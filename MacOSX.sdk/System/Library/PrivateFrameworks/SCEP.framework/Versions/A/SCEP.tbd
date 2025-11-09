@@ -54,5 +54,5 @@ exports:
                        _kSCEPSecKeyUsageEncipherOnly, _kSCEPSecKeyUsageKeyAgreement, 
                        _kSCEPSecKeyUsageKeyCertSign, _kSCEPSecKeyUsageKeyEncipherment, 
                        _kSCEPSecKeyUsageNonRepudiation, _kSCEPSecNotCertificateAuthority, 
-                       _objectInStack ]
+                       _objectInStack, _shouldTryHost ]
 ...

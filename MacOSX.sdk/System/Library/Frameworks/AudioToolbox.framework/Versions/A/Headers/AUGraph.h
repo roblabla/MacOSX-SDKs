@@ -1,19 +1,32 @@
-/*
-     File:       AUGraph.h
- 
-     Contains:   AUGraph application interfaces
- 
-     Copyright:  (c) 2000 - 2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		AUGraph.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2000-2015 by Apple, Inc., all rights reserved.
+	@abstract	API's to manage graphs of AudioUnits.
+
+	@discussion
+		An AUGraph is a complete description of an audio signal processing network. The AUGraph
+		API's maintain a set of AudioUnits, audio connections between their inputs and outputs, and
+		any callbacks used to provide inputs. It also allows the embedding of sub-graphs within
+		parent graphs to allow for a logical organization of parts of an overall signal chain. The
+		graph's AudioUnits do the actual audio processing.
+
+		The AUGraph may be introspected, in order to get complete information about all of the
+		AudioUnits in the graph.  The various nodes (AUNode) in the AUGraph representing AudioUnits
+		or sub graphs may be added or removed, and the interactions between them modified.
+
+		An AUGraph's state can be manipulated in both the rendering thread and in other threads.
+		Consequently, any activities that affect the state of the graph are guarded with locks and a
+		messaging model between any calling thread and the thread upon which the AUGraph's output
+		unit is called (the render thread).
+
+		An AUGraph will have a single head node - what is referred to below as its output unit. The
+		output unit is used to both start and stop the rendering operations of a graph, and as the
+		dispatch point for the safe manipulation of the state of the graph while it is running.
 */
 
-#ifndef __AUGraph
-#define __AUGraph
+#ifndef AudioToolbox_AUGraph_h
+#define AudioToolbox_AUGraph_h
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
@@ -24,45 +37,12 @@
 	#include <AudioUnit.h>
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
+
 #if defined(__cplusplus)
 extern "C"
 {
 #endif
-
-/*!
-    @header 
-		AUGraph
-    
-	@abstract 
-		This header defines the types, constants, data structures and functions of the AUGraph API. 
-		The AUGraph API is used for for maintaining arbitrary graphs of AudioUnits.
-
-	@discussion
-		The AUGraph APIs are responsible for representing the description of a set
-		of AudioUnits, audio connections between their inputs and outputs, and any 
-		callbacks used to provide inputs. It also allows the embedding of sub (or child)
-		graphs within parent graphs to allow for a logical organisation of parts
-		of an overall signal chain. Of course, the AudioUnits do the actual audio processing. 
-		Thus the AUGraph is a description of the various AudioUnits and their
-		connections, but also may manage the actual instantiated AudioUnits if
-		AUGraphOpen() is actually called. The AUGraph, in essence, is a complete
-		description of an audio signal processing network.
-
-		The AUGraph may be introspected, in order to get complete information about
-		all of the AudioUnits in the graph.  The various nodes (AUNode) in the
-		AUGraph representing AudioUnits or sub graphs may be added or removed, and the interactions
-		between them modified.
-				
-		An AUGraph's state can be manipulated in both the rendering thread and in
-		other threads. Consequently, any activities that effect the state of the
-		graph are guarded with locks and a messaging model between any calling thread
-		and the thread upon which the AUGraph's output unit is called (the render thread).
-		
-		An AUGraph will have a single head node - what is referred to below as its
-		output unit. The output unit is used to both start and stop the rendering
-		operations of a graph, and as the dispatch point for the safe manipulation
-		of the state of the graph while it is running.
-*/
 
 /*!
 	@typedef	AUGraph
@@ -99,7 +79,7 @@ typedef SInt32 	AUNode;
 
 	@constant	kAUGraphErr_InvalidAudioUnit
 */
-enum
+CF_ENUM(OSStatus)
 {
 	kAUGraphErr_NodeNotFound 				= -10860,
 	kAUGraphErr_InvalidConnection 			= -10861,
@@ -116,7 +96,7 @@ enum
     @param		outGraph		the new AUGraph object
 */
 extern OSStatus
-NewAUGraph(			AUGraph			*outGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+NewAUGraph(			AUGraph	__nullable * __nonnull outGraph)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 /*!
     @function	DisposeAUGraph
@@ -144,9 +124,9 @@ DisposeAUGraph(		AUGraph			inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__I
     @param		outNode			the newly added node
 */
 extern OSStatus
-AUGraphAddNode(		AUGraph							  inGraph,
-					const AudioComponentDescription	* inDescription,
-					AUNode						*	  outNode)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+AUGraphAddNode(		AUGraph								inGraph,
+					const AudioComponentDescription	*	inDescription,
+					AUNode *	  						outNode)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function	AUGraphRemoveNode
@@ -196,10 +176,10 @@ AUGraphGetIndNode(  AUGraph			inGraph,
 	@param		outAudioUnit		the AudioUnit of this node
 */
 extern OSStatus
-AUGraphNodeInfo(	AUGraph						inGraph,
-					AUNode						inNode,
-					AudioComponentDescription *	outDescription,
-					AudioUnit *					outAudioUnit)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+AUGraphNodeInfo(	AUGraph									inGraph,
+					AUNode									inNode,
+					AudioComponentDescription * __nullable	outDescription,
+					AudioUnit __nullable * __nullable		outAudioUnit)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 			
 
 #pragma mark -
@@ -234,7 +214,7 @@ AUGraphNewNodeSubGraph( AUGraph				inGraph,
 extern OSStatus
 AUGraphGetNodeInfoSubGraph(	const AUGraph		inGraph,
 							AUNode				inNode,
-							AUGraph				*outSubGraph)	__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+							AUGraph	__nullable * __nonnull outSubGraph)	__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 								
 /*!
     @function	AUGraphIsNodeSubGraph
@@ -247,7 +227,7 @@ AUGraphGetNodeInfoSubGraph(	const AUGraph		inGraph,
 extern OSStatus
 AUGraphIsNodeSubGraph(		const AUGraph		inGraph,
 							AUNode				inNode,
-							Boolean*			outFlag)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+							Boolean *			outFlag)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 
 #pragma mark -
@@ -266,13 +246,13 @@ AUGraphIsNodeSubGraph(		const AUGraph		inGraph,
 	@constant	kAUNodeInteraction_InputCallback
 				input callbacks being registered to a single audio unit's input bus.
 */
-enum {
+CF_ENUM(UInt32) {
 	kAUNodeInteraction_Connection		= 1,
 	kAUNodeInteraction_InputCallback	= 2
 };
 
 /*! 
-	@struct		AUNodeConnection
+	@struct		AudioUnitNodeConnection
 	@abstract	A connection between two nodes
 	@field		sourceNode
 	@field		sourceOutputNumber
@@ -342,11 +322,6 @@ typedef struct AUNodeInteraction AUNodeInteraction;
 /*! 
 	@function	AUGraphConnectNodeInput
 	@abstract	connect a node's output to a node's input
-	@param		inGraph,
-	@param		inSourceNode,
-	@param		inSourceOutputNumber,
-	@param		inDestNode,
-	@param		inDestInputNumber
 */
 extern OSStatus
 AUGraphConnectNodeInput(	AUGraph			inGraph,
@@ -358,8 +333,8 @@ AUGraphConnectNodeInput(	AUGraph			inGraph,
 /*! 
 	@function	AUGraphSetNodeInputCallback
 	@abstract	Set a callback for the specified node's specified input.
-	@param		inGraph,
-	@param		inDestNode,
+	@param		inGraph
+	@param		inDestNode
 	@param		inDestInputNumber
 	@param		inInputCallback		The callback that will provide input data to the node
 */
@@ -500,8 +475,8 @@ AUGraphGetNodeInteractions(	AUGraph					inGraph,
 	@param		outIsUpdated	if specified returns true if all of the edits were applied to the graph
 */
 extern OSStatus
-AUGraphUpdate(		AUGraph			inGraph,
-					Boolean			*outIsUpdated)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphUpdate(		AUGraph					inGraph,
+					Boolean	 * __nullable	outIsUpdated)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 #pragma mark -
 #pragma mark State Management
@@ -564,7 +539,6 @@ AUGraphStart(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPH
 	@function	AUGraphStop
 	@abstract	Stop a graph
 	@discussion Stop() is called on the "head" node(s) of the AUGraph	(rendering is stopped)
-	@param		inGraph
 */
 extern OSStatus
 AUGraphStop(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
@@ -573,7 +547,6 @@ AUGraphStop(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHO
 /*!
 	@function	AUGraphIsOpen
 	@abstract	Is the graph open
-	@param		inGraph
 */
 extern OSStatus
 AUGraphIsOpen(			AUGraph		inGraph,
@@ -582,7 +555,6 @@ AUGraphIsOpen(			AUGraph		inGraph,
 /*!
 	@function	AUGraphIsInitialized
 	@abstract	Is the graph initialised
-	@param		inGraph
 */
 extern OSStatus
 AUGraphIsInitialized(	AUGraph		inGraph,
@@ -591,7 +563,6 @@ AUGraphIsInitialized(	AUGraph		inGraph,
 /*!
 	@function	AUGraphIsRunning
 	@abstract	Is the graph running (has it been started)
-	@param		inGraph
 */
 extern OSStatus
 AUGraphIsRunning(		AUGraph		inGraph,
@@ -607,7 +578,6 @@ AUGraphIsRunning(		AUGraph		inGraph,
 	@abstract	The CPU load of the graph
 	@discussion	Returns a short-term running average of the current CPU load
 				of the graph.		
-	@param		inGraph
 */
 extern OSStatus
 AUGraphGetCPULoad(		AUGraph		inGraph,
@@ -618,7 +588,6 @@ AUGraphGetCPULoad(		AUGraph		inGraph,
 	@abstract	The Maximum CPU load of the graph
 	@discussion	Returns the max CPU load of the graph since this call was last made 
 				or the graph was last started.
-	@param		inGraph
 */
 extern OSStatus
 AUGraphGetMaxCPULoad(	AUGraph		inGraph,
@@ -630,29 +599,23 @@ AUGraphGetMaxCPULoad(	AUGraph		inGraph,
 	@discussion	Add a callback that the graph will call every time the
 				graph renders. The callback will be called once before the graph's render
 				operation, and once after the render operation is complete.
-	@param		inGraph
-	@param		inCallback
-	@param		inRefCon
 */
 extern OSStatus
 AUGraphAddRenderNotify(			AUGraph					inGraph,
 								AURenderCallback 		inCallback,
-								void 					*inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+								void * __nullable		inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 /*!
 	@function	AUGraphRemoveRenderNotify
 	@abstract	Remove a notification callback
 	@discussion	Remove a previously added callback. You must provide both the callback
 				and the refCon that was used previously to add the callback.
-	@param		inGraph
-	@param		inCallback
-	@param		inRefCon
 */
 extern OSStatus
 AUGraphRemoveRenderNotify(		AUGraph					inGraph,
 								AURenderCallback 		inCallback,
-								void 					*inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
-
+								void * __nullable		inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+	
 #pragma mark -
 #pragma mark Deprecated
 
@@ -665,7 +628,7 @@ struct ComponentDescription;
 extern OSStatus
 AUGraphNewNode(	AUGraph								inGraph,
 				const struct ComponentDescription	*inDescription,
-				UInt32								inClassDataSize,// reserved: must be zero
+				UInt32								inClassDataSize,	// reserved: must be zero
 				const void							*inClassData,
 				AUNode								*outNode)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
@@ -680,8 +643,8 @@ AUGraphGetNodeInfo(	AUGraph						inGraph,
 					AUNode						inNode,
 					struct ComponentDescription *outDescription,
 					UInt32						*outClassDataSize,
-					void						**outClassData,
-					AudioUnit					*outAudioUnit)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+					void * __nullable * __nullable outClassData,
+					AudioUnit __nullable * __nullable outAudioUnit)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@function			AUGraphGetNumberOfConnections
@@ -723,11 +686,13 @@ AUGraphGetNodeConnections(		AUGraph						inGraph,
 								UInt32						*ioNumConnections)	
 																	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
-
+	
 #if defined(__cplusplus)
 }
 #endif
 
-#endif // __AUGraph.h
+CF_ASSUME_NONNULL_END
+
+#endif // AudioToolbox_AUGraph_h
 
 

@@ -2,11 +2,13 @@
 	File:		AVAudioChannelLayout.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioTypes.h>
 #import <CoreAudio/CoreAudioTypes.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
 	@class AVAudioChannelLayout
@@ -16,7 +18,7 @@
 		in <CoreAudio/CoreAudioTypes.h>.
 */
 NS_CLASS_AVAILABLE(10_10, 8_0)
-@interface AVAudioChannelLayout : NSObject {
+@interface AVAudioChannelLayout : NSObject <NSSecureCoding> {
 @private
 	AudioChannelLayoutTag _layoutTag;
 	AudioChannelLayout * _layout;
@@ -39,7 +41,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		If the provided layout's tag is kAudioChannelLayoutTag_UseChannelDescriptions, this
 		initializer attempts to convert it to a more specific tag.
 */
-- (instancetype)initWithLayout:(const AudioChannelLayout *)layout;
+- (instancetype)initWithLayout:(const AudioChannelLayout *)layout NS_DESIGNATED_INITIALIZER;
 
 /*!	@method isEqual:
 	@abstract Determine whether another AVAudioChannelLayout is exactly equal to this layout.
@@ -74,3 +76,6 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly) AVAudioChannelCount channelCount;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

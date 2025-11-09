@@ -1,11 +1,13 @@
 /*	NSStream.h
-        Copyright (c) 2003-2014, Apple Inc. All rights reserved
+        Copyright (c) 2003-2015, Apple Inc. All rights reserved
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSData, NSDictionary, NSError, NSHost, NSInputStream, NSOutputStream, NSRunLoop, NSString, NSURL;
 @protocol NSStreamDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSStreamStatus) {
     NSStreamStatusNotOpen = 0,
@@ -33,17 +35,17 @@ typedef NS_OPTIONS(NSUInteger, NSStreamEvent) {
 - (void)open;
 - (void)close;
 
-@property (assign) id <NSStreamDelegate> delegate;
+@property (nullable, assign) id <NSStreamDelegate> delegate;
     // By default, a stream is its own delegate, and subclassers of NSInputStream and NSOutputStream must maintain this contract. [someStream setDelegate:nil] must restore this behavior. As usual, delegates are not retained.
 
-- (id)propertyForKey:(NSString *)key;
-- (BOOL)setProperty:(id)property forKey:(NSString *)key;
+- (nullable id)propertyForKey:(NSString *)key;
+- (BOOL)setProperty:(nullable id)property forKey:(NSString *)key;
 
 - (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
 - (void)removeFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
 
 @property (readonly) NSStreamStatus streamStatus;
-@property (readonly, copy) NSError *streamError;
+@property (nullable, readonly, copy) NSError *streamError;
 @end
 
 // NSInputStream is an abstract class representing the base functionality of a read stream.
@@ -52,14 +54,14 @@ typedef NS_OPTIONS(NSUInteger, NSStreamEvent) {
 - (NSInteger)read:(uint8_t *)buffer maxLength:(NSUInteger)len;
     // reads up to length bytes into the supplied buffer, which must be at least of size len. Returns the actual number of bytes read.
 
-- (BOOL)getBuffer:(uint8_t **)buffer length:(NSUInteger *)len;
+- (BOOL)getBuffer:(uint8_t * __nullable * __nonnull)buffer length:(NSUInteger *)len;
     // returns in O(1) a pointer to the buffer in 'buffer' and by reference in 'len' how many bytes are available. This buffer is only valid until the next stream operation. Subclassers may return NO for this if it is not appropriate for the stream type. This may return NO if the buffer is not available.
 
 @property (readonly) BOOL hasBytesAvailable;
     // returns YES if the stream has bytes available or if it impossible to tell without actually doing the read.
 
 - (instancetype)initWithData:(NSData *)data NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -74,42 +76,42 @@ typedef NS_OPTIONS(NSUInteger, NSStreamEvent) {
 
 - (instancetype)initToMemory NS_DESIGNATED_INITIALIZER;
 - (instancetype)initToBuffer:(uint8_t *)buffer capacity:(NSUInteger)capacity NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithURL:(NSURL *)url append:(BOOL)shouldAppend NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(NSURL *)url append:(BOOL)shouldAppend NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
 
 @end
 
 
 @interface NSStream (NSSocketStreamCreationExtensions)
 
-+ (void)getStreamsToHostWithName:(NSString *)hostname port:(NSInteger)port inputStream:(NSInputStream **)inputStream outputStream:(NSOutputStream **)outputStream NS_AVAILABLE(10_10, 8_0);
++ (void)getStreamsToHostWithName:(NSString *)hostname port:(NSInteger)port inputStream:(NSInputStream * __nullable * __nullable)inputStream outputStream:(NSOutputStream * __nullable * __nullable)outputStream NS_AVAILABLE(10_10, 8_0);
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-+ (void)getStreamsToHost:(NSHost *)host port:(NSInteger)port inputStream:(NSInputStream **)inputStream outputStream:(NSOutputStream **)outputStream NS_DEPRECATED_MAC(10_3, 10_10, "Please use getStreamsToHostWithName:port:inputStream:outputStream: instead");
++ (void)getStreamsToHost:(NSHost *)host port:(NSInteger)port inputStream:(NSInputStream * __nullable * __nullable)inputStream outputStream:(NSOutputStream * __nullable * __nullable)outputStream NS_DEPRECATED_MAC(10_3, 10_10, "Please use getStreamsToHostWithName:port:inputStream:outputStream: instead");
 #endif
 
 @end
 
 @interface NSStream (NSStreamBoundPairCreationExtensions)
-+ (void)getBoundStreamsWithBufferSize:(NSUInteger)bufferSize inputStream:(NSInputStream **)inputStream outputStream:(NSOutputStream **)outputStream NS_AVAILABLE(10_10, 8_0);
++ (void)getBoundStreamsWithBufferSize:(NSUInteger)bufferSize inputStream:(NSInputStream * __nullable * __nullable)inputStream outputStream:(NSOutputStream * __nullable * __nullable)outputStream NS_AVAILABLE(10_10, 8_0);
 @end
 
 // The NSInputStreamExtensions category contains additional initializers and convenience routines for dealing with NSInputStreams.
 @interface NSInputStream (NSInputStreamExtensions)
-- (instancetype)initWithFileAtPath:(NSString *)path;
+- (nullable instancetype)initWithFileAtPath:(NSString *)path;
 
-+ (instancetype)inputStreamWithData:(NSData *)data;
-+ (instancetype)inputStreamWithFileAtPath:(NSString *)path;
-+ (instancetype)inputStreamWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
++ (nullable instancetype)inputStreamWithData:(NSData *)data;
++ (nullable instancetype)inputStreamWithFileAtPath:(NSString *)path;
++ (nullable instancetype)inputStreamWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
 @end
 
 // The NSOutputStreamExtensions category contains additional initializers and convenience routines for dealing with NSOutputStreams.
 @interface NSOutputStream (NSOutputStreamExtensions)
-- (instancetype)initToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;
+- (nullable instancetype)initToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;
 
 + (instancetype)outputStreamToMemory;
 + (instancetype)outputStreamToBuffer:(uint8_t *)buffer capacity:(NSUInteger)capacity;
 + (instancetype)outputStreamToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;
-+ (instancetype)outputStreamWithURL:(NSURL *)url append:(BOOL)shouldAppend NS_AVAILABLE(10_6, 4_0);
++ (nullable instancetype)outputStreamWithURL:(NSURL *)url append:(BOOL)shouldAppend NS_AVAILABLE(10_6, 4_0);
 @end
 
 @protocol NSStreamDelegate <NSObject>
@@ -168,3 +170,4 @@ FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceTypeVideo	    NS_AVAILA
 FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceTypeBackground	    NS_AVAILABLE(10_7, 5_0);
 FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceTypeVoice	    NS_AVAILABLE(10_7, 5_0);
 
+NS_ASSUME_NONNULL_END

@@ -2,10 +2,12 @@
     File:		AVAudioUnitTimeEffect.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
 #import <AVFoundation/AVAudioUnit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @class AVAudioUnitTimeEffect
     @abstract an AVAudioUnit that processes audio in non real-time
@@ -18,7 +20,7 @@
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface AVAudioUnitTimeEffect : AVAudioUnit
 
-/*! @method initWithAudioComponentDescription
+/*! @method initWithAudioComponentDescription:
     @abstract create an AVAudioUnitTimeEffect object
     
     @param audioComponentDescription
@@ -34,3 +36,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic) BOOL bypass;
 
 @end
+
+NS_ASSUME_NONNULL_END

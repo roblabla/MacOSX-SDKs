@@ -1,9 +1,9 @@
 ---
-archs:           [ i386, x86_64 ]
+archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _UAContrastDidChangeNotification, _UAContrastKey, 
                        _UACursorScaleKey, _UADomainCloseViewSettingsDidChangeNotification, 
                        _UADomainKbdSettingsDidChangeNotification, _UADomainMouseSettingsDidChangeNotification, 

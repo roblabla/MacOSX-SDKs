@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, GKVoiceChatPlayerState) {
 @class GKPlayer;
 
 
+NS_ASSUME_NONNULL_BEGIN
 // GKVoiceChat represents an instance of a named voice communications channel
 NS_CLASS_AVAILABLE(10_8, 4_1)
 @interface GKVoiceChat : NSObject
@@ -33,7 +34,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 @property(assign, getter=isActive, NS_NONATOMIC_IOSONLY)    BOOL active; // make this session active and route the microphone
 @property(assign, NS_NONATOMIC_IOSONLY) float volume; // default 1.0 (max is 1.0, min is 0.0)
 
-@property(readonly, NS_NONATOMIC_IOSONLY) NSArray *players NS_AVAILABLE(10_10, 8_0); // array of GKPlayer *
+@property(readonly, NS_NONATOMIC_IOSONLY) NSArray<GKPlayer *> *players NS_AVAILABLE(10_10, 8_0); // array of GKPlayer *
 
 + (BOOL)isVoIPAllowed;
 
@@ -41,9 +42,10 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 
 @interface GKVoiceChat (Deprecated)
 
-@property(readonly, NS_NONATOMIC_IOSONLY) NSArray *playerIDs NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use players");
-@property(copy, NS_NONATOMIC_IOSONLY) void(^playerStateUpdateHandler)(NSString *playerID, GKVoiceChatPlayerState state) NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use setPlayerVoiceChatStateDidChangeHandler:");
+@property(readonly, NS_NONATOMIC_IOSONLY) NSArray<NSString *> *playerIDs NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use players") ;
+@property(copy, NS_NONATOMIC_IOSONLY) void(^playerStateUpdateHandler)(NSString *playerID, GKVoiceChatPlayerState state) NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use setPlayerVoiceChatStateDidChangeHandler:") ;
 
-- (void)setMute:(BOOL)isMuted forPlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use setPlayer:muted:");
+- (void)setMute:(BOOL)isMuted forPlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use setPlayer:muted:") ;
 
 @end
+NS_ASSUME_NONNULL_END

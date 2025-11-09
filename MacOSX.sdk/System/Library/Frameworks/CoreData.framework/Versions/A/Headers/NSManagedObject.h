@@ -1,14 +1,17 @@
 /*
     NSManagedObject.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSSet.h>
 #import <Foundation/NSKeyValueObserving.h>
 
-@class NSDictionary;
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSEntityDescription;
 @class NSError;
 @class NSManagedObjectContext;
@@ -45,19 +48,22 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 + (BOOL)contextShouldIgnoreUnmodeledPropertyChanges NS_AVAILABLE(10_6,3_0);
 
 // The designated initializer.
-- (instancetype)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context NS_DESIGNATED_INITIALIZER;    
+- (__kindof NSManagedObject*)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(nullable NSManagedObjectContext *)context NS_DESIGNATED_INITIALIZER;
 
 // identity
-@property (nonatomic, readonly, assign) NSManagedObjectContext *managedObjectContext;
+@property (nullable, nonatomic, readonly, assign) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, readonly, strong) NSEntityDescription *entity;
 @property (nonatomic, readonly, strong) NSManagedObjectID *objectID;
 
-// state - methods can be used through KVC, for example for enabling/disabling widgets based on the state of the object
+// state - methods
 @property (nonatomic, getter=isInserted, readonly) BOOL inserted;
 @property (nonatomic, getter=isUpdated, readonly) BOOL updated;
 @property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
 
 @property (nonatomic, readonly) BOOL hasChanges NS_AVAILABLE(10_7, 5_0);
+
+/* returns YES if any persistent properties do not compare isEqual to their last saved state.  Relationship faults will not be unnecessarily fired.  This differs from the existing -hasChanges method which is a simple dirty flag and also includes transient properties */
+@property (nonatomic, readonly) BOOL hasPersistentChangedValues NS_AVAILABLE(10_9,7_0);
 
 // this information is useful in many situations when computations are optional - this can be used to avoid growing the object graph unnecessarily (which allows to control performance as it can avoid time consuming fetches from databases)
 @property (nonatomic, getter=isFault, readonly) BOOL fault;    
@@ -65,12 +71,15 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 // returns a Boolean indicating if the relationship for the specified key is a fault.  If a value of NO is returned, the resulting relationship is a realized object;  otherwise the relationship is a fault.  If the specified relationship is a fault, calling this method does not result in the fault firing.
 - (BOOL)hasFaultForRelationshipNamed:(NSString *)key NS_AVAILABLE(10_5,3_0); 
 
+/* returns an array of objectIDs for the contents of a relationship.  to-one relationships will return an NSArray with a single NSManagedObjectID.  Optional relationships may return an empty NSArray.  The objectIDs will be returned in an NSArray regardless of the type of the relationship.  */
+- (NSArray<NSManagedObjectID *> *)objectIDsForRelationshipNamed:(NSString *)key NS_AVAILABLE(10_11,8_3);
+
 /* Allow developers to determine if an object is in a transitional phase when receiving a KVO notification.  Returns 0 if the object is fully initialized as a managed object and not transitioning to or from another state */
 @property (nonatomic, readonly) NSUInteger faultingState NS_AVAILABLE(10_5,3_0);
 
 // lifecycle/change management (includes key-value observing methods)
-- (void)willAccessValueForKey:(NSString *)key;      // read notification
-- (void)didAccessValueForKey:(NSString *)key;       // read notification (together with willAccessValueForKey used to maintain inverse relationships, to fire faults, etc.) - each read access has to be wrapped in this method pair (in the same way as each write access has to be wrapped in the KVO method pair)
+- (void)willAccessValueForKey:(nullable NSString *)key; // read notification
+- (void)didAccessValueForKey:(nullable NSString *)key;           // read notification (together with willAccessValueForKey used to maintain inverse relationships, to fire faults, etc.) - each read access has to be wrapped in this method pair (in the same way as each write access has to be wrapped in the KVO method pair)
 
 // KVO change notification
 - (void)willChangeValueForKey:(NSString *)key;
@@ -105,31 +114,32 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 // value access (includes key-value coding methods)
 
 // KVC - overridden to access generic dictionary storage unless subclasses explicitly provide accessors
-- (id)valueForKey:(NSString *)key;    
+- (nullable id)valueForKey:(NSString *)key;    
 
 // KVC - overridden to access generic dictionary storage unless subclasses explicitly provide accessors
-- (void)setValue:(id)value forKey:(NSString *)key;    
+- (void)setValue:(nullable id)value forKey:(NSString *)key;    
 
 // primitive methods give access to the generic dictionary storage from subclasses that implement explicit accessors like -setName/-name to add custom document logic
-- (id)primitiveValueForKey:(NSString *)key;    
-- (void)setPrimitiveValue:(id)value forKey:(NSString *)key;
+- (nullable id)primitiveValueForKey:(NSString *)key;    
+- (void)setPrimitiveValue:(nullable id)value forKey:(NSString *)key;
 
 // returns a dictionary of the last fetched or saved keys and values of this object.  Pass nil to get all persistent modeled properties.
-- (NSDictionary *)committedValuesForKeys:(NSArray *)keys;    
+- (NSDictionary<NSString *, id> *)committedValuesForKeys:(nullable NSArray<NSString *> *)keys;
 
 // returns a dictionary with the keys and (new) values that have been changed since last fetching or saving the object (this is implemented efficiently without firing relationship faults)
-- (NSDictionary *)changedValues;    
+- (NSDictionary<NSString *, id> *)changedValues;
 
-- (NSDictionary *)changedValuesForCurrentEvent NS_AVAILABLE(10_7, 5_0);
+- (NSDictionary<NSString *, id> *)changedValuesForCurrentEvent NS_AVAILABLE(10_7, 5_0);
 
 // validation - in addition to KVC validation managed objects have hooks to validate their lifecycle state; validation is a critical piece of functionality and the following methods are likely the most commonly overridden methods in custom subclasses
-- (BOOL)validateValue:(id *)value forKey:(NSString *)key error:(NSError **)error;    // KVC
+- (BOOL)validateValue:(id __nullable * __nonnull)value forKey:(NSString *)key error:(NSError **)error;    // KVC
 - (BOOL)validateForDelete:(NSError **)error;
 - (BOOL)validateForInsert:(NSError **)error;
 - (BOOL)validateForUpdate:(NSError **)error;
 
-- (void)setObservationInfo:(id)inObservationInfo;
-- (id)observationInfo;
+- (void)setObservationInfo:(nullable void*)inObservationInfo;
+- (nullable void*)observationInfo;
 
 @end
 
+NS_ASSUME_NONNULL_END

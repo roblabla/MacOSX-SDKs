@@ -19,8 +19,11 @@
  
  This a not a Game Center feature. To support Game Center and online play, see GKMatch.
 */
-NS_CLASS_DEPRECATED(10_8, 10_10, 3_0, 7_0, "Use MCSession from the MultipeerConnectivity framework instead")
+NS_CLASS_DEPRECATED(10_8, 10_10, 3_0, 7_0, "Use MCSession from the MultipeerConnectivity framework instead") 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @interface GKSession : NSObject {
+#pragma clang diagnostic pop
 @private
     id _session;
 }
@@ -30,7 +33,10 @@ NS_CLASS_DEPRECATED(10_8, 10_10, 3_0, 7_0, "Use MCSession from the MultipeerConn
 If sessionID = nil then the GKSession will use the app bundle identifier.
 If name = nil then GKSession will use the device name.
 */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (id)initWithSessionID:(NSString *)sessionID displayName:(NSString *)name sessionMode:(GKSessionMode)mode NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);
+#pragma clang diagnostic pop
 
 @property(assign) id<GKSessionDelegate> delegate;
 

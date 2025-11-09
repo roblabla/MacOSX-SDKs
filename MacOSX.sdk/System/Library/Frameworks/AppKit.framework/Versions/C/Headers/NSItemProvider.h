@@ -1,7 +1,7 @@
 /*
 	NSItemProvider.h
 	Application Kit
-	Copyright (c) 2014, Apple Inc.
+	Copyright (c) 2014-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSItemProvider.h>
 #import <AppKit/AppKitDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 #if __OBJC2__
 // Item information support for Services-with-UI.
@@ -31,3 +32,5 @@ APPKIT_EXTERN NSString * const NSTypeIdentifierAddressText NS_AVAILABLE(10_10, 8
 APPKIT_EXTERN NSString * const NSTypeIdentifierPhoneNumberText NS_AVAILABLE(10_10, 8_0); // NSTextCheckingTypePhoneNumber, com.apple.structured-text.telephone-number
 APPKIT_EXTERN NSString * const NSTypeIdentifierTransitInformationText NS_AVAILABLE(10_10, 8_0); // NSTextCheckingTypeTransitInformation, com.apple.structured-text.transit-information
 #endif
+
+NS_ASSUME_NONNULL_END

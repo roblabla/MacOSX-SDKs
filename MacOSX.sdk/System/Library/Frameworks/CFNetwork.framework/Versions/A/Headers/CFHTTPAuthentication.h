@@ -33,7 +33,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
-
+CF_ASSUME_NONNULL_BEGIN
 
 /*
  *  CFHTTPAuthenticationRef
@@ -150,7 +150,7 @@ CFHTTPAuthenticationGetTypeID(void) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT CFHTTPAuthenticationRef 
-CFHTTPAuthenticationCreateFromResponse(CFAllocatorRef alloc, CFHTTPMessageRef response) CF_AVAILABLE(10_2, 2_0);
+CFHTTPAuthenticationCreateFromResponse(CFAllocatorRef __nullable alloc, CFHTTPMessageRef response) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -190,7 +190,7 @@ CFHTTPAuthenticationCreateFromResponse(CFAllocatorRef alloc, CFHTTPMessageRef re
  *  
  */
 CFN_EXPORT Boolean 
-CFHTTPAuthenticationIsValid(CFHTTPAuthenticationRef auth, CFStreamError *error) CF_AVAILABLE(10_2, 2_0);
+CFHTTPAuthenticationIsValid(CFHTTPAuthenticationRef auth, CFStreamError * __nullable error) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -296,11 +296,11 @@ CFHTTPAuthenticationRequiresOrderedRequests(CFHTTPAuthenticationRef auth) CF_AVA
  */
 CFN_EXPORT Boolean 
 CFHTTPMessageApplyCredentials(
-  CFHTTPMessageRef          request,
-  CFHTTPAuthenticationRef   auth,
-  CFStringRef               username,
-  CFStringRef               password,
-  CFStreamError *           error)          CF_AVAILABLE(10_2, 2_0);
+  CFHTTPMessageRef				request,
+  CFHTTPAuthenticationRef		auth,
+  CFStringRef       __nullable	username,
+  CFStringRef       __nullable	password,
+  CFStreamError *   __nullable	error)          CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -347,7 +347,7 @@ CFHTTPMessageApplyCredentialDictionary(
   CFHTTPMessageRef          request,
   CFHTTPAuthenticationRef   auth,
   CFDictionaryRef           dict,
-  CFStreamError *           error)          CF_AVAILABLE(10_4, 2_0);
+  CFStreamError *    __nullable  error)          CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -499,6 +499,7 @@ CFHTTPAuthenticationRequiresAccountDomain(CFHTTPAuthenticationRef auth) CF_AVAIL
 
 
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFHTTPAUTHENTICATION__ */

@@ -14,11 +14,13 @@
 
 @class SKTexture, SKRegion;
 
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT NS_AVAILABLE(10_10, 8_0) @interface SKFieldNode : SKNode
 
 /** The region property is the domain of the field's effect. No force is applied to objects outside the region.
  */
-@property (nonatomic, retain) SKRegion *region;
+@property (nonatomic, retain, nullable) SKRegion *region;
 
 /** strength scaling value. default 1.0 */
 @property (nonatomic) float strength;
@@ -84,7 +86,7 @@ SK_EXPORT NS_AVAILABLE(10_10, 8_0) @interface SKFieldNode : SKNode
  
     @see velocityFieldWithTexture:velocityTexture
  */
-@property (nonatomic, retain) SKTexture* texture;
+@property (nonatomic, retain, nullable) SKTexture* texture;
 
 /**
  Slows an object proportionally to the object’s velocity.
@@ -203,3 +205,5 @@ typedef vector_float3 (^SKFieldForceEvaluator)(vector_float3 position, vector_fl
 + (SKFieldNode *)customFieldWithEvaluationBlock:(SKFieldForceEvaluator)block;
 
 @end
+
+NS_ASSUME_NONNULL_END

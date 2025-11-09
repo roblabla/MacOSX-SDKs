@@ -10,7 +10,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKMapCamera : NSObject <NSSecureCoding, NSCopying>
 
 @property (nonatomic) CLLocationCoordinate2D centerCoordinate;
@@ -24,4 +26,12 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
                               fromEyeCoordinate:(CLLocationCoordinate2D)eyeCoordinate
                                     eyeAltitude:(CLLocationDistance)eyeAltitude;
 
++ (instancetype)cameraLookingAtCenterCoordinate:(CLLocationCoordinate2D)centerCoordinate
+                                   fromDistance:(CLLocationDistance)distance
+                                          pitch:(CGFloat)pitch
+                                        heading:(CLLocationDirection)heading NS_AVAILABLE(10_11, 9_0);
+
+
 @end
+
+NS_ASSUME_NONNULL_END

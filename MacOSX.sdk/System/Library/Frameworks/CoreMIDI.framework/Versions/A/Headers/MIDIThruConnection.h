@@ -3,7 +3,7 @@
  
     Contains:   Routines for creating MIDI play-through connections.
  
-    Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
+    Copyright:  (c) 2000-2015 by Apple Inc., all rights reserved.
  
     Bugs?:      For bug reports, consult the following page on
                 the World Wide Web:
@@ -17,6 +17,8 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreMIDI/MIDIServices.h>
+
+CF_ASSUME_NONNULL_BEGIN
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -40,11 +42,7 @@
     
     @discussion     An opaque reference to a play-through connection.
 */
-#if __LP64__
 typedef MIDIObjectRef MIDIThruConnectionRef;
-#else
-typedef struct OpaqueMIDIThruConnection *       MIDIThruConnectionRef;
-#endif
 
 /*!
     @struct         MIDIValueMap
@@ -62,7 +60,7 @@ typedef struct MIDIValueMap MIDIValueMap;
 /*!
     @enum           MIDITransformType
     
-    @discussion     Values specifying a type of MIDI transformation, as found in the transform member of MIDITransform.
+    @brief          Values specifying a type of MIDI transformation, as found in the transform member of MIDITransform.
     
     @constant   kMIDITransform_None
         no transformation (param unused)
@@ -81,7 +79,7 @@ typedef struct MIDIValueMap MIDIValueMap;
     @constant   kMIDITransform_MapValue
         transform the value using a map; param is the index of the map in the connection's array of maps.
 */
-enum {  // MIDITransformType
+typedef CF_ENUM(UInt16, MIDITransformType) {
     kMIDITransform_None = 0,
     kMIDITransform_FilterOut = 1,
     kMIDITransform_MapControl = 2,
@@ -91,7 +89,6 @@ enum {  // MIDITransformType
     kMIDITransform_MaxValue = 11,
     kMIDITransform_MapValue = 12
 };
-typedef UInt16 MIDITransformType;
 
 enum {
     kMIDIThruConnection_MaxEndpoints = 8
@@ -111,7 +108,7 @@ enum {
     @constant   kMIDIControlType_7BitNRPN
     @constant   kMIDIControlType_14BitNRPN
 */
-enum {  // MIDITransformControlType
+typedef CF_ENUM(UInt8, MIDITransformControlType) {
     kMIDIControlType_7Bit = 0,
     kMIDIControlType_14Bit = 1,
     kMIDIControlType_7BitRPN = 2,
@@ -119,7 +116,6 @@ enum {  // MIDITransformControlType
     kMIDIControlType_7BitNRPN = 4,
     kMIDIControlType_14BitNRPN = 5
 };
-typedef UInt8 MIDITransformControlType;
 
 /*!
     @struct     MIDITransform
@@ -137,6 +133,13 @@ typedef struct MIDITransform MIDITransform;
 /*!
     @struct     MIDIControlTransform
     @abstract   Describes a transformation of MIDI control change events.
+
+    @field  controlType         The type of control specified by controlNumber
+    @field  remappedControlType If transform is kMIDITransform_MapControl, the output control type
+    @field  controlNumber       The control number to be affected.
+    @field  transform           The type of transformation to be applied to the event values.
+    @field  param               An argument to the transformation method (see description of MIDITransformType).
+
     @discussion
         A single MIDIThruConnectionParams may describe any number of transformations to control
         events. It is important that multiple transformations are ordered correctly: filter out,
@@ -148,18 +151,10 @@ typedef struct MIDITransform MIDITransform;
 
         As per the MIDI specification, a number of controls are interpreted specially:
 
-        <ul>
-        <li>32-63 are the LSBs of 0-31</li>
-        <li>6/38 is data entry</li>
-        <li>96,97 are data increment, decrement</li>
-        <li>98-101 are NRPN/RPN</li>
-        </ul>
- 
-    @field  controlType         The type of control specified by controlNumber
-    @field  remappedControlType If transform is kMIDITransform_MapControl, the output control type
-    @field  controlNumber       The control number to be affected.
-    @field  transform           The type of transformation to be applied to the event values.
-    @field  param               An argument to the transformation method (see description of MIDITransformType).
+        32-63 are the LSBs of 0-31
+        6/38 is data entry
+        96,97 are data increment, decrement
+        98-101 are NRPN/RPN
 */
 struct MIDIControlTransform {
     MIDITransformControlType    controlType;
@@ -261,15 +256,23 @@ struct MIDIThruConnectionParams {
 };
 typedef struct MIDIThruConnectionParams MIDIThruConnectionParams;
 
+#ifdef CF_INLINE
 /*!
     @defined    MIDIThruConnectionParamsSize
     @abstract   Returns the size of a MIDIThruConnectionParams.
     @discussion Accounts for the variable-length elements in the structure and returns its true
                 size in bytes.
 */
+CF_INLINE size_t MIDIThruConnectionParamsSize(const MIDIThruConnectionParams *ptr)
+{
+    return sizeof(MIDIThruConnectionParams) + ptr->numControlTransforms * sizeof(MIDIControlTransform)
+	    + ptr->numMaps * sizeof(MIDIValueMap);
+}
+#else
 #define MIDIThruConnectionParamsSize(ptr) \
     (sizeof(MIDIThruConnectionParams) + (ptr)->numControlTransforms * sizeof(MIDIControlTransform) \
     + (ptr)->numMaps * sizeof(MIDIValueMap))
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -305,7 +308,7 @@ MIDIThruConnectionParamsInitialize(
     @discussion
 */
 extern OSStatus
-MIDIThruConnectionCreate(   CFStringRef                     inPersistentOwnerID,
+MIDIThruConnectionCreate(   CFStringRef __nullable          inPersistentOwnerID,
                             CFDataRef                       inConnectionParams,
                             MIDIThruConnectionRef *         outConnection )
                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
@@ -336,7 +339,7 @@ MIDIThruConnectionDispose(  MIDIThruConnectionRef           connection )
 */
 extern OSStatus
 MIDIThruConnectionGetParams(MIDIThruConnectionRef           connection,
-                            CFDataRef *                     outConnectionParams )
+                            CFDataRef __nonnull * __nonnull outConnectionParams )
                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
@@ -366,11 +369,13 @@ MIDIThruConnectionSetParams(MIDIThruConnectionRef           connection,
 */
 extern OSStatus
 MIDIThruConnectionFind(     CFStringRef                     inPersistentOwnerID,
-                            CFDataRef *                     outConnectionList )
+                            CFDataRef __nonnull * __nonnull outConnectionList )
                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 #ifdef __cplusplus
 }
 #endif
+
+CF_ASSUME_NONNULL_END
 
 #endif /* __MIDIThruConnection_h__ */

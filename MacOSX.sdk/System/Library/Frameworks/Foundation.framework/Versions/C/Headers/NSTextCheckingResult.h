@@ -1,12 +1,14 @@
 /*	NSTextCheckingResult.h
-	Copyright (c) 2008-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSDate.h>
 
-@class NSString, NSArray, NSDictionary, NSDate, NSTimeZone, NSOrthography, NSURL, NSRegularExpression;
+@class NSString, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSDate, NSTimeZone, NSOrthography, NSURL, NSRegularExpression;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* NSTextCheckingResult is a class used to describe items located by text checking.  Each of these objects represents something that has been found during checking--a misspelled word, a sentence with grammatical issues, a detected URL, a straight quote to be replaced with curly quotes, and so forth. */
 
@@ -26,12 +28,12 @@ typedef NS_OPTIONS(uint64_t, NSTextCheckingType) {    // a single type
     NSTextCheckingTypeTransitInformation NS_ENUM_AVAILABLE(10_7, 4_0) = 1ULL << 12            // transit (e.g. flight) info detection
 };
 
-enum {
+typedef uint64_t NSTextCheckingTypes;   // a combination of types
+NS_ENUM(NSTextCheckingTypes) {
     NSTextCheckingAllSystemTypes    = 0xffffffffULL,        // the first 32 types are reserved
     NSTextCheckingAllCustomTypes    = 0xffffffffULL << 32,  // clients may use the remainder for their own purposes
     NSTextCheckingAllTypes          = (NSTextCheckingAllSystemTypes | NSTextCheckingAllCustomTypes)
 };
-typedef uint64_t NSTextCheckingTypes;   // a combination of types
 
 NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSTextCheckingResult : NSObject <NSCopying, NSCoding>
@@ -45,19 +47,19 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSTextCheckingResult (NSTextCheckingResultOptional)
 
 /* Optional properties, used with certain types of results. */
-@property (readonly, copy) NSOrthography *orthography;
-@property (readonly, copy) NSArray *grammarDetails;
-@property (readonly, copy) NSDate *date;
-@property (readonly, copy) NSTimeZone *timeZone;
+@property (nullable, readonly, copy) NSOrthography *orthography;
+@property (nullable, readonly, copy) NSArray<NSString *> *grammarDetails;
+@property (nullable, readonly, copy) NSDate *date;
+@property (nullable, readonly, copy) NSTimeZone *timeZone;
 @property (readonly) NSTimeInterval duration;
-@property (readonly, copy) NSDictionary *components NS_AVAILABLE(10_7, 4_0);
-@property (readonly, copy) NSURL *URL;
-@property (readonly, copy) NSString *replacementString;
-@property (readonly, copy) NSArray *alternativeStrings NS_AVAILABLE(10_9, 7_0);
-@property (readonly, copy) NSRegularExpression *regularExpression NS_AVAILABLE(10_7, 4_0);
-@property (readonly, copy) NSString *phoneNumber NS_AVAILABLE(10_7, 4_0);
+@property (nullable, readonly, copy) NSDictionary<NSString *, NSString *> *components NS_AVAILABLE(10_7, 4_0);
+@property (nullable, readonly, copy) NSURL *URL;
+@property (nullable, readonly, copy) NSString *replacementString;
+@property (nullable, readonly, copy) NSArray<NSString *> *alternativeStrings NS_AVAILABLE(10_9, 7_0);
+@property (nullable, readonly, copy) NSRegularExpression *regularExpression NS_AVAILABLE(10_7, 4_0);
+@property (nullable, readonly, copy) NSString *phoneNumber NS_AVAILABLE(10_7, 4_0);
 
-@property (readonly, copy) NSDictionary *addressComponents;
+@property (nullable, readonly, copy) NSDictionary<NSString *, NSString *> *addressComponents;
 
 /* A result must have at least one range, but may optionally have more (for example, to represent regular expression capture groups).  The range at index 0 always matches the range property.  Additional ranges, if any, will have indexes from 1 to numberOfRanges-1. */
 @property (readonly) NSUInteger numberOfRanges NS_AVAILABLE(10_7, 4_0);
@@ -87,19 +89,21 @@ FOUNDATION_EXPORT NSString * const NSTextCheckingFlightKey NS_AVAILABLE(10_7, 4_
 /* Methods for creating instances of the various types of results. */
 + (NSTextCheckingResult *)orthographyCheckingResultWithRange:(NSRange)range orthography:(NSOrthography *)orthography;
 + (NSTextCheckingResult *)spellCheckingResultWithRange:(NSRange)range;
-+ (NSTextCheckingResult *)grammarCheckingResultWithRange:(NSRange)range details:(NSArray *)details;
++ (NSTextCheckingResult *)grammarCheckingResultWithRange:(NSRange)range details:(NSArray<NSString *> *)details;
 + (NSTextCheckingResult *)dateCheckingResultWithRange:(NSRange)range date:(NSDate *)date;
 + (NSTextCheckingResult *)dateCheckingResultWithRange:(NSRange)range date:(NSDate *)date timeZone:(NSTimeZone *)timeZone duration:(NSTimeInterval)duration;
-+ (NSTextCheckingResult *)addressCheckingResultWithRange:(NSRange)range components:(NSDictionary *)components;
++ (NSTextCheckingResult *)addressCheckingResultWithRange:(NSRange)range components:(NSDictionary<NSString *, NSString *> *)components;
 + (NSTextCheckingResult *)linkCheckingResultWithRange:(NSRange)range URL:(NSURL *)url;
 + (NSTextCheckingResult *)quoteCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString;
 + (NSTextCheckingResult *)dashCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString;
 + (NSTextCheckingResult *)replacementCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString;
 + (NSTextCheckingResult *)correctionCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString;
-+ (NSTextCheckingResult *)correctionCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString alternativeStrings:(NSArray *)alternativeStrings     NS_AVAILABLE(10_9, 7_0);
++ (NSTextCheckingResult *)correctionCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString alternativeStrings:(NSArray<NSString *> *)alternativeStrings     NS_AVAILABLE(10_9, 7_0);
 + (NSTextCheckingResult *)regularExpressionCheckingResultWithRanges:(NSRangePointer)ranges count:(NSUInteger)count regularExpression:(NSRegularExpression *)regularExpression   NS_AVAILABLE(10_7, 4_0);
 + (NSTextCheckingResult *)phoneNumberCheckingResultWithRange:(NSRange)range phoneNumber:(NSString *)phoneNumber             NS_AVAILABLE(10_7, 4_0);
-+ (NSTextCheckingResult *)transitInformationCheckingResultWithRange:(NSRange)range components:(NSDictionary *)components    NS_AVAILABLE(10_7, 4_0);
++ (NSTextCheckingResult *)transitInformationCheckingResultWithRange:(NSRange)range components:(NSDictionary<NSString *, NSString *> *)components    NS_AVAILABLE(10_7, 4_0);
 
 @end
+
+NS_ASSUME_NONNULL_END
 

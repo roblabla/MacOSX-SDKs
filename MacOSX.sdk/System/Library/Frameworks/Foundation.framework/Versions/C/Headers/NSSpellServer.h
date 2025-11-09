@@ -1,18 +1,20 @@
 /*	NSSpellServer.h
-	Copyright (c) 1990-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1990-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSTextCheckingResult.h>
 
-@class NSArray, NSOrthography;
+@class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSOrthography;
 @protocol NSSpellServerDelegate;
 
 /*
 The server just handles all the checking in and IAC and delegates the real work to its delegate.  A single server can handle more than one language.  Services is used to rendezvous applications with servers.
 */
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSSpellServer : NSObject {
 
@@ -37,10 +39,10 @@ The server just handles all the checking in and IAC and delegates the real work 
     void *_reservedSpellServer;
 }
 
-@property (assign) id<NSSpellServerDelegate> delegate;
+@property (nullable, assign) id<NSSpellServerDelegate> delegate;
 
 /* Used to check in */
-- (BOOL)registerLanguage:(NSString *)language byVendor:(NSString *)vendor;
+- (BOOL)registerLanguage:(nullable NSString *)language byVendor:(nullable NSString *)vendor;
 
 /* Way to query user's private dictionary(ies). */
 - (BOOL)isWordInUserDictionaries:(NSString *)word caseSensitive:(BOOL)flag;
@@ -71,23 +73,26 @@ The result should be an array of NSTextCheckingResult objects, of the spelling, 
 
 - (NSRange)spellServer:(NSSpellServer *)sender findMisspelledWordInString:(NSString *)stringToCheck language:(NSString *)language wordCount:(NSInteger *)wordCount countOnly:(BOOL)countOnly;
 
-- (NSArray *)spellServer:(NSSpellServer *)sender suggestGuessesForWord:(NSString *)word inLanguage:(NSString *)language;
+- (nullable NSArray<NSString *> *)spellServer:(NSSpellServer *)sender suggestGuessesForWord:(NSString *)word inLanguage:(NSString *)language;
 
 - (void)spellServer:(NSSpellServer *)sender didLearnWord:(NSString *)word inLanguage:(NSString *)language;
 
 - (void)spellServer:(NSSpellServer *)sender didForgetWord:(NSString *)word inLanguage:(NSString *)language;
 
-- (NSArray *)spellServer:(NSSpellServer *)sender suggestCompletionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language;
+- (nullable NSArray<NSString *> *)spellServer:(NSSpellServer *)sender suggestCompletionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language;
 
-- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(NSString *)language details:(NSArray **)details NS_AVAILABLE(10_5, NA);
+- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(nullable NSString *)language details:(NSArray<NSDictionary<NSString *, id> *> * __nullable * __nullable)details NS_AVAILABLE(10_5, NA);
 
 /* Keys for the dictionaries in the details array. */
 FOUNDATION_EXPORT NSString *const NSGrammarRange NS_AVAILABLE(10_5, NA);
 FOUNDATION_EXPORT NSString *const NSGrammarUserDescription NS_AVAILABLE(10_5, NA);
 FOUNDATION_EXPORT NSString *const NSGrammarCorrections NS_AVAILABLE(10_5, NA);
 
-- (NSArray *)spellServer:(NSSpellServer *)sender checkString:(NSString *)stringToCheck offset:(NSUInteger)offset types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger *)wordCount NS_AVAILABLE(10_6, NA);
+- (nullable NSArray<NSTextCheckingResult *> *)spellServer:(NSSpellServer *)sender checkString:(NSString *)stringToCheck offset:(NSUInteger)offset types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options orthography:(nullable NSOrthography *)orthography wordCount:(NSInteger *)wordCount NS_AVAILABLE(10_6, NA);
 
 - (void)spellServer:(NSSpellServer *)sender recordResponse:(NSUInteger)response toCorrection:(NSString *)correction forWord:(NSString *)word language:(NSString *)language NS_AVAILABLE(10_7, NA);
 
 @end
+
+NS_ASSUME_NONNULL_END
+

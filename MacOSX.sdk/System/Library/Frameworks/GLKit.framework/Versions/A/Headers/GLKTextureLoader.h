@@ -7,22 +7,22 @@
 
 /*
  Convenience library for loading textures into OpenGL
-
+ 
  - Synchronous and asynchronous loading of textures
  - Supports most ImageIO formats as well as PVR files on iOS
-
+ 
  Default Texture Parameters
  
  - The following values will be set as the default for the OpenGL filter and wrap texture parameters:
  
-    GL_TEXTURE_MIN_FILTER: GL_LINEAR_MIPMAP_LINEAR if textures are mipmapped, GL_LINEAR otherwise
-    
-    GL_TEXTURE_MAG_FILTER: GL_LINEAR
-    
-    GL_TEXTURE_WRAP_S / GL_TEXTURE_WRAP_T: GL_CLAMP_TO_EDGE
+ GL_TEXTURE_MIN_FILTER: GL_LINEAR_MIPMAP_LINEAR if textures are mipmapped, GL_LINEAR otherwise
  
-    Any texture parameter not specified above will be set to OpenGL's default value.
-*/
+ GL_TEXTURE_MAG_FILTER: GL_LINEAR
+ 
+ GL_TEXTURE_WRAP_S / GL_TEXTURE_WRAP_T: GL_CLAMP_TO_EDGE
+ 
+ Any texture parameter not specified above will be set to OpenGL's default value.
+ */
 
 #import <CoreGraphics/CoreGraphics.h>
 
@@ -30,17 +30,15 @@
 
 #if TARGET_OS_IPHONE
 #import <OpenGLES/EAGL.h>
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES1/glext.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
+#import <OpenGLES/gltypes.h>
 #else // !TARGET_OS_IPHONE
-#import <OpenGL/gl3.h>
+#import <OpenGL/gltypes.h>
 #import <AppKit/AppKit.h>
 #endif // !TARGET_OS_IPHONE
 
 #import <GLKit/GLKitBase.h>
 
+NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 #pragma mark Definitions
 #pragma mark -
@@ -48,7 +46,7 @@
 /*
  Dictionary keys for texture loader properties
  */
-/* 
+/*
  GLKTextureLoaderApplyPremultiplication - A boolean NSNumber.
  Non-alpha channels are premultiplied by corresponding alpha channel values.
  For compressed formats, this option must be omitted, or false.
@@ -56,7 +54,7 @@
  */
 GLK_EXTERN NSString *const GLKTextureLoaderApplyPremultiplication NS_AVAILABLE(10_8, 5_0);
 
-/* 
+/*
  GLKTextureLoaderGenerateMipmaps - A boolean NSNumber
  Generates all levels of mipmaps for the current image being loaded as a texture.
  Generates mipmap levels for all faces when used with cube maps.
@@ -64,7 +62,7 @@ GLK_EXTERN NSString *const GLKTextureLoaderApplyPremultiplication NS_AVAILABLE(1
  False by default. */
 GLK_EXTERN NSString *const GLKTextureLoaderGenerateMipmaps NS_AVAILABLE(10_8, 5_0);
 
-/* 
+/*
  GLKTextureLoaderOriginBottomLeft - A boolean NSNumber.
  Transform image data to match OpenGL's bottom left orientation specification.
  False by default. */
@@ -75,7 +73,7 @@ GLK_EXTERN NSString *const GLKTextureLoaderOriginBottomLeft NS_AVAILABLE(10_8, 5
  If true, a single channel grayscale image is loaded as GL_ALPHA.
  If false, it will be loaded as GL_LUMINANCE.
  Has no effect on non-grayscale images and on OS X.
- False by default. 
+ False by default.
  */
 GLK_EXTERN NSString *const GLKTextureLoaderGrayscaleAsAlpha NS_AVAILABLE_IOS(5_0);
 
@@ -183,12 +181,12 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 #pragma mark GLKTextureLoader
 #pragma mark -
 
-typedef void (^GLKTextureLoaderCallback) (GLKTextureInfo *textureInfo, NSError *outError);
+typedef void (^GLKTextureLoaderCallback) (GLKTextureInfo * __nullable textureInfo, NSError * __nullable outError);
 
 NS_CLASS_AVAILABLE(10_8, 5_0)
-@interface GLKTextureLoader : NSObject  
+@interface GLKTextureLoader : NSObject
 {
-
+    
 }
 
 #pragma mark Synchronous Methods
@@ -198,31 +196,31 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  Returns the generated texture object when the operation is complete, or the operation terminates with an error (returning nil).
  Returned error can be queried via 'error', which is nil otherwise.
  */
-+ (GLKTextureInfo *)textureWithContentsOfFile:(NSString *)path                      /* File path of image. */
-                                      options:(NSDictionary *)options               /* Options that control how the image is loaded. */
-                                        error:(NSError **)outError;                 /* Error description. */
++ (nullable GLKTextureInfo *)textureWithContentsOfFile:(NSString *)path                                       /* File path of image. */
+                                               options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                                                 error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
-+ (GLKTextureInfo *)textureWithContentsOfURL:(NSURL *)url                           /* The URL from which to read. */
-                                     options:(NSDictionary *)options                /* Options that control how the image is loaded. */
-                                       error:(NSError **)outError;                  /* Error description. */
++ (nullable GLKTextureInfo *)textureWithContentsOfURL:(NSURL *)url                                           /* The URL from which to read. */
+                                              options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                                                error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
 /*
  Synchronously create a texture from data residing in memory.
  Returns the generated texture object when the operation is complete, or the operation terminates with an error (returning nil).
  Returned error can be queried via 'error', which is nil otherwise.
  */
-+ (GLKTextureInfo *)textureWithContentsOfData:(NSData *)data                        /* NSData containing image contents. */
-                                      options:(NSDictionary *)options               /* Options that control how the image is loaded. */
-                                        error:(NSError **)outError;                 /* Error description. */
++ (nullable GLKTextureInfo *)textureWithContentsOfData:(NSData *)data                                         /* NSData containing image contents. */
+                                               options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                                                 error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
 /*
  Synchronously create a texture from a CGImageRef.
  Returns the generated texture object when the operation is complete, or the operation terminates with an error (returning nil).
  Returned error can be queried via 'error', which is nil otherwise.
  */
-+ (GLKTextureInfo *)textureWithCGImage:(CGImageRef)cgImage                          /* CGImage reference. */
-                               options:(NSDictionary *)options                      /* Options that control how the image is loaded. */
-                                 error:(NSError **)outError;                        /* Error description. */
++ (nullable GLKTextureInfo *)textureWithCGImage:(CGImageRef)cgImage                                    /* CGImage reference. */
+                                        options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                                          error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
 /*
  Synchronously load six images from disk into an OpenGL cubemap texture.
@@ -231,9 +229,9 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  Returns the generated texture object when the operation is complete, or the operation terminates with an error (returning nil).
  Returned error can be queried via 'error' which is nil otherwise.
  */
-+ (GLKTextureInfo*)cubeMapWithContentsOfFiles:(NSArray *)paths                      /* An array of paths (NSStrings or NSURLs). */
-                                      options:(NSDictionary *)options               /* Otions that control how the image is loaded. */
-                                        error:(NSError **)outError;                 /* Error description. */
++ (nullable GLKTextureInfo*)cubeMapWithContentsOfFiles:(NSArray<id> *)paths                                   /* An array of paths (NSStrings or NSURLs). */
+                                               options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Otions that control how the image is loaded. */
+                                                 error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
 /*
  Synchronously creates an OpenGL cubemap texture by splitting one image into six parts.
@@ -244,58 +242,58 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  Returns the generated texture object when the operation is complete, or the operation terminates with an error (returning nil).
  Returned error can be queried via 'error' which is nil otherwise.
  */
-+ (GLKTextureInfo*)cubeMapWithContentsOfFile:(NSString *)path                       /* File path of image. */
-                                     options:(NSDictionary *)options                /* Options that control how the image is loaded. */
-                                       error:(NSError **)outError;                  /* Error description. */
++ (nullable GLKTextureInfo*)cubeMapWithContentsOfFile:(NSString *)path                                       /* File path of image. */
+                                              options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                                                error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
 
-+ (GLKTextureInfo*)cubeMapWithContentsOfURL:(NSURL *)url                            /* File path of image. */
-                                    options:(NSDictionary *)options                 /* Options that control how the image is loaded. */
-                                      error:(NSError **)outError;                   /* Error description. */
++ (nullable GLKTextureInfo*)cubeMapWithContentsOfURL:(NSURL *)url                                           /* File path of image. */
+                                             options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                                               error:(NSError * __nullable * __nullable)outError;           /* Error description. */
 
 #pragma mark Asynchronous Methods
 
 /*
  Internally creates a new shared context that will handle the texture creation operations.
- The sharegroup will be released upon releasing the GLKTextureLoader object. 
+ The sharegroup will be released upon releasing the GLKTextureLoader object.
  */
 #if TARGET_OS_IPHONE
-- (id)initWithSharegroup:(EAGLSharegroup *)sharegroup;
+- (instancetype)initWithSharegroup:(EAGLSharegroup *)sharegroup;
 #else
-- (id)initWithShareContext:(NSOpenGLContext *)context;
+- (instancetype)initWithShareContext:(NSOpenGLContext *)context;
 #endif
 
 /*
  Asynchronously load an image from disk into an OpenGL texture.
  Invokes the block on the provided queue when the operation is complete. If queue is NULL, the main queue will be used.
  */
-- (void)textureWithContentsOfFile:(NSString *)path 					    /* File path of image. */
-                          options:(NSDictionary *)options               /* Options that control how the image is loaded. */
-                            queue:(dispatch_queue_t)queue				/* Dispatch queue, or NULL to use the main queue. */
-                completionHandler:(GLKTextureLoaderCallback)block;		/* Block to be invoked on the above dispatch queue. */
+- (void)textureWithContentsOfFile:(NSString *)path                                       /* File path of image. */
+                          options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                            queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+                completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
-- (void)textureWithContentsOfURL:(NSURL *)url                           /* File path of image. */
-                         options:(NSDictionary *)options                /* Options that control how the image is loaded. */
-                           queue:(dispatch_queue_t)queue				/* Dispatch queue, or NULL to use the main queue. */
-               completionHandler:(GLKTextureLoaderCallback)block;		/* Block to be invoked on the above dispatch queue. */
+- (void)textureWithContentsOfURL:(NSURL *)url                                           /* File path of image. */
+                         options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                           queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+               completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
 /*
  Asynchronously create a texture from data residing in memory.
  Invokes the block on the provided queue when the operation is complete. If queue is NULL, the main queue will be used.
  */
-- (void)textureWithContentsOfData:(NSData *)data 						/* NSData containing image contents. */
-                          options:(NSDictionary *)options               /* Options that control how the image is loaded. */
-                            queue:(dispatch_queue_t)queue				/* Dispatch queue, or NULL to use the main queue. */
-                completionHandler:(GLKTextureLoaderCallback)block;		/* Block to be invoked on the above dispatch queue. */
+- (void)textureWithContentsOfData:(NSData *)data                                         /* NSData containing image contents. */
+                          options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                            queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+                completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
 /*
  Asynchronously create a texture from a CGImageRef.
  Invokes the block on the provided queue when the operation is complete. If queue is NULL, the main queue will be used.
  */
-- (void)textureWithCGImage:(CGImageRef)cgImage							/* CGImage reference. */
-                   options:(NSDictionary *)options                      /* Options that control how the image is loaded. */
-                     queue:(dispatch_queue_t)queue						/* Dispatch queue, or NULL to use the main queue. */
-         completionHandler:(GLKTextureLoaderCallback)block;				/* Block to be invoked on the above dispatch queue. */
+- (void)textureWithCGImage:(CGImageRef)cgImage                                    /* CGImage reference. */
+                   options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                     queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+         completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
 
 /*
@@ -304,10 +302,10 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  This coordinate system is left-handed if you think of yourself within the cube. The coordinate system is right-handed if you think of yourself outside of the cube.
  Invokes the block on the provided queue when the operation is complete. If queue is NULL, the main queue will be used.
  */
-- (void)cubeMapWithContentsOfFiles:(NSArray *)paths                     /* An array of paths (NSStrings or NSURLs). */
-                           options:(NSDictionary *)options              /* Options that control how the image is loaded. */
-                             queue:(dispatch_queue_t)queue				/* Dispatch queue, or NULL to use the main queue. */
-                 completionHandler:(GLKTextureLoaderCallback)block;		/* Block to be invoked on the above dispatch queue. */
+- (void)cubeMapWithContentsOfFiles:(NSArray<id> *)paths                                   /* An array of paths (NSStrings or NSURLs). */
+                           options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                             queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+                 completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
 
 /*
@@ -318,15 +316,16 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  This coordinate system is left-handed if you think of yourself within the cube. The coordinate system is right-handed if you think of yourself outside of the cube.
  Invokes the block on the provided queue when the operation is complete. If queue is NULL, the main queue will be used.
  */
-- (void)cubeMapWithContentsOfFile:(NSString *)path                      /* File path of image. */
-                          options:(NSDictionary *)options               /* Options that control how the image is loaded. */
-                            queue:(dispatch_queue_t)queue				/* Dispatch queue, or NULL to use the main queue. */
-                completionHandler:(GLKTextureLoaderCallback)block;		/* Block to be invoked on the above dispatch queue. */
+- (void)cubeMapWithContentsOfFile:(NSString *)path                                       /* File path of image. */
+                          options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                            queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+                completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
 
-- (void)cubeMapWithContentsOfURL:(NSURL *)url                           /* File path of image. */
-                         options:(NSDictionary *)options                /* Options that control how the image is loaded. */
-                           queue:(dispatch_queue_t)queue				/* Dispatch queue, or NULL to use the main queue. */
-               completionHandler:(GLKTextureLoaderCallback)block;       /* Block to be invoked on the above dispatch queue. */
+- (void)cubeMapWithContentsOfURL:(NSURL *)url                                           /* File path of image. */
+                         options:(nullable NSDictionary<NSString*, NSNumber*> *)options /* Options that control how the image is loaded. */
+                           queue:(nullable dispatch_queue_t)queue                       /* Dispatch queue, or NULL to use the main queue. */
+               completionHandler:(GLKTextureLoaderCallback)block;                       /* Block to be invoked on the above dispatch queue. */
 
 @end
+NS_ASSUME_NONNULL_END

@@ -1,34 +1,31 @@
-/*=============================================================================
-    AudioUnitUtilities.h
-        
-    Copyright (c) 2002-2008 Apple, Inc.  All Rights Reserved
-=============================================================================*/
-
 /*!
-    @header     AudioUnitUtilities.h
-    @abstract   Contains higher-level utility functions for the use of AudioUnit clients.
+	@file		AudioUnitUtilities.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2002-2015 by Apple, Inc., all rights reserved.
+	@abstract	Higher-level utility functions for the use of AudioUnit clients.
+
     @discussion
-The AU Parameter Listener is designed to provide notifications when an Audio Unit's parameters
-or other state changes.  It makes it unnecessary for UI components to continually poll an Audio
-Unit to determine if a parameter value has been changed. In order for this notification
-mechanism to work properly, parameter values should be changed using the AUParameterSet call
-(discussed below). This also makes it unnecessary for an Audio Unit to provide and support a
-notification mechanism, particularly as AudioUnitSetParameter may be received by an Audio Unit
-during the render process.
 
-The AUEventListener API's extend the AUParameterListener API's by supporting event types
-other than parameter changes. Events, including parameter changes are delivered serially to the 
-listener, preserving the time order of the events and parameter changes.
+	The AU Parameter Listener is designed to provide notifications when an Audio Unit's parameters
+	or other state changes.  It makes it unnecessary for UI components to continually poll an Audio
+	Unit to determine if a parameter value has been changed. In order for this notification
+	mechanism to work properly, parameter values should be changed using the AUParameterSet call
+	(discussed below). This also makes it unnecessary for an Audio Unit to provide and support a
+	notification mechanism, particularly as AudioUnitSetParameter may be received by an Audio Unit
+	during the render process.
 
-There are also some utilities for converting between non-linear and linear value ranges. These
-are useful for displaying a non-linear parameter (such as one whose units are in Hertz or
-decibels) using a linear control mechanism, such as a slider, to ensure that the user has a
-wider perceived range of control over the parameter value.
+	The AUEventListener API's extend the AUParameterListener API's by supporting event types
+	other than parameter changes. Events, including parameter changes are delivered serially to the 
+	listener, preserving the time order of the events and parameter changes.
+
+	There are also some utilities for converting between non-linear and linear value ranges. These
+	are useful for displaying a non-linear parameter (such as one whose units are in Hertz or
+	decibels) using a linear control mechanism, such as a slider, to ensure that the user has a
+	wider perceived range of control over the parameter value.
 */
 
-
-#ifndef __AudioUnitUtilities_h__
-#define __AudioUnitUtilities_h__
+#ifndef AudioToolbox_AudioUnitUtilities_h
+#define AudioToolbox_AudioUnitUtilities_h
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
@@ -40,6 +37,8 @@ wider perceived range of control over the parameter value.
     #include <dispatch/dispatch.h>
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,15 +47,12 @@ extern "C" {
 
 /*!
     @enum       
-    
-    @abstract   
-    
     @constant   kAUParameterListener_AnyParameter
                     A wildcard value for an AudioUnitParameterID. Note that this is
                     only valid when sending a notification (with AUParameterListenerNotify),
                     not when registering to receive one.
 */
-enum {
+CF_ENUM(AudioUnitParameterID) {
     kAUParameterListener_AnyParameter = 0xFFFFFFFF
 };
 
@@ -76,13 +72,12 @@ enum {
     @constant   kAudioUnitEvent_PropertyChange
                     The event is a change to a property value.
 */
-enum {  // typedef UInt32 AudioUnitEventType
+typedef CF_ENUM(UInt32, AudioUnitEventType) {
     kAudioUnitEvent_ParameterValueChange        = 0,
     kAudioUnitEvent_BeginParameterChangeGesture = 1,
     kAudioUnitEvent_EndParameterChangeGesture   = 2,
     kAudioUnitEvent_PropertyChange              = 3
 };
-typedef UInt32 AudioUnitEventType;
 
 /* ============================================================================= */
 
@@ -112,13 +107,14 @@ typedef AUParameterListenerRef AUEventListenerRef;
     @field      mArgument
         Specifies the parameter or property which has changed.
 */  
-typedef struct AudioUnitEvent {
+struct AudioUnitEvent {
     AudioUnitEventType                  mEventType;
     union {
         AudioUnitParameter  mParameter; // for parameter value change, begin and end gesture
         AudioUnitProperty   mProperty;  // for kAudioUnitEvent_PropertyChange
     }                                   mArgument;
-} AudioUnitEvent;
+};
+typedef struct AudioUnitEvent AudioUnitEvent;
 
 #ifdef __BLOCKS__
 /*!
@@ -131,7 +127,7 @@ typedef struct AudioUnitEvent {
     @param  inValue
                 The parameter's new value.
 */
-typedef void (^AUParameterListenerBlock)(   void *                      inObject,
+typedef void (^AUParameterListenerBlock)(   void * __nullable           inObject,
                                             const AudioUnitParameter *  inParameter,
                                             AudioUnitParameterValue     inValue);
 
@@ -147,7 +143,7 @@ typedef void (^AUParameterListenerBlock)(   void *                      inObject
     @param  inParameterValue
                 If the event is parameter change, the parameter's new value (otherwise, undefined).
 */
-typedef void (^AUEventListenerBlock)(       void *                      inObject,
+typedef void (^AUEventListenerBlock)(       void * __nullable           inObject,
                                             const AudioUnitEvent *      inEvent,
                                             UInt64                      inEventHostTime,
                                             AudioUnitParameterValue     inParameterValue);
@@ -165,8 +161,8 @@ typedef void (^AUEventListenerBlock)(       void *                      inObject
     @param  inValue
                 The parameter's new value.
 */
-typedef void (*AUParameterListenerProc)(    void *                      inUserData,
-                                            void *                      inObject,
+typedef void (*AUParameterListenerProc)(    void * __nullable           inUserData,
+                                            void * __nullable           inObject,
                                             const AudioUnitParameter *  inParameter,
                                             AudioUnitParameterValue     inValue);
 
@@ -184,8 +180,8 @@ typedef void (*AUParameterListenerProc)(    void *                      inUserDa
     @param  inParameterValue
                 If the event is parameter change, the parameter's new value (otherwise, undefined).
 */
-typedef void (*AUEventListenerProc)(void *                      inUserData,
-                                    void *                      inObject,
+typedef void (*AUEventListenerProc)(void * __nullable           inUserData,
+                                    void * __nullable           inObject,
                                     const AudioUnitEvent *      inEvent,
                                     UInt64                      inEventHostTime,
                                     AudioUnitParameterValue     inParameterValue);
@@ -220,10 +216,10 @@ typedef void (*AUEventListenerProc)(void *                      inUserData,
         AUParameterSet in preference to AudioUnitSetParameterValue.
 */
 extern OSStatus
-AUListenerCreateWithDispatchQueue(  AUParameterListenerRef *        outListener,
-                                    Float32                         inNotificationInterval,
-                                    dispatch_queue_t                inDispatchQueue,
-                                    AUParameterListenerBlock        inBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_6_0);
+AUListenerCreateWithDispatchQueue(  AUParameterListenerRef __nullable * __nonnull outListener,
+                                    Float32                                       inNotificationInterval,
+                                    dispatch_queue_t                              inDispatchQueue,
+                                    AUParameterListenerBlock                      inBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_6_0);
 #endif
 
 /*!
@@ -256,10 +252,10 @@ AUListenerCreateWithDispatchQueue(  AUParameterListenerRef *        outListener,
 extern OSStatus
 AUListenerCreate(                   AUParameterListenerProc         inProc,
                                     void *                          inUserData,
-                                    CFRunLoopRef                    inRunLoop,
-                                    CFStringRef                     inRunLoopMode,
+                                    CFRunLoopRef __nullable         inRunLoop,
+                                    CFStringRef __nullable          inRunLoopMode,
                                     Float32                         inNotificationInterval,
-                                    AUParameterListenerRef *        outListener)    __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_6_0);
+                                    AUParameterListenerRef __nullable * __nonnull outListener)    __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_6_0);
 
 /*!
     @function   AUListenerDispose
@@ -289,7 +285,7 @@ AUListenerDispose(                  AUParameterListenerRef          inListener) 
 */
 extern OSStatus
 AUListenerAddParameter(             AUParameterListenerRef          inListener, 
-                                    void *                          inObject,
+                                    void * __nullable               inObject,
                                     const AudioUnitParameter *      inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
 
 /*!
@@ -305,7 +301,7 @@ AUListenerAddParameter(             AUParameterListenerRef          inListener,
 */
 extern OSStatus
 AUListenerRemoveParameter(          AUParameterListenerRef          inListener, 
-                                    void *                          inObject, 
+                                    void * __nullable               inObject,
                                     const AudioUnitParameter *      inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
 
 
@@ -313,10 +309,10 @@ AUListenerRemoveParameter(          AUParameterListenerRef          inListener,
 /*!
     @function   AUParameterSet
     @abstract   Set an AudioUnit parameter value and notify listeners.
-    @param      inListener
+    @param      inSendingListener
                     A parameter listener generating the change and which does not want to
                     receive a callback as a result of it. May be NULL.
-    @param      inObject
+    @param      inSendingObject
                     The object generating the change and which does not want to receive a
                     callback as a result of it. NULL is treated specially when inListener is
                     non-null; it signifies that none of the specified listener's objects will
@@ -325,32 +321,35 @@ AUListenerRemoveParameter(          AUParameterListenerRef          inListener,
                     The parameter being changed.
     @param      inValue
                     The new value of the parameter.
+	@param		inBufferOffsetInFrames
+					The offset into the next rendered buffer at which the parameter change will take
+					effect.
     @discussion 
         Calls AudioUnitSetParameter, and performs/schedules notification callbacks to all
         parameter listeners, for that parameter -- except that no callback will be generated to
         the inListener/inObject pair.
 */
 extern OSStatus
-AUParameterSet(                     AUParameterListenerRef          inSendingListener, 
-                                    void *                          inSendingObject,
-                                    const AudioUnitParameter *      inParameter,
-                                    AudioUnitParameterValue         inValue,
-                                    UInt32                          inBufferOffsetInFrames)
+AUParameterSet(                     AUParameterListenerRef __nullable inSendingListener,
+                                    void * __nullable                 inSendingObject,
+                                    const AudioUnitParameter *        inParameter,
+                                    AudioUnitParameterValue           inValue,
+                                    UInt32                            inBufferOffsetInFrames)
                                                                                     __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
 
 /*!
     @function   AUParameterListenerNotify
     @abstract   Notify listeners of a past parameter change.
-    @param      inListener
+    @param      inSendingListener
                     A parameter listener generating the change and which does not want to
                     receive a callback as a result of it. May be NULL.
-    @param      inObject
+    @param      inSendingObject
                     The object generating the change and which does not want to receive a
                     callback as a result of it. NULL is treated specially when inListener is
                     non-null; it signifies that none of the specified listener's objects will
                     receive notifications.
     @param      inParameter
-                    The parameter which was changed changed.
+                    The parameter which was changed.
     @discussion 
         Performs and schedules the notification callbacks of AUParameterSet, without
         actually setting an AudioUnit parameter value.
@@ -365,9 +364,9 @@ AUParameterSet(                     AUParameterListenerRef          inSendingLis
         parameter.
 */
 extern OSStatus
-AUParameterListenerNotify(          AUParameterListenerRef          inSendingListener,
-                                    void *                          inSendingObject,
-                                    const AudioUnitParameter *      inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+AUParameterListenerNotify(          AUParameterListenerRef __nullable inSendingListener,
+                                    void * __nullable                 inSendingObject,
+                                    const AudioUnitParameter *        inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
 
 /* ============================================================================= */
 
@@ -423,11 +422,11 @@ AUParameterListenerNotify(          AUParameterListenerRef          inSendingLis
 */
 extern OSStatus
 AUEventListenerCreateWithDispatchQueue(
-                                    AUEventListenerRef *        outListener,
-                                    Float32                     inNotificationInterval,     // seconds
-                                    Float32                     inValueChangeGranularity,   // seconds
-                                    dispatch_queue_t            inDispatchQueue,
-                                    AUEventListenerBlock        inBlock)            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_6_0);
+                                    AUEventListenerRef __nullable * __nonnull outListener,
+                                    Float32                                   inNotificationInterval,     // seconds
+                                    Float32                                   inValueChangeGranularity,   // seconds
+                                    dispatch_queue_t                          inDispatchQueue,
+                                    AUEventListenerBlock                      inBlock)            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_6_0);
 #endif
 
 /*!
@@ -457,13 +456,13 @@ AUEventListenerCreateWithDispatchQueue(
         See the discussion of AUEventListenerCreateWithDispatchQueue.
 */
 extern OSStatus
-AUEventListenerCreate(              AUEventListenerProc         inProc,
-                                    void *                      inUserData,
-                                    CFRunLoopRef                inRunLoop,
-                                    CFStringRef                 inRunLoopMode,
-                                    Float32                     inNotificationInterval,     // seconds
-                                    Float32                     inValueChangeGranularity,   // seconds
-                                    AUEventListenerRef *        outListener)        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_6_0);
+AUEventListenerCreate(              AUEventListenerProc                       inProc,
+                                    void * __nullable                         inUserData,
+                                    CFRunLoopRef __nullable                   inRunLoop,
+                                    CFStringRef __nullable                    inRunLoopMode,
+                                    Float32                                   inNotificationInterval,     // seconds
+                                    Float32                                   inValueChangeGranularity,   // seconds
+                                    AUEventListenerRef __nullable * __nonnull outListener)        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_6_0);
 
 /*!
     @function   AUEventListenerAddEventType
@@ -480,7 +479,7 @@ AUEventListenerCreate(              AUEventListenerProc         inProc,
 */
 extern OSStatus
 AUEventListenerAddEventType(        AUEventListenerRef          inListener,
-                                    void *                      inObject,
+                                    void * __nullable           inObject,
                                     const AudioUnitEvent *      inEvent)        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_6_0);
     
 /*!
@@ -496,7 +495,7 @@ AUEventListenerAddEventType(        AUEventListenerRef          inListener,
 */
 extern OSStatus
 AUEventListenerRemoveEventType(     AUEventListenerRef          inListener,
-                                    void *                      inObject,
+                                    void * __nullable           inObject,
                                     const AudioUnitEvent *      inEvent)        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_6_0);           
 
 /*!
@@ -518,9 +517,9 @@ AUEventListenerRemoveEventType(     AUEventListenerRef          inListener,
     @result     An OSStatus error code.
 */
 extern OSStatus
-AUEventListenerNotify(              AUEventListenerRef          inSendingListener,
-                                    void *                      inSendingObject,
-                                    const AudioUnitEvent *      inEvent)        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_6_0);
+AUEventListenerNotify(              AUEventListenerRef __nullable  inSendingListener,
+                                    void * __nullable              inSendingObject,
+                                    const AudioUnitEvent *         inEvent)        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_6_0);
                                     
 /* ============================================================================= */
 
@@ -606,5 +605,6 @@ AUParameterFormatValue(             Float64                     inParameterValue
 }
 #endif
 
+CF_ASSUME_NONNULL_END
 
-#endif
+#endif // AudioToolbox_AudioUnitUtilities_h

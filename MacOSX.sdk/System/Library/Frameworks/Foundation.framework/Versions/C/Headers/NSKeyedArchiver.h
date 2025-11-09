@@ -1,5 +1,5 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2001-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -9,8 +9,10 @@
 #endif
 
 
-@class NSArray, NSMutableData, NSData;
+@class NSArray<ObjectType>, NSMutableData, NSData, NSString;
 @protocol NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString * const NSInvalidArchiveOperationException;
 FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
@@ -43,32 +45,32 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 
 - (instancetype)initForWritingWithMutableData:(NSMutableData *)data;
 
-@property (assign) id <NSKeyedArchiverDelegate> delegate;
+@property (nullable, assign) id <NSKeyedArchiverDelegate> delegate;
 
 @property NSPropertyListFormat outputFormat;
 
 - (void)finishEncoding;
 
-+ (void)setClassName:(NSString *)codedName forClass:(Class)cls;
-- (void)setClassName:(NSString *)codedName forClass:(Class)cls;
++ (void)setClassName:(nullable NSString *)codedName forClass:(Class)cls;
+- (void)setClassName:(nullable NSString *)codedName forClass:(Class)cls;
 	// During encoding, the coder first checks with the coder's
 	// own table, then if there was no mapping there, the class's.
 
-+ (NSString *)classNameForClass:(Class)cls;
-- (NSString *)classNameForClass:(Class)cls;
++ (nullable NSString *)classNameForClass:(Class)cls;
+- (nullable NSString *)classNameForClass:(Class)cls;
 
-- (void)encodeObject:(id)objv forKey:(NSString *)key;
-- (void)encodeConditionalObject:(id)objv forKey:(NSString *)key;
+- (void)encodeObject:(nullable id)objv forKey:(NSString *)key;
+- (void)encodeConditionalObject:(nullable id)objv forKey:(NSString *)key;
 - (void)encodeBool:(BOOL)boolv forKey:(NSString *)key;
 - (void)encodeInt:(int)intv forKey:(NSString *)key;	// native int
 - (void)encodeInt32:(int32_t)intv forKey:(NSString *)key;
 - (void)encodeInt64:(int64_t)intv forKey:(NSString *)key;
 - (void)encodeFloat:(float)realv forKey:(NSString *)key;
 - (void)encodeDouble:(double)realv forKey:(NSString *)key;
-- (void)encodeBytes:(const uint8_t *)bytesp length:(NSUInteger)lenv forKey:(NSString *)key;
+- (void)encodeBytes:(nullable const uint8_t *)bytesp length:(NSUInteger)lenv forKey:(NSString *)key;
 
 // Enables secure coding support on this keyed archiver. You do not need to enable secure coding on the archiver to enable secure coding on the unarchiver. Enabling secure coding on the archiver is a way for you to be sure that all classes that are encoded conform with NSSecureCoding (it will throw an exception if a class which does not NSSecureCoding is archived). Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
-- (void)setRequiresSecureCoding:(BOOL)b NS_AVAILABLE(10_8, 6_0);
+@property (readwrite) BOOL requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -92,36 +94,37 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
     void *  __strong _reserved0;
 }
 
-+ (id)unarchiveObjectWithData:(NSData *)data;
-+ (id)unarchiveObjectWithFile:(NSString *)path;
++ (nullable id)unarchiveObjectWithData:(NSData *)data;
++ (nullable id)unarchiveTopLevelObjectWithData:(NSData *)data error:(NSError **)error NS_AVAILABLE(10_11, 9_0) NS_SWIFT_UNAVAILABLE("Use 'unarchiveTopLevelObjectWithData(_:) throws' instead");
++ (nullable id)unarchiveObjectWithFile:(NSString *)path;
 
 - (instancetype)initForReadingWithData:(NSData *)data;
 
-@property (assign) id <NSKeyedUnarchiverDelegate> delegate;
+@property (nullable, assign) id <NSKeyedUnarchiverDelegate> delegate;
 
 - (void)finishDecoding;
 
-+ (void)setClass:(Class)cls forClassName:(NSString *)codedName;
-- (void)setClass:(Class)cls forClassName:(NSString *)codedName;
++ (void)setClass:(nullable Class)cls forClassName:(NSString *)codedName;
+- (void)setClass:(nullable Class)cls forClassName:(NSString *)codedName;
 	// During decoding, the coder first checks with the coder's
 	// own table, then if there was no mapping there, the class's.
 
-+ (Class)classForClassName:(NSString *)codedName;
-- (Class)classForClassName:(NSString *)codedName;
++ (nullable Class)classForClassName:(NSString *)codedName;
+- (nullable Class)classForClassName:(NSString *)codedName;
 
 - (BOOL)containsValueForKey:(NSString *)key;
 
-- (id)decodeObjectForKey:(NSString *)key;
+- (nullable id)decodeObjectForKey:(NSString *)key;
 - (BOOL)decodeBoolForKey:(NSString *)key;
 - (int)decodeIntForKey:(NSString *)key;		// may raise a range exception
 - (int32_t)decodeInt32ForKey:(NSString *)key;
 - (int64_t)decodeInt64ForKey:(NSString *)key;
 - (float)decodeFloatForKey:(NSString *)key;
 - (double)decodeDoubleForKey:(NSString *)key;
-- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;	// returned bytes immutable, and they go away with the unarchiver, not the containing autorlease pool
+- (nullable const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(nullable NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;	// returned bytes immutable, and they go away with the unarchiver, not the containing autorelease pool
 
 // Enables secure coding support on this keyed unarchiver. When enabled, anarchiving a disallowed class throws an exception. Once enabled, attempting to set requiresSecureCoding to NO will throw an exception. This is to prevent classes from selectively turning secure coding off. This is designed to be set once at the top level and remain on. Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
-- (void)setRequiresSecureCoding:(BOOL)b NS_AVAILABLE(10_8, 6_0);
+@property (readwrite) BOOL requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -129,7 +132,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 @optional
 
 // substitution
-- (id)archiver:(NSKeyedArchiver *)archiver willEncodeObject:(id)object;
+- (nullable id)archiver:(NSKeyedArchiver *)archiver willEncodeObject:(id)object;
 	// Informs the delegate that the object is about to be encoded.  The delegate
 	// either returns this object or can return a different object to be encoded
 	// instead.  The delegate can also fiddle with the coder state.  If the delegate
@@ -140,14 +143,14 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
         // been encoded).  This is also not called when nil is about to be encoded.
         // This method is called whether or not the object is being encoded conditionally.
 
-- (void)archiver:(NSKeyedArchiver *)archiver didEncodeObject:(id)object;
+- (void)archiver:(NSKeyedArchiver *)archiver didEncodeObject:(nullable id)object;
 	// Informs the delegate that the given object has been encoded.  The delegate
 	// might restore some state it had fiddled previously, or use this to keep
 	// track of the objects which are encoded.  The object may be nil.  Not called
 	// for conditional objects until they are really encoded (if ever).
 
 // notification
-- (void)archiver:(NSKeyedArchiver *)archiver willReplaceObject:(id)object withObject:(id)newObject;
+- (void)archiver:(NSKeyedArchiver *)archiver willReplaceObject:(nullable id)object withObject:(nullable id)newObject;
 	// Informs the delegate that the newObject is being substituted for the
 	// object. This is also called when the delegate itself is doing/has done
 	// the substitution. The delegate may use this method if it is keeping track
@@ -165,7 +168,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 @optional
 
 // error handling
-- (Class)unarchiver:(NSKeyedUnarchiver *)unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray *)classNames;
+- (nullable Class)unarchiver:(NSKeyedUnarchiver *)unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray<NSString *> *)classNames;
 	// Informs the delegate that the named class is not available during decoding.
 	// The delegate may, for example, load some code to introduce the class to the
 	// runtime and return it, or substitute a different class object.  If the
@@ -174,7 +177,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
         // the immediate superclass, and so on.
 
 // substitution
-- (id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id) NS_RELEASES_ARGUMENT object NS_RETURNS_RETAINED;
+- (nullable id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(nullable id) NS_RELEASES_ARGUMENT object NS_RETURNS_RETAINED;
 	// Informs the delegate that the object has been decoded.  The delegate
 	// either returns this object or can return a different object to replace
 	// the decoded one.  The object may be nil.  If the delegate returns nil,
@@ -198,7 +201,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 
 @interface NSObject (NSKeyedArchiverObjectSubstitution)
 
-@property (readonly) Class classForKeyedArchiver;
+@property (nullable, readonly) Class classForKeyedArchiver;
 	// Implemented by classes to substitute a new class for instances during
 	// encoding.  The object will be encoded as if it were a member of the
 	// returned class.  The results of this method are overridden by the archiver
@@ -207,7 +210,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 	// [self classForArchiver] by default, NOT -classForCoder as might be
 	// expected.  This is a concession to source compatibility.
 
-- (id)replacementObjectForKeyedArchiver:(NSKeyedArchiver *)archiver;
+- (nullable id)replacementObjectForKeyedArchiver:(NSKeyedArchiver *)archiver;
 	// Implemented by classes to substitute new instances for the receiving
 	// instance during encoding.  The returned object will be encoded instead
 	// of the receiver (if different).  This method is called only if no
@@ -219,7 +222,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 	// to source compatibility.
 
 
-+ (NSArray *)classFallbacksForKeyedArchiver;
++ (NSArray<NSString *> *)classFallbacksForKeyedArchiver;
 
 
 @end
@@ -234,4 +237,4 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 
 @end
 
-
+NS_ASSUME_NONNULL_END

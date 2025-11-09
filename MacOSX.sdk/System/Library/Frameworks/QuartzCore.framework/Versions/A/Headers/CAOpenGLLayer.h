@@ -1,11 +1,13 @@
 /* CoreAnimation - CAOpenGLLayer.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 #import <CoreVideo/CVBase.h>
 #import <OpenGL/OpenGL.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CAOpenGLLayer : CALayer
 {
@@ -66,4 +68,18 @@
 
 - (void)releaseCGLContext:(CGLContextObj)ctx;
 
+/* The colorspace of the rendered frames. If nil, no colormatching occurs.
+ * If non-nil, the rendered content will be colormatched to the colorspace of
+ * the context containing this layer (typically the display's colorspace). */
+
+@property CGColorSpaceRef colorspace;
+
+/* If any rendering context on the screen has this enabled, all content will be
+ * clamped to its NSScreen’s maximumExtendedDynamicRangeColorComponentValue
+ * rather than 1.0. The default is NO.  */
+
+@property BOOL wantsExtendedDynamicRangeContent;
+
 @end
+
+NS_ASSUME_NONNULL_END

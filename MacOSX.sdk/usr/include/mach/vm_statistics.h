@@ -222,6 +222,7 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 #define VM_PAGE_QUERY_PAGE_EXTERNAL	0x80
 #define VM_PAGE_QUERY_PAGE_CS_VALIDATED	0x100
 #define VM_PAGE_QUERY_PAGE_CS_TAINTED	0x200
+#define VM_PAGE_QUERY_PAGE_CS_NX	0x400
 
 
 /*
@@ -256,6 +257,8 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 #define VM_FLAGS_ANYWHERE	0x0001
 #define VM_FLAGS_PURGABLE	0x0002
 #define VM_FLAGS_NO_CACHE	0x0010
+#define VM_FLAGS_RESILIENT_CODESIGN	0x0020
+#define VM_FLAGS_RESILIENT_MEDIA	0x0040
 #define VM_FLAGS_OVERWRITE	0x4000	/* delete any existing mappings first */
 /*
  * VM_FLAGS_SUPERPAGE_MASK
@@ -264,6 +267,7 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
  */
 #define VM_FLAGS_SUPERPAGE_MASK	0x70000	/* bits 0x10000, 0x20000, 0x40000 */
 #define VM_FLAGS_RETURN_DATA_ADDR	0x100000 /* Return address of target data, rather than base of page */
+#define VM_FLAGS_RETURN_4K_DATA_ADDR	0x800000 /* Return 4K aligned address of target data */
 #define VM_FLAGS_ALIAS_MASK	0xFF000000
 #define VM_GET_FLAGS_ALIAS(flags, alias)			\
 		(alias) = ((flags) & VM_FLAGS_ALIAS_MASK) >> 24	
@@ -280,11 +284,13 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 				 VM_FLAGS_SUPERPAGE_MASK |	\
 				 VM_FLAGS_ALIAS_MASK)
 #define VM_FLAGS_USER_MAP	(VM_FLAGS_USER_ALLOCATE |	\
+				 VM_FLAGS_RETURN_4K_DATA_ADDR |	\
 				 VM_FLAGS_RETURN_DATA_ADDR)
 #define VM_FLAGS_USER_REMAP	(VM_FLAGS_FIXED |    \
 				 VM_FLAGS_ANYWHERE | \
 				 VM_FLAGS_OVERWRITE| \
-				 VM_FLAGS_RETURN_DATA_ADDR)
+				 VM_FLAGS_RETURN_DATA_ADDR |\
+				 VM_FLAGS_RESILIENT_CODESIGN)
 
 #define VM_FLAGS_SUPERPAGE_SHIFT 16
 #define SUPERPAGE_NONE			0	/* no superpages, if all bits are 0 */
@@ -404,10 +410,22 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 /* Genealogy buffers */
 #define VM_MEMORY_GENEALOGY 78
 
+/* RawCamera VM allocated memory */
+#define VM_MEMORY_RAWCAMERA 79
+
+/* corpse info for dead process */
+#define VM_MEMORY_CORPSEINFO 80
+
+/* Apple System Logger (ASL) messages */
+#define VM_MEMORY_ASL 81
+
 /* Reserve 240-255 for application */
 #define VM_MEMORY_APPLICATION_SPECIFIC_1 240
 #define VM_MEMORY_APPLICATION_SPECIFIC_16 255
 
 #define VM_MAKE_TAG(tag) ((tag) << 24)
+
+
+
 
 #endif	/* _MACH_VM_STATISTICS_H_ */

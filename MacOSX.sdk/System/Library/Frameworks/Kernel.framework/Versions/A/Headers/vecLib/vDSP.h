@@ -3,9 +3,9 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-516.0
+    Version:    vecLib-563.3
 
-    Copyright:  � 2000-2015 by Apple Inc., all rights reserved.
+    Copyright:  Copyright (c) 2000-2015 by Apple Inc. All rights reserved.
 
     For vDSP documentation, search for "vDSP" at <http://developer.apple.com>
     or search for one of the routine names below.
@@ -20,7 +20,7 @@
 
 // Tell compiler this file is idempotent (no need to process it more than once).
 #if PRAGMA_ONCE
-#pragma once
+    #pragma once
 #endif
 
 
@@ -30,13 +30,13 @@
         describes what they do.  For example, vDSP_vadd is declared with:
 
             extern void vDSP_vadd(
-                const float *__vDSP_A,
-                vDSP_Stride  __vDSP_IA,
-                const float *__vDSP_B,
-                vDSP_Stride  __vDSP_IB,
-                float       *__vDSP_C,
-                vDSP_Stride  __vDSP_IC,
-                vDSP_Length  __vDSP_N)
+                const float *__A,
+                vDSP_Stride  __IA,
+                const float *__B,
+                vDSP_Stride  __IB,
+                float       *__C,
+                vDSP_Stride  __IC,
+                vDSP_Length  __N)
                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
         and is described with:
@@ -46,9 +46,9 @@
 
         The pseudocode uses two important simplifications:
 
-            Names are shorted.
+            Names are shortened.
 
-                The prefix "__vDSP_" is removed.  This prefix is used in this
+                The prefix "__" is removed.  This prefix is used in this
                 header file so that Apple parameter names do not conflict with
                 other developer macro names that might be used in source files
                 that include this header, as when a program might use "#define
@@ -201,11 +201,39 @@
 
 #include <Availability.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+#if !defined __has_feature
+    #define __has_feature(f)    0
+#endif
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull begin")
+#else
+    #define __nullable
+    #define __nonnull
+#endif
+
+
+/*  The following is reproduced from CFAvailability.h to provide
+    Swift-compatibility enum declarations.  CFAvailability.h itself is not
+    included to creating a dependency on it in the kernel version of vDSP.h,
+    which cannot include CoreFoundation headers.
+*/
+#define __CF_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
+#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+#define __CF_NAMED_ENUM(_type, _name)     enum _name : _type _name; enum _name : _type
+#define __CF_ANON_ENUM(_type)             enum : _type
+#else
+#define __CF_NAMED_ENUM(_type, _name) _type _name; enum
+#define __CF_ANON_ENUM(_type) enum
+#endif
+#define CF_ENUM(...) __CF_ENUM_GET_MACRO(__VA_ARGS__, __CF_NAMED_ENUM, __CF_ANON_ENUM)(__VA_ARGS__)
 
 
 #pragma options align=power
@@ -216,8 +244,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   516
-#define vDSP_Version1   0
+#define vDSP_Version0   563
+#define vDSP_Version1   3
 
 
 /*  Define types:
@@ -253,12 +281,12 @@ typedef struct DSPDoubleComplex {
     array.
 */
 typedef struct DSPSplitComplex {
-    float  *realp;
-    float  *imagp;
+    float  * __nonnull realp;
+    float  * __nonnull imagp;
 } DSPSplitComplex;
 typedef struct DSPDoubleSplitComplex {
-    double *realp;
-    double *imagp;
+    double * __nonnull realp;
+    double * __nonnull imagp;
 } DSPDoubleSplitComplex;
 
 
@@ -318,12 +346,12 @@ typedef struct vDSP_biquadm_SetupStructD *vDSP_biquadm_SetupD;
     vDSP_destroy_fftsetup and vDSP_destroy_fftsetupD free the memory.  They
     may be passed a null pointer, in which case they have no effect.
 */
-extern FFTSetup vDSP_create_fftsetup(
-    vDSP_Length __vDSP_Log2n,
-    FFTRadix    __vDSP_Radix)
+extern __nullable FFTSetup vDSP_create_fftsetup(
+    vDSP_Length __Log2n,
+    FFTRadix    __Radix)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
-extern void vDSP_destroy_fftsetup(FFTSetup __vDSP_setup)
+extern void vDSP_destroy_fftsetup(__nullable FFTSetup __setup)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 /*  vDSP_biquadm_CreateSetup (for float) or vDSP_biquadm_CreateSetupD (for
@@ -339,19 +367,21 @@ extern void vDSP_destroy_fftsetup(FFTSetup __vDSP_setup)
     double) frees the memory allocated by the corresponding create-setup
     routine.
 */
-extern vDSP_biquadm_Setup vDSP_biquadm_CreateSetup(
-    const double *__vDSP_coeffs,
-    vDSP_Length   __vDSP_M,
-    vDSP_Length   __vDSP_N)
+extern __nullable vDSP_biquadm_Setup vDSP_biquadm_CreateSetup(
+    const double *__coeffs,
+    vDSP_Length   __M,
+    vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
-extern vDSP_biquadm_SetupD vDSP_biquadm_CreateSetupD(
-    const double *__vDSP_coeffs,
-    vDSP_Length   __vDSP_M,
-    vDSP_Length   __vDSP_N)
+extern __nullable vDSP_biquadm_SetupD vDSP_biquadm_CreateSetupD(
+    const double *__coeffs,
+    vDSP_Length   __M,
+    vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
-extern void vDSP_biquadm_DestroySetup(vDSP_biquadm_Setup __vDSP_setup)
+extern void vDSP_biquadm_DestroySetup(
+    vDSP_biquadm_Setup __setup)
         __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
-extern void vDSP_biquadm_DestroySetupD(vDSP_biquadm_SetupD __vDSP_setup)
+extern void vDSP_biquadm_DestroySetupD(
+    vDSP_biquadm_SetupD __setup)
         __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 /*  vDSP_biquadm_CopyState (for float) or vDSP_biquadm_CopyStateD (for double)
@@ -363,26 +393,96 @@ extern void vDSP_biquadm_DestroySetupD(vDSP_biquadm_SetupD __vDSP_setup)
     double) sets the delay values of a biquadm setup object to zero.
 */
 extern void vDSP_biquadm_CopyState(
-    vDSP_biquadm_Setup                     __vDSP_dest,
-    const struct vDSP_biquadm_SetupStruct *__vDSP_src)
+    vDSP_biquadm_Setup                     __dest,
+    const struct vDSP_biquadm_SetupStruct *__src)
         __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 extern void vDSP_biquadm_CopyStateD(
-    vDSP_biquadm_SetupD                     __vDSP_dest,
-    const struct vDSP_biquadm_SetupStructD *__vDSP_src)
+    vDSP_biquadm_SetupD                     __dest,
+    const struct vDSP_biquadm_SetupStructD *__src)
         __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
-extern void vDSP_biquadm_ResetState(vDSP_biquadm_Setup __vDSP_setup)
+extern void vDSP_biquadm_ResetState(vDSP_biquadm_Setup __setup)
         __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
-extern void vDSP_biquadm_ResetStateD(vDSP_biquadm_SetupD __vDSP_setup)
+extern void vDSP_biquadm_ResetStateD(vDSP_biquadm_SetupD __setup)
         __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
+/*
+    vDSP_biquadm_SetCoefficientsDouble will
+    update the filter coefficients within a valid vDSP_biquadm_Setup object.
+ */
+    
+extern void vDSP_biquadm_SetCoefficientsDouble(
+    vDSP_biquadm_Setup                  __setup,
+    const double                       *__coeffs,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+    
+/*
+    vDSP_biquadm_SetTargetsDouble will
+    set the target coefficients within a valid vDSP_biquadm_Setup object.
+ */
+    
+extern void vDSP_biquadm_SetTargetsDouble(
+    vDSP_biquadm_Setup                  __setup,
+    const double                       *__targets,
+    float                               __interp_rate,
+    float                               __interp_threshold,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+    
+/*
+    vDSP_biquadm_SetCoefficientsSingle will
+    update the filter coefficients within a valid vDSP_biquadm_Setup object.
+ 
+    Coefficients are specified in single precision.
+ */
+    
+extern void vDSP_biquadm_SetCoefficientsSingle(
+    vDSP_biquadm_Setup                  __setup,
+    const float                         *__coeffs,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+    
+/*
+    vDSP_biquadm_SetTargetsSingle will
+    set the target coefficients within a valid vDSP_biquadm_Setup object.
+    The target values are specified in single precision.
+ */
+    
+extern void vDSP_biquadm_SetTargetsSingle(
+    vDSP_biquadm_Setup                  __setup,
+    const float                        *__targets,
+    float                               __interp_rate,
+    float                               __interp_threshold,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __start_chn,
+    vDSP_Length                         __nsec,
+    vDSP_Length                         __nchn)
+    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+/*
+    vDSP_biquadm_SetActiveFilters will set the overall active/inactive filter
+    state of a valid vDSP_biquadm_Setup object.
+ */
+extern void vDSP_biquadm_SetActiveFilters(
+    vDSP_biquadm_Setup                  __setup,
+    const bool                         *__filter_states)
+    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 
 // Convert a complex array to a complex-split array.
 extern void vDSP_ctoz(
-    const DSPComplex      *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    const DSPSplitComplex *__vDSP_Z,
-    vDSP_Stride            __vDSP_IZ,
-    vDSP_Length            __vDSP_N)
+    const DSPComplex      *__C,
+    vDSP_Stride            __IC,
+    const DSPSplitComplex *__Z,
+    vDSP_Stride            __IZ,
+    vDSP_Length            __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Map:
 
@@ -399,11 +499,11 @@ extern void vDSP_ctoz(
 
 //  Convert a complex-split array to a complex array.
 extern void vDSP_ztoc(
-    const DSPSplitComplex *__vDSP_Z,
-    vDSP_Stride            __vDSP_IZ,
-    DSPComplex            *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    vDSP_Length            __vDSP_N)
+    const DSPSplitComplex *__Z,
+    vDSP_Stride            __IZ,
+    DSPComplex            *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Map:
 
@@ -424,11 +524,11 @@ extern void vDSP_ztoc(
     these.
 */
 extern void vDSP_fft_zrip(
-    FFTSetup               __vDSP_Setup,
-    const DSPSplitComplex *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    vDSP_Length            __vDSP_Log2N,
-    FFTDirection           __vDSP_Direction)
+    FFTSetup               __Setup,
+    const DSPSplitComplex *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __Log2N,
+    FFTDirection           __Direction)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Maps:
 
@@ -523,16 +623,16 @@ extern void vDSP_fft_zrip(
     vDSP_biquadm_CreateSetupD, respectively.
  */
 extern void vDSP_biquadm(
-    vDSP_biquadm_Setup   __vDSP_Setup,
-    const float        **__vDSP_X, vDSP_Stride __vDSP_IX,
-    float              **__vDSP_Y, vDSP_Stride __vDSP_IY,
-    vDSP_Length          __vDSP_N)
+    vDSP_biquadm_Setup       __Setup,
+    const float * __nonnull * __nonnull __X, vDSP_Stride __IX,
+    float       * __nonnull * __nonnull __Y, vDSP_Stride __IY,
+    vDSP_Length              __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 extern void vDSP_biquadmD(
-     vDSP_biquadm_SetupD   __vDSP_Setup,
-     const double        **__vDSP_X, vDSP_Stride __vDSP_IX,
-     double              **__vDSP_Y, vDSP_Stride __vDSP_IY,
-     vDSP_Length          __vDSP_N)
+     vDSP_biquadm_SetupD       __Setup,
+     const double * __nonnull * __nonnull __X, vDSP_Stride __IX,
+     double       * __nonnull * __nonnull __Y, vDSP_Stride __IY,
+     vDSP_Length               __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     /*  These routines perform the same function as M calls to vDSP_biquad or
         vDSP_biquadD, where M, the delay values, and the biquad setups are
@@ -551,27 +651,27 @@ extern void vDSP_biquadmD(
 /*  Convolution and correlation.
 */
 extern void vDSP_conv(
-    const float *__vDSP_A,  // Input signal.
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_F,  // Filter.
-    vDSP_Stride  __vDSP_IF,
-    float       *__vDSP_C,  // Output signal.
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N,  // Output length.
-    vDSP_Length  __vDSP_P)  // Filter length.
+    const float *__A,  // Input signal.
+    vDSP_Stride  __IA,
+    const float *__F,  // Filter.
+    vDSP_Stride  __IF,
+    float       *__C,  // Output signal.
+    vDSP_Stride  __IC,
+    vDSP_Length  __N,  // Output length.
+    vDSP_Length  __P)  // Filter length.
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 /*  Split-complex matrix multiply.
 */
 extern void vDSP_zmmul(
-    const DSPSplitComplex *__vDSP_A,
-    vDSP_Stride            __vDSP_IA,
-    const DSPSplitComplex *__vDSP_B,
-    vDSP_Stride            __vDSP_IB,
-    const DSPSplitComplex *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    vDSP_Length            __vDSP_M,
-    vDSP_Length            __vDSP_N,
-    vDSP_Length            __vDSP_P)
+    const DSPSplitComplex *__A,
+    vDSP_Stride            __IA,
+    const DSPSplitComplex *__B,
+    vDSP_Stride            __IB,
+    const DSPSplitComplex *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __M,
+    vDSP_Length            __N,
+    vDSP_Length            __P)
         __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
     /*  Maps:
 
@@ -590,13 +690,13 @@ extern void vDSP_zmmul(
 
 // Vector add.
 extern void vDSP_vadd(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    vDSP_Stride  __vDSP_IB,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    vDSP_Stride  __IB,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -609,13 +709,13 @@ extern void vDSP_vadd(
 
 // Vector subtract.
 extern void vDSP_vsub(
-    const float *__vDSP_B,  // Caution:  A and B are swapped!
-    vDSP_Stride  __vDSP_IB,
-    const float *__vDSP_A,  // Caution:  A and B are swapped!
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__B,  // Caution:  A and B are swapped!
+    vDSP_Stride  __IB,
+    const float *__A,  // Caution:  A and B are swapped!
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -628,13 +728,13 @@ extern void vDSP_vsub(
 
 // Vector multiply.
 extern void vDSP_vmul(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    vDSP_Stride  __vDSP_IB,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    vDSP_Stride  __IB,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -647,22 +747,22 @@ extern void vDSP_vmul(
 
 // Vector divide.
 extern void vDSP_vdiv(
-    const float *__vDSP_B,  // Caution:  A and B are swapped!
-    vDSP_Stride  __vDSP_IB,
-    const float *__vDSP_A,  // Caution:  A and B are swapped!
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__B,  // Caution:  A and B are swapped!
+    vDSP_Stride  __IB,
+    const float *__A,  // Caution:  A and B are swapped!
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 extern void vDSP_zvdiv(
-    const DSPSplitComplex *__vDSP_B,    // Caution:  A and B are swapped!
-    vDSP_Stride            __vDSP_IB,
-    const DSPSplitComplex *__vDSP_A,    // Caution:  A and B are swapped!
-    vDSP_Stride            __vDSP_IA,
-    const DSPSplitComplex *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    vDSP_Length            __vDSP_N)
+    const DSPSplitComplex *__B,    // Caution:  A and B are swapped!
+    vDSP_Stride            __IB,
+    const DSPSplitComplex *__A,    // Caution:  A and B are swapped!
+    vDSP_Stride            __IA,
+    const DSPSplitComplex *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -675,12 +775,12 @@ extern void vDSP_zvdiv(
 
 // Vector-scalar multiply.
 extern void vDSP_vsmul(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -693,15 +793,15 @@ extern void vDSP_vsmul(
 
 // Vector multiply and add.
 extern void vDSP_vma(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    vDSP_Stride  __vDSP_IB,
-    const float *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    float       *__vDSP_D,
-    vDSP_Stride  __vDSP_ID,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    vDSP_Stride  __IB,
+    const float *__C,
+    vDSP_Stride  __IC,
+    float       *__D,
+    vDSP_Stride  __ID,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -714,14 +814,14 @@ extern void vDSP_vma(
 
 // Complex multiplication with optional conjugation.
 extern void vDSP_zvmul(
-    const DSPSplitComplex *__vDSP_A,
-    vDSP_Stride            __vDSP_IA,
-    const DSPSplitComplex *__vDSP_B,
-    vDSP_Stride            __vDSP_IB,
-    const DSPSplitComplex *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    vDSP_Length            __vDSP_N,
-    int                    __vDSP_Conjugate)
+    const DSPSplitComplex *__A,
+    vDSP_Stride            __IA,
+    const DSPSplitComplex *__B,
+    vDSP_Stride            __IB,
+    const DSPSplitComplex *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __N,
+    int                    __Conjugate)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -742,18 +842,18 @@ extern void vDSP_zvmul(
 
 // Vector absolute value.
 extern void vDSP_vabs(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 extern void vDSP_zvabs(
-    const DSPSplitComplex *__vDSP_A,
-    vDSP_Stride            __vDSP_IA,
-    float                 *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    vDSP_Length            __vDSP_N)
+    const DSPSplitComplex *__A,
+    vDSP_Stride            __IA,
+    float                 *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -766,10 +866,10 @@ extern void vDSP_zvabs(
 
 // Vector fill.
 extern void vDSP_vfill(
-    const float *__vDSP_A,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IA,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    float       *__C,
+    vDSP_Stride  __IA,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -782,12 +882,12 @@ extern void vDSP_vfill(
 
 // Vector-scalar add.
 extern void vDSP_vsadd(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -800,11 +900,11 @@ extern void vDSP_vsadd(
 
 // Complex-split vector move.
 extern void vDSP_zvmov(
-    const DSPSplitComplex *__vDSP_A,
-    vDSP_Stride            __vDSP_IA,
-    const DSPSplitComplex *__vDSP_C,
-    vDSP_Stride            __vDSP_IC,
-    vDSP_Length            __vDSP_N)
+    const DSPSplitComplex *__A,
+    vDSP_Stride            __IA,
+    const DSPSplitComplex *__C,
+    vDSP_Stride            __IC,
+    vDSP_Length            __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -818,12 +918,12 @@ extern void vDSP_zvmov(
 
 // Difference equation, 2 poles, 2 zeros.
 extern void vDSP_deq22(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -840,10 +940,10 @@ extern void vDSP_deq22(
 
 // Maximum magnitude of vector.
 extern void vDSP_maxmgv(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -852,10 +952,10 @@ extern void vDSP_maxmgv(
 
 // Maximum value of vector.
 extern void vDSP_maxv(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -865,10 +965,10 @@ extern void vDSP_maxv(
 
 // Minimum value of vector.
 extern void vDSP_minv(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -879,10 +979,10 @@ extern void vDSP_minv(
 
 // Root-mean-square of vector.
 extern void vDSP_rmsqv(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -894,12 +994,12 @@ extern void vDSP_rmsqv(
 
 // Scalar-vector divide.
 extern void vDSP_svdiv(
-    const float *__vDSP_A,
-    const float *__vDSP_B,
-    vDSP_Stride  __vDSP_IB,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    const float *__B,
+    vDSP_Stride  __IB,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -915,10 +1015,10 @@ extern void vDSP_svdiv(
 
 // Sum of vector elements.
 extern void vDSP_sve(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_I,
-    float       *__vDSP_C,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __I,
+    float       *__C,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -931,10 +1031,10 @@ extern void vDSP_sve(
 
 // Sum of vector elements' squares.
 extern void vDSP_svesq(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -946,11 +1046,11 @@ extern void vDSP_svesq(
 
 // Sum of vector elements and sum of vector elements' squares.
 extern void vDSP_sve_svesq(
-    const float  *__vDSP_A,
-    vDSP_Stride   __vDSP_IA,
-    float        *__vDSP_Sum,
-    float        *__vDSP_SumOfSquares,
-    vDSP_Length   __vDSP_N)
+    const float  *__A,
+    vDSP_Stride   __IA,
+    float        *__Sum,
+    float        *__SumOfSquares,
+    vDSP_Length   __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
     /*  Maps:  The default maps are used.
 
@@ -963,10 +1063,10 @@ extern void vDSP_sve_svesq(
 
 // Sum of vector elements' signed squares.
 extern void vDSP_svs(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -977,13 +1077,13 @@ extern void vDSP_svs(
 
 // Vector clip.
 extern void vDSP_vclip(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    const float *__vDSP_C,
-    float       *__vDSP_D,
-    vDSP_Stride  __vDSP_ID,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    const float *__C,
+    float       *__D,
+    vDSP_Stride  __ID,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -1000,9 +1100,9 @@ extern void vDSP_vclip(
 
 // Vector clear.
 extern void vDSP_vclr(
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -1015,13 +1115,13 @@ extern void vDSP_vclr(
 
 // Vector convert to decibels, power, or amplitude.
 extern void vDSP_vdbcon(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N,
-    unsigned int __vDSP_F)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N,
+    unsigned int __F)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -1039,13 +1139,13 @@ extern void vDSP_vdbcon(
 
 // Vector maxima.
 extern void vDSP_vmax(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    vDSP_Stride  __vDSP_IB,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    vDSP_Stride  __IB,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -1058,13 +1158,13 @@ extern void vDSP_vmax(
 
 // Vector maximum magnitude.
 extern void vDSP_vmaxmg(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    const float *__vDSP_B,
-    vDSP_Stride  __vDSP_IB,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N)
+    const float *__A,
+    vDSP_Stride  __IA,
+    const float *__B,
+    vDSP_Stride  __IB,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N)
         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
     /*  Maps:  The default maps are used.
 
@@ -1077,12 +1177,12 @@ extern void vDSP_vmaxmg(
 
 // Vector sliding window maxima.
 extern void vDSP_vswmax(
-    const float *__vDSP_A,
-    vDSP_Stride  __vDSP_IA,
-    float       *__vDSP_C,
-    vDSP_Stride  __vDSP_IC,
-    vDSP_Length  __vDSP_N,
-    vDSP_Length  __vDSP_WindowLength)
+    const float *__A,
+    vDSP_Stride  __IA,
+    float       *__C,
+    vDSP_Stride  __IC,
+    vDSP_Length  __N,
+    vDSP_Length  __WindowLength)
         __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     /*  Maps:  The default maps are used.
 
@@ -1126,6 +1226,11 @@ typedef DSPDoubleSplitComplex           DOUBLE_COMPLEX_SPLIT;
 
 
 #pragma options align=reset
+
+
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull end")
+#endif
 
 
 #ifdef __cplusplus

@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
-current-version: 301.0
+current-version: 302.0
 exports:         
   - archs:           [ i386 ]
     symbols:         [ _ATSUCalculateBaselineDeltas, _ATSUCopyToHandle, 

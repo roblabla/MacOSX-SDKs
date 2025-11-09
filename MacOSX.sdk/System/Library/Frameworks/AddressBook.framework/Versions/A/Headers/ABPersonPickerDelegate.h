@@ -7,6 +7,7 @@
 @class ABPersonPicker;
 @class ABPerson;
 
+OBJC_GC_UNAVAILABLE
 @protocol ABPersonPickerDelegate <NSObject>
 
 /*!

@@ -982,15 +982,14 @@
 
 /*! @typedef AXMenuItemModifiers
       @abstract Values that indicate the keyboard shortcut modifiers for a menu item (used with the {@link kAXMenuItemCmdModifiersAttribute} attribute).
- */    
-enum {
+ */
+typedef CF_OPTIONS(UInt32, AXMenuItemModifiers) {
     kAXMenuItemModifierNone         = 0,        /* Mask for no modifiers other than the command key (which is used by default) */
     kAXMenuItemModifierShift        = (1 << 0), /* Mask for shift key modifier */
     kAXMenuItemModifierOption       = (1 << 1), /* Mask for option key modifier */
     kAXMenuItemModifierControl      = (1 << 2), /* Mask for control key modifier */
     kAXMenuItemModifierNoCommand    = (1 << 3)  /* Mask for no modifiers at all, not even the command key */
 };
-typedef UInt32 AXMenuItemModifiers;
 
 // application-specific attributes
 #define kAXMenuBarAttribute				CFSTR("AXMenuBar")

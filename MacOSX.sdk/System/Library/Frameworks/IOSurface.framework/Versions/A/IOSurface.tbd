@@ -67,7 +67,8 @@ exports:
                        _kIOSurfaceCleanApertureHeight, _kIOSurfaceCleanApertureHorizontalOffset, 
                        _kIOSurfaceCleanApertureVerticalOffset, _kIOSurfaceCleanApertureWidth, 
                        _kIOSurfaceClientAddress, _kIOSurfaceColorPrimaries, 
-                       _kIOSurfaceColorPrimaries_EBU_3213, _kIOSurfaceColorPrimaries_ITU_R_709_2, 
+                       _kIOSurfaceColorPrimaries_DCI_P3, _kIOSurfaceColorPrimaries_EBU_3213, 
+                       _kIOSurfaceColorPrimaries_ITU_R_709_2, _kIOSurfaceColorPrimaries_P3_D65, 
                        _kIOSurfaceColorPrimaries_SMPTE_C, _kIOSurfaceColorSpace, 
                        _kIOSurfaceCreationProperties, _kIOSurfaceElementHeight, 
                        _kIOSurfaceElementWidth, _kIOSurfaceFieldCount, 
@@ -86,6 +87,7 @@ exports:
                        _kIOSurfaceTransferFunction, _kIOSurfaceTransferFunction_ITU_R_709_2, 
                        _kIOSurfaceTransferFunction_SMPTE_240M_1995, _kIOSurfaceTransferFunction_UseGamma, 
                        _kIOSurfaceType, _kIOSurfaceWidth, _kIOSurfaceYCbCrMatrix, 
-                       _kIOSurfaceYCbCrMatrix_ITU_R_601_4_String, _kIOSurfaceYCbCrMatrix_ITU_R_709_2_String, 
+                       _kIOSurfaceYCbCrMatrix_DCI_P3_String, _kIOSurfaceYCbCrMatrix_ITU_R_601_4_String, 
+                       _kIOSurfaceYCbCrMatrix_ITU_R_709_2_String, _kIOSurfaceYCbCrMatrix_P3_D65_String, 
                        _kIOSurfaceYCbCrMatrix_SMPTE_240M_1995_String ]
 ...

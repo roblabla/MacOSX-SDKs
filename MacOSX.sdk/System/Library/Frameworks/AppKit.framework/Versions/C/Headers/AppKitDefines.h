@@ -1,7 +1,7 @@
 /*
 	AppKitDefines.h
 	Application Kit
-	Copyright (c) 1995-2014, Apple Inc.
+	Copyright (c) 1995-2015, Apple Inc.
 	All rights reserved.
 */
 #ifndef _APPKITDEFINES_H

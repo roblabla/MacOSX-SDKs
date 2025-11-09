@@ -10,6 +10,7 @@
 #import <CoreBluetooth/CBDefines.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  @class CBCentral
@@ -53,3 +54,5 @@ CB_EXTERN_CLASS @interface CBCentral : NSObject <NSCopying>
 @property(readonly, nonatomic) NSUInteger maximumUpdateValueLength;
 
 @end
+
+NS_ASSUME_NONNULL_END

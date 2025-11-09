@@ -1,7 +1,7 @@
 /*
     NSPopover.h
     Application Kit
-    Copyright (c) 2010-2014, Apple Inc.
+    Copyright (c) 2010-2015, Apple Inc.
     All rights reserved.
 */
 
@@ -12,6 +12,8 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSAppearance.h>
 #import <AppKit/NSResponder.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSView, NSViewController, NSWindow, NSNotification, NSString;
 
@@ -96,7 +98,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
     
 #pragma mark -
 #pragma mark Bindings
@@ -115,7 +117,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /*  The delegate of the popover. The delegate is not retained. 
  */
-@property(assign) IBOutlet id <NSPopoverDelegate> delegate;
+@property(nullable, assign) IBOutlet id <NSPopoverDelegate> delegate;
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10
 
@@ -124,7 +126,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  * If nil is set, nil will be returned, and the effective appearance will return to the default.
  * To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
  */
-@property (strong) NSAppearance *appearance NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSAppearance *appearance NS_AVAILABLE_MAC(10_10);
 
 @property (readonly, strong) NSAppearance *effectiveAppearance NS_AVAILABLE_MAC(10_10);
 
@@ -151,7 +153,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /*  The view controller that manages the content of the popover.  The default value is nil.  You must set the content view controller of the popover to a non-nil value before the popover is shown.  Changes to the popover's content view controller while the popover is shown will animate (provided animates is YES). 
  */
-@property(retain) IBOutlet NSViewController *contentViewController;
+@property(nullable, retain) IBOutlet NSViewController *contentViewController;
 
 /*  The content size of the popover.  The popover's content size is set to match the size of the content view when the content view controller is set.  Changes to the content size of the popover will animate while the popover is shown (provided animates is YES). 
  */
@@ -160,6 +162,10 @@ NS_CLASS_AVAILABLE(10_7, NA)
 /*  YES if the popover is being shown, NO otherwise. The popover is considered to be shown from the point when -showRelativeToRect:ofView:preferredEdge: is invoked until the popover is closed in response to an invocation of either -close or -performClose:.
  */
 @property(readonly, getter=isShown) BOOL shown;
+
+/// Returns \c YES if the window is detached to an implicitly created detached window, \c NO otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
+@property (readonly, getter=isDetached) BOOL detached NS_AVAILABLE_MAC(10_10);
+
 
 /*  Popovers are positioned relative to a positioning view and are automatically moved when the location or size of the positioning view changes.  Sometimes it is desirable to position popovers relative to a rectangle within the positioning view.  In this case, you must update the positioningRect binding whenever this rectangle changes, or use the positioningRect binding so AppKit can re-position the popover when appropriate. 
  */
@@ -174,7 +180,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /*  Attempts to close the popover.  The popover will not be closed if it has a delegate and the delegate returns NO to -popoverShouldClose: (or if the popover's class implements -popoverShouldClose: to return NO). The operation will fail if it is displaying a nested popover, or if it has a child window.  A window will attempt to close its popovers when it receives a -performClose: message.  The popover will animate out when closed (unless the animates property is set to NO).
  */
-- (IBAction)performClose:(id)sender;
+- (IBAction)performClose:(nullable id)sender;
 
 /*  Forces the popover to close without consulting its delegate.  Any popovers nested within the popovers will also receive a close message.  When a window is closed in response to the -close message being sent, all of its popovers will be closed.  The popover will animate out when closed (unless the animates property is set to NO).
  */
@@ -229,20 +235,27 @@ APPKIT_EXTERN NSString * const NSPopoverDidCloseNotification NS_AVAILABLE_MAC(10
 /*!
  * Return \c YES to allow the popover to detach from its positioning view. Return \c NO if it should not. If this method is not implemented, the default behavior is \c NO.
  * If this method returns YES, and \c -detachableWindowForPopover: is not implemented or returns nil, a detachable window will be created with the popover’s \c contentViewController.
- * This implicit detached window will have the same appearance as the popover. If the \c contentViewController has a title, it will be bound to and displayed as the title of the detached window. Upon detaching, the popover will not send a PopoverWill/DidClose notification or delegate call with reason \c NSPopoverCloseReasonDetachToWindow. Instead, when the detached window is going to be closed, PopoverShould/Will/DidClose delegate calls and notifications will be sent with the reason \c NSPopoverCloseReasonStandard.
+ * This implicit detached window will have the same appearance as the popover. If the \c contentViewController has a title, it will be bound to and displayed as the title of the detached window. Upon being released in a detached state, the popover will call \c -popoverDidDetach: on the delegate. Once the detached popover is closed, PopoverShould/Will/DidClose delegate calls and notifications will be sent with the reason \c NSPopoverCloseReasonStandard.
  * \param popover The popover that may be detached
  * \return YES if the popover should detach, whether to a custom window or the implicitly detached window. NO if not.
  */
 - (BOOL)popoverShouldDetach:(NSPopover *)popover NS_AVAILABLE_MAC(10_10);
 
 /*!
+ * This is called when the popover has been released in an implicitly detached state, i.e. not when detached to a custom window returned from \c -detachableWindowForPopover:.
+ * \param popover The popover that detached from its anchor view and is not closing.
+ */
+- (void)popoverDidDetach:(NSPopover *)popover NS_AVAILABLE_MAC(10_10);
+
+/*!
  * Return a custom window to which the popover should be detached. This should be used when the content of the detached window is wanted to be different from the content of the popover. If the same content should be used in the detached window, only \c -popoverShouldDetach: needs to be implemented.
  * If implementing this method, you should not remove the popover's content view as part of your implementation of this method. The popover and the detachable window may be shown at the same time and therefore cannot share a content view (or a content view controller).  If the popover and the detachable window should have the same content, you should define the content in a separate nib file and use a view controller to instantiate separate copies of the content for the popover and the detachable window.  The popover will animate to appear as though it morphs into the detachable window (unless the animates property is set to NO.  The exact animation used is not guaranteed).  Subclasses of NSPopover may also implement this method, in which case the subclass method will be invoked only if the delegate does not implement the method.
+ * Not implementing this method, and just returning YES to \c -popoverShouldDetach: is recommended over providing a custom window.
  * If \c -popoverShouldDetach: is not overridden or returns NO, this method will not be called and the popover will not be detachable.
  * \param popover The popover that is being detached
  * \return The custom window to detach to.
  */
-- (NSWindow *)detachableWindowForPopover:(NSPopover *)popover;
+- (nullable NSWindow *)detachableWindowForPopover:(NSPopover *)popover;
 
 /*!
  * Invoked on the delegate when the NSPopoverWillShowNotification notification is sent.  This method will also be invoked on the popover.
@@ -265,3 +278,5 @@ APPKIT_EXTERN NSString * const NSPopoverDidCloseNotification NS_AVAILABLE_MAC(10
 - (void)popoverDidClose:(NSNotification *)notification;
 
 @end
+
+NS_ASSUME_NONNULL_END

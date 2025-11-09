@@ -2,11 +2,12 @@
     File:		AVAudioUnitDelay.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioUnitEffect.h>
-#import <Foundation/NSDate.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @class AVAudioUnitDelay
     @abstract an AVAudioUnitEffect that implements a delay effect
@@ -58,3 +59,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @end
 
+NS_ASSUME_NONNULL_END

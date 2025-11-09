@@ -101,7 +101,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
 /*!
  * @abstract The Preview Panel delegate.
  */
-@property(assign) id <QLPreviewPanelDelegate> delegate;
+@property(assign) id /*<QLPreviewPanelDelegate>*/ delegate;
 
 /*
  * Managing Full screen mode

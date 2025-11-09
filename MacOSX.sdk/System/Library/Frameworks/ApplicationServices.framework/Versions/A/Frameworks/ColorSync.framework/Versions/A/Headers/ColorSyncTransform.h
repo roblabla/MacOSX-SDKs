@@ -56,13 +56,14 @@ CSEXTERN void ColorSyncTransformSetProperty(ColorSyncTransformRef transform, CFT
     */
 
 enum ColorSyncDataDepth {
-    kColorSync1BitGamut = 1,
-    kColorSync8BitInteger,
-    kColorSync16BitInteger,
-    kColorSync16BitFloat,
-    kColorSync32BitInteger,
-    kColorSync32BitNamedColorIndex,
-    kColorSync32BitFloat
+    kColorSync1BitGamut             = 1,
+    kColorSync8BitInteger           = 2,
+    kColorSync16BitInteger          = 3,
+    kColorSync16BitFloat            = 4,
+    kColorSync32BitInteger          = 5,
+    kColorSync32BitNamedColorIndex  = 6,
+    kColorSync32BitFloat            = 7,
+    kColorSync10BitInteger          = 8
 };
 
 typedef enum ColorSyncDataDepth ColorSyncDataDepth;
@@ -193,6 +194,8 @@ CSEXTERN CFStringRef kColorSyncTranformInfo;         /* dictionary with the foll
  *                     multi-dimensional table with N inputs and M outputs.
  */
  
+    
+CSEXTERN CFStringRef kColorSyncTransformCodeFragmentType;           /* CFSTR("com.apple.cmm.CodeFragmentType")  */
 CSEXTERN CFStringRef kColorSyncTransformFullConversionData;         /* CFSTR("com.apple.cmm.FullConversion") */
 CSEXTERN CFStringRef kColorSyncTransformSimplifiedConversionData;   /* CFSTR("com.apple.cmm.SimplifiedConversion") */
 CSEXTERN CFStringRef kColorSyncTransformParametricConversionData;   /* CFSTR("com.apple.cmm.ParametricConversion") */

@@ -1,7 +1,7 @@
 /*
     NSPathComponentCell.h
     Application Kit
-    Copyright (c) 2006-2014, Apple Inc.
+    Copyright (c) 2006-2015, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 
 
 #import <AppKit/NSTextFieldCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSImage, NSString, NSURL;
 
@@ -39,9 +41,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* See NSPathComponent.h for details on the image & URL properties.
 */
-@property (copy) NSImage *image;
+@property (nullable, copy) NSImage *image;
 
-@property (copy) NSURL *URL;
+@property (nullable, copy) NSURL *URL;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

@@ -1,14 +1,19 @@
 /*
     NSApplication.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSRunningApplication.h>
+#import <AppKit/NSUserInterfaceLayout.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSDate, NSDictionary, NSError, NSException, NSNotification;
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
@@ -45,7 +50,11 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_8 1187
 #define NSAppKitVersionNumber10_9 1265
 #define NSAppKitVersionNumber10_10 1343
-
+#define NSAppKitVersionNumber10_10_2 1344
+#define NSAppKitVersionNumber10_10_3 1347
+#define NSAppKitVersionNumber10_10_4 1348
+#define NSAppKitVersionNumber10_10_5 1348
+#define NSAppKitVersionNumber10_10_Max 1349
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSString *NSModalPanelRunLoopMode;
@@ -91,8 +100,6 @@ typedef NS_OPTIONS(NSUInteger, NSApplicationOcclusionState) {
     // If set, at least part of any window owned by this application is visible. If not set, all parts of all windows owned by this application are completely occluded. The menu bar does not count as a window owned by this application, so if only the menu bar is showing then the application is considered not visible. Status items, however, have windows owned by your application. If the status item is present in the menu bar, your application will be considered visible as long as the menu bar is visible.
     NSApplicationOcclusionStateVisible = 1UL << 1,
 } NS_ENUM_AVAILABLE_MAC(10_9);
-
-APPKIT_EXTERN id NSApp;
 
 /* Information used by the system during modal sessions */
 typedef struct _NSModalSession *NSModalSession;
@@ -154,36 +161,38 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
     _NSThreadPrivate     *_threadingSupport;
 }
 
-+ (NSApplication *)sharedApplication;
-@property (assign) id<NSApplicationDelegate> delegate;
-@property (readonly, strong) NSGraphicsContext *context;
-- (void)hide:(id)sender;
-- (void)unhide:(id)sender;
+APPKIT_EXTERN __kindof NSApplication * __null_unspecified NSApp;
+
++ (__kindof NSApplication *)sharedApplication;
+@property (nullable, assign) id<NSApplicationDelegate> delegate;
+@property (nullable, readonly, strong) NSGraphicsContext *context;
+- (void)hide:(nullable id)sender;
+- (void)unhide:(nullable id)sender;
 - (void)unhideWithoutActivation;
-- (NSWindow *)windowWithWindowNumber:(NSInteger)windowNum;
-@property (readonly, assign) NSWindow *mainWindow;
-@property (readonly, assign) NSWindow *keyWindow;
+- (nullable NSWindow *)windowWithWindowNumber:(NSInteger)windowNum;
+@property (nullable, readonly, assign) NSWindow *mainWindow;
+@property (nullable, readonly, assign) NSWindow *keyWindow;
 @property (getter=isActive, readonly) BOOL active;
 @property (getter=isHidden, readonly) BOOL hidden;
 @property (getter=isRunning, readonly) BOOL running;
 - (void)deactivate;
 - (void)activateIgnoringOtherApps:(BOOL)flag;
 
-- (void)hideOtherApplications:(id)sender;
-- (void)unhideAllApplications:(id)sender;
+- (void)hideOtherApplications:(nullable id)sender;
+- (void)unhideAllApplications:(nullable id)sender;
 
 - (void)finishLaunching;
 - (void)run;
 - (NSInteger)runModalForWindow:(NSWindow *)theWindow;
-- (void)stop:(id)sender;
+- (void)stop:(nullable id)sender;
 - (void)stopModal;
 - (void)stopModalWithCode:(NSInteger)returnCode;
 - (void)abortModal;
-@property (readonly, strong) NSWindow *modalWindow;
+@property (nullable, readonly, strong) NSWindow *modalWindow;
 - (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow NS_RETURNS_INNER_POINTER;
 - (NSInteger)runModalSession:(NSModalSession)session;
 - (void)endModalSession:(NSModalSession)session;
-- (void)terminate:(id)sender;
+- (void)terminate:(nullable id)sender;
 
 typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
       NSCriticalRequest = 0,
@@ -195,26 +204,26 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
 - (void)cancelUserAttentionRequest:(NSInteger)request;
 
 
-- (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
-- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(NSEvent *)lastEvent;
+- (nullable NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(nullable NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
+- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(nullable NSEvent *)lastEvent;
 - (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
-@property (readonly, strong) NSEvent *currentEvent;
+@property (nullable, readonly, strong) NSEvent *currentEvent;
 
 - (void)sendEvent:(NSEvent *)theEvent;
 - (void)preventWindowOrdering;
-- (NSWindow *)makeWindowsPerform:(SEL)aSelector inOrder:(BOOL)flag;
-@property (readonly, copy) NSArray *windows;
+- (nullable NSWindow *)makeWindowsPerform:(SEL)aSelector inOrder:(BOOL)flag;
+@property (readonly, copy) NSArray<NSWindow *> *windows;
 - (void)setWindowsNeedUpdate:(BOOL)needUpdate;
 - (void)updateWindows;
 
-@property (strong) NSMenu *mainMenu;
+@property (nullable, strong) NSMenu *mainMenu;
 
 /* Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from -helpMenu).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  NSApplication retains its Help menu and releases it when a different menu is set.
  
  */
-@property (strong) NSMenu *helpMenu NS_AVAILABLE_MAC(10_6);
+@property (nullable, strong) NSMenu *helpMenu NS_AVAILABLE_MAC(10_6);
 
-@property (strong) NSImage *applicationIconImage;
+@property (null_resettable, strong) NSImage *applicationIconImage;
 
 /* Returns the activation policy of the application.
  */
@@ -227,14 +236,14 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
 
 @property (readonly, strong) NSDockTile *dockTile NS_AVAILABLE_MAC(10_5);
 
-- (BOOL)sendAction:(SEL)theAction to:(id)theTarget from:(id)sender;
-- (id)targetForAction:(SEL)theAction;
-- (id)targetForAction:(SEL)theAction to:(id)theTarget from:(id)sender;
-- (BOOL)tryToPerform:(SEL)anAction with:(id)anObject;
-- (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
+- (BOOL)sendAction:(SEL)theAction to:(nullable id)theTarget from:(nullable id)sender;
+- (nullable id)targetForAction:(SEL)theAction;
+- (nullable id)targetForAction:(SEL)theAction to:(nullable id)theTarget from:(nullable id)sender;
+- (BOOL)tryToPerform:(SEL)anAction with:(nullable id)anObject;
+- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
 
 - (void)reportException:(NSException *)theException;
-+ (void)detachDrawingThread:(SEL)selector toTarget:(id)target withObject:(id)argument;
++ (void)detachDrawingThread:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;
 
 /*  If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
 - (void)replyToApplicationShouldTerminate:(BOOL)shouldTerminate;
@@ -250,7 +259,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 
 /* Opens the character palette
 */
-- (void)orderFrontCharacterPalette:(id)sender;
+- (void)orderFrontCharacterPalette:(nullable id)sender;
 
 /* Gets or sets the presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for -setPresentationOptions:.  When given an invalid combination of option flags, -setPresentationOptions: raises an exception.
 */
@@ -265,13 +274,13 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 @end
 
 @interface NSApplication(NSWindowsMenu)
-@property (strong) NSMenu *windowsMenu;
-- (void)arrangeInFront:(id)sender;
+@property (nullable, strong) NSMenu *windowsMenu;
+- (void)arrangeInFront:(nullable id)sender;
 - (void)removeWindowsItem:(NSWindow *)win;
 - (void)addWindowsItem:(NSWindow *)win title:(NSString *)aString filename:(BOOL)isFilename;
 - (void)changeWindowsItem:(NSWindow *)win title:(NSString *)aString filename:(BOOL)isFilename;
 - (void)updateWindowsItem:(NSWindow *)win;
-- (void)miniaturizeAll:(id)sender;
+- (void)miniaturizeAll:(nullable id)sender;
 @end
 
 @interface NSApplication(NSFullKeyboardAccess)
@@ -306,21 +315,21 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 */
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
-- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames;
+- (void)application:(NSApplication *)sender openFiles:(NSArray<NSString *> *)filenames;
 - (BOOL)application:(NSApplication *)sender openTempFile:(NSString *)filename;
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)application:(id)sender openFileWithoutUI:(NSString *)filename;
 - (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename;
-- (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray *)fileNames withSettings:(NSDictionary *)printSettings showPrintPanels:(BOOL)showPrintPanels;
+- (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray<NSString *> *)fileNames withSettings:(NSDictionary<NSString *, id> *)printSettings showPrintPanels:(BOOL)showPrintPanels;
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag;
-- (NSMenu *)applicationDockMenu:(NSApplication *)sender;
+- (nullable NSMenu *)applicationDockMenu:(NSApplication *)sender;
 - (NSError *)application:(NSApplication *)application willPresentError:(NSError *)error;
 
 - (void)application:(NSApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken NS_AVAILABLE_MAC(10_7);
 - (void)application:(NSApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error NS_AVAILABLE_MAC(10_7);
-- (void)application:(NSApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo NS_AVAILABLE_MAC(10_7);
+- (void)application:(NSApplication *)application didReceiveRemoteNotification:(NSDictionary<NSString *, id> *)userInfo NS_AVAILABLE_MAC(10_7);
 
 /* Method called by -[NSApplication encodeRestorableStateWithCoder:] to give the delegate a chance to encode any additional state into the NSCoder. If the restorable state managed by the delegate changes, you must call -[NSApplication invalidateRestorableState] so that it will be re-encoded. See the header NSWindowRestoration.h for more information.
 */
@@ -377,23 +386,23 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 @end
 
 @interface NSApplication(NSServicesMenu)
-@property (strong) NSMenu *servicesMenu;
-- (void)registerServicesMenuSendTypes:(NSArray *)sendTypes returnTypes:(NSArray *)returnTypes;
+@property (nullable, strong) NSMenu *servicesMenu;
+- (void)registerServicesMenuSendTypes:(NSArray<NSString *> *)sendTypes returnTypes:(NSArray<NSString *> *)returnTypes;
 @end
 
 @protocol NSServicesMenuRequestor <NSObject>
 @optional
-- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types;
+- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray<NSString *> *)types;
 - (BOOL)readSelectionFromPasteboard:(NSPasteboard *)pboard;
 @end
 
 @interface NSApplication(NSServicesHandling)
-@property (strong) id servicesProvider;
+@property (nullable, strong) id servicesProvider;
 @end
 
 @interface NSApplication(NSStandardAboutPanel)
-- (void)orderFrontStandardAboutPanel:(id)sender;
-- (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary *)optionsDictionary;
+- (void)orderFrontStandardAboutPanel:(nullable id)sender;
+- (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary<NSString *, id> *)optionsDictionary;
 
 
 /* Optional keys in optionsDictionary:
@@ -423,10 +432,6 @@ If not specified, obtain from CFBundleShortVersionString key in infoDictionary. 
 
 /* Bi-directional User Interface
 */
-typedef NS_ENUM(NSInteger, NSUserInterfaceLayoutDirection) {
-    NSUserInterfaceLayoutDirectionLeftToRight = 0,
-    NSUserInterfaceLayoutDirectionRightToLeft = 1
-};
 
 @interface NSApplication (NSApplicationLayoutDirection)
 @property (readonly) NSUserInterfaceLayoutDirection userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_6); // Returns the application-wide user interface layout direction.
@@ -470,17 +475,17 @@ APPKIT_EXTERN int NSApplicationMain(int argc, const char *argv[]);
 APPKIT_EXTERN BOOL NSApplicationLoad(void);
 
 /* NSShowsServicesMenuItem() always returns YES. */
-APPKIT_EXTERN BOOL NSShowsServicesMenuItem(NSString * itemName);
+APPKIT_EXTERN BOOL NSShowsServicesMenuItem(NSString *itemName);
 
 /* NSSetShowsServicesMenuItem() has no effect, and always returns 0. */
-APPKIT_EXTERN NSInteger NSSetShowsServicesMenuItem(NSString * itemName, BOOL enabled);
+APPKIT_EXTERN NSInteger NSSetShowsServicesMenuItem(NSString *itemName, BOOL enabled);
 
 /* NSUpdateDynamicServices() causes the services information for the system to be updated.  This will only be necessary if your program adds dynamic services to the system (i.e. services not found in mach-o segments of executables).
 */
 APPKIT_EXTERN void NSUpdateDynamicServices(void);
-APPKIT_EXTERN BOOL NSPerformService(NSString *itemName, NSPasteboard *pboard);
+APPKIT_EXTERN BOOL NSPerformService(NSString *itemName, NSPasteboard * __nullable pboard);
 
-APPKIT_EXTERN void NSRegisterServicesProvider(id provider, NSString *name); // apps should use -setServicesProvider
+APPKIT_EXTERN void NSRegisterServicesProvider(id __nullable provider, NSString *name); // apps should use -setServicesProvider
 APPKIT_EXTERN void NSUnregisterServicesProvider(NSString *name);
 
 /* Notifications */
@@ -523,16 +528,16 @@ APPKIT_EXTERN NSString * const NSApplicationDidChangeOcclusionStateNotification 
  ** runModalForWindow:relativeToWindow: was deprecated in Mac OS 10.0.  
  ** Please use -[NSWindow beginSheet:completionHandler:] instead
  */
-- (NSInteger)runModalForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
+- (NSInteger)runModalForWindow:(null_unspecified NSWindow *)theWindow relativeToWindow:(null_unspecified NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
 
 /* 
  ** beginModalSessionForWindow:relativeToWindow: was deprecated in Mac OS 10.0.
  ** Please use -[NSWindow beginSheet:completionHandler:] instead
  */
-- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0);
+- (NSModalSession)beginModalSessionForWindow:(null_unspecified NSWindow *)theWindow relativeToWindow:(null_unspecified NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0);
 
 // -application:printFiles: was deprecated in Mac OS 10.4. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
-- (void)application:(NSApplication *)sender printFiles:(NSArray *)filenames NS_DEPRECATED_MAC(10_3, 10_4);
+- (void)application:(null_unspecified NSApplication *)sender printFiles:(null_unspecified NSArray<NSString *> *)filenames NS_DEPRECATED_MAC(10_3, 10_4);
 
 /* These constants are deprecated in 10.9 and will be formally deprecated in the following release */
 enum {
@@ -545,9 +550,11 @@ enum {
  NSWindow's -beginSheet:completionHandler: and -endSheet:returnCode: should be used instead.
  NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
  */
-- (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(id)modalDelegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow beginSheet:completionHandler:] instead");
+- (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(nullable id)modalDelegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(null_unspecified void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow beginSheet:completionHandler:] instead");
 - (void)endSheet:(NSWindow *)sheet NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:] instead");
 - (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:returnCode:] instead");
 
 
 @end
+
+NS_ASSUME_NONNULL_END

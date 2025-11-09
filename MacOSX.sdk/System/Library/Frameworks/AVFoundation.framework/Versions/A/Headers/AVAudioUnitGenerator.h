@@ -2,11 +2,13 @@
     File:		AVAudioUnitGenerator.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
 #import <AVFoundation/AVAudioUnit.h>
 #import <AVFoundation/AVAudioMixing.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @class AVAudioUnitGenerator
     @abstract an AVAudioUnit that generates audio output
@@ -35,3 +37,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic) BOOL bypass;
 
 @end
+
+NS_ASSUME_NONNULL_END

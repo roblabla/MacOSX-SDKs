@@ -170,25 +170,25 @@ static vector_double3 __SIMD_ATTRIBUTES__ __tg_trunc(vector_double3 __x);
 static vector_double4 __SIMD_ATTRIBUTES__ __tg_trunc(vector_double4 __x);
 static vector_double8 __SIMD_ATTRIBUTES__ __tg_trunc(vector_double8 __x);
 
-static vector_float2  __SIMD_ATTRIBUTES__ __tg_cos(vector_float2  __x) __SIMD_AVAILABILITY__;
-static vector_float3  __SIMD_ATTRIBUTES__ __tg_cos(vector_float3  __x) __SIMD_AVAILABILITY__;
-static vector_float4  __SIMD_ATTRIBUTES__ __tg_cos(vector_float4  __x) __SIMD_AVAILABILITY__;
-static vector_float8  __SIMD_ATTRIBUTES__ __tg_cos(vector_float8  __x) __SIMD_AVAILABILITY__;
-static vector_float16 __SIMD_ATTRIBUTES__ __tg_cos(vector_float16 __x) __SIMD_AVAILABILITY__;
-static vector_double2 __SIMD_ATTRIBUTES__ __tg_cos(vector_double2 __x) __SIMD_AVAILABILITY__;
-static vector_double3 __SIMD_ATTRIBUTES__ __tg_cos(vector_double3 __x) __SIMD_AVAILABILITY__;
-static vector_double4 __SIMD_ATTRIBUTES__ __tg_cos(vector_double4 __x) __SIMD_AVAILABILITY__;
-static vector_double8 __SIMD_ATTRIBUTES__ __tg_cos(vector_double8 __x) __SIMD_AVAILABILITY__;
+static vector_float2  __SIMD_ATTRIBUTES__ __tg_cos(vector_float2  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float3  __SIMD_ATTRIBUTES__ __tg_cos(vector_float3  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float4  __SIMD_ATTRIBUTES__ __tg_cos(vector_float4  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float8  __SIMD_ATTRIBUTES__ __tg_cos(vector_float8  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float16 __SIMD_ATTRIBUTES__ __tg_cos(vector_float16 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double2 __SIMD_ATTRIBUTES__ __tg_cos(vector_double2 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double3 __SIMD_ATTRIBUTES__ __tg_cos(vector_double3 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double4 __SIMD_ATTRIBUTES__ __tg_cos(vector_double4 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double8 __SIMD_ATTRIBUTES__ __tg_cos(vector_double8 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
-static vector_float2  __SIMD_ATTRIBUTES__ __tg_sin(vector_float2  __x) __SIMD_AVAILABILITY__;
-static vector_float3  __SIMD_ATTRIBUTES__ __tg_sin(vector_float3  __x) __SIMD_AVAILABILITY__;
-static vector_float4  __SIMD_ATTRIBUTES__ __tg_sin(vector_float4  __x) __SIMD_AVAILABILITY__;
-static vector_float8  __SIMD_ATTRIBUTES__ __tg_sin(vector_float8  __x) __SIMD_AVAILABILITY__;
-static vector_float16 __SIMD_ATTRIBUTES__ __tg_sin(vector_float16 __x) __SIMD_AVAILABILITY__;
-static vector_double2 __SIMD_ATTRIBUTES__ __tg_sin(vector_double2 __x) __SIMD_AVAILABILITY__;
-static vector_double3 __SIMD_ATTRIBUTES__ __tg_sin(vector_double3 __x) __SIMD_AVAILABILITY__;
-static vector_double4 __SIMD_ATTRIBUTES__ __tg_sin(vector_double4 __x) __SIMD_AVAILABILITY__;
-static vector_double8 __SIMD_ATTRIBUTES__ __tg_sin(vector_double8 __x) __SIMD_AVAILABILITY__;
+static vector_float2  __SIMD_ATTRIBUTES__ __tg_sin(vector_float2  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float3  __SIMD_ATTRIBUTES__ __tg_sin(vector_float3  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float4  __SIMD_ATTRIBUTES__ __tg_sin(vector_float4  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float8  __SIMD_ATTRIBUTES__ __tg_sin(vector_float8  __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_float16 __SIMD_ATTRIBUTES__ __tg_sin(vector_float16 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double2 __SIMD_ATTRIBUTES__ __tg_sin(vector_double2 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double3 __SIMD_ATTRIBUTES__ __tg_sin(vector_double3 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double4 __SIMD_ATTRIBUTES__ __tg_sin(vector_double4 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static vector_double8 __SIMD_ATTRIBUTES__ __tg_sin(vector_double8 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 #ifdef __cplusplus
 } /* extern "C" */
@@ -235,8 +235,8 @@ namespace simd {
     template <typename fptypeN> static __SIMD_INLINE__ fptypeN trunc(fptypeN x) { return ::__tg_trunc(x); }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgcc-compat"
-    template <typename fptypeN> static __SIMD_INLINE__ fptypeN cos(fptypeN x) __SIMD_AVAILABILITY__ { return ::__tg_cos(x); }
-    template <typename fptypeN> static __SIMD_INLINE__ fptypeN sin(fptypeN x) __SIMD_AVAILABILITY__ { return ::__tg_sin(x); }
+    template <typename fptypeN> static __SIMD_INLINE__ fptypeN cos(fptypeN x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::__tg_cos(x); }
+    template <typename fptypeN> static __SIMD_INLINE__ fptypeN sin(fptypeN x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::__tg_sin(x); }
 #pragma clang diagnostic pop
 }
 
@@ -277,10 +277,10 @@ static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float4  __x, vector_f
 static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double2 __x, vector_double2 __y) { return _mm_max_pd(__x,__y); }
 static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { return _mm_min_pd(__x,__y); }
 #   else
-static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float4  __x, vector_float4  __y) { return vector_bitselect(_mm_max_ps(__x,__y), __x, __y != __y); }
-static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float4  __x, vector_float4  __y) { return vector_bitselect(_mm_min_ps(__x,__y), __x, __y != __y); }
-static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double2 __x, vector_double2 __y) { return vector_bitselect(_mm_max_pd(__x,__y), __x, __y != __y); }
-static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { return vector_bitselect(_mm_min_pd(__x,__y), __x, __y != __y); }
+static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float4  __x, vector_float4  __y) { return _mm_max_ps(__x, _mm_max_ps(__y, -(vector_float4)INFINITY)); }
+static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float4  __x, vector_float4  __y) { return _mm_min_ps(__x, _mm_min_ps(__y,  (vector_float4)INFINITY)); }
+static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double2 __x, vector_double2 __y) { return _mm_max_pd(__x, _mm_max_pd(__y,-(vector_double2)INFINITY)); }
+static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { return _mm_min_pd(__x, _mm_min_pd(__y, (vector_double2)INFINITY)); }
 #   endif /* __FINITE_MATH_ONLY__ */
 #elif defined __arm64__
 static vector_float2  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float2  __x, vector_float2  __y) { return vmaxnm_f32(__x, __y); }
@@ -288,7 +288,7 @@ static vector_float2  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float2  __x, vector_f
 static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float4  __x, vector_float4  __y) { return vmaxnmq_f32(__x, __y); }
 static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float4  __x, vector_float4  __y) { return vminnmq_f32(__x, __y); }
 static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double2 __x, vector_double2 __y) { return vmaxnmq_f64(__x,__y); }
-static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { return vmaxnmq_f64(__x,__y); }
+static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { return vminnmq_f64(__x,__y); }
 #elif defined __arm__ && __FINITE_MATH_ONLY__
 static vector_float2  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float2  __x, vector_float2  __y) { return vmax_f32(__x, __y); }
 static vector_float2  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float2  __x, vector_float2  __y) { return vmin_f32(__x, __y); }
@@ -297,12 +297,12 @@ static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float4  __x, vector_f
 static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double2 __x, vector_double2 __y) { vector_double2 __z = { __tg_fmax(__x[0],__y[0]), __tg_fmax(__x[1],__y[1])}; return __z; }
 static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { vector_double2 __z = { __tg_fmin(__x[0],__y[0]), __tg_fmin(__x[1],__y[1])}; return __z; }
 #else
-__SIMD_ELEMENTWISE_BINARY_2_IN_4(__tg_fmax,float);
-__SIMD_ELEMENTWISE_BINARY_2_IN_4(__tg_fmin,float);
+static vector_float2  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float2  __x, vector_float2  __y) { return vector_bitselect(__y, __x, (__x >= __y) | (__y != __y)); }
+static vector_float2  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float2  __x, vector_float2  __y) { return vector_bitselect(__y, __x, (__x <= __y) | (__y != __y)); }
 static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float4  __x, vector_float4  __y) { return vector_bitselect(__y, __x, (__x >= __y) | (__y != __y)); }
-static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float4  __x, vector_float4  __y) { return vector_bitselect(__y, __x, (__x >= __y) | (__y != __y)); }
+static vector_float4  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float4  __x, vector_float4  __y) { return vector_bitselect(__y, __x, (__x <= __y) | (__y != __y)); }
 static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double2 __x, vector_double2 __y) { return vector_bitselect(__y, __x, (__x >= __y) | (__y != __y)); }
-static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { return vector_bitselect(__y, __x, (__x >= __y) | (__y != __y)); }
+static vector_double2 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double2 __x, vector_double2 __y) { return vector_bitselect(__y, __x, (__x <= __y) | (__y != __y)); }
 #endif
 __SIMD_ELEMENTWISE_BINARY_3_IN_4(__tg_fmax,float);
 __SIMD_ELEMENTWISE_BINARY_3_IN_4(__tg_fmin,float);
@@ -315,10 +315,10 @@ static vector_float8  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float8  __x, vector_f
 static vector_double4 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double4 __x, vector_double4 __y) { return _mm256_max_pd(__x,__y); }
 static vector_double4 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double4 __x, vector_double4 __y) { return _mm256_min_pd(__x,__y); }
 #   else
-static vector_float8  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float8  __x, vector_float8  __y) { return vector_bitselect(_mm256_max_ps(__x,__y), __x, __y != __y); }
-static vector_float8  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float8  __x, vector_float8  __y) { return vector_bitselect(_mm256_min_ps(__x,__y), __x, __y != __y); }
-static vector_double4 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double4 __x, vector_double4 __y) { return vector_bitselect(_mm256_max_pd(__x,__y), __x, __y != __y); }
-static vector_double4 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double4 __x, vector_double4 __y) { return vector_bitselect(_mm256_min_pd(__x,__y), __x, __y != __y); }
+static vector_float8  __SIMD_ATTRIBUTES__ __tg_fmax(vector_float8  __x, vector_float8  __y) { return _mm256_max_ps(__x, _mm256_max_ps(__y, -(vector_float8)INFINITY)); }
+static vector_float8  __SIMD_ATTRIBUTES__ __tg_fmin(vector_float8  __x, vector_float8  __y) { return _mm256_min_ps(__x, _mm256_min_ps(__y,  (vector_float8)INFINITY)); }
+static vector_double4 __SIMD_ATTRIBUTES__ __tg_fmax(vector_double4 __x, vector_double4 __y) { return _mm256_max_pd(__x, _mm256_max_pd(__y,-(vector_double4)INFINITY)); }
+static vector_double4 __SIMD_ATTRIBUTES__ __tg_fmin(vector_double4 __x, vector_double4 __y) { return _mm256_min_pd(__x, _mm256_min_pd(__y, (vector_double4)INFINITY)); }
 #   endif /* __FINITE_MATH_ONLY__ */
 #else
 __SIMD_ELEMENTWISE_BINARY_8_IN_4(__tg_fmax,float);

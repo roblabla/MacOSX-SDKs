@@ -80,4 +80,5 @@ struct udphdr {
  * User-settable options (used with setsockopt).
  */
 #define	UDP_NOCKSUM	0x01	/* don't checksum outbound payloads */
-#endif
+
+#endif /* _NETINET_UDP_H */

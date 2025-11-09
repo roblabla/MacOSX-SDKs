@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -138,14 +138,15 @@ protected:
 		SCSITaggedTaskIdentifier	fTaskID;
 		IOSimpleLock *				fTaskIDLock;
 		UInt32						fRetryCount;
+        UInt32                      fNumCommandsExecuting;
 	};
 	IOSCSIPrimaryCommandsDeviceExpansionData * fIOSCSIPrimaryCommandsDeviceReserved;
 	
 	#define	fReadTimeoutDuration		fIOSCSIPrimaryCommandsDeviceReserved->fReadTimeoutDuration
 	#define	fWriteTimeoutDuration		fIOSCSIPrimaryCommandsDeviceReserved->fWriteTimeoutDuration
 	#define	fRetryCount					fIOSCSIPrimaryCommandsDeviceReserved->fRetryCount
-	
-	
+    #define	fNumCommandsExecuting       fIOSCSIPrimaryCommandsDeviceReserved->fNumCommandsExecuting
+    
 	UInt8							fDefaultInquiryCount;
 	OSDictionary *					fDeviceCharacteristicsDictionary;
 	UInt32							fNumCommandsOutstanding;
@@ -682,13 +683,25 @@ public:
     						SCSICmdField2Byte 			ALLOCATION_LENGTH,
     						SCSICmdField1Byte 			CONTROL );
 	
+    OSMetaClassDeclareReservedUsed ( IOSCSIPrimaryCommandsDevice,  1 );
+    
+    // ClampPowerState() will check if it is currently running behind the
+    // workloop lock, if not, it will call itself again to run behind the
+    // workloop gate.  When subclassing ClampPowerState() make sure to take
+    // workloop synchronization in consideration.
+    
+    virtual void        ClampPowerState ( void );
+    
+    OSMetaClassDeclareReservedUsed ( IOSCSIPrimaryCommandsDevice,  2 );
+    
+    virtual void        ReleasePowerStateClamp ( void );
+    
+    
 private:
 	
 	
 #if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
-	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  1 );
-	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  2 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  3 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  4 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  5 );

@@ -7,24 +7,37 @@
 
 typedef struct CGPDFStream *CGPDFStreamRef;
 
-enum CGPDFDataFormat {
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
+typedef CF_ENUM (int32_t, CGPDFDataFormat) {
     CGPDFDataFormatRaw, CGPDFDataFormatJPEGEncoded, CGPDFDataFormatJPEG2000
 };
-typedef enum CGPDFDataFormat CGPDFDataFormat;
 
 #include <CoreGraphics/CGPDFDictionary.h>
 #include <CoreGraphics/CGPDFStream.h>
 #include <CoreFoundation/CFData.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
+
 /* Return the dictionary of `stream'. */
 
-CG_EXTERN CGPDFDictionaryRef CGPDFStreamGetDictionary(CGPDFStreamRef stream)
+CG_EXTERN CGPDFDictionaryRef __nullable CGPDFStreamGetDictionary(
+    CGPDFStreamRef __nullable stream)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the data of `stream'. */
 
-CG_EXTERN CFDataRef CGPDFStreamCopyData(CGPDFStreamRef stream,
-    CGPDFDataFormat *format)
+CG_EXTERN CFDataRef __nullable CGPDFStreamCopyData(
+    CGPDFStreamRef __nullable stream,
+    CGPDFDataFormat * __nullable format)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPDFSTREAM_H_ */

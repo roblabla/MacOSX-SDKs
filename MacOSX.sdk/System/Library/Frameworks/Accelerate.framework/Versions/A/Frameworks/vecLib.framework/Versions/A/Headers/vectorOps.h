@@ -3,11 +3,11 @@
  
      Contains:   vector and matrix functions for AltiVec
  
-     Version:    vecLib-516.0
+     Version:    vecLib-563.3
  
-     Copyright:  © 1999-2014 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright (c) 1999-2015 by Apple Inc. All rights reserved.
  
-     Bugs?:      For bug reports, consult the following page on
+     Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
@@ -34,6 +34,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+#if !defined __has_feature
+    #define __has_feature(f)    0
+#endif
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull begin")
+#else
+    #define __nullable
+    #define __nonnull
+#endif
+
 
 /*
 -------------------------------------------------------------------------------------
@@ -73,7 +85,7 @@ extern "C" {
 extern int32_t 
 vIsamax(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -96,7 +108,7 @@ vIsamax(
 extern int32_t 
 vIsamin(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -119,7 +131,7 @@ vIsamin(
 extern int32_t 
 vIsmax(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -142,7 +154,7 @@ vIsmax(
 extern int32_t 
 vIsmin(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -165,7 +177,7 @@ vIsmin(
 extern float 
 vSasum(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -188,7 +200,7 @@ vSasum(
 extern float 
 vSsum(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -216,8 +228,8 @@ extern void
 vSaxpy(
   int32_t        n,
   float          alpha,
-  const vFloat   x[],
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x,
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -240,8 +252,8 @@ vSaxpy(
 extern void 
 vScopy(
   int32_t        n,
-  const vFloat   x[],
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x,
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -263,8 +275,8 @@ vScopy(
 extern float 
 vSdot(
   int32_t        n,
-  const vFloat   x[],
-  const vFloat   y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x,
+  const vFloat   *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -293,9 +305,9 @@ extern void
 vSnaxpy(
   int32_t        n,
   int32_t        m,
-  const vFloat   a[],
-  const vFloat   x[],
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *a,
+  const vFloat   *x,
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -333,10 +345,10 @@ extern void
 vSndot(
   int32_t        n,
   int32_t        m,
-  float          s[],
+  float          *s,
   int32_t        isw,
-  const vFloat   x[],
-  const vFloat   y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x,
+  const vFloat   *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -359,7 +371,7 @@ vSndot(
 extern float 
 vSnrm2(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -381,7 +393,7 @@ vSnrm2(
 extern float 
 vSnorm2(
   int32_t        count,
-  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -411,8 +423,8 @@ vSnorm2(
 extern void 
 vSrot(
   int32_t   n,
-  vFloat    x[],
-  vFloat    y[],
+  vFloat    *x,
+  vFloat    *y,
   float     c,
   float     s) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
@@ -440,7 +452,7 @@ extern void
 vSscal(
   int32_t   n,
   float     alpha,
-  vFloat    x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat    *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -464,8 +476,8 @@ vSscal(
 extern void 
 vSswap(
   int32_t   n,
-  vFloat    x[],
-  vFloat    y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat    *x,
+  vFloat    *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -492,8 +504,8 @@ extern void
 vSyax(
   int32_t        n,
   float          alpha,
-  const vFloat   x[],
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x,
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -523,9 +535,9 @@ extern void
 vSzaxpy(
   int32_t        n,
   float          alpha,
-  const vFloat   x[],
-  const vFloat   yY[],
-  vFloat         z[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x,
+  const vFloat   *y,
+  vFloat         *z) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -584,10 +596,10 @@ vSgemv(
   int32_t        m,
   int32_t        n,
   float          alpha,
-  const vFloat   a[],
-  const vFloat   x[],
+  const vFloat   *a,
+  const vFloat   *x,
   float          beta,
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -623,9 +635,9 @@ vSgemx(
   int32_t        m,
   int32_t        n,
   float          alpha,
-  const vFloat   a[],
-  const vFloat   x[],
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *a,
+  const vFloat   *x,
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -661,9 +673,9 @@ vSgemtx(
   int32_t        m,
   int32_t        n,
   float          alpha,
-  const vFloat   a[],
-  const vFloat   x[],
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *a,
+  const vFloat   *x,
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -723,11 +735,11 @@ extern void
 vSgeadd(
   int32_t        height,
   int32_t        width,
-  const vFloat   a[],
+  const vFloat   *a,
   char           forma,
-  const vFloat   b[],
+  const vFloat   *b,
   char           formb,
-  vFloat         c[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *c) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -780,11 +792,11 @@ extern void
 vSgesub(
   int32_t        height,
   int32_t        width,
-  const vFloat   a[],
+  const vFloat   *a,
   char           forma,
-  const vFloat   b[],
+  const vFloat   *b,
   char           formb,
-  vFloat         c[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *c) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -840,11 +852,11 @@ vSgemul(
   int32_t        l,
   int32_t        m,
   int32_t        n,
-  const vFloat   a[],
+  const vFloat   *a,
   char           forma,
-  const vFloat   b[],
+  const vFloat   *b,
   char           formb,
-  vFloat         matrix[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *matrix) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -907,14 +919,14 @@ vSgemm(
   int32_t        l,
   int32_t        m,
   int32_t        n,
-  const vFloat   a[],
+  const vFloat   *a,
   char           forma,
-  const vFloat   b[],
+  const vFloat   *b,
   char           formb,
-  vFloat         c[],
+  vFloat         *c,
   float          alpha,
   float          beta,
-  vFloat         matrix[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *matrix) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -936,7 +948,7 @@ vSgemm(
 extern void 
 vSgetmi(
   int32_t   size,
-  vFloat    x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat    *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -961,8 +973,8 @@ extern void
 vSgetmo(
   int32_t        height,
   int32_t        width,
-  const vFloat   x[],
-  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x,
+  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1000,13 +1012,18 @@ extern void
 vSgevv(
   int32_t        l,
   int32_t        n,
-  const vFloat   A[],
-  const vFloat   B[],
-  vFloat         M[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *A,
+  const vFloat   *B,
+  vFloat         *M) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 #endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__
 
+
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull end")
+#endif
+ 
 
 #ifdef __cplusplus
 }

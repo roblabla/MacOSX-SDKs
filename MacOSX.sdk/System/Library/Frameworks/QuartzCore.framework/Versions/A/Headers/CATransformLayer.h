@@ -1,9 +1,11 @@
 /* CoreAnimation - CATransformLayer.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* "Transform" layers are used to create true 3D layer hierarchies.
  *
@@ -29,3 +31,5 @@
 
 @interface CATransformLayer : CALayer
 @end
+
+NS_ASSUME_NONNULL_END

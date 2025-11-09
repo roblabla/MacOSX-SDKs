@@ -10,6 +10,7 @@
 
 @class CKRecordZoneID;
 
+NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, CKRecordZoneCapabilities) {
     /* This zone supports CKFetchRecordChangesOperation */
     CKRecordZoneCapabilityFetchChanges   = 1 << 0,
@@ -35,3 +36,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly, assign) CKRecordZoneCapabilities capabilities;
 
 @end
+NS_ASSUME_NONNULL_END

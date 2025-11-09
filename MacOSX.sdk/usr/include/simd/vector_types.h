@@ -84,7 +84,10 @@
  *  Note that vector_longN and vector_ulongN are always vectors of 64-bit
  *  elements, regardless of the size of the scalar "long" type (thus, they
  *  are actually "long long" on 32-bit iOS and OS X).  This follows the
- *  convention of the OpenCL language for such types.
+ *  convention of the OpenCL language for such types.  Note also that because
+ *  vector_longN and vector_ulongN have different base types on 32- and 64-bit
+ *  builds, we provide vector_long1 and vector_ulong1 as compatable scalar
+ *  types.
  *
  *  In C++, we provide all of the C and Objective-C types, plus more concise
  *  types within the simd:: namespace:
@@ -107,7 +110,8 @@
 #ifndef __SIMD_VECTOR_TYPES_HEADER__
 #define __SIMD_VECTOR_TYPES_HEADER__
 
-#if defined __has_attribute && __has_attribute(__ext_vector_type__)
+#include <simd/internal.h>
+#if __has_attribute(__ext_vector_type__)
 /*  The function of this header fundamentally depends on the ext_vector_type
  *  attribute.  There is no fallback if these attributes are not supported by
  *  your compiler.                                                            */
@@ -184,21 +188,25 @@ typedef __attribute__((__ext_vector_type__(16))) float vector_float16;
 
 #ifndef __METAL_VERSION__
 # if defined __LP64__
+typedef                                         long vector_long1;
 typedef __attribute__((__ext_vector_type__(2))) long vector_long2;
 typedef __attribute__((__ext_vector_type__(3))) long vector_long3;
 typedef __attribute__((__ext_vector_type__(4))) long vector_long4;
 typedef __attribute__((__ext_vector_type__(8))) long vector_long8;
 
+typedef                                         unsigned long vector_ulong1;
 typedef __attribute__((__ext_vector_type__(2))) unsigned long vector_ulong2;
 typedef __attribute__((__ext_vector_type__(3))) unsigned long vector_ulong3;
 typedef __attribute__((__ext_vector_type__(4))) unsigned long vector_ulong4;
 typedef __attribute__((__ext_vector_type__(8))) unsigned long vector_ulong8;
 # else
+typedef                                         long long vector_long1;
 typedef __attribute__((__ext_vector_type__(2))) long long vector_long2;
 typedef __attribute__((__ext_vector_type__(3))) long long vector_long3;
 typedef __attribute__((__ext_vector_type__(4))) long long vector_long4;
 typedef __attribute__((__ext_vector_type__(8))) long long vector_long8;
 
+typedef                                         unsigned long long vector_ulong1;
 typedef __attribute__((__ext_vector_type__(2))) unsigned long long vector_ulong2;
 typedef __attribute__((__ext_vector_type__(3))) unsigned long long vector_ulong3;
 typedef __attribute__((__ext_vector_type__(4))) unsigned long long vector_ulong4;
@@ -288,11 +296,13 @@ namespace simd {
 #endif
 
 #ifndef __METAL_VERSION__
+    typedef ::vector_long1 long1;
     typedef ::vector_long2 long2;
     typedef ::vector_long3 long3;
     typedef ::vector_long4 long4;
     typedef ::vector_long8 long8;
 
+    typedef ::vector_ulong1 ulong1;
     typedef ::vector_ulong2 ulong2;
     typedef ::vector_ulong3 ulong3;
     typedef ::vector_ulong4 ulong4;

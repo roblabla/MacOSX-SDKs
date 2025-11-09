@@ -1,7 +1,7 @@
 /*
         NSSpellProtocol.h
         Application Kit
-        Copyright (c) 1990-2014, Apple Inc.
+        Copyright (c) 1990-2015, Apple Inc.
         All rights reserved.
 */
 
@@ -11,8 +11,10 @@
 SpellCheckable objects can respond to this method if they want to support not only spell-checking, but spell correction.  This message is sent down the responder chain.  The receiver should ask the sender for its selectedCell's stringValue (the correct spelling of the word) and replace its selection if appropriate.
 */
  
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol NSChangeSpelling
-- (void)changeSpelling:(id)sender;
+- (void)changeSpelling:(nullable id)sender;
 @end
 
 /*
@@ -20,5 +22,7 @@ SpellCheckable objects can respond to this method if they wish to be able to ign
 */
 
 @protocol NSIgnoreMisspelledWords
-- (void)ignoreSpelling:(id)sender;
+- (void)ignoreSpelling:(nullable id)sender;
 @end
+
+NS_ASSUME_NONNULL_END

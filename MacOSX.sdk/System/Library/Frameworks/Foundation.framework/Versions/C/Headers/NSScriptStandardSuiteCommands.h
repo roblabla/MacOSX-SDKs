@@ -1,14 +1,16 @@
 /*
 	NSScriptStandardSuiteCommands.h
-	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSScriptCommand.h>
 
-@class NSDictionary;
+@class NSDictionary<KeyType, ObjectType>;
 @class NSScriptObjectSpecifier;
 @class NSScriptClassDescription;
+@class NSString;
 
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSSaveOptions) {
     NSSaveOptionsYes = 0,
@@ -21,7 +23,7 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
     NSScriptObjectSpecifier *_keySpecifier;
 }
 
-- (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
+- (void)setReceiversSpecifier:(nullable NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
 @property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
@@ -50,7 +52,7 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
 @property (readonly, retain) NSScriptClassDescription *createClassDescription;
     // Returns the class description for the class that is to be created (using the "ObjectClass" argument to figure it out).
 
-@property (readonly, copy) NSDictionary *resolvedKeyDictionary;
+@property (readonly, copy) NSDictionary<NSString *, id> *resolvedKeyDictionary;
     // The actual "KeyDictionary" argument has appleEventCodes as keys.  This method returns a version that has those codes resolved to actual key names (using the -createClassDescription to resolve the keys).
 
 @end
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
     NSScriptObjectSpecifier *_keySpecifier;
 }
 
-- (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
+- (void)setReceiversSpecifier:(nullable NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
 @property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
@@ -84,7 +86,7 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
     NSScriptObjectSpecifier *_keySpecifier;
 }
 
-- (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
+- (void)setReceiversSpecifier:(nullable NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
 @property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
@@ -105,9 +107,11 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
     NSScriptObjectSpecifier *_keySpecifier;
 }
 
-- (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
+- (void)setReceiversSpecifier:(nullable NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
 @property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

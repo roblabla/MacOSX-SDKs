@@ -2,7 +2,7 @@
  *  CFFileSecurity.h
  *  NSFileSecurity and CFFileSecurity are toll-free bridged.
  *
- *  Copyright (c) 2010-2014, Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2015, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION

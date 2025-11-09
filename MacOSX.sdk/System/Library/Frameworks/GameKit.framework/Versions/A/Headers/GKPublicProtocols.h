@@ -11,6 +11,7 @@
 @class GKSession;
 @protocol GKSessionDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
 
 /* Callbacks to the GKSession delegate.
 */
@@ -63,12 +64,12 @@ Deny by calling -denyConnectionFromPeer:
 
 - (void)voiceChatService:(GKVoiceChatService *)voiceChatService didStartWithParticipantID:(NSString *)participantID;
 
-- (void)voiceChatService:(GKVoiceChatService *)voiceChatService didNotStartWithParticipantID:(NSString *)participantID error:(NSError *)error;
+- (void)voiceChatService:(GKVoiceChatService *)voiceChatService didNotStartWithParticipantID:(NSString *)participantID error:(nullable NSError *)error;
 
-- (void)voiceChatService:(GKVoiceChatService *)voiceChatService didStopWithParticipantID:(NSString *)participantID error:(NSError *)error;
+- (void)voiceChatService:(GKVoiceChatService *)voiceChatService didStopWithParticipantID:(NSString *)participantID error:(nullable NSError *)error;
 
 - (void)voiceChatService:(GKVoiceChatService *)voiceChatService didReceiveInvitationFromParticipantID:(NSString *)participantID callID:(NSInteger)callID;
 
 @end
 
-
+NS_ASSUME_NONNULL_END

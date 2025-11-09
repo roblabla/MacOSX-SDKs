@@ -3,7 +3,7 @@
 
 	Framework:	MediaToolbox
 
-	Copyright 2011-2013 Apple Inc. All rights reserved.
+	Copyright 2011-2015 Apple Inc. All rights reserved.
 */
 
 #ifndef MTAUDIOPROCESSINGTAP_H
@@ -21,7 +21,7 @@ extern "C"
 
 #pragma pack(push, 4)
 
-typedef const struct opaqueMTAudioProcessingTap *MTAudioProcessingTapRef; // CFType, retain/release please
+typedef const struct CM_BRIDGED_TYPE(id) opaqueMTAudioProcessingTap *MTAudioProcessingTapRef; // CFType, retain/release please
 
 MT_EXPORT CFTypeID MTAudioProcessingTapGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
@@ -37,11 +37,16 @@ MT_EXPORT CFTypeID MTAudioProcessingTapGetTypeID(void) __OSX_AVAILABLE_STARTING(
 	@constant	kMTAudioProcessingTapCreationFlag_PostEffects
 		Signifies that the processing tap is inserted after any effects.
 */
-enum {
+typedef uint32_t MTAudioProcessingTapCreationFlags;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : MTAudioProcessingTapCreationFlags
+#else
+enum
+#endif
+{
 	kMTAudioProcessingTapCreationFlag_PreEffects	= (1 << 0),
 	kMTAudioProcessingTapCreationFlag_PostEffects	= (1 << 1),
 };
-typedef uint32_t MTAudioProcessingTapCreationFlags;
 
 /*!
 	@enum		MTAudioProcessingTapFlags
@@ -57,12 +62,17 @@ typedef uint32_t MTAudioProcessingTapCreationFlags;
 		all of its data. Returned from GetSourceAudio and should be propagated
 		on return from the process callback.
 */
-enum {
+typedef uint32_t MTAudioProcessingTapFlags;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : MTAudioProcessingTapFlags
+#else
+enum
+#endif
+{
 	// these are flags that are passed to the process callback and from GetSourceAudio
 	kMTAudioProcessingTapFlag_StartOfStream			= (1 << 8),
     kMTAudioProcessingTapFlag_EndOfStream			= (1 << 9),
 };
-typedef uint32_t MTAudioProcessingTapFlags;
 
 /*!
 	@typedef	MTAudioProcessingTapInitCallback
@@ -83,9 +93,9 @@ typedef uint32_t MTAudioProcessingTapFlags;
 				is optional.
 */
 typedef void (*MTAudioProcessingTapInitCallback)(
-		MTAudioProcessingTapRef tap,
-		void *clientInfo,
-		void **tapStorageOut);
+		MTAudioProcessingTapRef CM_NONNULL tap,
+		void * CM_NULLABLE clientInfo,
+		void * CM_NULLABLE * CM_NONNULL tapStorageOut);
 
 /*!
 	@typedef	MTAudioProcessingTapFinalizeCallback
@@ -99,7 +109,7 @@ typedef void (*MTAudioProcessingTapInitCallback)(
 	@param		tap
 				The processing tap.
 */
-typedef void (*MTAudioProcessingTapFinalizeCallback)(MTAudioProcessingTapRef tap);
+typedef void (*MTAudioProcessingTapFinalizeCallback)(MTAudioProcessingTapRef CM_NONNULL tap);
 
 /*!
 	@typedef	MTAudioProcessingTapPrepareCallback
@@ -138,9 +148,9 @@ typedef void (*MTAudioProcessingTapFinalizeCallback)(MTAudioProcessingTapRef tap
 				most efficient from its playback requirement.
 */
 typedef void (*MTAudioProcessingTapPrepareCallback)(
-		MTAudioProcessingTapRef tap,
+		MTAudioProcessingTapRef CM_NONNULL tap,
 		CMItemCount maxFrames,
-		const AudioStreamBasicDescription *processingFormat);
+		const AudioStreamBasicDescription * CM_NONNULL processingFormat);
 
 /*!
 	@typedef	MTAudioProcessingTapUnprepareCallback
@@ -156,7 +166,7 @@ typedef void (*MTAudioProcessingTapPrepareCallback)(
 	@param		tap
 				The processing tap.
 */
-typedef void (*MTAudioProcessingTapUnprepareCallback)(MTAudioProcessingTapRef tap);
+typedef void (*MTAudioProcessingTapUnprepareCallback)(MTAudioProcessingTapRef CM_NONNULL tap);
 
 /*!
 	@typedef	MTAudioProcessingTapProcessCallback
@@ -236,14 +246,19 @@ typedef void (*MTAudioProcessingTapUnprepareCallback)(MTAudioProcessingTapRef ta
 				The start/end of stream flags should be set when appropriate (see Discussion, above).
 */
 typedef void (*MTAudioProcessingTapProcessCallback)(
-		MTAudioProcessingTapRef tap,
+		MTAudioProcessingTapRef CM_NONNULL tap,
 		CMItemCount numberFrames,
 		MTAudioProcessingTapFlags flags,
-		AudioBufferList *bufferListInOut,
-		CMItemCount *numberFramesOut,
-		MTAudioProcessingTapFlags *flagsOut);
+		AudioBufferList * CM_NONNULL bufferListInOut,
+		CMItemCount * CM_NONNULL numberFramesOut,
+		MTAudioProcessingTapFlags * CM_NONNULL flagsOut);
 
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : int
+#else
+enum
+#endif
+{
 	kMTAudioProcessingTapCallbacksVersion_0 = 0,
 };
 
@@ -271,12 +286,12 @@ enum {
 */
 typedef struct {
 	int version;
-	void *clientInfo;
-	MTAudioProcessingTapInitCallback init;
-	MTAudioProcessingTapFinalizeCallback finalize;
-	MTAudioProcessingTapPrepareCallback prepare;
-	MTAudioProcessingTapUnprepareCallback unprepare;
-	MTAudioProcessingTapProcessCallback process;
+	void* CM_NULLABLE clientInfo;
+	MTAudioProcessingTapInitCallback CM_NULLABLE init;
+	MTAudioProcessingTapFinalizeCallback CM_NULLABLE finalize;
+	MTAudioProcessingTapPrepareCallback CM_NULLABLE prepare;
+	MTAudioProcessingTapUnprepareCallback CM_NULLABLE unprepare;
+	MTAudioProcessingTapProcessCallback CM_NONNULL process;
 } MTAudioProcessingTapCallbacks;
 
 /*!
@@ -304,10 +319,10 @@ typedef struct {
     @result     An OSStatus result code.
 */
 MT_EXPORT OSStatus MTAudioProcessingTapCreate(
-		CFAllocatorRef allocator,
-		const MTAudioProcessingTapCallbacks *callbacks,
+		CFAllocatorRef CM_NULLABLE allocator,
+		const MTAudioProcessingTapCallbacks * CM_NONNULL callbacks,
 		MTAudioProcessingTapCreationFlags flags,
-		MTAudioProcessingTapRef *tapOut) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+		MTAudioProcessingTapRef CM_NULLABLE * CM_NONNULL tapOut) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 /*!
 	@function	MTAudioProcessingTapGetStorage
@@ -318,7 +333,7 @@ MT_EXPORT OSStatus MTAudioProcessingTapCreate(
 
 	@result		The tapStorage returned by the init callback.
 */
-MT_EXPORT void *MTAudioProcessingTapGetStorage(MTAudioProcessingTapRef tap) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+MT_EXPORT void* CM_NONNULL MTAudioProcessingTapGetStorage(CM_NONNULL MTAudioProcessingTapRef tap) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 /*!
 	@function	MTAudioProcessingTapGetSourceAudio
@@ -348,12 +363,12 @@ MT_EXPORT void *MTAudioProcessingTapGetStorage(MTAudioProcessingTapRef tap) __OS
 	@result		An OSStatus result code.
 */
 MT_EXPORT OSStatus MTAudioProcessingTapGetSourceAudio(
-		MTAudioProcessingTapRef tap,
+		MTAudioProcessingTapRef CM_NONNULL tap,
 		CMItemCount numberFrames,
-		AudioBufferList *bufferListInOut,
-		MTAudioProcessingTapFlags *flagsOut,
-		CMTimeRange *timeRangeOut,
-		CMItemCount *numberFramesOut) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+		AudioBufferList * CM_NONNULL bufferListInOut,
+		MTAudioProcessingTapFlags * CM_NULLABLE flagsOut,
+		CMTimeRange * CM_NULLABLE timeRangeOut,
+		CMItemCount * CM_NULLABLE numberFramesOut) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 #pragma pack(pop)
 

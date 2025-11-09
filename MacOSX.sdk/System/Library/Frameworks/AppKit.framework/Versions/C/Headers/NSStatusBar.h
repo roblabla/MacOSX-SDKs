@@ -1,12 +1,14 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSColor;
 @class NSFont;
@@ -34,3 +36,5 @@ static const CGFloat NSSquareStatusItemLength = -2.0;
 @property (readonly) CGFloat thickness;
 
 @end
+
+NS_ASSUME_NONNULL_END

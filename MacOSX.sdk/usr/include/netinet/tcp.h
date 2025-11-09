@@ -63,8 +63,8 @@
 
 #ifndef _NETINET_TCP_H_
 #define _NETINET_TCP_H_
+#include <sys/types.h>
 #include <sys/appleapiopts.h>
-#include <sys/_types.h>
 #include <machine/endian.h>
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
@@ -137,6 +137,9 @@ struct tcphdr {
 #if MPTCP
 #define	TCPOPT_MULTIPATH  		30
 #endif
+
+#define	TCPOPT_FASTOPEN			34
+#define	TCPOLEN_FASTOPEN_REQ		2
 
 /* Option definitions */
 #define TCPOPT_SACK_PERMIT_HDR	\
@@ -217,11 +220,57 @@ struct tcphdr {
 #define	TCP_KEEPCNT		0x102	/* number of keepalives before close */
 #define	TCP_SENDMOREACKS	0x103	/* always ack every other packet */
 #define	TCP_ENABLE_ECN		0x104	/* Enable ECN on a connection */
+#define	TCP_FASTOPEN		0x105	/* Enable/Disable TCP Fastopen on this socket */
+#define	TCP_CONNECTION_INFO	0x106	/* State of TCP connection */
 
 
 
 #define	TCP_NOTSENT_LOWAT	0x201	/* Low water mark for TCP unsent data */
 
+
+struct tcp_connection_info {
+        u_int8_t	tcpi_state;     /* connection state */
+        u_int8_t	tcpi_snd_wscale; /* Window scale for send window */
+        u_int8_t	tcpi_rcv_wscale; /* Window scale for receive window */
+        u_int8_t	__pad1;
+        u_int32_t	tcpi_options;   /* TCP options supported */
+#define TCPCI_OPT_TIMESTAMPS	0x00000001 /* Timestamps enabled */
+#define TCPCI_OPT_SACK		0x00000002 /* SACK enabled */
+#define TCPCI_OPT_WSCALE	0x00000004 /* Window scaling enabled */
+#define TCPCI_OPT_ECN		0x00000008 /* ECN enabled */
+        u_int32_t	tcpi_flags;     /* flags */
+#define TCPCI_FLAG_LOSSRECOVERY 0x00000001
+#define TCPCI_FLAG_REORDERING_DETECTED  0x00000002
+        u_int32_t	tcpi_rto;       /* retransmit timeout in ms */
+        u_int32_t	tcpi_maxseg;    /* maximum segment size supported */
+        u_int32_t	tcpi_snd_ssthresh; /* slow start threshold in bytes */
+        u_int32_t	tcpi_snd_cwnd;  /* send congestion window in bytes */
+        u_int32_t	tcpi_snd_wnd;   /* send widnow in bytes */
+        u_int32_t	tcpi_snd_sbbytes; /* bytes in send socket buffer, including in-flight data */
+        u_int32_t	tcpi_rcv_wnd;   /* receive window in bytes*/
+        u_int32_t	tcpi_rttcur;    /* most recent RTT in ms */
+        u_int32_t	tcpi_srtt;      /* average RTT in ms */
+        u_int32_t	tcpi_rttvar;    /* RTT variance */
+	u_int32_t
+			/* Client-side information */
+			tcpi_tfo_cookie_req:1, /* Cookie requested? */
+			tcpi_tfo_cookie_rcv:1, /* Cookie received? */
+			tcpi_tfo_syn_loss:1,   /* Fallback to reg. TCP after SYN-loss */
+			tcpi_tfo_syn_data_sent:1, /* SYN+data has been sent out */
+			tcpi_tfo_syn_data_acked:1, /* SYN+data has been fully acknowledged */
+			/* And the following are for server-side information (must be set on the listener socket) */
+			tcpi_tfo_syn_data_rcv:1, /* Server received SYN+data with a valid cookie */
+			tcpi_tfo_cookie_req_rcv:1, /* Server received cookie-request */
+			tcpi_tfo_cookie_sent:1, /* Server announced cookie */
+			tcpi_tfo_cookie_invalid:1, /* Server received an invalid cookie */
+			__pad2:23;
+        u_int64_t	tcpi_txpackets __attribute__((aligned(8)));
+        u_int64_t	tcpi_txbytes __attribute__((aligned(8)));
+        u_int64_t	tcpi_txretransmitbytes __attribute__((aligned(8)));
+        u_int64_t	tcpi_rxpackets __attribute__((aligned(8)));
+        u_int64_t	tcpi_rxbytes __attribute__((aligned(8)));
+        u_int64_t	tcpi_rxoutoforderbytes __attribute__((aligned(8)));
+};
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 #endif

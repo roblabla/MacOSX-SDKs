@@ -1,22 +1,19 @@
 ---
-archs:           [ i386, x86_64 ]
+archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UniversalAccessCore.framework/Versions/A/UniversalAccessCore
 current-version: 236.0
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     re-exports:      [ /System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib ]
-    symbols:         [ _IOConnection, _UACursorGetScale, _UACursorMaximumScale, 
-                       _UACursorMinimumScale, _UACursorSetScale, _UAEnhanceContrastLevel, 
-                       _UAEnhanceContrastSetLevel, _UAEventCopyToCFData, 
-                       _UAEventEqualToEvent, _UAEventFromCFData, _UAEventNull, 
+    symbols:         [ _UACursorGetScale, _UACursorMaximumScale, _UACursorMinimumScale, 
+                       _UACursorSetScale, _UAEnhanceContrastLevel, _UAEnhanceContrastSetLevel, 
+                       _UAEventCopyToCFData, _UAEventEqualToEvent, _UAEventFromCFData, 
+                       _UAEventNull, _UAFindMyCursorIsEnabled, _UAFindMyCursorSetEnabled, 
                        _UAFlashScreenIsEnabled, _UAFlashScreenSetEnabled, 
-                       _UAGetBootstrapPort, _UAGrayscaleIsEnabled, _UAGrayscaleSetEnabled, 
-                       _UAIOHIDSetAccelerationWithKey, _UAIOHIDSetCFTypeParameter, 
-                       _UAIOHIDSetParameter, _UAIsCurrentSessionOnConsole, 
-                       _UAKeyboardZoomIsEnabled, _UAKeyboardZoomSetEnabled, 
-                       _UAMouseKeysEnableWithOptionKeyIsEnabled, _UAMouseKeysEnableWithOptionKeySetEnabled, 
-                       _UAMouseKeysIgnoreTrackpadForMouseKeysIsEnabled, 
+                       _UAGrayscaleIsEnabled, _UAGrayscaleSetEnabled, _UAKeyboardZoomIsEnabled, 
+                       _UAKeyboardZoomSetEnabled, _UAMouseKeysEnableWithOptionKeyIsEnabled, 
+                       _UAMouseKeysEnableWithOptionKeySetEnabled, _UAMouseKeysIgnoreTrackpadForMouseKeysIsEnabled, 
                        _UAMouseKeysIgnoreTrackpadForMouseKeysSetEnabled, 
                        _UAMouseKeysInitialDelay, _UAMouseKeysIsEnabled, 
                        _UAMouseKeysMaximumSpeed, _UAMouseKeysSetEnabled, 
@@ -65,6 +62,5 @@ exports:
                        _UAZoomSetMinimum, _UAZoomSetMode, _UAZoomSetPanningMode, 
                        _UAZoomSetScale, _UAZoomShowPreviewIsEnabled, _UAZoomShowPreviewSetEnabled, 
                        _UAZoomSmoothImagesIsEnabled, _UAZoomSmoothImagesSetEnabled, 
-                       _UniversalAccessCoreVersionNumber, _UniversalAccessCoreVersionString, 
-                       _gIOConnection ]
+                       _UniversalAccessCoreVersionNumber, _UniversalAccessCoreVersionString ]
 ...

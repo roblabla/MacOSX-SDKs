@@ -1,9 +1,23 @@
-/*
- *  Transform.h
+/*!
+ *  @header Transform.h
  *  vImage Framework
  *
- *  Copyright (c) 2003 Apple Computer. All rights reserved.
+ *  See vImage/vImage.h for more on how to better view the headerdoc documentation for functions declared herein.
  *
+ *  @copyright Copyright (c) 2003-2015 by Apple Inc. All rights reserved.
+ *
+ *  @discussion   Transform.h defines a number of interfaces that do linear and nonlinear operations
+ *                to images.  Matrix multiply operations treat each pixel as a short vector and 
+ *                multiply the vector by a matrix. Typically these are used to do colorspace conversion
+ *                and color twisting.  There are a series of gamma functions that apply a power function
+ *                to an image. The power operation is C2 symmetric around the origin such that negative values
+ *                are not NaN (unlike pow(-x, y)), but instead -pow(|x|, y) for negative x). 
+ *                In addition a series of polynomial and rational evaluators are available. Many complex
+ *                functions can be approximated as a polynomial or rational and evaluated more 
+ *                cheaply that way. Finally there are single and multi-dimensional interpolated lookup
+ *                tables, also commonly used in colorspace conversion.
+ *
+ *  @ignorefuncmacro VIMAGE_NON_NULL
  */
 
 #ifndef VIMAGE_TRANSFORM_H
@@ -16,6 +30,9 @@ extern "C" {
 #endif
 
 
+/*!
+ *  @functiongroup Image Matrix multiplication
+ */
 
 /*
  * vImageMatrixMultiply_Planar16S
@@ -304,6 +321,135 @@ vImage_Error vImageMatrixMultiply_ARGBFFFF(         const vImage_Buffer *src,
                                                     const float		*post_bias,	//Must be an array of 4 floats. NULL is okay. 
                                                     vImage_Flags 	flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
+/*!
+ * @function vImageMatrixMultiply_ARGB8888ToPlanar8
+ * @abstract apply a 1d matrix to a four channel, 8-bit per component image and get a 1-channel 8-bit image as a result
+ * @discussion vImageMatrixMultiply_ARGB8888ToPlanar8 is like vImageMatrixMultiply_ARGB8888, except that it produces
+ *             only a single channel of output. It is intended to produce grayscale images from four channel content,
+ *             but can be used for other purposes.  
+ *  <pre>@textblock
+ *                  for each pixel[y][x] in image:
+ *                      int32_t p = (pixel[y][x][0] + pre_bias[0]) * matrix[0]  +
+ *                                  (pixel[y][x][1] + pre_bias[1]) * matrix[1]  +
+ *                                  (pixel[y][x][2] + pre_bias[2]) * matrix[2]  +
+ *                                  (pixel[y][x][3] + pre_bias[3]) * matrix[3];
+ *                      result[y][x] = CLAMP( ( p + post_bias ) / divisor, 0, 0xff);
+ *  @/textblock </pre>
+ *             If you intend to just extract a single channel without modification (e.g. alpha), please see 
+ *             vImageExtractChannel_ARGB8888.  This function will work in place, provided that src->data = dest->data
+ *             and src->rowBytes = dest->rowBytes.  
+ *
+ *  @param      src         A four channel, 8-bit per component input buffer. It does not have to be ARGB.
+ *
+ *  @param      dest        A preallocated buffer to receive the 8-bit per component monochromatic result.
+ *
+ *  @param      matrix      The 1D matrix by which to multiply each pixel.
+ *
+ *  @param      divisor     Used to renormalize the image after scaling by the matrix. Typically this is the 
+ *                          sum over the matrix. If 0, 1 will be used. A faster implementation may be available
+ *                          if the divisor is an integer power of 2.
+ *
+ *  @param      pre_bias    A set of values used to correct the input image so that 0 is encoded as 0.  For example,
+ *                          if the input image is 444 AYCbCr video range, then {0, -16, -128, -128} could be used here.
+ *                          If NULL, {0,0,0,0} will be used.
+ *  
+ *  @param      post_bias   A value added to the sum at the end to provide both for rounding control and for
+ *                          allowing for a bias to be encoded into the image format.  Typically, this is just
+ *                          divisor/2 to allow for round to nearest behavior. However, other values may be appropriate
+ *                          if the encoding for 0.0 is not 0.  For example, for video range luminance, you might
+ *                          pass 16 * divisor + divisor/2. 
+ *
+ *  @param      flags       The following flags are allowed:
+ *      <pre> @textblock
+ *          kvImageNoFlags                      Default operation
+ *          kvImageDoNotTile                    Disable internal multithreading.
+ *          kvImageGetTempBufferSize            return 0, do no work
+ *          kvImagePrintDiagnosticsToConsole    Might print more helpful diagnostic info to the console in the event of an
+ *                                              error.
+ *      @/textblock</pre>
+ *
+ *  @return     The following error codes may be returned:
+ *      <pre> @textblock
+ *          kvImageNoError                      Success.
+ *          0                                   If kvImageGetTempBufferSize was passed, 0 is returned and no work is done on the image.
+ *
+ *          kvImageRoiLargerThanInputBuffer     dest->width and height must be less than or equal to the corresponding dimension of src.
+ *
+ *          kvImageUnknownFlagsBit              A flag not from the above list of flags was passed in.
+ *      @/textblock </pre>
+ */
+vImage_Error vImageMatrixMultiply_ARGB8888ToPlanar8( const vImage_Buffer *src,
+                                                     const vImage_Buffer *dest,
+                                                     const int16_t       matrix[4],
+                                                     int32_t             divisor,
+                                                     const int16_t       pre_bias[4],
+                                                     int32_t             post_bias,
+                                                     vImage_Flags        flags )
+                                                     VIMAGE_NON_NULL(1,2,3)
+                                                     __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+
+    
+/*!
+ * @function vImageMatrixMultiply_ARGBFFFFToPlanarF
+ * @abstract apply a 1d matrix to a four channel, float per component image and get a 1-channel float image as a result
+ * @discussion vImageMatrixMultiply_ARGBFFFFToPlanarF is like vImageMatrixMultiply_ARGBFFFF, except that it produces
+ *             only a single channel of output. It is intended to produce grayscale images from four channel content,
+ *             but can be used for other purposes.
+ *  <pre>@textblock
+ *                  for each pixel[y][x] in image:
+ *                      float p =   (pixel[y][x][0] + pre_bias[0]) * matrix[0]  +
+ *                                  (pixel[y][x][1] + pre_bias[1]) * matrix[1]  +
+ *                                  (pixel[y][x][2] + pre_bias[2]) * matrix[2]  +
+ *                                  (pixel[y][x][3] + pre_bias[3]) * matrix[3];
+ *                      result[y][x] = p + post_bias;
+ *  @/textblock </pre>
+ *             vImage reserves the right to reorder computation from the above formulation to improve performance.
+ *             If you intend to just extract a single channel without modification (e.g. alpha), please see
+ *             vImageExtractChannel_ARGBFFFF. This function will work in place, provided that src->data = dest->data
+ *             and src->rowBytes = dest->rowBytes.
+ *
+ *  @param      src         A four channel, floating-point input buffer. It does not have to be ARGB.
+ *
+ *  @param      dest        A preallocated buffer to receive the floating-point monochromatic result.
+ *
+ *  @param      matrix      The 1D matrix by which to multiply each pixel.
+ *
+ *  @param      pre_bias    A set of values used to correct the input image so that 0 is encoded as 0.
+ *                          If NULL, {0,0,0,0} will be used.
+*
+ *  @param      post_bias   A value added to the sum at the end to provide both for rounding control and for
+ *                          allowing for a bias to be encoded into the image format.  Typically, this is just
+ *                          zero.
+ *
+ *  @param      flags       The following flags are allowed:
+ *      <pre> @textblock
+ *          kvImageNoFlags                      Default operation
+ *          kvImageDoNotTile                    Disable internal multithreading.
+ *          kvImageGetTempBufferSize            return 0, do no work
+ *          kvImagePrintDiagnosticsToConsole    Might print more helpful diagnostic info to the console in the event of an
+ *                                              error.
+ *      @/textblock</pre>
+ *
+ *  @return     The following error codes may be returned:
+ *      <pre> @textblock
+ *          kvImageNoError                      Success.
+ *          0                                   If kvImageGetTempBufferSize was passed, 0 is returned and no work is done on the image.
+ *
+ *          kvImageRoiLargerThanInputBuffer     dest->width and height must be less than or equal to the corresponding dimension of src.
+ *
+ *          kvImageUnknownFlagsBit              A flag not from the above list of flags was passed in.
+ *      @/textblock </pre>
+ */
+vImage_Error vImageMatrixMultiply_ARGBFFFFToPlanarF( const vImage_Buffer *src,
+                                                     const vImage_Buffer *dest,
+                                                     const float         matrix[4],
+                                                     const float         pre_bias[4],
+                                                     float               post_bias,
+                                                     vImage_Flags        flags )
+                                                     VIMAGE_NON_NULL(1,2,3)
+                                                     __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+
+    
 /*
  * The gamma calculation is at the simplest level:
  *
@@ -556,7 +702,7 @@ vImage_Error vImagePiecewiseGamma_PlanarFtoPlanar8(const vImage_Buffer *src,
  *          boundary[1....N-1] = the boundaries separating the input ranges covered by the various polynomials provided (see below)
  *
  *     NaNs will return NaNs. The last polynomial also operates on Inf.  N must be an integer power of 2.
- *     Values found in the distination array are undefined until after the function returns.
+ *     Values found in the destination array are undefined until after the function returns.
  *	   The behavior is undefined if boundaries are NaN.
  *
  *  These functions will also work for multichannel data, such as RGBAFFFF buffers by adjusting the width of the buffer to 
@@ -595,18 +741,18 @@ vImage_Error vImagePiecewiseGamma_PlanarFtoPlanar8(const vImage_Buffer *src,
  *  Performance advisory: 
  *      It costs much more to resolve additional polynomials than to work with higher order polynomials. 
  *      For performance, you are typically better off with one 9th order polynomial that spans the range you are 
- *      interested in than many first order polynomials that cover the area in a  piecewise fashion. 
+ *      interested in than many first order polynomials that cover the area in a piecewise fashion.
  *      Vector code execution time is roughly proportional to:
  *
  *              time = (base cost to touch all the data) + polynomial order + 4 * log2segments
  *
- *      The vector code for a unsplit 13th order polynomial should be about as fast as vImageLookupTable_Planar8toPlanarF() 
+ *      The vector code for an unsplit 13th order polynomial should be about as fast as vImageLookupTable_Planar8toPlanarF() 
  *          on a G4.
  *
  *      With data not in cache, the time may be significantly different. For sufficiently small polynomials, the 
  *      cost may be a fixed cost, dependent only on how much data is touched, and not on polynomial order.
  *
- *        This performance behavior is provided to help developers evaluate speed tradeoffs. It is not a guaranteed. 
+ *        This performance behavior is provided to help developers evaluate speed tradeoffs. It is not a guarantee.
  *        It is subject to change in future operating system revisions, and may be different on different hardware
  *        within the same or different operating system revisions. 
  *
@@ -629,7 +775,7 @@ vImage_Error vImagePiecewiseGamma_PlanarFtoPlanar8(const vImage_Buffer *src,
  *              else
  *                  result = -0.055 + 1.055 * Pow( {R,G,B}, 2.4 )
  *
- *      Since the power function isn't a polynomial and we need a polynomial, we will approximate it with a second order polynomial:
+ *      Because the power function isn't a polynomial and we need a polynomial, we will approximate it with a second order polynomial:
  *
  *              if( {R,G,B} < 0.00304 )
  *                  result = 12.92 * {R,G,B}
@@ -647,20 +793,20 @@ vImage_Error vImagePiecewiseGamma_PlanarFtoPlanar8(const vImage_Buffer *src,
  *
  *      The two polynomials are:
  *
- *              float linearPart[ order + 1 ] = { 0, 12.92, 0 }; //result = 0 + 12.92 * {R,G,B} + 0 * {R,G,B} * {R,G,B} 
- *              float nonLinearPart[ order + 1 ] = { c0, c1, c2 };  //result = c0 + c1 * {R,G,B} + c2 * {R,G,B} * {R,G,B}
+ *              float linearPart[ order + 1 ] = { 0, 12.92, 0 };    // result = 0 + 12.92 * {R,G,B} + 0 * {R,G,B} * {R,G,B}
+ *              float nonLinearPart[ order + 1 ] = { c0, c1, c2 };  // result = c0 + c1 * {R,G,B} + c2 * {R,G,B} * {R,G,B}
  *
  *      Here we assemble the rest of the information:
  *      
- *              float *coefficients[ N ] = { linearPart, nonLinearPart };   //sorted in order of area of influence from least to greatest. ( x < 0.00304, x >= 0.00304 )
- *              float boundaries[ N+1 ] = { 0.0f, 0.00304, 1.0f };      //sorted in order from least to greatest. 0.0f and 1.0f define the range over which the polynomials are valid. 0.00304 is the single value separating the two polynomials
- *              int log2segments = 1;  //log2(N) 
- *              int flags = 0;          //you must pass 0 for the flags
+ *              float *coefficients[ N ] = { linearPart, nonLinearPart };   // sorted in order of area of influence from least to greatest. ( x < 0.00304, x >= 0.00304 )
+ *              float boundaries[ N+1 ] = { 0.0f, 0.00304, 1.0f };      // sorted in order from least to greatest. 0.0f and 1.0f define the range over which the polynomials are valid. 0.00304 is the single value separating the two polynomials
+ *              int log2segments = 1;   // log2(N)
+ *              int flags = 0;          // no flags
  *
  *              vImage_Error error = vImagePiecewisePolynomial_PlanarF( &mySourceBuffer, &myDestinationBuffer, coefficients, boundaries, order, log2segments, flags );
  */										
 vImage_Error    vImagePiecewisePolynomial_PlanarF(  const vImage_Buffer *src,       //floating point data
-                                                    const vImage_Buffer *dest,       //floating point data
+                                                    const vImage_Buffer *dest,      //floating point data
                                                     const float         **coefficients,
                                                     const float         *boundaries,
                                                     uint32_t            order,
@@ -685,6 +831,150 @@ vImage_Error    vImagePiecewisePolynomial_PlanarFtoPlanar8( const vImage_Buffer 
                                                             uint32_t            log2segments,
                                                             vImage_Flags        flags ) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
+    
+/*
+ *  vImageSymmetricPiecewisePolynomial*
+ *
+ *  Apply one or more polynomials to the input image to give the output image.  The polynomial p(x) is provided as a 
+ *  series of coefficients.  e.g.:
+ *
+ *      p(x,i) = coefficient[i][0] + (coefficient[i][1] + (coefficient[i][2] + coefficient[i][3]*x)*x)*x;    (assuming a 3rd order polynomial)
+ *
+ *  This is just like vImagePiecewisePolynomial_<fmt>.  However, when it is applied, a modified polynomial p'(x) is actually used:
+ *
+ *      p'(x) = p(fabsf(x)) * copysignf( 1.0f, x)
+ *
+ *  This makes the polynomial C2 symmetric about the origin.  That is, the negative domain looks like the positive domain, rotated 180 degrees about the origin.
+ *
+ *  vImageSymmetricPiecewisePolynomial_PlanarF floating point data on both input and output.
+ *
+ *  The arrangement of the polynomials is defined as follows:
+ *      Let there be N polynomials that each cover part of the single precision floating point range that are arranged in order of area of influence from -Infinity to Infinity.
+ *      The ith polynomial shall operate on the set of input pixel values that fall in the range:
+ *
+ *          boundary[i] <= pixel_value < boundary[i+1].
+ *
+ *     for which:
+ *
+ *          boundary[0] = smallest value fit by the polynomial. Input pixels smaller than this will be clamped to this value before the calculation is done. Use -Inf for no lower limit.
+ *          boundary[N] = largest value fit by the polynomial. Input pixels larger than this will be clamped to this value before the calculation is done. Use +Inf for no upper limit.
+ *          boundary[1....N-1] = the boundaries separating the input ranges covered by the various polynomials provided (see below)
+ *
+ *     NaNs will return NaNs. The last polynomial also operates on Inf.  N must be an integer power of 2.
+ *     Values found in the destination array are undefined until after the function returns.
+ *	   The behavior is undefined if boundaries are NaN.
+ *
+ *  These functions will also work for multichannel data, such as RGBAFFFF buffers by adjusting the width of the buffer to
+ *  reflect the additional channels. Note that this will cause the alpha channel, if there is one, to become modified like the other channels.
+ *  These will work in place, provided that the following are true:
+ *      src->data == dest->data
+ *      src->rowBytes >= dest->rowBytes
+ *      if( src->rowBytes > dest->rowBytes ) kvImageDoNotTile must be passed in the flags parameter
+ 
+ *
+ *  The input parameters are as follows:
+ *
+ *      src = a pointer to a vImage_Buffer containing the input data for the function
+ *      dest = a pointer to a vImage_Buffer structure that describes where to write the results
+ *
+ *      coefficients = a packed array of pointers to packed arrays of (order+1) polynomial coefficients ( i.e. coefficients[ N ][ order + 1 ] ).
+ *                      The polynomials must appear in order from least to greatest sorted by area of influence.
+ *                      The polynomials must all be of the same order.
+ *                      The polynomial coefficients are sorted from 0th order term to highest order term
+ *
+ *      boundaries = a packed array of (N+1) floating point values that mark the dividing line between one polynomial and the next. These must be sorted from most negative to most positive.
+ *						Input pixel values less than boundaries[0] will be clamped to be equal to boundaries[0] before the calculation is done
+ *						Input pixel values greater than boundaries[N] will be clamped to be equal to boundaries[N] before the calculation is done
+ *
+ *      order = the number of coefficients minus one used for each polynomial -- all the polynomials must be of the same order
+ *                  A polynomial with _two_ coefficients (y = c0 + c1 * x) is a _first_ order polynomial. Pass 1 for a first order polynomial. Pass 2 for a second order polynomial, etc.
+ *
+ *      log2segments = log2(N)
+ *
+ *      flags = no flags are currently honored. You must pass zero here.
+ *
+ *      vImagePiecewisePolynomial_PlanarF will work in place.
+ *      vImagePiecewisePolynomial_Planar8toPlanarF will work in place.
+ *      vImagePiecewisePolynomial_PlanarFtoPlanar8 will NOT work in place.
+ *
+ *  Performance advisory:
+ *      It costs much more to resolve additional polynomials than to work with higher order polynomials.
+ *      For performance, you are typically better off with one 9th order polynomial that spans the range you are
+ *      interested in than many first order polynomials that cover the area in a piecewise fashion.
+ *      Vector code execution time is roughly proportional to:
+ *
+ *              time = (base cost to touch all the data) + polynomial order + 4 * log2segments
+ *
+ *      The vector code for an unsplit 13th order polynomial should be about as fast as vImageLookupTable_Planar8toPlanarF()
+ *          on a G4.
+ *
+ *      With data not in cache, the time may be significantly different. For sufficiently small polynomials, the
+ *      cost may be a fixed cost, dependent only on how much data is touched, and not on polynomial order.
+ *
+ *        This performance behavior is provided to help developers evaluate speed tradeoffs. It is not a guarantee.
+ *        It is subject to change in future operating system revisions, and may be different on different hardware
+ *        within the same or different operating system revisions.
+ *
+ *      Vector code is not invoked for log2segments > 3.
+ *
+ *  Accuracy advisory:
+ *      Single precision floating point arithmetic is used. While some polynomials may fit a desired curve
+ *      within prescribed error limits when using infinite precision math, limited floating point precision
+ *      may in practice cause significant error to accumulate for some sets of polynomial coefficients. It is
+ *      recommended that you test all reasonable floating point pixel values to make sure that they do indeed
+ *      give results that conform to prescribed error limits.
+ *
+ *
+ *  Usage Example:
+ *  --------------
+ *      Lets say you want to mimic the sRGB gamma curve using vImagePiecewisePolynomial_PlanarF. The sRGB gamma curve is defined as follows:
+ *
+ *              if( {R,G,B} < 0.00304 )
+ *                  result = 12.92 * {R,G,B}
+ *              else
+ *                  result = -0.055 + 1.055 * Pow( {R,G,B}, 2.4 )
+ *
+ *      Because the power function isn't a polynomial and we need a polynomial, we will approximate it with a second order polynomial:
+ *
+ *              if( {R,G,B} < 0.00304 )
+ *                  result = 12.92 * {R,G,B}
+ *              else
+ *                  result = c0 + c1 * {R,G,B} + c2 * {R,G,B}^2
+ *
+ *      (Finding the best values for c0, c1, c2 to approximate -0.055 + 1.055 * Pow( {R,G,B}, 2.4 ) over the range [0.00304, 1.0] is
+ *          left as an exercise for the reader.)
+ *
+ *      We have two polynomials -- one for the region below 0.00304 and one for the region above, so N = 2.
+ *      The highest order polynomial is a second order polynomial, so order = 2.
+ *
+ *              const int N = 2;        // two polynomials
+ *              const int order = 2;    // the polynomials are second order (have three terms, including zero terms)
+ *
+ *      The two polynomials are:
+ *
+ *              float linearPart[ order + 1 ] = { 0, 12.92, 0 };    // result = 0 + 12.92 * {R,G,B} + 0 * {R,G,B} * {R,G,B}
+ *              float nonLinearPart[ order + 1 ] = { c0, c1, c2 };  // result = c0 + c1 * {R,G,B} + c2 * {R,G,B} * {R,G,B}
+ *
+ *      Here we assemble the rest of the information:
+ *
+ *              float *coefficients[ N ] = { linearPart, nonLinearPart };   // sorted in order of area of influence from least to greatest. ( x < 0.00304, x >= 0.00304 )
+ *              float boundaries[ N+1 ] = { 0.0f, 0.00304, 1.0f };      // sorted in order from least to greatest. 0.0f and 1.0f define the range over which the polynomials are valid. 0.00304 is the single value separating the two polynomials
+ *              int log2segments = 1;   // log2(N)
+ *              int flags = 0;          // no flags
+ *
+ *              vImage_Error error = vImagePiecewisePolynomial_PlanarF( &mySourceBuffer, &myDestinationBuffer, coefficients, boundaries, order, log2segments, flags );
+ */
+vImage_Error    vImageSymmetricPiecewisePolynomial_PlanarF( const vImage_Buffer *src,   //floating point data
+                                                            const vImage_Buffer *dest,  //floating point data
+                                                            const float         **coefficients,
+                                                            const float         *boundaries,
+                                                            uint32_t            order,
+                                                            uint32_t            log2segments,
+                                                            vImage_Flags        flags )
+                                                            VIMAGE_NON_NULL(1,2,3,4)
+                                                            __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 );
+
+    
 /*
  *      vImagePiecewiseRational_PlanarF is similar to vImagePiecewisePolynomial_PlanarF
  *      Except that it evaluates a piecewise rational expression in the form of:
@@ -985,7 +1275,7 @@ typedef enum
 vImage_MultidimensionalTable vImageMultidimensionalTable_Create( const uint16_t *tableData,
                                                                  uint32_t numSrcChannels,
                                                                  uint32_t numDestChannels,
-                                                                 uint8_t table_entries_per_dimension[],   /* uint8_t[numSrcChannels] */
+                                                                 const uint8_t table_entries_per_dimension[],   /* uint8_t[numSrcChannels] */
                                                                  vImageMDTableUsageHint hint,
                                                                  vImage_Flags flags,
                                                                  vImage_Error *err )

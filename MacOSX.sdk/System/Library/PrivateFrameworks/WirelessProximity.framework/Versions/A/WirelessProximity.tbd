@@ -8,15 +8,12 @@ exports:
                        _WPBeaconTypeATVSetup, _WPBeaconTypeAirPlayTargetPresence, 
                        _WPBeaconTypeAirPlayTargetPresencePayload, _WPBeaconTypeCompany, 
                        _WPBeaconTypeCompanyMajor, _WPBeaconTypeCompanyMinor, 
-                       _WPBeaconTypeCompanyUUID, _WPBeaconTypeFindMyPhone, 
-                       _WPBeaconTypeFindMyPhonePayload, _WPBeaconTypeFloor, 
-                       _WPBeaconTypeGPSAccuracy, _WPBeaconTypeGPSAltitude, 
-                       _WPBeaconTypeGPSLatitude, _WPBeaconTypeGPSLongitude, 
-                       _WPLoggingInit, _WPPuckType, _WPPuckTypeAirPlaySoloAdvertisingData, 
-                       _WPPuckTypeAirPlaySoloRSSI, _WPPuckTypeAirPlaySoloSourcePresence, 
-                       _WPPuckTypeAirPlaySoloTargetPresence, _WirelessProximityFileLogHelper, 
-                       _WirelessProximityFileLogHelperFlushFileCache, _WirelessProximityLoggingStatusChanged, 
-                       _isWPPoweredOn, _kFoundDevices ]
+                       _WPBeaconTypeCompanyUUID, _WPLoggingInit, _WPPuckType, 
+                       _WPPuckTypeAirPlaySoloAdvertisingData, _WPPuckTypeAirPlaySoloRSSI, 
+                       _WPPuckTypeAirPlaySoloSourcePresence, _WPPuckTypeAirPlaySoloTargetPresence, 
+                       _WirelessProximityFileLogHelper, _WirelessProximityFileLogHelperFlushFileCache, 
+                       _WirelessProximityLoggingStatusChanged, _isWPPoweredOn, 
+                       _kFoundDevices ]
     objc-classes:    [ _WPAWDL, _WPAdvertising, _WPAirPlaySolo, _WPContinuity, 
                        _WPDeviceScanner, _WPTransfer, _WPZoneTracker, _WirelessProximity, 
                        _XPCClient ]

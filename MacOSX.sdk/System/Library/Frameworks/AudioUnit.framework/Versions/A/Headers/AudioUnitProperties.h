@@ -1,19 +1,54 @@
-/*
-     File:       AudioUnitProperties.h
- 
-     Contains:   Property constants for AudioUnits
- 
-     Copyright:  (c) 2001-2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		AudioUnitProperties.h
+ 	@framework	AudioUnit.framework
+ 	@copyright	(c) 2000-2015 Apple, Inc. All rights reserved.
+	@abstract	Property ID's and accompanying structs used by Apple audio units.
+
+	@discussion
+
+	Properties form the basis of much of the audio unit API. You use them with
+	these AudioUnit.framework API functions declared in AUComponent.h:
+	
+		AudioUnitGetPropertyInfo
+		AudioUnitGetProperty
+		AudioUnitSetProperty
+
+	This file first lists generic audio unit properties (those that are potentially applicable to 
+	any audio unit), followed by properties specific to Apple audio units.
+
+	Apple reserves property IDs from 0 -> 63999. Developers are free to use property IDs above this 
+	range.
+
+	All property values are passed by reference. When a property's value type is listed below,
+	that value type is always passed by reference. For example, CFStringRef is passed as 
+	&myCFString.
+
+	Properties are described below using a general form:
+		Scope:				The audio unit scope that the property applies to. For example, Global, 
+							Input, Output, etc. For an explanation of audio unit scopes, see the 
+							Audio Unit Programming Guide in the ADC Reference Library.
+		Value Type:			The data type used to hold the value associated with the property. For 
+							example, CFStringRef or UInt32
+		Access:				How a host application can access the property in a hosted audio unit: 
+							read only, write only, or read/write.
+		Description:		A description of the property's role.
+
+	The descriptions in this file apply to typical or recommended usage. Audio unit developers can
+	vary the way each property is used. For example, a property may be described as applying to both
+	input and output scopes, but a given audio unit may implement the property on the input scope
+	only. As another example, a property may be described here as having read/write access, but an
+	audio unit may implement the property as read only.
+
+	The properties are divided into two primary sections:
+		(1) Core/Embedded Implementation
+			- these properties are available on all platforms where audio units are available
+		
+		(2) OS X 
+			- these properties are available on only available on OS X
 */
 
-#ifndef __AudioUnitProperties
-#define __AudioUnitProperties
+#ifndef AudioUnit_AudioUnitProperties_h
+#define AudioUnit_AudioUnitProperties_h
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <AudioUnit/AUComponent.h>
@@ -25,58 +60,15 @@
 	#include <CoreFoundation.h>
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
+
 //=====================================================================================================================
 #pragma mark Overview
-/*!
-    @header AudioUnitProperties
-	This file defines a collection of property IDs and their accompanying structures that are used
-	by audio units. Properties form the basis of much of the audio unit API. You use them with 
-	the Audio Unit framework's Get and Set property API calls declared in the AUComponent.h header
-	file:
-	
-		AudioUnitGetPropertyInfo
-		AudioUnitGetProperty
-		AudioUnitSetProperty
-	
-	This file first lists generic audio unit properties (those that are potentially applicable to 
-	any audio unit), followed by properties specific to Apple audio units.
-
-	Apple reserves property IDs from 0 -> 63999. Developers are free to use property IDs above this 
-	range.
-	
-	All property values are passed by reference. When a property's value type is listed below,
-	that value type is always passed by reference. For example, CFStringRef is passed as 
-	&myCFString.
-	
-	Properties are described below using a general form:
-		Scope:				The audio unit scope that the property applies to. For example, Global, 
-							Input, Output, etc. For an explanation of audio unit scopes, see the 
-							Audio Unit Programming Guide in the ADC Reference Library.
-		Value Type:			The data type used to hold the value associated with the property. For 
-							example, CFStringRef or UInt32
-		Access:				How a host application can access the property in a hosted audio unit: 
-							read only, write only, or read/write.
-		Description:		A description of the property's role.
-	
-	The descriptions in this file apply to typical or recommended usage. Audio unit developers can vary 
-	the way each property is used. For example, a property may be described as applying to both input and  
-	output scopes, but a given audio unit may implement the property on the input scope only. As another 
-	example, a property may be described here as having read/write access, but an audio unit may 
-	implement the property as read only.
-	
-	The properties are divided into two primary sections:
-		(1) Core/Embedded Implementation
-			- these properties are available on all platforms where audio units are available
-		
-		(2) Desktop 
-			- these properties are available on only available on desktop platforms
-	
-	The following file is organised into these two sections
-*/
 
 #pragma mark -
 #pragma mark Core Implementation
 #pragma mark -
+
 /*!
     @enum           Audio Unit scope types
     @abstract       The scope IDs for audio units define basic roles and contexts for an audio unit's state.
@@ -100,7 +92,7 @@
 											The individual sample zones, envelope generators, and filters within a synth are
 											examples of this.
 */
-enum {
+CF_ENUM(AudioUnitScope) {
 	kAudioUnitScope_Global		= 0,
 	kAudioUnitScope_Input		= 1,
 	kAudioUnitScope_Output		= 2,
@@ -189,7 +181,7 @@ enum {
 						The value can be both set and retrieve from an I/O element (bus)
 	
 	@constant		kAudioUnitProperty_ElementCount
-						Scope:			Any (though Global scope will always have and element count of 1)
+						Scope:			Any (though Global scope will always have an element count of 1)
 						Value Type:		UInt32
 						Access:			Read / Write
 						
@@ -408,7 +400,7 @@ enum {
 	
 	@constant		kAudioUnitProperty_ParameterIDName
 						Scope:				any
-						Value Type:			AudioUnitParameterNameInfo
+						Value Type:			AudioUnitParameterIDName
 						Access:				read
 
 						An audio unit returns the full parameter name in the GetParameterInfo struct/property.
@@ -416,14 +408,14 @@ enum {
 						truncating this full name may give a less than optimal name for the user. Thus, 
 						this property can be used to ask the audio unit whether it can supply a truncated name, with
 						the host suggesting a length (number of characters). If the unit returns a longer
-						name than the host requests, that name maybe truncated to the requested characters in display.
+						name than the host requests, that name may be truncated to the requested characters in display.
 						The unit could return a shorter name than requested as well. The unit returns a CFString
 						that should be released by the host. When using this property, the host asks for
 						the name in the same scope and element as the unit publishes the parameter.
 
 	@constant		kAudioUnitProperty_ParameterClumpName
 						Scope:				any
-						Value Type:			AudioUnitParameterNameInfo
+						Value Type:			AudioUnitParameterIDName
 						Access:				read
 
 						This works in a similar manner to the ParameterIDName property, except that the inID
@@ -554,7 +546,7 @@ enum {
 						latencies describe to that unit how long from the moment of generation it will take for its 
 						input to arrive, and how long it will take for its output to be presented. 
 						
-						You can use this property, for example, to provide metering for for an audio unit that 
+						You can use this property, for example, to provide metering for an audio unit that
 						is generating output to be presented to the user at a future time.
 	
 	@constant		kAudioUnitProperty_DependentParameters
@@ -738,8 +730,27 @@ enum {
 						When getting this property, ownership follows Core Foundation's 'Copy Rule'. This property may return NULL 
 						which indicates that no name has been set on the AU.
 
- */
-enum
+	@constant		kAudioUnitProperty_RequestViewController
+						Scope:			Global
+						Value Type:		block: void (^)(AUViewControllerBase *)
+						Access:			write
+						
+						If the audio unit is implemented using the version 3 API, it may provide a
+						view controller, returned via this property. As with any other CoreFoundation
+						or Foundation object returned by AudioUnitGetProperty, the caller must
+						release the returned reference (i.e. the Copy rule is used).
+
+	@constant		kAudioUnitProperty_ParametersForOverview
+						Scope:			Global
+						Value Type:		variably-sized array of struct AudioUnitParameter
+						Access:			read
+						
+						A host may query an audio unit for a list of its N most important
+						parameters, via this property. The size of the array passed to
+						AudioUnitGetProperty controls the number of AudioUnitParameter values
+						returned.
+*/
+CF_ENUM(AudioUnitPropertyID)
 {
 // range (0 -> 999)
 	kAudioUnitProperty_ClassInfo					= 0,
@@ -775,20 +786,22 @@ enum
     kAudioUnitProperty_OfflineRender				= 37,
 	kAudioUnitProperty_ParameterIDName				= 34,
 	kAudioUnitProperty_ParameterStringFromValue		= 33,
+	kAudioUnitProperty_ParameterClumpName			= 35,
 	kAudioUnitProperty_ParameterValueFromString		= 38,
+	kAudioUnitProperty_ContextName					= 25,
+	kAudioUnitProperty_PresentationLatency			= 40,
+	kAudioUnitProperty_ClassInfoFromDocument		= 50,
+	kAudioUnitProperty_RequestViewController		= 56,
+	kAudioUnitProperty_ParametersForOverview		= 57,
 
 	kAudioUnitProperty_FastDispatch					= 5,
 	kAudioUnitProperty_SetExternalBuffer			= 15,
 	kAudioUnitProperty_GetUIComponentList			= 18,
-	kAudioUnitProperty_ContextName					= 25,
 	kAudioUnitProperty_CocoaUI						= 31,
-	kAudioUnitProperty_ParameterClumpName			= 35,
 	kAudioUnitProperty_IconLocation					= 39,
-	kAudioUnitProperty_PresentationLatency			= 40,
 	kAudioUnitProperty_AUHostIdentifier				= 46,
 	kAudioUnitProperty_MIDIOutputCallbackInfo		= 47,
 	kAudioUnitProperty_MIDIOutputCallback			= 48,
-	kAudioUnitProperty_ClassInfoFromDocument		= 50
 };
 
 
@@ -820,7 +833,7 @@ enum
 	#define kAUPresetMASDataKey			"masdata"
 
 /*!
-    @defined        kAUPresetPartKey
+    @define         kAUPresetPartKey
     @discussion     This key if present, distinguishes a global preset that is set 
 					on the global scope with a part-based preset that is set on the part scope. 
 					The value of this key is audio unit defined
@@ -870,7 +883,7 @@ typedef struct AudioUnitExternalBuffer {
 */
 typedef struct AURenderCallbackStruct {
 	AURenderCallback			inputProc;
-	void *						inputProcRefCon;
+	void * __nullable			inputProcRefCon;
 } AURenderCallbackStruct;
 
 /*!
@@ -894,10 +907,10 @@ typedef struct AUPreset {
 					and the quality of the audio unit's processing/output.
 */
 enum {
-	kRenderQuality_Max								= 0x7F,
-	kRenderQuality_High								= 0x60,
-	kRenderQuality_Medium							= 0x40,
-	kRenderQuality_Low								= 0x20,
+	kRenderQuality_Max								= 127,
+	kRenderQuality_High								= 96,
+	kRenderQuality_Medium							= 64,
+	kRenderQuality_Low								= 32,
 	kRenderQuality_Min								= 0
 };
 
@@ -946,9 +959,9 @@ typedef struct AudioUnitFrequencyResponseBin
 	@param			outCurrentBeat			The current beat, where 0 is the first beat. Tempo is defined as the number of whole-number (integer) beat values (as indicated by the outCurrentBeat field) per minute.
 	@param			outCurrentTempo			The current tempo
 */
-typedef OSStatus (*HostCallback_GetBeatAndTempo) (void		*inHostUserData, 
-											Float64			*outCurrentBeat, 
-											Float64			*outCurrentTempo);
+typedef OSStatus (*HostCallback_GetBeatAndTempo)(void * __nullable	inHostUserData,
+											Float64	* __nullable	outCurrentBeat,
+											Float64	* __nullable	outCurrentTempo);
 
 /*!
 	@typedef		HostCallback_GetMusicalTimeLocation
@@ -971,11 +984,11 @@ typedef OSStatus (*HostCallback_GetBeatAndTempo) (void		*inHostUserData,
 	@param			outCurrentMeasureDownBeat		The beat that corresponds to the downbeat (first beat) of the current measure that is being rendered
 
 */
-typedef OSStatus (*HostCallback_GetMusicalTimeLocation) (void     *inHostUserData, 
-												UInt32            *outDeltaSampleOffsetToNextBeat,
-												Float32           *outTimeSig_Numerator,
-												UInt32            *outTimeSig_Denominator,
-												Float64           *outCurrentMeasureDownBeat);
+typedef OSStatus (*HostCallback_GetMusicalTimeLocation)(void * __nullable	inHostUserData,
+												UInt32 * __nullable			outDeltaSampleOffsetToNextBeat,
+												Float32 * __nullable		outTimeSig_Numerator,
+												UInt32 * __nullable			outTimeSig_Denominator,
+												Float64 * __nullable		outCurrentMeasureDownBeat);
 
 /*!
 	@typedef		HostCallback_GetTransportState
@@ -1000,13 +1013,13 @@ typedef OSStatus (*HostCallback_GetMusicalTimeLocation) (void     *inHostUserDat
 	@param			outCycleEndBeat					If cycling is true, the end beat of the cycle or loop point in the host's transport
 	
 */
-typedef OSStatus (*HostCallback_GetTransportState) (void 	*inHostUserData,
-										Boolean 			*outIsPlaying,
-										Boolean 			*outTransportStateChanged,
-										Float64 			*outCurrentSampleInTimeLine,
-										Boolean 			*outIsCycling,
-										Float64 			*outCycleStartBeat,
-										Float64 			*outCycleEndBeat);
+typedef OSStatus (*HostCallback_GetTransportState)(void * __nullable	inHostUserData,
+										Boolean * __nullable			outIsPlaying,
+										Boolean * __nullable			outTransportStateChanged,
+										Float64 * __nullable			outCurrentSampleInTimeLine,
+										Boolean * __nullable			outIsCycling,
+										Float64 * __nullable			outCycleStartBeat,
+										Float64 * __nullable			outCycleEndBeat);
 
 /*!
 	@typedef		HostCallback_GetTransportState2
@@ -1032,14 +1045,14 @@ typedef OSStatus (*HostCallback_GetTransportState) (void 	*inHostUserData,
 	@param			outCycleEndBeat					If cycling is true, the end beat of the cycle or loop point in the host's transport
 	
 */
-typedef OSStatus (*HostCallback_GetTransportState2) (void 	*inHostUserData,
-										Boolean 			*outIsPlaying,
-										Boolean				*outIsRecording,
-										Boolean 			*outTransportStateChanged,
-										Float64 			*outCurrentSampleInTimeLine,
-										Boolean 			*outIsCycling,
-										Float64 			*outCycleStartBeat,
-										Float64 			*outCycleEndBeat);
+typedef OSStatus (*HostCallback_GetTransportState2)(void * __nullable	inHostUserData,
+										Boolean * __nullable			outIsPlaying,
+										Boolean	* __nullable			outIsRecording,
+										Boolean * __nullable			outTransportStateChanged,
+										Float64 * __nullable			outCurrentSampleInTimeLine,
+										Boolean * __nullable			outIsCycling,
+										Float64 * __nullable			outCycleStartBeat,
+										Float64 * __nullable			outCycleEndBeat);
 
 /*!
 	@struct			HostCallbackInfo
@@ -1048,11 +1061,11 @@ typedef OSStatus (*HostCallback_GetTransportState2) (void 	*inHostUserData,
 		Any callback can be NULL.
 */
 typedef struct HostCallbackInfo {
-	void *									hostUserData;
-	HostCallback_GetBeatAndTempo			beatAndTempoProc;
-    HostCallback_GetMusicalTimeLocation     musicalTimeLocationProc;
-	HostCallback_GetTransportState			transportStateProc;	
-	HostCallback_GetTransportState2			transportStateProc2;
+	void * __nullable									hostUserData;
+	HostCallback_GetBeatAndTempo __nullable				beatAndTempoProc;
+    HostCallback_GetMusicalTimeLocation __nullable		musicalTimeLocationProc;
+	HostCallback_GetTransportState __nullable			transportStateProc;
+	HostCallback_GetTransportState2 __nullable			transportStateProc2;
 } HostCallbackInfo;
 
 /*!
@@ -1068,11 +1081,11 @@ typedef struct AUDependentParameter {
 
 /*!
 	@struct			AudioUnitCocoaViewInfo
-	@abstract		The name and how many, NSView objects an audio unit publishes as a custom Cocoa view.
+	@abstract		The location and class name of one or more view factory objects an Audio Unit publishes
 	@field			mCocoaAUViewBundleLocation
 						Contains the location of the bundle which the host app can then use to locate the bundle
 	@field			mCocoaAUViewClass
-						Contains the names of the classes that implements the required protocol for an AUView
+						Contains the names of the classes that implements the required protocol (AUCocoaUIBase). This class is a view factory that creates the NSView object that is the AudioUnit view.
 */
 typedef struct AudioUnitCocoaViewInfo {
 	CFURLRef	mCocoaAUViewBundleLocation;
@@ -1099,7 +1112,7 @@ struct MIDIPacketList;
 	@abstract		A callback used by an audio unit to provide MIDI data to a host application
 */
 typedef OSStatus
-(*AUMIDIOutputCallback)(void *							userData,
+(*AUMIDIOutputCallback)(void * __nullable				userData,
 						const AudioTimeStamp *			timeStamp,
 						UInt32							midiOutNum,
 						const struct MIDIPacketList *	pktlist);
@@ -1111,7 +1124,7 @@ typedef OSStatus
 */
 typedef struct AUMIDIOutputCallbackStruct {
 	AUMIDIOutputCallback	midiOutputCallback;
-	void*					userData;
+	void * __nullable		userData;
 } AUMIDIOutputCallbackStruct;
 
 /*!
@@ -1121,7 +1134,7 @@ typedef struct AUMIDIOutputCallbackStruct {
 */
 typedef struct AUInputSamplesInOutputCallbackStruct {
 	AUInputSamplesInOutputCallback		inputToOutputCallback;
-	void *								userData;
+	void * __nullable					userData;
 } AUInputSamplesInOutputCallbackStruct;
 
 
@@ -1203,7 +1216,7 @@ typedef struct AudioUnitParameterHistoryInfo
 	@constant		kAudioUnitParameterUnit_CustomUnit
 						this is the parameter unit type for parameters that present a custom unit name
 */
-enum
+typedef CF_ENUM(UInt32, AudioUnitParameterUnit)
 {
 	kAudioUnitParameterUnit_Generic				= 0,
 	kAudioUnitParameterUnit_Indexed				= 1,
@@ -1233,10 +1246,63 @@ enum
 	kAudioUnitParameterUnit_Ratio				= 25,
 	kAudioUnitParameterUnit_CustomUnit			= 26
 };
+
 /*!
-	@typedef		AudioUnitParameterUnit
+	@enum			AudioUnitParameterOptions
+	@discussion		Bit positions 18, 17, and 16 are set aside for display scales. Bit 19 is reserved.
+	@constant		kAudioUnitParameterFlag_CFNameRelease
+	@constant		kAudioUnitParameterFlag_PlotHistory
+	@constant		kAudioUnitParameterFlag_MeterReadOnly
+	@constant		kAudioUnitParameterFlag_DisplayMask
+	@constant		kAudioUnitParameterFlag_DisplaySquareRoot
+	@constant		kAudioUnitParameterFlag_DisplaySquared
+	@constant		kAudioUnitParameterFlag_DisplayCubed
+	@constant		kAudioUnitParameterFlag_DisplayCubeRoot
+	@constant		kAudioUnitParameterFlag_DisplayExponential
+	@constant		kAudioUnitParameterFlag_HasClump
+	@constant		kAudioUnitParameterFlag_ValuesHaveStrings
+	@constant		kAudioUnitParameterFlag_DisplayLogarithmic		
+	@constant		kAudioUnitParameterFlag_IsHighResolution
+	@constant		kAudioUnitParameterFlag_NonRealTime
+	@constant		kAudioUnitParameterFlag_CanRamp
+	@constant		kAudioUnitParameterFlag_ExpertMode
+	@constant		kAudioUnitParameterFlag_HasCFNameString
+	@constant		kAudioUnitParameterFlag_IsGlobalMeta
+	@constant		kAudioUnitParameterFlag_IsElementMeta
+	@constant		kAudioUnitParameterFlag_IsReadable
+	@constant		kAudioUnitParameterFlag_IsWritable
 */
-typedef UInt32		AudioUnitParameterUnit;
+typedef CF_OPTIONS(UInt32, AudioUnitParameterOptions)
+{
+	kAudioUnitParameterFlag_CFNameRelease		= (1UL << 4),
+
+	kAudioUnitParameterFlag_OmitFromPresets		= (1UL << 13),
+	kAudioUnitParameterFlag_PlotHistory			= (1UL << 14),
+	kAudioUnitParameterFlag_MeterReadOnly		= (1UL << 15),
+	
+	// bit positions 18,17,16 are set aside for display scales. bit 19 is reserved.
+	kAudioUnitParameterFlag_DisplayMask			= (7UL << 16) | (1UL << 22),
+	kAudioUnitParameterFlag_DisplaySquareRoot	= (1UL << 16),
+	kAudioUnitParameterFlag_DisplaySquared		= (2UL << 16),
+	kAudioUnitParameterFlag_DisplayCubed		= (3UL << 16),
+	kAudioUnitParameterFlag_DisplayCubeRoot		= (4UL << 16),
+	kAudioUnitParameterFlag_DisplayExponential	= (5UL << 16),
+
+	kAudioUnitParameterFlag_HasClump	 		= (1UL << 20),
+	kAudioUnitParameterFlag_ValuesHaveStrings	= (1UL << 21),
+	
+	kAudioUnitParameterFlag_DisplayLogarithmic 	= (1UL << 22),
+	
+	kAudioUnitParameterFlag_IsHighResolution 	= (1UL << 23),
+	kAudioUnitParameterFlag_NonRealTime 		= (1UL << 24),
+	kAudioUnitParameterFlag_CanRamp 			= (1UL << 25),
+	kAudioUnitParameterFlag_ExpertMode 			= (1UL << 26),
+	kAudioUnitParameterFlag_HasCFNameString 	= (1UL << 27),
+	kAudioUnitParameterFlag_IsGlobalMeta 		= (1UL << 28),
+	kAudioUnitParameterFlag_IsElementMeta		= (1UL << 29),
+	kAudioUnitParameterFlag_IsReadable			= (1UL << 30),
+	kAudioUnitParameterFlag_IsWritable			= (1UL << 31)
+};
 
 /*!
 	@struct			AudioUnitParameterInfo
@@ -1269,72 +1335,15 @@ typedef UInt32		AudioUnitParameterUnit;
 typedef struct AudioUnitParameterInfo
 {
 	char						name[52];
-	CFStringRef					unitName;
+	CFStringRef __nullable		unitName;
 	UInt32						clumpID;
-	CFStringRef					cfNameString;
-	AudioUnitParameterUnit		unit;						
-	AudioUnitParameterValue		minValue;			
-	AudioUnitParameterValue		maxValue;			
-	AudioUnitParameterValue		defaultValue;		
-	UInt32						flags;				
+	CFStringRef __nullable		cfNameString;
+	AudioUnitParameterUnit		unit;
+	AudioUnitParameterValue		minValue;
+	AudioUnitParameterValue		maxValue;
+	AudioUnitParameterValue		defaultValue;
+	AudioUnitParameterOptions	flags;
 } AudioUnitParameterInfo;
-
-/*!
-	@enum			Audio Unit Parameter Flags
-	@discussion		Bit positions 18, 17, and 16 are set aside for display scales. Bit 19 is reserved.
-	@constant		kAudioUnitParameterFlag_CFNameRelease
-	@constant		kAudioUnitParameterFlag_PlotHistory
-	@constant		kAudioUnitParameterFlag_MeterReadOnly
-	@constant		kAudioUnitParameterFlag_DisplayMask
-	@constant		kAudioUnitParameterFlag_DisplaySquareRoot
-	@constant		kAudioUnitParameterFlag_DisplaySquared
-	@constant		kAudioUnitParameterFlag_DisplayCubed
-	@constant		kAudioUnitParameterFlag_DisplayCubeRoot
-	@constant		kAudioUnitParameterFlag_DisplayExponential
-	@constant		kAudioUnitParameterFlag_HasClump
-	@constant		kAudioUnitParameterFlag_ValuesHaveStrings
-	@constant		kAudioUnitParameterFlag_DisplayLogarithmic		
-	@constant		kAudioUnitParameterFlag_IsHighResolution
-	@constant		kAudioUnitParameterFlag_NonRealTime
-	@constant		kAudioUnitParameterFlag_CanRamp
-	@constant		kAudioUnitParameterFlag_ExpertMode
-	@constant		kAudioUnitParameterFlag_HasCFNameString
-	@constant		kAudioUnitParameterFlag_IsGlobalMeta
-	@constant		kAudioUnitParameterFlag_IsElementMeta
-	@constant		kAudioUnitParameterFlag_IsReadable
-	@constant		kAudioUnitParameterFlag_IsWritable
-*/
-enum
-{
-	kAudioUnitParameterFlag_CFNameRelease		= (1L << 4),
-
-	kAudioUnitParameterFlag_OmitFromPresets		= (1L << 13),
-	kAudioUnitParameterFlag_PlotHistory			= (1L << 14),
-	kAudioUnitParameterFlag_MeterReadOnly		= (1L << 15),
-	
-	// bit positions 18,17,16 are set aside for display scales. bit 19 is reserved.
-	kAudioUnitParameterFlag_DisplayMask			= (7L << 16) | (1L << 22),
-	kAudioUnitParameterFlag_DisplaySquareRoot	= (1L << 16),
-	kAudioUnitParameterFlag_DisplaySquared		= (2L << 16),
-	kAudioUnitParameterFlag_DisplayCubed		= (3L << 16),
-	kAudioUnitParameterFlag_DisplayCubeRoot		= (4L << 16),
-	kAudioUnitParameterFlag_DisplayExponential	= (5L << 16),
-
-	kAudioUnitParameterFlag_HasClump	 		= (1L << 20),
-	kAudioUnitParameterFlag_ValuesHaveStrings	= (1L << 21),
-	
-	kAudioUnitParameterFlag_DisplayLogarithmic 	= (1L << 22),		
-	
-	kAudioUnitParameterFlag_IsHighResolution 	= (1L << 23),
-	kAudioUnitParameterFlag_NonRealTime 		= (1L << 24),
-	kAudioUnitParameterFlag_CanRamp 			= (1L << 25),
-	kAudioUnitParameterFlag_ExpertMode 			= (1L << 26),
-	kAudioUnitParameterFlag_HasCFNameString 	= (1L << 27),
-	kAudioUnitParameterFlag_IsGlobalMeta 		= (1L << 28),
-	kAudioUnitParameterFlag_IsElementMeta		= (1L << 29),
-	kAudioUnitParameterFlag_IsReadable			= (1L << 30),
-	kAudioUnitParameterFlag_IsWritable			= (1L << 31)
-};
 
 /*!
 	@enum			Audio Unit Clump ID
@@ -1344,9 +1353,29 @@ enum {
 	kAudioUnitClumpID_System = 0
 };
 
+#ifdef CF_INLINE
+
+CF_INLINE AudioUnitParameterOptions GetAudioUnitParameterDisplayType(AudioUnitParameterOptions flags)
+{
+	return flags & kAudioUnitParameterFlag_DisplayMask;
+}
+
+CF_INLINE AudioUnitParameterOptions SetAudioUnitParameterDisplayType(AudioUnitParameterOptions flags, AudioUnitParameterOptions displayType)
+{
+	return (flags & ~kAudioUnitParameterFlag_DisplayMask) | displayType;
+}
+
+#else
+
 /*! @define GetAudioUnitParameterDisplayType */
 #define GetAudioUnitParameterDisplayType(flags) \
 	((flags) & kAudioUnitParameterFlag_DisplayMask)
+
+/*! @define SetAudioUnitParameterDisplayType */
+#define SetAudioUnitParameterDisplayType(flags, displayType) \
+	(((flags) & ~kAudioUnitParameterFlag_DisplayMask) | (displayType))
+
+#endif // CF_INLINE
 
 /*! @define AudioUnitDisplayTypeIsLogarithmic */
 #define AudioUnitDisplayTypeIsLogarithmic(flags) \
@@ -1372,18 +1401,13 @@ enum {
 #define AudioUnitDisplayTypeIsExponential(flags) \
 	(GetAudioUnitParameterDisplayType(flags) == kAudioUnitParameterFlag_DisplayExponential)
 
-/*! @define SetAudioUnitParameterDisplayType */
-#define SetAudioUnitParameterDisplayType(flags, displayType) \
-	(((flags) & ~kAudioUnitParameterFlag_DisplayMask) | (displayType))
-
-
 /*
 	The following properties are used with display names
 */
 
 /*!
 	@enum			Audio Unit Parameter Full Name
-	@discussion		Used with the AudioUnitParameterNameInfo.inDesiredLength field to indicate the full name
+	@discussion		Used with the AudioUnitParameterIDName.inDesiredLength field to indicate the full name
 					of the requested parameter.
 */
 enum {
@@ -1397,7 +1421,7 @@ enum {
 typedef struct AudioUnitParameterNameInfo {
 	AudioUnitParameterID	inID;
 	SInt32					inDesiredLength;
-	CFStringRef				outName;
+	CFStringRef __nullable	outName;
 } AudioUnitParameterIDName;
 
 /*!
@@ -1407,7 +1431,7 @@ typedef struct AudioUnitParameterNameInfo {
 typedef struct AudioUnitParameterStringFromValue {
 	AudioUnitParameterID				inParamID;
 	const AudioUnitParameterValue *		inValue;	
-	CFStringRef							outString;  	
+	CFStringRef __nullable				outString;
 } AudioUnitParameterStringFromValue;
 
 /*!
@@ -1426,7 +1450,7 @@ typedef struct AudioUnitParameterValueFromString {
 #pragma mark - Configuration Info Keys
 
 //	These strings are used as keys to the dictionary of configuration info returned by
-//	AudioComponentGetConfiguationInfo(). Informaton about them is presented inline with the
+//	AudioComponentGetConfigurationInfo(). Information about them is presented inline with the
 //	declaration.
 
 /*!
@@ -1468,6 +1492,23 @@ typedef struct AudioUnitParameterValueFromString {
  */
 #define kAudioUnitConfigurationInfo_IconURL			"IconURL"
 
+/*!
+ @define		kAudioUnitConfigurationInfo_BusCountWritable
+ @discussion	An array of booleans whose size is three representing Global, Input and Output scope
+				in the order it is defined in CoreAudioTypes.h. Each value represents whether the bus
+				count is writable for the specified scope.
+ */
+#define kAudioUnitConfigurationInfo_BusCountWritable	"BusCountWritable"
+
+/*!
+ @define		kAudioUnitConfigurationInfo_SupportedChannelLayoutTags
+ @discussion	A dictionary that contains two arrays one for input scope and output scope. Each array
+				of numbers whose size is equal to number of supported channel layout tags supported for the scope
+				by the AU. Each number in the array represents the channel layout tag.
+ */
+
+#define kAudioUnitConfigurationInfo_SupportedChannelLayoutTags	"SupportedChannelLayoutTags"
+
 //=====================================================================================================================
 #pragma mark - Output Unit
 /*!
@@ -1478,13 +1519,13 @@ typedef struct AudioUnitParameterValueFromString {
 						Value Type:
 						Access:
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 // range  (2000 -> 2999)
 	kAudioOutputUnitProperty_IsRunning				= 2001
 };
 
 #pragma mark -
-#pragma mark Desktop Availability
+#pragma mark OS X Availability
 
 
 //=====================================================================================================================
@@ -1609,7 +1650,7 @@ enum {
 						At all times, the _AllMappings property will completely describe the current known state of an 
 						audio unit's mappings of MIDI messages to parameters.		
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_AllParameterMIDIMappings		= 41,
 	kAudioUnitProperty_AddParameterMIDIMapping		= 42,
 	kAudioUnitProperty_RemoveParameterMIDIMapping   = 43,
@@ -1656,7 +1697,7 @@ enum {
 						of the associated MIDI controller. Only valid  if the  kAUParameterMIDIMapping_Bipolar 
 						property is set.
 */
-enum {
+typedef CF_OPTIONS(UInt32, AUParameterMIDIMappingFlags) {
 	kAUParameterMIDIMapping_AnyChannelFlag		= (1L << 0),
 	kAUParameterMIDIMapping_AnyNoteFlag			= (1L << 1),
 	kAUParameterMIDIMapping_SubRange			= (1L << 2),
@@ -1677,7 +1718,7 @@ typedef struct AUParameterMIDIMapping
 	AudioUnitScope				mScope;
 	AudioUnitElement			mElement;
 	AudioUnitParameterID		mParameterID;
-	UInt32						mFlags;
+	AUParameterMIDIMappingFlags	mFlags;
 	AudioUnitParameterValue		mSubRangeMin;
 	AudioUnitParameterValue		mSubRangeMax;
 	UInt8						mStatus;
@@ -1759,7 +1800,7 @@ typedef struct AUParameterMIDIMapping
 						this property on a pre-10.5 system.
 						
 */	
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 // range  (1000 -> 1999)
 	kMusicDeviceProperty_MIDIXMLNames				= 1006,
 	kMusicDeviceProperty_PartGroup					= 1010,
@@ -1839,7 +1880,7 @@ enum {
 						the unit give its host application a name to describe the preflight 
 						operations.
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 // range (3020->3040)
 	kAudioUnitOfflineProperty_InputSize				= 3020,
 	kAudioUnitOfflineProperty_OutputSize			= 3021,
@@ -1872,14 +1913,16 @@ enum {
     @enum           Panner Unit Properties
     @abstract       The collection of properties for panner units
 	@constant		kAudioUnitProperty_DistanceAttenuationData
-	@discussion			Scope:			Global
+	@discussion		This property is deprecated.
+						Scope:			Global
 						Value Type:		AUDistanceAttenuationData
 						Access:			Read
+ 
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 // range (3060->3999)
 	kAudioUnitProperty_DistanceAttenuationData      = 3600
-};
+} __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@struct			AUDistanceAttenuationData
@@ -1891,7 +1934,7 @@ typedef struct AUDistanceAttenuationData
 		Float32	inDistance;	// 0-1000
 		Float32 outGain;	// 0-1
 	} pairs[1]; // this is a variable length array of inNumberOfPairs elements
-} AUDistanceAttenuationData;
+} AUDistanceAttenuationData __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 
 //=====================================================================================================================
@@ -1926,7 +1969,7 @@ typedef struct AUDistanceAttenuationData
 						Value Type:
 						Access:
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 // range (4000->4020)
  	kAudioUnitMigrateProperty_FromPlugin			= 4000,
 	kAudioUnitMigrateProperty_OldAutomation			= 4001
@@ -1935,7 +1978,7 @@ enum {
 /*!
 	@enum			Other Plug-in Formats
 */
-enum {
+CF_ENUM(UInt32) {
 	kOtherPluginFormat_Undefined	= 0, //reserving this value for future use
 	kOtherPluginFormat_kMAS			= 1,
 	kOtherPluginFormat_kVST			= 2,
@@ -2025,7 +2068,7 @@ typedef struct AudioUnitPresetMAS_Settings
 						Value Type:		UInt32
 						Access:			read/write
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_SampleRateConverterComplexity	= 3014
 };
 
@@ -2037,7 +2080,7 @@ enum {
 	@constant		kAudioUnitSampleRateConverterComplexity_Mastering
 	@discussion			Mastering quality sample rate conversion. More expensive.
 */
-enum {
+CF_ENUM(UInt32) {
 	kAudioUnitSampleRateConverterComplexity_Linear				= 'line',	// linear interpolation
 	kAudioUnitSampleRateConverterComplexity_Normal				= 'norm',	// the default
 	kAudioUnitSampleRateConverterComplexity_Mastering			= 'bats'	// higher quality, more expensive
@@ -2051,7 +2094,7 @@ enum {
 	
 	@constant		kAudioOutputUnitProperty_CurrentDevice
 	@discussion			Scope:			Global
-						Value Type:		AudioDeviceID
+						Value Type:		AudioObjectID
 						Access:			read/write
 						
 						The audio device being used (or to be used) by and output device unit
@@ -2115,7 +2158,7 @@ enum {
 							This property also applies to AUConverter. Its value defaults to 1 for AUHAL;
 							1 for other AUs.
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioOutputUnitProperty_CurrentDevice			= 2000,
 	kAudioOutputUnitProperty_ChannelMap				= 2002, // this will also work with AUConverter
 	kAudioOutputUnitProperty_EnableIO				= 2003,
@@ -2162,7 +2205,7 @@ typedef struct AudioOutputUnitStartAtTimeParams {
 							Mutes the output of the voice processing unit. 
 							0 (default) = muting off. 1 = mute output.  
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAUVoiceIOProperty_BypassVoiceProcessing		= 2100,
 	kAUVoiceIOProperty_VoiceProcessingEnableAGC		= 2101,
 	kAUVoiceIOProperty_MuteOutput					= 2104 
@@ -2171,23 +2214,10 @@ enum {
 
 
 #pragma mark - AUVoiceProcessing unit deprecated properties
+
+
 /*!
  @enum           Apple Voice Processing Property IDs that are being deprecated
- @abstract       The collection of property IDs for Apple voice processing units that are
- 				 being deprecated.
- 
- @constant		kAUVoiceIOProperty_DuckNonVoiceAudio
- @discussion			Scope: Global
-                        Value Type: UInt32
-                        Access: read/write
-                 DEPRECATED. iOS only.  Enable ducking of the non voice audio signal. Since
-                 music signals are typically louder than voice, ducking the music signal 
-                 can increase the intelligibility of voice chats. Note that the amount of
-                 ducking is dependent on the audio route. Set to 0 to turn off or 1 to 
-                 turn on. On by default. Deprecation note: What is being deprecated is the
-                 ability to turn off this feature via this property. In the future, ducking
-                 will always be on.
-
  @constant		kAUVoiceIOProperty_VoiceProcessingQuality
  @discussion		Scope: Global
                     Value Type: UInt32
@@ -2195,10 +2225,9 @@ enum {
                 DEPRECATED. Sets the quality of the voice processing unit. Quality values
                 are comprised between 0 (lowest) and 127 (highest).
  */
-enum {
-	kAUVoiceIOProperty_VoiceProcessingQuality		= 2103, // deprecated
-
-};
+CF_ENUM(AudioUnitPropertyID) {
+	kAUVoiceIOProperty_VoiceProcessingQuality		= 2103
+} __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_10_9, __IPHONE_3_0, __IPHONE_7_0);
 
 //=====================================================================================================================
 #pragma mark - AUNBandEQ unit
@@ -2227,7 +2256,7 @@ enum {
 							Returns an array of Float64 values, 5 per band.
 */
 
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAUNBandEQProperty_NumberOfBands			= 2200,
 	kAUNBandEQProperty_MaxNumberOfBands			= 2201,
 	kAUNBandEQProperty_BiquadCoefficients		= 2203
@@ -2242,9 +2271,7 @@ enum {
                This error indicates that an unexpected number of input channels was encountered during initialization of voice processing audio unit
 
 */
-
-enum {
-    
+CF_ENUM(OSStatus) {
     kAUVoiceIOErr_UnexpectedNumberOfInputChannels     = -66784,
 };
 
@@ -2305,7 +2332,7 @@ enum {
 						A mixer returns an AudioUnitMeterClipping structure.
 
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	// General mixers
 	kAudioUnitProperty_MeteringMode					= 3007,
 	
@@ -2372,7 +2399,7 @@ typedef struct AudioUnitMeterClipping
 						Value Type:		MixerDistanceParams
 						Access:			Read / Write
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_ReverbRoomType				= 10,
 	kAudioUnitProperty_UsesInternalReverb			= 1005,
 	kAudioUnitProperty_SpatializationAlgorithm		= 3000,
@@ -2384,7 +2411,7 @@ enum {
 /*!
 	@enum 	Spatialization Algorithms
 */
-enum {
+typedef CF_ENUM(UInt32, AUSpatializationAlgorithm) {
 	kSpatializationAlgorithm_EqualPowerPanning 		= 0,
 	kSpatializationAlgorithm_SphericalHead 			= 1,
 	kSpatializationAlgorithm_HRTF			 		= 2,
@@ -2398,7 +2425,7 @@ enum {
 	@discussion Used to specify room type (as identified by a factory preset number) on Apple audio 
 				units that use internal reverb.
 */
-enum {
+typedef CF_ENUM(UInt32, AUReverbRoomType) {
 	kReverbRoomType_SmallRoom		= 0,
 	kReverbRoomType_MediumRoom		= 1,
 	kReverbRoomType_LargeRoom		= 2,
@@ -2417,7 +2444,7 @@ enum {
 /*!
 	@enum AUSpatialMixer Attenuation Curves
 */
-enum {
+typedef CF_ENUM(UInt32, AUSpatialMixerAttenuationCurve) {
 	kSpatialMixerAttenuationCurve_Power					= 0,
     kSpatialMixerAttenuationCurve_Exponential			= 1,
     kSpatialMixerAttenuationCurve_Inverse				= 2,
@@ -2436,7 +2463,7 @@ typedef struct MixerDistanceParams {
 /*!
 	@enum	AUSpatial Mixer Rendering Flags
 */
-enum {
+typedef CF_OPTIONS(UInt32, AUSpatialMixerRenderingFlags) {
 	kSpatialMixerRenderingFlags_InterAuralDelay			= (1L << 0),
 	kSpatialMixerRenderingFlags_DistanceAttenuation		= (1L << 2),
 };
@@ -2490,19 +2517,19 @@ enum {
 						Value Type:
 						Access:
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_3DMixerDistanceParams		= 3010,
 	kAudioUnitProperty_3DMixerAttenuationCurve		= 3013,
 	kAudioUnitProperty_DopplerShift					= 3002,
 	kAudioUnitProperty_3DMixerRenderingFlags		= 3003,
 	kAudioUnitProperty_3DMixerDistanceAtten			= 3004,
 	kAudioUnitProperty_ReverbPreset					= 3012
-};
+} __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_10_11, __IPHONE_3_0, __IPHONE_9_0);
 
 /*!
 	@enum	3D Mixer Rendering Flags
 */
-enum {
+typedef CF_OPTIONS(UInt32, AU3DMixerRenderingFlags) {
 	k3DMixerRenderingFlags_InterAuralDelay			= (1L << 0),
 	k3DMixerRenderingFlags_DopplerShift				= (1L << 1),
 	k3DMixerRenderingFlags_DistanceAttenuation		= (1L << 2),
@@ -2515,7 +2542,7 @@ enum {
 /*!
 	@enum 3D Mixer Attenuation Curves
 */
-enum {
+typedef CF_ENUM(UInt32, AU3DMixerAttenuationCurve) {
 	k3DMixerAttenuationCurve_Power					= 0,
     k3DMixerAttenuationCurve_Exponential			= 1,
     k3DMixerAttenuationCurve_Inverse				= 2,
@@ -2632,7 +2659,7 @@ enum {
                         Access:
                             AudioTimeStamp, relative to start time, sample time of -1 if not yet started.
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_ScheduleAudioSlice			= 3300,
 	kAudioUnitProperty_ScheduleStartTimeStamp		= 3301,
 	kAudioUnitProperty_CurrentPlayTime				= 3302
@@ -2659,7 +2686,7 @@ enum {
                         but only at a loop point in that buffer.
 
 */
-enum {
+typedef CF_OPTIONS(UInt32, AUScheduledAudioSliceFlags) {
     kScheduledAudioSliceFlag_Complete               = 0x01,
     kScheduledAudioSliceFlag_BeganToRender          = 0x02,
     kScheduledAudioSliceFlag_BeganToRenderLate      = 0x04,
@@ -2673,9 +2700,8 @@ typedef struct ScheduledAudioSlice ScheduledAudioSlice; // forward dec, see defi
 /*!
 	@typedef			ScheduledAudioSliceCompletionProc
 */
-typedef void (*ScheduledAudioSliceCompletionProc)(void *userData, 
-				ScheduledAudioSlice *bufferList);
-				
+typedef void (*ScheduledAudioSliceCompletionProc)(void * __nullable userData, ScheduledAudioSlice *bufferList);
+
 /*
 	@struct				ScheduledAudioSlice
 	@field				mTimeStamp
@@ -2693,14 +2719,14 @@ typedef void (*ScheduledAudioSliceCompletionProc)(void *userData,
 							Must contain deinterleaved Float32
 */
 struct ScheduledAudioSlice {
-	AudioTimeStamp			mTimeStamp;
-	ScheduledAudioSliceCompletionProc  mCompletionProc;	// may be null
-	void *					mCompletionProcUserData;
-	UInt32					mFlags;
-	UInt32					mReserved;		// must be 0
-	void *					mReserved2;		// for internal use
-	UInt32					mNumberFrames;  // must be consistent with byte count of mBufferList
-	AudioBufferList *		mBufferList;	// must contain deinterleaved Float32
+	AudioTimeStamp									mTimeStamp;
+	ScheduledAudioSliceCompletionProc __nullable	mCompletionProc;
+	void *											mCompletionProcUserData;
+	AUScheduledAudioSliceFlags						mFlags;
+	UInt32											mReserved;		// must be 0
+	void *	__nullable								mReserved2;		// for internal use
+	UInt32											mNumberFrames;  // must be consistent with byte count of mBufferList
+	AudioBufferList *								mBufferList;	// must contain deinterleaved Float32
 };
 
 //=====================================================================================================================
@@ -2828,7 +2854,7 @@ struct ScheduledAudioSlice {
 						Value Type: UInt32
 						Access:
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_ScheduledFileIDs				= 3310,
 	kAudioUnitProperty_ScheduledFileRegion			= 3311,
 	kAudioUnitProperty_ScheduledFilePrime			= 3312,
@@ -2840,7 +2866,7 @@ typedef struct ScheduledAudioFileRegion ScheduledAudioFileRegion; //forward decl
 /*!
 	@typedef		ScheduledAudioFileRegionCompletionProc
 */
-typedef void (*ScheduledAudioFileRegionCompletionProc)(void *userData, 
+typedef void (*ScheduledAudioFileRegionCompletionProc)(void * __nullable userData,
 				ScheduledAudioFileRegion *fileRegion, OSStatus result);
 
 /*!
@@ -2861,21 +2887,21 @@ typedef void (*ScheduledAudioFileRegionCompletionProc)(void *userData,
 	
 */
 struct ScheduledAudioFileRegion {
-	AudioTimeStamp				mTimeStamp;
-	ScheduledAudioFileRegionCompletionProc  mCompletionProc;
-	void *						mCompletionProcUserData;
-	struct OpaqueAudioFileID *	mAudioFile;
-	UInt32						mLoopCount;
-	SInt64						mStartFrame;
-	UInt32						mFramesToPlay;
+	AudioTimeStamp										mTimeStamp;
+	ScheduledAudioFileRegionCompletionProc __nullable	mCompletionProc;
+	void * __nullable									mCompletionProcUserData;
+	struct OpaqueAudioFileID *							mAudioFile;
+	UInt32												mLoopCount;
+	SInt64												mStartFrame;
+	UInt32												mFramesToPlay;
 };
 
 
 //=====================================================================================================================
-#pragma mark - Desktop-specific Music Device Properties used by DLSMusicDevice
+#pragma mark - OS X-specific Music Device Properties used by DLSMusicDevice
 /*!
  @enum			Property IDs
- @abstract       Desktop-only audio unit property IDs used by the DLSMusicDevice
+ @abstract       OS X-only audio unit property IDs used by the DLSMusicDevice
  
  @constant		kMusicDeviceProperty_SoundBankData
  @discussion			Scope:
@@ -2894,7 +2920,7 @@ struct ScheduledAudioFileRegion {
  
  */
 
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kMusicDeviceProperty_UsesInternalReverb			= kAudioUnitProperty_UsesInternalReverb,
 	kMusicDeviceProperty_SoundBankData				= 1008,
 	kMusicDeviceProperty_StreamFromDisk				= 1011,
@@ -2920,7 +2946,7 @@ enum {
 						Access:				Read
  */
 
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kMusicDeviceProperty_InstrumentName				= 1001,
 	kMusicDeviceProperty_InstrumentNumber 			= 1004
 };
@@ -2951,10 +2977,14 @@ enum {
 	@constant		kMusicDeviceProperty_SoundBankURL
 	@discussion			Scope:				Global
 						Value Type:			CFURLRef
-						Access:				Read
+						Access:				Read (Read/Write for AUMIDISynth)
+						
+					For DLSMusicDevice, this is a read-only property to return the URL for the currently-loaded bank file.
+					For AUMIDISynth it is also writeable, and is used to specify the URL for the sound bank to load and use 
+					for playback.
  */
 
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kMusicDeviceProperty_InstrumentCount 			= 1000,
 	kMusicDeviceProperty_BankName					= 1007,
 	kMusicDeviceProperty_SoundBankURL				= 1100
@@ -2980,7 +3010,7 @@ enum {
 					and must be set back to 0 before attempting to start playback.
  */
 
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAUMIDISynthProperty_EnablePreload				= 4119
 };
 
@@ -3007,7 +3037,7 @@ enum {
 							Create a new preset from a list of audio file paths.  The CFArray should contain a set
 							of CFURLRefs, one per file.  The previous preset will be completely cleared.
  */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	// range (4100->4999)
 	kAUSamplerProperty_LoadInstrument				= 4102,
 	kAUSamplerProperty_LoadAudioFiles				= 4101
@@ -3139,7 +3169,7 @@ enum
 						Value Type: UInt32
 						Access:
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_DeferredRendererPullSize		= 3320,
 	kAudioUnitProperty_DeferredRendererExtraLatency	= 3321,
 	kAudioUnitProperty_DeferredRendererWaitFrames   = 3322
@@ -3167,7 +3197,7 @@ enum {
 						The password to send to the sender. Leave unset or set to the empty string for no password.
 						For GetProperty, the returned CFStringRef is a copy and therefore must be released by the caller.
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAUNetReceiveProperty_Hostname                  = 3511,
 	kAUNetReceiveProperty_Password                  = 3512
 };
@@ -3221,7 +3251,7 @@ enum {
 						For GetProperty, the returned CFStringRef is a copy and therefore must be released by the caller.
 
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAUNetSendProperty_PortNum                      = 3513,
 	kAUNetSendProperty_TransmissionFormat           = 3514,
 	kAUNetSendProperty_TransmissionFormatIndex      = 3515,
@@ -3262,7 +3292,7 @@ enum {
 	@discussion			32 kilobits per second per channel
 	@constant		kAUNetSendNumPresetFormats = 14
 */
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAUNetSendPresetFormat_PCMFloat32		= 0,
 	kAUNetSendPresetFormat_PCMInt24			= 1,
 	kAUNetSendPresetFormat_PCMInt16			= 2,
@@ -3318,8 +3348,6 @@ typedef struct AUHostIdentifier {
 	AUNumVersion		hostVersion;
 } AUHostIdentifier;
 
-
-// $$$ THESE NEED TO BE REMOVED FROM 64bit apps
 //=====================================================================================================================
 // GENERIC
 enum {
@@ -3333,7 +3361,7 @@ enum {
 	kAudioUnitParameterFlag_HasName				= kAudioUnitParameterFlag_ValuesHaveStrings
 };
 
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	//kAudioUnitProperty_SetInputCallback		= 7 -> deprecated
 	kAudioUnitProperty_SRCAlgorithm				= 9, // see kAudioUnitProperty_SampleRateConverterComplexity
 	kAudioUnitProperty_MIDIControlMapping		= 17, // see ParameterMIDIMapping Properties
@@ -3346,7 +3374,7 @@ enum {
 	kAudioOfflineUnitProperty_OutputSize		= kAudioUnitOfflineProperty_OutputSize
 };
 
-enum {
+CF_ENUM(UInt32) {
 	kAudioUnitSRCAlgorithm_Polyphase			= 'poly',	// same as kAudioUnitSampleRateConverterComplexity_Normal
 	kAudioUnitSRCAlgorithm_MediumQuality		= 'csrc'	// same as kAudioUnitSampleRateConverterComplexity_Normal
 };
@@ -3364,28 +3392,26 @@ typedef struct AudioUnitMIDIControlMapping
 
 // Deprecated. See AudioUnitParameterStringFromValue for equivalent structure, but with clearer field names
 typedef struct AudioUnitParameterValueName {
-	AudioUnitParameterID	inParamID;
-	const Float32			*inValue;	// may be NULL if should translate current parameter value
-	CFStringRef				outName;  	// see comments for kAudioUnitProperty_ParameterStringFromValue
+	AudioUnitParameterID		inParamID;
+	const Float32 * __nonnull	inValue;	// may be NULL if should translate current parameter value
+	CFStringRef					outName;  	// see comments for kAudioUnitProperty_ParameterStringFromValue
 } AudioUnitParameterValueName;
 
 
 //=====================================================================================================================
 // Deprecated. These properties are Apple specific.
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kMusicDeviceProperty_GroupOutputBus				= 1002,
 	kMusicDeviceProperty_SoundBankFSSpec			= 1003,
 	kAudioUnitProperty_PannerMode					= 3008
 };
 
-///$$$ THESE NEED TO BE EXCLUDED FROM 64BIT $$$
-
-enum {
+CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_SpeakerConfiguration			= 3001
 };
 
-	// Deprecated in favor of the newer AudioChannelLayout
-	// structure and its supporting property.
+// Deprecated in favor of the newer AudioChannelLayout
+// structure and its supporting property.
 enum {
 	kSpeakerConfiguration_HeadPhones		 		= 0,
 	kSpeakerConfiguration_Stereo			 		= 1,
@@ -3406,10 +3432,11 @@ typedef struct AUSamplerBankPresetData {
 	UInt8					reserved;
 } AUSamplerBankPresetData;
 
-enum
-{
+CF_ENUM(AudioUnitPropertyID) {
 	kAUSamplerProperty_LoadPresetFromBank			= 4100,
 	kAUSamplerProperty_BankAndPreset				= kAUSamplerProperty_LoadPresetFromBank
 };
 
-#endif // __AudioUnitProperties
+CF_ASSUME_NONNULL_END
+
+#endif // AudioUnit_AudioUnitProperties_h

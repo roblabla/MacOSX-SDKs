@@ -1,7 +1,7 @@
 //
 //  SCNNode.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -10,11 +10,14 @@
 #import <SceneKit/SCNBoundingVolume.h>
 #import <SceneKit/SCNAction.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class SCNLight;
 @class SCNCamera;
 @class SCNGeometry;
 @class SCNSkinner;
 @class SCNMorpher;
+@class SCNConstraint;
 @class SCNPhysicsBody;
 @class SCNPhysicsField;
 @class SCNPhysicsBody;
@@ -40,12 +43,8 @@ SCN_EXTERN NSString * const SCNModelViewProjectionTransform;
 		     The coordinate systems of all the sub-nodes are relative to the one of their parent node.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNNode : NSObject <NSCopying, NSSecureCoding, SCNAnimatable, SCNActionable, SCNBoundingVolume>
-{
-@private
-	id _reserved;
-}
 
 #pragma mark - Creating a Node
 
@@ -60,7 +59,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Creates and initializes a node instance with the specified geometry attached.
  @param geometry The geometry to attach.
  */
-+ (SCNNode *)nodeWithGeometry:(SCNGeometry *)geometry;
++ (SCNNode *)nodeWithGeometry:(nullable SCNGeometry *)geometry;
 
 
 
@@ -74,14 +73,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  if you want, for example, to change the materials of the copy independently of the original object, you'll
  have to copy the geometry of the node separately.
  */
-- (id)clone;
+- (instancetype)clone;
 
 /*
  @method flattenedClone
  @abstract Returns a clone of the node containing a geometry that concatenates all the geometries contained in the node hierarchy.
  The returned clone is autoreleased.
  */
-- (SCNNode *)flattenedClone SCENEKIT_AVAILABLE(10_9, 8_0);
+- (instancetype)flattenedClone NS_AVAILABLE(10_9, 8_0);
 
 
 
@@ -91,38 +90,38 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @property name
  @abstract Determines the name of the receiver.
  */
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy, nullable) NSString *name;
 
 /*!
  @property light
  @abstract Determines the light attached to the receiver.
  */
-@property(nonatomic, retain) SCNLight *light;
+@property(nonatomic, retain, nullable) SCNLight *light;
 
 /*!
  @property camera
  @abstract Determines the camera attached to the receiver.
  */
 
-@property(nonatomic, retain) SCNCamera *camera;
+@property(nonatomic, retain, nullable) SCNCamera *camera;
 
 /*!
  @property geometry
  @abstract Returns the geometry attached to the receiver.
  */
-@property(nonatomic, retain) SCNGeometry *geometry;
+@property(nonatomic, retain, nullable) SCNGeometry *geometry;
 
 /*!
  @property skinner
  @abstract Returns the skinner attached to the receiver.
  */
-@property(nonatomic, retain) SCNSkinner *skinner SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic, retain, nullable) SCNSkinner *skinner NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @property morpher
  @abstract Returns the morpher attached to the receiver.
  */
-@property(nonatomic, retain) SCNMorpher *morpher SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic, retain, nullable) SCNMorpher *morpher NS_AVAILABLE(10_9, 8_0);
 
 
 
@@ -152,14 +151,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @property orientation
  @abstract Determines the receiver's orientation as a unit quaternion. Animatable.
  */
-@property(nonatomic) SCNQuaternion orientation SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) SCNQuaternion orientation NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property eulerAngles
  @abstract Determines the receiver's euler angles. Animatable.
- @dicussion Specify the intrinsic euler angles (in radians) in the following order: z, y, x (or roll, yaw, pitch).
+ @dicussion Specify the intrinsic euler angles (in radians). It represents a sequence of 3 rotations about the x, y, and z axis with the following order: z, y, x (or roll, yaw, pitch).
  */
-@property(nonatomic) SCNVector3 eulerAngles SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) SCNVector3 eulerAngles NS_AVAILABLE(10_10, 8_0);
 
 /*! 
  @property scale
@@ -207,7 +206,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @property castsShadow
  @abstract Determines if the node is rendered in shadow maps. Defaults to YES.
  */
-@property(nonatomic) BOOL castsShadow SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) BOOL castsShadow NS_AVAILABLE(10_10, 8_0);
 
 
 #pragma mark - Managing the Node Hierarchy
@@ -216,13 +215,13 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @property parentNode
  @abstract Returns the parent node of the receiver.
  */
-@property(nonatomic, readonly) SCNNode *parentNode;
+@property(nonatomic, readonly, nullable) SCNNode *parentNode;
 
 /*! 
  @property childNodes
  @abstract Returns the child node array of the receiver.
  */
-@property(nonatomic, readonly) NSArray *childNodes;
+@property(nonatomic, readonly) NSArray<SCNNode *> *childNodes;
 
 /*!
  @method addChildNode:
@@ -265,7 +264,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param name The name of the node you are searching for.
  @param recursively Set to YES if you want the search to look through the sub-nodes recursively.
  */
-- (SCNNode *)childNodeWithName:(NSString *)name recursively:(BOOL)recursively;
+- (nullable SCNNode *)childNodeWithName:(NSString *)name recursively:(BOOL)recursively;
 
 /*!
  @method childNodesPassingTest:
@@ -273,7 +272,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @discussion The search is recursive and uses a pre-order tree traversal.
  @param predicate The block to apply to child nodes of the receiver. The block takes two arguments: "child" is a child node and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block. The Block returns a Boolean value that indicates whether "child" passed the test.
  */
-- (NSArray *)childNodesPassingTest:(BOOL (^)(SCNNode * child, BOOL *stop))predicate;
+- (NSArray<SCNNode *> *)childNodesPassingTest:(BOOL (^)(SCNNode *child, BOOL *stop))predicate;
 
 /*!
  @method enumerateChildNodesUsingBlock:
@@ -281,7 +280,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @discussion The search is recursive and uses a pre-order tree traversal.
  @param block The block to apply to child nodes of the receiver. The block takes two arguments: "child" is a child node and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block.
  */
-- (void)enumerateChildNodesUsingBlock:(void (^)(SCNNode *child, BOOL *stop))block SCENEKIT_AVAILABLE(10_10, 8_0);
+- (void)enumerateChildNodesUsingBlock:(void (^)(SCNNode *child, BOOL *stop))block NS_AVAILABLE(10_10, 8_0);
 
 
 #pragma mark - Converting Between Node Coordinate Systems
@@ -292,7 +291,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param position A position specified in the local coordinate system of the receiver.
  @param node The node into whose coordinate system "position" is to be converted. If "node" is nil, this method instead converts to world coordinates.
  */
-- (SCNVector3)convertPosition:(SCNVector3)position toNode:(SCNNode *)node SCENEKIT_AVAILABLE(10_9, 8_0);
+- (SCNVector3)convertPosition:(SCNVector3)position toNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @method convertPosition:fromNode:
@@ -300,7 +299,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param position A position specified in the local coordinate system of "node".
  @param node The node from whose coordinate system "position" is to be converted. If "node" is nil, this method instead converts from world coordinates.
  */
-- (SCNVector3)convertPosition:(SCNVector3)position fromNode:(SCNNode *)node SCENEKIT_AVAILABLE(10_9, 8_0);
+- (SCNVector3)convertPosition:(SCNVector3)position fromNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @method convertTransform:toNode:
@@ -308,7 +307,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param transform A transform specified in the local coordinate system of the receiver.
  @param node The node into whose coordinate system "transform" is to be converted. If "node" is nil, this method instead converts to world coordinates.
  */
-- (SCNMatrix4)convertTransform:(SCNMatrix4)transform toNode:(SCNNode *)node SCENEKIT_AVAILABLE(10_9, 8_0);
+- (SCNMatrix4)convertTransform:(SCNMatrix4)transform toNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @method convertTransform:fromNode:
@@ -316,7 +315,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param transform A transform specified in the local coordinate system of "node".
  @param node The node from whose coordinate system "transform" is to be converted. If "node" is nil, this method instead converts from world coordinates.
  */
-- (SCNMatrix4)convertTransform:(SCNMatrix4)transform fromNode:(SCNNode *)node SCENEKIT_AVAILABLE(10_9, 8_0);
+- (SCNMatrix4)convertTransform:(SCNMatrix4)transform fromNode:(nullable SCNNode *)node NS_AVAILABLE(10_9, 8_0);
 
 
 #pragma mark - Managing the SCNNode's physics body
@@ -326,7 +325,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract The description of the physics body of the receiver.
  @discussion Default is nil.
  */
-@property(nonatomic, retain) SCNPhysicsBody *physicsBody SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNPhysicsBody *physicsBody NS_AVAILABLE(10_10, 8_0);
 
 
 #pragma mark - Managing the Node's Physics Field
@@ -336,7 +335,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract The description of the physics field of the receiver.
  @discussion Default is nil.
  */
-@property(nonatomic, retain) SCNPhysicsField *physicsField SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNPhysicsField *physicsField NS_AVAILABLE(10_10, 8_0);
 
 
 #pragma mark - Managing the Node's Constraints
@@ -346,7 +345,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract An array of SCNConstraint that are applied to the receiver.
  @discussion Adding or removing a constraint can be implicitly animated based on the current transaction.
  */
-@property(copy) NSArray *constraints SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(copy, nullable) NSArray<SCNConstraint *> *constraints NS_AVAILABLE(10_9, 8_0);
 
 
 
@@ -357,7 +356,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable.
  @discussion Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
  */
-@property(nonatomic, copy) NSArray *filters SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic, copy, nullable) NSArray<CIFilter *> *filters NS_AVAILABLE(10_9, 8_0);
 
 
 
@@ -370,7 +369,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
              This gives a close approximation to the version of the node that is currently displayed.
              The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
  */
-- (SCNNode *)presentationNode;
+@property(nonatomic, readonly) SCNNode *presentationNode;
 
 
 #pragma mark - Pause
@@ -379,7 +378,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @property paused
  @abstract Controls whether or not the node's actions and animations are updated or paused. Defaults to NO.
  */
-@property (nonatomic, getter=isPaused) BOOL paused SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic, getter=isPaused) BOOL paused NS_AVAILABLE(10_10, 8_0);
 
 
 #pragma mark - Overriding the Rendering with Custom OpenGL Code
@@ -391,7 +390,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
              The preferred way to customize the rendering is to tweak the material properties of the different materials of the node's geometry. SCNMaterial conforms to the SCNShadable protocol and allows for more advanced rendering using GLSL.
              You would typically use a renderer delegate with a node that has no geometry and only serves as a location in space. An example would be attaching a particle system to that node and render it with custom OpenGL code.
  */
-@property(nonatomic, assign) id <SCNNodeRendererDelegate> rendererDelegate;
+@property(nonatomic, assign, nullable) id <SCNNodeRendererDelegate> rendererDelegate;
 
 
 
@@ -405,7 +404,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param options Optional parameters (see the "Hit test options" section in SCNSceneRenderer.h for the available options).
  @discussion See SCNSceneRenderer.h for a screen-space hit testing method.
  */
-- (NSArray *)hitTestWithSegmentFromPoint:(SCNVector3)pointA toPoint:(SCNVector3)pointB options:(NSDictionary *)options SCENEKIT_AVAILABLE(10_9, 8_0);
+- (NSArray<SCNHitTestResult *> *)hitTestWithSegmentFromPoint:(SCNVector3)pointA toPoint:(SCNVector3)pointB options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 8_0);
 
 
 #pragma mark - Categories
@@ -415,7 +414,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Defines what logical 'categories' the receiver belongs too. Defaults to 1.
  @discussion Categories can be used to exclude nodes from the influence of a given light (see SCNLight's categoryBitMask). It can also be used to include/exclude nodes from render passes (see SCNTechnique.h).
  */
-@property(nonatomic) NSUInteger categoryBitMask SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger categoryBitMask NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -438,6 +437,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param renderer The scene renderer to render into.
  @param arguments A dictionary that can have any of the entries described at the beginning of this file.
  */
-- (void)renderNode:(SCNNode *)node renderer:(SCNRenderer *)renderer arguments:(NSDictionary *)arguments;
+- (void)renderNode:(SCNNode *)node renderer:(SCNRenderer *)renderer arguments:(NSDictionary<NSString *, NSValue *> *)arguments;
 
 @end
+
+NS_ASSUME_NONNULL_END

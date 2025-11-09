@@ -1,10 +1,12 @@
 /*	NSDateComponentsFormatter.h
-	Copyright (c) 2014, Apple Inc. All rights reserved.
+	Copyright (c) 2014-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
 #import <Foundation/NSCalendar.h>
 #import <Foundation/NSNumberFormatter.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_ENUM_AVAILABLE(10_10, 8_0)
 typedef NS_ENUM(NSInteger, NSDateComponentsFormatterUnitsStyle) {
@@ -54,9 +56,9 @@ NS_AVAILABLE(10_10, 8_0)
 
 /* 'obj' must be an instance of NSDateComponents.
  */
-- (NSString *)stringForObjectValue:(id)obj;
+- (nullable NSString *)stringForObjectValue:(id)obj;
 
-- (NSString *)stringFromDateComponents:(NSDateComponents *)components;
+- (nullable NSString *)stringFromDateComponents:(NSDateComponents *)components;
 
 /* Normally, NSDateComponentsFormatter will calculate as though counting from the current date and time (e.g. in February, 1 month formatted as a number of days will be 28). -stringFromDate:toDate: calculates from the passed-in startDate instead.
  
@@ -64,14 +66,14 @@ NS_AVAILABLE(10_10, 8_0)
  
    Note that this is still formatting the quantity of time between the dates, not the pair of dates itself. For strings like "Feb 22nd - Feb 28th", use NSDateIntervalFormatter.
  */
-- (NSString *)stringFromDate:(NSDate *)startDate toDate:(NSDate *)endDate;
+- (nullable NSString *)stringFromDate:(NSDate *)startDate toDate:(NSDate *)endDate;
 
 /* Convenience method for formatting a number of seconds. See 'allowedUnits' for how the default set of allowed units differs from -stringFromDateComponents:.
  */
-- (NSString *)stringFromTimeInterval:(NSTimeInterval)ti;
+- (nullable NSString *)stringFromTimeInterval:(NSTimeInterval)ti;
 
 
-+ (NSString *)localizedStringFromDateComponents:(NSDateComponents *)components unitsStyle:(NSDateComponentsFormatterUnitsStyle) unitsStyle;
++ (nullable NSString *)localizedStringFromDateComponents:(NSDateComponents *)components unitsStyle:(NSDateComponentsFormatterUnitsStyle) unitsStyle;
 
 /* Choose how to indicate units. For example, 1h 10m vs 1:10. Default is NSDateComponentsFormatterUnitsStylePositional.
  */
@@ -101,7 +103,7 @@ NS_AVAILABLE(10_10, 8_0)
 
 /* Specifies the locale and calendar to use for formatting date components that do not themselves have calendars. Defaults to NSAutoupdatingCurrentCalendar. If set to nil, uses the gregorian calendar with the en_US_POSIX locale.
  */
-@property (copy) NSCalendar *calendar;
+@property (nullable, copy) NSCalendar *calendar;
 
 /* Choose whether non-integer units should be used to handle display of values that can't be exactly represented with the allowed units. For example, if minutes aren't allowed, then "1h 30m" could be formatted as "1.5h". Default is NO.
  */
@@ -137,6 +139,8 @@ NS_AVAILABLE(10_10, 8_0)
 
 /* NSDateComponentsFormatter currently only implements formatting, not parsing. Until it implements parsing, this will always return NO.
  */
-- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string errorDescription:(out NSString **)error;
+- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

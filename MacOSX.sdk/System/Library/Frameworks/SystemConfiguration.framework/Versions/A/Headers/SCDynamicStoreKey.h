@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002, 2004, 2005, 2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2002, 2004, 2005, 2008, 2015 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -28,6 +28,8 @@
 #include <sys/cdefs.h>
 #include <CoreFoundation/CoreFoundation.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
 	@header SCDynamicStoreKey
@@ -59,8 +61,8 @@ __BEGIN_DECLS
  */
 CFStringRef
 SCDynamicStoreKeyCreate				(
-						CFAllocatorRef	allocator,
-						CFStringRef	fmt,
+						CFAllocatorRef	__nullable	allocator,
+						CFStringRef			fmt,
 						...
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
@@ -84,9 +86,9 @@ SCDynamicStoreKeyCreate				(
  */
 CFStringRef
 SCDynamicStoreKeyCreateNetworkGlobalEntity	(
-						CFAllocatorRef	allocator,
-						CFStringRef	domain,
-						CFStringRef	entity
+						CFAllocatorRef	__nullable	allocator,
+						CFStringRef			domain,
+						CFStringRef			entity
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
@@ -107,8 +109,8 @@ SCDynamicStoreKeyCreateNetworkGlobalEntity	(
  */
 CFStringRef
 SCDynamicStoreKeyCreateNetworkInterface		(
-						CFAllocatorRef	allocator,
-						CFStringRef	domain
+						CFAllocatorRef	__nullable	allocator,
+						CFStringRef			domain
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
@@ -133,10 +135,10 @@ SCDynamicStoreKeyCreateNetworkInterface		(
  */
 CFStringRef
 SCDynamicStoreKeyCreateNetworkInterfaceEntity	(
-						CFAllocatorRef	allocator,
-						CFStringRef	domain,
-						CFStringRef	ifname,
-						CFStringRef	entity
+						CFAllocatorRef	__nullable	allocator,
+						CFStringRef			domain,
+						CFStringRef			ifname,
+						CFStringRef	__nullable	entity
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
@@ -162,10 +164,10 @@ SCDynamicStoreKeyCreateNetworkInterfaceEntity	(
  */
 CFStringRef
 SCDynamicStoreKeyCreateNetworkServiceEntity	(
-						CFAllocatorRef	allocator,
-						CFStringRef	domain,
-						CFStringRef	serviceID,
-						CFStringRef	entity
+						CFAllocatorRef	__nullable	allocator,
+						CFStringRef			domain,
+						CFStringRef			serviceID,
+						CFStringRef	__nullable	entity
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
@@ -183,7 +185,7 @@ SCDynamicStoreKeyCreateNetworkServiceEntity	(
 */
 CFStringRef
 SCDynamicStoreKeyCreateComputerName		(
-						CFAllocatorRef		allocator
+						CFAllocatorRef	__nullable	allocator
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
@@ -200,7 +202,7 @@ SCDynamicStoreKeyCreateComputerName		(
 */
 CFStringRef
 SCDynamicStoreKeyCreateConsoleUser		(
-						CFAllocatorRef		allocator
+						CFAllocatorRef	__nullable	allocator
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
@@ -218,7 +220,7 @@ SCDynamicStoreKeyCreateConsoleUser		(
 */
 CFStringRef
 SCDynamicStoreKeyCreateHostNames		(
-						CFAllocatorRef		allocator
+						CFAllocatorRef	__nullable	allocator
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
@@ -236,7 +238,7 @@ SCDynamicStoreKeyCreateHostNames		(
 */
 CFStringRef
 SCDynamicStoreKeyCreateLocation			(
-						CFAllocatorRef		allocator
+						CFAllocatorRef	__nullable	allocator
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
@@ -254,9 +256,12 @@ SCDynamicStoreKeyCreateLocation			(
 */
 CFStringRef
 SCDynamicStoreKeyCreateProxies			(
-						CFAllocatorRef		allocator
+						CFAllocatorRef	__nullable	allocator
 						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 __END_DECLS
+
+CF_ASSUME_NONNULL_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif	/* _SCDYNAMICSTOREKEY_H */

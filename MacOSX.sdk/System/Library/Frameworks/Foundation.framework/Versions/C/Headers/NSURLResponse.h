@@ -1,6 +1,6 @@
 /*	
     NSURLResponse.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -8,11 +8,13 @@
 
 #import <Foundation/NSObject.h>
 
-@class NSDictionary;
+@class NSDictionary<KeyType, ObjectType>;
 @class NSString;
 @class NSURL;
 @class NSURLRequest;
 @class NSURLResponseInternal;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #define NSURLResponseUnknownLength ((long long)-1)
 
@@ -44,14 +46,14 @@
     @result The initialized NSURLResponse.
     @discussion This is the designated initializer for NSURLResponse.
 */
-- (instancetype)initWithURL:(NSURL *)URL MIMEType:(NSString *)MIMEType expectedContentLength:(NSInteger)length textEncodingName:(NSString *)name;
+- (instancetype)initWithURL:(NSURL *)URL MIMEType:(nullable NSString *)MIMEType expectedContentLength:(NSInteger)length textEncodingName:(nullable NSString *)name NS_DESIGNATED_INITIALIZER;
 
 /*! 
     @method URL
     @abstract Returns the URL of the receiver. 
     @result The URL of the receiver. 
 */
-@property (readonly, copy) NSURL *URL;
+@property (nullable, readonly, copy) NSURL *URL;
 
 /*! 
     @method MIMEType
@@ -64,7 +66,7 @@
     be made if the origin source did not report any such information.
     @result The MIME type of the receiver.
 */
-@property (readonly, copy) NSString *MIMEType;
+@property (nullable, readonly, copy) NSString *MIMEType;
 
 /*! 
     @method expectedContentLength
@@ -92,7 +94,7 @@
     @result The name of the text encoding of the receiver, or nil if no
     text encoding was specified. 
 */
-@property (readonly, copy) NSString *textEncodingName;
+@property (nullable, readonly, copy) NSString *textEncodingName;
 
 /*!
     @method suggestedFilename
@@ -106,7 +108,7 @@
     This method always returns a valid filename.
     @result A suggested filename to use if saving the resource to disk.
 */
-@property (readonly, copy) NSString *suggestedFilename;
+@property (nullable, readonly, copy) NSString *suggestedFilename;
 
 @end
 
@@ -138,7 +140,7 @@
   @result 	the instance of the object, or NULL if an error occurred during initialization.
   @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
 */
-- (instancetype)initWithURL:(NSURL *)url statusCode:(NSInteger)statusCode HTTPVersion:(NSString *)HTTPVersion headerFields:(NSDictionary *)headerFields NS_AVAILABLE(10_7, 5_0);
+- (nullable instancetype)initWithURL:(NSURL *)url statusCode:(NSInteger)statusCode HTTPVersion:(nullable NSString *)HTTPVersion headerFields:(nullable NSDictionary<NSString *, NSString *> *)headerFields NS_AVAILABLE(10_7, 5_0);
 
 /*! 
     @method statusCode
@@ -171,3 +173,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

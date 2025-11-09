@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKRecordZoneID : NSObject <NSSecureCoding, NSCopying>
 
@@ -18,3 +19,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly, strong) NSString *ownerName;
 
 @end
+NS_ASSUME_NONNULL_END

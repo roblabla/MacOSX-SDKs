@@ -4,6 +4,5 @@ platform:        macosx
 install-name:    /usr/lib/libdns_services.dylib
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _DNSXEnableProxy, _DNSXRefDeAlloc, _dns_servicesVersionNumber, 
-                       _dns_servicesVersionString ]
+    symbols:         [ _DNSXEnableProxy, _DNSXRefDeAlloc ]
 ...

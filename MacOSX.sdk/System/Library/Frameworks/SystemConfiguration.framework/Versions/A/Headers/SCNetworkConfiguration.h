@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2011, 2015 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -30,6 +30,9 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <SystemConfiguration/SystemConfiguration.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+CF_ASSUME_NONNULL_BEGIN
+
 /*!
 	@header SCNetworkConfiguration
 	@discussion The SCNetworkConfiguration API provides access to the
@@ -57,7 +60,7 @@
 	@discussion This is the type of a reference to an object that represents
 		a network interface.
  */
-typedef const struct __SCNetworkInterface * SCNetworkInterfaceRef;
+typedef const struct CF_BRIDGED_TYPE(id) __SCNetworkInterface * SCNetworkInterfaceRef;
 
 /*!
 	@const kSCNetworkInterfaceType6to4
@@ -167,7 +170,7 @@ typedef SCNetworkInterfaceRef SCBondInterfaceRef;
 	@discussion This is the type of a reference to an object that represents
 		the status of an Ethernet Bond interface.
  */
-typedef const struct __SCBondStatus *		SCBondStatusRef;
+typedef const struct CF_BRIDGED_TYPE(id) __SCBondStatus *		SCBondStatusRef;
 
 /*!
 	@enum Ethernet Bond Aggregation Status (kSCBondStatusDeviceAggregationStatus) codes
@@ -227,7 +230,7 @@ typedef SCNetworkInterfaceRef SCVLANInterfaceRef;
 	@discussion This is the type of a reference to an object that represents
 		a network protocol.
  */
-typedef const struct __SCNetworkProtocol * SCNetworkProtocolRef;
+typedef const struct CF_BRIDGED_TYPE(id) __SCNetworkProtocol * SCNetworkProtocolRef;
 
 /* network "protocol" types */
 
@@ -273,7 +276,7 @@ extern const CFStringRef kSCNetworkProtocolTypeSMB						__OSX_AVAILABLE_STARTING
 	@discussion This is the type of a reference to an object that represents
 		a network service.
  */
-typedef const struct __SCNetworkService * SCNetworkServiceRef;
+typedef const struct CF_BRIDGED_TYPE(id) __SCNetworkService * SCNetworkServiceRef;
 
 
 /*!
@@ -288,7 +291,7 @@ typedef const struct __SCNetworkService * SCNetworkServiceRef;
 	@discussion This is the type of a reference to an object that represents
 		a network set.
  */
-typedef const struct __SCNetworkSet	* SCNetworkSetRef;
+typedef const struct CF_BRIDGED_TYPE(id) __SCNetworkSet	* SCNetworkSetRef;
 
 
 __BEGIN_DECLS
@@ -329,7 +332,7 @@ SCNetworkInterfaceCopyAll			(void)						__OSX_AVAILABLE_STARTING(__MAC_10_4,__IP
 	@result The list of SCNetworkInterface types supported by the interface;
 		NULL if no interface types are supported.
  */
-CFArrayRef /* of kSCNetworkInterfaceTypeXXX CFStringRef's */
+CFArrayRef /* of kSCNetworkInterfaceTypeXXX CFStringRef's */ __nullable
 SCNetworkInterfaceGetSupportedInterfaceTypes	(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -340,7 +343,7 @@ SCNetworkInterfaceGetSupportedInterfaceTypes	(SCNetworkInterfaceRef		interface)	
 	@result The list of SCNetworkProtocol types supported by the interface;
 		NULL if no protocol types are supported.
  */
-CFArrayRef /* of kSCNetworkProtocolTypeXXX CFStringRef's */
+CFArrayRef /* of kSCNetworkProtocolTypeXXX CFStringRef's */ __nullable
 SCNetworkInterfaceGetSupportedProtocolTypes	(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -354,7 +357,7 @@ SCNetworkInterfaceGetSupportedProtocolTypes	(SCNetworkInterfaceRef		interface)	_
 	@result A reference to the new SCNetworkInterface.
 		You must release the returned value.
  */
-SCNetworkInterfaceRef
+SCNetworkInterfaceRef __nullable
 SCNetworkInterfaceCreateWithInterface		(SCNetworkInterfaceRef		interface,
 						 CFStringRef			interfaceType)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
@@ -366,7 +369,7 @@ SCNetworkInterfaceCreateWithInterface		(SCNetworkInterfaceRef		interface,
 	@result The BSD name associated with the interface (e.g. "en0");
 		NULL if no BSD name is available.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkInterfaceGetBSDName			(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -377,7 +380,7 @@ SCNetworkInterfaceGetBSDName			(SCNetworkInterfaceRef		interface)	__OSX_AVAILABL
 		NULL if no configuration settings are associated with the interface
 		or an error was encountered.
  */
-CFDictionaryRef
+CFDictionaryRef __nullable
 SCNetworkInterfaceGetConfiguration		(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -389,7 +392,7 @@ SCNetworkInterfaceGetConfiguration		(SCNetworkInterfaceRef		interface)	__OSX_AVA
 		NULL if no configuration settings are associated with the interface
 		or an error was encountered.
  */
-CFDictionaryRef
+CFDictionaryRef __nullable
 SCNetworkInterfaceGetExtendedConfiguration	(SCNetworkInterfaceRef		interface,
 						 CFStringRef			extendedType)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
@@ -399,7 +402,7 @@ SCNetworkInterfaceGetExtendedConfiguration	(SCNetworkInterfaceRef		interface,
 	@param interface The network interface.
 	@result A string representing the hardware (MAC) address for the interface.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkInterfaceGetHardwareAddressString	(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -409,7 +412,7 @@ SCNetworkInterfaceGetHardwareAddressString	(SCNetworkInterfaceRef		interface)	__
 	@result The underlying network interface;
 		NULL if this is a leaf interface.
  */
-SCNetworkInterfaceRef
+SCNetworkInterfaceRef __nullable
 SCNetworkInterfaceGetInterface			(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -418,7 +421,7 @@ SCNetworkInterfaceGetInterface			(SCNetworkInterfaceRef		interface)	__OSX_AVAILA
 	@param interface The network interface.
 	@result The interface type.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkInterfaceGetInterfaceType		(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -429,7 +432,7 @@ SCNetworkInterfaceGetInterfaceType		(SCNetworkInterfaceRef		interface)	__OSX_AVA
 	@result A localized, display name for the interface;
 		NULL if no name is available.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkInterfaceGetLocalizedDisplayName	(SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -478,11 +481,11 @@ SCNetworkInterfaceSetExtendedConfiguration	(SCNetworkInterfaceRef		interface,
 	@result TRUE if requested information has been returned.
  */
 Boolean
-SCNetworkInterfaceCopyMediaOptions		(SCNetworkInterfaceRef		interface,
-						 CFDictionaryRef		*current,
-						 CFDictionaryRef		*active,
-						 CFArrayRef			*available,
-						 Boolean			filter)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+SCNetworkInterfaceCopyMediaOptions		(SCNetworkInterfaceRef						interface,
+						 CFDictionaryRef		__nullable	* __nullable	current,
+						 CFDictionaryRef		__nullable	* __nullable	active,
+						 CFArrayRef			__nullable	* __nullable	available,
+						 Boolean					filter)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function SCNetworkInterfaceCopyMediaSubTypes
@@ -493,7 +496,7 @@ SCNetworkInterfaceCopyMediaOptions		(SCNetworkInterfaceRef		interface,
 	@result An array of available media subtypes CFString's (e.g. 10BaseT/UTP,
 		100baseTX, etc).  NULL if no subtypes are available.
  */
-CFArrayRef
+CFArrayRef __nullable
 SCNetworkInterfaceCopyMediaSubTypes		(CFArrayRef			available)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -507,7 +510,7 @@ SCNetworkInterfaceCopyMediaSubTypes		(CFArrayRef			available)	__OSX_AVAILABLE_ST
 		is returned as an array of CFString's (e.g. <half-duplex>,
 		<full-duplex,flow-control>).  NULL if no options are available.
  */
-CFArrayRef
+CFArrayRef __nullable
 SCNetworkInterfaceCopyMediaSubTypeOptions	(CFArrayRef			available,
 						 CFStringRef			subType)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
@@ -528,10 +531,10 @@ SCNetworkInterfaceCopyMediaSubTypeOptions	(CFArrayRef			available,
 	@result TRUE if requested information has been returned.
  */
 Boolean
-SCNetworkInterfaceCopyMTU			(SCNetworkInterfaceRef		interface,
-						 int				*mtu_cur,
-						 int				*mtu_min,
-						 int				*mtu_max)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+SCNetworkInterfaceCopyMTU			(SCNetworkInterfaceRef				interface,
+						 int				* __nullable	mtu_cur,
+						 int				* __nullable	mtu_min,
+						 int				* __nullable	mtu_max)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@function SCNetworkInterfaceSetMediaOptions
@@ -617,7 +620,7 @@ SCBondInterfaceCopyAvailableMemberInterfaces	(SCPreferencesRef		prefs)		__OSX_AV
 	@result A reference to the new SCBondInterface.
 		You must release the returned value.
  */
-SCBondInterfaceRef
+SCBondInterfaceRef __nullable
 SCBondInterfaceCreate				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -635,7 +638,7 @@ SCBondInterfaceRemove				(SCBondInterfaceRef		bond)		__OSX_AVAILABLE_STARTING(__
 	@param bond The SCBondInterface interface.
 	@result The list of interfaces.
  */
-CFArrayRef /* of SCNetworkInterfaceRef's */
+CFArrayRef /* of SCNetworkInterfaceRef's */ __nullable
 SCBondInterfaceGetMemberInterfaces		(SCBondInterfaceRef		bond)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -645,7 +648,7 @@ SCBondInterfaceGetMemberInterfaces		(SCBondInterfaceRef		bond)		__OSX_AVAILABLE_
 	@result The configuration settings associated with the Ethernet Bond interface;
 		NULL if no changes to the default configuration have been saved.
  */
-CFDictionaryRef
+CFDictionaryRef __nullable
 SCBondInterfaceGetOptions			(SCBondInterfaceRef		bond)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -691,7 +694,7 @@ SCBondInterfaceSetOptions			(SCBondInterfaceRef		bond,
 	@result The status associated with the interface.
 		You must release the returned value.
  */
-SCBondStatusRef
+SCBondStatusRef __nullable
 SCBondInterfaceCopyStatus			(SCBondInterfaceRef	bond)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -708,7 +711,7 @@ SCBondStatusGetTypeID				(void)						__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHON
 	@param bondStatus The Ethernet Bond status.
 	@result The list of interfaces.
  */
-CFArrayRef /* of SCNetworkInterfaceRef's */
+CFArrayRef __nullable /* of SCNetworkInterfaceRef's */
 SCBondStatusGetMemberInterfaces			(SCBondStatusRef	bondStatus)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -724,9 +727,9 @@ SCBondStatusGetMemberInterfaces			(SCBondStatusRef	bondStatus)		__OSX_AVAILABLE_
 	      Bond is returned.  As long as one member interface is active
 	      then the bond should be operational.
  */
-CFDictionaryRef
-SCBondStatusGetInterfaceStatus			(SCBondStatusRef	bondStatus,
-						 SCNetworkInterfaceRef	interface)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CFDictionaryRef __nullable
+SCBondStatusGetInterfaceStatus			(SCBondStatusRef			bondStatus,
+						 SCNetworkInterfaceRef	__nullable	interface)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
 	@group Interface configuration (VLAN)
@@ -765,7 +768,7 @@ SCVLANInterfaceCopyAvailablePhysicalInterfaces	(void)						__OSX_AVAILABLE_START
 
 	Note: the tag must be in the range (1 <= tag <= 4094)
  */
-SCVLANInterfaceRef
+SCVLANInterfaceRef __nullable
 SCVLANInterfaceCreate				(SCPreferencesRef		prefs,
 						 SCNetworkInterfaceRef		physical,
 						 CFNumberRef			tag)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
@@ -785,7 +788,7 @@ SCVLANInterfaceRemove				(SCVLANInterfaceRef		vlan)		__OSX_AVAILABLE_STARTING(__
 	@param vlan The SCVLANInterface interface.
 	@result The list of interfaces.
  */
-SCNetworkInterfaceRef
+SCNetworkInterfaceRef __nullable
 SCVLANInterfaceGetPhysicalInterface		(SCVLANInterfaceRef		vlan)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -794,7 +797,7 @@ SCVLANInterfaceGetPhysicalInterface		(SCVLANInterfaceRef		vlan)		__OSX_AVAILABLE
 	@param vlan The SCVLANInterface interface.
 	@result The tag.
  */
-CFNumberRef
+CFNumberRef __nullable
 SCVLANInterfaceGetTag				(SCVLANInterfaceRef		vlan)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -804,7 +807,7 @@ SCVLANInterfaceGetTag				(SCVLANInterfaceRef		vlan)		__OSX_AVAILABLE_STARTING(__
 	@result The configuration settings associated with the VLAN interface;
 		NULL if no changes to the default configuration have been saved.
  */
-CFDictionaryRef
+CFDictionaryRef __nullable
 SCVLANInterfaceGetOptions			(SCVLANInterfaceRef		vlan)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 /*!
@@ -871,7 +874,7 @@ SCNetworkProtocolGetTypeID			(void)						__OSX_AVAILABLE_STARTING(__MAC_10_4,__I
 		NULL if no configuration settings are associated with the protocol
 		or an error was encountered.
  */
-CFDictionaryRef
+CFDictionaryRef __nullable
 SCNetworkProtocolGetConfiguration		(SCNetworkProtocolRef		protocol)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -889,7 +892,7 @@ SCNetworkProtocolGetEnabled			(SCNetworkProtocolRef		protocol)	__OSX_AVAILABLE_S
 	@param protocol The network protocol.
 	@result The protocol type.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkProtocolGetProtocolType		(SCNetworkProtocolRef		protocol)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -954,7 +957,7 @@ SCNetworkServiceAddProtocolType			(SCNetworkServiceRef		service,
 	@result The list of SCNetworkService services associated with the preferences.
 		You must release the returned value.
  */
-CFArrayRef /* of SCNetworkServiceRef's */
+CFArrayRef /* of SCNetworkServiceRef's */ __nullable
 SCNetworkServiceCopyAll				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -964,7 +967,7 @@ SCNetworkServiceCopyAll				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(_
 	@result The list of SCNetworkProtocol protocols associated with the service.
 		You must release the returned value.
  */
-CFArrayRef /* of SCNetworkProtocolRef's */
+CFArrayRef /* of SCNetworkProtocolRef's */ __nullable
 SCNetworkServiceCopyProtocols			(SCNetworkServiceRef		service)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -975,7 +978,7 @@ SCNetworkServiceCopyProtocols			(SCNetworkServiceRef		service)	__OSX_AVAILABLE_S
 	@result A reference to the new SCNetworkService.
 		You must release the returned value.
  */
-SCNetworkServiceRef
+SCNetworkServiceRef __nullable
 SCNetworkServiceCreate				(SCPreferencesRef		prefs,
 						 SCNetworkInterfaceRef		interface)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
@@ -989,7 +992,7 @@ SCNetworkServiceCreate				(SCPreferencesRef		prefs,
 		error was encountered.
 		You must release the returned value.
  */
-SCNetworkServiceRef
+SCNetworkServiceRef __nullable
 SCNetworkServiceCopy				(SCPreferencesRef		prefs,
 						 CFStringRef			serviceID)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
@@ -1021,7 +1024,7 @@ SCNetworkServiceGetEnabled			(SCNetworkServiceRef		service)	__OSX_AVAILABLE_STAR
 	@result A reference to the SCNetworkInterface associated with the service;
 		NULL if an error was encountered.
  */
-SCNetworkInterfaceRef
+SCNetworkInterfaceRef __nullable
 SCNetworkServiceGetInterface			(SCNetworkServiceRef		service)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1030,7 +1033,7 @@ SCNetworkServiceGetInterface			(SCNetworkServiceRef		service)	__OSX_AVAILABLE_ST
 	@param service The network service.
 	@result The [user specified] name.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkServiceGetName				(SCNetworkServiceRef		service)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1042,7 +1045,7 @@ SCNetworkServiceGetName				(SCNetworkServiceRef		service)	__OSX_AVAILABLE_STARTI
 		NULL if this protocol has not been added or if an error was encountered.
 		You must release the returned value.
  */
-SCNetworkProtocolRef
+SCNetworkProtocolRef __nullable
 SCNetworkServiceCopyProtocol			(SCNetworkServiceRef		service,
 						 CFStringRef			protocolType)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
@@ -1052,7 +1055,7 @@ SCNetworkServiceCopyProtocol			(SCNetworkServiceRef		service,
 	@param service The network service.
 	@result The service identifier.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkServiceGetServiceID			(SCNetworkServiceRef		service)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1158,7 +1161,7 @@ SCNetworkSetContainsInterface			(SCNetworkSetRef		set,
 	@result The list of SCNetworkSet sets associated with the preferences.
 		You must release the returned value.
  */
-CFArrayRef /* of SCNetworkSetRef's */
+CFArrayRef /* of SCNetworkSetRef's */ __nullable
 SCNetworkSetCopyAll				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1167,7 +1170,7 @@ SCNetworkSetCopyAll				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(__MAC
 	@param prefs The "preferences" session.
 	@result The current set; NULL if no current set has been defined.
  */
-SCNetworkSetRef
+SCNetworkSetRef __nullable
 SCNetworkSetCopyCurrent				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1177,7 +1180,7 @@ SCNetworkSetCopyCurrent				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(_
 	@result The list of SCNetworkService services associated with the set.
 		You must release the returned value.
  */
-CFArrayRef /* of SCNetworkServiceRef's */
+CFArrayRef /* of SCNetworkServiceRef's */ __nullable
 SCNetworkSetCopyServices			(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1187,7 +1190,7 @@ SCNetworkSetCopyServices			(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MA
 	@result A reference to the new SCNetworkSet.
 		You must release the returned value.
  */
-SCNetworkSetRef
+SCNetworkSetRef __nullable
 SCNetworkSetCreate				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1200,7 +1203,7 @@ SCNetworkSetCreate				(SCPreferencesRef		prefs)		__OSX_AVAILABLE_STARTING(__MAC_
 		error was encountered.
 		You must release the returned value.
  */
-SCNetworkSetRef
+SCNetworkSetRef __nullable
 SCNetworkSetCopy				(SCPreferencesRef		prefs,
 						 CFStringRef			setID)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
@@ -1210,7 +1213,7 @@ SCNetworkSetCopy				(SCPreferencesRef		prefs,
 	@param set The network set.
 	@result The [user specified] name.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkSetGetName				(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1219,7 +1222,7 @@ SCNetworkSetGetName				(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MAC_10
 	@param set The network set.
 	@result The set identifier.
  */
-CFStringRef
+CFStringRef __nullable
 SCNetworkSetGetSetID				(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1232,7 +1235,7 @@ SCNetworkSetGetSetID				(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MAC_1
 		NULL if no service order has been specified or if an error
 		was encountered.
  */
-CFArrayRef /* of serviceID CFStringRef's */
+CFArrayRef /* of serviceID CFStringRef's */ __nullable
 SCNetworkSetGetServiceOrder			(SCNetworkSetRef		set)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
@@ -1294,5 +1297,8 @@ SCNetworkSetSetServiceOrder			(SCNetworkSetRef		set,
 
 
 __END_DECLS
+
+CF_ASSUME_NONNULL_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif	/* _SCNETWORKCONFIGURATION_H */

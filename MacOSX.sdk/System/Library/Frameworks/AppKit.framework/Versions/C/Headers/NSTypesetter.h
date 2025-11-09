@@ -1,14 +1,18 @@
 /* 
 	NSTypesetter.h
-	Copyright (c) 1994-2014, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2015, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */
 
 #import <CoreFoundation/CFCharacterSet.h> // for UTF32Char
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <AppKit/NSLayoutManager.h>
 #import <AppKit/NSParagraphStyle.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
     NSTypesetterZeroAdvancementAction = (1 << 0), // glyphs with this action are flitered out from layout (notShownAttribute == YES)
@@ -52,7 +56,7 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 /* Tab stops */
 /* Returns an NSTextTab instance for glyphLocation from the current text tab array. glyphLocation must be in the base typesetter coordinate (should not include line fragment rect origin and lineFragmentPadding). direction should be either NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft. maxLocation specifies the maximum location a glyph can be assigned in the base typesetter coordinate.
 */
-- (NSTextTab *)textTabForGlyphLocation:(CGFloat)glyphLocation writingDirection:(NSWritingDirection)direction maxLocation:(CGFloat)maxLocation;
+- (nullable NSTextTab *)textTabForGlyphLocation:(CGFloat)glyphLocation writingDirection:(NSWritingDirection)direction maxLocation:(CGFloat)maxLocation;
 
 /* Bidi control */
 /* Controls whether to perform bi-directional processing.  You can disable the layout stage if you know the parapgraph does not need this stage (i.e. the backing-store is in the display order).
@@ -60,7 +64,7 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 @property BOOL bidiProcessingEnabled;
 
 /* Accessors for required paragraph typesetting settings */ // Note this method does not retain attrString
-@property (assign) NSAttributedString *attributedString;
+@property (nullable, assign) NSAttributedString *attributedString;
 - (void)setParagraphGlyphRange:(NSRange)paragraphRange separatorGlyphRange:(NSRange)paragraphSeparatorRange;
 @property (readonly) NSRange paragraphGlyphRange; // does not include paragraphSeparatorGlyphRange
 @property (readonly) NSRange paragraphSeparatorGlyphRange;
@@ -91,7 +95,7 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 /* Extra line fragment handling */
 /* This method returns the attributes used to layout the extra line fragment. The default implementation tries to use -[NSTextView typingAttributes] if possible; otherwise, uses attributes for the last character.
 */
-@property (readonly, copy) NSDictionary *attributesForExtraLineFragment;
+@property (nullable, readonly, copy) NSDictionary<NSString *, id> *attributesForExtraLineFragment;
 
 /* Control/format character handling */
 /* This method returns the action associated with a control character.
@@ -100,10 +104,10 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 
 /* Cocoa Text System specific interface methods */
 /* Friend class accessors */
-@property (readonly, assign) NSLayoutManager *layoutManager;
-@property (readonly, assign) NSArray *textContainers;
-@property (readonly, assign) NSTextContainer *currentTextContainer;
-@property (readonly, copy) NSParagraphStyle *currentParagraphStyle;
+@property (nullable, readonly, assign) NSLayoutManager *layoutManager;
+@property (nullable, readonly, assign) NSArray<NSTextContainer *> *textContainers;
+@property (nullable, readonly, assign) NSTextContainer *currentTextContainer;
+@property (nullable, readonly, copy) NSParagraphStyle *currentParagraphStyle;
 
 /* Forces NSLayoutManager to invalidate glyph cache in range when invalidating layout.
 */
@@ -147,28 +151,30 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 /* NSGlyphStorageInterface declares all primitives interfacing to the glyph storage (usually NSLayoutManager). By overriding all the methods, you can implement an NSTypesetter subclass that interacts with custom glyph storage. */
 @interface NSTypesetter (NSGlyphStorageInterface)
 // Glyph/character range mappings
-- (NSRange)characterRangeForGlyphRange:(NSRange)glyphRange actualGlyphRange:(NSRangePointer)actualGlyphRange;
-- (NSRange)glyphRangeForCharacterRange:(NSRange)charRange actualCharacterRange:(NSRangePointer)actualCharRange;
+- (NSRange)characterRangeForGlyphRange:(NSRange)glyphRange actualGlyphRange:(nullable NSRangePointer)actualGlyphRange;
+- (NSRange)glyphRangeForCharacterRange:(NSRange)charRange actualCharacterRange:(nullable NSRangePointer)actualCharRange;
 
 // Glyph data
-- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(NSGlyph *)glyphBuffer characterIndexes:(NSUInteger *)charIndexBuffer glyphInscriptions:(NSGlyphInscription *)inscribeBuffer elasticBits:(BOOL *)elasticBuffer bidiLevels:(unsigned char *)bidiLevelBuffer;
+- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer bidiLevels:(null_unspecified unsigned char *)bidiLevelBuffer;
 
 // NSTextContainer attribute
 /* Calculates line fragment rect, line fragment used rect, and remaining rect for a line fragment starting at glyph index startingGlyphIndex with proposedRect. The height is determined using lineSpacing, paragraphSpacingBefore, and paragraphSpacingAfter as well as proposedRect. The width for lineFragmentUsedRect is set to the lineFragmentRect width. In the standard implementation, paragraph spacing is included in the line fragment rect but not the line fragment used rect; line spacing is included in both.
 */
-- (void)getLineFragmentRect:(NSRectPointer)lineFragmentRect usedRect:(NSRectPointer)lineFragmentUsedRect remainingRect:(NSRectPointer)remainingRect forStartingGlyphAtIndex:(NSUInteger)startingGlyphIndex proposedRect:(NSRect)proposedRect lineSpacing:(CGFloat)lineSpacing paragraphSpacingBefore:(CGFloat)paragraphSpacingBefore paragraphSpacingAfter:(CGFloat)paragraphSpacingAfter;
+- (void)getLineFragmentRect:(null_unspecified NSRectPointer)lineFragmentRect usedRect:(null_unspecified NSRectPointer)lineFragmentUsedRect remainingRect:(null_unspecified NSRectPointer)remainingRect forStartingGlyphAtIndex:(NSUInteger)startingGlyphIndex proposedRect:(NSRect)proposedRect lineSpacing:(CGFloat)lineSpacing paragraphSpacingBefore:(CGFloat)paragraphSpacingBefore paragraphSpacingAfter:(CGFloat)paragraphSpacingAfter;
 
 // Layout storage
 - (void)setLineFragmentRect:(NSRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect)usedRect baselineOffset:(CGFloat)baselineOffset;
-- (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(NSGlyph *)glyphs;
+- (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(null_unspecified NSGlyph *)glyphs;
 - (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex;
 - (void)deleteGlyphsInRange:(NSRange)glyphRange;
 - (void)setNotShownAttribute:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
 - (void)setDrawsOutsideLineFragment:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
-- (void)setLocation:(NSPoint)location withAdvancements:(const CGFloat *)advancements forStartOfGlyphRange:(NSRange)glyphRange;
+- (void)setLocation:(NSPoint)location withAdvancements:(null_unspecified const CGFloat *)advancements forStartOfGlyphRange:(NSRange)glyphRange;
 - (void)setAttachmentSize:(NSSize)attachmentSize forGlyphRange:(NSRange)glyphRange;
-- (void)setBidiLevels:(const uint8_t *)levels forGlyphRange:(NSRange)glyphRange;
+- (void)setBidiLevels:(null_unspecified const uint8_t *)levels forGlyphRange:(NSRange)glyphRange;
 @end
+
+NS_ASSUME_NONNULL_END
 
 #if !__LP64__ && MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4
 #import <AppKit/NSSimpleHorizontalTypesetter.h>

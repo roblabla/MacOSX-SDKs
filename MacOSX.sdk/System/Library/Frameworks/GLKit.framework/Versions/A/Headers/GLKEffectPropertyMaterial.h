@@ -13,6 +13,7 @@
  GLKEffectPropertyMaterial encapsulates material properties for an GLKEffect in
  accordance with the specification and lighting behavior of OpenGL ES 1.1.
 */
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectPropertyMaterial : GLKEffectProperty
 {    
@@ -31,3 +32,4 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @property (nonatomic, assign) GLfloat          shininess;              // 0.0
 
 @end
+NS_ASSUME_NONNULL_END

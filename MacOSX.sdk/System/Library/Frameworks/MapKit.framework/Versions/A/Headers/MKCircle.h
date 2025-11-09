@@ -10,7 +10,9 @@
 #import <MapKit/MKGeometry.h>
 #import <MapKit/MKFoundation.h>
 
-MK_CLASS_AVAILABLE(10_9, 4_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 4_0) __WATCHOS_PROHIBITED
 @interface MKCircle : MKShape <MKOverlay>
 
 + (instancetype)circleWithCenterCoordinate:(CLLocationCoordinate2D)coord
@@ -24,3 +26,5 @@ MK_CLASS_AVAILABLE(10_9, 4_0)
 @property (nonatomic, readonly) MKMapRect boundingMapRect; 
 
 @end
+
+NS_ASSUME_NONNULL_END

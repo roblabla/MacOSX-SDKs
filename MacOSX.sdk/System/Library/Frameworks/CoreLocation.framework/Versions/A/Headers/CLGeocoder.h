@@ -9,12 +9,14 @@
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLAvailability.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CLRegion;
 @class CLPlacemark;
 @class CLGeocoderInternal;
 
 // geocoding handler, CLPlacemarks are provided in order of most confident to least confident
-typedef void (^CLGeocodeCompletionHandler)(NSArray *placemarks, NSError *error);
+typedef void (^CLGeocodeCompletionHandler)(NSArray< CLPlacemark *> * __nullable placemarks, NSError * __nullable error);
 
 NS_CLASS_AVAILABLE(10_8,5_0)
 @interface CLGeocoder : NSObject
@@ -35,8 +37,10 @@ NS_CLASS_AVAILABLE(10_8,5_0)
 
 - (void)geocodeAddressDictionary:(NSDictionary *)addressDictionary completionHandler:(CLGeocodeCompletionHandler)completionHandler;
 - (void)geocodeAddressString:(NSString *)addressString completionHandler:(CLGeocodeCompletionHandler)completionHandler;
-- (void)geocodeAddressString:(NSString *)addressString inRegion:(CLRegion *)region completionHandler:(CLGeocodeCompletionHandler)completionHandler;
+- (void)geocodeAddressString:(NSString *)addressString inRegion:(nullable CLRegion *)region completionHandler:(CLGeocodeCompletionHandler)completionHandler;
 
 - (void)cancelGeocode;
 
 @end
+
+NS_ASSUME_NONNULL_END

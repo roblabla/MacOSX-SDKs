@@ -1,6 +1,6 @@
 /*
     CFURLEnumerator.h
-    Copyright (c) 2008-2014, Apple Inc. All rights reserved.
+    Copyright (c) 2008-2015, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -17,7 +17,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 
-typedef const struct __CFURLEnumerator *CFURLEnumeratorRef;
+typedef const struct CF_BRIDGED_MUTABLE_TYPE(id) __CFURLEnumerator *CFURLEnumeratorRef;
 
 /* CFURLEnumeratorGetTypeID - Returns the CFURLEnumerator CFTypeID. */
 CF_EXPORT

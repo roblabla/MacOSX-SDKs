@@ -37,6 +37,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 #if PRAGMA_ENUM_ALWAYSINT
 	#pragma enumsalwaysint on
@@ -169,10 +170,12 @@ CFN_EXPORT const CFStringRef kCFStreamSSLIsServer CF_AVAILABLE(10_4, 2_0);
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceType CF_AVAILABLE(10_7, 4_0);
 
 /* supported network service types: */
-CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoIP       CF_AVAILABLE(10_7, 4_0);   // voice over IP control
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVideo      CF_AVAILABLE(10_7, 5_0);   // interactive video
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoice      CF_AVAILABLE(10_7, 5_0);   // interactive voice data
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeBackground CF_AVAILABLE(10_7, 5_0);   // background
+
+/* deprecated network service type: */
+CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoIP       CF_DEPRECATED(10_7, 10_11, 4_0, 9_0, "use PushKit for VoIP control purposes");   // voice over IP control - this service type is deprecated in favor of using PushKit for VoIP control
 
 /*
  *  kCFStreamPropertyNoCellular
@@ -491,6 +494,18 @@ CFN_EXPORT const CFStringRef kCFStreamPropertySocketRemoteHost CF_AVAILABLE(10_3
  */
 CFN_EXPORT const CFStringRef kCFStreamPropertySocketRemoteNetService CF_AVAILABLE(10_3, 2_0);
 
+/*
+ *  kCFStreamPropertySocketExtendedBackgroundIdleMode
+ *
+ *  Discussion:
+ *	Set this to kCFBooleanTrue to enable extended background idle
+ *	mode.  Enabling this mode asks the system to keep the socket open
+ *  and delay reclaiming it when the process moves to the background (see
+ *  https://developer.apple.com/library/ios/technotes/tn2277/_index.html)
+ *  This property must be set before the stream is opened.
+ *
+ */
+CFN_EXPORT const CFStringRef kCFStreamPropertySocketExtendedBackgroundIdleMode CF_AVAILABLE(10_11, 9_0);
 
 /*
  *  CFStreamCreatePairWithSocketToCFHost()
@@ -528,11 +543,11 @@ CFN_EXPORT const CFStringRef kCFStreamPropertySocketRemoteNetService CF_AVAILABL
  */
 CFN_EXPORT void 
 CFStreamCreatePairWithSocketToCFHost(
-  CFAllocatorRef      alloc,
+  CFAllocatorRef      __nullable alloc,
   CFHostRef           host,
   SInt32              port,
-  CFReadStreamRef *   readStream,
-  CFWriteStreamRef *  writeStream)            CF_AVAILABLE(10_3, 2_0);
+  CFReadStreamRef __nullable *   __nullable readStream,
+  CFWriteStreamRef __nullable *  __nullable writeStream)            CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -569,10 +584,10 @@ CFStreamCreatePairWithSocketToCFHost(
  */
 CFN_EXPORT void 
 CFStreamCreatePairWithSocketToNetService(
-  CFAllocatorRef      alloc,
+  CFAllocatorRef      __nullable alloc,
   CFNetServiceRef     service,
-  CFReadStreamRef *   readStream,
-  CFWriteStreamRef *  writeStream)           CF_AVAILABLE(10_3, 2_0);
+  CFReadStreamRef   __nullable *  __nullable readStream,
+  CFWriteStreamRef __nullable *  __nullable writeStream)           CF_AVAILABLE(10_3, 2_0);
 
 
 
@@ -600,6 +615,7 @@ CFN_EXPORT const CFStringRef kCFStreamSSLAllowsAnyRoot              CF_DEPRECATE
 	#pragma enumsalwaysint reset
 #endif
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFSOCKETSTREAM__ */

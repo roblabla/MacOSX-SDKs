@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage
-current-version: 209.11
+current-version: 239.0
 exports:         
   - archs:           [ i386 ]
     objc-classes:    [ _GSClientManagedLibrary, _GSPermanentAdditionEnumerator, 
@@ -52,9 +52,9 @@ exports:
                        _GSSetGenerationOptions, _GSSetInfoDictionary, _GSSetOriginalDisplayName, 
                        _GSSetOriginalPOSIXName, _GSTrackDocument, _GSUbiquitousConflictsNameSpace, 
                        __BeforePathRemove, __GSError, __GSErrorForErrno, 
-                       __GSErrorForStatus, __GSOpenByID, __PathResolve, 
-                       __RemoveSubTrees, __RemoveTree, __SetBirthTimeSpecForFD, 
-                       _get_volume_uuid, _kGSLibraryErrorDomain ]
+                       __GSErrorForStatus, __GSIsDocumentRevision, __GSOpenByID, 
+                       __PathRename, __PathResolve, __RemoveSubTrees, __RemoveTree, 
+                       __SetBirthTimeSpecForFD, _get_volume_uuid, _kGSLibraryErrorDomain ]
     objc-classes:    [ _GSAddition, _GSDaemonProxySync, _GSDocumentIdentifier, 
                        _GSPermanentStorage, _GSStagingPrefix, _GSStorageManager, 
                        _GSTemporaryStorage ]

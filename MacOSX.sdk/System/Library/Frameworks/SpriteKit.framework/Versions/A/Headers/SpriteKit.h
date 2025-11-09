@@ -6,6 +6,7 @@
 //
 
 #import <SpriteKit/SKScene.h>
+#import <SpriteKit/SKCameraNode.h>
 #import <SpriteKit/SKNode.h>
 #import <SpriteKit/SKSpriteNode.h>
 #import <SpriteKit/SKEmitterNode.h>
@@ -14,12 +15,15 @@
 #import <SpriteKit/SKFieldNode.h>
 #import <SpriteKit/SKLabelNode.h>
 #import <SpriteKit/SKVideoNode.h>
+#import <SpriteKit/SKAudioNode.h>
 #import <SpriteKit/SKCropNode.h>
 #import <SpriteKit/SKLightNode.h>
+#import <SpriteKit/SKReferenceNode.h>
 #import <SpriteKit/SK3DNode.h>
 #import <SpriteKit/SKRegion.h>
 #import <SpriteKit/SKView.h>
 #import <SpriteKit/SKTransition.h>
+
 
 #import <SpriteKit/SKTexture.h>
 #import <SpriteKit/SKMutableTexture.h>

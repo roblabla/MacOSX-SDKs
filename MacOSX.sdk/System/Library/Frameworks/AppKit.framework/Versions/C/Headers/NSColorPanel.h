@@ -1,12 +1,14 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSPanel.h>
 #import <AppKit/NSApplication.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSColorList, NSMutableArray;
 
@@ -82,26 +84,28 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 + (void)setPickerMask:(NSColorPanelOptions)mask;
 + (void)setPickerMode:(NSColorPanelMode)mode;
 
-@property (strong) NSView *accessoryView;
+@property (nullable, strong) NSView *accessoryView;
 @property (getter=isContinuous) BOOL continuous;
 @property BOOL showsAlpha;
 @property NSColorPanelMode mode;
 @property (copy) NSColor *color;
 @property (readonly) CGFloat alpha;
-- (void)setAction:(SEL)aSelector;
-- (void)setTarget:(id)anObject;
+- (void)setAction:(nullable SEL)aSelector;
+- (void)setTarget:(nullable id)anObject;
 - (void)attachColorList:(NSColorList *)colorList;
 - (void)detachColorList:(NSColorList *)colorList;
 @end
 
 @interface NSApplication(NSColorPanel)
-- (void)orderFrontColorPanel:(id)sender;
+- (void)orderFrontColorPanel:(nullable id)sender;
 @end
 
 @interface NSObject(NSColorPanelResponderMethod)
-- (void)changeColor:(id)sender;
+- (void)changeColor:(nullable id)sender;
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString *NSColorPanelColorDidChangeNotification;
+APPKIT_EXTERN NSString * NSColorPanelColorDidChangeNotification;
+
+NS_ASSUME_NONNULL_END
 

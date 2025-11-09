@@ -2,7 +2,7 @@
 archs:           [ i386 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/NavigationServices.framework/Versions/A/NavigationServices
-current-version: 215.1
+current-version: 220.0
 exports:         
   - archs:           [ i386 ]
     allowed-clients: [ QuickTime ]

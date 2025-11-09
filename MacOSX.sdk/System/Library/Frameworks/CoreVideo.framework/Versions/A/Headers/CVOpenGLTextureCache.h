@@ -2,7 +2,7 @@
  *  CVOpenGLTextureCache.h
  *  CoreVideo
  *
- *  Copyright 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright 2004-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -24,7 +24,7 @@ extern "C" {
     @abstract   CoreVideo OpenGL Texture Cache
 
 */
-typedef struct __CVOpenGLTextureCache *CVOpenGLTextureCacheRef;
+typedef struct CV_BRIDGED_TYPE(id) __CVOpenGLTextureCache *CVOpenGLTextureCacheRef;
 
 /* Dictionary keys and values for use with the 'cacheAttributes' parameter of CVOpenGLTextureCacheCreate */
 
@@ -33,10 +33,10 @@ typedef struct __CVOpenGLTextureCache *CVOpenGLTextureCacheRef;
    size is something reasonable for the GPU being used.   The automatic behaviour can be overridden below.  Note that setting
    kCVOpenGLTextureCacheChromaSamplingModeHighQuality is only a request.   GPUs that don't support ARB_fragment_program will still
    resort back to the native hardware support for YCbCr textures. */
-CV_EXPORT const CFStringRef kCVOpenGLTextureCacheChromaSamplingModeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef	kCVOpenGLTextureCacheChromaSamplingModeAutomatic AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // Defaut if the key is not present
-CV_EXPORT const CFStringRef	kCVOpenGLTextureCacheChromaSamplingModeHighestQuality AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;    // Force highest quality regardless of performance impact
-CV_EXPORT const CFStringRef	kCVOpenGLTextureCacheChromaSamplingModeBestPerformance AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;   // Do it the quickest way possible
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeAutomatic AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // Defaut if the key is not present
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeHighestQuality AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;    // Force highest quality regardless of performance impact
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeBestPerformance AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;   // Do it the quickest way possible
 
 CV_EXPORT CFTypeID CVOpenGLTextureCacheGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -47,7 +47,7 @@ CV_EXPORT CFTypeID CVOpenGLTextureCacheGetTypeID(void) AVAILABLE_MAC_OS_X_VERSIO
     @param      buffer A CVOpenGLTextureCache object that you want to retain.
     @result     A CVOpenGLTextureCache object that is the same as the passed in buffer.
 */
-CV_EXPORT CVOpenGLTextureCacheRef CVOpenGLTextureCacheRetain( CVOpenGLTextureCacheRef textureCache ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
+CV_EXPORT CVOpenGLTextureCacheRef CV_NULLABLE CVOpenGLTextureCacheRetain( CVOpenGLTextureCacheRef CV_NULLABLE textureCache ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
 
 /*!
     @function   CVOpenGLTextureCacheRelease
@@ -55,7 +55,7 @@ CV_EXPORT CVOpenGLTextureCacheRef CVOpenGLTextureCacheRetain( CVOpenGLTextureCac
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVOpenGLTextureCache object that you want to release.
 */
-CV_EXPORT void CVOpenGLTextureCacheRelease( CVOpenGLTextureCacheRef textureCache ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
+CV_EXPORT void CVOpenGLTextureCacheRelease( CV_RELEASES_ARGUMENT CVOpenGLTextureCacheRef CV_NULLABLE textureCache ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
 
 /*!
     @function   CVOpenGLTextureCacheCreate
@@ -69,12 +69,12 @@ CV_EXPORT void CVOpenGLTextureCacheRelease( CVOpenGLTextureCacheRef textureCache
     @result     Returns kCVReturnSuccess on success
 */
 CV_EXPORT CVReturn CVOpenGLTextureCacheCreate(
-					CFAllocatorRef allocator,
-					CFDictionaryRef cacheAttributes,
-					CGLContextObj cglContext,
-					CGLPixelFormatObj cglPixelFormat,
-					CFDictionaryRef textureAttributes,
-					CVOpenGLTextureCacheRef *cacheOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+    CFAllocatorRef CV_NULLABLE allocator,
+    CFDictionaryRef CV_NULLABLE cacheAttributes,
+    CGLContextObj CV_NONNULL cglContext,
+    CGLPixelFormatObj CV_NONNULL cglPixelFormat,
+    CFDictionaryRef CV_NULLABLE textureAttributes,
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLTextureCacheRef CV_NULLABLE * CV_NONNULL cacheOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLTextureCacheCreateTextureFromImage
@@ -86,11 +86,12 @@ CV_EXPORT CVReturn CVOpenGLTextureCacheCreate(
     @param      textureOut The newly created texture object will be placed here.
     @result     Returns kCVReturnSuccess on success
 */
-CV_EXPORT CVReturn CVOpenGLTextureCacheCreateTextureFromImage(CFAllocatorRef allocator,
-								       CVOpenGLTextureCacheRef textureCache,
-								       CVImageBufferRef sourceImage,
-								       CFDictionaryRef attributes,
-								       CVOpenGLTextureRef *textureOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVOpenGLTextureCacheCreateTextureFromImage(
+    CFAllocatorRef CV_NULLABLE allocator,
+    CVOpenGLTextureCacheRef CV_NONNULL textureCache,
+    CVImageBufferRef CV_NONNULL sourceImage,
+    CFDictionaryRef CV_NULLABLE attributes,
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLTextureRef CV_NULLABLE * CV_NONNULL textureOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLTextureCacheFlush
@@ -101,7 +102,7 @@ CV_EXPORT CVReturn CVOpenGLTextureCacheCreateTextureFromImage(CFAllocatorRef all
     @param      options Currently unused, set to 0.
     @result     Returns kCVReturnSuccess on success
 */
-CV_EXPORT void CVOpenGLTextureCacheFlush(CVOpenGLTextureCacheRef textureCache, CVOptionFlags options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVOpenGLTextureCacheFlush( CVOpenGLTextureCacheRef CV_NONNULL textureCache, CVOptionFlags options ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 #if defined(__cplusplus)
 }

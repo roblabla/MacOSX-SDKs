@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright © 2006-2014 Apple Inc. All rights reserved.
+	Copyright © 2006-2015 Apple Inc. All rights reserved.
  
 */
 
@@ -34,9 +34,9 @@ extern "C" {
 */
 CM_EXPORT OSStatus
 CMAudioDeviceClockCreate(
-		CFAllocatorRef allocator,
-		CFStringRef	deviceUID,
-		CMClockRef *clockOut)
+		CFAllocatorRef CM_NULLABLE allocator,
+		CFStringRef	CM_NULLABLE deviceUID,
+		CM_RETURNS_RETAINED_PARAMETER CMClockRef CM_NULLABLE * CM_NONNULL clockOut)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 #if ! TARGET_OS_IPHONE
@@ -46,9 +46,9 @@ CMAudioDeviceClockCreate(
 */
 CM_EXPORT OSStatus
 CMAudioDeviceClockCreateFromAudioDeviceID(
-		CFAllocatorRef allocator,
+		CFAllocatorRef CM_NULLABLE allocator,
 		AudioDeviceID deviceID,
-		CMClockRef *clockOut)
+		CM_RETURNS_RETAINED_PARAMETER CMClockRef CM_NULLABLE * CM_NONNULL clockOut)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -61,8 +61,8 @@ CF_IMPLICIT_BRIDGING_ENABLED
 */
 CM_EXPORT OSStatus
 CMAudioDeviceClockSetAudioDeviceUID(
-		CMClockRef clock,
-		CFStringRef deviceUID)
+		CMClockRef CM_NONNULL clock,
+		CFStringRef CM_NULLABLE deviceUID)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 /*!
@@ -71,7 +71,7 @@ CMAudioDeviceClockSetAudioDeviceUID(
 */
 CM_EXPORT OSStatus
 CMAudioDeviceClockSetAudioDeviceID(
-		CMClockRef clock,
+		CMClockRef CM_NONNULL clock,
 		AudioDeviceID deviceID)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
@@ -87,10 +87,10 @@ CMAudioDeviceClockSetAudioDeviceID(
 		returns NULL UID, the ID of the current default device, and *trackingDefaultDeviceOut == true.
 */
 CM_EXPORT OSStatus CMAudioDeviceClockGetAudioDevice(
-		CMClockRef clock,
-		CFStringRef *deviceUIDOut,				// may be NULL
-		AudioDeviceID *deviceIDOut,				// may be NULL
-		Boolean *trackingDefaultDeviceOut)		// may be NULL
+		CMClockRef CM_NONNULL clock,
+		CM_RETURNS_NOT_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NULLABLE deviceUIDOut,	// may be NULL
+		AudioDeviceID * CM_NULLABLE deviceIDOut,			// may be NULL
+		Boolean * CM_NULLABLE trackingDefaultDeviceOut)	// may be NULL
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 #endif // ! TARGET_OS_IPHONE

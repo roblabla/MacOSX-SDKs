@@ -33,6 +33,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 #if PRAGMA_ENUM_ALWAYSINT
 	#pragma enumsalwaysint on
@@ -79,11 +80,11 @@ typedef CF_ENUM(int, CFStreamErrorHTTP) {
  *	CFHTTPMessage with 0 bytes data.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPResponseHeader CF_AVAILABLE(10_1, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPResponseHeader CF_DEPRECATED(10_1, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*
- *  kCFStreamPropertyHTTPFinalURL
+ *  kCFStreamPropertyHTTPFinalURL   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Stream property key, for copy operations. The response header
@@ -92,10 +93,10 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPResponseHeader CF_AVAILABLE(10
  *	occurred.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPFinalURL CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPFinalURL CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 /*
- *  kCFStreamPropertyHTTPFinalRequest
+ *  kCFStreamPropertyHTTPFinalRequest   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Stream property key, for copy operations. The value is the
@@ -104,10 +105,10 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPFinalURL CF_AVAILABLE(10_2, 2_
  *	have been made.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPFinalRequest CF_AVAILABLE(10_5, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPFinalRequest CF_DEPRECATED(10_5, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 /*
- *  kCFStreamPropertyHTTPProxy
+ *  kCFStreamPropertyHTTPProxy   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Stream property key, for both set and copy operations. The value
@@ -120,66 +121,66 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPFinalRequest CF_AVAILABLE(10_5
  *	the system. HTTP proxies are not applied automatically.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPProxy CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPProxy CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*
- *  kCFStreamPropertyHTTPProxyHost
+ *  kCFStreamPropertyHTTPProxyHost   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Proxy dictionary key. The hostname of an HTTP proxy. The value is
  *	a CFString. The key name matches kSCPropNetProxiesHTTPProxy.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPProxyHost CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPProxyHost CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*
- *  kCFStreamPropertyHTTPProxyPort
+ *  kCFStreamPropertyHTTPProxyPort   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Proxy dictionary key. Value is a CFNumber.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPProxyPort CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPProxyPort CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 /* matches kSCPropNetProxiesHTTPPort */
 
 
 /*
- *  kCFStreamPropertyHTTPSProxyHost
+ *  kCFStreamPropertyHTTPSProxyHost   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Proxy dictionary key. Value is a CFString.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPSProxyHost CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPSProxyHost CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 /* matches kSCPropNetProxiesHTTPSProxy */
 
 
 /*
- *  kCFStreamPropertyHTTPSProxyPort
+ *  kCFStreamPropertyHTTPSProxyPort   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Proxy dictionary key. Value is a CFNumber.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPSProxyPort CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPSProxyPort CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 /* matches kSCPropNetProxiesHTTPSPort */
 
 
 /*
- *  kCFStreamPropertyHTTPShouldAutoredirect
+ *  kCFStreamPropertyHTTPShouldAutoredirect   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Stream property key. Value is a CFBoolean. Redirection is not
  *	performed by default.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPShouldAutoredirect CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPShouldAutoredirect CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*
- *  kCFStreamPropertyHTTPAttemptPersistentConnection
+ *  kCFStreamPropertyHTTPAttemptPersistentConnection   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Stream property key. Value is a CFBoolean.  If this property is
@@ -189,11 +190,11 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPShouldAutoredirect CF_AVAILABL
  *	by default.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPAttemptPersistentConnection CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPAttemptPersistentConnection CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*
- *  kCFStreamPropertyHTTPRequestBytesWrittenCount
+ *  kCFStreamPropertyHTTPRequestBytesWrittenCount   *** DEPRECATED ***
  *  
  *  Discussion:
  *	Stream property key. Value is a CFNumber. This property can only
@@ -202,15 +203,17 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPAttemptPersistentConnection CF
  *	underlying socket
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPRequestBytesWrittenCount CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPRequestBytesWrittenCount CF_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*********************/
 /* Creation routines */
 /*********************/
 /*
- *  CFReadStreamCreateForHTTPRequest()
+ *  CFReadStreamCreateForHTTPRequest()   *** DEPRECATED ***
  *  
+ *  DEPRECATED: Use NSURLSession API for http requests
+ *
  *  Discussion:
  *	Create an HTTP read stream for the response to the given request.
  *	When the stream is opened, it will begin transmitting the
@@ -241,12 +244,14 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyHTTPRequestBytesWrittenCount CF_AV
  *  
  */
 CFN_EXPORT CFReadStreamRef 
-CFReadStreamCreateForHTTPRequest(CFAllocatorRef alloc, CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0);
+CFReadStreamCreateForHTTPRequest(CFAllocatorRef __nullable alloc, CFHTTPMessageRef request) CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*
- *  CFReadStreamCreateForStreamedHTTPRequest()
+ *  CFReadStreamCreateForStreamedHTTPRequest()   *** DEPRECATED ***
  *  
+ *  DEPRECATED: Use NSURLSession API for http requests
+ *
  *  Discussion:
  *	Creates a read stream for the response to the given
  *	requestHeaders plus requestBody. Use in preference to
@@ -285,7 +290,7 @@ CFReadStreamCreateForHTTPRequest(CFAllocatorRef alloc, CFHTTPMessageRef request)
  *  
  */
 CFN_EXPORT CFReadStreamRef 
-CFReadStreamCreateForStreamedHTTPRequest(CFAllocatorRef alloc, CFHTTPMessageRef requestHeaders, CFReadStreamRef requestBody) CF_AVAILABLE(10_2, 2_0);
+CFReadStreamCreateForStreamedHTTPRequest(CFAllocatorRef __nullable alloc, CFHTTPMessageRef requestHeaders, CFReadStreamRef requestBody) CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
 
 /*
@@ -316,6 +321,7 @@ CFHTTPReadStreamSetRedirectsAutomatically(CFReadStreamRef httpStream, Boolean sh
 	#pragma enumsalwaysint reset
 #endif
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFHTTPSTREAM__ */

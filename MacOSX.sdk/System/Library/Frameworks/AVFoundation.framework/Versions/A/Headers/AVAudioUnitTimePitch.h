@@ -2,10 +2,12 @@
     File:		AVAudioUnitTimePitch.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioUnitTimeEffect.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @class AVAudioUnitTimePitch
     @abstract an AVAudioUnitTimeEffect that provides good quality time stretching and pitch shifting
@@ -50,3 +52,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic) float overlap;
 
 @end
+
+NS_ASSUME_NONNULL_END

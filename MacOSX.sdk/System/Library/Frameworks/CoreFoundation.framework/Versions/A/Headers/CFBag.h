@@ -1,5 +1,5 @@
 /*	CFBag.h
-	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBAG__)
@@ -31,8 +31,8 @@ const CFBagCallBacks kCFCopyStringBagCallBacks;
 
 typedef void (*CFBagApplierFunction)(const void *value, void *context);
 
-typedef const struct __CFBag * CFBagRef;
-typedef struct __CFBag * CFMutableBagRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CFBag * CFBagRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFBag * CFMutableBagRef;
 
 CF_EXPORT
 CFTypeID CFBagGetTypeID(void);

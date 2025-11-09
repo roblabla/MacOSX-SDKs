@@ -3,11 +3,11 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-516.0
+     Version:    vecLib-563.3
  
-     Copyright:  � 1999-2014 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright (c) 1999-2015 by Apple Inc. All rights reserved.
  
-     Bugs?:      For bug reports, consult the following page on
+     Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
@@ -29,6 +29,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+#if !defined __has_feature
+    #define __has_feature(f)    0
+#endif
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull begin")
+#else
+    #define __nullable
+    #define __nonnull
+#endif
+
 
 #if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
 #if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
@@ -145,7 +157,15 @@ Following is a short description of functions in this section:
 // introduce this conditional define to allow for certain inline
 // attributes to be defined.
 #if defined __SSE2__
-#include <immintrin.h>
+
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull end")
+	#include <immintrin.h>
+    _Pragma("clang assume_nonnull begin")
+#else
+	#include <immintrin.h>
+#endif
+
 #define __VBASICOPS_INLINE_ATTR__ __attribute__((__always_inline__, __nodebug__))
 #endif // defined __SSE2__
 
@@ -162,7 +182,8 @@ extern vUInt8
 vU8Divide(
   vUInt8    vN,
   vUInt8    vD,
-  vUInt8 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -177,7 +198,8 @@ extern vSInt8
 vS8Divide(
   vSInt8    vN,
   vSInt8    vD,
-  vSInt8 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt8 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -192,7 +214,8 @@ extern vUInt16
 vU16Divide(
   vUInt16    vN,
   vUInt16    vD,
-  vUInt16 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt16 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -207,7 +230,8 @@ extern vSInt16
 vS16Divide(
   vSInt16    vN,
   vSInt16    vD,
-  vSInt16 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt16 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -222,7 +246,8 @@ extern vUInt32
 vU32Divide(
   vUInt32    vN,
   vUInt32    vD,
-  vUInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -237,7 +262,8 @@ extern vSInt32
 vS32Divide(
   vSInt32    vN,
   vSInt32    vD,
-  vSInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -252,7 +278,8 @@ extern vUInt32
 vU64Divide(
   vUInt32    vN,
   vUInt32    vD,
-  vUInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -267,7 +294,8 @@ extern vSInt32
 vS64Divide(
   vSInt32    vN,
   vSInt32    vD,
-  vSInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -282,7 +310,8 @@ extern vUInt32
 vU128Divide(
   vUInt32    vN,
   vUInt32    vD,
-  vUInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -297,7 +326,8 @@ extern vSInt32
 vS128Divide(
   vSInt32    vN,
   vSInt32    vD,
-  vSInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32 * __nullable vRemainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1138,9 +1168,14 @@ vR128Rotate(
   vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
-#endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
+#endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
 #endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
+
+
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull end")
+#endif
 
 
 #ifdef __cplusplus

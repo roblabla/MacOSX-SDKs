@@ -3,11 +3,11 @@
  
      Contains:   Algebraic and logical operations on large operands.
  
-     Version:    vecLib-516.0
+     Version:    vecLib-563.3
  
-     Copyright:  © 1999-2014 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright (c) 1999-2015 by Apple Inc. All rights reserved.
  
-     Bugs?:      For bug reports, consult the following page on
+     Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
@@ -34,6 +34,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+#if !defined __has_feature
+    #define __has_feature(f)    0
+#endif
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull begin")
+#else
+    #define __nullable
+    #define __nonnull
+#endif
+
 
 #pragma options align=power
 
@@ -563,10 +575,11 @@ typedef union vS1024                    vS1024;
  */
 extern void 
 vU256Divide(
-  const vU256 *  numerator,
-  const vU256 *  divisor,
-  vU256 *        result,
-  vU256 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vU256       *numerator,
+  const vU256       *divisor,
+  vU256             *result,
+  vU256 * __nullable remainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -579,10 +592,11 @@ vU256Divide(
  */
 extern void 
 vS256Divide(
-  const vS256 *  numerator,
-  const vS256 *  divisor,
-  vS256 *        result,
-  vS256 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vS256       *numerator,
+  const vS256       *divisor,
+  vS256             *result,
+  vS256 * __nullable remainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -595,10 +609,11 @@ vS256Divide(
  */
 extern void 
 vU512Divide(
-  const vU512 *  numerator,
-  const vU512 *  divisor,
-  vU512 *        result,
-  vU512 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vU512       *numerator,
+  const vU512       *divisor,
+  vU512             *result,
+  vU512 * __nullable remainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -611,10 +626,11 @@ vU512Divide(
  */
 extern void 
 vS512Divide(
-  const vS512 *  numerator,
-  const vS512 *  divisor,
-  vS512 *        result,
-  vS512 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vS512       *numerator,
+  const vS512       *divisor,
+  vS512             *result,
+  vS512 * __nullable remainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -627,10 +643,11 @@ vS512Divide(
  */
 extern void 
 vU1024Divide(
-  const vU1024 *  numerator,
-  const vU1024 *  divisor,
-  vU1024 *        result,
-  vU1024 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vU1024       *numerator,
+  const vU1024       *divisor,
+  vU1024             *result,
+  vU1024 * __nullable remainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -643,10 +660,11 @@ vU1024Divide(
  */
 extern void 
 vS1024Divide(
-  const vS1024 *  numerator,
-  const vS1024 *  divisor,
-  vS1024 *        result,
-  vS1024 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vS1024       *numerator,
+  const vS1024       *divisor,
+  vS1024             *result,
+  vS1024 * __nullable remainder)
+    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1637,12 +1655,16 @@ vR1024Rotate(
   vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
-#endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
+#endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
 #endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
 
 
 #pragma options align=reset
+
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull end")
+#endif
 
 #ifdef __cplusplus
 }

@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 
 #if TARGET_OS_IPHONE
-#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/gltypes.h>
 #else // !TARGET_OS_IPHONE
-#import <OpenGL/gl3.h>
+#import <OpenGL/gltypes.h>
 #endif // !TARGET_OS_IPHONE
 
 #import <GLKit/GLKMath.h>
@@ -33,6 +33,7 @@
  All descendants of GLKEffectProperty are concrete, mutable classes.
  */
 
+NS_ASSUME_NONNULL_BEGIN
 typedef struct GLKEffectPropertyPrv *GLKEffectPropertyPrvPtr;
 
 NS_CLASS_AVAILABLE(10_8, 5_0)
@@ -47,3 +48,4 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 }
 
 @end
+NS_ASSUME_NONNULL_END

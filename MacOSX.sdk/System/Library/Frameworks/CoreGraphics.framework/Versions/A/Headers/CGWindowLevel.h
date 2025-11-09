@@ -5,6 +5,7 @@
 #ifndef CGWINDOWLEVEL_H_
 #define CGWINDOWLEVEL_H_
 
+#include <CoreFoundation/CFAvailability.h>
 #include <CoreGraphics/CGBase.h>
 #include <stdint.h>
 
@@ -18,33 +19,32 @@
    levels may be changed or adjusted in future releases without breaking
    binary compatability. */
 
-typedef int32_t CGWindowLevel;
-typedef int32_t CGWindowLevelKey;
-
-enum {
-  kCGBaseWindowLevelKey = 0,
-  kCGMinimumWindowLevelKey,
-  kCGDesktopWindowLevelKey,
-  kCGBackstopMenuLevelKey,
-  kCGNormalWindowLevelKey,
-  kCGFloatingWindowLevelKey,
-  kCGTornOffMenuWindowLevelKey,
-  kCGDockWindowLevelKey,
-  kCGMainMenuWindowLevelKey,
-  kCGStatusWindowLevelKey,
-  kCGModalPanelWindowLevelKey,
-  kCGPopUpMenuWindowLevelKey,
-  kCGDraggingWindowLevelKey,
-  kCGScreenSaverWindowLevelKey,
-  kCGMaximumWindowLevelKey,
-  kCGOverlayWindowLevelKey,
-  kCGHelpWindowLevelKey,
-  kCGUtilityWindowLevelKey,
-  kCGDesktopIconWindowLevelKey,
-  kCGCursorWindowLevelKey,
-  kCGAssistiveTechHighWindowLevelKey,
-  kCGNumberOfWindowLevelKeys	/* Must be last. */
+typedef CF_ENUM (int32_t, CGWindowLevelKey) {
+    kCGBaseWindowLevelKey = 0,
+    kCGMinimumWindowLevelKey,
+    kCGDesktopWindowLevelKey,
+    kCGBackstopMenuLevelKey,
+    kCGNormalWindowLevelKey,
+    kCGFloatingWindowLevelKey,
+    kCGTornOffMenuWindowLevelKey,
+    kCGDockWindowLevelKey,
+    kCGMainMenuWindowLevelKey,
+    kCGStatusWindowLevelKey,
+    kCGModalPanelWindowLevelKey,
+    kCGPopUpMenuWindowLevelKey,
+    kCGDraggingWindowLevelKey,
+    kCGScreenSaverWindowLevelKey,
+    kCGMaximumWindowLevelKey,
+    kCGOverlayWindowLevelKey,
+    kCGHelpWindowLevelKey,
+    kCGUtilityWindowLevelKey,
+    kCGDesktopIconWindowLevelKey,
+    kCGCursorWindowLevelKey,
+    kCGAssistiveTechHighWindowLevelKey,
+    kCGNumberOfWindowLevelKeys	/* Must be last. */
 };
+
+typedef int32_t CGWindowLevel;
 
 /* Return the window level that corresponds to one of the standard window
    types. */

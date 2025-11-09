@@ -12,6 +12,8 @@
 #import <GLKit/GLKViewController.h>
 #endif
 
+#import <GLKit/GLKModel.h>
+
 #import <GLKit/GLKEffects.h>
 
 #import <GLKit/GLKMath.h>

@@ -12,8 +12,11 @@
 #import <CoreLocation/CLLocationManager.h>
 #import <CoreLocation/CLRegion.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CLLocation;
 @class CLHeading;
+@class CLBeacon;
 
 /*
  *  CLLocationManagerDelegate
@@ -92,7 +95,7 @@
  */
 #if TARGET_OS_IPHONE
 - (void)locationManager:(CLLocationManager *)manager
-	didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0);
+	didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0);
 #endif
 
 /*
@@ -143,7 +146,7 @@
  *    Invoked when a region monitoring error has occurred. Error types are defined in "CLError.h".
  */
 - (void)locationManager:(CLLocationManager *)manager
-	monitoringDidFailForRegion:(CLRegion *)region
+	monitoringDidFailForRegion:(nullable CLRegion *)region
 	withError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
@@ -187,9 +190,11 @@
  *    are all possible reasons for finishing deferred updates.
  *
  *    An error will be returned if deferred updates end before the specified
- *    criteria are met (see CLError).
+ *    criteria are met (see CLError), otherwise error will be nil.
  */
 - (void)locationManager:(CLLocationManager *)manager
-	didFinishDeferredUpdatesWithError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+	didFinishDeferredUpdatesWithError:(nullable NSError *)error __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

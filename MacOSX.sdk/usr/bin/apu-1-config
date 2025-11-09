@@ -25,7 +25,7 @@ prefix="/usr"
 exec_prefix="${prefix}"
 bindir="${exec_prefix}/bin"
 libdir="${exec_prefix}/lib"
-includedir="${prefix}/include/apr-${APRUTIL_MAJOR_VERSION}"
+includedir="${SDKROOT}${prefix}/include/apr-${APRUTIL_MAJOR_VERSION}"
 
 LIBS="-lexpat -liconv      -lsqlite3        -lldap -llber"
 INCLUDES=""
@@ -35,8 +35,8 @@ DBM_LIBS="  "
 
 APRUTIL_LIBNAME="aprutil-${APRUTIL_MAJOR_VERSION}"
 
-APU_SOURCE_DIR="/SourceCache/apr/apr-32/apr-util/apr-util"
-APU_BUILD_DIR="/BinaryCache/apr/apr-32~217/Objects/apr-util"
+APU_SOURCE_DIR="/Library/Caches/com.apple.xbs/Sources/apr/apr-36/apr-util/apr-util"
+APU_BUILD_DIR="/Library/Caches/com.apple.xbs/Binaries/apr/apr-36~217/Objects/apr-util"
 APR_XML_EXPAT_OLD="@APR_XML_EXPAT_OLD@"
 APU_DB_VERSION="0"
 

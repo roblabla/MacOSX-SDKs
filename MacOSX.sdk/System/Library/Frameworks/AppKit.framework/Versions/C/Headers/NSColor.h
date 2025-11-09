@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -29,13 +29,17 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSPasteboard.h>
 #import <QuartzCore/CIColor.h>
 
-@class NSDictionary, NSImage, NSColorSpace;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSImage, NSColorSpace;
 
 #define NSAppKitVersionNumberWithPatternColorLeakFix 641.0
 
@@ -44,7 +48,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 @interface NSColor : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Create NSCalibratedWhiteColorSpace colors.
 */
@@ -67,7 +71,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 
 /* Create named colors from standard color catalogs (such as Pantone).
 */
-+ (NSColor *)colorWithCatalogName:(NSString *)listName colorName:(NSString *)colorName;
++ (nullable NSColor *)colorWithCatalogName:(NSString *)listName colorName:(NSString *)colorName;
 
 
 /* Create colors with arbitrary colorspace. The number of components in the provided array should match the number dictated by the specified colorspace, plus one for alpha (supply 1.0 for opaque colors); otherwise an exception will be raised.  If the colorspace is one which cannot be used with NSColors, nil is returned.
@@ -150,10 +154,10 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)alternateSelectedControlColor;	// Similar to selectedControlColor; for use in lists and tables 
 + (NSColor *)alternateSelectedControlTextColor;		// Similar to selectedControlTextColor; see alternateSelectedControlColor
 
-+ (NSArray *)controlAlternatingRowBackgroundColors;	// Standard colors for alternating colored rows in tables and lists (for instance, light blue/white; don't assume just two colors)
++ (NSArray<NSColor *> *)controlAlternatingRowBackgroundColors;	// Standard colors for alternating colored rows in tables and lists (for instance, light blue/white; don't assume just two colors)
 
-- (NSColor *)highlightWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => highlightColor
-- (NSColor *)shadowWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => shadowColor
+- (nullable NSColor *)highlightWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => highlightColor
+- (nullable NSColor *)shadowWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => shadowColor
 
 + (NSColor *)colorForControlTint:(NSControlTint)controlTint;	// pass in valid tint to get rough color matching. returns default if invalid tint
 
@@ -182,18 +186,18 @@ If device is nil then the current device (as obtained from the currently lockFoc
 
 If colorSpace is nil, then the most appropriate color space is used.
 */ 
-- (NSColor *)colorUsingColorSpaceName:(NSString *)colorSpace;
-- (NSColor *)colorUsingColorSpaceName:(NSString *)colorSpace device:(NSDictionary *)deviceDescription;
+- (nullable NSColor *)colorUsingColorSpaceName:(NSString *)colorSpace;
+- (nullable NSColor *)colorUsingColorSpaceName:(nullable NSString *)colorSpace device:(nullable NSDictionary<NSString *, id> *)deviceDescription;
 
 
 /* colorUsingColorSpace: will convert existing color to a new colorspace and create a new color, which will likely have different component values but look the same. It will return the same color if the colorspace is already the same as the one specified.  Will return nil if conversion is not possible.
 */
-- (NSColor *)colorUsingColorSpace:(NSColorSpace *)space;
+- (nullable NSColor *)colorUsingColorSpace:(NSColorSpace *)space;
 
 
 /* Blend using the NSCalibratedRGB color space. Both colors are converted into the calibrated RGB color space, and they are blended by taking fraction of color and 1 - fraction of the receiver. The result is in the calibrated RGB color space. If the colors cannot be converted into the calibrated RGB color space the blending fails and nil is returned.
 */
-- (NSColor *)blendedColorWithFraction:(CGFloat)fraction ofColor:(NSColor *)color;
+- (nullable NSColor *)blendedColorWithFraction:(CGFloat)fraction ofColor:(NSColor *)color;
 
 
 /* Returns a color in the same color space as the receiver with the specified alpha component. The abstract implementation of this method returns the receiver if alpha is 1.0, otherwise it returns nil; subclassers who have explicit opacity components override this method to actually return a color with the specified alpha.
@@ -218,20 +222,20 @@ If colorSpace is nil, then the most appropriate color space is used.
 @property (readonly) CGFloat redComponent;
 @property (readonly) CGFloat greenComponent;
 @property (readonly) CGFloat blueComponent;
-- (void)getRed:(CGFloat *)red green:(CGFloat *)green blue:(CGFloat *)blue alpha:(CGFloat *)alpha;
+- (void)getRed:(nullable CGFloat *)red green:(nullable CGFloat *)green blue:(nullable CGFloat *)blue alpha:(nullable CGFloat *)alpha;
 
 /* Get the components of NSCalibratedRGB or NSDeviceRGB colors as hue, saturation, or brightness. Starting in 10.7, it's also possible to call these on NSCustomColorSpace colors with color spaces with RGB model. 
 */
 @property (readonly) CGFloat hueComponent;
 @property (readonly) CGFloat saturationComponent;
 @property (readonly) CGFloat brightnessComponent;
-- (void)getHue:(CGFloat *)hue saturation:(CGFloat *)saturation brightness:(CGFloat *)brightness alpha:(CGFloat *)alpha;
+- (void)getHue:(nullable CGFloat *)hue saturation:(nullable CGFloat *)saturation brightness:(nullable CGFloat *)brightness alpha:(nullable CGFloat *)alpha;
 
 
 /* Get the white component of NSCalibratedWhite or NSDeviceWhite colors. Starting in 10.7, it's possible to call these on NSCustomColorSpace colors with color spaces with grayscale model. 
 */
 @property (readonly) CGFloat whiteComponent;
-- (void)getWhite:(CGFloat *)white alpha:(CGFloat *)alpha;
+- (void)getWhite:(nullable CGFloat *)white alpha:(nullable CGFloat *)alpha;
 
 
 /* Get the CMYK components of NSDeviceCMYK colors.  Starting in 10.7, it's possible to call these on NSCustomColorSpace colors with color spaces with CMYK model. 
@@ -240,7 +244,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 @property (readonly) CGFloat magentaComponent;
 @property (readonly) CGFloat yellowComponent;
 @property (readonly) CGFloat blackComponent;
-- (void)getCyan:(CGFloat *)cyan magenta:(CGFloat *)magenta yellow:(CGFloat *)yellow black:(CGFloat *)black alpha:(CGFloat *)alpha;
+- (void)getCyan:(nullable CGFloat *)cyan magenta:(nullable CGFloat *)magenta yellow:(nullable CGFloat *)yellow black:(nullable CGFloat *)black alpha:(nullable CGFloat *)alpha;
 
 
 /* For colors with custom colorspace; get the colorspace and individual floating point components, including alpha. Note that all these methods will work for other NSColors which have floating point components. They will raise exceptions otherwise, like other existing colorspace-specific methods.
@@ -257,7 +261,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 
 /* Pasteboard methods
 */
-+ (NSColor *)colorFromPasteboard:(NSPasteboard *)pasteBoard;
++ (nullable NSColor *)colorFromPasteboard:(NSPasteboard *)pasteBoard;
 - (void)writeToPasteboard:(NSPasteboard *)pasteBoard;
 
 
@@ -273,7 +277,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 
 /* Convert to and from CGColorRef.
 */
-+ (NSColor *)colorWithCGColor:(CGColorRef)cgColor NS_AVAILABLE_MAC(10_8);   // May return nil
++ (nullable NSColor *)colorWithCGColor:(CGColorRef)cgColor NS_AVAILABLE_MAC(10_8);   // May return nil
 @property (readonly) CGColorRef CGColor NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_8);      // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
 
 
@@ -292,15 +296,17 @@ This method provides a global approach to removing alpha which might not always 
 @end
 
 @interface CIColor (NSAppKitAdditions)
-- (instancetype)initWithColor:(NSColor *)color;
+- (nullable instancetype)initWithColor:(NSColor *)color;
 @end
 
 @interface NSCoder(NSAppKitColorExtensions)
 
 /* To decode NXColors... Will return nil if the archived color was "invalid" (written out by the kit in a few instances). Otherwise returns autoreleased NSColor. Can't write NSColors as NXColors, so we have no corresponding encode method.
 */
-- (NSColor *)decodeNXColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSColor *)decodeNXColor NS_DEPRECATED_MAC(10_0, 10_9);
 
 @end
 
-APPKIT_EXTERN NSString *NSSystemColorsDidChangeNotification;
+APPKIT_EXTERN NSString * NSSystemColorsDidChangeNotification;
+
+NS_ASSUME_NONNULL_END

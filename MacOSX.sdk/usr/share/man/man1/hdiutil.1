@@ -1,6 +1,5 @@
-.Dd 20 May 2014
-.\" general revision for 10.10 includes chunk size additions and
-.\" step 1 of removing IDME (declare the verb deprecated).
+.Dd 20 Mar 2015
+.\" 10.11 revision includes information on the new ULFO/lzfse format
 .\" preview changes to this file with 'man Documentation/hdiutil.1'
 .Os "OS X"
 .Dt HDIUTIL 1
@@ -599,7 +598,7 @@ each time the image grows.  Valid values for SPARSEBUNDLE range from 2048
 to 16777216 sectors (1 MB to 8 GB).
 .Pp
 The maximum size of a SPARSE image is 128 petabytes; the maximum for
-SPARSEBUNDLE is just under 8 exabytes (2^63 - 512 bytes minus 1 byte).
+SPARSEBUNDLE is just under 8 exabytes (2^63 - 512 bytes).
 The amount of data that can be stored in either type of sparse image is
 additionally bounded by the filesystem in the image and by any partition
 map.
@@ -835,7 +834,15 @@ UDCO - UDIF ADC-compressed image
 .It
 UDZO - UDIF zlib-compressed image
 .It
+ULFO - UDIF lzfse-compressed image (OS X 10.11+ only)
+.It
 UDBZ - UDIF bzip2-compressed image (Mac OS X 10.4+ only)
+.It
+UDTO - DVD/CD-R master for export
+.It
+UDSP - SPARSE (grows with content)
+.It
+UDSB - SPARSEBUNDLE (grows with content; bundle-backed)
 .It
 UFBI - UDIF entire image with MD5 checksum
 .It
@@ -843,30 +850,22 @@ UDRo - UDIF read-only (obsolete format)
 .It
 UDCo - UDIF compressed (obsolete format)
 .It
-UDTO - DVD/CD-R master for export
-.It
-UDxx - UDIF stub image
-.It
-UDSP - SPARSE (grows with content)
-.It
-UDSB - SPARSEBUNDLE (grows with content; bundle-backed)
-.It
 RdWr - NDIF read/write image (deprecated)
 .It
-Rdxx - NDIF read-only image (Disk Copy 6.3.3 format)
+Rdxx - NDIF read-only image (Disk Copy 6.3.3 format; deprecated)
 .It
 ROCo - NDIF compressed image (deprecated)
 .It
 Rken - NDIF compressed (obsolete format)
 .It
-DC42 - Disk Copy 4.2 image
+DC42 - Disk Copy 4.2 image (obsolete format)
 .El
 .Pp
 In addition to the compression offered by some formats, the UDIF and NDIF
 read-only formats skip unused space in HFS, ExFAT, and MS-DOS (FAT, FAT32)
 filesystems.  For UDZO,
 .Fl imagekey Ar zlib-level=value
-allows the zlib compression level to be specified ala
+allows the zlib compression level to be specified a la
 .Xr gzip 1 Ns .
 The default compression level is 1 (fastest).
 .Pp
@@ -890,7 +889,7 @@ The default is 4 (2K).
 .It Fl pmap
 add partition map.
 .br
-When converting a NDIF to a any variety of UDIF, or when converting an
+When converting an NDIF to any variety of UDIF, or when converting an
 unpartitioned UDIF, the default is true.
 .It Fl segmentSize
 .Op Ar size_spec
@@ -2285,7 +2284,8 @@ and the default Disk Copy.app "compressed" format became UDZO (breaking
 compatibility with 10.0).  Mac OS X 10.4 introduced bzip2 compression in the
 UDBZ format which provides smaller images (especially when combined with
 .Sy makehybrid )
-at the expense of backwards compatibility.
+at the expense of backwards compatibility, some performance, and kernel
+compatibility.
 .Pp
 In Mac OS X 10.4.7, the resource forks previously embedded in UDIF images
 were abandoned entirely to avoid metadata length limitations imposed by
@@ -2308,6 +2308,11 @@ and
 .Sy unflatten Ns ,
 or simply
 .Sy convert Ns .
+.Pp
+OS X 10.11 introduced lzfse compression in the ULFO format, providing
+faster, more efficient compression and smaller images compared to UDZO.
+These images are also supported in-kernel, but will not work on any
+earlier versions of the OS.
 .\"
 .Sh HISTORY
 Disk images were first invented to electronically store and transmit
@@ -2341,6 +2346,10 @@ recognizes the filesystems.  They can also be burned with
 .Ns Sy burn .
 .\"
 .Sh WHAT'S NEW
+OS X 10.11 adds ULFO format images compressed with lzfse.  These images are
+more efficient and smaller than comparable UDZO images compressed with zlib,
+and retain kernel compatibility, but are not usable on earlier OSes.
+.Pp
 OS X 10.10 quadrupled the default UDIF chunk size without affecting backward
 compatibility.  UDIF images created or converted on 10.10 will benefit from
 smaller metadata and more efficient compression for UDZO and especially UDBZ

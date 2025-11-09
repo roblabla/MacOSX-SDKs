@@ -2,14 +2,15 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal
-current-version: 221.7.2
+current-version: 248.0
 exports:         
   - archs:           [ i386, x86_64 ]
     allowed-clients: [ CoreFoundation ]
     symbols:         [ __CFURLBookmarkDataCopyDescription, __CFURLBookmarkToAliasHandle, 
-                       __CFURLCompareBookmarkData, __CFURLCreateBookmarkData, 
-                       __CFURLCreateBookmarkDataFromAliasRecord, __CFURLCreateBookmarkDataFromFile, 
-                       __CFURLCreateByResolvingBookmarkData, __CFURLCreateResourcePropertiesForKeysFromBookmarkData, 
+                       __CFURLCompareBookmarkData, __CFURLCopySecurityEAs, 
+                       __CFURLCreateBookmarkData, __CFURLCreateBookmarkDataFromAliasRecord, 
+                       __CFURLCreateBookmarkDataFromFile, __CFURLCreateByResolvingBookmarkData, 
+                       __CFURLCreateResourcePropertiesForKeysFromBookmarkData, 
                        __CFURLCreateResourcePropertyForKeyFromBookmarkData, 
                        __CFURLCreateWithVolumeURLAndResourceID, __CFURLStartAccessingSecurityScopedResource, 
                        __CFURLStopAccessingSecurityScopedResource, __CFURLWriteBookmarkDataToFile, 

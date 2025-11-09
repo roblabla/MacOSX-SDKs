@@ -2,12 +2,12 @@
  *  CVDisplayLink.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
  
   /*! @header CVDisplayLink.h
-	@copyright 2004-2014 Apple Inc. All rights reserved.
+	@copyright 2004-2015 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion The main purpose of the CoreVideo DisplayLink API is to provide a worker thread to the VideoUnit subsystem that is clocked based on the refresh rate of a CGDirectDisplay device. In the current implementation, these DisplayLinks are created automatically by the Video Unit display nodes, and the developer does not have to deal with them directly.
 		A CoreVideo DisplayLink is represented in code by a CVDisplayLinkRef. The CVDisplayLinkRef API uses the CoreFoundation class system internally to provide reference counting behaviour and other such goodies. There are three different ways to create a CVDisplayLinkRef in the current API. The first call is the most general case, and the other two are provided as a convenience (the third will probably go away, as it's only marginally useful). 
@@ -19,23 +19,34 @@
 #define __COREVIDEO_CVDISPLAYLINK_H__ 1
 
 
-typedef struct __CVDisplayLink *CVDisplayLinkRef;
 
 #include <ApplicationServices/ApplicationServices.h>
 #include <CoreVideo/CVReturn.h>
 #include <CoreVideo/CVBase.h>
 #include <OpenGL/OpenGL.h>
 
+typedef struct CV_BRIDGED_TYPE(id) __CVDisplayLink *CVDisplayLinkRef;
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
 
-typedef CVReturn (*CVDisplayLinkOutputCallback)(CVDisplayLinkRef displayLink, 
-                                                const CVTimeStamp *inNow, 
-                                                const CVTimeStamp *inOutputTime, 
-                                                CVOptionFlags flagsIn, 
-                                                CVOptionFlags *flagsOut, 
-                                                void *displayLinkContext);
+typedef CVReturn (*CVDisplayLinkOutputCallback)(
+		CVDisplayLinkRef CV_NONNULL displayLink,
+		const CVTimeStamp * CV_NONNULL inNow,
+		const CVTimeStamp * CV_NONNULL inOutputTime,
+		CVOptionFlags flagsIn, 
+		CVOptionFlags * CV_NONNULL flagsOut,
+		void * CV_NULLABLE displayLinkContext );
+
+#if __BLOCKS__
+typedef CVReturn (^CVDisplayLinkOutputHandler)(
+		CVDisplayLinkRef CV_NONNULL displayLink,
+		const CVTimeStamp * CV_NONNULL inNow,
+		const CVTimeStamp * CV_NONNULL inOutputTime,
+		CVOptionFlags flagsIn,
+		CVOptionFlags * CV_NONNULL flagsOut );
+#endif // __BLOCKS__
 
 CV_EXPORT CFTypeID CVDisplayLinkGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -48,7 +59,10 @@ CV_EXPORT CFTypeID CVDisplayLinkGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_
     @param      displayLisk The new display link will be returned here
     @result	returns kCVReturnSuccess on success.
 */
-CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplays(CGDirectDisplayID *displayArray, CFIndex count, CVDisplayLinkRef *displayLinkOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplays(
+    CGDirectDisplayID * CV_NONNULL displayArray,
+    CFIndex count,
+    CV_RETURNS_RETAINED_PARAMETER CVDisplayLinkRef CV_NULLABLE * CV_NONNULL displayLinkOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkCreateWithOpenGLDisplayMask
@@ -58,7 +72,9 @@ CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplays(CGDirectDisplayID *displayA
     @param      displayLisk The new display link will be returned here
     @result	returns kCVReturnSuccess on success.
 */
-CV_EXPORT CVReturn CVDisplayLinkCreateWithOpenGLDisplayMask(CGOpenGLDisplayMask mask, CVDisplayLinkRef *displayLinkOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkCreateWithOpenGLDisplayMask(
+    CGOpenGLDisplayMask mask,
+    CV_RETURNS_RETAINED_PARAMETER CVDisplayLinkRef CV_NULLABLE * CV_NONNULL displayLinkOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkCreateWithCGDisplay
@@ -68,7 +84,9 @@ CV_EXPORT CVReturn CVDisplayLinkCreateWithOpenGLDisplayMask(CGOpenGLDisplayMask 
     @param      displayLisk The new display link will be returned here
     @result	returns kCVReturnSuccess on success.
 */
-CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplay(CGDirectDisplayID displayID, CVDisplayLinkRef *displayLinkOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplay(
+    CGDirectDisplayID displayID,
+    CV_RETURNS_RETAINED_PARAMETER CVDisplayLinkRef CV_NULLABLE * CV_NONNULL displayLinkOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkCreateWithActiveCGDisplays
@@ -76,7 +94,8 @@ CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplay(CGDirectDisplayID displayID,
     @param      displayLinkOut The newly created CVDisplayLink
     @result     kCVReturnSuccess if the device was created, or failure
 */
-CV_EXPORT CVReturn CVDisplayLinkCreateWithActiveCGDisplays(CVDisplayLinkRef *displayLinkOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkCreateWithActiveCGDisplays(
+    CV_RETURNS_RETAINED_PARAMETER CVDisplayLinkRef CV_NULLABLE * CV_NONNULL displayLinkOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkSetCurrentCGDisplay
@@ -87,7 +106,7 @@ CV_EXPORT CVReturn CVDisplayLinkCreateWithActiveCGDisplays(CVDisplayLinkRef *dis
     @param      displayID target CGDirectDisplayID
     @result     CVReturn. kCVReturnSuccess if successfull.
 */
-CV_EXPORT CVReturn CVDisplayLinkSetCurrentCGDisplay(CVDisplayLinkRef displayLink, CGDirectDisplayID displayID) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkSetCurrentCGDisplay( CVDisplayLinkRef CV_NONNULL displayLink, CGDirectDisplayID displayID ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext
@@ -97,9 +116,10 @@ CV_EXPORT CVReturn CVDisplayLinkSetCurrentCGDisplay(CVDisplayLinkRef displayLink
     @param      cglPixelFormat The OpenGL pixel format used to create the passed in OpenGL context
     @result     kCVReturnSuccess if a device was found, or failure.
 */
-CV_EXPORT CVReturn CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(CVDisplayLinkRef displayLink, 
-                                                                  CGLContextObj cglContext,  
-                                                                  CGLPixelFormatObj cglPixelFormat) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(
+																  CVDisplayLinkRef CV_NONNULL displayLink,
+																  CGLContextObj CV_NONNULL cglContext,
+																  CGLPixelFormatObj CV_NONNULL cglPixelFormat) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 /*!
     @function   CVDisplayLinkGetCurrentCGDisplay
     @abstract   Gets the current display of a DisplayLink
@@ -107,7 +127,7 @@ CV_EXPORT CVReturn CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(CVDisplayLi
     @param      displayLink target CVDisplayLinkRef
     @result     CGDirectDisplayID
 */
-CV_EXPORT CGDirectDisplayID CVDisplayLinkGetCurrentCGDisplay(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CGDirectDisplayID CVDisplayLinkGetCurrentCGDisplay( CVDisplayLinkRef CV_NONNULL displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkSetOutputCallback
@@ -118,17 +138,28 @@ CV_EXPORT CGDirectDisplayID CVDisplayLinkGetCurrentCGDisplay(CVDisplayLinkRef di
     @param	userInfo  User data for the callback to identify the context.
     @result     CVReturn. kCVReturnSuccess if successfull.
 */
-CV_EXPORT CVReturn CVDisplayLinkSetOutputCallback(CVDisplayLinkRef displayLink, CVDisplayLinkOutputCallback callback, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkSetOutputCallback( CVDisplayLinkRef CV_NONNULL displayLink, CVDisplayLinkOutputCallback CV_NONNULL callback, void * CV_NULLABLE userInfo ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+
+/*!
+	 @function   CVDisplayLinkSetOutputHandler
+	 @abstract   Set the renderer output callback block
+	 @discussion The DisplayLink will invoke this block whenever it wants you to output a frame. You can only have a block or a callback function; not both.
+	 @param      displayLink target CVDisplayLinkRef
+	 @param      handler	CVDisplayLinkOutputHandler block
+	 @result     CVReturn. kCVReturnSuccess if successful.
+*/
+	
+CV_EXPORT CVReturn CVDisplayLinkSetOutputHandler( CVDisplayLinkRef CV_NONNULL displayLink, CVDisplayLinkOutputHandler CV_NONNULL handler );
 
 /*!
     @function   CVDisplayLinkStart
     @abstract   Start timer for DisplayLink
-    @discussion (description)
+    @discussion This call should not be made from inside the CVDisplayLinkOutputCallback
     @param      displayLink target CVDisplayLinkRef
     @result     CVReturn. kCVReturnSuccess if successfull.
-                kCVReturnDisplayLinkCallbacksNotSet The DisplayLink cannot be started untill both callbacks are set.
+                kCVReturnDisplayLinkCallbacksNotSet The DisplayLink cannot be started until the output callback is set.
 */
-CV_EXPORT CVReturn CVDisplayLinkStart(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkStart( CVDisplayLinkRef CV_NONNULL displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkStop
@@ -137,7 +168,7 @@ CV_EXPORT CVReturn CVDisplayLinkStart(CVDisplayLinkRef displayLink) AVAILABLE_MA
     @param      displayLink target CVDisplayLinkRef
     @result     CVReturn. kCVReturnSuccess if successfull.
 */
-CV_EXPORT CVReturn CVDisplayLinkStop(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkStop( CVDisplayLinkRef CV_NONNULL displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkGetNominalOutputVideoRefreshPeriod
@@ -146,7 +177,7 @@ CV_EXPORT CVReturn CVDisplayLinkStop(CVDisplayLinkRef displayLink) AVAILABLE_MAC
     @param      displayLink The CVDisplayLink to get the refresh period from.
     @result     A CVTime struct that holds the nominal refresh period.    This value may be indefinite.
 */
-CV_EXPORT CVTime CVDisplayLinkGetNominalOutputVideoRefreshPeriod(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVTime CVDisplayLinkGetNominalOutputVideoRefreshPeriod( CVDisplayLinkRef CV_NONNULL displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkGetOutputVideoLatency
@@ -155,7 +186,7 @@ CV_EXPORT CVTime CVDisplayLinkGetNominalOutputVideoRefreshPeriod(CVDisplayLinkRe
     @param      displayLink The CVDisplayLink to get the latency period from.
     @result     A CVTime struct that holds the latency.   This value may be indefinite.
 */
-CV_EXPORT CVTime CVDisplayLinkGetOutputVideoLatency(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVTime CVDisplayLinkGetOutputVideoLatency( CVDisplayLinkRef CV_NONNULL displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkGetActualOutputVideoRefreshPeriod
@@ -164,7 +195,7 @@ CV_EXPORT CVTime CVDisplayLinkGetOutputVideoLatency(CVDisplayLinkRef displayLink
     @param      displayLink The CVDisplayLink to get the refresh period from.
     @result     A double containing the actual refresh period.   This value may be zero if the device is not running, or is otherwise unavailable.
 */
-CV_EXPORT double CVDisplayLinkGetActualOutputVideoRefreshPeriod(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT double CVDisplayLinkGetActualOutputVideoRefreshPeriod( CVDisplayLinkRef CV_NONNULL displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkIsRunning
@@ -173,7 +204,7 @@ CV_EXPORT double CVDisplayLinkGetActualOutputVideoRefreshPeriod(CVDisplayLinkRef
     @param      displayLink The CVDisplayLink to get the running state from.
     @result     A boolean describing the running state. It returns true if it is running and false if it is not running or the CVDisplayLink is invalid.
 */
-CV_EXPORT Boolean CVDisplayLinkIsRunning(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT Boolean CVDisplayLinkIsRunning( CVDisplayLinkRef CV_NONNULL displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkGetCurrentTime
@@ -183,7 +214,7 @@ CV_EXPORT Boolean CVDisplayLinkIsRunning(CVDisplayLinkRef displayLink) AVAILABLE
     @param      outTime A pointer to a CVTimeStamp struct.  This struct's version field must currently be set correctly (currently 0) to indicate which version of the timestamp struct is desired.
     @result     kCVReturnSuccess if the current time could be retrieved, otherwise an error indicating why the operation failed.
 */
-CV_EXPORT CVReturn CVDisplayLinkGetCurrentTime(CVDisplayLinkRef displayLink, CVTimeStamp *outTime) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkGetCurrentTime( CVDisplayLinkRef CV_NONNULL displayLink, CVTimeStamp * CV_NONNULL outTime ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkTranslateTime
@@ -196,7 +227,7 @@ CV_EXPORT CVReturn CVDisplayLinkGetCurrentTime(CVDisplayLinkRef displayLink, CVT
                 which representations to translate to.
     @result     kCVReturnSuccess if the time could be translated, otherwise an error indicating why the operation failed.
 */
-CV_EXPORT CVReturn CVDisplayLinkTranslateTime(CVDisplayLinkRef displayLink, const CVTimeStamp *inTime, CVTimeStamp *outTime) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVDisplayLinkTranslateTime( CVDisplayLinkRef CV_NONNULL displayLink, const CVTimeStamp * CV_NONNULL inTime, CVTimeStamp * CV_NONNULL outTime ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkRetain
@@ -205,7 +236,7 @@ CV_EXPORT CVReturn CVDisplayLinkTranslateTime(CVDisplayLinkRef displayLink, cons
     @param      displayLink target CVDisplayLinkRef.   NULL safe.
 	@result		If successfull the passed in dislplayLink
 */
-CV_EXPORT CVDisplayLinkRef CVDisplayLinkRetain(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVDisplayLinkRef CV_NULLABLE CVDisplayLinkRetain( CVDisplayLinkRef CV_NULLABLE displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVDisplayLinkRelease
@@ -213,7 +244,7 @@ CV_EXPORT CVDisplayLinkRef CVDisplayLinkRetain(CVDisplayLinkRef displayLink) AVA
     @discussion Use this call to release a CVDisplayLink.
     @param      displayLink target CVDisplayLinkRef.  NULL safe.
 */
-CV_EXPORT void CVDisplayLinkRelease(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVDisplayLinkRelease( CV_RELEASES_ARGUMENT CVDisplayLinkRef CV_NULLABLE displayLink ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 #if defined(__cplusplus)
 }

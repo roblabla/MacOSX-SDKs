@@ -3,12 +3,14 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2012-2013 Apple Inc. All rights reserved.
+	Copyright 2012-2015 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
   @class		AVTextStyleRule
@@ -23,6 +25,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 @private
 	AVTextStyleRuleInternal *_textStyleRule;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method		propertyListForTextStyleRules:
@@ -32,7 +35,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @result		A serializable property list.
  @discussion	For serialization utilities, see NSPropertyList.h.
 */
-+ (id)propertyListForTextStyleRules:(NSArray *)textStyleRules;
++ (id)propertyListForTextStyleRules:(NSArray<AVTextStyleRule *> *)textStyleRules;
 
 /*!
  @method		textStyleRulesFromPropertyList:
@@ -41,7 +44,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  				A property list, normally obtained previously via an invocation of +propertyListForTextStyleRules:.
  @result		An NSArray of AVTextStyleRules
 */
-+ (NSArray *)textStyleRulesFromPropertyList:(id)plist;
++ (nullable NSArray<AVTextStyleRule *> *)textStyleRulesFromPropertyList:(id)plist;
 
 /*!
  @method		textStyleRuleWithTextMarkupAttributes:
@@ -51,7 +54,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @result		An instance of AVTextStyleRule
  @discussion	Equivalent to invoking +textStyleRuleWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
 */
-+ (AVTextStyleRule *)textStyleRuleWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes;
++ (nullable AVTextStyleRule *)textStyleRuleWithTextMarkupAttributes:(NSDictionary<NSString *, id> *)textMarkupAttributes;
 
 /*!
  @method		textStyleRuleWithTextMarkupAttributes:textSelector:
@@ -62,7 +65,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 				An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
  @result		An instance of AVTextStyleRule
 */
-+ (AVTextStyleRule *)textStyleRuleWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes textSelector:(NSString *)textSelector;
++ (nullable AVTextStyleRule *)textStyleRuleWithTextMarkupAttributes:(NSDictionary<NSString *, id> *)textMarkupAttributes textSelector:(nullable NSString *)textSelector;
 
 /*!
  @method		initWithTextMarkupAttributes:
@@ -72,7 +75,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @result		An instance of AVTextStyleRule
  @discussion	Equivalent to invoking -initWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
 */
-- (instancetype)initWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes;
+- (nullable instancetype)initWithTextMarkupAttributes:(NSDictionary<NSString *, id> *)textMarkupAttributes;
 
 /*!
  @method		initWithTextMarkupAttributes:textSelector:
@@ -83,19 +86,21 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 				An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
  @result		An instance of AVTextStyleRule
 */
-- (instancetype)initWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes textSelector:(NSString *)textSelector;
+- (nullable instancetype)initWithTextMarkupAttributes:(NSDictionary<NSString *, id> *)textMarkupAttributes textSelector:(nullable NSString *)textSelector NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property		textMarkupAttributes
  @abstract		An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
 */
-@property (nonatomic, readonly) NSDictionary *textMarkupAttributes;
+@property (nonatomic, readonly) NSDictionary<NSString *, id> *textMarkupAttributes;
 
 /*!
  @property		textSelector
  @abstract		A string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
  @dicussion		The syntax of text selectors is determined by the format of the legible media. Eligible selectors may be determined by the content of the legible media (e.g. CSS selectors that are valid for a specific WebVTT document).
 */
-@property (nonatomic, readonly) NSString *textSelector;
+@property (nonatomic, readonly, nullable) NSString *textSelector;
 
 @end
+
+NS_ASSUME_NONNULL_END

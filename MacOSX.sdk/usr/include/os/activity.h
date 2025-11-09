@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2013-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,11 +21,12 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef os_activity_h
-#define os_activity_h
+#ifndef __OS_ACTIVITY_H__
+#define __OS_ACTIVITY_H__
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 #include <os/base.h>
+#include <stdint.h>
 
 extern void *__dso_handle;
 
@@ -57,7 +58,7 @@ static const os_activity_flag_t OS_ACTIVITY_FLAG_DEFAULT = 0;
  * @constant: OS_ACTIVITY_FLAG_DETACHED
  * Creates an activity that is disassociated from the current activity
  */
-static const os_activity_flag_t OS_ACTIVITY_FLAG_DETACHED = 1;
+static const os_activity_flag_t OS_ACTIVITY_FLAG_DETACHED = 0x1;
 
 #pragma mark - activity related
 
@@ -86,12 +87,12 @@ static const os_activity_flag_t OS_ACTIVITY_FLAG_DETACHED = 1;
  * @param activity_block
  * The block to execute a given activity
  */
-#define os_activity_initiate(description, flags, activity_block) __extension__({ \
-	__attribute__((unused)) char _verify_const_msg[__builtin_constant_p(description) ? 1 : -1]; \
-	__attribute__((section("__TEXT,__os_activity"))) static const char _d[] = description; \
-	_os_activity_initiate(&__dso_handle, _d, flags, activity_block); \
-	asm(""); /* avoid tailcall */ \
-});
+#define os_activity_initiate(description, flags, activity_block) __extension__({                            \
+    _Static_assert(__builtin_constant_p(description), "activity description must be a constant string");    \
+    __attribute__((section("__TEXT,__os_activity"))) static const char _d[] = description;                  \
+    _os_activity_initiate(&__dso_handle, _d, flags, activity_block);                                        \
+    __asm__(""); /* avoid tailcall */                                                                       \
+})
 
 /*!
  * @function os_activity_initiate_f
@@ -119,12 +120,12 @@ static const os_activity_flag_t OS_ACTIVITY_FLAG_DETACHED = 1;
  * @param activity_func
  * The function to execute for the new activity.
  */
-#define os_activity_initiate_f(description, flags, context, activity_func) __extension__({ \
-	__attribute__((unused)) char _verify_const_msg[__builtin_constant_p(description) ? 1 : -1]; \
-	__attribute__((section("__TEXT,__os_activity"))) static const char _d[] = description; \
-	_os_activity_initiate_f(&__dso_handle, _d, flags, context, activity_func); \
-	asm(""); /* avoid tailcall */ \
-});
+#define os_activity_initiate_f(description, flags, context, activity_func) __extension__({                  \
+    _Static_assert(__builtin_constant_p(description), "activity description must be a constant string");    \
+    __attribute__((section("__TEXT,__os_activity"))) static const char _d[] = description;                  \
+    _os_activity_initiate_f(&__dso_handle, _d, flags, context, activity_func);                              \
+    __asm__(""); /* avoid tailcall */                                                                       \
+})
 
 /*!
  * @function os_activity_start
@@ -152,11 +153,13 @@ static const os_activity_flag_t OS_ACTIVITY_FLAG_DETACHED = 1;
  * @result
  * Returns a valid os_activity_t or 0 on failure.
  */
-#define os_activity_start(description, flags) __extension__({ \
-	__attribute__((unused)) char _verify_const_msg[__builtin_constant_p(description) ? 1 : -1]; \
-	__attribute__((section("__TEXT,__os_activity"))) static const char _d[] = description; \
-	_os_activity_start(&__dso_handle, _d, flags); \
-});
+#define os_activity_start(description, flags) __extension__({                                               \
+    _Static_assert(__builtin_constant_p(description), "activity description must be a constant string");    \
+    __attribute__((section("__TEXT,__os_activity"))) static const char _d[] = description;                  \
+    os_activity_t _aid = _os_activity_start(&__dso_handle, _d, flags);                                      \
+    __asm__(""); /* avoid possibility of tail call through optimization */                                  \
+    _aid;                                                                                                   \
+})
 
 /*!
  * @function os_activity_end
@@ -172,7 +175,7 @@ static const os_activity_flag_t OS_ACTIVITY_FLAG_DETACHED = 1;
  * @param activity_id
  * An os_activity_t returned from os_activity_start.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
 OS_EXPORT OS_NOTHROW
 void
 os_activity_end(os_activity_t activity_id);
@@ -199,7 +202,7 @@ os_activity_end(os_activity_t activity_id);
  * @result
  * Number of activity identifiers written to 'entries'
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
 OS_EXPORT OS_NOTHROW
 unsigned int
 os_activity_get_active(os_activity_t *entries, unsigned int *count);
@@ -220,11 +223,11 @@ os_activity_get_active(os_activity_t *entries, unsigned int *count);
  * @param name
  * A constant string that describes the breadcrumb.
  */
-#define os_activity_set_breadcrumb(name) __extension__({ \
-	__attribute__((unused)) char _verify_const_name[__builtin_constant_p(name) ? 1 : -1]; \
-	__attribute__((section("__TEXT,__os_breadcrumb"))) static const char _m[] = name; \
-	_os_activity_set_breadcrumb(&__dso_handle, _m); \
-	asm(""); \
+#define os_activity_set_breadcrumb(name) __extension__({                                            \
+    _Static_assert(__builtin_constant_p(name), "breadcrumb name must be a constant string");        \
+    __attribute__((section("__TEXT,__os_breadcrumb"))) static const char _m[] = name;               \
+    _os_activity_set_breadcrumb(&__dso_handle, _m);                                                 \
+    __asm__("");                                                                                    \
 })
 
 #pragma mark - internal routines
@@ -235,7 +238,7 @@ os_activity_get_active(os_activity_t *entries, unsigned int *count);
  * @abstract
  * Internal function for setting breadcrumb.  Do not use directly.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
 OS_EXPORT OS_NOTHROW
 void
 _os_activity_set_breadcrumb(void *dso, const char *name);
@@ -247,7 +250,7 @@ _os_activity_set_breadcrumb(void *dso, const char *name);
  * Internal function for activity start, do not use directly will not preserve
  * description.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
 OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 os_activity_t
 _os_activity_start(void *dso, const char *description, os_activity_flag_t flags);
@@ -258,7 +261,7 @@ _os_activity_start(void *dso, const char *description, os_activity_flag_t flags)
  * @abstract
  * Do not use directly because your description will not be preserved.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
 OS_EXPORT OS_NOTHROW
 void
 _os_activity_initiate(void *dso, const char *description, os_activity_flag_t flags, void (^activity_block)(void));
@@ -269,11 +272,11 @@ _os_activity_initiate(void *dso, const char *description, os_activity_flag_t fla
  * @abstract
  * Do not use directly because your description will not be preserved.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0)
 OS_EXPORT OS_NOTHROW
 void
 _os_activity_initiate_f(void *dso, const char *description, os_activity_flag_t flags, void *context, void (*activity_func)(void *context));
 
 __END_DECLS
 
-#endif
+#endif // __OS_ACTIVITY_H__

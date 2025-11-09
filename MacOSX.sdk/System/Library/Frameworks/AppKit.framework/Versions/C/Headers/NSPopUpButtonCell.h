@@ -1,12 +1,15 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSMenuItemCell.h>
 #import <AppKit/NSMenuItem.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSMenu;
 
@@ -42,7 +45,7 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
 - (instancetype)initTextCell:(NSString *)stringValue pullsDown:(BOOL)pullDown;
 
 // Overrides behavior of NSCell.  This is the menu for the popup, not a context menu.  PopUpButtonCells do not have context menus.
-@property (strong) NSMenu *menu;
+@property (nullable, strong) NSMenu *menu;
 
 // Behavior settings
 // If usesItemFromMenu is true, then pull down popup buttons always show the first item in the menu.  That menu item is hidden via [menuItem setHidden:YES]; if you wish to make it visible you can unhide it with setHidden:NO
@@ -61,7 +64,7 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
 
 // Adding and removing items
 - (void)addItemWithTitle:(NSString *)title;
-- (void)addItemsWithTitles:(NSArray *)itemTitles;
+- (void)addItemsWithTitles:(NSArray<NSString *> *)itemTitles;
 - (void)insertItemWithTitle:(NSString *)title atIndex:(NSInteger)index;
 
 - (void)removeItemWithTitle:(NSString *)title;
@@ -70,36 +73,36 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
 
 
 // Accessing the items
-@property (readonly, copy) NSArray *itemArray;
+@property (readonly, copy) NSArray<NSMenuItem *> *itemArray;
 @property (readonly) NSInteger numberOfItems;
 
 - (NSInteger)indexOfItem:(NSMenuItem *)item;
 - (NSInteger)indexOfItemWithTitle:(NSString *)title;
 - (NSInteger)indexOfItemWithTag:(NSInteger)tag;
-- (NSInteger)indexOfItemWithRepresentedObject:(id)obj;
-- (NSInteger)indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector;
+- (NSInteger)indexOfItemWithRepresentedObject:(nullable id)obj;
+- (NSInteger)indexOfItemWithTarget:(nullable id)target andAction:(nullable SEL)actionSelector;
 
-- (NSMenuItem *)itemAtIndex:(NSInteger)index;
-- (NSMenuItem *)itemWithTitle:(NSString *)title;
-@property (readonly, strong) NSMenuItem *lastItem;
+- (nullable NSMenuItem *)itemAtIndex:(NSInteger)index;
+- (nullable NSMenuItem *)itemWithTitle:(NSString *)title;
+@property (nullable, readonly, strong) NSMenuItem *lastItem;
 
 
 // Dealing with selection
-- (void)selectItem:(NSMenuItem *)item;
+- (void)selectItem:(nullable NSMenuItem *)item;
 - (void)selectItemAtIndex:(NSInteger)index;
 - (void)selectItemWithTitle:(NSString *)title;
 - (BOOL)selectItemWithTag:(NSInteger)tag;
-- (void)setTitle:(NSString *)aString;
+- (void)setTitle:(nullable NSString *)aString;
 
-@property (readonly, strong) NSMenuItem *selectedItem;
+@property (nullable, readonly, strong) NSMenuItem *selectedItem;
 @property (readonly) NSInteger indexOfSelectedItem;
 - (void)synchronizeTitleAndSelectedItem;
 
 
 // Title conveniences
 - (NSString *)itemTitleAtIndex:(NSInteger)index;
-@property (readonly, copy) NSArray *itemTitles;
-@property (readonly, copy) NSString *titleOfSelectedItem;
+@property (readonly, copy) NSArray<NSString *> *itemTitles;
+@property (nullable, readonly, copy) NSString *titleOfSelectedItem;
 
 - (void)attachPopUpWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 - (void)dismissPopUp;
@@ -112,4 +115,6 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
 
 
 /* Notifications */
-APPKIT_EXTERN NSString *NSPopUpButtonCellWillPopUpNotification;
+APPKIT_EXTERN NSString * NSPopUpButtonCellWillPopUpNotification;
+
+NS_ASSUME_NONNULL_END

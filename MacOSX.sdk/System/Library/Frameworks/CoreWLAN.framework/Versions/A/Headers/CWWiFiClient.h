@@ -14,6 +14,7 @@
  * @abstract 
  * Receive Wi-Fi event notifications.
  */
+NS_ASSUME_NONNULL_BEGIN
 @protocol CWEventDelegate
 
 @optional
@@ -237,7 +238,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * @abstract
  * Initializes a CWWiFiClient object.
  */
-- (CWWiFiClient *)init NS_AVAILABLE_MAC(10_10);
+- (nullable CWWiFiClient *)init NS_AVAILABLE_MAC(10_10);
 
 /*! @functiongroup Getting a Wi-Fi Interface */
 
@@ -247,7 +248,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * @abstract
  * Returns the CWInterface object for the default Wi-Fi interface.
  */
-- (CWInterface *)interface NS_AVAILABLE_MAC(10_10);
+- (nullable CWInterface *)interface NS_AVAILABLE_MAC(10_10);
 
 /*!
  * @method
@@ -262,7 +263,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * If no Wi-Fi interfaces are available, this method will return an empty array.
  * Returns nil if an error occurs.
  */
-+ (NSArray *)interfaceNames NS_AVAILABLE_MAC(10_10);
++ (nullable NSArray<NSString *> *)interfaceNames NS_AVAILABLE_MAC(10_10);
 
 /*!
  * @method
@@ -277,7 +278,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * Use +[CWWiFiClient interfaceNames] to get a list of available Wi-Fi interface names.
  * Returns a CWInterface object for the default Wi-Fi interface if no interface name is specified.
  */
-- (CWInterface *)interfaceWithName:(NSString *)interfaceName NS_AVAILABLE_MAC(10_10);
+- (nullable CWInterface *)interfaceWithName:(nullable NSString *)interfaceName NS_AVAILABLE_MAC(10_10);
 
 /*!
  * @method
@@ -292,7 +293,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * If no Wi-Fi interfaces are available, this method will return an empty array.
  * Returns nil if an error occurs.
  */
-- (NSArray *)interfaces NS_AVAILABLE_MAC(10_10);
+- (nullable NSArray<CWInterface *> *)interfaces NS_AVAILABLE_MAC(10_10);
 
 /*! @functiongroup Register for Wi-Fi Events */
 
@@ -357,5 +358,6 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (BOOL)stopMonitoringAllEventsAndReturnError:(out NSError **)error NS_AVAILABLE_MAC(10_10);
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif // _CORE_WLAN_WIFI_CLIENT_H_

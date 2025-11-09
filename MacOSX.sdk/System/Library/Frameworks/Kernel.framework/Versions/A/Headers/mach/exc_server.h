@@ -143,7 +143,7 @@ extern const struct catch_exc_subsystem {
 		exception_type_t exception;
 		mach_msg_type_number_t codeCnt;
 		integer_t code[2];
-	} __Request__exception_raise_t;
+	} __Request__exception_raise_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -160,7 +160,7 @@ extern const struct catch_exc_subsystem {
 		int flavor;
 		mach_msg_type_number_t old_stateCnt;
 		natural_t old_state[224];
-	} __Request__exception_raise_state_t;
+	} __Request__exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -182,7 +182,7 @@ extern const struct catch_exc_subsystem {
 		int flavor;
 		mach_msg_type_number_t old_stateCnt;
 		natural_t old_state[224];
-	} __Request__exception_raise_state_identity_t;
+	} __Request__exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -211,7 +211,7 @@ union __RequestUnion__catch_exc_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__exception_raise_t;
+	} __Reply__exception_raise_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -226,7 +226,7 @@ union __RequestUnion__catch_exc_subsystem {
 		int flavor;
 		mach_msg_type_number_t new_stateCnt;
 		natural_t new_state[224];
-	} __Reply__exception_raise_state_t;
+	} __Reply__exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -241,7 +241,7 @@ union __RequestUnion__catch_exc_subsystem {
 		int flavor;
 		mach_msg_type_number_t new_stateCnt;
 		natural_t new_state[224];
-	} __Reply__exception_raise_state_identity_t;
+	} __Reply__exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

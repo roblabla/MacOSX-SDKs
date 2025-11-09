@@ -1,7 +1,7 @@
 /*
     NSStatusBarButton.h
     Application Kit
-    Copyright (c) 1997-2014, Apple Inc.
+    Copyright (c) 1997-2015, Apple Inc.
     All rights reserved.
 */
 

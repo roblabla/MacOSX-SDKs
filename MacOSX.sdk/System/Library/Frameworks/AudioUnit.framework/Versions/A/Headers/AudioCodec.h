@@ -11,8 +11,8 @@
                      http://developer.apple.com/bugreporter/
 
 ==================================================================================================*/
-#if !defined(__AudioCodec_h__)
-#define __AudioCodec_h__
+#ifndef AudioUnit_AudioCodec_h
+#define AudioUnit_AudioCodec_h
 
 /*!
 	@header AudioCodec
@@ -93,6 +93,7 @@ extern "C"
 {
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
 
 //=============================================================================
 #pragma mark Types specific to AudioCodecs
@@ -118,8 +119,8 @@ typedef UInt32					AudioCodecPropertyID;
 */
 struct AudioCodecMagicCookieInfo 
 {
-	UInt32			mMagicCookieSize;
-	const void*		mMagicCookie;
+	UInt32					mMagicCookieSize;
+	const void* __nullable	mMagicCookie;
 };
 typedef struct AudioCodecMagicCookieInfo	AudioCodecMagicCookieInfo;
 
@@ -143,7 +144,7 @@ typedef struct AudioCodecMagicCookieInfo	AudioCodecMagicCookieInfo;
 					A codec that translates between different flavors of the same format
 					The component subtype specifies the format ID of this format.
 */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioDecoderComponentType								= 'adec',	
 	kAudioEncoderComponentType								= 'aenc',	
@@ -227,7 +228,7 @@ enum
 					the provided magic cookie or the AudioStreamBasicDescription and where applicable,
 					wildcards are overwritten with default values.
 */
-enum
+CF_ENUM(AudioCodecPropertyID)
 {
 	kAudioCodecPropertySupportedInputFormats				= 'ifm#',
 	kAudioCodecPropertySupportedOutputFormats				= 'ofm#',
@@ -458,7 +459,7 @@ enum
 						dynamic range compression scheme is applied if the information is present in
 						the bitstream. The default is kDynamicRangeControlMode_None.
 */
-enum
+CF_ENUM(AudioCodecPropertyID)
 {
 	kAudioCodecPropertyInputBufferSize											= 'tbuf',
 	kAudioCodecPropertyPacketFrameSize											= 'pakf',
@@ -506,7 +507,7 @@ enum
 	@constant		kAudioCodecQuality_Low
 	@constant		kAudioCodecQuality_Min
 */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioCodecQuality_Max		= 0x7F,
 	kAudioCodecQuality_High		= 0x60,
@@ -530,7 +531,7 @@ enum
 						Acts in "latency" mode
 						both leading and trailing frames assumed to be silence
 */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioCodecPrimeMethod_Pre 		= 0,
 	kAudioCodecPrimeMethod_Normal 	= 1,
@@ -571,7 +572,7 @@ enum
 						set by kAudioCodecPropertySoundQualityForVBR.
 						This mode usually provides the best tradeoff between quality and bit rate.
 */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioCodecBitRateControlMode_Constant					= 0,
 	kAudioCodecBitRateControlMode_LongTermAverage			= 1,
@@ -596,7 +597,7 @@ enum
                         In this mode, the resulting bitstream has the minimum amount of priming necessary for the decoder.
                         For aac this number is 1024 which corresponds to exactly one packet.
 */
-enum
+CF_ENUM(UInt32)
 {
     kAudioCodecDelayMode_Compatibility  = 0,
     kAudioCodecDelayMode_Minimum        = 1,
@@ -614,7 +615,7 @@ enum
 	@constant		kProgramTargetLevel_Minus23dB
 	@constant		kProgramTargetLevel_Minus20dB
 */
-enum
+CF_ENUM(UInt32)
 {
 	kProgramTargetLevel_None		= 0,
 	kProgramTargetLevel_Minus31dB	= 1,
@@ -634,7 +635,7 @@ enum
 	@constant		kDynamicRangeControlMode_Heavy
 						Heavy compression according to ETSI TS 101 154
 */
-enum
+CF_ENUM(UInt32)
 {
 	kDynamicRangeControlMode_None	= 0,
 	kDynamicRangeControlMode_Light	= 1,
@@ -679,7 +680,7 @@ typedef struct AudioCodecPrimeInfo
 
 
 /*!
-	@enum			AudioSettingsFlag
+	@enum			AudioSettingsFlags
  
 	@discussion		Constants to be used with kAudioSettings_Hint
 					in the kAudioCodecPropertySettings property dictionary.
@@ -695,7 +696,7 @@ typedef struct AudioCodecPrimeInfo
 	@constant		kAudioSettingsFlags_UserInterfaceParameter
 						If set, then this is only a user interface element and not reflected in the codec's bit stream.
 */
-enum {
+typedef CF_OPTIONS(UInt32, AudioSettingsFlags) {
 	kAudioSettingsFlags_ExpertParameter			= (1L << 0),
 	kAudioSettingsFlags_InvisibleParameter		= (1L << 1),
 	kAudioSettingsFlags_MetaParameter			= (1L << 2),
@@ -733,7 +734,7 @@ enum {
 						actual number produced. Note that not all formats have EOF
 						markers in them. 
 */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioCodecProduceOutputPacketFailure					= 1,		
 	kAudioCodecProduceOutputPacketSuccess					= 2,	
@@ -764,7 +765,7 @@ enum
 	@constant		kAudioCodecAppendInputBufferListSelect
 	@constant		kAudioCodecProduceOutputBufferListSelect
 */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioCodecGetPropertyInfoSelect						= 0x0001,
 	kAudioCodecGetPropertySelect							= 0x0002,
@@ -797,7 +798,7 @@ enum
 	@constant		kAudioCodecStateError
 	@constant		kAudioCodecNotEnoughBufferSpaceError
 */
-enum
+CF_ENUM(OSStatus)
 {
 	kAudioCodecNoError								= 0,
 	kAudioCodecUnspecifiedError						= 'what',
@@ -837,8 +838,8 @@ enum
 extern OSStatus
 AudioCodecGetPropertyInfo(	AudioCodec				inCodec,
 							AudioCodecPropertyID	inPropertyID,
-							UInt32*					outSize,
-							Boolean*				outWritable)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+							UInt32* __nullable		outSize,
+							Boolean* __nullable		outWritable)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
 /*!
@@ -916,11 +917,11 @@ AudioCodecSetProperty(	AudioCodec				inCodec,
 	@result			The OSStatus value
 */
 extern OSStatus
-AudioCodecInitialize(	AudioCodec							inCodec,
-						const AudioStreamBasicDescription*	inInputFormat,
-						const AudioStreamBasicDescription*	inOutputFormat,
-						const void*							inMagicCookie,
-						UInt32								inMagicCookieByteSize)
+AudioCodecInitialize(	AudioCodec										inCodec,
+						const AudioStreamBasicDescription* __nullable	inInputFormat,
+						const AudioStreamBasicDescription* __nullable	inOutputFormat,
+						const void*	__nullable							inMagicCookie,
+						UInt32											inMagicCookieByteSize)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
@@ -969,11 +970,11 @@ AudioCodecUninitialize(AudioCodec inCodec)								__OSX_AVAILABLE_STARTING(__MAC
 	@result			The OSStatus value
 */
 extern OSStatus
-AudioCodecAppendInputData(	AudioCodec							inCodec,
-							const void*							inInputData,
-							UInt32*								ioInputDataByteSize,
-							UInt32*								ioNumberPackets,
-							const AudioStreamPacketDescription*	inPacketDescription)
+AudioCodecAppendInputData(	AudioCodec										inCodec,
+							const void*										inInputData,
+							UInt32*											ioInputDataByteSize,
+							UInt32*											ioNumberPackets,
+							const AudioStreamPacketDescription*	__nullable	inPacketDescription)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 
@@ -1007,28 +1008,28 @@ AudioCodecAppendInputData(	AudioCodec							inCodec,
 	@result			The OSStatus value
 */
 extern OSStatus
-AudioCodecProduceOutputPackets(	AudioCodec						inCodec,
-								void*							outOutputData,
-								UInt32*							ioOutputDataByteSize,
-								UInt32*							ioNumberPackets,
-								AudioStreamPacketDescription*	outPacketDescription,
-								UInt32*							outStatus)
+AudioCodecProduceOutputPackets(	AudioCodec									inCodec,
+								void*										outOutputData,
+								UInt32*										ioOutputDataByteSize,
+								UInt32*										ioNumberPackets,
+								AudioStreamPacketDescription* __nullable	outPacketDescription,
+								UInt32*										outStatus)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
 extern OSStatus
 AudioCodecAppendInputBufferList(	AudioCodec							inCodec,
 									const AudioBufferList *				inBufferList,
 									UInt32*								ioNumberPackets,
-									const AudioStreamPacketDescription*	inPacketDescription,
+									const AudioStreamPacketDescription*	__nullable	inPacketDescription,
 									UInt32*								outBytesConsumed)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 extern OSStatus
-AudioCodecProduceOutputBufferList(	AudioCodec						inCodec,
-									AudioBufferList *				ioBufferList,
-									UInt32*							ioNumberPackets,
-									AudioStreamPacketDescription*	outPacketDescription,
-									UInt32*							outStatus)
+AudioCodecProduceOutputBufferList(	AudioCodec									inCodec,
+									AudioBufferList *							ioBufferList,
+									UInt32*										ioNumberPackets,
+									AudioStreamPacketDescription* __nullable	outPacketDescription,
+									UInt32*										outStatus)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -1047,7 +1048,7 @@ AudioCodecReset(AudioCodec inCodec)										__OSX_AVAILABLE_STARTING(__MAC_10_2
 
 //=====================================================================================================================
 typedef OSStatus
-(*AudioCodecGetPropertyInfoProc)(void *self, AudioCodecPropertyID inPropertyID, UInt32 *outSize, Boolean *outWritable);
+(*AudioCodecGetPropertyInfoProc)(void *self, AudioCodecPropertyID inPropertyID, UInt32 * __nullable outSize, Boolean * __nullable outWritable);
 
 typedef OSStatus
 (*AudioCodecGetPropertyProc)(void *self, AudioCodecPropertyID inPropertyID, UInt32 *ioPropertyDataSize, 
@@ -1058,8 +1059,8 @@ typedef OSStatus
 								const void *inPropertyData);
 
 typedef OSStatus
-(*AudioCodecInitializeProc)(void *self, const AudioStreamBasicDescription *inInputFormat, 
-								const AudioStreamBasicDescription *inOutputFormat, const void *inMagicCookie, 
+(*AudioCodecInitializeProc)(void *self, const AudioStreamBasicDescription * __nullable inInputFormat,
+								const AudioStreamBasicDescription * __nullable inOutputFormat, const void * __nullable inMagicCookie,
 								UInt32 inMagicCookieByteSize);
 
 typedef OSStatus
@@ -1067,22 +1068,22 @@ typedef OSStatus
 
 typedef OSStatus
 (*AudioCodecAppendInputDataProc)(void *self, const void *inInputData, UInt32 *ioInputDataByteSize, UInt32 *ioNumberPackets, 
-								const AudioStreamPacketDescription *inPacketDescription);
+								const AudioStreamPacketDescription * __nullable inPacketDescription);
 
 typedef OSStatus
 (*AudioCodecProduceOutputPacketsProc)(void *self, void *outOutputData, UInt32 *ioOutputDataByteSize, UInt32 *ioNumberPackets, 
-								AudioStreamPacketDescription *outPacketDescription, UInt32 *outStatus);
+								AudioStreamPacketDescription * __nullable outPacketDescription, UInt32 *outStatus);
 
 typedef OSStatus
 (*AudioCodecResetProc)(void *self);
 
 typedef OSStatus
 (*AudioCodecAppendInputBufferListProc)(void *self, const AudioBufferList *ioBufferList, UInt32 *inNumberPackets, 
-								const AudioStreamPacketDescription *inPacketDescription, UInt32 *outBytesConsumed);
+								const AudioStreamPacketDescription * __nullable inPacketDescription, UInt32 *outBytesConsumed);
 
 typedef OSStatus
 (*AudioCodecProduceOutputBufferListProc)(void *self, AudioBufferList *ioBufferList, UInt32 *ioNumberPackets, 
-								AudioStreamPacketDescription *outPacketDescription, UInt32 *outStatus);
+								AudioStreamPacketDescription *__nullable outPacketDescription, UInt32 *outStatus);
 
 
 //=====================================================================================================================
@@ -1100,7 +1101,7 @@ typedef OSStatus
                     encoding/ decoding delay which may be undesired and turned off with this property.
                     Use the kAudioCodecPropertyDelayMode property instead with the value set to kAudioCodecDelayMode_Minimum
 */
-enum
+CF_ENUM(AudioCodecPropertyID)
 {
 	kAudioCodecPropertyMinimumDelayMode                 = 'mdel'
 };
@@ -1120,12 +1121,12 @@ enum
 					retrieved via this property must be released by the caller.
 
 */
-enum
+CF_ENUM(AudioCodecPropertyID)
 {
-	kAudioCodecPropertyNameCFString						= 'lnam',
-	kAudioCodecPropertyManufacturerCFString				= 'lmak',
-	kAudioCodecPropertyFormatCFString					= 'lfor'
-};		
+	kAudioCodecPropertyNameCFString			= 'lnam',
+	kAudioCodecPropertyManufacturerCFString = 'lmak',
+	kAudioCodecPropertyFormatCFString		= 'lfor'
+};
 
 /*!
 	@enum		AudioCodecProperty
@@ -1181,7 +1182,7 @@ enum
 	@constant	kAudioCodecPropertyZeroFramesPadded
 					Renamed to kAudioCodecPropertyPaddedZeros
  */
-enum
+CF_ENUM(AudioCodecPropertyID)
 {
 	kAudioCodecPropertyRequiresPacketDescription			= 'pakd',
 	kAudioCodecPropertyAvailableBitRates					= 'brt#',
@@ -1212,7 +1213,7 @@ enum
 	@constant	kAudioCodecBitRateFormat_ABR is mapped to kAudioCodecBitRateControlMode_LongTermAverage
 	@constant	kAudioCodecBitRateFormat_VBR is mapped to kAudioCodecBitRateControlMode_VariableConstrained
  */
-enum
+CF_ENUM(UInt32)
 {	
 	kAudioCodecBitRateFormat_CBR 	=	kAudioCodecBitRateControlMode_Constant,
 	kAudioCodecBitRateFormat_ABR 	=	kAudioCodecBitRateControlMode_LongTermAverage,
@@ -1236,7 +1237,7 @@ enum
 					The sample rate may be changed freely,
 					adjusting the bit rate if necessary
  */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioCodecOutputPrecedenceNone			= 0,
 	kAudioCodecOutputPrecedenceBitRate		= 1,
@@ -1250,7 +1251,7 @@ enum
  
 	@discussion	renamed to AudioCodecMagicCookieInfo 
  */
-typedef struct AudioCodecMagicCookieInfo MagicCookieInfo;
+typedef struct AudioCodecMagicCookieInfo MagicCookieInfo __attribute__((deprecated));
 
 /*!
 	@enum		AudioCodecSettingsHint
@@ -1265,7 +1266,7 @@ typedef struct AudioCodecMagicCookieInfo MagicCookieInfo;
 	@constant	kHintAdvanced
 	@constant	kHintHidden
  */
-enum
+CF_ENUM(UInt32)
 {
 	kHintBasic		= 0,
 	kHintAdvanced	= 1,
@@ -1276,4 +1277,6 @@ enum
 }
 #endif
 
-#endif	//	__AudioCodec_h__
+CF_ASSUME_NONNULL_END
+
+#endif	//	AudioUnit_AudioCodec_h

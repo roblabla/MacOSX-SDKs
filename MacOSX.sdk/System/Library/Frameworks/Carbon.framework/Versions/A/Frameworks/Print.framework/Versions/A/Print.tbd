@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print
-current-version: 265.0
+current-version: 266.0
 exports:         
   - archs:           [ i386 ]
     symbols:         [ '$ld$hide$os10.10$_DisposePMDialogDoneUPP', '$ld$hide$os10.10$_DisposePMItemUPP', 

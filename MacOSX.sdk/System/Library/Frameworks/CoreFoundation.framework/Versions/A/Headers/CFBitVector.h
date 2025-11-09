@@ -1,5 +1,5 @@
 /*	CFBitVector.h
-	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBITVECTOR__)
@@ -12,8 +12,8 @@ CF_EXTERN_C_BEGIN
 
 typedef UInt32 CFBit;
 
-typedef const struct __CFBitVector * CFBitVectorRef;
-typedef struct __CFBitVector * CFMutableBitVectorRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CFBitVector * CFBitVectorRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFBitVector * CFMutableBitVectorRef;
 
 CF_EXPORT CFTypeID	CFBitVectorGetTypeID(void);
 

@@ -9,9 +9,9 @@
 #ifndef AudioVideoBridging_H
 #define AudioVideoBridging_H
 
-#import <AudioVideoBridging/AVBCentralManager.h>
-
 #import <AudioVideoBridging/AVBConstants.h>
+
+#import <AudioVideoBridging/AVBCentralManager.h>
 
 #import <AudioVideoBridging/AVBInterface.h>
 #import <AudioVideoBridging/AVBEthernetInterface.h>

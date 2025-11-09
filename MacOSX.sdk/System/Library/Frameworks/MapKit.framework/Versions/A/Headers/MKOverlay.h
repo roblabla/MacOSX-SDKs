@@ -10,6 +10,9 @@
 #import <MapKit/MKTypes.h>
 #import <MapKit/MKGeometry.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+__WATCHOS_PROHIBITED
 @protocol MKOverlay <MKAnnotation>
 @required
 
@@ -29,3 +32,5 @@
 - (BOOL)canReplaceMapContent NS_AVAILABLE(10_9, 7_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

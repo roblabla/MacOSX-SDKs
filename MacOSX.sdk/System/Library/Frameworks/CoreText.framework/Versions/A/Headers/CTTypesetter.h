@@ -2,7 +2,7 @@
  *	CTTypesetter.h
  *	CoreText
  *
- *	Copyright (c) 2003-2012 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -21,16 +21,14 @@
 #include <CoreText/CTLine.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Typesetter Types */
 /* --------------------------------------------------------------------------- */
 
-typedef const struct __CTTypesetter * CTTypesetterRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CTTypesetter * CTTypesetterRef;
 
 
 /*!
@@ -86,8 +84,7 @@ extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE(10
 				The CFAttributedStringRef that you want to typeset. This
 				parameter must be filled in with a valid CFAttributedString.
 
-	@result		This function will return a reference to a CTTypesetter if the
-				call was successful. Otherwise, it will return NULL.
+	@result		This function will return a reference to a CTTypesetter.
 */
 
 CTTypesetterRef CTTypesetterCreateWithAttributedString(
@@ -110,13 +107,12 @@ CTTypesetterRef CTTypesetterCreateWithAttributedString(
 	@param		options
 				A CFDictionary of typesetter options, or NULL if there are none.
 
-	@result		This function will return a reference to a CTTypesetter if the
-				call was successful. Otherwise, it will return NULL.
+	@result		This function will return a reference to a CTTypesetter.
 */
 
 CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 	CFAttributedStringRef string,
-	CFDictionaryRef options ) CT_AVAILABLE(10_5, 3_2);
+	CFDictionaryRef __nullable options ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -131,8 +127,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 				order, ready to draw.
 
 	@param		typesetter
-				The typesetter which the line will come from. This parameter is
-				required and cannot be set to NULL.
+				The typesetter which the line will come from.
 
 	@param		stringRange
 				The string range which the line will be based on. If the length
@@ -144,8 +139,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 	@param		offset
 				The line position offset.
 
-	@result		This function will return a reference to a CTLine if the call was
-				successful. Otherwise, it will return NULL.
+	@result		This function will return a reference to a CTLine.
 */
 
 CTLineRef CTTypesetterCreateLineWithOffset(
@@ -176,8 +170,7 @@ CTLineRef CTTypesetterCreateLine(
 				in the stream or by filling the specified width with characters.
 
 	@param		typesetter
-				The typesetter which the line will come from. This parameter is
-				required and cannot be set to NULL.
+				The typesetter which the line will come from.
 
 	@param		startIndex
 				The starting point for the line break calculations. The break
@@ -224,8 +217,7 @@ CFIndex CTTypesetterSuggestLineBreak(
 				triggered by a hard break character in the stream.
 
 	@param		typesetter
-				The typesetter which the line will come from. This parameter is
-				required and cannot be set to NULL.
+				The typesetter which the line will come from.
 
 	@param		startIndex
 				The starting point for the typographic cluster break
@@ -261,10 +253,8 @@ CFIndex CTTypesetterSuggestClusterBreak(
 	double width ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

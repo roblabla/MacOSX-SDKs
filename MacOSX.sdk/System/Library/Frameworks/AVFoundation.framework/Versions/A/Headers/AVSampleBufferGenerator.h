@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright © 2014 Apple Inc. All rights reserved.
+	Copyright 2014-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -14,6 +14,8 @@
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMSync.h>
 #import <CoreMedia/CMSampleBuffer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 #if ! TARGET_OS_IPHONE
 
@@ -38,12 +40,13 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @private
 	AVSampleBufferGeneratorInternal	*_generator;
 }
+AV_INIT_UNAVAILABLE
 
 /* If timebase is NULL, requests will be handled synchronously. */
-- (instancetype)initWithAsset:(AVAsset *)asset timebase:(CMTimebaseRef)timebase;
+- (instancetype)initWithAsset:(AVAsset *)asset timebase:(nullable CMTimebaseRef)timebase NS_DESIGNATED_INITIALIZER;
 
 /* It is an error to use an AVSampleBufferRequest with mode set to AVSampleBufferRequestModeScheduled when the AVSampleBufferGenerator was created with a NULL timebase. */
-- (CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request;
+- (CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED;
 
 /* completionHandler is called when data is ready or as soon as an error has occurred. */
 + (void)notifyOfDataReadyForSampleBuffer:(CMSampleBufferRef)sbuf completionHandler:(void (^)(BOOL dataReady, NSError *error))completionHandler;
@@ -73,8 +76,9 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @private
 	AVSampleBufferRequestInternal	*_request;
 }
+AV_INIT_UNAVAILABLE
 
-- (instancetype)initWithStartCursor:(AVSampleCursor *)startCursor;
+- (instancetype)initWithStartCursor:(AVSampleCursor *)startCursor NS_DESIGNATED_INITIALIZER;
 
 /* mandatory: the created CMSampleBuffer must include the sample at this position */
 @property (nonatomic, retain, readonly) AVSampleCursor *startCursor;
@@ -86,7 +90,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @property (nonatomic, assign) AVSampleBufferRequestDirection direction;
 
 /* optional: if not nil, the sequence of samples to be loaded may include the sample at this position, but no further. */
-@property (nonatomic, retain) AVSampleCursor *limitCursor;
+@property (nonatomic, retain,  nullable) AVSampleCursor *limitCursor;
 
 /* optional: if not zero, indicates the preferred number of samples to load. Fewer samples may be loaded if there is a change of format description. */
 @property (nonatomic, assign) NSInteger preferredMinSampleCount;
@@ -107,3 +111,6 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 #pragma pack(pop)
 
 #endif // ! TARGET_OS_IPHONE
+
+NS_ASSUME_NONNULL_END
+

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001, 2002, 2004, 2005, 2008, 2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2001, 2002, 2004, 2005, 2008, 2012, 2015 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -29,6 +29,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <SystemConfiguration/SCDynamicStore.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
 	@header SCDynamicStoreCopyDHCPInfo
@@ -56,9 +58,9 @@ __BEGIN_DECLS
 
 		A non-NULL return value must be released using CFRelease().
  */
-CFDictionaryRef
-SCDynamicStoreCopyDHCPInfo	(SCDynamicStoreRef	store,
-				 CFStringRef		serviceID)	__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+CFDictionaryRef __nullable
+SCDynamicStoreCopyDHCPInfo	(SCDynamicStoreRef	__nullable	store,
+				 CFStringRef		__nullable	serviceID)	__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 /*!
 	@function DHCPInfoGetOptionData
@@ -73,7 +75,7 @@ SCDynamicStoreCopyDHCPInfo	(SCDynamicStoreRef	store,
 
 		The return value must NOT be released.
  */
-CFDataRef
+CFDataRef __nullable
 DHCPInfoGetOptionData		(CFDictionaryRef	info,
 				 UInt8			code)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
@@ -89,7 +91,7 @@ DHCPInfoGetOptionData		(CFDictionaryRef	info,
 
 		The return value must NOT be released.
  */
-CFDateRef
+CFDateRef __nullable
 DHCPInfoGetLeaseStartTime	(CFDictionaryRef	info)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
 
@@ -106,9 +108,12 @@ DHCPInfoGetLeaseStartTime	(CFDictionaryRef	info)		__OSX_AVAILABLE_STARTING(__MAC
 
 		The return value must NOT be released.
 */
-CFDateRef
+CFDateRef __nullable
 DHCPInfoGetLeaseExpirationTime	(CFDictionaryRef	info)		__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 __END_DECLS
+
+CF_ASSUME_NONNULL_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif	/* _SCDYNAMICSTORECOPYDHCPINFO_H */

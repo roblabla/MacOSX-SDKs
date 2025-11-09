@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices
-current-version: 47.1
+current-version: 68.0
 exports:         
   - archs:           [ i386 ]
     symbols:         [ __ISAddPictToIconFamily, __ISGetIconSizesFromIconRef, 
@@ -12,6 +12,8 @@ exports:
                        __ISPlotIconRefInQDPort, __ISPlotIconSuiteInContext, 
                        __ISPlotSICNHandleInContext, __ISPtInIconRef, __ISRectInIconRef, 
                        __ISRegisterIconRef ]
+  - archs:           [ x86_64 ]
+    objc-classes:    [ _ISIconCacheService ]
   - archs:           [ i386, x86_64 ]
     symbols:         [ _ISCreateCGImageFromBindingWithSizeScaleAndOptions, 
                        __ISAgentMain, __ISContextScale, __ISCopyCacheContentsDescription, 

@@ -3,49 +3,13 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2008-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 	To report bugs, go to:  http://developer.apple.com/bugreporter/
 
 */
 
 #import <AVFoundation/AVBase.h>
-
-#import <AVFoundation/AVAudioBuffer.h>
-#import <AVFoundation/AVAudioChannelLayout.h>
-#import <AVFoundation/AVAudioEngine.h>
-#import <AVFoundation/AVAudioEnvironmentNode.h>
-#import <AVFoundation/AVAudioFile.h>
-#import <AVFoundation/AVAudioFormat.h>
-#import <AVFoundation/AVAudioIONode.h>
-#import <AVFoundation/AVAudioMixerNode.h>
-#import <AVFoundation/AVAudioMixing.h>
-#import <AVFoundation/AVAudioNode.h>
-#import <AVFoundation/AVAudioPlayer.h>
-#import <AVFoundation/AVAudioPlayerNode.h>
-#import <AVFoundation/AVAudioRecorder.h>
-#if TARGET_OS_IPHONE
-#import <AVFoundation/AVAudioSession.h>
-#endif
-#import <AVFoundation/AVAudioSettings.h>
-#import <AVFoundation/AVAudioTime.h>
-#import <AVFoundation/AVAudioTypes.h>
-#import <AVFoundation/AVAudioUnit.h>
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-#import <AVFoundation/AVAudioUnitComponent.h>
-#endif
-#import <AVFoundation/AVAudioUnitDelay.h>
-#import <AVFoundation/AVAudioUnitDistortion.h>
-#import <AVFoundation/AVAudioUnitEQ.h>
-#import <AVFoundation/AVAudioUnitEffect.h>
-#import <AVFoundation/AVAudioUnitGenerator.h>
-#import <AVFoundation/AVAudioUnitMIDIInstrument.h>
-#import <AVFoundation/AVAudioUnitReverb.h>
-#import <AVFoundation/AVAudioUnitSampler.h>
-#import <AVFoundation/AVAudioUnitTimeEffect.h>
-#import <AVFoundation/AVAudioUnitTimePitch.h>
-#import <AVFoundation/AVAudioUnitVarispeed.h>
-#import <AVFoundation/AVMIDIPlayer.h>
 
 #import <AVFoundation/AVAnimation.h>
 #import <AVFoundation/AVAsset.h>
@@ -63,6 +27,10 @@
 #import <AVFoundation/AVAudioMix.h>
 #import <AVFoundation/AVAudioProcessingSettings.h>
 
+#if TARGET_OS_IPHONE
+#import <AVFoundation/AVAssetDownloadTask.h>
+#endif
+
 #if (TARGET_OS_IPHONE || defined(__MAC_10_7))
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVCaptureInput.h>
@@ -75,7 +43,9 @@
 #import <AVFoundation/AVCompositionTrack.h>
 #import <AVFoundation/AVCompositionTrackSegment.h>
 #import <AVFoundation/AVError.h>
+#import <AVFoundation/AVFAudio.h>
 #import <AVFoundation/AVMediaFormat.h>
+#import <AVFoundation/AVMediaSelection.h>
 #import <AVFoundation/AVMediaSelectionGroup.h>
 #import <AVFoundation/AVMetadataFormat.h>
 #import <AVFoundation/AVMetadataIdentifiers.h> 
@@ -99,9 +69,6 @@
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 #import <AVFoundation/AVSampleBufferGenerator.h>
 #import <AVFoundation/AVSampleCursor.h>
-#endif
-#if TARGET_OS_IPHONE
-#import <AVFoundation/AVSpeechSynthesis.h>
 #endif
 #import <AVFoundation/AVSynchronizedLayer.h>
 #import <AVFoundation/AVTextStyleRule.h>

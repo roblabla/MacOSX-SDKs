@@ -66,6 +66,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
 	@function CFNetworkCopySystemProxySettings
@@ -77,7 +78,7 @@ CF_EXTERN_C_BEGIN
 		was encountered.
 		The caller is responsible for releasing the returned dictionary.
 */
-CFN_EXPORT CFDictionaryRef
+CFN_EXPORT __nullable CFDictionaryRef
 CFNetworkCopySystemProxySettings(void) CF_AVAILABLE(10_6, 2_0);
 
 	
@@ -136,7 +137,7 @@ CFNetworkCopyProxiesForURL(CFURLRef url, CFDictionaryRef proxySettings) CF_AVAIL
  *	error:
  *	  Upon failure, an error object explaining the failure.
  */
-typedef CALLBACK_API_C( void , CFProxyAutoConfigurationResultCallback )(void *client, CFArrayRef proxyList, CFErrorRef error);
+typedef CALLBACK_API_C( void , CFProxyAutoConfigurationResultCallback )(void *client, CFArrayRef proxyList, CFErrorRef __nullable error);
 
 /*
  *  CFNetworkCopyProxiesForAutoConfigurationScript()
@@ -163,8 +164,8 @@ typedef CALLBACK_API_C( void , CFProxyAutoConfigurationResultCallback )(void *cl
  *	script or NULL on failure.
  *  
  */
-CFN_EXPORT CFArrayRef 
-CFNetworkCopyProxiesForAutoConfigurationScript(CFStringRef proxyAutoConfigurationScript, CFURLRef targetURL, CFErrorRef *error) CF_AVAILABLE(10_5, 2_0);
+CFN_EXPORT __nullable CFArrayRef
+CFNetworkCopyProxiesForAutoConfigurationScript(CFStringRef proxyAutoConfigurationScript, CFURLRef targetURL, CFErrorRef * __nullable error) CF_AVAILABLE(10_5, 2_0);
 
 
 /*
@@ -596,6 +597,7 @@ CFN_EXPORT const CFStringRef kCFNetworkProxiesProxyAutoConfigJavaScript	CF_AVAIL
 CFN_EXPORT const CFStringRef kCFNetworkProxiesProxyAutoDiscoveryEnable CF_AVAILABLE(10_6, NA);
 #endif // TARGET_OS_MAC
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFPROXYSUPPORT__ */

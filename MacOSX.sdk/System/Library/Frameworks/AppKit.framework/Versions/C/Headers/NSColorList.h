@@ -1,7 +1,7 @@
 /*
 	NSColorList.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,12 +13,15 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <AppKit/AppKitDefines.h>
 #import <CoreFoundation/CFDictionary.h>
 
-@class NSArray, NSMutableArray, NSColor, NSBundle;
+NS_ASSUME_NONNULL_BEGIN
 
-@interface NSColorList : NSObject <NSCoding> {
+@class NSColor, NSBundle;
+
+@interface NSColorList : NSObject <NSSecureCoding> {
     /*All instance variables are private*/
     NSMutableArray *_keyArray;
     NSMutableArray *_colorArray;
@@ -45,20 +48,20 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 /* Returns all color lists in the user's color list path, including those added at runtime. Creating a named color list and saving with writeToFile:nil will add it to this list; removeFile will remove it from this list. (That is what happens as the user creates and destroys color lists in the color panel.)
 */
-+ (NSArray *)availableColorLists;			
++ (NSArray<NSColorList *> *)availableColorLists;
 
 /* Returns the named color list from availableColorLists
 */
-+ (NSColorList *)colorListNamed:(NSString *)name;
++ (nullable NSColorList *)colorListNamed:(NSString *)name;
 
 /* Creates a color list; specify @"" if you don't want a name. NOTE that this does not add the color list to availableColorLists until the color list is saved into the user's path with writeToFile:nil.
 */
 - (instancetype)initWithName:(NSString *)name;			
-- (instancetype)initWithName:(NSString *)name fromFile:(NSString *)path;	/* Load initial contents */
+- (nullable instancetype)initWithName:(NSString *)name fromFile:(nullable NSString *)path;	/* Load initial contents */
 
 /* Name of the color list
 */
-@property (readonly, copy) NSString *name;
+@property (nullable, readonly, copy) NSString *name;
 
 /* If key already exists, sets the corresponding color. Otherwise inserts the color at the end.
 */
@@ -74,11 +77,11 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 /* Returns nil if key doesn't exist.
 */
-- (NSColor *)colorWithKey:(NSString *)key;
+- (nullable NSColor *)colorWithKey:(NSString *)key;
 
 /* Use this array to get count of colors and enumerate them according to the ordering specified when inserting.
 */
-@property (readonly, copy) NSArray *allKeys;
+@property (readonly, copy) NSArray<NSString *> *allKeys;
 
 /* Depends on the source of the colorlist file
 */
@@ -86,7 +89,7 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 /* Use "nil" to save to the user's private colorlists directory. If the color list is named, this method will also insert the color list into availableColorLists.
 */
-- (BOOL)writeToFile:(NSString *)path;	
+- (BOOL)writeToFile:(nullable NSString *)path;	
 
 /* If the color list is in the user's path, removes the corresponding file in user's private colorlists directory. Also removes the color list from availableColorLists. If there are no outstanding references to the color list this might deallocate the object as well.
 */
@@ -95,5 +98,7 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString *NSColorListDidChangeNotification;
+APPKIT_EXTERN NSString * NSColorListDidChangeNotification;
+
+NS_ASSUME_NONNULL_END
 

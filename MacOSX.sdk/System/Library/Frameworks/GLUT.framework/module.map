@@ -1,4 +1,4 @@
-framework module GLUT [extern_c] [system] {
+framework module GLUT [extern_c] {
   header "glut.h"
 
   umbrella "Headers"

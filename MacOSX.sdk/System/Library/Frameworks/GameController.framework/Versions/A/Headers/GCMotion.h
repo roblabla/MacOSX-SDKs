@@ -7,6 +7,8 @@
 
 #import <GameController/GameController.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class GCController;
 
 /**
@@ -46,6 +48,30 @@ typedef struct {
 	double x, y, z;
 } GCRotationRate;
 
+
+/**
+ A structure containing 3-axis rotation data. The angles are rotated in order or pitch then yaw then roll.
+ 
+ 
+ @field pitch X-axis rotation in radians. The sign follows the right hand
+ rule (i.e. if the right hand is wrapped around the X axis such that the
+ tip of the thumb points toward positive X, a positive rotation is one
+ toward the tips of the other 4 fingers).
+ 
+ @field yaw   Y-axis rotation in radians. The sign follows the right hand
+ rule (i.e. if the right hand is wrapped around the Y axis such that the
+ tip of the thumb points toward positive Y, a positive rotation is one
+ toward the tips of the other 4 fingers).
+ 
+ @field roll  Z-axis rotation in radians. The sign follows the right hand
+ rule (i.e. if the right hand is wrapped around the Z axis such that the
+ tip of the thumb points toward positive Z, a positive rotation is one
+ toward the tips of the other 4 fingers).
+ */
+typedef struct {
+    double pitch, yaw, roll;
+} GCEulerAngles;
+
 /**
  Represents a quaternion (one way of parameterizing attitude).
  If q is an instance of GCQuaternion, mathematically it represents the following quaternion:
@@ -77,16 +103,16 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @see GCController
  */
 #if !__has_feature(objc_arc)
-@property (readonly, assign) GCController *controller;
+@property (nonatomic, readonly, assign) GCController *controller;
 #else
-@property (readonly, weak) GCController *controller;
+@property (nonatomic, readonly, weak) GCController *controller;
 #endif
 
 /**
  Called whenever a motion value changed.
  */
 typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
-@property (copy) GCMotionValueChangedHandler valueChangedHandler;
+@property (nonatomic, copy, nullable) GCMotionValueChangedHandler valueChangedHandler;
 
 /**
  The gravity vector expressed in the controller's reference frame.
@@ -95,7 +121,7 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
  
  @see userAcceleration
  */
-@property (assign, readonly) GCAcceleration gravity;
+@property (nonatomic, assign, readonly) GCAcceleration gravity;
 
 /**
  The acceleration that the user is giving to the controller.
@@ -104,16 +130,18 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
  
  @see userAcceleration
  */
-@property (assign, readonly) GCAcceleration userAcceleration;
+@property (nonatomic, assign, readonly) GCAcceleration userAcceleration;
 
 /**
  The current attitude of the controller.
  */
-@property (assign, readonly) GCQuaternion attitude;
+@property (nonatomic, assign, readonly) GCQuaternion attitude;
 
 /**
  The current rotation rate of the controller.
  */
-@property (assign, readonly) GCRotationRate rotationRate;
+@property (nonatomic, assign, readonly) GCRotationRate rotationRate;
 
 @end
+
+NS_ASSUME_NONNULL_END

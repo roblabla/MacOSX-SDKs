@@ -1,7 +1,7 @@
 /*
  NSBatchUpdateRequest.h
  Core Data
- Copyright (c) 2004-2014 Apple Inc.
+ Copyright (c) 2004-2015, Apple Inc.
  All rights reserved.
  */
 
@@ -10,6 +10,8 @@
 
 #import <CoreData/NSPersistentStoreRequest.h>
 #import <CoreData/NSPersistentStoreResult.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSEntityDescription;
 
@@ -39,7 +41,7 @@ NS_CLASS_AVAILABLE(10_10,8_0)
 
 @property (copy, readonly) NSString* entityName;
 @property (strong, readonly) NSEntityDescription *entity;
-@property (strong) NSPredicate *predicate;
+@property (nullable, strong) NSPredicate *predicate;
 
 // Should the update include subentities? Defaults to YES.
 @property BOOL includesSubentities;
@@ -49,6 +51,8 @@ NS_CLASS_AVAILABLE(10_10,8_0)
 
 // Dictionary of NSPropertyDescription|property name string -> constantValue/NSExpression pairs describing the desired updates.
 // The expressions can be any NSExpression that evaluates to a scalar value.
-@property (copy) NSDictionary *propertiesToUpdate;
+@property (nullable, copy) NSDictionary *propertiesToUpdate;
 
 @end
+
+NS_ASSUME_NONNULL_END

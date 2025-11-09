@@ -7,14 +7,16 @@
 
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol GKViewController
 @end
 
 @interface GKDialogController : NSResponder
 
-@property (assign) IBOutlet NSWindow *parentWindow;
+@property (assign, nullable) IBOutlet NSWindow *parentWindow;
 
-- (BOOL)presentViewController:(NSViewController<GKViewController> *)viewController;
+- (BOOL)presentViewController:(NSViewController<GKViewController>  *)viewController;
 - (IBAction)dismiss:(id)sender;
 
 @end
@@ -22,3 +24,5 @@
 @interface GKDialogController (SharedDialogController)
 + (GKDialogController *)sharedDialogController;
 @end
+
+NS_ASSUME_NONNULL_END

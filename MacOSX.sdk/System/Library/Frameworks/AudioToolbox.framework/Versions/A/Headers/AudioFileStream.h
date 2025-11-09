@@ -1,18 +1,32 @@
-/*
-     File:       AudioToolbox/AudioFileStream.h
+/*!
+	@file		AudioFileStream.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 1985-2015 by Apple, Inc., all rights reserved.
 
-     Contains:   API for parsing streamed audio file data.
+	@brief		API's to parse streamed audio files into packets of audio data.
 
-     Copyright:  (c) 1985-2008 by Apple, Inc., all rights reserved.
+	@discussion
 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+	AudioFileStream addresses situations where, in a stream of audio data, only a limited window
+	of data may be available at any time.
 
-                        http://developer.apple.com/bugreporter/
-
+	This case differs significantly enough from the random access file case to warrant a separate
+	API rather than overload the AudioFile API with additional semantics. With a random access file,
+	one can always assume that a read request for contiguous data that doesn't include EOF will
+	always supply all of the data. This makes parsing straightforward and inexpensive. In the
+	streaming case such an assumption cannot be made. A request by the parser for data from the
+	stream may only be partially satisfied. Any partially satisfied requests must be remembered and
+	retried before any other requests are satisfied, otherwise the streamed data might be lost
+	forever in the past. So the parser must be able to suspend work at any point and resume parsing
+	where it left off.
+	
+	The client provides data to the parser using AudioFileStreamParseBytes and the parser calls back
+	to the client with properties or packets using the AudioFileStream_PropertyListenerProc and
+	AudioFileStream_PacketsProc function pointers.
 */
-#if !defined(__AudioFileStream_h__)
-#define __AudioFileStream_h__
+
+#ifndef AudioToolbox_AudioFileStream_h
+#define AudioToolbox_AudioFileStream_h
 
 //=============================================================================
 //	Includes
@@ -27,34 +41,52 @@
 	#include <AudioFile.h>
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
+
 #if defined(__cplusplus)
 extern "C"
 {
 #endif
 
+//=============================================================================
+//	AudioFileStream flags
+//=============================================================================
+#pragma mark flags
+
 /*!
-    @header AudioFileStream
-    This header defines the types, constants, data structures and functions of the AudioFileStream API. 
-	The AudioFileStream API is used for parsing streamed audio files and returning packets of audio data.
-
-	AudioFileStream is meant to address the case of a stream of audio data of which only a limited
-	window may be available at any time.
-
-	Both of these cases differ significantly enough from the random access file case to warrant a new 
-	API rather than overload the current AudioFile API with a raft of new semantics. With a random
-	access file, one can always assume that a read request for contiguous data that doesn't include
-	EOF will always supply all of the data. This makes parsing straightforward and inexpensive. In
-	the streaming case such an assumption cannot be made. A request by the parser for data from the
-	stream may only be partially satisfied. Any partially satisfied requests must be remembered and
-	retried before any other requests are satisfied, otherwise the streamed data might be lost
-	forever in the past. So the parser must be able to suspend work at any point and resume parsing
-	where it left off.
-	
-	The client provides data to the parser using AudioFileStreamParseBytes
-	and the parser calls back to the client with properties or packets using the 
-	AudioFileStream_PropertyListenerProc and AudioFileStream_PacketsProc function pointers.
-
+    @enum AudioFileStreamPropertyFlags
+    @constant   kAudioFileStreamPropertyFlag_PropertyIsCached 
+		This flag is set in a call to AudioFileStream_PropertyListenerProc when the value of the property
+		can be obtained at any later time. If this flag is not set, then you should either get the value of 
+		the property from within this callback or set the flag kAudioFileStreamPropertyFlag_CacheProperty in order to signal
+		to the parser to begin caching the property data. Otherwise the value may not be available in the future.
+		
+    @constant   kAudioFileStreamPropertyFlag_CacheProperty 
+		This flag can be set by a property listener in order to signal to the parser that the client is
+		interested in the value of the property and that it should be cached until the full value of the property is available.
 */
+typedef CF_OPTIONS(UInt32, AudioFileStreamPropertyFlags) {
+	kAudioFileStreamPropertyFlag_PropertyIsCached = 1,
+	kAudioFileStreamPropertyFlag_CacheProperty = 2
+};
+
+/*!	@enum	AudioFileStreamParseFlags
+    @constant   kAudioFileStreamParseFlag_Discontinuity 
+		This flag is passed in to AudioFileStreamParseBytes to signal a discontinuity. Any partial packet straddling a buffer
+		boundary will be discarded. This is necessary to avoid being called with a corrupt packet. After a discontinuity occurs
+		seeking may be approximate in some data formats.
+*/
+typedef CF_OPTIONS(UInt32, AudioFileStreamParseFlags) {
+	kAudioFileStreamParseFlag_Discontinuity = 1
+};
+
+/*!	@enum	AudioFileStreamParseFlags
+    @constant   kAudioFileStreamSeekFlag_OffsetIsEstimated 
+		This flag may be returned from AudioFileStreamSeek if the byte offset is only an estimate, not exact.
+*/
+typedef CF_OPTIONS(UInt32, AudioFileStreamSeekFlags) {
+	kAudioFileStreamSeekFlag_OffsetIsEstimated = 1
+};
 
 //=============================================================================
 //	AudioFileStream Types
@@ -65,10 +97,10 @@ typedef UInt32 AudioFileStreamPropertyID;
 typedef	struct OpaqueAudioFileStreamID	*AudioFileStreamID;
 
 typedef void (*AudioFileStream_PropertyListenerProc)(
-											void *						inClientData,
-											AudioFileStreamID			inAudioFileStream,
-											AudioFileStreamPropertyID	inPropertyID,
-											UInt32 *					ioFlags);
+											void *							inClientData,
+											AudioFileStreamID				inAudioFileStream,
+											AudioFileStreamPropertyID		inPropertyID,
+											AudioFileStreamPropertyFlags *	ioFlags);
 
 typedef void (*AudioFileStream_PacketsProc)(
 											void *							inClientData,
@@ -76,42 +108,6 @@ typedef void (*AudioFileStream_PacketsProc)(
 											UInt32							inNumberPackets,
 											const void *					inInputData,
 											AudioStreamPacketDescription	*inPacketDescriptions);
-
-//=============================================================================
-//	AudioFileStream flags
-//=============================================================================
-#pragma mark flags
-
-/*!
-    @enum AudioFileStream flags
-
-    @constant   kAudioFileStreamPropertyFlag_PropertyIsCached 
-		This flag is set in a call to AudioFileStream_PropertyListenerProc when the value of the property
-		can be obtained at any later time. If this flag is not set, then you should either get the value of 
-		the property from within this callback or set the flag kAudioFileStreamPropertyFlag_CacheProperty in order to signal
-		to the parser to begin caching the property data. Otherwise the value may not be available in the future.
-		
-    @constant   kAudioFileStreamPropertyFlag_CacheProperty 
-		This flag can be set by a property listener in order to signal to the parser that the client is
-		interested in the value of the property and that it should be cached until the full value of the property is available.
-		
-    @constant   kAudioFileStreamParseFlag_Discontinuity 
-		This flag is passed in to AudioFileStreamParseBytes to signal a discontinuity. Any partial packet straddling a buffer
-		boundary will be discarded. This is necessary to avoid being called with a corrupt packet. After a discontinuity occurs
-		seeking may be approximate in some data formats.
-
-    @constant   kAudioFileStreamSeekFlag_OffsetIsEstimated 
-		This flag may be returned from AudioFileStreamSeek if the byte offset is only an estimate, not exact.
-*/
-
-enum {
-	kAudioFileStreamPropertyFlag_PropertyIsCached = 1,
-	kAudioFileStreamPropertyFlag_CacheProperty = 2,
-	
-	kAudioFileStreamParseFlag_Discontinuity = 1,
-	
-	kAudioFileStreamSeekFlag_OffsetIsEstimated = 1
-};
 
 //=============================================================================
 //	AudioFileStream error codes
@@ -150,7 +146,7 @@ enum {
 		
 */
 
-enum
+CF_ENUM(OSStatus)
 {
 	kAudioFileStreamError_UnsupportedFileType		= 'typ?',
 	kAudioFileStreamError_UnsupportedDataFormat		= 'fmt?',
@@ -236,7 +232,7 @@ enum
                     a CFDictionary filled with information about the data contained in the stream.
                     See AudioFile.h for InfoDictionary key strings. Caller is responsible for releasing the CFObject.
 */
-enum
+CF_ENUM(AudioFileStreamPropertyID)
 {
 	kAudioFileStreamProperty_ReadyToProducePackets			=	'redy',
 	kAudioFileStreamProperty_FileFormat						=	'ffmt',
@@ -297,11 +293,11 @@ enum
 */ 
 extern OSStatus	
 AudioFileStreamOpen (
-							void *									inClientData, 
+							void * __nullable						inClientData,
 							AudioFileStream_PropertyListenerProc	inPropertyListenerProc,
 							AudioFileStream_PacketsProc				inPacketsProc,
                 			AudioFileTypeID							inFileTypeHint,
-                			AudioFileStreamID *						outAudioFileStream)
+                			AudioFileStreamID __nullable * __nonnull outAudioFileStream)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
@@ -325,8 +321,8 @@ extern OSStatus
 AudioFileStreamParseBytes(	
 								AudioFileStreamID				inAudioFileStream,
 								UInt32							inDataByteSize,
-								const void*						inData,
-								UInt32							inFlags)
+								const void *					inData,
+								AudioFileStreamParseFlags		inFlags)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
@@ -355,7 +351,7 @@ AudioFileStreamSeek(
 								AudioFileStreamID				inAudioFileStream,
 								SInt64							inPacketOffset,
 								SInt64 *						outDataByteOffset,
-								UInt32 *						ioFlags)
+								AudioFileStreamSeekFlags *		ioFlags)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
@@ -368,7 +364,7 @@ AudioFileStreamSeek(
 						The file stream ID
 	@param			inPropertyID
 						Property ID whose value should be read
-	@param			outSize
+	@param			outPropertyDataSize
 						Size in bytes of the property
 	@param			outWritable
 						whether the property is writable
@@ -379,8 +375,8 @@ extern OSStatus
 AudioFileStreamGetPropertyInfo(	
 								AudioFileStreamID				inAudioFileStream,
 								AudioFileStreamPropertyID		inPropertyID,
-								UInt32 *						outPropertyDataSize,
-								Boolean *						outWritable)		
+								UInt32 * __nullable				outPropertyDataSize,
+								Boolean * __nullable			outWritable)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 
@@ -450,4 +446,7 @@ AudioFileStreamClose(			AudioFileStreamID				inAudioFileStream)
 }
 #endif
 
-#endif
+CF_ASSUME_NONNULL_END
+
+#endif // AudioToolbox_AudioFileStream_h
+

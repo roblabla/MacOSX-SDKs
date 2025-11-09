@@ -14,6 +14,8 @@
 @class AVAssetTrack;
 @class AVPlayerItemTrackInternal;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 	@class			AVPlayerItemTrack
 
@@ -71,8 +73,10 @@ AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields NS_A
  @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields.
  				You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount.
 */
-@property (nonatomic, copy) NSString *videoFieldMode NS_AVAILABLE_MAC(10_10);
+@property (nonatomic, copy, nullable) NSString *videoFieldMode NS_AVAILABLE_MAC(10_10);
 
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

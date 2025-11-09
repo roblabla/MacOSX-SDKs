@@ -1,13 +1,15 @@
 /*
         NSBezierPath.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSFont.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSAffineTransform;
 
@@ -122,8 +124,8 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 @property NSWindingRule windingRule;
 @property CGFloat miterLimit;
 @property CGFloat flatness;
-- (void)getLineDash:(CGFloat *)pattern count:(NSInteger *)count phase:(CGFloat *)phase;
-- (void)setLineDash:(const CGFloat *)pattern count:(NSInteger)count phase:(CGFloat)phase;
+- (void)getLineDash:(nullable CGFloat *)pattern count:(nullable NSInteger *)count phase:(nullable CGFloat *)phase;
+- (void)setLineDash:(nullable const CGFloat *)pattern count:(NSInteger)count phase:(CGFloat)phase;
 
 // Path operations.
 
@@ -157,10 +159,10 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 // of the points is controlPoint1 (points[0]), controlPoint2 (points[1]),
 // endPoint (points[2]).
 - (NSBezierPathElement)elementAtIndex:(NSInteger)index
-		     associatedPoints:(NSPointArray)points;
+		     associatedPoints:(nullable NSPointArray)points;
 // As above with points == NULL.
 - (NSBezierPathElement)elementAtIndex:(NSInteger)index;
-- (void)setAssociatedPoints:(NSPointArray)points atIndex:(NSInteger)index;
+- (void)setAssociatedPoints:(nullable NSPointArray)points atIndex:(NSInteger)index;
 
 // Appending common paths
 
@@ -194,4 +196,6 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 - (BOOL)cachesBezierPath NS_DEPRECATED_MAC(10_0, 10_0);
 - (void)setCachesBezierPath:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_0);
 @end
+
+NS_ASSUME_NONNULL_END
 

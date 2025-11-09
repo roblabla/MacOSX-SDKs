@@ -10,7 +10,9 @@
 #import <MapKit/MKGeometry.h>
 #import <MapKit/MKTypes.h>
 
-MK_CLASS_AVAILABLE(10_9, 4_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 4_0) __WATCHOS_PROHIBITED
 @interface MKMultiPoint : MKShape
 
 - (MKMapPoint *)points NS_RETURNS_INNER_POINTER;
@@ -21,3 +23,5 @@ MK_CLASS_AVAILABLE(10_9, 4_0)
 - (void)getCoordinates:(CLLocationCoordinate2D *)coords range:(NSRange)range;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -572,9 +572,6 @@
 /* */
 /* #undef HAVE_DCNGETTEXT */
 
-/* Define if the compiler supports Decimal32/64/128 types. */
-/* #undef HAVE_DECIMAL_FP_SUPPORT */
-
 /* Whether system headers declare timezone */
 #define HAVE_DECLARED_TIMEZONE 1
 
@@ -733,7 +730,7 @@
 #define HAVE_GD_JPG 1
 
 /* */
-/* #undef HAVE_GD_PNG */
+#define HAVE_GD_PNG 1
 
 /* */
 /* #undef HAVE_GD_WEBP */
@@ -1418,6 +1415,9 @@
 /* Define to 1 if you have the `random' function. */
 #define HAVE_RANDOM 1
 
+/* Define to 1 if you have the `RAND_egd' function. */
+/* #undef HAVE_RAND_EGD */
+
 /* Define to 1 if you have the `rand_r' function. */
 #define HAVE_RAND_R 1
 
@@ -2034,6 +2034,9 @@
 /* iconv() is aliased to libiconv() in -liconv */
 /* #undef ICONV_ALIASED_LIBICONV */
 
+/* Whether iconv supports IGNORE */
+#define ICONV_BROKEN_IGNORE 0
+
 /* Whether iconv supports error no or not */
 #define ICONV_SUPPORTS_ERRNO 1
 
@@ -2080,13 +2083,16 @@
 #define MYSQL_USE_MYSQLND 1
 
 /* */
-#define NDBM_INCLUDE_FILE "/usr/include/ndbm.h"
+#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.Internal.sdk/usr/include/ndbm.h"
 
 /* */
 /* #undef NEUTRINO */
 
 /* Define to 1 if your C compiler doesn't accept -c and -o together. */
 /* #undef NO_MINUS_C_MINUS_O */
+
+/* The highest supported ODBC version */
+#define ODBCVER 0x0300
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT ""
@@ -2125,7 +2131,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2015-02-25"
+#define PHP_BUILD_DATE "2015-08-22"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2146,7 +2152,7 @@
 /* #undef PHP_HPUX_TIME_R */
 
 /* Path to iconv.h */
-#define PHP_ICONV_H_PATH </usr/include/iconv.h>
+#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.Internal.sdk/usr/include/iconv.h>
 
 /* Which iconv implementation to use */
 #define PHP_ICONV_IMPL "libiconv"
@@ -2200,7 +2206,7 @@
 #define PHP_STD_DES_CRYPT 1
 
 /* uname -a output */
-#define PHP_UNAME "Darwin osx202.apple.com 14.0 Darwin Kernel Version 14.0.0: Fri Sep 19 00:26:44 PDT 2014; root:xnu-2782.1.97~2/DEVELOPMENT_X86_64 x86_64"
+#define PHP_UNAME "Darwin osx004.apple.com 15.0 Darwin Kernel Version 15.0.0: Fri May 22 22:03:51 PDT 2015; root:xnu-3216.0.0.1.11~1/DEVELOPMENT_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1

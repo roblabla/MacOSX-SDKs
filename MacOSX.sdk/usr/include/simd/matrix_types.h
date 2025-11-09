@@ -29,10 +29,9 @@
 #ifndef __SIMD_MATRIX_TYPES_HEADER__
 #define __SIMD_MATRIX_TYPES_HEADER__
 
+#include <simd/internal.h>
 #include <simd/vector_types.h>
-#include <simd/logic.h>
-
-#if defined __has_attribute && __has_attribute(__ext_vector_type__)
+#if __has_attribute(__ext_vector_type__)
 /*  The function of this header fundamentally depends on the ext_vector_type
  *  attribute.  There is no fallback if these attributes are not supported by
  *  your compiler.                                                            */

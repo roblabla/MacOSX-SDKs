@@ -7,10 +7,10 @@
 #ifndef IOBLUETOOTHHIDDRIVER_H
 #define IOBLUETOOTHHIDDRIVER_H
 
-#include <IOKit/hid/IOHIDDevice.h>
-#include <IOKit/bluetooth/Bluetooth.h>
+#import <IOKit/hid/IOHIDDevice.h>
+#import <IOKit/bluetooth/Bluetooth.h>
 
-#include "IOKit/pwr_mgt/RootDomain.h"
+#import "IOKit/pwr_mgt/RootDomain.h"
 
 //===========================================================================================================================
 // Macros

@@ -12,6 +12,8 @@
 #import <AppKit/AppKit.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Post this notification to re-query callout information.
 MK_EXTERN NSString * const MKAnnotationCalloutInfoDidChangeNotification;
 
@@ -21,31 +23,31 @@ typedef NS_ENUM(NSUInteger, MKAnnotationViewDragState) {
     MKAnnotationViewDragStateDragging,      // View is dragging ("lift" animations are complete)
     MKAnnotationViewDragStateCanceling,     // View was not dragged and should return to its starting position (e.g. pin drop)
     MKAnnotationViewDragStateEnding         // View was dragged, new coordinate is set and view should return to resting position (e.g. pin drop)
-} NS_ENUM_AVAILABLE(10_9, 4_0);
+} NS_ENUM_AVAILABLE(10_9, 4_0) __WATCHOS_PROHIBITED;
 
 @protocol MKAnnotation;
 
 #if TARGET_OS_IPHONE
-MK_CLASS_AVAILABLE(NA, 3_0)
+MK_CLASS_AVAILABLE(NA, 3_0) __WATCHOS_PROHIBITED
 @interface MKAnnotationView : UIView
 #else
 MK_CLASS_AVAILABLE(10_9, NA)
 @interface MKAnnotationView : NSView
 #endif
 
-- (instancetype)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier;
+- (instancetype)initWithAnnotation:(nullable id <MKAnnotation>)annotation reuseIdentifier:(nullable NSString *)reuseIdentifier;
 
-@property (nonatomic, readonly) NSString *reuseIdentifier;
+@property (nonatomic, readonly, nullable) NSString *reuseIdentifier;
 
 // Classes that override must call super.
 - (void)prepareForReuse;
 
-@property (nonatomic, strong) id <MKAnnotation> annotation;
+@property (nonatomic, strong, nullable) id <MKAnnotation> annotation;
 
 #if TARGET_OS_IPHONE
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong, nullable) UIImage *image;
 #else
-@property (nonatomic, strong) NSImage *image;
+@property (nonatomic, strong, nullable) NSImage *image;
 #endif
 
 // By default, the center of annotation view is placed over the coordinate of the annotation.
@@ -79,16 +81,23 @@ MK_CLASS_AVAILABLE(10_9, NA)
 
 // The left accessory view to be used in the standard callout.
 #if TARGET_OS_IPHONE
-@property (strong, nonatomic) UIView *leftCalloutAccessoryView;
+@property (strong, nonatomic, nullable) UIView *leftCalloutAccessoryView;
 #else
-@property (strong, nonatomic) NSView *leftCalloutAccessoryView;
+@property (strong, nonatomic, nullable) NSView *leftCalloutAccessoryView;
 #endif
 
 // The right accessory view to be used in the standard callout.
 #if TARGET_OS_IPHONE
-@property (strong, nonatomic) UIView *rightCalloutAccessoryView;
+@property (strong, nonatomic, nullable) UIView *rightCalloutAccessoryView;
 #else
-@property (strong, nonatomic) NSView *rightCalloutAccessoryView;
+@property (strong, nonatomic, nullable) NSView *rightCalloutAccessoryView;
+#endif
+
+// The detail accessory view to be used in the standard callout.
+#if TARGET_OS_IPHONE
+@property (nonatomic, strong, nullable) UIView *detailCalloutAccessoryView NS_AVAILABLE(10_11, 9_0);
+#else
+@property (nonatomic, strong, nullable) NSView *detailCalloutAccessoryView NS_AVAILABLE(10_11, 9_0);
 #endif
 
 // If YES and the underlying id<MKAnnotation> responds to setCoordinate:, 
@@ -103,3 +112,5 @@ MK_CLASS_AVAILABLE(10_9, NA)
 - (void)setDragState:(MKAnnotationViewDragState)newDragState animated:(BOOL)animated NS_AVAILABLE(10_9, 4_2);
 
 @end
+
+NS_ASSUME_NONNULL_END

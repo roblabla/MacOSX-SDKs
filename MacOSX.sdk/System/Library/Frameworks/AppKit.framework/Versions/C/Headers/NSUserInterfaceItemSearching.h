@@ -1,12 +1,15 @@
 /*
     NSUserInterfaceItemSearching.h
     Application Kit
-    Copyright (c) 2008-2014, Apple Inc.
+    Copyright (c) 2008-2015, Apple Inc.
     All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <Foundation/NSString.h>
 #import <AppKit/NSApplication.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol NSUserInterfaceItemSearching <NSObject>
 
@@ -20,7 +23,7 @@
 
 /* return an array of strings (localized for display in the menu) that will be combined with separators to form the menu item title
  */
-- (NSArray *)localizedTitlesForItem:(id)item;
+- (NSArray<NSString *> *)localizedTitlesForItem:(id)item;
 
 @optional
 
@@ -48,7 +51,9 @@
 /* returns YES if searchString matches the supplied range of stringToBeSearched according to Spotlight for Help default matching rules  
  * if found range is non null then the matching range is returned in it 
  */
-- (BOOL)searchString:(NSString *)searchString inUserInterfaceItemString:(NSString *)stringToSearch searchRange:(NSRange)searchRange foundRange:(NSRange *)foundRange NS_AVAILABLE_MAC(10_6);
+- (BOOL)searchString:(NSString *)searchString inUserInterfaceItemString:(NSString *)stringToSearch searchRange:(NSRange)searchRange foundRange:(nullable NSRange *)foundRange NS_AVAILABLE_MAC(10_6);
 
 @end
+
+NS_ASSUME_NONNULL_END
 

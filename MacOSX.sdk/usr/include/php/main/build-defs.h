@@ -18,7 +18,7 @@
 
 /* $Id$ */
 
-#define CONFIGURE_COMMAND " '/BinaryCache/apache_mod_php/apache_mod_php-94~2/Objects/php/configure'  '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/private/etc' '--with-apxs2=/usr/sbin/apxs' '--enable-cli' '--with-config-file-path=/etc' '--with-config-file-scan-dir=/Library/Server/Web/Config/php' '--with-libxml-dir=/usr' '--with-openssl=/usr' '--with-kerberos=/usr' '--with-zlib=/usr' '--enable-bcmath' '--with-bz2=/usr' '--enable-calendar' '--disable-cgi' '--with-curl=/usr' '--enable-dba' '--with-ndbm=/usr' '--enable-exif' '--enable-fpm' '--enable-ftp' '--with-png-dir=no' '--with-gd' '--with-jpeg-dir=/usr/local' '--enable-gd-native-ttf' '--with-icu-dir=/usr' '--with-ldap=/usr' '--with-ldap-sasl=/usr' '--with-libedit=/usr' '--enable-mbstring' '--enable-mbregex' '--with-mysql=mysqlnd' '--with-mysqli=mysqlnd' '--without-pear' '--with-pear=no' '--with-pdo-mysql=mysqlnd' '--with-mysql-sock=/var/mysql/mysql.sock' '--with-readline=/usr' '--enable-shmop' '--with-snmp=/usr' '--enable-soap' '--enable-sockets' '--enable-sysvmsg' '--enable-sysvsem' '--enable-sysvshm' '--with-tidy' '--enable-wddx' '--with-xmlrpc' '--with-iconv-dir=/usr' '--with-xsl=/usr' '--enable-zend-multibyte' '--enable-zip' '--with-pcre-regex=/usr'"
+#define CONFIGURE_COMMAND " '/Library/Caches/com.apple.xbs/Binaries/apache_mod_php/apache_mod_php-99~96/Objects/php/configure'  '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/private/etc' '--with-libdir=lib' '--enable-cli' '--with-iconv=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.Internal.sdk/usr' '--with-config-file-path=/etc' '--with-config-file-scan-dir=/Library/Server/Web/Config/php' '--with-libxml-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.Internal.sdk/usr' '--with-openssl=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.Internal.sdk/usr/local"
 #define PHP_ADA_INCLUDE		""
 #define PHP_ADA_LFLAGS		""
 #define PHP_ADA_LIBS		""
@@ -83,7 +83,7 @@
 #define PHP_SBINDIR             "/usr/sbin"
 #define PHP_MANDIR              "/usr/share/man"
 #define PHP_LIBDIR              "/usr/lib/php"
-#define PHP_DATADIR             "${prefix}/share"
+#define PHP_DATADIR             "/usr/share/php"
 #define PHP_SYSCONFDIR          "/private/etc"
 #define PHP_LOCALSTATEDIR       "/usr/var"
 #define PHP_CONFIG_FILE_PATH    "/etc"

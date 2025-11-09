@@ -1,4 +1,4 @@
-framework module PCSC [extern_c] [system] {
+framework module PCSC [extern_c] {
   explicit module defines {
     header "mscdefines.h"
     export *

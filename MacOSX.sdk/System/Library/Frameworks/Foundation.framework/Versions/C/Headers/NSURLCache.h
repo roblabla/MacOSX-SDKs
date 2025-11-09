@@ -1,11 +1,13 @@
 /*	
     NSURLCache.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
 #import <Foundation/NSObject.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @enum NSURLCacheStoragePolicy
@@ -80,7 +82,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     @param storagePolicy an NSURLCacheStoragePolicy constant.
     @result an initialized NSCachedURLResponse.
 */
-- (instancetype)initWithResponse:(NSURLResponse *)response data:(NSData *)data userInfo:(NSDictionary *)userInfo storagePolicy:(NSURLCacheStoragePolicy)storagePolicy;
+- (instancetype)initWithResponse:(NSURLResponse *)response data:(NSData *)data userInfo:(nullable NSDictionary *)userInfo storagePolicy:(NSURLCacheStoragePolicy)storagePolicy;
 
 /*! 
     @method response
@@ -101,7 +103,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     @abstract Returns the userInfo dictionary of the receiver. 
     @result The userInfo dictionary of the receiver. 
 */
-@property (readonly, copy) NSDictionary *userInfo;
+@property (nullable, readonly, copy) NSDictionary *userInfo;
 
 /*! 
     @method storagePolicy
@@ -168,7 +170,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     @result an initialized NSURLCache, with the given capacity, backed
     by disk.
 */
-- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(NSString *)path;
+- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(nullable NSString *)path;
 
 /*! 
     @method cachedResponseForRequest:
@@ -181,7 +183,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     request, or nil if there is no NSCachedURLResponse stored with the
     given request.
 */
-- (NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request;
+- (nullable NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request;
 
 /*! 
     @method storeCachedResponse:forRequest:
@@ -255,6 +257,8 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 
 @interface NSURLCache (NSURLSessionTaskAdditions)
 - (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
-- (void)getCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask completionHandler:(void (^) (NSCachedURLResponse *cachedResponse))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)getCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask completionHandler:(void (^) (NSCachedURLResponse * __nullable cachedResponse))completionHandler NS_AVAILABLE(10_10, 8_0);
 - (void)removeCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
 @end
+
+NS_ASSUME_NONNULL_END

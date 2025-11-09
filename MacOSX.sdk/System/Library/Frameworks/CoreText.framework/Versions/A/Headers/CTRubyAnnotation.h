@@ -2,7 +2,7 @@
  *  CTRubyAnnotation.h
  *  CoreText
  *
- *  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -20,15 +20,15 @@
 #include <CoreText/CTDefines.h>
 #include <CoreGraphics/CGBase.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_IMPLICIT_BRIDGING_ENABLED
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* RubyAnnotation Types                                                        */
 /* --------------------------------------------------------------------------- */
 
-typedef const struct __CTRubyAnnotation * CTRubyAnnotationRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CTRubyAnnotation * CTRubyAnnotationRef;
 
 
 /*!
@@ -164,9 +164,7 @@ typedef CF_ENUM(uint8_t, CTRubyPosition) {
     @param      text
                 An array of CFStringRef, indexed by CTRubyPosition. Supply NULL for any unused positions.
 
-    @result     If the ruby annotation creation was successful, this function
-                will return a valid reference to an immutable CTRubyAlignment
-                object. Otherwise, this function will return NULL.
+    @result     This function will return a reference to a CTRubyAlignment object.
 */
 
 CTRubyAnnotationRef CTRubyAnnotationCreate(
@@ -180,8 +178,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreate(
     @abstract   Creates an immutable copy of a ruby annotation object.
 
     @param      rubyAnnotation
-                The ruby annotation that you wish to copy. This parameter may not be
-                set to NULL.
+                The ruby annotation that you wish to copy.
 
     @result     If the "rubyAnnotation" reference is valid, then this
                 function will return valid reference to an immutable
@@ -251,13 +248,13 @@ CGFloat CTRubyAnnotationGetSizeFactor(
                 function will return a CFStringRef for the text. Otherwise it will return NULL.
 */
 
-CFStringRef CTRubyAnnotationGetTextForPosition(
+CFStringRef __nullable CTRubyAnnotationGetTextForPosition(
     CTRubyAnnotationRef rubyAnnotation,
     CTRubyPosition position ) CT_AVAILABLE(10_10, 8_0);
 
 
-#if defined(__cplusplus)
-}
-#endif
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

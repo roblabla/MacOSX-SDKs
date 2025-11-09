@@ -2,12 +2,14 @@
 	File:		AVAudioPlayerNode.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioNode.h>
 #import <AVFoundation/AVAudioFile.h>
 #import <AVFoundation/AVAudioMixing.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVAudioTime;
 
@@ -32,15 +34,15 @@ typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
 	@class AVAudioPlayerNode
 	@abstract Play buffers or segments of audio files.
 	@discussion
-		AVAudioPlayerNode supports scheduling the playback of @link AVAudioBuffer @/link instances,
-		or segments of audio files opened via @link AVAudioFile @/link. Buffers and segments may be
+		AVAudioPlayerNode supports scheduling the playback of `AVAudioBuffer` instances,
+		or segments of audio files opened via `AVAudioFile`. Buffers and segments may be
 		scheduled at specific points in time, or to play immediately following preceding segments.
 	
 		FORMATS
 		
 		Normally, you will want to configure the node's output format with the same number of
 		channels as are in the files and buffers to be played. Otherwise, channels will be dropped
-		or added as required. It is usually better to use an @link AVAudioMixerNode @/link to
+		or added as required. It is usually better to use an `AVAudioMixerNode` to
 		do this.
 	
 		Similarly, when playing file segments, the node will sample rate convert if necessary, but
@@ -52,18 +54,18 @@ typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
 		
 		TIMELINES
 	
-		The usual @link AVAudioNode @/link sample times (as observed by @link lastRenderTime @/link)
+		The usual `AVAudioNode` sample times (as observed by `lastRenderTime`)
 		have an arbitrary zero point. AVAudioPlayerNode superimposes a second "player timeline" on
 		top of this, to reflect when the player was started, and intervals during which it was
-		paused. The methods @link nodeTimeForPlayerTime: @/link and @link playerTimeForNodeTime: @/link
+		paused. The methods `nodeTimeForPlayerTime:` and `playerTimeForNodeTime:`
 		convert between the two.
 
-		This class' @link stop @/link method unschedules all previously scheduled buffers and 
+		This class' `stop` method unschedules all previously scheduled buffers and
 		file segments, and returns the player timeline to sample time 0.
 
 		TIMESTAMPS
 		
-		The "schedule" methods all take an @link AVAudioTime @/link "when" parameter. This is
+		The "schedule" methods all take an `AVAudioTime` "when" parameter. This is
 		interpreted as follows:
 		
 		1. nil:
@@ -88,7 +90,7 @@ typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface AVAudioPlayerNode : AVAudioNode <AVAudioMixing>
 
-/*! @method scheduleBuffer:error:completionHandler:
+/*! @method scheduleBuffer:completionHandler:
 	@abstract Schedule playing samples from an AVAudioBuffer.
 	@param buffer
 		the buffer to play
@@ -97,9 +99,9 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		Schedules the buffer to be played following any previously scheduled commands.
 */
-- (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer completionHandler:(AVAudioNodeCompletionHandler)completionHandler;
+- (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
 
-/*! @method scheduleBuffer:atTime:options:error:completionHandler:
+/*! @method scheduleBuffer:atTime:options:completionHandler:
 	@abstract Schedule playing samples from an AVAudioBuffer.
 	@param buffer
 		the buffer to play
@@ -111,9 +113,9 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		called after the buffer has completely played or the player is stopped. may be nil.
 	@discussion
 */
-- (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer atTime:(AVAudioTime *)when options:(AVAudioPlayerNodeBufferOptions)options completionHandler:(AVAudioNodeCompletionHandler)completionHandler;
+- (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer atTime:(AVAudioTime * __nullable)when options:(AVAudioPlayerNodeBufferOptions)options completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
 
-/*! @method scheduleFile:atTime:error:completionHandler:
+/*! @method scheduleFile:atTime:completionHandler:
 	@abstract Schedule playing of an entire audio file.
 	@param file
 		the file to play
@@ -122,7 +124,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@param completionHandler
 		called after the file has completely played or the player is stopped. may be nil.
 */
-- (void)scheduleFile:(AVAudioFile *)file atTime:(AVAudioTime *)when completionHandler:(AVAudioNodeCompletionHandler)completionHandler;
+- (void)scheduleFile:(AVAudioFile *)file atTime:(AVAudioTime * __nullable)when completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
 
 /*! @method scheduleSegment:startingFrame:frameCount:atTime:completionHandler:
 	@abstract Schedule playing a segment of an audio file.
@@ -137,7 +139,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@param completionHandler
 		called after the segment has completely played or the player is stopped. may be nil.
 */
-- (void)scheduleSegment:(AVAudioFile *)file startingFrame:(AVAudioFramePosition)startFrame frameCount:(AVAudioFrameCount)numberFrames atTime:(AVAudioTime *)when completionHandler:(AVAudioNodeCompletionHandler)completionHandler;
+- (void)scheduleSegment:(AVAudioFile *)file startingFrame:(AVAudioFramePosition)startFrame frameCount:(AVAudioFrameCount)numberFrames atTime:(AVAudioTime * __nullable)when completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
 
 /*!	@method stop
 	@abstract Clear all of the node's previously scheduled events and stop playback.
@@ -151,7 +153,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /*! @method prepareWithFrameCount:
 	@abstract Prepares previously scheduled file regions or buffers for playback.
-	@param numberFrames
+	@param frameCount
 		The number of sample frames of data to be prepared before returning.
 	@discussion
 */		
@@ -187,7 +189,7 @@ if (!nsErr) {
 }
 </pre>
 */
-- (void)playAtTime:(AVAudioTime *)when;
+- (void)playAtTime:(AVAudioTime * __nullable)when;
 
 /*! @method pause
 	@abstract Pause playback.
@@ -204,12 +206,12 @@ if (!nsErr) {
 	@return
 		a node time
 	@discussion
-		This method and its inverse @link playerTimeForNodeTime: @/link are discussed in the
+		This method and its inverse `playerTimeForNodeTime:` are discussed in the
 		introduction to this class.
 	
 		If the player is not playing when this method is called, nil is returned.
 */
-- (AVAudioTime *)nodeTimeForPlayerTime:(AVAudioTime *)playerTime;
+- (AVAudioTime * __nullable)nodeTimeForPlayerTime:(AVAudioTime *)playerTime;
 
 /*!	@method playerTimeForNodeTime:
 	@abstract
@@ -219,12 +221,12 @@ if (!nsErr) {
 	@return
 		a time relative to the player's start time
 	@discussion
-		This method and its inverse @link nodeTimeForPlayerTime: @/link are discussed in the
+		This method and its inverse `nodeTimeForPlayerTime:` are discussed in the
 		introduction to this class.
 	
 		If the player is not playing when this method is called, nil is returned.
 */
-- (AVAudioTime *)playerTimeForNodeTime:(AVAudioTime *)nodeTime;
+- (AVAudioTime * __nullable)playerTimeForNodeTime:(AVAudioTime *)nodeTime;
 
 /*!	@property playing
 	@abstract Indicates whether or not the player is playing.
@@ -234,3 +236,4 @@ if (!nsErr) {
 
 @end
 
+NS_ASSUME_NONNULL_END

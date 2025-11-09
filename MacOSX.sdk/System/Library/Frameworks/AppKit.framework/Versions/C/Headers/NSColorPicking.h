@@ -1,13 +1,15 @@
 /*
     NSColorPicking.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
 
 #import <Foundation/NSObject.h>
 #import <AppKit/NSColorPanel.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSButtonCell, NSColor, NSColorPanel, NSColorList, NSImage, NSView;
 
@@ -29,14 +31,14 @@
     FOR PERFORMANCE, DO NOT LOAD .NIBS, ETC. HERE!! WAIT UNTIL provideNewView: in NSColorPickingCustom!
 */
 
-- (instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
+- (nullable instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
 
 /* Allows you to return a new image used in the toolbar. By default, you can simply have a .tiff file with the same name as your custom color picker class in the bundle, and will not need to implement this method. 
 */
 - (NSImage *)provideNewButtonImage;
 - (void)insertNewButtonImage:(NSImage *)newButtonImage in:(NSButtonCell *)buttonCell;
-- (void)viewSizeChanged:(id)sender;
-- (void)alphaControlAddedOrRemoved:(id)sender;
+- (void)viewSizeChanged:(nullable id)sender;
+- (void)alphaControlAddedOrRemoved:(nullable id)sender;
 - (void)attachColorList:(NSColorList *)colorList;
 - (void)detachColorList:(NSColorList *)colorList;
 - (void)setMode:(NSColorPanelMode)mode;   
@@ -73,4 +75,6 @@
 */
 - (void)setColor:(NSColor *)newColor;
 @end
+
+NS_ASSUME_NONNULL_END
 

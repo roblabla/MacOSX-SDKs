@@ -1,5 +1,5 @@
 /*	NSFileHandle.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,6 +7,8 @@
 #import <Foundation/NSRange.h>
 
 @class NSString, NSData, NSError;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSFileHandle : NSObject <NSSecureCoding>
 
@@ -26,7 +28,7 @@
 - (void)closeFile;
 
 - (instancetype)initWithFileDescriptor:(int)fd closeOnDealloc:(BOOL)closeopt NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -37,13 +39,13 @@
 + (NSFileHandle *)fileHandleWithStandardError;
 + (NSFileHandle *)fileHandleWithNullDevice;
 
-+ (instancetype)fileHandleForReadingAtPath:(NSString *)path;
-+ (instancetype)fileHandleForWritingAtPath:(NSString *)path;
-+ (instancetype)fileHandleForUpdatingAtPath:(NSString *)path;
++ (nullable instancetype)fileHandleForReadingAtPath:(NSString *)path;
++ (nullable instancetype)fileHandleForWritingAtPath:(NSString *)path;
++ (nullable instancetype)fileHandleForUpdatingAtPath:(NSString *)path;
 
-+ (instancetype)fileHandleForReadingFromURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
-+ (instancetype)fileHandleForWritingToURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
-+ (instancetype)fileHandleForUpdatingURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
++ (nullable instancetype)fileHandleForReadingFromURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
++ (nullable instancetype)fileHandleForWritingToURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
++ (nullable instancetype)fileHandleForUpdatingURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
 @end
 
@@ -60,21 +62,21 @@ FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes NS_DEPRE
 
 @interface NSFileHandle (NSFileHandleAsynchronousAccess)
 
-- (void)readInBackgroundAndNotifyForModes:(NSArray *)modes;
+- (void)readInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
 - (void)readInBackgroundAndNotify;
 
-- (void)readToEndOfFileInBackgroundAndNotifyForModes:(NSArray *)modes;
+- (void)readToEndOfFileInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
 - (void)readToEndOfFileInBackgroundAndNotify;
 
-- (void)acceptConnectionInBackgroundAndNotifyForModes:(NSArray *)modes;
+- (void)acceptConnectionInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
 - (void)acceptConnectionInBackgroundAndNotify;
 
-- (void)waitForDataInBackgroundAndNotifyForModes:(NSArray *)modes;
+- (void)waitForDataInBackgroundAndNotifyForModes:(nullable NSArray<NSString *> *)modes;
 - (void)waitForDataInBackgroundAndNotify;
 
 #ifdef __BLOCKS__
-@property (copy) void (^readabilityHandler)(NSFileHandle *)  NS_AVAILABLE(10_7, 5_0);
-@property (copy) void (^writeabilityHandler)(NSFileHandle *) NS_AVAILABLE(10_7, 5_0);
+@property (nullable, copy) void (^readabilityHandler)(NSFileHandle *)  NS_AVAILABLE(10_7, 5_0);
+@property (nullable, copy) void (^writeabilityHandler)(NSFileHandle *) NS_AVAILABLE(10_7, 5_0);
 #endif
 
 @end
@@ -96,3 +98,4 @@ FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes NS_DEPRE
 
 @end
 
+NS_ASSUME_NONNULL_END

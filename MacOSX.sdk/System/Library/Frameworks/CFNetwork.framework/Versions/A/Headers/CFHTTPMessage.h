@@ -33,6 +33,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*
  *  kCFHTTPVersion1_0
@@ -51,6 +52,15 @@ CFN_EXPORT const CFStringRef kCFHTTPVersion1_0 CF_AVAILABLE(10_1, 2_0);
  *  
  */
 CFN_EXPORT const CFStringRef kCFHTTPVersion1_1 CF_AVAILABLE(10_1, 2_0);
+
+/*
+ *  kCFHTTPVersion2_0
+ *
+ *  Discussion:
+ *	Version string for HTTP 2.0.
+ *
+ */
+CFN_EXPORT const CFStringRef kCFHTTPVersion2_0 CF_AVAILABLE(10_10, 8_0);
 
 /*
  *  kCFHTTPAuthenticationSchemeBasic
@@ -187,7 +197,7 @@ CFHTTPMessageGetTypeID(void) CF_AVAILABLE(10_1, 2_0);
  *  
  */
 CFN_EXPORT CFHTTPMessageRef 
-CFHTTPMessageCreateRequest(CFAllocatorRef alloc, CFStringRef requestMethod, CFURLRef url, CFStringRef httpVersion) CF_AVAILABLE(10_1, 2_0);
+CFHTTPMessageCreateRequest(CFAllocatorRef __nullable alloc, CFStringRef requestMethod, CFURLRef url, CFStringRef httpVersion) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -227,9 +237,9 @@ CFHTTPMessageCreateRequest(CFAllocatorRef alloc, CFStringRef requestMethod, CFUR
  */
 CFN_EXPORT CFHTTPMessageRef 
 CFHTTPMessageCreateResponse(
-  CFAllocatorRef  alloc,
+  CFAllocatorRef  __nullable alloc,
   CFIndex         statusCode,
-  CFStringRef     statusDescription,
+  CFStringRef     __nullable statusDescription,
   CFStringRef     httpVersion)              CF_AVAILABLE(10_1, 2_0);
 
 
@@ -262,7 +272,7 @@ CFHTTPMessageCreateResponse(
  *  
  */
 CFN_EXPORT CFHTTPMessageRef 
-CFHTTPMessageCreateEmpty(CFAllocatorRef alloc, Boolean isRequest) CF_AVAILABLE(10_1, 2_0);
+CFHTTPMessageCreateEmpty(CFAllocatorRef __nullable alloc, Boolean isRequest) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -293,7 +303,7 @@ CFHTTPMessageCreateEmpty(CFAllocatorRef alloc, Boolean isRequest) CF_AVAILABLE(1
  *  
  */
 CFN_EXPORT CFHTTPMessageRef 
-CFHTTPMessageCreateCopy(CFAllocatorRef alloc, CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
+CFHTTPMessageCreateCopy(CFAllocatorRef __nullable alloc, CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -365,7 +375,7 @@ CFHTTPMessageCopyVersion(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
  *	responsibilty to release the memory allocated for the data.
  *  
  */
-CFN_EXPORT CFDataRef 
+CFN_EXPORT __nullable CFDataRef
 CFHTTPMessageCopyBody(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
@@ -417,7 +427,7 @@ CFHTTPMessageSetBody(CFHTTPMessageRef message, CFDataRef bodyData) CF_AVAILABLE(
  *	responsibilty to release the memory allocated for the string.
  *  
  */
-CFN_EXPORT CFStringRef 
+CFN_EXPORT __nullable CFStringRef
 CFHTTPMessageCopyHeaderFieldValue(CFHTTPMessageRef message, CFStringRef headerField) CF_AVAILABLE(10_1, 2_0);
 
 
@@ -441,7 +451,7 @@ CFHTTPMessageCopyHeaderFieldValue(CFHTTPMessageRef message, CFStringRef headerFi
  *	responsibilty to release the memory allocated for the dictionary.
  *  
  */
-CFN_EXPORT CFDictionaryRef 
+CFN_EXPORT __nullable CFDictionaryRef
 CFHTTPMessageCopyAllHeaderFields(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
@@ -470,7 +480,7 @@ CFHTTPMessageCopyAllHeaderFields(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_
  *  
  */
 CFN_EXPORT void 
-CFHTTPMessageSetHeaderFieldValue(CFHTTPMessageRef message, CFStringRef headerField, CFStringRef value) CF_AVAILABLE(10_1, 2_0);
+CFHTTPMessageSetHeaderFieldValue(CFHTTPMessageRef message, CFStringRef headerField, CFStringRef __nullable value) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -550,7 +560,7 @@ CFHTTPMessageIsHeaderComplete(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
  *	responsibilty to release the memory allocated for the data.
  *  
  */
-CFN_EXPORT CFDataRef 
+CFN_EXPORT __nullable CFDataRef
 CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
@@ -577,7 +587,7 @@ CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 
  *	responsibilty to release the memory allocated for the url.
  *  
  */
-CFN_EXPORT CFURLRef 
+CFN_EXPORT __nullable CFURLRef
 CFHTTPMessageCopyRequestURL(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0);
 
 
@@ -600,7 +610,7 @@ CFHTTPMessageCopyRequestURL(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0);
  *	responsibilty to release the memory allocated for the string.
  *  
  */
-CFN_EXPORT CFStringRef 
+CFN_EXPORT __nullable CFStringRef
 CFHTTPMessageCopyRequestMethod(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0);
 
 
@@ -648,10 +658,10 @@ CFHTTPMessageCopyRequestMethod(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0)
 CFN_EXPORT Boolean 
 CFHTTPMessageAddAuthentication(
   CFHTTPMessageRef   request,
-  CFHTTPMessageRef   authenticationFailureResponse,
+  CFHTTPMessageRef   __nullable authenticationFailureResponse,
   CFStringRef        username,
   CFStringRef        password,
-  CFStringRef        authenticationScheme,
+  CFStringRef        __nullable authenticationScheme,
   Boolean            forProxy)              CF_AVAILABLE(10_1, 2_0);
 
 
@@ -703,11 +713,12 @@ CFHTTPMessageGetResponseStatusCode(CFHTTPMessageRef response) CF_AVAILABLE(10_1,
  *	string.
  *  
  */
-CFN_EXPORT CFStringRef 
+CFN_EXPORT __nullable CFStringRef
 CFHTTPMessageCopyResponseStatusLine(CFHTTPMessageRef response) CF_AVAILABLE(10_1, 2_0);
 
 
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFHTTPMESSAGE__ */

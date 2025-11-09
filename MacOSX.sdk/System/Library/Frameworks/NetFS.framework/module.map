@@ -1,4 +1,4 @@
-framework module NetFS [extern_c] [system] {
+framework module NetFS [extern_c] {
   umbrella header "NetFS.h"
 
   export *

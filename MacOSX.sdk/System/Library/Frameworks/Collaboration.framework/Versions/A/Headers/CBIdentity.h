@@ -5,9 +5,10 @@
     Copyright (c) 2006-2012 Apple Inc. All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/Foundation.h>
 #import <CoreServices/CoreServices.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @class CBUserIdentity;
 @class CBGroupIdentity;
@@ -20,6 +21,7 @@
 
 /* CBIdentity - A wrapper for CSIdentityRef */
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface CBIdentity : NSObject <NSCoding, NSCopying> {
     @protected
         id _reserved[4];
@@ -31,54 +33,60 @@
 
 /* Return the identity with the given name, from the specified authority, nil if not found. */
 /* The name is compared against all valid identity names, including full names, posix names, email addresses, and aliases. */
-+ (CBIdentity *)identityWithName:(NSString *)name authority:(CBIdentityAuthority *)authority;
++ (nullable CBIdentity *)identityWithName:(NSString *)name authority:(CBIdentityAuthority *)authority;
 
 /* Return the identity with the given UUID, from the specified authority, nil if not found. */
-+ (CBIdentity *)identityWithUUIDString:(NSString *)uuid authority:(CBIdentityAuthority *)authority;
++ (nullable CBIdentity *)identityWithUniqueIdentifier:(NSUUID *)uuid authority:(CBIdentityAuthority *)authority NS_AVAILABLE(10_11, NA);
+
+/* Return the identity with the given UUID, from the specified authority, nil if not found. */
++ (nullable CBIdentity *)identityWithUUIDString:(NSString *)uuid authority:(CBIdentityAuthority *)authority NS_DEPRECATED(10_5, 10_11, NA, NA, "Use +identityWithUniqueIdentifier:authority: instead.");
 
 /* Return the identity specified in the given persistent reference data, nil if not found. 
    A persistent reference is an opaque blob suitable for persistent storage. */
-+ (CBIdentity *)identityWithPersistentReference:(NSData *)data;
++ (nullable CBIdentity *)identityWithPersistentReference:(NSData *)data;
 
 /* Return the identity with the given CSIdentityRef, for interoperability with CoreServices/CSIdentity API */
-+ (CBIdentity *)identityWithCSIdentity:(CSIdentityRef)csIdentity;
++ (CBIdentity *)identityWithCSIdentity:(CSIdentityRef)csIdentity NS_SWIFT_UNAVAILABLE("CSIdentity is not available in Swift.");
 
 
 
 /* Identity Attributes */
 
 /* The identity's authority */
-- (CBIdentityAuthority *)authority;
+@property (readonly, nonatomic) CBIdentityAuthority *authority;
+
+/* The identity's UUID */
+@property (readonly, nonatomic) NSUUID *uniqueIdentifier NS_AVAILABLE(10_11, NA);
 
 /* The identity's UUID in string form */
-- (NSString *)UUIDString;
+@property (readonly, nonatomic) NSString *UUIDString NS_DEPRECATED(10_5, 10_11, NA, NA, "Use the uniqueIdentifier property instead.");
 
 /* The identity's full name */
-- (NSString *)fullName;
+@property (readonly, nonatomic) NSString *fullName;
 
 /* The identity's POSIX ("short") name */
-- (NSString *)posixName;
+@property (readonly, nonatomic) NSString *posixName;
 
 /* Return an array of the identity's aliases (alternate names) */
-- (NSArray *)aliases;
+@property (readonly, nonatomic) NSArray<NSString *> *aliases;
 
 /* The identity's primary email address, or nil */
-- (NSString *)emailAddress;
+@property (nullable, readonly, nonatomic) NSString *emailAddress;
 
 /* The identity's image */
-- (NSImage *)image;
+@property (nullable, readonly, nonatomic) NSImage *image;
 
 /* Return a presistent reference data blob for use in an ACL or other storage */
-- (NSData *)persistentReference;
+@property (nullable, readonly, nonatomic) NSData *persistentReference;
 
 /* Hidden identities include "system" users and groups such as root, www, wheel */
-- (BOOL)isHidden;
+@property (readonly, nonatomic, getter=isHidden) BOOL hidden;
 
-/* Return TRUE if the identity is a member of the specified group */
+/* Return YES if the identity is a member of the specified group */
 - (BOOL)isMemberOfGroup:(CBGroupIdentity *)group;
 
 /* Return the corresponding CSIdentityRef (for interoperability with Identity Services API) */
-- (CSIdentityRef)CSIdentity;
+@property (readonly) CSIdentityRef CSIdentity NS_SWIFT_UNAVAILABLE("CSIdentity is not available in Swift.");
 
 @end
 
@@ -87,21 +95,22 @@
 
 /* CBUserIdentity - an identity with password and/or certificate credentials */
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface CBUserIdentity : CBIdentity <NSCoding, NSCopying>
 
 /* Return the user identity with the given Posix UID from the specified authority, nil if not found */
-+ (CBUserIdentity *)userIdentityWithPosixUID:(uid_t)uid authority:(CBIdentityAuthority *)authority;
++ (nullable CBUserIdentity *)userIdentityWithPosixUID:(uid_t)uid authority:(CBIdentityAuthority *)authority;
 
 /* Return the Posix UID of the user identity */
-- (uid_t)posixUID;
+@property (readonly, nonatomic) uid_t posixUID;
 
 /* The user's authentication certificate; nil if no cert */
-- (SecCertificateRef)certificate;
+@property (nullable, readonly, nonatomic) SecCertificateRef certificate;
 
-/* Return TRUE if the user can authenticate, FALSE if authentication is not allowed  */
-- (BOOL)isEnabled;
+/* Return YES if the user can authenticate, NO if authentication is not allowed  */
+@property (readonly, nonatomic, getter=isEnabled) BOOL enabled;
 
-/* Return TRUE if the given password is correct for this user. */
+/* Return YES if the given password is correct for this user. */
 - (BOOL)authenticateWithPassword:(NSString *)password;
 
 @end
@@ -111,15 +120,20 @@
 
 /* CBGroupIdentity - an identity with membership */
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface CBGroupIdentity : CBIdentity
 
 /* Return the group identity with the given Posix GID from the specified authority, nil if not found */
-+ (CBGroupIdentity *)groupIdentityWithPosixGID:(gid_t)gid authority:(CBIdentityAuthority *)authority;
++ (nullable CBGroupIdentity *)groupIdentityWithPosixGID:(gid_t)gid authority:(CBIdentityAuthority *)authority;
 
 /* Return the Posix GID of the group identity */
-- (gid_t)posixGID;
+@property (readonly, nonatomic) gid_t posixGID;
+
+/* The group's members, as an array of CSIdentityRef values */
+@property (nullable, readonly, nonatomic) NSArray *members NS_DEPRECATED(10_5, 10_11, NA, NA, "Use the memberIdentities property instead.") NS_SWIFT_UNAVAILABLE("Use the memberIdentities property instead. CSIdentity is not available in Swift.");
 
 /* The group's members, as an array of CBIdentity objects */
-- (NSArray *)members;
-
+@property (readonly, nonatomic) NSArray<CBIdentity *> *memberIdentities NS_AVAILABLE(10_11, NA);
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,42 +1,24 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2014, Apple Inc.
+        Copyright (c) 1994-2015, Apple Inc.
         All rights reserved.
 */
 
-// An NSTextContainer defines a region in which to lay out text.  Its main responsibility is to calculate line fragments which fall within the region it represents.  Containers have a line fragment padding which is used by the typesetter to inset text from the edges of line fragments along the sweep direction.
-// The container can enforce any other geometric constraints as well.  When drawing the text that has been laid in a container, a NSTextView will clip to the interior of the container (it clips to the container's rectagular area only, however, not to the arbitrary shape the container may define for text flow).
-
 #import <Foundation/NSObject.h>
-#import <Foundation/NSGeometry.h>
+#import <AppKit/NSParagraphStyle.h>
 #import <AppKit/NSLayoutManager.h>
 
-@class NSTextView;
+@class NSBezierPath;
 
-/* Values for NSLineSweepDirection */
-typedef NS_ENUM(NSUInteger, NSLineSweepDirection) {
-    NSLineSweepLeft     = 0,
-    NSLineSweepRight    = 1,
-    NSLineSweepDown     = 2,
-    NSLineSweepUp       = 3
-};
+NS_ASSUME_NONNULL_BEGIN
 
-/* Values for NSLineMovementDirection */
-typedef NS_ENUM(NSUInteger, NSLineMovementDirection) {
-    NSLineDoesntMove    = 0, 
-    NSLineMovesLeft     = 1,
-    NSLineMovesRight    = 2,
-    NSLineMovesDown     = 3,
-    NSLineMovesUp       = 4
-};
-
-
-@interface NSTextContainer : NSObject <NSCoding, NSTextLayoutOrientationProvider> {
+NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextContainer : NSObject <NSCoding, NSTextLayoutOrientationProvider>
+{
     
-  /*All instance variables are private*/
+    /*All instance variables are private*/
     
-  @private
+@private
     NSLayoutManager *_layoutManager;
     NSTextView *_textView;
     NSSize _size;
@@ -46,48 +28,91 @@ typedef NS_ENUM(NSUInteger, NSLineMovementDirection) {
         unsigned short heightTracksTextView:1;
         unsigned short observingFrameChanges:1;
         unsigned short lineBreakMode:4;
-        unsigned short _reserved:9;
+        unsigned short oldAPI:1;
+        unsigned short _reserved:8;
     } _tcFlags;
 }
 
 /**************************** Initialization ****************************/
 
-- (instancetype)initWithContainerSize:(NSSize)size;
+- (instancetype)initWithSize:(NSSize)size NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_11, 7_0);
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-/**************************** Layout and View ****************************/
 
-@property (assign) NSLayoutManager *layoutManager;
-    // The set method generally should not be called directly, but you may want to override it.  Adding a container to a NSLayoutManager through the provided NSLayoutManager methods will cause the set method to be called appropriately.
+/**************************** Layout ****************************/
 
-- (void)replaceLayoutManager:(NSLayoutManager *)newLayoutManager;
-    // This method should be used instead of the primitive -setLayoutManager: if you need to replace a container's layoutManager with a new one leaving the rest of the web intact.  All the NSTextContainers on the old NSLayoutManager get transferred to the new one.  This method deals with all the work of making sure the containers don't get deallocated and removing the old layoutManager from the text storage and replacing it with the new one.
+// Accessor for the NSLayoutManager object owning the receiver.
+// Avoid assigning a layout manager directly through this property.  Adding a text container to a layout manager through -[NSLayoutManager addTextContainer:] will use the property for assigning the new layout manager.
+@property(nullable, assign) NSLayoutManager *layoutManager;
 
-@property (strong) NSTextView *textView;
-    // Set/get the view which the container is drawn in.  Having a view is optional.
+// This method should be used instead of the primitive -setLayoutManager: if you need to replace a container's layoutManager with a new one leaving the rest of the web intact.  All the NSTextContainers on the old NSLayoutManager get transferred to the new one.  This method deals with all the work of making sure the containers don't get deallocated and removing the old layoutManager from the text storage and replacing it with the new one.
+- (void)replaceLayoutManager:(NSLayoutManager *)newLayoutManager NS_AVAILABLE(10_0, 9_0);
 
-@property BOOL widthTracksTextView;
-@property BOOL heightTracksTextView;
-    // If a container tracks the size of it's view in one or both of these dimensions then those dimensions will be kept in synch with with the view's frame (taking into account the view's textContainerInset).
 
-/************************* Container size and padding *************************/
+/************************* Container shape properties *************************/
 
-@property NSSize containerSize;
-    // Sets/returns the current size of the container.  This size has nothing to do with how much text is in the container and how much space it takes up (which the container is not in a position to know).  It is basically the maximum flowable area of the container.  The NSTextView's size will not generally have much connection to this size.  The NSTextView will generally want to be big enough to display all the text which has been laid in the container at the moment and no bigger.  The NSLayoutManager will generally be in charge of telling the view what size it should be.
+// Default value: CGSizeZero  Defines the maximum size for the layout area returned from -lineFragmentRectForProposedRect:writingDirection:remainingRect:.  0.0 and less means no limitation.
+@property NSSize size NS_AVAILABLE(10_11, 7_0);
 
+// Default value : empty array  An array of NSBezierPath representing the exclusion paths inside the receiver's bounding rect.
+@property(copy) NSArray<NSBezierPath *> *exclusionPaths NS_AVAILABLE(10_11, 7_0);
+
+// Default value: NSLineBreakByWordWrapping  The line break mode defines the behavior of the last line inside the text container.
+@property NSLineBreakMode lineBreakMode NS_AVAILABLE(10_11, 7_0);
+
+/************************* Layout constraint properties *************************/
+
+// Default value: 5.0  The layout padding at the beginning and end of the line fragment rects insetting the layout width available for the contents.  This value is utilized by NSLayoutManager for determining the layout width.
 @property CGFloat lineFragmentPadding;
-    // This value is used by the typesetter to inset the line fragment rects it gets along the sweep direction to give a little default pad to each fragment.
+
+// Default value: 0 (no limit)  The maximum number of lines that can be stored in the receiver.  This value is utilized by NSLayoutManager for determining the maximum number of lines associated with the text container.
+@property NSUInteger maximumNumberOfLines NS_AVAILABLE(10_11, 7_0);
 
 /**************************** Line fragments ****************************/
 
-- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect sweepDirection:(NSLineSweepDirection)sweepDirection movementDirection:(NSLineMovementDirection)movementDirection remainingRect:(NSRectPointer)remainingRect;
-    // Returns the first and largest subrect of proposedRect which falls within the container's region.  All rects are given in the container's coordinate system.  sweepDirection determines what edge of the proposedRect to start from.  movementDirection determines in which direction (if any) the proposedRect can be translated if it is necessary to move the rect to find a non-empty fragment.  remainingRect is set to hold whatever portion of of the proposedRect (after any line movement translation) which is left after subtracting the returned fragment.  The proposed rect should fall within the frame area of the container.  remainingRect will only be non-empty if there are parts of the proposedRect left within the container's frame area ("after" the returned fragment rect in the sweep direction) that are not included in the returned rect.
+// Returns the bounds of a line fragment rect inside the receiver for proposedRect.  This is the intersection of proposedRect and the receiver's bounding rect defined by -size property.  The regions defined by -exclusionPaths property are excluded from the return value.  charIndex is the character location inside the text storage for the line fragment being processed.  It is possible that proposedRect can be divided into multiple line fragments due to exclusion paths.  In that case, remainingRect returns the remainder that can be passed in as the proposed rect for the next iteration.  baseWritingDirection determines the direction of advancement for line fragments inside a visual horizontal line.  The values passed into the method are either NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft.  This method can be overridden by subclasses for further text container region customization.
+- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect atIndex:(NSUInteger)characterIndex writingDirection:(NSWritingDirection)baseWritingDirection remainingRect:(nullable NSRect *)remainingRect NS_AVAILABLE(10_11, 7_0);
 
-@property (getter=isSimpleRectangularTextContainer, readonly) BOOL simpleRectangularTextContainer;
-    // Subclasses should override this method to return NO if the containers area is not truly rectangular with no holes or concavities.  NSLayoutManager uses this method to determine whether it can make certain optimizations when relaying text in the container.  NSTextContainer's implementation returns YES.
+// Returns YES if the receiver is a rectangular shape defined simply by -size. TextKit utilizes this information for enabling various layout optimizations. NSLayoutManager disables non-contiguous layout when this property is NO. The default implementation returns NO when -exclusionPaths has 1 or more items, -maximumNumberOfLines is not 0, or -lineFragmentRectForProposedRect:atIndex:writingDirection:remainingRect: is overridden. It's recommended to override this property when -lineFragmentRectForProposedRect:atIndex:writingDirection:remainingRect: is overridden.
+@property (getter=isSimpleRectangularTextContainer, readonly) BOOL simpleRectangularTextContainer NS_AVAILABLE(10_0, 9_0);
 
-/**************************** Hit testing ****************************/
 
-- (BOOL)containsPoint:(NSPoint)point;
-    // Returns YES if the point (given in the coordinate system of the container) falls within the region of the container.
+/**************************** View synchronization ****************************/
 
+// Default value: NO  Define whether the text container view bounds changes can affect the text container size.
+@property BOOL widthTracksTextView;
+@property BOOL heightTracksTextView;
+
+// Set/get the view which the container is drawn in.  Having a view is optional.
+@property (nullable, strong) NSTextView *textView;
 @end
+
+/**************************** Deprecated ****************************/
+// NSLineSweepDirection and NSLineMovementDirection are soft deprecated starting with OS X 10.11. It will be officially deprecated in a future release
+typedef NS_ENUM(NSUInteger, NSLineSweepDirection) {
+    NSLineSweepLeft     = 0,
+    NSLineSweepRight    = 1,
+    NSLineSweepDown     = 2,
+    NSLineSweepUp       = 3
+};
+
+typedef NS_ENUM(NSUInteger, NSLineMovementDirection) {
+    NSLineDoesntMove    = 0,
+    NSLineMovesLeft     = 1,
+    NSLineMovesRight    = 2,
+    NSLineMovesDown     = 3,
+    NSLineMovesUp       = 4
+};
+
+@interface NSTextContainer (NSTextContainerDeprecated)
+// Methods names with "containerSize" are soft deprecated starting with OS X 10.11. It will be officially deprecated in a future release
+- (instancetype)initWithContainerSize:(NSSize)aContainerSize; // Use -initWithSize: instead. For binary compatibility, this method now just calls [self initWithSize:]. Also, -init still calls -initWithContainerSize:.
+@property NSSize containerSize; // Use -size instead
+
+// This method is soft deprecated starting with OS X 10.11. It will be officially deprecated in a future release
+- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect sweepDirection:(NSLineSweepDirection)sweepDirection movementDirection:(NSLineMovementDirection)movementDirection remainingRect:(nullable NSRectPointer)remainingRect; // Use -lineFragmentRectForProposedRect:atIndex:writingDirection:remainingRect: instead
+
+- (BOOL)containsPoint:(NSPoint)point NS_DEPRECATED_MAC(10_0, 10_11);
+@end
+
+NS_ASSUME_NONNULL_END

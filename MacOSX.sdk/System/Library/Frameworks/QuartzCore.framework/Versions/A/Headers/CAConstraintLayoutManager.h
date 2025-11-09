@@ -1,6 +1,6 @@
 /* CoreAnimation - CAConstraintLayoutManager.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -38,13 +38,15 @@ typedef NS_ENUM (int, CAConstraintAttribute)
 
 @class CAConstraint;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** The additions to CALayer for constraint layout. **/
 
 @interface CALayer (CAConstraintLayoutManager)
 
 /* The layer's array of CAConstraint objects. */
 
-@property(copy) NSArray *constraints;
+@property(nullable, copy) NSArray<CAConstraint *> *constraints;
 
 /* Append 'c' to the receiver's array of constraint objects. */
 
@@ -58,7 +60,7 @@ typedef NS_ENUM (int, CAConstraintAttribute)
 
 /* Returns a new layout manager object. */
 
-+ (id)layoutManager;
++ (instancetype)layoutManager;
 
 @end
 
@@ -75,23 +77,23 @@ typedef NS_ENUM (int, CAConstraintAttribute)
 
 /* Create a new constraint object with the specified parameters. In the
  * general case the new constraint will have the form:
- * 
- *	layer.attr = m * srcLayer.srcAttr + c
+ *
+ *      layer.attr = m * srcLayer.srcAttr + c
  *
  * 'm' defaults to one when undefined; 'c' defaults to zero. */
 
-+ (id)constraintWithAttribute:(CAConstraintAttribute)attr
++ (instancetype)constraintWithAttribute:(CAConstraintAttribute)attr
     relativeTo:(NSString *)srcId attribute:(CAConstraintAttribute)srcAttr
     scale:(CGFloat)m offset:(CGFloat)c;
-+ (id)constraintWithAttribute:(CAConstraintAttribute)attr
++ (instancetype)constraintWithAttribute:(CAConstraintAttribute)attr
     relativeTo:(NSString *)srcId attribute:(CAConstraintAttribute)srcAttr
     offset:(CGFloat)c;
-+ (id)constraintWithAttribute:(CAConstraintAttribute)attr
++ (instancetype)constraintWithAttribute:(CAConstraintAttribute)attr
     relativeTo:(NSString *)srcId attribute:(CAConstraintAttribute)srcAttr;
 
 /* Designated initializer. */
 
-- (id)initWithAttribute:(CAConstraintAttribute)attr
+- (instancetype)initWithAttribute:(CAConstraintAttribute)attr
     relativeTo:(NSString *)srcId attribute:(CAConstraintAttribute)srcAttr
     scale:(CGFloat)m offset:(CGFloat)c;
 
@@ -100,6 +102,9 @@ typedef NS_ENUM (int, CAConstraintAttribute)
 @property(readonly) CAConstraintAttribute attribute;
 @property(readonly) NSString *sourceName;
 @property(readonly) CAConstraintAttribute sourceAttribute;
-@property(readonly) CGFloat scale, offset;
+@property(readonly) CGFloat scale;
+@property(readonly) CGFloat offset;
 
 @end
+
+NS_ASSUME_NONNULL_END

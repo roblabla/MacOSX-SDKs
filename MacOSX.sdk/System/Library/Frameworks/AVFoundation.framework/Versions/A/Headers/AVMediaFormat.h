@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -20,6 +20,39 @@ AVF_EXPORT NSString *const AVMediaTypeSubtitle              NS_AVAILABLE(10_7, 4
 AVF_EXPORT NSString *const AVMediaTypeTimecode              NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMediaTypeMetadata              NS_AVAILABLE(10_8, 6_0);
 AVF_EXPORT NSString *const AVMediaTypeMuxed                 NS_AVAILABLE(10_7, 4_0);
+
+/*!
+ @constant AVMediaTypeMetadataObject
+ @abstract mediaType of AVCaptureInputPorts that provide AVMetadataObjects.
+ @discussion
+ Prior to iOS 9.0, camera AVCaptureDeviceInputs provide metadata (detected faces and barcodes) to an
+ AVCaptureMetadataOutput through an AVCaptureInputPort whose mediaType is AVMediaTypeMetadata.  The
+ AVCaptureMetadataOutput presents metadata to the client as an array of AVMetadataObjects, which are
+ defined by Apple and not externally subclassable.  Starting in iOS 9.0, clients may record arbitrary
+ metadata to a movie file using the AVCaptureMovieFileOutput.  The movie file output consumes metadata
+ in a different format than the AVCaptureMetadataOutput, namely it accepts CMSampleBuffers of type
+ 'meta'.  Starting in iOS 9.0, two types of AVCaptureInput can produce suitable metadata for the
+ movie file output.
+ 
+ <ul>
+ <li>The camera AVCaptureDeviceInput now presents an additional AVCaptureInputPort for recording detected
+ faces to a movie file. When linked on or after iOS 9, ports that deliver AVCaptureMetadataObjects have a
+ mediaType of AVMediaTypeMetadataObject rather than AVMediaTypeMetadata.  Input ports that deliver CMSampleBuffer
+ metadata have a mediaType of AVMediaTypeMetadata.</li>
+ 
+ <li>New to iOS 9 is the AVCaptureMetadataInput, which allows clients to record arbitrary metadata to a movie
+ file.  Clients package metadata as an AVTimedMetadataGroup, the AVCaptureMetadataInput presents a port of mediaType
+ AVMediaTypeMetadata, and when connected to a movie file output, transforms the timed metadata group's AVMetadataItems
+ into CMSampleBuffers which can be written to the movie file.</li>
+ </ul>
+ 
+ When linked on or after iOS 9, AVCaptureInputPorts with a mediaType of AVMediaTypeMetadata are handled
+ specially by the AVCaptureSession. When inputs and outputs are added to the session, the session does
+ not form connections implicitly between eligible AVCaptureOutputs and input ports of type AVMediaTypeMetadata.
+ If clients want to record a particular kind of metadata to a movie, they must manually form connections
+ between a AVMediaTypeMetadata port and the movie file output using AVCaptureSession's -addConnection API.
+*/
+AVF_EXPORT NSString *const AVMediaTypeMetadataObject NS_AVAILABLE_IOS(9_0);
 
 
 // Media characteristics
@@ -78,7 +111,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicIsMainProgramContent NS_AVAILABL
  @discussion
  The value of this characteristic is @"public.auxiliary-content".
  Example: an option that presents audio media containing commentary on the presentation would typically have this characteristic.
- Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicIsAuxiliaryContent if it's explicitly tagged with that characteristic or if, as a member of an altenate track group, its associated track is excluded from autoselection.
+ Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicIsAuxiliaryContent if it's explicitly tagged with that characteristic or if, as a member of an alternate track group, its associated track is excluded from autoselection.
  See the discussion of the tagging of tracks with media characteristics below.
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -91,7 +124,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicIsAuxiliaryContent NS_AVAILABLE(
  @discussion
  Media options with forced-only subtitles are typically selected when 1) the user has not selected a legible option with an accessibility characteristic or an auxiliary purpose and 2) its locale matches the locale of the selected audible media selection option.
  The value of this characteristic is @"public.subtitles.forced-only".
- Note for content authors: the presence of this characteristic for a legible media option is inferred from the format description of the associated track that presents the subtitle media.
+ Note for content authors: the presence of this characteristic for a legible media option may be inferred from the format description of the associated track that presents the subtitle media, if the format description carries sufficient information to indicate the presence or absence of forced and non-forced subtitles. If the format description does not carry this information, the legible media option can be explicitly tagged with the characteristic.
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
@@ -162,6 +195,41 @@ AVF_EXPORT NSString *const AVMediaCharacteristicEasyToRead NS_AVAILABLE(10_8, 6_
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
 AVF_EXPORT NSString *const AVMediaCharacteristicDescribesVideoForAccessibility NS_AVAILABLE(10_8, 5_0);
+
+/*!
+ @constant AVMediaCharacteristicLanguageTranslation
+ @abstract A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, intended to be used as a substitute for that content by users who prefer its designated language.
+ @discussion
+ See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
+ The value of this characteristic is @"public.translation".
+ Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicLanguageTranslation only if it's explicitly tagged with that characteristic.
+ See the discussion of the tagging of tracks with media characteristics below.
+*/
+AVF_EXPORT NSString *const AVMediaCharacteristicLanguageTranslation NS_AVAILABLE(10_11, 9_0);
+
+/*!
+ @constant AVMediaCharacteristicDubbedTranslation
+ @abstract A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, created by substituting most or all of the dialog in a previous mix of audio content with dialog spoken in its designated language.
+ @discussion
+ Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation.
+ See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
+ The value of this characteristic is @"public.translation.dubbed".
+ Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDubbedTranslation only if it's explicitly tagged with that characteristic.
+ See the discussion of the tagging of tracks with media characteristics below.
+*/
+AVF_EXPORT NSString *const AVMediaCharacteristicDubbedTranslation NS_AVAILABLE(10_11, 9_0);
+
+/*!
+ @constant AVMediaCharacteristicVoiceOverTranslation NS_AVAILABLE(10_11, 9_0);
+ @abstract A media characteristic that indicates that a track or media selection option contains a language translation of originally or previously produced content, created by adding, in its designated language, a verbal interpretation of dialog and translations of other important information to a new mix of the audio content.
+ @discussion
+ Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation.
+ See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
+ The value of this characteristic is @"public.translation.voice-over".
+ Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicVoiceOverTranslation only if it's explicitly tagged with that characteristic.
+ See the discussion of the tagging of tracks with media characteristics below.
+*/
+AVF_EXPORT NSString *const AVMediaCharacteristicVoiceOverTranslation NS_AVAILABLE(10_11, 9_0);
 
 /*
 	Tagging of tracks of .mov and .m4v files with media characteristics
@@ -234,8 +302,6 @@ AVF_EXPORT NSString *const AVFileTypeAppleM4V NS_AVAILABLE(10_7, 4_0);
  */
 AVF_EXPORT NSString *const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
 
-#if TARGET_OS_IPHONE
-
 /*!
  @constant AVFileType3GPP
  @abstract A UTI for the 3GPP file format.
@@ -243,7 +309,7 @@ AVF_EXPORT NSString *const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.3gpp".
  Files are identified with the .3gp, .3gpp, and .sdv extensions.
  */
-AVF_EXPORT NSString *const AVFileType3GPP NS_AVAILABLE_IOS(4_0);
+AVF_EXPORT NSString *const AVFileType3GPP NS_AVAILABLE(10_11, 4_0);
 
 /*!
  @constant AVFileType3GPP2
@@ -252,9 +318,7 @@ AVF_EXPORT NSString *const AVFileType3GPP NS_AVAILABLE_IOS(4_0);
  The value of this UTI is @"public.3gpp2".
  Files are identified with the .3g2, .3gp2 extensions.
  */
-AVF_EXPORT NSString *const AVFileType3GPP2 NS_AVAILABLE_IOS(7_0);
-
-#endif // TARGET_OS_IPHONE
+AVF_EXPORT NSString *const AVFileType3GPP2 NS_AVAILABLE(10_11, 4_0);
 
 /*!
  @constant AVFileTypeCoreAudioFormat
@@ -328,6 +392,29 @@ AVF_EXPORT NSString *const AVFileTypeSunAU NS_AVAILABLE(10_9, 7_0);
  */
 AVF_EXPORT NSString *const AVFileTypeAC3 NS_AVAILABLE(10_9, 7_0);
 
+/*!
+ @constant AVFileTypeEnhancedAC3
+ @abstract A UTI for the enhanced AC-3 audio file format.
+ @discussion
+ The value of this UTI is @"public.enhanced-ac3-audio".
+ Files are identified with the .eac3 extension.
+ */
+AVF_EXPORT NSString *const AVFileTypeEnhancedAC3 NS_AVAILABLE(10_11, 9_0);
 
+/*!
+ @constant AVStreamingKeyDeliveryContentKeyType
+ @abstract A UTI for streaming key delivery content keys
+ @discussion
+ The value of this UTI is @"com.apple.streamingkeydelivery.contentkey".
+ */
+AVF_EXPORT NSString *const AVStreamingKeyDeliveryContentKeyType NS_AVAILABLE(10_11, 9_0);
+
+/*!
+ @constant AVStreamingKeyDeliveryPersistentContentKeyType
+ @abstract A UTI for persistent streaming key delivery content keys
+ @discussion
+ The value of this UTI is @"com.apple.streamingkeydelivery.persistentcontentkey".
+ */
+AVF_EXPORT NSString *const AVStreamingKeyDeliveryPersistentContentKeyType NS_AVAILABLE(10_11, 9_0);
 
 

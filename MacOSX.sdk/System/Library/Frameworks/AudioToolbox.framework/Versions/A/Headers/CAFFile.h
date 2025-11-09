@@ -1,19 +1,12 @@
-/*
-     File:       AudioToolbox/CAFFile.h
-
-     Contains:   Tthe data structures contained within a CAF File
-
-     Copyright:  (c) 2004 - 2008 by Apple, Inc., all rights reserved.
-
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
-
-                     http://developer.apple.com/bugreporter/
-
+/*!
+	@file		CAFFile.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2004-2015 by Apple, Inc., all rights reserved.
+	@abstract	The data structures contained within a CAF (Core Audio Format) file.
 */
 
-#ifndef _CAFFile_H_
-#define _CAFFile_H_
+#ifndef AudioToolbox_CAFFile_h
+#define AudioToolbox_CAFFile_h
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>
@@ -32,13 +25,13 @@
 // When reading or writing these values the program will need to flip byte order to native endian
 
 // CAF File Header
-enum {
+CF_ENUM(UInt32) {
 	kCAF_FileType				= 'caff',
 	kCAF_FileVersion_Initial	= 1
 };
 
 // CAF Chunk Types	
-enum {
+CF_ENUM(UInt32) {
 	kCAF_StreamDescriptionChunkID   = 'desc',
 	kCAF_AudioDataChunkID			= 'data',
 	kCAF_ChannelLayoutChunkID		= 'chan',
@@ -88,27 +81,27 @@ struct CAF_UUID_ChunkHeader
 typedef struct CAF_UUID_ChunkHeader CAF_UUID_ChunkHeader;
 
 
+// these are the flags if the format ID is 'lpcm'
+// <CoreAudio/CoreAudioTypes.h> declares some of the format constants 
+// that can be used as Data Formats in a CAF file
+typedef CF_OPTIONS(UInt32, CAFFormatFlags)
+{
+    kCAFLinearPCMFormatFlagIsFloat				= (1L << 0),
+    kCAFLinearPCMFormatFlagIsLittleEndian		= (1L << 1)
+};
+
 // Every file MUST have this chunk. It MUST be the first chunk in the file
 struct CAFAudioDescription
 {
         Float64 mSampleRate;
         UInt32  mFormatID;
-        UInt32  mFormatFlags;
+        CAFFormatFlags  mFormatFlags;
         UInt32  mBytesPerPacket;
         UInt32  mFramesPerPacket;
         UInt32  mChannelsPerFrame;
         UInt32  mBitsPerChannel;
 } ATTRIBUTE_PACKED;
 typedef struct CAFAudioDescription  CAFAudioDescription;
-
-// these are the flags if the format ID is 'lpcm'
-// <CoreAudio/CoreAudioTypes.h> declares some of the format constants 
-// that can be used as Data Formats in a CAF file
-enum
-{
-    kCAFLinearPCMFormatFlagIsFloat				= (1L << 0),
-    kCAFLinearPCMFormatFlagIsLittleEndian		= (1L << 1)
-};
 
 
 // 'ldsc'  format list chunk.
@@ -182,7 +175,7 @@ struct CAFDataChunk
 typedef struct CAFDataChunk CAFDataChunk;
 
 // markers types
-enum {
+CF_ENUM(UInt32) {
 	kCAFMarkerType_Generic					= 0,
 	kCAFMarkerType_ProgramStart				= 'pbeg',
 	kCAFMarkerType_ProgramEnd				= 'pend',
@@ -208,7 +201,7 @@ enum {
 	kCAFMarkerType_KeySignature				= 'ksig'
 };
 
-enum
+CF_ENUM(UInt32)
 {
     kCAF_SMPTE_TimeTypeNone		 = 0,
     kCAF_SMPTE_TimeType24        = 1,
@@ -255,7 +248,7 @@ typedef struct CAFMarkerChunk CAFMarkerChunk;
 
 #define kCAFMarkerChunkHdrSize		offsetof(CAFMarkerChunk, mMarkers)
 
-enum {
+typedef CF_OPTIONS(UInt32, CAFRegionFlags) {
 	kCAFRegionFlag_LoopEnable = 1,
 	kCAFRegionFlag_PlayForward = 2,
 	kCAFRegionFlag_PlayBackward = 4
@@ -264,7 +257,7 @@ enum {
 struct CAFRegion
 {
         UInt32          mRegionID;               
-        UInt32          mFlags;
+        CAFRegionFlags  mFlags;
         UInt32          mNumberMarkers;
         CAFMarker       mMarkers[1]; // this is a variable length array of mNumberMarkers elements
 } ATTRIBUTE_PACKED;
@@ -372,4 +365,4 @@ typedef struct CAFUMIDChunk CAFUMIDChunk;
 #endif
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#endif
+#endif // AudioToolbox_CAFFile_h

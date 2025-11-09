@@ -7,6 +7,8 @@
 
 #import <SpriteKit/SpriteKitBase.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CIFilter;
 
 typedef NS_ENUM(NSInteger, SKTransitionDirection) {
@@ -19,7 +21,7 @@ typedef NS_ENUM(NSInteger, SKTransitionDirection) {
 /**
  A transition style from one scene to another.
  */
-SK_EXPORT @interface SKTransition : NSObject
+SK_EXPORT @interface SKTransition : NSObject <NSCopying>
 
 + (SKTransition *)crossFadeWithDuration:(NSTimeInterval)sec;
 
@@ -57,3 +59,5 @@ SK_EXPORT @interface SKTransition : NSObject
 
 
 @end
+
+NS_ASSUME_NONNULL_END

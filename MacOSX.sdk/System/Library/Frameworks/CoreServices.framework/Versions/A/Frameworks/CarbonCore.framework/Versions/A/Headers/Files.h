@@ -2413,7 +2413,7 @@ enum {
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSReplaceObject(const FSRef *originalObject, const FSRef *replacementObject, CFStringRef newName, CFStringRef temporaryName, const FSRef *temporaryDirectory, OptionBits flags, FSRef *resultObject) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+extern OSStatus  FSReplaceObject(const FSRef *originalObject, const FSRef *replacementObject, CFStringRef newName, CFStringRef temporaryName, const FSRef *temporaryDirectory, OptionBits flags, FSRef *resultObject) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA, "Use NSFileManager's -replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error: instead. WARNING: FSReplaceObject does not work correctly in sandboxed apps.");
 
 
 /*
@@ -2461,7 +2461,7 @@ extern OSStatus  FSReplaceObject(const FSRef *originalObject, const FSRef *repla
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathReplaceObject(const char *originalObjectPath, const char *replacementObjectPath, CFStringRef newName, CFStringRef temporaryName, const char *temporaryDirectoryPath, OptionBits flags) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+	extern OSStatus  FSPathReplaceObject(const char *originalObjectPath, const char *replacementObjectPath, CFStringRef newName, CFStringRef temporaryName, const char *temporaryDirectoryPath, OptionBits flags) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA, "Use NSFileManager's -replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error: instead. WARNING: FSPathReplaceObject does not work correctly in sandboxed apps.");
 
 
 /*

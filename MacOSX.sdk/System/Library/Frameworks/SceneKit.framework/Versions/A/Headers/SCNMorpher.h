@@ -1,11 +1,13 @@
 //
 //  SCNMorpher.h
 //
-//  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNAnimation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class SCNMorpher
@@ -17,19 +19,15 @@ typedef NS_ENUM(NSInteger, SCNMorpherCalculationMode) {
     SCNMorpherCalculationModeAdditive    // BaseMesh + w0 * Target0 + w1 * Target1 + ...
 };
 
-SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+NS_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNMorpher : NSObject <SCNAnimatable, NSSecureCoding>
-{
-@private
-	id _reserved;
-}
 
 /*!
  @property targets
  @abstract Specifies the morph targets as an array of SCNGeometry.
  @discussion The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
  */
-@property(nonatomic, copy) NSArray *targets;
+@property(nonatomic, copy) NSArray<SCNGeometry *> *targets;
 
 /*!
  @method setWeight:forTargetAtIndex:
@@ -50,3 +48,5 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
 @property(nonatomic) SCNMorpherCalculationMode calculationMode;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,9 +1,10 @@
 /*	NSXMLDTDNode.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @typedef NSXMLDTDNodeKind
@@ -56,7 +57,7 @@ typedef NS_ENUM(NSUInteger, NSXMLDTDNodeKind) {
     @method initWithXMLString:
     @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
 */
-- (instancetype)initWithXMLString:(NSString *)string NS_DESIGNATED_INITIALIZER; //primitive
+- (nullable instancetype)initWithXMLString:(NSString *)string NS_DESIGNATED_INITIALIZER; //primitive
 
 - (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options NS_DESIGNATED_INITIALIZER; //primitive
 
@@ -78,19 +79,20 @@ typedef NS_ENUM(NSUInteger, NSXMLDTDNodeKind) {
     @method publicID
     @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
 */
-@property (copy) NSString *publicID; //primitive
+@property (nullable, copy) NSString *publicID; //primitive
 
 /*!
     @method systemID
     @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
 */
-@property (copy) NSString *systemID; //primitive
+@property (nullable, copy) NSString *systemID; //primitive
 
 /*!
     @method notationName
     @abstract Set the notation name. Valid for entities only.
 */
-@property (copy) NSString *notationName; //primitive
+@property (nullable, copy) NSString *notationName; //primitive
 
 @end
 
+NS_ASSUME_NONNULL_END

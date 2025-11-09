@@ -164,9 +164,11 @@
 
 
 
+
 /* Data Protection Flags */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define O_DP_GETRAWENCRYPTED	0x0001
+#define O_DP_GETRAWUNENCRYPTED	0x0002
 #endif
 
 
@@ -191,8 +193,8 @@
  */
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#define CPF_OVERWRITE 1
-#define CPF_IGNORE_MODE 2
+#define CPF_OVERWRITE    0x0001
+#define CPF_IGNORE_MODE  0x0002
 #define CPF_MASK (CPF_OVERWRITE|CPF_IGNORE_MODE)
 #endif
 
@@ -269,6 +271,14 @@
 
 #define F_FINDSIGS		78	/* Add detached code signatures (used by dyld for shared libs) */
 
+
+#define F_ADDFILESIGS_FOR_DYLD_SIM 83	/* Add signature from same file, only if it is signed by Apple (used by dyld for simulator) */
+
+
+#define F_BARRIERFSYNC		85	/* fsync + issue barrier to drive */
+
+
+#define F_ADDFILESIGS_RETURN	97	/* Add signature from same file, return end offset in structure on sucess */
 
 
 // FS-specific fcntl()'s numbers begin at 0x00010000 and go up

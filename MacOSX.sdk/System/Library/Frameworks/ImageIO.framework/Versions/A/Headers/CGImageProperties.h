@@ -7,11 +7,12 @@
 #ifndef __CGIMAGEPROPERTIES__
 #define __CGIMAGEPROPERTIES__
 
-#include <CoreFoundation/CoreFoundation.h>
 #include <CoreGraphics/CGBase.h>
 #include <ImageIO/ImageIOBase.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* Properties that, if returned by CGImageSourceCopyProperties or 
  * CGImageSourceCopyPropertiesAtIndex, contain a dictionary of file-format 
@@ -138,6 +139,8 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFHostComputer  IMAGEIO_AVAIL
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFCopyright  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFWhitePoint  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFPrimaryChromaticities  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFTileWidth  IMAGEIO_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFTileLength  IMAGEIO_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 
 /* Possible keys for kCGImagePropertyJFIFDictionary */
 
@@ -181,7 +184,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifSubjectArea  IMAGEIO_AVAILA
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifMakerNote  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifUserComment  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifSubsecTime  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
-IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeOrginal  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeOriginal  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeDigitized  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifFlashPixVersion  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifColorSpace  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
@@ -219,6 +222,9 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifLensMake  IMAGEIO_AVAILABLE
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifLensModel  IMAGEIO_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifLensSerialNumber  IMAGEIO_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifGamma  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+
+/* deprecated */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifSubsecTimeOrginal IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Possible keys for kCGImagePropertyExifAuxDictionary */
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifAuxLensInfo    IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
@@ -413,7 +419,7 @@ IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonISOSelection  IMAGEI
 IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonFlashExposureComp  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonImageAdjustment  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonLensAdapter  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
-IMAGEIO_EXTERN const CFStringRef     kCGImagePropertyMakerNikonLensType  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonLensType  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonLensInfo  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonFocusDistance  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
 IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyMakerNikonDigitalZoom  IMAGEIO_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
@@ -438,7 +444,7 @@ IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyOpenEXRAspectRatio  IMAGEIO_AV
 
 
 /* Possible int values for kCGImagePropertyTIFFOrientation */
-enum CGImagePropertyOrientation {
+typedef CF_ENUM(uint32_t, CGImagePropertyOrientation) {
     kCGImagePropertyOrientationUp = 1,        // 0th row at top,    0th column on left   - default orientation
     kCGImagePropertyOrientationUpMirrored,    // 0th row at top,    0th column on right  - horizontal flip
     kCGImagePropertyOrientationDown,          // 0th row at bottom, 0th column on right  - 180 deg rotation
@@ -448,7 +454,27 @@ enum CGImagePropertyOrientation {
     kCGImagePropertyOrientationRightMirrored, // 0th row on right,  0th column on bottom
     kCGImagePropertyOrientationLeft           // 0th row on left,   0th column at bottom - 90 deg CCW
 };
-typedef enum CGImagePropertyOrientation CGImagePropertyOrientation;
+
+
+/*
+ * Allows client to choose the filters applied before PNG compression
+ * http://www.libpng.org/pub/png/book/chapter09.html#png.ch09.div.1
+ * The value should be a CFNumber, of type long, containing a bitwise OR of the desired filters
+ * The filters are defined below, IMAGEIO_PNG_NO_FILTERS, IMAGEIO_PNG_FILTER_NONE, etc
+ * This value has no effect when compressing to any format other than PNG
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGCompressionFilter IMAGEIO_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+
+#define IMAGEIO_PNG_NO_FILTERS     0x00
+#define IMAGEIO_PNG_FILTER_NONE    0x08
+#define IMAGEIO_PNG_FILTER_SUB     0x10
+#define IMAGEIO_PNG_FILTER_UP      0x20
+#define IMAGEIO_PNG_FILTER_AVG     0x40
+#define IMAGEIO_PNG_FILTER_PAETH   0x80
+#define IMAGEIO_PNG_ALL_FILTERS (IMAGEIO_PNG_FILTER_NONE | IMAGEIO_PNG_FILTER_SUB | IMAGEIO_PNG_FILTER_UP | IMAGEIO_PNG_FILTER_AVG | IMAGEIO_PNG_FILTER_PAETH)
+
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

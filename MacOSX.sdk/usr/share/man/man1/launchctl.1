@@ -1,4 +1,4 @@
-.Dd 5 April, 2014
+.Dd 1 October, 2014
 .Dt launchctl 1
 .Os Darwin
 .Sh NAME
@@ -11,7 +11,7 @@
 .Nm 
 interfaces with
 .Nm launchd
-to manage and inspect daemons, angents and XPC services.
+to manage and inspect daemons, agents and XPC services.
 .Sh SUBCOMMANDS
 .Nm launchctl
 allows for detailed examination of
@@ -80,15 +80,19 @@ the XPC services visible to that process which can be reached with
 .El
 .Sh SUBCOMMANDS
 .Bl -tag -width -indent
-.It Xo Ar bootstrap | unbootstrap Ar domain-target Ar service-path
-.Ar service-path2 Ar ...
+.It Xo Ar bootstrap | bootout Ar domain-target Op Ar service-path service-path2 ...
+.Ar | service-target
 .Xc
-Bootstraps or removes services from the specified paths into the target domain.
-The path may point to an XPC service bundle, a
-.Xr launchd.plist 5 ,
-or a directory containing a collection of either. If there were one or more
+Bootstraps or removes domains and services. Services may be specified as a
+series of paths or a service identifier. Paths may point to XPC service bundles,
+.Xr launchd.plist 5 s,
+or a directories containing a collection of either. If there were one or more
 errors while bootstrapping or removing a collection of services, the problematic
 paths will be printed with the errors that occurred.
+.Pp
+If no paths or service target are specified, these commands can either bootstrap
+or remove a domain specified as a domain target. Some domains will implicitly
+bootstrap pre-defined paths as part of their creation. 
 .It Xo Ar enable | disable Ar service-target
 .Xc
 Enables or disables the service in the requested domain. Once a service is
@@ -139,6 +143,108 @@ useful for anyone but the
 .Nm launchd
 maintainer.
 .El
+.It Xo Ar debug
+.Ar service-target
+.Op Ar --program <program path>
+.Op Ar --guard-malloc
+.Op Ar --malloc-stack-logging
+.Op Ar --debug-libraries
+.Op Ar --introspection-libraries
+.Op Ar --NSZombie
+.Op Ar --32
+.Op Ar --stdin
+.Op Ar --stdout
+.Op Ar --stderr
+.Op Ar --environment
+.Op Ar --
+.Op Ar argv0 argv1 argv2 ...
+.Xc
+Configures the next invocation of a service for debugging. This subcommand
+allows you to temporarily replace the main executable of the service with one at
+a different path, enable
+.Xr libgmalloc 3 ,
+set environment variables, set the argument vector and more. This is a
+convenient alternative to editing the
+.Xr launchd.plist 5
+for the service and then reloading it, as the additional debugging properties
+are cleared once the service has run once with them.
+.Bl -tag -width -indent
+.It Ar --program <program-path>
+Instructs
+.Xr launchd 8
+to use
+.Ar program-path as the service's executable.
+.It Ar --guard-malloc
+Turns on
+.Xr libgmalloc 3
+for the service.
+.It Ar --malloc-stack-logging
+Turns on
+.Xr malloc 3
+stack logging for the service.
+.It Ar --malloc-nano-allocator
+Turns on the
+.Xr malloc 3
+nano allocator for the service.
+.It Ar --debug-libraries
+Sets the
+.Ar DYLD_IMAGE_SUFFIX
+for the service to "_debug", which prefers the debug variants of libraries if
+they exist. See
+.Xr dyld 1
+for more information.
+.It Ar --introspection-libraries
+Adds
+.Ar /usr/lib/system/introspection
+to the
+.Ar DYLD_LIBRARY_PATH
+environment variable for the service. This causes the system to prefer the
+introspection variants of libraries if they exist.
+.It Ar --NSZombie
+Enables NSZombie.
+.It Ar --32
+Runs the service in the appropriate 32-bit architecture. Only available on
+64-bit platforms.
+.It Ar --stdin [stdin-path]
+Sets the service's standard input to be
+.Ar stdin-path .
+If no file is given,
+uses the current terminal as the service's standard input. If
+.Ar stdin-path
+does not exist, it is created.
+.It Ar --stdout [stdout-path]
+Sets the service's standard input to be
+.Ar stdout-path .
+If no file is given,
+uses the current terminal as the service's standard input. If
+.Ar stdout-path
+does not exist, it is created.
+.It Ar --stderr [stderr-path]
+Sets the service's standard input to be
+.Ar stderr-path .
+If no file is given,
+uses the current terminal as the service's standard input. If
+.Ar stderr-path
+does not exist, it is created.
+.It Ar --environment VARIABLE0=value VARIABLE1=value ...
+Sets the given environment variables on the service.
+.It Ar -- argv0 argv1 ...
+Any arguments following the
+.Ar --
+are given to the service as its argument vector.
+.Pp
+.Em IMPORTANT :
+These arguments replace the service's default argument vector; they are not
+merged in any way. The first argument following
+.Ar --
+is given as the initial (zeroth) element of the service's argument vector. As
+with the
+.Ar ProgramArguments
+.Xr launchd.plist 5
+key, you should read carefully and understand the
+.Xr execve 2
+man page.
+.El
 .It Xo Ar kill Ar signal-name | signal-number Ar service-target
 .Xc
 Sends the specified signal to the specified service if it is running. The signal
@@ -160,6 +266,15 @@ various properties about the domain as well as a list of services and endpoints
 in the domain with state pertaining to each. Service output includes various
 properties of the service, including information about its origin on-disk, its
 current state, execution context, and last exit status.
+.Pp
+.Em IMPORTANT :
+This output is
+.Em NOT
+API in any sense at all. Do
+.Em NOT
+rely on the structure or information emitted for
+.Em ANY
+reason. It may change from release to release without warning.
 .It Xo Ar print-cache
 .Xc
 Prints the contents of the
@@ -228,17 +343,6 @@ will automatically kill the snapshot instance when the examination tool exits.
 .Pp
 This subcommand may only be used against a DEVELOPMENT
 .Nm launchd .
-.It Xo Ar error Ar number
-.Xc
-.Nm launchd
-may return POSIX error codes defined in
-.Xr intro 2
-or error codes that it defines. This subcommand will print a human-readable
-description of an error code of either class and can take error codes specified
-in any base supported by
-.Xr strtol 3 ,
-with each base specified in the manner prescribed by
-.Xr strtol 3 .
 .It Xo Ar config Ar system | user Ar parameter Ar value
 .Xc
 Sets persistent configuration information for
@@ -276,6 +380,98 @@ This facility cannot be used to set general environment variables for all
 services within the domain. It is intentionally scoped to the PATH environment
 variable and nothing else for security reasons.
 .El
+.It Xo Ar reboot Ar [system|userspace|halt|logout|apps|reroot <mount-point>]
+.Xc
+Instructs
+.Nm launchd
+to begin tearing down userspace. With no argument given or with the
+.Ar system
+argument given,
+.Nm launchd
+will make the
+.Xr reboot 2
+system call when userspace has been completely torn down. With the
+.Ar halt
+argument given,
+.Nm launchd
+will make the
+.Xr reboot 2
+system call when userspace has been completely torn down and pass the
+.Ar RB_HALT
+flag, halting the system and not initiating a reboot.
+.Pp
+With the
+.Ar userspace
+argument given,
+.Nm launchd
+will re-exec itself when userspace has been torn down and bring userspace back
+up. This is useful for rebooting the system quickly under conditions where
+kernel data structures or hardware do not need to be re-initialized.
+.Pp
+With the
+.Ar reroot
+argument given,
+.Nm launchd
+will perform a userspace shutdown as with the
+.Ar userspace
+argument, but it will exec a copy of
+.Nm launchd
+from the specified
+.Ar mount-point .
+This mechanism is a light-weight way of changing boot partitions. As part of
+this process,
+.Nm launchd
+will make
+.Ar mount-point
+the new root partition and bring userspace up as if the kernel had designated
+.Ar mount-point
+as the root partition.
+.Pp
+.Em IMPORTANT :
+This type of reboot will, in no way, affect the already-running kernel on the
+host. Therefore, when using this option to switch to another volume, you should
+only target volumes whose userspace stacks are compatible with the
+already-running kernel.
+.Pp
+.Em NOTE :
+As of the date of this writing, this option does not completely work.
+.Pp
+With the
+.Ar logout
+argument given, launchd will tear down the caller's GUI login session in a
+manner similar to a logout initiated from the Apple menu. The key difference is
+that a logout initiated through this subcommand will be much faster since it
+will not give apps a chance to display modal dialogs to block logout
+indefinitely; therefore there is data corruption risk to using this option. Only
+use it when you know you have no unsaved data in your running apps.
+.Pp
+With the
+.Ar apps
+argument given, launchd will terminate all apps running in the caller's GUI
+login session that did not come from a
+.Xr launchd.plist 5
+on-disk. Apps like Finder, Dock and SystemUIServer will be unaffected. Apps are
+terminated in the same manner as the
+.Ar logout
+argument, and all the same caveats apply.
+.Bl -tag -width -indent
+.It Fl s
+When rebooting the machine (either a full reboot or userspace reboot), brings
+the subsequent boot session up in single-user mode.
+.El
+.It Xo Ar error Ar [posix|mach|bootstrap] Ar code
+.Xc
+Prints a human-readable string of the given error
+.Ar code .
+By default,
+.Nm
+will attempt to guess which error domain the code given belongs to. The caller
+may optionally specify which domain (either
+.Ar posix ,
+.Ar mach ,
+or
+.Ar bootstrap )
+to interpret the given code as an error from that subsystem.
 .It Xo Ar variant
 .Xc
 Prints the
@@ -548,7 +744,6 @@ with an error code that can be given to the
 subcommand to be decoded into human-readable form.
 .Sh SEE ALSO 
 .Xr launchd.plist 5 ,
-.Xr launchd.conf 5 ,
 .Xr launchd 8 ,
 .Xr audit 8 ,
 .Xr setaudit_addr 2

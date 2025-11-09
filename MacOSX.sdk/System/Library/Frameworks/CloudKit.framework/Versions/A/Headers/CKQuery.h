@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKQuery : NSObject <NSSecureCoding, NSCopying>
 
@@ -33,17 +34,13 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
-/* The predicate argument can not be nil. Use [NSPredicate predicateWithFormat:@"TRUEPREDICATE"] if you want to query for all records of a given type. */
+/* Use [NSPredicate predicateWithFormat:@"TRUEPREDICATE"] if you want to query for all records of a given type. */
 - (instancetype)initWithRecordType:(NSString *)recordType predicate:(NSPredicate *)predicate NS_DESIGNATED_INITIALIZER;
 
-/* recordType must not be nil. */
 @property (nonatomic, readonly, copy) NSString *recordType;
-
-/* predicate may either be nil or must have a valid predicateFormat. */
 @property (nonatomic, readonly, copy) NSPredicate *predicate;
 
-/* Defaults to nil. */
-@property (nonatomic, copy) NSArray /* NSSortDescriptor */ *sortDescriptors;
+@property (nonatomic, copy, nullable) NSArray <NSSortDescriptor *> *sortDescriptors;
 
 @end
-
+NS_ASSUME_NONNULL_END

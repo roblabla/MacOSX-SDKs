@@ -9,8 +9,8 @@
                      http://developer.apple.com/bugreporter/
 
 ==================================================================================================*/
-#if !defined(__AudioHardwareBase_h__)
-#define __AudioHardwareBase_h__
+#if !defined(CoreAudio_AudioHardwareBase_h)
+#define CoreAudio_AudioHardwareBase_h
 
 //==================================================================================================
 #pragma mark -
@@ -19,7 +19,7 @@
     @header AudioHardwareBase
     
     This file defines the HAL's object model including the properties and their needed types and
-    constants that describe the proeprty values.
+    constants that describe the property values.
 */
 
 //==================================================================================================
@@ -29,9 +29,7 @@
 
 //==================================================================================================
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint off
-#endif
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -149,7 +147,7 @@ typedef struct AudioObjectPropertyAddress   AudioObjectPropertyAddress;
                         The requested operation can't be completed because the process doesn't have
                         permission.
 */
-enum
+CF_ENUM(OSStatus)
 {
     kAudioHardwareNoError                   = 0,
     kAudioHardwareNotRunningError           = 'stop',
@@ -171,7 +169,7 @@ enum
     @constant       kAudioObjectUnknown
                         This is the sentinel value. No object will have an ID whose value is 0.
 */
-enum
+CF_ENUM(AudioObjectID)
 {
     kAudioObjectUnknown         = 0
 };
@@ -195,7 +193,7 @@ enum
                         The AudioObjectPropertyElement value for properties that apply to the master
                         element or to the entire scope.
 */
-enum
+CF_ENUM(AudioObjectPropertyScope)
 {
     kAudioObjectPropertyScopeGlobal         = 'glob',
     kAudioObjectPropertyScopeInput          = 'inpt',
@@ -207,8 +205,8 @@ enum
 /*!
     @enum           Wildcard Constants
     @abstract       Constants that are used as wildcards.
-    @discussion     Wildcards match any and all values for thier associated type. They are useful
-                    when registering to receive notificationss.
+    @discussion     Wildcards match any and all values for their associated type. They are useful
+                    when registering to receive notifications.
     @constant       kAudioObjectPropertySelectorWildcard
                         The wildcard value for AudioObjectPropertySelectors.
     @constant       kAudioObjectPropertyScopeWildcard
@@ -218,11 +216,23 @@ enum
     @constant       kAudioObjectClassIDWildcard
                         The wildcard value for AudioClassIDs.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
-    kAudioObjectPropertySelectorWildcard    = '****',
-    kAudioObjectPropertyScopeWildcard       = '****',
-    kAudioObjectPropertyElementWildcard     = 0xFFFFFFFF,
+    kAudioObjectPropertySelectorWildcard    = '****'
+};
+
+CF_ENUM(AudioObjectPropertyScope)
+{
+    kAudioObjectPropertyScopeWildcard       = '****'
+};
+
+CF_ENUM(AudioObjectPropertyElement)
+{
+    kAudioObjectPropertyElementWildcard     = 0xFFFFFFFF
+};
+
+CF_ENUM(AudioClassID)
+{
     kAudioObjectClassIDWildcard             = '****'
 };
 
@@ -237,7 +247,7 @@ enum
     @constant       kAudioObjectClassID
                         The AudioClassID that identifies the AudioObject class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioObjectClassID = 'aobj'
 };
@@ -251,7 +261,7 @@ enum
     @discussion     The AudioObject class is the base class for all classes. As such, all classes
                     inherit this set of properties.
     @constant       kAudioObjectPropertyBaseClass
-                        An AudioClassID that identifies the class from which the clase of the
+                        An AudioClassID that identifies the class from which the class of the
                         AudioObject is derived. This value must always be one of the standard
                         classes.
     @constant       kAudioObjectPropertyClass
@@ -301,16 +311,16 @@ enum
                         A CFString that contains the human readable serial number for the object.
                         This property will typically be implemented by AudioBox and AudioDevice
                         objects. Note that the serial number is not defined to be unique in the same
-                        way that an AudioBox's or AudioDevice's UID propety are defined. This is
-                        purely an informational value. The caller is responsible for releaseing the
+                        way that an AudioBox's or AudioDevice's UID property are defined. This is
+                        purely an informational value. The caller is responsible for releasing the
                         returned CFObject.
     @constant       kAudioObjectPropertyFirmwareVersion
                         A CFString that contains the human readable firmware version for the object.
                         This property will typically be implemented by AudioBox and AudioDevice
                         objects. Note that this is purely an informational value. The caller is
-                        responsible for releaseing the returned CFObject.
+                        responsible for releasing the returned CFObject.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioObjectPropertyBaseClass           = 'bcls',
     kAudioObjectPropertyClass               = 'clas',
@@ -337,7 +347,7 @@ enum
     @constant       kAudioPlugInClassID
                         The AudioClassID that identifies the AudioPlugIn class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioPlugInClassID = 'aplg'
 };
@@ -365,7 +375,7 @@ enum
                         as the value of the property.
     @constant       kAudioPlugInPropertyBoxList
                         An array of AudioObjectIDs that represent all the AudioBox objects currently
-                        provided by the plug-in
+                        provided by the plug-in.
     @constant       kAudioPlugInPropertyTranslateUIDToBox
                         This property fetches the AudioObjectID that corresponds to the AudioBox
                         that has the given UID. The UID is passed in via the qualifier as a CFString
@@ -374,7 +384,7 @@ enum
                         to any AudioBoxes. Rather, this property will return kAudioObjectUnknown
                         as the value of the property.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioPlugInPropertyBundleID                = 'piid',
     kAudioPlugInPropertyDeviceList              = 'dev#',
@@ -391,7 +401,7 @@ enum
     @enum           AudioTransportManager Class Constants
     @abstract       Various constants related to the AudioTransportManager class.
     @discussion     The AudioTransportManager class is a subclass of the AudioPlugIn class.
-                    Instances manage an entire tranport mechanism such as AirPlay or an AVB network
+                    Instances manage an entire transport mechanism such as AirPlay or an AVB network
                     of devices. AudioTransportManagers present a list of AudioEndPoints that
                     represent all the devices that they manage. They can combine AudioEndPoints into
                     an AudioEndPointDevice that can be used by the system the same as any other
@@ -399,7 +409,7 @@ enum
     @constant       kAudioTransportManagerClassID
                         The AudioClassID that identifies the AudioTransportManager class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioTransportManagerClassID   = 'trpm'
 };
@@ -429,7 +439,7 @@ enum
                         for this property can be found in the enum in the AudioDevice Constants
                         section of this file.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioTransportManagerPropertyEndPointList              = 'end#',
     kAudioTransportManagerPropertyTranslateUIDToEndPoint    = 'uide',
@@ -446,7 +456,7 @@ enum
     @constant       kAudioBoxClassID
                         The AudioClassID that identifies the AudioBox class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioBoxClassID    = 'abox'
 };
@@ -494,7 +504,7 @@ enum
                         came out of the given AudioBox. Note that until a box is enabled, this list
                         will be empty.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioBoxPropertyBoxUID             = 'buid',
     kAudioBoxPropertyTransportType      = 'tran',
@@ -517,7 +527,7 @@ enum
     @constant       kAudioDeviceClassID
                         The AudioClassID that identifies the AudioDevice class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioDeviceClassID = 'adev'
 };
@@ -559,7 +569,7 @@ enum
     @constant       kAudioDeviceTransportTypeThunderbolt
                         The transport type ID for AudioDevices connected via Thunderbolt.
 */
-enum
+CF_ENUM(UInt32)
 {
     kAudioDeviceTransportTypeUnknown        = 0,
     kAudioDeviceTransportTypeBuiltIn        = 'bltn',
@@ -680,7 +690,7 @@ enum
                         An AudioChannelLayout that indicates how each channel of the AudioDevice
                         should be used.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioDevicePropertyConfigurationApplication        = 'capp',
     kAudioDevicePropertyDeviceUID                       = 'uid ',
@@ -714,7 +724,7 @@ enum
     @constant       kAudioEndPointDeviceClassID
                         The AudioClassID that identifies the AudioEndPointDevice class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioEndPointDeviceClassID = 'edev'
 };
@@ -781,10 +791,10 @@ enum
     @constant       kAudioEndPointDevicePropertyEndPointList
                         An array of AudioObjectIDs for all the AudioEndPoints in the device.
     @constant       kAudioEndPointDevicePropertyIsPrivate
-                        A pid_t where a value of 0 idicates that the device is public and a non-zero
+                        A pid_t where a value of 0 indicates that the device is public and a non-zero
                         value indicates the pid of the process that owns the device.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioEndPointDevicePropertyComposition         = 'acom',
     kAudioEndPointDevicePropertyEndPointList        = 'agrp',
@@ -800,12 +810,12 @@ enum
     @abstract       Various constants related to the AudioEndPoint class.
     @discussion     The AudioEndPoint class is a subclass of AudioDevice class and has the same
                     scope and element structure. However, AudioEndPoint objects do not implement an
-                    IO path of their own and as such do not implmenent any  AudioDevice properties
+                    IO path of their own and as such do not implement any  AudioDevice properties
                     associated with the IO path.
     @constant       kAudioEndPointDeviceClassID
                         The AudioClassID that identifies the AudioEndPointDevice class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioEndPointClassID   = 'endp'
 };
@@ -853,7 +863,7 @@ enum
     @abstract       This structure allows a specific sample rate range to be associated with an
                     AudioStreamBasicDescription that specifies its sample rate as
                     kAudioStreamAnyRate.
-    @discussion     Note that this structure is only used to desicribe the the available formats
+    @discussion     Note that this structure is only used to describe the the available formats
                     for a stream. It is not used for the current format.
     @field          mFormat
                         The AudioStreamBasicDescription that describes the format of the stream.
@@ -883,7 +893,7 @@ typedef struct AudioStreamRangedDescription AudioStreamRangedDescription;
     @constant       kAudioStreamClassID
                         The AudioClassID that identifies the AudioStream class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioStreamClassID = 'astr'
 };
@@ -913,7 +923,7 @@ enum
     @constant       kAudioStreamTerminalTypeHeadsetMicrophone
                         The ID for a terminal type of a microphone attached to an headset.
     @constant       kAudioStreamTerminalTypeReceiverMicrophone
-                        The ID for a terminal type of a microhpone on a telephone handset recevier.
+                        The ID for a terminal type of a microphone on a telephone handset receiver.
     @constant       kAudioStreamTerminalTypeTTY
                         The ID for a terminal type of a device providing a TTY signal.
     @constant       kAudioStreamTerminalTypeHDMI
@@ -921,7 +931,7 @@ enum
     @constant       kAudioStreamTerminalTypeDisplayPort
                         The ID for a terminal type of a stream from/to an DisplayPort port.
 */
-enum
+CF_ENUM(UInt32)
 {
     kAudioStreamTerminalTypeUnknown                 = 0,
     kAudioStreamTerminalTypeLine                    = 'line',
@@ -983,7 +993,7 @@ enum
                         in which the hardware for the owning AudioDevice performs its IO
                         transactions.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioStreamPropertyIsActive                    = 'sact',
     kAudioStreamPropertyDirection                   = 'sdir',
@@ -1005,7 +1015,7 @@ enum
     @constant       kAudioControlClassID
                         The AudioClassID that identifies the AudioControl class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioControlClassID    = 'actl'
 };
@@ -1023,7 +1033,7 @@ enum
                         An AudioServerPlugIn_PropertyElement that indicates which element of the
                         device the control applies to.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioControlPropertyScope      = 'cscp',
     kAudioControlPropertyElement    = 'celm'
@@ -1039,7 +1049,7 @@ enum
     @constant       kAudioSliderControlClassID
                         The AudioClassID that identifies the AudioSliderControl class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioSliderControlClassID  = 'sldr'
 };
@@ -1055,7 +1065,7 @@ enum
                         An array of two UInt32s that represents the inclusive range of values the
                         slider control can take.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioSliderControlPropertyValue    = 'sdrv',
     kAudioSliderControlPropertyRange    = 'sdrr'
@@ -1078,7 +1088,7 @@ enum
                         bass management. Note that LFE channels that are represented as normal audio
                         channels must use kAudioVolumeControlClassID to manipulate the level.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioLevelControlClassID       = 'levl',
     kAudioVolumeControlClassID      = 'vlme',
@@ -1115,7 +1125,7 @@ enum
                         A Float32 that on input contains a dB volume value for the and on exit
                         contains the equivalent scalar value.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioLevelControlPropertyScalarValue               = 'lcsv',
     kAudioLevelControlPropertyDecibelValue              = 'lcdv',
@@ -1170,7 +1180,7 @@ enum
                         the regular IO channels. If the listenback channel is among the normal IO
                         channels, it will use AudioMuteControl.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioBooleanControlClassID         = 'togl',
     kAudioMuteControlClassID            = 'mute',
@@ -1192,7 +1202,7 @@ enum
     @constant       kAudioBooleanControlPropertyValue
                         A UInt32 where 0 means off/false and non-zero means on/true.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioBooleanControlPropertyValue   = 'bcvl'
 };
@@ -1224,7 +1234,7 @@ enum
                         A subclass of the AudioSelectorControl class that indicates the setting for
                         the high pass filter on the given element.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioSelectorControlClassID        = 'slct',
     kAudioDataSourceControlClassID      = 'dsrc',
@@ -1252,9 +1262,9 @@ enum
                         This property returns a UInt32 that identifies the kind of selector item the
                         item ID refers to. The qualifier contains the ID of the item. Note that this
                         property is optional for selector controls and that the meaning of the value
-                        depends on the specifc subclass being queried.
+                        depends on the specific subclass being queried.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioSelectorControlPropertyCurrentItem    = 'scci',
     kAudioSelectorControlPropertyAvailableItems = 'scai',
@@ -1269,7 +1279,7 @@ enum
                         This ID represents an item in a selector control's range that represents a
                         spacer item in a pop-up menu. Items with this kind are not be selectable.
 */
-enum
+CF_ENUM(UInt32)
 {
     kAudioSelectorControlItemKindSpacer = 'spcr'
 };
@@ -1280,7 +1290,7 @@ enum
     @constant       kAudioClockSourceItemKindInternal
                         This ID represents the device's internal clock.
 */
-enum
+CF_ENUM(UInt32)
 {
     kAudioClockSourceItemKindInternal   = 'int '
 };
@@ -1295,7 +1305,7 @@ enum
     @constant       kAudioStereoPanControlClassID
                         The AudioClassID that identifies the StereoPanControl class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioStereoPanControlClassID   = 'span'
 };
@@ -1311,7 +1321,7 @@ enum
                         An array of two UInt32s that indicate which elements of the device the
                         signal is being panned between.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioStereoPanControlPropertyValue             = 'spcv',
     kAudioStereoPanControlPropertyPanningChannels   = 'spcc'
@@ -1323,8 +1333,6 @@ enum
 }
 #endif
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint reset
-#endif
+CF_ASSUME_NONNULL_END
 
-#endif  //  __AudioHardwareBase_h__
+#endif  //  CoreAudio_AudioHardwareBase_h

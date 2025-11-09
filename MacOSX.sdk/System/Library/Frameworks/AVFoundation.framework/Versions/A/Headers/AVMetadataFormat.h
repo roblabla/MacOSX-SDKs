@@ -3,7 +3,7 @@
 
     Framework:  AVFoundation
  
-    Copyright 2010-2014 Apple Inc. All rights reserved.
+    Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -150,6 +150,7 @@ AVF_EXPORT NSString *const AVMetadataQuickTimeMetadataKeyLocationRole           
 AVF_EXPORT NSString *const AVMetadataQuickTimeMetadataKeyLocationDate                    NS_AVAILABLE(10_7, 4_3);
 AVF_EXPORT NSString *const AVMetadataQuickTimeMetadataKeyDirectionFacing                 NS_AVAILABLE(10_7, 4_3);
 AVF_EXPORT NSString *const AVMetadataQuickTimeMetadataKeyDirectionMotion                 NS_AVAILABLE(10_7, 4_3);
+AVF_EXPORT NSString *const AVMetadataQuickTimeMetadataKeyContentIdentifier               NS_AVAILABLE(10_11, 9_0);
 
 // iTunesMetadata
 AVF_EXPORT NSString *const AVMetadataFormatiTunesMetadata                                NS_AVAILABLE(10_7, 4_0);
@@ -214,7 +215,8 @@ AVF_EXPORT NSString *const AVMetadataID3MetadataKeyAudioEncryption              
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyAttachedPicture                       /* APIC Attached picture */                                     NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyAudioSeekPointIndex                   /* ASPI Audio seek point index */                               NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyComments                              /* COMM Comments */                                             NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMetadataID3MetadataKeyCommerical                            /* COMR Commercial frame */                                     NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVMetadataID3MetadataKeyCommercial                            /* COMR Commercial frame */                                     NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVMetadataID3MetadataKeyCommerical                            /* COMR Commercial frame */                                     NS_DEPRECATED(10_7, 10_11, 4_0, 9_0);
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyEncryption                            /* ENCR Encryption method registration */                       NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyEqualization                          /* EQUA Equalization */                                         NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyEqualization2                         /* EQU2 Equalisation (2) */                                     NS_AVAILABLE(10_7, 4_0);
@@ -318,13 +320,24 @@ AVF_EXPORT NSString *const AVMetadataFormatHLSMetadata                          
 /*!
  @constant		AVMetadataExtraAttributeValueURIKey
  @abstract
-	When present in an item’s extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
+	When present in an item's extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
 */
 AVF_EXPORT NSString *const AVMetadataExtraAttributeValueURIKey							 NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @constant		AVMetadataExtraAttributeBaseURIKey
  @abstract
-	When present in an item’s extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
+	When present in an item's extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
 */
 AVF_EXPORT NSString *const AVMetadataExtraAttributeBaseURIKey							 NS_AVAILABLE(10_10, 8_0);
+
+/*!
+	@constant		AVMetadataExtraAttributeInfoKey
+	@abstract		More information about the item; specific to the 
+					item keySpace & key.
+	@discussion		For example, this key is used with the following ID3 tags:
+					TXXX, WXXX, APIC, GEOB: carries the Description
+					PRIV: carries the Owner Identifier
+ */
+AVF_EXPORT NSString *const AVMetadataExtraAttributeInfoKey								NS_AVAILABLE(10_11, 9_0);
+

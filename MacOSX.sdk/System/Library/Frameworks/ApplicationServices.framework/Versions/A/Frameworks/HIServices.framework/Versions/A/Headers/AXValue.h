@@ -17,7 +17,8 @@ extern "C" {
 
 #include <CoreServices/CoreServices.h>
 #include <CoreFoundation/CoreFoundation.h>
-
+CF_ASSUME_NONNULL_BEGIN
+    
 /* Need discussion for following */
 
 /*! @header AXValue.h
@@ -33,31 +34,38 @@ extern "C" {
   These are AXValueType wrappers for other structures. You must use the AXValueCreate
   and AXValueGetValue functions to convert between the wrapped structure and the native structure.
   
-  @constant kAXValueCGPointType a wrapper for CGPoint; see CoreGraphics.h
-  @constant kAXValueCGSizeType a wrapper for CGSize; see CoreGraphics.h
-  @constant kAXValueCGRectType a wrapper for CGRect; see CoreGraphics.h
-  @constant kAXValueCFRangeType a wrapper for CFRange; see CFBase.h
-  @constant kAXValueAXErrorType See AXError.h
-  @constant kAXValueIllegalType a wrapper for unsupported structures
+  @constant kAXValueTypeCGPoint a wrapper for CGPoint; see CoreGraphics.h
+  @constant kAXValueTypeCGSize a wrapper for CGSize; see CoreGraphics.h
+  @constant kAXValueTypeCGRect a wrapper for CGRect; see CoreGraphics.h
+  @constant kAXValueTypeCFRange a wrapper for CFRange; see CFBase.h
+  @constant kAXValueTypeAXError See AXError.h
+  @constant kAXValueTypeIllegal a wrapper for unsupported structures
 */
-typedef enum {
-    kAXValueCGPointType = 1,
-    kAXValueCGSizeType = 2,
-    kAXValueCGRectType = 3,
-    kAXValueCFRangeType = 4,
-    kAXValueAXErrorType = 5,
-    kAXValueIllegalType = 0
+typedef CF_ENUM(UInt32, AXValueType) {
+    kAXValueTypeCGPoint      CF_ENUM_AVAILABLE_MAC(10_11) = 1,
+    kAXValueTypeCGSize       CF_ENUM_AVAILABLE_MAC(10_11) = 2,
+    kAXValueTypeCGRect       CF_ENUM_AVAILABLE_MAC(10_11) = 3,
+    kAXValueTypeCFRange      CF_ENUM_AVAILABLE_MAC(10_11) = 4,
+    kAXValueTypeAXError      CF_ENUM_AVAILABLE_MAC(10_11) = 5,
+    kAXValueTypeIllegal      CF_ENUM_AVAILABLE_MAC(10_11) = 0,
+};
 
+// Legacy constants will be deprecated shortly. Please switch to using AXValueType
+static const UInt32 kAXValueCGPointType = kAXValueTypeCGPoint;
+static const UInt32 kAXValueCGSizeType = kAXValueTypeCGSize;
+static const UInt32 kAXValueCGRectType = kAXValueTypeCGRect;
+static const UInt32 kAXValueCFRangeType = kAXValueTypeCFRange;
+static const UInt32 kAXValueAXErrorType = kAXValueTypeAXError;
+static const UInt32 kAXValueIllegalType = kAXValueTypeIllegal;
 
-} AXValueType;
-
+    
 /* Need discussion for following */
 
 /*!
     @typedef AXValueRef
     
 */
-typedef const struct __AXValue *AXValueRef;
+typedef const struct CF_BRIDGED_TYPE(id) __AXValue *AXValueRef;
 
 /* Need discussion for following */
 
@@ -82,7 +90,7 @@ extern CFTypeID		AXValueGetTypeID() AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 	
 	@result
 */
-extern AXValueRef 	AXValueCreate (AXValueType theType, const void *valuePtr);
+extern AXValueRef 	__nullable AXValueCreate (AXValueType theType, const void *valuePtr);
 
 /*!
 	@function AXValueGetType
@@ -110,6 +118,8 @@ extern AXValueType 	AXValueGetType(AXValueRef value);
 extern Boolean 		AXValueGetValue(AXValueRef value, AXValueType theType, void *valuePtr);
 
 
+CF_ASSUME_NONNULL_END
+    
 #ifdef __cplusplus
 }
 #endif

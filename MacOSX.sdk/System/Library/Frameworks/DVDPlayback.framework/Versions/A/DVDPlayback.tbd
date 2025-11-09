@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback
-current-version: 5900.0
+current-version: 5950.0
 compatibility-version: 5000.0
 exports:         
   - archs:           [ i386 ]
@@ -62,8 +62,9 @@ exports:
                        _DVDGetVideoStreaminfo, _DVDGetVideoSurfaceID, _DVDGetVideoViewArea, 
                        _DVDGetVideoWindowID, _DVDGetVideoWindowRef, _DVDGoBackOneLevel, 
                        _DVDGoToMenu, _DVDGotoBookmark, _DVDGotoBookmarkByState, 
-                       _DVDHasMedia, _DVDHasMenu, _DVDHasNextChapter, _DVDHasPreviousChapter, 
-                       _DVDIdle, _DVDInitialize, _DVDInstallCustomEQ, _DVDInstallEQ, 
+                       _DVDHasEventHandler, _DVDHasMedia, _DVDHasMenu, 
+                       _DVDHasNextChapter, _DVDHasPreviousChapter, _DVDIdle, 
+                       _DVDInitialize, _DVDInstallCustomEQ, _DVDInstallEQ, 
                        _DVDIsBDJKeysAvailable, _DVDIsDisplayingPopUpMenu, 
                        _DVDIsDisplayingSubPicture, _DVDIsEQEnabled, _DVDIsEQInstalled, 
                        _DVDIsMuted, _DVDIsOnInteractiveTitle, _DVDIsOnMenu, 
@@ -87,23 +88,24 @@ exports:
                        _DVDSetAudioVolume, _DVDSetAuthenticateCallBack, 
                        _DVDSetBDJColorKeyLayout, _DVDSetChapter, _DVDSetClosedCaptionServiceType, 
                        _DVDSetDeInterlaceMode, _DVDSetDeInterlaceQuality, 
-                       _DVDSetDebugMsgCallBack, _DVDSetDecodingMode, _DVDSetDecodingPostProcessingMode, 
+                       _DVDSetDebugMsgCallBack, _DVDSetDebugMsgHandler, 
+                       _DVDSetDecodingMode, _DVDSetDecodingPostProcessingMode, 
                        _DVDSetDefaultAudioLanguageCode, _DVDSetDefaultAudioLanguageCodeBDMV, 
                        _DVDSetDefaultMenuLanguageCode, _DVDSetDefaultMenuLanguageCodeBDMV, 
                        _DVDSetDefaultSubPictureLanguageCode, _DVDSetDefaultSubPictureLanguageCodeBDMV, 
                        _DVDSetDirtyScratchedDiscRecoveryMode, _DVDSetDisplayStatus, 
                        _DVDSetDolbyHeadphoneRoom, _DVDSetDriveRegionCode, 
-                       _DVDSetEQBandDecibel, _DVDSetFatalErrorCallBack, 
-                       _DVDSetLastPlayBookmark, _DVDSetNativeVideoSourceCropRect, 
-                       _DVDSetParentalControl, _DVDSetParentalMovieRating, 
-                       _DVDSetReadCacheParameter, _DVDSetRegionBDCode, 
-                       _DVDSetSPDIFDataOutDevice, _DVDSetStateCallBack, 
-                       _DVDSetSubPictureStream, _DVDSetTime, _DVDSetTimeEventRate, 
-                       _DVDSetTitle, _DVDSetUOPState, _DVDSetVideoCGBounds, 
-                       _DVDSetVideoColor, _DVDSetVideoColorBrigthness, 
-                       _DVDSetVideoColorContrast, _DVDSetVideoColorHue, 
-                       _DVDSetVideoColorSaturation, _DVDSetVideoDisplay, 
-                       _DVDSetVideoNoiseLevel, _DVDSetVideoOpenGLContext, 
+                       _DVDSetEQBandDecibel, _DVDSetEventHandler, _DVDSetFatalErrorCallBack, 
+                       _DVDSetFatalErrorHandler, _DVDSetLastPlayBookmark, 
+                       _DVDSetNativeVideoSourceCropRect, _DVDSetParentalControl, 
+                       _DVDSetParentalMovieRating, _DVDSetReadCacheParameter, 
+                       _DVDSetRegionBDCode, _DVDSetSPDIFDataOutDevice, 
+                       _DVDSetStateCallBack, _DVDSetStateHandler, _DVDSetSubPictureStream, 
+                       _DVDSetTime, _DVDSetTimeEventRate, _DVDSetTitle, 
+                       _DVDSetUOPState, _DVDSetVideoCGBounds, _DVDSetVideoColor, 
+                       _DVDSetVideoColorBrigthness, _DVDSetVideoColorContrast, 
+                       _DVDSetVideoColorHue, _DVDSetVideoColorSaturation, 
+                       _DVDSetVideoDisplay, _DVDSetVideoNoiseLevel, _DVDSetVideoOpenGLContext, 
                        _DVDSetVideoOutputFeature, _DVDSetVideoSharpness, 
                        _DVDSetVideoViewArea, _DVDSetVideoWindowID, _DVDSetVideoWindowRef, 
                        _DVDSleep, _DVDStepFrame, _DVDStillOff, _DVDStop, 

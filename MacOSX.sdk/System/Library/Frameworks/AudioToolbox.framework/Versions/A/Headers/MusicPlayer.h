@@ -1,25 +1,50 @@
-/*
-     File:       MusicPlayer.h
- 
-     Contains:   MusicPlayer application interfaces
-  
-     Copyright:  (c) 2000-2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		MusicPlayer.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2000-2015 by Apple, Inc., all rights reserved.
+
+	@abstract	API's for Music sequencing and playing services
+	
+	@discussion
+		The objects in this API set include:
+
+			- Music Sequence: a container of music tracks
+			- Music Track: a time ordered list of events
+			- Music Track Iterator: an object to iterate over events in a track
+			- Music Player: an object used to play a sequence
+		
+		A MusicSequence contains an arbitrary number of tracks (MusicTrack) each of which contains
+		time-stamped (in units of beats) events in time-increasing order. There are various types of
+		events, defined below, including the expected MIDI events, tempo, and extended events.
+		
+		A MusicTrack has properties which may be inspected and assigned, including support for
+		looping, muting/soloing, and time-stamp interpretation. APIs exist for iterating through the
+		events in a MusicTrack, and for performing editing operations on them.
+		
+		A MusicPlayer is used to play a sequence and provides control of playback rate and setting
+		to a particular time.
+		
+		Each MusicSequence may have an associated AUGraph object, which represents a set of
+		AudioUnits and the connections between them.  Then, each MusicTrack of the MusicSequence may
+		address its events to a specific AudioUnit within the AUGraph. In such a manner, it's
+		possible to automate arbitrary parameters of AudioUnits, and schedule notes to be played to
+		MusicDevices (AudioUnit software synthesizers) within an arbitrary audio processing network
+		(AUGraph). A MusicSequence or its tracks can also address a CoreMIDI endpoint directly.
 */
 
-#ifndef __MusicPlayer
-#define __MusicPlayer
+#ifndef AudioToolbox_MusicPlayer_h
+#define AudioToolbox_MusicPlayer_h
 
 #include <Availability.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <AudioUnit/MusicDevice.h>
 #include <AudioToolbox/AUGraph.h>
-#include <CoreMIDI/MIDIServices.h>
+
+#if __has_include(<CoreMIDI/MIDIServices.h>)
+	#include <CoreMIDI/MIDIServices.h>
+#endif
+
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -27,55 +52,20 @@ extern "C"
 #endif
 
 /*!
-	@header MusicPlayer.h
-	
-	@abstract	API for Music sequencing and playing services
-	
-	@discussion
-		Basic idea behind the Sequencing Services APIs:
-
-			A MusicSequence contains an arbitrary number of tracks (MusicTrack)
-			each of which contains time-stamped (in units of beats) events in time-increasing order.  
-			There are various types of events, defined below, including the expected MIDI events, tempo, 
-			and extended events.
-			
-			A MusicTrack has properties which may be inspected and assigned, including support
-			for looping, muting/soloing, and time-stamp interpretation. APIs exist for iterating through the 
-			events in a MusicTrack, and for performing editing operations on them.
-			
-			A MusicPlayer is used to play a sequence and provides control of playback rate and
-			setting to a particular time.
-			
-			Each MusicSequence may have an associated AUGraph object, which represents a set
-			of AudioUnits and the connections between them.  Then, each MusicTrack of the
-			MusicSequence may address its events to a specific AudioUnit within the AUGraph.
-			In such a manner, it's possible to automate arbitrary parameters of AudioUnits,
-			and schedule notes to be played to MusicDevices (AudioUnit software synthesizers)
-			within an arbitrary audio processing network (AUGraph). A MusicSequence or its tracks
-			can also address a MIDI endpoint directly.
-		
-		The objects defined in this header are:
-			Music Sequence - container of music tracks
-			Music Track - a time ordered list of events
-			Music Track Iterator - an object to iterate over events in a track
-			Music Player - an object used to play a sequence
-*/
-
-/*!
 	@enum MusicEventType
 	@abstract music event types, including both MIDI and "extended" protocol
 	@constant kMusicEventType_NULL	
-	@constant kMusicEventType_ExtendedNote		note with variable number of arguments (non-MIDI)
-	@constant kMusicEventType_ExtendedTempo		tempo change in BPM
-	@constant kMusicEventType_User				user defined data
-	@constant kMusicEventType_Meta				standard MIDI file meta event
+	@constant kMusicEventType_ExtendedNote	note with variable number of arguments (non-MIDI)
+	@constant kMusicEventType_ExtendedTempo	tempo change in BPM
+	@constant kMusicEventType_User			user defined data
+	@constant kMusicEventType_Meta			standard MIDI file meta event
 	@constant kMusicEventType_MIDINoteMessage		MIDI note-on with duration (for note-off)
 	@constant kMusicEventType_MIDIChannelMessage	MIDI channel messages (other than note-on/off)
 	@constant kMusicEventType_MIDIRawData			for MIDI system exclusive data
-	@constant kMusicEventType_Parameter,		general purpose AudioUnit parameter, added in 10.2
-	@constant kMusicEventType_AUPreset,			the AU's user preset CFDictionaryRef (the ClassInfo property), added 10.3
+	@constant kMusicEventType_Parameter		general purpose AudioUnit parameter, added in 10.2
+	@constant kMusicEventType_AUPreset		the AU's user preset CFDictionaryRef (the ClassInfo property), added 10.3
 */
-enum
+CF_ENUM(UInt32)
 {
 	kMusicEventType_NULL					= 0,
 	kMusicEventType_ExtendedNote			= 1,
@@ -93,6 +83,11 @@ typedef UInt32		MusicEventType;
 /*!
 	@enum MusicSequenceLoadFlags
 	@abstract Flags used to customise loading behaviour
+ 	@constant	kMusicSequenceLoadSMF_PreserveTracks
+			If this flag is set the resultant Sequence will contain:
+			a tempo track
+			a track for each track found in the SMF
+ 			This is the default behavior
 	@constant	kMusicSequenceLoadSMF_ChannelsToTracks
 			If this flag is set the resultant Sequence will contain:
 			a tempo track
@@ -100,11 +95,11 @@ typedef UInt32		MusicEventType;
 			1 track for SysEx or MetaEvents - this will be the last track 
 			in the sequence after the LoadSMFWithFlags calls
 */
-enum
+typedef CF_OPTIONS(UInt32, MusicSequenceLoadFlags)
 {
+	kMusicSequenceLoadSMF_PreserveTracks	= 0,
 	kMusicSequenceLoadSMF_ChannelsToTracks 	= (1 << 0)
 };
-typedef UInt32		MusicSequenceLoadFlags;
 
 /*!
 	@enum MusicSequenceType
@@ -123,37 +118,41 @@ typedef UInt32		MusicSequenceLoadFlags;
 	@constant	kMusicSequenceType_Samples
 					A music sequence with a single tempo event that represents the audio sample rate
 */
-enum {
+typedef CF_ENUM(UInt32, MusicSequenceType) {
 	kMusicSequenceType_Beats		= 'beat',
 	kMusicSequenceType_Seconds		= 'secs',
 	kMusicSequenceType_Samples		= 'samp'
 };
-typedef UInt32		MusicSequenceType;
 
 /*!
 	@enum MusicSequenceFileTypeID
 	@abstract	describes different types of files that can be parsed by a music sequence
+ 	@constant	kMusicSequenceFile_AnyType
+ 					let the system read iMelody files and read and write MIDI files (and any future types)
 	@constant	kMusicSequenceFile_MIDIType
 					read and write MIDI files
 	@constant	kMusicSequenceFile_iMelodyType
 					read iMelody files
 */
-enum {
+typedef CF_ENUM(UInt32, MusicSequenceFileTypeID) {
+	kMusicSequenceFile_AnyType			= 0,
 	kMusicSequenceFile_MIDIType			= 'midi',
 	kMusicSequenceFile_iMelodyType		= 'imel'
 };
-typedef UInt32		MusicSequenceFileTypeID;
 
 /*!
 	@enum MusicSequenceFileFlags
 	@abstract	controls the behaviour of the create file calls
+	@constant	kMusicSequenceFileFlags_Default
+ 					Does not overwrite existing files.  Attempts to save over an existing file
+ 					will return kAudio_FilePermissionError
 	@constant	kMusicSequenceFileFlags_EraseFile
 					Erase an existing file when creating a new file
 */
-enum {
+typedef CF_OPTIONS(UInt32, MusicSequenceFileFlags) {
+	kMusicSequenceFileFlags_Default	  = 0,
 	kMusicSequenceFileFlags_EraseFile = 1
 };
-typedef UInt32 MusicSequenceFileFlags;
 
 
 /*!
@@ -281,7 +280,9 @@ typedef struct AUPresetEvent
 } AUPresetEvent;
 
 
+	CF_ASSUME_NONNULL_END
 	#include <AudioToolbox/CoreAudioClock.h>
+	CF_ASSUME_NONNULL_BEGIN
 
 typedef struct OpaqueMusicPlayer		*MusicPlayer;
 typedef struct OpaqueMusicSequence		*MusicSequence;
@@ -292,11 +293,11 @@ typedef struct OpaqueMusicEventIterator *MusicEventIterator;
 	@typedef MusicSequenceUserCallback
 	@discussion See MusicSequenceSetUserCallback
 */
-typedef void (*MusicSequenceUserCallback)(	void					 	*inClientData,
+typedef void (*MusicSequenceUserCallback)(	void * __nullable			inClientData,
 											MusicSequence				inSequence,
 											MusicTrack					inTrack,
 											MusicTimeStamp				inEventTime,
-											const MusicEventUserData	*inEventData,
+											const MusicEventUserData *	inEventData,
 											MusicTimeStamp				inStartSliceBeat,
 											MusicTimeStamp				inEndSliceBeat);
 
@@ -313,7 +314,7 @@ typedef void (*MusicSequenceUserCallback)(	void					 	*inClientData,
 	@constant	kAudioToolboxErr_InvalidPlayerState
 	@constant	kAudioToolboxErr_CannotDoInCurrentContext
 */
-enum
+CF_ENUM(OSStatus)
 {
 	kAudioToolboxErr_InvalidSequenceType		= -10846,
 	kAudioToolboxErr_TrackIndexError 			= -10859,
@@ -324,7 +325,8 @@ enum
     kAudioToolboxErr_NoSequence 				= -10854,
 	kAudioToolboxErr_InvalidEventType			= -10853,
 	kAudioToolboxErr_InvalidPlayerState			= -10852,
-	kAudioToolboxErr_CannotDoInCurrentContext	= -10863
+	kAudioToolboxErr_CannotDoInCurrentContext	= -10863,
+	kAudioToolboxError_NoTrackDestination		= -66720
 };
 
 /*!
@@ -380,7 +382,7 @@ enum
 			480 if the sequence is created manually
 			some_value based on what was in a MIDI file if the sequence was created from a MIDI file		
 */
-enum
+CF_ENUM(UInt32)
 {
 	kSequenceTrackProperty_LoopInfo = 0,
 	kSequenceTrackProperty_OffsetTime = 1,
@@ -424,7 +426,7 @@ typedef struct MusicTrackLoopInfo
 	@param		outPlayer	the newly created player
 */
 extern OSStatus
-NewMusicPlayer(			MusicPlayer		*outPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+NewMusicPlayer(			MusicPlayer	__nullable * __nonnull outPlayer)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 /*!
 	@function	DisposeMusicPlayer
@@ -457,7 +459,7 @@ MusicPlayerSetSequence(	MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerGetSequence(	MusicPlayer 	inPlayer,
-						MusicSequence 	*outSequence)							__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
+						MusicSequence __nullable * __nonnull outSequence)		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
 								
 /*!
 	@function	MusicPlayerSetTime
@@ -607,7 +609,7 @@ MusicPlayerGetPlayRateScalar(	MusicPlayer		inPlayer,
 	@param		outSequence		the new sequence
 */
 extern OSStatus
-NewMusicSequence(			MusicSequence		*outSequence)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+NewMusicSequence(	MusicSequence __nullable * __nonnull outSequence)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 /*!
 	@function	DisposeMusicSequence
@@ -626,7 +628,7 @@ DisposeMusicSequence(		MusicSequence		inSequence)						__OSX_AVAILABLE_STARTING(
 */
 extern OSStatus
 MusicSequenceNewTrack(		MusicSequence 		inSequence,
-							MusicTrack 			*outTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							MusicTrack __nullable * __nonnull outTrack)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 													
 /*!
 	@function	MusicSequenceDisposeTrack
@@ -659,9 +661,9 @@ MusicSequenceGetTrackCount(	MusicSequence 		inSequence,
 	@param		outTrack		the track at that index
 */
 extern OSStatus
-MusicSequenceGetIndTrack(	MusicSequence 		inSequence,
-							UInt32 				inTrackIndex,
-							MusicTrack 			*outTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicSequenceGetIndTrack(	MusicSequence 						inSequence,
+							UInt32 								inTrackIndex,
+							MusicTrack __nullable * __nonnull	outTrack)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 /*!
 	@function	MusicSequenceGetTrackIndex
@@ -687,8 +689,8 @@ MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 	@param		outTrack		the tempo track of the sequence
 */
 extern OSStatus
-MusicSequenceGetTempoTrack(	MusicSequence		inSequence,
-							MusicTrack			*outTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
+MusicSequenceGetTempoTrack(	MusicSequence						inSequence,
+							MusicTrack __nullable * __nonnull	outTrack)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
 
 
 /*!
@@ -697,16 +699,15 @@ MusicSequenceGetTempoTrack(	MusicSequence		inSequence,
 	@discussion	A sequence can be associated with an AUGraph and this graph will be used to render the events as 
 				controlled by the sequence when it is played. By default, all of the tracks of a sequence will
 				find the first AUNode that is an instance of an Apple MusicDevice audio unit (see MusicSequenceGetAUGraph).
-				To properly render a multi-channel sequence on iOS, a custom graph with multiple MusicDevices
-				should be created.
-				
-				Specific nodes of the graph can be targeted for different tracks (see MusicTrackSetDestNode).
+				Specific nodes of the graph can be targeted for different tracks (see MusicTrackSetDestNode).  To render a
+ 				multi-track GM MIDI sequence on iOS, create a custom graph with a MIDISynth audio unit as the MusicDevice.
+ 				If inGraph is set to NULL, the sequence will reset to use the default graph.
 	@param		inSequence		the sequence
 	@param		inGraph			the graph
 */
 extern OSStatus
-MusicSequenceSetAUGraph(	MusicSequence 	inSequence,
-							AUGraph 		inGraph)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicSequenceSetAUGraph(	MusicSequence 	   inSequence,
+							AUGraph __nullable inGraph)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 
 /*!
@@ -716,16 +717,18 @@ MusicSequenceSetAUGraph(	MusicSequence 	inSequence,
 				This default graph contains a MusicDevice and a DynamicsProcessor and all tracks will be targeted
 				to the MusicDevice.  On Mac OS X, this MusicDevice is an instance of a software synthesizer that is 
 				compatible with the GM and GS MIDI standards.  On iOS, it is an instance of a monotimbral software 
-				synthesizer designed to render events from a single MIDI channel.
+				synthesizer designed to render events from a single MIDI channel.  To render multi-track GM MIDI
+ 				sequences on iOS, create a custom graph with a MIDISynth audio unit as the MusicDevice.
 				
 				This call will thus either return the graph as set by the user, or this default graph.
 	@param		inSequence		the sequence
 	@param		outGraph		the graph
 */
 extern OSStatus
-MusicSequenceGetAUGraph(	MusicSequence 	inSequence,
-							AUGraph 		*outGraph)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicSequenceGetAUGraph(	MusicSequence 					inSequence,
+							AUGraph __nullable * __nonnull	outGraph)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
+#if (TARGET_OS_MAC && !TARGET_OS_IPHONE) || TARGET_OS_IOS
 /*!
 	@function	MusicSequenceSetMIDIEndpoint
 	@abstract	Makes the target of all of the tracks in the sequence a MIDI endpoint
@@ -738,7 +741,8 @@ MusicSequenceGetAUGraph(	MusicSequence 	inSequence,
 extern OSStatus
 MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
 								MIDIEndpointRef	inEndpoint)						__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
-
+	
+#endif
 /*!
 	@function	MusicSequenceSetSequenceType
 	@abstract	Set the sequence type (the default is beats)
@@ -912,11 +916,11 @@ MusicSequenceFileCreate (MusicSequence				inSequence,
 	@param		outData			the resulting data object
 */
 extern OSStatus
-MusicSequenceFileCreateData (MusicSequence			inSequence,
-						MusicSequenceFileTypeID		inFileType,
-						MusicSequenceFileFlags		inFlags,
-						SInt16						inResolution,
-						CFDataRef *					outData)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+MusicSequenceFileCreateData (MusicSequence					inSequence,
+						MusicSequenceFileTypeID				inFileType,
+						MusicSequenceFileFlags				inFlags,
+						SInt16								inResolution,
+						CFDataRef __nullable * __nonnull	outData)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 /*!
@@ -977,9 +981,9 @@ MusicSequenceGetBeatsForSeconds(	MusicSequence		inSequence,
 	@param		inClientData	client (user supplied) data provided back to the callback when it is called by the sequence
 */
 extern OSStatus
-MusicSequenceSetUserCallback(	MusicSequence				inSequence,
-								MusicSequenceUserCallback	inCallback,
-								void*						inClientData)		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
+MusicSequenceSetUserCallback(	MusicSequence							inSequence,
+								MusicSequenceUserCallback __nullable	inCallback,
+								void * __nullable						inClientData)		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
 
 /*!
 	@function	MusicSequenceBeatsToBarBeatTime
@@ -1049,7 +1053,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 */
 extern OSStatus
 MusicTrackGetSequence(	MusicTrack 			inTrack,
-						MusicSequence		*outSequence)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicSequence __nullable * __nonnull outSequence)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 /*!
 	@function	MusicTrackSetDestNode
@@ -1063,6 +1067,7 @@ extern OSStatus
 MusicTrackSetDestNode(	MusicTrack 			inTrack,
 						AUNode				inNode)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
+#if (TARGET_OS_MAC && !TARGET_OS_IPHONE) || TARGET_OS_IOS
 /*!
 	@function	MusicTrackSetDestMIDIEndpoint
 	@abstract	Sets the track's target to the specified MIDI endpoint
@@ -1074,6 +1079,8 @@ extern OSStatus
 MusicTrackSetDestMIDIEndpoint(	MusicTrack			inTrack,
 								MIDIEndpointRef		inEndpoint)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
 
+#endif
+	
 /*!
 	@function	MusicTrackGetDestNode
 	@abstract	Gets the track's target if it is an AUNode
@@ -1086,6 +1093,7 @@ extern OSStatus
 MusicTrackGetDestNode(			MusicTrack 			inTrack,
 								AUNode *			outNode)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
 
+#if (TARGET_OS_MAC && !TARGET_OS_IPHONE) || TARGET_OS_IOS
 /*!
 	@function	MusicTrackGetDestMIDIEndpoint
 	@abstract	Gets the track's target if it is a MIDI Endpoint
@@ -1097,7 +1105,8 @@ MusicTrackGetDestNode(			MusicTrack 			inTrack,
 extern OSStatus
 MusicTrackGetDestMIDIEndpoint(	MusicTrack			inTrack,
 								MIDIEndpointRef	*	outEndpoint)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
-
+#endif
+	
 /*!
 	@function	MusicTrackSetProperty
 	@abstract	Sets the specified property value
@@ -1388,8 +1397,8 @@ MusicTrackNewAUPresetEvent(			MusicTrack 					inTrack,
 	@param		outIterator		the new iterator
 */
 extern OSStatus
-NewMusicEventIterator(				MusicTrack 			inTrack,
-									MusicEventIterator *outIterator)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+NewMusicEventIterator(		MusicTrack 									inTrack,
+							MusicEventIterator __nullable * __nonnull	outIterator)	__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 													
 /*!
 	@function	DisposeMusicEventIterator
@@ -1459,7 +1468,7 @@ extern OSStatus
 MusicEventIteratorGetEventInfo(		MusicEventIterator 		inIterator,
 									MusicTimeStamp *		outTimeStamp,
 									MusicEventType *		outEventType,
-									const void **			outEventData,
+									const void * __nullable * __nonnull outEventData,
 									UInt32 *				outEventDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 	
 /*!
@@ -1556,7 +1565,6 @@ MusicEventIteratorHasCurrentEvent(	MusicEventIterator	inIterator,
 
 
 
-
 //=====================================================================================================================
 #pragma mark -
 
@@ -1595,14 +1603,14 @@ MusicSequenceSaveMIDIFile(	MusicSequence	inSequence,
 
 extern OSStatus
 MusicSequenceSaveSMFData(	MusicSequence	inSequence,
-							CFDataRef		*outData,
+							CFDataRef __nullable * __nonnull outData,
 							UInt16			inResolution)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 extern OSStatus
 NewMusicTrackFrom(		MusicTrack			inSourceTrack,
 						MusicTimeStamp		inSourceStartTime,
 						MusicTimeStamp		inSourceEndTime,
-						MusicTrack 			*outNewTrack)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+						MusicTrack __nullable * __nonnull outNewTrack)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 enum {
 	kMusicEventType_ExtendedControl			= 2
@@ -1625,4 +1633,6 @@ MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
 }
 #endif
 
-#endif // __MusicPlayer
+CF_ASSUME_NONNULL_END
+
+#endif // AudioToolbox_MusicPlayer_h

@@ -6,16 +6,18 @@
 //
 
 #import <MapKit/MKFoundation.h>
+
 #import <MapKit/MKAnnotation.h>
-#import <MapKit/MKAnnotationView.h>
 #import <MapKit/MKDistanceFormatter.h>
 #import <MapKit/MKGeometry.h>
 #import <MapKit/MKMapItem.h>
+#import <MapKit/MKPlacemark.h>
+
+#if __has_include(<MapKit/MKMapView.h>)
+#import <MapKit/MKAnnotationView.h>
 #import <MapKit/MKMapView.h>
 #import <MapKit/MKPinAnnotationView.h>
-#import <MapKit/MKPlacemark.h>
 #import <MapKit/MKUserLocation.h>
-#import <MapKit/MKTypes.h>
 #import <MapKit/MKOverlay.h>
 #import <MapKit/MKShape.h>
 #import <MapKit/MKPointAnnotation.h>
@@ -40,6 +42,7 @@
 #import <MapKit/MKMapSnapshot.h>
 #import <MapKit/MKTileOverlay.h>
 #import <MapKit/MKTileOverlayRenderer.h>
+#import <MapKit/MKTypes.h>
 #import <MapKit/MKMapCamera.h>
 
 #if TARGET_OS_IPHONE
@@ -50,4 +53,6 @@
 #import <MapKit/MKPolylineView.h>
 #import <MapKit/MKCircleView.h>
 #import <MapKit/MKUserTrackingBarButtonItem.h>
+#endif
+
 #endif

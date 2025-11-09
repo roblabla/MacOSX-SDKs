@@ -3,7 +3,10 @@
  *  vImage.framework
  *
  *  Created by Ian Ollmann on 12/5/13.
- *  @copyright Copyright (c) 2013-2104 Apple Inc. All rights reserved.
+ *
+ *  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
+ *
+ *  @copyright Copyright (c) 2013-2015 by Apple Inc. All rights reserved.
  *
  *  @discussion vImage_CVUtilities.h provides a suite of high level APIs to facilitate conversion between CVPixelBufferRef
  *  formats and the set of formats describable by CoreGraphics types, including the core formats used by vImage for most
@@ -11,11 +14,23 @@
  *  manner.  Conversions by default are color corrected as necessary.  (The recipe for the correction is taken from ColorSync
  *  but vImage does the heavy lifting, usually running from 3-156 times faster.)  High level interfaces are available to 
  *  read/write data directly to/from CVPixelBufferRefs to vImage_Buffers.  Lower level interfaces are provided to allow the
- *  process to be broken apart a bit, to either respond to errors or eliminate redundant calculation.
+ *  process to be broken apart a bit, to either respond to errors or eliminate redundant calculation. That is, while it is 
+ *  expected that the high level interfaces above will work for most, there are two common situation where more work may be required:
  *
- *  Additionally, various RGB <-> CoreVideo basic conversions are available in vImage/Conversion.h.  These provide direct 
+ *  Sometimes CVPixelBuffers are missing information attached to them that is needed to convert them to other formats. The vImageCVImageFormatRef
+ *  allows you to repair this problem prior to proceeding with conversions using the above high level interfaces or vImageConvert_AnyToAny.
+ *  The vImageCVImageFormatRef also provides additional control over how the conversion is done.
+ *
+ *  In addition, when the same conversion is done repeatedly, such as when converting multiple frames from the same movie, the high level interfaces
+ *  presented above may incur some unnecessary overhead because they are redundantly introspecting pixel format and creating/destroying the same
+ *  objects over and over. Breaking apart the conversion process into substeps allows you to recycle work from earlier conversions to save time.
+ *  Both vImageCVImageFormatRefs and vImageConverterRefs can be reused multiple times, by multiple threads concurrently, if needed.
+ *
+ *  In addition, please see the various RGB <-> CoreVideo basic conversions are available in vImage/Conversion.h.  These provide direct
  *  access to the fast low level conversions available here. They are useful when you know exactly what formats you are working
  *  with ahead of time and just want to do that with a minimum of fuss.
+ *
+ * @ignorefuncmacro VIMAGE_NON_NULL
  */
  
 #ifndef vImage_CVUtilities_h
@@ -30,7 +45,24 @@
 
 #include <vImage/vImage_Utilities.h>
 #include <vImage/Conversion.h>
-#include <CoreVideo/CVPixelBuffer.h>  /* #define vImage_CVUtilities_h 1 before including Accelerate headers to turn this header off */
+#if defined __ASSERTMACROS__
+	/*	If __ASSERTMACROS__ is defined, indicating AssertMacros.h has been
+		previously included, simply include <CoreVideo/CVPixelBuffer.h>
+		normally.
+	*/
+	#include <CoreVideo/CVPixelBuffer.h>  /* #define vImage_CVUtilities_h 1 before including Accelerate headers to turn this header off */
+#else
+	/*	If __ASSERTMACROS__ is not defined, we define it so that AssertMacros.h
+		is suppressed while we include <CoreVideo/CVPixelBuffer.h>, and we
+		undefine it afterward to restore the prior state.  This works around a
+		problem caused by AssertMacros.h defining a "check" symbol, which can
+		interfere with clients (source files that include vImage headers) that
+		use "check" for their own purposes.
+	*/
+	#define __ASSERTMACROS__
+	#include <CoreVideo/CVPixelBuffer.h>  /* #define vImage_CVUtilities_h 1 before including Accelerate headers to turn this header off */
+	#undef __ASSERTMACROS__
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -266,19 +298,6 @@ vImage_Error vImageBuffer_CopyToCVPixelBuffer( const vImage_Buffer *buffer,
  *  Low level interfaces: *
  **************************/
     
-/*
- *  While it is expected that the high level interfaces above will work for most, there are two common situation where more work may be required:
- *
- *  Sometimes CVPixelBuffers are missing information attached to them that is needed to convert them to other formats. The vImageCVImageFormatRef
- *  allows you to repair this problem prior to proceeding with conversions using the above high level interfaces or vImageConvert_AnyToAny.   
- *  The vImageCVImageFormatRef also provides additional control over how the conversion is done.
- *
- *  In addition, when the same conversion is done repeatedly, such as when converting multiple frames from the same movie, the high level interfaces
- *  presented above may incur some unnecessary overhead because they are redundantly introspecting pixel format and creating/destroying the same 
- *  objects over and over. Beaking apart the conversion process into substeps allows you to recycle work from earlier conversions to save time. 
- *  Both vImageCVImageFormatRefs and vImageConverterRefs can be reused multiple times, by multiple threads concurrently, if needed.
- */
-
  
 /*!
  * @functiongroup vImageCVImageFormatRef methods
@@ -959,7 +978,19 @@ CGColorSpaceRef vImageCreateRGBColorSpaceWithPrimariesAndTransferFunction( const
                                                                            VIMAGE_NON_NULL(1,2)
                                                                            __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
+typedef struct vImageWhitePoint
+{
+    float white_x;
+    float white_y;
+}vImageWhitePoint;
 
+CGColorSpaceRef vImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction( const vImageWhitePoint *whitePoint,
+                                                                                  const vImageTransferFunction *tf,
+                                                                                  CGColorRenderingIntent intent,
+                                                                                  vImage_Flags flags,
+                                                                                  vImage_Error *error )
+                                                                                VIMAGE_NON_NULL(1,2)
+                                                                                __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
 /*! @functiongroup  vImageConverterRef creation */
     

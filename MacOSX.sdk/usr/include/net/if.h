@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -104,6 +104,7 @@
 #define	KEV_DL_IFDELEGATE_CHANGED		25
 #define	KEV_DL_AWDL_RESTRICTED			26
 #define	KEV_DL_AWDL_UNRESTRICTED		27
+#define	KEV_DL_RRC_STATE_CHANGED		28
 
 #include <net/if_var.h>
 #include <sys/types.h>

@@ -10,6 +10,7 @@
 
 // Policies
 #define kLAPolicyDeviceOwnerAuthenticationWithBiometrics    1
+#define kLAPolicyDeviceOwnerAuthentication                  2
 
 // Options
 #define kLAOptionUserFallback                               1
@@ -23,6 +24,9 @@
 #define kLAErrorPasscodeNotSet                             -5
 #define kLAErrorTouchIDNotAvailable                        -6
 #define kLAErrorTouchIDNotEnrolled                         -7
+#define kLAErrorTouchIDLockout                             -8
+#define kLAErrorAppCancel                                  -9
+#define kLAErrorInvalidContext                            -10
 
 // Error domain
 #define kLAErrorDomain        "com.apple.LocalAuthentication"

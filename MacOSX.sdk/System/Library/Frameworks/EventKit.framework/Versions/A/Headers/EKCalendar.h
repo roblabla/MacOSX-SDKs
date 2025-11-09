@@ -7,7 +7,11 @@
 
 #import <EventKit/EventKitDefines.h>
 #import <EventKit/EKObject.h>
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import <EventKit/EKTypes.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class EKEventStore, EKSource, NSColor;
 
@@ -15,8 +19,11 @@
     @class       EKCalendar
     @abstract    The EKCalendar class represents a calendar for events.
 */
-EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
+NS_CLASS_AVAILABLE(10_8, 4_0)
 @interface EKCalendar : EKObject
+
+// Create a new calendar in the specified event store. You should use calendarForEntityType in iOS 6 or later.
++ (EKCalendar*)calendarWithEventStore:(EKEventStore *)eventStore NS_DEPRECATED(NA, NA, 4_0, 6_0);
 
 /*!
     @method     calendarForEntityType:
@@ -27,7 +34,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @param      entityType    The entity type that this calendar may support.
     @param      eventStore    The event store in which to create this calendar.
  */
-+ (EKCalendar *)calendarForEntityType:(EKEntityType)entityType eventStore:(EKEventStore *)eventStore __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
++ (EKCalendar *)calendarForEntityType:(EKEntityType)entityType eventStore:(EKEventStore *)eventStore NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @property   source
@@ -45,7 +52,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                 with a calendar that is no longer fetchable by this property, e.g. by title, type, color, etc.
                 Use [EKEventStore calendarWithIdentifier:] to look up the calendar by this value.
 */
-@property(nonatomic, readonly) NSString         *calendarIdentifier __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+@property(nonatomic, readonly) NSString         *calendarIdentifier NS_AVAILABLE(10_8, 5_0);
 
 /*!
     @property   title
@@ -71,7 +78,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @property   subscribed
     @abstract   YES if this calendar is a subscribed calendar.
 */
-@property(nonatomic, readonly, getter=isSubscribed) BOOL subscribed __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+@property(nonatomic, readonly, getter=isSubscribed) BOOL subscribed NS_AVAILABLE(10_8, 5_0);
 
 /*!
     @property   immutable
@@ -79,13 +86,21 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                 the calendar or delete it. It does NOT imply that you cannot add events 
                 or reminders to the calendar.
 */
-@property(nonatomic, readonly, getter=isImmutable) BOOL immutable __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+@property(nonatomic, readonly, getter=isImmutable) BOOL immutable NS_AVAILABLE(10_8, 5_0);
 
+#if TARGET_OS_IPHONE
+/*!
+    @property   color
+    @abstract   Returns the calendar color as a CGColorRef.
+*/
+@property(nonatomic) CGColorRef CGColor;
+#else
 /*!
     @property   color
     @abstract   Returns the calendar color as a NSColor.
 */
 @property(nonatomic, copy) NSColor *color;
+#endif
 
 /*!
     @property   supportedEventAvailabilities
@@ -98,7 +113,9 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @property   allowedEntityTypes
     @discussion Returns the entity types this calendar can contain. While our API only allows creation
                 of single-entity calendars, other servers might allow mixed-entity calendars.
- */
-@property(nonatomic, readonly) EKEntityMask allowedEntityTypes __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+@property(nonatomic, readonly) EKEntityMask allowedEntityTypes NS_AVAILABLE(10_8, 6_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -29,5 +29,5 @@
 #ifndef _KERN_COALITION_H_
 #define _KERN_COALITION_H_
 
-
+/* only kernel-private interfaces */
 #endif /* _KERN_COALITION_H */

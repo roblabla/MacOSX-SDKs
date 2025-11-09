@@ -1,18 +1,47 @@
-/*
-     File:       MusicDevice.h
- 
-     Contains:   MusicDevice Interfaces
-  
-     Copyright:   2000-2011 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		MusicDevice.h
+	@framework	AudioUnit.framework
+	@copyright	(c) 2000-2015 Apple, Inc. All rights reserved.
+	@abstract	Additional Audio Unit API for software musical instruments.
+
+	@discussion
+
+	A music device audio unit, commonly referred to as a music instrument, is used to render notes.
+	A note is a sound, usually pitched, that is started and stopped with a note number or pitch
+	specifier. A note is played on a group (in MIDI this is called a MIDI Channel) and the various
+	state values of a group (such as pitch bend, after-touch, etc) is inherited and controlled by
+	every playing note on a given group. A note can be individually stopped (which is the common
+	case), or stopped with the "All Notes Off" message that is sent to a specific group.
+
+	A music instrument can be multi-timbral - that is, each group can have a particular patch (or
+	sound) associated with it, and different groups can have different patches. This is a common
+	case for music instruments that implement the General MIDI specification. In this case, the
+	music instrument should return the number of available patches at a given time as the value for
+	the _InstrumentCount property.
+
+	It is also common for instruments to be mono-timbral - that is, they are only capable of
+	producing notes using a single patch/sound and typically only respond to commands on one group.
+	In this case, the music instrument should return 0 as the value for the _InstrumentCount
+	property.
+
+	Parameters can be defined in Group Scope, and these parameter IDs within the range of 0 < 1024,
+	are equivalent to the standard definitions of control in the MIDI specification (up to the ID
+	of). Parameters in group scope above 1024 are audio unit defined.
+
+	Notes can be created/started with one of two methods. To stop a note it must be stopped with the
+	same API group as was used to start it (MIDI or the extended Start/Stop note API.
+
+	(1) the MIDI Note on event (MusicDeviceMIDIEvent)
+		- notes must be stopped with the MIDI note off event (MusicDeviceMIDIEvent)
+		The MIDI Note number is used to turn the note off for the specified channel
+		
+	(2) the extended Note API (MusicDeviceStartNote). This API returns a note instance ID.
+		This is unique and can be used with the kAudioUnitScope_Note.
+		It is also used to turn the note off with MusicDeviceStopNote
 */
-#ifndef __MUSICDEVICE__
-#define __MUSICDEVICE__
+
+#ifndef AudioUnit_MusicDevice_h
+#define AudioUnit_MusicDevice_h
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
@@ -23,16 +52,10 @@
 	#include <AUComponent.h>
 #endif
 
-#if PRAGMA_ONCE
-#pragma once
-#endif
+CF_ASSUME_NONNULL_BEGIN
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_IMPORT
-#pragma import on
 #endif
 
 #if !__LP64__
@@ -44,46 +67,6 @@ extern "C" {
 		#pragma pack(2)
 	#endif
 #endif
-
-//=====================================================================================================================
-#pragma mark -
-#pragma mark Overview
-
-/*!
-    @header MusicDevice
-	
-	@discussion
-	A music device audio unit - what is commonly referred to as a music instrument - is used to render notes. 
-	A note is a sound, usually pitched, that is started and stopped with a note number or pitch specifier.	
-	A note is played on a group (in MIDI this is called a MIDI Channel) and the various state values of a 
-	group (such as pitch bend, after-touch, etc) is inherited and controlled by every playing note on a given group. 
-	A note can be individually stopped (which is the common case), or stopped with the "All Notes Off" message that 
-	is sent to a specific group.
-
-	A music instrument can be multi-timbral - that is, each group can have a particular patch (or sound) associated with 
-	it, and different groups can have different patches. This is a common case for music instruments that implement 
-	the General MIDI specification. In this case, the music instrument should return the number of available 
-	patches at a given time as the value for the _InstrumentCount property.
-	
-	It is also common for instruments to be mono-timbral - that is, they are only capable of producing notes using a 
-	single patch/sound and typically only respond to commands on one group. In this case, the music instrument 
-	should return 0 as the value for the _InstrumentCount property.
-	
-	Parameters can be defined in Group Scope, and these parameter IDs within the range of 0 < 1024, are equivalent 
-	to the standard definitions of control in the MIDI specification (up to the ID of). Parameters in group scope 
-	above 1024 are audio unit defined.
-
-	Notes can be created/started with one of two methods. To stop a note it must be stopped with the same API group 
-	as was used to start it (MIDI or the extended Start/Stop note API.
-	
-	(1) the MIDI Note on event (MusicDeviceMIDIEvent)
-		- notes must be stopped with the MIDI note off event (MusicDeviceMIDIEvent)
-		The MIDI Note number is used to turn the note off for the specified channel
-		
-	(2) the extended Note API (MusicDeviceStartNote). This API returns a note instance ID.
-		This is unique and can be used with the kAudioUnitScope_Note.
-		It is also used to turn the note off with MusicDeviceStopNote
-*/
 
 //=====================================================================================================================
 #pragma mark -
@@ -453,6 +436,7 @@ typedef OSStatus
 //=====================================================================================================================
 #pragma mark -
 #pragma mark Deprecated
+
 /*
 	The notion of instruments (separate voices assigned to different control groups) is a deprecated concept.
 	
@@ -472,8 +456,7 @@ MusicDeviceReleaseInstrument(	MusicDeviceComponent		inUnit,
 								MusicDeviceInstrumentID		inInstrument)		
 										__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
-
-
+	
 #if !__LP64__
 	#if PRAGMA_STRUCT_ALIGN
 		#pragma options align=reset
@@ -484,15 +467,11 @@ MusicDeviceReleaseInstrument(	MusicDeviceComponent		inUnit,
 	#endif
 #endif
 
-#ifdef PRAGMA_IMPORT_OFF
-#pragma import off
-#elif PRAGMA_IMPORT
-#pragma import reset
-#endif
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __MUSICDEVICE__ */
+CF_ASSUME_NONNULL_END
+
+#endif /* AudioUnit_MusicDevice_h */
 

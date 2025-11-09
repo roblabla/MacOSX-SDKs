@@ -31,8 +31,12 @@
 
 #include <Security/SecBase.h>
 #include <CoreFoundation/CFError.h>
+#include <sys/cdefs.h>
 
 __BEGIN_DECLS
+
+CF_ASSUME_NONNULL_BEGIN
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
  @function SecAccessControlGetTypeID
@@ -43,21 +47,38 @@ CFTypeID SecAccessControlGetTypeID(void)
 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 typedef CF_OPTIONS(CFIndex, SecAccessControlCreateFlags) {
-    kSecAccessControlUserPresence     = 1 << 0,
+    kSecAccessControlUserPresence           = 1 << 0,                                 // User presence policy using Touch ID or Passcode. Touch ID does not have to be available or enrolled. Item is still accessible by Touch ID even if fingers are added or removed.
+    kSecAccessControlTouchIDAny             CF_ENUM_AVAILABLE(NA, 9_0)    = 1 << 1,   // Constraint: Touch ID (any finger). Touch ID must be available and at least one finger must be enrolled. Item is still accessible by Touch ID even if fingers are added or removed.
+    kSecAccessControlTouchIDCurrentSet      CF_ENUM_AVAILABLE(NA, 9_0)    = 1 << 3,   // Constraint: Touch ID from the set of currently enrolled fingers. Touch ID must be available and at least one finger must be enrolled. When fingers are added or removed, the item is invalidated.
+    kSecAccessControlDevicePasscode         CF_ENUM_AVAILABLE(10_11, 9_0) = 1 << 4,   // Constraint: Device passcode
+    kSecAccessControlOr                     CF_ENUM_AVAILABLE(NA, 9_0)    = 1 << 14,  // Constraint logic operation: when using more than one constraint, at least one of them must be satisfied.
+    kSecAccessControlAnd                    CF_ENUM_AVAILABLE(NA, 9_0)    = 1 << 15,  // Constraint logic operation: when using more than one constraint, all must be satisfied.
+    kSecAccessControlPrivateKeyUsage        CF_ENUM_AVAILABLE(NA, 9_0)    = 1 << 30,  // Create access control for private key operations (i.e. sign operation)
+    kSecAccessControlApplicationPassword    CF_ENUM_AVAILABLE(NA, 9_0)    = 1 << 31,  // Security: Application provided password for data encryption key generation. This is not a constraint but additional item encryption mechanism.
 } __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 /*!
  @function SecAccessControlCreateWithFlags
  @abstract Creates new access control object based on protection type and additional flags.
+ @discussion Created access control object should be used as a value for kSecAttrAccessControl attribute in SecItemAdd,
+ SecItemUpdate or SecKeyGeneratePair functions.  Accessing keychain items or performing operations on keys which are
+ protected by access control objects can block the execution because of UI which can appear to satisfy the access control
+ conditions, therefore it is recommended to either move those potentially blocking operations out of the main
+ application thread or use combination of kSecUseAuthenticationContext and kSecUseAuthenticationUI attributes to control
+ where the UI interaction can appear.
  @param allocator Allocator to be used by this instance.
  @param protection Protection class to be used for the item. One of kSecAttrAccessible constants.
- @param flags
+ @param flags If no flags are set then all operations are allowed.
  @param error Additional error information filled in case of failure.
  @result Newly created access control object.
  */
-SecAccessControlRef SecAccessControlCreateWithFlags(CFAllocatorRef allocator, CFTypeRef protection,
+__nullable
+SecAccessControlRef SecAccessControlCreateWithFlags(CFAllocatorRef __nullable allocator, CFTypeRef protection,
                                                     SecAccessControlCreateFlags flags, CFErrorRef *error)
 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
+CF_ASSUME_NONNULL_END
 
 __END_DECLS
 

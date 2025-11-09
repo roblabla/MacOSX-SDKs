@@ -1,11 +1,13 @@
 /*	
 	NSGlyphInfo.h
-	Copyright (c) 2002-2014, Apple Inc.
+	Copyright (c) 2002-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSString.h>
 #import <AppKit/NSFont.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSCharacterCollection) {
     NSIdentityMappingCharacterCollection = 0, // Identity mapping (CID == NSGlyph)
@@ -21,16 +23,16 @@ typedef NS_ENUM(NSUInteger, NSCharacterCollection) {
 }
 
 // Returns an NSGlyphInfo object for the glyph name such as "copyright."
-+ (NSGlyphInfo *)glyphInfoWithGlyphName:(NSString *)glyphName forFont:(NSFont *)font baseString:(NSString *)theString;
++ (nullable NSGlyphInfo *)glyphInfoWithGlyphName:(NSString *)glyphName forFont:(NSFont *)font baseString:(NSString *)theString;
 
 // Returns an NSGlyphInfo object for the NSGlyph glyph
-+ (NSGlyphInfo *)glyphInfoWithGlyph:(NSGlyph)glyph forFont:(NSFont *)font baseString:(NSString *)theString;
++ (nullable NSGlyphInfo *)glyphInfoWithGlyph:(NSGlyph)glyph forFont:(NSFont *)font baseString:(NSString *)theString;
 
 // Returns an NSGlyphInfo object for the CID/RO
-+ (NSGlyphInfo *)glyphInfoWithCharacterIdentifier:(NSUInteger)cid collection:(NSCharacterCollection)characterCollection baseString:(NSString *)theString;
++ (nullable NSGlyphInfo *)glyphInfoWithCharacterIdentifier:(NSUInteger)cid collection:(NSCharacterCollection)characterCollection baseString:(NSString *)theString;
 
 // Returns the glyph name.  If the receiver is instantiated without glyph name, returns nil
-@property (readonly, copy) NSString *glyphName;
+@property (nullable, readonly, copy) NSString *glyphName;
 
 // Returns CID
 @property (readonly) NSUInteger characterIdentifier;
@@ -38,3 +40,5 @@ typedef NS_ENUM(NSUInteger, NSCharacterCollection) {
 // Returns RO (character collection).  Returns NSIdentityMappingCharacterCollection if instantiated with NSGlyph or glyph name
 @property (readonly) NSCharacterCollection characterCollection;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 #import <SpriteKit/SKSpriteNode.h>
 #import <SpriteKit/SpriteKitBase.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT NS_AVAILABLE(10_10, 8_0) @interface SKLightNode : SKNode
 
 /**
@@ -87,3 +89,5 @@ SK_EXPORT NS_AVAILABLE(10_10, 8_0) @interface SKLightNode : SKNode
 
 
 @end
+
+NS_ASSUME_NONNULL_END

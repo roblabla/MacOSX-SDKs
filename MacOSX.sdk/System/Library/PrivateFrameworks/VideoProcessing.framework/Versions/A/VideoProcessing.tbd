@@ -5,7 +5,7 @@ install-name:    /System/Library/PrivateFrameworks/VideoProcessing.framework/Ver
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _VCPCodecGetProperty, _VCPCompressionSessionCompleteFrames, 
-                       _VCPCompressionSessionCopySupportedPropertyDictionary, 
+                       _VCPCompressionSessionCopyProperty, _VCPCompressionSessionCopySupportedPropertyDictionary, 
                        _VCPCompressionSessionCreate, _VCPCompressionSessionEncodeFrame, 
                        _VCPCompressionSessionGetPixelBufferPool, _VCPCompressionSessionGetTypeID, 
                        _VCPCompressionSessionInvalidate, _VCPCompressionSessionSetProperty, 
@@ -18,8 +18,10 @@ exports:
                        _VCPDecompressionSessionSetProperty, _VCPDecompressionSessionWaitForAsynchronousFrames, 
                        _VCPParseConfigurationRecordAndCreateParameterSets, 
                        _VCPParseParameterSetsAndCreateConfigurationRecord, 
-                       _VCPReadCodecConfigParams, _VCPReadFrameSliceHeader, 
-                       _VCPSessionCopyProperty, _VCPSessionCreate, _VCPSessionCreateDefaultBufferProperties, 
+                       _VCPReadCodecConfigParams, _VCPReadDecMaxFrameFormat, 
+                       _VCPReadEncMaxFrameFormat, _VCPReadFrameSliceHeader, 
+                       _VCPReadHEVCSliceHeader, _VCPSessionCopyProperty, 
+                       _VCPSessionCreate, _VCPSessionCreateDefaultBufferProperties, 
                        _VCPSessionExecute, _VCPSessionGetTypeID, _VCPSessionSetProperty, 
                        _VPModuleInitialize ]
 ...

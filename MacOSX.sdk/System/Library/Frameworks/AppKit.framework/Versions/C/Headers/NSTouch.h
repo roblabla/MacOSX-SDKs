@@ -1,13 +1,15 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009-2014, Apple Inc.
+    Copyright (c) 2009-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSView;
 
@@ -59,11 +61,13 @@ NS_CLASS_AVAILABLE(10_6, NA)
 @property (readonly, getter=isResting) BOOL resting;
 
 /* Properties of the underlying touch device */ 
-@property (readonly, strong) id device; // The digitizer that generated the touch. Useful to distinguish touches emanating from multiple-device scenario
+@property (nullable, readonly, strong) id device; // The digitizer that generated the touch. Useful to distinguish touches emanating from multiple-device scenario
 
 /* The range of the touch device in points (72ppi). Note: 0,0 is the lower left of the surface.
 */
 @property (readonly) NSSize deviceSize;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

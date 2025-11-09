@@ -5,8 +5,10 @@
     Public header file.
 */
 
-#import <Cocoa/Cocoa.h>
+#import <AppKit/AppKit.h>
 #import <Automator/AMAttributesForAnalyzer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AMWorkflow;
 @class AMWorkflowController;
@@ -17,7 +19,7 @@
 	NSMutableArray *_actionViewControllers;
 	NSArray *_draggedActionViews;
 	NSString *_messageString;
-	id _unused;
+	AM_UNUSED_FOR_ANALYZER id _unused;
 	id _variablesEditorController;
 	AM_UNUSED_FOR_ANALYZER id _showWhenRunController;
 	struct __AMWorkflowViewFlags {
@@ -33,7 +35,8 @@
 
 @property (getter=isEditable) BOOL editable;
 
-@property (strong) AMWorkflowController *workflowController;
+@property (nullable, strong) AMWorkflowController *workflowController;
 
 @end
 
+NS_ASSUME_NONNULL_END

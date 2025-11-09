@@ -1,10 +1,12 @@
 /*	NSUserDefaults.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSData, NSDictionary, NSMutableDictionary, NSString, NSURL;
+@class NSArray<ObjectType>, NSData, NSDictionary<KeyValue, ObjectValue>, NSMutableDictionary, NSString, NSURL;
+
+NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString * const NSGlobalDomain;
 FOUNDATION_EXPORT NSString * const NSArgumentDomain;
@@ -20,45 +22,45 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 + (void)resetStandardUserDefaults;
 
 - (instancetype)init;
-- (instancetype)initWithSuiteName:(NSString *)suitename NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER; //nil suite means use the default search list that +standardUserDefaults uses
-- (id)initWithUser:(NSString *)username NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
+- (nullable instancetype)initWithSuiteName:(nullable NSString *)suitename NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER; //nil suite means use the default search list that +standardUserDefaults uses
+- (nullable id)initWithUser:(NSString *)username NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
 
-- (id)objectForKey:(NSString *)defaultName;
-- (void)setObject:(id)value forKey:(NSString *)defaultName;
+- (nullable id)objectForKey:(NSString *)defaultName;
+- (void)setObject:(nullable id)value forKey:(NSString *)defaultName;
 - (void)removeObjectForKey:(NSString *)defaultName;
 
-- (NSString *)stringForKey:(NSString *)defaultName;
-- (NSArray *)arrayForKey:(NSString *)defaultName;
-- (NSDictionary *)dictionaryForKey:(NSString *)defaultName;
-- (NSData *)dataForKey:(NSString *)defaultName;
-- (NSArray *)stringArrayForKey:(NSString *)defaultName;
+- (nullable NSString *)stringForKey:(NSString *)defaultName;
+- (nullable NSArray *)arrayForKey:(NSString *)defaultName;
+- (nullable NSDictionary<NSString *, id> *)dictionaryForKey:(NSString *)defaultName;
+- (nullable NSData *)dataForKey:(NSString *)defaultName;
+- (nullable NSArray<NSString *> *)stringArrayForKey:(NSString *)defaultName;
 - (NSInteger)integerForKey:(NSString *)defaultName;
 - (float)floatForKey:(NSString *)defaultName;
 - (double)doubleForKey:(NSString *)defaultName;
 - (BOOL)boolForKey:(NSString *)defaultName;
-- (NSURL *)URLForKey:(NSString *)defaultName NS_AVAILABLE(10_6, 4_0);
+- (nullable NSURL *)URLForKey:(NSString *)defaultName NS_AVAILABLE(10_6, 4_0);
 
 - (void)setInteger:(NSInteger)value forKey:(NSString *)defaultName;
 - (void)setFloat:(float)value forKey:(NSString *)defaultName;
 - (void)setDouble:(double)value forKey:(NSString *)defaultName;
 - (void)setBool:(BOOL)value forKey:(NSString *)defaultName;
-- (void)setURL:(NSURL *)url forKey:(NSString *)defaultName NS_AVAILABLE(10_6, 4_0);
+- (void)setURL:(nullable NSURL *)url forKey:(NSString *)defaultName NS_AVAILABLE(10_6, 4_0);
 
-- (void)registerDefaults:(NSDictionary *)registrationDictionary;
+- (void)registerDefaults:(NSDictionary<NSString *, id> *)registrationDictionary;
 
 - (void)addSuiteNamed:(NSString *)suiteName;
 - (void)removeSuiteNamed:(NSString *)suiteName;
 
-- (NSDictionary *)dictionaryRepresentation;
+- (NSDictionary<NSString *, id> *)dictionaryRepresentation;
 
-@property (readonly, copy) NSArray *volatileDomainNames;
-- (NSDictionary *)volatileDomainForName:(NSString *)domainName;
-- (void)setVolatileDomain:(NSDictionary *)domain forName:(NSString *)domainName;
+@property (readonly, copy) NSArray<NSString *> *volatileDomainNames;
+- (NSDictionary<NSString *, id> *)volatileDomainForName:(NSString *)domainName;
+- (void)setVolatileDomain:(NSDictionary<NSString *, id> *)domain forName:(NSString *)domainName;
 - (void)removeVolatileDomainForName:(NSString *)domainName;
 
 - (NSArray *)persistentDomainNames NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
-- (NSDictionary *)persistentDomainForName:(NSString *)domainName;
-- (void)setPersistentDomain:(NSDictionary *)domain forName:(NSString *)domainName;
+- (nullable NSDictionary<NSString *, id> *)persistentDomainForName:(NSString *)domainName;
+- (void)setPersistentDomain:(NSDictionary<NSString *, id> *)domain forName:(NSString *)domainName;
 - (void)removePersistentDomainForName:(NSString *)domainName;
 
 - (BOOL)synchronize;
@@ -102,3 +104,4 @@ FOUNDATION_EXPORT NSString * const NSPositiveCurrencyFormatString NS_DEPRECATED(
 FOUNDATION_EXPORT NSString * const NSNegativeCurrencyFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
 #endif
 
+NS_ASSUME_NONNULL_END

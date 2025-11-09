@@ -2,10 +2,12 @@
     File:		AVAudioUnitReverb.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
 #import <AVFoundation/AVAudioUnitEffect.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, AVAudioUnitReverbPreset) {
     AVAudioUnitReverbPresetSmallRoom       = 0,
@@ -49,3 +51,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic) float wetDryMix;
 
 @end
+
+NS_ASSUME_NONNULL_END

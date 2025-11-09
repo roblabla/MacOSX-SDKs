@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIPlugIn.h>
+#include <CoreImage/CIPlugIn.h>

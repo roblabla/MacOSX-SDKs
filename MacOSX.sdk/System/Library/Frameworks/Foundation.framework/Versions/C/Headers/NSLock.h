@@ -1,11 +1,13 @@
 /*	NSLock.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSDate;
-	
+
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol NSLocking
 
 - (void)lock;
@@ -21,7 +23,7 @@
 - (BOOL)tryLock;
 - (BOOL)lockBeforeDate:(NSDate *)limit;
 
-@property (copy) NSString *name NS_AVAILABLE(10_5, 2_0);
+@property (nullable, copy) NSString *name NS_AVAILABLE(10_5, 2_0);
 
 @end
 
@@ -40,7 +42,7 @@
 - (BOOL)lockBeforeDate:(NSDate *)limit;
 - (BOOL)lockWhenCondition:(NSInteger)condition beforeDate:(NSDate *)limit;
 
-@property (copy) NSString *name NS_AVAILABLE(10_5, 2_0);
+@property (nullable, copy) NSString *name NS_AVAILABLE(10_5, 2_0);
 
 @end
 
@@ -52,7 +54,7 @@
 - (BOOL)tryLock;
 - (BOOL)lockBeforeDate:(NSDate *)limit;
 
-@property (copy) NSString *name NS_AVAILABLE(10_5, 2_0);
+@property (nullable, copy) NSString *name NS_AVAILABLE(10_5, 2_0);
 
 @end
 
@@ -69,8 +71,8 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 - (void)signal;
 - (void)broadcast;
 
-@property (copy) NSString *name NS_AVAILABLE(10_5, 2_0);
+@property (nullable, copy) NSString *name NS_AVAILABLE(10_5, 2_0);
 
 @end
 
-
+NS_ASSUME_NONNULL_END

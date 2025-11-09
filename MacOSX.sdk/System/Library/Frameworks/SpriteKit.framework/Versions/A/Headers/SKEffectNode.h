@@ -13,6 +13,7 @@
 #import <SpriteKit/SpriteKitBase.h>
 #import <SpriteKit/SKShader.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  A SpriteKit node that applies frame buffer effects to the rendered results of its child nodes. This is done continuously on live content and is not a simple snapshot of the rendered result at one instant of time.
  */
@@ -23,7 +24,7 @@ SK_EXPORT @interface SKEffectNode : SKNode
  
  Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
  */
-@property (nonatomic, retain) CIFilter *filter;
+@property (nonatomic, retain, nullable) CIFilter *filter;
 
 /* Controls whether the filter's "inputCenter" (if it exists) should automatically be set to the center of the effect area. Defaults to YES. */
 @property (nonatomic) BOOL shouldCenterFilter;
@@ -48,6 +49,8 @@ SK_EXPORT @interface SKEffectNode : SKNode
  */
 @property (nonatomic) SKBlendMode blendMode;
 
-@property (nonatomic, retain) SKShader *shader;
+@property (nonatomic, retain, nullable) SKShader *shader;
 
 @end
+
+NS_ASSUME_NONNULL_END

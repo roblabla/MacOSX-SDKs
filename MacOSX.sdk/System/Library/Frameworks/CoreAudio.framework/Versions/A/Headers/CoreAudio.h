@@ -11,8 +11,8 @@
                      http://developer.apple.com/bugreporter/
 
 ==================================================================================================*/
-#if !defined(__CoreAudio_h__)
-#define __CoreAudio_h__
+#if !defined(CoreAudio_CoreAudio_h)
+#define CoreAudio_CoreAudio_h
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <CoreAudio/CoreAudioTypes.h>

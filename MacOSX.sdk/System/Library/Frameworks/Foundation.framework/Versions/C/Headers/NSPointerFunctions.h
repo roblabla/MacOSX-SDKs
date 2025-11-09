@@ -1,7 +1,7 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2014, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2015, Apple Inc. All rights reserved.
  *
  */
  
@@ -10,6 +10,8 @@
 
 #if !defined(__FOUNDATION_NSPOINTERFUNCTIONS__)
 #define __FOUNDATION_NSPOINTERFUNCTIONS__ 1
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*
 
@@ -26,7 +28,7 @@
 */
 
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSPointerFunctionsOptions) {
     // Memory options are mutually exclusive
     
     // default is strong
@@ -51,8 +53,6 @@ enum {
     NSPointerFunctionsCopyIn NS_ENUM_AVAILABLE(10_5, 6_0) = (1UL << 16),      // the memory acquire function will be asked to allocate and copy items on input
 };
 
-typedef NSUInteger NSPointerFunctionsOptions;
-
 NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSPointerFunctions : NSObject <NSCopying>
 // construction
@@ -60,19 +60,21 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 + (NSPointerFunctions *)pointerFunctionsWithOptions:(NSPointerFunctionsOptions)options;
 
 // pointer personality functions
-@property NSUInteger (*hashFunction)(const void *item, NSUInteger (*size)(const void *item));
-@property BOOL (*isEqualFunction)(const void *item1, const void*item2, NSUInteger (*size)(const void *item));
-@property NSUInteger (*sizeFunction)(const void *item);
-@property NSString *(*descriptionFunction)(const void *item);
+@property (nullable) NSUInteger (*hashFunction)(const void *item, NSUInteger (* __nullable size)(const void *item));
+@property (nullable) BOOL (*isEqualFunction)(const void *item1, const void*item2, NSUInteger (* __nullable size)(const void *item));
+@property (nullable) NSUInteger (*sizeFunction)(const void *item);
+@property (nullable) NSString * __nullable (*descriptionFunction)(const void *item);
 
 // custom memory configuration
-@property void (*relinquishFunction)(const void *item, NSUInteger (*size)(const void *item));
-@property void *(*acquireFunction)(const void *src, NSUInteger (*size)(const void *item), BOOL shouldCopy);
+@property (nullable) void (*relinquishFunction)(const void *item, NSUInteger (* __nullable size)(const void *item));
+@property (nullable) void * __nonnull (*acquireFunction)(const void *src, NSUInteger (* __nullable size)(const void *item), BOOL shouldCopy);
 
 // GC requires that read and write barrier functions be used when pointers are from GC memory
 @property BOOL usesStrongWriteBarrier;             // pointers should (not) be assigned using the GC strong write barrier
 @property BOOL usesWeakReadAndWriteBarriers;       // pointers should (not) use GC weak read and write barriers
 @end
+
+NS_ASSUME_NONNULL_END
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 

@@ -30,5 +30,5 @@
 
 NS_CLASS_AVAILABLE_MAC(10_4)
 @protocol DOMEventListener <NSObject>
-- (void)handleEvent:(DOMEvent *)evt;
+- (void)handleEvent:(DOMEvent *)event;
 @end

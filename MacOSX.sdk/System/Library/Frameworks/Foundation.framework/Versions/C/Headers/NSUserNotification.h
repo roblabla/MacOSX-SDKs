@@ -1,12 +1,14 @@
 /*	
      NSUserNotification.h
-     Copyright (c) 2011-2014, Apple Inc. All rights reserved.
+     Copyright (c) 2011-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSString, NSDictionary, NSArray, NSDateComponents, NSDate, NSTimeZone, NSImage, NSAttributedString, NSUserNotificationAction;
+@class NSString, NSDictionary<KeyType, ObjectType>, NSArray<ObjectType>, NSDateComponents, NSDate, NSTimeZone, NSImage, NSAttributedString, NSUserNotificationAction;
 @protocol NSUserNotificationCenterDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 // Used to describe the method in which the user activated the user notification. Alerts can be activated by either clicking on the body of the alert or the action button.
 typedef NS_ENUM(NSInteger, NSUserNotificationActivationType) {
@@ -29,31 +31,31 @@ NS_CLASS_AVAILABLE(10_8, NA)
 // These properties are used to configure the notification before it is scheduled.
 
 // The title of the notification. Must be localized as it will be presented to the user. String will be truncated to a length appropriate for display.
-@property (copy) NSString *title;
+@property (nullable, copy) NSString *title;
 
 // The subtitle displayed in the notification. Must be localized as it will be presented to the user. String will be truncated to a length appropriate for display.
-@property (copy) NSString *subtitle;
+@property (nullable, copy) NSString *subtitle;
 
 // The body of the notification. Must be localized as it will be presented to the user. String will be truncated to a length appropriate for display.
-@property (copy) NSString *informativeText;
+@property (nullable, copy) NSString *informativeText;
 
 // The title of the button displayed in the notification. Must be localized as it will be presented to the user. String will be truncated to a length appropriate for display.
 @property (copy) NSString *actionButtonTitle;
 
-// Application-specific user info that may be retrieved later. All items must be property list types or an exception will be thrown. The userInfo should be of reasonable serialized size (less than 1k) or an exception will be thrown.
-@property (copy) NSDictionary *userInfo;
+// Application-specific user info that may be retrieved later. All items must be property list types or an exception will be thrown. The userInfo should be of reasonable serialized size or an exception will be thrown.
+@property (nullable, copy) NSDictionary<NSString *, id> *userInfo;
 
 // Specifies when (in an absolute time) the notification should be delivered. After a notification is delivered, it may be presented to the user.
-@property (copy) NSDate *deliveryDate;
+@property (nullable, copy) NSDate *deliveryDate;
 
 // Set the time zone to interpret the delivery date in. If this value is nil and the user switches time zones, the notification center will adjust the time of presentation to account for the time zone change. If a notification should be delivered at a time in a specific time zone (regardless if the user switches time zones), set this value to that time zone. One common value may be the current time zone.
-@property (copy) NSTimeZone *deliveryTimeZone;
+@property (nullable, copy) NSTimeZone *deliveryTimeZone;
 
 // The date components that specify how a notification is to be repeated. This value may be nil if the notification should not repeat. The date component values are relative to the date the notification was delivered. If the calendar value of the deliveryRepeatInterval is nil, the current calendar will be used to calculate the repeat interval. For example, if a notification should repeat every hour, set the 'hour' property of the deliveryRepeatInterval to 1.
-@property (copy) NSDateComponents *deliveryRepeatInterval;
+@property (nullable, copy) NSDateComponents *deliveryRepeatInterval;
 
 // The date at which this notification was actually delivered. The notification center will set this value if a notification is put in the scheduled list and the delivery time arrives. If the notification is delivered directly using the 'deliverNotification:' method on NSUserNotificationCenter, this value will be set to the deliveryDate value (unless deliveryDate is nil, in which case this value is set to the current date). This value is used to sort the list of notifications in the user interface.
-@property (readonly, copy) NSDate *actualDeliveryDate;
+@property (nullable, readonly, copy) NSDate *actualDeliveryDate;
 
 // In some cases, e.g. when your application is frontmost, the notification center may decide not to actually present a delivered notification. In that case, the value of this property will be NO. It will be set to YES if the notification was presented according to user preferences (note: this can mean no dialog, animation, or sound, if the user has turned off notifications completely for your application). 
 @property (readonly, getter=isPresented) BOOL presented;
@@ -62,7 +64,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (readonly, getter=isRemote) BOOL remote;
 
 // The name of the sound file in the resources of the application bundle to play when the notification is delivered. NSUserNotificationDefaultSoundName can be used to play the default Notification Center sound. A value of 'nil' means no sound.
-@property (copy) NSString *soundName;
+@property (nullable, copy) NSString *soundName;
 
 // Set to NO if the notification has no action button. This will be the case for notifications that are purely for informational purposes and have no user action. The default value is YES.
 @property BOOL hasActionButton;
@@ -74,24 +76,24 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (copy) NSString *otherButtonTitle;
 
 // This identifier is used to uniquely identify a notification. A notification delivered with the same identifier as an existing notification will replace that notification, rather then display a new one.
-@property (copy) NSString *identifier NS_AVAILABLE(10_9, NA);
+@property (nullable, copy) NSString *identifier NS_AVAILABLE(10_9, NA);
 
 // NSImage shown in the content of the notification.
-@property (copy) NSImage *contentImage NS_AVAILABLE(10_9, NA);
+@property (nullable, copy) NSImage *contentImage NS_AVAILABLE(10_9, NA);
 
 // Set to YES if the notification has a reply button. The default value is NO. If both this and hasActionButton are YES, the reply button will be shown.
 @property BOOL hasReplyButton NS_AVAILABLE(10_9, NA);
 
 // Optional placeholder for inline reply field.
-@property (copy) NSString *responsePlaceholder NS_AVAILABLE(10_9, NA);
+@property (nullable, copy) NSString *responsePlaceholder NS_AVAILABLE(10_9, NA);
 
 // When a notification has been responded to, the NSUserNotificationCenter delegate didActivateNotification: will be called with the notification with the activationType set to NSUserNotificationActivationTypeReplied and the response set on the response property
-@property (readonly, copy) NSAttributedString *response NS_AVAILABLE(10_9, NA);
+@property (nullable, readonly, copy) NSAttributedString *response NS_AVAILABLE(10_9, NA);
 
 // An array of NSUserNotificationAction objects that describe the different actions that can be taken on a notification in addition to the default action described by actionButtonTitle
-@property (copy) NSArray *additionalActions NS_AVAILABLE(10_10, NA);
+@property (nullable, copy) NSArray<NSUserNotificationAction *> *additionalActions NS_AVAILABLE(10_10, NA);
 // When a user selects an additional action that action will be set on the notification's additionalActivationAction property when passed into the delegate callback didActivateNotification
-@property (readonly, copy) NSUserNotificationAction *additionalActivationAction NS_AVAILABLE(10_10, NA);
+@property (nullable, readonly, copy) NSUserNotificationAction *additionalActivationAction NS_AVAILABLE(10_10, NA);
 
 @end
 
@@ -99,12 +101,12 @@ NS_CLASS_AVAILABLE(10_8, NA)
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSUserNotificationAction : NSObject <NSCopying>
 
-+ (instancetype)actionWithIdentifier:(NSString *)identifier title:(NSString *)title;
++ (instancetype)actionWithIdentifier:(nullable NSString *)identifier title:(nullable NSString *)title;
 
-@property (readonly, copy) NSString *identifier;
+@property (nullable, readonly, copy) NSString *identifier;
 
 // The localized title of the action.
-@property (readonly, copy) NSString *title;
+@property (nullable, readonly, copy) NSString *title;
 
 @end
 
@@ -119,7 +121,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 // Get a singleton user notification center that posts notifications for this process.
 + (NSUserNotificationCenter *)defaultUserNotificationCenter;
 
-@property (assign) id <NSUserNotificationCenterDelegate> delegate;
+@property (nullable, assign) id <NSUserNotificationCenterDelegate> delegate;
 
 /* 
     Notifications that the NSUserNotificationCenter is tracking will be in one of two states: scheduled or delivered. 
@@ -130,7 +132,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 */
 
 // Get a list of notifications that are scheduled but have not yet been presented. Newly scheduled notifications are added to the end of the array. You may also bulk-schedule notifications by setting this array.
-@property (copy) NSArray *scheduledNotifications;
+@property (copy) NSArray<NSUserNotification *> *scheduledNotifications;
 
 // Add a notification to the center for scheduling.
 - (void)scheduleNotification:(NSUserNotification *)notification;
@@ -141,7 +143,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 
 // Get a list of notifications that have been delivered to the Notification Center. The number of notifications the user actually sees in the user interface may be less than the size of this array. Note that these may or may not have been actually presented to the user (see the presented property on the NSUserNotification).
-@property (readonly, copy) NSArray *deliveredNotifications;
+@property (readonly, copy) NSArray<NSUserNotification *> *deliveredNotifications;
 
 // Deliver a notification immediately, including animation or sound alerts. It will be presented to the user (subject to user preferences). The 'presented' property will always be set to YES if a notification is delivered using this method.
 - (void)deliverNotification:(NSUserNotification *)notification;
@@ -168,3 +170,5 @@ NS_CLASS_AVAILABLE(10_8, NA)
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification;
 
 @end
+
+NS_ASSUME_NONNULL_END

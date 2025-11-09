@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2014 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -15,6 +15,9 @@
 #import <CoreMedia/CMSampleBuffer.h>
 
 @class AVAssetWriterInput;
+@class AVMetadataItem;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @enum AVAssetWriterStatus
@@ -60,6 +63,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @private
 	AVAssetWriterInternal	*_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetWriterWithURL:fileType:error:
@@ -80,7 +84,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-+ (instancetype)assetWriterWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError **)outError;
++ (nullable instancetype)assetWriterWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * __nullable * __nullable)outError;
 
 /*!
  @method initWithURL:fileType:error:
@@ -101,7 +105,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-- (instancetype)initWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError **)outError;
+- (nullable instancetype)initWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * __nullable * __nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property outputURL
@@ -127,7 +131,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	Some media types may not be accepted within the file format with which an AVAssetWriter was initialized.
  */
-@property (nonatomic, readonly) NSArray *availableMediaTypes;
+@property (nonatomic, readonly) NSArray<NSString *> *availableMediaTypes;
 
 /*!
  @property status
@@ -147,7 +151,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSError that describes what caused the receiver to no longer be able to write to its output file. If the receiver's status is not AVAssetWriterStatusFailed, the value of this property is nil. This property is thread safe.
  */
-@property (readonly) NSError *error;
+@property (readonly, nullable) NSError *error;
 
 /*!
  @property metadata
@@ -159,7 +163,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	This property cannot be set after writing has started.
  */
-@property (nonatomic, copy) NSArray *metadata;
+@property (nonatomic, copy) NSArray<AVMetadataItem *> *metadata;
 
 /*!
  @property shouldOptimizeForNetworkUse
@@ -185,7 +189,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
  */
-@property (nonatomic, copy) NSURL *directoryForTemporaryFiles NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, copy, nullable) NSURL *directoryForTemporaryFiles NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property inputs
@@ -194,7 +198,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to the receiver using the addInput: method.
  */
-@property (nonatomic, readonly) NSArray *inputs;
+@property (nonatomic, readonly) NSArray<AVAssetWriterInput *> *inputs;
 
 /*!
  @method canApplyOutputSettings:forMediaType:
@@ -213,7 +217,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	Attempting to add an input with output settings and a media type for which this method returns NO will cause an exception to be thrown.
 */
-- (BOOL)canApplyOutputSettings:(NSDictionary *)outputSettings forMediaType:(NSString *)mediaType;
+- (BOOL)canApplyOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings forMediaType:(NSString *)mediaType;
 
 /*!
  @method canAddInput:
@@ -271,13 +275,13 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	The starting asset time for the sample-writing session, in the timeline of the source samples.
 
  @discussion
-	Sequences of sample data appended to the asset writer inputs are considered to fall within "sample-writing sessions", initiated with this method. Accordingly, this method must be called after writing has started using startWriting but before any sample data is appended to the receiver's inputs.
+	Sequences of sample data appended to the asset writer inputs are considered to fall within "sample-writing sessions", initiated with this method. Accordingly, this method must be called after writing has started (using -startWriting) but before any sample data is appended to the receiver's inputs.
 	
-	Each writing session has a start time which, where allowed by the file format being written, defines the mapping from the timeline of source samples onto the file's timeline. In the case of the QuickTime movie file format, the first session begins at movie time 0, so a sample appended with timestamp T will be played at movie time (T-startTime).  Samples with timestamps before startTime will still be added to the output media but will be edited out of the movie. If the earliest buffer for an input is later than startTime, an empty edit will be inserted to preserve synchronization between tracks of the output asset.
+	Each writing session has a start time which, where allowed by the file format being written, defines the mapping from the timeline of source samples to the timeline of the written file. In the case of the QuickTime movie file format, the first session begins at movie time 0, so a sample appended with timestamp T will be played at movie time (T-startTime).  Samples with timestamps earlier than startTime will still be added to the output file but will be edited out (i.e. not presented during playback). If the earliest appended sample for an input has a timestamp later than than startTime, an empty edit will be inserted to preserve synchronization between tracks of the output asset.
 	
-	It is an error to invoke startSessionAtSourceTime: twice in a row without invoking endSessionAtSourceTime: in between.
+	To end the session started by use of this method, use -endSessionAtSourceTime: or -finishWritingWithCompletionHandler:.  It is an error to invoke -startSessionAtSourceTime: twice in a row without invoking -endSessionAtSourceTime: in between.
  
-	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call startSessionAtSourceTime: a second time after calling endSessionAtSourceTime:.
+	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call -startSessionAtSourceTime: a second time after calling -endSessionAtSourceTime:.
  */
 - (void)startSessionAtSourceTime:(CMTime)startTime;
 
@@ -290,13 +294,15 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	The ending asset time for the sample-writing session, in the timeline of the source samples.
 
  @discussion
-	Call this method to complete a session started with startSessionAtSourceTime:.
+	Call this method to complete a session started with -startSessionAtSourceTime:.
  
-	The endTime defines the moment on the timeline of source samples at which the session ends. In the case of the QuickTime movie file format, each sample-writing session's startTime...endTime pair corresponds to a period of movie time into which the session's samples are inserted. Samples with later timestamps will be still be added to the media but will be edited out of the movie. So if the first session has duration D1 = endTime - startTime, it will be inserted into the movie at movie time 0 through D1; the second session would be inserted into the movie at movie time D1 through D1+D2, etc. It is legal to have a session with no samples; this will cause creation of an empty edit of the prescribed duration.
+	The endTime defines the moment on the timeline of source samples at which the session ends. In the case of the QuickTime movie file format, each sample-writing session's startTime...endTime pair corresponds to a period of movie time into which the session's samples are inserted. Samples with timestamps that are later than the session end time will still be added to the written file but will be edited out (i.e. not presented during playback). So if the first session has duration D1 = endTime - startTime, it will be inserted into the written file at time 0 through D1; the second session would be inserted into the written file at time D1 through D1+D2, etc. It is legal to have a session with no samples; this will cause creation of an empty edit of the prescribed duration.
 	
-	It is not mandatory to call endSessionAtSourceTime:; if finishWriting is called without endSessionAtSourceTime:, the session's effective end time will be the latest end timestamp of the session's samples (i.e., no samples will be edited out at the end).
+	It is not mandatory to call -endSessionAtSourceTime:; if -finishWritingWithCompletionHandler: is called without first invoking -endSessionAtSourceTime:, the session's effective end time will be the latest end timestamp of the session's appended samples (i.e. no samples will be edited out at the end).
+ 
+	It is an error to append samples outside of a sample-writing session.  To append more samples after invoking -endSessionAtSourceTime:, you must first start a new session using -startSessionAtSourceTime:.
 	
-	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call startSessionAtSourceTime: a second time after calling endSessionAtSourceTime:.
+	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call -startSessionAtSourceTime: a second time after calling -endSessionAtSourceTime:.
  */
 - (void)endSessionAtSourceTime:(CMTime)endTime;
 
@@ -367,6 +373,20 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @property (nonatomic) CMTime movieFragmentInterval;
 
 /*!
+ @property overallDurationHint
+ @abstract
+	For file types that support movie fragments, provides a hint of the final duration of the file to be written
+ 
+ @discussion
+	The value of this property must be a nonnegative, numeric CMTime.  Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file.  The default value is kCMTimeInvalid.
+ 
+	This property is currently ignored if movie fragments are not being written.  Use the movieFragmentInterval property to enable movie fragments.
+ 
+	This property cannot be set after writing has started.
+ */
+@property (nonatomic) CMTime overallDurationHint;
+
+/*!
  @property movieTimeScale
  @abstract
 	For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be used. 
@@ -423,7 +443,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSArray containing concrete instances of AVAssetWriterInputGroup.  Input groups can be added to the receiver using the addInputGroup: method.
  */
-@property (nonatomic, readonly) NSArray *inputGroups NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<AVAssetWriterInputGroup *> *inputGroups NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -446,6 +466,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @private
     AVAssetWriterInputGroupInternal	*_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*
  @method assetWriterInputGroupWithInputs:defaultInput:
@@ -459,7 +480,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  @result
 	An instance of AVAssetWriterInputGroup, for use with -[AVAssetWriter addInputGroup:].
  */
-+ (AVAssetWriterInputGroup *)assetWriterInputGroupWithInputs:(NSArray *)inputs defaultInput:(AVAssetWriterInput *)defaultInput;
++ (instancetype)assetWriterInputGroupWithInputs:(NSArray<AVAssetWriterInput *> *)inputs defaultInput:(nullable AVAssetWriterInput *)defaultInput;
 
 /*
  @method initWithInputs:defaultInput:
@@ -473,7 +494,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  @result
 	An instance of AVAssetWriterInputGroup, for use with -[AVAssetWriter addInputGroup:].
  */
-- (instancetype)initWithInputs:(NSArray *)inputs defaultInput:(AVAssetWriterInput *)defaultInput;
+- (instancetype)initWithInputs:(NSArray<AVAssetWriterInput *> *)inputs defaultInput:(nullable AVAssetWriterInput *)defaultInput NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property inputs
@@ -483,7 +504,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  @discussion
 	The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
  */
-@property (nonatomic, readonly) NSArray *inputs;
+@property (nonatomic, readonly) NSArray<AVAssetWriterInput *> *inputs;
 
 /*!
  @property defaultInput
@@ -493,6 +514,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  @discussion
 	The value of this property is a concrete instance of AVAssetWriterInput.
  */
-@property (nonatomic, readonly) AVAssetWriterInput *defaultInput;
+@property (nonatomic, readonly, nullable) AVAssetWriterInput *defaultInput;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -27,6 +27,11 @@
 #if KERNEL
 	#include <libkern/OSByteOrder.h>
 	#include <IOKit/IOMemoryDescriptor.h>
+
+#ifndef __IOUSBFAMILY__
+#warning "Deprecated header file.  See IOUSBHostFamily for USB-Host KPI."
+#endif
+
 #else
 	#include <libkern/OSByteOrder.h>
 #endif
@@ -59,16 +64,19 @@ extern "C" {
 #define HostToUSBLong OSSwapHostToLittleInt32
     /*! @/defineblock */
 
-	
+#ifndef USBBitRange
 #define USBBitRange(start, end)				\
 (								\
 ((((UInt32) 0xFFFFFFFF) << (31 - (end))) >>		\
 ((31 - (end)) + (start))) <<				\
 (start)							\
 )
+#endif
 	
+#ifndef USBBitRangePhase
 #define USBBitRangePhase(start, end)				\
 (start)
+#endif
 	
     /*!
     @enum Miscellaneous Constants
@@ -456,6 +464,9 @@ Completion Code         Error Returned              Description
 #define kIOUSBMessageUnsupportedConfiguration		iokit_usb_msg(0x1c)     // 0xe000401c  Message sent to the clients of the device when a device is not supported in the current configuration.  The message argument contains the locationID of the device
 #define kIOUSBMessageHubCountExceeded               iokit_usb_err(0x1d)     // 0xe000401d  Message sent when a 6th hub was plugged in and was not enumerated, as the USB spec only support 5 hubs in a chain
 #define kIOUSBMessageTDMLowBattery                  iokit_usb_err(0x1e)     // 0xe000401e  Message sent when when an attached TDM system battery is running low.
+#define kIOUSBMessageLegacySuspendDevice            iokit_usb_err(0x1f)     // 0xe000401f  Message sent to legacy interfaces when SuspedDevice() is called .
+#define kIOUSBMessageLegacyResetDevice              iokit_usb_err(0x20)     // 0xe0004020  Message sent to legacy interfaces when ResetDevice() is called .
+#define kIOUSBMessageLegacyReEnumerateDevice        iokit_usb_err(0x21)     // 0xe0004021  Message sent to legacy interfaces when ReEnumerateDevice() is called .
     
 /*! @/defineblock */
 

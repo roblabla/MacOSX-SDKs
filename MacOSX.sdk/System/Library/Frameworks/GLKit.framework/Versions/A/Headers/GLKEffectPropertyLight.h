@@ -47,6 +47,7 @@ typedef NS_ENUM(GLint, GLKLightingType)
  value, indicates a directional light while values less than 180.0 indicates a 
  spot light.
 */
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectPropertyLight : GLKEffectProperty 
 {
@@ -78,3 +79,4 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @property (nonatomic, retain) GLKEffectPropertyTransform *transform;                                       // All identity matrices
 
 @end
+NS_ASSUME_NONNULL_END

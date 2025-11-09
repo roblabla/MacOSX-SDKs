@@ -1,10 +1,12 @@
 /*	NSXMLDocument.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
 
-@class NSData, NSXMLDTD, NSXMLDocument, NSDictionary, NSArray;
+@class NSData, NSXMLDTD, NSXMLDocument, NSDictionary<KeyType, ObjectType>, NSArray<ObjectType>;
+
+NS_ASSUME_NONNULL_BEGIN
 
 // Input options
 //  NSXMLNodeOptionsNone
@@ -71,25 +73,25 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method initWithXMLString:options:error:
     @abstract Returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
 */
-- (instancetype)initWithXMLString:(NSString *)string options:(NSUInteger)mask error:(NSError **)error;
+- (nullable instancetype)initWithXMLString:(NSString *)string options:(NSUInteger)mask error:(NSError **)error;
 
 /*!
     @method initWithContentsOfURL:options:error:
     @abstract Returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
 */
-- (instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
 
 /*!
     @method initWithData:options:error:
     @abstract Returns a document created from data. Parse errors are returned in <tt>error</tt>.
 */
-- (instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
+- (nullable instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method initWithRootElement:
     @abstract Returns a document with a single child, the root element.
 */
-- (instancetype)initWithRootElement:(NSXMLElement *)element NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithRootElement:(nullable NSXMLElement *)element NS_DESIGNATED_INITIALIZER;
 
 #if 0
 #pragma mark --- Properties ---
@@ -101,13 +103,13 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method characterEncoding
     @abstract Sets the character encoding to an IANA type.
 */
-@property (copy) NSString *characterEncoding; //primitive
+@property (nullable, copy) NSString *characterEncoding; //primitive
 
 /*!
     @method version
     @abstract Sets the XML version. Should be 1.0 or 1.1.
 */
-@property (copy) NSString *version; //primitive
+@property (nullable, copy) NSString *version; //primitive
 
 /*!
     @method standalone
@@ -125,13 +127,13 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method MIMEType
     @abstract Set the MIME type, eg text/xml.
 */
-@property (copy) NSString *MIMEType; //primitive
+@property (nullable, copy) NSString *MIMEType; //primitive
 
 /*!
     @method DTD
     @abstract Set the associated DTD. This DTD will be output with the document.
 */
-@property (copy) NSXMLDTD *DTD; //primitive
+@property (nullable, copy) NSXMLDTD *DTD; //primitive
 
 /*!
     @method setRootElement:
@@ -143,7 +145,7 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method rootElement
     @abstract The root element.
 */
-- (NSXMLElement *)rootElement; //primitive
+- (nullable NSXMLElement *)rootElement; //primitive
 
 #if 0
 #pragma mark --- Children ---
@@ -159,7 +161,7 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method insertChildren:atIndex:
     @abstract Insert several children at a particular index.
 */
-- (void)insertChildren:(NSArray *)children atIndex:(NSUInteger)index;
+- (void)insertChildren:(NSArray<NSXMLNode *> *)children atIndex:(NSUInteger)index;
 
 /*!
     @method removeChildAtIndex:atIndex:
@@ -171,7 +173,7 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method setChildren:
     @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
 */
-- (void)setChildren:(NSArray *)children; //primitive
+- (void)setChildren:(nullable NSArray<NSXMLNode *> *)children; //primitive
 
 /*!
     @method addChild:
@@ -209,19 +211,19 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method objectByApplyingXSLT:arguments:error:
     @abstract Applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
 */
-- (id)objectByApplyingXSLT:(NSData *)xslt arguments:(NSDictionary *)arguments error:(NSError **)error;
+- (nullable id)objectByApplyingXSLT:(NSData *)xslt arguments:(nullable NSDictionary<NSString *, NSString *> *)arguments error:(NSError **)error;
 
 /*!
     @method objectByApplyingXSLTString:arguments:error:
     @abstract Applies XSLT as expressed by a string with arguments (NSString key/value pairs) to this document, returning a new document.
 */
-- (id)objectByApplyingXSLTString:(NSString *)xslt arguments:(NSDictionary *)arguments error:(NSError **)error;
+- (nullable id)objectByApplyingXSLTString:(NSString *)xslt arguments:(nullable NSDictionary<NSString *, NSString *> *)arguments error:(NSError **)error;
 
 /*!
     @method objectByApplyingXSLTAtURL:arguments:error:
     @abstract Applies the XSLT at a URL with arguments (NSString key/value pairs) to this document, returning a new document. Error may contain a connection error from the URL.
 */
-- (id)objectByApplyingXSLTAtURL:(NSURL *)xsltURL arguments:(NSDictionary *)argument error:(NSError **)error;
+- (nullable id)objectByApplyingXSLTAtURL:(NSURL *)xsltURL arguments:(nullable NSDictionary<NSString *, NSString *> *)argument error:(NSError **)error;
 
 #if 0
 #pragma mark --- Validation ---
@@ -230,3 +232,5 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
 - (BOOL)validateAndReturnError:(NSError **)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

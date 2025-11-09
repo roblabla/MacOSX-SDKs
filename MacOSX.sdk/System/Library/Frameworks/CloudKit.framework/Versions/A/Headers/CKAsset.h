@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKAsset : NSObject
 
@@ -19,3 +20,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly, copy) NSURL *fileURL;
 
 @end
+NS_ASSUME_NONNULL_END

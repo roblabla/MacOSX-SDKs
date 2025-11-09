@@ -1,15 +1,18 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2014, Apple Inc.
+        Copyright (c) 2000-2015, Apple Inc.
         All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSLayoutConstraint.h>
 
-@class NSArray, NSFont, NSTabViewItem;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSFont, NSTabViewItem;
 @protocol NSTabViewDelegate;
 
 #define NSAppKitVersionNumberWithDirectionalTabs 631.0
@@ -78,24 +81,24 @@ typedef NS_ENUM(NSUInteger, NSTabViewType) {
 
 	/* Select */
 
-- (void)selectTabViewItem:(NSTabViewItem *)tabViewItem;
+- (void)selectTabViewItem:(nullable NSTabViewItem *)tabViewItem;
 - (void)selectTabViewItemAtIndex:(NSInteger)index;				// May raise an NSRangeException
 - (void)selectTabViewItemWithIdentifier:(id)identifier;			// May raise an NSRangeException if identifier not found
-- (void)takeSelectedTabViewItemFromSender:(id)sender;			// May raise an NSRangeException
+- (void)takeSelectedTabViewItemFromSender:(nullable id)sender;			// May raise an NSRangeException
 
 	/* Navigation */
 
-- (void)selectFirstTabViewItem:(id)sender;
-- (void)selectLastTabViewItem:(id)sender;
-- (void)selectNextTabViewItem:(id)sender;
-- (void)selectPreviousTabViewItem:(id)sender;
+- (void)selectFirstTabViewItem:(nullable id)sender;
+- (void)selectLastTabViewItem:(nullable id)sender;
+- (void)selectNextTabViewItem:(nullable id)sender;
+- (void)selectPreviousTabViewItem:(nullable id)sender;
 
 	/* Getters */
 
-@property (readonly, strong) NSTabViewItem *selectedTabViewItem;					// return nil if none are selected
+@property (nullable, readonly, strong) NSTabViewItem *selectedTabViewItem;					// return nil if none are selected
 @property (strong) NSFont *font;							// returns font used for all tab labels.
 @property NSTabViewType tabViewType;
-@property (readonly, copy) NSArray *tabViewItems;
+@property (readonly, copy) NSArray<__kindof NSTabViewItem *> *tabViewItems;
 @property BOOL allowsTruncatedLabels;
 @property (readonly) NSSize minimumSize;							// returns the minimum size of the tab view
 @property BOOL drawsBackground;  						// only relevant for borderless tab view type
@@ -110,11 +113,11 @@ typedef NS_ENUM(NSUInteger, NSTabViewType) {
 
 	/* Delegate */
 
-@property (assign) id<NSTabViewDelegate> delegate;
+@property (nullable, assign) id<NSTabViewDelegate> delegate;
 
 	/* Hit testing */
 
-- (NSTabViewItem *)tabViewItemAtPoint:(NSPoint)point;			// point in local coordinates. returns nil if none.
+- (nullable NSTabViewItem *)tabViewItemAtPoint:(NSPoint)point;			// point in local coordinates. returns nil if none.
 
 	/* Geometry */
 
@@ -135,8 +138,10 @@ typedef NS_ENUM(NSUInteger, NSTabViewType) {
 
 @protocol NSTabViewDelegate <NSObject>
 @optional
-- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem;
-- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem;
-- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
+- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem;
+- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem;
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem;
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView;
 @end
+
+NS_ASSUME_NONNULL_END

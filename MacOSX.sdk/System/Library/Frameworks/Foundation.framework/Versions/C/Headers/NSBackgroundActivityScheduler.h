@@ -1,10 +1,12 @@
 /*	NSBackgroundActivityScheduler.h
-	Copyright (c) 2013-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2013-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSDate.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* These values are arguments to the completion handler block for the scheduler. */
 typedef NS_ENUM(NSInteger, NSBackgroundActivityResult) {
@@ -82,7 +84,8 @@ NS_CLASS_AVAILABLE(10_10, NA)
  
    If the result of this method is YES, then you should wrap up current state. Once you are done saving your state, invoke the completionHandler block (the argument to your scheduled block) with the NSBackgroundActivityResultDeferred constant. The system will invoke your activity block again at a later, more appropriate time. At that point you can read your state and continue the work.
  */
-- (BOOL)shouldDefer;
+@property (readonly) BOOL shouldDefer;
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -2,12 +2,11 @@
 	File:		AVAudioIONode.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioNode.h>
 #import <AVFoundation/AVAudioMixing.h>
-#import <Foundation/NSDate.h>	// for NSTimeInterval
 #import <AudioUnit/AudioUnit.h>
 
 /*!	@class AVAudioIONode
@@ -34,7 +33,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		This is only necessary for certain advanced usages.
 */
-@property (nonatomic, readonly) AudioUnit audioUnit;
+@property (nonatomic, readonly, nullable) AudioUnit audioUnit;
 @end
 
 
@@ -45,6 +44,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		rate and channel count. The format of the output scope is initially the same as that of the
 		input, but you may set it to a different format, in which case the node will convert.
 */
+
+
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface AVAudioInputNode : AVAudioIONode <AVAudioMixing>
 @end

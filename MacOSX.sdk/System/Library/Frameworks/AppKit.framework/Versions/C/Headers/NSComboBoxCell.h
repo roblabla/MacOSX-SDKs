@@ -1,13 +1,16 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2014, Apple Inc.
+	Copyright (c) 1996-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSTextFieldCell.h>
 
-@class NSButtonCell, NSTableView, NSMutableArray;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSButtonCell, NSTableView;
 @protocol NSComboBoxCellDataSource;
 
 @interface NSComboBoxCell : NSTextFieldCell   {
@@ -55,10 +58,10 @@
 @property (readonly) NSInteger numberOfItems;
 
 @property BOOL completes;
-- (NSString *)completedString:(NSString *)string;
+- (nullable NSString *)completedString:(NSString *)string;
 
 /* These two methods can only be used when usesDataSource is YES */
-@property (assign) id<NSComboBoxCellDataSource> dataSource;
+@property (nullable, assign) id<NSComboBoxCellDataSource> dataSource;
 
 /* These methods can only be used when usesDataSource is NO */
 - (void)addItemWithObjectValue:(id)object;
@@ -67,9 +70,9 @@
 - (void)removeItemWithObjectValue:(id)object;
 - (void)removeItemAtIndex:(NSInteger)index;
 - (void)removeAllItems;
-- (void)selectItemWithObjectValue:(id)object;
+- (void)selectItemWithObjectValue:(nullable id)object;
 - (id)itemObjectValueAtIndex:(NSInteger)index;
-@property (readonly, strong) id objectValueOfSelectedItem;
+@property (nullable, readonly, strong) id objectValueOfSelectedItem;
 - (NSInteger)indexOfItemWithObjectValue:(id)object;
 @property (readonly, copy) NSArray *objectValues;
 
@@ -82,5 +85,7 @@
 - (id)comboBoxCell:(NSComboBoxCell *)aComboBoxCell objectValueForItemAtIndex:(NSInteger)index;
 
 - (NSUInteger)comboBoxCell:(NSComboBoxCell *)aComboBoxCell indexOfItemWithStringValue:(NSString *)string;
-- (NSString *)comboBoxCell:(NSComboBoxCell *)aComboBoxCell completedString:(NSString *)uncompletedString; 
+- (nullable NSString *)comboBoxCell:(NSComboBoxCell *)aComboBoxCell completedString:(NSString *)uncompletedString; 
 @end
+
+NS_ASSUME_NONNULL_END

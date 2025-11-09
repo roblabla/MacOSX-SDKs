@@ -4,8 +4,8 @@ platform:        macosx
 install-name:    /usr/lib/libCoreStorage.dylib
 exports:         
   - archs:           [ i386, x86_64 ]
-    symbols:         [ _CoreStorageAddPhysicalVolume, _CoreStorageAddVolumeForConversion, 
-                       _CoreStorageCalcMinResizeDeltaForPhysicalVolume, 
+    symbols:         [ _CoreStorageAddPhysicalVolume, _CoreStorageAddVolumeExtentsForConversion, 
+                       _CoreStorageAddVolumeForConversion, _CoreStorageCalcMinResizeDeltaForPhysicalVolume, 
                        _CoreStorageCanRevertVolume, _CoreStorageClearIOErrorForVolume, 
                        _CoreStorageCommitVolumeFamily, _CoreStorageCopyFamilyProperties, 
                        _CoreStorageCopyFamilyPropertiesForMount, _CoreStorageCopyFamilyUUIDForMount, 

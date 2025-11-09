@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -9,11 +9,13 @@
 #import <Foundation/NSDate.h>
 
 @class NSData;
-@class NSDictionary;
+@class NSDictionary<KeyType, ObjectType>;
 @class NSInputStream;
 @class NSString;
 @class NSURL;
 @class NSURLRequestInternal;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @header NSURLRequest.h
@@ -232,14 +234,14 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     timeout intervals.
     @result An initialized NSURLRequest. 
 */
-- (instancetype)initWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval;
+- (instancetype)initWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval NS_DESIGNATED_INITIALIZER;
 
 /*! 
     @method URL
     @abstract Returns the URL of the receiver. 
     @result The URL of the receiver. 
 */
-@property (readonly, copy) NSURL *URL;
+@property (nullable, readonly, copy) NSURL *URL;
 
 /*! 
     @method cachePolicy
@@ -276,7 +278,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     in the future. 
     @result The main document URL.
 */
-@property (readonly, copy) NSURL *mainDocumentURL;
+@property (nullable, readonly, copy) NSURL *mainDocumentURL;
 
 /*!
  @method networkServiceType
@@ -336,7 +338,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     @abstract Sets the URL of the receiver. 
     @param URL The new URL for the receiver. 
 */
-@property (copy) NSURL *URL;
+@property (nullable, copy) NSURL *URL;
 
 /*! 
     @method setCachePolicy:
@@ -376,7 +378,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     framework. A fully functional version of this method will be available 
     in the future. 
 */
-@property (copy) NSURL *mainDocumentURL;
+@property (nullable, copy) NSURL *mainDocumentURL;
 
 /*!
  @method setNetworkServiceType:
@@ -412,7 +414,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     @abstract Returns the HTTP request method of the receiver. 
     @result the HTTP request method of the receiver. 
 */
-@property (readonly, copy) NSString *HTTPMethod;
+@property (nullable, readonly, copy) NSString *HTTPMethod;
 
 /*! 
     @method allHTTPHeaderFields
@@ -421,7 +423,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     @result a dictionary containing all the HTTP header fields of the
     receiver.
 */
-@property (readonly, copy) NSDictionary *allHTTPHeaderFields;
+@property (nullable, readonly, copy) NSDictionary<NSString *, NSString *> *allHTTPHeaderFields;
 
 /*! 
     @method valueForHTTPHeaderField:
@@ -433,7 +435,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     @result the value associated with the given header field, or nil if
     there is no value associated with the given header field.
 */
-- (NSString *)valueForHTTPHeaderField:(NSString *)field;
+- (nullable NSString *)valueForHTTPHeaderField:(NSString *)field;
 
 /*! 
     @method HTTPBody
@@ -442,7 +444,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     in done in an HTTP POST request.
     @result The request body data of the receiver. 
 */
-@property (readonly, copy) NSData *HTTPBody;
+@property (nullable, readonly, copy) NSData *HTTPBody;
 
 /*!
     @method HTTPBodyStream
@@ -456,7 +458,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     NSCoding protocol
     @result The request body stream of the receiver.
 */
-@property (readonly, retain) NSInputStream *HTTPBodyStream;
+@property (nullable, readonly, retain) NSInputStream *HTTPBodyStream;
 
 /*! 
     @method HTTPShouldHandleCookies
@@ -509,7 +511,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     message, the key-value pair is skipped.
     @param headerFields a dictionary containing HTTP header fields.
 */
-@property (copy) NSDictionary *allHTTPHeaderFields;
+@property (nullable, copy) NSDictionary<NSString *, NSString *> *allHTTPHeaderFields;
 
 /*! 
     @method setValue:forHTTPHeaderField:
@@ -521,7 +523,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     @param value the header field value. 
     @param field the header field name (case-insensitive). 
 */
-- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+- (void)setValue:(nullable NSString *)value forHTTPHeaderField:(NSString *)field;
 
 /*! 
     @method addValue:forHTTPHeaderField:
@@ -546,7 +548,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     in done in an HTTP POST request.
     @param data the new request body data for the receiver.
 */
-@property (copy) NSData *HTTPBody;
+@property (nullable, copy) NSData *HTTPBody;
 
 /*!
     @method HTTPBodyStream:
@@ -558,7 +560,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     - setting one will clear the other. 
     @param inputStream the new input stream for use by the receiver
 */
-@property (retain) NSInputStream *HTTPBodyStream;
+@property (nullable, retain) NSInputStream *HTTPBodyStream;
 
 /*!
     @method HTTPShouldHandleCookies
@@ -594,3 +596,4 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 
 @end
 
+NS_ASSUME_NONNULL_END

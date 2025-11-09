@@ -5,29 +5,40 @@
 #ifndef CGEVENT_H_
 #define CGEVENT_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <CoreGraphics/CGEventTypes.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* Return the type identifier for the opaque type `CGEventRef'. */
 
 CG_EXTERN CFTypeID CGEventGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a new event using the event source `source'. If `source' is NULL,
    the default source is used. */
 
-CG_EXTERN CGEventRef CGEventCreate(CGEventSourceRef source)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventRef __nullable CGEventCreate(CGEventSourceRef __nullable source)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a "flattened" data representation of an event. */
 
-CG_EXTERN CFDataRef CGEventCreateData(CFAllocatorRef allocator,
-  CGEventRef event)  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CFDataRef __nullable CGEventCreateData(
+    CFAllocatorRef __nullable allocator,
+    CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return an event created from a "flattened" data representation of the
    event. */
 
-CG_EXTERN CGEventRef CGEventCreateFromData(CFAllocatorRef allocator,
-  CFDataRef data) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventRef __nullable CGEventCreateFromData(
+    CFAllocatorRef __nullable allocator, CFDataRef __nullable data)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a new mouse event.
 
@@ -43,9 +54,11 @@ CG_EXTERN CGEventRef CGEventCreateFromData(CFAllocatorRef allocator,
    Mouse button 1 is the secondary mouse button (right). Mouse button 2 is
    the center button, and the remaining buttons are in USB device order. */
 
-CG_EXTERN CGEventRef CGEventCreateMouseEvent(CGEventSourceRef source,
-  CGEventType mouseType, CGPoint mouseCursorPosition,
-  CGMouseButton mouseButton) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventRef __nullable CGEventCreateMouseEvent(
+    CGEventSourceRef __nullable source,
+    CGEventType mouseType, CGPoint mouseCursorPosition,
+    CGMouseButton mouseButton)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a new keyboard event.
 
@@ -63,9 +76,10 @@ CG_EXTERN CGEventRef CGEventCreateMouseEvent(CGEventSourceRef source,
      CGEventCreateKeyboardEvent(source, (CGKeyCode) 6, false); // 'z' up
      CGEventCreateKeyboardEvent(source, (CGKeyCode)56, false); // 'shift up */
 
-CG_EXTERN CGEventRef CGEventCreateKeyboardEvent(CGEventSourceRef source,
-  CGKeyCode virtualKey, bool keyDown)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventRef __nullable CGEventCreateKeyboardEvent(
+    CGEventSourceRef __nullable source,
+    CGKeyCode virtualKey, bool keyDown)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
                                                  
 /* Return a new scrollwheel event.
 
@@ -83,14 +97,15 @@ CG_EXTERN CGEventRef CGEventCreateKeyboardEvent(CGEventSourceRef source,
    The scale can be altered by setting a custom value for the event source,
    using `CGEventSourceSetPixelsPerLine'. */
  
-CG_EXTERN CGEventRef CGEventCreateScrollWheelEvent(CGEventSourceRef source,
-  CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1, ...)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN CGEventRef __nullable CGEventCreateScrollWheelEvent(
+    CGEventSourceRef __nullable source,
+    CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1, ...)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Return a copy of `event'. */
 
-CG_EXTERN CGEventRef CGEventCreateCopy(CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventRef __nullable CGEventCreateCopy(CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return an event source created from an existing event.
 
@@ -101,59 +116,64 @@ CG_EXTERN CGEventRef CGEventCreateCopy(CGEventRef event)
    was generated with a private CGEventSourceStateID owned by another
    process.  Such events should be filtered based on the public state. */
 
-CG_EXTERN CGEventSourceRef CGEventCreateSourceFromEvent(CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventSourceRef __nullable CGEventCreateSourceFromEvent(
+    CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the event source of an event. */
 
-CG_EXTERN void CGEventSetSource(CGEventRef event, CGEventSourceRef source)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSetSource(CGEventRef __nullable event,
+    CGEventSourceRef __nullable source)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the event type of an event (left mouse down, for example). */
 
-CG_EXTERN CGEventType CGEventGetType(CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventType CGEventGetType(CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the event type of an event. */
 
-CG_EXTERN void CGEventSetType(CGEventRef event, CGEventType type)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSetType(CGEventRef __nullable event, CGEventType type)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the timestamp of an event. */
 
-CG_EXTERN CGEventTimestamp CGEventGetTimestamp(CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventTimestamp CGEventGetTimestamp(CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the timestamp of an event. */
 
-CG_EXTERN void CGEventSetTimestamp(CGEventRef event,
-  CGEventTimestamp timestamp) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSetTimestamp(CGEventRef __nullable event,
+    CGEventTimestamp timestamp)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* Return the location of an event in global display coordinates. */
+/* Return the location of an event in global display coordinates.
+   CGPointZero is returned if event is not a valid CGEventRef. */
 
-CG_EXTERN CGPoint CGEventGetLocation(CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGPoint CGEventGetLocation(CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the location of an event relative to the lower-left corner of the
-   main display. */
+   main display. CGPointZero is returned if event is not a valid CGEventRef. */
 
-CG_EXTERN CGPoint CGEventGetUnflippedLocation(CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN CGPoint CGEventGetUnflippedLocation(CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Set the location of an event in global display coordinates. */
 
-CG_EXTERN void CGEventSetLocation(CGEventRef event, CGPoint location)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSetLocation(CGEventRef __nullable event, CGPoint location)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* Return the event flags of an event. */
+/* Return the event flags of an event. (CGEventFlags)0 if event is not a valid 
+   CGEventRef. */
 
-CG_EXTERN CGEventFlags CGEventGetFlags(CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventFlags CGEventGetFlags(CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the event flags of an event. */
 
-CG_EXTERN void CGEventSetFlags(CGEventRef event, CGEventFlags flags)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSetFlags(CGEventRef __nullable event, CGEventFlags flags)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the Unicode string associated with a keyboard event.
 
@@ -161,9 +181,10 @@ CG_EXTERN void CGEventSetFlags(CGEventRef event, CGEventFlags flags)
    of 0, the function still returns the actual count of Unicode characters
    in the event. */
 
-CG_EXTERN void CGEventKeyboardGetUnicodeString(CGEventRef event,
-  UniCharCount maxStringLength, UniCharCount *actualStringLength,
-  UniChar unicodeString[]) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventKeyboardGetUnicodeString(CGEventRef __nullable event,
+    UniCharCount maxStringLength, UniCharCount *__nullable actualStringLength,
+    UniChar * __nullable unicodeString)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the Unicode string associated with a keyboard event.
 
@@ -174,14 +195,15 @@ CG_EXTERN void CGEventKeyboardGetUnicodeString(CGEventRef event,
    and do their own translation based on the virtual keycode and perceived
    event state. */
 
-CG_EXTERN void CGEventKeyboardSetUnicodeString(CGEventRef event,
-  UniCharCount stringLength, const UniChar unicodeString[])
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventKeyboardSetUnicodeString(CGEventRef __nullable event,
+    UniCharCount stringLength, const UniChar * __nullable unicodeString)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the integer value of a field in an event. */
 
-CG_EXTERN int64_t CGEventGetIntegerValueField(CGEventRef event,
-  CGEventField field) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN int64_t CGEventGetIntegerValueField(CGEventRef __nullable event,
+    CGEventField field)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the integer value of a field in an event.
 
@@ -194,9 +216,9 @@ CG_EXTERN int64_t CGEventGetIntegerValueField(CGEventRef event,
    `kCGEventMouseSubtypeTabletPoint' or `kCGEventMouseSubtypeTabletProximity'
    before setting other parameters. */
 
-CG_EXTERN void CGEventSetIntegerValueField(CGEventRef event,
-  CGEventField field, int64_t value)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSetIntegerValueField(CGEventRef __nullable event,
+    CGEventField field, int64_t value)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the floating-point value of a field in an event.
 
@@ -204,8 +226,9 @@ CG_EXTERN void CGEventSetIntegerValueField(CGEventRef event,
    point number or an integer, the result is scaled to the appropriate range
    as part of creating the floating-point representation. */
 
-CG_EXTERN double CGEventGetDoubleValueField(CGEventRef event,
-  CGEventField field) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN double CGEventGetDoubleValueField(CGEventRef __nullable event,
+    CGEventField field)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the floating-point value of a field in an event.
 
@@ -217,9 +240,9 @@ CG_EXTERN double CGEventGetDoubleValueField(CGEventRef event,
    fixed point number or integer, the value parameter is scaled as needed
    and converted to the appropriate type. */
 
-CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event,
-  CGEventField field, double value)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSetDoubleValueField(CGEventRef __nullable event,
+    CGEventField field, double value)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Event taps.
 
@@ -263,10 +286,11 @@ CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event,
 
 /* Create an event tap. */
 
-CG_EXTERN CFMachPortRef CGEventTapCreate(CGEventTapLocation tap,
-  CGEventTapPlacement place, CGEventTapOptions options,
-  CGEventMask eventsOfInterest, CGEventTapCallBack callback,
-  void *userInfo) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CFMachPortRef __nullable CGEventTapCreate(CGEventTapLocation tap,
+    CGEventTapPlacement place, CGEventTapOptions options,
+    CGEventMask eventsOfInterest, CGEventTapCallBack __nullable callback,
+    void * __nullable userInfo)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Create an event tap for a specified process.
 
@@ -274,7 +298,14 @@ CG_EXTERN CFMachPortRef CGEventTapCreate(CGEventTapLocation tap,
    function. `CGEventTapCreateForPSN' will report all events routed to the
    specified application. */
 
-CG_EXTERN CFMachPortRef CGEventTapCreateForPSN(void *processSerialNumber,
+CG_EXTERN CFMachPortRef __nullable CGEventTapCreateForPSN(
+    void *  processSerialNumber,
+    CGEventTapPlacement place, CGEventTapOptions options,
+    CGEventMask eventsOfInterest, CGEventTapCallBack __nullable callback,
+    void *__nullable userInfo)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+CG_EXTERN CFMachPortRef __nullable CGEventTapCreateForPid(pid_t pid,
   CGEventTapPlacement place, CGEventTapOptions options,
   CGEventMask eventsOfInterest, CGEventTapCallBack callback,
   void *userInfo) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
@@ -286,13 +317,13 @@ CG_EXTERN CFMachPortRef CGEventTapCreateForPSN(void *processSerialNumber,
    event is passed to the registered CGEventTapCallBack function. An event
    tap may be re-enabled by calling this function. */
 
-CG_EXTERN void CGEventTapEnable(CFMachPortRef tap, bool enable)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventTapEnable(CFMachPortRef  tap, bool enable)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return true if `tap' is enabled; false otherwise. */
 
-CG_EXTERN bool CGEventTapIsEnabled(CFMachPortRef tap)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN bool CGEventTapIsEnabled(CFMachPortRef  tap)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Post an event from an event tap into the event stream.
 
@@ -302,8 +333,9 @@ CG_EXTERN bool CGEventTapIsEnabled(CFMachPortRef tap)
    enters the system. Events posted into the system will be seen by all taps
    placed after the tap posting the event. */
 
-CG_EXTERN void CGEventTapPostEvent(CGEventTapProxy proxy, CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventTapPostEvent(CGEventTapProxy __nullable proxy,
+    CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Post an event into the event stream at a specified location.
 
@@ -311,8 +343,8 @@ CG_EXTERN void CGEventTapPostEvent(CGEventTapProxy proxy, CGEventRef event)
    instantiated for that location, and the event passes through any such
    taps. */
 
-CG_EXTERN void CGEventPost(CGEventTapLocation tap, CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventPost(CGEventTapLocation tap, CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Post an event into the event stream for a specific application.
 
@@ -325,8 +357,13 @@ CG_EXTERN void CGEventPost(CGEventTapLocation tap, CGEventRef event)
    instantiated for the specified process, and the event passes through any
    such taps. */
 
-CG_EXTERN void CGEventPostToPSN(void *processSerialNumber, CGEventRef event)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventPostToPSN(void * __nullable processSerialNumber,
+    CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+CG_EXTERN void CGEventPostToPid( pid_t pid,
+    CGEventRef __nullable event)
+    CG_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
 
 /* Gets a list of currently installed event taps.
 
@@ -346,7 +383,12 @@ CG_EXTERN void CGEventPostToPSN(void *processSerialNumber, CGEventRef event)
    latency over time and under various operating conditions. */
 
 CG_EXTERN CGError CGGetEventTapList(uint32_t maxNumberOfTaps,
-  CGEventTapInformation tapList[], uint32_t *eventTapCount)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGEventTapInformation * __nullable tapList,
+    uint32_t * __nullable eventTapCount)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGEVENT_H_ */

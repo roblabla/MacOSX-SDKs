@@ -1,5 +1,5 @@
 /*	CFStringTokenizer.h
-	Copyright (c) 2006-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2015, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -58,12 +58,12 @@ CFStringRef CFStringTokenizerCopyBestStringLanguage(CFStringRef string, CFRange 
 ===================================================================
 */
 
-typedef struct __CFStringTokenizer * CFStringTokenizerRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFStringTokenizer * CFStringTokenizerRef;
 
 /*!
 	Tokenization options
 */
-enum {
+CF_ENUM(CFOptionFlags) {
     /*!
       Tokenization Unit
       Use one of tokenization unit options with CFStringTokenizerCreate to

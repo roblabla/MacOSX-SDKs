@@ -1,5 +1,5 @@
 /*	NSXMLNodeOptions.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -39,7 +39,7 @@
     @constant NSXMLDocumentIncludeContentTypeDeclaration Include a content type declaration for HTML or XHTML
 */
 
-enum {
+NS_ENUM(NSUInteger) {
     NSXMLNodeOptionsNone = 0,
     
     // Init

@@ -79,7 +79,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__kextd_ping_t;
+	} __Request__kextd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -105,7 +105,7 @@ union __RequestUnion__kextd_kernel_request_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__kextd_ping_t;
+	} __Reply__kextd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

@@ -13,6 +13,8 @@
 
 @class CKRecordID, CKRecordZoneID;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /* Use this constant for the recordType parameter when fetching User Records. */
 CK_EXTERN NSString * const CKRecordTypeUserRecord NS_AVAILABLE(10_10, 8_0);
 
@@ -35,15 +37,15 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /* Change tags are updated by the server to a unique value every time a record is modified.
    A different change tag necessarily means that the contents of the record are different. */
-@property (nonatomic, readonly, copy) NSString *recordChangeTag;
+@property (nonatomic, readonly, copy, nullable) NSString *recordChangeTag;
 
 /* This is a User Record recordID, identifying the user that created this record. */
-@property (nonatomic, readonly, copy) CKRecordID *creatorUserRecordID;
-@property (nonatomic, readonly, copy) NSDate *creationDate;
+@property (nonatomic, readonly, copy, nullable) CKRecordID *creatorUserRecordID;
+@property (nonatomic, readonly, copy, nullable) NSDate *creationDate;
 
 /* This is a User Record recordID, identifying the user that last modified this record. */
-@property (nonatomic, readonly, copy) CKRecordID *lastModifiedUserRecordID;
-@property (nonatomic, readonly, copy) NSDate *modificationDate;
+@property (nonatomic, readonly, copy, nullable) CKRecordID *lastModifiedUserRecordID;
+@property (nonatomic, readonly, copy, nullable) NSDate *modificationDate;
 
 /* 
     In addition to objectForKey: and setObject:forKey:, dictionary-style subscripting (record[key] and record[key] = value) can be used to get and set values.
@@ -65,19 +67,19 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
      letters and numbers and the underscore character.
     The maximum key length is 255 characters.
 */
-- (id)objectForKey:(NSString *)key;
-- (void)setObject:(id <CKRecordValue>)object forKey:(NSString *)key;
-- (NSArray /* NSString */ *)allKeys;
+- (nullable __kindof id <CKRecordValue>)objectForKey:(NSString *)key;
+- (void)setObject:(nullable __kindof id <CKRecordValue>)object forKey:(NSString *)key;
+- (NSArray <NSString *> *)allKeys;
 
 /* A special property that returns an array of token generated from all the string field values in the record.
    These tokens have been normalized for the current locale, so they are suitable for performing full-text searches. */
-- (NSArray /* NSString */ *)allTokens;
+- (NSArray <NSString *> *)allTokens;
 
-- (id)objectForKeyedSubscript:(NSString *)key;
-- (void)setObject:(id <CKRecordValue>)object forKeyedSubscript:(NSString *)key;
+- (nullable __kindof id <CKRecordValue>)objectForKeyedSubscript:(NSString *)key;
+- (void)setObject:(nullable __kindof id <CKRecordValue>)object forKeyedSubscript:(NSString *)key;
 
 /* A list of keys that have been modified on the local CKRecord instance */
-- (NSArray /* NSString */ *)changedKeys;
+- (NSArray <NSString *> *)changedKeys;
 
 /* CKRecord supports NSSecureCoding.  When you invoke
  -encodeWithCoder: on a CKRecord, it encodes all its values.  Including the record values you've set.
@@ -116,3 +118,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @interface CLLocation (CKRecordValue) <CKRecordValue>
 @end
+
+NS_ASSUME_NONNULL_END

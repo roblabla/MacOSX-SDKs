@@ -1,6 +1,6 @@
 /*
-vForce.h (from vecLib-516.0)
-Copyright 1999-2015 Apple Inc.  All rights reserved.
+vForce.h (from vecLib-563.3)
+Copyright (c) 1999-2015 by Apple Inc. All rights reserved.
 
 @APPLE_LICENSE_HEADER_START@
 
@@ -33,8 +33,25 @@ extern "C" {
 #endif
 
 #include <Availability.h>
+
+
+#if !defined __has_feature
+    #define __has_feature(f)    0
+#endif
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull begin")
+#else
+    #define __nullable
+    #define __nonnull
+#endif
+
+
 /* Set y[i] to the exponential function of x[i], for i=0,..,n-1 */
 void vvexpf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull end")
+#endif
+	
 #ifdef __cplusplus
 }
 #endif

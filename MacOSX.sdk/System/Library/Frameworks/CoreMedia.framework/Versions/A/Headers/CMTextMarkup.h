@@ -3,7 +3,7 @@
 
     Framework:  CoreMedia
  
-    Copyright 2012-2013 Apple Inc. All rights reserved.
+    Copyright 2012-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -29,6 +29,8 @@ extern "C" {
 #endif
     
 #pragma pack(push, 4)
+
+CM_ASSUME_NONNULL_BEGIN
 
 #pragma mark CMTextMarkup Attributes
 
@@ -406,6 +408,8 @@ CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Raised     __OSX_AV
 CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Depressed  __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Uniform    __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_DropShadow __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+CM_ASSUME_NONNULL_END
 
 #pragma pack(pop)
 

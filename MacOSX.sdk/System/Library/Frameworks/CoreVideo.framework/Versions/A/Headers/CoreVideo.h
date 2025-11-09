@@ -2,13 +2,13 @@
  *  CoreVideo.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
 /*!
     @header CoreVideo
 	@copyright 2004-2014 Apple Inc. All rights reserved.
-	@availability Mac OS X 10.4 or later
+	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @abstract   Umbrella header for the CoreVideo framework
     @discussion This header includes all necesssary headers for the CoreVideo API
 */
@@ -48,3 +48,7 @@
 #include <CoreVideo/CVDirect3DTextureCache.h>
 #endif
 
+#if COREVIDEO_SUPPORTS_METAL
+#include <CoreVideo/CVMetalTexture.h>
+#include <CoreVideo/CVMetalTextureCache.h>
+#endif

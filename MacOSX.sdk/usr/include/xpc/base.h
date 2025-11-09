@@ -15,11 +15,18 @@ __BEGIN_DECLS
 #define __has_attribute(x) 0
 #endif // !defined(__has_attribute)
 
+#if !defined(__has_feature)
+#define __has_feature(x) 0
+#endif // !defined(__has_feature)
+
+#if !defined(__has_extension)
+#define __has_extension(x) 0
+#endif // !defined(__has_extension)
+
 #if __has_include(<xpc/availability.h>)
 #include <xpc/availability.h>
 #else // __has_include(<xpc/availability.h>)
 #include <Availability.h>
-#define __XPC_IOS_SIMULATOR_AVAILABLE_STARTING(version)
 #endif // __has_include(<xpc/availability.h>)
 
 #if XPC_SERVICE_MAIN_IN_LIBXPC

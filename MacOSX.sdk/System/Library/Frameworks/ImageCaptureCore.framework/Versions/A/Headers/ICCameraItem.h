@@ -30,6 +30,7 @@
   @class ICCameraItem
   @abstract ICCameraItem is an abstract class that represents an item in an ICCameraDevice object. ICCameraDevice object creates instances of two concrete subclasses of ICCameraItem: ICCameraFolder and ICCameraFile.
 */
+CF_ASSUME_NONNULL_BEGIN
 
 @interface ICCameraItem : NSObject
 {
@@ -112,28 +113,28 @@
     @abstract ￼Thumbnail for the item if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveThumbnailForItem:", if this method is implemented on by the delegate.
 
 */
-@property(readonly)                                             CGImageRef      thumbnailIfAvailable;
+@property(nullable,readonly)                                             CGImageRef      thumbnailIfAvailable;
 
 /*!
  @property largeThumbnailIfAvailable
  @abstract Large thumbnail for the item if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveThumbnailForItem:", if this method is implemented on by the delegate.
  
  */
-@property(readonly)                                             CGImageRef      largeThumbnailIfAvailable;
+@property(nullable,readonly)                                             CGImageRef      largeThumbnailIfAvailable;
 
 /*!
     @property metadataIfAvailable
     @abstract ￼Metadata for the file if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveMetadataForItem:", if this method is implemented on by the delegate.
 
 */
-@property(readonly)                                             NSDictionary*   metadataIfAvailable;
+@property(nullable,readonly)                                             NSDictionary<NSString*,id>*   metadataIfAvailable;
 
 /*!
     @property userData
     @abstract ￼A mutable dictionary to store arbitrary key-value pairs associated with a camera item object. This can be used by view objects that bind to this object to store "house-keeping" information.
 
 */
-@property(readonly)                                             NSMutableDictionary*  userData;
+@property(nullable,readonly)                                             NSMutableDictionary*  userData;
 
 /*!
     @property ptpObjectHandle
@@ -168,7 +169,7 @@
     @abstract ￼A list of items contained by this folder.
 
 */
-@property(readonly)   NSArray*      contents;
+@property(readonly)   NSArray<ICCameraItem*>*      contents;
 
 @end
 
@@ -211,7 +212,9 @@
     @abstract This property is NULL if there are no sidecar files associated with this file. Otherwise it is an array of ICCameraFile instances of sidecar files associated with this file. An example of a sidecar file is a file with the same base name as this file and having an extension XMP.
 
 */
-@property(readonly)   NSArray*              sidecarFiles;
+@property(readonly)    NSArray<ICCameraItem*>*      sidecarFiles;
+
+CF_ASSUME_NONNULL_END
 
 @end
 

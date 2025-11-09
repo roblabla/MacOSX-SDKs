@@ -1,9 +1,11 @@
 /* CoreAnimation - CAEmitterBehavior.h
 
-   Copyright (c) 2013-2014, Apple Inc.
+   Copyright (c) 2013-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CAEmitterBehavior : NSObject <NSCoding>
 {
@@ -15,14 +17,14 @@
   uint32_t _flags;
 }
 
-+ (NSArray *)behaviorTypes;
++ (NSArray<NSString *> *)behaviorTypes;
 
 + (CAEmitterBehavior *)behaviorWithType:(NSString *)type;
-- (instancetype)initWithType:(NSString *)type;
+- (id)initWithType:(NSString *)type;
 
 @property(readonly) NSString *type;
 
-@property(copy) NSString *name;
+@property(nullable, copy) NSString *name;
 
 @property(getter=isEnabled) BOOL enabled;
 
@@ -126,3 +128,5 @@ CA_EXTERN NSString * const kCAEmitterBehaviorLight;
  * NSNumber falloff, falloffDistance: falloff values. */
 
 CA_EXTERN NSString * const kCAEmitterBehaviorAttractor;
+
+NS_ASSUME_NONNULL_END

@@ -11,10 +11,10 @@
 #pragma once
 
 //------------------------------------------------------------------------------------------------------------------------------
-
-#import <Carbon/Carbon.h>
 #import <ICADevices/ICD_CameraCalls.h>
 #import <ICADevices/ICD_ScannerCalls.h>
+#import <ICADevices/ICAApplication.h>
+#import <CoreGraphics/CGColorSpace.h>
 
 //------------------------------------------------------------------------------------------------------------------------------
 

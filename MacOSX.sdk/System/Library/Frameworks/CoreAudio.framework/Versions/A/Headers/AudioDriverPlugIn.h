@@ -12,8 +12,8 @@
                      http://developer.apple.com/bugreporter/
 
 ==================================================================================================*/
-#if !defined(__AudioDriverPlugIn_h__)
-#define __AudioDriverPlugIn_h__
+#if !defined(CoreAudio_AudioDriverPlugIn_h)
+#define CoreAudio_AudioDriverPlugIn_h
 
 //==================================================================================================
 #pragma mark    Overview
@@ -37,9 +37,7 @@
 
 //==================================================================================================
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint off
-#endif
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -138,7 +136,7 @@ typedef struct AudioDriverPlugInHostInfo    AudioDriverPlugInHostInfo;
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioDriverPlugInOpen(AudioDriverPlugInHostInfo* inHostInfo);
+AudioDriverPlugInOpen(AudioDriverPlugInHostInfo*    inHostInfo);
 
 /*!
     @function       AudioDriverPlugInClose
@@ -179,8 +177,8 @@ AudioDriverPlugInDeviceGetPropertyInfo( AudioDeviceID           inDevice,
                                         UInt32                  inChannel,
                                         Boolean                 isInput,
                                         AudioDevicePropertyID   inPropertyID,
-                                        UInt32*                 outSize,
-                                        Boolean*                outWritable);
+                                        UInt32* __nullable      outSize,
+                                        Boolean* __nullable     outWritable);
 
 /*!
     @function       AudioDriverPlugInDeviceGetProperty
@@ -241,13 +239,13 @@ AudioDriverPlugInDeviceGetProperty( AudioDeviceID           inDevice,
                     normally.
 */
 extern OSStatus
-AudioDriverPlugInDeviceSetProperty( AudioDeviceID           inDevice,
-                                    const AudioTimeStamp*   inWhen,
-                                    UInt32                  inChannel,
-                                    Boolean                 isInput,
-                                    AudioDevicePropertyID   inPropertyID,
-                                    UInt32                  inPropertyDataSize,
-                                    const void*             inPropertyData);
+AudioDriverPlugInDeviceSetProperty( AudioDeviceID                       inDevice,
+                                    const AudioTimeStamp* __nullable    inWhen,
+                                    UInt32                              inChannel,
+                                    Boolean                             isInput,
+                                    AudioDevicePropertyID               inPropertyID,
+                                    UInt32                              inPropertyDataSize,
+                                    const void*                         inPropertyData);
 
 /*!
     @function       AudioDriverPlugInStreamGetPropertyInfo
@@ -277,8 +275,8 @@ AudioDriverPlugInStreamGetPropertyInfo( AudioDeviceID           inDevice,
                                         io_object_t             inIOAudioStream,
                                         UInt32                  inChannel,
                                         AudioDevicePropertyID   inPropertyID,
-                                        UInt32*                 outSize,
-                                        Boolean*                outWritable);
+                                        UInt32* __nullable      outSize,
+                                        Boolean* __nullable     outWritable);
 
 /*!
     @function       AudioDriverPlugInStreamGetProperty
@@ -339,13 +337,13 @@ AudioDriverPlugInStreamGetProperty( AudioDeviceID           inDevice,
                     normally.
 */
 extern OSStatus
-AudioDriverPlugInStreamSetProperty( AudioDeviceID           inDevice,
-                                    io_object_t             inIOAudioStream,
-                                    const AudioTimeStamp*   inWhen,
-                                    UInt32                  inChannel,
-                                    AudioDevicePropertyID   inPropertyID,
-                                    UInt32                  inPropertyDataSize,
-                                    const void*             inPropertyData);
+AudioDriverPlugInStreamSetProperty( AudioDeviceID                       inDevice,
+                                    io_object_t                         inIOAudioStream,
+                                    const AudioTimeStamp* __nullable    inWhen,
+                                    UInt32                              inChannel,
+                                    AudioDevicePropertyID               inPropertyID,
+                                    UInt32                              inPropertyDataSize,
+                                    const void*                         inPropertyData);
 
 //==================================================================================================
 
@@ -353,8 +351,6 @@ AudioDriverPlugInStreamSetProperty( AudioDeviceID           inDevice,
 }
 #endif
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint reset
-#endif
+CF_ASSUME_NONNULL_END
 
-#endif  //  __AudioDriverPlugIn_h__
+#endif  //  CoreAudio_AudioDriverPlugIn_h

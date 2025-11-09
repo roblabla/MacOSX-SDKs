@@ -19,6 +19,8 @@ exports:
                        _OSACompileExecute, _OSACopyDisplayString, _OSACopyID, 
                        _OSACopyScript, _OSACopyScriptingDefinition, _OSACopyScriptingDefinitionFromFile, 
                        _OSACopyScriptingDefinitionFromURL, _OSACopySourceString, 
+                       _OSACopyURLForLibraryInDomainURL, _OSACopyURLForLibraryInFolderURL, 
+                       _OSACopyURLForLibraryInScriptURL, _OSACopyURLForLibraryName, 
                        _OSACreateFile, _OSADebuggerCreateSession, _OSADebuggerDisposeCallFrame, 
                        _OSADebuggerDisposeSession, _OSADebuggerGetBreakpoint, 
                        _OSADebuggerGetCallFrameState, _OSADebuggerGetCurrentCallFrame, 

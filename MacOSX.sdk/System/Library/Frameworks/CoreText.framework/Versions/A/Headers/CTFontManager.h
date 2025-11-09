@@ -2,7 +2,7 @@
  *  CTFontManager.h
  *  CoreText
  *
- *  Copyright (c) 2008-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -26,10 +26,8 @@
 #include <CoreGraphics/CGFont.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
     @constant   CTRegisterBundleFonts
@@ -40,7 +38,7 @@ extern "C" {
     @function   CTFontManagerCopyAvailablePostScriptNames
     @abstract   Returns an array of unique PostScript font names.
  
-    @result     This function returns a retained reference to a CFArray of CFString references, or NULL on error. The caller is responsible for releasing the array.
+    @result     An array of CFStrings.
 */
 CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE_MAC(10_6);
 
@@ -48,7 +46,7 @@ CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE_MAC(10
     @function   CTFontManagerCopyAvailableFontFamilyNames
     @abstract   Returns an array of visible font family names sorted for UI display.
 
-    @result     This function returns a retained reference to a CFArray of CFString references, or NULL on error. The caller is responsible for releasing the array.
+    @result     An array of CFStrings.
 */
 CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) CT_AVAILABLE_MAC(10_6);
 
@@ -56,7 +54,7 @@ CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) CT_AVAILABLE_MAC(10
     @function   CTFontManagerCopyAvailableFontURLs
     @abstract   Returns an array of font URLs.
 
-    @result     This function returns a retained reference to a CFArray of CFURL references, or NULL on error. The caller is responsible for releasing the array.
+    @result     An array of CFURLs.
 */
 CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) CT_AVAILABLE_MAC(10_6);
 
@@ -75,7 +73,7 @@ CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) CT_AVAILABLE_MAC(10_6);
 CFComparisonResult CTFontManagerCompareFontFamilyNames(
     const void *        family1,
     const void *        family2,
-    void *              context) CT_AVAILABLE_MAC(10_6);
+    void * __nullable   context ) CT_AVAILABLE_MAC(10_6);
 
 /*!
     @function   CTFontManagerCreateFontDescriptorsFromURL
@@ -85,9 +83,9 @@ CFComparisonResult CTFontManagerCompareFontFamilyNames(
     @param      fileURL
                 A file system URL referencing a valid font file.
 
-    @result     This function returns a retained reference to a CFArray, or NULL on error. The caller is responsible for releasing the array.
+    @result     An array of CTFontDescriptors or NULL if there are no valid fonts.
 */
-CFArrayRef CTFontManagerCreateFontDescriptorsFromURL(
+CFArrayRef __nullable CTFontManagerCreateFontDescriptorsFromURL(
     CFURLRef            fileURL ) CT_AVAILABLE(10_6, 7_0);
 
 /*!
@@ -98,9 +96,9 @@ CFArrayRef CTFontManagerCreateFontDescriptorsFromURL(
     @param      data
                 A CFData containing font data.
 
-    @result     A font descriptor created from the data, or NULL on error.
+    @result     A font descriptor created from the data or NULL if it is not a valid font.
 */
-CTFontDescriptorRef CTFontManagerCreateFontDescriptorFromData(
+CTFontDescriptorRef __nullable CTFontManagerCreateFontDescriptorFromData(
     CFDataRef               data ) CT_AVAILABLE(10_7, 7_0);
 
 /*!
@@ -217,7 +215,7 @@ bool CTFontManagerUnregisterGraphicsFont(
 bool CTFontManagerRegisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef *            errors ) CT_AVAILABLE(10_6, 4_1);
+    CFArrayRef __nullable * __nullable errors ) CT_AVAILABLE(10_6, 4_1);
 
 /*!
     @function   CTFontManagerUnregisterFontsForURLs
@@ -238,7 +236,7 @@ bool CTFontManagerRegisterFontsForURLs(
 bool CTFontManagerUnregisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef *            errors ) CT_AVAILABLE(10_6, 4_1);
+    CFArrayRef __nullable * __nullable errors ) CT_AVAILABLE(10_6, 4_1);
 
 /*!
     @function   CTFontManagerEnableFontDescriptors
@@ -290,9 +288,9 @@ bool CTFontManagerIsSupportedFont(
                 The order of the created run loop source.
     @param      createMatchesCallback
                 A block to handle the font request.
-    @result     A CFRunLoopSourceRef that should be added to the run loop. To stop receiving requests, invalidate this run loop source. Will return NULL on error, in the case of a duplicate requestPortName, or invalid context structure.
+    @result     A CFRunLoopSourceRef that should be added to the run loop. To stop receiving requests, invalidate this run loop source. Will return NULL on error, in the case of a duplicate requestPortName or invalid context structure.
 */
-CFRunLoopSourceRef CTFontManagerCreateFontRequestRunLoopSource(
+CFRunLoopSourceRef __nullable CTFontManagerCreateFontRequestRunLoopSource(
     CFIndex         sourceOrder,
     CFArrayRef    (^createMatchesCallback)(CFDictionaryRef requestAttributes, pid_t requestingProcess)) CT_AVAILABLE_MAC(10_6);
 #endif // defined(__BLOCKS__)
@@ -336,7 +334,7 @@ typedef CF_ENUM(uint32_t, CTFontManagerAutoActivationSetting) {
     @result     Function will apply the setting to the appropriate preferences location.
 */
 void CTFontManagerSetAutoActivationSetting(
-    CFStringRef                         bundleIdentifier,
+    CFStringRef __nullable              bundleIdentifier,
     CTFontManagerAutoActivationSetting  setting ) CT_AVAILABLE_MAC(10_6);
 
 /*!
@@ -349,7 +347,7 @@ void CTFontManagerSetAutoActivationSetting(
     @result     Will return the auto-activation setting for specified bundle identifier.
 */
 CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
-    CFStringRef bundleIdentifier ) CT_AVAILABLE_MAC(10_6);
+    CFStringRef __nullable bundleIdentifier ) CT_AVAILABLE_MAC(10_6);
 
 /*! --------------------------------------------------------------------------
     @group Manager Notifications
@@ -366,10 +364,8 @@ CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
 */
 extern const CFStringRef kCTFontManagerRegisteredFontsChangedNotification CT_AVAILABLE(10_6, 7_0);
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

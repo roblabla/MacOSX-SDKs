@@ -1,6 +1,6 @@
 /* CoreAnimation - CATransaction.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -25,6 +25,8 @@
  * timely render tree updates. */
 
 @class CAMediaTimingFunction;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CATransaction : NSObject
 
@@ -62,8 +64,8 @@
  * animations added to layers will have this value set as their
  * "timingFunction" property. Added in Mac OS X 10.6. */
 
-+ (CAMediaTimingFunction *)animationTimingFunction;
-+ (void)setAnimationTimingFunction:(CAMediaTimingFunction *)function;
++ (nullable CAMediaTimingFunction *)animationTimingFunction;
++ (void)setAnimationTimingFunction:(nullable CAMediaTimingFunction *)function;
 
 /* Accessors for the "disableActions" per-thread transaction property.
  * Defines whether or not the layer's -actionForKey: method is used to
@@ -82,8 +84,8 @@
  * block will be invoked immediately. Added in Mac OS X 10.6. */
 
 #if __BLOCKS__
-+ (void (^)(void))completionBlock;
-+ (void)setCompletionBlock:(void (^)(void))block;
++ (nullable void (^)(void))completionBlock;
++ (void)setCompletionBlock:(nullable void (^)(void))block;
 #endif
 
 /* Associate arbitrary keyed-data with the current transaction (i.e.
@@ -101,8 +103,8 @@
  * Attempting to set a property to a type other than its document type
  * has an undefined result. */
 
-+ (id)valueForKey:(NSString *)key;
-+ (void)setValue:(id)anObject forKey:(NSString *)key;
++ (nullable id)valueForKey:(NSString *)key;
++ (void)setValue:(nullable id)anObject forKey:(NSString *)key;
 
 @end
 
@@ -116,3 +118,5 @@ CA_EXTERN NSString * const kCATransactionAnimationTimingFunction
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString * const kCATransactionCompletionBlock
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_4_0);
+
+NS_ASSUME_NONNULL_END

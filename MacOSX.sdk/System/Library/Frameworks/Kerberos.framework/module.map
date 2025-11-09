@@ -1,4 +1,4 @@
-framework module Kerberos [extern_c] [system] {
+framework module Kerberos [extern_c] {
   umbrella header "Kerberos.h"
 
   export *

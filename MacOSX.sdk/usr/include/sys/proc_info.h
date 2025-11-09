@@ -37,11 +37,13 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/kern_control.h>
+#include <sys/event.h>
 #include <net/if.h>
 #include <net/route.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <mach/machine.h>
+
 
 __BEGIN_DECLS
 
@@ -244,6 +246,7 @@ struct proc_fileinfo {
 #define PROC_FP_SHARED	1	/* shared by more than one fd */
 #define PROC_FP_CLEXEC	2	/* close on exec */
 #define PROC_FP_GUARDED	4	/* guarded fd */
+#define PROC_FP_CLFORK	8	/* close on fork */
 
 #define PROC_FI_GUARD_CLOSE		(1u << 0)
 #define PROC_FI_GUARD_DUP		(1u << 1)
@@ -563,8 +566,14 @@ struct kqueue_info {
 	uint32_t		kq_state;
 	uint32_t		rfu_1;	/* reserved */
 };
-#define PROC_KQUEUE_SELECT	1
-#define PROC_KQUEUE_SLEEP	2
+
+/* keep in sync with KQ_* in sys/eventvar.h */
+#define PROC_KQUEUE_SELECT	0x01
+#define PROC_KQUEUE_SLEEP	0x02
+#define PROC_KQUEUE_32		0x08
+#define PROC_KQUEUE_64		0x10
+#define PROC_KQUEUE_QOS		0x20
+
 
 struct kqueue_fdinfo {
 	struct proc_fileinfo	pfi;
@@ -679,6 +688,7 @@ struct proc_fileportinfo {
 
 #define PROC_PIDFDATALKINFO		8
 #define PROC_PIDFDATALKINFO_SIZE	(sizeof(struct appletalk_fdinfo))
+
 
 /* Flavors for proc_pidfileportinfo */
 

@@ -1,35 +1,30 @@
 //
 //  SCNMaterialProperty.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @enum SCNFilterMode
     @abstract Filtering modes
 */
 typedef NS_ENUM(NSInteger, SCNFilterMode) {
-    SCNFilterModeNone    SCENEKIT_ENUM_AVAILABLE(10_9, 8_0) = 0,
-    SCNFilterModeNearest SCENEKIT_ENUM_AVAILABLE(10_9, 8_0) = 1,
-    SCNFilterModeLinear  SCENEKIT_ENUM_AVAILABLE(10_9, 8_0) = 2,
-    SCNNoFiltering       = SCNFilterModeNone,    // Deprecated name for SCNFilterModeNone
-    SCNNearestFiltering  = SCNFilterModeNearest, // Deprecated name for SCNFilterModeNearest
-    SCNLinearFiltering   = SCNFilterModeLinear   // Deprecated name for SCNFilterModeLinear
+    SCNFilterModeNone    NS_ENUM_AVAILABLE(10_9, 8_0) = 0,
+    SCNFilterModeNearest NS_ENUM_AVAILABLE(10_9, 8_0) = 1,
+    SCNFilterModeLinear  NS_ENUM_AVAILABLE(10_9, 8_0) = 2
 };
 
 /*! @enum SCNWrapeMode
  @abstract Wrap modes
  */
 typedef NS_ENUM(NSInteger, SCNWrapMode) {
-    SCNWrapModeClamp SCENEKIT_ENUM_AVAILABLE(10_9, 8_0) = 1,
-    SCNWrapModeRepeat SCENEKIT_ENUM_AVAILABLE(10_9, 8_0) = 2,
-    SCNWrapModeClampToBorder SCENEKIT_ENUM_AVAILABLE(10_9, NA) = 3,
-    SCNWrapModeMirror SCENEKIT_ENUM_AVAILABLE(10_9, 8_0) = 4,
-    SCNClamp = SCNWrapModeClamp,                 // Deprecated name for SCNWrapModeClamp
-    SCNRepeat = SCNWrapModeRepeat,               // Deprecated name for SCNWrapModeRepeat
-    SCNClampToBorder = SCNWrapModeClampToBorder, // Deprecated name for SCNWrapModeClampToBorder
-    SCNMirror = SCNWrapModeMirror,               // Deprecated name for SCNWrapModeMirror
+    SCNWrapModeClamp NS_ENUM_AVAILABLE(10_9, 8_0) = 1,
+    SCNWrapModeRepeat NS_ENUM_AVAILABLE(10_9, 8_0) = 2,
+    SCNWrapModeClampToBorder NS_ENUM_AVAILABLE(10_9, 9_0) = 3,
+    SCNWrapModeMirror NS_ENUM_AVAILABLE(10_9, 8_0) = 4,
 };
 
 /*! @class SCNMaterialProperty
@@ -37,26 +32,22 @@ typedef NS_ENUM(NSInteger, SCNWrapMode) {
     @discussion This can be used to specify the various properties of SCNMaterial slots such as diffuse, ambient, etc.
 */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNMaterialProperty : NSObject <SCNAnimatable, NSSecureCoding>
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method materialPropertyWithContents:
  @abstract Creates and initialize a property instance with the specified contents.
  */
-+ (instancetype)materialPropertyWithContents:(id)contents SCENEKIT_AVAILABLE(10_9, 8_0);
++ (instancetype)materialPropertyWithContents:(id)contents NS_AVAILABLE(10_9, 8_0);
 
 /*! 
  @property contents
- @abstract Specifies the receiver's contents. This can be a color (NSColor), an image (NSImage), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene) or a SKTexture. Animatable when set to a color.
- @discussion CGColorRef and CGImageRef can also be set. An array (NSArray) of 6 images is allowed for cube maps, only for reflective property. This array must contain images of the exact same dimensions, in the following order : +X, -X, +Y, -Y, +Z, -Z or if you prefer Right, Left, Top, Bottom, Back, Front. 
+ @abstract Specifies the receiver's contents. This can be a color (NSColor/UIColor), an image (NSImage/CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene) or a texture (SKTexture, id<MTLTexture> or GLKTextureInfo). Animatable when set to a color.
+ @discussion CGColorRef and CGImageRef can also be set. An array (NSArray) of 6 images is allowed for cube maps, only for reflective property. This array must contain images of the exact same dimensions, in the following order, in a left-handed coordinate system : +X, -X, +Y, -Y, +Z, -Z or if you prefer Right, Left, Top, Bottom, Front, Back. 
      Setting the contents to an instance of SKTexture will automatically update the wrapS, wrapT, contentsTransform, minification, magnification and mip filters according to the SKTexture settings.
  */
-@property(nonatomic, retain) id contents; 
+@property(nonatomic, retain, nullable) id contents;
 
 /*!
  @property intensity
@@ -64,7 +55,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  It dims the diffuse, specular and emission properties, it varies the bumpiness of the normal property and the
  filter property is blended with white. Default value is 1.0. Animatable.
  */
-@property(nonatomic) CGFloat intensity SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat intensity NS_AVAILABLE(10_9, 8_0);
 
 /*! 
  @property minificationFilter
@@ -107,9 +98,10 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 
 /*! 
  @property borderColor
- @abstract Determines the receiver's border color.
+ @abstract Determines the receiver's border color (CGColorRef or NSColor). Animatable.
+ @discussion The border color is ignored on iOS and is always considered as clear color (0,0,0,0) when the texture has an alpha channel and opaque back (0,0,0,1) otherwise.
  */
-@property(nonatomic, retain) id borderColor;              /* color (CGColorRef, NSColor or UIColor). Animatable.*/
+@property(nonatomic, retain, nullable) id borderColor;
 
 /*! 
  @property mappingChannel
@@ -123,6 +115,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the receiver's max anisotropy. Defaults to MAXFLOAT.
  @discussion Anisotropic filtering reduces blur and preserves detail at extreme viewing angles.
  */
-@property(nonatomic) CGFloat maxAnisotropy SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat maxAnisotropy NS_AVAILABLE(10_9, 8_0);
 
 @end
+    
+NS_ASSUME_NONNULL_END

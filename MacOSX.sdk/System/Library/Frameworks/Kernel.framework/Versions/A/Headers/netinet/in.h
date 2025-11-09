@@ -646,10 +646,6 @@ struct in_pktinfo {
 #define MAX_IPv6_STR_LEN	64
 
 extern int	 inet_aton(const char *, struct in_addr *); /* in libkern */
-extern char	*inet_ntoa(struct in_addr); /* in libkern */
-extern char	*inet_ntoa_r(struct in_addr ina, char *buf,
-    size_t buflen); /* in libkern */
 extern const char *inet_ntop(int, const void *, char *, socklen_t); /* in libkern*/
-extern int	inet_pton(int af, const char *, void *); /* in libkern */
 
 #endif /* _NETINET_IN_H_ */

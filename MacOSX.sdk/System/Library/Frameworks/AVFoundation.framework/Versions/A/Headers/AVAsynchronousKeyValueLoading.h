@@ -3,12 +3,14 @@
  
     Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
  
  */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
 	AVKeyValueStatusUnknown,
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
       
     The sole exception to this general rule is in usage on Mac OS X on the desktop, where it may be acceptable to block in cases in which the client is preparing objects for use on background threads or in operation queues. On iOS, values should always be loaded asynchronously prior to calling getters for the values, in any usage scenario.
 */
-- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError **)outError;
+- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * __nullable * __nullable)outError;
 
 /*!
   @method		loadValuesAsynchronouslyForKeys:completionHandler:
@@ -61,6 +63,8 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
   @param		completionHandler
     The block to be invoked when loading succeeds, fails, or is cancelled.
 */
-- (void)loadValuesAsynchronouslyForKeys:(NSArray *)keys completionHandler:(void (^)(void))handler;
+- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler;
 
 @end
+
+NS_ASSUME_NONNULL_END

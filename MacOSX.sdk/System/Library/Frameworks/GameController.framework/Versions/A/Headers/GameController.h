@@ -6,6 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#if TARGET_OS_IPHONE
+#import <UIKit/UIViewController.h>
+#else
+#import <AppKit/NSViewController.h>
+#endif
 
 #ifdef __cplusplus
 #define GAMECONTROLLER_EXTERN		extern "C" __attribute__((visibility ("default")))

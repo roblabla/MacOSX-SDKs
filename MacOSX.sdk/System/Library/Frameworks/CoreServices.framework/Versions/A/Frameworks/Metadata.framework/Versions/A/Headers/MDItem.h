@@ -67,7 +67,7 @@ MD_BEGIN_C_DECLS
         @typedef MDItemRef
         This is the type of a reference to MDItems.
 */
-typedef struct __MDItem * MDItemRef;
+typedef struct CF_BRIDGED_TYPE(id) __MDItem * MDItemRef;
 
 /*!
         @function MDItemGetTypeID
@@ -547,6 +547,12 @@ MD_EXPORT const CFStringRef     kMDItemStateOrProvince MD_AVAIL;           // CF
 MD_EXPORT const CFStringRef     kMDItemCountry MD_AVAIL;                   // CFString
 
 /*!
+   @constant kMDItemHTMLContent
+   Contains the HTML content of the document. Type is a CFString.
+   This field is only used by Spotlight importers to return HTML contents of a file.  Except in special cases,
+   this field is not a replacement for kMDItemTextContent which should still be returned.
+   This field does not particpate in Spotlight queries.
+
    @constant kMDItemTextContent
    Contains the text content of the document. Type is a CFString.
 
@@ -624,6 +630,7 @@ MD_EXPORT const CFStringRef     kMDItemFSInvisible MD_AVAIL;             // CFBo
 MD_EXPORT const CFStringRef     kMDItemFSLabel MD_AVAIL;                 // CFNumber
 MD_EXPORT const CFStringRef     kMDItemFSNodeCount MD_AVAIL;             // CFNumber
 
+MD_EXPORT const CFStringRef     kMDItemHTMLContent AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER;      // a Write-Only CFString
 MD_EXPORT const CFStringRef     kMDItemTextContent MD_AVAIL;             // a Write-Only CFString
 
 /*!

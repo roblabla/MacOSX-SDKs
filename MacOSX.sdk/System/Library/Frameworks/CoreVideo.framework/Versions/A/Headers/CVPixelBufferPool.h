@@ -2,13 +2,13 @@
  *  CVPixelBufferPool.h
  *  CoreVideo
  *
- *  Copyright 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright 2004-2015 Apple Inc. All rights reserved.
  *
  */
 
  /*! @header CVPixelBufferPool.h
-	@copyright 2004-2014 Apple Inc. All rights reserved.
-	@availability Mac OS X 10.4 or later
+	@copyright 2004-2015 Apple Inc. All rights reserved.
+	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @discussion CVPixelBufferPool is a utility object for managing a set of CVPixelBuffer objects that are going to be recycled.
 		   
 */
@@ -28,13 +28,13 @@
 extern "C" {
 #endif
 
-typedef struct __CVPixelBufferPool *CVPixelBufferPoolRef;
+typedef struct CV_BRIDGED_TYPE(id) __CVPixelBufferPool *CVPixelBufferPoolRef;
 
 // By default, buffers will age out after one second.   If required, setting an age of zero will disable
 // the age-out mechanism completely.
 
-CV_EXPORT const CFStringRef kCVPixelBufferPoolMinimumBufferCountKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
-CV_EXPORT const CFStringRef kCVPixelBufferPoolMaximumBufferAgeKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPoolMinimumBufferCountKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPoolMaximumBufferAgeKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 CV_EXPORT CFTypeID CVPixelBufferPoolGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
@@ -46,7 +46,7 @@ CV_EXPORT CFTypeID CVPixelBufferPoolGetTypeID(void) __OSX_AVAILABLE_STARTING(__M
     @param      buffer A CVPixelBufferPoolRef object that you want to retain.
     @result     A CVPixelBufferPoolRef object that is the same as the passed in buffer.
 */
-CV_EXPORT CVPixelBufferPoolRef CVPixelBufferPoolRetain( CVPixelBufferPoolRef pixelBufferPool ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0); // NULL-safe
+CV_EXPORT CVPixelBufferPoolRef CV_NULLABLE CVPixelBufferPoolRetain( CVPixelBufferPoolRef CV_NULLABLE pixelBufferPool ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0); // NULL-safe
 
 /*!
     @function   CVPixelBufferPoolRelease
@@ -54,7 +54,7 @@ CV_EXPORT CVPixelBufferPoolRef CVPixelBufferPoolRetain( CVPixelBufferPoolRef pix
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVPixelBufferPoolRef object that you want to release.
 */
-CV_EXPORT void CVPixelBufferPoolRelease( CVPixelBufferPoolRef pixelBufferPool ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0); // NULL-safe
+CV_EXPORT void CVPixelBufferPoolRelease( CV_RELEASES_ARGUMENT CVPixelBufferPoolRef CV_NULLABLE pixelBufferPool ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0); // NULL-safe
 
 /*!
     @function   CVPixelBufferPoolCreate
@@ -64,10 +64,11 @@ CV_EXPORT void CVPixelBufferPoolRelease( CVPixelBufferPoolRef pixelBufferPool ) 
     @param      poolOut   The newly created pool will be placed here
     @result     Returns kCVReturnSuccess on success
 */
-CV_EXPORT CVReturn CVPixelBufferPoolCreate(CFAllocatorRef allocator,
-					   CFDictionaryRef poolAttributes,
-					   CFDictionaryRef pixelBufferAttributes,
-					   CVPixelBufferPoolRef *poolOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferPoolCreate(
+    CFAllocatorRef CV_NULLABLE allocator,
+    CFDictionaryRef CV_NULLABLE poolAttributes,
+    CFDictionaryRef CV_NULLABLE pixelBufferAttributes,
+    CV_RETURNS_RETAINED_PARAMETER CVPixelBufferPoolRef CV_NULLABLE * CV_NONNULL poolOut ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferPoolGetAttributes
@@ -75,7 +76,7 @@ CV_EXPORT CVReturn CVPixelBufferPoolCreate(CFAllocatorRef allocator,
     @param      pool  The CVPixelBufferPoolRef to retrieve the attributes from
     @result     Returns the pool attributes dictionary, or NULL on failure.
 */
-CV_EXPORT CFDictionaryRef CVPixelBufferPoolGetAttributes(CVPixelBufferPoolRef pool) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CFDictionaryRef CV_NULLABLE CVPixelBufferPoolGetAttributes( CVPixelBufferPoolRef CV_NONNULL pool ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferPoolGetPixelBufferAttributes
@@ -85,7 +86,7 @@ CV_EXPORT CFDictionaryRef CVPixelBufferPoolGetAttributes(CVPixelBufferPoolRef po
     @param      pool  The CVPixelBufferPoolRef to retrieve the attributes from
     @result     Returns the pixel buffer attributes dictionary, or NULL on failure.
 */
-CV_EXPORT CFDictionaryRef CVPixelBufferPoolGetPixelBufferAttributes(CVPixelBufferPoolRef pool) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CFDictionaryRef CV_NULLABLE CVPixelBufferPoolGetPixelBufferAttributes( CVPixelBufferPoolRef CV_NONNULL pool ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferPoolCreatePixelBuffer
@@ -96,9 +97,10 @@ CV_EXPORT CFDictionaryRef CVPixelBufferPoolGetPixelBufferAttributes(CVPixelBuffe
     @param      pixelBufferOut   The newly created pixel buffer will be placed here
     @result     Returns kCVReturnSuccess on success
 */
-CV_EXPORT CVReturn CVPixelBufferPoolCreatePixelBuffer(CFAllocatorRef allocator, 
-						         CVPixelBufferPoolRef pixelBufferPool,
-							 CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferPoolCreatePixelBuffer(
+    CFAllocatorRef CV_NULLABLE allocator,
+    CVPixelBufferPoolRef CV_NONNULL pixelBufferPool,
+    CV_RETURNS_RETAINED_PARAMETER CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 /*
@@ -112,10 +114,10 @@ CV_EXPORT CVReturn CVPixelBufferPoolCreatePixelBuffer(CFAllocatorRef allocator,
     @result     Returns kCVReturnSuccess on success
 */
 CV_EXPORT CVReturn CVPixelBufferPoolCreatePixelBufferWithAuxAttributes(
-        CFAllocatorRef allocator,
-        CVPixelBufferPoolRef pixelBufferPool,
-        CFDictionaryRef auxAttributes,
-        CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+    CFAllocatorRef CV_NULLABLE allocator,
+    CVPixelBufferPoolRef CV_NONNULL pixelBufferPool,
+    CFDictionaryRef CV_NULLABLE auxAttributes,
+    CV_RETURNS_RETAINED_PARAMETER CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut ) __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 // Key for the auxiliary attributes dictionary passed to CVPixelBufferPoolCreatePixelBufferWithAuxAttributes().
 
@@ -124,13 +126,43 @@ CV_EXPORT CVReturn CVPixelBufferPoolCreatePixelBufferWithAuxAttributes(
 // This does not prevent already-allocated buffers from being recycled.
 // If this key causes CVPixelBufferPoolCreatePixelBufferWithAuxAttributes to fail,
 // it will return kCVReturnWouldExceedAllocationThreshold.
-CV_EXPORT const CFStringRef kCVPixelBufferPoolAllocationThresholdKey __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0); // CFNumberRef -- for use only in auxAttributes
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPoolAllocationThresholdKey __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0); // CFNumberRef -- for use only in auxAttributes
 
 // kCVPixelBufferPoolFreeBufferNotification is posted if a buffer becomes available after
 // CVPixelBufferPoolCreatePixelBufferWithAuxAttributes has failed due to kCVPixelBufferPoolAllocationThresholdKey.
 // This notification will not be posted by the pool if kCVPixelBufferPoolAllocationThresholdKey 
 // has never been passed to CVPixelBufferPoolCreatePixelBufferWithAuxAttributes.
-CV_EXPORT const CFStringRef kCVPixelBufferPoolFreeBufferNotification __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPoolFreeBufferNotification __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+
+/*!
+	@enum CVPixelBufferPoolFlush flags
+	@discussion Flags to pass to CVPixelBufferPoolFlush()
+	@constant kCVPixelBufferPoolFlushExcessBuffers
+		This flag will cause CVPixelBufferPoolFlush to flush all unused buffers regardless of age.
+*/
+
+typedef CVOptionFlags CVPixelBufferPoolFlushFlags;
+#if COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CVPixelBufferPoolFlushFlags
+#else
+enum
+#endif
+{
+	kCVPixelBufferPoolFlushExcessBuffers = 1,
+};
+
+/*!
+	@function       CVPixelBufferPoolFlush
+	@abstract       Frees as many buffers from the pool as possible.
+	@discussion     By default, this function will free all aged out buffers.  Setting the
+            kCVPixelBufferPoolFlushExcessBuffers flag will cause this call to free all unused
+            buffers regardless of age.
+	@param		pool    The CVPixelBufferPool to be flushed.
+	@param		options Set to kCVPixelBufferPoolFlushExcessBuffers to free all unused buffers
+            regardless of their age.
+*/
+CV_EXPORT void CVPixelBufferPoolFlush( CVPixelBufferPoolRef CV_NONNULL pool, CVPixelBufferPoolFlushFlags options );
 
 
 #if defined(__cplusplus)

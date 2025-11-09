@@ -13,20 +13,24 @@ typedef struct CGFunction *CGFunctionRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* This callback evaluates a function, using `in' as inputs, and places the
    result in `out'. `info' is the info parameter passed to the CGFunction
    creation functions. */
 
-typedef void (*CGFunctionEvaluateCallback)(void *info, const CGFloat *in,
-  CGFloat *out);
+typedef void (*CGFunctionEvaluateCallback)(void * __nullable info,
+  const CGFloat *  in, CGFloat *  out);
 
 /* When a function is deallocated, this callback releases `info', the info
    parameter passed to the CGFunction creation functions. */
 
-typedef void (*CGFunctionReleaseInfoCallback)(void *info);
+typedef void (*CGFunctionReleaseInfoCallback)(void * __nullable info);
 
 /* Callbacks for a CGFunction.
      `version' is the version number of this structure. This structure is
@@ -37,16 +41,16 @@ typedef void (*CGFunctionReleaseInfoCallback)(void *info);
        function is deallocated. */
 
 struct CGFunctionCallbacks {
-  unsigned int version;
-  CGFunctionEvaluateCallback evaluate;
-  CGFunctionReleaseInfoCallback releaseInfo;
+    unsigned int version;
+    CGFunctionEvaluateCallback __nullable evaluate;
+    CGFunctionReleaseInfoCallback __nullable releaseInfo;
 };
 typedef struct CGFunctionCallbacks CGFunctionCallbacks;
 
 /* Return the CFTypeID for CGFunctionRefs. */
 
 CG_EXTERN CFTypeID CGFunctionGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Create a CGFunction using `callbacks' to evaluate the function. `info' is
    passed to each of the callback functions. `domainDimension' is the number
@@ -74,22 +78,26 @@ CG_EXTERN CFTypeID CGFunctionGetTypeID(void)
    The contents of the callbacks structure is copied, so, for example, a
    pointer to a structure on the stack can be passed to this function. */
 
-CG_EXTERN CGFunctionRef CGFunctionCreate(void *info, size_t domainDimension,
-  const CGFloat *domain, size_t rangeDimension, const CGFloat *range,
-  const CGFunctionCallbacks *callbacks)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+CG_EXTERN CGFunctionRef __nullable CGFunctionCreate(void * __nullable info,
+    size_t domainDimension, const CGFloat *__nullable domain,
+    size_t rangeDimension, const CGFloat * __nullable range,
+    const CGFunctionCallbacks * __nullable callbacks)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(function)', except it doesn't crash (as CFRetain
    does) if `function' is NULL. */
 
-CG_EXTERN CGFunctionRef CGFunctionRetain(CGFunctionRef function)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+CG_EXTERN CGFunctionRef __nullable CGFunctionRetain(
+    CGFunctionRef __nullable function)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(function)', except it doesn't crash (as
    CFRelease does) if `function' is NULL. */
 
-CG_EXTERN void CGFunctionRelease(CGFunctionRef function)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+CG_EXTERN void CGFunctionRelease(CGFunctionRef __nullable function)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

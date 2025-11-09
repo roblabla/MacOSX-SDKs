@@ -1,5 +1,5 @@
 /*	CFMessagePort.h
-	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFMESSAGEPORT__)
@@ -15,7 +15,7 @@ CF_EXTERN_C_BEGIN
 
 typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMessagePort) __CFMessagePort * CFMessagePortRef;
 
-enum {
+CF_ENUM(SInt32) {
     kCFMessagePortSuccess = 0,
     kCFMessagePortSendTimeout = -1,
     kCFMessagePortReceiveTimeout = -2,

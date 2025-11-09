@@ -1,10 +1,12 @@
 /*	NSEnumerator.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray;
+@class NSArray<ObjectType>;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*
  * The fast enumeration protocol NSFastEnumeration is adopted and
@@ -18,8 +20,8 @@
 
 typedef struct {
     unsigned long state;
-    id __unsafe_unretained *itemsPtr;
-    unsigned long *mutationsPtr;
+    id __unsafe_unretained __nullable * __nullable itemsPtr;
+    unsigned long * __nullable mutationsPtr;
     unsigned long extra[5];
 } NSFastEnumerationState;
 
@@ -29,15 +31,16 @@ typedef struct {
 
 @end
 
-@interface NSEnumerator : NSObject <NSFastEnumeration>
+@interface NSEnumerator<ObjectType> : NSObject <NSFastEnumeration>
 
-- (id)nextObject;
-
-@end
-
-@interface NSEnumerator (NSExtendedEnumerator)
-
-@property (readonly, copy) NSArray *allObjects;
+- (nullable ObjectType)nextObject;
 
 @end
 
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+
+@property (readonly, copy) NSArray<ObjectType> *allObjects;
+
+@end
+
+NS_ASSUME_NONNULL_END

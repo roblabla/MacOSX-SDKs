@@ -1,36 +1,41 @@
 /* CoreAnimation - CALayer.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CAMediaTiming.h>
 #import <QuartzCore/CATransform3D.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSNull.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
-@class NSArray, NSDictionary, NSEnumerator, CAAnimation, CALayerArray;
+@class NSEnumerator, CAAnimation, CALayerArray;
 @protocol CAAction;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* Bit definitions for `autoresizingMask' property. */
 
 typedef NS_OPTIONS (unsigned int, CAAutoresizingMask)
 {
-  kCALayerNotSizable	= 0,
-  kCALayerMinXMargin	= 1U << 0,
-  kCALayerWidthSizable	= 1U << 1,
-  kCALayerMaxXMargin	= 1U << 2,
-  kCALayerMinYMargin	= 1U << 3,
-  kCALayerHeightSizable	= 1U << 4,
-  kCALayerMaxYMargin	= 1U << 5
+  kCALayerNotSizable    = 0,
+  kCALayerMinXMargin    = 1U << 0,
+  kCALayerWidthSizable  = 1U << 1,
+  kCALayerMaxXMargin    = 1U << 2,
+  kCALayerMinYMargin    = 1U << 3,
+  kCALayerHeightSizable = 1U << 4,
+  kCALayerMaxYMargin    = 1U << 5
 };
 
 /* Bit definitions for `edgeAntialiasingMask' property. */
 
 typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 {
-  kCALayerLeftEdge	= 1U << 0,	/* Minimum X edge. */
-  kCALayerRightEdge	= 1U << 1,	/* Maximum X edge. */
-  kCALayerBottomEdge	= 1U << 2,	/* Minimum Y edge. */
-  kCALayerTopEdge	= 1U << 3,	/* Maximum Y edge. */
+  kCALayerLeftEdge      = 1U << 0,      /* Minimum X edge. */
+  kCALayerRightEdge     = 1U << 1,      /* Maximum X edge. */
+  kCALayerBottomEdge    = 1U << 2,      /* Minimum Y edge. */
+  kCALayerTopEdge       = 1U << 3,      /* Maximum Y edge. */
 };
 
 /** The base layer class. **/
@@ -79,7 +84,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * on the result of the -presentationLayer will query the presentation
  * values of the layer tree. */
 
-- (id)presentationLayer;
+- (nullable id)presentationLayer;
 
 /* When called on the result of the -presentationLayer method, returns
  * the underlying layer with the current model values. When called on a
@@ -100,20 +105,20 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * standard KVC wrapping conventions are used, with extensions to
  * support the following types:
  *
- *	C Type			Class
- *      ------			-----
- *	CGPoint			NSValue
- *	CGSize			NSValue
- *	CGRect			NSValue
- *	CGAffineTransform	NSAffineTransform
- *	CATransform3D		NSValue  */
+ *      C Type                  Class
+ *      ------                  -----
+ *      CGPoint                 NSValue
+ *      CGSize                  NSValue
+ *      CGRect                  NSValue
+ *      CGAffineTransform       NSAffineTransform
+ *      CATransform3D           NSValue  */
 
 /* Returns the default value of the named property, or nil if no
  * default value is known. Subclasses that override this method to
  * define default values for their own properties should call `super'
  * for unknown properties. */
 
-+ (id)defaultValueForKey:(NSString *)key;
++ (nullable id)defaultValueForKey:(NSString *)key;
 
 /* Method for subclasses to override. Returning true for a given
  * property causes the layer's contents to be redrawn when the property
@@ -211,7 +216,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 /* The receiver's superlayer object. Implicitly changed to match the
  * hierarchy described by the `sublayers' properties. */
 
-@property(readonly) CALayer *superlayer; 
+@property(nullable, readonly) CALayer *superlayer;
 
 /* Removes the layer from its superlayer, works both if the receiver is
  * in its superlayer's `sublayers' array or set as its `mask' value. */
@@ -224,7 +229,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * the behavior is undefined. Note that the returned array is not
  * guaranteed to retain its elements. */
 
-@property(copy) NSArray *sublayers;
+@property(nullable, copy) NSArray<CALayer *> *sublayers;
 
 /* Add 'layer' to the end of the receiver's sublayers array. If 'layer'
  * already has a superlayer, it will be removed before being added. */
@@ -241,8 +246,8 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * receiver's sublayers array. If 'layer' already has a superlayer, it
  * will be removed before being inserted. */
 
-- (void)insertSublayer:(CALayer *)layer below:(CALayer *)sibling;
-- (void)insertSublayer:(CALayer *)layer above:(CALayer *)sibling;
+- (void)insertSublayer:(CALayer *)layer below:(nullable CALayer *)sibling;
+- (void)insertSublayer:(CALayer *)layer above:(nullable CALayer *)sibling;
 
 /* Remove 'layer' from the sublayers array of the receiver and insert
  * 'layer2' if non-nil in its position. If the superlayer of 'layer'
@@ -266,7 +271,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * undefined. Nested masks (mask layers with their own masks) are
  * unsupported. */
 
-@property(strong) CALayer *mask;
+@property(nullable, strong) CALayer *mask;
 
 /* When true an implicit mask matching the layer bounds is applied to
  * the layer (including the effects of the `cornerRadius' property). If
@@ -278,13 +283,13 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 
 /** Mapping between layer coordinate and time spaces. **/
 
-- (CGPoint)convertPoint:(CGPoint)p fromLayer:(CALayer *)l;
-- (CGPoint)convertPoint:(CGPoint)p toLayer:(CALayer *)l;
-- (CGRect)convertRect:(CGRect)r fromLayer:(CALayer *)l;
-- (CGRect)convertRect:(CGRect)r toLayer:(CALayer *)l;
+- (CGPoint)convertPoint:(CGPoint)p fromLayer:(nullable CALayer *)l;
+- (CGPoint)convertPoint:(CGPoint)p toLayer:(nullable CALayer *)l;
+- (CGRect)convertRect:(CGRect)r fromLayer:(nullable CALayer *)l;
+- (CGRect)convertRect:(CGRect)r toLayer:(nullable CALayer *)l;
 
-- (CFTimeInterval)convertTime:(CFTimeInterval)t fromLayer:(CALayer *)l;
-- (CFTimeInterval)convertTime:(CFTimeInterval)t toLayer:(CALayer *)l;
+- (CFTimeInterval)convertTime:(CFTimeInterval)t fromLayer:(nullable CALayer *)l;
+- (CFTimeInterval)convertTime:(CFTimeInterval)t toLayer:(nullable CALayer *)l;
 
 /** Hit testing methods. **/
 
@@ -294,7 +299,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * isn't a CATransformLayer (transform layers don't have a 2D
  * coordinate space in which the point could be specified). */
 
-- (CALayer *)hitTest:(CGPoint)p;
+- (nullable CALayer *)hitTest:(CGPoint)p;
 
 /* Returns true if the bounds of the layer contains point 'p'. */
 
@@ -307,7 +312,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * supported on Mac OS X 10.6 and later.) Default value is nil.
  * Animatable. */
 
-@property(strong) id contents;
+@property(nullable, strong) id contents;
 
 /* A rectangle in normalized image coordinates defining the
  * subrectangle of the `contents' property that will be drawn into the
@@ -335,7 +340,8 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * contentsScale is two -drawInContext: will draw into a buffer twice
  * as large as the layer bounds). Defaults to one. Animatable. */
 
-@property CGFloat contentsScale;
+@property CGFloat contentsScale
+  __OSX_AVAILABLE_STARTING (__MAC_10_7, __IPHONE_4_0);
 
 /* A rectangle in normalized image coordinates defining the scaled
  * center part of the `contents' image.
@@ -364,7 +370,8 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * image data. Currently the allowed values are `nearest' and `linear'.
  * Both properties default to `linear'. */
 
-@property(copy) NSString *minificationFilter, *magnificationFilter;
+@property(copy) NSString *minificationFilter;
+@property(copy) NSString *magnificationFilter;
 
 /* The bias factor added when determining which levels of detail to use
  * when minifying using trilinear filtering. The default value is 0.
@@ -411,7 +418,8 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * drawing operations sooner than when executing synchronously. The
  * default value is NO. */
 
-@property BOOL drawsAsynchronously;
+@property BOOL drawsAsynchronously
+  __OSX_AVAILABLE_STARTING (__MAC_10_8, __IPHONE_6_0);
 
 /* Called via the -display method when the `contents' property is being
  * updated. Default implementation does nothing. The context may be
@@ -443,7 +451,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 /* The background color of the layer. Default value is nil. Colors
  * created from tiled patterns are supported. Animatable. */
 
-@property CGColorRef backgroundColor;
+@property(nullable) CGColorRef backgroundColor;
 
 /* When positive, the background of the layer will be drawn with
  * rounded corners. Also effects the mask generated by the
@@ -461,7 +469,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 /* The color of the layer's border. Defaults to opaque black. Colors
  * created from tiled patterns are supported. Animatable. */
 
-@property CGColorRef borderColor;
+@property(nullable) CGColorRef borderColor;
 
 /* The opacity of the layer, as a value between zero and one. Defaults
  * to one. Specifying a value outside the [0,1] range will give undefined
@@ -480,17 +488,17 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * that the filter is attached to. (This also applies to the `filters'
  * and `backgroundFilters' properties.) */
 
-@property(strong) id compositingFilter;
+@property(nullable, strong) id compositingFilter;
 
 /* An array of filters that will be applied to the contents of the
  * layer and its sublayers. Defaults to nil. Animatable. */
 
-@property(copy) NSArray *filters;
+@property(nullable, copy) NSArray *filters;
 
 /* An array of filters that are applied to the background of the layer.
  * The root layer ignores this property. Animatable. */
 
-@property(copy) NSArray *backgroundFilters;
+@property(nullable, copy) NSArray *backgroundFilters;
 
 /* When true, the layer is rendered as a bitmap in its local coordinate
  * space ("rasterized"), then the bitmap is composited into the
@@ -521,7 +529,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
 /* The color of the shadow. Defaults to opaque black. Colors created
  * from patterns are currently NOT supported. Animatable. */
 
-@property CGColorRef shadowColor;
+@property(nullable) CGColorRef shadowColor;
 
 /* The opacity of the shadow. Defaults to 0. Specifying a value outside the
  * [0,1] range will give undefined results. Animatable. */
@@ -541,9 +549,10 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * channel. The path is rendered using the non-zero winding rule.
  * Specifying the path explicitly using this property will usually
  * improve rendering performance, as will sharing the same path
- * reference across multiple layers. Defaults to null. Animatable. */
+ * reference across multiple layers. Upon assignment the path is copied.
+ * Defaults to null. Animatable. */
 
-@property CGPathRef shadowPath;
+@property(nullable) CGPathRef shadowPath;
 
 /** Layout methods. **/
 
@@ -558,7 +567,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * When nil (the default value) only the autoresizing style of layout
  * is done (unless a subclass overrides -layoutSublayers). */
 
-@property(strong) id layoutManager;
+@property(nullable, strong) id layoutManager;
 
 /* Returns the preferred frame size of the layer in the coordinate
  * space of the superlayer. The default implementation calls the layout
@@ -631,19 +640,19 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * linked directly to properties:
  *
  * onOrderIn
- *	Invoked when the layer is made visible, i.e. either its
- *	superlayer becomes visible, or it's added as a sublayer of a
- *	visible layer
+ *      Invoked when the layer is made visible, i.e. either its
+ *      superlayer becomes visible, or it's added as a sublayer of a
+ *      visible layer
  *
  * onOrderOut
- *	Invoked when the layer becomes non-visible. */
+ *      Invoked when the layer becomes non-visible. */
 
 /* Returns the default action object associated with the event named by
  * the string 'event'. The default implementation returns a suitable
  * animation object for events posted by animatable properties, nil
  * otherwise. */
 
-+ (id<CAAction>)defaultActionForKey:(NSString *)event;
++ (nullable id<CAAction>)defaultActionForKey:(NSString *)event;
 
 /* Returns the action object associated with the event named by the
  * string 'event'. The default implementation searches for an action
@@ -658,12 +667,12 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * following steps are ignored. If the final result is an instance of
  * NSNull, it is converted to `nil'. */
 
-- (id<CAAction>)actionForKey:(NSString *)event;
+- (nullable id<CAAction>)actionForKey:(NSString *)event;
 
 /* A dictionary mapping keys to objects implementing the CAAction
  * protocol. Default value is nil. */
 
-@property(copy) NSDictionary *actions;
+@property(nullable, copy) NSDictionary<NSString *, id<CAAction>> *actions;
 
 /** Animation methods. **/
 
@@ -682,7 +691,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * subsequent modifications to `anim' will have no affect unless it is
  * added to another layer. */
 
-- (void)addAnimation:(CAAnimation *)anim forKey:(NSString *)key;
+- (void)addAnimation:(CAAnimation *)anim forKey:(nullable NSString *)key;
 
 /* Remove all animations attached to the layer. */
 
@@ -696,25 +705,26 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * attached to the receiver. The order of the array matches the order
  * in which animations will be applied. */
 
-- (NSArray *)animationKeys;
+- (nullable NSArray<NSString *> *)animationKeys;
 
 /* Returns the animation added to the layer with identifier 'key', or nil
  * if no such animation exists. Attempting to modify any properties of
  * the returned object will result in undefined behavior. */
 
-- (CAAnimation *)animationForKey:(NSString *)key;
+- (nullable CAAnimation *)animationForKey:(NSString *)key;
+
 
 /** Miscellaneous properties. **/
 
 /* The name of the layer. Used by some layout managers. Defaults to nil. */
 
-@property(copy) NSString *name;
+@property(nullable, copy) NSString *name;
 
 /* An object that will receive the CALayer delegate methods defined
  * below (for those that it implements). The value of this property is
  * not retained. Default value is nil. */
 
-@property(weak) id delegate;
+@property(nullable, weak) id delegate;
 
 /* When non-nil, a dictionary dereferenced to find property values that
  * aren't explicitly defined by the layer. (This dictionary may in turn
@@ -726,7 +736,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * the values of the layer's properties are undefined until the `style'
  * property is reset. */
 
-@property(copy) NSDictionary *style;
+@property(nullable, copy) NSDictionary *style;
 
 @end
 
@@ -763,7 +773,13 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * associated with the event. */
 
 - (void)runActionForKey:(NSString *)event object:(id)anObject
-    arguments:(NSDictionary *)dict;
+    arguments:(nullable NSDictionary *)dict;
+
+@end
+
+/** NSNull protocol conformance. **/
+
+@interface NSNull (CAActionAdditions) <CAAction>
 
 @end
 
@@ -794,7 +810,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
  * '[NSNull null]') explicitly forces no further search. (I.e. the
  * +defaultActionForKey: method will not be called.) */
 
-- (id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event;
+- (nullable id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event;
 
 @end
 
@@ -850,3 +866,5 @@ CA_EXTERN NSString * const kCAOnOrderOut
 
 CA_EXTERN NSString * const kCATransition
     __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+
+NS_ASSUME_NONNULL_END

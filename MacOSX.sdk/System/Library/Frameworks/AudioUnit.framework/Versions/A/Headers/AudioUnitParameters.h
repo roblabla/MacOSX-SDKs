@@ -1,19 +1,21 @@
-/*
-     File:       AudioUnitParameters.h
- 
-     Contains:   Parameter constants for Apple AudioUnits
- 
-     Copyright:  (c) 2002-2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		AudioUnitParameters.h
+ 	@framework	AudioUnit.framework
+ 	@copyright	(c) 2000-2015 Apple, Inc. All rights reserved.
+	@abstract	Constants for the parameters of Apple audio units.
 */
 
-#ifndef __AudioUnitParameters
-#define __AudioUnitParameters
+#ifndef AudioUnit_AudioUnitParameters_h
+#define AudioUnit_AudioUnitParameters_h
+
+#include <Availability.h>
+#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
+	#include <CoreAudio/CoreAudioTypes.h>
+	#include <AudioUnit/AUComponent.h>
+#else
+	#include <CoreAudioTypes.h>
+	#include <AUComponent.h>
+#endif
 
 #pragma mark General Declarations
 
@@ -24,7 +26,7 @@ MIDI messages, that should be supported in Group scope by MIDI capable AUs.
 
 Group scope parameter IDs from 0 < 512 are reserved for mapping MIDI controllers.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-enum {
+CF_ENUM(AudioUnitParameterID) {
 	kAUGroupParameterID_Volume					= 7,	// value 0 < 128
 	kAUGroupParameterID_Sustain					= 64, 	// value 0-63 (off), 64-127 (on)
 	kAUGroupParameterID_Sostenuto				= 66, 	// value 0-63 (off), 64-127 (on)
@@ -77,7 +79,7 @@ get the parameter information from the audio unit itself.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 // Parameters for all Panner AudioUnits
-enum {
+CF_ENUM(AudioUnitParameterID) {
         // Global, Linear, 0->1, 1
 	kPannerParam_Gain = 0,			
 	
@@ -100,7 +102,7 @@ enum {
 #pragma mark Apple Specific
 
 // Parameters for the AUSpatialMixer unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
     // Input, Degrees, -180->180, 0
     kSpatialMixerParam_Azimuth		= 0,
     
@@ -143,7 +145,7 @@ enum {
 };
 
 // Reverb parameters applicable to AUSpatialMixer
-enum {
+CF_ENUM(AudioUnitParameterID) {
     // Global, Hertz, 10.0 -> 20000.0, 800.0
 	kReverbParam_FilterFrequency					= 14,
     
@@ -162,7 +164,7 @@ enum {
 
 
 // Parameters for the AUMixer3D unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
         // Input, Degrees, -180->180, 0
     k3DMixerParam_Azimuth		= 0,
         
@@ -217,7 +219,7 @@ enum {
 
 // Parameters for the AUMultiChannelMixer unit
 // these are available for both desktop and iphone
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Linear Gain, 0->1, 1
 	kMultiChannelMixerParam_Volume 	= 0,
 		// Global, Boolean, 0->1, 1
@@ -236,7 +238,7 @@ enum {
 
 
 // Parameters for the AUMatrixMixer unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 	kMatrixMixerParam_Volume 	= 0,
 	kMatrixMixerParam_Enable 	= 1,
 	
@@ -257,20 +259,20 @@ enum {
 
 // Output Units
 // Parameters for the AudioDeviceOutput, DefaultOutputUnit, and SystemOutputUnit units
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, LinearGain, 0->1, 1
 	kHALOutputParam_Volume 		= 14 
 };
 
 // Parameters for the AUTimePitch, AUTimePitch (offline), AUPitch units
-enum {
+CF_ENUM(AudioUnitParameterID) {
 	kTimePitchParam_Rate						= 0,
 	kTimePitchParam_Pitch						= 1,
 	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
 };
 
 // Parameters for AUNewTimePitch
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, rate, 1/32 -> 32.0, 1.0
 	kNewTimePitchParam_Rate							= 0,
 		// Global, Cents, -2400 -> 2400, 1.0
@@ -282,7 +284,7 @@ enum {
 };
 
 // Parameters for the AUSampler unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, dB, -90->12, 0
 	kAUSamplerParam_Gain				= 900,
 
@@ -302,7 +304,7 @@ enum {
 // SampleRate/2).
 
 // Parameters for the AUBandpass unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Hz, 20->(SampleRate/2), 5000
 	kBandpassParam_CenterFrequency 			= 0,
 
@@ -311,7 +313,7 @@ enum {
 };
 
 // Parameters for the AUHipass unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Hz, 10->(SampleRate/2), 6900
 	kHipassParam_CutoffFrequency 			= 0,
 		
@@ -320,7 +322,7 @@ enum {
 };
 
 // Parameters for the AULowpass unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Hz, 10->(SampleRate/2), 6900
 	kLowPassParam_CutoffFrequency 			= 0,
 		
@@ -329,7 +331,7 @@ enum {
 };
 
 // Parameters for the AUHighShelfFilter unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Hz, 10000->(SampleRate/2), 10000
 	kHighShelfParam_CutOffFrequency 		= 0,
 		
@@ -338,7 +340,7 @@ enum {
 };
 
 // Parameters for the AULowShelfFilter unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Hz, 10->200, 80
 	kAULowShelfParam_CutoffFrequency = 0,
 		
@@ -347,7 +349,7 @@ enum {
 };
 
 // Parameters for the AUParametricEQ unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Hz, 20->(SampleRate/2), 2000
     kParametricEQParam_CenterFreq = 0,
 		
@@ -359,7 +361,7 @@ enum {
 };
 
 // Parameters for the AUPeakLimiter unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Secs, 0.001->0.03, 0.012
 	kLimiterParam_AttackTime 			= 0,
 		
@@ -371,7 +373,7 @@ enum {
 };
 
 // Parameters for the AUDynamicsProcessor unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, dB, -40->20, -20
 	kDynamicsProcessorParam_Threshold 			= 0,
 		
@@ -401,7 +403,7 @@ enum {
 
 
 // Parameters for the AUVarispeed unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Rate, 0.25 -> 4.0, 1.0
 	kVarispeedParam_PlaybackRate				= 0,
 		// Global, Cents, -2400 -> 2400, 0.0
@@ -410,7 +412,7 @@ enum {
 
 
 // Parameters for the Distortion unit 
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Milliseconds, 0.1 -> 500, 0.1
 	kDistortionParam_Delay = 0,
 		// Global, Rate, 0.1 -> 50, 1.0
@@ -451,7 +453,7 @@ enum {
 };
 
 // Parameters for the AUDelay unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, EqPow Crossfade, 0->100, 50
 	kDelayParam_WetDryMix 				= 0,
 		
@@ -472,7 +474,7 @@ enum {
 // AUNBandEQ property kAUNBandEQProperty_NumberOfBands. For example, the parameter ID corresponding
 // to the filter type of band 4 would be kAUNBandEQParam_FilterType + 3.
 // kAUNBandEQParam_GlobalsGain is an overall gain and does not have a band.
-enum {
+CF_ENUM(AudioUnitParameterID) {
     // Global, dB, -96->24, 0
 	kAUNBandEQParam_GlobalGain								= 0,
 	
@@ -568,7 +570,7 @@ enum {
  - kAUNBandEQParam_Bandwidth
  
  */
-enum {
+CF_ENUM(long) {
 	kAUNBandEQFilterType_Parametric 						= 0,
 	kAUNBandEQFilterType_2ndOrderButterworthLowPass			= 1,
 	kAUNBandEQFilterType_2ndOrderButterworthHighPass		= 2,
@@ -586,7 +588,7 @@ enum {
 
 
 // Parameters for the AURoundTripAACParam unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, indexed : AAC, HE-AAC, HE-AACv2
 	kRoundTripAACParam_Format				= 0,
 	
@@ -606,13 +608,13 @@ enum {
 
 
 // Some parameters for the AUGraphicEQ unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Indexed, currently either 10 or 31
 	kGraphicEQParam_NumberOfBands 			= 10000
 };
 
 // Parameters for the AUMatrixReverb unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, EqPow CrossFade, 0->100, 100
 	kReverbParam_DryWetMix 							= 0,
 		
@@ -657,7 +659,7 @@ enum {
 };
 
 // Parameters for the AUMultibandCompressor unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, dB, -40 -> 40, 0
 	kMultibandCompressorParam_Pregain 			= 0,
 		// Global, dB, -40 -> 40, 0
@@ -727,7 +729,7 @@ enum {
 };
 
 // Parameters for the AUFilter unit
-enum
+CF_ENUM(AudioUnitParameterID)
 {
 		// Global, indexed, 0 -> 1, 0
 	kMultibandFilter_LowFilterType  = 0,
@@ -766,7 +768,7 @@ enum
 };
 
 // Parameters for AURogerBeep
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, dB, -80 -> 0, -6
 	kRogerBeepParam_InGateThreshold = 0,
 		// Global, Milliseconds, 0 -> 1000, 1000
@@ -786,7 +788,7 @@ enum {
 // Mixer Units
 
 // Parameters for the Stereo Mixer unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Input/Output, Mixer Fader Curve, 0->1, 1
 	kStereoMixerParam_Volume 	= 0,
 		
@@ -806,14 +808,14 @@ enum {
 };
 
 // Parameters for the AUNetReceive unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, indexed, 0 -> 5, read only
 	kAUNetReceiveParam_Status = 0,
 	kAUNetReceiveParam_NumParameters = 1
 };
 
 // Parameters for the AUNetSend unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, indexed, 0 -> 5, read only
 	kAUNetSendParam_Status = 0,
 	kAUNetSendParam_NumParameters = 1
@@ -832,7 +834,7 @@ enum {
 
 // Music Device
 // Parameters for the DLSMusicDevice unit - defined and reported in the global scope
-enum {
+CF_ENUM(AudioUnitParameterID) {
 		// Global, Cents, -1200, 1200, 0
 	kMusicDeviceParam_Tuning 	= 0,
 
@@ -873,7 +875,7 @@ enum {
 
 
 // Parameters for the AURandom unit
-enum {
+CF_ENUM(AudioUnitParameterID) {
 	kRandomParam_BoundA 			= 0,
 	kRandomParam_BoundB				= 1,
 	kRandomParam_Curve				= 2
@@ -883,4 +885,4 @@ enum {
 #pragma mark Apple Specific - iOS
 
 
-#endif //__AudioUnitParameters
+#endif //AudioUnit_AudioUnitParameters_h

@@ -9,14 +9,14 @@
 
 #include <ImageIO/ImageIOBase.h>
 
-typedef struct CGImageSource *CGImageSourceRef;
+typedef struct IIO_BRIDGED_TYPE(id) CGImageSource * CGImageSourceRef;
 
 #include <CoreGraphics/CoreGraphics.h>
 #include "CGImageMetadata.h"
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
-enum CGImageSourceStatus {
+typedef CF_ENUM(int32_t, CGImageSourceStatus) {
     kCGImageStatusUnexpectedEOF = -5,
     kCGImageStatusInvalidData = -4,
     kCGImageStatusUnknownType = -3,
@@ -24,7 +24,8 @@ enum CGImageSourceStatus {
     kCGImageStatusIncomplete = -1,
     kCGImageStatusComplete = 0
 };
-typedef enum CGImageSourceStatus CGImageSourceStatus;
+
+CF_ASSUME_NONNULL_BEGIN
 
 /** Keys for the options dictionary when creating a CGImageSourceRef. **/
 
@@ -98,6 +99,17 @@ IMAGEIO_EXTERN const CFStringRef kCGImageSourceThumbnailMaxPixelSize  IMAGEIO_AV
 
 IMAGEIO_EXTERN const CFStringRef kCGImageSourceCreateThumbnailWithTransform  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
+/* Specifies that, if possible, an image should be returned as scaled down (in height and width) by a specified factor.
+ * The resulting image will be smaller and have reduced spacial quality but will otherwise have the same characteristics
+ * as the full size normal image.
+ * If the specified scaling factor is not supported, a larger or full size normal image will be returned.
+ * Supported file formats are JPEG, TIFF, and PNG.
+ * The value of this key must be an integer CFNumberRef (allowed values: 2, 4, and 8).
+ */
+
+IMAGEIO_EXTERN const CFStringRef kCGImageSourceSubsampleFactor  IMAGEIO_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+
+CF_ASSUME_NONNULL_END
 
 
 /* Return the CFTypeID for CGImageSources. */
@@ -106,74 +118,74 @@ IMAGEIO_EXTERN CFTypeID CGImageSourceGetTypeID (void)  IMAGEIO_AVAILABLE_STARTIN
 
 /* Return an array of supported type identifiers. */
 
-IMAGEIO_EXTERN CFArrayRef CGImageSourceCopyTypeIdentifiers(void)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CFArrayRef __nonnull CGImageSourceCopyTypeIdentifiers(void)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Create an image source reading from the data provider `provider'. The
  * `options' dictionary may be used to request additional creation options;
  * see the list of keys above for more information. */
 
-IMAGEIO_EXTERN CGImageSourceRef CGImageSourceCreateWithDataProvider(CGDataProviderRef provider, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageSourceRef __nullable CGImageSourceCreateWithDataProvider(CGDataProviderRef __nonnull provider, CFDictionaryRef __nullable options) IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Create an image source reading from `data'.  The `options' dictionary
  * may be used to request additional creation options; see the list of keys
  * above for more information. */
 
-IMAGEIO_EXTERN CGImageSourceRef CGImageSourceCreateWithData(CFDataRef data, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageSourceRef __nullable CGImageSourceCreateWithData(CFDataRef __nonnull data, CFDictionaryRef __nullable options) IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Create an image source reading from `url'. The `options' dictionary may
  * be used to request additional creation options; see the list of keys
  * above for more information. */
 
-IMAGEIO_EXTERN CGImageSourceRef CGImageSourceCreateWithURL(CFURLRef url, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageSourceRef __nullable CGImageSourceCreateWithURL(CFURLRef __nonnull url, CFDictionaryRef __nullable options) IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Return the type identifier of the image source `isrc'.  This type is the
  * type of the source "container", which is not necessarily the type of the
  * image(s) in the container.  For example, the .icns format supports
  * embedded JPEG2000 but the source type will be "com.apple.icns". */
 
-IMAGEIO_EXTERN CFStringRef CGImageSourceGetType(CGImageSourceRef isrc)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CFStringRef __nullable CGImageSourceGetType(CGImageSourceRef __nonnull isrc)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Return the number of images (not including thumbnails) in the image
  * source `isrc'. */
 
-IMAGEIO_EXTERN size_t CGImageSourceGetCount(CGImageSourceRef isrc)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN size_t CGImageSourceGetCount(CGImageSourceRef __nonnull isrc)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Return the properties of the image source `isrc'.  These properties
  * apply to the container in general but not necessarily to any individual
  * image that it contains. */
 
-IMAGEIO_EXTERN CFDictionaryRef CGImageSourceCopyProperties(CGImageSourceRef isrc, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CFDictionaryRef __nullable CGImageSourceCopyProperties(CGImageSourceRef __nonnull isrc, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Return the properties of the image at `index' in the image source
  * `isrc'.  The index is zero-based. The `options' dictionary may be used
  * to request additional options; see the list of keys above for more
  * information. */
 
-IMAGEIO_EXTERN CFDictionaryRef CGImageSourceCopyPropertiesAtIndex(CGImageSourceRef isrc, size_t index, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CFDictionaryRef __nullable CGImageSourceCopyPropertiesAtIndex(CGImageSourceRef __nonnull isrc, size_t index, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Return the metadata of the image at `index' in the image source
  * `isrc'. The index is zero-based. The `options' dictionary may be used
  * to request additional options; see the list of keys above for more
  * information. Please refer to CGImageMetadata.h for usage of metadata. */
-IMAGEIO_EXTERN CGImageMetadataRef CGImageSourceCopyMetadataAtIndex (CGImageSourceRef isrc, size_t index, CFDictionaryRef options) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_7_0);
+IMAGEIO_EXTERN CGImageMetadataRef __nullable CGImageSourceCopyMetadataAtIndex (CGImageSourceRef __nonnull isrc, size_t index, CFDictionaryRef __nullable options) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_7_0);
 
 /* Return the image at `index' in the image source `isrc'.  The index is
  * zero-based. The `options' dictionary may be used to request additional
  * creation options; see the list of keys above for more information. */
 
-IMAGEIO_EXTERN CGImageRef CGImageSourceCreateImageAtIndex(CGImageSourceRef isrc, size_t index, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageRef __nullable CGImageSourceCreateImageAtIndex(CGImageSourceRef __nonnull isrc, size_t index, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Remove the cached decoded image data for the image at `index' in the image source `isrc'.
  * The index is zero-based.
  */
-IMAGEIO_EXTERN void CGImageSourceRemoveCacheAtIndex(CGImageSourceRef isrc, size_t index) IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+IMAGEIO_EXTERN void CGImageSourceRemoveCacheAtIndex(CGImageSourceRef __nonnull isrc, size_t index) IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 /* Return the thumbnail of the image at `index' in the image source `isrc'.
  * The index is zero-based. The `options' dictionary may be used to request
  * additional thumbnail creation options; see the list of keys above for
  * more information. */
 
-IMAGEIO_EXTERN CGImageRef CGImageSourceCreateThumbnailAtIndex(CGImageSourceRef isrc, size_t index, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageRef __nullable CGImageSourceCreateThumbnailAtIndex(CGImageSourceRef __nonnull isrc, size_t index, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Create an incremental image source. No data is provided at creation
  * time; it is assumed that data will eventually be provided using
@@ -181,34 +193,34 @@ IMAGEIO_EXTERN CGImageRef CGImageSourceCreateThumbnailAtIndex(CGImageSourceRef i
  * `options' dictionary may be used to request additional creation options;
  * see the list of keys above for more information. */
 
-IMAGEIO_EXTERN CGImageSourceRef CGImageSourceCreateIncremental(CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageSourceRef __nonnull CGImageSourceCreateIncremental(CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Update the incremental image source `isrc' with new data.  The new data
  * must include all the previous data plus any additional new data. The
  * `final' parameter should be true when the final set of data is provided;
  * false otherwise. */
 
-IMAGEIO_EXTERN void CGImageSourceUpdateData(CGImageSourceRef isrc, CFDataRef data, bool final)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN void CGImageSourceUpdateData(CGImageSourceRef __nonnull isrc, CFDataRef __nonnull data, bool final)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Update the incremental image source `isrc' with a new data provider.
  * The new data provider must provide all the previous data plus any
  * additional new data. The `final' parameter should be true when the final
  * set of data is provided; false otherwise. */
 
-IMAGEIO_EXTERN void CGImageSourceUpdateDataProvider(CGImageSourceRef isrc, CGDataProviderRef provider, bool final)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN void CGImageSourceUpdateDataProvider(CGImageSourceRef __nonnull isrc, CGDataProviderRef __nonnull provider, bool final)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Return the overall status of the image source `isrc'.  The status is
  * particularly informative for incremental image sources, but may be used
  * by clients providing non-incremental data as well. */
 
-IMAGEIO_EXTERN CGImageSourceStatus CGImageSourceGetStatus(CGImageSourceRef isrc)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageSourceStatus CGImageSourceGetStatus(CGImageSourceRef __nonnull isrc)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 /* Return the current status of the image at `index' in the image source
  * `isrc'. The index is zero-based. The returned status is particularly
  * informative for incremental image sources but may used by clients
  * providing non-incremental data as well. */
 
-IMAGEIO_EXTERN CGImageSourceStatus CGImageSourceGetStatusAtIndex(CGImageSourceRef isrc, size_t index)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageSourceStatus CGImageSourceGetStatusAtIndex(CGImageSourceRef __nonnull isrc, size_t index)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

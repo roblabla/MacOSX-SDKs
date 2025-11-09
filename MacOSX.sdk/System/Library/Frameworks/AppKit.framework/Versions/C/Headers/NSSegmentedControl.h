@@ -1,12 +1,14 @@
 /*
 	NSSegmentedControl.h
 	Application Kit
-	Copyright (c) 2003-2014, Apple Inc.
+	Copyright (c) 2003-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSImage;
 
@@ -47,8 +49,8 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
 - (void)setWidth:(CGFloat)width forSegment:(NSInteger)segment;
 - (CGFloat)widthForSegment:(NSInteger)segment;
 
-- (void)setImage:(NSImage *)image forSegment:(NSInteger)segment;
-- (NSImage *)imageForSegment:(NSInteger)segment;
+- (void)setImage:(nullable NSImage *)image forSegment:(NSInteger)segment;
+- (nullable NSImage *)imageForSegment:(NSInteger)segment;
 
 
 - (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
@@ -56,10 +58,10 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
 
 
 - (void)setLabel:(NSString *)label forSegment:(NSInteger)segment;
-- (NSString *)labelForSegment:(NSInteger)segment;
+- (nullable NSString *)labelForSegment:(NSInteger)segment;
 
-- (void)setMenu:(NSMenu *)menu forSegment:(NSInteger)segment;
-- (NSMenu *)menuForSegment:(NSInteger)segment;
+- (void)setMenu:(nullable NSMenu *)menu forSegment:(NSInteger)segment;
+- (nullable NSMenu *)menuForSegment:(NSInteger)segment;
 
 - (void)setSelected:(BOOL)selected forSegment:(NSInteger)segment;
 - (BOOL)isSelectedForSegment:(NSInteger)segment;
@@ -75,6 +77,8 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
 
 /*  This message is valid only for trackingMode=NSSegmentSwitchTrackingMomentaryAccelerator and provides the double value for the selected segment.
  */
-- (double)doubleValueForSelectedSegment NS_AVAILABLE_MAC(10_10_3);
+@property (readonly) double doubleValueForSelectedSegment NS_AVAILABLE_MAC(10_10_3);
 
 @end
+
+NS_ASSUME_NONNULL_END

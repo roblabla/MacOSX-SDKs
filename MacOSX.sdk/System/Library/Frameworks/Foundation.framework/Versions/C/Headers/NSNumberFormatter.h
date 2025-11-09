@@ -1,11 +1,13 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
 #include <CoreFoundation/CFNumberFormatter.h>
 
-@class NSLocale, NSError, NSMutableDictionary, NSRecursiveLock;
+@class NSLocale, NSError, NSMutableDictionary, NSRecursiveLock, NSString, NSCache;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
     NSNumberFormatterBehaviorDefault = 0,
@@ -23,7 +25,8 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
     NSNumberFormatterBehavior _behavior;
     NSRecursiveLock *_lock;
     unsigned long _stateBitMask; // this is for NSUnitFormatter
-    void *_reserved[9];
+    NSInteger _cacheGeneration;
+    void *_reserved[8];
 }
 
 @property NSFormattingContext formattingContext NS_AVAILABLE(10_10, 8_0); // default is NSFormattingContextUnknown
@@ -32,13 +35,13 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
 
 // Report the used range of the string and an NSError, in addition to the usual stuff from NSFormatter
 
-- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string range:(inout NSRange *)rangep error:(out NSError **)error;
+- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string range:(inout nullable NSRange *)rangep error:(out NSError **)error;
 
 // Even though NSNumberFormatter responds to the usual NSFormatter methods,
 //   here are some convenience methods which are a little more obvious.
 
-- (NSString *)stringFromNumber:(NSNumber *)number;
-- (NSNumber *)numberFromString:(NSString *)string;
+- (nullable NSString *)stringFromNumber:(NSNumber *)number;
+- (nullable NSNumber *)numberFromString:(NSString *)string;
 
 typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
     NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,
@@ -47,6 +50,10 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
     NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,
     NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,
     NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle,
+    NSNumberFormatterOrdinalStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterOrdinalStyle,
+    NSNumberFormatterCurrencyISOCodeStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyISOCodeStyle,
+    NSNumberFormatterCurrencyPluralStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyPluralStyle,
+    NSNumberFormatterCurrencyAccountingStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyAccountingStyle,
 };
 
 + (NSString *)localizedStringFromNumber:(NSNumber *)num numberStyle:(NSNumberFormatterStyle)nstyle NS_AVAILABLE(10_6, 4_0);
@@ -57,50 +64,50 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
 + (void)setDefaultFormatterBehavior:(NSNumberFormatterBehavior)behavior;
 
 @property NSNumberFormatterStyle numberStyle;
-@property (copy) NSLocale *locale;
+@property (null_resettable, copy) NSLocale *locale;
 @property BOOL generatesDecimalNumbers;
 @property NSNumberFormatterBehavior formatterBehavior;
 
-@property (copy) NSString *negativeFormat;
-@property (copy) NSDictionary *textAttributesForNegativeValues;
-@property (copy) NSString *positiveFormat;
-@property (copy) NSDictionary *textAttributesForPositiveValues;
+@property (null_resettable, copy) NSString *negativeFormat;
+@property (nullable, copy) NSDictionary<NSString *, id> *textAttributesForNegativeValues;
+@property (null_resettable, copy) NSString *positiveFormat;
+@property (nullable, copy) NSDictionary<NSString *, id> *textAttributesForPositiveValues;
 @property BOOL allowsFloats;
-@property (copy) NSString *decimalSeparator;
+@property (null_resettable, copy) NSString *decimalSeparator;
 @property BOOL alwaysShowsDecimalSeparator;
-@property (copy) NSString *currencyDecimalSeparator;
+@property (null_resettable, copy) NSString *currencyDecimalSeparator;
 @property BOOL usesGroupingSeparator;
-@property (copy) NSString *groupingSeparator;
+@property (null_resettable, copy) NSString *groupingSeparator;
 
-@property (copy) NSString *zeroSymbol;
-@property (copy) NSDictionary *textAttributesForZero;
+@property (nullable, copy) NSString *zeroSymbol;
+@property (nullable, copy) NSDictionary<NSString *, id> *textAttributesForZero;
 @property (copy) NSString *nilSymbol;
-@property (copy) NSDictionary *textAttributesForNil;
-@property (copy) NSString *notANumberSymbol;
-@property (copy) NSDictionary *textAttributesForNotANumber;
+@property (nullable, copy) NSDictionary<NSString *, id> *textAttributesForNil;
+@property (null_resettable, copy) NSString *notANumberSymbol;
+@property (nullable, copy) NSDictionary<NSString *, id> *textAttributesForNotANumber;
 @property (copy) NSString *positiveInfinitySymbol;
-@property (copy) NSDictionary *textAttributesForPositiveInfinity;
+@property (nullable, copy) NSDictionary<NSString *, id> *textAttributesForPositiveInfinity;
 @property (copy) NSString *negativeInfinitySymbol;
-@property (copy) NSDictionary *textAttributesForNegativeInfinity;
+@property (nullable, copy) NSDictionary<NSString *, id> *textAttributesForNegativeInfinity;
 
-@property (copy) NSString *positivePrefix;
-@property (copy) NSString *positiveSuffix;
-@property (copy) NSString *negativePrefix;
-@property (copy) NSString *negativeSuffix;
-@property (copy) NSString *currencyCode;
-@property (copy) NSString *currencySymbol;
-@property (copy) NSString *internationalCurrencySymbol;
-@property (copy) NSString *percentSymbol;
-@property (copy) NSString *perMillSymbol;
-@property (copy) NSString *minusSign;
-@property (copy) NSString *plusSign;
-@property (copy) NSString *exponentSymbol;
+@property (null_resettable, copy) NSString *positivePrefix;
+@property (null_resettable, copy) NSString *positiveSuffix;
+@property (null_resettable, copy) NSString *negativePrefix;
+@property (null_resettable, copy) NSString *negativeSuffix;
+@property (null_resettable, copy) NSString *currencyCode;
+@property (null_resettable, copy) NSString *currencySymbol;
+@property (null_resettable, copy) NSString *internationalCurrencySymbol;
+@property (null_resettable, copy) NSString *percentSymbol;
+@property (null_resettable, copy) NSString *perMillSymbol;
+@property (null_resettable, copy) NSString *minusSign;
+@property (null_resettable, copy) NSString *plusSign;
+@property (null_resettable, copy) NSString *exponentSymbol;
 
 @property NSUInteger groupingSize;
 @property NSUInteger secondaryGroupingSize;
-@property (copy) NSNumber *multiplier;
+@property (nullable, copy) NSNumber *multiplier;
 @property NSUInteger formatWidth;
-@property (copy) NSString *paddingCharacter;
+@property (null_resettable, copy) NSString *paddingCharacter;
 
 
 typedef NS_ENUM(NSUInteger, NSNumberFormatterPadPosition) {
@@ -122,14 +129,14 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterRoundingMode) {
 
 @property NSNumberFormatterPadPosition paddingPosition;
 @property NSNumberFormatterRoundingMode roundingMode;
-@property (copy) NSNumber *roundingIncrement;
+@property (null_resettable, copy) NSNumber *roundingIncrement;
 @property NSUInteger minimumIntegerDigits;
 @property NSUInteger maximumIntegerDigits;
 @property NSUInteger minimumFractionDigits;
 @property NSUInteger maximumFractionDigits;
-@property (copy) NSNumber *minimum;
-@property (copy) NSNumber *maximum;
-@property (copy) NSString *currencyGroupingSeparator NS_AVAILABLE(10_5, 2_0);
+@property (nullable, copy) NSNumber *minimum;
+@property (nullable, copy) NSNumber *maximum;
+@property (null_resettable, copy) NSString *currencyGroupingSeparator NS_AVAILABLE(10_5, 2_0);
 @property (getter=isLenient) BOOL lenient NS_AVAILABLE(10_5, 2_0);
 @property BOOL usesSignificantDigits NS_AVAILABLE(10_5, 2_0);
 @property NSUInteger minimumSignificantDigits NS_AVAILABLE(10_5, 2_0);
@@ -144,7 +151,7 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterRoundingMode) {
 @interface NSNumberFormatter (NSNumberFormatterCompatibility)
 
 @property BOOL hasThousandSeparators;
-@property (copy) NSString *thousandSeparator;
+@property (null_resettable, copy) NSString *thousandSeparator;
 
 @property BOOL localizesFormat;
 
@@ -159,3 +166,4 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterRoundingMode) {
 @end
 #endif
 
+NS_ASSUME_NONNULL_END

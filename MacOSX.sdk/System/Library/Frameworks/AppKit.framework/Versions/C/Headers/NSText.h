@@ -1,12 +1,14 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSSpellProtocol.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSColor, NSFont, NSNotification;
 @protocol NSTextDelegate;
@@ -27,11 +29,16 @@ enum {
 
 /* Values for NSTextAlignment */
 typedef NS_ENUM(NSUInteger, NSTextAlignment) {
-    NSLeftTextAlignment		= 0,    // Visually left aligned
-    NSRightTextAlignment	= 1,    // Visually right aligned
-    NSCenterTextAlignment	= 2,    // Visually centered
-    NSJustifiedTextAlignment	= 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
-    NSNaturalTextAlignment	= 4     // Indicates the default alignment for script
+    NSTextAlignmentLeft      = 0,    // Visually left aligned
+#if TARGET_OS_IPHONE
+    NSTextAlignmentCenter    = 1,    // Visually centered
+    NSTextAlignmentRight     = 2,    // Visually right aligned
+#else /* !TARGET_OS_IPHONE */
+    NSTextAlignmentRight     = 1,    // Visually right aligned
+    NSTextAlignmentCenter    = 2,    // Visually centered
+#endif
+    NSTextAlignmentJustified = 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
+    NSTextAlignmentNatural   = 4     // Indicates the default alignment for script
 };
 
 /* Values for NSWritingDirection */
@@ -39,12 +46,6 @@ typedef NS_ENUM(NSInteger, NSWritingDirection) {
     NSWritingDirectionNatural       = -1,   // Determines direction using the Unicode Bidi Algorithm rules P2 and P3
     NSWritingDirectionLeftToRight   = 0,    // Left to right writing direction
     NSWritingDirectionRightToLeft   = 1     // Right to left writing direction
-};
-
-/* Additional values to be added to NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft, when used with NSWritingDirectionAttributeName */
-enum {
-    NSTextWritingDirectionEmbedding     = (0 << 1),
-    NSTextWritingDirectionOverride      = (1 << 1)
 };
 
 /* Movement codes for movement between fields; these codes are the integer values of the NSTextMovement key in NSTextDidEndEditing notifications, and are used when completions change in the NSTextView method insertCompletion:forPartialWordRange:movement:isFinal:.  Note that the value 0 is used for movements that do not fall under any of the other values, hence NSOtherTextMovement is a more appropriate name than the previous NSIllegalTextMovement.
@@ -68,21 +69,21 @@ enum {
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-@property (copy) NSString *string;
+@property (nullable, copy) NSString *string;
 
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString;
 - (void)replaceCharactersInRange:(NSRange)range withRTF:(NSData *)rtfData;
 - (void)replaceCharactersInRange:(NSRange)range withRTFD:(NSData *)rtfdData;
 
-- (NSData *)RTFFromRange:(NSRange)range;
-- (NSData *)RTFDFromRange:(NSRange)range;
+- (nullable NSData *)RTFFromRange:(NSRange)range;
+- (nullable NSData *)RTFDFromRange:(NSRange)range;
 
 - (BOOL)writeRTFDToFile:(NSString *)path atomically:(BOOL)flag;
 - (BOOL)readRTFDFromFile:(NSString *)path;
 
-@property (assign) id<NSTextDelegate> delegate;
+@property (nullable, assign) id<NSTextDelegate> delegate;
 
 @property (getter=isEditable) BOOL editable;
 @property (getter=isSelectable) BOOL selectable;
@@ -91,7 +92,7 @@ enum {
 @property (getter=isFieldEditor) BOOL fieldEditor;     // Indicates whether to end editing on CR, TAB, etc.
 @property BOOL usesFontPanel;
 @property BOOL drawsBackground;
-@property (copy) NSColor *backgroundColor;
+@property (nullable, copy) NSColor *backgroundColor; // Default is nil. If nil, it implies -drawsBackground=NO
 
 @property (getter=isRulerVisible, readonly) BOOL rulerVisible;
 
@@ -99,12 +100,12 @@ enum {
 
 - (void)scrollRangeToVisible:(NSRange)range;
 
-@property (strong) NSFont *font;
-@property (copy) NSColor *textColor;
+@property (nullable, strong) NSFont *font;
+@property (nullable, copy) NSColor *textColor; // Default is nil. If nil, draws with blackColor
 @property NSTextAlignment alignment;
 @property NSWritingDirection baseWritingDirection;
 
-- (void)setTextColor:(NSColor *)color range:(NSRange)range;
+- (void)setTextColor:(nullable NSColor *)color range:(NSRange)range; // Passing nil removes NSForegroundColorAttributeName from range
 - (void)setFont:(NSFont *)font range:(NSRange)range;
 
 @property NSSize maxSize;
@@ -115,26 +116,26 @@ enum {
 
 - (void)sizeToFit;
 
-- (void)copy:(id)sender;
-- (void)copyFont:(id)sender;
-- (void)copyRuler:(id)sender;
-- (void)cut:(id)sender;
-- (void)delete:(id)sender;
-- (void)paste:(id)sender;
-- (void)pasteFont:(id)sender;
-- (void)pasteRuler:(id)sender;
-- (void)selectAll:(id)sender;
-- (void)changeFont:(id)sender;
-- (void)alignLeft:(id)sender;
-- (void)alignRight:(id)sender;
-- (void)alignCenter:(id)sender;
-- (void)subscript:(id)sender;
-- (void)superscript:(id)sender;
-- (void)underline:(id)sender;
-- (void)unscript:(id)sender;
-- (void)showGuessPanel:(id)sender;
-- (void)checkSpelling:(id)sender;
-- (void)toggleRuler:(id)sender;
+- (void)copy:(nullable id)sender;
+- (void)copyFont:(nullable id)sender;
+- (void)copyRuler:(nullable id)sender;
+- (void)cut:(nullable id)sender;
+- (void)delete:(nullable id)sender;
+- (void)paste:(nullable id)sender;
+- (void)pasteFont:(nullable id)sender;
+- (void)pasteRuler:(nullable id)sender;
+- (void)selectAll:(nullable id)sender;
+- (void)changeFont:(nullable id)sender;
+- (void)alignLeft:(nullable id)sender;
+- (void)alignRight:(nullable id)sender;
+- (void)alignCenter:(nullable id)sender;
+- (void)subscript:(nullable id)sender;
+- (void)superscript:(nullable id)sender;
+- (void)underline:(nullable id)sender;
+- (void)unscript:(nullable id)sender;
+- (void)showGuessPanel:(nullable id)sender;
+- (void)checkSpelling:(nullable id)sender;
+- (void)toggleRuler:(nullable id)sender;
 
 @end
 
@@ -148,6 +149,22 @@ enum {
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString *NSTextDidBeginEditingNotification;
-APPKIT_EXTERN NSString *NSTextDidEndEditingNotification;    // userInfo key:  @"NSTextMovement"
-APPKIT_EXTERN NSString *NSTextDidChangeNotification;
+APPKIT_EXTERN NSString * NSTextDidBeginEditingNotification;
+APPKIT_EXTERN NSString * NSTextDidEndEditingNotification;    // userInfo key:  @"NSTextMovement"
+APPKIT_EXTERN NSString * NSTextDidChangeNotification;
+
+
+/* Deprecated */
+/* Additional values to be added to NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft, when used with NSWritingDirectionAttributeName */
+enum {
+    NSTextWritingDirectionEmbedding NS_DEPRECATED_MAC(10_0, 10_11, "Use NSWritingDirectionEmbedding instead")     = (0 << 1),
+    NSTextWritingDirectionOverride NS_DEPRECATED_MAC(10_0, 10_11, "Use NSWritingDirectionOverride instead")      = (1 << 1)
+};
+
+static const NSTextAlignment NSLeftTextAlignment = NSTextAlignmentLeft;
+static const NSTextAlignment NSRightTextAlignment = NSTextAlignmentRight;
+static const NSTextAlignment NSCenterTextAlignment = NSTextAlignmentCenter;
+static const NSTextAlignment NSJustifiedTextAlignment = NSTextAlignmentJustified;
+static const NSTextAlignment NSNaturalTextAlignment = NSTextAlignmentNatural;
+
+NS_ASSUME_NONNULL_END

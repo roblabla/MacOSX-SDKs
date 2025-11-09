@@ -12,6 +12,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  @const CBUUIDCharacteristicExtendedPropertiesString
  *  @discussion The string representation of the UUID for the extended properties descriptor.
@@ -47,6 +49,12 @@ CB_EXTERN NSString * const CBUUIDCharacteristicFormatString;
  *  @discussion The string representation of the UUID for the aggregate descriptor.
  */
 CB_EXTERN NSString * const CBUUIDCharacteristicAggregateFormatString;
+/*!
+ *  @const CBUUIDValidRangeString
+ *  @discussion The string representation of the UUID for the valid range descriptor.
+ *				The corresponding value for this descriptor is an <code>NSData</code> object.
+ */
+CB_EXTERN NSString * const CBUUIDValidRangeString;
 
 
 
@@ -117,7 +125,7 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
  *      The UUID as NSData.
  *
  */
-@property(nonatomic, readonly) NSData *data;
+@property(nonatomic, readonly, nonnull) NSData *data;
 
 /*!
  * @property UUIDString
@@ -126,7 +134,7 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
  *      The UUID as NSString.
  *
  */
-@property(nonatomic, readonly) NSString *UUIDString NS_AVAILABLE(10_10, 7_1);
+@property(nonatomic, readonly, nonnull) NSString *UUIDString NS_AVAILABLE(10_10, 7_1);
 
 /*!
  * @method UUIDWithString:
@@ -166,3 +174,5 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
 + (CBUUID *)UUIDWithNSUUID:(NSUUID *)theUUID NS_AVAILABLE(10_9, 7_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

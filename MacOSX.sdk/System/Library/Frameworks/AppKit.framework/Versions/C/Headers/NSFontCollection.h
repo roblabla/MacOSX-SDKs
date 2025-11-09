@@ -1,7 +1,7 @@
 /*
 	NSFontCollection.h
 	Application Kit
-	Copyright (c) 2010-2014, Apple Inc.
+	Copyright (c) 2010-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,6 +12,8 @@
 #import <Foundation/NSString.h>
 #import <AppKit/AppKitDefines.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSFontDescriptor;
 
@@ -40,13 +42,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
  Creating collections
  */
 // Return a font collection matching the given descriptors
-+ (NSFontCollection *)fontCollectionWithDescriptors:(NSArray *)queryDescriptors;
++ (NSFontCollection *)fontCollectionWithDescriptors:(NSArray<NSFontDescriptor *> *)queryDescriptors;
 
 // Return a font collection matching all registered fonts
 + (NSFontCollection *)fontCollectionWithAllAvailableDescriptors;
 
 // Return a collection with fonts for the specified locale.
-+ (NSFontCollection *)fontCollectionWithLocale:(NSLocale *)locale;
++ (nullable NSFontCollection *)fontCollectionWithLocale:(NSLocale *)locale;
 
 /* 
  Naming collections
@@ -70,33 +72,33 @@ NS_CLASS_AVAILABLE(10_7, NA)
 + (BOOL)renameFontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility toName:(NSString *)name error:(NSError **)error;
 
 // Named collections visible to this process (array of NSString)
-+ (NSArray *)allFontCollectionNames;
++ (NSArray<NSString *> *)allFontCollectionNames;
 
 // Return the specified named collection
-+ (NSFontCollection *)fontCollectionWithName:(NSString *)name;
++ (nullable NSFontCollection *)fontCollectionWithName:(NSString *)name;
 
 // Return the specified named collection with specified visibility
-+ (NSFontCollection *)fontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility;
++ (nullable NSFontCollection *)fontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility;
 
 /*
  Descriptor matching
  */
 
 // The list of NSFontDescriptors to match. The matching descriptors are produced by matching this list of descriptors.
-@property (readonly, copy) NSArray *queryDescriptors;
+@property (nullable, readonly, copy) NSArray<NSFontDescriptor *> *queryDescriptors;
 
 // A separate list of query descriptors. The matching results from this list are excluded from matchingDescriptors.
-@property (readonly, copy) NSArray *exclusionDescriptors;
+@property (nullable, readonly, copy) NSArray<NSFontDescriptor *> *exclusionDescriptors;
 
 // Returns a list of descriptors matching the logical descriptors.
 // These are determined at runtime as (matching queryDescriptors - matching exclusionDescriptors).
 // options may be nil or a dictionary containing any combination of {NSFontCollectionIncludeDisabledFontsOption, NSFontCollectionRemoveDuplicatesOption, NSFontCollectionDisallowAutoActivationOption}.
-@property (readonly, copy) NSArray *matchingDescriptors;
-- (NSArray *)matchingDescriptorsWithOptions:(NSDictionary *)options;
+@property (nullable, readonly, copy) NSArray<NSFontDescriptor *> *matchingDescriptors;
+- (nullable NSArray<NSFontDescriptor *> *)matchingDescriptorsWithOptions:(nullable NSDictionary<NSString *, NSNumber *> *)options;
 
 // Return a list of matching descriptors for a particular family
-- (NSArray *)matchingDescriptorsForFamily:(NSString *)family;
-- (NSArray *)matchingDescriptorsForFamily:(NSString *)family options:(NSDictionary *)options;
+- (nullable NSArray<NSFontDescriptor *> *)matchingDescriptorsForFamily:(NSString *)family;
+- (nullable NSArray<NSFontDescriptor *> *)matchingDescriptorsForFamily:(NSString *)family options:(nullable NSDictionary<NSString *, NSNumber *> *)options;
 
 @end
 
@@ -107,7 +109,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSMutableFontCollection : NSFontCollection
 
 // Return a font collection matching the given descriptors
-+ (NSMutableFontCollection *)fontCollectionWithDescriptors:(NSArray *)queryDescriptors;
++ (NSMutableFontCollection *)fontCollectionWithDescriptors:(NSArray<NSFontDescriptor *> *)queryDescriptors;
 
 // Return a font collection matching all registered fonts
 + (NSMutableFontCollection *)fontCollectionWithAllAvailableDescriptors;
@@ -116,20 +118,20 @@ NS_CLASS_AVAILABLE(10_7, NA)
 + (NSMutableFontCollection *)fontCollectionWithLocale:(NSLocale *)locale;
 
 // Return the specified named collection
-+ (NSMutableFontCollection *)fontCollectionWithName:(NSString *)name;
++ (nullable NSMutableFontCollection *)fontCollectionWithName:(NSString *)name;
 
 // Return the specified named collection with specified visibility
-+ (NSMutableFontCollection *)fontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility;
++ (nullable NSMutableFontCollection *)fontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility;
 
-@property (copy) NSArray *queryDescriptors;
+@property (nullable, copy) NSArray<NSFontDescriptor *> *queryDescriptors;
 
-@property (copy) NSArray *exclusionDescriptors;
+@property (nullable, copy) NSArray<NSFontDescriptor *> *exclusionDescriptors;
 
 // Edit the query and exclusion arrays to ensure that the results of querying the given descriptors are included in the matching descriptors.
-- (void)addQueryForDescriptors:(NSArray *)descriptors;
+- (void)addQueryForDescriptors:(NSArray<NSFontDescriptor *> *)descriptors;
 
 // Edit the query and exclusion arrays to ensure that the results of querying the given descriptors are excluded from the matching descriptors.
-- (void)removeQueryForDescriptors:(NSArray *)descriptors;
+- (void)removeQueryForDescriptors:(NSArray<NSFontDescriptor *> *)descriptors;
 
 @end
 
@@ -174,4 +176,6 @@ APPKIT_EXTERN NSString * const NSFontCollectionAllFonts NS_AVAILABLE_MAC(10_7);	
 APPKIT_EXTERN NSString * const NSFontCollectionUser NS_AVAILABLE_MAC(10_7);			// Per-user unmodifiable collection
 APPKIT_EXTERN NSString * const NSFontCollectionFavorites NS_AVAILABLE_MAC(10_7);		// Collection of the user's preferred font descriptors
 APPKIT_EXTERN NSString * const NSFontCollectionRecentlyUsed NS_AVAILABLE_MAC(10_7);	// Collection automatically maintained by NSFontManager
+
+NS_ASSUME_NONNULL_END
 

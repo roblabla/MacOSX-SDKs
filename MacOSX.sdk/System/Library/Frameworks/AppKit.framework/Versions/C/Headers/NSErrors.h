@@ -1,13 +1,15 @@
 /*
 	NSErrors.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 
 @class NSString;
+
+NS_ASSUME_NONNULL_BEGIN
 
 // The following strings are the names of exceptions the AppKit can raise
 
@@ -46,5 +48,6 @@ APPKIT_EXTERN NSString *NSBadComparisonException;
 APPKIT_EXTERN NSString *NSImageCacheException;
 APPKIT_EXTERN NSString *NSNibLoadingException;
 APPKIT_EXTERN NSString *NSBrowserIllegalDelegateException;
-APPKIT_EXTERN NSString *NSAccessibilityException;
+APPKIT_EXTERN NSString *NSAccessibilityException NS_DEPRECATED_MAC(10_1, 10_11, "Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.");
 
+NS_ASSUME_NONNULL_END

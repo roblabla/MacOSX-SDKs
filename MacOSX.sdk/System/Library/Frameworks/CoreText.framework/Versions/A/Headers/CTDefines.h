@@ -2,7 +2,7 @@
  *  CTDefines.h
  *  CoreText
  *
- *  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -61,11 +61,11 @@
 @class NSFontCollection;
 @class NSFontDescriptor;
 @class NSGlyphInfo;
+@class NSMutableFontCollection;
 #  endif /* TARGET_OS_IPHONE */
+@class NSParagraphStyle;
+@class NSTextTab;
 # endif /* defined(__OBJC__) */
-# define CT_BRIDGED_TYPE(T) __attribute__((objc_bridge(T)))
-#else
-# define CT_BRIDGED_TYPE(T)
 #endif /*  __has_attribute(objc_bridge) */
 
 #endif

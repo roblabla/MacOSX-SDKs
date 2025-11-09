@@ -97,6 +97,7 @@
 #define kTextEncodingUnicodeV6_0 		0x010D				/*  Adds many symbols, including emoji support. */
 #define kTextEncodingUnicodeV6_1 		0x010E				/*  Adds emoji variation sequences, properties changes. */
 #define kTextEncodingUnicodeV6_3 		0x0110				/*  Adds new bidi controls. */
+#define kTextEncodingUnicodeV7_0 		0x0111				/*  Adds RUBLE SIGN, symbols from Wingdings/Webdings. */
 
 #define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1, Western European */
 #define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2, Central European */

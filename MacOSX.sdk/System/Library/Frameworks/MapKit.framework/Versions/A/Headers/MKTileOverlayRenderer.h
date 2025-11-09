@@ -9,7 +9,9 @@
 #import <MapKit/MKOverlayRenderer.h>
 #import <MapKit/MKTileOverlay.h>
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKTileOverlayRenderer : MKOverlayRenderer
 
 - (instancetype)initWithTileOverlay:(MKTileOverlay *)overlay;
@@ -17,3 +19,5 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 - (void)reloadData;
 
 @end
+
+NS_ASSUME_NONNULL_END

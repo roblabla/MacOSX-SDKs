@@ -9,14 +9,21 @@
 #import <EventKit/EKObject.h>
 #import <CoreLocation/CLLocation.h>
 
-EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
+NS_ASSUME_NONNULL_BEGIN
+
+@class MKMapItem;
+
+NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface EKStructuredLocation : EKObject <NSCopying> {
 }
 
-+ (EKStructuredLocation *)locationWithTitle:(NSString *)title;
++ (instancetype)locationWithTitle:(NSString *)title;
++ (instancetype)locationWithMapItem:(MKMapItem *)mapItem NS_AVAILABLE(10_11, 9_0);
 
 @property(nonatomic, strong) NSString     *title;
-@property(nonatomic, strong) CLLocation   *geoLocation;
+@property(nonatomic, strong, nullable) CLLocation   *geoLocation;
 @property(nonatomic) double                radius; // 0 = use default, unit is meters
 
 @end
+
+NS_ASSUME_NONNULL_END

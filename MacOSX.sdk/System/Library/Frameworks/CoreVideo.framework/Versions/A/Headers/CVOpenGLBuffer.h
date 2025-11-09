@@ -2,12 +2,12 @@
  *  CVOpenGLBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVOpenGLBuffer.h
-	@copyright 2004-2014 Apple Inc. All rights reserved.
+	@copyright 2004-2015 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion A CoreVideo buffer derives from a generic buffer and can be an ImageBuffer or PixelBuffer. 
 		   
@@ -25,11 +25,11 @@
 extern "C" {
 #endif
 
-CV_EXPORT const CFStringRef kCVOpenGLBufferWidth AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef kCVOpenGLBufferHeight AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef kCVOpenGLBufferTarget AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef kCVOpenGLBufferInternalFormat AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef kCVOpenGLBufferMaximumMipmapLevel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferWidth AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferHeight AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferTarget AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferInternalFormat AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferMaximumMipmapLevel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 typedef CVImageBufferRef CVOpenGLBufferRef;
 
@@ -42,7 +42,7 @@ CV_EXPORT CFTypeID CVOpenGLBufferGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4
     @param      buffer A CVOpenGLBuffer object that you want to retain.
     @result     A CVOpenGLBuffer object that is the same as the passed in buffer.
 */
-CV_EXPORT CVOpenGLBufferRef CVOpenGLBufferRetain( CVOpenGLBufferRef buffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVOpenGLBufferRef CV_NULLABLE CVOpenGLBufferRetain( CVOpenGLBufferRef CV_NULLABLE buffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLBufferRelease
@@ -50,7 +50,7 @@ CV_EXPORT CVOpenGLBufferRef CVOpenGLBufferRetain( CVOpenGLBufferRef buffer ) AVA
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVOpenGLBuffer object that you want to release.
 */
-CV_EXPORT void CVOpenGLBufferRelease( CVOpenGLBufferRef buffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVOpenGLBufferRelease( CV_RELEASES_ARGUMENT CVOpenGLBufferRef CV_NULLABLE buffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLBufferCreate
@@ -63,14 +63,19 @@ CV_EXPORT void CVOpenGLBufferRelease( CVOpenGLBufferRef buffer ) AVAILABLE_MAC_O
     @param      bufferOut    The newly created buffer will be placed here.
     @result     kCVReturnSuccess if the attachment succeeded
 */
-CV_EXPORT CVReturn CVOpenGLBufferCreate(CFAllocatorRef allocator, size_t width, size_t height, CFDictionaryRef attributes, CVOpenGLBufferRef *bufferOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVOpenGLBufferCreate(
+    CFAllocatorRef CV_NULLABLE allocator,
+    size_t width,
+    size_t height,
+    CFDictionaryRef CV_NULLABLE attributes,
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLBufferRef CV_NULLABLE * CV_NONNULL bufferOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLBufferGetAttributes
     @param      openGLBuffer Target OpenGL Buffer.
     @result     CVOpenGLBuffer attributes dictionary, NULL if not set.
 */
-CV_EXPORT CFDictionaryRef CVOpenGLBufferGetAttributes(CVOpenGLBufferRef openGLBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFDictionaryRef CV_NULLABLE CVOpenGLBufferGetAttributes( CVOpenGLBufferRef CV_NONNULL openGLBuffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLBufferAttach
@@ -81,7 +86,7 @@ CV_EXPORT CFDictionaryRef CVOpenGLBufferGetAttributes(CVOpenGLBufferRef openGLBu
     @param      screen       The virtual screen number you want to use
     @result     kCVReturnSuccess if the attachment succeeded
 */
-CV_EXPORT CVReturn CVOpenGLBufferAttach(CVOpenGLBufferRef openGLBuffer, CGLContextObj cglContext, GLenum face, GLint level, GLint screen) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVOpenGLBufferAttach( CVOpenGLBufferRef CV_NONNULL openGLBuffer, CGLContextObj CV_NONNULL cglContext, GLenum face, GLint level, GLint screen ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 #if defined(__cplusplus)
 }

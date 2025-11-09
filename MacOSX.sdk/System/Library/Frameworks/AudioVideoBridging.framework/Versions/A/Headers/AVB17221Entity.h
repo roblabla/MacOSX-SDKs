@@ -7,7 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
+#include <IOKit/IOKitLib.h>
+
 #import <IOKit/network/IOEthernetController.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVB17221EntityDiscovery;
 @class AVBMACAddress;
@@ -27,7 +31,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVB17221Entity : NSObject
 {
 	@private
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 	BOOL localEntity;
 	
 	uint8_t timeToLive;
@@ -167,12 +171,14 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	macAddresses
 	@abstract	An array of AVBMACAddress objects containing the current MAC addresses of the entity.
  */
-@property (copy) NSArray *macAddresses;
+@property (copy) NSArray <AVBMACAddress *>*macAddresses;
 
 /*!
 	@property	entityDiscovery
 	@abstract	The AVB17221EntityDiscovery object which discovered the entity.
  */
-@property (assign) AVB17221EntityDiscovery *entityDiscovery;
+@property (assign, nullable) AVB17221EntityDiscovery *entityDiscovery;
 
 @end
+
+NS_ASSUME_NONNULL_END

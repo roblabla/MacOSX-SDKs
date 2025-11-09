@@ -93,7 +93,7 @@ extern const struct memory_object_default_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		vm_size_t new_memory_object_size;
-	} __Request__memory_object_create_t;
+	} __Request__memory_object_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -122,7 +122,7 @@ union __RequestUnion__memory_object_default_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t new_memory_object;
 		/* end of the kernel processed data */
-	} __Reply__memory_object_create_t;
+	} __Reply__memory_object_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

@@ -7,10 +7,6 @@
 #ifndef __IMAGEIO__
 #define __IMAGEIO__
 
-#ifndef __COREFOUNDATION__
-#include <CoreFoundation/CoreFoundation.h>
-#endif
-
 #include <ImageIO/ImageIOBase.h>
 
 #include <ImageIO/CGImageSource.h>
@@ -22,4 +18,4 @@
 #include <ImageIO/CGImageMetadata.h>
 
 
-#endif	/* __IMAGEIO__ */
+#endif  /* __IMAGEIO__ */

@@ -61,10 +61,6 @@ void bzero_phys(
 /* Bytes available on current stack */
 vm_offset_t ml_stack_remaining(void);
 
-#if CONFIG_COUNTERS
-void ml_get_csw_threads(thread_t * /*old*/, thread_t * /*new*/);
-#endif /* CONFIG_COUNTERS */
-
 __END_DECLS
 
 #endif /* _I386_MACHINE_ROUTINES_H_ */

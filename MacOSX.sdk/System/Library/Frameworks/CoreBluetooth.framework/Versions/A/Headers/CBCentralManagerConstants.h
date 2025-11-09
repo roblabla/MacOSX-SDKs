@@ -8,6 +8,8 @@
 #import <CoreBluetooth/CBDefines.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  @const  CBCentralManagerOptionShowPowerAlertKey
  *
@@ -132,3 +134,5 @@ CB_EXTERN NSString * const CBCentralManagerRestoredStateScanServicesKey NS_AVAIL
  *
  */
 CB_EXTERN NSString * const CBCentralManagerRestoredStateScanOptionsKey NS_AVAILABLE(NA, 7_0);
+
+NS_ASSUME_NONNULL_END

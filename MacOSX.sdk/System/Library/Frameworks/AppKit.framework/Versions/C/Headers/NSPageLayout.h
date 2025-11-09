@@ -1,13 +1,16 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSApplication.h>
 
-@class NSArray, NSMutableArray, NSPrintInfo, NSView, NSViewController, NSWindow, NSWindowController;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSPrintInfo, NSView, NSViewController, NSWindow, NSWindowController;
 
 @interface NSPageLayout : NSObject {
     @private
@@ -34,14 +37,14 @@
 */
 - (void)addAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
 - (void)removeAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSArray *accessoryControllers NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray<__kindof NSViewController *> *accessoryControllers NS_AVAILABLE_MAC(10_5);
 
 
 /* Present a page setup panel to the user, document-modally. When the user has dismissed it, send the message selected by didEndSelector to the delegate, with the contextInfo as the last argument. The method selected by didEndSelector must have the same signature as:
 
     - (void)pageLayoutDidEnd:(NSPageLayout *)pageLayout returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 */
-- (void)beginSheetWithPrintInfo:(NSPrintInfo *)printInfo modalForWindow:(NSWindow *)docWindow delegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+- (void)beginSheetWithPrintInfo:(NSPrintInfo *)printInfo modalForWindow:(NSWindow *)docWindow delegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo;
 
 /* Present a page setup panel to the user, application-modally, and return either NSOKButton or NSCancelButton. The default implementation of -runModal just invokes [self runModalWithPrintInfo:[NSPrintInfo sharedPrintInfo]].
 */
@@ -50,7 +53,7 @@
 
 /* A simple accessor. Your -beginSheetWithPrintInfo:... delegate can use this so it doesn't have to keep a pointer to the NSPrintInfo elsewhere while waiting for the user to dismiss the print panel.
 */
-@property (readonly, strong) NSPrintInfo *printInfo;
+@property (nullable, readonly, strong) NSPrintInfo *printInfo;
 
 @end
 
@@ -58,8 +61,8 @@
 
 /* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
 */
-- (void)setAccessoryView:(NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
-- (NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setAccessoryView:(null_unspecified NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (null_unspecified NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
 
 /* Methods that were deprecated in Mac OS 10.5.
 */
@@ -72,6 +75,8 @@
 
 /* An action method that merely invokes [[NSPageLayout pageLayout] runModal].
 */
-- (void)runPageLayout:(id)sender;
+- (void)runPageLayout:(nullable id)sender;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,13 +1,16 @@
 /*
         NSRulerView.h
         Application Kit
-        Copyright (c) 1994-2014, Apple Inc.
+        Copyright (c) 1994-2015, Apple Inc.
         All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSView.h>
 
-@class NSScrollView, NSRulerMarker, NSMutableArray;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSScrollView, NSRulerMarker;
 
 /* Values for NSRulerOrientation */
 typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
@@ -47,16 +50,16 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 
 /************************* Registering new units *************************/
 
-+ (void)registerUnitWithName:(NSString *)unitName abbreviation:(NSString *)abbreviation unitToPointsConversionFactor:(CGFloat)conversionFactor stepUpCycle:(NSArray *)stepUpCycle stepDownCycle:(NSArray *)stepDownCycle;
++ (void)registerUnitWithName:(NSString *)unitName abbreviation:(NSString *)abbreviation unitToPointsConversionFactor:(CGFloat)conversionFactor stepUpCycle:(NSArray<NSNumber *> *)stepUpCycle stepDownCycle:(NSArray<NSNumber *> *)stepDownCycle;
 
 /**************************** Initialization ****************************/
 
-- (instancetype)initWithScrollView:(NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation;
+- (instancetype)initWithScrollView:(nullable NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation;
     // The designated initializer.  A ruler's size is controlled by its NSScrollView. initWithFrame: is overridden to call this.  The view is initialized with an unrealistically small default frame which will be reset in due time by the NSScrollView.
 
 /**************************** Basic setup ****************************/
 
-@property (assign) NSScrollView *scrollView;
+@property (nullable, assign) NSScrollView *scrollView;
     // A ruler uses its scrollView to finds it's document view to see whether it should be flipped.  The set method is generally called only by the scroll view itself.  You should not have to set this.
 
 @property NSRulerOrientation orientation;
@@ -90,17 +93,17 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 
 /**************************** Client view setup ****************************/
 
-@property (assign) NSView *clientView;
+@property (nullable, assign) NSView *clientView;
 
 - (void)addMarker:(NSRulerMarker *)marker;
 - (void)removeMarker:(NSRulerMarker *)marker;
-@property (copy) NSArray *markers;
+@property (nullable, copy) NSArray<NSRulerMarker *> *markers;
     // Ruler objects sit on the ruler at a specific location.  They can be manipulatable by the user, and if they are manipulated the current client is informed of the change.  Once a bunch of objects has been set, objects can be added or removed individually.
 
 - (BOOL)trackMarker:(NSRulerMarker *)marker withMouseEvent:(NSEvent *)event;
     // Given a ruler object and a mouse event (either MouseDown or MouseDragged) this will take over the tracking of the mouse until MouseUp.  While tracking it will snap to the baseline of the ruler when it gets within a certain distance.  At that point it becomes stuck to the baseline (this may happen immediately) and won't come off below (or to the right of) the ruler.  It may still be dragged off the baseline upward (or leftward) if its removable.  It is strongly recommended that any ruler object that acan be added to the ruler should be removable as well and it must be movable.  When the mouse goes up, if the object is currently stuck to the baseline it is added to the ruler (and the client object is notified), if its not stuck on the baseline, it is not added.
 
-@property (strong) NSView *accessoryView;
+@property (nullable, strong) NSView *accessoryView;
     // A rulers accessory view is drawn below or to the right of the rule.  It can contain arbitrary controls.
 
 - (void)moveRulerlineFromLocation:(CGFloat)oldLocation toLocation:(CGFloat)newLocation;
@@ -161,3 +164,5 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 - (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)aPoint NS_AVAILABLE_MAC(10_7);
 - (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)aPoint NS_AVAILABLE_MAC(10_7);
 @end
+
+NS_ASSUME_NONNULL_END

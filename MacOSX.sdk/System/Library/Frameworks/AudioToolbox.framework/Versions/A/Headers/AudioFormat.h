@@ -1,18 +1,12 @@
-/*
-     File:       AudioToolbox/AudioFormat.h
-
-     Contains:   API for finding things out about audio formats.
-
-     Copyright:  (c) 1985-2008 by Apple, Inc., all rights reserved.
-
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
-
-                     http://developer.apple.com/bugreporter/
-
+/*!
+	@file		AudioFormat.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 1985-2015 by Apple, Inc., all rights reserved.
+    @abstract	API for finding things out about audio formats.
 */
-#if !defined(__AudioFormat_h__)
-#define __AudioFormat_h__
+
+#ifndef AudioToolbox_AudioFormat_h
+#define AudioToolbox_AudioFormat_h
 
 //=============================================================================
 //	Includes
@@ -25,6 +19,8 @@
 #else
 	#include <CoreAudioTypes.h>
 #endif
+
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -43,14 +39,13 @@ typedef UInt32	AudioFormatPropertyID;
 
 /*!
     @enum		PanningMode
-    @abstract   (description)
-    @discussion (description)
+    @abstract   Different panning algorithms.
     @constant   kPanningMode_SoundField
 					Sound field panning algorithm
     @constant   kPanningMode_VectorBasedPanning
 					Vector based panning algorithm
 */
-enum {
+typedef CF_ENUM(UInt32, AudioPanningMode) {
 	kPanningMode_SoundField		 					= 3,
 	kPanningMode_VectorBasedPanning					= 4
 };
@@ -71,11 +66,11 @@ enum {
 					This is the channel map that is going to be used to determine channel volumes for this pan.
 */
 struct AudioPanningInfo {
-	UInt32						mPanningMode;
+	AudioPanningMode			mPanningMode;
 	UInt32						mCoordinateFlags;
 	Float32						mCoordinates[3];	
 	Float32						mGainScale;
-	const AudioChannelLayout*	mOutputChannelMap;
+	const AudioChannelLayout *	mOutputChannelMap;
 };
 typedef struct AudioPanningInfo AudioPanningInfo;
 
@@ -90,7 +85,7 @@ typedef struct AudioPanningInfo AudioPanningInfo;
 					the gain value is 1.0 when the balance and fade are in the center.
 					From there they can increase to +3dB (1.414) and decrease to -inf dB (0.0).
 */
-enum {
+typedef CF_ENUM(UInt32, AudioBalanceFadeType) {
 	kAudioBalanceFadeType_MaxUnityGain = 0,
 	kAudioBalanceFadeType_EqualPower = 1
 };
@@ -111,7 +106,7 @@ struct AudioBalanceFade
 {
 	Float32						mLeftRightBalance;		// -1 is full left, 0 is center, +1 is full right
 	Float32						mBackFrontFade;			// -1 is full rear, 0 is center, +1 is full front
-	UInt32						mType;					// max unity gain, or equal power.
+	AudioBalanceFadeType		mType;					// max unity gain, or equal power.
 	const AudioChannelLayout*	mChannelLayout;
 };
 typedef struct AudioBalanceFade AudioBalanceFade;
@@ -380,7 +375,7 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					Caller must call CFRelease for the returned dictionary
 					
 */
-enum
+CF_ENUM(AudioFormatPropertyID)
 {
 //=============================================================================
 //	The following properties are concerned with the AudioStreamBasicDescription
@@ -448,15 +443,15 @@ enum
     @param      inPropertyID		an AudioFormatPropertyID constant.
     @param      inSpecifierSize		The size of the specifier data.
     @param      inSpecifier			A specifier is a buffer of data used as an input argument to some of the properties.
-    @param      outDataSize			the the size in bytes of the current value of the property. In order to get the property value, 
+    @param      outPropertyDataSize	The size in bytes of the current value of the property. In order to get the property value,
 									you will need a buffer of this size.
     @result     returns noErr if successful.
 */
 extern OSStatus
 AudioFormatGetPropertyInfo(	AudioFormatPropertyID	inPropertyID,
 							UInt32					inSpecifierSize,
-							const void*				inSpecifier,
-							UInt32*					outPropertyDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+							const void * __nullable	inSpecifier,
+							UInt32 *				outPropertyDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
 
 /*!
     @function	AudioFormatGetProperty
@@ -464,7 +459,7 @@ AudioFormatGetPropertyInfo(	AudioFormatPropertyID	inPropertyID,
     @param      inPropertyID		an AudioFormatPropertyID constant.
     @param      inSpecifierSize		The size of the specifier data.
     @param      inSpecifier			A specifier is a buffer of data used as an input argument to some of the properties.
-    @param      ioDataSize			on input the size of the outPropertyData buffer. On output the number of bytes written to the buffer.
+    @param      ioPropertyDataSize	on input the size of the outPropertyData buffer. On output the number of bytes written to the buffer.
     @param      outPropertyData		the buffer in which to write the property data. If outPropertyData is NULL and ioPropertyDataSize is
 									not, the amount that would have been written will be reported.
     @result     returns noErr if successful.
@@ -472,16 +467,17 @@ AudioFormatGetPropertyInfo(	AudioFormatPropertyID	inPropertyID,
 extern OSStatus
 AudioFormatGetProperty(	AudioFormatPropertyID	inPropertyID,
 						UInt32					inSpecifierSize,
-						const void*				inSpecifier,
-						UInt32*					ioPropertyDataSize,
-						void*					outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+						const void * __nullable	inSpecifier,
+						UInt32 * __nullable		ioPropertyDataSize,
+						void * __nullable		outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
 
 
 //-----------------------------------------------------------------------------
 //  AudioFormat Error Codes
 //-----------------------------------------------------------------------------
 
-enum {
+CF_ENUM(OSStatus)
+{
         kAudioFormatUnspecifiedError						= 'what',	// 0x77686174, 2003329396
         kAudioFormatUnsupportedPropertyError 				= 'prop',	// 0x70726F70, 1886547824
         kAudioFormatBadPropertySizeError 					= '!siz',	// 0x2173697A, 561211770
@@ -495,4 +491,6 @@ enum {
 }
 #endif
 
-#endif
+CF_ASSUME_NONNULL_END
+
+#endif // AudioToolbox_AudioFormat_h

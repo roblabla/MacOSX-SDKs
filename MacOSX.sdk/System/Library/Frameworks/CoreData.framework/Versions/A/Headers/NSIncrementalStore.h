@@ -1,15 +1,19 @@
 /*
  NSIncrementalStore.h
  Core Data
- Copyright (c) 2004-2012 Apple Inc.
+ Copyright (c) 2004-2015, Apple Inc.
  All rights reserved.
  */
 
+#import <Foundation/NSArray.h>
 #import <CoreData/NSPersistentStore.h>
 #import <CoreData/NSPersistentStoreRequest.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSManagedObjectContext;
 @class NSManagedObjectID;
+@class NSManagedObject;
 @class NSRelationshipDescription;
 @class NSIncrementalStoreNode;
 @class NSEntityDescription;
@@ -49,18 +53,18 @@ NS_CLASS_AVAILABLE(10_7,5_0)
 // Note that subclasses of NSIncrementalStore should implement this method conservatively, 
 // and expect that unknown request types may at some point be passed to the 
 // method. The correct behavior in these cases would be to return nil and an error.
-- (id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext*)context error:(NSError **)error;
+- (nullable id)executeRequest:(NSPersistentStoreRequest *)request withContext:(nullable NSManagedObjectContext*)context error:(NSError **)error;
 
 // Returns an NSIncrementalStoreNode encapsulating the persistent external values for the object for an objectID. 
 // It should include all attributes values and may include to-one relationship values as NSManagedObjectIDs.
 // Should return nil and set the error if the object cannot be found.
-- (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID*)objectID withContext:(NSManagedObjectContext*)context error:(NSError**)error;
+- (nullable NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID*)objectID withContext:(NSManagedObjectContext*)context error:(NSError**)error;
 
 // Returns the relationship for the given relationship on the object with ID objectID. If the relationship
 // is a to-one it should return an NSManagedObjectID corresponding to the destination or NSNull if the relationship value is nil.
 // If the relationship is a to-many, should return an NSSet or NSArray containing the NSManagedObjectIDs of the related objects.
 // Should return nil and set the error if the source object cannot be found.
-- (id)newValueForRelationship:(NSRelationshipDescription*)relationship forObjectWithID:(NSManagedObjectID*)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error;
+- (nullable id)newValueForRelationship:(NSRelationshipDescription*)relationship forObjectWithID:(NSManagedObjectID*)objectID withContext:(nullable NSManagedObjectContext *)context error:(NSError **)error;
 
 
 // API methods that may be overriden:
@@ -68,13 +72,13 @@ NS_CLASS_AVAILABLE(10_7,5_0)
 
 // Called before executeRequest with a save request, to assign permanent IDs to newly inserted objects; 
 // must return the objectIDs in the same order as the objects appear in array.
-- (NSArray*)obtainPermanentIDsForObjects:(NSArray*)array error:(NSError **)error;
+- (nullable NSArray<NSManagedObjectID *>*)obtainPermanentIDsForObjects:(NSArray<NSManagedObject *>*)array error:(NSError **)error;
 
 // Inform the store that the objects with ids in objectIDs are in use in a client NSManagedObjectContext
-- (void)managedObjectContextDidRegisterObjectsWithIDs:(NSArray*)objectIDs;
+- (void)managedObjectContextDidRegisterObjectsWithIDs:(NSArray<NSManagedObjectID *> *)objectIDs;
 
 // Inform the store that the objects with ids in objectIDs are no longer in use in a client NSManagedObjectContext
-- (void)managedObjectContextDidUnregisterObjectsWithIDs:(NSArray*)objectIDs;
+- (void)managedObjectContextDidUnregisterObjectsWithIDs:(NSArray<NSManagedObjectID *> *)objectIDs;
 
 
 // API utility methods that should not be overriden (implemented by NSIncrementalStore):
@@ -87,3 +91,4 @@ NS_CLASS_AVAILABLE(10_7,5_0)
 
 @end
 
+NS_ASSUME_NONNULL_END

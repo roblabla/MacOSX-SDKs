@@ -1,6 +1,6 @@
 /* CoreAnimation - CARemoteLayerClient.h
 
-   Copyright (c) 2010-2014, Apple Inc.
+   Copyright (c) 2010-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -8,6 +8,8 @@
 #import <mach/mach.h>
 
 @class CALayer;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CARemoteLayerClient : NSObject
 {
@@ -18,7 +20,7 @@
 /* The designated initializer. The port must have been obtained from
  * -[CARemoteLayerServer serverPort]. */
 
-- (id)initWithServerPort:(mach_port_t)port;
+- (instancetype)initWithServerPort:(mach_port_t)port;
 
 /* Invalidate the object, i.e. delete all state from the server. This
  * is called implicitly when the object is finalized. */
@@ -33,6 +35,8 @@
 
 /* The root layer. Defaults to nil. */
 
-@property(strong) CALayer *layer;
+@property(nullable, strong) CALayer *layer;
 
 @end
+
+NS_ASSUME_NONNULL_END

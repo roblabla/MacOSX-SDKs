@@ -3,12 +3,15 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2014 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
+#import <AVFoundation/AVBase.h>
+#import <Foundation/Foundation.h>
+
 /*!
- @class AVVideoSettings
+ @header AVVideoSettings
  @abstract
 	NSDictionary keys for configuring output video format
 	
@@ -27,9 +30,6 @@
  
 	It is an error to add any other AVVideoSettings.h keys to an uncompressed video settings dictionary.
 */
-
-#import <AVFoundation/AVBase.h>
-#import <Foundation/Foundation.h>
 
 AVF_EXPORT NSString *const AVVideoCodecKey /* NSString (CMVideoCodecType) */				NS_AVAILABLE(10_7, 4_0);
 	AVF_EXPORT NSString *const AVVideoCodecH264 /* @"avc1" */								NS_AVAILABLE(10_7, 4_0);

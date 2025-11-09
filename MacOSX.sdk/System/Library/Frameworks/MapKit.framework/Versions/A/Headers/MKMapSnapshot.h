@@ -14,7 +14,9 @@
 #import <AppKit/AppKit.h>
 #endif
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKMapSnapshot : NSObject
 
 #if TARGET_OS_IPHONE
@@ -26,3 +28,5 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

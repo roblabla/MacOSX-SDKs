@@ -424,7 +424,7 @@ public:
 	@result <code>true</code>.
 	*/
 	virtual bool	willTerminate ( IOService * provider, IOOptionBits options );
-	
+
 	/*!
 	@function GetUserClientExclusivityState
 	@abstract Gets the current exclusivity state of the user client.

@@ -1,6 +1,6 @@
 //
-//  JRSUIConstants.h
-//  Copyright 2011 Apple Inc. All rights reserved.
+//  JRSUIControl.h
+//  Copyright 2011-2015 Apple Inc. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -15,7 +15,7 @@ typedef CFTypeRef JRSUIRendererRef;
  Summary:	Creates an instance of a UI renderer.
  
  Returns:
- - a reference to a UI renderer which is used to render and measure controls. It is the responsibility of the caller to release the renderer when it is no longer needed. The renderer must be desposed with JRSUIRendererRelease(). The renderer is a CFType, so it may be put into collections, CFRetain()'d and CFRelease()'d.
+ - a reference to a UI renderer which is used to render and measure controls. It is the responsibility of the caller to release the renderer when it is no longer needed. The renderer must be disposed with JRSUIRendererRelease(). The renderer is a CFType, so it may be put into collections, CFRetain()'d and CFRelease()'d.
  
  ----------------------------------------------------------------------------- */
 JRSUIRendererRef JRSUIRendererCreate();
@@ -46,7 +46,7 @@ typedef CFTypeRef JRSUIControlRef;
  - isFlipped: determines if the UI control should be rendered and measured using a flipped coordinate system.
  
  Returns:
- - a reference to a UI control which contains all of the properties of a specific UI component. It is the responsibility of the caller to release the control when it is no longer needed. The control must be desposed with JRSUIControlRelease(). The control is a CFType, so it may be put into collections, CFRetain()'d and CFRelease()'d.
+ - a reference to a UI control which contains all of the properties of a specific UI component. It is the responsibility of the caller to release the control when it is no longer needed. The control must be disposed with JRSUIControlRelease(). The control is a CFType, so it may be put into collections, CFRetain()'d and CFRelease()'d.
  
  ----------------------------------------------------------------------------- */
 JRSUIControlRef JRSUIControlCreate(Boolean isFlipped);
@@ -70,7 +70,7 @@ void JRSUIControlRelease(JRSUIControlRef control);
  
  Summary:	Draws a UI element.
  
- Discussion:
+ Discussion: Any caching of UI drawing should be disposed upon receiving a NSSystemColorsDidChangeNotification notification.
  
  Parameters
  - renderer: The renderer that will do the drawing.

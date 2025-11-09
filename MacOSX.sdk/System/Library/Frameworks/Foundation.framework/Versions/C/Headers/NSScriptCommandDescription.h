@@ -1,11 +1,13 @@
 /*
 	NSScriptCommandDescription.h
-	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSDictionary, NSScriptCommand, NSString;
+@class NSArray<ObjectType>, NSDictionary, NSScriptCommand, NSString;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSScriptCommandDescription : NSObject<NSCoding> {
     @private
@@ -23,9 +25,9 @@
 
 /* Initialize, given a scripting suite name, command name, and command declaration dictionary of the sort that is valid in .scriptSuite property list files.
 */
-- (instancetype)initWithSuiteName:(NSString *)suiteName commandName:(NSString *)commandName dictionary:(NSDictionary *)commandDeclaration NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithSuiteName:(NSString *)suiteName commandName:(NSString *)commandName dictionary:(nullable NSDictionary *)commandDeclaration NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
 
 /* Return the suite name or command name provided at initialization time.
 */
@@ -43,7 +45,7 @@
 
 /* Return the declared type name for the result of execution of the described command, or nil if the described command is not declared to return a result.
 */
-@property (readonly, copy) NSString *returnType;
+@property (nullable, readonly, copy) NSString *returnType;
 
 /* Return the four character code that identifies in Apple events the declared type of the result of execution of the described command.
 */
@@ -51,11 +53,11 @@
 
 /* Return the strings valid for use as keys into argument dictionaries in instances of the described command.
 */
-@property (readonly, copy) NSArray *argumentNames;
+@property (readonly, copy) NSArray<NSString *> *argumentNames;
 
 /* Return the declared type of the named argument in instances of the described command.
 */
-- (NSString *)typeForArgumentWithName:(NSString *)argumentName;
+- (nullable NSString *)typeForArgumentWithName:(NSString *)argumentName;
 
 /* Return the four character code that identifies in Apple events the declared type of the named argument in instances of the described command.
 */
@@ -68,6 +70,8 @@
 /* Create an instance of the described command.
 */
 - (NSScriptCommand *)createCommandInstance;
-- (NSScriptCommand *)createCommandInstanceWithZone:(NSZone *)zone;
+- (NSScriptCommand *)createCommandInstanceWithZone:(nullable NSZone *)zone;
 
 @end
+
+NS_ASSUME_NONNULL_END

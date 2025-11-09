@@ -30,7 +30,8 @@ typedef NS_ENUM(GLint, GLKFogMode)
       density         1.0
       start           0.0
       end             1.0
-*/ 
+*/
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectPropertyFog : GLKEffectProperty 
 {
@@ -53,3 +54,4 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @property (nonatomic, assign)    GLfloat       end;        // 1.0
 
 @end
+NS_ASSUME_NONNULL_END

@@ -11,24 +11,28 @@
 
 @class MKMapItem;
 @class MKPolyline;
+@class MKRoute;
+@class MKRouteStep;
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKDirectionsResponse : NSObject
 
 // Source and destination may be filled with additional details compared to the request object.
 @property (nonatomic, readonly) MKMapItem *source;
 @property (nonatomic, readonly) MKMapItem *destination;
 
-@property (nonatomic, readonly) NSArray *routes; // array of MKRoute objects
+@property (nonatomic, readonly) NSArray<MKRoute *> *routes;
 
 @end
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKRoute : NSObject
 
 @property (nonatomic, readonly) NSString *name; // localized description of the route's significant feature, e.g. "US-101"
 
-@property (nonatomic, readonly) NSArray *advisoryNotices; // localized notices of route conditions as NSStrings. e.g. "Avoid during winter storms"
+@property (nonatomic, readonly) NSArray<NSString *> *advisoryNotices; // localized notices of route conditions. e.g. "Avoid during winter storms"
 
 @property (nonatomic, readonly) CLLocationDistance distance; // overall route distance in meters
 @property (nonatomic, readonly) NSTimeInterval expectedTravelTime;
@@ -37,15 +41,15 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 
 @property (nonatomic, readonly) MKPolyline *polyline; // detailed route geometry
 
-@property (nonatomic, readonly) NSArray *steps; // array of MKRouteStep objects
+@property (nonatomic, readonly) NSArray<MKRouteStep *> *steps;
 
 @end
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKRouteStep : NSObject
 
 @property (nonatomic, readonly) NSString *instructions; // localized written instructions
-@property (nonatomic, readonly) NSString *notice; // additional localized legal or warning notice related to this step (e.g. "Do not cross tracks when lights flash")
+@property (nonatomic, readonly, nullable) NSString *notice; // additional localized legal or warning notice related to this step (e.g. "Do not cross tracks when lights flash")
 
 @property (nonatomic, readonly) MKPolyline *polyline; // detailed step geometry
 
@@ -55,13 +59,17 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 
 @end
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKETAResponse : NSObject
 
 // Source and destination may be filled with additional details compared to the request object.
 @property (nonatomic, readonly) MKMapItem *source;
 @property (nonatomic, readonly) MKMapItem *destination;
-
 @property (nonatomic, readonly) NSTimeInterval expectedTravelTime;
-
+@property (nonatomic, readonly) CLLocationDistance distance NS_AVAILABLE(10_11, 9_0); // overall route distance in meters
+@property (nonatomic, readonly) NSDate *expectedArrivalDate NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) NSDate *expectedDepartureDate NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) MKDirectionsTransportType transportType NS_AVAILABLE(10_11, 9_0);
 @end
+
+NS_ASSUME_NONNULL_END

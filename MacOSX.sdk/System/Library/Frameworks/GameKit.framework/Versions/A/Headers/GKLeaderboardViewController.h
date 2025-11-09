@@ -11,22 +11,16 @@
 @protocol GKLeaderboardViewControllerDelegate;
 
 // View controller that provides the standard user interface for leaderboards.  Present modally from the top view controller.
-
-#if TARGET_OS_IPHONE
-// View controller that provides the standard user interface for leaderboards.  Present modally from the top view controller.
-NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead")
+NS_CLASS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead") 
 @interface GKLeaderboardViewController : GKGameCenterViewController
-@end
-#else
-#import <GameKit/GKDialogController.h>
-NS_CLASS_AVAILABLE(10_8, 10_10)
-@interface GKLeaderboardViewController : GKGameCenterViewController {
-	id<GKLeaderboardViewControllerDelegate> _leaderboardDelegate;
+#if !TARGET_OS_IPHONE
+{
+    id<GKLeaderboardViewControllerDelegate> _leaderboardDelegate;
     NSString *_category;
     GKLeaderboardTimeScope _timeScope;
 }
-@end
 #endif
+@end
 
 @interface GKLeaderboardViewController ()
 @property (assign, NS_NONATOMIC_IOSONLY) GKLeaderboardTimeScope timeScope;
@@ -35,7 +29,7 @@ NS_CLASS_AVAILABLE(10_8, 10_10)
 
 @end
 
-NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead")
+NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead") 
 @protocol GKLeaderboardViewControllerDelegate <NSObject>
 @required
 // The leaderboard view has finished

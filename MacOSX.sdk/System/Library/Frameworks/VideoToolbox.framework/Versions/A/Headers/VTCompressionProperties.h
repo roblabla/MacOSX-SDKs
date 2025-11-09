@@ -22,6 +22,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)    
+	
+CM_ASSUME_NONNULL_BEGIN
 
 /*!
 	@header
@@ -620,6 +622,8 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelTransferProperties __
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MultiPassStorage __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); // VTMultiPassStorage, optional, default is NULL
 
+	
+CM_ASSUME_NONNULL_END
 
 #pragma pack(pop)
     

@@ -26,6 +26,7 @@
  * @discussion 
  * All actions performed by a CWInterface object are executed on the Wi-Fi device with the corresponding interface name.
  */
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_6)
 @interface CWInterface : NSObject
 {
@@ -35,7 +36,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
     
         NSString                *_interfaceName;
     
-        NSArray                 *_capabilities;
+        NSArray<NSNumber *>     *_capabilities;
     
         IONotificationPortRef   _interfaceRemovedNotificationPort;
     
@@ -64,7 +65,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract 
  * Returns the BSD name of the Wi-Fi interface (e.g. "en0").
  */
-@property(readonly) NSString *interfaceName NS_AVAILABLE_MAC(10_7);
+@property(readonly, nullable) NSString *interfaceName NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -92,7 +93,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion
  * Returns nil if an error occurs.
  */
-- (NSSet *)supportedWLANChannels NS_AVAILABLE_MAC(10_7);
+- (nullable NSSet<CWChannel *> *)supportedWLANChannels NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -103,7 +104,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion 
  * Returns nil if an error occurs.
  */
-- (CWChannel *)wlanChannel NS_AVAILABLE_MAC(10_7);
+- (nullable CWChannel *)wlanChannel NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -126,7 +127,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network,
  * or if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
  */
-- (NSString *)ssid NS_AVAILABLE_MAC(10_6);
+- (nullable NSString *)ssid NS_AVAILABLE_MAC(10_6);
 
 /*!
  * @method
@@ -137,7 +138,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion 
  * Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network.
  */
-- (NSData *)ssidData NS_AVAILABLE_MAC(10_7);
+- (nullable NSData *)ssidData NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -149,7 +150,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
  * Returns nil if an error occurred, or if the interface is not participating in a Wi-Fi network.
  */
-- (NSString *)bssid NS_AVAILABLE_MAC(10_6);
+- (nullable NSString *)bssid NS_AVAILABLE_MAC(10_6);
 
 /*!
  * @method
@@ -204,7 +205,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion 
  * Returns nil if an error occurs, or if the Wi-Fi interface is off.
  */
-- (NSString *)countryCode NS_AVAILABLE_MAC(10_6);
+- (nullable NSString *)countryCode NS_AVAILABLE_MAC(10_6);
 
 /*!
  * @method
@@ -239,7 +240,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * the MAC address as a string. 
  * Returns nil if an error occurs.
  */
-- (NSString *)hardwareAddress NS_AVAILABLE_MAC(10_7);
+- (nullable NSString *)hardwareAddress NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -267,7 +268,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion 
  * Returns nil if an error occurs.
  */
-- (NSSet *)cachedScanResults NS_AVAILABLE_MAC(10_7);
+- (nullable NSSet<CWNetwork *> *)cachedScanResults NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -278,7 +279,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion
  * Returns nil if an error occurs.
  */
-- (CWConfiguration *)configuration NS_AVAILABLE_MAC(10_6);
+- (nullable CWConfiguration *)configuration NS_AVAILABLE_MAC(10_6);
 
 /*! @functiongroup Creating a Wi-Fi Interface */
 
@@ -295,7 +296,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * Returns an empty NSArray object if no Wi-Fi interfaces exist.
  * Returns nil if an error occurs.
  */
-+ (NSSet *)interfaceNames NS_DEPRECATED_MAC(10_6, 10_10, "Use +[CWWiFiClient interfaceNames] instead");
++ (nullable NSSet<NSString *> *)interfaceNames NS_DEPRECATED_MAC(10_6, 10_10, "Use +[CWWiFiClient interfaceNames] instead");
 
 /*!
  * @method
@@ -405,7 +406,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * The specified key must be exactly 32 octets. 
  * Requires the <i>com.apple.wifi.set_pmk</i> entitlement.
  */
-- (BOOL)setPairwiseMasterKey:(NSData *)key error:(out NSError **)error NS_AVAILABLE_MAC(10_6);
+- (BOOL)setPairwiseMasterKey:(nullable NSData *)key error:(out NSError **)error NS_AVAILABLE_MAC(10_6);
 
 /*!
  * @method
@@ -433,7 +434,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion
  * Requires the <i>com.apple.wifi.set_wep_key</i> entitlement.
  */
-- (BOOL)setWEPKey:(NSData *)key flags:(CWCipherKeyFlags)flags index:(NSInteger)index error:(out NSError **)error NS_AVAILABLE_MAC(10_6);
+- (BOOL)setWEPKey:(nullable NSData *)key flags:(CWCipherKeyFlags)flags index:(NSInteger)index error:(out NSError **)error NS_AVAILABLE_MAC(10_6);
 
 /*! @functiongroup Scanning for Networks */
 
@@ -459,7 +460,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This method will block for the duration of the scan.
  * Requires the <i>com.apple.wifi.scan</i> entitlement.
  */
-- (NSSet *)scanForNetworksWithSSID:(NSData *)ssid error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+- (nullable NSSet<CWNetwork *> *)scanForNetworksWithSSID:(nullable NSData *)ssid error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -483,7 +484,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This method will block for the duration of the scan.
  * Requires the <i>com.apple.wifi.scan</i> entitlement.
  */
-- (NSSet *)scanForNetworksWithName:(NSString *)networkName error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+- (nullable NSSet<CWNetwork *> *)scanForNetworksWithName:(nullable NSString *)networkName error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
 /*! @functiongroup Joining a Network */
 
@@ -510,7 +511,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This method will block for the duration of the association.
  * Requires the <i>com.apple.wifi.associate</i> entitlement.
  */
-- (BOOL)associateToNetwork:(CWNetwork *)network password:(NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+- (BOOL)associateToNetwork:(CWNetwork *)network password:(nullable NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -552,7 +553,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This method will block for the duration of the association.
  * Requires the <i>com.apple.wifi.associate</i> entitlement.
  */
-- (BOOL)associateToEnterpriseNetwork:(CWNetwork *)network identity:(SecIdentityRef)identity username:(NSString *)username password:(NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+- (BOOL)associateToEnterpriseNetwork:(CWNetwork *)network identity:(nullable SecIdentityRef)identity username:(nullable NSString *)username password:(nullable NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
 /*! @functiongroup Creating an IBSS Network */
 
@@ -585,7 +586,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion
  * Requires the <i>com.apple.wifi.ibss</i> entitlement.
  */
-- (BOOL)startIBSSModeWithSSID:(NSData *)ssidData security:(CWIBSSModeSecurity)security channel:(NSUInteger)channel password:(NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+- (BOOL)startIBSSModeWithSSID:(NSData *)ssidData security:(CWIBSSModeSecurity)security channel:(NSUInteger)channel password:(nullable NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
 /*! @functiongroup Committing a Wi-Fi Configuration */
 
@@ -613,8 +614,9 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * This method requires the caller have root privileges
  * or obtain administrator privileges using the SFAuthorization API.
  */
-- (BOOL)commitConfiguration:(CWConfiguration *)configuration authorization:(SFAuthorization *)authorization error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+- (BOOL)commitConfiguration:(CWConfiguration *)configuration authorization:(nullable SFAuthorization *)authorization error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif /* _CORE_WLAN_INTERFACE_H_ */

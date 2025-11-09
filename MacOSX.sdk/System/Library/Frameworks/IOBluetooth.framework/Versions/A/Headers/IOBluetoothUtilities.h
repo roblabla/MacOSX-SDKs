@@ -1,16 +1,16 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sysexits.h>
-#include <sys/errno.h>
-#include <unistd.h>
+#import <stdio.h>
+#import <stdlib.h>
+#import <string.h>
+#import <sysexits.h>
+#import <sys/errno.h>
+#import <unistd.h>
 
-#include <IOBluetooth/Bluetooth.h>
-#include <IOKit/IOReturn.h>
-#include <IOBluetooth/IOBluetoothUserLib.h>
+#import <IOBluetooth/Bluetooth.h>
+#import <IOKit/IOReturn.h>
+#import <IOBluetooth/IOBluetoothUserLib.h>
 
 
 #ifdef	__cplusplus
@@ -78,20 +78,6 @@ extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMData( NSString* inFileName );
 */
 
 extern	NSString*	IOBluetoothGetUniqueFileNameAndPath( NSString* inName, NSString* inPath );
-
-#pragma mark -
-#pragma mark === Audio Utilities ===
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothLaunchHandsFreeAgent
-	 @abstract	
-	 @param		deviceAddressString		Address of the device you want to connect to. If nil or empty, selects a paired hands free gateway.
-	 @result	YES or NO - were we able to launch the hands free agent successfully.
-	 @discussion	Connects to the hands free device and creates a service level connection.
- */
-
-Boolean IOBluetoothLaunchHandsFreeAgent(NSString * deviceAddressString);
-
 		
 #else
 
@@ -99,9 +85,7 @@ extern	IOReturn	IOBluetoothCFStringToDeviceAddress( CFStringRef inNameString, Bl
 extern	CFStringRef	IOBluetoothCFStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
 extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMDataAtCFStringPath( CFStringRef inFileName );
 extern	CFStringRef	IOBluetoothGetUniqueFileNameAndWithCFStringPath( CFStringRef inName, CFStringRef inPath );
-extern	Boolean		IOBluetoothLaunchHandsFreeAgent( CFStringRef deviceAddressString );
 		
-
 #endif /* __OBJC__ */
 
 #pragma mark -

@@ -1,5 +1,5 @@
 /*	CFURL.h
-	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFURL__)
@@ -377,7 +377,7 @@ CFStringRef CFURLCreateStringByReplacingPercentEscapes(CFAllocatorRef allocator,
 
 /* As above, but allows you to specify the encoding to use when interpreting percent escapes */
 CF_EXPORT
-CFStringRef CFURLCreateStringByReplacingPercentEscapesUsingEncoding(CFAllocatorRef allocator, CFStringRef origString, CFStringRef charsToLeaveEscaped, CFStringEncoding encoding);
+CFStringRef CFURLCreateStringByReplacingPercentEscapesUsingEncoding(CFAllocatorRef allocator, CFStringRef origString, CFStringRef charsToLeaveEscaped, CFStringEncoding encoding) CF_DEPRECATED(10_0, 10_11, 2_0, 9_0, "Use [NSString stringByRemovingPercentEncoding] or CFURLCreateStringByReplacingPercentEscapes() instead, which always uses the recommended UTF-8 encoding.");
 
 /* Creates a copy or originalString, replacing certain characters with */
 /* the equivalent percent escape sequence based on the encoding specified. */
@@ -390,10 +390,9 @@ CFStringRef CFURLCreateStringByReplacingPercentEscapesUsingEncoding(CFAllocatorR
 /* in legalURLCharactersToBeEscaped, less any characters in */
 /* charactersToLeaveUnescaped.  To simply correct any non-URL characters */
 /* in an otherwise correct URL string, do: */
-
-/* newString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, origString, NULL, NULL, kCFStringEncodingUTF8); */
+/*      newString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, origString, NULL, NULL, kCFStringEncodingUTF8); */
 CF_EXPORT
-CFStringRef CFURLCreateStringByAddingPercentEscapes(CFAllocatorRef allocator, CFStringRef originalString, CFStringRef charactersToLeaveUnescaped, CFStringRef legalURLCharactersToBeEscaped, CFStringEncoding encoding);
+CFStringRef CFURLCreateStringByAddingPercentEscapes(CFAllocatorRef allocator, CFStringRef originalString, CFStringRef charactersToLeaveUnescaped, CFStringRef legalURLCharactersToBeEscaped, CFStringEncoding encoding) CF_DEPRECATED(10_0, 10_11, 2_0, 9_0, "Use [NSString stringByAddingPercentEncodingWithAllowedCharacters:] instead, which always uses the recommended UTF-8 encoding, and which encodes for a specific URL component or subcomponent (since each URL component or subcomponent has different rules for what characters are valid).");
 
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -708,6 +707,14 @@ const CFStringRef kCFURLIsPackageKey CF_AVAILABLE(10_6, 4_0);
     /* True for packaged directories (Read-only 10_6 and 10_7, read-write 10_8, value type CFBoolean). Note: You can only set or clear this property on directories; if you try to set this property on non-directory objects, the property is ignored. If the directory is a package for some other reason (extension type, etc), setting this property to false will have no effect. */
 
 CF_EXPORT
+const CFStringRef kCFURLIsApplicationKey CF_AVAILABLE(10_11, 9_0);
+    /* True if resource is an application (Read-only, value type CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLApplicationIsScriptableKey CF_AVAILABLE(10_11, NA);
+    /* True if the resource is scriptable. Only applies to applications. (Read-only, value type CFBoolean) */
+
+CF_EXPORT
 const CFStringRef kCFURLIsSystemImmutableKey CF_AVAILABLE(10_6, 4_0);
     /* True for system-immutable resources (Read-write, value type CFBoolean) */
 
@@ -883,6 +890,22 @@ CF_EXPORT
 const CFStringRef kCFURLIsAliasFileKey CF_AVAILABLE(10_6, 4_0);
     /*  true if the resource is a Finder alias file or a symlink, false otherwise ( Read-only, value type CFBooleanRef) */
 
+CF_EXPORT
+const CFStringRef kCFURLFileProtectionKey CF_AVAILABLE_IOS(9_0);
+    /* The protection level for this file */
+
+/* The protection level values returned for the kCFURLFileProtectionKey */
+CF_EXPORT
+const CFStringRef kCFURLFileProtectionNone CF_AVAILABLE_IOS(9_0); // The file has no special protections associated with it. It can be read from or written to at any time.
+
+CF_EXPORT
+const CFStringRef kCFURLFileProtectionComplete CF_AVAILABLE_IOS(9_0); // The file is stored in an encrypted format on disk and cannot be read from or written to while the device is locked or booting.
+
+CF_EXPORT
+const CFStringRef kCFURLFileProtectionCompleteUnlessOpen CF_AVAILABLE_IOS(9_0); // The file is stored in an encrypted format on disk. Files can be created while the device is locked, but once closed, cannot be opened again until the device is unlocked. If the file is opened when unlocked, you may continue to access the file normally, even if the user locks the device. There is a small performance penalty when the file is created and opened, though not when being written to or read from. This can be mitigated by changing the file protection to kCFURLFileProtectionComplete when the device is unlocked.
+
+CF_EXPORT
+const CFStringRef kCFURLFileProtectionCompleteUntilFirstUserAuthentication CF_AVAILABLE_IOS(9_0); // The file is stored in an encrypted format on disk and cannot be accessed until after the device has booted. After the user unlocks the device for the first time, your app can access the file and continue to access it even if the user subsequently locks the device.
 
 /* Volume Properties */
 

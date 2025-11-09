@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIFilter.h>
+#include <CoreImage/CIFilter.h>

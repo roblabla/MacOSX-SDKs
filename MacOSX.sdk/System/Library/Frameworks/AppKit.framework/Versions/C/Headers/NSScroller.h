@@ -1,7 +1,7 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSCell.h>
 
 /* deprecated in 10.7; this enum is no longer needed */
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, NSScrollArrowPosition) {
     NSScrollerArrowsMaxEnd		= 0,	/* previously deprecated */
     NSScrollerArrowsMinEnd		= 1,	/* previously deprecated */
@@ -159,4 +161,6 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 
 /* Posted when the preferred scroller style changes.  The notification object is private; disregard it.  Consult NSScroller's +preferredScrollerStyle method when this notification is received, or thereafter, to determine the new scroller style to use.
 */
-APPKIT_EXTERN NSString *const NSPreferredScrollerStyleDidChangeNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSString * const NSPreferredScrollerStyleDidChangeNotification NS_AVAILABLE_MAC(10_7);
+
+NS_ASSUME_NONNULL_END

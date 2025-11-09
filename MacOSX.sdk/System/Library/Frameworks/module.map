@@ -1,4 +1,4 @@
-framework module * [extern_c] [system] {
+framework module * [extern_c] {
   exclude Kernel
   exclude System
 
@@ -6,6 +6,7 @@ framework module * [extern_c] [system] {
   exclude Tk
   exclude Ruby
   exclude SocialPlugin
+  exclude vecLib
 
 }
 

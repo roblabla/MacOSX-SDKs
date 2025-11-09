@@ -1,14 +1,18 @@
 /*
  NSSaveChangesRequest.h
  Core Data
- Copyright (c) 2004-2012 Apple Inc.
+ Copyright (c) 2004-2015, Apple Inc.
  All rights reserved.
  */
 
+#import <Foundation/NSArray.h>
 #import <Foundation/NSSet.h>
 #import <CoreData/NSPersistentStoreRequest.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSPersistentStoreRequest;
+@class NSManagedObject;
 
 NS_CLASS_AVAILABLE(10_7,5_0)
 @interface NSSaveChangesRequest : NSPersistentStoreRequest {
@@ -22,15 +26,17 @@ NS_CLASS_AVAILABLE(10_7,5_0)
 }
 
 // Default initializer.
-- (instancetype)initWithInsertedObjects:(NSSet*)insertedObjects updatedObjects:(NSSet*)updatedObjects deletedObjects:(NSSet*)deletedObjects lockedObjects:(NSSet*)lockedObjects;
+- (instancetype)initWithInsertedObjects:(nullable NSSet<NSManagedObject *> *)insertedObjects updatedObjects:(nullable NSSet<NSManagedObject *> *)updatedObjects deletedObjects:(nullable NSSet<NSManagedObject *> *)deletedObjects lockedObjects:(nullable NSSet<NSManagedObject *> *)lockedObjects;
 
 // Objects that were inserted into the calling context.
-@property (readonly, strong) NSSet *insertedObjects;
+@property (nullable, readonly, strong) NSSet<__kindof NSManagedObject *> *insertedObjects;
 // Objects that were modified in the calling context.
-@property (readonly, strong) NSSet *updatedObjects;
+@property (nullable, readonly, strong) NSSet<__kindof NSManagedObject *> *updatedObjects;
 // Objects that were deleted from the calling context.
-@property (readonly, strong) NSSet *deletedObjects;
+@property (nullable, readonly, strong) NSSet<__kindof NSManagedObject *> *deletedObjects;
 // Objects that were flagged for optimistic locking on the calling context via detectConflictsForObject:.
-@property (readonly, strong) NSSet *lockedObjects;
+@property (nullable, readonly, strong) NSSet<__kindof NSManagedObject *> *lockedObjects;
 
 @end
+
+NS_ASSUME_NONNULL_END

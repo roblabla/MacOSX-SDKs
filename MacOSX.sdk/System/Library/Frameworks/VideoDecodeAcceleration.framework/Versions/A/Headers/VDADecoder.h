@@ -5,11 +5,23 @@
  *
  */ 
 
+/*
+  VideoDecodeAcceleration.framework has been deprecated in 10.11.
+
+  The full functionality of VideoDecodeAcceleration.framework is available through VideoToolbox.framework.
+  Hardware accelerated decode can be achieved using the VTDecompressionSession interface and specifying
+  the kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder key or the 
+  kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder key.
+*/
+
+
 #ifndef VDADECODER_H
 #define VDADECODER_H
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreVideo/CoreVideo.h>
+#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if defined(__cplusplus)
 extern "C"
@@ -103,7 +115,7 @@ OSStatus VDADecoderCreate(
 	CFDictionaryRef							destinationImageBufferAttributes,         /* can be NULL */
 	VDADecoderOutputCallback				*outputCallback, 
 	void 									*decoderOutputCallbackRefcon,
-	VDADecoder								*decoderOut );
+	VDADecoder								*decoderOut )   DEPRECATED_IN_MAC_OS_X_VERSION_10_11_AND_LATER;
 
 // decodeFlags
 enum {
@@ -131,7 +143,7 @@ OSStatus VDADecoderDecode(
 	VDADecoder							decoder, 
 	uint32_t								decodeFlags,
 	CFTypeRef 								compressedBuffer, 
-	CFDictionaryRef 						frameInfo );		/* can be NULL */
+	CFDictionaryRef 						frameInfo /* can be NULL */ ) DEPRECATED_IN_MAC_OS_X_VERSION_10_11_AND_LATER;
 
 // FlushDecoder flags
 enum {
@@ -157,7 +169,7 @@ enum {
 */
 OSStatus VDADecoderFlush( 
 	VDADecoder							decoder, 
-	uint32_t 								flushFlags );
+	uint32_t 								flushFlags )    DEPRECATED_IN_MAC_OS_X_VERSION_10_11_AND_LATER;
 
 /*!
 	@function	VDADestroyDecoder
@@ -170,7 +182,7 @@ OSStatus VDADecoderFlush(
 		the hardware decoder interface that you are destroying.  This should not be referenced any longer
 		after the destroy call.
 */
-OSStatus VDADecoderDestroy( VDADecoder decoder );
+OSStatus VDADecoderDestroy( VDADecoder decoder )    DEPRECATED_IN_MAC_OS_X_VERSION_10_11_AND_LATER;
 
 #pragma pack(pop)
     

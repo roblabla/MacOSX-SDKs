@@ -2,11 +2,14 @@
 	File:		AVAudioEngine.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioTypes.h>
 #import <AudioToolbox/MusicPlayer.h>
+#import <AVFoundation/AVAudioConnectionPoint.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVAudioFormat, AVAudioNode, AVAudioInputNode, AVAudioOutputNode, AVAudioMixerNode;
 
@@ -75,28 +78,61 @@ _player = [[AVAudioPlayerNode alloc] init];
 	@param node2 the destination node
 	@param bus1 the output bus on the source node
 	@param bus2 the input bus on the destination node
-	@param format if non-null, the format of the source node's output bus is set to this
+	@param format if non-nil, the format of the source node's output bus is set to this
 		format. In all cases, the format of the destination node's input bus is set to
 		match that of the source node's output bus.
 	@discussion
 		Nodes have input and output buses (AVAudioNodeBus). Use this method to establish
-		connections betweeen nodes. Connections are always one-to-one, never one-to-many or
-		many-to-one.
+		one-to-one connections betweeen nodes. Connections made using this method are always
+		one-to-one, never one-to-many or many-to-one.
 	
 		Note that any pre-existing connection(s) involving the source's output bus or the
 		destination's input bus will be broken.
 */
-- (void)connect:(AVAudioNode *)node1 to:(AVAudioNode *)node2 fromBus:(AVAudioNodeBus)bus1 toBus:(AVAudioNodeBus)bus2 format:(AVAudioFormat *)format;
+- (void)connect:(AVAudioNode *)node1 to:(AVAudioNode *)node2 fromBus:(AVAudioNodeBus)bus1 toBus:(AVAudioNodeBus)bus2 format:(AVAudioFormat * __nullable)format;
 
 /*!	@method connect:to:format:
 	@abstract
 		Establish a connection between two nodes
 	@discussion
-		This calls connect:to:fromBus:toBus:format:error: using bus 0 on the source node,
+		This calls connect:to:fromBus:toBus:format: using bus 0 on the source node,
 		and bus 0 on the destination node, except in the case of a destination which is a mixer,
 		in which case the destination is the mixer's nextAvailableInputBus.
 */
-- (void)connect:(AVAudioNode *)node1 to:(AVAudioNode *)node2 format:(AVAudioFormat *)format;
+- (void)connect:(AVAudioNode *)node1 to:(AVAudioNode *)node2 format:(AVAudioFormat * __nullable)format;
+
+/*! @method connect:toConnectionPoints:fromBus:format:
+	@abstract
+		Establish connections between a source node and multiple destination nodes.
+	@param sourceNode the source node
+	@param destNodes an array of AVAudioConnectionPoint objects specifying destination 
+		nodes and busses
+	@param sourceBus the output bus on source node
+	@param format if non-nil, the format of the source node's output bus is set to this
+		format. In all cases, the format of the destination nodes' input bus is set to
+		match that of the source node's output bus
+	@discussion
+		Use this method to establish connections from a source node to multiple destination nodes.
+		Connections made using this method are either one-to-one (when a single destination
+		connection is specified) or one-to-many (when multiple connections are specified), but 
+		never many-to-one.
+
+		To incrementally add a new connection to a source node, use this method with an array
+		of AVAudioConnectionPoint objects comprising of pre-existing connections (obtained from
+		`outputConnectionPointsForNode:outputBus:`) and the new connection.
+ 
+		Note that any pre-existing connection involving the destination's input bus will be 
+		broken. And, any pre-existing connection on source node which is not a part of the
+		specified destination connection array will also be broken.
+
+		Also note that when the output of a node is split into multiple paths, all the paths
+		must render at the same rate until they reach a common mixer.
+		In other words, starting from the split node until the common mixer node where all split 
+		paths terminate, you cannot have:
+			- any AVAudioUnitTimeEffect
+			- any sample rate conversion
+*/
+- (void)connect:(AVAudioNode *)sourceNode toConnectionPoints:(NSArray<AVAudioConnectionPoint *> *)destNodes fromBus:(AVAudioNodeBus)sourceBus format:(AVAudioFormat * __nullable)format NS_AVAILABLE(10_11, 9_0);
 
 /*! @method disconnectNodeInput:bus:
 	@abstract
@@ -185,11 +221,41 @@ _player = [[AVAudioPlayerNode alloc] init];
 */
 - (void)stop;
 
+/*! @method inputConnectionPointForNode:inputBus:
+	@abstract 
+		Get connection information on a node's input bus.
+	@param node the node whose input connection is being queried.
+	@param bus the node's input bus on which the connection is being queried.
+	@return	
+		An AVAudioConnectionPoint object with connection information on the node's
+		specified input bus.
+	@discussion
+		Connections are always one-to-one or one-to-many, never many-to-one.
+ 
+		Returns nil if there is no connection on the node's specified input bus.
+*/
+- (AVAudioConnectionPoint * __nullable)inputConnectionPointForNode:(AVAudioNode *)node inputBus:(AVAudioNodeBus)bus NS_AVAILABLE(10_11, 9_0);
+
+/*! @method outputConnectionPointsForNode:outputBus:
+	@abstract
+		Get connection information on a node's output bus.
+	@param node the node whose output connections are being queried.
+	@param bus the node's output bus on which connections are being queried.
+	@return
+		An array of AVAudioConnectionPoint objects with connection information on the node's
+		specified output bus.
+	@discussion
+		Connections are always one-to-one or one-to-many, never many-to-one.
+ 
+		Returns an empty array if there are no connections on the node's specified output bus.
+*/
+- (NSArray<AVAudioConnectionPoint *> *)outputConnectionPointsForNode:(AVAudioNode *)node outputBus:(AVAudioNodeBus)bus NS_AVAILABLE(10_11, 9_0);
+
 /*! @property musicSequence
 	@abstract
 		The MusicSequence previously attached to the engine (if any).
  */
-@property (nonatomic) MusicSequence musicSequence;
+@property (nonatomic, nullable) MusicSequence musicSequence;
 
 /*! @property outputNode
 	@abstract
@@ -214,10 +280,12 @@ _player = [[AVAudioPlayerNode alloc] init];
 		the input node, or create a recording tap on it.
  
 		The AVAudioSesssion category and/or availability of hardware determine whether an app can
-		perform input. Check the input format of input node (i.e. hardware format) for non-zero
+		perform input. Check for non-nil input node and its input format (i.e. hardware format) for non-zero
 		sample rate and channel count to see if input is enabled.
 */
-@property (readonly, nonatomic) AVAudioInputNode *inputNode;
+
+@property (readonly, nonatomic, nullable) AVAudioInputNode *inputNode;
+
 
 /*! @property mainMixerNode
 	@abstract
@@ -257,3 +325,4 @@ _player = [[AVAudioPlayerNode alloc] init];
 AVF_EXPORT
 NSString *const AVAudioEngineConfigurationChangeNotification NS_AVAILABLE(10_10, 8_0);
 
+NS_ASSUME_NONNULL_END

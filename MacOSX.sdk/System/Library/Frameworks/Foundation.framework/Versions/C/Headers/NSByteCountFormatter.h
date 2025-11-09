@@ -1,8 +1,10 @@
 /*	NSByteCountFormatter.h
-	Copyright (c) 2012-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, NSByteCountFormatterUnits) {
     // This causes default units appropriate for the platform to be used. Specifying any units explicitly causes just those units to be used in showing the number.
@@ -84,3 +86,5 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @property NSFormattingContext formattingContext NS_AVAILABLE(10_10, 8_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

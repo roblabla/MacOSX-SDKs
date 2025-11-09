@@ -2,12 +2,12 @@
  *  CVOpenGLBufferPool.h
  *  CoreVideo
  *
- *  Copyright 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright 2004-2015 Apple Inc. All rights reserved.
  *
  */
 
  /*! @header CVOpenGLBufferPool.h
-	@copyright 2004-2014 Apple Inc. All rights reserved.
+	@copyright 2004-2015 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion CVOpenGLBufferPool is a utility object for managing a set of CVOpenGLBuffer objects that are going to be recycled.
 		   
@@ -24,13 +24,13 @@
 extern "C" {
 #endif
 
-typedef struct __CVOpenGLBufferPool *CVOpenGLBufferPoolRef;
+typedef struct CV_BRIDGED_TYPE(id) __CVOpenGLBufferPool *CVOpenGLBufferPoolRef;
 
-CV_EXPORT const CFStringRef kCVOpenGLBufferPoolMinimumBufferCountKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferPoolMinimumBufferCountKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 // By default, buffers will age out after one second.   If required, setting an age of zero will disable
 // the age-out mechanism completely.
-CV_EXPORT const CFStringRef kCVOpenGLBufferPoolMaximumBufferAgeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferPoolMaximumBufferAgeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 CV_EXPORT CFTypeID CVOpenGLBufferPoolGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -41,7 +41,7 @@ CV_EXPORT CFTypeID CVOpenGLBufferPoolGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_
     @param      buffer A CVOpenGLBufferPoolRef object that you want to retain.
     @result     A CVOpenGLBufferPoolRef object that is the same as the passed in buffer.
 */
-CV_EXPORT CVOpenGLBufferPoolRef CVOpenGLBufferPoolRetain( CVOpenGLBufferPoolRef openGLBufferPool ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
+CV_EXPORT CVOpenGLBufferPoolRef CV_NULLABLE CVOpenGLBufferPoolRetain( CVOpenGLBufferPoolRef CV_NULLABLE openGLBufferPool ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
 
 /*!
     @function   CVOpenGLBufferPoolRelease
@@ -49,7 +49,7 @@ CV_EXPORT CVOpenGLBufferPoolRef CVOpenGLBufferPoolRetain( CVOpenGLBufferPoolRef 
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVOpenGLBufferPoolRef object that you want to release.
 */
-CV_EXPORT void CVOpenGLBufferPoolRelease( CVOpenGLBufferPoolRef openGLBufferPool ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
+CV_EXPORT void CVOpenGLBufferPoolRelease( CV_RELEASES_ARGUMENT CVOpenGLBufferPoolRef CV_NULLABLE openGLBufferPool ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // NULL-safe
 
 /*!
     @function   CVOpenGLBufferPoolCreate
@@ -61,10 +61,11 @@ CV_EXPORT void CVOpenGLBufferPoolRelease( CVOpenGLBufferPoolRef openGLBufferPool
     @param      poolOut   The newly created pool will be placed here
     @result     Returns kCVReturnSuccess on success
 */
-CV_EXPORT CVReturn CVOpenGLBufferPoolCreate(CFAllocatorRef allocator,
-					   CFDictionaryRef poolAttributes,
-					   CFDictionaryRef openGLBufferAttributes,
-					   CVOpenGLBufferPoolRef *poolOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVOpenGLBufferPoolCreate(
+    CFAllocatorRef CV_NULLABLE allocator,
+    CFDictionaryRef CV_NULLABLE poolAttributes,
+    CFDictionaryRef CV_NULLABLE openGLBufferAttributes,
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLBufferPoolRef CV_NULLABLE * CV_NONNULL poolOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLBufferPoolGetOpenGLBufferAttributes
@@ -72,7 +73,7 @@ CV_EXPORT CVReturn CVOpenGLBufferPoolCreate(CFAllocatorRef allocator,
     @param      pool  The CVOpenGLBufferPoolRef to retrieve the attributes from
     @result     Returns the pool attributes dictionary, or NULL on failure.
 */
-CV_EXPORT CFDictionaryRef CVOpenGLBufferPoolGetAttributes(CVOpenGLBufferPoolRef pool) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFDictionaryRef CV_NULLABLE CVOpenGLBufferPoolGetAttributes( CVOpenGLBufferPoolRef CV_NONNULL pool ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLBufferPoolGetOpenGLBufferAttributes
@@ -82,7 +83,7 @@ CV_EXPORT CFDictionaryRef CVOpenGLBufferPoolGetAttributes(CVOpenGLBufferPoolRef 
     @param      pool  The CVOpenGLBufferPoolRef to retrieve the attributes from
     @result     Returns the OpenGL buffer attributes dictionary, or NULL on failure.
 */
-CV_EXPORT CFDictionaryRef CVOpenGLBufferPoolGetOpenGLBufferAttributes(CVOpenGLBufferPoolRef pool) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFDictionaryRef CV_NULLABLE CVOpenGLBufferPoolGetOpenGLBufferAttributes( CVOpenGLBufferPoolRef CV_NONNULL pool ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @function   CVOpenGLBufferPoolCreateOpenGLBuffer
@@ -93,9 +94,10 @@ CV_EXPORT CFDictionaryRef CVOpenGLBufferPoolGetOpenGLBufferAttributes(CVOpenGLBu
     @param      openGLBufferOut   The newly created OpenGL buffer will be placed here
     @result     Returns kCVReturnSuccess on success
 */
-CV_EXPORT CVReturn CVOpenGLBufferPoolCreateOpenGLBuffer(CFAllocatorRef allocator, 
-						         CVOpenGLBufferPoolRef openGLBufferPool,
-							 CVOpenGLBufferRef *openGLBufferOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVOpenGLBufferPoolCreateOpenGLBuffer(
+    CFAllocatorRef CV_NULLABLE allocator,
+    CVOpenGLBufferPoolRef CV_NONNULL openGLBufferPool,
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLBufferRef CV_NULLABLE * CV_NONNULL openGLBufferOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 #if defined(__cplusplus)
 }

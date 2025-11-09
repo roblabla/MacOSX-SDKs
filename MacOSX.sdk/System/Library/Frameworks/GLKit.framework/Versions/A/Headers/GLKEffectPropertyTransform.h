@@ -23,6 +23,7 @@
  the normalMatrix selector will recalculate the normalMatrix to return
  a current result with respect to the modelviewMatrix.
 */
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectPropertyTransform : GLKEffectProperty 
 {
@@ -40,3 +41,4 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @property (nonatomic, readonly) GLKMatrix3   normalMatrix;                                       // Identity 
 
 @end
+NS_ASSUME_NONNULL_END

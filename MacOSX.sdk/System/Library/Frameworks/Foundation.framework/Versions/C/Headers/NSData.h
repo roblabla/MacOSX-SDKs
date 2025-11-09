@@ -1,11 +1,13 @@
 /*	NSData.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
 
 @class NSString, NSURL, NSError;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /****************	Read/Write Options	****************/
 
@@ -100,21 +102,21 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 @interface NSData (NSDataCreation)
 
 + (instancetype)data;
-+ (instancetype)dataWithBytes:(const void *)bytes length:(NSUInteger)length;
++ (instancetype)dataWithBytes:(nullable const void *)bytes length:(NSUInteger)length;
 + (instancetype)dataWithBytesNoCopy:(void *)bytes length:(NSUInteger)length;
 + (instancetype)dataWithBytesNoCopy:(void *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)b;
-+ (instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-+ (instancetype)dataWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-+ (instancetype)dataWithContentsOfFile:(NSString *)path;
-+ (instancetype)dataWithContentsOfURL:(NSURL *)url;
-- (instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length;
++ (nullable instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
++ (nullable instancetype)dataWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
++ (nullable instancetype)dataWithContentsOfFile:(NSString *)path;
++ (nullable instancetype)dataWithContentsOfURL:(NSURL *)url;
+- (instancetype)initWithBytes:(nullable const void *)bytes length:(NSUInteger)length;
 - (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length;
 - (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)b;
-- (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length deallocator:(void (^)(void *bytes, NSUInteger length))deallocator NS_AVAILABLE(10_9, 7_0);
-- (instancetype)initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-- (instancetype)initWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-- (instancetype)initWithContentsOfFile:(NSString *)path;
-- (instancetype)initWithContentsOfURL:(NSURL *)url;
+- (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length deallocator:(nullable void (^)(void *bytes, NSUInteger length))deallocator NS_AVAILABLE(10_9, 7_0);
+- (nullable instancetype)initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
+- (nullable instancetype)initWithContentsOfFile:(NSString *)path;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url;
 - (instancetype)initWithData:(NSData *)data;
 + (instancetype)dataWithData:(NSData *)data;
 
@@ -124,7 +126,7 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 /* Create an NSData from a Base-64 encoded NSString using the given options. By default, returns nil when the input is not recognized as valid Base-64.
 */
-- (instancetype)initWithBase64EncodedString:(NSString *)base64String options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
+- (nullable instancetype)initWithBase64EncodedString:(NSString *)base64String options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
 
 /* Create a Base-64 encoded NSString from the receiver's contents using the given options.
 */
@@ -132,7 +134,7 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 /* Create an NSData from a Base-64, UTF-8 encoded NSData. By default, returns nil when the input is not recognized as valid Base-64.
 */
-- (instancetype)initWithBase64EncodedData:(NSData *)base64Data options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
+- (nullable instancetype)initWithBase64EncodedData:(NSData *)base64Data options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
 
 /* Create a Base-64, UTF-8 encoded NSData from the receiver's contents using the given options.
 */
@@ -144,12 +146,12 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 @interface NSData (NSDeprecated)
 
 - (void)getBytes:(void *)buffer NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "This method is unsafe because it could potentially cause buffer overruns. Use -getBytes:length: instead.");
-+ (id)dataWithContentsOfMappedFile:(NSString *)path NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use +dataWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.");
-- (id)initWithContentsOfMappedFile:(NSString *)path  NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use -initWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.");
++ (nullable id)dataWithContentsOfMappedFile:(NSString *)path NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use +dataWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.");
+- (nullable id)initWithContentsOfMappedFile:(NSString *)path  NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use -initWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.");
 
 /* These methods first appeared in NSData.h on OS X 10.9 and iOS 7.0. They are deprecated in the same releases in favor of the methods in the NSDataBase64Encoding category. However, these methods have existed for several releases, so they may be used for applications targeting releases prior to OS X 10.9 and iOS 7.0.
 */
-- (id)initWithBase64Encoding:(NSString *)base64String NS_DEPRECATED(10_6, 10_9, 4_0, 7_0);
+- (nullable id)initWithBase64Encoding:(NSString *)base64String NS_DEPRECATED(10_6, 10_9, 4_0, 7_0);
 - (NSString *)base64Encoding NS_DEPRECATED(10_6, 10_9, 4_0, 7_0);
 
 @end
@@ -171,16 +173,16 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 - (void)replaceBytesInRange:(NSRange)range withBytes:(const void *)bytes;
 - (void)resetBytesInRange:(NSRange)range;
 - (void)setData:(NSData *)data;
-- (void)replaceBytesInRange:(NSRange)range withBytes:(const void *)replacementBytes length:(NSUInteger)replacementLength;
+- (void)replaceBytesInRange:(NSRange)range withBytes:(nullable const void *)replacementBytes length:(NSUInteger)replacementLength;
 
 @end
 
 @interface NSMutableData (NSMutableDataCreation)
 
-+ (instancetype)dataWithCapacity:(NSUInteger)aNumItems;
-+ (instancetype)dataWithLength:(NSUInteger)length;
-- (instancetype)initWithCapacity:(NSUInteger)capacity;
-- (instancetype)initWithLength:(NSUInteger)length;
++ (nullable instancetype)dataWithCapacity:(NSUInteger)aNumItems;
++ (nullable instancetype)dataWithLength:(NSUInteger)length;
+- (nullable instancetype)initWithCapacity:(NSUInteger)capacity;
+- (nullable instancetype)initWithLength:(NSUInteger)length;
 
 @end
 
@@ -196,3 +198,5 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

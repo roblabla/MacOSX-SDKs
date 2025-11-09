@@ -29,6 +29,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class WKUserScript;
 @protocol WKScriptMessageHandler;
 
@@ -43,7 +45,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 /*! @abstract The user scripts associated with this user content
  controller.
 */
-@property (nonatomic, readonly, copy) NSArray *userScripts;
+@property (nonatomic, readonly, copy) NSArray<WKUserScript *> *userScripts;
 
 /*! @abstract Adds a user script.
  @param userScript The user script to add.
@@ -69,5 +71,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (void)removeScriptMessageHandlerForName:(NSString *)name;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

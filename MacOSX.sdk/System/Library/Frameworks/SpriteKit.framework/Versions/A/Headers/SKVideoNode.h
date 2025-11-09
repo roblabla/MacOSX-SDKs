@@ -14,6 +14,8 @@
 #import <SpriteKit/SKSpriteNode.h>
 #import <SpriteKit/SpriteKitBase.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT @interface SKVideoNode : SKNode
 
 /**
@@ -24,13 +26,14 @@ SK_EXPORT @interface SKVideoNode : SKNode
 /**
  Create a video node from a file.
  */
-+ (SKVideoNode *)videoNodeWithVideoFileNamed:(NSString *)videoFile;
++ (SKVideoNode *)videoNodeWithVideoFileNamed:(NSString *)videoFile NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
++ (SKVideoNode *)videoNodeWithFileNamed:(NSString *)videoFile NS_AVAILABLE(10_10, 8_0);
 
 /**
  Create a video node from a URL.
  */
-+ (SKVideoNode *)videoNodeWithVideoURL:(NSURL *)videoURL;
-
++ (SKVideoNode *)videoNodeWithVideoURL:(NSURL *)videoURL NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
++ (SKVideoNode *)videoNodeWithURL:(NSURL *)videoURL NS_AVAILABLE(10_10, 8_0);
 
 /**
  Designated Initializer.
@@ -42,14 +45,16 @@ SK_EXPORT @interface SKVideoNode : SKNode
 /**
  Initialize a video node from a file.
  */
-- (instancetype)initWithVideoFileNamed:(NSString *)videoFile NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithVideoFileNamed:(NSString *)videoFile NS_DESIGNATED_INITIALIZER NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
+- (instancetype)initWithFileNamed:(NSString *)videoFile NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_10, 8_0);
 
-- (instancetype)initWithVideoURL:(NSURL *)url NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithVideoURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
+- (instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_10, 8_0);
 
 /**
  Support coding and decoding via NSKeyedArchiver.
  */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 - (void)play;
 - (void)pause;
@@ -65,3 +70,5 @@ SK_EXPORT @interface SKVideoNode : SKNode
 @property (nonatomic) CGPoint anchorPoint;
 
 @end
+
+NS_ASSUME_NONNULL_END

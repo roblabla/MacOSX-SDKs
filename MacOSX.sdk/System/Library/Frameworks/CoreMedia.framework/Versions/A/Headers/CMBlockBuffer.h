@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
 
-    Copyright 2005-2014 Apple Inc. All rights reserved.
+    Copyright 2005-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -57,7 +57,12 @@ extern "C" {
 	@constant	kCMBlockBufferEmptyBBufErr	Expected a non-empty CMBlockBuffer.
 	@constant	kCMBlockBufferUnallocatedBlockErr	An unallocated memory block was encountered.
 */
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMBlockBufferNoErr							= 0,
 	kCMBlockBufferStructureAllocationFailedErr	= -12700,
 	kCMBlockBufferBlockAllocationFailedErr		= -12701,
@@ -71,6 +76,12 @@ enum {
 };
 
 /*!
+	@typedef CMBlockBufferFlags
+	Type used for parameters containing CMBlockBuffer feature and control flags
+*/
+typedef uint32_t CMBlockBufferFlags;
+
+/*!
 	@enum CMBlockBuffer Flags
 	@discussion Flags controlling behaviors and features of CMBlockBuffer APIs
 	@constant kCMBlockBufferAssureMemoryNowFlag When passed to routines that accept block allocators, causes the memory block
@@ -82,7 +93,12 @@ enum {
 	@constant kCMBlockBufferPermitEmptyReferenceFlag Passed to CMBlockBufferAppendBufferReference() and CMBlockBufferCreateWithBufferReference()
 				to allow references into a CMBlockBuffer that may not yet be populated.
 */
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMBlockBufferFlags
+#else
+enum
+#endif
+{
 	kCMBlockBufferAssureMemoryNowFlag		= (1L<<0),
 	kCMBlockBufferAlwaysCopyDataFlag		= (1L<<1),
 	kCMBlockBufferDontOptimizeDepthFlag		= (1L<<2),
@@ -90,18 +106,12 @@ enum {
 };
 
 /*!
-	@typedef CMBlockBufferFlags
-	Type used for parameters containing CMBlockBuffer feature and control flags
-*/
-typedef uint32_t CMBlockBufferFlags;
-
-/*!
 	@typedef CMBlockBufferRef
 	A reference to a CMBlockBuffer, a CF object that adheres to retain/release semantics. When CFRelease() is performed
 	on the last reference to the CMBlockBuffer, any referenced BlockBuffers are released and eligible memory blocks are
 	deallocated. These operations are recursive, so one release could result in many follow on releses.
 */
-typedef struct OpaqueCMBlockBuffer *CMBlockBufferRef;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef;
 
 /*!
 	@typedef CMBlockBufferCustomBlockSource
@@ -114,12 +124,17 @@ typedef struct OpaqueCMBlockBuffer *CMBlockBufferRef;
 */
 typedef  struct {
 	uint32_t	version;
-	void		*(*AllocateBlock)(void *refCon, size_t sizeInBytes);
-	void		(*FreeBlock)(void *refCon, void *doomedMemoryBlock, size_t sizeInBytes);
-	void		*refCon;
+	void* CM_NULLABLE (* CM_NULLABLE AllocateBlock)(void* CM_NULLABLE refCon, size_t sizeInBytes);
+	void (* CM_NULLABLE FreeBlock)(void* CM_NULLABLE refCon, void* CM_NONNULL doomedMemoryBlock, size_t sizeInBytes);
+	void* CM_NULLABLE refCon;
 } CMBlockBufferCustomBlockSource;
 
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : uint32_t
+#else
+enum
+#endif
+{
 	kCMBlockBufferCustomBlockSourceVersion = 0
 };
 
@@ -148,10 +163,10 @@ enum {
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
 CM_EXPORT OSStatus	CMBlockBufferCreateEmpty(
-		CFAllocatorRef structureAllocator, 
+		CFAllocatorRef CM_NULLABLE structureAllocator,
 		uint32_t subBlockCapacity, 
 		CMBlockBufferFlags flags, 
-		CMBlockBufferRef *newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -188,15 +203,15 @@ CM_EXPORT OSStatus	CMBlockBufferCreateEmpty(
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
 CM_EXPORT OSStatus	CMBlockBufferCreateWithMemoryBlock(
-		CFAllocatorRef structureAllocator, 
-		void *memoryBlock, 
+		CFAllocatorRef CM_NULLABLE structureAllocator,
+		void * CM_NULLABLE memoryBlock,
 		size_t blockLength,
-		CFAllocatorRef blockAllocator, 
-		const CMBlockBufferCustomBlockSource *customBlockSource,
+		CFAllocatorRef CM_NULLABLE blockAllocator,
+		const CMBlockBufferCustomBlockSource * CM_NULLABLE customBlockSource,
 		size_t offsetToData, 
 		size_t dataLength,
 		CMBlockBufferFlags flags, 
-		CMBlockBufferRef *newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -219,12 +234,12 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithMemoryBlock(
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
 CM_EXPORT OSStatus	CMBlockBufferCreateWithBufferReference(
-		CFAllocatorRef structureAllocator, 
-		CMBlockBufferRef targetBuffer, 
+		CFAllocatorRef CM_NULLABLE structureAllocator,
+		CMBlockBufferRef CM_NONNULL targetBuffer,
 		size_t offsetToData,
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
-		CMBlockBufferRef *newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -255,14 +270,14 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithBufferReference(
 	@result	Returns kCMBlockBufferNoErr if successful
 */
 CM_EXPORT OSStatus	CMBlockBufferCreateContiguous(
-		CFAllocatorRef structureAllocator, 
-		CMBlockBufferRef sourceBuffer, 
-		CFAllocatorRef blockAllocator,
-		const CMBlockBufferCustomBlockSource *customBlockSource,
+		CFAllocatorRef CM_NULLABLE structureAllocator,
+		CMBlockBufferRef CM_NONNULL sourceBuffer,
+		CFAllocatorRef CM_NULLABLE blockAllocator,
+		const CMBlockBufferCustomBlockSource * CM_NULLABLE customBlockSource,
 		size_t offsetToData, 
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
-		CMBlockBufferRef *newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 
@@ -310,11 +325,11 @@ CM_EXPORT CFTypeID CMBlockBufferGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_1
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
 CM_EXPORT OSStatus	CMBlockBufferAppendMemoryBlock(
-		CMBlockBufferRef theBuffer, 
-		void *memoryBlock, 
+		CMBlockBufferRef CM_NONNULL theBuffer,
+		void * CM_NULLABLE memoryBlock,
 		size_t blockLength, 
-		CFAllocatorRef blockAllocator,
-		const CMBlockBufferCustomBlockSource *customBlockSource,
+		CFAllocatorRef CM_NULLABLE blockAllocator,
+		const CMBlockBufferCustomBlockSource * CM_NULLABLE customBlockSource,
 		size_t offsetToData, 
 		size_t dataLength, 
 		CMBlockBufferFlags flags)
@@ -340,8 +355,8 @@ CM_EXPORT OSStatus	CMBlockBufferAppendMemoryBlock(
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
 CM_EXPORT OSStatus	CMBlockBufferAppendBufferReference(
-		CMBlockBufferRef theBuffer, 
-		CMBlockBufferRef targetBBuf, 
+		CMBlockBufferRef CM_NONNULL theBuffer,
+		CMBlockBufferRef CM_NONNULL targetBBuf,
 		size_t offsetToData, 
 		size_t dataLength, 
 		CMBlockBufferFlags flags)
@@ -358,7 +373,7 @@ CM_EXPORT OSStatus	CMBlockBufferAppendBufferReference(
 
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
-CM_EXPORT OSStatus	CMBlockBufferAssureBlockMemory(CMBlockBufferRef theBuffer) 
+CM_EXPORT OSStatus	CMBlockBufferAssureBlockMemory(CMBlockBufferRef CM_NONNULL theBuffer)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*! 
@@ -385,11 +400,11 @@ CM_EXPORT OSStatus	CMBlockBufferAssureBlockMemory(CMBlockBufferRef theBuffer)
 	@result	Returns kCMBlockBufferNoErr if the desired amount of data could be accessed at the given offset.
 */
 CM_EXPORT OSStatus CMBlockBufferAccessDataBytes(
-		CMBlockBufferRef theBuffer, 
+		CMBlockBufferRef CM_NONNULL theBuffer,
 		size_t offset, 
 		size_t length, 
-		void *temporaryBlock, 
-		char **returnedPointer)
+		void * CM_NONNULL temporaryBlock,
+		char * CM_NULLABLE * CM_NONNULL returnedPointer)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -410,10 +425,10 @@ CM_EXPORT OSStatus CMBlockBufferAccessDataBytes(
 	@result	Returns kCMBlockBufferNoErr if the copy succeeded, returns an error otherwise.
 */
 CM_EXPORT OSStatus	CMBlockBufferCopyDataBytes(
-		CMBlockBufferRef theSourceBuffer, 
+		CMBlockBufferRef CM_NONNULL theSourceBuffer,
 		size_t offsetToData, 
 		size_t dataLength, 
-		void* destination)
+		void* CM_NONNULL destination)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -433,8 +448,8 @@ CM_EXPORT OSStatus	CMBlockBufferCopyDataBytes(
 	@result	Returns kCMBlockBufferNoErr if the replacement succeeded, returns an error otherwise.
 */
 CM_EXPORT OSStatus	CMBlockBufferReplaceDataBytes(
-		const void* sourceBytes, 
-		CMBlockBufferRef destinationBuffer, 
+		const void* CM_NONNULL sourceBytes,
+		CMBlockBufferRef CM_NONNULL destinationBuffer,
 		size_t offsetIntoDestination, 
 		size_t dataLength)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -458,7 +473,7 @@ CM_EXPORT OSStatus	CMBlockBufferReplaceDataBytes(
 */
 CM_EXPORT OSStatus	CMBlockBufferFillDataBytes(
 		char fillByte, 
-		CMBlockBufferRef destinationBuffer, 
+		CMBlockBufferRef CM_NONNULL destinationBuffer,
 		size_t offsetIntoDestination, 
 		size_t dataLength)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -488,11 +503,11 @@ CM_EXPORT OSStatus	CMBlockBufferFillDataBytes(
 	@result	Returns kCMBlockBufferNoErr if data was accessible at the specified offset within the given CMBlockBuffer, false otherwise.
 */
 CM_EXPORT OSStatus	CMBlockBufferGetDataPointer(
-		CMBlockBufferRef theBuffer, 
+		CMBlockBufferRef CM_NONNULL theBuffer,
 		size_t offset, 
-		size_t *lengthAtOffset, 
-		size_t *totalLength, 
-		char **dataPointer)
+		size_t * CM_NULLABLE lengthAtOffset,
+		size_t * CM_NULLABLE totalLength,
+		char * CM_NULLABLE * CM_NULLABLE dataPointer)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -508,7 +523,7 @@ CM_EXPORT OSStatus	CMBlockBufferGetDataPointer(
 	
 	@result	Returns the total data length available via this CMBlockBuffer, or zero if it is empty, NULL, or somehow invalid.
 */
-CM_EXPORT size_t	CMBlockBufferGetDataLength(CMBlockBufferRef theBuffer)
+CM_EXPORT size_t	CMBlockBufferGetDataLength(CMBlockBufferRef CM_NONNULL theBuffer)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -527,7 +542,7 @@ CM_EXPORT size_t	CMBlockBufferGetDataLength(CMBlockBufferRef theBuffer)
 			CMBlockBuffer is NULL or empty.
 */
 CM_EXPORT Boolean	CMBlockBufferIsRangeContiguous(
-		CMBlockBufferRef theBuffer, 
+		CMBlockBufferRef CM_NONNULL theBuffer,
 		size_t offset, 
 		size_t length)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -544,7 +559,7 @@ CM_EXPORT Boolean	CMBlockBufferIsRangeContiguous(
 	
 	@result	Returns the result of the emptiness test. Will return false if the CMBlockBuffer is NULL.
 */
-CM_EXPORT Boolean	CMBlockBufferIsEmpty(CMBlockBufferRef theBuffer)
+CM_EXPORT Boolean	CMBlockBufferIsEmpty(CMBlockBufferRef CM_NONNULL theBuffer)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 #pragma pack(pop)

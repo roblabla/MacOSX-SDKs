@@ -1,5 +1,5 @@
 /*	CFDateFormatter.h
-	Copyright (c) 2003-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFDATEFORMATTER__)
@@ -12,7 +12,7 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef struct __CFDateFormatter *CFDateFormatterRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFDateFormatter *CFDateFormatterRef;
 
 // CFDateFormatters are not thread-safe.  Do not use one from multiple threads!
 

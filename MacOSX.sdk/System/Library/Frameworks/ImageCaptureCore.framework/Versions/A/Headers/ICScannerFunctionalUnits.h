@@ -22,7 +22,7 @@
 
 //-------------------------------------------------------------------------------------------------------------------- Constants
 /*!
-  @enum ICScannerFunctionalUnitType
+  @ICScannerFunctionalUnitType
   @abstract Scanner Functional Unit Types
   @constant ICScannerFunctionalUnitTypeFlatbed Flatbed functional unit.
   @constant ICScannerFunctionalUnitTypePositiveTransparency Transparency functional unit for scanning positives.
@@ -30,17 +30,16 @@
   @constant ICScannerFunctionalUnitTypeDocumentFeeder Document feeder functional unit.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICScannerFunctionalUnitType)
 {
     ICScannerFunctionalUnitTypeFlatbed              = 0,
     ICScannerFunctionalUnitTypePositiveTransparency = 1,
     ICScannerFunctionalUnitTypeNegativeTransparency = 2,
     ICScannerFunctionalUnitTypeDocumentFeeder       = 3
 };
-typedef NSUInteger ICScannerFunctionalUnitType;
 
 /*!
-  @enum ICScannerMeasurementUnit
+  @ICScannerMeasurementUnit
   @abstract Unit of measurement used by the scanner. This corresponds to values used for ICAP_UNITS as defined in the TWAIN Specification.
   @constant ICScannerMeasurementUnitInches      1 inch  = 2.54         cm
   @constant ICScannerMeasurementUnitCentimeters 1 cm    = 1.00         cm or 1/2.54 inches
@@ -50,7 +49,7 @@ typedef NSUInteger ICScannerFunctionalUnitType;
   @constant ICScannerMeasurementUnitPixels      
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICScannerMeasurementUnit)
 {
     ICScannerMeasurementUnitInches      = 0,
     ICScannerMeasurementUnitCentimeters = 1,
@@ -59,40 +58,37 @@ enum
     ICScannerMeasurementUnitTwips       = 4,
     ICScannerMeasurementUnitPixels      = 5
 };
-typedef NSUInteger ICScannerMeasurementUnit;
 
 /*!
-  @enum ICScannerBitDepth
+  @ICScannerBitDepth
   @abstract Bits per channel in the scanned image.
   @constant ICScannerBitDepth1Bit 1-bit image.
   @constant ICScannerBitDepth8Bits Image with 8 bits per channel.
   @constant ICScannerBitDepth16Bits Image with 16 bits per channel.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICScannerBitDepth)
 {
     ICScannerBitDepth1Bit   = 1,
     ICScannerBitDepth8Bits  = 8,
     ICScannerBitDepth16Bits = 16
 };
-typedef NSUInteger ICScannerBitDepth;
 
 /*!
-  @enum ICScannerColorDataFormatType
+  @ICScannerColorDataFormatType
   @abstract Identifies color data formats. Only relevant for multi-channel data. Corresponds to "ICAP_PLANARCHUNKY" of the TWAIN Specification.
   @constant ICScannerColorDataFormatTypeChunky For multi-channel data (e.g., RGB) data from all channels are interleaved.
   @constant ICScannerColorDataFormatTypePlanar For multi-channel data (e.g., RGB) each channel is transferred sequentially.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICScannerColorDataFormatType)
 {
     ICScannerColorDataFormatTypeChunky  = 0,
     ICScannerColorDataFormatTypePlanar  = 1
 };
-typedef NSUInteger ICScannerColorDataFormatType;
 
 /*!
-  @enum ICScannerPixelDataType
+  @ICScannerPixelDataType
   @abstract Pixel data types. Corresponds to "ICAP_PIXELTYPE" of the TWAIN Specification.
   @constant ICScannerPixelDataTypeBW Monochrome 1 bit pixel image.
   @constant ICScannerPixelDataTypeGray 8 bit pixel Gray color space.
@@ -105,7 +101,7 @@ typedef NSUInteger ICScannerColorDataFormatType;
   @constant ICScannerPixelDataTypeCIEXYZ Color image in CIEXYZ color space.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
 {
     ICScannerPixelDataTypeBW      = 0,
     ICScannerPixelDataTypeGray    = 1,
@@ -117,10 +113,9 @@ enum
     ICScannerPixelDataTypeYUVK    = 7,
     ICScannerPixelDataTypeCIEXYZ  = 8
 };
-typedef NSUInteger ICScannerPixelDataType;
 
 /*!
-  @enum ICScannerDocumentType
+  @ICScannerDocumentType
   @abstract Document size types. Corresponds to "ICAP_SUPPORTEDSIZES" used by the Image Catpure scanner modules. Also refer to TWAIN 1.9 Specification, page 9-483.
   @constant ICScannerDocumentTypeDefault This is the platten size. Not valid for scanners without a platten.
   @constant ICScannerDocumentTypeA4             A4,                               210.00 mm x  297.00 mm
@@ -199,7 +194,7 @@ typedef NSUInteger ICScannerPixelDataType;
   @constant ICScannerDocumentTypeLF             Large Format,                     100.00 mm x  120.00 mm
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICScannerDocumentType)
 {
     ICScannerDocumentTypeDefault      = 0,
     ICScannerDocumentTypeA4           = 1,
@@ -275,40 +270,37 @@ enum
     ICScannerDocumentTypeMF           = 77,
     ICScannerDocumentTypeLF           = 78
 };
-typedef NSUInteger ICScannerDocumentType;
 
 /*!
-  @enum ICScannerFunctionalUnitState
+  @ICScannerFunctionalUnitState
   @abstract A flag to indicate the scanner functional unit's state
   @constant ICScannerStateReady The scanner functional unit is ready for operation.
   @constant ICScannerStateScanInProgress The scanner functional unit is performing a scan.
   @constant ICScannerStateOverviewScanInProgress The scanner functional unit is performing an overview scan.
 */
 
-enum
+typedef NS_ENUM(unsigned int, ICScannerFunctionalUnitState)
 {
     ICScannerFunctionalUnitStateReady                  = (1 << 0),
     ICScannerFunctionalUnitStateScanInProgress         = (1 << 1),
     ICScannerFunctionalUnitStateOverviewScanInProgress = (1 << 2)
 };
-typedef unsigned int  ICScannerFunctionalUnitState;
 
 /*!
-  @enum ICScannerFeatureType
+  @ICScannerFeatureType
   @abstract Scanner Feature Types
   @constant ICScannerFeatureTypeEnumeration This feature can have one of several discrete values, strings or numbers.
   @constant ICScannerFeatureTypeRange This value of this feature lies within a range.
   @constant ICScannerFeatureTypeBoolean The value of this feature can be YES or NO.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICScannerFeatureType)
 {
     ICScannerFeatureTypeEnumeration = 0,
     ICScannerFeatureTypeRange       = 1,
     ICScannerFeatureTypeBoolean     = 2,
     ICScannerFeatureTypeTemplate    = 3
 };
-typedef NSUInteger ICScannerFeatureType;
 
 //------------------------------------------------------------------------------------------------------------- ICScannerFeature
 /*!
@@ -335,21 +327,21 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ￼The internal name of this feature.
 
 */
-@property(readonly)   NSString*                 internalName;
+@property(readonly,nullable)   NSString*                 internalName;
 
 /*!
     @property humanReadableName
     @abstract The human readable name of this feature.
 
 */
-@property(readonly)   NSString*                 humanReadableName;
+@property(readonly,nullable)   NSString*                 humanReadableName;
 
 /*!
     @property tooltip
     @abstract ￼Tooltip text describing the feature.
 
 */
-@property(readonly)   NSString*                 tooltip;
+@property(readonly,nullable)   NSString*                 tooltip;
 @end
 
 //-------------------------------------------------------------------------------------------------- ICScannerFeatureEnumeration
@@ -358,6 +350,8 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ICScannerFeatureEnumeration object is used to represent a feature of a scanner functional unit that can have one of several discrete values.
     @discussion 
 */
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ICScannerFeatureEnumeration : ICScannerFeature
 {
@@ -384,21 +378,21 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract An array of possible values. All items in this array must be of same type￼.
 
 */
-@property(readonly)   NSArray*  values;
+@property(readonly)   NSArray<NSNumber*>*  values;
 
 /*!
     @property menuItemLabels
     @abstract ￼The human readable menu item labels to be used in a menu to allow the user to select the current value from an array of possible values.
 
 */
-@property(readonly)   NSArray*  menuItemLabels;
+@property(readonly)   NSArray<NSString*>*  menuItemLabels;
 
 /*!
     @property menuItemLabelsTooltips
     @abstract ￼Tooltip text associated with the menu items.
 
 */
-@property(readonly)   NSArray*  menuItemLabelsTooltips;
+@property(readonly)   NSArray<NSString*>*  menuItemLabelsTooltips;
 @end
 
 //-------------------------------------------------------------------------------------------------------- ICScannerFeatureRange
@@ -484,7 +478,7 @@ typedef NSUInteger ICScannerFeatureType;
     id _tvProps;
 }
 
-@property(readonly) NSArray*  targets;
+@property(readonly) NSArray<NSMutableArray*>*  targets;
 @end
 
 //------------------------------------------------------------------------------------------------------ ICScannerFunctionalUnit
@@ -602,14 +596,14 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract An array of objects of type ICScannerFeatureTemplate.
 
 */
-@property(readonly)   NSArray*                      templates;
+@property(readonly)   NSArray<ICScannerFeatureTemplate*>*                      templates;
 
 /*!
     @property vendorFeatures
     @abstract An array of objects of type ICScannerFeature.
 
 */
-@property(readonly)   NSArray*                      vendorFeatures;
+@property(readonly,nullable)   NSArray<ICScannerFeature*>*                      vendorFeatures;
 
 /*!
     @property physicalSize
@@ -701,7 +695,7 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ￼Overview scan image. This property will be NULL for functional units that do not support overview scans.
 
 */
-@property(readonly)   CGImageRef                    overviewImage;
+@property(readonly,nullable)   CGImageRef                    overviewImage;
 
 /*!
     @property overviewResolution
@@ -730,7 +724,7 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 
 */
-@property(readonly)   NSIndexSet*                   supportedDocumentTypes;
+@property(readonly, nonnull)   NSIndexSet*                   supportedDocumentTypes;
 
 /*!
     @property documentType
@@ -898,6 +892,8 @@ typedef NSUInteger ICScannerFeatureType;
  
  */
 @property(readonly)   BOOL                          reverseFeederPageOrder;
+
+NS_ASSUME_NONNULL_END
 
 @end
 

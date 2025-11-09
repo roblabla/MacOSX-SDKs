@@ -15,15 +15,14 @@
 #include <AvailabilityMacros.h>
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
 	@typedef	DCSDictionaryRef
 	@abstract	Opaque CF object that represents a dictionary file
 */
-typedef const struct __DCSDictionary*	DCSDictionaryRef;
+typedef const struct CF_BRIDGED_TYPE(id) __DCSDictionary*	DCSDictionaryRef;
 
 /*!
 	@function	DCSGetTermRangeInString
@@ -40,7 +39,7 @@ typedef const struct __DCSDictionary*	DCSDictionaryRef;
 				The result range can be used as an input parameter of DCSCopyTextDefinition()
 				and HIDictionaryWindowShow() in Carbon framework.
 */
-extern CFRange DCSGetTermRangeInString( DCSDictionaryRef dictionary, CFStringRef textString, CFIndex offset )
+extern CFRange DCSGetTermRangeInString( DCSDictionaryRef __nullable dictionary, CFStringRef textString, CFIndex offset )
  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
@@ -54,12 +53,11 @@ extern CFRange DCSGetTermRangeInString( DCSDictionaryRef dictionary, CFStringRef
 				Range of the target word or phrase in textString
 	@result		Returns a definition of the specified term in range in plain text
 */
-extern CFStringRef DCSCopyTextDefinition( DCSDictionaryRef dictionary, CFStringRef textString, CFRange range )
+extern CFStringRef __nullable DCSCopyTextDefinition( DCSDictionaryRef __nullable dictionary, CFStringRef textString, CFRange range )
  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
-#ifdef __cplusplus
-}
-#endif
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 
 #endif // __DICTIONARYSERVICES__
 

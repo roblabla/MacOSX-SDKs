@@ -1,5 +1,5 @@
 /*	CFUserNotification.h
-	Copyright (c) 2000-2014, Apple Inc.  All rights reserved.
+	Copyright (c) 2000-2015, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUSERNOTIFICATION__)
@@ -15,7 +15,7 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef struct __CFUserNotification * CFUserNotificationRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFUserNotification * CFUserNotificationRef;
 
 /* A CFUserNotification is a notification intended to be presented to a 
 user at the console (if one is present).  This is for the use of processes
@@ -99,21 +99,21 @@ SInt32 CFUserNotificationDisplayAlert(CFTimeInterval timeout, CFOptionFlags flag
 
 /* Flags */
 
-enum {
+CF_ENUM(CFOptionFlags) {
     kCFUserNotificationStopAlertLevel 		= 0,
     kCFUserNotificationNoteAlertLevel 		= 1,
     kCFUserNotificationCautionAlertLevel 	= 2,
     kCFUserNotificationPlainAlertLevel		= 3
 };
 
-enum {
+CF_ENUM(CFOptionFlags) {
     kCFUserNotificationDefaultResponse		= 0,
     kCFUserNotificationAlternateResponse	= 1,
     kCFUserNotificationOtherResponse		= 2,
     kCFUserNotificationCancelResponse		= 3
 };
 
-enum {
+CF_ENUM(CFOptionFlags) {
     kCFUserNotificationNoDefaultButtonFlag 	= (1UL << 5),
     kCFUserNotificationUseRadioButtonsFlag 	= (1UL << 6)
 };

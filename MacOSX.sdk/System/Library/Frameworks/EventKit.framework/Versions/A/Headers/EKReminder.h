@@ -5,23 +5,25 @@
 //  Copyright 2010 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <EventKit/EventKitDefines.h>
 #import <EventKit/EKCalendarItem.h>
 
-@class EKEventStore;
+NS_ASSUME_NONNULL_BEGIN
+
+@class EKEventStore, EKCalendar, EKRecurrenceRule, EKAlarm;
 
 /*!
     @class      EKReminder
     @abstract   The EKReminder class represents a reminder (task/todo).
- */
-EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
-@interface EKReminder : EKCalendarItem {
-}
+*/
+NS_CLASS_AVAILABLE(10_8, 6_0)
+@interface EKReminder : EKCalendarItem
 
 /*!
     @method     reminderWithEventStore:
     @abstract   Creates a new reminder in the given event store.
- */
+*/
 + (EKReminder *)reminderWithEventStore:(EKEventStore *)eventStore;
 
 /*!
@@ -30,8 +32,8 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
     @discussion The use of date components allows the start date and its time zone to be represented in a single property. 
                 A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES.
                 If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
- */
-@property(nonatomic, copy) NSDateComponents *startDateComponents;
+*/
+@property(nonatomic, copy, nullable) NSDateComponents *startDateComponents;
 
 /*!
     @property   dueDateComponents
@@ -42,8 +44,8 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
  
                 On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive
                 an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
- */
-@property(nonatomic, copy) NSDateComponents *dueDateComponents;
+*/
+@property(nonatomic, copy, nullable) NSDateComponents *dueDateComponents;
 
 //  These two properties are inextricably linked.  Setting completed to be YES, will set the completedDate to be now,
 //  and setting any completedDate will change completed to be YES. Similarly, setting completed to be NO will set
@@ -55,14 +57,14 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
     @abstract   Whether or not the reminder is completed. 
     @discussion Setting it to YES will set the completed date to the current date. 
                 Setting it to NO will set the completed date to nil.
- */
+*/
 @property(nonatomic, getter=isCompleted) BOOL completed;
 
 /*!
     @property   completionDate
     @abstract   The date on which this reminder was completed.
- */
-@property(nonatomic, copy) NSDate *completionDate;
+*/
+@property(nonatomic, copy, nullable) NSDate *completionDate;
 
 /*!
     @property   priority
@@ -74,3 +76,5 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
 @property(nonatomic) NSUInteger priority;
 
 @end
+
+NS_ASSUME_NONNULL_END

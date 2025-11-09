@@ -2,7 +2,7 @@
 //  MLMediaTypes.h
 //  iLifeMediaBrowser
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 typedef NS_OPTIONS(NSUInteger, MLMediaSourceType)
@@ -18,6 +18,8 @@ typedef NS_ENUM(NSUInteger, MLMediaType)
 	MLMediaTypeImage		= 1 << 1,
 	MLMediaTypeMovie		= 1 << 2,
 };
+
+NS_ASSUME_NONNULL_BEGIN
 
 ///////////// Media Group Type Identifiers
 //
@@ -60,11 +62,13 @@ extern NSString* const MLPhotosLastImportGroupTypeIdentifier;
 extern NSString* const MLPhotosMyPhotoStreamTypeIdentifier;
 extern NSString* const MLPhotosSharedPhotoStreamTypeIdentifier;
 extern NSString* const MLPhotosFavoritesGroupTypeIdentifier;
+extern NSString* const MLPhotosFrontCameraGroupTypeIdentifier;
 extern NSString* const MLPhotosPanoramasGroupTypeIdentifier;
 extern NSString* const MLPhotosVideosGroupTypeIdentifier;
 extern NSString* const MLPhotosSloMoGroupTypeIdentifier;
 extern NSString* const MLPhotosTimelapseGroupTypeIdentifier;
 extern NSString* const MLPhotosBurstGroupTypeIdentifier;
+extern NSString* const MLPhotosScreenshotGroupTypeIdentifier;
 extern NSString* const MLPhotosFacesAlbumTypeIdentifier;
 extern NSString* const MLPhotosAllPhotosAlbumTypeIdentifier;
 
@@ -165,3 +169,5 @@ extern NSString* const MLMediaObjectResolutionStringKey;// NSString e.g. "{1280,
 extern NSString* const MLMediaObjectCommentsKey;		// NSString
 extern NSString* const MLMediaObjectKeywordsKey;		// NSArray of NSStrings
 extern NSString* const MLMediaObjectProtectedKey;		// NSNumber (BOOL)
+
+NS_ASSUME_NONNULL_END

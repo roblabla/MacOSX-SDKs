@@ -2,7 +2,7 @@
  *	CTTextTab.h
  *	CoreText
  *
- *	Copyright (c) 2004-2012 Apple Inc. All rights reserved.
+ *	Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -23,10 +23,8 @@
 #include <CoreFoundation/CFDictionary.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Text Tab Types */
@@ -44,7 +42,7 @@ extern "C" {
 	text.
 */
 
-typedef const struct __CTTextTab * CTTextTabRef;
+typedef const struct CF_RELATED_TYPE(NSTextTab,,) __CTTextTab * CTTextTabRef;
 
 
 /*!
@@ -95,14 +93,13 @@ extern const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE(10_5,
 				option available is kCTTabColumnTerminatorsAttributeName. This
 				parameter is optional and can be set to NULL if not needed.
 
-	@result		This function will return a reference to a CTTextTab if the call
-				was successful. Otherwise, this function will return NULL.
+	@result		The new CTTextTab.
 */
 
 CTTextTabRef CTTextTabCreate(
 	CTTextAlignment alignment,
 	double location,
-	CFDictionaryRef options ) CT_AVAILABLE(10_5, 3_2);
+	CFDictionaryRef __nullable options ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -148,14 +145,12 @@ double CTTextTabGetLocation(
 				no dictionary is present.
 */
 
-CFDictionaryRef CTTextTabGetOptions(
+CFDictionaryRef __nullable CTTextTabGetOptions(
 	CTTextTabRef tab ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

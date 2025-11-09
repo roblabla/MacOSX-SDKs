@@ -219,7 +219,7 @@ extern "C" {
 
 
 #define check_tasklevel0()                                                     \
-  check(ATTASKLEVEL0())
+  __Check(ATTASKLEVEL0())
 
 
 #define check_tasklevel0_string(cstring)                                       \
@@ -231,7 +231,7 @@ extern "C" {
 
 
 #define verify_tasklevel0_string(cstring)                                      \
-  verify_string(ATTASKLEVEL0(), cstring)
+  __Verify_String(ATTASKLEVEL0(), cstring)
 
 
 #define require_tasklevel0(exceptionLabel)                                     \

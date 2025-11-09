@@ -1,13 +1,15 @@
 /*
 	NSDatePickerCell.h
 	Application Kit
-	Copyright (c) 2004-2014, Apple Inc.
+	Copyright (c) 2004-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSDate.h>
 #import <AppKit/NSActionCell.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSDatePickerStyle) {
     NSTextFieldAndStepperDatePickerStyle    = 0,
@@ -84,11 +86,11 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 
 @property NSDatePickerElementFlags datePickerElements;
 
-@property (copy) NSCalendar *calendar;
+@property (nullable, copy) NSCalendar *calendar;
 
-@property (copy) NSLocale *locale;
+@property (nullable, copy) NSLocale *locale;
 
-@property (copy) NSTimeZone *timeZone;
+@property (nullable, copy) NSTimeZone *timeZone;
 
 #pragma mark *** Object Value Access ***
 
@@ -98,18 +100,20 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 
 #pragma mark *** Constraints on Displayable/Selectable Range ***
 
-@property (copy) NSDate *minDate;
+@property (nullable, copy) NSDate *minDate;
 
-@property (copy) NSDate *maxDate;
+@property (nullable, copy) NSDate *maxDate;
 
 #pragma mark *** Delegate ***
 
-@property (assign) id<NSDatePickerCellDelegate> delegate;
+@property (nullable, assign) id<NSDatePickerCellDelegate> delegate;
 
 @end
 
 @protocol NSDatePickerCellDelegate <NSObject>
 @optional
-- (void)datePickerCell:(NSDatePickerCell *)aDatePickerCell validateProposedDateValue:(NSDate **)proposedDateValue timeInterval:(NSTimeInterval *)proposedTimeInterval;
+- (void)datePickerCell:(NSDatePickerCell *)aDatePickerCell validateProposedDateValue:(NSDate * __nonnull *__nonnull)proposedDateValue timeInterval:(nullable NSTimeInterval *)proposedTimeInterval;
 @end
+
+NS_ASSUME_NONNULL_END
 

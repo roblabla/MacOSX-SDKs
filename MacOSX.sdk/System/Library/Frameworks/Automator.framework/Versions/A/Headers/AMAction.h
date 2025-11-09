@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <Automator/AMAttributesForAnalyzer.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSImage;
 
 // AMAction
@@ -21,8 +23,8 @@ typedef NS_ENUM(NSUInteger, AMLogLevel) {
 	AMLogLevelError = 3
 };
 
-@interface AMAction : NSObject 
-{
+NS_CLASS_AVAILABLE_MAC(10_4)
+@interface AMAction : NSObject {
 @private
     NSMutableDictionary *_definition;
     AM_UNUSED_FOR_ANALYZER NSDictionary *_argumentsWithOutlets;
@@ -44,39 +46,39 @@ typedef NS_ENUM(NSUInteger, AMLogLevel) {
 }
 
 // Construction
-- (instancetype)initWithDefinition:(NSDictionary *)dict fromArchive:(BOOL)archived;
-- (instancetype)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (nullable instancetype)initWithDefinition:(NSDictionary<NSString *, id> *)dict fromArchive:(BOOL)archived;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 // Accessors
 #ifndef __LP64__
-- (NSMutableDictionary *)definition AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
+- (NSMutableDictionary<NSString *, id> *)definition AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
 #endif
 
 @property (readonly, strong) NSString *name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 @property (readonly) BOOL ignoresInput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 // The selected[Input, Output]Type must be a UTI in the action's Info.plist.  Set these to nil to restore default behavior.
-@property (strong) NSString *selectedInputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-@property (strong) NSString *selectedOutputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (nullable, strong) NSString *selectedInputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (nullable, strong) NSString *selectedOutputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Values from 0 to 1 are used to show or determinate progress
 @property CGFloat progressValue AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Operations
-- (id)runWithInput:(id)input fromAction:(AMAction *)anAction error:(NSDictionary **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
-- (id)runWithInput:(id)input error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+- (nullable id)runWithInput:(nullable id)input fromAction:(nullable AMAction *)anAction error:(NSDictionary<NSString *, id> * __nullable * __nullable)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
+- (nullable id)runWithInput:(nullable id)input error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-- (void)runAsynchronouslyWithInput:(id)input AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)runAsynchronouslyWithInput:(nullable id)input AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (void)willFinishRunning AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)didFinishRunningWithError:(NSDictionary *)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;
-- (void)finishRunningWithError:(NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+- (void)didFinishRunningWithError:(nullable NSDictionary<NSString *, id> *)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;
+- (void)finishRunningWithError:(nullable NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-@property (strong) id output AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+@property (nullable, strong) id output AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (void)stop;
 - (void)reset;
-- (void)writeToDictionary:(NSMutableDictionary *)dictionary;
+- (void)writeToDictionary:(NSMutableDictionary<NSString *, id> *)dictionary;
 
 - (void)opened;
 - (void)activated;
@@ -90,3 +92,5 @@ typedef NS_ENUM(NSUInteger, AMLogLevel) {
 @property (getter=isStopped, readonly) BOOL stopped;
 
 @end
+
+NS_ASSUME_NONNULL_END

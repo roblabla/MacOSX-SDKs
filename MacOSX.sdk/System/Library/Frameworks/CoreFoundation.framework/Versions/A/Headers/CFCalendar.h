@@ -1,5 +1,5 @@
 /*	CFCalendar.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFCALENDAR__)
@@ -94,7 +94,7 @@ CF_EXPORT
 Boolean CFCalendarDecomposeAbsoluteTime(CFCalendarRef calendar, CFAbsoluteTime at, const char *componentDesc, ...);
 
 
-enum {
+CF_ENUM(CFOptionFlags) {
     kCFCalendarComponentsWrap = (1UL << 0)  // option for adding
 };
 

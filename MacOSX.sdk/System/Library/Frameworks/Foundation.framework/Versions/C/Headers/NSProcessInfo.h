@@ -1,9 +1,11 @@
 /*	NSProcessInfo.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 enum {	/* Constants returned by -operatingSystem */
     NSWindowsNTOperatingSystem = 1,
@@ -21,7 +23,7 @@ typedef struct {
     NSInteger patchVersion;
 } NSOperatingSystemVersion;
 
-@class NSArray, NSString, NSDictionary;
+@class NSArray<ObjectType>, NSString, NSDictionary<KeyType, ObjectType>;
 
 @interface NSProcessInfo : NSObject {
 @private
@@ -34,8 +36,8 @@ typedef struct {
 
 + (NSProcessInfo *)processInfo;
 
-@property (readonly, copy) NSDictionary *environment;
-@property (readonly, copy) NSArray *arguments;
+@property (readonly, copy) NSDictionary<NSString *, NSString *> *environment;
+@property (readonly, copy) NSArray<NSString *> *arguments;
 @property (readonly, copy) NSString *hostName;
 @property (copy) NSString *processName;
 @property (readonly) int processIdentifier;
@@ -151,7 +153,7 @@ typedef NS_OPTIONS(uint64_t, NSActivityOptions) {
     NSActivityLatencyCritical = 0xFF00000000ULL,
 } NS_ENUM_AVAILABLE(10_9, 7_0);
 
-@interface NSProcessInfo ()
+@interface NSProcessInfo (NSProcessInfoActivity)
 /*
  * Pass in an activity to this API, and a non-NULL, non-empty reason string. Indicate completion of the activity by calling the corresponding endActivity: method with the result of the beginActivityWithOptions:reason: method. The reason string is used for debugging.
  */
@@ -167,13 +169,18 @@ typedef NS_OPTIONS(uint64_t, NSActivityOptions) {
  */
 - (void)performActivityWithOptions:(NSActivityOptions)options reason:(NSString *)reason usingBlock:(void (^)(void))block NS_AVAILABLE(10_9, 7_0);
 
+/* 
+ * Perform an expiring background task, which obtains an expiring task assertion on iOS. The block contains any work which needs to be completed as a background-priority task. The block will be scheduled on a system-provided concurrent queue. After a system-specified time, the block will be called with the `expired` parameter set to YES. The `expired` parameter will also be YES if the system decides to prematurely terminate a previous non-expiration invocation of the block.
+ */
+- (void)performExpiringActivityWithReason:(NSString *)reason usingBlock:(void(^)(BOOL expired))block NS_AVAILABLE_IOS(8_2);
+
 @end
 
 // Describes the current thermal state of the system.
 typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
     // No corrective action is needed.
     NSProcessInfoThermalStateNominal,
-    
+
     // The system has reached a state where fans may become audible.
     NSProcessInfoThermalStateFair,
 
@@ -184,15 +191,22 @@ typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
     NSProcessInfoThermalStateCritical
 } NS_ENUM_AVAILABLE(10_10_3, NA);
 
-@interface NSProcessInfo ()
+@interface NSProcessInfo (NSProcessInfoThermalState)
 
 // Retrieve the current thermal state of the system. On systems where thermal state is unknown or unsupported, the value returned from the thermalState property is always NSProcessInfoThermalStateNominal.
 @property (readonly) NSProcessInfoThermalState thermalState NS_AVAILABLE(10_10_3, NA);
 
 @end
 
+@interface NSProcessInfo (NSProcessInfoPowerState)
+
+// Retrieve the current setting of the system for the low power mode setting. On systems where the low power mode is unknown or unsupported, the value returned from the lowPowerModeEnabled property is always NO
+@property (readonly, getter=isLowPowerModeEnabled) BOOL lowPowerModeEnabled NS_AVAILABLE(NA, 9_0);
+
+@end
+
 /*
- This notification is posted once the thermal state of the system has changed. Once the notification is posted, use the thermalState property to retrieve the current thermal state of the system.
+ NSProcessInfoThermalStateDidChangeNotification is posted once the thermal state of the system has changed. Once the notification is posted, use the thermalState property to retrieve the current thermal state of the system.
  
  You can use this opportunity to take corrective action in your application to help cool the system down. Work that could be done in the background or at opportunistic times should be using the Quality of Service levels in NSOperation or the NSBackgroundActivityScheduler API.
  
@@ -200,3 +214,13 @@ typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
 */
 FOUNDATION_EXTERN NSString * const NSProcessInfoThermalStateDidChangeNotification NS_AVAILABLE(10_10_3, NA);
 
+/*
+ NSProcessInfoPowerStateDidChangeNotification is posted once any power usage mode of the system has changed. Once the notification is posted, use the isLowPowerModeEnabled property to retrieve the current state of the low power mode setting of the system.
+ 
+ When this notification is posted your application should attempt to reduce power usage by reducing potentially costly computation and other power using activities like network activity or keeping the screen on if the low power mode setting is enabled.
+ 
+ This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is +[NSProcessInfo processInfo].
+ */
+FOUNDATION_EXTERN NSString * const NSProcessInfoPowerStateDidChangeNotification NS_AVAILABLE(NA, 9_0);
+
+NS_ASSUME_NONNULL_END

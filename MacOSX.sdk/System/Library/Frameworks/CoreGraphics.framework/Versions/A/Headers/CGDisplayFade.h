@@ -5,8 +5,16 @@
 #ifndef CGDISPLAYFADE_H_
 #define CGDISPLAYFADE_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <CoreGraphics/CGDirectDisplay.h>
 #include <CoreGraphics/CGDisplayConfiguration.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* These APIs are used to fade displays to and from a solid color without
    resorting to playing with the gamma table APIs and losing ColorSync
@@ -40,10 +48,11 @@ typedef float CGDisplayFadeInterval;
    complete, control returns to the calling program; the fade-in effect runs
    asynchronously. */
 
-CG_EXTERN CGError CGConfigureDisplayFadeEffect(CGDisplayConfigRef config,
-  CGDisplayFadeInterval fadeOutSeconds, CGDisplayFadeInterval fadeInSeconds,
-  float fadeRed, float fadeGreen, float fadeBlue)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+CG_EXTERN CGError CGConfigureDisplayFadeEffect(
+    CGDisplayConfigRef __nullable config,
+    CGDisplayFadeInterval fadeOutSeconds, CGDisplayFadeInterval fadeInSeconds,
+    float fadeRed, float fadeGreen, float fadeBlue)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* It may be desirable to perform fade operations at other times, such as
    when transitioning between game play and cinematic sequences. The
@@ -64,8 +73,8 @@ typedef float CGDisplayReservationInterval;
 #define kCGMaxDisplayReservationInterval ((CGDisplayReservationInterval)(15.0))
 
 CG_EXTERN CGError CGAcquireDisplayFadeReservation(CGDisplayReservationInterval
-  seconds, CGDisplayFadeReservationToken *token)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    seconds, CGDisplayFadeReservationToken * __nullable token)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Release a display fade reservation, and unfades the display if needed.
    The reservation token is no longer valid after this operation.
@@ -76,8 +85,8 @@ CG_EXTERN CGError CGAcquireDisplayFadeReservation(CGDisplayReservationInterval
    reservation is dropped when the fade operation completes. */
 
 CG_EXTERN CGError CGReleaseDisplayFadeReservation(
-  CGDisplayFadeReservationToken token)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CGDisplayFadeReservationToken token)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Perform a fade operation. The reservation token `token' must have been
    previously acquired from `CGAcquireDisplayFadeReservation'. The duration
@@ -122,15 +131,19 @@ CG_EXTERN CGError CGReleaseDisplayFadeReservation(
 		   false);			// Don't wait for completion */
 
 CG_EXTERN CGError CGDisplayFade(CGDisplayFadeReservationToken token,
-  CGDisplayFadeInterval duration, CGDisplayBlendFraction startBlend,
-  CGDisplayBlendFraction endBlend, float redBlend, float greenBlend,
-  float blueBlend, boolean_t synchronous)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CGDisplayFadeInterval duration, CGDisplayBlendFraction startBlend,
+    CGDisplayBlendFraction endBlend, float redBlend, float greenBlend,
+    float blueBlend, boolean_t synchronous)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if a fade operation is currently in progress, false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayFadeOperationInProgress(void)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGDISPLAYFADE_H_ */

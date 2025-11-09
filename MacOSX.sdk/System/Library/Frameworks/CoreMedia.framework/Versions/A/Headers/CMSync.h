@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright © 2006-2014 Apple Inc. All rights reserved.
+	Copyright © 2006-2015 Apple Inc. All rights reserved.
  
 */
 
@@ -37,7 +37,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		Additionally, the CMSync infrastructure monitors relative drift between CMClocks.
 */
 
-typedef struct OpaqueCMClock* CMClockRef; // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef; // a CF type; use CFRetain and CFRelease
 
 /*!
 	@typedef	CMTimebase
@@ -57,13 +57,18 @@ typedef struct OpaqueCMClock* CMClockRef; // a CF type; use CFRetain and CFRelea
 		the timebase's time changes relative to the ultimate master clock.
 */
 
-typedef struct OpaqueCMTimebase* CMTimebaseRef; // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef; // a CF type; use CFRetain and CFRelease
 
-typedef CFTypeRef CMClockOrTimebaseRef; // used in argument lists and function results to indicate that either may be passed
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef; // used in argument lists and function results to indicate that either may be passed
 
 
 // CMClock error codes
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMClockError_MissingRequiredParameter	= -12745,
 	kCMClockError_InvalidParameter			= -12746,
 	kCMClockError_AllocationFailed			= -12747,
@@ -71,7 +76,12 @@ enum {
 };
 
 // CMTimebase error codes
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMTimebaseError_MissingRequiredParameter	= -12748,
 	kCMTimebaseError_InvalidParameter			= -12749,
 	kCMTimebaseError_AllocationFailed			= -12750,
@@ -80,7 +90,12 @@ enum {
 };
 
 // CMSync error codes
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMSyncError_MissingRequiredParameter	= -12752,
 	kCMSyncError_InvalidParameter			= -12753,
 	kCMSyncError_AllocationFailed			= -12754,
@@ -102,7 +117,7 @@ CMClockGetTypeID( void )
 		On Mac OS X, the host time clock uses mach_absolute_time but returns a value 
 		with a large integer timescale (eg, nanoseconds).
 */
-CM_EXPORT CMClockRef
+CM_EXPORT CMClockRef CM_NONNULL
 CMClockGetHostTimeClock( void )
 	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
@@ -138,7 +153,7 @@ CMClockMakeHostTimeFromSystemUnits( uint64_t hostTime )
 */
 CM_EXPORT CMTime
 CMClockGetTime( 
-		CMClockRef clock )
+		CMClockRef CM_NONNULL clock )
 	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -148,9 +163,9 @@ CMClockGetTime(
 */
 CM_EXPORT OSStatus
 CMClockGetAnchorTime( 
-		CMClockRef clock,
-		CMTime *outClockTime,
-		CMTime *outReferenceClockTime )
+		CMClockRef CM_NONNULL clock,
+		CMTime * CM_NONNULL outClockTime,
+		CMTime * CM_NONNULL outReferenceClockTime )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -159,8 +174,8 @@ CMClockGetAnchorTime(
 */
 CM_EXPORT Boolean
 CMClockMightDrift(
-		CMClockRef clock,
-		CMClockRef otherClock )
+		CMClockRef CM_NONNULL clock,
+		CMClockRef CM_NONNULL otherClock )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -173,7 +188,7 @@ CMClockMightDrift(
 */
 CM_EXPORT void
 CMClockInvalidate(
-		CMClockRef clock )
+		CMClockRef CM_NONNULL clock )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 		
 
@@ -196,9 +211,9 @@ CF_IMPLICIT_BRIDGING_DISABLED
 */
 CM_EXPORT OSStatus
 CMTimebaseCreateWithMasterClock( 
-		CFAllocatorRef allocator,
-		CMClockRef masterClock,
-		CMTimebaseRef *timebaseOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMClockRef CM_NONNULL masterClock,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -209,34 +224,78 @@ CMTimebaseCreateWithMasterClock(
 */
 CM_EXPORT OSStatus
 CMTimebaseCreateWithMasterTimebase( 
-		CFAllocatorRef allocator,
-		CMTimebaseRef masterTimebase,
-		CMTimebaseRef *timebaseOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMTimebaseRef CM_NONNULL masterTimebase,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
-	@function	CMTimebaseGetMasterTimebase
+	@function	CMTimebaseCopyMasterTimebase
 	@abstract	Returns the immediate master timebase of a timebase.
 	@discussion
 		Returns NULL if the timebase actually has a master clock instead of a master timebase.
 */
-CM_EXPORT CMTimebaseRef
+CM_EXPORT CMTimebaseRef CM_NULLABLE
+CMTimebaseCopyMasterTimebase(
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+
+/*!
+	@function	CMTimebaseCopyMasterClock
+	@abstract	Returns the immediate master clock of a timebase.  
+	@discussion
+		Returns NULL if the timebase actually has a master timebase instead of a master clock.
+*/
+CM_EXPORT CMClockRef CM_NULLABLE
+CMTimebaseCopyMasterClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+
+/*!
+	@function	CMTimebaseCopyMaster
+	@abstract	Returns the immediate master (either timebase or clock) of a timebase.  
+	@discussion
+		Only returns NULL if there was an error (such as timebase == NULL).
+*/
+CM_EXPORT CMClockOrTimebaseRef CM_NULLABLE
+CMTimebaseCopyMaster(
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+
+/*!
+	@function	CMTimebaseCopyUltimateMasterClock
+	@abstract	Returns the master clock that is the master of all of a timebase's master timebases.
+*/
+CM_EXPORT CMClockRef CM_NULLABLE
+CMTimebaseCopyUltimateMasterClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+		
+/*!
+	@function	CMTimebaseGetMasterTimebase
+	@abstract	Returns the immediate master timebase of a timebase.
+	@discussion
+		Returns NULL if the timebase actually has a master clock instead of a master timebase.
+		Please use CMTimebaseCopyMasterTimebase instead.
+*/
+CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseGetMasterTimebase(
-		CMTimebaseRef timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
 
 /*!
 	@function	CMTimebaseGetMasterClock
 	@abstract	Returns the immediate master clock of a timebase.  
 	@discussion
 		Returns NULL if the timebase actually has a master timebase instead of a master clock.
+		Please use CMTimebaseCopyMasterClock instead.
 */
-CM_EXPORT CMClockRef
+CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetMasterClock(
-		CMTimebaseRef timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
 
 /*!
 	@function	CMTimebaseGetMaster
@@ -244,20 +303,23 @@ CMTimebaseGetMasterClock(
 	@discussion
 		Only returns NULL if there was an error (such as timebase == NULL).
 		Example of use: time = CMSyncGetTime(CMTimebaseGetMaster(timebase));
+		Please use CMTimebaseCopyMaster instead.
 */
-CM_EXPORT CMClockOrTimebaseRef
+CM_EXPORT CMClockOrTimebaseRef CM_NULLABLE
 CMTimebaseGetMaster(
-		CMTimebaseRef timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
 
 /*!
 	@function	CMTimebaseGetUltimateMasterClock
 	@abstract	Returns the master clock that is the master of all of a timebase's master timebases.
+	@discussion
+		Please use CMTimebaseCopyUltimateMasterClock instead.
 */
-CM_EXPORT CMClockRef
+CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetUltimateMasterClock(
-		CMTimebaseRef timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+		CMTimebaseRef CM_NONNULL timebase )
+			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
 		
 /*!
 	@function	CMTimebaseGetTime
@@ -265,7 +327,7 @@ CMTimebaseGetUltimateMasterClock(
 */
 CM_EXPORT CMTime
 CMTimebaseGetTime( 
-		CMTimebaseRef timebase )
+		CMTimebaseRef CM_NONNULL timebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -274,7 +336,7 @@ CMTimebaseGetTime(
 */
 CM_EXPORT CMTime
 CMTimebaseGetTimeWithTimeScale( 
-		CMTimebaseRef timebase,
+		CMTimebaseRef CM_NONNULL timebase,
 		CMTimeScale timescale,
 		CMTimeRoundingMethod method)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
@@ -285,7 +347,7 @@ CMTimebaseGetTimeWithTimeScale(
 */
 CM_EXPORT OSStatus 
 CMTimebaseSetTime( 
-		CMTimebaseRef timebase, 
+		CMTimebaseRef CM_NONNULL timebase,
 		CMTime time )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
@@ -295,11 +357,13 @@ CMTimebaseSetTime(
 	@discussion
 		CMTimebaseGetTime's results will be interpolated from that anchor time.
 		CMTimebaseSetTime(timebase, time) is equivalent to calling
-		CMTimebaseSetAnchorTime(timebase, time, CMSyncGetTime(CMTimebaseGetMaster(timebase))).
+			CMClockOrTimebaseRef master = CMTimebaseCopyMaster(timebase);
+			CMTimebaseSetAnchorTime(timebase, time, CMSyncGetTime(master));
+			CFRelease(master).
 */
 CM_EXPORT OSStatus
 CMTimebaseSetAnchorTime(
-		CMTimebaseRef timebase,
+		CMTimebaseRef CM_NONNULL timebase,
 		CMTime timebaseTime,
 		CMTime immediateMasterTime)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
@@ -313,7 +377,7 @@ CMTimebaseSetAnchorTime(
 */
 CM_EXPORT Float64 
 CMTimebaseGetRate( 
-		CMTimebaseRef timebase )
+		CMTimebaseRef CM_NONNULL timebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -325,9 +389,9 @@ CMTimebaseGetRate(
 */
 CM_EXPORT OSStatus 
 CMTimebaseGetTimeAndRate( 
-		CMTimebaseRef timebase,
-		CMTime *outTime,
-		Float64 *outRate )
+		CMTimebaseRef CM_NONNULL timebase,
+		CMTime * CM_NONNULL outTime,
+		Float64 * CM_NONNULL outRate )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -336,7 +400,7 @@ CMTimebaseGetTimeAndRate(
 */
 CM_EXPORT OSStatus 
 CMTimebaseSetRate( 
-		CMTimebaseRef timebase, 
+		CMTimebaseRef CM_NONNULL timebase,
 		Float64 rate )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 		
@@ -347,14 +411,15 @@ CMTimebaseSetRate(
 		CMTimebaseGetTime's results will be interpolated from that anchor time as though the timebase 
 		has been running at the requested rate since that time.
 		CMTimebaseSetRate(timebase, rate) is approximately equivalent to calling
-		CMTimebaseSetRateAndAnchorTime(timebase, rate, CMTimebaseGetTime(timebase),
-		                               CMSyncGetTime(CMTimebaseGetMaster(timebase))),
+			CMClockOrTimebaseRef master = CMTimebaseCopyMaster(timebase);
+			CMTimebaseSetRateAndAnchorTime(timebase, rate, CMTimebaseGetTime(timebase), CMSyncGetTime(master)),
+			CFRelease(master);
 		except that CMTimebaseSetRate will not generate a TimeJumped notification, and
 		CMTimebaseSetRateAndAnchorTime will.
 */
 CM_EXPORT OSStatus
 CMTimebaseSetRateAndAnchorTime(
-		CMTimebaseRef timebase,
+		CMTimebaseRef CM_NONNULL timebase,
 		Float64 rate,
 		CMTime timebaseTime,
 		CMTime immediateMasterTime)
@@ -365,11 +430,13 @@ CMTimebaseSetRateAndAnchorTime(
 	@abstract	Gets the effective rate of a timebase (which combines its rate with the rates of all its master timebases).
 	@discussion
 		Calling CMTimebaseGetEffectiveRate(timebase) is equivalent to calling
-		CMSyncGetRelativeRate(timebase, CMTimebaseGetUltimateMasterClock(timebase)).
+			CMClockRef clock = CMTimebaseCopyUltimateMasterClock(timebase);
+			CMSyncGetRelativeRate(timebase, clock).
+			CFRelease(clock);
 */
 CM_EXPORT Float64
 CMTimebaseGetEffectiveRate(
-		CMTimebaseRef timebase )
+		CMTimebaseRef CM_NONNULL timebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -388,9 +455,9 @@ CMTimebaseGetEffectiveRate(
 */
 CM_EXPORT OSStatus
 CMTimebaseAddTimer( 
-		CMTimebaseRef timebase,
-		CFRunLoopTimerRef timer,
-		CFRunLoopRef runloop )
+		CMTimebaseRef CM_NONNULL timebase,
+		CFRunLoopTimerRef CM_NONNULL timer,
+		CFRunLoopRef CM_NONNULL runloop )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 #define kCMTimebaseVeryLongCFTimeInterval	(CFTimeInterval)(256.0 * 365.0 * 24.0 * 60.0 * 60.0)	// quite a while
@@ -407,8 +474,8 @@ CMTimebaseAddTimer(
 */
 CM_EXPORT OSStatus
 CMTimebaseRemoveTimer( 
-		CMTimebaseRef timebase,
-		CFRunLoopTimerRef timer )
+		CMTimebaseRef CM_NONNULL timebase,
+		CFRunLoopTimerRef CM_NONNULL timer )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -432,8 +499,8 @@ CMTimebaseRemoveTimer(
 */
 CM_EXPORT OSStatus
 CMTimebaseSetTimerNextFireTime( 
-		CMTimebaseRef timebase,
-		CFRunLoopTimerRef timer,
+		CMTimebaseRef CM_NONNULL timebase,
+		CFRunLoopTimerRef CM_NONNULL timer,
 		CMTime fireTime,
 		uint32_t flags ) // reserved, pass zero
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
@@ -450,8 +517,8 @@ CMTimebaseSetTimerNextFireTime(
 */
 CM_EXPORT OSStatus
 CMTimebaseSetTimerToFireImmediately( 
-		CMTimebaseRef timebase,
-		CFRunLoopTimerRef timer )
+		CMTimebaseRef CM_NONNULL timebase,
+		CFRunLoopTimerRef CM_NONNULL timer )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 
@@ -475,8 +542,8 @@ CMTimebaseSetTimerToFireImmediately(
 */
 CM_EXPORT OSStatus
 CMTimebaseAddTimerDispatchSource( 
-		CMTimebaseRef timebase,
-		dispatch_source_t timerSource )
+		CMTimebaseRef CM_NONNULL timebase,
+		dispatch_source_t CM_NONNULL timerSource )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 
@@ -491,8 +558,8 @@ CMTimebaseAddTimerDispatchSource(
 */
 CM_EXPORT OSStatus
 CMTimebaseRemoveTimerDispatchSource( 
-		CMTimebaseRef timebase,
-		dispatch_source_t timerSource )
+		CMTimebaseRef CM_NONNULL timebase,
+		dispatch_source_t CM_NONNULL timerSource )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -516,8 +583,8 @@ CMTimebaseRemoveTimerDispatchSource(
 */
 CM_EXPORT OSStatus
 CMTimebaseSetTimerDispatchSourceNextFireTime( 
-		CMTimebaseRef timebase,
-		dispatch_source_t timerSource,
+		CMTimebaseRef CM_NONNULL timebase,
+		dispatch_source_t CM_NONNULL timerSource,
 		CMTime fireTime,
 		uint32_t flags ) // reserved, pass zero
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
@@ -535,8 +602,8 @@ CMTimebaseSetTimerDispatchSourceNextFireTime(
 */
 CM_EXPORT OSStatus
 CMTimebaseSetTimerDispatchSourceToFireImmediately( 
-		CMTimebaseRef timebase,
-		dispatch_source_t timerSource )
+		CMTimebaseRef CM_NONNULL timebase,
+		dispatch_source_t CM_NONNULL timerSource )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 
@@ -551,12 +618,14 @@ CMTimebaseSetTimerDispatchSourceToFireImmediately(
 		drift between the two clocks, using host time as a pivot.
 		The rate of a moving timebase relative to a stopped timebase is a NaN.
 		Calling CMTimebaseGetEffectiveRate(timebase) is equivalent to calling
-		CMSyncGetRelativeRate(timebase, CMTimebaseGetUltimateMasterClock(timebase)).
+			CMClockRef clock = CMTimebaseCopyUltimateMasterClock(timebase);
+			CMSyncGetRelativeRate(timebase, clock).
+			CFRelease(clock);
 */
 CM_EXPORT Float64 
 CMSyncGetRelativeRate( 
-		CMClockOrTimebaseRef ofClockOrTimebase, 
-		CMClockOrTimebaseRef relativeToClockOrTimebase )
+		CMClockOrTimebaseRef CM_NONNULL ofClockOrTimebase,
+		CMClockOrTimebaseRef CM_NONNULL relativeToClockOrTimebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 		
 /*!
@@ -571,11 +640,11 @@ CMSyncGetRelativeRate(
 */
 CM_EXPORT OSStatus
 CMSyncGetRelativeRateAndAnchorTime( 
-		CMClockOrTimebaseRef ofClockOrTimebase, 
-		CMClockOrTimebaseRef relativeToClockOrTimebase,
-		Float64* outRelativeRate,
-		CMTime* outOfClockOrTimebaseAnchorTime,
-		CMTime* outRelativeToClockOrTimebaseAnchorTime)
+		CMClockOrTimebaseRef CM_NONNULL ofClockOrTimebase,
+		CMClockOrTimebaseRef CM_NONNULL relativeToClockOrTimebase,
+		Float64* CM_NONNULL outRelativeRate,
+		CMTime* CM_NONNULL outOfClockOrTimebaseAnchorTime,
+		CMTime* CM_NONNULL outRelativeToClockOrTimebaseAnchorTime)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -591,8 +660,8 @@ CMSyncGetRelativeRateAndAnchorTime(
 CM_EXPORT CMTime
 CMSyncConvertTime(
 		CMTime time, 
-		CMClockOrTimebaseRef fromClockOrTimebase,
-		CMClockOrTimebaseRef toClockOrTimebase )
+		CMClockOrTimebaseRef CM_NONNULL fromClockOrTimebase,
+		CMClockOrTimebaseRef CM_NONNULL toClockOrTimebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -604,8 +673,8 @@ CMSyncConvertTime(
 */
 CM_EXPORT Boolean
 CMSyncMightDrift(
-		CMClockOrTimebaseRef clockOrTimebase1,
-		CMClockOrTimebaseRef clockOrTimebase2 )
+		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase1,
+		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase2 )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 		
 /*!
@@ -613,19 +682,24 @@ CMSyncMightDrift(
 	@abstract	A helper function to get time from a clock or timebase.
 	@discussion
 		CMSyncGetTime simply calls either CMClockGetTime or CMTimebaseGetTime, as appropriate.
-		It comes in handy for things like: CMSyncGetTime(CMTimebaseGetMaster(timebase)).
+		It comes in handy for things like:
+			CMClockOrTimebaseRef master = CMTimebaseCopyMaster(timebase);
+			CMSyncGetTime(master);
+			CFRelease(master);
 */
 CM_EXPORT CMTime
 CMSyncGetTime(
-		CMClockOrTimebaseRef clockOrTimebase )
+		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
 	@function	CMTimebaseNotificationBarrier
 	@abstract	Requests that the timebase wait until it is not posting any notifications.
 */
-CM_EXPORT OSStatus	CMTimebaseNotificationBarrier(CMTimebaseRef timebase )
+CM_EXPORT OSStatus	CMTimebaseNotificationBarrier(CMTimebaseRef CM_NONNULL timebase )
 						__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	
+CM_ASSUME_NONNULL_BEGIN
 
 // Posted by a timebase after a change in effective rate.  
 CM_EXPORT const CFStringRef kCMTimebaseNotification_EffectiveRateChanged
@@ -639,6 +713,7 @@ CM_EXPORT const CFStringRef kCMTimebaseNotification_TimeJumped
 CM_EXPORT const CFStringRef kCMTimebaseNotificationKey_EventTime
 								__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
+CM_ASSUME_NONNULL_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)

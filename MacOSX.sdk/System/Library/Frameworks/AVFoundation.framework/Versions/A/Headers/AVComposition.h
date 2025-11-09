@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2014 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -45,21 +45,20 @@
 
 					Compositing Of Video Tracks
 
-						During playback or other processing, such as export, without the use of an AVVideoComposition only the first enabled video track will be processed. Other video tracks are effectively ignored. To control the compositing of multiple enabled video tracks, you must create and configure an instance of AVVideoComposition and set it as the value of the videoComposition property of the AVFoundation object you’re using to control processing, such as an AVPlayerItem or AVAssetExportSession.
+						During playback or other processing, such as export, without the use of an AVVideoComposition only the first enabled video track will be processed. Other video tracks are effectively ignored. To control the compositing of multiple enabled video tracks, you must create and configure an instance of AVVideoComposition and set it as the value of the videoComposition property of the AVFoundation object you're using to control processing, such as an AVPlayerItem or AVAssetExportSession.
 
 					Mixing Of Audio Tracks
 
-						During playback or other processing, without the use of an AVAudioMix all of the asset’s enabled audio tracks are mixed together at equal levels. To control the mixing of enabled audio tracks, you must create and configure an instance of AVAudioMix and set it as the value of the audioMix property of the AVFoundation object you’re using to control processing, such as an AVPlayerItem or AVAssetExportSession.
+						During playback or other processing, without the use of an AVAudioMix all of the asset's enabled audio tracks are mixed together at equal levels. To control the mixing of enabled audio tracks, you must create and configure an instance of AVAudioMix and set it as the value of the audioMix property of the AVFoundation object you're using to control processing, such as an AVPlayerItem or AVAssetExportSession.
 */
 
-#import <AVFoundation/AVBase.h>
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVAsset.h>
+#import <AVFoundation/AVCompositionTrack.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
 
-@class AVCompositionTrack;
-@class AVMutableCompositionTrack;
+NS_ASSUME_NONNULL_BEGIN
+
 @class AVCompositionInternal;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
@@ -70,18 +69,58 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 }
 
 /* provides the array of AVCompositionTracks contained by the composition */
-@property (nonatomic, readonly) NSArray *tracks;
+@property (nonatomic, readonly) NSArray<AVCompositionTrack *> *tracks;
 
 /*	indicates the authored size of the visual portion of the composition */
 @property (nonatomic, readonly) CGSize naturalSize;
 
+/*!
+	@property		URLAssetInitializationOptions
+	@abstract		Specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options.
+	@discussion
+		AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
+		The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
+ */
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> *URLAssetInitializationOptions NS_AVAILABLE(10_11, 9_0);
+
+@end
+
+@interface AVComposition (AVCompositionTrackInspection)
+
+/*!
+  @method		trackWithTrackID:
+  @abstract		Provides an instance of AVCompositionTrack that represents the track of the specified trackID.
+  @param		trackID
+				The trackID of the requested AVCompositionTrack.
+  @result		An instance of AVCompositionTrack; may be nil if no track of the specified trackID is available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (nullable AVCompositionTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
+
+/*!
+  @method		tracksWithMediaType:
+  @abstract		Provides an array of AVCompositionTracks of the asset that present media of the specified media type.
+  @param		mediaType
+				The media type according to which the receiver filters its AVCompositionTracks. (Media types are defined in AVMediaFormat.h)
+  @result		An NSArray of AVCompositionTracks; may be empty if no tracks of the specified media type are available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (NSArray<AVCompositionTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+
+/*!
+  @method		tracksWithMediaCharacteristic:
+  @abstract		Provides an array of AVCompositionTracks of the asset that present media with the specified characteristic.
+  @param		mediaCharacteristic
+				The media characteristic according to which the receiver filters its AVCompositionTracks. (Media characteristics are defined in AVMediaFormat.h)
+  @result		An NSArray of AVCompositionTracks; may be empty if no tracks with the specified characteristic are available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (NSArray<AVCompositionTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+
 @end
 
 
-@class AVAssetTrack;
-@class AVMutableCompositionTrack;
 @class AVMutableCompositionInternal;
-
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableComposition : AVComposition
@@ -91,7 +130,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 }
 
 /* provides the array of AVMutableCompositionTracks contained by the composition */
-@property (nonatomic, readonly) NSArray *tracks;
+@property (nonatomic, readonly) NSArray<AVMutableCompositionTrack *> *tracks;
 
 /* Indicates the authored size of the visual portion of the asset.
    If not set, the default behavior is to provide the size of the composition's first video track.
@@ -102,7 +141,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@method			composition
 	@abstract		Returns an empty AVMutableComposition.
 */
-+ (AVMutableComposition *)composition;
++ (instancetype)composition;
+
+/*!
+	@method			compositionWithURLAssetInitializationOptions:
+	@abstract		Returns an empty AVMutableComposition.
+	@param			URLAssetInitializationOptions
+					Specifies the initialization options that the receiver should use when creating AVURLAssets internally, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVMutableComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options.
+	@discussion		AVMutableCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVMutableCompositionTracks, as needed, whenever AVCompositionTrackSegments are added to tracks via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
+ */
++ (instancetype)compositionWithURLAssetInitializationOptions:(nullable NSDictionary<NSString *, id> *)URLAssetInitializationOptions NS_AVAILABLE(10_11, 9_0);
 
 @end
 
@@ -130,7 +178,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 		
 		Existing content at the specified startTime will be pushed out by the duration of timeRange. 
 */
-- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime error:(NSError **)outError;
+- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime error:(NSError * __nullable * __nullable)outError;
 
 /*!
 	@method			insertEmptyTimeRange:
@@ -221,6 +269,42 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 		serially, even from multiple assets, a single track of that media type should be used. This method,
 		-mutableTrackCompatibleWithTrack:, can help the client to identify an existing target track for an insertion.
 */
-- (AVMutableCompositionTrack *)mutableTrackCompatibleWithTrack:(AVAssetTrack *)track;
+- (nullable AVMutableCompositionTrack *)mutableTrackCompatibleWithTrack:(AVAssetTrack *)track;
 
 @end
+
+@interface AVMutableComposition (AVMutableCompositionTrackInspection)
+
+/*!
+  @method		trackWithTrackID:
+  @abstract		Provides an instance of AVMutableCompositionTrack that represents the track of the specified trackID.
+  @param		trackID
+				The trackID of the requested AVMutableCompositionTrack.
+  @result		An instance of AVMutableCompositionTrack; may be nil if no track of the specified trackID is available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (nullable AVMutableCompositionTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
+
+/*!
+  @method		tracksWithMediaType:
+  @abstract		Provides an array of AVMutableCompositionTracks of the asset that present media of the specified media type.
+  @param		mediaType
+				The media type according to which the receiver filters its AVMutableCompositionTracks. (Media types are defined in AVMediaFormat.h)
+  @result		An NSArray of AVMutableCompositionTracks; may be empty if no tracks of the specified media type are available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+
+/*!
+  @method		tracksWithMediaCharacteristic:
+  @abstract		Provides an array of AVMutableCompositionTracks of the asset that present media with the specified characteristic.
+  @param		mediaCharacteristic
+				The media characteristic according to which the receiver filters its AVMutableCompositionTracks. (Media characteristics are defined in AVMediaFormat.h)
+  @result		An NSArray of AVMutableCompositionTracks; may be empty if no tracks with the specified characteristic are available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+
+@end
+
+NS_ASSUME_NONNULL_END

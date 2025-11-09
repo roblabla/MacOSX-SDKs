@@ -1,28 +1,30 @@
 /*	NSNotification.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSString, NSDictionary, NSOperationQueue;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /****************	Notifications	****************/
 
 @interface NSNotification : NSObject <NSCopying, NSCoding>
 
 @property (readonly, copy) NSString *name;
-@property (readonly, retain) id object;
-@property (readonly, copy) NSDictionary *userInfo;
+@property (nullable, readonly, retain) id object;
+@property (nullable, readonly, copy) NSDictionary *userInfo;
 
-- (instancetype)initWithName:(NSString *)name object:(id)object userInfo:(NSDictionary *)userInfo NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithName:(NSString *)name object:(nullable id)object userInfo:(nullable NSDictionary *)userInfo NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
 @interface NSNotification (NSNotificationCreation)
 
-+ (instancetype)notificationWithName:(NSString *)aName object:(id)anObject;
-+ (instancetype)notificationWithName:(NSString *)aName object:(id)anObject userInfo:(NSDictionary *)aUserInfo;
++ (instancetype)notificationWithName:(NSString *)aName object:(nullable id)anObject;
++ (instancetype)notificationWithName:(NSString *)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;
 
 - (instancetype)init /*NS_UNAVAILABLE*/;	/* do not invoke; not a valid initializer for this class */
 
@@ -39,18 +41,19 @@
 
 + (NSNotificationCenter *)defaultCenter;
 
-- (void)addObserver:(id)observer selector:(SEL)aSelector name:(NSString *)aName object:(id)anObject;
+- (void)addObserver:(id)observer selector:(SEL)aSelector name:(nullable NSString *)aName object:(nullable id)anObject;
 
 - (void)postNotification:(NSNotification *)notification;
-- (void)postNotificationName:(NSString *)aName object:(id)anObject;
-- (void)postNotificationName:(NSString *)aName object:(id)anObject userInfo:(NSDictionary *)aUserInfo;
+- (void)postNotificationName:(NSString *)aName object:(nullable id)anObject;
+- (void)postNotificationName:(NSString *)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;
 
 - (void)removeObserver:(id)observer;
-- (void)removeObserver:(id)observer name:(NSString *)aName object:(id)anObject;
+- (void)removeObserver:(id)observer name:(nullable NSString *)aName object:(nullable id)anObject;
 
-- (id <NSObject>)addObserverForName:(NSString *)name object:(id)obj queue:(NSOperationQueue *)queue usingBlock:(void (^)(NSNotification *note))block NS_AVAILABLE(10_6, 4_0);
+- (id <NSObject>)addObserverForName:(nullable NSString *)name object:(nullable id)obj queue:(nullable NSOperationQueue *)queue usingBlock:(void (^)(NSNotification *note))block NS_AVAILABLE(10_6, 4_0);
     // The return value is retained by the system, and should be held onto by the caller in
     // order to remove the observer with removeObserver: later, to stop observation.
 
 @end
 
+NS_ASSUME_NONNULL_END

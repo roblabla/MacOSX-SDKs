@@ -1,19 +1,21 @@
 /*	
     NSURLCredentialStorage.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSURLProtectionSpace.h>
 
-@class NSDictionary;
+@class NSDictionary<KeyType, ObjectType>;
 @class NSString;
 @class NSURLCredential;
-@class NSURLProtectionSpace;
 @class NSURLSessionTask;
 
 @class NSURLCredentialStorageInternal;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @class NSURLCredentialStorage
@@ -39,7 +41,7 @@
     @param protectionSpace An NSURLProtectionSpace indicating the protection space for which to get credentials
     @result A dictionary where the keys are usernames and the values are the corresponding NSURLCredentials.
 */
-- (NSDictionary *)credentialsForProtectionSpace:(NSURLProtectionSpace *)space;
+- (nullable NSDictionary<NSString *, NSURLCredential *> *)credentialsForProtectionSpace:(NSURLProtectionSpace *)space;
 
 /*!
     @method allCredentials
@@ -48,7 +50,7 @@
     and the values are dictionaries, in which the keys are usernames
     and the values are NSURLCredentials
 */
-@property (readonly, copy) NSDictionary *allCredentials;
+@property (readonly, copy) NSDictionary<NSURLProtectionSpace *, NSDictionary<NSString *, NSURLCredential *> *> *allCredentials;
 
 /*!
     @method setCredential:forProtectionSpace:
@@ -83,14 +85,14 @@
  are removed, the credential will be removed on all devices that contain this credential.
  @discussion The credential is removed from both persistent and temporary storage.
  */
-- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)space options:(NSDictionary *)options NS_AVAILABLE(10_9, 7_0);
+- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)space options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0);
 
 /*!
     @method defaultCredentialForProtectionSpace:
     @abstract Get the default credential for the specified protection space.
     @param space The protection space for which to get the default credential.
 */
-- (NSURLCredential *)defaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space;
+- (nullable NSURLCredential *)defaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space;
 
 /*!
     @method setDefaultCredential:forProtectionSpace:
@@ -104,10 +106,10 @@
 @end
 
 @interface NSURLCredentialStorage (NSURLSessionTaskAdditions)
-- (void)getCredentialsForProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task completionHandler:(void (^) (NSDictionary *credentials))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)getCredentialsForProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task completionHandler:(void (^) (NSDictionary<NSString *, NSURLCredential *> * __nullable credentials))completionHandler NS_AVAILABLE(10_10, 8_0);
 - (void)setCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace options:(NSDictionary *)options task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (void)getDefaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space task:(NSURLSessionTask *)task completionHandler:(void (^) (NSURLCredential *credential))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace options:(nullable NSDictionary<NSString *, id> *)options task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
+- (void)getDefaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space task:(NSURLSessionTask *)task completionHandler:(void (^) (NSURLCredential * __nullable credential))completionHandler NS_AVAILABLE(10_10, 8_0);
 - (void)setDefaultCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
 @end
 
@@ -127,4 +129,4 @@ FOUNDATION_EXPORT NSString *const NSURLCredentialStorageChangedNotification;
 FOUNDATION_EXPORT NSString *const NSURLCredentialStorageRemoveSynchronizableCredentials NS_AVAILABLE(10_9, 7_0);
 
 
-
+NS_ASSUME_NONNULL_END

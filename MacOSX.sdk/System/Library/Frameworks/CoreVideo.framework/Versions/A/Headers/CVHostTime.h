@@ -8,7 +8,7 @@
  
  /*! @header CVHostTime.h
 	@copyright 2004-2014 Apple Inc. All rights reserved.
-	@availability Mac OS X 10.4 or later
+	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @discussion Utility functions for retrieving and working with the host time.
 */
 

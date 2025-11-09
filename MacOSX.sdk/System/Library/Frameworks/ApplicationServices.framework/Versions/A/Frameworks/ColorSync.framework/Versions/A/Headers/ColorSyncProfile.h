@@ -26,6 +26,11 @@ CSEXTERN CFStringRef kColorSyncAdobeRGB1998Profile;         /* com.apple.ColorSy
 CSEXTERN CFStringRef kColorSyncGenericLabProfile;           /* com.apple.ColorSync.GenericLab */
 CSEXTERN CFStringRef kColorSyncGenericXYZProfile;           /* com.apple.ColorSync.GenericXYZ */
 
+CSEXTERN CFStringRef kColorSyncACESCGLinearProfile;         /* com.apple.ColorSync.ACESCGLinear */
+CSEXTERN CFStringRef kColorSyncITUR709Profile;              /* com.apple.ColorSync.ITUR709 */
+CSEXTERN CFStringRef kColorSyncITUR2020Profile;             /* com.apple.ColorSync.ITUR2020 */
+CSEXTERN CFStringRef kColorSyncROMMRGBProfile;              /* com.apple.ColorSync.ROMMRGB */
+    
 CSEXTERN CFStringRef kColorSyncProfileHeader;      /* com.apple.ColorSync.ProfileHeader */
 CSEXTERN CFStringRef kColorSyncProfileClass;       /* com.apple.ColorSync.ProfileClass */
 CSEXTERN CFStringRef kColorSyncProfileColorSpace;  /* com.apple.ColorSync.ProfileColorSpace */
@@ -75,6 +80,11 @@ CSEXTERN CFStringRef kColorSyncSigViewingConditionsTag;           /* 0x76696577L
 CSEXTERN CFStringRef kColorSyncSigViewingCondDescTag;             /* 0x76756564L => CFSTR("vued")*/
 CSEXTERN CFStringRef kColorSyncSigMediaWhitePointTag;             /* 0x77747074L => CFSTR("wtpt")*/
 
+CSEXTERN CFStringRef kColorSyncProfileComputerDomain; /* com.apple.ColorSync.ProfileDomain.Computer */
+CSEXTERN CFStringRef kColorSyncProfileUserDomain;     /* com.apple.ColorSync.ProfileDomain.User */
+
+#define COLORSYNC_PROFILE_INSTALL_ENTITLEMENT   "com.apple.developer.ColorSync.profile.install"
+
 CSEXTERN CFTypeID ColorSyncProfileGetTypeID(void);
    /*
     * returns the CFTypeID for ColorSyncProfiles.
@@ -83,15 +93,15 @@ CSEXTERN CFTypeID ColorSyncProfileGetTypeID(void);
 CSEXTERN ColorSyncProfileRef ColorSyncProfileCreate(CFDataRef data, CFErrorRef* error);
    /*
     *   data   - profile data
-    *   error  - (optional) pointer to the error that will be returned in case of failure
+    *   error  - (optional) pointer to the error which will be returned in case of failure
     *   
     *   returns ColorSyncProfileRef or NULL in case of failure
     */
 
 CSEXTERN ColorSyncProfileRef ColorSyncProfileCreateWithURL(CFURLRef url, CFErrorRef* error);
    /*
-    *   url    - URL to the profile data (caller needs to have privileges to read url).
-    *   error  - (optional) pointer to the error that will be returned in case of failure
+    *   url    - URL to the profile data.
+    *   error  - (optional) pointer to the error which will be returned in case of failure
     *   
     *   returns ColorSyncProfileRef or NULL in case of failure
     */
@@ -170,7 +180,7 @@ CSEXTERN bool ColorSyncProfileVerify (ColorSyncProfileRef prof, CFErrorRef* erro
 CSEXTERN float ColorSyncProfileEstimateGammaWithDisplayID (const int32_t displayID, CFErrorRef* error);
    /*
     *   displayID - system-wide unique display ID (defined by IOKIt)
-    *   error     - (optional) pointer to the error that will be returned in
+    *   error     - (optional) pointer to the error which will be returned in
     *               case of failure
     *   
     *   returns non-zero value if success or 0.0 in case of error.
@@ -179,7 +189,7 @@ CSEXTERN float ColorSyncProfileEstimateGammaWithDisplayID (const int32_t display
 CSEXTERN float ColorSyncProfileEstimateGamma (ColorSyncProfileRef prof, CFErrorRef* error);
     /*
     *   prof    - profile to perform estimation on
-    *   error   - (optional) pointer to the error that will be returned in
+    *   error   - (optional) pointer to the error which will be returned in
     *             case of failure
     *   
     *   returns non-zero value if success or 0.0 in case of error
@@ -199,7 +209,7 @@ CSEXTERN ColorSyncMD5 ColorSyncProfileGetMD5(ColorSyncProfileRef prof);
 CSEXTERN CFDataRef ColorSyncProfileCopyData (ColorSyncProfileRef prof, CFErrorRef* error);
    /*
     *   prof    - profile to copy the flattened data from
-    *   error  - (optional) pointer to the error that will be returned in case of failure
+    *   error  - (optional) pointer to the error which will be returned in case of failure
     *   
     *   returns CFDataRef if success or NULL in case of failure 
     */
@@ -207,7 +217,7 @@ CSEXTERN CFDataRef ColorSyncProfileCopyData (ColorSyncProfileRef prof, CFErrorRe
 CSEXTERN CFURLRef ColorSyncProfileGetURL (ColorSyncProfileRef prof, CFErrorRef* error);
    /*
     *   prof   - profile to get URL from
-    *   error  - (optional) pointer to the error that will be returned in case of failure
+    *   error  - (optional) pointer to the error which will be returned in case of failure
     *   
     *   returns CFURLRef if success or NULL in case of failure 
     */
@@ -302,10 +312,38 @@ CSEXTERN void ColorSyncIterateInstalledProfiles (ColorSyncProfileIterateCallback
    /*
     * callBack - pointer to a client provided function (can be NULL)
     * seed     - pointer to a cache seed owned by the client (can be NULL)
-    * error    - (optional) pointer to the error that will be returned in case of failure
+    * error    - (optional) pointer to the error which will be returned in case of failure
     *
     */
 
+CSEXTERN bool ColorSyncProfileInstall(ColorSyncProfileRef profile, CFStringRef domain, CFStringRef subpath, CFErrorRef* error);
+   /*
+    * profile   - profile to be installed
+    * domain    - either kColorSyncProfileComputerDomain or kColorSyncProfileUserDomain.
+    *             kColorSyncProfileComputerDomain is for sharing the profiles (from /Library/ColorSync/Profiles).
+    *             kColorSyncProfileUserDomain is for user custom profiles (installed under home directory, i.e. in 
+    *             ~/Library/ColorSync/Profiles.
+    *             NULL is the same as kColorSyncProfileUserDomain.
+    * subpath   - CFString created from the file system representation of the path of the file to contain the installed
+    *             profile. The last component of the path is interpreted as a file name if it ends with the extension ".icc".
+    *             Otherwise, the subpath is interpreted as the directory path and file name will be created from the 
+    *             profile description tag, appended with the ".icc" extension.
+    * error     - (optional) pointer to the error which will be returned in case of failure.
+    *
+    *             bool value true is returned if success or false in case of error.
+    */
+    
+CSEXTERN bool ColorSyncProfileUninstall(ColorSyncProfileRef profile, CFErrorRef* error);
+   /*
+    * profile   - profile to be uninstalled. This profile must return a valid url for ColorSyncProfileGetURL,
+    *             i.e. it must be created with ColorSyncProfileCreateWithURL. Also, the url
+    *             must be in either in kColorSyncProfileComputerDomain or
+    *             kColorSyncProfileUserDomain, including subfolders of those.
+    * error     - (optional) pointer to the error which will be returned in case of failure.
+    *
+    *             bool value true is returned if success or false in case of error.
+    */
+    
     /********************************************************************************************
     *                                                                                           *
     *   For further information on ICC profiles refer to ICC profile specification published    *

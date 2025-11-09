@@ -2,7 +2,7 @@
  *	CTFrame.h
  *	CoreText
  *
- *	Copyright (c) 2003-2012 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2015 Apple Inc. All rights reserved.
  *
  */
  
@@ -25,16 +25,14 @@
 #include <CoreGraphics/CGContext.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Frame Types */
 /* --------------------------------------------------------------------------- */
 
-typedef const struct __CTFrame * CTFrameRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CTFrame * CTFrameRef;
 
 
 /*!
@@ -191,7 +189,7 @@ CFRange CTFrameGetStringRange(
 	@abstract	Returns the range of characters that actually fit in the
 				frame.
 
-	@discussion This can be used to cascade frames, as it returns the range of
+	@discussion This can be used to chain frames, as it returns the range of
 				characters that can be seen in the frame. The next frame would
 				start where this frame ends.
 
@@ -239,7 +237,7 @@ CGPathRef CTFrameGetPath(
 				will return NULL.
 */
 
-CFDictionaryRef CTFrameGetFrameAttributes(
+CFDictionaryRef __nullable CTFrameGetFrameAttributes(
 	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
 
 
@@ -325,10 +323,8 @@ void CTFrameDraw(
 	CGContextRef context ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

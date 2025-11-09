@@ -1,12 +1,14 @@
 /* CoreAnimation - CAAnimation.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 #import <Foundation/NSObject.h>
 
 @class NSArray, NSString, CAMediaTimingFunction, CAValueFunction;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /** The base animation class. **/
 
@@ -25,19 +27,19 @@
 /* Animations implement the same property model as defined by CALayer.
  * See CALayer.h for more details. */
 
-+ (id)defaultValueForKey:(NSString *)key;
++ (nullable id)defaultValueForKey:(NSString *)key;
 - (BOOL)shouldArchiveValueForKey:(NSString *)key;
 
 /* A timing function defining the pacing of the animation. Defaults to
  * nil indicating linear pacing. */
 
-@property(strong) CAMediaTimingFunction *timingFunction;
+@property(nullable, strong) CAMediaTimingFunction *timingFunction;
 
 /* The delegate of the animation. This object is retained for the
  * lifetime of the animation object. Defaults to nil. See below for the
  * supported delegate methods. */
 
-@property(strong) id delegate;
+@property(nullable, strong) id delegate;
 
 /* When true, the animation is removed from the render tree once its
  * active duration has passed. Defaults to YES. */
@@ -71,11 +73,11 @@
 /* Creates a new animation object with its `keyPath' property set to
  * 'path'. */
 
-+ (instancetype)animationWithKeyPath:(NSString *)path;
++ (instancetype)animationWithKeyPath:(nullable NSString *)path;
 
 /* The key-path describing the property to be animated. */
 
-@property(copy) NSString *keyPath;
+@property(nullable, copy) NSString *keyPath;
 
 /* When true the value specified by the animation will be "added" to
  * the current presentation value of the property to produce the new
@@ -97,7 +99,7 @@
  * before they are set as the new presentation value of the animation's
  * target property. Defaults to nil. */
 
-@property(strong) CAValueFunction *valueFunction;
+@property(nullable, strong) CAValueFunction *valueFunction;
 
 @end
 
@@ -130,7 +132,9 @@
  * - `byValue' non-nil. Interpolates between the layer's current value
  * of the property in the render tree and that plus `byValue'. */
 
-@property(strong) id fromValue, toValue, byValue;
+@property(nullable, strong) id fromValue;
+@property(nullable, strong) id toValue;
+@property(nullable, strong) id byValue;
 
 @end
 
@@ -142,16 +146,16 @@
 /* An array of objects providing the value of the animation function for
  * each keyframe. */
 
-@property(copy) NSArray *values;
+@property(nullable, copy) NSArray *values;
 
 /* An optional path object defining the behavior of the animation
  * function. When non-nil overrides the `values' property. Each point
  * in the path except for `moveto' points defines a single keyframe for
  * the purpose of timing and interpolation. Defaults to nil. For
  * constant velocity animation along the path, `calculationMode' should
- * be set to `paced'. */
+ * be set to `paced'. Upon assignment the path is copied. */
 
-@property CGPathRef path;
+@property(nullable) CGPathRef path;
 
 /* An optional array of `NSNumber' objects defining the pacing of the
  * animation. Each time corresponds to one value in the `values' array,
@@ -159,14 +163,14 @@
  * Each value in the array is a floating point number in the range
  * [0,1]. */
 
-@property(copy) NSArray *keyTimes;
+@property(nullable, copy) NSArray<NSNumber *> *keyTimes;
 
 /* An optional array of CAMediaTimingFunction objects. If the `values' array
  * defines n keyframes, there should be n-1 objects in the
  * `timingFunctions' array. Each function describes the pacing of one
  * keyframe to keyframe segment. */
 
-@property(copy) NSArray *timingFunctions;
+@property(nullable, copy) NSArray<CAMediaTimingFunction *> *timingFunctions;
 
 /* The "calculation mode". Possible values are `discrete', `linear',
  * `paced', `cubic' and `cubicPaced'. Defaults to `linear'. When set to
@@ -193,7 +197,9 @@
  * point's tangents, and so on. Any unspecified values default to zero
  * (giving a Catmull-Rom spline if all are unspecified). */
 
-@property(copy) NSArray *tensionValues, *continuityValues, *biasValues;
+@property(nullable, copy) NSArray<NSNumber *> *tensionValues;
+@property(nullable, copy) NSArray<NSNumber *> *continuityValues;
+@property(nullable, copy) NSArray<NSNumber *> *biasValues;
 
 /* Defines whether or objects animating along paths rotate to match the
  * path tangent. Possible values are `auto' and `autoReverse'. Defaults
@@ -201,7 +207,7 @@
  * no path object is supplied is undefined. `autoReverse' rotates to
  * match the tangent plus 180 degrees. */
 
-@property(copy) NSString *rotationMode;
+@property(nullable, copy) NSString *rotationMode;
 
 @end
 
@@ -225,6 +231,41 @@ CA_EXTERN NSString * const kCAAnimationRotateAuto
 CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
     __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 
+/** Subclass for mass-spring animations. */
+
+@interface CASpringAnimation : CABasicAnimation
+
+/* The mass of the object attached to the end of the spring. Must be greater
+   than 0. Defaults to one. */
+
+@property CGFloat mass;
+
+/* The spring stiffness coefficient. Must be greater than 0.
+ * Defaults to 100. */
+
+@property CGFloat stiffness;
+
+/* The damping coefficient. Must be greater than or equal to 0.
+ * Defaults to 10. */
+
+@property CGFloat damping;
+
+/* The initial velocity of the object attached to the spring. Defaults
+ * to zero, which represents an unmoving object. Negative values
+ * represent the object moving away from the spring attachment point,
+ * positive values represent the object moving towards the spring
+ * attachment point. */
+
+@property CGFloat initialVelocity;
+
+/* Returns the estimated duration required for the spring system to be
+ * considered at rest. The duration is evaluated for the current animation
+ * parameters. */
+
+@property(readonly) CFTimeInterval settlingDuration;
+
+@end
+
 /** Transition animation subclass. **/
 
 @interface CATransition : CAAnimation
@@ -239,14 +280,15 @@ CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
  * the legal values are `fromLeft', `fromRight', `fromTop' and
  * `fromBottom'. */
 
-@property(copy) NSString *subtype;
+@property(nullable, copy) NSString *subtype;
 
 /* The amount of progress through to the transition at which to begin
  * and end execution. Legal values are numbers in the range [0,1].
  * `endProgress' must be greater than or equal to `startProgress'.
  * Default values are 0 and 1 respectively. */
 
-@property float startProgress, endProgress;
+@property float startProgress;
+@property float endProgress;
 
 /* An optional filter object implementing the transition. When set the
  * `type' and `subtype' properties are ignored. The filter must
@@ -255,7 +297,7 @@ CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
  * the `inputExtent' key, which will be set to a rectangle describing
  * the region in which the transition should run. Defaults to nil. */
 
-@property(strong) id filter;
+@property(nullable, strong) id filter;
 
 @end
 
@@ -290,6 +332,8 @@ CA_EXTERN NSString * const kCATransitionFromBottom
  * concurrently in the time space of the parent animation using the
  * normal rules. */
 
-@property(copy) NSArray *animations;
+@property(nullable, copy) NSArray<CAAnimation *> *animations;
 
 @end
+
+NS_ASSUME_NONNULL_END

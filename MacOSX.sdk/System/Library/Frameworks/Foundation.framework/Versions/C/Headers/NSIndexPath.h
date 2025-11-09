@@ -1,8 +1,11 @@
 /*  NSIndexPath.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSRange.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSIndexPath : NSObject <NSCopying, NSSecureCoding> {
 	@private
@@ -28,10 +31,23 @@
 - (NSUInteger)indexAtPosition:(NSUInteger)position;
 @property (readonly) NSUInteger length;
 
-- (void)getIndexes:(NSUInteger *)indexes;
+/*!
+ @abstract Copies the indexes stored in this index path from the positions specified by positionRange into indexes.
+ @param indexes Buffer of at least as many NSUIntegers as specified by the length of positionRange. On return, this memory will hold the index path's indexes.
+ @param positionRange A range of valid positions within this index path.  If the location plus the length of positionRange is greater than the length of this index path, this method raises an NSRangeException.
+ @discussion
+    It is the developer’s responsibility to allocate the memory for the C array.
+ */
+- (void)getIndexes:(NSUInteger *)indexes range:(NSRange)positionRange NS_AVAILABLE(10_9, 7_0);
 
 	// comparison support
 - (NSComparisonResult)compare:(NSIndexPath *)otherObject; // sorting an array of indexPaths using this comparison results in an array representing nodes in depth-first traversal order
 
 @end
 
+@interface NSIndexPath (NSDeprecated)
+/// This method is unsafe because it could potentially cause buffer overruns. You should use -getIndexes:range: instead. 
+- (void)getIndexes:(NSUInteger *)indexes; // use -getIndexes:range: instead
+@end
+
+NS_ASSUME_NONNULL_END

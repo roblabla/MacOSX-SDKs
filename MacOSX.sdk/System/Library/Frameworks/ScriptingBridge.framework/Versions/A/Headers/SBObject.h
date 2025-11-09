@@ -6,6 +6,8 @@
 #import <ApplicationServices/ApplicationServices.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class SBAppContext, SBElementArray;
 
 NS_CLASS_AVAILABLE(10_5, NA)
@@ -16,19 +18,19 @@ NS_CLASS_AVAILABLE(10_5, NA)
 	id _reserved;
 }
 
-- (id) init;
-- (id) initWithProperties:(NSDictionary *)properties;
-- (id) initWithData:(id)data;
+- (instancetype) init;
+- (instancetype) initWithProperties:(NSDictionary *)properties;
+- (instancetype) initWithData:(id)data;
 	// Initializers.  Calling one of these does not create an object in the target
 	// application; you must add the result to an SBElementArray for that.
 
-- (id) get;
+- (nullable id) get;
 	// Evaluate the object by sending it to the target application.  Depending on what
 	// the object points to, the result may be a Foundation object such as an NSString
 	// (for most properties), an NSAppleEventDescriptor (for properties of a type with
 	// no Foundation equivalent), or another SBObject (for most elements).
 
-- (NSError *) lastError NS_AVAILABLE(10_6, NA);
+- (nullable NSError *) lastError NS_AVAILABLE(10_6, NA);
 	// Return the error from the last event this object sent, or nil if it succeeded.
 
 @end
@@ -39,7 +41,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 // code.  You are not expected to use them directly, but you may, for example, to control
 // a generic application without glue.
 
-- (id) initWithElementCode:(DescType)code properties:(NSDictionary *)properties data:(id)data;
+- (instancetype) initWithElementCode:(DescType)code properties:(nullable NSDictionary<NSString *, id> *)properties data:(nullable id)data;
 	// Basic initializer.  The property dictionary keys should be NSNumbers with the
 	// four-byte codes of the properties.  Like the rest of the initializers, this does
 	// not create an object in the target application.
@@ -61,8 +63,10 @@ NS_CLASS_AVAILABLE(10_5, NA)
 	// of the parameter four-byte code followed by an Objective-C object; use a parameter
 	// code of 0 to mark the end of the list.
 
-- (void) setTo:(id)value;
+- (void) setTo:(nullable id)value;
 	// Set the value of the object.  This is shorthand for "sendEvent:'core' id:'setd'
 	// parameters:'data', value, 0".
 
 @end
+
+NS_ASSUME_NONNULL_END

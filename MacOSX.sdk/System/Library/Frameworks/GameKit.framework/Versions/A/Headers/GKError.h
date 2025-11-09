@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GKDefines.h>
 
-GK_EXTERN_WEAK NSString *GKErrorDomain;
+GK_EXTERN_WEAK NSString * __nonnull GKErrorDomain;
 
 typedef NS_ENUM(NSInteger, GKErrorCode) {
     GKErrorUnknown                              = 1,

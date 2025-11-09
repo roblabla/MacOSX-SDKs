@@ -1,5 +1,5 @@
 /*	NSCharacterSet.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <CoreFoundation/CFCharacterSet.h>
@@ -8,6 +8,8 @@
 #import <Foundation/NSString.h>
 
 @class NSData;
+
+NS_ASSUME_NONNULL_BEGIN
 
 enum {
     NSOpenStepUnicodeReservedBase = 0xF400
@@ -34,7 +36,7 @@ enum {
 + (NSCharacterSet *)characterSetWithRange:(NSRange)aRange;
 + (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;
 + (NSCharacterSet *)characterSetWithBitmapRepresentation:(NSData *)data;
-+ (NSCharacterSet *)characterSetWithContentsOfFile:(NSString *)fName;
++ (nullable NSCharacterSet *)characterSetWithContentsOfFile:(NSString *)fName;
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -78,7 +80,8 @@ enum {
 + (NSMutableCharacterSet *)characterSetWithRange:(NSRange)aRange;
 + (NSMutableCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;
 + (NSMutableCharacterSet *)characterSetWithBitmapRepresentation:(NSData *)data;
-+ (NSMutableCharacterSet *)characterSetWithContentsOfFile:(NSString *)fName;
++ (nullable NSMutableCharacterSet *)characterSetWithContentsOfFile:(NSString *)fName;
 
 @end
 
+NS_ASSUME_NONNULL_END

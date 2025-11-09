@@ -1,12 +1,12 @@
-/*=============================================================================
-	AUMIDIController.h
-	
-	Copyright (c) 2002 - 2008 Apple, Inc.  All Rights Reserved
-=============================================================================*/
+/*!
+	@file		AUMIDIController.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2002-2015 by Apple, Inc., all rights reserved.
+	@abstract	Deprecated.
+*/
 
-
-#ifndef __AUMIDIController_h__
-#define __AUMIDIController_h__
+#ifndef AudioToolbox_AUMIDIController_h
+#define AudioToolbox_AUMIDIController_h
 
 #if !__LP64__
 // This API set is not available for 64-bit
@@ -102,5 +102,5 @@ AUMIDIControllerExportXMLNames(		AUMIDIControllerRef		inController,
 
 #endif // !__LP64__
 
-#endif // __AUMIDIController_h__
+#endif // AudioToolbox_AUMIDIController_h
 

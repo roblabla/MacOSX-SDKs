@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <Foundation/NSString.h> // for NSStringEncoding
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSCell.h> // for NSControlSize
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSFontDescriptor, NSAffineTransform, NSGraphicsContext;
 
@@ -25,7 +27,7 @@ enum {
 /********* Font Matrix *********/
 /* This is a font matrix value representing [1 0 0 1 0 0].
 */
-APPKIT_EXTERN const CGFloat *NSFontIdentityMatrix;
+APPKIT_EXTERN const CGFloat * NSFontIdentityMatrix;
 
 /********* Glyph packing *********/
 /* Other glyph packing modes are deprecated.
@@ -61,29 +63,29 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 }
 
 /********* Factory *********/
-+ (NSFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
-+ (NSFont *)fontWithName:(NSString *)fontName matrix:(const CGFloat *)fontMatrix;
++ (nullable NSFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
++ (nullable NSFont *)fontWithName:(NSString *)fontName matrix:(const CGFloat *)fontMatrix;
 /* Instantiates an NSFont object matching fontDescriptor. If fontSize is greater than 0.0, it has precedence over NSFontSizeAttribute in fontDescriptor.
 */
-+ (NSFont *)fontWithDescriptor:(NSFontDescriptor *)fontDescriptor size:(CGFloat)fontSize;
++ (nullable NSFont *)fontWithDescriptor:(NSFontDescriptor *)fontDescriptor size:(CGFloat)fontSize;
 
 /* Instantiates an NSFont object matching fontDescriptor. If textTransform is non-nil, it has precedence over NSFontMatrixAttribute in fontDescriptor.
 */
-+ (NSFont *)fontWithDescriptor:(NSFontDescriptor *)fontDescriptor textTransform:(NSAffineTransform *)textTransform;
++ (nullable NSFont *)fontWithDescriptor:(NSFontDescriptor *)fontDescriptor textTransform:(nullable NSAffineTransform *)textTransform;
 
 /********* Meta Font *********/
 /* User font settings
 */
-+ (NSFont *)userFontOfSize:(CGFloat)fontSize;	// Aqua Application font
-+ (NSFont *)userFixedPitchFontOfSize:(CGFloat)fontSize; // Aqua fixed-pitch font
-+ (void)setUserFont:(NSFont *)aFont;	// set preference for Application font.
-+ (void)setUserFixedPitchFont:(NSFont *)aFont; // set preference for fixed-pitch.
++ (nullable NSFont *)userFontOfSize:(CGFloat)fontSize;	// Application font
++ (nullable NSFont *)userFixedPitchFontOfSize:(CGFloat)fontSize; // fixed-pitch font
++ (void)setUserFont:(nullable NSFont *)aFont;	// set preference for Application font.
++ (void)setUserFixedPitchFont:(nullable NSFont *)aFont; // set preference for fixed-pitch.
 
 /* UI font settings
 */
-+ (NSFont *)systemFontOfSize:(CGFloat)fontSize;	// Aqua System font
-+ (NSFont *)boldSystemFontOfSize:(CGFloat)fontSize; // Aqua System font (emphasized)
-+ (NSFont *)labelFontOfSize:(CGFloat)fontSize; // Aqua label font
++ (NSFont *)systemFontOfSize:(CGFloat)fontSize;	// System font with NSFontWeightRegular and proportional digits
++ (NSFont *)boldSystemFontOfSize:(CGFloat)fontSize; // System font with NSFontWeightBold and proportional digits
++ (NSFont *)labelFontOfSize:(CGFloat)fontSize; // Label font
 
 + (NSFont *)titleBarFontOfSize:(CGFloat)fontSize;
 + (NSFont *)menuFontOfSize:(CGFloat)fontSize;
@@ -92,6 +94,11 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 + (NSFont *)paletteFontOfSize:(CGFloat)fontSize;
 + (NSFont *)toolTipsFontOfSize:(CGFloat)fontSize;
 + (NSFont *)controlContentFontOfSize:(CGFloat)fontSize;
+
+/* Following two factory methods return system font with NSFontWeightTrait. Returns the system font object corresponding to fontSize and weight. +monospacedDigitSystemFontOfSize:weight: always return a system font instance with monospaced digit glyphs. It's recommended to use the symbolic weight values declared in NSFontDescriptor.h. Due to sophisticated system font weight matching logic underneath, it's recommended to use this factory method all the time when getting non-standard weight system fonts instead of transforming existing instances via methods like -[NSFontManager convertFont:toSize]. When asked for a missing weight for the running version of OS X, this method returns the nearest heavier weight available if the application is linked against the current or older SDK; otherwise, it returns the nearest lighter weight available.
+*/
++ (NSFont *)systemFontOfSize:(CGFloat)fontSize weight:(CGFloat)weight NS_AVAILABLE_MAC(10_11);
++ (NSFont *)monospacedDigitSystemFontOfSize:(CGFloat)fontSize weight:(CGFloat)weight NS_AVAILABLE_MAC(10_11);
 
 /* UI font size settings
 */
@@ -105,8 +112,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property (readonly, copy) NSString *fontName;
 @property (readonly) CGFloat pointSize;
 @property (readonly) const CGFloat *matrix NS_RETURNS_INNER_POINTER;
-@property (readonly, copy) NSString *familyName;
-@property (readonly, copy) NSString *displayName;
+@property (nullable, readonly, copy) NSString *familyName;
+@property (nullable, readonly, copy) NSString *displayName;
 @property (readonly, strong) NSFontDescriptor *fontDescriptor;
 @property (readonly, copy) NSAffineTransform *textTransform;
 
@@ -163,16 +170,18 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /********* Glyph packing *********/
 /* Take a buffer of NSGlyphs, of some given length, and a packing type, and a place to put some packed glyphs.  Pack up the NSGlyphs according to the NSMultibyteGlyphPacking, null-terminate the bytes, and then put them into the output buffer.  Return the count of bytes output, including the null-terminator.  The output buffer (packedGlyphs) provided by the caller is guaranteed to be at least "count*4+1" bytes long. This function only supports NSNativeShortGlyphPacking on Mac OS X.
 */
-APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph *glBuf, NSInteger count, NSMultibyteGlyphPacking packing, char *packedGlyphs);
+APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * __nonnull glBuf, NSInteger count, NSMultibyteGlyphPacking packing, char * __nonnull packedGlyphs);
 
 /********* Notifications *********/
 /* This notification is posted when the antialias threshold is changed by the user.
 */
-APPKIT_EXTERN NSString *NSAntialiasThresholdChangedNotification;
+APPKIT_EXTERN NSString * NSAntialiasThresholdChangedNotification;
 
 /* This notification is posted when the available font set is modified as a result of activation/deactivation.
 */
-APPKIT_EXTERN NSString *NSFontSetChangedNotification;
+APPKIT_EXTERN NSString * NSFontSetChangedNotification;
+
+NS_ASSUME_NONNULL_END
 
 
 /********* Deprecated API *********/
@@ -197,24 +206,25 @@ enum _NSGlyphRelation {
 typedef NSUInteger  NSGlyphRelation NS_DEPRECATED_MAC(10_0, 10_4);
 
 @interface NSFont (NSFontDeprecated)
-+ (void)useFont:(NSString *)fontName NS_DEPRECATED_MAC(10_0, 10_4); // This is now automatically handled by Quartz.
-- (CGFloat)widthOfString:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_4); // This API never returns correct value. Use NSStringDrawing API instead.
++ (void)useFont:(null_unspecified NSString *)fontName NS_DEPRECATED_MAC(10_0, 10_4); // This is now automatically handled by Quartz.
+- (CGFloat)widthOfString:(null_unspecified NSString *)string NS_DEPRECATED_MAC(10_0, 10_4); // This API never returns correct value. Use NSStringDrawing API instead.
 - (BOOL)isBaseFont NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSDictionary *)afmDictionary NS_DEPRECATED_MAC(10_0, 10_4);
+- (null_unspecified NSDictionary *)afmDictionary NS_DEPRECATED_MAC(10_0, 10_4);
 - (BOOL)glyphIsEncoded:(NSGlyph)aGlyph NS_DEPRECATED_MAC(10_0, 10_4); // Can be deduced by aGlyph < [NSFont numberOfGlyphs] since only NSNativeShortGlyphPacking is supported.
 - (CGFloat)defaultLineHeightForFont NS_DEPRECATED_MAC(10_0, 10_4); // Use -[NSLayoutManager defaultLineHeightForFont:] instead.
-+ (NSArray *)preferredFontNames NS_DEPRECATED_MAC(10_0, 10_4); // NSFontCascadeListAttribute offers more powerful font substitution management
-+ (void)setPreferredFontNames:(NSArray *)fontNameArray NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSString *)encodingScheme NS_DEPRECATED_MAC(10_0, 10_4);
++ (null_unspecified NSArray *)preferredFontNames NS_DEPRECATED_MAC(10_0, 10_4); // NSFontCascadeListAttribute offers more powerful font substitution management
++ (void)setPreferredFontNames:(null_unspecified NSArray *)fontNameArray NS_DEPRECATED_MAC(10_0, 10_4);
+- (null_unspecified NSString *)encodingScheme NS_DEPRECATED_MAC(10_0, 10_4);
 - (NSMultibyteGlyphPacking) glyphPacking NS_DEPRECATED_MAC(10_0, 10_4);
 
+NS_ASSUME_NONNULL_BEGIN
 // The context-sensitive inter-glyph spacing is now performed at the typesetting stage.
-- (NSPoint)positionOfGlyph:(NSGlyph)curGlyph precededByGlyph:(NSGlyph)prevGlyph isNominal:(BOOL *)nominal NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSInteger)positionsForCompositeSequence:(NSGlyph *)someGlyphs numberOfGlyphs:(NSInteger)numGlyphs pointArray:(NSPointArray)points NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)curGlyph struckOverGlyph:(NSGlyph)prevGlyph metricsExist:(BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)aGlyph struckOverRect:(NSRect)aRect metricsExist:(BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)curGlyph precededByGlyph:(NSGlyph)prevGlyph isNominal:(null_unspecified BOOL *)nominal NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSInteger)positionsForCompositeSequence:(null_unspecified NSGlyph *)someGlyphs numberOfGlyphs:(NSInteger)numGlyphs pointArray:(NSPointArray)points NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)curGlyph struckOverGlyph:(NSGlyph)prevGlyph metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)aGlyph struckOverRect:(NSRect)aRect metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
 - (NSPoint)positionOfGlyph:(NSGlyph)aGlyph forCharacter:(unichar)aChar struckOverRect:(NSRect)aRect NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)thisGlyph withRelation:(NSGlyphRelation)rel toBaseGlyph:(NSGlyph)baseGlyph totalAdvancement:(NSSizePointer)adv metricsExist:(BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSPoint)positionOfGlyph:(NSGlyph)thisGlyph withRelation:(NSGlyphRelation)rel toBaseGlyph:(NSGlyph)baseGlyph totalAdvancement:(NSSizePointer)adv metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
 @end
 
 APPKIT_EXTERN NSString *NSAFMFamilyName         NS_DEPRECATED_MAC(10_0, 10_4);
@@ -234,4 +244,6 @@ APPKIT_EXTERN NSString *NSAFMUnderlinePosition  NS_DEPRECATED_MAC(10_0, 10_4);
 APPKIT_EXTERN NSString *NSAFMUnderlineThickness NS_DEPRECATED_MAC(10_0, 10_4);
 APPKIT_EXTERN NSString *NSAFMItalicAngle        NS_DEPRECATED_MAC(10_0, 10_4);
 APPKIT_EXTERN NSString *NSAFMMappingScheme      NS_DEPRECATED_MAC(10_0, 10_4);
+NS_ASSUME_NONNULL_END
+
 #endif /* !__LP64__ */

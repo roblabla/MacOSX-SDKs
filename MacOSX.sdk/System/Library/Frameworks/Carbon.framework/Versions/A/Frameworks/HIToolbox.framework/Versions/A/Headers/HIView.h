@@ -556,20 +556,16 @@ struct HIViewContentInfo {
   HIViewContentType   contentType;
   union {
 #if !__LP64__
-
     IconSuiteRef        iconSuite;
 #endif
-
     IconRef             iconRef;
     HITypeAndCreator    iconTypeAndCreator;
     CGImageRef          imageRef;
     CFStringRef         imageResource;
     CFURLRef            imageFile;
-#ifdef __OBJC__
-
+#if defined(__OBJC__) && !__has_feature(objc_arc)
     NSImage *           nsImage;
 #endif
-
   }                       u;
 };
 typedef struct HIViewContentInfo        HIViewContentInfo;

@@ -1,16 +1,19 @@
 /*
     NSPathCell.h
     Application Kit
-    Copyright (c) 2005-2014, Apple Inc.
+    Copyright (c) 2005-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
 
 #import <AppKit/NSActionCell.h>
 
-@class NSString, NSImage, NSMutableArray, NSArray, NSAnimation, NSPathComponentCell, NSURL, NSPopUpButtonCell, NSNotification, NSOpenPanel;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSString, NSImage, NSAnimation, NSPathComponentCell, NSURL, NSPopUpButtonCell, NSNotification, NSOpenPanel;
 @protocol NSPathCellDelegate, NSOpenSavePanelDelegate;
 
 /* 
@@ -72,21 +75,21 @@ NS_CLASS_AVAILABLE(10_5, NA)
  */
 @property NSPathStyle pathStyle;
 
-@property (copy) NSURL *URL;
+@property (nullable, copy) NSURL *URL;
 
 /* If setObjectValue is called with an NSURL, setURL is automatically called. Calling objectValue will return the last set URL value. setObjectValue can also take a string value, with the items separated by the path separator. Any other value is a programming error and will cause an assertion.
 */
-- (void)setObjectValue:(id <NSCopying>)obj;
+- (void)setObjectValue:(nullable id <NSCopying>)obj;
 
-@property (copy) NSArray *allowedTypes;
+@property (nullable, copy) NSArray<NSString *> *allowedTypes;
 
-@property (assign) id<NSPathCellDelegate> delegate;
+@property (nullable, assign) id<NSPathCellDelegate> delegate;
 
 /* Returns the class used to create pathComponentCells when automatically filling up the control. Subclassers can override this method to return a custom cell class that will automatically be used. By default, it will return [NSPathComponentCell class], or a specialized subclass thereof.
 */
 + (Class)pathComponentCellClass;
     
-@property (copy) NSArray *pathComponentCells;
+@property (copy) NSArray<__kindof NSPathComponentCell *>  *pathComponentCells;
 
 /* Returns the current rect being displayed for a particular NSPathComponentCell 'cell', with respect to the 'frame' in 'view'. NSZeroRect will be returned if 'cell' is not found, or it currently is not visible. 
 */
@@ -94,11 +97,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Returns the cell located at 'point' within 'frame' of 'view', or nil, if none exists at that location.
 */
-- (NSPathComponentCell *)pathComponentCellAtPoint:(NSPoint)point withFrame:(NSRect)frame inView:(NSView *)view;
+- (nullable NSPathComponentCell *)pathComponentCellAtPoint:(NSPoint)point withFrame:(NSRect)frame inView:(NSView *)view;
 
 /* Returns the clicked cell, or nil, if a no cell has been clicked. The clickedPathComponentCell is generally only valid when the action or doubleAction is being sent.
 */
-@property (readonly, strong) NSPathComponentCell *clickedPathComponentCell;
+@property (nullable, readonly, strong) NSPathComponentCell *clickedPathComponentCell;
 
 /* The NSPathCell will dynamically animate to display the component that the mouse is hovering over by using mouseEntered and mouseExited events. The control should call these methods to correctly display the hovered component to the user. The control can acquire rects to track using rectOfPathComponentCell:withFrame:inView:.
 */
@@ -107,15 +110,15 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Allows you to set the selector that will be called when the user double clicks on a particular NSPathComponentCell. 
 */
-@property SEL doubleAction;
+@property (nullable) SEL doubleAction;
 
 /* The background color to be drawn. By default, it will be set to a light blue color for NSPathStyleStandard, and nil for everything else. You can use [NSColor clearColor] to make the background transparent. NSPathCell will return YES from isOpaque if the backgroundColor has an alphaComponent of 1.0, otherwise, it will return NO. When drawing with the background color, NSCompositeSourceOver is used for the compositing operation.
 */
-@property (copy) NSColor *backgroundColor;
+@property (nullable, copy) NSColor *backgroundColor;
 
-@property (copy) NSString *placeholderString;
+@property (nullable, copy) NSString *placeholderString;
 
-@property (copy) NSAttributedString *placeholderAttributedString;
+@property (nullable, copy) NSAttributedString *placeholderAttributedString;
 
 /* The NSPathCell properly respects the controlSize for the NSPathStyleStandard and NSPathStylePopUp styles. When the controlSize is set, the new size is propigated to the subcells. */
 
@@ -134,5 +137,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 - (void)pathCell:(NSPathCell *)pathCell willPopUpMenu:(NSMenu *)menu;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 

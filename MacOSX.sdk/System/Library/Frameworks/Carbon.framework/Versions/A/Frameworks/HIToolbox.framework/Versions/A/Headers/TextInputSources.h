@@ -476,7 +476,17 @@ extern const CFStringRef kTISPropertyIconRef                         AVAILABLE_M
  *    TIFF files are the normal icon format for input modes. If an
  *    image file URL is not available for the specified input source,
  *    the value will be NULL. Note that other image formats (e.g. JPEG,
- *    PNG) may also be used in the future. 
+ *    PNG, PDF) may also be supported.
+ *    
+ *    Clients should be prepared for a URL to be unreachable, such as when
+ *    an Input Method Info.plist mis-declares its icon path extension in its Info.plist.
+ *    In this case, the client should try other path extensions, by using, for example,
+ *    a combination of CFURLResourceIsReachable, CFURLCopyPathExtension,
+ *    CFURLCreateCopyDeletingPathExtension, and CFURLCreateCopyAppendingPathExtension.
+ *        For example, if the URL indicates ".png", be prepared to look for a ".tiff".
+ *    TIS uses [NSBundle(NSBundleImageExtension) imageForResource:],
+ *    where possible, to obtain an input source image, so the path extension (i.e. ".png")
+ *    is not critical for the System to find and display the image properly.
  *    
  *    NOTE: This key (and a corresponding value) may not be used in the
  *    filter dictionary passed to TISCreateInputSourceList.

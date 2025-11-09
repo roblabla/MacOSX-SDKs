@@ -21,5 +21,6 @@ exports:
                        _DLCSessionShouldLogCheckpoints, _DLCSessionShouldLogLevel, 
                        _DLCSessionSyncLoggingsPreferences, _DLCShouldLogLevel, 
                        _DLCShouldLogMessageBodies, _DLCWarn, _DLCWarnV, 
-                       __DLCLogWithLevelFileAndLine ]
+                       __DLCLogEventWithLevelV, __DLCLogWithLevelFileAndLine, 
+                       __DLCLogWithLevelV, __DLCWarnV ]
 ...

@@ -7,6 +7,8 @@
 
 #import <GameController/GameController.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  A GCGamepadSnapshot snapshot is a concrete GCGamepad implementation. It can be used directly in an
  application to implement controller input replays. It is also returned as the result of polling
@@ -21,7 +23,7 @@
  */
 GAMECONTROLLER_EXPORT
 @interface GCGamepadSnapshot : GCGamepad
-@property (copy) NSData *snapshotData;
+@property (atomic, copy) NSData *snapshotData;
 
 - (instancetype)initWithSnapshotData:(NSData *)data;
 - (instancetype)initWithController:(GCController *)controller snapshotData:(NSData *)data;
@@ -36,16 +38,16 @@ typedef struct {
     
     // Standard gamepad data
     // Axes in the range [-1.0, 1.0]
-    float_t dpadX;
-    float_t dpadY;
+    float dpadX;
+    float dpadY;
     
     // Buttons in the range [0.0, 1.0]
-    float_t buttonA;
-    float_t buttonB;
-    float_t buttonX;
-    float_t buttonY;
-    float_t leftShoulder;
-    float_t rightShoulder;
+    float buttonA;
+    float buttonB;
+    float buttonX;
+    float buttonY;
+    float leftShoulder;
+    float rightShoulder;
     
 } GCGamepadSnapShotDataV100;
 #pragma pack(pop)
@@ -55,7 +57,7 @@ typedef struct {
  @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
  */
 GAMECONTROLLER_EXPORT
-BOOL GCGamepadSnapShotDataV100FromNSData(GCGamepadSnapShotDataV100 *snapshotData, NSData *data);
+BOOL GCGamepadSnapShotDataV100FromNSData(GCGamepadSnapShotDataV100 *__nullable snapshotData, NSData *__nullable data);
 
 /**Creates an NSData object from a v100 snapshot.
  If the version and size is not set in the snapshot the data will automatically have version 0x100 and sizeof(GCGamepadSnapShotDataV100) set as the values implicitly.
@@ -63,4 +65,6 @@ BOOL GCGamepadSnapShotDataV100FromNSData(GCGamepadSnapShotDataV100 *snapshotData
  @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCGamepadSnapshot.snapshotData
  */
 GAMECONTROLLER_EXPORT
-NSData *NSDataFromGCGamepadSnapShotDataV100(GCGamepadSnapShotDataV100 *snapshotData);
+NSData *__nullable NSDataFromGCGamepadSnapShotDataV100(GCGamepadSnapShotDataV100 *__nullable snapshotData);
+
+NS_ASSUME_NONNULL_END

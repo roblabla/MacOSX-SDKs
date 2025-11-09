@@ -8,6 +8,8 @@
 #import <MapKit/MKFoundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 MK_CLASS_AVAILABLE(10_9, 7_0)
 @interface MKDistanceFormatter : NSFormatter
 
@@ -15,7 +17,7 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 - (NSString *)stringFromDistance:(CLLocationDistance)distance;
 - (CLLocationDistance)distanceFromString:(NSString *)distance; // Returns negative distance if distance string could not be parsed.
 
-@property (copy, NS_NONATOMIC_IOSONLY) NSLocale *locale; // defaults to current locale
+@property (copy, NS_NONATOMIC_IOSONLY, null_resettable) NSLocale *locale; // defaults to current locale
 
 typedef NS_ENUM(NSUInteger, MKDistanceFormatterUnits) {
     MKDistanceFormatterUnitsDefault, // Let units depend on locale. Note that some locales use imperial measurements for distances but metric for everything else, so this is not identical to NSLocaleUsesMetricSystem.
@@ -35,4 +37,6 @@ typedef NS_ENUM(NSUInteger, MKDistanceFormatterUnitStyle) {
 @property (assign, NS_NONATOMIC_IOSONLY) MKDistanceFormatterUnitStyle unitStyle;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

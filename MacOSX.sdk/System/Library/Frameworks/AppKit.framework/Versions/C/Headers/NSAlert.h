@@ -1,15 +1,18 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSGraphics.h>
 
-@class NSTextField, NSPanel, NSArray, NSWindow, NSImage, NSButton, NSError;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSTextField, NSPanel, NSWindow, NSImage, NSButton, NSError;
 @protocol NSAlertDelegate;
 
 
@@ -67,7 +70,7 @@ typedef NS_ENUM(NSUInteger, NSAlertStyle) {
  This was intended for use by apps migrating from the C-based API.  This uses alternate return codes that were compatible with this C-based API, but not with modern alerts, see NSAlertDefaultReturn, etc. in NSPanel.h
  Alerts should be created with the -init method and setting properties.
  */
-+ (NSAlert *)alertWithMessageText:(NSString *)message defaultButton:(NSString *)defaultButton alternateButton:(NSString *)alternateButton otherButton:(NSString *)otherButton informativeTextWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(5,6) NS_DEPRECATED_MAC(10_3, 10_10, "Use -init instead");
++ (NSAlert *)alertWithMessageText:(nullable NSString *)message defaultButton:(nullable NSString *)defaultButton alternateButton:(nullable NSString *)alternateButton otherButton:(nullable NSString *)otherButton informativeTextWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(5,6) NS_DEPRECATED_MAC(10_3, 10_10, "Use -init instead");
 
 
 @property (copy) NSString *messageText;
@@ -75,14 +78,14 @@ typedef NS_ENUM(NSUInteger, NSAlertStyle) {
 
 /* customize the icon.  By default uses the image named NSApplicationIcon.
 */
-@property (strong) NSImage *icon;
+@property (null_resettable, strong) NSImage *icon;
 
 /* customize the buttons in the alert panel.  Buttons are added from right to left (for left to right languages).
 */
 - (NSButton *)addButtonWithTitle:(NSString *)title;
 /* get the buttons, where the rightmost button is at index 0.
 */
-@property (readonly, copy) NSArray *buttons;
+@property (readonly, copy) NSArray<NSButton *> *buttons;
 
 /* These are additional NSModalResponse values used by NSAlert's -runModal and -beginSheetModalForWindow:completionHandler:.
  
@@ -115,11 +118,11 @@ enum {
 */
 @property BOOL showsHelp;
 
-@property (copy) NSString *helpAnchor;
+@property (nullable, copy) NSString *helpAnchor;
 
 @property NSAlertStyle alertStyle;
 
-@property (assign) id<NSAlertDelegate> delegate;
+@property (nullable, assign) id<NSAlertDelegate> delegate;
 
 /* -setShowsSuppressionButton: indicates whether or not the alert should contain a suppression checkbox.  The default is NO.  This checkbox is typically used to give the user an option to not show this alert again.  If shown, the suppression button will have a default localized title similar to @"Do not show this message again".  You can customize this title using [[alert suppressionButton] setTitle:].  When the alert is dismissed, you can get the state of the suppression button, using [[alert suppressionButton] state] and store the result in user defaults, for example.  This setting can then be checked before showing the alert again.  By default, the suppression button is positioned below the informative text, and above the accessory view (if any) and the alert buttons, and left-aligned with the informative text.  However do not count on the placement of this button, since it might be moved if the alert panel user interface is changed in the future. If you need a checkbox for purposes other than suppression text, it is recommended you create your own using an accessory view.
 */
@@ -127,12 +130,12 @@ enum {
 
 /* -suppressionButton returns a suppression button which may be customized, including the title and the initial state.  You can also use this method to get the state of the button after the alert is dismissed, which may be stored in user defaults and checked before showing the alert again.  In order to show the suppression button in the alert panel, you must call -setShowsSuppressionButton:YES.
 */
-@property (readonly, strong) NSButton *suppressionButton NS_AVAILABLE_MAC(10_5);
+@property (nullable, readonly, strong) NSButton *suppressionButton NS_AVAILABLE_MAC(10_5);
 
 
 /* -setAccessoryView: sets the accessory view displayed in the alert panel.  By default, the accessory view is positioned below the informative text and the suppression button (if any) and above the alert buttons, left-aligned with the informative text.  If you want to customize the location of the accessory view, you must first call -layout.  See the discussion of -layout for more information.
 */
-@property (strong) NSView *accessoryView NS_AVAILABLE_MAC(10_5);
+@property (nullable, strong) NSView *accessoryView NS_AVAILABLE_MAC(10_5);
 
 /* -layout can be used to indicate that the alert panel should do immediate layout, overriding the default behavior of laying out lazily just before showing panel.  You should only call this method if you want to do your own custom layout after it returns.  You should call this method only after you have finished with NSAlert customization, including setting message and informative text, and adding buttons and an accessory view if needed.  You can make layout changes after this method returns, in particular to adjust the frame of an accessory view.  Note that the standard layout of the alert may change in the future, so layout customization should be done with caution.
 */
@@ -146,16 +149,16 @@ enum {
 /* This method is deprecated in 10.9 and will be formally deprecated in the following release.
  -beginSheetModalForWindow:completionHandler: should be used instead.
  */
-- (void)beginSheetModalForWindow:(NSWindow *)window modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo NS_DEPRECATED_MAC(10_3, 10_10, "Use -beginSheetModalForWindow:completionHandler: instead");
+- (void)beginSheetModalForWindow:(NSWindow *)window modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_3, 10_10, "Use -beginSheetModalForWindow:completionHandler: instead");
 
 /* Begins a sheet on the doc window using NSWindow's sheet API.
    If the alert has an alertStyle of NSCriticalAlertStyle, it will be shown as a "critical" sheet; it will otherwise be presented as a normal sheet.
  */
-- (void)beginSheetModalForWindow:(NSWindow *)sheetWindow completionHandler:(void (^)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
+- (void)beginSheetModalForWindow:(NSWindow *)sheetWindow completionHandler:(void (^ __nullable)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
 
 /* return the application-modal panel or the document-modal sheet corresponding to this alert.
 */
-@property (readonly, strong) id window;
+@property (readonly, strong) NSWindow *window;
 
 @end
 
@@ -165,4 +168,6 @@ enum {
 */
 - (BOOL)alertShowHelp:(NSAlert *)alert;
 @end
+
+NS_ASSUME_NONNULL_END
 

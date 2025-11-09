@@ -1,16 +1,17 @@
 /*
     NSTabViewController.h
     Application Kit
-    Copyright (c) 2014, Apple Inc.
+    Copyright (c) 2014-2015, Apple Inc.
     All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSViewController.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSTabView.h>
 #import <AppKit/NSToolbar.h>
 
-@class NSSegmentedControl;
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSTabViewControllerTabStyle) {
     /// Uses an NSSegmentedControl to show the UI for the tabs. The control is on the top of the view.
@@ -46,10 +47,10 @@ NS_CLASS_AVAILABLE_MAC(10_10)
     } _tabViewControllerFlags;
 }
 
-//// The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
+/// The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
 @property NSTabViewControllerTabStyle tabStyle;
 
-/// Access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES (such as in \c -viewDidLoad before calling super). Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
+/// Access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
 @property (strong) NSTabView *tabView;
 
 /// This defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
@@ -59,7 +60,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @property BOOL canPropagateSelectedChildViewControllerTitle;
 
 /// The array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
-@property (copy) NSArray *tabViewItems;
+@property (copy) NSArray<__kindof NSTabViewItem *> *tabViewItems;
 
 /// Read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:@“selectedTabViewItemIndex" options:nil];
 @property NSInteger selectedTabViewItemIndex;
@@ -88,26 +89,28 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * \param viewController The ViewController to look up.
  * \return The corresponding TabViewItem. Returns nil if \c viewController is not a child of the TabViewController.
  */
-- (NSTabViewItem *)tabViewItemForViewController:(NSViewController *)viewController;
+- (nullable NSTabViewItem *)tabViewItemForViewController:(NSViewController *)viewController;
 
 
 /* Overridden methods from NSViewController. These require a call to super if overriden by a subclass. Override this to set the tabView before calling super. */
 - (void)viewDidLoad NS_REQUIRES_SUPER;
 
 /* Implemented methods from NSTabViewDelegate. These require a call to super if overriden by a subclass. */
-- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem NS_REQUIRES_SUPER;
-- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem NS_REQUIRES_SUPER;
-- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem NS_REQUIRES_SUPER;
+- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem NS_REQUIRES_SUPER;
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem NS_REQUIRES_SUPER;
+- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(nullable NSTabViewItem *)tabViewItem NS_REQUIRES_SUPER;
 
 /* Implemented methods from NSToolbarDelegate. These require a call to super if overriden by a subclass. */
 /* NSTabViewController will create a toolbar item for each of its tabViewItems. The toolbar item's identifier will be the same as the tab view item's; similarly, the toolbar item's label, image, and toolTip are bound to those of the corresponding tab view item. */
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag NS_REQUIRES_SUPER;
+- (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag NS_REQUIRES_SUPER;
 
 /* NSTabViewController returns the identifiers for the toolbar items corresponding to its tabViewItems. Overriding these allows additional items to be added to the toolbar. For example, adding NSToolbarFlexibleSpaceItemIdentifier to the beginning and end will center the TabViewController's toolbar items. If a subclass adds custom identifiers, -toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar: must be overridden to return a toolbar item for that identifer. */
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
+- (NSArray<NSString *> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
+- (NSArray<NSString *> *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
 
-/* NSTabViewController returns all toolbar item indentifiers corresponding to its tabViewItems. */
-- (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
+/* NSTabViewController returns all toolbar item identifiers corresponding to its tabViewItems. */
+- (NSArray<NSString *> *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
 
 @end
+
+NS_ASSUME_NONNULL_END

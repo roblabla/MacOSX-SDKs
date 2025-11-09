@@ -12,6 +12,8 @@
 @class SKPhysicsJoint;
 @class SKFieldNode;
 
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT @protocol SKPhysicsContactDelegate<NSObject>
 @optional
 - (void)didBeginContact:(SKPhysicsContact *)contact;
@@ -26,7 +28,7 @@ SK_EXPORT @interface SKPhysicsWorld : NSObject<NSCoding>
 @property (nonatomic) CGVector gravity;
 @property (nonatomic) CGFloat speed;
 
-@property (nonatomic, assign) id<SKPhysicsContactDelegate> contactDelegate;
+@property (nonatomic, assign, nullable) id<SKPhysicsContactDelegate> contactDelegate;
 
 - (void)addJoint:(SKPhysicsJoint *)joint;
 - (void)removeJoint:(SKPhysicsJoint *)joint;
@@ -34,9 +36,9 @@ SK_EXPORT @interface SKPhysicsWorld : NSObject<NSCoding>
 
 - (vector_float3)sampleFieldsAt:(vector_float3)position NS_AVAILABLE(10_10, 8_0);
 
-- (SKPhysicsBody *)bodyAtPoint:(CGPoint)point;
-- (SKPhysicsBody *)bodyInRect:(CGRect)rect;
-- (SKPhysicsBody *)bodyAlongRayStart:(CGPoint)start end:(CGPoint)end;
+- (nullable SKPhysicsBody *)bodyAtPoint:(CGPoint)point;
+- (nullable SKPhysicsBody *)bodyInRect:(CGRect)rect;
+- (nullable SKPhysicsBody *)bodyAlongRayStart:(CGPoint)start end:(CGPoint)end;
 
 - (void)enumerateBodiesAtPoint:(CGPoint)point usingBlock:(void (^)(SKPhysicsBody *body, BOOL *stop))block;
 - (void)enumerateBodiesInRect:(CGRect)rect usingBlock:(void (^)(SKPhysicsBody *body, BOOL *stop))block;
@@ -44,3 +46,5 @@ SK_EXPORT @interface SKPhysicsWorld : NSObject<NSCoding>
                           usingBlock:(void (^)(SKPhysicsBody *body, CGPoint point, CGVector normal, BOOL *stop))block;
 
 @end
+
+NS_ASSUME_NONNULL_END

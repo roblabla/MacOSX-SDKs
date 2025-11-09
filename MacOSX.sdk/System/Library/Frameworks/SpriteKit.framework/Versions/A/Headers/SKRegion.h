@@ -8,9 +8,11 @@
 #import <SpriteKit/SpriteKit.h>
 #import <CoreGraphics/CGPath.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT NS_AVAILABLE(10_10, 8_0) @interface SKRegion : NSObject <NSCopying, NSCoding>
 
-@property (nonatomic, readonly) CGPathRef path;
+@property (nonatomic, readonly, nullable) CGPathRef path;
 
 /** A shared infinite region
   */
@@ -52,3 +54,5 @@ SK_EXPORT NS_AVAILABLE(10_10, 8_0) @interface SKRegion : NSObject <NSCopying, NS
 - (BOOL)containsPoint:(CGPoint)point;
 
 @end
+
+NS_ASSUME_NONNULL_END

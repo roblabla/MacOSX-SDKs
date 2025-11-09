@@ -4,6 +4,7 @@ platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/FMFUI.framework/Versions/A/FMFUI
 exports:         
   - archs:           [ x86_64 ]
-    objc-classes:    [ _FMFActiveDeviceSelectionViewController, _FMFLocationSharingViewController, 
-                       _FMFMapViewController ]
+    objc-classes:    [ _FMAnnotationView, _FMFActiveDeviceSelectionViewController, 
+                       _FMFHandleMonogramPackage, _FMFLocationSharingViewController, 
+                       _FMFMapViewController, _FMFUISession ]
 ...

@@ -94,7 +94,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_timespec_t new_time;
-	} __Request__clock_set_time_t;
+	} __Request__clock_set_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -108,7 +108,7 @@ __END_DECLS
 		clock_flavor_t flavor;
 		mach_msg_type_number_t clock_attrCnt;
 		int clock_attr[1];
-	} __Request__clock_set_attributes_t;
+	} __Request__clock_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -135,7 +135,7 @@ union __RequestUnion__clock_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__clock_set_time_t;
+	} __Reply__clock_set_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -147,7 +147,7 @@ union __RequestUnion__clock_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__clock_set_attributes_t;
+	} __Reply__clock_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

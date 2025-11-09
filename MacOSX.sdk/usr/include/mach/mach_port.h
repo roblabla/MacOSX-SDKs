@@ -90,6 +90,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+__WATCHOS_PROHIBITED
 kern_return_t mach_port_allocate_name
 (
 	ipc_space_t task,
@@ -344,6 +345,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+__WATCHOS_PROHIBITED
 kern_return_t task_set_port_space
 (
 	ipc_space_t task,
@@ -563,7 +565,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__mach_port_names_t;
+	} __Request__mach_port_names_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -575,7 +577,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_type_t;
+	} __Request__mach_port_type_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -588,7 +590,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t old_name;
 		mach_port_name_t new_name;
-	} __Request__mach_port_rename_t;
+	} __Request__mach_port_rename_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -601,7 +603,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_right_t right;
 		mach_port_name_t name;
-	} __Request__mach_port_allocate_name_t;
+	} __Request__mach_port_allocate_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -613,7 +615,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_right_t right;
-	} __Request__mach_port_allocate_t;
+	} __Request__mach_port_allocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -625,7 +627,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_destroy_t;
+	} __Request__mach_port_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -637,7 +639,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_deallocate_t;
+	} __Request__mach_port_deallocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -650,7 +652,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_right_t right;
-	} __Request__mach_port_get_refs_t;
+	} __Request__mach_port_get_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -664,7 +666,7 @@ __END_DECLS
 		mach_port_name_t name;
 		mach_port_right_t right;
 		mach_port_delta_t delta;
-	} __Request__mach_port_mod_refs_t;
+	} __Request__mach_port_mod_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -679,7 +681,7 @@ __END_DECLS
 		mach_msg_trailer_type_t trailer_type;
 		mach_port_seqno_t request_seqnop;
 		mach_msg_type_number_t trailer_infopCnt;
-	} __Request__mach_port_peek_t;
+	} __Request__mach_port_peek_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -692,7 +694,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_mscount_t mscount;
-	} __Request__mach_port_set_mscount_t;
+	} __Request__mach_port_set_mscount_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -704,7 +706,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_get_set_status_t;
+	} __Request__mach_port_get_set_status_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -717,7 +719,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t member;
 		mach_port_name_t after;
-	} __Request__mach_port_move_member_t;
+	} __Request__mach_port_move_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -735,7 +737,7 @@ __END_DECLS
 		mach_port_name_t name;
 		mach_msg_id_t msgid;
 		mach_port_mscount_t sync;
-	} __Request__mach_port_request_notification_t;
+	} __Request__mach_port_request_notification_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -751,7 +753,7 @@ __END_DECLS
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_insert_right_t;
+	} __Request__mach_port_insert_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -764,7 +766,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_msg_type_name_t msgt_name;
-	} __Request__mach_port_extract_right_t;
+	} __Request__mach_port_extract_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -777,7 +779,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_seqno_t seqno;
-	} __Request__mach_port_set_seqno_t;
+	} __Request__mach_port_set_seqno_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -791,7 +793,7 @@ __END_DECLS
 		mach_port_name_t name;
 		mach_port_flavor_t flavor;
 		mach_msg_type_number_t port_info_outCnt;
-	} __Request__mach_port_get_attributes_t;
+	} __Request__mach_port_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -806,7 +808,7 @@ __END_DECLS
 		mach_port_flavor_t flavor;
 		mach_msg_type_number_t port_infoCnt;
 		integer_t port_info[17];
-	} __Request__mach_port_set_attributes_t;
+	} __Request__mach_port_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -819,7 +821,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_right_t right;
 		mach_port_qos_t qos;
-	} __Request__mach_port_allocate_qos_t;
+	} __Request__mach_port_allocate_qos_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -837,7 +839,7 @@ __END_DECLS
 		mach_port_right_t right;
 		mach_port_qos_t qos;
 		mach_port_name_t name;
-	} __Request__mach_port_allocate_full_t;
+	} __Request__mach_port_allocate_full_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -849,7 +851,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int table_entries;
-	} __Request__task_set_port_space_t;
+	} __Request__task_set_port_space_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -861,7 +863,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_get_srights_t;
+	} __Request__mach_port_get_srights_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -871,19 +873,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__mach_port_space_info_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		mach_port_name_t name;
-	} __Request__mach_port_dnrequest_info_t;
+	} __Request__mach_port_space_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -895,7 +885,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_kernel_object_t;
+	} __Request__mach_port_dnrequest_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -907,8 +897,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-		mach_port_name_t pset;
-	} __Request__mach_port_insert_member_t;
+	} __Request__mach_port_kernel_object_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -921,7 +910,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_name_t pset;
-	} __Request__mach_port_extract_member_t;
+	} __Request__mach_port_insert_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -933,7 +922,20 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_get_context_t;
+		mach_port_name_t pset;
+	} __Request__mach_port_extract_member_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_port_name_t name;
+	} __Request__mach_port_get_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -946,7 +948,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_context_t context;
-	} __Request__mach_port_set_context_t;
+	} __Request__mach_port_set_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -958,7 +960,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_port_kobject_t;
+	} __Request__mach_port_kobject_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -974,7 +976,7 @@ __END_DECLS
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_port_context_t context;
-	} __Request__mach_port_construct_t;
+	} __Request__mach_port_construct_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -988,7 +990,7 @@ __END_DECLS
 		mach_port_name_t name;
 		mach_port_delta_t srdelta;
 		mach_port_context_t guard;
-	} __Request__mach_port_destruct_t;
+	} __Request__mach_port_destruct_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1002,7 +1004,7 @@ __END_DECLS
 		mach_port_name_t name;
 		mach_port_context_t guard;
 		boolean_t strict;
-	} __Request__mach_port_guard_t;
+	} __Request__mach_port_guard_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1015,7 +1017,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_port_name_t name;
 		mach_port_context_t guard;
-	} __Request__mach_port_unguard_t;
+	} __Request__mach_port_unguard_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1025,7 +1027,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__mach_port_space_basic_info_t;
+	} __Request__mach_port_space_basic_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1092,7 +1094,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t namesCnt;
 		mach_msg_type_number_t typesCnt;
-	} __Reply__mach_port_names_t;
+	} __Reply__mach_port_names_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1105,7 +1107,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_type_t ptype;
-	} __Reply__mach_port_type_t;
+	} __Reply__mach_port_type_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1117,7 +1119,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_rename_t;
+	} __Reply__mach_port_rename_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1129,7 +1131,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_allocate_name_t;
+	} __Reply__mach_port_allocate_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1142,7 +1144,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_name_t name;
-	} __Reply__mach_port_allocate_t;
+	} __Reply__mach_port_allocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1154,7 +1156,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_destroy_t;
+	} __Reply__mach_port_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1166,7 +1168,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_deallocate_t;
+	} __Reply__mach_port_deallocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1179,7 +1181,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_urefs_t refs;
-	} __Reply__mach_port_get_refs_t;
+	} __Reply__mach_port_get_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1191,7 +1193,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_mod_refs_t;
+	} __Reply__mach_port_mod_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1208,7 +1210,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_id_t msg_idp;
 		mach_msg_type_number_t trailer_infopCnt;
 		char trailer_infop[68];
-	} __Reply__mach_port_peek_t;
+	} __Reply__mach_port_peek_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1220,7 +1222,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_set_mscount_t;
+	} __Reply__mach_port_set_mscount_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1236,7 +1238,7 @@ union __RequestUnion__mach_port_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t membersCnt;
-	} __Reply__mach_port_get_set_status_t;
+	} __Reply__mach_port_get_set_status_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1248,7 +1250,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_move_member_t;
+	} __Reply__mach_port_move_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1262,7 +1264,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t previous;
 		/* end of the kernel processed data */
-	} __Reply__mach_port_request_notification_t;
+	} __Reply__mach_port_request_notification_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1274,7 +1276,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_insert_right_t;
+	} __Reply__mach_port_insert_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1288,7 +1290,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t poly;
 		/* end of the kernel processed data */
-	} __Reply__mach_port_extract_right_t;
+	} __Reply__mach_port_extract_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1300,7 +1302,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_set_seqno_t;
+	} __Reply__mach_port_set_seqno_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1314,7 +1316,7 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 		mach_msg_type_number_t port_info_outCnt;
 		integer_t port_info_out[17];
-	} __Reply__mach_port_get_attributes_t;
+	} __Reply__mach_port_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1326,21 +1328,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_set_attributes_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-		mach_port_qos_t qos;
-		mach_port_name_t name;
-	} __Reply__mach_port_allocate_qos_t;
+	} __Reply__mach_port_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1354,7 +1342,7 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 		mach_port_qos_t qos;
 		mach_port_name_t name;
-	} __Reply__mach_port_allocate_full_t;
+	} __Reply__mach_port_allocate_qos_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1366,7 +1354,21 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__task_set_port_space_t;
+		mach_port_qos_t qos;
+		mach_port_name_t name;
+	} __Reply__mach_port_allocate_full_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__task_set_port_space_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1379,7 +1381,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_rights_t srights;
-	} __Reply__mach_port_get_srights_t;
+	} __Reply__mach_port_get_srights_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1398,7 +1400,7 @@ union __RequestUnion__mach_port_subsystem {
 		ipc_info_space_t space_info;
 		mach_msg_type_number_t table_infoCnt;
 		mach_msg_type_number_t tree_infoCnt;
-	} __Reply__mach_port_space_info_t;
+	} __Reply__mach_port_space_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1412,7 +1414,7 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 		unsigned dnr_total;
 		unsigned dnr_used;
-	} __Reply__mach_port_dnrequest_info_t;
+	} __Reply__mach_port_dnrequest_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1426,7 +1428,7 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 		unsigned object_type;
 		unsigned object_addr;
-	} __Reply__mach_port_kernel_object_t;
+	} __Reply__mach_port_kernel_object_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1438,7 +1440,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_insert_member_t;
+	} __Reply__mach_port_insert_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1450,7 +1452,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_extract_member_t;
+	} __Reply__mach_port_extract_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1463,7 +1465,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_context_t context;
-	} __Reply__mach_port_get_context_t;
+	} __Reply__mach_port_get_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1475,7 +1477,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_set_context_t;
+	} __Reply__mach_port_set_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1489,7 +1491,7 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 		natural_t object_type;
 		mach_vm_address_t object_addr;
-	} __Reply__mach_port_kobject_t;
+	} __Reply__mach_port_kobject_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1502,7 +1504,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_port_name_t name;
-	} __Reply__mach_port_construct_t;
+	} __Reply__mach_port_construct_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1514,7 +1516,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_destruct_t;
+	} __Reply__mach_port_destruct_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1526,7 +1528,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_guard_t;
+	} __Reply__mach_port_guard_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1538,7 +1540,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_port_unguard_t;
+	} __Reply__mach_port_unguard_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1551,7 +1553,7 @@ union __RequestUnion__mach_port_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		ipc_info_space_basic_t basic_info;
-	} __Reply__mach_port_space_basic_info_t;
+	} __Reply__mach_port_space_basic_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

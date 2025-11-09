@@ -2,10 +2,12 @@
 	File:		AVAudioUnitSampler.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioUnitMIDIInstrument.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class AVAudioUnitSampler
@@ -20,7 +22,7 @@
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface AVAudioUnitSampler : AVAudioUnitMIDIInstrument
 
-/*! @method loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error
+/*! @method loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error:
 	@abstract loads a specific instrument from the specified sound bank
 	@param bankURL
 		URL for a Soundbank file. The file can be either a DLS bank (.dls) or a SoundFont bank (.sf2).
@@ -38,7 +40,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (BOOL)loadSoundBankInstrumentAtURL:(NSURL *)bankURL program:(uint8_t)program bankMSB:(uint8_t)bankMSB bankLSB:(uint8_t)bankLSB error:(NSError **)outError;
 
-/*! @method loadInstrumentAtURL:error
+/*! @method loadInstrumentAtURL:error:
 	@abstract configures the sampler by loading the specified preset file.
 	@param instrumentURL
     	URL to the preset file or audio file
@@ -56,7 +58,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (BOOL)loadInstrumentAtURL:(NSURL *)instrumentURL error:(NSError **)outError;
 
-/*! @method loadAudioFilesAtURLs:error
+/*! @method loadAudioFilesAtURLs:error:
 	@abstract configures the sampler by loading a set of audio files.
 	@param audioFiles
 		array of URLs for audio files to be loaded
@@ -69,7 +71,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		This method reads from file and allocates memory, so it should not be called on a real time thread.
  
  */
-- (BOOL)loadAudioFilesAtURLs:(NSArray *)audioFiles error:(NSError **)outError;
+- (BOOL)loadAudioFilesAtURLs:(NSArray<NSURL *> *)audioFiles error:(NSError **)outError;
 
 /*! @property stereoPan
 	@abstract
@@ -98,3 +100,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,9 @@
 #import <CloudKit/CKDatabaseOperation.h>
 #import <CloudKit/CKDefines.h>
 
+@class CKSubscription;
+
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKFetchSubscriptionsOperation : CKDatabaseOperation
 
@@ -15,15 +18,16 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 + (instancetype)fetchAllSubscriptionsOperation;
 
-- (instancetype)initWithSubscriptionIDs:(NSArray /* NSString */ *)subscriptionIDs;
+- (instancetype)initWithSubscriptionIDs:(NSArray <NSString *> *)subscriptionIDs;
 
-@property (nonatomic, copy) NSArray /* NSString */ *subscriptionIDs;
+@property (nonatomic, copy, nullable) NSArray <NSString *> *subscriptionIDs;
 
 /*  This block is called when the operation completes.
     The [NSOperation completionBlock] will also be called if both are set.
     If the error is CKErrorPartialFailure, the error's userInfo dictionary contains
     a dictionary of subscriptionID to errors keyed off of CKPartialErrorsByItemIDKey.
 */
-@property (nonatomic, copy) void (^fetchSubscriptionCompletionBlock)(NSDictionary /* NSString -> CKSubscription */ *subscriptionsBySubscriptionID, NSError *operationError);
+@property (nonatomic, copy, nullable) void (^fetchSubscriptionCompletionBlock)(NSDictionary <NSString *, CKSubscription *> * __nullable subscriptionsBySubscriptionID, NSError * __nullable operationError);
 
 @end
+NS_ASSUME_NONNULL_END

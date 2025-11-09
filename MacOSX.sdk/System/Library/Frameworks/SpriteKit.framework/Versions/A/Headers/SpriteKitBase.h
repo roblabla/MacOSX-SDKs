@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import <SpriteKit/SKVersion.h>
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else

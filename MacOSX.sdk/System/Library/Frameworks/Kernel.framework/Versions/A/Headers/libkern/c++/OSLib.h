@@ -41,6 +41,8 @@ __BEGIN_DECLS
 
 __END_DECLS
 
+
+
 #ifndef NULL
 #if defined (__cplusplus)
 #define NULL 0

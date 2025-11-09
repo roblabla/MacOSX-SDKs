@@ -3,7 +3,7 @@
  
  	Contains:   API for communicating with MIDI hardware
  
- 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2015 by Apple Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -69,6 +69,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stddef.h>
 
+CF_ASSUME_NONNULL_BEGIN
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -113,7 +115,7 @@ extern "C" {
     @constant       kMIDINotPermitted
 	                    The process does not have privileges for the requested operation.						
 */
-enum {
+CF_ENUM(OSStatus) {
 	kMIDIInvalidClient		= -10830,
 	kMIDIInvalidPort		= -10831,
 	kMIDIWrongEndpointType	= -10832,
@@ -134,7 +136,6 @@ enum {
 //=============================================================================
 #pragma mark	Types
 
-#if __LP64__
 /*!
 	@typedef		MIDIObjectRef
 	@abstract		The base class of many CoreMIDI objects.
@@ -213,15 +214,6 @@ typedef MIDIObjectRef MIDIEntityRef;
 		MIDI streams.
 */
 typedef MIDIObjectRef MIDIEndpointRef;
-#else
-typedef void *							MIDIObjectRef;
-typedef struct OpaqueMIDIClient *		MIDIClientRef;
-typedef struct OpaqueMIDIPort *			MIDIPortRef;
-typedef struct OpaqueMIDIDevice *		MIDIDeviceRef;
-typedef struct OpaqueMIDIEntity *		MIDIEntityRef;
-typedef struct OpaqueMIDIEndpoint *		MIDIEndpointRef;
-#endif
-
 
 /*!
 	@typedef		MIDITimeStamp
@@ -243,20 +235,19 @@ typedef UInt64							MIDITimeStamp;
 	@discussion
 		Signifies the real type of a MIDIObjectRef instance.
 */
-enum {	// MIDIObjectType
+typedef CF_ENUM(SInt32, MIDIObjectType) {
 	kMIDIObjectType_Other				= -1,
 	kMIDIObjectType_Device				= 0,
 	kMIDIObjectType_Entity				= 1,
 	kMIDIObjectType_Source				= 2,
 	kMIDIObjectType_Destination			= 3,
 
-	kMIDIObjectType_ExternalMask		= 0x10,
-	kMIDIObjectType_ExternalDevice		= kMIDIObjectType_ExternalMask | kMIDIObjectType_Device,
-	kMIDIObjectType_ExternalEntity		= kMIDIObjectType_ExternalMask | kMIDIObjectType_Entity,
-	kMIDIObjectType_ExternalSource		= kMIDIObjectType_ExternalMask | kMIDIObjectType_Source,
-	kMIDIObjectType_ExternalDestination	= kMIDIObjectType_ExternalMask | kMIDIObjectType_Destination
+	kMIDIObjectType_ExternalDevice		= 0x10 | kMIDIObjectType_Device,
+	kMIDIObjectType_ExternalEntity		= 0x10 | kMIDIObjectType_Entity,
+	kMIDIObjectType_ExternalSource		= 0x10 | kMIDIObjectType_Source,
+	kMIDIObjectType_ExternalDestination	= 0x10 | kMIDIObjectType_Destination
 };
-typedef SInt32							MIDIObjectType;
+static const MIDIObjectType kMIDIObjectType_ExternalMask		= (MIDIObjectType)0x10;
 
 /*!
 	@typedef		MIDIUniqueID
@@ -266,7 +257,7 @@ typedef SInt32							MIDIObjectType;
 */
 typedef SInt32							MIDIUniqueID;
 
-enum {
+CF_ENUM(MIDIUniqueID) {
 	kMIDIInvalidUniqueID = 0
 };
 
@@ -292,7 +283,21 @@ typedef struct MIDINotification			MIDINotification;
 						The client's refCon passed to MIDIClientCreate.
 */
 typedef void
-(*MIDINotifyProc)(const MIDINotification *message, void *refCon);
+(*MIDINotifyProc)(const MIDINotification *message, void * __nullable refCon);
+
+/*!
+	@typedef		MIDINotifyBlock
+	@abstract		A callback block for notifying clients of state changes.
+	@discussion
+		This block is called when some aspect of the current MIDI setup changes. It
+		is called on an arbitrary thread chosen by the implementation; thread-safety
+		is the responsibility of the block.
+
+	@param			message	
+						A structure containing information about what changed.
+*/
+typedef void
+(^MIDINotifyBlock)(const MIDINotification *message);
 
 /*!
 	@typedef		MIDIReadProc
@@ -303,9 +308,7 @@ typedef void
 		A MIDIReadProc function pointer is passed to the MIDIInputPortCreate and
 		MIDIDestinationCreate functions.  The CoreMIDI framework will create a high-priority
 		receive thread on your client's behalf, and from that thread, your MIDIReadProc will be
-		called when incoming MIDI messages arrive. Because this function is called from a
-		separate thread, be aware of the synchronization issues when accessing data in this
-		callback.
+		called when incoming MIDI messages arrive.
 
 	@param			pktlist
 						The incoming MIDI message(s).
@@ -317,7 +320,27 @@ typedef void
 						identifies the source of the data.
 */
 typedef void
-(*MIDIReadProc)(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon);
+(*MIDIReadProc)(const MIDIPacketList *pktlist, void * __nullable readProcRefCon, void * __nullable srcConnRefCon);
+
+/*!
+	@typedef		MIDIReadBlock
+	@abstract		A block receiving MIDI input.
+	@discussion
+		This is a callback block through which a client receives incoming MIDI messages.
+
+		A MIDIReadBlock is passed to the MIDIInputPortCreateWithBlock and
+		MIDIDestinationCreateWithBlock functions.  The CoreMIDI framework will create a
+		high-priority receive thread on your client's behalf, and from that thread, your
+		MIDIReadProc will be called when incoming MIDI messages arrive.
+
+	@param			pktlist
+						The incoming MIDI message(s).
+	@param			srcConnRefCon
+						A refCon you passed to MIDIPortConnectSource, which
+						identifies the source of the data.
+*/
+typedef void
+(^MIDIReadBlock)(const MIDIPacketList *pktlist, void * __nullable srcConnRefCon);
 
 /*!
 	@typedef		MIDICompletionProc
@@ -437,12 +460,12 @@ struct MIDIPacketList
 struct MIDISysexSendRequest
 {
 	MIDIEndpointRef		destination;
-	const Byte *		data;
+	const Byte *  		data;
 	UInt32				bytesToSend;
 	Boolean				complete;
 	Byte				reserved[3];
-	MIDICompletionProc	completionProc;
-	void *				completionRefCon;
+	MIDICompletionProc 	completionProc;
+	void * __nullable	completionRefCon;
 };
 
 /*!
@@ -467,7 +490,7 @@ struct MIDISysexSendRequest
 										or destroyed.  No data.  New in Mac OS X 10.2.
 	@constant	kMIDIMsgIOError			A driver I/O error occurred.
 */
-enum {	// MIDINotificationMessageID
+typedef CF_ENUM(SInt32, MIDINotificationMessageID) {
 	kMIDIMsgSetupChanged			= 1,
 	kMIDIMsgObjectAdded				= 2,
 	kMIDIMsgObjectRemoved			= 3,
@@ -476,15 +499,14 @@ enum {	// MIDINotificationMessageID
 	kMIDIMsgSerialPortOwnerChanged	= 6, 
 	kMIDIMsgIOError					= 7
 };
-typedef SInt32			MIDINotificationMessageID;
 
 
 /*!
 	@struct			MIDINotification
 	@abstract		A message describing a system state change.
 	@discussion
-		A MIDINotification is a structure passed to a MIDINotifyProc, when CoreMIDI wishes to
-		inform a client of a change in the state of the system.
+		A MIDINotification is a structure passed to a MIDINotifyProc or MIDINotifyBlock, when
+		CoreMIDI wishes to inform a client of a change in the state of the system.
 	
 	@field			messageID
 						type of message
@@ -1102,10 +1124,34 @@ extern const CFStringRef	kMIDIPropertyDisplayName				__OSX_AVAILABLE_STARTING(__
 	
 */
 extern OSStatus
-MIDIClientCreate(	CFStringRef		name, 
-					MIDINotifyProc	notifyProc, 
-					void *			notifyRefCon, 
-					MIDIClientRef *	outClient )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+MIDIClientCreate(	CFStringRef					name,
+					MIDINotifyProc __nullable	notifyProc,
+					void * __nullable			notifyRefCon,
+					MIDIClientRef *				outClient )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+
+/*!
+	@function		MIDIClientCreateWithBlock
+
+	@abstract 		Creates a MIDIClient object.
+
+	@param			name
+						The client's name.
+	@param			outClient	
+						On successful return, points to the newly-created MIDIClientRef.
+	@param			notifyBlock
+						An optional (may be NULL) block via which the client
+						will receive notifications of changes to the system.
+	@result			An OSStatus result code.
+	
+	@discussion
+		Note that notifyBlock is called on a thread chosen by the implementation.
+		Thread-safety is the block's responsibility.
+*/
+extern OSStatus
+MIDIClientCreateWithBlock(
+					CFStringRef					name,
+					MIDIClientRef *				outClient,
+					MIDINotifyBlock __nullable	notifyBlock )			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 
 
 /*!
@@ -1157,11 +1203,42 @@ MIDIClientDispose(	MIDIClientRef client )					__OSX_AVAILABLE_STARTING(__MAC_10_
 		readProc will be called on a separate high-priority thread owned by CoreMIDI.
 */
 extern OSStatus 
-MIDIInputPortCreate(	MIDIClientRef	client, 
-						CFStringRef		portName, 
-						MIDIReadProc	readProc, 
-						void *			refCon, 
-						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+MIDIInputPortCreate(	MIDIClientRef		client,
+						CFStringRef			portName,
+						MIDIReadProc		readProc,
+						void * __nullable	refCon,
+						MIDIPortRef * 		outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+
+/*!
+	@function		MIDIInputPortCreateWithBlock
+
+	@abstract 		Creates an input port through which the client may receive
+					incoming MIDI messages from any MIDI source.
+
+	@param			client
+						The client to own the newly-created port.
+	@param			portName
+						The name of the port.
+	@param			outPort
+						On successful return, points to the newly-created
+						MIDIPort.
+	@param			readBlock
+						The MIDIReadBlock which will be called with incoming MIDI, from sources
+						connected to this port.
+	@result			An OSStatus result code.
+
+	@discussion
+		After creating a port, use MIDIPortConnectSource to establish an input connection from
+		any number of sources to your port.
+		
+		readBlock will be called on a separate high-priority thread owned by CoreMIDI.
+*/
+extern OSStatus
+MIDIInputPortCreateWithBlock(	MIDIClientRef	client,
+								CFStringRef		portName,
+								MIDIPortRef *	outPort,
+								MIDIReadBlock	readBlock )	__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+
 
 /*!
 	@function		MIDIOutputPortCreate
@@ -1188,7 +1265,7 @@ MIDIInputPortCreate(	MIDIClientRef	client,
 */
 extern OSStatus
 MIDIOutputPortCreate(	MIDIClientRef	client, 
-						CFStringRef		portName, 
+						CFStringRef		portName,
 						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
@@ -1220,7 +1297,7 @@ MIDIPortDispose(	MIDIPortRef port )						__OSX_AVAILABLE_STARTING(__MAC_10_0, __
 	@param			source
 						The source from which to create the connection.
 	@param			connRefCon	
-						This refCon is passed to the MIDIReadProc, as a way to
+						This refCon is passed to the port's MIDIReadProc or MIDIReadBlock, as a way to
 						identify the source.
 	@result			An OSStatus result code.
 
@@ -1229,7 +1306,7 @@ MIDIPortDispose(	MIDIPortRef port )						__OSX_AVAILABLE_STARTING(__MAC_10_0, __
 extern OSStatus
 MIDIPortConnectSource(	MIDIPortRef		port, 
 						MIDIEndpointRef	source, 
-						void *			connRefCon )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+						void * __nullable			connRefCon )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1410,7 +1487,7 @@ MIDIEntityGetDestination(	MIDIEntityRef	entity,
 */
 extern OSStatus
 MIDIEntityGetDevice(		MIDIEntityRef		inEntity,
-							MIDIDeviceRef *		outDevice)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
+							MIDIDeviceRef * __nullable		outDevice)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 //==================================================================================================
 #pragma mark	Endpoints
@@ -1484,7 +1561,7 @@ MIDIGetDestination(	ItemCount destIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10
 */
 extern OSStatus
 MIDIEndpointGetEntity(		MIDIEndpointRef		inEndpoint,
-							MIDIEntityRef *		outEntity)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
+							MIDIEntityRef * __nullable		outEntity)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@function		MIDIDestinationCreate
@@ -1522,10 +1599,48 @@ MIDIEndpointGetEntity(		MIDIEndpointRef		inEndpoint,
 */
 extern OSStatus
 MIDIDestinationCreate(	MIDIClientRef 		client, 
-						CFStringRef 		name, 
-						MIDIReadProc 		readProc, 
-						void *				refCon,
+						CFStringRef  		name,
+						MIDIReadProc 		readProc,
+						void * __nullable	refCon,
 						MIDIEndpointRef *	outDest )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+
+/*!
+	@function		MIDIDestinationCreateWithBlock
+
+	@abstract 		Creates a virtual destination in a client.
+
+	@param			client
+						The client owning the virtual destination.
+	@param			name
+						The name of the virtual destination.
+	@param			outDest
+						On successful return, a pointer to the newly-created
+						destination.
+	@param			readBlock
+						The MIDIReadBlock to be called when a client sends MIDI to the virtual
+						destination.
+	@result			An OSStatus result code.
+
+	@discussion
+		The specified readBlock gets called when clients send MIDI to your virtual destination.
+
+		Drivers need not call this; when they create devices and entities, sources and
+		destinations are created at that time.
+		
+		After creating a virtual destination, it's a good idea to assign it the same unique ID
+		it had the last time your application created it. (Although you should be prepared for
+		this to fail in the unlikely event of a collision.) This will permit other clients
+		to retain persistent references to your virtual destination more easily.
+		
+		See the discussion of kMIDIPropertyAdvanceScheduleTimeMuSec for notes about the
+		relationship between when a sender sends MIDI to the destination and when it is
+		received.
+*/
+extern OSStatus
+MIDIDestinationCreateWithBlock(	MIDIClientRef 		client,
+								CFStringRef  		name,
+								MIDIEndpointRef * 	outDest,
+								MIDIReadBlock 		readBlock ) __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 
 /*!
 	@function		MIDISourceCreate
@@ -1555,8 +1670,8 @@ MIDIDestinationCreate(	MIDIClientRef 		client,
 */
 extern OSStatus
 MIDISourceCreate(	MIDIClientRef 		client, 
-					CFStringRef 		name, 
-					MIDIEndpointRef *	outSrc )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+					CFStringRef  		name,
+					MIDIEndpointRef * 	outSrc )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1634,7 +1749,7 @@ MIDIGetExternalDevice(	ItemCount deviceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC
 */
 extern OSStatus
 MIDIObjectGetIntegerProperty(	MIDIObjectRef	obj, 
-								CFStringRef		propertyID, 
+								CFStringRef		propertyID,
 								SInt32 *		outValue )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
@@ -1655,7 +1770,7 @@ MIDIObjectGetIntegerProperty(	MIDIObjectRef	obj,
 */
 extern OSStatus
 MIDIObjectSetIntegerProperty(	MIDIObjectRef	obj, 
-								CFStringRef		propertyID, 
+								CFStringRef		propertyID,
 								SInt32			value )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
@@ -1675,9 +1790,9 @@ MIDIObjectSetIntegerProperty(	MIDIObjectRef	obj,
 		(See the MIDIObjectRef documentation for information about properties.)
 */
 extern OSStatus
-MIDIObjectGetStringProperty(	MIDIObjectRef	obj, 
-								CFStringRef		propertyID, 
-								CFStringRef *	str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+MIDIObjectGetStringProperty(	MIDIObjectRef			obj,
+								CFStringRef				propertyID,
+								CFStringRef __nullable * __nonnull str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectSetStringProperty
@@ -1718,9 +1833,9 @@ MIDIObjectSetStringProperty(	MIDIObjectRef	obj,
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDIObjectGetDataProperty(		MIDIObjectRef	obj, 
-								CFStringRef		propertyID, 
-								CFDataRef *		outData )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+MIDIObjectGetDataProperty(		MIDIObjectRef			obj,
+								CFStringRef				propertyID,
+								CFDataRef __nullable * __nonnull outData )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectSetDataProperty
@@ -1740,7 +1855,7 @@ MIDIObjectGetDataProperty(		MIDIObjectRef	obj,
 */
 extern OSStatus
 MIDIObjectSetDataProperty(		MIDIObjectRef	obj, 
-								CFStringRef		propertyID, 
+								CFStringRef		propertyID,
 								CFDataRef		data )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
@@ -1760,9 +1875,9 @@ MIDIObjectSetDataProperty(		MIDIObjectRef	obj,
 		(See the MIDIObjectRef documentation for information about properties.)
 */
 extern OSStatus
-MIDIObjectGetDictionaryProperty(	MIDIObjectRef		obj, 
-									CFStringRef			propertyID, 
-									CFDictionaryRef *	outDict )
+MIDIObjectGetDictionaryProperty(	MIDIObjectRef					obj,
+									CFStringRef						propertyID,
+									CFDictionaryRef __nullable * __nonnull outDict )
 															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
@@ -1783,8 +1898,8 @@ MIDIObjectGetDictionaryProperty(	MIDIObjectRef		obj,
 */
 extern OSStatus
 MIDIObjectSetDictionaryProperty(MIDIObjectRef	obj, 
-								CFStringRef		propertyID, 
-								CFDictionaryRef	data )		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
+								CFStringRef		propertyID,
+								CFDictionaryRef dict )		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectGetProperties
@@ -1809,7 +1924,7 @@ MIDIObjectSetDictionaryProperty(MIDIObjectRef	obj,
 */
 extern OSStatus
 MIDIObjectGetProperties(		MIDIObjectRef 		obj, 
-								CFPropertyListRef *	outProperties,
+								CFPropertyListRef __nullable * __nonnull outProperties,
 								Boolean				deep )	__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 /*!
@@ -1840,7 +1955,7 @@ MIDIObjectRemoveProperty(		MIDIObjectRef 		obj,
 						be the result of an earlier call to MIDIObjectGetIntegerProperty
 						for the property kMIDIPropertyUniqueID).
 	@param			outObject
-						The returned object, or NULL if the object was not found or
+						The returned object, or 0 if the object was not found or
 						an error occurred.  This should be cast to the appropriate
 						type (MIDIDeviceRef, MIDIEntityRef, MIDIEndpointRef),
 						according to *outObjectType.
@@ -1925,7 +2040,7 @@ MIDISendSysex(	MIDISysexSendRequest *request )				__OSX_AVAILABLE_STARTING(__MAC
 */
 extern OSStatus 
 MIDIReceived(	MIDIEndpointRef			src, 
-				const MIDIPacketList *	pktlist )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+				const MIDIPacketList * 	pktlist )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIFlushOutput
@@ -1966,7 +2081,7 @@ MIDIRestart()												__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 	@functiongroup	Packet Lists
 */
 
-#if TRICK_HEADERDOC_INTO_THINKING_THIS_IS_A_FUNCTION_NOT_A_MACRO
+#ifdef CF_INLINE
 /*!
 	@function		MIDIPacketNext
 
@@ -1977,19 +2092,23 @@ MIDIRestart()												__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 						A pointer to a MIDIPacket in a MIDIPacketList.
 
 	@result			The subsequent packet in the MIDIPacketList.
-
-	@discussion
-		This is implemented as a macro for efficiency and to avoid const problems.
 */
-extern MIDIPacket *
-MIDIPacketNext(	MIDIPacket *pkt );
-#endif
-
-#if TARGET_CPU_ARM || TARGET_CPU_ARM64
-// MIDIPacket must be 4-byte aligned
-#define MIDIPacketNext(pkt)	((MIDIPacket *)(((uintptr_t)(&(pkt)->data[(pkt)->length]) + 3) & ~3))
+CF_INLINE MIDIPacket *MIDIPacketNext(const MIDIPacket *pkt)
+{
+	#if TARGET_CPU_ARM || TARGET_CPU_ARM64
+		// MIDIPacket must be 4-byte aligned
+		return	(MIDIPacket *)(((uintptr_t)(&pkt->data[pkt->length]) + 3) & ~3);
+	#else
+		return	(MIDIPacket *)&pkt->data[pkt->length];
+	#endif
+}
 #else
-#define MIDIPacketNext(pkt)	((MIDIPacket *)&(pkt)->data[(pkt)->length])
+	#if TARGET_CPU_ARM || TARGET_CPU_ARM64
+		// MIDIPacket must be 4-byte aligned
+		#define MIDIPacketNext(pkt)	((MIDIPacket *)(((uintptr_t)(&(pkt)->data[(pkt)->length]) + 3) & ~3))
+	#else
+		#define MIDIPacketNext(pkt)	((MIDIPacket *)&(pkt)->data[(pkt)->length])
+	#endif
 #endif
 
 /*!
@@ -2046,5 +2165,7 @@ MIDIPacketListAdd(	MIDIPacketList *	pktlist,
 #ifdef __cplusplus
 }
 #endif
+
+CF_ASSUME_NONNULL_END
 
 #endif /* __MIDIServices_h__ */

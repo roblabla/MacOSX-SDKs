@@ -112,6 +112,9 @@ extern void             nanoseconds_to_absolutetime(
 							uint64_t		nanoseconds,
 							uint64_t		*result);
 
+extern uint64_t mach_absolutetime_asleep;
+extern uint64_t mach_absolutetime_last_sleep;
+
 
 __END_DECLS
 

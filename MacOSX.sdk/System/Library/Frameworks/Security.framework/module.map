@@ -1,4 +1,4 @@
-framework module Security [extern_c] [system] {
+framework module Security [extern_c] {
   umbrella header "Security.h"
 
   export *

@@ -137,7 +137,7 @@ extern const struct do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_notify_port_deleted_t;
+	} __Request__mach_notify_port_deleted_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -151,7 +151,7 @@ extern const struct do_notify_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t rights;
 		/* end of the kernel processed data */
-	} __Request__mach_notify_port_destroyed_t;
+	} __Request__mach_notify_port_destroyed_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -163,7 +163,7 @@ extern const struct do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_mscount_t mscount;
-	} __Request__mach_notify_no_senders_t;
+	} __Request__mach_notify_no_senders_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -173,7 +173,7 @@ extern const struct do_notify_subsystem {
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__mach_notify_send_once_t;
+	} __Request__mach_notify_send_once_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -185,7 +185,7 @@ extern const struct do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-	} __Request__mach_notify_dead_name_t;
+	} __Request__mach_notify_dead_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -216,7 +216,7 @@ union __RequestUnion__do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_notify_port_deleted_t;
+	} __Reply__mach_notify_port_deleted_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -228,7 +228,7 @@ union __RequestUnion__do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_notify_port_destroyed_t;
+	} __Reply__mach_notify_port_destroyed_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -240,7 +240,7 @@ union __RequestUnion__do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_notify_no_senders_t;
+	} __Reply__mach_notify_no_senders_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -252,7 +252,7 @@ union __RequestUnion__do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_notify_send_once_t;
+	} __Reply__mach_notify_send_once_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -264,7 +264,7 @@ union __RequestUnion__do_notify_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_notify_dead_name_t;
+	} __Reply__mach_notify_dead_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

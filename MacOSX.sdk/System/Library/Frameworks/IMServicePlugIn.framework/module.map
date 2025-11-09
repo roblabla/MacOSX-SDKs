@@ -1,4 +1,4 @@
-framework module IMServicePlugIn [system] {
+framework module IMServicePlugIn {
   umbrella header "IMServicePlugIn.h"
 
   export *

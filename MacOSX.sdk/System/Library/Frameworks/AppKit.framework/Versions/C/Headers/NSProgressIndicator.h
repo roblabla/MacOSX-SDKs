@@ -1,13 +1,15 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSCell.h>
 #import <Foundation/NSDate.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 struct __NSProgressIndicatorThreadInfo;
 typedef struct __NSProgressIndicatorThreadInfo _NSProgressIndicatorThreadInfo;
@@ -40,7 +42,7 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
 @interface NSProgressIndicator : NSView <NSAccessibilityProgressIndicator>
 {
 @private
-    /* Persitent properties */
+    /* Persistent properties */
     BOOL		_isBezeled;		// has or not a 3D bezel around the progress indicator (invariant)
     BOOL		_isIndeterminate;	// YES by default
     BOOL		_threadedAnimation;
@@ -48,7 +50,7 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
     double		_minimum;		// 0 by default
     double		_maximum;		// 100 by default
     
-    /* Non-persitent properties */
+    /* Non-persistent properties */
     double		_value;			// _minimum by default
     
     unsigned int        _animationIndex;
@@ -107,8 +109,8 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
 
 @property BOOL usesThreadedAnimation;				// returns YES if the PI uses a thread instead of a timer (default in NO)
 
-- (void)startAnimation:(id)sender;
-- (void)stopAnimation:(id)sender;
+- (void)startAnimation:(nullable id)sender;
+- (void)stopAnimation:(nullable id)sender;
 
 
 @property NSProgressIndicatorStyle style;
@@ -124,5 +126,7 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
 @interface NSProgressIndicator (NSProgressIndicatorDeprecated)
 - (NSTimeInterval)animationDelay NS_DEPRECATED_MAC(10_0, 10_6);
 - (void)setAnimationDelay:(NSTimeInterval)delay NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)animate:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)animate:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 @end
+
+NS_ASSUME_NONNULL_END

@@ -498,7 +498,7 @@ SYSCTL_DECL(_user);
 #define	KERN_SPECULATIVE_READS	64	/* int: whether speculative reads are disabled */
 #define	KERN_OSVERSION		65	/* for build number i.e. 9A127 */
 #define	KERN_SAFEBOOT		66	/* are we booted safe? */
-#define	KERN_LCTX		67	/* node: login context */
+			/*	67 was KERN_LCTX (login context) */
 #define KERN_RAGEVNODE		68
 #define KERN_TTY		69	/* node: tty settings */
 #define KERN_CHECKOPENEVT       70      /* spi: check the VOPENEVT flag on vnodes at open time */
@@ -563,6 +563,10 @@ SYSCTL_DECL(_user);
 #define KERN_KDSET_TYPEFILTER   22
 #define KERN_KDBUFWAIT		23
 #define KERN_KDCPUMAP		24
+#define KERN_KDWAIT_BG_TRACE_RESET 25
+#define KERN_KDSET_BG_TYPEFILTER   26
+#define KERN_KDWRITEMAP_V3	27
+#define KERN_KDWRITETR_V3	28
 
 #define CTL_KERN_NAMES { \
 	{ 0, 0 }, \
@@ -632,7 +636,7 @@ SYSCTL_DECL(_user);
 	{ "speculative_reads_disabled", CTLTYPE_INT }, \
 	{ "osversion", CTLTYPE_STRING }, \
 	{ "safeboot", CTLTYPE_INT }, \
-	{ "lctx", CTLTYPE_NODE }, \
+	{ "dummy", CTLTYPE_INT }, 		/* deprecated: lctx */ \
 	{ "rage_vnode", CTLTYPE_INT }, \
 	{ "tty", CTLTYPE_NODE },	\
 	{ "check_openevt", CTLTYPE_INT }, \
@@ -657,13 +661,6 @@ SYSCTL_DECL(_user);
 #define	KERN_PROC_UID		5	/* by effective uid */
 #define	KERN_PROC_RUID		6	/* by real uid */
 #define	KERN_PROC_LCID		7	/* by login context id */
-
-/*
- * KERN_LCTX subtypes
- */
-#define	KERN_LCTX_ALL		0	/* everything */
-#define	KERN_LCTX_LCID		1	/* by login context id */
-
 
 
 

@@ -99,7 +99,7 @@ __END_DECLS
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t value_handlesCnt;
-	} __Request__mach_voucher_attr_control_get_values_t;
+	} __Request__mach_voucher_attr_control_get_values_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -112,7 +112,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_msg_type_number_t recipesCnt;
 		uint8_t recipes[5120];
-	} __Request__mach_voucher_attr_control_create_mach_voucher_t;
+	} __Request__mach_voucher_attr_control_create_mach_voucher_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -141,7 +141,7 @@ union __RequestUnion__mach_voucher_attr_control_subsystem {
 		kern_return_t RetCode;
 		mach_msg_type_number_t value_handlesCnt;
 		mach_voucher_attr_value_handle_t value_handles[4];
-	} __Reply__mach_voucher_attr_control_get_values_t;
+	} __Reply__mach_voucher_attr_control_get_values_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -155,7 +155,7 @@ union __RequestUnion__mach_voucher_attr_control_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t voucher;
 		/* end of the kernel processed data */
-	} __Reply__mach_voucher_attr_control_create_mach_voucher_t;
+	} __Reply__mach_voucher_attr_control_create_mach_voucher_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

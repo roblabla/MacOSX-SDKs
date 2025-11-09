@@ -5,9 +5,15 @@
 #ifndef CGEVENTTYPES_H_
 #define CGEVENTTYPES_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGRemoteOperation.h>
 #include <IOKit/hidsystem/IOLLEvent.h>
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* An opaque type that represents a low-level hardware event.
 
@@ -29,41 +35,37 @@
 typedef struct __CGEvent *CGEventRef;
 
 /* Constants that specify buttons on a one, two, or three-button mouse. */
-enum {
+typedef CF_ENUM(uint32_t, CGMouseButton) {
   kCGMouseButtonLeft = 0,
   kCGMouseButtonRight = 1,
   kCGMouseButtonCenter = 2
 };
-typedef uint32_t CGMouseButton;
 
 /* Constants that specify the unit of measurement for a scrolling event. */
-enum {
+typedef CF_ENUM(uint32_t, CGScrollEventUnit) {
   kCGScrollEventUnitPixel = 0,
   kCGScrollEventUnitLine = 1,
 };
-typedef uint32_t CGScrollEventUnit;
 
 /* Constants that specify momentum scroll phases. */
-enum {
+typedef CF_ENUM(uint32_t, CGMomentumScrollPhase) {
     kCGMomentumScrollPhaseNone = 0,
     kCGMomentumScrollPhaseBegin = 1,
     kCGMomentumScrollPhaseContinue = 2,
     kCGMomentumScrollPhaseEnd = 3
 };
-typedef uint32_t CGMomentumScrollPhase;
 
 /* Constants that specify scroll phases. */
-enum {
+typedef CF_ENUM(uint32_t, CGScrollPhase) {
     kCGScrollPhaseBegan = 1,
     kCGScrollPhaseChanged = 2,
     kCGScrollPhaseEnded = 4,
     kCGScrollPhaseCancelled = 8,
     kCGScrollPhaseMayBegin = 128
 };
-typedef uint32_t CGScrollPhase;
 
 /* Constants that specify gesture phases. */
-enum {
+typedef CF_ENUM(uint32_t, CGGesturePhase) {
     kCGGesturePhaseNone = 0,
     kCGGesturePhaseBegan = 1,
     kCGGesturePhaseChanged = 2,
@@ -71,13 +73,12 @@ enum {
     kCGGesturePhaseCancelled = 8,
     kCGGesturePhaseMayBegin = 128
 };
-typedef uint32_t CGGesturePhase;
 
 /* Constants that indicate the modifier key state at the time an event is
    created, as well as other event-related states.
 
    Any bits not specified are reserved for future use. */
-enum {
+typedef CF_ENUM(uint64_t, CGEventFlags) { /* Flags for events */
   /* Device-independent modifier key bits. */
   kCGEventFlagMaskAlphaShift =          NX_ALPHASHIFTMASK,
   kCGEventFlagMaskShift =               NX_SHIFTMASK,
@@ -95,10 +96,9 @@ enum {
   /* Indicates if mouse/pen movement events are not being coalesced */
   kCGEventFlagMaskNonCoalesced =        NX_NONCOALSESCEDMASK
 };
-typedef uint64_t CGEventFlags;      /* Flags for events */
 
 /* Constants that specify the different types of input events. */
-enum {
+typedef CF_ENUM(uint32_t, CGEventType) {
   /* The null event. */
   kCGEventNull = NX_NULLEVENT,
 
@@ -129,13 +129,12 @@ enum {
   kCGEventTapDisabledByTimeout = 0xFFFFFFFE,
   kCGEventTapDisabledByUserInput = 0xFFFFFFFF
 };
-typedef uint32_t CGEventType;
 
 /* Event timestamp; roughly, nanoseconds since startup. */
 typedef uint64_t CGEventTimestamp;
 
 /* Constants used as keys to access specialized fields in low-level events. */
-enum {
+typedef CF_ENUM(uint32_t, CGEventField) {
   /* Key to access an integer field that contains the mouse button event
      number. Matching mouse-down and mouse-up events will have the same
      event number. */
@@ -377,39 +376,34 @@ enum {
   kCGMouseEventWindowUnderMousePointer = 91,
   kCGMouseEventWindowUnderMousePointerThatCanHandleThisEvent = 92
 };
-typedef uint32_t CGEventField;
 
 /* Constants used with the `kCGMouseEventSubtype' event field. */
-enum {
+typedef CF_ENUM(uint32_t, CGEventMouseSubtype) {
   kCGEventMouseSubtypeDefault           = 0,
   kCGEventMouseSubtypeTabletPoint       = 1,
   kCGEventMouseSubtypeTabletProximity   = 2
 };
-typedef uint32_t CGEventMouseSubtype;
 
 /* Constants that specify possible tapping points for events. */
-enum {
+typedef CF_ENUM(uint32_t, CGEventTapLocation) {
   kCGHIDEventTap = 0,
   kCGSessionEventTap,
   kCGAnnotatedSessionEventTap
 };
-typedef uint32_t CGEventTapLocation;
 
 /* Constants that specify where a new event tap is inserted into the list of
    active event taps. */
-enum {
+typedef CF_ENUM(uint32_t, CGEventTapPlacement) {
   kCGHeadInsertEventTap = 0,
   kCGTailAppendEventTap
 };
-typedef uint32_t CGEventTapPlacement;
 
 /* Constants that specify whether a new event tap is an active filter or a
    passive listener. */
-enum {
+typedef CF_ENUM(uint32_t, CGEventTapOptions) {
   kCGEventTapOptionDefault = 0x00000000,
   kCGEventTapOptionListenOnly = 0x00000001
 };
-typedef uint32_t CGEventTapOptions;
 
 /* A mask that identifies the set of Quartz events to be observed in an
    event tap. */
@@ -440,8 +434,8 @@ typedef struct __CGEventTapProxy *CGEventTapProxy;
    original event, after the event data has been passed back to the event
    system. */
 
-typedef CGEventRef (*CGEventTapCallBack)(CGEventTapProxy proxy,
-  CGEventType type, CGEventRef event, void *userInfo);
+typedef CGEventRef __nullable (*CGEventTapCallBack)(CGEventTapProxy  proxy,
+  CGEventType type, CGEventRef  event, void * __nullable userInfo);
 
 /* When an event tap is installed or released, a notification is posted. See
    notify(3) and notify.h for details. */
@@ -469,12 +463,11 @@ typedef struct __CGEventTapInformation CGEventTapInformation;
 typedef struct __CGEventSource *CGEventSourceRef;
 
 /* Constants that specify the possible source states of an event source. */
-enum {
+typedef CF_ENUM(int32_t, CGEventSourceStateID) {
   kCGEventSourceStatePrivate = -1,
   kCGEventSourceStateCombinedSessionState = 0,
   kCGEventSourceStateHIDSystemState = 1
 };
-typedef uint32_t CGEventSourceStateID;
 
 /* A code that represents the type of keyboard used with a specified event
    source. */
@@ -482,5 +475,7 @@ typedef uint32_t CGEventSourceKeyboardType;
 
 /* A constant specifying any input event type */
 #define kCGAnyInputEventType ((CGEventType)(~0))
+
+CF_ASSUME_NONNULL_END
 
 #endif /* CGEVENTTYPES_H_ */

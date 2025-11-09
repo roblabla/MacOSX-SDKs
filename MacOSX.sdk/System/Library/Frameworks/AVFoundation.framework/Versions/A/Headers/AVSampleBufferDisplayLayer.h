@@ -19,6 +19,8 @@
 #import <CoreMedia/CMSync.h>
 #import <CoreMedia/CMSampleBuffer.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class AVSampleBufferDisplayLayerInternal;
 
 /*!
@@ -65,7 +67,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 					
 					Note that prior to OSX 10.10 and iOS 8.0, the control timebase could not be changed after enqueueSampleBuffer: was called.  As of OSX 10.10 and iOS 8.0, the control timebase may be changed at any time.
 */
-@property (retain) __attribute__((NSObject)) CMTimebaseRef controlTimebase;
+@property (retain, nullable) __attribute__((NSObject)) CMTimebaseRef controlTimebase;
 
 /*!
 	@property		videoGravity
@@ -88,7 +90,7 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 	@abstract		If the display layer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure.
 	@discussion		The value of this property is an NSError that describes what caused the display layer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly) NSError *error NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, nullable) NSError *error NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -190,3 +192,5 @@ NS_CLASS_AVAILABLE(10_8, 8_0)
 - (void)stopRequestingMediaData;
 
 @end
+
+NS_ASSUME_NONNULL_END

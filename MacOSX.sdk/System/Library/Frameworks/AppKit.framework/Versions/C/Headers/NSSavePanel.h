@@ -1,14 +1,17 @@
 /*
     NSSavePanel.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSPanel.h>
 
-@class NSBox, NSMutableArray, NSTextField, NSTextView, NSView, NSURL, NSProgressIndicator, NSControl;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSBox, NSTextField, NSTextView, NSView, NSURL, NSProgressIndicator, NSControl;
 @protocol NSOpenSavePanelDelegate;
 
 /* Return codes from the open/save panel.
@@ -103,20 +106,20 @@ typedef struct __SPFlags {
 /* NSSavePanel: Returns the URL to save the file at. A file may already exist at 'URL' if the user choose to overwrite it.
    NSOpenPanel: Returns the single filename selected by the user. Note: if -allowsMultipleSelection is set, you should use the -URLs on NSOpenPanel instead.
 */
-@property (readonly, copy) NSURL *URL;
+@property (nullable, readonly, copy) NSURL *URL;
 
 #pragma mark -
 #pragma mark Configuration Properties
 
 /* NSSavePanel/NSOpenPanel: Gets and sets the directoryURL shown. A value of nil indicates that the last directory shown to the user will be used. This method will not block to resolve the URL, and the directory will asyncronously be set, if required.
 */
-@property (copy) NSURL *directoryURL NS_AVAILABLE_MAC(10_6);
+@property (nullable, copy) NSURL *directoryURL NS_AVAILABLE_MAC(10_6);
 
 /* 
     NSSavePanel: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'.
     NSOpenPanel: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
 */
-@property (copy) NSArray *allowedFileTypes;
+@property (nullable, copy) NSArray<NSString *> *allowedFileTypes;
 
 /*  NSSavePanel: Returns a BOOL value that indicates whether the receiver allows the user to save files with an extension that's not in the list of 'allowedFileTypes'.
     NSOpenPanel: Not used.
@@ -125,11 +128,11 @@ typedef struct __SPFlags {
 
 /* Gets and sets the accessory view shown in the panel. For applications that link on SnowLeopard and higher, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height).
 */
-@property (strong) NSView *accessoryView;
+@property (nullable, strong) NSView *accessoryView;
 
 /* Gets and sets the delegate.
 */
-@property (assign) id<NSOpenSavePanelDelegate> delegate;
+@property (nullable, assign) id<NSOpenSavePanelDelegate> delegate;
 
 /*  NSSavePanel: Returns YES if the panel is expanded. Defaults to NO, and persists in the user defaults.
     NSOpenPanel: Not used.
@@ -156,16 +159,16 @@ typedef struct __SPFlags {
 
 /* NSSavePanel/NSOpenPanel: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
 */
-@property (copy) NSString *prompt;
+@property (null_resettable, copy) NSString *prompt;
 
 /* NSSavePanel/NSOpenPanel: Gets and sets the title for the panel shown at the top of the window.
 */
-@property (copy) NSString *title;
+@property (null_resettable, copy) NSString *title;
 
 /*  NSSavePanel: Gets and sets the text shown to the left of the "name field". Default value is a localized "Save As:" string.
     NSOpenPanel: Not used.
 */
-@property (copy) NSString *nameFieldLabel;
+@property (null_resettable, copy) NSString *nameFieldLabel;
 
 /*  NSSavePanel: Gets and sets the user-editable file name shown in the name field. 'value' must not be nil. NOTE: calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel was shown. Note that 'value' may have the file extension stripped, if [panel isExtensionHidden] is set to YES.
     NSOpenPanel: Not used.
@@ -174,7 +177,7 @@ typedef struct __SPFlags {
 
 /*  NSSavePanel/NSOpenPanel: Gets and sets the message shown under title of the panel. 'message' must not be nil.
 */
-@property (copy) NSString *message;
+@property (null_resettable, copy) NSString *message;
 
 - (void)validateVisibleColumns;
 
@@ -190,13 +193,13 @@ typedef struct __SPFlags {
 /*  NSSavePanel: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing nil or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns nil.
     NSOpenPanel: Should not be used.
 */
-@property (copy) NSArray *tagNames NS_AVAILABLE_MAC(10_9);
+@property (nullable, copy) NSArray<NSString *> *tagNames NS_AVAILABLE_MAC(10_9);
 
 #pragma mark -
 #pragma mark Actions
 
-- (IBAction)ok:(id)sender;
-- (IBAction)cancel:(id)sender;
+- (IBAction)ok:(nullable id)sender;
+- (IBAction)cancel:(nullable id)sender;
 
 #pragma mark -
 #pragma mark Displaying/Showing
@@ -233,11 +236,11 @@ typedef struct __SPFlags {
 
 /* Optional - Sent when the user has changed the selected directory to the directory located at 'url'. 'url' may be nil, if the current directory can't be represented by an NSURL object (ie: the media sidebar directory, or the "Computer").
 */
-- (void)panel:(id)sender didChangeToDirectoryURL:(NSURL *)url NS_AVAILABLE_MAC(10_6);
+- (void)panel:(id)sender didChangeToDirectoryURL:(nullable NSURL *)url NS_AVAILABLE_MAC(10_6);
 
 /* Optional - Filename customization for the NSSavePanel. Allows the delegate to customize the filename entered by the user, before the extension is appended, and before the user is potentially asked to replace a file.
 */
-- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag;
+- (nullable NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag;
 
 /* Optional - Sent when the user clicks the disclosure triangle to expand or collapse the file browser while in NSOpenPanel.
 */
@@ -245,7 +248,7 @@ typedef struct __SPFlags {
 
 /* Optional - Sent when the user has changed the selection.
 */
-- (void)panelSelectionDidChange:(id)sender;
+- (void)panelSelectionDidChange:(nullable id)sender;
 
 @end
 
@@ -278,23 +281,25 @@ typedef struct __SPFlags {
 /* Use directoryURL/setDirectoryURL: instead.
 */
 - (NSString *)directory NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setDirectory:(NSString *)path NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setDirectory:(nullable NSString *)path NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Use allowedFileTypes/setAllowedFileTypes: instead. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel.
 */
-- (NSString *)requiredFileType NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setRequiredFileType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_6);
+- (nullable NSString *)requiredFileType NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setRequiredFileType:(nullable NSString *)type NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'. 'delegate/didEndSelector/contextInfo' is replaced by the 'completionHandler'.
 */
-- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)beginSheetForDirectory:(NSString *)path file:(nullable NSString *)name modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Use -runModal after setting up desired properties. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.
 */
-- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
+- (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Deprecated in 10.3. -[NSSavePanel selectText:] does nothing.
 */
-- (IBAction)selectText:(id)sender NS_DEPRECATED_MAC(10_0, 10_3);
+- (IBAction)selectText:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_3);
 
 @end
+
+NS_ASSUME_NONNULL_END

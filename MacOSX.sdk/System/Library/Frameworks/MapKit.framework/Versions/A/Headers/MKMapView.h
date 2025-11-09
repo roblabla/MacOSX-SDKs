@@ -20,21 +20,23 @@
 
 @protocol MKMapViewDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, MKUserTrackingMode) {
 	MKUserTrackingModeNone = 0, // the user's location is not followed
 	MKUserTrackingModeFollow, // the map follows the user's location
 	MKUserTrackingModeFollowWithHeading, // the map follows the user's location and heading
-} NS_ENUM_AVAILABLE(NA, 5_0);
+} NS_ENUM_AVAILABLE(NA, 5_0) __WATCHOS_PROHIBITED;
 
 #if TARGET_OS_IPHONE
-MK_CLASS_AVAILABLE(NA, 3_0)
+MK_CLASS_AVAILABLE(NA, 3_0) __WATCHOS_PROHIBITED
 @interface MKMapView : UIView <NSCoding>
 #else
 MK_CLASS_AVAILABLE(10_9, NA)
 @interface MKMapView : NSView <NSCoding>
 #endif
 
-@property (nonatomic, weak) id <MKMapViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id <MKMapViewDelegate> delegate;
 
 // Changing the map type or region can cause the map to start loading map content.
 // The loading delegate methods will be called as map content is loaded.
@@ -59,6 +61,9 @@ MK_CLASS_AVAILABLE(10_9, NA)
 // Returns an MKMapRect modified to fit the aspect ratio of the map.
 - (MKMapRect)mapRectThatFits:(MKMapRect)mapRect;
 
+// To be used in testing only
+- (void)_handleSelectionAtPoint:(CGPoint)locationInView;
+
 // Edge padding is the minumum padding on each side around the specified MKMapRect.
 #if TARGET_OS_IPHONE
 - (void)setVisibleMapRect:(MKMapRect)mapRect edgePadding:(UIEdgeInsets)insets animated:(BOOL)animate;
@@ -72,15 +77,15 @@ MK_CLASS_AVAILABLE(10_9, NA)
 - (void)setCamera:(MKMapCamera *)camera animated:(BOOL)animated NS_AVAILABLE(10_9, 7_0);
 
 #if TARGET_OS_IPHONE
-- (CGPoint)convertCoordinate:(CLLocationCoordinate2D)coordinate toPointToView:(UIView *)view;
-- (CLLocationCoordinate2D)convertPoint:(CGPoint)point toCoordinateFromView:(UIView *)view;
-- (CGRect)convertRegion:(MKCoordinateRegion)region toRectToView:(UIView *)view;
-- (MKCoordinateRegion)convertRect:(CGRect)rect toRegionFromView:(UIView *)view;
+- (CGPoint)convertCoordinate:(CLLocationCoordinate2D)coordinate toPointToView:(nullable UIView *)view;
+- (CLLocationCoordinate2D)convertPoint:(CGPoint)point toCoordinateFromView:(nullable UIView *)view;
+- (CGRect)convertRegion:(MKCoordinateRegion)region toRectToView:(nullable UIView *)view;
+- (MKCoordinateRegion)convertRect:(CGRect)rect toRegionFromView:(nullable UIView *)view;
 #else
-- (CGPoint)convertCoordinate:(CLLocationCoordinate2D)coordinate toPointToView:(NSView *)view;
-- (CLLocationCoordinate2D)convertPoint:(CGPoint)point toCoordinateFromView:(NSView *)view;
-- (CGRect)convertRegion:(MKCoordinateRegion)region toRectToView:(NSView *)view;
-- (MKCoordinateRegion)convertRect:(CGRect)rect toRegionFromView:(NSView *)view;
+- (CGPoint)convertCoordinate:(CLLocationCoordinate2D)coordinate toPointToView:(nullable NSView *)view;
+- (CLLocationCoordinate2D)convertPoint:(CGPoint)point toCoordinateFromView:(nullable NSView *)view;
+- (CGRect)convertRegion:(MKCoordinateRegion)region toRectToView:(nullable NSView *)view;
+- (MKCoordinateRegion)convertRect:(CGRect)rect toRegionFromView:(nullable NSView *)view;
 #endif
 
 // Control the types of user interaction available
@@ -92,13 +97,16 @@ MK_CLASS_AVAILABLE(10_9, NA)
 @property (nonatomic, getter=isPitchEnabled) BOOL pitchEnabled NS_AVAILABLE(10_9, 7_0);
 
 #if !TARGET_OS_IPHONE
-@property (nonatomic) BOOL showsCompass NS_AVAILABLE(10_9, NA);
 @property (nonatomic) BOOL showsZoomControls NS_AVAILABLE(10_9, NA);
-@property (nonatomic) BOOL showsScale NS_AVAILABLE(10_10, NA);
 #endif
+
+
+@property (nonatomic) BOOL showsCompass NS_AVAILABLE(10_9, 9_0);
+@property (nonatomic) BOOL showsScale NS_AVAILABLE(10_10, 9_0);
 
 @property (nonatomic) BOOL showsPointsOfInterest NS_AVAILABLE(10_9, 7_0); // Affects MKMapTypeStandard and MKMapTypeHybrid
 @property (nonatomic) BOOL showsBuildings NS_AVAILABLE(10_9, 7_0); // Affects MKMapTypeStandard
+@property (nonatomic) BOOL showsTraffic NS_AVAILABLE(10_11, 9_0); // Affects MKMapTypeStandard and MKMapTypeHybrid
 
 // Set to YES to add the user location annotation to the map and start updating its location
 @property (nonatomic) BOOL showsUserLocation;
@@ -117,38 +125,38 @@ MK_CLASS_AVAILABLE(10_9, NA)
 // Annotations are models used to annotate coordinates on the map. 
 // Implement mapView:viewForAnnotation: on MKMapViewDelegate to return the annotation view for each annotation.
 - (void)addAnnotation:(id <MKAnnotation>)annotation;
-- (void)addAnnotations:(NSArray *)annotations;
+- (void)addAnnotations:(NSArray<id<MKAnnotation>> *)annotations;
 
 - (void)removeAnnotation:(id <MKAnnotation>)annotation;
-- (void)removeAnnotations:(NSArray *)annotations;
+- (void)removeAnnotations:(NSArray<id<MKAnnotation>> *)annotations;
 
-@property (nonatomic, readonly) NSArray *annotations;
-- (NSSet *)annotationsInMapRect:(MKMapRect)mapRect NS_AVAILABLE(10_9, 4_2);
+@property (nonatomic, readonly) NSArray<id<MKAnnotation>> *annotations;
+- (NSSet<id<MKAnnotation>> *)annotationsInMapRect:(MKMapRect)mapRect NS_AVAILABLE(10_9, 4_2);
 
 // Currently displayed view for an annotation; returns nil if the view for the annotation isn't being displayed.
-- (MKAnnotationView *)viewForAnnotation:(id <MKAnnotation>)annotation;
+- (nullable MKAnnotationView *)viewForAnnotation:(id <MKAnnotation>)annotation;
 
 // Used by the delegate to acquire an already allocated annotation view, in lieu of allocating a new one.
-- (MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier;
+- (nullable MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier;
 
 // Select or deselect a given annotation.  Asks the delegate for the corresponding annotation view if necessary.
 - (void)selectAnnotation:(id <MKAnnotation>)annotation animated:(BOOL)animated;
-- (void)deselectAnnotation:(id <MKAnnotation>)annotation animated:(BOOL)animated;
-@property (nonatomic, copy) NSArray *selectedAnnotations;
+- (void)deselectAnnotation:(nullable id <MKAnnotation>)annotation animated:(BOOL)animated;
+@property (nonatomic, copy) NSArray<id<MKAnnotation>> *selectedAnnotations;
 
 // annotationVisibleRect is the visible rect where the annotations views are currently displayed.
 // The delegate can use annotationVisibleRect when animating the adding of the annotations views in mapView:didAddAnnotationViews:
 @property (nonatomic, readonly) CGRect annotationVisibleRect;
 
 // Position the map such that the provided array of annotations are all visible to the fullest extent possible.
-- (void)showAnnotations:(NSArray *)annotations animated:(BOOL)animated NS_AVAILABLE(10_9, 7_0);
+- (void)showAnnotations:(NSArray<id<MKAnnotation>> *)annotations animated:(BOOL)animated NS_AVAILABLE(10_9, 7_0);
 
 @end
 
 typedef NS_ENUM(NSInteger, MKOverlayLevel) {
     MKOverlayLevelAboveRoads = 0, // note that labels include shields and point of interest icons.
     MKOverlayLevelAboveLabels
-} NS_ENUM_AVAILABLE(10_9, 7_0);
+} NS_ENUM_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED;
 
 @interface MKMapView (OverlaysAPI)
 
@@ -156,10 +164,10 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 // This is in contrast to annotations, which represent points on the map.
 // Implement -mapView:rendererForOverlay: on MKMapViewDelegate to return the renderer for each overlay.
 - (void)addOverlay:(id <MKOverlay>)overlay level:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
-- (void)addOverlays:(NSArray *)overlays level:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
+- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays level:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
 
 - (void)removeOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 4_0);
-- (void)removeOverlays:(NSArray *)overlays NS_AVAILABLE(10_9, 4_0);
+- (void)removeOverlays:(NSArray<id<MKOverlay>> *)overlays NS_AVAILABLE(10_9, 4_0);
 
 - (void)insertOverlay:(id <MKOverlay>)overlay atIndex:(NSUInteger)index level:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
 
@@ -168,11 +176,11 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 
 - (void)exchangeOverlay:(id <MKOverlay>)overlay1 withOverlay:(id <MKOverlay>)overlay2 NS_AVAILABLE(10_9, 7_0);
 
-@property (nonatomic, readonly) NSArray *overlays NS_AVAILABLE(10_9, 4_0);
-- (NSArray *)overlaysInLevel:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<id<MKOverlay>> *overlays NS_AVAILABLE(10_9, 4_0);
+- (NSArray<id<MKOverlay>> *)overlaysInLevel:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
 
 // Current renderer for overlay; returns nil if the overlay is not shown.
-- (MKOverlayRenderer *)rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
+- (nullable MKOverlayRenderer *)rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
 
 #if TARGET_OS_IPHONE
 // Currently displayed view for overlay; returns nil if the view has not been created yet.
@@ -182,13 +190,14 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 
 // These methods operate implicitly on overlays in MKOverlayLevelAboveLabels and may be deprecated in a future release in favor of the methods that specify the level.
 - (void)addOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 4_0);
-- (void)addOverlays:(NSArray *)overlays NS_AVAILABLE(10_9, 4_0);
+- (void)addOverlays:(NSArray<id<MKOverlay>> *)overlays NS_AVAILABLE(10_9, 4_0);
 
 - (void)insertOverlay:(id <MKOverlay>)overlay atIndex:(NSUInteger)index NS_AVAILABLE(10_9, 4_0);
 - (void)exchangeOverlayAtIndex:(NSUInteger)index1 withOverlayAtIndex:(NSUInteger)index2 NS_AVAILABLE(10_9, 4_0);
 
 @end
 
+__WATCHOS_PROHIBITED
 @protocol MKMapViewDelegate <NSObject>
 @optional
 
@@ -205,12 +214,12 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 // mapView:viewForAnnotation: provides the view for each annotation.
 // This method may be called for all or some of the added annotations.
 // For MapKit provided annotations (eg. MKUserLocation) return nil to use the MapKit provided annotation view.
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation;
+- (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation;
 
 // mapView:didAddAnnotationViews: is called after the annotation views have been added and positioned in the map.
 // The delegate can implement this method to animate the adding of the annotations views.
 // Use the current positions of the annotation views as the destinations of the animation.
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views;
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views;
 
 #if TARGET_OS_IPHONE
 // mapView:annotationView:calloutAccessoryControlTapped: is called when the user taps on left & right callout accessory UIControls.
@@ -233,7 +242,7 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 #endif
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
-- (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray *)renderers NS_AVAILABLE(10_9, 7_0);
+- (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray<MKOverlayRenderer *> *)renderers NS_AVAILABLE(10_9, 7_0);
 
 #if TARGET_OS_IPHONE
 // Prefer -mapView:rendererForOverlay:
@@ -244,3 +253,5 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

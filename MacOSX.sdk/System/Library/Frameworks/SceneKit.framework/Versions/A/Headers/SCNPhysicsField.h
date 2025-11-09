@@ -1,8 +1,10 @@
 //
 //  SCNPhysicsField.h
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
 //
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class SCNNode;
 
@@ -19,11 +21,8 @@ typedef NS_ENUM(NSInteger, SCNPhysicsFieldScope) {
  @class SCNPhysicsField
  @abstract SCNPhysicsField is an abstract class that describes a force field that applies in the physics world.
  */
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsField : NSObject <NSCopying, NSSecureCoding>
-{
-@protected
-    void *_reserved;
-}
 
 // The following properties control the behavior of the field
 @property(nonatomic) CGFloat strength;                               // The strength factor of the force field. default 1.0.
@@ -45,7 +44,7 @@ typedef NS_ENUM(NSInteger, SCNPhysicsFieldScope) {
  @property categoryBitMask
  @abstract Determines the node categories that will be influenced by the receiver. Defaults to all bit set.
  */
-@property(nonatomic) NSUInteger categoryBitMask SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger categoryBitMask NS_AVAILABLE(10_10, 8_0);
 
 
 /**
@@ -118,3 +117,5 @@ typedef SCNVector3 (^SCNFieldForceEvaluator)(SCNVector3 position, SCNVector3 vel
 + (SCNPhysicsField *)customFieldWithEvaluationBlock:(SCNFieldForceEvaluator)block;
 
 @end
+
+NS_ASSUME_NONNULL_END

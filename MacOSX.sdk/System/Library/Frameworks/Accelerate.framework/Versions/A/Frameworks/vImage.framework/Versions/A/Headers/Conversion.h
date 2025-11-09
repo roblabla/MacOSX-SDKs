@@ -2,6 +2,8 @@
  *  @header Conversion.h
  *  vImage_Framework
  *
+ *  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
+ *
  *  @discussion  This header lists conversions between the many different image formats supported by vImage.  The core formats:
  *      <pre> @textblock
  *          Planar 8        Planar 16U      Planar 16S      Float
@@ -25,8 +27,9 @@
  *  vImage does its work on the calling thread. This will help ensure that the data just produced on that thread by a previous pass 
  *  is resident in the correct L1 cache for the next pass.
  *
- *  @copyright Copyright (c) 2003-2014 Apple Computer. All rights reserved.
+ *  @copyright Copyright (c) 2003-2015 by Apple Inc. All rights reserved.
  *
+ *  @ignorefuncmacro VIMAGE_NON_NULL
  */
 
 
@@ -182,6 +185,8 @@ vImage_Error vImageConvert_PlanarFtoPlanar8(const vImage_Buffer *src, const vIma
  *          @/textblock
  *          </pre>
  *
+ *
+ * 
  */
 vImage_Error vImageConvert_PlanarFtoPlanar8_dithered(const vImage_Buffer *src, const vImage_Buffer *dest, Pixel_F maxFloat, Pixel_F minFloat, int dither, vImage_Flags flags) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
     
@@ -287,6 +292,8 @@ vImage_Error vImageConvert_PlanarFtoPlanar8_dithered(const vImage_Buffer *src, c
  *          @/textblock
  *          </pre>
  *
+ *
+ * 
  */
 vImage_Error vImageConvert_RGBFFFtoRGB888_dithered(const vImage_Buffer *src, const vImage_Buffer *dest, const Pixel_F maxFloat[3], const Pixel_F minFloat[3], int dither, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
@@ -402,6 +409,8 @@ vImage_Error vImageConvert_RGBFFFtoRGB888_dithered(const vImage_Buffer *src, con
  *          @/textblock
  *          </pre>
  *
+ *
+ * 
  */
 vImage_Error vImageConvert_ARGBFFFFtoARGB8888_dithered(const vImage_Buffer *src, const vImage_Buffer *dest, const Pixel_FFFF maxFloat, const Pixel_FFFF minFloat, int dither, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
@@ -532,8 +541,8 @@ vImage_Error vImageConvert_16UToF( const vImage_Buffer *src, const vImage_Buffer
  *              vImageConvert_16SToF( int16_buffer, float_buffer, myOffset, myScale, kvImageNoFlags );   //Convert to float
  *              vImageConvert_FTo16S( float_buffer, int16_buffer, myOffset, myScale, kvImageNoFlags );   //Convert back to int16_t
  *
- *  will not work in place.
- *  To convert multichannel interleaved floating point formats (e.g. ARGB_FFFF) to a multichannel 16-bit image format with the same channel ordering, 
+ *  works in place, as long as src->data == dest->data and src->rowBytes == dest->rowBytes.
+ *  To convert multichannel interleaved floating point formats (e.g. ARGB_FFFF) to a multichannel 16-bit image format with the same channel ordering,
  *  simply multiply the vImage_Buffer.width by the number of channels.
  */
 vImage_Error vImageConvert_FTo16S( const vImage_Buffer *src, const vImage_Buffer *dest, float offset, float scale, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
@@ -553,7 +562,7 @@ vImage_Error vImageConvert_FTo16S( const vImage_Buffer *src, const vImage_Buffer
  *              vImageConvert_16UToF( uint16_buffer, float_buffer, myOffset, myScale, kvImageNoFlags );   //Convert to float
  *              vImageConvert_FTo16U( float_buffer, uint16_buffer, myOffset, myScale, kvImageNoFlags );   //Convert back to uint16_t
  *
- *  will not work in place.
+ *  works in place, as long as src->data == dest->data and src->rowBytes == dest->rowBytes.
  *  To convert multichannel interleaved floating point formats (e.g. ARGB_FFFF) to a multichannel 16-bit image format with the same channel ordering, 
  *  simply multiply the vImage_Buffer.width by the number of channels.
  */
@@ -811,6 +820,8 @@ vImage_Error vImageOverwriteChannelsWithScalar_Planar16U(	Pixel_16U     scalar,
  *                  kvImageInvalidParameter             channelIndex must be in the range [0,3]
  *
  *               @/textblock </pre>
+ *
+ * 
  */
 vImage_Error vImageExtractChannel_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, long channelIndex, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
@@ -866,6 +877,8 @@ vImage_Error vImageExtractChannel_ARGB8888( const vImage_Buffer *src, const vIma
  *                  kvImageInvalidParameter             channelIndex must be in the range [0,3]
  *
  *               @/textblock </pre>
+ *
+ * 
  */
 vImage_Error vImageExtractChannel_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, long channelIndex, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
@@ -918,6 +931,8 @@ vImage_Error vImageExtractChannel_ARGB16U( const vImage_Buffer *src, const vImag
  *                  kvImageInvalidParameter             channelIndex must be in the range [0,3]
  *
  *               @/textblock </pre>
+ *
+ * 
  */
 vImage_Error vImageExtractChannel_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, long channelIndex, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
@@ -1607,6 +1622,8 @@ vImage_Error vImageConvert_Planar8toRGB565(const vImage_Buffer *srcR, const vIma
  *          kvImageBufferSizeMismatch               dest->height > src->height OR dest->width > src->width.  There are not enough pixels to fill the destination buffer.
  *          @/textblock
  *          </pre>
+ *
+ * 
  */
 vImage_Error vImageConvert_RGBA5551toRGB565( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
@@ -1644,6 +1661,8 @@ vImage_Error vImageConvert_RGBA5551toRGB565( const vImage_Buffer *src, const vIm
  *          kvImageBufferSizeMismatch               dest->height > src->height OR dest->width > src->width.  There are not enough pixels to fill the destination buffer.
  *          @/textblock
  *          </pre>
+ *
+ * 
  */
 vImage_Error vImageConvert_ARGB1555toRGB565( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
@@ -1733,6 +1752,8 @@ vImage_Error vImageConvert_ARGB1555toRGB565( const vImage_Buffer *src, const vIm
  *          kvImageInvalidParameter                 Invalid / unknown dither value
  *          @/textblock
  *          </pre>
+ *
+ * 
  */
 vImage_Error vImageConvert_RGB565toRGBA5551( const vImage_Buffer *src, const vImage_Buffer *dest, int dither, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
@@ -1822,6 +1843,8 @@ vImage_Error vImageConvert_RGB565toRGBA5551( const vImage_Buffer *src, const vIm
  *          kvImageInvalidParameter                 Invalid / unknown dither value
  *          @/textblock
  *          </pre>
+ *
+ * 
  */
 vImage_Error vImageConvert_RGB565toARGB1555( const vImage_Buffer *src, const vImage_Buffer *dest, int dither, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
@@ -4079,13 +4102,14 @@ vImage_Error vImageConvert_16Uto16Q12(const vImage_Buffer *src, const vImage_Buf
  @/textblock
  </pre>
  
-     @return
+     @return  The following return codes may occur:
      <pre> @textblock
      kvImageNoError                  Is returned when there was no error.
      kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
      kvImageUnsupportedConversion    Is returned when there is no conversion in vImage for inYpCbCrType & outARGBType.
      @/textblock  </pre>
- */
+ 
+*/
 
 vImage_Error vImageConvert_YpCbCrToARGB_GenerateConversion(const vImage_YpCbCrToARGBMatrix *matrix, const vImage_YpCbCrPixelRange *pixelRange, vImage_YpCbCrToARGB *outInfo, vImageYpCbCrType inYpCbCrType, vImageARGBType outARGBType, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
@@ -4182,11 +4206,15 @@ vImage_Error vImageConvert_YpCbCrToARGB_GenerateConversion(const vImage_YpCbCrTo
      kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
      kvImageUnsupportedConversion    Is returned when there is no conversion in vImage for inARGBType & outYpCbCrType.
      @/textblock </pre>
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGBToYpCbCr_GenerateConversion(const vImage_ARGBToYpCbCrMatrix *matrix, const vImage_YpCbCrPixelRange *pixelRange, vImage_ARGBToYpCbCr *outInfo, vImageARGBType inARGBType, vImageYpCbCrType outYpCbCrType, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
     
+/*! @functiongroup 422YpCbYpCr8 ('yuvs' and 'yuvf') */
+   
 /*!
      @function vImageConvert_422YpCbYpCr8ToARGB8888
      
@@ -4282,9 +4310,9 @@ vImage_Error vImageConvert_ARGBToYpCbCr_GenerateConversion(const vImage_ARGBToYp
     @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
-    
-/*! @functiongroup 422YpCbYpCr8 ('yuvs' and 'yuvf') */
     
 vImage_Error vImageConvert_422YpCbYpCr8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
@@ -4370,6 +4398,8 @@ vImage_Error vImageConvert_422YpCbYpCr8ToARGB8888(const vImage_Buffer *src, cons
  
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To422YpCbYpCr8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -4473,6 +4503,8 @@ vImage_Error vImageConvert_ARGB8888To422YpCbYpCr8(const vImage_Buffer *src, cons
    </pre>
  
      Note: Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
 vImage_Error vImageConvert_422CbYpCrYp8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
@@ -4560,6 +4592,8 @@ vImage_Error vImageConvert_422CbYpCrYp8ToARGB8888(const vImage_Buffer *src, cons
  
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
+ 
+ 
 */
     
     
@@ -4671,6 +4705,8 @@ vImage_Error vImageConvert_ARGB8888To422CbYpCrYp8(const vImage_Buffer *src, cons
     </pre>
  
     Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_422CbYpCrYp8_AA8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *srcA, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -4764,6 +4800,8 @@ vImage_Error vImageConvert_422CbYpCrYp8_AA8ToARGB8888(const vImage_Buffer *src, 
  
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To422CbYpCrYp8_AA8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_Buffer *destA, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -4853,6 +4891,8 @@ vImage_Error vImageConvert_ARGB8888To422CbYpCrYp8_AA8(const vImage_Buffer *src, 
  
      Results are guaranteed to be faithfully rounded.
      This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_444AYpCbCr8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -4932,6 +4972,8 @@ vImage_Error vImageConvert_444AYpCbCr8ToARGB8888(const vImage_Buffer *src, const
  
      Results are guaranteed to be faithfully rounded.
      This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To444AYpCbCr8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5018,6 +5060,8 @@ vImage_Error vImageConvert_ARGB8888To444AYpCbCr8(const vImage_Buffer *src, const
  
      Results are guaranteed to be faithfully rounded.
      This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_444CbYpCrA8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5092,6 +5136,8 @@ vImage_Error vImageConvert_444CbYpCrA8ToARGB8888(const vImage_Buffer *src, const
  
      Results are guaranteed to be faithfully rounded.
      This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To444CbYpCrA8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5181,6 +5227,8 @@ vImage_Error vImageConvert_ARGB8888To444CbYpCrA8(const vImage_Buffer *src, const
    </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_444CrYpCb8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5259,6 +5307,8 @@ vImage_Error vImageConvert_444CrYpCb8ToARGB8888(const vImage_Buffer *src, const 
  </pre>
  
      Note: Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To444CrYpCb8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5399,6 +5449,8 @@ vImage_Error vImageConvert_ARGB8888To444CrYpCb8(const vImage_Buffer *src, const 
      kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
  
      Note: Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_420Yp8_Cb8_Cr8ToARGB8888(const vImage_Buffer *srcYp, const vImage_Buffer *srcCb, const vImage_Buffer *srcCr, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4,5) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5518,6 +5570,8 @@ vImage_Error vImageConvert_420Yp8_Cb8_Cr8ToARGB8888(const vImage_Buffer *srcYp, 
 
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To420Yp8_Cb8_Cr8(const vImage_Buffer *src, const vImage_Buffer *destYp, const vImage_Buffer *destCb, const vImage_Buffer *destCr, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4,5) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5656,6 +5710,8 @@ vImage_Error vImageConvert_ARGB8888To420Yp8_Cb8_Cr8(const vImage_Buffer *src, co
     @/textblock </pre> 
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_420Yp8_CbCr8ToARGB8888(const vImage_Buffer *srcYp, const vImage_Buffer *srcCbCr, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5770,6 +5826,8 @@ vImage_Error vImageConvert_420Yp8_CbCr8ToARGB8888(const vImage_Buffer *srcYp, co
 
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To420Yp8_CbCr8(const vImage_Buffer *src, const vImage_Buffer *destYp, const vImage_Buffer *destCbCr, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5852,6 +5910,8 @@ vImage_Error vImageConvert_ARGB8888To420Yp8_CbCr8(const vImage_Buffer *src, cons
    @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_444AYpCbCr16ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -5925,6 +5985,8 @@ vImage_Error vImageConvert_444AYpCbCr16ToARGB8888(const vImage_Buffer *src, cons
   @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To444AYpCbCr16(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6004,6 +6066,8 @@ vImage_Error vImageConvert_ARGB8888To444AYpCbCr16(const vImage_Buffer *src, cons
 
    Results are guaranteed to be faithfully rounded.
    This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_444AYpCbCr16ToARGB16U(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6172,6 +6236,8 @@ vImage_Error vImageConvert_ARGB16UTo444AYpCbCr16(const vImage_Buffer *src, const
 
     Results are guaranteed to be faithfully rounded.
     This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_444CrYpCb10ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6249,6 +6315,8 @@ vImage_Error vImageConvert_444CrYpCb10ToARGB8888(const vImage_Buffer *src, const
  *
  *   Results are guaranteed to be faithfully rounded.
  *   This function can work in place.
+ *
+ *  
  */
     
 vImage_Error vImageConvert_ARGB8888To444CrYpCb10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6336,6 +6404,8 @@ vImage_Error vImageConvert_ARGB8888To444CrYpCb10(const vImage_Buffer *src, const
     @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_444CrYpCb10ToARGB16Q12(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const Pixel_16Q12 alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6414,6 +6484,8 @@ vImage_Error vImageConvert_444CrYpCb10ToARGB16Q12(const vImage_Buffer *src, cons
     @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB16Q12To444CrYpCb10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6604,6 +6676,8 @@ vImage_Error vImageConvert_ARGB16Q12To444CrYpCb10(const vImage_Buffer *src, cons
     @/textblock </pre>
  
     Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6744,6 +6818,8 @@ vImage_Error vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888(const vImage_
  
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -6930,6 +7006,8 @@ vImage_Error vImageConvert_ARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10(const vImage_
    @/textblock </pre>
  
      Note: Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const Pixel_16Q12 alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7072,6 +7150,8 @@ vImage_Error vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12(const vImage
  
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7179,6 +7259,8 @@ vImage_Error vImageConvert_ARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10(const vImage
  
      Results are guaranteed to be faithfully rounded.
      This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_422CbYpCrYp16ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7264,6 +7346,8 @@ vImage_Error vImageConvert_422CbYpCrYp16ToARGB8888(const vImage_Buffer *src, con
      Results are guaranteed to be faithfully rounded.
      Chroma is sampled at center by default.
      This function can work in place.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888To422CbYpCrYp16(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7367,6 +7451,8 @@ vImage_Error vImageConvert_ARGB8888To422CbYpCrYp16(const vImage_Buffer *src, con
  @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_422CbYpCrYp16ToARGB16U(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint16_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7458,6 +7544,8 @@ vImage_Error vImageConvert_422CbYpCrYp16ToARGB16U(const vImage_Buffer *src, cons
            images.  If it has alpha, you may wish to composite against an opaque background first, before the transparency information is lost.
            If it is premultiplied by alpha, you at minimum should unpremultiply it first, or composite it against an opaque background. See
            vImageUnpremultiplyData_ARGB16U() and vImageFlatten_ARGB16U().
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB16UTo422CbYpCrYp16(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7551,6 +7639,8 @@ vImage_Error vImageConvert_ARGB16UTo422CbYpCrYp16(const vImage_Buffer *src, cons
  @/textblock </pre>
  
      Note: Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_RGBA1010102ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7632,6 +7722,8 @@ vImage_Error vImageConvert_RGBA1010102ToARGB8888(const vImage_Buffer *src, const
      Note
      ----
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB8888ToRGBA1010102(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7726,6 +7818,8 @@ vImage_Error vImageConvert_ARGB8888ToRGBA1010102(const vImage_Buffer *src, const
  @/textblock </pre>
  
      Note: Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_RGBA1010102ToARGB16Q12(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7820,6 +7914,8 @@ vImage_Error vImageConvert_RGBA1010102ToARGB16Q12(const vImage_Buffer *src, cons
  @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB16Q12ToRGBA1010102(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, int32_t RGB101010Min, int32_t RGB101010Max, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7913,6 +8009,8 @@ vImage_Error vImageConvert_ARGB16Q12ToRGBA1010102(const vImage_Buffer *src, cons
  @/textblock </pre>
  
      Note: Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_RGBA1010102ToARGB16U(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -7986,6 +8084,8 @@ vImage_Error vImageConvert_RGBA1010102ToARGB16U(const vImage_Buffer *src, const 
  @/textblock </pre>
  
      Results are guaranteed to be faithfully rounded.
+ 
+ 
 */
     
 vImage_Error vImageConvert_ARGB16UToRGBA1010102(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -8041,10 +8141,17 @@ vImage_Error vImageConvert_ARGB16UToRGBA1010102(const vImage_Buffer *src, const 
  @/textblock </pre>
 
    Works in place.
+ 
+ 
 */
     
 vImage_Error vImagePermuteChannels_RGB888(const vImage_Buffer *src, const vImage_Buffer *dest, const uint8_t permuteMap[3], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
+    
+/*!
+ * @functiongroup Format agnostic
+ */
+    
 /*!
      @function vImageCopyBuffer
  
@@ -8070,6 +8177,8 @@ vImage_Error vImagePermuteChannels_RGB888(const vImage_Buffer *src, const vImage
      kvImageNoError                  Is returned when there was no error.
      kvImageBufferSizeMismatch       Is returned when src.width < dest.width || src.height < dest.height
  @/textblock </pre>
+
+ 
 */
 
 vImage_Error vImageCopyBuffer(const vImage_Buffer *src, const vImage_Buffer *dest, size_t pixelSize, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);

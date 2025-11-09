@@ -84,7 +84,7 @@ SHOULD:
 Launch on demand given criteria specified in the XML property list. More
 information can be found later in this man page.
 .It
-Catch the SIGTERM signal, preferably with the
+Handle the SIGTERM signal, preferably with a
 .Xr dispatch 3
 source, and respond to this signal by unwinding any outstanding work quickly
 and then exiting.
@@ -153,9 +153,9 @@ key of "machine" with an array specifying only "MacBookPro4,2" would only load
 on a machine whose "hw.machine" value was "MacBook4,2".
 .It Sy Program <string>
 This key maps to the first argument of
-.Xr execvp 3
-and indicates the path to the executable for the job. If this key is missing,
-then the first element of the array of strings provided to the
+.Xr execv 3
+and indicates the absolute path to the executable for the job. If this key is
+missing, then the first element of the array of strings provided to the
 .Nm ProgramArguments
 will be used instead. This key is required in the absence of the
 .Nm ProgramArguments
@@ -169,6 +169,17 @@ spawned. This key is required in the absence of the Program key.
 Many people are confused by this key. Please read
 .Xr execvp 3
 very carefully!
+.Pp
+.Em NOTE:
+The
+.Nm Program
+key must be an absolute path. Previous versions of launchd did not
+enforce this requirement but failed to run the job. In the absence of the
+.Nm Program
+key, the first element of the
+.Nm ProgramArguments
+array may be either an
+absolute path, or a relative path which is resolved using _PATH_STDPATH.
 .It Sy EnableGlobbing <boolean>
 This flag causes
 .Nm launchd
@@ -187,7 +198,7 @@ can safely terminate. If no outstanding transactions are in progress, then
 .Nm launchd
 will SIGKILL the process when it determines that the job needs to be stopped.
 .It Sy EnablePressuredExit <boolean>
-This key opts the job into the system's pressured-exit facility. Use of this key
+This key opts the job into the system's Pressured Exit facility. Use of this key
 implies the same responsibilities as use of the
 .Nm EnableTransactions
 key, but it also enables automatic tracking of activity based on XPC message
@@ -196,7 +207,7 @@ reclamation under memory pressure. See
 .Xr xpc_main 3
 for details.
 .Pp
-.Em IMPORTANT :
+.Em NOTE :
 Jobs which opt into Pressured Exit have a more heavily-managed lifecycle than
 normal jobs, and they will be automatically relaunched if they exit while
 holding open transactions. Therefore,
@@ -204,6 +215,12 @@ holding open transactions. Therefore,
 does not respect
 .Fa KeepAlive
 criteria for jobs which have opted into Pressured Exit.
+.Pp
+.Em IMPORTANT :
+Jobs which opt into Pressured Exit will ignore SIGTERM rather than exiting by
+default, so a
+.Xr dispatch 3
+source must be used when handling this signal.
 .It Sy OnDemand <boolean>
 This key does nothing if set to false. If set to true, this key is equivalent to
 specifying a true value for the
@@ -613,8 +630,8 @@ descriptors using the
 .Xr launch_activate_sockets 3
 API.
 The keys of the top level Sockets dictionary can be anything. These keys are
-meant for the application developer to use to associated which socket
-dictionaries correspond to which application level protocols (e.g. http vs. ftp
+meant for the application developer to associate which socket descriptors
+correspond to which application level protocols (e.g. http vs. ftp
 vs. DNS...).
 .Pp
 The parameters below are used as inputs to call

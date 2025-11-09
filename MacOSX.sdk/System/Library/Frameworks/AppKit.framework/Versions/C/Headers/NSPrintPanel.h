@@ -1,14 +1,19 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSSet.h>
 
-@class NSArray, NSMutableArray, NSPrintInfo, NSSet, NSView, NSViewController, NSWindow, NSWindowController;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSPrintInfo, NSSet, NSView, NSViewController, NSWindow, NSWindowController;
 
 typedef NS_OPTIONS(NSUInteger, NSPrintPanelOptions) {
 
@@ -38,26 +43,26 @@ typedef NS_OPTIONS(NSUInteger, NSPrintPanelOptions) {
 
 /* Valid values for passing into -[NSPrintPanel setJobStyleHint:].
 */
-APPKIT_EXTERN NSString *const NSPrintPhotoJobStyleHint;
-APPKIT_EXTERN NSString *const NSPrintAllPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString *const NSPrintNoPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSString * const NSPrintPhotoJobStyleHint;
+APPKIT_EXTERN NSString * const NSPrintAllPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSString * const NSPrintNoPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
 
 /* The keys of the entries that must be in the dictionaries returned by NSPrintPanelAccessorizing's -localizedSummaryItems method.
 */
-APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemNameKey NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemDescriptionKey NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString * const NSPrintPanelAccessorySummaryItemNameKey NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString * const NSPrintPanelAccessorySummaryItemDescriptionKey NS_AVAILABLE_MAC(10_5);
 
 @protocol NSPrintPanelAccessorizing
 
 /* Return the text that summarizes the settings that the user has chosen using this print panel accessory view and that should appear in the summary pane of the print panel. It must be an array of dictionaries (not nil), each of which has an NSPrintPanelAccessorySummaryItemNameKey entry and an NSPrintPanelAccessorySummaryItemDescriptionKey entry whose values are strings. A print panel accessory view must be KVO-compliant for "localizedSummaryItems" because NSPrintPanel observes it to keep what it displays in its Summary view up to date. (In Mac OS 10.5 there is no way for the user to see your accessory view and the Summary view at the same time, but that might not always be true in the future.)
 */
-- (NSArray *)localizedSummaryItems;
+- (NSArray<NSDictionary<NSString *, NSString *> *> *)localizedSummaryItems;
 
 @optional
 
 /* Return the key paths for properties whose values affect what is drawn in the print panel's built-in preview. NSPrintPanel observes these key paths and redraws the preview when the values for any of them change. For example, if you write an accessory view that lets the user change document margins in the print panel you might provide an implementation of this method that returns a set that includes strings like @"representedObject.leftMargin", @"representedObject.rightMargin", etc. (because the representedObject would be an NSPrintInfo, which is KVO-compliant for "leftMargin," "rightMargin," etc.). This protocol method is optional because it's not necessary if you're not using NSPrintPanel's built-in preview, but if you use preview you almost certainly have to implement this method properly too.
 */
-- (NSSet *)keyPathsForValuesAffectingPreview;
+- (NSSet<NSString *> *)keyPathsForValuesAffectingPreview;
 
 @end
 
@@ -93,7 +98,7 @@ APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemDescriptionKey NS_
 */
 - (void)addAccessoryController:(NSViewController<NSPrintPanelAccessorizing> *)accessoryController NS_AVAILABLE_MAC(10_5);
 - (void)removeAccessoryController:(NSViewController<NSPrintPanelAccessorizing> *)accessoryController NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSArray *accessoryControllers NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray<__kindof NSViewController *> *accessoryControllers NS_AVAILABLE_MAC(10_5);
 
 /* The options described above. In Mac OS 10.5 an -options message sent to a freshly-created NSPrintPanel will return (NSPrintPanelShowsCopies | NSPrintPanelShowsPageRange) unless it was created by an NSPrintOperation, in which case it will also return NSPrintPanelShowsPreview. (See the release notes for backward binary compatibility information though.) To allow your application to take advantage of controls that may be added by default in future versions of Mac OS X, get the options from the print panel you've just created, turn on and off the flags you care about, and then set the options.
 */
@@ -101,24 +106,24 @@ APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemDescriptionKey NS_
 
 /* The title of the default button in the print panel. You can override the standard button title, "Print," when you're using an NSPrintPanel in such a way that printing isn't actually going to happen when the user presses that button.
 */
-- (void)setDefaultButtonTitle:(NSString *)defaultButtonTitle NS_AVAILABLE_MAC(10_5);
-- (NSString *)defaultButtonTitle NS_AVAILABLE_MAC(10_5);
+- (void)setDefaultButtonTitle:(nullable NSString *)defaultButtonTitle NS_AVAILABLE_MAC(10_5);
+- (nullable NSString *)defaultButtonTitle NS_AVAILABLE_MAC(10_5);
 
 /* The HTML help anchor for the print panel. You can override the standard anchor of the print panel's help button.
 */
-@property (copy) NSString *helpAnchor NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSString *helpAnchor NS_AVAILABLE_MAC(10_5);
 
 
 
 // Set or get a string that provides a hint about the type of print job in which this print panel is being used. This controls the set of items that appear in the Presets menu. The string must be one of the job style hint strings declared above, or nil to show general presets.
-@property (copy) NSString *jobStyleHint;
+@property (nullable, copy) NSString *jobStyleHint;
 
 
 /* Present a print panel to the user, document-modally. When the user has dismissed it, send the message selected by didEndSelector to the delegate, with the contextInfo as the last argument. The method selected by didEndSelector must have the same signature as:
 
     - (void)printPanelDidEnd:(NSPrintPanel *)printPanel returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 */
-- (void)beginSheetWithPrintInfo:(NSPrintInfo *)printInfo modalForWindow:(NSWindow *)docWindow delegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+- (void)beginSheetWithPrintInfo:(NSPrintInfo *)printInfo modalForWindow:(NSWindow *)docWindow delegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo;
 
 /* Present a print panel to the user, application-modally, and return either NSOKButton or NSCancelButton. The default implementation of -runModal just invokes [self runModalWithPrintInfo:[[NSPrintOperation currentOperation] printInfo]].
 */
@@ -137,8 +142,8 @@ APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemDescriptionKey NS_
 
 /* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
 */
-- (void)setAccessoryView:(NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
-- (NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setAccessoryView:(nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
 
 /* Methods that were also deprecated in Mac OS 10.5.
 */
@@ -146,3 +151,5 @@ APPKIT_EXTERN NSString *const NSPrintPanelAccessorySummaryItemDescriptionKey NS_
 - (void)finalWritePrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
 
 @end
+
+NS_ASSUME_NONNULL_END

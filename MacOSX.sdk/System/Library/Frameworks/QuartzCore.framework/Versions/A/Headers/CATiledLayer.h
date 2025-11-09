@@ -1,6 +1,6 @@
 /* CoreAnimation - CATiledLayer.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 /* This is a subclass of CALayer providing a way to asynchronously
@@ -23,6 +23,8 @@
  * regular CALayer. */
 
 #import <QuartzCore/CALayer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CATiledLayer : CALayer
 
@@ -56,3 +58,5 @@
 @property CGSize tileSize;
 
 @end
+
+NS_ASSUME_NONNULL_END

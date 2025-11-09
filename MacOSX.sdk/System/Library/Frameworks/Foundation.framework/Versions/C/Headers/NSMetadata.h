@@ -1,5 +1,5 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSMetadataAttributes.h>
@@ -7,9 +7,11 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 
-@class NSString, NSURL, NSArray, NSDictionary, NSPredicate, NSOperationQueue;
+@class NSString, NSURL, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSPredicate, NSOperationQueue, NSSortDescriptor;
 @class NSMetadataItem, NSMetadataQueryAttributeValueTuple, NSMetadataQueryResultGroup;
 @protocol NSMetadataQueryDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_4, 5_0)
 @interface NSMetadataQuery : NSObject {
@@ -20,11 +22,11 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     __strong void *_reserved;
 }
 
-@property (assign) id<NSMetadataQueryDelegate> delegate;
-@property (copy) NSPredicate *predicate;
-@property (copy) NSArray *sortDescriptors;
-@property (copy) NSArray *valueListAttributes;
-@property (copy) NSArray *groupingAttributes;
+@property (nullable, assign) id<NSMetadataQueryDelegate> delegate;
+@property (nullable, copy) NSPredicate *predicate;
+@property (copy) NSArray<NSSortDescriptor *> *sortDescriptors;
+@property (copy) NSArray<NSString *> *valueListAttributes;
+@property (nullable, copy) NSArray<NSString *> *groupingAttributes;
 @property NSTimeInterval notificationBatchingInterval;
 
 @property (copy) NSArray *searchScopes;
@@ -33,11 +35,11 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 // locations to which the search is limited; an empty array means no
 // limits, which is the default state.
 
-@property (copy) NSArray *searchItems NS_AVAILABLE(10_9, 7_0);
+@property (nullable, copy) NSArray *searchItems NS_AVAILABLE(10_9, 7_0);
 // items can be a mixture of NSMetadataItem, NSURL objects (file URLs only)
 // and/or string paths; the getter returns the same mixture as was set
 
-@property (retain) NSOperationQueue *operationQueue NS_AVAILABLE(10_9, 7_0);
+@property (nullable, retain) NSOperationQueue *operationQueue NS_AVAILABLE(10_9, 7_0);
 // optional operation queue for notifications and delegate method calls
 
 - (BOOL)startQuery;
@@ -62,11 +64,11 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 
 - (NSUInteger)indexOfResult:(id)result;
 
-@property (readonly, copy) NSDictionary *valueLists; // values are arrays of NSMetadataQueryAttributeValueTuple
+@property (readonly, copy) NSDictionary<NSString *, NSArray<NSMetadataQueryAttributeValueTuple *> *> *valueLists; // values are arrays of NSMetadataQueryAttributeValueTuple
 
-@property (readonly, copy) NSArray *groupedResults; // array of NSMetadataQueryResultGroups, for first grouping attribute
+@property (readonly, copy) NSArray<NSMetadataQueryResultGroup *> *groupedResults; // array of NSMetadataQueryResultGroups, for first grouping attribute
 
-- (id)valueOfAttribute:(NSString *)attrName forResultAtIndex:(NSUInteger)idx;
+- (nullable id)valueOfAttribute:(NSString *)attrName forResultAtIndex:(NSUInteger)idx;
 
 @end
 
@@ -112,12 +114,12 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     __strong void *_reserved;
 }
 
-- (instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_AVAILABLE_MAC(10_9);
+- (nullable instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_AVAILABLE_MAC(10_9);
 
-- (id)valueForAttribute:(NSString *)key;
-- (NSDictionary *)valuesForAttributes:(NSArray *)keys;
+- (nullable id)valueForAttribute:(NSString *)key;
+- (nullable NSDictionary<NSString *, id> *)valuesForAttributes:(NSArray<NSString *> *)keys;
 
-@property (readonly, copy) NSArray *attributes;
+@property (readonly, copy) NSArray<NSString *> *attributes;
 
 @end
 
@@ -131,7 +133,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 }
 
 @property (readonly, copy) NSString *attribute;
-@property (readonly, retain) id value;
+@property (nullable, readonly, retain) id value;
 @property (readonly) NSUInteger count;
 
 @end
@@ -147,7 +149,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @property (readonly, copy) NSString *attribute;
 @property (readonly, retain) id value;
 
-@property (readonly, copy) NSArray *subgroups; // nil if this is a leaf
+@property (nullable, readonly, copy) NSArray<NSMetadataQueryResultGroup *> *subgroups; // nil if this is a leaf
 
 @property (readonly) NSUInteger resultCount;
 - (id)resultAtIndex:(NSUInteger)idx; // uncertain whether this will do anything useful for non-leaf groups
@@ -155,3 +157,5 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @property (readonly, copy) NSArray *results;   // this is for K-V Bindings, and causes side-effects on the query
 
 @end
+
+NS_ASSUME_NONNULL_END

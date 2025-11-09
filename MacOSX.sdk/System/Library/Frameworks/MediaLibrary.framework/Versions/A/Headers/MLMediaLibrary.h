@@ -2,20 +2,23 @@
 //  MLMediaLibrary.h
 //  MediaLibrary
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+@class MLMediaSource;
+
+NS_ASSUME_NONNULL_BEGIN
 @interface MLMediaLibrary : NSObject
 
 // The designated initializer
-- (instancetype)initWithOptions:(NSDictionary *)options NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOptions:(NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER;
 
 // Returns a dictionary of media sources by identifier.
 // This will return nil the first time, which will kick off an async load of the media sources.
 // A KVO notification is sent when the media sources have been loaded.
-@property (readonly, copy) NSDictionary *mediaSources;
+@property (readonly, copy, nullable) NSDictionary<NSString *, MLMediaSource *> *mediaSources;
 
 @end
 
@@ -75,3 +78,5 @@ extern NSString* const MLMediaLoadMoviesFolder;
 // NSArray of NSStrings (relative paths inside the caller's app bundle)
 // Specifies one or more relative paths inside the caller's app bundle in which to search for media files.
 extern NSString* const MLMediaLoadAppFoldersKey;
+
+NS_ASSUME_NONNULL_END

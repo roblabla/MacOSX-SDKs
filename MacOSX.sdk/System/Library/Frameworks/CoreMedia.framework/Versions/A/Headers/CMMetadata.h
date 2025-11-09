@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2013-2014 Apple Inc. All rights reserved.
+    Copyright © 2013-2015 Apple Inc. All rights reserved.
  
 */
 
@@ -38,6 +38,8 @@ extern "C" {
 #endif
     
 #pragma pack(push, 4)
+	
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*! 
 	@group	Errors
@@ -56,8 +58,13 @@ extern "C" {
 	@constant	kCMMetadataIdentifierError_BadIdentifier The identifier passed in was invalid.
 	@constant	kCMMetadataIdentifierError_NoKeyValueAvailable A keyvalue was requested for the anonymous keyspace ('anon').
 */
-// Range 16300 to -16309
-enum {
+// Range -16300 to -16309
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMMetadataIdentifierError_AllocationFailed				= -16300,
 	kCMMetadataIdentifierError_RequiredParameterMissing		= -16301,
 	kCMMetadataIdentifierError_BadKey						= -16302,
@@ -80,7 +87,12 @@ enum {
 	@constant	kCMMetadataDataTypeRegistryError_MultipleConformingBaseTypes Data type passed specified more than one base data type.
 */
 // Range -16310 to -16319
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMMetadataDataTypeRegistryError_AllocationFailed				= -16310,
 	kCMMetadataDataTypeRegistryError_RequiredParameterMissing		= -16311,
 	kCMMetadataDataTypeRegistryError_BadDataTypeIdentifier			= -16312,
@@ -108,6 +120,8 @@ enum {
 	@const kCMMetadataKeySpace_Icy
 		Metadata keyspace for ShoutCast keys.
 */
+CM_ASSUME_NONNULL_BEGIN
+
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_QuickTimeUserData
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_ISOUserData
@@ -142,6 +156,18 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDirection_Fac
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+/*!
+	@const kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation
+		Video orientation as defined by TIFF/EXIF, which is enumerated by CGImagePropertyOrientation
+		(see <ImageIO/CGImageProperties.h>).
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation
+								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+	
+CM_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*! 
 	@functiongroup	Metadata Identifier services
@@ -196,15 +222,15 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataPreferredAffi
 */
 CM_EXPORT
 OSStatus CMMetadataCreateIdentifierForKeyAndKeySpace(
-	CFAllocatorRef allocator,					/*! @param allocator
-													Allocator to use for creating the identifier. */
-	CFTypeRef key,								/*! @param key
-													Key data;  may be CFString, CFNumber, or CFData. */
-	CFStringRef keySpace,						/*! @param keySpace
-													Keyspace;  must be string of one to four printable
-													ASCII characters. */
-	CFStringRef *identifierOut)					/*! @param identifierOut
-													The created identifier. */
+	CFAllocatorRef CM_NULLABLE allocator,					/*! @param allocator
+																Allocator to use for creating the identifier. */
+	CFTypeRef CM_NONNULL key,								/*! @param key
+																Key data;  may be CFString, CFNumber, or CFData. */
+	CFStringRef CM_NONNULL keySpace,						/*! @param keySpace
+																Keyspace;  must be string of one to four printable
+																ASCII characters. */
+	CM_RETURNS_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL identifierOut)		/*! @param identifierOut
+																The created identifier. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -223,11 +249,11 @@ OSStatus CMMetadataCreateIdentifierForKeyAndKeySpace(
 */
 CM_EXPORT
 OSStatus CMMetadataCreateKeyFromIdentifier(
-	CFAllocatorRef allocator,		/*! @param allocator
-										Allocator to use for creating the key. */
-	CFStringRef identifier,			/*! @param identifier
+	CFAllocatorRef CM_NULLABLE allocator,		/*! @param allocator
+													Allocator to use for creating the key. */
+	CFStringRef CM_NONNULL identifier,			/*! @param identifier
 										Identifier being inspected. */
-	CFTypeRef *keyOut)				/*! @param keyOut
+	CM_RETURNS_RETAINED_PARAMETER CFTypeRef CM_NULLABLE * CM_NONNULL keyOut)				/*! @param keyOut
 										The key data that was used create the identifier. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -238,12 +264,12 @@ OSStatus CMMetadataCreateKeyFromIdentifier(
 */
 CM_EXPORT
 OSStatus CMMetadataCreateKeyFromIdentifierAsCFData(
-	CFAllocatorRef allocator,		/*! @param allocator
-										Allocator to use for creating the key. */
-	CFStringRef identifier,			/*! @param identifier
-										Identifier being inspected. */
-	CFDataRef *keyOut)				/*! @param keyOut
-										The key data that was used create the identifier, as a CFData. */
+	CFAllocatorRef CM_NULLABLE allocator,		/*! @param allocator
+													Allocator to use for creating the key. */
+	CFStringRef CM_NONNULL identifier,			/*! @param identifier
+													Identifier being inspected. */
+	CM_RETURNS_RETAINED_PARAMETER CFDataRef CM_NULLABLE * CM_NONNULL keyOut)	/*! @param keyOut
+													The key data that was used create the identifier, as a CFData. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -252,13 +278,15 @@ OSStatus CMMetadataCreateKeyFromIdentifierAsCFData(
 */
 CM_EXPORT
 OSStatus CMMetadataCreateKeySpaceFromIdentifier(
-	CFAllocatorRef allocator,		/*! @param allocator
-										Allocator to use for creating the keyspace. */
-	CFStringRef identifier,			/*! @param identifier
-										Identifier being inspected. */
-	CFStringRef *keySpaceOut)		/*! @param keySpaceOut
-										The key space that was used to create the identifier. */
+	CFAllocatorRef CM_NULLABLE allocator,				/*! @param allocator
+															Allocator to use for creating the keyspace. */
+	CFStringRef CM_NONNULL identifier,					/*! @param identifier
+															Identifier being inspected. */
+	CM_RETURNS_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL keySpaceOut)	/*! @param keySpaceOut
+															The key space that was used to create the identifier. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@group	Metadata Datatype Registry
@@ -309,7 +337,15 @@ OSStatus CMMetadataCreateKeySpaceFromIdentifier(
 		May also be interpreted as a 32-bit floating point origin followed by a 32-bit floating point dimension.
 	@const kCMMetadataDataType_AffineTransformF64
 		A 3x3 matrix of 64-bit big endian floating point numbers stored in row-major order that specify an affine transform.
+	@const kCMMetadataBaseDataType_PolygonF32
+		Three or more pairs of 32-bit floating point numbers (x and y values) that define the verticies of a polygon.
+	@const kCMMetadataBaseDataType_PolylineF32
+		Two or more pairs of 32-bit floating point numbers (x and y values) that define a multi-segmented line.
+	@const kCMMetadataBaseDataType_JSON
+		UTF-8 encoded JSON data.
 */
+CM_ASSUME_NONNULL_BEGIN
+
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_RawData
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UTF8
@@ -352,6 +388,12 @@ CM_EXPORT const CFStringRef kCMMetadataBaseDataType_RectF32
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_AffineTransformF64
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PolygonF32
+								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PolylineF32
+								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMMetadataBaseDataType_JSON
+								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
 /*!
 	@const kCMMetadataDataType_Location_ISO6709
@@ -365,6 +407,8 @@ CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataLocation_ISO670
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataDirection
 								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CM_ASSUME_NONNULL_END
 
 /*! 
 	@functiongroup	Metadata DataType Registry
@@ -382,13 +426,13 @@ CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataDirection
 */
 CM_EXPORT
 OSStatus CMMetadataDataTypeRegistryRegisterDataType(
-	CFStringRef dataType,						/*! @param dataType
-													Identifier of data type being registered. */
-	CFStringRef description,					/*! @param description
-													Human readable description of data type being registered
-                                                    (for aiding debugging operations) */
-	CFArrayRef conformingDataTypes)				/*! @param conformingDataTypes
-													Data types that this data type conforms to. */
+	CFStringRef CM_NONNULL dataType,						/*! @param dataType
+																Identifier of data type being registered. */
+	CFStringRef CM_NONNULL description,						/*! @param description
+																Human readable description of data type being registered
+																(for aiding debugging operations) */
+	CFArrayRef CM_NONNULL conformingDataTypes)				/*! @param conformingDataTypes
+																Data types that this data type conforms to. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -397,8 +441,8 @@ OSStatus CMMetadataDataTypeRegistryRegisterDataType(
 */
 CM_EXPORT
 Boolean CMMetadataDataTypeRegistryDataTypeIsRegistered(
-	CFStringRef dataType)						/*! @param dataType
-													Identifier of data type being checked. */
+	CFStringRef CM_NONNULL dataType)						/*! @param dataType
+																Identifier of data type being checked. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -406,9 +450,9 @@ Boolean CMMetadataDataTypeRegistryDataTypeIsRegistered(
 	@abstract	Returns the data type's description (if any was provided when it was registered).
 */
 CM_EXPORT
-CFStringRef CMMetadataDataTypeRegistryGetDataTypeDescription(
-	CFStringRef dataType)						/*! @param dataType
-													Identifier of data type being interrogated. */
+CFStringRef CM_NONNULL CMMetadataDataTypeRegistryGetDataTypeDescription(
+	CFStringRef CM_NONNULL dataType)						/*! @param dataType
+																Identifier of data type being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -419,9 +463,9 @@ CFStringRef CMMetadataDataTypeRegistryGetDataTypeDescription(
 				NULL is returned if the data type has not been registered.
 */
 CM_EXPORT
-CFArrayRef CMMetadataDataTypeRegistryGetConformingDataTypes(
-	CFStringRef dataType)						/*! @param dataType
-													Identifier of data type being interrogated. */
+CFArrayRef CM_NONNULL CMMetadataDataTypeRegistryGetConformingDataTypes(
+	CFStringRef CM_NONNULL dataType)						/*! @param dataType
+																Identifier of data type being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -438,11 +482,11 @@ CFArrayRef CMMetadataDataTypeRegistryGetConformingDataTypes(
 */
 CM_EXPORT
 Boolean CMMetadataDataTypeRegistryDataTypeConformsToDataType(
-	CFStringRef dataType,						/*! @param dataType
-													Identifier of data type being interrogated. */
-	CFStringRef conformsToDataType)				/*! @param conformsToDataType
-													Identifier of data type being checked as as
-													conforming data type. */
+	CFStringRef CM_NONNULL dataType,						/*! @param dataType
+																Identifier of data type being interrogated. */
+	CFStringRef CM_NONNULL conformsToDataType)				/*! @param conformsToDataType
+																Identifier of data type being checked as as
+																conforming data type. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -453,7 +497,7 @@ Boolean CMMetadataDataTypeRegistryDataTypeConformsToDataType(
 				end with a base data type.
 */
 CM_EXPORT
-CFArrayRef CMMetadataDataTypeRegistryGetBaseDataTypes(void)
+CFArrayRef CM_NULLABLE CMMetadataDataTypeRegistryGetBaseDataTypes(void)
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -465,8 +509,8 @@ CFArrayRef CMMetadataDataTypeRegistryGetBaseDataTypes(void)
 */
 CM_EXPORT
 Boolean CMMetadataDataTypeRegistryDataTypeIsBaseDataType(
-	CFStringRef dataType)						/*! @param dataType
-													Identifier of data type being checked. */
+	CFStringRef CM_NONNULL dataType)						/*! @param dataType
+																Identifier of data type being checked. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -478,10 +522,12 @@ Boolean CMMetadataDataTypeRegistryDataTypeIsBaseDataType(
 				end with a base data type.
 */
 CM_EXPORT
-CFStringRef CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(
-	CFStringRef dataType)										/*! @param dataType
-																	Identifier of data type being interrogated. */
+CFStringRef CM_NONNULL CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(
+	CFStringRef CM_NONNULL dataType)								/*! @param dataType
+																		Identifier of data type being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
     

@@ -11,6 +11,8 @@
 #import <CoreLocation/CLLocation.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
  *  CLHeadingComponentValue
  *  
@@ -119,3 +121,5 @@ NS_CLASS_AVAILABLE(10_7, 3_0)
 @property (nonatomic, readonly, copy) NSString *description;
 
 @end
+
+NS_ASSUME_NONNULL_END

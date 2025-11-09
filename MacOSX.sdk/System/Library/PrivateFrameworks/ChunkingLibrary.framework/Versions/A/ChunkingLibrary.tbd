@@ -1,10 +1,10 @@
 ---
-archs:           [ i386, x86_64 ]
+archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary
-current-version: 163.6
+current-version: 167.0
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CKBeginImport, _CKCalculateFileSignature, _CKCalculateFileSignatureWithFlags, 
                        _CKCalculateItemSignature, _CKCheckChunkStoreDB, 
                        _CKChunkCoderCreate, _CKChunkCoderFinish, _CKChunkCoderRelease, 

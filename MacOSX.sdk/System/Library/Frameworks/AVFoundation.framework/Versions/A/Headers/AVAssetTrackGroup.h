@@ -3,12 +3,14 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
  */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVAssetTrackGroupInternal;
 
@@ -41,6 +43,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 	The value of this property is an NSArray of NSNumbers interpreted as CMPersistentTrackIDs, one for each track in the
 	group.
  */
-@property (nonatomic, readonly) NSArray *trackIDs;
+@property (nonatomic, readonly) NSArray<NSNumber *> *trackIDs;
 
 @end
+
+NS_ASSUME_NONNULL_END

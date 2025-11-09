@@ -1,11 +1,13 @@
 ---
-archs:           [ i386, x86_64 ]
+archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /usr/lib/libUniversalAccess.dylib
 exports:         
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ __ACAPQuit, __ACAPQuitSynchronously, __ACAPStartup, 
-                       __UACControlQuit, __UACControlQuitSynchronously, 
+  - archs:           [ x86_64 ]
+    symbols:         [ _UACoreGetBootstrapPort, _UACoreIOConnection, _UACoreIOHIDSetAccelerationWithKey, 
+                       _UACoreIOHIDSetCFTypeParameter, _UACoreIOHIDSetParameter, 
+                       _UACoreIsCurrentSessionOnConsole, __ACAPQuit, __ACAPQuitSynchronously, 
+                       __ACAPStartup, __UACControlQuit, __UACControlQuitSynchronously, 
                        __UACControlSendMessage, __UACControlSendMessageWithInt, 
                        __UACControlStartup, __UADDaemonQuit, __UADDaemonQuitSynchronously, 
                        __UADDaemonSendMessage, __UADDaemonSendMessageWithInt, 
@@ -15,5 +17,6 @@ exports:
                        __UniversalAccessDStart, __UniversalAccessDStartIfNeeded, 
                        __UniversalAccessDStop, __UniversalAccessDStopAsynchronously, 
                        __UniversalAccessRestoreSystemState, __UniversalAccessSwitchIsRunning, 
-                       __UniversalAccessSwitchStart, __UniversalAccessSwitchStop ]
+                       __UniversalAccessSwitchStart, __UniversalAccessSwitchStop, 
+                       _gIOConnection ]
 ...

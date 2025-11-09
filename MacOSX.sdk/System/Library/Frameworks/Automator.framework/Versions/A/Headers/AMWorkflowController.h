@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <Automator/AMAttributesForAnalyzer.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class AMAction;
 @class AMWorkflow;
 @class AMWorkflowView;
@@ -50,15 +52,15 @@
         NSUInteger reserved:19;
     } _delegateRespondTo;
 	
-	AM_UNUSED_FOR_ANALYZER id _future;
+	id _future;
 	AM_UNUSED_FOR_ANALYZER id _future2;
 	AM_UNUSED_FOR_ANALYZER id _future3;
 	AM_UNUSED_FOR_ANALYZER id _future4;
 }
 
-@property (strong) AMWorkflow *workflow;
-@property (strong) AMWorkflowView *workflowView;
-@property (assign) id delegate;
+@property (nullable, strong) AMWorkflow *workflow;
+@property (nullable, strong) AMWorkflowView *workflowView;
+@property (nullable, assign) id delegate;
 
 @property (readonly) BOOL canRun;
 @property (getter=isRunning, readonly) BOOL running;
@@ -87,3 +89,4 @@
 - (void)workflowController:(AMWorkflowController *)controller didError:(NSError *)error;
 @end
 
+NS_ASSUME_NONNULL_END

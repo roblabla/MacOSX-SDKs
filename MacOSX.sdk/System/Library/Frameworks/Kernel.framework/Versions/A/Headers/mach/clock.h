@@ -106,7 +106,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__clock_get_time_t;
+	} __Request__clock_get_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -119,7 +119,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		clock_flavor_t flavor;
 		mach_msg_type_number_t clock_attrCnt;
-	} __Request__clock_get_attributes_t;
+	} __Request__clock_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -136,7 +136,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		alarm_type_t alarm_type;
 		mach_timespec_t alarm_time;
-	} __Request__clock_alarm_t;
+	} __Request__clock_alarm_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -165,7 +165,7 @@ union __RequestUnion__clock_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_timespec_t cur_time;
-	} __Reply__clock_get_time_t;
+	} __Reply__clock_get_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -179,7 +179,7 @@ union __RequestUnion__clock_subsystem {
 		kern_return_t RetCode;
 		mach_msg_type_number_t clock_attrCnt;
 		int clock_attr[1];
-	} __Reply__clock_get_attributes_t;
+	} __Reply__clock_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -191,7 +191,7 @@ union __RequestUnion__clock_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__clock_alarm_t;
+	} __Reply__clock_alarm_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

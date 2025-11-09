@@ -1,15 +1,18 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2014, Apple Inc.
+        Copyright (c) 1994-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSAccessibilityProtocols.h>
 
-@class NSArray, NSError, NSEvent, NSMenu, NSUndoManager, NSWindow;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSError, NSEvent, NSMenu, NSUndoManager, NSWindow;
 
 @interface NSResponder : NSObject <NSCoding>
 {
@@ -18,12 +21,12 @@
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-@property (assign) NSResponder *nextResponder;
-- (BOOL)tryToPerform:(SEL)anAction with:(id)anObject;
+@property (nullable, assign) NSResponder *nextResponder;
+- (BOOL)tryToPerform:(SEL)anAction with:(nullable id)anObject;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
-- (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
+- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
 - (void)mouseDown:(NSEvent *)theEvent;
 - (void)rightMouseDown:(NSEvent *)theEvent;
 - (void)otherMouseDown:(NSEvent *)theEvent;
@@ -80,12 +83,12 @@
 - (BOOL)becomeFirstResponder;
 - (BOOL)resignFirstResponder;
 
-- (void)interpretKeyEvents:(NSArray *)eventArray;
+- (void)interpretKeyEvents:(NSArray<NSEvent *> *)eventArray;
 - (void)flushBufferedKeyEvents;
 
-@property (strong) NSMenu *menu;
+@property (nullable, strong) NSMenu *menu;
 
-- (void)showContextHelp:(id)sender;
+- (void)showContextHelp:(nullable id)sender;
 
 - (void)helpRequested:(NSEvent *)eventPtr;
 
@@ -101,7 +104,7 @@
 
 /* This method is used in the process of finding a target for an action method. If this NSResponder instance does not itself respondsToSelector:action, then supplementalTargetForAction:sender: is called. This method should return an object which responds to the action; if this responder does not have a supplemental object that does that, the implementation of this method should call super's supplementalTargetForAction:sender:. NSResponder's implementation returns nil.
 */
-- (id)supplementalTargetForAction:(SEL)action sender:(id)sender NS_AVAILABLE_MAC(10_7);
+- (nullable id)supplementalTargetForAction:(SEL)action sender:(nullable id)sender NS_AVAILABLE_MAC(10_7);
 @end
 
 @interface NSResponder (NSStandardKeyBindingMethods)
@@ -120,149 +123,149 @@
 
     /* Selection movement and scrolling */
 
-- (void)moveForward:(id)sender;
-- (void)moveRight:(id)sender;
-- (void)moveBackward:(id)sender;
-- (void)moveLeft:(id)sender;
-- (void)moveUp:(id)sender;
-- (void)moveDown:(id)sender;
-- (void)moveWordForward:(id)sender;
-- (void)moveWordBackward:(id)sender;
-- (void)moveToBeginningOfLine:(id)sender;
-- (void)moveToEndOfLine:(id)sender;
-- (void)moveToBeginningOfParagraph:(id)sender;
-- (void)moveToEndOfParagraph:(id)sender;
-- (void)moveToEndOfDocument:(id)sender;
-- (void)moveToBeginningOfDocument:(id)sender;
-- (void)pageDown:(id)sender;
-- (void)pageUp:(id)sender;
-- (void)centerSelectionInVisibleArea:(id)sender;
+- (void)moveForward:(nullable id)sender;
+- (void)moveRight:(nullable id)sender;
+- (void)moveBackward:(nullable id)sender;
+- (void)moveLeft:(nullable id)sender;
+- (void)moveUp:(nullable id)sender;
+- (void)moveDown:(nullable id)sender;
+- (void)moveWordForward:(nullable id)sender;
+- (void)moveWordBackward:(nullable id)sender;
+- (void)moveToBeginningOfLine:(nullable id)sender;
+- (void)moveToEndOfLine:(nullable id)sender;
+- (void)moveToBeginningOfParagraph:(nullable id)sender;
+- (void)moveToEndOfParagraph:(nullable id)sender;
+- (void)moveToEndOfDocument:(nullable id)sender;
+- (void)moveToBeginningOfDocument:(nullable id)sender;
+- (void)pageDown:(nullable id)sender;
+- (void)pageUp:(nullable id)sender;
+- (void)centerSelectionInVisibleArea:(nullable id)sender;
 
-- (void)moveBackwardAndModifySelection:(id)sender;
-- (void)moveForwardAndModifySelection:(id)sender;
-- (void)moveWordForwardAndModifySelection:(id)sender;
-- (void)moveWordBackwardAndModifySelection:(id)sender;
-- (void)moveUpAndModifySelection:(id)sender;
-- (void)moveDownAndModifySelection:(id)sender;
+- (void)moveBackwardAndModifySelection:(nullable id)sender;
+- (void)moveForwardAndModifySelection:(nullable id)sender;
+- (void)moveWordForwardAndModifySelection:(nullable id)sender;
+- (void)moveWordBackwardAndModifySelection:(nullable id)sender;
+- (void)moveUpAndModifySelection:(nullable id)sender;
+- (void)moveDownAndModifySelection:(nullable id)sender;
 
-- (void)moveToBeginningOfLineAndModifySelection:(id)sender;
-- (void)moveToEndOfLineAndModifySelection:(id)sender;
-- (void)moveToBeginningOfParagraphAndModifySelection:(id)sender;
-- (void)moveToEndOfParagraphAndModifySelection:(id)sender;
-- (void)moveToEndOfDocumentAndModifySelection:(id)sender;
-- (void)moveToBeginningOfDocumentAndModifySelection:(id)sender;
-- (void)pageDownAndModifySelection:(id)sender;
-- (void)pageUpAndModifySelection:(id)sender;
-- (void)moveParagraphForwardAndModifySelection:(id)sender;
-- (void)moveParagraphBackwardAndModifySelection:(id)sender;
+- (void)moveToBeginningOfLineAndModifySelection:(nullable id)sender;
+- (void)moveToEndOfLineAndModifySelection:(nullable id)sender;
+- (void)moveToBeginningOfParagraphAndModifySelection:(nullable id)sender;
+- (void)moveToEndOfParagraphAndModifySelection:(nullable id)sender;
+- (void)moveToEndOfDocumentAndModifySelection:(nullable id)sender;
+- (void)moveToBeginningOfDocumentAndModifySelection:(nullable id)sender;
+- (void)pageDownAndModifySelection:(nullable id)sender;
+- (void)pageUpAndModifySelection:(nullable id)sender;
+- (void)moveParagraphForwardAndModifySelection:(nullable id)sender;
+- (void)moveParagraphBackwardAndModifySelection:(nullable id)sender;
 
-- (void)moveWordRight:(id)sender;
-- (void)moveWordLeft:(id)sender;
-- (void)moveRightAndModifySelection:(id)sender;
-- (void)moveLeftAndModifySelection:(id)sender;
-- (void)moveWordRightAndModifySelection:(id)sender;
-- (void)moveWordLeftAndModifySelection:(id)sender;
+- (void)moveWordRight:(nullable id)sender;
+- (void)moveWordLeft:(nullable id)sender;
+- (void)moveRightAndModifySelection:(nullable id)sender;
+- (void)moveLeftAndModifySelection:(nullable id)sender;
+- (void)moveWordRightAndModifySelection:(nullable id)sender;
+- (void)moveWordLeftAndModifySelection:(nullable id)sender;
 
-- (void)moveToLeftEndOfLine:(id)sender NS_AVAILABLE_MAC(10_6);
-- (void)moveToRightEndOfLine:(id)sender NS_AVAILABLE_MAC(10_6);
-- (void)moveToLeftEndOfLineAndModifySelection:(id)sender NS_AVAILABLE_MAC(10_6);
-- (void)moveToRightEndOfLineAndModifySelection:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)moveToLeftEndOfLine:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)moveToRightEndOfLine:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)moveToLeftEndOfLineAndModifySelection:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)moveToRightEndOfLineAndModifySelection:(nullable id)sender NS_AVAILABLE_MAC(10_6);
 
-- (void)scrollPageUp:(id)sender;
-- (void)scrollPageDown:(id)sender;
-- (void)scrollLineUp:(id)sender;
-- (void)scrollLineDown:(id)sender;
+- (void)scrollPageUp:(nullable id)sender;
+- (void)scrollPageDown:(nullable id)sender;
+- (void)scrollLineUp:(nullable id)sender;
+- (void)scrollLineDown:(nullable id)sender;
 
-- (void)scrollToBeginningOfDocument:(id)sender;
-- (void)scrollToEndOfDocument:(id)sender;
+- (void)scrollToBeginningOfDocument:(nullable id)sender;
+- (void)scrollToEndOfDocument:(nullable id)sender;
 
     /* Graphical Element transposition */
 
-- (void)transpose:(id)sender;
-- (void)transposeWords:(id)sender;
+- (void)transpose:(nullable id)sender;
+- (void)transposeWords:(nullable id)sender;
 
     /* Selections */
 
-- (void)selectAll:(id)sender;
-- (void)selectParagraph:(id)sender;
-- (void)selectLine:(id)sender;
-- (void)selectWord:(id)sender;
+- (void)selectAll:(nullable id)sender;
+- (void)selectParagraph:(nullable id)sender;
+- (void)selectLine:(nullable id)sender;
+- (void)selectWord:(nullable id)sender;
 
     /* Insertions and Indentations */
 
-- (void)indent:(id)sender;
-- (void)insertTab:(id)sender;
-- (void)insertBacktab:(id)sender;
-- (void)insertNewline:(id)sender;
-- (void)insertParagraphSeparator:(id)sender;
-- (void)insertNewlineIgnoringFieldEditor:(id)sender;
-- (void)insertTabIgnoringFieldEditor:(id)sender;
-- (void)insertLineBreak:(id)sender;
-- (void)insertContainerBreak:(id)sender;
-- (void)insertSingleQuoteIgnoringSubstitution:(id)sender NS_AVAILABLE_MAC(10_5);
-- (void)insertDoubleQuoteIgnoringSubstitution:(id)sender NS_AVAILABLE_MAC(10_5);
+- (void)indent:(nullable id)sender;
+- (void)insertTab:(nullable id)sender;
+- (void)insertBacktab:(nullable id)sender;
+- (void)insertNewline:(nullable id)sender;
+- (void)insertParagraphSeparator:(nullable id)sender;
+- (void)insertNewlineIgnoringFieldEditor:(nullable id)sender;
+- (void)insertTabIgnoringFieldEditor:(nullable id)sender;
+- (void)insertLineBreak:(nullable id)sender;
+- (void)insertContainerBreak:(nullable id)sender;
+- (void)insertSingleQuoteIgnoringSubstitution:(nullable id)sender NS_AVAILABLE_MAC(10_5);
+- (void)insertDoubleQuoteIgnoringSubstitution:(nullable id)sender NS_AVAILABLE_MAC(10_5);
 
     /* Case changes */
 
-- (void)changeCaseOfLetter:(id)sender;
-- (void)uppercaseWord:(id)sender;
-- (void)lowercaseWord:(id)sender;
-- (void)capitalizeWord:(id)sender;
+- (void)changeCaseOfLetter:(nullable id)sender;
+- (void)uppercaseWord:(nullable id)sender;
+- (void)lowercaseWord:(nullable id)sender;
+- (void)capitalizeWord:(nullable id)sender;
 
     /* Deletions */
 
-- (void)deleteForward:(id)sender;
-- (void)deleteBackward:(id)sender;
-- (void)deleteBackwardByDecomposingPreviousCharacter:(id)sender;
-- (void)deleteWordForward:(id)sender;
-- (void)deleteWordBackward:(id)sender;
-- (void)deleteToBeginningOfLine:(id)sender;
-- (void)deleteToEndOfLine:(id)sender;
-- (void)deleteToBeginningOfParagraph:(id)sender;
-- (void)deleteToEndOfParagraph:(id)sender;
+- (void)deleteForward:(nullable id)sender;
+- (void)deleteBackward:(nullable id)sender;
+- (void)deleteBackwardByDecomposingPreviousCharacter:(nullable id)sender;
+- (void)deleteWordForward:(nullable id)sender;
+- (void)deleteWordBackward:(nullable id)sender;
+- (void)deleteToBeginningOfLine:(nullable id)sender;
+- (void)deleteToEndOfLine:(nullable id)sender;
+- (void)deleteToBeginningOfParagraph:(nullable id)sender;
+- (void)deleteToEndOfParagraph:(nullable id)sender;
 
-- (void)yank:(id)sender;
+- (void)yank:(nullable id)sender;
 
     /* Completion */
 
-- (void)complete:(id)sender;
+- (void)complete:(nullable id)sender;
 
     /* Mark/Point manipulation */
 
-- (void)setMark:(id)sender;
-- (void)deleteToMark:(id)sender;
-- (void)selectToMark:(id)sender;
-- (void)swapWithMark:(id)sender;
+- (void)setMark:(nullable id)sender;
+- (void)deleteToMark:(nullable id)sender;
+- (void)selectToMark:(nullable id)sender;
+- (void)swapWithMark:(nullable id)sender;
 
     /* Cancellation */
 
-- (void)cancelOperation:(id)sender;
+- (void)cancelOperation:(nullable id)sender;
 
     /* Writing Direction */
 
-- (void)makeBaseWritingDirectionNatural:(id)sender NS_AVAILABLE_MAC(10_6);
-- (void)makeBaseWritingDirectionLeftToRight:(id)sender NS_AVAILABLE_MAC(10_6);
-- (void)makeBaseWritingDirectionRightToLeft:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeBaseWritingDirectionNatural:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeBaseWritingDirectionLeftToRight:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeBaseWritingDirectionRightToLeft:(nullable id)sender NS_AVAILABLE_MAC(10_6);
 
-- (void)makeTextWritingDirectionNatural:(id)sender NS_AVAILABLE_MAC(10_6);
-- (void)makeTextWritingDirectionLeftToRight:(id)sender NS_AVAILABLE_MAC(10_6);
-- (void)makeTextWritingDirectionRightToLeft:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeTextWritingDirectionNatural:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeTextWritingDirectionLeftToRight:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeTextWritingDirectionRightToLeft:(nullable id)sender NS_AVAILABLE_MAC(10_6);
 
    /* Quick Look */
 /* Perform a Quick Look on the text cursor position, selection, or whatever is appropriate for your view. If there are no Quick Look items, then call [[self nextResponder] tryToPerform:_cmd with:sender]; to pass the request up the responder chain. Eventually AppKit will attempt to perform a dictionary look up. Also see quickLookWithEvent: above.
 */
-- (void)quickLookPreviewItems:(id)sender NS_AVAILABLE_MAC(10_8);
+- (void)quickLookPreviewItems:(nullable id)sender NS_AVAILABLE_MAC(10_8);
 @end
 
 @interface NSResponder(NSUndoSupport)
-@property (readonly, strong) NSUndoManager *undoManager;
+@property (nullable, readonly, strong) NSUndoManager *undoManager;
 @end
 
 @interface NSResponder (NSControlEditingSupport)
 
 /* This is a responder chain method to allow controls to determine when they should become first responder or not. Some controls, such as NSTextField, should only become first responder when the enclosing NSTableView/NSBrowser indicates that the view can begin editing. It is up to the particular control that wants to be validated to call this method in its -mouseDown: (or other time) to determine if it should attempt to become the first responder or not. The default implementation returns YES when there is no -nextResponder, otherwise, it is forwarded up the responder chain. NSTableView/NSBrowser implements this to only allow first responder status if the responder is a view in a selected row. It also delays the first responder assignment if a doubleAction needs to (possibly) be sent. 'event' may be nil if there is no applicable event.
  */
-- (BOOL)validateProposedFirstResponder:(NSResponder *)responder forEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_7);
+- (BOOL)validateProposedFirstResponder:(NSResponder *)responder forEvent:(nullable NSEvent *)event NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -293,7 +296,7 @@ You can invoke this method to present error alert sheets. For example, Cocoa's o
 
 You probably shouldn't override this method, because you have no way of reliably predicting whether this method vs. -presentError will be invoked for any particular error. You should instead override the -willPresentError: method described below.
 */
-- (void)presentError:(NSError *)error modalForWindow:(NSWindow *)window delegate:(id)delegate didPresentSelector:(SEL)didPresentSelector contextInfo:(void *)contextInfo;
+- (void)presentError:(NSError *)error modalForWindow:(NSWindow *)window delegate:(nullable id)delegate didPresentSelector:(nullable SEL)didPresentSelector contextInfo:(nullable void *)contextInfo;
 
 /* Present an error alert to the user, as an application-modal panel, and return YES if error recovery was done, NO otherwise. This method behaves much like the previous one except it does not return until the user has dismissed the alert and, if the error had recovery options and a recovery delegate, the error's recovery delegate has been sent an -attemptRecoveryFromError:optionIndex: message.
 
@@ -314,7 +317,7 @@ You can override this method to customize the presentation of errors by examinin
 
 @interface NSResponder(NSTextFinderSupport)
 
-- (void)performTextFinderAction:(id)sender NS_AVAILABLE_MAC(10_7);
+- (void)performTextFinderAction:(nullable id)sender NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -326,4 +329,6 @@ You can override this method to customize the presentation of errors by examinin
 - (BOOL)performMnemonic:(NSString *)theString NS_DEPRECATED_MAC(10_0, 10_8);
 
 @end
+
+NS_ASSUME_NONNULL_END
 

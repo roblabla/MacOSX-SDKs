@@ -1,12 +1,14 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2014, Apple Inc.
+	Copyright (c) 1997-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSClassDescription.h>
 
 @class NSScriptCommandDescription;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSScriptClassDescription : NSClassDescription {
     @private
@@ -23,24 +25,24 @@
 
 /* Return the class description for a class or, if it is not scriptable, the first superclass that is.
 */
-+ (NSScriptClassDescription *)classDescriptionForClass:(Class)aClass;
++ (nullable NSScriptClassDescription *)classDescriptionForClass:(Class)aClass;
 
 /* Initialize, given a scripting suite name, class name, and class declaration dictionary of the sort that is valid in .scriptSuite property list files.
 */
-- (instancetype)initWithSuiteName:(NSString *)suiteName className:(NSString *)className dictionary:(NSDictionary *)classDeclaration NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithSuiteName:(NSString *)suiteName className:(NSString *)className dictionary:(nullable NSDictionary *)classDeclaration NS_DESIGNATED_INITIALIZER;
 
 /* Return the suite name or class name provided at initialization time.
 */
-@property (readonly, copy) NSString *suiteName;
-@property (readonly, copy) NSString *className;
+@property (nullable, readonly, copy) NSString *suiteName;
+@property (nullable, readonly, copy) NSString *className;
 
 /* Return the name of the Objective-C that implements the described scriptable class.
 */
-@property (readonly, copy) NSString *implementationClassName;
+@property (nullable, readonly, copy) NSString *implementationClassName;
 
 /* Return the scripting class description of the superclass of the class described by the receiver.
 */
-@property (readonly, retain) NSScriptClassDescription *superclassDescription;
+@property (nullable, readonly, retain) NSScriptClassDescription *superclassDescription;
 
 /* Return the primary four character code used to identify the described class in Apple events.
 */
@@ -56,15 +58,15 @@
 
 /* If the described class or one of its superclasses is explicitly declared to support the described command and the declaration includes a method name, return the selector for the class' handler method for the command. Return NULL otherwise.
 */
-- (SEL)selectorForCommand:(NSScriptCommandDescription *)commandDescription;
+- (nullable SEL)selectorForCommand:(NSScriptCommandDescription *)commandDescription;
 
 /* Return the name of the declared type of the keyed attribute, to-one relationship, or to-many relationship.
 */
-- (NSString *)typeForKey:(NSString *)key;
+- (nullable NSString *)typeForKey:(NSString *)key;
 
 /* Return the class description for the keyed attribute, to-one relationship, or to-many relationship.
 */
-- (NSScriptClassDescription *)classDescriptionForKey:(NSString *)key;
+- (nullable NSScriptClassDescription *)classDescriptionForKey:(NSString *)key;
 
 /* Return the four character code that identifies the keyed attribute, to-one relationship, or to-many relationship in Apple events.
 */
@@ -72,11 +74,11 @@
 
 /* Given a four character code used to identify a property or element class in Apple events, return the key identifying the corresponding attribute, to-one relationship or to-many relationship.
 */
-- (NSString *)keyWithAppleEventCode:(FourCharCode)appleEventCode;
+- (nullable NSString *)keyWithAppleEventCode:(FourCharCode)appleEventCode;
 
 /* Return the value of the DefaultSubcontainerAttribute entry of the class declaration dictionary provided when the receiver was instantiated, or nil if there was no such entry.
 */
-@property (readonly, copy) NSString *defaultSubcontainerAttributeKey;
+@property (nullable, readonly, copy) NSString *defaultSubcontainerAttributeKey;
 
 /* Return YES if creation of objects for the relationship specified by the key, in containers of the class described by the receiver, requires an explicitly specified insertion location. Return NO otherwise. For example, NSCreateCommand uses this method to determine whether or not a specific Make command must have an at parameter.
 */
@@ -110,3 +112,5 @@
 @property (readonly, copy) NSString *className;
 
 @end
+
+NS_ASSUME_NONNULL_END

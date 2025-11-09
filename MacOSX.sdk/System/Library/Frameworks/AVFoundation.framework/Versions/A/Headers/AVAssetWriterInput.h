@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2014 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -15,7 +15,10 @@
 #import <CoreVideo/CVPixelBuffer.h>
 #import <CoreMedia/CMFormatDescription.h>
 
+@class AVMetadataItem;
 @class AVAssetWriterInputInternal;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class AVAssetWriterInput
@@ -35,6 +38,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @private
 	AVAssetWriterInputInternal	*_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetWriterInputWithMediaType:outputSettings:
@@ -57,7 +61,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this method to construct a new instance, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
-+ (AVAssetWriterInput *)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings;
++ (instancetype)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
 
 /*!
  @method assetWriterInputWithMediaType:outputSettings:sourceFormatHint:
@@ -78,7 +82,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-+ (AVAssetWriterInput *)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
++ (instancetype)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @method initWithMediaType:outputSettings:
@@ -101,7 +105,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
-- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings;
+- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
 
 /*!
  @method initWithMediaType:outputSettings:sourceFormatHint:
@@ -122,7 +126,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
+- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0) NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property mediaType
@@ -142,7 +146,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo.  A value of nil indicates that the receiver will pass through appended samples, doing no processing before they are written to the output file.
 */
-@property (nonatomic, readonly) NSDictionary *outputSettings;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *outputSettings;
 
 /*!
  @property sourceFormatHint
@@ -152,7 +156,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	AVAssetWriterInput may be able to use this hint to fill in missing output settings or perform more upfront validation.  To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended media data are of the specified format.
  */
-@property (nonatomic, readonly) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @property metadata
@@ -164,7 +168,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic, copy) NSArray *metadata;
+@property (nonatomic, copy) NSArray<AVMetadataItem *> *metadata;
 
 /*!
  @property readyForMoreMediaData
@@ -194,8 +198,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
     Clients appending media data to an input from a real-time source, such as an AVCaptureOutput, should set expectsMediaDataInRealTime to YES. This will ensure that readyForMoreMediaData is calculated appropriately for real-time usage.
  
-	It is an error to set this property to YES when the value for performsMultiPassEncodingIfSupported is YES.  It is also an error for an asset writer to contain an input with this property set to YES when any of its other inputs have a value of YES for performsMultiPassEncodingIfSupported.
-
+	For best results, do not set both this property and performsMultiPassEncodingIfSupported to YES.
+ 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
 @property (nonatomic) BOOL expectsMediaDataInRealTime;
@@ -269,7 +273,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	As of OS X 10.10 and iOS 8.0, this method can be used to add sample buffers that reference existing data in a file instead of containing media data to be appended to the file. This can be used to generate tracks that are not self-contained. In order to append such a sample reference to the track create a CMSampleBufferRef with a NULL dataBuffer and dataReady set to true and set the kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset attachments on the sample buffer. Further documentation on how to create such a "sample reference" sample buffer can be found in the description of the kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset attachment keys in the CMSampleBuffer documentation.
 
-	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.  It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
  */
 - (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 
@@ -302,19 +306,19 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic, copy) NSString *languageCode NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy, nullable) NSString *languageCode NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property extendedLanguageTag
  @abstract
-	Indicates the language tag to associate with the track corresponding to the receiver, as an RFC 4646 language tag; can be nil.
+	Indicates the language tag to associate with the track corresponding to the receiver, as an IETF BCP 47 (RFC 4646) language identifier; can be nil.
  
  @discussion
 	Extended language tags are normally set only when an ISO 639-2/T language code by itself is ambiguous, as in cases in which media data should be distinguished not only by language but also by the regional dialect in use or the writing system employed.
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.	
  */
-@property (nonatomic, copy) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -437,7 +441,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic, copy) NSURL *sampleReferenceBaseURL NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, copy, nullable) NSURL *sampleReferenceBaseURL NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -497,8 +501,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	The default value is NO, meaning that no additional analysis will occur and no segments will be re-encoded.  Not all asset writer input configurations (for example, inputs configured with certain media types or to use certain encoders) can benefit from performing multiple passes over the source media.  To determine whether the selected encoder can perform multiple passes, query the value of canPerformMultiplePasses after calling -startWriting.
  
-	It is an error to set this property to YES when the value for expectsMediaDataInRealTime is YES.  It is also an error for an asset writer to contain an input with this property set to YES when any of its other inputs have a value of YES for expectsMediaDataInRealTime.
- 
+	For best results, do not set both this property and expectsMediaDataInRealTime to YES.
+
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
 @property (nonatomic) BOOL performsMultiPassEncodingIfSupported NS_AVAILABLE(10_10, 8_0);
@@ -533,7 +537,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	This property is key-value observable.  Observers should not assume that they will be notified of changes on a specific thread.
  */
-@property (readonly) AVAssetWriterInputPassDescription *currentPassDescription NS_AVAILABLE(10_10, 8_0);
+@property (readonly, nullable) AVAssetWriterInputPassDescription *currentPassDescription NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method respondToEachPassDescriptionOnQueue:usingBlock:
@@ -594,6 +598,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @private
 	AVAssetWriterInputPassDescriptionInternal *_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @property sourceTimeRanges
@@ -603,7 +608,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @discussion
 	The value of this property is suitable for using as a parameter for -[AVAssetReaderOutput resetForReadingTimeRanges:].
  */
-@property (nonatomic, readonly) NSArray *sourceTimeRanges;
+@property (nonatomic, readonly) NSArray<NSValue *> *sourceTimeRanges;
 
 @end
 
@@ -624,6 +629,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @private
 	AVAssetWriterInputPixelBufferAdaptorInternal	*_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetWriterInputPixelBufferAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:
@@ -646,7 +652,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	It is an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with a sample buffer input that is already attached to another instance of AVAssetWriterInputPixelBufferAdaptor.
  */
-+ (instancetype)assetWriterInputPixelBufferAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(NSDictionary *)sourcePixelBufferAttributes;
++ (instancetype)assetWriterInputPixelBufferAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)sourcePixelBufferAttributes;
 
 /*!
  @method initWithAssetWriterInput:sourcePixelBufferAttributes:
@@ -669,7 +675,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	It is an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputPixelBufferAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
  */
-- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(NSDictionary *)sourcePixelBufferAttributes;
+- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)sourcePixelBufferAttributes NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property assetWriterInput
@@ -686,7 +692,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
  */
-@property (nonatomic, readonly) NSDictionary *sourcePixelBufferAttributes;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *sourcePixelBufferAttributes;
 
 /*!
  @property pixelBufferPool
@@ -700,7 +706,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	This property is key value observable.
  */
-@property (nonatomic, readonly) CVPixelBufferPoolRef pixelBufferPool;
+@property (nonatomic, readonly, nullable) CVPixelBufferPoolRef pixelBufferPool;
 
 /*!
  @method appendPixelBuffer:withPresentationTime:
@@ -727,7 +733,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
  	If you are working with high bit depth sources the following yuv pixel formats are recommended when encoding to ProRes: kCVPixelFormatType_4444AYpCbCr16, kCVPixelFormatType_422YpCbCr16, and kCVPixelFormatType_422YpCbCr10. When working in the RGB domain kCVPixelFormatType_64ARGB is recommended. Scaling and color matching are not currently supported when using AVAssetWriter with any of these high bit depth pixel formats. Please make sure that your track's output settings dictionary specifies the same width and height as the buffers you will be appending. Do not include AVVideoScalingModeKey or AVVideoColorPropertiesKey.
  
-	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.  It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
  */
 - (BOOL)appendPixelBuffer:(CVPixelBufferRef)pixelBuffer withPresentationTime:(CMTime)presentationTime;
 
@@ -747,6 +753,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface AVAssetWriterInputMetadataAdaptor : NSObject {
     AVAssetWriterInputMetadataAdaptorInternal	*_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetWriterInputMetadataAdaptorWithAssetWriterInput:
@@ -780,7 +787,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 	It is an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputMetadataAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
  */
-- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input;
+- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property assetWriterInput
@@ -804,8 +811,10 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  
 	The timing of the metadata items in the output asset will correspond to the timeRange of the AVTimedMetadataGroup, regardless of the values of the time and duration properties of the individual items.
  
-	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.  It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
  */
 - (BOOL)appendTimedMetadataGroup:(AVTimedMetadataGroup *)timedMetadataGroup;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,14 +1,17 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSControl.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 
-@class NSColor, NSMutableArray;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSColor;
 @protocol NSMatrixDelegate;
 
 /* Matrix Constants */
@@ -118,20 +121,20 @@ typedef struct __MFlags {
 
 - (instancetype)initWithFrame:(NSRect)frameRect;
 - (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode prototype:(NSCell *)aCell numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
-- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode cellClass:(Class)factoryId numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
+- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode cellClass:(nullable Class)factoryId numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
 
 
 @property (assign) Class cellClass;
-@property (copy) id /* NSCell * */ prototype;
+@property (nullable, copy) __kindof NSCell *prototype;
 - (NSCell *)makeCellAtRow:(NSInteger)row column:(NSInteger)col;
 @property NSMatrixMode mode;
 @property BOOL allowsEmptySelection;
 - (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
-@property (readonly, copy) NSArray *cells;
+@property (readonly, copy) NSArray<NSCell *> *cells;
 - (void)sortUsingSelector:(SEL)comparator;
-- (void)sortUsingFunction:(NSInteger (*)(id, id, void *))compare context:(void *)context;
-@property (readonly, strong) id selectedCell;
-@property (readonly, copy) NSArray *selectedCells;
+- (void)sortUsingFunction:(NSInteger (*)(id, id, void * __nullable))compare context:(nullable void *)context;
+@property (nullable, readonly, strong) __kindof NSCell *selectedCell;
+@property (readonly, copy) NSArray<__kindof NSCell *> *selectedCells;
 @property (readonly) NSInteger selectedRow;
 @property (readonly) NSInteger selectedColumn;
 @property (getter=isSelectionByRect) BOOL selectionByRect;
@@ -139,37 +142,37 @@ typedef struct __MFlags {
 - (void)deselectSelectedCell;
 - (void)deselectAllCells;
 - (void)selectCellAtRow:(NSInteger)row column:(NSInteger)col;
-- (void)selectAll:(id)sender;
+- (void)selectAll:(nullable id)sender;
 - (BOOL)selectCellWithTag:(NSInteger)anInt;
 @property NSSize cellSize;
 @property NSSize intercellSpacing;
 - (void)setScrollable:(BOOL)flag;
 @property (copy) NSColor *backgroundColor;
-@property (copy) NSColor *cellBackgroundColor;
+@property (nullable, copy) NSColor *cellBackgroundColor;
 @property BOOL drawsCellBackground;
 @property BOOL drawsBackground;
 - (void)setState:(NSInteger)value atRow:(NSInteger)row column:(NSInteger)col;
-- (void)getNumberOfRows:(NSInteger *)rowCount columns:(NSInteger *)colCount;
+- (void)getNumberOfRows:(nullable NSInteger *)rowCount columns:(nullable NSInteger *)colCount;
 @property (readonly) NSInteger numberOfRows;
 @property (readonly) NSInteger numberOfColumns;
-- (id)cellAtRow:(NSInteger)row column:(NSInteger)col;
+- (nullable __kindof NSCell *)cellAtRow:(NSInteger)row column:(NSInteger)col;
 - (NSRect)cellFrameAtRow:(NSInteger)row column:(NSInteger)col;
 - (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col ofCell:(NSCell *)aCell;
 - (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col forPoint:(NSPoint)aPoint;
 - (void)renewRows:(NSInteger)newRows columns:(NSInteger)newCols;
 - (void)putCell:(NSCell *)newCell atRow:(NSInteger)row column:(NSInteger)col;
 - (void)addRow;
-- (void)addRowWithCells:(NSArray *)newCells;
+- (void)addRowWithCells:(NSArray<NSCell *> *)newCells;
 - (void)insertRow:(NSInteger)row;
-- (void)insertRow:(NSInteger)row withCells:(NSArray *)newCells;
+- (void)insertRow:(NSInteger)row withCells:(NSArray<NSCell *> *)newCells;
 - (void)removeRow:(NSInteger)row;
 - (void)addColumn;
-- (void)addColumnWithCells:(NSArray *)newCells;
+- (void)addColumnWithCells:(NSArray<NSCell *> *)newCells;
 - (void)insertColumn:(NSInteger)column;
-- (void)insertColumn:(NSInteger)column withCells:(NSArray *)newCells;
+- (void)insertColumn:(NSInteger)column withCells:(NSArray<NSCell *> *)newCells;
 - (void)removeColumn:(NSInteger)col;
-- (id)cellWithTag:(NSInteger)anInt;
-@property SEL doubleAction;
+- (nullable __kindof NSCell *)cellWithTag:(NSInteger)anInt;
+@property (nullable) SEL doubleAction;
 @property BOOL autosizesCells;
 - (void)sizeToCells;
 - (void)setValidateSize:(BOOL)flag;
@@ -183,18 +186,18 @@ typedef struct __MFlags {
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (BOOL)sendAction;
 - (void)sendDoubleAction;
-@property (assign) id<NSMatrixDelegate> delegate;
+@property (nullable, assign) id<NSMatrixDelegate> delegate;
 - (BOOL)textShouldBeginEditing:(NSText *)textObject;
 - (BOOL)textShouldEndEditing:(NSText *)textObject;
 - (void)textDidBeginEditing:(NSNotification *)notification;
 - (void)textDidEndEditing:(NSNotification *)notification;
 - (void)textDidChange:(NSNotification *)notification;
-- (void)selectText:(id)sender;
-- (id)selectTextAtRow:(NSInteger)row column:(NSInteger)col;
-- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
+- (void)selectText:(nullable id)sender;
+- (nullable __kindof NSCell *)selectTextAtRow:(NSInteger)row column:(NSInteger)col;
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)theEvent;
 - (void)resetCursorRects;
-- (void)setToolTip:(NSString *)toolTipString forCell:(NSCell *)cell;
-- (NSString *)toolTipForCell:(NSCell *)cell;
+- (void)setToolTip:(nullable NSString *)toolTipString forCell:(NSCell *)cell;
+- (nullable NSString *)toolTipForCell:(NSCell *)cell;
 
 /* Determine whether the receiver autorecalculates its cellSize. The default is NO. If set to YES, then the receiver will adjust its cellSize to accommodate its largest cell. Changing the cellSize does not directly affect the frame of the receiver; however it does affect the intrinsic content size, which may cause the receiver to resize under autolayout. 
  
@@ -206,8 +209,10 @@ typedef struct __MFlags {
 
 @interface NSMatrix(NSKeyboardUI)
 @property BOOL tabKeyTraversesCells;
-@property (assign) id /* NSCell * */ keyCell;
+@property (nullable, assign) __kindof NSCell *keyCell;
 @end
 
 @protocol NSMatrixDelegate <NSControlTextEditingDelegate> @end
+
+NS_ASSUME_NONNULL_END
 

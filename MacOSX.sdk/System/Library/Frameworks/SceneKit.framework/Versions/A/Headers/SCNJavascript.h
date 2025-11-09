@@ -1,11 +1,13 @@
 //
 //  SCNJavascript.h
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 #if JSC_OBJC_API_ENABLED
 
@@ -37,10 +39,10 @@
  
  class name           constructor                                                  Objective-C class
  SCNColor             SCNColor.color(r,g,b,a)                                      NSColor
- SCNTimingFunction    SCNTimingFunction.functionWithName(name)                     CATimingFunction
- SCNBasicAnimation    SCNBasicAnimation.basicAnimationWithKeyPath(aPath)           CABasicAnimation
- SCNAnimationGroup    SCNAnimationGroup.animationGroup()                           CAAnimationGroup
- SCNKeyframeAnimation SCNKeyframeAnimation.keyframeAnimationWithKeyPath(aPath)     CAKeyframeAnimation
+ CATimingFunction     CATimingFunction.functionWithName(name)                      CATimingFunction
+ CABasicAnimation     CABasicAnimation.animationWithKeyPath(aPath)                 CABasicAnimation
+ CAAnimationGroup     new CAAnimationGroup()                                       CAAnimationGroup
+ CAKeyframeAnimation  CAKeyframeAnimation.animationWithKeyPath(aPath)              CAKeyframeAnimation
  SCNImage             SCNImage.imageWithURL(aURL)                                  NSImage / UIImage
                       SCNImage.imageWithPath(aPath)                                  
  
@@ -51,6 +53,8 @@
  aNode.transform = {m11:1, m12:0, m13:0 ... m44:1};
  */
 
-SCN_EXTERN void SCNExportJavaScriptModule(JSContext *context);
+SCN_EXTERN void SCNExportJavaScriptModule(JSContext *context) NS_AVAILABLE(10_10, 8_0);
 
 #endif
+
+NS_ASSUME_NONNULL_END

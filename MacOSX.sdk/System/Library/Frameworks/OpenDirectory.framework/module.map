@@ -1,4 +1,4 @@
-framework module OpenDirectory [extern_c] [system] {
+framework module OpenDirectory [extern_c] {
   umbrella header "OpenDirectory.h"
 
   export *

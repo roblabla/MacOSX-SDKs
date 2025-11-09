@@ -33,6 +33,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 #pragma pack(push, 2)
 
@@ -113,7 +114,7 @@ struct CFHostClientContext {
    * An arbitrary pointer to client-defined data, which can be
    * associated with the host and is passed to the callbacks.
    */
-  void *			  info;
+  void *	__nullable		  info;
 
   /*
    * The callback used to add a retain for the host on the info pointer
@@ -122,13 +123,13 @@ struct CFHostClientContext {
    * pointer to store in the host, almost always just the pointer
    * passed as the parameter.
    */
-  CFAllocatorRetainCallBack  retain;
+  CFAllocatorRetainCallBack  __nullable retain;
 
   /*
    * The callback used to remove a retain previously added for the host
    * on the info pointer.
    */
-  CFAllocatorReleaseCallBack  release;
+  CFAllocatorReleaseCallBack  __nullable release;
 
   /*
    * The callback used to create a descriptive string representation of
@@ -162,7 +163,7 @@ typedef struct CFHostClientContext	  CFHostClientContext;
  *	  Client's info reference which was passed into the client
  *	  context.
  */
-typedef CALLBACK_API_C( void , CFHostClientCallBack )(CFHostRef theHost, CFHostInfoType typeInfo, const CFStreamError *error, void *info);
+typedef CALLBACK_API_C( void , CFHostClientCallBack )(CFHostRef theHost, CFHostInfoType typeInfo, const CFStreamError * __nullable error, void * __nullable info);
 
 
 /*
@@ -206,7 +207,7 @@ CFHostGetTypeID(void) CF_AVAILABLE(10_3, 2_0);
  *  
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateWithName(CFAllocatorRef allocator, CFStringRef hostname) CF_AVAILABLE(10_3, 2_0);
+CFHostCreateWithName(CFAllocatorRef __nullable allocator, CFStringRef hostname) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -236,7 +237,7 @@ CFHostCreateWithName(CFAllocatorRef allocator, CFStringRef hostname) CF_AVAILABL
  *  
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateWithAddress(CFAllocatorRef allocator, CFDataRef addr) CF_AVAILABLE(10_3, 2_0);
+CFHostCreateWithAddress(CFAllocatorRef __nullable allocator, CFDataRef addr) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -267,7 +268,7 @@ CFHostCreateWithAddress(CFAllocatorRef allocator, CFDataRef addr) CF_AVAILABLE(1
  *  
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateCopy(CFAllocatorRef alloc, CFHostRef host) CF_AVAILABLE(10_3, 2_0);
+CFHostCreateCopy(CFAllocatorRef __nullable alloc, CFHostRef host) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -305,7 +306,7 @@ CFHostCreateCopy(CFAllocatorRef alloc, CFHostRef host) CF_AVAILABLE(10_3, 2_0);
  *  
  */
 CFN_EXPORT Boolean 
-CFHostStartInfoResolution(CFHostRef theHost, CFHostInfoType info, CFStreamError *error) CF_AVAILABLE(10_3, 2_0);
+CFHostStartInfoResolution(CFHostRef theHost, CFHostInfoType info, CFStreamError * __nullable error) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -337,8 +338,8 @@ CFHostStartInfoResolution(CFHostRef theHost, CFHostInfoType info, CFStreamError 
  *	  called), otherwise TRUE will be returned.
  *  
  */
-CFN_EXPORT CFArrayRef 
-CFHostGetAddressing(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT __nullable CFArrayRef
+CFHostGetAddressing(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -369,8 +370,8 @@ CFHostGetAddressing(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10
  *	  called), otherwise TRUE will be returned. Can be NULL.
  *  
  */
-CFN_EXPORT CFArrayRef 
-CFHostGetNames(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT __nullable CFArrayRef
+CFHostGetNames(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -405,8 +406,8 @@ CFHostGetNames(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10_3, 2
  *	  called), otherwise TRUE will be returned. Can be NULL.
  *  
  */
-CFN_EXPORT CFDataRef 
-CFHostGetReachability(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT __nullable CFDataRef
+CFHostGetReachability(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -469,7 +470,7 @@ CFHostCancelInfoResolution(CFHostRef theHost, CFHostInfoType info) CF_AVAILABLE(
  *  
  */
 CFN_EXPORT Boolean 
-CFHostSetClient(CFHostRef theHost, CFHostClientCallBack clientCB, CFHostClientContext *clientContext) CF_AVAILABLE(10_3, 2_0);
+CFHostSetClient(CFHostRef theHost, CFHostClientCallBack __nullable clientCB, CFHostClientContext * __nullable clientContext) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -539,6 +540,7 @@ CFHostUnscheduleFromRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef
 
 #pragma pack(pop)
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFHOST__ */

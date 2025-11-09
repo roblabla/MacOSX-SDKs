@@ -1,16 +1,21 @@
 //
 //  SCNGeometry.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <SceneKit/SceneKitTypes.h>
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNBoundingVolume.h>
 #import <SceneKit/SCNShadable.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class SCNGeometrySource;
 @class SCNGeometryElement;
+@class SCNLevelOfDetail;
+@protocol MTLBuffer;
 
 typedef NS_ENUM(NSInteger, SCNGeometryPrimitiveType) {
 	SCNGeometryPrimitiveTypeTriangles     = 0,
@@ -23,49 +28,45 @@ SCN_EXTERN NSString * const SCNGeometrySourceSemanticVertex;
 SCN_EXTERN NSString * const SCNGeometrySourceSemanticNormal;
 SCN_EXTERN NSString * const SCNGeometrySourceSemanticColor;
 SCN_EXTERN NSString * const SCNGeometrySourceSemanticTexcoord;
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticVertexCrease SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticEdgeCrease SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneWeights SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneIndices SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticVertexCrease NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticEdgeCrease NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneWeights NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneIndices NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @class SCNGeometry
  @abstract SCNGeometry is an abstract class that represents the geometry that can be attached to a SCNNode. 
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNGeometry : NSObject <SCNAnimatable, SCNBoundingVolume, SCNShadable, NSCopying, NSSecureCoding>
-{
-@private
-	id _geometryReserved;
-}
 
 /*!
  @method geometry
  @abstract Creates and returns an empty geometry object.
  @discussion An empty geometry may be used as the lowest level of detail of a geometry.
  */
-+ (instancetype)geometry SCENEKIT_AVAILABLE(10_9, 8_0);
++ (instancetype)geometry NS_AVAILABLE(10_9, 8_0);
 
-/*! 
+/*!
  @property name
  @abstract Determines the name of the receiver.
  */
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy, nullable) NSString *name;
 
 /*! 
  @property materials
  @abstract Specifies the receiver's materials array.
  @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
  */
-@property(nonatomic, copy) NSArray *materials;
+@property(nonatomic, copy) NSArray<SCNMaterial *> *materials;
 
 /*!
  @property firstMaterial
  @abstract Determines the first material of the geometry. Returns nil if the geometry has no material.
  @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
  */
-@property(nonatomic, retain) SCNMaterial *firstMaterial;
+@property(nonatomic, retain, nullable) SCNMaterial *firstMaterial;
 
 /*! 
  @method insertMaterial:atIndex:
@@ -95,7 +96,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Return the first material from the materials array of the receiver with the specified name.
  @param name The name of the material to retrieve.
  */
-- (SCNMaterial *)materialWithName:(NSString *)name;
+- (nullable SCNMaterial *)materialWithName:(NSString *)name;
 
 /*! 
  @method geometryWithSources:elements:
@@ -104,7 +105,13 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param elements An array of geometry elements. The sort order in the array determines the mapping between materials and geometry elements.
  @discussion A geometry is made of geometry sources (at least vertices) and at least one geometry element. Multiple sources for texture coordinates are accepted. In that case the mappingChannel is implicitly set based on the order of the texture sources, starting at index 0.
 */
-+ (instancetype)geometryWithSources:(NSArray *)sources elements:(NSArray *)elements;
++ (instancetype)geometryWithSources:(NSArray<SCNGeometrySource *> *)sources elements:(NSArray<SCNGeometryElement *> *)elements;
+
+/*!
+ @property geometrySources
+ @abstract The array of geometry sources of the receiver.
+ */
+@property(nonatomic, readonly) NSArray<SCNGeometrySource *> *geometrySources NS_AVAILABLE(10_10, 8_0);
 
 /*! 
  @method geometrySourcesForSemantic:
@@ -112,7 +119,13 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param semantic The semantic of the geometry sources that should be retrieved.
  @discussion Returns nil if no geometry source is found for the given semantic. May return more than one source, typically for multiple texture coordinate sources.
  */
-- (NSArray *)geometrySourcesForSemantic:(NSString *)semantic;
+- (NSArray<SCNGeometrySource *> *)geometrySourcesForSemantic:(NSString *)semantic;
+
+/*!
+ @property geometryElements
+ @abstract The array of geometry elements of the receiver.
+ */
+@property(nonatomic, readonly) NSArray<SCNGeometryElement *> *geometryElements NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property geometryElementCount
@@ -130,30 +143,29 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 /*!
  @property levelsOfDetail
  @abstract Determines the receiver's levels of detail. Defaults to nil.
- @discussion levelsOfDetail is an array of SCNLevelOfDetail instance.
  */
-@property(nonatomic, copy) NSArray *levelsOfDetail SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic, copy, nullable) NSArray<SCNLevelOfDetail *> *levelsOfDetail NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @property subdivisionLevel
  @abstract Specifies the subdivision level of the receiver. Defaults to 0.
  @discussion A subdivision level of 0 means no subdivision.
  */
-@property(nonatomic) NSUInteger subdivisionLevel SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) NSUInteger subdivisionLevel NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property edgeCreasesElement
  @abstract Specifies the edges creases that control the subdivision. Defaults to nil.
  @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
  */
-@property(nonatomic, retain) SCNGeometryElement *edgeCreasesElement SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNGeometryElement *edgeCreasesElement NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property edgeCreasesSource
  @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil.
  @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
  */
-@property(nonatomic, retain) SCNGeometrySource *edgeCreasesSource SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic, retain, nullable) SCNGeometrySource *edgeCreasesSource NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -163,12 +175,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract A geometry source contains geometry data for a specific semantic. The data format is described by properties.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNGeometrySource : NSObject <NSSecureCoding>
-{
-@private
-	id _reserved;
-}
 
 /*! 
  @method geometrySourceWithData:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:
@@ -210,6 +218,41 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @discussion Input texture coordinates are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
  */
 + (instancetype)geometrySourceWithTextureCoordinates:(const CGPoint *)texcoord count:(NSInteger)count;
+
+#if SCN_ENABLE_METAL
+/*!
+ @method geometrySourceWithBuffer:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:
+ @abstract Creates and returns a geometry source from the given data and parameters.
+ @param buffer A metal buffer.
+ @param vertexFormat The vertex format.
+ @param semantic The semantic of the geometry source.
+ @param vertexCount The number of vertex.
+ @param offset The offset from the beginning of the data. In bytes.
+ @param stride The number of bytes from a vector to the next one in the data.
+ @discussion Attempting to modify the metal buffer outside the SCNSceneRenderer delegate callbacks is undefined.
+ The typical usage it to modify the MTLBuffer within the willRenderScene callback, using a compute kernel or a vertex function in the user own command buffer. So something like:
+
+ - (void)renderer:(id <SCNSceneRenderer>)aRenderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time
+ {
+     // ask for a new command buffer
+     id<MTLCommandBuffer> myCommandBuffer = [aRenderer.commandQueue commandBuffer];
+
+     // get a compute command encoder
+     id <MTLComputeCommandEncoder> myComputeCommandEncoder = [myCommandBuffer computeCommandEncoder];
+
+     // configure the compute command encoder's pipeline state, buffer inputs etc...
+     //...
+
+     // dispatch the
+     [myComputeCommandEncoder dispatchThreadgroups:numberOfWorkingGroups threadsPerThreadgroup:numberOfThreads];
+     [myComputeCommandEncoder endEncoding];
+
+     [myCommandBuffer commit];
+ }
+ 
+ */
++ (instancetype)geometrySourceWithBuffer:(id <MTLBuffer>)mtlBuffer vertexFormat:(MTLVertexFormat)vertexFormat semantic:(NSString *)semantic vertexCount:(NSInteger)vertexCount dataOffset:(NSInteger)offset dataStride:(NSInteger)stride NS_AVAILABLE(10_11, 9_0);
+#endif
 
 /*! 
  @property data
@@ -267,22 +310,18 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract A geometry element describes how vertices from a geometry source are connected together.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNGeometryElement : NSObject <NSSecureCoding>
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex:
  @abstract Creates and returns a geometry element from the given data and data format info.
- @param data The data that contains element indexes.
+ @param data The data that contains element indexes. You can pass nil to use an implicit vertex ordering (0,1,2...).
  @param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration.
  @param primitiveCount The number of primitives in the data.
  @param bytesPerIndex The number of bytes that represent a single index value in the data.
  */
-+ (instancetype)geometryElementWithData:(NSData *)data primitiveType:(SCNGeometryPrimitiveType)primitiveType primitiveCount:(NSInteger)primitiveCount bytesPerIndex:(NSInteger)bytesPerIndex;
++ (instancetype)geometryElementWithData:(nullable NSData *)data primitiveType:(SCNGeometryPrimitiveType)primitiveType primitiveCount:(NSInteger)primitiveCount bytesPerIndex:(NSInteger)bytesPerIndex;
 
 /*!
  @property data
@@ -310,4 +349,4 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 
 @end
 
-
+NS_ASSUME_NONNULL_END

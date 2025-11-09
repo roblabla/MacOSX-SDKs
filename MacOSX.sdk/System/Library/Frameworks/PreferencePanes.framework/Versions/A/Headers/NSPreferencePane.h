@@ -8,21 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
-typedef enum NSPreferencePaneUnselectReply
+typedef NS_ENUM(NSUInteger, NSPreferencePaneUnselectReply)
 {
     NSUnselectCancel = 0,
     NSUnselectNow = 1,
     NSUnselectLater = 2
-} NSPreferencePaneUnselectReply;
+};
 
 
-extern NSString * const NSPreferencePaneDoUnselectNotification;
-extern NSString * const	NSPreferencePaneCancelUnselectNotification;
+extern NSString * __nonnull const 	NSPreferencePaneDoUnselectNotification;
+extern NSString * __nonnull const 	NSPreferencePaneCancelUnselectNotification;
 
 // Help Menu support
-APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuInfoPListKey;
-APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuTitleKey;
-APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
+APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuInfoPListKey;
+APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuTitleKey;
+APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuAnchorKey;
 
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7
@@ -46,26 +46,25 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 		//  The loadMainView method will remove the content view from this
 		//  window and set the main view of the preference pane to be the
 		//  content view.  The window is then disposed.
-		IBOutlet NSWindow *_window;
+		IBOutlet NSWindow * __nullable	_window;
 	
 		//  Connect these outlets to the initial, first and last keyboard
 		//  focus chain views.  These views MUST be subviews of the main view.
-		IBOutlet NSView *_initialKeyView;
-		IBOutlet NSView *_firstKeyView;
-		IBOutlet NSView *_lastKeyView;
+		IBOutlet NSView * __nullable	_initialKeyView;
+		IBOutlet NSView * __nullable	_firstKeyView;
+		IBOutlet NSView * __nullable	_lastKeyView;
 	
-		NSView *_mainView;
-		
-		NSBundle *_bundle;
+		NSView * __nonnull		_mainView;
+		NSBundle * __nonnull	_bundle;
 	
-		id _reserved1;
-		id _reserved2;
-		id _reserved3;
+		__nullable id _reserved1;
+		__nullable id _reserved2;
+		__nullable id _reserved3;
 }
 
-- (instancetype) initWithBundle:(NSBundle *)bundle;
+- (nonnull instancetype) initWithBundle:(nonnull NSBundle *)bundle;
 
-@property (readonly, strong) NSBundle *bundle;
+@property (readonly, strong, nonnull) NSBundle *bundle;
 
 //
 //  loadMainView loads the main nib file and invokes assignMainView to
@@ -80,7 +79,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  and setLastKeyView to set the initial, first and last keyboard focus views
 //  respectively.
 //
-- (NSView *) loadMainView;
+- (nonnull NSView *) loadMainView;
 
 //
 //  mainViewDidLoad is invoked by the default implementation of loadMainView
@@ -100,7 +99,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //
 //  The value returned must NOT include the ".nib" extension.
 //
-@property (readonly, strong) NSString *mainNibName;
+@property (readonly, strong, nonnull) NSString *mainNibName;
 
 //
 //  assignMainView is invoked by the default implementation of loadMainView,
@@ -153,7 +152,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //
 //  Returns the main view of the preference pane.
 //
-@property (strong) NSView *mainView;
+@property (strong, nonnull) NSView *mainView;
 
 //
 //  Returns the view that should have the keyboard focus when the pane is selected.
@@ -163,7 +162,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  A subclass can override this method if it needs to determine the
 //  initial key view dynamically.
 //
-@property (strong) NSView *initialKeyView;
+@property (strong, nullable) NSView *initialKeyView;
 
 //
 //  Returns the view that is the first view in the keyboard focus chain.
@@ -173,7 +172,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  A subclass can override this method if it needs to determine the
 //  first key view dynamically.
 //
-@property (strong) NSView *firstKeyView;
+@property (strong, nullable) NSView *firstKeyView;
 
 //
 //  Returns the view that is the last view in the keyboard focus chain.
@@ -183,7 +182,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  A subclass can override this method if it needs to determine the
 //  last key view dynamically.
 //
-@property (strong) NSView *lastKeyView;
+@property (strong, nullable) NSView *lastKeyView;
 
 
 // Default = YES
@@ -210,6 +209,6 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //		<key>anchor</key>	- anchor reference for AHLookupAnchor as string
 //	</dict>
 //
-- (void) updateHelpMenuWithArray:(NSArray *)inArrayOfMenuItems;
+- (void) updateHelpMenuWithArray:(nullable NSArray<NSDictionary<NSString *, NSString *> *> *)inArrayOfMenuItems;
 @end
 

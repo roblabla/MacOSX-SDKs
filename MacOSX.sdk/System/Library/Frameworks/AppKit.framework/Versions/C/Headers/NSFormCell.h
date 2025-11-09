@@ -1,11 +1,13 @@
 /*
 	NSFormCell.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSFormCell : NSActionCell
 {
@@ -18,7 +20,7 @@
 #endif
 }
 
-- (instancetype)initTextCell:(NSString *)aString;
+- (instancetype)initTextCell:(nullable NSString *)aString;
 
 - (CGFloat)titleWidth:(NSSize)aSize;
 @property CGFloat titleWidth;
@@ -27,8 +29,8 @@
 @property NSTextAlignment titleAlignment;
 @property (getter=isOpaque, readonly) BOOL opaque;
 
-@property (copy) NSString *placeholderString;
-@property (copy) NSAttributedString *placeholderAttributedString;
+@property (nullable, copy) NSString *placeholderString;
+@property (nullable, copy) NSAttributedString *placeholderAttributedString;
 
 @property NSWritingDirection titleBaseWritingDirection;
 
@@ -46,9 +48,11 @@
 @interface NSFormCell(NSKeyboardUI)
 /* Deprecated in 10.8 and higher. Use setTitle: instead.
  */
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+- (void)setTitleWithMnemonic:(null_unspecified NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
 @end
 
 @interface NSFormCell(NSFormCellAttributedStringMethods)
 @property (copy) NSAttributedString *attributedTitle;
 @end
+
+NS_ASSUME_NONNULL_END

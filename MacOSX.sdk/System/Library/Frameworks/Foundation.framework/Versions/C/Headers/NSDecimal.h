@@ -1,11 +1,13 @@
 /*	NSDecimal.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 #include <limits.h>
 #import <Foundation/NSObjCRuntime.h>
 
 @class NSDictionary;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /***************	Type definitions		***********/
 
@@ -82,5 +84,6 @@ FOUNDATION_EXPORT NSCalculationError NSDecimalPower(NSDecimal *result, const NSD
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalMultiplyByPowerOf10(NSDecimal *result, const NSDecimal *number, short power, NSRoundingMode roundingMode);
 
-FOUNDATION_EXPORT NSString *NSDecimalString(const NSDecimal *dcm, id locale);
+FOUNDATION_EXPORT NSString *NSDecimalString(const NSDecimal *dcm, id __nullable locale);
 
+NS_ASSUME_NONNULL_END

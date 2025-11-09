@@ -1,15 +1,19 @@
 /*
 	NSDocument.h
 	Application Kit
-	Copyright (c) 1997-2014, Apple Inc.
+	Copyright (c) 1997-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSUserInterfaceValidation.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSFilePresenter.h>
 
-@class NSArray, NSData, NSDate, NSDictionary, NSError, NSFileWrapper, NSMenuItem, NSPageLayout, NSPrintInfo, NSPrintOperation, NSSavePanel, NSUndoManager, NSURL, NSView, NSWindow, NSWindowController;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSData, NSDate, NSError, NSFileWrapper, NSMenuItem, NSPageLayout, NSPrintInfo, NSPrintOperation, NSSavePanel, NSUndoManager, NSURL, NSView, NSWindow, NSWindowController;
 
 typedef NS_ENUM(NSUInteger, NSDocumentChangeType) {
 
@@ -114,7 +118,7 @@ You can override this method to perform initialization that must be done both wh
 
 You can override this method to perform initialization that must be done when creating new documents but should not be done when opening existing documents. Your override should typically invoke super, or at least it must invoke -init, NSDocument's designated initializer, to initialize NSDocument's private instance variables.
 */
-- (instancetype)initWithType:(NSString *)typeName error:(NSError **)outError;
+- (nullable instancetype)initWithType:(NSString *)typeName error:(NSError **)outError;
 
 #pragma mark *** Opening ***
 
@@ -126,7 +130,7 @@ You can override this method to perform initialization that must be done when cr
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self initWithContentsOfFile:url ofType:typeName] if -initWithContentsOfFile:ofType: is overridden and the URL uses the "file:" scheme. It still invokes [self setFileModificationDate:theModificationDate] in this situation.
 */
-- (instancetype)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError;
 
 #pragma mark *** Reopening after Autosaving ***
 
@@ -136,7 +140,7 @@ To ease the adoption of the autosaving feature introduced in Mac OS 10.4, the de
 
 urlOrNil will be nil if the initializing is being done as part of the reopening of an autosaved document when the autosaved document had never been saved in the first place.
 */
-- (instancetype)initForURL:(NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL ofType:(NSString *)typeName error:(NSError **)outError;
+- (nullable instancetype)initForURL:(nullable NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL ofType:(NSString *)typeName error:(NSError **)outError;
 
 #pragma mark *** Attributes Applicable to Every Kind of Document ***
 
@@ -145,7 +149,7 @@ urlOrNil will be nil if the initializing is being done as part of the reopening 
 
 /* The name of the document's format. The set method isn't for _changing_ the document's format, it's just for initially recording the document's format during opening or saving.
 */
-@property (copy) NSString *fileType;
+@property (nullable, copy) NSString *fileType;
 
 /* The location of the document's on-disk representation. The set method doesn't actually rename the document, it's just for recording the document's location during initial opening or saving. The default implementation of -setFileURL: just records the URL so that the default implementation of -fileURL can return it. The default implementation of -fileURL returns whatever was stored by a previous invocation of the default implementation of -setFileURL:.
 
@@ -153,11 +157,11 @@ Starting in Mac OS 10.7 the default implementations of these methods are thread 
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of -setFileURL: instead invokes [self setFileName:[url path]] if -setFileName: is overridden and the URL is nil or uses the "file:" scheme. Likewise, the default implementation of -fileURL instead invokes -[self fileName] and returns the result as a URL if -fileName is overridden.
 */
-@property (copy) NSURL *fileURL;
+@property (nullable, copy) NSURL *fileURL;
 
 /* The last known modification date of the document's on-disk representation.
 */
-@property (copy) NSDate *fileModificationDate;
+@property (nullable, copy) NSDate *fileModificationDate;
 
 /* Whether the document is a draft that the user has not expressed an interest in keeping around. A save panel will be presented when the user closes a draft document. Only documents with non-nil values for [self fileURL] should be considered drafts.
 */
@@ -232,7 +236,7 @@ The distinction between entire activities and the file accessing part of activit
 
 If +autosavesInPlace returns YES and +preservesVersions returns NO, this method throws an exception.
 */
-- (IBAction)revertDocumentToSaved:(id)sender;
+- (IBAction)revertDocumentToSaved:(nullable id)sender;
 
 /* Discard all unsaved document modifications and replace the document's contents by reading a file or file package located by a URL, of a specified type, and return YES if successful. If not successful, return NO after setting *outError to an NSError that encapsulates the reason why the document could not be reverted. The default implementation of this method invokes [self readFromURL:url ofType:typeName error:outError], [self setFileModificationDate:theModificationDate], [self updateChangeCount:NSChangeCleared], and, if the document has an undo manager, [[self undoManager] removeAllActions]. It also deletes autosaved contents files when they have become obsolete.
 
@@ -278,13 +282,13 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self fileWrapperRepresentationOfType:typeName] if -fileWrapperRepresentationOfType: is overridden.
 */
-- (NSFileWrapper *)fileWrapperOfType:(NSString *)typeName error:(NSError **)outError;
+- (nullable NSFileWrapper *)fileWrapperOfType:(NSString *)typeName error:(NSError **)outError;
 
 /* Create and return a data object that contains the contents of this document, formatted to a specified type, or return nil after setting *outError to an NSError that encapsulates the reason why the data object could not be created. The default implementation of this method throws an exception because at least one of these three writing methods, or -writeToURL:ofType:saveOperation:originalContentsURL:error:, must be overridden.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self dataRepresentationOfType:typeName] if -dataRepresentationOfType: is overridden.
 */
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError;
+- (nullable NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError;
 
 /* If -saveToURL:ofType:forSaveOperation:completionHandler: is writing on a non-main thread because -canAsynchronouslyWriteToURL:ofType:forSaveOperation: has returned YES, but is still blocking the main thread, unblock the main thread. Otherwise, do nothing. For example, the default implementation of -fileWrapperOfType:error: invokes this when it has created the NSFileWrapper to return. Assuming that the NSFileWrapper will not be mutated by subsequent user actions, it is effectively a "snapshot" of the document's contents, and once it is created it is safe to resume handling user events on the main thread, even though some of those user events might change the document's contents before the NSFileWrapper has been safely written. You can invoke this method to make asynchronous saving actually asynchronous if you've overridden -writeSafelyToURL:ofType:forSaveOperation:error:, -writeToURL:forSaveOperation:originalContentsURL:error:, or -writeToURL:ofType:error: in such a way that the invocation of this method done by -writeToURL:ofType:error:'s default implementation won't happen during writing.
 */
@@ -316,7 +320,7 @@ This method is responsible for doing document writing in a way that minimizes th
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self writeToFile:[url path] ofType:typeName originalFile:[absoluteOriginalContentsURL path] saveOperation:aSaveOperation] if -writeToFile:ofType:originalFile:saveOperation: is overridden and both URLs use the "file:" scheme. The save operation used in this case will never be one of the autosaving ones; NSSaveToOperation will be used instead.
 */
-- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
+- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(nullable NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
 
 /* Given that a file is being saved, return the attributes that should be written to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why attributes could not be returned. The set of valid file attributes is a subset of those understood by the NSFileManager class. The default implementation of this method returns an empty dictionary for an NSSaveOperation or NSAutosaveInPlaceOperation, or a dictionary with an appropriate NSFileExtensionHidden entry for any other kind of save operation. You can override this method to customize the attributes that are written to document files.
 
@@ -326,7 +330,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 The default implementation of -[NSDocument writeSafelyToURL:ofType:forSaveOperation:error:] automatically copies important attributes like file permissions, creation date, and Finder info from the old on-disk version of a document to the new one during an NSSaveOperation or NSAutosaveInPlaceOperation. This method is meant to be used just for attributes that need to be written for the first time, for NSSaveAsOperations, NSSaveToOperations, and NSAutosaveAsOperations. Actually, url and absoluteOriginalContentsURL are passed in just for completeness; NSDocument's default implementation for instance doesn't even need to use them.
 */
-- (NSDictionary *)fileAttributesToWriteToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
+- (nullable NSDictionary<NSString *, id> *)fileAttributesToWriteToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(nullable NSURL *)absoluteOriginalContentsURL error:(NSError **)outError;
 
 /* Return YES if the old on-disk version of a document that is being overwritten should be preserved during an NSSaveOperation, NO otherwise. The default implementation of this method returns NO. For applications that return YES from +preservesVersions, this method has no effect.
 */
@@ -340,21 +344,21 @@ Implementations of -writeSafelyToURL:ofType:forSaveOperation:error: must check t
 
 The default implementation of this method returns a non-nil value based off the value of [self fileURL] only if the document's file needs to be preserved prior to saving, or if +preservesVersions returns NO. Otherwise, it returns nil.
 */
-@property (readonly, copy) NSURL *backupFileURL NS_AVAILABLE_MAC(10_8);
+@property (nullable, readonly, copy) NSURL *backupFileURL NS_AVAILABLE_MAC(10_8);
 
 #pragma mark *** Saving ***
 
 /* The action of the File menu's Save item in a document-based application. The default implementation of this method merely invokes [self saveDocumentWithDelegate:nil didSaveSelector:NULL contextInfo:NULL].
 */
-- (IBAction)saveDocument:(id)sender;
+- (IBAction)saveDocument:(nullable id)sender;
 
 /* The action of the File menu's Save As... item in a document-based application. The default implementation of this method merely invokes [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:nil didSaveSelector:NULL contextInfo:NULL].
 */
-- (IBAction)saveDocumentAs:(id)sender;
+- (IBAction)saveDocumentAs:(nullable id)sender;
 
 /* The action of the File menu's Export... item in a document-based application (actually, the menu item goes by different names in different applications; check the Human Interface Guidelines). The default implementation of this method merely invokes [self runModalSavePanelForSaveOperation:NSSaveToOperation delegate:nil didSaveSelector:NULL contextInfo:NULL].
 */
-- (IBAction)saveDocumentTo:(id)sender;
+- (IBAction)saveDocumentTo:(nullable id)sender;
 
 /* If a save operation can be performed without further user intervention (at the very least, neither -fileURL nor -fileType return nil), then save the document. Otherwise, present a save panel to the user and then save the document if the user OKs the panel. When saving is completed or has been cancelled, send the message selected by didSaveSelector to the delegate, with the contextInfo as the last argument. The method selected by didSaveSelector must have the same signature as:
 
@@ -366,7 +370,7 @@ The default implementation of this method first makes sure that any editor regis
     3) The document's file or file package was deleted or trashed since it was opened or most recently saved.
 The list of conditions for which NSDocument checks is subject to change. Regardless, the default implementation of this method always invokes either -runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo: or -saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo: unless the user cancels one of the panels it presents.
 */
-- (void)saveDocumentWithDelegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
+- (void)saveDocumentWithDelegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo;
 
 /* Present a save panel to the user, then try to save the document if the user OKs the panel. When saving is completed, regardless of success or failure, or has been cancelled, send the message selected by didSaveSelector to the delegate, with the contextInfo as the last argument. The method selected by didSaveSelector must have the same signature as:
 
@@ -376,7 +380,7 @@ The default implementation of this method first makes sure that any editor regis
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self saveToFile:nil saveOperation:saveOperation delegate:delegate didSaveSelector:contextInfo:] if -saveToFile:saveOperation:delegate:didSaveSelector:contextInfo: is overridden, even if the user cancels the panel (because that's what 10.3 did).
 */
-- (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
+- (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo;
 
 /* Return YES if -runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo: should add NSDocument's standard file format accessory view to the save panel, NO otherwise. The default implementation of this method returns YES. You can override this method to prevent NSDocument from adding an accessory view to the save panel so that your application can add its own when -prepareSavePanel is invoked.
 */
@@ -392,7 +396,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* If a save panel has been presented by this document, and a choice of file type was presented in that panel, return the name of the file type that the user chose.
 */
-@property (readonly, copy) NSString *fileTypeFromLastRunSavePanel;
+@property (nullable, readonly, copy) NSString *fileTypeFromLastRunSavePanel;
 
 /* Save the contents of the document to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation. When saving is completed, regardless of success or failure, send the message selected by didSaveSelector to the delegate, with the contextInfo as the last argument. The method selected by didSaveSelector must have the same signature as:
 
@@ -400,7 +404,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes (except for autosave operations), then invokes [self saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:aCompletionHandler] and, if that completion handler is passed an NSError when it is invoked, presents the error to the user in a document-modal panel before messaging the delegate.
 */
-- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
+- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo;
 
 /* Save the contents of the document to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation, and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass a nil error. If not successful, pass an NSError that encapsulates the reason why the document could not be saved.
  
@@ -408,7 +412,7 @@ The default implementation of this method first makes sure that any editor regis
 
 For backward binary compatibility with Mac OS 10.6 and earlier, the default implementation of this method instead invokes [self saveToURL:url ofType:typeName forSaveOperation:saveOperation error:&anError] if that method is overridden and this one is not, and passes any error to the completion handler.
 */
-- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *errorOrNil))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError * __nullable errorOrNil))completionHandler NS_AVAILABLE_MAC(10_7);
 
 /* Return whether the receiver can concurrently write to a file or file package located by a URL, formatted for a specific type, for a specific kind of save operation. The default implementation of this method returns NO. You are strongly encouraged to override it and make it return YES, after making sure your overrides of -write... methods can be safely invoked on a non-main thread, and making sure that -unblockUserInteraction will be invoked at some appropriate time during writing.
 */
@@ -442,13 +446,13 @@ The default implementation of this method simply invokes [self autosaveWithImpli
 
 This method is only invoked by AppKit itself as a result of -scheduleAutosaving being invoked. It is not invoked for any of the purposes of autosaving introduced by Mac OS 10.7's new document model that is triggered by +autosavesInPlace returning YES.
 */
-- (void)autosaveDocumentWithDelegate:(id)delegate didAutosaveSelector:(SEL)didAutosaveSelector contextInfo:(void *)contextInfo;
+- (void)autosaveDocumentWithDelegate:(nullable id)delegate didAutosaveSelector:(nullable SEL)didAutosaveSelector contextInfo:(nullable void *)contextInfo;
 
 /* Autosave the document's contents at an appropriate location if it needs autosaving, and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass a nil error. If not successful, pass an NSError that encapsulates the reason why the document could not be autosaved. autosavingIsImplicitlyCancellable becomes what -autosavingIsImplicitlyCancellable returns while the autosaving is happening.
 
 The default implementation of this method invokes [self hasUnautosavedChanges] and, if that returns YES, figures out where the autosaved document contents should go and invokes [self saveToURL:autosavedDocumentContentsURL ofType:[self autosavingFileType] forSaveOperation:oneOfTheAutosaveOperations completionHandler:aCompletionHandler]. oneOfTheAutosaveOperations will be NSAutosaveAsOperation if the document has been changed with NSChangeDone and the current document should be turned into a draft, NSAutosaveInPlaceOperation if [[self class] autosavesInPlace] returns YES and [self fileURL] returns non-nil, or NSAutosaveElsewhereOperation otherwise. The check of [self fileURL] is because there's no such thing as autosaving "in place" when the document does not yet have a permanent place.
 */
-- (void)autosaveWithImplicitCancellability:(BOOL)autosavingIsImplicitlyCancellable completionHandler:(void (^)(NSError *errorOrNil))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)autosaveWithImplicitCancellability:(BOOL)autosavingIsImplicitlyCancellable completionHandler:(void (^)(NSError * __nullable errorOrNil))completionHandler NS_AVAILABLE_MAC(10_7);
 
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.7 autosaving in place, NO otherwise. The default implementation of this method returns NO. You can override it and return YES to declare your NSDocument subclass' ability to do Mac OS 10.7 autosaving in place. You should not invoke this method to find out whether autosaving in place is actually being done at any particular moment. You should instead use the NSSaveOperationType parameter passed to your overrides of -save... and -write... methods.
  
@@ -464,7 +468,7 @@ Returning NO from this method will disable version browsing and -revertDocumentT
 
 /* The action of the Browse Saved Versions menu item in a document-based application. The default implementation causes the document's main window, specified by [self windowForSheet], to enter the Versions browser.
 */
-- (IBAction)browseDocumentVersions:(id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)browseDocumentVersions:(nullable id)sender NS_AVAILABLE_MAC(10_8);
 
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.8 autosaving of drafts, NO otherwise. The default implementation of this method returns YES for applications linked on or after Mac OS 10.8. You can override it and return YES to declare your NSDocument subclass' ability to do Mac OS 10.8 autosaving of drafts. You can also override it and return NO to opt out of this behavior after linking with 10.8. You should not invoke this method to find out whether autosaving of a draft will be done. Instances of subclasses that return YES from this method should be ready to properly handle save operations with NSAutosaveAsOperation.
 
@@ -474,13 +478,13 @@ AppKit invokes this method at a variety of times. For example, when -updateChang
 
 /* Return the document type that should be used for an autosave operation. The default implementation just returns [self fileType].
 */
-@property (readonly, copy) NSString *autosavingFileType;
+@property (nullable, readonly, copy) NSString *autosavingFileType;
 
 /* The location of the most recently autosaved document contents. The default implementation of -setAutosavedContentsFileURL: records the URL and notifies the shared document controller that this document should be autoreopened if the application is quit or crashes before the document is saved. The default implementation of -autosavedContentsFileURL just returns whatever was stored by a previous invocation of the default implementation of -setAutosavedContentsFileURL:.
 
 Starting in Mac OS 10.7 the default implementations of these methods are thread safe enough that -setAutosavedContentsFileURL: being invoked on the main thread while -autosavedContentsFileURL is being invoked on a different thread won't cause a crash. If you override one of these methods you must maintain that thread safety because AppKit itself may invoke -autosavedContentsFileURL on a background thread. (It's still not a good idea to invoke -setAutosavedContentsFileURL: on a non-main thread though.)
 */
-@property (copy) NSURL *autosavedContentsFileURL;
+@property (nullable, copy) NSURL *autosavedContentsFileURL;
 
 #pragma mark *** Closing ***
 
@@ -490,7 +494,7 @@ Starting in Mac OS 10.7 the default implementations of these methods are thread 
 
 The default implementation of this method has two rather different behaviors. If [[self class] autosavesInPlace] returns YES and [self fileURL] returns non-nil then it simply invokes [self autosaveWithImplicitCancellability:NO completionHandler:aCompletionHandler] if [self hasUnautosavedChanges] returns YES after making sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes. Otherwise it presents a panel giving the user the choice of canceling, discarding changes, or saving. In that case the shouldClose value passed to the delegate will be YES if the document was not modified in the first place, or the user chose to discard modifications, or chose to save and the saving was successful. NO will be passed if the user chose to cancel the operation or saving was unsuccessful. Because -saveDocumentWithDelegate:didSaveSelector:contextInfo: is used, an alert panel will be presented before the delegate is messaged if saving is attempted but does not succeed.
 */
-- (void)canCloseDocumentWithDelegate:(id)delegate shouldCloseSelector:(SEL)shouldCloseSelector contextInfo:(void *)contextInfo;
+- (void)canCloseDocumentWithDelegate:(id)delegate shouldCloseSelector:(nullable SEL)shouldCloseSelector contextInfo:(nullable void *)contextInfo;
 
 /* Close the document, discarding any as-yet-unsaved modifications. The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has discarded its changes, sends each of the document's window controllers a -close message, invokes [[NSDocumentController sharedDocumentController] removeDocument:self], and then invokes [NSFileCoordinator removeFilePresenter:self]. This is typically the method to use to close open documents (instead of just causing them to be deallocated by some other means). It's usually correct to use -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: first to make sure that the user's changes have been saved if appropriate.
 */
@@ -500,7 +504,7 @@ The default implementation of this method has two rather different behaviors. If
 
 /* The action of the File menu's Duplicate item in a document-based application. The default implementation of this method merely invokes [self duplicateDocumentWithDelegate:nil didDuplicateSelector:NULL contextInfo:NULL].
 */
-- (IBAction)duplicateDocument:(id)sender NS_AVAILABLE_MAC(10_7);
+- (IBAction)duplicateDocument:(nullable id)sender NS_AVAILABLE_MAC(10_7);
 
 /* Create a new document whose contents are the same as the receiver's and that doesn't yet have a fileURL. When duplicating is completed, regardless of success or failure, or has been rejected one way or another by the user, send the message selected by didDuplicateSelector to the delegate, with the contextInfo as the last argument. The method selected by didDuplicateSelector must have the same signature as:
  
@@ -508,7 +512,7 @@ The default implementation of this method has two rather different behaviors. If
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes, then checks to see if there are recent changes that might have been inadvertent and, if so, presents a panel giving the user the choice of canceling, duplicating, or duplicating then also discarding recent changes. Unless the user cancels duplicating, or if no panel was presented, it then invokes -duplicateAndReturnError:. If the user chose duplicating and discarding it also discards recent changes after duplicating.
 */
-- (void)duplicateDocumentWithDelegate:(id)delegate didDuplicateSelector:(SEL)didDuplicateSelector contextInfo:(void *)contextInfo NS_AVAILABLE_MAC(10_7);
+- (void)duplicateDocumentWithDelegate:(nullable id)delegate didDuplicateSelector:(nullable SEL)didDuplicateSelector contextInfo:(nullable void *)contextInfo NS_AVAILABLE_MAC(10_7);
 
 /* Create and return a new document whose contents are the same as the receiver and that doesn't yet have a fileURL, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be duplicated.
 
@@ -516,66 +520,66 @@ The default implementation of this method first uses -writeSafelyToURL:ofType:fo
 
 You can override this method to customize what is done during document duplication, but if your override does not invoke -[NSDocumentController duplicateDocumentWithContentsOfURL:copying:displayName:error:] you must take care to do things that that method does, especially invoking -[NSDocumentController addDocument:] and +[NSFileCoordinator addFilePresenter:].
 */
-- (NSDocument *)duplicateAndReturnError:(NSError **)outError NS_AVAILABLE_MAC(10_7);
+- (nullable __kindof NSDocument *)duplicateAndReturnError:(NSError **)outError NS_AVAILABLE_MAC(10_7);
 
 #pragma mark *** Renaming ***
 
 /* The action of the Rename menu item in a document-based application. The default implementation of this method initiates a renaming session in the window returned by [self windowForSheet].
 */
-- (IBAction)renameDocument:(id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)renameDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
 
 #pragma mark *** Moving ***
 
 /* The action of the Move to iCloud… menu item in a document-based application. The default implementation of this method presents an alert, asking the user to confirm the move, then invokes -moveToURL:completionHandler: with a URL in the application's default ubiquity container.
 */
-- (IBAction)moveDocumentToUbiquityContainer:(id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)moveDocumentToUbiquityContainer:(nullable id)sender NS_AVAILABLE_MAC(10_8);
 
 /* The action of the Move To… menu item in a document-based application. The default implementation of this method merely invokes [self moveDocumentWithCompletionHandler:nil].
 */
-- (IBAction)moveDocument:(id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)moveDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
 
 /* Present a move panel to the user, then try to save the document if the user OKs the panel. When moving is completed, regardless of success, failure, or cancellation, invoke the given block.
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration informal protocol has committed its changes if necessary. Then, if [self fileURL] is non-nil, it creates and presents a move panel. If the user OKs the panel, -moveToURL:completionHandler: is invoked. If a file already exists at the location the user chooses, the user will be asked to choose between replacing that file, renaming the current document, or canceling. If [self fileURL] is nil, then this method will instead invoke [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:didSaveSelector:contextInfo:].
 */
-- (void)moveDocumentWithCompletionHandler:(void (^)(BOOL didMove))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)moveDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didMove))completionHandler NS_AVAILABLE_MAC(10_8);
 
 /* Move the document's file to the given URL and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass a nil error. If not successful, pass an NSError that encapsulates the reason why the document could not be moved.
 
 The default implementation of this method does a coordinated move of the file at [self fileURL] to the given URL, replacing any file that may currently exist at that URL, and invokes -setFileURL: if the operation is successful. If [self fileURL] is nil, then this method will instead invoke [self saveToURL:url ofType:[self fileType] forSaveOperation:NSSaveAsOperation completionHandler:aCompletionHandler].
 */
-- (void)moveToURL:(NSURL *)url completionHandler:(void (^)(NSError *))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)moveToURL:(NSURL *)url completionHandler:(void (^ __nullable)(NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
 
 #pragma mark *** Locking ***
 
 /* The actions of the Lock and Unlock menu items in a document-based application. The default implementations of these method invoke -lockDocumentWithCompletionHandler: and -unlockDocumentWithCompletionHandler: respectively.
 */
-- (IBAction)lockDocument:(id)sender NS_AVAILABLE_MAC(10_8);
-- (IBAction)unlockDocument:(id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)lockDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)unlockDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
 
 /* Lock the document to prevent the user from making further modifications. When locking is completed, regardless of success or failure, invoke the given block.
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration informal protocol has committed its changes and immediately autosaves the document. If the autosave completes successfully or isn't necessary, this method invokes [self lockWithCompletionHandler:]. When locking succeeds, -isLocked will begin returning YES. Documents that return nil from [self fileURL] cannot be locked.
 */
-- (void)lockDocumentWithCompletionHandler:(void (^)(BOOL didLock))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)lockDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didLock))completionHandler NS_AVAILABLE_MAC(10_8);
 
 /* Lock the file at [self fileURL] to prevent further modifications. When locking is completed regardless of success or failure, invoke the given block.
 
 The default implementation of this method enables the "user immutable" flag on the file at [self fileURL].
 */
-- (void)lockWithCompletionHandler:(void (^)(NSError *))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)lockWithCompletionHandler:(void (^ __nullable)(NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
 
 /* Unlock the document and allow the user to make modifications to the document. When unlocking is completed, regardless of success or failure, invoke the given block.
 
 The default implementation of this method invokes [self unlockWithCompletionHandler:]. This method also disables autosaving safety checking, meaning that -checkAutosavingSafetyAndReturnError: will no longer be invoked on this document. When unlocking succeeds, -isLocked will being returning NO.
 */
-- (void)unlockDocumentWithCompletionHandler:(void (^)(BOOL didUnlock))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)unlockDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didUnlock))completionHandler NS_AVAILABLE_MAC(10_8);
 
 /* Unlock the file at [self fileURL] to allow modifications. When unlocking is completed, regardless of success of failure, invoke the given block.
 
 The default implementation of this method tries to clear the "user immutable" flag and add write permissions (if necessary) to the file at [self fileURL].
 */
-- (void)unlockWithCompletionHandler:(void (^)(NSError *))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)unlockWithCompletionHandler:(void (^ __nullable)(NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
 
 /* Returns YES when it appears the file at [self fileURL] cannot be written to. The conditions that cause this to return YES are subject to change, but may include the lack of write permissions, the "user immutable" flag, a read-only parent directory or volume, a return value of NO from -checkAutosavingSafetyAndReturnError:. You should not override this method.
 */
@@ -585,7 +589,7 @@ The default implementation of this method tries to clear the "user immutable" fl
 
 /* The action of the File menu's Page Setup... item in a document-based application. The default implementation of this method invokes [self printInfo], makes a copy of the print info object, and invokes [self runModalPageLayoutWithPrintInfo:printInfoCopy delegate:aPrivateDelegate didRunSelector:aSelectorForAPrivateMethod contextInfo:privateContextInfo]. If the user OKs the page layout panel, [self shouldChangePrintInfo:printInfoCopy] is invoked. If that returns YES, [self setPrintInfo:printInfoCopy] is invoked.
 */
-- (IBAction)runPageLayout:(id)sender;
+- (IBAction)runPageLayout:(nullable id)sender;
 
 /* Present a page layout panel to the user. When the page layout panel has been dismissed, regardless of whether the user cancelled or OK'ed it, send the message selected by didRunSelector to the delegate, with the contextInfo as the last argument. The method selected by didRunSelector must have the same signature as:
 
@@ -593,7 +597,7 @@ The default implementation of this method tries to clear the "user immutable" fl
 
 The default implementation of this method creates a page layout panel, invokes [self preparePageLayout:thePageLayoutPanel] to provide an opportunity for customization, then presents the panel.
 */
-- (void)runModalPageLayoutWithPrintInfo:(NSPrintInfo *)printInfo delegate:(id)delegate didRunSelector:(SEL)didRunSelector contextInfo:(void *)contextInfo;
+- (void)runModalPageLayoutWithPrintInfo:(NSPrintInfo *)printInfo delegate:(nullable id)delegate didRunSelector:(nullable SEL)didRunSelector contextInfo:(nullable void *)contextInfo;
 
 /* Given the page layout panel that -runModalPageLayoutWithPrintInfo:delegate:didRunSelector:contextInfo: is about to present to the user, make any final changes before it is presented, and return YES for success. Return NO for failure, to cancel the presentation of the panel. The default implementation of this method just returns YES.
 */
@@ -609,7 +613,7 @@ The default implementation of this method creates a page layout panel, invokes [
 
 /* The action of the File menu's Print... item in a document-based application. The default implementation of this method merely invokes [self printDocumentWithSettings:[NSDictionary dictionary] showPrintPanel:YES delegate:nil didPrintSelector:NULL contextInfo:NULL].
 */
-- (IBAction)printDocument:(id)sender;
+- (IBAction)printDocument:(nullable id)sender;
 
 /* Print the document. If showing of the print panel is specified, present it first, and print only if the user OKs the panel. The NSPrintInfo attributes in the passed-in printSettings dictionary should be added to a copy of the document's print info, and the resulting print info should be used for the operation. When printing is completed or has been cancelled, send the message selected by didPrintSelector to the delegate, with the contextInfo as the last argument. The method selected by didPrintSelector must have the same signature as:
 
@@ -621,23 +625,23 @@ Starting in OS X 10.6, if the printSettings dictionary has an NSPrintJobDisposit
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method invokes [self printShowingPrintPanel:showPrintPanel] if -printShowingPrintPanel: is overridden. When doing this it uses private functionality to arrange for 1) the print settings to take effect despite the fact that the override of -printShowingPrintPanel: can't possibly know about them, and 2) getting notified when the print operation has been completed, so it can message the delegate at the correct time. Correct messaging of the delegate is necessary for correct handling of the Print Apple event.
 */
-- (void)printDocumentWithSettings:(NSDictionary *)printSettings showPrintPanel:(BOOL)showPrintPanel delegate:(id)delegate didPrintSelector:(SEL)didPrintSelector contextInfo:(void *)contextInfo;
+- (void)printDocumentWithSettings:(NSDictionary<NSString *, id> *)printSettings showPrintPanel:(BOOL)showPrintPanel delegate:(nullable id)delegate didPrintSelector:(nullable SEL)didPrintSelector contextInfo:(nullable void *)contextInfo;
 
 /* Create a print operation that can be run to print the document's current contents, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the print operation could not be created. The NSPrintInfo attributes in the passed-in printSettings dictionary should be added to a copy of the document's print info, and the resulting print info should be used for the operation. The default implementation of this method does nothing. You must override it to enable printing in your application.
 */
-- (NSPrintOperation *)printOperationWithSettings:(NSDictionary *)printSettings error:(NSError **)outError;
+- (nullable NSPrintOperation *)printOperationWithSettings:(NSDictionary<NSString *, id> *)printSettings error:(NSError **)outError;
 
 /* Run a print operation, possibly with printing UI presented document-modally. When printing is completed, regardless of success or failure, or has been cancelled, send the message selected by didRunSelector to the delegate, with the contextInfo as the last argument. The method selected by didRunSelector must have the same signature as:
 
     - (void)document:(NSDocument *)document didRunPrintOperation:(BOOL)didPrintSuccessfully contextInfo:(void *)contextInfo;
 */
-- (void)runModalPrintOperation:(NSPrintOperation *)printOperation delegate:(id)delegate didRunSelector:(SEL)didRunSelector contextInfo:(void *)contextInfo;
+- (void)runModalPrintOperation:(NSPrintOperation *)printOperation delegate:(nullable id)delegate didRunSelector:(nullable SEL)didRunSelector contextInfo:(nullable void *)contextInfo;
 
 #pragma mark *** PDF Creation ***
 
 /* The action of the File menu's Export As PDF... item in a document-based application. The default implementation of this method merely invokes [self printDocumentWithSettings:@{ NSPrintJobDisposition : NSPrintSaveJob } showPrintPanel:NO delegate:nil didPrintSelector:NULL contextInfo:NULL].
  */
-- (IBAction)saveDocumentToPDF:(id)sender NS_AVAILABLE_MAC(10_9);
+- (IBAction)saveDocumentToPDF:(nullable id)sender NS_AVAILABLE_MAC(10_9);
 
 /* Create a print operation that can be run to create a PDF representation of the document's current contents, and return it if successful. You typically should not use [self printInfo] when creating this print operation, but you should instead maintain a separate NSPrintInfo instance specifically for creating PDFs. The default implementation of this method simply invokes [self printOperationWithSettings:@{ NSPrintJobDisposition : NSPrintSaveJob } error:NULL], but you are highly encouraged to override it if your document subclass supports creating PDF representations.
  */
@@ -669,7 +673,7 @@ This was method was introduced with support for asynchronous saving in Mac OS 10
 
 /* The document's undo manager. The default implementation of -setUndoManager:, in addition to recording the undo manager, registers the document as an observer of various NSUndoManager notifications so that -updateChangeCount: is invoked as undoable changes are made to the document. The default implementation of -undoManager creates an undo manager if the document does not already have one and -hasUndoManager would return YES.
 */
-@property (strong) NSUndoManager *undoManager;
+@property (nullable, strong) NSUndoManager *undoManager;
 
 /* Whether or not the document has an undo manager. The default implementation of -setHasUndoManager: releases the document's current undo manager if it has one before the invocation but is not to have one afterward.
 */
@@ -685,7 +689,7 @@ The default implementations of several NSDocument methods invoke -presentError:m
 
 You can customize the presentation of errors on a per-NSDocument-subclass basis by overriding -willPresentError:. Your override should follow the advice given for overriding of -[NSResponder willPresentError:].
 */
-- (void)presentError:(NSError *)error modalForWindow:(NSWindow *)window delegate:(id)delegate didPresentSelector:(SEL)didPresentSelector contextInfo:(void *)contextInfo;
+- (void)presentError:(NSError *)error modalForWindow:(NSWindow *)window delegate:(nullable id)delegate didPresentSelector:(nullable SEL)didPresentSelector contextInfo:(nullable void *)contextInfo;
 - (BOOL)presentError:(NSError *)error;
 - (NSError *)willPresentError:(NSError *)error;
 
@@ -701,7 +705,7 @@ You can customize the presentation of errors on a per-NSDocument-subclass basis 
 
 /* Return the name of the nib to be used by -makeWindowControllers. The default implementation returns nil. You can override this method to return the name of a nib in your application's resources; the class of the file's owner in that nib must match the class of this object, and the window outlet of the file's owner should be connected to a window. Virtually every subclass of NSDocument has to override either -makeWindowControllers or -windowNibName.
 */
-@property (readonly, copy) NSString *windowNibName;
+@property (nullable, readonly, copy) NSString *windowNibName;
 
 /* Be notified that a window controller will or did load a nib with this document as the nib file's owner. The default implementations of these methods do nothing. You can override these methods to do additional setup during the creation of the document's user interface, especially when there's no other reason to create a custom subclass of NSWindowController, so you're not, and you're simply overriding -windowNibName instead of -makeWindowControllers.
 */
@@ -710,7 +714,7 @@ You can customize the presentation of errors on a per-NSDocument-subclass basis 
 
 /* The setter for the "window" IB outlet of this class. It is invoked automatically during the loading of any nib for which this document is the file's owner, if the file's owner window outlet is connected in the nib. You should not invoke this method directly, and typically you would not override it either.
 */
-- (void)setWindow:(NSWindow *)window;
+- (void)setWindow:(nullable NSWindow *)window;
 
 /* Add or remove a window controller from this document's list of attached window controllers, and set the document of the passed-in window controller. You cannot attach a window controller to more than one document at a time. The default implementation of -addWindowController: removes the passed-in window controller from the document to which it is attached, if it is already attached to one. It also ignores redundant invocations. The default implementations of both of these methods send -setDocument: messages to the passed-in window controller (with a nil argument, in the latter case). You wouldn't typically override either of these methods. You typically invoke -addWindowController: once or more from an override of -makeWindowControllers, if you override -makeWindowControllers, and can invoke it at other times in applications that present multiple windows per document to the user.
 */
@@ -723,7 +727,7 @@ You can customize the presentation of errors on a per-NSDocument-subclass basis 
 
 /* Return an array of all window controllers that have been added to this document with -addWindowController: but not yet removed with -removeWindowController:.
 */
-@property (readonly, copy) NSArray *windowControllers;
+@property (readonly, copy) NSArray<__kindof NSWindowController *> *windowControllers;
 
 /* If the window controller is one whose closing results in the document being closed too, or there is only one window controller attached to the document, do the exact same thing that -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: would do. Otherwise send the message selected by shouldCloseSelector to the delegate, with the contextInfo as the last argument, specifying that the window controller should be closed. The method selected by shouldCloseSelector must have the same signature as:
 
@@ -731,11 +735,11 @@ You can customize the presentation of errors on a per-NSDocument-subclass basis 
 
 The default implementation of this method sends the window controller a -shouldCloseDocument message and, if the result is YES or the current count of window controllers is one, merely invokes [self canCloseDocumentWithDelegate:delegate shouldCloseSelector:shouldCloseSelector contextInfo:contextInfo]. Otherwise it messages the delegate as described above. You can override this method, but typically you would not invoke it. NSWindow invokes this method for any window that has a window controller and a document associated with it, before sending the window delegate any -windowShouldClose: message.
 */
-- (void)shouldCloseWindowController:(NSWindowController *)windowController delegate:(id)delegate shouldCloseSelector:(SEL)shouldCloseSelector contextInfo:(void *)contextInfo;
+- (void)shouldCloseWindowController:(NSWindowController *)windowController delegate:(nullable id)delegate shouldCloseSelector:(nullable SEL)shouldCloseSelector contextInfo:(nullable void *)contextInfo;
 
 /* Set the name for this document that is fit for presentation to the user. If the value is nil then a name based on -defaultDraftName is used.
 */
-- (void)setDisplayName:(NSString *)displayNameOrNil NS_AVAILABLE_MAC(10_7);
+- (void)setDisplayName:(nullable NSString *)displayNameOrNil NS_AVAILABLE_MAC(10_7);
 
 /* Returns the name for this document that is fit for presentation to the user. You can override this method, but overriding -[NSWindowController windowTitleForDocumentDisplayName:] is usually better, because a document's display name is used in error alerts, alerts presented during document saving, the alert that's presented when the user attempts to close a document that has unsaved changes, and save panels (as the default value of the "Save As:" field). In those places the document file's actual name really is what should be used.
 */
@@ -749,17 +753,17 @@ The default implementation of this method sends the window controller a -shouldC
 
 /* Of the windows associated with this document, return the one most appropriate to use as the parent window of a document-modal sheet. This method may return nil, in which case the invoker should present an application-modal panel. NSDocument's implementation of this method returns the window of the first window controller, or nil if there are no window controllers or if the first window controller has no window.
 */
-@property (readonly, strong) NSWindow *windowForSheet;
+@property (nullable, readonly, strong) NSWindow *windowForSheet;
 
 #pragma mark *** Types ***
 
 /* Return the names of the types for which this class can be instantiated for the application to play the Editor or Viewer role. The default implementation of this method returns information derived from the application's Info.plist. You must typically override it in document classes that are dynamically loaded from plugins. NSDocumentController uses this method when presenting an open panel and when trying to figure the NSDocument subclass to instantiate when opening a particular type of document.
 */
-+ (NSArray *)readableTypes;
++ (NSArray<NSString *> *)readableTypes;
 
 /* Return the names of the types which this class can save. Typically this includes types for which the application can play the Editor role, plus types than can be merely exported by the application. The default implementation of this method returns information derived from the application's Info.plist. You must typically override it in document classes that are dynamically loaded from plugins.
 */
-+ (NSArray *)writableTypes;
++ (NSArray<NSString *> *)writableTypes;
 
 /* Return YES if instances of this class can be instantiated for the application to play the Editor role, NO otherwise. The default implementation of this method returns information derived from the application's Info.plist. You must typically override it in document classes that are dynamically loaded from plugins. NSDocument uses this method when presenting a save panel; in that situation all types returned by -writableTypes are presented in the standard file format popup, except the ones for which -isNativeType returns NO.
 */
@@ -771,13 +775,13 @@ You can override this method to limit the set of writable types when the documen
 
 You can invoke this method when creating a custom save panel accessory view to easily present the same set of types that NSDocument would in its standard file format popup menu.
 */
-- (NSArray *)writableTypesForSaveOperation:(NSSaveOperationType)saveOperation;
+- (NSArray<NSString *> *)writableTypesForSaveOperation:(NSSaveOperationType)saveOperation;
 
 /* For a specified type, and a particular kind of save operation, return a file name extension that can be appended to a base file name. The default implementation of this method invokes [[NSWorkspace sharedWorkspace] preferredFilenameExtensionForType:typeName] if the type is a UTI or, for backward binary compatibility with Mac OS 10.4 and earlier, invokes [[NSDocumentController sharedDocumentController] fileExtensionsFromType:typeName] and chooses the first file name extension in the returned array if not.
 
 You can override this method to customize the appending of extensions to file names by NSDocument. It's invoked from a variety of places within AppKit itself.
 */
-- (NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation NS_AVAILABLE_MAC(10_5);
+- (nullable NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation NS_AVAILABLE_MAC(10_5);
 
 #pragma mark *** Menu Item Validation ***
 
@@ -802,12 +806,12 @@ You can override this method to customize the appending of extensions to file na
 
 /* Methods that were deprecated in Mac OS 10.4. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */
-- (NSData *)dataRepresentationOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSDictionary *)fileAttributesToWriteToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_1, 10_4);
-- (NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSFileWrapper *)fileWrapperRepresentationOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (id)initWithContentsOfFile:(NSString *)absolutePath ofType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_4);
-- (id)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_4);
+- (nullable NSData *)dataRepresentationOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
+- (nullable NSDictionary *)fileAttributesToWriteToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_1, 10_4);
+- (nullable NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
+- (nullable NSFileWrapper *)fileWrapperRepresentationOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
+- (nullable id)initWithContentsOfFile:(NSString *)absolutePath ofType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_4);
+- (nullable id)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_4);
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
 - (BOOL)loadFileWrapperRepresentation:(NSFileWrapper *)wrapper ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
 - (void)printShowingPrintPanel:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_4);
@@ -816,11 +820,13 @@ You can override this method to customize the appending of extensions to file na
 - (BOOL)revertToSavedFromFile:(NSString *)fileName ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
 - (BOOL)revertToSavedFromURL:(NSURL *)url ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
 - (NSInteger)runModalPageLayoutWithPrintInfo:(NSPrintInfo *)printInfo NS_DEPRECATED_MAC(10_0, 10_4);
-- (void)saveToFile:(NSString *)fileName saveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_4);
-- (void)setFileName:(NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
+- (void)saveToFile:(NSString *)fileName saveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_4);
+- (void)setFileName:(nullable NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
 - (BOOL)writeToFile:(NSString *)fileName ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)writeToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName originalFile:(NSString *)fullOriginalDocumentPath saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_0, 10_4);
+- (BOOL)writeToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName originalFile:(nullable NSString *)fullOriginalDocumentPath saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_0, 10_4);
 - (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
 - (BOOL)writeWithBackupToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_0, 10_4);
 
 @end
+
+NS_ASSUME_NONNULL_END

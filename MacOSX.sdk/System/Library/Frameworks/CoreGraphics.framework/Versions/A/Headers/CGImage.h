@@ -5,6 +5,10 @@
 #ifndef CGIMAGE_H_
 #define CGIMAGE_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 typedef struct CGImage *CGImageRef;
 
 #include <CoreGraphics/CGColorSpace.h>
@@ -12,6 +16,8 @@ typedef struct CGImage *CGImageRef;
 #include <CoreGraphics/CGGeometry.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 typedef CF_ENUM(uint32_t, CGImageAlphaInfo) {
   kCGImageAlphaNone,               /* For example, RGB. */
@@ -51,37 +57,41 @@ CG_EXTERN CFTypeID CGImageGetTypeID(void)
 
 /* Create an image. */
 
-CG_EXTERN CGImageRef CGImageCreate(size_t width, size_t height,
+CG_EXTERN CGImageRef __nullable CGImageCreate(size_t width, size_t height,
     size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow,
-    CGColorSpaceRef space, CGBitmapInfo bitmapInfo, CGDataProviderRef provider,
-    const CGFloat decode[], bool shouldInterpolate,
+    CGColorSpaceRef __nullable space, CGBitmapInfo bitmapInfo,
+    CGDataProviderRef __nullable provider,
+    const CGFloat * __nullable decode, bool shouldInterpolate,
     CGColorRenderingIntent intent)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create an image mask. */
 
-CG_EXTERN CGImageRef CGImageMaskCreate(size_t width, size_t height,
+CG_EXTERN CGImageRef __nullable CGImageMaskCreate(size_t width, size_t height,
     size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow,
-    CGDataProviderRef provider, const CGFloat decode[], bool shouldInterpolate)
+    CGDataProviderRef __nullable provider, const CGFloat * __nullable decode,
+    bool shouldInterpolate)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return a copy of `image'. Only the image structure itself is copied; the
    underlying data is not. */
 
-CG_EXTERN CGImageRef CGImageCreateCopy(CGImageRef image)
+CG_EXTERN CGImageRef __nullable CGImageCreateCopy(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create an image from `source', a data provider of JPEG-encoded data. */
 
-CG_EXTERN CGImageRef CGImageCreateWithJPEGDataProvider(CGDataProviderRef
-    source, const CGFloat decode[], bool shouldInterpolate,
+CG_EXTERN CGImageRef __nullable CGImageCreateWithJPEGDataProvider(
+    CGDataProviderRef __nullable source, const CGFloat * __nullable decode,
+    bool shouldInterpolate,
     CGColorRenderingIntent intent)
     CG_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_2_0);
 
 /* Create an image using `source', a data provider for PNG-encoded data. */
 
-CG_EXTERN CGImageRef CGImageCreateWithPNGDataProvider(CGDataProviderRef source,
-    const CGFloat decode[], bool shouldInterpolate,
+CG_EXTERN CGImageRef __nullable CGImageCreateWithPNGDataProvider(
+    CGDataProviderRef __nullable source, const CGFloat * __nullable decode,
+    bool shouldInterpolate,
     CGColorRenderingIntent intent)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
@@ -106,8 +116,9 @@ CG_EXTERN CGImageRef CGImageCreateWithPNGDataProvider(CGDataProviderRef source,
    The resulting image retains a reference to the original image, so you may
    release the original image after calling this function. */
 
-CG_EXTERN CGImageRef CGImageCreateWithImageInRect(CGImageRef image,
-    CGRect rect) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+CG_EXTERN CGImageRef __nullable CGImageCreateWithImageInRect(
+    CGImageRef __nullable image, CGRect rect)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create a new image from `image' masked by `mask', which may be an image
    mask or an image.
@@ -131,11 +142,12 @@ CG_EXTERN CGImageRef CGImageCreateWithImageInRect(CGImageRef image,
    The parameter `image' may not be an image mask and may not have an image
    mask or masking color associated with it.
   
-   If `mask' is an image, then it must be in the DeviceGray color space, may
-   not have alpha, and may not itself be masked by an image mask or a
-   masking color. */
+   If `mask' is an image, then it must be in a monochrome color space
+   (e.g. DeviceGray, GenericGray, etc...), may not have alpha, and may not
+   itself be masked by an image mask or a masking color. */
 
-CG_EXTERN CGImageRef CGImageCreateWithMask(CGImageRef image, CGImageRef mask)
+CG_EXTERN CGImageRef __nullable CGImageCreateWithMask(
+    CGImageRef __nullable image, CGImageRef __nullable mask)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create a new image from `image' masked by `components', an array of 2N
@@ -154,8 +166,8 @@ CG_EXTERN CGImageRef CGImageCreateWithMask(CGImageRef image, CGImageRef mask)
    The parameter `image' may not be an image mask, and may not already have
    an image mask or masking color associated with it. */
 
-CG_EXTERN CGImageRef CGImageCreateWithMaskingColors(CGImageRef image,
-    const CGFloat components[])
+CG_EXTERN CGImageRef __nullable CGImageCreateWithMaskingColors(
+    CGImageRef __nullable image, const CGFloat * __nullable components)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create a copy of `image', replacing the image's color space with `space'.
@@ -163,84 +175,92 @@ CG_EXTERN CGImageRef CGImageCreateWithMaskingColors(CGImageRef image,
    of `space' isn't the same as the number of components of the color space
    of `image'. */
 
-CG_EXTERN CGImageRef CGImageCreateCopyWithColorSpace(CGImageRef image,
-    CGColorSpaceRef space) CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithColorSpace(
+    CGImageRef __nullable image, CGColorSpaceRef __nullable space)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(image)'. */
 
-CG_EXTERN CGImageRef CGImageRetain(CGImageRef image)
+CG_EXTERN CGImageRef __nullable CGImageRetain(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(image)'. */
 
-CG_EXTERN void CGImageRelease(CGImageRef image)
+CG_EXTERN void CGImageRelease(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return true if `image' is an image mask, false otherwise. */
 
-CG_EXTERN bool CGImageIsMask(CGImageRef image)
+CG_EXTERN bool CGImageIsMask(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the width of `image'. */
 
-CG_EXTERN size_t CGImageGetWidth(CGImageRef image)
+CG_EXTERN size_t CGImageGetWidth(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the height of `image'. */
 
-CG_EXTERN size_t CGImageGetHeight(CGImageRef image)
+CG_EXTERN size_t CGImageGetHeight(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the number of bits/component of `image'. */
 
-CG_EXTERN size_t CGImageGetBitsPerComponent(CGImageRef image)
+CG_EXTERN size_t CGImageGetBitsPerComponent(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the number of bits/pixel of `image'. */
 
-CG_EXTERN size_t CGImageGetBitsPerPixel(CGImageRef image)
+CG_EXTERN size_t CGImageGetBitsPerPixel(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the number of bytes/row of `image'. */
 
-CG_EXTERN size_t CGImageGetBytesPerRow(CGImageRef image)
+CG_EXTERN size_t CGImageGetBytesPerRow(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the color space of `image', or NULL if `image' is an image
    mask. */
 
-CG_EXTERN CGColorSpaceRef CGImageGetColorSpace(CGImageRef image)
+CG_EXTERN CGColorSpaceRef __nullable CGImageGetColorSpace(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the alpha info of `image'. */
 
-CG_EXTERN CGImageAlphaInfo CGImageGetAlphaInfo(CGImageRef image)
+CG_EXTERN CGImageAlphaInfo CGImageGetAlphaInfo(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the data provider of `image'. */
 
-CG_EXTERN CGDataProviderRef CGImageGetDataProvider(CGImageRef image)
+CG_EXTERN CGDataProviderRef __nullable CGImageGetDataProvider(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the decode array of `image'. */
 
-CG_EXTERN const CGFloat *CGImageGetDecode(CGImageRef image)
+CG_EXTERN const CGFloat * __nullable CGImageGetDecode(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the interpolation parameter of `image'. */
 
-CG_EXTERN bool CGImageGetShouldInterpolate(CGImageRef image)
+CG_EXTERN bool CGImageGetShouldInterpolate(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the rendering intent of `image'. */
 
-CG_EXTERN CGColorRenderingIntent CGImageGetRenderingIntent(CGImageRef image)
+CG_EXTERN CGColorRenderingIntent CGImageGetRenderingIntent(__nullable CGImageRef image)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return the bitmap info of `image'. */
 
-CG_EXTERN CGBitmapInfo CGImageGetBitmapInfo(CGImageRef image)
+CG_EXTERN CGBitmapInfo CGImageGetBitmapInfo(CGImageRef __nullable image)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+
+/* Return the UTType of `image'. */
+
+CG_EXTERN CFStringRef  __nullable CGImageGetUTType(__nullable CGImageRef image)
+    CG_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

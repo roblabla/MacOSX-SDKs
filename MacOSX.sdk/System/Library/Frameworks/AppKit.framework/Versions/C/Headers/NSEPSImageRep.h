@@ -1,11 +1,13 @@
 /*
 	NSEPSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSPDFImageRep;
 
@@ -16,8 +18,8 @@
     NSPDFImageRep* _pdfImageRep;
 }
 
-+ (instancetype)imageRepWithData:(NSData *)epsData;	/* Convenience of initWithData: */
-- (instancetype)initWithData:(NSData *)epsData;
++ (nullable instancetype)imageRepWithData:(NSData *)epsData;	/* Convenience of initWithData: */
+- (nullable instancetype)initWithData:(NSData *)epsData;
 
 /* prepareGState is unused */
 - (void)prepareGState NS_DEPRECATED_MAC(10_0, 10_10);
@@ -27,4 +29,6 @@
 @property (readonly) NSRect boundingBox;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

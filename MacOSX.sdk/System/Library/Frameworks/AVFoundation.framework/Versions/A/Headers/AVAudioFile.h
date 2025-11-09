@@ -2,11 +2,13 @@
 	File:		AVAudioFile.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioTypes.h>
 #import <AVFoundation/AVAudioFormat.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSURL;
 @class AVAudioPCMBuffer;
@@ -16,8 +18,8 @@
 	@abstract
 		AVAudioFile represents an audio file opened for reading or writing.
 	@discussion
-		Regardless of the file's actual format, reading and writing the file is done via @link
-		AVAudioPCMBuffer @/link objects, containing samples in an @link AVAudioCommonFormat @/link,
+		Regardless of the file's actual format, reading and writing the file is done via 
+		`AVAudioPCMBuffer` objects, containing samples in an `AVAudioCommonFormat`,
 		referred to as the file's "processing format." Conversions are performed to and from
 		the file's actual format.
 		
@@ -38,7 +40,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		This opens the file for reading using the standard format (deinterleaved floating point).
 */
-- (instancetype)initForReading:(NSURL *)fileURL error:(NSError **)outError;
+- (nullable instancetype)initForReading:(NSURL *)fileURL error:(NSError **)outError;
 
 /*!	@method initForReading:commonFormat:interleaved:error:
 	@abstract Open a file for reading, using a specified processing format.
@@ -51,14 +53,14 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@param outError
 		on exit, if an error occurs, a description of the error
 */
-- (instancetype)initForReading:(NSURL *)fileURL commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError **)outError;
+- (nullable instancetype)initForReading:(NSURL *)fileURL commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError **)outError;
 
 /*! @method initForWriting:settings:error:
 	@abstract Open a file for writing.
 	@param fileURL
 		the path at which to create the file
 	@param settings
-		the format of the file to create (See @link AVAudioRecorder @/link.)
+		the format of the file to create (See `AVAudioRecorder`.)
 	@param outError
 		on exit, if an error occurs, a description of the error
 	@discussion
@@ -67,14 +69,14 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 		This opens the file for writing using the standard format (deinterleaved floating point).
 */
-- (instancetype)initForWriting:(NSURL *)fileURL settings:(NSDictionary *)settings error:(NSError **)outError;
+- (nullable instancetype)initForWriting:(NSURL *)fileURL settings:(NSDictionary<NSString *, id> *)settings error:(NSError **)outError;
 
 /*! @method initForWriting:settings:commonFormat:interleaved:error:
 	@abstract Open a file for writing.
 	@param fileURL
 		the path at which to create the file
 	@param settings
-		the format of the file to create (See @link AVAudioRecorder @/link.)
+		the format of the file to create (See `AVAudioRecorder`.)
 	@param format
 		the processing format to use when writing to the file
 	@param interleaved
@@ -85,13 +87,15 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		The file type to create is inferred from the file extension. Will overwrite a file at the
 		specified URL if a file exists.
 */
-- (instancetype)initForWriting:(NSURL *)fileURL settings:(NSDictionary *)settings commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError **)outError;
+- (nullable instancetype)initForWriting:(NSURL *)fileURL settings:(NSDictionary<NSString *, id> *)settings commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError **)outError;
 
 /*! @method readIntoBuffer:error:
 	@abstract Read an entire buffer.
 	@param buffer
 		The buffer into which to read from the file. Its format must match the file's
 		processing format.
+	@param outError
+		on exit, if an error occurs, a description of the error
 	@return
 		YES for success.
 	@discussion
@@ -107,18 +111,22 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@param buffer
 		The buffer into which to read from the file. Its format must match the file's
 		processing format.
+	@param outError
+		on exit, if an error occurs, a description of the error
 	@return
 		YES for success.
 	@discussion
-		Like @link read:error: @/link, but can be used to read fewer frames than buffer.frameCapacity.
+		Like `readIntoBuffer:error:`, but can be used to read fewer frames than buffer.frameCapacity.
 */
 - (BOOL)readIntoBuffer:(AVAudioPCMBuffer *)buffer frameCount:(AVAudioFrameCount)frames error:(NSError **)outError;
 
-/*! @method write:error:
+/*! @method writeFromBuffer:error:
 	@abstract Write a buffer.
 	@param buffer
 		The buffer from which to write to the file. Its format must match the file's
 		processing format.
+	@param outError
+		on exit, if an error occurs, a description of the error
 	@return
 		YES for success.
 	@discussion
@@ -155,3 +163,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 @property (nonatomic) AVAudioFramePosition framePosition;
 @end
+
+NS_ASSUME_NONNULL_END

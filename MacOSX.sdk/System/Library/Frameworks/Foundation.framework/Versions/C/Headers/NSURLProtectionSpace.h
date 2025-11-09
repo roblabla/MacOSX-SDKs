@@ -1,6 +1,6 @@
 /*	
     NSURLProtectionSpace.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -9,7 +9,10 @@
 #import <Security/Security.h>
 
 @class NSString;
-@class NSArray;
+@class NSArray<ObjectType>;
+@class NSData;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
    @const NSURLProtectionSpaceHTTP
@@ -129,7 +132,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     valid values include nil (default method), @"digest" and @"form".
     @result The initialized object.
 */
-- (instancetype)initWithHost:(NSString *)host port:(NSInteger)port protocol:(NSString *)protocol realm:(NSString *)realm authenticationMethod:(NSString *)authenticationMethod;
+- (instancetype)initWithHost:(NSString *)host port:(NSInteger)port protocol:(nullable NSString *)protocol realm:(nullable NSString *)realm authenticationMethod:(nullable NSString *)authenticationMethod;
 
 /*!
     @method initWithProxyHost:port:type:realm:authenticationMethod:
@@ -145,7 +148,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     valid values include nil (default method) and @"digest"
     @result The initialized object.
 */
-- (instancetype)initWithProxyHost:(NSString *)host port:(NSInteger)port type:(NSString *)type realm:(NSString *)realm  authenticationMethod:(NSString *)authenticationMethod;
+- (instancetype)initWithProxyHost:(NSString *)host port:(NSInteger)port type:(nullable NSString *)type realm:(nullable NSString *)realm  authenticationMethod:(nullable NSString *)authenticationMethod;
 
 /*!
     @method realm
@@ -155,7 +158,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     authentication, and may be nil otherwise.
     @result The realm string
 */
-@property (readonly, copy) NSString *realm;
+@property (nullable, readonly, copy) NSString *realm;
 
 /*!
     @method receivesCredentialSecurely
@@ -190,14 +193,14 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     @abstract Get the type of this protection space, if a proxy
     @result The type string, or nil if not a proxy.
  */
-@property (readonly, copy) NSString *proxyType;
+@property (nullable, readonly, copy) NSString *proxyType;
 
 /*!
     @method protocol
     @abstract Get the protocol of this protection space, if not a proxy
     @result The type string, or nil if a proxy.
 */
-@property (readonly, copy) NSString *protocol;
+@property (nullable, readonly, copy) NSString *protocol;
 
 /*!
     @method authenticationMethod
@@ -219,7 +222,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     @abstract Returns an array of acceptable certificate issuing authorities for client certification authentication. Issuers are identified by their distinguished name and returned as a DER encoded data.
     @result An array of NSData objects.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodClientCertificate)
  */
-@property (readonly, copy) NSArray *distinguishedNames NS_AVAILABLE(10_6, 3_0);
+@property (nullable, readonly, copy) NSArray<NSData *> *distinguishedNames NS_AVAILABLE(10_6, 3_0);
 
 @end
 
@@ -234,6 +237,8 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     @abstract Returns a SecTrustRef which represents the state of the servers SSL transaction state
     @result A SecTrustRef from Security.framework.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodServerTrust)
  */
-@property (readonly) SecTrustRef serverTrust NS_AVAILABLE(10_6, 3_0);
+@property (nullable, readonly) SecTrustRef serverTrust NS_AVAILABLE(10_6, 3_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

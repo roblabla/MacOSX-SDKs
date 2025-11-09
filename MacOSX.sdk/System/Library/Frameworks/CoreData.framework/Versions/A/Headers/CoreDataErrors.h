@@ -1,7 +1,7 @@
 /*
 	CoreDataErrors.h
 	Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
 	All rights reserved.
  */
 
@@ -11,6 +11,8 @@
 */
 
 #import <CoreData/CoreDataDefines.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 // User info keys for errors created by Core Data:
 COREDATA_EXTERN NSString * const NSDetailedErrorsKey NS_AVAILABLE(10_4,3_0);           // if multiple validation errors occur in one operation, they are collected in an array and added with this key to the "top-level error" of the operation
@@ -29,6 +31,7 @@ COREDATA_EXTERN NSString * const NSSQLiteErrorDomain NS_AVAILABLE(10_5,3_0);    
 
 enum : NSInteger {
     NSManagedObjectValidationError                   = 1550,   // generic validation error
+    NSManagedObjectConstraintValidationError         = 1551,   // one or more uniqueness constraints were violated
     NSValidationMultipleErrorsError                  = 1560,   // generic message for error containing multiple validation errors
     NSValidationMissingMandatoryPropertyError        = 1570,   // non-optional property with a nil value
     NSValidationRelationshipLacksMinimumCountError   = 1580,   // to-many relationship with too few destination objects
@@ -49,6 +52,7 @@ enum : NSInteger {
     NSManagedObjectReferentialIntegrityError         = 133000, // attempt to fire a fault pointing to an object that does not exist (we can see the store, we can't see the object)
     NSManagedObjectExternalRelationshipError         = 133010, // an object being saved has a relationship containing an object from another store
     NSManagedObjectMergeError                        = 133020, // merge policy failed - unable to complete merging
+    NSManagedObjectConstraintMergeError              = 133021, // merge policy failed - unable to complete merging due to multiple conflicting constraint violations
     
     NSPersistentStoreInvalidTypeError                = 134000, // unknown persistent store type/format/version
     NSPersistentStoreTypeMismatchError               = 134010, // returned by persistent store coordinator if a store is accessed that does not match the specified type
@@ -65,6 +69,7 @@ enum : NSInteger {
     
     NSPersistentStoreIncompatibleVersionHashError    = 134100, // entity version hashes incompatible with data model
     NSMigrationError                                 = 134110, // general migration error
+    NSMigrationConstraintViolationError              = 134111, // migration failed due to a violated uniqueness constraint
     NSMigrationCancelledError                        = 134120, // migration failed due to manual cancellation
     NSMigrationMissingSourceModelError               = 134130, // migration failed due to missing source data model
     NSMigrationMissingMappingModelError              = 134140, // migration failed due to missing mapping model
@@ -79,4 +84,4 @@ enum : NSInteger {
 
 };
 
-
+NS_ASSUME_NONNULL_END

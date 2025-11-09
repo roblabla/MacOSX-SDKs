@@ -81,7 +81,7 @@ MD_BEGIN_C_DECLS
         @typedef MDQueryRef
         This is the type of a reference to MDQuerys.
 */
-typedef struct __MDQuery *MDQueryRef;
+typedef struct CF_BRIDGED_TYPE(id) __MDQuery * MDQueryRef;
 
 typedef enum {
     kMDQuerySynchronous = 1,

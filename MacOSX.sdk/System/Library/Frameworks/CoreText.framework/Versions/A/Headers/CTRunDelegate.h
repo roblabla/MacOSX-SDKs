@@ -2,7 +2,7 @@
  *	CTRunDelegate.h
  *	CoreText
  *
- *	Copyright (c) 2006-2013 Apple Inc. All rights reserved.
+ *	Copyright (c) 2006-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -13,16 +13,14 @@
 #include <CoreText/CTRun.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Run Delegate Types */
 /* --------------------------------------------------------------------------- */
 
-typedef const struct __CTRunDelegate * CTRunDelegateRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CTRunDelegate * CTRunDelegateRef;
 
 /*!
 	@function	CTRunDelegateGetTypeID
@@ -45,7 +43,7 @@ CFTypeID CTRunDelegateGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 typedef void (*CTRunDelegateDeallocateCallback) (
-	void* refCon );
+	void * refCon );
 
 /*!
 	@typedef	CTRunDelegateGetAscentCallback
@@ -59,7 +57,7 @@ typedef void (*CTRunDelegateDeallocateCallback) (
 */
 
 typedef CGFloat (*CTRunDelegateGetAscentCallback) (
-	void* refCon );
+	void * refCon );
 
 /*!
 	@typedef	CTRunDelegateGetDescentCallback
@@ -73,7 +71,7 @@ typedef CGFloat (*CTRunDelegateGetAscentCallback) (
 */
 
 typedef CGFloat (*CTRunDelegateGetDescentCallback) (
-	void* refCon );
+	void * refCon );
 
 /*!
 	@typedef	CTRunDelegateGetWidthCallback
@@ -88,7 +86,7 @@ typedef CGFloat (*CTRunDelegateGetDescentCallback) (
 */
 
 typedef CGFloat (*CTRunDelegateGetWidthCallback) (
-	void* refCon );
+	void * refCon );
 
 /*!
 	@typedef	CTRunDelegateCallbacks
@@ -168,9 +166,9 @@ enum {
 				object. Otherwise, this function will return NULL.
 */
 
-CTRunDelegateRef CTRunDelegateCreate(
+CTRunDelegateRef __nullable CTRunDelegateCreate(
 	const CTRunDelegateCallbacks* callbacks,
-	void* refCon ) CT_AVAILABLE(10_5, 3_2);
+	void * __nullable refCon ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -190,14 +188,12 @@ CTRunDelegateRef CTRunDelegateCreate(
 	@result		The refCon value of the supplied run delegate.
 */
 
-void* CTRunDelegateGetRefCon(
+void * CTRunDelegateGetRefCon(
 	CTRunDelegateRef runDelegate ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

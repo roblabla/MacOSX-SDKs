@@ -11,12 +11,16 @@
 @class SKPhysicsBody;
 @class SKNode;
 @class SKTexture;
+@class SKPhysicsJoint;
 
 /**
  A SpriteKit physics body. These are the physical representations of your nodes. These specify the area and mass and any collision masking needed.
  
  All bodies have zero, one or more shapes that define its area. A body with no shapes is ethereal and does not collide with other bodies.
  */
+
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT @interface SKPhysicsBody : NSObject <NSCopying, NSCoding>
 
 /**
@@ -93,7 +97,7 @@ SK_EXPORT @interface SKPhysicsBody : NSObject <NSCopying, NSCoding>
 /**
  Creates an compound body that is the union of the bodies used to create it.
  */
-+ (SKPhysicsBody *)bodyWithBodies:(NSArray *)bodies;
++ (SKPhysicsBody *)bodyWithBodies:(NSArray<SKPhysicsBody*> *)bodies;
 
 @property (nonatomic, getter = isDynamic) BOOL dynamic;
 @property (nonatomic) BOOL usesPreciseCollisionDetection;
@@ -187,12 +191,12 @@ SK_EXPORT @interface SKPhysicsBody : NSObject <NSCopying, NSCoding>
 @property (nonatomic, assign) uint32_t contactTestBitMask;
 
 
-@property (nonatomic, readonly) NSArray *joints;
+@property (nonatomic, readonly) NSArray<SKPhysicsJoint*> *joints;
 
 /**
  The representedObject this physicsBody is currently bound to, or nil if it is not.
  */
-@property (nonatomic, readonly, weak) SKNode *node;
+@property (nonatomic, readonly, weak, nullable) SKNode *node;
 
 
 @property (nonatomic) CGVector velocity;
@@ -209,7 +213,9 @@ SK_EXPORT @interface SKPhysicsBody : NSObject <NSCopying, NSCoding>
 - (void)applyAngularImpulse:(CGFloat)impulse;
 
 /* Returns an array of all SKPhysicsBodies currently in contact with this one */
-- (NSArray *)allContactedBodies;
+- (NSArray<SKPhysicsBody*> *)allContactedBodies;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

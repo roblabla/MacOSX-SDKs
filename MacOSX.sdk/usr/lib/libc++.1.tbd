@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    '/usr/lib/libc++.1.dylib'
-current-version: 120.0
+current-version: 120.1
 exports:         
   - archs:           [ i386 ]
     symbols:         [ __ZNKSt3__18messagesIcE6do_getEiiiRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -1427,37 +1427,10 @@ exports:
                        ___cxa_vec_delete, ___cxa_vec_delete2, ___cxa_vec_delete3, 
                        ___cxa_vec_dtor, ___cxa_vec_new, ___cxa_vec_new2, 
                        ___cxa_vec_new3, ___dynamic_cast, ___gxx_personality_v0 ]
-    weak-def-symbols: [ __ZGVZNKSt3__120__time_get_c_storageIcE3__XEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIcE3__cEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIcE3__rEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIcE3__xEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIcE7__am_pmEvE5am_pm, 
-                        __ZGVZNKSt3__120__time_get_c_storageIcE7__weeksEvE5weeks, 
-                        __ZGVZNKSt3__120__time_get_c_storageIcE8__monthsEvE6months, 
-                        __ZGVZNKSt3__120__time_get_c_storageIwE3__XEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIwE3__cEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIwE3__rEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIwE3__xEvE1s, 
-                        __ZGVZNKSt3__120__time_get_c_storageIwE7__am_pmEvE5am_pm, 
-                        __ZGVZNKSt3__120__time_get_c_storageIwE7__weeksEvE5weeks, 
-                        __ZGVZNKSt3__120__time_get_c_storageIwE8__monthsEvE6months, 
-                        __ZTISt11range_error, __ZTISt12domain_error, __ZTISt12length_error, 
+    weak-def-symbols: [ __ZTISt11range_error, __ZTISt12domain_error, __ZTISt12length_error, 
                         __ZTISt12out_of_range, __ZTISt14overflow_error, 
                         __ZTISt15underflow_error, __ZTISt16invalid_argument, 
-                        __ZTISt16nested_exception, __ZZNKSt3__120__time_get_c_storageIcE3__XEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIcE3__cEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIcE3__rEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIcE3__xEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIcE7__am_pmEvE5am_pm, 
-                        __ZZNKSt3__120__time_get_c_storageIcE7__weeksEvE5weeks, 
-                        __ZZNKSt3__120__time_get_c_storageIcE8__monthsEvE6months, 
-                        __ZZNKSt3__120__time_get_c_storageIwE3__XEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIwE3__cEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIwE3__rEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIwE3__xEvE1s, 
-                        __ZZNKSt3__120__time_get_c_storageIwE7__am_pmEvE5am_pm, 
-                        __ZZNKSt3__120__time_get_c_storageIwE7__weeksEvE5weeks, 
-                        __ZZNKSt3__120__time_get_c_storageIwE8__monthsEvE6months, 
-                        __ZdaPv, __ZdaPvRKSt9nothrow_t, __ZdlPv, __ZdlPvRKSt9nothrow_t, 
-                        __Znam, __ZnamRKSt9nothrow_t, __Znwm, __ZnwmRKSt9nothrow_t ]
+                        __ZTISt16nested_exception, __ZdaPv, __ZdaPvRKSt9nothrow_t, 
+                        __ZdlPv, __ZdlPvRKSt9nothrow_t, __Znam, __ZnamRKSt9nothrow_t, 
+                        __Znwm, __ZnwmRKSt9nothrow_t ]
 ...

@@ -5,6 +5,10 @@
 #ifndef CGDATACONSUMER_H_
 #define CGDATACONSUMER_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 typedef struct CGDataConsumer *CGDataConsumerRef;
 
 #include <CoreGraphics/CGBase.h>
@@ -12,16 +16,18 @@ typedef struct CGDataConsumer *CGDataConsumerRef;
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
+CF_ASSUME_NONNULL_BEGIN
+
 /* This callback is called to copy `count' bytes from `buffer' to the data
    consumer. */
 
-typedef size_t (*CGDataConsumerPutBytesCallback)(void *info,
-    const void *buffer, size_t count);
+typedef size_t (*CGDataConsumerPutBytesCallback)(void * __nullable info,
+    const void *  buffer, size_t count);
 
 /* This callback is called to release the `info' pointer when the data
    provider is freed. */
 
-typedef void (*CGDataConsumerReleaseInfoCallback)(void *info);
+typedef void (*CGDataConsumerReleaseInfoCallback)(void * __nullable info);
 
 /* Callbacks for writing data.
    `putBytes' copies `count' bytes from `buffer' to the consumer, and
@@ -30,8 +36,8 @@ typedef void (*CGDataConsumerReleaseInfoCallback)(void *info);
    `releaseConsumer', if non-NULL, is called when the consumer is freed. */
 
 struct CGDataConsumerCallbacks {
-    CGDataConsumerPutBytesCallback putBytes;
-    CGDataConsumerReleaseInfoCallback releaseConsumer;
+    CGDataConsumerPutBytesCallback __nullable putBytes;
+    CGDataConsumerReleaseInfoCallback __nullable releaseConsumer;
 };
 typedef struct CGDataConsumerCallbacks CGDataConsumerCallbacks;
 
@@ -43,29 +49,34 @@ CG_EXTERN CFTypeID CGDataConsumerGetTypeID(void)
 /* Create a data consumer using `callbacks' to handle the data. `info' is
    passed to each of the callback functions. */
 
-CG_EXTERN CGDataConsumerRef CGDataConsumerCreate(void *info,
-    const CGDataConsumerCallbacks *callbacks)
+CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreate(
+    void * __nullable info, const CGDataConsumerCallbacks * __nullable cbks)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a data consumer which writes data to `url'. */
 
-CG_EXTERN CGDataConsumerRef CGDataConsumerCreateWithURL(CFURLRef url)
+CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreateWithURL(
+    CFURLRef __nullable url)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a data consumer which writes to `data'. */
 
-CG_EXTERN CGDataConsumerRef CGDataConsumerCreateWithCFData(CFMutableDataRef
-    data) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreateWithCFData(
+    CFMutableDataRef __nullable data)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(consumer)'. */
 
-CG_EXTERN CGDataConsumerRef CGDataConsumerRetain(CGDataConsumerRef consumer)
+CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerRetain(
+    CGDataConsumerRef __nullable consumer)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(consumer)'. */
 
-CG_EXTERN void CGDataConsumerRelease(CGDataConsumerRef consumer)
+CG_EXTERN void CGDataConsumerRelease(__nullable CGDataConsumerRef consumer)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

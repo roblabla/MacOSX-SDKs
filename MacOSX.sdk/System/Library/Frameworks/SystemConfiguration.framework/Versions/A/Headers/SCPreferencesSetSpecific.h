@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002, 2004, 2005, 2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2002, 2004, 2005, 2008, 2015 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -29,6 +29,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <SystemConfiguration/SCPreferences.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
 	@header SCPreferencesSetSpecific
@@ -86,5 +88,8 @@ SCPreferencesSetLocalHostName		(
 					)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 __END_DECLS
+
+CF_ASSUME_NONNULL_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* _SCPREFERENCESSETSPECIFIC_H */

@@ -1,36 +1,20 @@
-/*==================================================================================================
-     File:       CoreAudioClock.h
-
-     Contains:   Core Audio Clock APIs
-
-     Copyright:  (c) 2004-2008 by Apple, Inc., all rights reserved.
-
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
-
-                     http://developer.apple.com/bugreporter/
-
-==================================================================================================*/
-
-#ifndef __CoreAudioClock_h__
-#define __CoreAudioClock_h__
-
-//==================================================================================================
-
 /*!
-	@header		CoreAudioClock.h
-	
-	@abstract	CoreAudioClock APIs.
-	
-	@discussion
-				Provide services for audio and MIDI-related synchronization and
+	@file		CoreAudioClock.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2004-2015 by Apple, Inc., all rights reserved.
+	@abstract	Services for audio and MIDI-related synchronization and
 				time unit conversions.
 */
+
+#ifndef AudioToolbox_CoreAudioClock_h
+#define AudioToolbox_CoreAudioClock_h
 
 //==================================================================================================
 
 #include <Availability.h>
 #include <CoreAudio/CoreAudioTypes.h>
+
+CF_ASSUME_NONNULL_BEGIN
 
 //==================================================================================================
 
@@ -91,7 +75,7 @@
 					sent to the clock's MIDI clock destinations (if any). Available starting
 					in MacOS X 10.6.
 */
-enum {	// typedef UInt32 CAClockPropertyID;
+typedef CF_ENUM(UInt32, CAClockPropertyID) {
 	kCAClockProperty_InternalTimebase   = 'intb',
 	kCAClockProperty_TimebaseSource		= 'itbs',
 	kCAClockProperty_SyncMode			= 'synm',
@@ -106,7 +90,6 @@ enum {	// typedef UInt32 CAClockPropertyID;
 	kCAClockProperty_Name				= 'name',
 	kCAClockProperty_SendMIDISPP		= 'mspp'
 };
-typedef UInt32					CAClockPropertyID;
 
 /*!
 	@enum		CAClockTimebase
@@ -124,12 +107,11 @@ typedef UInt32					CAClockPropertyID;
 					The clock's reference time is derived from the audio
 					device addressed by an output Audio Unit.
 */
-enum {  // typedef UInt32 CAClockTimebase;
+typedef CF_ENUM(UInt32, CAClockTimebase) {
 	kCAClockTimebase_HostTime			= 'host',
 	kCAClockTimebase_AudioDevice		= 'audi',
 	kCAClockTimebase_AudioOutputUnit	= 'auou'
 };
-typedef UInt32					CAClockTimebase;
 
 /*!
 	@enum		CAClockSyncMode
@@ -145,12 +127,11 @@ typedef UInt32					CAClockTimebase;
 					The clock is driven by MIDI Time Code received from a CoreMIDI source
 					endpoint.
 */
-enum {	// typedef UInt32 CAClockSyncMode;
+typedef CF_ENUM(UInt32, CAClockSyncMode) {
 	kCAClockSyncMode_Internal			= 'intr',   // sync to the internal timebase
 	kCAClockSyncMode_MIDIClockTransport = 'mclk',	// sync to MIDI beat clock, external transport
 	kCAClockSyncMode_MTCTransport		= 'mmtc'	// sync to MIDI Time Code, external transport
 };
-typedef UInt32					CAClockSyncMode;
 
 
 /* From CoreAudioTypes.h:
@@ -164,6 +145,11 @@ typedef UInt32					CAClockSyncMode;
 	};
 */
 
+// we can remove this after the SDK's have the real declaration.
+#if !defined(COREAUDIOTYPES_VERSION) || COREAUDIOTYPES_VERSION <= 1051
+#define SMPTETimeType UInt32
+#endif
+
 /*!
 	@typedef		CAClockSMPTEFormat
 	@abstract		A SMPTE format, specifying the frames per second (fps) and
@@ -174,7 +160,7 @@ typedef UInt32					CAClockSyncMode;
 					kSMPTETimeType30, kSMPTETimeType30Drop, etc. Note that formats with more
 					than 30 fps are not usable with MIDI Time Code.
 */
-typedef UInt32					CAClockSMPTEFormat;
+typedef SMPTETimeType		CAClockSMPTEFormat;
 
 /*!
 	@enum		CAClockMessage
@@ -197,7 +183,7 @@ typedef UInt32					CAClockSMPTEFormat;
 					The clock is receiving SMPTE (MTC) messages in a SMPTE format that does not
 					match the clock's SMPTE format.
 */
-enum {	// typedef UInt32 CAClockMessage;
+typedef CF_ENUM(UInt32, CAClockMessage) {
 	kCAClockMessage_StartTimeSet		= 'stim',
 	kCAClockMessage_Started				= 'strt',
 	kCAClockMessage_Stopped				= 'stop',
@@ -206,7 +192,6 @@ enum {	// typedef UInt32 CAClockMessage;
 	kCAClockMessage_PropertyChanged		= 'pchg',
 	kCAClockMessage_WrongSMPTEFormat	= '?smp'
 };
-typedef UInt32					CAClockMessage;
 
 
 /*!
@@ -230,17 +215,17 @@ typedef UInt32					CAClockMessage;
 	@constant	kCAClockTimeFormat_SMPTETime
 					SMPTETime structure.
 */
-enum {	// typedef UInt32 CAClockTimeFormat;
+typedef CF_ENUM(UInt32, CAClockTimeFormat) {
 	kCAClockTimeFormat_HostTime			= 'host',
 	kCAClockTimeFormat_Samples			= 'samp',
 	kCAClockTimeFormat_Beats			= 'beat',   // relative position on media timeline
 	kCAClockTimeFormat_Seconds			= 'secs',   // relative position on media timeline
 	kCAClockTimeFormat_SMPTESeconds		= 'smps',	// absolute SMPTE position in seconds
-	kCAClockTimeFormat_SMPTETime		= 'smpt'	// SMPTETime structure
+	kCAClockTimeFormat_SMPTETime		= 'smpt',	// SMPTETime structure
+	kCAClockTimeFormat_AbsoluteSeconds	= 'asec'
 };
-typedef UInt32					CAClockTimeFormat;
 
-enum {  // errors
+CF_ENUM(OSStatus) {  // errors
 	kCAClock_UnknownPropertyError		= -66816,
 	kCAClock_InvalidPropertySizeError   = -66815,
 	kCAClock_InvalidTimeFormatError		= -66814,
@@ -388,7 +373,7 @@ typedef struct CATempoMapEntry CATempoMapEntry;
 	
 	@field	beats
 				The beat time at which the time signature (meter) changes.
-	@field	meterNum
+	@field	meterNumer
 				The numerator of the new time signature.
 	@field	meterDenom
 				The denominator of the new time signature (1, 2, 4, 8, etc.).
@@ -427,8 +412,8 @@ extern "C" {
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockNew(					UInt32 				inReservedFlags, 
-							CAClockRef *		outCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockNew(	UInt32					 				inReservedFlags,
+			CAClockRef __nullable * __nonnull		outCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -471,10 +456,10 @@ CAClockDispose(				CAClockRef 			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_1
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockGetPropertyInfo(		CAClockRef			inCAClock,
-							CAClockPropertyID	inPropertyID,
-							UInt32 *			outSize,
-							Boolean *			outWritable)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockGetPropertyInfo(		CAClockRef				inCAClock,
+							CAClockPropertyID		inPropertyID,
+							UInt32 * __nullable		outSize,
+							Boolean * __nullable	outWritable)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -836,9 +821,9 @@ CAClockGetPlayRate(			CAClockRef			inCAClock,
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockGetCurrentTempo(		CAClockRef			inCAClock,
-							CAClockTempo *		outTempo,
-							CAClockTime *		outTimestamp)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockGetCurrentTempo(		CAClockRef					inCAClock,
+							CAClockTempo *				outTempo,
+							CAClockTime * __nullable	outTimestamp)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -865,9 +850,9 @@ CAClockGetCurrentTempo(		CAClockRef			inCAClock,
 					kCAClock_CannotSetTimeError is returned.
 */
 extern OSStatus
-CAClockSetCurrentTempo(		CAClockRef			inCAClock,
-							CAClockTempo		inTempo,
-							const CAClockTime * inTimestamp)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockSetCurrentTempo(		CAClockRef						inCAClock,
+							CAClockTempo					inTempo,
+							const CAClockTime * __nullable	inTimestamp)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -1019,6 +1004,6 @@ CAClockParseMIDI(			CAClockRef			inCAClock,
 }
 #endif
 
+CF_ASSUME_NONNULL_END
 
-
-#endif // __CoreAudioClock_h__
+#endif // AudioToolbox_CoreAudioClock_h

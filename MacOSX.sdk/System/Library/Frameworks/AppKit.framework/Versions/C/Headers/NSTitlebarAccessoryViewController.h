@@ -1,7 +1,7 @@
 /*
     NSTitlebarAccessoryViewController.h
     Application Kit
-    Copyright (c) 2014, Apple Inc.
+    Copyright (c) 2014-2015, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSLayoutConstraint.h>
 
 @class NSClipView;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* For use with NSWindow's API addTitlebarAccessoryViewController:, etc. */
 NS_CLASS_AVAILABLE(10_10, NA)
@@ -33,7 +35,9 @@ NS_CLASS_AVAILABLE(10_10, NA)
 #endif
 }
 
-/* The layoutAttribute defaults to NSLayoutAttributeBottom, telling the window to place this view controller's view under the titlebar. NSLayoutAttributeRight is also supported, telling the window to place the view controller's view on the right side of the window. All other values are currently invalid and will assert.
+/* The layoutAttribute defaults to NSLayoutAttributeBottom, telling the window to place this view controller's view under the titlebar. NSLayoutAttributeRight is also supported, telling the window to place the view controller's view on the right side of the window. For applications linked on Mac OS 10.11 or later, NSLayoutAttributeLeft is also supported; placing the item on the left side of the window (adjacent and to the right of the close/minimize/maximize buttons). All other values are currently invalid and will assert.
+ 
+    For applications linked on 10.11 and higher, a layoutAttribute== NSLayoutAttributeRight will no longer right indent toolbar items (previously it would leave a space), unless  the titleVisibility == NSWindowTitleHidden. 
  */
 @property NSLayoutAttribute layoutAttribute;
 
@@ -52,6 +56,11 @@ NS_CLASS_AVAILABLE(10_10, NA)
 - (void)viewDidDisappear NS_REQUIRES_SUPER;
 
 /* NOTE: Do not override the -view property! Instead, override loadView, and set the view property in that method (i.e.: self.view = ...; )
+ 
+   NOTE: NSTitlebarAccessoryViewController will observe the view's frame for changes. You can change the view's frame in a direction that "makes sense". For instance, changing the height when the layoutAttribute is NSLayoutAttributeBottom, or changing the width when the layoutAttribute is NSLayoutAttributeRight. The other size direction will automatically be filled to the maximum size as required for the window.
+
  */
 
 @end
+
+NS_ASSUME_NONNULL_END

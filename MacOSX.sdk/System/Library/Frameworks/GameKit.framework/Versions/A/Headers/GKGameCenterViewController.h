@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, GKGameCenterViewControllerState) {
 #import <GameKit/GKDialogController.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
 // View controller that provides the standard user interface for leaderboards, achievements, and challenges. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 NS_CLASS_AVAILABLE(10_9, 6_0)
@@ -36,23 +37,24 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
     NSString *_leaderboardIdentifier;
     NSString *_leaderboardCategory;
     GKLeaderboardTimeScope _leaderboardTimeScope;
+    BOOL _internalFlag;
 }
 @end
 #endif
 
 @interface GKGameCenterViewController ()
-@property (assign, NS_NONATOMIC_IOSONLY)   id<GKGameCenterControllerDelegate>      gameCenterDelegate;
-@property (assign, NS_NONATOMIC_IOSONLY)   GKGameCenterViewControllerState         viewState;
+@property (assign, nullable, NS_NONATOMIC_IOSONLY)   id<GKGameCenterControllerDelegate>      gameCenterDelegate;
+@property (assign, NS_NONATOMIC_IOSONLY)   GKGameCenterViewControllerState         viewState ;
 
 
 @end
 
 @interface GKGameCenterViewController (Leaderboards)
 
-@property (nonatomic, assign)   GKLeaderboardTimeScope leaderboardTimeScope NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "GKGameCenterViewController no longer supports leaderboard time scopes. Will always default to GKLeaderboardTimeScopeAllTime.");  // Show leaderboard list
-@property (nonatomic, retain)   NSString *leaderboardIdentifier NS_AVAILABLE(10_10, 7_0); // Showing specified leaderboard
+@property (nonatomic, assign)   GKLeaderboardTimeScope leaderboardTimeScope NS_AVAILABLE(10_8, 4_1) ;
+@property (nonatomic, nullable, retain)   NSString *leaderboardIdentifier NS_AVAILABLE(10_10, 7_0) ;
 
-@property (nonatomic, retain)   NSString *leaderboardCategory   NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "GKGameCenterViewController's leaderboardCategory property is deprecated. Use leaderboardIdentifier instead.");
+@property (nonatomic, nullable, retain)   NSString *leaderboardCategory    NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "GKGameCenterViewController's leaderboardCategory property is deprecated. Use leaderboardIdentifier instead.") ;
 
 @end
 
@@ -61,5 +63,4 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController NS_AVAILABLE(10_9, 6_0);
 
 @end
-
-
+NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
  */
 
@@ -14,6 +14,41 @@
 	#define AVF_EXPORT extern "C"
 #else
 	#define AVF_EXPORT extern
+#endif
+
+// Annotation for classes that inherit -init from NSObject but cannot be usefully initialized using -init
+#define AV_INIT_UNAVAILABLE - (instancetype)init NS_UNAVAILABLE;
+
+#ifndef __has_feature
+	#define __has_feature(FEATURE) 0
+#endif
+
+// Generics
+
+// Use when declaring a variable of a generic type
+#if __has_feature(objc_generics)
+	#define AV_GENERIC(BASETYPE, ...) BASETYPE<__VA_ARGS__>
+#else
+	#define AV_GENERIC(BASETYPE, ...) BASETYPE
+#endif
+
+// Use when declaring a generic class interface
+#define AV_GENERIC_CLASS AV_GENERIC
+
+// Use to refer to generic types in a generic class
+#if __has_feature(objc_generics)
+	#define AV_PARAMETERIZED_TYPE(TYPENAME, TYPEBOUNDS) TYPENAME
+#else
+	#define AV_PARAMETERIZED_TYPE(TYPENAME, TYPEBOUNDS) TYPEBOUNDS
+#endif
+
+// Pre-10.11
+#ifndef __NSi_10_11
+	#define __NSi_10_11 introduced=10.11
+#endif
+
+#ifndef __NSd_10_11
+	#define __NSd_10_11 ,deprecated=10.11
 #endif
 
 // Pre-10.10
@@ -42,6 +77,16 @@
 // Pre-10.7, weak import
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_7
 	#define __AVAILABILITY_INTERNAL__MAC_10_7 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre-9.0
+#ifndef __NSi_9_0
+	#define __NSi_9_0 introduced=9.0
+#endif
+
+// Pre-8.3
+#ifndef __NSi_8_3
+	#define __NSi_8_3 introduced=8.3
 #endif
 
 // Pre-5.1, weak import
@@ -81,6 +126,18 @@
 
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9
 	#define AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9 WEAK_IMPORT_ATTRIBUTE
+#endif
+
+#ifndef __NSd_9_0
+	#define __NSd_9_0 ,deprecated=9.0
+#endif
+
+#ifndef __NSd_8_3
+	#define __NSd_8_3 ,deprecated=8.3
+#endif
+
+#ifndef __NSd_11_0
+	#define __NSd_11_0 ,deprecated=11.0
 #endif
 
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_4_0_DEP__IPHONE_6_0
@@ -127,3 +184,4 @@
 #ifndef NS_DEPRECATED
     #define NS_DEPRECATED(a, b, c, d)
 #endif
+

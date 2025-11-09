@@ -1,7 +1,7 @@
 /*
         NSMenuItemCell.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
@@ -12,6 +12,8 @@
 #if ! __LP64__
 @class NSMenuView;
 #endif
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMenuItemCell : NSButtonCell {
     /*All instance variables are private*/
@@ -34,7 +36,7 @@
     } _micFlags;
 }
 
-@property (strong) NSMenuItem *menuItem;
+@property (nullable, strong) NSMenuItem *menuItem;
 
 #if ! __LP64__
 - (void)setMenuView:(NSMenuView *)menuView;
@@ -62,6 +64,8 @@
 - (void)drawKeyEquivalentWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 - (void)drawBorderAndBackgroundWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 
-@property (readonly) NSInteger tag;
+@property NSInteger tag;
 
 @end
+
+NS_ASSUME_NONNULL_END

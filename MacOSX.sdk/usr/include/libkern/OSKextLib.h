@@ -35,9 +35,10 @@ __BEGIN_DECLS
 #include <stdint.h>
 #include <mach/kmod.h>
 #include <mach/vm_types.h>
+#include <uuid/uuid.h>
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <System/libkern/OSReturn.h>
+#include <libkern/OSReturn.h>
 
 /*!
  * @header

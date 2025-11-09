@@ -8,14 +8,17 @@
 #import <Foundation/Foundation.h>
 
 
-@interface EKObject : NSObject {
-}
+@interface EKObject : NSObject
 
 // Returns YES if this object or any sub-object (alarm, etc.) has uncommitted changes.
-- (BOOL)hasChanges;
+@property (nonatomic, readonly) BOOL hasChanges;
 
 // Returns YES if this object has never been saved.
+#if defined(__cplusplus)
 - (BOOL)isNew;
+#else
+@property (nonatomic, readonly, getter=isNew) BOOL new;
+#endif
 
 // If this object is not new, this method will unload all loaded properties and clear any dirty state
 - (void)reset;

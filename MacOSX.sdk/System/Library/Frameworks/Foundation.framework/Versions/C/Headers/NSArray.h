@@ -1,5 +1,5 @@
 /*	NSArray.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,65 +11,67 @@
 
 /****************	Immutable Array		****************/
 
-@interface NSArray : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
 @property (readonly) NSUInteger count;
-- (id)objectAtIndex:(NSUInteger)index;
+- (ObjectType)objectAtIndex:(NSUInteger)index;
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
-@interface NSArray (NSExtendedArray)
+@interface NSArray<ObjectType> (NSExtendedArray)
 
-- (NSArray *)arrayByAddingObject:(id)anObject;
-- (NSArray *)arrayByAddingObjectsFromArray:(NSArray *)otherArray;
+- (NSArray<ObjectType> *)arrayByAddingObject:(ObjectType)anObject;
+- (NSArray<ObjectType> *)arrayByAddingObjectsFromArray:(NSArray<ObjectType> *)otherArray;
 - (NSString *)componentsJoinedByString:(NSString *)separator;
-- (BOOL)containsObject:(id)anObject;
+- (BOOL)containsObject:(ObjectType)anObject;
 @property (readonly, copy) NSString *description;
-- (NSString *)descriptionWithLocale:(id)locale;
-- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
-- (id)firstObjectCommonWithArray:(NSArray *)otherArray;
-- (void)getObjects:(id __unsafe_unretained [])objects range:(NSRange)range;
-- (NSUInteger)indexOfObject:(id)anObject;
-- (NSUInteger)indexOfObject:(id)anObject inRange:(NSRange)range;
-- (NSUInteger)indexOfObjectIdenticalTo:(id)anObject;
-- (NSUInteger)indexOfObjectIdenticalTo:(id)anObject inRange:(NSRange)range;
-- (BOOL)isEqualToArray:(NSArray *)otherArray;
-@property (nonatomic, readonly) id firstObject NS_AVAILABLE(10_6, 4_0);
-@property (nonatomic, readonly) id lastObject;
-- (NSEnumerator *)objectEnumerator;
-- (NSEnumerator *)reverseObjectEnumerator;
+- (NSString *)descriptionWithLocale:(nullable id)locale;
+- (NSString *)descriptionWithLocale:(nullable id)locale indent:(NSUInteger)level;
+- (nullable ObjectType)firstObjectCommonWithArray:(NSArray<ObjectType> *)otherArray;
+- (void)getObjects:(ObjectType __unsafe_unretained [])objects range:(NSRange)range;
+- (NSUInteger)indexOfObject:(ObjectType)anObject;
+- (NSUInteger)indexOfObject:(ObjectType)anObject inRange:(NSRange)range;
+- (NSUInteger)indexOfObjectIdenticalTo:(ObjectType)anObject;
+- (NSUInteger)indexOfObjectIdenticalTo:(ObjectType)anObject inRange:(NSRange)range;
+- (BOOL)isEqualToArray:(NSArray<ObjectType> *)otherArray;
+@property (nullable, nonatomic, readonly) ObjectType firstObject NS_AVAILABLE(10_6, 4_0);
+@property (nullable, nonatomic, readonly) ObjectType lastObject;
+- (NSEnumerator<ObjectType> *)objectEnumerator;
+- (NSEnumerator<ObjectType> *)reverseObjectEnumerator;
 @property (readonly, copy) NSData *sortedArrayHint;
-- (NSArray *)sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator context:(void *)context;
-- (NSArray *)sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator context:(void *)context hint:(NSData *)hint;
-- (NSArray *)sortedArrayUsingSelector:(SEL)comparator;
-- (NSArray *)subarrayWithRange:(NSRange)range;
+- (NSArray<ObjectType> *)sortedArrayUsingFunction:(NSInteger (*)(ObjectType, ObjectType, void * __nullable))comparator context:(nullable void *)context;
+- (NSArray<ObjectType> *)sortedArrayUsingFunction:(NSInteger (*)(ObjectType, ObjectType, void * __nullable))comparator context:(nullable void *)context hint:(nullable NSData *)hint;
+- (NSArray<ObjectType> *)sortedArrayUsingSelector:(SEL)comparator;
+- (NSArray<ObjectType> *)subarrayWithRange:(NSRange)range;
 - (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
 - (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically;
 
-- (void)makeObjectsPerformSelector:(SEL)aSelector;
-- (void)makeObjectsPerformSelector:(SEL)aSelector withObject:(id)argument;
+- (void)makeObjectsPerformSelector:(SEL)aSelector NS_SWIFT_UNAVAILABLE("Use enumerateObjectsUsingBlock: or a for loop instead");
+- (void)makeObjectsPerformSelector:(SEL)aSelector withObject:(nullable id)argument NS_SWIFT_UNAVAILABLE("Use enumerateObjectsUsingBlock: or a for loop instead");
 
-- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes;
+- (NSArray<ObjectType> *)objectsAtIndexes:(NSIndexSet *)indexes;
 
-- (id)objectAtIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
+- (ObjectType)objectAtIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
 
-- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
-- (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
-- (void)enumerateObjectsAtIndexes:(NSIndexSet *)s options:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateObjectsUsingBlock:(void (^)(ObjectType obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(ObjectType obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateObjectsAtIndexes:(NSIndexSet *)s options:(NSEnumerationOptions)opts usingBlock:(void (^)(ObjectType obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 
-- (NSUInteger)indexOfObjectPassingTest:(BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
-- (NSUInteger)indexOfObjectWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
-- (NSUInteger)indexOfObjectAtIndexes:(NSIndexSet *)s options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSUInteger)indexOfObjectPassingTest:(BOOL (^)(ObjectType obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSUInteger)indexOfObjectWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(ObjectType obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSUInteger)indexOfObjectAtIndexes:(NSIndexSet *)s options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(ObjectType obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
 
-- (NSIndexSet *)indexesOfObjectsPassingTest:(BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
-- (NSIndexSet *)indexesOfObjectsWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
-- (NSIndexSet *)indexesOfObjectsAtIndexes:(NSIndexSet *)s options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSIndexSet *)indexesOfObjectsPassingTest:(BOOL (^)(ObjectType obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSIndexSet *)indexesOfObjectsWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(ObjectType obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSIndexSet *)indexesOfObjectsAtIndexes:(NSIndexSet *)s options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(ObjectType obj, NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
 
-- (NSArray *)sortedArrayUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
-- (NSArray *)sortedArrayWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
+- (NSArray<ObjectType> *)sortedArrayUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
+- (NSArray<ObjectType> *)sortedArrayWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 
 typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 	NSBinarySearchingFirstEqual = (1UL << 8),
@@ -77,89 +79,90 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 	NSBinarySearchingInsertionIndex = (1UL << 10),
 };
 
-- (NSUInteger)indexOfObject:(id)obj inSortedRange:(NSRange)r options:(NSBinarySearchingOptions)opts usingComparator:(NSComparator)cmp NS_AVAILABLE(10_6, 4_0); // binary search
+- (NSUInteger)indexOfObject:(ObjectType)obj inSortedRange:(NSRange)r options:(NSBinarySearchingOptions)opts usingComparator:(NSComparator)cmp NS_AVAILABLE(10_6, 4_0); // binary search
 
 @end
 
-@interface NSArray (NSArrayCreation)
+@interface NSArray<ObjectType> (NSArrayCreation)
 
 + (instancetype)array;
-+ (instancetype)arrayWithObject:(id)anObject;
-+ (instancetype)arrayWithObjects:(const id [])objects count:(NSUInteger)cnt;
-+ (instancetype)arrayWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-+ (instancetype)arrayWithArray:(NSArray *)array;
++ (instancetype)arrayWithObject:(ObjectType)anObject;
++ (instancetype)arrayWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt;
++ (instancetype)arrayWithObjects:(ObjectType)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)arrayWithArray:(NSArray<ObjectType> *)array;
 
-- (instancetype)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-- (instancetype)initWithArray:(NSArray *)array;
-- (instancetype)initWithArray:(NSArray *)array copyItems:(BOOL)flag;
+- (instancetype)initWithObjects:(ObjectType)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithArray:(NSArray<ObjectType> *)array;
+- (instancetype)initWithArray:(NSArray<ObjectType> *)array copyItems:(BOOL)flag;
 
-+ (NSArray *)arrayWithContentsOfFile:(NSString *)path;
-+ (NSArray *)arrayWithContentsOfURL:(NSURL *)url;
-- (NSArray *)initWithContentsOfFile:(NSString *)path;
-- (NSArray *)initWithContentsOfURL:(NSURL *)url;
++ (nullable NSArray<ObjectType> *)arrayWithContentsOfFile:(NSString *)path;
++ (nullable NSArray<ObjectType> *)arrayWithContentsOfURL:(NSURL *)url;
+- (nullable NSArray<ObjectType> *)initWithContentsOfFile:(NSString *)path;
+- (nullable NSArray<ObjectType> *)initWithContentsOfURL:(NSURL *)url;
 
 @end
 
-@interface NSArray (NSDeprecated)
+@interface NSArray<ObjectType> (NSDeprecated)
 
 /* This method is unsafe because it could potentially cause buffer overruns. You should use -getObjects:range: instead.
 */
-- (void)getObjects:(id __unsafe_unretained [])objects;
+- (void)getObjects:(ObjectType __unsafe_unretained [])objects;
 
 @end
 
 /****************	Mutable Array		****************/
 
-@interface NSMutableArray : NSArray
+@interface NSMutableArray<ObjectType> : NSArray<ObjectType>
 
-- (void)addObject:(id)anObject;
-- (void)insertObject:(id)anObject atIndex:(NSUInteger)index;
+- (void)addObject:(ObjectType)anObject;
+- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;
 - (void)removeLastObject;
 - (void)removeObjectAtIndex:(NSUInteger)index;
-- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
-@interface NSMutableArray (NSExtendedMutableArray)
+@interface NSMutableArray<ObjectType> (NSExtendedMutableArray)
     
-- (void)addObjectsFromArray:(NSArray *)otherArray;
+- (void)addObjectsFromArray:(NSArray<ObjectType> *)otherArray;
 - (void)exchangeObjectAtIndex:(NSUInteger)idx1 withObjectAtIndex:(NSUInteger)idx2;
 - (void)removeAllObjects;
-- (void)removeObject:(id)anObject inRange:(NSRange)range;
-- (void)removeObject:(id)anObject;
-- (void)removeObjectIdenticalTo:(id)anObject inRange:(NSRange)range;
-- (void)removeObjectIdenticalTo:(id)anObject;
+- (void)removeObject:(ObjectType)anObject inRange:(NSRange)range;
+- (void)removeObject:(ObjectType)anObject;
+- (void)removeObjectIdenticalTo:(ObjectType)anObject inRange:(NSRange)range;
+- (void)removeObjectIdenticalTo:(ObjectType)anObject;
 - (void)removeObjectsFromIndices:(NSUInteger *)indices numIndices:(NSUInteger)cnt NS_DEPRECATED(10_0, 10_6, 2_0, 4_0);
-- (void)removeObjectsInArray:(NSArray *)otherArray;
+- (void)removeObjectsInArray:(NSArray<ObjectType> *)otherArray;
 - (void)removeObjectsInRange:(NSRange)range;
-- (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray range:(NSRange)otherRange;
-- (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray;
-- (void)setArray:(NSArray *)otherArray;
-- (void)sortUsingFunction:(NSInteger (*)(id, id, void *))compare context:(void *)context;
+- (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray<ObjectType> *)otherArray range:(NSRange)otherRange;
+- (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray<ObjectType> *)otherArray;
+- (void)setArray:(NSArray<ObjectType> *)otherArray;
+- (void)sortUsingFunction:(NSInteger (*)(ObjectType,  ObjectType, void * __nullable))compare context:(nullable void *)context;
 - (void)sortUsingSelector:(SEL)comparator;
 
-- (void)insertObjects:(NSArray *)objects atIndexes:(NSIndexSet *)indexes;
+- (void)insertObjects:(NSArray<ObjectType> *)objects atIndexes:(NSIndexSet *)indexes;
 - (void)removeObjectsAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray *)objects;
+- (void)replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray<ObjectType> *)objects;
 
-- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
+- (void)setObject:(ObjectType)obj atIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
 
 - (void)sortUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 - (void)sortWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 
 @end
 
-@interface NSMutableArray (NSMutableArrayCreation)
+@interface NSMutableArray<ObjectType> (NSMutableArrayCreation)
 
 + (instancetype)arrayWithCapacity:(NSUInteger)numItems;
 
-+ (NSMutableArray *)arrayWithContentsOfFile:(NSString *)path;
-+ (NSMutableArray *)arrayWithContentsOfURL:(NSURL *)url;
-- (NSMutableArray *)initWithContentsOfFile:(NSString *)path;
-- (NSMutableArray *)initWithContentsOfURL:(NSURL *)url;
++ (nullable NSMutableArray<ObjectType> *)arrayWithContentsOfFile:(NSString *)path;
++ (nullable NSMutableArray<ObjectType> *)arrayWithContentsOfURL:(NSURL *)url;
+- (nullable NSMutableArray<ObjectType> *)initWithContentsOfFile:(NSString *)path;
+- (nullable NSMutableArray<ObjectType> *)initWithContentsOfURL:(NSURL *)url;
 
 @end
 
+NS_ASSUME_NONNULL_END

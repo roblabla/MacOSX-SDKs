@@ -1,4 +1,4 @@
-framework module JavaVM [extern_c] [system] {
+framework module JavaVM [extern_c] {
   umbrella "Headers"
 
   export *

@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,6 +10,8 @@ typedef int NSSocketNativeHandle;
 @class NSConnection, NSPortMessage;
 @class NSData;
 @protocol NSPortDelegate, NSMachPortDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 
@@ -26,8 +28,8 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 - (void)invalidate;
 @property (readonly, getter=isValid) BOOL valid;
 
-- (void)setDelegate:(id <NSPortDelegate>)anObject;
-- (id <NSPortDelegate>)delegate;
+- (void)setDelegate:(nullable id <NSPortDelegate>)anObject;
+- (nullable id <NSPortDelegate>)delegate;
 
 // These two methods should be implemented by subclasses
 // to setup monitoring of the port when added to a run loop,
@@ -39,8 +41,8 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 // DO Transport API; subclassers should implement these methods
 // default is 0
 @property (readonly) NSUInteger reservedSpaceLength;	
-- (BOOL)sendBeforeDate:(NSDate *)limitDate components:(NSMutableArray *)components from:(NSPort *) receivePort reserved:(NSUInteger)headerSpaceReserved;
-- (BOOL)sendBeforeDate:(NSDate *)limitDate msgid:(NSUInteger)msgID components:(NSMutableArray *)components from:(NSPort *)receivePort reserved:(NSUInteger)headerSpaceReserved;
+- (BOOL)sendBeforeDate:(NSDate *)limitDate components:(nullable NSMutableArray *)components from:(nullable NSPort *) receivePort reserved:(NSUInteger)headerSpaceReserved;
+- (BOOL)sendBeforeDate:(NSDate *)limitDate msgid:(NSUInteger)msgID components:(nullable NSMutableArray *)components from:(nullable NSPort *)receivePort reserved:(NSUInteger)headerSpaceReserved;
 	// The components array consists of a series of instances
 	// of some subclass of NSData, and instances of some
 	// subclass of NSPort; since one subclass of NSPort does
@@ -53,8 +55,8 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 	// being used in the same program, this requires some care.
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
-- (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
-- (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
+- (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+- (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
 	// The default implementation of these two methods is to
 	// simply add the receiving port to the run loop in the
 	// given mode.  Subclassers need not override these methods,
@@ -84,19 +86,19 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 }
 
 + (NSPort *)portWithMachPort:(uint32_t)machPort;
-- (instancetype)initWithMachPort:(uint32_t)machPort;
+- (instancetype)initWithMachPort:(uint32_t)machPort NS_DESIGNATED_INITIALIZER;
 
-- (void)setDelegate:(id <NSMachPortDelegate>)anObject;
-- (id <NSMachPortDelegate>)delegate;
+- (void)setDelegate:(nullable id <NSMachPortDelegate>)anObject;
+- (nullable id <NSMachPortDelegate>)delegate;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSMachPortOptions) {
     NSMachPortDeallocateNone = 0,
     NSMachPortDeallocateSendRight = (1UL << 0),
     NSMachPortDeallocateReceiveRight = (1UL << 1)
 } NS_ENUM_AVAILABLE(10_5, 2_0);
 
-+ (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0);
-- (instancetype)initWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;
++ (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f NS_AVAILABLE(10_5, 2_0);
+- (instancetype)initWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;
 
 @property (readonly) uint32_t machPort;
 
@@ -150,10 +152,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 }
 
 - (instancetype)init;
-- (instancetype)initWithTCPPort:(unsigned short)port;
-- (instancetype)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol address:(NSData *)address NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol socket:(NSSocketNativeHandle)sock NS_DESIGNATED_INITIALIZER;
-- (instancetype)initRemoteWithTCPPort:(unsigned short)port host:(NSString *)hostName;
+- (nullable instancetype)initWithTCPPort:(unsigned short)port;
+- (nullable instancetype)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol address:(NSData *)address NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol socket:(NSSocketNativeHandle)sock NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initRemoteWithTCPPort:(unsigned short)port host:(nullable NSString *)hostName;
 - (instancetype)initRemoteWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol address:(NSData *)address NS_DESIGNATED_INITIALIZER;
 
 
@@ -167,3 +169,4 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 #endif
 
+NS_ASSUME_NONNULL_END

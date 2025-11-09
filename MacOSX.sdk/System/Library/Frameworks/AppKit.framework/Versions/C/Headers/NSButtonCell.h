@@ -1,11 +1,13 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSAttributedString, NSFont, NSImage, NSSound;
 
@@ -139,10 +141,10 @@ typedef struct __BCFlags2 {
 }
 
 
-@property (copy) NSString *title;
+@property (null_resettable, copy) NSString *title;
 @property (copy) NSString *alternateTitle;
 
-@property (strong) NSImage *alternateImage;
+@property (nullable, strong) NSImage *alternateImage;
 @property NSCellImagePosition imagePosition;
 @property NSImageScaling imageScaling NS_AVAILABLE_MAC(10_5);
 
@@ -155,9 +157,9 @@ typedef struct __BCFlags2 {
 - (void)getPeriodicDelay:(float *)delay interval:(float *)interval;
 @property (copy) NSString *keyEquivalent;
 @property NSUInteger keyEquivalentModifierMask;
-@property (strong) NSFont *keyEquivalentFont;
+@property (nullable, strong) NSFont *keyEquivalentFont;
 - (void)setKeyEquivalentFont:(NSString *)fontName size:(CGFloat)fontSize;
-- (void)performClick:(id)sender; // Significant NSCell override, actually clicks itself.
+- (void)performClick:(nullable id)sender; // Significant NSCell override, actually clicks itself.
 
 - (void)drawImage:(NSImage*)image withFrame:(NSRect)frame inView:(NSView*)controlView;
 - (NSRect)drawTitle:(NSAttributedString*)title withFrame:(NSRect)frame inView:(NSView*)controlView;
@@ -194,7 +196,7 @@ typedef NS_ENUM(NSUInteger, NSGradientType) {
 - (void)mouseEntered:(NSEvent*)event;
 - (void)mouseExited:(NSEvent*)event;
 
-@property (copy) NSColor *backgroundColor;
+@property (nullable, copy) NSColor *backgroundColor;
 
 @end
 
@@ -210,7 +212,7 @@ typedef NS_ENUM(NSUInteger, NSGradientType) {
 @end
 
 @interface NSButtonCell (NSButtonCellSoundExtensions)
-@property (strong) NSSound *sound;
+@property (nullable, strong) NSSound *sound;
 @end
 
 /* In 10.8 and higher, all the *Mnemonic* methods are deprecated. On MacOS they have typically not been used.
@@ -219,8 +221,8 @@ typedef NS_ENUM(NSUInteger, NSGradientType) {
 
 /* On 10.8, these two methods still will call setTitle: (or setAlternateTitle:) with the ampersand stripped from stringWithAmpersand, but does nothing else. Use setTitle directly.
  */
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
-- (void)setAlternateTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+- (void)setTitleWithMnemonic:(null_unspecified NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+- (void)setAlternateTitleWithMnemonic:(null_unspecified NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
 
 /* This method no longer does anything and should not be called.
  */
@@ -230,6 +232,8 @@ typedef NS_ENUM(NSUInteger, NSGradientType) {
  */
 - (NSUInteger)alternateMnemonicLocation NS_DEPRECATED_MAC(10_0, 10_8);
 
-- (NSString *)alternateMnemonic NS_DEPRECATED_MAC(10_0, 10_8);
+- (null_unspecified NSString *)alternateMnemonic NS_DEPRECATED_MAC(10_0, 10_8);
 @end
+
+NS_ASSUME_NONNULL_END
 

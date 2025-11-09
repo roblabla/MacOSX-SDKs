@@ -1,7 +1,7 @@
 /*
     NSEntityMigrationPolicy.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <Foundation/NSError.h>
 
 #import <CoreData/CoreDataDefines.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* To access the entity migration policy keys in property mapping value expressions implemented in source code use the constants as declared.  To access them in custom value expression strings in the mapping model editor in Xcode follow the syntax rules outlined in the predicate format string syntax guide and refer to them as:
  NSMigrationManagerKey           $manager
@@ -28,6 +30,7 @@ COREDATA_EXTERN NSString * const NSMigrationEntityPolicyKey NS_AVAILABLE(10_5,3_
 @class NSManagedObject;
 @class NSEntityMapping;
 @class NSMigrationManager;
+@class NSError;
 
 NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSEntityMigrationPolicy : NSObject
@@ -71,3 +74,4 @@ associate the source and destination instances as required if super is not calle
 
 @end
 
+NS_ASSUME_NONNULL_END

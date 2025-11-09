@@ -1,5 +1,5 @@
-.\" Copyright (c) 2004-2013 Apple Inc. All rights reserved.
-.Dd Mar. 16, 2013
+.\" Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+.Dd Mar. 27, 2015
 .Dt "vmmap" 1
 .Os
 .Sh NAME
@@ -7,15 +7,18 @@
 .Nd Display the virtual memory regions allocated in a process
 .Sh SYNOPSIS
 .Nm vmmap
-.Op Fl d Ar seconds
 .Op Fl w
+.Op Fl v
 .Op Fl resident
+.Op Fl dirty
+.Op Fl swapped
+.Op Fl purge
 .Op Fl pages
 .Op Fl interleaved
 .Op Fl submap
 .Op Fl allSplitLibs
 .Op Fl noCoalesce
-.Op Fl v
+.Op Fl summary
 .Ar pid | partial-executable-name
 .Sh DESCRIPTION
 .Nm vmmap
@@ -26,14 +29,26 @@ by process ID or by full or partial executable name.
 .Pp
 .Sh OPTIONS
 .Bl -tag -width "-allSplitLibs"
-.It Fl d Ar seconds
-Take two snapshots of the vm regions of the process, separated by the
-specified time, and print the delta between those snapshots.
 .It Fl w, Fl wide
 Print wide output.
+.It Fl v, Fl verbose
+Equivalent to
+.Fl w
+.Fl resident
+.Fl dirty
+.Fl swapped
+.Fl purge
+.Fl submap
+.Fl allSplitLibs
+.Fl noCoalesce
 .It Fl resident
-Show both the virtual and resident sizes for each region, in the form
-[ virtual/resident].
+Print the amount of memory region that is resident.
+.It Fl dirty
+Print the amount of memory region that is dirty.
+.It Fl swapped
+Print the amount of memory region that is swapped (paged out or compressed).
+.It Fl purge
+Print the amount of memory region that is purgeable.
 .It Fl pages
 Print region sizes in page counts rather than kilobytes.
 .It Fl interleaved
@@ -46,15 +61,8 @@ Print information about all shared system split libraries, even those not
 loaded by this process.
 .It Fl noCoalesce
 Do not coalesce adjacent identical regions.  Default is to coalesce for more concise output.
-.It Fl v, Fl verbose
-Equivalent to 
-.Fl w 
-.Fl resident 
-.Fl dirty 
-.Fl purge 
-.Fl submap 
-.Fl allSplitLibs 
-.Fl noCoalesce
+.It Fl summary
+Print only the summary of VM usage, not the individual region detail.
 .El
 .Pp
 .Sh EXPLANATION OF OUTPUT
@@ -73,10 +81,8 @@ a read or write happens.
 Thus, this size may not correctly describe the application's true memory
 usage.
 .Pp
-If the \fB-resident\fR flag is given, then both the virtual and physical size
-of each region is shown, in the form [virtual/resident].  By default, the
-sizes are shown in kilobytes.  If the \fB-pages\fR flag is given, then the 
-sizes are in number of 4KB pages.
+By default, the sizes are shown in kilobytes or megabytes.  If the \fB-pages\fR
+flag is given, then the sizes are in number of VM pages.
 .Pp
 The protection mode describes if the memory is readable, writable, or
 executable.  Each virtual memory region has a current permission, and

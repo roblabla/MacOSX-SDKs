@@ -29,6 +29,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class WKFrameInfo;
 
 /*! Contains information about a navigation response, used for making policy decisions.
@@ -50,5 +52,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly) BOOL canShowMIMEType;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

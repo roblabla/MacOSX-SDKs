@@ -1,19 +1,22 @@
 /* CoreAnimation - CAGradientLayer.h
 
-   Copyright (c) 2008-2014, Apple Inc.
+   Copyright (c) 2008-2015, Apple Inc.
    All rights reserved. */
 
 /* The gradient layer draws a color gradient over its background color,
  * filling the shape of the layer (i.e. including rounded corners). */
 
 #import <QuartzCore/CALayer.h>
+#import <Foundation/NSArray.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CAGradientLayer : CALayer
 
 /* The array of CGColorRef objects defining the color of each gradient
  * stop. Defaults to nil. Animatable. */
 
-@property(copy) NSArray *colors;
+@property(nullable, copy) NSArray *colors;
 
 /* An optional array of NSNumber objects defining the location of each
  * gradient stop as a value in the range [0,1]. The values must be
@@ -22,7 +25,7 @@
  * the colors are mapped to the output colorspace before being
  * interpolated. Defaults to nil. Animatable. */
 
-@property(copy) NSArray *locations;
+@property(nullable, copy) NSArray<NSNumber *> *locations;
 
 /* The start and end points of the gradient when drawn into the layer's
  * coordinate space. The start point corresponds to the first gradient
@@ -32,7 +35,8 @@
  * corner of the layer, [1,1] is the top-right corner.) The default values
  * are [.5,0] and [.5,1] respectively. Both are animatable. */
 
-@property CGPoint startPoint, endPoint;
+@property CGPoint startPoint;
+@property CGPoint endPoint;
 
 /* The kind of gradient that will be drawn. Currently the only allowed
  * value is `axial' (the default value). */
@@ -45,3 +49,5 @@
 
 CA_EXTERN NSString * const kCAGradientLayerAxial
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+
+NS_ASSUME_NONNULL_END

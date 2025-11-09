@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -23,6 +23,11 @@
 #import <AppKit/NSButtonCell.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSClipView.h>
+#import <AppKit/NSCollectionView.h>
+#import <AppKit/NSCollectionViewLayout.h>
+#import <AppKit/NSCollectionViewFlowLayout.h>
+#import <AppKit/NSCollectionViewGridLayout.h>
+#import <AppKit/NSCollectionViewTransitionLayout.h>
 #import <AppKit/NSControl.h>
 #import <AppKit/NSDockTile.h>
 #import <AppKit/NSFont.h>
@@ -72,6 +77,7 @@
 #import <AppKit/NSImageRep.h>
 #import <AppKit/NSImageView.h>
 #import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSLayoutGuide.h>
 #import <AppKit/NSNib.h>
 #import <AppKit/NSNibLoading.h>
 #import <AppKit/NSPrinter.h>
@@ -126,6 +132,7 @@
 #import <AppKit/NSTableHeaderView.h>
 #import <AppKit/NSTableRowView.h>
 #import <AppKit/NSTableView.h>
+#import <AppKit/NSTableViewRowAction.h>
 #import <AppKit/NSOutlineView.h>
 #import <AppKit/NSAttributedString.h>
 #import <AppKit/NSLayoutManager.h>
@@ -204,10 +211,10 @@
 #import <AppKit/NSPathControlItem.h>
 #import <AppKit/NSPageController.h>
 #import <AppKit/NSPopover.h>
-#import <AppKit/NSCollectionView.h>
 #import <AppKit/NSTextInputClient.h>
 #import <AppKit/NSTextInputContext.h>
 #import <AppKit/NSUserInterfaceItemSearching.h>
+#import <AppKit/NSUserInterfaceLayout.h>
 #import <AppKit/NSTouch.h>
 #import <AppKit/NSWindowRestoration.h>
 #import <AppKit/NSTextAlternatives.h>
@@ -216,3 +223,7 @@
 #import <AppKit/NSVisualEffectView.h>
 #import <AppKit/NSItemProvider.h>
 #import <AppKit/NSTitlebarAccessoryViewController.h>
+#import <AppKit/NSDataAsset.h>
+#import <AppKit/NSAlignmentFeedbackFilter.h>
+#import <AppKit/NSHapticFeedback.h>
+#import <AppKit/NSPressureConfiguration.h>

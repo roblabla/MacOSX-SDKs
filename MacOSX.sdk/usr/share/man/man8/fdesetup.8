@@ -1,9 +1,9 @@
-.Dd June 05, 2014
+.Dd June 19, 2015
 .Dt fdesetup 8 
 .Os MacOSX
 .Sh NAME
 .Nm fdesetup
-.Nd FileVault enabling tool
+.Nd FileVault configuration tool
 .Sh SYNOPSIS
 .Nm
 .Ar verb
@@ -47,9 +47,9 @@ option to display a full list of existing user types along with some additional 
 command will remove a user from FileVault given either the user name or the FileVault UUID.
 .Pp
 The
-.Sy syncusers
+.Sy sync
 command synchronizes Open Directory attributes (e.g. user pictures) with appropriate FileVault users, and removes FileVault users that were removed from Open Directory.   In most cases these changes will already be updated in FileVault.
-.Sy syncusers
+.Sy sync
 does not add users to FileVault.
 .Pp
 Use the
@@ -211,14 +211,10 @@ Removes the current recovery key.   Either personal and/or institutional options
 .Pp
 .\"             -- authrestart --
 .It Sy authrestart
-.Oo
-.Op Fl key Ar path_to_keychain_file
-\*(Ba
 .Op Fl inputplist
-.Oc
 .Op Fl verbose
 .br
-If FileVault is enabled on the current volume, it restarts the system, bypassing the initial unlock.   The command may not work on all systems.  The -key option can be optionally used to unlock FileVault.   More information on this is described elsewhere in this document.
+If FileVault is enabled on the current volume, it restarts the system, bypassing the initial unlock.   The command may not work on all systems.
 .Pp
 .\"             -- isactive --
 .It Sy isactive

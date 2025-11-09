@@ -1,4 +1,4 @@
-framework module IOBluetoothUI [extern_c] [system] {
+framework module IOBluetoothUI [extern_c] {
   umbrella header "IOBluetoothUI.h"
 
   export *

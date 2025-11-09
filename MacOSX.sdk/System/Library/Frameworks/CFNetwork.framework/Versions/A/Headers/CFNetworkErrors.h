@@ -29,6 +29,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*
  *  kCFErrorDomainCFNetwork
@@ -119,6 +120,7 @@ typedef CF_ENUM(int, CFNetworkErrors) {
   kCFURLErrorCallIsActive = -1019,
   kCFURLErrorDataNotAllowed = -1020,
   kCFURLErrorRequestBodyStreamExhausted = -1021,
+  kCFURLErrorAppTransportSecurityRequiresSecureConnection = -1022,
   kCFURLErrorFileDoesNotExist = -1100,
   kCFURLErrorFileIsDirectory = -1101,
   kCFURLErrorNoPermissionsToReadFile = -1102,
@@ -246,6 +248,7 @@ CFN_EXPORT const CFStringRef kCFDNSServiceFailureKey CF_AVAILABLE(10_5, 2_0);
 CFN_EXPORT const CFStringRef kCFFTPStatusCodeKey CF_AVAILABLE(10_5, 2_0);
 
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFNETWORKERRORS__ */

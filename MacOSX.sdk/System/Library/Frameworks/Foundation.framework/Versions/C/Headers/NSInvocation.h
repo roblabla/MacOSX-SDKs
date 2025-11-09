@@ -1,5 +1,5 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,6 +7,9 @@
 
 @class NSMethodSignature;
 
+NS_ASSUME_NONNULL_BEGIN
+
+NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 @interface NSInvocation : NSObject {
 @private
     __strong void *_frame;
@@ -24,7 +27,7 @@
 - (void)retainArguments;
 @property (readonly) BOOL argumentsRetained;
 
-@property (assign) id target;
+@property (nullable, assign) id target;
 @property SEL selector;
 
 - (void)getReturnValue:(void *)retLoc;
@@ -83,3 +86,4 @@ typedef struct {
 #endif
 #endif
 
+NS_ASSUME_NONNULL_END

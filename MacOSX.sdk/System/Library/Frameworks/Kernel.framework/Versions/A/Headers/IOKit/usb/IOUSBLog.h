@@ -24,6 +24,10 @@
 #ifndef _IOKIT_IOUSBLOG_H
 #define _IOKIT_IOUSBLOG_H
 
+#ifndef __IOUSBFAMILY__
+#warning "Deprecated header file.  See IOUSBHostFamily for USB-Host KPI."
+#endif
+
 #ifdef KERNEL
     #include 	<IOKit/IOService.h>
     #include	<IOKit/IOLib.h>

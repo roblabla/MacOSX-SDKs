@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2006-2012 Apple Inc. All rights reserved.
+    Copyright 2006-2015 Apple Inc. All rights reserved.
   
 */
 
@@ -54,7 +54,12 @@ extern "C" {
 	@constant	kCMSimpleQueueError_ParameterOutOfRange			An out-of-range value was passed for a parameter with a restricted valid range.
 	@constant	kCMSimpleQueueError_QueueIsFull					Operation failed because queue was full.
 */
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMSimpleQueueError_AllocationFailed					= -12770,
 	kCMSimpleQueueError_RequiredParameterMissing			= -12771,
 	kCMSimpleQueueError_ParameterOutOfRange					= -12772,
@@ -70,7 +75,7 @@ enum {
 	@abstract	A reference to a CMSimpleQueue, a CF object that implements a simple lockless queue of (void *) elements.
 		
 */
-typedef struct opaqueCMSimpleQueue *CMSimpleQueueRef;
+typedef struct CM_BRIDGED_TYPE(id) opaqueCMSimpleQueue *CMSimpleQueueRef;
 
 //=============================================================================
 
@@ -94,13 +99,13 @@ CFTypeID CMSimpleQueueGetTypeID(void)
 */
 CM_EXPORT
 OSStatus CMSimpleQueueCreate(
-	CFAllocatorRef allocator,		/*! @param allocator
-										Allocator used to allocate storage for the queue. */
-	int32_t capacity,				/*! @param capacity
-										Capacity of the queue (maximum number of elements holdable at any
-										given time).  Required (must not be 0).  Must be a positive value. */
-	CMSimpleQueueRef *queueOut) 	/*! @param queueOut Returned newly created queue is written to this address.
-										Must not be NULL. */
+	CFAllocatorRef CM_NULLABLE allocator,					/*! @param allocator
+																Allocator used to allocate storage for the queue. */
+	int32_t capacity,										/*! @param capacity
+																Capacity of the queue (maximum number of elements holdable at any
+																given time).  Required (must not be 0).  Must be a positive value. */
+	CM_RETURNS_RETAINED_PARAMETER CMSimpleQueueRef CM_NULLABLE * CM_NONNULL queueOut)		/*! @param queueOut Returned newly created queue is written to this address.
+																Must not be NULL. */
 		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 /*!
@@ -111,11 +116,11 @@ OSStatus CMSimpleQueueCreate(
 */
 CM_EXPORT
 OSStatus CMSimpleQueueEnqueue(
-	CMSimpleQueueRef queue,		/*! @param queue
-									The queue on which to enqueue the element. Must not be NULL. */
-	const void *element)		/*! @param element
-									Element to enqueue. Must not be NULL (NULL is returned from Dequeue
-									to indicate an empty queue). */
+	CMSimpleQueueRef CM_NONNULL queue,		/*! @param queue
+												The queue on which to enqueue the element. Must not be NULL. */
+	const void * CM_NONNULL element)		/*! @param element
+												Element to enqueue. Must not be NULL (NULL is returned from Dequeue
+												to indicate an empty queue). */
 		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 /*!
@@ -125,9 +130,9 @@ OSStatus CMSimpleQueueEnqueue(
 	@result		The dequeued element.  NULL if the queue was empty, or if there was some other error.
 */
 CM_EXPORT
-const void *CMSimpleQueueDequeue(
-	CMSimpleQueueRef queue) 	/*! @param queue
-									The queue from which to dequeue an element. Must not be NULL. */
+const void * CM_NULLABLE CMSimpleQueueDequeue(
+	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
+											The queue from which to dequeue an element. Must not be NULL. */
 		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 /*!
@@ -137,9 +142,9 @@ const void *CMSimpleQueueDequeue(
 	@result		The head element.  NULL if the queue was empty, or if there was some other error.
 */
 CM_EXPORT
-const void *CMSimpleQueueGetHead(
-	CMSimpleQueueRef queue) 	/*! @param queue
-									The queue from which to get the head element. Must not be NULL. */
+const void * CM_NULLABLE CMSimpleQueueGetHead(
+	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
+											The queue from which to get the head element. Must not be NULL. */
 		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 /*!
@@ -153,8 +158,8 @@ const void *CMSimpleQueueGetHead(
 */
 CM_EXPORT
 OSStatus CMSimpleQueueReset(
-	CMSimpleQueueRef queue) 	/*! @param queue
-									The queue to reset. Must not be NULL. */
+	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
+											The queue to reset. Must not be NULL. */
 		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 /*!
@@ -165,8 +170,8 @@ OSStatus CMSimpleQueueReset(
 */
 CM_EXPORT
 int32_t CMSimpleQueueGetCapacity(
-	CMSimpleQueueRef queue) 	/*! @param queue
-									The queue being interrogated. Must not be NULL. */
+	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
+											The queue being interrogated. Must not be NULL. */
 		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 /*!
@@ -176,8 +181,8 @@ int32_t CMSimpleQueueGetCapacity(
 */
 CM_EXPORT
 int32_t CMSimpleQueueGetCount(
-	CMSimpleQueueRef queue) 	/*! @param queue
-									The queue being interrogated. Must not be NULL. */
+	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
+											The queue being interrogated. Must not be NULL. */
 		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 /*!

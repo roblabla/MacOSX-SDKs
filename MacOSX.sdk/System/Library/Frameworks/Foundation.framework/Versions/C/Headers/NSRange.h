@@ -1,11 +1,13 @@
 /*	NSRange.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
 #import <Foundation/NSObjCRuntime.h>
 
 @class NSString;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef struct _NSRange {
     NSUInteger location;
@@ -45,3 +47,4 @@ FOUNDATION_EXPORT NSRange NSRangeFromString(NSString *aString);
 
 @end
 
+NS_ASSUME_NONNULL_END

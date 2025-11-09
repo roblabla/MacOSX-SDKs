@@ -5,8 +5,16 @@
 #ifndef CGDISPLAYSTREAM_H_
 #define CGDISPLAYSTREAM_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <CoreGraphics/CGDirectDisplay.h>
 #include <IOSurface/IOSurfaceAPI.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 #ifdef __BLOCKS__
 
@@ -37,15 +45,13 @@ typedef const struct CGDisplayStreamUpdate *CGDisplayStreamUpdateRef;
  @const kCGDisplayStreamUpdateDirtyRects The union of both refreshed and moved rects
  @const kCGDisplayStreamUpdateReducedDirtyRects A possibly simplified (but overstated) array of dirty rectangles
 */
-enum
-{
+typedef CF_ENUM(int32_t, CGDisplayStreamUpdateRectType) {
         kCGDisplayStreamUpdateRefreshedRects,
         kCGDisplayStreamUpdateMovedRects,
         kCGDisplayStreamUpdateDirtyRects,
         kCGDisplayStreamUpdateReducedDirtyRects,
 };
-typedef int32_t CGDisplayStreamUpdateRectType;
- 
+
 /*!
  @enum CGDisplayStreamFrameStatus
  @abstract Provides information about incoming frame updates
@@ -54,14 +60,12 @@ typedef int32_t CGDisplayStreamUpdateRectType;
  @const kCGDisplayStreamFrameStatusFrameBlank As of displayTime, the display is has gone blank
  @const kCGDisplayStreamFrameStatusStopped The display stream has stopped and no more calls will be made to the handler until the stream is started.
 */
-enum 
-{
+typedef CF_ENUM(int32_t, CGDisplayStreamFrameStatus){
         kCGDisplayStreamFrameStatusFrameComplete,
         kCGDisplayStreamFrameStatusFrameIdle,
         kCGDisplayStreamFrameStatusFrameBlank,
         kCGDisplayStreamFrameStatusStopped,
 };
-typedef int32_t CGDisplayStreamFrameStatus;
 
 /*!
  @callback CGDisplayStreamFrameAvailableHandler
@@ -80,7 +84,8 @@ typedef int32_t CGDisplayStreamFrameStatus;
  when status is not kCGDisplayStreamFrameStatusFrameComplete.
  */
 typedef void (^CGDisplayStreamFrameAvailableHandler)(CGDisplayStreamFrameStatus status, uint64_t displayTime, 
-                                                                           IOSurfaceRef frameSurface, CGDisplayStreamUpdateRef updateRef);
+                                                                           IOSurfaceRef __nullable frameSurface,
+                                                                           CGDisplayStreamUpdateRef __nullable updateRef);
 
 /*!
  @function CGDisplayStreamUpdateGetTypeID
@@ -88,7 +93,7 @@ typedef void (^CGDisplayStreamFrameAvailableHandler)(CGDisplayStreamFrameStatus 
  @result The CFTypeID of the CGDisplayStreamUpdate class.
 */
 CG_EXTERN CFTypeID CGDisplayStreamUpdateGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
  @function CGDisplayStreamUpdateGetRects
@@ -98,8 +103,8 @@ CG_EXTERN CFTypeID CGDisplayStreamUpdateGetTypeID(void)
  @param count A pointer to where the count of the number of rectangles in the array is to be returned. Must not be NULL.
  @result A pointer to the array of CGRectangles.  This array should not be freed by the caller.
 */
-CG_EXTERN const CGRect *CGDisplayStreamUpdateGetRects(CGDisplayStreamUpdateRef updateRef, 
-    CGDisplayStreamUpdateRectType rectType, size_t *rectCount)
+CG_EXTERN const CGRect * __nullable CGDisplayStreamUpdateGetRects(CGDisplayStreamUpdateRef __nullable updateRef, 
+    CGDisplayStreamUpdateRectType rectType, size_t *  rectCount)
     CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
@@ -114,8 +119,9 @@ CG_EXTERN const CGRect *CGDisplayStreamUpdateGetRects(CGDisplayStreamUpdateRef u
  @param secondUpdate The second update (in a temporal sense)
  @result The new CGDisplayStreamUpdateRef 
 */
-CG_EXTERN CGDisplayStreamUpdateRef CGDisplayStreamUpdateCreateMergedUpdate(CGDisplayStreamUpdateRef firstUpdate,
-    CGDisplayStreamUpdateRef secondUpdate)
+CG_EXTERN CGDisplayStreamUpdateRef __nullable CGDisplayStreamUpdateCreateMergedUpdate(
+    CGDisplayStreamUpdateRef __nullable firstUpdate,
+    CGDisplayStreamUpdateRef __nullable secondUpdate)
     CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
@@ -126,8 +132,9 @@ CG_EXTERN CGDisplayStreamUpdateRef CGDisplayStreamUpdateCreateMergedUpdate(CGDis
  @param dy A pointer to a CGFloat to store the y component of the movement delta
  @discussion The delta values describe the offset from the moved rectangles back to the source location.
 */
-CG_EXTERN void CGDisplayStreamUpdateGetMovedRectsDelta(CGDisplayStreamUpdateRef updateRef,
-  CGFloat *dx, CGFloat *dy) CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN void CGDisplayStreamUpdateGetMovedRectsDelta(CGDisplayStreamUpdateRef __nullable updateRef,
+    CGFloat *  dx, CGFloat *  dy)
+    CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
  @function CGDisplayStreamGetDropCount
@@ -137,8 +144,8 @@ CG_EXTERN void CGDisplayStreamUpdateGetMovedRectsDelta(CGDisplayStreamUpdateRef 
  @discussion This call is primarily useful for performance measurement to determine if the client is keeping up with
  all WindowServer updates.
 */
-CG_EXTERN size_t CGDisplayStreamUpdateGetDropCount(CGDisplayStreamUpdateRef updateRef)
-  CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN size_t CGDisplayStreamUpdateGetDropCount(CGDisplayStreamUpdateRef __nullable updateRef)
+    CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /* Optional CGDisplayStream Properties */
 
@@ -149,7 +156,7 @@ CG_EXTERN size_t CGDisplayStreamUpdateGetDropCount(CGDisplayStreamUpdateRef upda
  source rectangle is specified in display logical coordinates and not in pixels, in order to match the normal convention on
  HiDPI displays.
 */
-CG_EXTERN const CFStringRef kCGDisplayStreamSourceRect CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);  /* Source rectangle to capture - defaults to entire display */
+CG_EXTERN const CFStringRef  kCGDisplayStreamSourceRect CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);  /* Source rectangle to capture - defaults to entire display */
 
 /*!
  @const kCGDisplayStreamDestinationRect
@@ -158,7 +165,7 @@ CG_EXTERN const CFStringRef kCGDisplayStreamSourceRect CG_AVAILABLE_STARTING(__M
  the destination rectangle is always specified in output pixels to match the fact that the output buffer size is also
  specified in terms of pixels.
  */
-CG_EXTERN const CFStringRef kCGDisplayStreamDestinationRect CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);     /* Destination rectangle - defaults to entire buffer */
+CG_EXTERN const CFStringRef  kCGDisplayStreamDestinationRect CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);     /* Destination rectangle - defaults to entire buffer */
 
 /*!
  @const kCGDisplayStreamPreserveAspectRatio
@@ -167,50 +174,51 @@ CG_EXTERN const CFStringRef kCGDisplayStreamDestinationRect CG_AVAILABLE_STARTIN
  the display stream destination rect are not the same, black borders will be inserted at the top/bottom or right/left sides of the destination
  in order to preserve the source aspect ratio.
  */
-CG_EXTERN const CFStringRef kCGDisplayStreamPreserveAspectRatio CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA); /* CFBoolean - defaults to true */
+CG_EXTERN const CFStringRef  kCGDisplayStreamPreserveAspectRatio CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA); /* CFBoolean - defaults to true */
 
 /*!
  @const kCGDisplayStreamColorSpace
  @discussion Set the desired CGColorSpace of the output frames.  By default the color space will be that of the display.
 */
-CG_EXTERN const CFStringRef kCGDisplayStreamColorSpace CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA); /* Desired output color space (CGColorSpaceRef) - defaults to display color space */
+CG_EXTERN const CFStringRef  kCGDisplayStreamColorSpace CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA); /* Desired output color space (CGColorSpaceRef) - defaults to display color space */
 
 /*!
  @const kCGDisplayStreamMinimumFrameTime
  @discussion Request that the delta between frame updates be at least as much specified by this value.
 */
-CG_EXTERN const CFStringRef kCGDisplayStreamMinimumFrameTime CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);    /* CFNumber in seconds, defaults to zero. */
+CG_EXTERN const CFStringRef  kCGDisplayStreamMinimumFrameTime CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);    /* CFNumber in seconds, defaults to zero. */
 
 /*!
  @const kCGDisplayStreamShowCursor
  @discussion Controls whether the cursor is embedded within the provided buffers or not.
 */
-CG_EXTERN const CFStringRef kCGDisplayStreamShowCursor CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);  /* CFBoolean - defaults to true */
+CG_EXTERN const CFStringRef  kCGDisplayStreamShowCursor CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);  /* CFBoolean - defaults to true */
 
 /*!
  @const kCGDisplayStreamQueueDepth
  @discussion Controls how many frames deep the frame queue will be.  Defaults to N.
  */
-CG_EXTERN const CFStringRef kCGDisplayStreamQueueDepth CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);  /* Queue depth in frames.  Defaults to 3. */
+CG_EXTERN const CFStringRef  kCGDisplayStreamQueueDepth CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);  /* Queue depth in frames.  Defaults to 3. */
 
 /*!
  @const kCGDisplayStreamYCbCrMatrix
  @discussion When outputting frames in 420v or 420f format, this key may be used to control which YCbCr matrix is used
  The value should be one of the three kCGDisplayStreamYCbCrMatrix values specified below.
 */
-CG_EXTERN const CFStringRef kCGDisplayStreamYCbCrMatrix CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGDisplayStreamYCbCrMatrix CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /* Supported YCbCr matrices. Note that these strings have identical values to the equivalent CoreVideo strings. */
-CG_EXTERN const CFStringRef     kCGDisplayStreamYCbCrMatrix_ITU_R_709_2 CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
-CG_EXTERN const CFStringRef     kCGDisplayStreamYCbCrMatrix_ITU_R_601_4 CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
-CG_EXTERN const CFStringRef     kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN const CFStringRef      kCGDisplayStreamYCbCrMatrix_ITU_R_709_2 CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN const CFStringRef      kCGDisplayStreamYCbCrMatrix_ITU_R_601_4 CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN const CFStringRef      kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
  @function CGDisplayStreamGetTypeID
  @abstract Returns the CF "class" ID for CGDisplayStream
  @result The CFTypeID of the CGDisplayStream class.
 */
-CG_EXTERN CFTypeID CGDisplayStreamGetTypeID(void) CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN CFTypeID CGDisplayStreamGetTypeID(void)
+    CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
  @function CGDisplayStreamCreate
@@ -232,9 +240,9 @@ CG_EXTERN CFTypeID CGDisplayStreamGetTypeID(void) CG_AVAILABLE_STARTING(__MAC_10
  @param handler A block that will be called for frame deliver.
  @result The new CGDisplayStream object. 
 */
-CG_EXTERN CGDisplayStreamRef CGDisplayStreamCreate(CGDirectDisplayID display, 
-    size_t outputWidth, size_t outputHeight, int32_t pixelFormat, CFDictionaryRef properties,
-    CGDisplayStreamFrameAvailableHandler handler)
+CG_EXTERN CGDisplayStreamRef __nullable CGDisplayStreamCreate(CGDirectDisplayID display, 
+    size_t outputWidth, size_t outputHeight, int32_t pixelFormat, CFDictionaryRef __nullable properties,
+    CGDisplayStreamFrameAvailableHandler __nullable handler)
     CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
@@ -251,9 +259,9 @@ CG_EXTERN CGDisplayStreamRef CGDisplayStreamCreate(CGDirectDisplayID display,
  @param handler A block that will be called for frame deliver.
  @result The new CGDisplayStream object.
 */
-CG_EXTERN CGDisplayStreamRef CGDisplayStreamCreateWithDispatchQueue(CGDirectDisplayID display, 
-    size_t outputWidth, size_t outputHeight, int32_t pixelFormat, CFDictionaryRef properties,
-    dispatch_queue_t queue, CGDisplayStreamFrameAvailableHandler handler)
+CG_EXTERN CGDisplayStreamRef __nullable CGDisplayStreamCreateWithDispatchQueue(CGDirectDisplayID display, 
+    size_t outputWidth, size_t outputHeight, int32_t pixelFormat, CFDictionaryRef __nullable properties,
+    dispatch_queue_t  queue, CGDisplayStreamFrameAvailableHandler __nullable handler)
     CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
@@ -262,8 +270,8 @@ CG_EXTERN CGDisplayStreamRef CGDisplayStreamCreateWithDispatchQueue(CGDirectDisp
  @param The CGDisplayStream to be started
  @result kCGErrorSuccess If the display stream was started, otherwise an error.
 */
-CG_EXTERN CGError CGDisplayStreamStart(CGDisplayStreamRef displayStream)
-  CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN CGError CGDisplayStreamStart(CGDisplayStreamRef __nullable displayStream)
+    CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
  @function CGDisplayStreamStop
@@ -274,8 +282,8 @@ CG_EXTERN CGError CGDisplayStreamStart(CGDisplayStreamRef displayStream)
  status of kCGDisplayStreamFrameStatusStopped.  After that point it is safe to release the CGDisplayStream.
  It is safe to call this function from within the handler block, but the previous caveat still applies.
 */
-CG_EXTERN CGError CGDisplayStreamStop(CGDisplayStreamRef displayStream)
-  CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN CGError CGDisplayStreamStop(CGDisplayStreamRef __nullable displayStream)
+    CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 /*!
  @function CGDisplayStreamGetRunLoopSource
@@ -284,9 +292,13 @@ CG_EXTERN CGError CGDisplayStreamStop(CGDisplayStreamRef displayStream)
  @result The CFRunLoopSource for this displayStream.  Note: This function will return NULL if the
  display stream was created via  CGDisplayStreamCreateWithDispatchQueue().
 */
-CG_EXTERN CFRunLoopSourceRef CGDisplayStreamGetRunLoopSource(CGDisplayStreamRef displayStream)
-  CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CG_EXTERN CFRunLoopSourceRef __nullable CGDisplayStreamGetRunLoopSource(CGDisplayStreamRef __nullable displayStream)
+    CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 
 #endif /* __BLOCKS__ */
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGDISPLAYSTREAM_H_ */

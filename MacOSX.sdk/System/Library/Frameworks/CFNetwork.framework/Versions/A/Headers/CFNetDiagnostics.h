@@ -30,7 +30,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
-
+CF_ASSUME_NONNULL_BEGIN
 
 /*
  *  CFNetDiagnosticRef
@@ -105,7 +105,7 @@ typedef CFIndex	CFNetDiagnosticStatus;
  *  
  */
 CFN_EXPORT CFNetDiagnosticRef 
-CFNetDiagnosticCreateWithStreams(CFAllocatorRef alloc, CFReadStreamRef readStream, CFWriteStreamRef writeStream) CF_AVAILABLE(10_4, 2_0);
+CFNetDiagnosticCreateWithStreams(CFAllocatorRef __nullable alloc, CFReadStreamRef __nullable readStream, CFWriteStreamRef __nullable writeStream) CF_AVAILABLE(10_4, 2_0);
 
 
 /*
@@ -207,10 +207,11 @@ CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) CF_AVAIL
  *  
  */
 CFN_EXPORT CFNetDiagnosticStatus 
-CFNetDiagnosticCopyNetworkStatusPassively(CFNetDiagnosticRef details, CFStringRef *description) CF_AVAILABLE(10_4, 2_0);
+CFNetDiagnosticCopyNetworkStatusPassively(CFNetDiagnosticRef details, CFStringRef __nullable * __nullable description) CF_AVAILABLE(10_4, 2_0);
 
 
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFNETDIAGNOSTICS__ */

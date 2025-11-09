@@ -35,10 +35,6 @@
 #include <LaunchServices/LSQuarantine.h>
 #endif
 
-#ifndef __LSSHAREDFILELIST__
-#include <LaunchServices/LSSharedFileList.h>
-#endif
-
 #ifndef __UTCORETYPES__
 #include <LaunchServices/UTCoreTypes.h>
 #endif

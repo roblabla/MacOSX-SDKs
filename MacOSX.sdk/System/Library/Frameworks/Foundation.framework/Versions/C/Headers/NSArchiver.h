@@ -1,10 +1,12 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
 
 @class NSString, NSData, NSMutableData, NSMutableDictionary, NSMutableArray;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /************		Archiving: Writing	****************/
 
@@ -24,14 +26,14 @@
 @property (readonly, retain) NSMutableData *archiverData;
 
 - (void)encodeRootObject:(id)rootObject;
-- (void)encodeConditionalObject:(id)object;
+- (void)encodeConditionalObject:(nullable id)object;
 
 + (NSData *)archivedDataWithRootObject:(id)rootObject;
 
 + (BOOL)archiveRootObject:(id)rootObject toFile:(NSString *)path;
 
 - (void)encodeClassName:(NSString *)trueName intoClassName:(NSString *)inArchiveName;
-- (NSString *)classNameEncodedForTrueClassName:(NSString *)trueName;
+- (nullable NSString *)classNameEncodedForTrueClassName:(NSString *)trueName;
 
 - (void)replaceObject:(id)object withObject:(id)newObject;
 
@@ -43,7 +45,7 @@
 @private
     void *		datax;
     NSUInteger		cursor;
-    NSZone		*objectZone;
+    NSZone              *objectZone;
     NSUInteger		systemVersion;
     signed char		streamerVersion;
     char		swap;
@@ -53,22 +55,22 @@
     void		*stringTable;
     id			classVersions;
     NSInteger			lastLabel;
-    void		*map;
+     void		*map;
     void		*allUnarchivedObjects;
     id			reserved;
 }
 
-- (instancetype)initForReadingWithData:(NSData *)data NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initForReadingWithData:(NSData *)data NS_DESIGNATED_INITIALIZER;
 
-- (void)setObjectZone:(NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-- (NSZone *)objectZone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+- (void)setObjectZone:(nullable NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+- (nullable NSZone *)objectZone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 @property (getter=isAtEnd, readonly) BOOL atEnd;
 
 @property (readonly) unsigned int systemVersion;
 
-+ (id)unarchiveObjectWithData:(NSData *)data;
-+ (id)unarchiveObjectWithFile:(NSString *)path;
++ (nullable id)unarchiveObjectWithData:(NSData *)data;
++ (nullable id)unarchiveObjectWithFile:(NSString *)path;
 
 + (void)decodeClassName:(NSString *)inArchiveName asClassName:(NSString *)trueName;
 
@@ -89,7 +91,9 @@ FOUNDATION_EXPORT NSString * const NSInconsistentArchiveException;
 
 @interface NSObject (NSArchiverCallback)
 
-@property (readonly) Class classForArchiver;
-- (id)replacementObjectForArchiver:(NSArchiver *)archiver;
+@property (nullable, readonly) Class classForArchiver;
+- (nullable id)replacementObjectForArchiver:(NSArchiver *)archiver;
 
 @end
+
+NS_ASSUME_NONNULL_END

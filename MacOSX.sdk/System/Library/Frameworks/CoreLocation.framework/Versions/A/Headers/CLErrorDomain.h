@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
  *  kCLErrorDomain
  *  
@@ -18,3 +20,5 @@
  *  The file CLError.h defines constants for the errors in kCLErrorDomain.
  */
 extern NSString *const kCLErrorDomain;
+
+NS_ASSUME_NONNULL_END

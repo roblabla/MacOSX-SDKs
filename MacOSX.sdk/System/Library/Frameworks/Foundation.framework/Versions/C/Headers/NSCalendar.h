@@ -1,5 +1,5 @@
 /*	NSCalendar.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,7 +7,9 @@
 #import <Foundation/NSDate.h>
 #include <CoreFoundation/CFCalendar.h>
 
-@class NSDateComponents, NSLocale, NSTimeZone, NSString, NSArray;
+@class NSDateComponents, NSLocale, NSTimeZone, NSString, NSArray<ObjectType>;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #if !defined(NS_CALENDAR_ENUM_DEPRECATED)
 #if 1 || NS_ENABLE_CALENDAR_DEPRECATIONS
@@ -106,40 +108,41 @@ enum {
 	This method returns a new autoreleased calendar object of the given type, specified by a calendar identifier constant.
 	The calendar defaults to having the current locale and default time zone, for those properties.
 */
-+ (NSCalendar *)calendarWithIdentifier:(NSString *)calendarIdentifierConstant NS_AVAILABLE(10_9, 8_0);
++ (nullable NSCalendar *)calendarWithIdentifier:(NSString *)calendarIdentifierConstant NS_AVAILABLE(10_9, 8_0);
 
+- (instancetype)init NS_UNAVAILABLE;
 
-- (id)initWithCalendarIdentifier:(NSString *)ident NS_DESIGNATED_INITIALIZER;
+- (nullable id)initWithCalendarIdentifier:(NSString *)ident NS_DESIGNATED_INITIALIZER;
 
 @property (readonly, copy) NSString *calendarIdentifier;
-@property (copy) NSLocale *locale;
+@property (nullable, copy) NSLocale *locale;
 @property (copy) NSTimeZone *timeZone;
 @property NSUInteger firstWeekday;
 @property NSUInteger minimumDaysInFirstWeek;
 
 // Methods to return component name strings localized to the calendar's locale
 
-@property (readonly, copy) NSArray *eraSymbols      NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *longEraSymbols  NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *eraSymbols      NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *longEraSymbols  NS_AVAILABLE(10_7, 5_0);
 
-@property (readonly, copy) NSArray *monthSymbols                    NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *shortMonthSymbols               NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *veryShortMonthSymbols           NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *standaloneMonthSymbols          NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *shortStandaloneMonthSymbols     NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *veryShortStandaloneMonthSymbols NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *monthSymbols                    NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *shortMonthSymbols               NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *veryShortMonthSymbols           NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *standaloneMonthSymbols          NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *shortStandaloneMonthSymbols     NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *veryShortStandaloneMonthSymbols NS_AVAILABLE(10_7, 5_0);
 
-@property (readonly, copy) NSArray *weekdaySymbols                    NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *shortWeekdaySymbols               NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *veryShortWeekdaySymbols           NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *standaloneWeekdaySymbols          NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *shortStandaloneWeekdaySymbols     NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *veryShortStandaloneWeekdaySymbols NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *weekdaySymbols                    NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *shortWeekdaySymbols               NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *veryShortWeekdaySymbols           NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *standaloneWeekdaySymbols          NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *shortStandaloneWeekdaySymbols     NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *veryShortStandaloneWeekdaySymbols NS_AVAILABLE(10_7, 5_0);
 
-@property (readonly, copy) NSArray *quarterSymbols                 NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *shortQuarterSymbols            NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *standaloneQuarterSymbols       NS_AVAILABLE(10_7, 5_0);
-@property (readonly, copy) NSArray *shortStandaloneQuarterSymbols  NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *quarterSymbols                 NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *shortQuarterSymbols            NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *standaloneQuarterSymbols       NS_AVAILABLE(10_7, 5_0);
+@property (readonly, copy) NSArray<NSString *> *shortStandaloneQuarterSymbols  NS_AVAILABLE(10_7, 5_0);
 
 @property (readonly, copy) NSString *AMSymbol  NS_AVAILABLE(10_7, 5_0);
 @property (readonly, copy) NSString *PMSymbol  NS_AVAILABLE(10_7, 5_0);
@@ -153,12 +156,12 @@ enum {
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date;
 - (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date;
 
-- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)datep interval:(NSTimeInterval *)tip forDate:(NSDate *)date NS_AVAILABLE(10_5, 2_0);
+- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate * __nullable * __nullable)datep interval:(nullable NSTimeInterval *)tip forDate:(NSDate *)date NS_AVAILABLE(10_5, 2_0);
 
-- (NSDate *)dateFromComponents:(NSDateComponents *)comps;
+- (nullable NSDate *)dateFromComponents:(NSDateComponents *)comps;
 - (NSDateComponents *)components:(NSCalendarUnit)unitFlags fromDate:(NSDate *)date;
 
-- (NSDate *)dateByAddingComponents:(NSDateComponents *)comps toDate:(NSDate *)date options:(NSCalendarOptions)opts;
+- (nullable NSDate *)dateByAddingComponents:(NSDateComponents *)comps toDate:(NSDate *)date options:(NSCalendarOptions)opts;
 
 - (NSDateComponents *)components:(NSCalendarUnit)unitFlags fromDate:(NSDate *)startingDate toDate:(NSDate *)resultDate options:(NSCalendarOptions)opts;
 
@@ -167,21 +170,21 @@ enum {
 	This API is a convenience for getting era, year, month, and day of a given date.
 	Pass NULL for a NSInteger pointer parameter if you don't care about that value.
 */
-- (void)getEra:(out NSInteger *)eraValuePointer year:(out NSInteger *)yearValuePointer month:(out NSInteger *)monthValuePointer day:(out NSInteger *)dayValuePointer fromDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
+- (void)getEra:(out nullable NSInteger *)eraValuePointer year:(out nullable NSInteger *)yearValuePointer month:(out nullable NSInteger *)monthValuePointer day:(out nullable NSInteger *)dayValuePointer fromDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
 
 
 /*
 	This API is a convenience for getting era, year for week-of-year calculations, week of year, and weekday of a given date.
 	Pass NULL for a NSInteger pointer parameter if you don't care about that value.
 */
-- (void)getEra:(out NSInteger *)eraValuePointer yearForWeekOfYear:(out NSInteger *)yearValuePointer weekOfYear:(out NSInteger *)weekValuePointer weekday:(out NSInteger *)weekdayValuePointer fromDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
+- (void)getEra:(out nullable NSInteger *)eraValuePointer yearForWeekOfYear:(out nullable NSInteger *)yearValuePointer weekOfYear:(out nullable NSInteger *)weekValuePointer weekday:(out nullable NSInteger *)weekdayValuePointer fromDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
 
 
 /*
 	This API is a convenience for getting hour, minute, second, and nanoseconds of a given date.
 	Pass NULL for a NSInteger pointer parameter if you don't care about that value.
 */
-- (void)getHour:(out NSInteger *)hourValuePointer minute:(out NSInteger *)minuteValuePointer second:(out NSInteger *)secondValuePointer nanosecond:(out NSInteger *)nanosecondValuePointer fromDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
+- (void)getHour:(out nullable NSInteger *)hourValuePointer minute:(out nullable NSInteger *)minuteValuePointer second:(out nullable NSInteger *)secondValuePointer nanosecond:(out nullable NSInteger *)nanosecondValuePointer fromDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -194,14 +197,14 @@ enum {
 	Create a date with given components.
 	Current era is assumed.
 */
-- (NSDate *)dateWithEra:(NSInteger)eraValue year:(NSInteger)yearValue month:(NSInteger)monthValue day:(NSInteger)dayValue hour:(NSInteger)hourValue minute:(NSInteger)minuteValue second:(NSInteger)secondValue nanosecond:(NSInteger)nanosecondValue NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)dateWithEra:(NSInteger)eraValue year:(NSInteger)yearValue month:(NSInteger)monthValue day:(NSInteger)dayValue hour:(NSInteger)hourValue minute:(NSInteger)minuteValue second:(NSInteger)secondValue nanosecond:(NSInteger)nanosecondValue NS_AVAILABLE(10_9, 8_0);
 
 
 /*
 	Create a date with given components.
 	Current era is assumed.
 */
-- (NSDate *)dateWithEra:(NSInteger)eraValue yearForWeekOfYear:(NSInteger)yearValue weekOfYear:(NSInteger)weekValue weekday:(NSInteger)weekdayValue hour:(NSInteger)hourValue minute:(NSInteger)minuteValue second:(NSInteger)secondValue nanosecond:(NSInteger)nanosecondValue NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)dateWithEra:(NSInteger)eraValue yearForWeekOfYear:(NSInteger)yearValue weekOfYear:(NSInteger)weekValue weekday:(NSInteger)weekdayValue hour:(NSInteger)hourValue minute:(NSInteger)minuteValue second:(NSInteger)secondValue nanosecond:(NSInteger)nanosecondValue NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -267,7 +270,7 @@ enum {
 	Returns NO if the given date is not in a weekend.
 	Note that a given entire Day within a calendar is not necessarily all in a weekend or not; weekends can start in the middle of a Day in some calendars and locales.
 */
-- (BOOL)rangeOfWeekendStartDate:(out NSDate **)datep interval:(out NSTimeInterval *)tip containingDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
+- (BOOL)rangeOfWeekendStartDate:(out NSDate * __nullable * __nullable)datep interval:(out nullable NSTimeInterval *)tip containingDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -276,7 +279,7 @@ enum {
 	Returns NO if there are no such things as weekend in the calendar and its locale.
 	Note that a given entire Day within a calendar is not necessarily all in a weekend or not; weekends can start in the middle of a Day in some calendars and locales.
 */
-- (BOOL)nextWeekendStartDate:(out NSDate **)datep interval:(out NSTimeInterval *)tip options:(NSCalendarOptions)options afterDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
+- (BOOL)nextWeekendStartDate:(out NSDate * __nullable * __nullable)datep interval:(out nullable NSTimeInterval *)tip options:(NSCalendarOptions)options afterDate:(NSDate *)date NS_AVAILABLE(10_9, 8_0);
 
 
 /* 
@@ -293,7 +296,7 @@ enum {
 	This API returns a new NSDate object representing the date calculated by adding an amount of a specific component to a given date.
 	The NSCalendarWrapComponents option specifies if the component should be incremented and wrap around to zero/one on overflow, and should not cause higher units to be incremented.
 */
-- (NSDate *)dateByAddingUnit:(NSCalendarUnit)unit value:(NSInteger)value toDate:(NSDate *)date options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)dateByAddingUnit:(NSCalendarUnit)unit value:(NSInteger)value toDate:(NSDate *)date options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -318,14 +321,14 @@ enum {
 	Result dates have an integer number of seconds (as if 0 was specified for the nanoseconds property of the NSDateComponents matching parameter), unless a value was set in the nanoseconds property, in which case the result date will have that number of nanoseconds (or as close as possible with floating point numbers).
 	The enumeration is stopped by setting *stop = YES in the block and return.  It is not necessary to set *stop to NO to keep the enumeration going.
 */
-- (void)enumerateDatesStartingAfterDate:(NSDate *)start matchingComponents:(NSDateComponents *)comps options:(NSCalendarOptions)opts usingBlock:(void (^)(NSDate *date, BOOL exactMatch, BOOL *stop))block NS_AVAILABLE(10_9, 8_0);
+- (void)enumerateDatesStartingAfterDate:(NSDate *)start matchingComponents:(NSDateComponents *)comps options:(NSCalendarOptions)opts usingBlock:(void (^)(NSDate * __nullable date, BOOL exactMatch, BOOL *stop))block NS_AVAILABLE(10_9, 8_0);
 
 /*
 	This method computes the next date which matches (or most closely matches) a given set of components.
 	The general semantics follow those of the -enumerateDatesStartingAfterDate:... method above.
 	To compute a sequence of results, use the -enumerateDatesStartingAfterDate:... method above, rather than looping and calling this method with the previous loop iteration's result.
 */
-- (NSDate *)nextDateAfterDate:(NSDate *)date matchingComponents:(NSDateComponents *)comps options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)nextDateAfterDate:(NSDate *)date matchingComponents:(NSDateComponents *)comps options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -333,7 +336,7 @@ enum {
 	The general semantics follow those of the -enumerateDatesStartingAfterDate:... method above.
 	To compute a sequence of results, use the -enumerateDatesStartingAfterDate:... method above, rather than looping and calling this method with the previous loop iteration's result.
 */
-- (NSDate *)nextDateAfterDate:(NSDate *)date matchingUnit:(NSCalendarUnit)unit value:(NSInteger)value options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)nextDateAfterDate:(NSDate *)date matchingUnit:(NSCalendarUnit)unit value:(NSInteger)value options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -341,7 +344,7 @@ enum {
 	The general semantics follow those of the -enumerateDatesStartingAfterDate:... method above.
 	To compute a sequence of results, use the -enumerateDatesStartingAfterDate:... method above, rather than looping and calling this method with the previous loop iteration's result.
 */
-- (NSDate *)nextDateAfterDate:(NSDate *)date matchingHour:(NSInteger)hourValue minute:(NSInteger)minuteValue second:(NSInteger)secondValue options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)nextDateAfterDate:(NSDate *)date matchingHour:(NSInteger)hourValue minute:(NSInteger)minuteValue second:(NSInteger)secondValue options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -350,7 +353,7 @@ enum {
 	If no such time exists, the next available time is returned (which could, for example, be in a different day, week, month, ... than the nominal target date).  Setting a component to something which would be inconsistent forces other units to change; for example, setting the Weekday to Thursday probably shifts the Day and possibly Month and Year.
 	The specific behaviors here are as yet unspecified; for example, if I change the weekday to Thursday, does that move forward to the next, backward to the previous, or to the nearest Thursday?  A likely rule is that the algorithm will try to produce a result which is in the next-larger unit to the one given (there's a table of this mapping at the top of this document).  So for the "set to Thursday" example, find the Thursday in the Week in which the given date resides (which could be a forwards or backwards move, and not necessarily the nearest Thursday).  For forwards or backwards behavior, one can use the -nextDateAfterDate:matchingUnit:value:options: method above.
  */
-- (NSDate *)dateBySettingUnit:(NSCalendarUnit)unit value:(NSInteger)v ofDate:(NSDate *)date options:(NSCalendarOptions)opts NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)dateBySettingUnit:(NSCalendarUnit)unit value:(NSInteger)v ofDate:(NSDate *)date options:(NSCalendarOptions)opts NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -358,7 +361,7 @@ enum {
 	If no such time exists, the next available time is returned (which could, for example, be in a different day than the nominal target date).
 	The intent is to return a date on the same day as the original date argument.  This may result in a date which is earlier than the given date, of course.
  */
-- (NSDate *)dateBySettingHour:(NSInteger)h minute:(NSInteger)m second:(NSInteger)s ofDate:(NSDate *)date options:(NSCalendarOptions)opts NS_AVAILABLE(10_9, 8_0);
+- (nullable NSDate *)dateBySettingHour:(NSInteger)h minute:(NSInteger)m second:(NSInteger)s ofDate:(NSDate *)date options:(NSCalendarOptions)opts NS_AVAILABLE(10_9, 8_0);
 
 
 /*
@@ -402,7 +405,7 @@ FOUNDATION_EXPORT NSString * const NSCalendarDayChangedNotification NS_AVAILABLE
 // or quantities of the units.
 // When you create a new one of these, all values begin Undefined.
 
-enum {
+NS_ENUM(NSInteger) {
 	NSDateComponentUndefined = NSIntegerMax,
 
 	NSUndefinedDateComponent NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSDateComponentUndefined instead") = NSDateComponentUndefined
@@ -411,8 +414,8 @@ enum {
 
 @interface NSDateComponents : NSObject <NSCopying, NSSecureCoding>
 
-@property (copy) NSCalendar *calendar NS_AVAILABLE(10_7, 4_0);
-@property (copy) NSTimeZone *timeZone NS_AVAILABLE(10_7, 4_0);
+@property (nullable, copy) NSCalendar *calendar NS_AVAILABLE(10_7, 4_0);
+@property (nullable, copy) NSTimeZone *timeZone NS_AVAILABLE(10_7, 4_0);
 @property NSInteger era;
 @property NSInteger year;
 @property NSInteger month;
@@ -428,7 +431,7 @@ enum {
 @property NSInteger weekOfYear NS_AVAILABLE(10_7, 5_0);
 @property NSInteger yearForWeekOfYear NS_AVAILABLE(10_7, 5_0);
 @property (getter=isLeapMonth) BOOL leapMonth NS_AVAILABLE(10_8, 6_0);
-@property (readonly, copy) NSDate *date NS_AVAILABLE(10_7, 4_0);
+@property (nullable, readonly, copy) NSDate *date NS_AVAILABLE(10_7, 4_0);
 
 - (NSInteger)week NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use weekOfMonth or weekOfYear, depending on which you mean");
 - (void)setWeek:(NSInteger)v NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use setWeekOfMonth: or setWeekOfYear:, depending on which you mean");
@@ -468,4 +471,4 @@ enum {
 
 @end
 
-
+NS_ASSUME_NONNULL_END

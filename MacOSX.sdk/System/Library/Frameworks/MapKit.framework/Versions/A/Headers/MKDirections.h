@@ -11,10 +11,12 @@
 @class MKDirectionsResponse;
 @class MKETAResponse;
 
-typedef void (^MKDirectionsHandler)(MKDirectionsResponse *response, NSError *error);
-typedef void (^MKETAHandler)(MKETAResponse *response, NSError *error);
+NS_ASSUME_NONNULL_BEGIN
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+typedef void (^MKDirectionsHandler)(MKDirectionsResponse * __nullable response, NSError * __nullable error);
+typedef void (^MKETAHandler)(MKETAResponse * __nullable response, NSError * __nullable error);
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKDirections : NSObject
 
 // The request will be copied during initialization, so any changes made to the request
@@ -30,3 +32,5 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 @property (nonatomic, readonly, getter=isCalculating) BOOL calculating;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
  *	CTFramesetter.h
  *	CoreText
  *
- *	Copyright (c) 2003-2012 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -22,16 +22,14 @@
 #include <CoreText/CTTypesetter.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Framesetter Types */
 /* --------------------------------------------------------------------------- */
 
-typedef const struct __CTFramesetter * CTFramesetterRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CTFramesetter * CTFramesetterRef;
 
 
 /*!
@@ -98,15 +96,14 @@ CTFramesetterRef CTFramesetterCreateWithAttributedString(
 				can be specified here, or NULL if there are no such attributes.
 				See CTFrame.h for available attributes.
 
-	@result		This function will return a reference to a new CTFrame object
-				if the call was successful. Otherwise, it will return NULL.
+	@result		This function will return a reference to a new CTFrame object.
 */
 
 CTFrameRef CTFramesetterCreateFrame(
 	CTFramesetterRef framesetter,
 	CFRange stringRange,
 	CGPathRef path,
-	CFDictionaryRef frameAttributes ) CT_AVAILABLE(10_5, 3_2);
+	CFDictionaryRef __nullable frameAttributes ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -123,9 +120,7 @@ CTFrameRef CTFramesetterCreateFrame(
 				The framesetter from which a typesetter is being requested.
 
 	@result		This function will return a reference to a CTTypesetter
-				object if the call was successful. Otherwise, it will return
-				NULL. The framesetter maintains a reference to the returned
-				object, which should not be disposed by the caller.
+				object, which should not be released by the caller.
 */
 
 CTTypesetterRef CTFramesetterGetTypesetter(
@@ -172,15 +167,13 @@ CTTypesetterRef CTFramesetterGetTypesetter(
 CGSize CTFramesetterSuggestFrameSizeWithConstraints(
 	CTFramesetterRef framesetter,
 	CFRange stringRange,
-	CFDictionaryRef frameAttributes,
+	CFDictionaryRef __nullable frameAttributes,
 	CGSize constraints,
-	CFRange* fitRange ) CT_AVAILABLE(10_5, 3_2);
+	CFRange * __nullable fitRange ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

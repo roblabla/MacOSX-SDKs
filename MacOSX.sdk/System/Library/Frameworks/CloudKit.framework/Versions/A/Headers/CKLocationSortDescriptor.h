@@ -9,6 +9,7 @@
 
 @class CLLocation;
 
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKLocationSortDescriptor : NSSortDescriptor <NSSecureCoding>
 
@@ -19,3 +20,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly, copy) CLLocation *relativeLocation;
 
 @end
+NS_ASSUME_NONNULL_END

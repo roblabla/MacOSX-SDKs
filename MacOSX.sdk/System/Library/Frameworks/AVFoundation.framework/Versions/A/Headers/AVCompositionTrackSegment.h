@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -22,6 +22,8 @@
 #import <AVFoundation/AVAssetTrackSegment.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTimeRange.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVCompositionTrackSegmentInternal;
 
@@ -47,7 +49,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@discussion		To specify that the segment be played at the asset's normal rate, set source.duration == target.duration in the timeMapping.
 					Otherwise, the segment will be played at a rate equal to the ratio source.duration / target.duration.
 */
-+ (AVCompositionTrackSegment *)compositionTrackSegmentWithURL:(NSURL *)URL trackID:(CMPersistentTrackID)trackID sourceTimeRange:(CMTimeRange)sourceTimeRange targetTimeRange:(CMTimeRange)targetTimeRange;
++ (instancetype)compositionTrackSegmentWithURL:(NSURL *)URL trackID:(CMPersistentTrackID)trackID sourceTimeRange:(CMTimeRange)sourceTimeRange targetTimeRange:(CMTimeRange)targetTimeRange;
 
 /*!
 	@method			compositionTrackSegmentWithTimeRange:
@@ -56,7 +58,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					The timeRange of the empty AVCompositionTrackSegment.
 	@result			An instance of AVCompositionTrackSegment.
 */
-+ (AVCompositionTrackSegment *)compositionTrackSegmentWithTimeRange:(CMTimeRange)timeRange;
++ (instancetype)compositionTrackSegmentWithTimeRange:(CMTimeRange)timeRange;
 
 /*!
 	@method			initWithURL:trackID:sourceTimeRange:targetTimeRange:
@@ -73,7 +75,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@discussion		To specify that the segment be played at the asset's normal rate, set source.duration == target.duration in the timeMapping.
 					Otherwise, the segment will be played at a rate equal to the ratio source.duration / target.duration.
 */
-- (instancetype)initWithURL:(NSURL *)URL trackID:(CMPersistentTrackID)trackID sourceTimeRange:(CMTimeRange)sourceTimeRange targetTimeRange:(CMTimeRange)targetTimeRange;
+- (instancetype)initWithURL:(NSURL *)URL trackID:(CMPersistentTrackID)trackID sourceTimeRange:(CMTimeRange)sourceTimeRange targetTimeRange:(CMTimeRange)targetTimeRange NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method			initWithTimeRange:
@@ -82,16 +84,18 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					The timeRange of the empty AVCompositionTrackSegment.
 	@result			An instance of AVCompositionTrackSegment.
 */
-- (instancetype)initWithTimeRange:(CMTimeRange)timeRange;
+- (instancetype)initWithTimeRange:(CMTimeRange)timeRange NS_DESIGNATED_INITIALIZER;
 
 /* indicates whether the AVCompositionTrackSegment is an empty segment;
    an empty segment has a valid target time range but nil sourceURL and kCMTimeInvalid source start time; all other fields are undefined */
 @property (nonatomic, readonly, getter=isEmpty) BOOL empty;
 
 /* indicates the container file of the media presented by the AVCompositionTrackSegment */
-@property (nonatomic, readonly) NSURL *sourceURL;
+@property (nonatomic, readonly, nullable) NSURL *sourceURL;
 
 /* indicates the track of the container file of the media presented by the AVCompositionTrackSegment */
 @property (nonatomic, readonly) CMPersistentTrackID sourceTrackID;
 
 @end
+
+NS_ASSUME_NONNULL_END

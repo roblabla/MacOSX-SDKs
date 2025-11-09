@@ -7,7 +7,7 @@
 
 #import <CloudKit/CKDatabaseOperation.h>
 
-@class CKRecord;
+@class CKRecord, CKRecordID;
 
 typedef NS_ENUM(NSInteger, CKRecordSavePolicy) {
     CKRecordSaveIfServerRecordUnchanged = 0, /* Locally-edited keys are sent to the server. If the record on the server has been modified,
@@ -22,21 +22,22 @@ typedef NS_ENUM(NSInteger, CKRecordSavePolicy) {
                                                that only a portion of the record's keys were downloaded. */
 } NS_ENUM_AVAILABLE(10_10, 8_0);
 
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKModifyRecordsOperation : CKDatabaseOperation
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithRecordsToSave:(NSArray /* CKRecord */ *)records recordIDsToDelete:(NSArray /* CKRecordID */ *)recordIDs;
+- (instancetype)initWithRecordsToSave:(nullable NSArray <CKRecord *> *)records recordIDsToDelete:(nullable NSArray <CKRecordID *> *)recordIDs;
 
-@property (nonatomic, copy) NSArray /* CKRecord */ *recordsToSave;
-@property (nonatomic, copy) NSArray /* CKRecordID */ *recordIDsToDelete;
+@property (nonatomic, copy, nullable) NSArray <CKRecord *> *recordsToSave;
+@property (nonatomic, copy, nullable) NSArray <CKRecordID *> *recordIDsToDelete;
 
 /* The default value is CKRecordSaveIfServerRecordUnchanged. */
 @property (nonatomic, assign) CKRecordSavePolicy savePolicy;
 
 /* This property is kept by the server to identify the last known request from this client. 
  Multiple requests from the client with the same change token will be ignored by the server. */
-@property (nonatomic, copy) NSData *clientChangeTokenData;
+@property (nonatomic, copy, nullable) NSData *clientChangeTokenData;
 
 /* Determines whether the batch should fail atomically or not. YES by default.
    This only applies to zones that support CKRecordZoneCapabilityAtomic */
@@ -45,9 +46,9 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 /* Called repeatedly during transfer.
  It is possible for progress to regress when a retry is automatically triggered.
 */
-@property (nonatomic, copy) void (^perRecordProgressBlock)(CKRecord *record, double progress);
+@property (nonatomic, copy, nullable) void (^perRecordProgressBlock)(CKRecord *record, double progress);
 /* Called on success or failure for each record. */
-@property (nonatomic, copy) void (^perRecordCompletionBlock)(CKRecord *record, NSError *error);
+@property (nonatomic, copy, nullable) void (^perRecordCompletionBlock)(CKRecord * __nullable record, NSError * __nullable error);
 
 /*  This block is called when the operation completes.
  The [NSOperation completionBlock] will also be called if both are set.
@@ -57,6 +58,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  seen all record changes, and may be invoked while the server is processing the side effects
  of those changes.
 */
-@property (nonatomic, copy) void (^modifyRecordsCompletionBlock)(NSArray /* CKRecord */ *savedRecords, NSArray /* CKRecordID */ *deletedRecordIDs, NSError *operationError);
+@property (nonatomic, copy, nullable) void (^modifyRecordsCompletionBlock)(NSArray <CKRecord *> * __nullable savedRecords, NSArray <CKRecordID *> * __nullable deletedRecordIDs, NSError * __nullable operationError);
 
 @end
+NS_ASSUME_NONNULL_END

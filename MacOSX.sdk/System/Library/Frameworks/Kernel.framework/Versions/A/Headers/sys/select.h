@@ -108,7 +108,7 @@
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 #include <sys/kernel_types.h>
-
+#include <kern/waitq.h>
 #include <sys/event.h>
 
 /*

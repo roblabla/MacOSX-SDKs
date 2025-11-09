@@ -7,7 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ScreenSaverDefaults : NSUserDefaults 
+NS_ASSUME_NONNULL_BEGIN
+
+@interface ScreenSaverDefaults : NSUserDefaults
 {
 @private
 	NSMutableDictionary		*_defaults;
@@ -18,6 +20,8 @@
 	BOOL					_screenLockPrefChanged;
 }
 
-+ (id) defaultsForModuleWithName:(NSString *)inModuleName;
++ (nullable instancetype) defaultsForModuleWithName:(NSString *)inModuleName;
 
 @end
+
+NS_ASSUME_NONNULL_END

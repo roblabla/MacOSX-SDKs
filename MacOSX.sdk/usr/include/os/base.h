@@ -35,6 +35,9 @@
 #ifndef __has_attribute
 #define __has_attribute(x) 0
 #endif
+#ifndef __has_extension
+#define __has_extension(x) 0
+#endif
 
 #if __GNUC__
 #define OS_NORETURN __attribute__((__noreturn__))

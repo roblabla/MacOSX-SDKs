@@ -5070,7 +5070,13 @@ enum {
    * Indicates that a device’s available window positioning bounds have
    * changed because of a change in display configuration.
    */
-  kAvailBoundsChangedForDisplay = 1 << 1
+  kAvailBoundsChangedForDisplay = 1 << 1,
+
+  /*
+   * Indicates that a device’s available window positioning bounds have
+   * changed because of a change in menubar visibility.
+   */
+  kAvailBoundsChangedForMenuBar = 1 << 2
 };
 
 /*
@@ -5166,8 +5172,8 @@ enum {
  *          The GrayRgn before the configuration change. This parameter
  *          is optional and may not be present in all instances of this
  *          event. It is present in events with a kEventParamReason
- *          parameter containing kAvailBoundsChangedForDisplay. To get
- *          the GrayRgn after the configuration change, just call the
+ *          parameter containing kAvailBoundsChangedForDisplay or ForMenuBar.
+ *          To get the GrayRgn after the configuration change, just call the
  *          GetGrayRgn API.
  *  
  *  Availability:

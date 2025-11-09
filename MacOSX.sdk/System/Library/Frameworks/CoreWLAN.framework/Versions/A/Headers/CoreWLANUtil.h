@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class CWNetwork;
+
 /*! @functiongroup Accessing Wi-Fi Keychain Items */
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @method
@@ -30,7 +33,7 @@
  * @abstract 
  * Finds and returns (by reference) the password for the specified SSID and keychain domain.
  */
-OSStatus CWKeychainFindWiFiPassword( CWKeychainDomain domain, NSData *ssid, NSString **password ) NS_AVAILABLE_MAC(10_9);
+OSStatus CWKeychainFindWiFiPassword( CWKeychainDomain domain, NSData *ssid, NSString * __nullable * __nullable password ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
@@ -95,7 +98,7 @@ OSStatus CWKeychainDeleteWiFiPassword( CWKeychainDomain domain, NSData *ssid ) N
  * @abstract 
  * Finds and returns the 802.1X username and password stored for the specified SSID and keychain domain.
  */
-OSStatus CWKeychainFindWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSData *ssid, NSString **username, NSString **password ) NS_AVAILABLE_MAC(10_9);
+OSStatus CWKeychainFindWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSData *ssid, NSString * __nullable * __nullable username, NSString * __nullable * __nullable password ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
@@ -119,7 +122,7 @@ OSStatus CWKeychainFindWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSDa
  * @abstract 
  * Sets the 802.1X username and password for the specified SSID and keychain domain.
  */
-OSStatus CWKeychainSetWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSData *ssid, NSString *username, NSString *password ) NS_AVAILABLE_MAC(10_9);
+OSStatus CWKeychainSetWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSData *ssid, NSString * __nullable username, NSString * __nullable password ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
@@ -159,7 +162,7 @@ OSStatus CWKeychainDeleteWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NS
  * @abstract 
  * Finds and returns the identity stored for the specified SSID and keychain domain.
  */
-OSStatus CWKeychainCopyWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, SecIdentityRef *identity ) NS_AVAILABLE_MAC(10_9);
+OSStatus CWKeychainCopyWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, __nullable SecIdentityRef * __nullable identity ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
@@ -181,7 +184,7 @@ OSStatus CWKeychainCopyWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, S
  * @abstract 
  * Associates an identity to the specified SSID and keychain domain.
  */
-OSStatus CWKeychainSetWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, SecIdentityRef identity ) NS_AVAILABLE_MAC(10_9);
+OSStatus CWKeychainSetWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, __nullable SecIdentityRef identity ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
@@ -197,7 +200,7 @@ OSStatus CWKeychainSetWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, Se
  * @abstract 
  * Finds and returns all available identities.
  */
-OSStatus CWKeychainCopyEAPIdentityList( CFArrayRef *list ) NS_AVAILABLE_MAC(10_7);
+OSStatus CWKeychainCopyEAPIdentityList( __nullable CFArrayRef * __nullable list ) NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
@@ -221,7 +224,7 @@ OSStatus CWKeychainCopyEAPIdentityList( CFArrayRef *list ) NS_AVAILABLE_MAC(10_7
  * Finds and returns the 802.1X username and password stored for the specified SSID.
  * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainCopyEAPUsernameAndPassword( CFDataRef ssidData, CFStringRef *username, CFStringRef *password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainFindWiFiEAPUsernameAndPassword() instead");
+OSStatus CWKeychainCopyEAPUsernameAndPassword( CFDataRef ssidData, __nullable CFStringRef * __nullable username, __nullable CFStringRef * __nullable password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainFindWiFiEAPUsernameAndPassword() instead");
 
 /*!
  * @method
@@ -243,7 +246,7 @@ OSStatus CWKeychainCopyEAPUsernameAndPassword( CFDataRef ssidData, CFStringRef *
  * Sets the 802.1X username and password for the specified SSID.
  * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainSetEAPUsernameAndPassword( CFDataRef ssidData, CFStringRef username, CFStringRef password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainSetWiFiEAPUsernameAndPassword() instead");
+OSStatus CWKeychainSetEAPUsernameAndPassword( CFDataRef ssidData, __nullable CFStringRef username, __nullable CFStringRef password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainSetWiFiEAPUsernameAndPassword() instead");
 
 /*!
  * @method
@@ -279,7 +282,7 @@ OSStatus CWKeychainDeleteEAPUsernameAndPassword( CFDataRef ssidData ) NS_DEPRECA
  * Finds and returns the identity stored for the specified SSID and keychain domain.
  * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainCopyEAPIdentity( CFDataRef ssidData, SecIdentityRef *identity ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainCopyWiFiEAPIdentity() instead");
+OSStatus CWKeychainCopyEAPIdentity( CFDataRef ssidData, __nullable SecIdentityRef * __nullable identity ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainCopyWiFiEAPIdentity() instead");
 
 /*!
  * @method
@@ -299,7 +302,7 @@ OSStatus CWKeychainCopyEAPIdentity( CFDataRef ssidData, SecIdentityRef *identity
  * Associates an identity to the specified SSID.
  * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainSetEAPIdentity( CFDataRef ssidData, SecIdentityRef identity ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainSetWiFiEAPIdentity() instead");
+OSStatus CWKeychainSetEAPIdentity( CFDataRef ssidData, __nullable SecIdentityRef identity ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainSetWiFiEAPIdentity() instead");
 
 /*!
  * @method
@@ -338,7 +341,7 @@ OSStatus CWKeychainSetPassword( CFDataRef ssidData, CFStringRef password ) NS_DE
  * Finds and returns (by reference) the password for the specified SSID.
  * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainCopyPassword( CFDataRef ssidData, CFStringRef *password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainFindWiFiPassword() instead");
+OSStatus CWKeychainCopyPassword( CFDataRef ssidData, __nullable CFStringRef * __nullable password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainFindWiFiPassword() instead");
 
 /*!
  * @method
@@ -371,6 +374,8 @@ OSStatus CWKeychainDeletePassword( CFDataRef ssidData ) NS_DEPRECATED_MAC(10_7, 
  * Duplicate networks are defined as networks with the same SSID, security type, and BSS type (IBSS or Infrastructure).
  * When duplicate networks exist, the network with the best RSSI value will be chosen.
  */
-NSSet* CWMergeNetworks( NSSet *networks ) NS_AVAILABLE_MAC(10_7);
+NSSet<CWNetwork *> * CWMergeNetworks( NSSet<CWNetwork *> *networks ) NS_AVAILABLE_MAC(10_7);
+
+NS_ASSUME_NONNULL_END
 
 #endif /* _CORE_WLAN_UTIL_H_ */

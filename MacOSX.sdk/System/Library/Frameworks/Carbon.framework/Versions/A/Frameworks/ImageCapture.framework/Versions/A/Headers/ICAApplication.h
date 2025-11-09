@@ -131,7 +131,8 @@ enum
     kICAFrameworkInternalErr            = -9919,
     kICAExtensionInternalErr            = -9920,
     kICAInvalidSessionErr               = -9921,
-    kICASandboxViolation                = -9922
+    kICASandboxViolation                = -9922,
+    kICASecureSessionRequired           = -9923
 };
 
 //------------------------------------------------------------------------------------------------- ICAObject types and subtypes
@@ -423,40 +424,40 @@ typedef struct ICAPTPEventDataset
 
 // Keys returned by ICACopyObjectDictionary() for deviceList object returned by ICAGetDeviceList()
 
-extern const CFStringRef kICADevicesArrayKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicesArrayKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef kICAObjectKey                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAObjectNameKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAUSBVendorIDKey                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAUSBProductIDKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADeviceTypeKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAExecutableArchitectureKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICARemoteDeviceKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADeviceSharedKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADeviceWebSharedKey                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADeviceUsedKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICABonjourServiceTypeKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICABonjourServiceNameKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICABonjourTXTRecordKey                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADeviceCapabilitiesKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICALockStatusKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAObjectKey                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAObjectNameKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAUSBVendorIDKey                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAUSBProductIDKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceTypeKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAExecutableArchitectureKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICARemoteDeviceKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceSharedKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceWebSharedKey                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceUsedKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICABonjourServiceTypeKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICABonjourServiceNameKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICABonjourTXTRecordKey                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceCapabilitiesKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICALockStatusKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef kICADataPropertyKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADataTypeKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADataSizeKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAThumbnailPropertyKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAThumbnailSizeKey                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICARawKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICADataPropertyKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADataTypeKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADataSizeKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAThumbnailPropertyKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAThumbnailSizeKey                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICARawKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef kICAMediaHeightKey                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// value is a number
+__attribute__((visibility("default"))) extern const CFStringRef kICAMediaHeightKey                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// value is a number
 extern const CFStringRef kICAMediaWidthKey                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// value is a number
-extern const CFStringRef kICACreationDateStringKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAModificationDateStringKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kMetaDataDictionaryKey                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICAMediaDurationInSecondsKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICACreationDateStringKey                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAModificationDateStringKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kMetaDataDictionaryKey                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICAMediaDurationInSecondsKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef kICADeviceTypeCamera                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADeviceTypeScanner                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceTypeCamera                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceTypeScanner                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
     In addition to the above, the following keys may also be present in the object property dictionay:
@@ -466,27 +467,27 @@ extern const CFStringRef kICADeviceTypeScanner                      AVAILABLE_MA
 */
 
 /* Transport types */
-extern const CFStringRef kICAUSBTransportType                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAFireWireTransportType                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICABluetoothTransportType                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICATCPIPTransportType                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICASCSITransportType                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICATWAINTransportType                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAUSBTransportType                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAFireWireTransportType                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICABluetoothTransportType                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICATCPIPTransportType                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICASCSITransportType                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICATWAINTransportType                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /* Keys used for paramDictionary in ICALoadDeviceModulePB*/
-extern const CFStringRef kICADeviceBrowserDeviceRefKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADeviceModulePathKey                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICADeviceIconPathKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICATransportTypeKey                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICABluetoothAddressKey                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAUSBLocationIDKey                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAFireWireGUIDKey                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAIOServicePathKey                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAIPAddressKey                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAIPPortKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAIPNameKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICAIPGUIDKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern const CFStringRef kICATWAINDSPathKey                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceBrowserDeviceRefKey              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceModulePathKey                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICADeviceIconPathKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICATransportTypeKey                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICABluetoothAddressKey                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAUSBLocationIDKey                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAFireWireGUIDKey                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAIOServicePathKey                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAIPAddressKey                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAIPAddressKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAIPNameKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICAIPGUIDKey                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICATWAINDSPathKey                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 /*!
     @const
@@ -496,7 +497,7 @@ extern const CFStringRef kICATWAINDSPathKey                         AVAILABLE_MA
     @discussion
         Value is of type CFStringRef.
 */
-extern const CFStringRef  kICAUserAssignedDeviceNameKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICAUserAssignedDeviceNameKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //-------------------------------------------------------------------------------------------------------------------- ICAHeader
 /*!
@@ -652,7 +653,7 @@ ICAImportImage(
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError
+__attribute__((visibility("default"))) extern ICAError
 ICAShowDeviceBrowser(
     CFDictionaryRef options
 )                                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
@@ -692,122 +693,122 @@ typedef CALLBACK_API_C( void , ICANotification )(CFStringRef notificationType, C
 
 // Possible values for kICANotificationTypeKey:
 
-extern const CFStringRef  kICANotificationTypeObjectAdded                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeObjectRemoved                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeObjectInfoChanged                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeObjectAdded                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeObjectRemoved                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeObjectInfoChanged                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationTypeStoreAdded                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeStoreRemoved                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeStoreFull                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeStoreInfoChanged                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeStoreAdded                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeStoreRemoved                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeStoreFull                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeStoreInfoChanged                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationTypeDeviceAdded                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDeviceRemoved                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDeviceAdded                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDeviceRemoved                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationTypeDeviceInfoChanged                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDevicePropertyChanged                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDeviceWasReset                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDeviceStatusInfo                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDeviceStatusError                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDeviceInfoChanged                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDevicePropertyChanged                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDeviceWasReset                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDeviceStatusInfo                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDeviceStatusError                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationTypeCaptureComplete                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeRequestObjectTransfer                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeTransactionCanceled                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeCaptureComplete                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeRequestObjectTransfer                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeTransactionCanceled                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationTypeUnreportedStatus                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeProprietary                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeUnreportedStatus                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeProprietary                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationTypeDeviceConnectionProgress                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeDownloadProgressStatus                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScanProgressStatus                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerSessionClosed                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerScanDone                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerPageDone                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeScannerButtonPressed                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDeviceConnectionProgress                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeDownloadProgressStatus                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeScanProgressStatus                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeScannerSessionClosed                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeScannerScanDone                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeScannerPageDone                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeScannerButtonPressed                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationTypeScannerOverviewOverlayAvailable         AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeScannerOverviewOverlayAvailable         AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Possible keys in the notification dictionary:
 
-extern const CFStringRef  kICAErrorKey                                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICARefconKey                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICAErrorKey                                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICARefconKey                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationICAObjectKey                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDeviceICAObjectKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDeviceListICAObjectKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationClassKey                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationTypeKey                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationRawEventKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataKey                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataSizeKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataCookieKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationICAObjectKey                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationDeviceICAObjectKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationDeviceListICAObjectKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationClassKey                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationTypeKey                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationRawEventKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationDataKey                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationDataSizeKey                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationDataCookieKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationImageKey                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageWidthKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageHeightKey                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageBytesPerRowKey                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageStartRowKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageNumberOfRowsKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageDataKey                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationImageDataSizeKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationDataIsBigEndianKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageKey                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageWidthKey                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageHeightKey                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageBytesPerRowKey                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageStartRowKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageNumberOfRowsKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageDataKey                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageDataSizeKey                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationImageDataSizeKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationScannerDocumentNameKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationScannerButtonTypeKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationScannerDocumentNameKey                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationScannerButtonTypeKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationNumerOfImagesRemainingKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationPercentDownloadedKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationNumerOfImagesRemainingKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationPercentDownloadedKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
-extern const CFStringRef  kICANotificationSubTypeKey                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationSubTypeWarmUpStarted                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationSubTypeWarmUpDone                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationVendorErrorCodeKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationSubTypePerformOverviewScan                  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-extern const CFStringRef  kICANotificationSubTypeDocumentLoaded                       AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-extern const CFStringRef  kICANotificationSubTypeDocumentNotLoaded                    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationSubTypeKey                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationSubTypeWarmUpStarted                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationSubTypeWarmUpDone                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationVendorErrorCodeKey                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationSubTypePerformOverviewScan                  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationSubTypeDocumentLoaded                       AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationSubTypeDocumentNotLoaded                    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Possible values in the notification dictionary:
 // ...
-
+//START HERE
 // Possible values for kICANotificationClassKey
-extern const CFStringRef  kICANotificationClassPTPStandard                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationClassPTPVendor                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef  kICANotificationClassProprietary                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationClassPTPStandard                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationClassPTPVendor                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef  kICANotificationClassProprietary                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 // Device Properties
 
-extern const CFStringRef kICADevicePropUndefined                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropBatteryLevel                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropFunctionalMode                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropImageSize                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropCompressionSetting                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropWhiteBalance                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropRGBGain                                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropFNumber                                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropFocalLength                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropFocusDistance                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropFocusMode                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropExposureMeteringMode                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropFlashMode                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropExposureTime                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropExposureProgramMode                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropExposureIndex                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropExposureBiasCompensation                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropDateTime                                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropCaptureDelay                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropStillCaptureMode                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropContrast                                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropSharpness                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropDigitalZoom                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropEffectMode                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropBurstNumber                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropBurstInterval                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropTimelapseNumber                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropTimelapseInterval                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropFocusMeteringMode                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropUploadURL                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropArtist                                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern const CFStringRef kICADevicePropCopyrightInfo                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropUndefined                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropBatteryLevel                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropFunctionalMode                                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropImageSize                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropCompressionSetting                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropWhiteBalance                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropRGBGain                                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropFNumber                                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropFocalLength                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropFocusDistance                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropFocusMode                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropExposureMeteringMode                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropFlashMode                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropExposureTime                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropExposureProgramMode                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropExposureIndex                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropExposureBiasCompensation                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropDateTime                                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropCaptureDelay                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropStillCaptureMode                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropContrast                                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropSharpness                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropDigitalZoom                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropEffectMode                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropBurstNumber                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropBurstInterval                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropTimelapseNumber                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropTimelapseInterval                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropFocusMeteringMode                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropUploadURL                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropArtist                                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+__attribute__((visibility("default"))) extern const CFStringRef kICADevicePropCopyrightInfo                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*!
     @struct ICARegisterForEventNotificationPB
@@ -847,7 +848,7 @@ typedef struct ICARegisterForEventNotificationPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError
+__attribute__((visibility("default"))) extern ICAError
 ICARegisterForEventNotification(
     ICARegisterForEventNotificationPB*	params,
     ICACompletion                       completionProc
@@ -918,7 +919,7 @@ typedef struct ICAGetDeviceListPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAGetDeviceList(
     ICAGetDeviceListPB* pb,
     ICACompletion       completion
@@ -980,7 +981,7 @@ typedef struct ICACopyObjectPropertyDictionaryPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICACopyObjectPropertyDictionary(
     ICACopyObjectPropertyDictionaryPB*  pb,
     ICACompletion                       completion
@@ -1064,7 +1065,7 @@ typedef struct ICACopyObjectThumbnailPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICACopyObjectThumbnail(
     ICACopyObjectThumbnailPB* pb,
     ICACompletion             completion
@@ -1107,7 +1108,7 @@ typedef struct ICACopyObjectDataPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICACopyObjectData(
     ICACopyObjectDataPB*  params,
     ICACompletion         completionProc
@@ -1201,7 +1202,7 @@ typedef struct ICAObjectSendMessagePB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAObjectSendMessage(
     ICAObjectSendMessagePB* pb,
     ICACompletion           completion
@@ -1313,7 +1314,7 @@ typedef struct ICADownloadFilePB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICADownloadFile(
     ICADownloadFilePB*  pb,
     ICACompletion       completion
@@ -1394,7 +1395,7 @@ typedef struct ICAUploadFilePB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAUploadFile(
     ICAUploadFilePB*  pb,
     ICACompletion     completion
@@ -1447,7 +1448,7 @@ typedef struct ICALoadDeviceModulePB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICALoadDeviceModule(
     ICALoadDeviceModulePB*  pb,
     ICACompletion           completion
@@ -1479,7 +1480,7 @@ typedef struct ICAUnloadDeviceModulePB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAUnloadDeviceModule(
     ICAUnloadDeviceModulePB*  pb,
     ICACompletion             completion
@@ -1514,7 +1515,7 @@ typedef struct ICAOpenSessionPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAOpenSession(
     ICAOpenSessionPB* pb,
     ICACompletion     completion
@@ -1546,7 +1547,7 @@ typedef struct ICACloseSessionPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICACloseSession(
     ICACloseSessionPB*  pb,
     ICACompletion       completion
@@ -1581,7 +1582,7 @@ typedef struct ICAScannerOpenSessionPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAScannerOpenSession(
     ICAScannerOpenSessionPB*  pb,
     ICACompletion             completion
@@ -1613,7 +1614,7 @@ typedef struct ICAScannerCloseSessionPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAScannerCloseSession(
     ICAScannerCloseSessionPB* pb,
     ICACompletion             completion
@@ -1645,7 +1646,7 @@ typedef struct ICAScannerInitializePB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAScannerInitialize(
     ICAScannerInitializePB* pb,
     ICACompletion           completion
@@ -1715,7 +1716,7 @@ typedef struct ICAScannerSetParametersPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAScannerSetParameters(
     ICAScannerSetParametersPB*  pb,
     ICACompletion               completion
@@ -1750,7 +1751,7 @@ typedef struct ICAScannerStatusPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAScannerStatus(
     ICAScannerStatusPB* pb,
     ICACompletion       completion
@@ -1782,7 +1783,7 @@ typedef struct ICAScannerStartPB {
     @result
         Returns an error code defined in ICAApplication.h
 */
-extern ICAError 
+__attribute__((visibility("default"))) extern ICAError
 ICAScannerStart(
     ICAScannerStartPB*  pb,
     ICACompletion       completion

@@ -1,4 +1,4 @@
-framework module DirectoryService [extern_c] [system] {
+framework module DirectoryService [extern_c] {
   umbrella header "DirectoryService.h"
 
   export *

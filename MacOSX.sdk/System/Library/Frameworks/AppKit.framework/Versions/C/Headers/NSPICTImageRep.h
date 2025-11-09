@@ -1,11 +1,13 @@
 /*
         NSPICTImageRep.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSPICTImageRep : NSImageRep
 {
@@ -23,10 +25,12 @@
 #endif
 }
 
-+ (instancetype)imageRepWithData:(NSData*)pictData;
-- (instancetype)initWithData:(NSData*)pictData;
++ (nullable instancetype)imageRepWithData:(NSData*)pictData;
+- (nullable instancetype)initWithData:(NSData*)pictData;
 
 @property (readonly, copy) NSData *PICTRepresentation;
 @property (readonly) NSRect boundingBox;
 
 @end
+
+NS_ASSUME_NONNULL_END

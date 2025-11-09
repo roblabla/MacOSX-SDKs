@@ -1,7 +1,7 @@
 /*
 	NSInputServer.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,13 +11,15 @@
 
 /* These methods must be implemented by the delegate.
 */
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol NSInputServiceProvider
 
-- (void) insertText:(id)aString client:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) doCommandBySelector:(SEL)aSelector client:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) markedTextAbandoned:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) markedTextSelectionChanged:(NSRange)newSel client:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) terminate:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) insertText:(null_unspecified id)aString client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) doCommandBySelector:(null_unspecified SEL)aSelector client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) markedTextAbandoned:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) markedTextSelectionChanged:(NSRange)newSel client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) terminate:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Normally canBeDisabled returns YES and is implemented that way in the abstract NSInputServer class.
 */
@@ -36,27 +38,27 @@
 
 /* These methods are sent by current input manager when the application changes state so that the server can update its concept of who's current.  The actually "active" sender is the last one to have sent a senderDidBecomeActive: message.  They may not arrive in the expected order.
 */
-- (void) inputClientBecomeActive:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) inputClientResignActive:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) inputClientBecomeActive:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) inputClientResignActive:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* These methods are sent by current input manger when it's enabled & the server returns YES to canBeDisabled.  When disabled, the server is expected to send only insertText: or doCommandBySelector:.
 */
-- (void) inputClientEnabled:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) inputClientDisabled:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) inputClientEnabled:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) inputClientDisabled:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* These methods are sent by input manager when the conversation within a particular sender changes.
 */
-- (void) activeConversationWillChange:(id)sender fromOldConversation:(NSInteger)oldConversation NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) activeConversationChanged:(id)sender toNewConversation:(NSInteger)newConversation NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) activeConversationWillChange:(null_unspecified id)sender fromOldConversation:(NSInteger)oldConversation NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) activeConversationChanged:(null_unspecified id)sender toNewConversation:(NSInteger)newConversation NS_DEPRECATED_MAC(10_0, 10_6);
 
 @end
 
 /* These methods are sent to input servers that return YES to wantsToHandleMouseEvents.  thePoint is in screen coordinate.
 */
 @protocol NSInputServerMouseTracker
-- (BOOL) mouseDownOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL) mouseDraggedOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
-- (void) mouseUpOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL) mouseDownOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL) mouseDraggedOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (void) mouseUpOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(null_unspecified id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 @end
 
 NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
@@ -65,5 +67,7 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
     id _delegate;
 }
 
-- initWithDelegate:(id)aDelegate name:(NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
+- initWithDelegate:(null_unspecified id)aDelegate name:(null_unspecified NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
 @end
+
+NS_ASSUME_NONNULL_END

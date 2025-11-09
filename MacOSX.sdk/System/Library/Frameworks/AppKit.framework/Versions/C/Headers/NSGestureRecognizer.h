@@ -1,15 +1,17 @@
 /*
     NSGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2014, Apple Inc.
+    Copyright (c) 2013-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol NSGestureRecognizerDelegate;
-@class NSView, NSEvent;
+@class NSView, NSEvent, NSPressureConfiguration;
 
 NS_ENUM_AVAILABLE_MAC(10_10)
 typedef NS_ENUM(NSInteger, NSGestureRecognizerState) {
@@ -54,17 +56,17 @@ NS_CLASS_AVAILABLE_MAC(10_10)
      -(void)handleGesture;
      -(void)handleGesture:(NSGestureRecognizer*)gestureRecognizer;
 */
-- (instancetype)initWithTarget:(id)target action:(SEL)action NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTarget:(id)target action:(nullable SEL)action NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-@property (weak) id target;
-@property SEL action;
+@property (nullable, weak) id target;
+@property (nullable) SEL action;
 
 /* the current state of the gesture recognizer */
 @property (readonly) NSGestureRecognizerState state;
 
 /* the gesture recognizer's delegate */
-@property (weak) id <NSGestureRecognizerDelegate> delegate;
+@property (nullable, weak) id <NSGestureRecognizerDelegate> delegate;
 
 /* default is YES. disabled gesture recognizers will not receive events. when changed to NO the gesture recognizer will be cancelled if it's currently recognizing a gesture */
 @property (getter=isEnabled) BOOL enabled;
@@ -72,7 +74,10 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 /* an NSGestureRecognizer receives events hit-tested to its view and any of that view's subviews
    the view the gesture is attached to. set by adding the recognizer to a NSView using the addGestureRecognizer: method
 */
-@property (readonly) NSView *view;
+@property (nullable, readonly) NSView *view;
+
+/* The pressure configuration the view should use when this recognizer is eligible for recognition. At any point in time during recognition the view's effective pressure configuration will be the most compatible configuration among the set of active recognizers. This property may be set at any time before or during recognition. If recognition fails, the effective configuration will revert to the view's -pressureConfiguration. */
+@property (strong) NSPressureConfiguration *pressureConfiguration NS_AVAILABLE_MAC(10_11);
 
 /*  causes the specified events to be delivered to the target view only after this gesture has failed recognition. set to YES to prevent views from processing any events that may be recognized as part of this gesture. note: once a gesture recognizer starts delaying one type of event, all event types are delayed until this gesture has failed recognition. refer to specific gesture subclasses as they have different defaults.
 */
@@ -84,13 +89,18 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @property BOOL delaysRotationEvents;                // default is NO.
 
 /* individual NSGestureRecognizer subclasses may provide subclass-specific location information. see individual subclasses for details */
-- (NSPoint)locationInView:(NSView*)view;
+- (NSPoint)locationInView:(nullable NSView*)view;
 
 @end
 
 
 @protocol NSGestureRecognizerDelegate <NSObject>
 @optional
+/* called when the window begins a new recognition stream
+ return YES to allow the recognizer to process events. return NO to fail recognition and opt the recognizer out of the event stream
+ */
+- (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldAttemptToRecognizeWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_11);
+
 /* called when a gesture recognizer attempts to transition out of NSGestureRecognizerStatePossible. returning NO causes it to transition to NSGestureRecognizerStateFailed */
 - (BOOL)gestureRecognizerShouldBegin:(NSGestureRecognizer *)gestureRecognizer;
 
@@ -157,3 +167,5 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (void)pressureChangeWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_10_3);
 
 @end
+
+NS_ASSUME_NONNULL_END

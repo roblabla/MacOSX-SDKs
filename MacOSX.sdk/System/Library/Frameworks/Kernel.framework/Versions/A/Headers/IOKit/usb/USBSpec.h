@@ -31,6 +31,12 @@
 #ifndef _USBSPEC_H
 #define _USBSPEC_H
 
+#if KERNEL
+#ifndef __IOUSBFAMILY__
+#warning "Deprecated header file.  See IOUSBHostFamily for USB-Host KPI."
+#endif
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

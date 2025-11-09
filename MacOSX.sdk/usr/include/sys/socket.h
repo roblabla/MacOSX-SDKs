@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -179,9 +179,28 @@
 #define SO_NP_EXTENSIONS	0x1083	/* To turn off some POSIX behavior */
 #endif
 
-
 #define SO_NUMRCVPKT		0x1112	/* number of datagrams in receive socket buffer */
 
+typedef __uint32_t sae_associd_t;
+#define	SAE_ASSOCID_ANY	0
+#define	SAE_ASSOCID_ALL	((sae_associd_t)(-1ULL))
+
+typedef __uint32_t sae_connid_t;
+#define	SAE_CONNID_ANY	0
+#define	SAE_CONNID_ALL	((sae_connid_t)(-1ULL))
+
+/* connectx() flag parameters */
+#define CONNECT_RESUME_ON_READ_WRITE	0x1 /* resume connect() on read/write */
+#define CONNECT_DATA_IDEMPOTENT		0x2 /* data is idempotent */
+
+/* sockaddr endpoints */
+typedef struct sa_endpoints {
+	unsigned int	sae_srcif;      /* optional source interface */
+	struct sockaddr	*sae_srcaddr;   /* optional source address */
+	socklen_t	sae_srcaddrlen; /* size of source address */
+	struct sockaddr	*sae_dstaddr;   /* destination address */
+	socklen_t	sae_dstaddrlen; /* size of destination address */
+} sa_endpoints_t;
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -557,6 +576,7 @@ struct sf_hdtr {
 
 
 __BEGIN_DECLS
+
 int	accept(int, struct sockaddr * __restrict, socklen_t * __restrict)
 		__DARWIN_ALIAS_C(accept);
 int	bind(int, const struct sockaddr *, socklen_t) __DARWIN_ALIAS(bind);
@@ -587,6 +607,9 @@ int	sendfile(int, int, off_t, off_t *, struct sf_hdtr *, int);
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 void	pfctlinput(int, struct sockaddr *);
+int connectx(int , const sa_endpoints_t *, sae_associd_t, unsigned int,
+    const struct iovec *, unsigned int, size_t *, sae_connid_t *);
+int disconnectx(int , sae_associd_t, sae_connid_t);
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 __END_DECLS
 

@@ -9,6 +9,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MKFoundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol MKAnnotation <NSObject>
 
 // Center latitude and longitude of the annotation view.
@@ -18,10 +20,12 @@
 @optional
 
 // Title and subtitle for use by selection UI.
-@property (nonatomic, readonly, copy) NSString *title;
-@property (nonatomic, readonly, copy) NSString *subtitle;
+@property (nonatomic, readonly, copy, nullable) NSString *title;
+@property (nonatomic, readonly, copy, nullable) NSString *subtitle;
 
 // Called as a result of dragging an annotation view.
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate NS_AVAILABLE(10_9, 4_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

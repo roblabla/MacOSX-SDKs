@@ -1,6 +1,6 @@
 /*    
     NSURLConnection.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -22,6 +22,10 @@
 @class NSOperationQueue;
 
 @protocol NSURLConnectionDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
+
+/*** DEPRECATED: The NSURLConnection class should no longer be used.  NSURLSession is the replacement for NSURLConnection ***/
 
 /*!
     @class NSURLConnection
@@ -110,10 +114,10 @@
 }
 
 /* Designated initializer */
-- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately NS_AVAILABLE(10_5, 2_0);
+- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate startImmediately:(BOOL)startImmediately NS_DEPRECATED(10_5, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)");
 
-- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;
-+ (NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(id)delegate;
+- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)");
++ (nullable NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)");
 
 @property (readonly, copy) NSURLRequest *originalRequest NS_AVAILABLE(10_8, 5_0);
 @property (readonly, copy) NSURLRequest *currentRequest NS_AVAILABLE(10_8, 5_0);
@@ -123,7 +127,7 @@
 
 - (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode NS_AVAILABLE(10_5, 2_0);
 - (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode NS_AVAILABLE(10_5, 2_0);
-- (void)setDelegateQueue:(NSOperationQueue*) queue NS_AVAILABLE(10_7, 5_0);
+- (void)setDelegateQueue:(nullable NSOperationQueue*) queue NS_AVAILABLE(10_7, 5_0);
 
 
 /*! 
@@ -291,17 +295,17 @@
 
 @protocol NSURLConnectionDataDelegate <NSURLConnectionDelegate>
 @optional
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response;
+- (nullable NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(nullable NSURLResponse *)response;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 
-- (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request;
+- (nullable NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request;
 - (void)connection:(NSURLConnection *)connection   didSendBodyData:(NSInteger)bytesWritten
                                                  totalBytesWritten:(NSInteger)totalBytesWritten
                                          totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
 
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse;
+- (nullable NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 @end
@@ -400,7 +404,7 @@
     @result      The content of the URL resulting from performing the load,
                  or nil if the load failed.
 */
-+ (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error;
++ (nullable NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse * __nullable * __nullable)response error:(NSError **)error NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h");
 
 @end
 
@@ -451,7 +455,8 @@
  */
 + (void)sendAsynchronousRequest:(NSURLRequest*) request
                           queue:(NSOperationQueue*) queue
-              completionHandler:(void (^)(NSURLResponse* response, NSData* data, NSError* connectionError)) handler NS_AVAILABLE(10_7, 5_0);
+              completionHandler:(void (^)(NSURLResponse* __nullable response, NSData* __nullable data, NSError* __nullable connectionError)) handler NS_DEPRECATED(10_7, 10_11, 5_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h");
            
 @end
-                   
+
+NS_ASSUME_NONNULL_END

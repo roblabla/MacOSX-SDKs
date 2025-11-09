@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,8 @@
 #ifndef NSEDGEINSETS_DEFINED
 #import <AppKit/NSLayoutConstraint.h>
 #endif
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSColor, NSNotification;
 
@@ -53,9 +55,9 @@
 
 @property (copy) NSColor *backgroundColor;
 @property BOOL drawsBackground;
-@property (assign) id /* NSView * */ documentView;
+@property (nullable, assign) id /* NSView * */ documentView;
 @property (readonly) NSRect documentRect;
-@property (strong) NSCursor *documentCursor;
+@property (nullable, strong) NSCursor *documentCursor;
 @property (readonly) NSRect documentVisibleRect;
 - (void)viewFrameChanged:(NSNotification *)notification;
 - (void)viewBoundsChanged:(NSNotification *)notification;
@@ -89,3 +91,5 @@
 - (void)reflectScrolledClipView:(NSClipView *)aClipView;
 - (void)scrollClipView:(NSClipView *)aClipView toPoint:(NSPoint)aPoint;
 @end
+
+NS_ASSUME_NONNULL_END

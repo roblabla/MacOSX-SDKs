@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 
@@ -21,6 +21,8 @@
 #import <Foundation/NSMassFormatter.h>
 #import <Foundation/NSLengthFormatter.h>
 #import <Foundation/NSEnergyFormatter.h>
+#import <Foundation/NSPersonNameComponents.h>
+#import <Foundation/NSPersonNameComponentsFormatter.h>
 #import <Foundation/NSDecimal.h>
 #import <Foundation/NSDecimalNumber.h>
 #import <Foundation/NSDictionary.h>

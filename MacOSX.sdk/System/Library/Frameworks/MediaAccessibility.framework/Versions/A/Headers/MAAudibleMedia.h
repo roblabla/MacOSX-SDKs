@@ -14,9 +14,10 @@
 #include <CoreFoundation/CFBase.h>
 
 MA_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
- @const kMAAudibleMediaSettingsChangedNotification
+ @constant kMAAudibleMediaSettingsChangedNotification
  @abstract CFNotification sent when any user-defined audible media settings are changed.
  */
 MA_EXPORT const CFStringRef kMAAudibleMediaSettingsChangedNotification;
@@ -34,6 +35,7 @@ MA_EXPORT CFStringRef const MAMediaCharacteristicDescribesVideoForAccessibility 
  */
 MA_EXPORT CFArrayRef MAAudibleMediaCopyPreferredCharacteristics() CF_AVAILABLE(10_10, 8_0);
 
+CF_ASSUME_NONNULL_END
 MA_EXTERN_C_END
 
 #endif /* MediaAccessibility_MAAudibleMedia_h */

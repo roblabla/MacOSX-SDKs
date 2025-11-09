@@ -7,6 +7,8 @@
 
 #import <GameController/GameController.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class GCController;
 @class GCGamepadSnapshot;
 
@@ -25,9 +27,9 @@ GAMECONTROLLER_EXPORT
  A profile keeps a reference to the controller that this profile is mapping input from.
  */
 #if !__has_feature(objc_arc)
-@property (readonly, assign) GCController *controller;
+@property (nonatomic, readonly, assign) GCController *controller;
 #else
-@property (readonly, weak) GCController *controller;
+@property (nonatomic, readonly, weak) GCController *controller;
 #endif
 
 /**
@@ -39,7 +41,7 @@ GAMECONTROLLER_EXPORT
  @param element the element that has been modified.
  */
 typedef void (^GCGamepadValueChangedHandler)(GCGamepad *gamepad, GCControllerElement *element);
-@property (copy) GCGamepadValueChangedHandler valueChangedHandler;
+@property (nonatomic, copy, nullable) GCGamepadValueChangedHandler valueChangedHandler;
 
 /**
  Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent
@@ -54,7 +56,7 @@ typedef void (^GCGamepadValueChangedHandler)(GCGamepad *gamepad, GCControllerEle
 /**
  Required to be analog in the Standard profile. All the elements of this directional input are thus analog.
  */
-@property (readonly) GCControllerDirectionPad *dpad;
+@property (nonatomic, readonly) GCControllerDirectionPad *dpad;
 
 /**
  All face buttons are required to be analog in the Standard profile. These must be arranged
@@ -67,18 +69,20 @@ typedef void (^GCGamepadValueChangedHandler)(GCGamepad *gamepad, GCControllerEle
    A
  
  */
-@property (readonly) GCControllerButtonInput *buttonA;
-@property (readonly) GCControllerButtonInput *buttonB;
-@property (readonly) GCControllerButtonInput *buttonX;
-@property (readonly) GCControllerButtonInput *buttonY;
+@property (nonatomic, readonly) GCControllerButtonInput *buttonA;
+@property (nonatomic, readonly) GCControllerButtonInput *buttonB;
+@property (nonatomic, readonly) GCControllerButtonInput *buttonX;
+@property (nonatomic, readonly) GCControllerButtonInput *buttonY;
 
 /**
  Shoulder buttons are required to be analog inputs.
  */
-@property (readonly) GCControllerButtonInput *leftShoulder;
+@property (nonatomic, readonly) GCControllerButtonInput *leftShoulder;
 /**
  Shoulder buttons are required to be analog inputs.
  */
-@property (readonly) GCControllerButtonInput *rightShoulder;
+@property (nonatomic, readonly) GCControllerButtonInput *rightShoulder;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /usr/lib/system/libquarantine.dylib
-current-version: 76.20.1
+current-version: 80.0
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ ___esp_check, ___esp_check_ns, ___esp_enabled, ___esp_notify, 
@@ -30,7 +30,8 @@ exports:
                        __qtn_proc_init_with_data, __qtn_proc_init_with_self, 
                        __qtn_proc_set_flags, __qtn_proc_set_identifier, 
                        __qtn_proc_set_metadata, __qtn_proc_set_path_exclusion_pattern, 
-                       __qtn_proc_to_data, __qtn_xattr_name, _responsibility_get_pid_responsible_for_pid, 
-                       _responsibility_get_responsible_for_pid, _responsibility_get_uniqueid_responsible_for_pid, 
+                       __qtn_proc_to_data, __qtn_xattr_name, _qtn_proc_init_with_pid, 
+                       _responsibility_get_pid_responsible_for_pid, _responsibility_get_responsible_for_pid, 
+                       _responsibility_get_uniqueid_responsible_for_pid, 
                        _responsibility_init, _responsibility_init2, _responsibility_set_pid_responsible_for_pid ]
 ...

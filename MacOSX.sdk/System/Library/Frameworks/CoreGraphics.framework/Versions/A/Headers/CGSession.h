@@ -5,14 +5,22 @@
 #ifndef CGSESSION_H_
 #define CGSESSION_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CoreFoundation.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* Return a window server session dictionary, or NULL if the caller is not
    running within a Quartz GUI session or the window server is disabled. You
    should release the dictionary when you are finished using it. */
 
-CG_EXTERN CFDictionaryRef CGSessionCopyCurrentDictionary(void)
+CG_EXTERN CFDictionaryRef __nullable CGSessionCopyCurrentDictionary(void)
   CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 /* Keys for window server session dictionaries. */
@@ -53,5 +61,9 @@ CG_EXTERN CFDictionaryRef CGSessionCopyCurrentDictionary(void)
 
 #define kCGNotifyGUISessionUserChanged					\
   "com.apple.coregraphics.GUISessionUserChanged"
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGSESSION_H_ */

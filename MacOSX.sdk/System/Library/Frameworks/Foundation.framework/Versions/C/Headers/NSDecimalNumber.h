@@ -1,11 +1,13 @@
 /*	NSDecimalNumber.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
 #import <Foundation/NSScanner.h>
 #import <Foundation/NSDecimal.h>
 #import <Foundation/NSDictionary.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /***************	Exceptions		***********/
 
@@ -25,7 +27,7 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 - (short)scale;
     // The scale could return NO_SCALE for no defined scale.
 
-- (NSDecimalNumber *)exceptionDuringOperation:(SEL)operation error:(NSCalculationError)error leftOperand:(NSDecimalNumber *)leftOperand rightOperand:(NSDecimalNumber *)rightOperand;
+- (nullable NSDecimalNumber *)exceptionDuringOperation:(SEL)operation error:(NSCalculationError)error leftOperand:(NSDecimalNumber *)leftOperand rightOperand:(nullable NSDecimalNumber *)rightOperand;
     // Receiver can raise, return a new value, or return nil to ignore the exception.
 
 @end
@@ -46,17 +48,17 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 
 - (instancetype)initWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;
 - (instancetype)initWithDecimal:(NSDecimal)dcm NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithString:(NSString *)numberValue;
-- (instancetype)initWithString:(NSString *)numberValue locale:(id)locale;
+- (instancetype)initWithString:(nullable NSString *)numberValue;
+- (instancetype)initWithString:(nullable NSString *)numberValue locale:(nullable id)locale;
 
-- (NSString *)descriptionWithLocale:(id)locale;
+- (NSString *)descriptionWithLocale:(nullable id)locale;
 
 @property (readonly) NSDecimal decimalValue;
 
 + (NSDecimalNumber *)decimalNumberWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;
 + (NSDecimalNumber *)decimalNumberWithDecimal:(NSDecimal)dcm;
-+ (NSDecimalNumber *)decimalNumberWithString:(NSString *)numberValue;
-+ (NSDecimalNumber *)decimalNumberWithString:(NSString *)numberValue locale:(id)locale;
++ (NSDecimalNumber *)decimalNumberWithString:(nullable NSString *)numberValue;
++ (NSDecimalNumber *)decimalNumberWithString:(nullable NSString *)numberValue locale:(nullable id)locale;
 
 + (NSDecimalNumber *)zero;
 + (NSDecimalNumber *)one;
@@ -65,25 +67,25 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 + (NSDecimalNumber *)notANumber;
 
 - (NSDecimalNumber *)decimalNumberByAdding:(NSDecimalNumber *)decimalNumber;
-- (NSDecimalNumber *)decimalNumberByAdding:(NSDecimalNumber *)decimalNumber withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberByAdding:(NSDecimalNumber *)decimalNumber withBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
 
 - (NSDecimalNumber *)decimalNumberBySubtracting:(NSDecimalNumber *)decimalNumber;
-- (NSDecimalNumber *)decimalNumberBySubtracting:(NSDecimalNumber *)decimalNumber withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberBySubtracting:(NSDecimalNumber *)decimalNumber withBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
 
 - (NSDecimalNumber *)decimalNumberByMultiplyingBy:(NSDecimalNumber *)decimalNumber;
-- (NSDecimalNumber *)decimalNumberByMultiplyingBy:(NSDecimalNumber *)decimalNumber withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberByMultiplyingBy:(NSDecimalNumber *)decimalNumber withBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
 
 - (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber;
-- (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberByDividingBy:(NSDecimalNumber *)decimalNumber withBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
 
 - (NSDecimalNumber *)decimalNumberByRaisingToPower:(NSUInteger)power;
-- (NSDecimalNumber *)decimalNumberByRaisingToPower:(NSUInteger)power withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberByRaisingToPower:(NSUInteger)power withBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
 
 - (NSDecimalNumber *)decimalNumberByMultiplyingByPowerOf10:(short)power;
-- (NSDecimalNumber *)decimalNumberByMultiplyingByPowerOf10:(short)power withBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberByMultiplyingByPowerOf10:(short)power withBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
 
 
-- (NSDecimalNumber *)decimalNumberByRoundingAccordingToBehavior:(id <NSDecimalNumberBehaviors>)behavior;
+- (NSDecimalNumber *)decimalNumberByRoundingAccordingToBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
     // Round to the scale of the behavior.
 
 - (NSComparisonResult)compare:(NSNumber *)decimalNumber;
@@ -144,7 +146,8 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 
 @interface NSScanner (NSDecimalNumberScanning)
 
-- (BOOL)scanDecimal:(NSDecimal *)dcm;
+- (BOOL)scanDecimal:(nullable NSDecimal *)dcm;
 
 @end
 
+NS_ASSUME_NONNULL_END

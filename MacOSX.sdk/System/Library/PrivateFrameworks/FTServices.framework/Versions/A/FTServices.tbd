@@ -5,7 +5,7 @@ install-name:    /System/Library/PrivateFrameworks/FTServices.framework/Versions
 current-version: 800.0
 exports:         
   - archs:           [ i386 ]
-    objc-classes:    [ _FTEmbeddedReachability, _FTGetRegionMetadataMessage ]
+    objc-classes:    [ _FTAuthKitManager, _FTEmbeddedReachability, _FTGetRegionMetadataMessage ]
   - archs:           [ x86_64 ]
     objc-ivars:      [ _FTMessageDelivery._retries, _FTNetworkSupport._criticalReliabilityEnabledState, 
                        _FTNetworkSupport._enableCriticalReliability, _FTPasswordManager._accountStore, 

@@ -2,10 +2,12 @@
 	File:		AVAudioTime.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioTypes.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
 	@class AVAudioTime
@@ -137,3 +139,4 @@ AVAudioTime *fullTime0 = [time0 extrapolateTimeFromAnchor: anchor];
 
 @end
 
+NS_ASSUME_NONNULL_END

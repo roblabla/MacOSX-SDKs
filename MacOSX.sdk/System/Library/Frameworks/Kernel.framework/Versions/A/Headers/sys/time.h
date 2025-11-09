@@ -76,6 +76,11 @@
 #include <sys/_types/_fd_def.h>
 #include <sys/_types/_timespec.h>
 #include <sys/_types/_timeval.h>
+
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#include <sys/_types/_timeval64.h>
+#endif /* !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE) */
+
 #include <sys/_types/_user_timespec.h>
 #include <sys/_types/_user32_timespec.h>
 #include <sys/_types/_user64_timespec.h>

@@ -73,12 +73,13 @@ extern "C" {
  * any shared OpenGL memory that is attached o a CL memory object remains 
  * resident on the active device.
  */
-cl_int	clGetGLContextInfoAPPLE ( cl_context /* context */,
-								  void * /* platform_gl_ctx */,
+
+cl_int	clGetGLContextInfoAPPLE ( cl_context __nonnull /* context */,
+								  void * __nonnull /* platform_gl_ctx */,
 								  cl_gl_platform_info /* param_name */,
 								  size_t /* param_value_size */,
-								  void * /* param_value */,
-								  size_t * /* param_value_size_ret */)  CL_EXT_SUFFIX__VERSION_1_0;  
+								  void *  __nullable /* param_value */,
+								  size_t * __nullable /* param_value_size_ret */)  CL_EXT_SUFFIX__VERSION_1_0;  
 
 /* The list of supported param_name values and the information returned in param_value by 
  * clGetContextInfo are listed below:
@@ -102,21 +103,22 @@ cl_int	clGetGLContextInfoAPPLE ( cl_context /* context */,
  */
 #define CL_COMMAND_GL_FENCE_SYNC_OBJECT_KHR     0x200D
 
-extern CL_API_ENTRY cl_event CL_API_CALL
-clCreateEventFromGLsyncKHR(cl_context           /* context */,
-                           cl_GLsync            /* cl_GLsync */,
-                           cl_int *             /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
+extern CL_API_ENTRY cl_event __nullable CL_API_CALL
+clCreateEventFromGLsyncKHR(cl_context __nonnull  /* context */,
+                           cl_GLsync  __nonnull  /* cl_GLsync */,
+                           cl_int *   __nullable /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
 
 #ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
 typedef struct __IOSurface* IOSurfaceRef;
 #endif
-cl_mem clCreateImageFromIOSurface2DAPPLE(cl_context /* context */,
+
+cl_mem __nullable clCreateImageFromIOSurface2DAPPLE(cl_context __nonnull /* context */,
 										 cl_mem_flags /* flags */,
-										 const cl_image_format * /* image_format */,
+										 const cl_image_format * __nonnull /* image_format */,
 										 size_t /* image_width */,
 										 size_t /* image_height */,
-										 IOSurfaceRef /* iosurface */,
-										 cl_int * /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
+										 IOSurfaceRef __nonnull/* iosurface */,
+										 cl_int * __nullable /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
 
 typedef intptr_t cl_iosurface_properties_APPLE;
   
@@ -130,12 +132,12 @@ typedef intptr_t cl_iosurface_properties_APPLE;
  * Create a 2D CL image from an IOSurface given a format, optional description, and property list. If
  * the image_desc argument is NULL, the width and height of the IOSurfaceRef will be used.
  */
-cl_mem clCreateImageFromIOSurfaceWithPropertiesAPPLE(cl_context /* context */,
-                      cl_mem_flags                    /* flags */,
-                      const cl_image_format *         /* image_format */,
-                      const cl_image_desc *           /* image_desc */,
-                      cl_iosurface_properties_APPLE * /* properties */,
-                      cl_int *                        /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
+cl_mem __nullable clCreateImageFromIOSurfaceWithPropertiesAPPLE(cl_context __nonnull /* context */,
+                      cl_mem_flags                              /* flags */,
+                      const cl_image_format * __nonnull         /* image_format */,
+                      const cl_image_desc *   __nonnull         /* image_desc */,
+                      cl_iosurface_properties_APPLE * __nonnull /* properties */,
+                      cl_int * __nullable                       /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
 
 /* Query parameter name for clGetImageInfo that returns the IOSurface backing the image (IOSurfaceRef) */
 #define CL_IMAGE_IOSURFACE_APPLE                            0x1000001b /* Introduced in Mac OS X 10.9 */

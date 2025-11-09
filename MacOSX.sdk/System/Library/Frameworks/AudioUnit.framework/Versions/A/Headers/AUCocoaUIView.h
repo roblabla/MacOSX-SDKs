@@ -1,15 +1,11 @@
-/*
-     File:       AUCocoaUIView.h
- 
-     Contains:   Specification of Protocol for Cocoa based UI Views for AudioUnits
- 
-     Copyright:  (c) 2003 - 2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		AUCocoaUIView.h
+ 	@framework	AudioUnit.framework
+ 	@copyright	(c) 2003-2015 Apple, Inc. All rights reserved.
+	@abstract	Protocol for Cocoa-based audio unit views.
+	@discussion
+	
+	Audio unit hosts can call these methods to retrieve views for audio units.
 */
 
 #if __OBJC__
@@ -17,12 +13,9 @@
 #import <Cocoa/Cocoa.h>
 #include <AudioUnit/AudioUnit.h>
 
-@protocol AUCocoaUIBase
+NS_ASSUME_NONNULL_BEGIN
 
-/*!
-	@header AUCocoaUIView
-	This file specifies a protocol that cocoa-based audio unit views will implement. Audio Unit hosts will call these methods to retrieve the view for your audio unit.
- */
+@protocol AUCocoaUIBase
 
 /*!
 	@function	interfaceVersion
@@ -54,8 +47,10 @@
 				Each view must be returned with a retain count of 1 and autoreleased.
 				It is the client's responsibility to retain the returned view and to release the view when it's no longer needed.
 */
-- (NSView *)uiViewForAudioUnit:(AudioUnit)inAudioUnit withSize:(NSSize)inPreferredSize;
+- (NSView * __nullable)uiViewForAudioUnit:(AudioUnit)inAudioUnit withSize:(NSSize)inPreferredSize;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

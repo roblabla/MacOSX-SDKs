@@ -1,16 +1,22 @@
 ---
-archs:           [ i386, x86_64 ]
+archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/NetworkMenusCommon.framework/NetworkMenusCommon
 exports:         
   - archs:           [ x86_64 ]
+    symbols:         [ _const_notificationName_NC, _gEnableLogs, _kConnectionTimerInterval, 
+                       _kStatusCheckInterval, _limit ]
+    objc-classes:    [ _AppleNetworkMenuExtra, _AppleNetworkMenuExtraNetworkExtensionServiceController, 
+                       _AppleNetworkMenuExtraServiceController, _AppleNetworkMenuExtraView, 
+                       _AppleNetworkMenuHeaderView, _AppleNetworkMenuHeaderViewController ]
     objc-ivars:      [ _AppleNetworkMenuExtra.mAlternateImages, _AppleNetworkMenuExtra.mBundle, 
                        _AppleNetworkMenuExtra.mControllers, _AppleNetworkMenuExtra.mFileHandle, 
                        _AppleNetworkMenuExtra.mImages, _AppleNetworkMenuExtra.mMenu, 
                        _AppleNetworkMenuExtra.mMenuBarView, _AppleNetworkMenuExtra.mNoConfigsMenuItem, 
                        _AppleNetworkMenuExtra.mPrefs, _AppleNetworkMenuExtra.mProcessingPrefChanges, 
                        _AppleNetworkMenuExtra.mRunLoopSource, _AppleNetworkMenuExtra.mShowStatusMenuItem, 
-                       _AppleNetworkMenuExtra.mShowTimeMenuItem, _AppleNetworkMenuExtraServiceController.kSleepStartTime, 
+                       _AppleNetworkMenuExtra.mShowTimeMenuItem, _AppleNetworkMenuExtra.neServiceQueue, 
+                       _AppleNetworkMenuExtraServiceController.kSleepStartTime, 
                        _AppleNetworkMenuExtraServiceController.kSleepTimeAdditionalSeconds, 
                        _AppleNetworkMenuExtraServiceController.mAlternateImages, 
                        _AppleNetworkMenuExtraServiceController.mApplicationURL, 
@@ -56,10 +62,4 @@ exports:
                        _AppleNetworkMenuHeaderView.mSleepTimeAdditionalSeconds, 
                        _AppleNetworkMenuHeaderView.o_timeField, _AppleNetworkMenuHeaderView.o_titleField, 
                        _AppleNetworkMenuHeaderViewController.o_view ]
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ _const_notificationName_NC, _gEnableLogs, _kConnectionTimerInterval, 
-                       _kStatusCheckInterval, _limit ]
-    objc-classes:    [ _AppleNetworkMenuExtra, _AppleNetworkMenuExtraServiceController, 
-                       _AppleNetworkMenuExtraView, _AppleNetworkMenuHeaderView, 
-                       _AppleNetworkMenuHeaderViewController ]
 ...

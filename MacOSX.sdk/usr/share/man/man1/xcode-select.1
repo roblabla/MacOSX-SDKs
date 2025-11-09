@@ -1,4 +1,6 @@
-.TH "XCODE-SELECT" "1" "July 30, 2013" "Mac OS X" "BSD General Commands Manual"
+.\" Man page generated from reStructuredText.
+.
+.TH "XCODE-SELECT" "1" "March 20, 2015" "Mac OS X" "BSD General Commands Manual"
 .SH NAME
 xcode-select \- Manages the active developer directory for Xcode and BSD tools.
 .
@@ -28,8 +30,6 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.\" Man page generated from reStructuredText.
-.
 .SH SYNOPSIS
 .sp
 \fBxcode\-select\fP [\-h|\-\-help] [\-s|\-\-switch <path>] [\-p|\-\-print\-path]
@@ -69,7 +69,7 @@ Prints the usage message.
 .TP
 .B \-s <path>, \-\-switch <path>
 Sets the active developer directory to the given path, for example
-\fB/Applications/Xcode\-DP.app\fP. This command must be run with superuser
+\fB/Applications/Xcode\-DP.app\fP\&. This command must be run with superuser
 permissions (see \fIsudo(8)\fP), and will affect all users on the
 system. To set the path without superuser permissions or only for the current
 shell session, use the DEVELOPER_DIR environment variable instead (see
@@ -133,7 +133,7 @@ directory.
 .INDENT 3.5
 As above, selects \fB/Applications/Xcode.app/Contents/Developer\fP as the active
 developer directory. The Developer content directory is automatically inferred
-by \fBxcode\-select\fP.
+by \fBxcode\-select\fP\&.
 .UNINDENT
 .UNINDENT
 .sp
@@ -170,6 +170,7 @@ Used to find or run arbitrary commands from the active developer directory. See
 .sp
 \fB/usr/bin/agvtool\fP
 \fB/usr/bin/desdp\fP
+\fB/usr/bin/genstrings\fP
 \fB/usr/bin/ibtool\fP
 \fB/usr/bin/ictool\fP
 \fB/usr/bin/instruments\fP
@@ -264,6 +265,8 @@ Runs the matching Xcode tool from with the active developer directory.
 \fB/usr/bin/svnserve\fP
 \fB/usr/bin/svnsync\fP
 \fB/usr/bin/svnversion\fP
+\fB/usr/bin/swift\fP
+\fB/usr/bin/swiftc\fP
 \fB/usr/bin/unifdef\fP
 \fB/usr/bin/unifdefall\fP
 \fB/usr/bin/xml2man\fP
@@ -275,7 +278,7 @@ Runs the matching BSD tool from with the active developer directory.
 .UNINDENT
 .SH SEE ALSO
 .sp
-\fIxcrun(1)\fP
+\fIxcrun(1)\fP, \fIxcodebuild(1)\fP
 .SH HISTORY
 .sp
 The \fBxcode\-select\fP command first appeared in Xcode 3.0.

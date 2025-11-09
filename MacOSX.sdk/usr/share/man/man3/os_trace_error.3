@@ -58,7 +58,7 @@ Trace messages should never be done in tight loops as they will overrun the buff
 .Pp
 The API was designed to prevent strings from being recorded in the buffers for performance and privacy protection. The API only suppports scalar types (float, double, etc.) despite use of a standard
 .Xr printf 3
-formatting. All unsupported types will emit UNSUPPORTED_TYPE to the trace output. The format string length does not factor into the trace buffer memory, although there is a maximum supported length of 100 characters.
+formatting. All unsupported types will emit UNSUP to the trace output. The format string length does not factor into the trace buffer memory, although there is a maximum supported length of 100 characters.
 .Pp
 Inappropriate use of strings in messages:
 .Bd -literal -offset indent
@@ -67,7 +67,7 @@ os_trace("user %s logged in from hostname %s", username, host);
 .Pp
 Will output:
 .Bd -literal -offset indent
-user UNSUPPORTED_STRING logged in from hostname UNSUPPORTED_STRING
+user UNSUP logged in from hostname UNSUP
 .Ed
 .Pp
 There are two (2) types of trace messages "release" and "debug". Release messages are always recorded into the ring buffers regardless of the state of the process. Whereas, "debug" messages are only recorded if the process is under a debugger or is specifically requested to include debug messages.

@@ -140,7 +140,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__processor_start_t;
+	} __Request__processor_start_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -150,7 +150,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__processor_exit_t;
+	} __Request__processor_exit_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -163,7 +163,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		processor_flavor_t flavor;
 		mach_msg_type_number_t processor_info_outCnt;
-	} __Request__processor_info_t;
+	} __Request__processor_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -176,7 +176,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_msg_type_number_t processor_cmdCnt;
 		integer_t processor_cmd[12];
-	} __Request__processor_control_t;
+	} __Request__processor_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -192,7 +192,7 @@ __END_DECLS
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		boolean_t wait;
-	} __Request__processor_assign_t;
+	} __Request__processor_assign_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -202,7 +202,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__processor_get_assignment_t;
+	} __Request__processor_get_assignment_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -233,7 +233,7 @@ union __RequestUnion__processor_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_start_t;
+	} __Reply__processor_start_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -245,7 +245,7 @@ union __RequestUnion__processor_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_exit_t;
+	} __Reply__processor_exit_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -262,7 +262,7 @@ union __RequestUnion__processor_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t processor_info_outCnt;
 		integer_t processor_info_out[12];
-	} __Reply__processor_info_t;
+	} __Reply__processor_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -274,7 +274,7 @@ union __RequestUnion__processor_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_control_t;
+	} __Reply__processor_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -286,7 +286,7 @@ union __RequestUnion__processor_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_assign_t;
+	} __Reply__processor_assign_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -300,7 +300,7 @@ union __RequestUnion__processor_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t assigned_set;
 		/* end of the kernel processed data */
-	} __Reply__processor_get_assignment_t;
+	} __Reply__processor_get_assignment_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

@@ -7,10 +7,10 @@ exports:
   - archs:           [ i386 ]
     objc-classes:    [ _FTCServiceContainer, _FTCServiceMonitor ]
   - archs:           [ i386, x86_64 ]
-    symbols:         [ _FTCServiceAvailabilityAvailabilityKey, _FTCServiceAvailabilityDidChangeNotification, 
-                       _FTCServiceAvailabilityServiceTypeKey, _FTCServiceNameCalling, 
-                       _FTCServiceNameFaceTime, _FTCServiceNameForServiceType, 
-                       _FTCServiceNameMadrid, _FTCServiceNameiMessage, 
-                       _FTCServiceTypeForServiceName ]
+    symbols:         [ _FTCLogPrefix, _FTCServiceAvailabilityAvailabilityKey, 
+                       _FTCServiceAvailabilityDidChangeNotification, _FTCServiceAvailabilityServiceTypeKey, 
+                       _FTCServiceNameCalling, _FTCServiceNameFaceTime, 
+                       _FTCServiceNameForServiceType, _FTCServiceNameMadrid, 
+                       _FTCServiceNameiMessage, _FTCServiceTypeForServiceName ]
     objc-classes:    [ _FTCServiceAvailabilityCenter ]
 ...

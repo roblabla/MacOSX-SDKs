@@ -8,7 +8,7 @@
  
  /*! @header CVReturn.h
 	@copyright 2004-2014 Apple Inc. All rights reserved.
-	@availability Mac OS X 10.4 or later
+	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @discussion Here you can find all the CoreVideo specific error codes. 
 		   
 */
@@ -37,7 +37,7 @@ extern "C" {
     @constant   kCVReturnInvalidDisplay A CVDisplayLink cannot be created for the given DisplayRef.
     @constant   kCVReturnDisplayLinkAlreadyRunning The CVDisplayLink is already started and running.
     @constant   kCVReturnDisplayLinkNotRunning The CVDisplayLink has not been started.
-    @constant   kCVReturnDisplayLinkCallbacksNotSet The render and display callbacks or the output callback is not set. You have to set either the render/display pair or the single output callback.
+    @constant   kCVReturnDisplayLinkCallbacksNotSet The output callback is not set.
 
     @constant   kCVReturnInvalidPixelFormat The requested pixelformat is not supported for the CVBuffer type.
     @constant   kCVReturnInvalidSize The requested size (most likely too big) is not supported for the CVBuffer type.
@@ -50,7 +50,12 @@ extern "C" {
     @constant   kCVReturnInvalidPoolAttributes A CVBufferPool cannot be created with the given attributes.
 */
 
+typedef int32_t CVReturn;
+#if COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CVReturn
+#else
 enum _CVReturn
+#endif
 {
     kCVReturnSuccess                         = 0,
     
@@ -59,6 +64,7 @@ enum _CVReturn
     kCVReturnError                           = kCVReturnFirst,
     kCVReturnInvalidArgument                 = -6661,
     kCVReturnAllocationFailed                = -6662,
+	kCVReturnUnsupported                     = -6663,
     
     // DisplayLink related errors
     kCVReturnInvalidDisplay                  = -6670,
@@ -77,11 +83,10 @@ enum _CVReturn
     kCVReturnWouldExceedAllocationThreshold  = -6689,
     kCVReturnPoolAllocationFailed            = -6690,
     kCVReturnInvalidPoolAttributes           = -6691,
-    
+	
     kCVReturnLast                            = -6699
     
 };
-typedef int32_t CVReturn;
 
 #if defined(__cplusplus)
 }

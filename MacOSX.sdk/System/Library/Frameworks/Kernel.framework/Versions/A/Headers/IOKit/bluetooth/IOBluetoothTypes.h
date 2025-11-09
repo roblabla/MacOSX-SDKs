@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <IOKit/IOReturn.h>
+#import <IOKit/IOReturn.h>
 
 // Error returns
 #ifndef sub_iokit_bluetooth

@@ -15,7 +15,7 @@
 
 //------------------------------------------------------------------------------------------------------------------------------
 /*!
-  @enum ICEXIFOrientationType
+  @ICEXIFOrientationType
   @abstract Type representing EXIF Orientation tag value
   @discussion The meaning of this value is defined by the EXIF specification. Here is what the letter F would look like if it were tagged correctly and displayed by a program that ignores the orientation tag (thus showing the stored image):
 
@@ -35,7 +35,7 @@
 
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICEXIFOrientationType)
 {
     ICEXIFOrientation1  = 1,    // Normal
     ICEXIFOrientation2  = 2,    // Flipped horizontally
@@ -46,12 +46,11 @@ enum
     ICEXIFOrientation7  = 7,    // Rotated 90° CW and flipped vertically
     ICEXIFOrientation8  = 8     // Rotated 90° CW
 };
-typedef NSUInteger ICEXIFOrientationType;
 
 //------------------------------------------------------------------------------------------------------------------------------
 
 /*!
-    @enum ICReturnCode
+    @ICReturnCode
     @discussion
         Definition of codes returned by APIs in ImageCaptureCore framework
     @constant ICReturnSuccess
@@ -115,7 +114,7 @@ typedef NSUInteger ICEXIFOrientationType;
     @constant ICReturnDeviceSoftwareNotAvailable
         Software for the device is not available from Apple.
 */
-typedef enum ICReturnCode
+typedef NS_ENUM( NSInteger, ICReturnCode )
 {
     ICReturnSuccess                               = 0,
     ICReturnInvalidParam                          = -9922,
@@ -149,6 +148,7 @@ typedef enum ICReturnCode
     ICReturnDeviceSoftwareNotAvailable            = -9950,
     ICReturnDeviceCouldNotPair                    = -9951,
     ICReturnDeviceCouldNotUnpair                  = -9952,
-} ICReturnCode;
+    ICReturnDeviceNeedsCredentials                = -9953,
+};
 
 ////------------------------------------------------------------------------------------------------------------------------------

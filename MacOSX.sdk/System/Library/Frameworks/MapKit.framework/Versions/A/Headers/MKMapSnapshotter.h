@@ -10,9 +10,11 @@
 @class MKMapSnapshotOptions;
 @class MKMapSnapshot;
 
-typedef void (^MKMapSnapshotCompletionHandler)(MKMapSnapshot *snapshot, NSError *error);
+NS_ASSUME_NONNULL_BEGIN
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+typedef void (^MKMapSnapshotCompletionHandler)(MKMapSnapshot * __nullable snapshot, NSError * __nullable error);
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKMapSnapshotter : NSObject
 
 - (instancetype)initWithOptions:(MKMapSnapshotOptions *)options NS_DESIGNATED_INITIALIZER;
@@ -24,3 +26,5 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 @property (nonatomic, readonly, getter=isLoading) BOOL loading;
 
 @end
+
+NS_ASSUME_NONNULL_END

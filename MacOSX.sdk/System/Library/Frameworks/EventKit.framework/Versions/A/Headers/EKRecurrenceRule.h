@@ -4,13 +4,15 @@
 //
 //  Copyright 2009-2010 Apple Inc. All rights reserved.
 //
- 
+
 #import <Foundation/Foundation.h>
 #import <EventKit/EventKitDefines.h>
 #import <EventKit/EKRecurrenceEnd.h>
 #import <EventKit/EKRecurrenceDayOfWeek.h>
 #import <EventKit/EKTypes.h>
 #import <EventKit/EKObject.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class EKEventStore, EKCalendarItem;
 
@@ -24,10 +26,9 @@
                 This functionality is achieved by creating a new EKRecurrenceRule, and setting an event to use the new rule. 
                 When a new recurrence rule is set on an EKEvent, that change is not saved until the client 
                 has passed the modified event to EKEventStore's saveEvent: method.
-*/
-EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
-@interface EKRecurrenceRule : EKObject <NSCopying> {
-}
+ */
+NS_CLASS_AVAILABLE(10_8, 4_0)
+@interface EKRecurrenceRule : EKObject <NSCopying>
 
 /*!
     @method     initRecurrenceWithFrequency:interval:end:
@@ -35,7 +36,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @discussion This is used to create a simple recurrence with a specific type, interval and end. If interval is
                 0, an exception is raised. The end parameter can be nil.
 */
-- (id)initRecurrenceWithFrequency:(EKRecurrenceFrequency)type interval:(NSInteger)interval end:(EKRecurrenceEnd *)end;
+- (instancetype)initRecurrenceWithFrequency:(EKRecurrenceFrequency)type interval:(NSInteger)interval end:(nullable EKRecurrenceEnd *)end;
 
 /*!
     @method     initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:
@@ -64,15 +65,15 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                                 daysOfTheYear is passed. Ignored otherwise. Corresponds to the BYSETPOS value in the iCalendar specification.
     @param      end             The recurrence end, or nil.
 */
-- (id)initRecurrenceWithFrequency:(EKRecurrenceFrequency)type 
+- (instancetype)initRecurrenceWithFrequency:(EKRecurrenceFrequency)type
                          interval:(NSInteger)interval 
-                    daysOfTheWeek:(NSArray *)days
-                   daysOfTheMonth:(NSArray *)monthDays 
-                  monthsOfTheYear:(NSArray *)months 
-                   weeksOfTheYear:(NSArray *)weeksOfTheYear 
-                    daysOfTheYear:(NSArray *)daysOfTheYear
-                     setPositions:(NSArray *)setPositions
-                              end:(EKRecurrenceEnd *)end;
+                    daysOfTheWeek:(nullable NSArray<EKRecurrenceDayOfWeek *> *)days
+                   daysOfTheMonth:(nullable NSArray<NSNumber *> *)monthDays
+                  monthsOfTheYear:(nullable NSArray<NSNumber *> *)months
+                   weeksOfTheYear:(nullable NSArray<NSNumber *> *)weeksOfTheYear
+                    daysOfTheYear:(nullable NSArray<NSNumber *> *)daysOfTheYear
+                     setPositions:(nullable NSArray<NSNumber *> *)setPositions
+                              end:(nullable EKRecurrenceEnd *)end;
 
 /*  Properties that exist in all EKRecurrenceRules  */
 
@@ -87,7 +88,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @discussion     This property defines when the the repeating event is scheduled to end. The end date can be specified by a number of
                     occurrences, or with an end date.
 */
-@property(nonatomic, copy) EKRecurrenceEnd *recurrenceEnd;
+@property(nonatomic, copy, nullable) EKRecurrenceEnd *recurrenceEnd;
 
 /*!
     @property       frequency
@@ -140,7 +141,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                     corresponding to the days of the week the event recurs. For all other EKRecurrenceRules, this property is nil.
                     This property corresponds to BYDAY in the iCalendar specification.
 */
-@property(nonatomic, readonly) NSArray *daysOfTheWeek;
+@property(nonatomic, readonly, nullable) NSArray<EKRecurrenceDayOfWeek *> *daysOfTheWeek;
 
 /*!
     @property       daysOfTheMonth
@@ -150,7 +151,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                     For all other EKRecurrenceRules, this property is nil. This property corresponds to BYMONTHDAY in the iCalendar 
                     specification.
 */
-@property(nonatomic, readonly) NSArray *daysOfTheMonth;
+@property(nonatomic, readonly, nullable) NSArray<NSNumber *> *daysOfTheMonth;
 
 /*!
     @property       daysOfTheYear
@@ -159,7 +160,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                     EKRecurrenceRules, this property is nil. This property corresponds to BYYEARDAY in the iCalendar specification. It should
                     contain values between 1 to 366 or -366 to -1.
 */
-@property(nonatomic, readonly) NSArray *daysOfTheYear;
+@property(nonatomic, readonly, nullable) NSArray<NSNumber *> *daysOfTheYear;
 
 /*!
     @property       weeksOfTheYear
@@ -168,7 +169,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                     EKRecurrenceRules, this property is nil. This property corresponds to BYWEEK in the iCalendar specification. It should
                     contain integers from 1 to 53 or -1 to -53.
 */
-@property(nonatomic, readonly) NSArray *weeksOfTheYear;
+@property(nonatomic, readonly, nullable) NSArray<NSNumber *> *weeksOfTheYear;
 
 /*!
     @property       monthsOfTheYear
@@ -176,7 +177,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                     as an array containing one or more NSNumbers corresponding to the months of the year the event recurs. For all other 
                     EKRecurrenceRules, this property is nil. This property corresponds to BYMONTH in the iCalendar specification.
 */
-@property(nonatomic, readonly) NSArray *monthsOfTheYear;
+@property(nonatomic, readonly, nullable) NSArray<NSNumber *> *monthsOfTheYear;
 
 /*!
     @property       setPositions
@@ -185,6 +186,8 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                     included. For example, setting the daysOfTheWeek to Monday-Friday and including a value of -1 in the array would indicate
                     the last weekday in the recurrence range (month, year, etc). This value corresponds to the iCalendar BYSETPOS property.
 */
-@property(nonatomic, readonly) NSArray *setPositions;
+@property(nonatomic, readonly, nullable) NSArray<NSNumber *> *setPositions;
 
 @end
+
+NS_ASSUME_NONNULL_END

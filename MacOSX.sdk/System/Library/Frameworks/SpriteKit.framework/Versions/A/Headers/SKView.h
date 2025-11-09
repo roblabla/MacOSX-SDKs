@@ -20,11 +20,13 @@
 #if TARGET_OS_IPHONE
 
 #import <UIKit/UIKit.h>
+NS_ASSUME_NONNULL_BEGIN
 SK_EXPORT @interface SKView : UIView
 
 #else
 
 #import <Cocoa/Cocoa.h>
+NS_ASSUME_NONNULL_BEGIN
 SK_EXPORT @interface SKView : NSView
 
 #endif
@@ -77,7 +79,7 @@ SK_EXPORT @interface SKView : NSView
  
  @param scene the scene to present.
  */
-- (void)presentScene:(SKScene *)scene;
+- (void)presentScene:(nullable SKScene *)scene;
 
 /**
  Present an SKScene in the view, replacing the current scene.
@@ -92,14 +94,14 @@ SK_EXPORT @interface SKView : NSView
 /**
  The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
  */
-@property (nonatomic, readonly) SKScene *scene;
+@property (nonatomic, readonly, nullable) SKScene *scene;
 
 /**
  Create an SKTexture containing a snapshot of how it would have been rendered in this view.
  The texture is tightly cropped to the size of the node.
  @param node the node subtree to render to the texture.
  */
-- (SKTexture *)textureFromNode:(SKNode *)node;
+- (nullable SKTexture *)textureFromNode:(SKNode *)node;
 
 /**
  Create an SKTexture containing a snapshot of how it would have been rendered in this view.
@@ -107,7 +109,7 @@ SK_EXPORT @interface SKView : NSView
  @param node the node subtree to render to the texture.
  @param rect the crop
  */
-- (SKTexture *)textureFromNode:(SKNode *)node crop:(CGRect)crop;
+- (nullable SKTexture *)textureFromNode:(SKNode *)node crop:(CGRect)crop;
 
 /**
  Converts a point from view space to scene space.
@@ -125,5 +127,6 @@ SK_EXPORT @interface SKView : NSView
  */
 - (CGPoint)convertPoint:(CGPoint)point fromScene:(SKScene *)scene;
 
-
 @end
+
+NS_ASSUME_NONNULL_END

@@ -18,6 +18,7 @@
  * @discussion
  * The CWChannel class is used by both CWInterface and CWNetwork as a representation of an IEEE 802.11 Wi-Fi channel.
  */
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_7)
 @interface CWChannel : NSObject <NSCopying, NSSecureCoding>
 {
@@ -70,5 +71,6 @@ NS_CLASS_AVAILABLE_MAC(10_7)
 - (BOOL)isEqualToChannel:(CWChannel *)channel NS_AVAILABLE_MAC(10_7);
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif /* _CORE_WLAN_CHANNEL_H_ */

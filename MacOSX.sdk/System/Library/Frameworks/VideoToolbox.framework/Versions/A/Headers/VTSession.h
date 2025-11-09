@@ -30,7 +30,7 @@ extern "C"
 				Compression Session or Pixel Transfer Session.
  */
 
-typedef CFTypeRef  VTSessionRef;
+typedef CM_BRIDGED_TYPE(id) CFTypeRef  VTSessionRef;
 
 /*!
 	@function	VTSessionCopySupportedPropertyDictionary
@@ -50,9 +50,13 @@ typedef CFTypeRef  VTSessionRef;
 
 VT_EXPORT OSStatus 
 VTSessionCopySupportedPropertyDictionary(
-  VTSessionRef       session,
-  CFDictionaryRef    *supportedPropertyDictionaryOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+  CM_NONNULL VTSessionRef					session,
+  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL supportedPropertyDictionaryOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CM_ASSUME_NONNULL_BEGIN
+	
 VT_EXPORT const CFStringRef kVTPropertyTypeKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // value is CFStringRef, one of the following:
 	VT_EXPORT const CFStringRef kVTPropertyType_Enumeration __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // value is one of a list of CFStrings
 	VT_EXPORT const CFStringRef kVTPropertyType_Boolean __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // value is a CFBoolean
@@ -66,6 +70,8 @@ VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey __OSX_AVAILABLE_
 VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFArray of appropriate values
 VT_EXPORT const CFStringRef kVTPropertyDocumentationKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // a CFString for developer eyes only
 
+	
+CM_ASSUME_NONNULL_END
 
 /*!
 	@function	VTSessionSetProperty
@@ -75,9 +81,11 @@ VT_EXPORT const CFStringRef kVTPropertyDocumentationKey __OSX_AVAILABLE_STARTING
 */
 VT_EXPORT OSStatus 
 VTSessionSetProperty(
-  VTSessionRef       session,
-  CFStringRef        propertyKey,
-  CFTypeRef          propertyValue ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+  CM_NONNULL VTSessionRef       session,
+  CM_NONNULL CFStringRef        propertyKey,
+  CM_NONNULL CFTypeRef          propertyValue ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	VTSessionCopyProperty
@@ -103,11 +111,12 @@ VTSessionSetProperty(
 */
 VT_EXPORT OSStatus 
 VTSessionCopyProperty(
-  VTSessionRef       session,
-  CFStringRef        propertyKey,
-  CFAllocatorRef     allocator,
-  void *             propertyValueOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+  CM_NONNULL VTSessionRef		session,
+  CM_NONNULL CFStringRef		propertyKey,
+  CM_NULLABLE CFAllocatorRef	allocator,
+  void * CM_NULLABLE			propertyValueOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
+CF_IMPLICIT_BRIDGING_ENABLED
 /*!
 	@function	VTSessionSetProperties
 	@abstract	Sets multiple properties at once.
@@ -116,8 +125,10 @@ VTSessionCopyProperty(
 */
 VT_EXPORT OSStatus 
 VTSessionSetProperties(
-  VTSessionRef       session,
-  CFDictionaryRef    propertyDictionary ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+  CM_NONNULL VTSessionRef		session,
+  CM_NONNULL CFDictionaryRef	propertyDictionary ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	VTSessionCopySerializableProperties
@@ -128,9 +139,9 @@ VTSessionSetProperties(
 */
 VT_EXPORT OSStatus
 VTSessionCopySerializableProperties(
-  VTSessionRef       session,
-  CFAllocatorRef     allocator,
-  CFDictionaryRef    *dictionaryOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+  CM_NONNULL VTSessionRef					session,
+  CM_NULLABLE CFAllocatorRef				allocator,
+  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL	dictionaryOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 
 #pragma pack(pop)

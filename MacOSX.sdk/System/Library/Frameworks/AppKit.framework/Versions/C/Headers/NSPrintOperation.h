@@ -1,13 +1,15 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
 #import <AppKit/AppKitDefines.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSMutableData, NSGraphicsContext, NSPDFPanel, NSPrintPanel, NSPrintInfo, NSView, NSWindow;
 
@@ -33,7 +35,7 @@ typedef NS_ENUM(NSInteger, NSPrintRenderingQuality) {
 
 /* An exception that may be thrown by the factory methods described below.
 */
-APPKIT_EXTERN NSString *NSPrintOperationExistsException;
+APPKIT_EXTERN NSString * NSPrintOperationExistsException;
 
 @interface NSPrintOperation : NSObject {
 }
@@ -50,12 +52,12 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 */
 + (NSPrintOperation *)printOperationWithView:(NSView *)view;
 + (NSPrintOperation *)PDFOperationWithView:(NSView *)view insideRect:(NSRect)rect toData:(NSMutableData *)data;
-+ (NSPrintOperation *)EPSOperationWithView:(NSView *)view insideRect:(NSRect)rect toData:(NSMutableData *)data;
++ (NSPrintOperation *)EPSOperationWithView:(NSView *)view insideRect:(NSRect)rect toData:(nullable NSMutableData *)data;
 
 /* The current print operation for this thread. If this is nil, there is no current operation for the current thread.
 */
-+ (NSPrintOperation *)currentOperation;
-+ (void)setCurrentOperation:(NSPrintOperation *)operation;
++ (nullable NSPrintOperation *)currentOperation;
++ (void)setCurrentOperation:(nullable NSPrintOperation *)operation;
 
 /* Return YES if the operation for copying to PDF or EPS, NO if it's for printing.
 */
@@ -67,7 +69,7 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 
 /* The title of the print job. If a job title is set it overrides anything that might be gotten by sending the printed view an [NSView(NSPrinting) printJobTitle] message.
 */
-@property (copy) NSString *jobTitle NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSString *jobTitle NS_AVAILABLE_MAC(10_5);
 
 
 
@@ -99,7 +101,7 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 
 This can only be invoked once. Create a new NSPrintOperation instance for each operation. When this method completes, the object is removed from being the current operation if it is the current operation.
 */
-- (void)runOperationModalForWindow:(NSWindow *)docWindow delegate:(id)delegate didRunSelector:(SEL)didRunSelector contextInfo:(void *)contextInfo;
+- (void)runOperationModalForWindow:(NSWindow *)docWindow delegate:(nullable id)delegate didRunSelector:(nullable SEL)didRunSelector contextInfo:(nullable void *)contextInfo;
 
 /* Do the print operation, with application-modal panels. Return YES if the operation completed successfully, NO if there was an error or the user cancelled the operation. This can only be invoked once. Create a new NSPrintOperation instance for each operation. When this method completes, the object is removed from being the current operation if it is the current operation.
 */
@@ -107,7 +109,7 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* The view being printed.
 */
-@property (readonly, strong) NSView *view;
+@property (nullable, readonly, strong) NSView *view;
 
 /* The print info of the operation. -printInfo always returns a copy of the NSPrintInfo passed into the factory method used to create the print operation, unless -setPrintInfo: has been invoked, in which case it returns the exact same object passed into -setPrintInfo:. So, the factory methods listed above copy the passed-in NSPrintInfo, but -setPrintInfo: doesn't.
 */
@@ -115,7 +117,7 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* The context for the output of this operation.
 */
-@property (readonly, strong) NSGraphicsContext *context;
+@property (nullable, readonly, strong) NSGraphicsContext *context;
 
 /* The first through last one-based page numbers of the operation as it's being previewed or printed. The first page number might not be 1, and the page count might be NSIntegerMax to indicate that the number of pages is not known, depending on what the printed view returned when sent an [NSView(NSPrinting) knowsPageRange:] message.
 */
@@ -128,7 +130,7 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* Methods that are invoked by the print operation itself as it proceeds. You should not invoke them.
 */
-- (NSGraphicsContext *)createContext;
+- (nullable NSGraphicsContext *)createContext;
 - (void)destroyContext;
 - (BOOL)deliverResult;
 - (void)cleanUpOperation;
@@ -139,11 +141,11 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* Methods that were deprecated in Mac OS 10.5. You can merely get the NSPrintPanel of the operation and invoke these methods on the result instead of invoking them on the operation. In Mac OS 10.5 -setAccessoryView:/-accessoryView are deprecated in NSPageLayout and NSPrintPanel too. You should consider using those class' support for NSViewControllers instead.
 */
-- (void)setAccessoryView:(NSView *)view NS_DEPRECATED_MAC(10_0, 10_5);
-- (NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setAccessoryView:(nullable NSView *)view NS_DEPRECATED_MAC(10_0, 10_5);
+- (nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void)setJobStyleHint:(NSString *)hint NS_DEPRECATED_MAC(10_2, 10_5);
-- (NSString *)jobStyleHint NS_DEPRECATED_MAC(10_2, 10_5);
+- (void)setJobStyleHint:(nullable NSString *)hint NS_DEPRECATED_MAC(10_2, 10_5);
+- (nullable NSString *)jobStyleHint NS_DEPRECATED_MAC(10_2, 10_5);
 
 /* Methods that were deprecated in Mac OS 10.4. Use the new -setShowsPrintPanel:/-showsPrintPanel and -setShowsProgressPanel:/-showsProgressPanel methods instead.
 */
@@ -151,3 +153,5 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 - (BOOL)showPanels NS_DEPRECATED_MAC(10_0, 10_4);
 
 @end
+
+NS_ASSUME_NONNULL_END

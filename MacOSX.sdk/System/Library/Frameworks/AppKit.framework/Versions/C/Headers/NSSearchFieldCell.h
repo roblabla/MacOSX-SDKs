@@ -1,10 +1,11 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2014, Apple Inc.
+	Copyright (c) 2003-2015, Apple Inc.
 	All rights reserved.
  */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSTextFieldCell.h>
 
 
@@ -21,6 +22,8 @@
 
 #define	NSSearchFieldNoRecentsMenuItemTag        1003
 // The item describing a lack of recents uses this tag. Hidden if recents
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSButtonCell, NSMenu, NSMutableArray, NSTimer;
 
@@ -39,8 +42,11 @@
         unsigned int renderingCentered:1;
         unsigned int becomeTransition:1;
         unsigned int resignTransition:1;
-        
-	unsigned int reserved:12;
+        unsigned int subclassOverridesRectForSearchButtonWhenCentered:2;
+        unsigned int subclassOverridesRectForSearchTextWhenCentered:2;
+        unsigned int subclassOverridesRectForCancelButtonWhenCentered:2;
+	unsigned int resumeEditingOnCancel:1;
+	unsigned int reserved:5;
     } _sfFlags;
     NSButtonCell*   _searchButtonCell;
     NSButtonCell*   _cancelButtonCell;
@@ -55,10 +61,10 @@
     unsigned int _reserved4;    
 }
 
-@property (strong) NSButtonCell *searchButtonCell;
+@property (nullable, strong) NSButtonCell *searchButtonCell;
     // can modify, set or cancel search button.
 
-@property (strong) NSButtonCell *cancelButtonCell;
+@property (nullable, strong) NSButtonCell *cancelButtonCell;
     // can modify, set or clear cancel button.
 
 - (void) resetSearchButtonCell;
@@ -70,7 +76,7 @@
 - (NSRect) cancelButtonRectForBounds:(NSRect)rect;
     // for custom layout or to get current sizes
 
-@property (strong) NSMenu *searchMenuTemplate;
+@property (nullable, strong) NSMenu *searchMenuTemplate;
     // set/get search menu template. Menu can use custom tagged items to indicate special items. this menu isn't actually set but used to construct the dynamic search menu. if cleared, then we don't track recents.
 
 @property BOOL sendsWholeSearchString;
@@ -79,13 +85,15 @@
 @property NSInteger maximumRecents;
     // set/get limit max recents. allowable between 0 and 254. setting -1 will use default.
 
-@property (copy) NSArray *recentSearches;
+@property (null_resettable, copy) NSArray<NSString *> *recentSearches;
     // if app wants to do custom search lists. will return empty array if no searches
 
-@property (copy) NSString *recentsAutosaveName;
+@property (nullable, copy) NSString *recentsAutosaveName;
     // must be set to use. default is nil which means no autosave.
 
 @property BOOL sendsSearchStringImmediately;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

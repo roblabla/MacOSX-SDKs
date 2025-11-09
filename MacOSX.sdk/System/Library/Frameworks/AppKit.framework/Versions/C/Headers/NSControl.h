@@ -1,13 +1,16 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSCell, NSFont, NSTextView, NSNotification, NSAttributedString, NSFormatter, NSControlAuxiliary;
 
@@ -31,8 +34,8 @@
     } _conFlags;
 }
 
-@property (weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign’.
-@property SEL action;
+@property (nullable, weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign’.
+@property (nullable) SEL action;
 @property NSInteger tag;
 @property BOOL ignoresMultiClick;
 @property (getter=isContinuous) BOOL continuous;
@@ -40,11 +43,11 @@
 @property BOOL refusesFirstResponder;
 @property (getter=isHighlighted) BOOL highlighted NS_AVAILABLE_MAC(10_10);
 @property NSControlSize controlSize NS_AVAILABLE_MAC(10_10);
-@property (strong) id /* NSFormatter* */ formatter;
+@property (nullable, strong) __kindof NSFormatter *formatter;
 
 @property (copy) NSString *stringValue;
 @property (copy) NSAttributedString *attributedStringValue;
-@property (copy) id  /* id<NSCopying> */ objectValue;
+@property (nullable, copy) id  /* id<NSCopying> */ objectValue;
 @property int intValue;
 @property NSInteger integerValue;
 @property float floatValue;
@@ -53,26 +56,24 @@
 
 - (NSSize)sizeThatFits:(NSSize)size NS_AVAILABLE_MAC(10_10);
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 - (void)sizeToFit;
 - (NSInteger)sendActionOn:(NSInteger)mask;
 
-- (BOOL)sendAction:(SEL)theAction to:(id)theTarget;
-- (void)takeIntValueFrom:(id)sender;
-- (void)takeFloatValueFrom:(id)sender;
-- (void)takeDoubleValueFrom:(id)sender;
-- (void)takeStringValueFrom:(id)sender;
-- (void)takeObjectValueFrom:(id)sender;
-- (void)takeIntegerValueFrom:(id)sender NS_AVAILABLE_MAC(10_5);
+- (BOOL)sendAction:(SEL)theAction to:(nullable id)theTarget;
+- (void)takeIntValueFrom:(nullable id)sender;
+- (void)takeFloatValueFrom:(nullable id)sender;
+- (void)takeDoubleValueFrom:(nullable id)sender;
+- (void)takeStringValueFrom:(nullable id)sender;
+- (void)takeObjectValueFrom:(nullable id)sender;
+- (void)takeIntegerValueFrom:(nullable id)sender NS_AVAILABLE_MAC(10_5);
 
 - (void)mouseDown:(NSEvent *)theEvent;
 
 @end
 
 @interface NSControl(NSKeyboardUI)
-- (void)performClick:(id)sender;
-- (void)setRefusesFirstResponder:(BOOL)flag;
-- (BOOL)refusesFirstResponder;
+- (void)performClick:(nullable id)sender;
 @end
 
 
@@ -81,7 +82,7 @@
 @interface NSControl(NSControlTextMethods)
 
 @property NSTextAlignment alignment;
-@property (copy) NSFont *font;
+@property (nullable, copy) NSFont *font;
 @property NSLineBreakMode lineBreakMode NS_AVAILABLE_MAC(10_10);
 @property BOOL usesSingleLineMode NS_AVAILABLE_MAC(10_10);
 
@@ -106,12 +107,12 @@
 /* The following category applies only to controls with editable text, like NSTextField.
  */
 @interface NSControl(NSControlEditableTextMethods)
-- (NSText *)currentEditor;
+- (nullable NSText *)currentEditor;
 - (BOOL)abortEditing;
 - (void)validateEditing;
 
-- (void)editWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent NS_AVAILABLE_MAC(10_10);
-- (void)selectWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength NS_AVAILABLE_MAC(10_10);
+- (void)editWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(nullable id)anObject event:(NSEvent *)theEvent NS_AVAILABLE_MAC(10_10);
+- (void)selectWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(nullable id)anObject start:(NSInteger)selStart length:(NSInteger)selLength NS_AVAILABLE_MAC(10_10);
 - (void)endEditing:(NSText *)textObj NS_AVAILABLE_MAC(10_10);
 @end
 
@@ -129,18 +130,18 @@
 // These delegate and notification methods are sent from NSControl subclasses that allow text editing such as NSTextField and NSMatrix.  The classes that need to send these have delegates.  NSControl does not.
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor;
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor;
-- (BOOL)control:(NSControl *)control didFailToFormatString:(NSString *)string errorDescription:(NSString *)error;
-- (void)control:(NSControl *)control didFailToValidatePartialString:(NSString *)string errorDescription:(NSString *)error;
+- (BOOL)control:(NSControl *)control didFailToFormatString:(NSString *)string errorDescription:(nullable NSString *)error;
+- (void)control:(NSControl *)control didFailToValidatePartialString:(NSString *)string errorDescription:(nullable NSString *)error;
 - (BOOL)control:(NSControl *)control isValidObject:(id)obj;
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
-- (NSArray *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
+- (NSArray<NSString *> *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray<NSString *> *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
 @end
 
                                                                     // userInfo keys:
-APPKIT_EXTERN NSString *NSControlTextDidBeginEditingNotification;	//	@"NSFieldEditor"
-APPKIT_EXTERN NSString *NSControlTextDidEndEditingNotification;	//	@"NSFieldEditor"
-APPKIT_EXTERN NSString *NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
+APPKIT_EXTERN NSString * NSControlTextDidBeginEditingNotification;	//	@"NSFieldEditor"
+APPKIT_EXTERN NSString * NSControlTextDidEndEditingNotification;	//	@"NSFieldEditor"
+APPKIT_EXTERN NSString * NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
 
 
 @interface NSControl (NSDeprecated)
@@ -148,12 +149,12 @@ APPKIT_EXTERN NSString *NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
 // Use formatters instead.  See -[NSControl formatter] and -[NSControl setFormatter:].
 - (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits NS_DEPRECATED_MAC(10_0, 10_0);
 
-+ (void)setCellClass:(Class)factoryId;
-+ (Class)cellClass;
++ (void)setCellClass:(nullable Class)factoryId;
++ (nullable Class)cellClass;
 
-- (id)cell;
-- (void)setCell:(NSCell *)aCell;
-- (id)selectedCell;
+@property (nullable, strong) __kindof NSCell *cell;
+
+- (nullable __kindof NSCell *)selectedCell;
 - (NSInteger)selectedTag;
 
 - (void)setNeedsDisplay;    // Use setNeedsDisplay:YES instead.
@@ -166,4 +167,6 @@ APPKIT_EXTERN NSString *NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
 - (void)selectCell:(NSCell *)aCell;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

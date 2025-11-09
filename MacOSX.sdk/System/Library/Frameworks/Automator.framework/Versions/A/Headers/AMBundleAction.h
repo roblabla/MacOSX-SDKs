@@ -5,14 +5,17 @@
     Public header file.
 */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import <Automator/AMAction.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSView;
 
 // AMBundleAction
 // =============
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface AMBundleAction : AMAction <NSCoding, NSCopying> 
 {
 @private
@@ -26,16 +29,15 @@
 	AM_UNUSED_FOR_ANALYZER id _reserved4;
 }
 
-// Construction
-- (instancetype)initWithDefinition:(NSDictionary *)dict fromArchive:(BOOL)archived;
-
 // Operations
 - (void)awakeFromBundle;
 @property (readonly) BOOL hasView;
 
 // Accessors
-@property (readonly, strong) NSView *view;
+@property (nullable, readonly, strong) NSView *view;
 @property (readonly, strong) NSBundle *bundle;
-@property (strong) NSMutableDictionary *parameters;
+@property (nullable, strong) NSMutableDictionary<NSString *, id> *parameters;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
@@ -12,6 +12,8 @@
 #import <CoreGraphics/CGBase.h>
 #import <CoreGraphics/CGGeometry.h>
 #endif
+
+NS_ASSUME_NONNULL_BEGIN
 
 #if __LP64__ || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
 
@@ -30,12 +32,17 @@ typedef CGRect NSRect;
 typedef NSRect *NSRectPointer;
 typedef NSRect *NSRectArray;
 
-#define NSMinXEdge CGRectMinXEdge
-#define NSMinYEdge CGRectMinYEdge
-#define NSMaxXEdge CGRectMaxXEdge
-#define NSMaxYEdge CGRectMaxYEdge
-
-typedef NSUInteger NSRectEdge;
+typedef NS_ENUM(NSUInteger, NSRectEdge) {
+    NSRectEdgeMinX = CGRectMinXEdge,
+    NSRectEdgeMinY = CGRectMinYEdge,
+    NSRectEdgeMaxX = CGRectMaxXEdge,
+    NSRectEdgeMaxY = CGRectMaxYEdge,
+    
+    NSMinXEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MinX instead") = NSRectEdgeMinX,
+    NSMinYEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MinY instead") = NSRectEdgeMinY,
+    NSMaxXEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MaxX instead") = NSRectEdgeMaxX,
+    NSMaxYEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MaxX instead") = NSRectEdgeMaxY,
+};
 
 #define NSGEOMETRY_TYPES_SAME_AS_CGGEOMETRY_TYPES 1
 
@@ -66,10 +73,15 @@ typedef NSRect *NSRectPointer;
 typedef NSRect *NSRectArray;
 
 typedef enum {
-    NSMinXEdge = 0,
-    NSMinYEdge = 1,
-    NSMaxXEdge = 2,
-    NSMaxYEdge = 3	
+    NSRectEdgeMinX = 0,
+    NSRectEdgeMinY = 1,
+    NSRectEdgeMaxX = 2,
+    NSRectEdgeMaxY = 3,
+    
+    NSMinXEdge = NSRectEdgeMinX,
+    NSMinYEdge = NSRectEdgeMinY,
+    NSMaxXEdge = NSRectEdgeMaxX,
+    NSMaxYEdge = NSRectEdgeMaxY,
 } NSRectEdge;
 
 #endif
@@ -277,3 +289,4 @@ FOUNDATION_EXPORT NSRect NSRectFromString(NSString *aString);
 
 @end
 
+NS_ASSUME_NONNULL_END

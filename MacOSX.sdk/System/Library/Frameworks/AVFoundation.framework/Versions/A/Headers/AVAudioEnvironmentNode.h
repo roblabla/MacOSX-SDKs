@@ -2,13 +2,15 @@
     File:       AVAudioEnvironmentNode.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioNode.h>
 #import <AVFoundation/AVAudioUnitReverb.h>
 #import <AVFoundation/AVAudioUnitEQ.h>
 #import <AVFoundation/AVAudioMixing.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @enum AVAudioEnvironmentDistanceAttenuationModel
     @abstract Types of distance attenuation models
@@ -240,7 +242,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 @property (nonatomic, readonly) AVAudioEnvironmentReverbParameters *reverbParameters;
 
-/*! @method applicableRenderingAlgorithms:
+/*! @property applicableRenderingAlgorithms
     @abstract Returns an array of AVAudio3DMixingRenderingAlgorithm values based on the current output format
     @discussion
         AVAudioEnvironmentNode supports several rendering algorithms per input bus which are defined 
@@ -254,6 +256,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
         This information should be retrieved after a successful connection to the destination node 
         via the engine's connect method.
 */
-- (NSArray *)applicableRenderingAlgorithms;
+@property (nonatomic, readonly) NSArray<NSNumber *> *applicableRenderingAlgorithms;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -668,6 +668,17 @@ typedef struct SCSICmd_INQUIRY_Page00_Header
 
 
 /*!
+@struct SCSICmd_INQUIRY_Page00_Header_SPC_16
+@discussion INQUIRY Page 00h Header.
+*/
+typedef struct SCSICmd_INQUIRY_Page00_Header_SPC_16
+{
+	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8		PAGE_CODE;							// Must be equal to 00h
+	UInt16		PAGE_LENGTH;						// n-3 bytes
+} SCSICmd_INQUIRY_Page00_Header_SPC_16;
+
+/*!
 @struct SCSICmd_INQUIRY_Page80_Header
 @discussion INQUIRY Page 80h Header.
 */
@@ -679,6 +690,19 @@ typedef struct SCSICmd_INQUIRY_Page80_Header
 	UInt8		PAGE_LENGTH;						// n-3 bytes
 	UInt8		PRODUCT_SERIAL_NUMBER;				// 4-n
 } SCSICmd_INQUIRY_Page80_Header;
+
+
+/*!
+@struct SCSICmd_INQUIRY_Page80_Header_SPC_16
+@discussion INQUIRY Page 80h Header with 16 bytes INQUIRY Command.
+*/
+typedef struct SCSICmd_INQUIRY_Page80_Header_SPC_16
+{
+	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8		PAGE_CODE;					// Must be equal to 80h
+	UInt16		PAGE_LENGTH;					// n-3 bytes
+	UInt8		PRODUCT_SERIAL_NUMBER;				// 4-n
+} SCSICmd_INQUIRY_Page80_Header_SPC_16;
 
 
 /*!

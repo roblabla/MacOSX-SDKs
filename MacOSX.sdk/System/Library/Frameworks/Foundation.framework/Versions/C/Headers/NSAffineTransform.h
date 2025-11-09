@@ -1,18 +1,19 @@
 /*	NSAffineTransform.h
-        Copyright (c) 1997-2014, Apple Inc. All rights reserved.
+        Copyright (c) 1997-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 #import <CoreGraphics/CGAffineTransform.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 typedef struct {
     CGFloat m11, m12, m21, m22;
     CGFloat tX, tY;
 } NSAffineTransformStruct;
 
-@interface NSAffineTransform : NSObject <NSCopying, NSCoding> {
+@interface NSAffineTransform : NSObject <NSCopying, NSSecureCoding> {
     @private
     NSAffineTransformStruct _transformStruct;
 }
@@ -51,3 +52,4 @@ typedef struct {
 
 @end
 
+NS_ASSUME_NONNULL_END

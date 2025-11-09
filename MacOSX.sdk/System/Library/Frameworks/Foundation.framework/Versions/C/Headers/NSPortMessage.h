@@ -1,10 +1,12 @@
 /*	NSPortMessage.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSPort, NSDate, NSArray, NSMutableArray;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSPortMessage : NSObject {
     @private
@@ -16,14 +18,15 @@
     void		*reserved;
 }
 
-- (instancetype)initWithSendPort:(NSPort *)sendPort receivePort:(NSPort *)replyPort components:(NSArray *)components NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSendPort:(nullable NSPort *)sendPort receivePort:(nullable NSPort *)replyPort components:(nullable NSArray *)components NS_DESIGNATED_INITIALIZER;
 
-@property (readonly, copy) NSArray *components;
-@property (readonly, retain) NSPort *receivePort;
-@property (readonly, retain) NSPort *sendPort;
+@property (nullable, readonly, copy) NSArray *components;
+@property (nullable, readonly, retain) NSPort *receivePort;
+@property (nullable, readonly, retain) NSPort *sendPort;
 - (BOOL)sendBeforeDate:(NSDate *)date;
 
 @property uint32_t msgid;
 
 @end
 
+NS_ASSUME_NONNULL_END

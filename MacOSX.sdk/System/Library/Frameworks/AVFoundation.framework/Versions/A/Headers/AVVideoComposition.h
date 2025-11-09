@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -27,8 +27,14 @@
 		A client can implement their own custom video compositor by implementing the AVVideoCompositing protocol; a custom video compositor is provided with pixel buffers for each of its video sources during playback and other operations and can perform arbitrary graphical operations on them in order to produce visual output.
 */
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class AVVideoCompositionCoreAnimationTool;
 @class AVVideoCompositionInternal;
+@class AVVideoCompositionLayerInstruction;
+@class AVVideoCompositionInstruction;
+@class CIContext;
+@class CIImage;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVVideoComposition : NSObject <NSCopying, NSMutableCopying> {
@@ -56,7 +62,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates a custom compositor class to use. The class must implement the AVVideoCompositing protocol.
    If nil, the default, internal video compositor is used */
-@property (nonatomic, readonly) Class<AVVideoCompositing> customVideoCompositorClass NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) Class<AVVideoCompositing> customVideoCompositorClass NS_AVAILABLE(10_9, 7_0);
 
 /* indicates the interval which the video composition, when enabled, should render composed video frames */
 @property (nonatomic, readonly) CMTime frameDuration;
@@ -77,12 +83,53 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    the last instruction must be greater than or equal to the latest time for which playback or other processing will be attempted (note that this will often be
    the duration of the asset with which the instance of AVVideoComposition is associated).
 */
-@property (nonatomic, readonly, copy) NSArray *instructions;
+@property (nonatomic, readonly, copy) NSArray<id <AVVideoCompositionInstruction>> *instructions;
 
 /* indicates a special video composition tool for use of Core Animation; may be nil */
-@property (nonatomic, readonly, retain) AVVideoCompositionCoreAnimationTool *animationTool;
+@property (nonatomic, readonly, retain, nullable) AVVideoCompositionCoreAnimationTool *animationTool;
 
 @end
+
+@interface AVVideoComposition (AVVideoCompositionFiltering)
+
+/*  
+ @method		videoCompositionWithAsset:options:applyingFiltersWithHandler:
+ @abstract
+	Returns a new instance of AVVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
+ @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
+ @result		An instance of AVVideoComposition.
+ @discussion
+	The returned AVVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload.
+ 
+	The video composition will also have the following values for its properties:
+
+		- A value for frameDuration to accommodate the nominalFrameRate for asset's first enabled video track. If the nominalFrameRate is 0, a default framerate of 30fps is used.
+		- A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform.
+		- A renderScale of 1.0.
+
+	The default CIContext has the following properties:
+
+		- iOS: Device RGB color space
+		- OS X: sRGB color space
+ 
+	Example usage:
+
+		playerItem.videoComposition = [AVVideoComposition videoCompositionWithAsset:srcAsset applyingCIFiltersWithHandler:
+			^(AVAsynchronousCIImageFilteringRequest *request)
+			{
+				NSError *err = nil;
+				CIImage *filtered = myRenderer(request, &err);
+				if (filtered)
+					[request finishWithImage:filtered context:nil];
+				else
+					[request finishWithError:err];
+			}];
+*/
++ (AVVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
+			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier NS_AVAILABLE(10_11, 9_0);
+
+@end
+
 
 /*!
 	@class		AVMutableVideoComposition
@@ -110,7 +157,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @method		videoCompositionWithPropertiesOfAsset:
  @abstract
    Returns a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks.
- @param			asset		An instance of AVAsset. Ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
+ @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
  @result		An instance of AVMutableVideoComposition.
  @discussion
    The returned AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks.
@@ -125,7 +172,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 + (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset NS_AVAILABLE(10_9, 6_0);
 
 /* indicates the custom compositor class to use. If nil, the default, internal video compositor is used */
-@property (nonatomic, retain) Class<AVVideoCompositing> customVideoCompositorClass NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, retain, nullable) Class<AVVideoCompositing> customVideoCompositorClass NS_AVAILABLE(10_9, 7_0);
 
 /* indicates the interval which the video composition, when enabled, should render composed video frames */
 @property (nonatomic) CMTime frameDuration;
@@ -146,10 +193,50 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    the last instruction must be greater than or equal to the latest time for which playback or other processing will be attempted (note that this will often be
    the duration of the asset with which the instance of AVVideoComposition is associated).
 */
-@property (nonatomic, copy) NSArray *instructions;
+@property (nonatomic, copy) NSArray<id <AVVideoCompositionInstruction>> *instructions;
 
 /* indicates a special video composition tool for use of Core Animation; may be nil */
-@property (nonatomic, retain) AVVideoCompositionCoreAnimationTool *animationTool;
+@property (nonatomic, retain, nullable) AVVideoCompositionCoreAnimationTool *animationTool;
+
+@end
+
+@interface AVMutableVideoComposition (AVMutableVideoCompositionFiltering)
+
+/*  
+ @method		videoCompositionWithAsset:options:applyingFiltersWithHandler:
+ @abstract
+	Returns a new instance of AVMutableVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage.
+ @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
+ @result		An instance of AVMutableVideoComposition.
+ @discussion
+	The returned AVMutableVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload.
+ 
+	The video composition will also have the following values for its properties:
+
+		- A value for frameDuration to accommodate the nominalFrameRate for asset's first enabled video track. If the nominalFrameRate is 0, a default framerate of 30fps is used.
+		- A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform.
+		- A renderScale of 1.0.
+
+	The default CIContext has the following properties:
+
+		- iOS: Device RGB color space
+		- OS X: sRGB color space
+ 
+	Example usage:
+
+		playerItem.videoComposition = [AVMutableVideoComposition videoCompositionWithAsset:srcAsset applyingCIFiltersWithHandler:
+			^(AVAsynchronousCIImageFilteringRequest *request)
+			{
+				NSError *err = nil;
+				CIImage *filtered = myRenderer(request, &err);
+				if (filtered)
+					[request finishWithImage:filtered context:nil];
+				else
+					[request finishWithError:err];
+			}];
+*/
++ (AVMutableVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
+			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier NS_AVAILABLE(10_11, 9_0);
 
 @end
 
@@ -177,20 +264,20 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* Indicates the background color of the composition. Solid BGRA colors only are supported; patterns and other color refs that are not supported will be ignored.
    If the background color is not specified the video compositor will use a default backgroundColor of opaque black.
    If the rendered pixel buffer does not have alpha, the alpha value of the backgroundColor will be ignored. */
-@property (nonatomic, retain) __attribute__((NSObject)) CGColorRef backgroundColor;
+@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) CGColorRef backgroundColor CF_RETURNS_RETAINED;
 
 /* Provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed.
    Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction
    in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc.
    If this key is nil, the output will be a fill of the background color. */
-@property (nonatomic, readonly, copy) NSArray *layerInstructions;
+@property (nonatomic, readonly, copy) NSArray<AVVideoCompositionLayerInstruction *> *layerInstructions;
 
 /* If NO, indicates that post-processing should be skipped for the duration of this instruction.  YES by default.
    See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].*/
 @property (nonatomic, readonly) BOOL enablePostProcessing;
 
 /* List of video track IDs required to compose frames for this instruction. The value of this property is computed from the layer instructions. */
-@property (nonatomic, readonly) NSArray *requiredSourceTrackIDs NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<NSValue *> *requiredSourceTrackIDs NS_AVAILABLE(10_9, 7_0);
 
 /* If the video composition result is one of the source frames for the duration of the instruction, this property
    returns the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source
@@ -222,7 +309,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
    The returned AVMutableVideoCompositionInstruction will have a timeRange of kCMTimeRangeInvalid, a NULL backgroundColor, and a nil array of layerInstructions.
 */
-+ (AVMutableVideoCompositionInstruction *)videoCompositionInstruction;
++ (instancetype)videoCompositionInstruction;
 
 /* Indicates the timeRange during which the instruction is effective. Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above. */
 @property (nonatomic, assign) CMTimeRange timeRange;
@@ -230,13 +317,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* Indicates the background color of the composition. Solid BGRA colors only are supported; patterns and other color refs that are not supported will be ignored.
    If the background color is not specified the video compositor will use a default backgroundColor of opaque black.
    If the rendered pixel buffer does not have alpha, the alpha value of the backgroundColor will be ignored. */
-@property (nonatomic, retain) __attribute__((NSObject)) CGColorRef backgroundColor;
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CGColorRef backgroundColor CF_RETURNS_RETAINED;
 
 /* Provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed.
    Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction
    in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc.
    If this key is nil, the output will be a fill of the background color. */
-@property (nonatomic, copy) NSArray *layerInstructions;
+@property (nonatomic, copy) NSArray<AVVideoCompositionLayerInstruction *> *layerInstructions;
 
 /* If NO, indicates that post-processing should be skipped for the duration of this instruction.  YES by default.
    See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].*/
@@ -276,7 +363,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of success. NO will be returned if the specified time is beyond the duration of the last transform ramp that has been set.
 */
-- (BOOL)getTransformRampForTime:(CMTime)time startTransform:(CGAffineTransform *)startTransform endTransform:(CGAffineTransform *)endTransform timeRange:(CMTimeRange *)timeRange;
+- (BOOL)getTransformRampForTime:(CMTime)time startTransform:(nullable CGAffineTransform *)startTransform endTransform:(nullable CGAffineTransform *)endTransform timeRange:(nullable CMTimeRange *)timeRange;
 
 /*  
  @method		getOpacityRampForTime:startOpacity:endOpacity:timeRange:
@@ -293,7 +380,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of success. NO will be returned if the specified time is beyond the duration of the last opacity ramp that has been set.
 */
-- (BOOL)getOpacityRampForTime:(CMTime)time startOpacity:(float *)startOpacity endOpacity:(float *)endOpacity timeRange:(CMTimeRange *)timeRange;
+- (BOOL)getOpacityRampForTime:(CMTime)time startOpacity:(nullable float *)startOpacity endOpacity:(nullable float *)endOpacity timeRange:(nullable CMTimeRange *)timeRange;
 
 /*  
  @method		getCropRectangleRampForTime:startCropRectangle:endCropRectangle:timeRange:
@@ -310,7 +397,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of success. NO will be returned if the specified time is beyond the duration of the last crop rectangle ramp that has been set.
 */
-- (BOOL)getCropRectangleRampForTime:(CMTime)time startCropRectangle:(CGRect *)startCropRectangle endCropRectangle:(CGRect *)endCropRectangle timeRange:(CMTimeRange *)timeRange NS_AVAILABLE(10_9, 7_0);
+- (BOOL)getCropRectangleRampForTime:(CMTime)time startCropRectangle:(nullable CGRect *)startCropRectangle endCropRectangle:(nullable CGRect *)endCropRectangle timeRange:(nullable CMTimeRange *)timeRange NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -334,13 +421,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @param			track
    A reference to an AVAssetTrack.
 */
-+ (AVMutableVideoCompositionLayerInstruction *)videoCompositionLayerInstructionWithAssetTrack:(AVAssetTrack *)track;
++ (instancetype)videoCompositionLayerInstructionWithAssetTrack:(AVAssetTrack *)track;
 
 /*  
  @method		videoCompositionLayerInstruction
  @abstract		Returns a new instance of AVMutableVideoCompositionLayerInstruction with no transform or opacity ramps and a trackID initialized to kCMPersistentTrackID_Invalid.
 */
-+ (AVMutableVideoCompositionLayerInstruction *)videoCompositionLayerInstruction;
++ (instancetype)videoCompositionLayerInstruction;
 
 /* Indicates the trackID of the source track to which the compositor will apply the instruction. */
 @property (nonatomic, assign) CMPersistentTrackID trackID;
@@ -497,7 +584,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 								to YES in the layer hierarchy to get the same result when attaching a CALayer to a AVVideoCompositionCoreAnimationTool
 								as when using it to back a UIView.
 */
-+ (AVVideoCompositionCoreAnimationTool *)videoCompositionCoreAnimationToolWithAdditionalLayer:(CALayer *)layer asTrackID:(CMPersistentTrackID)trackID;
++ (instancetype)videoCompositionCoreAnimationToolWithAdditionalLayer:(CALayer *)layer asTrackID:(CMPersistentTrackID)trackID;
 
 /*!
 	@method						videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:inLayer:
@@ -510,7 +597,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 								to YES in the layer hierarchy to get the same result when attaching a CALayer to a AVVideoCompositionCoreAnimationTool
 								as when using it to back a UIView.
 */
-+ (AVVideoCompositionCoreAnimationTool *)videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:(CALayer *)videoLayer inLayer:(CALayer *)animationLayer;
++ (instancetype)videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:(CALayer *)videoLayer inLayer:(CALayer *)animationLayer;
 
 /*!
 	@method						videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:inLayer:
@@ -523,7 +610,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 								to YES in the layer hierarchy to get the same result when attaching a CALayer to a AVVideoCompositionCoreAnimationTool
 								as when using it to back a UIView.
 */
-+ (AVVideoCompositionCoreAnimationTool *)videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:(NSArray *)videoLayers inLayer:(CALayer *)animationLayer NS_AVAILABLE(10_9, 7_0);
++ (instancetype)videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:(NSArray<CALayer *> *)videoLayers inLayer:(CALayer *)animationLayer NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -553,7 +640,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition.
    An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation.
 */
-- (BOOL)isValidForAsset:(AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(id<AVVideoCompositionValidationHandling>)validationDelegate NS_AVAILABLE(10_8, 5_0);
+- (BOOL)isValidForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate NS_AVAILABLE(10_8, 5_0);
 
 @end
 
@@ -600,3 +687,5 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 - (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidTrackIDInInstruction:(id<AVVideoCompositionInstruction>)videoCompositionInstruction layerInstruction:(AVVideoCompositionLayerInstruction *)layerInstruction asset:(AVAsset *)asset NS_AVAILABLE(10_8, 5_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

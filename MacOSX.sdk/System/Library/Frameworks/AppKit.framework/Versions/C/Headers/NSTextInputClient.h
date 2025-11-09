@@ -1,15 +1,17 @@
 /*
 	NSTextInputClient.h
 	Application Kit
-	Copyright (c) 2006-2014, Apple Inc.
+	Copyright (c) 2006-2015, Apple Inc.
 	All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSGeometry.h>
 
-@class NSArray;
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSAttributedString;
 
 @protocol NSTextInputClient
@@ -44,15 +46,15 @@
 
 /* Returns attributed string specified by aRange. It may return nil. If non-nil return value and actualRange is non-NULL, it contains the actual range for the return value. The range can be adjusted from various reasons (i.e. adjust to grapheme cluster boundary, performance optimization, etc).
 */
-- (NSAttributedString *)attributedSubstringForProposedRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange;
+- (nullable NSAttributedString *)attributedSubstringForProposedRange:(NSRange)aRange actualRange:(nullable NSRangePointer)actualRange;
 
 /* Returns an array of attribute names recognized by the receiver.
 */
-- (NSArray*)validAttributesForMarkedText;
+- (NSArray<NSString *> *)validAttributesForMarkedText;
 
 /* Returns the first logical rectangular area for aRange. The return value is in the screen coordinate. The size value can be negative if the text flows to the left. If non-NULL, actuallRange contains the character range corresponding to the returned area.
 */
-- (NSRect)firstRectForCharacterRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange;
+- (NSRect)firstRectForCharacterRange:(NSRange)aRange actualRange:(nullable NSRangePointer)actualRange;
 
 /* Returns the index for character that is nearest to aPoint. aPoint is in the screen coordinate system.
 */
@@ -79,3 +81,5 @@
  */
 - (BOOL)drawsVerticallyForCharacterAtIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_6);
 @end
+
+NS_ASSUME_NONNULL_END

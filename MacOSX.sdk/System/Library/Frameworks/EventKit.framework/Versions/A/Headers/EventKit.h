@@ -6,6 +6,8 @@
  *
  */
 
+#if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED || !TARGET_OS_IPHONE
+
 #import <EventKit/EventKitDefines.h>
 #import <EventKit/EKTypes.h>
 #import <EventKit/EKAlarm.h>
@@ -18,4 +20,6 @@
 #import <EventKit/EKReminder.h>
 #import <EventKit/EKSource.h>
 #import <EventKit/EKStructuredLocation.h>
+
+#endif //#if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
 

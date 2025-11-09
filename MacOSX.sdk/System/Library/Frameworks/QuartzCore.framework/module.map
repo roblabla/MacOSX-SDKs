@@ -1,4 +1,4 @@
-framework module QuartzCore [extern_c] [system] {
+framework module QuartzCore [extern_c] {
   umbrella "Headers"
 
   export *
@@ -107,12 +107,6 @@ framework module QuartzCore [extern_c] [system] {
   }
 
 
-  module CACIFilterAdditions {
-    requires objc
-    header "CACIFilterAdditions.h"
-    export *
-  }
-
   module CAConstraintLayoutManager {
     requires objc
     header "CAConstraintLayoutManager.h"
@@ -143,10 +137,9 @@ framework module QuartzCore [extern_c] [system] {
     export *
   }
 
-  framework module CoreImage {
-    umbrella header "CoreImage.h"
+  module CoreImage {
+    header "CoreImage.h"
     export *
-    module * { export * }    
   }
 
   module CIColor {

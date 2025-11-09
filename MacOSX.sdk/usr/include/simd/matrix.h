@@ -33,6 +33,22 @@
  *                                      returns the product x*y where x is
  *                                      interpreted as a row vector.
  *
+ *      matrix_equal(x,y)               Returns true if and only if every
+ *                                      element of x is exactly equal to the
+ *                                      corresponding element of y.
+ *
+ *      matrix_almost_equal_elements(x,y,tol)
+ *                                      Returns true if and only if for each
+ *                                      entry xij in x, the corresponding
+ *                                      element yij in y satisfies
+ *                                      |xij - yij| <= tol.
+ *
+ *      matrix_almost_equal_elements_relative(x,y,tol)
+ *                                      Returns true if and only if for each
+ *                                      entry xij in x, the corresponding
+ *                                      element yij in y satisfies
+ *                                      |xij - yij| <= tol*|xij|.
+ *
  *  The header also defines a few useful global matrix objects:
  *  matrix_identity_floatNxM and matrix_identity_doubleNxM, may be used to get
  *  an identity matrix of the specified size.
@@ -43,14 +59,18 @@
  *
  *      C++ Function                    Equivalent C Function
  *      --------------------------------------------------------------------
- *      SIMD::inverse                   matrix_invert
- *      SIMD::transpose                 matrix_transpose
+ *      simd::inverse                   matrix_invert
+ *      simd::transpose                 matrix_transpose
  *      operator+                       matrix_add
  *      operator-                       matrix_sub
  *      operator+=                      N/A
  *      operator-=                      N/A
  *      operator*                       matrix_scale or matrix_multiply
  *      operator*=                      matrix_scale or matrix_multiply
+ *      operator==                      matrix_equal
+ *      operator!=                      !matrix_equal
+ *      simd::almost_equal_elements     matrix_almost_equal_elements
+ *      simd::almost_equal_elements_relative  matrix_almost_equal_elements_relative
  *
  *  <simd/matrix_types.h> provides constructors that are equivalent to the
  *  various matrix_from functions.
@@ -64,21 +84,22 @@
 #include <simd/matrix_types.h>
 #include <simd/geometry.h>
 #include <simd/extern.h>
+#include <simd/logic.h>
 
 #ifdef __cplusplus
-extern "C" {
+    extern "C" {
 #endif
 
-extern const matrix_float2x2 matrix_identity_float2x2  __SIMD_AVAILABILITY__;
-extern const matrix_float3x3 matrix_identity_float3x3  __SIMD_AVAILABILITY__;
-extern const matrix_float4x4 matrix_identity_float4x4  __SIMD_AVAILABILITY__;
-extern const matrix_double2x2 matrix_identity_double2x2 __SIMD_AVAILABILITY__;
-extern const matrix_double3x3 matrix_identity_double3x3 __SIMD_AVAILABILITY__;
-extern const matrix_double4x4 matrix_identity_double4x4 __SIMD_AVAILABILITY__;
+extern const matrix_float2x2 matrix_identity_float2x2  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const matrix_float3x3 matrix_identity_float3x3  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const matrix_float4x4 matrix_identity_float4x4  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const matrix_double2x2 matrix_identity_double2x2 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const matrix_double3x3 matrix_identity_double3x3 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const matrix_double4x4 matrix_identity_double4x4 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
-static  matrix_float2x2 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_float2 __x);
-static  matrix_float3x3 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_float3 __x);
-static  matrix_float4x4 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_float4 __x);
+static matrix_float2x2 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_float2 __x);
+static matrix_float3x3 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_float3 __x);
+static matrix_float4x4 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_float4 __x);
 static matrix_double2x2 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_double2 __x);
 static matrix_double3x3 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_double3 __x);
 static matrix_double4x4 __SIMD_ATTRIBUTES__ matrix_from_diagonal(vector_double4 __x);
@@ -183,17 +204,17 @@ static matrix_double4x4 __SIMD_ATTRIBUTES__ matrix_transpose(matrix_double4x4 __
 
 static float __SIMD_ATTRIBUTES__ matrix_determinant(matrix_float2x2 __x);
 static float __SIMD_ATTRIBUTES__ matrix_determinant(matrix_float3x3 __x);
-static float __SIMD_ATTRIBUTES__ matrix_determinant(matrix_float4x4 __x) __SIMD_AVAILABILITY__;
+static float __SIMD_ATTRIBUTES__ matrix_determinant(matrix_float4x4 __x);
 static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double2x2 __x);
 static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double3x3 __x);
-static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double4x4 __x) __SIMD_AVAILABILITY__;
+static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double4x4 __x);
 
-static matrix_float2x2 __SIMD_ATTRIBUTES__ matrix_invert(matrix_float2x2 __x) __SIMD_AVAILABILITY__;
-static matrix_float3x3 __SIMD_ATTRIBUTES__ matrix_invert(matrix_float3x3 __x) __SIMD_AVAILABILITY__;
-static matrix_float4x4 __SIMD_ATTRIBUTES__ matrix_invert(matrix_float4x4 __x) __SIMD_AVAILABILITY__;
-static matrix_double2x2 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double2x2 __x) __SIMD_AVAILABILITY__;
-static matrix_double3x3 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double3x3 __x) __SIMD_AVAILABILITY__;
-static matrix_double4x4 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double4x4 __x) __SIMD_AVAILABILITY__;
+static matrix_float2x2 __SIMD_ATTRIBUTES__ matrix_invert(matrix_float2x2 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static matrix_float3x3 __SIMD_ATTRIBUTES__ matrix_invert(matrix_float3x3 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static matrix_float4x4 __SIMD_ATTRIBUTES__ matrix_invert(matrix_float4x4 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static matrix_double2x2 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double2x2 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static matrix_double3x3 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double3x3 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static matrix_double4x4 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double4x4 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 static vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_float2x2 __x, vector_float2 __y);
 static vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_float3x2 __x, vector_float3 __y);
@@ -285,6 +306,63 @@ static matrix_double4x3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x3 __x
 static matrix_double2x4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x4 __x, matrix_double2x4 __y);
 static matrix_double3x4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x4 __x, matrix_double3x4 __y);
 static matrix_double4x4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x4 __x, matrix_double4x4 __y);
+    
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float2x2 __x, matrix_float2x2 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float2x3 __x, matrix_float2x3 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float2x4 __x, matrix_float2x4 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float3x2 __x, matrix_float3x2 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float3x3 __x, matrix_float3x3 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float3x4 __x, matrix_float3x4 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float4x2 __x, matrix_float4x2 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float4x3 __x, matrix_float4x3 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float4x4 __x, matrix_float4x4 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double2x2 __x, matrix_double2x2 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double2x3 __x, matrix_double2x3 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double2x4 __x, matrix_double2x4 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double3x2 __x, matrix_double3x2 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double3x3 __x, matrix_double3x3 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double3x4 __x, matrix_double3x4 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double4x2 __x, matrix_double4x2 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double4x3 __x, matrix_double4x3 __y);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double4x4 __x, matrix_double4x4 __y);
+        
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float2x2 __x, matrix_float2x2 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float2x3 __x, matrix_float2x3 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float2x4 __x, matrix_float2x4 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float3x2 __x, matrix_float3x2 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float3x3 __x, matrix_float3x3 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float3x4 __x, matrix_float3x4 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float4x2 __x, matrix_float4x2 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float4x3 __x, matrix_float4x3 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float4x4 __x, matrix_float4x4 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double2x2 __x, matrix_double2x2 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double2x3 __x, matrix_double2x3 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double2x4 __x, matrix_double2x4 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double3x2 __x, matrix_double3x2 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double3x3 __x, matrix_double3x3 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double3x4 __x, matrix_double3x4 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double4x2 __x, matrix_double4x2 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double4x3 __x, matrix_double4x3 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double4x4 __x, matrix_double4x4 __y, double __tol);
+        
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float2x2 __x, matrix_float2x2 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float2x3 __x, matrix_float2x3 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float2x4 __x, matrix_float2x4 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float3x2 __x, matrix_float3x2 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float3x3 __x, matrix_float3x3 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float3x4 __x, matrix_float3x4 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float4x2 __x, matrix_float4x2 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float4x3 __x, matrix_float4x3 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float4x4 __x, matrix_float4x4 __y, float __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double2x2 __x, matrix_double2x2 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double2x3 __x, matrix_double2x3 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double2x4 __x, matrix_double2x4 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double3x2 __x, matrix_double3x2 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double3x3 __x, matrix_double3x3 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double3x4 __x, matrix_double3x4 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double4x2 __x, matrix_double4x2 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double4x3 __x, matrix_double4x3 __y, double __tol);
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double4x4 __x, matrix_double4x4 __y, double __tol);
 
 #ifdef __cplusplus
 } /* extern "C" */
@@ -311,9 +389,9 @@ namespace simd {
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgcc-compat"
-    static __SIMD_INLINE__ float2x2 inverse(const float2x2 x) __SIMD_AVAILABILITY__ { return ::matrix_invert(x); }
-    static __SIMD_INLINE__ float3x3 inverse(const float3x3 x) __SIMD_AVAILABILITY__ { return ::matrix_invert(x); }
-    static __SIMD_INLINE__ float4x4 inverse(const float4x4 x) __SIMD_AVAILABILITY__ { return ::matrix_invert(x); }
+    static __SIMD_INLINE__ float2x2 inverse(const float2x2 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::matrix_invert(x); }
+    static __SIMD_INLINE__ float3x3 inverse(const float3x3 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::matrix_invert(x); }
+    static __SIMD_INLINE__ float4x4 inverse(const float4x4 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::matrix_invert(x); }
 #pragma clang diagnostic pop
 
     static __SIMD_INLINE__ float2x2 operator*(const float a, const float2x2 x) { return ::matrix_scale(a, x); }
@@ -419,9 +497,9 @@ namespace simd {
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgcc-compat"
-    static __SIMD_INLINE__ double2x2 inverse(const double2x2 x) __SIMD_AVAILABILITY__ { return ::matrix_invert(x); }
-    static __SIMD_INLINE__ double3x3 inverse(const double3x3 x) __SIMD_AVAILABILITY__ { return ::matrix_invert(x); }
-    static __SIMD_INLINE__ double4x4 inverse(const double4x4 x) __SIMD_AVAILABILITY__ { return ::matrix_invert(x); }
+    static __SIMD_INLINE__ double2x2 inverse(const double2x2 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::matrix_invert(x); }
+    static __SIMD_INLINE__ double3x3 inverse(const double3x3 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::matrix_invert(x); }
+    static __SIMD_INLINE__ double4x4 inverse(const double4x4 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::matrix_invert(x); }
 #pragma clang diagnostic pop
 
     static __SIMD_INLINE__ double2x2 operator*(const double a, const double2x2 x) { return ::matrix_scale(a, x); }
@@ -510,6 +588,11 @@ namespace simd {
     static __SIMD_INLINE__ double4x2& operator*=(double4x2& x, const double4x4 y) { x = ::matrix_multiply(x, y); return x; }
     static __SIMD_INLINE__ double4x3& operator*=(double4x3& x, const double4x4 y) { x = ::matrix_multiply(x, y); return x; }
     static __SIMD_INLINE__ double4x4& operator*=(double4x4& x, const double4x4 y) { x = ::matrix_multiply(x, y); return x; }
+    
+    template <typename fptypeNxM> static __SIMD_INLINE__ bool operator==(const fptypeNxM& x, const fptypeNxM& y) { return ::matrix_equal(x, y); }
+    template <typename fptypeNxM> static __SIMD_INLINE__ bool operator!=(const fptypeNxM& x, const fptypeNxM& y) { return !::matrix_equal(x, y); }
+    template <typename fptypeNxM, typename fptype> static __SIMD_INLINE__ bool almost_equal_elements(const fptypeNxM x, const fptypeNxM y, const fptype tol) { return ::matrix_almost_equal_elements(x, y, tol); }
+    template <typename fptypeNxM, typename fptype> static __SIMD_INLINE__ bool almost_equal_elements_relative(const fptypeNxM x, const fptypeNxM y, const fptype tol) { return ::matrix_almost_equal_elements_relative(x, y, tol); }
 }
 
 extern "C" {
@@ -909,17 +992,17 @@ static vector_double4 __SIMD_ATTRIBUTES__ __rotate3(vector_double4 __x) { return
 
 static  float __SIMD_ATTRIBUTES__ matrix_determinant( matrix_float2x2 __x) { return __x.columns[0][0]*__x.columns[1][1] - __x.columns[0][1]*__x.columns[1][0]; }
 static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double2x2 __x) { return __x.columns[0][0]*__x.columns[1][1] - __x.columns[0][1]*__x.columns[1][0]; }
-static  float __SIMD_ATTRIBUTES__ matrix_determinant( matrix_float3x3 __x) { return __horizontal_sum(__x.columns[0]*(__rotate1(__x.columns[1])*__rotate2(__x.columns[2]) - __rotate2(__x.columns[1])*__rotate1(__x.columns[2]))); }
-static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double3x3 __x) { return __horizontal_sum(__x.columns[0]*(__rotate1(__x.columns[1])*__rotate2(__x.columns[2]) - __rotate2(__x.columns[1])*__rotate1(__x.columns[2]))); }
+static  float __SIMD_ATTRIBUTES__ matrix_determinant( matrix_float3x3 __x) { return vector_reduce_add(__x.columns[0]*(__rotate1(__x.columns[1])*__rotate2(__x.columns[2]) - __rotate2(__x.columns[1])*__rotate1(__x.columns[2]))); }
+static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double3x3 __x) { return vector_reduce_add(__x.columns[0]*(__rotate1(__x.columns[1])*__rotate2(__x.columns[2]) - __rotate2(__x.columns[1])*__rotate1(__x.columns[2]))); }
 static  float __SIMD_ATTRIBUTES__ matrix_determinant( matrix_float4x4 __x) {
-    return __horizontal_sum(__x.columns[0]*(__rotate1(__x.columns[1])*(__rotate2(__x.columns[2])*__rotate3(__x.columns[3])-__rotate3(__x.columns[2])*__rotate2(__x.columns[3])) +
-                                            __rotate2(__x.columns[1])*(__rotate3(__x.columns[2])*__rotate1(__x.columns[3])-__rotate1(__x.columns[2])*__rotate3(__x.columns[3])) +
-                                            __rotate3(__x.columns[1])*(__rotate1(__x.columns[2])*__rotate2(__x.columns[3])-__rotate2(__x.columns[2])*__rotate1(__x.columns[3]))));
+    return vector_reduce_add(__x.columns[0]*(__rotate1(__x.columns[1])*(__rotate2(__x.columns[2])*__rotate3(__x.columns[3])-__rotate3(__x.columns[2])*__rotate2(__x.columns[3])) +
+                                             __rotate2(__x.columns[1])*(__rotate3(__x.columns[2])*__rotate1(__x.columns[3])-__rotate1(__x.columns[2])*__rotate3(__x.columns[3])) +
+                                             __rotate3(__x.columns[1])*(__rotate1(__x.columns[2])*__rotate2(__x.columns[3])-__rotate2(__x.columns[2])*__rotate1(__x.columns[3]))));
 }
 static double __SIMD_ATTRIBUTES__ matrix_determinant(matrix_double4x4 __x) {
-    return __horizontal_sum(__x.columns[0]*(__rotate1(__x.columns[1])*(__rotate2(__x.columns[2])*__rotate3(__x.columns[3])-__rotate3(__x.columns[2])*__rotate2(__x.columns[3])) +
-                                            __rotate2(__x.columns[1])*(__rotate3(__x.columns[2])*__rotate1(__x.columns[3])-__rotate1(__x.columns[2])*__rotate3(__x.columns[3])) +
-                                            __rotate3(__x.columns[1])*(__rotate1(__x.columns[2])*__rotate2(__x.columns[3])-__rotate2(__x.columns[2])*__rotate1(__x.columns[3]))));
+    return vector_reduce_add(__x.columns[0]*(__rotate1(__x.columns[1])*(__rotate2(__x.columns[2])*__rotate3(__x.columns[3])-__rotate3(__x.columns[2])*__rotate2(__x.columns[3])) +
+                                             __rotate2(__x.columns[1])*(__rotate3(__x.columns[2])*__rotate1(__x.columns[3])-__rotate1(__x.columns[2])*__rotate3(__x.columns[3])) +
+                                             __rotate3(__x.columns[1])*(__rotate1(__x.columns[2])*__rotate2(__x.columns[3])-__rotate2(__x.columns[2])*__rotate1(__x.columns[3]))));
 }
 
 static  matrix_float2x2 __SIMD_ATTRIBUTES__ matrix_invert( matrix_float2x2 __x) { return __invert_f2(__x); }
@@ -929,24 +1012,47 @@ static matrix_double2x2 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double2x2 __x) 
 static matrix_double3x3 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double3x3 __x) { return __invert_d3(__x); }
 static matrix_double4x4 __SIMD_ATTRIBUTES__ matrix_invert(matrix_double4x4 __x) { return __invert_d4(__x); }
 
-static  vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float2x2 __x,  vector_float2 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1]; }
-static vector_double2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double2x2 __x, vector_double2 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1]; }
-static  vector_float3 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float2x3 __x,  vector_float2 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1]; }
-static vector_double3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double2x3 __x, vector_double2 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1]; }
-static  vector_float4 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float2x4 __x,  vector_float2 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1]; }
-static vector_double4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double2x4 __x, vector_double2 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1]; }
-static  vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float3x2 __x,  vector_float3 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2]; }
-static vector_double2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double3x2 __x, vector_double3 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2]; }
-static  vector_float3 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float3x3 __x,  vector_float3 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2]; }
-static vector_double3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double3x3 __x, vector_double3 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2]; }
-static  vector_float4 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float3x4 __x,  vector_float3 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2]; }
-static vector_double4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double3x4 __x, vector_double3 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2]; }
-static  vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float4x2 __x,  vector_float4 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2] + __x.columns[3]*__y[3]; }
-static vector_double2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x2 __x, vector_double4 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2] + __x.columns[3]*__y[3]; }
-static  vector_float3 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float4x3 __x,  vector_float4 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2] + __x.columns[3]*__y[3]; }
-static vector_double3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x3 __x, vector_double4 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2] + __x.columns[3]*__y[3]; }
-static  vector_float4 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float4x4 __x,  vector_float4 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2] + __x.columns[3]*__y[3]; }
-static vector_double4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x4 __x, vector_double4 __y) { return __x.columns[0]*__y[0] + __x.columns[1]*__y[1] + __x.columns[2]*__y[2] + __x.columns[3]*__y[3]; }
+#if defined __arm64__
+static  vector_float2 __SIMD_ATTRIBUTES__ __vector_mla( vector_float2 __accum,  vector_float2 __x,  vector_float2 __y) { return vfma_f32(__accum, __x, __y); }
+static  vector_float4 __SIMD_ATTRIBUTES__ __vector_mla( vector_float4 __accum,  vector_float4 __x,  vector_float4 __y) { return vfmaq_f32(__accum, __x, __y); }
+static vector_double2 __SIMD_ATTRIBUTES__ __vector_mla(vector_double2 __accum, vector_double2 __x, vector_double2 __y) { return vfmaq_f64(__accum, __x, __y); }
+static vector_double4 __SIMD_ATTRIBUTES__ __vector_mla(vector_double4 __accum, vector_double4 __x, vector_double4 __y) { vector_double4 __r; __r.lo = __vector_mla(__accum.lo, __x.lo, __y.lo); __r.hi = __vector_mla(__accum.hi, __x.hi, __y.hi); return __r; }
+static  vector_float3 __SIMD_ATTRIBUTES__ __vector_mla( vector_float3 __accum,  vector_float3 __x,  vector_float3 __y) {  vector_float4 __x4, __y4, __a4; __x4.xyz = __x; __y4.xyz = __y; __a4.xyz = __accum; return __vector_mla(__a4, __x4, __y4).xyz; }
+static vector_double3 __SIMD_ATTRIBUTES__ __vector_mla(vector_double3 __accum, vector_double3 __x, vector_double3 __y) { vector_double4 __x4, __y4, __a4; __x4.xyz = __x; __y4.xyz = __y; __a4.xyz = __accum; return __vector_mla(__a4, __x4, __y4).xyz; }
+#elif defined __FMA__
+static  vector_float4 __SIMD_ATTRIBUTES__ __vector_mla( vector_float4 __accum,  vector_float4 __x,  vector_float4 __y) { return _mm_fmadd_ps(__x, __y, __accum); }
+static vector_double4 __SIMD_ATTRIBUTES__ __vector_mla(vector_double4 __accum, vector_double4 __x, vector_double4 __y) { return _mm256_fmadd_pd(__x, __y, __accum); }
+static  vector_float2 __SIMD_ATTRIBUTES__ __vector_mla( vector_float2 __accum,  vector_float2 __x,  vector_float2 __y) {  vector_float4 __x4, __y4, __a4; __x4.xy  = __x; __y4.xy  = __y; __a4.xy  = __accum; return __vector_mla(__a4, __x4, __y4).xy; }
+static vector_double2 __SIMD_ATTRIBUTES__ __vector_mla(vector_double2 __accum, vector_double2 __x, vector_double2 __y) { return _mm_fmadd_pd(__x, __y, __accum); }
+static  vector_float3 __SIMD_ATTRIBUTES__ __vector_mla( vector_float3 __accum,  vector_float3 __x,  vector_float3 __y) {  vector_float4 __x4, __y4, __a4; __x4.xyz = __x; __y4.xyz = __y; __a4.xyz = __accum; return __vector_mla(__a4, __x4, __y4).xyz; }
+static vector_double3 __SIMD_ATTRIBUTES__ __vector_mla(vector_double3 __accum, vector_double3 __x, vector_double3 __y) { vector_double4 __x4, __y4, __a4; __x4.xyz = __x; __y4.xyz = __y; __a4.xyz = __accum; return __vector_mla(__a4, __x4, __y4).xyz; }
+#else
+static  vector_float2 __SIMD_ATTRIBUTES__ __vector_mla( vector_float2 __accum,  vector_float2 __x,  vector_float2 __y) { return __accum + __x*__y; }
+static  vector_float3 __SIMD_ATTRIBUTES__ __vector_mla( vector_float3 __accum,  vector_float3 __x,  vector_float3 __y) { return __accum + __x*__y; }
+static  vector_float4 __SIMD_ATTRIBUTES__ __vector_mla( vector_float4 __accum,  vector_float4 __x,  vector_float4 __y) { return __accum + __x*__y; }
+static vector_double2 __SIMD_ATTRIBUTES__ __vector_mla( vector_double2 __accum,  vector_double2 __x,  vector_double2 __y) { return __accum + __x*__y; }
+static vector_double3 __SIMD_ATTRIBUTES__ __vector_mla( vector_double3 __accum,  vector_double3 __x,  vector_double3 __y) { return __accum + __x*__y; }
+static vector_double4 __SIMD_ATTRIBUTES__ __vector_mla( vector_double4 __accum,  vector_double4 __x,  vector_double4 __y) { return __accum + __x*__y; }
+#endif
+
+static  vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float2x2 __x,  vector_float2 __y) {  vector_float2 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); return __r; }
+static  vector_float3 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float2x3 __x,  vector_float2 __y) {  vector_float3 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); return __r; }
+static  vector_float4 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float2x4 __x,  vector_float2 __y) {  vector_float4 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); return __r; }
+static  vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float3x2 __x,  vector_float3 __y) {  vector_float2 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); return __r; }
+static  vector_float3 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float3x3 __x,  vector_float3 __y) {  vector_float3 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); return __r; }
+static  vector_float4 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float3x4 __x,  vector_float3 __y) {  vector_float4 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); return __r; }
+static  vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float4x2 __x,  vector_float4 __y) {  vector_float2 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); __r = __vector_mla(__r, __x.columns[3], __y[3]); return __r; }
+static  vector_float3 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float4x3 __x,  vector_float4 __y) {  vector_float3 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); __r = __vector_mla(__r, __x.columns[3], __y[3]); return __r; }
+static  vector_float4 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float4x4 __x,  vector_float4 __y) {  vector_float4 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); __r = __vector_mla(__r, __x.columns[3], __y[3]); return __r; }
+static vector_double2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double2x2 __x, vector_double2 __y) { vector_double2 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); return __r; }
+static vector_double3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double2x3 __x, vector_double2 __y) { vector_double3 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); return __r; }
+static vector_double4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double2x4 __x, vector_double2 __y) { vector_double4 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); return __r; }
+static vector_double2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double3x2 __x, vector_double3 __y) { vector_double2 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); return __r; }
+static vector_double3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double3x3 __x, vector_double3 __y) { vector_double3 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); return __r; }
+static vector_double4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double3x4 __x, vector_double3 __y) { vector_double4 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); return __r; }
+static vector_double2 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x2 __x, vector_double4 __y) { vector_double2 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); __r = __vector_mla(__r, __x.columns[3], __y[3]); return __r; }
+static vector_double3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x3 __x, vector_double4 __y) { vector_double3 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); __r = __vector_mla(__r, __x.columns[3], __y[3]); return __r; }
+static vector_double4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x4 __x, vector_double4 __y) { vector_double4 __r = __x.columns[0]*__y[0]; __r = __vector_mla(__r, __x.columns[1], __y[1]); __r = __vector_mla(__r, __x.columns[2], __y[2]); __r = __vector_mla(__r, __x.columns[3], __y[3]); return __r; }
 
 static  vector_float2 __SIMD_ATTRIBUTES__ matrix_multiply( vector_float2 __x,  matrix_float2x2 __y) { return matrix_multiply(matrix_transpose(__y), __x); }
 static  vector_float3 __SIMD_ATTRIBUTES__ matrix_multiply( vector_float2 __x,  matrix_float3x2 __y) { return matrix_multiply(matrix_transpose(__y), __x); }
@@ -1024,6 +1130,279 @@ static matrix_double4x3 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x3 __x
 static  matrix_float4x4 __SIMD_ATTRIBUTES__ matrix_multiply( matrix_float4x4 __x,  matrix_float4x4 __y) {  matrix_float4x4 __r; for (int i=0; i<4; ++i) __r.columns[i] = matrix_multiply(__x, __y.columns[i]); return __r; }
 static matrix_double4x4 __SIMD_ATTRIBUTES__ matrix_multiply(matrix_double4x4 __x, matrix_double4x4 __y) { matrix_double4x4 __r; for (int i=0; i<4; ++i) __r.columns[i] = matrix_multiply(__x, __y.columns[i]); return __r; }
 
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float2x2 __x, matrix_float2x2 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float2x3 __x, matrix_float2x3 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float2x4 __x, matrix_float2x4 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float3x2 __x, matrix_float3x2 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float3x3 __x, matrix_float3x3 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float3x4 __x, matrix_float3x4 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float4x2 __x, matrix_float4x2 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]) &
+                      (__x.columns[3] == __y.columns[3]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float4x3 __x, matrix_float4x3 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]) &
+                      (__x.columns[3] == __y.columns[3]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_float4x4 __x, matrix_float4x4 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]) &
+                      (__x.columns[3] == __y.columns[3]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double2x2 __x, matrix_double2x2 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double2x3 __x, matrix_double2x3 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double2x4 __x, matrix_double2x4 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double3x2 __x, matrix_double3x2 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double3x3 __x, matrix_double3x3 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double3x4 __x, matrix_double3x4 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double4x2 __x, matrix_double4x2 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]) &
+                      (__x.columns[3] == __y.columns[3]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double4x3 __x, matrix_double4x3 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]) &
+                      (__x.columns[3] == __y.columns[3]));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_equal(matrix_double4x4 __x, matrix_double4x4 __y) {
+    return vector_all((__x.columns[0] == __y.columns[0]) &
+                      (__x.columns[1] == __y.columns[1]) &
+                      (__x.columns[2] == __y.columns[2]) &
+                      (__x.columns[3] == __y.columns[3]));
+}
+
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float2x2 __x, matrix_float2x2 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float2x3 __x, matrix_float2x3 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float2x4 __x, matrix_float2x4 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float3x2 __x, matrix_float3x2 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float3x3 __x, matrix_float3x3 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float3x4 __x, matrix_float3x4 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float4x2 __x, matrix_float4x2 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float4x3 __x, matrix_float4x3 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_float4x4 __x, matrix_float4x4 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double2x2 __x, matrix_double2x2 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double2x3 __x, matrix_double2x3 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double2x4 __x, matrix_double2x4 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double3x2 __x, matrix_double3x2 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double3x3 __x, matrix_double3x3 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double3x4 __x, matrix_double3x4 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double4x2 __x, matrix_double4x2 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double4x3 __x, matrix_double4x3 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements(matrix_double4x4 __x, matrix_double4x4 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol));
+}
+
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float2x2 __x, matrix_float2x2 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float2x3 __x, matrix_float2x3 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float2x4 __x, matrix_float2x4 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float3x2 __x, matrix_float3x2 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float3x3 __x, matrix_float3x3 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float3x4 __x, matrix_float3x4 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float4x2 __x, matrix_float4x2 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol*__tg_fabs(__x.columns[3])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float4x3 __x, matrix_float4x3 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol*__tg_fabs(__x.columns[3])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_float4x4 __x, matrix_float4x4 __y, float __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol*__tg_fabs(__x.columns[3])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double2x2 __x, matrix_double2x2 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double2x3 __x, matrix_double2x3 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double2x4 __x, matrix_double2x4 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double3x2 __x, matrix_double3x2 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double3x3 __x, matrix_double3x3 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double3x4 __x, matrix_double3x4 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double4x2 __x, matrix_double4x2 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol*__tg_fabs(__x.columns[3])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double4x3 __x, matrix_double4x3 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol*__tg_fabs(__x.columns[3])));
+}
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ matrix_almost_equal_elements_relative(matrix_double4x4 __x, matrix_double4x4 __y, double __tol) {
+    return vector_all((__tg_fabs(__x.columns[0] - __y.columns[0]) <= __tol*__tg_fabs(__x.columns[0])) &
+                      (__tg_fabs(__x.columns[1] - __y.columns[1]) <= __tol*__tg_fabs(__x.columns[1])) &
+                      (__tg_fabs(__x.columns[2] - __y.columns[2]) <= __tol*__tg_fabs(__x.columns[2])) &
+                      (__tg_fabs(__x.columns[3] - __y.columns[3]) <= __tol*__tg_fabs(__x.columns[3])));
+}
+    
 #ifdef __cplusplus
 }
 #endif

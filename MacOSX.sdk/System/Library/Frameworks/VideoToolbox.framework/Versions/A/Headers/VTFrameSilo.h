@@ -26,6 +26,7 @@ extern "C"
     
 #pragma pack(push, 4)    
 
+CF_IMPLICIT_BRIDGING_ENABLED
 /*!
 	@typedef	VTFrameSilo
 	@abstract	A VTFrameSilo stores a large number of sample buffers, as produced by a multi-pass compression session.
@@ -40,10 +41,11 @@ extern "C"
 		do not expect to get identical object pointers back.
 */
 
-typedef struct OpaqueVTFrameSilo *VTFrameSiloRef; // a CF type, call CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTFrameSilo *VTFrameSiloRef; // a CF type, call CFRetain and CFRelease
 
 VT_EXPORT CFTypeID VTFrameSiloGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
+CF_IMPLICIT_BRIDGING_DISABLED
 /*!
 	@function	VTFrameSiloCreate
 	@abstract	Creates a VTFrameSilo object using a temporary file.
@@ -62,11 +64,13 @@ VT_EXPORT CFTypeID VTFrameSiloGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_
 */
 VT_EXPORT OSStatus
 VTFrameSiloCreate( 
-	CFAllocatorRef			allocator,                 /* can be NULL */
-	CFURLRef				fileURL,                   /* can be NULL */
-	CMTimeRange				timeRange,				   /* can be kCMTimeRangeInvalid */
-	CFDictionaryRef			options,                   /* can be NULL */
-	VTFrameSiloRef			*siloOut ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NULLABLE CFAllocatorRef				allocator,
+	CM_NULLABLE CFURLRef					fileURL,
+	CMTimeRange								timeRange, /* can be kCMTimeRangeInvalid */
+	CM_NULLABLE CFDictionaryRef				options,
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTFrameSiloRef * CM_NONNULL siloOut ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	VTFrameSiloAddSampleBuffer
@@ -82,8 +86,8 @@ VTFrameSiloCreate(
 */
 VT_EXPORT OSStatus
 VTFrameSiloAddSampleBuffer( 
-	VTFrameSiloRef			silo,
-	CMSampleBufferRef		sampleBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NONNULL VTFrameSiloRef			silo,
+	CM_NONNULL CMSampleBufferRef		sampleBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
 	@function	VTFrameSiloSetTimeRangesForNextPass
@@ -96,9 +100,9 @@ VTFrameSiloAddSampleBuffer(
 */
 VT_EXPORT OSStatus
 VTFrameSiloSetTimeRangesForNextPass( 
-	VTFrameSiloRef			silo,
-	CMItemCount				timeRangeCount,
-	const CMTimeRange *		timeRangeArray ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NONNULL VTFrameSiloRef		silo,
+	CMItemCount						timeRangeCount,
+	const CMTimeRange * CM_NONNULL	timeRangeArray ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
 	@function	VTFrameSiloGetProgressOfCurrentPass
@@ -110,8 +114,8 @@ VTFrameSiloSetTimeRangesForNextPass(
 */
 VT_EXPORT OSStatus
 VTFrameSiloGetProgressOfCurrentPass(
-	VTFrameSiloRef			silo,
-	Float32					*progressOut ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NONNULL VTFrameSiloRef	silo,
+	Float32 * CM_NONNULL		progressOut ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
 	@function	VTFrameSiloCallFunctionForEachSampleBuffer
@@ -132,10 +136,10 @@ VTFrameSiloGetProgressOfCurrentPass(
 */
 VT_EXPORT OSStatus
 VTFrameSiloCallFunctionForEachSampleBuffer( 
-	VTFrameSiloRef			silo,
-	CMTimeRange				timeRange,
-	void *					callbackInfo,
-	OSStatus 				(*callback)( void *callbackInfo, CMSampleBufferRef sampleBuffer ) ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); // return nonzero to abort iteration
+	CM_NONNULL VTFrameSiloRef	silo,
+	CMTimeRange					timeRange,
+	void * CM_NULLABLE			callbackInfo,
+	OSStatus	(* CM_NONNULL callback)( void * CM_NULLABLE callbackInfo, CM_NONNULL CMSampleBufferRef sampleBuffer ) ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); // return nonzero to abort iteration
 
 #if __BLOCKS__
 /*!
@@ -157,10 +161,12 @@ VTFrameSiloCallFunctionForEachSampleBuffer(
 */
 VT_EXPORT OSStatus
 VTFrameSiloCallBlockForEachSampleBuffer( 
-	VTFrameSiloRef			silo,
-	CMTimeRange				timeRange,
-	OSStatus 				(^handler)( CMSampleBufferRef sampleBuffer ) ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); // return nonzero to abort iteration
+	CM_NONNULL VTFrameSiloRef			silo,
+	CMTimeRange							timeRange,
+	OSStatus (^ CM_NONNULL handler)( CM_NONNULL CMSampleBufferRef sampleBuffer ) ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); // return nonzero to abort iteration
 #endif // __BLOCKS__
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
     

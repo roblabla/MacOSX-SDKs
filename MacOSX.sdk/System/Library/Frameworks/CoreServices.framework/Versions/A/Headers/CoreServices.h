@@ -55,4 +55,8 @@
 #include <FSEvents/FSEvents.h>
 #endif
 
+#ifndef __SHAREDFILELIST__
+#include <SharedFileList/SharedFileList.h>
+#endif
+
 #endif /* __CORESERVICES__ */

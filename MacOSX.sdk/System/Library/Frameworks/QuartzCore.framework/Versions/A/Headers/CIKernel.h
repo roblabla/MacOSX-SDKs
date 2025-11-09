@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIKernel.h>
+#include <CoreImage/CIKernel.h>

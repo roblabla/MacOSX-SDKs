@@ -1,11 +1,13 @@
 /*
     NSStatusItem.h
     Application Kit
-    Copyright (c) 1997-2014, Apple Inc.
+    Copyright (c) 1997-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSAttributedString;
 @class NSStatusBarButton;
@@ -33,7 +35,8 @@
         unsigned int disableImageReplicationCount:4;
         unsigned int updatingReplicant:1;
         unsigned int didInactiveTemplateStyling:1;
-        unsigned int reserved:16;
+        unsigned int needsAdditionalReplicantUpdate:1;
+        unsigned int reserved:15;
     }	 _fFlags;
     id		 _statusItemMenu;
     NSMutableDictionary *_replicants;
@@ -48,10 +51,10 @@
 @property CGFloat length;
 
 /// The drop down menu that is displayed when the status item is pressed or clicked.
-@property (strong) NSMenu *menu;
+@property (nullable, strong) NSMenu *menu;
 
 /// The button that is displayed in the status bar. This is created automatically on the creation of the StatusItem. Behavior customization for the button, such as image, target/action, tooltip, can be set with this property.
-@property (readonly, strong) NSStatusBarButton *button NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly, strong) NSStatusBarButton *button NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -63,25 +66,27 @@
  Their past and current behavior is to forward their calls onto the button property.
  They will be formally deprecated in a later release. 
  */
-@property SEL action;
-@property SEL doubleAction;
-@property (weak) id target;
-@property (copy) NSString *title;
-@property (copy) NSAttributedString *attributedTitle;
-@property (strong) NSImage *image;
-@property (strong) NSImage *alternateImage;
+@property (nullable) SEL action;
+@property (nullable) SEL doubleAction;
+@property (nullable, weak) id target;
+@property (nullable, copy) NSString *title;
+@property (nullable, copy) NSAttributedString *attributedTitle;
+@property (nullable, strong) NSImage *image;
+@property (nullable, strong) NSImage *alternateImage;
 @property (getter=isEnabled) BOOL enabled;
 @property BOOL highlightMode;
-@property (copy) NSString *toolTip;
+@property (nullable, copy) NSString *toolTip;
 - (NSInteger)sendActionOn:(NSInteger)mask;
 
 /*
  Custom views should not be set on a status item.
  The button property with a template image will allow proper styling of the status item in various states and contexts and should be used instead.
  */
-@property (strong) NSView *view;
+@property (nullable, strong) NSView *view;
 - (void)drawStatusBarBackgroundInRect:(NSRect)rect withHighlight:(BOOL)highlight;
 - (void)popUpStatusItemMenu:(NSMenu*)menu;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

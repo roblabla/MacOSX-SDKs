@@ -7,6 +7,7 @@
 
 #import <CloudKit/CKOperation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface CKModifyBadgeOperation : CKOperation
 
@@ -17,6 +18,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /*  This block is called when the operation completes.
     The [NSOperation completionBlock] will also be called if both are set. */
-@property (nonatomic, copy) void (^modifyBadgeCompletionBlock)(NSError *operationError);
+@property (nonatomic, copy, nullable) void (^modifyBadgeCompletionBlock)(NSError * __nullable operationError);
 
 @end
+NS_ASSUME_NONNULL_END

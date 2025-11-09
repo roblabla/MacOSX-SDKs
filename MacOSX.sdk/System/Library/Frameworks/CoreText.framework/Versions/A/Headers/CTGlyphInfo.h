@@ -2,7 +2,7 @@
  *	CTGlyphInfo.h
  *	CoreText
  *
- *	Copyright (c) 2006-2012, 2014 Apple Inc. All rights reserved.
+ *	Copyright (c) 2006-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -21,19 +21,17 @@
 #include <CoreText/CTFont.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Glyph Info Types */
 /* --------------------------------------------------------------------------- */
 
 #if TARGET_OS_IPHONE
-typedef const struct __CTGlyphInfo * CTGlyphInfoRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CTGlyphInfo * CTGlyphInfoRef;
 #else
-typedef const struct CT_BRIDGED_TYPE(NSGlyphInfo) __CTGlyphInfo * CTGlyphInfoRef;
+typedef const struct CF_BRIDGED_TYPE(NSGlyphInfo) __CTGlyphInfo * CTGlyphInfoRef;
 #endif
 
 /*!
@@ -73,19 +71,19 @@ CFTypeID CTGlyphInfoGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 typedef CF_ENUM(uint16_t, CTCharacterCollection) {
-	kCTCharacterCollectionIdentityMapping   = 0,
-	kCTCharacterCollectionAdobeCNS1         = 1,
-	kCTCharacterCollectionAdobeGB1          = 2,
-	kCTCharacterCollectionAdobeJapan1       = 3,
-	kCTCharacterCollectionAdobeJapan2       = 4,
-	kCTCharacterCollectionAdobeKorea1       = 5,
+	kCTCharacterCollectionIdentityMapping CT_ENUM_AVAILABLE(10_8, 6_0) = 0,
+	kCTCharacterCollectionAdobeCNS1       CT_ENUM_AVAILABLE(10_8, 6_0) = 1,
+	kCTCharacterCollectionAdobeGB1        CT_ENUM_AVAILABLE(10_8, 6_0) = 2,
+	kCTCharacterCollectionAdobeJapan1     CT_ENUM_AVAILABLE(10_8, 6_0) = 3,
+	kCTCharacterCollectionAdobeJapan2     CT_ENUM_AVAILABLE(10_8, 6_0) = 4,
+	kCTCharacterCollectionAdobeKorea1     CT_ENUM_AVAILABLE(10_8, 6_0) = 5,
 
-	kCTIdentityMappingCharacterCollection = kCTCharacterCollectionIdentityMapping,
-	kCTAdobeCNS1CharacterCollection = kCTCharacterCollectionAdobeCNS1,
-	kCTAdobeGB1CharacterCollection = kCTCharacterCollectionAdobeGB1,
-	kCTAdobeJapan1CharacterCollection = kCTCharacterCollectionAdobeJapan1,
-	kCTAdobeJapan2CharacterCollection = kCTCharacterCollectionAdobeJapan2,
-	kCTAdobeKorea1CharacterCollection = kCTCharacterCollectionAdobeKorea1
+	kCTIdentityMappingCharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionIdentityMapping,
+	kCTAdobeCNS1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeCNS1,
+	kCTAdobeGB1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeGB1,
+	kCTAdobeJapan1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeJapan1,
+	kCTAdobeJapan2CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeJapan2,
+	kCTAdobeKorea1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeKorea1
 };
 
 
@@ -110,9 +108,7 @@ typedef CF_ENUM(uint16_t, CTCharacterCollection) {
 				The part of the string the returned object is intended
 				to override.
 
-	@result		If glyph info creation was successful, this function will return
-				a valid reference to an immutable CTGlyphInfo object. Otherwise,
-				this function will return NULL.
+	@result		This function will return a reference to a CTGlyphInfo object.
 */
 
 CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
@@ -138,9 +134,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
 				The part of the string the returned object is intended
 				to override.
 
-	@result		If glyph info creation was successful, this function will return
-				a valid reference to an immutable CTGlyphInfo object. Otherwise,
-				this function will return NULL.
+	@result		This function will return a reference to a CTGlyphInfo object.
 */
 
 CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
@@ -166,9 +160,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
 				The part of the string the returned object is intended
 				to override.
 
-	@result		If glyph info creation was successful, this function will return
-				a valid reference to an immutable CTGlyphInfo object. Otherwise,
-				this function will return NULL.
+	@result		This function will return a reference to a CTGlyphInfo object.
 */
 
 CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
@@ -188,14 +180,13 @@ CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
 	@discussion This function will return the glyph name.
 
 	@param		glyphInfo
-				The glyph info for which you would like the glyph name. This
-				parameter may not be set to NULL.
+				The glyph info for which you would like the glyph name.
 
 	@result		If the glyph info object was created with a glyph name, it will
 				be returned. Otherwise, this function will return NULL.
 */
 
-CFStringRef CTGlyphInfoGetGlyphName(
+CFStringRef __nullable CTGlyphInfoGetGlyphName(
 	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(10_5, 3_2);
 
 
@@ -207,7 +198,6 @@ CFStringRef CTGlyphInfoGetGlyphName(
 
 	@param		glyphInfo
 				The glyph info for which you would like the character identifier.
-				This parameter may not be set to NULL.
 
 	@result		If the glyph info object was created with a character identifier,
 				it will be returned. Otherwise, this function will return 0.
@@ -228,7 +218,6 @@ CGFontIndex CTGlyphInfoGetCharacterIdentifier(
 
 	@param		glyphInfo
 				The glyph info for which you would like the character collection.
-				This parameter may not be set to NULL.
 
 	@result		This function will return the character collection of the given
 				glyph info.
@@ -238,10 +227,8 @@ CTCharacterCollection CTGlyphInfoGetCharacterCollection(
 	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

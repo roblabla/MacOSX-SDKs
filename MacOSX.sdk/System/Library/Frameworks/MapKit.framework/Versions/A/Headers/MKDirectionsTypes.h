@@ -8,7 +8,8 @@
 #import <MapKit/MKFoundation.h>
 
 typedef NS_OPTIONS(NSUInteger, MKDirectionsTransportType) {
-    MKDirectionsTransportTypeAutomobile     = 1 << 0,
-    MKDirectionsTransportTypeWalking        = 1 << 1,
-    MKDirectionsTransportTypeAny            = 0x0FFFFFFF
-} NS_ENUM_AVAILABLE(10_9, 7_0);
+    MKDirectionsTransportTypeAutomobile = 1 << 0,
+    MKDirectionsTransportTypeWalking = 1 << 1,
+    MKDirectionsTransportTypeTransit NS_ENUM_AVAILABLE(10_11, 9_0) = 1 << 2, // Only supported for ETA calculations
+    MKDirectionsTransportTypeAny = 0x0FFFFFFF
+} NS_ENUM_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED;

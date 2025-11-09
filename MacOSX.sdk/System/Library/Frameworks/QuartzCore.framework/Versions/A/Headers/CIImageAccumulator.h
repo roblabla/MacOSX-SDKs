@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIImageAccumulator.h>
+#include <CoreImage/CIImageAccumulator.h>

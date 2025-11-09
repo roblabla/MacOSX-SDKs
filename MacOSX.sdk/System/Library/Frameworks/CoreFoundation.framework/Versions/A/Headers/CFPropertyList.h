@@ -1,5 +1,5 @@
 /*	CFPropertyList.h
-	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPROPERTYLIST__)
@@ -113,7 +113,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-enum {
+CF_ENUM(CFIndex) {
     kCFPropertyListReadCorruptError = 3840,              // Error parsing a property list
     kCFPropertyListReadUnknownVersionError = 3841,       // The version number in the property list is unknown
     kCFPropertyListReadStreamError = 3842,               // Stream error reading a property list

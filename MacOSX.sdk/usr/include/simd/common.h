@@ -3,7 +3,7 @@
  *  The interfaces declared in this header provide "common" elementwise
  *  operations that are neither math nor logic functions.  These are available
  *  only for floating-point vectors and scalars, except for min, max, abs,
- *  and clamp which also support integer vectors.
+ *  clamp, and the reduce operations, which also support integer vectors.
  *
  *      vector_abs(x)           Absolute value of x.  Also available as fabs
  *                              for floating-point vectors.  If x is the
@@ -80,6 +80,12 @@
  *                              a Hermite interpolation between 0 and 1 if
  *                              edge0 < x < edge1.
  *
+ *      vector_reduce_add(x)    Sum of the elements of x.
+ *
+ *      vector_reduce_min(x)    Minimum of the elements of x.
+ *
+ *      vector_reduce_max(x)    Maximum of the elements of x.
+ *
  *  The following common functions are available in the simd:: namespace:
  *
  *      C++ Function                    Equivalent C Function
@@ -92,10 +98,12 @@
  *      simd::mix(x)                    vector_mix(x)
  *      simd::recip(x)                  vector_recip(x)
  *      simd::rsqrt(x)                  vector_rsqrt(x)
- *      simd::Fast::sqrt(x)             vector_fast_sqrt(x)
  *      simd::fract(x)                  vector_fract(x)
  *      simd::step(edge,x)              vector_step(edge,x)
  *      simd::smoothstep(e0,e1,x)       vector_smoothstep(e0,e1,x)
+ *      simd::reduce_add(x)             vector_reduce_add(x)
+ *      simd::reduce_max(x)             vector_reduce_max(x)
+ *      simd::reduce_min(x)             vector_reduce_min(x)
  *
  *      simd::precise::recip(x)         vector_precise_recip(x)
  *      simd::precise::rsqrt(x)         vector_precise_rsqrt(x)
@@ -438,6 +446,162 @@ static vector_double3 __SIMD_ATTRIBUTES__ vector_smoothstep(vector_double3 __edg
 static vector_double4 __SIMD_ATTRIBUTES__ vector_smoothstep(vector_double4 __edge0, vector_double4 __edge1, vector_double4 __x);
 static vector_double8 __SIMD_ATTRIBUTES__ vector_smoothstep(vector_double8 __edge0, vector_double8 __edge1, vector_double8 __x);
 
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char2  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char3  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char4  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char8  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char16 __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char32 __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar2  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar3  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar4  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar8  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar16 __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar32 __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short2  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short3  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short4  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short8  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short16 __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short32 __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort2  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort3  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort4  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort8  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort16 __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort32 __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int2  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int3  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int4  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int8  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int16 __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint2  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint3  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint4  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint8  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint16 __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float2  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float3  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float4  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float8  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float16 __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long2  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long3  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long4  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long8  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong2  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong3  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong4  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong8  __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double2 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double3 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double4 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double8 __x);
+
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char2  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char3  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char4  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char8  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char16 __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char32 __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar2  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar3  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar4  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar8  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar16 __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar32 __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short2  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short3  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short4  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short8  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short16 __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short32 __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort2  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort3  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort4  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort8  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort16 __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort32 __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int2  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int3  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int4  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int8  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int16 __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint2  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint3  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint4  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint8  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint16 __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float2  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float3  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float4  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float8  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float16 __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long2  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long3  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long4  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long8  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong2  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong3  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong4  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong8  __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double2 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double3 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double4 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double8 __x);
+
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char2  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char3  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char4  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char8  __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char16 __x);
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char32 __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar2  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar3  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar4  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar8  __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar16 __x);
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar32 __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short2  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short3  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short4  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short8  __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short16 __x);
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short32 __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort2  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort3  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort4  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort8  __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort16 __x);
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort32 __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int2  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int3  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int4  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int8  __x);
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int16 __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint2  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint3  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint4  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint8  __x);
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint16 __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float2  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float3  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float4  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float8  __x);
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float16 __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long2  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long3  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long4  __x);
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long8  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong2  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong3  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong4  __x);
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong8  __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double2 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double3 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double4 __x);
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double8 __x);
+
 #ifdef __cplusplus
 } /* extern "C" */
 
@@ -453,6 +617,14 @@ namespace simd {
     template <typename fptypeN> static __SIMD_INLINE__ fptypeN fract(const fptypeN x) { return ::vector_fract(x); }
     template <typename fptypeN> static __SIMD_INLINE__ fptypeN step(const fptypeN edge, const fptypeN x) { return ::vector_step(edge,x); }
     template <typename fptypeN> static __SIMD_INLINE__ fptypeN smoothstep(const fptypeN edge0, const fptypeN edge1, const fptypeN x) { return ::vector_smoothstep(edge0,edge1,x); }
+#if __cpp_decltype_auto
+/*  If you are targeting an earlier version of the C++ standard that lacks
+    decltype_auto support, you may use the C-style vector_reduce_* functions
+    instead.                                                                  */
+    template <typename typeN> static __SIMD_INLINE__ auto reduce_add(typeN x) { return ::vector_reduce_add(x); }
+    template <typename typeN> static __SIMD_INLINE__ auto reduce_min(typeN x) { return ::vector_reduce_min(x); }
+    template <typename typeN> static __SIMD_INLINE__ auto reduce_max(typeN x) { return ::vector_reduce_max(x); }
+#endif
     namespace precise {
         template <typename fptypeN> static __SIMD_INLINE__ fptypeN recip(const fptypeN x) { return ::vector_precise_recip(x); }
         template <typename fptypeN> static __SIMD_INLINE__ fptypeN rsqrt(const fptypeN x) { return ::vector_precise_rsqrt(x); }
@@ -906,100 +1078,164 @@ static vector_double3 __SIMD_ATTRIBUTES__ vector_mix(vector_double3 __x, vector_
 static vector_double4 __SIMD_ATTRIBUTES__ vector_mix(vector_double4 __x, vector_double4 __y, vector_double4 __t) { return __x + __t*(__y - __x); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_mix(vector_double8 __x, vector_double8 __y, vector_double8 __t) { return __x + __t*(__y - __x); }
 
-static float          __SIMD_ATTRIBUTES__ vector_precise_recip(float          __x) { return 1/__x; }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_precise_recip(vector_float2  __x) { return 1/__x; }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_precise_recip(vector_float3  __x) { return 1/__x; }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_precise_recip(vector_float4  __x) { return 1/__x; }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_precise_recip(vector_float8  __x) { return 1/__x; }
-static vector_float16 __SIMD_ATTRIBUTES__ vector_precise_recip(vector_float16 __x) { return 1/__x; }
-static double         __SIMD_ATTRIBUTES__ vector_precise_recip(double         __x) { return 1/__x; }
+#if defined __SSE__
+static         float  __SIMD_ATTRIBUTES__ vector_precise_recip(        float  __x) { float __r = vector_fast_recip(__x); return __r*(2 - (__x == 0 ? -INFINITY : __x)*__r); }
+__SIMD_ELEMENTWISE_UNARY_2_IN_4(vector_precise_recip, float)
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_precise_recip, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_precise_recip( vector_float4 __x) { vector_float4 __r = vector_fast_recip(__x); return __r*(2 - vector_bitselect(__x, -INFINITY, __x == 0)*__r); }
+#elif defined __ARM_NEON__
+static         float  __SIMD_ATTRIBUTES__ vector_precise_recip(        float  __x) { vector_float2 __x2; __x2.x = __x; return vector_precise_recip(__x2).x; }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_precise_recip( vector_float2 __x) { vector_float2 __r = vector_fast_recip(__x); return __r * vrecps_f32(__x, __r); }
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_precise_recip, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_precise_recip( vector_float4 __x) { vector_float4 __r = vector_fast_recip(__x); return __r * vrecpsq_f32(__x, __r); }
+#else
+static         float  __SIMD_ATTRIBUTES__ vector_precise_recip(        float  __x) { return 1/__x; }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_precise_recip( vector_float2 __x) { return 1/__x; }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_precise_recip( vector_float3 __x) { return 1/__x; }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_precise_recip( vector_float4 __x) { return 1/__x; }
+#endif
+#if defined __AVX__
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_precise_recip( vector_float8 __x) { vector_float8 __r = vector_fast_recip(__x); return __r*(2 - vector_bitselect(__x, -INFINITY, __x == 0)*__r); }
+#else
+__SIMD_ELEMENTWISE_UNARY_8_IN_4(vector_precise_recip, float)
+#endif
+__SIMD_ELEMENTWISE_UNARY_16_IN_8(vector_precise_recip, float)
+static        double  __SIMD_ATTRIBUTES__ vector_precise_recip(       double  __x) { return 1/__x; }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_precise_recip(vector_double2 __x) { return 1/__x; }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_precise_recip(vector_double3 __x) { return 1/__x; }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_precise_recip(vector_double4 __x) { return 1/__x; }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_precise_recip(vector_double8 __x) { return 1/__x; }
 
-static float          __SIMD_ATTRIBUTES__ vector_fast_recip(float          __x) { return vector_precise_recip(__x); }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_fast_recip(vector_float2  __x) { return vector_precise_recip(__x); }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_fast_recip(vector_float3  __x) { return vector_precise_recip(__x); }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_fast_recip(vector_float4  __x) { return vector_precise_recip(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_fast_recip(vector_float8  __x) { return vector_precise_recip(__x); }
-static vector_float16 __SIMD_ATTRIBUTES__ vector_fast_recip(vector_float16 __x) { return vector_precise_recip(__x); }
-static double         __SIMD_ATTRIBUTES__ vector_fast_recip(double         __x) { return vector_precise_recip(__x); }
+#if defined __SSE__
+static         float  __SIMD_ATTRIBUTES__ vector_fast_recip(        float  __x) { vector_float4 __x4; __x4.x = __x; return ((vector_float4)_mm_rcp_ss(__x4)).x; }
+__SIMD_ELEMENTWISE_UNARY_2_IN_4(vector_fast_recip, float)
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_fast_recip, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_fast_recip( vector_float4 __x) { return _mm_rcp_ps(__x); }
+#elif defined __ARM_NEON__
+static         float  __SIMD_ATTRIBUTES__ vector_fast_recip(        float  __x) { vector_float2 __x2; __x2.x = __x; return vector_fast_recip(__x2).x; }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_fast_recip( vector_float2 __x) { vector_float2 __r = vrecpe_f32(__x); return __r * vrecps_f32(__x, __r); }
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_fast_recip, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_fast_recip( vector_float4 __x) { vector_float4 __r = vrecpeq_f32(__x); return __r * vrecpsq_f32(__x, __r); }
+#else
+static         float  __SIMD_ATTRIBUTES__ vector_fast_recip(        float  __x) { return vector_precise_recip(__x); }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_fast_recip( vector_float2 __x) { return vector_precise_recip(__x); }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_fast_recip( vector_float3 __x) { return vector_precise_recip(__x); }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_fast_recip( vector_float4 __x) { return vector_precise_recip(__x); }
+#endif
+#if defined __AVX__
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_fast_recip( vector_float8 __x) { return _mm256_rcp_ps(__x); }
+#else
+__SIMD_ELEMENTWISE_UNARY_8_IN_4(vector_fast_recip, float)
+#endif
+__SIMD_ELEMENTWISE_UNARY_16_IN_8(vector_fast_recip, float)
+static        double  __SIMD_ATTRIBUTES__ vector_fast_recip(       double  __x) { return vector_precise_recip(__x); }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_fast_recip(vector_double2 __x) { return vector_precise_recip(__x); }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_fast_recip(vector_double3 __x) { return vector_precise_recip(__x); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_fast_recip(vector_double4 __x) { return vector_precise_recip(__x); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_fast_recip(vector_double8 __x) { return vector_precise_recip(__x); }
 
 #if __FAST_MATH__
-static float          __SIMD_ATTRIBUTES__ vector_recip(float          __x) { return vector_fast_recip(__x); }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_recip(vector_float2  __x) { return vector_fast_recip(__x); }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_recip(vector_float3  __x) { return vector_fast_recip(__x); }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_recip(vector_float4  __x) { return vector_fast_recip(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_recip(vector_float8  __x) { return vector_fast_recip(__x); }
+static         float  __SIMD_ATTRIBUTES__ vector_recip(        float  __x) { return vector_fast_recip(__x); }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_recip( vector_float2 __x) { return vector_fast_recip(__x); }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_recip( vector_float3 __x) { return vector_fast_recip(__x); }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_recip( vector_float4 __x) { return vector_fast_recip(__x); }
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_recip( vector_float8 __x) { return vector_fast_recip(__x); }
 static vector_float16 __SIMD_ATTRIBUTES__ vector_recip(vector_float16 __x) { return vector_fast_recip(__x); }
-static double         __SIMD_ATTRIBUTES__ vector_recip(double         __x) { return vector_fast_recip(__x); }
+static        double  __SIMD_ATTRIBUTES__ vector_recip(       double  __x) { return vector_fast_recip(__x); }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_recip(vector_double2 __x) { return vector_fast_recip(__x); }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_recip(vector_double3 __x) { return vector_fast_recip(__x); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_recip(vector_double4 __x) { return vector_fast_recip(__x); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_recip(vector_double8 __x) { return vector_fast_recip(__x); }
 #else
-static float          __SIMD_ATTRIBUTES__ vector_recip(float          __x) { return vector_precise_recip(__x); }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_recip(vector_float2  __x) { return vector_precise_recip(__x); }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_recip(vector_float3  __x) { return vector_precise_recip(__x); }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_recip(vector_float4  __x) { return vector_precise_recip(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_recip(vector_float8  __x) { return vector_precise_recip(__x); }
+static         float  __SIMD_ATTRIBUTES__ vector_recip(        float  __x) { return vector_precise_recip(__x); }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_recip( vector_float2 __x) { return vector_precise_recip(__x); }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_recip( vector_float3 __x) { return vector_precise_recip(__x); }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_recip( vector_float4 __x) { return vector_precise_recip(__x); }
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_recip( vector_float8 __x) { return vector_precise_recip(__x); }
 static vector_float16 __SIMD_ATTRIBUTES__ vector_recip(vector_float16 __x) { return vector_precise_recip(__x); }
-static double         __SIMD_ATTRIBUTES__ vector_recip(double         __x) { return vector_precise_recip(__x); }
+static        double  __SIMD_ATTRIBUTES__ vector_recip(       double  __x) { return vector_precise_recip(__x); }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_recip(vector_double2 __x) { return vector_precise_recip(__x); }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_recip(vector_double3 __x) { return vector_precise_recip(__x); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_recip(vector_double4 __x) { return vector_precise_recip(__x); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_recip(vector_double8 __x) { return vector_precise_recip(__x); }
 #endif
 
-static float          __SIMD_ATTRIBUTES__ vector_precise_rsqrt(float          __x) { return 1/__tg_sqrt(__x); }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_float2  __x) { return 1/__tg_sqrt(__x); }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_float3  __x) { return 1/__tg_sqrt(__x); }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_float4  __x) { return 1/__tg_sqrt(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_float8  __x) { return 1/__tg_sqrt(__x); }
-static vector_float16 __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_float16 __x) { return 1/__tg_sqrt(__x); }
-static double         __SIMD_ATTRIBUTES__ vector_precise_rsqrt(double         __x) { return 1/__tg_sqrt(__x); }
+#if defined __SSE__
+static         float  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(        float  __x) { float __r = vector_fast_rsqrt(__x); return __r*(1.5 - 0.5*(__x == 0 ? -INFINITY : __x)*__r*__r); }
+__SIMD_ELEMENTWISE_UNARY_2_IN_4(vector_precise_rsqrt, float)
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_precise_rsqrt, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_precise_rsqrt( vector_float4 __x) { vector_float4 __r = vector_fast_rsqrt(__x); return __r*(1.5 - 0.5*vector_bitselect(__x, -INFINITY, __x == 0)*__r*__r); }
+#elif defined __ARM_NEON__
+static         float  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(        float  __x) { vector_float2 __x2; __x2.x = __x; return vector_precise_rsqrt(__x2).x; }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_precise_rsqrt( vector_float2 __x) { vector_float2 __r = vector_fast_rsqrt(__x); return __r*vrsqrts_f32(__x, __r*__r); }
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_precise_rsqrt, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_precise_rsqrt( vector_float4 __x) { vector_float4 __r = vector_fast_rsqrt(__x); return __r*vrsqrtsq_f32(__x, __r*__r); }
+#else
+static         float  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(        float  __x) { return 1/__tg_sqrt(__x); }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_precise_rsqrt( vector_float2 __x) { return 1/__tg_sqrt(__x); }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_precise_rsqrt( vector_float3 __x) { return 1/__tg_sqrt(__x); }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_precise_rsqrt( vector_float4 __x) { return 1/__tg_sqrt(__x); }
+#endif
+#if defined __AVX__
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_precise_rsqrt( vector_float8 __x) { vector_float8 __r = vector_fast_rsqrt(__x); return __r*(1.5 - 0.5*vector_bitselect(__x, -INFINITY, __x == 0)*__r*__r); }
+#else
+__SIMD_ELEMENTWISE_UNARY_8_IN_4(vector_precise_rsqrt, float)
+#endif
+__SIMD_ELEMENTWISE_UNARY_16_IN_8(vector_precise_rsqrt, float)
+static        double  __SIMD_ATTRIBUTES__ vector_precise_rsqrt(       double  __x) { return 1/__tg_sqrt(__x); }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_double2 __x) { return 1/__tg_sqrt(__x); }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_double3 __x) { return 1/__tg_sqrt(__x); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_double4 __x) { return 1/__tg_sqrt(__x); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_precise_rsqrt(vector_double8 __x) { return 1/__tg_sqrt(__x); }
 
-static float          __SIMD_ATTRIBUTES__ vector_fast_rsqrt(float          __x) { return vector_precise_rsqrt(__x); }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_float2  __x) { return vector_precise_rsqrt(__x); }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_float3  __x) { return vector_precise_rsqrt(__x); }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_float4  __x) { return vector_precise_rsqrt(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_float8  __x) { return vector_precise_rsqrt(__x); }
-static vector_float16 __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_float16 __x) { return vector_precise_rsqrt(__x); }
-static double         __SIMD_ATTRIBUTES__ vector_fast_rsqrt(double         __x) { return vector_precise_rsqrt(__x); }
+#if defined __SSE__
+static         float  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(        float  __x) { vector_float4 __x4; __x4.x = __x; return ((vector_float4)_mm_rsqrt_ss(__x4)).x; }
+__SIMD_ELEMENTWISE_UNARY_2_IN_4(vector_fast_rsqrt, float)
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_fast_rsqrt, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_fast_rsqrt( vector_float4 __x) { return _mm_rsqrt_ps(__x); }
+#elif defined __ARM_NEON__
+static         float  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(        float  __x) { vector_float2 __x2; __x2.x = __x; return vector_fast_rsqrt(__x2).x; }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_fast_rsqrt( vector_float2 __x) { vector_float2 __r = vrsqrte_f32(__x); return __r*vrsqrts_f32(__x, __r*__r); }
+__SIMD_ELEMENTWISE_UNARY_3_IN_4(vector_fast_rsqrt, float)
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_fast_rsqrt( vector_float4 __x) { vector_float4 __r = vrsqrteq_f32(__x); return __r*vrsqrtsq_f32(__x, __r*__r); }
+#else
+static         float  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(        float  __x) { return vector_precise_rsqrt(__x); }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_fast_rsqrt( vector_float2 __x) { return vector_precise_rsqrt(__x); }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_fast_rsqrt( vector_float3 __x) { return vector_precise_rsqrt(__x); }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_fast_rsqrt( vector_float4 __x) { return vector_precise_rsqrt(__x); }
+#endif
+#if defined __AVX__
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_fast_rsqrt( vector_float8 __x) { return _mm256_rsqrt_ps(__x); }
+#else
+__SIMD_ELEMENTWISE_UNARY_8_IN_4(vector_fast_rsqrt, float)
+#endif
+__SIMD_ELEMENTWISE_UNARY_16_IN_8(vector_fast_rsqrt, float)
+static        double  __SIMD_ATTRIBUTES__ vector_fast_rsqrt(       double  __x) { return vector_precise_rsqrt(__x); }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_double2 __x) { return vector_precise_rsqrt(__x); }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_double3 __x) { return vector_precise_rsqrt(__x); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_double4 __x) { return vector_precise_rsqrt(__x); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_fast_rsqrt(vector_double8 __x) { return vector_precise_rsqrt(__x); }
 
 #if __FAST_MATH__
-static float          __SIMD_ATTRIBUTES__ vector_rsqrt(float          __x) { return vector_fast_rsqrt(__x); }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float2  __x) { return vector_fast_rsqrt(__x); }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float3  __x) { return vector_fast_rsqrt(__x); }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float4  __x) { return vector_fast_rsqrt(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float8  __x) { return vector_fast_rsqrt(__x); }
+static         float  __SIMD_ATTRIBUTES__ vector_rsqrt(        float  __x) { return vector_fast_rsqrt(__x); }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float2 __x) { return vector_fast_rsqrt(__x); }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float3 __x) { return vector_fast_rsqrt(__x); }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float4 __x) { return vector_fast_rsqrt(__x); }
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float8 __x) { return vector_fast_rsqrt(__x); }
 static vector_float16 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float16 __x) { return vector_fast_rsqrt(__x); }
-static double         __SIMD_ATTRIBUTES__ vector_rsqrt(double         __x) { return vector_fast_rsqrt(__x); }
+static        double  __SIMD_ATTRIBUTES__ vector_rsqrt(       double  __x) { return vector_fast_rsqrt(__x); }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_double2 __x) { return vector_fast_rsqrt(__x); }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_double3 __x) { return vector_fast_rsqrt(__x); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_double4 __x) { return vector_fast_rsqrt(__x); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_double8 __x) { return vector_fast_rsqrt(__x); }
 #else
-static float          __SIMD_ATTRIBUTES__ vector_rsqrt(float          __x) { return vector_precise_rsqrt(__x); }
-static vector_float2  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float2  __x) { return vector_precise_rsqrt(__x); }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float3  __x) { return vector_precise_rsqrt(__x); }
-static vector_float4  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float4  __x) { return vector_precise_rsqrt(__x); }
-static vector_float8  __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float8  __x) { return vector_precise_rsqrt(__x); }
+static         float  __SIMD_ATTRIBUTES__ vector_rsqrt(      float  __x) { return vector_precise_rsqrt(__x); }
+static  vector_float2 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float2 __x) { return vector_precise_rsqrt(__x); }
+static  vector_float3 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float3 __x) { return vector_precise_rsqrt(__x); }
+static  vector_float4 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float4 __x) { return vector_precise_rsqrt(__x); }
+static  vector_float8 __SIMD_ATTRIBUTES__ vector_rsqrt( vector_float8 __x) { return vector_precise_rsqrt(__x); }
 static vector_float16 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_float16 __x) { return vector_precise_rsqrt(__x); }
-static double         __SIMD_ATTRIBUTES__ vector_rsqrt(double         __x) { return vector_precise_rsqrt(__x); }
+static        double  __SIMD_ATTRIBUTES__ vector_rsqrt(     double  __x) { return vector_precise_rsqrt(__x); }
 static vector_double2 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_double2 __x) { return vector_precise_rsqrt(__x); }
 static vector_double3 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_double3 __x) { return vector_precise_rsqrt(__x); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_rsqrt(vector_double4 __x) { return vector_precise_rsqrt(__x); }
@@ -1041,6 +1277,162 @@ static vector_double2 __SIMD_ATTRIBUTES__ vector_smoothstep(vector_double2 __edg
 static vector_double3 __SIMD_ATTRIBUTES__ vector_smoothstep(vector_double3 __edge0, vector_double3 __edge1, vector_double3 __x) { vector_double3 __t = vector_clamp((__x - __edge0)/(__edge1 - __edge0), 0, 1); return __t*__t*(3 - 2*__t); }
 static vector_double4 __SIMD_ATTRIBUTES__ vector_smoothstep(vector_double4 __edge0, vector_double4 __edge1, vector_double4 __x) { vector_double4 __t = vector_clamp((__x - __edge0)/(__edge1 - __edge0), 0, 1); return __t*__t*(3 - 2*__t); }
 static vector_double8 __SIMD_ATTRIBUTES__ vector_smoothstep(vector_double8 __edge0, vector_double8 __edge1, vector_double8 __x) { vector_double8 __t = vector_clamp((__x - __edge0)/(__edge1 - __edge0), 0, 1); return __t*__t*(3 - 2*__t); }
+
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char2  __x) { return __x.x + __x.y; }
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char3  __x) { return __x.x + __x.z + __x.y; }
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char16 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_char32 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar2  __x) { return __x.x + __x.y; }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar3  __x) { return __x.x + __x.z + __x.y; }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar16 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uchar32 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short2  __x) { return __x.x + __x.y; }
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short3  __x) { return __x.x + __x.z + __x.y; }
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short16 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_short32 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort2  __x) { return __x.x + __x.y; }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort3  __x) { return __x.x + __x.z + __x.y; }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort16 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ushort32 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int2  __x) { return __x.x + __x.y; }
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int3  __x) { return __x.x + __x.z + __x.y; }
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_int16 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint2  __x) { return __x.x + __x.y; }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint3  __x) { return __x.x + __x.z + __x.y; }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_add(vector_uint16 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float2  __x) { return __x.x + __x.y; }
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float3  __x) { return __x.x + __x.z + __x.y; }
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_add(vector_float16 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long2  __x) { return __x.x + __x.y; }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long3  __x) { return __x.x + __x.z + __x.y; }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_long8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong2  __x) { return __x.x + __x.y; }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong3  __x) { return __x.x + __x.z + __x.y; }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong4  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_add(vector_ulong8  __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double2 __x) { return __x.x + __x.y; }
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double3 __x) { return __x.x + __x.z + __x.y; }
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double4 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_add(vector_double8 __x) { return vector_reduce_add(__x.lo + __x.hi); }
+
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char3  __x) { const char __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char16 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_char32 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar3  __x) { const unsigned char __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar16 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uchar32 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short3  __x) { const short __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short16 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_short32 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort3  __x) { const unsigned short __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort16 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ushort32 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int3  __x) { const int __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_int16 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint3  __x) { const unsigned int __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_min(vector_uint16 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float2  __x) { return __tg_fmin(__x.x, __x.y); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float3  __x) { return __tg_fmin(__tg_fmin(__x.x, __x.z), __x.y); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_min(vector_float16 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long3  __x) { const vector_long1 __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_long8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong2  __x) { return __x.y < __x.x ? __x.y : __x.x; }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong3  __x) { const vector_ulong1 __t = vector_reduce_min(__x.even); return __x.y < __t ? __x.y : __t; }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong4  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_min(vector_ulong8  __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double2 __x) { return __tg_fmin(__x.x, __x.y); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double3 __x) { return __tg_fmin(__tg_fmin(__x.x, __x.z), __x.y); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double4 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_min(vector_double8 __x) { return vector_reduce_min(vector_min(__x.lo, __x.hi)); }
+
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char3  __x) { const char __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char16 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_char32 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar3  __x) { const unsigned char __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar16 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned char __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uchar32 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short3  __x) { const short __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short16 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_short32 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort3  __x) { const unsigned short __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort16 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned short __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ushort32 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int3  __x) { const int __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_int16 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint3  __x) { const unsigned int __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static unsigned int __SIMD_ATTRIBUTES__ vector_reduce_max(vector_uint16 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float2  __x) { return __tg_fmax(__x.x, __x.y); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float3  __x) { return __tg_fmax(__tg_fmax(__x.x, __x.z), __x.y); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static float __SIMD_ATTRIBUTES__ vector_reduce_max(vector_float16 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long3  __x) { const vector_long1 __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static vector_long1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_long8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong2  __x) { return __x.y > __x.x ? __x.y : __x.x; }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong3  __x) { const vector_ulong1 __t = vector_reduce_max(__x.even); return __x.y > __t ? __x.y : __t; }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong4  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static vector_ulong1 __SIMD_ATTRIBUTES__ vector_reduce_max(vector_ulong8  __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double2 __x) { return __tg_fmax(__x.x, __x.y); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double3 __x) { return __tg_fmax(__tg_fmax(__x.x, __x.z), __x.y); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double4 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
+static double __SIMD_ATTRIBUTES__ vector_reduce_max(vector_double8 __x) { return vector_reduce_max(vector_max(__x.lo, __x.hi)); }
 
 #ifdef __cplusplus
 }

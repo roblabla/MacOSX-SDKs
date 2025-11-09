@@ -1,10 +1,12 @@
 //
 //  SCNParametricGeometry.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class SCNGeometry;
 
@@ -13,12 +15,8 @@
  @abstract SCNPlane represents a rectangle with controllable width and height. The plane has one visible side.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNPlane : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method planeWithWidth:height:
@@ -61,14 +59,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract The corner radius. Animatable.
  @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
  */
-@property(nonatomic) CGFloat cornerRadius SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat cornerRadius NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @property cornerSegmentCount
  @abstract The number of subdivisions for the rounded corners. Animatable.
  @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
  */
-@property(nonatomic) NSInteger cornerSegmentCount SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic) NSInteger cornerSegmentCount NS_AVAILABLE(10_9, 8_0);
 
 @end
 
@@ -78,12 +76,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNBox represents a box with rectangular sides and optional chamfers.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNBox : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method boxWithWidth:height:length:chamferRadius:
@@ -159,12 +153,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNPyramid represents a right pyramid with a rectangular base.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNPyramid : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method pyramidWithWidth:height:length:
@@ -225,12 +215,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNSphere represents a sphere with controllable radius
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNSphere : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method sphereWithRadius:
@@ -268,12 +254,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNCylinder represents a cylinder with controllable height and radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNCylinder : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method cylinderWithRadius:height:
@@ -319,12 +301,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNCone represents a cone with controllable height, top radius and bottom radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNCone : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method coneWithTopRadius:bottomRadius:height:
@@ -378,12 +356,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNTube represents a tube with controllable height, inner radius and outer radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNTube : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method tubeWithInnerRadius:outerRadius:height:
@@ -437,12 +411,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNCapsule represents a capsule with controllable height and cap radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNCapsule : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method capsuleWithCapRadius:height:
@@ -495,12 +465,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNTorus represents a torus with controllable ring radius and pipe radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNTorus : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method torusWithRingRadius:pipeRadius:
@@ -546,12 +512,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNFloor represents an infinite plane geometry. 
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNFloor : SCNGeometry 
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method floor
@@ -586,7 +548,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Specifies the resolution scale factor of the buffer used to render the reflection.
  @discussion Defaults to 1.0.
 */
-@property(nonatomic) CGFloat reflectionResolutionScaleFactor SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat reflectionResolutionScaleFactor NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -595,12 +557,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract SCNText represents a block of text that has been extruded
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNText : SCNGeometry 
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method textWithString:extrusionDepth:
@@ -608,7 +566,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param string The text to be represented.
  @param extrusionDepth The extrusion depth.
  */
-+ (instancetype)textWithString:(id)string extrusionDepth:(CGFloat)extrusionDepth;
++ (instancetype)textWithString:(nullable id)string extrusionDepth:(CGFloat)extrusionDepth;
 
 /*! 
  @property extrusionDepth
@@ -622,14 +580,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract The text to be represented. The text must be an instance of NSString or NSAttributedString.
  @discussion The default value is nil.
  */
-@property(nonatomic, copy) id string;
+@property(nonatomic, copy, nullable) id string;
 
 /*! 
  @property font
  @abstract The font used to represent the text.
  @discussion The font property is only used when the string property is not an NSAttributedString. The default value is Helvetica size 36.
  */
-@property(nonatomic, retain) NSFont *font;
+@property(nonatomic, retain, null_resettable) NSFont *font;
 
 /*!
  @property wrapped
@@ -684,14 +642,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant.
  @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
  */
-@property(nonatomic, copy) NSBezierPath *chamferProfile SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic, copy, nullable) NSBezierPath *chamferProfile NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @property flatness
  @abstract Specifies the accuracy (or smoothness) with which fonts are rendered.
  @discussion Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
  */
-@property(nonatomic) CGFloat flatness SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat flatness NS_AVAILABLE(10_9, 8_0);
 
 @end
 
@@ -706,12 +664,8 @@ typedef NS_ENUM(NSInteger, SCNChamferMode) {
     SCNChamferModeBack
 } NS_ENUM_AVAILABLE(10_9, 8_0);
 
-SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+NS_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNShape : SCNGeometry
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method shapeWithPath:extrusionDepth:
@@ -719,14 +673,14 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
  @param path The cubic Bezier spline to extrude.
  @param extrusionDepth The extrusion depth.
  */
-+ (instancetype)shapeWithPath:(NSBezierPath *)path extrusionDepth:(CGFloat)extrusionDepth;
++ (instancetype)shapeWithPath:(nullable NSBezierPath *)path extrusionDepth:(CGFloat)extrusionDepth;
 
 /*!
  @property path
  @abstract The path defining the shape to be rendered.
  @discussion The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
  */
-@property(nonatomic, copy) NSBezierPath *path;
+@property(nonatomic, copy, nullable) NSBezierPath *path;
 
 /*!
  @property extrusionDepth
@@ -754,6 +708,8 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
  @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant.
  @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
  */
-@property(nonatomic, copy) NSBezierPath *chamferProfile;
+@property(nonatomic, copy, nullable) NSBezierPath *chamferProfile;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -27,4 +27,10 @@
 #define QL_DEPRECATED __attribute__((deprecated))
 #define QL_FORMAT_ARG(F, A) __attribute__((format(CFString, F, A)))
 
+#if __OBJC_GC__
+#define QL_STRONG_REF __strong
+#else
+#define QL_STRONG_REF
+#endif
+
 #endif

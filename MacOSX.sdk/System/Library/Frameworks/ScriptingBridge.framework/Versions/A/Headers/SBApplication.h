@@ -7,26 +7,28 @@
 #import <ScriptingBridge/SBObject.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol SBApplicationDelegate;
 
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface SBApplication : SBObject <NSCoding>
 
-- (id) initWithBundleIdentifier:(NSString *)ident;
-- (id) initWithURL:(NSURL *)url;
-- (id) initWithProcessIdentifier:(pid_t)pid;
+- (nullable __kindof SBApplication *) initWithBundleIdentifier:(NSString *)ident;
+- (nullable __kindof SBApplication *) initWithURL:(NSURL *)url;
+- (nullable __kindof SBApplication *) initWithProcessIdentifier:(pid_t)pid;
 	// Initializers.  These will dynamically create a subclass of SBApplication
 	// based on the target application's scripting interface and return an
 	// instance of that class.  (If the application does not have a scripting
 	// interface, they will return an instance of SBApplication.)
 
-+ (id) applicationWithBundleIdentifier:(NSString *) ident;
-+ (id) applicationWithURL:(NSURL *) url;
-+ (id) applicationWithProcessIdentifier:(pid_t) pid;
++ (nullable __kindof SBApplication *) applicationWithBundleIdentifier:(NSString *) ident;
++ (nullable __kindof SBApplication *) applicationWithURL:(NSURL *) url;
++ (nullable __kindof SBApplication *) applicationWithProcessIdentifier:(pid_t) pid;
 	// Convenience factory methods.  "[SBApplication applicationWith...:]" is
 	// equivalent to "[[[SBApplication alloc] initWith...:] autorelease]".
 
-- (Class) classForScriptingClass:(NSString *) className;
+- (nullable Class) classForScriptingClass:(NSString *) className;
 	// Returns the Objective-C class that represents the specified scripting object
 	// class.  The class name is as it appears in the scripting interface, for
 	// example, "document".
@@ -39,7 +41,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 - (void) activate;
 	// Bring the application to the foreground.
 
-@property (strong) id <SBApplicationDelegate> delegate;
+@property (nullable, strong) id <SBApplicationDelegate> delegate;
 	// Delegate for event handling; see the SBApplicationDelegate protocol.
 
 @property LSLaunchFlags launchFlags;
@@ -61,3 +63,5 @@ NS_CLASS_AVAILABLE(10_5, NA)
 	// it will become the result of the -sendEvent that failed.
 
 @end
+
+NS_ASSUME_NONNULL_END

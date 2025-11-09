@@ -2,10 +2,14 @@
 //  AVBInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+#include <IOKit/IOKitLib.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVBMACAddress;
 @class AVBNetworkClient;
@@ -16,7 +20,7 @@
 @class AVBMSRPTalker;
 @class AVB17221EntityDiscovery;
 
-@class AVB8021ASTimeSync;
+@class TSgPTPClock;
 
 @class AVB17221AECPInterface;
 @class AVB17221ACMPInterface;
@@ -46,7 +50,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	AVBMSRPTalker *_msrpTalker;
 	AVB17221EntityDiscovery *_entityDiscovery;
 	
-	AVB8021ASTimeSync *_timeSync;
+	TSgPTPClock *_timeSync;
 
 	AVB17221AECPInterface *_aecp;
 	AVB17221ACMPInterface *_acmp;
@@ -95,18 +99,18 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	entityDiscovery
 	@abstract	The IEEE Std 1722.1™-2013 entity discovery for the interface.
  */
-@property (retain, readonly) AVB17221EntityDiscovery *entityDiscovery;
+@property (retain, readonly, nullable) AVB17221EntityDiscovery *entityDiscovery;
 
 /*!
 	@property	aecp
 	@abstract	The IEEE Std 1722.1™-2013 AECP interface for the interface.
  */
-@property (retain, readonly) AVB17221AECPInterface *aecp;
+@property (retain, readonly, nullable) AVB17221AECPInterface *aecp;
 /*!
 	@property	acmp
 	@abstract	The IEEE Std 1722.1™-2013 ACMP interface for the interface.
  */
-@property (retain, readonly) AVB17221ACMPInterface *acmp;
+@property (retain, readonly, nullable) AVB17221ACMPInterface *acmp;
 
 /*!
  @method		macAddressForInterfaceNamed:
@@ -114,14 +118,14 @@ NS_CLASS_AVAILABLE(10_8, NA)
  @param		anInterfaceName	The BSD name of the interface to get the address for.
  @result		An instance of AVBMACAddress if the lookup was successful, nil otherwise.
  */
-+ (AVBMACAddress *)macAddressForInterfaceNamed:(NSString *)anInterfaceName;
++ (nullable AVBMACAddress *)macAddressForInterfaceNamed:(NSString *)anInterfaceName;
 
 /*!
 	@method		supportedInterfaces
 	@abstract	This method returns an array of BSD interface names of interfaces supporting AVB. An interface is included in this list if it claims it supports AVB.
 	@result		An NSArray of NSStrings, with each string being the BSD name of an interface. This may return nil.
  */
-+ (NSArray *)supportedInterfaces;
++ (nullable NSArray <NSString *>*)supportedInterfaces;
 
 /*!
 	@method		isAVBEnabledOnInterfaceNamed:
@@ -144,14 +148,15 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		anInterfaceName	The BSD name of the interface.
 	@result		The initialized receiver.
  */
-- (instancetype)initWithInterfaceName:(NSString *)anInterfaceName;
+- (nullable instancetype)initWithInterfaceName:(NSString *)anInterfaceName;
 
 /*!
  @method		myGUID
  @abstract	This method returns the GUID which is used by the built-in controller functionality of Mac OS X. This is either the FireWire GUID or an EUI64 based on the first found ethernet type interface (may be an ethernet port, USB ethernet adapter, PCI Express adapter or the AirPort card).
  @result		The GUID which is used by the OS.
  */
-+ (uint64_t)myGUID;
++ (uint64_t)myGUID NS_DEPRECATED(10_8, 10_10, NA, NA);
+
 /*!
  @method		myEntityID
  @abstract	This method returns the EntityID which is used by the built-in controller functionality of Mac OS X. This is either the FireWire GUID or an EUI64 based on the first found ethernet type interface (may be an ethernet port, USB ethernet adapter, PCI Express adapter or the AirPort card).
@@ -160,3 +165,5 @@ NS_CLASS_AVAILABLE(10_8, NA)
 + (uint64_t)myEntityID;
 
 @end
+
+NS_ASSUME_NONNULL_END

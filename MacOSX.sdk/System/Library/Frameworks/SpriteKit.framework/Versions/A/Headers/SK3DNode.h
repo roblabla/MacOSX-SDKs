@@ -14,6 +14,9 @@
 
 @class SCNScene;
 @class SCNNode;
+@class SCNHitTestResult;
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_10, 8_0)
 SK_EXPORT @interface SK3DNode : SKNode
@@ -28,7 +31,7 @@ SK_EXPORT @interface SK3DNode : SKNode
 /**
  Support coding and decoding via NSKeyedArchiver.
  */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  Create a 3D Node with the viewport size the 3D content will be rendered with.
@@ -40,7 +43,7 @@ SK_EXPORT @interface SK3DNode : SKNode
 @property CGSize viewportSize;
 
 /** A SceneKit scene  */
-@property (nonatomic, retain) SCNScene *scnScene;
+@property (nonatomic, retain, nullable) SCNScene *scnScene;
 
 /** 
  @property sceneTime
@@ -54,7 +57,7 @@ SK_EXPORT @interface SK3DNode : SKNode
  @param thePoint A point in the coordinate system of the receiver.
  @param options Optional parameters (see the "Hit test options" group for the available options).
 */
-- (NSArray *)hitTest:(CGPoint)thePoint options:(NSDictionary *)options;
+- (NSArray<SCNHitTestResult *> *)hitTest:(CGPoint)point options:(nullable NSDictionary<NSString *, id> *)options;
 
 /**
  @method projectPoint
@@ -90,7 +93,7 @@ SK_EXPORT @interface SK3DNode : SKNode
  @abstract Specifies the point of view used to render the scene.
  @discussion A point of view must have either a camera or a spot light attached.
  */
-@property(nonatomic, retain) SCNNode *pointOfView;
+@property(nonatomic, retain, nullable) SCNNode *pointOfView;
 
 /**
  @property autoenablesDefaultLighting
@@ -101,3 +104,5 @@ SK_EXPORT @interface SK3DNode : SKNode
 
 
 @end
+
+NS_ASSUME_NONNULL_END

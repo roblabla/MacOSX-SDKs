@@ -487,7 +487,7 @@ GLK_INLINE GLKVector4 GLKVector4CrossProduct(GLKVector4 vectorLeft, GLKVector4 v
     vLeft2 = vLeft2 * vRight2;
     vLeft1 = vLeft1 - vLeft2;
     //Set last element to 0
-    uint32_t mask[4] = {0xffffffff, 0xffffffff, 0xffffffff, 0x0};
+    uint32_t mask[4] __attribute__((aligned(16))) = {0xffffffff, 0xffffffff, 0xffffffff, 0x0};
     vLeft1 = _mm_and_ps(vLeft1, _mm_load_ps((float *)mask));
     return *(GLKVector4 *)&vLeft1;
 #else

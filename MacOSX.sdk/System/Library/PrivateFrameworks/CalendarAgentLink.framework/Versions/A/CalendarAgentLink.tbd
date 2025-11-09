@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CalendarAgentLink.framework/Versions/A/CalendarAgentLink
-current-version: 259.0
+current-version: 279.0
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _CalAgentLink._connection, _CalAgentLink._machServiceName, 
@@ -63,10 +63,7 @@ exports:
                        _CalStoreRemoteManagedTask._completedDate, _CalStoreRemoteManagedTask._dueDate, 
                        _CalStoreRemoteManagedTask._priority ]
   - archs:           [ i386, x86_64 ]
-    symbols:         [ _BoolToString, _CalAgentAliveNotification, _CalAgentLinkAcceptCertificatesTemporarilyOperation_MessageKey_Certificates, 
-                       _CalAgentLinkAcceptCertificatesTemporarilyOperation_MessageKey_NodeObjectID, 
-                       _CalAgentLinkAcceptCertificatesTemporarilyOperation_MessageKey_URL, 
-                       _CalAgentLinkCalDAVQueueOperation_Action_RemoveAndRevertOperation, 
+    symbols:         [ _BoolToString, _CalAgentAliveNotification, _CalAgentLinkCalDAVQueueOperation_Action_RemoveAndRevertOperation, 
                        _CalAgentLinkCalDAVQueueOperation_Action_RemoveOperation, 
                        _CalAgentLinkCalDAVQueueOperation_Action_RemoveOperationAndRefresh, 
                        _CalAgentLinkCalDAVQueueOperation_Action_TryOperationAgain, 
@@ -92,13 +89,9 @@ exports:
                        _CalAgentLinkUpdateSubscriptionAuthInfoOperation_MessageKey_Password, 
                        _CalAgentLinkUpdateSubscriptionAuthInfoOperation_MessageKey_User, 
                        _CalAgentLinkUserNotificationOperation_Action_DeleteAlarms, 
-                       _CalAgentLinkUserNotificationOperation_Action_DeleteMessages, 
-                       _CalAgentLinkUserNotificationOperation_Action_DeliverMessages, 
                        _CalAgentLinkUserNotificationOperation_Action_FindAndScheduleAlarms, 
-                       _CalAgentLinkUserNotificationOperation_Action_InvitationNotificationsDisabledChanged, 
                        _CalAgentLinkUserNotificationOperation_Action_ResolveBookmarks, 
                        _CalAgentLinkUserNotificationOperation_Action_ScheduleAlarms, 
-                       _CalAgentLinkUserNotificationOperation_Action_SharedCalendarNotificationsDisabledChanged, 
                        _CalAgentLinkUserNotificationOperation_Action_StartRemindersNotificationCenterWidget, 
                        _CalAgentLinkUserNotificationOperation_MessageKey_Action, 
                        _CalAgentLinkUserNotificationOperation_MessageKey_ObjectIDs, 
@@ -114,13 +107,13 @@ exports:
                        __scrubbedDictionaryFrom, _errorForXPCTransport, 
                        _getStringUUID, _protocolForMachServiceName, _setupXPCWhitelistForCalendarAgentInterface, 
                        _setupXPCWhitelistForCalendarStoreInterface, _setupXPCWhitelistForInterface ]
-    objc-classes:    [ _CalAgentLightweightClient, _CalAgentLink, _CalAgentLinkAcceptCertificatesTemporarilyOperation, 
-                       _CalAgentLinkCalDAVQueueOperation, _CalAgentLinkConnection, 
-                       _CalAgentLinkExchangeQueueOperation, _CalAgentLinkLaunchExternalSyncOperation, 
-                       _CalAgentLinkOneWayOperation, _CalAgentLinkOperation, 
-                       _CalAgentLinkProcessChangeRequestsOperation, _CalAgentLinkQueueDebugOperationItem, 
-                       _CalAgentLinkQueueStatusOperation, _CalAgentLinkRequestCalendarPublishOperation, 
-                       _CalAgentLinkScanDropboxOperation, _CalAgentLinkUpdateSubscriptionAuthInfoOperation, 
+    objc-classes:    [ _CalAgentLightweightClient, _CalAgentLink, _CalAgentLinkCalDAVQueueOperation, 
+                       _CalAgentLinkConnection, _CalAgentLinkExchangeQueueOperation, 
+                       _CalAgentLinkLaunchExternalSyncOperation, _CalAgentLinkOneWayOperation, 
+                       _CalAgentLinkOperation, _CalAgentLinkProcessChangeRequestsOperation, 
+                       _CalAgentLinkQueueDebugOperationItem, _CalAgentLinkQueueStatusOperation, 
+                       _CalAgentLinkRequestCalendarPublishOperation, _CalAgentLinkScanDropboxOperation, 
+                       _CalAgentLinkUpdateSubscriptionAuthInfoOperation, 
                        _CalAgentLinkUserNotificationOperation, _CalClientLink, 
                        _CalLink, _CalStoreRemoteCALDailyRecurrence, _CalStoreRemoteCALMonthlyRecurrence, 
                        _CalStoreRemoteCALWeekDayNumber, _CalStoreRemoteCALWeeklyRecurrence, 

@@ -152,7 +152,8 @@ const char *XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP; // bool
  * activity to run. A default minimum battery level is determined by the
  * system.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
+__OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_9, __IPHONE_7_0, __IPHONE_7_0,
+	"REQUIRE_BATTERY_LEVEL is not implemented")
 XPC_EXPORT
 const char *XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL; // int (%)
 
@@ -162,7 +163,8 @@ const char *XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL; // int (%)
  * while the hard disk drive (HDD) is spinning. Computers with flash storage
  * are considered to be equivalent to HDD spinning. Defaults to false.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
+__OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_9, __IPHONE_7_0, __IPHONE_7_0,
+	"REQUIRE_HDD_SPINNING is not implemented")
 XPC_EXPORT
 const char *XPC_ACTIVITY_REQUIRE_HDD_SPINNING; // bool
 

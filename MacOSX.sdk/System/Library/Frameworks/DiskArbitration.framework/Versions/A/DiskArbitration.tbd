@@ -72,6 +72,6 @@ exports:
                        _kDADiskDescriptionMediaWritableKey, _kDADiskDescriptionVolumeKindKey, 
                        _kDADiskDescriptionVolumeMountableKey, _kDADiskDescriptionVolumeNameKey, 
                        _kDADiskDescriptionVolumeNetworkKey, _kDADiskDescriptionVolumePathKey, 
-                       _kDADiskDescriptionVolumeUUIDKey, _kDADiskDescriptionWatchVolumeName, 
-                       _kDADiskDescriptionWatchVolumePath ]
+                       _kDADiskDescriptionVolumeTypeKey, _kDADiskDescriptionVolumeUUIDKey, 
+                       _kDADiskDescriptionWatchVolumeName, _kDADiskDescriptionWatchVolumePath ]
 ...

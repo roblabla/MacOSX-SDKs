@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-    Copyright 2010-2014 Apple Inc. All rights reserved.
+    Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -16,8 +16,9 @@
 @class AVAudioMixInputParameters;
 @class AVAudioMix;
 @class AVVideoComposition;
-
 @class AVAssetReaderOutputInternal;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class AVAssetReaderOutput
@@ -67,7 +68,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The client is responsible for calling CFRelease on the returned CMSampleBuffer object when finished with it. This method will return NULL if there are no more sample buffers available for the receiver within the time range specified by its AVAssetReader's timeRange property, or if there is an error that prevents the AVAssetReader from reading more media data. When this method returns NULL, clients should check the value of the associated AVAssetReader's status property to determine why no more samples could be read.
  */
-- (CMSampleBufferRef)copyNextSampleBuffer CF_RETURNS_RETAINED;
+- (nullable CMSampleBufferRef)copyNextSampleBuffer CF_RETURNS_RETAINED;
 
 @end
 
@@ -107,7 +108,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	If this method is invoked before all media data has been read (i.e. -copyNextSampleBuffer has not yet returned NULL), an exception will be thrown.  This method may not be called before -startReading has been invoked on the attached asset reader.
  */
-- (void)resetForReadingTimeRanges:(NSArray *)timeRanges NS_AVAILABLE(10_10, 8_0);
+- (void)resetForReadingTimeRanges:(NSArray<NSValue *> *)timeRanges NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method markConfigurationAsFinal
@@ -141,6 +142,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @private
 	AVAssetReaderTrackOutputInternal	*_trackOutputInternal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetReaderTrackOutputWithTrack:outputSettings:
@@ -175,7 +177,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	ProRes 4444 encoded media can contain a mathematically lossless alpha channel. To preserve the alpha channel during decompression use a pixel format with an alpha component such as kCVPixelFormatType_4444AYpCbCr16 or kCVPixelFormatType_64ARGB. To test whether your source contains an alpha channel check that the track's format description has kCMFormatDescriptionExtension_Depth and that its value is 32.
  */
-+ (instancetype)assetReaderTrackOutputWithTrack:(AVAssetTrack *)track outputSettings:(NSDictionary *)outputSettings;
++ (instancetype)assetReaderTrackOutputWithTrack:(AVAssetTrack *)track outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
 
 /*!
  @method initWithTrack:outputSettings:
@@ -210,7 +212,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	ProRes 4444 encoded media can contain a mathematically lossless alpha channel. To preserve the alpha channel during decompression use a pixel format with an alpha component such as kCVPixelFormatType_4444AYpCbCr16 or kCVPixelFormatType_64ARGB.  To test whether your source contains an alpha channel check that the track's format description has kCMFormatDescriptionExtension_Depth and that its value is 32.
  */
-- (instancetype)initWithTrack:(AVAssetTrack *)track outputSettings:(NSDictionary *)outputSettings;
+- (instancetype)initWithTrack:(AVAssetTrack *)track outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property track
@@ -230,7 +232,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for audio tracks or AVVideoSettings.h for video tracks.  A value of nil indicates that the receiver will vend samples in their original format as stored in the target track.
  */ 
-@property (nonatomic, readonly) NSDictionary *outputSettings;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *outputSettings;
 
 /*!
  @property audioTimePitchAlgorithm
@@ -263,6 +265,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @private
 	AVAssetReaderAudioMixOutputInternal	*_audioMixOutputInternal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetReaderAudioMixOutputWithAudioTracks:audioSettings:
@@ -281,7 +284,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	The audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). A value of nil configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks. Initialization will fail if the audio settings cannot be used with the specified tracks.  AVSampleRateConverterAudioQualityKey is not supported.
  */
-+ (instancetype)assetReaderAudioMixOutputWithAudioTracks:(NSArray *)audioTracks audioSettings:(NSDictionary *)audioSettings;
++ (instancetype)assetReaderAudioMixOutputWithAudioTracks:(NSArray<AVAssetTrack *> *)audioTracks audioSettings:(nullable NSDictionary<NSString *, id> *)audioSettings;
 
 /*!
  @method initWithAudioTracks:audioSettings:
@@ -300,7 +303,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	The audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). A value of nil configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks. Initialization will fail if the audio settings cannot be used with the specified tracks.  AVSampleRateConverterAudioQualityKey is not supported.
  */
-- (instancetype)initWithAudioTracks:(NSArray *)audioTracks audioSettings:(NSDictionary *)audioSettings;
+- (instancetype)initWithAudioTracks:(NSArray<AVAssetTrack *> *)audioTracks audioSettings:(nullable NSDictionary<NSString *, id> *)audioSettings NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property audioTracks
@@ -310,7 +313,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
  */
-@property (nonatomic, readonly) NSArray *audioTracks;
+@property (nonatomic, readonly) NSArray<AVAssetTrack *> *audioTracks;
 
 /*!
  @property audioSettings
@@ -320,7 +323,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSDictionary that contains values for keys from AVAudioSettings.h (linear PCM only).  A value of nil indicates that the receiver will return audio samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the receiver's audio tracks.
  */ 
-@property (nonatomic, readonly) NSDictionary *audioSettings;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *audioSettings;
 
 /*!
  @property audioMix
@@ -332,7 +335,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	This property cannot be set after reading has started.
  */
-@property (nonatomic, copy) AVAudioMix *audioMix;
+@property (nonatomic, copy, nullable) AVAudioMix *audioMix;
 
 /*!
  @property audioTimePitchAlgorithm
@@ -365,6 +368,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @private
 	AVAssetReaderVideoCompositionOutputInternal	*_videoCompositionOutputInternal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetReaderVideoCompositionOutputWithVideoTracks:videoSettings:
@@ -389,7 +393,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 		AVVideoPixelAspectRatioKey
 		AVVideoScalingModeKey
  */
-+ (instancetype)assetReaderVideoCompositionOutputWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
++ (instancetype)assetReaderVideoCompositionOutputWithVideoTracks:(NSArray<AVAssetTrack *> *)videoTracks videoSettings:(nullable NSDictionary<NSString *, id> *)videoSettings;
 
 /*!
  @method initWithVideoTracks:videoSettings:
@@ -413,7 +417,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 		AVVideoPixelAspectRatioKey
 		AVVideoScalingModeKey
  */
-- (instancetype)initWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
+- (instancetype)initWithVideoTracks:(NSArray<AVAssetTrack *> *)videoTracks videoSettings:(nullable NSDictionary<NSString *, id> *)videoSettings NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property videoTracks
@@ -423,7 +427,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
  */
-@property (nonatomic, readonly) NSArray *videoTracks;
+@property (nonatomic, readonly) NSArray<AVAssetTrack *> *videoTracks;
 
 /*!
  @property videoSettings
@@ -433,7 +437,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSDictionary that contains values for keys as specified by AVVideoSettings.h.  A value of nil indicates that the receiver will return video frames in a convenient uncompressed format, with properties determined according to the properties of the receiver's video tracks.
  */ 
-@property (nonatomic, readonly) NSDictionary *videoSettings;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *videoSettings;
 
 /*!
  @property videoComposition
@@ -445,7 +449,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	This property cannot be set after reading has started.
  */
-@property (nonatomic, copy) AVVideoComposition *videoComposition;
+@property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 
 /*!
  @property customVideoCompositor
@@ -455,7 +459,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
  	This property is nil if there is no video compositor, or if the internal video compositor is in use.
  */
-@property (nonatomic, readonly) id<AVVideoCompositing>customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -475,6 +479,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @private
 	AVAssetReaderOutputMetadataAdaptorInternal *_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput:
@@ -501,14 +506,14 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @param	assetReaderOutput
 	An instance of AVAssetReaderTrackOutput that vends sample buffers containing metadata, e.g. an AVAssetReaderTrackOutput object initialized with a track of media type AVMediaTypeMetadata and nil outputSettings.
  @result
-	An instance of AVAssetReaderTrackOutputTimedMetadataGroupAdaptor
+	An instance of AVAssetReaderOutputMetadataAdaptor
 
  @discussion
 	It is an error to create a timed metadata group adaptor with an asset reader output that does not vend metadata.  It is also an error to create a timed metadata group adaptor with an asset reader output whose asset reader has already started reading, or an asset reader output that already has been used to initialize another timed metadata group adaptor.
 	
 	Clients should not mix calls to -[AVAssetReaderTrackOutput copyNextSampleBuffer] and -[AVAssetReaderOutputMetadataAdaptor nextTimedMetadataGroup].  Once an AVAssetReaderTrackOutput instance has been used to initialize an AVAssetReaderOutputMetadataAdaptor, calling -copyNextSampleBuffer on that instance will result in an exception being thrown.
  */
-- (instancetype)initWithAssetReaderTrackOutput:(AVAssetReaderTrackOutput *)trackOutput;
+- (instancetype)initWithAssetReaderTrackOutput:(AVAssetReaderTrackOutput *)trackOutput NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property assetReaderTrackOutput
@@ -532,7 +537,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  
 	Before calling this method, you must ensure that the output which underlies the receiver is attached to an AVAssetReader via a prior call to -addOutput: and that -startReading has been called on the asset reader.
  */
-- (AVTimedMetadataGroup *)nextTimedMetadataGroup;
+- (nullable AVTimedMetadataGroup *)nextTimedMetadataGroup;
 
 @end
 
@@ -557,6 +562,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @private
 	AVAssetReaderSampleReferenceOutputInternal	*_sampleReferenceOutputInternal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method assetReaderSampleReferenceOutputWithTrack:
@@ -571,7 +577,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @discussion
 	The track must be one of the tracks contained by the target AVAssetReader's asset.
  */
-+ (AVAssetReaderSampleReferenceOutput *)assetReaderSampleReferenceOutputWithTrack:(AVAssetTrack *)track;
++ (instancetype)assetReaderSampleReferenceOutputWithTrack:(AVAssetTrack *)track;
 
 /*!
  @method initWithTrack:
@@ -586,7 +592,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  @discussion
 	The track must be one of the tracks contained by the target AVAssetReader's asset.
   */
-- (instancetype)initWithTrack:(AVAssetTrack *)track;
+- (instancetype)initWithTrack:(AVAssetTrack *)track NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property track
@@ -599,3 +605,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly) AVAssetTrack *track;
 
 @end
+
+NS_ASSUME_NONNULL_END

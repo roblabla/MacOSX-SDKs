@@ -1,18 +1,12 @@
-/*
-     File:       AudioToolbox/AudioToolbox.h
- 
-     Contains:  Umbrella include for AudioToolbox headers.
-				Also includes CAShow that allows you to print
-				internal state of an object.
-  
-     Copyright:  (c) 2002 - 2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		AudioToolbox.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2002-2015 by Apple, Inc., all rights reserved.
+	@abstract	Umbrella header for AudioToolbox framework.
 */
+
+#ifndef AudioToolbox_AudioToolbox_h
+#define AudioToolbox_AudioToolbox_h
 
 #define AUDIO_TOOLBOX_VERSION 1060
 
@@ -50,8 +44,9 @@
 	#include <AudioServices.h>
 #endif
 
-#ifndef __AudioToolbox_H
-#define __AudioToolbox_H
+#include <stdio.h>
+
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -62,16 +57,14 @@ extern "C"
 extern void CAShow (void* inObject) 
 											__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
-#include <stdio.h>
-
 // prints out the internal state of an object to the supplied FILE
 extern void CAShowFile (void* inObject, FILE* inFile) 
 											__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
-
+	
 // this will return the name of a sound bank from a sound bank file
 // the name should be released by the caller
 struct FSRef;
-extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStringRef *outName)
+extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStringRef __nullable * __nonnull outName)
 											__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*!
@@ -88,7 +81,7 @@ extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStri
 */
 
 extern OSStatus
-CopyNameFromSoundBank (CFURLRef inURL, CFStringRef *outName) 
+CopyNameFromSoundBank (CFURLRef inURL, CFStringRef __nullable * __nonnull outName)
 											__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_7_0);
 
 /*!
@@ -115,7 +108,7 @@ CopyNameFromSoundBank (CFURLRef inURL, CFStringRef *outName)
     @result			returns noErr if successful.
 */
 
-extern OSStatus CopyInstrumentInfoFromSoundBank (CFURLRef inURL, CFArrayRef *outInstrumentInfo)
+extern OSStatus CopyInstrumentInfoFromSoundBank (CFURLRef inURL, CFArrayRef __nullable * __nonnull outInstrumentInfo)
 														__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_7_0);
 	
 #define kInstrumentInfoKey_Name		"name"
@@ -127,4 +120,6 @@ extern OSStatus CopyInstrumentInfoFromSoundBank (CFURLRef inURL, CFArrayRef *out
 }
 #endif
 
-#endif // __AudioToolbox_H
+CF_ASSUME_NONNULL_END
+
+#endif // AudioToolbox_AudioToolbox_h

@@ -13,9 +13,17 @@ exports:
                        _FTAWDLogCallInvitationSent, _FTAWDLogCallRelayInitiateReceived, 
                        _FTAWDLogCallRelayInitiateSent, _FTAWDLogCallRelayUpdateSent, 
                        _FTAWDLogCallRelayUpdatedReceived, _FTAWDLogCallStarted, 
-                       _FTAWDLogIMessageAttachmentDownload, _FTAWDLogIMessageAttachmentUpload, 
+                       _FTAWDLogIMessageAttachmentDownload, _FTAWDLogIMessageAttachmentDownloadNew, 
+                       _FTAWDLogIMessageAttachmentUpload, _FTAWDLogIMessageAttachmentUploadNew, 
                        _FTAWDLogIMessageDeduplicated, _FTAWDLogIMessageDelivered, 
                        _FTAWDLogIMessageDowngrade, _FTAWDLogIMessageQueryFinished, 
                        _FTAWDLogIMessageReceived, _FTAWDLogIMessageSent, 
-                       _FTAWDLogSMSReceived, _FTAWDLogSMSSent, _FTAWDSetSubmissionDate ]
+                       _FTAWDLogRegistrationAuthenticate, _FTAWDLogRegistrationGetDependentRegistrations, 
+                       _FTAWDLogRegistrationGetHandles, _FTAWDLogRegistrationPhoneNumberReceivedSMS, 
+                       _FTAWDLogRegistrationPhoneNumberValidationFinished, 
+                       _FTAWDLogRegistrationProfileAuthenticate, _FTAWDLogRegistrationProfileLinkHandles, 
+                       _FTAWDLogRegistrationProfileUnLinkHandles, _FTAWDLogRegistrationProfileValidateHandle, 
+                       _FTAWDLogRegistrationProfileValidateInvitationContext, 
+                       _FTAWDLogRegistrationRegister, _FTAWDLogSMSReceived, 
+                       _FTAWDLogSMSSent, _FTAWDSetSubmissionDate ]
 ...

@@ -1,7 +1,7 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2014, Apple Inc.
+ Copyright (c) 2011-2015, Apple Inc.
  All rights reserved.
  */
 
@@ -9,7 +9,12 @@
 #import <AppKit/NSPasteboard.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSObject.h>
-@class NSString, NSImage, NSArray, NSView, NSError, NSWindow;
+#import <Foundation/NSArray.h>
+
+@class NSString, NSImage, NSView, NSError, NSWindow;
+
+NS_ASSUME_NONNULL_BEGIN
+
 
 /* NSSharing can be used to share items to different kinds of local and remote services. Items are objects which respond to the NSPasteboardWriting protocol, like NSURL, NSImage or NSString. If an NSURL is a file URL (point to a video for example), then the content of the file will be shared. If the URL is remote, then the URL itself will be shared. 
  */
@@ -44,53 +49,59 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @private
     id _reserved;
 }
-@property (assign) id <NSSharingServiceDelegate> delegate;
+@property (nullable, assign) id <NSSharingServiceDelegate> delegate;
 @property (readonly, copy) NSString *title;
 @property (readonly, strong) NSImage *image;
-@property (readonly, strong) NSImage *alternateImage;
+@property (nullable, readonly, strong) NSImage *alternateImage;
 
 /* Title of the service in the Share menu. Can be modified. */
-@property (copy) NSString *menuItemTitle NS_AVAILABLE_MAC(10_9); 
+@property (copy) NSString *menuItemTitle NS_AVAILABLE_MAC(10_9);
 
 /* These properties are used for configuration of the service. They need to be set when the NSSharingService is created or in sharingService:willShareItems:
  */
-@property (copy) NSArray *recipients NS_AVAILABLE_MAC(10_9);    // NSArray of NSString objects representing handles (example: email adresses)
-@property (copy) NSString *subject NS_AVAILABLE_MAC(10_9);
+@property (nullable, copy) NSArray<NSString *> *recipients NS_AVAILABLE_MAC(10_9);    // NSArray of NSString objects representing handles (example: email adresses)
+@property (nullable, copy) NSString *subject NS_AVAILABLE_MAC(10_9);
 
 /* These read-only properties allow for querying of the shared content:
  */
 // Message body as string
-@property (readonly, copy) NSString *messageBody NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, copy) NSString *messageBody NS_AVAILABLE_MAC(10_9);
 // URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
-@property (readonly, copy) NSURL *permanentLink NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, copy) NSURL *permanentLink NS_AVAILABLE_MAC(10_9);
 // Account name used for sending on Twitter or Sina Weibo
-@property (readonly, copy) NSString *accountName NS_AVAILABLE_MAC(10_9);
-// NSArray of NSURL objects representing the file that were shared
-@property (readonly, copy) NSArray *attachmentFileURLs NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, copy) NSString *accountName NS_AVAILABLE_MAC(10_9);
+// NSArray of NSURL objects representing the files that were shared
+@property (nullable, readonly, copy) NSArray<NSURL *> *attachmentFileURLs NS_AVAILABLE_MAC(10_9);
 
 
 
 /* Returns a list of NSSharingServices which could share all the provided items together. sharingServicesForItems can be used to build a custom UI, or to populate a contextual NSMenu. 
+   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
  */
-+ (NSArray *)sharingServicesForItems:(NSArray *)items;
++ (NSArray<NSSharingService *> *)sharingServicesForItems:(NSArray *)items;
 
 
 /* Returns an NSSharingService representing one of the built-in services. 
  */
-+ (NSSharingService *)sharingServiceNamed:(NSString *)serviceName;
++ (nullable NSSharingService *)sharingServiceNamed:(NSString *)serviceName;
 
 
 /* Creates a custom NSSharingService object. Custom sharing services can be added to the NSSharingServicePicker with the sharingServicePicker:sharingServicesForItems:proposedSharingServices: delegate method.
  */
-- (instancetype)initWithTitle:(NSString *)title image:(NSImage *)image alternateImage:(NSImage *)alternateImage handler:(void (^)(void))block;
+- (instancetype)initWithTitle:(NSString *)title image:(NSImage *)image alternateImage:(nullable NSImage *)alternateImage handler:(void (^)(void))block NS_DESIGNATED_INITIALIZER;
 
+/* Use -initWithTitle:image:alternateImage:handler: instead 
+ */
+- (instancetype)init NS_UNAVAILABLE;
 
 /* Returns whether a service can do something with all the provided items. This can be used to validate a custom UI such as a dedicated Twitter button. If items is nil, the method will return YES when the service is configured. Therefore you could call it once at launch time with nil items to check whether to display the button or not, and then with real items to enable and disable the button depending on the context or selection.
+   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
  */
-- (BOOL)canPerformWithItems:(NSArray *)items;
+- (BOOL)canPerformWithItems:(nullable NSArray *)items;
 
 
 /* Manually performs the service on the provided items. In most cases this will display a sharing window.
+   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
  */
 - (void)performWithItems:(NSArray *)items;
 
@@ -119,9 +130,9 @@ typedef NS_ENUM(NSInteger, NSSharingContentScope) {
 
 /* The following methods are invoked when the service is performed and the sharing window pops up, to present a transition between the original items and the sharing window.
  */
-- (NSRect)sharingService:(NSSharingService *)sharingService sourceFrameOnScreenForShareItem:(id <NSPasteboardWriting>)item;
-- (NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id <NSPasteboardWriting>)item contentRect:(NSRect *)contentRect;
-- (NSWindow *)sharingService:(NSSharingService *)sharingService sourceWindowForShareItems:(NSArray *)items sharingContentScope:(NSSharingContentScope *)sharingContentScope;
+- (NSRect)sharingService:(NSSharingService *)sharingService sourceFrameOnScreenForShareItem:(id)item;
+- (NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id)item contentRect:(NSRect *)contentRect;
+- (nullable NSWindow *)sharingService:(NSSharingService *)sharingService sourceWindowForShareItems:(NSArray *)items sharingContentScope:(NSSharingContentScope *)sharingContentScope;
 
 @end
 
@@ -138,12 +149,15 @@ NS_CLASS_AVAILABLE(10_8, NA)
     id _reserved;
 }
 
-@property (assign) id <NSSharingServicePickerDelegate> delegate;
+@property (nullable, assign) id <NSSharingServicePickerDelegate> delegate;
 
-/*  Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol. (e.g. NSString, NSImage, NSURL, etc.)
+/*  Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
  */
-- (instancetype)initWithItems:(NSArray *)items;
+- (instancetype)initWithItems:(NSArray *)items NS_DESIGNATED_INITIALIZER;
 
+/* Use -initWithItems: instead
+ */
+- (instancetype)init NS_UNAVAILABLE;
 
 /* Shows the picker, populated with sharing services related to the instance items. When the user selects one of the sharing services, the sharing service will be performed. Note that this method must be called on mouseDown.
  */
@@ -164,17 +178,21 @@ NS_CLASS_AVAILABLE(10_8, NA)
                                            }] autorelease];
         [sharingServices addObject:customService];
         return [sharingServices autorelease];
+  The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
  */
-- (NSArray *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker sharingServicesForItems:(NSArray *)items proposedSharingServices:(NSArray *)proposedServices;
+- (NSArray<NSSharingService *> *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker sharingServicesForItems:(NSArray *)items proposedSharingServices:(NSArray<NSSharingService *> *)proposedServices;
 
 
 /* Invoked when the user has selected a service and the picker is about to execute it.
  */
-- (id <NSSharingServiceDelegate>)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker delegateForSharingService:(NSSharingService *)sharingService;
+- (nullable id <NSSharingServiceDelegate>)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker delegateForSharingService:(NSSharingService *)sharingService;
 
 
 /* Invoked when the user has selected a service and before it is executed. Service will be nil if the picker was dismissed.
  */
-- (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(NSSharingService *)service;
+- (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(nullable NSSharingService *)service;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

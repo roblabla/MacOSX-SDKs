@@ -1,13 +1,12 @@
-/*=============================================================================
-	DefaultAudioOutput.h
-	
-	Public interface to the default audio output AudioUnit.
-	
-	Copyright (c) 2000 - 2008 Apple, Inc.  All Rights Reserved
-=============================================================================*/
+/*!
+	@file		DefaultAudioOutput.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2000-2015 by Apple, Inc., all rights reserved.
+	@abstract	Deprecated.
+*/
 
-#ifndef __DefaultAudioOutput_h__
-#define __DefaultAudioOutput_h__
+#ifndef AudioToolbox_DefaultAudioOutput_h
+#define AudioToolbox_DefaultAudioOutput_h
 
 #if !__LP64__
 
@@ -34,4 +33,4 @@ extern OSStatus	OpenSystemSoundAudioOutput(AudioUnit *outUnit)	__OSX_AVAILABLE_B
 
 #endif // !__LP64__
 
-#endif // __DefaultAudioOutput_h__
+#endif // AudioToolbox_DefaultAudioOutput_h

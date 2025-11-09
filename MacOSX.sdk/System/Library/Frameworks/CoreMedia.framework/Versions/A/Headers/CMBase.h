@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
 	
-    Copyright 2006-2013 Apple Inc. All rights reserved.
+    Copyright 2006-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -14,6 +14,10 @@
 #include <Availability.h>
 #include <AvailabilityMacros.h>
 
+// Pre-10.11, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_11
+	#define __AVAILABILITY_INTERNAL__MAC_10_11 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
 // Pre-10.10, weak import
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_10
 	#define __AVAILABILITY_INTERNAL__MAC_10_10 __AVAILABILITY_INTERNAL_WEAK_IMPORT
@@ -59,6 +63,11 @@
 #define __AVAILABILITY_INTERNAL__MAC_10_10 __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
+// Pre-9.0, weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_9_0
+#define __AVAILABILITY_INTERNAL__IPHONE_9_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
 // Pre-8.0, weak import
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_8_0
 #define __AVAILABILITY_INTERNAL__IPHONE_8_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
@@ -67,6 +76,14 @@
 // Deprecations
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_3_0_DEP__IPHONE_7_0
 #define __AVAILABILITY_INTERNAL__IPHONE_3_0_DEP__IPHONE_7_0 WEAK_IMPORT_ATTRIBUTE
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_8_DEP__MAC_10_11
+#define __AVAILABILITY_INTERNAL__MAC_10_8_DEP__MAC_10_11 WEAK_IMPORT_ATTRIBUTE
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_6_0_DEP__IPHONE_9_0
+#define __AVAILABILITY_INTERNAL__IPHONE_6_0_DEP__IPHONE_9_0 WEAK_IMPORT_ATTRIBUTE
 #endif
 
 #include <stdint.h>						// int32_t, etc.
@@ -100,8 +117,74 @@ typedef signed long	CMItemCount;
 typedef signed long	CMItemIndex;
 #endif
 
+#define COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS	(__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+
+#if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature)
+#if __has_feature(nullability)
+	#define COREMEDIA_DECLARE_NULLABILITY 1
+#endif
+#if __has_feature(assume_nonnull)
+	#define COREMEDIA_DECLARE_NULLABILITY_BEGIN_END 1
+#endif
+#if __has_feature(objc_bridge_id)
+	#define COREMEDIA_DECLARE_BRIDGED_TYPES 1
+#endif
+#if __has_feature(attribute_cf_returns_retained)
+	#define COREMEDIA_DECLARE_RETURNS_RETAINED 1
+#endif
+#if __has_feature(attribute_cf_returns_on_parameters)
+	#define COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS 1
+	#define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS 1
+#endif
+#endif // (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature)
+
+#if COREMEDIA_DECLARE_NULLABILITY
+#define CM_NULLABLE __nullable
+#define CM_NONNULL __nonnull
+#else
+#define CM_NULLABLE
+#define CM_NONNULL
+#endif
+
+#if COREMEDIA_DECLARE_NULLABILITY_BEGIN_END
+#define CM_ASSUME_NONNULL_BEGIN _Pragma("clang assume_nonnull begin")
+#define CM_ASSUME_NONNULL_END   _Pragma("clang assume_nonnull end")
+#else
+#define CM_ASSUME_NONNULL_BEGIN
+#define CM_ASSUME_NONNULL_END
+#endif
+	
+#if COREMEDIA_DECLARE_BRIDGED_TYPES
+#define CM_BRIDGED_TYPE(type)	CF_BRIDGED_TYPE(type)
+#else
+#define CM_BRIDGED_TYPE(type)
+#endif
+	
+#if COREMEDIA_DECLARE_RETURNS_RETAINED
+#define CM_RETURNS_RETAINED		CF_RETURNS_RETAINED
+#else
+#define CM_RETURNS_RETAINED
+#endif
+	
+#if COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS
+#define CM_RETURNS_RETAINED_PARAMETER	CF_RETURNS_RETAINED
+#else
+#define CM_RETURNS_RETAINED_PARAMETER
+#endif
+	
+#if COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS
+#define CM_RETURNS_NOT_RETAINED_PARAMETER	CF_RETURNS_NOT_RETAINED
+#else
+#define CM_RETURNS_NOT_RETAINED_PARAMETER
+#endif
+	
 typedef int32_t CMPersistentTrackID;
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMPersistentTrackID
+#else
+enum
+#endif
+{
 	kCMPersistentTrackID_Invalid = 0
 };
 

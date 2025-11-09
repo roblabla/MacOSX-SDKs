@@ -1,12 +1,14 @@
 /*
 	NSSlider.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSSliderCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSSlider : NSControl <NSAccessibilitySlider>
 
@@ -17,20 +19,20 @@
 @property double altIncrementValue;
 @property (readonly) CGFloat knobThickness;
 @property (getter=isVertical, readonly) NSInteger vertical;
-- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)theEvent;
 
 /* These methods have never done anything, and are formally deprecated as of 10.9*/
-- (void)setTitleCell:(NSCell *)aCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleColor:(NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleFont:(NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitle:(NSString *)aString NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleCell:(null_unspecified NSCell *)aCell NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleColor:(null_unspecified NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleFont:(null_unspecified NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitle:(null_unspecified NSString *)aString NS_DEPRECATED_MAC(10_0, 10_9);
 - (void)setKnobThickness:(CGFloat)aFloat NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setImage:(NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setImage:(null_unspecified NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9);
 @end
 
 @interface NSSlider(NSTickMarkSupport)
@@ -64,3 +66,5 @@
 - (double)closestTickMarkValueToValue:(double)value;
 
 @end
+
+NS_ASSUME_NONNULL_END

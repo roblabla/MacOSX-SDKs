@@ -1,7 +1,7 @@
 /* 
     NSMediaLibraryBrowserController.h
     Application Kit
-    Copyright (c) 2012-2014, Apple Inc.
+    Copyright (c) 2012-2015, Apple Inc.
     All rights reserved.
 */
 
@@ -18,6 +18,8 @@
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, NSMediaLibrary) {
     NSMediaLibraryAudio = 1UL << 0,
@@ -47,6 +49,8 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @property NSMediaLibrary mediaLibraries;
 
 + (NSMediaLibraryBrowserController*)sharedMediaLibraryBrowserController;
-- (IBAction)togglePanel:(id)sender;
+- (IBAction)togglePanel:(nullable id)sender;
 
 @end
+
+NS_ASSUME_NONNULL_END

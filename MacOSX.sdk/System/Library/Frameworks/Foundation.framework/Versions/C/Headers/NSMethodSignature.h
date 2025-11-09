@@ -1,16 +1,19 @@
 /*	NSMethodSignature.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 @interface NSMethodSignature : NSObject {
 @private
     void *_private;
     void *_reserved[6];
 }
 
-+ (NSMethodSignature *)signatureWithObjCTypes:(const char *)types;
++ (nullable NSMethodSignature *)signatureWithObjCTypes:(const char *)types;
 
 @property (readonly) NSUInteger numberOfArguments;
 - (const char *)getArgumentTypeAtIndex:(NSUInteger)idx NS_RETURNS_INNER_POINTER;
@@ -24,3 +27,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

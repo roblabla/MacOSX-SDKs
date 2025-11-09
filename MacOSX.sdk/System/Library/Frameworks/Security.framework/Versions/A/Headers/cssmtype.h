@@ -1109,6 +1109,7 @@ enum {
 	CSSM_PADDING_CIPHERSTEALING =		CSSM_PADDING_NONE + 8,
 	CSSM_PADDING_RANDOM =				CSSM_PADDING_NONE + 9,
 	CSSM_PADDING_PKCS1 =				CSSM_PADDING_NONE + 10,
+    CSSM_PADDING_SIGRAW =               CSSM_PADDING_NONE + 11,
 /* All padding types that are vendor specific, and not
    part of the CSSM specification should be defined
    relative to CSSM_PADDING_VENDOR_DEFINED. */

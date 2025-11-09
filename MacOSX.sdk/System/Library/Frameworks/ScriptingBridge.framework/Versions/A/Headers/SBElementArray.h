@@ -6,21 +6,25 @@
 #import <ScriptingBridge/SBObject.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_CLASS_AVAILABLE(10_5, NA)
-@interface SBElementArray : NSMutableArray
+@interface SBElementArray<ObjectType> : NSMutableArray<ObjectType>
 {
 	SBObject *_parent;
 	DescType _elementCode;
 	void *_reserved;
 }
 
-- (id) objectWithName:(NSString *)name;
-- (id) objectWithID:(id)identifier;
-- (id) objectAtLocation:(id)location;
+- (ObjectType) objectWithName:(NSString *)name;
+- (ObjectType) objectWithID:(id)identifier;
+- (ObjectType) objectAtLocation:(id)location;
 
-- (NSArray *) arrayByApplyingSelector:(SEL)selector;
-- (NSArray *) arrayByApplyingSelector:(SEL)aSelector withObject:(id)argument;
+- (NSArray<id> *) arrayByApplyingSelector:(SEL)selector;
+- (NSArray<id> *) arrayByApplyingSelector:(SEL)aSelector withObject:(id)argument;
 
-- (NSArray *) get;
+- (nullable NSArray<ObjectType> *) get;
 
 @end
+
+NS_ASSUME_NONNULL_END

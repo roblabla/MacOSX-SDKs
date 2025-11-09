@@ -15,6 +15,8 @@ typedef NS_ENUM(NSInteger, SKTextureFilteringMode) {
     SKTextureFilteringLinear,
 } NS_ENUM_AVAILABLE(10_9, 7_0);
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  A texture to be mapped onto SKSpriteNode instances.
  */
@@ -132,6 +134,12 @@ SK_EXPORT @interface SKTexture : NSObject <NSCopying, NSCoding>
  */
 @property (nonatomic) BOOL usesMipmaps;
 
+
+/**
+ Convert the current SKTexture into a CGImageRef object
+ */
+@property(nonatomic, readonly) CGImageRef CGImage NS_AVAILABLE(10_11, 9_0);
+
 /**
  Start a texture preload operation on an array of textures
  
@@ -139,7 +147,7 @@ SK_EXPORT @interface SKTexture : NSObject <NSCopying, NSCoding>
  @param completionhandler will be called upon the preload completion
  
  */
-+ (void)preloadTextures:(NSArray *)textures withCompletionHandler:(void(^)(void))completionHandler;
++ (void)preloadTextures:(NSArray<SKTexture*> *)textures withCompletionHandler:(void(^)(void))completionHandler;
 
 /**
  Request that this texture be loaded into vram on the next render update, with a callback handler.
@@ -147,3 +155,5 @@ SK_EXPORT @interface SKTexture : NSObject <NSCopying, NSCoding>
 - (void)preloadWithCompletionHandler:(void(^)(void))completionHandler;
 
 @end
+
+NS_ASSUME_NONNULL_END

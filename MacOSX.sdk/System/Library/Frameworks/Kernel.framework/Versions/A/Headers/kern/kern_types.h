@@ -148,4 +148,12 @@ typedef int wait_timeout_urgency_t;
 #define TIMEOUT_URGENCY_FIRST_AVAIL	0x40		/* first available bit outside of urgency mask/leeway */
 #define	TIMEOUT_URGENCY_RATELIMITED	0x80
 
+/*
+ * Timeout and deadline tokens for waits.
+ * The following tokens define common values for leeway and deadline parameters.
+ */
+#define TIMEOUT_NO_LEEWAY		(0ULL)
+#define TIMEOUT_WAIT_FOREVER		(0ULL)
+
+
 #endif	/* _KERN_KERN_TYPES_H_ */

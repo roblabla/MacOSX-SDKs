@@ -1,12 +1,14 @@
 /*
     NSUserInterfaceItemIdentification.h
     Application Kit
-    Copyright (c) 2006-2014, Apple Inc.
+    Copyright (c) 2006-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <AppKit/AppKitDefines.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSString;
 
@@ -20,6 +22,8 @@ To help avoid collision of identifiers, it is recommended that identifiers use t
 
 The slash '/', backslash '\', and colon ':' characters are reserved and should not be used in identifiers.
  */
-@property (copy) NSString *identifier;
+@property (nullable, copy) NSString *identifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*	CFPlugInCOM.h
-	Copyright (c) 1999-2014, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2015, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPLUGINCOM__)
@@ -59,11 +59,21 @@ typedef CFUUIDBytes REFIID;
 /* The IUnknown interface */
 #define IUnknownUUID CFUUIDGetConstantUUIDWithBytes(kCFAllocatorSystemDefault, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)
 
+#if __clang__
+#define __PRAGMA_PUSH_NO_NULLABILITY_COMPLETENESS_WARNINGS _Pragma("clang diagnostic push") _Pragma("clang diagnostic ignored \"-Wnullability-completeness\"")
+#define __PRAGMA_POP_NO_NULLABILITY_COMPLETENESS_WARNINGS _Pragma("clang diagnostic pop")
+#else
+#define __PRAGMA_PUSH_NO_NULLABILITY_COMPLETENESS_WARNINGS
+#define __PRAGMA_POP_NO_NULLABILITY_COMPLETENESS_WARNINGS
+#endif
+
 #define IUNKNOWN_C_GUTS \
+    __PRAGMA_PUSH_NO_NULLABILITY_COMPLETENESS_WARNINGS \
     void *_reserved; \
     HRESULT (STDMETHODCALLTYPE *QueryInterface)(void *thisPointer, REFIID iid, LPVOID *ppv); \
     ULONG (STDMETHODCALLTYPE *AddRef)(void *thisPointer); \
-    ULONG (STDMETHODCALLTYPE *Release)(void *thisPointer)
+    ULONG (STDMETHODCALLTYPE *Release)(void *thisPointer) \
+    __PRAGMA_POP_NO_NULLABILITY_COMPLETENESS_WARNINGS
     
 typedef struct IUnknownVTbl {
     IUNKNOWN_C_GUTS;

@@ -1,16 +1,20 @@
 /*
     NSFetchRequest.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <CoreData/NSPersistentStoreRequest.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSEntityDescription;
 @class NSManagedObjectModel;
 @class NSPredicate;
+@class NSPersistentStore;
+@class NSSortDescriptor;
 
 /* Definition of the possible result types a fetch request can return. */
 
@@ -52,21 +56,21 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
     } _flags;
 }
 
-+ (NSFetchRequest*)fetchRequestWithEntityName:(NSString*)entityName NS_AVAILABLE(10_7, 4_0);
++ (instancetype)fetchRequestWithEntityName:(NSString*)entityName NS_AVAILABLE(10_7, 4_0);
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithEntityName:(NSString*)entityName NS_AVAILABLE(10_7, 4_0);
 
-@property (nonatomic, strong) NSEntityDescription *entity;
-@property (nonatomic, readonly, strong) NSString *entityName NS_AVAILABLE(10_7, 4_0);
+@property (nullable, nonatomic, strong) NSEntityDescription *entity;
+@property (nullable, nonatomic, readonly, strong) NSString *entityName NS_AVAILABLE(10_7, 4_0);
 
-@property (nonatomic, strong) NSPredicate *predicate;
+@property (nullable, nonatomic, strong) NSPredicate *predicate;
 
-@property (nonatomic, strong) NSArray *sortDescriptors;
+@property (nullable, nonatomic, strong) NSArray<NSSortDescriptor *> *sortDescriptors;
 
 @property (nonatomic) NSUInteger fetchLimit;
 
-@property (nonatomic, strong) NSArray *affectedStores;
+@property (nullable, nonatomic, strong) NSArray<NSPersistentStore *> *affectedStores;
 
 /* Returns/sets the result type of the fetch request (the instance type of objects returned from executing the request.)  Setting the value to NSManagedObjectIDResultType will demote any sort orderings to "best effort" hints if property values are not included in the request.  Defaults to NSManagedObjectResultType.   
 */
@@ -89,7 +93,7 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 
 /* Returns/sets an array of relationship keypaths to prefetch along with the entity for the request.  The array contains keypath strings in NSKeyValueCoding notation, as you would normally use with valueForKeyPath.  (Prefetching allows Core Data to obtain developer-specified related objects in a single fetch (per entity), rather than incurring subsequent access to the store for each individual record as their faults are tripped.)  Defaults to an empty array (no prefetching.) 
 */
-@property (nonatomic, copy) NSArray *relationshipKeyPathsForPrefetching NS_AVAILABLE(10_5,3_0);
+@property (nullable, nonatomic, copy) NSArray<NSString *> *relationshipKeyPathsForPrefetching NS_AVAILABLE(10_5,3_0);
 
 
 /* Results accommodate the currently unsaved changes in the NSManagedObjectContext.  When disabled, the fetch request skips checking unsaved changes and only returns objects that matched the predicate in the persistent store.  Defaults to YES.
@@ -100,7 +104,7 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 @property (nonatomic) BOOL returnsDistinctResults NS_AVAILABLE(10_6, 3_0);
 
 /* Specifies a collection of either NSPropertyDescriptions or NSString property names that should be fetched. The collection may represent attributes, to-one relationships, or NSExpressionDescription.  If NSDictionaryResultType is set, the results of the fetch will be dictionaries containing key/value pairs where the key is the name of the specified property description.  If NSManagedObjectResultType is set, then NSExpressionDescription cannot be used, and the results are managed object faults partially pre-populated with the named properties */
-@property (nonatomic, copy) NSArray *propertiesToFetch NS_AVAILABLE(10_6, 3_0);
+@property (nullable, nonatomic, copy) NSArray *propertiesToFetch NS_AVAILABLE(10_6, 3_0);
 
 /* Allows you to specify an offset at which rows will begin being returned.  Effectively, the request will skip over 'offset' number of matching entries.  For example, given a fetch which would normally return a, b, c, and d, specifying an offset of 1 will return b, c, and d and an offset of 4  will return an empty array. Offsets are ignored in nested requests such as subqueries.  Default value is 0.  */
 @property (nonatomic) NSUInteger fetchOffset NS_AVAILABLE(10_6, 3_0);
@@ -116,10 +120,12 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
  any to-many steps. 
  If GROUP BY is used, then you must set the resultsType to NSDictionaryResultsType, and the SELECT values must be literals, aggregates, 
  or columns specified in the GROUP BY. Aggregates will operate on the groups specified in the GROUP BY rather than the whole table. */
-@property (nonatomic, copy) NSArray *propertiesToGroupBy NS_AVAILABLE(10_7,  5_0); 
+@property (nullable, nonatomic, copy) NSArray *propertiesToGroupBy NS_AVAILABLE(10_7,  5_0);
 
 /* Specifies a predicate that will be used to filter rows being returned by a query containing a GROUP BY. If a having predicate is
  supplied, it will be run after the GROUP BY.  Specifying a HAVING predicate requires that a GROUP BY also be specified. */
-@property (nonatomic, strong) NSPredicate *havingPredicate NS_AVAILABLE(10_7,  5_0);
+@property (nullable, nonatomic, strong) NSPredicate *havingPredicate NS_AVAILABLE(10_7,  5_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

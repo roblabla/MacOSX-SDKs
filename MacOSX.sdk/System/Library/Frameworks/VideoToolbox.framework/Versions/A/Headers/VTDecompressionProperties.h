@@ -22,6 +22,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
+	
+CM_ASSUME_NONNULL_BEGIN
 
 /*!
 	@header
@@ -360,6 +362,8 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedR
 */
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelTransferProperties __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
 
+	
+CM_ASSUME_NONNULL_END
 
 #pragma pack(pop)
     

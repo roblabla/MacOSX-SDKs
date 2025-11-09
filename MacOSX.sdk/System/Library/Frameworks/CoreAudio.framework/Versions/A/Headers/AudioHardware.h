@@ -11,8 +11,8 @@
                      http://developer.apple.com/bugreporter/
 
 ==================================================================================================*/
-#if !defined(__AudioHardware_h__)
-#define __AudioHardware_h__
+#if !defined(CoreAudio_AudioHardware_h)
+#define CoreAudio_AudioHardware_h
 
 //==================================================================================================
 #pragma mark -
@@ -77,22 +77,18 @@
 */
 
 //==================================================================================================
-//  Includes
+#pragma mark -
+#pragma mark Includes
 
 #include <Availability.h>
 #include <CoreAudio/CoreAudioTypes.h>
 #include <CoreAudio/AudioHardwareBase.h>
 #include <CoreFoundation/CoreFoundation.h>
-
-#if defined(__BLOCKS__)
-    #include <dispatch/dispatch.h>
-#endif
+#include <dispatch/dispatch.h>
 
 //==================================================================================================
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint off
-#endif
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -109,7 +105,7 @@ extern "C"
                         The AudioObjectID that always refers to the one and only instance of the
                         AudioSystemObject class.
 */
-enum
+CF_ENUM(int)
 {
     kAudioObjectSystemObject    = 1
 };
@@ -143,10 +139,8 @@ enum
 typedef OSStatus
 (*AudioObjectPropertyListenerProc)( AudioObjectID                       inObjectID,
                                     UInt32                              inNumberAddresses,
-                                    const AudioObjectPropertyAddress    inAddresses[],
-                                    void*                               inClientData);
-
-#if defined(__BLOCKS__)
+                                    const AudioObjectPropertyAddress*   inAddresses,
+                                    void* __nullable                    inClientData);
 
 /*!
     @typedef        AudioObjectPropertyListenerBlock
@@ -166,9 +160,7 @@ typedef OSStatus
 */
 typedef void
 (^AudioObjectPropertyListenerBlock)(    UInt32                              inNumberAddresses,
-                                        const AudioObjectPropertyAddress    inAddresses[]);
-
-#endif  //  __BLOCKS__
+                                        const AudioObjectPropertyAddress*   inAddresses);
 
 //==================================================================================================
 #pragma mark AudioObject Properties
@@ -192,7 +184,7 @@ typedef void
                         this property is for the HAL shell to notify AudioObjects implemented by an
                         AudioPlugIn when a listener is removed.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioObjectPropertyCreator             = 'oplg',
     kAudioObjectPropertyListenerAdded       = 'lisa',
@@ -268,7 +260,7 @@ extern OSStatus
 AudioObjectGetPropertyDataSize( AudioObjectID                       inObjectID,
                                 const AudioObjectPropertyAddress*   inAddress,
                                 UInt32                              inQualifierDataSize,
-                                const void*                         inQualifierData,
+                                const void* __nullable              inQualifierData,
                                 UInt32*                             outDataSize)                    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
@@ -299,7 +291,7 @@ extern OSStatus
 AudioObjectGetPropertyData( AudioObjectID                       inObjectID,
                             const AudioObjectPropertyAddress*   inAddress,
                             UInt32                              inQualifierDataSize,
-                            const void*                         inQualifierData,
+                            const void* __nullable              inQualifierData,
                             UInt32*                             ioDataSize,
                             void*                               outData)                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
@@ -332,7 +324,7 @@ extern OSStatus
 AudioObjectSetPropertyData( AudioObjectID                       inObjectID,
                             const AudioObjectPropertyAddress*   inAddress,
                             UInt32                              inQualifierDataSize,
-                            const void*                         inQualifierData,
+                            const void* __nullable              inQualifierData,
                             UInt32                              inDataSize,
                             const void*                         inData)                             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
@@ -355,7 +347,7 @@ extern OSStatus
 AudioObjectAddPropertyListener( AudioObjectID                       inObjectID,
                                 const AudioObjectPropertyAddress*   inAddress,
                                 AudioObjectPropertyListenerProc     inListener,
-                                void*                               inClientData)                   __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+                                void* __nullable                    inClientData)                   __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function       AudioObjectRemovePropertyListener
@@ -376,9 +368,7 @@ extern OSStatus
 AudioObjectRemovePropertyListener(  AudioObjectID                       inObjectID,
                                     const AudioObjectPropertyAddress*   inAddress,
                                     AudioObjectPropertyListenerProc     inListener,
-                                    void*                               inClientData)               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
-#if defined(__BLOCKS__)
+                                    void* __nullable                    inClientData)               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function       AudioObjectAddPropertyListenerBlock
@@ -406,7 +396,7 @@ AudioObjectRemovePropertyListener(  AudioObjectID                       inObject
 extern OSStatus
 AudioObjectAddPropertyListenerBlock(    AudioObjectID                       inObjectID,
                                         const AudioObjectPropertyAddress*   inAddress,
-                                        dispatch_queue_t                    inDispatchQueue,
+                                        dispatch_queue_t __nullable         inDispatchQueue,
                                         AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
 
 /*!
@@ -427,10 +417,8 @@ AudioObjectAddPropertyListenerBlock(    AudioObjectID                       inOb
 extern OSStatus
 AudioObjectRemovePropertyListenerBlock( AudioObjectID                       inObjectID,
                                         const AudioObjectPropertyAddress*   inAddress,
-                                        dispatch_queue_t                    inDispatchQueue,
+                                        dispatch_queue_t __nullable         inDispatchQueue,
                                         AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-
-#endif  //  __BLOCKS__
 
 //==================================================================================================
 #pragma mark -
@@ -444,7 +432,7 @@ AudioObjectRemovePropertyListenerBlock( AudioObjectID                       inOb
     @constant       kAudioSystemObjectClassID
                         The AudioClassID that identifies the AudioSystemObject class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioSystemObjectClassID   = 'asys'
 };
@@ -452,7 +440,7 @@ enum
 /*!
     @enum           Power Hints
     @abstract       The values for kAudioHardwarePropertyPowerHint
-    @discussion     The system obect property, kAudioHardwarePropertyPowerHint, allows a process to
+    @discussion     The system object property, kAudioHardwarePropertyPowerHint, allows a process to
                     to indicate how aggressive the system can be with optimizations that save power.
                     Note that the value of this property can be set in an application's info.plist
                     using the key, "AudioHardwarePowerHint". The values for this key are the strings
@@ -461,12 +449,12 @@ enum
                         This is the default value and it indicates that the system will not make any
                         power optimizations that compromise latency or quality in order to save
                         power. The info.plist value is "None" or the "AudioHardwarePowerHint" entry
-                        can be ommitted entirely.
+                        can be omitted entirely.
     @constant       kAudioHardwarePowerHintFavorSavingPower
                         The system will choose to save power even at the expense of latency. The
                         info.plist value is "Favor Saving Power"
 */
-enum
+typedef CF_ENUM(UInt32, AudioHardwarePowerHint)
 {
     kAudioHardwarePowerHintNone             = 0,
     kAudioHardwarePowerHintFavorSavingPower = 1
@@ -571,18 +559,18 @@ enum
     @constant       kAudioHardwarePropertyServiceRestarted
                         A UInt32 whose value has no meaning. Rather, this property exists so that
                         clients can be informed when the service has been reset for some reason.
-                        When a reset happens, any state the client has , such as cached data or
+                        When a reset happens, any state the client has, such as cached data or
                         added listeners, must be re-established by the client.
     @constant       kAudioHardwarePropertyPowerHint
-                        A UInt32 whose values are drawn from the Power Hints enum above. Only those
-                        values are allowed. This property allows a process to indicate how
+                        A UInt32 whose values are drawn from the AudioHardwarePowerHint enum above.
+                        Only those values are allowed. This property allows a process to indicate how
                         aggressive the system can be with optimizations that save power. The default
                         value is kAudioHardwarePowerHintNone. Note that the value of this
                         property can be set in an application's info.plist using the key,
                         "AudioHardwarePowerHint". The values for this key are the strings that
                         correspond to the values in the Power Hints enum.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioHardwarePropertyDevices                               = 'dev#',
     kAudioHardwarePropertyDefaultInputDevice                    = 'dIn ',
@@ -642,7 +630,7 @@ AudioHardwareCreateAggregateDevice( CFDictionaryRef inDescription,
 /*!
     @function       AudioHardwareDestroyAggregateDevice
     @abstract       This routine destroys the given AudioAggregateDevice.
-    @discussion     The actual desctruction of the device is asynchronous and may take place after
+    @discussion     The actual destruction of the device is asynchronous and may take place after
                     the call to this routine has returned.
     @param          inDeviceID
                         The AudioObjectID of the AudioAggregateDevice to destroy.
@@ -673,7 +661,7 @@ AudioHardwareDestroyAggregateDevice(AudioObjectID inDeviceID)                   
                         value of the property is the AudioObjectID of the AudioAggregateDevice to
                         destroy.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioPlugInCreateAggregateDevice   = 'cagg',
     kAudioPlugInDestroyAggregateDevice  = 'dagg'
@@ -702,7 +690,7 @@ enum
                         value of the property is the AudioObjectID of the AudioAggregateDevice to
                         destroy.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioTransportManagerCreateEndPointDevice  = 'cdev',
     kAudioTransportManagerDestroyEndPointDevice = 'ddev'
@@ -762,9 +750,7 @@ typedef OSStatus
                         const AudioTimeStamp*   inInputTime,
                         AudioBufferList*        outOutputData,
                         const AudioTimeStamp*   inOutputTime,
-                        void*                   inClientData);
-
-#if defined(__BLOCKS__)
+                        void* __nullable        inClientData);
 
 /*!
     @typedef        AudioDeviceIOBlock
@@ -808,8 +794,6 @@ typedef void
                         const AudioTimeStamp*   inInputTime,
                         AudioBufferList*        outOutputData,
                         const AudioTimeStamp*   inOutputTime);
-
-#endif  //  __BLOCKS__
 
 /*!
     @typedef        AudioDeviceIOProcID
@@ -861,7 +845,7 @@ typedef struct AudioHardwareIOProcStreamUsage   AudioHardwareIOProcStreamUsage;
                         start time. Clear to indicate that the HAL should be consulted. This flag
                         cannot be set if kAudioDeviceStartTimeDontConsultDeviceFlag is set.
 */
-enum
+CF_ENUM(UInt32)
 {
     kAudioDeviceStartTimeIsInputFlag            = (1 << 0),
     kAudioDeviceStartTimeDontConsultDeviceFlag  = (1 << 1),
@@ -957,7 +941,7 @@ enum
                         A Float64 that indicates the current actual sample rate of the AudioDevice
                         as measured by its time stamps.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioDevicePropertyPlugIn                          = 'plug',
     kAudioDevicePropertyDeviceHasChanged                = 'diff',
@@ -1236,7 +1220,7 @@ enum
                         that element inaudible. The property is implemented by an AudioControl
                         object that is a subclass of AudioLFEMuteControl.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioDevicePropertyJackIsConnected                                 = 'jack',
     kAudioDevicePropertyVolumeScalar                                    = 'volm',
@@ -1312,12 +1296,10 @@ enum
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioDeviceCreateIOProcID(  AudioObjectID           inDevice,
-                            AudioDeviceIOProc       inProc,
-                            void*                   inClientData,
-                            AudioDeviceIOProcID*    outIOProcID)                                    __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
-
-#if defined(__BLOCKS__)
+AudioDeviceCreateIOProcID(  AudioObjectID                               inDevice,
+                            AudioDeviceIOProc                           inProc,
+                            void* __nullable                            inClientData,
+                            AudioDeviceIOProcID __nullable * __nonnull  outIOProcID)                                    __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /*!
     @function       AudioDeviceCreateIOProcIDWithBlock
@@ -1338,12 +1320,10 @@ AudioDeviceCreateIOProcID(  AudioObjectID           inDevice,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioDeviceCreateIOProcIDWithBlock( AudioDeviceIOProcID*    outIOProcID,
-                                    AudioObjectID           inDevice,
-                                    dispatch_queue_t        inDispatchQueue,
-                                    AudioDeviceIOBlock      inIOBlock)                              __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-
-#endif  //  __BLOCKS__
+AudioDeviceCreateIOProcIDWithBlock( AudioDeviceIOProcID __nullable * __nonnull  outIOProcID,
+                                    AudioObjectID                               inDevice,
+                                    dispatch_queue_t __nullable                 inDispatchQueue,
+                                    AudioDeviceIOBlock                          inIOBlock)                              __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
 
 /*!
     @function       AudioDeviceDestroyIOProcID
@@ -1357,8 +1337,8 @@ AudioDeviceCreateIOProcIDWithBlock( AudioDeviceIOProcID*    outIOProcID,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioDeviceDestroyIOProcID( AudioObjectID           inDevice,
-                            AudioDeviceIOProcID     inIOProcID)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+AudioDeviceDestroyIOProcID( AudioObjectID       inDevice,
+                            AudioDeviceIOProcID inIOProcID)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /*!
     @function       AudioDeviceStart
@@ -1374,8 +1354,8 @@ AudioDeviceDestroyIOProcID( AudioObjectID           inDevice,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioDeviceStart(   AudioObjectID       inDevice,
-                    AudioDeviceIOProcID inProcID)                                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioDeviceStart(   AudioObjectID                   inDevice,
+                    AudioDeviceIOProcID __nullable  inProcID)                                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioDeviceStartAtTime
@@ -1397,10 +1377,10 @@ AudioDeviceStart(   AudioObjectID       inDevice,
                     not NULL.
 */
 extern OSStatus
-AudioDeviceStartAtTime( AudioObjectID       inDevice,
-                        AudioDeviceIOProcID inProcID,
-                        AudioTimeStamp*     ioRequestedStartTime,
-                        UInt32              inFlags)                                                __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+AudioDeviceStartAtTime( AudioObjectID                   inDevice,
+                        AudioDeviceIOProcID __nullable  inProcID,
+                        AudioTimeStamp*                 ioRequestedStartTime,
+                        UInt32                          inFlags)                                                __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /*!
     @function       AudioDeviceStop
@@ -1412,8 +1392,8 @@ AudioDeviceStartAtTime( AudioObjectID       inDevice,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioDeviceStop(    AudioObjectID       inDevice,
-                    AudioDeviceIOProcID inProcID)                                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioDeviceStop(    AudioObjectID                   inDevice,
+                    AudioDeviceIOProcID __nullable  inProcID)                                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioDeviceGetCurrentTime
@@ -1422,7 +1402,10 @@ AudioDeviceStop(    AudioObjectID       inDevice,
     @param          inDevice
                         The AudioDevice to from which to get the time.
     @param          outTime
-                        An AudioTimeStamp into which the current time is put.
+                        An AudioTimeStamp into which the current time is put. On entry, the
+                        mFlags field specifies which representations to provide. Because not every
+                        device supports all time representations, on exit, the mFlags field will
+                        indicate what values are actually valid.
     @result         An OSStatus indicating success or failure. kAudioHardwareNotRunningError will be
                     returned if the AudioDevice isn't running.
 */
@@ -1491,7 +1474,7 @@ AudioDeviceGetNearestStartTime( AudioObjectID   inDevice,
     @constant       kAudioAggregateDeviceClassID
                         The AudioClassID that identifies the AudioAggregateDevice class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioAggregateDeviceClassID            = 'aagg'
 };
@@ -1578,7 +1561,7 @@ enum
                         serving as the master time base of the aggregate device. The caller is
                         responsible for releasing the returned CFObject.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioAggregateDevicePropertyFullSubDeviceList      = 'grup',
     kAudioAggregateDevicePropertyActiveSubDeviceList    = 'agrp',
@@ -1596,7 +1579,7 @@ enum
     @constant       kAudioSubDeviceClassID
                         The AudioClassID that identifies the AudioSubDevice class.
 */
-enum
+CF_ENUM(AudioClassID)
 {
     kAudioSubDeviceClassID     = 'asub'
 };
@@ -1609,7 +1592,7 @@ enum
                     kAudioSubDeviceDriftCompensationMaxQuality, with some commonly used settings
                     called out.
 */
-enum
+CF_ENUM(UInt32)
 {
     kAudioSubDeviceDriftCompensationMinQuality      = 0,
     kAudioSubDeviceDriftCompensationLowQuality      = 0x20,
@@ -1692,7 +1675,7 @@ enum
     @abstract       AudioObjectPropertySelector values provided by the AudioSubDevice class.
     @discussion     The AudioSubDevice class is a subclass of AudioDevice class and has the same
                     scope and element structure. However, AudioSubDevice objects do not implement an
-                    IO path of their own and as such do not implmenent any  AudioDevice properties
+                    IO path of their own and as such do not implement any  AudioDevice properties
                     associated with the IO path. They also don't have any streams.
     @constant       kAudioSubDevicePropertyExtraLatency
                         A Float64 indicating the number of sample frames to add to or subtract from
@@ -1706,7 +1689,7 @@ enum
                         the number, the worse the quality but also the less CPU is used to do the
                         compensation.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioSubDevicePropertyExtraLatency             = 'xltc',
     kAudioSubDevicePropertyDriftCompensation        = 'drft',
@@ -1719,13 +1702,10 @@ enum
 }
 #endif
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint reset
-#endif
+CF_ASSUME_NONNULL_END
 
 //==================================================================================================
-#pragma mark -
 
 #include <CoreAudio/AudioHardwareDeprecated.h>
 
-#endif  //  __AudioHardware_h__
+#endif  //  CoreAudio_AudioHardware_h

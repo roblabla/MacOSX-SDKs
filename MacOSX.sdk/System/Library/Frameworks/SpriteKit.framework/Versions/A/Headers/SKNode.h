@@ -4,14 +4,16 @@
  
  Nodes are the base scene graph nodes used in the SpriteKit scene graph.
  
-
+ 
  @copyright 2011 Apple, Inc. All rights reserve.
-
-*/
+ 
+ */
 
 #import <SpriteKit/SpriteKitBase.h>
 
-@class SKView, SKAction, SKScene, SKTexture, SKPhysicsBody, SKFieldNode, SKReachConstraints, SKConstraint;
+NS_ASSUME_NONNULL_BEGIN
+
+@class SKView, SKAction, SKScene, SKTexture, SKPhysicsBody, SKFieldNode, SKReachConstraints, SKConstraint, GKPolygonObstacle;
 
 /**
  Blend modes that the SKNode uses to compose with the framebuffer to produce blended colors.
@@ -22,7 +24,7 @@ typedef NS_ENUM(NSInteger, SKBlendMode) {
     SKBlendModeSubtract     = 2,    // Blends the source and destination colors by subtracting the source from the destination.
     SKBlendModeMultiply     = 3,    // Blends the source and destination colors by multiplying them.
     SKBlendModeMultiplyX2   = 4,    // Blends the source and destination colors by multiplying them and doubling the result.
-    SKBlendModeScreen       = 5,    // FIXME: Description needed
+    SKBlendModeScreen       = 5,    // Blends the source and destination colors by multiplying one minus the source with the destination and adding the source.
     SKBlendModeReplace      = 6     // Replaces the destination with the source (ignores alpha).
 } NS_ENUM_AVAILABLE(10_9, 7_0);
 
@@ -42,11 +44,11 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 /**
  Support coding and decoding via NSKeyedArchiver.
  */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)node;
 
-+ (instancetype)nodeWithFileNamed:(NSString*)filename;
++ (nullable instancetype)nodeWithFileNamed:(NSString*)filename;
 
 @property (nonatomic, readonly) CGRect frame;
 
@@ -109,14 +111,14 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
  
  If this is nil the node has not been added to another group and is thus the root node of its own graph.
  */
-@property (nonatomic, readonly) SKNode *parent;
+@property (nonatomic, readonly, nullable) SKNode *parent;
 
 
 /**
  The children of this node.
  
  */
-@property (nonatomic, readonly) NSArray *children;
+@property (nonatomic, readonly) NSArray<SKNode*> *children;
 
 
 /**
@@ -124,27 +126,27 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
  
  In general, this should be unique among peers in the scene graph.
  */
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy, nullable) NSString *name;
 
 /**
  The scene that the node is currently in.
  */
-@property (nonatomic, readonly) SKScene* scene;
+@property (nonatomic, readonly, nullable) SKScene* scene;
 
 /**
  Physics body attached to the node, with synchronized scale, rotation, and position
  */
-@property (nonatomic, retain) SKPhysicsBody *physicsBody;
+@property (nonatomic, retain, nullable) SKPhysicsBody *physicsBody;
 
 /**
  An optional dictionary that can be used to store your own data in a node. Defaults to nil.
  */
-@property (nonatomic, retain) NSMutableDictionary *userData;
+@property (nonatomic, retain, nullable) NSMutableDictionary *userData;
 
 /**
  Kinematic constraints, used in IK solving
  */
-@property (nonatomic, copy) SKReachConstraints *reachConstraints;
+@property (nonatomic, copy, nullable) SKReachConstraints *reachConstraints;
 
 
 /**
@@ -152,7 +154,7 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
  Constraints are evaluated each frame after actions and physics.
  The node's transform will be changed to satisfy the constraint.
  */
-@property (nonatomic, copy) NSArray *constraints;
+@property (nonatomic, copy, nullable) NSArray<SKConstraint*> *constraints;
 
 /**
  Sets both the x & y scale
@@ -172,12 +174,14 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 
 - (void)insertChild:(SKNode *)node atIndex:(NSInteger)index;
 
-- (void)removeChildrenInArray:(NSArray *)nodes;
+- (void)removeChildrenInArray:(NSArray<SKNode*> *)nodes;
 - (void)removeAllChildren;
 
 - (void)removeFromParent;
+- (void)moveToParent:(SKNode *)parent;
 
-- (SKNode *)childNodeWithName:(NSString *)name;
+- (nullable SKNode *)childNodeWithName:(NSString *)name;
+
 - (void)enumerateChildNodesWithName:(NSString *)name usingBlock:(void (^)(SKNode *node, BOOL *stop))block;
 
 /**
@@ -191,7 +195,7 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
  * @param name An Xpath style path that can include simple regular expressions for matching node names.
  * @see enumerateChildNodesWithName:usingBlock:
  */
-- (NSArray *)objectForKeyedSubscript:(NSString *)name NS_AVAILABLE(10_10, 8_0);
+- (NSArray<SKNode*> *)objectForKeyedSubscript:(NSString *)name NS_AVAILABLE(10_10, 8_0);
 
 /* Returns true if the specified parent is in this node's chain of parents */
 
@@ -202,14 +206,20 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 - (void)runAction:(SKAction *)action withKey:(NSString *)key;
 
 - (BOOL)hasActions;
-- (SKAction *)actionForKey:(NSString *)key;
+- (nullable SKAction *)actionForKey:(NSString *)key;
 
 - (void)removeActionForKey:(NSString *)key;
 - (void)removeAllActions;
 
 - (BOOL)containsPoint:(CGPoint)p;
+
+/**Returns the node itself or a child node at the point given.
+ * If the receiver is returned there is no child node at the given point.
+ * @return a child node or self at the given location.
+ */
 - (SKNode *)nodeAtPoint:(CGPoint)p;
-- (NSArray *)nodesAtPoint:(CGPoint)p;
+
+- (NSArray<SKNode*> *)nodesAtPoint:(CGPoint)p;
 
 - (CGPoint)convertPoint:(CGPoint)point fromNode:(SKNode *)node;
 - (CGPoint)convertPoint:(CGPoint)point toNode:(SKNode *)node;
@@ -217,6 +227,19 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 /* Returns true if the bounds of this node intersects with the transformed bounds of the other node, otherwise false */
 
 - (BOOL)intersectsNode:(SKNode *)node;
+
+/* Returns true if this node has equivalent content to the other object, otherwise false */
+
+- (BOOL)isEqualToNode:(SKNode *)node;
+
+/* Returns an array of GKPolygonObstacles from a group of SKSpriteNode's textures in scene space. For use with GPObstacleGraph in GameplayKit */
++ (NSArray<GKPolygonObstacle*> *)obstaclesFromSpriteTextures:(NSArray<SKNode*>*)sprites accuracy:(float)accuracy;
+
+/* Returns an array of GKPolygonObstacles from a group of SKNode's transformed bounds in scene space. For use with GPObstacleGraph in GameplayKit */
++ (NSArray<GKPolygonObstacle*> *)obstaclesFromNodeBounds:(NSArray<SKNode*>*)nodes;
+
+/* Returns an array of GKPolygonObstacles from a group of SKNode's physics bodies in scene space. For use with GPObstacleGraph in GameplayKit */
++ (NSArray<GKPolygonObstacle*> *)obstaclesFromNodePhysicsBodies:(NSArray<SKNode*>*)nodes;
 
 @end
 
@@ -235,3 +258,7 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 - (CGPoint)locationInNode:(SKNode *)node;
 @end
 #endif
+
+
+
+NS_ASSUME_NONNULL_END

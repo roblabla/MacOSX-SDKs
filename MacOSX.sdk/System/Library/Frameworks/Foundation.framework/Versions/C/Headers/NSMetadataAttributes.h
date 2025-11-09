@@ -1,10 +1,12 @@
 /*	NSMetadataAttributes.h
-        Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+        Copyright (c) 2004-2015, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
 
 @class NSString;
+
+NS_ASSUME_NONNULL_BEGIN
 
 // The following NSMetadataItem attributes are available on Mac OS and iOS.
 
@@ -201,3 +203,5 @@ FOUNDATION_EXPORT NSString * const NSMetadataItemExecutablePlatformKey NS_AVAILA
 FOUNDATION_EXPORT NSString * const NSMetadataItemApplicationCategoriesKey NS_AVAILABLE_MAC(10_9); // NSArray of NSString
 
 FOUNDATION_EXPORT NSString * const NSMetadataItemIsApplicationManagedKey NS_AVAILABLE_MAC(10_9); // boolean NSNumber
+
+NS_ASSUME_NONNULL_END

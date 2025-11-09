@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -69,6 +69,20 @@
  */
 
 #define kIOStorageFeaturesKey "IOStorageFeatures"
+
+/*!
+ * @defined kIOStorageFeatureBarrier
+ * @abstract
+ * Describes the presence of the Barrier feature.
+ * @discussion
+ * This property describes the ability of the storage stack to honor a write
+ * barrier, guaranteeing that on power loss, writes after the barrier will not
+ * be visible until all writes before the barrier are visible.  It is one of the
+ * feature entries listed under the top-level kIOStorageFeaturesKey property
+ * table.  It has an OSBoolean value.
+ */
+
+#define kIOStorageFeatureBarrier "Barrier"
 
 /*!
  * @defined kIOStorageFeatureForceUnitAccess

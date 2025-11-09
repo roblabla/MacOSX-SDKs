@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
-current-version: 1108.6
+current-version: 1136.0
 exports:         
   - archs:           [ i386 ]
     symbols:         [ _AVLCount, _AVLDispose, _AVLFind, _AVLGetIndItem, 
@@ -202,7 +202,7 @@ exports:
                        __PBUnmountVol, __PBXGetVolInfoSync, _c2pstr, _c2pstrcpy, 
                        _p2cstr, _p2cstrcpy, _rLongMulDiv, _upperstring ]
   - archs:           [ i386, x86_64 ]
-    allowed-clients: [ Foundation, Metadata, AudioToolbox ]
+    allowed-clients: [ AudioToolbox, Foundation, Metadata ]
     symbols:         [ _AbsoluteDeltaToDuration, _AbsoluteDeltaToNanoseconds, 
                        _AbsoluteToDuration, _AbsoluteToNanoseconds, _AddAbsoluteToAbsolute, 
                        _AddAtomic, _AddAtomic16, _AddAtomic8, _AddCollectionItem, 
@@ -231,19 +231,7 @@ exports:
                        _CSMemReallocateHandle, _CSMemRecoverHandle, _CSMemSetHandleSize, 
                        _CSMemSetPtrSize, _CSRefCreateInstance, _CSRefRelease, 
                        _CSRefReleaseCallbackForCF, _CSRefRetain, _CSRefRetainCallbackForCF, 
-                       _CSSetComponentsThreadMode, _CSStoreAddTable, _CSStoreAllocFixedUnit, 
-                       _CSStoreAllocFixedUnitWithData, _CSStoreAllocUnit, 
-                       _CSStoreAllocUnitWithData, _CSStoreCopyMutable, 
-                       _CSStoreCreateMutable, _CSStoreCreateWithBytes, 
-                       _CSStoreCreateWithBytesNoCopy, _CSStoreFreeUnit, 
-                       _CSStoreGetBytes, _CSStoreGetBytesLength, _CSStoreGetFirstTable, 
-                       _CSStoreGetFirstUnit, _CSStoreGetFixedUnitLength, 
-                       _CSStoreGetGeneration, _CSStoreGetHeader, _CSStoreGetMaxAvailableUnitLength, 
-                       _CSStoreGetNextTable, _CSStoreGetNextUnit, _CSStoreGetTableWithName, 
-                       _CSStoreGetUnit, _CSStoreGetUnitCount, _CSStoreProtect, 
-                       _CSStoreReallocUnit, _CSStoreRemoveTable, _CSStoreReserveCapacity, 
-                       _CSStoreSetGeneration, _CSStoreUnprotect, _CSStoreWriteToHeader, 
-                       _CSStoreWriteToUnit, _CSUniverseGetConnectionRef, 
+                       _CSSetComponentsThreadMode, _CSUniverseGetConnectionRef, 
                        _CSUniverseGetFirstUIDConnection, _CSUniverseGetNextProcessConnection, 
                        _CSUniverseGetNextUIDConnection, _CSUniverseGetProcessStorageInfo, 
                        _CSUniverseGetUIDOfConnection, _CSUniverseProcessConnectionGetPID, 
@@ -352,8 +340,8 @@ exports:
                        _FSMountMakepath, _FSMountMountIDToVRefNum, _FSMountPrepare, 
                        _FSMountPrepareWithMountPointString, _FSMountRenameVolume, 
                        _FSMountServerVolumeAsync, _FSMountServerVolumeSync, 
-                       _FSMountStorageSize, _FSMountVCBVRefNum, _FSMoveObject, 
-                       _FSMoveObjectAsync, _FSMoveObjectAsyncWithCallbacks, 
+                       _FSMountSetProperty, _FSMountStorageSize, _FSMountVCBVRefNum, 
+                       _FSMoveObject, _FSMoveObjectAsync, _FSMoveObjectAsyncWithCallbacks, 
                        _FSMoveObjectSync, _FSMoveObjectToTrashAsync, _FSMoveObjectToTrashSync, 
                        _FSNewAlias, _FSNewAliasFromPath, _FSNewAliasMinimal, 
                        _FSNewAliasMinimalUnicode, _FSNewAliasUnicode, _FSObjTypeToFSNodeObjectType, 
@@ -771,16 +759,14 @@ exports:
                        __CSGetNamedData, __CSGetProcessorArchitecture, 
                        __CSIncrementSeed, __CSMachPortTrackerAdd, __CSMachPortTrackerRemove, 
                        __CSReadSeed, __CSReleaseNamedData, __CSSetNamedData, 
-                       __CSStoreScramble, __CSStoreShow, __CSStoreShowTable, 
-                       __CSStoreUnscramble, __CSStoreValidate, __CSVMMemoryTrackerAdd, 
-                       __CSVMMemoryTrackerRemove, __CSVMMemoryTrackerUpdate, 
-                       __CSWriteSeed, __CharacterByteType, __ConvertLocalTimeToUTC, 
-                       __ConvertLocalToUTCDateTime, __ConvertUTCToLocalDateTime, 
-                       __ConvertUTCToLocalTime, __CopyCStringToPascal, 
-                       __CopyComponentBundleIdentifier, __CopyPascalStringToC, 
-                       __CoreServicesServerMain, __EqualString, __FNNotifyByURL, 
-                       __FSAccessControlEntryCopyUUID, __FSAccessControlEntryCreateMutableWithUUID, 
-                       __FSAccessControlEntryCreateMutableWithUUIDBytes, 
+                       __CSVMMemoryTrackerAdd, __CSVMMemoryTrackerRemove, 
+                       __CSVMMemoryTrackerUpdate, __CSWriteSeed, __CharacterByteType, 
+                       __ConvertLocalTimeToUTC, __ConvertLocalToUTCDateTime, 
+                       __ConvertUTCToLocalDateTime, __ConvertUTCToLocalTime, 
+                       __CopyCStringToPascal, __CopyComponentBundleIdentifier, 
+                       __CopyPascalStringToC, __CoreServicesServerMain, 
+                       __EqualString, __FNNotifyByURL, __FSAccessControlEntryCopyUUID, 
+                       __FSAccessControlEntryCreateMutableWithUUID, __FSAccessControlEntryCreateMutableWithUUIDBytes, 
                        __FSAccessControlEntryGetAccessControlInfo, __FSAccessControlEntryGetDisplayAsCurrentID, 
                        __FSAccessControlEntryGetDisplayAsCurrentIDValue, 
                        __FSAccessControlEntryGetTypeID, __FSAccessControlEntryGetUUIDBytes, 

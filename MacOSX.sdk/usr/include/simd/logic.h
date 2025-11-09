@@ -253,10 +253,10 @@ static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char16 __x) {
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char16 __x) { return _mm_movemask_epi8(__x); }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short8 __x) { return (_mm_movemask_epi8(__x) & 0xaaaa) == 0xaaaa; }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short8 __x) { return _mm_movemask_epi8(__x) & 0xaaaa; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int2  __x) { vector_int4 __x4; __x4.lo  = __x; return _mm_movemask_ps(__x4) == 0x3; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int2  __x) { vector_int4 __x4; __x4.lo  = __x; return _mm_movemask_ps(__x4) &  0x3; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int3  __x) { vector_int4 __x4; __x4.xyz = __x; return _mm_movemask_ps(__x4) == 0x7; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int3  __x) { vector_int4 __x4; __x4.xyz = __x; return _mm_movemask_ps(__x4) &  0x7; }
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int2  __x) { vector_int4 __x4; __x4.lo  = __x; return (_mm_movemask_ps(__x4) & 0x3) == 0x3; }
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int2  __x) { vector_int4 __x4; __x4.lo  = __x; return (_mm_movemask_ps(__x4) & 0x3); }
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int3  __x) { vector_int4 __x4; __x4.xyz = __x; return (_mm_movemask_ps(__x4) & 0x7) == 0x7; }
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int3  __x) { vector_int4 __x4; __x4.xyz = __x; return (_mm_movemask_ps(__x4) & 0x7); }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int4  __x) { return _mm_movemask_ps(__x) == 0xf; }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int4  __x) { return _mm_movemask_ps(__x); }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long2 __x) { return _mm_movemask_pd(__x) == 0x3; }
@@ -291,8 +291,8 @@ static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long2 __x) { 
 #if defined __AVX__
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int8  __x) { return _mm256_movemask_ps(__x) == 0xff; }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int8  __x) { return _mm256_movemask_ps(__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long3 __x) { vector_long4 __x4; __x4.xyz = __x; return _mm256_movemask_pd(__x4) == 0x7; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long3 __x) { vector_long4 __x4; __x4.xyz = __x; return _mm256_movemask_pd(__x4) &  0x7; }
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long3 __x) { vector_long4 __x4; __x4.xyz = __x; return (_mm256_movemask_pd(__x4) & 0x7) == 0x7; }
+static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long3 __x) { vector_long4 __x4; __x4.xyz = __x; return (_mm256_movemask_pd(__x4) & 0x7); }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long4 __x) { return _mm256_movemask_pd(__x) == 0xf; }
 static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long4 __x) { return _mm256_movemask_pd(__x); }
 #else

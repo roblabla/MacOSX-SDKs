@@ -1,5 +1,5 @@
 /*	CFBundle.h
-	Copyright (c) 1999-2014, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2015, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBUNDLE__)
@@ -15,8 +15,8 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef struct __CFBundle *CFBundleRef;
-typedef struct __CFBundle *CFPlugInRef;
+typedef struct CF_BRIDGED_TYPE(id) __CFBundle *CFBundleRef;
+typedef struct CF_BRIDGED_TYPE(id) __CFBundle *CFPlugInRef;
 
 /* ===================== Standard Info.plist keys ===================== */
 CF_EXPORT

@@ -139,7 +139,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
-	} __Request__lock_acquire_t;
+	} __Request__lock_acquire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -151,7 +151,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
-	} __Request__lock_release_t;
+	} __Request__lock_release_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -163,7 +163,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
-	} __Request__lock_try_t;
+	} __Request__lock_try_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -175,7 +175,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
-	} __Request__lock_make_stable_t;
+	} __Request__lock_make_stable_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -187,7 +187,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
-	} __Request__lock_handoff_t;
+	} __Request__lock_handoff_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -199,7 +199,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int lock_id;
-	} __Request__lock_handoff_accept_t;
+	} __Request__lock_handoff_accept_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -230,7 +230,7 @@ union __RequestUnion__lock_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lock_acquire_t;
+	} __Reply__lock_acquire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -242,7 +242,7 @@ union __RequestUnion__lock_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lock_release_t;
+	} __Reply__lock_release_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -254,7 +254,7 @@ union __RequestUnion__lock_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lock_try_t;
+	} __Reply__lock_try_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -266,7 +266,7 @@ union __RequestUnion__lock_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lock_make_stable_t;
+	} __Reply__lock_make_stable_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -278,7 +278,7 @@ union __RequestUnion__lock_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lock_handoff_t;
+	} __Reply__lock_handoff_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -290,7 +290,7 @@ union __RequestUnion__lock_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lock_handoff_accept_t;
+	} __Reply__lock_handoff_accept_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

@@ -1,12 +1,14 @@
 /*
         NSRulerMarker.h
         Application Kit
-        Copyright (c) 1994-2014, Apple Inc.
+        Copyright (c) 1994-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSEvent, NSImage, NSRulerView;
 
@@ -55,7 +57,7 @@
 @property (getter=isDragging, readonly) BOOL dragging;
     // Returns YES if the ruler object is currently being dragged.
 
-@property (strong) id<NSCopying> representedObject;
+@property (nullable, strong) id<NSCopying> representedObject;
     // The representedObject of an NSRulerMarker is purely for the client's use.  It must be able to copy itself.  A represented object should be some small object.  The text object uses NSStrings for most ruler objects or NSTextTab objects for tab stops.
 
 /************************** Ruler facilities **************************/
@@ -73,3 +75,5 @@
     // Handles the given mmouseDown event.  Performs a modal tracking loop until mouseUp allowing the object to be moved, if movable or removed, if removable.
 
 @end
+
+NS_ASSUME_NONNULL_END

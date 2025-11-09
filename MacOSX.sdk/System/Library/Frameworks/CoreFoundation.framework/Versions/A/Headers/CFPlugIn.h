@@ -1,5 +1,5 @@
 /*	CFPlugIn.h
-	Copyright (c) 1999-2014, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2015, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPLUGIN__)
@@ -92,7 +92,7 @@ CF_EXPORT void CFPlugInRemoveInstanceForFactory(CFUUIDRef factoryID);
 
 /* Obsolete API */
 
-typedef struct __CFPlugInInstance *CFPlugInInstanceRef;
+typedef struct CF_BRIDGED_TYPE(id) __CFPlugInInstance *CFPlugInInstanceRef;
 
 typedef Boolean (*CFPlugInInstanceGetInterfaceFunction)(CFPlugInInstanceRef instance, CFStringRef interfaceName, void **ftbl);
 typedef void (*CFPlugInInstanceDeallocateInstanceDataFunction)(void *instanceData);

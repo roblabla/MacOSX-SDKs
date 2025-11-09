@@ -101,6 +101,7 @@ struct kevent64_s {
 	uint64_t	ext[2];		/* filter-specific extensions */
 };
 
+
 #define EV_SET(kevp, a, b, c, d, e, f) do {	\
 	struct kevent *__kevp__ = (kevp);	\
 	__kevp__->ident = (a);			\
@@ -123,34 +124,50 @@ struct kevent64_s {
 	__kevp__->ext[1] = (h);				\
 } while(0)
 
+
+/* kevent system call flags */
+#define KEVENT_FLAG_NONE		0x00	/* no flag value */
+#define KEVENT_FLAG_IMMEDIATE		0x01	/* immediate timeout */
+#define KEVENT_FLAG_ERROR_EVENTS	0x02	/* output events only include change errors */
+
+
 /* actions */
-#define EV_ADD		0x0001		/* add event to kq (implies enable) */
-#define EV_DELETE	0x0002		/* delete event from kq */
-#define EV_ENABLE	0x0004		/* enable event */
-#define EV_DISABLE	0x0008		/* disable event (not reported) */
-#define EV_RECEIPT	0x0040		/* force EV_ERROR on success, data == 0 */
+#define EV_ADD			0x0001		/* add event to kq (implies enable) */
+#define EV_DELETE		0x0002		/* delete event from kq */
+#define EV_ENABLE		0x0004		/* enable event */
+#define EV_DISABLE		0x0008		/* disable event (not reported) */
 
 /* flags */
-#define EV_ONESHOT	0x0010		/* only report one occurrence */
-#define EV_CLEAR	0x0020		/* clear event state after reporting */
-#define EV_DISPATCH     0x0080          /* disable event after reporting */
+#define EV_ONESHOT		0x0010		/* only report one occurrence */
+#define EV_CLEAR		0x0020		/* clear event state after reporting */
+#define EV_RECEIPT		0x0040		/* force EV_ERROR on success, data == 0 */
+#define EV_DISPATCH     0x0080      /* disable event after reporting */
 
-#define EV_SYSFLAGS	0xF000		/* reserved by system */
-#define EV_FLAG0	0x1000		/* filter-specific flag */
-#define EV_FLAG1	0x2000		/* filter-specific flag */
+#define EV_UDATA_SPECIFIC	0x0100          /* unique kevent per udata value */
+                                            /* ... in combination with EV_DELETE */
+                                            /* will defer delete until udata-specific */
+                                            /* event enabled. EINPROGRESS will be */
+                                            /* returned to indicate the deferral */
+
+#define EV_DISPATCH2		(EV_DISPATCH | EV_UDATA_SPECIFIC)
+
+#define EV_SYSFLAGS		0xF000		/* reserved by system */
+#define EV_FLAG0		0x1000		/* filter-specific flag */
+#define EV_FLAG1		0x2000		/* filter-specific flag */
 
 /* returned values */
-#define EV_EOF		0x8000		/* EOF detected */
-#define EV_ERROR	0x4000		/* error, data contains errno */
+#define EV_EOF			0x8000		/* EOF detected */
+#define EV_ERROR		0x4000		/* error, data contains errno */
 
 /*
  * Filter specific flags for EVFILT_READ
  *
  * The default behavior for EVFILT_READ is to make the "read" determination
- * relative to the current file descriptor read pointer. The EV_POLL
- * flag indicates the determination should be made via poll(2) semantics
- * (which always returns true for regular files - regardless of the amount
- * of unread data in the file).
+ * relative to the current file descriptor read pointer. 
+ *
+ * The EV_POLL flag indicates the determination should be made via poll(2)
+ * semantics. These semantics dictate always returning true for regular files,
+ * regardless of the amount of unread data in the file.  
  *
  * On input, EV_OOBAND specifies that filter should actively return in the
  * presence of OOB on the descriptor. It implies that filter will return
@@ -167,7 +184,7 @@ struct kevent64_s {
  * number of bytes before the current OOB marker, else data count is the number
  * of bytes beyond OOB marker.
  */
-#define EV_POLL	EV_FLAG0
+#define EV_POLL		EV_FLAG0
 #define EV_OOBAND	EV_FLAG1
 
 /*
@@ -200,6 +217,7 @@ struct kevent64_s {
  * realtive to the current file descriptor read pointer.
  */
 #define NOTE_LOWAT	0x00000001		/* low water mark */
+
 /*
  * data/hint fflags for EVFILT_VNODE, shared with userspace
  */
@@ -294,6 +312,19 @@ enum {
  * receive the message and the requested (or default) message trailers.  In addition,
  * the fflags field contains the return code normally returned by mach_msg().
  *
+ * If MACH_RCV_MSG is specified, and the ext[1] field specifies a zero length, the
+ * system call argument specifying an ouput area (kevent_qos) will be consulted. If
+ * the system call specified an output data area, the user-space address
+ * of the received message is carved from that provided output data area (if enough
+ * space remains there). The address and length of each received message is 
+ * returned in the ext[0] and ext[1] fields (respectively) of the corresponding kevent.
+ *
+ * IF_MACH_RCV_VOUCHER_CONTENT is specified, the contents of the message voucher is
+ * extracted (as specified in the xflags field) and stored in ext[2] up to ext[3]
+ * length.  If the input length is zero, and the system call provided a data area,
+ * the space for the voucher content is carved from the provided space and its
+ * address and length is returned in ext[2] and ext[3] respectively.
+ *
  * If no message receipt options were provided in the fflags field on setup, no
  * message is received by this call. Instead, on output, the data field simply
  * contains the name of the actual port detected with a message waiting.
@@ -316,18 +347,23 @@ struct knote;
 SLIST_HEAD(klist, knote);
 
 
+#include <sys/types.h>
 
 struct timespec;
 
 __BEGIN_DECLS
 int     kqueue(void);
-int     kevent(int kq, const struct kevent *changelist, int nchanges,
-		    struct kevent *eventlist, int nevents,
-		    const struct timespec *timeout);
-int     kevent64(int kq, const struct kevent64_s *changelist, 
-		    int nchanges, struct kevent64_s *eventlist, 
-		    int nevents, unsigned int flags, 
-		    const struct timespec *timeout);
+int     kevent(int kq, 
+	       const struct kevent *changelist, int nchanges,
+	       struct kevent *eventlist, int nevents,
+	       const struct timespec *timeout);
+int     kevent64(int kq, 
+		 const struct kevent64_s *changelist, int nchanges,
+		 struct kevent64_s *eventlist, int nevents,
+		 unsigned int flags, 
+		 const struct timespec *timeout);
+
+
 __END_DECLS
 
 

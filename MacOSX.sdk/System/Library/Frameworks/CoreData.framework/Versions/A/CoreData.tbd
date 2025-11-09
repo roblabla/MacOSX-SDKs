@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
-current-version: 526.3
+current-version: 640.0
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _NSAddedPersistentStoresKey, _NSAffectedObjectsErrorKey, 
@@ -30,7 +30,7 @@ exports:
                        _NSPersistentStoreCoordinatorWillRemoveStoreNotification, 
                        _NSPersistentStoreDidImportUbiquitousContentChangesNotification, 
                        _NSPersistentStoreForceDestroyOption, _NSPersistentStoreOSCompatibility, 
-                       _NSPersistentStoreRebuildFromUbiquitousContentOption, 
+                       _NSPersistentStoreOrderKeyUpdateNotification, _NSPersistentStoreRebuildFromUbiquitousContentOption, 
                        _NSPersistentStoreRemoveUbiquitousMetadataOption, 
                        _NSPersistentStoreSaveConflictsErrorKey, _NSPersistentStoreTimeoutOption, 
                        _NSPersistentStoreTypeKey, _NSPersistentStoreUbiquitousContainerIdentifierKey, 
@@ -55,10 +55,12 @@ exports:
                        __NSManagedObjectContextObjectsDidChangePrivateNotification ]
     objc-classes:    [ _NSAsynchronousFetchRequest, _NSAsynchronousFetchResult, 
                        _NSAtomicStore, _NSAtomicStoreCacheNode, _NSAttributeDescription, 
-                       _NSBatchUpdateRequest, _NSBatchUpdateResult, _NSEntityDescription, 
-                       _NSEntityMapping, _NSEntityMigrationPolicy, _NSExpressionDescription, 
-                       _NSFetchRequest, _NSFetchRequestExpression, _NSFetchedPropertyDescription, 
-                       _NSIncrementalStore, _NSIncrementalStoreNode, _NSKnownKeysDictionary, 
+                       _NSBatchDeleteRequest, _NSBatchDeleteResult, _NSBatchUpdateRequest, 
+                       _NSBatchUpdateResult, _NSCachingFetchRequest, _NSConstraintConflict, 
+                       _NSEntityDescription, _NSEntityMapping, _NSEntityMigrationPolicy, 
+                       _NSExpressionDescription, _NSFetchRequest, _NSFetchRequestExpression, 
+                       _NSFetchedPropertyDescription, _NSIncrementalStore, 
+                       _NSIncrementalStoreNode, _NSKnownKeysDictionary, 
                        _NSKnownKeysMappingStrategy, _NSManagedObject, _NSManagedObjectContext, 
                        _NSManagedObjectID, _NSManagedObjectModel, _NSMappingModel, 
                        _NSMergeConflict, _NSMergePolicy, _NSMigrationManager, 

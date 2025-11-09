@@ -1,6 +1,6 @@
 /* CoreAnimation - CARenderer.h
 
-   Copyright (c) 2007-2014, Apple Inc.
+   Copyright (c) 2007-2015, Apple Inc.
    All rights reserved. */
 
 /* This class lets an application manually drive the rendering of a
@@ -35,6 +35,8 @@
 
 @class NSDictionary, CALayer;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CARenderer : NSObject
 {
 @private
@@ -45,11 +47,11 @@
  * Core OpenGL context. 'dict' is an optional dictionary of parameters.  */
 
 + (CARenderer *)rendererWithCGLContext:(void *)ctx
-    options:(NSDictionary *)dict;
+    options:(nullable NSDictionary *)dict;
 
 /* The root layer associated with the renderer. */
 
-@property(strong) CALayer *layer;
+@property(nullable, strong) CALayer *layer;
 
 /* The bounds rect of the render target. */
 
@@ -58,7 +60,7 @@
 /* Begin rendering a frame at time 't'. If 'ts' is non-null it defines
  * the host time and update frequency of the target device. */
 
-- (void)beginFrameAtTime:(CFTimeInterval)t timeStamp:(CVTimeStamp *)ts;
+- (void)beginFrameAtTime:(CFTimeInterval)t timeStamp:(nullable CVTimeStamp *)ts;
 
 /* Returns the bounds of the update region - the area that contains all
  * pixels that will be rendered by the current frame. Initially this
@@ -87,3 +89,5 @@
 - (void)endFrame;
 
 @end
+
+NS_ASSUME_NONNULL_END

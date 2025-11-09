@@ -99,6 +99,11 @@ SMJobCopyDictionary(CFStringRef domain, CFStringRef jobLabel);
  * for all jobs in the given domain, or NULL if an error occurred. This routine
  * is deprecated and will be removed in a future release. There will be no
  * provided replacement.
+ *
+ * For the specific use of testing the state of a login item that may have been
+ * enabled with SMLoginItemSetEnabled() in order to show that state to the
+ * user, this function remains the recommended API. A replacement API for this
+ * specific use will be provided before this function is removed.
  */
 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_10_10, __IPHONE_3_0, __IPHONE_8_0)
 XPC_EXPORT

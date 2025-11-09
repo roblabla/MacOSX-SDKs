@@ -100,6 +100,7 @@
  * The malloc/free primatives used
  * by the BSD kernel code.
  */
+
 #define	MALLOC(space, cast, size, type, flags) \
 	(space) = (cast)_MALLOC(size, type, flags)
 
@@ -139,6 +140,8 @@ extern void	_FREE_ZONE(
 			void		*elem,
 			size_t		size,
 			int		type);
+
+
 
 
 #endif	/* _SYS_MALLOC_H_ */

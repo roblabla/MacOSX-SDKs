@@ -202,7 +202,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		vm_size_t object_size;
-	} __Request__default_pager_object_create_t;
+	} __Request__default_pager_object_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -212,7 +212,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__default_pager_info_t;
+	} __Request__default_pager_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -222,7 +222,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__default_pager_objects_t;
+	} __Request__default_pager_objects_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -236,7 +236,7 @@ __END_DECLS
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t memory_object;
 		/* end of the kernel processed data */
-	} __Request__default_pager_object_pages_t;
+	} __Request__default_pager_object_pages_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -249,7 +249,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		int priority;
 		int clsize;
-	} __Request__default_pager_backing_store_create_t;
+	} __Request__default_pager_backing_store_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -259,7 +259,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__default_pager_backing_store_delete_t;
+	} __Request__default_pager_backing_store_delete_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -272,7 +272,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		backing_store_flavor_t flavor;
 		mach_msg_type_number_t infoCnt;
-	} __Request__default_pager_backing_store_info_t;
+	} __Request__default_pager_backing_store_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -286,7 +286,7 @@ __END_DECLS
 		vnode_ptr_t vnode;
 		int record_size;
 		vm_size_t size;
-	} __Request__default_pager_add_file_t;
+	} __Request__default_pager_add_file_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -304,7 +304,7 @@ __END_DECLS
 		int hi_wat;
 		int lo_wat;
 		int flags;
-	} __Request__default_pager_triggers_t;
+	} __Request__default_pager_triggers_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -314,7 +314,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__default_pager_info_64_t;
+	} __Request__default_pager_info_64_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -351,7 +351,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t memory_object;
 		/* end of the kernel processed data */
-	} __Reply__default_pager_object_create_t;
+	} __Reply__default_pager_object_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -364,7 +364,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		default_pager_info_t info;
-	} __Reply__default_pager_info_t;
+	} __Reply__default_pager_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -382,7 +382,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t objectsCnt;
 		mach_msg_type_number_t portsCnt;
-	} __Reply__default_pager_objects_t;
+	} __Reply__default_pager_objects_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -398,7 +398,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t pagesCnt;
-	} __Reply__default_pager_object_pages_t;
+	} __Reply__default_pager_object_pages_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -412,7 +412,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t backing_store;
 		/* end of the kernel processed data */
-	} __Reply__default_pager_backing_store_create_t;
+	} __Reply__default_pager_backing_store_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -424,7 +424,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__default_pager_backing_store_delete_t;
+	} __Reply__default_pager_backing_store_delete_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -438,7 +438,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		kern_return_t RetCode;
 		mach_msg_type_number_t infoCnt;
 		integer_t info[20];
-	} __Reply__default_pager_backing_store_info_t;
+	} __Reply__default_pager_backing_store_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -450,7 +450,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__default_pager_add_file_t;
+	} __Reply__default_pager_add_file_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -462,7 +462,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__default_pager_triggers_t;
+	} __Reply__default_pager_triggers_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -475,7 +475,7 @@ union __RequestUnion__default_pager_object_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		default_pager_info_64_t info;
-	} __Reply__default_pager_info_64_t;
+	} __Reply__default_pager_info_64_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

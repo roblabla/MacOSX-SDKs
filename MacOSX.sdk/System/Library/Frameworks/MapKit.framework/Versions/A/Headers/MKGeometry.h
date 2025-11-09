@@ -9,6 +9,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MKFoundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 typedef struct {
     CLLocationDegrees latitudeDelta;
@@ -181,3 +182,5 @@ MK_EXTERN MKMapRect MKMapRectRemainder(MKMapRect rect) NS_AVAILABLE(10_9, 4_0);
 @property (readonly) MKCoordinateSpan MKCoordinateSpanValue;
 
 @end
+
+NS_ASSUME_NONNULL_END

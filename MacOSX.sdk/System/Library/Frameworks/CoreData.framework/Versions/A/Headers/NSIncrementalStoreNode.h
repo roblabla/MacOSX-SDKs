@@ -1,13 +1,15 @@
 /*
  NSIncrementalStoreNode.h
  Core Data
- Copyright (c) 2004-2012 Apple Inc.
+ Copyright (c) 2004-2015, Apple Inc.
  All rights reserved.
  */
 
 #import <CoreData/NSManagedObjectID.h>
+#import <Foundation/NSDictionary.h>
 
-@class NSDictionary;
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSPropertyDescription;
 
 // Provides the basic unit of external data that the Core Data stack interacts with.
@@ -36,11 +38,11 @@ NS_CLASS_AVAILABLE(10_7,5_0)
 //          -newValueForRelationship:forObjectWithID:withContext:error: on the NSPersistentStore
 //
 // version -> The revision number of this state; used for conflict detection and merging 
-- (instancetype)initWithObjectID:(NSManagedObjectID*)objectID withValues:(NSDictionary*)values version:(uint64_t)version;
+- (instancetype)initWithObjectID:(NSManagedObjectID*)objectID withValues:(NSDictionary<NSString *, id> *)values version:(uint64_t)version;
 
 // Update the values and version to reflect new data being saved to or loaded from the external store.  
 // The values dictionary is in the same format as the initializer
-- (void)updateWithValues:(NSDictionary *)values version:(uint64_t)version;
+- (void)updateWithValues:(NSDictionary<NSString *, id> *)values version:(uint64_t)version;
 
 // Return the object ID that identifies the data stored by this node
 @property (nonatomic, readonly, strong) NSManagedObjectID *objectID;
@@ -49,6 +51,8 @@ NS_CLASS_AVAILABLE(10_7,5_0)
 @property (nonatomic, readonly) uint64_t version;
 
 // May return NSNull for to-one relationships.  If a relationship is nil, clients should  invoke -newValueForRelationship:forObjectWithID:withContext:error: on the NSPersistentStore
-- (id)valueForPropertyDescription:(NSPropertyDescription*)prop;
+- (nullable id)valueForPropertyDescription:(NSPropertyDescription*)prop;
 
 @end
+
+NS_ASSUME_NONNULL_END

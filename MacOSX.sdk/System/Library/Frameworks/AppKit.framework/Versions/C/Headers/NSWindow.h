@@ -1,10 +1,12 @@
 /*
 	NSWindow.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSResponder.h>
@@ -16,6 +18,8 @@
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSAnimation.h>
 #import <AppKit/NSAppearance.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSButton, NSButtonCell, NSColor, NSImage, NSPasteboard, NSScreen;
 @class NSNotification, NSText, NSView, NSMutableSet, NSSet, NSDate;
@@ -66,15 +70,15 @@ enum {
 };
 
 typedef NS_ENUM(NSUInteger, NSWindowSharingType) {
-	NSWindowSharingNone = 0,                // Window contents may not be read by another process
-	NSWindowSharingReadOnly = 1,            // Window contents may be read but not modified by another process
-	NSWindowSharingReadWrite = 2            // Window contents may be read or modified by another process
+    NSWindowSharingNone = 0,                // Window contents may not be read by another process
+    NSWindowSharingReadOnly = 1,            // Window contents may be read but not modified by another process
+    NSWindowSharingReadWrite = 2            // Window contents may be read or modified by another process
 } NS_ENUM_AVAILABLE_MAC(10_5);
 
 typedef NS_ENUM(NSUInteger, NSWindowBackingLocation) {
-	NSWindowBackingLocationDefault = 0,		// System determines if window backing store is in VRAM or main memory
-	NSWindowBackingLocationVideoMemory = 1,		// Window backing store is in VRAM
-	NSWindowBackingLocationMainMemory = 2		// Window backing store is in main memory
+    NSWindowBackingLocationDefault = 0,		// System determines if window backing store is in VRAM or main memory
+    NSWindowBackingLocationVideoMemory = 1,		// Window backing store is in VRAM
+    NSWindowBackingLocationMainMemory = 2		// Window backing store is in main memory
 } NS_ENUM_AVAILABLE_MAC(10_5);
 
 
@@ -94,7 +98,13 @@ typedef NS_OPTIONS(NSUInteger, NSWindowCollectionBehavior) {
     
     /* You may specify at most one of NSWindowCollectionBehaviorFullScreenPrimary or NSWindowCollectionBehaviorFullScreenAuxiliary. */
     NSWindowCollectionBehaviorFullScreenPrimary NS_ENUM_AVAILABLE_MAC(10_7) = 1 << 7,       // the frontmost window with this collection behavior will be the fullscreen window.
-    NSWindowCollectionBehaviorFullScreenAuxiliary NS_ENUM_AVAILABLE_MAC(10_7) = 1 << 8      // windows with this collection behavior can be shown with the fullscreen window.
+    NSWindowCollectionBehaviorFullScreenAuxiliary NS_ENUM_AVAILABLE_MAC(10_7) = 1 << 8,     // windows with this collection behavior can be shown with the fullscreen window.
+    
+    /* 	You may specify at most one of NSWindowCollectionBehaviorFullScreenAllowsTiling or NSWindowCollectionBehaviorFullScreenDisallowsTiling, or an assertion will be raised.
+     
+     The default behavior is to allow any window to participate in full screen tiling, as long as it meets certain requirements, such as being resizable and not a panel or sheet. Windows which are not full screen capable can still become a secondary tile in full screen. A window can explicitly allow itself to be placed into a full screen tile by including NSWindowCollectionBehaviorFullScreenAllowsTiling. Even if a window allows itself to be placed in a tile, it still may not be put in the tile if its minFullScreenContentSize is too large to fit. A window can explicitly disallow itself from being placed in a full screen tile by including NSWindowCollectionBehaviorFullScreenDisallowsTiling. This is useful for non-full screen capable windows to explicitly prevent themselves from being tiled. It can also be used by a full screen window to prevent any other windows from being placed in its full screen tile. */
+    NSWindowCollectionBehaviorFullScreenAllowsTiling NS_ENUM_AVAILABLE_MAC(10_11) = 1 << 11,       // This window can be a full screen tile window. It does not have to have FullScreenPrimary set.
+    NSWindowCollectionBehaviorFullScreenDisallowsTiling NS_ENUM_AVAILABLE_MAC(10_11) = 1 << 12      // This window can NOT be made a full screen tile window; it still may be allowed to be a regular FullScreenPrimary window.
 } NS_ENUM_AVAILABLE_MAC(10_5);
 
 
@@ -115,7 +125,7 @@ enum {
 } NS_ENUM_AVAILABLE_MAC(10_6);
 
 typedef NS_OPTIONS(NSUInteger, NSWindowOcclusionState) {
-    // If set, at least part of the window is visible. If not set, the entire window is occluded. Windows with non-rectangular shapes may be completely occluded on screen but still count as visible, if their bounding box falls into a visible region. Windows that are completely transparent may also still count as visible.
+    /* If set, at least part of the window is visible. If not set, the entire window is occluded. Windows with non-rectangular shapes may be completely occluded on screen but still count as visible, if their bounding box falls into a visible region. Windows that are completely transparent may also still count as visible. */
     NSWindowOcclusionStateVisible = 1UL << 1,
 } NS_ENUM_AVAILABLE_MAC(10_9);
 
@@ -140,7 +150,7 @@ typedef NS_ENUM(NSUInteger, NSSelectionDirection) {
     NSSelectingPrevious
 };
 
-// standard window buttons
+/* Standard window buttons */
 typedef NS_ENUM(NSUInteger, NSWindowButton) {
     NSWindowCloseButton,
     NSWindowMiniaturizeButton,
@@ -173,7 +183,7 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
     NSResponder		*_firstResponder;
     NSView		*_lastLeftHit;
     NSView		*_lastRightHit;
-    id                  _counterpart;
+    id                  _unusedWindow2;
     id                  _fieldEditor;
     int                 _winEventMask;
     NSInteger           _windowNum;
@@ -192,7 +202,7 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
     NSURL		*_representedURL;
     NSSize		*_sizeLimits;
     NSString		*_frameSaveName;
-    id                  _reservedWindow2;
+    NSToolbar           *_toolbar;
     struct __wFlags {
         unsigned int  backing:2;
         unsigned int  visible:1;
@@ -240,7 +250,7 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
         unsigned int  isImageCache:1;
         unsigned int  autolayoutEngagedSomewhere:1;
         unsigned int  hasRegisteredBackdropViews:1;
-        unsigned int  _unused:1;
+        unsigned int  hasSubLevel:1;
         unsigned int  keyViewSelectionDirection:2;
         unsigned int  defaultButtonCellKETemporarilyDisabled:1;
         unsigned int  defaultButtonCellKEDisabled:1;
@@ -267,7 +277,7 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
 - (NSRect)contentRectForFrameRect:(NSRect)frameRect;
 
 - (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag;
-- (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
+- (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(nullable NSScreen *)screen;
 
 @property (copy) NSString *title;
 
@@ -284,11 +294,11 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
 
 /* contentLayoutGuide is a corollary to contentLayoutRect. It can be used by autolayout constraints to automatically bind to the contentLayoutRect.
  */
-@property (readonly) id contentLayoutGuide NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly) id contentLayoutGuide NS_AVAILABLE_MAC(10_10);
 
 /* The following methods allow you to add accessory views to the titlebar/toolbar area of a window. See NSTitlebarAccessoryViewController for more details.
  */
-@property (copy) NSArray *titlebarAccessoryViewControllers NS_AVAILABLE_MAC(10_10); /* Array of NSTitlebarAccessoryViewController */
+@property (copy) NSArray<__kindof NSTitlebarAccessoryViewController *> *titlebarAccessoryViewControllers NS_AVAILABLE_MAC(10_10);
 - (void)addTitlebarAccessoryViewController:(NSTitlebarAccessoryViewController *)childViewController NS_AVAILABLE_MAC(10_10);
 - (void)insertTitlebarAccessoryViewController:(NSTitlebarAccessoryViewController *)childViewController atIndex:(NSInteger)index NS_AVAILABLE_MAC(10_10);
 /* NOTE: you can use this method, or removeFromParentViewController, which ever is easier. */
@@ -299,20 +309,20 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
 If url is not nil and its path is not empty, the window will show a document icon in the titlebar.  
 If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using [[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage].  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method window:shouldPopUpDocumentPathMenu:If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
 */
-@property (copy) NSURL *representedURL NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSURL *representedURL NS_AVAILABLE_MAC(10_5);
 @property (copy) NSString *representedFilename;
 - (void)setTitleWithRepresentedFilename:(NSString *)filename;
 @property (getter=isExcludedFromWindowsMenu) BOOL excludedFromWindowsMenu;
-@property (strong) id /* NSView * */ contentView;
-@property (assign) id<NSWindowDelegate> delegate;
+@property (nullable, strong) __kindof NSView *contentView;
+@property (nullable, assign) id<NSWindowDelegate> delegate;
 @property (readonly) NSInteger windowNumber;
 @property NSUInteger styleMask;
 /* Valid styleMask settings have the same restrictions as the styleMask passed to -initWithContentRect:styleMask:backing:defer:.  Some styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window. */
 - (void)setStyleMask:(NSUInteger)styleMask NS_AVAILABLE_MAC(10_6);
-- (NSText *)fieldEditor:(BOOL)createFlag forObject:(id)anObject;
-- (void)endEditingFor:(id)anObject;
+- (nullable NSText *)fieldEditor:(BOOL)createFlag forObject:(nullable id)anObject;
+- (void)endEditingFor:(nullable id)anObject;
 
-- (NSRect)constrainFrameRect:(NSRect)frameRect toScreen:(NSScreen *)screen;
+- (NSRect)constrainFrameRect:(NSRect)frameRect toScreen:(nullable NSScreen *)screen;
 - (void)setFrame:(NSRect)frameRect display:(BOOL)flag;
 - (void)setContentSize:(NSSize)aSize;
 - (void)setFrameOrigin:(NSPoint)aPoint;
@@ -353,22 +363,22 @@ If the url represents a filename or other resource with a known icon, that icon 
 
 - (void)update;
 
-- (BOOL)makeFirstResponder:(NSResponder *)aResponder;
+- (BOOL)makeFirstResponder:(nullable NSResponder *)aResponder;
 /* firstResponder is Key Value Observing (KVO) compliant. */
-@property (readonly, strong) NSResponder *firstResponder;
+@property (readonly, assign) NSResponder *firstResponder;
 
 @property (readonly) NSInteger resizeFlags;
 - (void)keyDown:(NSEvent *)theEvent;
 - (void)close;
 @property (getter=isReleasedWhenClosed) BOOL releasedWhenClosed;
-- (void)miniaturize:(id)sender;
-- (void)deminiaturize:(id)sender;
+- (void)miniaturize:(nullable id)sender;
+- (void)deminiaturize:(nullable id)sender;
 @property (getter=isZoomed, readonly) BOOL zoomed;
-- (void)zoom:(id)sender;
+- (void)zoom:(nullable id)sender;
 @property (getter=isMiniaturized, readonly) BOOL miniaturized;
-- (BOOL)tryToPerform:(SEL)anAction with:(id)anObject;
-- (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
-@property (copy) NSColor *backgroundColor;
+- (BOOL)tryToPerform:(SEL)anAction with:(nullable id)anObject;
+- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
+@property (null_resettable, copy) NSColor *backgroundColor;
 
 /* Indicates the thickness of a given border of the window. NSMinYEdge is the bottom edge of the window, while NSMaxYEdge is the top edge of the window. This method may throw an exception for values that don't apply to the current window styleMask; specifically, passing NSMaxYEdge for a non-textured window will always raise. The contentBorder does not include the titlebar or toolbar.
  */
@@ -389,15 +399,15 @@ If the url represents a filename or other resource with a known icon, that icon 
 @property BOOL canHide;
 
 - (void)center;
-- (void)makeKeyAndOrderFront:(id)sender;
-- (void)orderFront:(id)sender;
-- (void)orderBack:(id)sender;
-- (void)orderOut:(id)sender;
+- (void)makeKeyAndOrderFront:(nullable id)sender;
+- (void)orderFront:(nullable id)sender;
+- (void)orderBack:(nullable id)sender;
+- (void)orderOut:(nullable id)sender;
 - (void)orderWindow:(NSWindowOrderingMode)place relativeTo:(NSInteger)otherWin;
 - (void)orderFrontRegardless;
 
-@property (strong) NSImage *miniwindowImage;
-@property (copy) NSString *miniwindowTitle;
+@property (nullable, strong) NSImage *miniwindowImage;
+@property (null_resettable, copy) NSString *miniwindowTitle;
 
 @property (readonly, strong) NSDockTile *dockTile NS_AVAILABLE_MAC(10_5);
 
@@ -433,13 +443,13 @@ If the url represents a filename or other resource with a known icon, that icon 
 /* Returns the scale factor representing the number of backing store pixels corresponding to each linear unit in window space on this NSWindow. This method is provided for rare cases when the explicit scale factor is needed. Please use -convert*ToBacking: methods whenever possible. */
 @property (readonly) CGFloat backingScaleFactor NS_AVAILABLE_MAC(10_7); 
 
-- (void)performClose:(id)sender;
-- (void)performMiniaturize:(id)sender;
-- (void)performZoom:(id)sender;
+- (void)performClose:(nullable id)sender;
+- (void)performMiniaturize:(nullable id)sender;
+- (void)performZoom:(nullable id)sender;
 @property (getter=isOneShot) BOOL oneShot;
 - (NSData *)dataWithEPSInsideRect:(NSRect)rect;
 - (NSData *)dataWithPDFInsideRect:(NSRect)rect;
-- (void)print:(id)sender;
+- (void)print:(nullable id)sender;
 
 - (void)disableCursorRects;
 - (void)enableCursorRects;
@@ -448,18 +458,22 @@ If the url represents a filename or other resource with a known icon, that icon 
 - (void)invalidateCursorRectsForView:(NSView *)aView;
 - (void)resetCursorRects;
 
-
+/*
+ Default is NO. Set to YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance.
+ Returns YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call setAllowsToolTipsWhenApplicationIsInactive: instead of overriding -allowsToolTipsWhenApplicationIsInactive.
+ */
 @property BOOL allowsToolTipsWhenApplicationIsInactive;
-	// Default is NO. Set to YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance.
-	// Returns YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call setAllowsToolTipsWhenApplicationIsInactive: instead of overriding -allowsToolTipsWhenApplicationIsInactive.
 
 @property NSBackingStoreType backingType;
 @property NSInteger level;
 @property NSWindowDepth depthLimit;
 - (void)setDynamicDepthLimit:(BOOL)flag;
 @property (readonly) BOOL hasDynamicDepthLimit;
-@property (readonly, strong) NSScreen *screen;
-@property (readonly, strong) NSScreen *deepestScreen;
+
+/* The screen property returns the best screen for the window. If the window only intersects one screen, it returns that screen. If it intersects more than one screen, then it resolves the tie through based on what space it is mostly on. It may return nil if there are no available screens, or it is completely off screen.
+ */
+@property (nullable, readonly, strong) NSScreen *screen;
+@property (nullable, readonly, strong) NSScreen *deepestScreen;
 
 @property BOOL hasShadow;
 - (void)invalidateShadow;
@@ -508,7 +522,7 @@ If the url represents a filename or other resource with a known icon, that icon 
 
 /* toggleFullScreen: enters or exits for full screeen. A window must have NSWindowCollectionBehaviorFullScreenAuxiliary or NSWindowCollectionBehaviorFullScreenPrimary included in the collectionBehavior property; if it does not, this method may simply do nothing.
  */
-- (void)toggleFullScreen:(id)sender NS_AVAILABLE_MAC(10_7);
+- (void)toggleFullScreen:(nullable id)sender NS_AVAILABLE_MAC(10_7);
 
 @property (readonly, copy) NSString *stringWithSavedFrame;
 - (void)setFrameFromString:(NSString *)string;
@@ -517,7 +531,7 @@ If the url represents a filename or other resource with a known icon, that icon 
 - (BOOL)setFrameUsingName:(NSString *)name force:(BOOL)force;
 - (BOOL)setFrameUsingName:(NSString *)name;
 - (BOOL)setFrameAutosaveName:(NSString *)name;
-- (NSString *)frameAutosaveName;
+@property (readonly, copy) NSString *frameAutosaveName;
 + (void)removeFrameUsingName:(NSString *)name;
 
 
@@ -525,28 +539,35 @@ If the url represents a filename or other resource with a known icon, that icon 
 - (void)restoreCachedImage;
 - (void)discardCachedImage;
 
+/* NOTE: minSize/contentMinSize and maxSize/contentMaxSize are ignored when using autolayout.
+ */
 @property NSSize minSize;
 @property NSSize maxSize;
 @property NSSize contentMinSize;
 @property NSSize contentMaxSize;
 
+/* These are the min and max values for a full screen tiled window.
+ 
+ In general, one should not need to explicitly set the min/maxFullScreenContentSize. If an application does not change its window content upon entering full screen, then the normal auto layout min and max size will be sufficient, and one should not set these values. If an application does significantly rework the UI in full screen, then it may be necessary to set a min/maxFullScreenContentSize. This size is what is used to determine if a window can fit when it is in full screen in a tile. This property may be used even if the window does not support full screen, but are implicitly opted into supporting a full screen tile based on resizing behavior and window properties (see the collectionBehavior property). By default, the system uses auto layout to determine the min and max sizes. If auto layout is not used, contentMinSize and contentMaxSize are queried.
+ */
+@property NSSize minFullScreenContentSize NS_AVAILABLE_MAC(10_11);
+@property NSSize maxFullScreenContentSize NS_AVAILABLE_MAC(10_11);
+
 /* Tracks events matching the supplied mask with the supplied tracking handler until the tracking handler explicitly terminates tracking. Each event is removed from the event queue then passed to the tracking handler. If a matching event does not exist in the event queue, then the main thread blocks in the specified runloop mode until an event of the requested type is received or the timeout expires. If the timeout expires, the tracking handler is called with a nil event. A negative timeout is interpreted as 0. Use NSEventDurationForever to never timeout. Tracking continues until *stop is set to YES. Calls to -nextEventMatchingMask:… are allowed inside the trackingHandler block. This method returns once tracking is terminated.
  */
 - (void)trackEventsMatchingMask:(NSEventMask)mask timeout:(NSTimeInterval)timeout mode:(NSString *)mode handler:(void(^)(NSEvent *event, BOOL *stop))trackingHandler NS_AVAILABLE_MAC(10_10);
-- (NSEvent *)nextEventMatchingMask:(NSUInteger)mask;
-- (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
-- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(NSEvent *)lastEvent;
+- (nullable NSEvent *)nextEventMatchingMask:(NSUInteger)mask;
+- (nullable NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(nullable NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
+- (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(nullable NSEvent *)lastEvent;
 - (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
-@property (readonly, strong) NSEvent *currentEvent;
+@property (nullable, readonly, strong) NSEvent *currentEvent;
 @property BOOL acceptsMouseMovedEvents;
 @property BOOL ignoresMouseEvents;
-@property (readonly, copy) NSDictionary *deviceDescription;
+@property (readonly, copy) NSDictionary<NSString *, id> *deviceDescription;
 - (void)sendEvent:(NSEvent *)theEvent;
 @property (readonly) NSPoint mouseLocationOutsideOfEventStream;
-+ (void)menuChanged:(NSMenu *)menu;
 
-- (id)windowController;
-- (void)setWindowController:(NSWindowController *)windowController;
+@property (nullable, assign) __kindof NSWindowController *windowController;
 
 /*
  This API presents modal-sheets on this window. It replaces NSApp's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:.
@@ -554,36 +575,37 @@ If the url represents a filename or other resource with a known icon, that icon 
  If the window already has a presented sheet, it will queue up sheets presented after that. Once the presented sheet is dismissed, the next queued sheet will be presented, and so forth.
  Critical sheets will skip this queuing process and be immediately presented on top of existing sheets. The presented sheet will be temporarily disabled and be able to be interacted with after the critical sheet is dismissed, and will then continue as normal. Critical sheets should only be used for time-critical or important events, when the presentation of the sheet needs to be guaranteed (Critical Alerts will automatically use this API).
 */
-- (void)beginSheet:(NSWindow *)sheetWindow completionHandler:(void (^)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
-- (void)beginCriticalSheet:(NSWindow *)sheetWindow completionHandler:(void (^)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
+- (void)beginSheet:(NSWindow *)sheetWindow completionHandler:(void (^ __nullable)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
+- (void)beginCriticalSheet:(NSWindow *)sheetWindow completionHandler:(void (^ __nullable)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
 - (void)endSheet:(NSWindow *)sheetWindow NS_AVAILABLE_MAC(10_9);
 - (void)endSheet:(NSWindow *)sheetWindow returnCode:(NSModalResponse)returnCode NS_AVAILABLE_MAC(10_9);
-@property (readonly, copy) NSArray *sheets NS_AVAILABLE_MAC(10_9); // An ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
-@property (readonly, strong) NSWindow *attachedSheet; // Returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
+@property (readonly, copy) NSArray<__kindof NSWindow *> *sheets NS_AVAILABLE_MAC(10_9); // An ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
+@property (nullable, readonly, strong) NSWindow *attachedSheet; // Returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
 
 @property (getter=isSheet, readonly) BOOL sheet;
+
 /* Returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not appearance.
  This relationship exists starting when the sheet is begun (using NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:), and ending once it is ordered out.
  
  Returns nil if the window is not a sheet or has no sheet parent.
  */
-@property (readonly, strong) NSWindow *sheetParent NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, strong) NSWindow *sheetParent NS_AVAILABLE_MAC(10_9);
 
 
-+ (NSButton *)standardWindowButton:(NSWindowButton)b forStyleMask:(NSUInteger)styleMask;
-- (NSButton *)standardWindowButton:(NSWindowButton)b;
++ (nullable NSButton *)standardWindowButton:(NSWindowButton)b forStyleMask:(NSUInteger)styleMask;
+- (nullable NSButton *)standardWindowButton:(NSWindowButton)b;
 
 - (void)addChildWindow:(NSWindow *)childWin ordered:(NSWindowOrderingMode)place;
 - (void)removeChildWindow:(NSWindow *)childWin;
-@property (readonly, copy) NSArray *childWindows;
+@property (nullable, readonly, copy) NSArray<__kindof NSWindow *> *childWindows;
 
-@property (assign) NSWindow *parentWindow;
+@property (nullable, assign) NSWindow *parentWindow;
 
 /* Returns NSGraphicsContext used to render the receiver's content on the screen for the calling thread.
 */
-@property (readonly, strong) NSGraphicsContext *graphicsContext;
+@property (nullable, readonly, strong) NSGraphicsContext *graphicsContext;
 
-@property (strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
+@property (nullable, strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
 
 /* windowNumbersWithOptions: returns an autoreleased array of NSNumbers containing windowNumbers for all visible windows satisfying options.  If no options are specified, only visible windows belonging to the calling application and on the active space are included.  If options include NSWindowNumberListAllApplications, visible windows belonging to all applications are included.  If options include NSWindowNumberListAllSpaces, visible windows on all spaces are included.  Windows on the active space are returned in z-order.  
    Examples: 
@@ -594,7 +616,7 @@ If the url represents a filename or other resource with a known icon, that icon 
       To get an array of windowNumbers visible on any space and belonging to the calling application:
 	windowNumbers = [NSWindow windowNumbersWithOptions:NSWindowNumberListAllSpaces];
 */
-+ (NSArray *)windowNumbersWithOptions:(NSWindowNumberListOptions)options NS_AVAILABLE_MAC(10_6);
++ (nullable NSArray<NSNumber *> *)windowNumbersWithOptions:(NSWindowNumberListOptions)options NS_AVAILABLE_MAC(10_6);
 
 /* windowNumberAtPoint:belowWindowWithWindowNumber: returns the number of the frontmost window that would be hit by a mouseDown at the screen location "point".  "windowNum" can be specified to exclude a given window along with all windows above it, and may belong to any application.  If no windows are to be excluded, specify 0 for "windowNum".  The windowNumber returned may correspond to a window in another application.    
 */
@@ -607,23 +629,26 @@ If the url represents a filename or other resource with a known icon, that icon 
 
 /* The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the rootViewController.
  */
-@property (strong) NSViewController *contentViewController NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSViewController *contentViewController NS_AVAILABLE_MAC(10_10);
 
 /* Convenience method for creating an autoreleased titled window with the given contentViewController. A basic NSWindow with the following attributes is made: titled, closable, resizable, miniaturizable. The window's title is automatically bound to the contentViewController's title. The size of the window can easily be controlled by utilizing autolayout and applying size constraints to the view (or its subviews). The window has isReleasedWhenClosed set to NO, and it must be explicitly retained to keep the window instance alive. To have it automatically be freed when it is closed, do the following: [window retain] and [window setReleasedWhenClosed:YES].
  */
 + (instancetype)windowWithContentViewController:(NSViewController *)contentViewController NS_AVAILABLE_MAC(10_10);
 
+/* Call to start a drag (moving the window) in the Window Server process. In general, this can be done after a mouseDown event has come in and been examined by an application or view. The view may determine it wants to allow that portion of the window to start a window drag, and can hand off the work to the Window Server process by calling this method. This allows the window to participate in space switching, and other system features. Pass the original mouseDown event to the method. The method will return right away, and a mouseUp may not get sent.
+ */
+- (void)performWindowDragWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_11);
+
 @end
 
 @interface NSWindow(NSKeyboardUI)
-@property (assign) NSView *initialFirstResponder;
-- (void)selectNextKeyView:(id)sender;
-- (void)selectPreviousKeyView:(id)sender;
+@property (nullable, assign) NSView *initialFirstResponder;
+- (void)selectNextKeyView:(nullable id)sender;
+- (void)selectPreviousKeyView:(nullable id)sender;
 - (void)selectKeyViewFollowingView:(NSView *)aView;
 - (void)selectKeyViewPrecedingView:(NSView *)aView;
 @property (readonly) NSSelectionDirection keyViewSelectionDirection;
-- (void)setDefaultButtonCell:(NSButtonCell *)defButt;
-- (NSButtonCell *)defaultButtonCell;
+@property (nullable, retain) NSButtonCell *defaultButtonCell;
 - (void)disableKeyEquivalentForDefaultButtonCell;
 - (void)enableKeyEquivalentForDefaultButtonCell;
 @property BOOL autorecalculatesKeyViewLoop;
@@ -631,27 +656,33 @@ If the url represents a filename or other resource with a known icon, that icon 
 @end
 
 @interface NSWindow (NSToolbarSupport)
-@property (strong) NSToolbar *toolbar;
-- (void)toggleToolbarShown:(id)sender;
-- (void)runToolbarCustomizationPalette:(id)sender;
+@property (nullable, strong) NSToolbar *toolbar;
+- (void)toggleToolbarShown:(nullable id)sender;
+- (void)runToolbarCustomizationPalette:(nullable id)sender;
 @property BOOL showsToolbarButton;
 @end
 
 @interface NSWindow(NSDrag)
 - (void)dragImage:(NSImage *)anImage at:(NSPoint)baseLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag;
 
-- (void)registerForDraggedTypes:(NSArray *)newTypes;
+- (void)registerForDraggedTypes:(NSArray<NSString *> *)newTypes;
 - (void)unregisterDraggedTypes;
 @end
 
 @interface NSWindow(NSCarbonExtensions)
-// create an NSWindow for a Carbon window - windowRef must be a Carbon WindowRef - see MacWindows.h
-- (NSWindow *)initWithWindowRef:(void * /* WindowRef */)windowRef;
-// return the Carbon WindowRef for this window, creating if necessary: - see MacWindows.h
+
+/* Create an NSWindow for a Carbon window - windowRef must be a Carbon WindowRef - see MacWindows.h. This method can only be called on NSWindow, and not subclasses of NSWindow. On 10.11, it will throw an exception if this is done.
+ */
+- (nullable NSWindow *)initWithWindowRef:(void * /* WindowRef */)windowRef;
+
+/* return the Carbon WindowRef for this window, creating if necessary: - see MacWindows.h
+ */
 @property (readonly) void * /* WindowRef */windowRef NS_RETURNS_INNER_POINTER;
 @end
 
 @interface NSWindow(NSDeprecated)
+
++ (void)menuChanged:(NSMenu *)menu NS_DEPRECATED_MAC(10_0, 10_11, "This method does not do anything and should not be called.");
 
 /* gState is unused and should not be called.
  */
@@ -681,11 +712,11 @@ If the url represents a filename or other resource with a known icon, that icon 
 @protocol NSWindowDelegate <NSObject>
 @optional
 - (BOOL)windowShouldClose:(id)sender;
-- (id)windowWillReturnFieldEditor:(NSWindow *)sender toObject:(id)client;
+- (nullable id)windowWillReturnFieldEditor:(NSWindow *)sender toObject:(nullable id)client;
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize;
 - (NSRect)windowWillUseStandardFrame:(NSWindow *)window defaultFrame:(NSRect)newFrame;
 - (BOOL)windowShouldZoom:(NSWindow *)window toFrame:(NSRect)newFrame;
-- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window;
+- (nullable NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window;
 
 /* Tells the delegate that the window is about to show a sheet, and gives the delegate a chance to customize the location of the sheet.
  */
@@ -704,7 +735,7 @@ If the url represents a filename or other resource with a known icon, that icon 
 
 /* The default animation between a window and its fullscreen representation is a crossfade.  With knowledge of the layout of a window before and after it enters fullscreen, an application can do a much better job on the animation.  The following API allows a window delegate to customize the animation by providing a custom window or windows containing layers or other effects.  In order to manage windows on spaces, we need the window delegate to provide a list of windows involved in the animation.  If an application does not do a custom animation, this method can be unimplemented or can return nil.  window:startCustomAnimationToEnterFullScreenWithDuration: will be called only if customWindowsToEnterFullScreenForWindow: returns non-nil.  
  */
-- (NSArray *)customWindowsToEnterFullScreenForWindow:(NSWindow *)window NS_AVAILABLE_MAC(10_7);
+- (nullable NSArray<NSWindow *> *)customWindowsToEnterFullScreenForWindow:(NSWindow *)window NS_AVAILABLE_MAC(10_7);
 
 /* The system has started its animation into fullscreen, including transitioning to a new space.  Start the window fullscreen animation immediately, and perform the animation with the given duration to  be in sync with the system animation.  This method is called only if customWindowToEnterFullScreenForWindow: returned non-nil. 
 */
@@ -716,14 +747,14 @@ If the url represents a filename or other resource with a known icon, that icon 
 
 /* The window is about to exit fullscreen mode.  The following API allows a window delegate to customize the animation when the window is about to exit fullscreen.  In order to manage windows on spaces, we need the window delegate to provide a list of windows involved in the animation.  If an application does not do a custom animation, this method can be unimplemented or can return nil.  window:startCustomAnimationToExitFullScreenWithDuration: will be called only if customWindowsToExitFullScreenForWindow: returns non-nil. 
 */
-- (NSArray *)customWindowsToExitFullScreenForWindow:(NSWindow *)window NS_AVAILABLE_MAC(10_7);
+- (nullable NSArray<NSWindow *> *)customWindowsToExitFullScreenForWindow:(NSWindow *)window NS_AVAILABLE_MAC(10_7);
 
 /* The system has started its animation out of fullscreen, including transitioning back to the desktop space.  Start the window animation immediately, and perform the animation with the given duration to  be in sync with the system animation.  This method is called only if customWindowsToExitFullScreenForWindow: returned non-nil. 
 */
 - (void)window:(NSWindow *)window startCustomAnimationToExitFullScreenWithDuration:(NSTimeInterval)duration NS_AVAILABLE_MAC(10_7);
 
 /* customWindowsToEnterFullScreenForWindow:onScreen: will be called in place of customWindowsToEnterFullScreenForWindow: if both are implemented */
-- (NSArray *)customWindowsToEnterFullScreenForWindow:(NSWindow *)window onScreen:(NSScreen *)screen NS_AVAILABLE_MAC(10_9);
+- (nullable NSArray<NSWindow *> *)customWindowsToEnterFullScreenForWindow:(NSWindow *)window onScreen:(NSScreen *)screen NS_AVAILABLE_MAC(10_9);
 
 /* window:startCustomAnimationToEnterFullScreenOnScreen:withDuration: will be called in place of window:startCustomAnimationToEnterFullScreenWithDuration: if both are implemented */
 - (void)window:(NSWindow *)window startCustomAnimationToEnterFullScreenOnScreen:(NSScreen *)screen withDuration:(NSTimeInterval)duration NS_AVAILABLE_MAC(10_9);
@@ -830,4 +861,6 @@ APPKIT_EXTERN NSString * const NSWindowDidChangeOcclusionStateNotification NS_AV
 enum {
     NSUnscaledWindowMask		= 1 << 11
 } NS_ENUM_DEPRECATED_MAC(10_0, 10_9);
+
+NS_ASSUME_NONNULL_END
 

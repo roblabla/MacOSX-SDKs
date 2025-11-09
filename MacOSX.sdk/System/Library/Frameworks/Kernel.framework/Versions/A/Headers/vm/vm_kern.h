@@ -71,4 +71,14 @@
 #include <mach/kern_return.h>
 
 
+
+extern vm_offset_t vm_kernel_addrperm_ext;
+
+extern void	vm_kernel_addrperm_external(
+			vm_offset_t addr,
+			vm_offset_t *perm_addr);
+
+extern void	vm_kernel_unslide_or_perm_external(
+		vm_offset_t addr,
+		vm_offset_t *up_addr);
 #endif	/* _VM_VM_KERN_H_ */

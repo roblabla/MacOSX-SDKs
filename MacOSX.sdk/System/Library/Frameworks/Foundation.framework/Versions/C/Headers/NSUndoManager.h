@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 
@@ -11,13 +11,13 @@
 #import <Foundation/NSObject.h>
 #include <stdint.h>
 
-@class NSArray;
+@class NSArray<ObjectType>;
 @class NSString;
 
+NS_ASSUME_NONNULL_BEGIN
+
 // used with NSRunLoop's performSelector:target:argument:order:modes:
-enum {
-    NSUndoCloseGroupingRunLoopOrdering		= 350000
-};
+static const NSUInteger NSUndoCloseGroupingRunLoopOrdering = 350000;
 
 NS_CLASS_AVAILABLE(10_0, 3_0)
 @interface NSUndoManager : NSObject {
@@ -63,7 +63,7 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
 
         /* Run Loop Modes */
 
-@property (copy) NSArray *runLoopModes;
+@property (copy) NSArray<NSString *> *runLoopModes;
 
         /* Undo/Redo */
 
@@ -95,7 +95,7 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
 
         /* Object based Undo */
 
-- (void)registerUndoWithTarget:(id)target selector:(SEL)selector object:(id)anObject;
+- (void)registerUndoWithTarget:(id)target selector:(SEL)selector object:(nullable id)anObject;
 
         /* Invocation based undo */
 
@@ -104,6 +104,14 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
    // [[undoManager prepareWithInvocationTarget:self] setFont:oldFont color:oldColor]
    // When undo is called, the specified target will be called with
    // [target setFont:oldFont color:oldColor]
+
+/*! @abstract records single undo operation for the specified target
+    @param target non-nil target of the undo operation
+    @param undoHandler non-nil block to be executed for the undo operation
+    @discussion
+      As with other undo operations, this does not strongly retain target. Care should be taken to avoid introducing retain cycles by other references captured by the block.
+ */
+- (void)registerUndoWithTarget:(id)target handler:(void (^)(id target))undoHandler NS_AVAILABLE(10_11, 9_0) NS_REFINED_FOR_SWIFT;
 
 - (void)setActionIsDiscardable:(BOOL)discardable NS_AVAILABLE(10_7, 5_0);
    // Set the latest undo action to discardable if it may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the NSUndoManagerGroupIsDiscardableKey in the userInfo dictionary of the NSUndoManagerDidCloseUndoGroupNotification.
@@ -161,3 +169,4 @@ FOUNDATION_EXPORT NSString * const NSUndoManagerWillCloseUndoGroupNotification N
 // This notification is sent after an undo group closes. It should be safe to undo at this time.
 FOUNDATION_EXPORT NSString * const NSUndoManagerDidCloseUndoGroupNotification NS_AVAILABLE(10_7, 5_0);
 
+NS_ASSUME_NONNULL_END

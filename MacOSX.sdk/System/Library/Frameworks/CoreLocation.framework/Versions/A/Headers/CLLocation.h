@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLAvailability.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
  *  CLLocationDegrees
  *  
@@ -56,10 +58,11 @@ typedef double CLLocationDirection;
  *    longitude:
  *      The longitude in degrees.
  */
-typedef struct {
+struct CLLocationCoordinate2D {
 	CLLocationDegrees latitude;
 	CLLocationDegrees longitude;
-} CLLocationCoordinate2D;
+};
+typedef struct CLLocationCoordinate2D CLLocationCoordinate2D;
 
 /*
  *  CLLocationDistance
@@ -275,3 +278,5 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
 - (CLLocationDistance)distanceFromLocation:(const CLLocation *)location __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_3_2);
 
 @end
+
+NS_ASSUME_NONNULL_END

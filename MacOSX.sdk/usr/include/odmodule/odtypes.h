@@ -393,6 +393,7 @@ ODM_CALLBACK_DECL(RecordWillPasswordExpire);
 ODM_CALLBACK_DECL(RecordWillAuthenticationsExpire);
 ODM_CALLBACK_DECL(RecordSecondsUntilPasswordExpires);
 ODM_CALLBACK_DECL(RecordSecondsUntilAuthenticationsExpire);
+ODM_CALLBACK_DECL(RecordCopyPasswordContentSummary);
 ODM_CALLBACK_DECL(NodeAddAccountPolicy);
 ODM_CALLBACK_DECL(NodeRemoveAccountPolicy);
 ODM_CALLBACK_DECL(NodeSetAccountPolicies);

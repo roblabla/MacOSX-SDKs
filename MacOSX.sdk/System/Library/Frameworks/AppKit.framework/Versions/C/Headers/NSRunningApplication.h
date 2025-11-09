@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,9 +21,12 @@
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <AppKit/NSWorkspace.h>
 
 /* The following flags are for activateWithOptions:. */
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_OPTIONS(NSUInteger, NSApplicationActivationOptions) {
     /* By default, activation brings only the main and key windows forward.  If you specify NSApplicationActivateAllWindows, all of the application's windows are brought forward. */
     NSApplicationActivateAllWindows = 1 << 0,
@@ -103,25 +106,25 @@ NS_CLASS_AVAILABLE(10_6, NA)
 @property (readonly) NSApplicationActivationPolicy activationPolicy;
 
 /* Indicates the name of the application.  This is dependent on the current localization of the referenced app, and is suitable for presentation to the user. */
-@property (readonly, copy) NSString *localizedName;
+@property (nullable, readonly, copy) NSString *localizedName;
 
 /* Indicates the CFBundleIdentifier of the application, or nil if the application does not have an Info.plist. */
-@property (readonly, copy) NSString *bundleIdentifier;
+@property (nullable, readonly, copy) NSString *bundleIdentifier;
 
 /* Indicates the URL to the application's bundle, or nil if the application does not have a bundle. */
-@property (readonly, copy) NSURL *bundleURL;
+@property (nullable, readonly, copy) NSURL *bundleURL;
 
 /* Indicates the URL to the application's executable. */
-@property (readonly, copy) NSURL *executableURL;
+@property (nullable, readonly, copy) NSURL *executableURL;
 
 /* Indicates the process identifier (pid) of the application.  Do not rely on this for comparing processes.  Use isEqual: instead.  Not all applications have a pid.  Applications without a pid return -1 from this method. This is observable through KVO (an application's pid may change if it is automatically terminated). */
 @property (readonly) pid_t processIdentifier;
 
 /* Indicates the date when the application was launched.  This property is not available for all applications.  Specifically, it is not available for applications that were launched without going through LaunchServices.   */
-@property (readonly, copy) NSDate *launchDate;
+@property (nullable, readonly, copy) NSDate *launchDate;
 
 /* Returns the icon of the application. */
-@property (readonly, strong) NSImage *icon;
+@property (nullable, readonly, strong) NSImage *icon;
 
 /* Indicates the executing processor architecture for the application, as an NSBundleExecutableArchitecture from NSBundle.h. */
 @property (readonly) NSInteger executableArchitecture;
@@ -140,10 +143,10 @@ NS_CLASS_AVAILABLE(10_6, NA)
 - (BOOL)forceTerminate;
 
 /* Returns an array of currently running applications with the given bundle identifier, or an empty array if no apps match. */
-+ (NSArray *)runningApplicationsWithBundleIdentifier:(NSString *)bundleIdentifier;
++ (NSArray<NSRunningApplication *> *)runningApplicationsWithBundleIdentifier:(NSString *)bundleIdentifier;
 
 /* Returns the running application with the given process identifier, or nil if no application has that pid.  Applications that do not have PIDs cannot be returned from this method. */
-+ (instancetype)runningApplicationWithProcessIdentifier:(pid_t)pid;
++ (nullable instancetype)runningApplicationWithProcessIdentifier:(pid_t)pid;
 
 /* Returns an NSRunningApplication representing this application. */
 + (instancetype)currentApplication;
@@ -164,7 +167,9 @@ NS_CLASS_AVAILABLE(10_6, NA)
  
  This property is thread safe, in that it may be called from background threads and the result is returned atomically.  This property is observable through KVO.
  */
-@property (readonly, copy) NSArray *runningApplications NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSArray<NSRunningApplication *> *runningApplications NS_AVAILABLE_MAC(10_6);
 
 @end
+
+NS_ASSUME_NONNULL_END
 

@@ -1,18 +1,12 @@
-/*
-     File:       AudioOutputUnit.h
- 
-     Contains:   AudioOutputUnit Interfaces
- 
-     Copyright:  © 2000-2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		AudioOutputUnit.h
+ 	@framework	AudioUnit.framework
+ 	@copyright	(c) 2000-2015 Apple, Inc. All rights reserved.
+	@brief		Additional Audio Unit API for audio input/output units.
 */
-#ifndef __AUDIOOUTPUTUNIT__
-#define __AUDIOOUTPUTUNIT__
+
+#ifndef AudioUnit_AudioOutputUnit_h
+#define AudioUnit_AudioOutputUnit_h
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
@@ -21,16 +15,10 @@
 	#include <AUComponent.h>
 #endif
 
-#if PRAGMA_ONCE
-#pragma once
-#endif
+CF_ASSUME_NONNULL_BEGIN
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_IMPORT
-#pragma import on
 #endif
 
 #if !__LP64__
@@ -80,15 +68,10 @@ typedef OSStatus	(*AudioOutputUnitStopProc) (void *self);
 	#endif
 #endif
 
-#ifdef PRAGMA_IMPORT_OFF
-#pragma import off
-#elif PRAGMA_IMPORT
-#pragma import reset
-#endif
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __AUDIOOUTPUTUNIT__ */
+CF_ASSUME_NONNULL_END
 
+#endif /* AudioUnit_AudioOutputUnit_h */

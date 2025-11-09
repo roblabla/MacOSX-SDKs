@@ -11,6 +11,21 @@
 extern "C" {
 #endif
 
+#if __has_feature(assume_nonnull)
+#define OPENGL_ASSUME_NONNULL_BEGIN _Pragma("clang assume_nonnull begin")
+#define OPENGL_ASSUME_NONNULL_END _Pragma("clang assume_nonnull end")
+#else
+#define OPENGL_ASSUME_NONNULL_BEGIN
+#define OPENGL_ASSUME_NONNULL_END
+#endif
+
+#if __has_feature(nullability)
+#define OPENGL_NULLABLE __nullable
+#define OPENGL_NONNULL __nonnull
+#else
+#define OPENGL_NULLABLE
+#define OPENGL_NONNULL
+#endif
 
 /*
 ** CGL opaque data.
@@ -27,7 +42,6 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFAAllRenderers                                                   =   1, /* choose from all available renderers          */
 	kCGLPFATripleBuffer OPENGL_ENUM_AVAILABLE(10_7)                       =   3, /* choose a triple buffered pixel format        */
 	kCGLPFADoubleBuffer                                                   =   5, /* choose a double buffered pixel format        */
-	kCGLPFAStereo                                                         =   6, /* stereo buffering supported                   */
 	kCGLPFAColorSize                                                      =   8, /* number of color buffer bits                  */
 	kCGLPFAAlphaSize                                                      =  11, /* number of alpha component bits               */
 	kCGLPFADepthSize                                                      =  12, /* number of depth buffer bits                  */
@@ -58,6 +72,7 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFAAccumSize                                   =  14, /* number of accum buffer bits                  */
 	kCGLPFAAuxDepthStencil OPENGL_ENUM_AVAILABLE(10_2) =  57, /* each aux buffer has its own depth stencil    */
 
+	kCGLPFAStereo OPENGL_ENUM_DEPRECATED(10_0, 10_11)        =   6,
 	kCGLPFAOffScreen OPENGL_ENUM_DEPRECATED(10_0, 10_7)      =  53,
 	kCGLPFAWindow OPENGL_ENUM_DEPRECATED(10_0, 10_9)         =  80,
 	kCGLPFACompliant OPENGL_ENUM_DEPRECATED(10_0, 10_9)      =  83,

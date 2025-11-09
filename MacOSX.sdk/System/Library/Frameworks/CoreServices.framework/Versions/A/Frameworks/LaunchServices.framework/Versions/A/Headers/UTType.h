@@ -31,6 +31,12 @@
 extern "C" {
 #endif
 
+
+
+CF_ASSUME_NONNULL_BEGIN
+
+
+
 /* ======================================================================================================== */
 /* Uniform Type Identification API                                                                          */
 /* ======================================================================================================== */
@@ -307,11 +313,11 @@ extern const CFStringRef kUTTagClassOSType                           __OSX_AVAIL
  *    a new CFStringRef containing the type identifier, or NULL if
  *    inTagClass is not a known tag class
  */
-extern CFStringRef 
+extern __nullable CFStringRef
 UTTypeCreatePreferredIdentifierForTag(
-  CFStringRef   inTagClass,
-  CFStringRef   inTag,
-  CFStringRef   inConformingToUTI)       /* can be NULL */    __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef              inTagClass,
+  CFStringRef              inTag,
+  __nullable CFStringRef   inConformingToUTI)                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -353,11 +359,11 @@ UTTypeCreatePreferredIdentifierForTag(
  *    An array of uniform type identifiers, or NULL if inTagClass is
  *    not a known tag class
  */
-extern CFArrayRef 
+extern __nullable CFArrayRef
 UTTypeCreateAllIdentifiersForTag(
-  CFStringRef   inTagClass,
-  CFStringRef   inTag,
-  CFStringRef   inConformingToUTI)       /* can be NULL */    __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef              inTagClass,
+  CFStringRef              inTag,
+  __nullable CFStringRef   inConformingToUTI)                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -385,10 +391,10 @@ UTTypeCreateAllIdentifiersForTag(
  *  Result:
  *    the tag string, or NULL if there is no tag of the specified class.
  */
-extern CFStringRef 
+extern __nullable CFStringRef
 UTTypeCopyPreferredTagWithClass(
   CFStringRef   inUTI,
-  CFStringRef   inTagClass)                                   __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef   inTagClass)                                          __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -410,10 +416,10 @@ UTTypeCopyPreferredTagWithClass(
  *  Result:
  *    an array of tag strings, or NULL if there is no tag of the specified class.
  */
-extern CFArrayRef 
+extern __nullable CFArrayRef
 UTTypeCopyAllTagsWithClass(
   CFStringRef   inUTI,
-  CFStringRef   inTagClass)                                   __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+  CFStringRef   inTagClass)                                          __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 
 
@@ -442,7 +448,7 @@ UTTypeCopyAllTagsWithClass(
 extern Boolean 
 UTTypeEqual(
   CFStringRef   inUTI1,
-  CFStringRef   inUTI2)                                       __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef   inUTI2)                                              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -468,7 +474,7 @@ UTTypeEqual(
 extern Boolean 
 UTTypeConformsTo(
   CFStringRef   inUTI,
-  CFStringRef   inConformsToUTI)                              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef   inConformsToUTI)                                     __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -489,8 +495,8 @@ UTTypeConformsTo(
  *  Result:
  *    a localized string, or NULL of no type description is available
  */
-extern CFStringRef 
-UTTypeCopyDescription(CFStringRef inUTI)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern __nullable CFStringRef
+UTTypeCopyDescription(CFStringRef inUTI)                             __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -511,7 +517,7 @@ UTTypeCopyDescription(CFStringRef inUTI)                      __OSX_AVAILABLE_ST
  *    Whether or not the UTI is registered.
  */
 extern Boolean
-UTTypeIsDeclared(CFStringRef inUTI)                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+UTTypeIsDeclared(CFStringRef inUTI)                                  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 
 
@@ -530,7 +536,7 @@ UTTypeIsDeclared(CFStringRef inUTI)                           __OSX_AVAILABLE_ST
  *    Whether or not the UTI is dynamic.
  */
 extern Boolean
-UTTypeIsDynamic(CFStringRef inUTI)                            __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+UTTypeIsDynamic(CFStringRef inUTI)                                   __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 
 
@@ -554,8 +560,8 @@ UTTypeIsDynamic(CFStringRef inUTI)                            __OSX_AVAILABLE_ST
  *  Result:
  *    a tag declaration dictionary, or NULL if the type is not declared
  */
-extern CFDictionaryRef 
-UTTypeCopyDeclaration(CFStringRef inUTI)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern __nullable CFDictionaryRef
+UTTypeCopyDeclaration(CFStringRef inUTI)                             __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -577,8 +583,8 @@ UTTypeCopyDeclaration(CFStringRef inUTI)                      __OSX_AVAILABLE_ST
  *  Result:
  *    a URL, or NULL if the bundle cannot be located.
  */
-extern CFURLRef 
-UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern __nullable CFURLRef
+UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -600,8 +606,8 @@ UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               __OSX_AVAILABLE_ST
  *  Result:
  *    a new CFString representing the OSType
  */
-extern CFStringRef 
-UTCreateStringForOSType(OSType inOSType)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+extern CFStringRef
+UTCreateStringForOSType(OSType inOSType)                             __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 
 
@@ -625,8 +631,11 @@ UTCreateStringForOSType(OSType inOSType)                      __OSX_AVAILABLE_ST
  *    a valid encoding of an OSType
  */
 extern OSType 
-UTGetOSTypeFromString(CFStringRef inString)                   __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+UTGetOSTypeFromString(CFStringRef inString)                          __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
+
+
+CF_ASSUME_NONNULL_END
 
 
 

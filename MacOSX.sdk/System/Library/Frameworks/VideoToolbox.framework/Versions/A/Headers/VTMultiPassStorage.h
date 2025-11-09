@@ -35,7 +35,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		VTMultiPassStorageRef is a CF type, so call CFRelease and CFRetain to manage objects of this type.
 		The data stored in the VTMultiPassStorage is private to the video encoder.
 */
-typedef struct OpaqueVTMultiPassStorage*  VTMultiPassStorageRef; // a CF type, call CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTMultiPassStorage*  VTMultiPassStorageRef; // a CF type, call CFRetain and CFRelease
 
 VT_EXPORT CFTypeID VTMultiPassStorageGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 	
@@ -59,15 +59,19 @@ CF_IMPLICIT_BRIDGING_DISABLED
 */
 VT_EXPORT OSStatus 
 VTMultiPassStorageCreate(
-	CFAllocatorRef			allocator,                 /* can be NULL */
-	CFURLRef				fileURL,                   /* can be NULL */
-	CMTimeRange				timeRange,				   /* can be kCMTimeRangeInvalid */
-	CFDictionaryRef			options,                   /* can be NULL */
-	VTMultiPassStorageRef	*multiPassStorageOut) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NULLABLE CFAllocatorRef						allocator,
+	CM_NULLABLE CFURLRef							fileURL,
+	CMTimeRange										timeRange,				   /* can be kCMTimeRangeInvalid */
+	CM_NULLABLE CFDictionaryRef						options,
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTMultiPassStorageRef * CM_NONNULL multiPassStorageOut) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 	
 CF_IMPLICIT_BRIDGING_ENABLED
+	
+CM_ASSUME_NONNULL_BEGIN
 
 VT_EXPORT const CFStringRef kVTMultiPassStorageCreationOption_DoNotDelete; // CFBoolean, false by default.  Provided for use when debugging video encoders.
+	
+CM_ASSUME_NONNULL_END
 
 
 /*!
@@ -79,7 +83,7 @@ VT_EXPORT const CFStringRef kVTMultiPassStorageCreationOption_DoNotDelete; // CF
 */
 VT_EXPORT OSStatus 
 VTMultiPassStorageClose(
-	VTMultiPassStorageRef	multiPassStorage ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NONNULL VTMultiPassStorageRef	multiPassStorage ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 

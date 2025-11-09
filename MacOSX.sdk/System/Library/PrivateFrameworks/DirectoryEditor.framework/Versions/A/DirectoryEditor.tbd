@@ -13,32 +13,14 @@ exports:
                        _DEProgressSheetController.statusString, _DEProportionalView._proportionalOff, 
                        _DEProportionalView.initialSubviewLocationDict, 
                        _DirectoryEditorView._authForLocalNode, _DirectoryEditorView._controller, 
-                       _DirectoryEditorView._odSession, _XSBonjourComboBox._displaysResolvedAddresses, 
-                       _XSBonjourComboBox._hostNamesForAddresses, _XSBonjourComboBox._hostNamesForAddressesLock, 
-                       _XSBonjourComboBox._isBrowsing, _XSBonjourComboBox._netServiceBrowser, 
-                       _XSBonjourComboBox._netServices, _XSBonjourComboBox._serviceType, 
-                       _XSBonjourComboBox._session, _XSGradientView._angle, 
-                       _XSGradientView._fillGradient, _XSLoginPanelController._authenticateAction, 
-                       _XSLoginPanelController._delegate, _XSLoginPanelController._disableableControls, 
-                       _XSLoginPanelController._messageText, _XSLoginPanelController._password, 
-                       _XSLoginPanelController._saveToKeychain, _XSLoginPanelController._serverAddress, 
-                       _XSLoginPanelController._serverAddressEditingEditable, 
-                       _XSLoginPanelController._userName, _XSLoginPanelController.cancelButton, 
-                       _XSLoginPanelController.connectButton, _XSLoginPanelController.controlsBelowMessageTextField, 
-                       _XSLoginPanelController.loginPanel, _XSLoginPanelController.messageTextField, 
-                       _XSLoginPanelController.passwordTextField, _XSLoginPanelController.progressIndicator, 
-                       _XSLoginPanelController.progressStatusTextField, 
-                       _XSLoginPanelController.saveToKeychainCheckBox, 
-                       _XSLoginPanelController.serverAddressBonjourComboBox, 
-                       _XSLoginPanelController.serverAddressTextField, 
-                       _XSLoginPanelController.userNameTextField ]
+                       _DirectoryEditorView._odSession, _XSGradientView._angle, 
+                       _XSGradientView._fillGradient ]
   - archs:           [ i386, x86_64 ]
-    symbols:         [ _NetServiceByHostNameComparator, _NetServiceByNameComparator, 
-                       _XSColorFromString, _XSGradientFromString, _XSStringFromColor, 
+    symbols:         [ _XSColorFromString, _XSGradientFromString, _XSStringFromColor, 
                        _XSStringFromGradient ]
     objc-classes:    [ _AuthToNodeSheetController, _ColoredView, _DECheckeredView, 
                        _DEDragReceiverView, _DEProgressSheetController, 
                        _DEProportionalView, _DefaultDirEditorPlugin, _DirEditorPlugin, 
                        _DirectoryEditorView, _DirectoryEditorViewController, 
-                       _XSBonjourComboBox, _XSGradientView, _XSLoginPanelController ]
+                       _XSGradientView ]
 ...

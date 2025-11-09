@@ -1,7 +1,7 @@
 /*
 	NSDockTile.h
 	Application Kit
-	Copyright (c) 2006-2014, Apple Inc.
+	Copyright (c) 2006-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,6 +11,8 @@
 
 #define NSAppKitVersionNumberWithDockTilePlugInSupport 1001.0
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSView;
 
@@ -38,7 +40,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* set the content view to view.  view should be height and width resizable.  In order to initiate drawing in view, you must call -[NSDockTile display]. 
 */
-@property (strong) NSView *contentView;
+@property (nullable, strong) NSView *contentView;
 
 /* cause the dock tile to be redrawn.  The contentView and any subviews will be sent drawRect: messages.
 */
@@ -50,7 +52,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Badge the dock icon with a localized string.  The badge appearance is system defined.  This is often used to show an unread count in the application dock icon.
 */
-@property (copy) NSString *badgeLabel;
+@property (nullable, copy) NSString *badgeLabel;
 
 /* -owner will return NSApp for the application dock tile, or the NSWindow for a mini window dock tile.
 */
@@ -67,9 +69,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @protocol NSDockTilePlugIn <NSObject>
 
 @required
-- (void)setDockTile:(NSDockTile*)dockTile;
+- (void)setDockTile:(nullable NSDockTile*)dockTile;
 
 @optional
-- (NSMenu*)dockMenu;
+- (nullable NSMenu*)dockMenu;
 @end
+
+NS_ASSUME_NONNULL_END
 

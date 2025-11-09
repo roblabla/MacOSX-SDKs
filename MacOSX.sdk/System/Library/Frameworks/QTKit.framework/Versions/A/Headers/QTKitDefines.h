@@ -91,15 +91,6 @@
  introduced for QTKit 7.2 should make sure they are running against QuickTime 7.2.1
  or later, which is the first release for which the QuickTime 7.2 SDK is supported.
  
- One way to check the QuickTime version is use the NSBundle API. For example, to
- ensure that an application is running on a version of QTKit that targetVersion
- or later, it can call
- 
- if ([[[[NSBundle bundleWithIdentifier:@"com.apple.QTKit"] infoDictionary]
-	 objectForKey:(NSString *)kCFBundleVersionKey] doubleValue] >= targetVersion) {
-     // Do something only available on targetVersion or later
- } 
- 
  */
 
 #define QTKIT_VERSION_7_0           70000

@@ -11,11 +11,10 @@
                      http://developer.apple.com/bugreporter/
 
 ==================================================================================================*/
-#if !defined(__HostTime_h__)
-#define __HostTime_h__
+#if !defined(CoreAudio_HostTime_h)
+#define CoreAudio_HostTime_h
 
 //==================================================================================================
-#pragma mark    Theory of Operation
 
 /*!
     @header HostTime
@@ -24,7 +23,8 @@
 */
 
 //==================================================================================================
-#pragma mark    Includes
+#pragma mark -
+#pragma mark Includes
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
@@ -35,16 +35,13 @@
 
 //==================================================================================================
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint off
-#endif
-
 #if defined(__cplusplus)
 extern "C"
 {
 #endif
 
 //==================================================================================================
+#pragma mark -
 #pragma mark    Functions
 
 /*!
@@ -103,8 +100,4 @@ AudioConvertNanosToHostTime(UInt64 inNanos)                                     
 }
 #endif
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint reset
-#endif
-
-#endif  //  __HostTime_h__
+#endif  //  CoreAudio_HostTime_h

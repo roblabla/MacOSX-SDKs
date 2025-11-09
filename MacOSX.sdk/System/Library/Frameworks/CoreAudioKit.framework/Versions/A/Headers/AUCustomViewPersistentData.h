@@ -11,6 +11,8 @@
                      http://developer.apple.com/bugreporter/
 */
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSDictionary;
 
 @protocol AUCustomViewPersistentData
@@ -23,21 +25,11 @@
  */
 
 /*!
-	@function	customViewPersistentData
-	@abstract	Return the custom data to be preserved by the host before closing the view.
-	@result		A NSDictionary
-	@discussion 	The host should call this method before closing the view. This dictionary should be returned autoreleased.
+    @property   customViewPersistentData
+    @abstract	Property for accessing custom data to be preserved by the host
+    @discussion Getter- Return the custom data to be preserved by the host before closing the view.                Setter- A NSDictionary containing the view data to restore when the view is opened. This property should set prior to opening the view. The au view should be written in such a way that it can store this dictionary and use its information when the view is opened and user interface elements are created. The view should retain this dictionary until it is finished with it, and should not release the dictionary. This dictionary is owned by the host.
 */
-- (NSDictionary *)customViewPersistentData;
-
-/*!
-	@function	setCustomViewPersistentData:
-	@abstract	Return the custom data to be preserved by the host between openings of the view.
-	@param		A NSDictionary containing the view data to restore when the view is opened.
-	@discussion 	This call should be made prior to opening the view. The au view should be written in such a way that it can store this
-			dictionary and use its information when the view is opened and user interface elements are created. The view should retain
-			this dictionary until it is finished with it, and should not release the dictionary. This dictionary is owned by the host.
-*/
-- (void) setCustomViewPersistentData:(NSDictionary *) data;
-
+@property (assign, nonatomic, nullable) NSDictionary<NSString *, id> *customViewPersistentData;
 @end
+
+NS_ASSUME_NONNULL_END

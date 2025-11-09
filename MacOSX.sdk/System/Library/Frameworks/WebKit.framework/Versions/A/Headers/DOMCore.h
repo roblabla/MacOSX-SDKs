@@ -39,7 +39,6 @@
 #import <WebKit/DOMNamedNodeMap.h>
 #import <WebKit/DOMNode.h>
 #import <WebKit/DOMNodeList.h>
-#import <WebKit/DOMNotation.h>
 #import <WebKit/DOMObject.h>
 #import <WebKit/DOMProcessingInstruction.h>
 #import <WebKit/DOMText.h>

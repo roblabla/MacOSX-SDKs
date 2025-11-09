@@ -1,4 +1,4 @@
-framework module CoreMediaIO [extern_c] [system] {
+framework module CoreMediaIO [extern_c] {
   export *
   umbrella header "CMIOHardware.h"
   module * { export * }

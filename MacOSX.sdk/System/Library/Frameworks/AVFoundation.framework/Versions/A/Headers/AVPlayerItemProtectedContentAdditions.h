@@ -3,13 +3,15 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
  
  */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVPlayerItem.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
@@ -114,3 +116,5 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
 #endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
 @end
+
+NS_ASSUME_NONNULL_END

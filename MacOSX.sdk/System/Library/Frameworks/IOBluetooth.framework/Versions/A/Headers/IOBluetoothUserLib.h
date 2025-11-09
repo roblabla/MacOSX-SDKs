@@ -1,10 +1,10 @@
 
 #pragma once
 
-#include	<IOKit/IOKitLib.h>
-#include 	<CoreFoundation/CFMachPort.h>
+#import	<IOKit/IOKitLib.h>
+#import 	<CoreFoundation/CFMachPort.h>
 
-#include	<IOBluetooth/Bluetooth.h>
+#import	<IOBluetooth/Bluetooth.h>
 
 #ifdef __OBJC__
 #import		<Foundation/Foundation.h>

@@ -57,11 +57,17 @@ uint32_t PE_get_random_seed(
 	unsigned char * dst_random_seed,
 	uint32_t request_size);
 
+uint32_t PE_i_can_has_debugger(
+	uint32_t *);
+
+
 
 void PE_init_kprintf(
 	boolean_t vm_initialized);
 
 extern int32_t gPESerialBaud;
+
+extern uint8_t gPlatformECID[8];
 
 unsigned int PE_init_taproot(vm_offset_t *taddr);
 
@@ -269,6 +275,14 @@ extern void PE_cpu_halt(
 	cpu_id_t target);
 
 extern void PE_cpu_signal(
+	cpu_id_t source,
+	cpu_id_t target);
+
+extern void PE_cpu_signal_deferred(
+	cpu_id_t source,
+	cpu_id_t target);
+
+extern void PE_cpu_signal_cancel(
 	cpu_id_t source,
 	cpu_id_t target);
 

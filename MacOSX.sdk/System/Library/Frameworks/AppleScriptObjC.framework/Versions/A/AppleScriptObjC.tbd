@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/AppleScriptObjC.framework/Versions/A/AppleScriptObjC
-current-version: 28.0
+current-version: 32.0
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _BAFunctionInvocation._arg_types, _BAFunctionInvocation._arg_values, 
@@ -13,14 +13,15 @@ exports:
                        _BAFunctionSignature._isVariadic, _BAFunctionSignature._returnType, 
                        _BAGenericObject.m_ci, _BAGenericObject.m_oid, _BAImmediateData._obj, 
                        _BAMetadataManager._constants, _BAMetadataManager._enums, 
-                       _BAMetadataManager._functions, _BAMetadataManager._protocol_classMethods, 
-                       _BAMetadataManager._protocol_instanceMethods, _BAMetadataManager._retvals, 
-                       _BAReferenceParameter._encoding, _BAReferenceParameter._modifier, 
-                       _BAReferenceParameter._storage, _BAXMLContext._currentArgDepth, 
-                       _BAXMLContext._currentClass, _BAXMLContext._currentFunction, 
-                       _BAXMLContext._currentMethod, _BAXMLContext._currentProtocol, 
-                       _BAXMLContext._currentSignature, _BAXMLContext._m, 
-                       _BAXMLContext._retvals ]
+                       _BAMetadataManager._functions, _BAMetadataManager._images, 
+                       _BAMetadataManager._methods, _BAMetadataManager._needsUpdate, 
+                       _BAMetadataManager._protocol_classMethods, _BAMetadataManager._protocol_instanceMethods, 
+                       _BAMetadataManager._structs, _BAReferenceParameter._encoding, 
+                       _BAReferenceParameter._modifier, _BAReferenceParameter._storage, 
+                       _BAXMLContext._currentArgDepth, _BAXMLContext._currentClass, 
+                       _BAXMLContext._currentFunction, _BAXMLContext._currentMethod, 
+                       _BAXMLContext._currentProtocol, _BAXMLContext._currentSignature, 
+                       _BAXMLContext._m, _BAXMLContext._retvals ]
   - archs:           [ i386, x86_64 ]
     symbols:         [ _AddressOfSymbol, _BAActiveProc, _BACreateClassForOSAIDInComponent, 
                        _BAHandleEvent, _BAHandleEventInternal, _BAObjCIDForOSAIDInComponent, 
@@ -30,6 +31,6 @@ exports:
                        _objectForDescriptor, _shimForObject, _unqualified_type_encoding ]
     objc-classes:    [ _BAFunctionInvocation, _BAFunctionSignature, _BAGenericObject, 
                        _BAGenericObjectNoDeleteOSAID, _BAImmediateData, 
-                       _BAMetadataManager, _BAObjectManager, _BAObjectProto, 
-                       _BAReferenceParameter, _BAXMLContext ]
+                       _BAMetadataManager, _BAMethodSignature, _BAObjectManager, 
+                       _BAObjectProto, _BAReferenceParameter, _BAXMLContext ]
 ...

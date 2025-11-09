@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright 2006-2012 Apple Inc. All rights reserved.
+	Copyright 2006-2015 Apple Inc. All rights reserved.
  
 */
 
@@ -16,6 +16,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@header		CMMemoryPool.h
@@ -47,7 +49,7 @@ extern "C" {
 		CFAllocatorDeallocate methods.
 */
 
-typedef struct OpaqueCMMemoryPool *CMMemoryPoolRef; // a CF type; use CFRetain and CFRelease.
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMMemoryPool *CMMemoryPoolRef; // a CF type; use CFRetain and CFRelease.
 
 CM_EXPORT CFTypeID CMMemoryPoolGetTypeID(void)
 						__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
@@ -57,28 +59,28 @@ CM_EXPORT CFTypeID CMMemoryPoolGetTypeID(void)
 	@abstract	Specifies how long memory should be allowed to hang out in the pool before being deallocated.
 	@discussion	Pass this in the options dictionary to CMMemoryPoolCreate.
 */
-CM_EXPORT const CFStringRef kCMMemoryPoolOption_AgeOutPeriod // CFNumber (seconds)
+CM_EXPORT const CFStringRef CM_NONNULL kCMMemoryPoolOption_AgeOutPeriod // CFNumber (seconds)
 								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
 	@function	CMMemoryPoolCreate
 	@abstract	Creates a new CMMemoryPool.
 */
-CM_EXPORT CMMemoryPoolRef CMMemoryPoolCreate( CFDictionaryRef options ) // pass NULL for defaults
+CM_EXPORT CMMemoryPoolRef CM_NONNULL CMMemoryPoolCreate( CFDictionaryRef CM_NULLABLE options ) // pass NULL for defaults
 								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
 	@function	CMMemoryPoolGetAllocator
 	@abstract	Returns the pool's CFAllocator.
 */
-CM_EXPORT CFAllocatorRef CMMemoryPoolGetAllocator( CMMemoryPoolRef pool )
+CM_EXPORT CFAllocatorRef CM_NONNULL CMMemoryPoolGetAllocator( CMMemoryPoolRef CM_NONNULL pool )
 								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
 	@function	CMMemoryPoolFlush
 	@abstract	Deallocates all memory the pool was holding for recycling.
 */
-CM_EXPORT void CMMemoryPoolFlush( CMMemoryPoolRef pool )
+CM_EXPORT void CMMemoryPoolFlush( CMMemoryPoolRef CM_NONNULL pool )
 					__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -90,8 +92,10 @@ CM_EXPORT void CMMemoryPoolFlush( CMMemoryPoolRef pool )
 		This also happens when the retain count of the CMMemoryPool drops to zero, 
 		except that under GC it may be delayed.
 */
-CM_EXPORT void CMMemoryPoolInvalidate( CMMemoryPoolRef pool )
+CM_EXPORT void CMMemoryPoolInvalidate( CMMemoryPoolRef CM_NONNULL pool )
 					__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #ifdef __cplusplus
 }

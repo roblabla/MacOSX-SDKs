@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2005-2012 Apple Inc. All rights reserved.
+    Copyright 2005-2015 Apple Inc. All rights reserved.
  
 */
 
@@ -48,6 +48,8 @@ typedef int64_t CMTimeValue;
 	@typedef	CMTimeScale
 	@abstract	Denominator of rational CMTime.
 	@discussion	Timescales must be positive.
+				Note: kCMTimeMaxTimescale is NOT a good choice of timescale for movie files.  
+				(Recommended timescales for movie files range from 600 to 90000.)
 */
 typedef int32_t CMTimeScale;
 #define kCMTimeMaxTimescale 0x7fffffffL
@@ -545,11 +547,11 @@ CMTime CMTimeAbsoluteValue(
     @result     A CFDictionary version of the CMTime.
 */
 CM_EXPORT 
-CFDictionaryRef CMTimeCopyAsDictionary(
-					CMTime time,				/*! @param time			CMTime from which to create dictionary. */
-					CFAllocatorRef allocator)	/*! @param allocator	CFAllocator with which to create dictionary.
-																		Pass kCFAllocatorDefault to use the default
-																		allocator. */
+CFDictionaryRef CM_NULLABLE CMTimeCopyAsDictionary(
+					CMTime time,							/*! @param time			CMTime from which to create dictionary. */
+					CFAllocatorRef CM_NULLABLE allocator)	/*! @param allocator	CFAllocator with which to create dictionary.
+																					Pass kCFAllocatorDefault to use the default
+																					allocator. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 /*!
 	@function	CMTimeMakeFromDictionary
@@ -560,8 +562,10 @@ CFDictionaryRef CMTimeCopyAsDictionary(
 */
 CM_EXPORT 
 CMTime CMTimeMakeFromDictionary(
-				CFDictionaryRef dict)	/*! @param dict CFDictionary from which to create CMTime. */
+				CFDictionaryRef CM_NULLABLE dict)	/*! @param dict CFDictionary from which to create CMTime. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CM_ASSUME_NONNULL_BEGIN
 
 /*!
 	@constant kCMTimeValueKey
@@ -591,6 +595,8 @@ CM_EXPORT const CFStringRef kCMTimeEpochKey
 CM_EXPORT const CFStringRef kCMTimeFlagsKey
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CM_ASSUME_NONNULL_END
+
 /*!
 	@function	CMTimeCopyDescription
     @abstract   Creates a CFString with a description of a CMTime (just like CFCopyDescription).
@@ -600,10 +606,10 @@ CM_EXPORT const CFStringRef kCMTimeFlagsKey
 	@result		The created CFString description.  
 */
 CM_EXPORT 
-CFStringRef CMTimeCopyDescription(
-	CFAllocatorRef allocator,		/*! @param allocator	CFAllocator with which to create description. Pass
+CFStringRef CM_NULLABLE CMTimeCopyDescription(
+	CFAllocatorRef CM_NULLABLE allocator,				/*! @param allocator	CFAllocator with which to create description. Pass
 															kCFAllocatorDefault to use the default allocator. */
-	CMTime time)					/*! @param time			CMTime to describe. */
+	CMTime time)										/*! @param time			CMTime to describe. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!

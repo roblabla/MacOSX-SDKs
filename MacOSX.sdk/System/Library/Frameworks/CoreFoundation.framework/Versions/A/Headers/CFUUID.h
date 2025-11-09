@@ -1,5 +1,5 @@
 /*	CFUUID.h
-	Copyright (c) 1999-2014, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2015, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUUID__)
@@ -11,7 +11,7 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef const struct __CFUUID * CFUUIDRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CFUUID * CFUUIDRef;
 
 typedef struct {
     UInt8 byte0;

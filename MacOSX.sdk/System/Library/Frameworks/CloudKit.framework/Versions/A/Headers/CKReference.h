@@ -9,6 +9,7 @@
 
 @class CKRecord, CKRecordID, CKAsset;
 
+NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, CKReferenceAction) {
     /* When the referred record is deleted, this record is unchanged, and has a dangling pointer */
     CKReferenceActionNone       = 0,
@@ -32,3 +33,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly, copy) CKRecordID *recordID;
 
 @end
+NS_ASSUME_NONNULL_END

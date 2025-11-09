@@ -6,6 +6,13 @@
 #define CGPDFOBJECT_H_
 
 #include <CoreGraphics/CGBase.h>
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* A type for boolean values. */
 
@@ -25,7 +32,7 @@ typedef union CGPDFObject *CGPDFObjectRef;
 
 /* An identifier to describe an object's type. */
 
-enum CGPDFObjectType {
+typedef CF_ENUM (int32_t, CGPDFObjectType) {
   kCGPDFObjectTypeNull = 1,
   kCGPDFObjectTypeBoolean,
   kCGPDFObjectTypeInteger,
@@ -36,12 +43,11 @@ enum CGPDFObjectType {
   kCGPDFObjectTypeDictionary,
   kCGPDFObjectTypeStream
 };
-typedef enum CGPDFObjectType CGPDFObjectType;
 
 /* Return the type of `object'. */
 
-CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef object)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef __nullable object)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Get the value of `object'. If the type of `object' is equal to `type',
    then copy the value of `object' to `value' (if it's non-NULL) and return
@@ -50,7 +56,12 @@ CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef object)
    `object' to floating point and copy the result to `value' (if it's
    non-NULL) and return true. Otherwise, return false. */
 
-CG_EXTERN bool CGPDFObjectGetValue(CGPDFObjectRef object, CGPDFObjectType type,
-  void *value) CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN bool CGPDFObjectGetValue(CGPDFObjectRef __nullable object,
+    CGPDFObjectType type, void * __nullable value)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPDFOBJECT_H_ */

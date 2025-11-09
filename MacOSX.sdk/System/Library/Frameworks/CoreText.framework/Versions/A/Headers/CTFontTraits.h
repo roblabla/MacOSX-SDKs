@@ -2,7 +2,7 @@
  *  CTFontTraits.h
  *  CoreText
  *
- *  Copyright (c) 2006-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -13,9 +13,8 @@
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFString.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
     @defined    kCTFontSymbolicTrait
@@ -113,8 +112,7 @@ typedef CF_OPTIONS(uint32_t, CTFontStylisticClass) {
     kCTFontSymbolicClass = kCTFontClassSymbolic
 };
 
-#if defined(__cplusplus)
-}
-#endif
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 
 #endif

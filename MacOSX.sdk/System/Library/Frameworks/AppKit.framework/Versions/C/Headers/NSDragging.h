@@ -1,17 +1,21 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <limits.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSDraggingItem, NSDraggingSession, NSImage, NSPasteboard, NSView, NSWindow;
-@class NSURL, NSArray, NSDictionary;
+@class NSURL;
 @protocol NSPasteboardWriting;
 
 
@@ -48,25 +52,32 @@ typedef NS_OPTIONS(NSUInteger, NSDraggingItemEnumerationOptions) {
     NSDraggingItemEnumerationClearNonenumeratedImages 	= (1UL << 16),
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
+/* The spring loading highlight styles roughly correlate to {None: NotSpringLoadable, Light: SpringLoadable, Dark: SpringLoadingEngaged}. However, this not not strictly true as Drag & Drop may switch between highlight styles as an animated signal to the user. */
+typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
+    NSSpringLoadingHighlightNone = 0,
+    NSSpringLoadingHighlightStandard,
+    NSSpringLoadingHighlightEmphasized
+} NS_ENUM_AVAILABLE_MAC(10_11);
+
 /* protocol for the sender argument of the messages sent to a drag destination.  The view or
    window that registered dragging types sends these messages as dragging is
    happening to find out details about that session of dragging.
  */
 @protocol NSDraggingInfo <NSObject>
 @required
-- (NSWindow *)draggingDestinationWindow;
+- (nullable NSWindow *)draggingDestinationWindow;
 - (NSDragOperation)draggingSourceOperationMask;
 - (NSPoint)draggingLocation;
 
 /* Returns the current location of the current composited dragging image’s origin in NSDraggingFormationNone translated to the base coordinate system of the destination object’s window
 */
 - (NSPoint)draggedImageLocation;
-- (NSImage *)draggedImage;
+- (nullable NSImage *)draggedImage;
 - (NSPasteboard *)draggingPasteboard;
-- (id)draggingSource;
+- (nullable id)draggingSource;
 - (NSInteger)draggingSequenceNumber;
 - (void)slideDraggedImageTo:(NSPoint)screenPoint;
-- (NSArray *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
+- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
 
 /* Controls the dragging formation while the drag is over this destination. The default value is the current drag formation. */
 @property NSDraggingFormation draggingFormation NS_AVAILABLE_MAC(10_7);
@@ -85,7 +96,13 @@ typedef NS_OPTIONS(NSUInteger, NSDraggingItemEnumerationOptions) {
 
 /* Enumerate through each dragging item. Any changes made to the properties of the draggingItem are reflected in the drag and are automatically removed when the drag exits. Classes in the provided array must implement the NSPasteboardReading protocol. Cocoa classes that implement this protocol include NSImage, NSString, NSURL, NSColor, NSAttributedString, and NSPasteboardItem. For every item on the pasteboard, each class in the provided array will be queried for the types it can read using -readableTypesForPasteboard:. An instance will be created of the first class found in the provided array whose readable types match a conforming type contained in that pasteboard item. If an Instance is created from the pasteboard item data, it is placed into an NSDraggingItem along with the dragging properties of that item such as the dragging image. The NSDraggingItem is then passed as a parameter to the provided block. Additional search options, such as restricting the search to file URLs with particular content types, can be specified with a search options dictionary.  See the comments for the Pasteboard Reading Options keys in NSPasteboard.h for a full description. Note: all coordinate properties in the NSDraggingItem are in the coordinate system of view. If view is nil, the screen coordinate space is used.
 */
-- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(NSView *)view classes:(NSArray *)classArray searchOptions:(NSDictionary *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block NS_AVAILABLE_MAC(10_7);
+- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(NSView *)view classes:(NSArray<Class> *)classArray searchOptions:(NSDictionary<NSString *, id> *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block NS_AVAILABLE_MAC(10_7);
+
+@property (readonly) NSSpringLoadingHighlight springLoadingHighlight NS_AVAILABLE_MAC(10_11);
+
+/* Used when the drag crosses two distinct but valid spring loading regions within the same destination. The hover timer is reset and if the user is currently in a force click, they must release and re-force click to highlight the new region. */
+- (void)resetSpringLoading NS_AVAILABLE_MAC(10_11);
+
 @end
 
 
@@ -97,18 +114,18 @@ typedef NS_OPTIONS(NSUInteger, NSDraggingItemEnumerationOptions) {
 @optional
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender;
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender; /* if the destination responded to draggingEntered: but not to draggingUpdated: the return value from draggingEntered: is used */
-- (void)draggingExited:(id <NSDraggingInfo>)sender;
+- (void)draggingExited:(nullable id <NSDraggingInfo>)sender;
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender;
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender;
-- (void)concludeDragOperation:(id <NSDraggingInfo>)sender;
+- (void)concludeDragOperation:(nullable id <NSDraggingInfo>)sender;
 /* draggingEnded: is implemented as of Mac OS 10.5 */
-- (void)draggingEnded:(id <NSDraggingInfo>)sender;
+- (void)draggingEnded:(nullable id <NSDraggingInfo>)sender;
 /* the receiver of -wantsPeriodicDraggingUpdates should return NO if it does not require periodic -draggingUpdated messages (eg. not autoscrolling or otherwise dependent on draggingUpdated: sent while mouse is stationary) */
 - (BOOL)wantsPeriodicDraggingUpdates;
 
 /* While a destination may change the dragging images at any time, it is recommended to wait until this method is called before updating the dragging image. This allows the system to delay changing the dragging images until it is likely that the user will drop on this destination. Otherwise, the dragging images will change too often during the drag which would be distracting to the user. The destination may update the dragging images by calling one of the -enumerateDraggingItems methods on the sender.
 */
-- (void)updateDraggingItemsForDrag:(id <NSDraggingInfo>)sender NS_AVAILABLE_MAC(10_7);
+- (void)updateDraggingItemsForDrag:(nullable id <NSDraggingInfo>)sender NS_AVAILABLE_MAC(10_7);
 @end
 
 
@@ -140,17 +157,57 @@ typedef NS_OPTIONS(NSUInteger, NSDraggingItemEnumerationOptions) {
 
 @end
 
+
+typedef NS_OPTIONS(NSUInteger, NSSpringLoadingOptions) {
+    NSSpringLoadingDisabled	= 0,		// Spring loading disabled
+    NSSpringLoadingEnabled	= 1UL << 0,	// Spring loading allowed (via Force Click release and hover timeout depending on user preferences)
+    
+    /* Activate spring loading when user enters Force Click as opposed to release from Force Click. Spring loading is de-activated when Force Click is released. If hover is enabled, spring loading is activated on hover timeout and deactivates when the drag exits the target. This option should be used sparingly. */
+    NSSpringLoadingContinuousActivation    = 1UL << 1,
+    
+    /* Disable spring loading activation via hover. This option should be used sparingly, but there are some rare cases where spring loading via hover results in too many false positives, but is otherwise very useful with a Force Click. These are generally cases when the destination view is very large, such as a canvas. */
+    NSSpringLoadingNoHover 	= 1UL << 3
+} NS_ENUM_AVAILABLE_MAC(10_11);
+
+@protocol NSSpringLoadingDestination <NSObject>
+@required
+/* Perform the spring loading action (For example, the button's action, or select the tab). Normally, spring loading is a discreet action that only activates after the user completes the spring loading input. When the NSSpringLoadingContinuousActivation option set, spring loading become a continuous action that activates (YES) when the user starts spring loading and then deactivates (NO) when the user releases spring loading. See NSSpringLoadingContinuousActivation for more information.
+ */
+- (void)springLoadingActivated:(BOOL)activated draggingInfo:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+
+/* Called when the spring loading highlight changes */
+- (void)springLoadingHighlightChanged:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+
+/* Note: You must also implement either -springLoadingEntered: or -springLoadingUpdated: */
+
+@optional
+/* Called when a drag enters the spring loading destination. Return NSSpringLoadingEnabled to enable spring loading. A view is not considered valid spring loading drag destination if neither this method nor springLoadingUpdated: is implemented */
+- (NSSpringLoadingOptions)springLoadingEntered:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+
+/* Called when a drag moves or the drag info changes. If this method is not implemented, then the value from -springLoadingEntered: is used. */
+- (NSSpringLoadingOptions)springLoadingUpdated:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+
+/* Called when a drag exits the spring loading destination */
+- (void)springLoadingExited:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+
+/* The drag & drop operation has ended. Un-spring if needed. Note: If this obejct is both an NSSpringLoadingDestination and NSDraggingDestination, draggingEnded: will only be called once. */
+- (void)draggingEnded:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+@end
+
+
 @interface NSObject(NSDraggingSourceDeprecated)
 /* The following methods are informally deprecated and are only called if the source does not implement the NSDraggingSource protocol methods. These methods will be formally deprecated in a future OS release
 */
-- (NSArray *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
+- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
 
 // Formally deprecated
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:sourceOperationMaskForDraggingContext: instead");
-- (void)draggedImage:(NSImage *)image beganAt:(NSPoint)screenPoint NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:willBeginAtPoint: instead");
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:endedAtPoint:operation: instead");
-- (void)draggedImage:(NSImage *)image movedTo:(NSPoint)screenPoint NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:movedToPoint: instead");
+- (void)draggedImage:(null_unspecified NSImage *)image beganAt:(NSPoint)screenPoint NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:willBeginAtPoint: instead");
+- (void)draggedImage:(null_unspecified NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:endedAtPoint:operation: instead");
+- (void)draggedImage:(null_unspecified NSImage *)image movedTo:(NSPoint)screenPoint NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:movedToPoint: instead");
 - (BOOL)ignoreModifierKeysWhileDragging NS_DEPRECATED_MAC(10_0, 10_7, "Use -ignoreModifierKeysForDraggingSession: instead");
 
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint deposited:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_1_AND_LATER;
+- (void)draggedImage:(null_unspecified NSImage *)image endedAt:(NSPoint)screenPoint deposited:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_1_AND_LATER;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -265,7 +265,19 @@
 #define NS_AVAILABLE_IPHONE(_ios) CF_AVAILABLE_IOS(_ios)
 #define NS_DEPRECATED_IPHONE(_iosIntro, _iosDep) CF_DEPRECATED_IOS(_iosIntro, _iosDep)
 
-#define NS_ENUM(_type, _name) CF_ENUM(_type, _name)
+/* NS_ENUM supports the use of one or two arguments. The first argument is always the integer type used for the values of the enum. The second argument is an optional type name for the macro. When specifying a type name, you must precede the macro with 'typedef' like so:
+ 
+typedef NS_ENUM(NSInteger, NSComparisonResult) {
+    ...
+};
+ 
+If you do not specify a type name, do not use 'typedef'. For example:
+ 
+NS_ENUM(NSInteger) {
+    ...
+};
+*/
+#define NS_ENUM(...) CF_ENUM(__VA_ARGS__)
 #define NS_OPTIONS(_type, _name) CF_OPTIONS(_type, _name)
 
 // This macro is to be used by system frameworks to support the weak linking of classes. Weak linking is supported on iOS 3.1 and Mac OS X 10.6.8 or later.
@@ -290,8 +302,23 @@
 #define NS_EXTENSION_UNAVAILABLE_MAC(_msg)  __OSX_EXTENSION_UNAVAILABLE(_msg)
 #define NS_EXTENSION_UNAVAILABLE_IOS(_msg)  __IOS_EXTENSION_UNAVAILABLE(_msg)
 
+#define NS_SWIFT_UNAVAILABLE(_msg) CF_SWIFT_UNAVAILABLE(_msg)
+
 #define NS_ASSUME_NONNULL_BEGIN _Pragma("clang assume_nonnull begin")
 #define NS_ASSUME_NONNULL_END   _Pragma("clang assume_nonnull end")
+
+#define NS_REFINED_FOR_SWIFT CF_REFINED_FOR_SWIFT
+
+#define NS_SWIFT_NAME(_name) CF_SWIFT_NAME(_name)
+
+#if __has_attribute(swift_error)
+#define NS_SWIFT_NOTHROW __attribute__((swift_error(none)))
+#else
+#define NS_SWIFT_NOTHROW
+#endif
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT double NSFoundationVersionNumber;
 
@@ -365,6 +392,10 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber10_9 1056
 #define NSFoundationVersionNumber10_9_1 1056
 #define NSFoundationVersionNumber10_9_2 1056.13
+#define NSFoundationVersionNumber10_10 1151.16
+#define NSFoundationVersionNumber10_10_1 1151.16
+#define NSFoundationVersionNumber10_10_2 1152.14
+#define NSFoundationVersionNumber10_10_3 1153.20
 #endif
 
 #if TARGET_OS_IPHONE
@@ -384,6 +415,10 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber_iOS_6_1  993.00
 #define NSFoundationVersionNumber_iOS_7_0 1047.20
 #define NSFoundationVersionNumber_iOS_7_1 1047.25
+#define NSFoundationVersionNumber_iOS_8_0 1140.11
+#define NSFoundationVersionNumber_iOS_8_1 1141.1
+#define NSFoundationVersionNumber_iOS_8_2 1142.14
+#define NSFoundationVersionNumber_iOS_8_3 1144.17
 #endif
 
 #if TARGET_OS_WIN32
@@ -403,12 +438,12 @@ FOUNDATION_EXPORT NSString *NSStringFromSelector(SEL aSelector);
 FOUNDATION_EXPORT SEL NSSelectorFromString(NSString *aSelectorName);
 
 FOUNDATION_EXPORT NSString *NSStringFromClass(Class aClass);
-FOUNDATION_EXPORT Class NSClassFromString(NSString *aClassName);
+FOUNDATION_EXPORT Class __nullable NSClassFromString(NSString *aClassName);
 
 FOUNDATION_EXPORT NSString *NSStringFromProtocol(Protocol *proto) NS_AVAILABLE(10_5, 2_0);
-FOUNDATION_EXPORT Protocol *NSProtocolFromString(NSString *namestr) NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT Protocol * __nullable NSProtocolFromString(NSString *namestr) NS_AVAILABLE(10_5, 2_0);
 
-FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, NSUInteger *sizep, NSUInteger *alignp);
+FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, NSUInteger * __nullable sizep, NSUInteger * __nullable alignp);
 
 FOUNDATION_EXPORT void NSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 FOUNDATION_EXPORT void NSLogv(NSString *format, va_list args) NS_FORMAT_FUNCTION(1,0);
@@ -447,7 +482,9 @@ typedef NS_ENUM(NSInteger, NSQualityOfService) {
     NSQualityOfServiceDefault = -1
 } NS_ENUM_AVAILABLE(10_10, 8_0);
 
-enum {NSNotFound = NSIntegerMax};
+static const NSInteger NSNotFound = NSIntegerMax;
+
+NS_ASSUME_NONNULL_END
 
 #if !defined(YES)
     #define YES	(BOOL)1

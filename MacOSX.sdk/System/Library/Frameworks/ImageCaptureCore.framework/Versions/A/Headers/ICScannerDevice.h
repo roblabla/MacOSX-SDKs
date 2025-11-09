@@ -20,6 +20,8 @@
 #import <ImageCaptureCore/ICScannerFunctionalUnits.h>
 #import <ImageCaptureCore/ICScannerBandData.h>
 
+CF_ASSUME_NONNULL_BEGIN
+
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used for device status notifications.
 /*!
@@ -45,19 +47,18 @@ extern NSString *const ICScannerStatusRequestsOverviewScan;
 
 //-------------------------------------------------------------------------------------------------------------------- Constants
 /*!
-  @enum ICScannerTransferMode
+  @ICScannerTransferMode
   @abstract Transfer mode to be used when transferring scan data from the scanner functional unit.
   @constant ICScannerTransferModeFileBased Save the scan as a file.
   @constant ICScannerTransferModeMemoryBased Transfer the scan as data.
 */
 
-enum 
+typedef NS_ENUM(NSUInteger, ICScannerTransferMode)
 {
     ICScannerTransferModeFileBased    = 0,
     ICScannerTransferModeMemoryBased  = 1
     
 };
-typedef NSUInteger ICScannerTransferMode;
 
 //--------------------------------------------------------------------------------------------------------- Forward Declarations
 
@@ -79,49 +80,49 @@ typedef NSUInteger ICScannerTransferMode;
   @abstract This message is sent when another client closes an open session on the scanner.
   @discusson Scanners require exclusive access, only one client can open a session on a scanner. The scanner is available if it does not have a session opened by another client. Attempting to open a session on a scanner that already has an open session for another client will result in an error. A client that wants to open a session on a scanner as soon as it is available should implement this method and send "requestOpenSession" message to scanner object from that method.
 */
-- (void)scannerDeviceDidBecomeAvailable:(ICScannerDevice*)scanner;
+- (void)scannerDeviceDidBecomeAvailable:( ICScannerDevice*)scanner;
 
 /*! 
   @method scannerDevice:didSelectFunctionalUnit:error:
   @abstract This message is sent when a functional unit is selected on the scanner device.
   @discusson A functional unit is selected immediately after the scanner device is instantiated and in response to "requestSelectFunctionalUnit:" message.
 */
-- (void)scannerDevice:(ICScannerDevice*)scanner didSelectFunctionalUnit:(ICScannerFunctionalUnit*)functionalUnit error:(NSError*)error;
+- (void)scannerDevice:( ICScannerDevice*)scanner didSelectFunctionalUnit:( ICScannerFunctionalUnit*)functionalUnit error:(nullable NSError*)error;
 
 /*! 
   @method scannerDevice:didScanToURL:data:
   @abstract This message is sent when the scanner device receives the requested scan. If selectedFunctionalUnit is a document feeder, then this message will be sent once for each scanned page.
   @discusson This method has been deprecated and superceded by the didScanToURL: method for file based transfer, along with the didScanToBandData: for memory based transfer.
 */
-- (void)scannerDevice:(ICScannerDevice*)scanner didScanToURL:(NSURL*)url data:(NSData*)data NS_DEPRECATED(10_6, 10_7, NA, NA);
+- (void)scannerDevice:( ICScannerDevice*)scanner didScanToURL:( NSURL*)url data:( NSData*)data NS_DEPRECATED(10_6, 10_7, NA, NA);
 
 /*! 
  @method scannerDevice:didScanToURL:
  @abstract This message is sent when the scanner device receives the requested scan. If selectedFunctionalUnit is a document feeder, then this message will be sent once for each scanned page.
  @discusson This message is sent when the scanner device receives the requested scan. If selectedFunctionalUnit is a document feeder, then this message will be sent once for each scanned page.
  */
-- (void)scannerDevice:(ICScannerDevice*)scanner didScanToURL:(NSURL*)url;
+- (void)scannerDevice:( ICScannerDevice*)scanner didScanToURL:( NSURL*)url;
 
 /*! 
  @method scannerDevice:didScanToBandData:
  @abstract This message is sent when the scanner device receives the requested scan progress notification and a band of data is sent for each notification received.
  @discusson In memory transfer mode, this will send a band of size that has been selected by the client via the maxMemoryBandSize property.
  */
-- (void)scannerDevice:(ICScannerDevice*)scanner didScanToBandData:(ICScannerBandData*)data;
+- (void)scannerDevice:( ICScannerDevice*)scanner didScanToBandData:( ICScannerBandData*)data;
 
 /*! 
   @method scannerDevice:didCompleteOverviewScanWithError:
   @abstract This message is sent after the scanner device completes an overview scan.
   @discusson This message is sent after the scanner device completes an overview scan.
 */
-- (void)scannerDevice:(ICScannerDevice*)scanner didCompleteOverviewScanWithError:(NSError*)error;
+- (void)scannerDevice:( ICScannerDevice*)scanner didCompleteOverviewScanWithError:(nullable NSError*)error;
 
 /*! 
   @method scannerDevice:didCompleteScanWithError:
   @abstract This message is sent after the scanner device completes a scan.
   @discusson This message is sent after the scanner device completes a scan.
 */
-- (void)scannerDevice:(ICScannerDevice*)scanner didCompleteScanWithError:(NSError*)error;
+- (void)scannerDevice:( ICScannerDevice*)scanner didCompleteScanWithError:(nullable NSError*)error;
 
 @end
 
@@ -131,6 +132,7 @@ typedef NSUInteger ICScannerTransferMode;
   @abstract ICScannerDevice is a concrete subclass of ICDevice class. ICDeviceBrowser creates instances of this class.
   @discussion In this release, an instance of ICScannerDevice class is intended to be used by the ICScannerDeviceView object. The ICScannerDeviceView class encapsulates the complexities of setting scan parameters, performing scans and saving the result. The developer should consider using ICScannerDeviceView instead of building their own views using the ICScannerDevice object.
 */
+
 
 @interface ICScannerDevice : ICDevice
 {
@@ -143,7 +145,7 @@ typedef NSUInteger ICScannerTransferMode;
     @abstract ￼An array of functional unit types available on this scanner device. This is an array of NSNumber objects whose values are of type ICScannerFunctionalUnitType.
 
 */
-@property(readonly) NSArray*                    availableFunctionalUnitTypes;
+@property(readonly) NSArray<NSNumber*>*                    availableFunctionalUnitTypes;
 
 /*!
     @property selectedFunctionalUnit
@@ -171,7 +173,7 @@ typedef NSUInteger ICScannerTransferMode;
     @abstract ￼The downloads directory.
 
 */
-@property(retain)   NSURL*                      downloadsDirectory;
+@property(retain)   NSURL*             downloadsDirectory;
 
 /*!
     @property documentName
@@ -213,6 +215,8 @@ typedef NSUInteger ICScannerTransferMode;
   @abstract Cancels the current scan operation started by sending a 'requestOverviewScan' or 'requestScan'.
 */
 - (void)cancelScan;
+
+NS_ASSUME_NONNULL_END
 
 @end
 

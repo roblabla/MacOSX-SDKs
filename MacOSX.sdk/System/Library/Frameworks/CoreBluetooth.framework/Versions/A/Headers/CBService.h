@@ -12,9 +12,9 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-
-@class CBPeripheral, CBUUID;
+@class CBPeripheral, CBUUID, CBCharacteristic;
 
 /*!
  * @class CBService
@@ -45,7 +45,7 @@ CB_EXTERN_CLASS @interface CBService : NSObject
  *      A back-pointer to the peripheral this service belongs to.
  *
  */
-@property(weak, readonly, nonatomic) CBPeripheral *peripheral;
+@property(assign, readonly, nonatomic, nonnull) CBPeripheral *peripheral;
 
 /*!
  * @property UUID
@@ -72,7 +72,7 @@ CB_EXTERN_CLASS @interface CBService : NSObject
  *      A list of included CBServices that have so far been discovered in this service.
  *
  */
-@property(retain, readonly) NSArray *includedServices;
+@property(retain, readonly, nullable) NSArray<CBService *> *includedServices;
 
 /*!
  * @property characteristics
@@ -81,7 +81,7 @@ CB_EXTERN_CLASS @interface CBService : NSObject
  *      A list of CBCharacteristics that have so far been discovered in this service.
  *
  */
-@property(retain, readonly) NSArray *characteristics;
+@property(retain, readonly, nullable) NSArray<CBCharacteristic *> *characteristics;
 
 @end
 
@@ -102,10 +102,10 @@ CB_EXTERN_CLASS @interface CBMutableService : CBService
 	NSNumber *_ID;
 }
 
-@property(retain, readwrite, nonatomic) CBUUID *UUID;
+@property(retain, readwrite, nonatomic, nullable) CBUUID *UUID;
 @property(readwrite, nonatomic) BOOL isPrimary;
-@property(retain, readwrite) NSArray *includedServices;
-@property(retain, readwrite) NSArray *characteristics;
+@property(retain, readwrite, nullable) NSArray<CBService *> *includedServices;
+@property(retain, readwrite, nullable) NSArray<CBCharacteristic *> *characteristics;
 
 /*!
  *  @method initWithType:primary:
@@ -116,6 +116,8 @@ CB_EXTERN_CLASS @interface CBMutableService : CBService
  *  @discussion			Returns a service, initialized with a service type and UUID.
  *
  */
-- (id)initWithType:(CBUUID *)UUID primary:(BOOL)isPrimary;
+- (id)initWithType:(nullable CBUUID *)UUID primary:(BOOL)isPrimary;
 
 @end
+
+NS_ASSUME_NONNULL_END

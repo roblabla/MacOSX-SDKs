@@ -1,20 +1,23 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2014, Apple Inc.
+	Copyright (c) 2002-2015, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSObjectController.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSPredicate.h>
 
 
-@class NSArray, NSIndexSet, NSMutableArray, NSMutableIndexSet;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSIndexSet, NSMutableIndexSet, NSSortDescriptor;
 
 @interface NSArrayController : NSObjectController {
 @private
-	void *_reserved4;
-	id _rearrangementExtensions;
+    void *_reserved4;
+    id _rearrangementExtensions;
     NSMutableArray *_temporaryWorkObjects;
     struct __arrayControllerFlags {
         unsigned int _avoidsEmptySelection:1;
@@ -46,12 +49,12 @@
 
 @property BOOL automaticallyRearrangesObjects NS_AVAILABLE_MAC(10_5);   // default: NO
 
-@property (readonly, copy) NSArray *automaticRearrangementKeyPaths NS_AVAILABLE_MAC(10_5);    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
+@property (nullable, readonly, copy) NSArray<NSString *> *automaticRearrangementKeyPaths NS_AVAILABLE_MAC(10_5);    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
 - (void)didChangeArrangementCriteria NS_AVAILABLE_MAC(10_5);    // invoked by the controller itself when any criteria for arranging objects change (sort descriptors or filter predicates) to reset the key paths for automatic rearranging; subclasses should invoke this method if additional arrangement criteria are used in custom implementations of -rearrangeObjects and those criteria change
 
-@property (copy) NSArray *sortDescriptors;
+@property (copy) NSArray<NSSortDescriptor *> *sortDescriptors;
 
-@property (strong) NSPredicate *filterPredicate;
+@property (nullable, strong) NSPredicate *filterPredicate;
 
 /* Indicates whether the controller should nil out its filter predicate before inserting (or adding) new objects. When set to yes, this eliminates the problem of inserting a new object into the array that would otherwise immediately be filtered out of the array of arranged objects.
 */
@@ -78,16 +81,16 @@
 - (BOOL)removeSelectionIndexes:(NSIndexSet *)indexes;
 
 - (BOOL)setSelectedObjects:(NSArray *)objects;
-@property (readonly, copy) NSArray *selectedObjects;
+@property (null_unspecified, readonly, copy) NSArray *selectedObjects;
 - (BOOL)addSelectedObjects:(NSArray *)objects;
 - (BOOL)removeSelectedObjects:(NSArray *)objects;
 
-- (void)add:(id)sender;    // overridden to add a new object to the content objects and to the arranged objects
-- (void)remove:(id)sender;    // overridden to remove the selected objects
-- (void)insert:(id)sender;
+- (void)add:(nullable id)sender;    // overridden to add a new object to the content objects and to the arranged objects
+- (void)remove:(nullable id)sender;    // overridden to remove the selected objects
+- (void)insert:(nullable id)sender;
 @property (readonly) BOOL canInsert;    // can be used in bindings controlling the enabling of buttons, for example
-- (void)selectNext:(id)sender;
-- (void)selectPrevious:(id)sender;
+- (void)selectNext:(nullable id)sender;
+- (void)selectPrevious:(nullable id)sender;
 @property (readonly) BOOL canSelectNext;
 @property (readonly) BOOL canSelectPrevious;
 
@@ -101,4 +104,6 @@
 - (void)removeObjects:(NSArray *)objects;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

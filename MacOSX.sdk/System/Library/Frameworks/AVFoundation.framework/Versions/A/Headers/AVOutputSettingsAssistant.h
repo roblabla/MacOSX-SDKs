@@ -3,13 +3,15 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2012-2014 Apple Inc. All rights reserved.
+	Copyright 2012-2015 Apple Inc. All rights reserved.
 
 */
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVBase.h>
 #import <CoreMedia/CMFormatDescription.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*
  Use these identifiers with +[AVOutputSettingsAssistant outputSettingsAssistantWithPreset:].
@@ -20,7 +22,7 @@ AVF_EXPORT NSString * const AVOutputSettingsPreset640x480		NS_AVAILABLE(10_9, 7_
 AVF_EXPORT NSString * const AVOutputSettingsPreset960x540   	NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT NSString * const AVOutputSettingsPreset1280x720  	NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT NSString * const AVOutputSettingsPreset1920x1080		NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString * const AVOutputSettingsPreset3840x2160		NS_AVAILABLE(10_10, NA);
+AVF_EXPORT NSString * const AVOutputSettingsPreset3840x2160		NS_AVAILABLE(10_10, 9_0);
 
 @class AVOutputSettingsAssistantInternal;
 
@@ -39,6 +41,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @private
 	AVOutputSettingsAssistantInternal *_internal;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
 	@method availableOutputSettingsPresets
@@ -51,7 +54,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  
 		On iOS, the returned array may be different between different device models.
  */
-+ (NSArray *)availableOutputSettingsPresets NS_AVAILABLE(10_10, 7_0);
++ (NSArray<NSString *> *)availableOutputSettingsPresets NS_AVAILABLE(10_10, 7_0);
 
 /*!
 	@method outputSettingsAssistantWithPreset:
@@ -66,7 +69,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  
 		Use +availableOutputSettingsPresets to get a list of presets identifiers that can be used with this method.
  */
-+ (instancetype)outputSettingsAssistantWithPreset:(NSString *)presetIdentifier;
++ (nullable instancetype)outputSettingsAssistantWithPreset:(NSString *)presetIdentifier;
 
 /*!
 	@property audioSettings
@@ -75,7 +78,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 	@discussion
 		The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
  */
-@property (nonatomic, readonly) NSDictionary *audioSettings;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *audioSettings;
 
 /*!
 	@property videoSettings
@@ -84,7 +87,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 	@discussion
 		The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
  */
-@property (nonatomic, readonly) NSDictionary *videoSettings;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *videoSettings;
 
 /*!
 	@property outputFileType
@@ -110,7 +113,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 		If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the audioSettings property.
  */
-@property (nonatomic, retain) __attribute__((NSObject)) CMAudioFormatDescriptionRef sourceAudioFormat;
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMAudioFormatDescriptionRef sourceAudioFormat;
 
 /*!
 	@property sourceVideoFormat
@@ -121,7 +124,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 		If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the videoSettings property.
  */
-@property (nonatomic, retain) __attribute__((NSObject)) CMVideoFormatDescriptionRef sourceVideoFormat;
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMVideoFormatDescriptionRef sourceVideoFormat;
 
 /*!
 	@property sourceVideoAverageFrameDuration
@@ -152,3 +155,5 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @property (nonatomic) CMTime sourceVideoMinFrameDuration NS_AVAILABLE(10_10, 7_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 #import <EventKit/EventKitDefines.h>
 #import <EventKit/EKTypes.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class EKCalendar, EKEvent, EKSource, EKReminder, EKCalendarItem;
 
 /*!
@@ -21,50 +23,32 @@
     @constant       EKSpanFutureEvents     Affect this event and all after it.
 */
 
-typedef enum {
+typedef NS_ENUM(NSInteger, EKSpan) {
     EKSpanThisEvent,
     EKSpanFutureEvents
-} EKSpan;
+};
 
-/*!
-    @enum       EKAuthorizationStatus
-    @abstract   This enumerated type is used to indicate the currently granted authorization status for a specific
-                entity type.
-    @constant   EKAuthorizationStatusNotDetermined  The user has not yet made a choice regarding whether this application
-                may access the service.
-    @constant   EKAuthorizationStatusRestricted     This application is not authorized to access the service.
-                The user cannot change this application’s status, possibly due to
-                active restrictions such as parental controls being in place.
-    @constant   EKAuthorizationStatusDenied         The user explicitly denied access to the service for this application.
-    @constant   EKAuthorizationStatusAuthorized     This application is authorized to access the service.
-*/
-typedef NS_ENUM(NSInteger, EKAuthorizationStatus) {
-    EKAuthorizationStatusNotDetermined = 0,
-    EKAuthorizationStatusRestricted,
-    EKAuthorizationStatusDenied,
-    EKAuthorizationStatusAuthorized,
-} __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 typedef void (^EKEventSearchCallback)(EKEvent *event, BOOL *stop);
 
 /*!
-    @class      EKEventStore
-    @abstract   The EKEventStore class provides an interface for accessing and manipulating calendar events and reminders.
-    @discussion The EKEventStore class is the main point of contact for accessing Calendar data. You must
-                create a EKEventStore object in order to retrieve/add/delete events or reminders from the Calendar database.
- 
-                Events, Reminders, and Calendar objects retrieved from an event store cannot be used with any other event
-                store. It is generally best to hold onto a long-lived instance of an event store, most
-                likely as a singleton instance in your application.
+    @class       EKEventStore
+    @abstract    The EKEventStore class provides an interface for accessing and manipulating calendar events and reminders.
+    @discussion  The EKEventStore class is the main point of contact for accessing Calendar data. You must
+                 create a EKEventStore object in order to retrieve/add/delete events or reminders from the Calendar database.
+                 
+                 Events, Reminders, and Calendar objects retrieved from an event store cannot be used with any other event
+                 store. It is generally best to hold onto a long-lived instance of an event store, most
+                 likely as a singleton instance in your application.
 */
-EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
+NS_CLASS_AVAILABLE(10_8, 4_0)
 @interface EKEventStore : NSObject
 
 /*!
     @method     authorizationStatusForEntityType:
     @discussion Returns the authorization status for the given entity type
-*/
-+ (EKAuthorizationStatus)authorizationStatusForEntityType:(EKEntityType)entityType __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+ */
++ (EKAuthorizationStatus)authorizationStatusForEntityType:(EKEntityType)entityType NS_AVAILABLE(10_9, 6_0);
 
 /*!
     @method     initWithAccessToEntityTypes:
@@ -78,15 +62,22 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                 subsequent instantiations of EKEventStore will use the existing permissions.
     @param      entityTypes         A bit mask of entity types to which you want access
 */
-- (id)initWithAccessToEntityTypes:(EKEntityMask)entityTypes __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
+- (id)initWithAccessToEntityTypes:(EKEntityMask)entityTypes NS_DEPRECATED(10_8, 10_9, NA, NA);
 
 
 /*!
         @method     init
  */
-- (id)init __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_4_0);
+- (id)init NS_AVAILABLE(10_9, 4_0);
 
-typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError *error);
+/*!
+    @method     initWithSources:
+    @abstract   Creates a new event store that only includes items and calendars for a subset of sources.
+    @param      sources The sources you want this event store to recognize. This may include delegate sources.
+ */
+- (instancetype)initWithSources:(NSArray<EKSource *> *)sources NS_AVAILABLE(10_11, NA);
+
+typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError * __nullable error);
 
 /*!
     @method     requestAccessToEntityType:completion:
@@ -99,8 +90,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 requested; any subsequent instantiations of EKEventStore will use the existing permissions. When the user
                 taps to grant or deny access, the completion handler will be called on an arbitrary queue.
 */
-- (void)requestAccessToEntityType:(EKEntityType)entityType completion:(EKEventStoreRequestAccessCompletionHandler)completion __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
-
+- (void)requestAccessToEntityType:(EKEntityType)entityType completion:(EKEventStoreRequestAccessCompletionHandler)completion NS_AVAILABLE(10_9, 6_0);
 
 /*!
     @property   eventStoreIdentifier
@@ -113,44 +103,62 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
 //----------------------------------------------------
 
 /*!
-    @method     sources
-    @abstract   Returns an unordered array of sources.
+    @property   delegateSources
+    @abstract   Returns an unordered array of sources for all available delegates.
+    @discussion By default, delegates are not included in an event store's sources. To work with delegates,
+                you can create a new event store and pass in the sources, including sources returned from this
+                method, that you're interested in.
+    @see        initWithSources:
  */
-- (NSArray *)sources __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+@property (nonatomic, readonly) NSArray<EKSource *> *delegateSources NS_AVAILABLE(10_11, NA);
+
+/*!
+    @property   sources
+    @abstract   Returns an unordered array of sources.
+*/
+@property (nonatomic, readonly) NSArray<EKSource *> *sources NS_AVAILABLE(10_8, 5_0);
 
 /*!
     @method     sourceWithIdentifier:
     @abstract   Returns a source with a specified identifier.
- */
-- (EKSource *)sourceWithIdentifier:(NSString *)identifier __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+*/
+- (EKSource *)sourceWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_8, 5_0);
 
 //----------------------------------------------------
 // CALENDARS
 //----------------------------------------------------
 
 /*!
+    @method     calendars
+    @abstract   While this returns an array, the calendars are unordered. This call is deprecated
+                 and only returns calendars that support events. If you want reminder calendars
+                 you should use calendarsForEntityType:
+*/
+@property(nonatomic, readonly) NSArray<EKCalendar *> *calendars NS_DEPRECATED(NA, NA, 4_0, 6_0);
+
+/*!
     @method     calendarsForEntityType
     @abstract   Returns calendars that support a given entity type (reminders, events)
  */
-- (NSArray *)calendarsForEntityType:(EKEntityType)entityType __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+- (NSArray<EKCalendar *> *)calendarsForEntityType:(EKEntityType)entityType NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @property   defaultCalendarForNewEvents
-    @abstract   Returns the calendar that events should be added to by default, as set in Calendar.app.
- */
+    @abstract   Returns the calendar that events should be added to by default.
+*/
 @property(nonatomic, readonly) EKCalendar *defaultCalendarForNewEvents;
 
 /*!
     @method     defaultCalendarForNewReminders
-    @abstract   Returns the calendar that reminders should be added to by default, as set in Reminders.app.
- */
-- (EKCalendar *)defaultCalendarForNewReminders __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+    @abstract   Returns the calendar that reminders should be added to by default.
+*/
+- (EKCalendar *)defaultCalendarForNewReminders NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @method     calendarWithIdentifier:
     @abstract   Returns a calendar with a specified identifier.
- */
-- (EKCalendar *)calendarWithIdentifier:(NSString *)identifier __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+*/
+- (nullable EKCalendar *)calendarWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_8, 5_0);
 
 /*!
     @method     saveCalendar:commit:error:
@@ -158,13 +166,14 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @discussion This method attempts to save the given calendar to the calendar database. It
                 returns YES if successful and NO otherwise. Passing a calendar fetched from
                 another EKEventStore instance into this function will raise an exception.
- 
+                On WatchOS, saving changes is not supported.
+
     @param      calendar    The calendar to save.
     @param      commit      Pass YES to cause the database to save. You can pass NO to save multiple
                             calendars and then call commit: to save them all at once.
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
- */
-- (BOOL)saveCalendar:(EKCalendar *)calendar commit:(BOOL)commit error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+*/
+- (BOOL)saveCalendar:(EKCalendar *)calendar commit:(BOOL)commit error:(NSError **)error NS_AVAILABLE(10_8, 5_0) __WATCHOS_PROHIBITED;
 
 /*!
     @method     removeCalendar:commit:error:
@@ -172,7 +181,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @discussion This method attempts to delete the given calendar from the calendar database. It
                 returns YES if successful and NO otherwise. Passing a calendar fetched from
                 another EKEventStore instance into this function will raise an exception.
- 
+
                 If the calendar supports multiple entity types (allowedEntityTypes), but the user has 
                 not granted you access to all those entity types, then we will delete all of the entity types 
                 for which you have access and remove that entity type from the allowedEntityTypes.
@@ -182,12 +191,14 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 If you have access to all of its allowedEntityTypes, then it will delete the calendar and
                 all of the events and reminders in the calendar.
  
+                On WatchOS, modifying the database is not supported.
+ 
     @param      calendar    The calendar to delete.
     @param      commit      Pass YES to cause the database to save. You can pass NO to batch multiple
                             changes and then call commit: to save them all at once.
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
- */
-- (BOOL)removeCalendar:(EKCalendar *)calendar commit:(BOOL)commit error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+*/
+- (BOOL)removeCalendar:(EKCalendar *)calendar commit:(BOOL)commit error:(NSError **)error NS_AVAILABLE(10_8, 5_0) __WATCHOS_PROHIBITED;
 
 //----------------------------------------------------
 // CALENDAR ITEMS (apply to both reminders and events)
@@ -196,8 +207,8 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
 /*!
     @method     calendarItemWithIdentifier:
     @abstract   Returns either a reminder or the first occurrence of an event.
- */
-- (EKCalendarItem *)calendarItemWithIdentifier:(NSString *)identifier __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+- (EKCalendarItem *)calendarItemWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @method     calendarItemsWithExternalIdentifier:
@@ -207,18 +218,18 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 Due to reasons discussed in -[EKCalendarItem calendarItemExternalIdentifier], there may be
                 more than one matching calendar item.
  
-    @param      externalIdentifier  The value obtained from EKCalendarItem's 
+    @param      externalIdentifier  The value obtained from EKCalendarItem's
                 calendarItemExternalIdentifier property
     @result     An unsorted array of EKCalendarItem instances
- */
-- (NSArray *)calendarItemsWithExternalIdentifier:(NSString *)externalIdentifier __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+- (NSArray<EKCalendarItem *> *)calendarItemsWithExternalIdentifier:(NSString *)externalIdentifier NS_AVAILABLE(10_8, 6_0);
 
 //----------------------------------------------------
 // EVENTS
 //----------------------------------------------------
 
 /*!
-    @method     saveEvent:span:commit:error:
+    @method     saveEvent:span:error:
     @abstract   Saves changes to an event permanently.
     @discussion This method attempts to save the event to the calendar database. It returns YES if
                 successful and NO otherwise. It's possible for this method to return NO, and error
@@ -226,22 +237,22 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 means the correct way to detect failure is a result of NO and a non-nil error parameter.
                 Passing an event fetched from another EKEventStore instance into this function will
                 raise an exception.
- 
+
                 After an event is successfully saved, it is also put into sync with the database, meaning
                 that all fields you did not change will be updated to the latest values. If you save the
                 event, but it was deleted by a different store/process, you will effectively recreate the
                 event as a new event.
  
+                On WatchOS, saving changes is not supported.
+ 
     @param      event       The event to save.
     @param      span        The span to use (this event, or this and future events).
-    @param      commit      Whether to save to the database or not. Pass NO to batch changes together and
-                            commit with [EKEventStore commit:].
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
- */
-- (BOOL)saveEvent:(EKEvent *)event span:(EKSpan)span commit:(BOOL)commit error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+*/
+- (BOOL)saveEvent:(EKEvent *)event span:(EKSpan)span error:(NSError **)error NS_AVAILABLE(NA, 4_0) __WATCHOS_PROHIBITED;
 
 /*!
-    @method     removeEvent:span:commit:error:
+    @method     removeEvent:span:error:
     @abstract   Removes an event from the calendar store.
     @discussion This method attempts to remove the event from the calendar database. It returns YES if
                 successful and NO otherwise. It's possible for this method to return NO, and error
@@ -251,13 +262,18 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 an event is removed, it is no longer tied to this calendar store, and all data in the event
                 is cleared except for the eventIdentifier.
  
+                On WatchOS, modifying the database is not supported.
+ 
     @param      event       The event to save.
     @param      span        The span to use (this event, or this and future events).
-    @param      commit      Whether to save to the database or not. Pass NO to batch changes together and
-                            commit with [EKEventStore commit:].
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
- */
-- (BOOL)removeEvent:(EKEvent *)event span:(EKSpan)span commit:(BOOL)commit error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+*/
+- (BOOL)removeEvent:(EKEvent *)event span:(EKSpan)span error:(NSError **)error NS_AVAILABLE(NA, 4_0) __WATCHOS_PROHIBITED;
+
+// These variants of the above allow you to batch changes by passing NO to commit. You can commit
+// all changes later with [EKEventStore commit:]
+- (BOOL)saveEvent:(EKEvent *)event span:(EKSpan)span commit:(BOOL)commit error:(NSError **)error NS_AVAILABLE(10_8, 5_0) __WATCHOS_PROHIBITED;
+- (BOOL)removeEvent:(EKEvent *)event span:(EKSpan)span commit:(BOOL)commit error:(NSError **)error NS_AVAILABLE(10_8, 5_0) __WATCHOS_PROHIBITED;
 
 /*!
     @method     eventWithIdentifier:
@@ -265,8 +281,8 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
  
     @param      identifier   The eventIdentifier to search for.
     @result     An EKEvent object, or nil if not found.
- */
-- (EKEvent *)eventWithIdentifier:(NSString *)identifier;
+*/
+- (nullable EKEvent *)eventWithIdentifier:(NSString *)identifier;
 
 /*!
     @method     eventsMatchingPredicate:
@@ -282,8 +298,8 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @param      predicate   The predicate to invoke. If this predicate was not created with the predicate
                             creation functions in this class, an exception is raised.
     @result     An array of EKEvent objects, or nil. There is no guaranteed order to the events.
- */
-- (NSArray *)eventsMatchingPredicate:(NSPredicate *)predicate;
+*/
+- (NSArray<EKEvent *> *)eventsMatchingPredicate:(NSPredicate *)predicate;
 
 /*!
     @method     enumerateEventsMatchingPredicate:usingBlock:
@@ -291,7 +307,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @discussion This call executes a search for the events indicated by the predicate passed to it, calling
                 the block specified in the callback parameter for each event. It only includes events which 
                 have been committed (e.g. those saved using saveEvent:commit:NO are not included until commit: is called.)
-                
+ 
                 This method is synchronous. If you want async behavior, you should either use dispatch_async or
                 NSOperation to run the query someplace other than the main thread.
  
@@ -299,7 +315,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                             creation functions in this class, an exception is raised.
     @param      block       The block to call for each event. Your block should return YES in the stop
                             parameter to stop iterating.
- */
+*/
 - (void)enumerateEventsMatchingPredicate:(NSPredicate *)predicate usingBlock:(EKEventSearchCallback)block;
 
 /*!
@@ -307,16 +323,16 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @abstract   Creates a predicate for use with eventsMatchingPredicate or enumerateEventsMatchingPredicate:usingBlock:.
     @discussion Creates a simple query predicate to search for events within a certain date range. At present,
                 this will return events in the default time zone ([NSTimeZone defaultTimeZone]).
- 
-                For performance reasons, this method will only return events within a four year timespan.
+
+                OS X Only: For performance reasons, this method will only return events within a four year timespan.
                 If the date range between the startDate and endDate is greater than four years, then it will be shortened 
                 to the first four years.
  
     @param      startDate   The start date.
     @param      endDate     The end date.
     @param      calendars   The calendars to search for events in, or nil to search all calendars.
- */
-- (NSPredicate *)predicateForEventsWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate calendars:(NSArray *)calendars;
+*/
+- (NSPredicate *)predicateForEventsWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate calendars:(nullable NSArray<EKCalendar *> *)calendars;
 
 //----------------------------------------------------
 // REMINDERS
@@ -328,16 +344,18 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @discussion This method attempts to save the reminder to the event store database. It returns YES if
                 successful and NO otherwise. Passing a reminder fetched from another EKEventStore instance
                 into this function will raise an exception.
- 
+
                 After a reminder is successfully saved, its fields are updated to the latest values in
                 the database.
  
+                On WatchOS, saving changes is not supported.
+
     @param      reminder    The reminder to save.
     @param      commit      Whether to save to the database or not. Pass NO to batch changes together and
                             commit with [EKEventStore commit:].
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
- */
-- (BOOL)saveReminder:(EKReminder *)reminder commit:(BOOL)commit error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+- (BOOL)saveReminder:(EKReminder *)reminder commit:(BOOL)commit error:(NSError **)error NS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED;
 
 /*!
     @method     removeReminder:commit:error:
@@ -346,12 +364,14 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 successful and NO otherwise. Passing a reminder from another EKEventStore into this function
                 will raise an exception. After a reminder is removed, it is no longer tied to this event store.
  
+                On WatchOS, modifying the database is not supported.
+
     @param      reminder    The reminder to save.
     @param      commit      Whether to save to the database or not. Pass NO to batch changes together and
                             commit with [EKEventStore commit:].
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
- */
-- (BOOL)removeReminder:(EKReminder *)reminder commit:(BOOL)commit error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+- (BOOL)removeReminder:(EKReminder *)reminder commit:(BOOL)commit error:(NSError **)error NS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED;
 
 /*!
     @method     fetchRemindersMatchingPredicate:completion:
@@ -361,22 +381,23 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 block is called with an array of reminders that match the given predicate (or potentially nil).
                 This only includes reminders which have been committed (e.g. those saved using 
                 saveReminder:commit:NO are not included until commit: is called.)
- */
-- (id)fetchRemindersMatchingPredicate:(NSPredicate *)predicate completion:(void (^)(NSArray *reminders))completion __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+- (id)fetchRemindersMatchingPredicate:(NSPredicate *)predicate completion:(void (^)(NSArray<EKReminder *> * __nullable reminders))completion NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @method     cancelFetchRequest:
     @discussion Given a value returned from fetchRemindersMatchingPredicate, this method can be used to
                 cancel the request. Once called, the completion block specified in fetchReminders... will
                 not be called.
- */
-- (void)cancelFetchRequest:(id)fetchIdentifier __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+- (void)cancelFetchRequest:(id)fetchIdentifier NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @method     predicateForRemindersInCalendars:
     @abstract   Fetch all reminders in a set of calendars.
- */
-- (NSPredicate *)predicateForRemindersInCalendars:(NSArray *)calendars __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+    @discussion You can pass nil for calendars to fetch from all available calendars.
+*/
+- (NSPredicate *)predicateForRemindersInCalendars:(nullable NSArray<EKCalendar *> *)calendars NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @method     predicateForIncompleteRemindersWithDueDateStarting:ending:calendars:
@@ -385,8 +406,9 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 You can pass nil for start date to find all reminders due before endDate.
                 You can pass nil for both start and end date to get all incomplete reminders
                 in the specified calendars.
- */
-- (NSPredicate *)predicateForIncompleteRemindersWithDueDateStarting:(NSDate *)startDate ending:(NSDate *)endDate calendars:(NSArray *)calendars __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+                You can pass nil for calendars to fetch from all available calendars.
+*/
+- (NSPredicate *)predicateForIncompleteRemindersWithDueDateStarting:(nullable NSDate *)startDate ending:(nullable NSDate *)endDate calendars:(nullable NSArray<EKCalendar *> *)calendars NS_AVAILABLE(10_8, 6_0);
 
 
 /*!
@@ -396,8 +418,9 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 You can pass nil for start date to find all reminders completed before endDate.
                 You can pass nil for both start and end date to get all completed reminders
                 in the specified calendars.
- */
-- (NSPredicate *)predicateForCompletedRemindersWithCompletionDateStarting:(NSDate *)startDate ending:(NSDate *)endDate calendars:(NSArray *)calendars __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+                You can pass nil for calendars to fetch from all available calendars.
+*/
+- (NSPredicate *)predicateForCompletedRemindersWithCompletionDateStarting:(nullable NSDate *)startDate ending:(nullable NSDate *)endDate calendars:(nullable NSArray<EKCalendar *> *)calendars NS_AVAILABLE(10_8, 6_0);
 
 //----------------------------------------------------
 // COMMIT, RESET, ROLLBACK
@@ -413,8 +436,10 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
  
                 This method will return YES as long as nothing went awry, even if nothing was actually
                 committed. If it returns NO, error should contain the reason it became unhappy.
- */
-- (BOOL)commit:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+ 
+                On WatchOS, modifying the database is not supported.
+*/
+- (BOOL)commit:(NSError **)error NS_AVAILABLE(10_8, 5_0) __WATCHOS_PROHIBITED;
 
 /*!
     @method     reset
@@ -423,8 +448,8 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 fetched objects, etc.). It essentially is as if you released the store and then created a
                 new one. It brings it back to its initial state. All objects ever created/fetched, etc.
                 using this store are no longer connected to it and are considered invalid.
- */
-- (void)reset __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+*/
+- (void)reset NS_AVAILABLE(10_8, 5_0);
 
 /*!
     @method     refreshSourcesIfNecessary
@@ -434,8 +459,9 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 refreshing the sources, you should call refresh on each of them afterwards.
                 On iOS, this sync only occurs if deemed necessary.  
                 On OS X, this will occur regardless of necessity, but may change in a future release to match the iOS behavior.
+                On WatchOS, initiating sync is not available. Sync will occur automatically with the paired iOS device.
  */
-- (void)refreshSourcesIfNecessary __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+- (void)refreshSourcesIfNecessary NS_AVAILABLE(10_8, 5_0) __WATCHOS_PROHIBITED;
 
 @end
 
@@ -452,6 +478,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 otherwise, you should release it and abandon what you were doing with it. The view
                 controllers provided by EventKitUI automatically deal with this for you.
                 This notification will also be posted if access to events or reminders is changed by the user.
- */
-EVENTKIT_EXTERN NSString *const EKEventStoreChangedNotification __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
+*/
+EVENTKIT_EXTERN NSString *const EKEventStoreChangedNotification NS_AVAILABLE(10_8, 4_0);
 
+NS_ASSUME_NONNULL_END

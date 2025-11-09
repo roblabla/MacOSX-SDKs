@@ -1,11 +1,15 @@
 /*	NSGarbageCollector.h
-	Copyright (c) 2006-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 NS_CLASS_DEPRECATED(10_5, 10_10, NA, NA, "Building Garbage Collected apps is no longer supported.")
 NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+
+NS_ASSUME_NONNULL_BEGIN
+
+NS_SWIFT_UNAVAILABLE("Garbage Collection is not supported")
 @interface NSGarbageCollector : NSObject
 
 + (id)defaultCollector;
@@ -26,3 +30,4 @@ NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 
 @end
 
+NS_ASSUME_NONNULL_END

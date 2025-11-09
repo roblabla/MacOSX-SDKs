@@ -1,15 +1,17 @@
 /*
     NSFetchRequestExpression.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/Foundation.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSExpression.h>
 
-enum {
-    NSFetchRequestExpressionType = 50
-};
+NS_ASSUME_NONNULL_BEGIN
+
+static const NSExpressionType NSFetchRequestExpressionType = (NSExpressionType)50;
 
 NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSFetchRequestExpression : NSExpression {
@@ -46,3 +48,5 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 @property (getter=isCountOnlyRequest, readonly) BOOL countOnlyRequest;
 
 @end
+
+NS_ASSUME_NONNULL_END

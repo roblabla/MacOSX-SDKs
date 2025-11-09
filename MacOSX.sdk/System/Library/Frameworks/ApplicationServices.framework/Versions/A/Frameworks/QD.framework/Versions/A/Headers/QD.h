@@ -50,18 +50,6 @@
 #include <QD/ATSUnicodeTypes.h>
 #endif
 
-#ifndef __ATSUNICODEOBJECTS__
-#include <QD/ATSUnicodeObjects.h>
-#endif
-
-#ifndef __ATSUNICODEDRAWING__
-#include <QD/ATSUnicodeDrawing.h>
-#endif
-
-#ifndef __ATSUNICODEFONTS__
-#include <QD/ATSUnicodeFonts.h>
-#endif
-
 #ifndef __ATSUNICODEGLYPHS__
 #include <QD/ATSUnicodeGlyphs.h>
 #endif

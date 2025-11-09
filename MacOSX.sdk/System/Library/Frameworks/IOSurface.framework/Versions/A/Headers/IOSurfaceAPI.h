@@ -14,7 +14,10 @@
 
 __BEGIN_DECLS
 
-typedef struct __IOSurface *IOSurfaceRef;
+CF_IMPLICIT_BRIDGING_ENABLED
+CF_ASSUME_NONNULL_BEGIN
+
+typedef struct  CF_BRIDGED_TYPE(id) __IOSurface *IOSurfaceRef;
 
 typedef uint32_t IOSurfaceID;
 
@@ -92,8 +95,8 @@ extern const CFStringRef kIOSurfacePlaneElementHeight				IOSFC_AVAILABLE_STARTIN
 /* kIOSurfaceCacheMode		- CFNumber for the CPU cache mode to be used for the allocation.  Default is kIOMapDefaultCache. */
 extern const CFStringRef kIOSurfaceCacheMode					IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-/* kIOSurfaceIsGlobal - CFBoolean     If true, the IOSurface may be looked up by any task in the system by its ID. */
-extern const CFStringRef kIOSurfaceIsGlobal					IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+/* kIOSurfaceIsGlobal - CFBoolean     If true, the IOSurface may be looked up by any task in the system by its ID.  Deprecated in Mac OS X 10.11. */
+extern const CFStringRef kIOSurfaceIsGlobal					IOSFC_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /* kIOSurfacePixelFormat - CFNumber	A 32-bit unsigned integer that stores the traditional Mac OS X buffer format  */
 extern const CFStringRef kIOSurfacePixelFormat					IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
@@ -102,7 +105,7 @@ CFTypeID IOSurfaceGetTypeID(void)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* Create a brand new IOSurface object */
-IOSurfaceRef IOSurfaceCreate(CFDictionaryRef properties)
+IOSurfaceRef __nullable IOSurfaceCreate(CFDictionaryRef properties)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* Perform an atomic lookup and retain of a IOSurface by its IOSurfaceID.
@@ -110,18 +113,18 @@ IOSurfaceRef IOSurfaceCreate(CFDictionaryRef properties)
    the same IOSurfaceRef.   If you need to compare two IOSurface objects
    for equality, you must either do so by comparing their IOSurfaceIDs, or by 
    using CFEqual(). */
-IOSurfaceRef IOSurfaceLookup(IOSurfaceID csid) CF_RETURNS_RETAINED
+IOSurfaceRef __nullable IOSurfaceLookup(IOSurfaceID csid) CF_RETURNS_RETAINED
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* Retrieve the unique IOSurfaceID value for a IOSurface */
 IOSurfaceID IOSurfaceGetID(IOSurfaceRef buffer)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
-	
-enum
+
+typedef CF_OPTIONS(uint32_t, IOSurfaceLockOptions)
 {
 	// If you are not going to modify the data while you hold the lock, you should set this flag to avoid invalidating
 	// any existing caches of the buffer contents.  This flag should be passed both to the lock and unlock functions.
-	// Non-symmentrical usage of this flag will result in undefined behavior.
+	// Non-symmetrical usage of this flag will result in undefined behavior.
 	kIOSurfaceLockReadOnly  =		0x00000001,
 	
 	// If you want to detect/avoid a potentially expensive paging operation (such as readback from a GPU to system memory)
@@ -150,9 +153,9 @@ enum
     so care should be taken to avoid the calls whenever possible.   The seed values are 
     particularly useful for keeping a cache of the buffer contents.
 */
-IOReturn IOSurfaceLock(IOSurfaceRef buffer, uint32_t options, uint32_t *seed)
+IOReturn IOSurfaceLock(IOSurfaceRef buffer, IOSurfaceLockOptions options, uint32_t * __nullable seed)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);	
-IOReturn IOSurfaceUnlock(IOSurfaceRef buffer, uint32_t options, uint32_t *seed)
+IOReturn IOSurfaceUnlock(IOSurfaceRef buffer, IOSurfaceLockOptions options, uint32_t * __nullable seed)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* These routines are all fairly self explanatory.  0 is returned if buffer is invalid or NULL */
@@ -226,10 +229,21 @@ size_t IOSurfaceGetElementHeightOfPlane(IOSurfaceRef buffer, size_t planeIndex)
 void IOSurfaceSetValue(IOSurfaceRef buffer, CFStringRef key, CFTypeRef value)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-CFTypeRef IOSurfaceCopyValue(IOSurfaceRef buffer, CFStringRef key)
+CFTypeRef __nullable IOSurfaceCopyValue(IOSurfaceRef buffer, CFStringRef key)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 void IOSurfaceRemoveValue(IOSurfaceRef buffer, CFStringRef key)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Bulk setters and getters for setting, retrieving or removing the entire
+   set of values at once .*/
+void IOSurfaceSetValues(IOSurfaceRef buffer, CFDictionaryRef keysAndValues)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+CFDictionaryRef __nullable IOSurfaceCopyAllValues(IOSurfaceRef buffer)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+void IOSurfaceRemoveAllValues(IOSurfaceRef buffer)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* This call lets you get a mach_port_t that holds a reference to the IOSurface. This is useful 
@@ -242,7 +256,7 @@ mach_port_t IOSurfaceCreateMachPort(IOSurfaceRef buffer)
 
 /* This call lets you take a mach_port_t created via IOSurfaceCreatePort() and recreate an IOSurfaceRef from it.
    Note: This call does NOT destroy the port. */
-IOSurfaceRef IOSurfaceLookupFromMachPort(mach_port_t port) CF_RETURNS_RETAINED
+IOSurfaceRef __nullable IOSurfaceLookupFromMachPort(mach_port_t port) CF_RETURNS_RETAINED
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 	
 /* This call lets you get an xpc_object_t that holds a reference to the IOSurface.
@@ -252,7 +266,7 @@ xpc_object_t IOSurfaceCreateXPCObject(IOSurfaceRef aSurface) XPC_RETURNS_RETAINE
 	IOSFC_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /* This call lets you take an xpc_object_t created via IOSurfaceCreatePort() and recreate an IOSurfaceRef from it. */
-IOSurfaceRef IOSurfaceLookupFromXPCObject(xpc_object_t xobj) CF_RETURNS_RETAINED
+IOSurfaceRef __nullable IOSurfaceLookupFromXPCObject(xpc_object_t xobj) CF_RETURNS_RETAINED
 	IOSFC_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /* 
@@ -336,5 +350,8 @@ Boolean IOSurfaceIsInUse(IOSurfaceRef buffer)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 __END_DECLS
+
+CF_ASSUME_NONNULL_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

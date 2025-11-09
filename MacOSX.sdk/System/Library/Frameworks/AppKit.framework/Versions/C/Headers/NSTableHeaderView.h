@@ -1,11 +1,13 @@
 /*
     NSTableHeaderView.h
     Application Kit
-    Copyright (c) 1995-2014, Apple Inc.
+    Copyright (c) 1995-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSView.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSTableView;
 @class NSColor;
@@ -33,7 +35,7 @@
     id _viewDataX;
 }
 
-@property (assign) NSTableView *tableView;
+@property (nullable, assign) NSTableView *tableView;
 
 // Returns -1 if there is no column being dragged
 @property (readonly) NSInteger draggedColumn;
@@ -44,3 +46,5 @@
 - (NSInteger)columnAtPoint:(NSPoint)point;
 
 @end
+
+NS_ASSUME_NONNULL_END

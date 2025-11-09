@@ -2,16 +2,19 @@
 archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/CommerceKit
-current-version: 376.24
+current-version: 379.0
 exports:         
   - archs:           [ x86_64 ]
     re-exports:      [ /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore ]
-    symbols:         [ _CKItemArtworKindSoftwareIcon, _CKItemArtworKindSoftwareScreenshot, 
-                       _CKItemKindAlbum, _CKItemKindArtist, _CKItemKindAudioBook, 
-                       _CKItemKindEBook, _CKItemKindLink, _CKItemKindMix, 
-                       _CKItemKindMovie, _CKItemKindMusicVideo, _CKItemKindNowPlaying, 
-                       _CKItemKindPDF, _CKItemKindPodcast, _CKItemKindPodcastEpisode, 
-                       _CKItemKindRingtone, _CKItemKindSoftware, _CKItemKindSoftwareUpdate, 
+    symbols:         [ _CKAccountPasswordSettingsAlways, _CKAccountPasswordSettingsFreeDownloadKey, 
+                       _CKAccountPasswordSettingsNever, _CKAccountPasswordSettingsPaidDownloadKey, 
+                       _CKAccountPasswordSettingsSometimes, _CKItemArtworKindSoftwareIcon, 
+                       _CKItemArtworKindSoftwareScreenshot, _CKItemKindAlbum, 
+                       _CKItemKindArtist, _CKItemKindAudioBook, _CKItemKindEBook, 
+                       _CKItemKindLink, _CKItemKindMix, _CKItemKindMovie, 
+                       _CKItemKindMusicVideo, _CKItemKindNowPlaying, _CKItemKindPDF, 
+                       _CKItemKindPodcast, _CKItemKindPodcastEpisode, _CKItemKindRingtone, 
+                       _CKItemKindSoftware, _CKItemKindSoftwareUpdate, 
                        _CKItemKindSong, _CKItemKindTVEpisode, _CKItemKindTVSeason, 
                        _CKItemLookupKeyProfileLockup, _CKItemLookupKeyProfileProduct, 
                        _CKItemLookupKeyProfileURL, _CKItemLookupPropertyBundleIdentifier, 
@@ -46,7 +49,7 @@ exports:
                        _ISAutomaticDownloadQueue, _ISLoadURLBagOperation, 
                        _ISProcessPropertyListOperation, _ISURLBag, _ISURLBagContext, 
                        _ISURLCache, _ISURLCacheGroup, _SSMutableURLRequestProperties, 
-                       _SSRemoteNotification, _SSURLRequestProperties, 
+                       _SSRemoteNotification, _SSRestoreContentItem, _SSURLRequestProperties, 
                        _SetupAssistantPlugin ]
     objc-ivars:      [ _CKAccountAuthentication._accountName, _CKAccountAuthentication._attempt, 
                        _CKAccountAuthentication._context, _CKAccountAuthentication._delegate, 
@@ -64,13 +67,13 @@ exports:
                        _CKItemTellAFriend._tellAFriendBody, _CKItemTellAFriend._tellAFriendBodyMIMEType, 
                        _CKItemTellAFriend._tellAFriendOperation, _CKItemTellAFriend._tellAFriendResponse, 
                        _CKItemTellAFriend._tellAFriendSubject, _CKLicenseAgreementSheet._agreeButton, 
-                       _CKLicenseAgreementSheet._cancelButton, _CKLicenseAgreementSheet._displayedAsSheet, 
-                       _CKLicenseAgreementSheet._sheetReturnCode, _CKLicenseAgreementSheet._textView, 
-                       _CKLicenseAgreementSheet._titleField, _CKPreflightURLRequest._identifiers, 
-                       _CKPreflightURLRequest._preflightURLs, _CKPurchaseController._adoptionEligibleItems, 
-                       _CKPurchaseController._adoptionErrorNumber, _CKPurchaseController._adoptionServerStatus, 
-                       _CKPurchaseController._purchases, _CKPurchaseController._rejectedPurchases, 
-                       _CKPushNotificationManager._delegate, _CKRestoreDownloadsRequest._archivedFiles, 
+                       _CKLicenseAgreementSheet._cancelButton, _CKLicenseAgreementSheet._sheetReturnCode, 
+                       _CKLicenseAgreementSheet._textView, _CKLicenseAgreementSheet._titleField, 
+                       _CKPreflightURLRequest._identifiers, _CKPreflightURLRequest._preflightURLs, 
+                       _CKPurchaseController._adoptionEligibleItems, _CKPurchaseController._adoptionErrorNumber, 
+                       _CKPurchaseController._adoptionServerStatus, _CKPurchaseController._purchases, 
+                       _CKPurchaseController._rejectedPurchases, _CKPushNotificationManager._delegate, 
+                       _CKRestoreDownloadsRequest._archivedFiles, _CKRestoreDownloadsRequest._serviceProxy, 
                        _CKUpToDate._callbackBlock, _CKiTunesAppleIDAuthentication._loadOperation, 
                        _CKiTunesAppleIDAuthentication._receivedData, _CKiTunesAppleIDAuthentication._url, 
                        _ISLoadURLBagOperation._context, _ISProcessPropertyListOperation._dataProvider, 

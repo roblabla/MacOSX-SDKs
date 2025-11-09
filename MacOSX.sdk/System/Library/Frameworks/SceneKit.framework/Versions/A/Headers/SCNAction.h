@@ -1,13 +1,16 @@
 //
 //  SCNAction.h
 //
-//  Copyright (c) 2014 Apple, Inc. All rights reserved.
+//  Copyright (c) 2014-2015 Apple, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class SCNNode;
 @class SCNAction;
+@class SCNAudioSource;
 
 /*! @enum SCNActionTimingMode
  @abstract The modes that an action can use to adjust the apparent timing of the action.
@@ -18,7 +21,6 @@ typedef NS_ENUM(NSInteger, SCNActionTimingMode) {
     SCNActionTimingModeEaseOut,
     SCNActionTimingModeEaseInEaseOut
 } NS_ENUM_AVAILABLE(10_10, 8_0);
-
 
 /**
  A custom timing function for SCNActions. Input time will be between 0.0 and 1.0
@@ -33,60 +35,61 @@ typedef float (^SCNActionTimingFunction)(float time);
  @method runAction:
  @abstract Adds an action to the list of actions executed by the node.
  */
-- (void)runAction:(SCNAction *)action SCENEKIT_AVAILABLE(10_10, 8_0);
+- (void)runAction:(SCNAction *)action NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method runAction:completionHandler:
  @abstract Adds an action to the list of actions executed by the node. Your block is called when the action completes.
  */
-- (void)runAction:(SCNAction *)action completionHandler:(void (^)())block SCENEKIT_AVAILABLE(10_10, 8_0);
+- (void)runAction:(SCNAction *)action completionHandler:(nullable void (^)())block NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method runAction:forKey:
  @abstract Adds an identifiable action to the list of actions executed by the node.
  */
-- (void)runAction:(SCNAction *)action forKey:(NSString *)key SCENEKIT_AVAILABLE(10_10, 8_0);
+- (void)runAction:(SCNAction *)action forKey:(nullable NSString *)key NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method runAction:forKey:completionHandler:
  @abstract Adds an identifiable action to the list of actions executed by the node. Your block is called when the action completes.
  */
-- (void)runAction:(SCNAction *)action forKey:(NSString *)key completionHandler:(void (^)())block SCENEKIT_AVAILABLE(10_10, 8_0);
+- (void)runAction:(SCNAction *)action forKey:(nullable NSString *)key completionHandler:(nullable void (^)())block NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method hasActions
  @abstract Returns a Boolean value that indicates whether the node is executing actions.
  */
-- (BOOL)hasActions SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic, readonly) BOOL hasActions NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method actionForKey:
  @abstract Returns an action associated with a specific key.
  */
-- (SCNAction *)actionForKey:(NSString *)key SCENEKIT_AVAILABLE(10_10, 8_0);
+- (nullable SCNAction *)actionForKey:(NSString *)key NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method removeActionForKey:
  @abstract Removes an action associated with a specific key.
  */
-- (void)removeActionForKey:(NSString *)key SCENEKIT_AVAILABLE(10_10, 8_0);
+- (void)removeActionForKey:(NSString *)key NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @method removeAllActions
  @abstract Ends and removes all actions from the node.
  */
-- (void)removeAllActions SCENEKIT_AVAILABLE(10_10, 8_0);
+- (void)removeAllActions NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method actionKeys
+ @abstract Returns an array containing the keys of all actions currently attached to the receiver.
+ */
+@property(nonatomic, readonly) NSArray<NSString *> *actionKeys NS_AVAILABLE(10_10, 8_0);
 
 @end
 
 
-
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNAction : NSObject <NSCopying, NSSecureCoding>
-{
-@private
-    id _reserved;
-}
 
 /*!
  @property duration
@@ -104,7 +107,7 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
  the 'timingMode' property is taken into account, defaults to nil
  @see SCNActionTimingFunction
  */
-@property (nonatomic) SCNActionTimingFunction timingFunction;
+@property(nonatomic, nullable) SCNActionTimingFunction timingFunction;
 
 /*!
  @property speed
@@ -117,11 +120,6 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
  @abstract Creates an action that reverses the behavior of another action.
  */
 - (SCNAction *)reversedAction;
-
-@end
-
-
-@interface SCNAction (SCNActions)
 
 //Creates an action that moves a node relative to its current position.
 + (SCNAction *)moveByX:(CGFloat)deltaX y:(CGFloat)deltaY z:(CGFloat)deltaZ duration:(NSTimeInterval)duration;
@@ -148,10 +146,10 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 + (SCNAction *)scaleTo:(CGFloat)scale duration:(NSTimeInterval)sec;
 
 //Creates an action that runs a collection of actions sequentially.
-+ (SCNAction *)sequence:(NSArray *)actions;
++ (SCNAction *)sequence:(NSArray<SCNAction *> *)actions;
 
 //Creates an action that runs a collection of actions in parallel.
-+ (SCNAction *)group:(NSArray *)actions;
++ (SCNAction *)group:(NSArray<SCNAction *> *)actions;
 
 //Creates an action that repeats another action a specified number of times.
 + (SCNAction *)repeatAction:(SCNAction *)action count:(NSUInteger)count;
@@ -170,6 +168,12 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 
 //Creates an action that adjusts the opacity value of a node to a new value.
 + (SCNAction *)fadeOpacityTo:(CGFloat)opacity duration:(NSTimeInterval)sec;
+
+//Creates an action that hides a node
++ (SCNAction *)hide NS_AVAILABLE(10_11, 9_0);
+
+//Creates an action that unhides a node
++ (SCNAction *)unhide NS_AVAILABLE(10_11, 9_0);
 
 //Creates an action that idles for a specified period of time.
 + (SCNAction *)waitForDuration:(NSTimeInterval)sec;
@@ -190,5 +194,13 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 //Creates an action that executes a block over a duration.
 + (SCNAction *)customActionWithDuration:(NSTimeInterval)seconds actionBlock:(void (^)(SCNNode *node, CGFloat elapsedTime))block;
 
+/** Creates an action that plays a sound
+ @param source The audio source to play (see SCNAudioSource.h)
+ @param waitForCompletion If YES, then the duration of this action is the same
+ as the length of the audio playback. If NO, the action is considered
+ to have completed immediately.*/
++ (SCNAction *)playAudioSource:(SCNAudioSource *)source waitForCompletion:(BOOL)wait NS_AVAILABLE(10_11, 9_0);
+
 @end
 
+NS_ASSUME_NONNULL_END

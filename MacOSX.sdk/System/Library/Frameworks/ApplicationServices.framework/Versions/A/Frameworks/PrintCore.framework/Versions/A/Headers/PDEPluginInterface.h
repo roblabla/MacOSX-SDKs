@@ -22,6 +22,7 @@
 #import <cups/cups.h>
 #import <cups/ppd.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSView;
 
@@ -69,7 +70,7 @@
  *			Each instance represents a panel that will be shown in the printer dialog.
  *			The method may return either nil or an empty array if no panels should be used.
  */
-- (NSArray*)PDEPanelsForType:(NSString*)pdeType withHostInfo:(id)host;
+- (nullable NSArray*)PDEPanelsForType:(NSString*)pdeType withHostInfo:(id)host;
 
 @end
 
@@ -127,7 +128,7 @@
  *				the dialog, other than via cancel, or when the user has asked that a preset
  *				be saved.
  */
-- (BOOL)saveValuesAndReturnError:(NSError **)error;
+- (BOOL)saveValuesAndReturnError:(NSError**)error;
 
 /*!
  * @method		restoreValuesAndReturnError
@@ -140,7 +141,7 @@
  *				A panel will usually be asked to read its setting just before it is first
  *				shown and when the user selects a new preset.
  */
-- (BOOL)restoreValuesAndReturnError:(NSError **)error;
+- (BOOL)restoreValuesAndReturnError:(NSError**)error;
 
 /*!
  * @method		supportedPPDOptionKeys
@@ -150,7 +151,7 @@
  * @discussion	Any PPD option keys not claimed by a PDEPanel are provided with a dynamically built
  *				user interface in the Printer Features panel.
  */
-- (NSArray *)supportedPPDOptionKeys;
+- (nullable NSArray*)supportedPPDOptionKeys;
 
 /*!
  * @method		PPDOptionKeyValueDidChange
@@ -314,7 +315,7 @@
  *				not operating on a print settings. The page setup dialog is
  *				the most obvious case where this method will return nil.
  */
-- (PMPrintSettings) printSettings;
+- (nullable PMPrintSettings) printSettings;
 
 /*!
  * @method		pageFormat
@@ -326,7 +327,7 @@
  *				instance. Today both the print and page setup dialogs will return
  *				a reference to a page format object.
  */
-- (PMPageFormat) pageFormat;
+- (nullable PMPageFormat) pageFormat;
 
 /*!
  * @method		PMPrinter
@@ -347,7 +348,7 @@
  *				A description of some of the CUPS PPD functions is here:
  *				http://127.0.0.1:631/spm.html#3_3
  */
-- (ppd_file_t*) ppdFile;
+- (nullable ppd_file_t*) ppdFile;
 
 /*!
  * @method		changePPDOptionKeyValue:ppdChoiceKey:
@@ -380,16 +381,9 @@
  */	
 - (BOOL)willChangePPDOptionKeyValue:(NSString *)option ppdChoice:(NSString *)choice;
 
-/*!
- * @method		panelViewDidResize
- * @abstract	A PDEPlugIn calls this method to inform the print system that the plugin's
- *				view size has changed. In response the print system will resize the printer
- *				dialog to show as much as possible of the view.
- */
-- (void)panelViewDidResize;
-
-
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* __PDEPLUGININTERFACE__ */
 

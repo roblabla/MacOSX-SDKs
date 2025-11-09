@@ -2,7 +2,9 @@
  *  @header vImage_Types.h
  *  vImage_Framework
  *
- *  @copyright Copyright (c) 2002-2014 Apple Computer, Inc. All rights reserved.
+ *  See vImage/vImage.h for more on how to view the headerdoc documentation for types declared herein.
+ *
+ *  @copyright Copyright (c) 2002-2015 by Apple Inc. All rights reserved.
  *
  *  @discussion     Defines various types and constants common to vImage.
  */
@@ -56,6 +58,20 @@ extern "C" {
 #endif
 #ifndef __has_extension         /* clang will define this. Other compilers maybe not. */
 #   define __has_extension(e)   0
+#endif
+
+/*!
+ *  @define     CF_BRIDGED_TYPE
+ *  @abstract   CoreFoundation definition detection and aliasing.
+ *  @discussion A macro for annotating structs bridging to CoreFoundation types.
+ *  @noParse
+ */
+#ifndef CF_BRIDGED_TYPE
+#   if __has_feature(objc_bridge_id)
+#       define CF_BRIDGED_TYPE(...) __attribute__((objc_bridge(__VA_ARGS__)))
+#   else
+#       define CF_BRIDGED_TYPE(...)
+#   endif
 #endif
     
 
@@ -466,6 +482,17 @@ typedef VIMAGE_CHOICE_ENUM(vImage_Error, ssize_t)
                 vImage functions do not allocate memory and assume that vImage_Buffer.data is already allocated, 
                 and in the case of source image buffers, contain valid pixel data.
  
+ @constant kvImageHDRContent    The pixels described in the input image may contain high dymanic range content.
+                HDR pixels may have value outside of [-2,2.0]. This flag is generally only applicable to 
+                floating-point images. Most 8- and 16-bit pixels can not represent values outside [0,1] and
+                functions that operate on 16Q12 formats are designed to operate over the full range of [-8,8).
+                Most floating-point functions in vImage are linear in behavior and so work equally well 
+                on any float.  Some non-linear functions like polynomials (or by extension colorspace conversion)
+                are only valid over a limited range (typically [-2,2]) and will return incorrect answers 
+                for values outside that range.  In addition, certain IIR or FFT algorithms in convolution may
+                encounter precision issues with HDR content.  For these cases, if you know you have HDR content,
+                pass kvImageHDRContent and a (typically slower) alternative method will be used for these
+                sources.
  */
 typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
 {
@@ -481,7 +508,7 @@ typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
     /* Use the background color for missing pixels. */
     kvImageBackgroundColorFill       VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )     =    4,
     
-    /* Use the nearst pixel for missing pixels. */
+    /* Use the nearest pixel for missing pixels. */
     kvImageEdgeExtend                VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )     =    8,
     
     /* Pass to turn off internal tiling and disable internal multithreading. Use this if 
@@ -494,7 +521,7 @@ typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
     
      /* Use only the part of the kernel that overlaps the image. For integer kernels, 
         real_divisor = divisor * (sum of used kernel elements) / (sum of kernel elements). 
-        This should preserve image brightness at the edges. Convolution only.               */
+        This should preserve image brightness at the edges. Convolution only. */
     kvImageTruncateKernel            VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 )     =   64,
     
     /* The function will return the number of bytes required for the temp buffer. 
@@ -504,11 +531,15 @@ typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
     /* Some functions such as vImageConverter_CreateWithCGImageFormat have so many possible error conditions 
        that developers may need more help than a simple error code to diagnose problems. When this 
        flag is set and an error is encountered, an informative error message will be logged to the Apple 
-       System Logger (ASL).  The output should be visible in Console.app.  */
+       System Logger (ASL).  The output should be visible in Console.app. */
     kvImagePrintDiagnosticsToConsole VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 )     =  256,
     
     /* Pass this flag to prevent vImage from allocating additional storage. */
-    kvImageNoAllocate                VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 )     =  512
+    kvImageNoAllocate                VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 )     =  512,
+
+    /* Use methods that are HDR-aware, capable of providing correct results for input images with pixel values
+       outside the otherwise limited (typically [-2,2]) range. This may be slower. */
+    kvImageHDRContent                VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 )    =  1024
 };
     
 /*!
@@ -532,7 +563,7 @@ typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
     @seealso Please see vImage_Utilities.h for interfaces that operate on the vImageConverterRef
  */
 
-typedef struct vImageConverter * vImageConverterRef;
+typedef struct CF_BRIDGED_TYPE(id) vImageConverter * vImageConverterRef;
 
     
 /*!
@@ -638,8 +669,8 @@ typedef struct vImageConverter * vImageConverterRef;
  
     @seealso Please see vImage_CVUtilities.h for interfaces that operate on the vImageCVImageFormatRef
  */
-typedef struct vImageCVImageFormat * vImageCVImageFormatRef;
-typedef const struct vImageCVImageFormat * vImageConstCVImageFormatRef;
+typedef struct CF_BRIDGED_TYPE(id) vImageCVImageFormat * vImageCVImageFormatRef;
+typedef const struct CF_BRIDGED_TYPE(id) vImageCVImageFormat * vImageConstCVImageFormatRef;
 
 
 

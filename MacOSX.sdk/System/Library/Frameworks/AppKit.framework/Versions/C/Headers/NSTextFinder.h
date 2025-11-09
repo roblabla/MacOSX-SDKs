@@ -1,17 +1,20 @@
 /*
         NSTextFinder.h
         Application Kit
-        Copyright (c) 2003-2014, Apple Inc.
+        Copyright (c) 2003-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/AppKitDefines.h>
 
-@class NSArray, NSView, NSOperationQueue;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSView, NSOperationQueue;
 @protocol NSTextFinderClient, NSTextFinderBarContainer;
 
 typedef NS_ENUM(NSInteger, NSTextFinderAction) {
@@ -33,8 +36,8 @@ typedef NS_ENUM(NSInteger, NSTextFinderAction) {
 
 /* Values for communicating NSTextFinder search options via pasteboard. Use the NSPasteboardTypeTextFinderOptions type.
 */
-APPKIT_EXTERN NSString *const NSTextFinderCaseInsensitiveKey NS_AVAILABLE_MAC(10_7);       // BOOL
-APPKIT_EXTERN NSString *const NSTextFinderMatchingTypeKey NS_AVAILABLE_MAC(10_7);          // NSNumber containing NSTextFinderMatchingType
+APPKIT_EXTERN NSString * const NSTextFinderCaseInsensitiveKey NS_AVAILABLE_MAC(10_7);       // BOOL
+APPKIT_EXTERN NSString * const NSTextFinderMatchingTypeKey NS_AVAILABLE_MAC(10_7);          // NSNumber containing NSTextFinderMatchingType
 
 typedef NS_ENUM(NSInteger, NSTextFinderMatchingType) {
     NSTextFinderMatchingTypeContains = 0,
@@ -60,14 +63,14 @@ NS_CLASS_AVAILABLE(10_7, NA)
 - (instancetype)init;
 
 /* A text finder must be associated with an object which implements the NSTextFinderClient protocol for it to function. The client is responsible for providing the string to be searched, the location for the find bar, and methods which control feedback to the user about the search results. */
-@property (assign) IBOutlet id <NSTextFinderClient> client;
+@property (nullable, assign) IBOutlet id <NSTextFinderClient> client;
 
 /* Responders to -performTextFinderAction: should call these methods. The -validateAction: method should be called by an implementation of -validateUserInterfaceItem: to properly validate items with an action of -performTextFinderAction:. The -performAction: method should be called by the implementation of -performTextFinderAction:. Both methods should pass the item's or sender's tag as the action parameter to an instance of NSTextFinder that it creates and initializes with the above method. */
 - (void)performAction:(NSTextFinderAction)op;
 - (BOOL)validateAction:(NSTextFinderAction)op;
 
 /* This property must be set to support the find bar. When the find bar is requested to be shown, NSTextFinder will call -showFindBarView: on the container, passing the view for the find bar, which it should display somewhere that is easily associated with the content being searched. NSScrollView already implements NSTextFinderBarContainer and is an excellent place to display the find bar, in most circumstances. The container may freely modify the find bar view's width and origin, but not its height. If this property is not set, then the find bar cannot be shown. */
-@property (assign) IBOutlet id <NSTextFinderBarContainer> findBarContainer;
+@property (nullable, assign) IBOutlet id <NSTextFinderBarContainer> findBarContainer;
 
 
 /* Find indicator control - NSTextFinder and NSView will handle the find indicator correctly when a content view is resized, moved, or removed from the view hierarchy. If your content view's scrolling is done by an NSScrollView, the find indicator will also be handled for you during scrolling. The following methods allow a client to deal with situations outside of these. */
@@ -88,7 +91,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @property BOOL incrementalSearchingShouldDimContentView;
 
 /* This array is updated periodically on the main queue as the incremental search operation on a background queue finds matches. You can use this property when incrementalSearchingShouldDimContentView is NO to know where to draw highlights for incremental matches. This array is KVO compliant and can be observed to know when to update your highlights. When NSKeyValueObservingOptionNew and NSKeyValueObservingOptionOld are used, the KVO change dictionary provides the ranges (and their indexes) that are added or removed so you can invalidate the minimal region needed to bring your highlights into sync with the NSTextFinder's results. If no incremental search is active, or there are no matches found, this array will be empty. If an incremental search is currently in progress, but not yet complete, this will return all the ranges found so far. */
-@property (readonly, copy) NSArray *incrementalMatchRanges;
+@property (readonly, copy) NSArray<NSValue *> *incrementalMatchRanges;
 
 /* If you set incrementalSearchingShouldDimContentView is NO to highlight incremental matches in your own view, you are encouraged to use this method to draw the highlight. */
 + (void)drawIncrementalMatchHighlightInRect:(NSRect)rect;
@@ -137,13 +140,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @property (readonly) NSRange firstSelectedRange;
 
 /* This property is required for the ReplaceAllInSelection, SelectAll, and SelectAllInSelection actions. The NSArray should contain NSRanges wrapped by NSValues. */
-@property (copy) NSArray *selectedRanges;
+@property (copy) NSArray<NSValue *> *selectedRanges;
 
 /* This method is used by all actions, but is not strictly required by any. This method instructs the client to scroll its view to make the given range visible. */
 - (void)scrollRangeToVisible:(NSRange)range;
 
 /* These methods are used by the ShowReplaceInterface, Replace, ReplaceAll(InSelection) and ReplaceAndFind actions. Since NSTextFinder can only read the content from the client, the client is responsible for performing replace operations itself, which are done via these methods. Before a replace operation is performed, NSTextFinder calls the first method to determine if a replacement should take place. If it returns NO, then the characters in the given ranges will not be replaced. If the method returns YES, or is not implemented, then it will call the second method, instructing the client to carry out the replacement. Finally, the third method will be called, if implemented, to indicate that the replacement was completed. For ReplaceAll actions, these methods will be called multiple times, starting from the last match and moving toward the first, in order to preserve the indexes of the matches which precede the current one. */
-- (BOOL)shouldReplaceCharactersInRanges:(NSArray *)ranges withStrings:(NSArray *)strings;
+- (BOOL)shouldReplaceCharactersInRanges:(NSArray<NSValue *> *)ranges withStrings:(NSArray<NSString *> *)strings;
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)string;
 - (void)didReplaceCharacters;
 
@@ -152,10 +155,10 @@ NS_CLASS_AVAILABLE(10_7, NA)
 - (NSView *)contentViewAtIndex:(NSUInteger)index effectiveCharacterRange:(NSRangePointer)outRange;
 
 /* NSTextFinder uses this method to determine the location to display the find indicator. The client should convert the given content range to an array of rectangles in the contentView's coordinate system and return that array. The given range is guaranteed not to overlap multiple views. */
-- (NSArray *)rectsForCharacterRange:(NSRange)range;
+- (nullable NSArray<NSValue *> *)rectsForCharacterRange:(NSRange)range;
 
 /* NSTextFinder uses this property's value to determine which ranges it should search to show all of the incremental matches that are currently visible. If this property is not implemented, then the incremental matches cannot be shown. */
-@property (readonly, copy) NSArray *visibleCharacterRanges;
+@property (readonly, copy) NSArray<NSValue *> *visibleCharacterRanges;
 
 /* Draw the glyphs for the requested character range as they are drawn in the given content view. If the character range partially intersects a glyph range, then the full glyph is can be drawn to avoid additional layout. The given range is guaranteed to be completely contained by the given view. When this method is called, a drawing context effectively identical to the one provided to the view’s -drawRect: will be set up. This method is mainly used to draw find indicator contents, so implementations should check -isDrawingFindIndicator to ensure that the text will be easily readable against the background of the find indicator when it returns YES. If this method is not implemented, then the find indicator will be drawn using the content view’s -drawRect: method instead. */
 - (void)drawCharactersInRange:(NSRange)range forContentView:(NSView *)view;
@@ -168,7 +171,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @required
 
 /* This property is used by NSTextFinder to assign a find bar to a container. The container may freely modify the view's width, but should not modify its height. This property is managed by NSTextFinder. You should not set this property. */
-@property (strong) NSView *findBarView;
+@property (nullable, strong) NSView *findBarView;
 
 /* This property controls whether the receiver should display its find bar or not. When this property is YES and the findBarView property is set, then the find bar should be displayed by the container. Otherwise, the find bar should not be displayed. The default value should be NO. */
 @property (getter=isFindBarVisible) BOOL findBarVisible;
@@ -179,6 +182,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @optional
 
 /* This contentView should contain all the views which display the contents being searched. This content view defines the area to be dimmed during incremental search, if incrementalSearchingShouldDimContentView is YES. If this method is not implemented or returns nil, then NSTextFinder will act as if incrementalSearchingShouldDimContentView is NO. */
-- (NSView *)contentView;
+- (nullable NSView *)contentView;
 
 @end
+
+NS_ASSUME_NONNULL_END

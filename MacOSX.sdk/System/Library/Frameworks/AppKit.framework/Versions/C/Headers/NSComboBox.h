@@ -1,16 +1,19 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2014, Apple Inc.
+	Copyright (c) 1996-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSTextField.h>
 
-APPKIT_EXTERN NSString *NSComboBoxWillPopUpNotification;
-APPKIT_EXTERN NSString *NSComboBoxWillDismissNotification;
-APPKIT_EXTERN NSString *NSComboBoxSelectionDidChangeNotification;
-APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
+NS_ASSUME_NONNULL_BEGIN
+
+APPKIT_EXTERN NSString * NSComboBoxWillPopUpNotification;
+APPKIT_EXTERN NSString * NSComboBoxWillDismissNotification;
+APPKIT_EXTERN NSString * NSComboBoxSelectionDidChangeNotification;
+APPKIT_EXTERN NSString * NSComboBoxSelectionIsChangingNotification;
 
 @protocol NSComboBoxDelegate, NSComboBoxDataSource;
 
@@ -41,11 +44,11 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 
 @property BOOL completes;
 
-- (id <NSComboBoxDelegate>)delegate;
-- (void)setDelegate:(id <NSComboBoxDelegate>)anObject;
+- (nullable id <NSComboBoxDelegate>)delegate;
+- (void)setDelegate:(nullable id <NSComboBoxDelegate>)anObject;
 
 /* These two methods can only be used when usesDataSource is YES */
-@property (assign) id<NSComboBoxDataSource> dataSource;
+@property (nullable, assign) id<NSComboBoxDataSource> dataSource;
 
 /* These methods can only be used when usesDataSource is NO */
 - (void)addItemWithObjectValue:(id)object;
@@ -54,9 +57,9 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (void)removeItemWithObjectValue:(id)object;
 - (void)removeItemAtIndex:(NSInteger)index;
 - (void)removeAllItems;
-- (void)selectItemWithObjectValue:(id)object;
+- (void)selectItemWithObjectValue:(nullable id)object;
 - (id)itemObjectValueAtIndex:(NSInteger)index;
-@property (readonly, strong) id objectValueOfSelectedItem;
+@property (nullable, readonly, strong) id objectValueOfSelectedItem;
 - (NSInteger)indexOfItemWithObjectValue:(id)object;
 @property (readonly, copy) NSArray *objectValues;
 
@@ -69,7 +72,7 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index;
 
 - (NSUInteger)comboBox:(NSComboBox *)aComboBox indexOfItemWithStringValue:(NSString *)string;
-- (NSString *)comboBox:(NSComboBox *)aComboBox completedString:(NSString *)string;
+- (nullable NSString *)comboBox:(NSComboBox *)aComboBox completedString:(NSString *)string;
 @end
 
 @protocol NSComboBoxDelegate <NSTextFieldDelegate>
@@ -82,3 +85,5 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (void)comboBoxSelectionIsChanging:(NSNotification *)notification;
 
 @end
+
+NS_ASSUME_NONNULL_END

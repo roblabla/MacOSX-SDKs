@@ -126,7 +126,7 @@ __END_DECLS
 		mach_msg_type_number_t port_nameOffset; /* MiG doesn't use it */
 		mach_msg_type_number_t port_nameCnt;
 		char port_name[80];
-	} __Request__netname_check_in_t;
+	} __Request__netname_check_in_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -143,7 +143,7 @@ __END_DECLS
 		mach_msg_type_number_t port_nameOffset; /* MiG doesn't use it */
 		mach_msg_type_number_t port_nameCnt;
 		char port_name[80];
-	} __Request__netname_look_up_t;
+	} __Request__netname_look_up_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -161,7 +161,7 @@ __END_DECLS
 		mach_msg_type_number_t port_nameOffset; /* MiG doesn't use it */
 		mach_msg_type_number_t port_nameCnt;
 		char port_name[80];
-	} __Request__netname_check_out_t;
+	} __Request__netname_check_out_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -171,7 +171,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__netname_version_t;
+	} __Request__netname_version_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -200,7 +200,7 @@ union __RequestUnion__netname_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__netname_check_in_t;
+	} __Reply__netname_check_in_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -214,7 +214,7 @@ union __RequestUnion__netname_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t port_id;
 		/* end of the kernel processed data */
-	} __Reply__netname_look_up_t;
+	} __Reply__netname_look_up_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -226,7 +226,7 @@ union __RequestUnion__netname_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__netname_check_out_t;
+	} __Reply__netname_check_out_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -241,7 +241,7 @@ union __RequestUnion__netname_subsystem {
 		mach_msg_type_number_t versionOffset; /* MiG doesn't use it */
 		mach_msg_type_number_t versionCnt;
 		char version[80];
-	} __Reply__netname_version_t;
+	} __Reply__netname_version_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

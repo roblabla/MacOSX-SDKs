@@ -1,10 +1,12 @@
 //
 //  SCNSceneSource.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class SCNScene;
 
@@ -106,7 +108,7 @@ SCN_EXTERN NSString * const SCNSceneSourceStrictConformanceKey;
      For better physics simulation it is recommended to use 1 unit equals to 1 meter.
      This option has no effect if the asset is already compressed by Xcode (use the compression options instead).
  */
-SCN_EXTERN NSString * const SCNSceneSourceConvertUnitsToMetersKey SCENEKIT_AVAILABLE(10_10, NA);
+SCN_EXTERN NSString * const SCNSceneSourceConvertUnitsToMetersKey NS_AVAILABLE(10_10, NA);
 
 /*!
  @constant SCNSceneSourceConvertToYUpKey
@@ -114,36 +116,36 @@ SCN_EXTERN NSString * const SCNSceneSourceConvertUnitsToMetersKey SCENEKIT_AVAIL
  @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
  This option has no effect if the asset is already compressed by Xcode (use the compression options instead).
  */
-SCN_EXTERN NSString * const SCNSceneSourceConvertToYUpKey SCENEKIT_AVAILABLE(10_10, NA);
+SCN_EXTERN NSString * const SCNSceneSourceConvertToYUpKey NS_AVAILABLE(10_10, NA);
 
 /*!
  @constant SCNSceneSourceAnimationImportPolicyKey
  @abstract Pass one of the value below to specify what to do with loaded animations.
  @discussion See below for the description of each individual key. Defaults to SCNSceneSourceAnimationImportPolicyPlayRepeatedly. On 10.9 and before the behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase. For compatibility reason if the application was built on 10.9 or before the default behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase.
  */
-SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyKey SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyKey NS_AVAILABLE(10_10, 8_0);
 
 /* values for SCNSceneSourceAnimationImportPolicyKey */
 /*!
  @constant SCNSceneSourceAnimationImportPolicyPlay
  @abstract Add animations to the scene and play them once (repeatCount set to 1).
  */
-SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlay SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlay NS_AVAILABLE(10_10, 8_0);
 /*!
  @constant SCNSceneSourceAnimationImportPolicyPlayRepeatedly
  @abstract Add animations to the scene and play them repeatedly (repeatCount set to infinity).
  */
-SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlayRepeatedly SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlayRepeatedly NS_AVAILABLE(10_10, 8_0);
 /*!
  @constant SCNSceneSourceAnimationImportPolicyDoNotPlay
  @abstract Only keep animations in the SCNSceneSource and don't add to the animatable elements of the scene.
  */
-SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyDoNotPlay SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyDoNotPlay NS_AVAILABLE(10_10, 8_0);
 /*!
  @constant SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase
  @abstract Add animations to the scene and play them using the SCNView/SCNRenderer's scene time (usesSceneTimeBase set to YES)
  */
-SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @constant SCNDetailedErrorsKey
@@ -184,7 +186,6 @@ SCN_EXTERN NSString * const SCNConsistencyLineNumberErrorKey;
  @discussion Each of the detailed errors found in the master error's SCNDetailedErrorsKey, when present, will have an error
              code in this enumeration and some additional metadata associated with the SCNConsistency* keys.
  */
-
 enum {
 	SCNConsistencyInvalidURIError = 1000,
 	SCNConsistencyInvalidCountError,
@@ -197,7 +198,8 @@ enum {
 /*!
  @enum SCNSceneSourceStatus
  @abstract Represents a phase of the loading process.
- @discussion Each of these constants (except SCNSceneSourceStatusError) represents a phase of the loading process. "Parsing" means that the document is being deserialized, "validating" that it's being checked for consistency, "processing" that the resulting object is being loaded. New values might be added to this enumeration to make it more detailed; however the values will always be ordered in the same order as the corresponding phases are executed. */
+ @discussion Each of these constants (except SCNSceneSourceStatusError) represents a phase of the loading process. "Parsing" means that the document is being deserialized, "validating" that it's being checked for consistency, "processing" that the resulting object is being loaded. New values might be added to this enumeration to make it more detailed; however the values will always be ordered in the same order as the corresponding phases are executed.
+ */
 typedef NS_ENUM(NSInteger, SCNSceneSourceStatus) {
 	SCNSceneSourceStatusError      = -1,
 	SCNSceneSourceStatusParsing    = 4,
@@ -206,7 +208,7 @@ typedef NS_ENUM(NSInteger, SCNSceneSourceStatus) {
 	SCNSceneSourceStatusComplete   = 16
 };
 
-typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceStatus status, NSError *error, BOOL *stop);
+typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceStatus status, NSError * __nullable error, BOOL *stop);
 
 
 /*!
@@ -215,12 +217,8 @@ typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceS
  After creating a SCNSceneSource object for the appropriate source, you can obtain scenes using SCNSceneSource methods.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNSceneSource : NSObject 
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method sceneSourceWithURL:options:
@@ -228,7 +226,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param url The URL to read scenes from.
  @param options An optional dictionary for future extensions. 
  */
-+ (instancetype)sceneSourceWithURL:(NSURL *)url options:(NSDictionary *)options;
++ (nullable instancetype)sceneSourceWithURL:(NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
  @method sceneSourceWithData:options:
@@ -236,7 +234,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param data The scene data.
  @param options An optional dictionary for future extensions. 
  */
-+ (instancetype)sceneSourceWithData:(NSData *)data options:(NSDictionary *)options;
++ (nullable instancetype)sceneSourceWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
  @method initWithURL:options:
@@ -244,7 +242,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param url The URL to read scenes from.
  @param options An optional dictionary for future extensions. 
  */
-- (id)initWithURL:(NSURL *)url options:(NSDictionary *)options;
+- (nullable instancetype)initWithURL:(NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
  @method initWithData:options:
@@ -252,19 +250,19 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param data The data to read scenes from.
  @param options An optional dictionary for future extensions. 
  */
-- (id)initWithData:(NSData *)data options:(NSDictionary *)options;
+- (nullable instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
  @property url
  @abstract The receiver's URL (if any).
  */
-@property(readonly) NSURL *url;
+@property(readonly, nullable) NSURL *url;
 
 /*!
  @property data
  @abstract The receiver's data (if any).
  */
-@property(readonly) NSData *data;
+@property(readonly, nullable) NSData *data;
 
 /*!
  @method sceneWithOptions:statusHandler:
@@ -276,7 +274,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 					  - If status == SCNSceneStatusError, then error will contain more information about the failure, and the method will return nil after having called the block. Otherwise error will be nil.
 					  - Set *stop to YES if you want the source to abort the loading operation.
  */
-- (SCNScene *)sceneWithOptions:(NSDictionary *)options statusHandler:(SCNSceneSourceStatusHandler)statusHandler;
+- (nullable SCNScene *)sceneWithOptions:(nullable NSDictionary<NSString *, id> *)options statusHandler:(nullable SCNSceneSourceStatusHandler)statusHandler;
 
 /*!
  @method sceneWithOptions:error:
@@ -286,14 +284,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @discussion This simpler version is equivalent to providing a block to sceneWithOptions:statusHandler: and checking the "error"
  parameter of the block if the status is SCNSceneStatusError.
  */
-- (SCNScene *)sceneWithOptions:(NSDictionary *)options error:(NSError **)error;
+- (nullable SCNScene *)sceneWithOptions:(nullable NSDictionary<NSString *, id> *)options error:(NSError **)error;
 
 /*!
  @method propertyForKey:
  @param key The key for which to return the corresponding property.
  @abstract Returns the property as defined in the 3D file for the given key. See keys above.
  */
-- (id)propertyForKey:(NSString *)key;
+- (nullable id)propertyForKey:(NSString *)key;
 
 /*!
  @method entryWithIdentifier:classType:
@@ -302,14 +300,18 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param entryClass Specifies the type of the object to be returned. It can be one of the following classes: SCNMaterial, SCNGeometry, SCNScene, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage
  @discussion Returns NULL if the receiver's library doesn't contains such an uid for the specified type.
  */
-- (id)entryWithIdentifier:(NSString *)uid withClass:(Class)entryClass;
+#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 1
+- (nullable id)entryWithIdentifier:(NSString *)uid withClass:(Class)entryClass NS_REFINED_FOR_SWIFT;
+#else
+- (nullable id)entryWithIdentifier:(NSString *)uid withClass:(Class)entryClass;
+#endif
 
 /*!
  @method identifiersOfEntriesWithClass:
  @abstract Returns the IDs found in the receiver's library for the class "entryClass".
  @param entryClass Specifies the type of the object referenced by the returned IDs. It can be one of the following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage
  */
-- (NSArray *)identifiersOfEntriesWithClass:(Class)entryClass;
+- (NSArray<NSString *> *)identifiersOfEntriesWithClass:(Class)entryClass;
 
 /*!
  @method entriesPassingTest:
@@ -317,6 +319,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @param predicate The block to apply to entries in the library. The block takes three arguments: "entry" is an entry in the library, "identifier" is the ID of this entry and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the library. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block. The Block returns a Boolean value that indicates whether "entry" passed the test.
  @discussion The entry is an instance of one of following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage.
  */
-- (NSArray *)entriesPassingTest:(BOOL (^)(id entry, NSString *identifier, BOOL *stop))predicate SCENEKIT_AVAILABLE(10_9, 8_0);
+- (NSArray<id> *)entriesPassingTest:(BOOL (^)(id entry, NSString *identifier, BOOL *stop))predicate NS_AVAILABLE(10_9, 8_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

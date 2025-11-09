@@ -1,6 +1,6 @@
 .\" see 'man mdoc' for syntax examples
 .\" this should go in /usr/share/man/man1/
-.Dd July 31, 2014
+.Dd December 16, 2014
 .Dt profiles 1
 .Os MacOSX
 .Sh NAME
@@ -45,7 +45,7 @@ List configuration profile information for a particular user, or the current use
 .It Fl F
 Specify the file path to the profile file.   Use '-' as the file path to input the configuration profile (not provisioning profile) XML plist via stdin.
 .It Fl U
-Specify the short username.   Since you can only install profiles for the current user, this is only useful for validation.
+Specify the short username.   If installing or removing a profile as root (or sudo), the designated user must be logged in.
 .It Fl H
 Returns whether configuration profiles are installed.
 .It Fl P
@@ -71,7 +71,7 @@ Displays tool version number.   The version is in the format x.yy, where x will 
 .It Fl f
 Automatically confirm any questions, or when used with -s, will retry startup profiles at each startup until successfully installed.
 .It Fl D
-Deletes all existing configuration profiles.  It will not update any existing managed preferences. (Requires root privileges)
+Deletes all existing configuration profiles.  It will not update any existing managed preferences. (Requires root privileges.  See important caveats below)
 .It Fl d
 Deletes all existing provisioning profiles. (Requires root privileges)
 .It Fl s
@@ -108,9 +108,9 @@ Installs the configuration profile read in from stdin.   The stdin data must be 
 .El                      \" Ends the list
 .Pp
 .Sh CAVEATS
-Certain configuration profiles may be marked as a device profile (system) using the PayloadScope key.  However, the profiles tool will ignore the PayloadScope key and install the profile based on how the profile is installed; either a user profile if installed from a user, or a device profile if installed from root (or sudo).
+Certain configuration profiles may be marked as a device profile (system) using the PayloadScope key.  However, the profiles tool will ignore the PayloadScope key and install the profile based on how the profile is installed; either a user profile if installed from a user, or a device profile if installed from root (or sudo).   If you are installing a profile as root, you may use the -U parameter to install or remove the profile for that active user.
 .Pp
-Specific payload dictionary information is not available since it may contain sensitive information.  Non-sensitive information can be viewed using the System Profiler report.
+Specific payload dictionary information is not available since it may contain sensitive information.  Non-sensitive information can be viewed using the System Report.
 .Pp
 Because this command line tool was not designed to ask for missing information, some profiles may fail to install properly.  The only recourse is to insert the missing information before installing the configuration profile.  The System Preferences application's Profiles pane is designed to handle the querying of missing information.
 .Pp

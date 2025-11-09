@@ -52,7 +52,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		to tear it down and CFRelease to release your object reference.
  */
 
-typedef struct OpaqueVTCompressionSession*  VTCompressionSessionRef;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTCompressionSession*  VTCompressionSessionRef;
 
 /*!
 	@typedef	VTCompressionOutputCallback
@@ -78,11 +78,13 @@ typedef struct OpaqueVTCompressionSession*  VTCompressionSessionRef;
 */
 
 typedef void (*VTCompressionOutputCallback)(
-		void *outputCallbackRefCon, 
-		void *sourceFrameRefCon, 
+		void * CM_NULLABLE outputCallbackRefCon,
+		void * CM_NULLABLE sourceFrameRefCon, 
 		OSStatus status, 
 		VTEncodeInfoFlags infoFlags,
-		CMSampleBufferRef sampleBuffer );
+		CM_NULLABLE CMSampleBufferRef sampleBuffer );
+	
+CM_ASSUME_NONNULL_BEGIN
 		
 /*!
 	@constant	kVTVideoEncoderSpecification_EncoderID
@@ -95,6 +97,8 @@ typedef void (*VTCompressionOutputCallback)(
 		the array returned by VTCopyVideoEncoderList.
 */
 VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0); // CFString
+	
+CM_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 	
@@ -125,6 +129,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 	@param	outputCallback
 		The callback to be called with compressed frames.
 		This function may be called asynchronously, on a different thread from the one that calls VTCompressionSessionEncodeFrame.
+		Pass NULL if and only if you will be calling VTCompressionSessionEncodeFrameWithOutputHandler for encoding frames.
 	@param	outputCallbackRefCon
 		Client-defined reference value for the output callback.
 	@param	compressionSessionOut
@@ -133,16 +138,16 @@ CF_IMPLICIT_BRIDGING_DISABLED
 */
 VT_EXPORT OSStatus 
 VTCompressionSessionCreate(
-	CFAllocatorRef                              allocator,                  /* can be NULL */
-	int32_t										width,
-	int32_t										height,
-	CMVideoCodecType							codecType,
-	CFDictionaryRef								encoderSpecification,       /* can be NULL */
-	CFDictionaryRef                             sourceImageBufferAttributes,/* can be NULL */
-	CFAllocatorRef								compressedDataAllocator,	/* can be NULL */
-	VTCompressionOutputCallback					outputCallback,
-	void *										outputCallbackRefCon,
-	VTCompressionSessionRef *					compressionSessionOut) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
+	CM_NULLABLE CFAllocatorRef							allocator,
+	int32_t												width,
+	int32_t												height,
+	CMVideoCodecType									codecType,
+	CM_NULLABLE CFDictionaryRef							encoderSpecification,
+	CM_NULLABLE CFDictionaryRef							sourceImageBufferAttributes,
+	CM_NULLABLE CFAllocatorRef							compressedDataAllocator,
+	CM_NULLABLE VTCompressionOutputCallback				outputCallback,
+	void * CM_NULLABLE									outputCallbackRefCon,
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTCompressionSessionRef * CM_NONNULL compressionSessionOut) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 	
@@ -157,7 +162,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
     	Calling VTCompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTCompressionSessionInvalidate( VTCompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
+VTCompressionSessionInvalidate( CM_NONNULL VTCompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
 /*!
 	@function VTCompressionSessionGetTypeID
@@ -184,9 +189,9 @@ VTCompressionSessionGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHON
 		the compressor's pixel buffer attributes to change, it's possible that
 		VTCompressionSessionGetPixelBufferPool might return a different pool.
 */
-VT_EXPORT CVPixelBufferPoolRef 
+VT_EXPORT CM_NULLABLE CVPixelBufferPoolRef
 VTCompressionSessionGetPixelBufferPool(
-	VTCompressionSessionRef		session ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
+	CM_NONNULL VTCompressionSessionRef		session ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
 /*!
 	@function	VTCompressionSessionPrepareToEncodeFrames
@@ -202,7 +207,7 @@ VTCompressionSessionGetPixelBufferPool(
 		The compression session.
 */
 VT_EXPORT OSStatus
-VTCompressionSessionPrepareToEncodeFrames( VTCompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_8_0);
+VTCompressionSessionPrepareToEncodeFrames( CM_NONNULL VTCompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_8_0);
 	
 /*!
 	@function	VTCompressionSessionEncodeFrame
@@ -238,13 +243,81 @@ VTCompressionSessionPrepareToEncodeFrames( VTCompressionSessionRef session ) __O
 */
 VT_EXPORT OSStatus
 VTCompressionSessionEncodeFrame(
-	VTCompressionSessionRef		session,
-	CVImageBufferRef			imageBuffer, 
-	CMTime						presentationTimeStamp,
-	CMTime						duration, // may be kCMTimeInvalid
-	CFDictionaryRef				frameProperties, // may be NULL
-	void *						sourceFrameRefCon,
-	VTEncodeInfoFlags			*infoFlagsOut /* may be NULL */ ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
+	CM_NONNULL VTCompressionSessionRef	session,
+	CM_NONNULL CVImageBufferRef			imageBuffer,
+	CMTime								presentationTimeStamp,
+	CMTime								duration, // may be kCMTimeInvalid
+	CM_NULLABLE CFDictionaryRef			frameProperties,
+	void * CM_NULLABLE					sourceFrameRefCon,
+	VTEncodeInfoFlags * CM_NULLABLE		infoFlagsOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
+	
+#if __BLOCKS__
+/*!
+	@typedef	VTCompressionOutputHandler
+	@abstract   Prototype for block invoked when frame compression is complete.
+	@discussion
+		When you encode a frame, you pass in a callback block to be called
+		for that compressed frame.  This block will be called in decode order (which is not
+		necessarily the same as display order).
+	@param	status
+		noErr if compression was successful; an error code if compression was not successful.
+	@param	infoFlags
+		Contains information about the encode operation.
+		The kVTEncodeInfo_Asynchronous bit may be set if the encode ran asynchronously.
+		The kVTEncodeInfo_FrameDropped bit may be set if the frame was dropped.
+	@param	sampleBuffer
+		Contains the compressed frame, if compression was successful and the frame was not dropped;
+		otherwise, NULL.
+ */
+typedef void (^VTCompressionOutputHandler)(
+		OSStatus status,
+		VTEncodeInfoFlags infoFlags,
+		CM_NULLABLE CMSampleBufferRef sampleBuffer );
+	
+/*!
+	@function	VTCompressionSessionEncodeFrameWithOutputHandler
+	@abstract
+		Call this function to present frames to the compression session.
+		Encoded frames may or may not be output before the function returns.
+	@discussion
+		The client should not modify the pixel data after making this call.
+		The session and/or encoder will retain the image buffer as long as necessary.
+		Cannot be called with a session created with a VTCompressionOutputCallback/
+	@param	session
+		The compression session.
+	@param	imageBuffer
+		A CVImageBuffer containing a video frame to be compressed.
+		Must have a nonzero reference count.
+	@param	presentationTimeStamp
+		The presentation timestamp for this frame, to be attached to the sample buffer.
+		Each presentation timestamp passed to a session must be greater than the previous one.
+	@param	duration
+		The presentation duration for this frame, to be attached to the sample buffer.
+		If you do not have duration information, pass kCMTimeInvalid.
+	@param	frameProperties
+		Contains key/value pairs specifying additional properties for encoding this frame.
+		Note that some session properties may also be changed between frames.
+		Such changes have effect on subsequently encoded frames.
+	@param	infoFlagsOut
+		Points to a VTEncodeInfoFlags to receive information about the encode operation.
+		The kVTEncodeInfo_Asynchronous bit may be set if the encode is (or was) running
+		asynchronously.
+		The kVTEncodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
+		Pass NULL if you do not want to receive this information.
+	@param	outputHandler
+		The block to be called when encoding the frame is completed.
+		This block may be called asynchronously, on a different thread from the one that calls VTCompressionSessionEncodeFrameWithOutputHandler.
+ */
+VT_EXPORT OSStatus
+VTCompressionSessionEncodeFrameWithOutputHandler(
+		CM_NONNULL VTCompressionSessionRef		session,
+		CM_NONNULL CVImageBufferRef				imageBuffer,
+		CMTime									presentationTimeStamp,
+		CMTime									duration, // may be kCMTimeInvalid
+		CM_NULLABLE CFDictionaryRef				frameProperties, // may be NULL
+		VTEncodeInfoFlags * CM_NULLABLE			infoFlagsOut,
+		CM_NONNULL VTCompressionOutputHandler	outputHandler ) __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+#endif // __BLOCKS__
 
 /*!
 	@function VTCompressionSessionCompleteFrames
@@ -257,8 +330,8 @@ VTCompressionSessionEncodeFrame(
 */
 VT_EXPORT OSStatus
 VTCompressionSessionCompleteFrames(
-	VTCompressionSessionRef		session,
-	CMTime						completeUntilPresentationTimeStamp) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0); // complete all frames if non-numeric
+	CM_NONNULL VTCompressionSessionRef	session,
+	CMTime								completeUntilPresentationTimeStamp) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0); // complete all frames if non-numeric
 	
 #pragma mark Multi-pass
 	
@@ -282,9 +355,9 @@ typedef CF_OPTIONS(uint32_t, VTCompressionSessionOptionFlags) {
 */
 VT_EXPORT OSStatus
 VTCompressionSessionBeginPass(
-	VTCompressionSessionRef			session,
-	VTCompressionSessionOptionFlags	beginPassFlags,
-	uint32_t						*reserved /* pass NULL */ ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NONNULL VTCompressionSessionRef	session,
+	VTCompressionSessionOptionFlags		beginPassFlags,
+	uint32_t * CM_NULLABLE				reserved) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 	
 /*!
 	@function	VTCompressionSessionEndPass
@@ -299,9 +372,9 @@ VTCompressionSessionBeginPass(
 */
 VT_EXPORT OSStatus
 VTCompressionSessionEndPass(
-	VTCompressionSessionRef		session,
-	Boolean						*furtherPassesRequestedOut,
-	uint32_t					*reserved /* pass NULL */ ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_NONNULL VTCompressionSessionRef	session,
+	Boolean * CM_NULLABLE				furtherPassesRequestedOut,
+	uint32_t * CM_NULLABLE				reserved) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 	
 /*!
 	 @function	VTCompressionSessionGetTimeRangesForNextPass
@@ -319,9 +392,9 @@ VTCompressionSessionEndPass(
 */
 VT_EXPORT OSStatus
 VTCompressionSessionGetTimeRangesForNextPass(
-	VTCompressionSessionRef		session,
-	CMItemCount *				timeRangeCountOut,
-	const CMTimeRange **		timeRangeArrayOut ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); /* returned pointer will be valid until next call to VTCompressionSessionEndPass */
+	CM_NONNULL VTCompressionSessionRef				session,
+	CMItemCount * CM_NONNULL						timeRangeCountOut,
+	const CMTimeRange * CM_NULLABLE * CM_NONNULL	timeRangeArrayOut ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); /* returned pointer will be valid until next call to VTCompressionSessionEndPass */
 
 // See VTSession.h for property access APIs on VTCompressionSessions.
 // See VTCompressionProperties.h for standard property keys and values for compression sessions.

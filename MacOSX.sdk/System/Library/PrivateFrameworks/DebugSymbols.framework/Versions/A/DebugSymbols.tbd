@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols
-current-version: 115.0
+current-version: 132.0
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _DBGAddDSYMURL, _DBGAppID, _DBGBlockPath, _DBGCopyDSYMPropertyLists, 

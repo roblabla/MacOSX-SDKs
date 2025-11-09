@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <CloudKit/CKDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 CK_EXTERN NSString * const CKErrorDomain NS_AVAILABLE(10_10, 8_0);
 
 CK_EXTERN NSString * const CKPartialErrorsByItemIDKey NS_AVAILABLE(10_10, 8_0);
@@ -56,3 +58,5 @@ typedef NS_ENUM(NSInteger, CKErrorCode) {
     CKErrorLimitExceeded           = 27, /* The request to the server was too large. Retry this request as a smaller batch. */
     CKErrorUserDeletedZone         = 28, /* The user deleted this zone through the settings UI. Your client should either remove its local data or prompt the user before attempting to re-upload any data to this zone. */
 } NS_ENUM_AVAILABLE(10_10, 8_0);
+
+NS_ASSUME_NONNULL_END

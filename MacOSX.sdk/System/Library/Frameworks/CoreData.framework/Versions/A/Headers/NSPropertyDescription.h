@@ -1,15 +1,18 @@
 /*
     NSPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSEntityDescription;
 @class NSData;
+@class NSPredicate;
 
 // Properties describe values within a managed object. There are different types of properties, each of them represented by a subclass which encapsulates the specific property behavior.
 NS_CLASS_AVAILABLE(10_4,3_0)
@@ -50,11 +53,11 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 @property (getter=isTransient) BOOL transient;
 
 // Instead of individual methods to set/get parameters like length, min and max values, formats, etc., there is a list of predicates evaluated against the managed objects and corresponding error messages (which can be localized).
-@property (readonly, strong) NSArray *validationPredicates;
+@property (readonly, strong) NSArray<NSPredicate *> *validationPredicates;
 @property (readonly, strong) NSArray *validationWarnings;
-- (void)setValidationPredicates:(NSArray *)validationPredicates withValidationWarnings:(NSArray *)validationWarnings;
+- (void)setValidationPredicates:(nullable NSArray<NSPredicate *> *)validationPredicates withValidationWarnings:(nullable NSArray<NSString *> *)validationWarnings;
 
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nullable, nonatomic, strong) NSDictionary *userInfo;
 
 /* Returns a boolean value indicating if the property is important for searching.  NSPersistentStores can optionally utilize this information upon store creation for operations like defining indexes.
 */
@@ -66,7 +69,7 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 
 /* Returns/sets the version hash modifier for the property.  This value is included in the version hash for the property, allowing developers to mark/denote a property as being a different "version" than another, even if all of the values which affects persistence are equal.  (Such a difference is important in cases where the design of a property is unchanged, but the format or content of data has changed.)
 */
-@property (copy) NSString *versionHashModifier NS_AVAILABLE(10_5,3_0);
+@property (nullable, copy) NSString *versionHashModifier NS_AVAILABLE(10_5,3_0);
 
 /* Returns a boolean value indicating if the property should be indexed by Spotlight.
 */
@@ -76,6 +79,8 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 */
 @property (getter=isStoredInExternalRecord) BOOL storedInExternalRecord NS_AVAILABLE(10_6,3_0);
 
-@property (copy) NSString *renamingIdentifier NS_AVAILABLE(10_6,3_0);
+@property (nullable, copy) NSString *renamingIdentifier NS_AVAILABLE(10_6,3_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

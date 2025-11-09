@@ -2,7 +2,7 @@
  *  CTFont.h
  *  CoreText
  *
- *  Copyright (c) 2006-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -25,10 +25,8 @@
 #include <CoreGraphics/CGContext.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*! --------------------------------------------------------------------------
     @group Font Types
@@ -40,9 +38,9 @@ extern "C" {
     @discussion This is a opaque reference to a core font object.
 */
 #if TARGET_OS_IPHONE
-typedef const struct CT_BRIDGED_TYPE(UIFont) __CTFont * CTFontRef;
+typedef const struct CF_BRIDGED_TYPE(UIFont) __CTFont * CTFontRef;
 #else
-typedef const struct CT_BRIDGED_TYPE(NSFont) __CTFont * CTFontRef;
+typedef const struct CF_BRIDGED_TYPE(NSFont) __CTFont * CTFontRef;
 #endif
 
 /*!
@@ -170,9 +168,9 @@ extern const CFStringRef kCTFontPostScriptCIDNameKey CT_AVAILABLE(10_5, 3_2);
     @result     This function will return a CTFontRef that best matches the name provided with size and matrix attributes. The name parameter is the only required parameters, and default values will be used for unspecified parameters. A best match will be found if all parameters cannot be matched identically.
 */
 CTFontRef CTFontCreateWithName(
-    CFStringRef                 name,
+    CFStringRef __nullable      name,
     CGFloat                     size,
-    const CGAffineTransform     *matrix ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @function   CTFontCreateWithFontDescriptor
@@ -192,7 +190,7 @@ CTFontRef CTFontCreateWithName(
 CTFontRef CTFontCreateWithFontDescriptor(
     CTFontDescriptorRef     descriptor,
     CGFloat                 size,
-    const CGAffineTransform *matrix ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @enum       CTFontOptions
@@ -230,7 +228,7 @@ typedef CF_OPTIONS(CFOptionFlags, CTFontOptions) {
 CTFontRef CTFontCreateWithNameAndOptions(
     CFStringRef                 name,
     CGFloat                     size,
-    const CGAffineTransform     *matrix,
+    const CGAffineTransform * __nullable matrix,
     CTFontOptions               options ) CT_AVAILABLE(10_6, 3_2);
 
 /*!
@@ -254,7 +252,7 @@ CTFontRef CTFontCreateWithNameAndOptions(
 CTFontRef CTFontCreateWithFontDescriptorAndOptions(
     CTFontDescriptorRef     descriptor,
     CGFloat                 size,
-    const CGAffineTransform *matrix,
+    const CGAffineTransform * __nullable matrix,
     CTFontOptions           options ) CT_AVAILABLE(10_6, 3_2);
 
 /*!
@@ -263,63 +261,63 @@ CTFontRef CTFontCreateWithFontDescriptorAndOptions(
     @discussion Use these constants with CTFontCreateUIFontForLanguage to indicate the intended user interface usage of the font reference to be created.
 */
 typedef CF_ENUM(uint32_t, CTFontUIFontType) {
-    kCTFontUIFontNone                           = (uint32_t)-1,
-    kCTFontUIFontUser                           =  0,
-    kCTFontUIFontUserFixedPitch                 =  1,
-    kCTFontUIFontSystem                         =  2,
-    kCTFontUIFontEmphasizedSystem               =  3,
-    kCTFontUIFontSmallSystem                    =  4,
-    kCTFontUIFontSmallEmphasizedSystem          =  5,
-    kCTFontUIFontMiniSystem                     =  6,
-    kCTFontUIFontMiniEmphasizedSystem           =  7,
-    kCTFontUIFontViews                          =  8,
-    kCTFontUIFontApplication                    =  9,
-    kCTFontUIFontLabel                          = 10,
-    kCTFontUIFontMenuTitle                      = 11,
-    kCTFontUIFontMenuItem                       = 12,
-    kCTFontUIFontMenuItemMark                   = 13,
-    kCTFontUIFontMenuItemCmdKey                 = 14,
-    kCTFontUIFontWindowTitle                    = 15,
-    kCTFontUIFontPushButton                     = 16,
-    kCTFontUIFontUtilityWindowTitle             = 17,
-    kCTFontUIFontAlertHeader                    = 18,
-    kCTFontUIFontSystemDetail                   = 19,
-    kCTFontUIFontEmphasizedSystemDetail         = 20,
-    kCTFontUIFontToolbar                        = 21,
-    kCTFontUIFontSmallToolbar                   = 22,
-    kCTFontUIFontMessage                        = 23,
-    kCTFontUIFontPalette                        = 24,
-    kCTFontUIFontToolTip                        = 25,
-    kCTFontUIFontControlContent                 = 26,
+    kCTFontUIFontNone                   CT_ENUM_AVAILABLE(10_8, 6_0) = (uint32_t)-1,
+    kCTFontUIFontUser                   CT_ENUM_AVAILABLE(10_8, 6_0) =  0,
+    kCTFontUIFontUserFixedPitch         CT_ENUM_AVAILABLE(10_8, 6_0) =  1,
+    kCTFontUIFontSystem                 CT_ENUM_AVAILABLE(10_8, 6_0) =  2,
+    kCTFontUIFontEmphasizedSystem       CT_ENUM_AVAILABLE(10_8, 6_0) =  3,
+    kCTFontUIFontSmallSystem            CT_ENUM_AVAILABLE(10_8, 6_0) =  4,
+    kCTFontUIFontSmallEmphasizedSystem  CT_ENUM_AVAILABLE(10_8, 6_0) =  5,
+    kCTFontUIFontMiniSystem             CT_ENUM_AVAILABLE(10_8, 6_0) =  6,
+    kCTFontUIFontMiniEmphasizedSystem   CT_ENUM_AVAILABLE(10_8, 6_0) =  7,
+    kCTFontUIFontViews                  CT_ENUM_AVAILABLE(10_8, 6_0) =  8,
+    kCTFontUIFontApplication            CT_ENUM_AVAILABLE(10_8, 6_0) =  9,
+    kCTFontUIFontLabel                  CT_ENUM_AVAILABLE(10_8, 6_0) = 10,
+    kCTFontUIFontMenuTitle              CT_ENUM_AVAILABLE(10_8, 6_0) = 11,
+    kCTFontUIFontMenuItem               CT_ENUM_AVAILABLE(10_8, 6_0) = 12,
+    kCTFontUIFontMenuItemMark           CT_ENUM_AVAILABLE(10_8, 6_0) = 13,
+    kCTFontUIFontMenuItemCmdKey         CT_ENUM_AVAILABLE(10_8, 6_0) = 14,
+    kCTFontUIFontWindowTitle            CT_ENUM_AVAILABLE(10_8, 6_0) = 15,
+    kCTFontUIFontPushButton             CT_ENUM_AVAILABLE(10_8, 6_0) = 16,
+    kCTFontUIFontUtilityWindowTitle     CT_ENUM_AVAILABLE(10_8, 6_0) = 17,
+    kCTFontUIFontAlertHeader            CT_ENUM_AVAILABLE(10_8, 6_0) = 18,
+    kCTFontUIFontSystemDetail           CT_ENUM_AVAILABLE(10_8, 6_0) = 19,
+    kCTFontUIFontEmphasizedSystemDetail CT_ENUM_AVAILABLE(10_8, 6_0) = 20,
+    kCTFontUIFontToolbar                CT_ENUM_AVAILABLE(10_8, 6_0) = 21,
+    kCTFontUIFontSmallToolbar           CT_ENUM_AVAILABLE(10_8, 6_0) = 22,
+    kCTFontUIFontMessage                CT_ENUM_AVAILABLE(10_8, 6_0) = 23,
+    kCTFontUIFontPalette                CT_ENUM_AVAILABLE(10_8, 6_0) = 24,
+    kCTFontUIFontToolTip                CT_ENUM_AVAILABLE(10_8, 6_0) = 25,
+    kCTFontUIFontControlContent         CT_ENUM_AVAILABLE(10_8, 6_0) = 26,
 
-    kCTFontNoFontType = kCTFontUIFontNone,
-    kCTFontUserFontType = kCTFontUIFontUser,
-    kCTFontUserFixedPitchFontType = kCTFontUIFontUserFixedPitch,
-    kCTFontSystemFontType = kCTFontUIFontSystem,
-    kCTFontEmphasizedSystemFontType = kCTFontUIFontEmphasizedSystem,
-    kCTFontSmallSystemFontType = kCTFontUIFontSmallSystem,
-    kCTFontSmallEmphasizedSystemFontType = kCTFontUIFontSmallEmphasizedSystem,
-    kCTFontMiniSystemFontType = kCTFontUIFontMiniSystem,
-    kCTFontMiniEmphasizedSystemFontType = kCTFontUIFontMiniEmphasizedSystem,
-    kCTFontViewsFontType = kCTFontUIFontViews,
-    kCTFontApplicationFontType = kCTFontUIFontApplication,
-    kCTFontLabelFontType = kCTFontUIFontLabel,
-    kCTFontMenuTitleFontType = kCTFontUIFontMenuTitle,
-    kCTFontMenuItemFontType = kCTFontUIFontMenuItem,
-    kCTFontMenuItemMarkFontType = kCTFontUIFontMenuItemMark,
-    kCTFontMenuItemCmdKeyFontType = kCTFontUIFontMenuItemCmdKey,
-    kCTFontWindowTitleFontType = kCTFontUIFontWindowTitle,
-    kCTFontPushButtonFontType = kCTFontUIFontPushButton,
-    kCTFontUtilityWindowTitleFontType = kCTFontUIFontUtilityWindowTitle,
-    kCTFontAlertHeaderFontType = kCTFontUIFontAlertHeader,
-    kCTFontSystemDetailFontType = kCTFontUIFontSystemDetail,
-    kCTFontEmphasizedSystemDetailFontType = kCTFontUIFontEmphasizedSystemDetail,
-    kCTFontToolbarFontType = kCTFontUIFontToolbar,
-    kCTFontSmallToolbarFontType = kCTFontUIFontSmallToolbar,
-    kCTFontMessageFontType = kCTFontUIFontMessage,
-    kCTFontPaletteFontType = kCTFontUIFontPalette,
-    kCTFontToolTipFontType = kCTFontUIFontToolTip,
-    kCTFontControlContentFontType = kCTFontUIFontControlContent
+    kCTFontNoFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontNone,
+    kCTFontUserFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontUser,
+    kCTFontUserFixedPitchFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontUserFixedPitch,
+    kCTFontSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSystem,
+    kCTFontEmphasizedSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontEmphasizedSystem,
+    kCTFontSmallSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSmallSystem,
+    kCTFontSmallEmphasizedSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSmallEmphasizedSystem,
+    kCTFontMiniSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMiniSystem,
+    kCTFontMiniEmphasizedSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMiniEmphasizedSystem,
+    kCTFontViewsFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontViews,
+    kCTFontApplicationFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontApplication,
+    kCTFontLabelFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontLabel,
+    kCTFontMenuTitleFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuTitle,
+    kCTFontMenuItemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuItem,
+    kCTFontMenuItemMarkFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuItemMark,
+    kCTFontMenuItemCmdKeyFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuItemCmdKey,
+    kCTFontWindowTitleFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontWindowTitle,
+    kCTFontPushButtonFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontPushButton,
+    kCTFontUtilityWindowTitleFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontUtilityWindowTitle,
+    kCTFontAlertHeaderFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontAlertHeader,
+    kCTFontSystemDetailFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSystemDetail,
+    kCTFontEmphasizedSystemDetailFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontEmphasizedSystemDetail,
+    kCTFontToolbarFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontToolbar,
+    kCTFontSmallToolbarFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSmallToolbar,
+    kCTFontMessageFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMessage,
+    kCTFontPaletteFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontPalette,
+    kCTFontToolTipFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontToolTip,
+    kCTFontControlContentFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontControlContent
 };
 
 /*!
@@ -337,10 +335,10 @@ typedef CF_ENUM(uint32_t, CTFontUIFontType) {
 
     @result     This function returns the correct font for various UI uses. The only required parameter is the uiType selector, unspecified optional parameters will use default values.
 */
-CTFontRef CTFontCreateUIFontForLanguage(
+CTFontRef __nullable CTFontCreateUIFontForLanguage(
     CTFontUIFontType    uiType,
     CGFloat             size,
-    CFStringRef         language ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef __nullable language ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @function   CTFontCreateCopyWithAttributes
@@ -365,8 +363,8 @@ CTFontRef CTFontCreateUIFontForLanguage(
 CTFontRef CTFontCreateCopyWithAttributes(
     CTFontRef                   font,
     CGFloat                     size,
-    const CGAffineTransform     *matrix,
-    CTFontDescriptorRef         attributes ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix,
+    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @function   CTFontCreateCopyWithSymbolicTraits
@@ -389,10 +387,10 @@ CTFontRef CTFontCreateCopyWithAttributes(
 
     @result     Returns a new font reference in the same family with the given symbolic traits, or NULL if none found in the system.
 */
-CTFontRef CTFontCreateCopyWithSymbolicTraits(
+CTFontRef __nullable CTFontCreateCopyWithSymbolicTraits(
     CTFontRef                   font,
     CGFloat                     size,
-    const CGAffineTransform     *matrix,
+    const CGAffineTransform * __nullable matrix,
     CTFontSymbolicTraits        symTraitValue,
     CTFontSymbolicTraits        symTraitMask ) CT_AVAILABLE(10_5, 3_2);
 
@@ -414,10 +412,10 @@ CTFontRef CTFontCreateCopyWithSymbolicTraits(
 
     @result     Returns a new font reference with the original traits in the given family. NULL if non found in the system.
 */
-CTFontRef CTFontCreateCopyWithFamily(
+CTFontRef __nullable CTFontCreateCopyWithFamily(
     CTFontRef                   font,
     CGFloat                     size,
-    const CGAffineTransform     *matrix,
+    const CGAffineTransform * __nullable matrix,
     CFStringRef                 family ) CT_AVAILABLE(10_5, 3_2);
 
 /*! --------------------------------------------------------------------------
@@ -478,7 +476,7 @@ CTFontDescriptorRef CTFontCopyFontDescriptor(
 
     @result     This function returns a retained reference to an arbitrary attribute. If the requested attribute is not present, NULL is returned. Refer to the attribute definitions for documentation as to how each attribute is packaged as a CFType.
 */
-CFTypeRef CTFontCopyAttribute(
+CFTypeRef __nullable CTFontCopyAttribute(
     CTFontRef       font,
     CFStringRef     attribute ) CT_AVAILABLE(10_5, 3_2);
 
@@ -586,7 +584,7 @@ CFStringRef CTFontCopyDisplayName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function creates the requested name for the font, or NULL if the font does not have an entry for the requested name. The Unicode version of the name will be preferred, otherwise the first available will be used.
 */
-CFStringRef CTFontCopyName(
+CFStringRef __nullable CTFontCopyName(
     CTFontRef       font,
     CFStringRef     nameKey ) CT_AVAILABLE(10_5, 3_2);
 
@@ -602,13 +600,14 @@ CFStringRef CTFontCopyName(
 
     @param      actualLanguage
                 Pointer to a CFStringRef to receive the language identifier of the returned name string. The format of the language identifier will conform to UTS #35.
+                If CoreText can supply its own localized string where the font cannot, this value will be NULL.
 
     @result     This function returns a specific localized name from the font reference. The name is localized based on the user's global language precedence. If the font does not have an entry for the requested name, NULL will be returned. The matched language will be returned in the caller's buffer.
 */
-CFStringRef CTFontCopyLocalizedName(
+CFStringRef __nullable CTFontCopyLocalizedName(
     CTFontRef       font,
     CFStringRef     nameKey,
-    CFStringRef*    actualLanguage ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef __nullable * __nullable actualLanguage ) CT_AVAILABLE(10_5, 3_2);
 
 /*! --------------------------------------------------------------------------
     @group Font Encoding
@@ -845,7 +844,7 @@ CGRect CTFontGetBoundingRectsForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
     const CGGlyph       glyphs[],
-    CGRect              boundingRects[],
+    CGRect * __nullable boundingRects,
     CFIndex             count ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
@@ -874,7 +873,7 @@ CGRect CTFontGetBoundingRectsForGlyphs(
 CGRect CTFontGetOpticalBoundsForGlyphs(
     CTFontRef           font,
     const CGGlyph       glyphs[],
-    CGRect              boundingRects[],
+    CGRect * __nullable boundingRects,
     CFIndex             count,
     CFOptionFlags       options ) CT_AVAILABLE(10_8, 6_0);
 
@@ -903,7 +902,7 @@ double CTFontGetAdvancesForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
     const CGGlyph       glyphs[],
-    CGSize              advances[],
+    CGSize * __nullable advances,
     CFIndex             count ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
@@ -943,12 +942,12 @@ void CTFontGetVerticalTranslationsForGlyphs(
     @param      transform
                 An affine transform applied to the path. Can be NULL, in which case CGAffineTransformIdentity will be used.
 
-    @result     A retained CGPath reference containing the glyph outlines or NULL if an error occurred.
+    @result     A retained CGPath reference containing the glyph outlines or NULL if there is no such glyph or it has no outline.
 */
-CGPathRef CTFontCreatePathForGlyph(
+CGPathRef __nullable CTFontCreatePathForGlyph(
     CTFontRef                   font,
     CGGlyph                     glyph,
-    const CGAffineTransform *   transform ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(10_5, 3_2);
 
 /*! --------------------------------------------------------------------------
     @group Font Variations        (this functionality is not supported on iOS)
@@ -994,7 +993,7 @@ extern const CFStringRef kCTFontVariationAxisNameKey CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns an array of variation axis dictionaries. Each variation axis dictionary contains the five variation axis keys above.
 */
-CFArrayRef CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFArrayRef __nullable CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @function   CTFontCopyVariation
@@ -1005,7 +1004,7 @@ CFArrayRef CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the current variation instance as a dictionary. The keys for each variation correspond to the variation identifier obtained via kCTFontVariationAxisIdentifierKey which represents the axis' four character code as a CFNumber.
 */
-CFDictionaryRef CTFontCopyVariation( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFDictionaryRef __nullable CTFontCopyVariation( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
 /*! --------------------------------------------------------------------------
     @group Font Features
@@ -1081,7 +1080,7 @@ extern const CFStringRef kCTFontFeatureSelectorSettingKey CT_AVAILABLE(10_5, 3_2
 
     @result     This function returns an array of font feature dictionaries for the font reference.
 */
-CFArrayRef CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFArrayRef __nullable CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @function   CTFontCopyFeatureSettings
@@ -1094,7 +1093,7 @@ CFArrayRef CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns a normalized array of font feature setting dictionaries. The array will only contain the non-default settings that should be applied to the font, or NULL if the default settings should be used.
 */
-CFArrayRef CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFArrayRef __nullable CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
 /*! --------------------------------------------------------------------------
     @group Font Conversion
@@ -1114,7 +1113,7 @@ CFArrayRef CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 */
 CGFontRef CTFontCopyGraphicsFont(
     CTFontRef           font,
-    CTFontDescriptorRef *attributes ) CT_AVAILABLE(10_5, 3_2);
+    CTFontDescriptorRef __nullable * __nullable attributes ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @function   CTFontCreateWithGraphicsFont
@@ -1137,8 +1136,8 @@ CGFontRef CTFontCopyGraphicsFont(
 CTFontRef CTFontCreateWithGraphicsFont(
     CGFontRef                   graphicsFont,
     CGFloat                     size,
-    const CGAffineTransform     *matrix,
-    CTFontDescriptorRef         attributes ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix,
+    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE(10_5, 3_2);
 
 #ifndef ATSFONTREF_DEFINED
 typedef UInt32 ATSFontRef;
@@ -1160,7 +1159,7 @@ typedef UInt32 ATSFontRef;
 
 ATSFontRef CTFontGetPlatformFont(
     CTFontRef               font,
-    CTFontDescriptorRef     *attributes ) CT_AVAILABLE_MAC(10_5);
+    CTFontDescriptorRef __nullable * __nullable attributes ) CT_AVAILABLE_MAC(10_5);
 
 /*!
     @function   CTFontCreateWithPlatformFont
@@ -1180,11 +1179,11 @@ ATSFontRef CTFontGetPlatformFont(
 
     @result     This function returns a new font reference for an ATSFontRef with the specified size, matrix, and additional attributes.
 */
-CTFontRef CTFontCreateWithPlatformFont(
+CTFontRef __nullable CTFontCreateWithPlatformFont(
     ATSFontRef                  platformFont,
     CGFloat                     size,
-    const CGAffineTransform     *matrix,
-    CTFontDescriptorRef         attributes ) CT_AVAILABLE_MAC(10_5);
+    const CGAffineTransform * __nullable matrix,
+    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE_MAC(10_5);
 
 /*!
     @function   CTFontCreateWithQuickdrawInstance
@@ -1207,7 +1206,7 @@ CTFontRef CTFontCreateWithPlatformFont(
     @result     This function returns the best font instance matching the Quickdraw instance information.
 */
 CTFontRef CTFontCreateWithQuickdrawInstance(
-    ConstStr255Param    name,
+    ConstStr255Param __nullable name,
     int16_t             identifier,
     uint8_t             style,
     CGFloat             size ) CT_AVAILABLE_MAC(10_5);
@@ -1280,7 +1279,7 @@ enum {
 typedef FourCharCode CTFontTableTag;
 
 typedef CF_OPTIONS(uint32_t, CTFontTableOptions) {
-    kCTFontTableOptionNoOptions = 0,
+    kCTFontTableOptionNoOptions CT_ENUM_AVAILABLE(10_5, 3_2) = 0,
     kCTFontTableOptionExcludeSynthetic CT_ENUM_DEPRECATED(10_5, 10_8, 3_2, 6_0) = (1 << 0)
 };
 
@@ -1296,7 +1295,7 @@ typedef CF_OPTIONS(uint32_t, CTFontTableOptions) {
     @result     This function returns an array of CTFontTableTag values for the given font and the supplied options. The returned set will contain unboxed values, which may be extracted like so:
                 <code>CTFontTableTag tag = (CTFontTableTag)(uintptr_t)CFArrayGetValueAtIndex(tags, index);</code>
 */
-CFArrayRef CTFontCopyAvailableTables(
+CFArrayRef __nullable CTFontCopyAvailableTables(
     CTFontRef           font,
     CTFontTableOptions  options ) CT_AVAILABLE(10_5, 3_2);
 
@@ -1312,9 +1311,9 @@ CFArrayRef CTFontCopyAvailableTables(
 
     @param      options
 
-    @result     This function returns a retained reference to the font table data as CFDataRef. The table data is not actually copied, however the data reference must be released.
+    @result     This function returns a retained reference to the font table data as CFDataRef or NULL if the table is not present.
 */
-CFDataRef CTFontCopyTable(
+CFDataRef __nullable CTFontCopyTable(
     CTFontRef           font,
     CTFontTableTag      table,
     CTFontTableOptions  options ) CT_AVAILABLE(10_5, 3_2);
@@ -1378,7 +1377,7 @@ void CTFontDrawGlyphs(
 CFIndex CTFontGetLigatureCaretPositions(
     CTFontRef       font,
     CGGlyph         glyph,
-    CGFloat         positions[],
+    CGFloat * __nullable positions,
     CFIndex         maxPositions ) CT_AVAILABLE(10_5, 3_2);
 
 /*! --------------------------------------------------------------------------
@@ -1470,12 +1469,10 @@ extern const CFStringRef kCTBaselineOriginalFont CT_AVAILABLE(10_8, 6_0);
 
     @result     The ordered list of fallback fonts - ordered array of CTFontDescriptors.
 */
-CFArrayRef CTFontCopyDefaultCascadeListForLanguages( CTFontRef font, CFArrayRef languagePrefList ) CT_AVAILABLE(10_8, 6_0);
+CFArrayRef __nullable CTFontCopyDefaultCascadeListForLanguages( CTFontRef font, CFArrayRef __nullable languagePrefList ) CT_AVAILABLE(10_8, 6_0);
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class AVBMACAddress;
 
 /*!
@@ -18,7 +20,7 @@
  */
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVB17221AECPMessage : NSObject <NSCopying>
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 {
 @private
 	AVB17221AECPMessageType messageType;
@@ -93,7 +95,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @private
 	uint16_t rawCommandType;
 	
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 	NSData *commandSpecificData;
 #endif
 }
@@ -118,7 +120,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	commandSpecificData
 	@abstract	The command_specific_data field of the AECP AEM message.
  */
-@property (copy) NSData *commandSpecificData;
+@property (copy, nullable) NSData *commandSpecificData;
 
 /*!
 	@method		commandMessage
@@ -138,7 +140,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 
 
-
+@class AVB17221AECPAddressAccessTLV;
 
 
 /*!
@@ -149,7 +151,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
  */
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVB17221AECPAddressAccessMessage : AVB17221AECPMessage
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 {
 @private
 	NSArray *tlvs;
@@ -160,7 +162,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	tlvs
 	@abstract	An array of AVB17221AECPAddressAccessTLV objects representing the tlv_data field of the AECP Address Access message.
  */
-@property (copy) NSArray *tlvs;
+@property (copy, nullable) NSArray <AVB17221AECPAddressAccessTLV *>*tlvs;
 
 /*!
 	@method		commandMessage
@@ -190,7 +192,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
  */
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVB17221AECPAddressAccessTLV : NSObject
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 {
 @private
 	AVB17221AECPAddressAccessTLVMode mode;
@@ -213,7 +215,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	memoryData
 	@abstract	The memory_data field of the Address Access TLV.
  */
-@property (copy) NSData *memoryData;
+@property (copy, nullable) NSData *memoryData;
 
 @end
 
@@ -230,7 +232,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
  */
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVB17221AECPAVCMessage : AVB17221AECPMessage
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 {
 @private
 	NSData *commandResponse;
@@ -241,7 +243,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	commandResponse
 	@abstract	The avc_command_response field of the AECP AEM message.
  */
-@property (copy) NSData *commandResponse;
+@property (copy, nullable) NSData *commandResponse;
 
 @end
 
@@ -258,7 +260,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
  */
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVB17221AECPVendorMessage : AVB17221AECPMessage
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 {
 @private
 	uint64_t protocolID;
@@ -275,7 +277,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	protocolSpecificData
 	@abstract	The protocol_specific_data field of the AECP Vendor Unique message.
  */
-@property (copy) NSData *protocolSpecificData;
+@property (copy, nullable) NSData *protocolSpecificData;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

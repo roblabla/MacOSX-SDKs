@@ -1,16 +1,19 @@
 /*
 	NSGradient.h
 	Application Kit
-	Copyright (c) 2006-2014, Apple Inc.
+	Copyright (c) 2006-2015, Apple Inc.
 	All rights reserved.
 */
 
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSGeometry.h>
 
 
-@class NSArray, NSBezierPath, NSColor, NSColorSpace;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSBezierPath, NSColor, NSColorSpace;
 
 typedef NSUInteger NSGradientDrawingOptions;
 
@@ -60,12 +63,12 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Initializes a gradient with starting color at location 0.0 and ending color at location 1.0  The color space returned by [NSColorSpace genericRGBColorSpace] is used.
 */
-- (instancetype)initWithStartingColor:(NSColor *)startingColor endingColor:(NSColor *)endingColor;
+- (nullable instancetype)initWithStartingColor:(NSColor *)startingColor endingColor:(NSColor *)endingColor;
 
 
 /* Initializes a gradient with the first color in the array at 0.0, the last color in the array at 1.0, and intervening colors at equal intervals in between. The color space returned by [NSColorSpace genericRGBColorSpace] is used.
 */
-- (instancetype)initWithColors:(NSArray *)colorArray;
+- (nullable instancetype)initWithColors:(NSArray<NSColor *> *)colorArray;
 
 
 /* This initializer takes the first color, then the first location as a CGFloat, then an alternating list of colors and CGFloats, terminated by nil.  If no color is provided for 0.0 or 1.0, the created color gradient will use the color provided at the locations closest to 0.0 and 1.0 for those values.  The color space returned by [NSColorSpace genericRGBColorSpace] is used.
@@ -74,12 +77,12 @@ NS_CLASS_AVAILABLE(10_5, NA)
     NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations: [NSColor blackColor], 0.0, [NSColor blueColor], 0.33, [NSColor cyanColor], 0.45, [NSColor orangeColor], 0.72, [NSColor redColor], 1.0, nil];
 
 */
-- (instancetype)initWithColorsAndLocations:(NSColor *)firstColor, ... NS_REQUIRES_NIL_TERMINATION;
+- (nullable instancetype)initWithColorsAndLocations:(NSColor *)firstColor, ... NS_REQUIRES_NIL_TERMINATION;
 
 
 /* Initializes a gradient by pairing the colors provided in the color array with the locations provided in the locations array.    Each location should be a CGFloat between 0.0 and 1.0.  The color array and location array should not be empty, and should contain the same number of items.  If no color is provided for 0.0 or 1.0, the created color gradient will use the color provided at the locations closest to 0.0 and 1.0 for those values.  This is the designated initializer.
 */
-- (instancetype)initWithColors:(NSArray *)colorArray atLocations:(const CGFloat *)locations colorSpace:(NSColorSpace *)colorSpace;
+- (nullable instancetype)initWithColors:(NSArray<NSColor *> *)colorArray atLocations:(nullable const CGFloat *)locations colorSpace:(NSColorSpace *)colorSpace;
 
 
 /* DRAWING LINEAR GRADIENTS */
@@ -134,7 +137,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 
 /* Returns the color and location at a particular index in the color gradient */
-- (void)getColor:(NSColor **)color location:(CGFloat *)location atIndex:(NSInteger)index;
+- (void)getColor:(NSColor * __nonnull * __nullable)color location:(nullable CGFloat *)location atIndex:(NSInteger)index;
 
 
 /* This method will return the interpolated gradient value at the given location.  For example, in a two color gradient with white at location 0.0 and black at location 1.0, the interpolated color at location 0.5 would be 50% gray.
@@ -145,4 +148,6 @@ You should not need to override this method, it reports the color value of the g
 
 
 @end
+
+NS_ASSUME_NONNULL_END
 

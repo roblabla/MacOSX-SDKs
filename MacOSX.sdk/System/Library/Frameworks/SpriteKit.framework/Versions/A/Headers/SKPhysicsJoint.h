@@ -9,6 +9,8 @@
 #import <SpriteKit/SKPhysicsBody.h>
 #import <SpriteKit/SpriteKitBase.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT @interface SKPhysicsJoint : NSObject <NSCoding>
 
 @property (nonatomic, retain) SKPhysicsBody *bodyA;
@@ -67,3 +69,5 @@ SK_EXPORT @interface SKPhysicsJointLimit : SKPhysicsJoint
 + (SKPhysicsJointLimit *)jointWithBodyA:(SKPhysicsBody *)bodyA bodyB:(SKPhysicsBody *)bodyB anchorA:(CGPoint)anchorA anchorB:(CGPoint)anchorB;
 
 @end
+
+NS_ASSUME_NONNULL_END

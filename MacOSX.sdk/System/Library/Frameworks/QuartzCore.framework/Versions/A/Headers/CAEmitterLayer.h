@@ -1,24 +1,31 @@
 /* CoreAnimation - CAEmitterLayer.h
 
-   Copyright (c) 2007-2014, Apple Inc.
+   Copyright (c) 2007-2015, Apple Inc.
    All rights reserved. */
 
 /* Particle emitter layer.
- * 
+ *
  * Each emitter has an array of cells, the cells define how particles
  * are emitted and rendered by the layer.
+ *
+ * Particle system is affected by layer's timing. The simulation starts
+ * at layer's beginTime.
  *
  * The particles are drawn above the backgroundColor and border of the
  * layer. */
 
 #import <QuartzCore/CALayer.h>
 
+@class CAEmitterCell;
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CAEmitterLayer : CALayer
 
 /* The array of emitter cells attached to the layer. Each object must
  * have the CAEmitterCell class. */
 
-@property(copy) NSArray *emitterCells;
+@property(nullable, copy) NSArray<CAEmitterCell *> *emitterCells;
 
 /* The birth rate of each cell is multiplied by this number to give the
  * actual number of particles created every second. Default value is one.
@@ -131,3 +138,5 @@ CA_EXTERN NSString * const kCAEmitterLayerBackToFront
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerAdditive
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
+
+NS_ASSUME_NONNULL_END

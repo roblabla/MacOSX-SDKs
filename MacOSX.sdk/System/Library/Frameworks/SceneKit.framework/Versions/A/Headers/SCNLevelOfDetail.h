@@ -1,22 +1,20 @@
 //
 //  SCNLevelOfDetail.h
 //
-//  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNGeometry.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  @class SCNLevelOfDetail
  @abstract SCNLevelOfDetail represents a level of detail of a geometry.
  */
-SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+NS_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNLevelOfDetail : NSObject <NSCopying, NSSecureCoding>
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method levelOfDetailWithGeometry:screenSpaceRadius:
@@ -24,7 +22,7 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
  @param geometry The geometry for this level of detail. nil is supported and indicates that no geometry should be rendered for this level of detail.
  @param radius The maximum radius in screen-space that this level of detail is suitable for. The coverage radius is calculated from the projected bounding sphere and expressed in pixels.
  */
-+ (instancetype)levelOfDetailWithGeometry:(SCNGeometry *)geometry screenSpaceRadius:(CGFloat)radius;
++ (instancetype)levelOfDetailWithGeometry:(nullable SCNGeometry *)geometry screenSpaceRadius:(CGFloat)radius;
 
 /*!
  @method levelOfDetailWithGeometry:worldSpaceDistance:
@@ -32,13 +30,13 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
  @param geometry The geometry for this level of detail. nil is supported and indicates that no geometry should be rendered for this level of detail.
  @param distance The minimum distance to the current point of view that this level of detail is suitable for.
  */
-+ (instancetype)levelOfDetailWithGeometry:(SCNGeometry *)geometry worldSpaceDistance:(CGFloat)distance;
++ (instancetype)levelOfDetailWithGeometry:(nullable SCNGeometry *)geometry worldSpaceDistance:(CGFloat)distance;
 
 /*!
  @property geometry
  @abstract Returns the geometry of the receiver.
  */
-@property(readonly) SCNGeometry *geometry;
+@property(readonly, nullable) SCNGeometry *geometry;
 
 /*!
  @property screenSpaceRadius
@@ -53,3 +51,5 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
 @property(readonly) CGFloat worldSpaceDistance;
 
 @end
+
+NS_ASSUME_NONNULL_END

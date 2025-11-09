@@ -1,11 +1,13 @@
 /* CoreAnimation - CARemoteLayerServer.h
 
-   Copyright (c) 2010-2014, Apple Inc.
+   Copyright (c) 2010-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 #import <Foundation/NSObject.h>
 #import <mach/mach.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CARemoteLayerServer : NSObject
 {
@@ -34,3 +36,5 @@
 + (CALayer *)layerWithRemoteClientId:(uint32_t)client_id;
 
 @end
+
+NS_ASSUME_NONNULL_END

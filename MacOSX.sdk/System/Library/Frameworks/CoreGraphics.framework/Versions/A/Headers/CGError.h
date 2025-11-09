@@ -8,9 +8,12 @@
 #include <CoreGraphics/CGBase.h>
 #include <stdint.h>
 
+#include <CoreFoundation/CFAvailability.h>
+
+
 /* Types used for errors and error handlers. */
 
-enum _CGError {
+typedef CF_ENUM (int32_t, CGError) {
   kCGErrorSuccess = 0,
   kCGErrorFailure = 1000,
   kCGErrorIllegalArgument = 1001,
@@ -23,6 +26,5 @@ enum _CGError {
   kCGErrorInvalidOperation = 1010,
   kCGErrorNoneAvailable = 1011,
 };
-typedef int32_t CGError;
 
 #endif /* CGERROR_H_ */

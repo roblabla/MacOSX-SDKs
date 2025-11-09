@@ -108,12 +108,12 @@ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicAdd32Barrier( int32_t __theAmount, volatile int32_t *__theValue );
 
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_1
+#if __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_10 || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_1
 
 /*! @abstract Atomically increments a 32-bit value.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int32_t	OSAtomicIncrement32( volatile int32_t *__theValue );
 
 
@@ -123,14 +123,14 @@ int32_t	OSAtomicIncrement32( volatile int32_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int32_t	OSAtomicIncrement32Barrier( volatile int32_t *__theValue );
 
 
 /*! @abstract Atomically decrements a 32-bit value.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int32_t	OSAtomicDecrement32( volatile int32_t *__theValue );
 
 
@@ -140,7 +140,7 @@ int32_t	OSAtomicDecrement32( volatile int32_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int32_t	OSAtomicDecrement32Barrier( volatile int32_t *__theValue );
 
 #else
@@ -187,12 +187,12 @@ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_3_2)
 int64_t	OSAtomicAdd64Barrier( int64_t __theAmount, volatile int64_t *__theValue );
 
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_1
+#if __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_10 || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_1
 
 /*! @abstract Atomically increments a 64-bit value.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int64_t	OSAtomicIncrement64( volatile int64_t *__theValue );
 
 
@@ -202,14 +202,14 @@ int64_t	OSAtomicIncrement64( volatile int64_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int64_t	OSAtomicIncrement64Barrier( volatile int64_t *__theValue );
 
 
 /*! @abstract Atomically decrements a 64-bit value.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int64_t	OSAtomicDecrement64( volatile int64_t *__theValue );
 
 
@@ -219,7 +219,7 @@ int64_t	OSAtomicDecrement64( volatile int64_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+__OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_7_1)
 int64_t	OSAtomicDecrement64Barrier( volatile int64_t *__theValue );
 
 #else

@@ -26,6 +26,18 @@
 #pragma once
 #endif
 
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+
+CF_ASSUME_NONNULL_BEGIN
+
+
+
 #pragma mark - Abstract base types
 /*
  *  kUTTypeItem
@@ -331,7 +343,7 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    assembly language source (.s)
  *
  *    UTI: public.assembly-source
- *    conforms to: public.source
+ *    conforms to: public.source-code
  *
  *
  *  kUTTypeCSource
@@ -339,7 +351,7 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    C source code (.c)
  *
  *    UTI: public.c-source
- *    conforms to: public.plain-text
+ *    conforms to: public.source-code
  *
  *
  *  kUTTypeObjectiveCSource
@@ -347,7 +359,15 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    Objective-C source code (.m)
  *
  *    UTI: public.objective-c-source
- *    conforms to: public.plain-text
+ *    conforms to: public.source-code
+ *
+ *
+ *  kUTTypeSwiftSource
+ *
+ *    Swift source code (.swift)
+ *
+ *    UTI: public.swift-source
+ *    conforms to: public.source-code
  *
  *
  *  kUTTypeCPlusPlusSource
@@ -355,7 +375,7 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    C++ source code (.cp, etc.)
  *
  *    UTI: public.c-plus-plus-source
- *    conforms to: public.plain-text
+ *    conforms to: public.source-code
  *
  *
  *  kUTTypeObjectiveCPlusPlusSource
@@ -363,7 +383,7 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    Objective-C++ source code
  *
  *    UTI: public.objective-c-plus-plus-source
- *    conforms to: public.plain-text
+ *    conforms to: public.source-code
  *
  *
  *  kUTTypeCHeader
@@ -371,7 +391,7 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    C header
  *
  *    UTI: public.c-header
- *    conforms to: public.plain-text
+ *    conforms to: public.source-code
  *
  *
  *  kUTTypeCPlusPlusHeader
@@ -379,7 +399,7 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    C++ header
  *
  *    UTI: public.c-plus-plus-header
- *    conforms to: public.plain-text
+ *    conforms to: public.source-code
  *
  *
  *  kUTTypeJavaSource
@@ -394,6 +414,7 @@ extern const CFStringRef kUTTypeSourceCode                           __OSX_AVAIL
 extern const CFStringRef kUTTypeAssemblyLanguageSource               __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 extern const CFStringRef kUTTypeCSource                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
 extern const CFStringRef kUTTypeObjectiveCSource                     __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeSwiftSource                          __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 extern const CFStringRef kUTTypeCPlusPlusSource                      __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
 extern const CFStringRef kUTTypeObjectiveCPlusPlusSource             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
 extern const CFStringRef kUTTypeCHeader                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
@@ -1115,7 +1136,7 @@ extern const CFStringRef kUTTypeDatabase                             __OSX_AVAIL
  *    VCard format
  *
  *    UTI: public.vcard
- *    conforms to: public.data, public.contact
+ *    conforms to: public.text, public.contact
  *
  *
  *  kUTTypeToDoItem
@@ -1231,5 +1252,15 @@ extern const CFStringRef kUTTypeElectronicPublication                __OSX_AVAIL
 extern const CFStringRef kUTTypeLog                                  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 
-#endif /* __UTCORETYPES__ */
 
+CF_ASSUME_NONNULL_END
+
+
+
+#ifdef __cplusplus
+}
+#endif
+
+
+
+#endif /* __UTCORETYPES__ */

@@ -1,4 +1,4 @@
-framework module MapKit [extern_c] [system] {
+framework module MapKit [extern_c] {
   umbrella header "MapKit.h"
 
   export *

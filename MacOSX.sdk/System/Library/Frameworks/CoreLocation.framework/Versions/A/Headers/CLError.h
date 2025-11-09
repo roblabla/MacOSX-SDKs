@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLAvailability.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
  *  CLError
  *  
@@ -45,3 +47,5 @@ typedef NS_ENUM(NSInteger, CLError) {
  *    in the userInfo dictionary.  The value is a CLRegion that the location service can more effectively monitor.
  */
 extern NSString *const kCLErrorUserInfoAlternateRegionKey NS_AVAILABLE(10_7, 5_0);
+
+NS_ASSUME_NONNULL_END

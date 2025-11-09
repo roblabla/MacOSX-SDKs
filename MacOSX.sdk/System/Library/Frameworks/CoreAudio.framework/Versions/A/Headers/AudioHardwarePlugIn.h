@@ -12,8 +12,8 @@
                      http://developer.apple.com/bugreporter/
 
 ==================================================================================================*/
-#if !defined(__AudioHardwarePlugIn_h__)
-#define __AudioHardwarePlugIn_h__
+#if !defined(CoreAudio_AudioHardwarePlugIn_h)
+#define CoreAudio_AudioHardwarePlugIn_h
 
 //==================================================================================================
 #pragma mark    Overview
@@ -58,9 +58,7 @@
 
 //==================================================================================================
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint off
-#endif
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -80,7 +78,7 @@ typedef struct AudioHardwarePlugInInterface AudioHardwarePlugInInterface;
     @typedef        AudioHardwarePlugInRef
     @abstract       A reference to an AudioHardwarePlugInInterface.
 */
-typedef AudioHardwarePlugInInterface**      AudioHardwarePlugInRef;
+typedef AudioHardwarePlugInInterface* __nullable *  AudioHardwarePlugInRef;
 
 //==================================================================================================
 #pragma mark    Constants
@@ -153,7 +151,7 @@ struct  AudioHardwarePlugInInterface
     @var            _reserved
     @abstract       A standard part of the IUnknown interface.
 */
-    void*       _reserved;
+    void* __nullable    _reserved;
 
 /*!
     @method         QueryInterface
@@ -167,9 +165,9 @@ struct  AudioHardwarePlugInInterface
     @result         An error code indicating success of failure.
 */
     HRESULT
-    (STDMETHODCALLTYPE *QueryInterface)(    void*   inSelf,
-                                            REFIID  inUUID,
-                                            LPVOID* outInterface);
+    (STDMETHODCALLTYPE *QueryInterface)( void* __nullable                inSelf,
+                                                    REFIID                          inUUID,
+                                                    LPVOID __nullable * __nullable  outInterface);
 /*!
     @method         AddRef
     @abstract       The IUnknown method for retaining a reference to a CFPlugIn type.
@@ -178,7 +176,7 @@ struct  AudioHardwarePlugInInterface
     @result         The resulting reference count after the new reference is added.
 */
     ULONG
-    (STDMETHODCALLTYPE *AddRef)(    void*   inSelf);
+    (STDMETHODCALLTYPE *AddRef)(void* __nullable inSelf);
 
 /*!
     @method         Release
@@ -188,7 +186,7 @@ struct  AudioHardwarePlugInInterface
     @result         The resulting reference count after the reference has been removed.
 */
     ULONG
-    (STDMETHODCALLTYPE *Release)(   void*   inSelf);
+    (STDMETHODCALLTYPE *Release)(void* __nullable    inSelf);
 
 /*!
     @method         Initialize
@@ -200,7 +198,7 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*Initialize)(  AudioHardwarePlugInRef  inSelf);
+    (*Initialize)(AudioHardwarePlugInRef __nonnull   inSelf);
 
 /*!
     @method         Teardown
@@ -210,7 +208,7 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*Teardown)(    AudioHardwarePlugInRef  inSelf);
+    (*Teardown)(AudioHardwarePlugInRef __nonnull inSelf);
 
 /*!
     @method         DeviceAddIOProc
@@ -233,10 +231,10 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceAddIOProc)( AudioHardwarePlugInRef  inSelf,
-                        AudioDeviceID           inDevice,
-                        AudioDeviceIOProc       inProc,
-                        void*                   inClientData);
+    (*DeviceAddIOProc)( AudioHardwarePlugInRef __nonnull    inSelf,
+                        AudioDeviceID                       inDevice,
+                        AudioDeviceIOProc                   inProc,
+                        void* __nullable                    inClientData);
 
 /*!
     @method         DeviceRemoveIOProc
@@ -250,9 +248,9 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceRemoveIOProc)(  AudioHardwarePlugInRef  inSelf,
-                            AudioDeviceID           inDevice,
-                            AudioDeviceIOProc       inProc);
+    (*DeviceRemoveIOProc)(  AudioHardwarePlugInRef __nonnull    inSelf,
+                            AudioDeviceID                       inDevice,
+                            AudioDeviceIOProc                   inProc);
 
 /*!
     @method         DeviceStart
@@ -270,9 +268,9 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceStart)( AudioHardwarePlugInRef  inSelf,
-                    AudioDeviceID           inDevice,
-                    AudioDeviceIOProcID     inProc);
+    (*DeviceStart)( AudioHardwarePlugInRef __nonnull    inSelf,
+                    AudioDeviceID                       inDevice,
+                    AudioDeviceIOProcID __nullable      inProc);
 
 /*!
     @method         DeviceStop
@@ -286,9 +284,9 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceStop)(  AudioHardwarePlugInRef  inSelf,
-                    AudioDeviceID           inDevice,
-                    AudioDeviceIOProcID     inProc);
+    (*DeviceStop)(  AudioHardwarePlugInRef __nonnull    inSelf,
+                    AudioDeviceID                       inDevice,
+                    AudioDeviceIOProcID __nullable      inProc);
 
 /*!
     @method         DeviceRead
@@ -313,10 +311,10 @@ struct  AudioHardwarePlugInInterface
                     does not support direct reading.
 */
     OSStatus
-    (*DeviceRead)(  AudioHardwarePlugInRef  inSelf,
-                    AudioDeviceID           inDevice,
-                    const AudioTimeStamp*   inStartTime,
-                    AudioBufferList*        outData);
+    (*DeviceRead)(  AudioHardwarePlugInRef __nonnull    inSelf,
+                    AudioDeviceID                       inDevice,
+                    const AudioTimeStamp*               inStartTime,
+                    AudioBufferList*                    outData);
 
 /*!
     @method         DeviceGetCurrentTime
@@ -332,9 +330,9 @@ struct  AudioHardwarePlugInInterface
                     will be returned if the AudioDevice isn't running.
 */
     OSStatus
-    (*DeviceGetCurrentTime)(    AudioHardwarePlugInRef  inSelf,
-                                AudioDeviceID           inDevice,
-                                AudioTimeStamp*         outTime);
+    (*DeviceGetCurrentTime)(    AudioHardwarePlugInRef __nonnull    inSelf,
+                                AudioDeviceID                       inDevice,
+                                AudioTimeStamp*                     outTime);
 
 /*!
     @method         DeviceTranslateTime
@@ -356,10 +354,10 @@ struct  AudioHardwarePlugInInterface
                     will be returned if the AudioDevice isn't running.
 */
     OSStatus
-    (*DeviceTranslateTime)( AudioHardwarePlugInRef  inSelf,
-                            AudioDeviceID           inDevice,
-                            const AudioTimeStamp*   inTime,
-                            AudioTimeStamp*         outTime);
+    (*DeviceTranslateTime)( AudioHardwarePlugInRef __nonnull    inSelf,
+                            AudioDeviceID                       inDevice,
+                            const AudioTimeStamp*               inTime,
+                            AudioTimeStamp*                     outTime);
 
 /*!
     @method         DeviceGetPropertyInfo
@@ -385,13 +383,13 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceGetPropertyInfo)(   AudioHardwarePlugInRef  inSelf,
-                                AudioDeviceID           inDevice,
-                                UInt32                  inChannel,
-                                Boolean                 isInput,
-                                AudioDevicePropertyID   inPropertyID,
-                                UInt32*                 outSize,
-                                Boolean*                outWritable);
+    (*DeviceGetPropertyInfo)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                                AudioDeviceID                       inDevice,
+                                UInt32                              inChannel,
+                                Boolean                             isInput,
+                                AudioDevicePropertyID               inPropertyID,
+                                UInt32* __nullable                  outSize,
+                                Boolean* __nullable                 outWritable);
 
 /*!
     @method         DeviceGetProperty
@@ -416,13 +414,13 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceGetProperty)(   AudioHardwarePlugInRef  inSelf,
-                            AudioDeviceID           inDevice,
-                            UInt32                  inChannel,
-                            Boolean                 isInput,
-                            AudioDevicePropertyID   inPropertyID,
-                            UInt32*                 ioPropertyDataSize,
-                            void*                   outPropertyData);
+    (*DeviceGetProperty)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                            AudioDeviceID                       inDevice,
+                            UInt32                              inChannel,
+                            Boolean                             isInput,
+                            AudioDevicePropertyID               inPropertyID,
+                            UInt32*                             ioPropertyDataSize,
+                            void*                               outPropertyData);
 
 /*!
     @method         DeviceSetProperty
@@ -450,14 +448,14 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceSetProperty)(   AudioHardwarePlugInRef  inSelf,
-                            AudioDeviceID           inDevice,
-                            const AudioTimeStamp*   inWhen,
-                            UInt32                  inChannel,
-                            Boolean                 isInput,
-                            AudioDevicePropertyID   inPropertyID,
-                            UInt32                  inPropertyDataSize,
-                            const void*             inPropertyData);
+    (*DeviceSetProperty)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                            AudioDeviceID                       inDevice,
+                            const AudioTimeStamp* __nullable    inWhen,
+                            UInt32                              inChannel,
+                            Boolean                             isInput,
+                            AudioDevicePropertyID               inPropertyID,
+                            UInt32                              inPropertyDataSize,
+                            const void*                         inPropertyData);
 
 /*!
     @method         StreamGetPropertyInfo
@@ -481,12 +479,12 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*StreamGetPropertyInfo)(   AudioHardwarePlugInRef  inSelf,
-                                AudioStreamID           inStream,
-                                UInt32                  inChannel,
-                                AudioDevicePropertyID   inPropertyID,
-                                UInt32*                 outSize,
-                                Boolean*                outWritable);
+    (*StreamGetPropertyInfo)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                                AudioStreamID                       inStream,
+                                UInt32                              inChannel,
+                                AudioDevicePropertyID               inPropertyID,
+                                UInt32*                             outSize,
+                                Boolean*                            outWritable);
 
 /*!
     @method         StreamGetProperty
@@ -509,12 +507,12 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*StreamGetProperty)(   AudioHardwarePlugInRef  inSelf,
-                            AudioStreamID           inStream,
-                            UInt32                  inChannel,
-                            AudioDevicePropertyID   inPropertyID,
-                            UInt32*                 ioPropertyDataSize,
-                            void*                   outPropertyData);
+    (*StreamGetProperty)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                            AudioStreamID                       inStream,
+                            UInt32                              inChannel,
+                            AudioDevicePropertyID               inPropertyID,
+                            UInt32*                             ioPropertyDataSize,
+                            void*                               outPropertyData);
 
 /*!
     @method         StreamSetProperty
@@ -540,13 +538,13 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*StreamSetProperty)(   AudioHardwarePlugInRef  inSelf,
-                            AudioStreamID           inStream,
-                            const AudioTimeStamp*   inWhen,
-                            UInt32                  inChannel,
-                            AudioDevicePropertyID   inPropertyID,
-                            UInt32                  inPropertyDataSize,
-                            const void*             inPropertyData);
+    (*StreamSetProperty)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                            AudioStreamID                       inStream,
+                            const AudioTimeStamp* __nullable    inWhen,
+                            UInt32                              inChannel,
+                            AudioDevicePropertyID               inPropertyID,
+                            UInt32                              inPropertyDataSize,
+                            const void*                         inPropertyData);
 
 /*!
     @method         DeviceStartAtTime
@@ -572,11 +570,11 @@ struct  AudioHardwarePlugInInterface
                     ioRequestedStartTime are not NULL.
 */
     OSStatus
-    (*DeviceStartAtTime)(   AudioHardwarePlugInRef  inSelf,
-                            AudioDeviceID           inDevice,
-                            AudioDeviceIOProcID     inProc,
-                            AudioTimeStamp*         ioRequestedStartTime,
-                            UInt32                  inFlags);
+    (*DeviceStartAtTime)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                            AudioDeviceID                       inDevice,
+                            AudioDeviceIOProcID                 inProc,
+                            AudioTimeStamp*                     ioRequestedStartTime,
+                            UInt32                              inFlags);
 
 /*!
     @method         DeviceGetNearestStartTime
@@ -606,10 +604,10 @@ struct  AudioHardwarePlugInInterface
                     does not support starting at a specific time.
 */
     OSStatus
-    (*DeviceGetNearestStartTime)(   AudioHardwarePlugInRef  inSelf,
-                                    AudioDeviceID           inDevice,
-                                    AudioTimeStamp*         ioRequestedStartTime,
-                                    UInt32                  inFlags);
+    (*DeviceGetNearestStartTime)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                                    AudioDeviceID                       inDevice,
+                                    AudioTimeStamp*                     ioRequestedStartTime,
+                                    UInt32                              inFlags);
 
 /*!
     @method         InitializeWithObjectID
@@ -625,8 +623,8 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*InitializeWithObjectID)(  AudioHardwarePlugInRef  inSelf,
-                                AudioObjectID           inObjectID);
+    (*InitializeWithObjectID)(  AudioHardwarePlugInRef __nonnull    inSelf,
+                                AudioObjectID                       inObjectID);
 
 /*!
     @method         ObjectShow
@@ -637,8 +635,8 @@ struct  AudioHardwarePlugInInterface
                         The AudioObject to show.
 */
     void
-    (*ObjectShow)(  AudioHardwarePlugInRef  inSelf,
-                    AudioObjectID           inObjectID);
+    (*ObjectShow)(  AudioHardwarePlugInRef __nonnull    inSelf,
+                    AudioObjectID                       inObjectID);
 
 /*!
     @method         ObjectHasProperty
@@ -653,7 +651,7 @@ struct  AudioHardwarePlugInInterface
     @result         A Boolean indicating whether or not the AudioObject has the given property.
 */
     Boolean
-    (*ObjectHasProperty)(   AudioHardwarePlugInRef              inSelf,
+    (*ObjectHasProperty)(   AudioHardwarePlugInRef __nonnull    inSelf,
                             AudioObjectID                       inObjectID,
                             const AudioObjectPropertyAddress*   inAddress);
 
@@ -673,7 +671,7 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*ObjectIsPropertySettable)(    AudioHardwarePlugInRef              inSelf,
+    (*ObjectIsPropertySettable)(    AudioHardwarePlugInRef __nonnull    inSelf,
                                     AudioObjectID                       inObjectID,
                                     const AudioObjectPropertyAddress*   inAddress,
                                     Boolean*                            outIsSettable);
@@ -702,12 +700,12 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*ObjectGetPropertyDataSize)(   AudioHardwarePlugInRef              inSelf,
+    (*ObjectGetPropertyDataSize)(   AudioHardwarePlugInRef __nonnull    inSelf,
                                     AudioObjectID                       inObjectID,
                                     const AudioObjectPropertyAddress*   inAddress,
                                     UInt32                              inQualifierDataSize,
-                                    const void*                         inQualifierData,
-                                    UInt32*                             outDataSize);
+                                    const void* __nullable              inQualifierData,
+                                    UInt32* __nonnull                   outDataSize);
 
 /*!
     @method         ObjectGetPropertyData
@@ -737,11 +735,11 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*ObjectGetPropertyData)(   AudioHardwarePlugInRef              inSelf,
+    (*ObjectGetPropertyData)(   AudioHardwarePlugInRef __nonnull    inSelf,
                                 AudioObjectID                       inObjectID,
                                 const AudioObjectPropertyAddress*   inAddress,
                                 UInt32                              inQualifierDataSize,
-                                const void*                         inQualifierData,
+                                const void* __nullable              inQualifierData,
                                 UInt32*                             ioDataSize,
                                 void*                               outData);
 
@@ -772,11 +770,11 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*ObjectSetPropertyData)(   AudioHardwarePlugInRef              inSelf,
+    (*ObjectSetPropertyData)(   AudioHardwarePlugInRef __nonnull    inSelf,
                                 AudioObjectID                       inObjectID,
                                 const AudioObjectPropertyAddress*   inAddress,
                                 UInt32                              inQualifierDataSize,
-                                const void*                         inQualifierData,
+                                const void* __nullable              inQualifierData,
                                 UInt32                              inDataSize,
                                 const void*                         inData);
 
@@ -800,11 +798,11 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceCreateIOProcID)(    AudioHardwarePlugInRef  inSelf,
-                                AudioDeviceID           inDevice,
-                                AudioDeviceIOProc       inProc,
-                                void*                   inClientData,
-                                AudioDeviceIOProcID*    outIOProcID);
+    (*DeviceCreateIOProcID)(    AudioHardwarePlugInRef __nonnull            inSelf,
+                                AudioDeviceID                               inDevice,
+                                AudioDeviceIOProc                           inProc,
+                                void* __nullable                            inClientData,
+                                AudioDeviceIOProcID __nullable * __nonnull  outIOProcID);
 
 /*!
     @function       DeviceDestroyIOProcID
@@ -820,9 +818,9 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceDestroyIOProcID)(   AudioHardwarePlugInRef  inSelf,
-                                AudioDeviceID           inDevice,
-                                AudioDeviceIOProcID     inIOProcID);
+    (*DeviceDestroyIOProcID)(   AudioHardwarePlugInRef __nonnull    inSelf,
+                                AudioDeviceID                       inDevice,
+                                AudioDeviceIOProcID                 inIOProcID);
 
 /*!
     @function       DeviceCreateIOProcIDWithBlock
@@ -845,11 +843,11 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
     OSStatus
-    (*DeviceCreateIOProcIDWithBlock)(   AudioHardwarePlugInRef  inSelf,
-                                        AudioDeviceIOProcID*    outIOProcID,
-                                        AudioDeviceID           inDevice,
-                                        dispatch_queue_t        inDispatchQueue,
-                                        AudioDeviceIOBlock      inBlock);
+    (*DeviceCreateIOProcIDWithBlock)(   AudioHardwarePlugInRef __nonnull            inSelf,
+                                        AudioDeviceIOProcID __nullable * __nonnull  outIOProcID,
+                                        AudioDeviceID                               inDevice,
+                                        dispatch_queue_t __nullable                 inDispatchQueue,
+                                        AudioDeviceIOBlock                          inBlock);
 
 };
 
@@ -876,10 +874,10 @@ struct  AudioHardwarePlugInInterface
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioObjectCreate(  AudioHardwarePlugInRef  inOwningPlugIn,
-                    AudioObjectID           inOwningObjectID,
-                    AudioClassID            inClassID,
-                    AudioObjectID*          outAudioObjectID)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
+AudioObjectCreate(  AudioHardwarePlugInRef __nonnull    inOwningPlugIn,
+                    AudioObjectID                       inOwningObjectID,
+                    AudioClassID                        inClassID,
+                    AudioObjectID*                      outAudioObjectID)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
 
 /*!
     @function       AudioObjectsPublishedAndDied
@@ -903,12 +901,12 @@ AudioObjectCreate(  AudioHardwarePlugInRef  inOwningPlugIn,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioObjectsPublishedAndDied(   AudioHardwarePlugInRef  inOwningPlugIn,
-                                AudioObjectID           inOwningObjectID,
-                                UInt32                  inNumberPublishedAudioObjects,
-                                const AudioObjectID     inPublishedAudioObjects[],
-                                UInt32                  inNumberDeadAudioObjects,
-                                const AudioObjectID     inDeadAudioObjects[])                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
+AudioObjectsPublishedAndDied(   AudioHardwarePlugInRef __nonnull    inOwningPlugIn,
+                                AudioObjectID                       inOwningObjectID,
+                                UInt32                              inNumberPublishedAudioObjects,
+                                const AudioObjectID* __nullable     inPublishedAudioObjects,
+                                UInt32                              inNumberDeadAudioObjects,
+                                const AudioObjectID* __nullable     inDeadAudioObjects)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
 
 /*!
     @function       AudioObjectPropertiesChanged
@@ -927,10 +925,10 @@ AudioObjectsPublishedAndDied(   AudioHardwarePlugInRef  inOwningPlugIn,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioObjectPropertiesChanged(   AudioHardwarePlugInRef              inOwningPlugIn,
+AudioObjectPropertiesChanged(   AudioHardwarePlugInRef __nonnull    inOwningPlugIn,
                                 AudioObjectID                       inObjectID,
                                 UInt32                              inNumberAddresses,
-                                const AudioObjectPropertyAddress    inAddresses[])                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
+                                const AudioObjectPropertyAddress*   inAddresses)                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark    AudioDevice Functions
@@ -949,8 +947,8 @@ AudioObjectPropertiesChanged(   AudioHardwarePlugInRef              inOwningPlug
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareClaimAudioDeviceID(    AudioHardwarePlugInRef  inOwner,
-                                    AudioDeviceID*          outAudioDeviceID)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareClaimAudioDeviceID(    AudioHardwarePlugInRef __nonnull    inOwner,
+                                    AudioDeviceID*                      outAudioDeviceID)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareDevicesCreated
@@ -966,9 +964,9 @@ AudioHardwareClaimAudioDeviceID(    AudioHardwarePlugInRef  inOwner,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareDevicesCreated(    AudioHardwarePlugInRef  inOwner,
-                                UInt32                  inNumberDevices,
-                                const AudioDeviceID*    inAudioDeviceIDs)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareDevicesCreated(    AudioHardwarePlugInRef __nonnull    inOwner,
+                                UInt32                              inNumberDevices,
+                                const AudioDeviceID*                inAudioDeviceIDs)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareDevicesDied
@@ -982,9 +980,9 @@ AudioHardwareDevicesCreated(    AudioHardwarePlugInRef  inOwner,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareDevicesDied(   AudioHardwarePlugInRef  inOwner,
-                            UInt32                  inNumberDevices,
-                            const AudioDeviceID*    inAudioDeviceIDs)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareDevicesDied(   AudioHardwarePlugInRef __nonnull    inOwner,
+                            UInt32                              inNumberDevices,
+                            const AudioDeviceID*                inAudioDeviceIDs)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareDevicePropertyChanged
@@ -1004,11 +1002,11 @@ AudioHardwareDevicesDied(   AudioHardwarePlugInRef  inOwner,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareDevicePropertyChanged( AudioHardwarePlugInRef  inOwner,
-                                    AudioDeviceID           inDeviceID,
-                                    UInt32                  inChannel,
-                                    Boolean                 isInput,
-                                    AudioDevicePropertyID   inPropertyID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareDevicePropertyChanged( AudioHardwarePlugInRef __nonnull    inOwner,
+                                    AudioDeviceID                       inDeviceID,
+                                    UInt32                              inChannel,
+                                    Boolean                             isInput,
+                                    AudioDevicePropertyID               inPropertyID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 //==================================================================================================
 #pragma mark    AudioStream Functions
@@ -1029,9 +1027,9 @@ AudioHardwareDevicePropertyChanged( AudioHardwarePlugInRef  inOwner,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareClaimAudioStreamID(    AudioHardwarePlugInRef  inOwner,
-                                    AudioDeviceID           inOwningDeviceID,
-                                    AudioStreamID*          outAudioStreamID)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareClaimAudioStreamID(    AudioHardwarePlugInRef __nonnull    inOwner,
+                                    AudioDeviceID                       inOwningDeviceID,
+                                    AudioStreamID*                      outAudioStreamID)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareStreamsCreated
@@ -1049,10 +1047,10 @@ AudioHardwareClaimAudioStreamID(    AudioHardwarePlugInRef  inOwner,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareStreamsCreated(    AudioHardwarePlugInRef  inOwner,
-                                AudioDeviceID           inOwningDeviceID,
-                                UInt32                  inNumberStreams,
-                                const AudioStreamID*    inAudioStreamIDs)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareStreamsCreated(    AudioHardwarePlugInRef __nonnull    inOwner,
+                                AudioDeviceID                       inOwningDeviceID,
+                                UInt32                              inNumberStreams,
+                                const AudioStreamID*                inAudioStreamIDs)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareStreamsDied
@@ -1068,10 +1066,10 @@ AudioHardwareStreamsCreated(    AudioHardwarePlugInRef  inOwner,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareStreamsDied(   AudioHardwarePlugInRef  inOwner,
-                            AudioDeviceID           inOwningDeviceID,
-                            UInt32                  inNumberStreams,
-                            const AudioStreamID*    inAudioStreamIDs)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareStreamsDied(   AudioHardwarePlugInRef __nonnull    inOwner,
+                            AudioDeviceID                       inOwningDeviceID,
+                            UInt32                              inNumberStreams,
+                            const AudioStreamID*                inAudioStreamIDs)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareStreamPropertyChanged
@@ -1091,11 +1089,11 @@ AudioHardwareStreamsDied(   AudioHardwarePlugInRef  inOwner,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareStreamPropertyChanged( AudioHardwarePlugInRef  inOwner,
-                                    AudioDeviceID           inOwningDeviceID,
-                                    AudioStreamID           inStreamID,
-                                    UInt32                  inChannel,
-                                    AudioDevicePropertyID   inPropertyID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
+AudioHardwareStreamPropertyChanged( AudioHardwarePlugInRef __nonnull    inOwner,
+                                    AudioDeviceID                       inOwningDeviceID,
+                                    AudioStreamID                       inStreamID,
+                                    UInt32                              inChannel,
+                                    AudioDevicePropertyID               inPropertyID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_5, __IPHONE_2_0, __IPHONE_2_0);
 
 //==================================================================================================
 
@@ -1103,8 +1101,6 @@ AudioHardwareStreamPropertyChanged( AudioHardwarePlugInRef  inOwner,
 }
 #endif
 
-#if PRAGMA_ENUM_ALWAYSINT
-    #pragma enumsalwaysint reset
-#endif
+CF_ASSUME_NONNULL_END
 
-#endif  //  __AudioHardwarePlugIn_h__
+#endif  //  CoreAudio_AudioHardwarePlugIn_h

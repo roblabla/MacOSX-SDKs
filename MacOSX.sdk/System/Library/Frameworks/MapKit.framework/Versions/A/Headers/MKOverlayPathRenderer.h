@@ -13,15 +13,17 @@
 #import <AppKit/AppKit.h>
 #endif
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKOverlayPathRenderer : MKOverlayRenderer
 
 #if TARGET_OS_IPHONE
-@property (strong) UIColor *fillColor;
-@property (strong) UIColor *strokeColor;
+@property (strong, nullable) UIColor *fillColor;
+@property (strong, nullable) UIColor *strokeColor;
 #else
-@property (strong) NSColor *fillColor;
-@property (strong) NSColor *strokeColor;
+@property (strong, nullable) NSColor *fillColor;
+@property (strong, nullable) NSColor *strokeColor;
 #endif
 
 @property CGFloat lineWidth; // defaults to 0, which is MKRoadWidthAtZoomScale(currentZoomScale)
@@ -29,13 +31,13 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 @property CGLineCap lineCap; // defaults to kCGLineCapRound
 @property CGFloat miterLimit; // defaults to 10
 @property CGFloat lineDashPhase; // defaults to 0
-@property (copy) NSArray *lineDashPattern; // an array of NSNumbers, defaults to nil
+@property (copy, nullable) NSArray<NSNumber *> *lineDashPattern; // defaults to nil
 
 // subclassers should override this to create a path and then set it on
 // themselves with self.path = newPath;
 - (void)createPath;
 // returns cached path or calls createPath if path has not yet been created
-@property CGPathRef path; // path will be retained
+@property (null_resettable) CGPathRef path; // path will be retained
 - (void)invalidatePath;
 
 // subclassers may override these
@@ -47,3 +49,5 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 - (void)fillPath:(CGPathRef)path inContext:(CGContextRef)context;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,7 +8,9 @@
 #import <MapKit/MKOverlayPathRenderer.h>
 #import <MapKit/MKCircle.h>
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKCircleRenderer : MKOverlayPathRenderer
 
 - (instancetype)initWithCircle:(MKCircle *)circle;
@@ -16,3 +18,5 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 @property (nonatomic, readonly) MKCircle *circle;
 
 @end
+
+NS_ASSUME_NONNULL_END

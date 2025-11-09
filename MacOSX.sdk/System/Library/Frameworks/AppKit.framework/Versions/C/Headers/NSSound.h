@@ -1,14 +1,17 @@
 /*
         NSSound.h
 	Application Kit
-	Copyright (c) 1997-2014, Apple Inc.
+	Copyright (c) 1997-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSPasteboard.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSDate.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSData, NSURL;
 @protocol NSSoundDelegate;
@@ -26,26 +29,26 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 /* If this finds & creates the sound, only name is saved when archived.
 */
-+ (NSSound *)soundNamed:(NSString *)name;
++ (nullable NSSound *)soundNamed:(NSString *)name;
 
 /* When archived, byref ? saves url : saves contents.
 */
-- (instancetype)initWithContentsOfURL:(NSURL *)url byReference:(BOOL)byRef;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url byReference:(BOOL)byRef;
 
 
-- (instancetype)initWithContentsOfFile:(NSString *)path byReference:(BOOL)byRef;
+- (nullable instancetype)initWithContentsOfFile:(NSString *)path byReference:(BOOL)byRef;
 
 /* Whether the data comes in from disk, or via this method, NSSound expects it to have a proper magic number, sound header, and data.  Only uncompressed AIFF data is currently supported.
 */
-- (instancetype)initWithData:(NSData *)data;
+- (nullable instancetype)initWithData:(NSData *)data;
 
-- (BOOL)setName:(NSString *)string;
-@property (readonly, copy) NSString *name;
+- (BOOL)setName:(nullable NSString *)string;
+@property (nullable, readonly, copy) NSString *name;
 
 // Pasteboard support
 + (BOOL)canInitWithPasteboard:(NSPasteboard *)pasteboard;
-+ (NSArray*)soundUnfilteredTypes NS_AVAILABLE_MAC(10_5);
-- (instancetype)initWithPasteboard:(NSPasteboard *)pasteboard;
++ (NSArray<NSString *> *)soundUnfilteredTypes NS_AVAILABLE_MAC(10_5);
+- (nullable instancetype)initWithPasteboard:(NSPasteboard *)pasteboard;
 - (void)writeToPasteboard:(NSPasteboard *)pasteboard;
 
 // Sound operations
@@ -55,7 +58,7 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 - (BOOL)stop;
 @property (getter=isPlaying, readonly) BOOL playing;
 
-@property (assign) id<NSSoundDelegate> delegate;
+@property (nullable, assign) id<NSSoundDelegate> delegate;
 
 
 /* Returns the duration of the sound in seconds.
@@ -79,15 +82,15 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 /* Setter: Set the UID of the audio device where playback will occur.  Pass nil to play on the default output device.
    Getter: Get the UID of the audio device where playback will occur.  Returns nil if playback tracks the default device, which is the default.
 */
-@property (copy) NSString *playbackDeviceIdentifier NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSString *playbackDeviceIdentifier NS_AVAILABLE_MAC(10_5);
 
 /* Set the channel mapping for the sound.  Pass an array of NSNumbers, which maps sound channels to device channels.  Pass -1 to indicate that a particular sound channel should be ignored.  For any channel, instead of an NSNumber, you may also pass an NSArray of NSNumbers to map a single sound channel to multiple device channels.
 */
-- (void)setChannelMapping:(NSArray *)channelMapping NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setChannelMapping:(null_unspecified NSArray *)channelMapping NS_DEPRECATED_MAC(10_5, 10_9);
 
 /* Get the channel mapping for the sound.  By default, a stereo sound maps its first and second channels to the left and right device channels, while a mono sound maps its single channel across every device channel.
 */
-- (NSArray *)channelMapping NS_DEPRECATED_MAC(10_5, 10_9);
+- (null_unspecified NSArray *)channelMapping NS_DEPRECATED_MAC(10_5, 10_9);
 
 
 @end
@@ -96,8 +99,8 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 /* Methods that were deprecated in Mac OS 10.5. You can now use +soundUnfilteredTypes to get an array of Uniform Type Identifiers (UTIs).
 */
-+ (NSArray *)soundUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);
-+ (NSArray *)soundUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_5);
++ (null_unspecified NSArray *)soundUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);
++ (null_unspecified NSArray *)soundUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_5);
 
 @end
 
@@ -112,7 +115,9 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 /* May return nil if no file found
 */
-- (NSString *)pathForSoundResource:(NSString *)name;
+- (nullable NSString *)pathForSoundResource:(NSString *)name;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

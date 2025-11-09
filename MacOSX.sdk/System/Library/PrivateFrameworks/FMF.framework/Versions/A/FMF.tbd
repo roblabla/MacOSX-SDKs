@@ -9,5 +9,5 @@ exports:
                        _activeFMFLogLevel ]
     objc-classes:    [ _FMFAppAccountInfo, _FMFAppSession, _FMFDevice, 
                        _FMFFriendshipRequest, _FMFHandle, _FMFLocation, 
-                       _FMFSession, _FMFSynchronizer, _FMFSystemLog, _FMFUserNotification ]
+                       _FMFLogger, _FMFSession, _FMFSynchronizer ]
 ...

@@ -1,7 +1,7 @@
 /*
     NSUserActivity.h
     Application Kit
-    Copyright (c) 2014, Apple Inc.
+    Copyright (c) 2014-2015, Apple Inc.
     All rights reserved.
 */
 
@@ -19,6 +19,8 @@
 
 #if NS_USER_ACTIVITY_SUPPORTED
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSResponder (NSUserActivity)
 
 /*
@@ -32,7 +34,7 @@
  
  This property is KVO observable.
  */
-@property (strong) NSUserActivity *userActivity NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSUserActivity *userActivity NS_AVAILABLE_MAC(10_10);
 
 /* This method exists to be overridden and will be called from the main thread. You should save any state representing the user's activity into the NSUserActivity's userInfo via its -addUserInfoEntriesFromDictionary method. When the state is out of date, you should mark the userActivity as needing to save via the needsSave property, and your override will be invoked again at an appropriate time. */
 - (void)updateUserActivityState:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
@@ -51,7 +53,7 @@
 
  If there is a CFBundleDocumentTypes entry for the document's type with a NSUbiquitousDocumentUserActivityType key, AppKit/UIKIt will automatically create an NSUserActivity with the given activityType when the document is ubiquitous. When it is non-ubiquitous, the userActivity will be nil. Note that userActivity is KVO observable, in case the userActivity is being shared with other objects that need to be kept in sync as the document moves into and out of iCloud.
  */
-@property (strong) NSUserActivity *userActivity NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSUserActivity *userActivity NS_AVAILABLE_MAC(10_10);
 
 /* On OS X, The default implementation of this will put the fileURL into the userInfo with the NSUserActivityDocumentURLKey. NSDocument will automatically call needsSave on the userActivity when the fileURL changes. */
 - (void)updateUserActivityState:(NSUserActivity *)activity NS_AVAILABLE_MAC(10_10);
@@ -64,5 +66,7 @@
 
 /* When NSUbiquitousDocumentUserActivityType is present in a CFBundleDocumentTypes entry, AppKit will automatically create an NSUserActivity for documents in iCloud, using the given activityType. */
 APPKIT_EXTERN NSString * const NSUserActivityDocumentURLKey NS_AVAILABLE_MAC(10_10);
+
+NS_ASSUME_NONNULL_END
 
 #endif

@@ -9,11 +9,13 @@
 #import <Automator/AMBundleAction.h>
 #import <OSAKit/OSAScript.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // AMAppleScriptAction
 // ==================
 
-@interface AMAppleScriptAction : AMBundleAction 
-{
+NS_CLASS_AVAILABLE_MAC(10_4)
+@interface AMAppleScriptAction : AMBundleAction {
 @private
     IBOutlet OSAScript *_script;
 }
@@ -22,3 +24,5 @@
 @property (strong) OSAScript *script;
 
 @end
+
+NS_ASSUME_NONNULL_END

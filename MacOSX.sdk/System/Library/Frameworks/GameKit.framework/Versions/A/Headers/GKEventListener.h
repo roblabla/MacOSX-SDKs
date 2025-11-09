@@ -9,6 +9,7 @@
 
 @class GKPlayer, GKChallenge;
 
+NS_ASSUME_NONNULL_BEGIN
 @protocol GKChallengeListener <NSObject>
 @optional
 
@@ -35,3 +36,4 @@
 - (void)player:(GKPlayer *)player issuedChallengeWasCompleted:(GKChallenge *)challenge byFriend:(GKPlayer *)friendPlayer NS_AVAILABLE(10_10, 7_0);
 
 @end
+NS_ASSUME_NONNULL_END

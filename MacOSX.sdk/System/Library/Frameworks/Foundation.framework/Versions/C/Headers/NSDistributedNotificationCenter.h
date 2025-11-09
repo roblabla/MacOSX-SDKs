@@ -1,10 +1,12 @@
 /*	NSDistributedNotificationCenter.h
-	Copyright (c) 1996-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSNotification.h>
 
 @class NSString, NSDictionary;
+
+NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString * const NSLocalNotificationCenterType;
 // Distributes notifications to all tasks on the sender's machine.
@@ -22,6 +24,13 @@ typedef NS_ENUM(NSUInteger, NSNotificationSuspensionBehavior) {
     // the notification in question being delivered, followed by a transition back to the previous suspended or unsuspended state.
 };
 
+typedef NS_OPTIONS(NSUInteger, NSDistributedNotificationOptions) {
+    NSDistributedNotificationDeliverImmediately = (1UL << 0),
+    NSDistributedNotificationPostToAllSessions = (1UL << 1)
+};
+static const NSDistributedNotificationOptions NSNotificationDeliverImmediately = NSDistributedNotificationDeliverImmediately;
+static const NSDistributedNotificationOptions NSNotificationPostToAllSessions = NSDistributedNotificationPostToAllSessions;
+
 @interface NSDistributedNotificationCenter : NSNotificationCenter
 
 + (NSDistributedNotificationCenter *)notificationCenterForType:(NSString *)notificationCenterType;
@@ -30,19 +39,15 @@ typedef NS_ENUM(NSUInteger, NSNotificationSuspensionBehavior) {
 + (NSDistributedNotificationCenter *)defaultCenter;
 // Returns the default distributed notification center - cover for [NSDistributedNotificationCenter notificationCenterForType:NSLocalNotificationCenterType]
 
-- (void)addObserver:(id)observer selector:(SEL)selector name:(NSString *)name object:(NSString *)object suspensionBehavior:(NSNotificationSuspensionBehavior)suspensionBehavior;
+- (void)addObserver:(id)observer selector:(SEL)selector name:(nullable NSString *)name object:(nullable NSString *)object suspensionBehavior:(NSNotificationSuspensionBehavior)suspensionBehavior;
 // All other registration methods are covers of this one, with the default for suspensionBehavior = NSNotificationSuspensionBehaviorCoalesce.
 
-- (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo deliverImmediately:(BOOL)deliverImmediately;
+- (void)postNotificationName:(NSString *)name object:(nullable NSString *)object userInfo:(nullable NSDictionary *)userInfo deliverImmediately:(BOOL)deliverImmediately;
 // All other posting methods are covers of this one.  The deliverImmediately argument causes the notification to be received in the same manner as if matching registrants had registered with suspension
 // behavior NSNotificationSuspensionBehaviorDeliverImmediately.  The default in covers is deliverImmediately = NO (respect suspension behavior of registrants).
 
-enum {
-    NSNotificationDeliverImmediately = (1UL << 0),
-    NSNotificationPostToAllSessions = (1UL << 1)
-};
+- (void)postNotificationName:(NSString *)name object:(nullable NSString *)object userInfo:(nullable NSDictionary *)userInfo options:(NSDistributedNotificationOptions)options;
 
-- (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo options:(NSUInteger)options;
 
 
 
@@ -50,10 +55,13 @@ enum {
 @property BOOL suspended;
 
 // Methods from NSNotificationCenter that are re-declared in part because the anObject argument is typed to be an NSString.
-- (void)addObserver:(id)observer selector:(SEL)aSelector name:(NSString *)aName object:(NSString *)anObject;
+- (void)addObserver:(id)observer selector:(SEL)aSelector name:(nullable NSString *)aName object:(nullable NSString *)anObject;
 
-- (void)postNotificationName:(NSString *)aName object:(NSString *)anObject;
-- (void)postNotificationName:(NSString *)aName object:(NSString *)anObject userInfo:(NSDictionary *)aUserInfo;
-- (void)removeObserver:(id)observer name:(NSString *)aName object:(NSString *)anObject;
+- (void)postNotificationName:(NSString *)aName object:(nullable NSString *)anObject;
+- (void)postNotificationName:(NSString *)aName object:(nullable NSString *)anObject userInfo:(nullable NSDictionary *)aUserInfo;
+- (void)removeObserver:(id)observer name:(nullable NSString *)aName object:(nullable NSString *)anObject;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

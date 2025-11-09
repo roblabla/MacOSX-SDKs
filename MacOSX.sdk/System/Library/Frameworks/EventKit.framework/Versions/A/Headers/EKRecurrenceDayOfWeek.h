@@ -7,6 +7,9 @@
 
 #import <Foundation/Foundation.h>
 #import <EventKit/EventKitDefines.h>
+#import <EventKit/EKTypes.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @class      EKRecurrenceDayOfWeek
@@ -29,7 +32,7 @@
                 weekNumber must be zero when passing EKRecurrenceDayOfWeek objects to initialize a weekly 
                 recurrence.
 */
-EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
+NS_CLASS_AVAILABLE(10_8, 4_0)
 @interface EKRecurrenceDayOfWeek : NSObject <NSCopying> {
 }
 
@@ -37,25 +40,25 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
      @method     dayOfWeek:
      @abstract   Creates an autoreleased object with a day of the week and week number of zero.
 */
-+ (EKRecurrenceDayOfWeek *)dayOfWeek:(NSInteger)dayOfTheWeek;
++ (instancetype)dayOfWeek:(EKWeekday)dayOfTheWeek;
 
 /*!
      @method     dayOfWeek:weekNumber:
      @abstract   Creates an autoreleased object with a specific day of week and week number.
 */
-+ (EKRecurrenceDayOfWeek *)dayOfWeek:(NSInteger)dayOfTheWeek weekNumber:(NSInteger)weekNumber;
++ (instancetype)dayOfWeek:(EKWeekday)dayOfTheWeek weekNumber:(NSInteger)weekNumber;
 
 /*!
      @method     initWithDayOfTheWeek:weekNumber:
      @abstract   Creates an day-of-week object with a specific day of week and week number.
 */
-- (id)initWithDayOfTheWeek:(NSInteger)dayOfTheWeek weekNumber:(NSInteger)weekNumber;
+- (id)initWithDayOfTheWeek:(EKWeekday)dayOfTheWeek weekNumber:(NSInteger)weekNumber;
 
 /*!
      @property   dayOfTheWeek
      @abstract   The day of the week.
 */
-@property(nonatomic, readonly) NSInteger dayOfTheWeek;
+@property(nonatomic, readonly) EKWeekday dayOfTheWeek;
 
 /*!
      @property   weekNumber
@@ -64,3 +67,5 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
 @property(nonatomic, readonly) NSInteger weekNumber;
 
 @end
+
+NS_ASSUME_NONNULL_END

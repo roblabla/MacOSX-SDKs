@@ -16,7 +16,9 @@
 
 #include <AudioUnit/AudioUnit.h>
 
-enum {
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_OPTIONS(UInt32, AUGenericViewDisplayFlags)  {
 	AUViewTitleDisplayFlag			= 1 << 0,
 	AUViewPropertiesDisplayFlag		= 1 << 1,
 	AUViewParametersDisplayFlag		= 1 << 2
@@ -27,11 +29,14 @@ enum {
 @abstract  An AUGenericView object retrieves and instantiates a generic user interface view for the given audio unit
 */
 @interface AUGenericView : NSView <AUCustomViewPersistentData> {
-	__strong void *		_reserved[32];
+#if __OBJC_GC__
+	__strong
+#endif
+	void *		_reserved[32];
 }
 /* @property audioUnit
 @abstract Read-only property for the audio unit associated with the view
-@result	  The audio unit associated with the generic view or nil on error
+@result	  The audio unit associated with the generic view
  */
 @property (readonly) AudioUnit audioUnit;
 
@@ -44,15 +49,17 @@ enum {
 /*! @method initWithAudioUnit:
 @abstract initializer used to create the view for a specific audio unit
 @param au  The Audio Unit associated with the view
-@result  Returns the newly created view object or nil on error
+@result  Returns the newly created view object
 */
 - (AUGenericView *)initWithAudioUnit:(AudioUnit)au;
 /*! @method initWithAudioUnit:displayFlags:
 	@abstract initializer used to create the view for a specific audio unit with a parameter for view flags
 	@param au  The Audio Unit associated with the view
 	@param inFlags  The flags specifying display properties (multiple flags can be combined using the or '|' operator)
-	@result  Returns the newly created view object or nil on error
+	@result  Returns the newly created view object
 */
-- (AUGenericView *)initWithAudioUnit:(AudioUnit)inAudioUnit displayFlags:(UInt32)inFlags;
+- (AUGenericView *)initWithAudioUnit:(AudioUnit)inAudioUnit displayFlags:(AUGenericViewDisplayFlags)inFlags;
 
 @end
+
+NS_ASSUME_NONNULL_END

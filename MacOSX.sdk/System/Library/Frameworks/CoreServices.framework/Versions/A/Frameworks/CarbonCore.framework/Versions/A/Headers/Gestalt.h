@@ -2061,13 +2061,14 @@ enum {
     Mac OS X 10.3.15 will be returned as 0x1039, and Mac OS X 10.10.5 will
     return 0x1095.
     
-    A better way to get version information on Mac OS X would be to use the
-    new gestaltSystemVersionMajor, gestaltSystemVersionMinor, and 
-    gestaltSystemVersionBugFix selectors, which don't have arbitrary limits
-    on the values returned.
+    A better way to get version information with the deprecated Gestalt API
+	would be to use the gestaltSystemVersionMajor, gestaltSystemVersionMinor,
+    and gestaltSystemVersionBugFix selectors, which don't have arbitrary limits
+    on the values returned. However, because Gestalt is deprecated, you should
+	use NSProcessInfo's operatingSystemVersion property instead.
  
     If you want to know the product build version string, product name, or
-    the user visible version string you shuold read in the system version
+    the user visible version string you should read in the system version
     information from the file /System/Library/CoreServices/SystemVersion.plist.
  
 */

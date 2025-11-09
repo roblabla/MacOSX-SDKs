@@ -12,6 +12,8 @@
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLRegion.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
  *  CLDeviceOrientation
  *  
@@ -149,7 +151,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  */
 + (CLAuthorizationStatus)authorizationStatus __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_2);
 
-@property(assign, nonatomic) id<CLLocationManagerDelegate> delegate;
+@property(assign, nonatomic, nullable) id<CLLocationManagerDelegate> delegate;
 
 /*
  *  locationServicesEnabled
@@ -169,7 +171,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *
  *      Deprecated.  Set the purpose string in Info.plist using key NSLocationUsageDescription.
  */
-@property(copy, nonatomic) NSString *purpose __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_NA, __IPHONE_3_2, __IPHONE_6_0);
+@property(copy, nonatomic, nullable) NSString *purpose __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_NA, __IPHONE_3_2, __IPHONE_6_0);
 
 /*
  *	activityType
@@ -219,7 +221,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      The last location received. Will be nil until a location has been received.
  */
-@property(readonly, nonatomic, copy) CLLocation *location;
+@property(readonly, nonatomic, copy, nullable) CLLocation *location;
 
 /*
  *  headingAvailable
@@ -256,7 +258,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Returns the latest heading update received, or nil if none is available.
  */
-@property(readonly, nonatomic, copy) CLHeading *heading __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_4_0);
+@property(readonly, nonatomic, copy, nullable) CLHeading *heading __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_4_0);
 
 /*
  *  maximumRegionMonitoringDistance
@@ -276,7 +278,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *       has been instructed to monitor a region, during this or previous launches of your application, it will
  *       be present in this set.
  */
-@property (readonly, nonatomic, copy) NSSet *monitoredRegions __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
+@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *monitoredRegions __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  rangedRegions
@@ -284,7 +286,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *       Retrieve a set of objects representing the regions for which this location manager is actively providing ranging.
  */
-@property (readonly, nonatomic, copy) NSSet *rangedRegions __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0);
+@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *rangedRegions __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0);
 
 /*
  *  startUpdatingLocation
@@ -473,3 +475,5 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
 + (BOOL)deferredLocationUpdatesAvailable __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

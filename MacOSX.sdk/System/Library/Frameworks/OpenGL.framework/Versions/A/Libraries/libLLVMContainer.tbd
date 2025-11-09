@@ -1,7 +1,7 @@
 ---
 archs:           [ i386, x86_64 ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries//libLLVMContainer.dylib
+install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libLLVMContainer.dylib
 exports:         
   - archs:           [ i386 ]
     symbols:         [ _X86CompilationCallback_SSE, __ZN4llvm22CriticalAntiDepBreaker23isNewRegClobberedByRefsENSt3__120__map_const_iteratorINS1_21__tree_const_iteratorINS1_12__value_typeIjPNS_14MachineOperandEEEPNS1_11__tree_nodeIS7_PvEEiEEEESD_j, 

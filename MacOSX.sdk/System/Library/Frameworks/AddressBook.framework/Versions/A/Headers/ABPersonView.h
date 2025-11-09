@@ -2,8 +2,11 @@
 //  ABPersonView.h
 //  AddressBook Framework
 //
-//  Copyright 2009 Apple, Inc. All rights reserved.
+//  Copyright 2009-2014 Apple, Inc. All rights reserved.
 //
+
+#ifndef __ABPERSONVIEW__
+#define __ABPERSONVIEW__
 
 #import <Cocoa/Cocoa.h>
 
@@ -21,13 +24,13 @@
 @interface ABPersonView : NSView {
 @private
 	ABAddressBook *_addressBook;
-	ABPerson *_person;
-	id _delegate;
-	NSView *_view;
-	id _container;
-	id _controller;
-	id _watcher;
+    id _styleProvider;
+    id _adapter;
+    id _remoteView;
 	id _reserved1 __unused;
+    id _reserved2 __unused;
+    id _reserved3 __unused;
+    id _reserved4 __unused;
 }
 
 @property (assign) BOOL editing;
@@ -47,3 +50,5 @@
 @end
 
 #endif
+
+#endif // __ABPERSONVIEW__

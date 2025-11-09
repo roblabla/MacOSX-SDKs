@@ -124,7 +124,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		integer_t abort_cond;
-	} __Request__upl_abort_t;
+	} __Request__upl_abort_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -138,7 +138,7 @@ __END_DECLS
 		upl_offset_t offset;
 		upl_size_t size;
 		integer_t abort_cond;
-	} __Request__upl_abort_range_t;
+	} __Request__upl_abort_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -151,7 +151,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_msg_type_number_t page_listCnt;
 		upl_page_info_t page_list[256];
-	} __Request__upl_commit_t;
+	} __Request__upl_commit_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -167,7 +167,7 @@ __END_DECLS
 		integer_t cntrl_flags;
 		mach_msg_type_number_t page_listCnt;
 		upl_page_info_t page_list[256];
-	} __Request__upl_commit_range_t;
+	} __Request__upl_commit_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -196,7 +196,7 @@ union __RequestUnion__upl_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__upl_abort_t;
+	} __Reply__upl_abort_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -209,7 +209,7 @@ union __RequestUnion__upl_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		boolean_t empty;
-	} __Reply__upl_abort_range_t;
+	} __Reply__upl_abort_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -221,7 +221,7 @@ union __RequestUnion__upl_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__upl_commit_t;
+	} __Reply__upl_commit_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -234,7 +234,7 @@ union __RequestUnion__upl_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		boolean_t empty;
-	} __Reply__upl_commit_range_t;
+	} __Reply__upl_commit_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

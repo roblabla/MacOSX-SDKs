@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -106,7 +106,6 @@ extern int nfs_ticks;
 #define	NFS_ASYNCTHREADMAXIDLE	60	/* Seconds before idle nfsiods are reaped */
 #define	NFS_DEFSTATFSRATELIMIT 	10	/* Def. max # statfs RPCs per second */
 #define NFS_REQUESTDELAY	10	/* ms interval to check request queue */
-#define NFSRV_DEADSOCKDELAY	5	/* Seconds before dead sockets are reaped */
 #define NFSRV_MAXWGATHERDELAY	100	/* Max. write gather delay (msec) */
 #ifndef NFSRV_WGATHERDELAY
 #define NFSRV_WGATHERDELAY	1	/* Default write gather delay (msec) */
@@ -182,6 +181,7 @@ extern int nfs_ticks;
 #define NFS_MATTR_REALM			24	/* Realm to authenticate with */
 #define NFS_MATTR_PRINCIPAL		25	/* GSS principal to authenticate with */
 #define NFS_MATTR_SVCPRINCIPAL		26	/* GSS principal to authenticate to, the server principal */
+#define NFS_MATTR_NFS_VERSION_RANGE	27	/* Packed version range to try */
 
 /* NFS mount flags */
 #define NFS_MFLAG_SOFT			0	/* soft mount (requests fail if unresponsive) */
@@ -202,6 +202,11 @@ extern int nfs_ticks;
 #define NFS_MFLAG_NOQUOTA		15	/* don't support QUOTA requests */
 #define NFS_MFLAG_MNTUDP		16	/* MOUNT protocol should use UDP */
 #define NFS_MFLAG_MNTQUICK		17	/* use short timeouts while mounting */
+
+/* Macros for packing and unpacking packed versions */
+#define PVER2MAJOR(M) ((uint32_t)(((M) >> 16) & 0xffff))
+#define PVER2MINOR(m) ((uint32_t)((m) & 0xffff))
+#define VER2PVER(M, m) ((uint32_t)((M) << 16) | ((m) & 0xffff))
 
 /* NFS advisory file locking modes */
 #define NFS_LOCK_MODE_ENABLED		0	/* advisory file locking enabled */

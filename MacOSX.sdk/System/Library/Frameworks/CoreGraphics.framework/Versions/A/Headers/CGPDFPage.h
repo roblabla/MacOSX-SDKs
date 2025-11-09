@@ -5,6 +5,10 @@
 #ifndef CGPDFPAGE_H_
 #define CGPDFPAGE_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 typedef struct CGPDFPage *CGPDFPageRef;
 
 #include <CoreGraphics/CGAffineTransform.h> 
@@ -13,49 +17,53 @@ typedef struct CGPDFPage *CGPDFPageRef;
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
-enum CGPDFBox {
+CF_ASSUME_NONNULL_BEGIN
+
+typedef CF_ENUM (int32_t, CGPDFBox) {
   kCGPDFMediaBox = 0,
   kCGPDFCropBox = 1,
   kCGPDFBleedBox = 2,
   kCGPDFTrimBox = 3,
   kCGPDFArtBox = 4
 };
-typedef enum CGPDFBox CGPDFBox;
 
 /* Equivalent to `CFRetain(page)', except it doesn't crash (as CFRetain
    does) if `page' is NULL. */
 
-CG_EXTERN CGPDFPageRef CGPDFPageRetain(CGPDFPageRef page)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CGPDFPageRef __nullable CGPDFPageRetain(CGPDFPageRef __nullable page)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(page)', except it doesn't crash (as CFRelease
    does) if `page' is NULL. */
 
-CG_EXTERN void CGPDFPageRelease(CGPDFPageRef page)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN void CGPDFPageRelease(CGPDFPageRef __nullable page)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the document of `page'. */
 
-CG_EXTERN CGPDFDocumentRef CGPDFPageGetDocument(CGPDFPageRef page)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CGPDFDocumentRef __nullable CGPDFPageGetDocument(
+    CGPDFPageRef __nullable page)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the page number of `page'. */
 
-CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef page)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef __nullable page)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the rectangle associated with `box' in `page'. This is the value
    of the corresponding entry (such as /MediaBox, /ArtBox, and so on) in the
-   page's dictionary. */
+   page's dictionary. Return CGRectNull if `page' is not a valid CGPDFPageRef
+   or `box' is not a valid CGPDFBox. */
 
-CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef page, CGPDFBox box)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef __nullable page, CGPDFBox box)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the rotation angle (in degrees) of `page'. This is the value of
-   the /Rotate entry in the page's dictionary. */
+   the /Rotate entry in the page's dictionary. Return 0 if `page' is not a valid
+   CGPDFPageRef. */
 
-CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef page)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef __nullable page)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return a transform mapping the box specified by `box' to `rect' as
    follows:
@@ -70,19 +78,23 @@ CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef page)
        rect will coincide with the edges of `rect' only in the more
        restrictive dimension. */
 
-CG_EXTERN CGAffineTransform CGPDFPageGetDrawingTransform(CGPDFPageRef page,
-  CGPDFBox box, CGRect rect, int rotate, bool preserveAspectRatio)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CGAffineTransform CGPDFPageGetDrawingTransform(
+    CGPDFPageRef __nullable page, CGPDFBox box, CGRect rect, int rotate,
+    bool preserveAspectRatio)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the dictionary of `page'. */
 
-CG_EXTERN CGPDFDictionaryRef CGPDFPageGetDictionary(CGPDFPageRef page)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CGPDFDictionaryRef __nullable CGPDFPageGetDictionary(
+    CGPDFPageRef __nullable page)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /* Return the CFTypeID for CGPDFPageRefs. */
 
 CG_EXTERN CFTypeID CGPDFPageGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

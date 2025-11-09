@@ -3,7 +3,7 @@
  
  	Contains:   Specialized configuration-editing routines for CoreMIDI.
  
- 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2015 by Apple Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
@@ -19,6 +19,7 @@
 #include <CoreMIDI/MIDIServices.h>
 #endif
 
+
 //  -----------------------------------------------------------------------------
 /*!
 	@header MIDISetup.h
@@ -30,6 +31,12 @@
 	dynamically modify the system state as hardware is connected and 
 	disconnected.
 */
+
+CF_ASSUME_NONNULL_BEGIN
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -47,15 +54,7 @@
 					MIDIServer maintains a single global MIDISetupRef, stored
 					persistently in a preference file.
 */
-#if __LP64__
 typedef MIDIObjectRef MIDISetupRef;
-#else
-typedef struct OpaqueMIDISetup *		MIDISetupRef;
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 // ______________________________________________________________________________
 //	MIDISetup
@@ -166,7 +165,7 @@ MIDISetupGetCurrent(	MIDISetupRef *outSetup )				__OSX_AVAILABLE_BUT_DEPRECATED(
 */
 extern OSStatus
 MIDISetupToData(	MIDISetupRef	setup,
-					CFDataRef *		outData )					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+					CFDataRef __nullable * __nonnull outData )					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -358,7 +357,7 @@ MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(
 */
 extern OSStatus
 MIDIGetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef *		outDriverName )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+						CFStringRef __nullable * __nonnull outDriverName )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -403,7 +402,7 @@ MIDISetSerialPortOwner(	CFStringRef			portName,
 	@result			An OSStatus result code.	
 */
 extern OSStatus
-MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -432,9 +431,10 @@ MIDIExternalDeviceCreate(CFStringRef name, CFStringRef manufacturer,
 							CFStringRef model, MIDIDeviceRef *outDevice)
 															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
-
 #ifdef __cplusplus
 }
 #endif
+
+CF_ASSUME_NONNULL_END
 
 #endif /* __MIDISetup_h__ */

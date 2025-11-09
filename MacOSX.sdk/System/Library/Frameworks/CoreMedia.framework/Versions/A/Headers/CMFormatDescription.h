@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-    Copyright 2005-2014 Apple Inc. All rights reserved.
+    Copyright 2005-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -25,15 +25,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreAudio/CoreAudioTypes.h>
 #include <AudioToolbox/AudioFormat.h>
-
-#if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32)
-	#include <CoreGraphics/CGBase.h>
-	#include <CoreGraphics/CGGeometry.h>
-#elif TARGET_OS_MAC
-	#include <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGBase.h>
-	#include <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGGeometry.h>
-#endif
-
+#include <CoreGraphics/CGBase.h>
+#include <CoreGraphics/CGGeometry.h>
 #include <CoreVideo/CoreVideo.h>
 
 #ifdef __cplusplus
@@ -51,7 +44,12 @@ extern "C" {
 	@constant	kCMFormatDescriptionError_AllocationFailed Returned when an allocation fails.
 	@constant	kCMFormatDescriptionError_ValueNotAvailable Returned when the CMFormatDescription does not carry such a value.
 */
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMFormatDescriptionError_InvalidParameter		= -12710,
 	kCMFormatDescriptionError_AllocationFailed		= -12711,
 	kCMFormatDescriptionError_ValueNotAvailable		= -12718,
@@ -61,7 +59,7 @@ enum {
 	@typedef	CMFormatDescriptionRef
 	@abstract	A reference to a CMFormatDescription, a CF object describing media of a particular type (audio, video, muxed, etc).
 */
-typedef const struct opaqueCMFormatDescription *CMFormatDescriptionRef;
+typedef const struct CM_BRIDGED_TYPE(id) opaqueCMFormatDescription *CMFormatDescriptionRef;
 
 /*!
 	@enum CMMediaType
@@ -75,7 +73,13 @@ typedef const struct opaqueCMFormatDescription *CMFormatDescriptionRef;
 	@constant kCMMediaType_TimeCode TimeCode media
 	@constant kCMMediaType_Metadata Metadata media
 */
-enum {
+typedef FourCharCode CMMediaType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMMediaType
+#else
+enum
+#endif
+{
 	kCMMediaType_Video				= 'vide',
 	kCMMediaType_Audio				= 'soun',
 	kCMMediaType_Muxed				= 'muxx',
@@ -85,7 +89,6 @@ enum {
 	kCMMediaType_TimeCode			= 'tmcd',
 	kCMMediaType_Metadata			= 'meta'
 };
-typedef FourCharCode CMMediaType;
 
 /*! 
 	@functiongroup	Media-type-agnostic functions
@@ -95,23 +98,28 @@ typedef FourCharCode CMMediaType;
 	@function	CMFormatDescriptionCreate
     @abstract   Creates a generic CMFormatDescription object.
     @discussion Use this call to create any CMFormatDescription that is composed solely of extensions, and for which 
-    			CFEqual() of a the extensions dictionaries is a valid test for Format Description equality.
+				CFEqual() of a the extensions dictionaries is a valid test for Format Description equality.  Note that
+				for some media types using this routine may result in creating a format description that is not fully
+				specified for the purpose of media processing. Whenever possible, use media-specific format description
+				creations routines such as CMVideoFormatDescriptionCreate, CMAudioFormatDescriptionCreate, etc.
     @result     A new CMFormatDescription object.
 */
 CM_EXPORT OSStatus 
 CMFormatDescriptionCreate(
-	CFAllocatorRef allocator,			/*! @param allocator
-										Allocator to use when creating the CMFormatDescription. If NULL, the default
-										allocator will be used. */
-	CMMediaType mediaType,				/*! @param mediaType
-										Four character code identifying the type of media associated with the CMFormatDescription. */
-	FourCharCode mediaSubtype,			/*! @param mediaSubtype
-										Four character code identifying the sub-type of media. */
-	CFDictionaryRef extensions,			/*! @param extensions
-										Dictionary of extensions to be attached to the CMFormatDescription. May be NULL. */
-	CMFormatDescriptionRef *descOut)	/*! @param descOut
-										Receives the newly-created CMFormatDescription. */
+	CFAllocatorRef CM_NULLABLE allocator,						/*! @param allocator
+																	Allocator to use when creating the CMFormatDescription. If NULL, the default
+																	allocator will be used. */
+	CMMediaType mediaType,										/*! @param mediaType
+																	Four character code identifying the type of media associated with the CMFormatDescription. */
+	FourCharCode mediaSubtype,									/*! @param mediaSubtype
+																	Four character code identifying the sub-type of media. */
+	CFDictionaryRef CM_NULLABLE extensions,						/*! @param extensions
+																	Dictionary of extensions to be attached to the CMFormatDescription. May be NULL. */
+	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL descOut)	/*! @param descOut
+																	Receives the newly-created CMFormatDescription. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMFormatDescriptionGetTypeID
@@ -131,9 +139,9 @@ CFTypeID CMFormatDescriptionGetTypeID(void)
 */
 CM_EXPORT
 Boolean CMFormatDescriptionEqual(
-	CMFormatDescriptionRef desc1,	/*! @param desc1
+	CMFormatDescriptionRef CM_NULLABLE desc1,	/*! @param desc1
 									The first formatDescription. */
-	CMFormatDescriptionRef desc2)	/*! @param desc2
+	CMFormatDescriptionRef CM_NULLABLE desc2)	/*! @param desc2
 									The second formatDescription. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -155,10 +163,10 @@ Boolean CMFormatDescriptionEqual(
 */
 CM_EXPORT
 Boolean CMFormatDescriptionEqualIgnoringExtensionKeys(
-	CMFormatDescriptionRef desc1,
-	CMFormatDescriptionRef desc2,
-	CFTypeRef formatDescriptionExtensionKeysToIgnore,
-	CFTypeRef sampleDescriptionExtensionAtomKeysToIgnore )
+	CMFormatDescriptionRef CM_NULLABLE desc1,
+	CMFormatDescriptionRef CM_NULLABLE desc2,
+	CFTypeRef CM_NULLABLE formatDescriptionExtensionKeysToIgnore,
+	CFTypeRef CM_NULLABLE sampleDescriptionExtensionAtomKeysToIgnore )
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
 
 /*!
@@ -169,7 +177,7 @@ Boolean CMFormatDescriptionEqualIgnoringExtensionKeys(
 */
 CM_EXPORT
 CMMediaType CMFormatDescriptionGetMediaType(
-	CMFormatDescriptionRef desc)	/*! @param desc CMFormatDescription being interrogated */
+	CMFormatDescriptionRef CM_NONNULL desc)	/*! @param desc CMFormatDescription being interrogated */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -188,7 +196,7 @@ CMMediaType CMFormatDescriptionGetMediaType(
 */
 CM_EXPORT
 FourCharCode CMFormatDescriptionGetMediaSubType(
-	CMFormatDescriptionRef desc)	/*! @param desc CMFormatDescription being interrogated */
+	CMFormatDescriptionRef CM_NONNULL desc)	/*! @param desc CMFormatDescription being interrogated */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -202,9 +210,11 @@ FourCharCode CMFormatDescriptionGetMediaSubType(
 	@result		An immutable dictionary containing all the extensions of the CMFormatDescription.  May be NULL.
 */
 CM_EXPORT
-CFDictionaryRef CMFormatDescriptionGetExtensions(
-	CMFormatDescriptionRef desc)	/*! @param desc CMFormatDescription being interrogated */
+CFDictionaryRef CM_NULLABLE CMFormatDescriptionGetExtensions(
+	CMFormatDescriptionRef CM_NONNULL desc)	/*! @param desc CMFormatDescription being interrogated */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CM_ASSUME_NONNULL_BEGIN
 
 /*!
 	@define 	kCMFormatDescriptionExtension_OriginalCompressionSettings
@@ -252,6 +262,8 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimSampleDescript
 */
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimISOSampleEntry		// CFData
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	
+CM_ASSUME_NONNULL_END
 
 /*!
 	@function	CMFormatDescriptionGetExtension
@@ -265,9 +277,9 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimISOSampleEntry
 	@result		The specified extension of the CMFormatDescription.  May be NULL.
 */
 CM_EXPORT
-CFPropertyListRef CMFormatDescriptionGetExtension(
-	CMFormatDescriptionRef desc,	/*! @param desc				CMFormatDescription being interrogated */
-	CFStringRef extensionKey)		/*! @param extensionID		Key of extension to be returned. Cannot be NULL. */
+CFPropertyListRef CM_NULLABLE CMFormatDescriptionGetExtension(
+	CMFormatDescriptionRef CM_NONNULL desc,	/*! @param desc				CMFormatDescription being interrogated */
+	CFStringRef CM_NONNULL extensionKey)		/*! @param extensionID		Key of extension to be returned. Cannot be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 				
@@ -283,17 +295,24 @@ CFPropertyListRef CMFormatDescriptionGetExtension(
 	@constant	kCMAudioCodecType_AAC_LCProtected iTMS protected low-complexity AAC.
 	@constant	kCMAudioCodecType_AAC_AudibleProtected Audible's protected AAC.
 */
-enum {
+typedef FourCharCode CMAudioCodecType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMAudioCodecType
+#else
+enum
+#endif
+{
     kCMAudioCodecType_AAC_LCProtected      = 'paac',
 	kCMAudioCodecType_AAC_AudibleProtected = 'aaac'
 };
-typedef FourCharCode CMAudioCodecType;
 
 /*!
 	@typedef CMAudioFormatDescriptionRef
 	SYnonym type used for manipulating audio CMFormatDescriptions
 */
 typedef CMFormatDescriptionRef CMAudioFormatDescriptionRef;
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	CMAudioFormatDescriptionCreate
@@ -306,18 +325,19 @@ typedef CMFormatDescriptionRef CMAudioFormatDescriptionRef;
 */
 CM_EXPORT
 OSStatus CMAudioFormatDescriptionCreate(
-	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. Pass kCFAllocatorDefault or NULL to use the default allocator. */
-	const AudioStreamBasicDescription *asbd,	/*! @param asbd				Audio format description (see CoreAudioTypes.h). This information is required. */
-	size_t layoutSize,							/*! @param layoutSize		Size, in bytes, of audio channel layout. 0 if layout is NULL. */
-	const AudioChannelLayout *layout,			/*! @param layout			Audio channel layout (see CoreAudioTypes.h). Can be NULL. */	
-	size_t magicCookieSize,						/*! @param magicCookieSize	Size, in bytes, of magic cookie. 0 if magicCookie is NULL. */
-	const void *magicCookie,					/*! @param magicCookie		Magic cookie. This information is required for some formats, and must be NULL for all others. */
-	CFDictionaryRef extensions,					/*! @param extensions		Dictionary of extension key/value pairs.  Keys are always CFStrings.
+	CFAllocatorRef CM_NULLABLE allocator,								/*! @param allocator		CFAllocator to be used. Pass kCFAllocatorDefault or NULL to use the default allocator. */
+	const AudioStreamBasicDescription * CM_NONNULL asbd,				/*! @param asbd				Audio format description (see CoreAudioTypes.h). This information is required. */
+	size_t layoutSize,													/*! @param layoutSize		Size, in bytes, of audio channel layout. 0 if layout is NULL. */
+	const AudioChannelLayout * CM_NULLABLE layout,						/*! @param layout			Audio channel layout (see CoreAudioTypes.h). Can be NULL. */
+	size_t magicCookieSize,												/*! @param magicCookieSize	Size, in bytes, of magic cookie. 0 if magicCookie is NULL. */
+	const void * CM_NULLABLE magicCookie,								/*! @param magicCookie		Magic cookie. This information is required for some formats, and must be NULL for all others. */
+	CFDictionaryRef CM_NULLABLE extensions,								/*! @param extensions		Dictionary of extension key/value pairs.  Keys are always CFStrings.
 																			Values are always property list objects (ie. CFData, CFString, CFArray, CFDictionary,
 																			CFDate, CFBoolean, or CFNumber). Can be NULL. */
-	CMAudioFormatDescriptionRef *outDesc)		/*! @param outDesc			Returned newly created audio CMFormatDescription */
+	CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)		/*! @param outDesc			Returned newly created audio CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMAudioFormatDescriptionGetStreamBasicDescription
@@ -327,8 +347,8 @@ OSStatus CMAudioFormatDescriptionCreate(
 				used with a non-audio format descriptions.
 */
 CM_EXPORT
-const AudioStreamBasicDescription * CMAudioFormatDescriptionGetStreamBasicDescription(
-	CMAudioFormatDescriptionRef desc)		/*! @param desc		CMFormatDescription being interrogated. */
+const AudioStreamBasicDescription * CM_NULLABLE CMAudioFormatDescriptionGetStreamBasicDescription(
+	CMAudioFormatDescriptionRef CM_NONNULL desc)		/*! @param desc		CMFormatDescription being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -342,9 +362,9 @@ const AudioStreamBasicDescription * CMAudioFormatDescriptionGetStreamBasicDescri
 	@result		A read-only pointer to the magic cookie inside the audio format description.
 */
 CM_EXPORT
-const void * CMAudioFormatDescriptionGetMagicCookie(
-	CMAudioFormatDescriptionRef desc,		/*! @param desc				CMFormatDescription being interrogated. */
-	size_t *cookieSizeOut)					/*! @param cookieSizeOut	Pointer to variable that will be written with the size of the cookie. Can be NULL. */
+const void * CM_NULLABLE CMAudioFormatDescriptionGetMagicCookie(
+	CMAudioFormatDescriptionRef CM_NONNULL desc,		/*! @param desc				CMFormatDescription being interrogated. */
+	size_t * CM_NULLABLE cookieSizeOut)					/*! @param cookieSizeOut	Pointer to variable that will be written with the size of the cookie. Can be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -358,9 +378,9 @@ const void * CMAudioFormatDescriptionGetMagicCookie(
 	@result		A read-only pointer to the AudioChannelLayout inside the audio format description.
 */
 CM_EXPORT
-const AudioChannelLayout * CMAudioFormatDescriptionGetChannelLayout(
-	CMAudioFormatDescriptionRef desc,		/*! @param desc			CMFormatDescription being interrogated. */
-	size_t *layoutSize)						/*! @param layoutSize	Pointer to variable that will be written with the size of the layout.
+const AudioChannelLayout * CM_NULLABLE CMAudioFormatDescriptionGetChannelLayout(
+	CMAudioFormatDescriptionRef CM_NONNULL desc,		/*! @param desc			CMFormatDescription being interrogated. */
+	size_t * CM_NULLABLE layoutSize)					/*! @param layoutSize	Pointer to variable that will be written with the size of the layout.
 																	Can be NULL. */    
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -375,9 +395,9 @@ const AudioChannelLayout * CMAudioFormatDescriptionGetChannelLayout(
 	@result		A read-only pointer to the array of AudioFormatListItem structs inside the audio format description.
 */
 CM_EXPORT
-const AudioFormatListItem * CMAudioFormatDescriptionGetFormatList(
-	CMAudioFormatDescriptionRef desc,		/*! @param desc             CMFormatDescription being interrogated. */
-	size_t *formatListSize)	                /*! @param formatListSize	Pointer to variable that will be written with the size of the formatList.
+const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetFormatList(
+	CMAudioFormatDescriptionRef CM_NONNULL desc,		/*! @param desc             CMFormatDescription being interrogated. */
+	size_t * CM_NULLABLE formatListSize)	            /*! @param formatListSize	Pointer to variable that will be written with the size of the formatList.
                                                                         Can be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -392,8 +412,8 @@ const AudioFormatListItem * CMAudioFormatDescriptionGetFormatList(
 	@result		A read-only pointer to the appropriate AudioFormatListItem inside the audio format description.
 */
 CM_EXPORT
-const AudioFormatListItem * CMAudioFormatDescriptionGetRichestDecodableFormat(
-	CMAudioFormatDescriptionRef desc)	     /*! @param desc             CMFormatDescription being interrogated. */
+const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetRichestDecodableFormat(
+	CMAudioFormatDescriptionRef CM_NONNULL desc)	     /*! @param desc             CMFormatDescription being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 
@@ -406,9 +426,11 @@ const AudioFormatListItem * CMAudioFormatDescriptionGetRichestDecodableFormat(
 	@result		A read-only pointer to the appropriate AudioFormatListItem inside the audio format description.
 */
 CM_EXPORT
-const AudioFormatListItem * CMAudioFormatDescriptionGetMostCompatibleFormat(
-	CMAudioFormatDescriptionRef desc)	     /*! @param desc             CMFormatDescription being interrogated. */
+const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetMostCompatibleFormat(
+	CMAudioFormatDescriptionRef CM_NONNULL desc)	     /*! @param desc             CMFormatDescription being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	CMAudioFormatDescriptionCreateSummary
@@ -419,11 +441,13 @@ const AudioFormatListItem * CMAudioFormatDescriptionGetMostCompatibleFormat(
 		and mixing the constituent format descriptions.
 */
 CM_EXPORT OSStatus CMAudioFormatDescriptionCreateSummary(
-		CFAllocatorRef allocator,
-		CFArrayRef formatDescriptionArray, // CFArray[CMAudioFormatDescription]
+		CFAllocatorRef CM_NULLABLE allocator,
+		CFArrayRef CM_NONNULL formatDescriptionArray, // CFArray[CMAudioFormatDescription]
 		uint32_t flags, // pass 0
-		CMAudioFormatDescriptionRef *summaryFormatDescriptionOut )
+		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL summaryFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@enum CMAudioFormatDescriptionMask
@@ -435,7 +459,12 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateSummary(
 	@constant	CMAudioFormatDescriptionMask_Extensions					Represents the format description extensions.
 	@constant	CMAudioFormatDescriptionMask_All						Represents all the parts of an audio format description.
 */
+typedef uint32_t CMAudioFormatDescriptionMask;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMAudioFormatDescriptionMask
+#else
 enum
+#endif
 {
 	kCMAudioFormatDescriptionMask_StreamBasicDescription	= (1<<0),
 	kCMAudioFormatDescriptionMask_MagicCookie				= (1<<1),
@@ -446,7 +475,6 @@ enum
 															| kCMAudioFormatDescriptionMask_ChannelLayout
 															| kCMAudioFormatDescriptionMask_Extensions
 };
-typedef uint32_t CMAudioFormatDescriptionMask;
 
 /*!
 	@function	CMAudioFormatDescriptionEqual
@@ -461,10 +489,10 @@ typedef uint32_t CMAudioFormatDescriptionMask;
 */
 CM_EXPORT
 Boolean CMAudioFormatDescriptionEqual(
-	CMAudioFormatDescriptionRef desc1,				/*! @param desc1			The CMAudioFormatDescription being compared. */
-	CMAudioFormatDescriptionRef desc2,				/*! @param desc2			The CMAudioFormatDescription to which it is being compared. */
-	CMAudioFormatDescriptionMask equalityMask,		/*! @param equalityMask		Mask specifying which parts of the descriptions to compare. */
-	CMAudioFormatDescriptionMask *equalityMaskOut)	/*! @param equalityMaskOut  Pointer to variable that will be written with the results by part.
+	CMAudioFormatDescriptionRef CM_NONNULL desc1,				/*! @param desc1			The CMAudioFormatDescription being compared. */
+	CMAudioFormatDescriptionRef CM_NONNULL desc2,				/*! @param desc2			The CMAudioFormatDescription to which it is being compared. */
+	CMAudioFormatDescriptionMask equalityMask,					/*! @param equalityMask		Mask specifying which parts of the descriptions to compare. */
+	CMAudioFormatDescriptionMask * CM_NULLABLE equalityMaskOut)	/*! @param equalityMaskOut  Pointer to variable that will be written with the results by part.
 																				Bits not set in equalityMask will not be set in equalityMaskOut.
 																				Can be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -477,7 +505,7 @@ Boolean CMAudioFormatDescriptionEqual(
 
 /*!
 	@typedef CMVideoFormatDescriptionRef
-	Synonym type used for manipulating audio CMFormatDescriptions
+	Synonym type used for manipulating video CMFormatDescriptions
 */
 typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef;
 
@@ -502,7 +530,13 @@ typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef;
 	@constant	kCMPixelFormat_444YpCbCr10 Component Y'CbCr 10-bit 4:4:4
 	@constant	kCMPixelFormat_8IndexedGray_WhiteIsZero 8 bit indexed gray, white is zero
 */
-enum {
+typedef FourCharCode CMPixelFormatType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMPixelFormatType
+#else
+enum
+#endif
+{
 	kCMPixelFormat_32ARGB                   = 32,
 	kCMPixelFormat_32BGRA                   = 'BGRA',
 	kCMPixelFormat_24RGB                    = 24,
@@ -520,7 +554,6 @@ enum {
 	kCMPixelFormat_444YpCbCr10              = 'v410',
 	kCMPixelFormat_8IndexedGray_WhiteIsZero = 0x00000028,
 };
-typedef FourCharCode CMPixelFormatType; 
 
 /*!
 	@enum CMVideoCodecType
@@ -535,6 +568,7 @@ typedef FourCharCode CMPixelFormatType;
 	@constant	kCMVideoCodecType_SorensonVideo3	Sorenson 3 video format
 	@constant	kCMVideoCodecType_H263	ITU-T H.263 format
 	@constant	kCMVideoCodecType_H264	ITU-T H.264 format (AKA ISO/IEC 14496-10 - MPEG-4 Part 10, Advanced Video Coding format)
+	@constant	kCMVideoCodecType_HEVC	ITU-T HEVC format
 	@constant	kCMVideoCodecType_MPEG4Video	ISO/IEC Moving Picture Experts Group (MPEG) MPEG-4 Part 2 video format
 	@constant	kCMVideoCodecType_MPEG2Video	MPEG-2 video format
 	@constant	kCMVideoCodecType_MPEG1Video	MPEG-1 video format
@@ -555,7 +589,13 @@ typedef FourCharCode CMPixelFormatType;
 	@constant	kCMVideoCodecType_AppleProRes422LT	Apple ProRes 422 LT format
 	@constant	kCMVideoCodecType_AppleProRes422Proxy	Apple ProRes 422 Proxy format
 */
-enum {
+typedef FourCharCode CMVideoCodecType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMVideoCodecType
+#else
+enum
+#endif
+{
 	kCMVideoCodecType_422YpCbCr8       = kCMPixelFormat_422YpCbCr8,
 	kCMVideoCodecType_Animation        = 'rle ',
 	kCMVideoCodecType_Cinepak          = 'cvid',
@@ -565,6 +605,7 @@ enum {
 	kCMVideoCodecType_SorensonVideo3   = 'SVQ3',
 	kCMVideoCodecType_H263             = 'h263',
 	kCMVideoCodecType_H264             = 'avc1',
+	kCMVideoCodecType_HEVC             = 'hvc1',
 	kCMVideoCodecType_MPEG4Video       = 'mp4v',
 	kCMVideoCodecType_MPEG2Video       = 'mp2v',
 	kCMVideoCodecType_MPEG1Video       = 'mp1v',
@@ -587,7 +628,6 @@ enum {
 	kCMVideoCodecType_AppleProRes422LT = 'apcs',
 	kCMVideoCodecType_AppleProRes422Proxy = 'apco',
 };
-typedef FourCharCode CMVideoCodecType;
 
 /*!
 	@typedef CMVideoDimensions
@@ -598,12 +638,19 @@ typedef struct {
 	int32_t height;
 } CMVideoDimensions;
 
+CM_ASSUME_NONNULL_BEGIN
+
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FormatName	// CFString
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_Depth			// CFNumber with depth value as directed by http://developer.apple.com/qa/qa2001/qa1183.html
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 // Many of the following extension keys and values are the same as the corresponding CVImageBuffer attachment keys and values
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_CleanAperture __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureWidth __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHeight __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHorizontalOffset __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffset __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_CleanAperture				kCVImageBufferCleanApertureKey					// CFDictionary containing the following four keys
 #define kCMFormatDescriptionKey_CleanApertureWidth				kCVImageBufferCleanApertureWidthKey				// CFNumber
 #define kCMFormatDescriptionKey_CleanApertureHeight				kCVImageBufferCleanApertureHeightKey			// CFNumber
@@ -620,36 +667,68 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHorizontalOffse
 CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational							// CFArray of 2 CFNumbers: numerator, denominator
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FieldCount __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_FieldCount				kCVImageBufferFieldCountKey						// CFNumber, 1 or 2
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FieldDetail __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_TemporalTopFirst __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_TemporalBottomFirst __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_SpatialFirstLineLate __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_FieldDetail				kCVImageBufferFieldDetailKey					// CFString with one of the following four values
 #define kCMFormatDescriptionFieldDetail_TemporalTopFirst		kCVImageBufferFieldDetailTemporalTopFirst
 #define kCMFormatDescriptionFieldDetail_TemporalBottomFirst		kCVImageBufferFieldDetailTemporalBottomFirst
 #define kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly	kCVImageBufferFieldDetailSpatialFirstLineEarly
 #define kCMFormatDescriptionFieldDetail_SpatialFirstLineLate	kCVImageBufferFieldDetailSpatialFirstLineLate
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_PixelAspectRatio __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_PixelAspectRatio			kCVImageBufferPixelAspectRatioKey				// CFDictionary with the following two keys
 #define kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing	kCVImageBufferPixelAspectRatioHorizontalSpacingKey	// CFNumber
 #define kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing	kCVImageBufferPixelAspectRatioVerticalSpacingKey	// CFNumber
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ColorPrimaries __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_EBU_3213 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_SMPTE_C __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_ColorPrimaries			kCVImageBufferColorPrimariesKey					// CFString describing the color primaries. This key can be one of the following values:
 #define kCMFormatDescriptionColorPrimaries_ITU_R_709_2			kCVImageBufferColorPrimaries_ITU_R_709_2		// CFString
 #define kCMFormatDescriptionColorPrimaries_EBU_3213				kCVImageBufferColorPrimaries_EBU_3213			// CFString
 #define kCMFormatDescriptionColorPrimaries_SMPTE_C				kCVImageBufferColorPrimaries_SMPTE_C			// CFString
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_DCI_P3											// same as kCVImageBufferColorPrimaries_DCI_P3
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_P3_D65											// same as kCVImageBufferColorPrimaries_P3_D65
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_ITU_R_2020										// same as kCVImageBufferColorPrimaries_ITU_R_2020
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_P22												// same as kCVImageBufferColorPrimaries_P22
 							__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_TransferFunction __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_240M_1995 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_UseGamma __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_TransferFunction			kCVImageBufferTransferFunctionKey				// CFString describing the transfer function. This key can be one of the following values:
 #define kCMFormatDescriptionTransferFunction_ITU_R_709_2		kCVImageBufferTransferFunction_ITU_R_709_2		// CFString
 #define kCMFormatDescriptionTransferFunction_SMPTE_240M_1995	kCVImageBufferTransferFunction_SMPTE_240M_1995	// CFString
 #define kCMFormatDescriptionTransferFunction_UseGamma			kCVImageBufferTransferFunction_UseGamma			// CFString
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_2020										// same as kCVImageBufferTransferFunction_ITU_R_2020
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_GammaLevel __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_GammaLevel				kCVImageBufferGammaLevelKey						// CFNumber describing the gamma level, used in absence of (or ignorance of) kCMFormatDescriptionExtension_TransferFunction
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_YCbCrMatrix __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_YCbCrMatrix				kCVImageBufferYCbCrMatrixKey					// CFString describing the color matrix for YCbCr->RGB. This key can be one of the following values:
 #define kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2				kCVImageBufferYCbCrMatrix_ITU_R_709_2			// CFString
 #define kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4				kCVImageBufferYCbCrMatrix_ITU_R_601_4			// CFString
 #define kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995			kCVImageBufferYCbCrMatrix_SMPTE_240M_1995		// CFString
+CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_2020											// same as kCVImageBufferYCbCrMatrix_ITU_R_2020
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FullRangeVideo										// CFBoolean; by default, false for YCbCr-based compressed formats, indicating that pixel values are video-range rather than full-range
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
@@ -661,6 +740,15 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_BytesPerRow											
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /* Chroma siting information. For progressive images, only the TopField value is used. */
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ChromaLocationTopField __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ChromaLocationBottomField __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Left __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Center __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_TopLeft __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Top __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_BottomLeft __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Bottom __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_DV420 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_ChromaLocationTopField		kCVImageBufferChromaLocationTopFieldKey		// CFString with one of the following CFString values
 #define kCMFormatDescriptionExtension_ChromaLocationBottomField 	kCVImageBufferChromaLocationBottomFieldKey	// CFString with one of the following CFString values
 #define kCMFormatDescriptionChromaLocation_Left						kCVImageBufferChromaLocation_Left			// Chroma sample is horizontally co-sited with the left column of luma samples, but centered vertically.
@@ -675,7 +763,11 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_BytesPerRow											
 CM_EXPORT const CFStringRef kCMFormatDescriptionConformsToMPEG2VideoProfile			// CFNumber specifying a kCMMPEG2VideoProfile_*
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : int32_t
+#else
 enum
+#endif
 {
 	kCMMPEG2VideoProfile_HDV_720p30 =				'hdv1',
 	kCMMPEG2VideoProfile_HDV_1080i60 =				'hdv2',
@@ -722,6 +814,7 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_TemporalQuality			// C
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_SpatialQuality			// CFNumber
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimImageDescription __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_VerbatimImageDescription	kCMFormatDescriptionExtension_VerbatimSampleDescription
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_Version					// CFNumber
@@ -734,6 +827,10 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_Vendor					// CFString
 CM_EXPORT const CFStringRef kCMFormatDescriptionVendor_Apple
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CM_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
+
 /*!
 	@function	CMVideoFormatDescriptionCreate
 	@abstract	Creates a format description for a video media stream.
@@ -742,14 +839,14 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionVendor_Apple
 */
 CM_EXPORT
 OSStatus CMVideoFormatDescriptionCreate(
-	CFAllocatorRef allocator,				/*! @param allocator	CFAllocator to be used. kCFAllocatorDefault used if NULL. */
-	CMVideoCodecType codecType,				/*! @param codecType	The type of video compression. */
-	int32_t width,							/*! @param width		The width of encoded video. */
-	int32_t height,							/*! @param height		The height of encoded video. */
-	CFDictionaryRef extensions,				/*! @param extensions	Dictionary of extension key/value pairs. Keys are always CFStrings.
-																	Values are always property list objects (ie. CFData, CFString, CFArray,
-																	CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
-	CMVideoFormatDescriptionRef *outDesc)	/*! @param outDesc		Returned newly created video CMFormatDescription */
+	CFAllocatorRef CM_NULLABLE allocator,							/*! @param allocator	CFAllocator to be used. kCFAllocatorDefault used if NULL. */
+	CMVideoCodecType codecType,										/*! @param codecType	The type of video compression. */
+	int32_t width,													/*! @param width		The width of encoded video. */
+	int32_t height,													/*! @param height		The height of encoded video. */
+	CFDictionaryRef CM_NULLABLE extensions,							/*! @param extensions	Dictionary of extension key/value pairs. Keys are always CFStrings.
+																		Values are always property list objects (ie. CFData, CFString, CFArray,
+																		CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
+	CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)	/*! @param outDesc		Returned newly created video CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -769,12 +866,12 @@ OSStatus CMVideoFormatDescriptionCreate(
 */
 CM_EXPORT
 OSStatus CMVideoFormatDescriptionCreateForImageBuffer(
-	CFAllocatorRef allocator,				/*! @param allocator
-											CFAllocator to be used when creating the CMFormatDescription. NULL will cause the default allocator to be used */
-	CVImageBufferRef imageBuffer,			/*! @param imageBuffer
-											Image buffer for which we are creating the format description. */
-	CMVideoFormatDescriptionRef *outDesc)	/*! @param outDesc
-											Returned newly-created video CMFormatDescription */
+	CFAllocatorRef CM_NULLABLE allocator,							/*! @param allocator
+																		CFAllocator to be used when creating the CMFormatDescription. NULL will cause the default allocator to be used */
+	CVImageBufferRef CM_NONNULL imageBuffer,						/*! @param imageBuffer
+																		Image buffer for which we are creating the format description. */
+	CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)	/*! @param outDesc
+																		Returned newly-created video CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -786,19 +883,21 @@ OSStatus CMVideoFormatDescriptionCreateForImageBuffer(
 */
 CM_EXPORT
 OSStatus CMVideoFormatDescriptionCreateFromH264ParameterSets(
-	 CFAllocatorRef allocator,						/*! @param allocator
-													CFAllocator to be used when creating the CMFormatDescription. Pass NULL to use the default allocator. */
-	 size_t parameterSetCount,						/*! @param parameterSetCount
-													The number of parameter sets to include in the format description. This parameter must be at least 2. */
-	 const uint8_t * const * parameterSetPointers,	/*! @param parameterSetPointers
-													Points to a C array containing parameterSetCount pointers to parameter sets. */
-	 const size_t * parameterSetSizes,				/*! @param parameterSetSizes
-													Points to a C array containing the size, in bytes, of each of the parameter sets. */
-	 int NALUnitHeaderLength,						/*! @param NALUnitHeaderLength
-													Size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass 1, 2 or 4. */
-	 CMFormatDescriptionRef *formatDescriptionOut )	/*! @param formatDescriptionOut
-													Returned newly-created video CMFormatDescription */
+	CFAllocatorRef CM_NULLABLE allocator,									/*! @param allocator
+																				CFAllocator to be used when creating the CMFormatDescription. Pass NULL to use the default allocator. */
+	 size_t parameterSetCount,												/*! @param parameterSetCount
+																				The number of parameter sets to include in the format description. This parameter must be at least 2. */
+	 const uint8_t * CM_NONNULL const * CM_NONNULL parameterSetPointers,	/*! @param parameterSetPointers
+																				Points to a C array containing parameterSetCount pointers to parameter sets. */
+	 const size_t * CM_NONNULL parameterSetSizes,							/*! @param parameterSetSizes
+																				Points to a C array containing the size, in bytes, of each of the parameter sets. */
+	 int NALUnitHeaderLength,												/*! @param NALUnitHeaderLength
+																				Size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass 1, 2 or 4. */
+	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )	/*! @param formatDescriptionOut
+																				Returned newly-created video CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMVideoFormatDescriptionGetH264ParameterSetAtIndex
@@ -810,18 +909,18 @@ OSStatus CMVideoFormatDescriptionCreateFromH264ParameterSets(
 */
 CM_EXPORT
 OSStatus CMVideoFormatDescriptionGetH264ParameterSetAtIndex(
-		CMFormatDescriptionRef videoDesc,			/*! @param videoDesc
-													FormatDescription being interrogated. */
-		size_t parameterSetIndex,					/*! @param parameterSetIndex
-													Index of the parameter set to be returned in parameterSetPointerOut and parameterSetSizeOut. This parameter is ignored if both parameterSetPointerOut and parameterSetSizeOut are NULL. */
-		const uint8_t **parameterSetPointerOut,		/*! @param parameterSetPointerOut
-													Points to a pointer to receive the parameter set. Pass NULL if you do not want this information. */
-		size_t *parameterSetSizeOut,				/*! @param parameterSetSizeOut
-													Points to a size_t to receive the size in bytes of the parameter set. Pass NULL if you do not want this information. */
-		size_t *parameterSetCountOut,				/*! @param parameterSetCountOut
-													Number of parameter sets in the AVC decoder configuration record contained in videoDesc. Pass NULL if you do not want this information. */
-		int *NALUnitHeaderLengthOut )				/*! @param NALUnitHeaderLengthOut
-													Points to an int to receive the size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass NULL if you do not want this information. */
+		CMFormatDescriptionRef CM_NONNULL videoDesc,					/*! @param videoDesc
+																			FormatDescription being interrogated. */
+		size_t parameterSetIndex,										/*! @param parameterSetIndex
+																			Index of the parameter set to be returned in parameterSetPointerOut and parameterSetSizeOut. This parameter is ignored if both parameterSetPointerOut and parameterSetSizeOut are NULL. */
+		const uint8_t * CM_NULLABLE * CM_NULLABLE parameterSetPointerOut,	/*! @param parameterSetPointerOut
+																			Points to a pointer to receive the parameter set. Pass NULL if you do not want this information. */
+		size_t * CM_NULLABLE parameterSetSizeOut,						/*! @param parameterSetSizeOut
+																			Points to a size_t to receive the size in bytes of the parameter set. Pass NULL if you do not want this information. */
+		size_t * CM_NULLABLE parameterSetCountOut,						/*! @param parameterSetCountOut
+																			Number of parameter sets in the AVC decoder configuration record contained in videoDesc. Pass NULL if you do not   want this information. */
+		int * CM_NULLABLE NALUnitHeaderLengthOut )						/*! @param NALUnitHeaderLengthOut
+																			Points to an int to receive the size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass NULL if you do not want this information. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
 
 #define CMVideoFormatDescriptionGetCodecType(desc)  CMFormatDescriptionGetMediaSubType(desc)
@@ -833,7 +932,7 @@ OSStatus CMVideoFormatDescriptionGetH264ParameterSetAtIndex(
 */
 CM_EXPORT
 CMVideoDimensions CMVideoFormatDescriptionGetDimensions(
-	CMVideoFormatDescriptionRef videoDesc)	/*! @param videoDesc
+	CMVideoFormatDescriptionRef CM_NONNULL videoDesc)	/*! @param videoDesc
 											FormatDescription being interrogated. */ 
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -845,12 +944,12 @@ CMVideoDimensions CMVideoFormatDescriptionGetDimensions(
 */
 CM_EXPORT
 CGSize CMVideoFormatDescriptionGetPresentationDimensions(
-		CMVideoFormatDescriptionRef videoDesc,		/*! @param videoDesc
-													FormatDescription being interrogated. */ 
-		Boolean usePixelAspectRatio,				/*! @param usePixelAspectRatio
-													Compute the dimensions maintaining pixel aspect ratio */
-		Boolean useCleanAperture )					/*! @param useCleanAperture
-													Compute the dimensions using the clean aperture */
+		CMVideoFormatDescriptionRef CM_NONNULL videoDesc,		/*! @param videoDesc
+																	FormatDescription being interrogated. */
+		Boolean usePixelAspectRatio,							/*! @param usePixelAspectRatio
+																	Compute the dimensions maintaining pixel aspect ratio */
+		Boolean useCleanAperture )								/*! @param useCleanAperture
+																	Compute the dimensions using the clean aperture */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -862,15 +961,15 @@ CGSize CMVideoFormatDescriptionGetPresentationDimensions(
 */
 CM_EXPORT
 CGRect CMVideoFormatDescriptionGetCleanAperture( 
-		CMVideoFormatDescriptionRef videoDesc,		/*! @param videoDesc
-													FormatDescription being interrogated. */ 
-		Boolean originIsAtTopLeft )					/*! @param originIsAtTopLeft
-													Pass true if the CGRect will be used in an environment 
-													where (0,0) is at the top-left corner of an enclosing rectangle 
-													and y coordinates increase as you go down.
-													Pass false if the CGRect will be used in an environment 
-													where (0,0) is at the bottom-left corner of an enclosing rectangle 
-													and y coordinates increase as you go up. */
+		CMVideoFormatDescriptionRef CM_NONNULL videoDesc,		/*! @param videoDesc
+																	FormatDescription being interrogated. */
+		Boolean originIsAtTopLeft )								/*! @param originIsAtTopLeft
+																	Pass true if the CGRect will be used in an environment
+																	where (0,0) is at the top-left corner of an enclosing rectangle
+																	and y coordinates increase as you go down.
+																	Pass false if the CGRect will be used in an environment 
+																	where (0,0) is at the bottom-left corner of an enclosing rectangle 
+																	and y coordinates increase as you go up. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -899,7 +998,7 @@ CGRect CMVideoFormatDescriptionGetCleanAperture(
 				kCMFormatDescriptionExtension_ChromaLocationBottomField
 */
 CM_EXPORT
-CFArrayRef CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers(void)
+CFArrayRef CM_NONNULL CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers(void)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -912,8 +1011,8 @@ CFArrayRef CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers(void)
 */
 CM_EXPORT
 Boolean CMVideoFormatDescriptionMatchesImageBuffer(
-	CMVideoFormatDescriptionRef desc,	/*! @param desc			format description to validate. */
-	CVImageBufferRef imageBuffer)		/*! @param imageBuffer	image buffer validate against. */
+	CMVideoFormatDescriptionRef CM_NONNULL desc,	/*! @param desc			format description to validate. */
+	CVImageBufferRef CM_NONNULL imageBuffer)		/*! @param imageBuffer	image buffer validate against. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 #pragma mark CMMuxedFormatDescription
@@ -936,15 +1035,22 @@ typedef CMFormatDescriptionRef CMMuxedFormatDescriptionRef;
 	@constant	kCMMuxedStreamType_MPEG2Program	MPEG-2 Program stream
 	@constant	kCMMuxedStreamType_DV	DV stream
 */
-enum {
+typedef FourCharCode CMMuxedStreamType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMMuxedStreamType
+#else
+enum
+#endif
+{
 	kCMMuxedStreamType_MPEG1System		= 'mp1s',
 	kCMMuxedStreamType_MPEG2Transport	= 'mp2t',
 	kCMMuxedStreamType_MPEG2Program		= 'mp2p',
 	kCMMuxedStreamType_DV				= 'dv  '
 };
-typedef FourCharCode CMMuxedStreamType;
 
 #define CMMuxedFormatDescriptionGetStreamType(desc)  CMFormatDescriptionGetMediaSubType(desc)
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	CMMuxedFormatDescriptionCreate
@@ -958,17 +1064,18 @@ typedef FourCharCode CMMuxedStreamType;
 */
 CM_EXPORT
 OSStatus CMMuxedFormatDescriptionCreate(
-	CFAllocatorRef allocator,			/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
-	CMMuxedStreamType muxType,			/*! @param muxType			Type of the muxed stream (eg. kCMMuxedStreamType_MPEG2Transport
-																	for MPEG-2 transport stream). This is the media subtype, and will
-																	be returned if you subsequently call CMFormatDescriptionGetMediaSubType
-																	(or CMMuxedFormatDescriptionGetStreamType). */
-	CFDictionaryRef extensions,			/*! @param extensions		Dictionary of extension key/value pairs. Keys are always CFStrings.
-																	Values are always property list objects (ie. CFData, CFString, CFArray,
-																	CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
-	CMMuxedFormatDescriptionRef *outDesc)	/*! @param outDesc		Returned newly created muxed CMFormatDescription */
+	CFAllocatorRef CM_NULLABLE allocator,							/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMuxedStreamType muxType,										/*! @param muxType			Type of the muxed stream (eg. kCMMuxedStreamType_MPEG2Transport
+																		for MPEG-2 transport stream). This is the media subtype, and will
+																		be returned if you subsequently call CMFormatDescriptionGetMediaSubType
+																		(or CMMuxedFormatDescriptionGetStreamType). */
+	CFDictionaryRef CM_NULLABLE extensions,							/*! @param extensions		Dictionary of extension key/value pairs. Keys are always CFStrings.
+																		Values are always property list objects (ie. CFData, CFString, CFArray,
+																		CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
+	CM_RETURNS_RETAINED_PARAMETER CMMuxedFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)	/*! @param outDesc		Returned newly created muxed CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #pragma mark CMClosedCaptionFormatDescription
 
@@ -990,12 +1097,17 @@ typedef CMFormatDescriptionRef CMClosedCaptionFormatDescriptionRef;
 	@constant	kCMClosedCaptionFormatType_CEA708	CEA 708-compliant samples
 	@constant	kCMClosedCaptionFormatType_ATSC		ATSC/52 part-4 compliant samples
 */
-enum {
+typedef FourCharCode CMClosedCaptionFormatType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMClosedCaptionFormatType
+#else
+enum
+#endif
+{
 	kCMClosedCaptionFormatType_CEA608	= 'c608',
 	kCMClosedCaptionFormatType_CEA708	= 'c708',
 	kCMClosedCaptionFormatType_ATSC		= 'atcc'
 };
-typedef FourCharCode CMClosedCaptionFormatType;
 
 #define CMClosedCaptionFormatDescriptionGetFormatType(desc)  CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1018,11 +1130,16 @@ typedef CMFormatDescriptionRef CMTextFormatDescriptionRef;
 	@constant	kCMTextFormatType_QTText	QuickTime Text media
 	@constant	kCMTextFormatType_3GText	3GPP Text media
 */
-enum {
+typedef FourCharCode CMTextFormatType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMTextFormatType
+#else
+enum
+#endif
+{
     kCMTextFormatType_QTText           = 'text',
     kCMTextFormatType_3GText           = 'tx3g'
 };
-typedef FourCharCode CMTextFormatType;
 
 /*!
 	@enum CMTextDisplayFlags
@@ -1041,7 +1158,13 @@ typedef FourCharCode CMTextFormatType;
 	@constant	kCMTextDisplayFlag_forcedSubtitlesPresent	There are forced subtitles present, e.g., a subtitle which only displays during foreign language sections of the video. Check individual samples to determine what type of subtitle is contained.
 	@constant	kCMTextDisplayFlag_allSubtitlesForced	Treat all subtitle samples as if they contain forced subtitles.
 */
-enum {
+typedef uint32_t CMTextDisplayFlags;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMTextDisplayFlags
+#else
+enum
+#endif
+{
     kCMTextDisplayFlag_scrollIn                    = 0x00000020,
     kCMTextDisplayFlag_scrollOut                   = 0x00000040,
     kCMTextDisplayFlag_scrollDirectionMask         = 0x00000180,
@@ -1056,7 +1179,6 @@ enum {
     kCMTextDisplayFlag_forcedSubtitlesPresent      = 0x40000000,
     kCMTextDisplayFlag_allSubtitlesForced          = 0x80000000,
 };
-typedef uint32_t CMTextDisplayFlags;
 
 /*!
 	@enum CMTextJustificationValue
@@ -1065,12 +1187,19 @@ typedef uint32_t CMTextDisplayFlags;
 	@constant	kCMTextJustification_centered	Center justification (both horizontal and vertical justification).
 	@constant	kCMTextJustification_bottom_right	Bottom justification when specified for vertical justification, right justification for horizontal justification.
 */
-enum {
+typedef int8_t CMTextJustificationValue;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMTextJustificationValue
+#else
+enum
+#endif
+{
 	kCMTextJustification_left_top		=  0,
 	kCMTextJustification_centered		=  1,
 	kCMTextJustification_bottom_right	= -1
 };
-typedef int8_t CMTextJustificationValue;
+
+CM_ASSUME_NONNULL_BEGIN
 
 // Extension keys and values common to kCMTextFormatType_QTText and kCMTextFormatType_3GText format descriptions
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DisplayFlags                 // CFNumber (SInt32 holding CMTextDisplayFlags)
@@ -1129,7 +1258,8 @@ CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_TextJustification 
 								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DefaultFontName              // CFString
 								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
-
+	
+CM_ASSUME_NONNULL_END
 
 /*!
 	@function	CMTextFormatDescriptionGetDisplayFlags
@@ -1139,9 +1269,9 @@ CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DefaultFontName   
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetDisplayFlags(
-	CMFormatDescriptionRef desc,			/*! @param desc
+	CMFormatDescriptionRef CM_NONNULL desc,			/*! @param desc
 											FormatDescription being interrogated. */
-	CMTextDisplayFlags *outDisplayFlags)	/*! @param outDisplayFlags
+	CMTextDisplayFlags * CM_NONNULL outDisplayFlags)	/*! @param outDisplayFlags
 											Receives the display flags. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -1153,11 +1283,11 @@ OSStatus CMTextFormatDescriptionGetDisplayFlags(
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetJustification(
-	CMFormatDescriptionRef desc,					/*! @param desc
+	CMFormatDescriptionRef CM_NONNULL desc,					/*! @param desc
 													FormatDescription being interrogated. */
-	CMTextJustificationValue *outHorizontalJust,	/*! @param outHorizontalJust
+	CMTextJustificationValue * CM_NULLABLE outHorizontalJust,/*! @param outHorizontalJust
 													Horizontal justification mode. May be NULL. */
-	CMTextJustificationValue *outVerticalJust)		/*! @param outVerticalJust
+	CMTextJustificationValue * CM_NULLABLE outVerticalJust)		/*! @param outVerticalJust
 													Vertical justification mode. May be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -1169,21 +1299,21 @@ OSStatus CMTextFormatDescriptionGetJustification(
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetDefaultTextBox(
-	CMFormatDescriptionRef desc,	/*! @param desc
-									FormatDescription being interrogated. */
-	Boolean originIsAtTopLeft,		/*! @param originIsAtTopLeft
-									Pass true if the CGRect will be used in an environment 
-									where (0,0) is at the top-left corner of an enclosing rectangle 
-									and y coordinates increase as you go down.
-									Pass false if the CGRect will be used in an environment 
-									where (0,0) is at the bottom-left corner of an enclosing rectangle 
-									and y coordinates increase as you go up. */
-	CGFloat heightOfTextTrack,		/*! @param heightOfTextTrack
-									If originIsAtTopLeft is false, pass the height of the enclosing text track or destination.
-									This value will be used to properly compute the default text box for the given origin.
-									Ignored if originIsAtTopLeft is true. */
-	CGRect *outDefaultTextBox)		/*! @param outDefaultTextBox
-									Receives the default text box. */
+	CMFormatDescriptionRef CM_NONNULL desc,		/*! @param desc
+													FormatDescription being interrogated. */
+	Boolean originIsAtTopLeft,					/*! @param originIsAtTopLeft
+													Pass true if the CGRect will be used in an environment
+													where (0,0) is at the top-left corner of an enclosing rectangle
+													and y coordinates increase as you go down.
+													Pass false if the CGRect will be used in an environment
+													where (0,0) is at the bottom-left corner of an enclosing rectangle
+													and y coordinates increase as you go up. */
+	CGFloat heightOfTextTrack,					/*! @param heightOfTextTrack
+													If originIsAtTopLeft is false, pass the height of the enclosing text track or destination.
+													This value will be used to properly compute the default text box for the given origin.
+													Ignored if originIsAtTopLeft is true. */
+	CGRect * CM_NONNULL outDefaultTextBox)		/*! @param outDefaultTextBox
+													Receives the default text box. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -1194,21 +1324,23 @@ OSStatus CMTextFormatDescriptionGetDefaultTextBox(
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetDefaultStyle(
-	CMFormatDescriptionRef desc,	/*! @param desc
-									FormatDescription being interrogated. */
-	uint16_t *outLocalFontID,		/*! @param localFontID
-									Font number, local to the FormatDescription. May be NULL. */
-	Boolean *outBold,				/*! @param outBold
-									Returned true if style includes Bold. May be NULL. */
-	Boolean *outItalic,				/*! @param outItalic
-									Returned true if style includes Italic. May be NULL. */
-	Boolean *outUnderline,			/*! @param outUnderline
-									Returned true if style includes Underline. May be NULL. */
-	CGFloat *outFontSize,			/*! @param outFontSize
-									FontSize in points. May be NULL. */
-	CGFloat outColorComponents[4])	/*! @param outColorComponents
-									Components are in order red, green, blue, alpha. May be NULL. */
+	CMFormatDescriptionRef CM_NONNULL desc,		/*! @param desc
+													FormatDescription being interrogated. */
+	uint16_t * CM_NULLABLE outLocalFontID,		/*! @param localFontID
+													Font number, local to the FormatDescription. May be NULL. */
+	Boolean * CM_NULLABLE outBold,				/*! @param outBold
+													Returned true if style includes Bold. May be NULL. */
+	Boolean * CM_NULLABLE outItalic,				/*! @param outItalic
+													Returned true if style includes Italic. May be NULL. */
+	Boolean * CM_NULLABLE outUnderline,			/*! @param outUnderline
+													Returned true if style includes Underline. May be NULL. */
+	CGFloat * CM_NULLABLE outFontSize,			/*! @param outFontSize
+													FontSize in points. May be NULL. */
+	/* CM_NULLABLE */ CGFloat outColorComponents[4])	/*! @param outColorComponents
+													Components are in order red, green, blue, alpha. May be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	CMTextFormatDescriptionGetFontName
@@ -1218,22 +1350,29 @@ OSStatus CMTextFormatDescriptionGetDefaultStyle(
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetFontName(
-	CMFormatDescriptionRef desc,	/*! @param desc
-									FormatDescription being interrogated. */
-	uint16_t localFontID,			/*! @param localFontID
-									Font number, local to the FormatDescription. */
-	CFStringRef *outFontName)		/*! @param outFontName
-									Name of the font. */
+	CMFormatDescriptionRef CM_NONNULL desc,					/*! @param desc
+																FormatDescription being interrogated. */
+	uint16_t localFontID,									/*! @param localFontID
+																Font number, local to the FormatDescription. */
+	CM_RETURNS_NOT_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL outFontName)		/*! @param outFontName
+																Name of the font. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #pragma mark CMSubtitleFormatDescription
+
+typedef FourCharCode CMSubtitleFormatType;
 	
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMSubtitleFormatType
+#else
+enum
+#endif
+{
     kCMSubtitleFormatType_3GText = 'tx3g',
 	kCMSubtitleFormatType_WebVTT = 'wvtt',
 };
-
-typedef FourCharCode CMSubtitleFormatType;
 	
 #define CMSubtitleFormatDescriptionGetFormatType(desc)	CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1256,14 +1395,20 @@ typedef CMFormatDescriptionRef CMTimeCodeFormatDescriptionRef;
 	@constant	kCMTimeCodeFormatType_TimeCode64 64-bit timeCode sample.
 	@constant	kCMTimeCodeFormatType_Counter32 32-bit counter-mode sample.
 	@constant	kCMTimeCodeFormatType_Counter64 64-bit counter-mode sample.
-*/	
-enum {
+*/
+typedef FourCharCode CMTimeCodeFormatType;
+
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMTimeCodeFormatType
+#else
+enum
+#endif
+{
 	kCMTimeCodeFormatType_TimeCode32	= 'tmcd',
 	kCMTimeCodeFormatType_TimeCode64	= 'tc64',
 	kCMTimeCodeFormatType_Counter32		= 'cn32',
 	kCMTimeCodeFormatType_Counter64		= 'cn64'
 };
-typedef FourCharCode CMTimeCodeFormatType;
 
 #define CMTimeCodeFormatDescriptionGetFormatType(desc)	CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1274,11 +1419,18 @@ typedef FourCharCode CMTimeCodeFormatType;
 	@constant	kCMTimeCodeFlag_24HourMax	Timecode rolls over every 24 hours.
 	@constant	kCMTimeCodeFlag_NegTimesOK	Track may contain negative timecodes.
 */
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : uint32_t
+#else
+enum
+#endif
+{
 	kCMTimeCodeFlag_DropFrame	= 1 << 0,
 	kCMTimeCodeFlag_24HourMax	= 1 << 1,
 	kCMTimeCodeFlag_NegTimesOK	= 1 << 2
 };
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	CMTimeCodeFormatDescriptionCreate
@@ -1288,21 +1440,23 @@ enum {
 */
 CM_EXPORT
 OSStatus CMTimeCodeFormatDescriptionCreate(
-	CFAllocatorRef allocator,					/*! @param allocator
-												Allocator to be used for creating the FormatDescription object */
-	CMTimeCodeFormatType timeCodeFormatType,	/*! @param timeCodeFormatType
-												One of the CMTimeCodeFormatTypes */
-	CMTime frameDuration,						/*! @param frameDuration
-												Duration of each frame (eg. 100/2997) */
-	uint32_t frameQuanta,						/*! @param frameQuanta
-												Frames/sec for timecode (eg. 30) OR frames/tick for counter mode */
-	uint32_t tcFlags,							/*! @param tcFlags
-												kCMTimeCodeFlag_DropFrame, kCMTimeCodeFlag_24HourMax, kCMTimeCodeFlag_NegTimesOK */
-	CFDictionaryRef extensions,					/*! @param extensions
-												Keys are always CFStrings. Values are always property list objects (ie. CFData). May be NULL. */
-	CMTimeCodeFormatDescriptionRef *descOut)	/*! @param descOut
-												Receives the newly-created CMFormatDescription. */
+	CFAllocatorRef CM_NULLABLE allocator,								/*! @param allocator
+																			Allocator to be used for creating the FormatDescription object */
+	CMTimeCodeFormatType timeCodeFormatType,							/*! @param timeCodeFormatType
+																			One of the CMTimeCodeFormatTypes */
+	CMTime frameDuration,												/*! @param frameDuration
+																			Duration of each frame (eg. 100/2997) */
+	uint32_t frameQuanta,												/*! @param frameQuanta
+																			Frames/sec for timecode (eg. 30) OR frames/tick for counter mode */
+	uint32_t tcFlags,													/*! @param tcFlags
+																			kCMTimeCodeFlag_DropFrame, kCMTimeCodeFlag_24HourMax, kCMTimeCodeFlag_NegTimesOK */
+	CFDictionaryRef CM_NULLABLE extensions,								/*! @param extensions
+																			Keys are always CFStrings. Values are always property list objects (ie. CFData). May be NULL. */
+	CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL descOut)	/*! @param descOut
+																			Receives the newly-created CMFormatDescription. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMTimeCodeFormatDescriptionGetFrameDuration
@@ -1310,7 +1464,7 @@ OSStatus CMTimeCodeFormatDescriptionCreate(
 */
 CM_EXPORT
 CMTime CMTimeCodeFormatDescriptionGetFrameDuration(
-	CMTimeCodeFormatDescriptionRef timeCodeFormatDescription)	/*! @param timeCodeFormatDescription
+	CMTimeCodeFormatDescriptionRef CM_NONNULL timeCodeFormatDescription)	/*! @param timeCodeFormatDescription
 																FormatDescription being interrogated */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -1320,7 +1474,7 @@ CMTime CMTimeCodeFormatDescriptionGetFrameDuration(
 */
 CM_EXPORT
 uint32_t CMTimeCodeFormatDescriptionGetFrameQuanta(
-	CMTimeCodeFormatDescriptionRef timeCodeFormatDescription)	/*! @param timeCodeFormatDescription
+	CMTimeCodeFormatDescriptionRef CM_NONNULL timeCodeFormatDescription)	/*! @param timeCodeFormatDescription
 																FormatDescription being interrogated */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -1330,9 +1484,11 @@ uint32_t CMTimeCodeFormatDescriptionGetFrameQuanta(
 */
 CM_EXPORT
 uint32_t CMTimeCodeFormatDescriptionGetTimeCodeFlags(
-	CMTimeCodeFormatDescriptionRef desc)	/*! @param desc
+	CMTimeCodeFormatDescriptionRef CM_NONNULL desc)	/*! @param desc
 											FormatDescription being interrogated */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	
+CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMTimeCodeFormatDescriptionExtension_SourceReferenceName	// CFDictionary containing the following two keys
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -1340,6 +1496,8 @@ CM_EXPORT const CFStringRef kCMTimeCodeFormatDescriptionKey_Value						// CFStri
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 CM_EXPORT const CFStringRef kCMTimeCodeFormatDescriptionKey_LangCode					// CFNumber
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	
+CM_ASSUME_NONNULL_END
 
 #pragma mark CMMetadataFormatDescription
 
@@ -1360,12 +1518,19 @@ typedef CMFormatDescriptionRef CMMetadataFormatDescriptionRef;
 	@constant	kCMMetadataFormatType_ID3		ID3 format.
 	@constant	kCMMetadataFormatType_Boxed		Boxed format.
 */
-enum {
+typedef FourCharCode CMMetadataFormatType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMMetadataFormatType
+#else
+enum
+#endif
+{
 	kCMMetadataFormatType_ICY   = 'icy ',
 	kCMMetadataFormatType_ID3   = 'id3 ',
 	kCMMetadataFormatType_Boxed = 'mebx',
 };
-typedef FourCharCode CMMetadataFormatType;
+
+CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtensionKey_MetadataKeyTable
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -1383,6 +1548,11 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtensionKey_MetadataKeyTable
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_LanguageTag	// CFString
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_StructuralDependency	// CFDictionary
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+
+CM_EXPORT const CFStringRef kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag	// CFBoolean
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier				// CFString
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
@@ -1390,52 +1560,61 @@ CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag	// CFString in BCP 47 format
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency	// CFDictionary
+							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
+CM_ASSUME_NONNULL_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateWithKeys(
-	CFAllocatorRef allocator,					/*! @param allocator	CFAllocator to be used. kCFAllocatorDefault if you don't care. */
-	CMMetadataFormatType metadataType,			/*! @param metadataType The type of metadata (kCMMetadataFormatType_Boxed). */
-	CFArrayRef keys,							/*! @param keys			Array of metadata keys. Each key is a dictionary of key
-																		properties. The required properties are: 
+	CFAllocatorRef CM_NULLABLE allocator,								/*! @param allocator	CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMetadataFormatType metadataType,									/*! @param metadataType The type of metadata. */
+	CFArrayRef CM_NULLABLE keys,											/*! @param keys			Array of metadata keys.  Required if metadataType is kCMMetadataFormatType_Boxed,
+																			may be NULL for metadataTypes that do not have keys (such as kCMMetadataFormatType_ICY
+																			and kCMMetadataFormatType_ID3).
+																			Each key is a dictionary of key properties. The required properties are:
 																			kCMMetadataFormatDescriptionKey_Namespace
 																			kCMMetadataFormatDescriptionKey_Value
 																			kCMMetadataFormatDescriptionKey_LocalID */
-	CMMetadataFormatDescriptionRef *outDesc)	/*! @param outDesc		Returned newly created metadata CMFormatDescription */
+	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)	/*! @param outDesc		Returned newly created metadata CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateWithMetadataSpecifications(
-	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
-	CMMetadataFormatType metadataType,			/*! @param metadataType		Currently the type must be kCMMetadataFormatType_Boxed. */
-	CFArrayRef metadataSpecifications,			/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
-	CMMetadataFormatDescriptionRef *outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
+	CFAllocatorRef CM_NULLABLE allocator,								/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMetadataFormatType metadataType,									/*! @param metadataType		Currently the type must be kCMMetadataFormatType_Boxed. */
+	CFArrayRef CM_NONNULL metadataSpecifications,						/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
+	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications(
-	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
-	CMMetadataFormatDescriptionRef srcDesc,		/*! @param srcDesc			Source metadata format description being extended */
-	CFArrayRef metadataSpecifications,			/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
-	CMMetadataFormatDescriptionRef *outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
+	CFAllocatorRef CM_NULLABLE allocator,								/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMetadataFormatDescriptionRef CM_NONNULL srcDesc,					/*! @param srcDesc			Source metadata format description being extended */
+	CFArrayRef CM_NONNULL metadataSpecifications,						/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
+	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(
-	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
-	CMMetadataFormatDescriptionRef srcDesc1,	/*! @param srcDesc1			Metadata format description being merged */
-	CMMetadataFormatDescriptionRef srcDesc2,	/*! @param srcDesc2			Metadata format description being merged */
-	CMMetadataFormatDescriptionRef *outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
+	CFAllocatorRef CM_NULLABLE allocator,								/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMetadataFormatDescriptionRef CM_NONNULL srcDesc1,					/*! @param srcDesc1			Metadata format description being merged */
+	CMMetadataFormatDescriptionRef CM_NONNULL srcDesc2,					/*! @param srcDesc2			Metadata format description being merged */
+	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 CM_EXPORT
-CFDictionaryRef CMMetadataFormatDescriptionGetKeyWithLocalID( CMMetadataFormatDescriptionRef desc, OSType localKeyID)
+CFDictionaryRef CM_NULLABLE CMMetadataFormatDescriptionGetKeyWithLocalID( CMMetadataFormatDescriptionRef CM_NONNULL desc, OSType localKeyID)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 CM_EXPORT
-CFArrayRef CMMetadataFormatDescriptionGetIdentifiers( CMMetadataFormatDescriptionRef desc)
+CFArrayRef CM_NULLABLE CMMetadataFormatDescriptionGetIdentifiers( CMMetadataFormatDescriptionRef CM_NONNULL desc)
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
 

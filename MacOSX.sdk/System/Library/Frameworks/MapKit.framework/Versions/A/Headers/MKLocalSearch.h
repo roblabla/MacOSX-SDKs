@@ -7,12 +7,14 @@
 
 #import <MapKit/MKFoundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class MKLocalSearchRequest;
 @class MKLocalSearchResponse;
 
-typedef void (^MKLocalSearchCompletionHandler)(MKLocalSearchResponse *response, NSError *error);
+typedef void (^MKLocalSearchCompletionHandler)(MKLocalSearchResponse * __nullable response, NSError * __nullable error);
 
-MK_CLASS_AVAILABLE(10_9, 6_1)
+MK_CLASS_AVAILABLE(10_9, 6_1) __WATCHOS_PROHIBITED
 @interface MKLocalSearch : NSObject
 
 // The request will be copied during initialization, so any changes made to the request
@@ -27,3 +29,5 @@ MK_CLASS_AVAILABLE(10_9, 6_1)
 @property (nonatomic, readonly, getter=isSearching) BOOL searching;
 
 @end
+
+NS_ASSUME_NONNULL_END

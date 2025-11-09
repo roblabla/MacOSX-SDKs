@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI
-current-version: 675.42
+current-version: 0.0
 exports:         
   - archs:           [ i386 ]
     symbols:         [ __Z11StrokeGuide8_NSPoint, __Z14StrokeTickmark8_NSPoint, 
@@ -106,15 +106,15 @@ exports:
                        _QLPreviewTextOverlayController._textOverlayField, 
                        _QLSeamlessOpeningFakeCloserDelegate._mapTable, 
                        _QLSeamlessOpeningItemInfo._contentRect, _QLSeamlessOpeningItemInfo._sourceFrame, 
-                       _QLSeamlessOpeningItemInfo._sourceImage, _QLThumbnailLayer._contentRect, 
-                       _QLThumbnailLayer._iconMode, _QLThumbnailLayer._item, 
-                       _QLThumbnailLayer._thumbnail, _QLThumbnailLayer._thumbnailImage, 
-                       _QLThumbnailLayer._thumbnailMaxSize, _QLThumbnailLayer._thumbnailSize, 
-                       _QLTintedImageRep._imageRep, _QLTintedImageRep._rescale, 
-                       _QLTintedImageRep._tintColor, _QLTransformWindowEffect._finalTransform, 
-                       _QLTransformWindowEffect._initialTransform, _QLUIHelperObject._port, 
-                       _QLUIHelperObject._serverPort, _QLWarpingWindowEffect._pointBlock, 
-                       _QLWarpingWindowEffect._setupBlock ]
+                       _QLSeamlessOpeningItemInfo._sourceImage, _QLSpotlightDarkModeWatcher._isInDarkMode, 
+                       _QLThumbnailLayer._contentRect, _QLThumbnailLayer._iconMode, 
+                       _QLThumbnailLayer._item, _QLThumbnailLayer._thumbnail, 
+                       _QLThumbnailLayer._thumbnailImage, _QLThumbnailLayer._thumbnailMaxSize, 
+                       _QLThumbnailLayer._thumbnailSize, _QLTintedImageRep._imageRep, 
+                       _QLTintedImageRep._rescale, _QLTintedImageRep._tintColor, 
+                       _QLTransformWindowEffect._finalTransform, _QLTransformWindowEffect._initialTransform, 
+                       _QLUIHelperObject._port, _QLUIHelperObject._serverPort, 
+                       _QLWarpingWindowEffect._pointBlock, _QLWarpingWindowEffect._setupBlock ]
   - archs:           [ i386, x86_64 ]
     re-exports:      [ /System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook ]
     symbols:         [ _QLDisplayBundleDisplayStateCurrentPageKey, _QLDisplayBundleDisplayStateCurrentScrollKey, 
@@ -142,15 +142,14 @@ exports:
                        _QLSizingDeltaPositionKey, _QLSizingMinimumSizeKey, 
                        _QLSizingNaturalSizeKey, _QLSizingOnlyRatioKey, 
                        _QLSizingRatioKey, _QLSizingUserDefinedSizeKey, 
-                       _QLSwellValueForProgress, _QuickLookUIVersionNumber, 
-                       _QuickLookUIVersionString, __QLDeactivateSlowMotion, 
+                       _QLSwellValueForProgress, __QLDeactivateSlowMotion, 
                        __QLPreviewDocumentCopyDisplayBundle, __QLPreviewDocumentCopyPageAsImageFromDisplayBundle, 
                        __QLPreviewDocumentCopyPageTextFromDisplayBundle, 
                        __QLPreviewDocumentDrawPageFromDisplayBundle, __QLPreviewDocumentGetPageCountInDisplayBundle, 
                        __QLPreviewDocumentGetPageSizeInDisplayBundle, __QLPreviewDocumentIsPaginatedInDisplayBundle, 
                        __QLPreviewDocumentReleaseDisplayBundle, __QLRemotePreviewCallbackQLRemotePreviewCallbacks_subsystem, 
                        __QLSeamlessOpeningSupportForRunningApplication, 
-                       __QLThumbnailRequestSetThumbnailWithDataRepresentation, 
+                       __QLSpotlightIsInDarkMode, __QLThumbnailRequestSetThumbnailWithDataRepresentation, 
                        __QLThumbnailRequestSetThumbnailWithURLRepresentation, 
                        __QLTitleBarHeight, __Z16DebugTweakSplineR13QLCubicSplinePKc, 
                        __Z16DebugTweakSplineR32QLNaturalCubicSplineInterpolatorPKc, 
@@ -177,10 +176,11 @@ exports:
                        _QLScaleWindowEffect, _QLSeamlessDocumentAnimator, 
                        _QLSeamlessDocumentCloser, _QLSeamlessDocumentOpener, 
                        _QLSeamlessOpener, _QLSeamlessOpeningFakeCloserDelegate, 
-                       _QLSeamlessOpeningItemInfo, _QLTextLayer, _QLThumbnailLayer, 
-                       _QLThumbnailRequest, _QLTimeSlider, _QLTintedImageRep, 
-                       _QLTooltipTextFieldCell, _QLTransformWindowEffect, 
-                       _QLTransitionWindow, _QLUIHelperObject, _QLVibrantGenericView, 
-                       _QLWarpingWindowEffect, _QLWindowEffect, _QLWindowEffectsLibrary ]
+                       _QLSeamlessOpeningItemInfo, _QLSpotlightDarkModeWatcher, 
+                       _QLTextLayer, _QLThumbnailLayer, _QLThumbnailRequest, 
+                       _QLTimeSlider, _QLTintedImageRep, _QLTooltipTextFieldCell, 
+                       _QLTransformWindowEffect, _QLTransitionWindow, _QLUIHelperObject, 
+                       _QLVibrantGenericView, _QLWarpingWindowEffect, _QLWindowEffect, 
+                       _QLWindowEffectsLibrary ]
     weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
 ...

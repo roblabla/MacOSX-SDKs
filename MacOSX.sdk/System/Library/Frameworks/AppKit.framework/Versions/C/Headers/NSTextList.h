@@ -1,6 +1,6 @@
 /*
         NSTextList.h
-        Copyright (c) 2004-2014, Apple Inc.
+        Copyright (c) 2004-2015, Apple Inc.
         All rights reserved.
 
         Class to represent text lists.
@@ -8,6 +8,8 @@
 
 #import <Foundation/NSObject.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, NSTextListOptions) {
     NSTextListPrependEnclosingMarker = (1 << 0)
@@ -28,4 +30,6 @@ typedef NS_OPTIONS(NSUInteger, NSTextListOptions) {
 @property NSInteger startingItemNumber NS_AVAILABLE_MAC(10_6);
 
 @end
+
+NS_ASSUME_NONNULL_END
 

@@ -164,6 +164,7 @@ enum vtagtype	{
 #define IO_SYSCALL_DISPATCH		0x100000	/* I/O was originated from a file table syscall */
 #define IO_SWAP_DISPATCH		0x200000	/* I/O was originated from the swap layer */
 #define IO_SKIP_ENCRYPTION		0x400000	/* Skips en(de)cryption on the IO. Must be initiated from kernel */
+#define IO_EVTONLY                      0x800000        /* the i/o is being done on an fd that's marked O_EVTONLY */
 
 /*
  * Component Name: this structure describes the pathname
@@ -488,6 +489,7 @@ extern int		vttoif_tab[];
 /* VNOP_REMOVE/unlink flags */
 #define VNODE_REMOVE_NODELETEBUSY  			0x0001 /* Don't delete busy files (Carbon) */  
 #define VNODE_REMOVE_SKIP_NAMESPACE_EVENT	0x0002 /* Do not upcall to userland handlers */
+#define VNODE_REMOVE_NO_AUDIT_PATH		0x0004 /* Do not audit the path */
 
 /* VNOP_READDIR flags: */
 #define VNODE_READDIR_EXTENDED    0x0001   /* use extended directory entries */
@@ -551,6 +553,7 @@ __BEGIN_DECLS
  @return 0 for success, error code otherwise.
  */
 errno_t	vnode_create(uint32_t, uint32_t, void  *, vnode_t *);
+
 
 /*!
  @function vnode_addfsref
@@ -866,6 +869,58 @@ void	vnode_setnoreadahead(vnode_t);
  @return void.
  */
 void	vnode_clearnoreadahead(vnode_t);
+
+/*!
+ @function vnode_isfastdevicecandidate
+ @abstract Check if a vnode is a candidate to store on the fast device of a composite disk system
+ @param vp The vnode which you want to test.
+ @return Nonzero if the vnode is marked as a fast-device candidate
+ @return void.
+ */
+int	vnode_isfastdevicecandidate(vnode_t);
+
+/*!
+ @function vnode_setfastdevicecandidate
+ @abstract Mark a vnode as a candidate to store on the fast device of a composite disk system
+ @abstract If the vnode is a directory, all its children will inherit this bit.
+ @param vp The vnode which you want marked.
+ @return void.
+ */
+void	vnode_setfastdevicecandidate(vnode_t);
+
+/*!
+ @function vnode_clearfastdevicecandidate
+ @abstract Clear the status of a vnode being a candidate to store on the fast device of a composite disk system.
+ @param vp The vnode whose flag to clear.
+ @return void.
+ */
+void	vnode_clearfastdevicecandidate(vnode_t);
+
+/*!
+ @function vnode_isautocandidate
+ @abstract Check if a vnode was automatically selected to be fast-dev candidate (see vnode_setfastdevicecandidate)
+ @param vp The vnode which you want to test.
+ @return Nonzero if the vnode was automatically marked as a fast-device candidate
+ @return void.
+ */
+int	vnode_isautocandidate(vnode_t);
+
+/*!
+ @function vnode_setfastdevicecandidate
+ @abstract Mark a vnode as an automatically selected candidate for storing on the fast device of a composite disk system
+ @abstract If the vnode is a directory, all its children will inherit this bit.
+ @param vp The vnode which you want marked.
+ @return void.
+ */
+void	vnode_setautocandidate(vnode_t);
+
+/*!
+ @function vnode_clearautocandidate
+ @abstract Clear the status of a vnode being an automatic candidate (see above)
+ @param vp The vnode whose flag to clear.
+ @return void.
+ */
+void	vnode_clearautocandidate(vnode_t);
 
 /* left only for compat reasons as User code depends on this from getattrlist, for ex */
 
@@ -1282,11 +1337,35 @@ errno_t vnode_close(vnode_t, int, vfs_context_t);
  */
 int vn_getpath(struct vnode *vp, char *pathbuf, int *len);
 
+/*!
+ @function vnode_notify
+ @abstract Send a notification up to VFS.  
+ @param vp Vnode for which to provide notification.
+ @param vap Attributes for that vnode, to be passed to fsevents.
+ @discussion Filesystem determines which attributes to pass up using 
+ vfs_get_notify_attributes(&vap).  The most specific events possible should be passed,
+ e.g. VNODE_EVENT_FILE_CREATED on a directory rather than just VNODE_EVENT_WRITE, but
+ a less specific event can be passed up if more specific information is not available.
+ Will not reenter the filesystem.
+ @return 0 for success, else an error code.
+ */ 
+int 	vnode_notify(vnode_t, uint32_t, struct vnode_attr*);
+
+/*!
+ @function vfs_get_notify_attributes
+ @abstract Determine what attributes are required to send up a notification with vnode_notify().
+ @param vap Structure to initialize and activate required attributes on.
+ @discussion Will not reenter the filesystem.
+ @return 0 for success, nonzero for error (currently always succeeds).
+ */ 
+int	vfs_get_notify_attributes(struct vnode_attr *vap);
+
 /*
  * Flags for the vnode_lookup and vnode_open
  */
 #define VNODE_LOOKUP_NOFOLLOW		0x01
 #define	VNODE_LOOKUP_NOCROSSMOUNT	0x02
+#define	VNODE_LOOKUP_CROSSMOUNTNOWAIT	0x04
 /*!
  @function vnode_lookup
  @abstract Convert a path into a vnode.

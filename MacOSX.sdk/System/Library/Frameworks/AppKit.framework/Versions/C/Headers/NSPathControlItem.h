@@ -1,11 +1,13 @@
 /*
  NSPathControlItem.h
  Application Kit
- Copyright (c) 2013-2014, Apple Inc.
+ Copyright (c) 2013-2015, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSPathComponentCell;
 
@@ -25,10 +27,12 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 /* The image/icon shown for this particular component along the path. The NSPathControlItem can display both an image and title.  When drawing, your image will be scaled to fit the available area, which in 10.10 and earlier releases is 16x16 points for NSPathStyleStandard or NSPathStylePopUp, and 14x14 points for NSPathStyleNavigationBar.
  */
-@property (strong) NSImage *image;
+@property (nullable, strong) NSImage *image;
 
 /* A url for the partial path from the beginning up to this particular item.
  */
-@property (readonly) NSURL *URL;
+@property (nullable, readonly) NSURL *URL;
 
 @end
+
+NS_ASSUME_NONNULL_END

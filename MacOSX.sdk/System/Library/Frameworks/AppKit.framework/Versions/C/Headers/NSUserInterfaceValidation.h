@@ -1,7 +1,7 @@
 /*
 	NSUserInterfaceValidation.h
 	Application Kit
-	Copyright (c) 1999-2014, Apple Inc.
+	Copyright (c) 1999-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -65,8 +65,10 @@ You can extend this functionality by introducing a new set of protocols that are
 */
 
 /* Protocol implemented by validated objects */
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol NSValidatedUserInterfaceItem
-- (SEL)action;
+- (nullable SEL)action;
 - (NSInteger)tag;
 @end
 
@@ -74,3 +76,5 @@ You can extend this functionality by introducing a new set of protocols that are
 @protocol NSUserInterfaceValidations
 - (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem;
 @end
+
+NS_ASSUME_NONNULL_END

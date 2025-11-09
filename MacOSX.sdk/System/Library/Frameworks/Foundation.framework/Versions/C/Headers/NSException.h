@@ -1,5 +1,5 @@
 /*	NSException.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,7 +7,9 @@
 #import <stdarg.h>
 #import <setjmp.h>
 
-@class NSString, NSDictionary, NSArray;
+@class NSString, NSDictionary, NSArray<ObjectType>, NSNumber;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /***************	Generic Exception names		***************/
 
@@ -43,15 +45,15 @@ __attribute__((__objc_exception__))
     id			reserved;
 }
 
-+ (NSException *)exceptionWithName:(NSString *)name reason:(NSString *)reason userInfo:(NSDictionary *)userInfo;
-- (instancetype)initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo NS_DESIGNATED_INITIALIZER;
++ (NSException *)exceptionWithName:(NSString *)name reason:(nullable NSString *)reason userInfo:(nullable NSDictionary *)userInfo;
+- (instancetype)initWithName:(NSString *)aName reason:(nullable NSString *)aReason userInfo:(nullable NSDictionary *)aUserInfo NS_DESIGNATED_INITIALIZER;
 
 @property (readonly, copy) NSString *name;
-@property (readonly, copy) NSString *reason;
-@property (readonly, copy) NSDictionary *userInfo;
+@property (nullable, readonly, copy) NSString *reason;
+@property (nullable, readonly, copy) NSDictionary *userInfo;
 
-@property (readonly, copy) NSArray *callStackReturnAddresses NS_AVAILABLE(10_5, 2_0);
-@property (readonly, copy) NSArray *callStackSymbols NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSArray<NSNumber *> *callStackReturnAddresses NS_AVAILABLE(10_5, 2_0);
+@property (readonly, copy) NSArray<NSString *> *callStackSymbols NS_AVAILABLE(10_6, 4_0);
 
 - (void)raise;
 
@@ -74,12 +76,15 @@ __attribute__((__objc_exception__))
 
 typedef void NSUncaughtExceptionHandler(NSException *exception);
 
-FOUNDATION_EXPORT NSUncaughtExceptionHandler *NSGetUncaughtExceptionHandler(void);
-FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler *);
+FOUNDATION_EXPORT NSUncaughtExceptionHandler * __nullable NSGetUncaughtExceptionHandler(void);
+FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler * __nullable);
 
 
 #if __clang__
-#define __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS _Pragma("clang diagnostic push") _Pragma("clang diagnostic ignored \"-Wformat-extra-args\"")
+#define __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wformat-extra-args\"")
+
 #define __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS _Pragma("clang diagnostic pop")
 #else
 #define __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS
@@ -97,8 +102,10 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
     do {				\
 	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
 	if (!(condition)) {		\
+            NSString *__assert_file__ = [NSString stringWithUTF8String:__FILE__]; \
+            __assert_file__ = __assert_file__ ? __assert_file__ : @"<Unknown File>"; \
 	    [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
-		object:self file:[NSString stringWithUTF8String:__FILE__] \
+		object:self file:__assert_file__ \
 	    	lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
 	}				\
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
@@ -110,8 +117,12 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
     do {				\
 	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
 	if (!(condition)) {		\
-	    [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] \
-		file:[NSString stringWithUTF8String:__FILE__] \
+            NSString *__assert_fn__ = [NSString stringWithUTF8String:__PRETTY_FUNCTION__]; \
+            __assert_fn__ = __assert_fn__ ? __assert_fn__ : @"<Unknown Function>"; \
+            NSString *__assert_file__ = [NSString stringWithUTF8String:__FILE__]; \
+            __assert_file__ = __assert_file__ ? __assert_file__ : @"<Unknown File>"; \
+	    [[NSAssertionHandler currentHandler] handleFailureInFunction:__assert_fn__ \
+		file:__assert_file__ \
 	    	lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
 	}				\
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
@@ -136,7 +147,7 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 #define NSAssert3(condition, desc, arg1, arg2, arg3) NSAssert((condition), (desc), (arg1), (arg2), (arg3))
 #define NSAssert4(condition, desc, arg1, arg2, arg3, arg4) NSAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4))
 #define NSAssert5(condition, desc, arg1, arg2, arg3, arg4, arg5) NSAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4), (arg5))
-#define NSParameterAssert(condition) NSAssert((condition), @"Invalid parameter not satisfying: %s", #condition)
+#define NSParameterAssert(condition) NSAssert((condition), @"Invalid parameter not satisfying: %@", @#condition)
 #endif
 
 #if !defined(_NSCAssertBody)
@@ -145,7 +156,7 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 #define NSCAssert3(condition, desc, arg1, arg2, arg3) NSCAssert((condition), (desc), (arg1), (arg2), (arg3))
 #define NSCAssert4(condition, desc, arg1, arg2, arg3, arg4) NSCAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4))
 #define NSCAssert5(condition, desc, arg1, arg2, arg3, arg4, arg5) NSCAssert((condition), (desc), (arg1), (arg2), (arg3), (arg4), (arg5))
-#define NSCParameterAssert(condition) NSCAssert((condition), @"Invalid parameter not satisfying: %s", #condition)
+#define NSCParameterAssert(condition) NSCAssert((condition), @"Invalid parameter not satisfying: %@", @#condition)
 #endif
 
 #endif
@@ -158,7 +169,9 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
     do {						\
 	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
 	if (!(condition)) {				\
-	    [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd object:self file:[NSString stringWithUTF8String:__FILE__] \
+            NSString *__assert_file__ = [NSString stringWithUTF8String:__FILE__]; \
+            __assert_file__ = __assert_file__ ? __assert_file__ : @"<Unknown File>"; \
+	    [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd object:self file:__assert_file__ \
 	    	lineNumber:__LINE__ description:(desc), (arg1), (arg2), (arg3), (arg4), (arg5)];	\
 	}						\
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
@@ -169,7 +182,11 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
     do {						\
 	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
 	if (!(condition)) {				\
-	    [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] file:[NSString stringWithUTF8String:__FILE__] \
+            NSString *__assert_fn__ = [NSString stringWithUTF8String:__PRETTY_FUNCTION__]; \
+            __assert_fn__ = __assert_fn__ ? __assert_fn__ : @"<Unknown Function>"; \
+            NSString *__assert_file__ = [NSString stringWithUTF8String:__FILE__]; \
+            __assert_file__ = __assert_file__ ? __assert_file__ : @"<Unknown File>"; \
+	    [[NSAssertionHandler currentHandler] handleFailureInFunction:__assert_fn__ file:__assert_file__ \
 	    	lineNumber:__LINE__ description:(desc), (arg1), (arg2), (arg3), (arg4), (arg5)];	\
 	}						\
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
@@ -278,9 +295,10 @@ FOUNDATION_EXPORT NSString * const NSAssertionHandlerKey NS_AVAILABLE(10_6, 4_0)
 
 + (NSAssertionHandler *)currentHandler;
 
-- (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format,... NS_FORMAT_FUNCTION(5,6);
+- (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(nullable NSString *)format,... NS_FORMAT_FUNCTION(5,6);
 
-- (void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format,... NS_FORMAT_FUNCTION(4,5);
+- (void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(nullable NSString *)format,... NS_FORMAT_FUNCTION(4,5);
 
 @end
 
+NS_ASSUME_NONNULL_END

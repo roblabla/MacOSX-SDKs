@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIRAWFilter.h>
+#include <CoreImage/CIRAWFilter.h>

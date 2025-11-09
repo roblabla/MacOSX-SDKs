@@ -1,11 +1,13 @@
 /*
         NSOpenGLView.h
         Application Kit
-        Copyright (c) 2000-2014, Apple Inc.
+        Copyright (c) 2000-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSView.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSOpenGLContext, NSOpenGLPixelFormat;
 
@@ -20,15 +22,15 @@
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat;
 
-- (instancetype)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat*)format;
+- (nullable instancetype)initWithFrame:(NSRect)frameRect pixelFormat:(nullable NSOpenGLPixelFormat*)format;
 
-@property (strong) NSOpenGLContext *openGLContext;
+@property (nullable, strong) NSOpenGLContext *openGLContext;
 - (void)clearGLContext;
 
 - (void)update;		// moved or resized
 - (void)reshape;	// scrolled, moved or resized
 
-@property (strong) NSOpenGLPixelFormat *pixelFormat;
+@property (nullable, strong) NSOpenGLPixelFormat *pixelFormat;
 
 - (void)prepareOpenGL;
 @end
@@ -46,3 +48,14 @@ For testing purposes only, the effect of this property can be overridden globall
 @property BOOL wantsBestResolutionOpenGLSurface NS_AVAILABLE_MAC(10_7);
 
 @end
+
+@interface NSView (NSExtendedDynamicRange)
+
+/* If any view on the screen has this enabled, the NSScreen which the OpenGL surface is on may have its maximumExtendedDynamicRangeColorComponentValue increased.  When composited by the Window Server, color values rendered by this OpenGL surface will be clamped to the NSScreen’s maximumExtendedDynamicRangeColorComponentValue rather than 1.0.
+ */
+@property BOOL wantsExtendedDynamicRangeOpenGLSurface NS_AVAILABLE_MAC(10_11);
+
+@end
+
+
+NS_ASSUME_NONNULL_END

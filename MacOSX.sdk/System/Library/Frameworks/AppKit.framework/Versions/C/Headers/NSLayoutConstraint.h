@@ -1,7 +1,7 @@
 /*
 	NSLayoutConstraint.h
 	Application Kit
-	Copyright (c) 2009-2014, Apple Inc.
+	Copyright (c) 2009-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,9 +11,13 @@
 #import <AppKit/NSAnimation.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <AppKit/NSLayoutAnchor.h>
 
-@class NSArray, NSDictionary;
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSLayoutRelation) {
     NSLayoutRelationLessThanOrEqual = -1,
@@ -33,9 +37,12 @@ typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
     NSLayoutAttributeCenterX,
     NSLayoutAttributeCenterY,
     NSLayoutAttributeBaseline,
+    NSLayoutAttributeLastBaseline = NSLayoutAttributeBaseline,
+    NSLayoutAttributeFirstBaseline NS_ENUM_AVAILABLE_MAC(10_11),
     
     NSLayoutAttributeNotAnAttribute = 0
 };
+
 
 typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {        
     NSLayoutFormatAlignAllLeft = (1 << NSLayoutAttributeLeft),
@@ -47,6 +54,8 @@ typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
     NSLayoutFormatAlignAllCenterX = (1 << NSLayoutAttributeCenterX),
     NSLayoutFormatAlignAllCenterY = (1 << NSLayoutAttributeCenterY),
     NSLayoutFormatAlignAllBaseline = (1 << NSLayoutAttributeBaseline),
+    NSLayoutFormatAlignAllLastBaseline = NSLayoutFormatAlignAllBaseline,
+    NSLayoutFormatAlignAllFirstBaseline NS_ENUM_AVAILABLE_MAC(10_11) = (1 << NSLayoutAttributeFirstBaseline),
     
     NSLayoutFormatAlignmentMask = 0xFFFF,
     
@@ -95,7 +104,6 @@ static const NSLayoutPriority NSLayoutPriorityDragThatCannotResizeWindow NS_AVAI
 static const NSLayoutPriority NSLayoutPriorityDefaultLow NS_AVAILABLE_MAC(10_7) = 250; // this is the priority level at which a button hugs its contents horizontally.
 static const NSLayoutPriority NSLayoutPriorityFittingSizeCompression NS_AVAILABLE_MAC(10_7) = 50; // When you issue -[NSView fittingSize], the smallest size that is large enough for the view's contents is computed.  This is the priority level with which the view wants to be as small as possible in that computation.  It's quite low.  It is generally not appropriate to make a constraint at exactly this priority.  You want to be higher or lower.
 
-
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSLayoutConstraint : NSObject <NSAnimatablePropertyContainer>
 {
@@ -121,19 +129,19 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* Create an array of constraints using an ASCII art-like visual format string.
  */
-+ (NSArray *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(NSDictionary *)metrics views:(NSDictionary *)views;
++ (NSArray<NSLayoutConstraint *> *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(nullable NSDictionary<NSString *, NSNumber *> *)metrics views:(NSDictionary<NSString *, id> *)views;
 
 /* This macro is a helper for making view dictionaries for +constraintsWithVisualFormat:options:metrics:views:.  
  NSDictionaryOfVariableBindings(v1, v2, v3) is equivalent to [NSDictionary dictionaryWithObjectsAndKeys:v1, @"v1", v2, @"v2", v3, @"v3", nil];
  */
 #define NSDictionaryOfVariableBindings(...) _NSDictionaryOfVariableBindings(@"" # __VA_ARGS__, __VA_ARGS__, nil)
-APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, id firstValue, ...); // not for direct use
+APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSString * commaSeparatedKeysString, id firstValue, ...); // not for direct use
 
 
 /* Create constraints explicitly.  Constraints are of the form "view1.attr1 = view2.attr2 * multiplier + constant" 
  If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.
  */
-+ (instancetype)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
++ (instancetype)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(nullable id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
 
 /* If a constraint's priority level is less than NSLayoutPriorityRequired, then it is optional.  Higher priority constraints are met before lower priority constraints.
  Constraint satisfaction is not all or nothing.  If a constraint 'a == b' is optional, that means we will attempt to minimize 'abs(a-b)'.
@@ -152,7 +160,7 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 @property (readonly, assign) id firstItem;
 @property (readonly) NSLayoutAttribute firstAttribute;
 @property (readonly) NSLayoutRelation relation;
-@property (readonly, assign) id secondItem;
+@property (nullable, readonly, assign) id secondItem;
 @property (readonly) NSLayoutAttribute secondAttribute;
 @property (readonly) CGFloat multiplier;
 
@@ -164,10 +172,10 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 @property (getter=isActive) BOOL active NS_AVAILABLE(10_10, 8_0);
 
 /* Convenience method that activates each constraint in the contained array, in the same manner as setting active=YES. This is often more efficient than activating each constraint individually. */
-+ (void)activateConstraints:(NSArray *)constraints NS_AVAILABLE(10_10, 8_0);
++ (void)activateConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE(10_10, 8_0);
 
 /* Convenience method that deactivates each constraint in the contained array, in the same manner as setting active=NO. This is often more efficient than deactivating each constraint individually. */
-+ (void)deactivateConstraints:(NSArray *)constraints NS_AVAILABLE(10_10, 8_0);
++ (void)deactivateConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -175,9 +183,13 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 
 /* Name a constraint by setting its identifier. The identifier is output in the constraint's description. Identifiers starting with NS are reserved by the system.
  */
-@property (copy) NSString *identifier;
+@property (nullable, copy) NSString *identifier;
 
 @end
+
+
+
+
 
 #pragma mark Installing Constraints
 
@@ -186,12 +198,32 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
  */
 @interface NSView (NSConstraintBasedLayoutInstallingConstraints)
 
-@property (readonly, copy) NSArray *constraints NS_AVAILABLE_MAC(10_7);	// This property is deprecated and should be avoided.  Instead, create IB outlets or otherwise maintain references to constraints you need to reference directly.
+/* 
+ These properties aid concise creation of simple constraints.  Views can be constrained using simple code like the following:
+ [view.topAnchor constraintEqualToAnchor:otherView.bottomAnchor constant:10].active=YES;
+ 
+ See NSLayoutAnchor.h for more details.
+ */
+@property (readonly, strong) NSLayoutXAxisAnchor *leadingAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutXAxisAnchor *trailingAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutXAxisAnchor *leftAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutXAxisAnchor *rightAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutYAxisAnchor *topAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutYAxisAnchor *bottomAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutDimension *widthAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutDimension *heightAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutXAxisAnchor *centerXAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutYAxisAnchor *centerYAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutYAxisAnchor *firstBaselineAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutYAxisAnchor *lastBaselineAnchor NS_AVAILABLE(10_11, 9_0);
+
+
+@property (readonly, copy) NSArray<NSLayoutConstraint *> *constraints NS_AVAILABLE_MAC(10_7);	// This property is deprecated and should be avoided.  Instead, create IB outlets or otherwise maintain references to constraints you need to reference directly.
 
 - (void)addConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead, set NSLayoutConstraint's active property to YES.
-- (void)addConstraints:(NSArray *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint activateConstraints:].
+- (void)addConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint activateConstraints:].
 - (void)removeConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead set NSLayoutConstraint's active property to NO.
-- (void)removeConstraints:(NSArray *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint deactivateConstraints:].
+- (void)removeConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint deactivateConstraints:].
 
 @end
 
@@ -255,9 +287,15 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
  */
 @property (readonly) NSEdgeInsets alignmentRectInsets NS_AVAILABLE_MAC(10_7);
 
-/* override this to provide the distance between NSLayoutAttributeBottom and NSLayoutAttributeBaseline.  NSView's implementation returns zero.
+/* override this to provide the distance between NSLayoutAttributeTop and NSLayoutAttributeFirstBaseline.  NSView's implementation returns zero.
  */
-@property (readonly) CGFloat baselineOffsetFromBottom NS_AVAILABLE_MAC(10_7);
+@property (readonly) CGFloat firstBaselineOffsetFromTop NS_AVAILABLE_MAC(10_11);
+
+/* override this to provide the distance between NSLayoutAttributeBottom and NSLayoutAttributeLastBaseline (or NSLayoutAttributeBaseline).  NSView's implementation returns zero.
+ */
+@property (readonly) CGFloat lastBaselineOffsetFromBottom NS_AVAILABLE_MAC(10_11);
+
+@property (readonly) CGFloat baselineOffsetFromBottom NS_AVAILABLE_MAC(10_7); // Deprecated. Override lastBaselineOffsetFromBottom instead.
 
 
 /* Override this method to tell the layout system that there is something it doesn't natively understand in this view, and this is how large it intrinsically is.  A typical example would be a single line text field.  The layout system does not understand text - it must just be told that there's something in the view, and that that something will take a certain amount of space if not clipped.  
@@ -273,9 +311,11 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
  
  The default 'strong' and 'weak' priorities referred to above are NSLayoutPriorityDefaultHigh and NSLayoutPriorityDefaultLow.  
  
- Note that not all views have an intrinsicContentSize.  A horizontal slider has an intrinsic height, but no intrinsic width - the slider artwork has no intrinsic best width.  A horizontal NSSlider returns (NSViewNoInstrinsicMetric, <slider height>) for intrinsicContentSize.  An NSBox returns (NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric).  The _intrinsic_ content size is concerned only with data that is in the view itself, not in other views.
+ Note that not all views have an intrinsicContentSize.  A horizontal slider has an intrinsic height, but no intrinsic width - the slider artwork has no intrinsic best width.  A horizontal NSSlider returns (NSViewNoIntrinsicMetric, <slider height>) for intrinsicContentSize.  An NSBox returns (NSViewNoIntrinsicMetric, NSViewNoIntrinsicMetric).  The _intrinsic_ content size is concerned only with data that is in the view itself, not in other views.
  */
-APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // -1
+APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // Deprecated. Use NSViewNoIntrinsicMetric.
+APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric NS_AVAILABLE_MAC(10_11); // -1
+
 @property (readonly) NSSize intrinsicContentSize NS_AVAILABLE_MAC(10_7);
 - (void)invalidateIntrinsicContentSize NS_AVAILABLE_MAC(10_7); // call this when something changes that affects the intrinsicContentSize.  Otherwise AppKit won't notice that it changed.  
 
@@ -319,9 +359,9 @@ APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // -1
 @interface NSView (NSConstraintBasedLayoutDebugging)
 
 /* This returns a list of all the constraints that are affecting the current location of the receiver.  The constraints do not necessarily involve the receiver, they may affect the frame indirectly.
- Pass YES for the constraints affecting NSMinX([self frame]) and NSWidth([self frame]), and NO for the constraints affecting NSMinY([self frame]) and NSHeight([self frame]).
+ Pass NSLayoutConstraintOrientationHorizontal for the constraints affecting NSMinX([self frame]) and NSWidth([self frame]), or NSLayoutConstraintOrientationVertical for the constraints affecting NSMinY([self frame]) and NSHeight([self frame]).
  */
-- (NSArray *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
+- (NSArray<NSLayoutConstraint *> *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
 
 /* If there aren't enough constraints in the system to uniquely determine layout, we say the layout is ambiguous.  For example, if the only constraint in the system was x = y + 100, then there are lots of different possible values for x and y.  This situation is not automatically detected by AppKit, due to performance considerations and details of the algorithm used for layout.  
  The symptom of ambiguity is that views sometimes jump from place to place, or possibly are just in the wrong place.
@@ -335,5 +375,7 @@ APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // -1
 @interface NSWindow (NSConstraintBasedLayoutDebugging)
 /* This draws a visual representation of the given constraints in the receiver window.  It's a nice way to understand exactly what a collection of constraints specifies.  
  */
-- (void)visualizeConstraints:(NSArray *)constraints NS_AVAILABLE_MAC(10_7);
+- (void)visualizeConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE_MAC(10_7);
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,14 +1,25 @@
 /*
     NSAtomicStore.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/Foundation.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSSet.h>
+#import <Foundation/NSString.h>
+#import <Foundation/NSError.h>
+#import <Foundation/NSURL.h>
 #import <CoreData/NSPersistentStore.h>
 #import <CoreData/NSAtomicStoreCacheNode.h>
 #import <CoreData/NSManagedObject.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSPersistentStoreCoordinator;
+@class NSEntityDescription;
+@class NSManagedObjectID;
 
 NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSAtomicStore : NSPersistentStore {
@@ -22,7 +33,7 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 }
 
 // API method that may be overriden by subclasses for custom initialization
-- (instancetype)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator configurationName:(NSString *)configurationName URL:(NSURL *)url options:(NSDictionary *)options;
+- (instancetype)initWithPersistentStoreCoordinator:(nullable NSPersistentStoreCoordinator *)coordinator configurationName:(nullable NSString *)configurationName URL:(NSURL *)url options:(nullable NSDictionary *)options;
 
 // API method that must be overriden by subclasses
 - (BOOL)load:(NSError **)error;
@@ -37,16 +48,16 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 - (void)updateCacheNode:(NSAtomicStoreCacheNode *)node fromManagedObject:(NSManagedObject *)managedObject;
 
 // Utility method with implementation provided by NSAtomicStore
-- (NSSet *)cacheNodes;
+- (NSSet<__kindof NSAtomicStoreCacheNode *> *)cacheNodes;
 
 // Utility method with implementation provided by NSAtomicStore
-- (void)addCacheNodes:(NSSet *)cacheNodes;
+- (void)addCacheNodes:(NSSet<__kindof NSAtomicStoreCacheNode *> *)cacheNodes;
 
 // Called before cache nodes are removed
-- (void)willRemoveCacheNodes:(NSSet *)cacheNodes;
+- (void)willRemoveCacheNodes:(NSSet<__kindof NSAtomicStoreCacheNode *> *)cacheNodes;
 
 // Utility method with implementation provided by NSAtomicStore
-- (NSAtomicStoreCacheNode *)cacheNodeForObjectID:(NSManagedObjectID *)objectID;
+- (nullable NSAtomicStoreCacheNode *)cacheNodeForObjectID:(NSManagedObjectID *)objectID;
 
 // Utility method with implementation provided by NSAtomicStore
 - (NSManagedObjectID *)objectIDForEntity:(NSEntityDescription *)entity referenceObject:(id)data;
@@ -61,3 +72,5 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 - (id)referenceObjectForObjectID:(NSManagedObjectID *)objectID;
 
 @end
+
+NS_ASSUME_NONNULL_END

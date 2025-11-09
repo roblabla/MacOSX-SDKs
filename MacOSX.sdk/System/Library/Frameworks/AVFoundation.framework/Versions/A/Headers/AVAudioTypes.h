@@ -2,7 +2,7 @@
 	File:		AVAudioTypes.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #ifndef __AVAudioTypes_h__
@@ -27,6 +27,17 @@ typedef int64_t		AVAudioFramePosition;
 		TODO: Remove rationales.
 */
 typedef uint32_t	AVAudioFrameCount;
+
+/*!	@typedef AVAudioPacketCount
+	@abstract A number of packets of compressed audio data.
+	
+	@discussion
+		Rationale: making this a potentially larger-than-32-bit type like NSUInteger would open the
+		door to a large set of runtime failures due to underlying implementations' use of UInt32.
+		
+		TODO: Remove rationales.
+*/
+typedef uint32_t	AVAudioPacketCount;
 
 /*!	@typedef AVAudioChannelCount
 	@abstract A number of audio channels.
@@ -60,8 +71,8 @@ typedef NSUInteger AVAudioNodeBus;
 /*!	@struct AVAudio3DPoint
     @abstract Struct representing a point in 3D space
     @discussion
-        This struct is used by classes dealing with 3D audio such as @link AVAudioMixing @/link
-        and @link AVAudioEnvironmentNode @/link and represents a point in 3D space.
+        This struct is used by classes dealing with 3D audio such as `AVAudioMixing`
+        and `AVAudioEnvironmentNode` and represents a point in 3D space.
 */
 struct AVAudio3DPoint {
     float x;

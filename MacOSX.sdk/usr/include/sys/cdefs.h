@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -82,6 +82,26 @@
 #endif
 
 /*
+ * Compatibility with compilers and environments that don't support compiler
+ * feature checking function-like macros.
+ */
+#ifndef __has_builtin
+#define __has_builtin(x) 0
+#endif
+#ifndef __has_include
+#define __has_include(x) 0
+#endif
+#ifndef __has_feature
+#define __has_feature(x) 0
+#endif
+#ifndef __has_attribute
+#define __has_attribute(x) 0
+#endif
+#ifndef __has_extension
+#define __has_extension(x) 0
+#endif
+
+/*
  * The __CONCAT macro is used to concatenate parts of symbol names, e.g.
  * with "#define OLD(foo) __CONCAT(old,foo)", OLD(foo) produces oldfoo.
  * The __CONCAT macro is a bit tricky -- make sure you don't put spaces
@@ -155,26 +175,17 @@
  */
 #define __deprecated	__attribute__((deprecated))
 
-#ifdef __has_extension
-    #if __has_extension(attribute_deprecated_with_message)
-        #define __deprecated_msg(_msg) __attribute__((deprecated(_msg)))
-    #else
-        #define __deprecated_msg(_msg) __attribute__((deprecated))
-    #endif
-#elif defined(__GNUC__) && ((__GNUC__ >= 5) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 5)))
-    #define __deprecated_msg(_msg) __attribute__((deprecated(_msg)))
+#if __has_extension(attribute_deprecated_with_message) || \
+		(defined(__GNUC__) && ((__GNUC__ >= 5) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 5))))
+	#define __deprecated_msg(_msg) __attribute__((deprecated(_msg)))
 #else
-    #define __deprecated_msg(_msg) __attribute__((deprecated))
+	#define __deprecated_msg(_msg) __attribute__((deprecated))
 #endif
 
-#ifdef __has_extension
-    #if __has_extension(enumerator_attributes)
-        #define __deprecated_enum_msg(_msg) __deprecated_msg(_msg)
-    #else
-        #define __deprecated_enum_msg(_msg)
-    #endif
+#if __has_extension(enumerator_attributes)
+	#define __deprecated_enum_msg(_msg) __deprecated_msg(_msg)
 #else
-    #define __deprecated_enum_msg(_msg)
+	#define __deprecated_enum_msg(_msg)
 #endif
 
 /* __unavailable causes the compiler to error out when encountering
@@ -196,6 +207,22 @@
 #define __restrict
 #else
 #define __restrict	restrict
+#endif
+
+/* Compatibility with compilers and environments that don't support the
+ * nullability feature.
+ */
+
+#if !__has_feature(nullability)
+#ifndef __nullable
+#define __nullable
+#endif
+#ifndef __nonnull
+#define __nonnull
+#endif
+#ifndef __null_unspecified
+#define __null_unspecified
+#endif
 #endif
 
 /* Declaring inline functions within headers is error-prone due to differences
@@ -510,7 +537,7 @@
 #elif defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 #define __DARWIN_ALIAS_STARTING(_mac, _iphone, x)   __DARWIN_ALIAS_STARTING_MAC_##_mac(x)
 #else
-#define __DARWIN_ALIAS_STARTING(_mac, _iphone, x)
+#define __DARWIN_ALIAS_STARTING(_mac, _iphone, x)   x
 #endif
 
 
@@ -679,5 +706,6 @@
 #else
 #error Unsupported architecture
 #endif
+
 
 #endif /* !_CDEFS_H_ */

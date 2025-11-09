@@ -5,6 +5,10 @@
 #ifndef CGDATAPROVIDER_H_
 #define CGDATAPROVIDER_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 typedef struct CGDataProvider *CGDataProviderRef;
 
 #include <CoreGraphics/CGBase.h>
@@ -13,27 +17,30 @@ typedef struct CGDataProvider *CGDataProviderRef;
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
+CF_ASSUME_NONNULL_BEGIN
+
 /* This callback is called to copy `count' bytes from the sequential data
    stream to `buffer'. */
 
-typedef size_t (*CGDataProviderGetBytesCallback)(void *info, void *buffer,
-  size_t count);
+typedef size_t (*CGDataProviderGetBytesCallback)(void * __nullable info,
+    void *  buffer, size_t count);
 
 /* This callback is called to skip `count' bytes forward in the sequential
    data stream. It should return the number of bytes that were actually
    skipped. */
 
-typedef off_t (*CGDataProviderSkipForwardCallback)(void *info, off_t count);
+typedef off_t (*CGDataProviderSkipForwardCallback)(void * __nullable info,
+    off_t count);
 
 /* This callback is called to rewind to the beginning of sequential data
    stream. */
 
-typedef void (*CGDataProviderRewindCallback)(void *info);
+typedef void (*CGDataProviderRewindCallback)(void * __nullable info);
 
 /* This callback is called to release the `info' pointer when the data
    provider is freed. */
 
-typedef void (*CGDataProviderReleaseInfoCallback)(void *info);
+typedef void (*CGDataProviderReleaseInfoCallback)(void * __nullable info);
 
 /* Callbacks for sequentially accessing data.
    `version' is the version of this structure. It should be set to 0.
@@ -48,30 +55,31 @@ typedef void (*CGDataProviderReleaseInfoCallback)(void *info);
      the provider is freed. */
 
 struct CGDataProviderSequentialCallbacks {
-  unsigned int version;
-  CGDataProviderGetBytesCallback getBytes;
-  CGDataProviderSkipForwardCallback skipForward;
-  CGDataProviderRewindCallback rewind;
-  CGDataProviderReleaseInfoCallback releaseInfo;
+    unsigned int version;
+    CGDataProviderGetBytesCallback __nullable getBytes;
+    CGDataProviderSkipForwardCallback __nullable skipForward;
+    CGDataProviderRewindCallback __nullable rewind;
+    CGDataProviderReleaseInfoCallback __nullable releaseInfo;
 };
 typedef struct CGDataProviderSequentialCallbacks
-  CGDataProviderSequentialCallbacks;
+    CGDataProviderSequentialCallbacks;
 
-/* This callback is called to get a pointer to the entire block of data. */
+/*  This callback is called to get a pointer to the entire block of data. */
 
-typedef const void *(*CGDataProviderGetBytePointerCallback)(void *info);
+typedef const void * __nullable(*CGDataProviderGetBytePointerCallback)(
+    void * __nullable info);
 
 /* This callback is called to release the pointer to entire block of
    data. */
 
-typedef void (*CGDataProviderReleaseBytePointerCallback)(void *info,
-  const void *pointer);
+typedef void (*CGDataProviderReleaseBytePointerCallback)(
+    void * __nullable info, const void *  pointer);
 
 /* This callback is called to copy `count' bytes at byte offset `position'
    into `buffer'. */
 
-typedef size_t (*CGDataProviderGetBytesAtPositionCallback)(void *info,
-  void *buffer, off_t position, size_t count);
+typedef size_t (*CGDataProviderGetBytesAtPositionCallback)(
+    void * __nullable info, void *  buffer, off_t pos, size_t cnt);
 
 /* Callbacks for directly accessing data.
    `version' is the version of this structure. It should be set to 0.
@@ -89,81 +97,90 @@ typedef size_t (*CGDataProviderGetBytesAtPositionCallback)(void *info,
    non-NULL. */
 
 struct CGDataProviderDirectCallbacks {
-  unsigned int version;
-  CGDataProviderGetBytePointerCallback getBytePointer;
-  CGDataProviderReleaseBytePointerCallback releaseBytePointer;
-  CGDataProviderGetBytesAtPositionCallback getBytesAtPosition;
-  CGDataProviderReleaseInfoCallback releaseInfo;
+    unsigned int version;
+    CGDataProviderGetBytePointerCallback __nullable getBytePointer;
+    CGDataProviderReleaseBytePointerCallback __nullable releaseBytePointer;
+    CGDataProviderGetBytesAtPositionCallback __nullable getBytesAtPosition;
+    CGDataProviderReleaseInfoCallback __nullable releaseInfo;
 };
 typedef struct CGDataProviderDirectCallbacks CGDataProviderDirectCallbacks;
 
 /* Return the CFTypeID for CGDataProviderRefs. */
 
 CG_EXTERN CFTypeID CGDataProviderGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Create a sequential-access data provider using `callbacks' to provide the
    data. `info' is passed to each of the callback functions. */
 
-CG_EXTERN CGDataProviderRef CGDataProviderCreateSequential(void *info,
-  const CGDataProviderSequentialCallbacks *callbacks)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateSequential(
+    void * __nullable info,
+    const CGDataProviderSequentialCallbacks * __nullable callbacks)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Create a direct-access data provider using `callbacks' to supply `size'
    bytes of data. `info' is passed to each of the callback functions.
    The underlying data must not change for the life of the data provider. */
 
-CG_EXTERN CGDataProviderRef CGDataProviderCreateDirect(void *info, off_t size,
-  const CGDataProviderDirectCallbacks *callbacks)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateDirect(
+    void * __nullable info, off_t size,
+    const CGDataProviderDirectCallbacks * __nullable callbacks)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* The callback used by `CGDataProviderCreateWithData'. */
 
-typedef void (*CGDataProviderReleaseDataCallback)(void *info, const void *data,
-  size_t size);
+typedef void (*CGDataProviderReleaseDataCallback)(void * __nullable info,
+    const void *  data, size_t size);
 
 /* Create a direct-access data provider using `data', an array of `size'
    bytes. `releaseData' is called when the data provider is freed, and is
    passed `info' as its first argument. */
 
-CG_EXTERN CGDataProviderRef CGDataProviderCreateWithData(void *info,
-  const void *data, size_t size, CGDataProviderReleaseDataCallback releaseData)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithData(
+    void * __nullable info, const void * __nullable data, size_t size,
+    CGDataProviderReleaseDataCallback __nullable releaseData)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a direct-access data provider which reads from `data'. */
 
-CG_EXTERN CGDataProviderRef CGDataProviderCreateWithCFData(CFDataRef data)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithCFData(
+    CFDataRef __nullable data)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create a data provider reading from `url'. */
 
-CG_EXTERN CGDataProviderRef CGDataProviderCreateWithURL(CFURLRef url)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithURL(
+    CFURLRef __nullable url)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a data provider reading from `filename'. */
 
-CG_EXTERN CGDataProviderRef
-  CGDataProviderCreateWithFilename(const char *filename)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithFilename(
+    const char * __nullable filename)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(provider)', but doesn't crash (as CFRetain does)
    if `provider' is NULL. */
 
-CG_EXTERN CGDataProviderRef CGDataProviderRetain(CGDataProviderRef provider)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN CGDataProviderRef __nullable CGDataProviderRetain(
+    CGDataProviderRef __nullable provider)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(provider)', but doesn't crash (as CFRelease
    does) if `provider' is NULL. */
 
-CG_EXTERN void CGDataProviderRelease(CGDataProviderRef provider)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN void CGDataProviderRelease(CGDataProviderRef __nullable provider)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Return a copy of the data specified by provider. Returns NULL if a
    complete copy of the data can't be obtained (for example, if the
    underlying data is too large to fit in memory). */
 
-CG_EXTERN CFDataRef CGDataProviderCopyData(CGDataProviderRef provider)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+CG_EXTERN CFDataRef __nullable CGDataProviderCopyData(
+    CGDataProviderRef __nullable provider)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

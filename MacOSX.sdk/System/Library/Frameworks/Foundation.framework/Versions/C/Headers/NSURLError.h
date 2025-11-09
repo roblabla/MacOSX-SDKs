@@ -1,23 +1,28 @@
 /*	
     NSURLError.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.
     
     Public header file.
 */
-
-// Retrieve kCFURLError* values used in the NSURLError* assignments
-#if TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32
+#if TARGET_OS_IPHONE
+#if __has_include(<CFNetwork/CFNetwork.h>)
+#import <CFNetwork/CFNetwork.h>
+#endif
+#elif TARGET_OS_WIN32
 #import <CFNetwork/CFNetwork.h>
 #else
 #import <CoreServices/CoreServices.h>
 #endif
+
 #import <Foundation/NSObjCRuntime.h>
 
 @class NSString;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
     @discussion Constants used by NSError to differentiate between "domains" of error codes, serving as a discriminator for error codes that originate from different subsystems or sources.
-    @constant WebFoundationErrorDomain Indicates a WebFoundation error.
+    @constant NSURLErrorDomain Indicates an NSURL error.
 */
 FOUNDATION_EXPORT NSString * const NSURLErrorDomain;
 
@@ -59,7 +64,7 @@ FOUNDATION_EXPORT NSString * const NSURLErrorBackgroundTaskCancelledReasonKey NS
     @abstract Constants used by NSError to indicate why a background NSURLSessionTask was cancelled.
  */
 
-enum
+NS_ENUM(NSInteger)
 {
     NSURLErrorCancelledReasonUserForceQuitApplication =    0,
     NSURLErrorCancelledReasonBackgroundUpdatesDisabled =   1,
@@ -69,63 +74,65 @@ enum
 
 /*!
     @enum NSURL-related Error Codes
-    @abstract Constants used by NSError to indicate errors in the WebFoundation domain
-    @discussion Documentation on each constant forthcoming.
+    @abstract Constants used by NSError to indicate errors in the NSURL domain
 */
-enum
+NS_ENUM(NSInteger)
 {
     NSURLErrorUnknown = 			-1,
-    NSURLErrorCancelled = 			kCFURLErrorCancelled,
-    NSURLErrorBadURL = 				kCFURLErrorBadURL,
-    NSURLErrorTimedOut = 			kCFURLErrorTimedOut,
-    NSURLErrorUnsupportedURL = 			kCFURLErrorUnsupportedURL,
-    NSURLErrorCannotFindHost = 			kCFURLErrorCannotFindHost,
-    NSURLErrorCannotConnectToHost = 		kCFURLErrorCannotConnectToHost,
-    NSURLErrorNetworkConnectionLost = 		kCFURLErrorNetworkConnectionLost,
-    NSURLErrorDNSLookupFailed = 		kCFURLErrorDNSLookupFailed,
-    NSURLErrorHTTPTooManyRedirects = 		kCFURLErrorHTTPTooManyRedirects,
-    NSURLErrorResourceUnavailable = 		kCFURLErrorResourceUnavailable,
-    NSURLErrorNotConnectedToInternet = 		kCFURLErrorNotConnectedToInternet,
-    NSURLErrorRedirectToNonExistentLocation = 	kCFURLErrorRedirectToNonExistentLocation,
-    NSURLErrorBadServerResponse = 		kCFURLErrorBadServerResponse,
-    NSURLErrorUserCancelledAuthentication = 	kCFURLErrorUserCancelledAuthentication,
-    NSURLErrorUserAuthenticationRequired = 	kCFURLErrorUserAuthenticationRequired,
-    NSURLErrorZeroByteResource = 		kCFURLErrorZeroByteResource,
-    NSURLErrorCannotDecodeRawData =             kCFURLErrorCannotDecodeRawData,
-    NSURLErrorCannotDecodeContentData =         kCFURLErrorCannotDecodeContentData,
-    NSURLErrorCannotParseResponse =             kCFURLErrorCannotParseResponse,
-    NSURLErrorFileDoesNotExist = 		kCFURLErrorFileDoesNotExist,
-    NSURLErrorFileIsDirectory = 		kCFURLErrorFileIsDirectory,
-    NSURLErrorNoPermissionsToReadFile = 	kCFURLErrorNoPermissionsToReadFile,
-    NSURLErrorDataLengthExceedsMaximum NS_ENUM_AVAILABLE(10_5, 2_0) =	kCFURLErrorDataLengthExceedsMaximum,
+    NSURLErrorCancelled = 			-999,
+    NSURLErrorBadURL = 				-1000,
+    NSURLErrorTimedOut = 			-1001,
+    NSURLErrorUnsupportedURL = 			-1002,
+    NSURLErrorCannotFindHost = 			-1003,
+    NSURLErrorCannotConnectToHost = 		-1004,
+    NSURLErrorNetworkConnectionLost = 		-1005,
+    NSURLErrorDNSLookupFailed = 		-1006,
+    NSURLErrorHTTPTooManyRedirects = 		-1007,
+    NSURLErrorResourceUnavailable = 		-1008,
+    NSURLErrorNotConnectedToInternet = 		-1009,
+    NSURLErrorRedirectToNonExistentLocation = 	-1010,
+    NSURLErrorBadServerResponse = 		-1011,
+    NSURLErrorUserCancelledAuthentication = 	-1012,
+    NSURLErrorUserAuthenticationRequired = 	-1013,
+    NSURLErrorZeroByteResource = 		-1014,
+    NSURLErrorCannotDecodeRawData =             -1015,
+    NSURLErrorCannotDecodeContentData =         -1016,
+    NSURLErrorCannotParseResponse =             -1017,
+    NSURLErrorAppTransportSecurityRequiresSecureConnection NS_ENUM_AVAILABLE(10_11, 9_0) = -1022,
+    NSURLErrorFileDoesNotExist = 		-1100,
+    NSURLErrorFileIsDirectory = 		-1101,
+    NSURLErrorNoPermissionsToReadFile = 	-1102,
+    NSURLErrorDataLengthExceedsMaximum NS_ENUM_AVAILABLE(10_5, 2_0) =	-1103,
     
     // SSL errors
-    NSURLErrorSecureConnectionFailed = 		kCFURLErrorSecureConnectionFailed,
-    NSURLErrorServerCertificateHasBadDate = 	kCFURLErrorServerCertificateHasBadDate,
-    NSURLErrorServerCertificateUntrusted = 	kCFURLErrorServerCertificateUntrusted,
-    NSURLErrorServerCertificateHasUnknownRoot = kCFURLErrorServerCertificateHasUnknownRoot,
-    NSURLErrorServerCertificateNotYetValid = 	kCFURLErrorServerCertificateNotYetValid,
-    NSURLErrorClientCertificateRejected = 	kCFURLErrorClientCertificateRejected,
-    NSURLErrorClientCertificateRequired =	kCFURLErrorClientCertificateRequired,
-    NSURLErrorCannotLoadFromNetwork = 		kCFURLErrorCannotLoadFromNetwork,
+    NSURLErrorSecureConnectionFailed = 		-1200,
+    NSURLErrorServerCertificateHasBadDate = 	-1201,
+    NSURLErrorServerCertificateUntrusted = 	-1202,
+    NSURLErrorServerCertificateHasUnknownRoot = -1203,
+    NSURLErrorServerCertificateNotYetValid = 	-1204,
+    NSURLErrorClientCertificateRejected = 	-1205,
+    NSURLErrorClientCertificateRequired =	-1206,
+    NSURLErrorCannotLoadFromNetwork = 		-2000,
     
     // Download and file I/O errors
-    NSURLErrorCannotCreateFile = 		kCFURLErrorCannotCreateFile,
-    NSURLErrorCannotOpenFile = 			kCFURLErrorCannotOpenFile,
-    NSURLErrorCannotCloseFile = 		kCFURLErrorCannotCloseFile,
-    NSURLErrorCannotWriteToFile = 		kCFURLErrorCannotWriteToFile,
-    NSURLErrorCannotRemoveFile = 		kCFURLErrorCannotRemoveFile,
-    NSURLErrorCannotMoveFile = 			kCFURLErrorCannotMoveFile,
-    NSURLErrorDownloadDecodingFailedMidStream = kCFURLErrorDownloadDecodingFailedMidStream,
-    NSURLErrorDownloadDecodingFailedToComplete =kCFURLErrorDownloadDecodingFailedToComplete,
+    NSURLErrorCannotCreateFile = 		-3000,
+    NSURLErrorCannotOpenFile = 			-3001,
+    NSURLErrorCannotCloseFile = 		-3002,
+    NSURLErrorCannotWriteToFile = 		-3003,
+    NSURLErrorCannotRemoveFile = 		-3004,
+    NSURLErrorCannotMoveFile = 			-3005,
+    NSURLErrorDownloadDecodingFailedMidStream = -3006,
+    NSURLErrorDownloadDecodingFailedToComplete =-3007,
 
-    NSURLErrorInternationalRoamingOff NS_ENUM_AVAILABLE(10_7, 3_0) =         kCFURLErrorInternationalRoamingOff,
-    NSURLErrorCallIsActive NS_ENUM_AVAILABLE(10_7, 3_0) =                    kCFURLErrorCallIsActive,
-    NSURLErrorDataNotAllowed NS_ENUM_AVAILABLE(10_7, 3_0) =                  kCFURLErrorDataNotAllowed,
-    NSURLErrorRequestBodyStreamExhausted NS_ENUM_AVAILABLE(10_7, 3_0) =      kCFURLErrorRequestBodyStreamExhausted,
+    NSURLErrorInternationalRoamingOff NS_ENUM_AVAILABLE(10_7, 3_0) =         -1018,
+    NSURLErrorCallIsActive NS_ENUM_AVAILABLE(10_7, 3_0) =                    -1019,
+    NSURLErrorDataNotAllowed NS_ENUM_AVAILABLE(10_7, 3_0) =                  -1020,
+    NSURLErrorRequestBodyStreamExhausted NS_ENUM_AVAILABLE(10_7, 3_0) =      -1021,
     
     NSURLErrorBackgroundSessionRequiresSharedContainer NS_ENUM_AVAILABLE(10_10, 8_0) = -995,
     NSURLErrorBackgroundSessionInUseByAnotherProcess NS_ENUM_AVAILABLE(10_10, 8_0) = -996,
     NSURLErrorBackgroundSessionWasDisconnected NS_ENUM_AVAILABLE(10_10, 8_0)= -997,
 };
+
+NS_ASSUME_NONNULL_END
 

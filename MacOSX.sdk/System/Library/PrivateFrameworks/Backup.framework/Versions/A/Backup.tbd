@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup
-current-version: 932.5.27
+current-version: 960.0.2
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _BUAboutToDeleteSnapshots, _BUActivatedSnapshot, 
@@ -17,22 +17,22 @@ exports:
                        _BURegisterSetOKToProcessSnapshotImages, _BURegisterShowChangedItemsOnlyToggled, 
                        _BURegisterStartTimeMachineFromDock, _BURegisterStartVersions, 
                        _BURegisterTimeMachineDismissed, _BURegisterTimeMachineRestore, 
-                       _BURelinquishTimeMachineAccess, _BURunAllTests, 
-                       _BUStartTimeMachine, _BUTimeMachineAction, _BUTimeMachineCopyMappedBackupPath, 
-                       _BUTimeMachineSetRestoreAllowed, _BUUpdateGenericSnapshotImage, 
-                       _BUUpdateSnapshotImage, __BUActivateSnapshot, __BUDeactivateSnapshot, 
-                       __BUGetTimeMachineWindowLevel, __BUInitializeTimeMachineHostProcess, 
-                       __BULockFrontProcess, __BURegisterActionRequested, 
-                       __BURegisterInvalidateAllSnapshotImages, __BURegisterReceiveGenericSnapshotImage, 
-                       __BURegisterReceiveRevisionID, __BURegisterReceiveSnapshotImage, 
-                       __BURegisterSnapshotActivated, __BURegisterSnapshotDeactivated, 
-                       __BURegisterTargetChanged, __BURegisterWindowResizePhase, 
-                       __BURequestRevisionIDs, __BURequestRevisionIDsAsync, 
-                       __BURequestSnapshotImage, __BUSetPIDForRemotePanels, 
-                       __BUShowChangedItemsOnly, __BUTimeMachineDismissed, 
-                       __BUTimeMachineRestore, __BUUnlockFrontProcess, 
-                       __BUUpdateSnapshotImage, __BUUserInvokedTimeMachine, 
-                       _kBUStarFieldWarpCountKey, _kBackupBrowseOtherDisks, 
+                       _BURegisterUpdatedEntryWindow, _BURelinquishTimeMachineAccess, 
+                       _BURunAllTests, _BUStartTimeMachine, _BUTimeMachineAction, 
+                       _BUTimeMachineCopyMappedBackupPath, _BUTimeMachineSetRestoreAllowed, 
+                       _BUUpdateGenericSnapshotImage, _BUUpdateSnapshotImage, 
+                       __BUActivateSnapshot, __BUDeactivateSnapshot, __BUGetTimeMachineWindowLevel, 
+                       __BUInitializeTimeMachineHostProcess, __BULockFrontProcess, 
+                       __BURegisterActionRequested, __BURegisterInvalidateAllSnapshotImages, 
+                       __BURegisterReceiveGenericSnapshotImage, __BURegisterReceiveRevisionID, 
+                       __BURegisterReceiveSnapshotImage, __BURegisterSnapshotActivated, 
+                       __BURegisterSnapshotDeactivated, __BURegisterTargetChanged, 
+                       __BURegisterWindowResizePhase, __BURequestRevisionIDs, 
+                       __BURequestRevisionIDsAsync, __BURequestSnapshotImage, 
+                       __BUSetPIDForRemotePanels, __BUShowChangedItemsOnly, 
+                       __BUTimeMachineDismissed, __BUTimeMachineRestore, 
+                       __BUUnlockFrontProcess, __BUUpdateSnapshotImage, 
+                       __BUUserInvokedTimeMachine, _kBackupBrowseOtherDisks, 
                        _kBackupConnectionIDKey, _kBackupDateKey, _kBackupDismissedNotification, 
                        _kBackupHandshakeNotification, _kBackupHookPIDKey, 
                        _kBackupHookPostKey, _kBackupHookUnregisterKey, 
@@ -58,5 +58,4 @@ exports:
                        _kSnapshotStateXAttrKey, _kSnapshotVolumeFSEventStoreUUIDXAttrKey, 
                        _kSnapshotVolumeLastEventBackedUpXAttrKey, _kSnapshotVolumeUUIDXAttrKey, 
                        _kStartDateXAttrKey ]
-    objc-classes:    [ _BUStarField ]
 ...

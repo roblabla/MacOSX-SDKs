@@ -13,8 +13,8 @@
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GKNotificationBanner : NSObject
 
-+ (void)showBannerWithTitle:(NSString *)title message:(NSString *)message completionHandler:(void(^)(void))completionHandler NS_AVAILABLE(10_8, 5_0);
++ (void)showBannerWithTitle:(nullable NSString *)title message:(nullable NSString *)message completionHandler:(void(^__nullable)(void))completionHandler NS_AVAILABLE(10_8, 5_0);
 
-+ (void)showBannerWithTitle:(NSString *)title message:(NSString *)message duration:(NSTimeInterval)duration completionHandler:(void(^)(void))completionHandler NS_AVAILABLE(10_8, 6_0);
++ (void)showBannerWithTitle:(nullable NSString *)title message:(nullable NSString *)message duration:(NSTimeInterval)duration completionHandler:(void(^__nullable)(void))completionHandler NS_AVAILABLE(10_8, 6_0);
 
 @end

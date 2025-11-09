@@ -1,12 +1,14 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSLayoutConstraint.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSNotification;
 @protocol NSSplitViewDelegate;
@@ -34,12 +36,12 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 
 /* The name to use when autosaving the positions of dividers, and whether or not subviews are collapsed, to preferences. If this value is nil or the string is empty no autosaving is done.
 */
-@property (copy) NSString *autosaveName NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSString *autosaveName NS_AVAILABLE_MAC(10_5);
 
 
 /* Set or get the delegate of the split view. The delegate will be sent NSSplitViewDelegate messages to which it responds.
 */
-@property (assign) id<NSSplitViewDelegate> delegate;
+@property (nullable, assign) id<NSSplitViewDelegate> delegate;
 
 /* Draw the divider between two of the split view's subviews. The rectangle describes the entire divider rectangle in the receiver's coordinates. You can override this method to change the appearance of dividers.
 */
@@ -82,6 +84,40 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
  */
 - (NSLayoutPriority)holdingPriorityForSubviewAtIndex:(NSInteger)subviewIndex NS_AVAILABLE_MAC(10_8);
 - (void)setHoldingPriority:(NSLayoutPriority)priority forSubviewAtIndex:(NSInteger)subviewIndex NS_AVAILABLE_MAC(10_8);
+
+@end
+
+@interface NSSplitView (NSSplitViewArrangedSubviews)
+
+/*!
+ * Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES.
+ * Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
+ */
+@property BOOL arrangesAllSubviews NS_AVAILABLE_MAC(10_11);
+
+/*!
+ * The list of views that are arranged as split panes in the receiver.
+ * They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
+ */
+@property (readonly, copy) NSArray<__kindof NSView *> *arrangedSubviews NS_AVAILABLE_MAC(10_11);
+
+/*!
+ * Adds a view as arranged split pane. If the view is not a subview of the receiver, it will be added as one.
+ */
+- (void)addArrangedSubview:(NSView *)view NS_AVAILABLE_MAC(10_11);
+
+/*!
+ * Adds a view as an arranged split pane list at the specific index.
+ * If the view is already an arranged split view, it will move the view the specified index (but not move the subview index).
+ * If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
+ */
+- (void)insertArrangedSubview:(NSView *)view atIndex:(NSInteger)index NS_AVAILABLE_MAC(10_11);
+
+/*!
+ * Removes a view as arranged split pane. If \c -arrangesAllSubviews is set to NO, this does not remove the view as a subview.
+ * Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
+ */
+- (void)removeArrangedSubview:(NSView *)view NS_AVAILABLE_MAC(10_11);
 
 @end
 
@@ -152,11 +188,11 @@ Delegates that respond to this message should adjust the frames of the uncollaps
 
 /* A notification that is posted to the default notification center by NSSplitView when a split view is about to resize its subviews either as a result of its own resizing or during the dragging of one of its dividers by the user. Starting in Mac OS 10.5, if the notification is being sent because the user is dragging a divider, the notification's user info dictionary contains an entry whose key is @"NSSplitViewDividerIndex" and whose value is an NSInteger-wrapping NSNumber that is the index of the divider being dragged.
 */
-APPKIT_EXTERN NSString *NSSplitViewWillResizeSubviewsNotification;
+APPKIT_EXTERN NSString * NSSplitViewWillResizeSubviewsNotification;
 
 /* A notification that is posted to the default notification center by NSSplitView when a split view has just resized its subviews either as a result of its own resizing or during the dragging of one of its dividers by the user. Starting in Mac OS 10.5, if the notification is being sent because the user is dragging a divider, the notification's user info dictionary contains an entry whose key is @"NSSplitViewDividerIndex" and whose value is an NSInteger-wrapping NSNumber that is the index of the divider being dragged.
 */
-APPKIT_EXTERN NSString *NSSplitViewDidResizeSubviewsNotification;
+APPKIT_EXTERN NSString * NSSplitViewDidResizeSubviewsNotification;
 
 
 @interface NSSplitView (NSDeprecated)
@@ -167,3 +203,5 @@ APPKIT_EXTERN NSString *NSSplitViewDidResizeSubviewsNotification;
 - (BOOL)isPaneSplitter NS_DEPRECATED_MAC(10_0, 10_6);
 
 @end
+
+NS_ASSUME_NONNULL_END

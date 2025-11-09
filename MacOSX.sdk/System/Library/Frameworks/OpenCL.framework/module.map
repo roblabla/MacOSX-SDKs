@@ -1,4 +1,4 @@
-framework module OpenCL [extern_c] [system] {
+framework module OpenCL [extern_c] {
   umbrella header "opencl.h"
 
   export *

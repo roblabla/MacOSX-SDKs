@@ -1,22 +1,21 @@
 //
 //  SCNTechnique.h
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNAnimation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class SCNTechnique
  @abstract SCNTechnique represents a rendering process that may require multiple passes.
  @discussion A technique is generally initialized from a Property List file. It can be set to any object that conforms to the SCNTechniqueSupport protocol.
  */
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNTechnique : NSObject <SCNAnimatable, NSCopying, NSSecureCoding>
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method techniqueWithDictionary:
@@ -33,6 +32,8 @@
         inputs: <inputs>
         draw: <draw command>
         program: <program name>
+        metalVertexShader: <METAL vertex shader function name>
+        metalFragmentShader: <METAL fragment shader function name>
         colorStates: <color states>               //optional
         depthStates: <depth states>               //optional
         stencilStates: <stencil states>           //optional
@@ -61,8 +62,7 @@
      [...]
    }
 }
- 
- 
+
 <outputs>:
  The possible (and optional) keys with their possible associated values are:
  color: a string referencing a color render target. See <render target reference>.
@@ -71,7 +71,7 @@
  
 <inputs>:
 The inputs are listed in a dictionary. The keys are the uniform name as specified in the program of this pass.
-The values can be a single string referencing a symbol or a target OR a dictionary with the following structure:
+The values can be a single string referencing a symbol or a semantic or a target OR a dictionary with the following structure:
  
  {
    target: <render target reference>,
@@ -102,6 +102,12 @@ The values can be a single string referencing a symbol or a target OR a dictiona
 <program name>
  Name of a program (a vertex shader + a fragment shader) located in the application bundle.
  The vertex shader must have the extension "vsh" and the fragment shader "fsh".
+ 
+<METAL vertex shader function name>
+ Name of a METAL function to use as the vertex shader.
+
+<METAL fragment shader function name>
+ Name of a METAL function to use as the fragment shader.
  
 <color states>
  A dictionary with the following optional keys:
@@ -178,7 +184,7 @@ The values can be a single string referencing a symbol or a target OR a dictiona
  
  semantic: vertex, normal, color, texcoord, time, modelViewProjectionTransform, modelViewTransform, modelTransform, viewTransform, projectionTransform, normalTransform, modelViewProjectionInverseTransform, modelViewInverseTransform, modelInverseTransform, viewInverseTransform, projectionInverseTransform, normalInverseTransform
  
- type: float, vec2, vec3, vec4, mat4, int, ivec2, ivec3, ivec4, mat3, sampler2D, none
+ type: float, vec2, vec3, vec4, mat4, int, ivec2, ivec3, ivec4, mat3, sampler2D, none. Every types can also be an array of the given type by adding [N] where N is the number of elements in the array.
  
  image: name of an image located in the application bundle. (only valid when type is sampler2D)
  
@@ -187,17 +193,16 @@ The values can be a single string referencing a symbol or a target OR a dictiona
 <target description>
  A dictionary with the following optional keys and their possible associated values:
  
- type: a string specifying the type of the render target. It can be one of the following: color, depth, depthstencil
+ type: a string specifying the type of the render target. It can be one of the following: color, depth, stencil
  format: a string specifying the format of the render target. It can be:
  - for color targets: rgba32f, r8, r16, rgba(default)
  - for depth targets: depth24, depth24stencil8
  - for stencil targets: depth24stencil8
  scaleFactor: a float value (encapsulated in a NSNumber) that controls the size of the render target. default to 1, which means 1x the size of the main viewport.
  size: a string with the format %dx%d that controls the size of the render target.
+ persistent: a boolean that tells if this target should persist from one frame to the next. It permits to create temporal effects suchs as motion blur. Defaults to NO.
  */
-
-+ (SCNTechnique *)techniqueWithDictionary:(NSDictionary *)dictionary;
-
++ (nullable SCNTechnique *)techniqueWithDictionary:(NSDictionary<NSString *, id> *)dictionary;
 
 /*!
  @method techniqueBySequencingTechniques:
@@ -205,8 +210,7 @@ The values can be a single string referencing a symbol or a target OR a dictiona
  @param techniques The techniques to sequence.
  @discussion The passes from "techniques" are executed sequentially. The symbols and targets are merged. This allows to use the same uniform ad targets across multiple techniques.
  */
-+ (SCNTechnique *)techniqueBySequencingTechniques:(NSArray *)techniques;
-
++ (nullable SCNTechnique *)techniqueBySequencingTechniques:(NSArray<SCNTechnique *> *)techniques;
 
 /*!
  @method handleBindingOfSymbol:usingBlock:
@@ -214,34 +218,40 @@ The values can be a single string referencing a symbol or a target OR a dictiona
  @param symbol The name of the symbol to bind a value for.
  @param block The block to call to bind the specified symbol.
  @discussion The block will be called at every frame for every pass referencing the specified symbol.
- 
- SCNTechnique is a key-value coding compliant classe, which means that you can set values for arbitrary keys. Even if the key `myAmplitude` is not a declared property of the class, you can still set a value for it.
+ */
+- (void)handleBindingOfSymbol:(NSString *)symbol usingBlock:(nullable SCNBindingBlock)block;
+
+/*!
+ @property dictionaryRepresentation
+ @abstract Returns the dictionary representation of the technique.
+ */
+@property(readonly) NSDictionary<NSString *, id> *dictionaryRepresentation;
+
+/*
+ SCNTechnique is a key-value coding compliant class, which means that you can set values for arbitrary keys. Even if the key `myAmplitude` is not a declared property of the class, you can still set a value for it.
  If the Property List file declares the `myAmplitude` symbol, any change to the `myAmplitude` property of the receiver will make SceneKit bind the associated uniform with the new value.
  
  Symbols can be animated using explicit animations.
  
  The following GLSL types (and Objective-C counterparts) can be used to bind symbols:
  
-   GLSL types    | Objective-C types
-   --------------------------------------
-   int           | NSNumber, NSInteger, int
-   float         | NSNumber, CGFloat, float, double
-   vec2          | CGPoint
-   vec3          | SCNVector3
-   vec4          | SCNVector4
-   mat4, mat44   | SCNMatrix4
+ GLSL types    | Objective-C types
+ --------------------------------------
+ int           | NSNumber, NSInteger, int
+ float         | NSNumber, CGFloat, float, double
+ vec2          | CGPoint
+ vec3          | SCNVector3
+ vec4          | SCNVector4
+ mat4, mat44   | SCNMatrix4
  
+ On OS X 10.11 or later and iOS 9 or later you can also use the object subscripting syntax to set values to uniforms.
+ For example:
+ myTechnique[@"myAmplitude"] = aValue;
  */
-- (void)handleBindingOfSymbol:(NSString *)symbol usingBlock:(SCNBindingBlock)block;
-
-/*!
- @property dictionaryRepresentation
- @abstract Returns the dictionary representation of the technique.
- */
-@property(readonly) NSDictionary *dictionaryRepresentation;
+- (nullable id)objectForKeyedSubscript:(id)key NS_AVAILABLE(10_11, 9_0);
+- (void)setObject:(nullable id)obj forKeyedSubscript:(id <NSCopying>)key NS_AVAILABLE(10_11, 9_0);
 
 @end
-
 
 
 
@@ -255,6 +265,8 @@ The values can be a single string referencing a symbol or a target OR a dictiona
  @property technique
  @abstract Specifies the technique of the receiver. Defaults to nil.
  */
-@property(nonatomic, copy) SCNTechnique *technique;
+@property(nonatomic, copy, nullable) SCNTechnique *technique NS_AVAILABLE(10_10, 8_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

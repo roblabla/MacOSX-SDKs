@@ -109,7 +109,7 @@ extern const struct task_access_subsystem {
 		int32_t calling_pid;
 		uint32_t calling_gid;
 		int32_t target_pid;
-	} __Request__check_task_access_t;
+	} __Request__check_task_access_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -121,7 +121,7 @@ extern const struct task_access_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int32_t new_pid;
-	} __Request__find_code_signature_t;
+	} __Request__find_code_signature_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -149,7 +149,7 @@ union __RequestUnion__task_access_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__check_task_access_t;
+	} __Reply__check_task_access_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -161,7 +161,7 @@ union __RequestUnion__task_access_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__find_code_signature_t;
+	} __Reply__find_code_signature_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

@@ -1,11 +1,12 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSParagraphStyle.h>
@@ -13,7 +14,9 @@
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSAccessibilityProtocols.h>
 
-@class NSAttributedString, NSEvent, NSFont, NSFormatter, NSImage, NSMenu, NSText, NSView, NSTextView;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSAttributedString, NSEvent, NSFont, NSFormatter, NSImage, NSMenu, NSText, NSView, NSTextView, NSDraggingImageComponent;
 
 typedef NS_ENUM(NSUInteger, NSCellType) {
     NSNullCellType			= 0,
@@ -167,13 +170,13 @@ typedef struct __CFlags {
 
 
 - (instancetype)initTextCell:(NSString *)aString;
-- (instancetype)initImageCell:(NSImage *)image;
+- (instancetype)initImageCell:(nullable NSImage *)image;
 
-@property (assign) NSView *controlView;
+@property (nullable, assign) NSView *controlView; // Must be an NSControl subclass, non-control view subclasses not allowed!
 @property NSCellType type;
 @property NSInteger state;
-@property (weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign'.
-@property SEL action;
+@property (nullable, weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign'.
+@property (nullable) SEL action;
 @property NSInteger tag;
 @property (copy) NSString *title;
 @property (getter=isOpaque, readonly) BOOL opaque;
@@ -188,25 +191,25 @@ typedef struct __CFlags {
 @property (getter=isHighlighted) BOOL highlighted;
 @property NSTextAlignment alignment;
 @property BOOL wraps;    /* If YES, sets scrollable to NO */
-@property (strong) NSFont *font;
+@property (nullable, strong) NSFont *font;
 @property (readonly, copy) NSString *keyEquivalent;
-@property (strong) id /* NSFormatter * */ formatter;
-@property (copy) id /* id <NSCopying> */ objectValue;
+@property (nullable, strong) __kindof NSFormatter *formatter;
+@property (nullable, copy) id /* id <NSCopying> */ objectValue;
 @property (readonly) BOOL hasValidObjectValue;
 @property (copy) NSString *stringValue;
 - (NSComparisonResult)compare:(id)otherCell;
 @property int intValue;
 @property float floatValue;
 @property double doubleValue;
-- (void)takeIntValueFrom:(id)sender;
-- (void)takeFloatValueFrom:(id)sender;
-- (void)takeDoubleValueFrom:(id)sender;
-- (void)takeStringValueFrom:(id)sender;
-- (void)takeObjectValueFrom:(id)sender;
-@property (strong) NSImage *image;
+- (void)takeIntValueFrom:(nullable id)sender;
+- (void)takeFloatValueFrom:(nullable id)sender;
+- (void)takeDoubleValueFrom:(nullable id)sender;
+- (void)takeStringValueFrom:(nullable id)sender;
+- (void)takeObjectValueFrom:(nullable id)sender;
+@property (nullable, strong) NSImage *image;
 @property NSControlTint controlTint;
 @property NSControlSize controlSize;
-@property (strong) id representedObject;
+@property (nullable, strong) id representedObject;
 - (NSInteger)cellAttribute:(NSCellAttribute)aParameter;
 - (void)setCellAttribute:(NSCellAttribute)aParameter to:(NSInteger)value;
 - (NSRect)imageRectForBounds:(NSRect)theRect;
@@ -226,14 +229,14 @@ typedef struct __CFlags {
 - (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView;
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag;
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)flag;
-- (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent;
-- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength;
+- (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(nullable id)anObject event:(NSEvent *)theEvent;
+- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(nullable id)anObject start:(NSInteger)selStart length:(NSInteger)selLength;
 - (void)endEditing:(NSText *)textObj;
 - (void)resetCursorRect:(NSRect)cellFrame inView:(NSView *)controlView;
 
-@property (strong) NSMenu *menu;
-- (NSMenu *)menuForEvent:(NSEvent *)event inRect:(NSRect)cellFrame ofView:(NSView *)view;
-+ (NSMenu *)defaultMenu;
+@property (nullable, strong) NSMenu *menu;
+- (nullable NSMenu *)menuForEvent:(NSEvent *)event inRect:(NSRect)cellFrame ofView:(NSView *)view;
++ (nullable NSMenu *)defaultMenu;
 
 @property BOOL sendsActionOnEndEditing;
 
@@ -244,7 +247,7 @@ typedef struct __CFlags {
 @property BOOL allowsUndo;
 
 @property NSInteger integerValue NS_AVAILABLE_MAC(10_5);
-- (void)takeIntegerValueFrom:(id)sender NS_AVAILABLE_MAC(10_5);
+- (void)takeIntegerValueFrom:(nullable id)sender NS_AVAILABLE_MAC(10_5);
 
 /* Truncates and adds the ellipsis character to the last visible line if the text doesn't fit into the cell bounds. The setting is ignored if -lineBreakMode is neither NSLineBreakByWordWrapping nor NSLineBreakByCharWrapping.
  */
@@ -256,7 +259,7 @@ typedef struct __CFlags {
 
 /* Returns a custom field editor for editing inside aControlView. This is an override point for NSCell subclasses designed to work with its own custom field editor. This message is sent to the selected cell of aControlView in -[NSWindow fieldEditor:forObject:]. Returning non-nil from this method indicates skipping the standard field editor querying processes including -windowWillReturnFieldEditor:toObject: delegation. The default NSCell implementation returns nil. The field editor returned from this method should have isFieldEditor == YES.
  */
-- (NSTextView *)fieldEditorForView:(NSView *)aControlView NS_AVAILABLE_MAC(10_6);
+- (nullable NSTextView *)fieldEditorForView:(NSView *)aControlView NS_AVAILABLE_MAC(10_6);
 
 /* Tells the text cell to layout/render its content in single-line. If YES, the cell ignores the return value from -wraps, interprets NSLineBreakByWordWrapping and NSLineBreakByCharWrapping from -lineBreakMode as NSLineBreakByClipping, and configures the field editor to ignore key binding commands that insert paragraph/line separators. Also, the field editor bound to a single line cell filters paragraph/line separator insertion from user actions. Cells in the single line mode use the fixed baseline layout. The text baseline position is determined solely by the control size regardless of content font style/size.
  */
@@ -264,7 +267,7 @@ typedef struct __CFlags {
 
 /* Multi-image Drag Support. The default implementation will return an array of up to two NSDraggingImageComponent instances -- one for the image portion and another for the text portion (if appropriate). This method can be subclassed and overridden to provide a custom set of NSDraggingImageComponents to create the drag image for the cell. This method is generally used by NSTableView/NSOutlineView.
  */
-- (NSArray *)draggingImageComponentsWithFrame:(NSRect)frame inView:(NSView *)view NS_AVAILABLE_MAC(10_7);
+- (NSArray<NSDraggingImageComponent *> *)draggingImageComponentsWithFrame:(NSRect)frame inView:(NSView *)view NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -273,7 +276,7 @@ typedef struct __CFlags {
 @property (readonly) BOOL acceptsFirstResponder;
 @property BOOL showsFirstResponder;
 
-- (void)performClick:(id)sender;
+- (void)performClick:(nullable id)sender;
 
 @property NSFocusRingType focusRingType;
 + (NSFocusRingType)defaultFocusRingType;
@@ -297,7 +300,7 @@ typedef struct __CFlags {
 - (void)setNextState;			/* toggle/cycle through states */
 @end
 
-APPKIT_EXTERN NSString *NSControlTintDidChangeNotification; /* sent after user changes control tint preference */
+APPKIT_EXTERN NSString * NSControlTintDidChangeNotification; /* sent after user changes control tint preference */
 
 /* Cell Hit testing support */
 
@@ -388,13 +391,13 @@ typedef NS_ENUM(NSInteger, NSBackgroundStyle) {
  
  This is an appropriate way to draw the bezel of a button that can be resized in one dimension.
  */
-APPKIT_EXTERN void NSDrawThreePartImage(NSRect frame, NSImage *startCap, NSImage *centerFill, NSImage *endCap, BOOL vertical, NSCompositingOperation op, CGFloat alphaFraction, BOOL flipped) NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN void NSDrawThreePartImage(NSRect frame, NSImage * __nullable startCap, NSImage * __nullable centerFill, NSImage * __nullable endCap, BOOL vertical, NSCompositingOperation op, CGFloat alphaFraction, BOOL flipped) NS_AVAILABLE_MAC(10_5);
 
 /* Draw an image from nine pieces.  When drawn, the destination rect is partitioned into nine rectangular regions: the corner pieces are the natural size of the corner images, the edge pieces are the natural size of the edge fill images in the direction perpendicular to the edge and flush with the corners.  The center rect fills the remaining space.  The supplied images and fills are drawn into the corresponding regions, with fill images tiled at their natural dimensions.  Images that share a border should have the same thickness in that dimension.  
  
  This method is appropriate for the bezel of a control, like a box, that can be resized in both dimensions.
  */
-APPKIT_EXTERN void NSDrawNinePartImage(NSRect frame, NSImage *topLeftCorner, NSImage *topEdgeFill, NSImage *topRightCorner, NSImage *leftEdgeFill, NSImage *centerFill, NSImage *rightEdgeFill, NSImage *bottomLeftCorner, NSImage *bottomEdgeFill, NSImage *bottomRightCorner, NSCompositingOperation op, CGFloat alphaFraction, BOOL flipped) NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN void NSDrawNinePartImage(NSRect frame, NSImage * topLeftCorner, NSImage * topEdgeFill, NSImage * topRightCorner, NSImage * leftEdgeFill, NSImage * centerFill, NSImage * rightEdgeFill, NSImage * bottomLeftCorner, NSImage * bottomEdgeFill, NSImage * bottomRightCorner, NSCompositingOperation op, CGFloat alphaFraction, BOOL flipped) NS_AVAILABLE_MAC(10_5);
 
 enum {
     NSAnyType				= 0,
@@ -405,3 +408,5 @@ enum {
     NSDoubleType			= 6,
     NSPositiveDoubleType		= 7
 } NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use formatters instead");
+
+NS_ASSUME_NONNULL_END

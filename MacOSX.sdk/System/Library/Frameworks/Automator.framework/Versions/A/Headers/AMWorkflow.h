@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <Automator/AMAttributesForAnalyzer.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class AMAction;
 @class AMWorkflowController;
 
@@ -40,13 +42,14 @@
 	AM_UNUSED_FOR_ANALYZER id _future4;
 }
 
-+ (id)runWorkflowAtURL:(NSURL *)fileURL withInput:(id)input error:(NSError **)error;
++ (nullable id)runWorkflowAtURL:(NSURL *)fileURL withInput:(nullable id)input error:(NSError **)error;
 
-- (instancetype)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError;
 
 - (BOOL)writeToURL:(NSURL *)fileURL error:(NSError **)outError;
 
-- (BOOL)setValue:(id)value forVariableWithName:(NSString *)variableName;
+- (BOOL)setValue:(nullable id)value forVariableWithName:(NSString *)variableName;
 - (id)valueForVariableWithName:(NSString *)variableName;
 
 - (void)addAction:(AMAction *)action;
@@ -54,9 +57,11 @@
 - (void)insertAction:(AMAction *)action atIndex:(NSUInteger)index;
 - (void)moveActionAtIndex:(NSUInteger)startIndex toIndex:(NSUInteger)endIndex;
 
-@property (readonly, copy) NSURL *fileURL;
-@property (readonly, retain) NSArray *actions;
-@property (readwrite, retain) id input;
-@property (readonly, retain) id output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (nullable, readonly, copy) NSURL *fileURL;
+@property (readonly, retain) NSArray<__kindof AMAction *> *actions;
+@property (nullable, readwrite, retain) id input;
+@property (nullable, readonly, retain) id output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
+
+NS_ASSUME_NONNULL_END

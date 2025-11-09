@@ -28,7 +28,8 @@ extern "C" {
 	@discussion
     
 */
-enum {
+
+typedef CF_ENUM(SInt32, AXError) {
     /*! No error occurred. */
     kAXErrorSuccess 				= 0,
 
@@ -77,7 +78,6 @@ enum {
     /*! Not enough precision. */
 	kAXErrorNotEnoughPrecision	= -25214
 };
-typedef SInt32 AXError;
 
 
 #ifdef __cplusplus

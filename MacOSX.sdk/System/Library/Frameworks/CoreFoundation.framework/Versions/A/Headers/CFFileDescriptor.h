@@ -1,5 +1,5 @@
 /*	CFFileDescriptor.h
-	Copyright (c) 2006-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2015, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFFILEDESCRIPTOR__)
@@ -12,10 +12,10 @@ CF_EXTERN_C_BEGIN
 
 typedef int CFFileDescriptorNativeDescriptor;
 
-typedef struct __CFFileDescriptor * CFFileDescriptorRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFFileDescriptor * CFFileDescriptorRef;
 
 /* Callback Reason Types */
-enum {
+CF_ENUM(CFOptionFlags) {
     kCFFileDescriptorReadCallBack = 1UL << 0,
     kCFFileDescriptorWriteCallBack = 1UL << 1
 };

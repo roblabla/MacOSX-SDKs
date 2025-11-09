@@ -1,9 +1,11 @@
 /* CoreAnimation - CAShapeLayer.h
 
-   Copyright (c) 2008-2014, Apple Inc.
+   Copyright (c) 2008-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* The shape layer draws a cubic Bezier spline in its coordinate space.
  *
@@ -32,17 +34,17 @@
 
 /* The path defining the shape to be rendered. If the path extends
  * outside the layer bounds it will not automatically be clipped to the
- * layer, only if the normal layer masking rules cause that. Defaults
- * to null. Animatable. (Note that although the path property is
- * animatable, no implicit animation will be created when the property
- * is changed.) */
+ * layer, only if the normal layer masking rules cause that. Upon
+ * assignment the path is copied. Defaults to null. Animatable.
+ * (Note that although the path property is animatable, no implicit
+ * animation will be created when the property is changed.) */
 
-@property CGPathRef path;
+@property(nullable) CGPathRef path;
 
 /* The color to fill the path, or nil for no fill. Defaults to opaque
  * black. Animatable. */
 
-@property CGColorRef fillColor;
+@property(nullable) CGColorRef fillColor;
 
 /* The fill rule used when filling the path. Options are `non-zero' and
  * `even-odd'. Defaults to `non-zero'. */
@@ -52,7 +54,7 @@
 /* The color to fill the path's stroked outline, or nil for no stroking.
  * Defaults to nil. Animatable. */
 
-@property CGColorRef strokeColor;
+@property(nullable) CGColorRef strokeColor;
 
 /* These values define the subregion of the path used to draw the
  * stroked outline. The values must be in the range [0,1] with zero
@@ -61,7 +63,8 @@
  * length. strokeStart defaults to zero and strokeEnd to one. Both are
  * animatable. */
 
-@property CGFloat strokeStart, strokeEnd;
+@property CGFloat strokeStart;
+@property CGFloat strokeEnd;
 
 /* The line width used when stroking the path. Defaults to one.
  * Animatable. */
@@ -91,7 +94,7 @@
 /* The dash pattern (an array of NSNumbers) applied when creating the
  * stroked version of the path. Defaults to nil. */
 
-@property(copy) NSArray *lineDashPattern;
+@property(nullable, copy) NSArray<NSNumber *> *lineDashPattern;
 
 @end
 
@@ -119,3 +122,5 @@ CA_EXTERN NSString *const kCALineCapRound
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString *const kCALineCapSquare
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+
+NS_ASSUME_NONNULL_END

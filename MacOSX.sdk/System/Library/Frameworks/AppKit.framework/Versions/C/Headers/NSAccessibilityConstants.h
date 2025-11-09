@@ -1,11 +1,13 @@
 /*
 	NSAccessibilityConstants.h
 	Application Kit
-	Copyright (c) 2001-2014, Apple Inc.
+	Copyright (c) 2001-2015, Apple Inc.
 	All rights reserved.
 */
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*** Exception Constants ***/
 
@@ -85,6 +87,7 @@ NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSString *const NSAccessibilityContainsProtectedContentAttribute NS_AVAILABLE_MAC(10_9);   // (NSNumber *) - (boolValue) contains protected content?
 APPKIT_EXTERN NSString *const NSAccessibilityAlternateUIVisibleAttribute NS_AVAILABLE_MAC(10_10);  //(NSNumber *) - (boolValue)
 
+
 /* Linkage attributes
  */
 APPKIT_EXTERN NSString *const NSAccessibilityTitleUIElementAttribute;		//(id)	      - UIElement for the title
@@ -101,7 +104,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityVisibleCharacterRangeAttribute;	//(
 APPKIT_EXTERN NSString *const NSAccessibilitySharedTextUIElementsAttribute;	//(NSArray *)  - text views sharing text
 APPKIT_EXTERN NSString *const NSAccessibilitySharedCharacterRangeAttribute;	//(NSValue *)  - (rangeValue) part of shared text in this view
 APPKIT_EXTERN NSString *const NSAccessibilityInsertionPointLineNumberAttribute;	//(NSNumber *) - line# containing caret
-APPKIT_EXTERN NSString *const NSAccessibilitySelectedTextRangesAttribute	//(NSArray *) - array of NSValue (rangeValue) ranges of selected text
+APPKIT_EXTERN NSString *const NSAccessibilitySelectedTextRangesAttribute	//(NSArray<NSValue *> *) - array of NSValue (rangeValue) ranges of selected text
 NS_AVAILABLE_MAC(10_5);
 
 
@@ -132,6 +135,12 @@ APPKIT_EXTERN NSString *const NSAccessibilityShadowTextAttribute;		//(NSNumber *
 APPKIT_EXTERN NSString *const NSAccessibilityAttachmentTextAttribute;		//id - corresponding element
 APPKIT_EXTERN NSString *const NSAccessibilityLinkTextAttribute;			//id - corresponding element
 APPKIT_EXTERN NSString *const NSAccessibilityAutocorrectedTextAttribute NS_AVAILABLE_MAC(10_7);		//(NSNumber *)	    - (boolValue)
+
+/* Textual list attributes and constants. Examples: unordered or ordered lists in a document.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityListItemPrefixTextAttribute    NS_AVAILABLE_MAC(10_11);    // NSAttributedString, the prepended string of the list item. If the string is a common unicode character (e.g. a bullet •), return that unicode character. For lists with images before the text, return a reasonable label of the image.
+APPKIT_EXTERN NSString *const NSAccessibilityListItemIndexTextAttribute     NS_AVAILABLE_MAC(10_11);    // NSNumber, integerValue of the line index. Each list item increments the index, even for unordered lists. The first item should have index 0.
+APPKIT_EXTERN NSString *const NSAccessibilityListItemLevelTextAttribute     NS_AVAILABLE_MAC(10_11);    // NSNumber, integerValue of the indent level. Each sublist increments the level. The first item should have level 0.
 
 /*
  About MisspelledText attributes for attribute strings:
@@ -261,7 +270,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityDisclosureLevelAttribute;	//(NSNumb
 
 /* Slider attributes
  */
-APPKIT_EXTERN NSString *const NSAccessibilityAllowedValuesAttribute;	//(NSArray *) - array of allowed values
+APPKIT_EXTERN NSString *const NSAccessibilityAllowedValuesAttribute;	//(NSArray<NSNumber *> *) - array of allowed values
 APPKIT_EXTERN NSString *const NSAccessibilityLabelUIElementsAttribute;	//(NSArray *) - array of label UIElements
 APPKIT_EXTERN NSString *const NSAccessibilityLabelValueAttribute;	//(NSNumber *) - value of a label UIElement
 
@@ -534,3 +543,4 @@ typedef NS_ENUM(NSInteger, NSAccessibilityPriorityLevel) {
  */
 APPKIT_EXTERN NSString *const NSAccessibilitySortButtonRole	NS_DEPRECATED_MAC(10_4, 10_6);
 
+NS_ASSUME_NONNULL_END

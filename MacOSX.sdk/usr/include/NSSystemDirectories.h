@@ -54,41 +54,41 @@
 // Directories
 
 typedef enum {
-    NSApplicationDirectory = 1,             // supported applications (Applications)
-    NSDemoApplicationDirectory = 2,         // unsupported applications, demonstration versions (Applications/GrabBag)
-    NSDeveloperApplicationDirectory = 3,    // developer applications (Developer/Applications)
-    NSAdminApplicationDirectory = 4,        // system and network administration applications (Applications/Utilities)
-    NSLibraryDirectory = 5,                 // various user-visible documentation, support, and configuration files, resources (Library)
-    NSDeveloperDirectory = 6,               // developer resources (Developer)
-    NSUserDirectory = 7,                    // user home directories (Users)
-    NSDocumentationDirectory = 8,           // documentation (Library/Documentation)
-    NSDocumentDirectory = 9,                // documents (Documents)
-    NSCoreServiceDirectory = 10,            // location of core services (System/Library/CoreServices)
-    NSAutosavedInformationDirectory = 11,   // location of user's directory for use with autosaving (Library/Autosave Information)
-    NSDesktopDirectory = 12,                // location of user's Desktop (Desktop)
-    NSCachesDirectory = 13,                 // location of discardable cache files (Library/Caches)
-    NSApplicationSupportDirectory = 14,     // location of application support files (plug-ins, etc) (Library/Application Support)
-    NSDownloadsDirectory = 15,              // location of user's Downloads directory (Downloads)
-    NSInputMethodsDirectory = 16,           // input methods (Library/Input Methods)
-    NSMoviesDirectory = 17,                 // location of user's Movies directory (~/Movies)
-    NSMusicDirectory = 18,                  // location of user's Music directory (~/Music)
-    NSPicturesDirectory = 19,               // location of user's Pictures directory (~/Pictures)
-    NSPrinterDescriptionDirectory = 20,     // location of system's PPDs directory (Library/Printers/PPDs)
-    NSSharedPublicDirectory = 21,           // location of user's Public sharing directory (~/Public)
-    NSPreferencePanesDirectory = 22,        // location of the PreferencePanes directory for use with System Preferences (Library/PreferencePanes)
-    NSAllApplicationsDirectory = 100,       // all directories where applications can occur (Applications, Applications/Utilities, Developer/Applications, ...)
-    NSAllLibrariesDirectory = 101           // all directories where resources can occur (Library, Developer)
-} NSSearchPathDirectory;
+    NSApplicationDirectory __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                           = 1,    // supported applications (Applications)
+    NSDemoApplicationDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)         = 2,    // unsupported applications, demonstration versions (Applications/GrabBag)
+    NSDeveloperApplicationDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)    = 3,    // developer applications (Developer/Applications) Soft deprecated as of __MAC_10_5 - there is no one single Developer directory
+    NSAdminApplicationDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)        = 4,    // system and network administration applications (Applications/Utilities)
+    NSLibraryDirectory __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                               = 5,    // various user-visible documentation, support, and configuration files, resources (Library)
+    NSDeveloperDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)               = 6,    // developer resources (Developer) Soft deprecated as of __MAC_10_5 - there is no one single Developer directory
+    NSUserDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)                    = 7,    // user home directories (Users)
+    NSDocumentationDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)           = 8,    // documentation (Library/Documentation)
+    NSDocumentDirectory __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0)                                              = 9,    // documents (Documents)
+    NSCoreServiceDirectory __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0)                                           = 10,   // location of core services (System/Library/CoreServices)
+    NSAutosavedInformationDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)    = 11,   // location of user's directory for use with autosaving (Library/Autosave Information)
+    NSDesktopDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)                 = 12,   // location of user's Desktop (Desktop)
+    NSCachesDirectory __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)                                                = 13,   // location of discardable cache files (Library/Caches)
+    NSApplicationSupportDirectory __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)                                    = 14,   // location of application support files (plug-ins, etc) (Library/Application Support)
+    NSDownloadsDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)               = 15,   // location of user's Downloads directory (Downloads)
+    NSInputMethodsDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)            = 16,   // input methods (Library/Input Methods)
+    NSMoviesDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)                  = 17,   // location of user's Movies directory (~/Movies)
+    NSMusicDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)                   = 18,   // location of user's Music directory (~/Music)
+    NSPicturesDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)                = 19,   // location of user's Pictures directory (~/Pictures)
+    NSPrinterDescriptionDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)      = 20,   // location of system's PPDs directory (Library/Printers/PPDs)
+    NSSharedPublicDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)            = 21,   // location of user's Public sharing directory (~/Public)
+    NSPreferencePanesDirectory __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_4_0, __IPHONE_9_0)         = 22,   // location of the PreferencePanes directory for use with System Preferences (Library/PreferencePanes)
+    NSAllApplicationsDirectory __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                       = 100,  // all directories where applications can occur (Applications, Applications/Utilities, Developer/Applications, ...)
+    NSAllLibrariesDirectory __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                          = 101   // all directories where resources can occur (Library, Developer)
+} NSSearchPathDirectory __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 // Domains
 
 typedef enum {
-   NSUserDomainMask = 1,	// user's home directory --- place to install user's personal items (~)
-   NSLocalDomainMask = 2,	// local to the current machine --- place to install items available to everyone on this machine
-   NSNetworkDomainMask = 4, 	// publically available location in the local area network --- place to install items available on the network (/Network)
-   NSSystemDomainMask = 8,	// provided by Apple
-   NSAllDomainsMask = 0x0ffff	// all domains: all of the above and more, future items
-} NSSearchPathDomainMask;
+    NSUserDomainMask __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                     = 1,        // user's home directory --- place to install user's personal items (~)
+    NSLocalDomainMask __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                    = 2,        // local to the current machine --- place to install items available to everyone on this machine
+    NSNetworkDomainMask __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_NA, __IPHONE_2_0, __IPHONE_9_0)    = 4,        // publically available location in the local area network --- place to install items available on the network (/Network)
+    NSSystemDomainMask __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                   = 8,        // provided by Apple
+    NSAllDomainsMask __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)                                     = 0x0ffff   // all domains: all of the above and more, future items
+} NSSearchPathDomainMask __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 typedef unsigned int NSSearchPathEnumerationState;
 

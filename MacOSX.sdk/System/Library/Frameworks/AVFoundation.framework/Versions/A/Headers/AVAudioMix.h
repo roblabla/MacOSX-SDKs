@@ -3,7 +3,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
  
  */
 
@@ -23,6 +23,9 @@
 */
 
 @class AVAudioMixInternal;
+@class AVAudioMixInputParameters;
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVAudioMix : NSObject <NSCopying, NSMutableCopying> {
@@ -31,7 +34,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 }
 
 /* Indicates parameters for inputs to the mix; an NSArray of instances of AVAudioMixInputParameters. Note that an instance of AVAudioMixInputParameters is not required for each audio track that contributes to the mix; audio for those without associated AVAudioMixInputParameters will be included in the mix, processed according to default behavior.  */
-@property (nonatomic, readonly, copy) NSArray *inputParameters;
+@property (nonatomic, readonly, copy) NSArray<AVAudioMixInputParameters *> *inputParameters;
 
 @end
 
@@ -48,14 +51,14 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @method		audioMix
  @abstract		Returns a new instance of AVMutableAudioMix with a nil array of inputParameters.
 */
-+ (AVMutableAudioMix *)audioMix;
++ (instancetype)audioMix;
 
 /*!
  @property		inputParameters
  @abstract		Indicates parameters for inputs to the mix; an NSArray of instances of AVAudioMixInputParameters.
  @discussion	Note that an instance of AVAudioMixInputParameters is not required for each audio track that contributes to the mix; audio for those without associated AVAudioMixInputParameters will be included in the mix, processed according to default behavior.
 */
-@property (nonatomic, copy) NSArray *inputParameters;
+@property (nonatomic, copy) NSArray<AVAudioMixInputParameters *> *inputParameters;
 
 @end
 
@@ -68,7 +71,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  
  @discussion
  
- Use an instance AVAudioMixInputParameters to apply audio volume ramps for an input to an audio mix.
+ Use an instance of AVAudioMixInputParameters to apply audio volume ramps for an input to an audio mix.
  AVAudioMixInputParameters are associated with audio tracks via the trackID property.
  
  Notes on audio volume ramps:
@@ -101,13 +104,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, readonly, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic, readonly, copy, nullable) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
 
 /*!
  @property		audioTapProcessor
  @abstract		Indicates the audio processing tap that will be used for the audio track.
 */
-@property (nonatomic, readonly, retain) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
 
 /*  
  @method		getVolumeRampForTime:startVolume:endVolume:timeRange:
@@ -124,7 +127,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of success. NO will be returned if the specified time is beyond the duration of the last volume ramp that has been set.
 */
-- (BOOL)getVolumeRampForTime:(CMTime)time startVolume:(float *)startVolume endVolume:(float *)endVolume timeRange:(CMTimeRange *)timeRange;
+- (BOOL)getVolumeRampForTime:(CMTime)time startVolume:(nullable float *)startVolume endVolume:(nullable float *)endVolume timeRange:(nullable CMTimeRange *)timeRange;
 
 @end
 
@@ -145,13 +148,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @param			track
    A reference to an AVAssetTrack.
 */
-+ (AVMutableAudioMixInputParameters *)audioMixInputParametersWithTrack:(AVAssetTrack *)track;
++ (instancetype)audioMixInputParametersWithTrack:(nullable AVAssetTrack *)track;
 
 /*  
  @method		audioMixInputParameters
  @abstract		Returns a new instance of AVMutableAudioMixInputParameters with no volume ramps and a trackID initialized to kCMPersistentTrackID_Invalid.
 */
-+ (AVMutableAudioMixInputParameters *)audioMixInputParameters;
++ (instancetype)audioMixInputParameters;
 
 /*!
  @property		trackID
@@ -166,13 +169,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic, copy, nullable) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
 
 /*!
  @property		audioTapProcessor
  @abstract		Indicates the audio processing tap that will be used for the audio track.
 */
-@property (nonatomic, retain) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
 
 /*  
  @method		setVolumeRampFromStartVolume:toEndVolume:timeRange:
@@ -187,3 +190,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 - (void)setVolume:(float)volume atTime:(CMTime)time;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

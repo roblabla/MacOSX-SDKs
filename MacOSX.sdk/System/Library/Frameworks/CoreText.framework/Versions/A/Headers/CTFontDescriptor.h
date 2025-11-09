@@ -2,7 +2,7 @@
  *  CTFontDescriptor.h
  *  CoreText
  *
- *  Copyright (c) 2006-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -28,10 +28,8 @@
 #include <CoreGraphics/CGAffineTransform.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*! --------------------------------------------------------------------------
     @group Descriptor Types
@@ -43,9 +41,9 @@ extern "C" {
     @discussion This is a opaque reference to a font descriptor.
 */
 #if TARGET_OS_IPHONE
-typedef const struct CT_BRIDGED_TYPE(UIFontDescriptor) __CTFontDescriptor * CTFontDescriptorRef;
+typedef const struct CF_BRIDGED_TYPE(UIFontDescriptor) __CTFontDescriptor * CTFontDescriptorRef;
 #else
-typedef const struct CT_BRIDGED_TYPE(NSFontDescriptor) __CTFontDescriptor * CTFontDescriptorRef;
+typedef const struct CF_BRIDGED_TYPE(NSFontDescriptor) __CTFontDescriptor * CTFontDescriptorRef;
 #endif
 
 /*!
@@ -117,7 +115,7 @@ extern const CFStringRef kCTFontMatrixAttribute CT_AVAILABLE(10_5, 3_2);
 /*!
     @defined    kCTFontCascadeListAttribute
     @abstract   The font cascade list.
-    @discussion This key is used to specify or obtain the cascade list used for a font reference. The cascade list is a CFArrayRef containing CTFontDescriptorRefs. If unspecified, the global cascade list is used.
+    @discussion This key is used to specify or obtain the cascade list used for a font reference. The cascade list is a CFArrayRef containing CTFontDescriptorRefs. If unspecified, the global cascade list is used. This list is not consulted for private-use characters on OS X 10.10, iOS 8, or earlier.
 */
 extern const CFStringRef kCTFontCascadeListAttribute CT_AVAILABLE(10_5, 3_2);
 /*!
@@ -155,7 +153,7 @@ extern const CFStringRef kCTFontFeaturesAttribute CT_AVAILABLE(10_5, 3_2);
     @abstract   The array of typographic feature settings.
     @discussion This key is used to specify an array of zero or more feature settings. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary.
                 An AAT setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair.
-                An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Each setting dictionary indicates which setting should applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence.
+                An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Each setting dictionary indicates which setting should be applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence.
 
                 Starting with OS X 10.10 and iOS 8.0, settings are also accepted (but not returned) in the following simplified forms:
                 An OpenType setting can be either an array pair of tag string and value number, or a tag string on its own. For example: @[ @"c2sc", @1 ] or simply @"c2sc". An unspecified value enables the feature and a value of zero disables it.
@@ -180,13 +178,13 @@ extern const CFStringRef kCTFontOrientationAttribute CT_AVAILABLE(10_5, 3_2);
     @abstract   Specifies the intended rendering orientation of the font for obtaining glyph metrics.
 */
 typedef CF_ENUM(uint32_t, CTFontOrientation) {
-    kCTFontOrientationDefault       = 0,
-    kCTFontOrientationHorizontal    = 1,
-    kCTFontOrientationVertical      = 2,
+    kCTFontOrientationDefault    CT_ENUM_AVAILABLE(10_8, 6_0) = 0,
+    kCTFontOrientationHorizontal CT_ENUM_AVAILABLE(10_8, 6_0) = 1,
+    kCTFontOrientationVertical   CT_ENUM_AVAILABLE(10_8, 6_0) = 2,
 
-    kCTFontDefaultOrientation = kCTFontOrientationDefault,
-    kCTFontHorizontalOrientation = kCTFontOrientationHorizontal,
-    kCTFontVerticalOrientation = kCTFontOrientationVertical
+    kCTFontDefaultOrientation CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontOrientationDefault,
+    kCTFontHorizontalOrientation CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontOrientationHorizontal,
+    kCTFontVerticalOrientation CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontOrientationVertical
 };
 
 /*!
@@ -337,7 +335,7 @@ CTFontDescriptorRef CTFontDescriptorCreateCopyWithAttributes(
 
     @result     Returns a new font reference with the original traits in the given family, or NULL if none found in the system.
 */
-CTFontDescriptorRef CTFontDescriptorCreateCopyWithFamily(
+CTFontDescriptorRef __nullable CTFontDescriptorCreateCopyWithFamily(
     CTFontDescriptorRef     original,
     CFStringRef             family ) CT_AVAILABLE(10_9, 7_0);
 
@@ -356,7 +354,7 @@ CTFontDescriptorRef CTFontDescriptorCreateCopyWithFamily(
 
     @result     Returns a new font descriptor reference in the same family with the given symbolic traits, or NULL if none found in the system.
 */
-CTFontDescriptorRef CTFontDescriptorCreateCopyWithSymbolicTraits( 
+CTFontDescriptorRef __nullable CTFontDescriptorCreateCopyWithSymbolicTraits(
     CTFontDescriptorRef     original,
     CTFontSymbolicTraits    symTraitValue,
     CTFontSymbolicTraits    symTraitMask ) CT_AVAILABLE(10_9, 7_0);
@@ -415,9 +413,9 @@ CTFontDescriptorRef CTFontDescriptorCreateCopyWithFeature(
 
     @result     This function returns a retained array of normalized font descriptors matching the attributes present in descriptor. If descriptor itself is normalized then the array will contain only one item, the original descriptor.
 */
-CFArrayRef CTFontDescriptorCreateMatchingFontDescriptors(
+CFArrayRef __nullable CTFontDescriptorCreateMatchingFontDescriptors(
     CTFontDescriptorRef     descriptor,
-    CFSetRef                mandatoryAttributes ) CT_AVAILABLE(10_5, 3_2);
+    CFSetRef __nullable     mandatoryAttributes ) CT_AVAILABLE(10_5, 3_2);
 
 /*!
     @function   CTFontDescriptorCreateMatchingFontDescriptor
@@ -431,9 +429,9 @@ CFArrayRef CTFontDescriptorCreateMatchingFontDescriptors(
 
     @result     This function returns a retained normalized font descriptor matching the attributes present in descriptor. The original descriptor may be returned in normalized form.
 */
-CTFontDescriptorRef CTFontDescriptorCreateMatchingFontDescriptor(
+CTFontDescriptorRef __nullable CTFontDescriptorCreateMatchingFontDescriptor(
     CTFontDescriptorRef     descriptor,
-    CFSetRef                mandatoryAttributes ) CT_AVAILABLE(10_5, 3_2);
+    CFSetRef __nullable     mandatoryAttributes ) CT_AVAILABLE(10_5, 3_2);
 
     
 /*!
@@ -507,7 +505,7 @@ typedef bool (^CTFontDescriptorProgressHandler)(CTFontDescriptorMatchingState st
     
 bool CTFontDescriptorMatchFontDescriptorsWithProgressHandler(
     CFArrayRef                          descriptors,
-    CFSetRef                            mandatoryAttributes,
+    CFSetRef __nullable                 mandatoryAttributes,
     CTFontDescriptorProgressHandler     progressBlock) CT_AVAILABLE(10_9, 6_0);
 
 #endif // defined(__BLOCKS__)
@@ -540,7 +538,7 @@ CFDictionaryRef CTFontDescriptorCopyAttributes(
 
     @result     A retained reference to the requested attribute, or NULL if the requested attribute is not present. Refer to the attribute definitions for documentation as to how each attribute is packaged as a CFType.
 */
-CFTypeRef CTFontDescriptorCopyAttribute(
+CFTypeRef __nullable CTFontDescriptorCopyAttribute(
     CTFontDescriptorRef     descriptor,
     CFStringRef             attribute ) CT_AVAILABLE(10_5, 3_2);
 
@@ -558,18 +556,17 @@ CFTypeRef CTFontDescriptorCopyAttribute(
 
     @param      language
                 If non-NULL, this will be receive a retained reference to the matched language. The language identifier will conform to UTS #35.
+                If CoreText can supply its own localized string where the font cannot, this value will be NULL.
 
     @result     A retained reference to the requested attribute, or NULL if the requested attribute is not present. Refer to the attribute definitions for documentation as to how each attribute is packaged as a CFType.
 */
-CFTypeRef CTFontDescriptorCopyLocalizedAttribute(
+CFTypeRef __nullable CTFontDescriptorCopyLocalizedAttribute(
     CTFontDescriptorRef     descriptor,
     CFStringRef             attribute,
-    CFStringRef             *language ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef __nullable * __nullable language ) CT_AVAILABLE(10_5, 3_2);
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

@@ -1,19 +1,17 @@
 //
 //  SCNPhysicsContact.h
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
 //
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class SCNPhysicsContact
  @abstract SCNPhysicsContact contains information about a physics contact.
  */
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsContact : NSObject
-{
-@private
-    id _reserved;
-}
 
 //The two nodes in contact
 @property(nonatomic, readonly) SCNNode *nodeA;
@@ -26,3 +24,5 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 @property(nonatomic, readonly) CGFloat    penetrationDistance; 
 
 @end
+
+NS_ASSUME_NONNULL_END

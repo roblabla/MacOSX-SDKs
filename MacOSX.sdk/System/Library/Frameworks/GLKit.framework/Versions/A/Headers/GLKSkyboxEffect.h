@@ -75,6 +75,8 @@
       [skybox prepareToDraw];
       [skybox draw];
 */
+
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKSkyboxEffect : NSObject <GLKNamedEffect>
 {
@@ -103,10 +105,11 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 // Draw skybox
 - (void) draw;
 
-// Properties                                                                             // Default Value
-@property (nonatomic, assign)   GLKVector3                         center;                // { 0.0, 0.0, 0.0 }
-@property (nonatomic, assign)   GLfloat                            xSize, ySize, zSize;   // 1.0, 1.0, 1.0
-@property (nonatomic, readonly) GLKEffectPropertyTexture           *textureCubeMap;       // name == 0, target == GL_TEXTURE_CUBE_MAP
-@property (nonatomic, readonly) GLKEffectPropertyTransform         *transform;            // Identity for all matrices
-@property (nonatomic, copy)     NSString                           *label;                // nil
+// Properties                                                                           // Default Value
+@property (nonatomic, assign)         GLKVector3                 center;                // { 0.0, 0.0, 0.0 }
+@property (nonatomic, assign)         GLfloat                    xSize, ySize, zSize;   // 1.0, 1.0, 1.0
+@property (nonatomic, readonly)       GLKEffectPropertyTexture   *textureCubeMap;       // name == 0, target == GL_TEXTURE_CUBE_MAP
+@property (nonatomic, readonly)       GLKEffectPropertyTransform *transform;            // Identity for all matrices
+@property (nullable, nonatomic, copy) NSString                   *label;                // nil
 @end
+NS_ASSUME_NONNULL_END

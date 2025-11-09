@@ -1,14 +1,16 @@
 /*	NSProtocolChecker.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSProxy.h>
 #import <Foundation/NSObject.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSProtocolChecker : NSProxy
 
 @property (readonly) Protocol *protocol;
-@property (readonly, retain) NSObject *target;
+@property (nullable, readonly, retain) NSObject *target;
 
 @end
 
@@ -19,3 +21,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -2,10 +2,12 @@
  	File:		AVMIDIPlayer.h
  	Framework:	AVFoundation
  
- 	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+ 	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVAudioTime;
 
@@ -23,23 +25,23 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	void *_impl;
 }
 
-/*!	@method initWithContentsOfURL:error
+/*!	@method initWithContentsOfURL:soundBankURL:error:
  	@abstract Create a player with the contents of the file specified by the URL.
 	@discussion
  		'bankURL' should contain the path to a SoundFont2 or DLS bank to be used
  		by the MIDI synthesizer.  For OSX it can be set to nil for the default,
  		but for iOS it must always refer to a valid bank file.
 */
-- (instancetype)initWithContentsOfURL:(NSURL *)inURL soundBankURL:(NSURL *)bankURL error:(NSError **)outError;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)inURL soundBankURL:(NSURL * __nullable)bankURL error:(NSError **)outError;
 
-/*!	@method initWithData:error
+/*!	@method initWithData:soundBankURL:error:
 	@abstract Create a player with the contents of the data object
 	@discussion
 		'bankURL' should contain the path to a SoundFont2 or DLS bank to be used
 		by the MIDI synthesizer.  For OSX it can be set to nil for the default,
 		but for iOS it must always refer to a valid bank file.
  */
-- (instancetype)initWithData:(NSData *)data soundBankURL:(NSURL *)bankURL error:(NSError **)outError;
+- (nullable instancetype)initWithData:(NSData *)data soundBankURL:(NSURL * __nullable)bankURL error:(NSError **)outError;
 
 /* transport control */
 
@@ -50,10 +52,10 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)prepareToPlay;
 
-/*! @method play
+/*! @method play:
 	@abstract Play the sequence.
  */
-- (void)play:(AVMIDIPlayerCompletionHandler)completionHandler;
+- (void)play:(AVMIDIPlayerCompletionHandler __nullable)completionHandler;
 
 /*! @method stop
 	@abstract Stop playing the sequence.
@@ -88,3 +90,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property(nonatomic) NSTimeInterval currentPosition;
 
 @end
+
+NS_ASSUME_NONNULL_END

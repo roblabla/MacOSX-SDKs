@@ -1,18 +1,21 @@
 /*
     NSPathControl.h
     Application Kit
-    Copyright (c) 2005-2014, Apple Inc.
+    Copyright (c) 2005-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSPathCell.h>
 #import <AppKit/NSDragging.h>
 
-@class NSMutableArray, NSPathComponentCell, NSOpenPanel, NSPathControlItem;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSPathComponentCell, NSOpenPanel, NSPathControlItem;
 @protocol NSPathControlDelegate;
 
 /* 
@@ -49,21 +52,21 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Specifies the allowed types when the control isEditable. The allowedTypes can contain a file extension (without the period that begins the extension) or UTI (Uniform Type Identifier). To allow folders, include the UTI 'public.folder'. To allow all types, use 'nil'. If allowedTypes is an empty array, nothing will be allowed. The default value is 'nil', allowing all types.
  */
-@property(copy) NSArray *allowedTypes NS_AVAILABLE_MAC(10_10);
+@property(nullable, copy) NSArray<NSString *> *allowedTypes NS_AVAILABLE_MAC(10_10);
 
 
 /* If there are no components in the path, the placeholder is drawn instead (if non-nil).  We first try to draw the placeholderAttributedString. If it's nil, then the placeholderString will be drawn with correct default attributes.
  */
-@property(copy) NSString *placeholderString NS_AVAILABLE_MAC(10_10);
-@property(copy) NSAttributedString *placeholderAttributedString NS_AVAILABLE_MAC(10_10);
+@property(nullable, copy) NSString *placeholderString NS_AVAILABLE_MAC(10_10);
+@property(nullable, copy) NSAttributedString *placeholderAttributedString NS_AVAILABLE_MAC(10_10);
 
 /* Gets and sets the path value displayed. When setting, an array of NSPathControlItems will automatically be set based on the path in the 'url'. If the 'url' is a file URL (returns YES from isFileURL), the images will automatically be filled up with file icons, if the path exists.  The URL value itself is stored in the objectValue of the control.
  */
-@property (copy) NSURL *URL;
+@property (nullable, copy) NSURL *URL;
 
 /* The selector that will be called when the user double clicks on a NSPathControlItem.
  */
-@property SEL doubleAction;
+@property (nullable) SEL doubleAction;
 
 /* The style/mode of the NSPathControl. Defaults to NSPathStyleStandard.
  */
@@ -71,20 +74,20 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* The clicked NSPathControlItem, or nil, if no item has been clicked. The clickedPathItem is generally only valid while the action or doubleAction is being sent.
  */
-@property (readonly) NSPathControlItem *clickedPathItem NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly) NSPathControlItem *clickedPathItem NS_AVAILABLE_MAC(10_10);
 
 /* The array of NSPathControlItems currently being displayed.
     Each item must be an NSPathControlItem.  Do not subclass NSPathControlItem. You cannot set this value to nil, but should instead set it to an empty array.
  */
-@property (copy) NSArray *pathItems NS_AVAILABLE_MAC(10_10);
+@property (copy) NSArray<NSPathControlItem *> *pathItems NS_AVAILABLE_MAC(10_10);
 
 /* The background color to be drawn.  By default, it will be set to a light blue color for NSPathStyleStandard, and nil for everything else. You can use [NSColor clearColor] to make the background transparent.
  */
-@property (copy) NSColor *backgroundColor;
+@property (nullable, copy) NSColor *backgroundColor;
 
 /* The delegate for this control. The delegate is weakly referenced for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign'.
 */
-@property (weak) id <NSPathControlDelegate> delegate;
+@property (nullable, weak) id <NSPathControlDelegate> delegate;
 
 /* Configures the default value returned from -draggingSourceOperationMaskForLocal:. An 'isLocal' value of YES indicates that 'mask' applies when the destination object is in the same application. An 'isLocal' value of NO indicates that 'mask' applies when the destination object in a destination object outside the receiver's application. By default, -draggingSourceOperationMaskForLocal: returns NSDragOperationEvery when 'isLocal' is YES, and NSDragOperationNone when 'isLocal' is NO.
 */
@@ -92,7 +95,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* The menu used when the syle is NSPathStylePopUp.
  */
-@property (strong) NSMenu *menu;
+@property (nullable, strong) NSMenu *menu;
 
 @end
 
@@ -135,8 +138,10 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Access to a control's NSCells is deprecated in Mac OS X 10.10.
  */
-- (NSPathComponentCell *)clickedPathComponentCell;  // Please use -[NSPathControl clickedPathItem] instead.
-- (NSArray *)pathComponentCells;                    // Please use -[NSPathControl pathItems] instead.
-- (void)setPathComponentCells:(NSArray *)cells;     // Please use -[NSPathControl setPathItems:] instead.
+- (nullable NSPathComponentCell *)clickedPathComponentCell;  // Please use -[NSPathControl clickedPathItem] instead.
+- (NSArray<NSPathComponentCell *> *)pathComponentCells;                    // Please use -[NSPathControl pathItems] instead.
+- (void)setPathComponentCells:(NSArray<NSPathComponentCell *> *)cells;     // Please use -[NSPathControl setPathItems:] instead.
 
 @end
+
+NS_ASSUME_NONNULL_END

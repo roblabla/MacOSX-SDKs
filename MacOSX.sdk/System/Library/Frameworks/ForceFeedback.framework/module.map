@@ -1,4 +1,4 @@
-framework module ForceFeedback [extern_c] [system] {
+framework module ForceFeedback [extern_c] {
   umbrella header "ForceFeedback.h"
 
   export *

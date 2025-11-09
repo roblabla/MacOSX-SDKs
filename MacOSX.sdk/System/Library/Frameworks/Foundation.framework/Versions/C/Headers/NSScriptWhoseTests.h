@@ -1,14 +1,16 @@
 /*
 	NSScriptWhoseTests.h
-	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray;
+@class NSArray<ObjectType>;
 @class NSScriptObjectSpecifier;
+@class NSSpecifierTest;
 @class NSString;
 
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
     NSEqualToComparison = 0,
@@ -25,7 +27,7 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
 
 - (BOOL)isTrue;
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -36,8 +38,8 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
     id _subTests;
 }
 
-- (instancetype)initAndTestWithTests:(NSArray *)subTests NS_DESIGNATED_INITIALIZER;
-- (instancetype)initOrTestWithTests:(NSArray *)subTests NS_DESIGNATED_INITIALIZER;
+- (instancetype)initAndTestWithTests:(NSArray<NSSpecifierTest *> *)subTests NS_DESIGNATED_INITIALIZER;
+- (instancetype)initOrTestWithTests:(NSArray<NSSpecifierTest *> *)subTests NS_DESIGNATED_INITIALIZER;
 - (instancetype)initNotTestWithTest:(NSScriptWhoseTest *)subTest NS_DESIGNATED_INITIALIZER;
 
 @end
@@ -53,24 +55,24 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
     id _object2;
 }
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithObjectSpecifier:(NSScriptObjectSpecifier *)obj1 comparisonOperator:(NSTestComparisonOperation)compOp testObject:(id)obj2 NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjectSpecifier:(nullable NSScriptObjectSpecifier *)obj1 comparisonOperator:(NSTestComparisonOperation)compOp testObject:(nullable id)obj2 NS_DESIGNATED_INITIALIZER;
 
 @end
 
 
 @interface NSObject (NSComparisonMethods)
-- (BOOL)isEqualTo:(id)object;
+- (BOOL)isEqualTo:(nullable id)object;
     // Implemented using isEqual:. Returns NO if receiver is nil.
-- (BOOL)isLessThanOrEqualTo:(id)object;
+- (BOOL)isLessThanOrEqualTo:(nullable id)object;
     // Implemented using compare. Returns NO if receiver is nil.
-- (BOOL)isLessThan:(id)object;
+- (BOOL)isLessThan:(nullable id)object;
     // Implemented using compare. Returns NO if receiver is nil.
-- (BOOL)isGreaterThanOrEqualTo:(id)object;
+- (BOOL)isGreaterThanOrEqualTo:(nullable id)object;
     // Implemented using compare. Returns NO if receiver is nil.
-- (BOOL)isGreaterThan:(id)object;
+- (BOOL)isGreaterThan:(nullable id)object;
     // Implemented using compare. Returns NO if receiver is nil.
-- (BOOL)isNotEqualTo:(id)object;
+- (BOOL)isNotEqualTo:(nullable id)object;
     // Implemented using compare. Returns NO if receiver is nil.
 - (BOOL)doesContain:(id)object;
     // Returns nil if receiver is not an NSArray or if array doesn't contain object.
@@ -101,4 +103,7 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
 - (BOOL)scriptingContains:(id)object;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
 

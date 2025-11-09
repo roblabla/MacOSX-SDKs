@@ -28,6 +28,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*
  *  kCFStreamErrorDomainFTP
@@ -58,7 +59,7 @@ CFN_EXPORT const SInt32 kCFStreamErrorDomainFTP CF_AVAILABLE(10_3, 2_0);
  *	want anonymous FTP.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPUserName CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPUserName CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -70,7 +71,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPUserName CF_AVAILABLE(10_3, 2_0
  *	anonymous FTP.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPPassword CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPPassword CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -82,7 +83,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPPassword CF_AVAILABLE(10_3, 2_0
  *	otherwise
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPUsePassiveMode CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPUsePassiveMode CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -93,7 +94,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPUsePassiveMode CF_AVAILABLE(10_
  *	of kCFNumberLongLongType to hold resource size in bytes.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPResourceSize CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPResourceSize CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -107,7 +108,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPResourceSize CF_AVAILABLE(10_3,
  *	resource size is implemented.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPFetchResourceInfo CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPFetchResourceInfo CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -118,7 +119,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPFetchResourceInfo CF_AVAILABLE(
  *	of kCFNumberLongLongType for the file offset to start transfer at.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPFileTransferOffset CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPFileTransferOffset CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -130,7 +131,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPFileTransferOffset CF_AVAILABLE
  *	server connections.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPAttemptPersistentConnection CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPAttemptPersistentConnection CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -143,7 +144,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPAttemptPersistentConnection CF_
  *	passed directly as the value.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxy CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxy CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -157,7 +158,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxy CF_AVAILABLE(10_3, 2_0);
  *	CFDictionary.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyHost CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyHost CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -171,19 +172,19 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyHost CF_AVAILABLE(10_3, 2_
  *	individually or via a CFDictionary.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyPort CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyPort CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 /*
  *  kCFStreamPropertyFTPProxyUser
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyUser CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyUser CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 /*
  *  kCFStreamPropertyFTPProxyPassword
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyPassword CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyPassword CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -201,7 +202,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyFTPProxyPassword CF_AVAILABLE(10_3
  *	resource access permission defined in sys/types.h.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceMode CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceMode CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -212,7 +213,7 @@ CFN_EXPORT const CFStringRef kCFFTPResourceMode CF_AVAILABLE(10_3, 2_0);
  *	the resource name.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceName CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceName CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -223,7 +224,7 @@ CFN_EXPORT const CFStringRef kCFFTPResourceName CF_AVAILABLE(10_3, 2_0);
  *	the resource owner's name.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceOwner CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceOwner CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -234,7 +235,7 @@ CFN_EXPORT const CFStringRef kCFFTPResourceOwner CF_AVAILABLE(10_3, 2_0);
  *	name of the group that shares the resource.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceGroup CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceGroup CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -246,7 +247,7 @@ CFN_EXPORT const CFStringRef kCFFTPResourceGroup CF_AVAILABLE(10_3, 2_0);
  *	string will contain the path to the item the link references.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceLink CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceLink CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -257,7 +258,7 @@ CFN_EXPORT const CFStringRef kCFFTPResourceLink CF_AVAILABLE(10_3, 2_0);
  *	kCFNumberLongLongType to hold the resource length in bytes.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceSize CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceSize CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -268,7 +269,7 @@ CFN_EXPORT const CFStringRef kCFFTPResourceSize CF_AVAILABLE(10_3, 2_0);
  *	resource type as defined in sys/dirent.h.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceType CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceType CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
@@ -279,12 +280,14 @@ CFN_EXPORT const CFStringRef kCFFTPResourceType CF_AVAILABLE(10_3, 2_0);
  *	last modification date and time information.
  *  
  */
-CFN_EXPORT const CFStringRef kCFFTPResourceModDate CF_AVAILABLE(10_3, 2_0);
+CFN_EXPORT const CFStringRef kCFFTPResourceModDate CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 /*
  *  CFReadStreamCreateWithFTPURL()
  *  
+ *  DEPRECATED: Use NSURLSessionAPI for ftp requests
+ *
  *  Discussion:
  *	Create an FTP read stream for downloading operation from an FTP
  *	URL. If the URL refers to a directory, the stream is a filtered
@@ -315,13 +318,15 @@ CFN_EXPORT const CFStringRef kCFFTPResourceModDate CF_AVAILABLE(10_3, 2_0);
  *  
  */
 CFN_EXPORT CFReadStreamRef 
-CFReadStreamCreateWithFTPURL(CFAllocatorRef alloc, CFURLRef ftpURL) CF_AVAILABLE(10_3, 2_0);
+CFReadStreamCreateWithFTPURL(CFAllocatorRef __nullable alloc, CFURLRef ftpURL) CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 
 /*
  *  CFFTPCreateParsedResourceListing()
  *  
+ *  DEPRECATED: Use NSURLSessionAPI for ftp requests
+ *
  *  Discussion:
  *	Parse a line of file or folder listing of Unix format, and store
  *	the extracted result in a CFDictionary.
@@ -357,13 +362,15 @@ CFReadStreamCreateWithFTPURL(CFAllocatorRef alloc, CFURLRef ftpURL) CF_AVAILABLE
  *  
  */
 CFN_EXPORT CFIndex 
-CFFTPCreateParsedResourceListing(CFAllocatorRef alloc, const UInt8 *buffer, CFIndex bufferLength, CFDictionaryRef *parsed) CF_AVAILABLE(10_3, 2_0);
+CFFTPCreateParsedResourceListing(CFAllocatorRef __nullable alloc, const UInt8 *buffer, CFIndex bufferLength, CFDictionaryRef __nullable *  __nullable parsed) CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
 
 /*
  *  CFWriteStreamCreateWithFTPURL()
- *  
+ *
+ *  DEPRECATED: Use NSURLSessionAPI for ftp requests
+ *
  *  Discussion:
  *	Create an FTP write stream for uploading operation to a FTP URL.
  *	If the URL specifies a directory, the open will be followed by a
@@ -393,10 +400,10 @@ CFFTPCreateParsedResourceListing(CFAllocatorRef alloc, const UInt8 *buffer, CFIn
  *  
  */
 CFN_EXPORT CFWriteStreamRef
-CFWriteStreamCreateWithFTPURL(CFAllocatorRef alloc, CFURLRef ftpURL) CF_AVAILABLE(10_3, 2_0);
+CFWriteStreamCreateWithFTPURL(CFAllocatorRef __nullable alloc, CFURLRef ftpURL) CF_DEPRECATED(10_3, 10_11, 2_0, 9_0 , "Use NSURLSessionAPI for ftp requests");
 
 
-
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFFTPSTREAM__ */

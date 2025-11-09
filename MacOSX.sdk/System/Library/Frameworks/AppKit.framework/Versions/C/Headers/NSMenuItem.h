@@ -1,14 +1,17 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2014, Apple Inc.
+        Copyright (c) 1996-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSView.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSMenu;
 @class NSImage, NSAttributedString, NSView;
@@ -70,21 +73,21 @@
 
 + (NSMenuItem *)separatorItem;
 
-- (instancetype)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode;
+- (instancetype)initWithTitle:(NSString *)aString action:(nullable SEL)aSelector keyEquivalent:(NSString *)charCode;
 
-@property (assign) NSMenu *menu;
+@property (nullable, assign) NSMenu *menu;
     // Never call the set method directly it is there only for subclassers.
 
 
 @property (readonly) BOOL hasSubmenu;
-@property (strong) NSMenu *submenu;
+@property (nullable, strong) NSMenu *submenu;
 
 /* Returns the NSMenuItem whose submenu contains the receiver, or nil if the receiver does not have a parent item.
 */
-@property (readonly, assign) NSMenuItem *parentItem NS_AVAILABLE_MAC(10_6);
+@property (nullable, readonly, assign) NSMenuItem *parentItem NS_AVAILABLE_MAC(10_6);
 
 @property (copy) NSString *title;
-@property (copy) NSAttributedString *attributedTitle;
+@property (nullable, copy) NSAttributedString *attributedTitle;
 
 @property (getter=isSeparatorItem, readonly) BOOL separatorItem;
 
@@ -95,26 +98,25 @@
 
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
 
-@property (strong) NSImage *image;
+@property (nullable, strong) NSImage *image;
 
 @property NSInteger state;
-@property (strong) NSImage *onStateImage; // checkmark by default
-@property (strong) NSImage *offStateImage; // none by default
-@property (strong) NSImage *mixedStateImage; // horizontal line by default?
+@property (null_resettable, strong) NSImage *onStateImage; // checkmark by default
+@property (null_resettable, strong) NSImage *offStateImage; // none by default
+@property (null_resettable, strong) NSImage *mixedStateImage; // horizontal line by default?
 
 @property (getter=isEnabled) BOOL enabled;
-
 
 @property (getter=isAlternate) BOOL alternate;
 
 @property NSInteger indentationLevel;
 
-@property (weak) id target;
-@property SEL action;
+@property (nullable, weak) id target;
+@property (nullable) SEL action;
 
 @property NSInteger tag;
 
-@property (strong) id representedObject;
+@property (nullable, strong) id representedObject;
 
 /* Set (and get) the view for a menu item.  By default, a menu item has a nil view.
 A menu item with a view does not draw its title, state, font, or other standard drawing attributes, and assigns drawing responsibility entirely to the view.  Keyboard equivalents and type-select continue to use the key equivalent and title as normal.
@@ -123,7 +125,7 @@ A view in a menu item will receive mouse and keyboard events normally.  During n
 Animation is possible via the usual mechanism (set a timer to call setNeedsDisplay: or display), but because menu tracking occurs in the NSEventTrackingRunLoopMode, you must add the timer to the run loop in that mode.
 When the menu is opened, the view is added to a window; when the menu is closed the view is removed from the window.  Override viewDidMoveToWindow in your view for a convenient place to start/stop animations, reset tracking rects, etc., but do not attempt to move or otherwise modify the window.
 When a menu item is copied via NSCopying, any attached view is copied via archiving/unarchiving.  Menu item views are not supported in the Dock menu. */
-@property (strong) NSView *view NS_AVAILABLE_MAC(10_5);
+@property (nullable, strong) NSView *view NS_AVAILABLE_MAC(10_5);
 
 /* Indicates whether the menu item should be drawn highlighted or not. */
 @property (getter=isHighlighted, readonly) BOOL highlighted NS_AVAILABLE_MAC(10_5);
@@ -133,13 +135,13 @@ When a menu item is copied via NSCopying, any attached view is copied via archiv
 @property (getter=isHiddenOrHasHiddenAncestor, readonly) BOOL hiddenOrHasHiddenAncestor NS_AVAILABLE_MAC(10_5);
 
 
-@property (copy) NSString *toolTip;
+@property (nullable, copy) NSString *toolTip;
 
 @end
 
 @interface NSView (NSViewEnclosingMenuItem)
 /* Returns the menu item containing the receiver or any of its superviews in the view hierarchy, or nil if the receiver's view hierarchy is not in a menu item. */
-@property (readonly, strong) NSMenuItem *enclosingMenuItem NS_AVAILABLE_MAC(10_5);
+@property (nullable, readonly, strong) NSMenuItem *enclosingMenuItem NS_AVAILABLE_MAC(10_5);
 @end
 
 // The NSMenuItem protocol is deprecated.  Use the NSMenuItem class in your code.
@@ -153,6 +155,8 @@ NS_DEPRECATED_MAC(10_0, 10_6)
 
 - (void)setMnemonicLocation:(NSUInteger)location NS_DEPRECATED_MAC(10_0, 10_6);
 - (NSUInteger)mnemonicLocation NS_DEPRECATED_MAC(10_0, 10_6);
-- (NSString *)mnemonic NS_DEPRECATED_MAC(10_0, 10_6);
+- (null_unspecified NSString *)mnemonic NS_DEPRECATED_MAC(10_0, 10_6);
 
 @end
+
+NS_ASSUME_NONNULL_END

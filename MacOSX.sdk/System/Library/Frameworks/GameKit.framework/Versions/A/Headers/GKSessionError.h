@@ -10,10 +10,11 @@
 #import <GameKit/GKDefines.h>
 
 // domain
-GK_EXTERN_WEAK NSString * const GKSessionErrorDomain;
+GK_EXTERN_WEAK NSString * __nonnull const GKSessionErrorDomain;
 
 // code
-typedef enum {
+typedef NS_ENUM(int, GKSessionError)
+{
     GKSessionInvalidParameterError = 30500,
     GKSessionPeerNotFoundError = 30501,
     GKSessionDeclinedError = 30502,
@@ -31,5 +32,5 @@ typedef enum {
     GKSessionInternalError = 30203,
     GKSessionUnknownError = 30204,
     GKSessionSystemError = 30205
-} GKSessionError NS_ENUM_DEPRECATED_IOS(3_0, 7_0);
+}  NS_ENUM_DEPRECATED_IOS(3_0, 7_0);
 

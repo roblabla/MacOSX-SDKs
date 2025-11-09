@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -12,6 +12,7 @@
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 // utilities for carriage of CoreMedia time structures in NSValues
 
@@ -43,3 +44,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

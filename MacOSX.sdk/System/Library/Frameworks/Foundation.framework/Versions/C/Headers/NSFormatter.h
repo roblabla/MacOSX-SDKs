@@ -1,5 +1,5 @@
 /*	NSFormatter.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,7 +7,9 @@
 
 @class NSString;
 @class NSAttributedString;
-@class NSDictionary;
+@class NSDictionary<KeyType, ObjectType>;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSFormattingContext) {
     
@@ -34,7 +36,7 @@ typedef NS_ENUM(NSInteger, NSFormattingContext) {
 /*
  * There are 3 widths: long, medium, and short.
  * For example, for English, when formatting "3 pounds"
- * Long is "3 pounds"; medium is "3 lb"; short is "3#”;
+ * Long is "3 pounds"; medium is "3 lb"; short is "3#";
  */
 typedef NS_ENUM(NSInteger, NSFormattingUnitStyle) {
     NSFormattingUnitStyleShort = 1,
@@ -44,18 +46,19 @@ typedef NS_ENUM(NSInteger, NSFormattingUnitStyle) {
 
 @interface NSFormatter : NSObject <NSCopying, NSCoding>
 
-- (NSString *)stringForObjectValue:(id)obj;
+- (nullable NSString *)stringForObjectValue:(id)obj;
 
-- (NSAttributedString *)attributedStringForObjectValue:(id)obj withDefaultAttributes:(NSDictionary *)attrs;
+- (nullable NSAttributedString *)attributedStringForObjectValue:(id)obj withDefaultAttributes:(nullable NSDictionary<NSString *, id> *)attrs;
 
-- (NSString *)editingStringForObjectValue:(id)obj;
+- (nullable NSString *)editingStringForObjectValue:(id)obj;
 
-- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string errorDescription:(out NSString **)error;
+- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
 
-- (BOOL)isPartialStringValid:(NSString *)partialString newEditingString:(NSString **)newString errorDescription:(NSString **)error;
+- (BOOL)isPartialStringValid:(NSString *)partialString newEditingString:(NSString * __nullable * __nullable)newString errorDescription:(NSString * __nullable * __nullable)error;
     // Compatibility method.  If a subclass overrides this and does not override the new method below, this will be called as before (the new method just calls this one by default).  The selection range will always be set to the end of the text with this method if replacement occurs.
 
-- (BOOL)isPartialStringValid:(NSString **)partialStringPtr proposedSelectedRange:(NSRangePointer)proposedSelRangePtr originalString:(NSString *)origString originalSelectedRange:(NSRange)origSelRange errorDescription:(NSString **)error;
+- (BOOL)isPartialStringValid:(NSString * __nonnull * __nonnull)partialStringPtr proposedSelectedRange:(nullable NSRangePointer)proposedSelRangePtr originalString:(NSString *)origString originalSelectedRange:(NSRange)origSelRange errorDescription:(NSString * __nullable * __nullable)error;
 
 @end
 
+NS_ASSUME_NONNULL_END

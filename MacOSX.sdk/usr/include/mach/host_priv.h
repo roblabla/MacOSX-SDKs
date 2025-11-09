@@ -414,7 +414,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_get_boot_info_t;
+	} __Request__host_get_boot_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -426,7 +426,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int options;
-	} __Request__host_reboot_t;
+	} __Request__host_reboot_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -439,7 +439,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		host_flavor_t flavor;
 		mach_msg_type_number_t host_info_outCnt;
-	} __Request__host_priv_statistics_t;
+	} __Request__host_priv_statistics_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -455,7 +455,7 @@ __END_DECLS
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		memory_object_cluster_size_t cluster_size;
-	} __Request__host_default_memory_manager_t;
+	} __Request__host_default_memory_manager_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -473,7 +473,7 @@ __END_DECLS
 		vm_address_t address;
 		vm_size_t size;
 		vm_prot_t desired_access;
-	} __Request__vm_wire_t;
+	} __Request__vm_wire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -489,7 +489,7 @@ __END_DECLS
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		boolean_t wired;
-	} __Request__thread_wire_t;
+	} __Request__thread_wire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -507,7 +507,7 @@ __END_DECLS
 		vm_address_t address;
 		vm_size_t size;
 		int flags;
-	} __Request__vm_allocate_cpm_t;
+	} __Request__vm_allocate_cpm_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -517,7 +517,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_processors_t;
+	} __Request__host_processors_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -529,7 +529,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		clock_id_t clock_id;
-	} __Request__host_get_clock_control_t;
+	} __Request__host_get_clock_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -541,7 +541,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		vm_address_t info;
-	} __Request__kmod_create_t;
+	} __Request__kmod_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -553,7 +553,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kmod_t module;
-	} __Request__kmod_destroy_t;
+	} __Request__kmod_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -571,7 +571,7 @@ __END_DECLS
 		kmod_t module;
 		kmod_control_flavor_t flavor;
 		mach_msg_type_number_t dataCnt;
-	} __Request__kmod_control_t;
+	} __Request__kmod_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -584,7 +584,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		int node;
 		int which;
-	} __Request__host_get_special_port_t;
+	} __Request__host_get_special_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -600,7 +600,7 @@ __END_DECLS
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		int which;
-	} __Request__host_set_special_port_t;
+	} __Request__host_set_special_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -618,7 +618,7 @@ __END_DECLS
 		exception_mask_t exception_mask;
 		exception_behavior_t behavior;
 		thread_state_flavor_t new_flavor;
-	} __Request__host_set_exception_ports_t;
+	} __Request__host_set_exception_ports_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -630,7 +630,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		exception_mask_t exception_mask;
-	} __Request__host_get_exception_ports_t;
+	} __Request__host_get_exception_ports_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -648,7 +648,7 @@ __END_DECLS
 		exception_mask_t exception_mask;
 		exception_behavior_t behavior;
 		thread_state_flavor_t new_flavor;
-	} __Request__host_swap_exception_ports_t;
+	} __Request__host_swap_exception_ports_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -666,7 +666,7 @@ __END_DECLS
 		mach_vm_address_t address;
 		mach_vm_size_t size;
 		vm_prot_t desired_access;
-	} __Request__mach_vm_wire_t;
+	} __Request__mach_vm_wire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -676,7 +676,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_processor_sets_t;
+	} __Request__host_processor_sets_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -690,7 +690,7 @@ __END_DECLS
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t set_name;
 		/* end of the kernel processed data */
-	} __Request__host_processor_set_priv_t;
+	} __Request__host_processor_set_priv_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -704,7 +704,7 @@ __END_DECLS
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t control_port;
 		/* end of the kernel processed data */
-	} __Request__set_dp_control_port_t;
+	} __Request__set_dp_control_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -714,7 +714,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__get_dp_control_port_t;
+	} __Request__get_dp_control_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -728,7 +728,7 @@ __END_DECLS
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t server;
 		/* end of the kernel processed data */
-	} __Request__host_set_UNDServer_t;
+	} __Request__host_set_UNDServer_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -738,7 +738,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_get_UNDServer_t;
+	} __Request__host_get_UNDServer_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -755,7 +755,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		uint32_t user_log_flags;
 		mach_msg_type_number_t request_dataCnt;
-	} __Request__kext_request_t;
+	} __Request__kext_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -808,7 +808,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_type_number_t boot_infoOffset; /* MiG doesn't use it */
 		mach_msg_type_number_t boot_infoCnt;
 		char boot_info[4096];
-	} __Reply__host_get_boot_info_t;
+	} __Reply__host_get_boot_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -820,7 +820,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__host_reboot_t;
+	} __Reply__host_reboot_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -834,7 +834,7 @@ union __RequestUnion__host_priv_subsystem {
 		kern_return_t RetCode;
 		mach_msg_type_number_t host_info_outCnt;
 		integer_t host_info_out[68];
-	} __Reply__host_priv_statistics_t;
+	} __Reply__host_priv_statistics_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -848,7 +848,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t default_manager;
 		/* end of the kernel processed data */
-	} __Reply__host_default_memory_manager_t;
+	} __Reply__host_default_memory_manager_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -860,7 +860,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__vm_wire_t;
+	} __Reply__vm_wire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -872,7 +872,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__thread_wire_t;
+	} __Reply__thread_wire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -885,7 +885,7 @@ union __RequestUnion__host_priv_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		vm_address_t address;
-	} __Reply__vm_allocate_cpm_t;
+	} __Reply__vm_allocate_cpm_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -901,7 +901,7 @@ union __RequestUnion__host_priv_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t out_processor_listCnt;
-	} __Reply__host_processors_t;
+	} __Reply__host_processors_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -915,7 +915,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t clock_ctrl;
 		/* end of the kernel processed data */
-	} __Reply__host_get_clock_control_t;
+	} __Reply__host_get_clock_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -928,7 +928,7 @@ union __RequestUnion__host_priv_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		kmod_t module;
-	} __Reply__kmod_create_t;
+	} __Reply__kmod_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -940,7 +940,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__kmod_destroy_t;
+	} __Reply__kmod_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -956,7 +956,7 @@ union __RequestUnion__host_priv_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t dataCnt;
-	} __Reply__kmod_control_t;
+	} __Reply__kmod_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -970,7 +970,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t port;
 		/* end of the kernel processed data */
-	} __Reply__host_get_special_port_t;
+	} __Reply__host_get_special_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -982,7 +982,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__host_set_special_port_t;
+	} __Reply__host_set_special_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -994,7 +994,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__host_set_exception_ports_t;
+	} __Reply__host_set_exception_ports_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1013,7 +1013,7 @@ union __RequestUnion__host_priv_subsystem {
 		exception_mask_t masks[32];
 		exception_behavior_t old_behaviors[32];
 		thread_state_flavor_t old_flavors[32];
-	} __Reply__host_get_exception_ports_t;
+	} __Reply__host_get_exception_ports_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1032,7 +1032,7 @@ union __RequestUnion__host_priv_subsystem {
 		exception_mask_t masks[32];
 		exception_behavior_t old_behaviors[32];
 		thread_state_flavor_t old_flavors[32];
-	} __Reply__host_swap_exception_ports_t;
+	} __Reply__host_swap_exception_ports_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1044,7 +1044,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_vm_wire_t;
+	} __Reply__mach_vm_wire_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1060,7 +1060,7 @@ union __RequestUnion__host_priv_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t processor_setsCnt;
-	} __Reply__host_processor_sets_t;
+	} __Reply__host_processor_sets_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1074,7 +1074,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t set;
 		/* end of the kernel processed data */
-	} __Reply__host_processor_set_priv_t;
+	} __Reply__host_processor_set_priv_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1086,7 +1086,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__set_dp_control_port_t;
+	} __Reply__set_dp_control_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1100,7 +1100,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t contorl_port;
 		/* end of the kernel processed data */
-	} __Reply__get_dp_control_port_t;
+	} __Reply__get_dp_control_port_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1112,7 +1112,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__host_set_UNDServer_t;
+	} __Reply__host_set_UNDServer_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1126,7 +1126,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t server;
 		/* end of the kernel processed data */
-	} __Reply__host_get_UNDServer_t;
+	} __Reply__host_get_UNDServer_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1145,7 +1145,7 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_type_number_t response_dataCnt;
 		mach_msg_type_number_t log_dataCnt;
 		kern_return_t op_result;
-	} __Reply__kext_request_t;
+	} __Reply__kext_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

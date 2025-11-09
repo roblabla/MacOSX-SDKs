@@ -10,6 +10,8 @@
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLAvailability.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CLRegionInternal;
 
 /*
@@ -122,3 +124,5 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 - (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

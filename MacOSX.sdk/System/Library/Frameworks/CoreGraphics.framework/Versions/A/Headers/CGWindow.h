@@ -5,6 +5,8 @@
 #ifndef CGWINDOW_H_
 #define CGWINDOW_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
 /* The CGWindowID contains a unique value within the user session
@@ -12,30 +14,28 @@
 
 typedef uint32_t CGWindowID;
 
-/* Options for use with these APIs. */
-typedef uint32_t CGWindowListOption;
-typedef uint32_t CGWindowImageOption;
-
 /* Values used for `CGWindowSharingType'. */
-enum {
-  kCGWindowSharingNone = 0,
-  kCGWindowSharingReadOnly = 1,
-  kCGWindowSharingReadWrite = 2
+typedef CF_ENUM(uint32_t, CGWindowSharingType) {
+    kCGWindowSharingNone = 0,
+    kCGWindowSharingReadOnly = 1,
+    kCGWindowSharingReadWrite = 2
 };
-typedef uint32_t CGWindowSharingType;
 
 /* Values used for `CGWindowBackingType'. */
-enum {
-  kCGBackingStoreRetained = 0,
-  kCGBackingStoreNonretained = 1,
-  kCGBackingStoreBuffered = 2
+typedef CF_ENUM(uint32_t, CGWindowBackingType) {
+    kCGBackingStoreRetained = 0,
+    kCGBackingStoreNonretained = 1,
+    kCGBackingStoreBuffered = 2
 };
-typedef uint32_t CGWindowBackingType;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGImage.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFArray.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* A value which is never the window ID of any window. */
 
@@ -47,117 +47,117 @@ typedef uint32_t CGWindowBackingType;
    window. The value of this key is a CFNumber 32-bit signed integer
    value. */
 
-CG_EXTERN const CFStringRef kCGWindowNumber
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowNumber
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* The backing store type of the window, one of `kCGBackingStoreRetained',
    `kCGBackingStoreNonretained', or `kCGBackingStoreBuffered'. The value of
    this key is a CFNumber 32-bit signed integer value. */
 
-CG_EXTERN const CFStringRef kCGWindowStoreType
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowStoreType
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* The window layer number of the window. The value of this key is a
    CFNumber 32-bit signed integer value. */
 
-CG_EXTERN const CFStringRef kCGWindowLayer
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowLayer
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* The bounds of the window in screen space, with the origin at the
    upper-left corner of the main display. The value of this key is a
    CFDictionary; use `CGRectMakeWithDictionaryRepresentation' to obtain the
    bounds as a CGRect value. */
 
-CG_EXTERN const CFStringRef kCGWindowBounds
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowBounds
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* The sharing state of the window, one of `kCGWindowSharingNone',
    `kCGWindowSharingReadOnly', or `kCGWindowSharingReadWrite'. The value of
    this key is a CFNumber 32-bit signed integer value. */
 
-CG_EXTERN const CFStringRef kCGWindowSharingState
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowSharingState
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* The alpha fade of the window. The value of this key is a CFNumber
    floating-point value. The value 1.0 is normal (opaque); the value 0.0 is
    fully transparent (invisible). */
 
-CG_EXTERN const CFStringRef kCGWindowAlpha
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowAlpha
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* The process ID of the process that owns the window. The value of this key
    is a CFNumber 32-bit signed integer value. */
 
-CG_EXTERN const CFStringRef kCGWindowOwnerPID
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowOwnerPID
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* An estimate of the memory in bytes currently used by the window and its
    supporting data structures. The value of this key is a CFNumber 64-bit
    signed integer value. */
 
-CG_EXTERN const CFStringRef kCGWindowMemoryUsage
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowMemoryUsage
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Optional keys for window dictionaries. */
 
 /* If present, the workspace ID of the workspace associated with the window.
    The value of this key is a CFNumber 32-bit signed integer value. */
 
-CG_EXTERN const CFStringRef kCGWindowWorkspace
+CG_EXTERN const CFStringRef  kCGWindowWorkspace
   CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /* If present, the name of the application process which owns the window.
    The value of this key is a CFString. */
 
-CG_EXTERN const CFStringRef kCGWindowOwnerName
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowOwnerName
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* If present, the name of the window. The value of this key is a
    CFString. */
 
-CG_EXTERN const CFStringRef kCGWindowName
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowName
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* If present, true if the window is ordered on screen, false otherwise. If
    the key is not present, then the window is not ordered on screen. The
    value of this key is a CFBoolean. */
 
-CG_EXTERN const CFStringRef kCGWindowIsOnscreen
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowIsOnscreen
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* If present, true if the window backing store is in video memory, false
    otherwise. If the key is not present, then the window backing store is in
    main memory. The value of this key is a CFBoolean. */
 
-CG_EXTERN const CFStringRef kCGWindowBackingLocationVideoMemory
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN const CFStringRef  kCGWindowBackingLocationVideoMemory
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Flags for CGWindowListOption values.  These may be ORed together. */
 
-enum {
-  /* List all windows in this user session, including both on- and
+typedef CF_OPTIONS(uint32_t, CGWindowListOption) {
+    /* List all windows in this user session, including both on- and
      off-screen windows. The parameter `relativeToWindow' should be
      `kCGNullWindowID'. */
-  kCGWindowListOptionAll = 0,
+    kCGWindowListOptionAll = 0,
 
-  /* List all on-screen windows in this user session, ordered from front to
+    /* List all on-screen windows in this user session, ordered from front to
      back. The parameter `relativeToWindow' should be `kCGNullWindowID'. */
-  kCGWindowListOptionOnScreenOnly = (1 << 0),
+    kCGWindowListOptionOnScreenOnly = (1 << 0),
 
-  /* List all on-screen windows above the window specified by
+    /* List all on-screen windows above the window specified by
      `relativeToWindow', ordered from front to back. */
-  kCGWindowListOptionOnScreenAboveWindow = (1 << 1),
+    kCGWindowListOptionOnScreenAboveWindow = (1 << 1),
 
-  /* List all on-screen windows below the window specified by
+    /* List all on-screen windows below the window specified by
      `relativeToWindow', ordered from front to back. */
-  kCGWindowListOptionOnScreenBelowWindow = (1 << 2),
+    kCGWindowListOptionOnScreenBelowWindow = (1 << 2),
 
-  /* Include the window specified by `relativeToWindow' in any list,
+    /* Include the window specified by `relativeToWindow' in any list,
      effectively creating `at-or-above' or `at-or-below' lists. */
-  kCGWindowListOptionIncludingWindow = (1 << 3),
-    
-  /* Exclude any windows from the list that are elements of the desktop. */
-  kCGWindowListExcludeDesktopElements = (1 << 4)
+    kCGWindowListOptionIncludingWindow = (1 << 3),
+
+    /* Exclude any windows from the list that are elements of the desktop. */
+    kCGWindowListExcludeDesktopElements = (1 << 4)
 };
 
 /* Return an array of window dictionaries for windows within the user
@@ -167,8 +167,9 @@ enum {
    GUI session or the window server is disabled. You should release the
    array when you are finished using it. */
 
-CG_EXTERN CFArrayRef CGWindowListCopyWindowInfo(CGWindowListOption option,
-  CGWindowID relativeToWindow) CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN CFArrayRef __nullable CGWindowListCopyWindowInfo(CGWindowListOption option,
+    CGWindowID relativeToWindow)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Return an array of CGWindowID values for windows within the user session.
 
@@ -176,8 +177,10 @@ CG_EXTERN CFArrayRef CGWindowListCopyWindowInfo(CGWindowListOption option,
    GUI session or the window server is disabled. You should release the
    array when you are finished using it. */
 
-CG_EXTERN CFArrayRef CGWindowListCreate(CGWindowListOption option,
-  CGWindowID relativeToWindow) CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN CFArrayRef __nullable CGWindowListCreate(CGWindowListOption option,
+    CGWindowID relativeToWindow)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA)
+    CF_SWIFT_UNAVAILABLE("No replacement at present");
 
 /* Return an array of window dictionaries, each corresponding to a window ID
    specified in `windowArray'.
@@ -186,34 +189,34 @@ CG_EXTERN CFArrayRef CGWindowListCreate(CGWindowListOption option,
    GUI session or the window server is disabled. You should release the
    array when you are finished using it. */
 
-CG_EXTERN CFArrayRef CGWindowListCreateDescriptionFromArray(CFArrayRef
-  windowArray) CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN CFArrayRef __nullable CGWindowListCreateDescriptionFromArray(
+    CFArrayRef __nullable windowArray)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Flags for CGWindowImageOption values.  These may be ORed together. */
 
-enum {
-
-  /* If `CGRectNull' is passed as the screen bounds, then then bounds
+typedef CF_OPTIONS(uint32_t, CGWindowImageOption) {
+    /* If `CGRectNull' is passed as the screen bounds, then then bounds
      computation includes window frame ornamentation, such as a shadow. */
-  kCGWindowImageDefault = 0,
+    kCGWindowImageDefault = 0,
 
-  /* If `CGRectNull' is passed as the screen bounds, then then bounds
+    /* If `CGRectNull' is passed as the screen bounds, then then bounds
      computation excludes window frame ornamentation, such as a shadow. */
-  kCGWindowImageBoundsIgnoreFraming = (1 << 0),
+    kCGWindowImageBoundsIgnoreFraming = (1 << 0),
 
-  /* Force the created image to be opaque.  Empty areas are white */
-  kCGWindowImageShouldBeOpaque = (1 << 1),
+    /* Force the created image to be opaque.  Empty areas are white */
+    kCGWindowImageShouldBeOpaque = (1 << 1),
 
-  /* Only draw the windows' shadows, not the windows themselves. */
-  kCGWindowImageOnlyShadows = (1 << 2),
+    /* Only draw the windows' shadows, not the windows themselves. */
+    kCGWindowImageOnlyShadows = (1 << 2),
 
-  /* Return the best image resolution. The screen size may be
+    /* Return the best image resolution. The screen size may be
      different than the returned image size. */
-  kCGWindowImageBestResolution = (1 << 3),
+    kCGWindowImageBestResolution = (1 << 3),
 
-  /* Return the nominal image resolution. The screen size
+    /* Return the nominal image resolution. The screen size
      equals the returned image size. */
-  kCGWindowImageNominalResolution = (1 << 4)
+    kCGWindowImageNominalResolution = (1 << 4)
 };
 
 /* Create an image containing a composite of the specified set of windows
@@ -260,18 +263,19 @@ enum {
    This function returns NULL if the caller is not running within a Quartz
    GUI session or the window server is disabled. */
 
-CG_EXTERN CGImageRef CGWindowListCreateImage(CGRect screenBounds,
-  CGWindowListOption listOption, CGWindowID windowID,
-  CGWindowImageOption imageOption)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN CGImageRef __nullable CGWindowListCreateImage(CGRect screenBounds,
+    CGWindowListOption listOption, CGWindowID windowID,
+    CGWindowImageOption imageOption)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Create an image containing a composite of the specified set of windows
    contained within a rectangular area à la `CGWindowListCreateImage'. The
    set of windows is specified by `windowArray', an array of window IDs. */
 
-CG_EXTERN CGImageRef CGWindowListCreateImageFromArray(CGRect screenBounds,
-  CFArrayRef windowArray, CGWindowImageOption imageOption)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN CGImageRef __nullable CGWindowListCreateImageFromArray(
+    CGRect screenBounds, CFArrayRef  windowArray,
+    CGWindowImageOption imageOption)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* A CFNumberRef encoding appropriate for use with a CGWindowID. */
 #define kCGWindowIDCFNumberType kCFNumberSInt32Type
@@ -281,5 +285,9 @@ CG_EXTERN CGImageRef CGWindowListCreateImageFromArray(CGRect screenBounds,
 
 /* CFNumberRef encoding appropriate for use with CGWindowBackingType */
 #define kCGWindowBackingCFNumberType kCFNumberSInt32Type
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGWINDOW_H_ */

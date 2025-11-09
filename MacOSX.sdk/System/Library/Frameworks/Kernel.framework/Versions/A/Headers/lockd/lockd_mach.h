@@ -127,7 +127,7 @@ __END_DECLS
 		xcred cred;
 		uint32_t fh_len;
 		nfs_handle fh;
-	} __Request__lockd_request_t;
+	} __Request__lockd_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -137,7 +137,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__lockd_ping_t;
+	} __Request__lockd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -147,7 +147,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__lockd_shutdown_t;
+	} __Request__lockd_shutdown_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -175,7 +175,7 @@ union __RequestUnion__lockd_mach_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lockd_request_t;
+	} __Reply__lockd_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -187,7 +187,7 @@ union __RequestUnion__lockd_mach_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lockd_ping_t;
+	} __Reply__lockd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -199,7 +199,7 @@ union __RequestUnion__lockd_mach_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__lockd_shutdown_t;
+	} __Reply__lockd_shutdown_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

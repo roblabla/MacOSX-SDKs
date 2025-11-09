@@ -2,7 +2,7 @@
  *  CTParagraphStyle.h
  *  CoreText
  *
- *  Copyright (c) 2004-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -22,16 +22,14 @@
 #include <CoreGraphics/CGBase.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Paragraph Style Types */
 /* --------------------------------------------------------------------------- */
 
-typedef const struct __CTParagraphStyle * CTParagraphStyleRef;
+typedef const struct CF_RELATED_TYPE(NSParagraphStyle,,) __CTParagraphStyle * CTParagraphStyleRef;
 
 
 /*!
@@ -68,17 +66,17 @@ CFTypeID CTParagraphStyleGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 typedef CF_ENUM(uint8_t, CTTextAlignment) {
-    kCTTextAlignmentLeft = 0,
-    kCTTextAlignmentRight = 1,
-    kCTTextAlignmentCenter = 2,
-    kCTTextAlignmentJustified = 3,
-    kCTTextAlignmentNatural = 4,
+    kCTTextAlignmentLeft      CT_ENUM_AVAILABLE(10_8, 6_0) = 0,
+    kCTTextAlignmentRight     CT_ENUM_AVAILABLE(10_8, 6_0) = 1,
+    kCTTextAlignmentCenter    CT_ENUM_AVAILABLE(10_8, 6_0) = 2,
+    kCTTextAlignmentJustified CT_ENUM_AVAILABLE(10_8, 6_0) = 3,
+    kCTTextAlignmentNatural   CT_ENUM_AVAILABLE(10_8, 6_0) = 4,
 
-    kCTLeftTextAlignment = kCTTextAlignmentLeft,
-    kCTRightTextAlignment = kCTTextAlignmentRight,
-    kCTCenterTextAlignment = kCTTextAlignmentCenter,
-    kCTJustifiedTextAlignment = kCTTextAlignmentJustified,
-    kCTNaturalTextAlignment = kCTTextAlignmentNatural
+    kCTLeftTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentLeft,
+    kCTRightTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentRight,
+    kCTCenterTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentCenter,
+    kCTJustifiedTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentJustified,
+    kCTNaturalTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentNatural
 };
 
 
@@ -375,7 +373,7 @@ typedef struct CTParagraphStyleSetting
 {
     CTParagraphStyleSpecifier spec;
     size_t valueSize;
-    const void* value;
+    const void * value;
 
 } CTParagraphStyleSetting;
 
@@ -414,7 +412,7 @@ typedef struct CTParagraphStyleSetting
 */
 
 CTParagraphStyleRef CTParagraphStyleCreate(
-    const CTParagraphStyleSetting * settings,
+    const CTParagraphStyleSetting * __nullable settings,
     size_t settingCount ) CT_AVAILABLE(10_5, 3_2);
 
 
@@ -423,8 +421,7 @@ CTParagraphStyleRef CTParagraphStyleCreate(
     @abstract   Creates an immutable copy of a paragraph style.
 
     @param      paragraphStyle
-                The style that you wish to copy. This parameter may not be
-                set to NULL.
+                The style that you wish to copy.
 
     @result     If the "paragraphStyle" reference is valid, then this
                 function will return valid reference to an immutable
@@ -455,8 +452,7 @@ CTParagraphStyleRef CTParagraphStyleCreateCopy(
                 in future versions.
 
     @param      paragraphStyle
-                The paragraph style that you wish to get the value from. This
-                parameter may not be set to NULL.
+                The paragraph style that you wish to get the value from.
 
     @param      spec
                 The setting specifier that you want to get the value for.
@@ -469,8 +465,7 @@ CTParagraphStyleRef CTParagraphStyleCreateCopy(
     @param      valueBuffer
                 The buffer where the requested setting value will be written
                 upon successful completion. The buffer's size needs to be at least
-                as large as the value passed into "valueBufferSize". This parameter
-                is required and may not be set to NULL.
+                as large as the value passed into "valueBufferSize".
 
     @result     This function will return "true" if the valueBuffer had been
                 successfully filled. Otherwise, this function will return false,
@@ -484,10 +479,8 @@ bool CTParagraphStyleGetValueForSpecifier(
     void * valueBuffer ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
-
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

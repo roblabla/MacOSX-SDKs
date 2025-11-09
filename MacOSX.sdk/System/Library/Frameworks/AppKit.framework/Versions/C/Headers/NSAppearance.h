@@ -1,12 +1,14 @@
 /*
         NSAppearance.h
         Application Kit
-        Copyright (c) 2011-2014, Apple Inc.
+        Copyright (c) 2011-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSString, NSBundle;
 
@@ -27,18 +29,18 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 
 // Setting and identifying the current appearance in the thread.
 + (NSAppearance *)currentAppearance;
-+ (void)setCurrentAppearance:(NSAppearance *)appearance; // nil is valid and indicates the default appearance.
++ (void)setCurrentAppearance:(nullable NSAppearance *)appearance; // nil is valid and indicates the default appearance.
 
 /* Finds and returns an NSAppearance based on the name. 
  For standard appearances such as NSAppearanceNameAqua, a built-in appearance is returned.
  For other names, the main bundle is searched.
  */
-+ (NSAppearance *)appearanceNamed:(NSString *)name;
++ (nullable NSAppearance *)appearanceNamed:(NSString *)name;
 
 /* Creates an NSAppearance by searching the specified bundle for a file with the specified name (without path extension).
     If bundle is nil, the main bundle is assumed.
  */
-- (instancetype)initWithAppearanceNamed:(NSString *)name bundle:(NSBundle *)bundle;
+- (nullable instancetype)initWithAppearanceNamed:(NSString *)name bundle:(nullable NSBundle *)bundle;
 
 /* Query allowsVibrancy to see if the given appearance actually needs vibrant drawing. You may want to draw differently if the current apperance is vibrant.
  */
@@ -49,23 +51,25 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 #pragma mark -
 #pragma mark Standard Appearances
 
-APPKIT_EXTERN NSString *const NSAppearanceNameAqua NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSString *const NSAppearanceNameLightContent NS_DEPRECATED_MAC(10_9, 10_10, "Light content should use the default Aqua apppearance.");
+APPKIT_EXTERN NSString * const NSAppearanceNameAqua NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString * const NSAppearanceNameLightContent NS_DEPRECATED_MAC(10_9, 10_10, "Light content should use the default Aqua apppearance.");
 
 /* The following two Vibrant appearances should only be set on an NSVisualEffectView, or one of its container subviews.
  */
-APPKIT_EXTERN NSString *const NSAppearanceNameVibrantDark NS_AVAILABLE_MAC(10_10);
-APPKIT_EXTERN NSString *const NSAppearanceNameVibrantLight NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSString * const NSAppearanceNameVibrantDark NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSString * const NSAppearanceNameVibrantLight NS_AVAILABLE_MAC(10_10);
 
 #pragma mark -
 
 @protocol NSAppearanceCustomization <NSObject>
 @required
 
-@property (strong) NSAppearance *appearance NS_AVAILABLE_MAC(10_9);
+@property (nullable, strong) NSAppearance *appearance NS_AVAILABLE_MAC(10_9);
 
 /* This returns the appearance that would be used when drawing the receiver, taking inherited appearances into account.
  */
 @property (readonly, strong) NSAppearance *effectiveAppearance NS_AVAILABLE_MAC(10_9);
 
 @end
+
+NS_ASSUME_NONNULL_END

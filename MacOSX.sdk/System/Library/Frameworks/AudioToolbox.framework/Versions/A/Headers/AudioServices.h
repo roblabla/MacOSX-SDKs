@@ -1,29 +1,13 @@
-/*==================================================================================================
-     File:       AudioToolbox/AudioServices.h
-
-     Contains:   API for general high level audio services.
-
-     Copyright:  (c) 2006 - 2011 by Apple, Inc., all rights reserved.
-
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
-
-                     http://developer.apple.com/bugreporter/
-
-==================================================================================================*/
-#if !defined(__AudioServices_h__)
-#define __AudioServices_h__
-
-//==================================================================================================
-
 /*!
-    @header AudioServices
-    This header describes the API for several high level audio services.
-    
-    About AudioServices 
+	@file		AudioServices.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2006-2015 by Apple, Inc., all rights reserved.
+    @abstract   API's for general high level audio services.
+
+    @discussion
+
     AudioServices provides a means to play audio for things such as UI sound effects.
     
-    About the Audio Hardware Service
     The Audio Hardware Service (AHS) provides a way for applications to query and manipulate the
     aspects of an audio hardware device without incurring the overhead of loading the full audio
     HAL. AHS provides access to all the AudioObjects and their properties on the system. However,
@@ -32,6 +16,9 @@
     incorporates the various structures and constants in HAL's API, with the caveat that the
     AudioObjectIDs used in AHS cannot be used with the HAL.
 */
+
+#ifndef AudioToolbox_AudioServices_h
+#define AudioToolbox_AudioServices_h
 
 //==================================================================================================
 #pragma mark    Includes
@@ -49,6 +36,7 @@
 #endif
 
 //==================================================================================================
+CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
 extern "C"
@@ -74,7 +62,7 @@ extern "C"
     @constant       kAudioServicesSystemSoundClientTimedOutError 
                         SystemSound client message timed out
 */
-enum
+CF_ENUM(OSStatus)
 {
 	kAudioServicesNoError									=  0,
 	kAudioServicesUnsupportedPropertyError					= 'pty?',
@@ -112,8 +100,8 @@ typedef UInt32      AudioServicesPropertyID;
                         Client application user data
 */
 typedef void
-(*AudioServicesSystemSoundCompletionProc)(  SystemSoundID  ssID, 
-                                        	void*          clientData);
+(*AudioServicesSystemSoundCompletionProc)(  SystemSoundID       ssID,
+                                        	void* __nullable    clientData);
 
 //==================================================================================================
 #pragma mark    AudioServices Constants
@@ -124,22 +112,18 @@ typedef void
     @constant       kSystemSoundID_UserPreferredAlert 
                         Use this constant with the play sound APIs to
                         playback the alert sound selected by the User in System Preferences.
-    @constant       kSystemSoundID_Vibrate
-                        Use this constant with the play sound APIs to vibrate the device
-                        - iOS only 
-                            - on a device with no vibration capability (like iPod Touch) this will 
-                            do nothing
     @constant       kSystemSoundID_FlashScreen
                         Use this constant with the play sound APIs to flash the screen
                         - Desktop systems only
 */
-enum
+CF_ENUM(SystemSoundID)
 {
     kSystemSoundID_UserPreferredAlert   = 0x00001000,
     kSystemSoundID_FlashScreen          = 0x00000FFE,
         // this has been renamed to be consistent
     kUserPreferredAlert     = kSystemSoundID_UserPreferredAlert
 };
+
 
 //==================================================================================================
 #pragma mark    AudioServices Properties
@@ -158,7 +142,7 @@ enum
                         a UInt32 where 1 means that the SystemSoundID passed in the
                         inSpecifier parameter will finish playing even if the client application goes away.
 */
-enum
+CF_ENUM(AudioServicesPropertyID)
 {
     kAudioServicesPropertyIsUISound                   = 'isui',
     kAudioServicesPropertyCompletePlaybackIfAppDies   = 'ifdi'
@@ -170,30 +154,6 @@ enum
 /*!
     @functiongroup  AudioServices
 */
-
-/*!
-    @function       AudioServicesPlayAlertSound
-    @abstract       Play an Alert Sound
-    @discussion     Play the provided SystemSoundID with AlertSound behavior.
-    @param          inSystemSoundID
-                        A SystemSoundID for the System Sound server to play. On the desktop you
-                        can pass the kSystemSoundID_UserPreferredAlert constant to playback the alert sound 
-                        selected by the user in System Preferences. On iOS there is no preferred user alert sound.
-*/
-extern void 
-AudioServicesPlayAlertSound(SystemSoundID inSystemSoundID)                                          
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
-
-/*!
-    @function       AudioServicesPlaySystemSound
-    @abstract       Play the sound designated by the provided SystemSoundID.
-    @discussion     A SystemSoundID indicating the desired System Sound to be played.
-    @param          inSystemSoundID
-                        A SystemSoundID for the System Sound server to play.
-*/
-extern void 
-AudioServicesPlaySystemSound(SystemSoundID inSystemSoundID)                                         
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
     @function       AudioServicesCreateSystemSoundID
@@ -208,7 +168,7 @@ AudioServicesPlaySystemSound(SystemSoundID inSystemSoundID)
 */
 extern OSStatus 
 AudioServicesCreateSystemSoundID(   CFURLRef                    inFileURL,
-                                    SystemSoundID* 				outSystemSoundID)                   
+                                    SystemSoundID*              outSystemSoundID)
                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 	
 /*!
@@ -225,47 +185,39 @@ AudioServicesDisposeSystemSoundID(SystemSoundID inSystemSoundID)
                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
-    @function       AudioServicesAddSystemSoundCompletion
-    @abstract       Call the provided Completion Routine when provided SystemSoundID
-                    finishes playing.
-    @discussion     Once set, the System Sound server will send a message to the System Sound client
-                    indicating which SystemSoundID has finished playing.
+    @function       AudioServicesPlayAlertSoundWithCompletion
+    @abstract       Play an alert sound
+    @discussion     Play the sound designated by the provided SystemSoundID with alert sound behavior.
     @param          inSystemSoundID
-                        The SystemSoundID to associate with the provided completion
-                        routine.
-    @param          inRunLoop
-                        A CFRunLoopRef indicating the desired run loop the completion routine should
-                        be run on. Pass NULL to use the main run loop.
-    @param          inRunLoopMode
-                        A CFStringRef indicating the run loop mode for the runloop where the
-                        completion routine will be executed. Pass NULL to use kCFRunLoopDefaultMode.
-    @param          inCompletionRoutine
-                        An AudioServicesSystemSoundCompletionProc to be called when the provided
-                        SystemSoundID has completed playing in the server.
-    @param          inClientData
-                        A void* to pass client data to the completion routine.
+                        The SystemSoundID to be played. On the desktop the kSystemSoundID_UserPreferredAlert
+                        constant can be passed in to play back the alert sound selected by the user
+                        in System Preferences. On iOS there is no preferred user alert sound.
+    @param          inCompletionBlock
+                        The completion block gets executed for every attempt to play a system sound irrespective
+                        of success or failure. The callbacks are issued on a serial queue and the client is
+                        responsible for handling thread safety.
 */
-extern OSStatus 
-AudioServicesAddSystemSoundCompletion(  SystemSoundID          					inSystemSoundID,
-                                    	CFRunLoopRef                        	inRunLoop,
-                                    	CFStringRef                        		inRunLoopMode,
-                                    	AudioServicesSystemSoundCompletionProc  inCompletionRoutine,
-                                    	void*                               	inClientData)       
-                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
-
+extern void
+AudioServicesPlayAlertSoundWithCompletion(  SystemSoundID inSystemSoundID,
+                                            void (^__nullable inCompletionBlock)(void))
+                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+                                                                
 /*!
-    @function       AudioServicesRemoveSystemSoundCompletion
-    @abstract       Disassociate any completion proc for the specified SystemSoundID
-    @discussion     Tells the SystemSound client to remove any completion proc associated with the
-                    provided SystemSoundID
+    @function       AudioServicesPlaySystemSoundWithCompletion
+    @abstract       Play a system sound
+    @discussion     Play the sound designated by the provided SystemSoundID.
     @param          inSystemSoundID
-                        The SystemSoundID for which completion routines should be
-                        removed.
+                        The SystemSoundID to be played.
+    @param          inCompletionBlock
+                        The completion block gets executed for every attempt to play a system sound irrespective 
+                        of success or failure. The callbacks are issued on a serial queue and the client is 
+                        responsible for handling thread safety.
 */
-extern void 
-AudioServicesRemoveSystemSoundCompletion(SystemSoundID inSystemSoundID)                             
-                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
-
+extern void
+AudioServicesPlaySystemSoundWithCompletion(     SystemSoundID inSystemSoundID,
+                                                void (^__nullable inCompletionBlock)(void))
+                                                                        __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+                                                                
 /*!
     @function       AudioServicesGetPropertyInfo
     @abstract       Get information about the size of an AudioServices property and whether it can
@@ -287,9 +239,9 @@ AudioServicesRemoveSystemSoundCompletion(SystemSoundID inSystemSoundID)
 extern OSStatus 
 AudioServicesGetPropertyInfo( AudioServicesPropertyID   inPropertyID,
                               UInt32                    inSpecifierSize,
-                              const void*               inSpecifier,
-                              UInt32*                   outPropertyDataSize,
-                              Boolean*                  outWritable)                                
+                              const void * __nullable   inSpecifier,
+                              UInt32 * __nullable       outPropertyDataSize,
+                              Boolean * __nullable      outWritable)
                                                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
@@ -312,11 +264,11 @@ AudioServicesGetPropertyInfo( AudioServicesPropertyID   inPropertyID,
     @result         returns kAudioServicesNoError if successful.
 */                        
 extern OSStatus 
-AudioServicesGetProperty(   AudioServicesPropertyID   inPropertyID,
-                            UInt32                    inSpecifierSize,
-                            const void*               inSpecifier,
-                            UInt32*                   ioPropertyDataSize,
-                            void*                     outPropertyData)                              
+AudioServicesGetProperty(   AudioServicesPropertyID         inPropertyID,
+                            UInt32                          inSpecifierSize,
+                            const void * __nullable         inSpecifier,
+                            UInt32 *                        ioPropertyDataSize,
+                            void * __nullable               outPropertyData)
                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*!
@@ -336,12 +288,88 @@ AudioServicesGetProperty(   AudioServicesPropertyID   inPropertyID,
     @result         returns kAudioServicesNoError if successful.
 */
 extern OSStatus 
-AudioServicesSetProperty(   AudioServicesPropertyID   inPropertyID,
-                            UInt32                    inSpecifierSize,
-                            const void*               inSpecifier,
-                            UInt32                    inPropertyDataSize,
-                            const void*               inPropertyData)                               
+AudioServicesSetProperty(   AudioServicesPropertyID             inPropertyID,
+                            UInt32                              inSpecifierSize,
+                            const void * __nullable             inSpecifier,
+                            UInt32                              inPropertyDataSize,
+                            const void *                        inPropertyData)
                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                
+/*!
+    This function will be deprecated in a future release. Use AudioServicesPlayAlertSoundWithCompletion instead.
+ 
+    @function       AudioServicesPlayAlertSound
+    @abstract       Play an Alert Sound
+    @discussion     Play the provided SystemSoundID with AlertSound behavior.
+    @param          inSystemSoundID
+                        A SystemSoundID for the System Sound server to play. On the desktop you
+                        can pass the kSystemSoundID_UserPreferredAlert constant to playback the alert sound 
+                        selected by the user in System Preferences. On iOS there is no preferred user alert sound.
+*/
+extern void 
+AudioServicesPlayAlertSound(SystemSoundID inSystemSoundID)                                          
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                
+/*!
+    This function will be deprecated in a future release. Use AudioServicesPlaySystemSoundWithCompletion instead.
+ 
+    @function       AudioServicesPlaySystemSound
+    @abstract       Play the sound designated by the provided SystemSoundID.
+    @discussion     A SystemSoundID indicating the desired System Sound to be played.
+    @param          inSystemSoundID
+                        A SystemSoundID for the System Sound server to play.
+*/
+extern void 
+AudioServicesPlaySystemSound(SystemSoundID inSystemSoundID)                                         
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                
+/*!
+    This function will be deprecated in a future release. Use AudioServicesPlayAlertSoundWithCompletion 
+    or AudioServicesPlaySystemSoundWithCompletion instead.
+ 
+    @function       AudioServicesAddSystemSoundCompletion
+    @abstract       Call the provided Completion Routine when provided SystemSoundID
+                    finishes playing.
+    @discussion     Once set, the System Sound server will send a message to the System Sound client
+                    indicating which SystemSoundID has finished playing.
+    @param          inSystemSoundID
+                        The SystemSoundID to associate with the provided completion
+                        routine.
+    @param          inRunLoop
+                        A CFRunLoopRef indicating the desired run loop the completion routine should
+                        be run on. Pass NULL to use the main run loop.
+    @param          inRunLoopMode
+                        A CFStringRef indicating the run loop mode for the runloop where the
+                        completion routine will be executed. Pass NULL to use kCFRunLoopDefaultMode.
+    @param          inCompletionRoutine
+                        An AudioServicesSystemSoundCompletionProc to be called when the provided
+                        SystemSoundID has completed playing in the server.
+    @param          inClientData
+                        A void* to pass client data to the completion routine.
+*/
+extern OSStatus 
+AudioServicesAddSystemSoundCompletion(  SystemSoundID                                       inSystemSoundID,
+                                    	CFRunLoopRef __nullable                             inRunLoop,
+                                    	CFStringRef __nullable                              inRunLoopMode,
+                                    	AudioServicesSystemSoundCompletionProc              inCompletionRoutine,
+                                    	void * __nullable                                   inClientData)
+                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+
+/*!
+    This function will be deprecated in a future release. Use AudioServicesPlayAlertSoundWithCompletion
+    or AudioServicesPlaySystemSoundWithCompletion instead.
+ 
+    @function       AudioServicesRemoveSystemSoundCompletion
+    @abstract       Disassociate any completion proc for the specified SystemSoundID
+    @discussion     Tells the SystemSound client to remove any completion proc associated with the
+                    provided SystemSoundID
+    @param          inSystemSoundID
+                        The SystemSoundID for which completion routines should be
+                        removed.
+*/
+extern void 
+AudioServicesRemoveSystemSoundCompletion(SystemSoundID inSystemSoundID)                             
+                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 //==================================================================================================
 #pragma mark    Audio Hardware Service Properties
@@ -372,7 +400,7 @@ AudioServicesSetProperty(   AudioServicesPropertyID   inPropertyID,
                         manipulates the relative balance between the volume controls on the channels
                         identified as the device's default stereo pair.
 */
-enum
+CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioHardwareServiceProperty_ServiceRestarted              = 'srst',
     kAudioHardwareServiceDeviceProperty_VirtualMasterVolume     = 'vmvc',
@@ -398,7 +426,7 @@ enum
 extern Boolean
 AudioHardwareServiceHasProperty(    AudioObjectID                       inObjectID,
                                     const AudioObjectPropertyAddress*   inAddress)                  
-                                                            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+                                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function       AudioHardwareServiceIsPropertySettable
@@ -416,7 +444,7 @@ extern OSStatus
 AudioHardwareServiceIsPropertySettable( AudioObjectID                       inObjectID,
                                         const AudioObjectPropertyAddress*   inAddress,
                                         Boolean*                            outIsSettable)          
-                                                            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+                                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function       AudioHardwareServiceGetPropertyDataSize
@@ -429,7 +457,7 @@ AudioHardwareServiceIsPropertySettable( AudioObjectID                       inOb
                         A UInt32 indicating the size of the buffer pointed to by inQualifierData.
                         Note that not all properties require qualification, in which case this
                         value will be 0.
-    @param          inQualifierData,
+    @param          inQualifierData
                         A buffer of data to be used in determining the data of the property being
                         queried. Note that not all properties require qualification, in which case
                         this value will be NULL.
@@ -443,7 +471,7 @@ AudioHardwareServiceGetPropertyDataSize(    AudioObjectID                       
                                             UInt32                              inQualifierDataSize,
                                             const void*                         inQualifierData,
                                             UInt32*                             outDataSize)        
-                                                            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+                                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function       AudioHardwareServiceGetPropertyData
@@ -457,7 +485,7 @@ AudioHardwareServiceGetPropertyDataSize(    AudioObjectID                       
                         A UInt32 indicating the size of the buffer pointed to by inQualifierData.
                         Note that not all properties require qualification, in which case this
                         value will be 0.
-    @param          inQualifierData,
+    @param          inQualifierData
                         A buffer of data to be used in determining the data of the property being
                         queried. Note that not all properties require qualification, in which case
                         this value will be NULL.
@@ -476,7 +504,7 @@ AudioHardwareServiceGetPropertyData(    AudioObjectID                       inOb
                                         const void*                         inQualifierData,
                                         UInt32*                             ioDataSize,
                                         void*                               outData)                
-                                                        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function       AudioHardwareServiceSetPropertyData
@@ -493,7 +521,7 @@ AudioHardwareServiceGetPropertyData(    AudioObjectID                       inOb
                         A UInt32 indicating the size of the buffer pointed to by inQualifierData.
                         Note that not all properties require qualification, in which case this
                         value will be 0.
-    @param          inQualifierData,
+    @param          inQualifierData
                         A buffer of data to be used in determining the data of the property being
                         queried. Note that not all properties require qualification, in which case
                         this value will be NULL.
@@ -510,7 +538,7 @@ AudioHardwareServiceSetPropertyData(    AudioObjectID                       inOb
                                         const void*                         inQualifierData,
                                         UInt32                              inDataSize,
                                         const void*                         inData)                 
-                                                        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function       AudioHardwareServiceAddPropertyListener
@@ -532,7 +560,7 @@ AudioHardwareServiceAddPropertyListener(    AudioObjectID                       
                                             const AudioObjectPropertyAddress*   inAddress,
                                             AudioObjectPropertyListenerProc     inListener,
                                             void*                               inClientData)       
-                                                        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function       AudioHardwareServiceRemovePropertyListener
@@ -554,12 +582,13 @@ AudioHardwareServiceRemovePropertyListener( AudioObjectID                       
                                             const AudioObjectPropertyAddress*   inAddress,
                                             AudioObjectPropertyListenerProc     inListener,
                                             void*                               inClientData)       
-                                                        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 
+CF_ASSUME_NONNULL_END
+    
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __AudioServices_h__ */
-
+#endif /* AudioToolbox_AudioServices_h */

@@ -1,4 +1,4 @@
-framework module IOKit [extern_c] [system] {
+framework module IOKit [extern_c] {
   header "IOBSD.h"
   header "IODataQueueClient.h"
   header "IOReturn.h"
@@ -31,7 +31,6 @@ framework module IOKit [extern_c] [system] {
   }
 
   explicit module avc {
-    requires cplusplus
     header "avc/IOFireWireAVCConsts.h"
     header "avc/IOFireWireAVCLib.h"
     export *

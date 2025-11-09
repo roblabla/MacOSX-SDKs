@@ -2,27 +2,29 @@
  File:		AVAudioUnitComponent.h
  Framework:	AVFoundation
  
- Copyright (c) 2014 Apple Inc. All Rights Reserved.
+ Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
 #import <AVFoundation/AVAudioTypes.h>
 #import <AudioUnit/AudioComponent.h>
 #import <AudioUnit/AUComponent.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Standard Audio Unit Types
-AVF_EXPORT NSString * const AVAudioUnitTypeOutput		NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeMusicDevice	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeMusicEffect	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeFormatConverter	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeEffect	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeMixer	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypePanner	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeGenerator	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeOfflineEffect	NS_AVAILABLE(10_10, NA);
-AVF_EXPORT NSString * const AVAudioUnitTypeMIDIProcessor	NS_AVAILABLE(10_10, NA);
+AVF_EXPORT NSString * const AVAudioUnitTypeOutput				NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeMusicDevice			NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeMusicEffect			NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeFormatConverter		NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeEffect				NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeMixer				NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypePanner				NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeGenerator			NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeOfflineEffect		NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeMIDIProcessor		NS_AVAILABLE(10_10, 9_0);
 
 // Standard Audio Unit Manufacturers
-AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	NS_AVAILABLE(10_10, NA);
+AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	NS_AVAILABLE(10_10, 9_0);
 
 #pragma mark AVAudioUnitComponent
 
@@ -34,48 +36,125 @@ AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	NS_AVAILABLE(10_10,
  	 for display.
  */
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+NS_CLASS_AVAILABLE(10_10, 9_0)
 @interface AVAudioUnitComponent : NSObject
 {
-	void* impl_;
+	void *_impl;
 }
+/*! @property name
+	@abstract the name of an audio component
+ */
+@property (nonatomic, readonly) NSString		*name;
 
-@property(nonatomic,readonly) NSString		*name;
+/*! @property typeName
+	@abstract standard audio component types returned as strings
+ */
+@property (nonatomic, readonly) NSString		*typeName;
 
-/* standard audio unit types as strings */
-@property(nonatomic,readonly) NSString		*typeName;
-/* localized string of typeName for display */
-@property(nonatomic,readonly) NSString		*localizedTypeName;
+/*! @property typeName
+	@abstract localized string of typeName for display
+ */
+@property (nonatomic, readonly) NSString		*localizedTypeName;
 
-@property(nonatomic,readonly) NSString		*manufacturerName;
-/* version number comprised of a hexadecimal number with major, minor, dot-release format: 0xMMMMmmDD */
-@property(nonatomic,readonly) NSUInteger	version;
-@property(nonatomic,readonly) NSString		*versionString;
-@property(nonatomic,readonly) NSURL			*iconURL;
-/* URL representing location of component */
-@property(nonatomic,readonly) NSURL			*componentURL;
+/*! @property manufacturerName
+	@abstract the manufacturer name, extracted from the manufacturer key defined in Info.plist dictionary
+ */
+@property (nonatomic, readonly) NSString		*manufacturerName;
 
-/* NSSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference */
-@property(readonly)			  NSArray		*availableArchitectures;
-@property(nonatomic,readonly) BOOL			hasCustomView;
-@property(nonatomic,readonly) BOOL			passesAUVal;
-/* only applies to the current process */
-@property(nonatomic,readonly,getter=isSandboxSafe) BOOL	sandboxSafe;
+/*! @property version
+	@abstract version number comprised of a hexadecimal number with major, minor, dot-release format: 0xMMMMmmDD
+ */
+@property (nonatomic, readonly) NSUInteger	version;
 
-@property(readonly)			  BOOL			hasMIDIInput;
-@property(readonly)			  BOOL			hasMIDIOutput;
+/*! @property versionString
+	@abstract version number as string
+ */
+@property (nonatomic, readonly) NSString		*versionString;
 
-@property(nonatomic,readonly) AudioComponent	audioComponent;
-@property(nonatomic,readonly) NSDictionary		*configurationDictionary;
+/*! @property componentURL
+	@abstract URL representing location of component
+ */
+@property (nonatomic, readonly, nullable) NSURL		*componentURL NS_DEPRECATED(10_10, 10_11, NA, NA);
 
-/* User tags represent the tags from the current user.  */
-@property(copy)				  NSArray		*userTagNames;
-/* allTagNames represent the tags from the current user plus the tags defined by the manufacturer. */
-@property(nonatomic,readonly) NSArray		*allTagNames;
+/*! @property availableArchitectures
+	@abstract NSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference
+ */
+@property (nonatomic, readonly) NSArray<NSNumber *>		*availableArchitectures NS_AVAILABLE(10_10, NA);
 
-@property(nonatomic,readonly) AudioComponentDescription	audioComponentDescription;
+/*! @property sandboxSafe
+	@abstract On OSX, YES if the AudioComponent can be loaded into a sandboxed process otherwise NO.
+			  On iOS, this is always YES.
+ */
+@property (nonatomic, readonly, getter=isSandboxSafe) BOOL		sandboxSafe;
 
-- (BOOL)supportsNumberInputChannels:(NSInteger)numInputChannels outputChannels:(NSInteger)numOutputChannels;
+/*! @property hasMIDIInput
+	@abstract YES if AudioComponent has midi input, otherwise NO
+ */
+@property (nonatomic, readonly) BOOL		hasMIDIInput;
+
+/*! @property hasMIDIOutput
+	@abstract YES if AudioComponent has midi output, otherwise NO
+ */
+@property (nonatomic, readonly) BOOL		hasMIDIOutput;
+
+/*! @property audioComponent
+	@abstract the audioComponent that can be used in AudioComponent APIs.
+ */
+@property (nonatomic, readonly) AudioComponent	audioComponent;
+
+/*! @property userTagNames
+	@abstract User tags represent the tags from the current user.
+ */
+@property (copy) NSArray<NSString *>		*userTagNames NS_AVAILABLE(10_10, NA);
+
+/*! @property allTagNames
+	@abstract represent the tags from the current user and the system tags defined by AudioComponent.
+ */
+@property (nonatomic, readonly) NSArray<NSString *>		*allTagNames;
+
+/*! @property audioComponentDescription
+	@abstract description of the audio component that can be used in AudioComponent APIs.
+ */
+@property (nonatomic, readonly) AudioComponentDescription	audioComponentDescription;
+
+/*! @property iconURL
+	@abstract A URL that will specify the location of an icon file that can be used when presenting UI
+ for this audio component.
+ */
+@property (nonatomic, readonly, nullable) NSURL		*iconURL NS_AVAILABLE(10_10, NA);
+
+#if !TARGET_OS_IPHONE
+/*! @property icon
+	@abstract An icon representing the component.
+    @discussion
+        For a component originating in an app extension, the returned icon will be that of the
+        application containing the extension.
+        
+        For components loaded from bundles, the icon will be that of the bundle.
+ */
+@property (nonatomic, readonly, nullable) NSImage *icon NS_AVAILABLE(10_11, NA);
+#endif
+
+/*! @property passesAUVal
+	@abstract YES if the AudioComponent has passed the AU validation tests, otherwise NO
+ */
+@property (nonatomic, readonly) BOOL		passesAUVal NS_AVAILABLE(10_10, NA);
+
+/*! @property hasCustomView
+	@abstract YES if the AudioComponent provides custom view, otherwise NO
+ */
+@property (nonatomic, readonly) BOOL		hasCustomView NS_AVAILABLE(10_10, NA);
+
+/*! @property configurationDictionary
+	@abstract A NSDictionary that contains information describing the capabilities of the AudioComponent.
+	The specific information depends on the type and the keys are defined in AudioUnitProperties.h
+ */
+@property (nonatomic, readonly) NSDictionary<NSString *, id>		*configurationDictionary NS_AVAILABLE(10_10, NA);
+
+/*! @property supportsNumberInputChannels: outputChannels:
+	@abstract returns YES if the AudioComponent supports the input/output channel configuration
+ */
+- (BOOL)supportsNumberInputChannels:(NSInteger)numInputChannels outputChannels:(NSInteger)numOutputChannels NS_AVAILABLE(10_10, NA);
 
 @end
 
@@ -83,7 +162,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 #pragma mark AVAudioUnitComponentManager
 
 /* The notification object is an AVAudioUnitComponent object */
-AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification NS_AVAILABLE(10_10, NA);
+AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification NS_AVAILABLE(10_10, 9_0);
 
 /*!
  @class AVAudioUnitComponentManager
@@ -104,54 +183,56 @@ AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification NS_AVA
 			- using an AudioComponentDescription
  */
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+NS_CLASS_AVAILABLE(10_10, 9_0)
 @interface AVAudioUnitComponentManager : NSObject
 {
-	void* impl_;
+	void *_impl;
 }
 
 /*! @discussion 
  		returns all tags associated with the current user as well as all system tags defined by 
 		the audio unit(s).
  */
-@property(nonatomic,readonly) NSArray	*tagNames;
+@property (nonatomic, readonly) NSArray<NSString *>		*tagNames;
 
 /*! @discussion
 		returns the localized standard system tags defined by the audio unit(s).
  */
 
-@property(nonatomic,readonly) NSArray	*standardLocalizedTagNames;
+@property (nonatomic, readonly) NSArray<NSString *>		*standardLocalizedTagNames;
 
 /* returns singleton instance of AVAudioUnitComponentManager */
 + (instancetype)sharedAudioUnitComponentManager;
 
 /*!
- @method componentsMatchingPredicate
- @abstract	returns an array of AVAudioComponent objects that matches the search predicate
+ @method componentsMatchingPredicate:
+ @abstract	returns an array of AVAudioUnitComponent objects that match the search predicate.
  @discussion
  		AudioComponent's information or tags can be used to build a search criteria. 
  		For example, "typeName CONTAINS 'Effect'" or tags IN {'Sampler', 'MIDI'}"
  */
-- (NSArray *)componentsMatchingPredicate:(NSPredicate *)predicate;
+- (NSArray<AVAudioUnitComponent *> *)componentsMatchingPredicate:(NSPredicate *)predicate;
 
 /*!
- @method componentsPassingTest
- @abstract	returns an array of AVAudioComponent objects that passes the user provided block method.
+ @method componentsPassingTest:
+ @abstract	returns an array of AVAudioUnitComponent objects that pass the user provided block method.
  @discussion
 		For each AudioComponent found by the manager, the block method will be called. If the return
  		value is YES then the AudioComponent is added to the resulting array else it will excluded. 
  		This gives more control to the block provider to filter out the components returned.
  */
-- (NSArray *)componentsPassingTest:(BOOL(^)(AVAudioUnitComponent *comp, BOOL *stop))testHandler;
+- (NSArray<AVAudioUnitComponent *> *)componentsPassingTest:(BOOL(^)(AVAudioUnitComponent *comp, BOOL *stop))testHandler;
 
 /*!
- @method componentsMatchingDescription
- @abstract	returns an array of AVAudioComponent objects that matches the description
+ @method componentsMatchingDescription:
+ @abstract	returns an array of AVAudioUnitComponent objects that match the description.
  @discussion
  		This method provides a mechanism to search for AudioComponents using AudioComponentDescription
 		structure. The type, subtype and manufacturer fields are used to search for audio units. A 
  		value of 0 for any of these fields is a wildcard and returns the first match found.
  */
-- (NSArray *)componentsMatchingDescription:(AudioComponentDescription)desc;
+- (NSArray<AVAudioUnitComponent *> *)componentsMatchingDescription:(AudioComponentDescription)desc;
 
 @end
+
+NS_ASSUME_NONNULL_END

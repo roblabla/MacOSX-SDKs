@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2014 Apple Inc. All rights reserved.
+	Copyright 2011-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -16,6 +16,8 @@
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVMediaSelectionOption;
 @class AVMediaSelectionGroupInternal;
@@ -31,7 +33,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @abstract		A collection of mutually exclusive media selection options.
  @discussion	An NSArray of AVMediaSelectionOption*.
 */
-@property (nonatomic, readonly) NSArray *options;
+@property (nonatomic, readonly) NSArray<AVMediaSelectionOption *> *options;
 
 /*!
  @property		defaultOption
@@ -39,7 +41,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @discussion
 	Can be nil, indicating that without a specific end-user selection or preference, no option in the group is intended to be selected.
 */
-@property (nonatomic, readonly) AVMediaSelectionOption *defaultOption NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, nullable) AVMediaSelectionOption *defaultOption NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property		allowsEmptySelection
@@ -57,7 +59,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   				A property list previously obtained from an option in the group via -[AVMediaSelectionOption propertyList].
   @result		If the specified properties match those of an option in the group, an instance of AVMediaSelectionOption. Otherwise nil.
 */
-- (AVMediaSelectionOption *)mediaSelectionOptionWithPropertyList:(id)plist;
+- (nullable AVMediaSelectionOption *)mediaSelectionOptionWithPropertyList:(id)plist;
 
 @end
 
@@ -79,7 +81,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   				An array of AVMediaSelectionOption to be filtered according to whether they are playable.
   @result		An instance of NSArray containing the media selection options of the specified NSArray that are playable.
 */
-+ (NSArray *)playableMediaSelectionOptionsFromArray:(NSArray *)mediaSelectionOptions;
++ (NSArray<AVMediaSelectionOption *> *)playableMediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions;
 
 /*!
  @method		mediaSelectionOptionsFromArray:filteredAndSortedAccordingToPreferredLanguages:
@@ -90,7 +92,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
  @result		An instance of NSArray containing media selection options of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 */
-+ (NSArray *)mediaSelectionOptionsFromArray:(NSArray *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
 
 /*!
   @method		mediaSelectionOptionsFromArray:withLocale:
@@ -101,7 +103,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   				The NSLocale that must be matched for a media selection option to be copied to the output array.
   @result		An instance of NSArray containing the media selection options of the specified NSArray that match the specified locale.
 */
-+ (NSArray *)mediaSelectionOptionsFromArray:(NSArray *)mediaSelectionOptions withLocale:(NSLocale *)locale;
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions withLocale:(NSLocale *)locale;
 
 /*!
   @method		mediaSelectionOptionsFromArray:withMediaCharacteristics:
@@ -113,7 +115,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   @result		An instance of NSArray containing the media selection options of the specified NSArray that match the specified
 				media characteristics.
 */
-+ (NSArray *)mediaSelectionOptionsFromArray:(NSArray *)mediaSelectionOptions withMediaCharacteristics:(NSArray *)mediaCharacteristics;
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions withMediaCharacteristics:(NSArray<NSString *> *)mediaCharacteristics;
 
 /*!
   @method		mediaSelectionOptionsFromArray:withoutMediaCharacteristics:
@@ -125,7 +127,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   @result		An instance of NSArray containing the media selection options of the specified NSArray that lack the specified
 				media characteristics.
 */
-+ (NSArray *)mediaSelectionOptionsFromArray:(NSArray *)mediaSelectionOptions withoutMediaCharacteristics:(NSArray *)mediaCharacteristics;
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions withoutMediaCharacteristics:(NSArray<NSString *> *)mediaCharacteristics;
 
 @end
 
@@ -138,6 +140,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 */
 
 @class AVMediaSelectionOptionInternal;
+@class AVMetadataItem;
 
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface AVMediaSelectionOption : NSObject <NSCopying> {
@@ -160,7 +163,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 	
 	Note that if no information is available about the encoding of the media presented when a media option is selected, the value of mediaSubTypes will be an empty array. This can occur, for example, with streaming media. In these cases the value of mediaSubTypes should simply not be used as a criteria for selection.
 */
-@property (nonatomic, readonly) NSArray *mediaSubTypes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *mediaSubTypes;
 
 /*!
   @method		hasMediaCharacteristic:
@@ -182,7 +185,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @property		extendedLanguageTag
  @abstract		Indicates the RFC 4646 language tag associated with the option. May be nil.
  */
-@property (nonatomic, readonly) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property		locale
@@ -190,7 +193,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @discussion
  	Use -[NSLocale objectForKey:NSLocaleLanguageCode] to obtain the language code of the locale. See NSLocale.h for additional information.
 */
-@property (nonatomic, readonly) NSLocale *locale;
+@property (nonatomic, readonly, nullable) NSLocale *locale;
 
 /*!
  @property		commonMetadata
@@ -219,7 +222,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 	}
 
 */
-@property (nonatomic, readonly) NSArray *commonMetadata;
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
 
 /*!
  @property		availableMetadataFormats
@@ -227,16 +230,16 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @discussion
    Metadata formats are defined in AVMetadataFormat.h.
 */
-@property (nonatomic, readonly) NSArray *availableMetadataFormats;
+@property (nonatomic, readonly) NSArray<NSString *> *availableMetadataFormats;
 
 /*!
   @method		metadataForFormat:
   @abstract		Provides an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format.
   @param		format
   				The metadata format for which items are requested.
-  @result		An NSArray containing AVMetadataItems; may be nil if there is no metadata of the specified format.
+  @result		An NSArray containing AVMetadataItems.
 */
-- (NSArray *)metadataForFormat:(NSString *)format;
+- (NSArray<AVMetadataItem *> *)metadataForFormat:(NSString *)format;
 
 /*!
   @method		associatedMediaSelectionOptionInMediaSelectionGroup
@@ -247,7 +250,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @discussion
    Audible media selection options often have associated legible media selection options; in particular, audible options are typically associated with forced-only subtitle options with the same locale. See AVMediaCharacteristicContainsOnlyForcedSubtitles in AVMediaFormat.h for a discussion of forced-only subtitles.
 */
-- (AVMediaSelectionOption *)associatedMediaSelectionOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup;
+- (nullable AVMediaSelectionOption *)associatedMediaSelectionOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup;
 
 /*!
   @method		propertyList
@@ -277,3 +280,5 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @property (nonatomic, readonly) NSString *displayName NS_AVAILABLE(10_9, 7_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

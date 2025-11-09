@@ -1,6 +1,6 @@
 /*	
     NSURLDownload.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -16,6 +16,10 @@
 @class NSURLResponse;
 @class NSURLProtectionSpace;
 @protocol NSURLDownloadDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
+
+/*** DEPRECATED: The NSURLDownload class should no longer be used.  NSURLSession is the replacement for NSURLDownload ***/
 
 /*!
     @class NSURLDownload
@@ -47,7 +51,7 @@
     @param delegate The delegate of the download.
     @result An initialized NSURLDownload object.
 */
-- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(id <NSURLDownloadDelegate>)delegate;
+- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id <NSURLDownloadDelegate>)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession downloadTask (see NSURLSession.h)");
 
 /*!
     @method initWithResumeData:delegate:path:
@@ -57,7 +61,7 @@
     @param path The path of the incomplete downloaded file.
     @result An initialized NSURLDownload object.
 */
-- (instancetype)initWithResumeData:(NSData *)resumeData delegate:(id <NSURLDownloadDelegate>)delegate path:(NSString *)path;
+- (instancetype)initWithResumeData:(NSData *)resumeData delegate:(nullable id <NSURLDownloadDelegate>)delegate path:(NSString *)path NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession downloadTask (see NSURLSession.h)");
 
 /*!
     @method cancel
@@ -96,7 +100,7 @@
     The protocol of the download as well as the server must support resuming for non-nil to be returned.
     In order to later resume a download, be sure to call setDeletesFileUponFailure: with NO.
 */
-@property (readonly, copy) NSData *resumeData;
+@property (nullable, readonly, copy) NSData *resumeData;
 
 /*!
     @method deletesFileUponFailure
@@ -136,7 +140,7 @@
     @discussion This method gives the delegate an opportunity to inspect the request
     that will be used to continue loading the request, and modify it if necessary.
 */
-- (NSURLRequest *)download:(NSURLDownload *)download willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
+- (nullable NSURLRequest *)download:(NSURLDownload *)download willSendRequest:(NSURLRequest *)request redirectResponse:(nullable NSURLResponse *)redirectResponse;
 
 
 /*!
@@ -278,3 +282,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

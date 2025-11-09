@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /usr/lib/system/libsystem_configuration.dylib
-current-version: 699.1.5
+current-version: 801.1.1
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ __dns_configuration_ack, __libSC_info_fork_child, 
@@ -16,6 +16,6 @@ exports:
                        _nwi_ifstate_get_reachability_flags, _nwi_ifstate_get_signature, 
                        _nwi_ifstate_get_vpn_server, _nwi_state_copy, _nwi_state_get_first_ifstate, 
                        _nwi_state_get_generation, _nwi_state_get_ifstate, 
-                       _nwi_state_get_notify_key, _nwi_state_get_reachability_flags, 
-                       _nwi_state_release ]
+                       _nwi_state_get_interface_names, _nwi_state_get_notify_key, 
+                       _nwi_state_get_reachability_flags, _nwi_state_release ]
 ...

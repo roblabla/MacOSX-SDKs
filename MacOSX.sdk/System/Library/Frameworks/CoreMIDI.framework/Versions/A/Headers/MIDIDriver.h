@@ -3,7 +3,7 @@
  
      Contains:   MIDI Services driver interfaces
  
- 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2015 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,7 +26,7 @@
 	
 	This is the header file for Mac OS X's MIDI driver interface.
 	
-	<h2>About MIDI drivers</h2>
+
 	MIDI drivers are CFPlugIns, installed into the following places:
 <pre>
     /System/Library/Extensions      -- not recommended for non-Apple drivers, but
@@ -38,7 +38,7 @@
 </pre>
 	Refer to the CFPlugIn documentation for more information about plug-ins.
 	
-	<h2>Driver bundle/plug-in properties</h2>
+
 	A driver's bundle settings should include settings resembling the following:
 <pre>
     Bundle settings:
@@ -55,30 +55,27 @@
         WRAPPER_EXTENSION               plugin
 </pre>
 	
-	<h2>Driver access to the CoreMIDI API</h2>
-	Drivers have access to most of the CoreMIDI API.  Starting in Mac OS X 10.6,
-	drivers should link with CoreMIDI.framework. In previous versions of Mac OS X,
-	drivers should link with CoreMIDIServer.framework, <b>not</b> CoreMIDI.framework.
-	
-	On Mac OS X versions prior to 10.6, MIDI driver plugins linked against the
-	CoreMIDIServer framework in order to access the CoreMIDI API. Drivers which
-	are to run on earlier OS versions should be built 32-bit fat (ppc and i386)
-	and link against CoreMIDIServer. Drivers which are to run on Mac OS X 10.6
-	and later should be built for x86_64 and link against the CoreMIDI
-	framework. Drivers which are to run on all versions of Mac OS X should be
-	build 3-way fat (ppc, i386, and x86_64), with the ppc and i386 slices
-	linking against CoreMIDIServer, and the x86_64 slice linking against
-	CoreMIDI.
 
-	Unlike applications, drivers communicate with the server directly, not 
-	through Mach messaging.  This necessitates some limitations on the contexts from 
-	which a driver may call the server.
+	Drivers have access to most of the CoreMIDI API.  Starting in Mac OS X 10.6, drivers should link
+	with CoreMIDI.framework. In previous versions of Mac OS X, drivers should link with
+	CoreMIDIServer.framework, not CoreMIDI.framework.
+	
+	On Mac OS X versions prior to 10.6, MIDI driver plugins linked against the CoreMIDIServer
+	framework in order to access the CoreMIDI API. Drivers which are to run on earlier OS versions
+	should be built 32-bit fat (ppc and i386) and link against CoreMIDIServer. Drivers which are to
+	run on Mac OS X 10.6 and later should be built for x86_64 and link against the CoreMIDI
+	framework. Drivers which are to run on all versions of Mac OS X should be build 3-way fat (ppc,
+	i386, and x86_64), with the ppc and i386 slices linking against CoreMIDIServer, and the x86_64
+	slice linking against CoreMIDI.
+
+	Unlike applications, drivers communicate with the server directly, not through Mach messaging. 
+	This necessitates some limitations on the contexts from which a driver may call the server.
 	
 	The MIDI I/O functions MIDISend and MIDIReceived may be called from any thread.
 	
 	All other CoreMIDI functions must only be called from the server's main thread, which is the
-	thread on which the driver is created and from which all calls to the driver other than
-	Send() are made.
+	thread on which the driver is created and from which all calls to the driver other than Send()
+	are made.
 */
 
 typedef struct MIDIDriverInterface		MIDIDriverInterface;
@@ -86,25 +83,19 @@ typedef struct MIDIDriverInterface		MIDIDriverInterface;
 /*!
 	@typedef		MIDIDriverRef
 	
-	@discussion		Points to a pointer to a MIDIDriverInterface, a CFPlugIn
-					structure (defined in MIDIDriver.h) containing function
-					pointers for the driver's methods.  Only the MIDIServer
-					may call a driver's methods.
+	@discussion		Points to a pointer to a MIDIDriverInterface, a CFPlugIn structure (defined in
+					MIDIDriver.h) containing function pointers for the driver's methods.  Only the
+					MIDIServer may call a driver's methods.
 */
 typedef MIDIDriverInterface **			MIDIDriverRef;
 
 /*!
 	@typedef		MIDIDeviceListRef
 	
-	@discussion		A MIDIDeviceListRef is a list of MIDIDeviceRef's.  The devices are
-					not owned by the list (i.e., disposing the list does not dispose
-					the devices it references).
+	@discussion		A MIDIDeviceListRef is a list of MIDIDeviceRef's.  The devices are not owned by
+					the list (i.e., disposing the list does not dispose the devices it references).
 */
-#if __LP64__
 typedef MIDIObjectRef MIDIDeviceListRef;
-#else
-typedef struct OpaqueMIDIDeviceList*    MIDIDeviceListRef;
-#endif
 
 /*!
 	@interface		MIDIDriverInterface
@@ -374,7 +365,7 @@ extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
 	
 	@param			devList
 						The device list.
-	@param			deviceIndex0
+	@param			index0
 						The index (0...MIDIDeviceListGetNumberOfDevices()-1) of the device
 						to return.
 	@result			A reference to a device, or NULL if an error occurred.

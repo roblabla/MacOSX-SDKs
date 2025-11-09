@@ -5,9 +5,9 @@
 
      Version:    Accelerate-1
 
-     Copyright:  ? 2000-2003 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright (c) 2000-2015 by Apple Inc. All rights reserved.
 
-     Bugs?:      For bug reports, consult the following page on
+     Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
 
                      http://developer.apple.com/bugreporter/
@@ -17,7 +17,7 @@
 #define __ACCELERATE__
 
 #ifndef __VECLIB__
-#include <vecLib/vecLib.h>
+#include "../Frameworks/vecLib.framework/Headers/vecLib.h"
 #endif
 
 #ifndef VIMAGE_H

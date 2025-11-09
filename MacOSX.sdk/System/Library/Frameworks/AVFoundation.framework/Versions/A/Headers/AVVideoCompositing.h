@@ -3,13 +3,15 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2013 Apple Inc. All rights reserved.
+	Copyright 2013-2015 Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVBase.h>
 #import <CoreVideo/CVPixelBufferPool.h>
 #import <CoreMedia/CMTimeRange.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef struct {
 	NSInteger	horizontalSpacing;
@@ -74,13 +76,13 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 					The buffer will have its kCVImageBufferCleanApertureKey and kCVImageBufferPixelAspectRatioKey attachments set to match the current composition processor properties.
 					 
 */
-- (CVPixelBufferRef)newPixelBuffer; // caller must CFRelease
+- (nullable CVPixelBufferRef)newPixelBuffer CF_RETURNS_RETAINED; // caller must CFRelease
 
 @end
 
 
 /*!
-	@@protocol		AVVideoCompositing
+	@protocol		AVVideoCompositing
 	@abstract		Defines properties and methods for custom video compositors
 	@discussion
 		For each AVFoundation object of class AVPlayerItem, AVAssetExportSession, AVAssetImageGenerator, or AVAssetReaderVideoCompositionOutput that has a non-nil value for its videoComposition property, when the value of the customVideoCompositorClass property of the AVVideoComposition is not Nil, AVFoundation creates and uses an instance of that custom video compositor class to process the instructions contained in the AVVideoComposition. The custom video compositor instance will be created when you invoke -setVideoComposition: with an instance of AVVideoComposition that's associated with a different custom video compositor class than the object was previously using.
@@ -104,7 +106,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
    This property is queried once before any composition request is sent to the compositor. Changing
    source buffer attributes afterwards is not supported.
 */
-@property (nonatomic, readonly) NSDictionary *sourcePixelBufferAttributes;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *sourcePixelBufferAttributes;
 
 /* Indicates the pixel buffer attributes required by the video compositor for new buffers that it creates
  for processing. The property is required to provide kCVPixelBufferPixelFormatTypeKey along with attributes for which the compositor needs specific values to work properly. Omitted attributes will be supplied by the composition engine to allow for the best performance. If the attribute kCVPixelBufferPixelFormatTypeKey is missing an exception will be raised.
@@ -114,7 +116,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  This property is queried once before any composition request is sent to the compositor. Changing
  required buffer attributes afterwards is not supported.
  */
-@property (nonatomic, readonly) NSDictionary *requiredPixelBufferAttributesForRenderContext;
+@property (nonatomic, readonly) NSDictionary<NSString *, id> *requiredPixelBufferAttributesForRenderContext;
 
 /*!
     @method			renderContextChanged:
@@ -182,7 +184,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @property (nonatomic, readonly) CMTime compositionTime;
 
 /* Track ID of all the source buffers that are available to compose the frame. */
-@property (nonatomic, readonly) NSArray *sourceTrackIDs;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sourceTrackIDs;
 
 /* The AVVideoCompositionInstruction to use to compose the frame. */
 @property (nonatomic, readonly) id<AVVideoCompositionInstruction> videoCompositionInstruction;
@@ -193,20 +195,56 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 	@param			trackID
 					The track ID for the requested source frame
 */
-- (CVPixelBufferRef)sourceFrameByTrackID:(CMPersistentTrackID)trackID;
+- (nullable CVPixelBufferRef)sourceFrameByTrackID:(CMPersistentTrackID)trackID CF_RETURNS_NOT_RETAINED;
 
 /* callback the custom compositor should call when composition succeeded */
 - (void)finishWithComposedVideoFrame:(CVPixelBufferRef)composedVideoFrame;
 
-/* callback the custom compositor should call when composition failed. The error parameter should describe the actual
-   error.
-*/
+/* callback the custom compositor should call when composition failed. The error parameter should describe the actual error. */
 - (void)finishWithError:(NSError *)error;
 
 /* callback the custom compositor should call for a request that has been cancelled. */
 - (void)finishCancelledRequest;
 
 @end
+
+/*!
+	@class		AVAsynchronousCIImageFilteringRequest
+ 
+	@abstract	An AVAsynchronousCIImageFilteringRequest instance contains the information necessary for a filter to render an output CIImage.
+*/
+
+@class AVAsynchronousCIImageFilteringRequestInternal;
+@class CIImage;
+@class CIContext;
+
+NS_CLASS_AVAILABLE(10_11, 9_0)
+@interface AVAsynchronousCIImageFilteringRequest : NSObject <NSCopying> {
+@private
+	AVAsynchronousCIImageFilteringRequestInternal *_internal;
+}
+
+/* Width and height for rendering frames. */
+@property (nonatomic, readonly) CGSize renderSize;
+
+/* The time for which the frame should be filtered */
+@property (nonatomic, readonly) CMTime compositionTime;
+
+/* CIImage for the first enabled source video track. The pixel format will be kCIFormatBGRA8 (kCVPixelFormatType_32BGRA). Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image. */
+@property (nonatomic, readonly) CIImage *sourceImage;
+
+/*
+Callback the filter should call when filtering succeeded. The pixel format of the filteredImage must be kCIFormatBGRA8 (kCVPixelFormatType_32BGRA). If context is nil then a default context will be used, GPU-accelerated if possible.
+
+It is safe to pass in the sourceImage in which case the filter will appear to have no effect, essentially functioning as a pass-through.
+*/
+- (void)finishWithImage:(CIImage *)filteredImage context:(nullable CIContext *)context;
+
+/* Callback the filter should call when filtering failed. The error parameter should describe the actual error. */
+- (void)finishWithError:(NSError *)error;
+
+@end
+
 
 /*!
 	@protocol	AVVideoCompositionInstruction
@@ -230,8 +268,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
    same frame. The media pipeline may me able to avoid some duplicate processing when containsTweening is NO */
 @property (nonatomic, readonly) BOOL containsTweening;
 
-/* List of video track IDs required to compose frames for this instruction. */
-@property (nonatomic, readonly) NSArray *requiredSourceTrackIDs;
+/* List of video track IDs required to compose frames for this instruction. If the value of this property is nil, all source tracks will be considered required for composition */
+@property (nonatomic, readonly, nullable) NSArray<NSValue *> *requiredSourceTrackIDs;
 
 /* If for the duration of the instruction, the video composition result is one of the source frames, this property should
    return the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source
@@ -240,3 +278,5 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @property (nonatomic, readonly) CMPersistentTrackID passthroughTrackID; // kCMPersistentTrackID_Invalid if not a passthrough instruction
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,9 +1,14 @@
-/*
- *  Histogram.h
+/*!
+ *  @header Histogram.h
  *  vImage_Framework
  *
- *  Copyright (c) 2003 Apple Computer. All rights reserved.
+ *  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
  *
+ *  @copyright Copyright (c) 2003-2015 by Apple Inc. All rights reserved.
+ *
+ *  @discussion Exports interfaces for collecting histograms of images, and causing images to conform to histograms.
+ *
+ *  @ignorefuncmacro VIMAGE_NON_NULL
  */
 
 #ifndef VIMAGE_HISTOGRAM_H
@@ -15,37 +20,44 @@ extern "C" {
 
 #include <vImage/vImage_Types.h>
 
-/*
- * vImageHistogramCalculation_Planar8
+/*!
+ * @functiongroup Histogram Calculation
+ * @discussion  These functions build a histogram of the frequency of occurence of 
+ *              each channel value in the provided image.
+ */
+    
+/*!
+ * @function vImageHistogramCalculation_Planar8
  *
- * Calculates a histogram for a Planar8 image.
+ * @abstract Calculates a histogram for a Planar8 image.
  *
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each pixel, do the following:
  *          histogram[src[x]]++;
+ * @/textblock</pre>
  *
+ * This routine will not work in place
  *
- * Operands:
- * ---------
- *    src            A pointer to a vImage_Buffer that references the source pixels
+ * @param   src            A pointer to a vImage_Buffer that references the source pixels
  *
- *    histogram      A pointer to a histogram. On return, this array will 
+ * @param   histogram      A pointer to a histogram. On return, this array will
  *                   contain the histogram for the source image.
  *                   The histogram will be an array with 256 elements.
  *
- *    flags          The following flags are allowed:
- *
+ * @param   flags          The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile         Turns off internal multithreading. You may
  *                                   wish to do this if you have your own
  *                                   multithreading scheme to avoid having the
  *                                   two interfere with one another.
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following error codes may be returned
+ * <pre>@textblock
  *   kvImageNoError                  Success!
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
- *
- * This routine will not work in place
- *
+ * @/textblock</pre>
  */
 vImage_Error
 vImageHistogramCalculation_Planar8( 
@@ -53,51 +65,51 @@ vImageHistogramCalculation_Planar8(
     vImagePixelCount *histogram, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageHistogramCalculation_PlanarF
+/*!
+ * @function vImageHistogramCalculation_PlanarF
  *
- * Calculates a histogram for a PlanarF image.
- *
+ * @abstract Calculates a histogram for a PlanarF image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each pixel, do the following:
  *          val = histogram_entries * (src[x] - minVal) / (maxVal - minVal);
  *          i = clip val between 0 and histogram_entries-1
  *          histogram[i]++;
+ * @/textblock</pre>
  *
+ * This routine will not work in place
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * @param   src         A pointer to a vImage_Buffer that references the source pixels
  *
- *    histogram         A pointer to a histogram. On return, this array will
+ * @param   histogram   A pointer to a histogram. On return, this array will
  *                      contain the histogram for the source image.
  *                      The histogram will have histogram_entries elements.
  *
- *    histogram_entries The number of histogram entries, or “bins.”
+ * @param   histogram_entries The number of histogram entries, or bins.
  *                      The histogram will be an array with histogram_entries elements.
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be
+ * @param   minVal      A minimum pixel value. Any pixel value less than this will be
  *                      clipped to this value (for the purposes of histogram calculation),
- *                      and assigned to the first histogram entry.
+ *                      and assigned to the first histogram entry. src is not modified.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will
+ * @param   maxVal      A maximum pixel value. Any pixel value greater than this will
  *                      be clipped to this value (for the purposes of histogram calculation),
- *                      and assigned to the last histogram entry.
+ *                      and assigned to the last histogram entry.  src is not modified.
  *
- *    flags             The following flags are allowed:
- *
+ * @param   flags       The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile         Turns off internal multithreading. You may
  *                                   wish to do this if you have your own
  *                                   multithreading scheme to avoid having the
  *                                   two interfere with one another.
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return  The following error codes may occur:
+ * <pre>@textblock
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
- *
- * This routine will not work in place
- *
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageHistogramCalculation_PlanarF( 
@@ -108,43 +120,49 @@ vImageHistogramCalculation_PlanarF(
     Pixel_F maxVal, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageHistogramCalculation_ARGB8888
+/*!
+ * @function vImageHistogramCalculation_ARGB8888
  *
- * Calculates histograms for each channel of an ARGB8888 image.
+ * @abstract Calculates histograms for each channel of an ARGB8888 image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *
  *      For each pixel and channel, do the following:
  *          val = src[x];
  *          histogram[ch][val[ch]]++;
  *
+ * @/textblock</pre>
  *
- * Operands:
- * ---------
- *    src            A pointer to a vImage_Buffer that references the source pixels
+ * This routine will not work in place
  *
- *    histogram      A pointer to a histograms, one each for alpha, red, green, and blue (in that order). 
- *                   On return, this array will contain the four histograms for the corresponding channels.
- *                   Each of the four histograms will be an array with 256 elements.
+ * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
+ *    The ordering of the histogram will match the channel order of the image.
  *
- *    flags          The following flags are allowed:
+ * @param   src         A pointer to a vImage_Buffer that references the source pixels
  *
+ * @param   histogram   A pointer to a histograms, one each for alpha, red, green, and blue (in that order).
+ *                      On return, this array will contain the four histograms for the corresponding channels.
+ *                      Each of the four histograms will be an array with 256 elements.
+ *                      This function does not allocate storage for the histograms. You must allocate
+ *                      storage for each of the four histograms, create an array and populate it with
+ *                      pointers to the histograms before calling the function.
+ *
+ * @param   flags       The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
  *                                      two interfere with one another.
  *
  *          kvImageLeaveAlphaUnchanged  Do not calculate the histogram for the alpha channel
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return  The following error codes may occur
+ * <pre>@textblock
  *   kvImageNoError                  Success!
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
- *
- * This routine will not work in place
- *
- * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) 
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
- *    The ordering of the histogram will match the channel order of the image.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageHistogramCalculation_ARGB8888( 
@@ -152,59 +170,64 @@ vImageHistogramCalculation_ARGB8888(
     vImagePixelCount *histogram[4], 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageHistogramCalculation_ARGBFFFF
+/*!
+ * @function vImageHistogramCalculation_ARGBFFFF
  *
- * Calculates histograms for each channel of an ARGBFFFF image.
- *
+ * @abstract Calculates histograms for each channel of an ARGBFFFF image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each pixel, do the following:
  *          val = src[x];
  *          For each channel do:
  *              i = histogram_entries * (val[ch] - minVal) / (maxVal - minVal);
  *              i = clip i between 0 and histogram_entries-1
  *              histogram[ch][i]++;
+ * @/textblock</pre>
  *
+ * This routine will not work in place
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
+ *    The ordering of the histogram will match the channel order of the image.
  *
- *    histogram         A pointer to an array of four histograms,
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param histogram     A pointer to an array of four histograms,
  *                      one each for alpha, red, green, and blue (in that order).
  *                      On return, this array will contain the four histograms for the corresponding channels.
  *                      Each of the four histograms will be an array with histogram_entries elements.
+ *                      This function does not allocate storage for the histograms. You must allocate
+ *                      storage for each of the four histograms, create an array and populate it with
+ *                      pointers to the histograms before calling the function.
  *
- *    histogram_entries The number of histogram entries, or “bins.” Each of the four
+ * @param histogram_entries The number of histogram entries, or bins. Each of the four
  *                      calculated histograms will be an array with histogram_entries elements.
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be clipped to this value
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the first histogram entry.
  *                      This minimum value is applied to each of the four channels separately.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will be clipped to this value
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the last histogram entry.
  *                      This maximum value is applied to each of the four channels separately.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
  *                                      two interfere with one another.
  *
  *          kvImageLeaveAlphaUnchanged  Do not calculate the histogram for the alpha channel
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following error codes may be returned:
+ * <pre>@textblock
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src or any of the histogram pointers is NULL.
+ * @/textblock</pre>
  *
- * This routine will not work in place
- *
- * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) 
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
- *    The ordering of the histogram will match the channel order of the image.
  */
 vImage_Error 
 vImageHistogramCalculation_ARGBFFFF( 
@@ -216,42 +239,46 @@ vImageHistogramCalculation_ARGBFFFF(
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 
+/*!
+ * @functiongroup Histogram Equalization
+ * @discussion These functions attempt to change an image such that its histogram
+ *              contains an even distribution of values.
+ */
 
-
-/*
- * vImageEqualization_Planar8
+/*!
+ * @function vImageEqualization_Planar8
  *
- * Equalizes the histogram of a Planar8 source image.
- *
+ * @abstract Equalizes the histogram of a Planar8 source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Compute the histogram of the input image;
  *      Calculate normalized sum of histogram;
  *      For each pixel, do the following:
  *          dest[x] = equalized_histogram[src[x]];
- *
- *
- * Operands:
- * ---------
- *    src            A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest           A pointer to a vImage buffer that references the destination pixels
- *
- *    flags          The following flags are allowed:
- *
- *          kvImageDoNotTile         Turns off internal multithreading. You may
- *                                   wish to do this if you have your own
- *                                   multithreading scheme to avoid having the
- *                                   two interfere with one another.
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
  *    kvImageDoNotTile
  *
+ * @param src       A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest      A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param flags     The following flags are allowed:
+ * <pre>@textblock
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ * @/textblock</pre>
+ *
+ * @return The following error codes may be returned:
+ * <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageEqualization_Planar8( 
@@ -259,11 +286,12 @@ vImageEqualization_Planar8(
     const vImage_Buffer *dest, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageEqualization_PlanarF
+/*!
+ * @function vImageEqualization_PlanarF
  *
- * Equalizes the histogram of a PlanarF source image.
- *
+ * @abstract Equalizes the histogram of a PlanarF source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Compute the histogram of the input image:
  *          For each pixel, do the following:
  *              val = histogram_entries * (src[x] - minVal) / (maxVal - minVal);
@@ -274,32 +302,35 @@ vImageEqualization_Planar8(
  *          val = histogram_entries * (src[x] - minVal) / (maxVal - minVal);
  *          i = clip val between 0 and histogram_entries-1
  *          dest[x] = equalized_histogram[i];
+ * @/textblock</pre>
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
+ *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
+ *    kvImageDoNotTile
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
  *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
- *    histogram_entries The number of histogram entries, or “bins.”
+ * @param histogram_entries The number of histogram entries, or bins.
  *                      The histogram will be an array with histogram_entries elements.
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be
  *                      clipped to this value (for the purposes of histogram calculation),
  *                      and assigned to the first histogram entry.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will
  *                      be clipped to this value (for the purposes of histogram calculation),
  *                      and assigned to the last histogram entry.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -314,20 +345,17 @@ vImageEqualization_Planar8(
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
  *                                      this time of day.
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following values may be returned:
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
- *
- * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
- *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
- *    kvImageDoNotTile
- *
+ * @/textblock</pre>
  */
 vImage_Error
 vImageEqualization_PlanarF( 
@@ -339,11 +367,12 @@ vImageEqualization_PlanarF(
     Pixel_F maxVal, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageEqualization_ARGB8888
+/*!
+ * @function vImageEqualization_ARGB8888
  *
- * Equalizes the histogram of an ARGB8888 source image.
- *
+ * @abstract Equalizes the histogram of an ARGB8888 source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Calculates histograms for each channel of the ARGB8888 source image;
  *      Calculate normalized sum of each histogram;
  *      For each pixel do the following:
@@ -351,34 +380,35 @@ vImageEqualization_PlanarF(
  *          For each channel:
  *              val[ch] = equalized_histogram[ch][val[ch]];
  *              dest[x] = val;
- *
- * Operands:
- * ---------
- *    src            A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest           A pointer to a vImage buffer that references the destination pixels
- *
- *    flags          The following flags are allowed:
- *
- *          kvImageDoNotTile            Turns off internal multithreading. You may
- *                                      wish to do this if you have your own
- *                                      multithreading scheme to avoid having the
- *                                      two interfere with one another.
- *
- *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
  *    kvImageDoNotTile
  *
  * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
+ *
+ * @param src       A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest      A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param flags     The following flags are allowed:
+ * <pre>@textblock
+ *          kvImageDoNotTile            Turns off internal multithreading. You may
+ *                                      wish to do this if you have your own
+ *                                      multithreading scheme to avoid having the
+ *                                      two interfere with one another.
+ *
+ *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
+ * @/textblock</pre>
+ *
+ * @return The following error codes may be returned
+ * <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageEqualization_ARGB8888( 
@@ -386,11 +416,12 @@ vImageEqualization_ARGB8888(
     const vImage_Buffer *dest, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageEqualization_ARGBFFFF
+/*!
+ * @function vImageEqualization_ARGBFFFF
  *
- * Equalizes the histogram of an ARGBFFFF source image.
- *
+ * @abstract Equalizes the histogram of an ARGBFFFF source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Compute the histogram of the input image:
  *          For each pixel, do the following:
  *              val = src[x];
@@ -408,31 +439,30 @@ vImageEqualization_ARGB8888(
  *              i = clip i between 0 and histogram_entries-1
  *              val[ch] = equalized_histogram[ch][i];
  *          dest[x] = val;
+ * @/textblock</pre>
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
  *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
- *    histogram_entries The number of histogram entries, or “bins,” to be used in histograms for this operation
+ * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be clipped to this value
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the first histogram entry.
  *                      This minimum value is applied to each of the four channels separately.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will be clipped to this value
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the last histogram entry.
  *                      This maximum value is applied to each of the four channels separately.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -449,15 +479,17 @@ vImageEqualization_ARGB8888(
  *                                      this time of day. 
  *
  *          kvImageLeaveAlphaUnchanged    Copy the alpha channel to the destination image unchanged
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following error codes may be returned
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
@@ -477,45 +509,50 @@ vImageEqualization_ARGBFFFF(
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 
-
-
-/*
- * vImageHistogramSpecification_Planar8
+/*!
+ * @functiongroup Histogram Specification
+ * @discussion These functions cause the source image pixel distribution to conform to the
+ *             desired histogram.
+ */
+    
+/*!
+ * @function vImageHistogramSpecification_Planar8
  *
- * Performs a histogram specification operation on a Planar8 source image.
- *
+ * @abstract Performs a histogram specification operation on a Planar8 source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Compute the histogram of the input image;
  *      Calculate normalized sum of the input histogram and the desired_histogram
  *      Generate the inverse transform
  *      Transform final image using inv_hist as a LUT. For each pixel, do the following:
  *          dest[x] = inv_histogram[src[x]];
- *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest              A pointer to a vImage buffer that references the destination pixels
- *
- *    desired_histogram A pointer to the desired histogram for the transformed image.
- *                      The histogram should be an array with 256 elements.
- *
- *    flags             The following flags are allowed:
- *
- *          kvImageDoNotTile         Turns off internal multithreading. You may
- *                                   wish to do this if you have your own
- *                                   multithreading scheme to avoid having the
- *                                   two interfere with one another.
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src, dest or desired_histogram pointer is NULL.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
  *    kvImageDoNotTile
  *
+ * @param src               A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest              A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param desired_histogram A pointer to the desired histogram for the transformed image.
+ *                          The histogram should be an array with 256 elements.
+ *
+ * @param flags             The following flags are allowed:
+ * <pre>@textblock
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ * @/textblock</pre>
+ *
+ * @return  The following error codes may occur:
+ * <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src, dest or desired_histogram pointer is NULL.
+ * @/textblock</pre>
  */
 vImage_Error
 vImageHistogramSpecification_Planar8( 
@@ -524,11 +561,12 @@ vImageHistogramSpecification_Planar8(
     const vImagePixelCount *desired_histogram, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageHistogramSpecification_PlanarF
+/*!
+ * @function vImageHistogramSpecification_PlanarF
  *
- * Performs a histogram specification operation on a PlanarF source image.
- *
+ * @abstract Performs a histogram specification operation on a PlanarF source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Compute the histogram of the input image:
  *          For each pixel, do the following:
  *              val = histogram_entries * (src[x] - minVal) / (maxVal - minVal);
@@ -540,36 +578,37 @@ vImageHistogramSpecification_Planar8(
  *          val = histogram_entries * (src[x] - minVal) / (maxVal - minVal);
  *          i = clip val between 0 and histogram_entries-1
  *          dest[x] = inv_histogram[i];
+ * @/textblock</pre>
  *
+ * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
+ *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
+ *    kvImageDoNotTile
  *
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
- *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
- *    desired_histogram A pointer the desired histogram for the transformed image.
+ * @param desired_histogram A pointer the desired histogram for the transformed image.
  *                      The histogram should be an array with histogram_entries elements.
  *
- *    histogram_entries The number of histogram entries, or “bins,” to be used in histograms for this operation
+ * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be
  *                      clipped to this value (for the purposes of histogram calculation),
  *                      and assigned to the first histogram entry.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will
  *                      be clipped to this value (for the purposes of histogram calculation),
  *                      and assigned to the last histogram entry.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -584,20 +623,17 @@ vImageHistogramSpecification_Planar8(
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
  *                                      this time of day. 
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following error codes may be returned:
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src, dest or desired_histogram pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
- *
- * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
- *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
- *    kvImageDoNotTile
- *
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageHistogramSpecification_PlanarF( 
@@ -611,51 +647,58 @@ vImageHistogramSpecification_PlanarF(
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,4) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 
-/*
- * vImageHistogramSpecification_ARGB8888
+/*!
+ * @function vImageHistogramSpecification_ARGB8888
  *
- * Performs a histogram specification operation on an ARGB8888 source image.
- *
+ * @abstract Performs a histogram specification operation on an ARGB8888 source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each channel:
  *          Compute the histogram of the input image;
  *          Calculate normalized sum of the input histogram and the desired_histogram
  *          Generate the inverse transform
  *          Transform final image using inv_hist as a LUT. For each pixel, do the following:
  *              dest[x] = inv_histogram[src[x]];
- *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest              A pointer to a vImage buffer that references the destination pixels
- *
- *    desired_histogram A pointer to an array of four histograms, one each for
- *                      alpha, red, green, and blue (in that order).
- *                      These are the desired histograms for the transformed image.
- *                      Each histogram should be an array with 256 elements.
- *
- *    flags             The following flags are allowed:
- *
- *          kvImageDoNotTile            Turns off internal multithreading. You may
- *                                      wish to do this if you have your own
- *                                      multithreading scheme to avoid having the
- *                                      two interfere with one another.
- *
- *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src, dest or any of the desired_histogram pointers is NULL.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
  *    kvImageDoNotTile
  *
  * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
  *    The ordering of the desired_histogram must match the channel order of the image.
+ *
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param desired_histogram A pointer to an array of four histograms, one each for
+ *                      alpha, red, green, and blue (in that order).
+ *                      These are the desired histograms for the transformed image.
+ *                      Each histogram should be an array with 256 elements.
+ *                      This function does not allocate storage for the histograms. You must allocate
+ *                      storage for each of the four histograms, create an array and populate it with
+ *                      pointers to the histograms before calling the function. The contents of the 
+ *                      histograms are generally obtained from vImageHistogramCalculation_<fmt> from
+ *                      another image, but need not be so.
+ *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
+ *          kvImageDoNotTile            Turns off internal multithreading. You may
+ *                                      wish to do this if you have your own
+ *                                      multithreading scheme to avoid having the
+ *                                      two interfere with one another.
+ *
+ *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
+ * @/textblock</pre>
+ *
+ * @return The following values may be returned:
+ * <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src, dest or any of the desired_histogram pointers is NULL.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageHistogramSpecification_ARGB8888( 
@@ -665,11 +708,12 @@ vImageHistogramSpecification_ARGB8888(
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 
-/*
- * vImageHistogramSpecification_ARGBFFFF
+/*!
+ * @function vImageHistogramSpecification_ARGBFFFF
  *
- * Performs a histogram specification operation on an ARGBFFFF source image.
- *
+ * @abstract Performs a histogram specification operation on an ARGBFFFF source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each channel do:
  *          Compute the histogram of the input image:
  *              For each pixel, do the following:
@@ -682,36 +726,48 @@ vImageHistogramSpecification_ARGB8888(
  *              val = histogram_entries * (src[ch][x] - minVal) / (maxVal - minVal);
  *              i = clip val between 0 and histogram_entries-1
  *              dest[ch][x] = inv_histogram[ch][i];
+ * @/textblock </pre>
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
+ *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
+ *    kvImageDoNotTile
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
+ * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
+ *    The ordering of the desired_histogram must match the channel order of the image.
  *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information 
  *                      on how to determine the minimum size that you must allocate.
  *
- *    desired_histogram A pointer to an array of four histograms, one each for
+ * @param desired_histogram A pointer to an array of four histograms, one each for
  *                      alpha, red, green, and blue (in that order).                
  *                      These are the desired histograms for the transformed image.
  *                      Each histogram should be an array with histogram_entries elements..
+ *                      This function does not allocate storage for the histograms. You must allocate
+ *                      storage for each of the four histograms, create an array and populate it with
+ *                      pointers to the histograms before calling the function. The contents of the
+ *                      histograms are generally obtained from vImageHistogramCalculation_<fmt> from
+ *                      another image, but need not be so.
  *
- *    histogram_entries The number of histogram entries, or “bins,” to be used in histograms for this operation
+ * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be clipped to this value
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the first histogram entry.
  *                      This minimum value is applied to each of the four channels separately.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will be clipped to this value
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the last histogram entry. 
  *                      This maximum value is applied to each of the four channels separately.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -728,23 +784,17 @@ vImageHistogramSpecification_ARGB8888(
  *                                      this time of day. 
  *
  *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return  The following error codes may be returned:
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src, dest or any of desired_histogram pointers is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
- *
- * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
- *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
- *    kvImageDoNotTile
- *
- * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
- *    The ordering of the desired_histogram must match the channel order of the image.
+ * @/textblock</pre>
  */
 vImage_Error
 vImageHistogramSpecification_ARGBFFFF( 
@@ -757,36 +807,24 @@ vImageHistogramSpecification_ARGBFFFF(
     Pixel_F maxVal, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*!
+ * @functiongroup Contrast Stretch
+ * @discussion Some images do not make enough use of the light and dark ends of the spectrum.
+ *             vImageContrastStretch functions widen the pixel value distribution to use a wider
+ *             range of values.
+ */
 
-
-/*
- * vImageContrastStretch_Planar8
+/*!
+ * @function vImageContrastStretch_Planar8
  *
- * Stretches the contrast of a Planar8 source image.
- *
+ * @abstract Stretches the contrast of a Planar8 source image.
+ * @discussion This function performs the following operation:
+ *   <pre>@textblock
  *      Compute the histogram of the input image;
  *      Generate LookUp table based on the histogram
  *      Transform final image using the LUT. For each pixel, do the following:
  *          dest[x] = LUT[src[x]];
- *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest              A pointer to a vImage buffer that references the destination pixels
- *
- *    flags             The following flags are allowed:
- *
- *          kvImageDoNotTile         Turns off internal multithreading. You may
- *                                   wish to do this if you have your own
- *                                   multithreading scheme to avoid having the
- *                                   two interfere with one another.
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ *   @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
@@ -794,6 +832,25 @@ vImageHistogramSpecification_ARGBFFFF(
  *
  * vImageEndsInContrastStretch_Planar8 or vImageTableLookUp_Planar8 may be used instead when more control
  * over the stretch is desired.
+ *
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param flags         The following flags are allowed:
+ *   <pre>@textblock
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ *   @/textblock</pre>
+ *
+ * @return The following error codes may be returned:
+ *   <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ *   @/textblock</pre>
  */
 vImage_Error 
 vImageContrastStretch_Planar8( 
@@ -801,40 +858,47 @@ vImageContrastStretch_Planar8(
     const vImage_Buffer *dest, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageContrastStretch_PlanarF
+/*!
+ * @function vImageContrastStretch_PlanarF
  *
- * Stretches the contrast of a PlanarF source image.
- *
+ * @abstract Stretches the contrast of a PlanarF source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Find minimum and maximum value of the input image: loVal, hiVal;
  *      scale_factor = ( maxVal - minVal ) / (float) ( hiVal - loVal );
  *      Transfer the image. For each pixel do:
  *          dest[x] = (src[x] - loVal) * scale_factor + minVal;
+ * @/textblock</pre>
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
+ *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
+ *    kvImageDoNotTile
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
+ * vImageEndsInContrastStretch_PlanarF or vImageInterpolatedLookupTable_PlanarF may be used instead when more control
+ * over the stretch is desired.
  *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information 
  *                      on how to determine the minimum size that you must allocate.
  *
- *    histogram_entries The number of histogram entries, or “bins,” to be used in histograms for this operation
+ * @param histogram_entries The number of histogram entries, or bins to be used in histograms for this operation
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be
  *                      clipped to this value (for the purposes of histogram calculation),
  *                      and assigned to the first histogram entry.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will
  *                      be clipped to this value (for the purposes of histogram calculation),
  *                      and assigned to the last histogram entry.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -849,22 +913,17 @@ vImageContrastStretch_Planar8(
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
  *                                      this time of day. 
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following error codes may be returned
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
- *
- * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
- *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
- *    kvImageDoNotTile
- *
- * vImageEndsInContrastStretch_PlanarF or vImageInterpolatedLookupTable_PlanarF may be used instead when more control
- * over the stretch is desired.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageContrastStretch_PlanarF( 
@@ -876,47 +935,48 @@ vImageContrastStretch_PlanarF(
     Pixel_F maxVal, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageContrastStretch_ARGB8888
- *
- * Stretches the contrast of an ARGB8888 source image.
- *
+/*!
+ * @function vImageContrastStretch_ARGB8888
+ * @abstract Stretches the contrast of an ARGB8888 source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each channel:
  *          Compute the histogram of the input image;
  *          Generate LookUp table based on the histogram
  *          Transform final image using the LUT. For each pixel, do the following:
  *              dest[x] = LUT[src[x]];
- *
- * Operands:
- * ---------
- *    src           A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest          A pointer to a vImage buffer that references the destination pixels
- *
- *    flags         The following flags are allowed:
- *
- *          kvImageDoNotTile            Turns off internal multithreading. You may
- *                                      wish to do this if you have your own
- *                                      multithreading scheme to avoid having the
- *                                      two interfere with one another.
- *
- *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
  *    kvImageDoNotTile
  *
  * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
  *
  * vImageEndsInContrastStretch_ARGB8888 or vImageTableLookUp_ARGB8888 may be used instead when more control
  * over the stretch is desired.
+ *
+ * @param src       A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest      A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param flags     The following flags are allowed:
+ * <pre>@textblock
+ *          kvImageDoNotTile            Turns off internal multithreading. You may
+ *                                      wish to do this if you have your own
+ *                                      multithreading scheme to avoid having the
+ *                                      two interfere with one another.
+ *
+ *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
+ * @/textblock</pre>
+ *
+ * @return The following error codes may be returned:
+ * <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageContrastStretch_ARGB8888( 
@@ -924,41 +984,48 @@ vImageContrastStretch_ARGB8888(
     const vImage_Buffer *dest, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageContrastStretch_ARGBFFFF
+/*!
+ * @function vImageContrastStretch_ARGBFFFF
  *
- * Stretches the contrast of  an ARGBFFFF source image.
- *
+ * @abstract Stretches the contrast of  an ARGBFFFF source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *        For each channel:
  *            Find minimum and maximum value of the input image: loVal, hiVal;
  *            scale_factor = ( maxVal - minVal ) / (float) ( hiVal - loVal );
  *            Transfer the image. For each pixel do:
  *                dest[x] = (src[x] - loVal) * scale_factor + minVal;
+ * @/textblock</pre>
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
+ *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
+ *    kvImageDoNotTile
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
+ * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
  *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information 
  *                      on how to determine the minimum size that you must allocate.
  *
- *    histogram_entries The number of histogram entries, or “bins,” to be used in histograms for this operation
+ * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be clipped to this value
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the first histogram entry.
  *                      This minimum value is applied to each of the four channels separately.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will be clipped to this value
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the last histogram entry. 
  *                      This maximum value is applied to each of the four channels separately.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -975,21 +1042,16 @@ vImageContrastStretch_ARGB8888(
  *                                      this time of day. 
  *
  *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following error codes may be returned:
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
- *
- * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
- *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
- *    kvImageDoNotTile
- *
- * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ * @/textblock<pre>
  */
 vImage_Error 
 vImageContrastStretch_ARGBFFFF( 
@@ -1002,50 +1064,54 @@ vImageContrastStretch_ARGBFFFF(
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 
+/*!
+ *  @functiongroup Ends-In Contrast Stretch
+ *  @discussion Readjust the image pixel value distribution to use only some of the range of available intensities.
+ */
 
-
-/*
- * vImageEndsInContrastStretch_Planar8
+/*!
+ * @function vImageEndsInContrastStretch_Planar8
  *
- * Performs an ends-in contrast stretch operation on a Planar8 source image.
- *
+ * @abstract Performs an ends-in contrast stretch operation on a Planar8 source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      Compute the histogram of the input image;
  *      Generate LookUp table based on the histogram and percentage parameters
  *      Transform final image using the LookUp table. For each pixel, do the following:
  *          dest[x] = LUT[src[x]];
- *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest              A pointer to a vImage buffer that references the destination pixels
- *
- *    percent_low       A percentage value.
- *                      The number of pixels that map to the lowest end of the histogram of the
- *                      transformed image should represent this percentage of the total pixels.
- *    
- *    percent_high      A percentage value.
- *                      The number of pixels that map to the highest end of the histogram of the 
- *                      transformed image should represent this percentage of the total pixels.
- *
- *    flags             The following flags are allowed:
- *
- *          kvImageDoNotTile         Turns off internal multithreading. You may
- *                                   wish to do this if you have your own
- *                                   multithreading scheme to avoid having the
- *                                   two interfere with one another.
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src or dest pointer is NULL.
- *   kvImageInvalidParameter         percent_low + percent_high is greater than 100.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
  *    kvImageDoNotTile
  *
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param percent_low   A percentage value.
+ *                      The number of pixels that map to the lowest end of the histogram of the
+ *                      transformed image should represent this percentage of the total pixels.
+ *    
+ * @param percent_high  A percentage value.
+ *                      The number of pixels that map to the highest end of the histogram of the 
+ *                      transformed image should represent this percentage of the total pixels.
+ *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ * @/textblock</pre>
+ *
+ * @return The following error codes may be returned:
+ * <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src or dest pointer is NULL.
+ *   kvImageInvalidParameter         percent_low + percent_high is greater than 100.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageEndsInContrastStretch_Planar8( 
@@ -1055,11 +1121,12 @@ vImageEndsInContrastStretch_Planar8(
     unsigned int percent_high, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageEndsInContrastStretch_PlanarF
+/*!
+ * @function vImageEndsInContrastStretch_PlanarF
  *
- * Performs an ends-in contrast stretch operation on a PlanarF source image.
- *
+ * @abstract Performs an ends-in contrast stretch operation on a PlanarF source image.
+ * @discussion 
+ * <pre>@textblock
  *      Compute the histogram of the input image;
  *      Generate LookUp table based on the histogram and percentage parameters
  *      Transform final image using the LookUp table. For each pixel, do the following:
@@ -1067,38 +1134,40 @@ vImageEndsInContrastStretch_Planar8(
  *          i = clip val between 0 and histogram_entries-1
  *          dest[x] = LUT[i];
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
+ *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
+ *    kvImageDoNotTile
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
  *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information 
  *                      on how to determine the minimum size that you must allocate.
  *
- *    percent_low       A percentage value.
+ * @param percent_low   A percentage value.
  *                      The number of pixels that map to the lowest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
  *    
- *    percent_high      A percentage value.
+ * @param percent_high  A percentage value.
  *                      The number of pixels that map to the highest end of the histogram of the 
  *                      transformed image should represent this percentage of the total pixels.
  *
- *    histogram_entries The number of histogram entries, or “bins,” to be used in histograms for this operation
+ * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
  *
- *    minVal            A minimum pixel value, the low end of the histogram.
+ * @param minVal        A minimum pixel value, the low end of the histogram.
  *                      Any pixel value less than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the first histogram entry.
  *
- *    maxVal            A maximum pixel value, the high end of the histogram.
+ * @param maxVal        A maximum pixel value, the high end of the histogram.
  *                      Any pixel value greater than this will be clipped to this value 
  *                      (for the purposes of histogram calculation), and assigned to the last histogram entry.
  *
- *    flags             The following flags are allowed:
- *
+ * @param    flags      The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -1113,9 +1182,10 @@ vImageEndsInContrastStretch_Planar8(
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
  *                                      this time of day. 
+ * @/textblock</pre>
  *
- * Return Value:
- * -------------
+ * @return The following error codes may be returned:
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal, histogram_entries is 0 or
@@ -1123,11 +1193,7 @@ vImageEndsInContrastStretch_Planar8(
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
- *
- * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
- *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
- *    kvImageDoNotTile
- *
+ * @/textblock </pre>
  */
 vImage_Error
 vImageEndsInContrastStretch_PlanarF( 
@@ -1141,54 +1207,56 @@ vImageEndsInContrastStretch_PlanarF(
     Pixel_F maxVal, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * vImageEndsInContrastStretch_ARGB8888
+/*!
+ * @function vImageEndsInContrastStretch_ARGB8888
  *
- * Performs an ends-in contrast stretch operation on an ARGB8888 source image.
- *
+ * @abstract Performs an ends-in contrast stretch operation on an ARGB8888 source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each channel:
  *          Compute the histogram of the input image;
  *          Generate LookUp table based on the histogram and percentage parameters
  *          Transform final image using the LookUp table. For each pixel, do the following:
  *              dest[x] = LUT[src[x]];
- *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
- *
- *    dest              A pointer to a vImage buffer that references the destination pixels
- *
- *    percent_low       An array of four percentage values, one each for alpha, red, green, and blue.
- *                      The number of pixels that map to the lowest end of the histogram of the
- *                      transformed image should represent this percentage of the total pixels.
- *    
- *    percent_high      An array of four percentage values, one each for alpha, red, green, and blue.
- *                      The number of pixels that map to the highest end of the histogram of the 
- *                      transformed image should represent this percentage of the total pixels.
- *
- *    flags             The following flags are allowed:
- *
- *          kvImageDoNotTile            Turns off internal multithreading. You may
- *                                      wish to do this if you have your own
- *                                      multithreading scheme to avoid having the
- *                                      two interfere with one another.
- *
- *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
- *
- * Return Value:
- * -------------
- *   kvImageNoError                  Success!
- *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
- *   kvImageNullPointerArgument      src, dest, percent_low or percent_high pointer is NULL.
- *   kvImageInvalidParameter         Some of percent_low[i]+percent_high[i] is greater than 100.
+ * @/textblock</pre>
  *
  * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
  *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
  *    kvImageDoNotTile
  *
  * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
  *    The ordering of the percent_low and percent_high parameters match the order of the channels.
+ *
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param percent_low   An array of four percentage values, one each for alpha, red, green, and blue.
+ *                      The number of pixels that map to the lowest end of the histogram of the
+ *                      transformed image should represent this percentage of the total pixels.
+ *    
+ * @param percent_high  An array of four percentage values, one each for alpha, red, green, and blue.
+ *                      The number of pixels that map to the highest end of the histogram of the 
+ *                      transformed image should represent this percentage of the total pixels.
+ *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
+ *          kvImageDoNotTile            Turns off internal multithreading. You may
+ *                                      wish to do this if you have your own
+ *                                      multithreading scheme to avoid having the
+ *                                      two interfere with one another.
+ *
+ *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
+ * @/textblock</pre>
+ *
+ * @return The following error codes may be returned:
+ * <pre>@textblock
+ *   kvImageNoError                  Success!
+ *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *   kvImageNullPointerArgument      src, dest, percent_low or percent_high pointer is NULL.
+ *   kvImageInvalidParameter         Some of percent_low[i]+percent_high[i] is greater than 100.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageEndsInContrastStretch_ARGB8888( 
@@ -1199,11 +1267,12 @@ vImageEndsInContrastStretch_ARGB8888(
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 
-/*
- * vImageEndsInContrastStretch_ARGBFFFF
+/*!
+ * @function vImageEndsInContrastStretch_ARGBFFFF
  *
- * Performs a histogram specification operation on an ARGBFFFF source image.
- *
+ * @abstract Performs a histogram specification operation on an ARGBFFFF source image.
+ * @discussion This function performs the following operation:
+ * <pre>@textblock
  *      For each channel do:
  *          Compute the histogram of the input image;
  *          Generate LookUp table based on the histogram and percentage parameters
@@ -1211,39 +1280,46 @@ vImageEndsInContrastStretch_ARGB8888(
  *              val = histogram_entries * (src[x] - minVal) / ( maxVal - minVal );
  *              i = clip val between 0 and histogram_entries-1
  *              dest[x] = LUT[i];
+ * @/textblock</pre>
  *
- * Operands:
- * ---------
- *    src               A pointer to a vImage_Buffer that references the source pixels
+ * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
+ *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
+ *    kvImageDoNotTile
  *
- *    dest              A pointer to a vImage buffer that references the destination pixels
+ * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
+ *    The ordering of the percent_low and percent_high parameters match the order of the channels.
  *
- *    tempBuffer        A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer, 
+ * @param src           A pointer to a vImage_Buffer that references the source pixels
+ *
+ * @param dest          A pointer to a vImage buffer that references the destination pixels
+ *
+ * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
  *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
  *                      in which case you are responsible for deallocating it when you is no longer need it.
  *                      If you want to allocate the buffer yourself, see the documentation for information 
  *                      on how to determine the minimum size that you must allocate.
  *
- *    percent_low       An array of four percentage values, one each for alpha, red, green, and blue.
+ * @param percent_low   An array of four percentage values, one each for alpha, red, green, and blue.
  *                      The number of pixels that map to the lowest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
  *    
- *    percent_high      An array of four percentage values, one each for alpha, red, green, and blue.
+ * @param percent_high  An array of four percentage values, one each for alpha, red, green, and blue.
  *                      The number of pixels that map to the highest end of the histogram of the 
  *                      transformed image should represent this percentage of the total pixels.
  *
- *    histogram_entries The number of histogram entries, or “bins,” to be used in histograms for this operation
+ * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
  *
- *    minVal            A minimum pixel value. Any pixel value less than this will be clipped to this value
+ * @param minVal        A minimum pixel value. Any pixel value less than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the first histogram entry.
  *                      This minimum value is applied to each of the four channels separately.
  *
- *    maxVal            A maximum pixel value. Any pixel value greater than this will be clipped to this value
+ * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the last histogram entry. 
  *                      This maximum value is applied to each of the four channels separately.
  *
- *    flags             The following flags are allowed:
- *
+ * @param flags         The following flags are allowed:
+ * <pre>@textblock
  *          kvImageDoNotTile            Turns off internal multithreading. You may
  *                                      wish to do this if you have your own
  *                                      multithreading scheme to avoid having the
@@ -1260,9 +1336,9 @@ vImageEndsInContrastStretch_ARGB8888(
  *                                      this time of day. 
  *
  *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
- *
- * Return Value:
- * -------------
+ * @/textblock</pre>
+ * @return The following error codes may be returned:
+ * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
  *   kvImageInvalidParameter         maxVal is less than minVal, histogram_entries is 0 or 
@@ -1270,14 +1346,7 @@ vImageEndsInContrastStretch_ARGB8888(
  *   kvImageNullPointerArgument      src, dest, percent_low or percent_high pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
- *
- * This routine will work in place provided that src.data == dest.data and src.rowBytes >= dest.rowBytes.
- *    if src.rowBytes > dest.rowBytes and src.data == dest.data, the function will only work if you pass
- *    kvImageDoNotTile
- *
- * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
- *    The ordering of the percent_low and percent_high parameters match the order of the channels.
+ * @/textblock</pre>
  */
 vImage_Error 
 vImageEndsInContrastStretch_ARGBFFFF( 
@@ -1291,24 +1360,10 @@ vImageEndsInContrastStretch_ARGBFFFF(
     Pixel_F maxVal, 
     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,4,5) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
-/*
- * It is recommended that you use the kvImageGetTempBufferSize flag 
- * with the appropriate function, instead of using this API 
- * Simply pass the kvImageGetTempBufferSize flag in addition to all 
- * the regular parameters. The size will be returned in the  
- * vImage_Error result.  
- * kvImageGetTempBufferSize is for MacOS X.4 and later. 
- */
-size_t 
-vImageGetMinimumTempBufferSizeForHistogram( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    unsigned int histogram_entries, 
-    vImage_Flags flags, 
-    size_t bytesPerPixel ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_BUT_DEPRECATED( __MAC_10_3, __MAC_10_4, __IPHONE_NA, __IPHONE_NA );
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
+

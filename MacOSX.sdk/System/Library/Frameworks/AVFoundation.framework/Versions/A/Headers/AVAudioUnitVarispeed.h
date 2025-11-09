@@ -2,10 +2,12 @@
     File:		AVAudioUnitVarispeed.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
 #import <AVFoundation/AVAudioUnitTimeEffect.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @class AVAudioUnitVarispeed
     @abstract an AVAudioUnitTimeEffect that can be used to control the playback rate 
@@ -13,7 +15,7 @@
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface AVAudioUnitVarispeed : AVAudioUnitTimeEffect
 
-/*! @property playbackRate
+/*! @property rate
     @abstract controls the playback rate of the audio signal
     @discussion
     Since this unit resamples the input signal, changing the playback rate also changes the pitch.
@@ -35,3 +37,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic) float rate;
 
 @end
+
+NS_ASSUME_NONNULL_END

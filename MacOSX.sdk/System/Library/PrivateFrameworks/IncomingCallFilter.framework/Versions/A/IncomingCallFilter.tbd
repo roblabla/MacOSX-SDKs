@@ -8,6 +8,7 @@ exports:
     symbols:         [ _ICFCallProviderShouldAllowIncomingCall, _ICFCallProviderShouldAllowIncomingCallWithQueue, 
                        _ICFRegisterCallFilterBlockWithIdentifier, _ICFServiceIdentifierFaceTime, 
                        _ICFServiceIdentifierFaceTimeAudio, _ICFServiceIdentifierTelephony, 
-                       _ICFUnknownID, _ICFUnregisterCallFilterBlockWithIdentifier ]
+                       _ICFServiceIdentifierTelephonyRelay, _ICFUnknownID, 
+                       _ICFUnregisterCallFilterBlockWithIdentifier ]
     objc-classes:    [ _ICFCallServer ]
 ...

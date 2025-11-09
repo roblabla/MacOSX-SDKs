@@ -1,8 +1,10 @@
 //
 //  SCNPhysicsBody.h
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
 //
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class SCNPhysicsShape;
 
@@ -11,25 +13,21 @@ typedef NS_ENUM(NSInteger, SCNPhysicsBodyType) {
 	SCNPhysicsBodyTypeStatic,
 	SCNPhysicsBodyTypeDynamic,
 	SCNPhysicsBodyTypeKinematic
-} SCENEKIT_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_10, 8_0);
 
 //Collision default category
 typedef NS_OPTIONS(NSUInteger, SCNPhysicsCollisionCategory) {
 	SCNPhysicsCollisionCategoryDefault = 1 << 0,    // default collision group for dynamic and kinematic objects
 	SCNPhysicsCollisionCategoryStatic  = 1 << 1,    // default collision group for static objects
 	SCNPhysicsCollisionCategoryAll     = ~0UL       // default for collision mask
-} SCENEKIT_ENUM_AVAILABLE(10_10, 8_0);
+} NS_ENUM_AVAILABLE(10_10, 8_0);
 
 /*!
  @class SCNPhysicsBody
  @abstract The SCNPhysicsBody class describes the physics properties (such as mass, friction...) of a node.
  */
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsBody : NSObject <NSCopying, NSSecureCoding>
-{
-@private
-    id _reserved;
-}
 
 //Creates an instance of a static body with default properties.
 + (instancetype)staticBody;
@@ -41,13 +39,19 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 + (instancetype)kinematicBody;
 
 //Creates an instance of a rigid body with a specific shape.
-+ (instancetype)bodyWithType:(SCNPhysicsBodyType)type shape:(SCNPhysicsShape *)shape;
++ (instancetype)bodyWithType:(SCNPhysicsBodyType)type shape:(nullable SCNPhysicsShape *)shape;
 
 //Specifies the type of the receiver.
 @property(nonatomic) SCNPhysicsBodyType type;
 
 //Specifies the Mass of the body in kilogram. Defaults to 1 for dynamic bodies, defaults to 0 for static bodies.
 @property(nonatomic) CGFloat mass;
+
+//Specifies the moment of inertia of the body as a vector in 3D. Disable usesDefaultMomentOfInertia for this value to be used instead of the default moment of inertia that is calculated from the shape geometry.
+@property(nonatomic) SCNVector3 momentOfInertia NS_AVAILABLE(10_11, 9_0);
+
+//Permits to disable the use of the default moment of inertia in favor of the one stored in momentOfInertia.
+@property(nonatomic) BOOL usesDefaultMomentOfInertia NS_AVAILABLE(10_11, 9_0);
 
 // Specifies the charge on the body. Charge determines the degree to which a body is affected by
 // electric and magnetic fields. Note that this is a unitless quantity, it is up to the developer to
@@ -64,7 +68,7 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 @property(nonatomic) CGFloat rollingFriction;
 
 //Specifies the physics shape of the receiver. Leaving this nil will let the system decide and use the most efficients bounding representation of the actual geometry.
-@property(nonatomic, retain) SCNPhysicsShape *physicsShape;
+@property(nonatomic, retain, nullable) SCNPhysicsShape *physicsShape;
 
 //If the physics simulation has determined that this body is at rest it may set the resting property to YES. Resting bodies do not participate in the simulation until some collision with a non-resting object, or an impulse is applied, that unrests it. If all bodies in the world are resting then the simulation as a whole is "at rest".
 @property(nonatomic, readonly) BOOL isResting;
@@ -92,11 +96,18 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 
 //Defines what logical 'categories' this body belongs too.
 //Defaults to SCNPhysicsCollisionCategoryStatic for static bodies and SCNPhysicsCollisionCategoryDefault for the other body types.
-//limited to the first 15 bits.
-@property(nonatomic, assign) NSUInteger categoryBitMask;
+//limited to the first 15 bits on OS X 10.10 and iOS 8.
+@property(nonatomic) NSUInteger categoryBitMask;
 
 //Defines what logical 'categories' of bodies this body responds to collisions with. Defaults to all bits set (all categories).
-@property(nonatomic, assign) NSUInteger collisionBitMask;
+@property(nonatomic) NSUInteger collisionBitMask;
+
+//A mask that defines which categories of bodies cause intersection notifications with this physics body. Defaults to 0.
+//On iOS 8 and OS X 10.10 and lower the intersection notifications are always sent when a collision occurs.
+@property(nonatomic) NSUInteger contactTestBitMask NS_AVAILABLE(10_11, 9_0);
+
+//If set to YES this node will be affected by gravity. The default is YES.
+@property(nonatomic, getter=isAffectedByGravity) BOOL affectedByGravity NS_AVAILABLE(10_11, 9_0);
 
 //Applies a linear force in the specified direction. The linear force is applied on the center of mass of the receiver. If impulse is set to YES then the force is applied for just one frame, otherwise it applies a continuous force.
 - (void)applyForce:(SCNVector3)direction impulse:(BOOL)impulse;
@@ -114,3 +125,5 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 - (void)resetTransform;
 
 @end
+    
+NS_ASSUME_NONNULL_END

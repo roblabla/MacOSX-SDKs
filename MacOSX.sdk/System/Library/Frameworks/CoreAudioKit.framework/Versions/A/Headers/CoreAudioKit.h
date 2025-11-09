@@ -14,3 +14,11 @@
 #import <CoreAudioKit/AUGenericView.h>
 #import <CoreAudioKit/AUPannerView.h>
 #import <CoreAudioKit/AUCustomViewPersistentData.h>
+
+#import <CoreAudioKit/CANetworkBrowserWindowController.h>
+#import <CoreAudioKit/CABTLEMIDIWindowController.h>
+
+#if __OBJC2__
+#import <CoreAudioKit/CAInterDeviceAudioViewController.h>
+#import <CoreAudioKit/AUViewController.h>
+#endif

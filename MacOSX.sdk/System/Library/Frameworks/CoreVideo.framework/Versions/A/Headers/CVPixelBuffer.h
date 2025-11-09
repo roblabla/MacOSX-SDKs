@@ -2,13 +2,13 @@
  *  CVPixelBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
  
   /*! @header CVPixelBuffer.h
-	@copyright 2004-2014 Apple Inc. All rights reserved.
-	@availability Mac OS X 10.4 or later
+	@copyright 2004-2015 Apple Inc. All rights reserved.
+	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @discussion CVPixelBuffers are CVImageBuffers that hold the pixels in main memory
 		   
 */
@@ -31,7 +31,12 @@ extern "C" {
 CoreVideo pixel format type constants.
 CoreVideo does not provide support for all of these formats; this list just defines their names.
 */
-enum {
+#if COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSType
+#else
+enum
+#endif
+{
   kCVPixelFormatType_1Monochrome    = 0x00000001, /* 1 bit indexed */
   kCVPixelFormatType_2Indexed       = 0x00000002, /* 2 bit indexed */
   kCVPixelFormatType_4Indexed       = 0x00000004, /* 4 bit indexed */
@@ -92,7 +97,13 @@ enum {
 		should be passed both to the lock and unlock functions.  Non-symmetrical usage of this
 		flag will result in undefined behavior.
 */
-enum CVPixelBufferLockFlags {
+typedef CVOptionFlags CVPixelBufferLockFlags;
+#if COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CVPixelBufferLockFlags
+#else
+enum
+#endif
+{
 	kCVPixelBufferLock_ReadOnly = 0x00000001,
 };
 
@@ -123,23 +134,25 @@ struct CVPlanarPixelBufferInfo_YCbCrBiPlanar {
 typedef struct CVPlanarPixelBufferInfo_YCbCrBiPlanar   CVPlanarPixelBufferInfo_YCbCrBiPlanar;
 
 #pragma mark BufferAttributeKeys
-CV_EXPORT const CFStringRef kCVPixelBufferPixelFormatTypeKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // A single CFNumber or a CFArray of CFNumbers (OSTypes)
-CV_EXPORT const CFStringRef kCVPixelBufferMemoryAllocatorKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFAllocatorRef
-CV_EXPORT const CFStringRef kCVPixelBufferWidthKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferHeightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsLeftKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsTopKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsRightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsBottomKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferBytesPerRowAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferCGBitmapContextCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);  // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferCGImageCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferOpenGLCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferPlaneAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);		    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferIOSurfacePropertiesKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);     // CFDictionary; presence requests buffer allocation via IOSurface
-CV_EXPORT const CFStringRef kCVPixelBufferOpenGLESCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);	    // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferMetalCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_8_0);	    // CFBoolean
-    
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPixelFormatTypeKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // A single CFNumber or a CFArray of CFNumbers (OSTypes)
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMemoryAllocatorKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFAllocatorRef
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferWidthKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferHeightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsLeftKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsTopKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsRightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsBottomKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferBytesPerRowAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGBitmapContextCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);  // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGImageCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPlaneAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);		    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfacePropertiesKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);     // CFDictionary; presence requests buffer allocation via IOSurface
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMetalCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLTextureCacheCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_NA);
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESTextureCacheCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_9_0);    
+
 /*!
     @typedef	CVPixelBufferRef
     @abstract   Based on the image buffer type. The pixel buffer implements the memory storage for an image buffer.
@@ -156,7 +169,7 @@ CV_EXPORT CFTypeID CVPixelBufferGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_1
     @param      buffer A CVPixelBuffer object that you want to retain.
     @result     A CVPixelBuffer object that is the same as the passed in buffer.
 */
-CV_EXPORT CVPixelBufferRef CVPixelBufferRetain( CVPixelBufferRef texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVPixelBufferRef CV_NULLABLE CVPixelBufferRetain( CVPixelBufferRef CV_NULLABLE texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferRelease
@@ -164,7 +177,7 @@ CV_EXPORT CVPixelBufferRef CVPixelBufferRetain( CVPixelBufferRef texture ) __OSX
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVPixelBuffer object that you want to release.
 */
-CV_EXPORT void CVPixelBufferRelease( CVPixelBufferRef texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT void CVPixelBufferRelease( CV_RELEASES_ARGUMENT CVPixelBufferRef CV_NULLABLE texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferCreateResolvedAttributesDictionary
@@ -175,7 +188,10 @@ CV_EXPORT void CVPixelBufferRelease( CVPixelBufferRef texture ) __OSX_AVAILABLE_
     @param      resolvedDictionaryOut The resulting dictionary will be placed here.
     @result     Return value that may be useful in discovering why resolution failed.
 */
-CV_EXPORT CVReturn CVPixelBufferCreateResolvedAttributesDictionary(CFAllocatorRef allocator, CFArrayRef attributes, CFDictionaryRef *resolvedDictionaryOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferCreateResolvedAttributesDictionary(
+    CFAllocatorRef CV_NULLABLE allocator,
+    CFArrayRef CV_NULLABLE attributes,
+    CV_RETURNS_RETAINED_PARAMETER CFDictionaryRef CV_NULLABLE * CV_NONNULL resolvedDictionaryOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 /*!
@@ -185,18 +201,19 @@ CV_EXPORT CVReturn CVPixelBufferCreateResolvedAttributesDictionary(CFAllocatorRe
     @param      width   Width of the PixelBuffer in pixels.
     @param      height  Height of the PixelBuffer in pixels.
     @param	pixelFormatType		Pixel format indentified by its respective OSType.
-    @param	pixelBufferAttributes      A dictionary with additional attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
+    @param	pixelBufferAttributes      A dictionary with additional attributes for a pixel buffer. This parameter is optional. See BufferAttributeKeys for more details.
     @param      pixelBufferOut          The new pixel buffer will be returned here
     @result	returns kCVReturnSuccess on success.
 */    
-CV_EXPORT CVReturn CVPixelBufferCreate(CFAllocatorRef allocator,
-                                      size_t width,
-                                      size_t height,
-                                      OSType pixelFormatType,
-                                      CFDictionaryRef pixelBufferAttributes,
-                                      CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferCreate(
+    CFAllocatorRef CV_NULLABLE allocator,
+    size_t width,
+    size_t height,
+    OSType pixelFormatType,
+    CFDictionaryRef CV_NULLABLE pixelBufferAttributes,
+    CV_RETURNS_RETAINED_PARAMETER CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
-typedef void (*CVPixelBufferReleaseBytesCallback)( void *releaseRefCon, const void *baseAddress );
+typedef void (*CVPixelBufferReleaseBytesCallback)( void * CV_NULLABLE releaseRefCon, const void * CV_NULLABLE baseAddress );
 
 /*!
     @function   CVPixelBufferCreateWithBytes
@@ -213,18 +230,19 @@ typedef void (*CVPixelBufferReleaseBytesCallback)( void *releaseRefCon, const vo
     @param      pixelBufferOut          The new pixel buffer will be returned here
     @result	returns kCVReturnSuccess on success.
 */
-CV_EXPORT CVReturn CVPixelBufferCreateWithBytes(CFAllocatorRef allocator,
-					       size_t width,
-					       size_t height,
-					       OSType pixelFormatType,
-					       void *baseAddress,
-					       size_t bytesPerRow,
-					       CVPixelBufferReleaseBytesCallback releaseCallback,
-					       void *releaseRefCon,
-					       CFDictionaryRef pixelBufferAttributes,
-				               CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferCreateWithBytes(
+    CFAllocatorRef CV_NULLABLE allocator,
+    size_t width,
+    size_t height,
+    OSType pixelFormatType,
+    void * CV_NONNULL baseAddress,
+    size_t bytesPerRow,
+    CVPixelBufferReleaseBytesCallback CV_NULLABLE releaseCallback,
+    void * CV_NULLABLE releaseRefCon,
+    CFDictionaryRef CV_NULLABLE pixelBufferAttributes,
+    CV_RETURNS_RETAINED_PARAMETER CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
-typedef void (*CVPixelBufferReleasePlanarBytesCallback)( void *releaseRefCon, const void *dataPtr, size_t dataSize, size_t numberOfPlanes, const void *planeAddresses[] );
+typedef void (*CVPixelBufferReleasePlanarBytesCallback)( void * CV_NULLABLE releaseRefCon, const void * CV_NULLABLE dataPtr, size_t dataSize, size_t numberOfPlanes, const void * CV_NULLABLE planeAddresses[] );
 
 /*!
     @function   CVPixelBufferCreateWithPlanarBytes
@@ -246,31 +264,33 @@ typedef void (*CVPixelBufferReleasePlanarBytesCallback)( void *releaseRefCon, co
     @param      pixelBufferOut          The new pixel buffer will be returned here
     @result	returns kCVReturnSuccess on success.
 */
-CV_EXPORT CVReturn CVPixelBufferCreateWithPlanarBytes(CFAllocatorRef allocator,
-							 size_t width,
-							 size_t height,
-							 OSType pixelFormatType,
-							 void *dataPtr, // pass a pointer to a plane descriptor block, or NULL
-							 size_t dataSize, // pass size if planes are contiguous, NULL if not
-							 size_t numberOfPlanes,
-							 void *planeBaseAddress[],
-							 size_t planeWidth[],
-							 size_t planeHeight[],
-							 size_t planeBytesPerRow[],
-							 CVPixelBufferReleasePlanarBytesCallback releaseCallback,
-							 void *releaseRefCon,
-							 CFDictionaryRef pixelBufferAttributes,
-							 CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferCreateWithPlanarBytes(
+    CFAllocatorRef CV_NULLABLE allocator,
+    size_t width,
+    size_t height,
+    OSType pixelFormatType,
+    void * CV_NULLABLE dataPtr, // pass a pointer to a plane descriptor block, or NULL
+    size_t dataSize, // pass size if planes are contiguous, NULL if not
+    size_t numberOfPlanes,
+    void * CV_NULLABLE planeBaseAddress[],
+    size_t planeWidth[],
+    size_t planeHeight[],
+    size_t planeBytesPerRow[],
+    CVPixelBufferReleasePlanarBytesCallback CV_NULLABLE releaseCallback,
+    void * CV_NULLABLE releaseRefCon,
+    CFDictionaryRef CV_NULLABLE pixelBufferAttributes,
+    CV_RETURNS_RETAINED_PARAMETER CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 /*!
 	@function   CVPixelBufferLockBaseAddress
 	@abstract   Description Locks the BaseAddress of the PixelBuffer to ensure that the memory is accessible.
+	@discussion This API ensures that the CVPixelBuffer is accessible in system memory. This should only be called if the base address is going to be used and the pixel data will be accessed by the CPU.
 	@param      pixelBuffer Target PixelBuffer.
 	@param      lockFlags See CVPixelBufferLockFlags.
 	@result     kCVReturnSuccess if the lock succeeded, or error code on failure
 */
-CV_EXPORT CVReturn CVPixelBufferLockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags lockFlags) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferLockBaseAddress( CVPixelBufferRef CV_NONNULL pixelBuffer, CVPixelBufferLockFlags lockFlags ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
 	@function   CVPixelBufferUnlockBaseAddress
@@ -279,7 +299,7 @@ CV_EXPORT CVReturn CVPixelBufferLockBaseAddress(CVPixelBufferRef pixelBuffer, CV
 	@param      unlockFlags See CVPixelBufferLockFlags.
 	@result     kCVReturnSuccess if the unlock succeeded, or error code on failure
 */
-CV_EXPORT CVReturn CVPixelBufferUnlockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags unlockFlags) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferUnlockBaseAddress( CVPixelBufferRef CV_NONNULL pixelBuffer, CVPixelBufferLockFlags unlockFlags ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetWidth
@@ -287,7 +307,7 @@ CV_EXPORT CVReturn CVPixelBufferUnlockBaseAddress(CVPixelBufferRef pixelBuffer, 
     @param      pixelBuffer Target PixelBuffer.
     @result     Width in pixels.
 */
-CV_EXPORT size_t CVPixelBufferGetWidth(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetWidth( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetHeight
@@ -295,7 +315,7 @@ CV_EXPORT size_t CVPixelBufferGetWidth(CVPixelBufferRef pixelBuffer) __OSX_AVAIL
     @param      pixelBuffer Target PixelBuffer.
     @result     Height in pixels.
 */
-CV_EXPORT size_t CVPixelBufferGetHeight(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetHeight( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetPixelFormatType
@@ -303,7 +323,7 @@ CV_EXPORT size_t CVPixelBufferGetHeight(CVPixelBufferRef pixelBuffer) __OSX_AVAI
     @param      pixelBuffer Target PixelBuffer.
     @result     OSType identifying the pixel format by its type.
 */
-CV_EXPORT OSType CVPixelBufferGetPixelFormatType(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT OSType CVPixelBufferGetPixelFormatType( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBaseAddress
@@ -315,7 +335,7 @@ CV_EXPORT OSType CVPixelBufferGetPixelFormatType(CVPixelBufferRef pixelBuffer) _
 		For chunky buffers, this will return a pointer to the pixel at 0,0 in the buffer
 		For planar buffers this will return a pointer to a PlanarComponentInfo struct (defined in QuickTime).
 */
-CV_EXPORT void *CVPixelBufferGetBaseAddress(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT void * CV_NULLABLE CVPixelBufferGetBaseAddress( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBytesPerRow
@@ -324,7 +344,7 @@ CV_EXPORT void *CVPixelBufferGetBaseAddress(CVPixelBufferRef pixelBuffer) __OSX_
     @result     Bytes per row of the image data.   For planar buffers this will return a rowBytes value such that bytesPerRow * height
                 will cover the entire image including all planes.
 */
-CV_EXPORT size_t CVPixelBufferGetBytesPerRow(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetBytesPerRow( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetDataSize
@@ -332,7 +352,7 @@ CV_EXPORT size_t CVPixelBufferGetBytesPerRow(CVPixelBufferRef pixelBuffer) __OSX
     @param      pixelBuffer Target PixelBuffer.
     @result     Data size used in CVPixelBufferCreateWithPlanarBytes.
 */
-CV_EXPORT size_t CVPixelBufferGetDataSize(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetDataSize( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferIsPlanar
@@ -340,7 +360,7 @@ CV_EXPORT size_t CVPixelBufferGetDataSize(CVPixelBufferRef pixelBuffer) __OSX_AV
     @param      pixelBuffer Target PixelBuffer.
     @result     True if the PixelBuffer was created using CVPixelBufferCreateWithPlanarBytes.
 */
-CV_EXPORT Boolean CVPixelBufferIsPlanar(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT Boolean CVPixelBufferIsPlanar( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetPlaneCount
@@ -348,67 +368,77 @@ CV_EXPORT Boolean CVPixelBufferIsPlanar(CVPixelBufferRef pixelBuffer) __OSX_AVAI
     @param      pixelBuffer Target PixelBuffer.
     @result     Number of planes.  Returns 0 for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetPlaneCount(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetPlaneCount( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetWidthOfPlane
     @abstract   Returns the width of the plane at planeIndex in the PixelBuffer.
+    @discussion On OSX 10.10 and earlier, or iOS 8 and earlier, calling this 
+                function with a non-planar buffer will have undefined behavior.
     @param      pixelBuffer Target PixelBuffer.
     @param      planeIndex  Identifying the plane.
     @result     Width in pixels, or 0 for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetWidthOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetWidthOfPlane( CVPixelBufferRef CV_NONNULL pixelBuffer, size_t planeIndex ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetHeightOfPlane
     @abstract   Returns the height of the plane at planeIndex in the PixelBuffer.
+    @discussion On OSX 10.10 and earlier, or iOS 8 and earlier, calling this
+                function with a non-planar buffer will have undefined behavior.
     @param      pixelBuffer Target PixelBuffer.
     @param      planeIndex  Identifying the plane.
     @result     Height in pixels, or 0 for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetHeightOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetHeightOfPlane( CVPixelBufferRef CV_NONNULL pixelBuffer, size_t planeIndex ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBaseAddressOfPlane
     @abstract   Returns the base address of the plane at planeIndex in the PixelBuffer.
     @discussion Retrieving the base address for a PixelBuffer requires that the buffer base address be locked
-                via a successful call to CVPixelBufferLockBaseAddress.
+                via a successful call to CVPixelBufferLockBaseAddress. On OSX 10.10 and earlier, or iOS 8 and
+                earlier, calling this function with a non-planar buffer will have undefined behavior.
     @param      pixelBuffer Target PixelBuffer.
     @param      planeIndex  Identifying the plane.
     @result     Base address of the plane, or NULL for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT void *CVPixelBufferGetBaseAddressOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT void * CV_NULLABLE CVPixelBufferGetBaseAddressOfPlane( CVPixelBufferRef CV_NONNULL pixelBuffer, size_t planeIndex ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBytesPerRowOfPlane
     @abstract   Returns the row bytes of the plane at planeIndex in the PixelBuffer.
+    @discussion On OSX 10.10 and earlier, or iOS 8 and earlier, calling this
+                function with a non-planar buffer will have undefined behavior.
     @param      pixelBuffer Target PixelBuffer.
     @param      planeIndex  Identifying the plane.
     @result     Row bytes of the plane, or NULL for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetBytesPerRowOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT size_t CVPixelBufferGetBytesPerRowOfPlane( CVPixelBufferRef CV_NONNULL pixelBuffer, size_t planeIndex ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetExtendedPixels
     @abstract   Returns the size of extended pixels of the PixelBuffer.
+    @discussion On OSX 10.10 and earlier, or iOS 8 and earlier, calling this
+                function with a non-planar buffer will have undefined behavior.
     @param      pixelBuffer Target PixelBuffer.
     @param      extraColumnsOnLeft Returns the pixel row padding to the left.  May be NULL.
     @param      extraRowsOnTop Returns the pixel row padding to the top.  May be NULL. 
     @param      extraColumnsOnRight Returns the pixel row padding to the right. May be NULL.
     @param      extraRowsOnBottom Returns the pixel row padding to the bottom. May be NULL.
 */
-CV_EXPORT void CVPixelBufferGetExtendedPixels(CVPixelBufferRef pixelBuffer,
-					      size_t *extraColumnsOnLeft,
-					      size_t *extraColumnsOnRight,
-					      size_t *extraRowsOnTop,
-					      size_t *extraRowsOnBottom) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT void CVPixelBufferGetExtendedPixels(
+						  CVPixelBufferRef CV_NONNULL pixelBuffer,
+						  size_t * CV_NULLABLE extraColumnsOnLeft,
+						  size_t * CV_NULLABLE extraColumnsOnRight,
+						  size_t * CV_NULLABLE extraRowsOnTop,
+						  size_t * CV_NULLABLE extraRowsOnBottom ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferFillExtendedPixels
     @abstract   Fills the extended pixels of the PixelBuffer.   This function replicates edge pixels to fill the entire extended region of the image.
     @param      pixelBuffer Target PixelBuffer.
 */
-CV_EXPORT CVReturn CVPixelBufferFillExtendedPixels(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CVReturn CVPixelBufferFillExtendedPixels( CVPixelBufferRef CV_NONNULL pixelBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 #if defined(__cplusplus)

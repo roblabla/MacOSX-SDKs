@@ -1,12 +1,14 @@
 /*
     NSAttributeDescription.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <CoreData/NSPropertyDescription.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSEntityDescription;
 
@@ -49,16 +51,18 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 // NSUndefinedAttributeType is valid for transient properties - Core Data will still track the property as an id value and register undo/redo actions, etc. NSUndefinedAttributeType is illegal for non-transient properties.
 @property () NSAttributeType attributeType;
 
-@property (copy) NSString *attributeValueClassName;
+@property (nullable, copy) NSString *attributeValueClassName;
 
-@property (retain) id defaultValue;   // value is retained and not copied
+@property (nullable, retain) id defaultValue;   // value is retained and not copied
 
 /* Returns the version hash for the attribute.  This value includes the versionHash information from the NSPropertyDescription superclass, and the attribute type.*/
 @property (readonly, copy) NSData *versionHash NS_AVAILABLE(10_5,3_0);
 
 /* The name of the transformer used to convert a NSTransformedAttributeType.  The transformer must output NSData from transformValue and allow reverse transformation.  If this value is not set, or set to nil, Core Data will default to using a transformer which uses NSCoding to archive/unarchive the attribute value.*/
-@property (copy) NSString *valueTransformerName NS_AVAILABLE(10_5,3_0);
+@property (nullable, copy) NSString *valueTransformerName NS_AVAILABLE(10_5,3_0);
 
 @property () BOOL allowsExternalBinaryDataStorage NS_AVAILABLE(10_7, 5_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

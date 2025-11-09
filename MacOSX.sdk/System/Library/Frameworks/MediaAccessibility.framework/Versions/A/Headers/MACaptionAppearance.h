@@ -17,6 +17,8 @@
 
 MA_EXTERN_C_BEGIN
 
+CF_ASSUME_NONNULL_BEGIN
+
 /*!
  @const kMACaptionAppearanceSettingsChangedNotification
  @abstract CFNotification sent when any user-defined captioning settings are changed.
@@ -244,7 +246,7 @@ CFArrayRef MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(MACapt
  @result User preference for foreground/text color.
  */
 MA_EXPORT
-CGColorRef MACaptionAppearanceCopyForegroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGColorRef MACaptionAppearanceCopyForegroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceCopyBackgroundColor
@@ -255,7 +257,7 @@ CGColorRef MACaptionAppearanceCopyForegroundColor(MACaptionAppearanceDomain doma
  @result User preference for background color.
  */
 MA_EXPORT
-CGColorRef MACaptionAppearanceCopyBackgroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGColorRef MACaptionAppearanceCopyBackgroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceCopyWindowColor
@@ -266,7 +268,7 @@ CGColorRef MACaptionAppearanceCopyBackgroundColor(MACaptionAppearanceDomain doma
  @result User preference for window color.
  */
 MA_EXPORT
-CGColorRef MACaptionAppearanceCopyWindowColor(MACaptionAppearanceDomain domain,MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGColorRef MACaptionAppearanceCopyWindowColor(MACaptionAppearanceDomain domain,MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetForegroundOpacity
@@ -276,7 +278,7 @@ CGColorRef MACaptionAppearanceCopyWindowColor(MACaptionAppearanceDomain domain,M
  @result User preference for foreground opacity.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetForegroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetForegroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetBackgroundOpacity
@@ -286,7 +288,7 @@ CGFloat MACaptionAppearanceGetForegroundOpacity(MACaptionAppearanceDomain domain
  @result User preference for background opacity.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetBackgroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetBackgroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetWindowOpacity
@@ -296,7 +298,7 @@ CGFloat MACaptionAppearanceGetBackgroundOpacity(MACaptionAppearanceDomain domain
  @result User preference for window opacity.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetWindowOpacity(MACaptionAppearanceDomain domain,MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetWindowOpacity(MACaptionAppearanceDomain domain,MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetWindowRoundedCornerRadius
@@ -306,7 +308,7 @@ CGFloat MACaptionAppearanceGetWindowOpacity(MACaptionAppearanceDomain domain,MAC
  @result User preference for caption-window corner radius.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetWindowRoundedCornerRadius(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetWindowRoundedCornerRadius(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 #pragma mark Text Preferences
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -320,7 +322,7 @@ CGFloat MACaptionAppearanceGetWindowRoundedCornerRadius(MACaptionAppearanceDomai
  @param fontStyle Font style, see  @link MACaptionAppearanceFontStyle @/link.
  @result User font preference for the specified style.
  */
-MA_EXPORT CTFontDescriptorRef MACaptionAppearanceCopyFontDescriptorForStyle(MACaptionAppearanceDomain domain,  MACaptionAppearanceBehavior *behavior, MACaptionAppearanceFontStyle fontStyle) CF_AVAILABLE(10_9, 7_0);
+MA_EXPORT CTFontDescriptorRef MACaptionAppearanceCopyFontDescriptorForStyle(MACaptionAppearanceDomain domain,  MACaptionAppearanceBehavior * __nullable behavior, MACaptionAppearanceFontStyle fontStyle) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetRelativeCharacterSize
@@ -330,7 +332,7 @@ MA_EXPORT CTFontDescriptorRef MACaptionAppearanceCopyFontDescriptorForStyle(MACa
  @result User font scaling preference for the specified style.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetRelativeCharacterSize(MACaptionAppearanceDomain domain,  MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetRelativeCharacterSize(MACaptionAppearanceDomain domain,  MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetTextEdgeStyle
@@ -340,7 +342,9 @@ CGFloat MACaptionAppearanceGetRelativeCharacterSize(MACaptionAppearanceDomain do
  @result User preference for text edge style.
  */
 MA_EXPORT
-MACaptionAppearanceTextEdgeStyle MACaptionAppearanceGetTextEdgeStyle(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *behavior) CF_AVAILABLE(10_9, 7_0);
+MACaptionAppearanceTextEdgeStyle MACaptionAppearanceGetTextEdgeStyle(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+
+CF_ASSUME_NONNULL_END
 
 
 MA_EXTERN_C_END

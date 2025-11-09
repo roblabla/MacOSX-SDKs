@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIFilterShape.h>
+#include <CoreImage/CIFilterShape.h>

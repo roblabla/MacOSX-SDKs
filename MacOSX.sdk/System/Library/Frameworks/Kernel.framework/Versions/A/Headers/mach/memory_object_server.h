@@ -217,7 +217,7 @@ extern const struct memory_object_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		memory_object_cluster_size_t memory_object_page_size;
-	} __Request__memory_object_init_t;
+	} __Request__memory_object_init_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -227,7 +227,7 @@ extern const struct memory_object_subsystem {
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__memory_object_terminate_t;
+	} __Request__memory_object_terminate_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -242,7 +242,7 @@ extern const struct memory_object_subsystem {
 		memory_object_cluster_size_t length;
 		vm_prot_t desired_access;
 		memory_object_fault_info_t fault_info;
-	} __Request__memory_object_data_request_t;
+	} __Request__memory_object_data_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -258,7 +258,7 @@ extern const struct memory_object_subsystem {
 		boolean_t dirty;
 		boolean_t kernel_copy;
 		int upl_flags;
-	} __Request__memory_object_data_return_t;
+	} __Request__memory_object_data_return_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -271,7 +271,7 @@ extern const struct memory_object_subsystem {
 		NDR_record_t NDR;
 		memory_object_offset_t offset;
 		memory_object_cluster_size_t size;
-	} __Request__memory_object_data_initialize_t;
+	} __Request__memory_object_data_initialize_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -285,7 +285,7 @@ extern const struct memory_object_subsystem {
 		memory_object_offset_t offset;
 		memory_object_size_t size;
 		vm_prot_t desired_access;
-	} __Request__memory_object_data_unlock_t;
+	} __Request__memory_object_data_unlock_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -299,7 +299,7 @@ extern const struct memory_object_subsystem {
 		memory_object_offset_t offset;
 		memory_object_size_t size;
 		vm_sync_t sync_flags;
-	} __Request__memory_object_synchronize_t;
+	} __Request__memory_object_synchronize_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -311,7 +311,7 @@ extern const struct memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		vm_prot_t prot;
-	} __Request__memory_object_map_t;
+	} __Request__memory_object_map_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -321,7 +321,7 @@ extern const struct memory_object_subsystem {
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__memory_object_last_unmap_t;
+	} __Request__memory_object_last_unmap_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -333,7 +333,7 @@ extern const struct memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		boolean_t reclaim_backing_store;
-	} __Request__memory_object_data_reclaim_t;
+	} __Request__memory_object_data_reclaim_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -369,7 +369,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_init_t;
+	} __Reply__memory_object_init_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -381,7 +381,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_terminate_t;
+	} __Reply__memory_object_terminate_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -393,7 +393,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_data_request_t;
+	} __Reply__memory_object_data_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -407,7 +407,7 @@ union __RequestUnion__memory_object_subsystem {
 		kern_return_t RetCode;
 		memory_object_offset_t resid_offset;
 		int io_error;
-	} __Reply__memory_object_data_return_t;
+	} __Reply__memory_object_data_return_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -419,7 +419,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_data_initialize_t;
+	} __Reply__memory_object_data_initialize_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -431,7 +431,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_data_unlock_t;
+	} __Reply__memory_object_data_unlock_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -443,7 +443,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_synchronize_t;
+	} __Reply__memory_object_synchronize_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -455,7 +455,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_map_t;
+	} __Reply__memory_object_map_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -467,7 +467,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_last_unmap_t;
+	} __Reply__memory_object_last_unmap_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -479,7 +479,7 @@ union __RequestUnion__memory_object_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__memory_object_data_reclaim_t;
+	} __Reply__memory_object_data_reclaim_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

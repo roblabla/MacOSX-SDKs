@@ -1,11 +1,13 @@
 /*
 	NSColorWell.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSColorWell : NSControl
 {
@@ -31,7 +33,9 @@
 
 @property (getter=isBordered) BOOL bordered;
 
-- (void)takeColorFrom:(id)sender;
+- (void)takeColorFrom:(nullable id)sender;
 @property (copy) NSColor *color;
 
 @end
+
+NS_ASSUME_NONNULL_END

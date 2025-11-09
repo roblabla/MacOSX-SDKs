@@ -1,13 +1,15 @@
 /*
 	NSController.h
 	Application Kit
-	Copyright (c) 2002-2014, Apple Inc.
+	Copyright (c) 2002-2015, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSKeyValueBinding.h>
 #import <CoreFoundation/CoreFoundation.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSMutableArray, NSMutableDictionary, NSMutableSet;
 
@@ -41,14 +43,16 @@
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 - (void)objectDidBeginEditing:(id)editor;
 - (void)objectDidEndEditing:(id)editor;
 - (void)discardEditing;
 - (BOOL)commitEditing;
-- (void)commitEditingWithDelegate:(id)delegate didCommitSelector:(SEL)didCommitSelector contextInfo:(void *)contextInfo;
+- (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo;
 @property (getter=isEditing, readonly) BOOL editing;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

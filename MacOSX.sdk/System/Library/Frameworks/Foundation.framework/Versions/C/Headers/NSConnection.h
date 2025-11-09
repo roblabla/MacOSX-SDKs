@@ -1,16 +1,19 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 
-@class NSMutableData, NSDistantObject, NSException, NSData;
-@class NSPort, NSRunLoop, NSPortNameServer, NSDictionary, NSArray;
+@class NSMutableData, NSDistantObject, NSException, NSData, NSString, NSNumber;
+@class NSPort, NSRunLoop, NSPortNameServer, NSDictionary<KeyType, ObjectType>, NSArray<ObjectType>;
 @class NSDistantObjectRequest;
 @protocol NSConnectionDelegate;
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
+NS_ASSUME_NONNULL_BEGIN
+
+NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSConnection : NSObject {
     @private
     id		receivePort;
@@ -44,24 +47,24 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     id		reserved;
 }
 
-@property (readonly, copy) NSDictionary *statistics;
+@property (readonly, copy) NSDictionary<NSString *, NSNumber *> *statistics;
 
-+ (NSArray *)allConnections;
++ (NSArray<NSConnection *> *)allConnections;
 
 + (NSConnection *)defaultConnection NS_DEPRECATED(10_0, 10_6, NA, NA);
 
-+ (instancetype)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
-+ (instancetype)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
-+ (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
-+ (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
++ (nullable instancetype)connectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName;
++ (nullable instancetype)connectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName usingNameServer:(NSPortNameServer *)server;
++ (nullable NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName;
++ (nullable NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 
-+ (instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server NS_AVAILABLE(10_5, 2_0);
-+ (instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root NS_AVAILABLE(10_5, 2_0);
++ (nullable instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server NS_AVAILABLE(10_5, 2_0);
++ (nullable instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root NS_AVAILABLE(10_5, 2_0);
 
 @property NSTimeInterval requestTimeout;
 @property NSTimeInterval replyTimeout;
-@property (retain) id rootObject;
-@property (assign) id<NSConnectionDelegate> delegate;
+@property (nullable, retain) id rootObject;
+@property (nullable, assign) id<NSConnectionDelegate> delegate;
 @property BOOL independentConversationQueueing;
 @property (readonly, getter=isValid) BOOL valid;
 
@@ -71,16 +74,16 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 - (void)addRequestMode:(NSString *)rmode;
 - (void)removeRequestMode:(NSString *)rmode;
-@property (readonly, copy) NSArray *requestModes;
+@property (readonly, copy) NSArray<NSString *> *requestModes;
 
-- (BOOL)registerName:(NSString *) name;
-- (BOOL)registerName:(NSString *) name withNameServer:(NSPortNameServer *)server;
+- (BOOL)registerName:(nullable NSString *) name;
+- (BOOL)registerName:(nullable NSString *) name withNameServer:(NSPortNameServer *)server;
 
-+ (instancetype)connectionWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
++ (nullable instancetype)connectionWithReceivePort:(nullable NSPort *)receivePort sendPort:(nullable NSPort *)sendPort;
 
-+ (id)currentConversation;
++ (nullable id)currentConversation;
 
-- (instancetype)initWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
+- (nullable instancetype)initWithReceivePort:(nullable NSPort *)receivePort sendPort:(nullable NSPort *)sendPort;
 
 @property (readonly, retain) NSPort *sendPort;
 @property (readonly, retain) NSPort *receivePort;
@@ -101,11 +104,12 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSConnectionReplyMode;
+FOUNDATION_EXPORT NSString * const NSConnectionReplyMode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
 
-FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification;
+FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
 
 
+NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @protocol NSConnectionDelegate <NSObject>
 @optional
 
@@ -126,15 +130,18 @@ FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification;
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSFailedAuthenticationException;
+FOUNDATION_EXPORT NSString * const NSFailedAuthenticationException NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
 
-FOUNDATION_EXPORT NSString * const NSConnectionDidInitializeNotification;
+FOUNDATION_EXPORT NSString * const NSConnectionDidInitializeNotification NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
 
+NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSDistantObjectRequest : NSObject
 
 @property (readonly, retain) NSInvocation *invocation;
 @property (readonly, retain) NSConnection *connection;
 @property (readonly, retain) id conversation;
-- (void)replyWithException:(NSException *)exception;
+- (void)replyWithException:(nullable NSException *)exception;
 
 @end
+
+NS_ASSUME_NONNULL_END

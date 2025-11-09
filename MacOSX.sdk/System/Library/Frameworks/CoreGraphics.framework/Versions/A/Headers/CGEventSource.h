@@ -5,8 +5,16 @@
 #ifndef CGEVENTSOURCE_H_
 #define CGEVENTSOURCE_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <CoreGraphics/CGRemoteOperation.h>
 #include <CoreGraphics/CGEventTypes.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* An event source contains accumulated state related to event generation
    and event posting, allowing for customized event generation and
@@ -42,23 +50,27 @@
 /* Return the CFTypeID for CGEventSourceRefs. */
 
 CG_EXTERN CFTypeID CGEventSourceGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a Quartz event source created with a specified source state. */
 
-CG_EXTERN CGEventSourceRef CGEventSourceCreate(CGEventSourceStateID stateID)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventSourceRef __nullable CGEventSourceCreate(
+    CGEventSourceStateID stateID)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
-/* Return the keyboard type to be used with a Quartz event source. */
+/* Return the keyboard type to be used with a Quartz event source.
+   Result of CGSDefaultKeyboardID() is returned if source is not a valid
+   CGEventSourceRef. */
 
 CG_EXTERN CGEventSourceKeyboardType CGEventSourceGetKeyboardType(
-  CGEventSourceRef source) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGEventSourceRef __nullable source)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the keyboard type to be used with a Quartz event source. */
 
-CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef source,
-  CGEventSourceKeyboardType keyboardType)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef __nullable source,
+    CGEventSourceKeyboardType keyboardType)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the scale of pixels per line in a scrolling event source.
 
@@ -66,10 +78,12 @@ CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef source,
    source. For example, if the scale in the event source is 10.5 pixels per
    line, this function would return 10.5. Every scrolling event can be
    interpreted to be scrolling by pixel or by line. By default, the scale is
-   about ten pixels per line. */
+   about ten pixels per line. kCGSDefaultScrollwheelScale is returned in case 
+   of invalid source */
 
-CG_EXTERN double CGEventSourceGetPixelsPerLine(CGEventSourceRef source)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN double CGEventSourceGetPixelsPerLine(
+    CGEventSourceRef __nullable source)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Set the scale of pixels per line in a scrolling event source.
 
@@ -80,8 +94,9 @@ CG_EXTERN double CGEventSourceGetPixelsPerLine(CGEventSourceRef source)
    by pixel or by line. By default, the scale is about ten pixels per
    line. */
 
-CG_EXTERN void CGEventSourceSetPixelsPerLine(CGEventSourceRef source,
-  double pixelsPerLine) CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+CG_EXTERN void CGEventSourceSetPixelsPerLine(CGEventSourceRef __nullable source,
+    double pixelsPerLine)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Return the source state associated with a Quartz event source.
 
@@ -90,28 +105,33 @@ CG_EXTERN void CGEventSourceSetPixelsPerLine(CGEventSourceRef source,
    created for the event source. This unique ID may be passed to the
    `CGEventSourceCreate' function to create a second event source sharing
    the same state table. This may be useful, for example, in creating
-   separate mouse and keyboard sources which share a common private state. */
+   separate mouse and keyboard sources which share a common private state.
+   kCGEventSourceStateCombinedSessionState is returned in case of invalid
+   source. */
 
-CG_EXTERN CGEventSourceStateID CGEventSourceGetSourceStateID(CGEventSourceRef
-  source) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGEventSourceStateID CGEventSourceGetSourceStateID(
+    CGEventSourceRef __nullable source)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a Boolean value indicating the current button state of a Quartz
    event source. If true, the button is down; if false, the button is up. */
 
 CG_EXTERN bool CGEventSourceButtonState(CGEventSourceStateID stateID,
-  CGMouseButton button) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGMouseButton button)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a Boolean value indicating the current keyboard state of a Quartz
    event source. If true, the key is down; if false, the key is up. */
 
 CG_EXTERN bool CGEventSourceKeyState(CGEventSourceStateID stateID,
-  CGKeyCode key) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGKeyCode key)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the current flags of a Quartz event source. If true, the key is
    down; if false, the key is up. */
 
 CG_EXTERN CGEventFlags CGEventSourceFlagsState(CGEventSourceStateID stateID)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the elapsed time since the last event for a Quartz event source.
 
@@ -119,8 +139,8 @@ CG_EXTERN CGEventFlags CGEventSourceFlagsState(CGEventSourceStateID stateID)
    mouse, or tablet --- specify `kCGAnyInputEventType'. */
 
 CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(
-  CGEventSourceStateID stateID, CGEventType eventType)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGEventSourceStateID stateID, CGEventType eventType)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return a count of events of a given type seen since the Window Server
    started.
@@ -137,8 +157,8 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(
    Key autorepeat events are not counted. */
 
 CG_EXTERN uint32_t CGEventSourceCounterForEventType(CGEventSourceStateID
-  stateID, CGEventType eventType)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    stateID, CGEventType eventType)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the 64-bit user-specified data for a Quartz event source.
 
@@ -147,18 +167,20 @@ CG_EXTERN uint32_t CGEventSourceCounterForEventType(CGEventSourceStateID
    event source. This data may also be set per event using the
    `CGEventGetIntegerValueField' function. */
 
-CG_EXTERN void CGEventSourceSetUserData(CGEventSourceRef source,
-  int64_t userData) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSourceSetUserData(CGEventSourceRef __nullable source,
+    int64_t userData)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the 64-bit user-specified data for a Quartz event source.
 
    Each input event includes 64 bits of user-specified data. This function
    gets the user-specified data for all events created by the specified
    event source. This data may also be obtained per event using the
-   `CGEventGetIntegerValueField' function. */
+   `CGEventGetIntegerValueField' function. 0 is returned in case of invalid
+   source. */
 
-CG_EXTERN int64_t CGEventSourceGetUserData(CGEventSourceRef source)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN int64_t CGEventSourceGetUserData(CGEventSourceRef __nullable source)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the mask that indicates which classes of local hardware events are
    enabled during event suppression.
@@ -179,9 +201,9 @@ CG_EXTERN int64_t CGEventSourceGetUserData(CGEventSourceRef source)
    event source. */
 
 CG_EXTERN void CGEventSourceSetLocalEventsFilterDuringSuppressionState(
-  CGEventSourceRef source, CGEventFilterMask filter,
-  CGEventSuppressionState state)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGEventSourceRef __nullable source, CGEventFilterMask filter,
+    CGEventSuppressionState state)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 /* Return the mask that indicates which classes of local hardware events are
@@ -195,12 +217,13 @@ CG_EXTERN void CGEventSourceSetLocalEventsFilterDuringSuppressionState(
 
    This function lets you specify an event source and a suppression state
    (event suppression interval or mouse drag), and returns a filter mask of
-   event categories to be passed through during suppression. */
+   event categories to be passed through during suppression.
+   (CGEventFilterMask)0 is retuned in case of invalid source. */
 
 CG_EXTERN CGEventFilterMask
-  CGEventSourceGetLocalEventsFilterDuringSuppressionState(CGEventSourceRef
-    source, CGEventSuppressionState state)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGEventSourceGetLocalEventsFilterDuringSuppressionState(
+    CGEventSourceRef __nullable source, CGEventSuppressionState state)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Set the interval that local hardware events may be suppressed following
    the posting of a Quartz event.
@@ -210,14 +233,21 @@ CG_EXTERN CGEventFilterMask
    specified event source. The default suppression interval is 0.25
    seconds. */
 
-CG_EXTERN void CGEventSourceSetLocalEventsSuppressionInterval(CGEventSourceRef
-  source, CFTimeInterval seconds)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN void CGEventSourceSetLocalEventsSuppressionInterval(
+    CGEventSourceRef __nullable source, CFTimeInterval seconds)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return the interval that local hardware events may be suppressed
-   following the posting of a Quartz event. */
+   following the posting of a Quartz event.
+   kCGSDefaultLocalEventSuppressionInterval is retuned in case of invalid
+   source.*/
 
 CG_EXTERN CFTimeInterval CGEventSourceGetLocalEventsSuppressionInterval(
-  CGEventSourceRef source) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    CGEventSourceRef __nullable source)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGEVENTSOURCE_H_ */

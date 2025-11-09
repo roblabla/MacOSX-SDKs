@@ -1,10 +1,12 @@
 /*
         NSRuleEditor.h
 	Application Kit
-	Copyright (c) 2006-2014, Apple Inc.
+	Copyright (c) 2006-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSControl.h>
 
@@ -34,7 +36,9 @@ NSRuleEditor exposes one binding, "rows."  The "rows" binding may be bound to an
     These key paths can be set using the set*KeyPath: methods below
 */
 
-@class NSMutableArray, NSIndexSet, NSView, NSPredicate, NSString, NSViewAnimation;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSIndexSet, NSView, NSPredicate, NSString, NSViewAnimation;
 @protocol NSRuleEditorDelegate;
 
 typedef NS_ENUM(NSUInteger, NSRuleEditorNestingMode) {
@@ -100,13 +104,13 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 /* -- Configuring NSRuleEditor -- */
 
 /* Clients can call this method to set and get the delegate for the NSRuleEditor.  NSRuleEditor requires a delegate that implements the required NSRuleEditorDelegateMethods methods to function. */
-@property (assign) id<NSRuleEditorDelegate> delegate;
+@property (nullable, assign) id<NSRuleEditorDelegate> delegate;
 
 /* Clients can call this to automatically set a formatting dictionary based on the strings file with the given name.  Setting a formatting strings file searches the main bundle, and the bundle containing this nib, for a (possibly localized) strings file resource with the given name, loads it, and sets it as the formatting dictionary.  The resulting dictionary can be obtained with -[NSRuleEditor formattingDictionary].  If you set the formatting dictionary explicitly with -[NSRuleEditor setFormattingDictionary:], then it sets the current formattingStringsFilename to nil */
-@property (copy) NSString *formattingStringsFilename;
+@property (nullable, copy) NSString *formattingStringsFilename;
 
 /* Clients can call this to set (and get) a formatting dictionary on the NSRuleEditor.  The formatting dictionary should have NSString keys and NSString values.  The syntax of the keys and values is the same as the syntax for strings files. */
-@property (copy) NSDictionary *formattingDictionary;
+@property (nullable, copy) NSDictionary<NSString *, NSString *> *formattingDictionary;
 
 /* Clients can call this to indicate that the available criteria may have changed and should be refetched from the delegate, and the popups recalculated.  If any item in a given row is "orphaned" (no longer reported as a child of its previous parent), those rows have their critieria and display values set to valid choices. */
 - (void)reloadCriteria;
@@ -126,13 +130,13 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 /* -- Predicate support -- */
 
 /* Clients can call this to obtain the predicate for the view if the delegate implements - ruleEditor: predicatePartsForItem: withValue: inRow:row: .  If the delegate does not, or if the delegate does not return enough parts to construct a full predicate, this method returns nil. */
-@property (readonly, strong) NSPredicate *predicate;
+@property (nullable, readonly, strong) NSPredicate *predicate;
 
 /* Clients can call this to indicates that the predicate should be generated again from the delegate (by invoking the corresponding delegate method), typically because something has changed (for example, a view's value). */
 - (void)reloadPredicate;
 
 /* This method returns the predicate for a given row.  Clients should rarely have a need to call this directly, but it can be overridden to perform specialized predicate handling for certain criteria or display values. */
-- (NSPredicate *)predicateForRow:(NSInteger)row;
+- (nullable NSPredicate *)predicateForRow:(NSInteger)row;
 
 /* -- Obtaining row information -- */
 
@@ -160,7 +164,7 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 /* -- Manipulating rows -- */
 
 /* Adds "initial" rows, or a row to the end - useful as the target for the outside + button */
-- (void)addRow:(id)sender;
+- (void)addRow:(nullable id)sender;
 
 /* Clients call this to add a new row at the given index with the given type as a subrow of the parent row.  Pass -1 to indicate that it should be a root row.  If parentRow >= rowIndex, or if rowIndex would fall amongst the children of some other parent, or if the nesting mode forbids this configuration, an NSInvalidArgumentException is raised. */
 - (void)insertRowAtIndex:(NSInteger)rowIndex withType:(NSRuleEditorRowType)rowType asSubrowOfRow:(NSInteger)parentRow animate:(BOOL)shouldAnimate;
@@ -207,10 +211,10 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 /* -- Required delegate methods -- */
 
 /* When called, you should return the number of child items of the given criterion.  If criterion is nil, you should return the number of root criteria for the given row type. Implementation of this method is required. */
-- (NSInteger)ruleEditor:(NSRuleEditor *)editor numberOfChildrenForCriterion:(id)criterion withRowType:(NSRuleEditorRowType)rowType;
+- (NSInteger)ruleEditor:(NSRuleEditor *)editor numberOfChildrenForCriterion:(nullable id)criterion withRowType:(NSRuleEditorRowType)rowType;
 
 /* When called, you should return the child of the given item at the given index.  If criterion is nil, return the root criterion for the given row type at the given index. Implementation of this method is required. */
-- (id)ruleEditor:(NSRuleEditor *)editor child:(NSInteger)index forCriterion:(id)criterion withRowType:(NSRuleEditorRowType)rowType;
+- (id)ruleEditor:(NSRuleEditor *)editor child:(NSInteger)index forCriterion:(nullable id)criterion withRowType:(NSRuleEditorRowType)rowType;
 
 /* When called, you should return a value for the given criterion.  The value should be an instance of NSString, NSView, or NSMenuItem.  If the value is an NSView or NSMenuItem, you must ensure it is unique for every invocation of this method; that is, do not return a particular instance of NSView or NSMenuItem more than once.  Implementation of this method is required. */
 - (id)ruleEditor:(NSRuleEditor *)editor displayValueForCriterion:(id)criterion inRow:(NSInteger)row;
@@ -221,7 +225,7 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 
 
 /* When called, you should return an NSDictionary representing the parts of the predicate determined by the given criterion and value.  The keys of the dictionary should be the strings shown above that begin with NSRuleEditorPredicate..., and the values should be as described in the comments adjacent to the keys.  Implementation of this method is optional. */
-- (NSDictionary *)ruleEditor:(NSRuleEditor *)editor predicatePartsForCriterion:(id)criterion withDisplayValue:(id)value inRow:(NSInteger)row;
+- (nullable NSDictionary<NSString *, id> *)ruleEditor:(NSRuleEditor *)editor predicatePartsForCriterion:(id)criterion withDisplayValue:(id)value inRow:(NSInteger)row;
 
 /* If ruleEditorRowsDidChange: is implemented, NSRuleEditor will automatically register its delegate to receive NSRuleEditorRowsDidChangeNotification notifications to this method. Implementation of this method is optional. */
 - (void)ruleEditorRowsDidChange:(NSNotification *)notification;
@@ -242,5 +246,7 @@ APPKIT_EXTERN NSString * const NSRuleEditorPredicateCompoundType; /* NSNumber re
 
 /* Posted to the default notification center whenever the view's rows change.
  * The object is the NSRuleEditor; there is no userInfo */
-APPKIT_EXTERN NSString *const NSRuleEditorRowsDidChangeNotification;
+APPKIT_EXTERN NSString * const NSRuleEditorRowsDidChangeNotification;
+
+NS_ASSUME_NONNULL_END
 

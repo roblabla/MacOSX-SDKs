@@ -1,10 +1,12 @@
 /*	NSXMLElement.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
 
-@class NSDictionary, NSMutableArray, NSEnumerator;
+@class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSMutableArray, NSEnumerator, NSString;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @class NSXMLElement
@@ -35,19 +37,19 @@
     @method initWithName:URI:
     @abstract Returns an element whose full QName is specified.
 */
-- (instancetype)initWithName:(NSString *)name URI:(NSString *)URI NS_DESIGNATED_INITIALIZER; //primitive
+- (instancetype)initWithName:(NSString *)name URI:(nullable NSString *)URI NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method initWithName:stringValue:
     @abstract Returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
 */
-- (instancetype)initWithName:(NSString *)name stringValue:(NSString *)string;
+- (instancetype)initWithName:(NSString *)name stringValue:(nullable NSString *)string;
 
 /*!
     @method initWithXMLString:error:
     @abstract Returns an element created from a string. Parse errors are collected in <tt>error</tt>.
 */
-- (instancetype)initWithXMLString:(NSString *)string error:(NSError **)error NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithXMLString:(NSString *)string error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options;
 
@@ -59,13 +61,13 @@
     @method elementsForName:
     @abstract Returns all of the child elements that match this name.
 */
-- (NSArray *)elementsForName:(NSString *)name;
+- (NSArray<NSXMLElement *> *)elementsForName:(NSString *)name;
 
 /*!
     @method elementsForLocalName:URI
     @abstract Returns all of the child elements that match this localname URI pair.
 */
-- (NSArray *)elementsForLocalName:(NSString *)localName URI:(NSString *)URI;
+- (NSArray<NSXMLElement *> *)elementsForLocalName:(NSString *)localName URI:(nullable NSString *)URI;
 
 #if 0
 #pragma mark --- Attributes ---
@@ -87,25 +89,25 @@
     @method setAttributes
     @abstract Set the attributes. In the case of duplicate names, the first attribute with the name is used.
 */
-@property (copy) NSArray *attributes;
+@property (nullable, copy) NSArray<NSXMLNode *> *attributes;
 
 /*!
  @method setAttributesWithDictionary:
  @abstract Set the attributes based on a name-value dictionary.
  */
-- (void)setAttributesWithDictionary:(NSDictionary *)attributes;
+- (void)setAttributesWithDictionary:(NSDictionary<NSString *, NSString *> *)attributes;
 
 /*!
     @method attributeForName:
     @abstract Returns an attribute matching this name.
 */
-- (NSXMLNode *)attributeForName:(NSString *)name;
+- (nullable NSXMLNode *)attributeForName:(NSString *)name;
 
 /*!
     @method attributeForLocalName:URI:
     @abstract Returns an attribute matching this localname URI pair.
 */
-- (NSXMLNode *)attributeForLocalName:(NSString *)localName URI:(NSString *)URI; //primitive
+- (nullable NSXMLNode *)attributeForLocalName:(NSString *)localName URI:(nullable NSString *)URI; //primitive
 
 #if 0
 #pragma mark --- Namespaces ---
@@ -127,25 +129,25 @@
     @method namespaces
     @abstract Set the namespaces. In the case of duplicate names, the first namespace with the name is used.
 */
-@property (copy) NSArray *namespaces; //primitive
+@property (nullable, copy) NSArray<NSXMLNode *> *namespaces; //primitive
 
 /*!
     @method namespaceForPrefix:
     @abstract Returns the namespace matching this prefix.
 */
-- (NSXMLNode *)namespaceForPrefix:(NSString *)name;
+- (nullable NSXMLNode *)namespaceForPrefix:(NSString *)name;
 
 /*!
     @method resolveNamespaceForName:
     @abstract Returns the namespace who matches the prefix of the name given. Looks in the entire namespace chain.
 */
-- (NSXMLNode *)resolveNamespaceForName:(NSString *)name;
+- (nullable NSXMLNode *)resolveNamespaceForName:(NSString *)name;
 
 /*!
     @method resolvePrefixForNamespaceURI:
     @abstract Returns the URI of this prefix. Looks in the entire namespace chain.
 */
-- (NSString *)resolvePrefixForNamespaceURI:(NSString *)namespaceURI;
+- (nullable NSString *)resolvePrefixForNamespaceURI:(NSString *)namespaceURI;
 
 #if 0
 #pragma mark --- Children ---
@@ -161,7 +163,7 @@
     @method insertChildren:atIndex:
     @abstract Insert several children at a particular index.
 */
-- (void)insertChildren:(NSArray *)children atIndex:(NSUInteger)index;
+- (void)insertChildren:(NSArray<NSXMLNode *> *)children atIndex:(NSUInteger)index;
 
 /*!
     @method removeChildAtIndex:atIndex:
@@ -173,7 +175,7 @@
     @method setChildren:
     @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
 */
-- (void)setChildren:(NSArray *)children; //primitive
+- (void)setChildren:(nullable NSArray<NSXMLNode *> *)children; //primitive
 
 /*!
     @method addChild:
@@ -204,3 +206,4 @@
 - (void)setAttributesAsDictionary:(NSDictionary *)attributes;
 @end
 
+NS_ASSUME_NONNULL_END

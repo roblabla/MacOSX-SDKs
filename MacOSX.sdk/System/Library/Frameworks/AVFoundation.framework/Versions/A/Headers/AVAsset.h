@@ -3,10 +3,19 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2014 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
+#import <AVFoundation/AVBase.h>
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVAsynchronousKeyValueLoading.h>
+
+#import <CoreGraphics/CGAffineTransform.h>
+
+#import <CoreMedia/CMTime.h>
+
+#pragma mark --- AVAsset ---
 /*!
   @class		AVAsset
 
@@ -34,20 +43,12 @@
 
 */
 
-#import <AVFoundation/AVBase.h>
-#import <Foundation/Foundation.h>
-#import <AVFoundation/AVAsynchronousKeyValueLoading.h>
-
-#if TARGET_OS_IPHONE
-#import <CoreGraphics/CGAffineTransform.h>
-#else // ! TARGET_OS_IPHONE
-#import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGAffineTransform.h>
-#endif // ! TARGET_OS_IPHONE
-
-#import <CoreMedia/CMTime.h>
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVAssetTrack;
+@class AVFragmentedAssetTrack;
 @class AVMetadataItem;
+@class AVMediaSelection;
 @class AVCompositionTrack;
 
 @class AVAssetInternal;
@@ -67,7 +68,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
   @result		An instance of AVAsset.
   @discussion	Returns a newly allocated instance of a subclass of AVAsset initialized with the specified URL.
 */
-+ (id)assetWithURL:(NSURL *)URL;
++ (instancetype)assetWithURL:(NSURL *)URL;
 
 /*	Indicates the duration of the asset. If @"providesPreciseDurationAndTiming" is NO, a best-available estimate of the duration is returned. The degree of precision preferred for timing-related properties can be set at initialization time for assets initialized with URLs. See AVURLAssetPreferPreciseDurationAndTimingKey for AVURLAsset below.
 */
@@ -147,11 +148,15 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 @end
 
 
+@class AVAssetTrackGroup;
+
 @interface AVAsset (AVAssetTrackInspection)
 
-/* provides the array of AVAssetTracks contained by the asset
+/*!
+  @property		tracks
+  @abstract		Provides the array of AVAssetTracks contained by the asset
 */
-@property (nonatomic, readonly) NSArray *tracks;
+@property (nonatomic, readonly) NSArray<AVAssetTrack *> *tracks;
 
 /*!
   @method		trackWithTrackID:
@@ -161,7 +166,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An instance of AVAssetTrack; may be nil if no track of the specified trackID is available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (AVAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
+- (nullable AVAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
   @method		tracksWithMediaType:
@@ -171,7 +176,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An NSArray of AVAssetTracks; may be empty if no tracks of the specified media type are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray *)tracksWithMediaType:(NSString *)mediaType;
+- (NSArray<AVAssetTrack *> *)tracksWithMediaType:(NSString *)mediaType;
 
 /*!
   @method		tracksWithMediaCharacteristic:
@@ -181,7 +186,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An NSArray of AVAssetTracks; may be empty if no tracks with the specified characteristic are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (NSArray<AVAssetTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
 
 /*!
  @property trackGroups
@@ -191,7 +196,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  @discussion
 	The value of this property is an NSArray of AVAssetTrackGroups, each representing a different grouping of tracks in the receiver.
  */
-@property (nonatomic, readonly) NSArray *trackGroups NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -202,23 +207,23 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* Indicates the creation date of the asset as an AVMetadataItem. May be nil. If a creation date has been stored by the asset in a form that can be converted to an NSDate, the dateValue property of the AVMetadataItem will provide an instance of NSDate. Otherwise the creation date is available only as a string value, via -[AVMetadataItem stringValue].
 */
-@property (nonatomic, readonly) AVMetadataItem *creationDate NS_AVAILABLE(10_8, 5_0);
+@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate NS_AVAILABLE(10_8, 5_0);
 
 /* Provides access to the lyrics of the asset suitable for the current locale.
 */
-@property (nonatomic, readonly) NSString *lyrics;
+@property (nonatomic, readonly, nullable) NSString *lyrics;
 
 /* Provides access to an array of AVMetadataItems for each common metadata key for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
-@property (nonatomic, readonly) NSArray *commonMetadata;
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
 
 /* Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
-@property (nonatomic, readonly) NSArray *metadata NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata NS_AVAILABLE(10_10, 8_0);
 
 /* Provides an NSArray of NSStrings, each representing a metadata format that's available to the asset (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
 */
-@property (nonatomic, readonly) NSArray *availableMetadataFormats;
+@property (nonatomic, readonly) NSArray<NSString *> *availableMetadataFormats;
 
 /*!
   @method		metadataForFormat:
@@ -228,16 +233,18 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @result		An NSArray containing AVMetadataItems; may be empty if there is no metadata of the specified format.
   @discussion	Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded
 */
-- (NSArray *)metadataForFormat:(NSString *)format;
+- (NSArray<AVMetadataItem *> *)metadataForFormat:(NSString *)format;
 
 @end
 
+
+@class AVTimedMetadataGroup;
 
 @interface AVAsset (AVAssetChapterInspection)
 
 /* array of NSLocale
 */
-@property (readonly) NSArray *availableChapterLocales NS_AVAILABLE(10_7, 4_3);
+@property (readonly) NSArray<NSLocale *> *availableChapterLocales NS_AVAILABLE(10_7, 4_3);
 
 /*!
   @method		chapterMetadataGroupsWithTitleLocale:containingMetadataItemsWithCommonKeys:
@@ -255,7 +262,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  
 	Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 */
-- (NSArray *)chapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(NSArray *)commonKeys NS_AVAILABLE(10_7, 4_3);
+- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(nullable NSArray<NSString *> *)commonKeys NS_AVAILABLE(10_7, 4_3);
 
 /*!
  @method		chapterMetadataGroupsBestMatchingPreferredLanguages:
@@ -273,7 +280,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 .
 */
-- (NSArray *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
+- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray<NSString *> *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
 
 
 @end
@@ -285,7 +292,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* Provides an NSArray of NSStrings, each NSString indicating a media characteristic for which a media selection option is available.
 */
-@property (nonatomic, readonly) NSArray *availableMediaCharacteristicsWithMediaSelectionOptions NS_AVAILABLE(10_8, 5_0);
+@property (nonatomic, readonly) NSArray<NSString *> *availableMediaCharacteristicsWithMediaSelectionOptions NS_AVAILABLE(10_8, 5_0);
 
 /*!
   @method		mediaSelectionGroupForMediaCharacteristic:
@@ -304,7 +311,13 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 	
 	Filtering of the options in the returned AVMediaSelectionGroup according to playability, locale, and additional media characteristics can be accomplished using the category AVMediaSelectionOptionFiltering defined on AVMediaSelectionGroup.
 */
-- (AVMediaSelectionGroup *)mediaSelectionGroupForMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_8, 5_0);
+- (nullable AVMediaSelectionGroup *)mediaSelectionGroupForMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_8, 5_0);
+
+/*!
+  @property		preferredMediaSelection
+  @abstract		Provides an instance of AVMediaSelection with default selections for each of the receiver's media selection groups.
+*/
+@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection NS_AVAILABLE(10_11, 9_0);
 
 @end
 
@@ -314,6 +327,26 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 /* Indicates whether or not the asset has protected content.
 */
 @property (nonatomic, readonly) BOOL hasProtectedContent NS_AVAILABLE(10_7, 4_2);
+
+@end
+
+
+@interface AVAsset (AVAssetFragments)
+
+/*!
+  @property		canContainFragments
+  @abstract		Indicates whether the asset is capable of being extended by fragments.
+  @discussion	For QuickTime movie files and MPEG-4 files, the value of canContainFragments is YES if an 'mvex' box is present in the 'moov' box. For those types, the 'mvex' box signals the possible presence of later 'moof' boxes.
+*/
+
+@property (nonatomic, readonly) BOOL canContainFragments NS_AVAILABLE(10_11, 9_0);
+
+/*!
+  @property		containsFragments
+  @abstract		Indicates whether the asset is extended by at least one movie fragment.
+  @discussion	For QuickTime movie files and MPEG-4 files, the value of this property is YES if canContainFragments is YES and at least one 'moof' box is present after the 'moov' box.
+*/
+@property (nonatomic, readonly) BOOL containsFragments NS_AVAILABLE(10_11, 9_0);
 
 @end
 
@@ -344,10 +377,17 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 #endif	// TARGET_OS_IPHONE
 
+/*!
+  @property		compatibleWithAirPlayVideo
+  @abstract		Indicates whether the asset is compatible with AirPlay Video.
+  @discussion	YES if an AVPlayerItem initialized with the receiver can be played by an external device via AirPlay Video.
+ */
+@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo NS_AVAILABLE(10_11, 9_0);
 
 @end
 
 
+#pragma mark --- AVURLAsset ---
 // Keys for options dictionary for use with -[AVURLAsset initWithURL:options:]
 
 /*!
@@ -411,20 +451,21 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @private
 	AVURLAssetInternal *_URLAsset;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
   @method		audiovisualTypes
   @abstract		Provides the file types the AVURLAsset class understands.
   @result		An NSArray of UTIs identifying the file types the AVURLAsset class understands.
 */
-+ (NSArray *)audiovisualTypes NS_AVAILABLE(10_7, 5_0);
++ (NSArray<NSString *> *)audiovisualTypes NS_AVAILABLE(10_7, 5_0);
 
 /*!
   @method		audiovisualMIMETypes
   @abstract		Provides the MIME types the AVURLAsset class understands.
   @result		An NSArray of NSStrings containing MIME types the AVURLAsset class understands.
 */
-+ (NSArray *)audiovisualMIMETypes NS_AVAILABLE(10_7, 5_0);
++ (NSArray<NSString *> *)audiovisualMIMETypes NS_AVAILABLE(10_7, 5_0);
 
 /*!
   @method		isPlayableExtendedMIMEType:
@@ -443,7 +484,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above.
   @result		An instance of AVURLAsset.
 */
-+ (AVURLAsset *)URLAssetWithURL:(NSURL *)URL options:(NSDictionary *)options;
++ (instancetype)URLAssetWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
   @method		initWithURL:options:
@@ -454,7 +495,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above.
   @result		An instance of AVURLAsset.
 */
-- (instancetype)initWithURL:(NSURL *)URL options:(NSDictionary *)options;
+- (instancetype)initWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER;
 
 /* indicates the URL with which the instance of AVURLAsset was initialized
 */
@@ -492,6 +533,186 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	Finds a track of the target with content that can be accommodated by the specified composition track.
 	The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:].
 */
-- (AVAssetTrack *)compatibleTrackForCompositionTrack:(AVCompositionTrack *)compositionTrack;
+- (nullable AVAssetTrack *)compatibleTrackForCompositionTrack:(AVCompositionTrack *)compositionTrack;
 
 @end
+
+#pragma mark --- AVAsset change notifications ---
+
+/*
+	AVAsset change notifications are posted by instances of mutable subclasses, AVMutableComposition and AVMutableMovie.
+	Some of the notifications are also posted by instances of dynamic subclasses, AVFragmentedAsset and AVFragmentedMovie, but these are capable of changing only in well-defined ways and only under specific conditions that you control. 
+*/
+
+/*!
+ @constant       AVAssetDurationDidChangeNotification
+ @abstract       Posted when the duration of an AVFragmentedAsset changes while it's being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
+*/
+AVF_EXPORT NSString *const AVAssetDurationDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+
+/*!
+ @constant       AVAssetContainsFragmentsDidChangeNotification
+ @abstract       Posted after the value of @"containsFragments" has already been loaded and the AVFragmentedAsset is added to an AVFragmentedAssetMinder, either when 1) fragments are detected in the asset on disk after it had previously contained none or when 2) no fragments are detected in the asset on disk after it had previously contained one or more.
+*/
+AVF_EXPORT NSString *const AVAssetContainsFragmentsDidChangeNotification NS_AVAILABLE_MAC(10_11);
+
+/*!
+ @constant       AVAssetWasDefragmentedNotification
+ @abstract       Posted when the asset on disk is defragmented while an AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only if the defragmentation occurs after the status of the value of @"canContainFragments" has reached AVKeyValueStatusLoaded.
+ @discussion     After this notification is posted, the value of the asset properties canContainFragments and containsFragments will both be NO.
+*/
+AVF_EXPORT NSString *const AVAssetWasDefragmentedNotification NS_AVAILABLE_MAC(10_11);
+
+/*!
+ @constant       AVAssetChapterMetadataGroupsDidChangeNotification
+ @abstract       Posted when the collection of arrays of timed metadata groups representing chapters of an AVAsset change and when any of the contents of the timed metadata groups change, but only for changes that occur after the status of the value of @"availableChapterLocales" has reached AVKeyValueStatusLoaded.
+*/
+AVF_EXPORT NSString *const AVAssetChapterMetadataGroupsDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+/*!
+
+ @constant       AVAssetMediaSelectionGroupsDidChangeNotification
+ @abstract       Posted when the collection of media selection groups provided by an AVAsset changes and when any of the contents of its media selection groups change, but only for changes that occur after the status of the value of @"availableMediaCharacteristicsWithMediaSelectionOptions" has reached AVKeyValueStatusLoaded.
+*/
+AVF_EXPORT NSString *const AVAssetMediaSelectionGroupsDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+
+#pragma mark --- AVFragmentedAsset ---
+/*!
+	@class			AVFragmentedAsset
+ 
+	@abstract		A subclass of AVURLAsset that represents media resources that can be extended in total duration without modifying previously existing data structures.
+	Such media resources include QuickTime movie files and MPEG-4 files that indicate, via an 'mvex' box in their 'moov' box, that they accommodate additional fragments. Media resources of other types may also be supported. To check whether a given instance of AVFragmentedAsset can be used to monitor the addition of fragments, check the value of the AVURLAsset property canContainFragments.
+	An AVFragmentedAsset is capable of changing the values of certain of its properties and those of its tracks, while an operation that appends fragments to the underlying media resource in in progress, if the AVFragmentedAsset is associated with an instance of AVFragmentedAssetMinder.
+	@discussion		While associated with an AVFragmentedAssetMinder, AVFragmentedAssetTrack posts AVAssetDurationDidChangeNotification and whenever new fragments are detected, as appropriate. It may also post AVAssetContainsFragmentsDidChangeNotification and AVAssetWasDefragmentedNotification, as discussed in documentation of those notifications.
+*/
+
+@protocol AVFragmentMinding
+
+/*!
+  @property		associatedWithFragmentMinder
+  @abstract		Indicates whether an AVAsset that supports fragment minding is currently associated with an AVAssetFragmentMinder.
+  @discussion	AVAssets that support fragment minding post change notifications only while associated with an AVAssetFragmentMinder.
+*/
+@property (nonatomic, readonly, getter=isAssociatedWithFragmentMinder) BOOL associatedWithFragmentMinder NS_AVAILABLE_MAC(10_11);
+
+@end
+
+@class AVFragmentedAssetInternal;
+
+NS_CLASS_AVAILABLE_MAC(10_11)
+@interface AVFragmentedAsset : AVURLAsset <AVFragmentMinding>
+{
+@private
+	AVFragmentedAssetInternal	*_fragmentedAsset;
+}
+
+/*!
+  @method		fragmentedAssetWithURL:options:
+  @abstract		Returns an instance of AVFragmentedAsset for inspection of a fragmented media resource.
+  @param		URL
+				An instance of NSURL that references a media resource.
+  @param		options
+				An instance of NSDictionary that contains keys for specifying options for the initialization of the AVFragmentedAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above.
+  @result		An instance of AVFragmentedAsset.
+*/
++ (instancetype)fragmentedAssetWithURL:(NSURL *)URL options:(nullable NSDictionary<NSString *, id> *)options;
+
+/*!
+	@property       tracks
+	@abstract       The tracks in an asset.
+	@discussion     The value of this property is an array of tracks the asset contains; the tracks are of type AVFragmentedAssetTrack.
+*/
+@property (nonatomic, readonly) NSArray<AVFragmentedAssetTrack *> *tracks;
+
+@end
+
+@interface AVFragmentedAsset (AVFragmentedAssetTrackInspection)
+
+/*!
+  @method		trackWithTrackID:
+  @abstract		Provides an instance of AVFragmentedAssetTrack that represents the track of the specified trackID.
+  @param		trackID
+				The trackID of the requested AVFragmentedAssetTrack.
+  @result		An instance of AVFragmentedAssetTrack; may be nil if no track of the specified trackID is available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (nullable AVFragmentedAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
+
+/*!
+  @method		tracksWithMediaType:
+  @abstract		Provides an array of AVFragmentedAssetTracks of the asset that present media of the specified media type.
+  @param		mediaType
+				The media type according to which the receiver filters its AVFragmentedAssetTracks. (Media types are defined in AVMediaFormat.h)
+  @result		An NSArray of AVFragmentedAssetTracks; may be empty if no tracks of the specified media type are available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+
+/*!
+  @method		tracksWithMediaCharacteristic:
+  @abstract		Provides an array of AVFragmentedAssetTracks of the asset that present media with the specified characteristic.
+  @param		mediaCharacteristic
+				The media characteristic according to which the receiver filters its AVFragmentedAssetTracks. (Media characteristics are defined in AVMediaFormat.h)
+  @result		An NSArray of AVFragmentedAssetTracks; may be empty if no tracks with the specified characteristic are available.
+  @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
+*/
+- (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+
+@end
+
+#pragma mark --- AVFragmentedAssetMinder ---
+/*!
+	@class			AVFragmentedAssetMinder
+	@abstract		A class that periodically checks whether additional fragments have been appended to fragmented assets.
+*/
+
+@class AVFragmentedAssetMinderInternal;
+
+NS_CLASS_AVAILABLE_MAC(10_11)
+@interface AVFragmentedAssetMinder : NSObject
+{
+@private
+	AVFragmentedAssetMinderInternal	*_fragmentedAssetMinder;
+}
+
+/*!
+	@method			fragmentedAssetMinderWithAsset:mindingInterval:
+	@abstract       Creates an AVFragmentedAssetMinder, adds the specified asset to it, and sets the mindingInterval to the specified value.
+	@param			asset
+					An instance of AVFragmentedAsset to add to the AVFragmentedAssetMinder
+	@param			mindingInterval
+					The initial minding interval of the AVFragmentedAssetMinder.
+	@result			A new instance of AVFragmentedAssetMinder.
+*/
++ (instancetype)fragmentedAssetMinderWithAsset:(AVAsset<AVFragmentMinding> *)asset mindingInterval:(NSTimeInterval)mindingInterval;
+
+/*!
+	@property       mindingInterval
+	@abstract       An NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0.
+*/
+@property (nonatomic) NSTimeInterval mindingInterval;
+
+/*!
+	@property       assets
+	@abstract       An NSArray of the AVFragmentedAsset objects being minded.
+*/
+@property (nonatomic, readonly) NSArray<AVAsset<AVFragmentMinding> *> *assets;
+
+/*!
+	@method			addFragmentedAsset:
+	@abstract		Adds a fragmented asset to the array of assets being minded.
+	@param			asset
+					The fragmented asset to add to the minder.
+*/
+- (void)addFragmentedAsset:(AVAsset<AVFragmentMinding> *)asset;
+
+/*!
+	@method			removeFragmentedAsset:
+	@abstract		Removes a fragmented asset from the array of assets being minded.
+	@param			asset
+					The fragmented asset to remove from the minder.
+*/
+- (void)removeFragmentedAsset:(AVAsset<AVFragmentMinding> *)asset;
+
+@end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLAvailability.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
  *  CLCircularRegion
  *
@@ -57,3 +59,5 @@ NS_CLASS_AVAILABLE(10_10, 7_0)
 - (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate;
 
 @end
+
+NS_ASSUME_NONNULL_END

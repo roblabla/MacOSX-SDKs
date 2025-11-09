@@ -1,6 +1,6 @@
 /*	
     NSURLAuthenticationChallenge.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -12,6 +12,8 @@
 @class NSURLProtectionSpace;
 @class NSURLResponse;
 @class NSError;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!  
     @protocol NSURLAuthenticationChallengeSender 
@@ -78,7 +80,7 @@
     @param error The NSError for the authentication failure, if applicable, else nil
     @result An authentication challenge initialized with the specified parameters
 */
-- (instancetype)initWithProtectionSpace:(NSURLProtectionSpace *)space proposedCredential:(NSURLCredential *)credential previousFailureCount:(NSInteger)previousFailureCount failureResponse:(NSURLResponse *)response error:(NSError *)error sender:(id<NSURLAuthenticationChallengeSender>)sender;
+- (instancetype)initWithProtectionSpace:(NSURLProtectionSpace *)space proposedCredential:(nullable NSURLCredential *)credential previousFailureCount:(NSInteger)previousFailureCount failureResponse:(nullable NSURLResponse *)response error:(nullable NSError *)error sender:(id<NSURLAuthenticationChallengeSender>)sender;
 
 /*!
     @method initWithAuthenticationChallenge:
@@ -109,7 +111,7 @@
     credential is not ready to use as-is, but provides a default
     username the client could use when prompting.
 */
-@property (readonly, copy) NSURLCredential *proposedCredential;
+@property (nullable, readonly, copy) NSURLCredential *proposedCredential;
 
 /*!
     @method previousFailureCount
@@ -127,7 +129,7 @@
     then this method will return the response. Otherwise it will
     return nil.
 */
-@property (readonly, copy) NSURLResponse *failureResponse;
+@property (nullable, readonly, copy) NSURLResponse *failureResponse;
 
 /*!
     @method error
@@ -137,7 +139,7 @@
     then this method will return the error. Otherwise it will
     return nil.
 */
-@property (readonly, copy) NSError *error;
+@property (nullable, readonly, copy) NSError *error;
 
 /*!
     @method sender
@@ -145,6 +147,8 @@
     @result The sender of the challenge
     @discussion The sender is the object you should reply to when done processing the challenge.
 */
-@property (readonly, retain) id<NSURLAuthenticationChallengeSender> sender;
+@property (nullable, readonly, retain) id<NSURLAuthenticationChallengeSender> sender;
 
 @end
+
+NS_ASSUME_NONNULL_END

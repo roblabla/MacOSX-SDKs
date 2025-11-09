@@ -17,6 +17,7 @@
 		#import <IOBluetoothUI/objc/IOBluetoothPairingController.h>
 		#import <IOBluetoothUI/objc/IOBluetoothServiceBrowserController.h>
 		#import <IOBluetoothUI/objc/IOBluetoothObjectPushUIController.h>
+        #import <IOBluetoothUI/objc/IOBluetoothPasskeyDisplay.h>
 
 	#if defined(__cplusplus)
 	}

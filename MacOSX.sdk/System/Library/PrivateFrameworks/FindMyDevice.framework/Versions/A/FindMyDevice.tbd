@@ -3,15 +3,16 @@ archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice
 exports:         
-  - archs:           [ x86_64 ]
-    objc-classes:    [ _FMDLogger, _FMDPreferencesUtil ]
+  - archs:           [ i386 ]
+    objc-classes:    [ _FMLogger_i386, _FMPreferencesUtil_i386, _FMSynchronizer_i386 ]
   - archs:           [ i386, x86_64 ]
-    symbols:         [ _FMDLogFacilityDefault, _FMDLogFacilityLocation, 
-                       _FMDLogFacilitySyslog, _FMDLogFacilityTraffic, ___fmdLogLevel, 
-                       ___fmdLogLocations, ___fmdLogNetworkTraffic, _fmdFMMLastOperationResult, 
-                       _kFMDErrorDomain, _kFMDNotBackedUpPrefDomain, _kFMDPostWipePrefDomain, 
+    symbols:         [ _fmdFMMLastOperationResult, _kFMDErrorDomain, _kFMDLogPrefsChangedDarwinNotification, 
+                       _kFMDNotBackedUpPrefDomain, _kFMDPostWipePrefDomain, 
                        _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, 
-                       _kFMMAuthRight, _kFMMEnabledPrefDomain, _kFMMEnabledPrefKey, 
+                       _kFMDUserAgentAccessEntitlement, _kFMDUserAgentPrefDomain, 
+                       _kFMDUserAgentXPCServiceName, _kFMDWatchNotBackedUpPrefDomain, 
+                       _kFMDWatchPrefDomain, _kFMDXPCServiceName, _kFMMAuthRight, 
+                       _kFMMEnabledPrefDomain, _kFMMEnabledPrefKey, _kFMMLocateAlertPendingNotification, 
                        _kFMMRemoveAuthRight ]
     objc-classes:    [ _FMDFMMAccountInfo, _FMDFMMManager ]
 ...

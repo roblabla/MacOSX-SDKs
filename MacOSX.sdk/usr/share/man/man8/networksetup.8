@@ -36,11 +36,15 @@
 .Op Fl setdhcp Ar networkservice [clientid]
 .Op Fl setbootp Ar networkservice
 .Op Fl setmanualwithdhcprouter Ar networkservice ip
+.Op Fl getadditionalroutes Ar networkservice
+.Op Fl setadditionalroutes Ar networkservice [ dest1 mask1 gate1 ] [ dest2 mask2 gate2 ] ... [destN maskN gateN ]
 .Op Fl setv4off Ar networkservice
 .Op Fl setv6off Ar networkservice
 .Op Fl setv6automatic Ar networkservice
 .Op Fl setv6linklocal Ar networkservice
 .Op Fl setv6manual Ar networkservice address prefixLength router
+.Op Fl getv6additionalroutes Ar networkservice
+.Op Fl setv6additionalroutes Ar networkservice [ dest1 prefixlength1 gate1 ] [ dest2 prefixlength2 gate2 ] ... [destN prefixlengthN gateN ]
 .Op Fl getdnsservers Ar networkservice
 .Op Fl setdnsservers Ar networkservice dns1 [dns2] [...]
 .Op Fl getsearchdomains Ar networkservice
@@ -175,6 +179,11 @@ Use this command to set the TCP/IP configuration for the specified <networkservi
 Use this command to set the TCP/IP configuration for the specified <networkservice> to use BOOTP.
 .It Fl setmanualwithdhcprouter Ar networkservice ip
 Use this command to specify a manual IP address to use for DHCP for the specified <networkservice>.
+.It Fl getadditionalroutes Ar networkservice
+Use this command to display the list of additional IPv4 routes configured for the service.
+.It Fl setadditionalroutes Ar networkservice [ dest1 mask1 gate1 ] [ dest2 mask2 gate2 ] ... [destN maskN gateN ]
+Use this command to set the list of IPv4 additional routes configured for the service. Each route is specified as a
+(destination address, subnet mask, gateway address) tuple. Specifying no tuples clears the list of routes.
 .It Fl setv4off Ar networkservice
 Use this command to turn IPv4 off on the specified <networkservice>.
 .It Fl setv6off Ar networkservice
@@ -185,6 +194,12 @@ Use this command to set IPv6 to get its addresses automatically for <networkserv
 Use this command to set IPv6 to only use link local for <networkservice>.
 .It Fl setv6manual Ar ip prefixlength router
 Use this command to set IPv6 to get its addresses manually for <networkservice>. Specify the ip address, the prefix length and the router.
+.It Fl getv6additionalroutes Ar networkservice
+Use this command to display the list of additional IPv6 routes configured for the service.
+.It Fl setv6additionalroutes Ar networkservice [ dest1 prefixlength1 gate1 ] [ dest2 prefixlength2 gate2 ] ... [destN prefixlengthN gateN ]
+Use this command to set the list of additional routes configured for the service. Each route is specified as a
+.br
+(destination address, prefix length, gateway address) tuple. Specifying no tuples clears the list of routes.
 .It Fl getdnsservers Ar networkservice
 Displays DNS info for <networkservice>.
 .It Fl setdnsservers Ar networkservice dns1 [dns2] [...]

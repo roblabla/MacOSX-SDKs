@@ -1,10 +1,11 @@
 /*
     NSBrowser.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSControl.h>
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSViewController.h>
@@ -12,7 +13,9 @@
 #define NSAppKitVersionNumberWithContinuousScrollingBrowser 680.0
 #define NSAppKitVersionNumberWithColumnResizingBrowser      685.0
 
-@class NSMatrix, NSScroller, NSMutableArray, NSIndexSet;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSMatrix, NSScroller, NSIndexSet;
 @protocol NSBrowserDelegate;
 
 typedef struct __Brflags {
@@ -128,10 +131,10 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 - (void)loadColumnZero;
 @property (getter=isLoaded, readonly) BOOL loaded;
 
-@property SEL doubleAction;
+@property (nullable) SEL doubleAction;
 - (void)setCellClass:(Class)factoryId;
-@property (strong) id /* NSCell * */ cellPrototype;
-@property (assign) id<NSBrowserDelegate> delegate;
+@property (null_resettable, strong) id /* NSCell * */ cellPrototype;
+@property (nullable, assign) id<NSBrowserDelegate> delegate;
 @property BOOL reusesColumns;
 
 @property BOOL hasHorizontalScroller;
@@ -151,11 +154,11 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Returns the item at the given index path. This method can only be used if the delegate implements the item data source methods. The indexPath must be displayable in the browser.
  */
-- (id)itemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_6);
+- (nullable id)itemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_6);
 
 /* Returns the item located at 'row' in 'column'.
  */
-- (id)itemAtRow:(NSInteger)row inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_6);
+- (nullable id)itemAtRow:(NSInteger)row inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_6);
 
 /* Returns the index path of the item whose children are displayed in the given column. This method can only be used if the delegate implements the item data source methods.
  */
@@ -163,7 +166,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Returns whether the given item is a leaf item. This method can only be used if the delegate implements the item data source methods.
  */
-- (BOOL)isLeafItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (BOOL)isLeafItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 /* Updates a particular set of rows in 'column'. For rows that are visible, appropriate dataSource and delegate methods will be called and the row will be redrawn. For browsers that support variable row heights, the row height will not be re-queried from the delegate. This method can only be used if the delegate implements the item data source methods.
 */
@@ -171,14 +174,14 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Returns the item that contains all children located in 'column'. In other words, it is the parent item for that column.
  */
-- (id)parentForItemsInColumn:(NSInteger)column NS_AVAILABLE_MAC(10_6);
+- (nullable id)parentForItemsInColumn:(NSInteger)column NS_AVAILABLE_MAC(10_6);
 
 /* Scrolls 'row' to be visible within 'column'. 'column' will not be scrolled visible. To scroll 'column' to visible, first call -[browser scrollColumnToVisible:column].
  */
 - (void)scrollRowToVisible:(NSInteger)row inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_6);
 
 - (void)setTitle:(NSString *)aString ofColumn:(NSInteger)column;
-- (NSString *)titleOfColumn:(NSInteger)column;
+- (nullable NSString *)titleOfColumn:(NSInteger)column;
 @property (copy) NSString *pathSeparator;
 - (BOOL)setPath:(NSString *)path;
 - (NSString *)path;
@@ -193,12 +196,12 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* For the item based browser, selectedCell returns the prepared cell at the selected row in the selected column.
  */
-@property (readonly, strong) id selectedCell;
-- (id)selectedCellInColumn:(NSInteger)column;
+@property (nullable, readonly, strong) id selectedCell;
+- (nullable id)selectedCellInColumn:(NSInteger)column;
 
 /* For the item based browser, selectedCells returns a copy of all prepared cells in the selected row in the selected column
  */
-@property (readonly, copy) NSArray *selectedCells;
+@property (nullable, readonly, copy) NSArray<NSCell *> *selectedCells;
 
 - (void)selectRow:(NSInteger)row inColumn:(NSInteger)column;
 
@@ -210,7 +213,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Returns the index paths of all items selected in the browser. The setter sets the browser's selection to the specified index paths. Throws an exception if any of the paths are invalid. This method can only be used if the delegate implements the item data source methods.
  */
-@property (copy) NSArray *selectionIndexPaths NS_AVAILABLE_MAC(10_6);
+@property (copy) NSArray<NSIndexPath *> *selectionIndexPaths NS_AVAILABLE_MAC(10_6);
 
 /* Sets the selected row 'indexes' in the matrix located at 'column'. 
  */
@@ -218,7 +221,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Returns the selected cell indexes in the matrix located at 'column'. 
  */
-- (NSIndexSet *)selectedRowIndexesInColumn:(NSInteger)column NS_AVAILABLE_MAC(10_5);
+- (nullable NSIndexSet *)selectedRowIndexesInColumn:(NSInteger)column NS_AVAILABLE_MAC(10_5);
 
 - (void)reloadColumn:(NSInteger)column;
 - (void)validateVisibleColumns;
@@ -239,12 +242,12 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 @property (readonly) NSInteger lastVisibleColumn;
 
 
-- (id)loadedCellAtRow:(NSInteger)row column:(NSInteger)col;
-- (void)selectAll:(id)sender;
+- (nullable id)loadedCellAtRow:(NSInteger)row column:(NSInteger)col;
+- (void)selectAll:(nullable id)sender;
 - (void)tile;
-- (void)doClick:(id)sender;
-- (void)doDoubleClick:(id)sender;
-@property (readonly) BOOL sendAction;
+- (void)doClick:(nullable id)sender;
+- (void)doDoubleClick:(nullable id)sender;
+- (BOOL)sendAction;
 
 - (NSRect)titleFrameOfColumn:(NSInteger)column;
 - (void)drawTitleOfColumn:(NSInteger)column inRect:(NSRect)aRect;
@@ -258,7 +261,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Finds the row and column located at 'point', returning YES if both can be found. If a row does not exist at 'point', then -1 is set for the row. If a column does not exist at 'point', then -1 is set for the column. 'point' is expected to be in the NSBrowser's coordinate system.
 */
-- (BOOL)getRow:(NSInteger *)row column:(NSInteger *)column forPoint:(NSPoint)point NS_AVAILABLE_MAC(10_6);
+- (BOOL)getRow:(nullable NSInteger *)row column:(nullable NSInteger *)column forPoint:(NSPoint)point NS_AVAILABLE_MAC(10_6);
 
 /* These methods convert between column width (the column's scrollview), and the content width (the matrix in the scrollview).  For example, to guarantee that 16 pixels of your browser cell are always visible, call [browser setMinColumnWidth:[browser columnWidthForColumnContentWidth:16]] 
 */
@@ -310,7 +313,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* This method computes and returns an image to use for dragging. You can override this to return a custom drag image, or call it to get the default drag image from the delegate method. 'rowIndexes' are the indexes of the cells being dragged in matrix 'column'. 'event' is a reference to the mouse down event that began the drag. 'dragImageOffset' is an in/out parameter. This method will be called with dragImageOffset set to NSZeroPoint, but it can be modified to re-position the returned image. A dragImageOffset of NSZeroPoint will cause the image to be centered under the mouse. By default, an image will be created that contain the visible cells within 'rowIndexes'. If the equivalent delegate method is present, it will be preferred over this method, and you can safely call this method from your delegate. 
  */
-- (NSImage *)draggingImageForRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset NS_AVAILABLE_MAC(10_5);
+- (nullable NSImage *)draggingImageForRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event offset:(nullable NSPointPointer)dragImageOffset NS_AVAILABLE_MAC(10_5);
 
 /* Configures the value returned from -draggingSourceOperationMaskForLocal:. An isLocal value of YES indicates that 'mask' applies when the destination object is in the same application. By default, NSDragOperationEvery will be returned. An isLocal value of NO indicates that 'mask' applies when the destination object in an application outside the receiver's application. By default, NSDragOperationNone is returned. NSBrowser will save the values you set for each isLocal setting. You typically will invoke this method, and not override it. 
  */
@@ -337,7 +340,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* The -object in the NSNotification is the browser whose column sizes need to be persisted. There is no userInfo.
  */
-APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
+APPKIT_EXTERN NSString * NSBrowserColumnConfigurationDidChangeNotification;
 
 #pragma mark -
 #pragma mark **** Delegate methods ****
@@ -364,19 +367,19 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 */
 
 /* Return the number of children of the given item. */
-- (NSInteger)browser:(NSBrowser *)browser numberOfChildrenOfItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (NSInteger)browser:(NSBrowser *)browser numberOfChildrenOfItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 /* Return the indexth child of item. You may expect that index is never equal to or greater to the number of children of item as reported by -browser:numberOfChildrenOfItem:.
  */
-- (id)browser:(NSBrowser *)browser child:(NSInteger)index ofItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (id)browser:(NSBrowser *)browser child:(NSInteger)index ofItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 /* Return whether item should be shown as a leaf item; that is, an item that can not be expanded into another column. Returning NO does not prevent you from returning 0 from -browser:numberOfChildrenOfItem:.
  */
-- (BOOL)browser:(NSBrowser *)browser isLeafItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (BOOL)browser:(NSBrowser *)browser isLeafItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 /* Return the object value passed to the cell displaying item.
  */
-- (id)browser:(NSBrowser *)browser objectValueForItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (nullable id)browser:(NSBrowser *)browser objectValueForItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 /* Optional - Variable Row Heights
     Implement this method to support varying row heights per column.  The height returned by this method should not include intercell spacing and must be greater than zero.  NSBrowser may cache the values this method returns.  So if you would like to change a row's height make sure to invalidate the row height by calling -noteHeightOfRowsWithIndexesChanged:inColumn:.
@@ -388,17 +391,17 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 /* Optional - Alternate root item. 
  By default, NSBrowser uses 'nil' to identify the root item. It can optionally use a different root item provided by this delegate method. To reload the rootItem that was previously set, call -loadColumnZero, and NSBrowser will call -rootItemForBrowser: again.
  */
-- (id)rootItemForBrowser:(NSBrowser *)browser NS_AVAILABLE_MAC(10_6);
+- (nullable id)rootItemForBrowser:(NSBrowser *)browser NS_AVAILABLE_MAC(10_6);
 
 /* Optional - editing support.
  Implement this method to support editing of browser items. The browser will pass back the object value from the cell displaying item.
  */
-- (void)browser:(NSBrowser *)browser setObjectValue:(id)object forItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (void)browser:(NSBrowser *)browser setObjectValue:(nullable id)object forItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 /* Optional - editing support.
  Implement this method to control whether the browser may start an editing session for item.
  */
-- (BOOL)browser:(NSBrowser *)browser shouldEditItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (BOOL)browser:(NSBrowser *)browser shouldEditItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 #pragma mark -
 
@@ -407,7 +410,7 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
  */
 - (void)browser:(NSBrowser *)sender willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column;
 
-- (NSString *)browser:(NSBrowser *)sender titleOfColumn:(NSInteger)column;
+- (nullable NSString *)browser:(NSBrowser *)sender titleOfColumn:(NSInteger)column;
 
 /* Called by the browser when selecting cells by title, either from -setPath:, or when recomputing the selection after -reloadColumn:. Return NO if a matching cell could not be found.
  */
@@ -460,7 +463,7 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 
 /* The delegate can support file promise drags by adding NSFilesPromisePboardType to the pasteboard in browser:writeRowsWithIndexes:inColumn:toPasteboard:. NSBrowser implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this data source method.  This method should returns an array of filenames for the created files (filenames only, not full paths).  The URL represents the drop location.  For more information on file promise dragging, see documentation on the NSDraggingSource protocol and -namesOfPromisedFilesDroppedAtDestination:. You do not need to implement this method for your browser to be a drag source.
  */
-- (NSArray *)browser:(NSBrowser *)browser namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_5);
+- (NSArray<NSString *> *)browser:(NSBrowser *)browser namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_5);
 
 /* The delegate can control if some particular rows can be dragged or not for a particular event. You do not need to implement this method for your browser to be a drag source. 
  */
@@ -468,7 +471,7 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 
 /* Allows the delegate to compute a dragging image for the particular cells being dragged. 'rowIndexes' are the indexes of the cells being dragged in the matrix in 'column'. 'event' is a reference to the mouse down event that began the drag. 'dragImageOffset' is an in/out parameter. This method will be called with dragImageOffset set to NSZeroPoint, but it can be modified to re-position the returned image.  A dragImageOffset of NSZeroPoint will cause the image to be centered under the mouse. You can safely call [browser dragImageForRowsWithIndexes:inColumn:withEvent:offset:] from inside this method. You do not need to implement this method for your browser to be a drag source. You can safely call the corresponding NSBrowser method.
  */
-- (NSImage *)browser:(NSBrowser *)browser draggingImageForRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset NS_AVAILABLE_MAC(10_5);
+- (nullable NSImage *)browser:(NSBrowser *)browser draggingImageForRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset NS_AVAILABLE_MAC(10_5);
 
 #pragma mark ** Dragging Destination Methods **
 
@@ -496,24 +499,24 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 /* Optional - Type select support
     Implement this method if you would like to prevent a type select from happening based on the current event and current search string. Generally, this will be called from keyDown: and the event will be a key event. The search string will be nil if no type select has began. 
  */
-- (BOOL)browser:(NSBrowser *)browser shouldTypeSelectForEvent:(NSEvent *)event withCurrentSearchString:(NSString *)searchString NS_AVAILABLE_MAC(10_5);
+- (BOOL)browser:(NSBrowser *)browser shouldTypeSelectForEvent:(NSEvent *)event withCurrentSearchString:(nullable NSString *)searchString NS_AVAILABLE_MAC(10_5);
 
 /* Optional - Type select support
     Implement this method if you want to control how type selection works. Return the first row that matches searchString from within the range of startRow to endRow. It is possible for endRow to be less than startRow if the search will wrap. Return -1 when there is no match. Include startRow as a possible match, but do not include endRow. It is not necessary to implement this method in order to support type select.
  */
-- (NSInteger)browser:(NSBrowser *)browser nextTypeSelectMatchFromRow:(NSInteger)startRow toRow:(NSInteger)endRow inColumn:(NSInteger)column forString:(NSString *)searchString NS_AVAILABLE_MAC(10_5);
+- (NSInteger)browser:(NSBrowser *)browser nextTypeSelectMatchFromRow:(NSInteger)startRow toRow:(NSInteger)endRow inColumn:(NSInteger)column forString:(nullable NSString *)searchString NS_AVAILABLE_MAC(10_5);
 
 #pragma mark -
 
 /* Optional - Preview column support
     Implement this method to provide a preview column for leaf items. Return nil to suppress the preview column. The controller's representedObject will be set to the browser's selected leaf item. This method is only called if the delegate implements the item data source methods.
  */
-- (NSViewController *)browser:(NSBrowser *)browser previewViewControllerForLeafItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (nullable NSViewController *)browser:(NSBrowser *)browser previewViewControllerForLeafItem:(id)item NS_AVAILABLE_MAC(10_6);
 
 /* Optional - Column header support
     Implement this method to provide a header view for columns. Return nil to omit the header view. The controller's representedObject will be set to the column's item. This method is only called if the delegate implements the item data source methods.
  */
-- (NSViewController *)browser:(NSBrowser *)browser headerViewControllerForItem:(id)item NS_AVAILABLE_MAC(10_6);
+- (nullable NSViewController *)browser:(NSBrowser *)browser headerViewControllerForItem:(nullable id)item NS_AVAILABLE_MAC(10_6);
 
 /* Optional - Notification when the lastColumn changes.
  */
@@ -545,7 +548,7 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 
 /* Use of -scrollViaScroller: is deprecated in 10.3.  Continuous scrolling no longer requires this functionality.
  */
-- (void)scrollViaScroller:(NSScroller *)sender NS_DEPRECATED_MAC(10_0, 10_3);
+- (void)scrollViaScroller:(null_unspecified NSScroller *)sender NS_DEPRECATED_MAC(10_0, 10_3);
 
 /* Use of -updateScroller is deprecated in 10.3.  Continuous scrolling no longer requires this functionality.
  */
@@ -556,6 +559,8 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 - (void)setMatrixClass:(Class)factoryId  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
 - (Class)matrixClass  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
 - (NSInteger)columnOfMatrix:(NSMatrix *)matrix  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
-- (NSMatrix *)matrixInColumn:(NSInteger)column  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
+- (nullable NSMatrix *)matrixInColumn:(NSInteger)column  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
 
 @end
+
+NS_ASSUME_NONNULL_END

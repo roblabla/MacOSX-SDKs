@@ -8,6 +8,8 @@
 #import <CoreBluetooth/CBDefines.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  @constant CBAdvertisementDataLocalNameKey
  *
@@ -84,3 +86,5 @@ CB_EXTERN NSString * const CBAdvertisementDataIsConnectable NS_AVAILABLE(10_9, 7
  *
  */
 CB_EXTERN NSString * const CBAdvertisementDataSolicitedServiceUUIDsKey NS_AVAILABLE(10_9, 7_0);
+
+NS_ASSUME_NONNULL_END

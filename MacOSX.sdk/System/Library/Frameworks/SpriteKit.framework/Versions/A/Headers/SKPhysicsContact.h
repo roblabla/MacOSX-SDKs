@@ -9,6 +9,9 @@
 #import <SpriteKit/SKPhysicsBody.h>
 #import <SpriteKit/SpriteKitBase.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT @interface SKPhysicsContact : NSObject
 
 @property (nonatomic, readonly) SKPhysicsBody *bodyA;
@@ -18,3 +21,5 @@ SK_EXPORT @interface SKPhysicsContact : NSObject
 @property (nonatomic, readonly) CGFloat collisionImpulse;
 
 @end
+
+NS_ASSUME_NONNULL_END

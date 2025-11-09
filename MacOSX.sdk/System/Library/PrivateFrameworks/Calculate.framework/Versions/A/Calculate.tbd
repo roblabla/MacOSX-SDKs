@@ -10,7 +10,9 @@ exports:
                        _Converter._localizedInputValueAndUnit, _Converter._localizedOutputUnit, 
                        _Converter._localizedOutputValue, _Converter._localizedOutputValueAndUnit, 
                        _Converter._outputUnit, _Converter._outputValue, 
-                       _CurrencyCache._currencyData, _CurrencyCache._lastRefreshDate, 
+                       _CurrencyCache._currencyData, _CurrencyCache._currentCurrency, 
+                       _CurrencyCache._currentRate, _CurrencyCache._currentString, 
+                       _CurrencyCache._lastRefreshDate, _CurrencyCache._mutableCurrencyCache, 
                        _CurrencyCache._uuid ]
   - archs:           [ i386, x86_64 ]
     symbols:         [ _CalculateExpression, _CalculateExpressionError, 

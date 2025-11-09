@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
-current-version: 640.4
+current-version: 728.4
 exports:         
   - archs:           [ i386 ]
     symbols:         [ _CloseOpenTransportInContext, _DisableIdle, _DisposeKCCallbackUPP, 
@@ -66,9 +66,7 @@ exports:
                        _KCSetInteractionAllowed, _KCUnlockNoUI, _KCUpdateItem, 
                        _MakeAppleSharePasswordKCItemRef, _MakeGenericPasswordKCItemRef, 
                        _MakeInternetPasswordKCItemRef, _MaximumProcessorSpeed, 
-                       _MinimumProcessorSpeed, _SFLCopyIconsForFlattening, 
-                       _SFLItemGetSandboxExtension, _SFLItemGetURLRef, 
-                       _SFLSetFlattenedIcons, _SecNewAFPXVolMountInfo, 
+                       _MinimumProcessorSpeed, _SecNewAFPXVolMountInfo, 
                        _Sleep, _SleepQInstall, _SleepQRemove, _SystemSoundGetActionID, 
                        _SystemSoundGetProperty, _SystemSoundGetPropertyInfo, 
                        _SystemSoundPlay, _SystemSoundRemoveActionID, _SystemSoundRemoveCompletionRoutine, 
@@ -160,32 +158,7 @@ exports:
                        __LWCopyNextFireDateForScheduledAction, __LWRemoveScheduledAction, 
                        __LWScheduleCommandAction, __LWScheduleOpenItemAction, 
                        __LWScheduleOpenURLAction, __LWSchedulerNotifyPortName, 
-                       __OSS_InstallGestaltSelectors, __SFLAddCallback, 
-                       __SFLAddNewBookmarkItemToListWithProperties, __SFLAddNewItemToListWithProperties, 
-                       __SFLAddNewURLItemToListWithProperties, __SFLAddObserver, 
-                       __SFLAsyncGetSKServiceDescription, __SFLChangeBookmarkItemInList, 
-                       __SFLChangeItemInList, __SFLClearList, __SFLCopyProperty, 
-                       __SFLCreateSnapshot, __SFLGetCustomFileList, __SFLGetFirstItem, 
-                       __SFLGetMaxItemCount, __SFLGetNextItem, __SFLGetPrefsAndListName, 
-                       __SFLGetPrivilegedList, __SFLGetRestrictedCustomFileList, 
-                       __SFLGetSKServiceDescription, __SFLGetSharedSeedValue, 
-                       __SFLGetSnapshotSeedValue, __SFLGetVisibilityForSpecialVolumeItem, 
-                       __SFLGetVolumesList, __SFLGetVolumesListMask, __SFLIsFolderShareable, 
-                       __SFLItemCheckType, __SFLItemCopyCustomProperties, 
-                       __SFLItemCopyDisplayName, __SFLItemCopyDisplayNameInternal, 
-                       __SFLItemCopyPrivilegedProperty, __SFLItemCopySandboxExtension, 
-                       __SFLItemGetAliasData, __SFLItemGetBookmarkDataRef, 
-                       __SFLItemGetFlags, __SFLItemGetID, __SFLItemGetISImageRef, 
-                       __SFLItemGetVRefNum, __SFLItemIsHandledBySFLManager, 
-                       __SFLItemIsSpecial, __SFLItemSetProperty, __SFLModifyItemFlags, 
-                       __SFLModifyVolumesListMask, __SFLMoveItemInList, 
-                       __SFLPreferencesCopyMultiple, __SFLPreferencesCopyValue, 
-                       __SFLPreferencesSetMultiple, __SFLPreferencesSetValue, 
-                       __SFLPrefsCopySharedPrefs, __SFLPrefsFlush, __SFLPrefsNotifyServerPrefsWereWritten, 
-                       __SFLRelease, __SFLReleaseSnapshot, __SFLRemoveCallback, 
-                       __SFLRemoveItemFromList, __SFLServiceMain, __SFLSetAuthorization, 
-                       __SFLSetMaxItemCount, __SFLSetProperty, __SFLSetVisibilityForSpecialVolumeItem, 
-                       __SFLVolumeIsVisibleInSidebar, __SetAppleIDAuthenticationXPCServiceName, 
+                       __OSS_InstallGestaltSelectors, __SetAppleIDAuthenticationXPCServiceName, 
                        __kCSAppleIDAccountAllEmailAddresses, __kCSAppleIDAccountAppleID, 
                        __kCSAppleIDAccountCertificateExpirationDate, __kCSAppleIDAccountCertificateSerialNumber, 
                        __kCSAppleIDAccountConfigurationChangeNotification, 

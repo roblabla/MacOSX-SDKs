@@ -1,16 +1,22 @@
 //
 //  SceneKitTypes.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
 #import <GLKit/GLKMathTypes.h>
 
+
 /*! @header SceneKitTypes
-    @abstract Various types and utility functions used throughout SceneKit
+ @abstract Various types and utility functions used throughout SceneKit
  */
 
+#define SCN_ENABLE_METAL (defined(MAC_OS_X_VERSION_10_11) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_11))
+
+#if SCN_ENABLE_METAL
+#import <Metal/Metal.h>
+#endif
 
 typedef CATransform3D SCNMatrix4;
 
@@ -24,11 +30,9 @@ typedef struct SCNVector4 {
 
 typedef SCNVector4 SCNQuaternion;
 
-
-
-SCN_EXTERN const SCNMatrix4 SCNMatrix4Identity SCENEKIT_AVAILABLE (10_10, 8_0);
-SCN_EXTERN const SCNVector3 SCNVector3Zero SCENEKIT_AVAILABLE (10_10, 8_0);
-SCN_EXTERN const SCNVector4 SCNVector4Zero SCENEKIT_AVAILABLE (10_10, 8_0);
+SCN_EXTERN const SCNMatrix4 SCNMatrix4Identity NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN const SCNVector3 SCNVector3Zero NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN const SCNVector4 SCNVector4Zero NS_AVAILABLE(10_10, 8_0);
 
 /*! Returns true if 'a' is exactly equal to 'b'. */
 SCN_EXTERN bool SCNVector3EqualToVector3 (SCNVector3 a, SCNVector3 b);
@@ -71,14 +75,14 @@ NS_INLINE SCNMatrix4 SCNMatrix4Translate(SCNMatrix4 mat, CGFloat x, CGFloat y, C
     return mat;
 }
 
-SCN_EXTERN SCNMatrix4 SCNMatrix4MakeRotation(CGFloat angle, CGFloat x, CGFloat y, CGFloat z) SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN SCNMatrix4 SCNMatrix4Scale(SCNMatrix4 mat, CGFloat x, CGFloat y, CGFloat z) SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN SCNMatrix4 SCNMatrix4Rotate(SCNMatrix4 mat, CGFloat angle, CGFloat x, CGFloat y, CGFloat z) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4MakeRotation(CGFloat angle, CGFloat x, CGFloat y, CGFloat z) NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4Scale(SCNMatrix4 mat, CGFloat x, CGFloat y, CGFloat z) NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4Rotate(SCNMatrix4 mat, CGFloat angle, CGFloat x, CGFloat y, CGFloat z) NS_AVAILABLE(10_10, 8_0);
 
-SCN_EXTERN SCNMatrix4 SCNMatrix4Invert(SCNMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN SCNMatrix4 SCNMatrix4Mult(SCNMatrix4 matA, SCNMatrix4 matB) SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN bool       SCNMatrix4IsIdentity(SCNMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN bool       SCNMatrix4EqualToMatrix4(SCNMatrix4 matA, SCNMatrix4 matB) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4Invert(SCNMatrix4 mat) NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4Mult(SCNMatrix4 matA, SCNMatrix4 matB) NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN bool       SCNMatrix4IsIdentity(SCNMatrix4 mat) NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN bool       SCNMatrix4EqualToMatrix4(SCNMatrix4 matA, SCNMatrix4 matB) NS_AVAILABLE(10_10, 8_0);
 
 /* GLKit bridge */
 NS_INLINE SCNVector3 SCNVector3FromGLKVector3(GLKVector3 vector) {
@@ -117,16 +121,17 @@ NS_INLINE GLKVector4 SCNVector4ToGLKVector4(SCNVector4 vector) {
 #endif
 }
 
-SCN_EXTERN GLKMatrix4 SCNMatrix4ToGLKMatrix4(SCNMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
-SCN_EXTERN SCNMatrix4 SCNMatrix4FromGLKMatrix4(GLKMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN GLKMatrix4 SCNMatrix4ToGLKMatrix4(SCNMatrix4 mat) NS_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4FromGLKMatrix4(GLKMatrix4 mat) NS_AVAILABLE(10_10, 8_0);
 #define GLKMatrix4FromCATransform3D(X) SCNMatrix4ToGLKMatrix4(X)
 #define GLKMatrix4ToCATransform3D(X)   SCNMatrix4FromGLKMatrix4(X)
     
 //SIMD bridge
 #import <SceneKit/SceneKit_simd.h>
-
     
 #ifdef __OBJC__
+    
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @category NSValue(SceneKitAdditions)
  @abstract Adds methods to wrap vectors in NSValue objects.
@@ -136,11 +141,11 @@ SCN_EXTERN SCNMatrix4 SCNMatrix4FromGLKMatrix4(GLKMatrix4 mat) SCENEKIT_AVAILABL
 
 + (NSValue *)valueWithSCNVector3:(SCNVector3)v;
 + (NSValue *)valueWithSCNVector4:(SCNVector4)v;
-+ (NSValue *)valueWithSCNMatrix4:(SCNMatrix4)v SCENEKIT_AVAILABLE(10_10, 8_0);
++ (NSValue *)valueWithSCNMatrix4:(SCNMatrix4)v NS_AVAILABLE(10_10, 8_0);
 
-@property(readonly) SCNVector3 SCNVector3Value;
-@property(readonly) SCNVector4 SCNVector4Value;
-@property(readonly) SCNMatrix4 SCNMatrix4Value SCENEKIT_AVAILABLE (10_10, 8_0);
+@property(nonatomic, readonly) SCNVector3 SCNVector3Value;
+@property(nonatomic, readonly) SCNVector4 SCNVector4Value;
+@property(nonatomic, readonly) SCNMatrix4 SCNMatrix4Value NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -152,5 +157,6 @@ enum {
 	SCNProgramCompilationError = 1
 };
 
+NS_ASSUME_NONNULL_END
+    
 #endif /* __OBJC__ */
-

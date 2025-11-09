@@ -1,15 +1,18 @@
 /*
 	NSDraggingItem.h
 	Application Kit
-	Copyright (c) 2010-2014, Apple Inc.
+	Copyright (c) 2010-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
 
-@class NSArray, NSString;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSString;
 @protocol NSPasteboardWriting;
 
 
@@ -35,7 +38,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* An object providing the image contents of the component, typically you set an NSImage, but may be anything CALayer accepts.
 */
-@property (strong) id contents;
+@property (nullable, strong) id contents;
 
 /* The coordinate space is the bounds of the parent NSDraggingItem. That is, {{0,0}, {draggingFrame.size.width, draggingFrame.size.height}} Note: NSDraggingItem does not clip its components.
 */
@@ -70,7 +73,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* The dragging image is the composite of an array of NSDraggingImageComponents. The dragging image components may not be set directly. Instead, provide a block to generate the components and the block will be called if necessary. The block may be set to nil, meaning that this drag item has no image. Generally, only dragging destinations do this, and only if there is at least one valid item in the drop, and this is not it. The components are composited in painting order. That is, each component in the array is painted on top of the previous components in the array.
 */
-@property (copy) NSArray*(^imageComponentsProvider)(void);
+@property (nullable, copy) NSArray<NSDraggingImageComponent *> * __nonnull (^imageComponentsProvider)(void);
 
 /* Alternate single image component setter. This method simplifies modifiying the components of an NSDraggingItem when there is only one component. This method will set the draggingFrame and imageComponentsProvider properties. frame is in the same coordinate space that the draggingFrame property is.
 */
@@ -78,6 +81,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* An array of NSDraggingImageComponents that are used to create the drag image. Note: the array contains copies of the components. Changes made to these copies are not reflected in the drag. If needed, the imageComponentsProvider block is called to generate the image components.
 */
-@property (readonly, copy) NSArray *imageComponents;
+@property (nullable, readonly, copy) NSArray<NSDraggingImageComponent *> *imageComponents;
 
 @end
+
+NS_ASSUME_NONNULL_END

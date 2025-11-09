@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -31,11 +31,9 @@
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
 #import <CoreMedia/CMSync.h>
-#if TARGET_OS_IPHONE
 #import <CoreGraphics/CGGeometry.h>
-#else // ! TARGET_OS_IPHONE
-#import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGGeometry.h>
-#endif  // ! TARGET_OS_IPHONE
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* Note that NSNotifications posted by AVPlayerItem may be posted on a different thread from the one on which the observer was registered. */
 
@@ -75,6 +73,7 @@ typedef NS_ENUM(NSInteger, AVPlayerItemStatus) {
 @class AVAssetTrack;
 @class AVAudioMix;
 @class AVVideoComposition;
+@class AVMediaSelection;
 @class AVMediaSelectionGroup;
 @class AVMediaSelectionOption;
 @class AVPlayerItemInternal;
@@ -86,6 +85,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @private
 	AVPlayerItemInternal* _playerItem;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method		playerItemWithURL:
@@ -114,7 +114,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result		An instance of AVPlayerItem.
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
  */
-+ (AVPlayerItem *)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(NSArray *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
++ (AVPlayerItem *)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @method		initWithURL:
@@ -144,7 +144,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result		An instance of AVPlayerItem
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
  */
-- (instancetype)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(NSArray *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property status
@@ -168,10 +168,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	The value of this property is an NSError that describes what caused the receiver to no longer be able to be played.
 	If the receiver's status is not AVPlayerItemStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly) NSError *error;
+@property (nonatomic, readonly, nullable) NSError *error;
 
 @end
 
+
+@class AVPlayerItemTrack;
+@class AVMetadataItem;
 
 @interface AVPlayerItem (AVPlayerItemInspection)
 
@@ -190,7 +193,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	Before the underlying media resource has been sufficiently loaded, its value is an empty NSArray. Use key-value observation to obtain
 	a valid array of tracks as soon as it becomes available.
  */
-@property (nonatomic, readonly) NSArray *tracks;
+@property (nonatomic, readonly) NSArray<AVPlayerItemTrack *> *tracks;
 
 /*!
  @property duration
@@ -231,7 +234,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Notifications of changes are available via key-value observation.
    As an optimization for playback, AVPlayerItem may omit the processing of timed metadata when no observer of this property is registered. Therefore, when no such observer is registered, the value of the timedMetadata property may remain nil regardless of the contents of the underlying media.
  */
-@property (nonatomic, readonly) NSArray *timedMetadata;
+@property (nonatomic, readonly, nullable) NSArray<AVMetadataItem *> *timedMetadata;
 
 /*!
  @property automaticallyLoadedAssetKeys
@@ -239,7 +242,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
    The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be AVKeyValueStatusLoaded. If loading of any of the values fails, the status of the AVPlayerItem will change instead to AVPlayerItemStatusFailed..
  */
-@property (nonatomic, readonly) NSArray *automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<NSString *> *automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -321,7 +324,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @abstract This property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous.
  @discussion Returns an NSArray of NSValues containing CMTimeRanges.
  */
-@property (nonatomic, readonly) NSArray *seekableTimeRanges;
+@property (nonatomic, readonly) NSArray<NSValue *> *seekableTimeRanges;
 
 /*!
  @method			seekToTime:
@@ -389,7 +392,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@abstract	If currentTime is mapped to a particular (real-time) date, return that date.
 	@result		Returns the date of current playback, or nil if playback is not mapped to any date.
 */
-- (NSDate*)currentDate;
+- (nullable NSDate *)currentDate;
 
 /*!
  @method		seekToDate
@@ -436,10 +439,12 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    You can examine the timebase to discover the relationship between the item's time and the master clock used for drift synchronization.
    This timebase is read-only; you cannot set its time or rate to affect playback.  The value of this property may change during playback.
  */
-@property (nonatomic, readonly) __attribute__((NSObject)) CMTimebaseRef timebase NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMTimebaseRef timebase NS_AVAILABLE(10_8, 6_0);
 
 @end
 
+
+@class AVTextStyleRule;
 
 @interface AVPlayerItem (AVPlayerItemVisualPresentation)
 
@@ -447,7 +452,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @property videoComposition
  @abstract Indicates the video composition settings to be applied during playback.
  */
-@property (nonatomic, copy) AVVideoComposition *videoComposition;
+@property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 
 /*!
  @property customVideoCompositor
@@ -456,7 +461,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  	This property is nil if there is no video compositor, or if the internal video compositor is in use. This reference can be used to provide
 	extra context to the custom video compositor instance if required.
  */
-@property (nonatomic, readonly) id<AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) id<AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property seekingWaitsForVideoCompositionRendering
@@ -483,7 +488,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  
 	This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
 */
-@property (nonatomic, copy) NSArray *textStyleRules NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, copy, nullable) NSArray<AVTextStyleRule *> *textStyleRules NS_AVAILABLE(10_9, 6_0);
 
 @end
 
@@ -505,7 +510,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
    The inputParameters of the AVAudioMix must have trackIDs that correspond to a track of the receiver's asset. Otherwise they will be ignored. (See AVAudioMix.h for the declaration of AVAudioMixInputParameters and AVPlayerItem's asset property.)
  */
-@property (nonatomic, copy) AVAudioMix *audioMix;
+@property (nonatomic, copy, nullable) AVAudioMix *audioMix;
 
 @end
 
@@ -514,10 +519,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /*!
  @property loadedTimeRanges
- @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinous.
+ @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
  @discussion Returns an NSArray of NSValues containing CMTimeRanges.
  */
-@property (nonatomic, readonly) NSArray *loadedTimeRanges;
+@property (nonatomic, readonly) NSArray<NSValue *> *loadedTimeRanges;
 
 /*!
  @property playbackLikelyToKeepUp
@@ -542,6 +547,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates that playback has consumed all buffered media and that playback will stall or end */
 @property (nonatomic, readonly, getter=isPlaybackBufferEmpty) BOOL playbackBufferEmpty;
+
+/*!
+ @property canUseNetworkResourcesForLiveStreamingWhilePaused
+ @abstract Indicates whether the player item can use network resources to keep playback state up to date while paused
+ @discussion
+	For live streaming content, the player item may need to use extra networking and power resources to keep playback state up to date when paused.  For example, when this property is set to YES, the seekableTimeRanges property will be periodically updated to reflect the current state of the live stream.
+ 
+	For clients linked on or after OS X 10.11 or iOS 9.0, the default value is NO.  To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
+ */
+@property (nonatomic, assign) BOOL canUseNetworkResourcesForLiveStreamingWhilePaused NS_AVAILABLE(10_11, 9_0);
 
 @end
 
@@ -576,7 +591,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    all media selection options in the group.
    Note that if multiple options within a group meet your criteria for selection according to locale or other considerations, and if these options are otherwise indistinguishable to you according to media characteristics that are meaningful for your application, content is typically authored so that the first available option that meets your criteria is appropriate for selection.
  */
-- (void)selectMediaOption:(AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
+- (void)selectMediaOption:(nullable AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
 
 /*!
  @method		selectMediaOptionAutomaticallyInMediaSelectionGroup:
@@ -596,7 +611,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
    If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
  */
-- (AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
+- (nullable AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
+
+/*!
+  @property		currentMediaSelection
+  @abstract		Provides an instance of AVMediaSelection carrying current selections for each of the receiver's media selection groups.
+*/
+@property (nonatomic, readonly) AVMediaSelection *currentMediaSelection NS_AVAILABLE(10_11, 9_0);
 
 @end
 
@@ -618,7 +639,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An AVPlayerItemNewAccessLogEntryNotification will be posted when new logging information becomes available. However, accessLog might already return a non-nil value even before the first notification is posted.
  @result		An autoreleased AVPlayerItemAccessLog instance.
  */
-- (AVPlayerItemAccessLog *)accessLog NS_AVAILABLE(10_7, 4_3);
+- (nullable AVPlayerItemAccessLog *)accessLog NS_AVAILABLE(10_7, 4_3);
 
 /*!
  @method		errorLog
@@ -627,7 +648,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  				If nil is returned then there is no logging information currently available for this AVPlayerItem.
  @result		An autoreleased AVPlayerItemErrorLog instance.
  */
-- (AVPlayerItemErrorLog *)errorLog NS_AVAILABLE(10_7, 4_3); 
+- (nullable AVPlayerItemErrorLog *)errorLog NS_AVAILABLE(10_7, 4_3);
 
 @end
 
@@ -662,9 +683,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @abstract		The collection of associated outputs.
  */
 
-@property (nonatomic, readonly) NSArray *outputs NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, readonly) NSArray<AVPlayerItemOutput *> *outputs NS_AVAILABLE(10_8, 6_0);
 
 @end
+
+@class AVPlayerItemAccessLogEvent;
 
 /*!
  @class			AVPlayerItemAccessLog
@@ -688,7 +711,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 				For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html
  @result		An autoreleased NSData instance.
  */
-- (NSData *)extendedLogData;
+- (nullable NSData *)extendedLogData;
 
 /*!
  @property		extendedLogDataStringEncoding
@@ -705,10 +728,11 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  				sequence of events contained in the access log.
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSArray *events;
+@property (nonatomic, readonly) NSArray<AVPlayerItemAccessLogEvent *> *events;
 
 @end
 
+@class AVPlayerItemErrorLogEvent;
 /*!
  @class			AVPlayerItemErrorLog
  @abstract		An AVPlayerItemErrorLog provides methods to retrieve the error log in a format suitable for serialization.
@@ -729,7 +753,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 				For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html
  @result		An autoreleased NSData instance.
  */
-- (NSData *)extendedLogData;
+- (nullable NSData *)extendedLogData;
 
 /*!
  @property		extendedLogDataStringEncoding
@@ -746,7 +770,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  				sequence of events contained in the error log.
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSArray *events;
+@property (nonatomic, readonly) NSArray<AVPlayerItemErrorLogEvent *> *events;
 
 @end
 
@@ -789,7 +813,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the date is unknown. Corresponds to "date".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSDate *playbackStartDate;
+@property (nonatomic, readonly, nullable) NSDate *playbackStartDate;
 
 /*!
  @property		URI
@@ -797,7 +821,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the URI is unknown. Corresponds to "uri".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *URI;
+@property (nonatomic, readonly, nullable) NSString *URI;
 
 /*!
  @property		serverAddress
@@ -805,7 +829,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *serverAddress;
+@property (nonatomic, readonly, nullable) NSString *serverAddress;
 
 /*!
  @property		numberOfServerAddressChanges
@@ -821,7 +845,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the GUID is unknown. Corresponds to "cs-guid".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *playbackSessionID;
+@property (nonatomic, readonly, nullable) NSString *playbackSessionID;
 
 /*!
  @property		playbackStartOffset
@@ -941,7 +965,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the playback type is unknown. Corresponds to "s-playback-type".
 				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *playbackType NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) NSString *playbackType NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property		mediaRequestsWWAN
@@ -980,7 +1004,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the date is unknown. Corresponds to "date".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSDate *date;
+@property (nonatomic, readonly, nullable) NSDate *date;
 
 /*!
  @property		URI
@@ -988,7 +1012,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the URI is unknown. Corresponds to "uri".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *URI;
+@property (nonatomic, readonly, nullable) NSString *URI;
 
 /*!
  @property		serverAddress
@@ -996,7 +1020,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *serverAddress;
+@property (nonatomic, readonly, nullable) NSString *serverAddress;
 
 /*!
  @property		playbackSessionID
@@ -1004,7 +1028,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned the GUID is unknown. Corresponds to "cs-guid".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *playbackSessionID;
+@property (nonatomic, readonly, nullable) NSString *playbackSessionID;
 
 /*!
  @property		errorStatusCode
@@ -1028,6 +1052,8 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @discussion	If nil is returned further information is not available. Corresponds to "comment".
  				This property is not observable.
  */
-@property (nonatomic, readonly) NSString *errorComment;
+@property (nonatomic, readonly, nullable) NSString *errorComment;
 
 @end
+
+NS_ASSUME_NONNULL_END

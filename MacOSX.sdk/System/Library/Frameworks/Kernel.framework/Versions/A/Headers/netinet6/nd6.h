@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -98,7 +98,6 @@ struct nd_ifinfo {
 	u_int8_t randomseed1[8]; /* lower 64 bits (usually the EUI64 IFID) */
 	u_int8_t randomid[8];	/* current random ID */
 };
-
 
 #define	ND6_IFF_PERFORMNUD		0x1
 #define	ND6_IFF_PROXY_PREFIXES		0x20

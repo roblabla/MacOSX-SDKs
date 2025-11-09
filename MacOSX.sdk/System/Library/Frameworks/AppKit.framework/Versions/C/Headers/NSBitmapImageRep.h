@@ -1,12 +1,16 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <AppKit/NSImageRep.h>
 #import <ApplicationServices/ApplicationServices.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class CIImage;
 @class NSColor;
@@ -52,20 +56,20 @@ typedef NS_OPTIONS(NSUInteger, NSBitmapFormat) {
     NS32BitBigEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 11)
 };
 
-APPKIT_EXTERN NSString* NSImageCompressionMethod;	// TIFF input/output (NSTIFFCompression in NSNumber)
-APPKIT_EXTERN NSString* NSImageCompressionFactor;	// TIFF/JPEG input/output (float in NSNumber)
-APPKIT_EXTERN NSString* NSImageDitherTransparency;	// GIF output (BOOL in NSNumber)
-APPKIT_EXTERN NSString* NSImageRGBColorTable;		// GIF input/output (packed RGB in NSData)
-APPKIT_EXTERN NSString* NSImageInterlaced;		// PNG output (BOOL in NSNumber)
-APPKIT_EXTERN NSString* NSImageColorSyncProfileData;	// TIFF,GIF input/output (NSData)
-APPKIT_EXTERN NSString* NSImageFrameCount;	// GIF input (int in NSNumber) (read-only)
-APPKIT_EXTERN NSString* NSImageCurrentFrame;	// GIF input (int in NSNumber)
-APPKIT_EXTERN NSString* NSImageCurrentFrameDuration;	// GIF input (float in NSNumber) (read-only)
-APPKIT_EXTERN NSString* NSImageLoopCount            ;	// GIF input (int in NSNumber) (read-only)
-APPKIT_EXTERN NSString* NSImageGamma                ;	// PNG input/output (float in NSNumber)
-APPKIT_EXTERN NSString* NSImageProgressive          ;	// JPEG input/output (BOOL in NSNumber)
-APPKIT_EXTERN NSString* NSImageEXIFData             ;	// JPEG input/output (NSDictionary)
-APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  NS_AVAILABLE_MAC(10_5); // JPEG output (NSColor)
+APPKIT_EXTERN NSString *NSImageCompressionMethod;	// TIFF input/output (NSTIFFCompression in NSNumber)
+APPKIT_EXTERN NSString *NSImageCompressionFactor;	// TIFF/JPEG input/output (float in NSNumber)
+APPKIT_EXTERN NSString *NSImageDitherTransparency;	// GIF output (BOOL in NSNumber)
+APPKIT_EXTERN NSString *NSImageRGBColorTable;		// GIF input/output (packed RGB in NSData)
+APPKIT_EXTERN NSString *NSImageInterlaced;		// PNG output (BOOL in NSNumber)
+APPKIT_EXTERN NSString *NSImageColorSyncProfileData;	// TIFF,GIF input/output (NSData)
+APPKIT_EXTERN NSString *NSImageFrameCount;	// GIF input (int in NSNumber) (read-only)
+APPKIT_EXTERN NSString *NSImageCurrentFrame;	// GIF input (int in NSNumber)
+APPKIT_EXTERN NSString *NSImageCurrentFrameDuration;	// GIF input (float in NSNumber) (read-only)
+APPKIT_EXTERN NSString *NSImageLoopCount            ;	// GIF input (int in NSNumber) (read-only)
+APPKIT_EXTERN NSString *NSImageGamma                ;	// PNG input/output (float in NSNumber)
+APPKIT_EXTERN NSString *NSImageProgressive          ;	// JPEG input/output (BOOL in NSNumber)
+APPKIT_EXTERN NSString *NSImageEXIFData             ;	// JPEG input/output (NSDictionary)
+APPKIT_EXTERN NSString *NSImageFallbackBackgroundColor  NS_AVAILABLE_MAC(10_5); // JPEG output (NSColor)
 
 @interface NSBitmapImageRep : NSImageRep <NSSecureCoding> {
     /*All instance variables are private*/
@@ -90,20 +94,21 @@ APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  NS_AVAILABLE_MAC(10_5); 
     id _properties;
 }
 
-- (instancetype)initWithFocusedViewRect:(NSRect)rect;
+- (nullable instancetype)initWithFocusedViewRect:(NSRect)rect;
 
-- (instancetype)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
-- (instancetype)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
+- (nullable instancetype)initWithBitmapDataPlanes:(unsigned char *__nullable *__nullable)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
+- (nullable instancetype)initWithBitmapDataPlanes:(unsigned char *__nullable *__nullable)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
 - (instancetype)initWithCGImage:(CGImageRef)cgImage NS_AVAILABLE_MAC(10_5);
 - (instancetype)initWithCIImage:(CIImage *)ciImage NS_AVAILABLE_MAC(10_5);
 
-+ (NSArray *)imageRepsWithData:(NSData *)data;	/* some file formats can contain multiple images */
++ (NSArray<NSImageRep *> *)imageRepsWithData:(NSData *)data;	/* some file formats can contain multiple images */
 
-+ (instancetype)imageRepWithData:(NSData *)data;	/* Convenience of initWithData: */
-- (instancetype)initWithData:(NSData *)data;
++ (nullable instancetype)imageRepWithData:(NSData *)data;	/* Convenience of initWithData: */
+- (nullable instancetype)initWithData:(NSData *)data;
 
-@property (readonly) unsigned char *bitmapData NS_RETURNS_INNER_POINTER;
-- (void)getBitmapDataPlanes:(unsigned char **)data;
+@property (nullable, readonly) unsigned char *bitmapData NS_RETURNS_INNER_POINTER;
+- (void)getBitmapDataPlanes:(unsigned char *__nullable *__nonnull)data;
+
 @property (getter=isPlanar, readonly) BOOL planar;
 @property (readonly) NSInteger samplesPerPixel;
 @property (readonly) NSInteger bitsPerPixel;
@@ -112,52 +117,54 @@ APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  NS_AVAILABLE_MAC(10_5); 
 @property (readonly) NSInteger numberOfPlanes;
 @property (readonly) NSBitmapFormat bitmapFormat;
 
-- (void)getCompression:(NSTIFFCompression *)compression factor:(float *)factor;
+- (void)getCompression:(nullable NSTIFFCompression *)compression factor:(nullable float *)factor;
 - (void)setCompression:(NSTIFFCompression)compression factor:(float)factor;
 
-@property (readonly, copy) NSData *TIFFRepresentation;
-- (NSData *)TIFFRepresentationUsingCompression:(NSTIFFCompression)comp factor:(float)factor;
+@property (nullable, readonly, copy) NSData *TIFFRepresentation;
+- (nullable NSData *)TIFFRepresentationUsingCompression:(NSTIFFCompression)comp factor:(float)factor;
 
-+ (NSData *)TIFFRepresentationOfImageRepsInArray:(NSArray *)array;
-+ (NSData *)TIFFRepresentationOfImageRepsInArray:(NSArray *)array usingCompression:(NSTIFFCompression)comp factor:(float)factor;
++ (nullable NSData *)TIFFRepresentationOfImageRepsInArray:(NSArray<NSImageRep *> *)array;
++ (nullable NSData *)TIFFRepresentationOfImageRepsInArray:(NSArray<NSImageRep *> *)array usingCompression:(NSTIFFCompression)comp factor:(float)factor;
 
-+ (void)getTIFFCompressionTypes:(const NSTIFFCompression **)list count:(NSInteger *)numTypes;
-+ (NSString *)localizedNameForTIFFCompressionType:(NSTIFFCompression)compression;
++ (void)getTIFFCompressionTypes:(const NSTIFFCompression * __nullable * __nonnull)list count:(NSInteger *)numTypes;
++ (nullable NSString *)localizedNameForTIFFCompressionType:(NSTIFFCompression)compression;
 - (BOOL)canBeCompressedUsing:(NSTIFFCompression)compression;
 
 /* Support for colorization of grayscale images.  Maps the image such that:
 Gray value of midPoint -> midPointColor, black -> shadowColor, white -> lightColor.
 Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with optional alpha).
 */
-- (void)colorizeByMappingGray:(CGFloat)midPoint toColor:(NSColor *)midPointColor blackMapping:(NSColor *)shadowColor whiteMapping:(NSColor *)lightColor;
+- (void)colorizeByMappingGray:(CGFloat)midPoint toColor:(nullable NSColor *)midPointColor blackMapping:(nullable NSColor *)shadowColor whiteMapping:(nullable NSColor *)lightColor;
 
 - (instancetype)initForIncrementalLoad;
 - (NSInteger)incrementalLoadFromData:(NSData*)data complete:(BOOL)complete;
 
 - (void)setColor:(NSColor*)color atX:(NSInteger)x y:(NSInteger)y;
-- (NSColor*)colorAtX:(NSInteger)x y:(NSInteger)y;
+- (nullable NSColor *)colorAtX:(NSInteger)x y:(NSInteger)y;
 
 - (void)getPixel:(NSUInteger[])p atX:(NSInteger)x y:(NSInteger)y;
 - (void)setPixel:(NSUInteger[])p atX:(NSInteger)x y:(NSInteger)y;
 
-@property (readonly) CGImageRef CGImage NS_AVAILABLE_MAC(10_5);
+@property (nullable, readonly) CGImageRef CGImage NS_AVAILABLE_MAC(10_5);
 
 
 @property (readonly, strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
 
-- (NSBitmapImageRep *)bitmapImageRepByConvertingToColorSpace:(NSColorSpace *)targetSpace renderingIntent:(NSColorRenderingIntent)renderingIntent NS_AVAILABLE_MAC(10_6);
-- (NSBitmapImageRep *)bitmapImageRepByRetaggingWithColorSpace:(NSColorSpace *)newSpace NS_AVAILABLE_MAC(10_6);
+- (nullable NSBitmapImageRep *)bitmapImageRepByConvertingToColorSpace:(NSColorSpace *)targetSpace renderingIntent:(NSColorRenderingIntent)renderingIntent NS_AVAILABLE_MAC(10_6);
+- (nullable NSBitmapImageRep *)bitmapImageRepByRetaggingWithColorSpace:(NSColorSpace *)newSpace NS_AVAILABLE_MAC(10_6);
 
 @end
 
 
 @interface NSBitmapImageRep (NSBitmapImageFileTypeExtensions)
 
-+ (NSData *)representationOfImageRepsInArray:(NSArray *)imageReps usingType:(NSBitmapImageFileType)storageType properties:(NSDictionary *)properties;
++ (nullable NSData *)representationOfImageRepsInArray:(NSArray<NSImageRep *> *)imageReps usingType:(NSBitmapImageFileType)storageType properties:(NSDictionary<NSString *, id> *)properties;
 
-- (NSData *)representationUsingType:(NSBitmapImageFileType)storageType properties:(NSDictionary *)properties;
+- (nullable NSData *)representationUsingType:(NSBitmapImageFileType)storageType properties:(NSDictionary<NSString *, id> *)properties;
 
-- (void)setProperty:(NSString *)property withValue:(id)value;
-- (id)valueForProperty:(NSString *)property;
+- (void)setProperty:(NSString *)property withValue:(nullable id)value;
+- (nullable id)valueForProperty:(NSString *)property;
 
 @end
+
+NS_ASSUME_NONNULL_END

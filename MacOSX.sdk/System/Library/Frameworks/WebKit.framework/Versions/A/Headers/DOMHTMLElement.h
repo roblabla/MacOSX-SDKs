@@ -37,9 +37,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *dir;
 @property int tabIndex;
 @property (copy) NSString *accessKey NS_AVAILABLE_MAC(10_8);
-@property (copy) NSString *innerHTML;
 @property (copy) NSString *innerText;
-@property (copy) NSString *outerHTML;
 @property (copy) NSString *outerText;
 @property (readonly, strong) DOMHTMLCollection *children;
 @property (copy) NSString *contentEditable;

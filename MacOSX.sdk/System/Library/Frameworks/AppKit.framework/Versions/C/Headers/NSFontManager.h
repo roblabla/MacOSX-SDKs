@@ -1,14 +1,18 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 
-@class NSArray, NSDictionary, NSFont, NSFontPanel, NSMenu, NSFontDescriptor;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSFont, NSFontPanel, NSMenu, NSFontDescriptor;
 
 /*
  * Font Traits
@@ -75,52 +79,54 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     NSUInteger _fmReserved4;
 }
 
-+ (void)setFontPanelFactory:(Class)factoryId;
-+ (void)setFontManagerFactory:(Class)factoryId;
++ (void)setFontPanelFactory:(nullable Class)factoryId;
++ (void)setFontManagerFactory:(nullable Class)factoryId;
 + (NSFontManager *)sharedFontManager;
 
 @property (getter=isMultiple, readonly) BOOL multiple;
-@property (readonly, strong) NSFont *selectedFont;
+@property (nullable, readonly, strong) NSFont *selectedFont;
 - (void)setSelectedFont:(NSFont *)fontObj isMultiple:(BOOL)flag;
 - (void)setFontMenu:(NSMenu *)newMenu;
-- (NSMenu *)fontMenu:(BOOL)create;
-- (NSFontPanel *)fontPanel:(BOOL)create;
-- (NSFont *)fontWithFamily:(NSString *)family traits:(NSFontTraitMask)traits weight:(NSInteger)weight size:(CGFloat)size;
+- (nullable NSMenu *)fontMenu:(BOOL)create;
+- (nullable NSFontPanel *)fontPanel:(BOOL)create;
+- (nullable NSFont *)fontWithFamily:(NSString *)family traits:(NSFontTraitMask)traits weight:(NSInteger)weight size:(CGFloat)size;
 - (NSFontTraitMask)traitsOfFont:(NSFont *)fontObj;
 - (NSInteger)weightOfFont:(NSFont *)fontObj;
 
 /* Three methods for supporting app font management.  The fonts and names used/returned by these functions are the same as those used by the NSFontPanel.  The third method below takes as input a name as returned by "availableFontFamilies" and returns an NSArray of NSArrays.  The elements of the "inner" arrays are: (0) the font's name, (1) non-family part of the name as used by NSFontPanel, (2) an NSNumber indicating the weight, and (3) an NSNumber indicating the traits.
 */
-@property (readonly, copy) NSArray *availableFonts;
-@property (readonly, copy) NSArray *availableFontFamilies;
-- (NSArray *)availableMembersOfFontFamily:(NSString *)fam;
+@property (readonly, copy) NSArray<NSString *> *availableFonts;
+@property (readonly, copy) NSArray<NSString *> *availableFontFamilies;
+- (nullable NSArray<NSArray *> *)availableMembersOfFontFamily:(NSString *)fam;
 
 - (NSFont *)convertFont:(NSFont *)fontObj;
 - (NSFont *)convertFont:(NSFont *)fontObj toSize:(CGFloat)size;
-- (NSFont *)convertFont:(NSFont *)fontObj toFace:(NSString *)typeface;
+- (nullable NSFont *)convertFont:(NSFont *)fontObj toFace:(NSString *)typeface;
 - (NSFont *)convertFont:(NSFont *)fontObj toFamily:(NSString *)family;
 - (NSFont *)convertFont:(NSFont *)fontObj toHaveTrait:(NSFontTraitMask)trait;
 - (NSFont *)convertFont:(NSFont *)fontObj toNotHaveTrait:(NSFontTraitMask)trait;
 - (NSFont *)convertWeight:(BOOL)upFlag ofFont:(NSFont *)fontObj;
 @property (getter=isEnabled) BOOL enabled;
 @property SEL action;
-@property (readonly) BOOL sendAction;
-@property (assign) id delegate;
+@property (nullable, assign) id delegate NS_DEPRECATED_MAC(10_0, 10_11, "NSFontManager doesn't have any delegate method. This property should not be used.");
 
-- (NSString *) localizedNameForFamily:(NSString *)family face:(NSString *)faceKey;
 
-- (void)setSelectedAttributes:(NSDictionary *)attributes isMultiple:(BOOL)flag;
-- (NSDictionary *)convertAttributes:(NSDictionary *)attributes;
+- (BOOL)sendAction;
 
-- (NSArray *)availableFontNamesMatchingFontDescriptor:(NSFontDescriptor *)descriptor;
+- (NSString *) localizedNameForFamily:(NSString *)family face:(nullable NSString *)faceKey;
 
-@property (readonly, copy) NSArray *collectionNames;
-- (NSArray *)fontDescriptorsInCollection:(NSString *)collectionNames;
-- (BOOL)addCollection:(NSString *)collectionName options:(NSFontCollectionOptions)collectionOptions;
-- (BOOL)removeCollection:(NSString *)collectionName;
+- (void)setSelectedAttributes:(NSDictionary<NSString *, id> *)attributes isMultiple:(BOOL)flag;
+- (NSDictionary<NSString *, id> *)convertAttributes:(NSDictionary<NSString *, id> *)attributes;
 
-- (void)addFontDescriptors:(NSArray *)descriptors  toCollection:(NSString *)collectionName;
-- (void)removeFontDescriptor:(NSFontDescriptor *)descriptor fromCollection:(NSString *)collection;
+- (nullable NSArray *)availableFontNamesMatchingFontDescriptor:(NSFontDescriptor *)descriptor NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFontDescriptor matchingFontDescriptorsWithMandatoryKeys:] instead");
+
+@property (readonly, copy) NSArray *collectionNames NS_DEPRECATED_MAC(10_0, 10_11, "Use +[NSFontCollection allFontCollectionNames] instead");
+- (nullable NSArray *)fontDescriptorsInCollection:(NSString *)collectionNames NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFontCollection matchingDescriptors] instead");
+- (BOOL)addCollection:(NSString *)collectionName options:(NSFontCollectionOptions)collectionOptions NS_DEPRECATED_MAC(10_0, 10_11, "Use +[NSFontCollection showFontCollection:withName:visibility:name:] instead");
+- (BOOL)removeCollection:(NSString *)collectionName NS_DEPRECATED_MAC(10_0, 10_11, "Use +[NSFontCollection hideFontCollectionWithName:visibility:error:] instead");
+
+- (void)addFontDescriptors:(NSArray *)descriptors  toCollection:(NSString *)collectionName NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSMutableFontCollection addQueryForDescriptors:] instead");
+- (void)removeFontDescriptor:(NSFontDescriptor *)descriptor fromCollection:(NSString *)collection NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSMutableFontCollection removeQueryForDescriptors:] instead");
 
 /* Returns the current font action used by -convertFont:. This method is intended to be invoked to query the font conversion action while the action message (usually -changeFont:) is being invoked.
  */
@@ -130,7 +136,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
  */
 - (NSFontTraitMask)convertFontTraits:(NSFontTraitMask)traits NS_AVAILABLE_MAC(10_5);
 
-@property (weak) id target NS_AVAILABLE_MAC(10_5);
+@property (nullable, weak) id target NS_AVAILABLE_MAC(10_5);
 
 @end
 
@@ -140,28 +146,30 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /* The following is like "availableFonts", but checks traits.  Returns an auto-released instance.  To get fonts with "non-italic" or "non-bold" combine the flags NSUnitalicFontMask and/or NSUnboldFontMask as the argument "someTraits".
 */
-- (NSArray *)availableFontNamesWithTraits:(NSFontTraitMask)someTraits;
+- (nullable NSArray<NSString *> *)availableFontNamesWithTraits:(NSFontTraitMask)someTraits;
 
 /* These methods are action messages sent from Font Menu items:
 */
-- (void)addFontTrait:(id)sender;
-- (void)removeFontTrait:(id)sender;
-- (void)modifyFontViaPanel:(id)sender;
-- (void)modifyFont:(id)sender;
-- (void)orderFrontFontPanel:(id)sender;
-- (void)orderFrontStylesPanel:(id)sender;
+- (void)addFontTrait:(nullable id)sender;
+- (void)removeFontTrait:(nullable id)sender;
+- (void)modifyFontViaPanel:(nullable id)sender;
+- (void)modifyFont:(nullable id)sender;
+- (void)orderFrontFontPanel:(nullable id)sender;
+- (void)orderFrontStylesPanel:(nullable id)sender;
 
 @end
 
 /* This method is perhaps inappropriately named; it is sent to the delegate of the shared NSFontPanel instance, not to the delegate of the NSFontManager.
 */
 @interface NSObject(NSFontManagerDelegate)
-- (BOOL)fontManager:(id)sender willIncludeFont:(NSString *)fontName;
+- (BOOL)fontManager:(id)sender willIncludeFont:(NSString *)fontName NS_DEPRECATED_MAC(10_0, 10_11, "Use NSFontCollection for providing filtered font lists");
 @end
 
 /* This is the message that's propagated up the responder chain.
 */
 @interface NSObject(NSFontManagerResponderMethod)
-- (void)changeFont:(id)sender;
+- (void)changeFont:(nullable id)sender;
 @end
+
+NS_ASSUME_NONNULL_END
 

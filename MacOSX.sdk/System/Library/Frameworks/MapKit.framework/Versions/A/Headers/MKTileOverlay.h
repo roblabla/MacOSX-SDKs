@@ -8,11 +8,13 @@
 #import <MapKit/MKFoundation.h>
 #import <MapKit/MKOverlay.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // MKTileOverlay represents a data source for raster image tiles in the spherical mercator projection (EPSG:3857).
-MK_CLASS_AVAILABLE(10_9, 7_0)
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKTileOverlay : NSObject <MKOverlay>
 
-- (instancetype)initWithURLTemplate:(NSString *)URLTemplate NS_DESIGNATED_INITIALIZER; // URL template is a string where the substrings "{x}", "{y}", "{z}", and "{scale}" are replaced with values from a tile path to create a URL to load. For example: http://server/path?x={x}&y={y}&z={z}&scale={scale}.
+- (instancetype)initWithURLTemplate:(nullable NSString *)URLTemplate NS_DESIGNATED_INITIALIZER; // URL template is a string where the substrings "{x}", "{y}", "{z}", and "{scale}" are replaced with values from a tile path to create a URL to load. For example: http://server/path?x={x}&y={y}&z={z}&scale={scale}.
 
 @property CGSize tileSize; // default is 256x256
 
@@ -22,7 +24,7 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 @property NSInteger minimumZ;
 @property NSInteger maximumZ;
 
-@property (readonly) NSString *URLTemplate;
+@property (readonly, nullable) NSString *URLTemplate;
 
 @property (nonatomic) BOOL canReplaceMapContent;
 
@@ -40,8 +42,10 @@ typedef struct {
 
 - (NSURL *)URLForTilePath:(MKTileOverlayPath)path; // default implementation fills out the URLTemplate
 
-// Load the requested tile and call the callback block with the tile data or with an error if the tile could not be loaded. The default implementation first uses -URLForTilePath to get a URL and then it loads it asynchronously via NSURLConnection.
-- (void)loadTileAtPath:(MKTileOverlayPath)path result:(void (^)(NSData *tileData, NSError *error))result; 
+// Load the requested tile and call the callback block with the tile data or with an error if the tile could not be loaded. The default implementation first uses -URLForTilePath to get a URL and then it loads it asynchronously.
+- (void)loadTileAtPath:(MKTileOverlayPath)path result:(void (^)(NSData * __nullable tileData, NSError * __nullable error))result;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

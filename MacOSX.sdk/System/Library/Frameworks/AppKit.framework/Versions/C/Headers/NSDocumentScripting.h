@@ -1,11 +1,13 @@
 /*
         NSDocumentScripting.h
         AppKit Framework
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSDocument.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSCloseCommand;
 @class NSScriptCommand;
@@ -16,10 +18,12 @@
 
 @property (copy) NSString *lastComponentOfFileName;
 
-- (id)handleSaveScriptCommand:(NSScriptCommand *)command;
-- (id)handleCloseScriptCommand:(NSCloseCommand *)command;
-- (id)handlePrintScriptCommand:(NSScriptCommand *)command;
+- (nullable id)handleSaveScriptCommand:(NSScriptCommand *)command;
+- (nullable id)handleCloseScriptCommand:(NSCloseCommand *)command;
+- (nullable id)handlePrintScriptCommand:(NSScriptCommand *)command;
 
 @property (readonly, strong) NSScriptObjectSpecifier *objectSpecifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

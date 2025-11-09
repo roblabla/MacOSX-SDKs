@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+NS_ASSUME_NONNULL_BEGIN
 
 @class CBCharacteristic, CBUUID;
 
@@ -40,7 +40,7 @@ CB_EXTERN_CLASS @interface CBDescriptor : NSObject
  *      A back-pointer to the characteristic this descriptor belongs to.
  *
  */
-@property(weak, readonly, nonatomic) CBCharacteristic *characteristic;
+@property(assign, readonly, nonatomic) CBCharacteristic *characteristic;
 
 /*!
  *  @property UUID
@@ -58,7 +58,7 @@ CB_EXTERN_CLASS @interface CBDescriptor : NSObject
  *      The value of the descriptor. The corresponding value types for the various descriptors are detailed in @link CBUUID.h @/link.
  *
  */
-@property(retain, readonly) id value;
+@property(retain, readonly, nullable) id value;
 
 @end
 
@@ -90,6 +90,8 @@ CB_EXTERN_CLASS @interface CBMutableDescriptor : CBDescriptor
  *					once the parent service has been published.
  *
  */
-- (id)initWithType:(CBUUID *)UUID value:(id)value;
+- (id)initWithType:(CBUUID *)UUID value:(nullable id)value;
 
 @end
+
+NS_ASSUME_NONNULL_END

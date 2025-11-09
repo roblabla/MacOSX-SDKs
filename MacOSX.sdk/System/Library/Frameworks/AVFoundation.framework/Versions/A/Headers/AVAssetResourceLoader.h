@@ -3,14 +3,14 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
 /*!
   @class		AVAssetResourceLoader
 
-  @abstract		An AVAssetResourceLoader mediates requests to load resources required by an AVURLAsset by asking a delegate object that you provide for assistance. When a resource is required that cannot be loaded by the AVURLAsset itself, the resource loader makes a request of its delegate to load it and proceeds according to the delegate’s response.
+  @abstract		An AVAssetResourceLoader mediates requests to load resources required by an AVURLAsset by asking a delegate object that you provide for assistance. When a resource is required that cannot be loaded by the AVURLAsset itself, the resource loader makes a request of its delegate to load it and proceeds according to the delegate's response.
 	
   @discussion
 	You should not create resource loader objects. Instead, you should retrieve a resource loader from the resourceLoader property of an AVURLAsset and use it to assign your delegate object for resource loading.
@@ -19,6 +19,8 @@
 */
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol AVAssetResourceLoaderDelegate;
 
@@ -31,6 +33,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 @private
 	AVAssetResourceLoaderInternal *_resourceLoader;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
  @method 		setDelegate:queue:
@@ -40,15 +43,15 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @param			delegateQueue
 				A dispatch queue on which all delegate methods will be invoked.
 */
-- (void)setDelegate:(id<AVAssetResourceLoaderDelegate>)delegate queue:(dispatch_queue_t)delegateQueue;
+- (void)setDelegate:(nullable id <AVAssetResourceLoaderDelegate>)delegate queue:(nullable dispatch_queue_t)delegateQueue;
 
 /*!
  @property 		delegate
  @abstract		The receiver's delegate.
  @discussion
-  The value of this property is an object conforming to the AVAssetResourceLoaderDelegate protocol. The delegate is set using the setDelegate:queue: method.
+  The value of this property is an object conforming to the AVAssetResourceLoaderDelegate protocol. The delegate is set using the setDelegate:queue: method. The delegate is held using a zeroing-weak reference, so this property will have a value of nil after a delegate that was previously set has been deallocated.
 */
-@property (nonatomic, readonly) id<AVAssetResourceLoaderDelegate> delegate;
+@property (nonatomic, readonly, weak, nullable) id <AVAssetResourceLoaderDelegate> delegate;
 
 /*!
  @property 		delegateQueue
@@ -56,7 +59,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @discussion
   The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
 */
-@property (nonatomic, readonly) dispatch_queue_t delegateQueue;
+@property (nonatomic, readonly, nullable) dispatch_queue_t delegateQueue;
 
 @end
 
@@ -155,6 +158,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 @private
 	AVAssetResourceLoadingRequestInternal *_loadingRequest;
 }
+AV_INIT_UNAVAILABLE
 
 /*! 
  @property 		request
@@ -180,31 +184,31 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @property 		contentInformationRequest
  @abstract		An instance of AVAssetResourceLoadingContentInformationRequest that you should populate with information about the resource. The value of this property will be nil if no such information is being requested.
 */
-@property (nonatomic, readonly) AVAssetResourceLoadingContentInformationRequest *contentInformationRequest NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) AVAssetResourceLoadingContentInformationRequest *contentInformationRequest NS_AVAILABLE(10_9, 7_0);
 
 /*! 
  @property 		dataRequest
  @abstract		An instance of AVAssetResourceLoadingDataRequest that indicates the range of resource data that's being requested. The value of this property will be nil if no data is being requested.
 */
-@property (nonatomic, readonly) AVAssetResourceLoadingDataRequest *dataRequest NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) AVAssetResourceLoadingDataRequest *dataRequest NS_AVAILABLE(10_9, 7_0);
 
 /*! 
  @property 		response
  @abstract		Set the value of this property to an instance of NSURLResponse indicating a response to the loading request. If no response is needed, leave the value of this property set to nil.
 */
-@property (nonatomic, copy) NSURLResponse *response NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy, nullable) NSURLResponse *response NS_AVAILABLE(10_9, 7_0);
 
 /*! 
  @property 		redirect
  @abstract		Set the value of this property to an instance of NSURLRequest indicating a redirection of the loading request to another URL. If no redirection is needed, leave the value of this property set to nil.
  @discussion	AVAssetResourceLoader supports redirects to HTTP URLs only. Redirects to other URLs will result in a loading failure.
 */
-@property (nonatomic, copy) NSURLRequest *redirect NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy, nullable) NSURLRequest *redirect NS_AVAILABLE(10_9, 7_0);
 
 /*! 
  @method 		finishLoading   
  @abstract		Causes the receiver to treat the processing of the request as complete.
- @discussion	If a dataRequest is present and the resource does not contain the full extent of the data that has been requested according to the values of the requestedOffset and requestedLength properties of the dataRequest, you may invoke -finishLoading after you have provided as much of the requested data as the resource contains.
+ @discussion	If a dataRequest is present and the resource does not contain the full extent of the data that has been requested according to the values of the requestedOffset and requestedLength properties of the dataRequest, or if requestsAllDataToEndOfResource has a value of YES, you may invoke -finishLoading after you have provided as much of the requested data as the resource contains.
 */
 - (void)finishLoading NS_AVAILABLE(10_9, 7_0);
 
@@ -214,7 +218,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @param			error
  				An instance of NSError indicating the reason for failure.
 */
-- (void)finishLoadingWithError:(NSError *)error;
+- (void)finishLoadingWithError:(nullable NSError *)error;
 
 @end
 
@@ -240,7 +244,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		When a resource loading delegate accepts responsibility for loading a resource by returning YES from its implementation of resourceLoader:shouldWaitForLoadingOfRequestedResource:, it must check whether the contentInformationRequest property of the AVAssetResourceLoadingRequest is not nil. Whenever the value is not nil, the request includes a query for the information that AVAssetResourceLoadingContentInformationRequest encapsulates. In response to such queries, the resource loading delegate should set the values of the content information request's properties appropriately before invoking the AVAssetResourceLoadingRequest method finishLoading.
  
-		When finishLoading is invoked, the values of the properties of its contentInformationRequest property will, in part, determine how the requested resource is processed. For example, if the requested resource’s URL is the URL of an AVURLAsset and contentType is set by the resource loading delegate to a value that the underlying media system doesn’t recognize as a supported media file type, operations on the AVURLAsset, such as playback, are likely to fail.
+		When finishLoading is invoked, the values of the properties of its contentInformationRequest property will, in part, determine how the requested resource is processed. For example, if the requested resource's URL is the URL of an AVURLAsset and contentType is set by the resource loading delegate to a value that the underlying media system doesn't recognize as a supported media file type, operations on the AVURLAsset, such as playback, are likely to fail.
 */
 
 @class AVAssetResourceLoadingContentInformationRequestInternal;
@@ -250,13 +254,14 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @private
 	AVAssetResourceLoadingContentInformationRequestInternal *_contentInformationRequest;
 }
+AV_INIT_UNAVAILABLE
 
 /*! 
  @property 		contentType
  @abstract		A UTI that indicates the type of data contained by the requested resource.
  @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
 */
-@property (nonatomic, copy) NSString *contentType;
+@property (nonatomic, copy, nullable) NSString *contentType;
 
 /*! 
  @property 		contentLength
@@ -277,7 +282,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  @abstract		For resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it.
  @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
  */
-@property (nonatomic, copy) NSDate *renewalDate NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, copy, nullable) NSDate *renewalDate NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -301,6 +306,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @private
 	AVAssetResourceLoadingDataRequestInternal *_dataRequest;
 }
+AV_INIT_UNAVAILABLE
 
 /*! 
  @property 		requestedOffset
@@ -311,9 +317,18 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 /*! 
  @property 		requestedLength
  @abstract		The length of the data requested.
- @discussion	If the content length of the resource is not precisely known, the sum of requestedLength and requestedOffset may be greater than the actual content length of the resource. When this occurs, you should attempt to provide as much of the requested data from the requestedOffset as the resource contains before invoking either -finishLoading (if you succeed) or -finishLoadingWithError: (if you encounter a failure in the course of providing the data).
+ @discussion	Note that requestsAllDataToEndOfResource will be set to YES when the entire remaining length of the resource is being requested from requestedOffset to the end of the resource. This can occur even when the content length has not yet been reported by you via a prior finished loading request.
+ 				When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained.
+ 				When requestsAllDataToEndOfResource is YES and the content length has not yet been provided by you via a prior finished loading request, the value of requestedLength is set to NSIntegerMax. Starting in OS X 10.11 and iOS 9.0, in 32-bit applications requestedLength is also set to NSIntegerMax when all of the remaining resource data is being requested and the known length of the remaining data exceeds NSIntegerMax.
 */
 @property (nonatomic, readonly) NSInteger requestedLength;
+
+/*! 
+ @property 		requestsAllDataToEndOfResource
+ @abstract		Specifies that the entire remaining length of the resource from requestedOffset to the end of the resource is being requested.
+ @discussion	When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained.
+*/
+@property (nonatomic, readonly) BOOL requestsAllDataToEndOfResource NS_AVAILABLE(10_11, 9_0);
 
 /*! 
  @property 		currentOffset
@@ -332,8 +347,18 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 @end
 
+@interface AVAssetResourceLoader (AVAssetResourceLoaderContentKeySupport)
 
-@interface AVAssetResourceLoadingRequest (AVAssetResourceLoader_ContentKeyRequestSupport)
+/*!
+ @property 		preloadsEligibleContentKeys
+ @abstract		When YES, eligible content keys will be loaded as eagerly as possible, potentially handled by the delegate. Setting to YES may result in network activity.
+ @discussion	Any work done as a result of setting this property will be performed asynchronously.
+*/
+@property (nonatomic) BOOL preloadsEligibleContentKeys NS_AVAILABLE(10_11, 9_0);
+
+@end
+
+@interface AVAssetResourceLoadingRequest (AVAssetResourceLoadingRequestContentKeyRequestSupport)
 
 /*! 
  @method 		streamingContentKeyRequestDataForApp:contentIdentifier:options:error:   
@@ -348,10 +373,30 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  				If obtaining the streaming content key request fails, will be set to an instance of NSError describing the failure.
  @result		The key request data that must be transmitted to the key vendor to obtain the content key.
 */
-- (NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(NSDictionary *)options error:(NSError **)outError;
+- (nullable NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * __nullable * __nullable)outError;
+
+/*! 
+ @method 		persistentContentKeyFromKeyVendorResponse:options:error:
+ @abstract		Obtains a persistable content key from a context.
+ @param			keyVendorResponse
+ 				The response returned from the key vendor as a result of a request generated from streamingContentKeyRequestDataForApp:contentIdentifier:options:error:.
+ @param			options
+ 				Additional information necessary to obtain the persistable content key, or nil if none.
+ @param			error
+ 				If obtaining the persistable content key fails, will be set to an instance of NSError describing the failure.
+ @result		The persistable content key data that may be stored offline to answer future loading requests of the same content key.
+ @discussion	The data returned from this method may be used to immediately satisfy an AVAssetResourceLoadingDataRequest, as well as any subsequent requests for the same key url. The value of AVAssetResourceLoadingContentInformationRequest.contentType must be set to AVStreamingKeyDeliveryPersistentContentKeyType when responding with data created with this method.
+*/
+- (NSData *)persistentContentKeyFromKeyVendorResponse:(NSData *)keyVendorResponse options:(nullable NSDictionary<NSString *, id> *)options error:(NSError **)outError NS_AVAILABLE_IOS(9_0);
 
 @end
 
+// Options keys for use with -[AVAssetResourceLoadingRequest streamingContentKeyRequestDataForApp:contentIdentifier:trackID:options:error:]
+/*!
+ @constant		AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey
+ @abstract		Specifies whether the content key request should require a persistable key to be returned from the key vendor. Value should be a NSNumber created with +[NSNumber numberWithBool:].
+*/
+AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey NS_AVAILABLE_IOS(9_0);
 
 @interface AVAssetResourceLoadingRequest (AVAssetResourceLoadingRequestDeprecated)
 
@@ -370,6 +415,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 					-[AVAssetResourceLoadingDataRequest respondWithData:] to provide data, and
 					-[AVAssetResourceLoadingRequest finishLoading] to indicate that loading is finished.
 */
-- (void)finishLoadingWithResponse:(NSURLResponse *)response data:(NSData *)data redirect:(NSURLRequest *)redirect NS_DEPRECATED_IOS(6_0, 7_0);
+- (void)finishLoadingWithResponse:(nullable NSURLResponse *)response data:(nullable NSData *)data redirect:(nullable NSURLRequest *)redirect NS_DEPRECATED_IOS(6_0, 7_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 
 #import <GameController/GameController.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  A GCExtendedGamepadSnapshot snapshot is a concrete GCExtendedGamepad implementation. It can be used directly in an
  application to implement controller input replays. It is also returned as the result of polling a controller.
@@ -20,7 +22,7 @@
  */
 GAMECONTROLLER_EXPORT
 @interface GCExtendedGamepadSnapshot : GCExtendedGamepad
-@property (copy) NSData *snapshotData;
+@property (atomic, copy) NSData *snapshotData;
 
 - (instancetype)initWithSnapshotData:(NSData *)data;
 - (instancetype)initWithController:(GCController *)controller snapshotData:(NSData *)data;
@@ -35,26 +37,26 @@ typedef struct {
     
     // Extended gamepad data
     // Axes in the range [-1.0, 1.0]
-    float_t dpadX;
-    float_t dpadY;
+    float dpadX;
+    float dpadY;
     
     // Buttons in the range [0.0, 1.0]
-    float_t buttonA;
-    float_t buttonB;
-    float_t buttonX;
-    float_t buttonY;
-    float_t leftShoulder;
-    float_t rightShoulder;
+    float buttonA;
+    float buttonB;
+    float buttonX;
+    float buttonY;
+    float leftShoulder;
+    float rightShoulder;
 
     // Axes in the range [-1.0, 1.0]
-    float_t leftThumbstickX;
-    float_t leftThumbstickY;
-    float_t rightThumbstickX;
-    float_t rightThumbstickY;
+    float leftThumbstickX;
+    float leftThumbstickY;
+    float rightThumbstickX;
+    float rightThumbstickY;
     
     // Buttons in the range [0.0, 1.0]
-    float_t leftTrigger;
-    float_t rightTrigger;
+    float leftTrigger;
+    float rightTrigger;
 
 } GCExtendedGamepadSnapShotDataV100;
 #pragma pack(pop)
@@ -64,7 +66,7 @@ typedef struct {
  @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
  */
 GAMECONTROLLER_EXPORT
-BOOL GCExtendedGamepadSnapShotDataV100FromNSData(GCExtendedGamepadSnapShotDataV100 *snapshotData, NSData *data);
+BOOL GCExtendedGamepadSnapShotDataV100FromNSData(GCExtendedGamepadSnapShotDataV100 *__nullable snapshotData, NSData *__nullable data);
 
 /**Creates an NSData object from a v100 snapshot.
  If the version and size is not set in the snapshot the data will automatically have version 0x100 and sizeof(GCExtendedGamepadSnapShotDataV100) set as the values implicitly.
@@ -72,4 +74,6 @@ BOOL GCExtendedGamepadSnapShotDataV100FromNSData(GCExtendedGamepadSnapShotDataV1
  @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCExtendedGamepadSnapshot.snapshotData
  */
 GAMECONTROLLER_EXPORT
-NSData *NSDataFromGCExtendedGamepadSnapShotDataV100(GCExtendedGamepadSnapShotDataV100 *snapshotData);
+NSData *__nullable NSDataFromGCExtendedGamepadSnapShotDataV100(GCExtendedGamepadSnapShotDataV100 *__nullable snapshotData);
+
+NS_ASSUME_NONNULL_END

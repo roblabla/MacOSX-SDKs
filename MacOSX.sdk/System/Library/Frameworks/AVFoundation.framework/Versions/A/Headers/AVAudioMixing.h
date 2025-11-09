@@ -2,11 +2,16 @@
     File:       AVAudioMixing.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioTypes.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class AVAudioNode, AVAudioConnectionPoint, AVAudioMixingDestination;
+@protocol AVAudioStereoMixing;
+@protocol AVAudio3DMixing;
 
 /*! @protocol   AVAudioMixing
     @abstract   Protocol that defines properties applicable to the input bus of a mixer
@@ -16,20 +21,54 @@
         specifically of type AVAudioMixerNode or AVAudioEnvironmentNode. The properties defined 
         by this protocol apply to the respective input bus of the mixer node that the source node is 
         connected to. Note that effect nodes cannot talk to their downstream mixer.
- 
-        The state of properties that are set via this protocol before the source node is connected 
-        to the mixer node are cached and then applied on the mixer once the physical connection is 
-        made. Similarly, after disconnection, the state of the properties are once again cached.
- 
-        Source nodes can be disconnected from one mixer and connected to another mixer with their 
-        mixing settings intact. For example, an AVAudioPlayerNode that is being used in a gaming scenario
-        can set up its 3D mixing settings and then move from one environment to another.
-*/
-@protocol AVAudioStereoMixing;
-@protocol AVAudio3DMixing;
 
+		Properties can be set either on the source node, or directly on individual mixer connections.
+		Source node properties are:
+		- applied to all existing mixer connections when set
+		- applied to new mixer connections
+		- preserved upon disconnection from mixers
+		- not affected by connections/disconnections to/from mixers
+		- not affected by any direct changes to properties on individual mixer connections
+
+		Individual mixer connection properties, when set, will override any values previously derived 
+		from the corresponding source node properties. However, if a source node property is 
+		subsequently set, it will override the corresponding property value of all individual mixer 
+		connections.
+		Unlike source node properties, individual mixer connection properties are not preserved upon
+		disconnection (see `AVAudioMixing(destinationForMixer:bus:)` and `AVAudioMixingDestination`).
+
+		Source nodes that are connected to a mixer downstream can be disconnected from
+		one mixer and connected to another mixer with source node's mixing settings intact.
+		For example, an AVAudioPlayerNode that is being used in a gaming scenario can set up its 
+		3D mixing settings and then move from one environment to another.
+*/
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @protocol AVAudioMixing <AVAudioStereoMixing, AVAudio3DMixing>
+
+/*! @method destinationForMixer:bus:
+	@abstract Returns the AVAudioMixingDestination object corresponding to specified mixer node and
+		its input bus
+	@discussion
+		When a source node is connected to multiple mixers downstream, setting AVAudioMixing 
+		properties directly on the source node will apply the change to all the mixers downstream. 
+		If you want to set/get properties on a specific mixer, use this method to get the 
+		corresponding AVAudioMixingDestination and set/get properties on it. 
+ 
+		Note:
+		- Properties set on individual AVAudioMixingDestination instances will not reflect at the
+			source node level.
+
+		- AVAudioMixingDestination reference returned by this method could become invalid when
+			there is any disconnection between the source and the mixer node. Hence this reference
+			should not be retained and should be fetched every time you want to set/get properties 
+			on a specific mixer.
+ 
+		If the source node is not connected to the specified mixer/input bus, this method
+		returns nil.
+		Calling this on an AVAudioMixingDestination instance returns self if the specified
+		mixer/input bus match its connection point, otherwise returns nil.
+*/
+- (nullable AVAudioMixingDestination *)destinationForMixer:(AVAudioNode *)mixer bus:(AVAudioNodeBus)bus NS_AVAILABLE(10_11, 9_0);
 
 /*! @property volume
     @abstract Set a bus's input volume
@@ -180,4 +219,27 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
 @property (nonatomic) AVAudio3DPoint position;
 
 @end
+
+/*! @class AVAudioMixingDestination
+	@abstract An object representing a connection to a mixer node from a node that
+		conforms to AVAudioMixing protocol
+	@discussion
+		A standalone instance of AVAudioMixingDestination cannot be created.
+		Only an instance vended by a source node (e.g. AVAudioPlayerNode) can be used
+		(see `AVAudioMixing`).
+*/
+NS_CLASS_AVAILABLE(10_11, 9_0)
+@interface AVAudioMixingDestination : NSObject <AVAudioMixing> {
+@private
+	void *_impl;
+}
+
+/*! @property connectionPoint
+	@abstract Returns the underlying mixer connection point
+*/
+@property (nonatomic, readonly) AVAudioConnectionPoint *connectionPoint;
+
+@end
+
+NS_ASSUME_NONNULL_END
 

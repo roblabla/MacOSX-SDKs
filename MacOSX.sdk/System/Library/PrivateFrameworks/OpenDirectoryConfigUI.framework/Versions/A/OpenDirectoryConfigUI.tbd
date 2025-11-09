@@ -48,7 +48,13 @@ exports:
                        _XSBonjourComboBox._hostNamesForAddresses, _XSBonjourComboBox._hostNamesForAddressesLock, 
                        _XSBonjourComboBox._isBrowsing, _XSBonjourComboBox._netServiceBrowser, 
                        _XSBonjourComboBox._netServices, _XSBonjourComboBox._serviceType, 
-                       _XSBonjourComboBox._session, _XSDisablingTextField.origTextColor ]
+                       _XSCharacterSetFormatter._allowsEmptyString, _XSCharacterSetFormatter._allowsNilValue, 
+                       _XSCharacterSetFormatter._charactersInCustomSet, 
+                       _XSCharacterSetFormatter._lengthIsLimitedByBytes, 
+                       _XSCharacterSetFormatter._maxLength, _XSCharacterSetFormatter._minLength, 
+                       _XSCharacterSetFormatter._validCharacters, _XSDisablingTextField.origTextColor, 
+                       _XSDomainNameFormatter._allowsMultipleValues, _XSDomainNameFormatter._allowsPortSuffix, 
+                       _XSDomainNameFormatter._allowsWildcardDomains ]
   - archs:           [ i386, x86_64 ]
     symbols:         [ _DirServersDictComparator, _NetServiceByHostNameComparator, 
                        _NetServiceByNameComparator, _ODCActiveDirectoryMaxComputerNameLength, 
@@ -58,5 +64,6 @@ exports:
                        _ODCRemoveODServerSheetController, _ODCServerComboBox, 
                        _ODCServersTableCell, _ODCServersView, _ODCServersViewController, 
                        _ODCSummaryView, _ODCSummaryViewController, _ODCUnbindFromADSheetController, 
-                       _ODCViewControllerBase, _XSBonjourComboBox, _XSDisablingTextField ]
+                       _ODCViewControllerBase, _XSBonjourComboBox, _XSCharacterSetFormatter, 
+                       _XSDisablingTextField, _XSDomainNameFormatter ]
 ...

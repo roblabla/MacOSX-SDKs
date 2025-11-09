@@ -23,6 +23,9 @@ typedef NS_ENUM(NSInteger, SKUniformType) {
     SKUniformTypeTexture            =    8,
 } NS_ENUM_AVAILABLE(10_10, 8_0);
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 NS_CLASS_AVAILABLE(10_10, 8_0)
 SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
 
@@ -97,14 +100,14 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
  */
 + (instancetype)uniformWithName:(NSString *)name floatMatrix4:(GLKMatrix4)value;
 
-/* The name by which this uniform will be refernced in a shader */
-@property (readonly) NSString *name;
+/* The name by which this uniform will be referenced in a shader */
+@property (nonatomic, readonly) NSString *name;
 
 /* Once created, a uniform is locked to a specific type, you may only access the property of this type */
-@property (readonly) SKUniformType uniformType;
+@property (nonatomic, readonly) SKUniformType uniformType;
 
 /* Access to the texture data associated with the current uniform */
-@property SKTexture *textureValue;
+@property (nonatomic, retain, nullable) SKTexture *textureValue;
 
 /* Access to the float value associated with the current uniform */
 @property float floatValue;
@@ -125,7 +128,7 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
 
 - (instancetype)initWithName:(NSString *)name;
 
-- (instancetype)initWithName:(NSString *)name texture:(SKTexture*)texture;
+- (instancetype)initWithName:(NSString *)name texture:(nullable SKTexture*)texture;
 
 - (instancetype)initWithName:(NSString *)name float:(float)value;
 - (instancetype)initWithName:(NSString *)name floatVector2:(GLKVector2)value;
@@ -137,3 +140,5 @@ SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
 - (instancetype)initWithName:(NSString *)name floatMatrix4:(GLKMatrix4)value;
 
 @end
+
+NS_ASSUME_NONNULL_END

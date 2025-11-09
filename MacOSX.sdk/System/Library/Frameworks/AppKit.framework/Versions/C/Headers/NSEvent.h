@@ -1,7 +1,7 @@
 /*
     NSEvent.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
@@ -11,10 +11,13 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSSet.h>
 #import <IOKit/hidsystem/IOLLEvent.h>
 #import <limits.h>
 
-@class NSGraphicsContext, NSWindow, NSTrackingArea, NSSet;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSGraphicsContext, NSWindow, NSTrackingArea;
 
 typedef NS_ENUM(NSUInteger, NSEventType) {        /* various types of events */
     NSLeftMouseDown             = 1,            
@@ -93,7 +96,7 @@ typedef NS_OPTIONS(unsigned long long, NSEventMask) { /* masks for the types of 
     NSEventMaskEndGesture NS_ENUM_AVAILABLE_MAC(10_5)       = 1 << NSEventTypeEndGesture,
     
 #if __LP64__
-    /* Note: You can only use these event masks on 64 bit. In other words, you cannot setup a local, nor global, event monitor for these event types on 32 bit. Also, you cannot search the event que for them (nextEventMatchingMask:...) on 32 bit.
+    /* Note: You can only use these event masks on 64 bit. In other words, you cannot setup a local, nor global, event monitor for these event types on 32 bit. Also, you cannot search the event queue for them (nextEventMatchingMask:...) on 32 bit.
      */
     NSEventMaskSmartMagnify NS_ENUM_AVAILABLE_MAC(10_8) = 1ULL << NSEventTypeSmartMagnify,
     NSEventMaskPressure NS_ENUM_AVAILABLE_MAC(10_10_3) = 1ULL << NSEventTypePressure,
@@ -176,6 +179,57 @@ typedef NS_ENUM(short, NSEventSubtype) {
     NSTabletProximityEventSubtype   = NX_SUBTYPE_TABLET_PROXIMITY,
     NSTouchEventSubtype NS_ENUM_AVAILABLE_MAC(10_6)             = NX_SUBTYPE_MOUSE_TOUCH
 };
+
+
+// NSPressureBehavior - The pressure gesture behavior that describes how a pressure gesture behaves and progresses
+// In general, pressure gestures begin when stage reaches 1 and end when stage reaches 0. This corresponds to the simultaneously generated mouse down/up events.
+typedef NS_ENUM(NSInteger, NSPressureBehavior) {
+    NSPressureBehaviorUnknown = -1,
+    
+    // The default primary behavior when otherwise not explicitly configured. In 10.10.3 the default is NSPressureBehaviorPrimaryDeepClick.
+    NSPressureBehaviorPrimaryDefault = 0,
+    
+    // Variable pressure with a small dynamic range after mouseDown.
+    // Mouse events: LeftMouse
+    // # of Stages: 1
+    // Allowed stage transitions: 1->0
+    // Actuations: mouseDown, mouseUp
+    // stageTransition: NO
+    NSPressureBehaviorPrimaryClick = 1,
+    
+    // Variable pressure with a large dynamic range after mouseDown suitable for drawing and general pressure use.
+    // Mouse events: LeftMouse
+    // # of Stages: 1
+    // Allowed stage transitions: 1->0
+    // Actuations: mouseDown, mouseUp
+    // stageTransition: NO
+    NSPressureBehaviorPrimaryGeneric = 2,
+    
+    // Variable pressure after mouseDown suitable for controlling speed. Used by NSAcceleratorButton
+    // Mouse events: LeftMouse
+    // # of Stages: 1
+    // Allowed stage transitions: 1->0
+    // Actuations: mouseDown, mouseUp
+    // stageTransition: NO
+    NSPressureBehaviorPrimaryAccelerator = 3,
+    
+    // Toggle between stages 1 and 2 until drag or mouse up (e.g. Force Click)
+    // Mouse events: LeftMouse
+    // # of Stages: 2 (stage 2 is disabled once dragging starts)
+    // Allowed stage transitions: 1->0, 1->2, 2->1, 2->0
+    // Actuations: mouseDown, mouseUp, 1->2, 2->1
+    // stageTransition: into and release from stage 2
+    NSPressureBehaviorPrimaryDeepClick = 5,
+    
+    // Toggle between stages 1 and 2 until mouse up (e.g. Force Click)
+    // Mouse events: LeftMouse
+    // # of Stages: 2
+    // Allowed stage transitions: 1->0, 1->2, 2->1, 2->0
+    // Actuations: mouseDown, mouseUp, 1->2, 2->1
+    // stageTransition: into and release from stage 2
+    NSPressureBehaviorPrimaryDeepDrag = 6,
+    
+}NS_ENUM_AVAILABLE_MAC(10_10_3);
 
 @interface NSEvent : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
@@ -272,9 +326,9 @@ typedef NS_ENUM(short, NSEventSubtype) {
 @property (readonly) NSEventType type;
 @property (readonly) NSEventModifierFlags modifierFlags;
 @property (readonly) NSTimeInterval timestamp;
-@property (readonly, assign) NSWindow *window;
+@property (nullable, readonly, assign) NSWindow *window;
 @property (readonly) NSInteger windowNumber;
-@property (readonly, strong) NSGraphicsContext *context;
+@property (nullable, readonly, strong) NSGraphicsContext *context;
 
 /* these messages are valid for all mouse down/up/drag events */
 @property (readonly) NSInteger clickCount;
@@ -311,8 +365,8 @@ typedef NS_ENUM(short, NSEventSubtype) {
 @property (getter=isDirectionInvertedFromDevice, readonly) BOOL directionInvertedFromDevice NS_AVAILABLE_MAC(10_7);
 
 /* these messages are valid for keyup and keydown events */
-@property (readonly, copy) NSString *characters;
-@property (readonly, copy) NSString *charactersIgnoringModifiers;
+@property (nullable, readonly, copy) NSString *characters;
+@property (nullable, readonly, copy) NSString *charactersIgnoringModifiers;
   /* the chars that would have been generated, regardless of modifier keys (except shift) */
 @property (getter=isARepeat, readonly) BOOL ARepeat;
 /* this message is valid for keyup, keydown and flagschanged events */
@@ -320,9 +374,9 @@ typedef NS_ENUM(short, NSEventSubtype) {
 
 /* these messages are valid for enter and exit events */
 @property (readonly) NSInteger trackingNumber;
-@property (readonly) void *userData NS_RETURNS_INNER_POINTER;
+@property (nullable, readonly) void *userData NS_RETURNS_INNER_POINTER;
 /* -trackingArea returns the NSTrackingArea that generated this event.  It is possible for there to be no trackingArea associated with the event in some cases where the event corresponds to a trackingRect installed with -[NSView addTrackingRect:owner:userData:assumeInside:], in which case nil is returned. */
-@property (readonly, strong) NSTrackingArea *trackingArea NS_AVAILABLE_MAC(10_5); 
+@property (nullable, readonly, strong) NSTrackingArea *trackingArea NS_AVAILABLE_MAC(10_5); 
 
 /* this message is valid for kit, system, and app-defined events */
 /* this message is also valid for mouse events on 10.4 or later */
@@ -336,18 +390,18 @@ typedef NS_ENUM(short, NSEventSubtype) {
 /* -eventRef and +eventWithEventRef:  are valid for all events */
 /* -eventRef returns an EventRef corresponding to the NSEvent.  The EventRef is retained by the NSEvent, so will be valid as long as the NSEvent is valid, and will be released when the NSEvent is freed.  You can use RetainEvent to extend the lifetime of the EventRef, with a corresponding ReleaseEvent when you are done with it.  If there is no EventRef corresponding to the NSEvent, -eventRef will return NULL.
 */
-@property (readonly) const void * /* EventRef */eventRef NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5);
+@property (nullable, readonly) const void * /* EventRef */eventRef NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5);
 /* +eventWithEventRef: returns an autoreleased NSEvent corresponding to the EventRef.  The EventRef is retained by the NSEvent and will be released when the NSEvent is freed.  If there is no NSEvent corresponding to the EventRef, +eventWithEventRef will return nil.
 */
-+ (NSEvent *)eventWithEventRef:(const void * /* EventRef */)eventRef NS_AVAILABLE_MAC(10_5);
++ (nullable NSEvent *)eventWithEventRef:(const void * /* EventRef */)eventRef NS_AVAILABLE_MAC(10_5);
 
 /* -CGEvent returns an autoreleased CGEventRef corresponding to the NSEvent.  If there is no CGEventRef corresponding to the NSEvent, -CGEvent will return NULL.
 */
-@property (readonly) CGEventRef CGEvent NS_AVAILABLE_MAC(10_5);
+@property (nullable, readonly) CGEventRef CGEvent NS_AVAILABLE_MAC(10_5);
 
 /* +eventWithCGEvent: returns an autoreleased NSEvent corresponding to the CGEventRef.  The CGEventRef is retained by the NSEvent and will be released when the NSEvent is freed.  If there is no NSEvent corresponding to the CGEventRef, +eventWithEventRef will return nil.
 */
-+ (NSEvent *)eventWithCGEvent:(CGEventRef)cgEvent NS_AVAILABLE_MAC(10_5);
++ (nullable NSEvent *)eventWithCGEvent:(CGEventRef)cgEvent NS_AVAILABLE_MAC(10_5);
 
 /* Enable or disable coalescing of mouse movement events, including mouse moved, mouse dragged, and tablet events.  Coalescing is enabled by default.
 */
@@ -403,7 +457,7 @@ typedef NS_ENUM(short, NSEventSubtype) {
 @property (getter=isEnteringProximity, readonly) BOOL enteringProximity;    
 
 
-- (NSSet *)touchesMatchingPhase:(NSTouchPhase)phase inView:(NSView*)view NS_AVAILABLE_MAC(10_6);
+- (NSSet<NSTouch *> *)touchesMatchingPhase:(NSTouchPhase)phase inView:(nullable NSView *)view NS_AVAILABLE_MAC(10_6);
 
 /* The phase of a gesture scroll event. A gesture phrase are all the events that begin with a NSEventPhaseBegan and end with either a NSEventPhaseEnded or NSEventPhaseCancelled. All the gesture events are sent to the view under the cursor when the NSEventPhaseBegan occurred.  A gesture scroll event starts with a NSEventPhaseBegan phase and ends with a NSPhaseEnded. Legacy scroll wheel events (say from a Mighty Mouse) and momentum scroll wheel events have a phase of NSEventPhaseNone.
     Valid for NSScrollWheel
@@ -422,6 +476,8 @@ typedef NS_ENUM(short, NSEventSubtype) {
 */
 @property (readonly) NSEventMask associatedEventsMask NS_AVAILABLE_MAC(10_10_3);
 
+/* this message is valid for NSEventTypePressure events */
+@property (readonly) NSPressureBehavior pressureBehavior NS_AVAILABLE_MAC(10_11);
 
 /* Returns the user's preference about using gesture scrolls as a way to track fluid swipes. This value is determined by the Mouse / Trackpad preference panel for the current user. Generally, NSScrollView will check this for you. However, if your app is not using an NSScrollView, or your NSResponder can receive scrollWheel messages without first being sent to an NSScrollView, then you should check this preference before calling -trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler:
 */
@@ -446,10 +502,10 @@ typedef NS_ENUM(short, NSEventSubtype) {
 + (void)stopPeriodicEvents;
 
 /* apps will rarely create these objects */
-+ (NSEvent *)mouseEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(NSGraphicsContext*)context eventNumber:(NSInteger)eNum clickCount:(NSInteger)cNum pressure:(float)pressure;
-+ (NSEvent *)keyEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(NSGraphicsContext*)context characters:(NSString *)keys charactersIgnoringModifiers:(NSString *)ukeys isARepeat:(BOOL)flag keyCode:(unsigned short)code;
-+ (NSEvent *)enterExitEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(NSGraphicsContext*)context eventNumber:(NSInteger)eNum trackingNumber:(NSInteger)tNum userData:(void *)data;
-+ (NSEvent *)otherEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(NSGraphicsContext*)context subtype:(short)subtype data1:(NSInteger)d1 data2:(NSInteger)d2;
++ (nullable NSEvent *)mouseEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(nullable NSGraphicsContext*)context eventNumber:(NSInteger)eNum clickCount:(NSInteger)cNum pressure:(float)pressure;
++ (nullable NSEvent *)keyEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(nullable NSGraphicsContext*)context characters:(NSString *)keys charactersIgnoringModifiers:(NSString *)ukeys isARepeat:(BOOL)flag keyCode:(unsigned short)code;
++ (nullable NSEvent *)enterExitEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(nullable NSGraphicsContext*)context eventNumber:(NSInteger)eNum trackingNumber:(NSInteger)tNum userData:(nullable void *)data;
++ (nullable NSEvent *)otherEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSEventModifierFlags)flags timestamp:(NSTimeInterval)time windowNumber:(NSInteger)wNum context:(nullable NSGraphicsContext*)context subtype:(short)subtype data1:(NSInteger)d1 data2:(NSInteger)d2;
 
 // global mouse coordinates
 + (NSPoint)mouseLocation;
@@ -478,8 +534,8 @@ typedef NS_ENUM(short, NSEventSubtype) {
    
    To remove the event monitor, under both garbage collection and non-GC, pass the return value from the +add API to +removeMonitor.
 */
-+ (id)addGlobalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(void (^)(NSEvent*))block NS_AVAILABLE_MAC(10_6);
-+ (id)addLocalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(NSEvent* (^)(NSEvent*))block NS_AVAILABLE_MAC(10_6);
++ (nullable id)addGlobalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(void (^)(NSEvent*))block NS_AVAILABLE_MAC(10_6);
++ (nullable id)addLocalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(NSEvent* __nullable (^)(NSEvent*))block NS_AVAILABLE_MAC(10_6);
 + (void)removeMonitor:(id)eventMonitor NS_AVAILABLE_MAC(10_6);
 
 @end
@@ -560,3 +616,5 @@ enum {
     NSHelpFunctionKey           = 0xF746,
     NSModeSwitchFunctionKey     = 0xF747
 };
+
+NS_ASSUME_NONNULL_END

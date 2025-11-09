@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CoreImage.h>
+#include <CoreImage/CoreImage.h>

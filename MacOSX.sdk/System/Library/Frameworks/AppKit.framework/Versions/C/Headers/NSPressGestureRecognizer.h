@@ -1,12 +1,14 @@
 /*
     NSPressGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2014, Apple Inc.
+    Copyright (c) 2013-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSGestureRecognizer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_10, NA)
 @interface NSPressGestureRecognizer : NSGestureRecognizer <NSCoding> {
@@ -35,3 +37,5 @@ NS_CLASS_AVAILABLE(10_10, NA)
 @property CGFloat allowableMovement; // in screen points. Defaults to double-click distance
 
 @end
+
+NS_ASSUME_NONNULL_END

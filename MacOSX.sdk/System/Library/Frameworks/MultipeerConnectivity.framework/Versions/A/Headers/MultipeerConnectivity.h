@@ -1,8 +1,8 @@
 //
-//  MultipeerConnectivity.h
-//  MultipeerConnectivity
+// MultipeerConnectivity.h
+// MultipeerConnectivity
 //
-//  Copyright 2013 Apple Inc. All rights reserved.
+// Copyright 2013 Apple Inc. All rights reserved.
 //
 
 // MultipeerConnectivity headers

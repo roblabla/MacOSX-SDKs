@@ -1,13 +1,15 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2014, Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSSliderCell.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
     NSRelevancyLevelIndicatorStyle,
@@ -60,7 +62,9 @@ typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
 - (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;
 - (double)tickMarkValueAtIndex:(NSInteger)index;
 
-- (void)setImage:(NSImage*)image;
+- (void)setImage:(nullable NSImage*)image;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

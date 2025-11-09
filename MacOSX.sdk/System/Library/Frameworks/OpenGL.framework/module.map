@@ -1,4 +1,4 @@
-framework module OpenGL [extern_c] [system] {
+framework module OpenGL [extern_c] {
   umbrella header "OpenGL.h"
 
   module CGLRenderers { 

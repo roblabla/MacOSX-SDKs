@@ -1,27 +1,24 @@
 //
 //  SCNPhysicsBehavior.h
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2015 Apple Inc. All rights reserved.
 //
 
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class SCNPhysicsBehavior
  @abstract SCNPhysicsBehavior is an abstract class that represents a behavior in the physics world.
  */
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsBehavior : NSObject <NSSecureCoding>
-{
-@protected
-    id _reserved;
-}
 @end
 
 /*!
  @class SCNPhysicsHingeJoint
  @abstract SCNPhysicsHingeJoint makes two bodies to move like they are connected by a hinge. It is for example suitable for doors, chains...
  */
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsHingeJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics hinge joint.
@@ -36,9 +33,9 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 @property(nonatomic) SCNVector3 axisA;                //the axis of rotation of bodyA
 @property(nonatomic) SCNVector3 anchorA;              //the anchor point on which bodyA is attached
 
-@property(nonatomic, readonly) SCNPhysicsBody *bodyB; //the second body attached to the hinge. may be NULL
-@property(nonatomic) SCNVector3 axisB;                //the axis of rotation of bodyB
-@property(nonatomic) SCNVector3 anchorB;              //the anchor point on which bodyB is attached
+@property(nonatomic, readonly, nullable) SCNPhysicsBody *bodyB; //the second body attached to the hinge.
+@property(nonatomic) SCNVector3 axisB;                          //the axis of rotation of bodyB
+@property(nonatomic) SCNVector3 anchorB;                        //the anchor point on which bodyB is attached
 
 @end
 
@@ -46,7 +43,7 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsBallSocketJoint
  @abstract SCNPhysicsBallSocketJoint makes two bodies to move like they are connected by a ball-and-socket joint (i.e it allows rotations around all axes).
  */
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsBallSocketJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics ball-and-socket joint.
@@ -60,8 +57,8 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 @property(nonatomic, readonly) SCNPhysicsBody *bodyA; //the first body attached to the ball-and-socket joint
 @property(nonatomic) SCNVector3 anchorA;              //the attach point of bodyA
 
-@property(nonatomic, readonly) SCNPhysicsBody *bodyB; //the second body attached to the ball-and-socket joint
-@property(nonatomic) SCNVector3 anchorB;              //the attach point of bodyB
+@property(nonatomic, readonly, nullable) SCNPhysicsBody *bodyB; //the second body attached to the ball-and-socket joint
+@property(nonatomic) SCNVector3 anchorB;                        //the attach point of bodyB
 
 @end
 
@@ -69,7 +66,7 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsSliderJoint
  @abstract SCNPhysicsSliderJoint provides a linear sliding joint between two bodies.
  */
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsSliderJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics slider joint.
@@ -84,9 +81,9 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 @property(nonatomic) SCNVector3 axisA;                //the axis on which bodyA can slide
 @property(nonatomic) SCNVector3 anchorA;              //the attach point of bodyA
 
-@property(nonatomic, readonly) SCNPhysicsBody *bodyB; //the second body attached to the slider joint
-@property(nonatomic) SCNVector3 axisB;                //the axis on which bodyB can slide
-@property(nonatomic) SCNVector3 anchorB;              //the attach point of bodyB
+@property(nonatomic, readonly, nullable) SCNPhysicsBody *bodyB; //the second body attached to the slider joint
+@property(nonatomic) SCNVector3 axisB;                          //the axis on which bodyB can slide
+@property(nonatomic) SCNVector3 anchorB;                        //the attach point of bodyB
 
 //The minimum and maximum linear/angular limits in radians
 @property(nonatomic) CGFloat minimumLinearLimit;
@@ -109,11 +106,8 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsVehicleWheel
  @abstract SCNPhysicsVehicleWheel represents a wheel that can be attached to a SCNPhysicsVehicle instance.
  */
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsVehicleWheel : NSObject <NSCopying, NSSecureCoding>
-{
-@protected
-    id _reserved;
-}
 
 //Initializes and returns a wheel.
 + (instancetype)wheelWithNode:(SCNNode *)node;
@@ -160,18 +154,19 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
  @class SCNPhysicsVehicle
  @abstract SCNPhysicsVehicle provides a vehicle behavior.
  */
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNPhysicsVehicle : SCNPhysicsBehavior
 
 // Initializes and returns a physics vehicle that applies on the physics body "chassisBody" with the given wheels.
 //The wheel properties can be modified at anytime by calling setValue:forKeyPath: on each wheel with the format 'wheel[n].property', where n if the zero based wheel index.
 //A wheel can't be shared to multiple vehicle
-+ (instancetype)vehicleWithChassisBody:(SCNPhysicsBody *)chassisBody wheels:(NSArray *)wheels;
++ (instancetype)vehicleWithChassisBody:(SCNPhysicsBody *)chassisBody wheels:(NSArray<SCNPhysicsVehicleWheel *> *)wheels;
 
 //The actual speed in kilometers per hour.
 @property(nonatomic, readonly) CGFloat speedInKilometersPerHour;
 
 //The wheels of the vehicle
-@property(nonatomic, readonly) NSArray *wheels;
+@property(nonatomic, readonly) NSArray<SCNPhysicsVehicleWheel *> *wheels;
 
 //The chassis of the vehicle
 @property(nonatomic, readonly) SCNPhysicsBody *chassisBody;
@@ -186,3 +181,5 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 - (void)applyBrakingForce:(CGFloat)value forWheelAtIndex:(NSInteger)index;
 
 @end
+
+NS_ASSUME_NONNULL_END

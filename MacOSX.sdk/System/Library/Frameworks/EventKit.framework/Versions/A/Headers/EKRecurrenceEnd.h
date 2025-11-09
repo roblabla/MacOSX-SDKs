@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <EventKit/EventKitDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
     @class      EKRecurrenceEnd
     @abstract   Class which represents when a recurrence should end.
@@ -26,7 +28,7 @@
                 A EKRecurrenceEnd initialized with an end date will return 0 for occurrenceCount.
                 One initialized with a number of occurrences will return nil for its endDate.
 */
-EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
+NS_CLASS_AVAILABLE(10_8, 4_0)
 @interface EKRecurrenceEnd : NSObject <NSCopying> {
 }
 
@@ -34,19 +36,19 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @method     recurrenceEndWithEndDate:
     @abstract   Creates an autoreleased recurrence end with a specific end date.
 */
-+ (id)recurrenceEndWithEndDate:(NSDate *)endDate;
++ (instancetype)recurrenceEndWithEndDate:(NSDate *)endDate;
 
 /*!
     @method     recurrenceEndWithOccurrenceCount:
     @abstract   Creates an autoreleased recurrence end with a maximum occurrence count.
 */
-+ (id)recurrenceEndWithOccurrenceCount:(NSUInteger)occurrenceCount;
++ (instancetype)recurrenceEndWithOccurrenceCount:(NSUInteger)occurrenceCount;
 
 /*!
     @property   endDate
     @abstract   The end date of this recurrence, or nil if it's count-based.
 */
-@property(nonatomic, readonly) NSDate *endDate;
+@property(nonatomic, readonly, nullable) NSDate *endDate;
 
 /*!
     @property   occurrenceCount
@@ -55,3 +57,5 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
 @property(nonatomic, readonly) NSUInteger occurrenceCount;
 
 @end
+
+NS_ASSUME_NONNULL_END

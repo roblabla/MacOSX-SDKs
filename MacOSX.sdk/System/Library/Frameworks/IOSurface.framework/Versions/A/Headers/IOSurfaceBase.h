@@ -12,11 +12,11 @@
 #include <sys/cdefs.h>
 
 #  include <AvailabilityMacros.h>
-#  if defined(MAC_OS_X_VERSION_10_6)
+#  if defined(MAC_OS_X_VERSION_10_11)
 #    include <Availability.h>
-#  endif /* defined(MAC_OS_X_VERSION_10_6) */
+#  endif /* defined(MAC_OS_X_VERSION_10_11) */
 
-#if !defined(MAC_OS_X_VERSION_10_6) || defined(IOSFC_BUILDING_IOSFC)
+#if !defined(MAC_OS_X_VERSION_10_11) || defined(IOSFC_BUILDING_IOSFC)
 #  define IOSFC_DEPRECATED 
 #  define IOSFC_AVAILABLE_STARTING(_mac,_iphone)
 #  define IOSFC_AVAILABLE_BUT_DEPRECATED(_mac,_macDep,_iphone,_iphoneDep)

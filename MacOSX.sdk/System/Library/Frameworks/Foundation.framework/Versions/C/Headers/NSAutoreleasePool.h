@@ -1,8 +1,10 @@
 /*	NSAutoreleasePool.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 @interface NSAutoreleasePool : NSObject {
@@ -21,3 +23,4 @@ NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 
 @end
 
+NS_ASSUME_NONNULL_END

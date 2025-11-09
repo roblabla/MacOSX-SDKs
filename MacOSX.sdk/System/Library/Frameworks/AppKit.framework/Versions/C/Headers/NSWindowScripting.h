@@ -1,11 +1,13 @@
 /*
         NSWindowScripting.h
         AppKit Framework
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSWindow.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSCloseCommand;
 @class NSScriptCommand;
@@ -28,8 +30,10 @@
 - (void)setIsZoomed:(BOOL)flag;
 
 // Handlers for script commands declared in Cocoa's definition of the Standard suite.
-- (id)handleCloseScriptCommand:(NSCloseCommand *)command;
-- (id)handlePrintScriptCommand:(NSScriptCommand *)command;
-- (id)handleSaveScriptCommand:(NSScriptCommand *)command;
+- (nullable id)handleCloseScriptCommand:(NSCloseCommand *)command;
+- (nullable id)handlePrintScriptCommand:(NSScriptCommand *)command;
+- (nullable id)handleSaveScriptCommand:(NSScriptCommand *)command;
 
 @end
+
+NS_ASSUME_NONNULL_END

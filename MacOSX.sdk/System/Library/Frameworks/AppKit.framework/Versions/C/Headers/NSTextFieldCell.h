@@ -1,11 +1,14 @@
 /*
     NSTextFieldCell.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSActionCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSTextFieldBezelStyle) {
     NSTextFieldSquareBezel  = 0,
@@ -35,25 +38,28 @@ typedef NS_ENUM(NSUInteger, NSTextFieldBezelStyle) {
         unsigned int allowTightening:1;
         unsigned int thcHighlighted:1;
         unsigned int shouldNotClipToBounds:1;
-        unsigned int reservedTextFieldCell:10;
+        unsigned int allowsDefaultTightening:1;
+        unsigned int reservedTextFieldCell:9;
     } _tfFlags;
 }
 
-@property (copy) NSColor *backgroundColor;
+@property (nullable, copy) NSColor *backgroundColor;
 @property BOOL drawsBackground;
-@property (copy) NSColor *textColor;
+@property (nullable, copy) NSColor *textColor;
 - (NSText *)setUpFieldEditorAttributes:(NSText *)textObj;
 
 @property NSTextFieldBezelStyle bezelStyle;
 
-@property (copy) NSString *placeholderString;
-@property (copy) NSAttributedString *placeholderAttributedString;
+@property (nullable, copy) NSString *placeholderString;
+@property (nullable, copy) NSAttributedString *placeholderAttributedString;
 
 - (void)setWantsNotificationForMarkedText:(BOOL)flag NS_AVAILABLE_MAC(10_5);
 
 /* Returns an array of locale identifiers representing keyboard input sources allowed to be enabled when the receiver has the keyboard focus.
  */
-@property (copy) NSArray *allowedInputSourceLocales NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSArray<NSString *> *allowedInputSourceLocales NS_AVAILABLE_MAC(10_5);
 
 @end
+
+NS_ASSUME_NONNULL_END
 

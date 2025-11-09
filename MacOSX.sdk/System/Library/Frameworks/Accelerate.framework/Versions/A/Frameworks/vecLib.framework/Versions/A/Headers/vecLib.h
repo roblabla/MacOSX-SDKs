@@ -3,11 +3,11 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-516.0
+     Version:    vecLib-563.3
  
-     Copyright:  2000-2014 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright (c) 2000-2015 by Apple Inc. All rights reserved.
  
-     Bugs?:      For bug reports, consult the following page on
+     Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
@@ -16,12 +16,6 @@
 #ifndef __VECLIB__
 #define __VECLIB__
 
-
-#if !defined __ACCELERATE__
-	#if !defined __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED || __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED >= 1040
-		#error "<vecLib/vecLib.h> is deprecated.  Please #include <Accelerate/Accelerate.h> and link to Accelerate.framework."
-	#endif
-#endif
 
 #ifndef __VECLIBTYPES__
 #include <vecLib/vecLibTypes.h>
@@ -63,6 +57,10 @@
 
 #ifndef __LINEAR_ALGEBRA_PUBLIC_HEADER__
 #include <vecLib/LinearAlgebra/LinearAlgebra.h>
+#endif
+
+#ifndef __SPARSE_HEADER__
+#include <vecLib/Sparse/Sparse.h>
 #endif
 
 #ifndef __VFORCE_H

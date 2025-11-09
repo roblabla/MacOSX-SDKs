@@ -1,13 +1,15 @@
 /*
     NSMigrationManager.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSError.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSEntityDescription;
 @class NSEntityMapping;
@@ -46,7 +48,7 @@ NS_CLASS_AVAILABLE(10_5, 3_0)
 - (instancetype)initWithSourceModel:(NSManagedObjectModel *)sourceModel destinationModel:(NSManagedObjectModel *)destinationModel;
 
 /* Migrates of the store at the specified source URL to the store at the destination URL, performing all of the mappings in the mapping model.  A store must exist at the source URL;  if a store does not exist at the destination URL, one will be created (otherwise the migration will append to the existing store.)  Invoking this method will perform compatibility checks on the source and destination models (and the mapping model.)  If an error occurs during the validation or migration, this method will return NO.*/
-- (BOOL)migrateStoreFromURL:(NSURL *)sourceURL type:(NSString *)sStoreType options:(NSDictionary *)sOptions withMappingModel:(NSMappingModel *)mappings toDestinationURL:(NSURL *)dURL destinationType:(NSString *)dStoreType destinationOptions:(NSDictionary *)dOptions error:(NSError **)error;
+- (BOOL)migrateStoreFromURL:(NSURL *)sourceURL type:(NSString *)sStoreType options:(nullable NSDictionary *)sOptions withMappingModel:(nullable NSMappingModel *)mappings toDestinationURL:(NSURL *)dURL destinationType:(NSString *)dStoreType destinationOptions:(nullable NSDictionary *)dOptions error:(NSError **)error;
 
 /* Tries to use a store specific migration manager to perform the store migration, note that a store specific migration manager class is not guaranteed to perform any of the migration manager delegate callbacks or update values for the observable properties.  
  Defaults to YES */
@@ -65,18 +67,18 @@ NS_CLASS_AVAILABLE(10_5, 3_0)
 @property (readonly, strong) NSManagedObjectContext *destinationContext;
 
 /* Returns the NSEntityDescription for the source and destination entities, respectively, of the entity mapping.  (Entity mappings do not store the actual description objects, but rather the name and version information of the entity.)*/
-- (NSEntityDescription *)sourceEntityForEntityMapping:(NSEntityMapping *)mEntity;
-- (NSEntityDescription *)destinationEntityForEntityMapping:(NSEntityMapping *)mEntity;
+- (nullable NSEntityDescription *)sourceEntityForEntityMapping:(NSEntityMapping *)mEntity;
+- (nullable NSEntityDescription *)destinationEntityForEntityMapping:(NSEntityMapping *)mEntity;
 
 /* Associates the source instance with the specified destination instance for the given entity mapping.  Since the migration is performed as a three-step process (first create the data, then relate the data, then validate the data) it is necessary to be able to associate data between the source and destination stores, in order to allow for relationship creation/fixup after the creation pass.  This method is called in the default
 implementation of NSEntityMigrationPolicy's createDestinationInstancesForSourceInstance:entityMapping:manager:error: method.*/
 - (void)associateSourceInstance:(NSManagedObject *)sourceInstance withDestinationInstance:(NSManagedObject *)destinationInstance forEntityMapping:(NSEntityMapping *)entityMapping;
 
 /* Returns the managed object instances created in the destination store for the given entity mapping for the specified source instances.*/
-- (NSArray *)destinationInstancesForEntityMappingNamed:(NSString *)mappingName sourceInstances:(NSArray*)sourceInstances;
+- (NSArray<__kindof NSManagedObject *> *)destinationInstancesForEntityMappingNamed:(NSString *)mappingName sourceInstances:(nullable NSArray<__kindof NSManagedObject *> *)sourceInstances;
  
 /* Returns the managed object instances in the source store used to create the specified destination instances for the given entity mapping.*/
-- (NSArray *)sourceInstancesForEntityMappingNamed:(NSString *)mappingName destinationInstances:(NSArray *)destinationInstances;
+- (NSArray<__kindof NSManagedObject *> *)sourceInstancesForEntityMappingNamed:(NSString *)mappingName destinationInstances:(nullable NSArray<__kindof NSManagedObject *> *)destinationInstances;
 
 /* Observable property that can be used to determine progress of the migration process.  Returns the current entity mapping being processed. Each entity is processed a total of three times (instance creation, relationship creation, validation)*/
 @property (readonly, strong) NSEntityMapping *currentEntityMapping;
@@ -85,9 +87,11 @@ implementation of NSEntityMigrationPolicy's createDestinationInstancesForSourceI
 @property (readonly) float migrationProgress;
 
 /* Returns/sets the user info for the migration manager*/
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nullable, nonatomic, strong) NSDictionary *userInfo;
 
 /* Cancels the migration with the specified error. Calling this method causes migrateStoreFromURL:type:options:withMappingModel:toDestinationURL:destinationType:destinationOptions:error: to abort the migration and return the specified error.  */
 - (void)cancelMigrationWithError:(NSError *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

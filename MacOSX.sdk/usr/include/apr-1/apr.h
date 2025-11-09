@@ -303,7 +303,7 @@ extern "C" {
 
 /* Is the TCP_NODELAY socket option inherited from listening sockets?
 */
-#define APR_TCP_NODELAY_INHERITED 1
+#define APR_TCP_NODELAY_INHERITED 0
 
 /* Is the O_NONBLOCK flag inherited from listening sockets?
 */

@@ -1,17 +1,20 @@
 /*	
     NSHTTPCookie.h
-    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2015, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray;
+@class NSArray<ObjectType>;
 @class NSDate;
-@class NSDictionary;
+@class NSDictionary<KeyType, ObjectType>;
+@class NSNumber;
 @class NSString;
 @class NSURL;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @const NSHTTPCookieName
@@ -232,7 +235,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     dictionary keys is invalid, for example because a required key is
     missing, or a recognized key maps to an illegal value.
 */
-- (instancetype)initWithProperties:(NSDictionary *)properties;
+- (nullable instancetype)initWithProperties:(NSDictionary<NSString *, id> *)properties;
 
 /*!
     @method cookieWithProperties:
@@ -247,7 +250,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     a required key is missing, or a recognized key maps to an illegal
     value.
 */
-+ (NSHTTPCookie *)cookieWithProperties:(NSDictionary *)properties;
++ (nullable NSHTTPCookie *)cookieWithProperties:(NSDictionary<NSString *, id> *)properties;
 
 /*!
     @method requestHeaderFieldsWithCookies:
@@ -257,7 +260,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @result An NSDictionary where the keys are header field names, and the values
     are the corresponding header field values.
 */
-+ (NSDictionary *)requestHeaderFieldsWithCookies:(NSArray *)cookies;
++ (NSDictionary<NSString *, NSString *> *)requestHeaderFieldsWithCookies:(NSArray<NSHTTPCookie *> *)cookies;
 
 /*!
     @method cookiesWithResponseHeaderFields:forURL:
@@ -268,7 +271,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @discussion This method will ignore irrelevant header fields so
     you can pass a dictionary containing data other than cookie data.
 */
-+ (NSArray *)cookiesWithResponseHeaderFields:(NSDictionary *)headerFields forURL:(NSURL *)URL;
++ (NSArray<NSHTTPCookie *> *)cookiesWithResponseHeaderFields:(NSDictionary<NSString *, NSString *> *)headerFields forURL:(NSURL *)URL;
 
 /*!
     @method properties
@@ -282,7 +285,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     for descriptions of the supported keys and values.
     @result The dictionary representation of the receiver.
 */
-@property (readonly, copy) NSDictionary *properties;
+@property (nullable, readonly, copy) NSDictionary<NSString *, id> *properties;
 
 /*!
     @method version
@@ -316,7 +319,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     date. This will be the case only for "session-only" cookies.
     @result The expires date of the receiver.
 */
-@property (readonly, copy) NSDate *expiresDate;
+@property (nullable, readonly, copy) NSDate *expiresDate;
 
 /*!
     @method isSessionOnly
@@ -384,7 +387,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @result The comment of the receiver, or nil if the receiver has no
     comment.
 */
-@property (readonly, copy) NSString *comment;
+@property (nullable, readonly, copy) NSString *comment;
 
 /*!
     @method commentURL
@@ -395,7 +398,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @result The comment URL of the receiver, or nil if the receiver
     has no comment URL.
 */
-@property (readonly, copy) NSURL *commentURL;
+@property (nullable, readonly, copy) NSURL *commentURL;
 
 /*!
     @method portList
@@ -408,7 +411,8 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     array may be nil, in which case this cookie can be sent to any
     port.
 */
-@property (readonly, copy) NSArray *portList;
+@property (nullable, readonly, copy) NSArray<NSNumber *> *portList;
 
 @end
 
+NS_ASSUME_NONNULL_END

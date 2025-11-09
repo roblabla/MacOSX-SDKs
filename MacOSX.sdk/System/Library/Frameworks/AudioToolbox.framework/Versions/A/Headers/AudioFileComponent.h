@@ -1,20 +1,24 @@
-/*
-     File:       AudioToolbox/AudioFileComponent.h
+/*!
+	@file		AudioFileComponent.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2004-2015 by Apple, Inc., all rights reserved.
 
-     Contains:   API for implementing Audio File Components.
+	@abstract	Interfaces for components which implement knowledge of audio file formats.
+    @discussion
+    	Audio file components are not for the use of clients. Rather, they are called by the
+    	implementation of the AudioFile API to implement the various semantics of that API.
+		Most of these calls match a call in the AudioFile API which calls through to the component.
 
-     Copyright:  (c) 2004 - 2008 by Apple, Inc., all rights reserved.
-
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
-
-                     http://developer.apple.com/bugreporter/
-
+		A component may be used in two ways, either associated with a file or not. If a component is
+		not associated with a file, it may be used to answer questions about the file type in
+		general and whether some data is recognized by that file type. A component is associated
+		with a file by calling one of the AudioFile Create, Open or Initialize calls. If a component
+		is associated with a file, then it can also be asked to perform any of the calls that
+		implement the AudioFile API.
 */
 
-
-#ifndef _AudioFileComponent_h_
-#define _AudioFileComponent_h_
+#ifndef AudioToolbox_AudioFileComponent_h
+#define AudioToolbox_AudioFileComponent_h
 
 //==================================================================================================
 //	Includes
@@ -32,26 +36,12 @@
 	#include "AudioFile.h"
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
+
 #if defined(__cplusplus)
 extern "C"
 {
 #endif
-
-/*!
-    @header AudioFileComponent
-    @discussion 
-		This API is not for clients to call. These are the calls implemented by AudioFileComponents 
-		which are called from within the AudioToolbox framework.
-		Most of these calls match a call in the AudioFile API which calls through to the component.
-
-		A component may be used in two ways, either associated with a file or not. 
-		If a component is not associated with a file, it may be used to answer questions about
-		the file type in general and whether some data is recognized by that file type.
-		A component is associated with a file by calling one of the AudioFile Create, Open or Initialize calls.
-		If a component is associated with a file then it can also be asked to perform any of
-		the calls that implement the AudioFile API.
-*/
-
 
 /*!
     @typedef	AudioFileComponent
@@ -89,13 +79,10 @@ AudioFileComponentCreateURL (
     @function				AudioFileComponentOpenURL
     @abstract				Open an existing audio file.
     @discussion				Open an existing audio file for reading or reading and writing.
-    @param inComponent		an AudioFileComponent
+    @param inComponent		an AudioFileComponent.
     @param inFileRef		the CFURLRef of an existing audio file.
-    @param inPermissions	use the permission constants
-    @param inFileTypeHint	For files which have no filename extension and whose type cannot be easily or
-							uniquely determined from the data (ADTS,AC3), this hint can be used to indicate the file type. 
-							Otherwise you can pass zero for this. The hint is only used on OS versions 10.3.1 or greater.
-							For OS versions prior to that, opening files of the above description will fail.
+    @param inPermissions	use the permission constants.
+    @param inFileDescriptor	an open file descriptor.
     @result					returns noErr if successful.
 */
 extern OSStatus	
@@ -238,7 +225,7 @@ AudioFileComponentReadPackets(
 								AudioFileComponent				inComponent,
 								Boolean							inUseCache,
 								UInt32							*outNumBytes,
-								AudioStreamPacketDescription	*outPacketDescriptions,
+								AudioStreamPacketDescription * __nullable outPacketDescriptions,
 								SInt64							inStartingPacket, 
 								UInt32  						*ioNumPackets, 
 								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
@@ -273,7 +260,7 @@ AudioFileComponentReadPacketData(
 								AudioFileComponent				inComponent,
 								Boolean							inUseCache,
 								UInt32							*ioNumBytes,
-								AudioStreamPacketDescription	*outPacketDescriptions,
+								AudioStreamPacketDescription * __nullable outPacketDescriptions,
 								SInt64							inStartingPacket, 
 								UInt32  						*ioNumPackets, 
 								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
@@ -299,7 +286,7 @@ AudioFileComponentWritePackets(
 								AudioFileComponent					inComponent,
 								Boolean								inUseCache,
 								UInt32								inNumBytes,
-								const AudioStreamPacketDescription	*inPacketDescriptions,
+								const AudioStreamPacketDescription * __nullable inPacketDescriptions,
 								SInt64								inStartingPacket, 
 								UInt32								*ioNumPackets, 
 								const void							*inBuffer)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
@@ -312,15 +299,15 @@ AudioFileComponentWritePackets(
     @param      inPropertyID		an AudioFileProperty constant.
     @param      outPropertySize		the size in bytes of the current value of the property. In order to get the property value, 
 									you will need a buffer of this size.
-    @param      isWritable			will be set to 1 if writable, or 0 if read only.
+    @param      outWritable			will be set to 1 if writable, or 0 if read only.
     @result							returns noErr if successful.
 */
 extern OSStatus 
 AudioFileComponentGetPropertyInfo(	
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
-								UInt32							*outPropertySize,
-								UInt32							*outWritable)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32 * __nullable				outPropertySize,
+								UInt32 * __nullable				outWritable)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 
 /*!
@@ -510,11 +497,11 @@ AudioFileComponentFileIsThisFormat(
 extern OSStatus 
 AudioFileComponentDataIsThisFormat(	
 								AudioFileComponent				inComponent,
-								void							*inClientData, 
-								AudioFile_ReadProc				inReadFunc, 
-								AudioFile_WriteProc				inWriteFunc, 
-								AudioFile_GetSizeProc			inGetSizeFunc,
-								AudioFile_SetSizeProc			inSetSizeFunc,
+								void * __nullable				inClientData,
+								AudioFile_ReadProc __nullable	inReadFunc, 
+								AudioFile_WriteProc	__nullable	inWriteFunc,
+								AudioFile_GetSizeProc __nullable inGetSizeFunc,
+								AudioFile_SetSizeProc __nullable inSetSizeFunc,
 								UInt32							*outResult)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_5, __IPHONE_NA, __IPHONE_NA); 
 
 
@@ -539,12 +526,13 @@ AudioFileComponentGetGlobalInfoSize(
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inSpecifierSize,
-								const void						*inSpecifier,
+								const void * __nullable			inSpecifier,
 								UInt32							*outPropertySize)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
 /*!
     @function	AudioFileComponentGetGlobalInfo
     @abstract   implements AudioFileGetGlobalInfo.
+    @param		inComponent			an AudioFileComponent
     @param      inPropertyID		an AudioFileGlobalInfo property constant.
     @param      inSpecifierSize		The size of the specifier data.
     @param      inSpecifier			A specifier is a buffer of data used as an input argument to some of the global info properties.
@@ -557,7 +545,7 @@ AudioFileComponentGetGlobalInfo(
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inSpecifierSize,
-								const void						*inSpecifier,
+								const void * __nullable			inSpecifier,
 								UInt32							*ioPropertyDataSize,
 								void							*outPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
@@ -596,7 +584,7 @@ AudioFileComponentGetGlobalInfo(
 					The first type in the array is the preferred one for use when
 					writing new files.
 */
-enum
+CF_ENUM(AudioFilePropertyID)
 {
 	kAudioFileComponent_CanRead									= 'cnrd',
 	kAudioFileComponent_CanWrite								= 'cnwr',
@@ -616,7 +604,6 @@ enum
 
 enum
 {
-
 	kAudioFileCreateSelect						= 0x0001,
 	kAudioFileOpenSelect						= 0x0002,
 	kAudioFileInitializeSelect					= 0x0003,
@@ -672,7 +659,7 @@ typedef OSStatus (*WriteBytesFDF)(	void			*inComponentStorage,
 typedef OSStatus (*ReadPacketsFDF)(	void							*inComponentStorage,
 									Boolean							inUseCache,
 									UInt32							*outNumBytes,
-									AudioStreamPacketDescription	*outPacketDescriptions,
+									AudioStreamPacketDescription * __nullable outPacketDescriptions,
 									SInt64							inStartingPacket, 
 									UInt32  						*ioNumPackets, 
 									void							*outBuffer);
@@ -680,7 +667,7 @@ typedef OSStatus (*ReadPacketsFDF)(	void							*inComponentStorage,
 typedef OSStatus (*ReadPacketDataFDF)(	void						*inComponentStorage,
 									Boolean							inUseCache,
 									UInt32							*ioNumBytes,
-									AudioStreamPacketDescription	*outPacketDescriptions,
+									AudioStreamPacketDescription * __nullable outPacketDescriptions,
 									SInt64							inStartingPacket, 
 									UInt32  						*ioNumPackets, 
 									void							*outBuffer);
@@ -688,15 +675,15 @@ typedef OSStatus (*ReadPacketDataFDF)(	void						*inComponentStorage,
 typedef OSStatus (*WritePacketsFDF)(	void								*inComponentStorage,
 										Boolean								inUseCache,
 										UInt32								inNumBytes,
-										const AudioStreamPacketDescription	*inPacketDescriptions,
+										const AudioStreamPacketDescription * __nullable inPacketDescriptions,
 										SInt64								inStartingPacket, 
 										UInt32								*ioNumPackets, 
 										const void							*inBuffer);
 								
 typedef OSStatus (*GetPropertyInfoFDF)(	void					*inComponentStorage,
 										AudioFilePropertyID		inPropertyID,
-										UInt32					*outDataSize,
-										UInt32					*isWritable);
+										UInt32 * __nullable		outDataSize,
+										UInt32 * __nullable		isWritable);
 								
 typedef OSStatus (*GetPropertyFDF)(		void					*inComponentStorage,
 										AudioFilePropertyID		inPropertyID,
@@ -731,6 +718,9 @@ typedef OSStatus (*SetUserDataFDF)(		void					*inComponentStorage,
 										
 /* no fast dispatch for kAudioFileRemoveUserDataSelect */
 
+#pragma mark -
+#pragma mark Deprecated
+
 //==================================================================================================
 // Fast Dispatch Function tables. Deprecated. These are no longer used by the implementation.
 //==================================================================================================
@@ -751,7 +741,7 @@ typedef struct AudioFileFDFTable
 	GetUserDataSizeFDF  mGetUserDataSizeFDF;
 	GetUserDataFDF		mGetUserDataFDF;
 	SetUserDataFDF		mSetUserDataFDF;
-} AudioFileFDFTable;
+} AudioFileFDFTable __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_7,__IPHONE_NA,__IPHONE_NA);
 
 typedef struct AudioFileFDFTableExtended
 {
@@ -771,10 +761,7 @@ typedef struct AudioFileFDFTableExtended
 	SetUserDataFDF		mSetUserDataFDF;
 
 	ReadPacketDataFDF	mReadPacketDataFDF;
-} AudioFileFDFTableExtended;
-
-#pragma mark -
-#pragma mark Deprecated
+} AudioFileFDFTableExtended __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_7,__IPHONE_NA,__IPHONE_NA);
 
 /*!
 	@functiongroup Deprecated AFComponent
@@ -802,7 +789,7 @@ AudioFileComponentCreate(
 								CFStringRef							inFileName,
 								const AudioStreamBasicDescription	*inFormat,
 								UInt32								inFlags,
-								struct FSRef						*outNewFileRef)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								struct FSRef						*outNewFileRef)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
                                 
 
 /*!
@@ -820,7 +807,7 @@ AudioFileComponentInitialize(
 								AudioFileComponent					inComponent,
 								const struct FSRef					*inFileRef,
 								const AudioStreamBasicDescription	*inFormat,
-								UInt32								inFlags)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32								inFlags)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 							
 /*!
     @function	AudioFileComponentOpenFile
@@ -837,7 +824,7 @@ AudioFileComponentOpenFile(
 								AudioFileComponent					inComponent,
 								const struct FSRef					*inFileRef, 
 								SInt8  								inPermissions,
-								SInt16								inRefNum)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								SInt16								inRefNum)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 
 #if defined(__cplusplus)
 }
@@ -899,7 +886,7 @@ typedef	OSStatus	(*AudioFileComponentReadPacketsProc)(
 								void							*self,
 								Boolean							inUseCache,
 								UInt32							*outNumBytes,
-								AudioStreamPacketDescription	*outPacketDescriptions,
+								AudioStreamPacketDescription * __nullable outPacketDescriptions,
 								SInt64							inStartingPacket, 
 								UInt32  						*ioNumPackets, 
 								void							*outBuffer);	
@@ -909,7 +896,7 @@ typedef	OSStatus	(*AudioFileComponentReadPacketDataProc)(
 								void							*self,
 								Boolean							inUseCache,
 								UInt32							*ioNumBytes,
-								AudioStreamPacketDescription	*outPacketDescriptions,
+								AudioStreamPacketDescription * __nullable outPacketDescriptions,
 								SInt64							inStartingPacket, 
 								UInt32  						*ioNumPackets, 
 								void							*outBuffer);	
@@ -918,7 +905,7 @@ typedef	OSStatus	(*AudioFileComponentWritePacketsProc)(
 								void								*self,
 								Boolean								inUseCache,
 								UInt32								inNumBytes,
-								const AudioStreamPacketDescription	*inPacketDescriptions,
+								const AudioStreamPacketDescription * __nullable inPacketDescriptions,
 								SInt64								inStartingPacket, 
 								UInt32								*ioNumPackets, 
 								const void							*inBuffer);
@@ -927,8 +914,8 @@ typedef	OSStatus	(*AudioFileComponentWritePacketsProc)(
 typedef	OSStatus	(*AudioFileComponentGetPropertyInfoProc)(	
 								void							*self,
 								AudioFileComponentPropertyID	inPropertyID,
-								UInt32							*outPropertySize,
-								UInt32							*outWritable);
+								UInt32 * __nullable				outPropertySize,
+								UInt32 * __nullable				outWritable);
 
 
 typedef	OSStatus	(*AudioFileComponentGetPropertyProc)(	
@@ -992,15 +979,18 @@ typedef	OSStatus	(*AudioFileComponentGetGlobalInfoSizeProc)(
 								void							*self,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inSpecifierSize,
-								const void						*inSpecifier,
+								const void * __nullable			inSpecifier,
 								UInt32							*outPropertySize);
 
 typedef	OSStatus	(*AudioFileComponentGetGlobalInfoProc)(	
 								void							*self,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inSpecifierSize,
-								const void						*inSpecifier,
+								const void * __nullable			inSpecifier,
 								UInt32							*ioPropertyDataSize,
 								void							*outPropertyData);
 
-#endif
+CF_ASSUME_NONNULL_END
+
+#endif // AudioToolbox_AudioFileComponent_h
+

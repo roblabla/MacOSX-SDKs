@@ -1,5 +1,5 @@
 /*	CFTree.h
-	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
 */
 /*!
         @header CFTree
@@ -83,7 +83,7 @@ typedef void (*CFTreeApplierFunction)(const void *value, void *context);
         @typedef CFTreeRef
         This is the type of a reference to CFTrees.
 */
-typedef struct __CFTree * CFTreeRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFTree * CFTreeRef;
 
 /*!
         @function CFTreeGetTypeID

@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class AVBInterface;
 
 /*!
@@ -26,7 +28,7 @@ FOUNDATION_EXTERN const uint64_t AVBNullEUI64;
 NS_CLASS_AVAILABLE(10_10, NA)
 @interface AVBCentralManager : NSObject
 {
-#ifndef _LP64
+#if AVB_LEGACY_OBJC_RUNTIME
 	@private
 	void *_impl;
 #endif
@@ -93,3 +95,5 @@ NS_CLASS_AVAILABLE(10_10, NA)
 + (void)releaseDynamicEntityModelID:(uint64_t)entityModelID;
 
 @end
+
+NS_ASSUME_NONNULL_END

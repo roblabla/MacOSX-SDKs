@@ -296,7 +296,7 @@ public:
     virtual unsigned int getCapacityIncrement() const;
     virtual unsigned int setCapacityIncrement(unsigned increment);
     virtual unsigned int ensureCapacity(unsigned int newCapacity);
-    virtual void free();
+    virtual void free() APPLE_KEXT_OVERRIDE;
 
     OSMetaClassDeclareReservedUnused(OSSerialize, 0);
     OSMetaClassDeclareReservedUnused(OSSerialize, 1);
@@ -328,7 +328,7 @@ public:
         OSSerializerCallback callback,
         void * ref = 0);
 
-    virtual bool serialize(OSSerialize * serializer) const;
+    virtual bool serialize(OSSerialize * serializer) const APPLE_KEXT_OVERRIDE;
 };
 
 #endif /* _OS_OSSERIALIZE_H */

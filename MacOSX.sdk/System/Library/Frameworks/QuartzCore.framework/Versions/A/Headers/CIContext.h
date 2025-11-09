@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIContext.h>
+#include <CoreImage/CIContext.h>

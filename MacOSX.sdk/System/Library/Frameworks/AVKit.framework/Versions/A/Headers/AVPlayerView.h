@@ -3,11 +3,13 @@
 	
 	Framework:  AVKit
 	
-	Copyright 2013-2014 Apple Inc. All rights reserved.
+	Copyright 2013-2015 Apple Inc. All rights reserved.
 	
  */
 
 #import <AppKit/AppKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVPlayer;
 
@@ -23,7 +25,7 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 	@property	player
 	@abstract	The player from which to source the media content for the view.
  */
-@property AVPlayer *player;
+@property (nullable) AVPlayer *player;
 
 /*!
 	@constant	AVPlayerViewControlsStyleNone
@@ -75,7 +77,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	@property	contentOverlayView
 	@abstract	Use the content overlay view to add additional custom views between the video content and the controls.
  */
-@property (readonly) NSView *contentOverlayView NS_AVAILABLE_MAC(10_10);
+@property (readonly, nullable) NSView *contentOverlayView NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -98,7 +100,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	@property	actionPopUpButtonMenu
 	@abstract	Clients can set this property in order to show an action pop up button. Default is nil.
  */
-@property NSMenu *actionPopUpButtonMenu;
+@property (nullable) NSMenu *actionPopUpButtonMenu;
 
 /*!
 	@property	showsFullScreenToggleButton
@@ -134,7 +136,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 				A completion handler that is executed when the user selects either the Trim or Cancel button in the trimming UI.
 	@abstract	Sets the controls panel into trimming mode and blocks until the user selects either the Trim or the Cancel button.
  */
-- (void)beginTrimmingWithCompletionHandler:(void (^)(AVPlayerViewTrimResult result))handler;
+- (void)beginTrimmingWithCompletionHandler:(nullable void (^)(AVPlayerViewTrimResult result))handler;
 
 @end
 
@@ -152,3 +154,5 @@ typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 - (void)flashChapterNumber:(NSUInteger)chapterNumber chapterTitle:(NSString *)chapterTitle;
 
 @end
+
+NS_ASSUME_NONNULL_END

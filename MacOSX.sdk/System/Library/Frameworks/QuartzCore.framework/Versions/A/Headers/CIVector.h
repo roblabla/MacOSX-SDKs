@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CIVector.h>
+#include <CoreImage/CIVector.h>

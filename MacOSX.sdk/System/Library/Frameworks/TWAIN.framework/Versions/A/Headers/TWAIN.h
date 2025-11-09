@@ -119,11 +119,6 @@
 #endif  /* _MSWIN_ */
 
 #ifdef  _MAC_
-#ifdef __MWERKS__
-	#include <Carbon.h>
-#else
-    #include <Carbon/Carbon.h>
-#endif
     #ifndef PASCAL
     #define PASCAL         pascal
     #endif
@@ -132,7 +127,7 @@
     #define FAR
     #endif
     
-    typedef Handle         TW_HANDLE;
+    typedef char          *TW_HANDLE;
     typedef char          *TW_MEMREF;
 
 #pragma options align = power

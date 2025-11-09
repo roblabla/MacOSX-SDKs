@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -10,24 +10,26 @@
 @class NSInvocation, NSMethodSignature, NSCoder, NSString, NSEnumerator;
 @class Protocol;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /***************	Basic protocols		***************/
 
 @protocol NSCopying
 
-- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(nullable NSZone *)zone;
 
 @end
 
 @protocol NSMutableCopying
 
-- (id)mutableCopyWithZone:(NSZone *)zone;
+- (id)mutableCopyWithZone:(nullable NSZone *)zone;
 
 @end
 
 @protocol NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder;
-- (id)initWithCoder:(NSCoder *)aDecoder; // NS_DESIGNATED_INITIALIZER
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder; // NS_DESIGNATED_INITIALIZER
 
 @end
 
@@ -48,8 +50,8 @@
 + (NSInteger)version;
 + (void)setVersion:(NSInteger)aVersion;
 @property (readonly) Class classForCoder;
-- (id)replacementObjectForCoder:(NSCoder *)aCoder;
-- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder NS_REPLACES_RECEIVER;
+- (nullable id)replacementObjectForCoder:(NSCoder *)aCoder;
+- (nullable id)awakeAfterUsingCoder:(NSCoder *)aDecoder NS_REPLACES_RECEIVER;
 
 @end
 
@@ -82,13 +84,13 @@ UNAVAILABLE_ATTRIBUTE
 
 /***********	Object Allocation / Deallocation		*******/
     
-FOUNDATION_EXPORT id NSAllocateObject(Class aClass, NSUInteger extraBytes, NSZone *zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+FOUNDATION_EXPORT id NSAllocateObject(Class aClass, NSUInteger extraBytes, NSZone * __nullable zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 FOUNDATION_EXPORT void NSDeallocateObject(id object) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
-FOUNDATION_EXPORT id NSCopyObject(id object, NSUInteger extraBytes, NSZone *zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE NS_DEPRECATED(10_0, 10_8, 2_0, 6_0);
+FOUNDATION_EXPORT id NSCopyObject(id object, NSUInteger extraBytes, NSZone * __nullable zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE NS_DEPRECATED(10_0, 10_8, 2_0, 6_0);
 
-FOUNDATION_EXPORT BOOL NSShouldRetainWithZone(id anObject, NSZone *requestedZone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+FOUNDATION_EXPORT BOOL NSShouldRetainWithZone(id anObject, NSZone * __nullable requestedZone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 FOUNDATION_EXPORT void NSIncrementExtraRefCount(id object) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
@@ -99,24 +101,26 @@ FOUNDATION_EXPORT NSUInteger NSExtraRefCount(id object) NS_AUTOMATED_REFCOUNT_UN
 #if __has_feature(objc_arc)
 
 // After using a CFBridgingRetain on an NSObject, the caller must take responsibility for calling CFRelease at an appropriate time.
-NS_INLINE CF_RETURNS_RETAINED CFTypeRef CFBridgingRetain(id X) {
+NS_INLINE CF_RETURNS_RETAINED CFTypeRef __nullable CFBridgingRetain(id __nullable X) {
     return (__bridge_retained CFTypeRef)X;
 }
 
-NS_INLINE id CFBridgingRelease(CFTypeRef CF_CONSUMED X) {
+NS_INLINE id __nullable CFBridgingRelease(CFTypeRef CF_CONSUMED __nullable X) {
     return (__bridge_transfer id)X;
 }
 
 #else
 
 // This function is intended for use while converting to ARC mode only.
-NS_INLINE CF_RETURNS_RETAINED CFTypeRef CFBridgingRetain(id X) {
+NS_INLINE CF_RETURNS_RETAINED CFTypeRef __nullable CFBridgingRetain(id __nullable X) {
     return X ? CFRetain((CFTypeRef)X) : NULL;
 }
 
 // This function is intended for use while converting to ARC mode only.
-NS_INLINE id CFBridgingRelease(CFTypeRef CF_CONSUMED X) {
+NS_INLINE id __nullable CFBridgingRelease(CFTypeRef CF_CONSUMED __nullable X) {
     return [(id)CFMakeCollectable(X) autorelease];
 }
 
 #endif
+
+NS_ASSUME_NONNULL_END

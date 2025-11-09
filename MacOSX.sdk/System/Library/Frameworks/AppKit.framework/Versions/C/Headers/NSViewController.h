@@ -1,10 +1,11 @@
 /*
 	NSViewController.h
 	Application Kit
-	Copyright (c) 2006-2014, Apple Inc.
+	Copyright (c) 2006-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSPopover.h>
@@ -12,7 +13,9 @@
 #import <AppKit/NSStoryboardSegue.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 
-@class NSArray, NSBundle, NSPointerArray, NSView;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSBundle, NSPointerArray, NSView;
 @protocol NSViewControllerPresentationAnimator;
 @protocol NSExtensionRequestHandling;
 
@@ -61,25 +64,25 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 On 10.10 and higher, a nil nibName can be used, and NSViewController will automatically attempt to load a view with the same class name. See loadView for more information.
 */
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Return the name of the nib to be loaded to instantiate the view. The default implementation returns whatever value was passed to the initializer.
 */
-@property (copy, readonly) NSString *nibName;
+@property (nullable, copy, readonly) NSString *nibName;
 
 /* Return the bundle that the nib will be loaded from. The default implementation returns whatever value was passed to the initializer.
 */
-@property (strong, readonly) NSBundle *nibBundle;
+@property (nullable, strong, readonly) NSBundle *nibBundle;
 
 /* The object whose value is being presented in the view. The default implementation of -setRepresentedObject: doesn't copy the passed-in object, it retains it. (In another words, "representedObject" is a to-one relationship, not an attribute.) This class is key-value coding and key-value observing compliant for "representedObject" so when you use it as the file's owner of a view's nib you can bind controls to the file's owner using key paths that start with "representedObject."
 */
-@property (strong) id representedObject;
+@property (nullable, strong) id representedObject;
 
 /* The localized title of the view. This class doesn't actually do anything with the value of this property other than hold onto it, and be KVC and KVO compliant for "title." The default implementation of -setTitle: copies the passed-in object ("title" is an attribute). This property is here because so many anticipated uses of this class will involve letting the user choose among multiple named views using a pulldown menu or something like that.
 */
-@property (copy) NSString *title;
+@property (nullable, copy) NSString *title;
 
 /* The default implementation of the getter first invokes [self loadView] if the view hasn't been set yet. After -loadView is called, -viewDidLoad will be called. The setter can be used to assign a view that's created in a different manner than what -view's default implementation would do.
 */
@@ -93,7 +96,7 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Conformance to KVB's NSEditor informal protocol. The default implementations of these methods pass on the message to each registered editor, which are typically controls in the nib that are bound to the nib file's owner. You can override these methods to customize what is done when your view's presentation to the user is about to end because, for example, the user has selected another of a set of views or hit a panel's OK button (committing time) or because the user has hit a panel's Cancel button (discarding time). This class also conforms to KVB's NSEditorRegistration informal protocol, but you're not encouraged to override those methods.
 */
-- (void)commitEditingWithDelegate:(id)delegate didCommitSelector:(SEL)didCommitSelector contextInfo:(void *)contextInfo;
+- (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo;
 - (BOOL)commitEditing;
 - (void)discardEditing;
 
@@ -153,15 +156,15 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Dismisses the ViewController.  If the presenter is a ViewController, it will be sent a -dismissViewController: message with this ViewController as the parameter.  Does nothing if the receiver is not currently presented.
 */
-- (IBAction)dismissController:(id)sender NS_AVAILABLE_MAC(10_10);
+- (IBAction)dismissController:(nullable id)sender NS_AVAILABLE_MAC(10_10);
 
 /* The view controllers that were presented by this view controller. In other words, 'self' displayed each of the items in the array. This is a one-to-many relationship.
 */
-@property (readonly, assign) NSArray *presentedViewControllers NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly, assign) NSArray<__kindof NSViewController *> *presentedViewControllers NS_AVAILABLE_MAC(10_10);
 
 /* The view controller that presented this view controller (or its farthest ancestor). In other words, 'presentingViewController' is the one that displayed 'self' to screen.
 */
-@property (readonly, assign) NSViewController *presentingViewController NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly, assign) NSViewController *presentingViewController NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -181,7 +184,7 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* This method can be used to transition between sibling child view controllers. The receiver of this method is their common parent view controller. (Use [NSViewController addChildViewController:] to create the parent/child relationship.) This method will add the toViewController's view to the superview of the fromViewController's view. The fromViewController's view will be removed from the parent at the appropriate time. It is important to allow this method to add and remove the views. This method will throw an exception/assertion if the parent view controllers are not the same as the receiver, or if fromViewController.view does not have a superview.
 */
-- (void)transitionFromViewController:(NSViewController *)fromViewController toViewController:(NSViewController *)toViewController options:(NSViewControllerTransitionOptions)options completionHandler:(void (^)(void))completion NS_AVAILABLE_MAC(10_10);
+- (void)transitionFromViewController:(NSViewController *)fromViewController toViewController:(NSViewController *)toViewController options:(NSViewControllerTransitionOptions)options completionHandler:(void (^ __nullable)(void))completion NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -190,11 +193,11 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Returns the ancestor of this view controller. Can return nil if this is the contentViewController, or there is no parent for the given view controller.
 */
-@property (readonly) NSViewController *parentViewController NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly) NSViewController *parentViewController NS_AVAILABLE_MAC(10_10);
 
 /* An array of children view controllers. Assignment of the array filters all additions and removals through the insert and remove API below.
 */
-@property (copy) NSArray *childViewControllers NS_AVAILABLE_MAC(10_10);
+@property (copy) NSArray<__kindof NSViewController *> *childViewControllers NS_AVAILABLE_MAC(10_10);
 
 /* A convenience method for adding a child view controller; this simply calls insertChildViewController:atIndex: at the end of the array.
 */
@@ -245,7 +248,7 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* The Storyboard the ViewController was loaded from. Returns nil if the ViewController was not loaded from a Storyboard.
 */
-@property(readonly, strong) NSStoryboard *storyboard NS_AVAILABLE_MAC(10_10);
+@property(nullable, readonly, strong) NSStoryboard *storyboard NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -254,11 +257,11 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Returns the extension context. Also acts as a convenience method for a view controller to check if it participating in an extension request.
 */
-@property (readonly,retain) NSExtensionContext *extensionContext NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly,retain) NSExtensionContext *extensionContext NS_AVAILABLE_MAC(10_10);
 
 /* For services that vend UI.  Identifies the view (if any) in the service’s UI that displays the source image.  Defaults to nil.  When your service loads its UI (or in your service UI's xib file), you can set this to point to an image view, or some containing border view, that’s a descendant of the ViewController’s view.  Doing so helps the system to position and animate the service’s UI with respect to the source item representation.  If your service UI doesn't display the source item at its original screen position and size, leave this set to nil.
 */
-@property(strong) IBOutlet NSView *sourceItemView NS_AVAILABLE_MAC(10_10);
+@property(nullable, strong) IBOutlet NSView *sourceItemView NS_AVAILABLE_MAC(10_10);
 
 /* For services that vend UI.  Set this to position the service UI's lower-left corner in screen space.  (Use the `preferredContentSize` property to specify the service UI's desired size, in screen units.)
 */
@@ -274,3 +277,5 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 @end
 #endif
+
+NS_ASSUME_NONNULL_END

@@ -1,13 +1,16 @@
 /*
         NSPopUpButton.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSButton.h>
 #import <AppKit/NSMenuItemCell.h>
 #import <AppKit/NSMenuItem.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSMenu;
 
@@ -26,7 +29,7 @@
 - (instancetype)initWithFrame:(NSRect)buttonFrame pullsDown:(BOOL)flag;
 
 // Overrides behavior of NSView.  This is the menu for the popup, not a context menu.  PopUpButtons do not have context menus.
-@property (strong) NSMenu *menu;
+@property (nullable, strong) NSMenu *menu;
 
 // Behavior settings
 @property BOOL pullsDown;
@@ -38,7 +41,7 @@
 
 // Adding and removing items
 - (void)addItemWithTitle:(NSString *)title;
-- (void)addItemsWithTitles:(NSArray *)itemTitles;
+- (void)addItemsWithTitles:(NSArray<NSString *> *)itemTitles;
 - (void)insertItemWithTitle:(NSString *)title atIndex:(NSInteger)index;
 
 - (void)removeItemWithTitle:(NSString *)title;
@@ -47,38 +50,40 @@
 
 
 // Accessing the items
-@property (readonly, copy) NSArray *itemArray;
+@property (readonly, copy) NSArray<NSMenuItem *> *itemArray;
 @property (readonly) NSInteger numberOfItems;
 
 - (NSInteger)indexOfItem:(NSMenuItem *)item;
 - (NSInteger)indexOfItemWithTitle:(NSString *)title;
 - (NSInteger)indexOfItemWithTag:(NSInteger)tag;
-- (NSInteger)indexOfItemWithRepresentedObject:(id)obj;
-- (NSInteger)indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector;
+- (NSInteger)indexOfItemWithRepresentedObject:(nullable id)obj;
+- (NSInteger)indexOfItemWithTarget:(nullable id)target andAction:(nullable SEL)actionSelector;
 
-- (NSMenuItem *)itemAtIndex:(NSInteger)index;
-- (NSMenuItem *)itemWithTitle:(NSString *)title;
-@property (readonly, strong) NSMenuItem *lastItem;
+- (nullable NSMenuItem *)itemAtIndex:(NSInteger)index;
+- (nullable NSMenuItem *)itemWithTitle:(NSString *)title;
+@property (nullable, readonly, strong) NSMenuItem *lastItem;
 
 
 // Dealing with selection
-- (void)selectItem:(NSMenuItem *)item;
+- (void)selectItem:(nullable NSMenuItem *)item;
 - (void)selectItemAtIndex:(NSInteger)index;
 - (void)selectItemWithTitle:(NSString *)title;
 - (BOOL)selectItemWithTag:(NSInteger)tag;
 - (void)setTitle:(NSString *)aString;
 
-@property (readonly, strong) NSMenuItem *selectedItem;
+@property (nullable, readonly, strong) NSMenuItem *selectedItem;
 @property (readonly) NSInteger indexOfSelectedItem;
 @property (readonly) NSInteger selectedTag;
 - (void)synchronizeTitleAndSelectedItem;
 
 // Title conveniences
 - (NSString *)itemTitleAtIndex:(NSInteger)index;
-@property (readonly, copy) NSArray *itemTitles;
-@property (readonly, copy) NSString *titleOfSelectedItem;
+@property (readonly, copy) NSArray<NSString *> *itemTitles;
+@property (nullable, readonly, copy) NSString *titleOfSelectedItem;
 
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString *NSPopUpButtonWillPopUpNotification;
+APPKIT_EXTERN NSString * NSPopUpButtonWillPopUpNotification;
+
+NS_ASSUME_NONNULL_END

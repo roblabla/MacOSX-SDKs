@@ -1,10 +1,12 @@
 /*	NSValue.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSString, NSDictionary;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSValue : NSObject <NSCopying, NSSecureCoding>
 
@@ -12,7 +14,7 @@
 @property (readonly) const char *objCType NS_RETURNS_INNER_POINTER;
 
 - (instancetype)initWithBytes:(const void *)value objCType:(const char *)type NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -25,11 +27,11 @@
 
 @interface NSValue (NSValueExtensionMethods)
 
-+ (NSValue *)valueWithNonretainedObject:(id)anObject;
-@property (nonatomic, readonly) id nonretainedObjectValue;
++ (NSValue *)valueWithNonretainedObject:(nullable id)anObject;
+@property (nullable, readonly) id nonretainedObjectValue;
 
-+ (NSValue *)valueWithPointer:(const void *)pointer;
-- (void *)pointerValue;
++ (NSValue *)valueWithPointer:(nullable const void *)pointer;
+@property (nullable, readonly) void *pointerValue;
 
 - (BOOL)isEqualToValue:(NSValue *)value;
 
@@ -37,7 +39,7 @@
 
 @interface NSNumber : NSValue
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithChar:(char)value NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithUnsignedChar:(unsigned char)value NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithShort:(short)value NS_DESIGNATED_INITIALIZER;
@@ -76,7 +78,7 @@
 
 - (BOOL)isEqualToNumber:(NSNumber *)number;
 
-- (NSString *)descriptionWithLocale:(id)locale;
+- (NSString *)descriptionWithLocale:(nullable id)locale;
 
 @end
 
@@ -100,3 +102,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

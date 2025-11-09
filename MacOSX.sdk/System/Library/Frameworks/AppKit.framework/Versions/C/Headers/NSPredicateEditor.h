@@ -1,14 +1,17 @@
 /*
         NSPredicateEditor.h
 	Application Kit
-	Copyright (c) 2006-2014, Apple Inc.
+	Copyright (c) 2006-2015, Apple Inc.
 	All rights reserved.
 */
 
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSRuleEditor.h>
 
-@class NSPredicateTemplate, NSArray;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSPredicateTemplate, NSArray, NSPredicateEditorRowTemplate;
 
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSPredicateEditor : NSRuleEditor {
@@ -28,7 +31,9 @@ NS_CLASS_AVAILABLE(10_5, NA)
 */
 /* Getter - Returns the row templates for this NSPredicateEditor.
 */
-@property (copy) NSArray *rowTemplates;
+@property (copy) NSArray<NSPredicateEditorRowTemplate *> *rowTemplates;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

@@ -1,7 +1,8 @@
 #ifndef __SIMD_PACKED_HEADER__
 #define __SIMD_PACKED_HEADER__
 
-#if defined __has_attribute && __has_attribute(__ext_vector_type__) && __has_attribute(__aligned__)
+#include <simd/internal.h>
+#if __has_attribute(__ext_vector_type__) && __has_attribute(__aligned__)
 /*  The function of this header fundamentally depends on the ext_vector_type
  *  and aligned attributes.  There is no fallback if these attributes are not
  *  supported by your compiler.                                               */

@@ -1,12 +1,14 @@
 /*
     NSPanGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2014, Apple Inc.
+    Copyright (c) 2013-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSGestureRecognizer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_10, NA)
 @interface NSPanGestureRecognizer : NSGestureRecognizer <NSCoding> {
@@ -33,10 +35,12 @@ NS_CLASS_AVAILABLE(10_10, NA)
 @property NSUInteger buttonMask; // Defaults to 0x1
 
 /* translation in the coordinate system of the specified view */
-- (NSPoint)translationInView:(NSView*)view;
-- (void)setTranslation:(NSPoint)translation inView:(NSView*)view;
+- (NSPoint)translationInView:(nullable NSView*)view;
+- (void)setTranslation:(NSPoint)translation inView:(nullable NSView*)view;
 
 /* velocity of the pan in points/second in the coordinate system of the specified view */
-- (NSPoint)velocityInView:(NSView*)view;
+- (NSPoint)velocityInView:(nullable NSView*)view;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreRAID.framework/Versions/A/CoreRAID
-current-version: 304.0
+current-version: 305.0
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CRArrayCreateFromSet, _CRCodecCreateCopy, _CRCopyLocalizedString, 

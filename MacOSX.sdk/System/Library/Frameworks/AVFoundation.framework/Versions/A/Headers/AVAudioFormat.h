@@ -2,12 +2,14 @@
 	File:		AVAudioFormat.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioTypes.h>
 #import <AVFoundation/AVAudioChannelLayout.h>
-#import <Foundation/NSDictionary.h>
+#import <CoreMedia/CMFormatDescription.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!	
 	@enum		AVAudioCommonFormat
@@ -41,7 +43,7 @@ typedef NS_ENUM(NSUInteger, AVAudioCommonFormat) {
 		Instances of this class are immutable.
 */
 NS_CLASS_AVAILABLE(10_10, 8_0)
-@interface AVAudioFormat : NSObject {
+@interface AVAudioFormat : NSObject <NSSecureCoding> {
 @private
 	AudioStreamBasicDescription _asbd;
 	AVAudioChannelLayout *_layout;
@@ -69,7 +71,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		If the format specifies more than 2 channels, this method fails (returns nil) unless layout
 		is non-nil.
 */
-- (instancetype)initWithStreamDescription:(const AudioStreamBasicDescription *)asbd channelLayout:(AVAudioChannelLayout *)layout;
+- (instancetype)initWithStreamDescription:(const AudioStreamBasicDescription *)asbd channelLayout:(AVAudioChannelLayout * __nullable)layout;
 
 /*! @method initStandardFormatWithSampleRate:channels:
 	@abstract Initialize to deinterleaved float with the specified sample rate and channel count.
@@ -82,7 +84,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 - (instancetype)initStandardFormatWithSampleRate:(double)sampleRate channels:(AVAudioChannelCount)channels;
 
-/*! @method initStandardFormatWithSampleRate:sampleRate:channelLayout:
+/*! @method initStandardFormatWithSampleRate:channelLayout:
 	@abstract Initialize to deinterleaved float with the specified sample rate and channel layout.
 	@param sampleRate
 		the sample rate
@@ -93,6 +95,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /*! @method initWithCommonFormat:sampleRate:channels:interleaved:
 	@abstract Initialize to float with the specified sample rate, channel count and interleavedness.
+	@param format
+		the common format type
 	@param sampleRate
 		the sample rate
 	@param channels
@@ -106,6 +110,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /*! @method initWithCommonFormat:sampleRate:interleaved:channelLayout:
 	@abstract Initialize to float with the specified sample rate, channel layout and interleavedness.
+	@param format
+		the common format type
 	@param sampleRate
 		the sample rate
 	@param interleaved
@@ -121,11 +127,22 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		See AVAudioSettings.h. Note that many settings dictionary elements pertain to encoder
 		settings, not the basic format, and will be ignored.
 */
-- (instancetype)initWithSettings:(NSDictionary *)settings;
+- (instancetype)initWithSettings:(NSDictionary<NSString *, id> *)settings;
+
+/*!
+ 	@method initWithCMAudioFormatDescription:
+ 	@abstract initialize from a CMAudioFormatDescriptionRef.
+ 	@param formatDescription
+ 		the CMAudioFormatDescriptionRef.
+ 	@discussion
+ 		If formatDescription is invalid, this method fails (returns nil).
+ */
+- (instancetype)initWithCMAudioFormatDescription:(CMAudioFormatDescriptionRef)formatDescription NS_AVAILABLE(10_11, 9_0);
+
 
 /*!	@method isEqual:
 	@abstract Determine whether another format is functionally equivalent.
-	@param format
+	@param object
 		the format to compare against
 	@discussion
 		For PCM, interleavedness is ignored for mono. Differences in the AudioStreamBasicDescription
@@ -143,7 +160,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly, getter=isStandard) BOOL standard;
 
 /*!	@property commonFormat
-	@abstract An @link AVAudioCommonFormat @/link identifying the format
+	@abstract An `AVAudioCommonFormat` identifying the format
 */
 @property (nonatomic, readonly) AVAudioCommonFormat commonFormat;
 
@@ -170,17 +187,23 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly) const AudioStreamBasicDescription *streamDescription;
 
 /*!	@property channelLayout
-	@abstract The underlying AVAudioChannelLayout.
+	@abstract The underlying AVAudioChannelLayout, if any.
+	@discussion
+		Only formats with more than 2 channels are required to have channel layouts.
 */
-@property (nonatomic, readonly) const AVAudioChannelLayout *channelLayout;
+@property (nonatomic, readonly, nullable) const AVAudioChannelLayout *channelLayout;
 
 /*!	@property settings
 	@abstract Returns the format represented as a dictionary with keys from AVAudioSettings.h.
-	@discussion
-		Not all formats representable by an AudioStreamBasicDescription (the underlying
-		implementation) can be represented in a settings dictionary; in that case, nil will be
-		returned.
 */
-@property (nonatomic, readonly) NSDictionary *settings;
+@property (nonatomic, readonly) NSDictionary<NSString *, id> *settings;
+
+/*!
+	 @property formatDescription
+	 @abstract Converts to a CMAudioFormatDescriptionRef, for use with Core Media API's.
+ */
+@property (nonatomic, readonly) CMAudioFormatDescriptionRef formatDescription NS_AVAILABLE(10_11, 9_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

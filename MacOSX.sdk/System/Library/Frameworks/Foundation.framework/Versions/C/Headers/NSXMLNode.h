@@ -1,12 +1,14 @@
 /*	NSXMLNode.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSXMLNodeOptions.h>
 
-@class NSArray, NSDictionary, NSError, NSString, NSURL;
+@class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSError, NSString, NSURL;
 @class NSXMLElement, NSXMLDocument;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @typedef NSXMLNodeKind
@@ -20,7 +22,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 	NSXMLProcessingInstructionKind,
 	NSXMLCommentKind,
 	NSXMLTextKind,
-	NSXMLDTDKind,
+	NSXMLDTDKind NS_SWIFT_NAME(DTDKind),
 	NSXMLEntityDeclarationKind,
 	NSXMLAttributeDeclarationKind,
 	NSXMLElementDeclarationKind,
@@ -114,7 +116,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method elementWithName:children:attributes:
     @abstract Returns an element children and attributes <tt>&lt;name attr1="foo" attr2="bar">&lt;-- child1 -->child2&lt;/name></tt>.
 */
-+ (id)elementWithName:(NSString *)name children:(NSArray *)children attributes:(NSArray *)attributes;
++ (id)elementWithName:(NSString *)name children:(nullable NSArray<NSXMLNode *> *)children attributes:(nullable NSArray<NSXMLNode *> *)attributes;
 
 /*!
     @method attributeWithName:stringValue:
@@ -156,7 +158,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method DTDNodeWithXMLString:
     @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
 */
-+ (id)DTDNodeWithXMLString:(NSString *)string;
++ (nullable id)DTDNodeWithXMLString:(NSString *)string;
 
 #if 0
 #pragma mark --- Properties ---
@@ -172,19 +174,19 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method name
     @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
 */
-@property (copy) NSString *name; //primitive
+@property (nullable, copy) NSString *name; //primitive
 
 /*!
     @method objectValue
     @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
 */
-@property (retain) id objectValue; //primitive
+@property (nullable, retain) id objectValue; //primitive
 
 /*!
     @method stringValue:
     @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
 */
-@property (copy) NSString *stringValue; //primitive
+@property (nullable, copy) NSString *stringValue; //primitive
 
 /*!
     @method setStringValue:resolvingEntities:
@@ -212,13 +214,13 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method rootDocument
     @abstract The encompassing document or nil.
 */
-@property (readonly, retain) NSXMLDocument *rootDocument;
+@property (nullable, readonly, retain) NSXMLDocument *rootDocument;
 
 /*!
     @method parent
     @abstract The parent of this node. Documents and standalone Nodes have a nil parent; there is not a 1-to-1 relationship between parent and children, eg a namespace cannot be a child but has a parent element.
 */
-@property (readonly, copy) NSXMLNode *parent; //primitive
+@property (nullable, readonly, copy) NSXMLNode *parent; //primitive
 
 /*!
     @method childCount
@@ -230,37 +232,37 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method children
     @abstract An immutable array of child nodes. Relevant for documents, elements, and document type declarations.
 */
-@property (readonly, copy) NSArray *children; //primitive
+@property (nullable, readonly, copy) NSArray<NSXMLNode *> *children; //primitive
 
 /*!
     @method childAtIndex:
     @abstract Returns the child node at a particular index.
 */
-- (NSXMLNode *)childAtIndex:(NSUInteger)index; //primitive
+- (nullable NSXMLNode *)childAtIndex:(NSUInteger)index; //primitive
 
 /*!
     @method previousSibling:
     @abstract Returns the previous sibling, or nil if there isn't one.
 */
-@property (readonly, copy) NSXMLNode *previousSibling;
+@property (nullable, readonly, copy) NSXMLNode *previousSibling;
 
 /*!
     @method nextSibling:
     @abstract Returns the next sibling, or nil if there isn't one.
 */
-@property (readonly, copy) NSXMLNode *nextSibling;
+@property (nullable, readonly, copy) NSXMLNode *nextSibling;
 
 /*!
     @method previousNode:
     @abstract Returns the previous node in document order. This can be used to walk the tree backwards.
 */
-@property (readonly, copy) NSXMLNode *previousNode;
+@property (nullable, readonly, copy) NSXMLNode *previousNode;
 
 /*!
     @method nextNode:
     @abstract Returns the next node in document order. This can be used to walk the tree forwards.
 */
-@property (readonly, copy) NSXMLNode *nextNode;
+@property (nullable, readonly, copy) NSXMLNode *nextNode;
 
 /*!
     @method detach:
@@ -272,7 +274,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method detach:
     @abstract Returns the XPath to this node, for example foo/bar[2]/baz.
 */
-@property (readonly, copy) NSString *XPath;
+@property (nullable, readonly, copy) NSString *XPath;
 
 #if 0
 #pragma mark --- QNames ---
@@ -282,19 +284,19 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 	@method localName
 	@abstract Returns the local name bar if this attribute or element's name is foo:bar
 */
-@property (readonly, copy) NSString *localName; //primitive
+@property (nullable, readonly, copy) NSString *localName; //primitive
 
 /*!
 	@method prefix
 	@abstract Returns the prefix foo if this attribute or element's name if foo:bar
 */
-@property (readonly, copy) NSString *prefix; //primitive
+@property (nullable, readonly, copy) NSString *prefix; //primitive
 
 /*!
 	@method URI
 	@abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
 */
-@property (copy) NSString *URI; //primitive
+@property (nullable, copy) NSString *URI; //primitive
 
 /*!
     @method localNameForName:
@@ -306,14 +308,14 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method localNameForName:
     @abstract Returns the prefix foo in the name foo:bar.
 */
-+ (NSString *)prefixForName:(NSString *)name;
++ (nullable NSString *)prefixForName:(NSString *)name;
 
 
 /*!
     @method predefinedNamespaceForPrefix:
     @abstract Returns the namespace belonging to one of the predefined namespaces xml, xs, or xsi
 */
-+ (NSXMLNode *)predefinedNamespaceForPrefix:(NSString *)name;
++ (nullable NSXMLNode *)predefinedNamespaceForPrefix:(NSString *)name;
 
 #if 0
 #pragma mark --- Output ---
@@ -352,15 +354,16 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @abstract Returns the nodes resulting from applying an XPath to this node using the node as the context item ("."). normalizeAdjacentTextNodesPreservingCDATA:NO should be called if there are adjacent text nodes since they are not allowed under the XPath/XQuery Data Model.
 	@returns An array whose elements are a kind of NSXMLNode.
 */
-- (NSArray *)nodesForXPath:(NSString *)xpath error:(NSError **)error;
+- (nullable NSArray<__kindof NSXMLNode *> *)nodesForXPath:(NSString *)xpath error:(NSError **)error;
 
 /*!
     @method objectsForXQuery:constants:error:
     @abstract Returns the objects resulting from applying an XQuery to this node using the node as the context item ("."). Constants are a name-value dictionary for constants declared "external" in the query. normalizeAdjacentTextNodesPreservingCDATA:NO should be called if there are adjacent text nodes since they are not allowed under the XPath/XQuery Data Model.
 	@returns An array whose elements are kinds of NSArray, NSData, NSDate, NSNumber, NSString, NSURL, or NSXMLNode.
 */
-- (NSArray *)objectsForXQuery:(NSString *)xquery constants:(NSDictionary *)constants error:(NSError **)error;
+- (nullable NSArray *)objectsForXQuery:(NSString *)xquery constants:(nullable NSDictionary<NSString *, id> *)constants error:(NSError **)error;
 
-- (NSArray *)objectsForXQuery:(NSString *)xquery error:(NSError **)error;
+- (nullable NSArray *)objectsForXQuery:(NSString *)xquery error:(NSError **)error;
 @end
 
+NS_ASSUME_NONNULL_END

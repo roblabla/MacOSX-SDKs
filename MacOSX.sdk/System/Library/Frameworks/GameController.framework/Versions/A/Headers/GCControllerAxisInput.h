@@ -7,6 +7,8 @@
 
 #import <GameController/GameController.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 GAMECONTROLLER_EXPORT
 @interface GCControllerAxisInput : GCControllerElement
 
@@ -17,7 +19,7 @@ GAMECONTROLLER_EXPORT
  @param value the value the axis was set to at the time the valueChangedHandler fired.
  */
 typedef void (^GCControllerAxisValueChangedHandler)(GCControllerAxisInput *axis, float value);
-@property (copy) GCControllerAxisValueChangedHandler valueChangedHandler;
+@property (nonatomic, copy, nullable) GCControllerAxisValueChangedHandler valueChangedHandler;
 
 /**
  A normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned
@@ -27,6 +29,9 @@ typedef void (^GCControllerAxisValueChangedHandler)(GCControllerAxisInput *axis,
  As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone.
  Any value greater than or less than zero is not in the deadzone.
  */
-@property (readonly) float value;
+@property (nonatomic, readonly) float value;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

@@ -40,6 +40,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly, strong) DOMNode *relatedNode;
 @property (readonly, copy) NSString *prevValue;
 @property (readonly, copy) NSString *newValue;
+- (NSString *)newValue NS_RETURNS_NOT_RETAINED;
 @property (readonly, copy) NSString *attrName;
 @property (readonly) unsigned short attrChange;
 

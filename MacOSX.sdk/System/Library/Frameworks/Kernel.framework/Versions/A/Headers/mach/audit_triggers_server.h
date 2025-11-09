@@ -92,7 +92,7 @@ extern const struct audit_triggers_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int flags;
-	} __Request__audit_triggers_t;
+	} __Request__audit_triggers_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -119,7 +119,7 @@ union __RequestUnion__audit_triggers_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__audit_triggers_t;
+	} __Reply__audit_triggers_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

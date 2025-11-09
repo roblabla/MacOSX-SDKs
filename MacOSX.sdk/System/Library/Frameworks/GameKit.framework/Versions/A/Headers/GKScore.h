@@ -12,6 +12,8 @@
 
 @class GKPlayer;
 
+NS_ASSUME_NONNULL_BEGIN
+
 // GKScore represents a score in the leaderboards.
 NS_CLASS_AVAILABLE(10_8, 4_1)
 @interface GKScore : NSObject <NSCoding, NSSecureCoding>
@@ -22,8 +24,8 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 // Initialize the achievement for a specific player. Use to submit participant scores when ending a turn-based match.
 - (instancetype)initWithLeaderboardIdentifier:(NSString *)identifier player:(GKPlayer *)player NS_AVAILABLE(10_10, 8_0);
 
-@property(assign, NS_NONATOMIC_IOSONLY)             int64_t     value;              // The score value as a 64bit integer.
-@property(readonly, copy, NS_NONATOMIC_IOSONLY)     NSString    *formattedValue;    // The score formatted as a string, localized with a label
+@property(assign, NS_NONATOMIC_IOSONLY)                     int64_t     value;              // The score value as a 64bit integer.
+@property(readonly, copy, nullable, NS_NONATOMIC_IOSONLY)   NSString    *formattedValue;    // The score formatted as a string, localized with a label
 
 // leaderboard identifier (required)
 @property(copy, NS_NONATOMIC_IOSONLY)               NSString    *leaderboardIdentifier NS_AVAILABLE(10_10, 7_0);
@@ -44,17 +46,19 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 // 1. Value not set
 // 2. Local player not authenticated
 // 3. Communications problem
-+ (void)reportScores:(NSArray *)scores withCompletionHandler:(void(^)(NSError *error))completionHandler NS_AVAILABLE(10_8, 6_0);
++ (void)reportScores:(NSArray<GKScore *> *)scores withCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 6_0);
 
 @end
 
 @interface GKScore (Deprecated)
 
-- (instancetype)initWithLeaderboardIdentifier:(NSString *)identifier forPlayer:(NSString *)playerID NS_DEPRECATED_IOS(7_0, 8_0, "use initWithLeaderboardIdentifier:player:");
-- (void)reportScoreWithCompletionHandler:(void(^)(NSError *error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use +reportScores:withCompletionhandler: instead");
-- (instancetype)initWithCategory:(NSString *)category NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use initWithLeaderboardIdentifier: instead");
+- (instancetype)initWithLeaderboardIdentifier:(NSString *)identifier forPlayer:(NSString *)playerID NS_DEPRECATED_IOS(7_0, 8_0, "use initWithLeaderboardIdentifier:player:") ;
+- (void)reportScoreWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use +reportScores:withCompletionhandler: instead") ;
+- (instancetype)initWithCategory:(nullable NSString *)category NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use initWithLeaderboardIdentifier: instead") ;
 
-@property(readonly, retain, NS_NONATOMIC_IOSONLY)   NSString    *playerID NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use player");          // The identifier of the player that recorded the score.
-@property(copy, NS_NONATOMIC_IOSONLY) NSString *category NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use leaderboardIdentifier instead");
+@property(readonly, retain, NS_NONATOMIC_IOSONLY)   NSString    *playerID NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use player") ;          // The identifier of the player that recorded the score.
+@property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *category NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use leaderboardIdentifier instead") ;
 
 @end
+
+NS_ASSUME_NONNULL_END

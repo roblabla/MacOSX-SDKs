@@ -2,13 +2,13 @@
  *  CVBase.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVBase.h
-	@copyright 2004-2014 Apple Inc. All rights reserved.
-	@availability Mac OS X 10.4 or later
+	@copyright 2004-2015 Apple Inc. All rights reserved.
+	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @discussion Here you can find the type declarations for CoreVideo. CoreVideo uses a CVTimeStamp structure to store video display time stamps.
 */
 
@@ -48,6 +48,14 @@
 #define __AVAILABILITY_INTERNAL__IPHONE_8_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_11
+#define __AVAILABILITY_INTERNAL__MAC_10_11        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_9_0
+#define __AVAILABILITY_INTERNAL__IPHONE_9_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
 #include <CoreFoundation/CFBase.h>
 
 #if defined(__cplusplus)
@@ -60,7 +68,41 @@ extern "C" {
 #define COREVIDEO_SUPPORTS_COLORSPACE 	((TARGET_OS_MAC && ! TARGET_OS_IPHONE) || (TARGET_OS_WIN32))
 #define COREVIDEO_SUPPORTS_DISPLAYLINK 	(TARGET_OS_MAC && ! TARGET_OS_IPHONE)
 #define COREVIDEO_SUPPORTS_IOSURFACE	(TARGET_OS_IPHONE ? TARGET_OS_EMBEDDED : (TARGET_OS_MAC && ((MAC_OS_X_VERSION_MAX_ALLOWED >= 1060))))
-#define COREVIDEO_SUPPORTS_METAL        (COREVIDEO_SUPPORTS_IOSURFACE && TARGET_OS_IPHONE)
+#define COREVIDEO_SUPPORTS_IOSURFACE_PREFETCH    (TARGET_OS_EMBEDDED && (__IPHONE_OS_VERSION_MIN_REQUIRED >= 80300))
+#define COREVIDEO_SUPPORTS_METAL        (COREVIDEO_SUPPORTS_IOSURFACE && (TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MIN_REQUIRED >= 101100)) && (! TARGET_OS_WATCH))
+
+#define COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS	(__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+
+#if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature) && __has_feature(nullability)
+	#define COREVIDEO_DECLARE_NULLABILITY 1
+#endif
+
+#if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature) && __has_feature(attribute_cf_returns_on_parameters)
+#define CV_RETURNS_RETAINED_PARAMETER		CF_RETURNS_RETAINED
+#else
+#define CV_RETURNS_RETAINED_PARAMETER
+#endif
+
+#if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature) && __has_feature(attribute_cf_consumed)
+#define CV_RELEASES_ARGUMENT        CF_RELEASES_ARGUMENT
+#else
+#define CV_RELEASES_ARGUMENT
+#endif
+
+
+#if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature) && __has_feature(objc_bridge_id)
+#define CV_BRIDGED_TYPE(type)       CF_BRIDGED_TYPE(type)
+#else
+#define CV_BRIDGED_TYPE(type)
+#endif
+
+#if COREVIDEO_DECLARE_NULLABILITY
+#define CV_NULLABLE __nullable
+#define CV_NONNULL __nonnull
+#else
+#define CV_NULLABLE
+#define CV_NONNULL
+#endif
 
 #if TARGET_OS_WIN32 && defined(CV_BUILDING_CV) && defined(__cplusplus)
 #define CV_EXPORT extern "C" __declspec(dllexport) 
@@ -189,11 +231,12 @@ typedef struct
     @abstract CoreVideo uses a CVTimeStamp structure to store video display time stamps.
     @discussion This structure is purposely very similar to AudioTimeStamp defined in the CoreAudio framework. 
 		Most of the CVTimeStamp struct should be fairly self-explanatory. However, it is probably worth pointing out that unlike the audio time stamps, floats are not used to represent the video equivalent of sample times. This was done partly to avoid precision issues, and partly because QuickTime still uses integers for time values and time scales. In the actual implementation it has turned out to be very convenient to use integers, and we can represent framerates like NTSC (30000/1001 fps) exactly. The mHostTime structure field uses the same Mach absolute time base that is used in CoreAudio, so that clients of the CoreVideo API can synchronize between the two subsystems.
+    @field version The current CVTimeStamp is version 0.
     @field videoTimeScale The scale (in units per second) of the videoTime and videoPeriod values
     @field videoTime This represents the start of a frame (or field for interlaced)
     @field hostTime Host root timebase time
     @field rateScalar This is the current rate of the device as measured by the timestamps, divided by the nominal rate
-    @field videoPeriod This is the nominal update period of the current output device
+    @field videoRefreshPeriod This is the nominal update period of the current output device
     @field smpteTime SMPTE time representation of the time stamp. 
     @field flags Possible values are:		
 		kCVTimeStampVideoTimeValid
@@ -207,18 +250,17 @@ typedef struct
 		Some commonly used combinations of timestamp flags
 		kCVTimeStampVideoHostTimeValid
 		kCVTimeStampIsInterlaced
-    @field version The current CVTimeStamp is version 0.
     @field reserved Reserved. Do not use.
 
 */
 typedef struct
 {
-    uint32_t			version;		// Currently will be 0.
-    int32_t			videoTimeScale;     	// Video timescale (units per second)
-    int64_t			videoTime;		// This represents the start of a frame (or field for interlaced) .. think vsync  - still not 100% sure on the name
-    uint64_t			hostTime;		// Host root timebase time
-    double			rateScalar;		// Current rate as measured by the timestamps divided by the nominal rate
-    int64_t			videoRefreshPeriod;    	// Hint for nominal output rate
+    uint32_t			version;
+    int32_t			videoTimeScale;
+    int64_t			videoTime;
+    uint64_t			hostTime;
+    double			rateScalar;
+    int64_t			videoRefreshPeriod;
     CVSMPTETime			smpteTime;
     uint64_t			flags;
     uint64_t			reserved;

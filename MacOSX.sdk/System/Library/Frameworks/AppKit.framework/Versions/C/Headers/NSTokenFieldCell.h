@@ -1,7 +1,7 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2014, Apple Inc.
+	Copyright (c) 2004-2015, Apple Inc.
 	All rights reserved.
 
 */
@@ -10,7 +10,9 @@
 #import <Foundation/Foundation.h>
 
 
-@class NSMutableArray, NSMutableCharacterSet, NSMutableDictionary, NSTextContainer;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSTextContainer;
 @protocol NSTokenFieldCellDelegate;
 
 typedef NS_ENUM(NSUInteger, NSTokenStyle) {
@@ -62,10 +64,10 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 @property NSTimeInterval completionDelay;
 + (NSTimeInterval)defaultCompletionDelay;
 
-@property (copy) NSCharacterSet *tokenizingCharacterSet;
+@property (null_resettable, copy) NSCharacterSet *tokenizingCharacterSet;
 + (NSCharacterSet *)defaultTokenizingCharacterSet;
 
-@property (assign) id<NSTokenFieldCellDelegate> delegate;
+@property (nullable, assign) id<NSTokenFieldCellDelegate> delegate;
 
 @end
 
@@ -86,8 +88,8 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 
 // If you return nil or don't implement these delegate methods, we will assume
 // editing string = display string = represented object
-- (NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject;
-- (NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell editingStringForRepresentedObject:(id)representedObject;
+- (nullable NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject;
+- (nullable NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell editingStringForRepresentedObject:(id)representedObject;
 - (id)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell representedObjectForEditingString: (NSString *)editingString;
 
 // We put the string on the pasteboard before calling this delegate method. 
@@ -95,13 +97,15 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 - (BOOL)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell writeRepresentedObjects:(NSArray *)objects toPasteboard:(NSPasteboard *)pboard;
 
 // Return an array of represented objects to add to the token field.
-- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell readFromPasteboard:(NSPasteboard *)pboard;
+- (nullable NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell readFromPasteboard:(NSPasteboard *)pboard;
 
 // By default the tokens have no menu.
-- (NSMenu *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell menuForRepresentedObject:(id)representedObject;
+- (nullable NSMenu *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell menuForRepresentedObject:(id)representedObject;
 - (BOOL)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell hasMenuForRepresentedObject:(id)representedObject; 
 
 // This method allows you to change the style for individual tokens as well as have mixed text and tokens.
 - (NSTokenStyle)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell styleForRepresentedObject:(id)representedObject;
 
 @end
+
+NS_ASSUME_NONNULL_END

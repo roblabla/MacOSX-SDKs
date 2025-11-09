@@ -1,6 +1,6 @@
 /*
         NSTextTable.h
-        Copyright (c) 2004-2014, Apple Inc.
+        Copyright (c) 2004-2015, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.
@@ -10,6 +10,8 @@
 */
 
 #import <AppKit/NSText.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSTextTable;
 @class NSLayoutManager;
@@ -87,10 +89,10 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 @property NSTextBlockVerticalAlignment verticalAlignment;
 
 /* Colors */
-@property (copy) NSColor *backgroundColor;
-- (void)setBorderColor:(NSColor *)color forEdge:(NSRectEdge)edge;
-- (void)setBorderColor:(NSColor *)color;        // Convenience method sets all edges at once
-- (NSColor *)borderColorForEdge:(NSRectEdge)edge;
+@property (nullable, copy) NSColor *backgroundColor;
+- (void)setBorderColor:(nullable NSColor *)color forEdge:(NSRectEdge)edge;
+- (void)setBorderColor:(nullable NSColor *)color;        // Convenience method sets all edges at once
+- (nullable NSColor *)borderColorForEdge:(NSRectEdge)edge;
 
 /* These methods will be called during layout to determine the size and position of the block.  The first will be called before the block is laid out to determine the rect within which glyphs should be laid.  The second will be called after the block is laid out to determine the rect the block occupies with borders and margins. */
 - (NSRect)rectForLayoutAtPoint:(NSPoint)startingPoint inRect:(NSRect)rect textContainer:(NSTextContainer *)textContainer characterRange:(NSRange)charRange;
@@ -144,4 +146,6 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 - (void)drawBackgroundForBlock:(NSTextTableBlock *)block withFrame:(NSRect)frameRect inView:(NSView *)controlView characterRange:(NSRange)charRange layoutManager:(NSLayoutManager *)layoutManager;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

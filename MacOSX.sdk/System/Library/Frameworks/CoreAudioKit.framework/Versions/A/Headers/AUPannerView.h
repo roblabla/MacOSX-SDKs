@@ -17,23 +17,20 @@
 @class AUPannerView
 @abstract  An AUPannerView object retrieves and instantiates a generic panner view for the given panner unit
 */
+NS_ASSUME_NONNULL_BEGIN
 @interface AUPannerView : NSView {}
 /*! @property audioUnit
 	@abstract Read-only property for the audio unit associated with the view
-	@result   The audio unit associated with the generic panner view or nil on error
+	@result   The audio unit associated with the generic panner view
 */
 @property (readonly) AudioUnit audioUnit;
 
 /*! @method +AUPannerViewWithAudioUnit:
     @abstract Static constructor used to create the view
-    @discussion This static constructor is called as follows:
-		AUPannerView *mGenericPannerView = nil;
-		mGenericPannerView = [[AUPannerView AUPannerViewWithAudioUnit: mCurrentAU] retain];
-
-	Note that we retain the returned view because it is returned autoreleased. You do not to retain it if you are adding the view as a subview of an existing NSView.
     @param au  The Panner Audio Unit associated with the view
     @result  Returns the newly created view object autoreleased or nil on error
 */
 + (AUPannerView *) AUPannerViewWithAudioUnit: (AudioUnit) au;
 
 @end
+NS_ASSUME_NONNULL_END

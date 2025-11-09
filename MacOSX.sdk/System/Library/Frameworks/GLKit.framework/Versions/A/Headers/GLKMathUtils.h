@@ -15,6 +15,7 @@
 
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
+NS_ASSUME_NONNULL_BEGIN
 #endif
 
 #ifdef __cplusplus
@@ -37,6 +38,7 @@ NSString * NSStringFromGLKVector3(GLKVector3 vector);
 NSString * NSStringFromGLKVector4(GLKVector4 vector);
     
 NSString * NSStringFromGLKQuaternion(GLKQuaternion quaternion);
+NS_ASSUME_NONNULL_END
 #endif
     
 #ifdef __cplusplus

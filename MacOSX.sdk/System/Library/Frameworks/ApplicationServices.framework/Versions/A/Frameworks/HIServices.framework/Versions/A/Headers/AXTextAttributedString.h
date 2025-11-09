@@ -22,7 +22,8 @@ extern "C" {
 #endif
 
 #include <CoreFoundation/CoreFoundation.h>
-
+CF_ASSUME_NONNULL_BEGIN
+    
 /*! @constant kAXFontTextAttribute
       @abstract A dictionary (a <code>CFDictionaryRef</code>) of two or more font keys.
       @discussion The dictionary associated with this attribute must contain the {@link kAXFontNameKey} and
@@ -115,6 +116,23 @@ extern CFStringRef kAXAutocorrectedTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_7
 
 
 
+/*! @constant kAXListItemPrefixTextAttribute
+      @abstract A <code>CFAttributedStringRef</code> value that indicates the prepended string of the list item. If the string is a common unicode character (e.g. a bullet ¥), return that unicode character. For lists with images before the text, return a reasonable label of the image.
+ */
+extern CFStringRef kAXListItemPrefixTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER;
+
+/*! @constant kAXListItemIndexTextAttribute
+      @abstract A <code>CFNumberRef</code> value that indicates the line index. Each list item increments the index, even for unordered lists. The first item should have index 0.
+ */
+extern CFStringRef kAXListItemIndexTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER;
+
+/*! @constant kAXListItemLevelTextAttribute
+      @abstract A <code>CFNumberRef</code> value that indicates the indent level. Each sublist increments the level. The first item should have level 0.
+ */
+extern CFStringRef kAXListItemLevelTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER;
+
+
+
 /*! @group Font Text Attribute Keys
     @discussion
         Used with {@link kAXFontTextAttribute}.
@@ -143,19 +161,19 @@ extern CFStringRef kAXFontSizeKey			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	/
 
 /*! @typedef AXUnderlineStyle
       @abstract Values that describe the style of underlining (used with the {@link kAXUnderlineTextAttribute} attribute).
- */    
-enum {
+ */
+typedef CF_ENUM(UInt32, AXUnderlineStyle) {
     kAXUnderlineStyleNone	= 0x0,
     kAXUnderlineStyleSingle	= 0x1,
     kAXUnderlineStyleThick	= 0x2,
     kAXUnderlineStyleDouble	= 0x9
 };
-typedef UInt32 AXUnderlineStyle;
 
 
 // DO NOT USE. This is an old, misspelled version of one of the above constants.
 extern CFStringRef kAXForegoundColorTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CGColorRef
 
+CF_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }
 #endif

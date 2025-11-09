@@ -2,7 +2,7 @@
 archs:           [ i386, x86_64 ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/BrowserKit.framework/Versions/A/BrowserKit
-current-version: 962.0
+current-version: 964.1
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _BKAllowsEmptySelectionKey, _BKAllowsMultipleSelectionKey, 

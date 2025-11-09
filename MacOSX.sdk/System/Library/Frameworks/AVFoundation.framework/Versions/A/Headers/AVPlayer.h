@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -37,6 +37,8 @@
 
 @class AVPlayerItem;
 @class AVPlayerInternal;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @enum AVPlayerStatus
@@ -72,7 +74,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			An instance of AVPlayer
 	@discussion		Implicitly creates an AVPlayerItem. Clients can obtain the AVPlayerItem as it becomes the player's currentItem.
 */
-+ (id)playerWithURL:(NSURL *)URL;
++ (instancetype)playerWithURL:(NSURL *)URL;
 
 /*!
 	@method			playerWithPlayerItem:
@@ -81,7 +83,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			An instance of AVPlayer
 	@discussion		Useful in order to play items for which an AVAsset has previously been created. See -[AVPlayerItem initWithAsset:].
 */
-+ (id)playerWithPlayerItem:(AVPlayerItem *)item;
++ (instancetype)playerWithPlayerItem:(AVPlayerItem *)item;
 
 /*!
 	@method			initWithURL:
@@ -123,7 +125,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	The value of this property is an NSError that describes what caused the receiver to no longer be able to play items.
 	If the receiver's status is not AVPlayerStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly) NSError *error;
+@property (nonatomic, readonly, nullable) NSError *error;
 
 @end
 
@@ -153,7 +155,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVPlayer (AVPlayerItemControl)
 
 /* indicates the current item of the player */
-@property (nonatomic, readonly) AVPlayerItem *currentItem;
+@property (nonatomic, readonly, nullable) AVPlayerItem *currentItem;
 
 /*!
 	@method			replaceCurrentItemWithPlayerItem:
@@ -163,7 +165,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@discussion
 	  In all releases of iOS 4, invoking replaceCurrentItemWithPlayerItem: with an AVPlayerItem that's already the receiver's currentItem results in an exception being raised. Starting with iOS 5, it's a no-op.
 */
-- (void)replaceCurrentItemWithPlayerItem:(AVPlayerItem *)item;
+- (void)replaceCurrentItemWithPlayerItem:(nullable AVPlayerItem *)item;
 
 /*!
  @enum AVPlayerActionAtItemEnd
@@ -311,7 +313,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 	@param completionHandler
 					The block that will be called when the preroll is either completed or is interrupted.
 */
-- (void)prerollAtRate:(float)rate completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_8, 6_0);
+- (void)prerollAtRate:(float)rate completionHandler:(nullable void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_8, 6_0);
 
 /*!
 	@method			cancelPendingPrerolls
@@ -321,7 +323,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 - (void)cancelPendingPrerolls NS_AVAILABLE(10_8, 6_0);
 
 /* NULL by default.  if not NULL, overrides the automatic choice of master clock for item timebases. This is most useful for synchronizing video-only movies with audio played via other means. IMPORTANT: If you specify a master clock other than the appropriate audio device clock, audio may drift out of sync. */
-@property (nonatomic, retain) __attribute__((NSObject)) CMClockRef masterClock NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMClockRef masterClock NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -349,7 +351,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 					Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.
 					Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
-- (id)addPeriodicTimeObserverForInterval:(CMTime)interval queue:(dispatch_queue_t)queue usingBlock:(void (^)(CMTime time))block;
+- (id)addPeriodicTimeObserverForInterval:(CMTime)interval queue:(nullable dispatch_queue_t)queue usingBlock:(void (^)(CMTime time))block;
 
 /*!
 	@method			addBoundaryTimeObserverForTimes:queue:usingBlock:
@@ -367,7 +369,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 	@discussion		Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.
 					Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
-- (id)addBoundaryTimeObserverForTimes:(NSArray *)times queue:(dispatch_queue_t)queue usingBlock:(void (^)(void))block;
+- (id)addBoundaryTimeObserverForTimes:(NSArray<NSValue *> *)times queue:(nullable dispatch_queue_t)queue usingBlock:(void (^)(void))block;
 
 /*!
 	@method			removeTimeObserver:
@@ -429,7 +431,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 
    Specific selections made by -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:] within any group will override automatic selection in that group until -[AVPlayerItem selectMediaOptionAutomaticallyInMediaSelectionGroup:] is received.
 */
-- (void)setMediaSelectionCriteria:(AVPlayerMediaSelectionCriteria *)criteria forMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
+- (void)setMediaSelectionCriteria:(nullable AVPlayerMediaSelectionCriteria *)criteria forMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @method     mediaSelectionCriteriaForMediaCharacteristic:
@@ -437,7 +439,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
  @param      mediaCharacteristic
   The media characteristic for which the selection criteria is to be returned. Supported values include AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual.
 */
-- (AVPlayerMediaSelectionCriteria *)mediaSelectionCriteriaForMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
+- (nullable AVPlayerMediaSelectionCriteria *)mediaSelectionCriteriaForMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -453,11 +455,9 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 
 	Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs.
 */
-@property (nonatomic, copy) NSString *audioOutputDeviceUniqueID NS_AVAILABLE_MAC(10_9);
+@property (nonatomic, copy, nullable) NSString *audioOutputDeviceUniqueID NS_AVAILABLE_MAC(10_9);
 
 @end
-
-#if TARGET_OS_IPHONE
 
 /*
  @category		
@@ -467,27 +467,27 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 	Methods for supporting "external playback" of video 
  
  @discussion
-	"External playback" is a mode where video data is sent to an external device such as Apple TV via AirPlay
-	and the Lightning-based HDMI/VGA adapters for full screen playback at its original fidelity. 
-	AirPlay Video playback is also considered as an "external playback" mode.
+	"External playback" is a mode where video data is sent to an external device for full screen playback at its original fidelity.
+	AirPlay Video playback is considered as an "external playback" mode.
  
 	In "external screen" mode (also known as mirroring and second display), video data is rendered on the host 
-	device (e.g. iPhone), rendered video is recompressed and transferred to the external device, and the
+	device (e.g. Mac and iPhone), rendered video is recompressed and transferred to the external device, and the
 	external device decompresses and displays the video.
  
 	AVPlayerExternalPlaybackSupport properties affect AirPlay Video playback and are the replacement for the 
 	deprecated AVPlayerAirPlaySupport properties.
  
-	AVPlayerExternalPlaybackSupport properties do not apply to 30-pin-connector-based video output cables and adapters.
+	Additional note for iOS: AVPlayerExternalPlaybackSupport properties apply to the Lightning-based
+	video adapters but do not apply to 30-pin-connector-based video output cables and adapters.
  */
 
 @interface AVPlayer (AVPlayerExternalPlaybackSupport)
 
 /* Indicates whether the player allows switching to "external playback" mode. The default value is YES. */
-@property (nonatomic) BOOL allowsExternalPlayback NS_AVAILABLE_IOS(6_0);
+@property (nonatomic) BOOL allowsExternalPlayback NS_AVAILABLE(10_11, 6_0);
 
 /* Indicates whether the player is currently playing video in "external playback" mode. */
-@property (nonatomic, readonly, getter=isExternalPlaybackActive) BOOL externalPlaybackActive NS_AVAILABLE_IOS(6_0);
+@property (nonatomic, readonly, getter=isExternalPlaybackActive) BOOL externalPlaybackActive NS_AVAILABLE(10_11, 6_0);
 
 /* Indicates whether the player should automatically switch to "external playback" mode while the "external 
 	screen" mode is active in order to play video content and switching back to "external screen" mode as soon 
@@ -499,6 +499,8 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 @property (nonatomic, copy) NSString *externalPlaybackVideoGravity NS_AVAILABLE_IOS(6_0);
 
 @end
+
+#if TARGET_OS_IPHONE
 
 @interface AVPlayer (AVPlayerAirPlaySupport)
 
@@ -580,7 +582,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
     @result
       An instance of AVQueuePlayer.
 */
-+ (id)queuePlayerWithItems:(NSArray *)items;
++ (instancetype)queuePlayerWithItems:(NSArray<AVPlayerItem *> *)items;
 
 /*!
     @method     initWithItems:
@@ -590,14 +592,14 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
     @result
       An instance of AVQueuePlayer.
 */
-- (instancetype)initWithItems:(NSArray *)items;
+- (AVQueuePlayer *)initWithItems:(NSArray<AVPlayerItem *> *)items;
 
 /*!
     @method     items
     @abstract   Provides an array of the currently enqueued items.
     @result     An NSArray containing the enqueued AVPlayerItems.
 */
-- (NSArray *)items;
+- (NSArray<AVPlayerItem *> *)items;
 
 /*!
     @method     advanceToNextItem
@@ -618,7 +620,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
     @discussion
       Note that adding the same AVPlayerItem to an AVQueuePlayer at more than one position in the queue is not supported.
 */
-- (BOOL)canInsertItem:(AVPlayerItem *)item afterItem:(AVPlayerItem *)afterItem;
+- (BOOL)canInsertItem:(AVPlayerItem *)item afterItem:(nullable AVPlayerItem *)afterItem;
 
 /*!
     @method     insertItem:afterItem:
@@ -628,7 +630,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
     @param      afterItem
       The item that the newly inserted item should follow in the queue. Pass nil to append the item to the queue.
 */
-- (void)insertItem:(AVPlayerItem *)item afterItem:(AVPlayerItem *)afterItem;
+- (void)insertItem:(AVPlayerItem *)item afterItem:(nullable AVPlayerItem *)afterItem;
 
 /*!
     @method     removeItem:
@@ -649,4 +651,4 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 @end
 
-
+NS_ASSUME_NONNULL_END

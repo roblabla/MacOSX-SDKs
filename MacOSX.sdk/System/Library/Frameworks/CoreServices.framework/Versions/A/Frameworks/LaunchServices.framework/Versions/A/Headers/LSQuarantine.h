@@ -27,11 +27,17 @@
 #pragma once
 #endif
 
+
+
+CF_ASSUME_NONNULL_BEGIN
+
+
+
 /*
  *    The following keys may appear in a quarantine properties dictionary. To access a
- *    file's quarantine properties dictionary, fetch the kLSItemQuarantineProperties
- *    attribute using LSCopyItemAttribute() or LSCopyItemAttributes(). 
- *    The quarantine property dictionary can be set using LSSetItemAttribute().
+ *    file's quarantine properties dictionary, fetch the kCFURLQuarantinePropertiesKey
+ *    property using CFURLCopyResourcePropertyForKey() or CFURLCopyResourcePropertiesForKeys().
+ *    The quarantine property dictionary can be set using CFURLSetResourcePropertyForKey().
  *
  *
  * kLSQuarantineAgentNameKey - value type CFStringRef
@@ -197,5 +203,9 @@ extern const CFStringRef kLSQuarantineOriginURLKey                   __OSX_AVAIL
 extern const CFStringRef kLSQuarantineDataURLKey                     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
-#endif /* __LSQUARANTINE__ */
 
+CF_ASSUME_NONNULL_END
+
+
+
+#endif /* __LSQUARANTINE__ */

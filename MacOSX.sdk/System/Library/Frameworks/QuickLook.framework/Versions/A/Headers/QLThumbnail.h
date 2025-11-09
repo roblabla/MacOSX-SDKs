@@ -22,7 +22,7 @@
 QL_EXTERN_C_BEGIN
 
 
-typedef struct __QLThumbnail *QLThumbnailRef;
+typedef struct CF_BRIDGED_TYPE(id) __QLThumbnail *QLThumbnailRef;
 
 QL_EXPORT CFTypeID QLThumbnailGetTypeID();
 

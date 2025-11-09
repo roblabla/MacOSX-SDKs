@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -42,6 +42,8 @@
 @class AVPlayer;
 @class AVPlayerLayerInternal;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVPlayerLayer : CALayer
 {
@@ -54,13 +56,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@abstract		Returns an instance of AVPlayerLayer to display the visual output of the specified AVPlayer.
 	@result		An instance of AVPlayerLayer.
 */
-+ (AVPlayerLayer *)playerLayerWithPlayer:(AVPlayer *)player;
++ (AVPlayerLayer *)playerLayerWithPlayer:(nullable AVPlayer *)player;
 
 /*! 
 	@property		player
 	@abstract		Indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
 */
-@property (nonatomic, retain) AVPlayer *player;
+@property (nonatomic, retain, nullable) AVPlayer *player;
 
 /*!
 	@property		videoGravity
@@ -87,4 +89,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  */
 @property (nonatomic, readonly) CGRect videoRect NS_AVAILABLE(10_9, 7_0);
 
+/*!
+	@property		pixelBufferAttributes
+	@abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback.  	
+	@discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h>
+ */
+@property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *pixelBufferAttributes NS_AVAILABLE(10_11, 9_0);
+
 @end
+
+NS_ASSUME_NONNULL_END

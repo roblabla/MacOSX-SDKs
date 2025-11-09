@@ -1,15 +1,19 @@
 /*
 	NSScreen.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSGraphics.h>
 
-@class NSArray, NSColorSpace;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSColorSpace;
 
 typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 
@@ -22,9 +26,9 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
     id _auxiliaryStorage;
 }
 
-+ (NSArray *)screens;		/* All screens; first one is "zero" screen */
-+ (NSScreen *)mainScreen;	/* Screen with key window */
-+ (NSScreen *)deepestScreen;
++ (nullable NSArray<NSScreen *> *)screens;		/* All screens; first one is "zero" screen */
++ (nullable NSScreen *)mainScreen;	/* Screen with key window */
++ (nullable NSScreen *)deepestScreen;
 
 /* screensHaveSeparateSpaces returns YES if each screen has its own set of spaces.  This is a system  setting and does not necessarily imply that there are multiple screens, nor that there are multiple spaces on any one screen 
 */
@@ -33,8 +37,8 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 @property (readonly) NSWindowDepth depth;
 @property (readonly) NSRect frame;
 @property (readonly) NSRect visibleFrame;
-@property (readonly, copy) NSDictionary *deviceDescription;
-@property (readonly, strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSDictionary<NSString *, id> *deviceDescription;
+@property (nullable, readonly, strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
 
 @property (readonly) const NSWindowDepth *supportedWindowDepths NS_RETURNS_INNER_POINTER; /* 0 terminated */
 
@@ -53,8 +57,18 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 
 @end
 
+
 /* Notifications */
 APPKIT_EXTERN NSString * const NSScreenColorSpaceDidChangeNotification NS_AVAILABLE_MAC(10_6);  // the notification object is the screen whose profile has changed
+
+
+@interface NSScreen (NSExtendedDynamicRange)
+
+/* Returns the current maximum color component value for the screen. Typically the maximum is 1.0, but if any rendering context on the screen has requested extended dynamic range, it may return a value greater than 1.0, depending on system capabilities and other conditions. Only rendering contexts that support extended dynamic range can use values greater than 1.0. When the value changes, NSApplicationDidChangeScreenParametersNotification will be posted.
+ */
+@property (readonly) CGFloat maximumExtendedDynamicRangeColorComponentValue NS_AVAILABLE_MAC(10_11);
+
+@end
 
 
 @interface NSScreen(NSDeprecated)
@@ -65,3 +79,5 @@ APPKIT_EXTERN NSString * const NSScreenColorSpaceDidChangeNotification NS_AVAILA
 - (CGFloat)userSpaceScaleFactor NS_DEPRECATED_MAC(10_4, 10_7, "Use -convertRectToBacking: or -backingScaleFactor instead");
 
 @end
+
+NS_ASSUME_NONNULL_END

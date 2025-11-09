@@ -14,6 +14,14 @@
 #import <SpriteKit/SpriteKitBase.h>
 #import <SpriteKit/SKShader.h>
 
+typedef NS_ENUM(NSUInteger, SKParticleRenderOrder) {
+    SKParticleRenderOrderOldestLast,
+    SKParticleRenderOrderOldestFirst,
+    SKParticleRenderOrderDontCare,
+} NS_ENUM_AVAILABLE(10_11, 9_0);
+
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  An emitter of particle sprites.
  */
@@ -31,22 +39,8 @@ SK_EXPORT @interface SKEmitterNode : SKNode
 /**
  The texture to be used for the particles.
  */
-@property (nonatomic, retain) SKTexture *particleTexture;
+@property (nonatomic, retain, nullable) SKTexture *particleTexture;
 
-/**
- The starting z-position for each particle. Defaults to 0.0.
- */
-@property (nonatomic) CGFloat particleZPosition;
-
-/**
- The random variance about the starting z-position for each particle. Defaults to 0.0.
- */
-@property (nonatomic) CGFloat particleZPositionRange;
-
-/**
- The rate at which to modify the z-position for each particle. Defaults to 0.0.
- */
-@property (nonatomic) CGFloat particleZPositionSpeed;
 
 /**
  The blend mode for each particle. Defaults to SKBlendModeAlpha.
@@ -74,7 +68,7 @@ SK_EXPORT @interface SKEmitterNode : SKNode
 @property (nonatomic) CGFloat particleColorBlueSpeed;
 @property (nonatomic) CGFloat particleColorAlphaSpeed;
 
-@property (nonatomic, retain) SKKeyframeSequence *particleColorSequence;
+@property (nonatomic, retain, nullable) SKKeyframeSequence *particleColorSequence;
 
 /**
  The starting color blend for each particle. Behaves the same as SKSpriteNode. Defaults to 0.0.
@@ -91,7 +85,7 @@ SK_EXPORT @interface SKEmitterNode : SKNode
  */
 @property (nonatomic) CGFloat particleColorBlendFactorSpeed;
 
-@property (nonatomic, retain) SKKeyframeSequence *particleColorBlendFactorSequence;
+@property (nonatomic, retain, nullable) SKKeyframeSequence *particleColorBlendFactorSequence;
 
 /**
  The starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
@@ -188,8 +182,7 @@ SK_EXPORT @interface SKEmitterNode : SKNode
  */
 @property (nonatomic) CGFloat particleScaleSpeed;
 
-@property (nonatomic, retain) SKKeyframeSequence *particleScaleSequence;
-
+@property (nonatomic, retain, nullable) SKKeyframeSequence *particleScaleSequence;
 
 /**
  The starting alpha for each particle. Defaults to 1.0.
@@ -206,12 +199,12 @@ SK_EXPORT @interface SKEmitterNode : SKNode
  */
 @property (nonatomic) CGFloat particleAlphaSpeed;
 
-@property (nonatomic, retain) SKKeyframeSequence *particleAlphaSequence;
+@property (nonatomic, retain, nullable) SKKeyframeSequence *particleAlphaSequence;
 
 /**
  The rate at which to modify the alpha for each particle. Defaults to 1.0.
  */
-@property (nonatomic, copy) SKAction *particleAction;
+@property (nonatomic, copy, nullable) SKAction *particleAction;
 
 /**
  Defines what logical 'categories' of fields this particles emitted respond to. Defaults to all bits set (all categories).
@@ -222,8 +215,34 @@ SK_EXPORT @interface SKEmitterNode : SKNode
 /**
  Normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
  */
-@property (nonatomic, weak) SKNode *targetNode;
+@property (nonatomic, weak, nullable) SKNode *targetNode;
 
-@property (nonatomic, retain) SKShader *shader;
+@property (nonatomic, retain, nullable) SKShader *shader;
+
+
+/**
+ The starting z-position for each particle. Defaults to 0.0.
+ */
+@property (nonatomic) CGFloat particleZPosition;
+
+/**
+ The order in which particles will be rendered. Defaults to SKParticleRenderOrderOldestLast.
+ */
+@property (nonatomic) SKParticleRenderOrder particleRenderOrder NS_AVAILABLE(10_11, 9_0);
+
+
+/**
+ The random variance about the starting z-position for each particle. Defaults to 0.0.
+ */
+@property (nonatomic) CGFloat particleZPositionRange NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
+
+/**
+ The rate at which to modify the z-position for each particle. Defaults to 0.0.
+ */
+@property (nonatomic) CGFloat particleZPositionSpeed NS_DEPRECATED(10_8, 10_10, 7_0, 8_0);
+
+
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -5,7 +5,7 @@
  
      Version:    QuickTime 7.7.3
  
-     Copyright:  © 2004-2012 by Apple Inc., all rights reserved.
+     Copyright:  © 2004-2015 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

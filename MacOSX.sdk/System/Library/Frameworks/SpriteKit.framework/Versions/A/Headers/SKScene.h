@@ -5,10 +5,13 @@
 //  Copyright (c) 2011 Apple Inc. All rights reserved.
 //
 
+#import <SpriteKit/SKCameraNode.h>
 #import <SpriteKit/SKEffectNode.h>
 #import <SpriteKit/SpriteKitBase.h>
 
-@class SKView, SKPhysicsWorld;
+@class SKView, SKPhysicsWorld, AVAudioEngine;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, SKSceneScaleMode) {
     SKSceneScaleModeFill,           /* Scale the SKScene to fill the entire SKView. */
@@ -54,10 +57,28 @@ SK_EXPORT @interface SKScene : SKEffectNode
  */
 @property (nonatomic) SKSceneScaleMode scaleMode;
 
-/* Background color, defaults to gray */
+/**
+ The camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
+ */
+@property (nonatomic, weak, nullable) SKCameraNode *camera NS_AVAILABLE(10_11, 9_0);
+
+/**
+ The node that is currently the listener for positional audio coming from SKAudioNodes
+ @see SKAudioNode
+ */
+@property (nonatomic, weak, nullable) SKNode *listener NS_AVAILABLE(10_11, 9_0);
+
+/**
+ The audio engine that the listener and the scene's audio nodes use to process their sound through.
+ */
+@property (nonatomic, retain, readonly) AVAudioEngine *audioEngine NS_AVAILABLE(10_11, 9_0);
+
+/**
+ Background color, defaults to gray
+ */
 @property (nonatomic, retain) SKColor *backgroundColor;
 
-@property (nonatomic, assign) id<SKSceneDelegate> delegate NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, assign, nullable) id<SKSceneDelegate> delegate NS_AVAILABLE(10_10, 8_0);
 
 /**
  Used to choose the origin of the scene's coordinate system
@@ -75,7 +96,7 @@ SK_EXPORT @interface SKScene : SKEffectNode
 /**
  The SKView this scene is currently presented in, or nil if it is not being presented.
  */
-@property (nonatomic, weak, readonly) SKView *view;
+@property (nonatomic, weak, readonly, nullable) SKView *view;
 
 /**
  Override this to perform per-frame game logic. Called exactly once per frame before any actions are evaluated and any physics are simulated.
@@ -111,3 +132,5 @@ SK_EXPORT @interface SKScene : SKEffectNode
 - (void)didChangeSize:(CGSize)oldSize;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -32,22 +32,24 @@
 /*! @abstract A WKBackForwardList object is a list of webpages previously
  visited in a web view that can be reached by going back or forward.
  */
+NS_ASSUME_NONNULL_BEGIN
+
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface WKBackForwardList : NSObject
 
 /*! @abstract The current item.
  */
-@property (nonatomic, readonly, strong) WKBackForwardListItem *currentItem;
+@property (nullable, nonatomic, readonly, strong) WKBackForwardListItem *currentItem;
 
 /*! @abstract The item immediately preceding the current item, or nil
 if there isn't one.
  */
-@property (nonatomic, readonly, strong) WKBackForwardListItem *backItem;
+@property (nullable, nonatomic, readonly, strong) WKBackForwardListItem *backItem;
 
 /*! @abstract The item immediately following the current item, or nil
 if there isn't one.
  */
-@property (nonatomic, readonly, strong) WKBackForwardListItem *forwardItem;
+@property (nullable, nonatomic, readonly, strong) WKBackForwardListItem *forwardItem;
 
 /*! @abstract Returns the item at a specified distance from the current
  item.
@@ -57,20 +59,22 @@ if there isn't one.
  @result The item at the specified distance from the current item, or nil
  if the index parameter exceeds the limits of the list.
  */
-- (WKBackForwardListItem *)itemAtIndex:(NSInteger)index;
+- (nullable WKBackForwardListItem *)itemAtIndex:(NSInteger)index;
 
 /*! @abstract The portion of the list preceding the current item.
  @discussion The items are in the order in which they were originally
  visited.
  */
-@property (nonatomic, readonly, copy) NSArray *backList;
+@property (nonatomic, readonly, copy) NSArray<WKBackForwardListItem *> *backList;
 
 /*! @abstract The portion of the list following the current item.
  @discussion The items are in the order in which they were originally
  visited.
  */
-@property (nonatomic, readonly, copy) NSArray *forwardList;
+@property (nonatomic, readonly, copy) NSArray<WKBackForwardListItem *> *forwardList;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

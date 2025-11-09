@@ -2,10 +2,12 @@
 	File:		AVAudioNode.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioTypes.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVAudioEngine, AVAudioFormat, AVAudioInputNode, AVAudioMixerNode, AVAudioOutputNode, AVAudioPCMBuffer, AVAudioTime;
 
@@ -24,7 +26,7 @@ typedef void (^AVAudioNodeTapBlock)(AVAudioPCMBuffer *buffer, AVAudioTime *when)
 	@class AVAudioNode
 	@abstract Base class for an audio generation, processing, or I/O block.
 	@discussion
-		@link AVAudioEngine @/link objects contain instances of various AVAudioNode subclasses. This
+		`AVAudioEngine` objects contain instances of various AVAudioNode subclasses. This
 		base class provides certain common functionality.
 		
 		Nodes have input and output busses, which can be thought of as connection points.
@@ -33,7 +35,7 @@ typedef void (^AVAudioNodeTapBlock)(AVAudioPCMBuffer *buffer, AVAudioTime *when)
 		
 		Busses have formats, expressed in terms of sample rate and channel count. When making
 		connections between nodes, often the format must match exactly. There are exceptions
-		(e.g. @link AVAudioMixerNode @/link and @link AVAudioOutputNode @/link).
+		(e.g. `AVAudioMixerNode` and `AVAudioOutputNode`).
 
 		Nodes do not currently provide useful functionality until attached to an engine.
 */
@@ -47,22 +49,22 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 - (void)reset;
 
-/*! @method inputFormat:
+/*! @method inputFormatForBus:
 	@abstract Obtain an input bus's format.
 */
 - (AVAudioFormat *)inputFormatForBus:(AVAudioNodeBus)bus;
 
-/*! @method outputFormat:
+/*! @method outputFormatForBus:
 	@abstract Obtain an output bus's format.
 */
 - (AVAudioFormat *)outputFormatForBus:(AVAudioNodeBus)bus;
 
-/*!	@method nameForInput:
+/*!	@method nameForInputBus:
 	@abstract Return the name of an input bus.
 */
 - (NSString *)nameForInputBus:(AVAudioNodeBus)bus;
 
-/*!	@method nameForOutput:
+/*!	@method nameForOutputBus:
 	@abstract Return the name of an output bus.
 */
 - (NSString *)nameForOutputBus:(AVAudioNodeBus)bus;
@@ -99,7 +101,7 @@ AVAudioFormat *format = [input outputFormatForBus: 0];
 // start engine
 </pre>
 */
-- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)bufferSize format:(AVAudioFormat *)format block:(AVAudioNodeTapBlock)tapBlock;
+- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)bufferSize format:(AVAudioFormat * __nullable)format block:(AVAudioNodeTapBlock)tapBlock;
 
 /*!	@method removeTapOnBus:
 	@abstract Destroy a tap.
@@ -113,7 +115,7 @@ AVAudioFormat *format = [input outputFormatForBus: 0];
 /*!	@property engine
 	@abstract The engine to which the node is attached (or nil).
 */
-@property (nonatomic, readonly) AVAudioEngine *engine;
+@property (nonatomic, readonly, nullable) AVAudioEngine *engine;
 
 /*! @property numberOfInputs
 	@abstract The node's number of input busses.
@@ -131,6 +133,8 @@ AVAudioFormat *format = [input outputFormatForBus: 0];
 		Will return nil if the engine is not running or if the node is not connected to an input or
 		output node.
 */
-@property (nonatomic, readonly) AVAudioTime *lastRenderTime;
+@property (nonatomic, readonly, nullable) AVAudioTime *lastRenderTime;
 
 @end
+
+NS_ASSUME_NONNULL_END

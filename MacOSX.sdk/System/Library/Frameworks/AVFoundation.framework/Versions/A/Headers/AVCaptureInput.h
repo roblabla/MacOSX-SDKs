@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -11,11 +11,12 @@
 #import <CoreMedia/CMFormatDescription.h>
 #import <CoreMedia/CMSync.h>
 #if TARGET_OS_MAC && ! (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32)
-	#import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGDirectDisplay.h>
+	#import <CoreGraphics/CGDirectDisplay.h>
 #endif
 
 @class AVCaptureInputPort;
 @class AVCaptureInputInternal;
+@class AVTimedMetadataGroup;
 
 /*!
  @class AVCaptureInput
@@ -128,7 +129,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 @property(nonatomic, getter=isEnabled) BOOL enabled;
 
-
 /*!
  @property clock
  @abstract
@@ -179,7 +179,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     necessary. If the device cannot be opened because it is no longer available or because it is in use, for example,
     this method returns nil, and the optional outError parameter points to an NSError describing the problem.
 */
-+ (id)deviceInputWithDevice:(AVCaptureDevice *)device error:(NSError **)outError;
++ (instancetype)deviceInputWithDevice:(AVCaptureDevice *)device error:(NSError **)outError;
 
 /*!
  @method initWithDevice:error:
@@ -200,7 +200,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     necessary. If the device cannot be opened because it is no longer available or because it is in use, for example,
     this method returns nil, and the optional outError parameter points to an NSError describing the problem.
 */
-- (id)initWithDevice:(AVCaptureDevice *)device error:(NSError **)outError;
+- (instancetype)initWithDevice:(AVCaptureDevice *)device error:(NSError **)outError;
 
 /*!
  @property device
@@ -252,7 +252,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
     an AVCaptureSession. This method validates the displayID. If the display cannot be used because it is not available
     on the system, for example, this method returns nil.
 */
-- (id)initWithDisplayID:(CGDirectDisplayID)displayID;
+- (instancetype)initWithDisplayID:(CGDirectDisplayID)displayID;
 
 /*!
  @property minFrameDuration
@@ -327,9 +327,100 @@ NS_CLASS_AVAILABLE(10_7, NA)
 	detects duplicate frames, it drops them.  If set to NO, the captured output receives all frames
     from the input.  Prior to 10.9 this value defaulted to YES.  In 10.9 and later, it defaults to
 	NO, as modern platforms support frame differencing in hardware-based encoders.
+	
+	As of 10.10, this property has been deprecated and is ignored.  Clients wishing to re-create
+	this functionality can use an AVCaptureVideoDataOutput and compare frame contents in their
+	own code.  If they wish to write a movie file, they can then pass the unique frames to an
+	AVAssetWriterInput.
 */
-@property(nonatomic) BOOL removesDuplicateFrames NS_AVAILABLE(10_8, NA);
+@property(nonatomic) BOOL removesDuplicateFrames NS_DEPRECATED(10_8, 10_10, NA, NA);
 
 @end
 
 #endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+
+@class AVCaptureMetadataInputInternal;
+
+/*!
+ @class AVCaptureMetadataInput
+ @abstract
+    AVCaptureMetadataInput is a concrete subclass of AVCaptureInput that provides a way for
+    clients to supply AVMetadataItems to an AVCaptureSession.
+
+ @discussion
+    Instances of AVCaptureMetadataInput are input sources for AVCaptureSession that provide
+    AVMetadataItems to an AVCaptureSession.  AVCaptureMetadataInputs present one and only one
+    AVCaptureInputPort, which currently may only be connected to an AVCaptureMovieFileOutput.
+    The metadata supplied over the input port is provided by the client, and must conform to a
+    client-supplied CMFormatDescription.  The AVMetadataItems are supplied in an AVTimedMetadataGroup.
+*/
+NS_CLASS_AVAILABLE(NA, 9_0)
+@interface AVCaptureMetadataInput : AVCaptureInput 
+{
+@private
+    AVCaptureMetadataInputInternal *_internal;
+}
+
+/*!
+ @method metadataInputWithFormatDescription:clock:
+ @abstract
+    Returns an AVCaptureMetadataInput instance that allows a client to provide
+    AVTimedMetadataGroups to an AVCaptureSession.
+
+ @param desc
+    A CMFormatDescription that defines the metadata to be supplied by the client.
+    Throws an NSInvalidArgumentException if NULL is passed.
+ @param clock
+    A CMClock that provided the timebase for the supplied samples.
+    Throws an NSInvalidArgumentException if NULL is passed.
+ @result
+    An AVCaptureMetadataInput instance.
+
+ @discussion
+    This method returns an instance of AVCaptureMetadataInput that can be used to capture
+    AVTimedMetadataGroups supplied by the client to an AVCaptureSession.
+*/
++ (instancetype)metadataInputWithFormatDescription:(CMMetadataFormatDescriptionRef)desc clock:(CMClockRef)clock;
+
+/*!
+ @method initWithFormatDescription:clock:
+ @abstract
+    Creates an AVCaptureMetadataInput instance that allows a client to provide
+    AVTimedMetadataGroups to an AVCaptureSession.
+
+ @param desc
+    A CMFormatDescription that defines the metadata to be supplied by the client.
+    Throws NSInvalidArgumentException if NULL is passed.
+ @param clock
+    A CMClock that provided the timebase for the supplied samples.
+    Throws NSInvalidArgumentException if NULL is passed.
+ @result
+    An AVCaptureMetadataInput instance, or nil, if the device could not be used
+    for capture.
+
+ @discussion
+    This method creates an instance of AVCaptureMetadataInput that can be used to capture
+    AVTimedMetadataGroups supplied by the client to an AVCaptureSession.
+*/
+- (instancetype)initWithFormatDescription:(CMMetadataFormatDescriptionRef)desc clock:(CMClockRef)clock;
+
+/*!
+ @method appendTimedMetadataGroup:
+ @abstract
+    Provides metadata to the AVCaptureSession.
+
+ @param metadata
+    An AVTimedMetadataGroup of metadata.  Will throw an exception if nil.
+    In order to denote a period of no metadata, an empty AVTimedMetadataGroup should
+    be passed.
+
+ @discussion
+    The provided AVTimedMetadataGroup will be provided to the AVCaptureSession.  The group's
+    presentation timestamp is expressed in the context of the clock supplied to the initializer.
+    It is not required that the AVTimedMetadataGroup have a duration;  an empty AVTimedMetadataGroup
+    can be supplied to denote a period of no metadata.
+*/
+- (BOOL)appendTimedMetadataGroup:(AVTimedMetadataGroup *)metadata error:(NSError **)outError;
+
+@end

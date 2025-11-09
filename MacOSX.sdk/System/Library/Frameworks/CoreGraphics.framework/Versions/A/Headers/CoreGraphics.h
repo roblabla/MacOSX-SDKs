@@ -49,5 +49,6 @@
 #include <CoreGraphics/CGSession.h>
 #include <CoreGraphics/CGWindow.h>
 #include <CoreGraphics/CGWindowLevel.h>
+#include <CoreGraphics/CGDirectDisplayMetal.h>
 
 #endif	/* COREGRAPHICS_H_ */

@@ -20,6 +20,7 @@
  * The CWConfiguration class contains basic network configuration settings and also the list of preferred networks.
  * CWConfiguration is an immutable object. For changing configuration settings and/or the preferred networks list, see CWMutableConfiguration.
  */
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_6)
 @interface CWConfiguration : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 {
@@ -29,7 +30,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
 
     @protected
 	
-        NSOrderedSet    *_networkProfiles;
+        NSOrderedSet<CWNetworkProfile *>    *_networkProfiles;
     
         BOOL            _rememberJoinedNetworks;
     
@@ -52,7 +53,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion 
  * The order of the ordered set corresponds to the order the preferred networks list.
  */
-@property(readonly, copy) NSOrderedSet *networkProfiles NS_AVAILABLE_MAC(10_7);
+@property(readonly, copy) NSOrderedSet<CWNetworkProfile *> *networkProfiles NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
@@ -195,7 +196,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract
  * Add, remove, or update the preferred networks list.
  */
-@property(copy) NSOrderedSet *networkProfiles NS_AVAILABLE_MAC(10_7);
+@property(copy) NSOrderedSet<CWNetworkProfile *> *networkProfiles NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
@@ -230,5 +231,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
 @property BOOL rememberJoinedNetworks NS_AVAILABLE_MAC(10_7);
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif /* _CORE_WLAN_CONFIGURATION_H_ */

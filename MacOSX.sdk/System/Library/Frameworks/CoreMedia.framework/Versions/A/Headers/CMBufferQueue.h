@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2006-2012 Apple Inc. All rights reserved.
+    Copyright 2006-2015 Apple Inc. All rights reserved.
   
 */
 
@@ -90,6 +90,8 @@ extern "C" {
 #endif
     
 #pragma pack(push, 4)
+	
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@enum CMBufferQueue Errors
@@ -106,7 +108,12 @@ extern "C" {
 	@constant	kCMBufferQueueError_InvalidTriggerToken Trigger token is not a trigger that is currently associated with this queue.
 	@constant	kCMBufferQueueError_InvalidBuffer Buffer was rejected by the CMBufferValidationCallback.
 */
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMBufferQueueError_AllocationFailed						= -12760,
 	kCMBufferQueueError_RequiredParameterMissing				= -12761,
 	kCMBufferQueueError_InvalidCMBufferCallbacksStruct			= -12762,
@@ -124,7 +131,7 @@ enum {
 	@abstract	A reference to a CMBufferQueue, a CF object that implements a queue of timed buffers.
 		
 */
-typedef struct opaqueCMBufferQueue *CMBufferQueueRef;
+typedef struct CM_BRIDGED_TYPE(id) opaqueCMBufferQueue *CMBufferQueueRef;
 
 /*!
 	@typedef	CMBufferRef
@@ -132,7 +139,7 @@ typedef struct opaqueCMBufferQueue *CMBufferQueueRef;
 	@discussion	A CMBuffer can be any CFTypeRef, as long as a getDuration callback can be provided.  Commonly used
 				types are CMSampleBufferRef and CVPixelBufferRef.
 */
-typedef CFTypeRef CMBufferRef;
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMBufferRef;
 
 /*!
 	@typedef	CMBufferGetTimeCallback
@@ -141,8 +148,8 @@ typedef CFTypeRef CMBufferRef;
 				getDecodeTimeStamp (optional), and getPresentationTimeStamp (optional).
 */
 typedef CMTime (*CMBufferGetTimeCallback)(
-	CMBufferRef buf,	/*! @param buf Buffer being interrogated. */
-	void *refcon);		/*! @param refcon Client refcon. Can be NULL. */
+	CMBufferRef CM_NONNULL buf,		/*! @param buf Buffer being interrogated. */
+	void * CM_NULLABLE refcon);		/*! @param refcon Client refcon. Can be NULL. */
 
 /*!
 	@typedef	CMBufferGetBooleanCallback
@@ -150,8 +157,8 @@ typedef CMTime (*CMBufferGetTimeCallback)(
 	@discussion	There is one callback of this type that can be provided to CMBufferQueueCreate: isDataReady (optional).
 */
 typedef Boolean (*CMBufferGetBooleanCallback)(
-	CMBufferRef buf,	/*! @param buf Buffer being interrogated. */
-	void *refcon);		/*! @param refcon Client refcon. Can be NULL. */
+	CMBufferRef CM_NONNULL buf,		/*! @param buf Buffer being interrogated. */
+	void * CM_NULLABLE refcon);		/*! @param refcon Client refcon. Can be NULL. */
 
 /*!
 	@typedef	CMBufferCompareCallback
@@ -159,9 +166,9 @@ typedef Boolean (*CMBufferGetBooleanCallback)(
 	@discussion	Note that a CFComparatorFunction can be used here.
 */
 typedef CFComparisonResult (*CMBufferCompareCallback)(
-	CMBufferRef buf1,	/*! @param buf Buffer being compared. */
-	CMBufferRef buf2,	/*! @param buf Other buffer being compared. */
-	void *refcon);		/*! @param refcon Client refcon. Can be NULL. */
+	CMBufferRef CM_NONNULL buf1,	/*! @param buf Buffer being compared. */
+	CMBufferRef CM_NONNULL buf2,	/*! @param buf Other buffer being compared. */
+	void * CM_NULLABLE refcon);		/*! @param refcon Client refcon. Can be NULL. */
 
 /*!
 	 @typedef	CMBufferGetSizeCallback
@@ -169,8 +176,8 @@ typedef CFComparisonResult (*CMBufferCompareCallback)(
 	 @discussion	There is one callback of this type that can be provided to CMBufferQueueCreate: getTotalSize.
  */
 typedef size_t (*CMBufferGetSizeCallback)(
-	CMBufferRef buf,	/*! @param buf Buffer being interrogated. */
-	void *refcon);		/*! @param refcon Client refcon. Can be NULL. */
+	CMBufferRef CM_NONNULL buf,		/*! @param buf Buffer being interrogated. */
+	void * CM_NULLABLE refcon);		/*! @param refcon Client refcon. Can be NULL. */
 	
 /*!
 	@typedef	CMBufferCallbacks
@@ -183,17 +190,17 @@ typedef size_t (*CMBufferGetSizeCallback)(
 typedef struct {
 	uint32_t					version;						/*! @field version
 																	Must be 0 or 1. */
-	void						*refcon;						/*! @field refcon
+	void * CM_NULLABLE refcon;									/*! @field refcon
 																	Client refcon to be passed to all callbacks (can be NULL,
 																	if the callbacks don't require it). */
-	CMBufferGetTimeCallback		getDecodeTimeStamp;				/*! @field getDecodeTimeStamp
+	CMBufferGetTimeCallback CM_NULLABLE		getDecodeTimeStamp;	/*! @field getDecodeTimeStamp
 																	This callback is called from CMBufferQueueGetFirstDecodeTimeStamp (once),
 																	and from CMBufferQueueGetMinDecodeTimeStamp (multiple times).  It should
 																	return the decode timestamp of the buffer.  If there are multiple samples
 																	in the buffer, this callback should return the minimum decode timestamp
 																	in the buffer. Can be NULL (CMBufferQueueGetFirstDecodeTimeStamp and
 																	CMBufferQueueGetMinDecodeTimeStamp will return kCMTimeInvalid). */
-	CMBufferGetTimeCallback		getPresentationTimeStamp;		/*! @field getPresentationTimeStamp
+	CMBufferGetTimeCallback CM_NULLABLE getPresentationTimeStamp;/*! @field getPresentationTimeStamp
 																	This callback is called from CMBufferQueueGetFirstPresentationTimeStamp
 																	(once) and from CMBufferQueueGetMinPresentationTimeStamp (multiple times).
 																	It should return the presentation timestamp of the buffer.  If there are
@@ -201,21 +208,21 @@ typedef struct {
 																	presentation timestamp in the buffer. Can be NULL
 																	(CMBufferQueueGetFirstPresentationTimeStamp and
 																	CMBufferQueueGetMinPresentationTimeStamp will return kCMTimeInvalid). */
-	CMBufferGetTimeCallback		getDuration;					/*! @field getDuration
+	CMBufferGetTimeCallback CM_NONNULL getDuration;				/*! @field getDuration
 																	This callback is called (once) during enqueue and dequeue operations to
 																	update the total duration of the queue.  Must not be NULL. */
-	CMBufferGetBooleanCallback	isDataReady;					/*! @field isDataReady
+	CMBufferGetBooleanCallback CM_NULLABLE isDataReady;			/*! @field isDataReady
 																	This callback is called from CMBufferQueueDequeueIfDataReadyAndRetain, to
 																	ask if the buffer that is about to be dequeued is ready.  Can be NULL
 																	(data will be assumed to be ready). */
-	CMBufferCompareCallback		compare;						/*! @field compare
+	CMBufferCompareCallback CM_NULLABLE compare;				/*! @field compare
 																	This callback is called (multiple times) from CMBufferQueueEnqueue, to
 																	perform an insertion sort. Can be NULL (queue will be FIFO). */
-	CFStringRef					dataBecameReadyNotification;	/*! @field dataBecameReadyNotification
+	CFStringRef CM_NULLABLE dataBecameReadyNotification;		/*! @field dataBecameReadyNotification
 																	If triggers of type kCMBufferQueueTrigger_WhenDataBecomesReady are installed,
 																	the queue will listen for this notification on the head buffer. 
 																	Can be NULL (then the queue won't listen for it). */
-	CMBufferGetSizeCallback		getSize;						/*! @field getSize
+	CMBufferGetSizeCallback CM_NULLABLE getSize;				/*! @field getSize
 																	This callback is called (once) during enqueue and dequeue operation to
 																	update the total size of the queue. Can be NULL.  Ignored if version < 1. */
 } CMBufferCallbacks;
@@ -224,15 +231,17 @@ typedef struct {
 	@function	CMBufferQueueGetCallbacksForUnsortedSampleBuffers
 	@abstract	Returns a pointer to a callback struct for unsorted CMSampleBuffers, provided as a convenience.
 */
-CM_EXPORT const CMBufferCallbacks *CMBufferQueueGetCallbacksForUnsortedSampleBuffers(void)
+CM_EXPORT const CMBufferCallbacks * CM_NONNULL CMBufferQueueGetCallbacksForUnsortedSampleBuffers(void)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
 	 @function	CMBufferQueueGetCallbacksForOutputPTSSortedSampleBuffers
 	 @abstract	Returns a pointer to a callback struct for CMSampleBuffers sorted by output presentation timestamp, provided as a convenience.
  */
-CM_EXPORT const CMBufferCallbacks *CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS(void)
+CM_EXPORT const CMBufferCallbacks * CM_NONNULL CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS(void)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
 	@function	CMBufferQueueCreate
@@ -240,19 +249,21 @@ CM_EXPORT const CMBufferCallbacks *CMBufferQueueGetCallbacksForSampleBuffersSort
 	@discussion	On return, the caller owns the returned CMBufferQueue, and must release it when done with it.
 */
 CM_EXPORT OSStatus CMBufferQueueCreate(
-	CFAllocatorRef allocator,				/*! @param allocator
+	CFAllocatorRef CM_NULLABLE allocator,	/*! @param allocator
 												The allocator to use for allocating the CMBufferQueue object.
 												Pass kCFAllocatorDefault to use the default allocator. */
 	CMItemCount	capacity,					/*! @param capacity
 												Maximum number of buffers in the queue.  Pass 0 to create
 												a queue that will grow as needed. */
-	const CMBufferCallbacks *callbacks,		/*! @param callbacks
+	const CMBufferCallbacks * CM_NONNULL callbacks,	/*! @param callbacks
 												Callbacks the queue should use to interrogate the buffer objects.
 												This struct is copied internally, so the client can pass a pointer
 												to a temporary struct on the stack. */
-	CMBufferQueueRef *queueOut)				/*! @param queueOut
+	CM_RETURNS_RETAINED_PARAMETER CMBufferQueueRef CM_NULLABLE * CM_NONNULL queueOut)	/*! @param queueOut
 												Returned newly created CMBufferQueue. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMBufferQueueGetTypeID
@@ -272,10 +283,10 @@ CM_EXPORT CFTypeID CMBufferQueueGetTypeID(void)
 				the buffer will not be enqueued and this API will return the same error OSStatus.
 */
 CM_EXPORT OSStatus CMBufferQueueEnqueue(
-	CMBufferQueueRef queue,	/*! @param queue
-									The CMBufferQueue on which to enqueue the buffer. */
-	CMBufferRef buf)			/*! @param buf
-									The buffer to enqueue. */
+	CMBufferQueueRef CM_NONNULL queue,	/*! @param queue
+											The CMBufferQueue on which to enqueue the buffer. */
+	CMBufferRef CM_NONNULL buf)			/*! @param buf
+											The buffer to enqueue. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -286,9 +297,9 @@ CM_EXPORT OSStatus CMBufferQueueEnqueue(
 				it when done with it.
 	@result		The dequeued buffer.  Will be NULL if the queue is empty.
 */
-CM_EXPORT CMBufferRef CMBufferQueueDequeueAndRetain(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue from which to dequeue a buffer. */
+CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueDequeueAndRetain(
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue from which to dequeue a buffer. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -299,9 +310,9 @@ CM_EXPORT CMBufferRef CMBufferQueueDequeueAndRetain(
 				it when done with it.
 	@result		The dequeued buffer.  Will be NULL if the queue is empty, or if the buffer to be dequeued is not yet ready.
 */
-CM_EXPORT CMBufferRef CMBufferQueueDequeueIfDataReadyAndRetain(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue from which to dequeue a buffer (if the buffer is ready). */
+CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueDequeueIfDataReadyAndRetain(
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue from which to dequeue a buffer (if the buffer is ready). */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -312,9 +323,9 @@ CM_EXPORT CMBufferRef CMBufferQueueDequeueIfDataReadyAndRetain(
     			this particular buffer (if an intervening Enqueue adds a buffer that will dequeue next).
 	@result		The buffer.  Will be NULL if the queue is empty.
 */
-CM_EXPORT CMBufferRef CMBufferQueueGetHead(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue from which to retrieve a buffer. */
+CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueGetHead(
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue from which to retrieve a buffer. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -323,8 +334,8 @@ CM_EXPORT CMBufferRef CMBufferQueueGetHead(
 	@result		Whether or not the CMBufferQueue is empty. If queue is NULL, true is returned.
 */
 CM_EXPORT Boolean CMBufferQueueIsEmpty(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -334,8 +345,8 @@ CM_EXPORT Boolean CMBufferQueueIsEmpty(
 				Subsequent Dequeues will succeed as long as the queue is not empty.
 */
 CM_EXPORT OSStatus CMBufferQueueMarkEndOfData(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue being marked. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue being marked. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -346,8 +357,8 @@ CM_EXPORT OSStatus CMBufferQueueMarkEndOfData(
 				be empty, and permanently at EOD).
 */
 CM_EXPORT Boolean CMBufferQueueContainsEndOfData(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -358,8 +369,8 @@ CM_EXPORT Boolean CMBufferQueueContainsEndOfData(
 				be empty, and permanently at EOD).
 */
 CM_EXPORT Boolean CMBufferQueueIsAtEndOfData(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -369,8 +380,8 @@ CM_EXPORT Boolean CMBufferQueueIsAtEndOfData(
 				and will be called appropriately as the queue duration goes to zero.
 */
 CM_EXPORT OSStatus CMBufferQueueReset(
-	CMBufferQueueRef queue)		/*! @param queue
-									The CMBufferQueue being reset. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue being reset. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -379,14 +390,14 @@ CM_EXPORT OSStatus CMBufferQueueReset(
 */
 CM_EXPORT OSStatus
 CMBufferQueueResetWithCallback(
-	CMBufferQueueRef queue,	/*! @param queue
-									CMBufferQueue being reset, that may contain multiple buffers. */
-	void (*callback)( CMBufferRef buffer, void *refcon ),
-								/*! @param callback
-									Function to be called for each buffer.  
-									The callback should not make other calls to the buffer queue. */
-	void *refcon )				/*! @param refcon
-									Refcon to be passed to the callback function. */
+	CMBufferQueueRef CM_NONNULL queue,	/*! @param queue
+											CMBufferQueue being reset, that may contain multiple buffers. */
+	void (* CM_NONNULL callback)(CMBufferRef CM_NONNULL buffer, void * CM_NULLABLE refcon ),
+										/*! @param callback
+											Function to be called for each buffer.
+											The callback should not make other calls to the buffer queue. */
+	void * CM_NULLABLE refcon )			/*! @param refcon
+											Refcon to be passed to the callback function. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -394,8 +405,8 @@ CMBufferQueueResetWithCallback(
 	@abstract	Gets the number of buffers in the queue.
 */
 CM_EXPORT CMItemCount CMBufferQueueGetBufferCount(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -407,8 +418,8 @@ CM_EXPORT CMItemCount CMBufferQueueGetBufferCount(
 				kCMTimeZero will be returned.
 */
 CM_EXPORT CMTime CMBufferQueueGetDuration(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -420,8 +431,8 @@ CM_EXPORT CMTime CMBufferQueueGetDuration(
 				NULL, kCMTimeInvalid will be returned.
 */
 CM_EXPORT CMTime CMBufferQueueGetMinDecodeTimeStamp(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -433,8 +444,8 @@ CM_EXPORT CMTime CMBufferQueueGetMinDecodeTimeStamp(
 				be returned.
 */
 CM_EXPORT CMTime CMBufferQueueGetFirstDecodeTimeStamp(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -447,8 +458,8 @@ CM_EXPORT CMTime CMBufferQueueGetFirstDecodeTimeStamp(
 				be returned.
 */
 CM_EXPORT CMTime CMBufferQueueGetMinPresentationTimeStamp(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -460,8 +471,8 @@ CM_EXPORT CMTime CMBufferQueueGetMinPresentationTimeStamp(
 				kCMTimeInvalid will be returned.
 */
 CM_EXPORT CMTime CMBufferQueueGetFirstPresentationTimeStamp(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 
@@ -472,8 +483,8 @@ CM_EXPORT CMTime CMBufferQueueGetFirstPresentationTimeStamp(
 				be returned.
 */
 CM_EXPORT CMTime CMBufferQueueGetMaxPresentationTimeStamp(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -484,8 +495,8 @@ CM_EXPORT CMTime CMBufferQueueGetMaxPresentationTimeStamp(
 				be returned.
 */
 CM_EXPORT CMTime CMBufferQueueGetEndPresentationTimeStamp(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 	
@@ -498,8 +509,8 @@ CM_EXPORT CMTime CMBufferQueueGetEndPresentationTimeStamp(
 				0 will be returned.
  */
 CM_EXPORT size_t CMBufferQueueGetTotalSize(
-	CMBufferQueueRef queue)		/*! @param queue
-									CMBufferQueue being interrogated. */
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_1);
 
 /*!
@@ -533,8 +544,8 @@ typedef struct opaqueCMBufferQueueTriggerToken *CMBufferQueueTriggerToken;
 	@abstract	A callback to be called when a CMBufferQueue trigger condition becomes true.
 */
 typedef void (*CMBufferQueueTriggerCallback)(
-	void *triggerRefcon,						/*! @param triggerRefcon Refcon for trigger callback.  */
-	CMBufferQueueTriggerToken triggerToken );	/*! @param triggerToken Trigger whose condition became true. */
+	void * CM_NULLABLE triggerRefcon,						/*! @param triggerRefcon Refcon for trigger callback.  */
+	CMBufferQueueTriggerToken CM_NONNULL triggerToken );	/*! @param triggerToken Trigger whose condition became true. */
 
 /*!
 	@enum		CMBufferQueueTriggerCondition
@@ -551,7 +562,13 @@ typedef void (*CMBufferQueueTriggerCallback)(
 	@constant	kCMBufferQueueTrigger_WhenBufferCountBecomesLessThan			Trigger fires when buffer count becomes < the specified threshold number.
 	@constant	kCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan			Trigger fires when buffer count becomes > the specified threshold number.
 */
-enum {
+typedef int32_t CMBufferQueueTriggerCondition;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMBufferQueueTriggerCondition
+#else
+enum
+#endif
+{
 	kCMBufferQueueTrigger_WhenDurationBecomesLessThan = 1,
 	kCMBufferQueueTrigger_WhenDurationBecomesLessThanOrEqualTo = 2,
 	kCMBufferQueueTrigger_WhenDurationBecomesGreaterThan = 3,
@@ -564,7 +581,6 @@ enum {
 	kCMBufferQueueTrigger_WhenBufferCountBecomesLessThan = 10,
 	kCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan = 11,
 };
-typedef int32_t CMBufferQueueTriggerCondition;
 
 /*!
 	@function	CMBufferQueueInstallTrigger
@@ -578,25 +594,25 @@ typedef int32_t CMBufferQueueTriggerCondition;
 				the trigger token to *triggerTokenOut.
 */
 CM_EXPORT OSStatus CMBufferQueueInstallTrigger(
-	CMBufferQueueRef queue,								/*! @param queue
+	CMBufferQueueRef CM_NONNULL queue,					/*! @param queue
 															CMBufferQueue on which the trigger is being set. */
-	CMBufferQueueTriggerCallback triggerCallback,		/*! @param triggerCallback
+	CMBufferQueueTriggerCallback CM_NULLABLE triggerCallback,	/*! @param triggerCallback
 															Callback to be called when the trigger condition becomes true.
 															Can be NULL, if client intends only to explicitly test the
 															condition.  Cannot be NULL if triggerTokenOut is NULL,
 															since then the trigger would be meaningless. */
-	void *triggerRefcon,								/*! @param triggerRefcon
+	void * CM_NULLABLE triggerRefcon,					/*! @param triggerRefcon
 															Refcon to be passed to the triggerCallback.
 															Can be NULL if the callback doesn't need it, or is
 															itself NULL. */
 	CMBufferQueueTriggerCondition triggerCondition,		/*! @param triggerCondition
 															The condition to be tested when evaluating the trigger. */
 	CMTime triggerTime,									/*! @param triggerTime
-															The time value to compare against when evaluating the trigger.  
-															Must be numeric (ie. not invalid, indefinite, or infinite), 
-															except for certain trigger conditions which ignore it 
+															The time value to compare against when evaluating the trigger.
+															Must be numeric (ie. not invalid, indefinite, or infinite),
+															except for certain trigger conditions which ignore it
 															(eg, kCMBufferQueueTrigger_WhenMinPresentationTimeStampChanges). */
-	CMBufferQueueTriggerToken *triggerTokenOut )		/*! @param triggerTokenOut
+	CMBufferQueueTriggerToken CM_NULLABLE * CM_NONNULL triggerTokenOut )	/*! @param triggerTokenOut
 															Address where created trigger token will be written.
 															Can be NULL, if client has no need to explicitly test
 															or remove the trigger. Cannot be NULL if triggerCallback
@@ -610,27 +626,27 @@ CM_EXPORT OSStatus CMBufferQueueInstallTrigger(
 				the integer value rather than the time value.
 */
 CM_EXPORT OSStatus CMBufferQueueInstallTriggerWithIntegerThreshold(
-	CMBufferQueueRef queue,								/*! @param queue
-															CMBufferQueue on which the trigger is being set. */
-	CMBufferQueueTriggerCallback triggerCallback,		/*! @param triggerCallback
-															Callback to be called when the trigger condition becomes true.
-															Can be NULL, if client intends only to explicitly test the
-															condition.  Cannot be NULL if triggerTokenOut is NULL,
-															since then the trigger would be meaningless. */
-	void *triggerRefcon,								/*! @param triggerRefcon
-															Refcon to be passed to the triggerCallback.
-															Can be NULL if the callback doesn't need it, or is
-															itself NULL. */
-	CMBufferQueueTriggerCondition triggerCondition,		/*! @param triggerCondition
-															The condition to be tested when evaluating the trigger.
-															Must be a valid condition for an integer threshold. */
-	CMItemCount triggerThreshold,						/*! @param triggerThreshold
-															The integer value to compare against when evaluating the trigger. */
-	CMBufferQueueTriggerToken *triggerTokenOut )		/*! @param triggerTokenOut
-															Address where created trigger token will be written.
-															Can be NULL, if client has no need to explicitly test
-															or remove the trigger. Cannot be NULL if triggerCallback
-															is NULL, since then the trigger would be meaningless. */
+	CMBufferQueueRef CM_NONNULL queue,										/*! @param queue
+																				CMBufferQueue on which the trigger is being set. */
+	CMBufferQueueTriggerCallback CM_NULLABLE triggerCallback,				/*! @param triggerCallback
+																				Callback to be called when the trigger condition becomes true.
+																				Can be NULL, if client intends only to explicitly test the
+																				condition.  Cannot be NULL if triggerTokenOut is NULL,
+																				since then the trigger would be meaningless. */
+	void * CM_NULLABLE triggerRefcon,										/*! @param triggerRefcon
+																				Refcon to be passed to the triggerCallback.
+																				Can be NULL if the callback doesn't need it, or is
+																				itself NULL. */
+	CMBufferQueueTriggerCondition triggerCondition,							/*! @param triggerCondition
+																				The condition to be tested when evaluating the trigger.
+																				Must be a valid condition for an integer threshold. */
+	CMItemCount triggerThreshold,											/*! @param triggerThreshold
+																				The integer value to compare against when evaluating the trigger. */
+	CMBufferQueueTriggerToken CM_NULLABLE * CM_NONNULL triggerTokenOut )	/*! @param triggerTokenOut
+																				Address where created trigger token will be written.
+																				Can be NULL, if client has no need to explicitly test
+																				or remove the trigger. Cannot be NULL if triggerCallback
+																				is NULL, since then the trigger would be meaningless. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -642,10 +658,10 @@ CM_EXPORT OSStatus CMBufferQueueInstallTriggerWithIntegerThreshold(
 				modules should remove their triggers before they themselves are finalized.
 */
 CM_EXPORT OSStatus CMBufferQueueRemoveTrigger(
-	CMBufferQueueRef queue,						/*! @param queue
-													CMBufferQueue from which the trigger is to be removed. */
-	CMBufferQueueTriggerToken triggerToken )	/*! @param triggerToken
-													Trigger to remove from the queue. */
+	CMBufferQueueRef CM_NONNULL queue,					/*! @param queue
+															CMBufferQueue from which the trigger is to be removed. */
+	CMBufferQueueTriggerToken CM_NONNULL triggerToken )	/*! @param triggerToken
+															Trigger to remove from the queue. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -656,10 +672,10 @@ CM_EXPORT OSStatus CMBufferQueueRemoveTrigger(
 				The triggerToken must be one that has been installed on this queue.
 */
 CM_EXPORT Boolean CMBufferQueueTestTrigger(
-	CMBufferQueueRef queue,						/*! @param queue
-													CMBufferQueue on which the trigger is to be tested. */
-	CMBufferQueueTriggerToken triggerToken )	/*! @param triggerToken
-													Trigger to test. */
+	CMBufferQueueRef CM_NONNULL queue,					/*! @param queue
+															CMBufferQueue on which the trigger is to be tested. */
+	CMBufferQueueTriggerToken CM_NONNULL triggerToken )	/*! @param triggerToken
+															Trigger to test. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -670,16 +686,16 @@ CM_EXPORT Boolean CMBufferQueueTestTrigger(
 */
 CM_EXPORT OSStatus
 CMBufferQueueCallForEachBuffer(
-	CMBufferQueueRef queue,		/*! @param queue
-									CMBufferQueue that may contain multiple buffers. */
-	OSStatus (*callback)( CMBufferRef buffer, void *refcon ),
-								/*! @param callback
-									Function to be called for each buffer.  
-									The callback may modify buffer attachments but should not modify sort-affecting 
-									properties (eg, timestamps).
-									The callback should not make other calls to the buffer queue. */
-	void *refcon )				/*! @param refcon
-									Refcon to be passed to the callback function. */
+	CMBufferQueueRef CM_NONNULL queue,		/*! @param queue
+												CMBufferQueue that may contain multiple buffers. */
+	OSStatus (* CM_NONNULL callback)(CMBufferRef CM_NONNULL buffer, void * CM_NULLABLE refcon ),
+											/*! @param callback
+												Function to be called for each buffer.
+												The callback may modify buffer attachments but should not modify sort-affecting
+												properties (eg, timestamps).
+												The callback should not make other calls to the buffer queue. */
+	void * CM_NULLABLE refcon )				/*! @param refcon
+												Refcon to be passed to the callback function. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -692,20 +708,22 @@ CMBufferQueueCallForEachBuffer(
 		CMBufferQueueEnqueue will return this error to the caller.
 		If you do not have a more descriptive error code, use kCMBufferQueueError_InvalidBuffer.
 */
-typedef OSStatus (*CMBufferValidationCallback)( CMBufferQueueRef queue, CMBufferRef buf, void *validationRefCon );
+typedef OSStatus (*CMBufferValidationCallback)(CMBufferQueueRef CM_NONNULL queue, CMBufferRef CM_NONNULL buf, void * CM_NULLABLE validationRefCon );
 
 /*!
 	@function	CMBufferQueueSetValidationCallback
 	@abstract	Sets a function that CMBufferQueueEnqueue will call to validate buffers before adding them to the queue.
 */
 CM_EXPORT OSStatus CMBufferQueueSetValidationCallback( 
-		CMBufferQueueRef queue,							/*! @param queue
-															CMBufferQueue that will use the validation callback. */
-		CMBufferValidationCallback validationCallback,	/*! @param validationCallback
-															Callback that will validate each buffer enqueued. */
-		void *validationRefCon )						/*! @param validationRefCon
-															Context refcon for validation callback. */
+		CMBufferQueueRef CM_NONNULL queue,							/*! @param queue
+																		CMBufferQueue that will use the validation callback. */
+		CMBufferValidationCallback CM_NONNULL validationCallback,	/*! @param validationCallback
+																		Callback that will validate each buffer enqueued. */
+		void * CM_NULLABLE validationRefCon )						/*! @param validationRefCon
+																		Context refcon for validation callback. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
     

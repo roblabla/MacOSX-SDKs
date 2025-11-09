@@ -5,8 +5,16 @@
 #ifndef CGDISPLAYCONFIGURATION_H_
 #define CGDISPLAYCONFIGURATION_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <IOKit/IOKitLib.h>
 #include <CoreGraphics/CGDirectDisplay.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* The display reconfiguration process:
    - Call `CGBeginDisplayConfiguration' to start.
@@ -24,8 +32,9 @@ typedef struct _CGDisplayConfigRef *CGDisplayConfigRef;
    configuration changes. Use `CGCompleteDisplayConfiguration' to apply the
    changes in a single transaction. */
 
-CG_EXTERN CGError CGBeginDisplayConfiguration(CGDisplayConfigRef *config)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+CG_EXTERN CGError CGBeginDisplayConfiguration(
+    CGDisplayConfigRef __nullable * __nullable config)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /* Configure the origin of a display in global display coordinates.
 
@@ -40,9 +49,10 @@ CG_EXTERN CGError CGBeginDisplayConfiguration(CGDisplayConfigRef *config)
    Note that setting the origin of a display which is mirroring another
    display will remove that display from any mirroring set. */
 
-CG_EXTERN CGError CGConfigureDisplayOrigin(CGDisplayConfigRef config,
-  CGDirectDisplayID display, int32_t x, int32_t y)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+CG_EXTERN CGError CGConfigureDisplayOrigin(
+    CGDisplayConfigRef __nullable config,
+    CGDirectDisplayID display, int32_t x, int32_t y)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /* Configure the display mode of a display. The "options" field is reserved
    for future expansion; pass NULL for now.
@@ -55,9 +65,11 @@ CG_EXTERN CGError CGConfigureDisplayOrigin(CGDisplayConfigRef config,
    displays in the set to a safe mode, with matching depth and the smallest
    enclosing size. */
 
-CG_EXTERN CGError CGConfigureDisplayWithDisplayMode(CGDisplayConfigRef config,
-  CGDirectDisplayID display, CGDisplayModeRef mode, CFDictionaryRef options)
-  CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CG_EXTERN CGError CGConfigureDisplayWithDisplayMode(
+    CGDisplayConfigRef __nullable config,
+    CGDirectDisplayID display, CGDisplayModeRef __nullable mode,
+    CFDictionaryRef __nullable options)
+    CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* Enable or disable stereo operation for a display.
 
@@ -82,9 +94,10 @@ CG_EXTERN CGError CGConfigureDisplayWithDisplayMode(CGDisplayConfigRef config,
    You should check these settings to verify that they are appropriate for
    your application. */
 
-CG_EXTERN CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef config,
-  CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+CG_EXTERN CGError CGConfigureDisplayStereoOperation(
+    CGDisplayConfigRef __nullable config,
+    CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Make a display a mirror of a master display.
 
@@ -122,15 +135,17 @@ CG_EXTERN CGError CGConfigureDisplayStereoOperation(CGDisplayConfigRef config,
      displays are active, or drawable. This automatically gives your
      application the correct view of the current displays. */
 
-CG_EXTERN CGError CGConfigureDisplayMirrorOfDisplay(CGDisplayConfigRef config,
-  CGDirectDisplayID display, CGDirectDisplayID master)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+CG_EXTERN CGError CGConfigureDisplayMirrorOfDisplay(
+    CGDisplayConfigRef __nullable config,
+    CGDirectDisplayID display, CGDirectDisplayID master)
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Cancel a set of display configuration changes. On return, the
    configuration is cancelled and is no longer valid. */
 
-CG_EXTERN CGError CGCancelDisplayConfiguration(CGDisplayConfigRef config)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+CG_EXTERN CGError CGCancelDisplayConfiguration(
+    CGDisplayConfigRef __nullable config)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /* Complete a set of display configuration changes. On return, the
    configuration is no longer valid.
@@ -152,21 +167,22 @@ CG_EXTERN CGError CGCancelDisplayConfiguration(CGDisplayConfigRef config)
    This operation may fail if an unsupported display mode is requested, or
    if another app is running in full-screen mode. */
 
-enum {
-  kCGConfigureForAppOnly = 0,
-  kCGConfigureForSession = 1,
-  kCGConfigurePermanently = 2
+typedef CF_OPTIONS(uint32_t, CGConfigureOption) {
+    kCGConfigureForAppOnly = 0,
+    kCGConfigureForSession = 1,
+    kCGConfigurePermanently = 2
 };
-typedef uint32_t CGConfigureOption;
 
-CG_EXTERN CGError CGCompleteDisplayConfiguration(CGDisplayConfigRef config,
-  CGConfigureOption option) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+CG_EXTERN CGError CGCompleteDisplayConfiguration(
+    CGDisplayConfigRef __nullable config,
+    CGConfigureOption option)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /* Restore the permanent display configuration settings for the current
    user. */
 
 CG_EXTERN void CGRestorePermanentDisplayConfiguration(void)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Display changes are reported via a callback mechanism.
 
@@ -192,40 +208,41 @@ CG_EXTERN void CGRestorePermanentDisplayConfiguration(void)
    case of removed displays, calls into the CoreGraphics API with the
    removed display ID will fail. */
 
-enum {
-  kCGDisplayBeginConfigurationFlag	= (1 << 0),
-  kCGDisplayMovedFlag			= (1 << 1),
-  kCGDisplaySetMainFlag			= (1 << 2),
-  kCGDisplaySetModeFlag			= (1 << 3),
-  kCGDisplayAddFlag			= (1 << 4),
-  kCGDisplayRemoveFlag			= (1 << 5),
-  kCGDisplayEnabledFlag			= (1 << 8),
-  kCGDisplayDisabledFlag		= (1 << 9),
-  kCGDisplayMirrorFlag			= (1 << 10),
-  kCGDisplayUnMirrorFlag		= (1 << 11),
-  kCGDisplayDesktopShapeChangedFlag	= (1 << 12)
+typedef CF_OPTIONS(uint32_t, CGDisplayChangeSummaryFlags) {
+    kCGDisplayBeginConfigurationFlag      = (1 << 0),
+    kCGDisplayMovedFlag                   = (1 << 1),
+    kCGDisplaySetMainFlag                 = (1 << 2),
+    kCGDisplaySetModeFlag                 = (1 << 3),
+    kCGDisplayAddFlag                     = (1 << 4),
+    kCGDisplayRemoveFlag                  = (1 << 5),
+    kCGDisplayEnabledFlag                 = (1 << 8),
+    kCGDisplayDisabledFlag                = (1 << 9),
+    kCGDisplayMirrorFlag                  = (1 << 10),
+    kCGDisplayUnMirrorFlag                = (1 << 11),
+    kCGDisplayDesktopShapeChangedFlag     = (1 << 12)
 };
-typedef uint32_t CGDisplayChangeSummaryFlags;
 
 /* A client-supplied callback function that’s invoked whenever the
    configuration of a local display is changed. */
 
 typedef void(*CGDisplayReconfigurationCallBack)(CGDirectDisplayID display,
-  CGDisplayChangeSummaryFlags flags, void *userInfo);
+  CGDisplayChangeSummaryFlags flags, void * __nullable userInfo);
 
 /* Register a display reconfiguration callback procedure. The `userInfo'
    argument is passed back to the callback procedure each time it is
    invoked. */
 
 CG_EXTERN CGError CGDisplayRegisterReconfigurationCallback(
-  CGDisplayReconfigurationCallBack callback, void *userInfo)
+  CGDisplayReconfigurationCallBack __nullable callback,
+  void * __nullable userInfo)
   CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 /* Remove a display reconfiguration callback procedure. */
 
 CG_EXTERN CGError CGDisplayRemoveReconfigurationCallback(
-  CGDisplayReconfigurationCallBack callback, void *userInfo)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+    CGDisplayReconfigurationCallBack __nullable callback,
+    void * __nullable userInfo)
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 /* Specialized configuration changes should be done outside of the scope of
    a `CGBeginDisplayConfiguration'/`CGCompleteDisplayConfiguration' pair, as
@@ -256,105 +273,105 @@ CG_EXTERN CGError CGDisplayRemoveReconfigurationCallback(
    your application. */
 
 CG_EXTERN CGError CGDisplaySetStereoOperation(CGDirectDisplayID display,
-  boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+    boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option)
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* Return true if the display is connected, awake, and available for
    drawing; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsActive(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is asleep (and is therefore not drawable);
    false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsAsleep(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is connected or online; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsOnline(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is the current main display; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsMain(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is built-in, such as the internal display in
    portable systems; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsBuiltin(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is in a mirroring set; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsInMirrorSet(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is always in a mirroring set and cannot be
    unmirrored; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsAlwaysInMirrorSet(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is in a hardware mirroring set; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsInHWMirrorSet(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* For a secondary display in a mirror set, return the display being
    mirrored (the primary display), or `kCGNullDirectDisplay' if the display
    is the primary display or if the display is unmirrored. */
 
 CG_EXTERN CGDirectDisplayID CGDisplayMirrorsDisplay(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is using OpenGL acceleration; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayUsesOpenGLAcceleration(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return true if the display is running in a stereo graphics mode; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsStereo(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); /* 10.4.3 and later. */
+    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); /* 10.4.3 and later. */
 
 /* Return the primary display in a hardware mirror set, or `display' if the
    display is not hardware-mirrored. */
 
 CG_EXTERN CGDirectDisplayID CGDisplayPrimaryDisplay(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return the logical unit number of a display. */
 
 CG_EXTERN uint32_t CGDisplayUnitNumber(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return the vendor number of a display's monitor. */
 
 CG_EXTERN uint32_t CGDisplayVendorNumber(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return the model number of a display's monitor. */
 
 CG_EXTERN uint32_t CGDisplayModelNumber(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return the serial number of a display's monitor. */
 
 CG_EXTERN uint32_t CGDisplaySerialNumber(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /* Return the IOKit service port of a display. */
 
 CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_9,
-    __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_9,
+                                __IPHONE_NA, __IPHONE_NA);
 
 /* Return the width and height of a display in millimeters.
 
@@ -368,7 +385,7 @@ CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display)
    support. */
 
 CG_EXTERN CGSize CGDisplayScreenSize(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 /* Return the rotation angle of a display in degrees clockwise.
 
@@ -379,18 +396,23 @@ CG_EXTERN CGSize CGDisplayScreenSize(CGDirectDisplayID display)
    If `display' is not a valid display ID, the rotation returned is 0. */
 
 CG_EXTERN double CGDisplayRotation(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Return the color space of a display. */
 
-CG_EXTERN CGColorSpaceRef CGDisplayCopyColorSpace(CGDirectDisplayID display)
+CG_EXTERN CGColorSpaceRef  CGDisplayCopyColorSpace(
+  CGDirectDisplayID display)
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* These functions are deprecated; do not use them. */
 
-CG_EXTERN CGError CGConfigureDisplayMode(CGDisplayConfigRef config,
-  CGDirectDisplayID display, CFDictionaryRef mode)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-    __IPHONE_NA, __IPHONE_NA);
+CG_EXTERN CGError CGConfigureDisplayMode(CGDisplayConfigRef __nullable config,
+    CGDirectDisplayID display, CFDictionaryRef __nullable mode)
+    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
+                                __IPHONE_NA, __IPHONE_NA);
+
+CF_ASSUME_NONNULL_END
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGDISPLAYCONFIGURATION_H_ */

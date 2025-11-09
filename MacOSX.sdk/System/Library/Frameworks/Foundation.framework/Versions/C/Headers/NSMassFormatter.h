@@ -1,10 +1,12 @@
 /*      NSMassFormatter.h
-        Copyright (c) 2014, Apple Inc. All rights reserved.
+        Copyright (c) 2014-2015, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSFormatter.h>
 
 @class NSNumberFormatter;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSMassFormatterUnit) {
     NSMassFormatterUnitGram = 11,
@@ -22,7 +24,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     void *_reserved[2];
 }
 
-@property (copy) NSNumberFormatter *numberFormatter;    // default is NSNumberFormatter with NSNumberFormatterDecimalStyle
+@property (null_resettable, copy) NSNumberFormatter *numberFormatter;    // default is NSNumberFormatter with NSNumberFormatterDecimalStyle
 @property NSFormattingUnitStyle unitStyle;              // default is NSFormattingUnitStyleMedium
 @property (getter = isForPersonMassUse) BOOL forPersonMassUse;  // default is NO; if it is set to YES, the number argument for -stringFromKilograms: and -unitStringFromKilograms: is considered as a person’s mass
 
@@ -36,8 +38,11 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (NSString *)unitStringFromValue:(double)value unit:(NSMassFormatterUnit)unit;
 
 // Return the locale-appropriate unit, the same unit used by -stringFromKilograms:.
-- (NSString *)unitStringFromKilograms:(double)numberInKilograms usedUnit:(NSMassFormatterUnit *)unitp;
+- (NSString *)unitStringFromKilograms:(double)numberInKilograms usedUnit:(nullable NSMassFormatterUnit *)unitp;
 
 // No parsing is supported. This method will return NO.
-- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string errorDescription:(out NSString **)error;
+- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
 @end
+
+NS_ASSUME_NONNULL_END
+

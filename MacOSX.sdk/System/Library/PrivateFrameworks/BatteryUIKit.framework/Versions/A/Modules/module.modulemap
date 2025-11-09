@@ -1,6 +1,0 @@
-framework module BatteryUIKit {
-  umbrella header "BatteryUIKit.h"
-
-  export *
-  module * { export * }
-}

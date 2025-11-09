@@ -21,6 +21,7 @@ exports:
                        _kPRRequestInfoStoreSalableLocalizedProductType, 
                        _kPRRequestInfoStoreSalableProductName, _kPRRequestInfoStoreSalableProductType, 
                        _kPRRequestInfoStoreSalableProductTypeID, _kPRRequestInfoStoreSalableURL, 
-                       _kPRRequestInfoStoreSalables, _kPRRequestQueueiTunesStoreIdentifier ]
+                       _kPRRequestInfoStoreSalables, _kPRRequestInfoStoreSandboxRequest, 
+                       _kPRRequestQueueiTunesStoreIdentifier ]
     objc-classes:    [ _PRLogging, _PRRequest, _PRRequestQueue, _PRUIHelper ]
 ...

@@ -3462,6 +3462,49 @@ const ODPolicyKeyType kODPolicyKeyParameters __OSX_AVAILABLE_STARTING(__MAC_10_1
 CF_EXPORT
 const ODPolicyKeyType kODPolicyKeyContent __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 
+/*!
+    @const      kODPolicyKeyContentDescription
+    @abstract   Key for the policy content description.
+    @discussion Key for the policy content description.  Used in either a policy
+                dictionary or in kODPolicyKeyEvaluationDetails dictionary.  It
+                is an optional key in either dictionary.
+
+                When used in a policy dictionary, the value of this key is a
+                dictionary containing key/value pairs consisting of locale
+                identifiers and localized descriptions of the policy content.
+
+                When used in kODPolicyKeyEvaluationDetails dictionary, the value
+                is a string containing the localized description of the policy
+                content.
+ */
+CF_EXPORT
+const ODPolicyKeyType kODPolicyKeyContentDescription __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
+
+/*!
+    @const      kODPolicyKeyEvaluationDetails
+    @abstract   Key containing details of the policy evaluation results.
+    @discussion Key containing details of the policy evaluation results.  This
+                key may be used in the userInfo portion of a CFErrorRef/NSError.
+                The value of this key is an array of dictionaries, with each
+                dictionary containing the results of an individual policy
+                evaluation.  The keys in the details dictionaries are:
+                   kODPolicyKeyIdentifier
+                   kODPolicyKeyContentDescription
+                   kODPolicyKeyPolicySatisfied
+*/
+CF_EXPORT
+const ODPolicyKeyType kODPolicyKeyEvaluationDetails __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
+
+/*!
+    @const      kODPolicyKeyPolicySatisfied
+    @abstract   Key denoting if a specific policy was satisfied during evaluation.
+    @discussion Key denoting if a specific policy was satisfied during evaluation.
+                This key is used in the dictionaries in kODPolicyKeyEvaluationDetails.
+                The value of this key will be true if the specific policy was
+                satisfied and false if not.
+*/
+CF_EXPORT
+const ODPolicyKeyType kODPolicyKeyPolicySatisfied __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
 
 /*!
     @typedef    ODPolicyCategoryType

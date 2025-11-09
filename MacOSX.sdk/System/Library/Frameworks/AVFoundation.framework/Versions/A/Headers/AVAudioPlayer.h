@@ -3,18 +3,18 @@
 	
 	Framework:  AVFoundation
 
-	Copyright 2008-2013 Apple Inc. All rights reserved.
+	Copyright 2008-2015 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
-#import <Foundation/NSObject.h>
-#import <Foundation/NSArray.h>
-#import <Foundation/NSDate.h>  /* for NSTimeInterval */
+#import <Foundation/Foundation.h>
 #import <AVFoundation/AVAudioSettings.h>
 #import <AudioToolbox/AudioFile.h>
 #import <Availability.h>
 
-@class NSData, NSURL, NSError, NSDictionary;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSData, NSURL, NSError;
 @class AVAudioSessionChannelDescription;
 @protocol AVAudioPlayerDelegate;
 
@@ -29,13 +29,13 @@ NS_CLASS_AVAILABLE(10_7, 2_2)
 */
 
 /* all data must be in the form of an audio file understood by CoreAudio */
-- (instancetype)initWithContentsOfURL:(NSURL *)url error:(NSError **)outError;
-- (instancetype)initWithData:(NSData *)data error:(NSError **)outError;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url error:(NSError **)outError;
+- (nullable instancetype)initWithData:(NSData *)data error:(NSError **)outError;
 
 /* The file type hint is a constant defined in AVMediaFormat.h whose value is a UTI for a file format. e.g. AVFileTypeAIFF. */
 /* Sometimes the type of a file cannot be determined from the data, or it is actually corrupt. The file type hint tells the parser what kind of data to look for so that files which are not self identifying or possibly even corrupt can be successfully parsed. */
-- (instancetype)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString *)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
-- (instancetype)initWithData:(NSData *)data fileTypeHint:(NSString *)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
+- (nullable instancetype)initWithData:(NSData *)data fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
 
 /* transport control */
 /* methods that return BOOL return YES on success and NO on failure. */
@@ -53,11 +53,11 @@ NS_CLASS_AVAILABLE(10_7, 2_2)
 @property(readonly) NSTimeInterval duration; /* the duration of the sound. */
 
 /* the delegate will be sent messages from the AVAudioPlayerDelegate protocol */ 
-@property(assign) id<AVAudioPlayerDelegate> delegate; 
+@property(assign, nullable) id<AVAudioPlayerDelegate> delegate;
 
 /* one of these properties will be non-nil based on the init... method used */
-@property(readonly) NSURL *url; /* returns nil if object was not created with a URL */
-@property(readonly) NSData *data; /* returns nil if object was not created with a data object */
+@property(readonly, nullable) NSURL *url; /* returns nil if object was not created with a URL */
+@property(readonly, nullable) NSData *data; /* returns nil if object was not created with a data object */
 
 @property float pan NS_AVAILABLE(10_7, 4_0); /* set panning. -1.0 is left, 0.0 is center, 1.0 is right. */
 @property float volume; /* The volume for the sound. The nominal range is from 0.0 to 1.0. */
@@ -81,7 +81,7 @@ Any negative number will loop indefinitely until stopped.
 @property NSInteger numberOfLoops;
 
 /* settings */
-@property(readonly) NSDictionary *settings NS_AVAILABLE(10_7, 4_0); /* returns a settings dictionary with keys as described in AVAudioSettings.h */
+@property(readonly) NSDictionary<NSString *, id> *settings NS_AVAILABLE(10_7, 4_0); /* returns a settings dictionary with keys as described in AVAudioSettings.h */
 
 /* metering */
 
@@ -96,7 +96,7 @@ Any negative number will loop indefinitely until stopped.
 /* The channels property lets you assign the output to play to specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy) NSArray *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
+@property(nonatomic, copy, nullable) NSArray<NSNumber *> *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
 #endif
 
 @end
@@ -108,7 +108,7 @@ Any negative number will loop indefinitely until stopped.
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
 
 /* if an error occurs while decoding it will be reported to the delegate. */
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error;
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError * __nullable)error;
 
 #if TARGET_OS_IPHONE
 
@@ -129,3 +129,5 @@ Any negative number will loop indefinitely until stopped.
 #endif // TARGET_OS_IPHONE
 
 @end
+
+NS_ASSUME_NONNULL_END

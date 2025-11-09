@@ -1,12 +1,14 @@
 /*
     NSView.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSResponder.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
 #import <AppKit/AppKitDefines.h>
@@ -16,8 +18,10 @@
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSAppearance.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSBitmapImageRep, NSCursor, NSDraggingSession, NSGestureRecognizer, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
-@class CIFilter, CALayer, NSDictionary, NSScreen, NSShadow, NSTrackingArea;
+@class CIFilter, CALayer, NSScreen, NSShadow, NSTrackingArea;
 @protocol NSDraggingSource;
 
 // Bitset options for the autoresizingMask
@@ -146,33 +150,32 @@ typedef NSInteger NSToolTipTag;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-@property (readonly, assign) NSWindow *window;
-@property (readonly, assign) NSView *superview;
-@property (copy) NSArray *subviews;
+@property (nullable, readonly, assign) NSWindow *window;
+@property (nullable, readonly, assign) NSView *superview;
+@property (copy) NSArray<__kindof NSView *> *subviews;
 - (BOOL)isDescendantOf:(NSView *)aView;
-- (NSView *)ancestorSharedWithView:(NSView *)aView;
-@property (readonly, assign) NSView *opaqueAncestor;
+- (nullable NSView *)ancestorSharedWithView:(NSView *)aView;
+@property (nullable, readonly, assign) NSView *opaqueAncestor;
 @property (getter=isHidden) BOOL hidden;
 @property (getter=isHiddenOrHasHiddenAncestor, readonly) BOOL hiddenOrHasHiddenAncestor;
 
-- (void)getRectsBeingDrawn:(const NSRect **)rects count:(NSInteger *)count;
+- (void)getRectsBeingDrawn:(const NSRect * __nullable * __nullable)rects count:(nullable NSInteger *)count;
 - (BOOL)needsToDrawRect:(NSRect)aRect;
 @property (readonly) BOOL wantsDefaultClipping;
 - (void)viewDidHide NS_AVAILABLE_MAC(10_5);
 - (void)viewDidUnhide NS_AVAILABLE_MAC(10_5);
 
-- (void)setSubviews:(NSArray *)newSubviews NS_AVAILABLE_MAC(10_5);
 - (void)addSubview:(NSView *)aView;
-- (void)addSubview:(NSView *)aView positioned:(NSWindowOrderingMode)place relativeTo:(NSView *)otherView;
-- (void)sortSubviewsUsingFunction:(NSComparisonResult (*)(id, id, void *))compare context:(void *)context;
+- (void)addSubview:(NSView *)aView positioned:(NSWindowOrderingMode)place relativeTo:(nullable NSView *)otherView;
+- (void)sortSubviewsUsingFunction:(NSComparisonResult (*)(__kindof NSView *, __kindof NSView *,  void * __nullable))compare context:(nullable void *)context;
 
 /* NOTE: In general, it is good practice to call 'super' for the viewWill* and viewDid* methods. Some AppKit subclasses, such as NSTableView, depend on this behavior, and calling super is required for things to work properly.
  */
-- (void)viewWillMoveToWindow:(NSWindow *)newWindow;
+- (void)viewWillMoveToWindow:(nullable NSWindow *)newWindow;
 - (void)viewDidMoveToWindow;
-- (void)viewWillMoveToSuperview:(NSView *)newSuperview;
+- (void)viewWillMoveToSuperview:(nullable NSView *)newSuperview;
 - (void)viewDidMoveToSuperview;
 
 - (void)didAddSubview:(NSView *)subview;
@@ -212,12 +215,12 @@ typedef NSInteger NSToolTipTag;
  */
 @property (getter=isOpaque, readonly) BOOL opaque;
 
-- (NSPoint)convertPoint:(NSPoint)aPoint fromView:(NSView *)aView;
-- (NSPoint)convertPoint:(NSPoint)aPoint toView:(NSView *)aView;
-- (NSSize)convertSize:(NSSize)aSize fromView:(NSView *)aView;
-- (NSSize)convertSize:(NSSize)aSize toView:(NSView *)aView;
-- (NSRect)convertRect:(NSRect)aRect fromView:(NSView *)aView;
-- (NSRect)convertRect:(NSRect)aRect toView:(NSView *)aView;
+- (NSPoint)convertPoint:(NSPoint)aPoint fromView:(nullable NSView *)aView;
+- (NSPoint)convertPoint:(NSPoint)aPoint toView:(nullable NSView *)aView;
+- (NSSize)convertSize:(NSSize)aSize fromView:(nullable NSView *)aView;
+- (NSSize)convertSize:(NSSize)aSize toView:(nullable NSView *)aView;
+- (NSRect)convertRect:(NSRect)aRect fromView:(nullable NSView *)aView;
+- (NSRect)convertRect:(NSRect)aRect toView:(nullable NSView *)aView;
 
 /* Uses NSIntegralRectWithOptions() to produce a backing store pixel aligned rectangle from the given input rectangle in local view coordinates.
  */
@@ -242,15 +245,6 @@ typedef NSInteger NSToolTipTag;
 - (NSRect)convertRectToLayer:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
 - (NSRect)convertRectFromLayer:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
 
-/* These methods are deprecated on 10.7 and later. */
-
-- (NSPoint)convertPointToBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSPoint)convertPointFromBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSSize)convertSizeToBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSSize)convertSizeFromBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSRect)convertRectToBase:(NSRect)aRect  NS_DEPRECATED_MAC(10_5, 10_7);
-- (NSRect)convertRectFromBase:(NSRect)aRect  NS_DEPRECATED_MAC(10_5, 10_7);
-
 /* Reports whether AppKit may invoke the view's -drawRect: method on a background thread, where it would otherwise be invoked on the main thread.  Defaults to NO.
 */
 @property BOOL canDrawConcurrently NS_AVAILABLE_MAC(10_6);
@@ -264,7 +258,7 @@ typedef NSInteger NSToolTipTag;
 - (void)unlockFocus;
 - (BOOL)lockFocusIfCanDraw;
 - (BOOL)lockFocusIfCanDrawInContext:(NSGraphicsContext *)context;
-+ (NSView *)focusView;
++ (nullable NSView *)focusView;
 @property (readonly) NSRect visibleRect;
 
 - (void)display;
@@ -277,7 +271,7 @@ typedef NSInteger NSToolTipTag;
 - (void)drawRect:(NSRect)dirtyRect;
 - (void)displayRectIgnoringOpacity:(NSRect)aRect inContext:(NSGraphicsContext *)context;
 
-- (NSBitmapImageRep *)bitmapImageRepForCachingDisplayInRect:(NSRect)rect;
+- (nullable NSBitmapImageRep *)bitmapImageRepForCachingDisplayInRect:(NSRect)rect;
 - (void)cacheDisplayInRect:(NSRect)rect toBitmapImageRep:(NSBitmapImageRep *)bitmapImageRep;
 - (void)viewWillDraw NS_AVAILABLE_MAC(10_5);
 
@@ -288,12 +282,12 @@ typedef NSInteger NSToolTipTag;
 - (void)scrollRect:(NSRect)aRect by:(NSSize)delta;
 - (void)translateRectsNeedingDisplayInRect:(NSRect)clipRect by:(NSSize)delta NS_AVAILABLE_MAC(10_5);
 
-- (NSView *)hitTest:(NSPoint)aPoint;
+- (nullable NSView *)hitTest:(NSPoint)aPoint;
 - (BOOL)mouse:(NSPoint)aPoint inRect:(NSRect)aRect;
-- (id)viewWithTag:(NSInteger)aTag;
+- (nullable __kindof NSView *)viewWithTag:(NSInteger)aTag;
 @property (readonly) NSInteger tag;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
-- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
+- (BOOL)acceptsFirstMouse:(nullable NSEvent *)theEvent;
 - (BOOL)shouldDelayWindowOrderingForEvent:(NSEvent *)theEvent;
 @property (readonly) BOOL needsPanelToBecomeKey;
 @property (readonly) BOOL mouseDownCanMoveWindow;
@@ -311,7 +305,7 @@ typedef NSInteger NSToolTipTag;
 - (void)discardCursorRects;
 - (void)resetCursorRects;
 
-- (NSTrackingRectTag)addTrackingRect:(NSRect)aRect owner:(id)anObject userData:(void *)data assumeInside:(BOOL)flag;
+- (NSTrackingRectTag)addTrackingRect:(NSRect)aRect owner:(id)anObject userData:(nullable void *)data assumeInside:(BOOL)flag;
 - (void)removeTrackingRect:(NSTrackingRectTag)tag;
 
 - (CALayer *)makeBackingLayer NS_AVAILABLE_MAC(10_6);
@@ -328,7 +322,7 @@ typedef NSInteger NSToolTipTag;
 
 /* Get and set the CALayer for this view. The layer is not encoded by the view.
  */
-@property (strong) CALayer *layer NS_AVAILABLE_MAC(10_5);
+@property (nullable, strong) CALayer *layer NS_AVAILABLE_MAC(10_5);
 
 /* Layer Backed Views: Return YES if this view supports directly setting the layer properties (such as the contents and backgroundColor) as opposed to filling in the contents with a drawRect: implementation. Most AppKit controls return YES if there is no subclassing involved that would alter the drawing appearance. It will return NO for views that do have subclassing that AppKit does not know about (such as, overriding drawRect:, or other drawing methods).
  */
@@ -348,19 +342,19 @@ typedef NSInteger NSToolTipTag;
  */
 @property BOOL layerUsesCoreImageFilters NS_AVAILABLE_MAC(10_9);
 
-@property (copy) NSArray *backgroundFilters NS_AVAILABLE_MAC(10_5);
+@property (copy) NSArray<__kindof CIFilter *> *backgroundFilters NS_AVAILABLE_MAC(10_5);
 
-@property (strong) CIFilter *compositingFilter NS_AVAILABLE_MAC(10_5);
+@property (nullable, strong) CIFilter *compositingFilter NS_AVAILABLE_MAC(10_5);
 
-@property (copy) NSArray *contentFilters NS_AVAILABLE_MAC(10_5);
+@property (copy) NSArray<__kindof CIFilter *> *contentFilters NS_AVAILABLE_MAC(10_5);
 
-@property (copy) NSShadow *shadow NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSShadow *shadow NS_AVAILABLE_MAC(10_5);
 
 /* The following methods are meant to be invoked, and probably don't need to be overridden
 */
 - (void)addTrackingArea:(NSTrackingArea *)trackingArea NS_AVAILABLE_MAC(10_5);
 - (void)removeTrackingArea:(NSTrackingArea *)trackingArea NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSArray *trackingAreas NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray<NSTrackingArea *> *trackingAreas NS_AVAILABLE_MAC(10_5);
 
 /* updateTrackingAreas should be overridden to remove out of date tracking areas and add recomputed tracking areas, and should call super.
 */
@@ -368,13 +362,29 @@ typedef NSInteger NSToolTipTag;
 
 @property BOOL postsBoundsChangedNotifications;
 
-@property (readonly, strong) NSScrollView *enclosingScrollView;
+@property (nullable, readonly, strong) NSScrollView *enclosingScrollView;
 
-- (NSMenu *)menuForEvent:(NSEvent *)event;
-+ (NSMenu *)defaultMenu;
+- (nullable NSMenu *)menuForEvent:(NSEvent *)event;
++ (nullable NSMenu *)defaultMenu;
 
-@property (copy) NSString *toolTip;
-- (NSToolTipTag)addToolTipRect:(NSRect)aRect owner:(id)anObject userData:(void *)data;
+/*!
+ * A contextual menu is being opened from the receiving view.
+ * The view should update any visual state in response — such as making a selection.
+ * \param menu The contextual menu that is being opened on the view
+ * \param event The event that caused the menu to open.
+ */
+- (void)willOpenMenu:(NSMenu *)menu withEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_11);
+
+/*!
+ * A contextual menu shown from the receiving view has been closed. This is only called if the menu had been opened and the view previously received \c -willOpenMenu:withEvent:.
+ * The view should update any visual state in response — such as removing a temporary selection.
+ * \param menu The contextual menu that was open on the view
+ * \param event The event that caused the menu to close. This may be nil if there is no specific event that triggered the closing.
+ */
+- (void)didCloseMenu:(NSMenu *)menu withEvent:(nullable NSEvent *)event NS_AVAILABLE_MAC(10_11);
+
+@property (nullable, copy) NSString *toolTip;
+- (NSToolTipTag)addToolTipRect:(NSRect)aRect owner:(id)anObject userData:(nullable void *)data;
 - (void)removeToolTip:(NSToolTipTag)tag;
 - (void)removeAllToolTips;
 
@@ -404,7 +414,7 @@ typedef NSInteger NSToolTipTag;
 /* Text Input */
 /* Returns NSTextInputContext object for the receiver. Returns nil if the receiver doesn't conform to NSTextInputClient protocol.
  */
-@property (readonly, strong) NSTextInputContext *inputContext NS_AVAILABLE_MAC(10_6);
+@property (nullable, readonly, strong) NSTextInputContext *inputContext NS_AVAILABLE_MAC(10_6);
 
 /* Return the complete rect of the most appropriate content grouping at the specified location. For example, if your content is divided into three columns, return the entire rect of the column that contains the location. NSScrollView will attempt to magnify such that the width fits inside the scroll view while remaining within the minMagnification, maxMagnification range.
  
@@ -451,14 +461,14 @@ typedef NSInteger NSToolTipTag;
 @end
 
 @interface NSObject(NSToolTipOwner)
-- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)data;
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(nullable void *)data;
 @end
 
 @interface NSView(NSKeyboardUI)
-@property (assign) NSView *nextKeyView;
-@property (readonly, assign) NSView *previousKeyView;
-@property (readonly, assign) NSView *nextValidKeyView;
-@property (readonly, assign) NSView *previousValidKeyView;
+@property (nullable, assign) NSView *nextKeyView;
+@property (nullable, readonly, assign) NSView *previousKeyView;
+@property (nullable, readonly, assign) NSView *nextValidKeyView;
+@property (nullable, readonly, assign) NSView *previousValidKeyView;
 
 @property (readonly) BOOL canBecomeKeyView;
 
@@ -482,7 +492,7 @@ typedef NSInteger NSToolTipTag;
 - (NSData *)dataWithPDFInsideRect:(NSRect)rect;
 
 /* Printing action method (Note fax: is obsolete) */
-- (void)print:(id)sender;
+- (void)print:(nullable id)sender;
 
 /* Pagination */
 - (BOOL)knowsPageRange:(NSRangePointer)range;
@@ -513,23 +523,19 @@ typedef NSInteger NSToolTipTag;
 @interface NSView(NSDrag)
 /* Starts a dragging session with a group of NSDraggingItems. The frame property of each NSDraggingItem must be in the view's coordinate system. The images may animate (flock) from thier initial layout into a system defined formation. Flocking or may not be done immediately. (see NSDraggingSession's flockOnBeginDrag. The visible area of the view is used as the clip rect.
 */
-- (NSDraggingSession *)beginDraggingSessionWithItems:(NSArray *)items event:(NSEvent *)event source:(id<NSDraggingSource>)source NS_AVAILABLE_MAC(10_7);
+- (NSDraggingSession *)beginDraggingSessionWithItems:(NSArray<NSDraggingItem *> *)items event:(NSEvent *)event source:(id<NSDraggingSource>)source NS_AVAILABLE_MAC(10_7);
 
-/* This drag method as been deprecated in favor of beginDraggingSessionWithItems:event:source:
-*/ 
-- (void)dragImage:(NSImage *)anImage at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag NS_DEPRECATED_MAC(10_0, 10_7, "Use -beginDraggingSessionWithItems:event:source: instead");
-
-@property (readonly, copy) NSArray *registeredDraggedTypes;
-- (void)registerForDraggedTypes:(NSArray *)newTypes;
+@property (readonly, copy) NSArray<NSString *> *registeredDraggedTypes;
+- (void)registerForDraggedTypes:(NSArray<NSString *> *)newTypes;
 - (void)unregisterDraggedTypes;
 
 - (BOOL)dragFile:(NSString *)filename fromRect:(NSRect)rect slideBack:(BOOL)aFlag event:(NSEvent *)event;
-- (BOOL)dragPromisedFilesOfTypes:(NSArray *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)aFlag event:(NSEvent *)event;
+- (BOOL)dragPromisedFilesOfTypes:(NSArray<NSString *> *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)aFlag event:(NSEvent *)event;
 @end
 
 @interface NSView (NSFullScreenMode) 
-- (BOOL)enterFullScreenMode:(NSScreen *)screen withOptions:(NSDictionary *)options NS_AVAILABLE_MAC(10_5);
-- (void)exitFullScreenModeWithOptions:(NSDictionary *)options NS_AVAILABLE_MAC(10_5);
+- (BOOL)enterFullScreenMode:(NSScreen *)screen withOptions:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_5);
+- (void)exitFullScreenModeWithOptions:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_5);
 @property (getter=isInFullScreenMode, readonly) BOOL inFullScreenMode NS_AVAILABLE_MAC(10_5); 
 @end
 
@@ -546,7 +552,7 @@ APPKIT_EXTERN NSString * const NSFullScreenModeApplicationPresentationOptions NS
  
  This method is equivalent to using showDefinitionForAttributedString:range:options:baselineOriginProvider: and passing attrString with the whole range, nil options, and an originProvider which returns textBaselineOrigin.
  */
-- (void)showDefinitionForAttributedString:(NSAttributedString *)attrString atPoint:(NSPoint)textBaselineOrigin NS_AVAILABLE_MAC(10_6);
+- (void)showDefinitionForAttributedString:(nullable NSAttributedString *)attrString atPoint:(NSPoint)textBaselineOrigin NS_AVAILABLE_MAC(10_6);
 
 /* Takes a whole attributed string with the target range (normally, this is the selected range), and shows a window displaying the definition of the specified range.  The caller can pass a zero-length range and the appropriate range will be auto-detected around the range's offset.  That's the recommended approach when there is no selection.
  
@@ -556,7 +562,7 @@ APPKIT_EXTERN NSString * const NSFullScreenModeApplicationPresentationOptions NS
  
  If the receiver is an NSTextView, both attrString and originProvider may be nil, in which case the text view will automatically supply values suitable for displaying definitions for the specified range within its text content.  This method does not cause scrolling, so clients should perform any necessary scrolling before calling this method.
  */
-- (void)showDefinitionForAttributedString:(NSAttributedString *)attrString range:(NSRange)targetRange options:(NSDictionary *)options baselineOriginProvider:(NSPoint (^)(NSRange adjustedRange))originProvider NS_AVAILABLE_MAC(10_6);
+- (void)showDefinitionForAttributedString:(nullable NSAttributedString *)attrString range:(NSRange)targetRange options:(nullable NSDictionary<NSString *, id> *)options baselineOriginProvider:(NSPoint (^ __nullable)(NSRange adjustedRange))originProvider NS_AVAILABLE_MAC(10_6);
 
 @end
 
@@ -578,12 +584,24 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 
 
 @interface NSView (NSGestureRecognizer)
-@property (copy) NSArray *gestureRecognizers NS_AVAILABLE_MAC(10_10);
+@property (copy) NSArray<__kindof NSGestureRecognizer *> *gestureRecognizers NS_AVAILABLE_MAC(10_10);
 - (void)addGestureRecognizer:(NSGestureRecognizer *)gestureRecognizer NS_AVAILABLE_MAC(10_10);
 - (void)removeGestureRecognizer:(NSGestureRecognizer *)gestureRecognizer NS_AVAILABLE_MAC(10_10);
 @end
 
 @interface NSView(NSDeprecated)
+
+/* This drag method as been deprecated in favor of beginDraggingSessionWithItems:event:source:
+ */
+- (void)dragImage:(NSImage *)anImage at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag NS_DEPRECATED_MAC(10_0, 10_7, "Use -beginDraggingSessionWithItems:event:source: instead");
+
+/* These methods are deprecated on 10.7 and later. */
+- (NSPoint)convertPointToBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSPoint)convertPointFromBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSSize)convertSizeToBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSSize)convertSizeFromBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSRect)convertRectToBase:(NSRect)aRect NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSRect)convertRectFromBase:(NSRect)aRect NS_DEPRECATED_MAC(10_5, 10_7);
 
 /* This method is deprecated in 10.8 and higher. On MacOS it has historically not done anything.
  */
@@ -592,7 +610,6 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 /* shouldDrawColor is no longer used by AppKit.
  */
 - (BOOL)shouldDrawColor NS_DEPRECATED_MAC(10_0, 10_10);
-
 
 /* The gState class of methods are deprecatd and in many cases did not do anything, or not what one would expect.
  */
@@ -624,4 +641,5 @@ APPKIT_EXTERN NSString *NSViewGlobalFrameDidChangeNotification;
  */
 APPKIT_EXTERN NSString *NSViewDidUpdateTrackingAreasNotification NS_AVAILABLE_MAC(10_5);
 
+NS_ASSUME_NONNULL_END
 

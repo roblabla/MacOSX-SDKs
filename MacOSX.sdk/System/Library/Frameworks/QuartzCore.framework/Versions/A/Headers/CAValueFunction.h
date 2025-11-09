@@ -1,10 +1,12 @@
 /* CoreAnimation - CAValueFunction.h
 
-   Copyright (c) 2008-2014, Apple Inc.
+   Copyright (c) 2008-2015, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
 #import <Foundation/NSObject.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CAValueFunction : NSObject <NSCoding>
 {
@@ -13,7 +15,7 @@
   void *_impl;
 }
 
-+ (instancetype)functionWithName:(NSString *)name;
++ (nullable instancetype)functionWithName:(NSString *)name;
 
 @property(readonly) NSString *name;
 
@@ -66,3 +68,4 @@ CA_EXTERN NSString * const kCAValueFunctionTranslateY
 CA_EXTERN NSString * const kCAValueFunctionTranslateZ
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 
+NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
@@ -9,23 +9,25 @@
 #import <AppKit/NSGraphics.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSDictionary.h>
 
 #import <CoreGraphics/CGContext.h>
 
-@class NSDictionary;
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSString;
 @class NSWindow;
 @class NSBitmapImageRep;
 
 /* Attributes that can be passed to graphicsContextWithAttributes: method */
-APPKIT_EXTERN NSString *NSGraphicsContextDestinationAttributeName; // Can be an instance of NSWindow, NSMutableData, NSBitmapImageRep, or NSURL.
+APPKIT_EXTERN NSString * NSGraphicsContextDestinationAttributeName; // Can be an instance of NSWindow, NSMutableData, NSBitmapImageRep, or NSURL.
 
 // Attributes for NSMutableData or NSURL destinations
-APPKIT_EXTERN NSString *NSGraphicsContextRepresentationFormatAttributeName; // Specifies destination file format
+APPKIT_EXTERN NSString * NSGraphicsContextRepresentationFormatAttributeName; // Specifies destination file format
 
 // Supported file format
-APPKIT_EXTERN NSString *NSGraphicsContextPSFormat;
-APPKIT_EXTERN NSString *NSGraphicsContextPDFFormat;
+APPKIT_EXTERN NSString * NSGraphicsContextPSFormat;
+APPKIT_EXTERN NSString * NSGraphicsContextPDFFormat;
 
 typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
    NSImageInterpolationDefault = 0,
@@ -39,22 +41,22 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 }
 
 // Instantiates from an appropriate concrete subclass depending on NSGraphicsContextDestinationAttributeName attribute
-+ (NSGraphicsContext *)graphicsContextWithAttributes:(NSDictionary *)attributes;
++ (nullable NSGraphicsContext *)graphicsContextWithAttributes:(NSDictionary<NSString *, id> *)attributes;
 
 // Convenience cover method for [NSGraphicsContext graphicsContextWithAttributes:[NSDictionary dictionaryWithObject:<NSWindow instance> forKey:NSGraphicsContextDestinationAttributeName]]
 + (NSGraphicsContext *)graphicsContextWithWindow:(NSWindow *)window;
 
 /* Convenience cover method for [NSGraphicsContext graphicsContextWithAttributes:[NSDictionary dictionaryWithObject:<NSBitmapImageRep instance> forKey:NSGraphicsContextDestinationAttributeName]]. Only NSBitmapImageRep instances with isPlanar == NO are supported.
 */
-+ (NSGraphicsContext *)graphicsContextWithBitmapImageRep:(NSBitmapImageRep *)bitmapRep;
++ (nullable NSGraphicsContext *)graphicsContextWithBitmapImageRep:(NSBitmapImageRep *)bitmapRep;
 
 /* Instantiates from a CGContextRef.  initialFlippedState is used to determine the return value from -isFlipped when no view is focused in the context.
 */
 + (NSGraphicsContext *)graphicsContextWithCGContext:(CGContextRef)graphicsPort flipped:(BOOL)initialFlippedState NS_AVAILABLE_MAC(10_10);
 
 // Setting and identifying the current context in the thread
-+ (NSGraphicsContext *)currentContext;
-+ (void)setCurrentContext:(NSGraphicsContext *)context;
++ (nullable NSGraphicsContext *)currentContext;
++ (void)setCurrentContext:(nullable NSGraphicsContext *)context;
 
 // Convenience cover method for [[NSGraphicsContext currentContext] isDrawingToScreen]
 + (BOOL)currentContextDrawingToScreen;
@@ -66,7 +68,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 + (void)restoreGraphicsState;
 
 // Returns attributes used to create this instance
-@property (readonly, copy) NSDictionary *attributes;
+@property (nullable, readonly, copy) NSDictionary<NSString *, id> *attributes;
 
 // Testing the drawing destination
 @property (getter=isDrawingToScreen, readonly) BOOL drawingToScreen;
@@ -96,7 +98,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 @class CIContext;
 @interface NSGraphicsContext (NSQuartzCoreAdditions)
-@property (readonly, strong) CIContext *CIContext;
+@property (nullable, readonly, strong) CIContext *CIContext;
 @end
 
 @interface NSGraphicsContext (NSGraphicsContextDeprecated)
@@ -105,11 +107,13 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
  */
 + (void)setGraphicsState:(NSInteger)gState NS_DEPRECATED_MAC(10_0, 10_10);
 
-- (id)focusStack NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setFocusStack:(id)stack NS_DEPRECATED_MAC(10_0, 10_6);
+- (null_unspecified id)focusStack NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setFocusStack:(null_unspecified id)stack NS_DEPRECATED_MAC(10_0, 10_6);
 
 // Platform specific graphics ports (usually CGContextRef.) Use +graphicsContextWithCGContext:flipped: and -CGContext instead.
 + (NSGraphicsContext *)graphicsContextWithGraphicsPort:(void *)graphicsPort flipped:(BOOL)initialFlippedState;
 @property (readonly) void *graphicsPort NS_RETURNS_INNER_POINTER;
 
 @end
+
+NS_ASSUME_NONNULL_END

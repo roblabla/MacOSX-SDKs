@@ -268,7 +268,7 @@ __END_DECLS
 		uint32_t gssd_flags;
 		gssd_ctx context;
 		gssd_cred cred_handle;
-	} __Request__mach_gss_init_sec_context_t;
+	} __Request__mach_gss_init_sec_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -290,7 +290,7 @@ __END_DECLS
 		uint32_t gssd_flags;
 		gssd_ctx context;
 		gssd_cred cred_handle;
-	} __Request__mach_gss_accept_sec_context_t;
+	} __Request__mach_gss_accept_sec_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -310,7 +310,7 @@ __END_DECLS
 		char source[1024];
 		uint32_t major_stat;
 		uint32_t minor_stat;
-	} __Request__mach_gss_log_error_t;
+	} __Request__mach_gss_log_error_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -338,7 +338,7 @@ __END_DECLS
 		uint32_t gssd_flags;
 		gssd_ctx context;
 		gssd_cred cred_handle;
-	} __Request__mach_gss_init_sec_context_v2_t;
+	} __Request__mach_gss_init_sec_context_v2_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -360,7 +360,7 @@ __END_DECLS
 		uint32_t gssd_flags;
 		gssd_ctx context;
 		gssd_cred cred_handle;
-	} __Request__mach_gss_accept_sec_context_v2_t;
+	} __Request__mach_gss_accept_sec_context_v2_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -378,7 +378,7 @@ __END_DECLS
 		gssd_mechtype mech;
 		gssd_nametype nt;
 		mach_msg_type_number_t princCnt;
-	} __Request__mach_gss_hold_cred_t;
+	} __Request__mach_gss_hold_cred_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -396,7 +396,7 @@ __END_DECLS
 		gssd_mechtype mech;
 		gssd_nametype nt;
 		mach_msg_type_number_t princCnt;
-	} __Request__mach_gss_unhold_cred_t;
+	} __Request__mach_gss_unhold_cred_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -409,7 +409,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		uint32_t uid;
 		int32_t asid;
-	} __Request__mach_gss_lookup_t;
+	} __Request__mach_gss_lookup_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -453,7 +453,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		mach_msg_type_number_t outtokenCnt;
 		uint32_t major_stat;
 		uint32_t minor_stat;
-	} __Reply__mach_gss_init_sec_context_t;
+	} __Reply__mach_gss_init_sec_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -479,7 +479,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		mach_msg_type_number_t outtokenCnt;
 		uint32_t major_stat;
 		uint32_t minor_stat;
-	} __Reply__mach_gss_accept_sec_context_t;
+	} __Reply__mach_gss_accept_sec_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -491,7 +491,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__mach_gss_log_error_t;
+	} __Reply__mach_gss_log_error_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -518,7 +518,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		char displayname[128];
 		uint32_t major_stat;
 		uint32_t minor_stat;
-	} __Reply__mach_gss_init_sec_context_v2_t;
+	} __Reply__mach_gss_init_sec_context_v2_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -545,7 +545,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		mach_msg_type_number_t outtokenCnt;
 		uint32_t major_stat;
 		uint32_t minor_stat;
-	} __Reply__mach_gss_accept_sec_context_v2_t;
+	} __Reply__mach_gss_accept_sec_context_v2_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -559,7 +559,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		kern_return_t RetCode;
 		uint32_t major_stat;
 		uint32_t minor_stat;
-	} __Reply__mach_gss_hold_cred_t;
+	} __Reply__mach_gss_hold_cred_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -573,7 +573,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		kern_return_t RetCode;
 		uint32_t major_stat;
 		uint32_t minor_stat;
-	} __Reply__mach_gss_unhold_cred_t;
+	} __Reply__mach_gss_unhold_cred_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -587,7 +587,7 @@ union __RequestUnion__gssd_mach_subsystem {
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t gssd_session_port;
 		/* end of the kernel processed data */
-	} __Reply__mach_gss_lookup_t;
+	} __Reply__mach_gss_lookup_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

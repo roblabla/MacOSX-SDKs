@@ -2,11 +2,13 @@
 	File:		AVAudioMixerNode.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioNode.h>
 #import <AVFoundation/AVAudioMixing.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @class AVAudioMixerNode
 	@abstract A node that mixes its inputs to a single output.
@@ -35,3 +37,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, readonly) AVAudioNodeBus nextAvailableInputBus;
 
 @end
+
+NS_ASSUME_NONNULL_END

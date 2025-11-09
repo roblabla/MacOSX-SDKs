@@ -1,16 +1,16 @@
 /*
     NSRelationshipDescription.h
     Core Data
-    Copyright (c) 2004-2012 Apple Inc.
+    Copyright (c) 2004-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <CoreData/NSPropertyDescription.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSEntityDescription;
-
-
 
 typedef NS_ENUM(NSUInteger, NSDeleteRule) {
     NSNoActionDeleteRule,
@@ -34,8 +34,8 @@ NS_CLASS_AVAILABLE(10_4,3_0)
     NSDeleteRule _deleteRule;
 }
 
-@property (nonatomic, assign) NSEntityDescription *destinationEntity;
-@property (nonatomic, assign) NSRelationshipDescription *inverseRelationship;
+@property (nullable, nonatomic, assign) NSEntityDescription *destinationEntity;
+@property (nullable, nonatomic, assign) NSRelationshipDescription *inverseRelationship;
 
 // Min and max count indicate the number of objects referenced (1/1 for a to-one relationship, 0 for the max count means undefined) - note that the counts are only enforced if the relationship value is not nil/"empty" (so as long as the relationship value is optional, there might be zero objects in the relationship, which might be less than the min count)
 @property () NSUInteger maxCount;
@@ -51,3 +51,5 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 @property (getter=isOrdered) BOOL ordered NS_AVAILABLE(10_7,  5_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

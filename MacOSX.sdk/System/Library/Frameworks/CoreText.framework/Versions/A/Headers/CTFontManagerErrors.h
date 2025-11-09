@@ -2,7 +2,7 @@
  *  CTFontManagerErrors.h
  *  CoreText
  *
- *  Copyright (c) 2008-2013 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -12,9 +12,8 @@
 #include <CoreText/CTDefines.h>
 #include <CoreFoundation/CFString.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
     @const      kCTFontManagerErrorDomain
@@ -67,8 +66,7 @@ typedef CF_ENUM(CFIndex, CTFontManagerError) {
     kCTFontManagerErrorSystemRequired           = 203,
 };
 
-#if defined(__cplusplus)
-}
-#endif
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 
 #endif

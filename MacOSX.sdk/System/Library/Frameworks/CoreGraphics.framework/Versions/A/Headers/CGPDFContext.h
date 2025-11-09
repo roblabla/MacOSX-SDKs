@@ -5,12 +5,19 @@
 #ifndef CGPDFCONTEXT_H_
 #define CGPDFCONTEXT_H_
 
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
+
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGContext.h>
 #include <CoreGraphics/CGDataConsumer.h>
 #include <CoreFoundation/CFDictionary.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
+
 
 /* Create a PDF context, using `consumer' for output. `mediaBox' is the
    default page media bounding box; if NULL, then a default page size is
@@ -20,16 +27,16 @@ CF_IMPLICIT_BRIDGING_ENABLED
    value overrides the value of `kCGPDFContextMediaBox' if specified in the
    `auxiliaryInfo' dictionary. */
 
-CG_EXTERN CGContextRef CGPDFContextCreate(CGDataConsumerRef consumer,
-  const CGRect *mediaBox, CFDictionaryRef auxiliaryInfo)
+CG_EXTERN CGContextRef __nullable CGPDFContextCreate(CGDataConsumerRef __nullable consumer,
+  const CGRect *__nullable mediaBox, CFDictionaryRef __nullable auxiliaryInfo)
   CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Create a PDF context for writing to `url'. This function behaves in the
    same manner as the above function, except that the output data will be
    written to `url'. */
 
-CG_EXTERN CGContextRef CGPDFContextCreateWithURL(CFURLRef url,
-  const CGRect *mediaBox, CFDictionaryRef auxiliaryInfo)
+CG_EXTERN CGContextRef __nullable CGPDFContextCreateWithURL(CFURLRef __nullable url,
+  const CGRect * __nullable mediaBox, CFDictionaryRef __nullable auxiliaryInfo)
   CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Close a PDF context. After closing the context, all pending data is
@@ -37,18 +44,18 @@ CG_EXTERN CGContextRef CGPDFContextCreateWithURL(CFURLRef url,
    additional data will be written to the context's destionation after
    closing. */
 
-CG_EXTERN void CGPDFContextClose(CGContextRef context)
+CG_EXTERN void CGPDFContextClose(CGContextRef __nullable context)
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Begin a new page in the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextBeginPage(CGContextRef context,
-  CFDictionaryRef pageInfo)
+CG_EXTERN void CGPDFContextBeginPage(CGContextRef __nullable context,
+  CFDictionaryRef __nullable pageInfo)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* End the current page in the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextEndPage(CGContextRef context)
+CG_EXTERN void CGPDFContextEndPage(CGContextRef __nullable context)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Add the metadata stream specified by `metadata' to the document catalog
@@ -58,27 +65,27 @@ CG_EXTERN void CGPDFContextEndPage(CGContextRef context)
    described in section 10.2.2, "Metadata Streams", of the PDF 1.7
    specification. */
 
-CG_EXTERN void CGPDFContextAddDocumentMetadata(CGContextRef context,
-  CFDataRef metadata) CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+CG_EXTERN void CGPDFContextAddDocumentMetadata(CGContextRef __nullable context,
+  CFDataRef __nullable metadata) CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
 
 /* Set the URL associated with `rect' to `url' in the PDF context
    `context'. */
 
-CG_EXTERN void CGPDFContextSetURLForRect(CGContextRef context, CFURLRef url,
+CG_EXTERN void CGPDFContextSetURLForRect(CGContextRef __nullable context, CFURLRef  url,
   CGRect rect) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Create a PDF destination named `name' at `point' in the current page of
    the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextAddDestinationAtPoint(CGContextRef context,
-  CFStringRef name, CGPoint point)
+CG_EXTERN void CGPDFContextAddDestinationAtPoint(CGContextRef __nullable context,
+  CFStringRef  name, CGPoint point)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Specify a destination named `name' to jump to when clicking in `rect' of
    the current page of the PDF context `context'. */
 
-CG_EXTERN void CGPDFContextSetDestinationForRect(CGContextRef context,
-  CFStringRef name, CGRect rect)
+CG_EXTERN void CGPDFContextSetDestinationForRect(CGContextRef __nullable context,
+  CFStringRef  name, CGRect rect)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*** Keys for the auxiliary info dictionary or the page info dictionary. ***/ 
@@ -87,35 +94,35 @@ CG_EXTERN void CGPDFContextSetDestinationForRect(CGContextRef context,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef kCGPDFContextMediaBox
+CG_EXTERN const CFStringRef  kCGPDFContextMediaBox
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The crop box for the document or for a given page. Optional; if present,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef kCGPDFContextCropBox
+CG_EXTERN const CFStringRef  kCGPDFContextCropBox
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The bleed box for the document or for a given page. Optional; if present,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef kCGPDFContextBleedBox
+CG_EXTERN const CFStringRef  kCGPDFContextBleedBox
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The trim box for the document or for a given page. Optional; if present,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef kCGPDFContextTrimBox
+CG_EXTERN const CFStringRef  kCGPDFContextTrimBox
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The art box for the document or for a given page. Optional; if present,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef kCGPDFContextArtBox
+CG_EXTERN const CFStringRef  kCGPDFContextArtBox
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*** Keys for auxiliary info dictionary. ***/
@@ -123,19 +130,19 @@ CG_EXTERN const CFStringRef kCGPDFContextArtBox
 /* The document's title. Optional; if present, the value of this key must be
    a CFString. */
 
-CG_EXTERN const CFStringRef kCGPDFContextTitle
+CG_EXTERN const CFStringRef  kCGPDFContextTitle
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The name of the person who created this document. Optional; if present,
    the value of this key must be a CFString. */
 
-CG_EXTERN const CFStringRef kCGPDFContextAuthor
+CG_EXTERN const CFStringRef  kCGPDFContextAuthor
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The subject of a document. Optional; if present, the value of this key
    must be a CFString. */
 
-CG_EXTERN const CFStringRef kCGPDFContextSubject
+CG_EXTERN const CFStringRef  kCGPDFContextSubject
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* The keywords for this document. This key is optional. If the value of
@@ -148,14 +155,14 @@ CG_EXTERN const CFStringRef kCGPDFContextSubject
    strings. The value of this key must be in one of the above forms;
    otherwise, this key is ignored. */
 
-CG_EXTERN const CFStringRef kCGPDFContextKeywords
+CG_EXTERN const CFStringRef  kCGPDFContextKeywords
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* The name of the application that created the original data used to create
    this document. Optional; if present, the value of this key must be a
    CFString. */
 
-CG_EXTERN const CFStringRef kCGPDFContextCreator
+CG_EXTERN const CFStringRef  kCGPDFContextCreator
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The "owner password" of the PDF document. If this key is specified, the
@@ -168,7 +175,7 @@ CG_EXTERN const CFStringRef kCGPDFContextCreator
    If the value of this key cannot be represented in ASCII, the document
    will not be created and the creation function will return NULL. */
 
-CG_EXTERN const CFStringRef kCGPDFContextOwnerPassword
+CG_EXTERN const CFStringRef  kCGPDFContextOwnerPassword
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The "user password" of the PDF document. If the document is encrypted,
@@ -180,7 +187,7 @@ CG_EXTERN const CFStringRef kCGPDFContextOwnerPassword
    If the value of this key cannot be represented in ASCII, the document
    will not be created and the creation function will return NULL. */
 
-CG_EXTERN const CFStringRef kCGPDFContextUserPassword
+CG_EXTERN const CFStringRef  kCGPDFContextUserPassword
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Specifies the encryption key length in bits; see Table 3.18 "Entries
@@ -190,21 +197,21 @@ CG_EXTERN const CFStringRef kCGPDFContextUserPassword
    128, inclusive. If this key is absent or invalid, the encryption key
    length defaults to 40 bits. */
 
-CG_EXTERN const CFStringRef kCGPDFContextEncryptionKeyLength
+CG_EXTERN const CFStringRef  kCGPDFContextEncryptionKeyLength
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Used to specify whether the document allows printing when unlocked with
    the user password. The value of this key must be a CFBooleanRef. The
    default value of this key is "kCFBooleanTrue". */
 
-CG_EXTERN const CFStringRef kCGPDFContextAllowsPrinting
+CG_EXTERN const CFStringRef  kCGPDFContextAllowsPrinting
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Used to specify whether the document allows copying when unlocked with
    the user password. The value of this key must be a CFBooleanRef. The
    default value of this key is "kCFBooleanTrue". */
 
-CG_EXTERN const CFStringRef kCGPDFContextAllowsCopying
+CG_EXTERN const CFStringRef  kCGPDFContextAllowsCopying
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* The document's PDF/X output intent. Optional; if present, the value of
@@ -214,7 +221,7 @@ CG_EXTERN const CFStringRef kCGPDFContextAllowsCopying
    9.10.4 of the PDF 1.4 specification, ISO/DIS 15930-3 document published
    by ISO/TC 130, and Adobe Technical Note #5413. */
 
-CG_EXTERN const CFStringRef kCGPDFContextOutputIntent
+CG_EXTERN const CFStringRef  kCGPDFContextOutputIntent
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The following keys are supported in the output intent dictionary:
@@ -223,7 +230,7 @@ CG_EXTERN const CFStringRef kCGPDFContextOutputIntent
    required; the value of this key must be a CFString equal to "GTS_PDFX";
    otherwise, the dictionary is ignored. */
 
-CG_EXTERN const CFStringRef kCGPDFXOutputIntentSubtype
+CG_EXTERN const CFStringRef  kCGPDFXOutputIntentSubtype
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* kCGPDFXOutputConditionIdentifier ("OutputConditionIdentifier"): A string
@@ -232,7 +239,7 @@ CG_EXTERN const CFStringRef kCGPDFXOutputIntentSubtype
    key must be a CFString. For best results, the string should be
    representable losslessly in ASCII encoding. */
 
-CG_EXTERN const CFStringRef kCGPDFXOutputConditionIdentifier
+CG_EXTERN const CFStringRef  kCGPDFXOutputConditionIdentifier
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* kCGPDFXOutputCondition ("OutputCondition"): A text string identifying the
@@ -240,7 +247,7 @@ CG_EXTERN const CFStringRef kCGPDFXOutputConditionIdentifier
    This key is optional; if present, the value of this key must be a
    CFString. */
 
-CG_EXTERN const CFStringRef kCGPDFXOutputCondition
+CG_EXTERN const CFStringRef  kCGPDFXOutputCondition
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* kCGPDFXRegistryName ("RegistryName"): A string identifying the registry
@@ -249,7 +256,7 @@ CG_EXTERN const CFStringRef kCGPDFXOutputCondition
    be a CFString. For best results, the string should be representable
    losslessly in ASCII encoding. */
 
-CG_EXTERN const CFStringRef kCGPDFXRegistryName
+CG_EXTERN const CFStringRef  kCGPDFXRegistryName
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* kCGPDFXInfo ("Info"): A human-readable text string containing additional
@@ -258,7 +265,7 @@ CG_EXTERN const CFStringRef kCGPDFXRegistryName
    does not specify a standard production condition; it is optional
    otherwise. If present, the value of this key must be a CFString. */
 
-CG_EXTERN const CFStringRef kCGPDFXInfo
+CG_EXTERN const CFStringRef  kCGPDFXInfo
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* kCGPDFXDestinationOutputProfile ("DestOutputProfile"): An ICC profile
@@ -268,7 +275,7 @@ CG_EXTERN const CFStringRef kCGPDFXInfo
    condition; it is optional otherwise. If present, the value of this key
    must be a ICC-based CGColorSpaceRef. */
 
-CG_EXTERN const CFStringRef kCGPDFXDestinationOutputProfile
+CG_EXTERN const CFStringRef  kCGPDFXDestinationOutputProfile
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /* The document's output intents. Optional; if present, the value must be a
@@ -281,8 +288,10 @@ CG_EXTERN const CFStringRef kCGPDFXDestinationOutputProfile
    and `kCGPDFContextOutputIntents' keys are specified, the former is
    ignored. */
 
-CG_EXTERN const CFStringRef kCGPDFContextOutputIntents
+CG_EXTERN const CFStringRef  kCGPDFContextOutputIntents
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

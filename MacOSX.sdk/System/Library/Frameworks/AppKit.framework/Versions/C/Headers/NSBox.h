@@ -1,11 +1,13 @@
 /*
     NSBox.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSView.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSFont;
 
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSUInteger, NSBoxType) {
 
 /* Get and set the content view for the box. Note that subviews added to the NSBox will be really added as subviews of the contentView.
  */
-@property (assign) id /* NSView * */ contentView;
+@property (nullable, assign) __kindof NSView *contentView;
 
 /* Transparent boxes do not draw anything.  Subview drawing is unaffected.  The 'transparent' property corresponds to the binding 'NSTransparentBinding'.
  */
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSUInteger, NSBoxType) {
  */
 @property CGFloat borderWidth NS_AVAILABLE_MAC(10_5);
 
-/* For boxType == NSBoxCustom: Get and set the corner raduis of the box. The default value is 0.0 (no corner raduis).
+/* For boxType == NSBoxCustom: Get and set the corner radius of the box. The default value is 0.0 (no corner radius).
  */
 @property CGFloat cornerRadius NS_AVAILABLE_MAC(10_5);
 
@@ -92,7 +94,9 @@ typedef NS_ENUM(NSUInteger, NSBoxType) {
 
 /* Mnemonics are deprecated in 10.8. Historically they have not done anything. For compatability, this method still calls setTitle: with the ampersand stripped from it.
  */
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+- (void)setTitleWithMnemonic:(null_unspecified NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
 
 @end
+
+NS_ASSUME_NONNULL_END
 

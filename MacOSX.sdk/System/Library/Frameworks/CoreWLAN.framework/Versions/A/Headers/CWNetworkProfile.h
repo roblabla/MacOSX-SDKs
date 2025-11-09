@@ -15,6 +15,7 @@
  * @abstract 
  * Encapsulates a preferred network entry.
  */
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_7)
 @interface CWNetworkProfile : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 {
@@ -57,6 +58,8 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSSet           *_channelHistory;
         
     NSInteger       _roamingProfileType;
+    
+    BOOL            _isPersonalHotspot;
 }
 
 /*!
@@ -68,7 +71,7 @@ NS_CLASS_AVAILABLE_MAC(10_7)
  * @discussion 
  * Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
  */
-@property(readonly, copy) NSString *ssid NS_AVAILABLE_MAC(10_7);
+@property(readonly, copy, nullable) NSString *ssid NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
@@ -79,7 +82,7 @@ NS_CLASS_AVAILABLE_MAC(10_7)
  * @discussion
  * The SSID is 1-32 octets.
  */
-@property(readonly, copy) NSData *ssidData NS_AVAILABLE_MAC(10_7);
+@property(readonly, copy, nullable) NSData *ssidData NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
@@ -186,5 +189,6 @@ NS_CLASS_AVAILABLE_MAC(10_7)
 @property CWSecurity security NS_AVAILABLE_MAC(10_7);
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif /* _CORE_WLAN_NETWORK_PROFILE_H_ */

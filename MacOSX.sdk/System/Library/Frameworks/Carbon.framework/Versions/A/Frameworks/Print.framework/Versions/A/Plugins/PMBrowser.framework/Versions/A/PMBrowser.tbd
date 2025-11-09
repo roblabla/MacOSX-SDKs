@@ -2,13 +2,14 @@
 archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Plugins/PMBrowser.framework/Versions/A/PMBrowser
-current-version: 482.2
+current-version: 0.0
+compatibility-version: 0.0
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CheckPrinterList, _ComputerLocation, _FilterDNSSDSuffix, 
-                       _IOUSBDevInterface, _MatchNameAndQueueID, _PMCommandAbbrvKey, 
-                       _PMCommandAbbrvString, _PMCommandKey, _PMCommandString, 
-                       _PMCompatibilityAbbrvKey, _PMCompatibilityAbbrvString, 
+                       _GetUSBDeviceCapabilities, _IOUSBDevInterface, _MatchNameAndQueueID, 
+                       _PMCommandAbbrvKey, _PMCommandAbbrvString, _PMCommandKey, 
+                       _PMCommandString, _PMCompatibilityAbbrvKey, _PMCompatibilityAbbrvString, 
                        _PMCompatibilityKey, _PMCompatibilityString, _PMDNSSDCommandAbbrvKey, 
                        _PMDNSSDCommandAbbrvString, _PMDNSSDCommandKey, 
                        _PMDNSSDCommandPDLKey, _PMDNSSDCommandPDLString, 
@@ -29,17 +30,15 @@ exports:
                        _PMModelAbbrvString, _PMModelKey, _PMModelString, 
                        _PMSerialAbbrv2Key, _PMSerialAbbrv2String, _PMSerialAbbrvKey, 
                        _PMSerialAbbrvString, _PMSerialKey, _PMSerialString, 
-                       _USBDeviceESCLInterfaces, _USBDeviceIPPEveryWhereDeviceType, 
-                       _USBDeviceIPPEverywhereInterfaces, _USBGetDeviceID, 
-                       _USBGetDeviceIDUsingInterface, _USBGetDeviceInfo, 
-                       _USBGetDeviceInfo2, _USBIntfInterface220, _USBIteratePrintersUsingBlock, 
-                       _USBIterateScannersUsingBlock, _close_pipe, _cpl_cupsDoFileRequest, 
+                       _USBDeviceIDSupportsESCL, _USBDeviceIDSupportsIPP, 
+                       _USBGetDeviceID, _USBGetDeviceIDUsingInterface, 
+                       _USBGetDeviceInfo, _USBGetDeviceInfo2, _USBIteratePrintersUsingBlock, 
+                       _USBIterateScannersUsingBlock, _USBPrinterInterfaceInterface, 
+                       _USBSupportsIPPEInterfaces, _close_pipe, _cpl_cupsDoFileRequest, 
                        _dprintfMakequeues, _examineBundle, _examineFile, 
-                       _getAttributesForPrinters, _getKnownDevices, _getPrinterNames, 
-                       _getPrinters, _open_pipe, _serverSupportsKerberos, 
-                       _start_process, _str_for_ioreturn, _stringWithKnownEncodings, 
-                       _supportsCurrentArcitecture, _supportsIntelArcitecture, 
-                       _supportsPowerPCArcitecture ]
+                       _getKnownDevices, _getPrinters, _open_pipe, _serverSupportsKerberos, 
+                       _start_process, _str_for_ioreturn, _supportsCurrentArcitecture, 
+                       _supportsIntelArcitecture, _supportsPowerPCArcitecture ]
     objc-classes:    [ _DNSSDBrowser, _DNSSDConfigure, _DNSSDPrinter, _DNSServiceObject, 
                        _FilteringArrayController, _IPPrinter, _PMBrowserNoUIPlugin, 
                        _PMBrowserPlugin, _PMBrowserPrinter, _PMPPDPopUpButton, 

@@ -54,7 +54,7 @@
 //  originally scheduled to occur. This value will remain the same even if the event has been detached and its start 
 //  date has changed. For CalEvents not part of a repeating pattern, this method will return the same value as startDate.
 
-@property(copy, readonly) NSDate *occurrence NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy, readonly, nonatomic) NSDate *occurrence NS_DEPRECATED_MAC(10_5, 10_8);
 
 @end
 

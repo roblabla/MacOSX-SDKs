@@ -24,7 +24,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @APPLE_BSD_LICENSE_HEADER_END@
 ..
-.Dd 16 Apr, 2010
+.Dd 7 Mar, 2015
 .Dt darwinup 1
 .Os Darwin
 .Sh NAME
@@ -130,7 +130,13 @@ removed the file.
 .It U
 Updated. During installation, the file or directory replaces an existing 
 object at the same path. During uninstallation, the previous version of
-the file was restored. 
+the file was restored.
+.It I
+Ignored. A file specified in the removal list was not removed. This usually
+indicates that the file was a directory and the path in the removal list lacked
+a trailing
+.Pa /
+character.
 .El
 .Sh SUPPORTED PATHS
 .Bl -tag -width -indent
@@ -226,6 +232,44 @@ If a root modifies a file under /System/Library/Extensions, then darwinup
 will update the mtime of /System/Library/Extensions to ensure that the 
 kext cache is updated during the next boot. 
 .El
+.Sh REMOVING FILES
+.Nm
+supports removing files from disk as part of installing a root. These files must
+be enumerated in a list that is included in the root at the path
+.Pa /.DarwinMetadata/removals .
+The list is a simple text file consisting of paths to remove, separated by new
+lines. Directories may be present in this list. If a directory is to be removed,
+its path must include a trailing '/' character, and all of its descendants will
+be removed. When files are removed as part of root installation, they will be
+restored when the root is uninstalled with the
+.Ar uninstall
+command.
+.Pp
+It is permissible for the root to contain files that are specified in its
+removal list. This is primarily useful for replacing entire directory
+hierarchies as singular entities.
+.Pp
+.Em IMPORTANT :
+Replacing a directory hierarchy can only be done safely is the root creator has
+full knowledge of the contents of a given directory hierarchy and knows how to
+completely populate it such that all dependencies will be satisfied. For
+example, a project which installs content into
+.Pa /usr/include
+should
+.Em not
+specify that path in its removal list since many other projects populate that
+directory. The result of the removal operation in such a case would be the only
+the contents of the root would exist in
+.Pa /usr/include
+after the installation completes.
+.Nm
+cannot and does not protect against this scenario, so exercise extreme caution
+when constructing roots with removal lists.
+.Pp
+.Em NOTE :
+Neither the
+.Pa .DarwinMetadata
+directory nor its contents will be installed into the destination path.
 .Sh EXAMPLES
 .Bl -tag -width -indent
 .It Install files from a tarball

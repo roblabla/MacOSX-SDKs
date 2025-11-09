@@ -31,11 +31,13 @@
 #define _H_SECCODE
 
 #include <Security/CSCommon.h>
+#include <CoreFoundation/CFBase.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
 
 /*!
 	@function SecCodeGetTypeID
@@ -59,7 +61,7 @@ CFTypeID SecCodeGetTypeID(void);
 	@result Upon success, errSecSuccess. Upon error, an OSStatus value documented in
 	CSCommon.h or certain other Security framework headers.
  */
-OSStatus SecCodeCopySelf(SecCSFlags flags, SecCodeRef *self);
+OSStatus SecCodeCopySelf(SecCSFlags flags, SecCodeRef * __nonnull CF_RETURNS_RETAINED self);
 
 
 /*!
@@ -95,11 +97,11 @@ OSStatus SecCodeCopySelf(SecCSFlags flags, SecCodeRef *self);
 	@result Upon success, errSecSuccess. Upon error, an OSStatus value documented in
 	CSCommon.h or certain other Security framework headers.
 */
-enum {
+CF_ENUM(uint32_t) {
 	kSecCSUseAllArchitectures = 1 << 0,
 };
 
-OSStatus SecCodeCopyStaticCode(SecCodeRef code, SecCSFlags flags, SecStaticCodeRef *staticCode);
+OSStatus SecCodeCopyStaticCode(SecCodeRef code, SecCSFlags flags, SecStaticCodeRef * __nonnull CF_RETURNS_RETAINED staticCode);
 
 
 /*!
@@ -117,8 +119,7 @@ OSStatus SecCodeCopyStaticCode(SecCodeRef code, SecCSFlags flags, SecStaticCodeR
 	@result Upon success, errSecSuccess. Upon error, an OSStatus value documented in
 	CSCommon.h or certain other Security framework headers.
 */
-OSStatus SecCodeCopyHost(SecCodeRef guest, SecCSFlags flags, SecCodeRef *host);
-
+OSStatus SecCodeCopyHost(SecCodeRef guest, SecCSFlags flags, SecCodeRef * __nonnull CF_RETURNS_RETAINED host);
 
 /*!
 	@function SecCodeCopyGuestWithAttributes
@@ -183,8 +184,8 @@ extern const CFStringRef kSecGuestAttributeDynamicCodeInfoPlist;
 extern const CFStringRef kSecGuestAttributeArchitecture;
 extern const CFStringRef kSecGuestAttributeSubarchitecture;
 
-OSStatus SecCodeCopyGuestWithAttributes(SecCodeRef host,
-	CFDictionaryRef attributes,	SecCSFlags flags, SecCodeRef *guest);
+OSStatus SecCodeCopyGuestWithAttributes(SecCodeRef __nullable host,
+	CFDictionaryRef __nullable attributes,	SecCSFlags flags, SecCodeRef * __nonnull CF_RETURNS_RETAINED guest);
 
 
 /*!
@@ -213,10 +214,10 @@ OSStatus SecCodeCopyGuestWithAttributes(SecCodeRef host,
 	documented in CSCommon.h or certain other Security framework headers.
 */
 OSStatus SecCodeCheckValidity(SecCodeRef code, SecCSFlags flags,
-	SecRequirementRef requirement);
+	SecRequirementRef __nullable requirement);
 
 OSStatus SecCodeCheckValidityWithErrors(SecCodeRef code, SecCSFlags flags,
-	SecRequirementRef requirement, CFErrorRef *errors);
+	SecRequirementRef __nullable requirement, CFErrorRef *errors);
 
 
 /*!
@@ -237,7 +238,7 @@ OSStatus SecCodeCheckValidityWithErrors(SecCodeRef code, SecCSFlags flags,
 	documented in CSCommon.h or certain other Security framework headers.
 */
 OSStatus SecCodeCopyPath(SecStaticCodeRef staticCode, SecCSFlags flags,
-	CFURLRef *path);
+	CFURLRef * __nonnull CF_RETURNS_RETAINED path);
 
 
 /*!
@@ -262,7 +263,7 @@ OSStatus SecCodeCopyPath(SecStaticCodeRef staticCode, SecCSFlags flags,
 		documented in CSCommon.h or certain other Security framework headers.
 */
 OSStatus SecCodeCopyDesignatedRequirement(SecStaticCodeRef code, SecCSFlags flags,
-	SecRequirementRef *requirement);
+	SecRequirementRef * __nonnull CF_RETURNS_RETAINED requirement);
 
 
 /*
@@ -340,6 +341,8 @@ OSStatus SecCodeCopyDesignatedRequirement(SecStaticCodeRef code, SecCSFlags flag
 		the code. Suitable for display to a (knowledeable) user.
 	@constant kSecCodeInfoDigestAlgorithm A CFNumber indicating the kind of cryptographic
 		hash function used within the signature to seal its pieces together.
+ 	@constant kSecCodeInfoPlatformIdentifier If this code was signed as part of an operating
+ 		system release, this value identifies that release.
 	@constant kSecCodeInfoIdentifier A CFString with the actual signing identifier
 		sealed into the signature. Absent for unsigned code.
 	@constant kSecCodeInfoImplicitDesignatedRequirement A SecRequirement describing
@@ -383,18 +386,16 @@ OSStatus SecCodeCopyDesignatedRequirement(SecStaticCodeRef code, SecCSFlags flag
 		the static code in question. It can be used to recognize this particular code
 		(and none other) now or in the future. Compare to kSecCodeInfoIdentifier, which
 		remains stable across (developer-approved) updates.
-		This is currently the SHA-1 hash of the code's CodeDirectory. However, future
-		versions of the system may use a different algorithm for newly signed code.
-		Already-signed code not change the reported value in this case.
+		The algorithm used may change from time to time. However, for any existing signature,
+ 		the value is stable.
  */
-enum {
+CF_ENUM(uint32_t) {
 	kSecCSInternalInformation = 1 << 0,
 	kSecCSSigningInformation = 1 << 1,
 	kSecCSRequirementInformation = 1 << 2,
 	kSecCSDynamicInformation = 1 << 3,
 	kSecCSContentInformation = 1 << 4
 };
-
 													/* flag required to get this value */
 extern const CFStringRef kSecCodeInfoCertificates;	/* Signing */
 extern const CFStringRef kSecCodeInfoChangedFiles;	/* Content */
@@ -405,6 +406,7 @@ extern const CFStringRef kSecCodeInfoEntitlementsDict; /* Requirement */
 extern const CFStringRef kSecCodeInfoFlags;		/* generic */
 extern const CFStringRef kSecCodeInfoFormat;		/* generic */
 extern const CFStringRef kSecCodeInfoDigestAlgorithm; /* generic */
+extern const CFStringRef kSecCodeInfoPlatformIdentifier; /* generic */
 extern const CFStringRef kSecCodeInfoIdentifier;	/* generic */
 extern const CFStringRef kSecCodeInfoImplicitDesignatedRequirement; /* Requirement */
 extern const CFStringRef kSecCodeInfoMainExecutable; /* generic */
@@ -420,7 +422,7 @@ extern const CFStringRef kSecCodeInfoTrust;			/* Signing */
 extern const CFStringRef kSecCodeInfoUnique;		/* generic */
 
 OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags,
-	CFDictionaryRef *information);
+	CFDictionaryRef * __nonnull CF_RETURNS_RETAINED information);
 
 
 /*
@@ -436,6 +438,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags,
  */
 OSStatus SecCodeMapMemory(SecStaticCodeRef code, SecCSFlags flags);
 
+CF_ASSUME_NONNULL_END
 
 #ifdef __cplusplus
 }

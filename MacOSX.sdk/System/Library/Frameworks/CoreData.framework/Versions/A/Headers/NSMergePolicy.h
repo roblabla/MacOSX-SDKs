@@ -1,12 +1,15 @@
 //
 //  NSMergePolicy.h
 //  Core Data
-//  Copyright (c) 2004-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSError.h>
 #import <CoreData/CoreDataDefines.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSMergePolicy;
 @class NSManagedObject;
@@ -47,9 +50,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 }
 
 @property (readonly, retain) NSManagedObject* sourceObject;
-@property (readonly, retain) NSDictionary* objectSnapshot;
-@property (readonly, retain) NSDictionary* cachedSnapshot;
-@property (readonly, retain) NSDictionary* persistedSnapshot;
+@property (nullable, readonly, retain) NSDictionary<NSString *, id> * objectSnapshot;
+@property (nullable, readonly, retain) NSDictionary<NSString *, id> * cachedSnapshot;
+@property (nullable, readonly, retain) NSDictionary<NSString *, id> * persistedSnapshot;
 @property (readonly) NSUInteger newVersionNumber;
 @property (readonly) NSUInteger oldVersionNumber;
 
@@ -68,7 +71,46 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  *
  *  A newVersion number of 0 means the object was deleted and the corresponding snapshot is nil.
  */
-- (instancetype)initWithSource:(NSManagedObject*)srcObject newVersion:(NSUInteger)newvers oldVersion:(NSUInteger)oldvers cachedSnapshot:(NSDictionary*)cachesnap persistedSnapshot:(NSDictionary*)persnap NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSource:(NSManagedObject*)srcObject newVersion:(NSUInteger)newvers oldVersion:(NSUInteger)oldvers cachedSnapshot:(nullable NSDictionary<NSString *, id> *)cachesnap persistedSnapshot:(nullable NSDictionary<NSString *, id>  *)persnap NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+/* Used to report uniqueness constraint violations. Optimistic locking failures will be reported separately from uniquness conflicts and will be resolved first. Each constraint violated will result in a separate NSConstraintConflict, although if an entity hierarchy has a constraint which is extended in subentities, all constraint violations for that constraint will be collapsed into a single report.
+ */
+NS_CLASS_AVAILABLE(10_11, 9_0)
+@interface NSConstraintConflict : NSObject {
+@private
+    NSArray *_constraint;
+    NSManagedObject *_databaseObject;
+    NSDictionary *_databaseSnapshot;
+    NSDictionary *_conflictedValues;
+    NSArray *_conflictingObjects;
+    NSArray *_conflictingSnapshots;
+}
+
+@property (readonly, copy) NSArray <NSString *> *constraint; // The constraint which has been violated.
+@property (readonly, copy) NSDictionary <NSString *, id> *constraintValues; // The values which the conflictingObjects had when this conflict was created. May no longer match the values of any conflicted object if something else resolved the conflict.
+@property (nullable, readonly, retain) NSManagedObject *databaseObject; // Object whose DB row is using constraint values. May be null if this is a context-level violation.
+@property (nullable, readonly, retain) NSDictionary<NSString *, id> *databaseSnapshot; // DB row already using constraint values. May be null if this is a context-level violation.
+@property (readonly, copy) NSArray <NSManagedObject *> *conflictingObjects; // The objects in violation of the constraint. May contain one (in the case of a db level conflict) or more objects.
+@property (readonly, copy) NSArray <NSDictionary *> *conflictingSnapshots; // The original property values of objects in violation of the constraint.  Will contain as many objects as there are conflictingObjects. If an object was unchanged, its snapshot will instead be -[NSNull null].
+
+/*
+ * There are two situations in which a constraint conflict may occur:
+ *
+ * 1. Between multiple objects being saved in a single managed object context. In this case, the conflict
+ *      will have a nil database object/snapshot, and multiple conflicting objects/snapshots representing
+ *      the state of the objects when they were first faulted or inserted into the context.
+ *
+ * 2. Between a single object being saved in a managed object context and the external store. In this case, the
+ *      constraint conflict will have a database object, the current row snapshot for the database object, plus a
+ *      a single conflicting object and its snapshot from when it was first faulted or inserted.
+ *
+ *  Snapshot dictionaries include values for all attributes and to-one relationships, but not to-many relationships.
+ *   Relationship values are NSManagedObjectID references. to-many relationships must be pulled from the persistent store as needed.
+ */
+- (instancetype)initWithConstraint:(NSArray<NSString *> *)contraint databaseObject:(nullable NSManagedObject*)databaseObject databaseSnapshot:(nullable NSDictionary *)databaseSnapshot conflictingObjects:(NSArray<NSManagedObject *> *)conflictingObjects conflictingSnapshots:(NSArray  *)conflictingSnapshots NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -89,12 +131,27 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  * Due to the complexity of merging to-many relationships, this class is designed with the expectation that you call super as the base implemenation.
  */
 - (id)initWithMergeType:(NSMergePolicyType)ty NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 
 /*
  * In a subclass, you are strongly encouraged to override initWithMergeType: and customize the results from calling super instead of performing your own actions from scratch.
  * Correctly merging to-many relationships is very challenging and any mistakes will cause permanent data corruption in the form of dangling foreign keys.
+ * Calls -resolveOptimisticLockingVersionConflicts:error: and then -resolveConstraintConflicts:error:
  */
-- (BOOL)resolveConflicts:(NSArray*)list error:(NSError **)error;
+- (BOOL)resolveConflicts:(NSArray *)list error:(NSError **)error;
+
+/* Resolve optimistic locking failures for the list of failures. In a subclass, you are strongly encouraged to override initWithMergeType: and customize 
+ *  the results from calling super instead of performing your own actions from scratch. Correctly merging to-many relationships is very challenging and
+ *  any mistakes will cause permanent data corruption in the form of dangling foreign keys.
+ * Will be called before -resolveConstraintConflicts:error:
+ */
+ - (BOOL)resolveOptimisticLockingVersionConflicts:(NSArray<NSMergeConflict *> *)list error:(NSError **)error NS_AVAILABLE(10_11, 9_0);
+
+/* Resolve uniqueness constraint violations for the list of failures.
+ *  Will be called after -resolveOptimisticLockingVersionConflicts:error:
+ */
+- (BOOL)resolveConstraintConflicts:(NSArray<NSConstraintConflict *> *)list error:(NSError **)error NS_AVAILABLE(10_11, 9_0);
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
         NSOpenGLLayer.h
         Application Kit
-        Copyright (c) 2008-2014, Apple Inc.
+        Copyright (c) 2008-2015, Apple Inc.
         All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSOpenGL.h>
 #import <QuartzCore/CAOpenGLLayer.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSOpenGLLayer : CAOpenGLLayer
@@ -21,15 +23,15 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* Provides access to the layer's associated view.  Subclasses shouldn't invoke -setView:, but can override it if desired to intercept the layer's association to, or dissociation from, a view.
 */
-@property (assign) NSView *view;
+@property (nullable, assign) NSView *view;
 
 /* Provides access to the layer's associated NSOpenGLPixelFormat.  Subclasses shouldn't invoke -setOpenGLPixelFormat:, but can override it if desired to intercept assignment of the layer's pixel format.
 */
-@property (strong) NSOpenGLPixelFormat *openGLPixelFormat;
+@property (nullable, strong) NSOpenGLPixelFormat *openGLPixelFormat;
 
 /* Provides access to the layer's associated NSOpenGLContext.  Subclasses shouldn't invoke -setOpenGLContext:, but can override it if desired to intercept assignment of the layer's context.
 */
-@property (strong) NSOpenGLContext *openGLContext;
+@property (nullable, strong) NSOpenGLContext *openGLContext;
 
 /* Invoked by AppKit to ask for the pixel format to use.  Should return an autoreleased NSOpenGLPixelFormat suitable for the displays specified by "mask".  (In practice, this means including an NSOpenGLPFAScreenMask specification in the pixel format attribute list that's used to instantiate the NSOpenGLPixelFormat.)
 */
@@ -49,3 +51,4 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 @end
 
+NS_ASSUME_NONNULL_END

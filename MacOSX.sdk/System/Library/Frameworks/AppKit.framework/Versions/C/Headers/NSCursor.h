@@ -1,12 +1,14 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSColor, NSEvent, NSImage;
 
@@ -34,7 +36,7 @@
  
  This method returns nil if the currently displayed cursor could not be fetched.
  */
-+ (NSCursor *)currentSystemCursor NS_AVAILABLE_MAC(10_6);
++ (nullable NSCursor *)currentSystemCursor NS_AVAILABLE_MAC(10_6);
 
 + (NSCursor *)arrowCursor;
 + (NSCursor *)IBeamCursor;
@@ -56,7 +58,7 @@
 + (NSCursor *)IBeamCursorForVerticalLayout NS_AVAILABLE_MAC(10_7);
 
 - (instancetype)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)aPoint;
-- (instancetype)initWithImage:(NSImage *)newImage	foregroundColorHint:(NSColor *)fg backgroundColorHint:(NSColor *)bg hotSpot:(NSPoint)hotSpot;
+- (instancetype)initWithImage:(NSImage *)newImage	foregroundColorHint:(nullable NSColor *)fg backgroundColorHint:(nullable NSColor *)bg hotSpot:(NSPoint)hotSpot;
 
 + (void)hide;
 + (void)unhide;
@@ -76,3 +78,5 @@
 - (void)mouseExited:(NSEvent *)theEvent;
 
 @end
+
+NS_ASSUME_NONNULL_END

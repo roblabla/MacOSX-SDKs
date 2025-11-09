@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreWLAN/CoreWLANTypes.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @class CWChannel;
 
 /*!
@@ -34,7 +35,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion
  * Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
  */
-@property(readonly) NSString *ssid NS_AVAILABLE_MAC(10_6);
+@property(readonly, nullable) NSString *ssid NS_AVAILABLE_MAC(10_6);
 
 
 /*!
@@ -46,7 +47,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion
  * The SSID is defined as 1-32 octets.
  */
-@property(readonly) NSData *ssidData NS_AVAILABLE_MAC(10_7);
+@property(readonly, nullable) NSData *ssidData NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
@@ -57,7 +58,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion
  * Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
  */
-@property(readonly) NSString *bssid NS_AVAILABLE_MAC(10_6);
+@property(readonly, nullable) NSString *bssid NS_AVAILABLE_MAC(10_6);
 
 /*!
  * @property
@@ -89,7 +90,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract 
  * Returns information element data included in beacon or probe response frames.
  */
-@property(readonly) NSData *informationElementData NS_AVAILABLE_MAC(10_7);
+@property(readonly, nullable) NSData *informationElementData NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
@@ -97,7 +98,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract 
  * Returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device.
  */
-@property(readonly) NSString *countryCode NS_AVAILABLE_MAC(10_7);
+@property(readonly, nullable) NSString *countryCode NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
@@ -169,5 +170,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  */
 - (BOOL)supportsPHYMode:(CWPHYMode)phyMode NS_AVAILABLE_MAC(10_8);
 @end
+NS_ASSUME_NONNULL_END
 
 #endif /* _CORE_WLAN_NETWORK_H_ */

@@ -1,175 +1,166 @@
-/*
-     File:      AudioUnit/AudioComponent.h
- 
-     Contains:  API for finding and opening audio components
-  
-     Copyright: (c) 2007 - 2010 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
+/*!
+	@file		AudioComponent.h
+ 	@framework	AudioUnit.framework
+ 	@copyright	(c) 2007-2015 Apple, Inc. All rights reserved.
+	@brief		API's to locate, get information about, and open audio components.
+
+	@discussion
+
+	This file defines a collection of APIs to find, get information about, and open
+	audio components (such as audio units, audio codecs, and audio file components).
+
+	Originally, CoreServices' Component Manager was used for the registration, discovery, and
+	packaging of these loadable code modules. However, in order to provide an API that will be
+	supported going forward from Mac OS X 10.6 and iOS 2.0, it is advised that applications use the
+	Audio Component APIs to find and load (open) audio components such as audio units.
+
+	The type "AudioComponent" or "AudioComponentInstance" should be seen and used as a distinct type
+	from the Component Manager types of "Component" and "ComponentInstance". It is never safe to
+	assume a direct cast is compatible between this type and the other.
+
+	Beginning with Mac OS X 10.7, AudioComponents can be registered and used directly without
+	involving the Component Manager. The system scans certain directories for bundles with names
+	ending in ".audiocomp" or ".component" (the latter permits registering plug-ins in a single
+	bundle with both the Component Manager and the Audio Component system). These directories are
+	scanned non-recursively:
+
+		~/Library/Audio/Plug-Ins/Components
+		/Library/Audio/Plug-Ins/Components
+		/System/Library/Components
+
+	Bundles' Info.plist dictionaries should contain an "AudioComponents" item whose value
+	is an array of dictionaries, e.g.
+
+	@textblock
+		<key>AudioComponents</key>
+		<array>
+			<dict>
+				<key>type</key>
+				<string>aufx</string>
+				<key>subtype</key>
+				<string>XMPL</string>
+				<key>manufacturer</key>
+				<string>ACME</string>
+				<key>name</key>
+				<string>AUExample</string>
+				<key>version</key>
+				<integer>12345</integer>
+				<key>factoryFunction</key>
+				<string>AUExampleFactory</string>
+				
+				<!-- An AudioComponent is sandbox safe -->
+				
+				<key>sandboxSafe</key>
+				<true/>
+				
+				<!-- or it can describe its resource usage -->
+				
+				<key>resourceUsage</key>
+				<dict>
+					<key>iokit.user-client</key>
+					<array>
+						<string>CustomUserClient1</string>
+						<string>CustomUserClient2</string>
+					</array>
+					<key>mach-lookup.global-name</key>
+					<array>
+						<string>MachServiceName1</string>
+						<string>MachServiceName2</string>
+					</array>
+					<key>network.client</key>
+					<true/>
+					<key>temporary-exception.files.all.read-write</key>
+					</true>
+				</dict>
+
+				<!-- An AudioComponent can define its tags -->
+				
+				<key>tags</key>
+				<array>
+					<string>Effect</string>
+					<string>Equalizer</string>
+				</array>
+			</dict>
+		</array>
+	@/textblock
+
+	The type, subtype and manufacturer keys correspond to the OSType fields of the
+	AudioComponentDescription structure. They can be strings if they are 4 ASCII characters;
+	otherwise they must be 32-bit integers.
+
+	The "factoryFunction" is the name of a AudioComponentFactoryFunction in the bundle's binary.
+
+
+	SANDBOX-SAFETY
+
+	The "sandboxSafe" key is used to indicate whether or not an AudioComponent can be loaded
+	directly into a sandboxed process. This key is reflected in the componentFlags field of the the
+	AudioComponentDescription for the AudioComponent with the constant,
+	kAudioComponentFlag_SandboxSafe. Note that if this key is not present, it is assumed that the
+	AudioComponent is not sandbox safe.
+
+	The "resourceUsage" key describes the system resources used by an AudioComponent that is not
+	sandbox safe. The keys for this dictionary are described below. If the "sandboxSafe" key is
+	true, this dictionary should not be included.
+
+	The "iokit.user-client" key is a "resourceUsage" key that describes the IOKit user-client
+	objects the AudioComponent will open. It is an array of the user-clients' class names.
+
+	The "mach-lookup.global-name" key is a "resourceUsage" key that describes the mach services the
+	AudioComponent needs to connect to. It is an array of the names of the services. Note that these
+	services can be direct mach services found via bootstrap_look_up() or XPC services found via
+	xpc_connection_create_mach_service().
+
+	The "network.client" key is a "resourceUsage" key that indicates that the AudioComponent will
+	receive data from the network.
+
+	The "temporary-exception.files.all.read-write" key is a "resourceUsage" key that indicates that
+	the AudioComponent needs arbitrary access to the file system. This is for backward compatibility
+	for AudioComponents that have not yet adopted the usage of security scope bookmarks and/or the
+	usage of the standard file dialog for discovering, accessing and storing persistent references
+	to files on the file system. In a future OS release, this key will not be supported.
+
+	Note that a sandbox-safe AudioComponent can function correctly in even the most severely
+	sandboxed process. This means that the process will have curtailed or no access to common system
+	resources like the file system, device drivers, the network, and communication with other
+	processes.
+
+	When instantiating a sandbox unsafe AudioComponent in a sandboxed process, the system evaluates
+	the "resourceUsage" information against the restrictions the process is under. If the
+	"resourceUsage" will not violate those restrictions, the AudioComponent will be instantiated and
+	can be used as normal. Note that the system will set kAudioComponentFlag_SandboxSafe in the
+	AudioComponentDescription in this case.
+
+	If the "resourceUsage" information includes things that can't be accessed from the process and
+	the process has the entitlement, "com.apple.security.temporary-exception.audio-unit-host", the
+	system will ask the user whether or not it is acceptable for the process to open the unsafe
+	AudioComponent. If the user says yes, the system will suspend the process's sandbox and allow
+	the unsafe AudioComponent to be opened and used.
+
+
+	TAGS
+
+	The "tags" key is an array of tags associated with the defined AudioComponent. The following are
+	the set of predefined standard tags that are localized and can be used in the audio unit
+	definition. "Equalizer", "Dynamics", "Distortion", "Synthesizer", "Effects", "Filter", "Dynamics
+	Processor", "Delay", "Reverb", "Pitch", "Panner", "Imaging", "Sampler", "Mixer", "Format
+	Converter", "Time Effect", "Output", "Offline Effect", "Drums", "Guitar", "Vocal", "Bass",
+	"MIDI". 
+
+	These standard tags should not be localized in the audio unit.
+
+	Localizing the tags is similar to localizing AudioUnit parameter strings. Create a strings 
+	resource file and name it "AudioUnitTags.strings".
+	For more information on strings resource file please check
+	https://developer.apple.com/library/mac/documentation/macosx/conceptual/bpinternational/Articles/StringsFiles.html
 */
 
-#ifndef __AUDIOCOMPONENT_H__
-#define __AUDIOCOMPONENT_H__
+#ifndef AudioUnit_AudioComponent_h
+#define AudioUnit_AudioComponent_h
 
 //=====================================================================================================================
 #pragma mark Overview
 
-/*!
-    @header AudioComponent
-
-    @discussion
-    
-    This file defines a collection of APIs that are designed to be used when finding and opening
-    audio components (such as audio units, audio codecs, and audio file components).
-    
-    Traditionally, the Component Manager has been used for the registration, discovery, and
-    packaging of these loadable code modules. However, this may not always be the case. In order
-    to provide an API that will be supported going forward from SnowLeopard (10.6) and iPhone
-    2.0, it is advised that applications use the Audio Component APIs to find and load (open)
-    audio components such as audio units.
-
-    The type "AudioComponent" or "AudioComponentInstance" should be seen and used as a distinct
-    type from the Component Manager types of "Component" and "ComponentInstance". It is not the
-    case that it is safe to assume a direct cast is compatible between this type and the other.
-
-    The AudioComponent APIs provide a general, and mostly complete service for doing the basic
-    task of finding and using audio components. If however, you find that you need functionality
-    that is not provided by this API that was previously supported by the Component Manager then
-    you should use the ComponentMgr APIs exclusively to find and open the Component Manager
-    components. In other words, you should not assume that an audio component instance is always
-    interchangeable with the existing ComponentInstance type.
-    
-    
-    Beginning with Mac OS X 10.7, AudioComponents can be registered and used directly without
-    involving the Component Manager. The system scans certain directories for bundles with names
-    ending in ".audiocomp" or ".component" (the latter permits registering plug-ins in a single
-    bundle with both the Component Manager and the Audio Component system). These directories
-    are scanned non-recursively:
-    
-        ~/Library/Audio/Plug-Ins/Components
-        /Library/Audio/Plug-Ins/Components
-        /System/Library/Components
-
-    Bundles' Info.plist dictionaries should contain an "AudioComponents" item whose value
-    is an array of dictionaries, e.g.
-
-        <key>AudioComponents</key>
-        <array>
-            <dict>
-                <key>type</key>
-                <string>aufx</string>
-                <key>subtype</key>
-                <string>XMPL</string>
-                <key>manufacturer</key>
-                <string>ACME</string>
-                <key>name</key>
-                <string>AUExample</string>
-                <key>version</key>
-                <integer>12345</integer>
-                <key>factoryFunction</key>
-                <string>AUExampleFactory</string>
-                
-                <!-- An AudioComponent is sandbox safe -->
-                
-                <key>sandboxSafe</key>
-                <true/>
-                
-                <!-- or it can describe it's resource usage -->
-                
-                <key>resourceUsage</key>
-                <dict>
-                    <key>iokit.user-client</key>
-                    <array>
-                        <string>CustomUserClient1</string>
-                        <string>CustomUserClient2</string>
-                    </array>
-                    <key>mach-lookup.global-name</key>
-                    <array>
-                        <string>MachServiceName1</string>
-                        <string>MachServiceName2</string>
-                    </array>
-                    <key>network.client</key>
-                    <true/>
-                    <key>temporary-exception.files.all.read-write</key>
-                    </true>
-                </dict>
- 
-                <!-- An AudioComponent can define its tags -->
-                <key>tags</key>
-                <array>
-                    <string>Effect</string>
-                    <string>Equalizer</string>
-                </array>
-            </dict>
-        </array>
-
-    The type, subtype and manufacturer keys correspond to the OSType fields of the 
-    AudioComponentDescription structure. They can be strings if they are 4 ASCII characters; 
-    otherwise they must be 32-bit integers.
-    
-    The "factoryFunction" is the name of a AudioComponentFactoryFunction in the bundle's binary.
-    
-    The "sandboxSafe" key is used to indicate whether or not an AudioComponent can be loaded
-    directly into a sandboxed process. This key is reflected in the componentFlags field of the the
-    AudioComponentDescription for the AudioComponent with the constant, kAudioComponentFlag_SandboxSafe.
-    Note that if this key is not present, it is assumed that the AudioComponent is not sandbox safe.
-    
-    The "resourceUsage" key describes the system resources used by an AudioComponent that is not
-    sandobox safe. The keys for this dictionary are described below. If the "sandboxSafe" key is
-    true, this dictionary should not be included.
-    
-    The "iokit.user-client" key is a "resourceUsage" key that describes the IOKit user-client
-    objects the AudioComponent will open. It is an array of the user-clients' class names.
-    
-    The "mach-lookup.global-name" key is a "resourceUsage" key that describes the mach services the
-    AudioComponent needs to connect to. It is an array of the names of the services. Note that these
-    services can be direct mach services found via bootstrap_look_up() or XPC services found via
-    xpc_connection_create_mach_service().
-    
-    The "network.client" key is a "resourceUsage" key that indicates that the AudioComponent will
-    receive data from the network.
-    
-    The "temporary-exception.files.all.read-write" key is a "resourceUsage" key that indicates that
-    the AudioComponent needs arbitrary access to the file system. This is for backward compatibility
-    for AudioComponents that have not yet adopted the usage of security scope bookmarks and/or the
-    usage of the standard file dialog for discovering, accessing and storing persistent references
-    to files on the file system. In a future OS release, this key will not be supported.
-    
-    Note that a sandbox safe AudioComponent can function correctly in even the most severely
-    sandboxed process. This means that the process will have curtailed or no access to common system
-    resources like the file system, device drivers, the network, and communication with other
-    processes.
-    
-    When instantiating a sandbox unsafe AudioComponent in a sandboxed process, the system evaluates
-    the "resourceUsage" information against the restrictions the process is under. If the
-    "resourceUsage" will not violate those restrictions, the AudioComponent will be instantiated and
-    can be used as normal. Note that the system will set kAudioComponentFlag_SandboxSafe in the
-    AudioComponentDescription in this case.
-    
-    If the "resourceUsage" information includes things that can't be accessed from the process and
-    the process has the entitlement, "com.apple.security.temporary-exception.audio-unit-host", the
-    system will ask the user whether or not it is acceptable for the process to open the unsafe
-    AudioComponent. If the user says yes, the system will suspend the process's sandbox and allow
-    the unsafe AudioComponent to be opened and used.
- 
-    The "tags" key is an array of tags associated with the defined AudioComponent. The following are 
- 	the set of predefined standard tags that are localized and can be used in the audio unit definition.
- 	"Equalizer", "Dynamics", "Distortion", "Synthesizer", "Effects", "Filter",
- 	"Dynamics Processor", "Delay", "Reverb", "Pitch", "Panner", "Imaging", "Sampler", "Mixer", 
- 	"Format Converter", "Time Effect", "Output", "Offline Effect", "Drums", "Guitar", "Vocal", 
- 	"Bass", "MIDI". 
- 
- 	These standard tags should not be localized in the audio unit.
- 
-    Localizing the tags is similar to localizing AudioUnit parameter strings. Create a strings 
-    resource file and name it "AudioUnitTags.strings".
-    For more information on strings resource file please check
-    https://developer.apple.com/library/mac/documentation/macosx/conceptual/bpinternational/Articles/StringsFiles.html
- 
-*/
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
@@ -179,6 +170,8 @@
     #include <CoreAudioTypes.h>
     #include <CoreFoundation.h>
 #endif
+
+CF_ASSUME_NONNULL_BEGIN
 
 //=====================================================================================================================
 #pragma mark Constants
@@ -190,18 +183,65 @@
 	will only return this component when performing a specific, non-wildcard search for the
 	component, i.e. with non-zero values of componentType, componentSubType, and
 	componentManufacturer. This can be useful when privately registering a component.
-	Available starting in Mac OS X 10.7 and iOS 5.0
 	
 	@constant	kAudioComponentFlag_SandboxSafe
 	
-	An AudioComponent sets this bit in it's componentFlags to indicate to the system that the
+	An AudioComponent sets this bit in its componentFlags to indicate to the system that the
 	AudioComponent is safe to open in a sandboxed process.
-	Available starting in Mac OS X 10.8.
+	
+	@constant	kAudioComponentFlag_IsV3AudioUnit
+	
+	The system sets this flag automatically when registering components which implement a version 3
+	Audio Unit.
+	
+	@constant	kAudioComponentFlag_RequiresAsyncInstantiation
+	
+	The system sets this flag automatically when registering components which require asynchronous
+	instantiation via AudioComponentInstantiate (v3 audio units with views).
+	
+	@constant	kAudioComponentFlag_CanLoadInProcess
+	
+	The system sets this flag automatically when registering components which can be loaded into
+	the current process. This is always true for V2 audio units; it depends on the packaging
+	in the case of a V3 audio unit.
 */
-enum {
-	kAudioComponentFlag_Unsearchable    = 1,
-	kAudioComponentFlag_SandboxSafe     = 2
+typedef CF_OPTIONS(UInt32, AudioComponentFlags) {
+    kAudioComponentFlag_Unsearchable                CF_ENUM_AVAILABLE(10_7, 5_0)   = 1,
+    kAudioComponentFlag_SandboxSafe                 CF_ENUM_AVAILABLE(10_8, 6_0)   = 2,
+    kAudioComponentFlag_IsV3AudioUnit               CF_ENUM_AVAILABLE(10_11, 9_0)  = 4,
+    kAudioComponentFlag_RequiresAsyncInstantiation  CF_ENUM_AVAILABLE(10_11, 9_0)  = 8,
+	kAudioComponentFlag_CanLoadInProcess			CF_ENUM_AVAILABLE(10_11, 9_0)  = 0x10
 };
+
+/*! @enum       AudioComponentInstantiationOptions
+    @brief      Options controlling component instantiation.
+    @discussion
+        Most component instances are loaded into the calling process.
+
+        A version 3 audio unit, however, can be loaded into a separate extension service process,
+        and this is the default behavior for these components. To be able to load one in-process
+        requires that the developer package the audio unit in a bundle separate from the application
+        extension, since an extension's main binary cannot be dynamically loaded into another
+        process.
+        
+        An OS X host may request in-process loading of such audio units using
+        kAudioComponentInstantiation_LoadInProcess.
+
+        kAudioComponentFlag_IsV3AudioUnit specifies whether an audio unit is implemented using API
+        version 3.
+
+        These options are just requests to the implementation. It may fail and fall back to the
+        default.
+    @constant kAudioComponentInstantiation_LoadOutOfProcess
+        Attempt to load the component into a separate extension process.
+    @constant kAudioComponentInstantiation_LoadInProcess
+        Attempt to load the component into the current process. Only available on OS X.
+*/
+typedef CF_OPTIONS(UInt32, AudioComponentInstantiationOptions) {
+    kAudioComponentInstantiation_LoadOutOfProcess   CF_ENUM_AVAILABLE(10_11,  9_0) = 1,
+    kAudioComponentInstantiation_LoadInProcess      CF_ENUM_AVAILABLE(10_11,  NA)  = 2
+};
+
 
 //=====================================================================================================================
 #pragma mark Data Types
@@ -275,7 +315,7 @@ typedef struct OpaqueAudioComponent *   AudioComponent;
 					is a pointer to the plugin instance structure, has 0 or more specific arguments,  
 					and returns an OSStatus.
 */
-typedef OSStatus (*AudioComponentMethod) (void *self,...);
+typedef OSStatus (*AudioComponentMethod)(void *self,...);
 
 /*!
     @struct         AudioComponentPlugInInterface
@@ -293,8 +333,8 @@ typedef OSStatus (*AudioComponentMethod) (void *self,...);
 typedef struct AudioComponentPlugInInterface {
 	OSStatus						(*Open)(void *self, AudioComponentInstance mInstance);
 	OSStatus						(*Close)(void *self);
-	AudioComponentMethod			(*Lookup) (SInt16 selector);
-	void *							reserved; // set to NULL
+	AudioComponentMethod __nullable	(* __nonnull Lookup)(SInt16 selector);
+	void * __nullable				reserved;
 } AudioComponentPlugInInterface;
 
 /*!
@@ -309,7 +349,7 @@ typedef struct AudioComponentPlugInInterface {
                         The AudioComponentDescription specifying the component to be instantiated.
     @result         A pointer to a AudioComponentPlugInInterface structure.
 */
-typedef AudioComponentPlugInInterface *  (*AudioComponentFactoryFunction)(const AudioComponentDescription *inDesc);
+typedef AudioComponentPlugInInterface * __nullable (*AudioComponentFactoryFunction)(const AudioComponentDescription *inDesc);
 
 //=====================================================================================================================
 #pragma mark Functions
@@ -322,7 +362,10 @@ extern "C" {
     @function       AudioComponentFindNext
     @abstract       Finds an audio component.
     @discussion     This function is used to find an audio component that is the closest match
-                    to the provided values.
+                    to the provided values. Note that the list of available components may change
+					dynamically in situations involving inter-app audio on iOS, or version 3
+					audio unit extensions. See kAudioComponentRegistrationsChangedNotification.
+
     @param          inComponent
                         If NULL, then the search starts from the beginning until an audio
                         component is found that matches the description provided by inDesc.
@@ -335,8 +378,8 @@ extern "C" {
                         a wildcard, so the first match found is returned.
     @result         An audio component that matches the search parameters, or NULL if none found.
 */
-extern AudioComponent 
-AudioComponentFindNext (    AudioComponent                      inComponent, 
+extern AudioComponent __nullable
+AudioComponentFindNext (    AudioComponent __nullable           inComponent,
                             const AudioComponentDescription *   inDesc) 
                                                                             __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
 
@@ -369,7 +412,7 @@ AudioComponentCount (   const AudioComponentDescription *       inDesc)
 */
 extern OSStatus 
 AudioComponentCopyName (    AudioComponent                      inComponent, 
-                            CFStringRef *                       outName)
+                            CFStringRef __nullable * __nonnull  outName)
                                                                             __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
 
 /*!
@@ -403,6 +446,27 @@ AudioComponentGetVersion(   AudioComponent                      inComponent,
                             UInt32 *                            outVersion)
                                                                             __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
 
+#if __OBJC__ && !TARGET_OS_IPHONE
+@class NSImage;
+
+/*!
+    @function       AudioComponentGetIcon
+    @abstract       Fetches an icon representing the component.
+    @param          comp
+        The component whose icon is to be retrieved.
+    @result
+        An autoreleased NSImage object.
+    @discussion
+        For a component originating in an app extension, the returned icon will be that of the
+        application containing the extension.
+        
+        For components loaded from bundles, the icon will be that of the bundle.
+*/
+extern NSImage * __nullable
+AudioComponentGetIcon(AudioComponent comp)
+                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
+#endif
+
 /*!
     @function       AudioComponentInstanceNew
     @abstract       Creates an audio component instance.
@@ -421,9 +485,30 @@ AudioComponentGetVersion(   AudioComponent                      inComponent,
     @result         an OSStatus result code.
 */
 extern OSStatus 
-AudioComponentInstanceNew(      AudioComponent                  inComponent, 
-                                AudioComponentInstance *        outInstance)
+AudioComponentInstanceNew(      AudioComponent                                inComponent,
+                                AudioComponentInstance __nullable * __nonnull outInstance)
                                                                             __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+/*!
+    @function       AudioComponentInstantiate
+    @abstract       Creates an audio component instance, asynchronously.
+    @discussion     This is an asynchronous version of AudioComponentInstanceNew(). It must be
+                    used to instantiate any component with kAudioComponentFlag_RequiresAsyncInstantiation
+                    set in its component flags. It may be used for other components as well.
+					
+					Note: Do not block the main thread while waiting for the completion handler
+					to be called; this can deadlock.
+    @param          inComponent
+                        the audio component
+    @param          inOptions
+                        see AudioComponentInstantiationOptions
+    @param          inCompletionHandler
+                        called in an arbitrary thread context when instantiation is complete.
+*/
+extern void
+AudioComponentInstantiate(      AudioComponent                      inComponent,
+                                AudioComponentInstantiationOptions  inOptions,
+                                void (^inCompletionHandler)(AudioComponentInstance __nullable, OSStatus))
+                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
 /*!
     @function       AudioComponentInstanceDispose
@@ -438,7 +523,6 @@ extern OSStatus
 AudioComponentInstanceDispose(  AudioComponentInstance          inInstance)
                                                                             __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
 
-// retrieves the class object associated with the instance
 /*!
     @function       AudioComponentInstanceGetComponent
     @abstract       Retrieve the audio component from its instance
@@ -508,20 +592,89 @@ AudioComponentRegister(     const AudioComponentDescription *   inDesc,
                         The AudioComponent whose info is being fetched.
     @param          outConfigurationInfo
                         On exit, this is CFDictionaryRef that contains information describing the
-                        capabilities of the AudioComoponent. The specific information depends on the
+                        capabilities of the AudioComponent. The specific information depends on the
                         type of AudioComponent. The keys for the dictionary are defined in
                         AudioUnitProperties.h (or other headers as appropriate for the component type).
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
 AudioComponentCopyConfigurationInfo(    AudioComponent      inComponent,
-                                        CFDictionaryRef*    outConfigurationInfo)
+                                        CFDictionaryRef __nullable * __nonnull outConfigurationInfo)
                                                     __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+
+/*!
+	 @enum		 AudioComponentValidationResult
+	 @abstract	 Constants for describing the result of validating an AudioComponent
+	 @constant	 kAudioComponentValidationResult_Passed
+					The AudioComponent passed validation.
+	 @constant	 kAudioComponentValidationResult_Failed
+					The AudioComponent failed validation.
+	 @constant	 kAudioComponentValidationResult_TimedOut
+					The validation operation timed out before completing.
+	 @constant	 kAudioComponentValidationResult_UnauthorizedError_Open
+					The AudioComponent failed validation during open operation as it is not authorized.
+	 @constant	 kAudioComponentValidationResult_UnauthorizedError_Init
+					The AudioComponent failed validation during initialization as it is not authorized.
+*/
+typedef CF_ENUM(UInt32, AudioComponentValidationResult)
+{
+	kAudioComponentValidationResult_Unknown = 0,
+	kAudioComponentValidationResult_Passed,
+	kAudioComponentValidationResult_Failed,
+	kAudioComponentValidationResult_TimedOut,
+	kAudioComponentValidationResult_UnauthorizedError_Open,
+	kAudioComponentValidationResult_UnauthorizedError_Init
+};
+	
+/*!
+	@define		kAudioComponentConfigurationInfo_ValidationResult
+	@abstract	Dictionary that contains the AudioComponentValidationResult for the component.
+	@discussion
+		The keys for this dictionary is the platform (e.g. "i386") that generated the result.
+*/
+#define kAudioComponentConfigurationInfo_ValidationResult	"ValidationResult"
+	
+/*!
+	 @function		AudioComponentValidate
+	 @abstract		Tests a specified AudioComponent for API and behavioural conformance
+	 @discussion	Currently, only AudioUnits can can be validated.
+	 @param			inComponent
+						The AudioComponent to validate.
+	 @param			inValidationParameters
+						A CFDictionaryRef that contains parameters for the validation operation.
+						Passing NULL for this argument tells the system to use the default
+						parameters.
+	 @param			outValidationResult
+						On exit, this is an AudioComponentValidationResult.
+	 @result		an OSStatus result code.
+*/
+extern OSStatus
+AudioComponentValidate( AudioComponent					inComponent,
+						CFDictionaryRef __nullable		inValidationParameters,
+						AudioComponentValidationResult *outValidationResult)
+													__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+	
+/*!
+	@define		kAudioComponentValidationParameter_TimeOut
+	@discussion This is a number that indicates the time in seconds to wait for a validation
+				operation to complete. Note that if a validation operation times out, it will return
+				kAudioComponentValidationResult_TimedOut as its result.
+*/
+#define kAudioComponentValidationParameter_TimeOut				"TimeOut"
+	
+/*!
+	 @define	 kAudioComponentValidationParameter_ForceValidation
+	 @discussion
+	 	This is a bool that indicates to ignore the cached value and run validation on the specified
+	 	audio unit and update the cache.
+*/
+#define kAudioComponentValidationParameter_ForceValidation		 "ForceValidation"
 
 
 #ifdef __cplusplus
 }
 #endif
 
+CF_ASSUME_NONNULL_END
 
-#endif // __AUDIOCOMPONENT_H__
+#endif // AudioUnit_AudioComponent_h

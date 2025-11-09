@@ -33,6 +33,7 @@
 #endif
 
 CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 #pragma pack(push, 2)
 
@@ -232,7 +233,7 @@ struct CFNetServiceClientContext {
    * An arbitrary pointer to client-defined data, which can be
    * associated with the service/browser and is passed to the callbacks.
    */
-  void *			  info;
+  void *	__nullable	 info;
 
   /*
    * The callback used to add a retain for the service/browser on the
@@ -242,13 +243,13 @@ struct CFNetServiceClientContext {
    * service/browser, almost always just the pointer passed as the
    * parameter.
    */
-  CFAllocatorRetainCallBack  retain;
+  CFAllocatorRetainCallBack  __nullable retain;
 
   /*
    * The callback used to remove a retain previously added for the
    * service/browser on the info pointer.
    */
-  CFAllocatorReleaseCallBack  release;
+  CFAllocatorReleaseCallBack  __nullable release;
 
   /*
    * The callback used to create a descriptive string representation of
@@ -256,7 +257,7 @@ struct CFNetServiceClientContext {
    * debugging purposes. This is used by the CFCopyDescription()
    * function.
    */
-  CFAllocatorCopyDescriptionCallBack  copyDescription;
+  CFAllocatorCopyDescriptionCallBack  __nullable copyDescription;
 };
 typedef struct CFNetServiceClientContext CFNetServiceClientContext;
 
@@ -281,7 +282,7 @@ typedef struct CFNetServiceClientContext CFNetServiceClientContext;
  *	  Client's info reference which was passed into the client
  *	  context.
  */
-typedef CALLBACK_API_C( void , CFNetServiceClientCallBack )(CFNetServiceRef theService, CFStreamError *error, void *info);
+typedef CALLBACK_API_C( void , CFNetServiceClientCallBack )(CFNetServiceRef theService, CFStreamError * __nullable error, void  * __nullable info);
 
 /*
  *  CFNetServiceMonitorClientCallBack
@@ -310,7 +311,7 @@ typedef CALLBACK_API_C( void , CFNetServiceClientCallBack )(CFNetServiceRef theS
  *	  Client's info reference which was passed into the client
  *	  context.
  */
-typedef CALLBACK_API_C( void , CFNetServiceMonitorClientCallBack )(CFNetServiceMonitorRef theMonitor, CFNetServiceRef theService, CFNetServiceMonitorType typeInfo, CFDataRef rdata, CFStreamError *error, void *info);
+typedef CALLBACK_API_C( void , CFNetServiceMonitorClientCallBack )(CFNetServiceMonitorRef theMonitor, CFNetServiceRef theService, CFNetServiceMonitorType typeInfo, CFDataRef rdata, CFStreamError * __nullable error, void * __nullable info);
 
 /*
  *  CFNetServiceBrowserClientCallBack
@@ -340,7 +341,7 @@ typedef CALLBACK_API_C( void , CFNetServiceMonitorClientCallBack )(CFNetServiceM
  *	  Client's info reference which was passed into the client
  *	  context.
  */
-typedef CALLBACK_API_C( void , CFNetServiceBrowserClientCallBack )(CFNetServiceBrowserRef browser, CFOptionFlags flags, CFTypeRef domainOrService, CFStreamError *error, void *info);
+typedef CALLBACK_API_C( void , CFNetServiceBrowserClientCallBack )(CFNetServiceBrowserRef browser, CFOptionFlags flags, CFTypeRef domainOrService, CFStreamError * __nullable error, void * __nullable info);
 
 /*
  *  CFNetServiceGetTypeID()
@@ -431,7 +432,7 @@ CFNetServiceBrowserGetTypeID(void) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT CFNetServiceRef 
-CFNetServiceCreate(CFAllocatorRef alloc, CFStringRef domain, CFStringRef serviceType, CFStringRef name, SInt32 port) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceCreate(CFAllocatorRef __nullable alloc, CFStringRef domain, CFStringRef serviceType, CFStringRef name, SInt32 port) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -463,7 +464,7 @@ CFNetServiceCreate(CFAllocatorRef alloc, CFStringRef domain, CFStringRef service
  *  
  */
 CFN_EXPORT CFNetServiceRef 
-CFNetServiceCreateCopy(CFAllocatorRef alloc, CFNetServiceRef service) CF_AVAILABLE(10_3, 2_0);
+CFNetServiceCreateCopy(CFAllocatorRef __nullable alloc, CFNetServiceRef service) CF_AVAILABLE(10_3, 2_0);
 
 
 
@@ -587,7 +588,7 @@ CFNetServiceGetName(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceRegisterWithOptions(CFNetServiceRef theService, CFOptionFlags options, CFStreamError *error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceRegisterWithOptions(CFNetServiceRef theService, CFOptionFlags options, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -629,7 +630,7 @@ CFNetServiceRegisterWithOptions(CFNetServiceRef theService, CFOptionFlags option
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceResolveWithTimeout(CFNetServiceRef theService, CFTimeInterval timeout, CFStreamError *error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceResolveWithTimeout(CFNetServiceRef theService, CFTimeInterval timeout, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -677,7 +678,7 @@ CFNetServiceCancel(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *	resolved).
  *  
  */
-CFN_EXPORT CFStringRef 
+CFN_EXPORT __nullable CFStringRef
 CFNetServiceGetTargetHost(CFNetServiceRef theService) CF_AVAILABLE(10_4, 2_0);
 
 
@@ -733,7 +734,7 @@ CFNetServiceGetPortNumber(CFNetServiceRef theService) CF_AVAILABLE(10_5, 2_0);
  *	representing the address of the service.
  *  
  */
-CFN_EXPORT CFArrayRef 
+CFN_EXPORT __nullable CFArrayRef
 CFNetServiceGetAddressing(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
 
 
@@ -763,7 +764,7 @@ CFNetServiceGetAddressing(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *	CFNetServiceCreateDictionaryWithTXTData.
  *  
  */
-CFN_EXPORT CFDataRef 
+CFN_EXPORT __nullable CFDataRef
 CFNetServiceGetTXTData(CFNetServiceRef theService) CF_AVAILABLE(10_4, 2_0);
 
 
@@ -823,8 +824,8 @@ CFNetServiceSetTXTData(CFNetServiceRef theService, CFDataRef txtRecord) CF_AVAIL
  *	Keys in the dictionary are CFStringRef's.  Values are CFDataRef's.
  *  
  */
-CFN_EXPORT CFDictionaryRef 
-CFNetServiceCreateDictionaryWithTXTData(CFAllocatorRef alloc, CFDataRef txtRecord) CF_AVAILABLE(10_4, 2_0);
+CFN_EXPORT __nullable CFDictionaryRef
+CFNetServiceCreateDictionaryWithTXTData(CFAllocatorRef __nullable alloc, CFDataRef txtRecord) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -864,8 +865,8 @@ CFNetServiceCreateDictionaryWithTXTData(CFAllocatorRef alloc, CFDataRef txtRecor
  *	If the dictionary could not be flattend, NULL will be returned.
  *  
  */
-CFN_EXPORT CFDataRef 
-CFNetServiceCreateTXTDataWithDictionary(CFAllocatorRef alloc, CFDictionaryRef keyValuePairs) CF_AVAILABLE(10_4, 2_0);
+CFN_EXPORT __nullable CFDataRef
+CFNetServiceCreateTXTDataWithDictionary(CFAllocatorRef __nullable alloc, CFDictionaryRef keyValuePairs) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -909,7 +910,7 @@ CFNetServiceCreateTXTDataWithDictionary(CFAllocatorRef alloc, CFDictionaryRef ke
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceSetClient(CFNetServiceRef theService, CFNetServiceClientCallBack clientCB, CFNetServiceClientContext *clientContext) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceSetClient(CFNetServiceRef theService, CFNetServiceClientCallBack __nullable clientCB, CFNetServiceClientContext * __nullable clientContext) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -1005,7 +1006,7 @@ CFNetServiceUnscheduleFromRunLoop(CFNetServiceRef theService, CFRunLoopRef runLo
  */
 CFN_EXPORT CFNetServiceMonitorRef 
 CFNetServiceMonitorCreate(
-  CFAllocatorRef                     alloc,
+  CFAllocatorRef __nullable          alloc,
   CFNetServiceRef                    theService,
   CFNetServiceMonitorClientCallBack  clientCB,
   CFNetServiceClientContext *        clientContext) CF_AVAILABLE(10_4, 2_0);
@@ -1069,7 +1070,7 @@ CFNetServiceMonitorInvalidate(CFNetServiceMonitorRef monitor) CF_AVAILABLE(10_4,
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceMonitorStart(CFNetServiceMonitorRef monitor, CFNetServiceMonitorType recordType, CFStreamError *error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorStart(CFNetServiceMonitorRef monitor, CFNetServiceMonitorType recordType, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -1097,7 +1098,7 @@ CFNetServiceMonitorStart(CFNetServiceMonitorRef monitor, CFNetServiceMonitorType
  *  
  */
 CFN_EXPORT void 
-CFNetServiceMonitorStop(CFNetServiceMonitorRef monitor, CFStreamError *error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorStop(CFNetServiceMonitorRef monitor, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -1190,7 +1191,7 @@ CFNetServiceMonitorUnscheduleFromRunLoop(CFNetServiceMonitorRef monitor, CFRunLo
  *  
  */
 CFN_EXPORT CFNetServiceBrowserRef 
-CFNetServiceBrowserCreate(CFAllocatorRef alloc, CFNetServiceBrowserClientCallBack clientCB, CFNetServiceClientContext *clientContext) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserCreate(CFAllocatorRef __nullable alloc, CFNetServiceBrowserClientCallBack clientCB, CFNetServiceClientContext *clientContext) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -1250,7 +1251,7 @@ CFNetServiceBrowserInvalidate(CFNetServiceBrowserRef browser) CF_AVAILABLE(10_2,
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceBrowserSearchForDomains(CFNetServiceBrowserRef browser, Boolean registrationDomains, CFStreamError *error) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserSearchForDomains(CFNetServiceBrowserRef browser, Boolean registrationDomains, CFStreamError * __nullable error) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -1293,7 +1294,7 @@ CFNetServiceBrowserSearchForDomains(CFNetServiceBrowserRef browser, Boolean regi
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceBrowserSearchForServices(CFNetServiceBrowserRef browser, CFStringRef domain, CFStringRef serviceType, CFStreamError *error) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserSearchForServices(CFNetServiceBrowserRef browser, CFStringRef domain, CFStringRef serviceType, CFStreamError * __nullable error) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -1323,7 +1324,7 @@ CFNetServiceBrowserSearchForServices(CFNetServiceBrowserRef browser, CFStringRef
  *  
  */
 CFN_EXPORT void 
-CFNetServiceBrowserStopSearch(CFNetServiceBrowserRef browser, CFStreamError *error) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserStopSearch(CFNetServiceBrowserRef browser, CFStreamError * __nullable error) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -1426,7 +1427,7 @@ CFNetServiceBrowserUnscheduleFromRunLoop(CFNetServiceBrowserRef browser, CFRunLo
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceRegister(CFNetServiceRef theService, CFStreamError *error) CF_DEPRECATED(10_2, 10_4, NA, NA);
+CFNetServiceRegister(CFNetServiceRef theService, CFStreamError * __nullable error) CF_DEPRECATED(10_2, 10_4, NA, NA);
 
 
 
@@ -1472,7 +1473,7 @@ CFNetServiceRegister(CFNetServiceRef theService, CFStreamError *error) CF_DEPREC
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceResolve(CFNetServiceRef theService, CFStreamError *error) CF_DEPRECATED(10_2, 10_4, NA, NA);
+CFNetServiceResolve(CFNetServiceRef theService, CFStreamError * __nullable error) CF_DEPRECATED(10_2, 10_4, NA, NA);
 
 
 
@@ -1508,7 +1509,7 @@ CFNetServiceResolve(CFNetServiceRef theService, CFStreamError *error) CF_DEPRECA
  *	if there is some.
  *  
  */
-CFN_EXPORT CFStringRef 
+CFN_EXPORT __nullable CFStringRef
 CFNetServiceGetProtocolSpecificInformation(CFNetServiceRef theService) CF_DEPRECATED(10_2, 10_4, NA, NA);
 
 
@@ -1538,7 +1539,7 @@ CFNetServiceGetProtocolSpecificInformation(CFNetServiceRef theService) CF_DEPREC
  *  
  */
 CFN_EXPORT void 
-CFNetServiceSetProtocolSpecificInformation(CFNetServiceRef theService, CFStringRef theInfo) CF_DEPRECATED(10_2, 10_4, NA, NA);
+CFNetServiceSetProtocolSpecificInformation(CFNetServiceRef theService, CFStringRef __nullable theInfo) CF_DEPRECATED(10_2, 10_4, NA, NA);
 
 
 #endif  /* defined(__MACH__) */
@@ -1546,6 +1547,7 @@ CFNetServiceSetProtocolSpecificInformation(CFNetServiceRef theService, CFStringR
 
 #pragma pack(pop)
 
+CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 
 #endif /* __CFNETSERVICES__ */

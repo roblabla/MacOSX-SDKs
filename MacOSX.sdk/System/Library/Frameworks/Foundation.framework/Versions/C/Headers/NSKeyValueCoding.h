@@ -1,6 +1,6 @@
 /*
 	NSKeyValueCoding.h
-	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
@@ -9,6 +9,8 @@
 #import <Foundation/NSSet.h>
 
 @class NSError, NSString;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /* The exception that is thrown when a key value coding operation fails. The exception's user info dictionary will contain at least two entries:
     - @"NSTargetObjectUserInfoKey": the receiver of the failed KVC message.
@@ -53,7 +55,7 @@ Compatibility notes:
     - The behavior described in step 5 is a change from Mac OS 10.2, in which the instance variable search order was <key>, _<key>.
     - For backward binary compatibility, -handleQueryWithUnboundKey: will be invoked instead of -valueForUndefinedKey: in step 6, if the implementation of -handleQueryWithUnboundKey: in the receiver's class is not NSObject's.
 */
-- (id)valueForKey:(NSString *)key;
+- (nullable id)valueForKey:(NSString *)key;
 
 /* Given a value and a key that identifies an attribute, set the value of the attribute. Given an object and a key that identifies a to-one relationship, relate the object to the receiver, unrelating the previously related object if there was one. Given a collection object and a key that identifies a to-many relationship, relate the objects contained in the collection to the receiver, unrelating previously related objects if there were any.
 
@@ -68,13 +70,13 @@ Compatibility notes:
     - The behavior described in step 2 is different from -takeValue:forKey:'s, in which the instance variable search order is <key>, _<key>.
     - For backward binary compatibility with -takeValue:forKey:'s behavior, -handleTakeValue:forUnboundKey: will be invoked instead of -setValue:forUndefinedKey: in step 3, if the implementation of -handleTakeValue:forUnboundKey: in the receiver's class is not NSObject's.
 */
-- (void)setValue:(id)value forKey:(NSString *)key;
+- (void)setValue:(nullable id)value forKey:(NSString *)key;
 
 /* Given a pointer to a value pointer, a key that identifies an attribute or to-one relationship, and a pointer to an NSError pointer, return a value that is suitable for use in subsequent -setValue:forKey: messages sent to the same receiver. If no validation is necessary, return YES without altering *ioValue or *outError. If validation is necessary and possible, return YES after setting *ioValue to an object that is the validated version of the original value, but without altering *outError. If validation is necessary but not possible, return NO after setting *outError to an NSError that encapsulates the reason that validation was not possible, but without altering *ioValue. The sender of the message is never given responsibility for releasing ioValue or outError.
 
 The default implementation of this method searches the class of the receiver for a validator method whose name matches the pattern -validate<Key>:error:. If such a method is found it is invoked and the result is returned. If no such method is found, YES is returned.
 */
-- (BOOL)validateValue:(inout id *)ioValue forKey:(NSString *)inKey error:(out NSError **)outError;
+- (BOOL)validateValue:(inout id __nullable * __nonnull)ioValue forKey:(NSString *)inKey error:(out NSError **)outError;
 
 /* Given a key that identifies an _ordered_ to-many relationship, return a mutable array that provides read-write access to the related objects. Objects added to the mutable array will become related to the receiver, and objects removed from the mutable array will become unrelated.
 
@@ -114,20 +116,20 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 /* Key-path-taking variants of like-named methods. The default implementation of each parses the key path enough to determine whether or not it has more than one component (key path components are separated by periods). If so, -valueForKey: is invoked with the first key path component as the argument, and the method being invoked is invoked recursively on the result, with the remainder of the key path passed as an argument. If not, the like-named non-key-path-taking method is invoked.
 */
-- (id)valueForKeyPath:(NSString *)keyPath;
-- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;
-- (BOOL)validateValue:(inout id *)ioValue forKeyPath:(NSString *)inKeyPath error:(out NSError **)outError;
+- (nullable id)valueForKeyPath:(NSString *)keyPath;
+- (void)setValue:(nullable id)value forKeyPath:(NSString *)keyPath;
+- (BOOL)validateValue:(inout id __nullable * __nonnull)ioValue forKeyPath:(NSString *)inKeyPath error:(out NSError **)outError;
 - (NSMutableArray *)mutableArrayValueForKeyPath:(NSString *)keyPath;
 - (NSMutableOrderedSet *)mutableOrderedSetValueForKeyPath:(NSString *)keyPath NS_AVAILABLE(10_7, 5_0);
 - (NSMutableSet *)mutableSetValueForKeyPath:(NSString *)keyPath;
 
 /* Given that an invocation of -valueForKey: would be unable to get a keyed value using its default access mechanism, return the keyed value using some other mechanism. The default implementation of this method raises an NSUndefinedKeyException. You can override it to handle properties that are dynamically defined at run-time.
 */
-- (id)valueForUndefinedKey:(NSString *)key;
+- (nullable id)valueForUndefinedKey:(NSString *)key;
 
 /* Given that an invocation of -setValue:forKey: would be unable to set the keyed value using its default mechanism, set the keyed value using some other mechanism. The default implementation of this method raises an NSUndefinedKeyException. You can override it to handle properties that are dynamically defined at run-time.
 */
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key;
+- (void)setValue:(nullable id)value forUndefinedKey:(NSString *)key;
 
 /* Given that an invocation of -setValue:forKey: would be unable to set the keyed value because the type of the parameter of the corresponding accessor method is an NSNumber scalar type or NSValue structure type but the value is nil, set the keyed value using some other mechanism. The default implementation of this method raises an NSInvalidArgumentException. You can override it to map nil values to something meaningful in the context of your application.
 */
@@ -135,15 +137,15 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 /* Given an array of keys, return a dictionary containing the keyed attribute values, to-one-related objects, and/or collections of to-many-related objects. Entries for which -valueForKey: returns nil have NSNull as their value in the returned dictionary.
 */
-- (NSDictionary *)dictionaryWithValuesForKeys:(NSArray *)keys;
+- (NSDictionary<NSString *, id> *)dictionaryWithValuesForKeys:(NSArray<NSString *> *)keys;
 
 /* Given a dictionary containing keyed attribute values, to-one-related objects, and/or collections of to-many-related objects, set the keyed values. Dictionary entries whose values are NSNull result in -setValue:nil forKey:key messages being sent to the receiver.
 */
-- (void)setValuesForKeysWithDictionary:(NSDictionary *)keyedValues;
+- (void)setValuesForKeysWithDictionary:(NSDictionary<NSString *, id> *)keyedValues;
 
 @end
 
-@interface NSArray(NSKeyValueCoding)
+@interface NSArray<ObjectType>(NSKeyValueCoding)
 
 /* Return an array containing the results of invoking -valueForKey: on each of the receiver's elements. The returned array will contain NSNull elements for each instance of -valueForKey: returning nil.
 */
@@ -151,27 +153,27 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 /* Invoke -setValue:forKey: on each of the receiver's elements.
 */
-- (void)setValue:(id)value forKey:(NSString *)key;
+- (void)setValue:(nullable id)value forKey:(NSString *)key;
 
 @end
 
-@interface NSDictionary(NSKeyValueCoding)
+@interface NSDictionary<KeyType, ObjectType>(NSKeyValueCoding)
 
 /* Return the result of sending -objectForKey: to the receiver.
 */
-- (id)valueForKey:(NSString *)key;
+- (nullable ObjectType)valueForKey:(NSString *)key;
 
 @end
 
-@interface NSMutableDictionary(NSKeyValueCoding)
+@interface NSMutableDictionary<KeyType, ObjectType>(NSKeyValueCoding)
 
-/* Send -setObject:forKey: to the receiver, unless the value is nil, in which case send -removeObject:forKey:.
+/* Send -setObject:forKey: to the receiver, unless the value is nil, in which case send -removeObjectForKey:.
 */
-- (void)setValue:(id)value forKey:(NSString *)key;
+- (void)setValue:(nullable ObjectType)value forKey:(NSString *)key;
 
 @end
 
-@interface NSOrderedSet(NSKeyValueCoding)
+@interface NSOrderedSet<ObjectType>(NSKeyValueCoding)
 
 /* Return an ordered set containing the results of invoking -valueForKey: on each of the receiver's members. The returned ordered set might not have the same number of members as the receiver. The returned ordered set will not contain any elements corresponding to instances of -valueForKey: returning nil, nor will it contain duplicates.
 */
@@ -179,11 +181,11 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 /* Invoke -setValue:forKey: on each of the receiver's members.
 */
-- (void)setValue:(id)value forKey:(NSString *)key NS_AVAILABLE(10_7, 5_0);
+- (void)setValue:(nullable id)value forKey:(NSString *)key NS_AVAILABLE(10_7, 5_0);
 
 @end
 
-@interface NSSet(NSKeyValueCoding)
+@interface NSSet<ObjectType>(NSKeyValueCoding)
 
 /* Return a set containing the results of invoking -valueForKey: on each of the receiver's members. The returned set might not have the same number of members as the receiver. The returned set will not contain any elements corresponding to instances of -valueForKey: returning nil (in contrast with -[NSArray(NSKeyValueCoding) valueForKey:], which may put NSNulls in the arrays it returns).
 */
@@ -191,7 +193,7 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 /* Invoke -setValue:forKey: on each of the receiver's members.
 */
-- (void)setValue:(id)value forKey:(NSString *)key;
+- (void)setValue:(nullable id)value forKey:(NSString *)key;
 
 @end
 
@@ -202,15 +204,15 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 /* Methods that were deprecated in Mac OS 10.4.
 */
 + (BOOL)useStoredAccessor NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (id)storedValueForKey:(NSString *)key NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (void)takeStoredValue:(id)value forKey:(NSString *)key NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (nullable id)storedValueForKey:(NSString *)key NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (void)takeStoredValue:(nullable id)value forKey:(NSString *)key NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
 
 /* Methods that were deprecated in Mac OS 10.3. Use the new, more consistently named, methods declared above instead.
 */
-- (void)takeValue:(id)value forKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (void)takeValue:(id)value forKeyPath:(NSString *)keyPath NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (id)handleQueryWithUnboundKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (void)handleTakeValue:(id)value forUnboundKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
+- (void)takeValue:(nullable id)value forKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
+- (void)takeValue:(nullable id)value forKeyPath:(NSString *)keyPath NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
+- (nullable id)handleQueryWithUnboundKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
+- (void)handleTakeValue:(nullable id)value forUnboundKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
 - (void)unableToSetNilForKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
 - (NSDictionary *)valuesForKeys:(NSArray *)keys NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
 - (void)takeValuesFromDictionary:(NSDictionary *)properties NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
@@ -218,3 +220,5 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 @end
 
 #endif
+
+NS_ASSUME_NONNULL_END

@@ -3,7 +3,12 @@
 #ifndef __SIMD_INTERNAL_HEADER__
 #define __SIMD_INTERNAL_HEADER__
 
-#if defined __has_attribute && __has_attribute(__ext_vector_type__) && __has_attribute(__overloadable__)
+/*  Define __has_attribute for compilers that do not support it.              */
+#ifndef __has_attribute
+# define __has_attribute(__x) 0
+#endif
+
+#if __has_attribute(__ext_vector_type__) && __has_attribute(__overloadable__)
 /*  The function of these headers fundamentally depends on the ext_vector_type
  *  and overloadable attributes.  There is no fallback if these attributes
  *  are not supported by your compiler.                                       */
@@ -19,7 +24,6 @@
 #define __SIMD_OVERLOAD__ __attribute__((__overloadable__))
 
 #include <Availability.h>
-#define __SIMD_AVAILABILITY__ __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
 
 #if defined __ARM_NEON__
 #include <arm_neon.h>

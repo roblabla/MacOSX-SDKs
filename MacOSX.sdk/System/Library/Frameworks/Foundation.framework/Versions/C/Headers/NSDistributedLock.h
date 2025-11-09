@@ -1,20 +1,22 @@
 /*	NSDistributedLock.h
-	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSDate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDistributedLock : NSObject {
 @private
     void *_priv;
 }
 
-+ (NSDistributedLock *)lockWithPath:(NSString *)path;  
++ (nullable NSDistributedLock *)lockWithPath:(NSString *)path;  
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)tryLock;
 - (void)unlock;
@@ -23,3 +25,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

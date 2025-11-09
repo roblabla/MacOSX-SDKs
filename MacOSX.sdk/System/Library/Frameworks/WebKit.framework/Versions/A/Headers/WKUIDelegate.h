@@ -29,7 +29,10 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class WKFrameInfo;
+@class WKNavigationAction;
 @class WKWebViewConfiguration;
 @class WKWindowFeatures;
 
@@ -52,7 +55,14 @@
 
  If you do not implement this method, the web view will cancel the navigation.
  */
-- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures;
+- (nullable WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures;
+
+/*! @abstract Notifies your app that the DOM window object's close() method completed successfully.
+  @param webView The web view invoking the delegate method.
+  @discussion Your app should remove the web view from the view hierarchy and update
+  the UI as needed, such as by closing the containing browser tab or window.
+  */
+- (void)webViewDidClose:(WKWebView *)webView NS_AVAILABLE(10_11, 9_0);
 
 /*! @abstract Displays a JavaScript alert panel.
  @param webView The web view invoking the delegate method.
@@ -68,7 +78,7 @@
 
  If you do not implement this method, the web view will behave as if the user selected the OK button.
  */
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)())completionHandler;
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler;
 
 /*! @abstract Displays a JavaScript confirm panel.
  @param webView The web view invoking the delegate method.
@@ -102,8 +112,10 @@
 
  If you do not implement this method, the web view will behave as if the user selected the Cancel button.
  */
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *result))completionHandler;
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

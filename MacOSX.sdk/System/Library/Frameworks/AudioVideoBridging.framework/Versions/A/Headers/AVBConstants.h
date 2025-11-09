@@ -2,13 +2,28 @@
 //  AVBConstants.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2015 Apple Inc. All rights reserved.
 //
 
 #ifndef AudioVideoBridging_AVBConstants_h
 #define AudioVideoBridging_AVBConstants_h
 
 #include <Foundation/NSObjCRuntime.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+#if !defined(_LP64)
+
+#define AVB_LEGACY_OBJC_RUNTIME	1
+#define AVB_MODERN_OBJC_RUNTIME	0
+
+#else
+
+#define AVB_LEGACY_OBJC_RUNTIME	0
+#define AVB_MODERN_OBJC_RUNTIME	1
+
+#endif
+
 
 #define AVBMACAddressSize												6
 
@@ -332,6 +347,11 @@ typedef NS_ENUM(uint8_t, AVB17221AECPStatusCode)
 	 @abstract	The IEEE Std 1722.1™-2013 AECP AEM NOT_SUPPORTED status code.
 	 */
 	AVB17221AECPStatusNotSupported										= 0x0b,
+	/*!
+	 @constant	AVB17221AECPStatusStreamIsRunning
+	 @abstract	The IEEE Std 1722.1™-2013 AECP AEM STREAM_IS_RUNNING status code.
+	 */
+	AVB17221AECPStatusStreamIsRunning									= 0x0c,
 
 	/*!
 		@constant	AVB17221AECPStatusAddressAccessAddressTooLow
@@ -991,7 +1011,8 @@ typedef NS_ENUM(uint8_t, AVB17221AECPAddressAccessTLVMode)
 	@constant	AVBErrorDomain
 	@abstract	The string defining the error domain for AudioVideoBridging errors.
  */
-extern NSString * const AVBErrorDomain;
+FOUNDATION_EXPORT NSString * const AVBErrorDomain;
 
+NS_ASSUME_NONNULL_END
 
 #endif

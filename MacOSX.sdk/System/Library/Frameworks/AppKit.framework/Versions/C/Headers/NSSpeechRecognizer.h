@@ -1,14 +1,17 @@
 /*
 	NSSpeechRecognizer.h
 	Application Kit
-	Copyright (c) 2003-2014, Apple Inc.
+	Copyright (c) 2003-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
-@class NSArray, NSString;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSString;
 @protocol NSSpeechRecognizerDelegate;
 
 
@@ -17,16 +20,16 @@
     id	_privateNSSpeechRecognizerVars;
 }
 
-- (instancetype)init;
+- (nullable instancetype)init;
 
 - (void)startListening;
 - (void)stopListening;
 
-@property (assign) id<NSSpeechRecognizerDelegate> delegate;
+@property (nullable, assign) id<NSSpeechRecognizerDelegate> delegate;
 
-@property (copy) NSArray *commands;
+@property (nullable, copy) NSArray<NSString *> *commands;
 
-@property (copy) NSString *displayedCommandsTitle;
+@property (nullable, copy) NSString *displayedCommandsTitle;
 
 @property BOOL listensInForegroundOnly;
 
@@ -36,7 +39,9 @@
 
 @protocol NSSpeechRecognizerDelegate <NSObject>
 @optional
-- (void)speechRecognizer:(NSSpeechRecognizer *)sender didRecognizeCommand:(id)command;
+- (void)speechRecognizer:(NSSpeechRecognizer *)sender didRecognizeCommand:(NSString *)command;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

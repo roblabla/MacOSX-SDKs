@@ -1,19 +1,21 @@
 /*
         NSDrawer.h
         Application Kit
-        Copyright (c) 1999-2014, Apple Inc.
+        Copyright (c) 1999-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <CoreFoundation/CFDate.h>
 #import <CoreFoundation/CFRunLoop.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSWindow.h>
 
-@class NSArray;
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSLock;
 @class NSView;
 @class NSWindow;
@@ -55,18 +57,18 @@ typedef NS_ENUM(NSUInteger, NSDrawerState) {
 
 - (instancetype)initWithContentSize:(NSSize)contentSize preferredEdge:(NSRectEdge)edge;
 
-@property (assign) NSWindow *parentWindow;
-@property (strong) NSView *contentView;
+@property (nullable, assign) NSWindow *parentWindow;
+@property (nullable, strong) NSView *contentView;
 @property NSRectEdge preferredEdge;
-@property (assign) id<NSDrawerDelegate> delegate;
+@property (nullable, assign) id<NSDrawerDelegate> delegate;
 
 - (void)open;
 - (void)openOnEdge:(NSRectEdge)edge;
 - (void)close;
 
-- (void)open:(id)sender;
-- (void)close:(id)sender;
-- (void)toggle:(id)sender;
+- (void)open:(nullable id)sender;
+- (void)close:(nullable id)sender;
+- (void)toggle:(nullable id)sender;
 
 @property (readonly) NSInteger state;
 @property (readonly) NSRectEdge edge;
@@ -82,7 +84,7 @@ typedef NS_ENUM(NSUInteger, NSDrawerState) {
 
 @interface NSWindow(Drawers)
 
-@property (readonly, copy) NSArray *drawers;
+@property (nullable, readonly, copy) NSArray<NSDrawer *> *drawers;
 
 @end
 
@@ -101,10 +103,12 @@ typedef NS_ENUM(NSUInteger, NSDrawerState) {
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSString *NSDrawerWillOpenNotification;
-APPKIT_EXTERN NSString *NSDrawerDidOpenNotification;
-APPKIT_EXTERN NSString *NSDrawerWillCloseNotification;
-APPKIT_EXTERN NSString *NSDrawerDidCloseNotification;
+APPKIT_EXTERN NSString * NSDrawerWillOpenNotification;
+APPKIT_EXTERN NSString * NSDrawerDidOpenNotification;
+APPKIT_EXTERN NSString * NSDrawerWillCloseNotification;
+APPKIT_EXTERN NSString * NSDrawerDidCloseNotification;
+
+NS_ASSUME_NONNULL_END
 
 /* Note that the size of a drawer is determined partly by its content, partly by
 the size of its parent window.  The size in the direction of the drawer's motion

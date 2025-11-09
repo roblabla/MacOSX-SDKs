@@ -1,8 +1,10 @@
 /*      NSEnergyFormatter.h
-        Copyright (c) 2014, Apple Inc. All rights reserved.
+        Copyright (c) 2014-2015, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSEnergyFormatterUnit) {
     NSEnergyFormatterUnitJoule = 11,
@@ -18,7 +20,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     BOOL _isForFoodEnergyUse;
     void *_reserved[2];
 }
-@property (copy) NSNumberFormatter *numberFormatter;    // default is NSNumberFormatter with NSNumberFormatterDecimalStyle
+@property (null_resettable, copy) NSNumberFormatter *numberFormatter;    // default is NSNumberFormatter with NSNumberFormatterDecimalStyle
 @property NSFormattingUnitStyle unitStyle;              // default is NSFormattingUnitStyleMedium
 @property (getter = isForFoodEnergyUse) BOOL forFoodEnergyUse; // default is NO; if it is set to YES, NSEnergyFormatterUnitKilocalorie may be “C” instead of “kcal"
 
@@ -32,8 +34,10 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (NSString *)unitStringFromValue:(double)value unit:(NSEnergyFormatterUnit)unit;
 
 // Return the locale-appropriate unit, the same unit used by -stringFromJoules:.
-- (NSString *)unitStringFromJoules:(double)numberInJoules usedUnit:(NSEnergyFormatterUnit *)unitp;
+- (NSString *)unitStringFromJoules:(double)numberInJoules usedUnit:(nullable NSEnergyFormatterUnit *)unitp;
 
 // No parsing is supported. This method will return NO.
-- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string errorDescription:(out NSString **)error;
+- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
 @end
+
+NS_ASSUME_NONNULL_END

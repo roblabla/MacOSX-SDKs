@@ -1,1 +1,1 @@
-#include <QuartzCore/../Frameworks/CoreImage.framework/Headers/CISampler.h>
+#include <CoreImage/CISampler.h>

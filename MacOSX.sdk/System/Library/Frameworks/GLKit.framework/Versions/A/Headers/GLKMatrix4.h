@@ -692,7 +692,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4Translate(GLKMatrix4 matrix, float tx, float ty,
                      matrix.m[0] * tx + matrix.m[4] * ty + matrix.m[8] * tz + matrix.m[12],
                      matrix.m[1] * tx + matrix.m[5] * ty + matrix.m[9] * tz + matrix.m[13],
                      matrix.m[2] * tx + matrix.m[6] * ty + matrix.m[10] * tz + matrix.m[14],
-                     matrix.m[15] };
+                     matrix.m[3] * tx + matrix.m[7] * ty + matrix.m[11] * tz + matrix.m[15] };
     return m;
 }
  
@@ -704,7 +704,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4TranslateWithVector3(GLKMatrix4 matrix, GLKVecto
                      matrix.m[0] * translationVector.v[0] + matrix.m[4] * translationVector.v[1] + matrix.m[8] * translationVector.v[2] + matrix.m[12],
                      matrix.m[1] * translationVector.v[0] + matrix.m[5] * translationVector.v[1] + matrix.m[9] * translationVector.v[2] + matrix.m[13],
                      matrix.m[2] * translationVector.v[0] + matrix.m[6] * translationVector.v[1] + matrix.m[10] * translationVector.v[2] + matrix.m[14],
-                     matrix.m[15] };
+                     matrix.m[3] * translationVector.v[0] + matrix.m[7] * translationVector.v[1] + matrix.m[11] * translationVector.v[2] + matrix.m[15] };
     return m;
 }
     
@@ -716,7 +716,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4TranslateWithVector4(GLKMatrix4 matrix, GLKVecto
                      matrix.m[0] * translationVector.v[0] + matrix.m[4] * translationVector.v[1] + matrix.m[8] * translationVector.v[2] + matrix.m[12],
                      matrix.m[1] * translationVector.v[0] + matrix.m[5] * translationVector.v[1] + matrix.m[9] * translationVector.v[2] + matrix.m[13],
                      matrix.m[2] * translationVector.v[0] + matrix.m[6] * translationVector.v[1] + matrix.m[10] * translationVector.v[2] + matrix.m[14],
-                     matrix.m[15] };
+                     matrix.m[3] * translationVector.v[0] + matrix.m[7] * translationVector.v[1] + matrix.m[11] * translationVector.v[2] + matrix.m[15] };
     return m;
 }
     

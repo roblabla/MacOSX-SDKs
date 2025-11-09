@@ -463,14 +463,14 @@ extern void APIENTRY glutSetCursor(int cursor) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
 extern void APIENTRY glutWarpPointer(int x, int y) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_MACOSX_IMPLEMENTATION >= 1)
-/* surface texturing API Mac OS X specific
+/* surface texturing API OS X specific
 *  Note:
 *	glutSurfaceTexture has been deprecated, use GL_EXT_framebuffer_object
 */
 extern void APIENTRY glutSurfaceTexture (GLenum target, GLenum internalformat, int surfacewin) OPENGL_DEPRECATED(10_2, 10_5);
 #endif
 #if (GLUT_MACOSX_IMPLEMENTATION >= 2)
-/* Mac OS X specific API */
+/* OS X specific API */
 extern void APIENTRY glutWMCloseFunc(void (*func)(void)) OPENGL_DEPRECATED(10_3, 10_9);
 extern void APIENTRY glutCheckLoop(void) OPENGL_DEPRECATED(10_3, 10_9);
 #endif

@@ -11,6 +11,8 @@
 #import <SpriteKit/SpriteKitBase.h>
 #import <SpriteKit/SKNode.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  SKRange object used to define a range of allowable values 
  */
@@ -64,7 +66,7 @@ SK_EXPORT @interface SKConstraint : NSObject <NSCoding, NSCopying>
 @property BOOL enabled;
 
 /* Reference node to transform the values to before apply the constraint limits. Defaults to nil (no transfrom). */
-@property (retain) SKNode *referenceNode;
+@property (retain, nonatomic, nullable) SKNode *referenceNode;
 
 /**
  Constrain the node's position to a range
@@ -93,3 +95,5 @@ SK_EXPORT @interface SKConstraint : NSObject <NSCoding, NSCopying>
 + (instancetype)orientToPoint:(CGPoint)point inNode:(SKNode *)node offset:(SKRange *)radians;
 
 @end
+
+NS_ASSUME_NONNULL_END

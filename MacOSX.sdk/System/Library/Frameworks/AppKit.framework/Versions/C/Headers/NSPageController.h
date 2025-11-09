@@ -1,16 +1,19 @@
 /*
  NSPageController.h
  Application Kit
- Copyright (c) 2011-2014, Apple Inc.
+ Copyright (c) 2011-2015, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <AppKit/NSAnimation.h>
 #import <AppKit/NSViewController.h>
 #import <AppKit/NSAnimation.h>
 
-@class NSMutableDictionary, NSMutableArray, NSView;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSMutableDictionary, NSView;
 @protocol NSPageControllerDelegate;
 
 typedef NS_ENUM(NSInteger, NSPageControllerTransitionStyle) {
@@ -59,11 +62,11 @@ NS_CLASS_AVAILABLE(10_8, NA)
     id _private;
 }
 
-@property (assign) IBOutlet id<NSPageControllerDelegate> delegate;
+@property (nullable, assign) IBOutlet id<NSPageControllerDelegate> delegate;
 
 /* The viewController associated with the selected arrangedObject. May be nil if delegate is not supplying viewControllers.
  */
-@property (readonly, strong) NSViewController *selectedViewController;
+@property (nullable, readonly, strong) NSViewController *selectedViewController;
 
 
 /* The animation style used when transitioning from one page to another. The default value is NSPageControllerTransitionStyleStackHistory */
@@ -87,9 +90,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 - (void)completeTransition;
 
 /* Supported IBActions - all IB actions are animated and delegate LiveTransition methods are called. */
-- (IBAction)navigateBack:(id)sender;
-- (IBAction)navigateForward:(id)sender;
-- (IBAction)takeSelectedIndexFrom:(id)sender; // sender must respond to -integerValue;
+- (IBAction)navigateBack:(nullable id)sender;
+- (IBAction)navigateForward:(nullable id)sender;
+- (IBAction)takeSelectedIndexFrom:(nullable id)sender; // sender must respond to -integerValue;
 @end
 
 @protocol NSPageControllerDelegate <NSObject>	
@@ -101,7 +104,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
  */
 
 
-/* Return the identifier of the view controller that owns a view to display the object. If NSPageController does not have an unused viewController for this identifier, the you will be asked to create one via pageController:viewControllerForIdentifier.
+/* Return the identifier of the view controller that owns a view to display the object. If NSPageController does not have an unused viewController for this identifier, then you will be asked to create one via pageController:viewControllerForIdentifier.
  */
 - (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object;
 
@@ -135,3 +138,5 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 
 @end
+
+NS_ASSUME_NONNULL_END

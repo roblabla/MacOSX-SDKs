@@ -49,7 +49,7 @@ QL_EXTERN_C_BEGIN
  *      @typedef QLThumbnailRequestRef
  *      @abstract This is the type of a reference to Thumbnail requests.
  */
-typedef struct __QLThumbnailRequest *QLThumbnailRequestRef;
+typedef struct CF_BRIDGED_TYPE(id) __QLThumbnailRequest *QLThumbnailRequestRef;
 
 /*!
  *      @function QLThumbnailRequestGetTypeID
@@ -169,7 +169,7 @@ QL_EXPORT void QLThumbnailRequestSetImageAtURL(QLThumbnailRequestRef thumbnail, 
  *      @param contentTypeUTI The contentTypeUTI for the preview representation.
  *      @param previewProperties Additional properties for the preview response.
  *      @param properties Currently unused.
- *      @discussion Currently supported UTIs are: none. This call only works if your gemeratpr is set to be run in the main thread
+ *      @discussion Currently supported UTIs are: none. This call only works if your generator is set to be run in the main thread
  */
 QL_EXPORT void QLThumbnailRequestSetThumbnailWithDataRepresentation(QLThumbnailRequestRef thumbnail, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
@@ -180,7 +180,7 @@ QL_EXPORT void QLThumbnailRequestSetThumbnailWithDataRepresentation(QLThumbnailR
  *      @param url The url to the preview response.
  *      @param contentTypeUTI The contentTypeUTI for the preview representation.
  *      @param properties Additional properties for the preview response.
- *      @discussion Currently supported UTIs are: none. This call only works if your gemeratpr is set to be run in the main thread
+ *      @discussion Currently supported UTIs are: none. This call only works if your generator is set to be run in the main thread
  */
 QL_EXPORT void QLThumbnailRequestSetThumbnailWithURLRepresentation(QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
@@ -218,7 +218,7 @@ QL_EXPORT const CFStringRef kQLThumbnailPropertyBaseBundlePathKey AVAILABLE_MAC_
  *      @typedef QLPreviewRequestRef
  *      This is the type of a reference to Preview requests.
  */
-typedef struct __QLPreviewRequest *QLPreviewRequestRef;
+typedef struct CF_BRIDGED_TYPE(id) __QLPreviewRequest *QLPreviewRequestRef;
 
 /*!
  *      @function QLPreviewRequestGetTypeID

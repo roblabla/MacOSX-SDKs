@@ -203,7 +203,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		processor_set_flavor_t flavor;
 		mach_msg_type_number_t info_outCnt;
-	} __Request__processor_set_statistics_t;
+	} __Request__processor_set_statistics_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -213,7 +213,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__processor_set_destroy_t;
+	} __Request__processor_set_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -226,7 +226,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		int max_priority;
 		boolean_t change_threads;
-	} __Request__processor_set_max_priority_t;
+	} __Request__processor_set_max_priority_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -238,7 +238,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		int policy;
-	} __Request__processor_set_policy_enable_t;
+	} __Request__processor_set_policy_enable_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -251,7 +251,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		int policy;
 		boolean_t change_threads;
-	} __Request__processor_set_policy_disable_t;
+	} __Request__processor_set_policy_disable_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -261,7 +261,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__processor_set_tasks_t;
+	} __Request__processor_set_tasks_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -271,7 +271,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__processor_set_threads_t;
+	} __Request__processor_set_threads_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -286,7 +286,7 @@ __END_DECLS
 		mach_msg_type_number_t policy_infoCnt;
 		integer_t policy_info[5];
 		boolean_t change;
-	} __Request__processor_set_policy_control_t;
+	} __Request__processor_set_policy_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -296,7 +296,7 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__processor_set_stack_usage_t;
+	} __Request__processor_set_stack_usage_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -309,7 +309,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		int flavor;
 		mach_msg_type_number_t info_outCnt;
-	} __Request__processor_set_info_t;
+	} __Request__processor_set_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -346,7 +346,7 @@ union __RequestUnion__processor_set_subsystem {
 		kern_return_t RetCode;
 		mach_msg_type_number_t info_outCnt;
 		integer_t info_out[5];
-	} __Reply__processor_set_statistics_t;
+	} __Reply__processor_set_statistics_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -358,7 +358,7 @@ union __RequestUnion__processor_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_set_destroy_t;
+	} __Reply__processor_set_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -370,7 +370,7 @@ union __RequestUnion__processor_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_set_max_priority_t;
+	} __Reply__processor_set_max_priority_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -382,7 +382,7 @@ union __RequestUnion__processor_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_set_policy_enable_t;
+	} __Reply__processor_set_policy_enable_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -394,7 +394,7 @@ union __RequestUnion__processor_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_set_policy_disable_t;
+	} __Reply__processor_set_policy_disable_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -410,7 +410,7 @@ union __RequestUnion__processor_set_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t task_listCnt;
-	} __Reply__processor_set_tasks_t;
+	} __Reply__processor_set_tasks_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -426,7 +426,7 @@ union __RequestUnion__processor_set_subsystem {
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_msg_type_number_t thread_listCnt;
-	} __Reply__processor_set_threads_t;
+	} __Reply__processor_set_threads_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -438,7 +438,7 @@ union __RequestUnion__processor_set_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__processor_set_policy_control_t;
+	} __Reply__processor_set_policy_control_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -455,7 +455,7 @@ union __RequestUnion__processor_set_subsystem {
 		vm_size_t resident;
 		vm_size_t maxusage;
 		vm_offset_t maxstack;
-	} __Reply__processor_set_stack_usage_t;
+	} __Reply__processor_set_stack_usage_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -472,7 +472,7 @@ union __RequestUnion__processor_set_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t info_outCnt;
 		integer_t info_out[5];
-	} __Reply__processor_set_info_t;
+	} __Reply__processor_set_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif

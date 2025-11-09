@@ -208,7 +208,7 @@ protected:
     * This function is used to initialize state
     * within a newly created OSCollection object.
     */
-    virtual bool init();
+    virtual bool init() APPLE_KEXT_OVERRIDE;
 
 public:
 
@@ -454,3 +454,5 @@ public:
 };
 
 #endif /* !_OS_OSCOLLECTION_H */
+
+

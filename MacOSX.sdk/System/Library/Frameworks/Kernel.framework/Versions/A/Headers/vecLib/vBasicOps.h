@@ -3,11 +3,11 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-516.0
+     Version:    vecLib-563.3
  
-     Copyright:  � 1999-2015 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright (c) 1999-2015 by Apple Inc. All rights reserved.
  
-     Bugs?:      For bug reports, consult the following page on
+     Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
@@ -29,6 +29,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+#if !defined __has_feature
+    #define __has_feature(f)    0
+#endif
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull begin")
+#else
+    #define __nullable
+    #define __nonnull
+#endif
+
 
 #if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
 #if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
@@ -318,9 +330,14 @@ extern vUInt32
 vA128Shift(
   vUInt32   vA,
   vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
+#endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
 #endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
+
+
+#if __has_feature(assume_nonnull)
+    _Pragma("clang assume_nonnull end")
+#endif
 
 
 #ifdef __cplusplus

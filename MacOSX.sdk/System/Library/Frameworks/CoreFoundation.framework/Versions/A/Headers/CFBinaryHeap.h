@@ -1,5 +1,5 @@
 /*	CFBinaryHeap.h
-	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2015, Apple Inc. All rights reserved.
 */
 /*!
         @header CFBinaryHeap
@@ -77,7 +77,7 @@ typedef void (*CFBinaryHeapApplierFunction)(const void *val, void *context);
 	@typedef CFBinaryHeapRef
 	This is the type of a reference to CFBinaryHeaps.
 */
-typedef struct __CFBinaryHeap * CFBinaryHeapRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFBinaryHeap * CFBinaryHeapRef;
 
 /*!
 	@function CFBinaryHeapGetTypeID

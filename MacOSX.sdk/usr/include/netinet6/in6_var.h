@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -94,6 +94,7 @@
 #define	_NETINET6_IN6_VAR_H_
 #include <sys/appleapiopts.h>
 
+#include <netinet6/scope6_var.h>
 #include <sys/kern_event.h>
 #include <net/ethernet.h>
 
@@ -241,7 +242,6 @@ struct icmp6_ifstat {
 	u_quad_t ifs6_out_mlddone;
 };
 
-
 struct in6_ifreq {
 	char	ifr_name[IFNAMSIZ];
 	union {
@@ -255,7 +255,7 @@ struct in6_ifreq {
 		struct in6_addrlifetime ifru_lifetime;
 		struct in6_ifstat ifru_stat;
 		struct icmp6_ifstat ifru_icmp6stat;
-		u_int32_t ifru_scope_id[16];
+		u_int32_t ifru_scope_id[SCOPE6_ID_MAX];
 	} ifr_ifru;
 };
 

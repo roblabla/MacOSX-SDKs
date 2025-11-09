@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <IOBluetooth/IOBluetoothUserLib.h>
+#import <IOBluetooth/IOBluetoothUserLib.h>
 
 #ifdef	__cplusplus
 	extern "C" {

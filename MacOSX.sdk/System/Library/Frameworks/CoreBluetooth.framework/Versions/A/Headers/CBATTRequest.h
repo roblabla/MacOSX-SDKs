@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CBCentral, CBCharacteristic;
 
 /*!
@@ -64,6 +66,8 @@ CB_EXTERN_CLASS @interface CBATTRequest : NSObject
  *				For write requests, <i>value</i> will contain the data to be written.
  *
  */
-@property(readwrite, copy) NSData *value;
+@property(readwrite, copy, nullable) NSData *value;
 
 @end
+
+NS_ASSUME_NONNULL_END

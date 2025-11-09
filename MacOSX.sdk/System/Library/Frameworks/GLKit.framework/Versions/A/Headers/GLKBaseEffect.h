@@ -8,10 +8,9 @@
 #import <GLKit/GLKitBase.h>
 
 #if TARGET_OS_IPHONE
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/gltypes.h>
 #else // !TARGET_OS_IPHONE
-#import <OpenGL/gl3.h>
+#import <OpenGL/gltypes.h>
 #endif // !TARGET_OS_IPHONE
 
 #import <GLKit/GLKNamedEffect.h>
@@ -103,6 +102,9 @@
       glDrawArrays(GL_TRIANGLE_STRIP, 0, vertCt);
 */
 
+@class GLKEffectPropertyTexture;
+
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKBaseEffect : NSObject <GLKNamedEffect>
 {
@@ -142,22 +144,22 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 - (void) prepareToDraw;
 
 
-// Properties                                                                                           // Default Value
+// Properties                                                                                         // Default Value
 
-@property (nonatomic, assign)          GLboolean                           colorMaterialEnabled;        // GL_FALSE
-@property (nonatomic, assign)          GLboolean                           lightModelTwoSided;          // GL_FALSE
-@property (nonatomic, assign)          GLboolean                           useConstantColor;            // GL_TRUE
+@property (nonatomic, assign)         GLboolean                          colorMaterialEnabled;        // GL_FALSE
+@property (nonatomic, assign)         GLboolean                          lightModelTwoSided;          // GL_FALSE
+@property (nonatomic, assign)         GLboolean                          useConstantColor;            // GL_TRUE
 
-@property (nonatomic, readonly)        GLKEffectPropertyTransform          *transform;                  // Identity Matrices
-@property (nonatomic, readonly)        GLKEffectPropertyLight              *light0, *light1, *light2;   // Disabled
-@property (nonatomic, assign)          GLKLightingType                     lightingType;                // GLKLightingTypePerVertex
-@property (nonatomic, assign)          GLKVector4                          lightModelAmbientColor;      // { 0.2, 0.2, 0.2, 1.0 }
-@property (nonatomic, readonly)        GLKEffectPropertyMaterial           *material;                   // Default material state
-@property (nonatomic, readonly)        GLKEffectPropertyTexture            *texture2d0, *texture2d1;    // Disabled
-@property (nonatomic, copy)            NSArray                             *textureOrder;               // texture2d0, texture2d1
-@property (nonatomic, assign)          GLKVector4                          constantColor;               // { 1.0, 1.0, 1.0, 1.0 }
-@property (nonatomic, readonly)        GLKEffectPropertyFog                *fog;                        // Disabled
-
-@property (nonatomic, copy)            NSString                            *label;                      // nil
+@property (nonatomic, readonly)       GLKEffectPropertyTransform         *transform;                  // Identity Matrices
+@property (nonatomic, readonly)       GLKEffectPropertyLight             *light0, *light1, *light2;   // Disabled
+@property (nonatomic, assign)         GLKLightingType                    lightingType;                // GLKLightingTypePerVertex
+@property (nonatomic, assign)         GLKVector4                         lightModelAmbientColor;      // { 0.2, 0.2, 0.2, 1.0 }
+@property (nonatomic, readonly)       GLKEffectPropertyMaterial          *material;                   // Default material state
+@property (nonatomic, readonly)       GLKEffectPropertyTexture           *texture2d0, *texture2d1;    // Disabled
+@property (nullable, nonatomic, copy) NSArray<GLKEffectPropertyTexture*> *textureOrder;               // texture2d0, texture2d1
+@property (nonatomic, assign)         GLKVector4                         constantColor;               // { 1.0, 1.0, 1.0, 1.0 }
+@property (nonatomic, readonly)       GLKEffectPropertyFog               *fog;                        // Disabled
+@property (nullable, nonatomic, copy) NSString                           *label;                      // @"GLKBaseEffect"
 
 @end
+NS_ASSUME_NONNULL_END

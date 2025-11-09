@@ -2,7 +2,7 @@
  *  CTLine.h
  *  CoreText
  *
- *  Copyright (c) 2003-2012, 2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2003-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -23,16 +23,14 @@
 #include <CoreGraphics/CGContext.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* --------------------------------------------------------------------------- */
 /* Line Types */
 /* --------------------------------------------------------------------------- */
 
-typedef const struct __CTLine * CTLineRef;
+typedef const struct CF_BRIDGED_TYPE(id) __CTLine * CTLineRef;
 
 
 /*!
@@ -76,7 +74,7 @@ typedef CF_OPTIONS(CFOptionFlags, CTLineBoundsOptions) {
     kCTLineBoundsUseHangingPunctuation      = 1 << 2,
     kCTLineBoundsUseGlyphPathBounds         = 1 << 3,
     kCTLineBoundsUseOpticalBounds           = 1 << 4,
-    kCTLineBoundsIncludeLanguageExtents CT_ENUM_AVAILABLE_IOS(8_0) = 1 << 5,
+    kCTLineBoundsIncludeLanguageExtents CT_ENUM_AVAILABLE(10_11, 8_0) = 1 << 5,
 };
 
 
@@ -129,15 +127,14 @@ CFTypeID CTLineGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
                 object, the line cannot be properly broken. However, for simple
                 things like text labels and other things, this is not an issue.
 
-    @param      string
-                The string which the line will be created for.
+    @param      attrString
+                The attributed string which the line will be created for.
 
-    @result     This function will return a reference to a CTLine object if the
-                call was successful. Otherwise, it will return NULL.
+    @result     This function will return a reference to a CTLine object.
 */
 
 CTLineRef CTLineCreateWithAttributedString(
-    CFAttributedStringRef string ) CT_AVAILABLE(10_5, 3_2);
+    CFAttributedStringRef attrString ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -169,11 +166,11 @@ CTLineRef CTLineCreateWithAttributedString(
                 NULL.
 */
 
-CTLineRef CTLineCreateTruncatedLine(
+CTLineRef __nullable CTLineCreateTruncatedLine(
     CTLineRef line,
     double width,
     CTLineTruncationType truncationType,
-    CTLineRef truncationToken ) CT_AVAILABLE(10_5, 3_2);
+    CTLineRef __nullable truncationToken ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -200,7 +197,7 @@ CTLineRef CTLineCreateTruncatedLine(
                 NULL.
 */
 
-CTLineRef CTLineCreateJustifiedLine(
+CTLineRef __nullable CTLineCreateJustifiedLine(
     CTLineRef line,
     CGFloat justificationFactor,
     double justificationWidth ) CT_AVAILABLE(10_5, 3_2);
@@ -342,9 +339,9 @@ void CTLineDraw(
 
 double CTLineGetTypographicBounds(
     CTLineRef line,
-    CGFloat* ascent,
-    CGFloat* descent,
-    CGFloat* leading ) CT_AVAILABLE(10_5, 3_2);
+    CGFloat * __nullable ascent,
+    CGFloat * __nullable descent,
+    CGFloat * __nullable leading ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -417,7 +414,7 @@ double CTLineGetTrailingWhitespaceWidth(
 
 CGRect CTLineGetImageBounds(
     CTLineRef line,
-    CGContextRef context ) CT_AVAILABLE(10_5, 3_2);
+    CGContextRef __nullable context ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -487,13 +484,30 @@ CFIndex CTLineGetStringIndexForPosition(
 CGFloat CTLineGetOffsetForStringIndex(
     CTLineRef line,
     CFIndex charIndex,
-    CGFloat* secondaryOffset ) CT_AVAILABLE(10_5, 3_2);
+    CGFloat * __nullable secondaryOffset ) CT_AVAILABLE(10_5, 3_2);
 
 
-#if defined(__cplusplus)
-}
-#endif
+#if defined(__BLOCKS__)
 
+/*!
+    @function   CTLineEnumerateCaretOffsets
+    @abstract   Enumerates caret offsets for characters in a line.
+
+    @discussion The provided block is invoked once for each logical caret edge in the line, in left-to-right visual order.
+
+    @param      block
+                The offset parameter is relative to the line origin. The leadingEdge parameter of this block refers to logical order.
+*/
+
+void CTLineEnumerateCaretOffsets(
+    CTLineRef line,
+    void (^block)(double offset, CFIndex charIndex, bool leadingEdge, bool* stop) ) CT_AVAILABLE(10_11, 9_0);
+
+#endif // defined(__BLOCKS__)
+
+
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

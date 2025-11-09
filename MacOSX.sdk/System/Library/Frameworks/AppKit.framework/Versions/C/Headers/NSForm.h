@@ -1,11 +1,13 @@
 /*
 	NSForm.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSMatrix.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSFormCell;
 
@@ -21,10 +23,10 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and cons
 - (void)setTextAlignment:(NSTextAlignment)mode;
 - (void)setTitleFont:(NSFont *)fontObj;
 - (void)setTextFont:(NSFont *)fontObj;
-- (id)cellAtIndex:(NSInteger)index;
+- (null_unspecified id)cellAtIndex:(NSInteger)index;
 - (void)drawCellAtIndex:(NSInteger)index;
 - (NSFormCell *)addEntry:(NSString *)title;
-- (NSFormCell *)insertEntry:(NSString *)title atIndex:(NSInteger)index;
+- (null_unspecified NSFormCell *)insertEntry:(NSString *)title atIndex:(NSInteger)index;
 - (void)removeEntryAtIndex:(NSInteger)index;
 - (NSInteger)indexOfCellWithTag:(NSInteger)aTag;
 - (void)selectTextAtIndex:(NSInteger)index;
@@ -42,3 +44,5 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and cons
 - (CGFloat)preferredTextFieldWidth NS_AVAILABLE_MAC(10_8);
 
 @end
+
+NS_ASSUME_NONNULL_END

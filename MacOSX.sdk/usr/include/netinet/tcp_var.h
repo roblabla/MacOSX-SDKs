@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -63,9 +63,11 @@
 
 #ifndef _NETINET_TCP_VAR_H_
 #define _NETINET_TCP_VAR_H_
+#include <sys/types.h>
 #include <sys/appleapiopts.h>
 #include <sys/queue.h>
 #include <netinet/in_pcb.h>
+#include <netinet/tcp.h>
 #include <netinet/tcp_timer.h>
 
 #if defined(__LP64__)
@@ -180,6 +182,9 @@ struct tcpcb {
 	u_int32_t t_badrxtwin;		/* window for retransmit recovery */
 };
 
+#define        tcps_ecn_setup  tcps_ecn_client_success
+#define        tcps_sent_cwr   tcps_ecn_recv_ece
+#define        tcps_sent_ece   tcps_ecn_sent_ece
 
 /*
  * TCP statistics.
@@ -337,17 +342,61 @@ struct	tcpstat {
 	u_int32_t	tcps_rto_after_pto;	/* RTO after a probe */
 	u_int32_t	tcps_tlp_recovery;	/* TLP induced fast recovery */
 	u_int32_t	tcps_tlp_recoverlastpkt; /* TLP recoverd last pkt */
-	u_int32_t	tcps_ecn_setup;		/* connection negotiated ECN */
-	u_int32_t	tcps_sent_cwr;		/* Sent CWR, ECE received */
-	u_int32_t	tcps_sent_ece;		/* Sent ECE notification */
+	u_int32_t	tcps_ecn_client_success; /* client-side connection negotiated ECN */
+	u_int32_t	tcps_ecn_recv_ece;	/* ECE received, sent CWR */
+	u_int32_t	tcps_ecn_sent_ece;	/* Sent ECE notification */
 	u_int32_t	tcps_detect_reordering; /* Detect pkt reordering */
 	u_int32_t	tcps_delay_recovery;	/* Delay fast recovery */
 	u_int32_t	tcps_avoid_rxmt;	/* Retransmission was avoided */
 	u_int32_t	tcps_unnecessary_rxmt;	/* Retransmission was not needed */
 	u_int32_t	tcps_nostretchack;	/* disabled stretch ack algorithm on a connection */
 	u_int32_t	tcps_rescue_rxmt;	/* SACK rescue retransmit */
-	u_int32_t	tcps_pto_in_recovery;	/* PTO during fast recovery */
-	u_int32_t	tcps_pmtudbh_reverted;	/* PMTU Blackhole detection, segement size reverted */
+	u_int32_t	tcps_pto_in_recovery;	/* rescue retransmit in fast recovery */
+	u_int32_t	tcps_pmtudbh_reverted;	/* PMTU Blackhole detection, segment size reverted */
+
+	/* DSACK related statistics */
+	u_int32_t	tcps_dsack_disable;	/* DSACK disabled due to n/w duplication */
+	u_int32_t	tcps_dsack_ackloss;	/* ignore DSACK due to ack loss */
+	u_int32_t	tcps_dsack_badrexmt;	/* DSACK based bad rexmt recovery */
+	u_int32_t	tcps_dsack_sent;	/* Sent DSACK notification */
+	u_int32_t	tcps_dsack_recvd;	/* Received a valid DSACK option */
+	u_int32_t	tcps_dsack_recvd_old;	/* Received an out of window DSACK option */
+
+	/* MPTCP Subflow selection stats */
+	u_int32_t	tcps_mp_sel_symtomsd;	/* By symptomsd */
+	u_int32_t	tcps_mp_sel_rtt;	/* By RTT comparison */
+	u_int32_t	tcps_mp_sel_rto;	/* By RTO comparison */
+	u_int32_t	tcps_mp_sel_peer;	/* By peer's output pattern */
+	u_int32_t	tcps_mp_num_probes;	/* Number of probes sent */
+	u_int32_t	tcps_mp_verdowngrade;	/* MPTCP version downgrade */
+	u_int32_t	tcps_drop_after_sleep;	/* drop after long AP sleep */
+	u_int32_t	tcps_probe_if;		/* probe packets after interface availability */
+	u_int32_t	tcps_probe_if_conflict; /* Can't send probe packets for interface */
+
+	u_int32_t	tcps_ecn_client_setup;	/* Attempted ECN setup from client side */
+	u_int32_t	tcps_ecn_server_setup;	/* Attempted ECN setup from server side */
+	u_int32_t	tcps_ecn_server_success; /* server-side connection negotiated ECN */
+	u_int32_t	tcps_ecn_lost_synack;	/* Lost SYN-ACK with ECN setup */
+	u_int32_t	tcps_ecn_lost_syn;	/* Lost SYN with ECN setup */
+	u_int32_t	tcps_ecn_not_supported;	/* Server did not support ECN setup */
+	u_int32_t	tcps_ecn_recv_ce;	/* Received CE from the network */
+	u_int32_t	tcps_ecn_conn_recv_ce;	/* Number of connections received CE atleast once */
+	u_int32_t	tcps_ecn_conn_recv_ece;	/* Number of connections received ECE atleast once */
+	u_int32_t	tcps_ecn_conn_plnoce;	/* Number of connections that received no CE and sufferred packet loss */
+	u_int32_t	tcps_ecn_conn_pl_ce;	/* Number of connections that received CE and sufferred packet loss */
+	u_int32_t	tcps_ecn_conn_nopl_ce;	/* Number of connections that received CE and sufferred no packet loss */
+
+	/* TFO-related statistics */
+	u_int32_t	tcps_tfo_syn_data_rcv;	/* Received a SYN+data with valid cookie */
+	u_int32_t	tcps_tfo_cookie_req_rcv;/* Received a TFO cookie-request */
+	u_int32_t	tcps_tfo_cookie_sent;	/* Offered a TFO-cookie to the client */
+	u_int32_t	tcps_tfo_cookie_invalid;/* Received an invalid TFO-cookie */
+	u_int32_t	tcps_tfo_cookie_req;	/* Cookie requested with the SYN */
+	u_int32_t	tcps_tfo_cookie_rcv;	/* Cookie received in a SYN/ACK */
+	u_int32_t	tcps_tfo_syn_data_sent;	/* SYN+data+cookie sent */
+	u_int32_t	tcps_tfo_syn_data_acked;/* SYN+data has been acknowledged */
+	u_int32_t	tcps_tfo_syn_loss;	/* SYN+TFO has been lost and we fallback */
+	u_int32_t	tcps_tfo_blackhole;	/* TFO got blackholed by a middlebox. */
 };
 
 struct tcpstat_local {

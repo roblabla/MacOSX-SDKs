@@ -1,12 +1,14 @@
 //
 //  SCNMaterial.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNShadable.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*
  Constants for lightingModel
@@ -91,6 +93,19 @@ typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
 	SCNTransparencyModeRGBZero = 1, 
 };
 
+/*! 
+ @enum SCNBlendMode
+ @abstract  Blend modes that SCNMaterial uses to compose with the framebuffer to produce blended colors.
+ */
+typedef NS_ENUM(NSInteger, SCNBlendMode) {
+    SCNBlendModeAlpha        = 0, // Blends the source and destination colors by adding the source multiplied by source alpha and the destination multiplied by one minus source alpha.
+    SCNBlendModeAdd          = 1, // Blends the source and destination colors by adding them up.
+    SCNBlendModeSubtract     = 2, // Blends the source and destination colors by subtracting the source from the destination.
+    SCNBlendModeMultiply     = 3, // Blends the source and destination colors by multiplying them.
+    SCNBlendModeScreen       = 4, // Blends the source and destination colors by multiplying one minus the source with the destination and adding the source.
+    SCNBlendModeReplace      = 5  // Replaces the destination with the source (ignores alpha).
+} NS_ENUM_AVAILABLE(10_11, 9_0);
+
 @class SCNMaterialProperty;
 @class SCNProgram;
 @protocol SCNProgramDelegate;
@@ -101,12 +116,8 @@ typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
  @abstract A SCNMaterial determines how a geometry is rendered. It encapsulates the colors and textures that define the appearance of 3d geometries.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNMaterial : NSObject <SCNAnimatable, SCNShadable, NSCopying, NSSecureCoding>
-{	
-@private
-	id _reserved;
-}
 
 /*! 
  @method material
@@ -118,7 +129,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @property name
  @abstract Determines the name of the receiver.
  */
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy, nullable) NSString *name;
 
 /*! 
  @property diffuse
@@ -171,6 +182,18 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @discussion When an image is set on the normal property the material is automatically lit per pixel. Setting a color has no effect.
  */
 @property(nonatomic, readonly) SCNMaterialProperty *normal;
+
+/*!
+ @property ambientOcclusion
+ @abstract The ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *ambientOcclusion NS_ENUM_AVAILABLE(10_11, 9_0);
+
+/*!
+ @property selfIllumination
+ @abstract The selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *selfIllumination NS_ENUM_AVAILABLE(10_11, 9_0);
 
 /*! 
  @property shininess
@@ -233,15 +256,21 @@ SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
  @property readsFromDepthBuffer
  @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
  */
-@property(nonatomic) BOOL readsFromDepthBuffer SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic) BOOL readsFromDepthBuffer NS_AVAILABLE(10_9, 8_0);
 
 /*!
  @property fresnelExponent
  @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable.
  @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
  */
-@property(nonatomic) CGFloat fresnelExponent SCENEKIT_AVAILABLE(10_9, 8_0);
+@property(nonatomic) CGFloat fresnelExponent NS_AVAILABLE(10_9, 8_0);
 
+/*!
+ @property blendMode
+ @abstract Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
+ */
+@property(nonatomic) SCNBlendMode blendMode NS_AVAILABLE(10_11, 9_0);
 
 @end
-
+    
+NS_ASSUME_NONNULL_END

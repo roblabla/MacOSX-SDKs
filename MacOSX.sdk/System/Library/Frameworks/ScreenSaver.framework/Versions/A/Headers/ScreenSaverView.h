@@ -24,23 +24,22 @@
 + (NSBackingStoreType)backingStoreType;
 + (BOOL)performGammaFade;
 
-- (id)initWithFrame:(NSRect)frame;
-- (id)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview;
+- (nullable instancetype)initWithFrame:(NSRect)frame;
+- (nullable instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview NS_DESIGNATED_INITIALIZER;
 
-- (NSTimeInterval)animationTimeInterval;
-- (void)setAnimationTimeInterval:(NSTimeInterval)timeInterval;
+@property (NS_NONATOMIC_IOSONLY) NSTimeInterval animationTimeInterval;
 
 - (void)startAnimation;
 - (void)stopAnimation;
-- (BOOL)isAnimating;
+@property (NS_NONATOMIC_IOSONLY, getter=isAnimating, readonly) BOOL animating;
 
 - (void)drawRect:(NSRect)rect;
 - (void)animateOneFrame;
 
 - (BOOL)hasConfigureSheet;
-- (NSWindow*)configureSheet;
+- (nullable NSWindow*)configureSheet;
 
-- (BOOL)isPreview;
+@property (NS_NONATOMIC_IOSONLY, getter=isPreview, readonly) BOOL preview;
 
 @end
 

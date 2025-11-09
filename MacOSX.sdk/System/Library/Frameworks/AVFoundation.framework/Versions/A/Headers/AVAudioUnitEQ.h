@@ -2,10 +2,12 @@
     File:		AVAudioUnitEQ.h
     Framework:	AVFoundation
  
-    Copyright (c) 2014 Apple Inc. All Rights Reserved.
+    Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
 #import <AVFoundation/AVAudioUnitEffect.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*! @enum AVAudioUnitEQFilterType
     @abstract Filter types available to use with AVAudioUnitEQ.
@@ -146,7 +148,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     @discussion
         The number of elements in the array is equal to the number of bands.
 */
-@property (nonatomic, readonly) NSArray *bands;
+@property (nonatomic, readonly) NSArray<AVAudioUnitEQFilterParameters *> *bands;
 
 /*! @property globalGain
     @abstract Overall gain adjustment applied to the signal.
@@ -158,3 +160,5 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic) float globalGain;
 
 @end
+
+NS_ASSUME_NONNULL_END

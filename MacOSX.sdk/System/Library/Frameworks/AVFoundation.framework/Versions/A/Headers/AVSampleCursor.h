@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2014 Apple Inc. All rights reserved.
+	Copyright 2014-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -13,6 +13,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMSampleBuffer.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma pack(push)
 #pragma pack()
@@ -31,8 +33,10 @@
 
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface AVSampleCursor : NSObject <NSCopying> {
+@private
 	AVSampleCursorInternal	*_sampleCursor;
 }
+AV_INIT_UNAVAILABLE
 
 /*!
 	@method			stepInDecodeOrderByCount:
@@ -61,7 +65,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 					If the beginning or the end of the sample sequence was reached before the requested deltaDecodeTime was traversed, the BOOL value at the address specified by outWasPinned will be set to YES. May be NULL if this information isn't desired.
 	@result			The amount of time the cursor was moved along the decode timeline. Because sample cursors snap to sample boundaries when stepped, this value may not be equal to deltaDecodeTime even if the cursor was not pinned.
 */
-- (CMTime)stepByDecodeTime:(CMTime)deltaDecodeTime wasPinned:(BOOL *)outWasPinned;
+- (CMTime)stepByDecodeTime:(CMTime)deltaDecodeTime wasPinned:(nullable BOOL *)outWasPinned;
 
 /*!
 	@method			stepByPresentationTime:wasPinned:
@@ -72,7 +76,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 					If the beginning or the end of the sample sequence was reached before the requested deltaPresentationTime was traversed, the BOOL value at the address specified by outWasPinned will be set to YES. May be NULL if this information isn't desired.
 	@result			The amount of time the cursor was moved along the presentation timeline. Because sample cursors snap to sample boundaries when stepped, this value may not be equal to deltaPresentationTime even if the cursor was not pinned.
 */
-- (CMTime)stepByPresentationTime:(CMTime)deltaPresentationTime wasPinned:(BOOL *)outWasPinned;
+- (CMTime)stepByPresentationTime:(CMTime)deltaPresentationTime wasPinned:(nullable BOOL *)outWasPinned;
 
 @end
 
@@ -192,6 +196,24 @@ typedef struct {
 */
 @property (nonatomic, readonly) AVSampleCursorDependencyInfo currentSampleDependencyInfo;
 
+/*!
+	@property		samplesRequiredForDecoderRefresh
+	@abstract		Count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information.
+	@discussion		Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded.
+
+	In order to position a sample cursor at the first sample that the decoder requires for a full refresh, you can use code like the following:
+	
+	
+			NSInteger samplesPriorToCurrentSampleToFeedToDecoder = [mySampleCursor samplesRequiredForDecoderRefresh];
+			AVSampleCursor *cursorForObtainingRefreshSamples = [mySampleCursor copy];
+			[cursorForObtainingRefreshSamples stepInDecodeOrderByCount: -samplesPriorToCurrentSampleToFeedToDecoder ];
+			
+			// cursorForObtainingRefreshSamples is now positioned at the first sample that must be provided to the decoder
+			// in order to decode the sample at the position of mySampleCursor in full
+			
+*/
+@property (nonatomic, readonly) NSInteger samplesRequiredForDecoderRefresh NS_AVAILABLE_MAC(10_11);
+
 @end
 
 
@@ -267,4 +289,7 @@ typedef struct {
 
 #pragma pack(pop)
 
+NS_ASSUME_NONNULL_END
+
 #endif // !TARGET_OS_IPHONE
+

@@ -10,7 +10,9 @@
 #import <MapKit/MKTypes.h>
 #import <MapKit/MKMapView.h>
 
-MK_CLASS_AVAILABLE(10_9, 7_0)
+NS_ASSUME_NONNULL_BEGIN
+
+MK_CLASS_AVAILABLE(10_9, 7_0) __WATCHOS_PROHIBITED
 @interface MKMapSnapshotOptions : NSObject <NSCopying>
 
 @property (nonatomic, copy) MKMapCamera *camera;
@@ -34,3 +36,5 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,18 +1,18 @@
-/*
-     File:       AudioToolbox/ExtendedAudioFile.h
+/*!
+	@file		ExtendedAudioFile.h
+	@framework	AudioToolbox.framework
+	@copyright	(c) 2004-2015 by Apple, Inc., all rights reserved.
+	@abstract	API's to support reading and writing files in encoded audio formats.
 
-     Contains:   API for reading/writing AudioFiles via an AudioConverter
+	@discussion
 
-     Copyright:  (c) 1985-2008 by Apple, Inc., all rights reserved.
-
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
-
-                        http://developer.apple.com/bugreporter/
-
+				The ExtendedAudioFile provides high-level audio file access, building
+				on top of the AudioFile and AudioConverter API sets. It provides a single
+				unified interface to reading and writing both encoded and unencoded files.
 */
-#ifndef __ExtendedAudioFile_h__
-#define __ExtendedAudioFile_h__
+
+#ifndef AudioToolbox_ExtendedAudioFile_h
+#define AudioToolbox_ExtendedAudioFile_h
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
@@ -27,15 +27,7 @@
 extern "C" {
 #endif
 
-/*!
-	@header		ExtendedAudioFile.h
-	
-	@abstract	ExtendedAudioFile APIs.
-	
-	The ExtendedAudioFile provides high-level audio file access, building
-	on top of the AudioFile and AudioConverter API sets. It provides a single
-	unified interface to reading and writing both encoded and unencoded files.
-*/
+CF_ASSUME_NONNULL_BEGIN
 
 //==================================================================================================
 //	Types
@@ -50,6 +42,7 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 //==================================================================================================
 //	Properties
 
+typedef UInt32						ExtAudioFilePropertyID;
 /*!
     @enum           ExtAudioFilePropertyID
     @constant       kExtAudioFileProperty_FileDataFormat
@@ -94,7 +87,7 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 	@constant		kExtAudioFileProperty_AudioConverter
 						AudioConverterRef. The underlying AudioConverterRef, if any. Read-only.
 						
-						N.B. If you alter any properties of the AudioConverterRef, for example,
+						Note: If you alter any properties of the AudioConverterRef, for example,
 						an encoder's bit rate, you must set the kExtAudioFileProperty_ConverterConfig
 						property on the ExtAudioFileRef afterwards. A NULL configuration is 
 						sufficient. This will ensure that the output file's data format is consistent
@@ -105,7 +98,6 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 							err = ExtAudioFileSetProperty(myExtAF, kExtAudioFileProperty_ConverterConfig, 
 							  sizeof(config), &config);
 						</pre>
-						
 	@constant		kExtAudioFileProperty_AudioFile
 						The underlying AudioFileID. Read-only.
 	@constant		kExtAudioFileProperty_FileMaxPacketSize
@@ -135,30 +127,37 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 						subsequently set the kExtAudioFileProperty_IOBufferSizeBytes property. Note
 						that a pointer to a pointer should be passed to ExtAudioFileSetProperty.
 	@constant		kExtAudioFileProperty_PacketTable
-						AudioFilePacketTableInfo
-						This can be used to both override the priming and remainder information in an audio file and
-						to retrieve the current priming and remainder frames information for a given ExtAudioFile object. 
-						If the underlying file type does not provide packet table info, the Get call will return an error.
+						This AudioFilePacketTableInfo can be used to both override the priming and
+						remainder information in an audio file and to retrieve the current priming
+						and remainder frames information for a given ExtAudioFile object. If the
+						underlying file type does not provide packet table info, the Get call will
+						return an error.
 						
-						If you set this, then you can override the setting for these values in the file to ones that you want to use.
-						When setting this, you can use a value of -1 for either the priming or remainder frames to use the value that
-						is currently stored in the file. If you set this to a non-negative number (or zero) then that value will override
-						whatever value is stored in the file that you are reading.
-						Retrieving the value of the property will always retrieve the value the ExtAudioFile object is using (whether this
-						is derived from the file, or from your override).
-						If you want to determine what the value is in the file, you should use the AudioFile property:
+						If you set this, then you can override the setting for these values in the
+						file to ones that you want to use. When setting this, you can use a value of
+						-1 for either the priming or remainder frames to use the value that is
+						currently stored in the file. If you set this to a non-negative number (or
+						zero) then that value will override whatever value is stored in the file
+						that you are reading. Retrieving the value of the property will always
+						retrieve the value the ExtAudioFile object is using (whether this is derived
+						from the file, or from your override). If you want to determine what the
+						value is in the file, you should use the AudioFile property:
 						kAudioFilePropertyPacketTableInfo
-						
-						When the property is set, only the remaining and priming values are used. You should set the mNumberValidFrames to zero.
-						
-						For example, a file encoded using AAC may have 2112 samples of priming at the start of the file
-						and a remainder of 823 samples at the end. When ExtAudioFile returns decoded samples to you,
-						it will trim out the <priming num samples> at the start of the file, and the <remainder num samples> at the end.
-						It will get these numbers initially from the file. A common use case for overriding this would be to set the priming
-						and remainder samples to 0, so in this example you would retrieve an additional 2112 samples of silence from the start of the file
-						and 823 samples of silence at the end of the file (silence, because the encoders use silence to pad out these priming and remainder samples)
+
+						When the property is set, only the remaining and priming values are used.
+						You should set the mNumberValidFrames to zero.
+
+						For example, a file encoded using AAC may have 2112 samples of priming at
+						the start of the file and a remainder of 823 samples at the end. When
+						ExtAudioFile returns decoded samples to you, it will trim `mPrimingFrames`
+						at the start of the file, and `mRemainderFrames` at the end. It will get
+						these numbers initially from the file. A common use case for overriding this
+						would be to set the priming and remainder samples to 0, so in this example
+						you would retrieve an additional 2112 samples of silence from the start of
+						the file and 823 samples of silence at the end of the file (silence, because
+						the encoders use silence to pad out these priming and remainder samples)
 */
-enum { // ExtAudioFilePropertyID
+CF_ENUM(ExtAudioFilePropertyID) {
 	kExtAudioFileProperty_FileDataFormat		= 'ffmt',   // AudioStreamBasicDescription
 	kExtAudioFileProperty_FileChannelLayout		= 'fclo',   // AudioChannelLayout
 	kExtAudioFileProperty_ClientDataFormat		= 'cfmt',   // AudioStreamBasicDescription
@@ -178,26 +177,8 @@ enum { // ExtAudioFilePropertyID
 	kExtAudioFileProperty_IOBuffer				= 'iobf',	// void *
 	kExtAudioFileProperty_PacketTable			= 'xpti'	// AudioFilePacketTableInfo
 };
-typedef UInt32						ExtAudioFilePropertyID;
 
-/*!
-    @enum           ExtAudioFile errors
-    @constant       kExtAudioFileError_CodecUnavailableInputConsumed
-						iOS only. Returned when ExtAudioFileWrite was interrupted. You must stop calling
-						ExtAudioFileWrite. If the underlying audio converter can resume after an
-						interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
-						wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
-						before resuming. In this situation, the buffer you provided to ExtAudioFileWrite was successfully
-						consumed and you may proceed to the next buffer.
-    @constant       kExtAudioFileError_CodecUnavailableInputNotConsumed
-						iOS only. Returned when ExtAudioFileWrite was interrupted. You must stop calling
-						ExtAudioFileWrite. If the underlying audio converter can resume after an
-						interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
-						wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
-						before resuming. In this situation, the buffer you provided to ExtAudioFileWrite was not
-						successfully consumed and you must try to write it again.
-*/
-enum {
+CF_ENUM(OSStatus) {
 	kExtAudioFileError_InvalidProperty			= -66561,
 	kExtAudioFileError_InvalidPropertySize		= -66562,
 	kExtAudioFileError_NonPCMClientFormat		= -66563,
@@ -211,6 +192,7 @@ enum {
 };
 
 
+
 //==================================================================================================
 //	Creation/Destruction
 /*!
@@ -221,7 +203,7 @@ enum {
 	@function   ExtAudioFileOpenURL
 	
 	@abstract   Opens an audio file specified by a CFURLRef.
-	@param		inURLRef
+	@param		inURL
 					The audio file to read.
 	@param		outExtAudioFile
 					On exit, a newly-allocated ExtAudioFileRef.
@@ -231,8 +213,8 @@ enum {
 				Allocates a new ExtAudioFileRef, for reading an existing audio file.
 */
 extern OSStatus
-ExtAudioFileOpenURL(		CFURLRef					inURL,
-							ExtAudioFileRef *			outExtAudioFile)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_1);
+ExtAudioFileOpenURL(		CFURLRef 					inURL,
+							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_1);
 
 /*!
 	@function   ExtAudioFileWrapAudioFileID
@@ -256,7 +238,7 @@ ExtAudioFileOpenURL(		CFURLRef					inURL,
 extern OSStatus
 ExtAudioFileWrapAudioFileID(AudioFileID					inFileID,
 							Boolean						inForWriting,
-							ExtAudioFileRef *			outExtAudioFile)	
+							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)
 																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
@@ -292,9 +274,9 @@ extern OSStatus
 ExtAudioFileCreateWithURL(	CFURLRef							inURL,
 							AudioFileTypeID						inFileType,
 							const AudioStreamBasicDescription * inStreamDesc,
-							const AudioChannelLayout *			inChannelLayout,
+							const AudioChannelLayout * __nullable inChannelLayout,
                     		UInt32								inFlags,
-							ExtAudioFileRef *					outExtAudioFile)						
+							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)
 																			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_1);
 																			
 #if !TARGET_OS_IPHONE && !CA_NO_CORE_SERVICES
@@ -315,12 +297,12 @@ ExtAudioFileCreateWithURL(	CFURLRef							inURL,
 */
 extern OSStatus
 ExtAudioFileOpen(			const struct FSRef *		inFSRef,
-							ExtAudioFileRef *			outExtAudioFile)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 
 /*!
 	@function   ExtAudioFileCreateNew
 	
-	@abstract   Create a new audio file.
+	@abstract   Creates a new audio file.
 	@param		inParentDir
 					The directory in which to create the new file.
 	@param		inFileName
@@ -338,8 +320,6 @@ ExtAudioFileOpen(			const struct FSRef *		inFSRef,
 	@result		An OSStatus error code.
 
 	@discussion
-				Creates a new audio file.
-				
 				If the file to be created is in an encoded format, it is permissible for the
 				sample rate in inStreamDesc to be 0, since in all cases, the file's encoding
 				AudioConverter may produce audio at a different sample rate than the source. The
@@ -352,8 +332,8 @@ ExtAudioFileCreateNew(		const struct FSRef *				inParentDir,
 							CFStringRef							inFileName,
 							AudioFileTypeID						inFileType,
 							const AudioStreamBasicDescription * inStreamDesc,
-							const AudioChannelLayout *			inChannelLayout,
-							ExtAudioFileRef *					outExtAudioFile)
+							const AudioChannelLayout * __nullable inChannelLayout,
+							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)
 																			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 #endif
 
@@ -467,7 +447,7 @@ ExtAudioFileWrite(			ExtAudioFileRef			inExtAudioFile,
 extern OSStatus
 ExtAudioFileWriteAsync(		ExtAudioFileRef			inExtAudioFile,
 							UInt32					inNumberFrames,
-							const AudioBufferList * ioData)					
+							const AudioBufferList * __nullable ioData)
 																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
@@ -539,8 +519,8 @@ ExtAudioFileTell(			ExtAudioFileRef			inExtAudioFile,
 extern OSStatus
 ExtAudioFileGetPropertyInfo(ExtAudioFileRef			inExtAudioFile,
 							ExtAudioFilePropertyID	inPropertyID,
-							UInt32 *				outSize,
-							Boolean *				outWritable)			
+							UInt32 * __nullable		outSize,
+							Boolean * __nullable	outWritable)
 																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
@@ -564,7 +544,7 @@ extern OSStatus
 ExtAudioFileGetProperty(	ExtAudioFileRef			inExtAudioFile,
 							ExtAudioFilePropertyID	inPropertyID,
 							UInt32 *				ioPropertyDataSize,
-							void *					outPropertyData)		
+							void *					outPropertyData)
 																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
 /*!
@@ -590,10 +570,10 @@ ExtAudioFileSetProperty(	ExtAudioFileRef			inExtAudioFile,
 							const void *			inPropertyData)			
 																			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_1);
 
-
+CF_ASSUME_NONNULL_END
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // __ExtendedAudioFile_h__
+#endif // AudioToolbox_ExtendedAudioFile_h

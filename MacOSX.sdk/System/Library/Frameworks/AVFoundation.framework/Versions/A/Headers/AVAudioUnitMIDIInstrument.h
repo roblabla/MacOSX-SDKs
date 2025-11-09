@@ -2,10 +2,22 @@
 	File:		AVAudioUnitMIDIInstrument.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
 #import <AVFoundation/AVAudioUnit.h>
+#import <AVFoundation/AVAudioMixing.h>
+
+#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 101100
+	#define AVAudioUnitMIDIInstrument_MixingConformance <AVAudioMixing>
+#elif defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
+	#define AVAudioUnitMIDIInstrument_MixingConformance <AVAudioMixing>
+#else
+	#define AVAudioUnitMIDIInstrument_MixingConformance
+#endif
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class AVAudioUnitMIDIInstrument
@@ -15,7 +27,7 @@
     that processes realtime input (live) and has general concept of music events i.e. notes.
  */
 NS_CLASS_AVAILABLE(10_10, 8_0)
-@interface AVAudioUnitMIDIInstrument : AVAudioUnit
+@interface AVAudioUnitMIDIInstrument : AVAudioUnit AVAudioUnitMIDIInstrument_MixingConformance
 
 /*! @method initWithAudioComponentDescription:
  @abstract initialize the node with the component description
@@ -25,7 +37,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (instancetype)initWithAudioComponentDescription:(AudioComponentDescription)description;
 
-/*! @method startNote:withVelocity:onChannel
+/*! @method startNote:withVelocity:onChannel:
  @abstract sends a MIDI Note On event to the instrument
  @param note
     the note number (key) to play.
@@ -38,7 +50,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)startNote:(uint8_t)note withVelocity:(uint8_t)velocity onChannel:(uint8_t)channel;
 
-/*! @method stopNote:onChannel
+/*! @method stopNote:onChannel:
  @abstract sends a MIDI Note Off event to the instrument
  @param note
     the note number (key) to stop
@@ -49,7 +61,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)stopNote:(uint8_t)note onChannel:(uint8_t)channel;
 
-/*! @method sendController:withValue:onChannel
+/*! @method sendController:withValue:onChannel:
  @abstract send a MIDI controller event to the instrument.
  @param controller
     a standard MIDI controller number. 
@@ -63,7 +75,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)sendController:(uint8_t)controller withValue:(uint8_t)value onChannel:(uint8_t)channel;
 
-/*! @method sendPitchBend:onChannel
+/*! @method sendPitchBend:onChannel:
  @abstract sends MIDI Pitch Bend event to the instrument.
  @param pitchbend
     value of the pitchbend
@@ -74,7 +86,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)sendPitchBend:(uint16_t)pitchbend onChannel:(uint8_t)channel;
 
-/*! @method sendPressure:onChannel
+/*! @method sendPressure:onChannel:
  @abstract sends MIDI channel pressure event to the instrument.
  @param pressure 
     value of the pressure.
@@ -85,7 +97,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)sendPressure:(uint8_t)pressure onChannel:(uint8_t)channel;
 
-/*! @method sendPressureForKey:withValue:onChannel
+/*! @method sendPressureForKey:withValue:onChannel:
  @abstract sends MIDI Polyphonic key pressure event to the instrument
  @param key
     the key (note) number to which the pressure event applies
@@ -99,7 +111,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)sendPressureForKey:(uint8_t)key withValue:(uint8_t)value onChannel:(uint8_t)channel;
 
-/*! @method sendProgramChange:onChannel
+/*! @method sendProgramChange:onChannel:
  @abstract sends MIDI Program Change event to the instrument
  @param program
     the program number.
@@ -112,7 +124,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)sendProgramChange:(uint8_t)program onChannel:(uint8_t)channel;
 
-/*! @method sendProgramChange:bankUSB:bankLSB:onChannel
+/*! @method sendProgramChange:bankMSB:bankLSB:onChannel:
  @abstract sends a MIDI Program Change and Bank Select events to the instrument
  @param program
     specifies the program (preset) number within the bank to load.
@@ -130,7 +142,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)sendProgramChange:(uint8_t)program bankMSB:(uint8_t)bankMSB bankLSB:(uint8_t)bankLSB onChannel:(uint8_t)channel;
 
-/*! @method sendMIDIEvent:data1:data2
+/*! @method sendMIDIEvent:data1:data2:
  @abstract sends a MIDI event which contains two data bytes to the instrument.
  @param midiStatus
     the STATUS value of the MIDI event
@@ -141,7 +153,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
   */
 - (void)sendMIDIEvent:(uint8_t)midiStatus data1:(uint8_t)data1 data2:(uint8_t)data2;
 
-/*! @method sendMIDIEvent:data1
+/*! @method sendMIDIEvent:data1:
  @abstract sends a MIDI event which contains one data byte to the instrument.
  @param midiStatus
     the STATUS value of the MIDI event
@@ -158,5 +170,6 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (void)sendMIDISysExEvent:(NSData *)midiData;
 
-
 @end
+
+NS_ASSUME_NONNULL_END

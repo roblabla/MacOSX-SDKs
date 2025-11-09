@@ -1,10 +1,11 @@
 /*
 	NSWindowRestoration.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
  */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSDocument.h>
 #import <AppKit/NSDocumentController.h>
@@ -14,6 +15,8 @@
 /* NSWindowRestoration is the mechanism by which Cocoa apps can persist their user interface state, such as window frames, and integrate with the machinery of the rest of the system. */
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol NSWindowRestoration <NSObject>
 /* The following message is sent to request that a window be restored.  If the receiver knows how to restore the identified window, it should invoke the completion handler with the window, possibly creating it.  It is acceptable to invoke the completion handler with a pre-existing window, though you should not pass the same window to more than one completion handler.  If the receiver cannot restore the identified window (for example, the window referenced a document that has been deleted), it should invoke the completion handler with a nil window.  In Mac OS X 10.7, the error parameter is ignored.
  
@@ -22,7 +25,7 @@
  Note that the receiver may invoke the completion handler before or after the method returns, and on any queue.  If you plan to invoke the completion handler after the method returns, you must copy the completion handler via the -copy method, and -release it after you invoke it.  It is not necessary or recommended for implementations of this method to order restored windows onscreen (for example, the window may have been minimized, in which case it will not be ordered onscreen).
  
  */
-+ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler NS_AVAILABLE_MAC(10_7);
++ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
 @end
 
 /* NSDocumentController implements the NSWindowRestoration protocol.  It is set as the restoration class for document windows.  You may subclass it and override the restoreWindowWithIdentifier:state:completionHandler: method to control how documents are restored. */
@@ -37,7 +40,7 @@
  
  Unlike the class-level counterpart, this method returns BOOL.  A YES return means that the window is recognized and that the completion handler will be called (or has already been called).  A NO return means that the window was not recognized and the completion handler will not be called.  If you override this and return YES, it is important that the completion handler be called, even if the window you pass to it is nil; otherwise the app will never finish restoring its state.
 */
-- (BOOL)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler NS_AVAILABLE_MAC(10_7);
+- (BOOL)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -54,7 +57,7 @@ APPKIT_EXTERN NSString * const NSApplicationDidFinishRestoringWindowsNotificatio
 
 /* Set and get the class that is responsible for restoring the window.  The default implementation of -[NSWindowController setDocument:] will set the restoration class of the window to the shared NSDocumentController's class.
  */
-@property (assign) Class<NSWindowRestoration> restorationClass NS_AVAILABLE_MAC(10_7);
+@property (nullable, assign) Class<NSWindowRestoration> restorationClass NS_AVAILABLE_MAC(10_7);
 
 /* Disable or enable snapshot restoration. While snapshot restoration is disabled, the window will not be snapshotted for restorable state. */
 - (void)disableSnapshotRestoration;
@@ -82,7 +85,7 @@ APPKIT_EXTERN NSString * const NSApplicationDidFinishRestoringWindowsNotificatio
 
 /* Returns a set of key paths, representing paths of properties that should be persistent.  The frameworks will observe these key paths via KVO and automatically persist their values as part of the persistent state, and restore them on relaunch.  The values of the key paths should implement keyed archiving.  The base implementation returns an empty array.
 */
-+ (NSArray *)restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
++ (NSArray<NSString *> *)restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -110,12 +113,14 @@ APPKIT_EXTERN NSString * const NSApplicationDidFinishRestoringWindowsNotificatio
 
 If your document has variable or optional windows, you may override this to create the requested window, and then call the completion handler with it.  This allows you to use the default document reopening behavior, but intervene at the point of creating the windows.  The parameters are the same as in the class method +restoreWindowWithIdentifier:state:completionHandler:. 
 */
-- (void)restoreDocumentWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)restoreDocumentWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
 
 /* NSDocument implements the NSRestorableState methods, even though it itself is not an NSResponder. */
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
 - (void)restoreStateWithCoder:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
 - (void)invalidateRestorableState NS_AVAILABLE_MAC(10_7);
-+ (NSArray *)restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
++ (NSArray<NSString *> *)restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
 
 @end
+
+NS_ASSUME_NONNULL_END

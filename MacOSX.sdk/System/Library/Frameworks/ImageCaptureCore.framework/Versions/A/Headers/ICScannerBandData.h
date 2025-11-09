@@ -86,7 +86,7 @@
  @abstract Returns the path to the color profile matching the banded data.
  
  */
-@property(readonly, retain)                 NSString*               colorSyncProfilePath;
+@property(readonly, retain, nullable)       NSString*               colorSyncProfilePath;
 
 /*!
  @property bytesPerRow
@@ -121,7 +121,7 @@
  @abstract The pointer to the data buffer object.
  
  */
-@property(readonly, retain)                 NSData*                 dataBuffer;
+@property(readonly, retain, nullable)       NSData*                 dataBuffer;
 
 @end
 

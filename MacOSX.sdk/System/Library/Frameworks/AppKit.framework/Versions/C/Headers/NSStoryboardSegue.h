@@ -1,11 +1,13 @@
 /*
         NSStoryboardSegue.h
         Application Kit
-        Copyright (c) 2013-2014, Apple Inc.
+        Copyright (c) 2013-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSStoryboardSegue : NSObject {
@@ -14,7 +16,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
     NSString *_identifier;
     id _sourceController;
     id _destinationController;
-    id _reserved;
+    void (^_prepareHandler)(void);
 }
 
 // Convenience constructor for returning a segue that performs a handler block in its -perform method.
@@ -24,7 +26,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (instancetype)initWithIdentifier:(NSString *)identifier source:(id)sourceController destination:(id)destinationController NS_DESIGNATED_INITIALIZER;
 
 /* NSStoryboardSegue instances have optional identifiers that can be assigned in Interface Builder. These identifiers can be used in overrides of -[NSViewController prepareForSegue:sender:] to differentiate segues. */
-@property (readonly, copy) NSString *identifier;
+@property (nullable, readonly, copy) NSString *identifier;
 
 /* Subclasses of NSStoryboardSegue can use this property to access the source view or window controller that is being segued away from. */
 @property (readonly, strong) id sourceController;
@@ -43,14 +45,16 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 /* Subclasses should override this to do any necessary work preparing for the destination ViewController or WindowController.
  */
-- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender NS_AVAILABLE_MAC(10_10);
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(nullable id)sender NS_AVAILABLE_MAC(10_10);
 
 /* Performs the identified Segue created from this WindowController. Throws exception if identifier is nil or not associated with the receiver.
  */
-- (void)performSegueWithIdentifier:(NSString *)identifier sender:(id)sender NS_AVAILABLE_MAC(10_10);
+- (void)performSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender NS_AVAILABLE_MAC(10_10);
 
 /* Invoked immediately prior to initiating a segue. Return NO to prevent the segue from firing. The default implementations in NSViewController and NSWindowController return YES. This method is invoked when -performSegueWithIdentifier:sender: is used.
  */
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender NS_AVAILABLE_MAC(10_10);
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender NS_AVAILABLE_MAC(10_10);
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -12,6 +12,8 @@
 #import <CoreBluetooth/CBCentralManagerConstants.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  @enum CBCentralManagerState
  *
@@ -61,7 +63,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *  @discussion The delegate object that will receive central events.
  *
  */
-@property(assign, nonatomic) id<CBCentralManagerDelegate> delegate;
+@property(assign, nonatomic, nullable) id<CBCentralManagerDelegate> delegate;
 
 /*!
  *  @property state
@@ -82,7 +84,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *                  If <i>nil</i>, the main queue will be used.
  *
  */
-- (id)initWithDelegate:(id<CBCentralManagerDelegate>)delegate queue:(dispatch_queue_t)queue;
+- (id)initWithDelegate:(nullable id<CBCentralManagerDelegate>)delegate queue:(nullable dispatch_queue_t)queue;
 
 /*!
  *  @method initWithDelegate:queue:options:
@@ -98,7 +100,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *	@seealso		CBCentralManagerOptionRestoreIdentifierKey
  *
  */
-- (id)initWithDelegate:(id<CBCentralManagerDelegate>)delegate queue:(dispatch_queue_t)queue options:(NSDictionary *)options NS_AVAILABLE(10_9, 7_0);
+- (id)initWithDelegate:(nullable id<CBCentralManagerDelegate>)delegate queue:(nullable dispatch_queue_t)queue options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0);
 
 /*!
  *  @method retrievePeripherals:
@@ -124,7 +126,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *	@return				A list of <code>CBPeripheral</code> objects.
  *
  */
-- (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers NS_AVAILABLE(10_9, 7_0);
+- (NSArray<CBPeripheral *> *)retrievePeripheralsWithIdentifiers:(NSArray<NSUUID *> *)identifiers NS_AVAILABLE(10_9, 7_0);
 
 /*!
  *  @method retrieveConnectedPeripherals
@@ -149,7 +151,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *	@return		A list of <code>CBPeripheral</code> objects.
  *
  */
-- (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDs NS_AVAILABLE(10_9, 7_0);
+- (NSArray<CBPeripheral *> *)retrieveConnectedPeripheralsWithServices:(NSArray<CBUUID *> *)serviceUUIDs NS_AVAILABLE(10_9, 7_0);
 
 /*!
  *  @method scanForPeripheralsWithServices:options:
@@ -169,7 +171,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *	@seealso			CBCentralManagerScanOptionSolicitedServiceUUIDsKey
  *
  */
-- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options;
+- (void)scanForPeripheralsWithServices:(nullable NSArray<CBUUID *> *)serviceUUIDs options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
  *  @method stopScan:
@@ -196,7 +198,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *  @seealso            CBConnectPeripheralOptionNotifyOnNotificationKey
  *
  */
-- (void)connectPeripheral:(CBPeripheral *)peripheral options:(NSDictionary *)options;
+- (void)connectPeripheral:(CBPeripheral *)peripheral options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
  *  @method cancelPeripheralConnection:
@@ -253,7 +255,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *  @discussion
  *
  */
-- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict;
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *, id> *)dict;
 
 /*!
  *  @method centralManager:didRetrievePeripherals:
@@ -265,7 +267,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *                      able to match to the provided UUID(s).
  *
  */
-- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals;
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray<CBPeripheral *> *)peripherals;
 
 /*!
  *  @method centralManager:didRetrieveConnectedPeripherals:
@@ -276,7 +278,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *  @discussion         This method returns the result of a {@link retrieveConnectedPeripherals} call.
  *
  */
-- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals;
+- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray<CBPeripheral *> *)peripherals;
 
 /*!
  *  @method centralManager:didDiscoverPeripheral:advertisementData:RSSI:
@@ -294,7 +296,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *  @seealso                    CBAdvertisementData.h
  *
  */
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *, id> *)advertisementData RSSI:(NSNumber *)RSSI;
 
 /*!
  *  @method centralManager:didConnectPeripheral:
@@ -318,7 +320,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *                      timeout, the failure of a connection is atypical and usually indicative of a transient issue.
  *
  */
-- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error;
 
 /*!
  *  @method centralManager:didDisconnectPeripheral:error:
@@ -332,6 +334,8 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *                      called, no more methods will be invoked on <i>peripheral</i>'s <code>CBPeripheralDelegate</code>.
  *
  */
-- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

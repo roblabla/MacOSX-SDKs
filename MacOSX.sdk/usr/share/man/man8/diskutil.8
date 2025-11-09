@@ -1,5 +1,5 @@
 .\"
-.\" Copyright (c) 1998-2014 Apple Inc. All rights reserved.
+.\" Copyright (c) 1998-2015 Apple Inc. All rights reserved.
 .\"
 .\" This file contains Original Code and/or Modifications of Original Code
 .\" as defined in and that are subject to the Apple Public Source License
@@ -16,7 +16,7 @@
 .\" Please see the License for the specific language governing rights and
 .\" limitations under the License.
 .\"
-.Dd 2 June 2014
+.Dd 6 July 2015
 .Os "Mac OS X"
 .Dt DISKUTIL 8
 .Pp
@@ -96,12 +96,16 @@ editing operation in which volumes were kept mounted.
 .\"             -- info --
 .It Sy info | information
 .Op Nm -plist
-.Ar device
+.Ar device |
+.Nm -all
 .br
 Get detailed information about a specific whole disk or partition.
 If
 .Sy -plist
 is specified, then a property list instead of the normal user-readable output will be emitted.
+If
+.Sy -all
+is specified, then all disks (whole disks and their partitions) are processed.
 .\"
 .\"             -- activity --
 .It Sy activity
@@ -300,14 +304,14 @@ Running as root is required.
 .It Sy verifyVolume Ar device
 .br
 Verify the file system data structures of a volume.  The appropriate fsck program is executed and
-the volume is left mounted or unmounted at it was before the command.
+the volume is left mounted or unmounted as it was before the command.
 Ownership of the disk to be verified is required.
 .\"
 .\"             -- repairVolume --
 .It Sy repairVolume Ar device
 .br
 Repair the file system data structures of a volume.  The appropriate fsck program is executed and
-the volume is left mounted or unmounted at it was before the command.
+the volume is left mounted or unmounted as it was before the command.
 Ownership of the affected disk is required.
 .\"
 .\"             -- verifyDisk --
@@ -327,24 +331,6 @@ The repairs further include, but are not limited to, the repair or creation of a
 the integrity of any Core Storage Physical Volume partitions,
 and the provisioning of space for boot loaders.
 Ownership of the affected disk is required; it must be a whole disk and must have a partition map.
-.\"
-.\"             -- verifyPermissions --
-.It Sy verifyPermissions
-.Op Nm -plist
-.Ar device
-.br
-Verify the permissions of a Mac OS X boot volume.  The data that guides the permissions
-verification is written during the installation process.
-Ownership of the disk to be verified is required.
-.\"
-.\"             -- repairPermissions --
-.It Sy repairPermissions
-.Op Nm -plist
-.Ar device
-.br
-Repair the permissions of a Mac OS X boot volume.  The data that guides the permissions
-repair is written during the installation process.
-Ownership of the affected disk is required.
 .\"
 .\"             -- eraseDisk --
 .It Sy eraseDisk Ar format Ar name 
@@ -366,11 +352,18 @@ Ownership of the affected disk is required.
 .Ar name
 .Ar device
 .br
-Erase an existing volume or write out a new empty file system if there was none.
+Write out a new empty file system volume (erasing any current file system volume) on an existing partition.
+The partition remains but its data is lost.
 .Ar Format
 is discussed below in the section for the
 .Sy partitionDisk
 verb.
+.Pp
+If you specify
+.Sy Free Space
+for
+.Ar format ,
+the partition itself is deleted (removed entirely) from the partition map instead of merely being erased.
 Ownership of the affected disk is required.
 .\"
 .\"             -- reformat --
@@ -525,22 +518,26 @@ parameter is also optional).  The triplets must be as follows:
 .Bl -bullet -offset indent
 .It
 .Ar Format
-names are of the form HFS+, MS-DOS, etc.; a list of formattable file systems (more precisely, personalities exported by
+names are of the form jhfs+, HFS+, MS-DOS, etc.; a list of formattable file systems (more precisely, specific file system personalities exported by
 the installed file system bundles)
 and common aliases is available from the
 .Sy listFilesystems
 verb.
+.Pp
 .Ar Format
 guides
 .Sy diskutil
-both in what partition type to set for the partitions (slices) as well as what file system structures to lay down therein,
+both in what partition type to set for the partitions (slices) as well as what file system structures to initialize therein,
 using the file system bundle's plist's FormatExecutable setting which usually points to the appropriate formatter program such as
-.Xr newfs_hfs 8
-or you can also specify a
+.Xr newfs_hfs 8 .
+.Pp
+You can specify a
 .Ar format
 of
 .Sy Free Space
-to skip an area of the disk.  Additionally, you can specify the partition (personality) type manually and directly with a
+to skip an area of the disk.
+.Pp
+You can specify the partition type manually and directly with a
 .Ar format
 of %<human-readable partition type>%
 such as
@@ -556,38 +553,56 @@ of
 .It
 .Ar Names
 are the initial volume names; they must conform to file system specific restrictions.
+.Pp
 If a name of
 .Sy %noformat%
 is specified, then the partition is left blank such that the partition space is carved out, the partition type is set
-according to the file system format name, the partition space is partially erased, but a file system structure
-is not laid down with any file system's formatter program (e.g.
+according to the file system format name or explicit type, the partition space is partially erased ("wiped"),
+but a file system structure
+is not initialized with any file system's formatter program (e.g.
 .Ns Xr newfs_hfs 8 ; this is useful for setting up partitions that will
 contain user-defined (not necessarily file system) data.
+.Pp
 For a triplet whose
 .Ar format
 is
 .Sy Free Space
 or a directly-specified partition type, its
 .Ar name
-is ignored but a dummy name must be present.
+is ignored but a dummy name must nevertheless be present.
 .It
 .Ar Sizes
 are floating point numbers followed by a letter or percent sign as described in the
 .Sy SIZES
-section at the end of this page (e.g. 165536000B, 55.3T, 678M, 75%, R).
+section at the end of this page (e.g. 165536000, 55.3T, 678M, 75%, R).
 .\" List-End-PartitionRequestTriplets
 .El
 .Pp
-The last partition may be lengthened to the end of the disk.
+In addition to explicitly-requested partitions, space (gaps) might be allocated to satisfy certain filesystems'
+position and length alignment requirements; space might be allocated for possible future booter partition
+insertion; and indeed, actual booter partitions might be implicitly created.
+.Pp
+In particular, there is a rule that unrecognized partitions 1GiB or larger automatically acquire booters.
+Thus, if you create an arbitrary partition with e.g.
+.Sy diskutil partitionDisk disk0 gpt %11112222-1111-2222-1111-111122221111% %noformat% 3gib jhfs+ Untitled r ,
+then a booter partition will also be created. You can always delete that booter with
+.Sy diskutil eraseVolume \&"Free Space\&" dummy disk0s3 .
+.Pp
+The last partition is usually automatically lengthened to the end of the partition map (disk).
 You can specify an exact size for your last partition by specifying it as the penultimate
 triplet and specifying an additional (last) triplet as
-.Sy "Free Space".
+.Sy Free Space .
+Or you can use the
+.Sy R
+(remainder) size specifier for one of your middle partitions while specifying an exact size for your last partition.
 .Pp
 Ownership of the affected disk is required.
 .\"
 .\"             -- resizeVolume --
 .It Sy resizeVolume Ar device [
 .Sy limits
+|
+.Sy mapsize
 |
 .Sy R
 |
@@ -597,16 +612,27 @@ Ownership of the affected disk is required.
 ]
 .br
 .Pp
-Non-destructively resize a volume. You may increase or decrease its size.
+Non-destructively resize a volume (partition); you may increase or decrease its size. Alternatively, takes no action and prints some info.
 .Pp
 A
 .Ar size
 of
 .Sy limits
+takes no action, but instead
 will print the range of valid values for the target partition, taking into account current file system and partition map conditions
 such as files in use and other (immovable) partitions following the target.
 .Pp
-You can grow a volume (back) to its maximum size possible, provided no new partitions have been created that are in the way, by specifying
+A
+.Ar size
+of
+.Sy mapsize
+takes no action, but instead
+will print the size of the encompassing whole-disk device, as well as the size of the entire partition map (all partitions less map
+overhead). The whole-disk device might be
+larger than the partition map if the whole-disk device has grown since the partition map was created. Growing a whole-disk device is
+possible with certain enterprise disk (RAID) systems.
+.Pp
+You can grow a volume (partition) (back) to its maximum size possible, provided no new partitions have been created that are in the way, by specifying
 .Sy R
 for the new volume size. You should use
 .Sy R
@@ -984,8 +1010,10 @@ partition and the encompassing scheme must be GPT.
 An LVG exports zero or more Logical Volume Families (LVFs). An LVF contains properties which govern and bind
 together all of its descendant Logical Volumes (LVs). These properties provide settings for Full Disk Encryption (FDE)
 (such as whether the LVG is encrypted, which users have access, etc) and other services.
+However, at the present time, for new LVF creation, only zero or one LVF per LVG is supported.
 .Pp
 A Logical Volume Family (LVF) exports one or more Logical Volumes (LVs).
+However, at the present time, only and exactly one LV per LVF is supported.
 .Pp
 A Logical Volume (LV) exports a dev node, upon which a file system (such as Journaled HFS+) resides.
 .Pp
@@ -1130,7 +1158,7 @@ logical volume group is destroyed, and the now-orphaned physical volumes are era
 .It Sy rename | renameLVG Ar lvgUUID | lvgName Ar newName
 .br
 Rename a CoreStorage logical volume group. Do not confuse this name with the LV name or the volume name of the
-fiesystem volume on the LV.
+file system volume on the LV.
 .\"
 .\"             -- coreStorage > createVolume --
 .It Sy createVolume | createLV Ar lvgUUID | lvgName Ar type Ar name Ar size
@@ -1168,7 +1196,7 @@ group. Any data on that logical volume will be lost.
 This operation will thus result in an increase in free space in the logical volume group.
 .Pp
 It is assumed that the logical volume is used as a backing store for a file system; therefore, an unmount attempt
-is made which must suceeed before the removal of the logical volume is done.
+is made which must succeed before the removal of the logical volume is done.
 .\"
 .\"             -- coreStorage > encryptVolume --
 .It Sy encryptVolume | encryptLV
@@ -1241,8 +1269,8 @@ or specify that a recovery keychain file be used, in the same manner as
 .br
 Unlock a logical volume and file system, causing it to be attached and mounted.
 .Pp
-Data is now accessible in plain form to the file system and applications;
-the on-physical-disk backing bytes remain in encrypted form.
+Data is then accessible in plain form to the file system and applications,
+while the on-physical-disk backing bytes remain in encrypted form.
 .Pp
 The locked state means that the CoreStorage driver has not been given authentication
 information (a passphrase) to interpret the encrypted bytes on disk and thus export a dev node.
@@ -1302,6 +1330,120 @@ or
 .Pp
 If you are supplying both the old and new passphrases via stdin, they must be separated with a newline character.
 .\"
+.\"             -- coreStorage > resizeVolume --
+.It Sy resizeVolume | resizeLV
+.Ar lvUUID | device
+.Ar size
+.br
+Resize a logical volume (LV). If you shrink an LV, more space becomes available in its logical volume group (LVG);
+if you grow an LV, less space becomes available. You can check the free space with
+.Sy diskutil
+.Sy coreStorage
+.Sy list.
+The file system volume which resides inside the LV is grown or shrunk as needed.
+.Pp
+You can specify a
+.Ar size
+of zero
+.Sy (0)
+to fill up all remaining space in the parent LVG with the given LV.
+.\"
+.\"             -- coreStorage > resizeDisk --
+.It Sy resizeDisk | resizePV
+.Ar pvUUID
+.Ar size
+.Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...
+.br
+Resize a physical volume (PV). If you shrink a PV, less space becomes available in its logical volume group (LVG);
+if you grow a PV, more space becomes available. The partition in which the PV resides is changed to accommodate, and
+the associated booter partition, if present, is automatically moved.
+.Pp
+Note that you cannot ordinarily grow a PV unless there is
+free space in the partition map beyond it; note also that you cannot ordinarily shrink a PV unless the LVG has some free space in
+it (e.g. by shrinking an overlying LV first).
+.Pp
+When decreasing the size (shrinking), new partitions may optionally be created to fill the newly-freed space.
+To do this, specify the
+.Ar format,
+.Ar name,
+and
+.Ar size
+parameters in the same manner as the triplet description for the
+.Sy partitionDisk
+verb.
+.Pp
+You can specify a
+.Ar size
+of zero
+.Sy (0)
+to fill up all remaining space to the next partition or the end of the partition map, if possible.
+.\"
+.\"             -- coreStorage > resizeStack --
+.It Sy resizeStack Ar lvUUID | device
+.Op Ar pvUUID
+.Ar size
+.Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...
+.br
+Combine the actions of
+.Sy diskutil
+.Sy coreStorage
+.Sy resizePV
+and
+.Sy diskutil
+.Sy coreStorage
+.Sy resizeLV
+in the correct sequence in order to effect a shrink or a grow in an entire LVG setup.
+.Pp
+This is done by making a change to the size of a logical
+volume (LV), after or before which (one of its) physical volume(s) (PV) also changes its size accordingly.
+The (HFS) file system "on top of" the LV and the disk partition "below" the PV, as well as the location of the PV's
+associated booter partition, are automatically adjusted.
+.Pp
+When decreasing the size (shrinking), new partitions may optionally be created to fill the newly-freed space.
+To do this, specify the
+.Ar format,
+.Ar name,
+and
+.Ar size
+parameters in the same manner as the triplet description for the
+.Sy partitionDisk
+verb.
+.Pp
+Since an LVG might have one (e.g. Full Disk Encryption (FDE), aka FileVault),
+two (e.g. Fusion), or even three (certain Boot Camp configurations) PVs, a specific PV
+must be chosen. You can have this command choose one for you, or you can specify the PV UUID directly. If you do not specify a
+PV, the one which has previously been marked for this purpose is used; if no mark, a policy algorithm is applied.
+.Pp
+If your new LV size represents a grow of the existing LV size, then the PV size will take up
+more space on disk, thus creating a larger LVG for the larger LV to live in.
+If your new LV size represents a shrink, then the PV size will take up less space
+on disk, thus creating a smaller LVG, which is enough for the smaller LV to live in. The
+magnitude of the size change you specify (which is for the LV) causes an exact size change in
+the PV if you conform to partition rounding (alignment) restrictions; the corresponding LV change
+may be greater because it is under additional alignment restrictions imposed by CoreStorage and HFS.
+.Pp
+The "spilling over" of size change effects from one PV onto another is not supported; only and exactly
+one PV is affected by this operation. Grows or shrinks whose effects don't
+"fit" the designated PV will result in an error message and no effect.
+For example, you can't do a shrink on a multi-PV setup
+such that the designated PV should shrink to zero size and so effectively should disappear.
+Nor can you do a grow
+which would necessitate the growth of some other PV or the addition of new PVs.
+.Pp
+As in
+.Sy diskutil
+.Sy coreStorage
+.Sy resizePV ,
+note that you cannot grow unless there is free space in the partition map beyond the designated PV,
+which is not normally the case because you usually don't leave gaps of free space on your disk.
+.Pp
+You can specify a
+.Ar size
+of zero
+.Sy (0)
+to fill up all remaining space to the partition following the designated PV's booter
+or to the end of the partition map, if possible.
+.\"
 .\" List-End-CoreStorageVerbs
 .El
 .\" List-End-Verbs
@@ -1310,8 +1452,8 @@ If you are supplying both the old and new passphrases via stdin, they must be se
 .\"
 .\"
 .Sh DEVICES
-A device parameter to any of the above commands (except where explicitly required otherwise) is usually
-any of the following:
+A device parameter to any of the above commands (except where explicitly required otherwise) can usually
+be any of the following:
 .\" List-Begin-DeviceSpecifiers
 .Bl -bullet -offset indent
 .It
@@ -1334,10 +1476,21 @@ The volume mount point.  Any entry of the form of
 .Pa /Volumes/* , 
 e.g.
 .Pa /Volumes/Untitled .
+In most cases, a "custom" mount point e.g.
+.Pa /your/custom/mountpoint/here
+is also accepted.
 .It
-The Universally Unique Identifier or UUID.  Any entry of the form of
+The URL form of any of the volume mount point forms described above.
+E.g.
+.Pa file:///Volumes/Untitled
+or
+.Pa file:/// .
+.It
+A UUID.  Any entry of the form of
 e.g.
 .Pa 11111111-2222-3333-4444-555555555555 .
+The UUID can be a "media" UUID which IOKit places in an IOMedia node as derived from e.g. a GPT map's partition UUID,
+or it can be an AppleRAID (or CoreStorage) set (LV) or member (PV) UUID.
 .\" List-End-DeviceSpecifiers
 .El
 .\"
@@ -1388,17 +1541,18 @@ slices with file systems) is stored.
 .\"
 .Pp
 .Sh SIZES
-Wherever a size is supplied as an output, it is always presented as a base-ten approximation with one decimal
-digit and a base-ten SI multiplier, often accompanied by a precise count in bytes. Scripts should refrain from parsing the
-normal output and use the
+Wherever a size is emitted as an output, it is presented as a base-ten approximation to the precision of one fractional decimal
+digit and a base-ten SI multiplier, often accompanied by a precise count in bytes. Scripts should refrain from parsing this
+human-readable output and use the
 .Sy -plist
 option instead.
 .Pp
 Wherever a
-.Sy size
-is to be supplied as an input, you can provide values in several different ways, some absolute and some context-sensitive.
-All suffixes described below are interpreted in a case-insensitive manner. The "B" is mandatory by itself but optional
-when combined with an SI or IEC multiplier.
+.Ar size
+is to be supplied by you as an input, you can provide values in several different ways, some absolute and some context-sensitive.
+All suffixes described below are interpreted in a case-insensitive manner. The
+.Sy B
+is optional.
 .Pp
 The most common way is to specify absolute values as a decimal number, possibly followed by a period and a
 decimal fraction, followed without whitespace with a suffix as follows:
@@ -1409,6 +1563,7 @@ decimal fraction, followed without whitespace with a suffix as follows:
 is
 .Sy bytes
 (not blocks) where the multiplier is 1.
+This suffix may be omitted.
 .It
 .Sy K[B]
 is power of ten
@@ -1521,7 +1676,8 @@ refer to a constant multiplier of 512; the latter are useful when working with t
 underlying device driver and/or hardware, nor is it an "allocation block", which is a
 file system's minimum unit of backing store usage, often formatting-option-dependent.
 .Pp
-Examples: 10G (10 gigabytes), 4.23tb (4.23 terabytes), 5M (5 megabytes), 4GiB (exactly 2^32 bytes), 25.4% (25.4 percent of whole disk size).
+Examples: 10G (10 gigabytes), 4.23tb (4.23 terabytes), 5M (5 megabytes), 4GiB (exactly 2^32 bytes),
+126000 (exactly 126000 bytes), 25.4% (25.4 percent of whole disk size).
 .Sh FORMAT
 The
 .Sy format
@@ -1566,6 +1722,39 @@ Resize a volume and leave all remaining space as unused
 .br
 diskutil resizeVolume /Volumes/SomeDisk 12g
 .Pp
+Convert a disk to Core Storage and encrypt it
+.br
+diskutil coreStorage convert disk3s2 -passphrase
+.Pp
+Shrink your Core Storage PV in order to make space for a Boot Camp volume
+.br
+subtract desired Windows size from LV size, to be new LV size, i.e. 150g
+.br
+diskutil coreStorage list
+.br
+diskutil coreStorage resizeStack
+.Ar LVUUID
+.Ar PVUUID
+150g ms-dos BOOTCAMP 0
+.Pp
+Revert a disk from Core Storage back to plain HFS, possibly decrypting
+.br
+diskutil coreStorage revert disk5
+.Pp
+Create a Core Storage setup "manually"
+.br
+diskutil coreStorage createLVG LVG1 disk0s2 disk1s2
+.br
+diskutil cs list
+.br
+diskutil cs createLV
+.Ar LVGUUID
+jhfs+ LVG1-Vol1 100%
+.Pp
+Remove a partition
+.br
+diskutil eraseVolume Free\\ Space not disk0s4
+.Pp
 Merge two partitions into a new partition
 .br
 diskutil mergePartitions JHFS+ not disk1s3 disk1s5
@@ -1594,19 +1783,22 @@ diskutil enableRAID mirror /Volumes/ExistingVolume
 .\"
 .Pp
 .Sh SEE ALSO
-.Ns Xr authopen 1 ,
-.Ns Xr hdid 8 ,
 .Ns Xr hdiutil 1 ,
-.Ns Xr ufs.util 8 ,
-.Ns Xr msdos.util 8 ,
-.Ns Xr hfs.util 8 ,
-.Ns Xr drutil 1 ,
-.Ns Xr diskarbitrationd 8 ,
 .Ns Xr mount 8 ,
 .Ns Xr umount 8 ,
+.Ns Xr diskmanagementd 8 ,
+.Ns Xr diskmanagementstartup 8 ,
+.Ns Xr diskarbitrationd 8 ,
+.Ns Xr corestoraged 8 ,
+.Ns Xr ioreg 8 ,
 .Ns Xr newfs_hfs 8 ,
-.Ns Xr vsdbutil 8 ,
-.Ns Xr fsck 8
+.Ns Xr fsck_hfs 8 ,
+.Ns Xr authopen 1 ,
+.Ns Xr hfs.util 8 ,
+.Ns Xr msdos.util 8 ,
+.Ns Xr ufs.util 8 ,
+.Ns Xr drutil 1 ,
+.Ns Xr vsdbutil 8
 .\"
 .\"
 .\"
@@ -1627,7 +1819,13 @@ an underlying POSIX error, or some combination.
 .Pp
 .Sh HISTORY
 The eraseDisk and partitionDisk verbs had an option to add Mac OS 9 drivers (in partitions designated for that purpose);
-there was also a repairOS9Permissions verb.  These have been removed.
+there was also a repairOS9Permissions verb.
+These have been removed.
+.Pp
+Starting with Mac OS X 10.11, the verify- and repairPermissions verbs have been removed.
 .Pp
 Starting with Mac OS X 10.6, the input and output notation of disk and partition sizes use power-of-10 suffixes.
 In the past this has been power-of-2, regardless of the suffix (e.g. G, Gi, GiB) used for display or accepted as input.
+Starting with Mac OS X 10.11, the
+.Sy B
+suffix is optional even for "bare" numeric values.

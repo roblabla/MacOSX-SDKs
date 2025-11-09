@@ -10,6 +10,8 @@
 #import <SpriteKit/SpriteKitBase.h>
 #import <SpriteKit/SKUniform.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_CLASS_AVAILABLE(10_10, 8_0)
 SK_EXPORT @interface SKShader : NSObject <NSCopying, NSCoding>
 
@@ -26,11 +28,11 @@ SK_EXPORT @interface SKShader : NSObject <NSCopying, NSCoding>
  @param source the source code for the custom fragment shader.
  @param uniforms the array of uniforms supplied to this shader
  */
-- (instancetype)initWithSource:(NSString *)source uniforms:(NSArray *)uniforms;
+- (instancetype)initWithSource:(NSString *)source uniforms:(NSArray<SKUniform*> *)uniforms;
 
 + (instancetype)shader;
 + (instancetype)shaderWithSource:(NSString *)source;
-+ (instancetype)shaderWithSource:(NSString *)source uniforms:(NSArray *)uniforms;
++ (instancetype)shaderWithSource:(NSString *)source uniforms:(NSArray<SKUniform*> *)uniforms;
 
 /**
  Loads a shader source file named 'name' from the main bundle. This is simpler yet functionally equivalent to the following code
@@ -70,7 +72,7 @@ SK_EXPORT @interface SKShader : NSObject <NSCopying, NSCoding>
  
  */
 
-@property (copy) NSString *source;
+@property (copy, nullable) NSString *source;
 
 
 /**
@@ -79,10 +81,12 @@ SK_EXPORT @interface SKShader : NSObject <NSCopying, NSCoding>
  
  All uniforms declared must be used within the source.
  */
-@property (copy) NSArray *uniforms;
+@property (copy) NSArray<SKUniform*> *uniforms;
 
 - (void)addUniform:(SKUniform *)uniform;
-- (SKUniform *)uniformNamed:(NSString *)name;
+- (nullable SKUniform *)uniformNamed:(NSString *)name;
 - (void)removeUniformNamed:(NSString *)name;
 
 @end
+
+NS_ASSUME_NONNULL_END

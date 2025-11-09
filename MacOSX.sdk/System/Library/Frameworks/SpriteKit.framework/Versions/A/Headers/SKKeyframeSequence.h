@@ -19,17 +19,19 @@ typedef NS_ENUM(NSInteger, SKRepeatMode) {
     SKRepeatModeLoop    = 2,
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 SK_EXPORT @interface SKKeyframeSequence : NSObject <NSCoding, NSCopying>
 
 /* Designated initializer */
-- (instancetype)initWithKeyframeValues:(NSArray*)values times:(NSArray*)times NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithKeyframeValues:(NSArray*)values times:(NSArray<NSNumber*> *)times NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithCapacity:(NSUInteger)numItems;
 
 /**
  Support coding and decoding via NSKeyedArchiver.
  */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 - (NSUInteger)count;
 
@@ -46,7 +48,7 @@ SK_EXPORT @interface SKKeyframeSequence : NSObject <NSCoding, NSCopying>
 - (id)getKeyframeValueForIndex:(NSUInteger)index;
 - (CGFloat)getKeyframeTimeForIndex:(NSUInteger)index;
 
-- (id)sampleAtTime:(CGFloat)time;
+- (nullable id)sampleAtTime:(CGFloat)time;
 
 /* defaults to SKInterpolationModeLinear */
 @property (nonatomic) SKInterpolationMode interpolationMode;
@@ -55,3 +57,5 @@ SK_EXPORT @interface SKKeyframeSequence : NSObject <NSCoding, NSCopying>
 @property (nonatomic) SKRepeatMode repeatMode;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
 
-	Copyright 2006-2014 Apple Inc. All rights reserved.
+	Copyright 2006-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -39,7 +39,12 @@ extern "C" {
 	@constant	kCMFormatDescriptionBridgeError_UnsupportedSampleDescriptionFlavor Returned when the sample description is unsupported for the specified format flavor.
 	@constant	kCMFormatDescriptionBridgeError_InvalidSlice Returned when the slice has an invalid value.
 */
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif
+{
 	kCMFormatDescriptionBridgeError_InvalidParameter					= -12712,
 	kCMFormatDescriptionBridgeError_AllocationFailed					= -12713,
 	kCMFormatDescriptionBridgeError_InvalidSerializedSampleDescription	= -12714,
@@ -65,9 +70,14 @@ enum {
 	@abstract	Chooses the 3GP family sample description format.
 	@discussion	This implies kCMImageDescriptionFlavor_ISOFamily and adds additional rules specific to the 3GP family.
 */
+
+CM_ASSUME_NONNULL_BEGIN
+
 CM_EXPORT const CFStringRef kCMImageDescriptionFlavor_QuickTimeMovie	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// equivalent to NULL
 CM_EXPORT const CFStringRef kCMImageDescriptionFlavor_ISOFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// MP4, etc
 CM_EXPORT const CFStringRef kCMImageDescriptionFlavor_3GPFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// 3GPP (implies ISO)
+
+CM_ASSUME_NONNULL_END
 
 /*!
 	@function	CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData
@@ -81,12 +91,12 @@ CM_EXPORT const CFStringRef kCMImageDescriptionFlavor_3GPFamily			__OSX_AVAILABL
 	@param	videoFormatDescriptionOut		Receives new CMVideoFormatDescription.
 */
 CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(
-		CFAllocatorRef allocator,
-		const uint8_t *imageDescriptionData,
+		CFAllocatorRef CM_NULLABLE allocator,
+		const uint8_t * CM_NONNULL imageDescriptionData,
 		size_t imageDescriptionSize,
 		CFStringEncoding imageDescriptionStringEncoding,
-		CFStringRef imageDescriptionFlavor,
-		CMVideoFormatDescriptionRef *videoFormatDescriptionOut )
+		CFStringRef CM_NULLABLE imageDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL videoFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -100,11 +110,11 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionDa
 	@param	videoFormatDescriptionOut		Receives new CMVideoFormatDescription.
 */
 CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMBlockBufferRef imageDescriptionBlockBuffer,
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMBlockBufferRef CM_NONNULL imageDescriptionBlockBuffer,
 		CFStringEncoding imageDescriptionStringEncoding,
-		CFStringRef imageDescriptionFlavor,
-		CMVideoFormatDescriptionRef *videoFormatDescriptionOut )
+		CFStringRef CM_NULLABLE imageDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL videoFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -122,12 +132,14 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBl
 	@param	imageDescriptionBlockBufferOut	Receives new CMBlockBuffer containing ImageDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMVideoFormatDescriptionRef videoFormatDescription,
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMVideoFormatDescriptionRef CM_NONNULL videoFormatDescription,
 		CFStringEncoding imageDescriptionStringEncoding,
-		CFStringRef imageDescriptionFlavor,
-		CMBlockBufferRef *imageDescriptionBlockBufferOut )
+		CFStringRef CM_NULLABLE imageDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL imageDescriptionBlockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if TARGET_RT_LITTLE_ENDIAN
 
@@ -139,7 +151,7 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockB
 	@param	imageDescriptionSize			Size of ImageDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapBigEndianImageDescriptionToHost(
-		uint8_t *imageDescriptionData,
+		uint8_t * CM_NONNULL imageDescriptionData,
 		size_t imageDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -151,7 +163,7 @@ CM_EXPORT OSStatus CMSwapBigEndianImageDescriptionToHost(
 	@param	imageDescriptionSize			Size of ImageDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapHostEndianImageDescriptionToBig(
-		uint8_t *imageDescriptionData,
+		uint8_t * CM_NONNULL imageDescriptionData,
 		size_t imageDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -161,6 +173,8 @@ CM_EXPORT OSStatus CMSwapHostEndianImageDescriptionToBig(
 #define CMSwapHostEndianImageDescriptionToBig(d,s) (noErr)
 
 #endif // TARGET_RT_BIG_ENDIAN
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*! 
 	@functiongroup	CMAudioFormatDescription and SoundDescription bridge functions
@@ -184,10 +198,15 @@ CM_EXPORT OSStatus CMSwapHostEndianImageDescriptionToBig(
 	@abstract	Chooses the 3GP family sample description format.
 	@discussion	This implies kCMSoundDescriptionFlavor_ISOFamily and adds additional rules specific to the 3GP family.
 */
+
+CM_ASSUME_NONNULL_BEGIN
+
 CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_QuickTimeMovie	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// equivalent to NULL
 CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_QuickTimeMovieV2	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_ISOFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// MP4, etc
 CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_3GPFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// 3GPP (implies ISO)
+
+CM_ASSUME_NONNULL_END
 
 /*!
 	@function	CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData
@@ -200,11 +219,11 @@ CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_3GPFamily			__OSX_AVAILABL
 	@param	audioFormatDescriptionOut		Receives new CMAudioFormatDescription.
 */
 CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(
-		CFAllocatorRef allocator,
-		const uint8_t *soundDescriptionData,
+		CM_NULLABLE CFAllocatorRef allocator,
+		const uint8_t * CM_NONNULL soundDescriptionData,
 		size_t soundDescriptionSize,
-		CFStringRef soundDescriptionFlavor,
-		CMAudioFormatDescriptionRef *audioFormatDescriptionOut )
+		CFStringRef CM_NULLABLE soundDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL  audioFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -217,10 +236,10 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionDa
 	@param	audioFormatDescriptionOut		Receives new CMAudioFormatDescription.
 */
 CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMBlockBufferRef soundDescriptionBlockBuffer,
-		CFStringRef soundDescriptionFlavor,
-		CMAudioFormatDescriptionRef *audioFormatDescriptionOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMBlockBufferRef CM_NONNULL soundDescriptionBlockBuffer,
+		CFStringRef CM_NULLABLE soundDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL audioFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -237,11 +256,13 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBl
 	@param	soundDescriptionBlockBufferOut	Receives new CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMAudioFormatDescriptionRef audioFormatDescription,
-		CFStringRef soundDescriptionFlavor,
-		CMBlockBufferRef *soundDescriptionBlockBufferOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMAudioFormatDescriptionRef CM_NONNULL audioFormatDescription,
+		CFStringRef CM_NULLABLE soundDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL soundDescriptionBlockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout
@@ -251,8 +272,8 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockB
 	@param	soundDescriptionFlavor			kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
 */
 CM_EXPORT Boolean CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout(
-		CMBlockBufferRef soundDescriptionBlockBuffer,
-		CFStringRef soundDescriptionFlavor )
+		CMBlockBufferRef CM_NONNULL soundDescriptionBlockBuffer,
+		CFStringRef CM_NULLABLE soundDescriptionFlavor )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 #if TARGET_RT_LITTLE_ENDIAN
@@ -265,7 +286,7 @@ CM_EXPORT Boolean CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayo
 	@param	soundDescriptionSize			Size of SoundDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapBigEndianSoundDescriptionToHost(
-		uint8_t *soundDescriptionData,
+		uint8_t * CM_NONNULL soundDescriptionData,
 		size_t soundDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -277,7 +298,7 @@ CM_EXPORT OSStatus CMSwapBigEndianSoundDescriptionToHost(
 	@param	soundDescriptionSize			Size of SoundDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapHostEndianSoundDescriptionToBig(
-		uint8_t *soundDescriptionData,
+		uint8_t * CM_NONNULL soundDescriptionData,
 		size_t soundDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -287,6 +308,8 @@ CM_EXPORT OSStatus CMSwapHostEndianSoundDescriptionToBig(
 #define CMSwapHostEndianSoundDescriptionToBig(d,s) (noErr)
 
 #endif // TARGET_RT_BIG_ENDIAN
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*! 
 	@functiongroup	CMTextFormatDescription and TextDescription bridge functions
@@ -304,12 +327,12 @@ CM_EXPORT OSStatus CMSwapHostEndianSoundDescriptionToBig(
 	@param	textFormatDescriptionOut		Receives new CMTextFormatDescription.
 */
 CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(
-		CFAllocatorRef allocator,
-		const uint8_t *textDescriptionData,
+		CFAllocatorRef CM_NULLABLE allocator,
+		const uint8_t * CM_NONNULL textDescriptionData,
 		size_t textDescriptionSize,
-		CFStringRef textDescriptionFlavor,
+		CFStringRef CM_NULLABLE textDescriptionFlavor,
 		CMMediaType mediaType,
-		CMTextFormatDescriptionRef *textFormatDescriptionOut )
+		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL textFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -323,11 +346,11 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData
 	@param	textFormatDescriptionOut		Receives new CMTextFormatDescription.
 */
 CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMBlockBufferRef textDescriptionBlockBuffer,
-		CFStringRef textDescriptionFlavor,
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMBlockBufferRef CM_NONNULL textDescriptionBlockBuffer,
+		CFStringRef CM_NULLABLE textDescriptionFlavor,
 		CMMediaType mediaType,
-		CMTextFormatDescriptionRef *textFormatDescriptionOut )
+		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL textFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -344,11 +367,13 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBloc
 	@param	textDescriptionBlockBufferOut	Receives new CMBlockBuffer containing TextDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMTextFormatDescriptionRef textFormatDescription,
-		CFStringRef textDescriptionFlavor,
-		CMBlockBufferRef *textDescriptionBlockBufferOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMTextFormatDescriptionRef CM_NONNULL textFormatDescription,
+		CFStringRef CM_NULLABLE textDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL textDescriptionBlockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if TARGET_RT_LITTLE_ENDIAN
 
@@ -360,7 +385,7 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuf
 	@param	textDescriptionSize				Size of TextDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapBigEndianTextDescriptionToHost(
-		uint8_t *textDescriptionData,
+		uint8_t * CM_NONNULL textDescriptionData,
 		size_t textDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -372,7 +397,7 @@ CM_EXPORT OSStatus CMSwapBigEndianTextDescriptionToHost(
 	@param	textDescriptionSize				Size of TextDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapHostEndianTextDescriptionToBig(
-		uint8_t *textDescriptionData,
+		uint8_t * CM_NONNULL textDescriptionData,
 		size_t textDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -382,6 +407,8 @@ CM_EXPORT OSStatus CMSwapHostEndianTextDescriptionToBig(
 #define CMSwapHostEndianTextDescriptionToBig(d,s) (noErr)
 
 #endif // TARGET_RT_BIG_ENDIAN
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*! 
 	@functiongroup	CMClosedCaptionFormatDescription and ClosedCaptionDescription bridge functions
@@ -398,11 +425,11 @@ CM_EXPORT OSStatus CMSwapHostEndianTextDescriptionToBig(
 	@param	closedCaptionFormatDescriptionOut	Receives new CMClosedCaptionFormatDescription.
 */
 CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(
-		CFAllocatorRef allocator,
-		const uint8_t *closedCaptionDescriptionData,
+		CFAllocatorRef CM_NULLABLE allocator,
+		const uint8_t * CM_NONNULL closedCaptionDescriptionData,
 		size_t closedCaptionDescriptionSize,
-		CFStringRef closedCaptionDescriptionFlavor,
-		CMClosedCaptionFormatDescriptionRef *closedCaptionFormatDescriptionOut )
+		CFStringRef CM_NULLABLE closedCaptionDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL closedCaptionFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -415,10 +442,10 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCapt
 	@param	closedCaptionFormatDescriptionOut	Receives new CMClosedCaptionFormatDescription.
 */
 CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMBlockBufferRef closedCaptionDescriptionBlockBuffer,
-		CFStringRef closedCaptionDescriptionFlavor,
-		CMClosedCaptionFormatDescriptionRef *closedCaptionFormatDescriptionOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMBlockBufferRef CM_NONNULL closedCaptionDescriptionBlockBuffer,
+		CFStringRef CM_NULLABLE closedCaptionDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL closedCaptionFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -435,11 +462,13 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCapt
 	@param	closedCaptionDescriptionBlockBufferOut	Receives new CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMClosedCaptionFormatDescriptionRef closedCaptionFormatDescription,
-		CFStringRef closedCaptionDescriptionFlavor,
-		CMBlockBufferRef *closedCaptionDescriptionBlockBufferOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMClosedCaptionFormatDescriptionRef CM_NONNULL closedCaptionFormatDescription,
+		CFStringRef CM_NULLABLE closedCaptionDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL closedCaptionDescriptionBlockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if TARGET_RT_LITTLE_ENDIAN
 
@@ -451,7 +480,7 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionD
 	@param	closedCaptionDescriptionSize	Size of ClosedCaptionDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapBigEndianClosedCaptionDescriptionToHost(
-		uint8_t *closedCaptionDescriptionData,
+		uint8_t * CM_NONNULL closedCaptionDescriptionData,
 		size_t closedCaptionDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -463,7 +492,7 @@ CM_EXPORT OSStatus CMSwapBigEndianClosedCaptionDescriptionToHost(
 	@param	closedCaptionDescriptionSize	Size of ClosedCaptionDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapHostEndianClosedCaptionDescriptionToBig(
-		uint8_t *closedCaptionDescriptionData,
+		uint8_t * CM_NONNULL closedCaptionDescriptionData,
 		size_t closedCaptionDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -473,6 +502,8 @@ CM_EXPORT OSStatus CMSwapHostEndianClosedCaptionDescriptionToBig(
 #define CMSwapHostEndianClosedCaptionDescriptionToBig(d,s) (noErr)
 
 #endif // TARGET_RT_BIG_ENDIAN
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*! 
 	@functiongroup	CMTimeCodeFormatDescription and TimeCodeDescription bridge functions
@@ -489,11 +520,11 @@ CM_EXPORT OSStatus CMSwapHostEndianClosedCaptionDescriptionToBig(
 	@param	timeCodeFormatDescriptionOut	Receives new CMTimeCodeFormatDescription.
 */
 CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(
-		CFAllocatorRef allocator,
-		const uint8_t *timeCodeDescriptionData,
+		CFAllocatorRef CM_NULLABLE allocator,
+		const uint8_t * CM_NONNULL timeCodeDescriptionData,
 		size_t timeCodeDescriptionSize, 
-		CFStringRef timeCodeDescriptionFlavor,
-		CMTimeCodeFormatDescriptionRef *timeCodeFormatDescriptionOut )
+		CFStringRef CM_NULLABLE timeCodeDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL timeCodeFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -506,10 +537,10 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescrip
 	@param	timeCodeFormatDescriptionOut	Receives new CMTimeCodeFormatDescription.
 */
 CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMBlockBufferRef timeCodeDescriptionBlockBuffer,
-		CFStringRef timeCodeDescriptionFlavor,
-		CMTimeCodeFormatDescriptionRef *timeCodeFormatDescriptionOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMBlockBufferRef CM_NONNULL timeCodeDescriptionBlockBuffer,
+		CFStringRef CM_NULLABLE timeCodeDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL timeCodeFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -526,11 +557,13 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescrip
 	@param	timeCodeDescriptionBlockBufferOut	Receives new CMBlockBuffer containing TimeCodeDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMTimeCodeFormatDescriptionRef timeCodeFormatDescription,
-		CFStringRef timeCodeDescriptionFlavor,
-		CMBlockBufferRef *timeCodeDescriptionBlockBufferOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMTimeCodeFormatDescriptionRef CM_NONNULL timeCodeFormatDescription,
+		CFStringRef CM_NULLABLE timeCodeDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL timeCodeDescriptionBlockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if TARGET_RT_LITTLE_ENDIAN
 
@@ -542,7 +575,7 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescription
 	@param	timeCodeDescriptionSize			Size of TimeCodeDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapBigEndianTimeCodeDescriptionToHost(
-		uint8_t *timeCodeDescriptionData,
+		uint8_t * CM_NONNULL timeCodeDescriptionData,
 		size_t timeCodeDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -554,7 +587,7 @@ CM_EXPORT OSStatus CMSwapBigEndianTimeCodeDescriptionToHost(
 	@param	timeCodeDescriptionSize			Size of TimeCodeDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapHostEndianTimeCodeDescriptionToBig(
-		uint8_t *timeCodeDescriptionData,
+		uint8_t * CM_NONNULL timeCodeDescriptionData,
 		size_t timeCodeDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -564,6 +597,8 @@ CM_EXPORT OSStatus CMSwapHostEndianTimeCodeDescriptionToBig(
 #define CMSwapHostEndianTimeCodeDescriptionToBig(d,s) (noErr)
 
 #endif // TARGET_RT_BIG_ENDIAN
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 /*! 
 	@functiongroup	CMMetadataFormatDescription and MetadataDescription bridge functions
@@ -580,11 +615,11 @@ CM_EXPORT OSStatus CMSwapHostEndianTimeCodeDescriptionToBig(
 	@param	metadataFormatDescriptionOut	Receives new CMMetadataFormatDescriptionRef.
 */
 CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(
-		CFAllocatorRef allocator,
-		const uint8_t *metadataDescriptionData,
+		CFAllocatorRef CM_NULLABLE allocator,
+		const uint8_t * CM_NONNULL metadataDescriptionData,
 		size_t metadataDescriptionSize,
-		CFStringRef metadataDescriptionFlavor,
-		CMMetadataFormatDescriptionRef *metadataFormatDescriptionOut )
+		CFStringRef CM_NULLABLE metadataDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL metadataFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -597,10 +632,10 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescrip
 	@param	metadataFormatDescriptionOut	Receives new CMMetadataFormatDescriptionRef.
 */
 CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMBlockBufferRef metadataDescriptionBlockBuffer,
-		CFStringRef metadataDescriptionFlavor,
-		CMMetadataFormatDescriptionRef *metadataFormatDescriptionOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMBlockBufferRef CM_NONNULL metadataDescriptionBlockBuffer,
+		CFStringRef CM_NULLABLE metadataDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL metadataFormatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -617,11 +652,13 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescrip
 	@param	metadataDescriptionBlockBufferOut	Receives new CMBlockBuffer containing MetadataDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer(
-		CFAllocatorRef allocator,
-		CMMetadataFormatDescriptionRef metadataFormatDescription,
-		CFStringRef metadataDescriptionFlavor,
-		CMBlockBufferRef *metadataDescriptionBlockBufferOut )
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMMetadataFormatDescriptionRef CM_NONNULL metadataFormatDescription,
+		CFStringRef CM_NULLABLE metadataDescriptionFlavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL metadataDescriptionBlockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if TARGET_RT_LITTLE_ENDIAN
 
@@ -633,7 +670,7 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescription
 	@param	metadataDescriptionSize			Size of MetadataDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapBigEndianMetadataDescriptionToHost(
-		uint8_t *metadataDescriptionData,
+		uint8_t * CM_NONNULL metadataDescriptionData,
 		size_t metadataDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -645,7 +682,7 @@ CM_EXPORT OSStatus CMSwapBigEndianMetadataDescriptionToHost(
 	@param	metadataDescriptionSize			Size of MetadataDescription data structure.
 */
 CM_EXPORT OSStatus CMSwapHostEndianMetadataDescriptionToBig(
-		uint8_t *metadataDescriptionData,
+		uint8_t * CM_NONNULL metadataDescriptionData,
 		size_t metadataDescriptionSize )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
@@ -655,6 +692,8 @@ CM_EXPORT OSStatus CMSwapHostEndianMetadataDescriptionToBig(
 #define CMSwapHostEndianMetadataDescriptionToBig(d,s) (noErr)
 
 #endif // TARGET_RT_BIG_ENDIAN
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
 

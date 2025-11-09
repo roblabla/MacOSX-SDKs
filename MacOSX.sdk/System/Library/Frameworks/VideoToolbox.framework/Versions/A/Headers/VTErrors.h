@@ -20,7 +20,12 @@ extern "C"
 #pragma pack(push, 4)
 
 // Error codes
-enum {
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : OSStatus
+#else
+enum
+#endif // COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+	{
 	kVTPropertyNotSupportedErr				= -12900,
 	kVTPropertyReadOnlyErr					= -12901,
 	kVTParameterErr							= -12902,
@@ -72,8 +77,7 @@ enum {
 		the bit set, it is legal for the decoder to delay frames indefinitely -- at least 
 		until VTDecompressionSessionFinishDelayedFrames or VTDecompressionSessionInvalidate is called.
 */
-typedef uint32_t VTDecodeFrameFlags;
-enum {
+typedef CF_OPTIONS(uint32_t, VTDecodeFrameFlags) {
 	kVTDecodeFrame_EnableAsynchronousDecompression = 1<<0,
 	kVTDecodeFrame_DoNotOutputFrame = 1<<1,
 	kVTDecodeFrame_1xRealTimePlayback = 1<<2, 
@@ -81,16 +85,14 @@ enum {
 };
 
 // Informational status for decoding -- non-error flags 
-typedef UInt32 VTDecodeInfoFlags;
-enum {
+typedef CF_OPTIONS(UInt32, VTDecodeInfoFlags) {
 	kVTDecodeInfo_Asynchronous = 1UL << 0,
 	kVTDecodeInfo_FrameDropped = 1UL << 1,
 	kVTDecodeInfo_ImageBufferModifiable = 1UL << 2,
 };
 
 // Informational status for encoding -- non-error flags 
-typedef UInt32 VTEncodeInfoFlags;
-enum {
+typedef CF_OPTIONS(UInt32, VTEncodeInfoFlags) {
 	kVTEncodeInfo_Asynchronous = 1UL << 0,
 	kVTEncodeInfo_FrameDropped = 1UL << 1,
 };

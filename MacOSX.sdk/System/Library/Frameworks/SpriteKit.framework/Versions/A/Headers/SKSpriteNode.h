@@ -8,7 +8,7 @@
  
  A SpriteNode is a node that displays a Sprite. As it is a Node it can be transformed, be included as a child in another node and have child nodes of its own.
  
-
+ 
  
  @copyright 2011 Apple, Inc. All rights reserved.
  
@@ -18,6 +18,7 @@
 #import <SpriteKit/SKShader.h>
 #import <SpriteKit/SpriteKitBase.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @class  SKLightNode;
 
@@ -35,21 +36,21 @@ SK_EXPORT @interface SKSpriteNode : SKNode
  @param texture the texture to reference for size and content
  @param size the size of the sprite in points
  */
-+ (instancetype)spriteNodeWithTexture:(SKTexture *)texture size:(CGSize)size;
++ (instancetype)spriteNodeWithTexture:(nullable SKTexture *)texture size:(CGSize)size;
 
 /**
  Create a sprite with an SKTexture and set its size to the SKTexture's pixel width/height.
  @param texture the texture to reference for size and content
  */
-+ (instancetype)spriteNodeWithTexture:(SKTexture *)texture;
++ (instancetype)spriteNodeWithTexture:(nullable SKTexture *)texture;
 
-+ (instancetype)spriteNodeWithTexture:(SKTexture *)texture normalMap:(SKTexture *)normalMap;
++ (instancetype)spriteNodeWithTexture:(nullable SKTexture *)texture normalMap:(nullable SKTexture *)normalMap;
 
 /**
  Create a sprite with an image from your app bundle (An SKTexture is created for the image and set on the sprite. Its size is set to the SKTexture's pixel width/height)
  The position of the sprite is (0, 0) and the texture anchored at (0.5, 0.5), so that it is offset by half the width and half the height.
  Thus the sprite has the texture centered about the position. If you wish to have the texture anchored at a different offset set the anchorPoint to another pair of values in the interval from 0.0 up to and including 1.0.
- @param name the name that can be used to find the sprite in later queries
+ @param name is the name of an image file stored in the app bundle.
  */
 + (instancetype)spriteNodeWithImageNamed:(NSString *)name;
 
@@ -69,13 +70,13 @@ SK_EXPORT @interface SKSpriteNode : SKNode
  @param color the color to use for tinting the sprite.
  @param size the size of the sprite in points
  */
-- (instancetype)initWithTexture:(SKTexture *)texture color:(SKColor *)color size:(CGSize)size NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTexture:(nullable SKTexture *)texture color:(SKColor *)color size:(CGSize)size NS_DESIGNATED_INITIALIZER;
 
 /**
  Initialize a sprite with an SKTexture and set its size to the SKTexture's width/height.
  @param texture the texture to reference for size and content
  */
-- (instancetype)initWithTexture:(SKTexture *)texture;
+- (instancetype)initWithTexture:(nullable SKTexture *)texture;
 
 /**
  Initialize a sprite with an image from your app bundle (An SKTexture is created for the image and set on the sprite. Its size is set to the SKTexture's pixel width/height)
@@ -95,12 +96,12 @@ SK_EXPORT @interface SKSpriteNode : SKNode
 /**
  Support coding and decoding via NSKeyedArchiver.
  */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  Texture to be drawn (is stretched to fill the sprite)
  */
-@property (nonatomic, retain) SKTexture *texture;
+@property (nonatomic, retain, nullable) SKTexture *texture;
 
 /**
  Texture to use for generating normals that lights use to light this sprite.
@@ -110,7 +111,7 @@ SK_EXPORT @interface SKSpriteNode : SKNode
  @see SKLightNode
  @see lightingBitMask
  */
-@property (nonatomic, retain) SKTexture *normalTexture NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, retain, nullable) SKTexture *normalTexture NS_AVAILABLE(10_10, 8_0);
 
 
 /**
@@ -131,7 +132,7 @@ SK_EXPORT @interface SKSpriteNode : SKNode
 
 /**
  Controls how the texture is stretched to fill the SKSpriteNode. Stretching is performed via a 9-part algorithm where the upper & lower middle parts are scaled horizontally, the left and right middle parts are scaled vertically, the center is scaled in both directions, and the corners are preserved. The centerRect defines the center region in a (0.0 - 1.0) coordinate space. Defaults to {(0,0) (1,1)} (the entire texture is stretched).
-*/
+ */
 @property (nonatomic) CGRect centerRect;
 
 /**
@@ -160,6 +161,8 @@ SK_EXPORT @interface SKSpriteNode : SKNode
  */
 @property (nonatomic) CGSize size;
 
-@property (nonatomic, retain) SKShader *shader NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, retain, nullable) SKShader *shader NS_AVAILABLE(10_10, 8_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

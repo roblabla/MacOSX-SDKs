@@ -1,14 +1,16 @@
 /*
 	NSFileCoordinator.h
-	Copyright (c) 2010-2014, Apple Inc.
+	Copyright (c) 2010-2015, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSError, NSMutableDictionary, NSOperationQueue, NSURL;
+@class NSArray<ObjectType>, NSError, NSMutableDictionary, NSOperationQueue, NSURL;
 
 @protocol NSFilePresenter;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorReadingOptions) {
 
@@ -101,7 +103,7 @@ If your application reads an item and then registers a file presenter for it the
 */
 + (void)addFilePresenter:(id<NSFilePresenter>)filePresenter;
 + (void)removeFilePresenter:(id<NSFilePresenter>)filePresenter;
-+ (NSArray *)filePresenters;
++ (NSArray<id<NSFilePresenter>> *)filePresenters;
 
 /* The designated initializer. If an NSFilePresenter is provided then the receiver is considered to have been created by that NSFilePresenter, or on its behalf.
 
@@ -115,7 +117,7 @@ You pass an NSFilePresenter to this initializer when the operation whose file ac
 
 For example, NSDocument creates a single NSFileCoordinator for all of the coordinated reading and writing it does during the saving of a document. It always creates the NSFileCoordinator in the main queue even when it is doing the actual coordinated reading and writing in a background queue to implement asynchronous saving.
 */
-- (instancetype)initWithFilePresenter:(id<NSFilePresenter>)filePresenterOrNil NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithFilePresenter:(nullable id<NSFilePresenter>)filePresenterOrNil NS_DESIGNATED_INITIALIZER;
 
 #pragma mark *** Purpose Identifier ***
 
@@ -165,7 +167,7 @@ Coordinated writing of an item triggers the sending of messages to NSFilePresent
  
 For both coordinated reading and writing, if there are multiple NSFilePresenters involved then the order in which they are messaged is undefined. If an NSFilePresenter signals failure then waiting will fail and *outError will be set to an NSError describing the failure.
 */
-- (void)coordinateAccessWithIntents:(NSArray *)intents queue:(NSOperationQueue *)queue byAccessor:(void (^)(NSError *error))accessor NS_AVAILABLE(10_10, 8_0);
+- (void)coordinateAccessWithIntents:(NSArray<NSFileAccessIntent *> *)intents queue:(NSOperationQueue *)queue byAccessor:(void (^)(NSError * __nullable error))accessor NS_AVAILABLE(10_10, 8_0);
 
 #pragma mark *** Synchronous File Coordination ***
 
@@ -190,7 +192,7 @@ The -coordinate... methods must use interprocess communication to message instan
 
 In most cases it is redundant to pass the same reading or writing options in an invocation of this method as are passed to individual invocations of the -coordinate... methods invoked by the block passed to an invocation of this method. For example, when Finder invokes this method during a copy operation it does not pass NSFileCoordinatorReadingWithoutChanges because it is appropriate to trigger the saving of document changes right away, but it does pass it when doing the nested invocations of -coordinate... methods because it is not necessary to trigger saving again, even if the user changes the document before the Finder proceeds far enough to actually copy that document's file.
 */
-- (void)prepareForReadingItemsAtURLs:(NSArray *)readingURLs options:(NSFileCoordinatorReadingOptions)readingOptions writingItemsAtURLs:(NSArray *)writingURLs options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (^)(void (^completionHandler)(void)))batchAccessor;
+- (void)prepareForReadingItemsAtURLs:(NSArray<NSURL *> *)readingURLs options:(NSFileCoordinatorReadingOptions)readingOptions writingItemsAtURLs:(NSArray<NSURL *> *)writingURLs options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (^)(void (^completionHandler)(void)))batchAccessor;
 
 #pragma mark *** Renaming and Moving Notification ***
 
@@ -219,8 +221,11 @@ Useless invocations of this method are harmless, so you don't have to write code
 
 /* Cancel all invocations of -coordinate... and -prepare... methods for the receiver. Any current invocation of one of those methods will stop waiting and return immediately, unless it has already invoked the passed-in block, in which case it will return when the passed-in block returns. Subsequent invocations of those methods will not invoke the blocks passed into them at all. When an invocation of -coordinate... or -prepare... returns without invoking the passed-in block because this method was invoked it instead returns an error whose domain is NSCocoaErrorDomain and whose code is NSUserCancelledError. Messages that have already been sent to NSFilePresenters will not be cancelled but the file coordination machinery will stop waiting for the replies.
 
-This method this can be invoked from any thread. It always returns immediately, without waiting for anything. Cancellation is racy; you usually cannot assume that no block passed into a -coordinate... or -prepare... method is already being invoked, so the code inside those blocks typically still has to check for cancellation, whatever that means in your application.
+This method can be invoked from any thread. It always returns immediately, without waiting for anything. Cancellation is racy; you usually cannot assume that no block passed into a -coordinate... or -prepare... method is already being invoked, so the code inside those blocks typically still has to check for cancellation, whatever that means in your application.
 */
 - (void)cancel;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

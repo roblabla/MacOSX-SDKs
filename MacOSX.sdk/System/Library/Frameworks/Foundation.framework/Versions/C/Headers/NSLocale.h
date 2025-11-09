@@ -1,23 +1,25 @@
 /*	NSLocale.h
-	Copyright (c) 2003-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <CoreFoundation/CFLocale.h>
 
-@class NSArray, NSDictionary, NSString;
+@class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString;
 
 // Toll-free bridged with CFLocaleRef
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSLocale : NSObject <NSCopying, NSSecureCoding>
 
-- (id)objectForKey:(id)key;
+- (nullable id)objectForKey:(id)key;
 
-- (NSString *)displayNameForKey:(id)key value:(id)value;
+- (nullable NSString *)displayNameForKey:(id)key value:(id)value;
 
 - (instancetype)initWithLocaleIdentifier:(NSString *)string NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -42,21 +44,21 @@
 
 @interface NSLocale (NSLocaleGeneralInfo)
 
-+ (NSArray *)availableLocaleIdentifiers;
-+ (NSArray *)ISOLanguageCodes;
-+ (NSArray *)ISOCountryCodes;
-+ (NSArray *)ISOCurrencyCodes;
-+ (NSArray *)commonISOCurrencyCodes NS_AVAILABLE(10_5, 2_0);
++ (NSArray<NSString *> *)availableLocaleIdentifiers;
++ (NSArray<NSString *> *)ISOLanguageCodes;
++ (NSArray<NSString *> *)ISOCountryCodes;
++ (NSArray<NSString *> *)ISOCurrencyCodes;
++ (NSArray<NSString *> *)commonISOCurrencyCodes NS_AVAILABLE(10_5, 2_0);
 
-+ (NSArray *)preferredLanguages NS_AVAILABLE(10_5, 2_0); // note that this list does not indicate what language the app is actually running in; the [NSBundle mainBundle] object determines that at launch and knows that information
++ (NSArray<NSString *> *)preferredLanguages NS_AVAILABLE(10_5, 2_0); // note that this list does not indicate what language the app is actually running in; the [NSBundle mainBundle] object determines that at launch and knows that information
 
-+ (NSDictionary *)componentsFromLocaleIdentifier:(NSString *)string;
-+ (NSString *)localeIdentifierFromComponents:(NSDictionary *)dict;
++ (NSDictionary<NSString *, NSString *> *)componentsFromLocaleIdentifier:(NSString *)string;
++ (NSString *)localeIdentifierFromComponents:(NSDictionary<NSString *, NSString *> *)dict;
 
 + (NSString *)canonicalLocaleIdentifierFromString:(NSString *)string;
 + (NSString *)canonicalLanguageIdentifierFromString:(NSString *)string;
 
-+ (NSString *)localeIdentifierFromWindowsLocaleCode:(uint32_t)lcid NS_AVAILABLE(10_6, 4_0);
++ (nullable NSString *)localeIdentifierFromWindowsLocaleCode:(uint32_t)lcid NS_AVAILABLE(10_6, 4_0);
 + (uint32_t)windowsLocaleCodeFromLocaleIdentifier:(NSString *)localeIdentifier NS_AVAILABLE(10_6, 4_0);
 
 typedef NS_ENUM(NSUInteger, NSLocaleLanguageDirection) {
@@ -122,3 +124,4 @@ FOUNDATION_EXPORT NSString * const NSPersianCalendar NS_CALENDAR_DEPRECATED(10_6
 FOUNDATION_EXPORT NSString * const NSIndianCalendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierIndian instead");
 FOUNDATION_EXPORT NSString * const NSISO8601Calendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierISO8601 instead");
 
+NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2014, Apple Inc.
+	Copyright (c) 2001-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,6 +14,8 @@
 #import <AppKit/NSAccessibilityElement.h>
 #import <AppKit/NSWorkspace.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSString, NSArray, NSView;
 
 /*** Accessibility Informal Protocol ***/
@@ -23,19 +25,19 @@
 /* Attribute methods
 */
 - (NSArray *)accessibilityAttributeNames NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (id)accessibilityAttributeValue:(NSString *)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (nullable id)accessibilityAttributeValue:(NSString *)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
 - (BOOL)accessibilityIsAttributeSettable:(NSString *)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (void)accessibilitySetValue:(id)value forAttribute:(NSString *)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (void)accessibilitySetValue:(nullable id)value forAttribute:(NSString *)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
 
 /* Parameterized Attribute methods
 */
 - (NSArray *)accessibilityParameterizedAttributeNames NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (id)accessibilityAttributeValue:(NSString *)attribute forParameter:(id)parameter NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");;
+- (nullable id)accessibilityAttributeValue:(NSString *)attribute forParameter:(nullable id)parameter NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");;
 
 /* Accessibility action methods
 */
 - (NSArray *)accessibilityActionNames NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (NSString *)accessibilityActionDescription:(NSString *)action NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (nullable NSString *)accessibilityActionDescription:(NSString *)action NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
 - (void)accessibilityPerformAction:(NSString *)action NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
 
 /* Return YES if the UIElement doesn't show up to the outside world - i.e. its parent should return the UIElement's children as its own - cutting the UIElement out. E.g. NSControls are ignored when they are single-celled.
@@ -44,11 +46,11 @@
 
 /* Returns the deepest descendant of the UIElement hierarchy that contains the point. You can assume the point has already been determined to lie within the receiver. Override this method to do deeper hit testing within a UIElement - e.g. a NSMatrix would test its cells. The point is bottom-left relative screen coordinates.
 */
-- (id)accessibilityHitTest:(NSPoint)point;
+- (nullable id)accessibilityHitTest:(NSPoint)point;
 
 /* Returns the UI Element that has the focus. You can assume that the search for the focus has already been narrowed down to the receiver. Override this method to do a deeper search with a UIElement - e.g. a NSMatrix would determine if one of its cells has the focus.
 */
-@property (readonly, strong) id accessibilityFocusedUIElement;
+@property (nullable, readonly, strong) id accessibilityFocusedUIElement;
 
 
 /* The following are optional methods to improve performance of accessible objects with large numbers of children or large numbers of UI Elements returned from attributes that return an array (selected children, or visible children, for instance).  The default implementation for these operations will call -accessibilityAttributeValue: to retrieve the entire array of values, and then perform the appropriate operation.  If these methods are implemented, they will be used instead.  For accessibility objects with many children, the results to these methods can sometimes be calculated without generating the entire array of children which can improve performance.
@@ -105,7 +107,7 @@ APPKIT_EXTERN NSString * const NSWorkspaceAccessibilityDisplayOptionsDidChangeNo
 
 /* For changing the set of attributes on an instance - as an alternative to sub-classing.
 */
-- (BOOL)accessibilitySetOverrideValue:(id)value forAttribute:(NSString *)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (BOOL)accessibilitySetOverrideValue:(nullable id)value forAttribute:(NSString *)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
 
 @end
 
@@ -124,20 +126,20 @@ APPKIT_EXTERN BOOL NSAccessibilitySetMayContainProtectedContent(BOOL flag);
 
 /* Getting descriptions for standard roles and actions.
 */
-APPKIT_EXTERN NSString *NSAccessibilityRoleDescription(NSString *role, NSString *subrole);
-APPKIT_EXTERN NSString *NSAccessibilityRoleDescriptionForUIElement(id element);
-APPKIT_EXTERN NSString *NSAccessibilityActionDescription(NSString *action);
+APPKIT_EXTERN NSString * __nullable NSAccessibilityRoleDescription(NSString *role, NSString * __nullable subrole);
+APPKIT_EXTERN NSString * __nullable NSAccessibilityRoleDescriptionForUIElement(id element);
+APPKIT_EXTERN NSString * __nullable NSAccessibilityActionDescription(NSString *action);
 
 
 /* Error signaling for bad setter value or bad parameter.
 */
-APPKIT_EXTERN void NSAccessibilityRaiseBadArgumentException(id element, NSString *attribute, id value);
+APPKIT_EXTERN void NSAccessibilityRaiseBadArgumentException(__null_unspecified id element, NSString * __null_unspecified attribute, __null_unspecified id value) NS_DEPRECATED_MAC(10_1, 10_11, "Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.");
 
 
 /*** Ignored UIElements Utilities ***/
 
-APPKIT_EXTERN id NSAccessibilityUnignoredAncestor(id element);
-APPKIT_EXTERN id NSAccessibilityUnignoredDescendant(id element);
+APPKIT_EXTERN __nullable id NSAccessibilityUnignoredAncestor(id element);
+APPKIT_EXTERN __nullable id NSAccessibilityUnignoredDescendant(id element);
 APPKIT_EXTERN NSArray *NSAccessibilityUnignoredChildren(NSArray *originalChildren);
 APPKIT_EXTERN NSArray *NSAccessibilityUnignoredChildrenForOnlyChild(id originalChild);
 
@@ -162,4 +164,6 @@ The rule of thumb is that the affected element should be passed into the functio
 
 */
 APPKIT_EXTERN void NSAccessibilityPostNotification(id element, NSString *notification);
+
+NS_ASSUME_NONNULL_END
 

@@ -1,12 +1,15 @@
 /*
     NSOpenPanel.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/NSSavePanel.h>
-@class NSArray;
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSString;
 @class NSWindow;
 
@@ -20,7 +23,7 @@
  */
 + (NSOpenPanel *)openPanel;
 
-@property (readonly, copy) NSArray *URLs;
+@property (readonly, copy) NSArray<NSURL *> *URLs;
 
 @property BOOL resolvesAliases;
 
@@ -42,6 +45,11 @@ To provide the ideal user experience, you should set this property to NO and dow
 */
 @property BOOL canDownloadUbiquitousContents NS_AVAILABLE_MAC(10_10);
 
+
+/* Gets and sets the disclosure state of an accessory view in an NSOpenPanel. If hiding / disclosing an accessory view is not applicable this property will behave like a read only property. */
+
+@property (getter=isAccessoryViewDisclosed) BOOL accessoryViewDisclosed NS_AVAILABLE_MAC(10_11);
+
 @end
 
 @interface NSOpenPanel (NSDeprecated)
@@ -54,23 +62,25 @@ To provide the ideal user experience, you should set this property to NO and dow
     Set the -directoryURL property instead of passing in a 'path'.
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)beginSheetForDirectory:(nullable NSString *)path file:(nullable NSString *)name types:(nullable NSArray *)fileTypes modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Use -beginWithCompletionHandler: instead. 
     Set the -directoryURL property instead of passing in a 'path'.
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (void)beginForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modelessDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo  NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)beginForDirectory:(nullable NSString *)path file:(nullable NSString *)name types:(nullable NSArray *)fileTypes modelessDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo  NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Use -runModal instead. 
     Set the -directoryURL property instead of passing in a 'path'.
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes NS_DEPRECATED_MAC(10_0, 10_6);
+- (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name types:(nullable NSArray *)fileTypes NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Use -runModal instead. 
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (NSInteger)runModalForTypes:(NSArray *)fileTypes NS_DEPRECATED_MAC(10_0, 10_6);
+- (NSInteger)runModalForTypes:(nullable NSArray *)fileTypes NS_DEPRECATED_MAC(10_0, 10_6);
 
 @end
+
+NS_ASSUME_NONNULL_END

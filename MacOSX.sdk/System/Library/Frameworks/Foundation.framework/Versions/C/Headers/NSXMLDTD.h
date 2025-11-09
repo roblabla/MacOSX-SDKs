@@ -1,11 +1,13 @@
 /*	NSXMLDTD.h
-	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
 
-@class NSData, NSMutableDictionary;
+@class NSArray<ObjectType>, NSData, NSMutableDictionary;
 @class NSXMLDTDNode;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
     @class NSXMLDTD
@@ -34,20 +36,20 @@
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options NS_UNAVAILABLE;
-- (instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
-- (instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
+- (nullable instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method publicID
     @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
 */
-@property (copy) NSString *publicID; //primitive
+@property (nullable, copy) NSString *publicID; //primitive
 
 /*!
     @method systemID
     @abstract Sets the system id. This should be a URL that points to a valid DTD.
 */
-@property (copy) NSString *systemID; //primitive
+@property (nullable, copy) NSString *systemID; //primitive
 
 #if 0
 #pragma mark --- Children ---
@@ -63,7 +65,7 @@
     @method insertChildren:atIndex:
     @abstract Insert several children at a particular index.
 */
-- (void)insertChildren:(NSArray *)children atIndex:(NSUInteger)index;
+- (void)insertChildren:(NSArray<NSXMLNode *> *)children atIndex:(NSUInteger)index;
 
 /*!
     @method removeChildAtIndex:
@@ -75,7 +77,7 @@
     @method setChildren:
     @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
 */
-- (void)setChildren:(NSArray *)children; //primitive
+- (void)setChildren:(nullable NSArray<NSXMLNode *> *)children; //primitive
 
 /*!
     @method addChild:
@@ -97,25 +99,25 @@
     @method entityDeclarationForName:
     @abstract Returns the entity declaration matching this name.
 */
-- (NSXMLDTDNode *)entityDeclarationForName:(NSString *)name; //primitive
+- (nullable NSXMLDTDNode *)entityDeclarationForName:(NSString *)name; //primitive
 
 /*!
     @method notationDeclarationForName:
     @abstract Returns the notation declaration matching this name.
 */
-- (NSXMLDTDNode *)notationDeclarationForName:(NSString *)name; //primitive
+- (nullable NSXMLDTDNode *)notationDeclarationForName:(NSString *)name; //primitive
 
 /*!
     @method elementDeclarationForName:
     @abstract Returns the element declaration matching this name.
 */
-- (NSXMLDTDNode *)elementDeclarationForName:(NSString *)name; //primitive
+- (nullable NSXMLDTDNode *)elementDeclarationForName:(NSString *)name; //primitive
 
 /*!
     @method attributeDeclarationForName:
     @abstract Returns the attribute declaration matching this name.
 */
-- (NSXMLDTDNode *)attributeDeclarationForName:(NSString *)name elementName:(NSString *)elementName; //primitive
+- (nullable NSXMLDTDNode *)attributeDeclarationForName:(NSString *)name elementName:(NSString *)elementName; //primitive
 
 /*!
     @method predefinedEntityDeclarationForName:
@@ -123,5 +125,7 @@
 	@discussion The five predefined entities are
 	<ul><li>&amp;lt; - &lt;</li><li>&amp;gt; - &gt;</li><li>&amp;amp; - &amp;</li><li>&amp;quot; - &quot;</li><li>&amp;apos; - &amp;</li></ul>
 */
-+ (NSXMLDTDNode *)predefinedEntityDeclarationForName:(NSString *)name;
++ (nullable NSXMLDTDNode *)predefinedEntityDeclarationForName:(NSString *)name;
 @end
+
+NS_ASSUME_NONNULL_END

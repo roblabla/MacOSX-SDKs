@@ -37,7 +37,7 @@ typedef int32_t eODModuleType;
 typedef eODCallbackResponse (*odm_customfunction_t)(od_request_t request, od_connection_t connection, xpc_object_t custom_payload);
 
 struct odmodule_vtable_s {
-#define ODMODULE_VTABLE_VERSION 2
+#define ODMODULE_VTABLE_VERSION 3
     int version; /* set to ODMODULE_VTABLE_VERSION */
     
     /* Callbacks not associated with API calls */
@@ -145,6 +145,13 @@ struct odmodule_vtable_s {
                                                                        const char *recordname, xpc_object_t addinfo_dict);
     eODCallbackResponse (*odm_RecordSecondsUntilPasswordExpires)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
                                                                  const char *recordname, xpc_object_t addinfo_dict);
+
+    /*
+     * Version 3 additions
+     */
+
+    eODCallbackResponse (*odm_RecordCopyPasswordContentSummary)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                                const char *recordname, xpc_object_t addinfo_dict);
 
 };
 

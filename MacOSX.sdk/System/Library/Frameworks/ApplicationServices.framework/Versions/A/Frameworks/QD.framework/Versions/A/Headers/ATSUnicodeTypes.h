@@ -1109,57 +1109,6 @@ typedef ATSURGBAlphaColor               ATSUBackgroundColor;
  */
 typedef CALLBACK_API( Boolean , RedrawBackgroundProcPtr )(ATSUTextLayout iLayout, UniCharArrayOffset iTextOffset, UniCharCount iTextLength, ATSTrapezoid iUnhighlightArea[], ItemCount iTrapezoidCount);
 typedef STACK_UPP_TYPE(RedrawBackgroundProcPtr)                 RedrawBackgroundUPP;
-/*
- *  NewRedrawBackgroundUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern RedrawBackgroundUPP
-NewRedrawBackgroundUPP(RedrawBackgroundProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
-
-/*
- *  DisposeRedrawBackgroundUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern void
-DisposeRedrawBackgroundUPP(RedrawBackgroundUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
-
-/*
- *  InvokeRedrawBackgroundUPP()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
- *    Non-Carbon CFM:   not available
- */
-extern Boolean
-InvokeRedrawBackgroundUPP(
-  ATSUTextLayout       iLayout,
-  UniCharArrayOffset   iTextOffset,
-  UniCharCount         iTextLength,
-  ATSTrapezoid         iUnhighlightArea[],
-  ItemCount            iTrapezoidCount,
-  RedrawBackgroundUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
-
-#if __MACH__
-  #ifdef __cplusplus
-    inline RedrawBackgroundUPP                                  NewRedrawBackgroundUPP(RedrawBackgroundProcPtr userRoutine) { return userRoutine; }
-    inline void                                                 DisposeRedrawBackgroundUPP(RedrawBackgroundUPP) { }
-    inline Boolean                                              InvokeRedrawBackgroundUPP(ATSUTextLayout iLayout, UniCharArrayOffset iTextOffset, UniCharCount iTextLength, ATSTrapezoid iUnhighlightArea[], ItemCount iTrapezoidCount, RedrawBackgroundUPP userUPP) { return (*userUPP)(iLayout, iTextOffset, iTextLength, iUnhighlightArea, iTrapezoidCount); }
-  #else
-    #define NewRedrawBackgroundUPP(userRoutine)                 ((RedrawBackgroundUPP)userRoutine)
-    #define DisposeRedrawBackgroundUPP(userUPP)
-    #define InvokeRedrawBackgroundUPP(iLayout, iTextOffset, iTextLength, iUnhighlightArea, iTrapezoidCount, userUPP) (*userUPP)(iLayout, iTextOffset, iTextLength, iUnhighlightArea, iTrapezoidCount)
-  #endif
-#endif
-
 
 /*
  *  ATSUBackgroundData

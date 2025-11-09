@@ -1,8 +1,10 @@
 /*      NSLengthFormatter.h
-        Copyright (c) 2014, Apple Inc. All rights reserved.
+        Copyright (c) 2014-2015, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSLengthFormatterUnit) {
     NSLengthFormatterUnitMillimeter = 8,
@@ -22,7 +24,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     BOOL _isForPersonHeight;
     void *_reserved[2];
 }
-@property (copy) NSNumberFormatter *numberFormatter;    // default is NSNumberFormatter with NSNumberFormatterDecimalStyle
+@property (null_resettable, copy) NSNumberFormatter *numberFormatter;    // default is NSNumberFormatter with NSNumberFormatterDecimalStyle
 @property NSFormattingUnitStyle unitStyle;              // default is NSFormattingUnitStyleMedium
 
 @property (getter = isForPersonHeightUse) BOOL forPersonHeightUse;  // default is NO; if it is set to YES, the number argument for -stringFromMeters: and -unitStringFromMeters: is considered as a person's height
@@ -37,8 +39,10 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (NSString *)unitStringFromValue:(double)value unit:(NSLengthFormatterUnit)unit;
 
 // Return the locale-appropriate unit, the same unit used by -stringFromMeters:.
-- (NSString *)unitStringFromMeters:(double)numberInMeters usedUnit:(NSLengthFormatterUnit *)unitp;
+- (NSString *)unitStringFromMeters:(double)numberInMeters usedUnit:(nullable NSLengthFormatterUnit *)unitp;
 
 // No parsing is supported. This method will return NO.
-- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string errorDescription:(out NSString **)error;
+- (BOOL)getObjectValue:(out id __nullable * __nullable)obj forString:(NSString *)string errorDescription:(out NSString * __nullable * __nullable)error;
 @end
+
+NS_ASSUME_NONNULL_END

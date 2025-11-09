@@ -1,7 +1,7 @@
 /*
 	NSTokenField.h
 	Application Kit
-	Copyright (c) 2004-2014, Apple Inc.
+	Copyright (c) 2004-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSTextField.h>
 #import <AppKit/NSTokenFieldCell.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol NSTokenFieldDelegate;
 
@@ -25,8 +27,8 @@
     id _reserved7;
 }
 
-- (void)setDelegate:(id <NSTokenFieldDelegate>)anObject;
-- (id <NSTokenFieldDelegate>)delegate;
+- (void)setDelegate:(nullable id <NSTokenFieldDelegate>)anObject;
+- (nullable id <NSTokenFieldDelegate>)delegate;
 
 /* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
 */
@@ -35,7 +37,7 @@
 @property NSTimeInterval completionDelay;
 + (NSTimeInterval)defaultCompletionDelay;
 
-@property (copy) NSCharacterSet *tokenizingCharacterSet;
+@property (null_resettable, copy) NSCharacterSet *tokenizingCharacterSet;
 + (NSCharacterSet *)defaultTokenizingCharacterSet;
 
 @end
@@ -48,7 +50,7 @@
 // substring is the partial string that is being completed.  tokenIndex is the index of the token being completed.
 // selectedIndex allows you to return by reference an index specifying which of the completions should be selected initially. 
 // The default behavior is not to have any completions.
-- (NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex;
+- (nullable NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(nullable NSInteger *)selectedIndex;
 
 // return an array of represented objects you want to add.
 // If you want to reject the add, return an empty array.
@@ -57,8 +59,8 @@
 
 // If you return nil or don't implement these delegate methods, we will assume
 // editing string = display string = represented object
-- (NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject;
-- (NSString *)tokenField:(NSTokenField *)tokenField editingStringForRepresentedObject:(id)representedObject;
+- (nullable NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject;
+- (nullable NSString *)tokenField:(NSTokenField *)tokenField editingStringForRepresentedObject:(id)representedObject;
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString: (NSString *)editingString;
 
 // We put the string on the pasteboard before calling this delegate method. 
@@ -66,13 +68,16 @@
 - (BOOL)tokenField:(NSTokenField *)tokenField writeRepresentedObjects:(NSArray *)objects toPasteboard:(NSPasteboard *)pboard;
 
 // Return an array of represented objects to add to the token field.
-- (NSArray *)tokenField:(NSTokenField *)tokenField readFromPasteboard:(NSPasteboard *)pboard;
+- (nullable NSArray *)tokenField:(NSTokenField *)tokenField readFromPasteboard:(NSPasteboard *)pboard;
 
 // By default the tokens have no menu.
-- (NSMenu *)tokenField:(NSTokenField *)tokenField menuForRepresentedObject:(id)representedObject;
+- (nullable NSMenu *)tokenField:(NSTokenField *)tokenField menuForRepresentedObject:(id)representedObject;
 - (BOOL)tokenField:(NSTokenField *)tokenField hasMenuForRepresentedObject:(id)representedObject; 
 
 // This method allows you to change the style for individual tokens as well as have mixed text and tokens.
 - (NSTokenStyle)tokenField:(NSTokenField *)tokenField styleForRepresentedObject:(id)representedObject;
 
+
 @end
+
+NS_ASSUME_NONNULL_END

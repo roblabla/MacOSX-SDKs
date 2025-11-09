@@ -117,6 +117,7 @@
       glDrawArrays(GL_TRIANGLE_STRIP, 0, vertCt);
 */
 
+NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKReflectionMapEffect : GLKBaseEffect <GLKNamedEffect>
 {
@@ -138,3 +139,4 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @property (nonatomic, assign)   GLKMatrix3                         matrix;              // Identity
 
 @end
+NS_ASSUME_NONNULL_END

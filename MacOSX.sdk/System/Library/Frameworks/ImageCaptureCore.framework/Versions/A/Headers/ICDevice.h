@@ -22,21 +22,20 @@
 
 //------------------------------------------------------------------------------------------------------------------------------
 /*!
-  @enum ICDeviceType
+  @ICDeviceType
   @abstract Image Capture Device Types
   @constant ICDeviceTypeCamera Camera device.
   @constant ICDeviceTypeScanner Scanner device.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICDeviceType)
 {
     ICDeviceTypeCamera  = 0x00000001,
     ICDeviceTypeScanner = 0x00000002
 };
-typedef NSUInteger ICDeviceType;
 
 /*!
-  @enum ICDeviceLocationType
+  @ICDeviceLocationType
   @abstract Image Capture Device Location Types
   @constant ICDeviceLocationTypeLocal Device found directly attached to the Macintosh via its USB or FireWire port.
   @constant ICDeviceLocationTypeShared Device found over the network by searching for devices shared by other Macintosh hosts.
@@ -44,31 +43,29 @@ typedef NSUInteger ICDeviceType;
   @constant ICDeviceLocationTypeBluetooth Device found as a paired Bluetooth device.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICDeviceLocationType)
 {
     ICDeviceLocationTypeLocal     = 0x00000100,
     ICDeviceLocationTypeShared    = 0x00000200,
     ICDeviceLocationTypeBonjour   = 0x00000400,
     ICDeviceLocationTypeBluetooth = 0x00000800
 };
-typedef NSUInteger ICDeviceLocationType;
 
 /*!
-  @enum ICDeviceTypeMask
+  @ICDeviceTypeMask
   @abstract Image Capture Device Type Mask
   @constant ICDeviceTypeMaskCamera Mask to detect a camera device.
   @constant ICDeviceTypeMaskScanner Mask to detect a scanner device.
 */
 
-enum
+typedef NS_ENUM(NSUInteger, ICDeviceTypeMask)
 {
     ICDeviceTypeMaskCamera  = 0x00000001,
     ICDeviceTypeMaskScanner = 0x00000002
 };
-typedef NSUInteger ICDeviceTypeMask;
 
 /*!
-  @enum ICDeviceLocationTypeMask
+  @ICDeviceLocationTypeMask
   @abstract Image Capture Device Location Type Mask
   @constant ICDeviceLocationTypeMaskLocal Mask to detect a local (e.g., USB or FireWire) device.
   @constant ICDeviceLocationTypeMaskShared Mask to detect a device by another Macintosh host.
@@ -77,7 +74,7 @@ typedef NSUInteger ICDeviceTypeMask;
   @constant ICDeviceLocationTypeMaskRemote Mask to detect a remote (shared, Bonjour, Bluetooth) device.
 */
 
-enum
+typedef NS_ENUM( NSUInteger, ICDeviceLocationTypeMask )
 {
     ICDeviceLocationTypeMaskLocal     = 0x00000100,
     ICDeviceLocationTypeMaskShared    = 0x00000200,
@@ -85,7 +82,8 @@ enum
     ICDeviceLocationTypeMaskBluetooth = 0x00000800,
     ICDeviceLocationTypeMaskRemote    = 0x0000FE00
 };
-typedef NSUInteger ICDeviceLocationTypeMask;
+
+NS_ASSUME_NONNULL_BEGIN
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used to identify the transport type used by a device.
@@ -94,7 +92,7 @@ typedef NSUInteger ICDeviceLocationTypeMask;
     @abstract   ICTransportTypeUSB
     @discussion Indicates that the device uses USB transport.
 */
-extern NSString *const ICTransportTypeUSB;
+extern NSString* const ICTransportTypeUSB;
 
 /*!
     @const      ICTransportTypeFireWire
@@ -230,6 +228,7 @@ extern NSString *const ICLocalizedStatusNotificationKey;
 */
 extern NSString *const ICDeviceCanEjectOrDisconnect;
 
+
 //------------------------------------------------------------------------------------------------------------- ICDeviceDelegate
 /*! 
   @protocol ICDeviceDelegate <NSObject>
@@ -253,7 +252,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @abstract This message is sent when a session is opened on a device.
   @discussion This message completes the process initiated by the message "requestOpenSession" sent to the device object.
 */
-- (void)device:(ICDevice*)device didOpenSessionWithError:(NSError*)error;
+- (void)device:(ICDevice*)device didOpenSessionWithError:(nullable NSError*)error;
 
 /*! 
   @method deviceDidBecomeReady:
@@ -267,7 +266,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @abstract This message is sent when a session is closed on a device.
   @discussion This message completes the process initiated by the message "requestCloseSession" sent to the device object. This message is also sent if the device module in control of the device ceases to control the device.
 */
-- (void)device:(ICDevice*)device didCloseSessionWithError:(NSError*)error;
+- (void)device:(ICDevice*)device didCloseSessionWithError:(nullable NSError*)error;
 
 /*! 
   @method deviceDidChangeName:
@@ -287,27 +286,27 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @method device:didReceiveStatusInformation:
   @abstract This message is sent to the device delegate when status information is received from a camera or a scanner. In Mac OS X 10.6 this delegate is not called for camera devices. This may change in the future releases of Mac OS X.
   @discussion The 'status' dictionary contains two keys, ICStatusNotificationKey and ICLocalizedStatusNotificationKey, which are defined above. If type of 'device' is ICDeviceTypeScanner, the value of ICStatusNotificationKey will be one of the values defined in ICScannerDevice.h (e.g., ICScannerStatusWarmingUp, ICScannerStatusWarmUpDone, or ICScannerStatusRequestsOverviewScan); the value of ICLocalizedStatusNotificationKey will be a localized status information string suitable for displaying to the user. */
-- (void)device:(ICDevice*)device didReceiveStatusInformation:(NSDictionary*)status;
+- (void)device:(ICDevice*)device didReceiveStatusInformation:( NSDictionary<NSString*,id>*)status;
 
 /*! 
   @method device:didEncounterError:
   @abstract This message is sent to the device delegate when a camera or scanner device encounters an error.
 */
-- (void)device:(ICDevice*)device didEncounterError:(NSError*)error;
+- (void)device:(ICDevice*)device didEncounterError:(nullable NSError*)error;
 
 /*! 
   @method device:didReceiveButtonPress:
   @abstract This message is sent to the device delegate if a button is pressed on the device.
   @discussion This message is sent only if a session is open on the device. The value of 'buttonType' argument is one of the ICButtonType* values defined above.
 */
-- (void)device:(ICDevice*)device didReceiveButtonPress:(NSString*)buttonType;
+- (void)device:(ICDevice*)device didReceiveButtonPress:( NSString*)buttonType;
 
 /*! 
   @method device:didReceiveCustomNotification:data:
   @abstract This message is sent to the device delegate the device sends a custom notification 'notification' with an arbitrary byte buffer 'data'.
   @discussion This message is sent only if a session is open on the device.
 */
-- (void)device:(ICDevice*)device didReceiveCustomNotification:(NSDictionary*)notification data:(NSData*)data;
+- (void)device:(ICDevice*)device didReceiveCustomNotification:(NSDictionary<NSString*,id>*)notification data:(NSData*)data;
 
 @end
 
@@ -328,7 +327,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @abstract The delegate to receive messages once a session is opened on the device.
   @discussion The delegate must conform to ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate or ICScannerDeviceDelegate protocols in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols. NOTES: (1) The delegate is not retain by the ICDevice instance. Therefore the delegate property of the ICDevice instance must be set to NULL before the delegate is released. (2) Since communication with the device object is done asynchronously, changing the delegate after opening a session may result in unexpected behavior; e.g., expected delegate method(s) may not be invoked.
 */
-@property(assign)                       id <ICDeviceDelegate> delegate;
+@property(assign,nullable)               id <ICDeviceDelegate> delegate;
 
 /*!
     @property type
@@ -342,35 +341,35 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
     @abstract ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device. This name may change if the device module overrides the default name of the device reported by the device's transport, or if the name of the filesystem volume mounted by the device is changed by the user.
 
 */
-@property(readonly)                     NSString*             name;
+@property(readonly,nullable)            NSString*             name;
 
 /*!
     @property icon
     @abstract ￼Icon image for the device.
 
 */
-@property(readonly)                     CGImageRef            icon;
+@property(readonly,nullable)            CGImageRef            icon;
 
 /*!
     @property capabilities
     @abstract ￼The capabilities of the device as reported by the device module.
 
 */
-@property(readonly)                     NSArray*              capabilities;
+@property(readonly, nonnull)            NSArray<NSString*>*   capabilities;
 
 /*!
     @property modulePath
     @abstract ￼Filesystem path of the device module that is associated with this device. Camera-specific capabilities are defined in ICCameraDevice.h and scanner-specific capabilities are defined in ICScannerDevice.h.
 
 */
-@property(readonly)                     NSString*             modulePath;
+@property(readonly, nonnull)            NSString*             modulePath;
 
 /*!
     @property moduleVersion
     @abstract ￼The bundle version of the device module associated with this device. This may change if an existing device module associated with this device is updated or a new device module for this device is installed.
 
 */
-@property(readonly)                     NSString*             moduleVersion;
+@property(readonly)             NSString*             moduleVersion;
 
 /*!
     @property moduleExecutableArchitecture
@@ -405,7 +404,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
     @abstract ￼The transport type used by the device. The possible values are: ICTransportTypeUSB, ICTransportTypeFireWire, ICTransportTypeBluetooth, ICTransportTypeTCPIP, or ICTransportTypeMassStorage.
 
 */
-@property(readonly)                     NSString*             transportType;
+@property(readonly)             NSString*             transportType;
 
 /*!
     @property usbLocationID
@@ -440,7 +439,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
     @abstract ￼The serial number of the device. This will be NULL if the device does not provide a serial number.
 
 */
-@property(readonly)                     NSString*             serialNumberString;
+@property(readonly,nullable)            NSString*             serialNumberString;
 
 /*!
     @property locationDescription
@@ -448,7 +447,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
     @discussion The value returned in one of the location description strings defined above, or location obtained from the Bonjour TXT record of a network device.
 
 */
-@property(readonly)                     NSString*             locationDescription;
+@property(readonly,nullable)            NSString*             locationDescription;
 
 /*!
     @property hasOpenSession
@@ -462,35 +461,35 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
     @abstract ￼A string representation of the Universally Unique ID of the device.
 
 */
-@property(readonly)                     NSString*             UUIDString;
+@property(readonly,nullable)            NSString*             UUIDString;
 
 /*!
     @property persistentIDString
     @abstract ￼A string representation of the persistent ID of the device.
 
 */
-@property(readonly)                     NSString*             persistentIDString;
+@property(readonly,nullable)            NSString*             persistentIDString;
 
 /*!
     @property buttonPressed
     @abstract ￼A string object with one of the ICButtonType* values defined above.
 
 */
-@property(readonly)                     NSString*             buttonPressed;
+@property(readonly)             NSString*             buttonPressed;
 
 /*!
     @property autolaunchApplicationPath
     @abstract ￼Filesystem path of an application that is to be automatically launched when this device is added.
 
 */
-@property(readwrite,copy)               NSString*             autolaunchApplicationPath;
+@property(readwrite,copy,nullable)      NSString*             autolaunchApplicationPath;
 
 /*!
     @property userData
     @abstract ￼A mutable dictionary to store arbitrary key-value pairs associated with a device object. This can be used by view objects that bind to this object to store "house-keeping" information.
 
 */
-@property(readonly)                     NSMutableDictionary*  userData;
+@property(readonly,nullable)            NSMutableDictionary*  userData;
 
 /*! 
   @method requestOpenSession:
@@ -518,13 +517,16 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @abstract This method asynchronously sends an arbitrary message with optional data to a device.
   @discussion This method allows developers to send a private message from a client application to a device module. This method is the functional equivalent of calling ICAObjectSendMessage() found in ImageCapture.framework, which has been deprecated in Mac OS X 10.6. The response to this command will be delivered using didSendMessageSelector of sendMessageDelegate. The didSendMessageSelector should have the same signature as: - (void)didSendMessage:(UInt32)messageCode inData:(NSData*)data error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully. NOTE: This method SHOULD NOT BE USED to send PTP pass-through commands to a PTP camera. Please refer to 'requestSendPTPCommand:outData:sendCommandDelegate:sendCommandDelegate:contextInfo:' defined in ICCameraDevice.h for sending PTP pass-through commands.
 */
-- (void)requestSendMessage:(unsigned int)messageCode outData:(NSData*)data maxReturnedDataSize:(unsigned int)maxReturnedDataSize sendMessageDelegate:(id)sendMessageDelegate didSendMessageSelector:(SEL)selector contextInfo:(void*)contextInfo;
+- (void)requestSendMessage:(unsigned int)messageCode outData:(NSData*)data maxReturnedDataSize:(unsigned int)maxReturnedDataSize sendMessageDelegate:(id)sendMessageDelegate didSendMessageSelector:(SEL)selector contextInfo:(nullable void*)contextInfo;
 
 /*! 
   @method requestEjectOrDisconnect
   @abstract Eject the media if permitted by the device, or disconnect from a remote device.
 */
 - (void)requestEjectOrDisconnect;
+
+NS_ASSUME_NONNULL_END
+
 @end
 
 //------------------------------------------------------------------------------------------------------------------------------

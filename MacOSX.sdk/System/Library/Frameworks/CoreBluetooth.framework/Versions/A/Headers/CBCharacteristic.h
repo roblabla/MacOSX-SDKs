@@ -9,7 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class CBPeripheral;
+NS_ASSUME_NONNULL_BEGIN
+
+@class CBPeripheral, CBCentral, CBDescriptor;
 
 /*!
  *  @enum CBCharacteristicProperties
@@ -78,7 +80,7 @@ CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
  *      A back-pointer to the service this characteristic belongs to.
  *
  */
-@property(weak, readonly, nonatomic) CBService *service;
+@property(assign, readonly, nonatomic) CBService *service;
 
 /*!
  * @property UUID
@@ -105,7 +107,7 @@ CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
  *      The value of the characteristic.
  *
  */
-@property(retain, readonly) NSData *value;
+@property(retain, readonly, nullable) NSData *value;
 
 /*!
  * @property descriptors
@@ -114,7 +116,7 @@ CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
  *      A list of the CBDescriptors that have so far been discovered in this characteristic.
  *
  */
-@property(retain, readonly) NSArray *descriptors;
+@property(retain, readonly, nullable) NSArray<CBDescriptor *> *descriptors;
 
 /*!
  * @property isBroadcasted
@@ -188,12 +190,12 @@ CB_EXTERN_CLASS @interface CBMutableCharacteristic : CBCharacteristic {
  *
  *  @discussion For notifying characteristics, the set of currently subscribed centrals.
  */
-@property(retain, readonly) NSArray *subscribedCentrals NS_AVAILABLE(10_9, 7_0);
+@property(retain, readonly, nullable) NSArray<CBCentral *> *subscribedCentrals NS_AVAILABLE(10_9, 7_0);
 
-@property(retain, readwrite, nonatomic) CBUUID *UUID;
+@property(retain, readwrite, nonatomic, nullable) CBUUID *UUID;
 @property(assign, readwrite, nonatomic) CBCharacteristicProperties properties;
-@property(retain, readwrite) NSData *value;
-@property(retain, readwrite) NSArray *descriptors;
+@property(retain, readwrite, nullable) NSData *value;
+@property(retain, readwrite, nullable) NSArray<CBDescriptor *> *descriptors;
 
 /*!
  *  @method initWithType:properties:value:permissions
@@ -206,6 +208,8 @@ CB_EXTERN_CLASS @interface CBMutableCharacteristic : CBCharacteristic {
  *  @discussion			Returns an initialized characteristic.
  *
  */
-- (id)initWithType:(CBUUID *)UUID properties:(CBCharacteristicProperties)properties value:(NSData *)value permissions:(CBAttributePermissions)permissions;
+- (id)initWithType:(nullable CBUUID *)UUID properties:(CBCharacteristicProperties)properties value:(nullable NSData *)value permissions:(CBAttributePermissions)permissions;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -136,16 +136,16 @@ class IOPMrootDomain: public IOService
 public:
     static IOPMrootDomain * construct( void );
 
-    virtual bool        start( IOService * provider );
-    virtual IOReturn    setAggressiveness( unsigned long, unsigned long );
-    virtual IOReturn    getAggressiveness( unsigned long, unsigned long * );
+    virtual bool        start( IOService * provider ) APPLE_KEXT_OVERRIDE;
+    virtual IOReturn    setAggressiveness( unsigned long, unsigned long ) APPLE_KEXT_OVERRIDE;
+    virtual IOReturn    getAggressiveness( unsigned long, unsigned long * ) APPLE_KEXT_OVERRIDE;
 
     virtual IOReturn    sleepSystem( void );
     IOReturn            sleepSystemOptions( OSDictionary *options );
 
-    virtual IOReturn    setProperties( OSObject * );
-    virtual bool        serializeProperties( OSSerialize * s ) const;
-    virtual OSObject *  copyProperty( const char * aKey ) const;
+    virtual IOReturn    setProperties( OSObject * ) APPLE_KEXT_OVERRIDE;
+    virtual bool        serializeProperties( OSSerialize * s ) const APPLE_KEXT_OVERRIDE;
+    virtual OSObject *  copyProperty( const char * aKey ) const APPLE_KEXT_OVERRIDE;
 
 /*! @function systemPowerEventOccurred
     @abstract Other drivers may inform IOPMrootDomain of system PM events
@@ -250,13 +250,13 @@ public:
     virtual IONotifier * registerInterest(
                                 const OSSymbol * typeOfInterest,
                                 IOServiceInterestHandler handler,
-                                void * target, void * ref = 0 );
+                                void * target, void * ref = 0 ) APPLE_KEXT_OVERRIDE;
 
     virtual IOReturn    callPlatformFunction(
                                 const OSSymbol *functionName,
                                 bool waitForFunction,
                                 void *param1, void *param2,
-                                void *param3, void *param4 );
+                                void *param3, void *param4 ) APPLE_KEXT_OVERRIDE;
 
 /*! @function createPMAssertion
     @abstract Creates an assertion to influence system power behavior.
@@ -313,22 +313,29 @@ public:
     IOReturn restartWithStackshot();
 
 private:
-    virtual IOReturn    changePowerStateTo( unsigned long ordinal );
+    virtual IOReturn    changePowerStateTo( unsigned long ordinal ) APPLE_KEXT_COMPATIBILITY_OVERRIDE;
     virtual IOReturn    changePowerStateToPriv( unsigned long ordinal );
-    virtual IOReturn    requestPowerDomainState( IOPMPowerFlags, IOPowerConnection *, unsigned long );
-    virtual void        powerChangeDone( unsigned long );
-    virtual bool        tellChangeDown( unsigned long );
-    virtual bool        askChangeDown( unsigned long );
-    virtual void        tellChangeUp( unsigned long );
-    virtual void        tellNoChangeDown( unsigned long );
+    virtual IOReturn    requestPowerDomainState( IOPMPowerFlags, IOPowerConnection *, unsigned long ) APPLE_KEXT_OVERRIDE;
+    virtual void        powerChangeDone( unsigned long ) APPLE_KEXT_OVERRIDE;
+    virtual bool        tellChangeDown( unsigned long ) APPLE_KEXT_OVERRIDE;
+    virtual bool        askChangeDown( unsigned long ) APPLE_KEXT_OVERRIDE;
+    virtual void        tellChangeUp( unsigned long ) APPLE_KEXT_OVERRIDE;
+    virtual void        tellNoChangeDown( unsigned long ) APPLE_KEXT_OVERRIDE;
     virtual IOReturn configureReport(IOReportChannelList   *channels,
                                     IOReportConfigureAction action,
                                     void                    *result,
-                                    void                    *destination);
+                                    void                    *destination) APPLE_KEXT_OVERRIDE;
     virtual IOReturn updateReport(IOReportChannelList      *channels,
                                   IOReportUpdateAction     action,
                                   void                     *result,
-                                  void                     *destination);
+                                  void                     *destination) APPLE_KEXT_OVERRIDE;
+
+    void             configureReportGated(uint64_t channel_id,
+                                          uint64_t action,
+                                          void     *result);
+    IOReturn         updateReportGated(uint64_t ch_id, 
+                                       void *result, 
+                                       IOBufferMemoryDescriptor *dest);
 
 };
 

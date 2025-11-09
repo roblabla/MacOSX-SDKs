@@ -41,13 +41,13 @@ extern "C"
 		to tear it down and CFRelease to release your object reference.
  */
 
-typedef struct OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef;
 
 /*!
 	@function	VTPixelTransferSessionCreate
 	@abstract	Creates a session for transferring images between CVPixelBuffers.
     @discussion 
-		Decompressed frames will be emitted through calls to outputCallback.
+		The function creates a session for transferring images between CVPixelBuffers. 
 	@param	allocator
 		An allocator for the session.  Pass NULL to use the default allocator.
 	@param	pixelTransferSessionOut
@@ -56,9 +56,11 @@ typedef struct OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef;
 */
 VT_EXPORT OSStatus 
 VTPixelTransferSessionCreate(
-  CFAllocatorRef                              allocator,                                /* can be NULL */
-  VTPixelTransferSessionRef *                 pixelTransferSessionOut) VT_AVAILABLE_STARTING(10_8);
+  CM_NULLABLE CFAllocatorRef							allocator,
+  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTPixelTransferSessionRef * CM_NONNULL pixelTransferSessionOut) VT_AVAILABLE_STARTING(10_8);
 
+CF_IMPLICIT_BRIDGING_ENABLED
+	
 /*!
 	@function	VTPixelTransferSessionInvalidate
 	@abstract	Tears down a pixel transfer session.
@@ -70,7 +72,7 @@ VTPixelTransferSessionCreate(
     	Calling VTPixelTransferSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTPixelTransferSessionInvalidate( VTPixelTransferSessionRef session ) VT_AVAILABLE_STARTING(10_8);
+VTPixelTransferSessionInvalidate( CM_NONNULL VTPixelTransferSessionRef session ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTPixelTransferSessionGetTypeID
@@ -100,9 +102,11 @@ VTPixelTransferSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
 */
 VT_EXPORT OSStatus
 VTPixelTransferSessionTransferImage(
-  VTPixelTransferSessionRef       session,
-  CVPixelBufferRef                sourceBuffer,
-  CVPixelBufferRef                destinationBuffer) VT_AVAILABLE_STARTING(10_8);
+  CM_NONNULL VTPixelTransferSessionRef       session,
+  CM_NONNULL CVPixelBufferRef                sourceBuffer,
+  CM_NONNULL CVPixelBufferRef                destinationBuffer) VT_AVAILABLE_STARTING(10_8);
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 // See VTSession.h for property access APIs on VTPixelTransferSessions.
 // See VTPixelTransferProperties.h for standard property keys and values for pixel transfer sessions.

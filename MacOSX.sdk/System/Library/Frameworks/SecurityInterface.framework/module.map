@@ -1,4 +1,4 @@
-framework module SecurityInterface [extern_c] [system] {
+framework module SecurityInterface [extern_c] {
   umbrella "Headers"
   explicit module * {
     export *

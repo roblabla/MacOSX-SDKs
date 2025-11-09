@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -22,16 +22,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
 
-#if TARGET_OS_IPHONE
 #import <CoreGraphics/CoreGraphics.h>
-#else // ! TARGET_OS_IPHONE
-#import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CoreGraphics.h>
-#endif // ! TARGET_OS_IPHONE
 
 @class AVAsset;
 @class AVVideoComposition;
 @class AVAssetImageGeneratorInternal;
 @protocol AVVideoCompositing;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeCleanAperture
@@ -64,6 +62,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @private
 	AVAssetImageGeneratorInternal		*_priv;
 }
+AV_INIT_UNAVAILABLE
 
 /* Indicates the instance of AVAsset with which the AVAssetImageGenerator was initialized  */ 
 @property (nonatomic, readonly) AVAsset *asset NS_AVAILABLE(10_9, 6_0);
@@ -78,15 +77,15 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic) CGSize maximumSize;
 
 /* Specifies the aperture mode for the generated image.  Default is AVAssetImageGeneratorApertureModeCleanAperture. */
-@property (nonatomic, copy) NSString *apertureMode;
+@property (nonatomic, copy, nullable) NSString *apertureMode;
 
 /* Specifies the video composition to use when extracting images from assets with multiple video tracks.
    If no videoComposition is specified, only the first enabled video track will be used.
    If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. */
-@property (nonatomic, copy) AVVideoComposition *videoComposition;
+@property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 
 /* Indicates the custom video compositor instance used, if any */
-@property (nonatomic, readonly) id<AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
 
 /* The actual time of the generated images will be within the range [requestedTime-toleranceBefore, requestedTime+toleranceAfter] and may differ from the requested time for efficiency.
    Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request frame-accurate image generation; this may incur additional decoding delay.
@@ -112,7 +111,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 					AVAssetImageGenerator will use the default enabled video track(s) to generate images.
 */
-+ (AVAssetImageGenerator *)assetImageGeneratorWithAsset:(AVAsset *)asset;
++ (instancetype)assetImageGeneratorWithAsset:(AVAsset *)asset;
 
 /*!
 	@method			initWithAsset:
@@ -132,7 +131,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 					AVAssetImageGenerator will use the default enabled video track(s) to generate images.
 */
-- (instancetype)initWithAsset:(AVAsset *)asset;
+- (instancetype)initWithAsset:(AVAsset *)asset NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method			copyCGImageAtTime:actualTime:error:
@@ -147,10 +146,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			A CGImageRef.
 	@discussion		Returns the CGImage synchronously. Ownership follows the Create Rule.
 */
-- (CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(CMTime *)actualTime error:(NSError **)outError CF_RETURNS_RETAINED;
+- (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * __nullable * __nullable)outError CF_RETURNS_RETAINED;
 
 /* error object indicates the reason for failure if the result is AVAssetImageGeneratorFailed */
-typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGImageRef image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error);
+typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGImageRef __nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * __nullable error);
 
 /*!
 	@method			generateCGImagesAsynchronouslyForTimes:completionHandler:
@@ -164,7 +163,7 @@ typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGI
 					Changes to generator properties (snap behavior, maximum size, etc...) will not affect outstanding asynchronous image generation requests.
 					The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns.
 */
-- (void)generateCGImagesAsynchronouslyForTimes:(NSArray *)requestedTimes completionHandler:(AVAssetImageGeneratorCompletionHandler)handler;
+- (void)generateCGImagesAsynchronouslyForTimes:(NSArray<NSValue *> *)requestedTimes completionHandler:(AVAssetImageGeneratorCompletionHandler)handler;
 
 /*!
 	@method			cancelAllCGImageGeneration
@@ -175,3 +174,5 @@ typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGI
 - (void)cancelAllCGImageGeneration;
 
 @end
+
+NS_ASSUME_NONNULL_END

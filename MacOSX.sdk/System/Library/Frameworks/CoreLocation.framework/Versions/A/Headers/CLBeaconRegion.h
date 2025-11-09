@@ -10,6 +10,8 @@
 #import <CoreLocation/CLRegion.h>
 #import <CoreLocation/CLAvailability.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*
  *  CLBeaconMajorValue
  *
@@ -85,7 +87,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  *    If not specified, it will default to a pre-determined value for the device.
  *
  */
-- (NSMutableDictionary *)peripheralDataWithMeasuredPower:(NSNumber *)measuredPower;
+- (NSMutableDictionary *)peripheralDataWithMeasuredPower:(nullable NSNumber *)measuredPower;
 
 /*
  *  proximityUUID
@@ -103,7 +105,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  *    Most significant value associated with the region. If a major value wasn't specified, this will be nil.
  *
  */
-@property (readonly, nonatomic, copy) NSNumber *major;
+@property (readonly, nonatomic, copy, nullable) NSNumber *major;
 
 /*
  *  minor
@@ -112,7 +114,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  *    Least significant value associated with the region. If a minor value wasn't specified, this will be nil.
  *
  */
-@property (readonly, nonatomic, copy) NSNumber *minor;
+@property (readonly, nonatomic, copy, nullable) NSNumber *minor;
 
 /*
  *  notifyEntryStateOnDisplay
@@ -198,3 +200,5 @@ NS_CLASS_AVAILABLE(NA, 7_0)
 @property (readonly, nonatomic) NSInteger rssi;
 
 @end
+
+NS_ASSUME_NONNULL_END

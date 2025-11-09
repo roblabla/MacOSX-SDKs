@@ -1,4 +1,4 @@
-framework module InstantMessage [extern_c] [system] {
+framework module InstantMessage [extern_c] {
   export *
 
   module IMAVControl {

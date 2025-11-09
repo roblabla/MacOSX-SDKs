@@ -2,7 +2,7 @@
  *  CTStringAttributes.h
  *  CoreText
  *
- *  Copyright (c) 2004, 2006-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -14,9 +14,8 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreGraphics/CGColor.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
+CF_ASSUME_NONNULL_BEGIN
 
 /* The purpose of this file is to define all the attributes to which
     CoreText will respond when placed in a CFAttributedString. These
@@ -219,7 +218,7 @@ extern const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(10_5, 3_2);
                 an attribute value of 1 corresponds to kTraditionalCharactersSelector.
 */
 
-extern const CFStringRef kCTCharacterShapeAttributeName CT_AVAILABLE(10_5, 3_2);
+extern const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED(10_5, 10_11, 3_2, 9_0);
 
 
 /*!
@@ -411,8 +410,8 @@ enum {
 
 extern const CFStringRef kCTRubyAnnotationAttributeName CT_AVAILABLE(10_10, 8_0);
 
-#if defined(__cplusplus)
-}
-#endif
+
+CF_ASSUME_NONNULL_END
+CF_EXTERN_C_END
 
 #endif

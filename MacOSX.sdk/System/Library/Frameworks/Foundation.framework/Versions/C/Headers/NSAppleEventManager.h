@@ -1,12 +1,14 @@
 /*
 	NSAppleEventManager.h
-	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <ApplicationServices/ApplicationServices.h>
 
 @class NSAppleEventDescriptor;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef const struct __NSAppleEventManagerSuspension* NSAppleEventManagerSuspensionID;
 
@@ -35,13 +37,13 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 - (OSErr)dispatchRawAppleEvent:(const AppleEvent *)theAppleEvent withRawReply:(AppleEvent *)theReply handlerRefCon:(SRefCon)handlerRefCon;
 
 // If an Apple event is being handled on the current thread (i.e., a handler that was registered with -setEventHandler:andSelector:forEventClass:andEventID: is being messaged at this instant or -setCurrentAppleEventAndReplyEventWithSuspensionID: has just been invoked), return the descriptor for the event.  Return nil otherwise.  The effects of mutating or retaining the returned descriptor are undefined, though it may be copied.
-@property (readonly, retain) NSAppleEventDescriptor *currentAppleEvent;
+@property (nullable, readonly, retain) NSAppleEventDescriptor *currentAppleEvent;
 
 // If an Apple event is being handled on the current thread (i.e., -currentAppleEvent would not return nil), return the corresponding reply event descriptor.  Return nil otherwise.  This descriptor, including any mutatations, will be returned to the sender of the current event when all handling of the event has been completed, if the sender has requested a reply.  The effects of retaining the descriptor are undefined; it may be copied, but mutations of the copy will not be returned to the sender of the current event.
-@property (readonly, retain) NSAppleEventDescriptor *currentReplyAppleEvent;
+@property (nullable, readonly, retain) NSAppleEventDescriptor *currentReplyAppleEvent;
 
 // If an Apple event is being handled on the current thread (i.e., -currentAppleEvent would not return nil), suspend the handling of the event, returning an ID that must be used to resume the handling of the event.  Return zero otherwise.  The suspended event will no longer be the current event after this method has returned.
-- (NSAppleEventManagerSuspensionID)suspendCurrentAppleEvent NS_RETURNS_INNER_POINTER;
+- (nullable NSAppleEventManagerSuspensionID)suspendCurrentAppleEvent NS_RETURNS_INNER_POINTER;
 
 // Given a nonzero suspension ID returned by an invocation of -suspendCurrentAppleEvent, return the descriptor for the event whose handling was suspended.  The effects of mutating or retaining the returned descriptor are undefined, though it may be copied.  This method may be invoked in any thread, not just the one in which the corresponding invocation of -suspendCurrentAppleEvent occurred.
 - (NSAppleEventDescriptor *)appleEventForSuspensionID:(NSAppleEventManagerSuspensionID)suspensionID;
@@ -56,3 +58,5 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 - (void)resumeWithSuspensionID:(NSAppleEventManagerSuspensionID)suspensionID;
 
 @end
+
+NS_ASSUME_NONNULL_END

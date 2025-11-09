@@ -1,14 +1,16 @@
 /*
 	NSScriptObjectSpecifiers.h
-	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSAppleEventDescriptor, NSScriptClassDescription, NSScriptWhoseTest, NSString;
+@class NSArray<ObjectType>, NSAppleEventDescriptor, NSNumber, NSScriptClassDescription, NSScriptWhoseTest, NSString;
+
+NS_ASSUME_NONNULL_BEGIN
 
 // Error codes for specific problems evaluating specifiers
-enum {
+NS_ENUM(NSInteger) {
     NSNoSpecifierError = 0,
     NSNoTopLevelContainersSpecifierError, // Someone called evaluate with nil.
     NSContainerSpecifierError, // Error evaluating container specifier.
@@ -59,19 +61,19 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
 
 /* Given a typeObjectSpecifier Apple event descriptor, create and return an object specifier, or nil for failure. If this is invoked and fails during the execution of a script command, information about the error that caused the failure is recorded in [NSScriptCommand currentCommand].
 */
-+ (NSScriptObjectSpecifier *)objectSpecifierWithDescriptor:(NSAppleEventDescriptor *)descriptor NS_AVAILABLE(10_5, NA);
++ (nullable NSScriptObjectSpecifier *)objectSpecifierWithDescriptor:(NSAppleEventDescriptor *)descriptor NS_AVAILABLE(10_5, NA);
 
 - (instancetype)initWithContainerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property;
     // This figures out the container class desc from the container specifier.
 
-- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(nullable NSScriptObjectSpecifier *)container key:(NSString *)property NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
 
-@property (assign) NSScriptObjectSpecifier *childSpecifier;
+@property (nullable, assign) NSScriptObjectSpecifier *childSpecifier;
     // You generally should not call the set method.  It is called automatically by setContainerSpecifier:.
 
-@property (retain) NSScriptObjectSpecifier *containerSpecifier;
+@property (nullable, retain) NSScriptObjectSpecifier *containerSpecifier;
      // setContainerSpecifier: calls [child setChildSpecifier:self] as well.
 
 @property BOOL containerIsObjectBeingTested;
@@ -83,31 +85,31 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
 @property (copy) NSString *key;
     // The name of the key in the container object to be accessed by this specifier.
 
-@property (retain) NSScriptClassDescription *containerClassDescription;
-@property (readonly, retain) NSScriptClassDescription *keyClassDescription;
+@property (nullable, retain) NSScriptClassDescription *containerClassDescription;
+@property (nullable, readonly, retain) NSScriptClassDescription *keyClassDescription;
 
-- (NSInteger *)indicesOfObjectsByEvaluatingWithContainer:(id)container count:(NSInteger *)count NS_RETURNS_INNER_POINTER;
+- (nullable NSInteger *)indicesOfObjectsByEvaluatingWithContainer:(id)container count:(NSInteger *)count NS_RETURNS_INNER_POINTER;
     // Returning with count == -1 is shorthand for all indices.
     // count == 0 means no objects match.
-- (id)objectsByEvaluatingWithContainers:(id)containers;
-@property (readonly, retain) id objectsByEvaluatingSpecifier;
+- (nullable id)objectsByEvaluatingWithContainers:(id)containers;
+@property (nullable, readonly, retain) id objectsByEvaluatingSpecifier;
 
 @property NSInteger evaluationErrorNumber;
-@property (readonly, retain) NSScriptObjectSpecifier *evaluationErrorSpecifier;
+@property (nullable, readonly, retain) NSScriptObjectSpecifier *evaluationErrorSpecifier;
 
 /* Return an Apple event descriptor that represents the receiver. If the receiver was created with +objectSpecifierWithDescriptor: that passed-in descriptor is returned. Otherwise a new one is created and returned (autoreleased, of course).
 */ 
-@property (readonly, copy) NSAppleEventDescriptor *descriptor NS_AVAILABLE(10_5, NA);
+@property (nullable, readonly, copy) NSAppleEventDescriptor *descriptor NS_AVAILABLE(10_5, NA);
 
 @end
 
 
 @interface NSObject (NSScriptObjectSpecifiers)
 
-@property (readonly, retain) NSScriptObjectSpecifier *objectSpecifier;
+@property (nullable, readonly, retain) NSScriptObjectSpecifier *objectSpecifier;
     // Overridden by objects that can provide a fully specified object specifier to themselves within an app.
 
-- (NSArray *)indicesOfObjectsByEvaluatingObjectSpecifier:(NSScriptObjectSpecifier *)specifier;
+- (nullable NSArray<NSNumber *> *)indicesOfObjectsByEvaluatingObjectSpecifier:(NSScriptObjectSpecifier *)specifier;
     // Containers that want to evaluate some specifiers on their own should implement this method.  The result array should be full of NSNumber objects which identify the indices of the matching objects.  If this method returns nil, the object specifier will go on to do its own evaluation.  If this method returns an array, the object specifier will use the NSNumbers in it as the indices.  So, if you evaluate the specifier and there are no objects which match, you should return an empty array, not nil.  If you find only one object you should still return its index in an array.  Returning an array with a single index where the index is -1 is interpretted to mean all the objects.
 
 @end
@@ -120,7 +122,7 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     NSInteger _index;
 }
 
-- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property index:(NSInteger)index NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(nullable NSScriptObjectSpecifier *)container key:(NSString *)property index:(NSInteger)index NS_DESIGNATED_INITIALIZER;
 
 @property NSInteger index;
 
@@ -141,8 +143,8 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     NSString *_name;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property name:(NSString *)name NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(nullable NSScriptObjectSpecifier *)container key:(NSString *)property name:(NSString *)name NS_DESIGNATED_INITIALIZER;
 @property (copy) NSString *name;
 
 @end
@@ -171,10 +173,10 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
 - (void)evaluate;
 
 // Return the container into which insertion should be done, if evaluation has been successful, or nil otherwise.  If this object has never been evaluated, evaluation is attempted.
-@property (readonly, retain) id insertionContainer;
+@property (nullable, readonly, retain) id insertionContainer;
 
 // Return the key for the to-many relationship for which insertion should be done, if evaluation has been successful, or nil otherwise.  If this object has never been evaluated, evaluation is attempted.
-@property (readonly, copy) NSString *insertionKey;
+@property (nullable, readonly, copy) NSString *insertionKey;
 
 // Return an index into the set of keyed to-many relationship objects before which insertion should be done in the insertion container, if evaluation has been successful, or -1 otherwise.  If this object has never been evaluated, evaluation is attempted.
 @property (readonly) NSInteger insertionIndex;
@@ -206,12 +208,12 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     NSScriptObjectSpecifier *_startSpec;
     NSScriptObjectSpecifier *_endSpec;
 }
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property startSpecifier:(NSScriptObjectSpecifier *)startSpec endSpecifier:(NSScriptObjectSpecifier *)endSpec NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(nullable NSScriptObjectSpecifier *)container key:(NSString *)property startSpecifier:(nullable NSScriptObjectSpecifier *)startSpec endSpecifier:(nullable NSScriptObjectSpecifier *)endSpec NS_DESIGNATED_INITIALIZER;
 
-@property (retain) NSScriptObjectSpecifier *startSpecifier;
+@property (nullable, retain) NSScriptObjectSpecifier *startSpecifier;
 
-@property (retain) NSScriptObjectSpecifier *endSpecifier;
+@property (nullable, retain) NSScriptObjectSpecifier *endSpecifier;
 
 @end
 
@@ -221,12 +223,12 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     NSRelativePosition _relativePosition;
     NSScriptObjectSpecifier *_baseSpecifier;
 }
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property relativePosition:(NSRelativePosition)relPos baseSpecifier:(NSScriptObjectSpecifier *)baseSpecifier NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(nullable NSScriptObjectSpecifier *)container key:(NSString *)property relativePosition:(NSRelativePosition)relPos baseSpecifier:(nullable NSScriptObjectSpecifier *)baseSpecifier NS_DESIGNATED_INITIALIZER;
 
 @property NSRelativePosition relativePosition;
 
-@property (retain) NSScriptObjectSpecifier *baseSpecifier;
+@property (nullable, retain) NSScriptObjectSpecifier *baseSpecifier;
     // This is another object specifier (which will be evaluated within the same container objects that this specifier is evalutated in).  To find the indices for this specifier we will evaluate the base specifier and take the index before or after the indices returned.
 
 @end
@@ -238,8 +240,8 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     @private
     id _uniqueID;
 }
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property uniqueID:(id)uniqueID NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(nullable NSScriptObjectSpecifier *)container key:(NSString *)property uniqueID:(id)uniqueID NS_DESIGNATED_INITIALIZER;
 
 @property (copy) id uniqueID;
 
@@ -264,8 +266,8 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     NSInteger _endSubelementIndex;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property test:(NSScriptWhoseTest *)test NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContainerClassDescription:(NSScriptClassDescription *)classDesc containerSpecifier:(nullable NSScriptObjectSpecifier *)container key:(NSString *)property test:(NSScriptWhoseTest *)test NS_DESIGNATED_INITIALIZER;
 
 @property (retain) NSScriptWhoseTest *test;
 @property NSWhoseSubelementIdentifier startSubelementIdentifier;
@@ -279,3 +281,6 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     // Only used if the endSubelementIdentifier == NSIndexSubelement
 
 @end
+
+NS_ASSUME_NONNULL_END
+

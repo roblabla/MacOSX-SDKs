@@ -1,12 +1,14 @@
 /*
     NSImageView.h
     Application Kit
-    Copyright (c) 1994-2014, Apple Inc.
+    Copyright (c) 1994-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSImageCell.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSImageView : NSControl <NSAccessibilityImage> {
     /*All instance variables are private*/
@@ -24,7 +26,7 @@
     SEL _action;                   // call here after an image drag-drop
 }
 
-@property (strong) NSImage *image;
+@property (nullable, strong) NSImage *image;
 
 @property NSImageAlignment imageAlignment;
 @property NSImageScaling imageScaling;
@@ -36,5 +38,7 @@
 @property BOOL allowsCutCopyPaste;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 

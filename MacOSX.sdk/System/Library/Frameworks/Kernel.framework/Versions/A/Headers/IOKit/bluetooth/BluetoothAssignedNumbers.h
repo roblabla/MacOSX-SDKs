@@ -380,6 +380,7 @@ enum
     kBluetoothL2CAPPSMHIDInterrupt				= 0x0013,	// HID profile - interrupt interface
     kBluetoothL2CAPPSMAVCTP						= 0x0017,	// Audio/Video Control Transport Protocol
     kBluetoothL2CAPPSMAVDTP						= 0x0019,	// Audio/Video Distribution Transport Protocol
+    kBluetoothL2CAPPSMAVCTP_Browsing			= 0x001B,	// AVTCP (AVRCP) Browsing
     kBluetoothL2CAPPSMUID_C_Plane				= 0x001D,	// Unrestricted Digital Information Profile (UDI)
     kBluetoothL2CAPPSMATT						= 0x001F,	// Attribute Protocol
 	

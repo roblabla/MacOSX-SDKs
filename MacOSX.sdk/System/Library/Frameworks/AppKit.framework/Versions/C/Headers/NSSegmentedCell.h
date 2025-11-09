@@ -1,13 +1,15 @@
 /*
     NSSegmentedCell.h
     Application Kit
-    Copyright (c) 2003-2014, Apple Inc.
+    Copyright (c) 2003-2015, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSSegmentedControl.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSMutableArray;
 
@@ -63,8 +65,8 @@
 - (void)setWidth:(CGFloat)width forSegment:(NSInteger)segment;
 - (CGFloat)widthForSegment:(NSInteger)segment;
 
-- (void)setImage:(NSImage *)image forSegment:(NSInteger)segment;
-- (NSImage *)imageForSegment:(NSInteger)segment;
+- (void)setImage:(nullable NSImage *)image forSegment:(NSInteger)segment;
+- (nullable NSImage *)imageForSegment:(NSInteger)segment;
 
 
 - (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
@@ -72,7 +74,7 @@
 
 
 - (void)setLabel:(NSString *)label forSegment:(NSInteger)segment;
-- (NSString *)labelForSegment:(NSInteger)segment;
+- (nullable NSString *)labelForSegment:(NSInteger)segment;
 
 - (void)setSelected:(BOOL)selected forSegment:(NSInteger)segment;
 - (BOOL)isSelectedForSegment:(NSInteger)segment;
@@ -80,11 +82,11 @@
 - (void)setEnabled:(BOOL)enabled forSegment:(NSInteger)segment;
 - (BOOL)isEnabledForSegment:(NSInteger)segment;
 
-- (void)setMenu:(NSMenu *)menu forSegment:(NSInteger)segment;
-- (NSMenu *)menuForSegment:(NSInteger)segment;
+- (void)setMenu:(nullable NSMenu *)menu forSegment:(NSInteger)segment;
+- (nullable NSMenu *)menuForSegment:(NSInteger)segment;
 
-- (void)setToolTip:(NSString *)toolTip forSegment:(NSInteger)segment;
-- (NSString *)toolTipForSegment:(NSInteger)segment;
+- (void)setToolTip:(nullable NSString *)toolTip forSegment:(NSInteger)segment;
+- (nullable NSString *)toolTipForSegment:(NSInteger)segment;
 
 - (void)setTag:(NSInteger)tag forSegment:(NSInteger)segment;
 - (NSInteger)tagForSegment:(NSInteger)segment;
@@ -103,4 +105,6 @@
 */
 - (NSBackgroundStyle)interiorBackgroundStyleForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
 @end
+
+NS_ASSUME_NONNULL_END
 

@@ -1,13 +1,16 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2014, Apple Inc.
+	Copyright (c) 2008-2015, Apple Inc.
 	All rights reserved.
 */
 
+#import <Foundation/NSArray.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSTextInputClient.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSEvent;
 
@@ -56,7 +59,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* The current activated text input context object. The Cocoa Text Input system communicates primarily with the client of the activated input context via the NSTextInputClient protocol.
  */
-+ (NSTextInputContext *)currentInputContext;
++ (nullable NSTextInputContext *)currentInputContext;
 
 /* The designated initializer.
  */
@@ -73,7 +76,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* Specifies the set of keyboard input source locales allowed when this input context is active. NSAllRomanInputSourcesLocaleIdentifier can be specified as a valid locale.
  */
-@property(copy) NSArray *allowedInputSourceLocales;
+@property(nullable, copy) NSArray<NSString *> *allowedInputSourceLocales;
 
 
 /**** Activation *****/
@@ -102,21 +105,23 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* The array of keyboard text input source identifier strings available to the receiver.
  */
-@property(readonly) NSArray *keyboardInputSources; 
+@property(nullable, readonly) NSArray<NSString *> *keyboardInputSources;
 
 /* The identifier string for the selected keyboard text input source.
  */
-@property(copy) NSString *selectedKeyboardInputSource;
+@property(nullable, copy) NSString *selectedKeyboardInputSource;
 
 
 /**** Text Input source attributes ****/
 /* Returns the display name for inputSourceIdentifier.
  */
-+ (NSString *)localizedNameForInputSource:(NSString *)inputSourceIdentifier;
++ (nullable NSString *)localizedNameForInputSource:(NSString *)inputSourceIdentifier;
 @end
 
 /**** Notifications ****/
 /* Notified whenever the selected text input source changes.
  */
-APPKIT_EXTERN NSString *NSTextInputContextKeyboardSelectionDidChangeNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSString * NSTextInputContextKeyboardSelectionDidChangeNotification NS_AVAILABLE_MAC(10_6);
+
+NS_ASSUME_NONNULL_END
 

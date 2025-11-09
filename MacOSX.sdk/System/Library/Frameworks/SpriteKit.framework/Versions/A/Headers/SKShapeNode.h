@@ -13,6 +13,9 @@
 #import <SpriteKit/SKShader.h>
 #import <SpriteKit/SpriteKitBase.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  A SpriteKit Node used to stroke or fill a shape. CGPaths are used to supply the path.
  
@@ -58,7 +61,7 @@ SK_EXPORT @interface SKShapeNode : SKNode
 /**
  The CGPath to be drawn (in the Node's coordinate space)
  */
-@property (nonatomic) CGPathRef path;
+@property (nonatomic, nullable) CGPathRef path;
 
 /**
  The color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
@@ -112,16 +115,18 @@ SK_EXPORT @interface SKShapeNode : SKNode
 @property (nonatomic, readonly) CGFloat lineLength;
 
 /* An optional Texture used for the filling the Shape */
-@property (nonatomic, retain) SKTexture *fillTexture NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, retain, nullable) SKTexture *fillTexture NS_AVAILABLE(10_10, 8_0);
 
 /* An optional SKShader used for the filling the Shape */
-@property (nonatomic, retain) SKShader *fillShader NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, retain, nullable) SKShader *fillShader NS_AVAILABLE(10_10, 8_0);
 
 
 /* An optional Texture used for the Shape's stroke. */
-@property (nonatomic, retain) SKTexture *strokeTexture NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, retain, nullable) SKTexture *strokeTexture NS_AVAILABLE(10_10, 8_0);
 
 /* An optional SKShader used for the Shape's Stroke. */
-@property (nonatomic, retain) SKShader *strokeShader NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, retain, nullable) SKShader *strokeShader NS_AVAILABLE(10_10, 8_0);
 
 @end
+
+NS_ASSUME_NONNULL_END

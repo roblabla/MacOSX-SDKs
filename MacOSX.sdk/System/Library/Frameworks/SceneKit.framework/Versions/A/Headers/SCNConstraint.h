@@ -1,26 +1,24 @@
 //
 //  SCNConstraint.h
 //
-//  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
 //
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class SCNConstraint
  @abstract A SCNConstraint is an abstract class that represents a single constraint that can be applied to a node.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+NS_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNConstraint : NSObject <NSCopying, NSSecureCoding, SCNAnimatable>
-{
-@protected
-	id _constraintReserved;
-}
 
 /*!
  @property influenceFactor
  @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
  */
-@property(nonatomic) CGFloat influenceFactor SCENEKIT_AVAILABLE(10_10, 8_0);
+@property(nonatomic) CGFloat influenceFactor NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -29,12 +27,8 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
  @abstract A SCNLookAtConstraint applies on a node's orientation so that it always look at another node.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+NS_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNLookAtConstraint : SCNConstraint
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method lookAtConstraintWithTarget:
@@ -58,16 +52,37 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
 
 @end
 
+typedef NS_OPTIONS(NSUInteger, SCNBillboardAxis) {
+    SCNBillboardAxisX = 0x1 << 0,
+    SCNBillboardAxisY = 0x1 << 1,
+    SCNBillboardAxisZ = 0x1 << 2,
+    SCNBillboardAxisAll = SCNBillboardAxisX | SCNBillboardAxisY | SCNBillboardAxisZ
+};
+
+NS_CLASS_AVAILABLE(10_11, 9_0)
+@interface SCNBillboardConstraint : SCNConstraint
+
+/*!
+ @method billboardConstraint:
+ @abstract Creates and returns a SCNBillboardConstraint constraint.
+ @discussion A billboard constraint forces the receiver to look into the direction of the current point of view.
+ */
++ (instancetype)billboardConstraint;
+
+/*!
+ @property freeAxes
+ @abstract Specifies the axes on which the billboarding orientation operates. Defaults to SCNBillboardAxisAll.
+ */
+@property(nonatomic) SCNBillboardAxis freeAxes;
+
+@end
+
 /*!
  @class SCNTransformConstraint
  @abstract A SCNTransformConstraint applies on the transform of a node via a custom block.
  */
-SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+NS_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNTransformConstraint : SCNConstraint
-{
-@private
-	id _reserved;
-}
 
 /*!
  @method transformConstraintInWorldSpace:withBlock:
@@ -76,7 +91,7 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
  @param block The custom block to call to evaluate the constraint.
  @discussion The node and its transform are passed to the block. The transform returned by the block will be used to render the node.
  */
-+ (instancetype)transformConstraintInWorldSpace:(BOOL)world withBlock:(SCNMatrix4(^)(SCNNode *node, SCNMatrix4 transform))block;
++ (instancetype)transformConstraintInWorldSpace:(BOOL)world withBlock:(SCNMatrix4 (^)(SCNNode *node, SCNMatrix4 transform))block;
 
 @end
 
@@ -85,12 +100,16 @@ SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
  @class SCNIKConstraint
  @abstract A SCNIKConstraint applies an inverse kinematics constraint
  */
-SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface SCNIKConstraint : SCNConstraint
-{
-@private
-	id _reserved;
-}
+
+/*!
+ @method initWithChainRootNode:
+ @abstract Creates and returns a SCNIKConstraint object with the specified parameter.
+ @param chainRootNode The root node of the kinematic chain.
+ @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
+ */
+- (instancetype)initWithChainRootNode:(SCNNode *)chainRootNode NS_AVAILABLE(10_11, 9_0);
 
 /*!
  @method inverseKinematicsConstraintWithChainRootNode:
@@ -120,3 +139,5 @@ SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
 - (CGFloat)maxAllowedRotationAngleForJoint:(SCNNode *)node;
 
 @end
+
+NS_ASSUME_NONNULL_END

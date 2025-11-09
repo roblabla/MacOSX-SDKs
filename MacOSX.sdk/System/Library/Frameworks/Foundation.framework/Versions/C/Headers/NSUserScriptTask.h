@@ -1,12 +1,13 @@
 /*
 	NSUserScriptTask.h
-	Copyright (c) 2012-2014, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2015, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSAppleEventDescriptor, NSArray, NSDictionary, NSError, NSFileHandle, NSURL, NSXPCConnection;
+@class NSAppleEventDescriptor, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSError, NSFileHandle, NSString, NSURL, NSXPCConnection;
 
+NS_ASSUME_NONNULL_BEGIN
 
 /*
     These classes are intended to execute user-supplied scripts, and will execute them outside of the application's sandbox, if any.  (They are *not* intended to execute scripts built into an application; for that, use NSTask, NSAppleScript, or AMWorkflow.)  If the application is sandboxed, then the script must be in the "application scripts" folder, which you can get using +[NSFileManager URLForDirectory:NSApplicationScriptsDirectory ...].  A sandboxed application may read from, but not write to, this folder.
@@ -29,13 +30,13 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Initialize given a URL for a script file.  The returned object will be of one of the specific sub-classes below, or nil if the file does not appear to match any of the known types.  (If used from a sub-class, the result will be of that class, or nil.)
-- (instancetype)initWithURL:(NSURL *)url error:(NSError **)error NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(NSURL *)url error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
 @property (readonly, copy) NSURL *scriptURL;
 
 // Execute the script with no input and ignoring any result.  This and the other "execute" methods below may be called at most once on any given instance.  If the script completed normally, the completion handler's "error" parameter will be nil.
-typedef void (^NSUserScriptTaskCompletionHandler)(NSError *error);
-- (void)executeWithCompletionHandler:(NSUserScriptTaskCompletionHandler)handler;
+typedef void (^NSUserScriptTaskCompletionHandler)(NSError * __nullable error);
+- (void)executeWithCompletionHandler:(nullable NSUserScriptTaskCompletionHandler)handler;
 
 @end
 
@@ -46,13 +47,13 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @interface NSUserUnixTask : NSUserScriptTask
 
 // Standard I/O streams.  Setting them to nil (the default) will bind them to /dev/null.
-@property (retain) NSFileHandle *standardInput;
-@property (retain) NSFileHandle *standardOutput;
-@property (retain) NSFileHandle *standardError;
+@property (nullable, retain) NSFileHandle *standardInput;
+@property (nullable, retain) NSFileHandle *standardOutput;
+@property (nullable, retain) NSFileHandle *standardError;
 
 // Execute the file with the given arguments.  "arguments" is an array of NSStrings.  The arguments do not undergo shell expansion, so you do not need to do special quoting, and shell variables are not resolved.
-typedef void (^NSUserUnixTaskCompletionHandler)(NSError *error);
-- (void)executeWithArguments:(NSArray *)arguments completionHandler:(NSUserUnixTaskCompletionHandler)handler;
+typedef void (^NSUserUnixTaskCompletionHandler)(NSError *__nullable error);
+- (void)executeWithArguments:(nullable NSArray<NSString *> *)arguments completionHandler:(nullable NSUserUnixTaskCompletionHandler)handler;
 
 @end
 
@@ -66,8 +67,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Execute the AppleScript script by sending it the given Apple event.  Pass nil to execute the script's default "run" handler.
-typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor *result, NSError *error);
-- (void)executeWithAppleEvent:(NSAppleEventDescriptor *)event completionHandler:(NSUserAppleScriptTaskCompletionHandler)handler;
+typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor * __nullable result, NSError * __nullable error);
+- (void)executeWithAppleEvent:(nullable NSAppleEventDescriptor *)event completionHandler:(nullable NSUserAppleScriptTaskCompletionHandler)handler;
 
 @end
 
@@ -81,10 +82,12 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Workflow variables.
-@property (copy) NSDictionary *variables;
+@property (nullable, copy) NSDictionary<NSString *, id> *variables;
 
 // Execute the Automator workflow, passing it the given input.
-typedef void (^NSUserAutomatorTaskCompletionHandler)(id result, NSError *error);
-- (void)executeWithInput:(id <NSSecureCoding>)input completionHandler:(NSUserAutomatorTaskCompletionHandler)handler;
+typedef void (^NSUserAutomatorTaskCompletionHandler)(id __nullable result, NSError * __nullable error);
+- (void)executeWithInput:(nullable id <NSSecureCoding>)input completionHandler:(nullable NSUserAutomatorTaskCompletionHandler)handler;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,6 +1,6 @@
 /* CoreAnimation - CABase.h
 
-   Copyright (c) 2006-2014, Apple Inc.
+   Copyright (c) 2006-2015, Apple Inc.
    All rights reserved. */
 
 #ifndef CABASE_H
@@ -16,7 +16,47 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
 
+#include <Availability.h>
 #include <TargetConditionals.h>
+
+/* The earliest Mac SDK we support is 10.9 */
+
+#ifndef __MAC_10_10
+# define __MAC_10_10    101000
+#endif
+#ifndef __MAC_10_10_2
+# define __MAC_10_10_2  101002
+#endif
+#ifndef __MAC_10_10_3
+# define __MAC_10_10_3  101003
+#endif
+#ifndef __MAC_10_11
+# define __MAC_10_11    101100
+#endif
+
+/* The earliest iOS SDK we support is 7.0 */
+
+#ifndef __IPHONE_7_1
+# define __IPHONE_7_1   70100
+#endif
+#ifndef __IPHONE_8_0
+# define __IPHONE_8_0   80000
+#endif
+#ifndef __IPHONE_8_1
+# define __IPHONE_8_1   80100
+#endif
+#ifndef __IPHONE_8_2
+# define __IPHONE_8_2   80200
+#endif
+#ifndef __IPHONE_8_3
+# define __IPHONE_8_3   80300
+#endif
+#ifndef __IPHONE_8_4
+# define __IPHONE_8_4   80400
+#endif
+#ifndef __IPHONE_9_0
+# define __IPHONE_9_0   90000
+#endif
 
 #ifdef CA_BUILDING_CA
 # undef __OSX_AVAILABLE_STARTING
@@ -55,12 +95,12 @@
 #ifndef CA_INLINE
 # if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 #  define CA_INLINE static inline
-# elif defined (__MWERKS__) || defined (__cplusplus)
+# elif defined (__cplusplus)
 #  define CA_INLINE static inline
 # elif CA_GNUC (3, 0)
 #  define CA_INLINE static __inline__ __attribute__ ((always_inline))
 # else
-#  define CA_INLINE static    
+#  define CA_INLINE static
 # endif
 #endif
 

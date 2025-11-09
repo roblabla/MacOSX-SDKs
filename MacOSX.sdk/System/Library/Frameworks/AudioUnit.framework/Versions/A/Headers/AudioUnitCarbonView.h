@@ -1,18 +1,12 @@
-/*
-     File:       AudioUnitCarbonView.h
- 
-     Contains:   AudioUnitCarbonView Interfaces
- 
-     Copyright:  © 2002-2008 by Apple, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+/*!
+	@file		AudioUnitCarbonView.h
+ 	@framework	AudioUnit.framework
+ 	@copyright	(c) 2000-2008 Apple, Inc. All rights reserved.
+	@abstract	Deprecated interfaces for using Carbon-based views of Audio Units.
 */
-#ifndef __AUDIOUNITCARBONVIEW__
-#define __AUDIOUNITCARBONVIEW__
+
+#ifndef AudioUnit_AudioUnitCarbonView_h
+#define AudioUnit_AudioUnitCarbonView_h
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <Carbon/Carbon.h>
@@ -23,16 +17,8 @@
 	#include <AUComponent.h>
 #endif
 
-#if PRAGMA_ONCE
-#pragma once
-#endif
-
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if PRAGMA_IMPORT
-#pragma import on
 #endif
 
 #if PRAGMA_STRUCT_ALIGN
@@ -42,11 +28,6 @@ extern "C" {
 #elif PRAGMA_STRUCT_PACK
 	#pragma pack(2)
 #endif
-
-/*!
-	@header		AudioUnitCarbonView
-	@abstract	This file defines interfaces for creating and event handling in carbon-based views of Audio Units.
-*/
 
 /*!
 	@typedef	AudioUnitCarbonView
@@ -61,7 +42,7 @@ typedef ComponentInstance			   AudioUnitCarbonView;
 	@constant	kAUCarbonViewSubType_Generic
 					The four char-code subtype of a carbon-based view component
 */
-enum
+CF_ENUM(UInt32)
 {
 	kAudioUnitCarbonViewComponentType   = 'auvw',
 	kAUCarbonViewSubType_Generic		= 'gnrc'
@@ -148,7 +129,7 @@ AudioUnitCarbonViewCreate(	  AudioUnitCarbonView   inView,
 							  ControlRef            inParentControl,
 							  const Float32Point *  inLocation,
 							  const Float32Point *  inSize,
-							  ControlRef *          outControl)				__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+							  ControlRef *          outControl)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@function	AudioUnitCarbonViewSetEventListener
@@ -196,15 +177,9 @@ enum
     #pragma pack()
 #endif
 
-#ifdef PRAGMA_IMPORT_OFF
-#pragma import off
-#elif PRAGMA_IMPORT
-#pragma import reset
-#endif
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __AUDIOUNITCARBONVIEW__ */
+#endif /* AudioUnit_AudioUnitCarbonView_h */
 

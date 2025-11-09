@@ -135,7 +135,10 @@ AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataLocationRole    
 AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataLocationDate                    NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataDirectionFacing                 NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataDirectionMotion                 NS_AVAILABLE(10_10, 8_0);
-AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform		NS_AVAILABLE(10_10, 8_0);
+AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform        NS_AVAILABLE(10_10, 8_0);
+AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataDetectedFace                    NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataVideoOrientation                NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVMetadataIdentifierQuickTimeMetadataContentIdentifier               NS_AVAILABLE(10_11, 9_0);
 
 // iTunesMetadata
 AVF_EXPORT NSString *const AVMetadataIdentifieriTunesMetadataAlbum                              NS_AVAILABLE(10_10, 8_0);
@@ -192,7 +195,8 @@ AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataAudioEncryption       
 AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataAttachedPicture                       /* APIC Attached picture */                                     NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataAudioSeekPointIndex                   /* ASPI Audio seek point index */                               NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataComments                              /* COMM Comments */                                             NS_AVAILABLE(10_10, 8_0);
-AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataCommerical                            /* COMR Commercial frame */                                     NS_AVAILABLE(10_10, 8_0);
+AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataCommercial                            /* COMR Commercial frame */                                     NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataCommerical                            /* COMR Commercial frame */                                     NS_DEPRECATED(10_10, 10_11, 8_0, 9_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataEncryption                            /* ENCR Encryption method registration */                       NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataEqualization                          /* EQUA Equalization */                                         NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadataIdentifierID3MetadataEqualization2                         /* EQU2 Equalisation (2) */                                     NS_AVAILABLE(10_10, 8_0);

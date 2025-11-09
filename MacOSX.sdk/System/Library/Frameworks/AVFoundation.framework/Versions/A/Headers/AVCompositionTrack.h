@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2015 Apple Inc. All rights reserved.
 
 */
 
@@ -11,6 +11,8 @@
 #import <AVFoundation/AVAssetTrack.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class AVAsset;
 @class AVComposition;
@@ -24,6 +26,7 @@
 */
 
 @class AVCompositionTrackInternal;
+@class AVCompositionTrackSegment;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVCompositionTrack : AVAssetTrack
@@ -39,7 +42,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
   	-validateTrackSegments:error: will perform a test to ensure that an array of AVCompositionTrackSegments
   	conforms to this rule.
 */
-@property (nonatomic, readonly, copy) NSArray *segments;
+@property (nonatomic, readonly, copy) NSArray<AVCompositionTrackSegment *> *segments;
 
 @end
 
@@ -66,10 +69,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic) CMTimeScale naturalTimeScale;
 
 /* indicates the language associated with the track, as an ISO 639-2/T language code; if not set, returns nil */
-@property (nonatomic, copy) NSString *languageCode;
+@property (nonatomic, copy, nullable) NSString *languageCode;
 
-/* indicates the language tag associated with the track, as an RFC 4646 language tag; if not set, returns nil */
-@property (nonatomic, copy) NSString *extendedLanguageTag;
+/* indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier; if not set, returns nil */
+@property (nonatomic, copy, nullable) NSString *extendedLanguageTag;
 
 /* the preferred transformation of the visual media data for display purposes; if not set, returns CGAffineTransformIdentity */
 @property (nonatomic) CGAffineTransform preferredTransform;
@@ -84,7 +87,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
   	-validateTrackSegments:error: will perform a test to ensure that an array of AVCompositionTrackSegments
   	conforms to this rule.
 */
-@property (nonatomic, copy) NSArray *segments;
+@property (nonatomic, copy, null_resettable) NSArray<AVCompositionTrackSegment *> *segments;
 
 /*!
 	@method			insertTimeRange:ofTrack:atTime:error:
@@ -103,7 +106,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 		
 		Note that the inserted track timeRange will be presented at its natural duration and rate. It can be scaled to a different duration (and presented at a different rate) via -scaleTimeRange:toDuration:.
 */
-- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofTrack:(AVAssetTrack *)track atTime:(CMTime)startTime error:(NSError **)error;
+- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofTrack:(AVAssetTrack *)track atTime:(CMTime)startTime error:(NSError * __nullable * __nullable)outError;
 
 /*!
 	@method			insertTimeRanges:ofTracks:atTime:error:
@@ -121,7 +124,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@discussion	
 		This method is equivalent to (but more efficient than) calling -insertTimeRange:ofTrack:atTime:error: for each timeRange/track pair. If this method returns an error, none of the time ranges will be inserted into the composition track. To specify an empty time range, pass NSNull for the track and a time range of starting at kCMTimeInvalid with a duration of the desired empty edit.
 */
-- (BOOL)insertTimeRanges:(NSArray *)timeRanges ofTracks:(NSArray *)tracks atTime:(CMTime)startTime error:(NSError **)error NS_AVAILABLE(10_8, 5_0);
+- (BOOL)insertTimeRanges:(NSArray<NSValue *> *)timeRanges ofTracks:(NSArray<AVAssetTrack *> *)tracks atTime:(CMTime)startTime error:(NSError * __nullable * __nullable)outError NS_AVAILABLE(10_8, 5_0);
 
 /*!
 	@method			insertEmptyTimeRange:
@@ -175,6 +178,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 		be made via an instance of NSMutableArray, and the resulting array can be tested via
 		-validateTrackSegments:error:.
 */
-- (BOOL)validateTrackSegments:(NSArray *)trackSegments error:(NSError **)error;
+- (BOOL)validateTrackSegments:(NSArray<AVCompositionTrackSegment *> *)trackSegments error:(NSError * __nullable * __nullable)outError;
 
 @end
+
+NS_ASSUME_NONNULL_END

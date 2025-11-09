@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2014, Apple Inc.
+	Copyright (c) 1994-2015, Apple Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -12,6 +12,8 @@
 #ifndef NSEDGEINSETS_DEFINED
 #import <AppKit/NSLayoutConstraint.h>
 #endif
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSColor, NSClipView, NSRulerView, NSScroller;
 
@@ -97,15 +99,15 @@ typedef struct __SFlags {
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Returns the NSScrollView frame size that yields the specified contentView frame size.  This method should be used in preference to the deprecated +frameSizeForContentSize:hasHorizontalScroller:hasVerticalScroller:borderType:, which makes assumptions about the scrollers' classes, control size, and style.  The "horizontalScrollerClass" parameter should specify the class of horizontal scroller to use if the NSScrollView will have a horizontal scroller, or Nil if it will not.  Likewise for the "verticalScrollerClass" parameter.
 */
-+ (NSSize)frameSizeForContentSize:(NSSize)cSize horizontalScrollerClass:(Class)horizontalScrollerClass verticalScrollerClass:(Class)verticalScrollerClass borderType:(NSBorderType)aType controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
++ (NSSize)frameSizeForContentSize:(NSSize)cSize horizontalScrollerClass:(nullable Class)horizontalScrollerClass verticalScrollerClass:(nullable Class)verticalScrollerClass borderType:(NSBorderType)aType controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
 
 /* Returns the contentView frame size that yields the specified NSScrollView frame size.  This method should be used in preference to the deprecated +contentSizeForFrameSize:hasHorizontalScroller:hasVerticalScroller:borderType: method, which makes assumptions about the scrollers' classes, control size, and style.  The "horizontalScrollerClass" parameter should specify the class of horizontal scroller to use if the NSScrollView will have a horizontal scroller, or Nil if it will not.  Likewise for the "verticalScrollerClass" parameter.
 */
-+ (NSSize)contentSizeForFrameSize:(NSSize)fSize horizontalScrollerClass:(Class)horizontalScrollerClass verticalScrollerClass:(Class)verticalScrollerClass borderType:(NSBorderType)aType controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
++ (NSSize)contentSizeForFrameSize:(NSSize)fSize horizontalScrollerClass:(nullable Class)horizontalScrollerClass verticalScrollerClass:(nullable Class)verticalScrollerClass borderType:(NSBorderType)aType controlSize:(NSControlSize)controlSize scrollerStyle:(NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
 
 /* Returns the NSScrollView frame size that yields the specified contentView frame size.  This method assumes scrollers of NSRegularControlSize, that are not subclassed in a way that affects their metrics (scrollerWidth), and also assumes that scrollers of the current [NSScroller preferredScrollerStyle] will be used, which may not be the case if conditions such as legacy scroller subclassing or presence of accessory views force fallback to NSScrollerStyleLegacy for a particular NSScrollView instance.  Since those assumptions will produce incorrect results for some cases, this method should be considered deprecated; use +frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle:, which provides for full specification of the relevant parameters, instead.
 */
@@ -117,16 +119,16 @@ typedef struct __SFlags {
 
 @property (readonly) NSRect documentVisibleRect;
 @property (readonly) NSSize contentSize;
-@property (assign) id /* NSView * */ documentView;
+@property (nullable, assign) id /* NSView * */ documentView;
 @property (strong) NSClipView *contentView;
-@property (strong) NSCursor *documentCursor;
+@property (nullable, strong) NSCursor *documentCursor;
 @property NSBorderType borderType;
 @property (copy) NSColor *backgroundColor;
 @property BOOL drawsBackground;
 @property BOOL hasVerticalScroller;
 @property BOOL hasHorizontalScroller;
-@property (strong) NSScroller *verticalScroller;
-@property (strong) NSScroller *horizontalScroller;
+@property (nullable, strong) NSScroller *verticalScroller;
+@property (nullable, strong) NSScroller *horizontalScroller;
 @property BOOL autohidesScrollers;
 @property CGFloat horizontalLineScroll;
 @property CGFloat verticalLineScroll;
@@ -232,7 +234,7 @@ APPKIT_EXTERN NSString * const NSScrollViewDidEndLiveScrollNotification NS_AVAIL
 
 @interface NSScrollView(NSRulerSupport)
 
-+ (void)setRulerViewClass:(Class)rulerViewClass;
++ (void)setRulerViewClass:(nullable Class)rulerViewClass;
 + (Class)rulerViewClass;
 
 @property BOOL rulersVisible;
@@ -240,8 +242,8 @@ APPKIT_EXTERN NSString * const NSScrollViewDidEndLiveScrollNotification NS_AVAIL
 @property BOOL hasHorizontalRuler;
 @property BOOL hasVerticalRuler;
 
-@property (strong) NSRulerView *horizontalRulerView;
-@property (strong) NSRulerView *verticalRulerView;
+@property (nullable, strong) NSRulerView *horizontalRulerView;
+@property (nullable, strong) NSRulerView *verticalRulerView;
 
 @end
 
@@ -256,3 +258,5 @@ typedef NS_ENUM(NSInteger, NSScrollViewFindBarPosition) {
 @property NSScrollViewFindBarPosition findBarPosition NS_AVAILABLE_MAC(10_7);
 
 @end
+
+NS_ASSUME_NONNULL_END

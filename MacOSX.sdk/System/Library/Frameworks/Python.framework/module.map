@@ -1,4 +1,4 @@
-framework module Python [extern_c] [system] {
+framework module Python [extern_c] {
   umbrella header "Python.h"
 
   export *

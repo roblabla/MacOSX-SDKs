@@ -65,6 +65,7 @@
 #define	_SYS_USER_H_
 
 #include <sys/appleapiopts.h>
+struct waitq_set;
 /* stuff that *used* to be included by user.h, or is now needed */
 #include <errno.h>
 #include <sys/time.h>

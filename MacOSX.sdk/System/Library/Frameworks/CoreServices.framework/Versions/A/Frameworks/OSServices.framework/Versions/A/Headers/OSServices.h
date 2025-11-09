@@ -51,10 +51,6 @@
 #include <OSServices/SecurityCore.h>
 #endif
 
-#ifndef __SYSTEMSOUND__
-#include <OSServices/SystemSound.h>
-#endif
-
 #ifndef __WSMETHODINVOCATION__
 #include <OSServices/WSMethodInvocation.h>
 #endif

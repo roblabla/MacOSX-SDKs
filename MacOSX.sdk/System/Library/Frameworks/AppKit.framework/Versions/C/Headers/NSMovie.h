@@ -1,7 +1,7 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2014, Apple Inc.
+        Copyright (c) 2000-2015, Apple Inc.
         All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class NSArray, NSPasteboard, NSURL;
+@class NSPasteboard, NSURL;
 
 #if __LP64__
 @class QTMovie;
@@ -43,8 +43,8 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_5, "Use QTMovie instead")
 - (void*/*Movie*/)QTMovie NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_5);
 - (NSURL*)URL NS_DEPRECATED_MAC(10_0, 10_5);
 
-+ (NSArray*) movieUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);
-+ (NSArray*) movieUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_5);
++ (NSArray<NSString *> *) movieUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);
++ (NSArray<NSString *> *) movieUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_5);
 + (BOOL) canInitWithPasteboard:(NSPasteboard*)pasteboard NS_DEPRECATED_MAC(10_0, 10_5);
 
 #else

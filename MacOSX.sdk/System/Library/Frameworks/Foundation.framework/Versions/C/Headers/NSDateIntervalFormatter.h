@@ -1,10 +1,12 @@
 /*	NSDateIntervalFormatter.h
-        Copyright (c) 2013-2014, Apple Inc. All rights reserved.
+        Copyright (c) 2013-2015, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSFormatter.h>
 #include <dispatch/dispatch.h>
 @class NSLocale, NSCalendar, NSTimeZone, NSDate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSDateIntervalFormatterStyle) {
     NSDateIntervalFormatterNoStyle = 0,
@@ -35,10 +37,10 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
     void *_reserved[4];
 }
 
-@property (copy) NSLocale   *locale;                // default is [NSLocale currentLocale]
-@property (copy) NSCalendar *calendar;              // default is the calendar of the locale
-@property (copy) NSTimeZone *timeZone;              // default is [NSTimeZone defaultTimeZone]
-@property (copy) NSString   *dateTemplate;          // default is an empty string
+@property (null_resettable, copy) NSLocale   *locale;                // default is [NSLocale currentLocale]
+@property (null_resettable, copy) NSCalendar *calendar;              // default is the calendar of the locale
+@property (null_resettable, copy) NSTimeZone *timeZone;              // default is [NSTimeZone defaultTimeZone]
+@property (null_resettable, copy) NSString   *dateTemplate;          // default is an empty string
 @property NSDateIntervalFormatterStyle dateStyle;   // default is NSDateIntervalFormatterNoStyle
 @property NSDateIntervalFormatterStyle timeStyle;   // default is NSDateIntervalFormatterNoStyle
 
@@ -64,3 +66,4 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @end
 
+NS_ASSUME_NONNULL_END

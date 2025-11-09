@@ -43,7 +43,7 @@
 
 @interface WebDownload : NSURLDownload
 {
-@private
+@package
     WebDownloadInternal *_webInternal;
 }
 
@@ -54,7 +54,9 @@
     @discussion The WebDownloadDelegate delegate has one extra method used to choose
     the right window when automatically prompting with a sheet.
 */
-@interface NSObject (WebDownloadDelegate)
+@protocol WebDownloadDelegate <NSURLDownloadDelegate>
+
+@optional
 
 /*!
     @method downloadWindowForAuthenticationSheet:

@@ -1,7 +1,7 @@
 //
 //  SceneKit.h
 //
-//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
 /*! @framework SceneKit
@@ -49,6 +49,12 @@
 #import <SceneKit/SCNPhysicsContact.h>
 #import <SceneKit/SCNPhysicsBehavior.h>
 #import <SceneKit/SCNTechnique.h>
+#import <SceneKit/SCNReferenceNode.h>
+#import <SceneKit/SCNAudioSource.h>
+
+//bridges
+#import <SceneKit/SceneKit_simd.h>
 
 //scripting
 #import <SceneKit/SCNJavascript.h>
+

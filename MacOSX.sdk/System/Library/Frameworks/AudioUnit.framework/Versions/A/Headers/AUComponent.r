@@ -39,6 +39,7 @@
 #define kAudioUnitSubType_DeferredRenderer		'defr'
 #define kAudioUnitSubType_TimePitch				'tmpt'
 #define kAudioUnitSubType_NewTimePitch			'nutp'
+#define kAudioUnitSubType_MultiSplitter			'mspl'
 #define kAudioUnitSubType_Splitter				'splt'
 #define kAudioUnitSubType_Merger				'merg'
 #define kAudioUnitSubType_RoundTripAAC			'raac'

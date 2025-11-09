@@ -1,14 +1,16 @@
 /*
         NSTreeNode.h
 	AppKit
-	Copyright (c) 2007-2014, Apple Inc.
+	Copyright (c) 2007-2015, Apple Inc.
 	All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-@class NSArray, NSMutableArray, NSIndexPath, NSTreeController;
+@class NSIndexPath, NSSortDescriptor, NSTreeController;
 
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSTreeNode : NSObject {
@@ -24,23 +26,25 @@ NS_CLASS_AVAILABLE(10_5, NA)
     } _NSTreeNodeFlags;
 }
 
-+ (instancetype)treeNodeWithRepresentedObject:(id)modelObject;
-- (instancetype)initWithRepresentedObject:(id)modelObject;
++ (instancetype)treeNodeWithRepresentedObject:(nullable id)modelObject;
+- (instancetype)initWithRepresentedObject:(nullable id)modelObject;
 
-@property (readonly, strong) id representedObject;
+@property (nullable, readonly, strong) id representedObject;
 
     // stats
 @property (readonly, strong) NSIndexPath *indexPath; // represents the receivers location in entire tree
 @property (getter=isLeaf, readonly) BOOL leaf; // determined by (count of child nodes == 0)
     
-@property (readonly, copy) NSArray *childNodes;    // traversal
-@property (readonly, strong) NSMutableArray *mutableChildNodes; // returns a mutable proxy - parentNode of inserted/removed child nodes is automatically updated
-- (NSTreeNode *)descendantNodeAtIndexPath:(NSIndexPath *)indexPath; // traversal begins with receiver
+@property (nullable, readonly, copy) NSArray<NSTreeNode *> *childNodes;    // traversal
+@property (readonly, strong) NSMutableArray<NSTreeNode *> *mutableChildNodes; // returns a mutable proxy - parentNode of inserted/removed child nodes is automatically updated
+- (nullable NSTreeNode *)descendantNodeAtIndexPath:(NSIndexPath *)indexPath; // traversal begins with receiver
 
-@property (readonly, assign) NSTreeNode *parentNode;
+@property (nullable, readonly, assign) NSTreeNode *parentNode;
 
     // sorts the entire subtree
-- (void)sortWithSortDescriptors:(NSArray *)sortDescriptors recursively:(BOOL)recursively;
+- (void)sortWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors recursively:(BOOL)recursively;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

@@ -38,6 +38,9 @@
 extern "C" {
 #endif
 
+CF_ASSUME_NONNULL_BEGIN
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /*!
 	@enum Policy Constants
 	@discussion Predefined constants used to specify a policy.
@@ -55,35 +58,39 @@ extern "C" {
 	@constant kSecPolicyAppleTimeStamping
 	@constant kSecPolicyAppleRevocation
 	@constant kSecPolicyApplePassbookSigning
+    @constant kSecPolicyApplePayIssuerEncryption
 */
-extern CFTypeRef kSecPolicyAppleX509Basic
+extern const CFStringRef kSecPolicyAppleX509Basic
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyAppleSSL
+extern const CFStringRef kSecPolicyAppleSSL
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyAppleSMIME
+extern const CFStringRef kSecPolicyAppleSMIME
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyAppleEAP
+extern const CFStringRef kSecPolicyAppleEAP
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyAppleIPsec
+extern const CFStringRef kSecPolicyAppleIPsec
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyAppleiChat
+extern const CFStringRef kSecPolicyAppleiChat
     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
-extern CFTypeRef kSecPolicyApplePKINITClient
+extern const CFStringRef kSecPolicyApplePKINITClient
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyApplePKINITServer
+extern const CFStringRef kSecPolicyApplePKINITServer
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyAppleCodeSigning
+extern const CFStringRef kSecPolicyAppleCodeSigning
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyMacAppStoreReceipt
-    __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyAppleIDValidation
+extern const CFStringRef kSecPolicyMacAppStoreReceipt
+    __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_9_0);
+extern const CFStringRef kSecPolicyAppleIDValidation
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyAppleTimeStamping
+extern const CFStringRef kSecPolicyAppleTimeStamping
     __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyAppleRevocation
+extern const CFStringRef kSecPolicyAppleRevocation
     __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyApplePassbookSigning
+extern const CFStringRef kSecPolicyApplePassbookSigning
     __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+extern const CFStringRef kSecPolicyApplePayIssuerEncryption
+    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+
 
 /*!
     @enum Policy Value Constants
@@ -116,15 +123,15 @@ extern CFTypeRef kSecPolicyApplePassbookSigning
         this policy. For the Passbook signing policy, this string must match
         the Organizational Unit field of the certificate subject.
  */
-extern CFTypeRef kSecPolicyOid
+extern const CFStringRef kSecPolicyOid
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyName
+extern const CFStringRef kSecPolicyName
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyClient
+extern const CFStringRef kSecPolicyClient
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyRevocationFlags
+extern const CFStringRef kSecPolicyRevocationFlags
 	__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
-extern CFTypeRef kSecPolicyTeamIdentifier
+extern const CFStringRef kSecPolicyTeamIdentifier
 	__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 
@@ -169,7 +176,7 @@ SecPolicyRef SecPolicyCreateBasicX509(void)
     @result A policy object. The caller is responsible for calling CFRelease
     on this when it is no longer needed.
 */
-SecPolicyRef SecPolicyCreateSSL(Boolean server, CFStringRef hostname)
+SecPolicyRef SecPolicyCreateSSL(Boolean server, CFStringRef __nullable hostname)
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 
 /*!
@@ -230,16 +237,22 @@ SecPolicyRef SecPolicyCreateRevocation(CFOptionFlags revocationFlags)
 	@result The returned policy reference, or NULL if the policy could not be
 	created.
 */
+__nullable
 SecPolicyRef SecPolicyCreateWithProperties(CFTypeRef policyIdentifier,
-	CFDictionaryRef properties)
+	CFDictionaryRef __nullable properties)
 	__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
+CF_IMPLICIT_BRIDGING_DISABLED
+CF_ASSUME_NONNULL_END
 
 /*
  *  Legacy functions (OS X only)
  */
 #if TARGET_OS_MAC && !TARGET_OS_IPHONE
 #include <Security/cssmtype.h>
+
+CF_ASSUME_NONNULL_BEGIN
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
     @enum Policy Value Constants (OS X)
@@ -296,23 +309,23 @@ SecPolicyRef SecPolicyCreateWithProperties(CFTypeRef policyIdentifier,
     @constant kSecPolicyKU_DecipherOnly Specifies that the certificate must
         have a key usage that permits it to be used for decryption only.
  */
-extern CFTypeRef kSecPolicyKU_DigitalSignature
+extern const CFStringRef kSecPolicyKU_DigitalSignature
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_NonRepudiation
+extern const CFStringRef kSecPolicyKU_NonRepudiation
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_KeyEncipherment
+extern const CFStringRef kSecPolicyKU_KeyEncipherment
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_DataEncipherment
+extern const CFStringRef kSecPolicyKU_DataEncipherment
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_KeyAgreement
+extern const CFStringRef kSecPolicyKU_KeyAgreement
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_KeyCertSign
+extern const CFStringRef kSecPolicyKU_KeyCertSign
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_CRLSign
+extern const CFStringRef kSecPolicyKU_CRLSign
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_EncipherOnly
+extern const CFStringRef kSecPolicyKU_EncipherOnly
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-extern CFTypeRef kSecPolicyKU_DecipherOnly
+extern const CFStringRef kSecPolicyKU_DecipherOnly
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /*!
@@ -327,6 +340,7 @@ extern CFTypeRef kSecPolicyKU_DecipherOnly
 	use SecPolicyCreateWithProperties (or a more specific policy creation
 	function) instead.
 */
+__nullable
 SecPolicyRef SecPolicyCreateWithOID(CFTypeRef policyOID)
 	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
@@ -398,8 +412,10 @@ OSStatus SecPolicySetProperties(SecPolicyRef policyRef,
 OSStatus SecPolicyGetTPHandle(SecPolicyRef policyRef, CSSM_TP_HANDLE *tpHandle)
 	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
+CF_IMPLICIT_BRIDGING_DISABLED
+CF_ASSUME_NONNULL_END
+    
 #endif /* TARGET_OS_MAC && !TARGET_OS_IPHONE */
-
 
 #if defined(__cplusplus)
 }

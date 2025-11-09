@@ -1,11 +1,13 @@
 /*
         NSAffineTransform.h
         Application Kit
-        Copyright (c) 1997-2014, Apple Inc.
+        Copyright (c) 1997-2015, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSAffineTransform.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSBezierPath;
 
@@ -17,3 +19,5 @@
 - (void)set;
 - (void)concat;
 @end
+
+NS_ASSUME_NONNULL_END

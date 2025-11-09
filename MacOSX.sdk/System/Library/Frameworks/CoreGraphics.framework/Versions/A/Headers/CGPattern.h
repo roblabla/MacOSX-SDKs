@@ -10,8 +10,12 @@ typedef struct CGPattern *CGPatternRef;
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGContext.h>
 #include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* kCGPatternTilingNoDistortion: The pattern cell is not distorted when
    painted, however the spacing between pattern cells may vary by as much as
@@ -26,12 +30,11 @@ CF_IMPLICIT_BRIDGING_ENABLED
    pattern cell may be distorted additionally to permit a more efficient
    implementation. */
 
-enum CGPatternTiling {
-  kCGPatternTilingNoDistortion,
-  kCGPatternTilingConstantSpacingMinimalDistortion,
-  kCGPatternTilingConstantSpacing
+typedef CF_ENUM (int32_t, CGPatternTiling) {
+    kCGPatternTilingNoDistortion,
+    kCGPatternTilingConstantSpacingMinimalDistortion,
+    kCGPatternTilingConstantSpacing
 };
-typedef enum CGPatternTiling CGPatternTiling;
 
 /* The drawing of the pattern is delegated to the callbacks. The callbacks
    may be called one or many times to draw the pattern.
@@ -42,39 +45,43 @@ typedef enum CGPatternTiling CGPatternTiling;
       parameter originally passed to the CGPattern creation functions.
     `releaseInfo' is called when the pattern is deallocated. */
 
-typedef void (*CGPatternDrawPatternCallback)(void *info, CGContextRef c);
-typedef void (*CGPatternReleaseInfoCallback)(void *info);
+typedef void (*CGPatternDrawPatternCallback)(void * __nullable info,
+                                             CGContextRef __nullable context);
+typedef void (*CGPatternReleaseInfoCallback)(void * __nullable info);
 
 struct CGPatternCallbacks {
-  unsigned int version;
-  CGPatternDrawPatternCallback drawPattern;
-  CGPatternReleaseInfoCallback releaseInfo;
+    unsigned int version;
+    CGPatternDrawPatternCallback __nullable drawPattern;
+    CGPatternReleaseInfoCallback __nullable releaseInfo;
 };
 typedef struct CGPatternCallbacks CGPatternCallbacks;
 
 /* Return the CFTypeID for CGPatternRefs. */
 
 CG_EXTERN CFTypeID CGPatternGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
 
 /* Create a pattern. */
 
-CG_EXTERN CGPatternRef CGPatternCreate(void *info, CGRect bounds,
-  CGAffineTransform matrix, CGFloat xStep, CGFloat yStep,
-  CGPatternTiling tiling, bool isColored, const CGPatternCallbacks *callbacks)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN CGPatternRef __nullable CGPatternCreate(void * __nullable info,
+    CGRect bounds, CGAffineTransform matrix, CGFloat xStep, CGFloat yStep,
+    CGPatternTiling tiling, bool isColored,
+    const CGPatternCallbacks * __nullable callbacks)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain(pattern)', except it doesn't crash (as CF does)
    if `pattern' is NULL. */
 
-CG_EXTERN CGPatternRef CGPatternRetain(CGPatternRef pattern)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN CGPatternRef __nullable CGPatternRetain(CGPatternRef __nullable pattern)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease(pattern)', except it doesn't crash (as CF does)
    if `pattern' is NULL. */
 
-CG_EXTERN void CGPatternRelease(CGPatternRef pattern)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+CG_EXTERN void CGPatternRelease(CGPatternRef __nullable pattern)
+    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

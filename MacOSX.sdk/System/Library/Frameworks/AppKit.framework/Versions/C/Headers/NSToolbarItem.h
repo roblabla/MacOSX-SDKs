@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2014, Apple Inc.
+	Copyright (c) 2000-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSToolbar.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSToolbarItemViewer, NSMenuItem, NSView, NSImage;
 
@@ -71,7 +73,7 @@
 @property (readonly, copy) NSString *itemIdentifier;
 
 /* Use this to determine the toolbar in which an item is currently displayed. */
-@property (readonly, assign) NSToolbar *toolbar;
+@property (nullable, readonly, assign) NSToolbar *toolbar;
 
 // ----- Setters and Getters -----
 
@@ -82,28 +84,28 @@
 @property (copy) NSString *paletteLabel;
 
 /* Use this to set a tooltip to be used when the item is displayed in the toolbar.  (forwards to -view if it responds) */
-@property (copy) NSString *toolTip;
+@property (nullable, copy) NSString *toolTip;
 
 /* The menu form of a toolbar item's purpose is twofold.  First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here.  Second, in text only mode, the menu returned will be used to create the displayed items.  Singleton menu items will be clickable, while submenu items will be represented as a pull down.  For instance, say you want a button that allows you to switch between modes A, B, and C.  You could represent this as a menu by :  a menu item "mode" with three submenu items "A", "B", and "C".   By default, this method returns a singleton menu item with item label as the title.  For standard items, the target, action is set.  */
-@property (strong) NSMenuItem *menuFormRepresentation;
+@property (nullable, strong) NSMenuItem *menuFormRepresentation;
 
 /* Tag for your own custom purpose. (forwards to -view if it responds) */ 
 @property NSInteger tag;
 
 /* Set and get the action of an item. (forwards to -view if it responds) */
-@property (weak) id target;
+@property (nullable, weak) id target;
 
 /* Set and get the action of an item. For custom views, this method will call setAction:/action on the view if it responds. (forwards to -view if it responds) */
-@property SEL action;
+@property (nullable) SEL action;
 
 /* Set and get the enabled flag of an item.  For custom views, this method will call setEnabled:/isEnabled on the view if it responds. (forwards to -view if it responds) */
 @property (getter=isEnabled) BOOL enabled;
 
 /* Set and get the image of an item.  For custom views, this method will call setImage:/image on the view if it responds. (forwards to -view if it responds) */
-@property (strong) NSImage *image;
+@property (nullable, strong) NSImage *image;
 
 /* Use setView: if you want your toolbar item to use something other than the standard.  Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.  Also, your view must be archivable (in order for the toolbar to make copies of your item to hand off to the config palette). */
-@property (strong) NSView *view;
+@property (nullable, strong) NSView *view;
 
 /* Unless you have already set your own custom view, you should not call this method.  The min size should be small enough to look nice in all display modes. */
 @property NSSize minSize;
@@ -152,11 +154,14 @@ enum {
 
 /* standard toolbar item identifiers */
 
-APPKIT_EXTERN NSString *NSToolbarSeparatorItemIdentifier;
-APPKIT_EXTERN NSString *NSToolbarSpaceItemIdentifier;
-APPKIT_EXTERN NSString *NSToolbarFlexibleSpaceItemIdentifier;
+APPKIT_EXTERN NSString * NSToolbarSeparatorItemIdentifier;
+APPKIT_EXTERN NSString * NSToolbarSpaceItemIdentifier;
+APPKIT_EXTERN NSString * NSToolbarFlexibleSpaceItemIdentifier;
 
-APPKIT_EXTERN NSString *NSToolbarShowColorsItemIdentifier;        // Shows the color panel.
-APPKIT_EXTERN NSString *NSToolbarShowFontsItemIdentifier;         // Shows the font panel.
-APPKIT_EXTERN NSString *NSToolbarCustomizeToolbarItemIdentifier;  // Puts the current toolbar into customize mode.
-APPKIT_EXTERN NSString *NSToolbarPrintItemIdentifier;             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
+APPKIT_EXTERN NSString * NSToolbarShowColorsItemIdentifier;        // Shows the color panel.
+APPKIT_EXTERN NSString * NSToolbarShowFontsItemIdentifier;         // Shows the font panel.
+APPKIT_EXTERN NSString * NSToolbarCustomizeToolbarItemIdentifier;  // Puts the current toolbar into customize mode.
+APPKIT_EXTERN NSString * NSToolbarPrintItemIdentifier;             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
+APPKIT_EXTERN NSString * NSToolbarToggleSidebarItemIdentifier NS_AVAILABLE_MAC(10_11);  // A standard toolbar item identifier for sidebars. It sends -toggleSidebar: to the firstResponder.
+
+NS_ASSUME_NONNULL_END

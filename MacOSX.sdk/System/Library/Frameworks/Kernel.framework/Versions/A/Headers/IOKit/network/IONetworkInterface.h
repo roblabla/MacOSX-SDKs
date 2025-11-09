@@ -292,6 +292,7 @@ private:
         uint32_t                    txPullOptions;
         uint32_t                    txQueueSize;
         uint32_t                    txSchedulingModel;
+        uint32_t                    txTargetQdelay;
         uint32_t                    txThreadState;
         volatile UInt32             txThreadFlags;
         uint32_t                    txThreadSignal;
@@ -306,6 +307,8 @@ private:
         void *                      rxCtlAction;        
         uint64_t                    rxPollEmpty;
         uint64_t                    rxPollTotal;
+        uint16_t                    txStartDelayQueueLength;	/* optional */
+        uint16_t                    txStartDelayTimeout;        /* optional */
     };
 
     ExpansionData *         _reserved;
@@ -983,6 +986,20 @@ protected:
 	virtual bool     initIfnetParams( struct ifnet_init_params * params );
 
     OSMetaClassDeclareReservedUsed(IONetworkInterface, 4);
+    
+/*! @function configureOutputStartDelay
+    @abstract Configure the output start delay
+    @discussion This optional routine, if used, needs to be called after 
+    IONetworkInterface::init() and before IONetworkInterface::attachToDataLinkLayer().
+    This allows for over-riding ifnet_init_eparams.start_delay_qlen and 
+    ifnet_init_eparams.start_delay_timeout.
+    @param outputStartDelayQueueLength, maps to ifnet_init_eparams.start_delay_qlen
+    @param outputStartDelayTimeout, maps to ifnet_init_eparams.start_delay_timeout
+    @result <code>kIOReturnSuccess</code> if interface was successfully
+    configured.
+ */
+    IOReturn configureOutputStartDelay( uint16_t outputStartDelayQueueLength,
+                                        uint16_t outputStartDelayTimeout );
 
 public:
     OSMetaClassDeclareReservedUnused( IONetworkInterface,  5);

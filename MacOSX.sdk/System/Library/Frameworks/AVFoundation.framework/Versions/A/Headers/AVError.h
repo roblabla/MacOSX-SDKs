@@ -16,7 +16,7 @@ AVF_EXPORT NSString *const AVErrorDeviceKey                         NS_AVAILABLE
 AVF_EXPORT NSString *const AVErrorTimeKey                           NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVErrorFileSizeKey                       NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVErrorPIDKey                            NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVErrorRecordingSuccessfullyFinishedKey  NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVErrorRecordingSuccessfullyFinishedKey  NS_AVAILABLE(10_7, 4_0); // an NSNumber carrying a BOOL indicating whether the recording is playable
 AVF_EXPORT NSString *const AVErrorMediaTypeKey                      NS_AVAILABLE(10_7, 4_3); // an NSString, as defined in AVMediaFormat.h
 AVF_EXPORT NSString *const AVErrorMediaSubTypeKey                   NS_AVAILABLE(10_7, 4_3); // an NSArray of NSNumbers carrying four character codes (4ccs) as defined in CoreAudioTypes.h for audio media and in CMFormatDescription.h for video media.
 AVF_EXPORT NSString *const AVErrorPresentationTimeStampKey          NS_AVAILABLE(10_10, 8_0); // an NSValue carrying a CMTime
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, AVError) {
     AVErrorContentIsNotAuthorized                       = -11835,
     AVErrorApplicationIsNotAuthorized                   = -11836,
 #if TARGET_OS_IPHONE
-    AVErrorDeviceIsNotAvailableInBackground             = -11837,
+    AVErrorDeviceIsNotAvailableInBackground NS_DEPRECATED_IOS(4_3, 9_0, "AVCaptureSession no longer produces an AVCaptureSessionRuntimeErrorNotification with this error. See AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableInBackground.") = -11837,
 #endif
     AVErrorOperationNotSupportedForAsset                = -11838,
     
@@ -90,5 +90,11 @@ typedef NS_ENUM(NSInteger, AVError) {
     AVErrorFailedToParse	NS_AVAILABLE(10_10, 8_0)		= -11853,
 	AVErrorFileTypeDoesNotSupportSampleReferences NS_AVAILABLE(10_10, 8_0)	= -11854,  // userInfo contains AVErrorFileTypeKey
     AVErrorUndecodableMediaData NS_AVAILABLE(10_10, 8_0)  = -11855,
+    AVErrorAirPlayControllerRequiresInternet NS_AVAILABLE(10_10, 8_3) = -11856,
+    AVErrorAirPlayReceiverRequiresInternet NS_AVAILABLE(10_10, 8_3) = -11857,
+    AVErrorVideoCompositorFailed NS_AVAILABLE(10_11, 9_0) = -11858,
+#if TARGET_OS_IPHONE
+    AVErrorRecordingAlreadyInProgress NS_AVAILABLE_IOS(9_0) = -11859, // on iOS, AVCaptureMovieFileOutput only supports one recording at a time
+#endif
 	
 };

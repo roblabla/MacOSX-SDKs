@@ -7,19 +7,23 @@
 
 typedef struct CGGradient *CGGradientRef;
 
+
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-enum {
+typedef CF_OPTIONS (uint32_t, CGGradientDrawingOptions) {
   kCGGradientDrawsBeforeStartLocation = (1 << 0),
   kCGGradientDrawsAfterEndLocation = (1 << 1)
 };
-typedef uint32_t CGGradientDrawingOptions;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGContext.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
+
+CF_ASSUME_NONNULL_BEGIN
 
 /* A CGGradient defines a transition between colors. The transition is
    defined over a range from 0 to 1 inclusive. A gradient specifies a color
@@ -34,7 +38,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 /* Return the CFTypeID for CGGradients. */
 
 CG_EXTERN CFTypeID CGGradientGetTypeID(void)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Creates a gradient by pairing the color components provided in
    `components' with locations provided in `locations'. If `locations' is
@@ -49,9 +53,10 @@ CG_EXTERN CFTypeID CGGradientGetTypeID(void)
    gradient will use the color provided at the locations closest to 0 and 1
    for those values. */
 
-CG_EXTERN CGGradientRef CGGradientCreateWithColorComponents(CGColorSpaceRef
-  space, const CGFloat components[], const CGFloat locations[], size_t count)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColorComponents(
+    CGColorSpaceRef __nullable space, const CGFloat * __nullable components,
+    const CGFloat * __nullable locations, size_t count)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Creates a gradient by pairing the colors provided in `colors' with the
    locations provided in `locations'. `colors' should be a non-empty array
@@ -69,21 +74,25 @@ CG_EXTERN CGGradientRef CGGradientCreateWithColorComponents(CGColorSpaceRef
    the color provided at the locations closest to 0 and 1 for those
    values. */
 
-CG_EXTERN CGGradientRef CGGradientCreateWithColors(CGColorSpaceRef space,
-  CFArrayRef colors, const CGFloat locations[])
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColors(
+    CGColorSpaceRef __nullable space, CFArrayRef __nullable colors,
+    const CGFloat * __nullable locations)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Equivalent to `CFRetain' except that it doesn't crash (as `CFRetain'
    does) if `gradient' is NULL. */
 
-CG_EXTERN CGGradientRef CGGradientRetain(CGGradientRef gradient)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+CG_EXTERN CGGradientRef __nullable CGGradientRetain(
+    CGGradientRef __nullable gradient)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Equivalent to `CFRelease' except that it doesn't crash (as `CFRelease'
    does) if `gradient' is NULL. */
 
-CG_EXTERN void CGGradientRelease(CGGradientRef gradient)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+CG_EXTERN void CGGradientRelease(CGGradientRef __nullable gradient)
+    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+
+CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

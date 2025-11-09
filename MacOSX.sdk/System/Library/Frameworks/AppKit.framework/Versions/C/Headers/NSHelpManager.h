@@ -1,7 +1,7 @@
 /*
 	NSHelpManager.h
 	Application Kit
-	Copyright (c) 1995-2014, Apple Inc.
+	Copyright (c) 1995-2015, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,6 +11,8 @@
 #import <Foundation/NSBundle.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSApplication.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class NSAttributedString, NSWindow;
 
@@ -32,12 +34,12 @@
 
 - (void)setContextHelp:(NSAttributedString *)attrString forObject:(id)object;
 - (void)removeContextHelpForObject:(id)object;
-- (NSAttributedString *)contextHelpForObject:(id)object;
+- (nullable NSAttributedString *)contextHelpForObject:(id)object;
 
 - (BOOL)showContextHelpForObject:(id)object locationHint:(NSPoint)pt;
 
-- (void)openHelpAnchor:(NSString *)anchor inBook:(NSString *)book;
-- (void)findString:(NSString *)query inBook:(NSString *)book;
+- (void)openHelpAnchor:(NSString *)anchor inBook:(nullable NSString *)book;
+- (void)findString:(NSString *)query inBook:(nullable NSString *)book;
 
 /* Register one or more help books in the given bundle.  The main bundle is automatically registered by -openHelpAnchor:inBook: and -findString:inBook:.  You can use -registerBooksInBundle: to register help books in a plugin bundle, for example.  The Info.plist in the bundle should contain a help book directory path, which specifies one or more folders containing help books.  Returns NO if the bundle doesn't contain any help books or if registration fails.  Returns YES on successful registration. */
 - (BOOL)registerBooksInBundle:(NSBundle *)bundle NS_AVAILABLE_MAC(10_6);
@@ -48,15 +50,15 @@
 // Notifications for the activation/deactivation of the context help mode
 //
 
-APPKIT_EXTERN NSString *NSContextHelpModeDidActivateNotification;
-APPKIT_EXTERN NSString *NSContextHelpModeDidDeactivateNotification;
+APPKIT_EXTERN NSString * NSContextHelpModeDidActivateNotification;
+APPKIT_EXTERN NSString * NSContextHelpModeDidDeactivateNotification;
 
 //
 //  Conveniences for accessing Help.plist
 //
 
 @interface NSBundle(NSBundleHelpExtension)
-- (NSAttributedString *)contextHelpForKey:(NSString *)key;	/* return nil if not found */
+- (nullable NSAttributedString *)contextHelpForKey:(NSString *)key;	/* return nil if not found */
 @end
 
 //
@@ -64,7 +66,9 @@ APPKIT_EXTERN NSString *NSContextHelpModeDidDeactivateNotification;
 //
 
 @interface NSApplication(NSApplicationHelpExtension)
-- (void)activateContextHelpMode:(id)sender;
+- (void)activateContextHelpMode:(nullable id)sender;
   // Target method cover for [NSHelpManager setContextHelpModeActive:YES];
-- (void)showHelp:(id)sender;
+- (void)showHelp:(nullable id)sender;
 @end
+
+NS_ASSUME_NONNULL_END

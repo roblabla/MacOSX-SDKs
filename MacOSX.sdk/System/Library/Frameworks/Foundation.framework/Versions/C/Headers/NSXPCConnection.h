@@ -1,5 +1,5 @@
 /*	NSXPCConnection.h
-        Copyright (c) 2011-2014, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2015, Apple Inc. All rights reserved.
  */
 
 #import <dispatch/dispatch.h>
@@ -10,9 +10,11 @@
 
 #import <CoreFoundation/CFDictionary.h>
 
-@class NSMutableDictionary, NSString, NSOperationQueue, NSSet, NSLock, NSError;
+@class NSMutableDictionary, NSString, NSOperationQueue, NSSet<ObjectType>, NSLock, NSError;
 @class NSXPCConnection, NSXPCListener, NSXPCInterface, NSXPCListenerEndpoint;
 @protocol NSXPCListenerDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 // The connection itself and all proxies vended by the connection will conform with this protocol. This allows creation of new proxies from other proxies.
 @protocol NSXPCProxyCreating
@@ -59,7 +61,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 // Initialize an NSXPCConnection that will connect to the specified service name. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
 - (instancetype)initWithServiceName:(NSString *)serviceName;
-@property (readonly, copy) NSString *serviceName;
+@property (nullable, readonly, copy) NSString *serviceName;
 
 // Use this if looking up a name advertised in a launchd.plist. For example, an agent with a launchd.plist in ~/Library/LaunchAgents. If the connection is being made to something in a privileged Mach bootstrap (for example, a daemon with a launchd.plist in /Library/LaunchDaemons), then use the NSXPCConnectionPrivileged option. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
 - (instancetype)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options;
@@ -69,13 +71,13 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @property (readonly, retain) NSXPCListenerEndpoint *endpoint;
 
 // The interface that describes messages that are allowed to be received by the exported object on this connection. This value is required if a exported object is set.
-@property (retain) NSXPCInterface *exportedInterface;
+@property (nullable, retain) NSXPCInterface *exportedInterface;
 
 // Set an exported object for the connection. Messages sent to the remoteObjectProxy from the other side of the connection will be dispatched to this object. Messages delivered to exported objects are serialized and sent on a non-main queue. The receiver is responsible for handling the messages on a different queue or thread if it is required.
-@property (retain) id exportedObject;
+@property (nullable, retain) id exportedObject;
 
 // The interface that describes messages that are allowed to be received by object that has been "imported" to this connection (exported from the other side). This value is required if messages are sent over this connection.
-@property (retain) NSXPCInterface *remoteObjectInterface;
+@property (nullable, retain) NSXPCInterface *remoteObjectInterface;
 
 // Get a proxy for the remote object (that is, the object exported from the other side of this connection). See descriptions in NSXPCProxyCreating for more details.
 @property (readonly, retain) id remoteObjectProxy;
@@ -84,12 +86,12 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 // The interruption handler will be called if the remote process exits or crashes. It may be possible to re-establish the connection by simply sending another message. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
 // The interruptionHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the NSXPCConnection instance inside this block.
-@property (copy) void (^interruptionHandler)(void);
+@property (nullable, copy) void (^interruptionHandler)(void);
 
 // The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
 // You may not send messages over the connection from within an invalidation handler block.
 // The invalidationHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the NSXPCConnection instance inside this block.
-@property (copy) void (^invalidationHandler)(void);
+@property (nullable, copy) void (^invalidationHandler)(void);
 
 // All connections start suspended. You must resume them before they will start processing received messages or sending messages through the remoteObjectProxy. Note: Calling resume does not immediately launch the XPC service. The service will be started on demand when the first message is sent. However, if the name specified when creating the connection is determined to be invalid, your invalidation handler will be called immediately (and asynchronously) after calling resume.
 - (void)resume;
@@ -133,7 +135,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 - (instancetype)initWithMachServiceName:(NSString *)name NS_DESIGNATED_INITIALIZER;
 
 // The delegate for the connection listener. If no delegate is set, all new connections will be rejected. See the protocol for more information on how to implement it.
-@property (assign) id <NSXPCListenerDelegate> delegate;
+@property (nullable, assign) id <NSXPCListenerDelegate> delegate;
 
 // Get an endpoint object which may be sent over an existing connection. This allows the receiver of the endpoint to create a new connection to this NSXPCListener. The NSXPCListenerEndpoint uniquely names this listener object across connections.
 @property (readonly, retain) NSXPCListenerEndpoint *endpoint;
@@ -175,12 +177,12 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 // If an argument to a method in your protocol is a collection class (for example, NSArray or NSDictionary), then the interface must be configured with the set of expected classes contained inside of the collection. The classes argument to this method should be an NSSet containing Class objects, like [MyObject class]. The selector argument specifies which method in the protocol is being configured. The argumentIndex parameter specifies which argument of the method the NSSet applies to. If the NSSet is for an argument of the reply block in the method, pass YES for the ofReply: argument. The first argument is index 0 for both the method and the reply block.
 // If the expected classes are all property list types, calling this method is optional (property list types are automatically whitelisted for collection objects). You may use this method to further restrict the set of allowed classes.
-- (void)setClasses:(NSSet *)classes forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
-- (NSSet *)classesForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
+- (void)setClasses:(NSSet<Class> *)classes forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
+- (NSSet<Class> *)classesForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
 
 // If an argument to a method in your protocol should be sent as a proxy object instead of by copy, then the interface must be configured with the interface of that new proxy object. If the proxy object is to be an argument of the reply block, pass YES for ofReply. The first argument is index 0 for both the method and the reply block.
 - (void)setInterface:(NSXPCInterface *)ifc forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
-- (NSXPCInterface *)interfaceForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
+- (nullable NSXPCInterface *)interfaceForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
 
 @end
 
@@ -194,3 +196,4 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 }
 @end
 
+NS_ASSUME_NONNULL_END
