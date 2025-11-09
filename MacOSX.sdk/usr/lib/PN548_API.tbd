@@ -3,23 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9EF3F790-B46A-3449-8F7B-CB1C657F9ED1
+    value:           71119AF9-6DE0-3033-AAD1-42C71CABD480
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57BC22DF-1ECE-3DB8-8D85-79AB1031D583
+    value:           4B786DF4-D129-328E-8E9D-F21D6502077A
 install-name:    '/usr/lib/PN548_API.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
-    symbols:         [ _NFDriverChangeDynamicTransitRFSettings, _NFDriverChangeReaderModeDynamicRFSetting, 
-                       _NFDriverClearAutomaticMultiTagPollingState, _NFDriverClose, 
-                       _NFDriverConfigureAutomaticMultiTagPolling, _NFDriverConfigureExpressFelicaEntry, 
-                       _NFDriverConfigureReaderModeRFForTransitPartner, _NFDriverConfigureVASPolling, 
-                       _NFDriverCreateErrorCode, _NFDriverDebugDumpMemory, _NFDriverDisableBoost, 
-                       _NFDriverDisableHeadlessModeMiniNV, _NFDriverDumpLPMDebugLog, 
-                       _NFDriverDumpUART, _NFDriverEnableFelicaTxEndPatternV2, _NFDriverEnableGreenCarThreshold, 
-                       _NFDriverEnableHeadlessTestMode, _NFDriverEnableSecondaryReaderModePower, 
-                       _NFDriverGPIOSetPMUStandbyPowerEnabled, _NFDriverGetControllerInfo, 
+    symbols:         [ _NFDriverAntennaSelfTest, _NFDriverChangeDynamicTransitRFSettings, 
+                       _NFDriverChangeReaderModeDynamicRFSetting, _NFDriverClearAutomaticMultiTagPollingState, 
+                       _NFDriverClose, _NFDriverConfigureAutomaticMultiTagPolling, 
+                       _NFDriverConfigureExpressFelicaEntry, _NFDriverConfigureReaderModeRFForTransitPartner, 
+                       _NFDriverConfigureVASPolling, _NFDriverCreateErrorCode, _NFDriverDebugDumpMemory, 
+                       _NFDriverDisableBoost, _NFDriverDisableHeadlessModeMiniNV, 
+                       _NFDriverDumpLPMDebugLog, _NFDriverDumpUART, _NFDriverEnableAutomaticRFOverride, 
+                       _NFDriverEnableFelicaTxEndPatternV2, _NFDriverEnableGreenCarThreshold, 
+                       _NFDriverEnableHeadlessTestMode, _NFDriverGPIOSetPMUStandbyPowerEnabled, 
+                       _NFDriverGetControllerInfo, _NFDriverGetFlashWriteCounter, 
                        _NFDriverGetHeadlessModeFlags, _NFDriverGetMultiTagState, 
                        _NFDriverGetOSUpdateLog, _NFDriverGetPowerCounter, _NFDriverGetSWIOTemperature, 
                        _NFDriverGetSecureElementInfo, _NFDriverGetStackBreadcrumb, 
@@ -46,9 +47,10 @@ exports:
                        _NFDriverSetCallback, _NFDriverSetChipscope, _NFDriverSetConfiguration, 
                        _NFDriverSetEmbeddedSecureElementPower, _NFDriverSetExpressConfig, 
                        _NFDriverSetHeadlessMode, _NFDriverSetIcefallSecureElementPower, 
-                       _NFDriverSetPollingConfig, _NFDriverSetReaderModeRFGain, _NFDriverSetSecureElementAlwaysOn, 
-                       _NFDriverSetSecureElementAvailable, _NFDriverSetSecureElementPower, 
-                       _NFDriverSetTypeATagDataRate, _NFDriverSimulateCrash, _NFDriverToggleDownloadRequest, 
-                       _NFDriverToggleGPIO, _NFDriverTriggerDelayedWake, _NFDriverUnloadStackAndLeaveHWEnabled, 
+                       _NFDriverSetMaxWTX, _NFDriverSetPollingConfig, _NFDriverSetPollingProfile, 
+                       _NFDriverSetReaderModeRFGain, _NFDriverSetSecureElementAlwaysOn, 
+                       _NFDriverSetSecureElementPower, _NFDriverSetTypeATagDataRate, 
+                       _NFDriverSimulateCrash, _NFDriverToggleDownloadRequest, _NFDriverToggleGPIO, 
+                       _NFDriverTriggerDelayedWake, _NFDriverUnloadStackAndLeaveHWEnabled, 
                        _NFDriverUpdateFirmware, _nfc_err ]
 ...

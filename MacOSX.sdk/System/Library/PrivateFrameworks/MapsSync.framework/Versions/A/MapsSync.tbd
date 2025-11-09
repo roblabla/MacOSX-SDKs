@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           48058917-2860-3FB2-BE08-D906D8E39BEC
+    value:           DDC05292-B058-3F03-BA91-2BD8F57F6B81
   - target:          x86_64-maccatalyst
-    value:           48058917-2860-3FB2-BE08-D906D8E39BEC
+    value:           DDC05292-B058-3F03-BA91-2BD8F57F6B81
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27854C92-E970-31F4-89F4-6B66A8AE2FEA
+    value:           F7306ECA-F997-319D-BAAB-B0BF62C4E005
   - target:          arm64e-maccatalyst
-    value:           27854C92-E970-31F4-89F4-6B66A8AE2FEA
+    value:           F7306ECA-F997-319D-BAAB-B0BF62C4E005
 install-name:    '/System/Library/PrivateFrameworks/MapsSync.framework/Versions/A/MapsSync'
 swift-abi-version: 7
 exports:

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           48DFE9F9-8336-3D14-B63F-671826ECF06A
+    value:           CD073B8E-E30A-3491-AC0D-C5E48F420785
   - target:          x86_64-maccatalyst
-    value:           48DFE9F9-8336-3D14-B63F-671826ECF06A
+    value:           CD073B8E-E30A-3491-AC0D-C5E48F420785
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0EA63253-45B2-3CB7-8122-12CB654472DA
+    value:           CC47EEEC-EE26-3E8B-A569-1C282E426930
   - target:          arm64e-maccatalyst
-    value:           0EA63253-45B2-3CB7-8122-12CB654472DA
+    value:           CC47EEEC-EE26-3E8B-A569-1C282E426930
 install-name:    '/System/Library/PrivateFrameworks/WeatherDaemon.framework/Versions/A/WeatherDaemon'
-current-version: 163
+current-version: 177
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

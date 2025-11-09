@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E3BB2281-963C-3344-B868-38C642DD653F
+    value:           EAD16014-02EC-38D4-A7B0-C255DFFEC8A8
   - target:          x86_64-maccatalyst
-    value:           E3BB2281-963C-3344-B868-38C642DD653F
+    value:           EAD16014-02EC-38D4-A7B0-C255DFFEC8A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1B124D5B-35DD-31AE-ABFB-646401CF8EE9
+    value:           5B683D5D-4B50-3CD8-82B3-95CDDA796C4F
   - target:          arm64e-maccatalyst
-    value:           1B124D5B-35DD-31AE-ABFB-646401CF8EE9
+    value:           5B683D5D-4B50-3CD8-82B3-95CDDA796C4F
 install-name:    '/System/Library/PrivateFrameworks/BookCoverUtility.framework/Versions/A/BookCoverUtility'
-current-version: 1632
+current-version: 1672
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

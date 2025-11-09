@@ -11,7 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKActivitySummaryQueryDescriptor", ios(9.3, API_TO_BE_DEPRECATED), watchos(2.2, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(9.3), watchos(2.2))
+#endif
 @interface HKActivitySummaryQuery : HKQuery
 
 /**

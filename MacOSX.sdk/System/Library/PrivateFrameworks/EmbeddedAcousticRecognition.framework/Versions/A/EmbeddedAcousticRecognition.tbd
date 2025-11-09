@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           770BEF93-D1F9-3EEB-B91E-4D16FC85E3C4
+    value:           BB6DB23D-686C-3834-98A1-33FCA7D4D739
   - target:          x86_64-maccatalyst
-    value:           770BEF93-D1F9-3EEB-B91E-4D16FC85E3C4
+    value:           BB6DB23D-686C-3834-98A1-33FCA7D4D739
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92523B21-E143-3ABB-BEB3-27C87D59A2AF
+    value:           F3D92500-FF4A-3E92-B7A6-6E7F70008F44
   - target:          arm64e-maccatalyst
-    value:           92523B21-E143-3ABB-BEB3-27C87D59A2AF
+    value:           F3D92500-FF4A-3E92-B7A6-6E7F70008F44
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -78,19 +78,21 @@ exports:
                        EARKeywordFinder, EARKeywordFinderResult, EARPSRAudioProcessor, 
                        EARSyncPSRAudioProcessor, EARTokenPronounciations, EMTResult, 
                        EMTSpan, EMTToken, EMTTokenizer, EMTTranslator, _EARAcousticFeature, 
-                       _EARAppLmData, _EARAudioAnalytics, _EARCombinedResult, _EARCommandTagger, 
-                       _EARCommandTagging, _EARCommandTaggingResult, _EARContextualData, 
-                       _EARCustomLMBuilder, _EARDefaultServerEndpointFeatures, _EAREndpointFeatures, 
+                       _EARAppLmArtifact, _EARAppLmData, _EARArtifact, _EARAudioAnalytics, 
+                       _EARCombinedResult, _EARCommandTagger, _EARCommandTagging, 
+                       _EARCommandTaggingResult, _EARContextualData, _EARCustomLMBuilder, 
+                       _EARCustomPronData, _EARDefaultServerEndpointFeatures, _EAREndpointFeatures, 
                        _EAREndpointer, _EARFormatter, _EARGeoLMHelper, _EARInterpolator, 
-                       _EARJitProfile, _EARLanguageDetector, _EARLanguageDetectorAudioBuffer, 
-                       _EARLanguageDetectorLoggingInfo, _EARLanguageDetectorRequestContext, 
-                       _EARLanguageDetectorResult, _EARLanguageModel, _EARLatticeMitigatorResult, 
-                       _EARLmBuilder, _EARLmData, _EARLmEvaluator, _EARLmHandle, 
-                       _EARLmInterpolator, _EARLmLoader, _EARLmLoader2, _EARLmModel, 
-                       _EARLmModel2, _EARNgramLmModel, _EARNgramLmModel2, _EARNnetUtil, 
-                       _EAROnDeviceEndpointerInfo, _EAROovToken, _EARPeopleSuggesterConfig, 
-                       _EARPhonesetMapping, _EARPhoneticMatchBuilder, _EARPhoneticMatchData, 
-                       _EARPlsParser, _EARResultCombiner, _EARSpeakerCodeInfo, _EARSpeakerCodeReader, 
+                       _EARJitProfile, _EARLMTGlobalNNLM, _EARLMTKaldiVocab, _EARLanguageDetector, 
+                       _EARLanguageDetectorAudioBuffer, _EARLanguageDetectorLoggingInfo, 
+                       _EARLanguageDetectorRequestContext, _EARLanguageDetectorResult, 
+                       _EARLanguageModel, _EARLatticeMitigatorResult, _EARLmBuilder, 
+                       _EARLmData, _EARLmEvaluator, _EARLmHandle, _EARLmInterpolator, 
+                       _EARLmLoader, _EARLmLoader2, _EARLmModel, _EARLmModel2, _EARNgramLmModel, 
+                       _EARNgramLmModel2, _EARNnetUtil, _EAROnDeviceEndpointerInfo, 
+                       _EAROovToken, _EARPeopleSuggesterConfig, _EARPhonesetMapping, 
+                       _EARPhoneticMatchBuilder, _EARPhoneticMatchData, _EARPlsParser, 
+                       _EARProfiler, _EARResultCombiner, _EARSpeakerCodeInfo, _EARSpeakerCodeReader, 
                        _EARSpeakerCodeWriter, _EARSpeechModelInfo, _EARSpeechRecognition, 
                        _EARSpeechRecognitionActiveConfiguration, _EARSpeechRecognitionAudioBuffer, 
                        _EARSpeechRecognitionResult, _EARSpeechRecognitionResultPackage, 

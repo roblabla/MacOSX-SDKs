@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4279CC62-73B7-304A-A7A4-29C9B978027A
+    value:           E2ADF6BD-E9B1-343B-893F-F2F22C95A51F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           919EBB72-AFB5-30D7-A2BA-63E8C2D7E339
+    value:           6E31CC87-BD6D-3EE6-8F55-9C61A2B684A1
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateCore.framework/Versions/A/SoftwareUpdateCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -20,9 +20,10 @@ exports:
                        _kSUAssetActualMinimumSystemPartitionKey, _kSUAssetAllowableOTAKey, 
                        _kSUAssetAllowableOverCellularKey, _kSUAssetAlternateAssetAudienceUUIDKey, 
                        _kSUAssetAutoInstallDelayKey, _kSUAssetAutoUpdateKey, _kSUAssetBaseURLKey, 
-                       _kSUAssetCriticalUpdateKey, _kSUAssetDisableRecoveryOSUpdatesKey, 
-                       _kSUAssetDisableRosettaUpdatesKey, _kSUAssetEnableAlternateAssetAudienceKey, 
-                       _kSUAssetHideInstallAlertKey, _kSUAssetHumanReadableUpdateNameKey, 
+                       _kSUAssetContainsSFRContentKey, _kSUAssetCriticalUpdateKey, 
+                       _kSUAssetDisableRecoveryOSUpdatesKey, _kSUAssetDisableRosettaUpdatesKey, 
+                       _kSUAssetEnableAlternateAssetAudienceKey, _kSUAssetHideInstallAlertKey, 
+                       _kSUAssetHumanReadableMoreInfoLinkKey, _kSUAssetHumanReadableUpdateNameKey, 
                        _kSUAssetLanguageKey, _kSUAssetLastEmergencyBuildKey, _kSUAssetLastEmergencyOSVersionKey, 
                        _kSUAssetLicenseAgreementFileNameKey, _kSUAssetLicenseAgreementKey, 
                        _kSUAssetMDMDelayIntervalKey, _kSUAssetMandatoryUpdateEligibleKey, 
@@ -30,12 +31,14 @@ exports:
                        _kSUAssetMandatoryUpdateVersionMaxKey, _kSUAssetMandatoryUpdateVersionMinKey, 
                        _kSUAssetMasteredVersionKey, _kSUAssetMeasurementAlgorithmKey, 
                        _kSUAssetMeasurementKey, _kSUAssetMinimumBridgeVersionKey, 
-                       _kSUAssetNotifyAfterKey, _kSUAssetPreferencesIconFileNameKey, 
-                       _kSUAssetProductTypeKey, _kSUAssetPromoteAlternateUpdateKey, 
-                       _kSUAssetRSEPDigestKey, _kSUAssetRSEPTBMDigestsKey, _kSUAssetRampKey, 
-                       _kSUAssetRampingScanTypeKey, _kSUAssetRelativePathKey, _kSUAssetReleaseDateKey, 
-                       _kSUAssetReleaseNotesFileNameKey, _kSUAssetReleaseNotesKey, 
-                       _kSUAssetReleaseNotesSummaryFileNameKey, _kSUAssetReleaseNotesSummaryKey, 
+                       _kSUAssetNotificationBodyStringKey, _kSUAssetNotificationEnabledKey, 
+                       _kSUAssetNotificationTitleStringKey, _kSUAssetNotifyAfterKey, 
+                       _kSUAssetPreferencesIconFileNameKey, _kSUAssetProductTypeKey, 
+                       _kSUAssetPromoteAlternateUpdateKey, _kSUAssetRSEPDigestKey, 
+                       _kSUAssetRSEPTBMDigestsKey, _kSUAssetRampKey, _kSUAssetRampingScanTypeKey, 
+                       _kSUAssetRelativePathKey, _kSUAssetReleaseDateKey, _kSUAssetReleaseNotesFileNameKey, 
+                       _kSUAssetReleaseNotesKey, _kSUAssetReleaseNotesSummaryFileNameKey, 
+                       _kSUAssetReleaseNotesSummaryKey, _kSUAssetRequireInstallAssistantUpdateKey, 
                        _kSUAssetRestoreVersionKey, _kSUAssetSEPDigestKey, _kSUAssetSEPTBMDigestsKey, 
                        _kSUAssetSLAVersionKey, _kSUAssetSUDisableAppDemotionKey, 
                        _kSUAssetSUDisableCDLevel4Key, _kSUAssetSUDisableSiriVoiceDeletionKey, 

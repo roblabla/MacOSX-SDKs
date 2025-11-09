@@ -46,7 +46,7 @@ volume
 .Op Fl i
 .Op Fl s Ar volume-size | Fl q Ar volume-quota Fl r Ar volume-reserve
 .Op Fl v Ar volume-name
-.Op Fl E
+.Op  Fl E Fl W Nm (empty password) |  Fl E Fl S passphrase
 .Op Fl R Ar role
 .Ar special
 .Nm
@@ -143,6 +143,9 @@ may be used later to format volumes inside that container.
 .It Fl E
 Enable volume encryption.
 The volume metadata is also encrypted.
+.It Fl W
+Empty password flag. Must be placed after
+.Fl E
 .It Fl S Ar password
 Key used for volume encryption.
 If the

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4A76983E-6BC6-3419-B4E7-07015C6D02FF
+    value:           BEC5B4AE-A303-341D-9E36-4F624A94749E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           42001672-E915-325A-95CA-D29A95CD74F3
+    value:           5AA3C770-F415-3909-8B6C-CF4A03553C65
 install-name:    '/System/Library/PrivateFrameworks/iPodVoiceOver.framework/Versions/A/iPodVoiceOver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

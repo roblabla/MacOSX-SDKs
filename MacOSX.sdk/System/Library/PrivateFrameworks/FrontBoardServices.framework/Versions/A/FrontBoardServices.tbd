@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5D550B1B-EF84-364D-9033-E20265C662BF
+    value:           B86DB4A6-BE6D-322A-9271-C4084E5DA905
   - target:          x86_64-maccatalyst
-    value:           5D550B1B-EF84-364D-9033-E20265C662BF
+    value:           B86DB4A6-BE6D-322A-9271-C4084E5DA905
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C8F1B5A8-0357-39BE-9CCD-25A378675286
+    value:           11ABE2E0-B78A-3D10-B41A-9A50CA8CCF3A
   - target:          arm64e-maccatalyst
-    value:           C8F1B5A8-0357-39BE-9CCD-25A378675286
+    value:           11ABE2E0-B78A-3D10-B41A-9A50CA8CCF3A
 install-name:    '/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices'
 current-version: 0
 reexported-libraries:
@@ -187,17 +187,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29F6F616-C4AD-3B15-80CA-DC3C2791609F
+    value:           90DA7E21-38A7-3610-B225-78EB3287CC52
   - target:          x86_64-maccatalyst
-    value:           29F6F616-C4AD-3B15-80CA-DC3C2791609F
+    value:           90DA7E21-38A7-3610-B225-78EB3287CC52
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FF02969-E153-32A2-97E8-B679B29661AB
+    value:           426AFF92-1D58-39DC-B853-6CB62EFD4459
   - target:          arm64e-maccatalyst
-    value:           5FF02969-E153-32A2-97E8-B679B29661AB
+    value:           426AFF92-1D58-39DC-B853-6CB62EFD4459
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
@@ -360,17 +360,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B7E46076-6387-3265-8A32-81A43D0631CA
+    value:           BFEFCF2E-D45B-3D2B-BAFA-A66BF2A7D8FC
   - target:          x86_64-maccatalyst
-    value:           B7E46076-6387-3265-8A32-81A43D0631CA
+    value:           BFEFCF2E-D45B-3D2B-BAFA-A66BF2A7D8FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           22228D26-400F-391E-A638-40C510B60FA6
+    value:           21A8104C-7AA6-391B-9A1A-9160D35EB09C
   - target:          arm64e-maccatalyst
-    value:           22228D26-400F-391E-A638-40C510B60FA6
+    value:           21A8104C-7AA6-391B-9A1A-9160D35EB09C
 install-name:    '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices'
 current-version: 0
 exports:

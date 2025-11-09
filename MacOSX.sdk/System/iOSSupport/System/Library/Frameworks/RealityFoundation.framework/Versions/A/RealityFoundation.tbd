@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3293E96D-F1A5-3CE0-944D-89C28E3CD2B4
+    value:           0328737F-ABCA-302A-BE77-15EF7CDEEA7C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           29547E6F-90C8-35AF-A893-47AF28A7F378
+    value:           F059D4CB-3663-3578-BC98-EDD8F2EA653A
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
-current-version: 161.200
+current-version: 161.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
@@ -18012,28 +18012,14 @@ exports:
                        '_$s17RealityFoundation16SystemDependencyO6beforeyAcA0C0_pXpcACmFWC', 
                        '_$s17RealityFoundation16SystemDependencyOMa', '_$s17RealityFoundation16SystemDependencyOMn', 
                        '_$s17RealityFoundation16SystemDependencyON', '_$s17RealityFoundation16SystemDependencyOSQAAMc', 
-                       '_$s17RealityFoundation16USDImportServiceMp', '_$s17RealityFoundation16USDImportServiceP14loadModelAsync10contentsOf8withName21generateDecimatedMesh7fulfilly0B03URLV_SSSgSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTj', 
-                       '_$s17RealityFoundation16USDImportServiceP14loadModelAsync10contentsOf8withName21generateDecimatedMesh7fulfilly0B03URLV_SSSgSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTq', 
-                       '_$s17RealityFoundation16USDImportServiceP14loadModelAsync5named2in21generateDecimatedMesh7fulfillySS_So8NSBundleCSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTj', 
-                       '_$s17RealityFoundation16USDImportServiceP14loadModelAsync5named2in21generateDecimatedMesh7fulfillySS_So8NSBundleCSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTq', 
-                       '_$s17RealityFoundation16USDImportServiceP4load10contentsOf8withName0A3Kit6EntityC0B03URLV_SSSgtFTj', 
-                       '_$s17RealityFoundation16USDImportServiceP4load10contentsOf8withName0A3Kit6EntityC0B03URLV_SSSgtFTq', 
-                       '_$s17RealityFoundation16USDImportServiceP4load4with0A3Kit6EntityCSDySSypG_tKFTj', 
+                       '_$s17RealityFoundation16USDImportServiceMp', '_$s17RealityFoundation16USDImportServiceP4load4with0A3Kit6EntityCSDySSypG_tKFTj', 
                        '_$s17RealityFoundation16USDImportServiceP4load4with0A3Kit6EntityCSDySSypG_tKFTq', 
                        '_$s17RealityFoundation16USDImportServiceP7canLoad10contentsOfSb0B03URLV_tFTj', 
                        '_$s17RealityFoundation16USDImportServiceP7canLoad10contentsOfSb0B03URLV_tFTq', 
                        '_$s17RealityFoundation16USDImportServiceP7canLoad5named2inSbSS_So8NSBundleCtFTj', 
                        '_$s17RealityFoundation16USDImportServiceP7canLoad5named2inSbSS_So8NSBundleCtFTq', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadAsync10contentsOf8withName21generateDecimatedMesh7fulfill8postLoady0B03URLV_SSSgSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAR_SayAA16USDImportedSceneVGtKcSgtFTj', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadAsync10contentsOf8withName21generateDecimatedMesh7fulfill8postLoady0B03URLV_SSSgSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAR_SayAA16USDImportedSceneVGtKcSgtFTq', 
                        '_$s17RealityFoundation16USDImportServiceP9loadAsync4withySDySSypG_tKFTj', 
                        '_$s17RealityFoundation16USDImportServiceP9loadAsync4withySDySSypG_tKFTq', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadAsync5named2in21generateDecimatedMesh7fulfill8postLoadySS_So8NSBundleCSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAP_SayAA16USDImportedSceneVGtKcSgtFTj', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadAsync5named2in21generateDecimatedMesh7fulfill8postLoadySS_So8NSBundleCSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAP_SayAA16USDImportedSceneVGtKcSgtFTq', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadModel10contentsOf8withName0A3Kit0F6EntityC0B03URLV_SSSgtKFTj', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadModel10contentsOf8withName0A3Kit0F6EntityC0B03URLV_SSSgtKFTq', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadModel5named2in0A3Kit0F6EntityCSS_So8NSBundleCtKFTj', 
-                       '_$s17RealityFoundation16USDImportServiceP9loadModel5named2in0A3Kit0F6EntityCSS_So8NSBundleCtKFTq', 
                        '_$s17RealityFoundation16USDImportServicePxycfCTj', '_$s17RealityFoundation16USDImportServicePxycfCTq', 
                        '_$s17RealityFoundation16USDImportServiceTL', '_$s17RealityFoundation16USDImportedSceneV4name9assetName6activeACSS_SSSbtcfC', 
                        '_$s17RealityFoundation16USDImportedSceneVMa', '_$s17RealityFoundation16USDImportedSceneVMn', 

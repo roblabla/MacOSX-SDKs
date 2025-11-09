@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1F87CB53-92B7-366E-AFE0-078BBA18A215
+    value:           80653016-DB01-3FB0-9888-1F41E328C399
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           12A9AB77-4F51-355A-B663-11234D47F911
+    value:           E04E2F6A-2941-3E0E-8EF6-1EAC41CA06EC
 install-name:    '/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI'
 current-version: 0
 compatibility-version: 0
@@ -2303,7 +2303,10 @@ exports:
                        '_$s7SwiftUI15DisclosureGroupVA2A4TextVRszrlE_7contentACyAEq_Gqd___q_yctcSyRd__lufC', 
                        '_$s7SwiftUI15DisclosureGroupVMa', '_$s7SwiftUI15DisclosureGroupVMn', 
                        '_$s7SwiftUI15DisclosureGroupVyxq_GAA4ViewAAMc', '_$s7SwiftUI15DisclosureGroupVyxq_GAA4ViewAAWP', 
-                       '_$s7SwiftUI15DynamicPropertyMp', '_$s7SwiftUI15DynamicPropertyP05_makeD02in9container11fieldOffset6inputsyAA01_cD6BufferVz_AA11_GraphValueVyqd__GSiAA01_L6InputsVztlFZTj', 
+                       '_$s7SwiftUI15DragItemTimingsV7defaultACvgZ', '_$s7SwiftUI15DragItemTimingsV9liftDelay011pointerLiftG0012cancellationG0018competingLongPressG00F14MoveHysteresis0hinO0ACSdSg_A3J12CoreGraphics7CGFloatVSgANtcfC', 
+                       '_$s7SwiftUI15DragItemTimingsVMa', '_$s7SwiftUI15DragItemTimingsVMn', 
+                       '_$s7SwiftUI15DragItemTimingsVN', '_$s7SwiftUI15DynamicPropertyMp', 
+                       '_$s7SwiftUI15DynamicPropertyP05_makeD02in9container11fieldOffset6inputsyAA01_cD6BufferVz_AA11_GraphValueVyqd__GSiAA01_L6InputsVztlFZTj', 
                        '_$s7SwiftUI15DynamicPropertyP05_makeD02in9container11fieldOffset6inputsyAA01_cD6BufferVz_AA11_GraphValueVyqd__GSiAA01_L6InputsVztlFZTq', 
                        '_$s7SwiftUI15DynamicPropertyP18_propertyBehaviorss6UInt32VvgZTj', 
                        '_$s7SwiftUI15DynamicPropertyP18_propertyBehaviorss6UInt32VvgZTq', 
@@ -5656,6 +5659,8 @@ exports:
                        '_$s7SwiftUI23DragReorderableDelegateMp', '_$s7SwiftUI23DragReorderableDelegateP02onC5Began2atySi_tFTj', 
                        '_$s7SwiftUI23DragReorderableDelegateP02onC5Began2atySi_tFTq', 
                        '_$s7SwiftUI23DragReorderableDelegateP02onC5EndedyyFTj', '_$s7SwiftUI23DragReorderableDelegateP02onC5EndedyyFTq', 
+                       '_$s7SwiftUI23DragReorderableDelegateP03hasC11SourceProxy2atSbSi_tFTj', 
+                       '_$s7SwiftUI23DragReorderableDelegateP03hasC11SourceProxy2atSbSi_tFTq', 
                        '_$s7SwiftUI23DragReorderableDelegateP11onDropEndedyyFTj', 
                        '_$s7SwiftUI23DragReorderableDelegateP11onDropEndedyyFTq', 
                        '_$s7SwiftUI23DragReorderableDelegateP11onItemMoved4from2toSbSi_SitFTj', 
@@ -5670,11 +5675,15 @@ exports:
                        '_$s7SwiftUI23DragReorderableDelegateP14onItemInserted2at13itemProvidersSbSi_SaySo14NSItemProviderCGtFTq', 
                        '_$s7SwiftUI23DragReorderableDelegateP19isReorderingAllowed2atSbSi_tFTj', 
                        '_$s7SwiftUI23DragReorderableDelegateP19isReorderingAllowed2atSbSi_tFTq', 
+                       '_$s7SwiftUI23DragReorderableDelegateP26targetDropDestinationIndex4from011destinationI0S2iSg_SitFTj', 
+                       '_$s7SwiftUI23DragReorderableDelegateP26targetDropDestinationIndex4from011destinationI0S2iSg_SitFTq', 
                        '_$s7SwiftUI23DragReorderableDelegatePAAE02onC5Began2atySi_tF', 
                        '_$s7SwiftUI23DragReorderableDelegatePAAE02onC5EndedyyF', 
+                       '_$s7SwiftUI23DragReorderableDelegatePAAE03hasC11SourceProxy2atSbSi_tF', 
                        '_$s7SwiftUI23DragReorderableDelegatePAAE11onDropEndedyyF', 
                        '_$s7SwiftUI23DragReorderableDelegatePAAE13onDropUpdated8location11sourceIndex011destinationK0ySo7CGPointV_SiSgSitF', 
                        '_$s7SwiftUI23DragReorderableDelegatePAAE19isReorderingAllowed2atSbSi_tF', 
+                       '_$s7SwiftUI23DragReorderableDelegatePAAE26targetDropDestinationIndex4from011destinationI0S2iSg_SitF', 
                        '_$s7SwiftUI23DragReorderableDelegateTL', '_$s7SwiftUI23GaugeStyleConfigurationV16MarkedValueLabelVAA4ViewAAMc', 
                        '_$s7SwiftUI23GaugeStyleConfigurationV16MarkedValueLabelVAA4ViewAAWP', 
                        '_$s7SwiftUI23GaugeStyleConfigurationV16MarkedValueLabelVMa', 
@@ -7753,6 +7762,8 @@ exports:
                        '_$s7SwiftUI4ViewPAAE15coordinateSpace4nameQrqd___tSHRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE15datePickerStyleyQrqd__AA04DateeF0Rd__lF', 
                        '_$s7SwiftUI4ViewPAAE15datePickerStyleyQrqd__AA04DateeF0Rd__lFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE15dragItemTimingsyQrAA04DrageF0VF', '_$s7SwiftUI4ViewPAAE15dragItemTimingsyQrAA04DrageF0VFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE15dragSourceProxyQryF', '_$s7SwiftUI4ViewPAAE15dragSourceProxyQryFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE15dynamicTypeSizeyQrAA07DynamiceF0OF', 
                        '_$s7SwiftUI4ViewPAAE15dynamicTypeSizeyQrAA07DynamiceF0OFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE15dynamicTypeSizeyQrqd__SXRd__AA07DynamiceF0O5BoundRtd__lF', 
@@ -7817,6 +7828,8 @@ exports:
                        '_$s7SwiftUI4ViewPAAE16keyboardShortcut_9modifiersQrAA13KeyEquivalentV_AA14EventModifiersVtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE16keyboardShortcutyQrAA08KeyboardE0VF', 
                        '_$s7SwiftUI4ViewPAAE16keyboardShortcutyQrAA08KeyboardE0VFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE16keyboardShortcutyQrAA08KeyboardE0VSgF', 
+                       '_$s7SwiftUI4ViewPAAE16keyboardShortcutyQrAA08KeyboardE0VSgFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE16listRowSeparator_5edgesQrAA10VisibilityO_AA12VerticalEdgeO3SetVtF', 
                        '_$s7SwiftUI4ViewPAAE16listRowSeparator_5edgesQrAA10VisibilityO_AA12VerticalEdgeO3SetVtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE16luminanceToAlphaQryF', '_$s7SwiftUI4ViewPAAE16luminanceToAlphaQryFQOMQ', 
@@ -8115,6 +8128,8 @@ exports:
                        '_$s7SwiftUI4ViewPAAE26prefersDragBasedReorderingyQrSbFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE26resizesContainerOnCollapseyQrSbF', 
                        '_$s7SwiftUI4ViewPAAE26resizesContainerOnCollapseyQrSbFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE26textFieldScrollingDisabledyQrSbF', 
+                       '_$s7SwiftUI4ViewPAAE26textFieldScrollingDisabledyQrSbFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE26touchBarCustomizationLabelyQrAA4TextVF', 
                        '_$s7SwiftUI4ViewPAAE26touchBarCustomizationLabelyQrAA4TextVFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE27accessibilityAutomationTypeyAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGs6UInt64VF', 
@@ -8253,6 +8268,10 @@ exports:
                        '_$s7SwiftUI4ViewPAAE6offset1x1yQr12CoreGraphics7CGFloatV_AItF', 
                        '_$s7SwiftUI4ViewPAAE6offset1x1yQr12CoreGraphics7CGFloatV_AItFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE6offsetyQrSo6CGSizeVF', '_$s7SwiftUI4ViewPAAE6offsetyQrSo6CGSizeVFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE6onDrag9isEnabled12localContext_0D12SessionBegan0dJ5Ended7previewQrSb_ypSgSo14NSItemProviderCycyycSgAMqd__yXEtAaBRd__lF', 
+                       '_$s7SwiftUI4ViewPAAE6onDrag9isEnabled12localContext_0D12SessionBegan0dJ5Ended7previewQrSb_ypSgSo14NSItemProviderCycyycSgAMqd__yXEtAaBRd__lFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE6onDrag9isEnabled12localContext_0D12SessionBegan0dJ5EndedQrSb_ypSgSo14NSItemProviderCycyycSgALtF', 
+                       '_$s7SwiftUI4ViewPAAE6onDrag9isEnabled12localContext_0D12SessionBegan0dJ5EndedQrSb_ypSgSo14NSItemProviderCycyycSgALtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE6onDrag_0D12SessionBegan0dF5EndedQrSo14NSItemProviderCyc_yycSgAItF', 
                        '_$s7SwiftUI4ViewPAAE6onDrag_0D12SessionBegan0dF5EndedQrSo14NSItemProviderCyc_yycSgAItFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE6onDrag_7previewQrSo14NSItemProviderCyc_qd__yXEtAaBRd__lF', 

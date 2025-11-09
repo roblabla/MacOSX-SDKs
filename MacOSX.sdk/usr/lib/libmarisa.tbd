@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           82D3D664-FBC9-36D9-9168-B7AB63A47EA9
+    value:           FA5792B3-5335-3DDE-A421-F44CA7754FA5
   - target:          x86_64-maccatalyst
-    value:           82D3D664-FBC9-36D9-9168-B7AB63A47EA9
+    value:           FA5792B3-5335-3DDE-A421-F44CA7754FA5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4EB83D92-1639-3663-86A2-6F943676E646
+    value:           CE24133A-3D6E-3FDE-8CA0-660B8B6933E2
   - target:          arm64e-maccatalyst
-    value:           4EB83D92-1639-3663-86A2-6F943676E646
+    value:           CE24133A-3D6E-3FDE-8CA0-660B8B6933E2
 install-name:    '/usr/lib/libmarisa.dylib'
 current-version: 23
 exports:

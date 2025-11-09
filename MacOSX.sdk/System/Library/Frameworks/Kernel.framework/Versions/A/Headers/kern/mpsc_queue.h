@@ -32,7 +32,7 @@
 
 #include <sys/cdefs.h>
 
-__BEGIN_DECLS
+__BEGIN_DECLS __ASSUME_PTR_ABI_SINGLE_BEGIN
 
 /*!
  * @typedef struct mpsc_queue_chain
@@ -41,7 +41,11 @@ __BEGIN_DECLS
  * Type for the intrusive linkage used by MPSC queues.
  */
 typedef struct mpsc_queue_chain {
+#if __has_ptrcheck // work around 78354145
+	struct mpsc_queue_chain *volatile mpqc_next;
+#else
 	struct mpsc_queue_chain *_Atomic mpqc_next;
+#endif
 } *mpsc_queue_chain_t;
 
 /*!
@@ -107,7 +111,11 @@ typedef struct mpsc_queue_chain {
  */
 typedef struct mpsc_queue_head {
 	struct mpsc_queue_chain mpqh_head;
+#if __has_ptrcheck // work around 78354145
+	struct mpsc_queue_chain *volatile mpqh_tail;
+#else
 	struct mpsc_queue_chain *_Atomic mpqh_tail;
+#endif
 } *mpsc_queue_head_t;
 
 /*!
@@ -122,6 +130,6 @@ typedef struct mpsc_queue_head {
 #define MPSC_QUEUE_INITIALIZER(head)   { .mpqh_tail = &(head).mpqh_head }
 
 
-__END_DECLS
+__ASSUME_PTR_ABI_SINGLE_END __END_DECLS
 
 #endif /* _KERN_MPSC_QUEUE_H_ */

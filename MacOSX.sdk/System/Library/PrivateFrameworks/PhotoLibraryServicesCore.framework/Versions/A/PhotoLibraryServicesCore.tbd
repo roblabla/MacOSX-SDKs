@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E346DDC2-8589-3C5A-8E4C-37E3E2C2E036
+    value:           E8033FC0-254A-39F2-BC98-A14FE7B3B3B4
   - target:          x86_64-maccatalyst
-    value:           E346DDC2-8589-3C5A-8E4C-37E3E2C2E036
+    value:           E8033FC0-254A-39F2-BC98-A14FE7B3B3B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B01EAC3-8077-37F4-A95D-AF50EC7A3DB1
+    value:           51432CDA-6C70-3521-ACD7-0E8C90D75770
   - target:          arm64e-maccatalyst
-    value:           6B01EAC3-8077-37F4-A95D-AF50EC7A3DB1
+    value:           51432CDA-6C70-3521-ACD7-0E8C90D75770
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServicesCore.framework/Versions/A/PhotoLibraryServicesCore'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -121,7 +121,12 @@ exports:
                        _PLCoreAnalyticsCollectionsStatisticsEventAvgNumAssetsKey, 
                        _PLCoreAnalyticsCollectionsStatisticsEventMedianNumAssetsKey, 
                        _PLCoreAnalyticsCollectionsStatisticsEventNumberOfCollectionsKey, 
-                       _PLCoreAnalyticsLibraryBackgroundMigrationActionEvent, _PLCoreAnalyticsLibraryBackgroundMigrationActionEventAttemptCountKey, 
+                       _PLCoreAnalyticsDeferredProcessingEvent, _PLCoreAnalyticsDeferredProcessingEventAdjustmentDateKey, 
+                       _PLCoreAnalyticsDeferredProcessingEventAssetDurationKey, _PLCoreAnalyticsDeferredProcessingEventCreationDateKey, 
+                       _PLCoreAnalyticsDeferredProcessingEventRenderDurationKey, 
+                       _PLCoreAnalyticsDeferredProcessingEventResourceSizeKey, _PLCoreAnalyticsDeferredProcessingEventResourceTypeKey, 
+                       _PLCoreAnalyticsDeferredProcessingEventSuccessTypeKey, _PLCoreAnalyticsLibraryBackgroundMigrationActionEvent, 
+                       _PLCoreAnalyticsLibraryBackgroundMigrationActionEventAttemptCountKey, 
                        _PLCoreAnalyticsLibraryBackgroundMigrationActionEventClassNameKey, 
                        _PLCoreAnalyticsLibraryBackgroundMigrationActionEventCompletionTimeKey, 
                        _PLCoreAnalyticsLibraryBackgroundMigrationActionEventResultKey, 
@@ -240,7 +245,11 @@ exports:
                        _PLCoreAnalyticsSyndicationLibrarySummaryIsActiveKey, _PLCoreAnalyticsSyndicationLibrarySummaryLivePhotoCountKey, 
                        _PLCoreAnalyticsSyndicationLibrarySummaryNonGuestAssetCountKey, 
                        _PLCoreAnalyticsSyndicationLibrarySummaryPhotoCountKey, _PLCoreAnalyticsSyndicationLibrarySummarySavedToLibraryCountKey, 
-                       _PLCoreAnalyticsSyndicationLibrarySummaryVideosCountKey, _PLCoreAnalyticsYearStatisticsEvent, 
+                       _PLCoreAnalyticsSyndicationLibrarySummaryVideosCountKey, _PLCoreAnalyticsVideoComplementProcessingEvent, 
+                       _PLCoreAnalyticsVideoComplementProcessingEventBailOutKey, 
+                       _PLCoreAnalyticsVideoComplementProcessingEventDurationKey, 
+                       _PLCoreAnalyticsVideoComplementProcessingEventErrorKey, _PLCoreAnalyticsVideoComplementProcessingEventIsProcessingNotNeededKey, 
+                       _PLCoreAnalyticsVideoComplementProcessingEventResultKey, _PLCoreAnalyticsYearStatisticsEvent, 
                        _PLCoreAnalyticsYearStatisticsEventEndYearKey, _PLCoreAnalyticsYearStatisticsEventNumYearsWithAssetKey, 
                        _PLCoreAnalyticsYearStatisticsEventStartYearKey, _PLCreateCGImageFromIOSurface, 
                        _PLCreateCGImageFromIOSurfaceBackedUIImage, _PLCreateCroppedImageFromImage, 
@@ -645,13 +654,14 @@ exports:
                        PLPhotoLibraryPathManagerIdentifier, PLPhotoLibraryPathManagerUBF, 
                        PLPositionalASTCImageTable, PLPositionalBC7ImageTable, PLPositionalBGRAImageTable, 
                        PLPositionalImageTable, PLPositionalImageTableEntries, PLPositionalTable, 
-                       PLPositionalTableEntries, PLPrivacy, PLQuery, PLQueryBuilder, 
-                       PLQueryCircularRegion, PLResult, PLSQLiteDatabase, PLSandboxHelper, 
-                       PLSandboxedURL, PLSecurity, PLSimpleDCIMDirectory, PLSingleQuery, 
-                       PLThumbFileManagerCore, PLThumbnailManagerCore, PLTimedPerfCheck, 
-                       PLUUIDString, PLValidatedSavedAssetType, PLVolumeInfo, PLXPCDictionary, 
-                       PLXPCFileDescriptor, PLXPCGenericObject, PLXPCMessageLogger, 
-                       PLXPCObject, PLXPCShMemData, PLXPCShMemObject, PLXPCTransaction ]
+                       PLPositionalTableEntries, PLPowerAssertion, PLPrivacy, PLQuery, 
+                       PLQueryBuilder, PLQueryCircularRegion, PLResult, PLSQLiteDatabase, 
+                       PLSandboxHelper, PLSandboxedURL, PLSecurity, PLSimpleDCIMDirectory, 
+                       PLSingleQuery, PLThumbFileManagerCore, PLThumbnailManagerCore, 
+                       PLTimedPerfCheck, PLUUIDString, PLValidatedSavedAssetType, 
+                       PLVolumeInfo, PLXPCDictionary, PLXPCFileDescriptor, PLXPCGenericObject, 
+                       PLXPCMessageLogger, PLXPCObject, PLXPCShMemData, PLXPCShMemObject, 
+                       PLXPCTransaction ]
     objc-ivars:      [ PLDiskController._bytesRequiredForPhoto, PLDiskController._flags, 
                        PLDiskController._lastFSCheck, PLPhotoDCFDirectory._considerInvalidFileGroups, 
                        PLPhotoDCFDirectory._dcimDirectory, PLPhotoDCFDirectory._fileGroupsByNumber, 

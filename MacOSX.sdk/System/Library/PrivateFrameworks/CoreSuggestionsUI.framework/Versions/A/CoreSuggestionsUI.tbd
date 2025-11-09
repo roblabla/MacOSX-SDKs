@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AB95F896-5575-355C-9620-2891B504EA7F
+    value:           07E7D8AD-A1C2-3C22-876E-5B9F94D983EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D42EA92B-853E-3257-B8A9-7CD826C8F77B
+    value:           9F2316E2-2C68-3173-98C8-363975A3340F
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI'
-current-version: 1153.10
+current-version: 1153.16.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -116,6 +116,8 @@ exports:
                        '_$s17CoreSuggestionsUI21SGBannerContainerViewV4bodyQrvpQOMQ', 
                        '_$s17CoreSuggestionsUI21SGBannerContainerViewVMa', '_$s17CoreSuggestionsUI21SGBannerContainerViewVMn', 
                        '_$s17CoreSuggestionsUI21SGBannerContainerViewVN', '_$s17CoreSuggestionsUI21SGBannerContainerViewV_5storeAcA0D7ContentC_So17SGSuggestionStoreCSgtcfC', 
+                       '_$s17CoreSuggestionsUI26SGBannerContentHostingViewC016invalidateBannerG0yyF', 
+                       '_$s17CoreSuggestionsUI26SGBannerContentHostingViewC016invalidateBannerG0yyFTq', 
                        '_$s17CoreSuggestionsUI26SGBannerContentHostingViewC13setSuggestion5storeySo17SGSuggestionStoreC_tF', 
                        '_$s17CoreSuggestionsUI26SGBannerContentHostingViewC13setSuggestion5storeySo17SGSuggestionStoreC_tFTq', 
                        '_$s17CoreSuggestionsUI26SGBannerContentHostingViewC15suggestionStore33_1106847833BCF2FCC7D7310F22ADAFF3LLSo012SGSuggestionI0CSgvpfi', 

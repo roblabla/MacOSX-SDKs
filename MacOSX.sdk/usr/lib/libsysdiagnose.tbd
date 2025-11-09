@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7CAF5B0C-369B-3E5F-935A-751589E47429
+    value:           1683526D-71C9-39F4-90BE-E949364017CB
   - target:          x86_64-maccatalyst
-    value:           7CAF5B0C-369B-3E5F-935A-751589E47429
+    value:           1683526D-71C9-39F4-90BE-E949364017CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53F0851B-B888-36BB-BF58-A720CD8A73C0
+    value:           DF97B629-3471-38F7-8CBA-D7BAD886DF93
   - target:          arm64e-maccatalyst
-    value:           53F0851B-B888-36BB-BF58-A720CD8A73C0
+    value:           DF97B629-3471-38F7-8CBA-D7BAD886DF93
 install-name:    '/usr/lib/libsysdiagnose.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

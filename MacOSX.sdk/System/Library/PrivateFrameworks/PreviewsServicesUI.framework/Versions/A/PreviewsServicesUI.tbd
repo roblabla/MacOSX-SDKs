@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           412EE8B9-CDCA-319F-AFAA-99E25379B30E
+    value:           F3335DEC-D8B1-31CD-9B4B-73CD9D0B69FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71945C77-3E27-3EE7-8C1D-ABF09CBF2B80
+    value:           11A3F6B7-BB20-3100-B140-CBCB879A272F
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServicesUI.framework/Versions/A/PreviewsServicesUI'
-current-version: 19.20.23
+current-version: 19.30.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -90,5 +90,5 @@ exports:
                        '_$s18PreviewsServicesUI18PreviewPreferencesVN', '_$s18PreviewsServicesUI18PreviewPreferencesVs23CustomStringConvertibleAAMc', 
                        _PreviewsServicesUIVersionNumber, _PreviewsServicesUIVersionString, 
                        _UVPreviewsInjectionLog, _UVPreviewsServicesError ]
-    objc-classes:    [ UVFenceHandle ]
+    objc-classes:    [ UVFenceHandle, UVHardwareEvent ]
 ...

@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Library/Caches/com.apple.xbs/Sources/tcl/tcl-134/tcl_ext/tcllib/tcllib/modules/ripemd/ripemd160.man' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/AppleInternal/Library/BuildRoots/66382bca-8bca-11ec-aade-6613bcf0e2ee/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/ripemd/ripemd160.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2004, Pat Thoyts <patthoyts@users.sourceforge.net>
 '\"
 '\" The definitions below are for supplemental macros used in Tcl/Tk

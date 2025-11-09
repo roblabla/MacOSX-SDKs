@@ -33,5 +33,6 @@
 #import <CoreMotion/CMRotationRateData.h>
 #import <CoreMotion/CMStepCounter.h>
 #import <CoreMotion/CMSensorRecorder.h>
+#import <CoreMotion/CMRecordedPressureData.h>
 
 #endif /* __COREMOTION__ */

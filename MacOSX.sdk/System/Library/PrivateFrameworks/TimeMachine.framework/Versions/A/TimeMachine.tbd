@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           280296D5-7AA9-355B-B568-DF4471DF3FA6
+    value:           5D94FAA4-A728-3757-9F06-359BC21F2686
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           89B0EE8D-F9DD-3A6A-BAA1-E2C6EF99FC60
+    value:           F0854A1C-1E2A-34A7-B501-9DE5B657F4E5
 install-name:    '/System/Library/PrivateFrameworks/TimeMachine.framework/Versions/A/TimeMachine'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

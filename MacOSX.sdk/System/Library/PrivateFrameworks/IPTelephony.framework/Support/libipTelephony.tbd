@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           48D09A09-2AB0-3E65-84D1-FF5941FB43C0
+    value:           CCC306A2-A281-3546-ABDB-4E653077810C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           94606E53-ABBF-3CAE-9071-60E2B2086199
+    value:           B5255E09-C8DE-323F-B145-0C6F4D48CF92
 install-name:    '/System/Library/PrivateFrameworks/IPTelephony.framework/Support/libIPTelephony.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -15,24 +15,12 @@ exports:
                        __ZTIN3ims12AuthResponseE, __ZTIN3ims16DisconnectReasonE, 
                        __ZTIN3ims17CallEventDelegateE, __ZTIN3ims17XcapEventDelegateE, 
                        __ZTIN3ims18StackEventDelegateE, __ZTIN3ims20MessageEventDelegateE, 
-                       __ZTIN3ims24CallManagerEventDelegateE, __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__120__shared_ptr_emplaceI11ClientStateNS_9allocatorIS1_EEEE, 
+                       __ZTIN3ims24CallManagerEventDelegateE, __ZTINSt3__120__shared_ptr_emplaceI11ClientStateNS_9allocatorIS1_EEEE, 
                        __ZTSN19CapSuppServicesInfo7ServiceE, __ZTSN3ims10httpDigest8ResponseE, 
                        __ZTSN3ims12AuthResponseE, __ZTSN3ims16DisconnectReasonE, 
                        __ZTSN3ims17CallEventDelegateE, __ZTSN3ims17XcapEventDelegateE, 
                        __ZTSN3ims18StackEventDelegateE, __ZTSN3ims20MessageEventDelegateE, 
-                       __ZTSN3ims24CallManagerEventDelegateE, __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__120__shared_ptr_emplaceI11ClientStateNS_9allocatorIS1_EEEE ]
+                       __ZTSN3ims24CallManagerEventDelegateE, __ZTSNSt3__120__shared_ptr_emplaceI11ClientStateNS_9allocatorIS1_EEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IMSClientEventToString, _InitializeIPTelephony, __Z10IMSEndCallPN3ims12ClientHandleEhbb, 
                        __Z10IMSSendSMSPN3ims12ClientHandleERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_RKNS2_6vectorIhNS6_IhEEEESA_, 

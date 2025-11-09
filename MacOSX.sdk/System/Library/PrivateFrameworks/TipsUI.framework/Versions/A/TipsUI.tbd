@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           96E8ACD0-98DB-3598-AFCA-52FE33A3F0A5
+    value:           D9D9EC6F-0EC6-3A11-B400-1F2787B2E315
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E14968E-9DF5-373D-AB96-5CF6AAA62013
+    value:           31673DDE-7202-35E3-A591-697D7111F3D9
 install-name:    '/System/Library/PrivateFrameworks/TipsUI.framework/Versions/A/TipsUI'
-current-version: 613.8
+current-version: 618.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -205,6 +205,9 @@ exports:
                        '_$s6TipsUI12TipViewModelC14totalPageCountSivpMV', '_$s6TipsUI12TipViewModelC15footnoteContentSaySDySSypGGSgvgTj', 
                        '_$s6TipsUI12TipViewModelC15footnoteContentSaySDySSypGGSgvgTq', 
                        '_$s6TipsUI12TipViewModelC15footnoteContentSaySDySSypGGSgvpMV', 
+                       '_$s6TipsUI12TipViewModelC17bodyContentOrTextSaySDySSypGGvgTj', 
+                       '_$s6TipsUI12TipViewModelC17bodyContentOrTextSaySDySSypGGvgTq', 
+                       '_$s6TipsUI12TipViewModelC17bodyContentOrTextSaySDySSypGGvpMV', 
                        '_$s6TipsUI12TipViewModelC18colorSchemeUpdated_12shouldReloady05SwiftB005ColorG0O_SbtFTj', 
                        '_$s6TipsUI12TipViewModelC18colorSchemeUpdated_12shouldReloady05SwiftB005ColorG0O_SbtFTq', 
                        '_$s6TipsUI12TipViewModelC20collectionIdentifierSSvgTj', '_$s6TipsUI12TipViewModelC20collectionIdentifierSSvgTq', 
@@ -247,15 +250,21 @@ exports:
                        '_$s6TipsUI15RemoteImageViewVMn', '_$s6TipsUI15RemoteImageViewVN', 
                        '_$s6TipsUI15RemoteVideoViewV05SwiftB00E0AAMc', '_$s6TipsUI15RemoteVideoViewV4bodyQrvg', 
                        '_$s6TipsUI15RemoteVideoViewV4bodyQrvpMV', '_$s6TipsUI15RemoteVideoViewV4bodyQrvpQOMQ', 
-                       '_$s6TipsUI15RemoteVideoViewV9viewModelAcA08TipAsseteG0C_tcfC', 
+                       '_$s6TipsUI15RemoteVideoViewV9viewModel018showReplayButtonAtD3EndAcA08TipAsseteG0C_05SwiftB07BindingVySbGtcfC', 
                        '_$s6TipsUI15RemoteVideoViewVMa', '_$s6TipsUI15RemoteVideoViewVMn', 
-                       '_$s6TipsUI15RemoteVideoViewVN', '_$s6TipsUI17TipAssetViewModelC10resetVideoyyFTj', 
-                       '_$s6TipsUI17TipAssetViewModelC10resetVideoyyFTq', '_$s6TipsUI17TipAssetViewModelC11replayVideoyyFTj', 
-                       '_$s6TipsUI17TipAssetViewModelC11replayVideoyyFTq', '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvMTj', 
-                       '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvMTq', '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvgTj', 
-                       '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvgTq', '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvpMV', 
-                       '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvsTj', '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvsTq', 
-                       '_$s6TipsUI17TipAssetViewModelC15$isPosterLoaded7Combine9PublishedV9PublisherVySb_GvMTj', 
+                       '_$s6TipsUI15RemoteVideoViewVN', '_$s6TipsUI17TipAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvMTj', 
+                       '_$s6TipsUI17TipAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvMTq', 
+                       '_$s6TipsUI17TipAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvgTj', 
+                       '_$s6TipsUI17TipAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvgTq', 
+                       '_$s6TipsUI17TipAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvpMV', 
+                       '_$s6TipsUI17TipAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvsTj', 
+                       '_$s6TipsUI17TipAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvsTq', 
+                       '_$s6TipsUI17TipAssetViewModelC10resetVideoyyFTj', '_$s6TipsUI17TipAssetViewModelC10resetVideoyyFTq', 
+                       '_$s6TipsUI17TipAssetViewModelC11replayVideoyyFTj', '_$s6TipsUI17TipAssetViewModelC11replayVideoyyFTq', 
+                       '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvMTj', '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvMTq', 
+                       '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvgTj', '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvgTq', 
+                       '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvpMV', '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvsTj', 
+                       '_$s6TipsUI17TipAssetViewModelC14isPosterLoadedSbvsTq', '_$s6TipsUI17TipAssetViewModelC15$isPosterLoaded7Combine9PublishedV9PublisherVySb_GvMTj', 
                        '_$s6TipsUI17TipAssetViewModelC15$isPosterLoaded7Combine9PublishedV9PublisherVySb_GvMTq', 
                        '_$s6TipsUI17TipAssetViewModelC15$isPosterLoaded7Combine9PublishedV9PublisherVySb_GvgTj', 
                        '_$s6TipsUI17TipAssetViewModelC15$isPosterLoaded7Combine9PublishedV9PublisherVySb_GvgTq', 
@@ -287,17 +296,22 @@ exports:
                        '_$s6TipsUI17TipAssetViewModelC7$player7Combine9PublishedV9PublisherVySo8AVPlayerCSg_GvsTj', 
                        '_$s6TipsUI17TipAssetViewModelC7$player7Combine9PublishedV9PublisherVySo8AVPlayerCSg_GvsTq', 
                        '_$s6TipsUI17TipAssetViewModelC7Combine16ObservableObjectAAMc', 
-                       '_$s6TipsUI17TipAssetViewModelC9playVideoyyFTj', '_$s6TipsUI17TipAssetViewModelC9playVideoyyFTq', 
-                       '_$s6TipsUI17TipAssetViewModelCMa', '_$s6TipsUI17TipAssetViewModelCMm', 
-                       '_$s6TipsUI17TipAssetViewModelCMn', '_$s6TipsUI17TipAssetViewModelCMo', 
-                       '_$s6TipsUI17TipAssetViewModelCMu', '_$s6TipsUI17TipAssetViewModelCN', 
-                       '_$s6TipsUI17TipAssetViewModelCfD', '_$s6TipsUI17TipAssetViewModelCfd', 
-                       '_$s6TipsUI20ContentLoadErrorTypeO2eeoiySbAC_ACtFZ', '_$s6TipsUI20ContentLoadErrorTypeO4hash4intoys6HasherVz_tF', 
+                       '_$s6TipsUI17TipAssetViewModelC9isPlayingSbvMTj', '_$s6TipsUI17TipAssetViewModelC9isPlayingSbvMTq', 
+                       '_$s6TipsUI17TipAssetViewModelC9isPlayingSbvgTj', '_$s6TipsUI17TipAssetViewModelC9isPlayingSbvgTq', 
+                       '_$s6TipsUI17TipAssetViewModelC9isPlayingSbvpMV', '_$s6TipsUI17TipAssetViewModelC9isPlayingSbvsTj', 
+                       '_$s6TipsUI17TipAssetViewModelC9isPlayingSbvsTq', '_$s6TipsUI17TipAssetViewModelC9playVideoyyFTj', 
+                       '_$s6TipsUI17TipAssetViewModelC9playVideoyyFTq', '_$s6TipsUI17TipAssetViewModelCMa', 
+                       '_$s6TipsUI17TipAssetViewModelCMm', '_$s6TipsUI17TipAssetViewModelCMn', 
+                       '_$s6TipsUI17TipAssetViewModelCMo', '_$s6TipsUI17TipAssetViewModelCMu', 
+                       '_$s6TipsUI17TipAssetViewModelCN', '_$s6TipsUI17TipAssetViewModelCfD', 
+                       '_$s6TipsUI17TipAssetViewModelCfd', '_$s6TipsUI20ContentLoadErrorTypeO2eeoiySbAC_ACtFZ', 
+                       '_$s6TipsUI20ContentLoadErrorTypeO4hash4intoys6HasherVz_tF', 
                        '_$s6TipsUI20ContentLoadErrorTypeO4noneyA2CmFWC', '_$s6TipsUI20ContentLoadErrorTypeO7networkyA2CmFWC', 
                        '_$s6TipsUI20ContentLoadErrorTypeO7unknownyA2CmFWC', '_$s6TipsUI20ContentLoadErrorTypeO9hashValueSivg', 
                        '_$s6TipsUI20ContentLoadErrorTypeO9hashValueSivpMV', '_$s6TipsUI20ContentLoadErrorTypeOMa', 
                        '_$s6TipsUI20ContentLoadErrorTypeOMn', '_$s6TipsUI20ContentLoadErrorTypeON', 
                        '_$s6TipsUI20ContentLoadErrorTypeOSHAAMc', '_$s6TipsUI20ContentLoadErrorTypeOSQAAMc', 
+                       '_$s6TipsUI23defaultParagraphSpacing12CoreGraphics7CGFloatVvg', 
                        '_$s6TipsUI24ConstellationContentViewV03rawD08language13assetsBaseURL10attributes4size8maxWidth8delegateACSaySDySSypGG_SS10Foundation0J0VSgAA0cD10AttributesVSgSo6CGSizeV12CoreGraphics7CGFloatVSgAA0cD8Delegate_pSgtcfC', 
                        '_$s6TipsUI24ConstellationContentViewV05SwiftB00E0AAMc', '_$s6TipsUI24ConstellationContentViewV4bodyQrvg', 
                        '_$s6TipsUI24ConstellationContentViewV4bodyQrvpMV', '_$s6TipsUI24ConstellationContentViewV4bodyQrvpQOMQ', 
@@ -307,7 +321,7 @@ exports:
                        '_$s6TipsUI28ConstellationContentDelegateP013constellationD13LinkActivated3urly10Foundation3URLV_tFTq', 
                        '_$s6TipsUI28ConstellationContentDelegateP013constellationD23PersonalizedStringForIDySSSgSiFTj', 
                        '_$s6TipsUI28ConstellationContentDelegateP013constellationD23PersonalizedStringForIDySSSgSiFTq', 
-                       '_$s6TipsUI28ConstellationContentDelegateTL', '_$s6TipsUI30ConstellationContentAttributesV4font15foregroundColor06accentH013textAlignmentACSo6NSFontCSg_05SwiftB00H0VSgANSo06NSTextK0VtcfC', 
+                       '_$s6TipsUI28ConstellationContentDelegateTL', '_$s6TipsUI30ConstellationContentAttributesV4font15foregroundColor06accentH013textAlignment16paragraphSpacingACSo6NSFontCSg_05SwiftB00H0VSgAOSo06NSTextK0V12CoreGraphics7CGFloatVtcfC', 
                        '_$s6TipsUI30ConstellationContentAttributesVMa', '_$s6TipsUI30ConstellationContentAttributesVMn', 
                        '_$s6TipsUI30ConstellationContentAttributesVN', '_$s7SwiftUI4ViewP04TipsB0E14onTipActionURL7performQry10Foundation0H0Vc_tF', 
                        '_$s7SwiftUI4ViewP04TipsB0E14onTipActionURL7performQry10Foundation0H0Vc_tFQOMQ', 

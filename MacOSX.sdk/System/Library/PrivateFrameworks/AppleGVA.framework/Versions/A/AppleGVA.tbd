@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C6F3F475-4654-3BAC-B46C-403C33B3E3B5
+    value:           EE2F8A3A-80FD-313D-8F71-834BCA535871
 install-name:    '/System/Library/PrivateFrameworks/AppleGVA.framework/Versions/A/AppleGVA'
 current-version: 10.0.20
 exports:

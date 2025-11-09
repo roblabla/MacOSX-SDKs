@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           19D55A81-E846-32F5-8419-C5EC34D90104
+    value:           76DF7822-24F3-38D8-8633-28FAB90C036A
   - target:          x86_64-maccatalyst
-    value:           19D55A81-E846-32F5-8419-C5EC34D90104
+    value:           76DF7822-24F3-38D8-8633-28FAB90C036A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           593FC070-B635-33BC-8A60-BBA8B2963C7A
+    value:           9DA61A72-C278-3753-86B1-AEDB8FFB827F
   - target:          arm64e-maccatalyst
-    value:           593FC070-B635-33BC-8A60-BBA8B2963C7A
+    value:           9DA61A72-C278-3753-86B1-AEDB8FFB827F
 install-name:    '/usr/lib/swift/libswiftCloudKit.dylib'
-current-version: 1930.13
+current-version: 1950.31.1
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

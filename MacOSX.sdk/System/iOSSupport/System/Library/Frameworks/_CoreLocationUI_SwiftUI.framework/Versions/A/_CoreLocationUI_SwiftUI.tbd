@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           DFB6EE9B-9336-39EA-A66F-88EAA0D333EC
+    value:           C4674295-056B-31A5-8E23-1E76C6911DDE
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           514F8AFA-560F-3FFA-AFA4-E2D4F478A6DF
+    value:           3F78069B-009D-36C9-AEA2-280795E731DC
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_CoreLocationUI_SwiftUI.framework/Versions/A/_CoreLocationUI_SwiftUI'
 swift-abi-version: 7
 exports:

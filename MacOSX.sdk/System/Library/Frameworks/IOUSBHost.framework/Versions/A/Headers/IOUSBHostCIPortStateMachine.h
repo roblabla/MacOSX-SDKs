@@ -67,10 +67,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly)  IOUSBHostControllerInterface*   controllerInterface;
 
+/*!
+ * @brief       Set the powered state of the port
+ * @discussion  Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command.  As part of successfully processing this command
+ *              the powered property must be set to YES.  Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered
+ *              property to NO.
+ */
 @property(nonatomic, readwrite) BOOL                            powered;
 
+/*!
+ * @brief       Set the connection state of the port
+ * @discussion  The connected property cannot be set for an unpowered port, and will read back as NO, just at IOUSBHostCIPortStatusConnected in the port status will always
+ *              read as 0.  For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the
+ *              new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange
+ *              set.
+ */
 @property(nonatomic, readwrite) BOOL                            connected;
 
+/*!
+ * @brief       Set the overcurrent state of the port
+ * @discussion  The overcurrent property cannot be set for an unpowered port, and will read back as NO, just as IOUSBHostCIPortStatusOvercurrent in the port status will always
+ *              read as 0.  For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the
+ *              new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange
+ *              set.
+ */
 @property(nonatomic, readwrite) BOOL                            overcurrent;
 
 -(BOOL)updateLinkState:(const IOUSBHostCILinkState)linkState

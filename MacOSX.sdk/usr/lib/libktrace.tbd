@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           657F299B-D731-36A6-9620-E34F3500C744
+    value:           80CAA020-A7C4-33B1-986C-5AFED940A3F1
   - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
+    value:           5B306A3B-7421-3D36-9E3D-00EDB98345C2
   - target:          arm64e-macos
-    value:           1681BE10-6780-327C-BC26-5FF6458283B5
+    value:           2DAE52AD-6577-32BE-BF11-8B2A00B107CB
 install-name:    '/usr/lib/libktrace.dylib'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -18,31 +18,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D4E0D21A-C8E5-3305-838F-BFF106C4B28C
+    value:           796CA2EA-FA6F-398E-BA30-EE31C8B8592B
   - target:          x86_64-maccatalyst
-    value:           D4E0D21A-C8E5-3305-838F-BFF106C4B28C
+    value:           796CA2EA-FA6F-398E-BA30-EE31C8B8592B
   - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
+    value:           D9C72D24-C8A4-36BD-B10F-B16EBEEB4055
   - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
+    value:           D9C72D24-C8A4-36BD-B10F-B16EBEEB4055
   - target:          arm64e-macos
-    value:           B3E931DE-AC03-3323-9780-03DF32C8B0D6
+    value:           B58D1395-7194-3DF3-ACD2-47E4F252F512
   - target:          arm64e-maccatalyst
-    value:           B3E931DE-AC03-3323-9780-03DF32C8B0D6
+    value:           B58D1395-7194-3DF3-ACD2-47E4F252F512
 install-name:    '/System/Library/PrivateFrameworks/ktrace.framework/Versions/A/ktrace'
-current-version: 453
+current-version: 453.100.11
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN11flatbuffers15ToStringVisitorE, __ZTIN11flatbuffers16DefaultAllocatorE, 
                        __ZTIN11flatbuffers16IterationVisitorE, __ZTIN11flatbuffers9AllocatorE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSN11flatbuffers15ToStringVisitorE, __ZTSN11flatbuffers16DefaultAllocatorE, 
-                       __ZTSN11flatbuffers16IterationVisitorE, __ZTSN11flatbuffers9AllocatorE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+                       __ZTSN11flatbuffers16IterationVisitorE, __ZTSN11flatbuffers9AllocatorE ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64-maccatalyst, arm64-macos, 
+                       arm64e-maccatalyst, arm64e-macos ]
     symbols:         [ _CFArrayApplierTrampoline, _CFDictionaryApplierTrampoline, 
                        _CFSetApplierTrampoline, __Z25ktrace_address_space_sortP20ktrace_address_space, 
                        __Z27ktrace_address_space_appendP20ktrace_address_space11SymbolOwner, 
@@ -57,16 +53,17 @@ exports:
                        __Z45ktrace_address_space_symbol_owner_for_addressP20ktrace_address_spacey, 
                        __Z45ktrace_uuid_map_learn_sharedcache_with_bufferP15ktrace_uuid_map11CFUUIDBytesPvm, 
                        _aasprintf, _cfaasprintf, _clear_events, _config_init_v1_0, 
-                       _config_init_v1_1, _config_init_v1_2, _config_init_v1_3, _context_kind_name, 
-                       _create_dict, _current_system_is_64_bit, _decompress_32, _decompress_64, 
-                       _deserializeSignpostSpecs, _dict_bool, _dict_data, _dict_int, 
-                       _dict_int_arr, _dict_set_bool, _dict_set_cfstring, _dict_set_data, 
-                       _dict_set_int, _dict_set_int_arr, _dict_set_string, _dict_set_uint32, 
-                       _dict_set_uint32_arr, _dict_set_uint64, _dict_set_uint64_arr, 
-                       _dict_string, _dict_uint32, _dict_uint32_arr, _dict_uint64, 
-                       _dict_uint64_arr, _free_array_callbacks, _free_callback, _insert_start_event, 
-                       _int_equal_callback, _int_hash_callback, _int_key_callbacks, 
-                       _int_value_callbacks, _kdebug_alloc_current_cpu_map, _kdebug_alloc_current_thread_map, 
+                       _config_init_v1_1, _config_init_v1_2, _config_init_v1_3, _config_init_v1_4, 
+                       _context_kind_name, _create_dict, _current_system_is_64_bit, 
+                       _decompress_32, _decompress_64, _deserializeSignpostSpecs, 
+                       _dict_bool, _dict_data, _dict_int, _dict_int_arr, _dict_set_bool, 
+                       _dict_set_cfstring, _dict_set_data, _dict_set_int, _dict_set_int_arr, 
+                       _dict_set_string, _dict_set_uint32, _dict_set_uint32_arr, 
+                       _dict_set_uint64, _dict_set_uint64_arr, _dict_string, _dict_uint32, 
+                       _dict_uint32_arr, _dict_uint64, _dict_uint64_arr, _free_array_callbacks, 
+                       _free_callback, _insert_start_event, _int_equal_callback, 
+                       _int_hash_callback, _int_key_callbacks, _int_value_callbacks, 
+                       _kdebug_alloc_current_cpu_map, _kdebug_alloc_current_thread_map, 
                        _kdebug_alloc_filter_description, _kdebug_alloc_thread_map, 
                        _kdebug_get_bufinfo, _kdebug_get_flags, _kdebug_read_events, 
                        _kdebug_wait, _kdebug_wait_and_read_events, _kdebug_write_events, 
@@ -97,22 +94,22 @@ exports:
                        _ktrace_config_get_owner_kind, _ktrace_config_get_owner_name, 
                        _ktrace_config_get_owner_pid, _ktrace_config_get_reason, _ktrace_config_get_trigger_kind, 
                        _ktrace_config_kdebug_get_buffer_size, _ktrace_config_kdebug_get_coprocessor_tracing, 
-                       _ktrace_config_kdebug_get_debugid_enabled, _ktrace_config_kdebug_get_filtering_events, 
-                       _ktrace_config_kdebug_get_procfilt, _ktrace_config_kdebug_get_procfilt_mode, 
-                       _ktrace_config_kdebug_get_state, _ktrace_config_kdebug_get_typefilter, 
-                       _ktrace_config_kdebug_get_wrapping, _ktrace_config_kdebug_pid_included, 
-                       _ktrace_config_kdebug_using_mach_continuous_time, _ktrace_config_kpc_get_action_id, 
-                       _ktrace_config_kpc_get_classes, _ktrace_config_kpc_get_config, 
-                       _ktrace_config_kpc_get_period, _ktrace_config_kpc_get_state, 
-                       _ktrace_config_kpc_get_thread_classes, _ktrace_config_kperf_get_action_count, 
-                       _ktrace_config_kperf_get_action_pid_only, _ktrace_config_kperf_get_action_samplers, 
-                       _ktrace_config_kperf_get_action_user_data, _ktrace_config_kperf_get_kdebug_action_id, 
-                       _ktrace_config_kperf_get_kdebug_filter_desc, _ktrace_config_kperf_get_pet_idle_rate, 
-                       _ktrace_config_kperf_get_pet_mode, _ktrace_config_kperf_get_pet_timer_id, 
-                       _ktrace_config_kperf_get_state, _ktrace_config_kperf_get_timer_action_id, 
-                       _ktrace_config_kperf_get_timer_count, _ktrace_config_kperf_get_timer_period_ns, 
-                       _ktrace_config_print_description, _ktrace_config_serialize, 
-                       _ktrace_config_set_command, _ktrace_config_set_context_kind, 
+                       _ktrace_config_kdebug_get_debugid_enabled, _ktrace_config_kdebug_get_disabling_event_matching, 
+                       _ktrace_config_kdebug_get_filtering_events, _ktrace_config_kdebug_get_procfilt, 
+                       _ktrace_config_kdebug_get_procfilt_mode, _ktrace_config_kdebug_get_state, 
+                       _ktrace_config_kdebug_get_typefilter, _ktrace_config_kdebug_get_wrapping, 
+                       _ktrace_config_kdebug_pid_included, _ktrace_config_kdebug_using_mach_continuous_time, 
+                       _ktrace_config_kpc_get_action_id, _ktrace_config_kpc_get_classes, 
+                       _ktrace_config_kpc_get_config, _ktrace_config_kpc_get_period, 
+                       _ktrace_config_kpc_get_state, _ktrace_config_kpc_get_thread_classes, 
+                       _ktrace_config_kperf_get_action_count, _ktrace_config_kperf_get_action_pid_only, 
+                       _ktrace_config_kperf_get_action_samplers, _ktrace_config_kperf_get_action_user_data, 
+                       _ktrace_config_kperf_get_kdebug_action_id, _ktrace_config_kperf_get_kdebug_filter_desc, 
+                       _ktrace_config_kperf_get_pet_idle_rate, _ktrace_config_kperf_get_pet_mode, 
+                       _ktrace_config_kperf_get_pet_timer_id, _ktrace_config_kperf_get_state, 
+                       _ktrace_config_kperf_get_timer_action_id, _ktrace_config_kperf_get_timer_count, 
+                       _ktrace_config_kperf_get_timer_period_ns, _ktrace_config_print_description, 
+                       _ktrace_config_serialize, _ktrace_config_set_command, _ktrace_config_set_context_kind, 
                        _ktrace_config_set_reason, _ktrace_config_set_trigger_kind, 
                        _ktrace_configure, _ktrace_convert_timestamp_to_nanoseconds, 
                        _ktrace_convert_timestamp_to_walltime, _ktrace_copy_cs_signature_data, 
@@ -133,15 +130,16 @@ exports:
                        _ktrace_dsym_search_configuration_set_use_debugsymbols_defaults, 
                        _ktrace_dump_address_space, _ktrace_dump_address_space_pid, 
                        _ktrace_dumpbuffer_address_space, _ktrace_dumpbuffer_address_space_pid, 
-                       _ktrace_enable_symbolication, _ktrace_end, _ktrace_eventid_for_name, 
-                       _ktrace_events_all, _ktrace_events_all_paired, _ktrace_events_any, 
-                       _ktrace_events_any_paired, _ktrace_events_filter, _ktrace_events_filter_bitmap, 
-                       _ktrace_events_filter_bitmap_paired, _ktrace_events_filter_paired, 
-                       _ktrace_events_range, _ktrace_events_range_paired, _ktrace_events_single, 
-                       _ktrace_events_single_paired, _ktrace_exclude_pid, _ktrace_exclude_process, 
-                       _ktrace_file_align_next, _ktrace_file_append, _ktrace_file_append_chunk, 
-                       _ktrace_file_append_data, _ktrace_file_append_file, _ktrace_file_append_filtered_kdebug_events, 
-                       _ktrace_file_append_finish, _ktrace_file_append_ioreg, _ktrace_file_append_live_ariadne_device_tree, 
+                       _ktrace_enable_symbolication, _ktrace_end, _ktrace_end_on_event_match, 
+                       _ktrace_eventid_for_name, _ktrace_events_all, _ktrace_events_all_paired, 
+                       _ktrace_events_any, _ktrace_events_any_paired, _ktrace_events_filter, 
+                       _ktrace_events_filter_bitmap, _ktrace_events_filter_bitmap_paired, 
+                       _ktrace_events_filter_paired, _ktrace_events_range, _ktrace_events_range_paired, 
+                       _ktrace_events_single, _ktrace_events_single_paired, _ktrace_exclude_pid, 
+                       _ktrace_exclude_process, _ktrace_file_align_next, _ktrace_file_append, 
+                       _ktrace_file_append_chunk, _ktrace_file_append_data, _ktrace_file_append_file, 
+                       _ktrace_file_append_filtered_kdebug_events, _ktrace_file_append_finish, 
+                       _ktrace_file_append_ioreg, _ktrace_file_append_live_ariadne_device_tree, 
                        _ktrace_file_append_live_ariadne_signpost_specs, _ktrace_file_append_live_filtered_ktrace, 
                        _ktrace_file_append_live_ktrace, _ktrace_file_append_live_stackshot, 
                        _ktrace_file_append_live_stackshot_internal, _ktrace_file_append_live_thread_map, 
@@ -192,27 +190,28 @@ exports:
                        _ktrace_machine_apple_internal, _ktrace_machine_boot_args, 
                        _ktrace_machine_boot_uuid, _ktrace_machine_cluster_flags, 
                        _ktrace_machine_copy_description, _ktrace_machine_cpu_cluster, 
-                       _ktrace_machine_cpu_family, _ktrace_machine_cpu_subtype, _ktrace_machine_cpu_type, 
-                       _ktrace_machine_create, _ktrace_machine_create_current, _ktrace_machine_destroy, 
-                       _ktrace_machine_device_uuid, _ktrace_machine_has_hyperthreading, 
+                       _ktrace_machine_cpu_die, _ktrace_machine_cpu_family, _ktrace_machine_cpu_subtype, 
+                       _ktrace_machine_cpu_type, _ktrace_machine_create, _ktrace_machine_create_current, 
+                       _ktrace_machine_destroy, _ktrace_machine_device_uuid, _ktrace_machine_has_hyperthreading, 
                        _ktrace_machine_has_internal_content, _ktrace_machine_has_thread_groups, 
                        _ktrace_machine_hostname, _ktrace_machine_hw_page_size, _ktrace_machine_kernel_version, 
-                       _ktrace_machine_max_clusters, _ktrace_machine_max_cpus, _ktrace_machine_max_kernel_vaddr, 
-                       _ktrace_machine_memory_size, _ktrace_machine_min_kernel_vaddr, 
-                       _ktrace_machine_model, _ktrace_machine_name, _ktrace_machine_os_build, 
-                       _ktrace_machine_os_name, _ktrace_machine_os_version, _ktrace_machine_physical_cpus, 
-                       _ktrace_machine_print_description, _ktrace_machine_root_volume_size, 
-                       _ktrace_machine_vm_page_size, _ktrace_machine_vm_pages, _ktrace_machine_vm_size, 
-                       _ktrace_name_for_eventid, _ktrace_only_do_time_sensitive_postprocess, 
-                       _ktrace_parse_arg, _ktrace_parse_args, _ktrace_plausible_kernel_address, 
-                       _ktrace_postprocess_file, _ktrace_prepass_uuid_map_finish, 
-                       _ktrace_prepass_uuid_map_init, _ktrace_print_csv_header, _ktrace_print_trace_point, 
-                       _ktrace_remotetime_update_params, _ktrace_reset_existing, 
-                       _ktrace_session_add_codes_file, _ktrace_session_create, _ktrace_session_destroy, 
-                       _ktrace_session_free, _ktrace_session_get_default_event_names_enabled, 
+                       _ktrace_machine_max_clusters, _ktrace_machine_max_cpus, _ktrace_machine_max_dies, 
+                       _ktrace_machine_max_kernel_vaddr, _ktrace_machine_memory_size, 
+                       _ktrace_machine_min_kernel_vaddr, _ktrace_machine_model, _ktrace_machine_name, 
+                       _ktrace_machine_os_build, _ktrace_machine_os_name, _ktrace_machine_os_version, 
+                       _ktrace_machine_physical_cpus, _ktrace_machine_print_description, 
+                       _ktrace_machine_root_volume_size, _ktrace_machine_vm_page_size, 
+                       _ktrace_machine_vm_pages, _ktrace_machine_vm_size, _ktrace_name_for_eventid, 
+                       _ktrace_only_do_time_sensitive_postprocess, _ktrace_parse_arg, 
+                       _ktrace_parse_args, _ktrace_plausible_kernel_address, _ktrace_postprocess_file, 
+                       _ktrace_prepass_uuid_map_finish, _ktrace_prepass_uuid_map_init, 
+                       _ktrace_print_csv_header, _ktrace_print_trace_point, _ktrace_remotetime_update_params, 
+                       _ktrace_reset_existing, _ktrace_session_add_codes_file, _ktrace_session_create, 
+                       _ktrace_session_destroy, _ktrace_session_free, _ktrace_session_get_default_event_names_enabled, 
                        _ktrace_session_get_event_names_enabled, _ktrace_session_getting_event_names_from_system, 
                        _ktrace_session_set_default_event_names_enabled, _ktrace_session_set_event_names_enabled, 
-                       _ktrace_set_buffer_size, _ktrace_set_cleanup_handler, _ktrace_set_collection_interval, 
+                       _ktrace_set_buffer_size, _ktrace_set_callbacks_after_elapsed, 
+                       _ktrace_set_cleanup_handler, _ktrace_set_collection_interval, 
                        _ktrace_set_collection_qos, _ktrace_set_command_argv, _ktrace_set_completion_handler, 
                        _ktrace_set_continuous_timestamps, _ktrace_set_coprocessor_tracing_enabled, 
                        _ktrace_set_default_event_names_enabled, _ktrace_set_dropped_events_handler, 
@@ -263,11 +262,11 @@ exports:
                        _ktrace_visit_uuid, _kttimesync_abs_from_cont, _kttimesync_abs_from_timestamp, 
                        _kttimesync_append, _kttimesync_can_convert_continuous, _kttimesync_cont_from_abs, 
                        _kttimesync_cont_from_timestamp, _kttimesync_frequency, _kttimesync_init, 
-                       _kttimesync_ns_from_mach, _kttimesync_ns_from_timestamp, _kttimesync_update_kdebug, 
-                       _kttimesync_update_kdebug_prepass, _kttimesync_wall_from_timestamp, 
-                       _long_key_callbacks, _long_set_callbacks, _long_value_callbacks, 
-                       _machtime_to_timespec, _machtime_to_timeval, _match_end_event, 
-                       _owner_kind_name, _print_typefilter, _proc_name_equal_callback, 
+                       _kttimesync_ns_from_mach, _kttimesync_ns_from_timestamp, _kttimesync_timestamp_from_ns, 
+                       _kttimesync_update_kdebug, _kttimesync_update_kdebug_prepass, 
+                       _kttimesync_wall_from_timestamp, _long_key_callbacks, _long_set_callbacks, 
+                       _long_value_callbacks, _machtime_to_timespec, _machtime_to_timeval, 
+                       _match_end_event, _owner_kind_name, _print_typefilter, _proc_name_equal_callback, 
                        _proc_name_hash_callback, _ptr_equal_callback, _read_cfdata, 
                        _signpostSpecPathsForURL, _state_name, _str_equal_callback, 
                        _str_hash_callback, _str_key_callbacks, _str_no_free_key_callbacks, 
@@ -291,12 +290,12 @@ exports:
                        _trace_remove_internal, _trace_reset, _trace_set_buffer_size, 
                        _trace_set_command_map_enabled, _trace_set_completion_handler, 
                        _trace_set_default_code_map_enabled, _trace_set_dropped_events_handler, 
-                       _trace_set_enable, _trace_set_filter, _trace_set_flags, _trace_set_mode, 
-                       _trace_set_pid_filter, _trace_set_raw_file, _trace_set_signal_handler, 
-                       _trace_set_thread_exit_handler, _trace_set_use_existing, _trace_set_walltime_enabled, 
-                       _trace_setup, _trace_single, _trace_single_paired, _trace_start, 
-                       _trace_wait, _tracepoint_timestamp, _trigger_kind_name, _utf8, 
-                       _utf8_nullable, _uuid_string, _vfs_trace_paths, _vnode_path_map_destroy, 
-                       _vnode_path_map_update ]
+                       _trace_set_enable, _trace_set_event_match_disable, _trace_set_filter, 
+                       _trace_set_flags, _trace_set_mode, _trace_set_pid_filter, 
+                       _trace_set_raw_file, _trace_set_signal_handler, _trace_set_thread_exit_handler, 
+                       _trace_set_use_existing, _trace_set_walltime_enabled, _trace_setup, 
+                       _trace_single, _trace_single_paired, _trace_start, _trace_wait, 
+                       _tracepoint_timestamp, _trigger_kind_name, _utf8, _utf8_nullable, 
+                       _uuid_string, _vfs_trace_paths, _vnode_path_map_destroy, _vnode_path_map_update ]
     objc-classes:    [ AOTImage, KtraceLoggingDataSource ]
 ...

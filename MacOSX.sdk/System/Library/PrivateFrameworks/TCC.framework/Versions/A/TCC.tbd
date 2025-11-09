@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BDCFDA23-512F-3B72-BE35-62CB1F037E21
+    value:           A3B94CA6-A1BA-30C8-8081-818451C73698
   - target:          x86_64-maccatalyst
-    value:           BDCFDA23-512F-3B72-BE35-62CB1F037E21
+    value:           A3B94CA6-A1BA-30C8-8081-818451C73698
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3313DD91-7C48-3C3A-986E-F223270B647E
+    value:           5397213B-5DC5-3512-B525-BD2C4F95164F
   - target:          arm64e-maccatalyst
-    value:           3313DD91-7C48-3C3A-986E-F223270B647E
+    value:           5397213B-5DC5-3512-B525-BD2C4F95164F
 install-name:    '/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -22,13 +22,14 @@ exports:
     symbols:         [ _TCCAccessCheckAuditToken, _TCCAccessCopyBundleIdentifiersDisabledForService, 
                        _TCCAccessCopyBundleIdentifiersForService, _TCCAccessCopyInformation, 
                        _TCCAccessCopyInformationForBundle, _TCCAccessCopyInformationForBundleId, 
-                       _TCCAccessDeclarePolicy, _TCCAccessGetOverride, _TCCAccessGetOverrides, 
-                       _TCCAccessOverride, _TCCAccessPreflight, _TCCAccessPreflightWithAuditToken, 
-                       _TCCAccessRequest, _TCCAccessRequestIndirect, _TCCAccessRequestIndirectWithOptions, 
-                       _TCCAccessReset, _TCCAccessResetForBundle, _TCCAccessResetForBundleId, 
-                       _TCCAccessResetForBundleIdWithAuditToken, _TCCAccessResetForPath, 
-                       _TCCAccessResetPoliciesExcept, _TCCAccessRestricted, _TCCAccessSelectPolicyForExtensionWithIdentifier, 
-                       _TCCAccessSet, _TCCAccessSetForAuditToken, _TCCAccessSetForAuditTokenWithOptions, 
+                       _TCCAccessCopyOverrides, _TCCAccessDeclarePolicy, _TCCAccessGetOverride, 
+                       _TCCAccessGetOverrides, _TCCAccessOverride, _TCCAccessPreflight, 
+                       _TCCAccessPreflightWithAuditToken, _TCCAccessRequest, _TCCAccessRequestIndirect, 
+                       _TCCAccessRequestIndirectWithOptions, _TCCAccessReset, _TCCAccessResetForBundle, 
+                       _TCCAccessResetForBundleId, _TCCAccessResetForBundleIdWithAuditToken, 
+                       _TCCAccessResetForPath, _TCCAccessResetPoliciesExcept, _TCCAccessRestricted, 
+                       _TCCAccessSelectPolicyForExtensionWithIdentifier, _TCCAccessSet, 
+                       _TCCAccessSetForAuditToken, _TCCAccessSetForAuditTokenWithOptions, 
                        _TCCAccessSetForBundle, _TCCAccessSetForBundleId, _TCCAccessSetForBundleIdAndCodeRequirement, 
                        _TCCAccessSetForBundleIdWithOptions, _TCCAccessSetForCodeIdentity, 
                        _TCCAccessSetForIndirectObject, _TCCAccessSetForPath, _TCCAccessSetForPathWithOptions, 

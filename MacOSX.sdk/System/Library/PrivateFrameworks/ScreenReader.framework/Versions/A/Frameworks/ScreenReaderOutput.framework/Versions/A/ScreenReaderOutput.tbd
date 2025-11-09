@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E7B1B7DD-D1B9-3731-ACCB-9F11FCE7B3F2
+    value:           5ED0C47A-562D-3600-BCB5-4C5C25DDB793
   - target:          x86_64-maccatalyst
-    value:           E7B1B7DD-D1B9-3731-ACCB-9F11FCE7B3F2
+    value:           5ED0C47A-562D-3600-BCB5-4C5C25DDB793
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33AD12B0-DE69-36ED-ACC0-B57EF0D19251
+    value:           6687AE3E-17C8-39BC-8DAD-ABA2186ACC00
   - target:          arm64e-maccatalyst
-    value:           33AD12B0-DE69-36ED-ACC0-B57EF0D19251
+    value:           6687AE3E-17C8-39BC-8DAD-ABA2186ACC00
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderOutput.framework/Versions/A/ScreenReaderOutput'
 current-version: 390
 exports:
@@ -160,11 +160,12 @@ exports:
                        SCROEvent._callbacks, SCROEvent._getDictionary, SCROEvent._handlerType, 
                        SCROEvent._readOnly, SCROEvent._setDictionary, SCROHandler._lock, 
                        SCROHandler.isInvalid, SCROMobileBrailleDisplayInputManager._brailleKeys, 
-                       SCROMobileBrailleDisplayInputManager._bundle, SCROMobileBrailleDisplayInputManager._displayInfoDict, 
-                       SCROMobileBrailleDisplayInputManager._eightDotCommands, SCROMobileBrailleDisplayInputManager._sixDotCommands, 
-                       SCROScriptClient._connection, SCROScriptClient._isReady, SCROScriptClient._lock, 
-                       SCROScriptClient._timer, SCROServer._clientCount, SCROServer._contentLock, 
-                       SCROServer._deathPort, SCROServer._deathSource, SCROServer._deathTimer, 
-                       SCROServer._delegate, SCROServer._isRegisteredWithMach, SCROServer._serverPort, 
+                       SCROMobileBrailleDisplayInputManager._bundle, SCROMobileBrailleDisplayInputManager._contentLock, 
+                       SCROMobileBrailleDisplayInputManager._displayInfoDict, SCROMobileBrailleDisplayInputManager._eightDotCommands, 
+                       SCROMobileBrailleDisplayInputManager._sixDotCommands, SCROScriptClient._connection, 
+                       SCROScriptClient._isReady, SCROScriptClient._lock, SCROScriptClient._timer, 
+                       SCROServer._clientCount, SCROServer._contentLock, SCROServer._deathPort, 
+                       SCROServer._deathSource, SCROServer._deathTimer, SCROServer._delegate, 
+                       SCROServer._isRegisteredWithMach, SCROServer._serverPort, 
                        SCROServer._serverSource ]
 ...

@@ -56,6 +56,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  */
 - (void)prepareInterfaceToProvideCredentialForIdentity:(ASPasswordCredentialIdentity *)credentialIdentity;
 
+
 /*! @abstract Prepare the view controller to show user interface when the user enables your extension.
  @discussion The system calls this method after your extension is enabled by the user in Settings. You can
  use this method to give the user a chance to configure the extension or to provide credential identities

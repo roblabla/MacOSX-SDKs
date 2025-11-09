@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           97ECC656-9F36-3B6A-928E-2B695613A4C2
+    value:           BEA5A54A-EC82-37E7-9D36-E39FDA33F72E
   - target:          x86_64-maccatalyst
-    value:           97ECC656-9F36-3B6A-928E-2B695613A4C2
+    value:           BEA5A54A-EC82-37E7-9D36-E39FDA33F72E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81D78F63-A583-37F5-9D09-23BE092F6F94
+    value:           C40BB963-72F2-3B20-A799-213809C93397
   - target:          arm64e-maccatalyst
-    value:           81D78F63-A583-37F5-9D09-23BE092F6F94
+    value:           C40BB963-72F2-3B20-A799-213809C93397
 install-name:    '/System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -50,11 +50,10 @@ exports:
                        ADClientSettingsRequest, ADClientSettingsResponse, ADConfiguration, 
                        ADConfigurationRequest, ADConfigurationResponse, ADCoreDefaults, 
                        ADCoreSettings, ADFlags, ADFrequencyCap, ADIDManager, ADIDRecord, 
-                       ADKeyedParameterList, ADLandingCapData, ADLandingFrequencyCap, 
-                       ADLogAnalyticsRequest, ADLogAnalyticsResponse, ADNetworkController, 
-                       ADOptOutRequest, ADOptOutResponse, ADParameter, ADRoutingInfoMessage, 
-                       ADSegmentUpdateRequest, ADSegmentUpdateResponse, ADServer, 
-                       ADSingleton, ADSponsoredSearchRequest, ADTransparencyDetails, 
+                       ADKeyedParameterList, ADLogAnalyticsRequest, ADLogAnalyticsResponse, 
+                       ADNetworkController, ADOptOutRequest, ADOptOutResponse, ADParameter, 
+                       ADRoutingInfoMessage, ADSegmentUpdateRequest, ADSegmentUpdateResponse, 
+                       ADServer, ADSingleton, ADSponsoredSearchRequest, ADTransparencyDetails, 
                        ADUserTargetingProperties, ADUserTransparencyRequest, ADUserTransparencyResponse, 
                        ADWatchDog, ADWatchDogManager, DSIDRecord ]
     objc-ivars:      [ ADAnalyticsEvent._event, ADAnalyticsEvent._timestamp, ADAttributionRequest._adMetadata, 

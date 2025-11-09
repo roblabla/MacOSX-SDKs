@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8977EE5C-D994-339A-B1F7-46EFA1772794
+    value:           8DB17081-768F-3B48-92D4-C107C21ADD06
   - target:          x86_64-maccatalyst
-    value:           8977EE5C-D994-339A-B1F7-46EFA1772794
+    value:           8DB17081-768F-3B48-92D4-C107C21ADD06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           970FAE8E-1769-3816-BADF-2B75EC9A9385
+    value:           2BCC020C-4393-3CAC-8257-848A303A7E4A
   - target:          arm64e-maccatalyst
-    value:           970FAE8E-1769-3816-BADF-2B75EC9A9385
+    value:           2BCC020C-4393-3CAC-8257-848A303A7E4A
 install-name:    '/System/Library/Frameworks/Metal.framework/Versions/A/Metal'
-current-version: 258.17
+current-version: 261.13
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -60,11 +60,11 @@ exports:
                        _MTLCounterSetDescriptionStageUtilization, _MTLCounterSetDescriptionStatistics, 
                        _MTLCounterSetDescriptionTimestamp, _MTLCountersLayerEnabled, 
                        _MTLCreateCompilerConnectionManager, _MTLCreateDeviceWithID, 
-                       _MTLCreateStructTypeFromArgumentDescriptors, _MTLCreateSystemDefaultDevice, 
-                       _MTLDataTypeGetAlignment, _MTLDataTypeGetComponentCount, _MTLDataTypeGetComponentType, 
-                       _MTLDataTypeGetShaderTypeName, _MTLDataTypeGetSignedType, 
-                       _MTLDataTypeGetSize, _MTLDataTypeGetVectorDataType, _MTLDataTypeString, 
-                       _MTLDebugValidateMTLPixelFormat, _MTLDeviceRemovalRequestedNotification, 
+                       _MTLCreateSimulatorDevice, _MTLCreateStructTypeFromArgumentDescriptors, 
+                       _MTLCreateSystemDefaultDevice, _MTLDataTypeGetAlignment, _MTLDataTypeGetComponentCount, 
+                       _MTLDataTypeGetComponentType, _MTLDataTypeGetShaderTypeName, 
+                       _MTLDataTypeGetSignedType, _MTLDataTypeGetSize, _MTLDataTypeGetVectorDataType, 
+                       _MTLDataTypeString, _MTLDebugValidateMTLPixelFormat, _MTLDeviceRemovalRequestedNotification, 
                        _MTLDeviceWasAddedNotification, _MTLDeviceWasRemovedNotification, 
                        _MTLDispatchListAppendBlock, _MTLDispatchListApply, _MTLDynamicLibraryDomain, 
                        _MTLDynamicLibraryLoadOptionsFromPipelineOptions, _MTLDynamicLibraryPerformanceKeyInstallName, 
@@ -190,7 +190,8 @@ exports:
                        MTLFunctionStitchingInputBufferAddress, MTLFunctionStitchingInputImageblock, 
                        MTLFunctionStitchingInputNode, MTLFunctionStitchingInputSampler, 
                        MTLFunctionStitchingInputTexture, MTLFunctionStitchingInputThreadgroup, 
-                       MTLFunctionVariant, MTLGPUBVHBuilder, MTLHeapDescriptor, MTLIOAccelAccelerationStructure, 
+                       MTLFunctionVariant, MTLGPUBVHBuilder, MTLGenericBVHBufferSizesSPI, 
+                       MTLGenericBVHBuffersSPI, MTLHeapDescriptor, MTLIOAccelAccelerationStructure, 
                        MTLIOAccelBlitCommandEncoder, MTLIOAccelBuffer, MTLIOAccelCommandBuffer, 
                        MTLIOAccelCommandEncoder, MTLIOAccelCommandQueue, MTLIOAccelComputeCommandEncoder, 
                        MTLIOAccelDebugCommandEncoder, MTLIOAccelDevice, MTLIOAccelDeviceShmem, 

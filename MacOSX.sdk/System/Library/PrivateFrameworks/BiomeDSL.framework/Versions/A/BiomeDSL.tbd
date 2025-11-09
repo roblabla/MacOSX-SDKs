@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           39AB4872-1E8C-33C3-85AB-4D59F5F25AC4
+    value:           EC057D66-E1B3-3AED-9775-D8A7FB064CB9
   - target:          x86_64-maccatalyst
-    value:           39AB4872-1E8C-33C3-85AB-4D59F5F25AC4
+    value:           EC057D66-E1B3-3AED-9775-D8A7FB064CB9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           73662979-EBA8-3C46-8B43-5D4EFD1721F1
+    value:           0D768E51-F2A4-367D-A8E3-A64A8835F220
   - target:          arm64e-maccatalyst
-    value:           73662979-EBA8-3C46-8B43-5D4EFD1721F1
+    value:           0D768E51-F2A4-367D-A8E3-A64A8835F220
 install-name:    '/System/Library/PrivateFrameworks/BiomeDSL.framework/Versions/A/BiomeDSL'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -26,8 +26,9 @@ exports:
                        BMDSLBaseCodable, BMDSLClassTransform, BMDSLClasses, BMDSLCollect, 
                        BMDSLFilter, BMDSLInstanceTransform, BMDSLJSONAllowedClasses, 
                        BMDSLJSONArchiver, BMDSLJSONCoder, BMDSLJSONUnarchiver, BMDSLKeyPathSelector, 
-                       BMDSLKeyPathTransform, BMDSLMap, BMDSLMerge, BMDSLOrderedMerge, 
-                       BMDSLState, BMDSLSubscribeOn, BMDSLSubscriber, BMDSLTransformInvocation, 
-                       BMDSLTransformValidator, BMDSLTransforms, BMDSLTumblingWindowAssigner, 
-                       BMDSLWindowAssigner, BMDSLWindower, _BPSSubscribeOnInner ]
+                       BMDSLKeyPathTransform, BMDSLMap, BMDSLMerge, BMDSLMultiKeyPathsTransform, 
+                       BMDSLOrderedMerge, BMDSLState, BMDSLSubscribeOn, BMDSLSubscriber, 
+                       BMDSLTransformInvocation, BMDSLTransformValidator, BMDSLTransforms, 
+                       BMDSLTumblingWindowAssigner, BMDSLWindowAssigner, BMDSLWindower, 
+                       _BPSSubscribeOnInner ]
 ...

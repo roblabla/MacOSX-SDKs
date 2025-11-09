@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DB77A8F8-A604-38C7-8223-7B94DD0AFA62
+    value:           1A4EB10F-05FE-399E-AB6A-120F20633A4C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59400FCD-CA81-3FEA-A09C-29E38B63191A
+    value:           D707B0C7-B360-3D90-BC95-658551498103
 install-name:    '/System/Library/PrivateFrameworks/MediaFoundation.framework/Versions/A/MediaFoundation'
 current-version: 0
 compatibility-version: 0
@@ -43,6 +43,8 @@ exports:
                        '_$s15MediaFoundation11DescriptionC19forUserActionSourceySSAA0efG0OFZTq', 
                        '_$s15MediaFoundation11DescriptionC20forItemRequestReasonySSAA0efG0OFZTj', 
                        '_$s15MediaFoundation11DescriptionC20forItemRequestReasonySSAA0efG0OFZTq', 
+                       '_$s15MediaFoundation11DescriptionC20forTimeControlStatusySSAA0efG0OFZTj', 
+                       '_$s15MediaFoundation11DescriptionC20forTimeControlStatusySSAA0efG0OFZTq', 
                        '_$s15MediaFoundation11DescriptionC27forPlaybackTimeChangeReasonySSAA0efgH0OFZTj', 
                        '_$s15MediaFoundation11DescriptionC27forPlaybackTimeChangeReasonySSAA0efgH0OFZTq', 
                        '_$s15MediaFoundation11DescriptionC29forPlayerSpatializationFormatySSAA0efG0OFZTj', 
@@ -120,6 +122,14 @@ exports:
                        '_$s15MediaFoundation17ItemRequestReasonON', '_$s15MediaFoundation17ItemRequestReasonOSHAAMc', 
                        '_$s15MediaFoundation17ItemRequestReasonOSQAAMc', '_$s15MediaFoundation17ItemRequestReasonOSYAAMc', 
                        '_$s15MediaFoundation17ItemRequestReasonOs23CustomStringConvertibleAAMc', 
+                       '_$s15MediaFoundation17TimeControlStatusO11descriptionSSvg', 
+                       '_$s15MediaFoundation17TimeControlStatusO11descriptionSSvpMV', 
+                       '_$s15MediaFoundation17TimeControlStatusO8rawValueACSgSi_tcfC', 
+                       '_$s15MediaFoundation17TimeControlStatusO8rawValueSivg', '_$s15MediaFoundation17TimeControlStatusO8rawValueSivpMV', 
+                       '_$s15MediaFoundation17TimeControlStatusOMa', '_$s15MediaFoundation17TimeControlStatusOMn', 
+                       '_$s15MediaFoundation17TimeControlStatusON', '_$s15MediaFoundation17TimeControlStatusOSHAAMc', 
+                       '_$s15MediaFoundation17TimeControlStatusOSQAAMc', '_$s15MediaFoundation17TimeControlStatusOSYAAMc', 
+                       '_$s15MediaFoundation17TimeControlStatusOs23CustomStringConvertibleAAMc', 
                        '_$s15MediaFoundation20ExternalPlaybackTypeO8rawValueACSgSi_tcfC', 
                        '_$s15MediaFoundation20ExternalPlaybackTypeO8rawValueSivg', 
                        '_$s15MediaFoundation20ExternalPlaybackTypeO8rawValueSivpMV', 
@@ -203,6 +213,9 @@ exports:
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC17reloadCurrentItem6reason10completionyAA15ReloadingReasonO_ySo7NSErrorCSgcSgtFTq', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC17setRelativeVolumeyySfFTj', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC17setRelativeVolumeyySfFTq', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC17timeControlStatusAA04TimehI0OvgTj', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC17timeControlStatusAA04TimehI0OvgTq', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC17timeControlStatusAA04TimehI0OvpMV', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC18clearPlaybackQueueyyFTj', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC18clearPlaybackQueueyyFTq', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC18updateAudioSession4withyAA0hI13ConfigurationC_tFTj', 
@@ -254,10 +267,10 @@ exports:
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvpMV', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvsTj', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvsTq', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0CtcfC', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0CtcfCTj', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0CtcfCTq', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID05queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0I0ACSS_AA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternalnE0_pAA05LeaseR0_pAA0N8Defaults_pSo012OS_dispatch_I0Ctcfc', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0CtcfC', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0CtcfCTj', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0CtcfCTq', 
+                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0Ctcfc', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC9nextItemsSayAA15QueuePlayerItem_pGvpMV', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationCACycfC', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationCACycfc', 
@@ -308,6 +321,9 @@ exports:
                        '_$sSo14AVPlayerStatusV15MediaFoundationE11descriptionSSvg', 
                        '_$sSo14AVPlayerStatusV15MediaFoundationE11descriptionSSvpMV', 
                        '_$sSo14AVPlayerStatusVs23CustomStringConvertible15MediaFoundationMc', 
+                       '_$sSo21AVPlayerWaitingReasona15MediaFoundationE11descriptionSSvg', 
+                       '_$sSo21AVPlayerWaitingReasona15MediaFoundationE11descriptionSSvpMV', 
+                       '_$sSo21AVPlayerWaitingReasonas23CustomStringConvertible15MediaFoundationMc', 
                        '_$sSo23AVPlayerActionAtItemEndV15MediaFoundationE11descriptionSSvg', 
                        '_$sSo23AVPlayerActionAtItemEndV15MediaFoundationE11descriptionSSvpMV', 
                        '_$sSo23AVPlayerActionAtItemEndVs23CustomStringConvertible15MediaFoundationMc', 

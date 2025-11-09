@@ -13,6 +13,7 @@
 @class NSManagedObjectModel;
 @class NSManagedObject;
 @class CSSearchableIndex;
+@class CSSearchableItem;
 @class CSSearchableItemAttributeSet;
 
 NS_ASSUME_NONNULL_BEGIN

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C8ECDD73-0CCE-3C12-BC41-6F94FA07525A
+    value:           E9EF5E0B-B385-3A9B-8BC1-2A65D4ACF45E
   - target:          x86_64-maccatalyst
-    value:           C8ECDD73-0CCE-3C12-BC41-6F94FA07525A
+    value:           E9EF5E0B-B385-3A9B-8BC1-2A65D4ACF45E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FF2E555-1574-3BDF-B0BE-6993C2002C34
+    value:           B1135FF1-1B30-38D8-B2A6-EFCAD87A4CD9
   - target:          arm64e-maccatalyst
-    value:           6FF2E555-1574-3BDF-B0BE-6993C2002C34
+    value:           B1135FF1-1B30-38D8-B2A6-EFCAD87A4CD9
 install-name:    '/System/Library/PrivateFrameworks/FMFCore.framework/Versions/A/FMFCore'
 swift-abi-version: 7
 allowable-clients:
@@ -24,7 +24,7 @@ allowable-clients:
                        FindMySiriIntents, FindMyTests, FindMyWidgetIntentsPeople, 
                        FindMyWidgetPeople, FindMyWidgetTestApp, FindPeople, NanoFindMyBulletinFactory, 
                        People, PeopleTests, SiriFindMy, SiriFindMyTester, SiriFindMyTests, 
-                       fmfcoretool, peopled, 'peopled Tests (iOS)' ]
+                       fmfcoretool, fmfd, peopled, 'peopled Tests (iOS)' ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -53,15 +53,16 @@ exports:
                        '_$s7FMFCore10FMFAddressV28displayAddressWithStreetNameSSSgvpMV', 
                        '_$s7FMFCore10FMFAddressV2eeoiySbAC_ACtFZ', '_$s7FMFCore10FMFAddressV31displayAddressWithoutStreetNameSSSgvg', 
                        '_$s7FMFCore10FMFAddressV31displayAddressWithoutStreetNameSSSgvpMV', 
-                       '_$s7FMFCore10FMFAddressV4fromACSo10GEOMapItem_p_tcfC', '_$s7FMFCore10FMFAddressV4fromACSo11CLPlacemarkC_tcfC', 
-                       '_$s7FMFCore10FMFAddressV4fromACSo12FMFPlacemarkC_tcfC', '_$s7FMFCore10FMFAddressV4fromACs7Decoder_p_tKcfC', 
-                       '_$s7FMFCore10FMFAddressV6encode2toys7Encoder_p_tKF', '_$s7FMFCore10FMFAddressV7countrySSSgvg', 
-                       '_$s7FMFCore10FMFAddressV7countrySSSgvpMV', '_$s7FMFCore10FMFAddressV8landmarkSSSgvg', 
+                       '_$s7FMFCore10FMFAddressV4fromACSo11CLPlacemarkC_tcfC', '_$s7FMFCore10FMFAddressV4fromACSo12FMFPlacemarkC_tcfC', 
+                       '_$s7FMFCore10FMFAddressV4fromACs7Decoder_p_tKcfC', '_$s7FMFCore10FMFAddressV6encode2toys7Encoder_p_tKF', 
+                       '_$s7FMFCore10FMFAddressV7countrySSSgvg', '_$s7FMFCore10FMFAddressV7countrySSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressV7mapItemACSo06GEOMapD0_p_tcfC', '_$s7FMFCore10FMFAddressV8landmarkSSSgvg', 
                        '_$s7FMFCore10FMFAddressV8landmarkSSSgvpMV', '_$s7FMFCore10FMFAddressV8localitySSSgvg', 
                        '_$s7FMFCore10FMFAddressV8localitySSSgvpMV', '_$s7FMFCore10FMFAddressV9levelTypeAA0b5LevelD0Ovg', 
                        '_$s7FMFCore10FMFAddressV9levelTypeAA0b5LevelD0OvpMV', '_$s7FMFCore10FMFAddressV9placemarkSo12FMFPlacemarkCvg', 
                        '_$s7FMFCore10FMFAddressV9placemarkSo12FMFPlacemarkCvpMV', 
                        '_$s7FMFCore10FMFAddressV9stateCodeSSSgvg', '_$s7FMFCore10FMFAddressV9stateCodeSSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressVAA17FMAddressProtocolAAMc', '_$s7FMFCore10FMFAddressVAA17FMAddressProtocolAAWP', 
                        '_$s7FMFCore10FMFAddressVMa', '_$s7FMFCore10FMFAddressVMn', 
                        '_$s7FMFCore10FMFAddressVN', '_$s7FMFCore10FMFAddressVSEAAMc', 
                        '_$s7FMFCore10FMFAddressVSQAAMc', '_$s7FMFCore10FMFAddressVSeAAMc', 
@@ -253,6 +254,7 @@ exports:
                        '_$s7FMFCore11FMFScheduleVSEAAMc', '_$s7FMFCore11FMFScheduleVSQAAMc', 
                        '_$s7FMFCore11FMFScheduleVSeAAMc', '_$s7FMFCore11FMFScheduleVs28CustomDebugStringConvertibleAAMc', 
                        '_$s7FMFCore12FMFAlertTypeO12networkIssueyA2CmFWC', '_$s7FMFCore12FMFAlertTypeO14initializationyA2CmFWC', 
+                       '_$s7FMFCore12FMFAlertTypeO18deprecationWarningyA2CmFWC', 
                        '_$s7FMFCore12FMFAlertTypeO6saveMeyA2CmFWC', '_$s7FMFCore12FMFAlertTypeO8rawValueACSgSS_tcfC', 
                        '_$s7FMFCore12FMFAlertTypeO8rawValueSSvg', '_$s7FMFCore12FMFAlertTypeO8rawValueSSvpMV', 
                        '_$s7FMFCore12FMFAlertTypeOMa', '_$s7FMFCore12FMFAlertTypeOMn', 
@@ -340,6 +342,7 @@ exports:
                        '_$s7FMFCore14FMFConfigValueO24reverseGeocodingThrottleyA2CmFWC', 
                        '_$s7FMFCore14FMFConfigValueO25inaccuracyRadiusThresholdyA2CmFWC', 
                        '_$s7FMFCore14FMFConfigValueO29fallbackToLegacyIntervalInSecyA2CmFWC', 
+                       '_$s7FMFCore14FMFConfigValueO32reverseGeocodingThrottleDistanceyA2CmFWC', 
                        '_$s7FMFCore14FMFConfigValueOMa', '_$s7FMFCore14FMFConfigValueOMn', 
                        '_$s7FMFCore14FMFConfigValueON', '_$s7FMFCore14FMFConfigValueOSHAAMc', 
                        '_$s7FMFCore14FMFConfigValueOSQAAMc', '_$s7FMFCore14FMFConfigValueOSYAAMc', 
@@ -468,7 +471,11 @@ exports:
                        '_$s7FMFCore16FMFLocationAlertVN', '_$s7FMFCore16FMFLocationAlertVSEAAMc', 
                        '_$s7FMFCore16FMFLocationAlertVSQAAMc', '_$s7FMFCore16FMFLocationAlertVSeAAMc', 
                        '_$s7FMFCore16FMFLocationAlertVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s7FMFCore17FMFFavoriteFriendV16debugDescriptionSSvg', '_$s7FMFCore17FMFFavoriteFriendV16debugDescriptionSSvpMV', 
+                       '_$s7FMFCore17FMAddressProtocolMp', '_$s7FMFCore17FMAddressProtocolP7mapItemxSo06GEOMapE0_p_tcfCTj', 
+                       '_$s7FMFCore17FMAddressProtocolP7mapItemxSo06GEOMapE0_p_tcfCTq', 
+                       '_$s7FMFCore17FMAddressProtocolPs28CustomDebugStringConvertibleTb', 
+                       '_$s7FMFCore17FMAddressProtocolTL', '_$s7FMFCore17FMFFavoriteFriendV16debugDescriptionSSvg', 
+                       '_$s7FMFCore17FMFFavoriteFriendV16debugDescriptionSSvpMV', 
                        '_$s7FMFCore17FMFFavoriteFriendV16friendIdentifierSSvg', '_$s7FMFCore17FMFFavoriteFriendV16friendIdentifierSSvpMV', 
                        '_$s7FMFCore17FMFFavoriteFriendV2eeoiySbAC_ACtFZ', '_$s7FMFCore17FMFFavoriteFriendV4fromACs7Decoder_p_tKcfC', 
                        '_$s7FMFCore17FMFFavoriteFriendV5orderSivg', '_$s7FMFCore17FMFFavoriteFriendV5orderSivpMV', 
@@ -531,6 +538,10 @@ exports:
                        '_$s7FMFCore18FMFManagerDelegateP10fmfManager_15meDeviceChangedyAA0B0C_SSSgtFTq', 
                        '_$s7FMFCore18FMFManagerDelegateP10fmfManager_21initializationDidFailyAA0B0C_s5Error_pSgtFTj', 
                        '_$s7FMFCore18FMFManagerDelegateP10fmfManager_21initializationDidFailyAA0B0C_s5Error_pSgtFTq', 
+                       '_$s7FMFCore18FMFManagerDelegateP10fmfManager_22friendsToShallowLocateSayAA9FMFFriendVGAA0B0C_AHtFTj', 
+                       '_$s7FMFCore18FMFManagerDelegateP10fmfManager_22friendsToShallowLocateSayAA9FMFFriendVGAA0B0C_AHtFTq', 
+                       '_$s7FMFCore18FMFManagerDelegateP10fmfManager_31legacyFallbackFriendIdentifiers03didG0yAA0B0C_SaySSGSbtFTj', 
+                       '_$s7FMFCore18FMFManagerDelegateP10fmfManager_31legacyFallbackFriendIdentifiers03didG0yAA0B0C_SaySSGSbtFTq', 
                        '_$s7FMFCore18FMFManagerDelegateP10fmfManager_35friendsOperationsRestrictionChangedyAA0B0C_SbtFTj', 
                        '_$s7FMFCore18FMFManagerDelegateP10fmfManager_35friendsOperationsRestrictionChangedyAA0B0C_SbtFTq', 
                        '_$s7FMFCore18FMFManagerDelegateP23fmfManagerDidInitializeyyAA0B0CFTj', 
@@ -549,6 +560,8 @@ exports:
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_10didReceiveyAA0B0C_SayAA19FMFLabelledLocationVGtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_15meDeviceChangedyAA0B0C_SSSgtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_21initializationDidFailyAA0B0C_s5Error_pSgtF', 
+                       '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_22friendsToShallowLocateSayAA9FMFFriendVGAA0B0C_AHtF', 
+                       '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_31legacyFallbackFriendIdentifiers03didG0yAA0B0C_SaySSGSbtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE10fmfManager_35friendsOperationsRestrictionChangedyAA0B0C_SbtF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE23fmfManagerDidInitializeyyAA0B0CF', 
                        '_$s7FMFCore18FMFManagerDelegatePAAE31fmfManagerDidCompleteFirstFetchyyAA0B0CF', 
@@ -783,11 +796,13 @@ exports:
                        '_$s7FMFCore23FMFManagerConfigurationC15preferredLocale10Foundation0E0VvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC16snapshotHandlersAA011FMFSnapshotE0CSgvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC16snapshotHandlersAA011FMFSnapshotE0CSgvpMV', 
-                       '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystems15preferredLocale14cacheDirectory8useCache16snapshotHandlers0J14OptimizedFetchAcA0B9SubsystemV_10Foundation0G0VSSSbAA011FMFSnapshotM0CSgSbtcfC', 
+                       '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystems15preferredLocale14cacheDirectory8useCache16snapshotHandlers0J14OptimizedFetch22disableContactMatchingAcA0B9SubsystemV_10Foundation0G0VSSSbAA011FMFSnapshotM0CSgS2btcfC', 
                        '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystemsAA0B9SubsystemVvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystemsAA0B9SubsystemVvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC17useOptimizedFetchSbvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC17useOptimizedFetchSbvpMV', 
+                       '_$s7FMFCore23FMFManagerConfigurationC22disableContactMatchingSbvg', 
+                       '_$s7FMFCore23FMFManagerConfigurationC22disableContactMatchingSbvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC7defaultACvgZ', '_$s7FMFCore23FMFManagerConfigurationC8useCacheSbvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC8useCacheSbvpMV', '_$s7FMFCore23FMFManagerConfigurationCMa', 
                        '_$s7FMFCore23FMFManagerConfigurationCMm', '_$s7FMFCore23FMFManagerConfigurationCMn', 
@@ -808,6 +823,13 @@ exports:
                        '_$s7FMFCore23FMFUpdateMeDeviceActionCMn', '_$s7FMFCore23FMFUpdateMeDeviceActionCMo', 
                        '_$s7FMFCore23FMFUpdateMeDeviceActionCMu', '_$s7FMFCore23FMFUpdateMeDeviceActionCN', 
                        '_$s7FMFCore23FMFUpdateMeDeviceActionCfD', '_$s7FMFCore23FMFUpdateMeDeviceActionCfd', 
+                       '_$s7FMFCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfC', 
+                       '_$s7FMFCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfCTj', 
+                       '_$s7FMFCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfCTq', 
+                       '_$s7FMFCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfc', 
+                       '_$s7FMFCore23FMReverseGeocodingCacheCMa', '_$s7FMFCore23FMReverseGeocodingCacheCMn', 
+                       '_$s7FMFCore23FMReverseGeocodingCacheCMo', '_$s7FMFCore23FMReverseGeocodingCacheCMu', 
+                       '_$s7FMFCore23FMReverseGeocodingCacheCfD', '_$s7FMFCore23FMReverseGeocodingCacheCfd', 
                        '_$s7FMFCore24FMFRespondToInviteActionC8friendId8acceptedACSS_SbtcfC', 
                        '_$s7FMFCore24FMFRespondToInviteActionC8friendId8acceptedACSS_SbtcfCTj', 
                        '_$s7FMFCore24FMFRespondToInviteActionC8friendId8acceptedACSS_SbtcfCTq', 
@@ -880,6 +902,27 @@ exports:
                        '_$s7FMFCore25FMLocationShiftingRequestCMn', '_$s7FMFCore25FMLocationShiftingRequestCMo', 
                        '_$s7FMFCore25FMLocationShiftingRequestCMu', '_$s7FMFCore25FMLocationShiftingRequestCN', 
                        '_$s7FMFCore25FMLocationShiftingRequestCfD', '_$s7FMFCore25FMLocationShiftingRequestCfd', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV10identifierSSvg', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV10identifierSSvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV14referenceFrameSo025CLClientLocationReferenceF0aSgvg', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV14referenceFrameSo025CLClientLocationReferenceF0aSgvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV16debugDescriptionSSvg', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV16debugDescriptionSSvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV16isCoarseLocationSbvg', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV16isCoarseLocationSbvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV18isRealtimeLocationSbvg', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV18isRealtimeLocationSbvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV2eeoiySbAC_ACtFZ', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV4hash4intoys6HasherVz_tF', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV6locale10Foundation6LocaleVSgvg', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV6locale10Foundation6LocaleVSgvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV7geoHashSSvg', '_$s7FMFCore25FMReverseGeocodingRequestV7geoHashSSvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV8locationSo10CLLocationCvg', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV8locationSo10CLLocationCvpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestV9hashValueSivg', '_$s7FMFCore25FMReverseGeocodingRequestV9hashValueSivpMV', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestVMa', '_$s7FMFCore25FMReverseGeocodingRequestVMn', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestVN', '_$s7FMFCore25FMReverseGeocodingRequestVSHAAMc', 
+                       '_$s7FMFCore25FMReverseGeocodingRequestVSQAAMc', '_$s7FMFCore25FMReverseGeocodingRequestVs28CustomDebugStringConvertibleAAMc', 
                        '_$s7FMFCore27FMFLocationAlertAddressTypeO10droppedPinyA2CmFWC', 
                        '_$s7FMFCore27FMFLocationAlertAddressTypeO11addressbookyA2CmFWC', 
                        '_$s7FMFCore27FMFLocationAlertAddressTypeO14friendLocationyA2CmFWC', 
@@ -1090,7 +1133,11 @@ exports:
                        '_$s7FMFCore9FMFMyInfoVMn', '_$s7FMFCore9FMFMyInfoVN', '_$s7FMFCore9FMFMyInfoVSEAAMc', 
                        '_$s7FMFCore9FMFMyInfoVSQAAMc', '_$s7FMFCore9FMFMyInfoVSeAAMc', 
                        '_$s7FMFCore9FMFMyInfoVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s7Request7FMFCore21FMImageCacheOperationPTl', '_$sSo10CLLocationC7FMFCoreE12fmifIsNearBy_25inBTRangeDistanceInMetersSbAB_SdtF' ]
+                       '_$s7Request7FMFCore21FMImageCacheOperationPTl', '_$sSo10CLLocationC7FMFCoreE12fmifIsNearBy_25inBTRangeDistanceInMetersSbAB_SdtF', 
+                       '_$sSo29SPSecureLocationPublishReasonV7FMFCoreE11descriptionSSvg', 
+                       '_$sSo29SPSecureLocationPublishReasonV7FMFCoreE11descriptionSSvpMV', 
+                       '_$sSo29SPSecureLocationPublishReasonVs23CustomStringConvertible7FMFCoreMc', 
+                       '_$sSo30CLClientLocationReferenceFrameaSH7FMFCoreMc', '_$sSo30CLClientLocationReferenceFrameaSQ7FMFCoreMc' ]
     objc-classes:    [ _TtC7FMFCore13FMFCoreHelper, _TtC7FMFCore17FMPhoneNumberUtil, 
                        _TtC7FMFCore22FMAPSConnectionHandler, _TtC7FMFCore23FMFMyLocationController, 
                        _TtC7FMFCore25FMFGenericResponseHandler ]

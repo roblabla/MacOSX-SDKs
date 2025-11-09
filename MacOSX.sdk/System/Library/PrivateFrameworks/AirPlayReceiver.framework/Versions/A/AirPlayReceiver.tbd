@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           63D71489-5FAF-380D-9997-B7FE1D5C4DC2
+    value:           200948ED-3B19-3358-9BFE-5BC9382B3554
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4FA58C06-338C-3B24-ADB8-2F3BC019825B
+    value:           24E55791-3593-35EE-9AD3-EFA74FB9412F
 install-name:    '/System/Library/PrivateFrameworks/AirPlayReceiver.framework/Versions/A/AirPlayReceiver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -62,12 +62,12 @@ exports:
                        _kAPAdvertiserInfoProperty_AccessControlType, _kAPAdvertiserInfoProperty_AccessoryType, 
                        _kAPAdvertiserInfoProperty_AirPlayVersion, _kAPAdvertiserInfoProperty_AirTunesProtocolVersion, 
                        _kAPAdvertiserInfoProperty_BluetoothAddress, _kAPAdvertiserInfoProperty_CompressionTypes, 
-                       _kAPAdvertiserInfoProperty_DeviceID, _kAPAdvertiserInfoProperty_DeviceManufacturer, 
-                       _kAPAdvertiserInfoProperty_DeviceModel, _kAPAdvertiserInfoProperty_DeviceName, 
-                       _kAPAdvertiserInfoProperty_DeviceSerialNumber, _kAPAdvertiserInfoProperty_EncryptionKeyIndex, 
-                       _kAPAdvertiserInfoProperty_EncryptionTypes, _kAPAdvertiserInfoProperty_FeaturesEx, 
-                       _kAPAdvertiserInfoProperty_FeaturesLegacy, _kAPAdvertiserInfoProperty_FirmwareVersion, 
-                       _kAPAdvertiserInfoProperty_GroupContainsDiscoverableLeader, 
+                       _kAPAdvertiserInfoProperty_DeviceCompany, _kAPAdvertiserInfoProperty_DeviceID, 
+                       _kAPAdvertiserInfoProperty_DeviceManufacturer, _kAPAdvertiserInfoProperty_DeviceModel, 
+                       _kAPAdvertiserInfoProperty_DeviceName, _kAPAdvertiserInfoProperty_DeviceSerialNumber, 
+                       _kAPAdvertiserInfoProperty_EncryptionKeyIndex, _kAPAdvertiserInfoProperty_EncryptionTypes, 
+                       _kAPAdvertiserInfoProperty_FeaturesEx, _kAPAdvertiserInfoProperty_FeaturesLegacy, 
+                       _kAPAdvertiserInfoProperty_FirmwareVersion, _kAPAdvertiserInfoProperty_GroupContainsDiscoverableLeader, 
                        _kAPAdvertiserInfoProperty_GroupID, _kAPAdvertiserInfoProperty_GroupPublicName, 
                        _kAPAdvertiserInfoProperty_IsGroupLeader, _kAPAdvertiserInfoProperty_MetadataTypes, 
                        _kAPAdvertiserInfoProperty_NameIsFactoryDefault, _kAPAdvertiserInfoProperty_OSVersion, 
@@ -98,7 +98,7 @@ exports:
                        _kAPReceiverAudioSessionOption_RedundantAudio, _kAPReceiverAudioSessionOption_StatsCollector, 
                        _kAPReceiverAudioSessionOption_StreamDescription, _kAPReceiverAudioSessionOption_StreamType, 
                        _kAPReceiverAudioSessionOption_TimeoutDataSeconds, _kAPReceiverAudioSessionOption_TransportType, 
-                       _kAPReceiverAudioSessionOption_UsingScreen, _kAPReceiverAudioSessionProperty_ArrivalToRenderLatencyMs, 
+                       _kAPReceiverAudioSessionOption_UsingScreen, _kAPReceiverAudioSessionProperty_AirPlayArrivalToRenderLatencyMs, 
                        _kAPReceiverAudioSessionProperty_AudioBufferSize, _kAPReceiverAudioSessionProperty_AudioFormat, 
                        _kAPReceiverAudioSessionProperty_CompressionType, _kAPReceiverAudioSessionProperty_IsMedia, 
                        _kAPReceiverAudioSessionProperty_IsPlayingBufferedAudio, _kAPReceiverAudioSessionProperty_IsUsingScreen, 
@@ -109,6 +109,7 @@ exports:
                        _kAPReceiverAudioSessionProperty_RTCPPortRemote, _kAPReceiverAudioSessionProperty_RTPAudioPort, 
                        _kAPReceiverAudioSessionProperty_RTPNetworkInfo, _kAPReceiverAudioSessionProperty_SampleRate, 
                        _kAPReceiverAudioSessionProperty_StreamType, _kAPReceiverAudioSessionProperty_VolumeLinear, 
+                       _kAPReceiverAudioSessionProperty_WiFiArrivalToRenderLatencyMs, 
                        _kAPReceiverAudioSessionStopPacketProcessorOption_CCCountAPSender, 
                        _kAPReceiverAudioSessionStopPacketProcessorOption_CCCountNonAPSender, 
                        _kAPReceiverAudioSessionStopPacketProcessorOption_CCCountSender, 
@@ -139,19 +140,19 @@ exports:
                        _kAPReceiverUIControllerNotification_StopScreenPresentation, 
                        _kAPReceiverUIControllerNotification_UserStop, _kAPReceiverUIControllerParam_Data, 
                        _kAPReceiverUIControllerParam_DeviceID, _kAPReceiverUIControllerParam_IsScreenAudio, 
-                       _kAPReceiverUIControllerParam_PerformSync, _kAPReceiverUIControllerParam_PresentationContext, 
-                       _kAPReceiverUIControllerParam_PresentationLayer, _kAPReceiverUIControllerParam_SessionID, 
-                       _kAPReceiverUIControllerParam_ShouldForwardLayer, _kAPReceiverUIControllerProperty_AudioMetadata, 
-                       _kAPReceiverUIControllerProperty_AudioProgress, _kAPReceiverUIControllerProperty_ClientName, 
-                       _kAPReceiverUIControllerProperty_DemoDeviceInfo, _kAPReceiverUIControllerProperty_DenyInterruptions, 
-                       _kAPReceiverUIControllerProperty_EnsembleInfo, _kAPReceiverUIControllerProperty_IsActive, 
-                       _kAPReceiverUIControllerProperty_IsP2PWiFi, _kAPReceiverUIControllerProperty_IsWiredLink, 
-                       _kAPReceiverUIControllerProperty_SBufConsumer, _kAPReceiverUIControllerProperty_SessionReceiverAddress, 
-                       _kAPReceiverUIControllerProperty_StatsCollector, _kAPReceiverUIControllerProperty_Volume, 
-                       _kAirPlayReceiverServerOption_CheckDeviceActivation, _kAirPlayReceiverServerOption_DeviceID, 
-                       _kAirPlayReceiverServerOption_DeviceName, _kAirPlayReceiverServerOption_DisplayHDRMode, 
-                       _kAirPlayReceiverServerOption_DisplaySize, _kAirPlayReceiverServerOption_DisplaySizeMax, 
-                       _kAirPlayReceiverServerOption_ForcedDisabledFeaturesMask, 
+                       _kAPReceiverUIControllerParam_NetworkClock, _kAPReceiverUIControllerParam_PerformSync, 
+                       _kAPReceiverUIControllerParam_PresentationContext, _kAPReceiverUIControllerParam_PresentationLayer, 
+                       _kAPReceiverUIControllerParam_SessionID, _kAPReceiverUIControllerParam_ShouldForwardLayer, 
+                       _kAPReceiverUIControllerProperty_AudioMetadata, _kAPReceiverUIControllerProperty_AudioProgress, 
+                       _kAPReceiverUIControllerProperty_ClientName, _kAPReceiverUIControllerProperty_DemoDeviceInfo, 
+                       _kAPReceiverUIControllerProperty_DenyInterruptions, _kAPReceiverUIControllerProperty_EnsembleInfo, 
+                       _kAPReceiverUIControllerProperty_IsActive, _kAPReceiverUIControllerProperty_IsP2PWiFi, 
+                       _kAPReceiverUIControllerProperty_IsWiredLink, _kAPReceiverUIControllerProperty_SBufConsumer, 
+                       _kAPReceiverUIControllerProperty_SessionReceiverAddress, _kAPReceiverUIControllerProperty_StatsCollector, 
+                       _kAPReceiverUIControllerProperty_Volume, _kAirPlayReceiverServerOption_CheckDeviceActivation, 
+                       _kAirPlayReceiverServerOption_DeviceID, _kAirPlayReceiverServerOption_DeviceName, 
+                       _kAirPlayReceiverServerOption_DisplayHDRMode, _kAirPlayReceiverServerOption_DisplaySize, 
+                       _kAirPlayReceiverServerOption_DisplaySizeMax, _kAirPlayReceiverServerOption_ForcedDisabledFeaturesMask, 
                        _kAirPlayReceiverServerOption_InterfaceName, _kAirPlayReceiverServerOption_MaxNumSessions, 
                        _kAirPlayReceiverServerOption_PausesOtherPlaybackSources, 
                        _kAirPlayReceiverServerOption_SBufConsumer, _kAirPlayReceiverServerOption_SupportsRemoteControl, 

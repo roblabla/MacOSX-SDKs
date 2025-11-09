@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DED102B0-EFFE-335A-856A-561D3DF460ED
+    value:           AE892A3B-A7C3-3786-84DE-13529C6D03DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92788EC2-6F06-3E39-966C-89B462D6C6BF
+    value:           CE6B6298-1BBB-3FD5-9FE0-F3883C48FF54
 install-name:    '/System/Library/PrivateFrameworks/DigitalTouchShared.framework/Versions/A/DigitalTouchShared'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

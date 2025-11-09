@@ -37,7 +37,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @property (readonly, nonatomic, nullable) id<MTLDevice> metalDevice;
 
 /*!
- *  @abstract   Creates a MEtal MPSGraphDevice from a MTLDevice
+ *  @abstract   Creates a Metal MPSGraphDevice from a MTLDevice
  *
  *  @param      metalDevice                                           MTLDevice to create an MPSGraphDevice from
  *  @return     A valid MPSGraphDevice

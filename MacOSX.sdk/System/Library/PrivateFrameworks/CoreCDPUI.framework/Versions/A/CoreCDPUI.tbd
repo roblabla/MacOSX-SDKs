@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D767BF04-DD32-381D-873F-51BDEE2B5FAC
+    value:           6A68FDC1-C827-3652-94A2-69BB5E6A34F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57133AB5-2433-3925-A9E8-131033536DD4
+    value:           D47CA68B-68F4-3B98-941A-3027360DFBD0
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPUI.framework/Versions/A/CoreCDPUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

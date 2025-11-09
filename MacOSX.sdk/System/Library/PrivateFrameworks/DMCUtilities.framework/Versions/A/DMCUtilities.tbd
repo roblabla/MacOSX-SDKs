@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           467E08A5-22DF-3960-B7A5-0DFB97084E0B
+    value:           B665158C-B202-3C18-BC19-A6353F76BA1D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69341781-69CC-3BFE-A00D-38D53EC60209
+    value:           43632A64-D4F7-3AF4-970F-3BC8FBB057C4
 install-name:    '/System/Library/PrivateFrameworks/DMCUtilities.framework/Versions/A/DMCUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

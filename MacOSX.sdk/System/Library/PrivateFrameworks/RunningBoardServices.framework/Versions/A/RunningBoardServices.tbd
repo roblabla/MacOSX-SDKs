@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           464E870D-C37E-3601-BE95-8AD89CCEF1CE
+    value:           F7E83763-9D70-3BF3-943B-04F6A0174DAC
   - target:          x86_64-maccatalyst
-    value:           464E870D-C37E-3601-BE95-8AD89CCEF1CE
+    value:           F7E83763-9D70-3BF3-943B-04F6A0174DAC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB3B2484-3A10-3131-88D7-5CE812A65AAC
+    value:           00570EAA-FB24-397F-A606-F0173CB991FD
   - target:          arm64e-maccatalyst
-    value:           BB3B2484-3A10-3131-88D7-5CE812A65AAC
+    value:           00570EAA-FB24-397F-A606-F0173CB991FD
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 617.60.2
+current-version: 618.100.42
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

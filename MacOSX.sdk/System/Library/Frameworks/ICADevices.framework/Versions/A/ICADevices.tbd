@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           71837D93-E114-3936-A3AF-D18D268E8D8D
+    value:           77CA2956-8A3E-3AB3-ADA0-083A3A994841
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84CC79E7-12A1-3AF4-9946-DB901C9EE7ED
+    value:           AB213736-C7D0-3B3F-BB5E-A33C8B8D6C2A
 install-name:    '/System/Library/Frameworks/ICADevices.framework/Versions/A/ICADevices'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

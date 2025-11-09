@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           976A391C-5BAF-347F-B328-2EE02F6E9AB7
+    value:           3BEAC930-1990-3B11-8103-18E502A3FD2A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C28C0853-D2A4-3CF3-A72F-27AFEB4BA6E1
+    value:           CBDC74CC-A9CF-36F0-8F42-4E3BF8AB47F0
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 213
+current-version: 214
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 

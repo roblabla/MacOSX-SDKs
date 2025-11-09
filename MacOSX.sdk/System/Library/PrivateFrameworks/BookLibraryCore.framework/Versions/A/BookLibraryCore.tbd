@@ -4,33 +4,34 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           995E7B0D-6884-372E-9E0B-39B0D50FEDC7
+    value:           E4F075B7-9802-3FC4-A7D7-A5F7F8F96B64
   - target:          x86_64-maccatalyst
-    value:           995E7B0D-6884-372E-9E0B-39B0D50FEDC7
+    value:           E4F075B7-9802-3FC4-A7D7-A5F7F8F96B64
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD25B8C9-9E28-3BAA-9D82-0ADB464949B8
+    value:           F42A9C79-4057-3105-A088-A31CDF0416B7
   - target:          arm64e-maccatalyst
-    value:           AD25B8C9-9E28-3BAA-9D82-0ADB464949B8
+    value:           F42A9C79-4057-3105-A088-A31CDF0416B7
 install-name:    '/System/Library/PrivateFrameworks/BookLibraryCore.framework/Versions/A/BookLibraryCore'
-current-version: 1632
+current-version: 1672
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _BLAudiobookDownloadInBookassetdEnabled, _BLAudiobookMLImporterLog, 
-                       _BLAudiobookStreamingEnabled, _BLAudiobookSyncLog, _BLBookCacheDeleteLog, 
-                       _BLBookInstallLog, _BLBookManifestPropertyAlbum, _BLBookManifestPropertyAppleID, 
-                       _BLBookManifestPropertyArtist, _BLBookManifestPropertyArtworkTemplateName, 
-                       _BLBookManifestPropertyBackupFileName, _BLBookManifestPropertyCopyright, 
-                       _BLBookManifestPropertyDSID, _BLBookManifestPropertyEstimatedDownloadSize, 
-                       _BLBookManifestPropertyFileName, _BLBookManifestPropertyFlavor, 
-                       _BLBookManifestPropertyGenre, _BLBookManifestPropertyHumanReadablePublicationVersion, 
-                       _BLBookManifestPropertyITunesUPermalink, _BLBookManifestPropertyIsExplicit, 
-                       _BLBookManifestPropertyIsSample, _BLBookManifestPropertyItemIdentifier, 
+    symbols:         [ _BLAudiobookBookletAutoMigrationEnabled, _BLAudiobookDownloadInBookassetdEnabled, 
+                       _BLAudiobookMLImporterLog, _BLAudiobookStreamingEnabled, _BLAudiobookSyncLog, 
+                       _BLBookCacheDeleteLog, _BLBookInstallLog, _BLBookManifestPropertyAlbum, 
+                       _BLBookManifestPropertyAppleID, _BLBookManifestPropertyArtist, 
+                       _BLBookManifestPropertyArtworkTemplateName, _BLBookManifestPropertyBackupFileName, 
+                       _BLBookManifestPropertyCopyright, _BLBookManifestPropertyDSID, 
+                       _BLBookManifestPropertyEstimatedDownloadSize, _BLBookManifestPropertyFileName, 
+                       _BLBookManifestPropertyFlavor, _BLBookManifestPropertyGenre, 
+                       _BLBookManifestPropertyHumanReadablePublicationVersion, _BLBookManifestPropertyITunesUPermalink, 
+                       _BLBookManifestPropertyIsExplicit, _BLBookManifestPropertyIsSample, 
+                       _BLBookManifestPropertyIsSupplementalContent, _BLBookManifestPropertyItemIdentifier, 
                        _BLBookManifestPropertyItemIdentifier2, _BLBookManifestPropertyLanguages, 
                        _BLBookManifestPropertyPageProgression, _BLBookManifestPropertyPageProgressionDirection, 
                        _BLBookManifestPropertyPersistentID, _BLBookManifestPropertyPlaylistID, 
@@ -65,14 +66,14 @@ exports:
                        _BLDownloadMetadataKeyPageProgression, _BLDownloadMetadataKeyPageProgressionDirection, 
                        _BLDownloadMetadataKeyPermlink, _BLDownloadMetadataKeyPreferredAssetFlavor, 
                        _BLDownloadMetadataKeyPublicationVersion, _BLDownloadMetadataKeyPurchaseDate, 
-                       _BLDownloadMetadataKeyRating, _BLDownloadMetadataKeyReleaseDate, 
-                       _BLDownloadMetadataKeyRentalIdentifier, _BLDownloadMetadataKeyRequestPersistentID, 
-                       _BLDownloadMetadataKeySINFs, _BLDownloadMetadataKeyScrollAxis, 
-                       _BLDownloadMetadataKeySoftwareExternalVersionID, _BLDownloadMetadataKeySortArtist, 
-                       _BLDownloadMetadataKeySortCollection, _BLDownloadMetadataKeySortName, 
-                       _BLDownloadMetadataKeySoureApp, _BLDownloadMetadataKeyStoreFrontID, 
-                       _BLDownloadMetadataKeyStoreItemID, _BLDownloadMetadataKeyURL, 
-                       _BLDownloadMetadataKeyURL2, _BLDownloadMetadataKeyVariantIdentifier, 
+                       _BLDownloadMetadataKeyRacGUID, _BLDownloadMetadataKeyRating, 
+                       _BLDownloadMetadataKeyReleaseDate, _BLDownloadMetadataKeyRentalIdentifier, 
+                       _BLDownloadMetadataKeyRequestPersistentID, _BLDownloadMetadataKeySINFs, 
+                       _BLDownloadMetadataKeyScrollAxis, _BLDownloadMetadataKeySoftwareExternalVersionID, 
+                       _BLDownloadMetadataKeySortArtist, _BLDownloadMetadataKeySortCollection, 
+                       _BLDownloadMetadataKeySortName, _BLDownloadMetadataKeySoureApp, 
+                       _BLDownloadMetadataKeyStoreFrontID, _BLDownloadMetadataKeyStoreItemID, 
+                       _BLDownloadMetadataKeyURL, _BLDownloadMetadataKeyURL2, _BLDownloadMetadataKeyVariantIdentifier, 
                        _BLDownloadMetadataKeyXID, _BLDownloadPodcastTypeITunesU, 
                        _BLDownloadQueueDownloadCompleteNotification, _BLDownloadQueueDownloadFailedNotification, 
                        _BLDownloadQueueDownloadProgressNotification, _BLDownloadQueuePropertyArtistName, 
@@ -113,8 +114,8 @@ exports:
                        _BLServiceDownloadFilesystemLog, _BLServiceDownloadManagerLog, 
                        _BLServiceDownloadPipelineLog, _BLServiceDownloadQueueLog, 
                        _BLServiceDownloadStreamingZipLog, _BLServiceLog, _BLServiceMediaLibraryManagerLog, 
-                       _BLServiceNotificationLog, _BLServiceProxyLog, _BLServicePurchaseManagerLog, 
-                       _BLUnknownDownloadError, _BLUseAMSInsteadOfStoreServicesEnabled, 
+                       _BLServiceMetadataStoreLog, _BLServiceNotificationLog, _BLServiceProxyLog, 
+                       _BLServicePurchaseManagerLog, _BLUnknownDownloadError, _BLUseAMSInsteadOfStoreServicesEnabled, 
                        _BLUtilitiesLog, _BOOK_PRODUCER, _BookLibraryCoreVersionNumber, 
                        _BookLibraryCoreVersionString, _CONTRIBUTOR_ELEMENT, _DC_TERMS_NAMESPACE, 
                        _IDENTIFIER_ELEMENT, _ID_ATTR, _IMStreamingHashStringWithFilePath, 
@@ -123,21 +124,22 @@ exports:
                        _STORE_ID_KEY, _UNIQUE_IDENTIFIER_ATTR, __BLStoreDemoModeEnabled, 
                        _alignedSInt16FromByte, _alignedSInt8FromByte, _alignedUInt16FromByte, 
                        _alignedUInt32FromByte, _alignedUInt64FromByte, _alignedUInt8FromByte, 
-                       _deleteItemAtURLCoordinated, _kBooksPlistName, _kDefaultIdentifier, 
-                       _kEduCloudAlbumKey, _kEduCloudAssetIDKey, _kEduCloudAuthorKey, 
-                       _kEduCloudCoverImagePath, _kEduCloudFeedURLKey, _kEduCloudFileURLKey, 
-                       _kEduCloudFolderNameKey, _kEduCloudITunesUKey, _kEduCloudIdentifierKey, 
-                       _kEduCloudLastUserAccessDateKey, _kEduCloudLegacyUniqueIdentifierKey, 
-                       _kEduCloudPermlinkKey, _kEduCloudPersistentIdentifierKey, 
-                       _kEduCloudPublicationVersionKey, _kEduCloudPublisherIdentifierKey, 
-                       _kEduCloudPurgePriorityKey, _kEduCloudSampleKey, _kEduCloudStoreIdentifierKey, 
-                       _kEduCloudTemporaryIdentifierKey, _kEduCloudTitleKey, _kEduCloudTypeKey, 
-                       _kIMLibraryPlistArtworkName, _kIMLibraryPlistMetadataName, 
-                       _kJaliscoDAAPClientLastSuccessfulFullUpdateDateDictionary, 
+                       _deleteItemAtURLCoordinated, _kBLPurchaseDAAPItemBookletsKey, 
+                       _kBooksPlistName, _kDefaultIdentifier, _kEduCloudAlbumKey, 
+                       _kEduCloudAssetIDKey, _kEduCloudAuthorKey, _kEduCloudCoverImagePath, 
+                       _kEduCloudFeedURLKey, _kEduCloudFileURLKey, _kEduCloudFolderNameKey, 
+                       _kEduCloudITunesUKey, _kEduCloudIdentifierKey, _kEduCloudLastUserAccessDateKey, 
+                       _kEduCloudLegacyUniqueIdentifierKey, _kEduCloudPermlinkKey, 
+                       _kEduCloudPersistentIdentifierKey, _kEduCloudPublicationVersionKey, 
+                       _kEduCloudPublisherIdentifierKey, _kEduCloudPurgePriorityKey, 
+                       _kEduCloudSampleKey, _kEduCloudStoreIdentifierKey, _kEduCloudTemporaryIdentifierKey, 
+                       _kEduCloudTitleKey, _kEduCloudTypeKey, _kIMLibraryPlistArtworkName, 
+                       _kIMLibraryPlistMetadataName, _kJaliscoDAAPClientLastSuccessfulFullUpdateDateDictionary, 
                        _kJaliscoDAAPClientMOCDidSaveNotification, _kManagedBooksPlistName, 
                        _kProofingPlistFilename, _kPurchasedBooksPlistName, _kSampleBooksPlistName, 
                        _kSchemaVersion, _kSharedBooksPlistName, _kStashedSamplesPlistName ]
-    objc-classes:    [ BKPurchaseDAAPBackoff, BLBookItem, BLBundleClass, BLDAAPArtRequest, 
+    objc-classes:    [ BKPurchaseDAAPBackoff, BLBookItem, BLBookletMigrationInfo, 
+                       BLBookletMigrationStore, BLBundleClass, BLDAAPArtRequest, 
                        BLDAAPBuffer, BLDAAPDatabasesRequest, BLDAAPHideItemsRequest, 
                        BLDAAPItemsRequest, BLDAAPLoginRequest, BLDAAPServerInfoRequest, 
                        BLDAAPURLRequest, BLDAAPUpdateRequest, BLDownload, BLDownloadManifestRequest, 
@@ -146,10 +148,11 @@ exports:
                        BLFamilyCircleController, BLHLSAudiobookFetcher, BLHLSGroup, 
                        BLHLSKey, BLHLSMap, BLHLSMedia, BLHLSPlaylist, BLHLSPlaylistState, 
                        BLHLSSegment, BLHLSStreamInf, BLItemArtworkImage, BLItemContentRating, 
-                       BLItemImageCollection, BLJaliscoDAAPClient, BLJaliscoItem, 
-                       BLJaliscoReadOnlyDAAPClient, BLJaliscoServerDatabase, BLJaliscoServerInfo, 
-                       BLJaliscoServerItem, BLJaliscoServerSource, BLJaliscoVersion, 
-                       BLLibrary, BLLibraryUtility, BLM3U8Parser, BLMetrics, BLPurchaseDAAPItem, 
+                       BLItemImageCollection, BLJaliscoBookletItem, BLJaliscoDAAPClient, 
+                       BLJaliscoItem, BLJaliscoReadOnlyDAAPClient, BLJaliscoServerBookletItem, 
+                       BLJaliscoServerDatabase, BLJaliscoServerInfo, BLJaliscoServerItem, 
+                       BLJaliscoServerSource, BLJaliscoVersion, BLLibrary, BLLibraryUtility, 
+                       BLM3U8Parser, BLMetadataStore, BLMetrics, BLPurchaseDAAPItem, 
                        BLPurchaseDAAPParser, BLPurchaseDAAPServer, BLPurchaseRequest, 
                        BLPurchaseResponse, BLPurchaseResponseItem, BLRequest, BLServiceInterface, 
                        BLServiceProxy, BLServiceProxyConnectionFactory, BLUIHostServiceNonUI, 

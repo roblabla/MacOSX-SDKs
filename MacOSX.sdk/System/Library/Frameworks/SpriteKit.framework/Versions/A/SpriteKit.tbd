@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5B5B0C2B-7F60-34EE-ACF6-97A1920B4941
+    value:           064C32C0-116B-3E97-8AF5-353E6290E4B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B523459A-0C42-3BA4-BDF4-766E56116912
+    value:           76361EE2-81CA-3985-B4FB-F45D712411F8
 install-name:    '/System/Library/Frameworks/SpriteKit.framework/Versions/A/SpriteKit'
 current-version: 47.2
 exports:

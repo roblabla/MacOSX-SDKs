@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FE830ABB-D169-38B7-8E5C-FD821F1C1052
+    value:           B86C5363-9F72-3438-9384-17063C93022B
   - target:          x86_64-maccatalyst
-    value:           FE830ABB-D169-38B7-8E5C-FD821F1C1052
+    value:           B86C5363-9F72-3438-9384-17063C93022B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           014BE76C-37FD-33B4-AFB0-98DC8BBAF4C8
+    value:           2ECEF1FC-CAD0-3167-8E71-404072F7E04C
   - target:          arm64e-maccatalyst
-    value:           014BE76C-37FD-33B4-AFB0-98DC8BBAF4C8
+    value:           2ECEF1FC-CAD0-3167-8E71-404072F7E04C
 install-name:    '/System/Library/PrivateFrameworks/AAAFoundationSwift.framework/Versions/A/AAAFoundationSwift'
 swift-abi-version: 7
 exports:

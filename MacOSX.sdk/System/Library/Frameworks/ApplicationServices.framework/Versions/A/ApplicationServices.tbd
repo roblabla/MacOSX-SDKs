@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3AA5C213-212E-3507-A883-DA77A0D28161
+    value:           ED20BBDF-51E0-3489-BDE0-944C4D59C312
   - target:          x86_64-maccatalyst
-    value:           3AA5C213-212E-3507-A883-DA77A0D28161
+    value:           ED20BBDF-51E0-3489-BDE0-944C4D59C312
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6CAF83A4-1277-3B59-98BA-161D2F7775D5
+    value:           5135F624-1CF2-3795-9662-57B402C64FEF
   - target:          arm64e-maccatalyst
-    value:           6CAF83A4-1277-3B59-98BA-161D2F7775D5
+    value:           5135F624-1CF2-3795-9662-57B402C64FEF
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices'
 current-version: 56
 reexported-libraries:
@@ -41,17 +41,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F15EDF15-EC33-32A7-A042-28E4CE5410CA
+    value:           E8655C59-3D54-32FB-8113-F25B4792FC5E
   - target:          x86_64-maccatalyst
-    value:           F15EDF15-EC33-32A7-A042-28E4CE5410CA
+    value:           E8655C59-3D54-32FB-8113-F25B4792FC5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C74B12BC-1345-323D-8FD5-6157E189F800
+    value:           6B09B034-30FA-3EC8-B82B-22A280E7EC5B
   - target:          arm64e-maccatalyst
-    value:           C74B12BC-1345-323D-8FD5-6157E189F800
+    value:           6B09B034-30FA-3EC8-B82B-22A280E7EC5B
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
 parent-umbrella:
@@ -211,11 +211,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           38BF232D-749E-3BA2-B156-1DE24057ADC9
+    value:           1E528D32-6630-3028-8161-FFC7A7EFFC4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8CF2ABB1-B43A-3326-8884-8D229D0E24DB
+    value:           56785513-F26C-359C-A711-15CC95A4E794
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -279,11 +279,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           00FF93FE-A887-314A-B760-076F7ED60BB6
+    value:           B901DBA6-0300-310C-B306-0F5995C13B48
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           404D58D0-4CED-3EF2-8820-9B62E41FBD06
+    value:           1BEE6CFA-0DA4-3DCE-812B-7751F60A9234
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -342,11 +342,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D8B67D06-A916-3E96-969F-6667A640B18A
+    value:           2E58F8CE-D41E-3F70-B13E-CBF282C15648
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1032F4D5-C154-3003-83AB-7BB3E5AFA130
+    value:           E6EB06F5-5546-3C97-A88D-DB6EAA655D97
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
 current-version: 739.1
 parent-umbrella:
@@ -586,13 +586,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7CC8FCA8-1B6C-341B-B9E6-97B61CE45D4F
+    value:           610A0ABD-918B-3411-8252-75CE7B82DE0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C5732D2-DD61-3434-9722-4B4788DDDA52
+    value:           BF1E9E9A-21B7-36D7-9C4E-6622F44E65C0
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 544
+current-version: 544.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -765,11 +765,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14F5DD47-EAE9-3EE9-B7C2-1F5F2052019B
+    value:           FE3CE7F1-B68D-344F-9D27-30E171CFFBA8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57462D0B-FDD1-34B5-836D-4444DC66E303
+    value:           DE7DA4A1-F75B-3EEF-A910-D36D94826195
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1164,11 +1164,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2EA5BE1A-A2CC-39F6-A88D-8C5A38A3BEDD
+    value:           072910C8-2250-3525-A4BD-EB47540A28F7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F7E93B7-C73D-3A47-9189-84784E2CBA36
+    value:           2332F71C-26EA-3A98-AE66-809FB60D0186
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

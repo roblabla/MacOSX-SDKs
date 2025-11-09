@@ -3,30 +3,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AA43BB09-4916-3214-9245-B4685008211C
+    value:           75A1ACDF-BBCE-3052-86E4-3A71F7CE3320
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FA47E15F-A181-3D32-8F5D-EEA99E38D9C5
+    value:           0CA18DFE-4FAE-3139-8B5A-A8EDEAA1C205
 install-name:    '/System/Library/PrivateFrameworks/ANECompiler.framework/libORTools.dylib'
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN6google10LogMessage9LogStreamE, __ZTIN6google12base_logging12LogStreamBufE, 
                        __ZTINSt3__110__function6__baseIFbvEEE, __ZTINSt3__110__function6__baseIFvPiEEE, 
                        __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__121__basic_string_commonILb1EEE, __ZTSN6google10LogMessage9LogStreamE, 
-                       __ZTSN6google12base_logging12LogStreamBufE, __ZTSNSt3__110__function6__baseIFbvEEE, 
-                       __ZTSNSt3__110__function6__baseIFvPiEEE, __ZTSNSt3__110__function6__baseIFvvEEE, 
-                       __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__121__basic_string_commonILb1EEE ]
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__121__basic_string_commonILb1EEE, 
+                       __ZTSN6google10LogMessage9LogStreamE, __ZTSN6google12base_logging12LogStreamBufE, 
+                       __ZTSNSt3__110__function6__baseIFbvEEE, __ZTSNSt3__110__function6__baseIFvPiEEE, 
+                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__121__basic_string_commonILb1EEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ORToolsCpBasedAllocatorUtil_CallCpAllocator, _ORToolsVersionNumber, 
                        _ORToolsVersionString, __ZN12CpAllocGraph12SetLayerNameEmRKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 

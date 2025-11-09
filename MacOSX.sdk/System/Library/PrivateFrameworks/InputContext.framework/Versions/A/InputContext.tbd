@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FBC84C7E-EC06-3C21-AC43-0F6B32DFD0E5
+    value:           B60DE6F8-2823-3E8F-AD5E-D299C9039542
   - target:          x86_64-maccatalyst
-    value:           FBC84C7E-EC06-3C21-AC43-0F6B32DFD0E5
+    value:           B60DE6F8-2823-3E8F-AD5E-D299C9039542
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84D20613-A8A6-3652-8AB1-3AF714E4A635
+    value:           7369DB1D-DED2-3F77-89DF-ADFA4B1E4AD0
   - target:          arm64e-maccatalyst
-    value:           84D20613-A8A6-3652-8AB1-3AF714E4A635
+    value:           7369DB1D-DED2-3F77-89DF-ADFA4B1E4AD0
 install-name:    '/System/Library/PrivateFrameworks/InputContext.framework/InputContext'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

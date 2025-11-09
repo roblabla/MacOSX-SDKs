@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           71A8146C-078C-3C82-A1E4-2C791128A4E8
+    value:           A17F1A61-39C4-3315-A503-95F8534D4FD6
   - target:          x86_64-maccatalyst
-    value:           71A8146C-078C-3C82-A1E4-2C791128A4E8
+    value:           A17F1A61-39C4-3315-A503-95F8534D4FD6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DD613704-B8AF-388A-80E3-434FB602E32E
+    value:           6F0D0D2A-666B-3095-888C-780C445A605C
   - target:          arm64e-maccatalyst
-    value:           DD613704-B8AF-388A-80E3-434FB602E32E
+    value:           6F0D0D2A-666B-3095-888C-780C445A605C
 install-name:    '/System/Library/PrivateFrameworks/BookKit.framework/Versions/A/BookKit'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -34,11 +34,11 @@ exports:
                        _kBKAgentMetadataKeyGeneratedItemId, _kBKAgentMetadataKeyGenerationCount, 
                        _kBKAgentMetadataKeyGenre, _kBKAgentMetadataKeyGrouping, _kBKAgentMetadataKeyHumanVersionNumber, 
                        _kBKAgentMetadataKeyIsLocked, _kBKAgentMetadataKeyIsProof, 
-                       _kBKAgentMetadataKeyIsSample, _kBKAgentMetadataKeyItemId, 
-                       _kBKAgentMetadataKeyItemName, _kBKAgentMetadataKeyItemSortName, 
-                       _kBKAgentMetadataKeyKind, _kBKAgentMetadataKeyMigrationVersion, 
-                       _kBKAgentMetadataKeyPageCount, _kBKAgentMetadataKeyParts, 
-                       _kBKAgentMetadataKeyPath, _kBKAgentMetadataKeyPurchaseDate, 
+                       _kBKAgentMetadataKeyIsSample, _kBKAgentMetadataKeyIsSupplementalContent, 
+                       _kBKAgentMetadataKeyItemId, _kBKAgentMetadataKeyItemName, 
+                       _kBKAgentMetadataKeyItemSortName, _kBKAgentMetadataKeyKind, 
+                       _kBKAgentMetadataKeyMigrationVersion, _kBKAgentMetadataKeyPageCount, 
+                       _kBKAgentMetadataKeyParts, _kBKAgentMetadataKeyPath, _kBKAgentMetadataKeyPurchaseDate, 
                        _kBKAgentMetadataKeyRating, _kBKAgentMetadataKeyReleaseDate, 
                        _kBKAgentMetadataKeyScrollDirection, _kBKAgentMetadataKeySeriesAdamId, 
                        _kBKAgentMetadataKeyShouldDisableOptimizeSpeed, _kBKAgentMetadataKeyShouldDisableTouchEmulation, 

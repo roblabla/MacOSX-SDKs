@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1CDBCCC1-0019-3FFA-8096-49C71C7936FB
+    value:           0998D5C1-BA1B-3C86-BBBE-50485A44647B
   - target:          x86_64-maccatalyst
-    value:           1CDBCCC1-0019-3FFA-8096-49C71C7936FB
+    value:           0998D5C1-BA1B-3C86-BBBE-50485A44647B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA158D33-9DBD-3C23-B114-05DB53FD1B29
+    value:           01E4D90F-4295-38B3-9BF3-2E4DCEE2627D
   - target:          arm64e-maccatalyst
-    value:           BA158D33-9DBD-3C23-B114-05DB53FD1B29
+    value:           01E4D90F-4295-38B3-9BF3-2E4DCEE2627D
 install-name:    '/System/Library/PrivateFrameworks/PersonalizationPortraitInternals.framework/Versions/A/PersonalizationPortraitInternals'
-current-version: 1153.10
+current-version: 1153.16.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -167,9 +167,9 @@ exports:
                        PPFeatureRedactor, PPFeatureRedactorGuardedData, PPFeaturizerModel, 
                        PPFeedbackExclusionProvider, PPFeedbackStorage, PPFeedbackUtils, 
                        PPFileErrorCode, PPFixup49995922Tuple, PPFlightAirport, PPFlightEventsAggregator, 
-                       PPHealthKitImporter, PPInternalContactNameRecord, PPInternalFeedback, 
-                       PPInternalRequestHandler, PPInternalServerDelegate, PPKVOObserver, 
-                       PPLabelMatcher, PPLabelStrengthSets, PPLocalConnectionsStore, 
+                       PPHealthKitImporter, PPITunesStoreURLOverrideChecker, PPInternalContactNameRecord, 
+                       PPInternalFeedback, PPInternalRequestHandler, PPInternalServerDelegate, 
+                       PPKVOObserver, PPLabelMatcher, PPLabelStrengthSets, PPLocalConnectionsStore, 
                        PPLocalContactStore, PPLocalEventStore, PPLocalLocationStore, 
                        PPLocalNamedEntityStore, PPLocalNamedEntityStoreGuardedData, 
                        PPLocalQuickTypeBroker, PPLocalSocialHighlightStore, PPLocalTemporalClusterStore, 

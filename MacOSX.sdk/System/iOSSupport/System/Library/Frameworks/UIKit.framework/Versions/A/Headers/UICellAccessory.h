@@ -63,6 +63,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 @end
 
 
+/// A detail (info) button.
+UIKIT_EXTERN API_AVAILABLE(ios(15.4), tvos(15.4), watchos(8.5)) NS_SWIFT_UI_ACTOR
+@interface UICellAccessoryDetail : UICellAccessory
+
+/// An optional handler to call when the detail accessory is tapped. If nil, taps on the accessory are ignored.
+@property (nonatomic, copy, nullable) void (^actionHandler)(void);
+
+@end
+
+
 /// A checkmark with default green color.
 UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryCheckmark : UICellAccessory

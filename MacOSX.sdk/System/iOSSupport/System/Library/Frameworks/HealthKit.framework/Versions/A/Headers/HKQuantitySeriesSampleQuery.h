@@ -20,7 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
                 the series data.
                 Call -[HKHealthStore stopQuery:] to discontinue further quantity data reporting.
  */
-HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKQuantitySeriesSampleQueryDescriptor", ios(12.0, API_TO_BE_DEPRECATED), watchos(5.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(12.0), watchos(5.0))
+#endif
 @interface HKQuantitySeriesSampleQuery : HKQuery
 
 /*!

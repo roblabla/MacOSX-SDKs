@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6800E956-EA17-39A6-87FC-6DC240200198
+    value:           84AE4C04-61EB-3B6A-B43A-586E80828CC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BAFDE345-6372-310B-B171-B8D451365026
+    value:           848E53AC-6FD8-3401-95E1-1C3A74534990
 install-name:    '/System/Library/PrivateFrameworks/MediaAnalysis.framework/Versions/A/MediaAnalysis'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -259,14 +259,15 @@ exports:
                        _VCPMediaAnalysisServicePersonSuggestionPersonFaceCountKey, 
                        _VCPMediaAnalysisServicePersonSuggestionPersonIdentifierKey, 
                        _VCPMediaAnalysisServiceRebuildPersonWithLocalIdentifierKey, 
-                       _VCPMediaAnalysisService_InProcessOption, _VCPMediaAnalyzerOption_AllowOnDemand, 
-                       _VCPMediaAnalyzerOption_AllowOnDemandGyro, _VCPMediaAnalyzerOption_AllowOnDemandPixel, 
-                       _VCPMediaAnalyzerOption_AllowStreaming, _VCPMediaAnalyzerOption_HighlightBestTrim, 
-                       _VCPMediaAnalyzerOption_HighlightIndex, _VCPMediaAnalyzerOption_HighlightStartRange, 
-                       _VCPMediaAnalyzerOption_HighlightTargetDuration, _VCPMediaAnalyzerOption_HighlightTolerance, 
-                       _VCPMediaAnalyzerOption_KeepPrivateResults, _VCPMediaAnalyzerOption_MaxHighlightDuration, 
-                       _VCPMediaAnalyzerOption_ScaledSlomoTime, _VCPMediaAnalyzerOption_Standalone, 
-                       _VCPMediaAnalyzerOption_StoreAnalysis, _VCPPerformance_LogMeasurement, 
+                       _VCPMediaAnalysisService_InProcessOption, _VCPMediaAnalysisService_SceneprintRevisionOption, 
+                       _VCPMediaAnalyzerOption_AllowOnDemand, _VCPMediaAnalyzerOption_AllowOnDemandGyro, 
+                       _VCPMediaAnalyzerOption_AllowOnDemandPixel, _VCPMediaAnalyzerOption_AllowStreaming, 
+                       _VCPMediaAnalyzerOption_HighlightBestTrim, _VCPMediaAnalyzerOption_HighlightIndex, 
+                       _VCPMediaAnalyzerOption_HighlightStartRange, _VCPMediaAnalyzerOption_HighlightTargetDuration, 
+                       _VCPMediaAnalyzerOption_HighlightTolerance, _VCPMediaAnalyzerOption_KeepPrivateResults, 
+                       _VCPMediaAnalyzerOption_MaxHighlightDuration, _VCPMediaAnalyzerOption_ScaledSlomoTime, 
+                       _VCPMediaAnalyzerOption_Standalone, _VCPMediaAnalyzerOption_StoreAnalysis, 
+                       _VCPNextRetryDateFromLastRetryDate, _VCPPerformance_LogMeasurement, 
                        _VCPPerformance_QueryMeasurements, _VCPPerformance_RecordMeasurement, 
                        _VCPPerformance_ReportSummary, _VCPPerformance_Reset, _VCPPhotoLibrariesDefaultsKey, 
                        _VCPPhotosFaceAnalysisTaskID, _VCPPhotosFaceProcessingVersion, 

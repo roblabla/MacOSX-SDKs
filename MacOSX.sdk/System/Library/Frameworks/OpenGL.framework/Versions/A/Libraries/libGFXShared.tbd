@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           094650E5-B5BB-33EE-A3B2-CE9B5BFE57CB
+    value:           FECF34AD-31E1-34F0-BD30-60D1A626942B
   - target:          x86_64-maccatalyst
-    value:           094650E5-B5BB-33EE-A3B2-CE9B5BFE57CB
+    value:           FECF34AD-31E1-34F0-BD30-60D1A626942B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           17FE65C7-CF62-33B3-B194-6FBF52A98B52
+    value:           252D940C-C4FB-33C3-92D9-BF6280414B76
   - target:          arm64e-maccatalyst
-    value:           17FE65C7-CF62-33B3-B194-6FBF52A98B52
+    value:           252D940C-C4FB-33C3-92D9-BF6280414B76
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]

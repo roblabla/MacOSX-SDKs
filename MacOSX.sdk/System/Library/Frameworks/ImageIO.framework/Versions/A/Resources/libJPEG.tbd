@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3FE43098-9AA8-3691-AC05-91915D3FD0C6
+    value:           E07842DA-BF49-3FF8-81D6-0E4F9FF6EAD1
   - target:          x86_64-maccatalyst
-    value:           3FE43098-9AA8-3691-AC05-91915D3FD0C6
+    value:           E07842DA-BF49-3FF8-81D6-0E4F9FF6EAD1
   - target:          x86_64h-macos
-    value:           F01B4A83-6BF0-3EB2-9667-4E632770DAE2
+    value:           9FE2000F-4D14-31DB-B849-B4A740EA83A6
   - target:          x86_64h-maccatalyst
-    value:           F01B4A83-6BF0-3EB2-9667-4E632770DAE2
+    value:           9FE2000F-4D14-31DB-B849-B4A740EA83A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE934E1B-ED56-37EC-A394-A612F200DE1F
+    value:           5DD1E066-EADC-32C6-9044-A341788B0964
   - target:          arm64e-maccatalyst
-    value:           EE934E1B-ED56-37EC-A394-A612F200DE1F
+    value:           5DD1E066-EADC-32C6-9044-A341788B0964
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 

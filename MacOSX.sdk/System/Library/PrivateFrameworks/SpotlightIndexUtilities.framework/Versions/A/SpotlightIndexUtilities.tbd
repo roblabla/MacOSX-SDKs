@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           71F6EEEE-85FC-36FA-98C3-A2E6BC0E32B1
+    value:           28E034DB-3B8E-33AB-AE61-F376411E4D0D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7E0C8D8A-58EF-39B7-9609-FA6E386EE62A
+    value:           A2F3CE34-085C-3576-8808-13D05070B666
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndexUtilities.framework/Versions/A/SpotlightIndexUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -30,7 +30,9 @@ exports:
                        _open_directory_nosymlink, _packPostingChunkUpdatesWithType, 
                        _packPostingChunks, _partial_path, _separate_path_parent_child, 
                        _si_content_index_base, _si_content_index_count, _si_content_index_flags, 
-                       _si_content_index_name, _si_get_token_info, _si_tcmr, _unpackPostingChunk ]
+                       _si_content_index_name, _si_get_token_info, _si_tcmr, _unpackPostingChunk, 
+                       _x_faccessat, _x_fchownat, _x_fstatat, _x_getattrlist, _x_getattrlistat, 
+                       _x_linkat, _x_openat, _x_renameatx_np, _x_renamex_np, _x_unlinkat ]
     objc-classes:    [ SIIndexer, SIIndexerComplete, SIIndexerQuery, SIPostingsIterator, 
                        TermIndex ]
 ...

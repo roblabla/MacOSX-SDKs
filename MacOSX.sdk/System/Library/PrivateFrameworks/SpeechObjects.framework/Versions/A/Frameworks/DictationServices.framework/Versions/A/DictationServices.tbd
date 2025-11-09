@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1C25D5D5-F211-3046-84CB-478D10198732
+    value:           8D1C5F12-F889-38DB-87C1-320FF518CE22
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED72F046-C3F0-3FD0-869B-EC2C39F1B6DD
+    value:           B3C365BB-90A0-3C81-A0CC-4D5CAF0FF50E
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationServices.framework/Versions/A/DictationServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -26,11 +26,16 @@ exports:
                        _kHotKeyModifiersKeysKey, _kHotKeySelectorKey, _kHotKeyTargetKey, 
                        _kHotKeyUserInfoKey, _kHotKeyVirtualKeyCodeKey, _kLabelPositioningLargeElementHeight, 
                        _kLabelPositioningSmallElementHeight, _kMaxSecondsToRecord, 
-                       _kSOApplicationBundleID, _kSOApplicationPath, _kSODictationCustomCommandChangedNotification, 
-                       _kSODictationCustomCommandEnabledKey, _kSODictationCustomCommandFileURLKey, 
-                       _kSODictationCustomCommandIdentifierKey, _kSODictationCustomCommandTitleKey, 
-                       _kSODictationRecognizerModeNoDictationImageName, _kSODictationRecognizerModeNumberOnlyImageName, 
-                       _kSODictationRecognizerModeSpellingOnlyImageName, _kSORecognitionWindowMicLayerObjectName, 
+                       _kSOApplicationBundleID, _kSOApplicationPath, _kSOCommandsFileExportCommandsKey, 
+                       _kSOCommandsFileExportDateKey, _kSOCommandsFileExportSystemKey, 
+                       _kSOCommandsFileExtensionPropertyList, _kSOCommandsFileExtensionVCCommands, 
+                       _kSODictationCustomCommandChangedNotification, _kSODictationCustomCommandEnabledKey, 
+                       _kSODictationCustomCommandFileURLKey, _kSODictationCustomCommandIdentifierKey, 
+                       _kSODictationCustomCommandTitleKey, _kSODictationRecognizerModeNoDictationImageName, 
+                       _kSODictationRecognizerModeNumberOnlyImageName, _kSODictationRecognizerModeSpellingOnlyImageName, 
+                       _kSODictationRecognizerModeTextAreaDoesNotSupportEditingImageName, 
+                       _kSORecognitionWindowMicLayerObjectName, _kSOVocabularyFileExtensionPropertyList, 
+                       _kSOVocabularyFileExtensionText, _kSOVocabularyFileExtensionVCVocabulary, 
                        _sDSRMessageTracerUtilities, _sDSRSiriInstrumentationUtilities, 
                        _sSOCommandsWindowController, _sSOElementClickFlashOverlayController, 
                        _sSOExternalClientDownloadAlertController, _sSORecognitionTextBalloonController, 
@@ -42,8 +47,10 @@ exports:
                        SOClassicDictationPlainBackgroundView, SOClassicDictationWindow, 
                        SOCommandCreationManager, SOCommandCreationWindowController, 
                        SOCommandCustomizationViewController, SOCommandEditingViewController, 
-                       SOCommandPreferencesViewController, SOCommandWithParameterValuesTableCellView, 
-                       SOCommandsWindow, SOCommandsWindowCollapsingCell, SOCommandsWindowController, 
+                       SOCommandExportWindowController, SOCommandImportExportUtilities, 
+                       SOCommandImportWindowController, SOCommandPreferencesViewController, 
+                       SOCommandWithParameterValuesTableCellView, SOCommandsWindow, 
+                       SOCommandsWindowCollapsingCell, SOCommandsWindowController, 
                        SOCorrectionCollectionHeaderView, SOCorrectionCollectionViewItem, 
                        SOCorrectionCollectionViewItemView, SOCorrectionManager, SOCorrectionPopoverWindow, 
                        SOCorrectionViewController, SOCyclingContainer, SOCyclingController, 
@@ -69,7 +76,8 @@ exports:
                        SORecognitionWindowAnimatedMicBackgroundView, SORecognitionWindowAnimatedMicFillView, 
                        SORecognitionWindowController, SORecognitionWindowDoneButton, 
                        SORecognitionWindowDoneButtonHighlightView, SOTableView, SOVocabularyEditorWindowController, 
-                       SOVocabularyListWindowController ]
+                       SOVocabularyExportWindowController, SOVocabularyImportExportUtilities, 
+                       SOVocabularyImportWindowController, SOVocabularyListWindowController ]
     objc-ivars:      [ ConfigKeyEditor.mAllowsHighFunctionKeys, ConfigKeyEditor.mCharCode, 
                        ConfigKeyEditor.mDelegate, ConfigKeyEditor.mModifiers, ConfigKeyEditor.mNSModifiers, 
                        ConfigKeyEditor.mOperationModeEnabled, ConfigKeyEditor.mSavedHotKeyOperatingMode, 
@@ -167,6 +175,7 @@ exports:
                        SODictationHotKeyController._conflictButton, SODictationHotKeyController._conflictLabel, 
                        SODictationHotKeyController._hotKeyField, SODictationHotKeyController._popUpButton, 
                        SODictationHotKeyController._previousTag, SODictationPreferences._builtInCommandsTableCache, 
+                       SODictationPreferences._builtInLocalizedCommandExamplesByLocaleIdentifier, 
                        SODictationPreferences._builtInLocalizedCommandStringsByLocaleIdentifier, 
                        SODictationPreferences._nashvilleLangaugeStatus, SODictationPreferences._propertyTransactions, 
                        SODictationPreferences._uuid, SODictationPreferencesViewController._descriptionText, 

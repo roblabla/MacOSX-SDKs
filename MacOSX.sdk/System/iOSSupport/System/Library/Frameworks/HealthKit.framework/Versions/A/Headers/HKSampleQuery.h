@@ -17,7 +17,12 @@ static const NSUInteger HKObjectQueryNoLimit = 0;
  @class         HKSampleQuery
  @abstract      A concrete subclass of HKQuery that provides an interface to retrieve HKSample objects.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKSampleQueryDescriptor", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(8.0), watchos(2.0))
+#endif
 @interface HKSampleQuery : HKQuery
 
 /*!

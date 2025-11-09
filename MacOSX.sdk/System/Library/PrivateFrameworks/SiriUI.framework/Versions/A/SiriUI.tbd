@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FD522361-7010-3604-A0DF-E5CDB8B9C7D7
+    value:           7DB83BE9-62FB-3223-900D-3BA5D9EA5F8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F26525EF-C1DE-3C2A-8AA2-D51D18F3BCE1
+    value:           3C69A40E-A17A-342A-8873-FA64F7E3F2BE
 install-name:    '/System/Library/PrivateFrameworks/SiriUI.framework/Versions/A/SiriUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -55,9 +55,9 @@ exports:
                        SiriUIKeyline, SiriUILabel, SiriUIMediaPauser, SiriUIObjectPickerButtonView, 
                        SiriUIObjectPickerViewController, SiriUIOrbView, SiriUIPluginManager, 
                        SiriUIPreferences, SiriUIPrivatePeoplePickerViewController, 
-                       SiriUIPrivateViewControllerOverrides, SiriUIRequestOptions, 
-                       SiriUIReusableConfirmationFooterView, SiriUIReusableFooterView, 
-                       SiriUIReusableHeaderView, SiriUIReusableSubtitledHeaderView, 
+                       SiriUIPrivateViewControllerOverrides, SiriUIRemoteDeviceBrowser, 
+                       SiriUIRequestOptions, SiriUIReusableConfirmationFooterView, 
+                       SiriUIReusableFooterView, SiriUIReusableHeaderView, SiriUIReusableSubtitledHeaderView, 
                        SiriUIReviewItemCell, SiriUIReviewItemViewItem, SiriUIReviewsHeaderView, 
                        SiriUIReviewsViewController, SiriUIScrollView, SiriUISetup, 
                        SiriUISetupAlert, SiriUISiriLanguage, SiriUISiriStatusView, 
@@ -67,5 +67,6 @@ exports:
                        SiriUITextView, SiriUIThumbnailView, SiriUITintedImageView, 
                        SiriUITitledSectionHeaderView, SiriUITranscriptItem, SiriUITwoButtonFooterView, 
                        SiriUIURLSession, SiriUIVoicePickerTableView, SiriUIVoicePreviewManager, 
-                       SiriUIWorkspaceOverride, VTUIStringsHelper, VTUIStyle, VTUITrainingViewController ]
+                       SiriUIVoiceProfileProvider, SiriUIWorkspaceOverride, VTUIStringsHelper, 
+                       VTUIStyle, VTUITrainingViewController ]
 ...

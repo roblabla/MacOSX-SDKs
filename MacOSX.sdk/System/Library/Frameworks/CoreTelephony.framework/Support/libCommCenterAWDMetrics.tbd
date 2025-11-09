@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F2F5B496-FB4A-3930-AE16-CE49C6156046
+    value:           5BBA7871-6DA6-3055-B2E8-10BAFD71C418
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1E2F2AA-2F44-3C26-AD2C-89CCDE6F2922
+    value:           DA0EDECF-FBBD-3919-A216-66B5FD1D1778
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterAWDMetrics.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -2720,6 +2720,8 @@ exports:
                        __ZN3awd7metrics27CommCenterDynamicDataSwitch28kNumTotalSwitchesFieldNumberE, 
                        __ZN3awd7metrics27CommCenterDynamicDataSwitch31kNumSwitchesDueToOOSFieldNumberE, 
                        __ZN3awd7metrics27CommCenterDynamicDataSwitch32kNumSwitchesDueToCallFieldNumberE, 
+                       __ZN3awd7metrics27CommCenterDynamicDataSwitch33kNumSwitchesDueToOtherFieldNumberE, 
+                       __ZN3awd7metrics27CommCenterDynamicDataSwitch38kNumSwitchesDueToCongestionFieldNumberE, 
                        __ZN3awd7metrics27CommCenterDynamicDataSwitch4SwapEPS1_, __ZN3awd7metrics27CommCenterDynamicDataSwitch5ClearEv, 
                        __ZN3awd7metrics27CommCenterDynamicDataSwitch8CopyFromERKS1_, 
                        __ZN3awd7metrics27CommCenterDynamicDataSwitch9MergeFromERKS1_, 
@@ -4859,6 +4861,7 @@ exports:
                        __ZN3awd7metrics40CommCenterCellularPlanCloudUploadDetails18kResultFieldNumberE, 
                        __ZN3awd7metrics40CommCenterCellularPlanCloudUploadDetails21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
                        __ZN3awd7metrics40CommCenterCellularPlanCloudUploadDetails21InitAsDefaultInstanceEv, 
+                       __ZN3awd7metrics40CommCenterCellularPlanCloudUploadDetails21kErrorCodeFieldNumberE, 
                        __ZN3awd7metrics40CommCenterCellularPlanCloudUploadDetails21kTimestampFieldNumberE, 
                        __ZN3awd7metrics40CommCenterCellularPlanCloudUploadDetails22kUploadTypeFieldNumberE, 
                        __ZN3awd7metrics40CommCenterCellularPlanCloudUploadDetails23kUploadCountFieldNumberE, 
@@ -4960,6 +4963,7 @@ exports:
                        __ZN3awd7metrics42CommCenterCellularPlanMonitorModeCompleted10SharedDtorEv, 
                        __ZN3awd7metrics42CommCenterCellularPlanMonitorModeCompleted16default_instanceEv, 
                        __ZN3awd7metrics42CommCenterCellularPlanMonitorModeCompleted17default_instance_E, 
+                       __ZN3awd7metrics42CommCenterCellularPlanMonitorModeCompleted20kDurationFieldNumberE, 
                        __ZN3awd7metrics42CommCenterCellularPlanMonitorModeCompleted20kPlanTypeFieldNumberE, 
                        __ZN3awd7metrics42CommCenterCellularPlanMonitorModeCompleted21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
                        __ZN3awd7metrics42CommCenterCellularPlanMonitorModeCompleted21InitAsDefaultInstanceEv, 
@@ -5195,6 +5199,7 @@ exports:
                        __ZN3awd7metrics44CommCenterCellularPlanProfileTransferDetails30kRemoteTransferInfoFieldNumberE, 
                        __ZN3awd7metrics44CommCenterCellularPlanProfileTransferDetails31kUsedDiscoverServiceFieldNumberE, 
                        __ZN3awd7metrics44CommCenterCellularPlanProfileTransferDetails32kIsOnDeviceConversionFieldNumberE, 
+                       __ZN3awd7metrics44CommCenterCellularPlanProfileTransferDetails34kTransferTypeFromSourceFieldNumberE, 
                        __ZN3awd7metrics44CommCenterCellularPlanProfileTransferDetails4SwapEPS1_, 
                        __ZN3awd7metrics44CommCenterCellularPlanProfileTransferDetails5ClearEv, 
                        __ZN3awd7metrics44CommCenterCellularPlanProfileTransferDetails8CopyFromERKS1_, 

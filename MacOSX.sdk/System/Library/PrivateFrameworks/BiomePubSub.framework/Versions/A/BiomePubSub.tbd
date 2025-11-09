@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           74B55F36-A848-3D34-BCF4-B32A04CF6063
+    value:           D3C73ADF-B079-32E9-BBCC-E62C0088E03C
   - target:          x86_64-maccatalyst
-    value:           74B55F36-A848-3D34-BCF4-B32A04CF6063
+    value:           D3C73ADF-B079-32E9-BBCC-E62C0088E03C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D63D4184-398C-3AA6-B4D7-FFFD3BD309F7
+    value:           D5D62F72-475B-371A-81CA-A0DAAEB65D6B
   - target:          arm64e-maccatalyst
-    value:           D63D4184-398C-3AA6-B4D7-FFFD3BD309F7
+    value:           D5D62F72-475B-371A-81CA-A0DAAEB65D6B
 install-name:    '/System/Library/PrivateFrameworks/BiomePubSub.framework/Versions/A/BiomePubSub'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1C6351DF-EB13-37DF-8002-FF4EDF364B12
+    value:           E6EA13EE-F00F-31FE-BAF0-FAEDD58FF4A8
   - target:          x86_64-maccatalyst
-    value:           1C6351DF-EB13-37DF-8002-FF4EDF364B12
+    value:           E6EA13EE-F00F-31FE-BAF0-FAEDD58FF4A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E30B51C-0D00-3AFA-AB86-BBDDE68976CE
+    value:           E5416FBC-E0E2-33DF-A649-ED0901B7461B
   - target:          arm64e-maccatalyst
-    value:           2E30B51C-0D00-3AFA-AB86-BBDDE68976CE
+    value:           E5416FBC-E0E2-33DF-A649-ED0901B7461B
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
-current-version: 136.1
+current-version: 139.6
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

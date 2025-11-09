@@ -3,15 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5A542DA8-7A97-34A5-A37E-905FE30FDF48
+    value:           ED5B1090-DDA0-34AB-9F40-3526E42BE196
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           32B8855D-C217-3A41-A179-5A9EF3518E32
+    value:           2087713F-B8E5-33D9-A59A-7BDA1CF001ED
 install-name:    '/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _H11ANEDeviceClose, _H11ANEDeviceOpen, _H11ANEDeviceUpdateParameters, 
+                       _H11ANEHandleDeviceOpen, _H11ANELocateAndOpenHintedDevice, 
                        _H11ANEProgramCancelAllRequests, _H11ANEProgramCompleteAllRequests, 
                        _H11ANEProgramCreate, _H11ANEProgramCreateNewInstance, _H11ANEProgramDestroy, 
                        _H11ANEProgramPrepare, _H11ANEProgramProcessRequest, _H11ANEProgramProcessRequest2, 

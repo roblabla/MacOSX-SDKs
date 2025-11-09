@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ECFABC9E-B386-392F-A12A-2D341AE9BACE
+    value:           07E5839B-F779-3671-B0E1-DB3D027C5364
   - target:          x86_64-maccatalyst
-    value:           ECFABC9E-B386-392F-A12A-2D341AE9BACE
+    value:           07E5839B-F779-3671-B0E1-DB3D027C5364
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F208078-6C8F-3A29-883D-C987634ECD61
+    value:           E3DDB2BE-D903-374C-B141-03405DD21737
   - target:          arm64e-maccatalyst
-    value:           3F208078-6C8F-3A29-883D-C987634ECD61
+    value:           E3DDB2BE-D903-374C-B141-03405DD21737
 install-name:    '/System/Library/PrivateFrameworks/CacheDelete.framework/Versions/A/CacheDelete'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0530D7AC-319D-3EAE-8950-B4FF0A2928AC
+    value:           B02E7DAB-8D08-33B7-BA51-150B4FC88A7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           47832894-85BF-3529-87D5-EEB821E59097
+    value:           E2507935-418F-3E22-A5B1-D3785A07E039
 install-name:    '/System/Library/PrivateFrameworks/WebInspector.framework/Versions/A/WebInspector'
-current-version: 612.3.6
+current-version: 613.1.17
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NSStringFromRWIDebuggerAvailability, _RWIAutomationAvailabilityFromString, 

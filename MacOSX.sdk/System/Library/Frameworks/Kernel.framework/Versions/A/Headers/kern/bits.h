@@ -178,7 +178,7 @@ typedef uint64_t                bitmap_t;
 
 
 inline static bool
-atomic_bit_set(_Atomic bitmap_t *map, int n, int mem_order)
+atomic_bit_set(_Atomic bitmap_t *__single map, int n, int mem_order)
 {
 	bitmap_t prev;
 	prev = __c11_atomic_fetch_or(map, BIT(n), mem_order);
@@ -186,7 +186,7 @@ atomic_bit_set(_Atomic bitmap_t *map, int n, int mem_order)
 }
 
 inline static bool
-atomic_bit_clear(_Atomic bitmap_t *map, int n, int mem_order)
+atomic_bit_clear(_Atomic bitmap_t *__single map, int n, int mem_order)
 {
 	bitmap_t prev;
 	prev = __c11_atomic_fetch_and(map, ~BIT(n), mem_order);
@@ -199,15 +199,15 @@ atomic_bit_clear(_Atomic bitmap_t *map, int n, int mem_order)
 #define bitmap_bit(n)   bits(n, 5, 0)
 #define bitmap_index(n) bits(n, 63, 6)
 
-inline static bitmap_t *
-bitmap_zero(bitmap_t *map, uint nbits)
+inline static bitmap_t * __header_indexable
+bitmap_zero(bitmap_t *__header_indexable map, uint nbits)
 {
 	memset((void *)map, 0, BITMAP_SIZE(nbits));
 	return map;
 }
 
-inline static bitmap_t *
-bitmap_full(bitmap_t *map, uint nbits)
+inline static bitmap_t *__header_indexable
+bitmap_full(bitmap_t *__header_indexable map, uint nbits)
 {
 	uint i;
 
@@ -225,7 +225,7 @@ bitmap_full(bitmap_t *map, uint nbits)
 }
 
 inline static bool
-bitmap_is_full(bitmap_t *map, uint nbits)
+bitmap_is_full(bitmap_t *__header_indexable map, uint nbits)
 {
 	uint i;
 
@@ -244,13 +244,11 @@ bitmap_is_full(bitmap_t *map, uint nbits)
 	return true;
 }
 
-inline static bitmap_t *
+inline static bitmap_t *__header_indexable
 bitmap_alloc(uint nbits)
 {
-	bitmap_t *map;
 	assert(nbits > 0);
-	map = (bitmap_t *)kalloc_data(BITMAP_SIZE(nbits), Z_WAITOK_ZERO);
-	return map;
+	return (bitmap_t *)kalloc_data(BITMAP_SIZE(nbits), Z_WAITOK_ZERO);
 }
 
 inline static void
@@ -261,37 +259,37 @@ bitmap_free(bitmap_t *map, uint nbits)
 }
 
 inline static void
-bitmap_set(bitmap_t *map, uint n)
+bitmap_set(bitmap_t *__header_indexable map, uint n)
 {
 	bit_set(map[bitmap_index(n)], bitmap_bit(n));
 }
 
 inline static void
-bitmap_clear(bitmap_t *map, uint n)
+bitmap_clear(bitmap_t *__header_indexable map, uint n)
 {
 	bit_clear(map[bitmap_index(n)], bitmap_bit(n));
 }
 
 inline static bool
-atomic_bitmap_set(_Atomic bitmap_t *map, uint n, int mem_order)
+atomic_bitmap_set(_Atomic bitmap_t *__header_indexable map, uint n, int mem_order)
 {
 	return atomic_bit_set(&map[bitmap_index(n)], bitmap_bit(n), mem_order);
 }
 
 inline static bool
-atomic_bitmap_clear(_Atomic bitmap_t *map, uint n, int mem_order)
+atomic_bitmap_clear(_Atomic bitmap_t *__header_indexable map, uint n, int mem_order)
 {
 	return atomic_bit_clear(&map[bitmap_index(n)], bitmap_bit(n), mem_order);
 }
 
 inline static bool
-bitmap_test(const bitmap_t *map, uint n)
+bitmap_test(const bitmap_t *__header_indexable map, uint n)
 {
 	return bit_test(map[bitmap_index(n)], bitmap_bit(n));
 }
 
 inline static int
-bitmap_first(bitmap_t *map, uint nbits)
+bitmap_first(bitmap_t *__header_indexable map, uint nbits)
 {
 	for (int i = (int)bitmap_index(nbits - 1); i >= 0; i--) {
 		if (map[i] == 0) {
@@ -304,7 +302,10 @@ bitmap_first(bitmap_t *map, uint nbits)
 }
 
 inline static void
-bitmap_not(bitmap_t *out, const bitmap_t *in, uint nbits)
+bitmap_not(
+	bitmap_t       *__header_indexable out,
+	const bitmap_t *__header_indexable in,
+	uint                               nbits)
 {
 	uint i;
 
@@ -321,10 +322,10 @@ bitmap_not(bitmap_t *out, const bitmap_t *in, uint nbits)
 
 inline static void
 bitmap_and(
-	bitmap_t       *out,
-	const bitmap_t *in1,
-	const bitmap_t *in2,
-	uint                        nbits)
+	bitmap_t       *__header_indexable out,
+	const bitmap_t *__header_indexable in1,
+	const bitmap_t *__header_indexable in2,
+	uint                               nbits)
 {
 	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
 		out[i] = in1[i] & in2[i];
@@ -333,10 +334,10 @@ bitmap_and(
 
 inline static void
 bitmap_and_not(
-	bitmap_t       *out,
-	const bitmap_t *in1,
-	const bitmap_t *in2,
-	uint                        nbits)
+	bitmap_t       *__header_indexable out,
+	const bitmap_t *__header_indexable in1,
+	const bitmap_t *__header_indexable in2,
+	uint                               nbits)
 {
 	uint i;
 
@@ -347,9 +348,9 @@ bitmap_and_not(
 
 inline static void
 bitmap_or(
-	bitmap_t       *out,
-	const bitmap_t *in1,
-	const bitmap_t *in2,
+	bitmap_t       *__header_indexable out,
+	const bitmap_t *__header_indexable in1,
+	const bitmap_t *__header_indexable in2,
 	uint                        nbits)
 {
 	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
@@ -358,7 +359,10 @@ bitmap_or(
 }
 
 inline static bool
-bitmap_equal(const bitmap_t *in1, const bitmap_t *in2, uint nbits)
+bitmap_equal(
+	const bitmap_t *__header_indexable in1,
+	const bitmap_t *__header_indexable in2,
+	uint                               nbits)
 {
 	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
 		if (in1[i] != in2[i]) {
@@ -370,7 +374,10 @@ bitmap_equal(const bitmap_t *in1, const bitmap_t *in2, uint nbits)
 }
 
 inline static int
-bitmap_and_not_mask_first(bitmap_t *map, const bitmap_t *mask, uint nbits)
+bitmap_and_not_mask_first(
+	bitmap_t       *__header_indexable map,
+	const bitmap_t *__header_indexable mask,
+	uint                               nbits)
 {
 	for (int i = (int)bitmap_index(nbits - 1); i >= 0; i--) {
 		if ((map[i] & ~mask[i]) == 0) {
@@ -383,7 +390,7 @@ bitmap_and_not_mask_first(bitmap_t *map, const bitmap_t *mask, uint nbits)
 }
 
 inline static int
-bitmap_lsb_first(const bitmap_t *map, uint nbits)
+bitmap_lsb_first(const bitmap_t *__header_indexable map, uint nbits)
 {
 	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
 		if (map[i] == 0) {
@@ -396,7 +403,7 @@ bitmap_lsb_first(const bitmap_t *map, uint nbits)
 }
 
 inline static int
-bitmap_next(const bitmap_t *map, uint prev)
+bitmap_next(const bitmap_t *__header_indexable map, uint prev)
 {
 	if (prev == 0) {
 		return -1;
@@ -419,7 +426,7 @@ bitmap_next(const bitmap_t *map, uint prev)
 }
 
 inline static int
-bitmap_lsb_next(const bitmap_t *map, uint nbits, uint prev)
+bitmap_lsb_next(const bitmap_t *__header_indexable map, uint nbits, uint prev)
 {
 	if ((prev + 1) >= nbits) {
 		return -1;

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7AD0512A-2BDD-35DB-AE56-8AAF2DD4EE17
+    value:           B9FB79FD-2232-330F-B6F8-70429D9139A9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E5F3B1BB-28EC-3972-BFC4-864E53472569
+    value:           5510909A-107F-33DF-9E39-4CF44B011677
 install-name:    '/System/Library/PrivateFrameworks/PrivateFederatedLearning.framework/Versions/A/PrivateFederatedLearning'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -35,22 +35,22 @@ exports:
                        __ZN20PFLRejectionSampling19sampleUniformSphereEPfm, __ZN21PFLUniformRVGenerator27uniformRandomVariableSampleEv, 
                        __ZN21PFLUniformRVGenerator34uniformRandomVariableInRangeSampleEdd, 
                        __ZN22PFLGaussianRVGenerator31PFLGaussianRandomVariableSampleEdd, 
-                       _count, _gFedStatsBoundedULongTypeOutOfBoundsNumber, _kDataType, 
-                       _kDataTypeName, _kFedStatsBoundedULongTypeBound, _kFedStatsBucketedTypeBucketBoundaries, 
-                       _kFedStatsBucketedTypeBucketCount, _kFedStatsBucketedTypeMaxValue, 
-                       _kFedStatsBucketedTypeMinValue, _kFedStatsCategoricalTypeCategories, 
-                       _kFedStatsCombinationTypeAvailableTypes, _kFedStatsCombinationTypeStructure, 
-                       _kPFLAllowedEntitlement, _kPFLPrivatizeIdentifierAppEmbeddings, 
-                       _kPFLPrivatizeIdentifierArcadeRanking, _kPFLPrivatizeIdentifierCoreSuggestionsSemlPlugin, 
-                       _kPFLPrivatizeIdentifierEmbeddingTraining, _kPFLPrivatizeIdentifierHomeAI, 
-                       _kPFLPrivatizeIdentifierPeopleSuggesterShareSheetPlugin, _kPFLPrivatizeIdentifierPhotos, 
-                       _kPFLPrivatizeIdentifierPhotosLarge, _kPFLPrivatizeIdentifierPhotosSmall, 
-                       _kPFLPrivatizeIdentifierProactivePhoneEn, _kPFLPrivatizeIdentifierProactiveResponses, 
-                       _kPFLPrivatizeIdentifierQuickTypeLM, _kPFLPrivatizeIdentifierReminderKitREMMLPlugin, 
-                       _kPFLPrivatizeIdentifierSearchAds, _kPFLPrivatizeIdentifierSiriInference, 
-                       _kPFLPrivatizeIdentifierSiriSpeechNNLM, _kPFLPrivatizeIdentifierTips, 
-                       _kPFLPrivatizeIdentifierVocalClassifier, _kPFLPrivatizeIdentifierVocalGBDTClassifier, 
-                       _kPFLPrivatizeTaskIdentifierQuickTypeCNNTextClassification, 
+                       _count, _gFedStatsBoundedULongTypeOutOfBoundsNumber, _gSubsamplingSize, 
+                       _kDataType, _kDataTypeName, _kFedStatsBoundedULongTypeBound, 
+                       _kFedStatsBucketedTypeBucketBoundaries, _kFedStatsBucketedTypeBucketCount, 
+                       _kFedStatsBucketedTypeMaxValue, _kFedStatsBucketedTypeMinValue, 
+                       _kFedStatsCategoricalTypeCategories, _kFedStatsCombinationTypeAvailableTypes, 
+                       _kFedStatsCombinationTypeStructure, _kPFLAllowedEntitlement, 
+                       _kPFLPrivatizeIdentifierAppEmbeddings, _kPFLPrivatizeIdentifierArcadeRanking, 
+                       _kPFLPrivatizeIdentifierCoreSuggestionsSemlPlugin, _kPFLPrivatizeIdentifierEmbeddingTraining, 
+                       _kPFLPrivatizeIdentifierHomeAI, _kPFLPrivatizeIdentifierPeopleSuggesterShareSheetPlugin, 
+                       _kPFLPrivatizeIdentifierPhotos, _kPFLPrivatizeIdentifierPhotosLarge, 
+                       _kPFLPrivatizeIdentifierPhotosSmall, _kPFLPrivatizeIdentifierProactivePhoneEn, 
+                       _kPFLPrivatizeIdentifierProactiveResponses, _kPFLPrivatizeIdentifierQuickTypeLM, 
+                       _kPFLPrivatizeIdentifierReminderKitREMMLPlugin, _kPFLPrivatizeIdentifierSearchAds, 
+                       _kPFLPrivatizeIdentifierSiriInference, _kPFLPrivatizeIdentifierSiriSpeechNNLM, 
+                       _kPFLPrivatizeIdentifierTips, _kPFLPrivatizeIdentifierVocalClassifier, 
+                       _kPFLPrivatizeIdentifierVocalGBDTClassifier, _kPFLPrivatizeTaskIdentifierQuickTypeCNNTextClassification, 
                        _kPFLPrivatizeTaskIdentifierQuickTypeLM, _stringsToDataTypesMap, 
                        _temp ]
     objc-classes:    [ CKRecordValueConverter, FedStatsBooleanType, FedStatsBoundedULongType, 

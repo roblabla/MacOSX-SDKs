@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           99FD38B5-4814-3D7B-AEAC-7331AAFE0F36
+    value:           7990873F-C0E3-3B75-B3F7-E2D613830DDB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36D020A4-3243-3BDE-B278-3C86CF725A7D
+    value:           A1B876C6-53AB-3144-BB18-5BF46233B3F0
 install-name:    '/System/Library/PrivateFrameworks/SocialLayer.framework/Versions/A/SocialLayer'
 swift-abi-version: 7
 exports:
@@ -126,9 +126,8 @@ exports:
                        _SLDGetHyphenationPosition, _SLDGlobalWorkloop, _SLDRenderContactMonogramInContextAtRect, 
                        _SLDRenderTintedImageInContext, _SLDSystemVectorGlyph, _SLDSystemVectorGlyphWithSlotStyle, 
                        _SLDaemonLogHandle, _SLDisplayNameWithPhoneNumberOrEmailForContact, 
-                       _SLFormattedDisplayNameForPerson, _SLFormattedDisplayNameListAndNOthers, 
-                       _SLFrameworkBundle, _SLFrameworkLogHandle, _SLGeneralTelemetryLogHandle, 
-                       _SLHCSSIFetchErrorDomain, _SLHInitErrorDomainFailedCSSIFetch, 
+                       _SLFormattedDisplayNameForPerson, _SLFrameworkBundle, _SLFrameworkLogHandle, 
+                       _SLGeneralTelemetryLogHandle, _SLHCSSIFetchErrorDomain, _SLHInitErrorDomainFailedCSSIFetch, 
                        _SLHInitErrorDomainInvalidAttributionIdentifier, _SLHInitErrorDomainInvalidCSDomain, 
                        _SLHInitErrorDomainInvalidCSSIUniqueIdentifier, _SLHInitErrorDomainInvalidHighlight, 
                        _SLHInitErrorDomainInvalidIdentifier, _SLHInitErrorDomainInvalidTimestamp, 
@@ -138,7 +137,7 @@ exports:
                        _SLPInitErrorDomainInvalidPerson, _SLRectCenteredInRectToScale, 
                        _SLReplyContextMenuIdentifier, _SLResolvedURLKey, _SLRoundToScale, 
                        _SLSendPortraitFeedbackTypeAppButtonForAttribution, _SL_CGFloatApproximatelyEqualToFloat, 
-                       _SL_NSStringFromRect ]
+                       _SL_NSStringFromRect, __SLFrameworkBundle ]
     objc-classes:    [ SLAttribution, SLAttributionView, SLDCloudKitConfiguration, 
                        SLDCloudKitReaderHighlightService, SLDCloudKitSyncBase, SLDCloudKitSyncPersistence, 
                        SLDCloudKitSyncReader, SLDCloudKitSyncWriter, SLDEmptySlotContent, 

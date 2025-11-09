@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           775F9E3D-6FE6-3EA1-AEBD-780EBC2C392A
+    value:           E889E8FB-DA3C-3A0C-827E-32C75D4D72D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D23E7859-797A-3B6D-BD61-273ADCBFF23B
+    value:           507CCF7D-CE40-38E6-B337-958F58D0475C
 install-name:    '/usr/lib/libAudioDSPCore.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

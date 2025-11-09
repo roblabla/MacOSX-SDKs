@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1341D8D1-FCD3-3C0C-AD66-1D096171E682
+    value:           BBE13DE9-DDC1-381F-AA33-5CDD523FAD69
   - target:          x86_64-maccatalyst
-    value:           1341D8D1-FCD3-3C0C-AD66-1D096171E682
+    value:           BBE13DE9-DDC1-381F-AA33-5CDD523FAD69
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9BC6C802-AB81-3775-B46D-8AFBB90BF4E4
+    value:           3F595314-7566-37BE-A3C4-49259CEF5808
   - target:          arm64e-maccatalyst
-    value:           9BC6C802-AB81-3775-B46D-8AFBB90BF4E4
+    value:           3F595314-7566-37BE-A3C4-49259CEF5808
 install-name:    '/System/Library/PrivateFrameworks/PeopleSuggester.framework/Versions/A/PeopleSuggester'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -42,10 +42,10 @@ exports:
     objc-classes:    [ CAPContactFillerContactEvent, CAPContactFillerContactFillerEventForShare, 
                        CAPContactFillerShareEvent, CAPContactFillerUserEvent, ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent, 
                        ContactEmbeddingAnalysisPETContactEmbeddingArrayEvent, ContactEmbeddingAnalysisPETNeuralNetEmbedding, 
-                       CoreBehaviorAnalysisPETCoreBehaviorAnalysisEvent, FeatureVectorCoordinates, 
-                       FidesPHSEvaluatorDataSource, GBDTEvaluator, LighthouseShareSheetPFLTraining, 
-                       ModelHyperparameters, PSDESPlugin, _PSAlter, _PSAppUsageUtilities, 
-                       _PSAttachment, _PSAutocompleteSearchUtilities, _PSAutocompleteSuggestion, 
+                       CoreBehaviorAnalysisPETCoreBehaviorAnalysisEvent, FidesPHSEvaluatorDataSource, 
+                       GBDTEvaluator, LighthouseShareSheetPFLTraining, ModelHyperparameters, 
+                       PSDESPlugin, _PSAlter, _PSAppUsageUtilities, _PSAttachment, 
+                       _PSAutocompleteSearchUtilities, _PSAutocompleteSuggestion, 
                        _PSBehaviorRuleFeatureExtraction, _PSBehaviorRuleRankingUtilities, 
                        _PSCNAutocompleteFeedback, _PSCNAutocompleteFeedbackActionStatistics, 
                        _PSCNAutocompleteFeedbackEntered, _PSCNAutocompleteFeedbackErasedHandle, 
@@ -75,8 +75,8 @@ exports:
                        _PSMapsSuggester, _PSMessagesPinningFeedback, _PSMessagesPinningSuggester, 
                        _PSMessagesPinningSuggestion, _PSMessagesPinningUtilities, 
                        _PSMessagesZkwFeedback, _PSPersonalizationEvaluation, _PSPhotoSuggestions, 
-                       _PSPhotoUtils, _PSPredictionContext, _PSProximityBooster, 
-                       _PSRecipient, _PSRuleMiningModel, _PSRuleOverlapFeedback, 
+                       _PSPhotoUtils, _PSPredictionContext, _PSPrivacyDataRetentionPeriod, 
+                       _PSProximityBooster, _PSRecipient, _PSRuleMiningModel, _PSRuleOverlapFeedback, 
                        _PSRuleRankingMLModel, _PSShareSheetSuggestLessFeedback, _PSSharingContactFeatureExtraction, 
                        _PSSharingContactRankerMLModel, _PSSharingContactRankerModel, 
                        _PSSharingContactRankerScoredContact, _PSSiriHandleRanker, 
@@ -86,7 +86,7 @@ exports:
                        _PSSuggestionTemplate, _PSZKWFTCalendarEventConfig, _PSZKWFTFallbackInteractionsConfig, 
                        _PSZKWFTPrimaryInteractionsConfig, _PSZKWFTUnstructuredCalendarConfig, 
                        _PSZKWFTUnstructuredRemindersConfig, _PS_TPSDiscoverabilitySignal, 
-                       scoredModel, scoredRule ]
+                       evaluatedRule, scoredModel, scoredRule ]
     objc-ivars:      [ CAPContactFillerContactEvent._averageBehavioralRuleConfidence, 
                        CAPContactFillerContactEvent._averageBehavioralRuleConviction, 
                        CAPContactFillerContactEvent._averageBehavioralRuleLift, CAPContactFillerContactEvent._averageBehavioralRuleMLScore, 

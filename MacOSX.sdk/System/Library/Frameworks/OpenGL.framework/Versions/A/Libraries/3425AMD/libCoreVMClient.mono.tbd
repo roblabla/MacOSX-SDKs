@@ -3,10 +3,10 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3EC1B78E-192E-3B9C-B2E3-1424C62E88B4
+    value:           DE56FCF1-9774-3D1D-B998-F4FC7760561F
   - target:          x86_64-maccatalyst
-    value:           3EC1B78E-192E-3B9C-B2E3-1424C62E88B4
-install-name:    '/System/Volumes/Data/SWE/macOS/BuildRoots/5b2e67f8af/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono3425AMD.dylib'
+    value:           DE56FCF1-9774-3D1D-B998-F4FC7760561F
+install-name:    '/AppleInternal/Library/BuildRoots/66382bca-8bca-11ec-aade-6613bcf0e2ee/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono3425AMD.dylib'
 current-version: 0
 compatibility-version: 0
 exports:

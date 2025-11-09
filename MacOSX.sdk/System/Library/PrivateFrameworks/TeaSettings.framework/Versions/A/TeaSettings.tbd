@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8473FF6-22EF-3ED3-8CF2-12BC8B5B1E45
+    value:           87114C48-285D-3CD5-8046-FAF5565EFD5B
   - target:          x86_64-maccatalyst
-    value:           D8473FF6-22EF-3ED3-8CF2-12BC8B5B1E45
+    value:           87114C48-285D-3CD5-8046-FAF5565EFD5B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F23DB28-5CA8-39A6-B83B-901E2D7BAED4
+    value:           4F64CB66-8C61-3DBC-9FE6-D48749BA0282
   - target:          arm64e-maccatalyst
-    value:           0F23DB28-5CA8-39A6-B83B-901E2D7BAED4
+    value:           4F64CB66-8C61-3DBC-9FE6-D48749BA0282
 install-name:    '/System/Library/PrivateFrameworks/TeaSettings.framework/Versions/A/TeaSettings'
-current-version: 549.1
+current-version: 588
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -238,7 +238,14 @@ exports:
                        '_$s11TeaSettings20PresetApplicatorTypeP5resetyyAA7SettingCyqd__GAA8SettableRd__lFTq', 
                        '_$s11TeaSettings20PresetApplicatorTypePAAE3set_2toyAA7SettingCyqd__G_qd__tAA8SettableRd__lF', 
                        '_$s11TeaSettings20PresetApplicatorTypePAAE5resetyyAA7SettingCyqd__GAA8SettableRd__lF', 
-                       '_$s11TeaSettings20PresetApplicatorTypeTL', '_$s11TeaSettings4ItemC13ResetBehaviorO2eeoiySbAEyx_G_AGtFZ', 
+                       '_$s11TeaSettings20PresetApplicatorTypeTL', '_$s11TeaSettings2IfV5labelSSvg', 
+                       '_$s11TeaSettings2IfV5labelSSvpMV', '_$s11TeaSettings2IfV9cellStyleAA011SettingCellE0Ovg', 
+                       '_$s11TeaSettings2IfV9cellStyleAA011SettingCellE0OvpMV', '_$s11TeaSettings2IfV9isEnabledSbvg', 
+                       '_$s11TeaSettings2IfV9isEnabledSbvpMV', '_$s11TeaSettings2IfV9isVisibleSbvg', 
+                       '_$s11TeaSettings2IfV9isVisibleSbvpMV', '_$s11TeaSettings2IfVAA9GroupableAAMc', 
+                       '_$s11TeaSettings2IfVAA9GroupableAAWP', '_$s11TeaSettings2IfVMa', 
+                       '_$s11TeaSettings2IfVMn', '_$s11TeaSettings2IfVN', '_$s11TeaSettings2IfVyACSbyXA_AA9Groupable_pyXEtcfC', 
+                       '_$s11TeaSettings4ItemC13ResetBehaviorO2eeoiySbAEyx_G_AGtFZ', 
                        '_$s11TeaSettings4ItemC13ResetBehaviorO4hash4intoys6HasherVz_tF', 
                        '_$s11TeaSettings4ItemC13ResetBehaviorO5resetyAEyx_GAGmAA8SettableRzlFWC', 
                        '_$s11TeaSettings4ItemC13ResetBehaviorO7persistyAEyx_GAGmAA8SettableRzlFWC', 

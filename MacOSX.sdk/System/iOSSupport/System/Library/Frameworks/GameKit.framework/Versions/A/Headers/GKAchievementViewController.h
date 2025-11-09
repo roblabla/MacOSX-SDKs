@@ -2,7 +2,7 @@
 //  GKAchievementViewController.h
 //  Game Center
 //
-//  Copyright 2010-2021 Apple Inc. All rights reserved.
+//  Copyright 2010-2022 Apple Inc. All rights reserved.
 //
 
 #if TARGET_OS_IPHONE

@@ -2,7 +2,7 @@
 //  CSSearchableItemAttributeSet.h
 //  CoreSpotlight
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2022 Apple. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -19,12 +19,13 @@ CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet : NSObject <NSCopying,NSSecureCoding>
 
 //Creates an attribute set for the given content type.
-- (instancetype)initWithItemContentType:(nonnull NSString *)itemContentType API_DEPRECATED("Use initWithContentType instead", macos(10.13, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED));
-- (instancetype)initWithContentType:(nonnull UTType *)contentType NS_AVAILABLE(11_0, 14_0);
+- (instancetype)initWithItemContentType:(nonnull NSString *)itemContentType API_DEPRECATED("Use initWithContentType instead", macos(10.13, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED)) CS_TVOS_UNAVAILABLE;
+- (instancetype)initWithContentType:(nonnull UTType *)contentType NS_AVAILABLE(11_0, 14_0) CS_TVOS_UNAVAILABLE;
 
 @end
 
 //CSLocalizedString can be used in place of NSString to support localization
+CS_CLASS_AVAILABLE(10_13, 9_0)
 CS_TVOS_UNAVAILABLE
 @interface CSLocalizedString : NSString
 
@@ -71,6 +72,7 @@ CS_TVOS_UNAVAILABLE
 
 //Use these methods to set custom attributes on an attribute set
 //Values must be common plist types (NSString,NSNumber,NSNull,NSData,NSDate) or CSPerson, or arrays (NSArray) of these types.
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSCustomAttributes)
 
 - (void)setValue:(nullable id<NSSecureCoding>)value forCustomKey:(CSCustomAttributeKey *)key;
@@ -81,9 +83,10 @@ CS_TVOS_UNAVAILABLE
 #if __OBJC2__
 
 //Attributes to be indexed for a given NSUserActivity
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface NSUserActivity (CSSearchableItemAttributeSet)
 
-@property (nullable, copy) CSSearchableItemAttributeSet *contentAttributeSet CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE;
+@property (nullable, copy) CSSearchableItemAttributeSet *contentAttributeSet;
 
 @end
 

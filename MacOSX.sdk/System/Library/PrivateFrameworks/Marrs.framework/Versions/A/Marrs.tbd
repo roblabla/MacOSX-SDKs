@@ -3,22 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4EC4437F-3335-3491-A2EB-1FAF3D723530
+    value:           C20203A0-4AA9-31F2-BDB3-7F842B7E3DF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8C5665DF-CF7D-3D6C-ACEE-2681B155BDEC
+    value:           4AE7F8CC-EC7F-3FB8-A9CD-3F3CA0B1CD3E
 install-name:    '/System/Library/PrivateFrameworks/Marrs.framework/Versions/A/Marrs'
 current-version: 0
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFbmmEEE, __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTSNSt3__110__function6__baseIFbmmEEE, 
+                       __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    objc-classes:    [ QREllipsisAnaphoraPredictor, QRRepetitionDetectionPredictor ]
+    objc-classes:    [ MRRMultimodalMentionDetector, MRRMultimodalMentionResolver, 
+                       QueryRewriter ]
 ...

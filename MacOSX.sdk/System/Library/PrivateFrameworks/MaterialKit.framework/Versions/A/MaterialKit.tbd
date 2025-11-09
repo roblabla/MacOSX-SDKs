@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           9FE3AB97-6741-3A84-B158-E0D9882BF4F1
+    value:           DAA8E267-D2CB-377C-9109-A0CB0FA873DF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           0D678705-F3D7-354E-8049-E2B0652E2D4F
+    value:           581F3CBD-CFB4-33E9-B01E-4E6C61EA6265
 install-name:    '/System/Library/PrivateFrameworks/MaterialKit.framework/Versions/A/MaterialKit'
 allowable-clients:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

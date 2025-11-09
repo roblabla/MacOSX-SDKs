@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8BA2CB51-CBBF-39DE-B51F-50DDDE389155
+    value:           BC3BE5DA-C3BF-3467-B39F-60099DEA7D84
   - target:          x86_64-maccatalyst
-    value:           8BA2CB51-CBBF-39DE-B51F-50DDDE389155
+    value:           BC3BE5DA-C3BF-3467-B39F-60099DEA7D84
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2EBC1AB7-404E-33FF-BCBB-1DAA6054CE50
+    value:           A18F8818-0352-319B-8150-C7DD98CE969B
   - target:          arm64e-maccatalyst
-    value:           2EBC1AB7-404E-33FF-BCBB-1DAA6054CE50
+    value:           A18F8818-0352-319B-8150-C7DD98CE969B
 install-name:    '/System/Library/PrivateFrameworks/AppleIDSSOAuthentication.framework/Versions/A/AppleIDSSOAuthentication'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

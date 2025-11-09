@@ -73,7 +73,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", 
 @property (nonatomic, readonly) UITableViewRowActionStyle style;
 @property (nonatomic, copy, nullable) NSString *title;
 @property (nonatomic, copy, nullable) UIColor *backgroundColor; // default background color is dependent on style
-@property (nonatomic, copy, nullable) UIVisualEffect* backgroundEffect;
+@property (nonatomic, copy, nullable) UIVisualEffect *backgroundEffect;
 
 @end
 

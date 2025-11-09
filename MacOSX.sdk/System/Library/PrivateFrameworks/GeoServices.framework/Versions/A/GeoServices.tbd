@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B764EE2A-D9EC-3431-95A1-0B4923A39EB5
+    value:           515190F4-8EBF-3BFD-B46B-BC7CBF815AF6
   - target:          x86_64-maccatalyst
-    value:           B764EE2A-D9EC-3431-95A1-0B4923A39EB5
+    value:           515190F4-8EBF-3BFD-B46B-BC7CBF815AF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78A2B4E8-E638-307B-90D5-C727717AD0B3
+    value:           2F72F562-D64D-3DBF-AAEF-AED3AEC0CC05
   - target:          arm64e-maccatalyst
-    value:           78A2B4E8-E638-307B-90D5-C727717AD0B3
+    value:           2F72F562-D64D-3DBF-AAEF-AED3AEC0CC05
 install-name:    '/System/Library/PrivateFrameworks/GeoServices.framework/Versions/A/GeoServices'
-current-version: 1830.22.9
+current-version: 1830.24.11
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -30,10 +30,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__110__function6__baseIFvmPKyEEE, 
                        __ZTINSt3__110__function6__baseIFvmfEEE, __ZTINSt3__110__function6__baseIFvmmPKcEEE, 
                        __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__117bad_function_callE, 
                        __ZTINSt3__121__basic_string_commonILb1EEE, __ZTIPFddE, __ZTIPFvPNSt3__16vectorIiNS_9allocatorIiEEEES4_E, 
                        __ZTSFddE, __ZTSFvPNSt3__16vectorIiNS_9allocatorIiEEEES4_E, 
                        __ZTSN3geo7MapEdgeE, __ZTSN5zilch11PathElementE, __ZTSNSt3__110__function6__baseIFbiiEEE, 
@@ -44,10 +41,7 @@ exports:
                        __ZTSNSt3__110shared_ptrIN5zilch18TrafficDynamicTile8IncidentEE27__shared_ptr_default_deleteIS3_S3_EE, 
                        __ZTSNSt3__110shared_ptrINS_6vectorIN5zilch14GeoCoordinatesENS_9allocatorIS3_EEEEE27__shared_ptr_default_deleteIS6_S6_EE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__117bad_function_callE, 
                        __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSPFddE, __ZTSPFvPNSt3__16vectorIiNS_9allocatorIiEEEES4_E ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -324,19 +318,18 @@ exports:
                        _GEODirectionsResponseReadFrom, _GEODirectionsSearchTypeForError, 
                        _GEODisableUpdatingActiveTileGroupKey, _GEODisplayStringIsValid, 
                        _GEODisplayStringReadAllFrom, _GEODisplayStringReadFrom, _GEODistanceBetweenPointAndLine, 
-                       _GEODistanceForTimeOnStep, _GEODistancePercentageTraveledForLocationOnStep, 
-                       _GEODistanceTraveledForLocationOnStep, _GEODoesUserHaveValidAccountForMakingContributions, 
-                       _GEODownloadMetadataIsDirty, _GEODownloadMetadataIsValid, 
-                       _GEODownloadMetadataReadAllFrom, _GEODownloadMetadataReadFrom, 
-                       _GEODrivingWalkingSpokenInstructionIsDirty, _GEODrivingWalkingSpokenInstructionIsValid, 
-                       _GEODrivingWalkingSpokenInstructionReadAllFrom, _GEODrivingWalkingSpokenInstructionReadFrom, 
-                       _GEODurationInNavigationModeIsValid, _GEODurationInNavigationModeReadAllFrom, 
-                       _GEODurationInNavigationModeReadFrom, _GEODynamicContextHyperlinkDetailsIsValid, 
-                       _GEODynamicContextHyperlinkDetailsReadAllFrom, _GEODynamicContextHyperlinkDetailsReadFrom, 
-                       _GEOECEFCoordinateDescription, _GEOECEFCoordinateDictionaryRepresentation, 
-                       _GEOECEFCoordinateEquals, _GEOECEFCoordinateFromDictionaryRepresentation, 
-                       _GEOECEFCoordinateFromJSONRepresentation, _GEOECEFCoordinateHash, 
-                       _GEOECEFCoordinateIsValid, _GEOECEFCoordinateJSONRepresentation, 
+                       _GEODistancePercentageTraveledForLocationOnStep, _GEODistanceTraveledForLocationOnStep, 
+                       _GEODoesUserHaveValidAccountForMakingContributions, _GEODownloadMetadataIsDirty, 
+                       _GEODownloadMetadataIsValid, _GEODownloadMetadataReadAllFrom, 
+                       _GEODownloadMetadataReadFrom, _GEODrivingWalkingSpokenInstructionIsDirty, 
+                       _GEODrivingWalkingSpokenInstructionIsValid, _GEODrivingWalkingSpokenInstructionReadAllFrom, 
+                       _GEODrivingWalkingSpokenInstructionReadFrom, _GEODurationInNavigationModeIsValid, 
+                       _GEODurationInNavigationModeReadAllFrom, _GEODurationInNavigationModeReadFrom, 
+                       _GEODynamicContextHyperlinkDetailsIsValid, _GEODynamicContextHyperlinkDetailsReadAllFrom, 
+                       _GEODynamicContextHyperlinkDetailsReadFrom, _GEOECEFCoordinateDescription, 
+                       _GEOECEFCoordinateDictionaryRepresentation, _GEOECEFCoordinateEquals, 
+                       _GEOECEFCoordinateFromDictionaryRepresentation, _GEOECEFCoordinateFromJSONRepresentation, 
+                       _GEOECEFCoordinateHash, _GEOECEFCoordinateIsValid, _GEOECEFCoordinateJSONRepresentation, 
                        _GEOECEFCoordinateReadAllFrom, _GEOECEFCoordinateReadFrom, 
                        _GEOECEFCoordinateWriteTo, _GEOETARequestClearSensitiveFields, 
                        _GEOETARequestHasSensitiveFields, _GEOETARequestIsDirty, _GEOETARequestIsValid, 
@@ -1691,8 +1684,8 @@ exports:
                        _GEOTileSetStateUsageLogMessageReadFrom, _GEOTileSetUsageIsValid, 
                        _GEOTileSetUsageReadAllFrom, _GEOTileSetUsageReadFrom, _GEOTileUnpackageBaseAndLocalization, 
                        _GEOTimeCheckpointsIsDirty, _GEOTimeCheckpointsIsValid, _GEOTimeCheckpointsReadAllFrom, 
-                       _GEOTimeCheckpointsReadFrom, _GEOTimeForDistanceOnStep, _GEOTimeGapIsValid, 
-                       _GEOTimeGapReadAllFrom, _GEOTimeGapReadFrom, _GEOTimeToLeaveHypothesisLogMessageIsValid, 
+                       _GEOTimeCheckpointsReadFrom, _GEOTimeGapIsValid, _GEOTimeGapReadAllFrom, 
+                       _GEOTimeGapReadFrom, _GEOTimeToLeaveHypothesisLogMessageIsValid, 
                        _GEOTimeToLeaveHypothesisLogMessageReadAllFrom, _GEOTimeToLeaveHypothesisLogMessageReadFrom, 
                        _GEOTimeToLeaveInitialTravelTimeLogMessageIsValid, _GEOTimeToLeaveInitialTravelTimeLogMessageReadAllFrom, 
                        _GEOTimeToLeaveInitialTravelTimeLogMessageReadFrom, _GEOTimeToLeaveMapLaunchIsValid, 
@@ -1978,8 +1971,11 @@ exports:
                        _GeoAnalyticsConfig_EVDirectionsFeedbackToggle, _GeoAnalyticsConfig_FallbackCountry, 
                        _GeoAnalyticsConfig_FallbackMetro, _GeoAnalyticsConfig_FifteenMonthDeviceSessionConfiguredEpoch, 
                        _GeoAnalyticsConfig_FifteenMonthDeviceSessionData, _GeoAnalyticsConfig_FifteenMonthDeviceSessionEpoch, 
+                       _GeoAnalyticsConfig_FifteenMonthPreSyncDeviceSessionData, 
+                       _GeoAnalyticsConfig_FifteenMonthPreSyncDeviceSessionDataHasMigrated, 
                        _GeoAnalyticsConfig_FifteenMonthPreSyncUserSessionData, _GeoAnalyticsConfig_FifteenMonthSessionID, 
                        _GeoAnalyticsConfig_FifteenMonthSessionIDGenTime, _GeoAnalyticsConfig_FifteenMonthUserSessionConfiguredEpoch, 
+                       _GeoAnalyticsConfig_FifteenMonthUserSessionCreateDateInUse, 
                        _GeoAnalyticsConfig_FifteenMonthUserSessionSyncDeletionEnabled, 
                        _GeoAnalyticsConfig_FifteenMonthUserSessionSyncEnabled, _GeoAnalyticsConfig_LongSessionData, 
                        _GeoAnalyticsConfig_LongSessionDataByAppID, _GeoAnalyticsConfig_MapLaunchEventEnabled, 
@@ -2703,24 +2699,24 @@ exports:
                        GEOAPReportDailySettingRequest, GEOAPReportDailyUsageReply, 
                        GEOAPReportDailyUsageRequest, GEOAPReportLogMsgReply, GEOAPReportLogMsgRequest, 
                        GEOAPReportRRLogReply, GEOAPReportRRLogRequest, GEOAPSessionData, 
-                       GEOAPURLSessionConfig, GEOAPUploadPolicies, GEOAPUploadPolicy, 
-                       GEOAPUploadStage, GEOARElementDetails, GEOARGuidance, GEOARInfo, 
-                       GEOARSessionThermalPressure, GEOAbAssignInfo, GEOAbstractMapServiceTicket, 
-                       GEOAbstractRequestResponseTicket, GEOAbstractTicket, GEOActiveResourceFilters, 
-                       GEOActiveTileGroup, GEOActiveTileGroupReserved, GEOActiveTileSet, 
-                       GEOAdditionalEnabledMarkets, GEOAddress, GEOAddressCorrectionAddress, 
-                       GEOAddressCorrectionInitRequest, GEOAddressCorrectionInitResponse, 
-                       GEOAddressCorrectionRequester, GEOAddressCorrectionResult, 
-                       GEOAddressCorrectionTaggedLocationRequest, GEOAddressCorrectionTaggedLocationResponse, 
-                       GEOAddressCorrectionUpdateRequest, GEOAddressCorrectionUpdateResponse, 
-                       GEOAddressObject, GEOAdvisoriesInfo, GEOAdvisoryCard, GEOAdvisoryClientCapabilities, 
-                       GEOAdvisoryItem, GEOAdvisoryNotice, GEOAlertNonRecommendedRouteText, 
-                       GEOAlightNotificationFeedback, GEOAllCollectionsViewResult, 
-                       GEOAllCollectionsViewResultFilter, GEOAllCollectionsViewResultFilterTypeAddress, 
-                       GEOAllCollectionsViewResultFilterTypeKeyword, GEOAllGuidesLocationsSection, 
-                       GEOAllGuidesLocationsViewResult, GEOAlmanac, GEOAltitudeManifest, 
-                       GEOAmenityItem, GEOAmenityRibbonItem, GEOAnalyticsHandlingInfo, 
-                       GEOAnalyticsPipelineFuzzers, GEOAnalyticsPipelineManager, 
+                       GEOAPURLSessionConfig, GEOAPUpdateAnalyticStateRequest, GEOAPUpdateAnalyticStateResponse, 
+                       GEOAPUploadPolicies, GEOAPUploadPolicy, GEOAPUploadStage, 
+                       GEOARElementDetails, GEOARGuidance, GEOARInfo, GEOARSessionThermalPressure, 
+                       GEOAbAssignInfo, GEOAbstractMapServiceTicket, GEOAbstractRequestResponseTicket, 
+                       GEOAbstractTicket, GEOActiveResourceFilters, GEOActiveTileGroup, 
+                       GEOActiveTileGroupReserved, GEOActiveTileSet, GEOAdditionalEnabledMarkets, 
+                       GEOAddress, GEOAddressCorrectionAddress, GEOAddressCorrectionInitRequest, 
+                       GEOAddressCorrectionInitResponse, GEOAddressCorrectionRequester, 
+                       GEOAddressCorrectionResult, GEOAddressCorrectionTaggedLocationRequest, 
+                       GEOAddressCorrectionTaggedLocationResponse, GEOAddressCorrectionUpdateRequest, 
+                       GEOAddressCorrectionUpdateResponse, GEOAddressObject, GEOAdvisoriesInfo, 
+                       GEOAdvisoryCard, GEOAdvisoryClientCapabilities, GEOAdvisoryItem, 
+                       GEOAdvisoryNotice, GEOAlertNonRecommendedRouteText, GEOAlightNotificationFeedback, 
+                       GEOAllCollectionsViewResult, GEOAllCollectionsViewResultFilter, 
+                       GEOAllCollectionsViewResultFilterTypeAddress, GEOAllCollectionsViewResultFilterTypeKeyword, 
+                       GEOAllGuidesLocationsSection, GEOAllGuidesLocationsViewResult, 
+                       GEOAlmanac, GEOAltitudeManifest, GEOAmenityItem, GEOAmenityRibbonItem, 
+                       GEOAnalyticsHandlingInfo, GEOAnalyticsPipelineFuzzers, GEOAnalyticsPipelineManager, 
                        GEOAnalyticsPipelinePortal, GEOAnalyticsPipelineSharedStateData, 
                        GEOAnalyticsPipelineStateData, GEOAnnotatedItemList, GEOAnnouncement, 
                        GEOAppStoreAppClip, GEOAppleMediaServicesResult, GEOAppleRating, 
@@ -2752,17 +2748,17 @@ exports:
                        GEOCompanionTransitAlightMessage, GEOCompanionWalkStep, GEOCompanionWaypoint, 
                        GEOComposedAdvisoryItem, GEOComposedAdvisoryItemDetail, GEOComposedBicycleRouteSegment, 
                        GEOComposedBicycleRouteStep, GEOComposedDrivingRouteSegment, 
-                       GEOComposedDrivingRouteStep, GEOComposedETARoute, GEOComposedEnrouteNotice, 
-                       GEOComposedFerryRouteSegment, GEOComposedFerryRouteStep, GEOComposedGeometryRoute, 
-                       GEOComposedGeometryRouteTrafficColors, GEOComposedGuidanceEvent, 
-                       GEOComposedRoute, GEOComposedRouteAdvisory, GEOComposedRouteAnnotation, 
-                       GEOComposedRouteCoordinateArray, GEOComposedRouteETAUPosition, 
-                       GEOComposedRouteEVChargingStationInfo, GEOComposedRouteEVStepInfo, 
-                       GEOComposedRouteLaneChangeInfo, GEOComposedRouteLaneDirectionInfo, 
-                       GEOComposedRouteLaneInfo, GEOComposedRouteLeg, GEOComposedRouteLengthMarker, 
-                       GEOComposedRouteMutableData, GEOComposedRouteRoadComplexity, 
-                       GEOComposedRouteSection, GEOComposedRouteSegment, GEOComposedRouteStep, 
-                       GEOComposedRouteTraffic, GEOComposedRouteTrafficColorInfo, 
+                       GEOComposedDrivingRouteStep, GEOComposedETARoute, GEOComposedETARouteLeg, 
+                       GEOComposedETARouteStep, GEOComposedEnrouteNotice, GEOComposedFerryRouteSegment, 
+                       GEOComposedFerryRouteStep, GEOComposedGeometryRoute, GEOComposedGeometryRouteTrafficColors, 
+                       GEOComposedGuidanceEvent, GEOComposedRoute, GEOComposedRouteAdvisory, 
+                       GEOComposedRouteAnnotation, GEOComposedRouteCoordinateArray, 
+                       GEOComposedRouteETAUPosition, GEOComposedRouteEVChargingStationInfo, 
+                       GEOComposedRouteEVStepInfo, GEOComposedRouteLaneChangeInfo, 
+                       GEOComposedRouteLaneDirectionInfo, GEOComposedRouteLaneInfo, 
+                       GEOComposedRouteLeg, GEOComposedRouteLengthMarker, GEOComposedRouteMutableData, 
+                       GEOComposedRouteRoadComplexity, GEOComposedRouteSection, GEOComposedRouteSegment, 
+                       GEOComposedRouteStep, GEOComposedRouteTraffic, GEOComposedRouteTrafficColorInfo, 
                        GEOComposedRouteTrafficIncidentInfo, GEOComposedRouteTransitTripSection, 
                        GEOComposedRouteVisualInfo, GEOComposedTrafficCamera, GEOComposedTrafficSignal, 
                        GEOComposedTransitBaseRouteSegment, GEOComposedTransitRouteStep, 
@@ -2998,28 +2994,29 @@ exports:
                        GEOPlaceTemplate, GEOPlacecardLayoutConfiguration, GEOPlacecardLayoutData, 
                        GEOPlannedDestination, GEOPlatform, GEOPoint, GEOPointUtility, 
                        GEOPolyLocationShiftRequest, GEOPolyLocationShiftResponse, 
-                       GEOPolygonSelectionSimpleTileRequester, GEOPowerAssertion, 
-                       GEOPredictedCommuteDestination, GEOPrice, GEOPriceDescription, 
-                       GEOPrivacyManager, GEOProactiveItem, GEOProactiveWidgetItem, 
-                       GEOProtobufSession, GEOProtobufSessionTask, GEOProxyClient, 
-                       GEOPublisher, GEOPublisherAttributionManifest, GEOPublisherAttributionManifestIndex, 
-                       GEOPublisherAttributionSource, GEOPublisherDetails, GEOPublisherResult, 
-                       GEOPublisherSuggestionResult, GEOPublisherViewResult, GEOPublisherViewResultFilter, 
-                       GEOPublisherViewResultFilterAddress, GEOPublisherViewResultFilterKeyword, 
-                       GEOQuickETARequest, GEOQuickETARequester, GEOQuickETAResponse, 
-                       GEOQuickLink, GEORPAccessPointCorrections, GEORPAddToMapFeedback, 
-                       GEORPAddress, GEORPAddressCorrections, GEORPAddressFeedback, 
-                       GEORPAmenityCorrections, GEORPAppAttestInfo, GEORPAuxiliaryControl, 
-                       GEORPCarPlayAuxiliaryControl, GEORPCategoryCorrections, GEORPCategoryRating, 
-                       GEORPClientCapabilities, GEORPContainmentCorrection, GEORPCorrectedCoordinate, 
-                       GEORPCorrectedField, GEORPCorrectedFlag, GEORPCorrectedLabel, 
-                       GEORPCorrectedSearch, GEORPCorrectedString, GEORPCuratedCollectionContext, 
-                       GEORPCuratedCollectionCorrections, GEORPCuratedCollectionFeedback, 
-                       GEORPCurrentEnvironmentManifestURLs, GEORPDebugSettings, GEORPDetails, 
-                       GEORPDirectionsCorrections, GEORPDirectionsEvent, GEORPDirectionsFeedback, 
-                       GEORPDirectionsFeedbackContext, GEORPDirectionsProblem, GEORPEditedAccessPoint, 
-                       GEORPEnrichmentImage, GEORPFeatureHandle, GEORPFeedbackAddressFields, 
-                       GEORPFeedbackBooleanField, GEORPFeedbackBusinessHours, GEORPFeedbackClientImageInfo, 
+                       GEOPolygonSelectionSimpleTileRequester, GEOPolylineCoordinateIterator, 
+                       GEOPowerAssertion, GEOPredictedCommuteDestination, GEOPrice, 
+                       GEOPriceDescription, GEOPrivacyManager, GEOProactiveItem, 
+                       GEOProactiveWidgetItem, GEOProtobufSession, GEOProtobufSessionTask, 
+                       GEOProxyClient, GEOPublisher, GEOPublisherAttributionManifest, 
+                       GEOPublisherAttributionManifestIndex, GEOPublisherAttributionSource, 
+                       GEOPublisherDetails, GEOPublisherResult, GEOPublisherSuggestionResult, 
+                       GEOPublisherViewResult, GEOPublisherViewResultFilter, GEOPublisherViewResultFilterAddress, 
+                       GEOPublisherViewResultFilterKeyword, GEOQuickETARequest, GEOQuickETARequester, 
+                       GEOQuickETAResponse, GEOQuickLink, GEORPAccessPointCorrections, 
+                       GEORPAddToMapFeedback, GEORPAddress, GEORPAddressCorrections, 
+                       GEORPAddressFeedback, GEORPAmenityCorrections, GEORPAppAttestInfo, 
+                       GEORPAuxiliaryControl, GEORPCarPlayAuxiliaryControl, GEORPCategoryCorrections, 
+                       GEORPCategoryRating, GEORPClientCapabilities, GEORPContainmentCorrection, 
+                       GEORPCorrectedCoordinate, GEORPCorrectedField, GEORPCorrectedFlag, 
+                       GEORPCorrectedLabel, GEORPCorrectedSearch, GEORPCorrectedString, 
+                       GEORPCuratedCollectionContext, GEORPCuratedCollectionCorrections, 
+                       GEORPCuratedCollectionFeedback, GEORPCurrentEnvironmentManifestURLs, 
+                       GEORPDebugSettings, GEORPDetails, GEORPDirectionsCorrections, 
+                       GEORPDirectionsEvent, GEORPDirectionsFeedback, GEORPDirectionsFeedbackContext, 
+                       GEORPDirectionsProblem, GEORPEditedAccessPoint, GEORPEnrichmentImage, 
+                       GEORPFeatureHandle, GEORPFeedbackAddressFields, GEORPFeedbackBooleanField, 
+                       GEORPFeedbackBusinessHours, GEORPFeedbackClientImageInfo, 
                        GEORPFeedbackCommonContext, GEORPFeedbackCommonCorrections, 
                        GEORPFeedbackComponent, GEORPFeedbackComponentQueryParameters, 
                        GEORPFeedbackComponentValue, GEORPFeedbackConversation, GEORPFeedbackConversationMessage, 
@@ -3657,19 +3654,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A7F01FDD-BE16-377C-BEEF-8E9A3DD42255
+    value:           9CC158C3-1E8F-3CF3-A11F-1EF4B68CF2EE
   - target:          x86_64-maccatalyst
-    value:           A7F01FDD-BE16-377C-BEEF-8E9A3DD42255
+    value:           9CC158C3-1E8F-3CF3-A11F-1EF4B68CF2EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55997FC2-0765-3060-8050-A03F5679C88B
+    value:           F9A5183C-8C0C-37A4-8492-C622C00B40AF
   - target:          arm64e-maccatalyst
-    value:           55997FC2-0765-3060-8050-A03F5679C88B
+    value:           F9A5183C-8C0C-37A4-8492-C622C00B40AF
 install-name:    '/System/Library/PrivateFrameworks/GeoServicesCore.framework/Versions/A/GeoServicesCore'
-current-version: 1830.22.9
+current-version: 1830.24.11
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

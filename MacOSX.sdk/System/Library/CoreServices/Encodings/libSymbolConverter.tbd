@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2B107BAC-B8ED-3796-87D1-F763BD75123E
+    value:           20F1C647-F2F3-3FA6-8D53-0E98E151BE9E
   - target:          x86_64-maccatalyst
-    value:           2B107BAC-B8ED-3796-87D1-F763BD75123E
+    value:           20F1C647-F2F3-3FA6-8D53-0E98E151BE9E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08089EF0-2585-37D7-B469-1F18FC7CA893
+    value:           431369F9-5F9D-380B-A505-9137CB28ACF3
   - target:          arm64e-maccatalyst
-    value:           08089EF0-2585-37D7-B469-1F18FC7CA893
+    value:           431369F9-5F9D-380B-A505-9137CB28ACF3
 install-name:    '/System/Library/CoreServices/Encodings/libSymbolConverter.dylib'
 current-version: 100
 exports:

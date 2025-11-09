@@ -58,7 +58,6 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  The default value of this property is 0.
  */
 @property (nonatomic) NSInteger rank;
-
 @end
 
 NS_ASSUME_NONNULL_END

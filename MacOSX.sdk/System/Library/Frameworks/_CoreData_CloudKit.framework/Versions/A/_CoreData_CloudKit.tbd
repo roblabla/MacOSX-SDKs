@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A31E2470-659E-39A1-B36C-18AFA202C987
+    value:           795A40A3-AA0D-3531-8B81-D093D43369E5
   - target:          x86_64-maccatalyst
-    value:           A31E2470-659E-39A1-B36C-18AFA202C987
+    value:           795A40A3-AA0D-3531-8B81-D093D43369E5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0C1CD3A-5089-3671-BBC0-F7D543EC87B8
+    value:           FA007BCE-723E-3C23-BFBE-1F49EB127A50
   - target:          arm64e-maccatalyst
-    value:           F0C1CD3A-5089-3671-BBC0-F7D543EC87B8
+    value:           FA007BCE-723E-3C23-BFBE-1F49EB127A50
 install-name:    '/System/Library/Frameworks/_CoreData_CloudKit.framework/Versions/A/_CoreData_CloudKit'
 current-version: 15
 swift-abi-version: 7

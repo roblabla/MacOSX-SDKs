@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           990E8B73-E361-345F-8921-3DA1729478B7
+    value:           1EA62393-5AEE-3831-BFD4-A1AFB4B32107
   - target:          x86_64-maccatalyst
-    value:           990E8B73-E361-345F-8921-3DA1729478B7
+    value:           1EA62393-5AEE-3831-BFD4-A1AFB4B32107
   - target:          x86_64h-macos
-    value:           CBF0B3EC-6B70-30AF-995C-7DFEC1EEEBD1
+    value:           23196F58-9161-3DB3-B5F2-5EB8A901D06D
   - target:          x86_64h-maccatalyst
-    value:           CBF0B3EC-6B70-30AF-995C-7DFEC1EEEBD1
+    value:           23196F58-9161-3DB3-B5F2-5EB8A901D06D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1A00531F-6DEF-3DD6-943C-E0DED9374CC7
+    value:           D3E07F23-512A-3722-AE19-417DD3288C99
   - target:          arm64e-maccatalyst
-    value:           1A00531F-6DEF-3DD6-943C-E0DED9374CC7
+    value:           D3E07F23-512A-3722-AE19-417DD3288C99
 install-name:    '/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData'
-current-version: 1145
+current-version: 1152
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]

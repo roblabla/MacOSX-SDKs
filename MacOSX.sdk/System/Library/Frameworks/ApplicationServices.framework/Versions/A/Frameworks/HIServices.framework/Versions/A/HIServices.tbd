@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D8B67D06-A916-3E96-969F-6667A640B18A
+    value:           2E58F8CE-D41E-3F70-B13E-CBF282C15648
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1032F4D5-C154-3003-83AB-7BB3E5AFA130
+    value:           E6EB06F5-5546-3C97-A88D-DB6EAA655D97
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
 current-version: 739.1
 parent-umbrella:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BE460B29-1E3F-3689-BEBC-792BA75D7CAD
+    value:           454CEB15-2C0D-343B-B459-4A777C960ED8
   - target:          x86_64-maccatalyst
-    value:           BE460B29-1E3F-3689-BEBC-792BA75D7CAD
+    value:           454CEB15-2C0D-343B-B459-4A777C960ED8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7113D0E8-7F94-35D8-AB8F-22A94C22F893
+    value:           D5651151-FF16-39D5-9482-A9DB6DA18FD6
   - target:          arm64e-maccatalyst
-    value:           7113D0E8-7F94-35D8-AB8F-22A94C22F893
+    value:           D5651151-FF16-39D5-9482-A9DB6DA18FD6
 install-name:    '/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices'
 current-version: 493
 reexported-libraries:
@@ -86,17 +86,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7BC9E472-2B97-3BEC-B26F-5472DE17C5BD
+    value:           154A21D6-EC13-30C8-8358-99A32D454604
   - target:          x86_64-maccatalyst
-    value:           7BC9E472-2B97-3BEC-B26F-5472DE17C5BD
+    value:           154A21D6-EC13-30C8-8358-99A32D454604
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6DF438CE-4A8E-34B8-8F91-C0D1F4F18CD9
+    value:           FF109065-92A2-3080-ABE5-2C5EE2A364B4
   - target:          arm64e-maccatalyst
-    value:           6DF438CE-4A8E-34B8-8F91-C0D1F4F18CD9
+    value:           FF109065-92A2-3080-ABE5-2C5EE2A364B4
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
 current-version: 493
 exports:

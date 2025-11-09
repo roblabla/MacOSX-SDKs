@@ -351,13 +351,13 @@ enum
                         CMFormatDescriptionRef can be provided. In the event of the latter, the FigFormatDescriptionEquals() routine will be used to see if the stream can support the provided
                         Setting this property is not a guarantee that the CMIOStream will provide data in this format;  when possible, the CMIOStream will examine all of the values specified by
                         the various clients sharing it, and select the most appropriate configuration. Typically, the value set for this property will only have an effect when the stream is
-                        active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately). Note that if the client is the device master (set using kCMIODevicePropertyDeviceControl),
+                        active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately). Note that if the client is the device controller (set using kCMIODevicePropertyDeviceControl),
                         setting the value of this property *will* directly affect the device, as if kCMIOStreamPropertyFormatDescription were used.
     @constant       kCMIOStreamPropertyPreferredFrameRate
                         A Float64 that indicates the current preferred video frame rate of the CMIOStream. Setting this property is not a guarantee that the CMIOStream will operate at that
                         framerate;  when possible, the CMIOStream will examine all of the values specified by the various clients sharing it, and select the most appropriate configuration.
                         Typically, the value set for this property will only have an effect when the stream is active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately).
-                        Note that if the client is the device master (set using kCMIODevicePropertyDeviceControl), setting the value of this property will directly affect the device, as if
+                        Note that if the client is the device controller (set using kCMIODevicePropertyDeviceControl), setting the value of this property will directly affect the device, as if
                         kCMIOStreamPropertyFormatDescription were used.
 */
 enum
@@ -492,7 +492,7 @@ CMIOStreamDeckCueTo(    CMIOStreamID    streamID,
     @param          numberOfEventsForRateSmoothing
                         The number of events to use for rate smoothing; must be > 0.
     @param          numberOfAveragesForRateSmoothing
-                        The number of averages used for rate smoothing; if 0, the CA HAL smoothing algorithm is used.
+                        The number of averages used for rate smoothing; if 0, the default smoothing algorithm is used.
     @param          clock
                         Receives the created clock. When the clock is no longer needed, CMIOStreamClockInvalidate should be called, followed by CFRelease.
     @result         An OSStatus indicating success or failure.

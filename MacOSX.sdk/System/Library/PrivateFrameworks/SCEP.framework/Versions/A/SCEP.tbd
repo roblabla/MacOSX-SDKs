@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C3A80892-37D7-3244-8A66-5CD5C49566DB
+    value:           35C7082E-EE75-3851-9125-F71E8E82B5E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B32127B-0F24-3165-B180-E348CA14DB1F
+    value:           6B1E1514-8047-3BFD-9F02-3DE4DE71DBA6
 install-name:    '/System/Library/PrivateFrameworks/SCEP.framework/Versions/A/SCEP'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

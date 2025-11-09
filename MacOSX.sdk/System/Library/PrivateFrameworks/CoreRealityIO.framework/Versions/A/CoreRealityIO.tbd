@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           897FBBA7-8BFC-35EA-B523-657B2DECFEAF
+    value:           080E80E2-526C-3AA3-82E5-8A13233B866F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1688B41-5C4A-3E98-9AA9-63118D310A32
+    value:           30CACE2E-1759-3C26-AAB9-61D9ABFCAFF5
 install-name:    '/System/Library/PrivateFrameworks/CoreRealityIO.framework/Versions/A/CoreRealityIO'
 exports:
   - targets:         [ x86_64-macos ]
@@ -31,7 +31,7 @@ exports:
                        _RIOBuilderChildPrimInputDescriptorCopyChildPrimType, _RIOBuilderChildPrimInputDescriptorCopyInputName, 
                        _RIOBuilderChildPrimInputDescriptorCopyOptionality, _RIOBuilderChildPrimInputDescriptorCopyOutputIdentifier, 
                        _RIOBuilderChildPrimInputDescriptorCreate, _RIOBuilderCopyBuildOrder, 
-                       _RIOBuilderCopyIdentifier, _RIOBuilderCreateWithBuilderInfo, 
+                       _RIOBuilderCopyIdentifier, _RIOBuilderCreate, _RIOBuilderCreateWithBuilderInfo, 
                        _RIOBuilderCurrentPrimInputDescriptorCopyInputName, _RIOBuilderCurrentPrimInputDescriptorCopyOptionality, 
                        _RIOBuilderCurrentPrimInputDescriptorCopyOutputIdentifier, 
                        _RIOBuilderCurrentPrimInputDescriptorCreate, _RIOBuilderDirtyMetadataDescriptorCopyMetadata, 
@@ -48,7 +48,7 @@ exports:
                        _RIOBuilderEntityBuilderCopyEntityOutputName, _RIOBuilderEntityBuilderGetOutputEntity, 
                        _RIOBuilderGetDirtyStageSubscription, _RIOBuilderGetInputsDescriptor, 
                        _RIOBuilderGetOutputs, _RIOBuilderGetOutputsDescriptor, _RIOBuilderGetPrim, 
-                       _RIOBuilderGetSwiftObject, _RIOBuilderInputDescriptorCopyType, 
+                       _RIOBuilderGetSwiftObject, _RIOBuilderGetTypeID, _RIOBuilderInputDescriptorCopyType, 
                        _RIOBuilderInputsCopyStageDelta, _RIOBuilderInputsDescriptorCopyInputDescriptorsByName, 
                        _RIOBuilderInputsDescriptorCreateWithInputDescriptors, _RIOBuilderInputsDescriptorGetInputDescriptors, 
                        _RIOBuilderInputsGetAllBuildersAndOutputNamesProvidingValuesWithName, 
@@ -236,6 +236,6 @@ exports:
                        _kRIOStageMetersPerUnitBuilderIdentifier, _kRIOStageTimeCodeBuilderIdentifier, 
                        _kRIOStageUpAxisBuilderIdentifier, _kRIOTextComponentBuilderIdentifier, 
                        _kRIOTextEntityBuilderIdentifier, _kRIOTextMeshAssetBuilderIdentifier, 
-                       _kRIOTextureBuilderIdentifier, _kRIOTransformAnimationAssetBuilderIdentifier, 
-                       _kRIOTransformAnimationComponentBuilderIdentifier, _kRIOTransformComponentBuilderIdentifier ]
+                       _kRIOTextureBuilderIdentifier, _kRIOTransformAnimationAggregationBuilderIdentifier, 
+                       _kRIOTransformAnimationAssetBuilderIdentifier, _kRIOTransformComponentBuilderIdentifier ]
 ...

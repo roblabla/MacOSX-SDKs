@@ -233,6 +233,121 @@ MPS_SWIFT_NAME( scatterWithData(_:updates:indices:axis:mode:name:) )
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 @end
 
+@interface MPSGraph(MPSGraphScatterAlongAxisOps)
+
+/*!
+ *  @abstract   Create ScatterAlongAxis op and return the result tensor
+ *  @discussion Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` into a result tensor.
+ *              Values are updated following `mode`. See MPSGraphScatterMode.
+ *              The shape of `updatesTensor` and `indicesTensor` must match. `shape` must match except at `axis`.
+ *              The shape of the result tensor is equal to `shape` and initialized with an initial value corresponding to `mode`.
+ *              If an index is out of bounds of `shape` along `axis` the update value is skipped.
+ *
+ *  @param      axis        The axis to scatter to. Negative values wrap around
+ *  @param      updatesTensor        The input tensor to scatter values from
+ *  @param      indicesTensor        Int32 or Int64 tensor used to index the result tensor
+ *  @param      mode        The type of update to use
+ *  @param      name        The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) scatterAlongAxis:(NSInteger) axis
+                   withUpdatesTensor:(MPSGraphTensor *) updatesTensor
+                       indicesTensor:(MPSGraphTensor *) indicesTensor
+                               shape:(MPSShape *) shape
+                                mode:(MPSGraphScatterMode) mode
+                                name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( scatterAlongAxis(_:updates:indices:shape:mode:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create ScatterAlongAxis op and return the result tensor
+ *  @discussion See above discussion of scatterAlongAxis: withUpdatesTensor: indicesTensor: shape: mode: name:
+ *
+ *  @param      axisTensor        Scalar Int32 tensor. The axis to scatter to. Negative values wrap around
+ *  @param      updatesTensor        The input tensor to scatter values from
+ *  @param      indicesTensor        Int32 or Int64 tensor used to index the result tensor
+ *  @param      mode        The type of update to use
+ *  @param      name        The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) scatterAlongAxisTensor:(MPSGraphTensor *) axisTensor
+                         withUpdatesTensor:(MPSGraphTensor *) updatesTensor
+                             indicesTensor:(MPSGraphTensor *) indicesTensor
+                                     shape:(MPSShape *) shape
+                                      mode:(MPSGraphScatterMode) mode
+                                      name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( scatterAlongAxisTensor(_:updates:indices:shape:mode:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create ScatterAlongAxis op and return the result tensor
+ *  @discussion Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` onto `dataTensor`.
+ *              Values in `dataTensor` are updated following `mode`. See MPSGraphScatterMode.
+ *              The shape of `updatesTensor` and `indicesTensor` must match. The shape of `dataTensor` must match except at `axis`.
+ *              If an index is out of bounds of `shape` along `axis` the update value is skipped.
+ *
+ *              For example,
+ *              @code
+ *              data = [ [0, 0, 0],
+ *                       [1, 1, 1],
+ *                       [2, 2, 2],
+ *                       [3, 3, 3] ]
+ *              updates = [ [1, 2, 3],
+ *                          [4, 5, 6] ]
+ *              indices = [ [2, 1, 0],
+ *                          [1, 3, 2] ]
+ *              axis = 0
+ *              result = scatterAlongAxis(axis, data, updates, indices, MPSGraphScatterModeAdd, "scatter")
+ *              result = [ [0, 0, 3],
+ *                         [5, 3, 1],
+ *                         [3, 2, 8],
+ *                         [3, 8, 3] ]
+ *              @endcode
+ *
+ *  @param      axis        The axis to scatter to. Negative values wrap around
+ *  @param      dataTensor        The input tensor to scatter values onto
+ *  @param      updatesTensor        The input tensor to scatter values from
+ *  @param      indicesTensor        Int32 or Int64 tensor used to index the result tensor
+ *  @param      mode        The type of update to use
+ *  @param      name        The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) scatterAlongAxis:(NSInteger) axis
+                      withDataTensor:(MPSGraphTensor *) dataTensor
+                       updatesTensor:(MPSGraphTensor *) updatesTensor
+                       indicesTensor:(MPSGraphTensor *) indicesTensor
+                                mode:(MPSGraphScatterMode) mode
+                                name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( scatterAlongAxis(_:data:updates:indices:mode:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create ScatterAlongAxis op and return the result tensor
+ *  @discussion See above discussion of scatterAlongAxis: withDataTensor: updatesTensor: indicesTensor: shape: mode: name:
+ *
+ *  @param      axisTensor        Scalar Int32 tensor. The axis to scatter to. Negative values wrap around
+ *  @param      dataTensor        The input tensor to scatter values onto
+ *  @param      updatesTensor        The input tensor to scatter values from
+ *  @param      indicesTensor        Int32 or Int64 tensor used to index the result tensor
+ *  @param      mode        The type of update to use
+ *  @param      name        The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) scatterAlongAxisTensor:(MPSGraphTensor *) axisTensor
+                            withDataTensor:(MPSGraphTensor *) dataTensor
+                             updatesTensor:(MPSGraphTensor *) updatesTensor
+                             indicesTensor:(MPSGraphTensor *) indicesTensor
+                                      mode:(MPSGraphScatterMode) mode
+                                      name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( scatterAlongAxisTensor(_:data:updates:indices:mode:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 #endif /* MPSScatterNDOps_h */

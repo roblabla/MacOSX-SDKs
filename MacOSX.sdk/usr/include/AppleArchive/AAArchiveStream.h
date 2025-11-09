@@ -179,6 +179,10 @@ APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   call for a given entry, and will not necessarily be called in the same order.  In particular,
   for directories, END will only be called after all directory contents are extracted.
 
+  The creation and/or final attribute updates for some entries may be delayed to the
+  AAArchiveStreamClose() call for the returned stream.  Before accessing the extracted
+  entries in `dir`, it is necessary to first call AAArchiveStreamClose() and check its return value.
+
   @param dir output directory, must exist
   @param msg_data is passed as first argument to \p msg_proc
   @param msg_proc is called with queries to the caller if not NULL

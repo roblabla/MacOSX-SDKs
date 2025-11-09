@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CB27191F-1310-359A-B05D-5C8998A0BA4D
+    value:           15EEDEF4-3B04-3DE0-A68D-4CCF0B2DDF92
   - target:          x86_64-maccatalyst
-    value:           CB27191F-1310-359A-B05D-5C8998A0BA4D
+    value:           15EEDEF4-3B04-3DE0-A68D-4CCF0B2DDF92
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           982D8311-129E-3496-B06C-C0B4AB0CE27C
+    value:           2A3D0BCB-3E83-30D7-9061-B545F9412FC4
   - target:          arm64e-maccatalyst
-    value:           982D8311-129E-3496-B06C-C0B4AB0CE27C
+    value:           2A3D0BCB-3E83-30D7-9061-B545F9412FC4
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

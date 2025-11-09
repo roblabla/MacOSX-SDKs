@@ -3,26 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5191F305-5B4A-3B4E-A68E-C91B05C719E9
+    value:           D5F718A3-6C51-3B53-B7D5-B4BF113A17A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B55669D0-CC16-353E-9B2B-3815E55ADF61
+    value:           E9E03B84-62DC-3C92-8098-E0A950F15336
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2498.2.1
+current-version: 2498.4
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
-    symbols:         [ '_$s10ContactsUI27CNAvatarPickerViewInterfaceC09configureD04with8cropRect14memojiMetadata19initialMonogramText14showsAsCompany19canSaveInitialImage12likenessTypey10Foundation4DataVSg_So6CGRectVSo08CNMemojiL0CSgSSSgS2bAA06Avatarde8LikenessX0OtFTj', 
-                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC09configureD04with8cropRect14memojiMetadata19initialMonogramText14showsAsCompany19canSaveInitialImage12likenessTypey10Foundation4DataVSg_So6CGRectVSo08CNMemojiL0CSgSSSgS2bAA06Avatarde8LikenessX0OtFTq', 
+    symbols:         [ '_$s10ContactsUI27CNAvatarPickerViewInterfaceC09configureD04with8cropRect18memojiMetadataData19initialMonogramText14showsAsCompany19canSaveInitialImage12likenessTypey10Foundation0M0VSg_So6CGRectVAOSSSgS2bAA06Avatarde8LikenessY0OtFTj', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC09configureD04with8cropRect18memojiMetadataData19initialMonogramText14showsAsCompany19canSaveInitialImage12likenessTypey10Foundation0M0VSg_So6CGRectVAOSSSgS2bAA06Avatarde8LikenessY0OtFTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC12likenessTypeAA06Avatarde8LikenessH0OvgTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC12likenessTypeAA06Avatarde8LikenessH0OvgTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC12likenessTypeAA06Avatarde8LikenessH0OvpMV', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC13setSaveAction_06cancelI0yyyc_yyctFTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC13setSaveAction_06cancelI0yyyc_yyctFTq', 
-                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC14memojiMetadataSo08CNMemojiH0CSgvgTj', 
-                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC14memojiMetadataSo08CNMemojiH0CSgvgTq', 
-                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC14memojiMetadataSo08CNMemojiH0CSgvpMV', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC15backgroundColorSo7NSColorCSgvgTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC15backgroundColorSo7NSColorCSgvgTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC15backgroundColorSo7NSColorCSgvpMV', 
@@ -36,6 +33,9 @@ exports:
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC17hostingControllerSo06NSViewH0CvpMV', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC17hostingControllerSo06NSViewH0CvsTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC17hostingControllerSo06NSViewH0CvsTq', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC18memojiMetadataData10Foundation0I0VSgvgTj', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC18memojiMetadataData10Foundation0I0VSgvgTq', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC18memojiMetadataData10Foundation0I0VSgvpMV', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC19setIsRunningInBuddyyySbFTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC19setIsRunningInBuddyyySbFTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC26setupUserMemojiRecordsDataSDySS10Foundation0K0VGvgTj', 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3B9FC61E-214B-30D9-8C50-724ECC8BD105
+    value:           22564612-FFFD-3729-ADF3-8F5A9519EE91
   - target:          x86_64-maccatalyst
-    value:           3B9FC61E-214B-30D9-8C50-724ECC8BD105
+    value:           22564612-FFFD-3729-ADF3-8F5A9519EE91
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8400441E-D678-32BA-A3AA-9A466AAE390E
+    value:           2F4588B1-C166-3FF4-A039-ED9E886ECDDD
   - target:          arm64e-maccatalyst
-    value:           8400441E-D678-32BA-A3AA-9A466AAE390E
+    value:           2F4588B1-C166-3FF4-A039-ED9E886ECDDD
 install-name:    '/System/Library/Frameworks/CloudKit.framework/Versions/A/CloudKit'
-current-version: 1930.13
+current-version: 1950.31.1
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -90,10 +90,11 @@ exports:
                        _CKHTTPHeaderRetryAfter, _CKHandleSignificantIssueBehavior, 
                        _CKHeaderForLibraryName, _CKHexCharFromBytes, _CKIdentityUpdateNotification, 
                        _CKIndexedArrayKey, _CKInternalErrorDomain, _CKInternalUnderlyingHTTPStatusKey, 
-                       _CKIsIndexedArrayKey, _CKIsPCSError, _CKIsRunningInLogger, 
-                       _CKIsRunningInTestHost, _CKIsValidOperationForScope, _CKLinkCheck32f5805a68adfc1b65f94a0de69aa32177c7cd24, 
-                       _CKLinkCheck48d9728e8c354416a38f82379cbb35e3, _CKMainBundleIsAppleExecutable, 
-                       _CKMonotonicFastHostTime, _CKMonotonicHostTime, _CKNSIndexSet_enumerateInverseRangesInRange_options_usingBlock, 
+                       _CKIsDebuggerAttached, _CKIsIndexedArrayKey, _CKIsPCSError, 
+                       _CKIsRunningInLogger, _CKIsRunningInTestHost, _CKIsValidOperationForScope, 
+                       _CKLinkCheck32f5805a68adfc1b65f94a0de69aa32177c7cd24, _CKLinkCheck48d9728e8c354416a38f82379cbb35e3, 
+                       _CKMainBundleIsAppleExecutable, _CKMonotonicFastHostTime, 
+                       _CKMonotonicHostTime, _CKNSIndexSet_enumerateInverseRangesInRange_options_usingBlock, 
                        _CKNSIndexSet_indexSetWithInverseIndexSet, _CKNSQualityOfServiceFromQoSClass, 
                        _CKNotifyPostTestPrefix, _CKOncePerBoot, _CKOperationExecutationStateIsExecuting, 
                        _CKOperationExecutationStateIsFinished, _CKOperationExecutationStateTransitionToExecuting, 
@@ -136,7 +137,7 @@ exports:
                        _CKTrap, _CKUploadRequestManagerResponseActionErrorUserInfoKey, 
                        _CKUploadRequestManagerResponseActionRetryUserInfoKey, _CKUseSystemInstalledBinariesFuncForSwift, 
                        _CKValidSharingURLHostnames, _CKValidateIndexedArrayKeys, 
-                       _CKValidateKeyName, _CKValidateRecordArrayValue, _CKValueIsAcceptableClass, 
+                       _CKValidateKeyName, _CKValidateRecordArrayValue, _CKValueCanBeSetOnRecord, 
                        _CKValueIsAcceptablePredicateClass, _CKWarnForIncorrectServiceIdentity, 
                        _CKWarnForInvalidApplicationIdentifier, _CKWebSharingBaseTokenKey, 
                        _CKWebSharingIsReadOnly, _CKWebSharingIsShared, _CKWebSharingProtectionDataKey, 
@@ -155,8 +156,9 @@ exports:
                        _kCKAPSConnectionInitiateEntitlementKey, _kCKAPSEnvironmentEntitlementString, 
                        _kCKAccountChangedNotificationKey, _kCKAccountWarmingUpNotificationKey, 
                        _kCKAllowAccessDuringBuddyEntitlementKey, _kCKAllowMasqueradingEntitlementKey, 
-                       _kCKAllowProtectionDataEntitlementKey, _kCKAllowZoneProtectionDataEntitlementKey, 
-                       _kCKAnonymousAccountKey, _kCKAssetChunkLength, _kCKAssociatedApplicationIdentifierKey, 
+                       _kCKAllowProtectionDataEntitlementKey, _kCKAllowSetEnvironmentEntitlementKey, 
+                       _kCKAllowZoneProtectionDataEntitlementKey, _kCKAnonymousAccountKey, 
+                       _kCKAssetChunkLength, _kCKAssociatedApplicationIdentifierKey, 
                        _kCKCDBShareResourceProvider, _kCKChainPrivateKeyFieldName, 
                        _kCKClientLogCollectionBotEmail, _kCKCloudDocsContainerIdentifier, 
                        _kCKCloudDocsShareURLSlug, _kCKCloudDocsUnitTestContainerIdentifier, 
@@ -169,7 +171,8 @@ exports:
                        _kCKCompleteParticipantVettingVettingRecordEnvironmentKey, 
                        _kCKCompleteParticipantVettingVettingRecordPhoneKey, _kCKCompleteParticipantVettingVettingRecordRoutingKeyKey, 
                        _kCKCompleteParticipantVettingVettingRecordShareTitleKey, 
-                       _kCKConfigBaseURLString, _kCKContainerEnvironmentProduction, 
+                       _kCKConfigBaseURLString, _kCKContainerEnvironmentEntitlementKey, 
+                       _kCKContainerEnvironmentOverridesEntitlementKey, _kCKContainerEnvironmentProduction, 
                        _kCKContainerEnvironmentSandbox, _kCKDProtobufContentType, 
                        _kCKDefaultShareURLDisplayedHostname, _kCKDefaultShareURLFullHostname, 
                        _kCKDeviceIDUserDefaultsKey, _kCKDisplaysSystemAcceptPromptEntitlementKey, 
@@ -201,6 +204,7 @@ exports:
                        CKAccountOverrideInfo, CKAggregateZonePCSOperation, CKAggregateZonePCSOperationInfo, 
                        CKApplicationPermissionGroup, CKArchiveRecordsOperation, CKArchiveRecordsOperationInfo, 
                        CKAsset, CKAssetCopyInfo, CKAssetDownloadPreauthorization, 
+                       CKAssetDownloadStagingInfo, CKAssetDownloadStagingManager, 
                        CKAssetReference, CKAssetRepairOperationUtilities, CKAssetRepairScheduler, 
                        CKAssetRereferenceInfo, CKAssetReuploadExpectedProperties, 
                        CKAssetTransferOptions, CKAssetUploadRequestMetadata, CKBehaviorOptions, 
@@ -267,11 +271,11 @@ exports:
                        CKRecordID, CKRecordValueStore, CKRecordZone, CKRecordZoneID, 
                        CKRecordZoneNotification, CKRecordZoneSubscription, CKReference, 
                        CKRepairAssetsOperation, CKRepairAssetsOperationInfo, CKRepairZonePCSOperation, 
-                       CKRepairZonePCSOperationInfo, CKRequestInfo, CKSQLite, CKSQLiteEnumerator, 
-                       CKSQLiteError, CKScheduler, CKSchedulerActivity, CKServerChangeToken, 
-                       CKShare, CKShareMetadata, CKShareParticipant, CKSignatureGenerator, 
-                       CKStreamingAsset, CKStreamingAssetAppendContext, CKSubscription, 
-                       CKSyncEngine, CKSyncEngineBatch, CKSyncEngineConfiguration, 
+                       CKRepairZonePCSOperationInfo, CKRequestInfo, CKResult, CKSQLite, 
+                       CKSQLiteEnumerator, CKSQLiteError, CKScheduler, CKSchedulerActivity, 
+                       CKServerChangeToken, CKShare, CKShareMetadata, CKShareParticipant, 
+                       CKSignatureGenerator, CKSignpost, CKStreamingAsset, CKStreamingAssetAppendContext, 
+                       CKSubscription, CKSyncEngine, CKSyncEngineBatch, CKSyncEngineConfiguration, 
                        CKSyncEngineFetchChangesOperation, CKSyncEngineMetadata, CKSyncEngineModifyRecordBatchesOperation, 
                        CKSyncEngineRecordModification, CKThrottle, CKThrottleManager, 
                        CKTuple2, CKTuple3, CKTuple4, CKTuple5, CKUndeprecatedCodeFunctionInvokeOperation, 

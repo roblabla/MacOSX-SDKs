@@ -9,6 +9,7 @@
 .Nm
 .Op Fl chsv           \" [-chsv]
 .Op Fl I Ar interface \" [-I interface]
+.Op Fl C Ar configuration URL \" [-C configuration URL]
 .Sh DESCRIPTION
 .Nm
 allows for measuring the different aspects of Network Quality, including:
@@ -22,18 +23,23 @@ Other aspects of the connection that affect the quality of experience.
 .Pp
 NOTE: This tool will connect to the Internet to perform its tests. This will use data on your Internet service plan.
 .Pp
+For more details about the RPM score and the methodology around the testing, see
+.Ar https://datatracker.ietf.org/doc/draft-cpaasch-ippm-responsiveness/
+.Pp
 The following options are available:
 .Bl -tag -width -indent
-.It Fl C                 \"-C flag as a list item
-Use custom configuration URL.
-.It Fl c
-Produce computer-readable output
-.It Fl h
-Show help
+.It Fl C Ar configuration URL
+Use custom configuration URL. See
+.Ar https://github.com/network-quality/server
+for server implementation details.
 .It Fl I Ar interface
 Bind test to interface (e.g., en0, pdp_ip0,...)
 .Pp
 If not specified, the default interface will be used.
+.It Fl c
+Produce computer-readable output
+.It Fl h
+Show help
 .It Fl s
 Run tests sequentially instead of parallel upload/download
 .It Fl v

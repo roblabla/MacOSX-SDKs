@@ -733,7 +733,7 @@ Protocols:
   - Selector: 'playbackCoordinator:didIssuePrepareTransitionCommand:'
     SwiftName: playbackCoordinator(_:didIssue:)
     MethodKind: Instance
-
+    
 Functions:
 - Name: AVMakeRectWithAspectRatioInsideRect
   SwiftName: AVMakeRect(aspectRatio:insideRect:)

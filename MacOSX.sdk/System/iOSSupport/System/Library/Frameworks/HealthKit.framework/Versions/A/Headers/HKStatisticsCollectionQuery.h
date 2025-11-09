@@ -49,7 +49,12 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 
 @end
 
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKStatisticsCollectionQueryDescriptor", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(8.0), watchos(2.0))
+#endif
 @interface HKStatisticsCollectionQuery : HKQuery
 
 @property (readonly, strong) NSDate *anchorDate;

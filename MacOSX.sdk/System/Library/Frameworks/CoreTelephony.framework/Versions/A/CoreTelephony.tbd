@@ -4,30 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           514A6947-24C6-3541-B85F-D4063AEF5B1F
+    value:           0DF279BD-EF56-3DAD-B1FC-2AADB31616AC
   - target:          x86_64-maccatalyst
-    value:           514A6947-24C6-3541-B85F-D4063AEF5B1F
+    value:           0DF279BD-EF56-3DAD-B1FC-2AADB31616AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FD3D881-8298-33E2-ACBF-C6C1C575C1A2
+    value:           68281E0D-0D20-3CEB-A042-9F46242F33CF
   - target:          arm64e-maccatalyst
-    value:           5FD3D881-8298-33E2-ACBF-C6C1C575C1A2
+    value:           68281E0D-0D20-3CEB-A042-9F46242F33CF
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Versions/A/CoreTelephony'
 current-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSPFvPN3xpc4dictEE ]
+    weak-symbols:    [ __ZTSPFvPN3xpc4dictEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CTActivationPolicyCarrierLockAsString, _CTCallAddressBlocked, 
@@ -523,20 +515,22 @@ exports:
                        _kCTCarrierEntitlementResultUnknown, _kCTCarrierEntitlements, 
                        _kCTCarrierEntitlementsAuthTokenAvailable, _kCTCarrierEntitlementsInfoAvailableNotification, 
                        _kCTCarrierSettingsNewCarrierNotification, _kCTCarrierSettingsNewOperatorNotification, 
-                       _kCTCellMonitorARFCN, _kCTCellMonitorBandClass, _kCTCellMonitorBandInfo, 
-                       _kCTCellMonitorBandwidth, _kCTCellMonitorBaseStationId, _kCTCellMonitorBaseStationLat, 
-                       _kCTCellMonitorBaseStationLong, _kCTCellMonitorCellId, _kCTCellMonitorCellRadioAccessTechnology, 
+                       _kCTCellMonitorARFCN, _kCTCellMonitorBWPSupport, _kCTCellMonitorBandClass, 
+                       _kCTCellMonitorBandInfo, _kCTCellMonitorBandwidth, _kCTCellMonitorBaseStationId, 
+                       _kCTCellMonitorBaseStationLat, _kCTCellMonitorBaseStationLong, 
+                       _kCTCellMonitorCSGIndication, _kCTCellMonitorCellId, _kCTCellMonitorCellRadioAccessTechnology, 
                        _kCTCellMonitorCellType, _kCTCellMonitorCellTypeDetected, 
                        _kCTCellMonitorCellTypeNeighbor, _kCTCellMonitorCellTypeServing, 
-                       _kCTCellMonitorChannelNumber, _kCTCellMonitorDayLightSaving, 
+                       _kCTCellMonitorChannelNumber, _kCTCellMonitorCsgId, _kCTCellMonitorDayLightSaving, 
                        _kCTCellMonitorDeploymentType, _kCTCellMonitorDerivedMCC, 
                        _kCTCellMonitorECN0, _kCTCellMonitorEcio, _kCTCellMonitorEcioFiltered, 
                        _kCTCellMonitorGSCN, _kCTCellMonitorIsSA, _kCTCellMonitorLAC, 
                        _kCTCellMonitorLtmOffset, _kCTCellMonitorMCC, _kCTCellMonitorMNC, 
-                       _kCTCellMonitorNID, _kCTCellMonitorNRARFCN, _kCTCellMonitorNgbrPn, 
-                       _kCTCellMonitorPCI, _kCTCellMonitorPID, _kCTCellMonitorPNOffset, 
-                       _kCTCellMonitorPSC, _kCTCellMonitorRSCP, _kCTCellMonitorRSRP, 
-                       _kCTCellMonitorRSRQ, _kCTCellMonitorRSSI, _kCTCellMonitorRadioAccessTechnologyCDMA1x, 
+                       _kCTCellMonitorNID, _kCTCellMonitorNRARFCN, _kCTCellMonitorNeighborType, 
+                       _kCTCellMonitorNgbrPn, _kCTCellMonitorPCI, _kCTCellMonitorPID, 
+                       _kCTCellMonitorPMax, _kCTCellMonitorPNOffset, _kCTCellMonitorPSC, 
+                       _kCTCellMonitorRSCP, _kCTCellMonitorRSRP, _kCTCellMonitorRSRQ, 
+                       _kCTCellMonitorRSSI, _kCTCellMonitorRadioAccessTechnologyCDMA1x, 
                        _kCTCellMonitorRadioAccessTechnologyCDMAEVDO, _kCTCellMonitorRadioAccessTechnologyCDMAHybrid, 
                        _kCTCellMonitorRadioAccessTechnologyGSM, _kCTCellMonitorRadioAccessTechnologyLTE, 
                        _kCTCellMonitorRadioAccessTechnologyNR, _kCTCellMonitorRadioAccessTechnologyUMTS, 
@@ -547,9 +541,10 @@ exports:
                        _kCTCellMonitorRefPn, _kCTCellMonitorRxAGC, _kCTCellMonitorSCN, 
                        _kCTCellMonitorSCS, _kCTCellMonitorSID, _kCTCellMonitorSNR, 
                        _kCTCellMonitorSectorId, _kCTCellMonitorSectorLat, _kCTCellMonitorSectorLong, 
-                       _kCTCellMonitorTAC, _kCTCellMonitorUARFCN, _kCTCellMonitorUpdateNotification, 
-                       _kCTCellMonitorZoneId, _kCTCellTrackedCI, _kCTCellTrackedLAC, 
-                       _kCTCellTrackedMCC, _kCTCellTrackedMNC, _kCTCellularDataPlanActivationStatus, 
+                       _kCTCellMonitorTAC, _kCTCellMonitorThroughput, _kCTCellMonitorUARFCN, 
+                       _kCTCellMonitorUpdateNotification, _kCTCellMonitorZoneId, 
+                       _kCTCellTrackedCI, _kCTCellTrackedLAC, _kCTCellTrackedMCC, 
+                       _kCTCellTrackedMNC, _kCTCellularDataPlanActivationStatus, 
                        _kCTCellularDataPlanActivationSuccessKey, _kCTCellularDataPlanAutorenewEnabledKey, 
                        _kCTCellularDataPlanBucketPlanExpiryDateKey, _kCTCellularDataPlanBucketPlanSizeKey, 
                        _kCTCellularDataPlanDeviceIdentifierKey, _kCTCellularDataPlanInternationalKey, 
@@ -1025,9 +1020,9 @@ exports:
                        CTCellIdInfo, CTCellInfo, CTCellularData, CTCellularPlanManagerCameraScanAction, 
                        CTCellularPlanProvisioning, CTCellularPlanProvisioningOnDeviceActivationRequest, 
                        CTCellularPlanProvisioningRequest, CTCellularQoSFlow, CTDataConnectionAvailabilityStatus, 
-                       CTDataConnectionStatus, CTDataSettings, CTDataStatus, CTDataUsage, 
-                       CTDataUsagePolicies, CTDataUsagePoliciesWrapper, CTDataUsed, 
-                       CTDeviceDataUsage, CTEmergencyMode, CTEmergencyModeResult, 
+                       CTDataConnectionStatus, CTDataSettings, CTDataStatus, CTDataStatusBasic, 
+                       CTDataUsage, CTDataUsagePolicies, CTDataUsagePoliciesWrapper, 
+                       CTDataUsed, CTDeviceDataUsage, CTEmergencyMode, CTEmergencyModeResult, 
                        CTEncryptionStatusInfo, CTEnhancedDataLinkQualityMetric, CTEnhancedLinkQualityMetric, 
                        CTIMSRegistrationStatus, CTIMSRegistrationTransportInfo, CTIPFilterEndpoint, 
                        CTMessage, CTMessageCenter, CTMessagePart, CTMessageStatus, 

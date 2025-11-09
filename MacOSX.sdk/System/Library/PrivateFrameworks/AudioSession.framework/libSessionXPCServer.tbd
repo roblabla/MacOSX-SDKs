@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F42483D7-2C95-3A27-8A75-A1EE7EA425B9
+    value:           70B21431-EB3A-3D59-86EE-D8A177000755
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9EBC499-DF7A-3B38-9A46-D32C4AE7810A
+    value:           2740A699-75C1-3C8A-83D5-FD4A9CC3E3CB
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/libSessionXPCServer.dylib'
 exports:
   - targets:         [ x86_64-macos ]

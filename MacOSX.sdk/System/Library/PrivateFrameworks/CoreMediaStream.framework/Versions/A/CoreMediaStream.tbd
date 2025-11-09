@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E81DF57E-BB92-3FF0-A7E3-1E6286BC19D0
+    value:           B0B218C7-A68F-3C5A-8FD5-54537C0AACCA
   - target:          x86_64-maccatalyst
-    value:           E81DF57E-BB92-3FF0-A7E3-1E6286BC19D0
+    value:           B0B218C7-A68F-3C5A-8FD5-54537C0AACCA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45E81D4C-FF96-3C7E-8E1C-3E42EA4F411D
+    value:           68F52DE6-CFE8-36C3-BBF2-7A80D262C556
   - target:          arm64e-maccatalyst
-    value:           45E81D4C-FF96-3C7E-8E1C-3E42EA4F411D
+    value:           68F52DE6-CFE8-36C3-BBF2-7A80D262C556
 install-name:    '/System/Library/PrivateFrameworks/CoreMediaStream.framework/Versions/A/CoreMediaStream'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

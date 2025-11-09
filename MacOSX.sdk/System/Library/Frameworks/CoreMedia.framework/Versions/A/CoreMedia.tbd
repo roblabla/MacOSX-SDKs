@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1CB829B-07E5-3CC0-B9EA-65BABD678480
+    value:           057F21CD-DAEA-3E68-B9B2-CF677DB71834
   - target:          x86_64-maccatalyst
-    value:           A1CB829B-07E5-3CC0-B9EA-65BABD678480
+    value:           057F21CD-DAEA-3E68-B9B2-CF677DB71834
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38594FCB-9201-3A72-A937-782D5126F374
+    value:           BE2A60DE-57EB-3789-9E4E-B3761B2E62C9
   - target:          arm64e-maccatalyst
-    value:           38594FCB-9201-3A72-A937-782D5126F374
+    value:           BE2A60DE-57EB-3789-9E4E-B3761B2E62C9
 install-name:    '/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst, 
@@ -821,7 +821,8 @@ exports:
                        _FigTimelineCoordinatorCopyParticipantSnapshotForUUID, _FigTimelineCoordinatorCopyParticipantSnapshots, 
                        _FigTimelineCoordinatorCopyProperty, _FigTimelineCoordinatorCreate, 
                        _FigTimelineCoordinatorDisconnectFromMedium, _FigTimelineCoordinatorEndSuspension, 
-                       _FigTimelineCoordinatorEndSuspensionProposingNewTime, _FigTimelineCoordinatorEndSuspensions, 
+                       _FigTimelineCoordinatorEndSuspensionProposingNewTime, _FigTimelineCoordinatorEndSuspensionWeaklyIfNeededProposingNewRateAndTime, 
+                       _FigTimelineCoordinatorEndSuspensions, _FigTimelineCoordinatorEndSuspensionsProposingNewTime, 
                        _FigTimelineCoordinatorExpectTransitionToNewTimelineFromTimelineControl, 
                        _FigTimelineCoordinatorGetExpectedTimeAtHostTime, _FigTimelineCoordinatorGetTypeID, 
                        _FigTimelineCoordinatorHandleAssignmentOfUUIDToLocalParticipantByMedium, 
@@ -834,17 +835,17 @@ exports:
                        _FigTimelineCoordinatorIsSuspended, _FigTimelineCoordinatorMakeHostTimeFromNetworkTimeDictionary, 
                        _FigTimelineCoordinatorReapplyGroupStateViaTimelineControl, 
                        _FigTimelineCoordinatorSetProperty, _FigTimelineCoordinatorSetReadinessHintFromTimelineControl, 
-                       _FigTimelineCoordinatorSetWeakMediumAndCallbacks, _FigTimelineCoordinatorSuspensionCreate, 
-                       _FigTimelineCoordinatorSuspensionGetTypeID, _FigTimelineCoordinatorTimelineStateGetTypeID, 
-                       _FigTimelineStateDictionaryGetStateLoggingIdentifier, _FigTraceLoggingDumpToFile, 
-                       _FigTraceLoggingEnd, _FigTraceLoggingPause, _FigTraceLoggingResume, 
-                       _FigTraceLoggingStart, _FigTransportConnectionTCPCreate, _FigTransportConnectionUSBCreate, 
-                       _FigTransportCopyRegisteredObject, _FigTransportCreateBBufFromPointer, 
-                       _FigTransportCreateBBufFromRemoteObjectRef, _FigTransportCreateCFNumberFromLocalObjectRef, 
-                       _FigTransportCreateCFNumberFromRemoteObjectRef, _FigTransportDiscoveryAddEventHandler, 
-                       _FigTransportDiscoveryGetSharedDiscovery, _FigTransportDiscoveryGetTypeID, 
-                       _FigTransportDiscoveryRemoveEventHandler, _FigTransportDiscoveryStart, 
-                       _FigTransportDiscoveryStop, _FigTransportGetCMBaseObject, 
+                       _FigTimelineCoordinatorSetWeakMediumAndCallbacks, _FigTimelineCoordinatorSuspensionCopyReason, 
+                       _FigTimelineCoordinatorSuspensionCreate, _FigTimelineCoordinatorSuspensionGetTypeID, 
+                       _FigTimelineCoordinatorTimelineStateGetTypeID, _FigTimelineStateDictionaryGetStateLoggingIdentifier, 
+                       _FigTraceLoggingDumpToFile, _FigTraceLoggingEnd, _FigTraceLoggingPause, 
+                       _FigTraceLoggingResume, _FigTraceLoggingStart, _FigTransportConnectionTCPCreate, 
+                       _FigTransportConnectionUSBCreate, _FigTransportCopyRegisteredObject, 
+                       _FigTransportCreateBBufFromPointer, _FigTransportCreateBBufFromRemoteObjectRef, 
+                       _FigTransportCreateCFNumberFromLocalObjectRef, _FigTransportCreateCFNumberFromRemoteObjectRef, 
+                       _FigTransportDiscoveryAddEventHandler, _FigTransportDiscoveryGetSharedDiscovery, 
+                       _FigTransportDiscoveryGetTypeID, _FigTransportDiscoveryRemoveEventHandler, 
+                       _FigTransportDiscoveryStart, _FigTransportDiscoveryStop, _FigTransportGetCMBaseObject, 
                        _FigTransportGetClassID, _FigTransportGetLocalObjectRefFromCFNumber, 
                        _FigTransportGetLocalRootObject, _FigTransportGetRemoteObjectRefFromBBuf, 
                        _FigTransportGetRemoteObjectRefFromCFNumber, _FigTransportGetRemoteRootObject, 
@@ -1050,7 +1051,8 @@ exports:
                        _kCMSampleBufferAttachmentKey_RequestNonReferenceFrame, _kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding, 
                        _kCMSampleBufferAttachmentKey_ResumeOutput, _kCMSampleBufferAttachmentKey_Reverse, 
                        _kCMSampleBufferAttachmentKey_SampleReferenceByteOffset, _kCMSampleBufferAttachmentKey_SampleReferenceURL, 
-                       _kCMSampleBufferAttachmentKey_SpeedMultiplier, _kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo, 
+                       _kCMSampleBufferAttachmentKey_SegmentEdge, _kCMSampleBufferAttachmentKey_SpeedMultiplier, 
+                       _kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo, 
                        _kCMSampleBufferAttachmentKey_TransitionID, _kCMSampleBufferAttachmentKey_TrimDurationAtEnd, 
                        _kCMSampleBufferAttachmentKey_TrimDurationAtStart, _kCMSampleBufferConduitNotificationParameter_EndPresentationTimeStamp, 
                        _kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS, 
@@ -1440,16 +1442,19 @@ exports:
                        _kFigEndpointPlaybackSessionKey_CurrentInterstitialEvent, 
                        _kFigEndpointPlaybackSessionKey_DSID, _kFigEndpointPlaybackSessionKey_DateRangeArray, 
                        _kFigEndpointPlaybackSessionKey_ErrorInfo, _kFigEndpointPlaybackSessionKey_ForInterstitial, 
-                       _kFigEndpointPlaybackSessionKey_HLSContentLocation, _kFigEndpointPlaybackSessionKey_InheritURIQueryComponentFromReferencingURI, 
+                       _kFigEndpointPlaybackSessionKey_HLSContentLocation, _kFigEndpointPlaybackSessionKey_HostClockTime, 
+                       _kFigEndpointPlaybackSessionKey_InheritURIQueryComponentFromReferencingURI, 
                        _kFigEndpointPlaybackSessionKey_InterstitialEvents, _kFigEndpointPlaybackSessionKey_InterstitialLiveHorizon, 
-                       _kFigEndpointPlaybackSessionKey_ItemID, _kFigEndpointPlaybackSessionKey_ItemType, 
-                       _kFigEndpointPlaybackSessionKey_MediaType, _kFigEndpointPlaybackSessionKey_MightSupportStorePastisKeyRequests, 
+                       _kFigEndpointPlaybackSessionKey_ItemID, _kFigEndpointPlaybackSessionKey_ItemTime, 
+                       _kFigEndpointPlaybackSessionKey_ItemType, _kFigEndpointPlaybackSessionKey_MediaType, 
+                       _kFigEndpointPlaybackSessionKey_MightSupportStorePastisKeyRequests, 
                        _kFigEndpointPlaybackSessionKey_Options, _kFigEndpointPlaybackSessionKey_OutOfBandAlternateTracks, 
                        _kFigEndpointPlaybackSessionKey_Path, _kFigEndpointPlaybackSessionKey_PlaybackRestrictions, 
                        _kFigEndpointPlaybackSessionKey_PurchasedMediaKind, _kFigEndpointPlaybackSessionKey_Rate, 
                        _kFigEndpointPlaybackSessionKey_ReferenceRestrictions, _kFigEndpointPlaybackSessionKey_RequestContext, 
-                       _kFigEndpointPlaybackSessionKey_StartDate, _kFigEndpointPlaybackSessionKey_StartEstimatedDate, 
-                       _kFigEndpointPlaybackSessionKey_StartPosition, _kFigEndpointPlaybackSessionKey_StartPositionInLegacyTime, 
+                       _kFigEndpointPlaybackSessionKey_SnapTimeToPausePlayback, _kFigEndpointPlaybackSessionKey_StartDate, 
+                       _kFigEndpointPlaybackSessionKey_StartEstimatedDate, _kFigEndpointPlaybackSessionKey_StartPosition, 
+                       _kFigEndpointPlaybackSessionKey_StartPositionInLegacyTime, 
                        _kFigEndpointPlaybackSessionKey_TextMarkupArray, _kFigEndpointPlaybackSessionKey_TimeToPauseBuffering, 
                        _kFigEndpointPlaybackSessionKey_TimeToPausePlayback, _kFigEndpointPlaybackSessionKey_TimeToSwapPlayback, 
                        _kFigEndpointPlaybackSessionKey_UUID, _kFigEndpointPlaybackSessionKey_UserAgent, 
@@ -1483,6 +1488,7 @@ exports:
                        _kFigEndpointPlaybackSessionProxiedProperty_PlaybackErrorLog, 
                        _kFigEndpointPlaybackSessionProxiedProperty_ReverseEndTime, 
                        _kFigEndpointPlaybackSessionProxiedProperty_SelectedMediaArray, 
+                       _kFigEndpointPlaybackSessionProxiedProperty_SnapTimeToPausePlayback, 
                        _kFigEndpointPlaybackSessionProxiedProperty_TextMarkupArray, 
                        _kFigEndpointPlaybackSessionProxiedProperty_TimeToPauseBuffering, 
                        _kFigEndpointPlaybackSessionProxiedProperty_TimeToPausePlayback, 
@@ -1550,11 +1556,12 @@ exports:
                        _kFigEndpointProperty_TightSyncPeerP2PAddress, _kFigEndpointProperty_TightSyncUUID, 
                        _kFigEndpointProperty_TransportType, _kFigEndpointProperty_Type, 
                        _kFigEndpointProperty_URLPlaybackActivationToken, _kFigEndpointProperty_UseIndirectStarkSpeechModeTransitions, 
-                       _kFigEndpointProperty_UseLegacyStarkModeActions, _kFigEndpointProperty_VehicleInformation, 
-                       _kFigEndpointProperty_VoiceActivationType, _kFigEndpointProperty_Volume, 
-                       _kFigEndpointProperty_VolumeControlSupported, _kFigEndpointProperty_VolumeControlType, 
-                       _kFigEndpointProperty_VolumeDB, _kFigEndpointProperty_iOSEntityIsDoingTurnByTurn, 
-                       _kFigEndpointRemoteControlSessionClientTypeUUIDKey, _kFigEndpointRemoteControlSessionClientTypeUUIDKey_APSync, 
+                       _kFigEndpointProperty_UseLegacyStarkModeActions, _kFigEndpointProperty_UserPickedRoute, 
+                       _kFigEndpointProperty_VehicleInformation, _kFigEndpointProperty_VoiceActivationType, 
+                       _kFigEndpointProperty_Volume, _kFigEndpointProperty_VolumeControlSupported, 
+                       _kFigEndpointProperty_VolumeControlType, _kFigEndpointProperty_VolumeDB, 
+                       _kFigEndpointProperty_iOSEntityIsDoingTurnByTurn, _kFigEndpointRemoteControlSessionClientTypeUUIDKey, 
+                       _kFigEndpointRemoteControlSessionClientTypeUUIDKey_APSync, 
                        _kFigEndpointRemoteControlSessionClientTypeUUIDKey_CarPlayClusterControl, 
                        _kFigEndpointRemoteControlSessionClientTypeUUIDKey_CarPlayLoggingData, 
                        _kFigEndpointRemoteControlSessionClientTypeUUIDKey_CarPlayProtocolData, 

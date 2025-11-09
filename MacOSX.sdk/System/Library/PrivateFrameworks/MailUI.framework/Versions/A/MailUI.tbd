@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78A4CFDB-104F-39B1-9857-7A948F020899
+    value:           06E90A10-28A9-38F8-8578-AB869440007A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           011B4E4B-276A-3912-BC79-336E78D7D219
+    value:           2935A4A5-2DD4-3741-8374-CFCB230C29B6
 install-name:    '/System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI'
-current-version: 3693.40
+current-version: 3696.80.82
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Mail, MailNotificationContentExtension, MailQuickLookExtension, 
@@ -65,26 +65,27 @@ exports:
                        _MFImageGlyphSidebarFlagged, _MFImageGlyphSidebarFolder, _MFImageGlyphSidebarInbox, 
                        _MFImageGlyphSidebarJunk, _MFImageGlyphSidebarOffline, _MFImageGlyphSidebarOutbox, 
                        _MFImageGlyphSidebarSent, _MFImageGlyphSidebarSmartMailbox, 
-                       _MFImageGlyphSidebarTrash, _MFImageGlyphSidebarVIPs, _MFImageGlyphToolbarDisconnectAccounts, 
-                       _MFImageGlyphTouchBarArchive, _MFImageGlyphTouchBarCompose, 
-                       _MFImageGlyphTouchBarDrafts, _MFImageGlyphTouchBarFlagClear, 
-                       _MFImageGlyphTouchBarForward, _MFImageGlyphTouchBarGenericMailbox, 
-                       _MFImageGlyphTouchBarGoBack, _MFImageGlyphTouchBarInbox, _MFImageGlyphTouchBarJunk, 
-                       _MFImageGlyphTouchBarMarkAsRead, _MFImageGlyphTouchBarMarkAsUnread, 
-                       _MFImageGlyphTouchBarMarkup, _MFImageGlyphTouchBarMoveChevron, 
-                       _MFImageGlyphTouchBarMoveTo, _MFImageGlyphTouchBarRelatedMessages, 
-                       _MFImageGlyphTouchBarReply, _MFImageGlyphTouchBarReplyAll, 
-                       _MFImageGlyphTouchBarSend, _MFImageGlyphTouchBarSent, _MFImageGlyphTouchBarSidebar, 
-                       _MFImageGlyphTouchBarTrash, _MUIAddressPasteboardType, _MUIAddressesBinding, 
-                       _MUIAttachmentInfoKeyContentID, _MUIAttachmentInfoKeyFrame, 
-                       _MUIAttachmentInfoKeySnapshot, _MUIBundleResourceProtocolScheme, 
-                       _MUIComposeGroupIdentifier, _MUIContextMenuAttachmentIdentifierKey, 
-                       _MUIContextMenuSelectedAttachmentIdentifiersKey, _MUIContextMenuSelectionIsWebAddressKey, 
-                       _MUIDefaultsKeyEnableAutomaticListInsertion, _MUIDismissAutocompletionNotification, 
-                       _MUIDocumentLoadContextKeyAttachmentRegistrationScript, _MUIDocumentLoadContextKeyBaseURLHost, 
-                       _MUIDocumentLoadContextKeyDataDetectorsContext, _MUIDocumentLoadContextKeyFailedProxyURLs, 
-                       _MUIDocumentLoadContextKeyJSDocumentContext, _MUIDocumentLoadContextKeyMessageContentTypeToBlock, 
-                       _MUIKeyPathAddresses, _MUIRemoteImageCollectorFullResolutionDataDidBecomeAvailableNotification, 
+                       _MFImageGlyphSidebarTrash, _MFImageGlyphSidebarVIPs, _MFImageGlyphToolbarConnectAccounts, 
+                       _MFImageGlyphToolbarDisconnectAccounts, _MFImageGlyphTouchBarArchive, 
+                       _MFImageGlyphTouchBarCompose, _MFImageGlyphTouchBarDrafts, 
+                       _MFImageGlyphTouchBarFlagClear, _MFImageGlyphTouchBarForward, 
+                       _MFImageGlyphTouchBarGenericMailbox, _MFImageGlyphTouchBarGoBack, 
+                       _MFImageGlyphTouchBarInbox, _MFImageGlyphTouchBarJunk, _MFImageGlyphTouchBarMarkAsRead, 
+                       _MFImageGlyphTouchBarMarkAsUnread, _MFImageGlyphTouchBarMarkup, 
+                       _MFImageGlyphTouchBarMoveChevron, _MFImageGlyphTouchBarMoveTo, 
+                       _MFImageGlyphTouchBarRelatedMessages, _MFImageGlyphTouchBarReply, 
+                       _MFImageGlyphTouchBarReplyAll, _MFImageGlyphTouchBarSend, 
+                       _MFImageGlyphTouchBarSent, _MFImageGlyphTouchBarSidebar, _MFImageGlyphTouchBarTrash, 
+                       _MUIAddressPasteboardType, _MUIAddressesBinding, _MUIAttachmentInfoKeyContentID, 
+                       _MUIAttachmentInfoKeyFrame, _MUIAttachmentInfoKeySnapshot, 
+                       _MUIBundleResourceProtocolScheme, _MUIComposeGroupIdentifier, 
+                       _MUIContextMenuAttachmentIdentifierKey, _MUIContextMenuSelectedAttachmentIdentifiersKey, 
+                       _MUIContextMenuSelectionIsWebAddressKey, _MUIDefaultsKeyEnableAutomaticListInsertion, 
+                       _MUIDismissAutocompletionNotification, _MUIDocumentLoadContextKeyAttachmentRegistrationScript, 
+                       _MUIDocumentLoadContextKeyBaseURLHost, _MUIDocumentLoadContextKeyDataDetectorsContext, 
+                       _MUIDocumentLoadContextKeyFailedProxyURLs, _MUIDocumentLoadContextKeyJSDocumentContext, 
+                       _MUIDocumentLoadContextKeyMessageContentTypeToBlock, _MUIKeyPathAddresses, 
+                       _MUIRemoteImageCollectorFullResolutionDataDidBecomeAvailableNotification, 
                        _MUISegmentedControlForDescriptors, _MUISelectionContextDictionaryKeyAbsoluteImageURL, 
                        _MUISelectionContextDictionaryKeyAbsoluteLinkURL, _MUISelectionContextDictionaryKeyAbsoluteMediaURL, 
                        _MUISelectionContextDictionaryKeyClickedAttachmentInfo, _MUISelectionContextDictionaryKeyIsSelectableTextInImage, 
@@ -116,12 +117,13 @@ exports:
                        _kMUITrailingBlankLineRemoverSource, _kMUITrailingBlankLineRemoverSourceLength, 
                        _kMUIWebAttachmentControllerSource, _kMUIWebAttachmentControllerSourceLength, 
                        _kMUIWebDocumentDisplayControllerDelegateSource, _kMUIWebDocumentDisplayControllerDelegateSourceLength, 
-                       _kMUIWebDocumentDisplayControllerSource, _kMUIWebDocumentDisplayControllerSourceLength ]
+                       _kMUIWebDocumentDisplayControllerSource, _kMUIWebDocumentDisplayControllerSourceLength, 
+                       _sStringKeyAXFlaggedWithName ]
     objc-classes:    [ MUIAddressField, MUIAddressFieldScrollDocumentView, MUIAddressTokenAttachmentCell, 
                        MUIAttachmentInfo, MUIBundleResourceURLProtocol, MUICollectionCellView, 
-                       MUICollectionHeightStorage, MUICollectionView, MUIFramework, 
-                       MUIOpenWithApplicationHelper, MUIOriginalMessageInfo, MUIRemoteImageCollector, 
-                       MUISegmentedToolbarItem, MUISelectionAndClickInformation, 
+                       MUICollectionHeightStorage, MUICollectionView, MUIFlagIconFactory, 
+                       MUIFramework, MUIOpenWithApplicationHelper, MUIOriginalMessageInfo, 
+                       MUIRemoteImageCollector, MUISegmentedToolbarItem, MUISelectionAndClickInformation, 
                        MUITokenAddress, MUITokenAddressField, MUITokenAddressFieldCell, 
                        MUITokenAddressTextStorage, MUITokenAddressTextView, MUIWKWebView, 
                        MUIWKWebViewConfigurationManager, MUIWKWebViewController, 

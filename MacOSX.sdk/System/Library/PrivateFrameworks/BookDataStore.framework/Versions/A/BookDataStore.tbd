@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           493C189F-31C1-3A1F-8579-45E3D57386F4
+    value:           C398BDDD-A567-3087-8034-05DD9B6A2BEF
   - target:          x86_64-maccatalyst
-    value:           493C189F-31C1-3A1F-8579-45E3D57386F4
+    value:           C398BDDD-A567-3087-8034-05DD9B6A2BEF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3370A554-C4FA-3D6C-ABBC-27A6542622B3
+    value:           D2BD60A9-E9D6-39A6-9FEA-986294910C24
   - target:          arm64e-maccatalyst
-    value:           3370A554-C4FA-3D6C-ABBC-27A6542622B3
+    value:           D2BD60A9-E9D6-39A6-9FEA-986294910C24
 install-name:    '/System/Library/PrivateFrameworks/BookDataStore.framework/Versions/A/BookDataStore'
-current-version: 1632
+current-version: 1672
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -31,7 +31,8 @@ exports:
                        _BCNormalizedNumberOfStars, _BCProtoAnnotationReadFrom, _BDSArrayAdditionsError, 
                        _BDSArtworkImporterLog, _BDSCloudGlobalMetadataManagerChanged, 
                        _BDSCloudGlobalMetadataManagerFetchedRecordsChanged, _BDSCloudKitAudiobookLog, 
-                       _BDSCloudKitLog, _BDSCloudKitSyncLog, _BDSCtlLog, _BDSErrorDomain, 
+                       _BDSCloudKitClientErrorDomain, _BDSCloudKitLog, _BDSCloudKitSyncLog, 
+                       _BDSCtlLog, _BDSErrorDomain, _BDSErrorFromUnderlyingError, 
                        _BDSReachabilityErrorDomain, _BDSReportAssertionFailureWithMessage, 
                        _BDSServiceCenterLog, _BDSServiceLog, _BookDataStoreBundle, 
                        _BookDataStoreCFBundle, _NSManagedObjectContextIMAdditionsSafeAccessState, 

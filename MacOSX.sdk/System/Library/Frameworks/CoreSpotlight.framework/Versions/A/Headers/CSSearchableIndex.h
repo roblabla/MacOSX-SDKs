@@ -2,7 +2,7 @@
 //  CSSearchableIndex.h
 //  CoreSpotlight
 //
-//  Copyright © 2017 Apple. All rights reserved.
+//  Copyright © 2022 Apple. All rights reserved.
 //
 
 #import <CoreSpotlight/CSSearchableItem.h>
@@ -61,6 +61,8 @@ CS_TVOS_UNAVAILABLE
 
 @end
 
+CS_AVAILABLE(10_13, 9_0)
+CS_TVOS_UNAVAILABLE
 @interface CSSearchableIndex (CSOptionalBatching)
 
 //Batching:

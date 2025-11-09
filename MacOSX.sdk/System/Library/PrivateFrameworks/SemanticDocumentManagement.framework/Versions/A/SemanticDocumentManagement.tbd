@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4923DF29-EB73-3342-9995-6CEB7B4AE686
+    value:           D9FD72DE-5366-3268-855D-B2CEE876405D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3EEF8D46-60D5-3CBA-BB51-FFD6E6EA65FF
+    value:           F8776AED-2401-3AB3-AF96-31575FE79EE3
 install-name:    '/System/Library/PrivateFrameworks/SemanticDocumentManagement.framework/Versions/A/SemanticDocumentManagement'
 current-version: 2.0.5
 exports:

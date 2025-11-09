@@ -1086,7 +1086,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(1
     MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias    MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3)) MPS_SWIFT_NAME(gradientWithWeightsAndBias) = 2U,
     
     // Compute both gradients
-    MPSCNNConvolutionGradientOptionAll                           MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3)) MPS_SWIFT_NAME(gradientWithWeightsAndBias) = MPSCNNConvolutionGradientOptionGradientWithData | MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias
+    MPSCNNConvolutionGradientOptionAll                           MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3)) MPS_SWIFT_NAME(all) = MPSCNNConvolutionGradientOptionGradientWithData | MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias
 };
     
 /*!

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE05E99A-F436-3E9C-9302-69869B582603
+    value:           1855A06F-1D7A-37B6-8203-BA8FFE98A444
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59FB9271-F392-3F39-8F79-FD8C47E9FC4C
+    value:           EC05BBF7-B84F-3E4A-A2D9-3EEBA649FD9E
 install-name:    '/System/Library/PrivateFrameworks/SystemStatus.framework/Versions/A/SystemStatus'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

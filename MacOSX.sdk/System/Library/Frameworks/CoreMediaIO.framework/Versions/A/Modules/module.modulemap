@@ -1,7 +1,9 @@
 framework module CoreMediaIO [extern_c] {
+	umbrella header "CoreMediaIO.h"
 	export *
-	umbrella header "CMIOHardware.h"
-	module * { export * }
+	module * {
+		export *
+	}
 
 	explicit module CMIOHardwarePlugIn {
 		header "CMIOHardwarePlugIn.h"

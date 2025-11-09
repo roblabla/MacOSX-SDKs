@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           13D77FC2-DD08-3BB2-BBF5-B50B29ED989C
+    value:           9E48DD67-B752-3754-B08E-E3C92F611B40
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80F3EB82-5AB8-324E-A729-EEC16369CFB7
+    value:           44A3FA10-E99A-3ABD-AB88-AC4B08CAA405
 install-name:    '/usr/lib/libCheckFix.dylib'
 current-version: 31
 exports:

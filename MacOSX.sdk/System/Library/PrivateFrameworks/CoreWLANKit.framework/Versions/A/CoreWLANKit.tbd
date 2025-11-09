@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9C7AC9E2-CE6F-328C-B75A-D3035059D639
+    value:           083ABE0F-F0E4-31DB-9E76-AF4143578B1E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C35F2B91-0DB1-37A7-9A6E-F18660B56028
+    value:           481B1EE4-020F-3167-968F-2946A88620EC
 install-name:    '/System/Library/PrivateFrameworks/CoreWLANKit.framework/Versions/A/CoreWLANKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7EDB2AF0-A1F6-3186-865D-DF8818EABD88
+    value:           E0EB0FBF-94D2-3149-ABE4-7C09CD822B80
   - target:          x86_64-maccatalyst
-    value:           7EDB2AF0-A1F6-3186-865D-DF8818EABD88
+    value:           E0EB0FBF-94D2-3149-ABE4-7C09CD822B80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           12CAFDC9-2D6D-3637-9DD1-55148441AA5C
+    value:           711A3F54-F89F-37E8-AB99-04680BE9CBEC
   - target:          arm64e-maccatalyst
-    value:           12CAFDC9-2D6D-3637-9DD1-55148441AA5C
+    value:           711A3F54-F89F-37E8-AB99-04680BE9CBEC
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 612.3.6
+current-version: 613.1.17
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -91,7 +91,8 @@ exports:
                        _WBSSafariBookmarksSyncAgentDidUpdateBookmarksNotificationName, 
                        _WBSSafariBookmarksSyncAgentProxyConnectionWasInvalidatedNotification, 
                        _WBSSafariBookmarksSyncAgentServiceName, _WBSSafariBookmarksSyncAgentSyncResultKey, 
-                       _WBSSafariTechnologyPreviewSyncServiceName, _WBSSavedPasswordStoreDidChangeNotification, 
+                       _WBSSafariTechnologyPreviewSyncServiceName, _WBSSavedAccountMaxNotesCharacterCount, 
+                       _WBSSavedAccountStoreDidChangeNotification, _WBSSavedPasswordStoreDidChangeNotification, 
                        _WBSStatusCodeGroupFromStatusCode, _WBSSuppressCloudKitBookmarkMigrationForCyclerTestPreferenceKey, 
                        _WBSTeamIdentifierFromAuditToken, __WBSLocalizedString, __WBSLocalizedStringWithCurrentUserLocale, 
                        __WBSRunOnceImpl, _canonicalizedCharacterClasses, _parseCustomCharacterClass, 
@@ -127,23 +128,25 @@ exports:
                        WBSChangePasswordURLManager, WBSCloudBookmarksRemoteMigrationInfo, 
                        WBSCloudKitContainerManateeObserver, WBSCloudKitThrottler, 
                        WBSConfigurationDataTransformer, WBSConfigurationDownloader, 
-                       WBSCoreAnalyticsExtensionsStatistics, WBSCoreClass, WBSDontSaveMarker, 
-                       WBSExtensionTelemetryData, WBSFeatureAvailability, WBSFetchedCloudTabDeviceOrCloseRequest, 
-                       WBSFileLogger, WBSKeyBagLockStatusChangedHandlerToken, WBSKeyBagLockStatusManager, 
-                       WBSKeychainCredentialNotificationMonitor, WBSLazyURLCredentialCache, 
-                       WBSMaxConsecutivePasswordRule, WBSMaxLengthPasswordRule, WBSMemoryFootprint, 
-                       WBSMemoryFootprintMallocZone, WBSMinLengthPasswordRule, WBSMutableOrderedDictionary, 
-                       WBSMutableOrderedSet, WBSPair, WBSPasswordAuditingEligibleDomainsManager, 
+                       WBSCoreAnalyticsExtensionsStatistics, WBSCoreClass, WBSDiagnosticStateCollector, 
+                       WBSDontSaveMarker, WBSExtensionTelemetryData, WBSFeatureAvailability, 
+                       WBSFetchedCloudTabDeviceOrCloseRequest, WBSFileLogger, WBSKeyBagLockStatusChangedHandlerToken, 
+                       WBSKeyBagLockStatusManager, WBSKeychainCredentialNotificationMonitor, 
+                       WBSLazyURLCredentialCache, WBSMaxConsecutivePasswordRule, 
+                       WBSMaxLengthPasswordRule, WBSMemoryFootprint, WBSMemoryFootprintMallocZone, 
+                       WBSMinLengthPasswordRule, WBSMutableOrderedDictionary, WBSMutableOrderedSet, 
+                       WBSPair, WBSPasswordAuditingEligibleDomainsManager, WBSPasswordAuditor, 
                        WBSPasswordCharacterClass, WBSPasswordGenerationManager, WBSPasswordManagerURL, 
                        WBSPasswordRule, WBSPasswordRuleParser, WBSPasswordRuleSet, 
-                       WBSRemotePlistController, WBSRequiredPasswordRule, WBSSQLiteDatabase, 
-                       WBSSQLiteRow, WBSSQLiteRowEnumerator, WBSSQLiteStatement, 
+                       WBSPasswordWarningHideMarker, WBSRemotePlistController, WBSRequiredPasswordRule, 
+                       WBSSQLiteDatabase, WBSSQLiteRow, WBSSQLiteRowEnumerator, WBSSQLiteStatement, 
                        WBSSQLiteStatementCache, WBSSQLiteStore, WBSSafariBookmarksSyncAgentProxy, 
-                       WBSSandboxExtensionDataPair, WBSSavedPassword, WBSSavedPasswordAuditor, 
-                       WBSSavedPasswordChangeRequest, WBSSavedPasswordSidecar, WBSSavedPasswordStore, 
+                       WBSSandboxExtensionDataPair, WBSSavedAccount, WBSSavedAccountChangeRequest, 
+                       WBSSavedAccountSidecar, WBSSavedAccountStore, WBSSavedPassword, 
+                       WBSSavedPasswordAuditor, WBSSavedPasswordChangeRequest, WBSSavedPasswordStore, 
                        WBSScopeExitHandler, WBSSoftLinkingUtilities, WBSTOTPGenerator, 
                        WBSURLCredentialCache, WBSUnifiedBarAnalyticsRecorder, WBSUserDefaultObservation, 
-                       _WBSSavedPasswordPartialCredential ]
+                       _WBSSavedAccountPartialCredential ]
     objc-ivars:      [ WBSAnalyticsLogger._analyticsSynchronizationQueue, WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._has, 
                        WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._quickAction, 
                        WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._timestamp, 

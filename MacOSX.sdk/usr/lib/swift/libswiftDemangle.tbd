@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5A507C80-A0F8-382B-A9D4-0C11BD56F548
+    value:           613DF5B9-0357-32C7-A303-972E8C718142
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           316232E2-7E1A-3D43-BD15-5FD7F565B8F5
+    value:           2C178B04-CD07-3230-92E7-CDD50C2AC29B
 install-name:    '/usr/lib/swift/libswiftDemangle.dylib'
 current-version: 0
 exports:
@@ -18,8 +18,8 @@ exports:
                        __ZN5swift6Mangle21translateOperatorCharEc, __ZN5swift8Demangle10CharVector6appendEN4llvm9StringRefERNS0_11NodeFactoryE, 
                        __ZN5swift8Demangle10CharVector6appendEiRNS0_11NodeFactoryE, 
                        __ZN5swift8Demangle10CharVector6appendEyRNS0_11NodeFactoryE, 
-                       __ZN5swift8Demangle10isProtocolEN4llvm9StringRefE, __ZN5swift8Demangle10mangleNodeEPNS0_4NodeE, 
-                       __ZN5swift8Demangle10mangleNodeEPNS0_4NodeEN4llvm12function_refIFS2_NS0_21SymbolicReferenceKindEPKvEEE, 
+                       __ZN5swift8Demangle10failAssertEPKcjPNS0_4NodeES2_, __ZN5swift8Demangle10isProtocolEN4llvm9StringRefE, 
+                       __ZN5swift8Demangle10mangleNodeEPNS0_4NodeE, __ZN5swift8Demangle10mangleNodeEPNS0_4NodeEN4llvm12function_refIFS2_NS0_21SymbolicReferenceKindEPKvEEE, 
                        __ZN5swift8Demangle10mangleNodeEPNS0_4NodeEN4llvm12function_refIFS2_NS0_21SymbolicReferenceKindEPKvEEERNS0_11NodeFactoryE, 
                        __ZN5swift8Demangle11NodeFactory10createNodeENS0_4Node4KindE, 
                        __ZN5swift8Demangle11NodeFactory10createNodeENS0_4Node4KindEPKc, 

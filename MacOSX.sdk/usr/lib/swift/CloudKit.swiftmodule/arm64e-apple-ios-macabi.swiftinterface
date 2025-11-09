@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCloudKit -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name CloudKit
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCloudKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CloudKit
+// swift-module-flags-ignorable: -user-module-version 1950.31.1
 @_exported import CloudKit
 import Foundation
 import Swift
@@ -77,62 +78,81 @@ extension CloudKit.CKDatabase {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @nonobjc extension CloudKit.CKDatabase {
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @discardableResult
   public func configuredWith<R>(configuration: CloudKit.CKOperation.Configuration? = nil, group: CloudKit.CKOperationGroup? = nil, body: (_ configuredDatabase: CloudKit.CKDatabase) throws -> R) rethrows -> R
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @discardableResult
   public func configuredWith<R>(configuration: CloudKit.CKOperation.Configuration? = nil, group: CloudKit.CKOperationGroup? = nil, body: (_ configuredDatabase: CloudKit.CKDatabase) async throws -> R) async rethrows -> R
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetch(withRecordIDs recordIDs: [CloudKit.CKRecord.ID], desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, completionHandler: @escaping (Swift.Result<[CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKRecord, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func records(for ids: [CloudKit.CKRecord.ID], desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil) async throws -> [CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKRecord, Swift.Error>]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func modifyRecords(saving recordsToSave: [CloudKit.CKRecord], deleting recordIDsToDelete: [CloudKit.CKRecord.ID], savePolicy: CloudKit.CKModifyRecordsOperation.RecordSavePolicy = .ifServerRecordUnchanged, atomically: Swift.Bool = true, completionHandler: @escaping (Swift.Result<(saveResults: [CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKRecord, Swift.Error>], deleteResults: [CloudKit.CKRecord.ID : Swift.Result<Swift.Void, Swift.Error>]), Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func modifyRecords(saving recordsToSave: [CloudKit.CKRecord], deleting recordIDsToDelete: [CloudKit.CKRecord.ID], savePolicy: CloudKit.CKModifyRecordsOperation.RecordSavePolicy = .ifServerRecordUnchanged, atomically: Swift.Bool = true) async throws -> (saveResults: [CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKRecord, Swift.Error>], deleteResults: [CloudKit.CKRecord.ID : Swift.Result<Swift.Void, Swift.Error>])
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetch(withQuery query: CloudKit.CKQuery, inZoneWith zoneID: CloudKit.CKRecordZone.ID? = nil, desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, resultsLimit: Swift.Int = CKQueryOperation.maximumResults, completionHandler: @escaping (Swift.Result<(matchResults: [(CloudKit.CKRecord.ID, Swift.Result<CloudKit.CKRecord, Swift.Error>)], queryCursor: CloudKit.CKQueryOperation.Cursor?), Swift.Error>) -> Swift.Void)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetch(withCursor queryCursor: CloudKit.CKQueryOperation.Cursor, desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, resultsLimit: Swift.Int = CKQueryOperation.maximumResults, completionHandler: @escaping (Swift.Result<(matchResults: [(CloudKit.CKRecord.ID, Swift.Result<CloudKit.CKRecord, Swift.Error>)], queryCursor: CloudKit.CKQueryOperation.Cursor?), Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func records(matching query: CloudKit.CKQuery, inZoneWith zoneID: CloudKit.CKRecordZone.ID? = nil, desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, resultsLimit: Swift.Int = CKQueryOperation.maximumResults) async throws -> (matchResults: [(CloudKit.CKRecord.ID, Swift.Result<CloudKit.CKRecord, Swift.Error>)], queryCursor: CloudKit.CKQueryOperation.Cursor?)
   #endif
 
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func records(continuingMatchFrom queryCursor: CloudKit.CKQueryOperation.Cursor, desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, resultsLimit: Swift.Int = CKQueryOperation.maximumResults) async throws -> (matchResults: [(CloudKit.CKRecord.ID, Swift.Result<CloudKit.CKRecord, Swift.Error>)], queryCursor: CloudKit.CKQueryOperation.Cursor?)
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetch(withRecordZoneIDs zoneIDs: [CloudKit.CKRecordZone.ID], completionHandler: @escaping (Swift.Result<[CloudKit.CKRecordZone.ID : Swift.Result<CloudKit.CKRecordZone, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func recordZones(for ids: [CloudKit.CKRecordZone.ID]) async throws -> [CloudKit.CKRecordZone.ID : Swift.Result<CloudKit.CKRecordZone, Swift.Error>]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func modifyRecordZones(saving recordZonesToSave: [CloudKit.CKRecordZone], deleting recordZoneIDsToDelete: [CloudKit.CKRecordZone.ID], completionHandler: @escaping (Swift.Result<(saveResults: [CloudKit.CKRecordZone.ID : Swift.Result<CloudKit.CKRecordZone, Swift.Error>], deleteResults: [CloudKit.CKRecordZone.ID : Swift.Result<Swift.Void, Swift.Error>]), Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func modifyRecordZones(saving recordZonesToSave: [CloudKit.CKRecordZone], deleting recordZoneIDsToDelete: [CloudKit.CKRecordZone.ID]) async throws -> (saveResults: [CloudKit.CKRecordZone.ID : Swift.Result<CloudKit.CKRecordZone, Swift.Error>], deleteResults: [CloudKit.CKRecordZone.ID : Swift.Result<Swift.Void, Swift.Error>])
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetch(withSubscriptionIDs subscriptionIDs: [CloudKit.CKSubscription.ID], completionHandler: @escaping (Swift.Result<[CloudKit.CKSubscription.ID : Swift.Result<CloudKit.CKSubscription, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func subscriptions(for ids: [CloudKit.CKSubscription.ID]) async throws -> [CloudKit.CKSubscription.ID : Swift.Result<CloudKit.CKSubscription, Swift.Error>]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func modifySubscriptions(saving subscriptionsToSave: [CloudKit.CKSubscription], deleting subscriptionIDsToDelete: [CloudKit.CKSubscription.ID], completionHandler: @escaping (Swift.Result<(saveResults: [CloudKit.CKSubscription.ID : Swift.Result<CloudKit.CKSubscription, Swift.Error>], deleteResults: [CloudKit.CKSubscription.ID : Swift.Result<Swift.Void, Swift.Error>]), Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func modifySubscriptions(saving subscriptionsToSave: [CloudKit.CKSubscription], deleting subscriptionIDsToDelete: [CloudKit.CKSubscription.ID]) async throws -> (saveResults: [CloudKit.CKSubscription.ID : Swift.Result<CloudKit.CKSubscription, Swift.Error>], deleteResults: [CloudKit.CKSubscription.ID : Swift.Result<Swift.Void, Swift.Error>])
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public enum DatabaseChange {
     public struct Modification {
       public let zoneID: CloudKit.CKRecordZone.ID
@@ -142,12 +162,15 @@ extension CloudKit.CKDatabase {
       public let purged: Swift.Bool
     }
   }
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetchDatabaseChanges(since changeToken: CloudKit.CKServerChangeToken?, resultsLimit: Swift.Int? = nil, completionHandler: @escaping (Swift.Result<(modifications: [CloudKit.CKDatabase.DatabaseChange.Modification], deletions: [CloudKit.CKDatabase.DatabaseChange.Deletion], changeToken: CloudKit.CKServerChangeToken, moreComing: Swift.Bool), Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func databaseChanges(since changeToken: CloudKit.CKServerChangeToken?, resultsLimit: Swift.Int? = nil) async throws -> (modifications: [CloudKit.CKDatabase.DatabaseChange.Modification], deletions: [CloudKit.CKDatabase.DatabaseChange.Deletion], changeToken: CloudKit.CKServerChangeToken, moreComing: Swift.Bool)
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public enum RecordZoneChange {
     public struct Modification {
       public let record: CloudKit.CKRecord
@@ -157,9 +180,11 @@ extension CloudKit.CKDatabase {
       public let recordType: CloudKit.CKRecord.RecordType
     }
   }
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetchRecordZoneChanges(inZoneWith zoneID: CloudKit.CKRecordZone.ID, since changeToken: CloudKit.CKServerChangeToken?, desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, resultsLimit: Swift.Int? = nil, completionHandler: @escaping (Swift.Result<(modificationResultsByID: [CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKDatabase.RecordZoneChange.Modification, Swift.Error>], deletions: [CloudKit.CKDatabase.RecordZoneChange.Deletion], changeToken: CloudKit.CKServerChangeToken, moreComing: Swift.Bool), Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func recordZoneChanges(inZoneWith zoneID: CloudKit.CKRecordZone.ID, since changeToken: CloudKit.CKServerChangeToken?, desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, resultsLimit: Swift.Int? = nil) async throws -> (modificationResultsByID: [CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKDatabase.RecordZoneChange.Modification, Swift.Error>], deletions: [CloudKit.CKDatabase.RecordZoneChange.Deletion], changeToken: CloudKit.CKServerChangeToken, moreComing: Swift.Bool)
   #endif
 
@@ -303,8 +328,11 @@ extension CloudKit.CKSubscription {
 @nonobjc extension CloudKit.CKShare {
   @available(swift 4.2)
   public enum SystemFieldKey {
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let title: CloudKit.CKRecord.FieldKey
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let thumbnailImageData: CloudKit.CKRecord.FieldKey
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let shareType: CloudKit.CKRecord.FieldKey
   }
 }
@@ -364,59 +392,77 @@ extension CloudKit.CKContainer {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @nonobjc extension CloudKit.CKContainer {
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @discardableResult
   public func configuredWith<R>(configuration: CloudKit.CKOperation.Configuration? = nil, group: CloudKit.CKOperationGroup? = nil, body: (_ configuredContainer: CloudKit.CKContainer) throws -> R) rethrows -> R
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @discardableResult
   public func configuredWith<R>(configuration: CloudKit.CKOperation.Configuration? = nil, group: CloudKit.CKOperationGroup? = nil, body: (_ configuredContainer: CloudKit.CKContainer) async throws -> R) async rethrows -> R
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func discoverUserIdentities(forEmailAddresses emails: [Swift.String], completionHandler: @escaping (Swift.Result<[Swift.String : CloudKit.CKUserIdentity], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func userIdentities(forEmailAddresses emails: [Swift.String]) async throws -> [Swift.String : CloudKit.CKUserIdentity]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func discoverUserIdentities(forPhoneNumbers phoneNumbers: [Swift.String], completionHandler: @escaping (Swift.Result<[Swift.String : CloudKit.CKUserIdentity], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func userIdentities(forPhoneNumbers phoneNumbers: [Swift.String]) async throws -> [Swift.String : CloudKit.CKUserIdentity]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func discoverUserIdentities(forUserRecordIDs userRecordIDs: [CloudKit.CKRecord.ID], completionHandler: @escaping (Swift.Result<[CloudKit.CKRecord.ID : CloudKit.CKUserIdentity], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func userIdentities(forUserRecordIDs userRecordIDs: [CloudKit.CKRecord.ID]) async throws -> [CloudKit.CKRecord.ID : CloudKit.CKUserIdentity]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetchShareParticipants(forEmailAddresses emails: [Swift.String], completionHandler: @escaping (Swift.Result<[Swift.String : Swift.Result<CloudKit.CKShare.Participant, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func shareParticipants(forEmailAddresses emails: [Swift.String]) async throws -> [Swift.String : Swift.Result<CloudKit.CKShare.Participant, Swift.Error>]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetchShareParticipants(forPhoneNumbers phoneNumbers: [Swift.String], completionHandler: @escaping (Swift.Result<[Swift.String : Swift.Result<CloudKit.CKShare.Participant, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func shareParticipants(forPhoneNumbers phoneNumbers: [Swift.String]) async throws -> [Swift.String : Swift.Result<CloudKit.CKShare.Participant, Swift.Error>]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetchShareParticipants(forUserRecordIDs userRecordIDs: [CloudKit.CKRecord.ID], completionHandler: @escaping (Swift.Result<[CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKShare.Participant, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func shareParticipants(forUserRecordIDs userRecordIDs: [CloudKit.CKRecord.ID]) async throws -> [CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKShare.Participant, Swift.Error>]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func fetchShareMetadatas(for urls: [Foundation.URL], completionHandler: @escaping (Swift.Result<[Foundation.URL : Swift.Result<CloudKit.CKShare.Metadata, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func shareMetadatas(for urls: [Foundation.URL]) async throws -> [Foundation.URL : Swift.Result<CloudKit.CKShare.Metadata, Swift.Error>]
   #endif
 
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func accept(_ metadatas: [CloudKit.CKShare.Metadata], completionHandler: @escaping (Swift.Result<[CloudKit.CKShare.Metadata : Swift.Result<CloudKit.CKShare, Swift.Error>], Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func accept(_ metadatas: [CloudKit.CKShare.Metadata]) async throws -> [CloudKit.CKShare.Metadata : Swift.Result<CloudKit.CKShare, Swift.Error>]
   #endif
 
@@ -502,12 +548,15 @@ public struct CKRecordKeyValueIterator : Swift.IteratorProtocol {
   public typealias RecordType = Swift.String
   public typealias FieldKey = Swift.String
   @available(swift 4.2)
+  @available(macOS 10.10, iOS 8.0, watchOS 3.0, *)
   public enum SystemType {
+    @available(macOS 10.10, iOS 8.0, watchOS 3.0, *)
     public static let userRecord: CloudKit.CKRecord.RecordType
     @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let share: CloudKit.CKRecord.RecordType
   }
   @available(swift 4.2)
+  @available(macOS 10.10, iOS 8.0, watchOS 3.0, *)
   public enum SystemFieldKey {
     @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let parent: CloudKit.CKRecord.RecordType
@@ -711,7 +760,9 @@ extension CloudKit.CKError {
 @available(macOS 10.10, iOS 8.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecordZone.ID {
   convenience public init(zoneName: Swift.String = CKRecordZone.ID.defaultZoneName, ownerName: Swift.String = CKCurrentUserDefaultName)
+  @available(macOS 10.10, iOS 8.0, watchOS 3.0, *)
   public static let `default`: CloudKit.CKRecordZone.ID
+  @available(macOS 10.10, iOS 8.0, watchOS 3.0, *)
   public static let defaultZoneName: Swift.String
 }
 @available(macOS 10.10, iOS 8.0, watchOS 3.0, *)

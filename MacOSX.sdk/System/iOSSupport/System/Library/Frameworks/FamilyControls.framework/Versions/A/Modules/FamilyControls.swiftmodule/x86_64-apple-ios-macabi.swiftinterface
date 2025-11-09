@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target x86_64-apple-ios15.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FamilyControls
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target x86_64-apple-ios15.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name FamilyControls
+// swift-module-flags-ignorable: -user-module-version 1021
 import Combine
 import CoreServices
 import Foundation
@@ -22,6 +23,7 @@ public enum FamilyControlsError : Foundation.LocalizedError {
   case invalidArgument
   case authorizationConflict
   case authorizationCanceled
+  case networkError
   public var errorDescription: Swift.String? {
     get
   }
@@ -48,12 +50,41 @@ public enum AuthorizationStatus : Swift.Int, Swift.Codable, Swift.CustomStringCo
     get
   }
 }
+@available(iOS 15.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, Icon == FamilyControls.FamilyActivityIconView {
+  public init(_ applicationToken: ManagedSettings.ApplicationToken)
+  public init(_ categoryToken: ManagedSettings.ActivityCategoryToken)
+  public init(_ webDomainToken: ManagedSettings.WebDomainToken)
+}
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct FamilyActivityTitleView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A17ActivityTitleViewV4bodyQrvp", 0) __
+}
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct FamilyActivityIconView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A16ActivityIconViewV4bodyQrvp", 0) __
+}
 @available(iOS 15.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct FamilyActivitySelection : Swift.Codable, Swift.Equatable {
-  @available(iOS 15.0, *)
+  @available(iOS 15.2, *)
   public let includeEntireCategory: Swift.Bool
   public var applicationTokens: Swift.Set<ManagedSettings.ApplicationToken>
   public var categoryTokens: Swift.Set<ManagedSettings.ActivityCategoryToken>

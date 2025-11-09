@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BE41003F-6646-3C96-ACCA-3699A5718678
+    value:           AFAAFCD1-3BE2-35AE-8FBE-619A7B7FC2B8
   - target:          x86_64-maccatalyst
-    value:           BE41003F-6646-3C96-ACCA-3699A5718678
+    value:           AFAAFCD1-3BE2-35AE-8FBE-619A7B7FC2B8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11FF91D2-70E5-3592-85DC-4BC2F2E93030
+    value:           ECD7C50B-BC92-351C-AA27-D1F15A563E3F
   - target:          arm64e-maccatalyst
-    value:           11FF91D2-70E5-3592-85DC-4BC2F2E93030
+    value:           ECD7C50B-BC92-351C-AA27-D1F15A563E3F
 install-name:    '/System/Library/Frameworks/UserNotifications.framework/Versions/A/UserNotifications'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

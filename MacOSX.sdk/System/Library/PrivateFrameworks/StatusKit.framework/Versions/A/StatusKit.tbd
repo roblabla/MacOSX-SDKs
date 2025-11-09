@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3D00BAA8-1AA6-3894-89AB-C349CE029F1A
+    value:           4CD2C595-45EA-32BD-AF97-6A3E0A95FF87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           44AC56C5-9E0E-3FF5-9B8C-1D42179C88B3
+    value:           CBFD416C-289B-390D-9A76-E4ADFB0499CE
 install-name:    '/System/Library/PrivateFrameworks/StatusKit.framework/Versions/A/StatusKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

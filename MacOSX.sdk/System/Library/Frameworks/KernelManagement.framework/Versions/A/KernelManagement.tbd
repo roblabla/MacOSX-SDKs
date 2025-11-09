@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E9C1578A-BB7A-321D-BADB-3C6F13A89589
+    value:           2FC99150-D596-3DBD-9DEA-90B24DD89776
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BBC68FCD-7A96-3338-BA2C-189603EBCB7D
+    value:           25154694-4887-32F2-9CB7-DDA28A048332
 install-name:    '/System/Library/Frameworks/KernelManagement.framework/Versions/A/KernelManagement'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

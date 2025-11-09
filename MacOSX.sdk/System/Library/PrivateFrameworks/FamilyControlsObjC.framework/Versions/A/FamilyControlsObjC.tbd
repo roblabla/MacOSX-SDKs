@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6FA7530A-6AD7-3614-B302-4BE3E22A9D94
+    value:           228AB4AB-3EBE-3826-9456-F546E4F9F3F0
   - target:          x86_64-maccatalyst
-    value:           6FA7530A-6AD7-3614-B302-4BE3E22A9D94
+    value:           228AB4AB-3EBE-3826-9456-F546E4F9F3F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE0465A4-FC3A-3784-8712-9DD7DCB97491
+    value:           E9F85FD8-7632-3B95-94B4-98359BC3D566
   - target:          arm64e-maccatalyst
-    value:           BE0465A4-FC3A-3784-8712-9DD7DCB97491
+    value:           E9F85FD8-7632-3B95-94B4-98359BC3D566
 install-name:    '/System/Library/PrivateFrameworks/FamilyControlsObjC.framework/Versions/A/FamilyControlsObjC'
-current-version: 1017
+current-version: 1021
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

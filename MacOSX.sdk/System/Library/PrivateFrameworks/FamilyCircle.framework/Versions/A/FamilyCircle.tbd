@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A0300B54-FB69-3C91-AD49-91ADDF2BE658
+    value:           9EC348A8-3677-3AD6-9BB1-7066E8D3D537
   - target:          x86_64-maccatalyst
-    value:           A0300B54-FB69-3C91-AD49-91ADDF2BE658
+    value:           9EC348A8-3677-3AD6-9BB1-7066E8D3D537
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66078D92-7E91-38A3-A502-502D6C74E5EF
+    value:           31401BB3-14BB-3BCF-A69E-020C74346ECC
   - target:          arm64e-maccatalyst
-    value:           66078D92-7E91-38A3-A502-502D6C74E5EF
+    value:           31401BB3-14BB-3BCF-A69E-020C74346ECC
 install-name:    '/System/Library/PrivateFrameworks/FamilyCircle.framework/Versions/A/FamilyCircle'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

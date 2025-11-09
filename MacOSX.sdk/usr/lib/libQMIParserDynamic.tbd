@@ -3,20 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AA66E1E0-0C9D-3529-AB5F-FDB23F6D912D
+    value:           3E484A70-89B5-3ABD-A196-28794E88B022
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           06F4EA0B-6EFB-31EA-A836-319482627521
+    value:           383267A5-F188-361E-82E4-CDF17177DCEC
 install-name:    '/usr/lib/libQMIParserDynamic.dylib'
 exports:
-  - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __ZN3qmi11MessageBase13validateMsgIdEt, __ZN3qmi11MessageBase14validateBufferEv, 
                        __ZN3qmi11MessageBase20sParsingErrorHandlerE, __ZN3qmi11MessageBase22setParsingErrorHandlerEPFbttPKhmE, 

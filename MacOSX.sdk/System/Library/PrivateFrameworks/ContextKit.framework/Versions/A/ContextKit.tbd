@@ -3,17 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D270BA3E-E2A6-390C-9B97-E6E65EFE3BFD
+    value:           27A0C71D-AD67-3D23-88E2-4B5ED7D9C31D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4D6F3D6-DA37-3CED-9ED5-64C5485820D5
+    value:           659114F7-90D2-30A9-86C8-CBBD8EA67142
 install-name:    '/System/Library/PrivateFrameworks/ContextKit.framework/Versions/A/ContextKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _CKContextKitNotification_ConfigurationUpdate, _CKContextTagTypeAddress, 
-                       _CKContextTagTypeDateTime, _CKContextTagTypePersonReal, _CKContextTagTypePhoneNumber, 
-                       _CKContextTagTypeTitle, _CKContextTagTypeURL, _ContextKitErrorDomain, 
+    symbols:         [ _CKContextKitNotification_ConfigurationUpdate, _ContextKitErrorDomain, 
                        _ContextKitVersionNumber, _ContextKitVersionString ]
     objc-classes:    [ CKContextClient, CKContextCompleter, CKContextCountedItem, 
                        CKContextFingerprint, CKContextFingerprintMinHash, CKContextGlobals, 

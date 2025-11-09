@@ -3,17 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0848A29F-9A88-390C-85DF-3480BBC44611
+    value:           5D183B49-B987-326A-93BB-48A1D7AE8956
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5151BE55-9208-34CC-B624-ED8E811D0219
+    value:           CF45D17B-0199-3847-8F9B-13DA21887536
 install-name:    '/System/Library/PrivateFrameworks/UARPiCloud.framework/Versions/A/UARPiCloud'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _GetInternalStorageDirectoryPath, _UARPiCloudVersionNumber, 
-                       _UARPiCloudVersionString, _getEntryForKey, _kUARPStringInternalStorageDirectoryPath, 
-                       _saveEntryForKey ]
+    symbols:         [ _InternalStorageDirectoryPath, _UARPiCloudVersionNumber, _UARPiCloudVersionString, 
+                       _getCachedAccessories, _getEntryForKey, _getSuperBinaryVersionForAsset, 
+                       _saveEntryForKey, _uarpFilepathForRemotePath ]
     objc-classes:    [ CHIPAccessoriesRecord, UARPiCloudAccessory, UARPiCloudAccessoryRecord, 
-                       UARPiCloudContainer, UARPiCloudManager, UARPiCloudZone ]
+                       UARPiCloudAssetManager, UARPiCloudContainer, UARPiCloudManager, 
+                       UARPiCloudZone ]
+    objc-ivars:      [ UARPiCloudAssetManager._accessories, UARPiCloudAssetManager._assetManager, 
+                       UARPiCloudAssetManager._cloudManager, UARPiCloudAssetManager._log, 
+                       UARPiCloudAssetManager._workQueue ]
 ...

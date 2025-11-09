@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           01AAEE39-F27C-32AF-87B1-F7306B506184
+    value:           BC8E78A6-76DF-3DBA-9EE9-F19E286C3E6B
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A6791C37-BBF4-3414-B004-C3F12394A6CF
+    value:           1490D410-FA69-3AA4-B672-D0C9A9C8FC8C
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3693.40
+current-version: 3696.80.82
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _MFAutomaticHorizontalDirectionalEdgeInsets, _MFAutomaticHorizontalEdgeInsets, 
@@ -40,12 +40,12 @@ exports:
                        _MFImageGlyphMailDropDownload, _MFImageGlyphMailDropDownloaded, 
                        _MFImageGlyphMailDropExpired, _MFImageGlyphMarkElipsis, _MFImageGlyphMarkup, 
                        _MFImageGlyphMessageListChevronSingle, _MFImageGlyphMessageListChevronThread, 
-                       _MFImageGlyphMessageListFilter, _MFImageGlyphMessageListFilterEnabled, 
-                       _MFImageGlyphMessageListMore, _MFImageGlyphMore, _MFImageGlyphMoreActions, 
-                       _MFImageGlyphMoreActionsFill, _MFImageGlyphMove, _MFImageGlyphMute, 
-                       _MFImageGlyphNotify, _MFImageGlyphOpenEnvelope, _MFImageGlyphOpenInNewWindow, 
-                       _MFImageGlyphPhotos, _MFImageGlyphPrimary, _MFImageGlyphPrint, 
-                       _MFImageGlyphPromotion, _MFImageGlyphProtectedEnvelope, _MFImageGlyphQuicklook, 
+                       _MFImageGlyphMessageListFilter, _MFImageGlyphMessageListMore, 
+                       _MFImageGlyphMore, _MFImageGlyphMoreActions, _MFImageGlyphMoreActionsFill, 
+                       _MFImageGlyphMove, _MFImageGlyphMute, _MFImageGlyphNotify, 
+                       _MFImageGlyphOpenEnvelope, _MFImageGlyphOpenInNewWindow, _MFImageGlyphPhotos, 
+                       _MFImageGlyphPrimary, _MFImageGlyphPrint, _MFImageGlyphPromotion, 
+                       _MFImageGlyphProtectedEnvelope, _MFImageGlyphQuestion, _MFImageGlyphQuicklook, 
                        _MFImageGlyphRead, _MFImageGlyphReadLater, _MFImageGlyphReply, 
                        _MFImageGlyphReplyAll, _MFImageGlyphReplyAllFill, _MFImageGlyphReplyFill, 
                        _MFImageGlyphRevealAction, _MFImageGlyphSave, _MFImageGlyphSaveAll, 

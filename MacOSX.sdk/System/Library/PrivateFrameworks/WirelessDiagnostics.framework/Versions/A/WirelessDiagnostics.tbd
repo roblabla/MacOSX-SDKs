@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A257ACD8-BEC5-3529-921A-82211B1E82DF
+    value:           BBAF7B14-14D0-31CD-9C29-FF0B0B9BC386
   - target:          x86_64-maccatalyst
-    value:           A257ACD8-BEC5-3529-921A-82211B1E82DF
+    value:           BBAF7B14-14D0-31CD-9C29-FF0B0B9BC386
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E06E978-C894-3E21-938B-40894B4BAD4C
+    value:           8325E375-FDB6-3832-B1DF-1D81DFF5D81E
   - target:          arm64e-maccatalyst
-    value:           1E06E978-C894-3E21-938B-40894B4BAD4C
+    value:           8325E375-FDB6-3832-B1DF-1D81DFF5D81E
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/WirelessDiagnostics'
 current-version: 757
 reexported-libraries:
@@ -25,8 +25,6 @@ exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTI12PRNGenerator, __ZTIN3awd10AWDMessageE, __ZTIN3ctu20SharedSynchronizableI12PRNGeneratorEE, 
                        __ZTIN3ctu8LoggableIN3awd18AWDBasicConfigTypeENS_11OsLogLoggerEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN3awd20ServerConnectionInfoENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIbNS_9allocatorIbEEEE, __ZTINSt3__120__shared_ptr_emplaceIjNS_9allocatorIjEEEE, 
@@ -37,8 +35,6 @@ exports:
                        __ZTSN3ctu8LoggableIN3awd18AWDBasicConfigTypeENS_11OsLogLoggerEEE, 
                        __ZTSNSt3__110shared_ptrIN3awd7profile22ComponentConfigurationEE27__shared_ptr_default_deleteIS3_S3_EE, 
                        __ZTSNSt3__110shared_ptrINS_6vectorIhNS_9allocatorIhEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN3awd20ServerConnectionInfoENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIbNS_9allocatorIbEEEE, __ZTSNSt3__120__shared_ptr_emplaceIjNS_9allocatorIjEEEE, 
@@ -717,17 +713,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A6A4BAD2-4639-3677-8EF2-721B58C111F2
+    value:           4F027C0D-BB6A-3D77-AA1D-67C75BACC69D
   - target:          x86_64-maccatalyst
-    value:           A6A4BAD2-4639-3677-8EF2-721B58C111F2
+    value:           4F027C0D-BB6A-3D77-AA1D-67C75BACC69D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0080DF6C-2A52-3E2C-AEE4-0648C3A53513
+    value:           CAFA1486-B9EB-3BA6-A266-A21BBCACE742
   - target:          arm64e-maccatalyst
-    value:           0080DF6C-2A52-3E2C-AEE4-0648C3A53513
+    value:           CAFA1486-B9EB-3BA6-A266-A21BBCACE742
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupportFramework.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

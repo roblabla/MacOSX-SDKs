@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CE6969CC-859A-30E3-B4E4-DEF81F60F3F9
+    value:           C0F3CDA7-BDE6-3464-9298-07DB0124FFB8
   - target:          x86_64-maccatalyst
-    value:           CE6969CC-859A-30E3-B4E4-DEF81F60F3F9
+    value:           C0F3CDA7-BDE6-3464-9298-07DB0124FFB8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C479864-DBF4-3B44-8733-0D6C355D02D5
+    value:           EC6C6C18-40A5-3846-8FFF-FB234E816AA5
   - target:          arm64e-maccatalyst
-    value:           5C479864-DBF4-3B44-8733-0D6C355D02D5
+    value:           EC6C6C18-40A5-3846-8FFF-FB234E816AA5
 install-name:    '/usr/lib/swift/libswiftCoreML.dylib'
-current-version: 1127.60.2
+current-version: 1127.100.41
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -185,6 +185,10 @@ exports:
                        '_$sSf6CoreMLE18multiArrayDataTypeSo07MLMultideF0VvgZ', '_$sSn6CoreMLSiRszrlE8relative17toShapedArrayAxisSnySiGAD_tF', 
                        '_$sSnyxG6CoreML28MLShapedArrayRangeExpressionABSiRszrlMc', 
                        '_$sSnyxG6CoreML28MLShapedArrayRangeExpressionABSiRszrlWP', 
+                       '_$sSo12MLMultiArrayC6CoreMLE15withUnsafeBytesyxxSWKXEKlF', 
+                       '_$sSo12MLMultiArrayC6CoreMLE22withUnsafeMutableBytesyxxSw_SaySiGtKXEKlF', 
+                       '_$sSo12MLMultiArrayC6CoreMLE23withUnsafeBufferPointer6ofType_q_xm_q_SRyxGKXEtKAC08MLShapedB6ScalarRzr0_lF', 
+                       '_$sSo12MLMultiArrayC6CoreMLE30withUnsafeMutableBufferPointer6ofType_q_xm_q_SryxG_SaySiGtKXEtKAC08MLShapedB6ScalarRzr0_lF', 
                        '_$sSo12MLMultiArrayC6CoreMLEyABxKcSlRzSd7ElementRtzlufC', 
                        '_$sSo12MLMultiArrayC6CoreMLEyABxKcSlRzSd7ElementRtzlufc', 
                        '_$sSo12MLMultiArrayC6CoreMLEyABxKcSlRzSf7ElementRtzlufC', 

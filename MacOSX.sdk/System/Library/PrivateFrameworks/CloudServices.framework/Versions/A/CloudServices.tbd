@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           652B7E75-B0DA-3E94-BDA8-5B3DB1CC7A5C
+    value:           A62127D5-5E30-3EE0-801F-5D957D0935F0
   - target:          x86_64-maccatalyst
-    value:           652B7E75-B0DA-3E94-BDA8-5B3DB1CC7A5C
+    value:           A62127D5-5E30-3EE0-801F-5D957D0935F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D8E3D92-2030-3325-99DD-9FC274D17A99
+    value:           C7FADF29-B415-3584-A344-D1577D357470
   - target:          arm64e-maccatalyst
-    value:           6D8E3D92-2030-3325-99DD-9FC274D17A99
+    value:           C7FADF29-B415-3584-A344-D1577D357470
 install-name:    '/System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/CloudServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

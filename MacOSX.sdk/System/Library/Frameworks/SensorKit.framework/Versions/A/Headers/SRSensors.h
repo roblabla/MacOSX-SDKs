@@ -212,4 +212,20 @@ SR_EXTERN SRSensor const SRSensorSiriSpeechMetrics API_AVAILABLE(ios(15.0)) API_
  */
 SR_EXTERN SRSensor const SRSensorTelephonySpeechMetrics API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
 
+/*!
+ * @const SRSensorAmbientPressure
+ *
+ * @brief
+ * Ambient pressure sensor stream
+ *
+ * @discussion
+ * This stream stores simple pressure and temperature masurements including:
+ * @textblock
+ *   - Pressure and temperature
+ *   - Date when metric was collected
+ * @/textblock
+ *
+ * Fetches from this stream return objects of type NSArray<CMRecordedPressureData *> * as defined in the CoreMotion framework.
+ */
+SR_EXTERN SRSensor const SRSensorAmbientPressure API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
 NS_ASSUME_NONNULL_END

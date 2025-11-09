@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E61FB1BE-1319-31DA-B402-3EF16F79B2B5
+    value:           E97EA4F9-73D5-3969-AFDB-CE036D8B7377
   - target:          x86_64-maccatalyst
-    value:           E61FB1BE-1319-31DA-B402-3EF16F79B2B5
+    value:           E97EA4F9-73D5-3969-AFDB-CE036D8B7377
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           912D6FAE-D485-32B5-B246-F1AF25FC3D53
+    value:           2273B772-B057-3F54-9F55-0B5AB8861EBB
   - target:          arm64e-maccatalyst
-    value:           912D6FAE-D485-32B5-B246-F1AF25FC3D53
+    value:           2273B772-B057-3F54-9F55-0B5AB8861EBB
 install-name:    '/usr/lib/libtidy.A.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

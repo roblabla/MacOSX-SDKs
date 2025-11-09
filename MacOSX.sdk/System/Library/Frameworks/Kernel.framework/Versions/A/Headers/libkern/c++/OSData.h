@@ -35,6 +35,7 @@
 #include <libkern/c++/OSPtr.h>
 #include <os/base.h>
 
+
 class OSData;
 class OSString;
 
@@ -158,6 +159,8 @@ public:
 		unsigned int   numBytes);
 
 
+
+
 /*!
  * @function withBytesNoCopy
  *
@@ -189,6 +192,8 @@ public:
 	static OSPtr<OSData> withBytesNoCopy(
 		void         * bytes,
 		unsigned int   numBytes);
+
+
 
 
 /*!
@@ -293,6 +298,8 @@ public:
 		unsigned int   numBytes);
 
 
+
+
 /*!
  * @function initWithBytesNoCopy
  *
@@ -321,6 +328,8 @@ public:
 	virtual bool initWithBytesNoCopy(
 		void         * bytes,
 		unsigned int   numBytes);
+
+
 
 
 /*!
@@ -532,6 +541,8 @@ public:
 		unsigned int   numBytes);
 
 
+
+
 /*!
  * @function appendBytes
  *
@@ -740,6 +751,13 @@ public:
 private:
 	virtual void setDeallocFunction(DeallocFunction func);
 	bool isSerializable(void);
+
+private:
+	enum ValueAcquisition {
+		kValueCopy,
+		kValueNoCopy
+	};
+
 
 private:
 	OSMetaClassDeclareReservedUsedX86(OSData, 0);

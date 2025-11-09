@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A3AD026A-0F4F-3D3A-8480-92FC06FB337E
+    value:           D16D88C8-0AE2-342F-9A8E-529392480A6E
   - target:          x86_64-maccatalyst
-    value:           A3AD026A-0F4F-3D3A-8480-92FC06FB337E
+    value:           D16D88C8-0AE2-342F-9A8E-529392480A6E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0C20A5D-EB17-3144-82CC-DB29BE5BF8AD
+    value:           0CA3B70C-2FCA-3105-A54F-463067EC8ECC
   - target:          arm64e-maccatalyst
-    value:           E0C20A5D-EB17-3144-82CC-DB29BE5BF8AD
+    value:           0CA3B70C-2FCA-3105-A54F-463067EC8ECC
 install-name:    '/System/Library/PrivateFrameworks/GameKitServices.framework/Versions/A/GameKitServices'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -105,17 +105,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           94D90707-35FA-3D6F-AA18-F05D1FEB65DE
+    value:           3BA802AB-6888-3CF3-95C4-543845544DF0
   - target:          x86_64-maccatalyst
-    value:           94D90707-35FA-3D6F-AA18-F05D1FEB65DE
+    value:           3BA802AB-6888-3CF3-95C4-543845544DF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91D66FE3-D9D6-36EC-A4CF-55AF5B094AB0
+    value:           A5A4E654-9891-3F56-BBBA-AA1F912AE837
   - target:          arm64e-maccatalyst
-    value:           91D66FE3-D9D6-36EC-A4CF-55AF5B094AB0
+    value:           A5A4E654-9891-3F56-BBBA-AA1F912AE837
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/LegacyHandle.framework/Versions/A/LegacyHandle'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -128,17 +128,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           838071CC-3CB5-3A91-BFA0-FFFC418A571E
+    value:           8CBBB89E-7AB4-3E3B-8A52-0886E076FA67
   - target:          x86_64-maccatalyst
-    value:           838071CC-3CB5-3A91-BFA0-FFFC418A571E
+    value:           8CBBB89E-7AB4-3E3B-8A52-0886E076FA67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E74FF9B1-B264-37CC-8663-69957D5062F5
+    value:           86AF124C-3D4A-3611-8F68-72AF8F5C7A41
   - target:          arm64e-maccatalyst
-    value:           E74FF9B1-B264-37CC-8663-69957D5062F5
+    value:           86AF124C-3D4A-3611-8F68-72AF8F5C7A41
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/snatmap.framework/Versions/A/snatmap'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -151,17 +151,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA37A59D-5516-3088-9670-DCEC6787267D
+    value:           045E4AF8-EFB9-34CA-9276-60BE037479ED
   - target:          x86_64-maccatalyst
-    value:           FA37A59D-5516-3088-9670-DCEC6787267D
+    value:           045E4AF8-EFB9-34CA-9276-60BE037479ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E52159AA-9538-3019-AF3D-B1448705978D
+    value:           FF196417-92B5-3F78-AA86-199160E6629D
   - target:          arm64e-maccatalyst
-    value:           E52159AA-9538-3019-AF3D-B1448705978D
+    value:           FF196417-92B5-3F78-AA86-199160E6629D
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

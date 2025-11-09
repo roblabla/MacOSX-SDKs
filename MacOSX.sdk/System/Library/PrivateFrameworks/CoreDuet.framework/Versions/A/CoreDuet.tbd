@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BFE5CEBC-B808-3F63-AA63-2967D97B502D
+    value:           FD1B99FF-7E38-3FA4-A7F7-14A901CE45D3
   - target:          x86_64-maccatalyst
-    value:           BFE5CEBC-B808-3F63-AA63-2967D97B502D
+    value:           FD1B99FF-7E38-3FA4-A7F7-14A901CE45D3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B35EF884-7F04-3EEE-931A-B14975451803
+    value:           48E2F678-5214-39B4-A306-323B7CE75D8F
   - target:          arm64e-maccatalyst
-    value:           B35EF884-7F04-3EEE-931A-B14975451803
+    value:           48E2F678-5214-39B4-A306-323B7CE75D8F
 install-name:    '/System/Library/PrivateFrameworks/CoreDuet.framework/Versions/A/CoreDuet'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -170,16 +170,17 @@ exports:
                        _CDRateAndTotalLimiter, _CDRateLimiter, _CDSerializableKeyedData, 
                        _CDServerRequest, _CDSharedMemoryKeyValueStore, _CDSiriLearningSettings, 
                        _CDSizeMetric, _CDSizeMetricFamily, _CDSleepForAutoSu, _CDSleepPredictor, 
-                       _CDSleepPredictorMath, _CDSocialInteractionAdvisor, _CDSpotlightEventIndexer, 
-                       _CDSpotlightEventIndexerDataSource, _CDSpotlightItemRecorder, 
-                       _CDSpotlightItemRecorderOperation, _CDSpotlightItemUtils, 
-                       _CDSpotlightQuerier, _CDStats, _CDStatsPrinter, _CDStringTokenizer, 
-                       _CDSuggestedPerson, _CDTemporalInteractionAdvisor, _CDTopicMetadataKey, 
-                       _CDUserActivity, _CDVersionRecord, _DKActivityThrottler, _DKAggregateEventQueryResult, 
-                       _DKAirPlayPredictionCategory, _DKAirPlayPredictionMetadataKey, 
-                       _DKAlarmMetadataKey, _DKAlarmStateCategory, _DKAnyDoubleQuantity, 
-                       _DKAnyIntegerCategory, _DKAnyStringIdentifier, _DKAppActivityStreamTombstoneRequirement, 
-                       _DKAppClipUsageMetadataKey, _DKAppInstallMetadataKey, _DKAppIntentsStreamTombstoneRequirement, 
+                       _CDSleepPredictorMath, _CDSocialInteractionAdvisor, _CDSpotlightCachedContact, 
+                       _CDSpotlightContactResolver, _CDSpotlightEventIndexer, _CDSpotlightEventIndexerDataSource, 
+                       _CDSpotlightItemRecorder, _CDSpotlightItemRecorderOperation, 
+                       _CDSpotlightItemUtils, _CDSpotlightQuerier, _CDStats, _CDStatsPrinter, 
+                       _CDStringTokenizer, _CDSuggestedPerson, _CDTemporalInteractionAdvisor, 
+                       _CDTopicMetadataKey, _CDUserActivity, _CDVersionRecord, _DKActivityThrottler, 
+                       _DKAggregateEventQueryResult, _DKAirPlayPredictionCategory, 
+                       _DKAirPlayPredictionMetadataKey, _DKAlarmMetadataKey, _DKAlarmStateCategory, 
+                       _DKAnyDoubleQuantity, _DKAnyIntegerCategory, _DKAnyStringIdentifier, 
+                       _DKAppActivityStreamTombstoneRequirement, _DKAppClipUsageMetadataKey, 
+                       _DKAppInstallMetadataKey, _DKAppIntentsStreamTombstoneRequirement, 
                        _DKAppMediaUsageMetadataKey, _DKAppUsageTombstoneRequirement, 
                        _DKApplicationActivityMetadataKey, _DKApplicationMetadataKey, 
                        _DKAudioMetadataKey, _DKAudioRouteCategory, _DKBacklightMetadataKey, 

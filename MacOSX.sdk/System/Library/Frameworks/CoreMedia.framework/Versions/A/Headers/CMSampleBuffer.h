@@ -1874,7 +1874,7 @@ CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_ForceKeyFrame
 	@constant   kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData
 	@abstract   Describes the ranges of protected and unprotected data within a protected CMSampleBuffer
 	@discussion
-		The attachment is CFData containing one or more "BytesOfClearData"/"BytesOfProtectedData" pairs as appears in the 'senc' box (see ISO/IEC 23001-7 section 7.2.2). The "BytesOfClearData” field is a 16-bit integer, and the "BytesOfProtectedData” field is a 32-bit integer. Both are native endian in the CFData. This attachment is not present if the CMSampleBuffer contains unprotected content.
+		The attachment is CFData containing one or more "BytesOfClearData"/"BytesOfProtectedData" pairs as appears in the 'senc' box (see ISO/IEC 23001-7 section 7.2.2). The "BytesOfClearData” and the "BytesOfProtectedData” fields are 32-bit integers. Both are native endian in the CFData. This attachment is not present if the CMSampleBuffer contains unprotected content.
  */
 CM_EXPORT const CFStringRef kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData // CFData
 						API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));

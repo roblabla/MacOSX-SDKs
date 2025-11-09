@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           24596460-6B57-337A-B94C-A3A0537846F6
+    value:           F8BDA0C8-B647-3E31-8B7E-3084D81C39C8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2B339E10-F15F-373B-8E59-1A846F3B5717
+    value:           46AB2628-EDA9-32D9-8A21-92A8A2106E80
 install-name:    '/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 swift-abi-version: 7
 exports:

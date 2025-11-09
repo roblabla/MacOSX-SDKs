@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4E1D3771-3417-307F-BBBE-5952312D629C
+    value:           F5223B68-3FFB-30AB-ACBD-B4BE6E3E641F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F2DE527-B1B2-318A-8196-B1C03CE3855A
+    value:           4F5CD135-8462-3058-ADAE-5C6778C06ECE
 install-name:    '/System/Library/PrivateFrameworks/AppleISPEmulator.framework/Versions/A/AppleISPEmulator'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

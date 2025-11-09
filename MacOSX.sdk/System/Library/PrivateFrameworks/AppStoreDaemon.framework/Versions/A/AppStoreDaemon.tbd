@@ -4,36 +4,37 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DD76592E-53FF-34E6-B795-456EDCBF204E
+    value:           979323C7-0AFA-3E56-AC7D-CF0EB3C8089D
   - target:          x86_64-maccatalyst
-    value:           DD76592E-53FF-34E6-B795-456EDCBF204E
+    value:           979323C7-0AFA-3E56-AC7D-CF0EB3C8089D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           953A5975-F672-3E2D-8B3E-1ED9F10D43F8
+    value:           DAFF1AD9-5F14-38DB-A03B-908B120857F8
   - target:          arm64e-maccatalyst
-    value:           953A5975-F672-3E2D-8B3E-1ED9F10D43F8
+    value:           DAFF1AD9-5F14-38DB-A03B-908B120857F8
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Versions/A/AppStoreDaemon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _AFSStoreKitKeyProductsRequestBundleIdentifier, _ASDAggregateClusterMappingDataReadFrom, 
-                       _ASDAppLibraryServiceNotificationActionAppsRegistered, _ASDAppLibraryServiceNotificationActionAppsUnregistered, 
-                       _ASDAppLibraryServiceNotificationActionError, _ASDAppLibraryServiceNotificationActionRefresh, 
-                       _ASDAppLibraryServiceNotificationKeyAction, _ASDAppLibraryServiceNotificationKeyApps, 
-                       _ASDAppLibraryServiceNotificationKeyBundleIDs, _ASDAppLibraryServiceNotificationKeyDeviceID, 
-                       _ASDAppLibraryServiceNotificationName, _ASDAppQueryErrorDomain, 
-                       _ASDArcadeSubscriptionBagDidChangeNotification, _ASDCKPurchaseQueueIdentifier, 
-                       _ASDDebugFileLevel, _ASDDebugLevel, _ASDDebugLog, _ASDDebugLogV, 
-                       _ASDDebugSetFileLoggingOptions, _ASDError, _ASDErrorAskPermissionRequestIdentifier, 
-                       _ASDErrorBySettingUserInfoValue, _ASDErrorDomain, _ASDErrorHTTPStatusCodeKey, 
-                       _ASDErrorIsEqual, _ASDErrorIsNilReturn, _ASDErrorWithDescription, 
+    symbols:         [ _ASDAggregateClusterMappingDataReadFrom, _ASDAppLibraryServiceNotificationActionAppsRegistered, 
+                       _ASDAppLibraryServiceNotificationActionAppsUnregistered, _ASDAppLibraryServiceNotificationActionError, 
+                       _ASDAppLibraryServiceNotificationActionRefresh, _ASDAppLibraryServiceNotificationKeyAction, 
+                       _ASDAppLibraryServiceNotificationKeyApps, _ASDAppLibraryServiceNotificationKeyBundleIDs, 
+                       _ASDAppLibraryServiceNotificationKeyDeviceID, _ASDAppLibraryServiceNotificationName, 
+                       _ASDAppQueryErrorDomain, _ASDArcadeSubscriptionBagDidChangeNotification, 
+                       _ASDCKPurchaseQueueIdentifier, _ASDDebugFileLevel, _ASDDebugLevel, 
+                       _ASDDebugLog, _ASDDebugLogV, _ASDDebugSetFileLoggingOptions, 
+                       _ASDError, _ASDErrorAskPermissionRequestIdentifier, _ASDErrorBySettingUserInfoValue, 
+                       _ASDErrorDomain, _ASDErrorHTTPStatusCodeKey, _ASDErrorIsEqual, 
+                       _ASDErrorIsNilReturn, _ASDErrorSearch, _ASDErrorWithDescription, 
                        _ASDErrorWithSafeUserInfo, _ASDErrorWithUnderlyingError, _ASDErrorWithUnderlyingErrorAndDescription, 
                        _ASDErrorWithUnderlyingErrorAndInfo, _ASDErrorWithUserInfoAndFormat, 
-                       _ASDIsDaemon, _ASDLocalizedMessageKey, _ASDLocalizedTextForUserPresentableError, 
-                       _ASDLocalizedTitleKey, _ASDLogHandleForCategory, _ASDLookupPropertyBundleIdentifier, 
+                       _ASDIsDaemon, _ASDLocalizedMessageKey, _ASDLocalizedString, 
+                       _ASDLocalizedTextForUserPresentableError, _ASDLocalizedTitleKey, 
+                       _ASDLogHandleForCategory, _ASDLookupPropertyBundleIdentifier, 
                        _ASDLookupPropertyBuyParams, _ASDLookupPropertyContentRating, 
                        _ASDLookupPropertyDisplayVersion, _ASDLookupPropertyExternalVersionIdentifier, 
                        _ASDLookupPropertyFileSize, _ASDLookupPropertyItemIdentifier, 
@@ -96,47 +97,7 @@ exports:
                        _ASDUpdateItemMetricsInstallStart, _ASDUpdateItemMetricsPurchaseCompleteDate, 
                        _ASDUpdateItemMetricsPurchaseStartDate, _ASDUpdateServiceDidChangeNotification, 
                        _ASDUserActivityUniqueIdentifierArcadeTab, _ASDUserPresentableErrorDomain, 
-                       _ASFStoreKitAdImpressionAdNetworkId, _ASFStoreKitAdImpressionAppAdamId, 
-                       _ASFStoreKitAdImpressionAttributionSignature, _ASFStoreKitAdImpressionCampaignId, 
-                       _ASFStoreKitAdImpressionFidelityType, _ASFStoreKitAdImpressionId, 
-                       _ASFStoreKitAdImpressionSourceAppAdamId, _ASFStoreKitAdImpressionTimestamp, 
-                       _ASFStoreKitAdImpressionVersion, _ASFStoreKitDefaultKeyEnableAppStoreDaemon, 
-                       _ASFStoreKitDefaultQueueIdentifier, _ASFStoreKitEntitlementDeveloperRequestData, 
-                       _ASFStoreKitEntitlementRequestData, _ASFStoreKitKeyAdditionalBuyParams, 
-                       _ASFStoreKitKeyAllowBoostrapCellularData, _ASFStoreKitKeyAppAccountToken, 
-                       _ASFStoreKitKeyApplicationName, _ASFStoreKitKeyApplicationUsername, 
-                       _ASFStoreKitKeyArgument, _ASFStoreKitKeyBundleIdentifier, 
-                       _ASFStoreKitKeyBundleVersion, _ASFStoreKitKeyBuyParams, _ASFStoreKitKeyCustomPurchaseOptions, 
-                       _ASFStoreKitKeyDescription, _ASFStoreKitKeyDiscountIdentifier, 
-                       _ASFStoreKitKeyDiscountKeyIdentifier, _ASFStoreKitKeyDiscountNonceString, 
-                       _ASFStoreKitKeyDiscountSignature, _ASFStoreKitKeyDiscountTimestamp, 
-                       _ASFStoreKitKeyDiscounts, _ASFStoreKitKeyDownload, _ASFStoreKitKeyDownloadProgress, 
-                       _ASFStoreKitKeyDownloadState, _ASFStoreKitKeyDownloadStatus, 
-                       _ASFStoreKitKeyDownloadTimeRemaining, _ASFStoreKitKeyError, 
-                       _ASFStoreKitKeyExternalVersion, _ASFStoreKitKeyGrandfatherRequestData, 
-                       _ASFStoreKitKeyHideDialogs, _ASFStoreKitKeyHosted, _ASFStoreKitKeyHostedAssets, 
-                       _ASFStoreKitKeyHostedContentLength, _ASFStoreKitKeyHostedIdentifier, 
-                       _ASFStoreKitKeyHostedInstallPath, _ASFStoreKitKeyHostedVersion, 
-                       _ASFStoreKitKeyIdentifier, _ASFStoreKitKeyIgnoreRestrictions, 
-                       _ASFStoreKitKeyInvalidIdentifiers, _ASFStoreKitKeyIsFamilyShareable, 
-                       _ASFStoreKitKeyIsStoreOriginated, _ASFStoreKitKeyLocaleIdentifier, 
-                       _ASFStoreKitKeyModeType, _ASFStoreKitKeyOfferName, _ASFStoreKitKeyOriginalPurchaseDate, 
-                       _ASFStoreKitKeyOriginalTransactionIdentifier, _ASFStoreKitKeyPartnerIdentifier, 
-                       _ASFStoreKitKeyPartnerTransactionIdentifier, _ASFStoreKitKeyPeriodCount, 
-                       _ASFStoreKitKeyPrice, _ASFStoreKitKeyProducts, _ASFStoreKitKeyPromotionOrder, 
-                       _ASFStoreKitKeyPromotionVisibility, _ASFStoreKitKeyPurchaseDate, 
-                       _ASFStoreKitKeyQuantity, _ASFStoreKitKeyQueueIdentifier, _ASFStoreKitKeyReceipt, 
-                       _ASFStoreKitKeyReceiptDirectoryPath, _ASFStoreKitKeyRequestData, 
-                       _ASFStoreKitKeyRequireAuthentication, _ASFStoreKitKeySK2Receipt, 
-                       _ASFStoreKitKeySandboxToken, _ASFStoreKitKeyServerEnvironment, 
-                       _ASFStoreKitKeySimulateAskToBuy, _ASFStoreKitKeyState, _ASFStoreKitKeySubGroupId, 
-                       _ASFStoreKitKeySubPeriod, _ASFStoreKitKeyTitle, _ASFStoreKitKeyTransactionIdentifier, 
-                       _ASFStoreKitKeyTransactions, _ASFStoreKitKeyType, _ASFStoreKitKeyUniqueIdentifier, 
-                       _ASFStoreKitKeyVendorIdentifier, _ASFStoreKitNewStorefront, 
-                       _ASFStoreKitNewStorefrontCountryCode, _ASFStoreKitOldStorefront, 
-                       _ASFStoreKitOldStorefrontCountryCode, _ASFStoreKitServiceName, 
-                       _ASFStoreKitSimulatorToHostServiceName, _CreateLogContext, 
-                       _kASDPurchaseHistoryQuerySortOptionDate ]
+                       _CreateLogContext, _kASDPurchaseHistoryQuerySortOptionDate ]
     objc-classes:    [ ASDAccountLookupRequest, ASDAccountLookupRequestOptions, ASDAccountLookupResponse, 
                        ASDAggregateClusterMappingData, ASDApp, ASDAppClusterMapping, 
                        ASDAppEvent, ASDAppLibrary, ASDAppMetricsEvent, ASDAppMetricsService, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           23498328-0EFF-36ED-BFB6-9820FF8F89A3
+    value:           C4B98928-CDA8-3B8C-80D6-1F965115B299
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09C8EF3C-3C7C-3D4E-8F40-CCEC40B4CE10
+    value:           BDCA3018-8D1D-39B2-B260-5C6CD1905521
 install-name:    '/System/Library/PrivateFrameworks/Sentry.framework/Versions/A/Sentry'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FFC6F868-DDF2-32C4-9BA8-8D96EDC303B2
+    value:           F64732CF-3FB8-3420-8276-D0CF9CFE78FA
   - target:          x86_64-maccatalyst
-    value:           FFC6F868-DDF2-32C4-9BA8-8D96EDC303B2
+    value:           F64732CF-3FB8-3420-8276-D0CF9CFE78FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F271D46-022E-32C9-9A53-3F37BEF34FFC
+    value:           87AB49B5-1D3A-3532-9ED1-BE240D3ED3B5
   - target:          arm64e-maccatalyst
-    value:           7F271D46-022E-32C9-9A53-3F37BEF34FFC
+    value:           87AB49B5-1D3A-3532-9ED1-BE240D3ED3B5
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 421.0.100
+current-version: 441.0.120
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

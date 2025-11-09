@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3E54E6D1-3327-3F88-8069-5B9892EFFB33
+    value:           6C71CD1F-0A5F-3820-BA4F-1ED5255DF9DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7986CC77-F040-3AB4-AF22-0A4B9E388FA4
+    value:           28DA6CB2-898C-39E2-9313-B2AEDBAD606E
 install-name:    '/System/Library/PrivateFrameworks/AppPredictionFoundation.framework/Versions/A/AppPredictionFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9D80CFC3-ADE2-30E4-8685-BA01790BF059
+    value:           775E87B5-51F4-36A0-AD11-F702FE63635F
   - target:          x86_64-maccatalyst
-    value:           9D80CFC3-ADE2-30E4-8685-BA01790BF059
+    value:           775E87B5-51F4-36A0-AD11-F702FE63635F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FEC8B543-1809-38D3-8AC4-15ADC47B83D8
+    value:           CEAFBA9D-5105-36DB-A651-5CCF6C74C582
   - target:          arm64e-maccatalyst
-    value:           FEC8B543-1809-38D3-8AC4-15ADC47B83D8
+    value:           CEAFBA9D-5105-36DB-A651-5CCF6C74C582
 install-name:    '/System/Library/PrivateFrameworks/PegasusKit.framework/Versions/A/PegasusKit'
 swift-abi-version: 7
 exports:
@@ -52,6 +52,8 @@ exports:
                        '_$s10PegasusKit0A12ProxyForNewsCfD', '_$s10PegasusKit0A12ProxyForNewsCfd', 
                        '_$s10PegasusKit0A17ProxyForAssistantC22constructSearchRequest5query7context0A3API026Apple_Parsec_Siri_V2alpha_naH0VSS_AG0l1_m1_g1_A12QueryContextVtFTj', 
                        '_$s10PegasusKit0A17ProxyForAssistantC22constructSearchRequest5query7context0A3API026Apple_Parsec_Siri_V2alpha_naH0VSS_AG0l1_m1_g1_A12QueryContextVtFTq', 
+                       '_$s10PegasusKit0A17ProxyForAssistantC22constructSearchRequest5query7context11requestType0A3API026Apple_Parsec_Siri_V2alpha_paH0VSS_AH0n1_o1_g1_A12QueryContextVAH0n1_o1_p1_q1_hL0OtFTj', 
+                       '_$s10PegasusKit0A17ProxyForAssistantC22constructSearchRequest5query7context11requestType0A3API026Apple_Parsec_Siri_V2alpha_paH0VSS_AH0n1_o1_g1_A12QueryContextVAH0n1_o1_p1_q1_hL0OtFTq', 
                        '_$s10PegasusKit0A17ProxyForAssistantC23searchResponsePublisher18usingSearchRequest7Combine03AnyH0Vys6ResultOy0A3API026Apple_Parsec_Siri_V2alpha_raG0VAC5ErrorOGs5NeverOGAK0p1_q1_r1_s1_raK0V_tFTj', 
                        '_$s10PegasusKit0A17ProxyForAssistantC23searchResponsePublisher18usingSearchRequest7Combine03AnyH0Vys6ResultOy0A3API026Apple_Parsec_Siri_V2alpha_raG0VAC5ErrorOGs5NeverOGAK0p1_q1_r1_s1_raK0V_tFTq', 
                        '_$s10PegasusKit0A17ProxyForAssistantC23searchResponsePublisher8forQuery12usingContext11withTimeout7onQueue7Combine10PublishersO0N0Vy_AK14SetFailureTypeVy_AI03AnyH0Vys6ResultOy0A3API030Apple_Parsec_Siri_V2alpha_SiriaG0VAC5ErrorOGs5NeverOGAXGSo17OS_dispatch_queueCGSS_AT0y1_z8_Search_ajL0V8Dispatch20DispatchTimeIntervalOA3_tFTj', 
@@ -113,10 +115,9 @@ exports:
                        '_$s10PegasusKit0A27ProxyForSiriPersonalizationCMa', '_$s10PegasusKit0A27ProxyForSiriPersonalizationCMm', 
                        '_$s10PegasusKit0A27ProxyForSiriPersonalizationCMn', '_$s10PegasusKit0A27ProxyForSiriPersonalizationCMo', 
                        '_$s10PegasusKit0A27ProxyForSiriPersonalizationCN', '_$s10PegasusKit0A27ProxyForSiriPersonalizationCfD', 
-                       '_$s10PegasusKit0A27ProxyForSiriPersonalizationCfd', '_$s10PegasusKit10ClientNameC07extractcD10FromStringySSSgSSFZ', 
+                       '_$s10PegasusKit0A27ProxyForSiriPersonalizationCfd', '_$s10PegasusKit10ClientNameC07extractcD10FromStringySSSgAEFZ', 
                        '_$s10PegasusKit10ClientNameC07extractcD13FromUserAgent_17allowAbbreviationSSSgAF_SbtFZ', 
                        '_$s10PegasusKit10ClientNameC10DuetExpertSSvgZ', '_$s10PegasusKit10ClientNameC10ParsecToolSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC10clientType3forAA0cF0OSSSg_tFZ', 
                        '_$s10PegasusKit10ClientNameC11sessionType3forAA07SessionF0OSSSg_tFZ', 
                        '_$s10PegasusKit10ClientNameC14MediaAnalysisdSSvgZ', '_$s10PegasusKit10ClientNameC15CoreSuggestionsSSvgZ', 
                        '_$s10PegasusKit10ClientNameC15FlightUtilitiesSSvgZ', '_$s10PegasusKit10ClientNameC15MapsSuggestionsSSvgZ', 
@@ -126,31 +127,23 @@ exports:
                        '_$s10PegasusKit10ClientNameC4SiriSSvgZ', '_$s10PegasusKit10ClientNameC6LookupSSvgZ', 
                        '_$s10PegasusKit10ClientNameC6SafariSSvgZ', '_$s10PegasusKit10ClientNameC7ParsecdSSvgZ', 
                        '_$s10PegasusKit10ClientNameC8MessagesSSvgZ', '_$s10PegasusKit10ClientNameC8TrysteroSSvgZ', 
-                       '_$s10PegasusKit10ClientNameC9SpotlightSSvgZ', '_$s10PegasusKit10ClientNameCACycfC', 
-                       '_$s10PegasusKit10ClientNameCACycfc', '_$s10PegasusKit10ClientNameCMa', 
-                       '_$s10PegasusKit10ClientNameCMn', '_$s10PegasusKit10ClientNameCMo', 
-                       '_$s10PegasusKit10ClientNameCN', '_$s10PegasusKit10ClientNameCfD', 
-                       '_$s10PegasusKit10ClientTypeO10duetexpertyA2CmFWC', '_$s10PegasusKit10ClientTypeO10parsectoolyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO15coresuggestionsyA2CmFWC', '_$s10PegasusKit10ClientTypeO15flightutilitiesyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO15mapssuggestionsyA2CmFWC', '_$s10PegasusKit10ClientTypeO18visualintelligenceyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO4mailyA2CmFWC', '_$s10PegasusKit10ClientTypeO4newsyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO4siriyA2CmFWC', '_$s10PegasusKit10ClientTypeO6lookupyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO6safariyA2CmFWC', '_$s10PegasusKit10ClientTypeO7parsecdyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO7unknownyA2CmFWC', '_$s10PegasusKit10ClientTypeO8messagesyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO8rawValueACSgSu_tcfC', '_$s10PegasusKit10ClientTypeO8rawValueSuvg', 
-                       '_$s10PegasusKit10ClientTypeO8rawValueSuvpMV', '_$s10PegasusKit10ClientTypeO8trysteroyA2CmFWC', 
-                       '_$s10PegasusKit10ClientTypeO9spotlightyA2CmFWC', '_$s10PegasusKit10ClientTypeOMa', 
-                       '_$s10PegasusKit10ClientTypeOMn', '_$s10PegasusKit10ClientTypeON', 
-                       '_$s10PegasusKit10ClientTypeOSHAAMc', '_$s10PegasusKit10ClientTypeOSQAAMc', 
-                       '_$s10PegasusKit10ClientTypeOSYAAMc', '_$s10PegasusKit11AtomicValueC4loadxyF', 
-                       '_$s10PegasusKit11AtomicValueC5storeyyxF', '_$s10PegasusKit11AtomicValueCMa', 
-                       '_$s10PegasusKit11AtomicValueCMn', '_$s10PegasusKit11AtomicValueCMo', 
-                       '_$s10PegasusKit11AtomicValueCMu', '_$s10PegasusKit11AtomicValueCfD', 
-                       '_$s10PegasusKit11AtomicValueCfd', '_$s10PegasusKit11AtomicValueCyACyxGxcfC', 
-                       '_$s10PegasusKit11AtomicValueCyACyxGxcfCTj', '_$s10PegasusKit11AtomicValueCyACyxGxcfCTq', 
-                       '_$s10PegasusKit11AtomicValueCyACyxGxcfc', '_$s10PegasusKit11SessionTypeO10duetexpertyA2CmFWC', 
-                       '_$s10PegasusKit11SessionTypeO10parsectoolyA2CmFWC', '_$s10PegasusKit11SessionTypeO14mediaanalysisdyA2CmFWC', 
-                       '_$s10PegasusKit11SessionTypeO15flightutilitiesyA2CmFWC', 
+                       '_$s10PegasusKit10ClientNameC9SpotlightSSvgZ', '_$s10PegasusKit10ClientNameCAASSvgZ', 
+                       '_$s10PegasusKit10ClientNameCACycfC', '_$s10PegasusKit10ClientNameCACycfc', 
+                       '_$s10PegasusKit10ClientNameCMa', '_$s10PegasusKit10ClientNameCMn', 
+                       '_$s10PegasusKit10ClientNameCMo', '_$s10PegasusKit10ClientNameCN', 
+                       '_$s10PegasusKit10ClientNameCfD', '_$s10PegasusKit10ClientTypeO8rawValueACSgSu_tcfC', 
+                       '_$s10PegasusKit10ClientTypeO8rawValueSuvg', '_$s10PegasusKit10ClientTypeO8rawValueSuvpMV', 
+                       '_$s10PegasusKit10ClientTypeOMa', '_$s10PegasusKit10ClientTypeOMn', 
+                       '_$s10PegasusKit10ClientTypeON', '_$s10PegasusKit10ClientTypeOSHAAMc', 
+                       '_$s10PegasusKit10ClientTypeOSQAAMc', '_$s10PegasusKit10ClientTypeOSYAAMc', 
+                       '_$s10PegasusKit11AtomicValueC4loadxyF', '_$s10PegasusKit11AtomicValueC5storeyyxF', 
+                       '_$s10PegasusKit11AtomicValueCMa', '_$s10PegasusKit11AtomicValueCMn', 
+                       '_$s10PegasusKit11AtomicValueCMo', '_$s10PegasusKit11AtomicValueCMu', 
+                       '_$s10PegasusKit11AtomicValueCfD', '_$s10PegasusKit11AtomicValueCfd', 
+                       '_$s10PegasusKit11AtomicValueCyACyxGxcfC', '_$s10PegasusKit11AtomicValueCyACyxGxcfCTj', 
+                       '_$s10PegasusKit11AtomicValueCyACyxGxcfCTq', '_$s10PegasusKit11AtomicValueCyACyxGxcfc', 
+                       '_$s10PegasusKit11SessionTypeO10duetexpertyA2CmFWC', '_$s10PegasusKit11SessionTypeO10parsectoolyA2CmFWC', 
+                       '_$s10PegasusKit11SessionTypeO14mediaanalysisdyA2CmFWC', '_$s10PegasusKit11SessionTypeO15flightutilitiesyA2CmFWC', 
                        '_$s10PegasusKit11SessionTypeO15mapssuggestionsyA2CmFWC', 
                        '_$s10PegasusKit11SessionTypeO16reversetemplatedyA2CmFWC', 
                        '_$s10PegasusKit11SessionTypeO20notificationsloggingyA2CmFWC', 

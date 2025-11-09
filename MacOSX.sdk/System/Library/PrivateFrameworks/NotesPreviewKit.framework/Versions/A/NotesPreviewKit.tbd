@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4A49C3A2-91E9-320C-8398-7712FB8F3133
+    value:           1EE1B059-106E-3FB2-B6D4-229661065519
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DFA587E-CB18-3DD8-B80D-A9E05C43D7ED
+    value:           B66A5E0D-BCA0-3810-B9D3-711A5FA99CA7
 install-name:    '/System/Library/PrivateFrameworks/NotesPreviewKit.framework/Versions/A/NotesPreviewKit'
-current-version: 1974
+current-version: 1992
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

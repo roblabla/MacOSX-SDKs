@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C0E72AD4-45D3-3545-ABAA-1705CFCE9215
+    value:           E80E38B2-BCD6-3797-937E-5AA011A7EBEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC77E110-6291-3A0B-970B-376C163821CB
+    value:           91066885-12E7-3BE8-866A-AD81985C6757
 install-name:    '/System/Library/PrivateFrameworks/NotesSupport.framework/Versions/A/NotesSupport'
-current-version: 1974
+current-version: 1992
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ICACAccountPropertyDidChooseToMigrate, _ICACAccountPropertyDidFinishMigration, 

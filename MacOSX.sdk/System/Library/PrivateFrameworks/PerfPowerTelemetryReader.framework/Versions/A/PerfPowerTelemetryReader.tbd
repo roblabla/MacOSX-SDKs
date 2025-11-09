@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8F37BA3F-5392-306E-A60A-35108C1BD913
+    value:           6ABFE343-7780-3AD4-88DF-C2C669DE47E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24F010EE-83B3-3020-A930-CBA1F303F1E3
+    value:           9B344891-0B6B-3265-904B-B894032AA92E
 install-name:    '/System/Library/PrivateFrameworks/PerfPowerTelemetryReader.framework/Versions/A/PerfPowerTelemetryReader'
 exports:
   - targets:         [ x86_64-macos ]
@@ -28,13 +28,10 @@ exports:
                        __ZTIN5boost7archive6detail15common_oarchiveINS0_13text_oarchiveEEE, 
                        __ZTIN5boost7archive6detail18interface_iarchiveINS0_13text_iarchiveEEE, 
                        __ZTIN5boost7archive6detail18interface_oarchiveINS0_13text_oarchiveEEE, 
-                       __ZTINSt3__113__vector_baseImNS_9allocatorImEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__16vectorImNS_9allocatorImEEEE, 
-                       __ZTS12PPTSQLiteRow, __ZTSN3ppt21PPTHistogram_InternalImdEE, 
-                       __ZTSN5boost12noncopyable_11noncopyableE, __ZTSN5boost13serialization16singleton_moduleE, 
-                       __ZTSN5boost13serialization25extended_type_info_typeidIN3ppt21PPTHistogram_InternalImdEEEE, 
+                       __ZTINSt3__113__vector_baseImNS_9allocatorImEEEE, __ZTINSt3__120__vector_base_commonILb1EEE, 
+                       __ZTINSt3__16vectorImNS_9allocatorImEEEE, __ZTS12PPTSQLiteRow, 
+                       __ZTSN3ppt21PPTHistogram_InternalImdEE, __ZTSN5boost12noncopyable_11noncopyableE, 
+                       __ZTSN5boost13serialization16singleton_moduleE, __ZTSN5boost13serialization25extended_type_info_typeidIN3ppt21PPTHistogram_InternalImdEEEE, 
                        __ZTSN5boost13serialization25extended_type_info_typeidINSt3__16vectorImNS2_9allocatorImEEEEEE, 
                        __ZTSN5boost13serialization9singletonINS0_25extended_type_info_typeidIN3ppt21PPTHistogram_InternalImdEEEEEE, 
                        __ZTSN5boost13serialization9singletonINS0_25extended_type_info_typeidINSt3__16vectorImNS3_9allocatorImEEEEEEEE, 
@@ -49,10 +46,8 @@ exports:
                        __ZTSN5boost7archive6detail15common_oarchiveINS0_13text_oarchiveEEE, 
                        __ZTSN5boost7archive6detail18interface_iarchiveINS0_13text_iarchiveEEE, 
                        __ZTSN5boost7archive6detail18interface_oarchiveINS0_13text_oarchiveEEE, 
-                       __ZTSNSt3__113__vector_baseImNS_9allocatorImEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__16vectorImNS_9allocatorImEEEE ]
+                       __ZTSNSt3__113__vector_baseImNS_9allocatorImEEEE, __ZTSNSt3__120__vector_base_commonILb1EEE, 
+                       __ZTSNSt3__16vectorImNS_9allocatorImEEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _PPTDataPathForMetricDefinition, _PPTDataRequestErrorDomain, 
                        _PPTDataRequestPredicateCategoryKey, _PPTDataRequestPredicateSubsystemKey, 

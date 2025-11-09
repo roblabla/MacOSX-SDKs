@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           2C84DC64-F500-315B-ADB8-8A76603A3B2F
+    value:           B0961429-0E20-3F07-B68C-C2D7FBEF6861
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           560E1FA0-6FFD-364E-B11C-E6C5B9251F56
+    value:           EA3F48D2-E544-37D0-9E84-DB5A7F1A68EB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ManagedSettingsUI.framework/Versions/A/ManagedSettingsUI'
-current-version: 26
+current-version: 27
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

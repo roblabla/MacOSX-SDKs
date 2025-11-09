@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A9E2932C-B2DB-3E89-807B-1179B2B77501
+    value:           476F1E9A-CD14-3458-A485-C1F713BF8026
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2B0371B-BAA2-332B-90DE-F71E3E6FC710
+    value:           AD4BB033-A126-3873-8AA6-535DB5CC8F69
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libComposeFilters.dylib'
-current-version: 31001.255
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _composeImageFilterFunctionsFromModulesSPI, _composeImageFilterFunctionsSPI ]

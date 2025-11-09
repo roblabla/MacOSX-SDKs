@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0F095E41-8138-38C8-9ACB-44C99965DD63
+    value:           F0E6DA86-5179-3A71-9E0E-02E01B083DC3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CDF03181-AADF-3E7F-BF7B-39E2CE8EF401
+    value:           32221975-9C63-3D8B-BA16-9CA48A057C36
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
 current-version: 3662
 allowable-clients:
@@ -164,14 +164,13 @@ exports:
                        MCDiscretionaryWorkScheduler, MCDisplayNameInfo, MCDisplayNameManager, 
                        MCDownloadingMessagesProgressEntry, MCFileTypeInfo, MCFileURLAttachmentDataSource, 
                        MCFileWrapper, MCFileWrapperAttachmentDataSource, MCImageJunkMetadata, 
-                       MCInvocationQueue, MCJunkRecorder, MCKeychainManager, MCMainThreadInvocationOperation, 
-                       MCMemoryDataSource, MCMessage, MCMessageAttachmentMetadatum, 
-                       MCMessageBody, MCMessageDecoder, MCMessageGenerator, MCMessageHeaders, 
-                       MCMessageTracer, MCMessageURLProtocol, MCMimeCharset, MCMimeDataEncoding, 
-                       MCMimePart, MCMimePartAttachmentDataSource, MCMonitoredInvocation, 
-                       MCMonitoredOperation, MCMovingMessagesProgressEntry, MCMutableMessageHeaders, 
-                       MCMutableMessageHeadersFactory, MCNetworkController, MCOutgoingMessage, 
-                       MCPlaceholderArchiveFileWrapper, MCPlaceholderFileWrapper, 
+                       MCInvocationQueue, MCJunkRecorder, MCKeychainManager, MCMemoryDataSource, 
+                       MCMessage, MCMessageAttachmentMetadatum, MCMessageBody, MCMessageDecoder, 
+                       MCMessageGenerator, MCMessageHeaders, MCMessageTracer, MCMessageURLProtocol, 
+                       MCMimeCharset, MCMimeDataEncoding, MCMimePart, MCMimePartAttachmentDataSource, 
+                       MCMonitoredInvocation, MCMonitoredOperation, MCMovingMessagesProgressEntry, 
+                       MCMutableMessageHeaders, MCMutableMessageHeadersFactory, MCNetworkController, 
+                       MCOutgoingMessage, MCPlaceholderArchiveFileWrapper, MCPlaceholderFileWrapper, 
                        MCPowerLog, MCPowerSourceManager, MCPreparingToCopyProgressEntry, 
                        MCPreparingToMoveProgressEntry, MCPriorityInvocation, MCProgressEntry, 
                        MCProgressGroup, MCProgressManager, MCQOSInvocation, MCQuotaUsage, 

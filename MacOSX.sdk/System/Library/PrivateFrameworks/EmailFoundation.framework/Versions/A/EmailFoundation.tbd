@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           15D5D7D1-2AF8-31C8-95BF-9563A58265D2
+    value:           1ABAC428-A6D3-31F7-A1E0-BDEC8CDBCCFE
   - target:          x86_64-maccatalyst
-    value:           15D5D7D1-2AF8-31C8-95BF-9563A58265D2
+    value:           1ABAC428-A6D3-31F7-A1E0-BDEC8CDBCCFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           138923AD-0260-32AA-9E5C-FE59A5FA7B51
+    value:           2D61D14E-6601-36AA-856D-4E4676E8299D
   - target:          arm64e-maccatalyst
-    value:           138923AD-0260-32AA-9E5C-FE59A5FA7B51
+    value:           2D61D14E-6601-36AA-856D-4E4676E8299D
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3693.40
+current-version: 3696.80.82
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -33,8 +33,8 @@ exports:
                        _EFIsCustomerBuild, _EFIsNotNull, _EFIsNull, _EFIsRunningUnitTests, 
                        _EFIsSeedBuild, _EFLogRegisterStateCaptureBlock, _EFMurmurHash3Mix, 
                        _EFNonContainerizedHomeDirectory, _EFObjectsAreEqual, _EFPerformSyncWithProtectedDataAvailability, 
-                       _EFPriorityDesignatorKey, _EFProductName, _EFProtectedDataAvailable, 
-                       _EFPublicErrorInfoKey, _EFRegisterContentProtectionObserver, 
+                       _EFPostUTF8FormData, _EFPriorityDesignatorKey, _EFProductName, 
+                       _EFProtectedDataAvailable, _EFPublicErrorInfoKey, _EFRegisterContentProtectionObserver, 
                        _EFRoundUnsignedInteger, _EFSQLSchemaColumnNameRowID, _EFSQLSchemaDatabaseNameMain, 
                        _EFSQLStringForCollation, _EFSQLStringForConflictResolution, 
                        _EFSQLStringForOrderDirection, _EFSQLVerboseDebugLoggingEnabled, 
@@ -51,8 +51,8 @@ exports:
                        EFCancelationToken, EFCoalescer, EFDeallocInvocationToken, 
                        EFDebouncer, EFDevice, EFFileCompression, EFFileWrapper, EFFuture, 
                        EFHTMLUtilities, EFImmediateScheduler, EFInvocationToken, 
-                       EFLRUCache, EFLazyCache, EFLazyFuture, EFLinearFunction, EFLocked, 
-                       EFMainThreadScheduler, EFMeasuredObject, EFMutableByteSet, 
+                       EFLRUCache, EFLazyCache, EFLazyFuture, EFLinearFunction, EFListStateCapturer, 
+                       EFLocked, EFMainThreadScheduler, EFMeasuredObject, EFMutableByteSet, 
                        EFMutableIndexMap, EFMutableInt64Set, EFNetworkStatus, EFObservable, 
                        EFObserver, EFOperationQueueScheduler, EFPair, EFParenthesizedSQLExpression, 
                        EFPathComponent, EFPriorityDesignator, EFPrivacy, EFProcessBoost, 
@@ -71,8 +71,8 @@ exports:
                        EFSQLSelectStatement, EFSQLTableSchema, EFSQLUnaryExpression, 
                        EFSQLUpdateStatement, EFSQLUpsertStatement, EFSandboxedURLWrapper, 
                        EFScheduler, EFSchedulerTrampoline, EFSearchableIndexObjectPropertyMapper, 
-                       EFSortDescriptor, EFStoppableScheduler, EFStringHash, EFURLConnectionDelegate, 
-                       EFWatchdog, _EFBlockObservable, _EFBlockObserver, _EFCombineLatestObservable, 
+                       EFSortDescriptor, EFStoppableScheduler, EFStringHash, EFWatchdog, 
+                       _EFBlockObservable, _EFBlockObserver, _EFCombineLatestObservable, 
                        _EFCombineLatestObservableSubscription, _EFConcatenatingObservable, 
                        _EFConnectableObservable, _EFContentProtectionObserverWrapper, 
                        _EFDistinctUntilChangedObservable, _EFGeneratorObservable, 
@@ -82,5 +82,5 @@ exports:
                        _EFSQLDataBinding, _EFSQLDistinctExpression, _EFSQLDoubleBinding, 
                        _EFSQLInsertStatementFirstValue, _EFSQLInsertStatementFollowUpValue, 
                        _EFSQLInsertStatementValue, _EFSQLInt64Binding, _EFSQLJoinExpression, 
-                       _EFSQLStringBinding, _EFSamplingObservable ]
+                       _EFSQLStringBinding, _EFSamplingObservable, _EFURLConnectionDelegate ]
 ...

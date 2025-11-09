@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8223B187-56D0-3378-B80C-7A4409B8A908
+    value:           CA9BBD60-2C3F-3E99-AD99-DC3CE6A326E2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C790CF65-9B51-313D-9505-2CE38C33BAD2
+    value:           F62EA368-6F5E-3A51-8175-279AC81ACEC8
 install-name:    '/System/Library/PrivateFrameworks/JetUI.framework/Versions/A/JetUI'
 swift-abi-version: 7
 allowable-clients:
@@ -55,7 +55,15 @@ exports:
                        '_$s5JetUI0A13FontTextStyleVyACSScfC', '_$s5JetUI0A16TraitEnvironmentPAAE012withOverrideC10CollectionyAaB_pSo07JUTraitG0CF', 
                        '_$s5JetUI0A16TraitEnvironmentPAAE34withAccessibleContentSizesDisabledAaB_pvg', 
                        '_$s5JetUI0A16TraitEnvironmentPAAE34withAccessibleContentSizesDisabledAaB_pvpMV', 
-                       '_$s5JetUI0A20TraitsViewControllerC15traitCollectionSo07JUTraitG0CvgTj', 
+                       '_$s5JetUI0A18UIBugCompatibilityV36textFieldAdoptsMeasurableIncorrectlyACvgZ', 
+                       '_$s5JetUI0A18UIBugCompatibilityV6enable_7performxAC_xyKXEtKlFZ', 
+                       '_$s5JetUI0A18UIBugCompatibilityV7disable_7performxAC_xyKXEtKlFZ', 
+                       '_$s5JetUI0A18UIBugCompatibilityV8rawValueACSu_tcfC', '_$s5JetUI0A18UIBugCompatibilityV8rawValueSuvg', 
+                       '_$s5JetUI0A18UIBugCompatibilityV8rawValueSuvpMV', '_$s5JetUI0A18UIBugCompatibilityVMa', 
+                       '_$s5JetUI0A18UIBugCompatibilityVMn', '_$s5JetUI0A18UIBugCompatibilityVN', 
+                       '_$s5JetUI0A18UIBugCompatibilityVSQAAMc', '_$s5JetUI0A18UIBugCompatibilityVSYAAMc', 
+                       '_$s5JetUI0A18UIBugCompatibilityVs10SetAlgebraAAMc', '_$s5JetUI0A18UIBugCompatibilityVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s5JetUI0A18UIBugCompatibilityVs9OptionSetAAMc', '_$s5JetUI0A20TraitsViewControllerC15traitCollectionSo07JUTraitG0CvgTj', 
                        '_$s5JetUI0A20TraitsViewControllerC15traitCollectionSo07JUTraitG0CvgTq', 
                        '_$s5JetUI0A20TraitsViewControllerC15traitCollectionSo07JUTraitG0CvpMV', 
                        '_$s5JetUI0A20TraitsViewControllerC24traitCollectionDidChangeyySo07JUTraitG0CSgFTj', 
@@ -373,6 +381,8 @@ exports:
                        '_$s5JetUI14LayoutTextViewPAAE24withLanguageAwareOutsetsAaB_pvg', 
                        '_$s5JetUI14LayoutTextViewPAAE24withLanguageAwareOutsetsAaB_pvpMV', 
                        '_$s5JetUI14LayoutTextViewTL', '_$s5JetUI14TextAppearanceV04withC9AlignmentyACSo06NSTextF0VF', 
+                       '_$s5JetUI14TextAppearanceV11lineSpacingSivM', '_$s5JetUI14TextAppearanceV11lineSpacingSivg', 
+                       '_$s5JetUI14TextAppearanceV11lineSpacingSivpMV', '_$s5JetUI14TextAppearanceV11lineSpacingSivs', 
                        '_$s5JetUI14TextAppearanceV13lineBreakModeSo06NSLinefG0VvM', 
                        '_$s5JetUI14TextAppearanceV13lineBreakModeSo06NSLinefG0Vvg', 
                        '_$s5JetUI14TextAppearanceV13lineBreakModeSo06NSLinefG0VvpMV', 
@@ -383,7 +393,7 @@ exports:
                        '_$s5JetUI14TextAppearanceV13textAlignmentSo06NSTextF0Vvg', 
                        '_$s5JetUI14TextAppearanceV13textAlignmentSo06NSTextF0VvpMV', 
                        '_$s5JetUI14TextAppearanceV13textAlignmentSo06NSTextF0Vvs', 
-                       '_$s5JetUI14TextAppearanceV17withLineBreakModeyACSo06NSLinegH0VF', 
+                       '_$s5JetUI14TextAppearanceV15withLineSpacingyACSiF', '_$s5JetUI14TextAppearanceV17withLineBreakModeyACSo06NSLinegH0VF', 
                        '_$s5JetUI14TextAppearanceV17withNumberOfLinesyACSiF', '_$s5JetUI14TextAppearanceV2eeoiySbAC_ACtFZ', 
                        '_$s5JetUI14TextAppearanceV4fontSo6NSFontCvM', '_$s5JetUI14TextAppearanceV4fontSo6NSFontCvg', 
                        '_$s5JetUI14TextAppearanceV4fontSo6NSFontCvpMV', '_$s5JetUI14TextAppearanceV4fontSo6NSFontCvs', 
@@ -667,7 +677,14 @@ exports:
                        '_$s5JetUI16JUNavigationItemCMn', '_$s5JetUI16JUNavigationItemCMo', 
                        '_$s5JetUI16JUNavigationItemCMu', '_$s5JetUI16JUNavigationItemCN', 
                        '_$s5JetUI16JUNavigationItemCfD', '_$s5JetUI16LabelPlaceholderV11descriptionSSvg', 
-                       '_$s5JetUI16LabelPlaceholderV11descriptionSSvpMV', '_$s5JetUI16LabelPlaceholderV5place2at4withySo6CGRectV_So17JUTraitCollectionCtF', 
+                       '_$s5JetUI16LabelPlaceholderV11descriptionSSvpMV', '_$s5JetUI16LabelPlaceholderV11isTextEmptySbvg', 
+                       '_$s5JetUI16LabelPlaceholderV11isTextEmptySbvpMV', '_$s5JetUI16LabelPlaceholderV11isTruncated11whenFittingSbSo6CGSizeV_tF', 
+                       '_$s5JetUI16LabelPlaceholderV12measurements7fitting2inSo14JUMeasurementsVSo6CGSizeV_AA0A16TraitEnvironment_ptF', 
+                       '_$s5JetUI16LabelPlaceholderV14attributedText13numberOfLines15isLanguageAwareACSo18NSAttributedStringC_SiSbtcfC', 
+                       '_$s5JetUI16LabelPlaceholderV14attributedText4font13textAlignment13lineBreakMode0J7Spacing13numberOfLines15isLanguageAwareACSo18NSAttributedStringC_So6NSFontCSo06NSTextI0VSo06NSLinekL0VS2iSbtcfC', 
+                       '_$s5JetUI16LabelPlaceholderV16willTextTruncate7fitting4withSbSo6CGSizeV_So17JUTraitCollectionCtF', 
+                       '_$s5JetUI16LabelPlaceholderV4text4font0E9Alignment13lineBreakMode0H7Spacing13numberOfLines15isLanguageAwareACSS_So6NSFontCSo06NSTextG0VSo06NSLineiJ0VS2iSbtcfC', 
+                       '_$s5JetUI16LabelPlaceholderV5place2at4withySo6CGRectV_So17JUTraitCollectionCtF', 
                        '_$s5JetUI16LabelPlaceholderV7OptionsV11descriptionSSvg', 
                        '_$s5JetUI16LabelPlaceholderV7OptionsV11descriptionSSvpMV', 
                        '_$s5JetUI16LabelPlaceholderV7OptionsV13languageAwareAEvgZ', 
@@ -679,6 +696,7 @@ exports:
                        '_$s5JetUI16LabelPlaceholderV7OptionsVs23CustomStringConvertibleAAMc', 
                        '_$s5JetUI16LabelPlaceholderV7OptionsVs25ExpressibleByArrayLiteralAAMc', 
                        '_$s5JetUI16LabelPlaceholderV7OptionsVs9OptionSetAAMc', '_$s5JetUI16LabelPlaceholderV7measure5toFit4withSo14JUMeasurementsVSo6CGSizeV_So17JUTraitCollectionCtF', 
+                       '_$s5JetUI16LabelPlaceholderVAA10MeasurableAAMc', '_$s5JetUI16LabelPlaceholderVAA10MeasurableAAWP', 
                        '_$s5JetUI16LabelPlaceholderVAA9PlaceableAAMc', '_$s5JetUI16LabelPlaceholderVAA9PlaceableAAWP', 
                        '_$s5JetUI16LabelPlaceholderVMa', '_$s5JetUI16LabelPlaceholderVMn', 
                        '_$s5JetUI16LabelPlaceholderVN', '_$s5JetUI16LabelPlaceholderV_4with5whereACSSSg_AA14TextAppearanceVAC7OptionsVtcfC', 
@@ -1062,6 +1080,8 @@ exports:
                        '_$s5JetUI21DynamicTextAppearanceV06customD5StyleAA06CustomdG0_pvg', 
                        '_$s5JetUI21DynamicTextAppearanceV06customD5StyleAA06CustomdG0_pvpMV', 
                        '_$s5JetUI21DynamicTextAppearanceV06customD5StyleAA06CustomdG0_pvs', 
+                       '_$s5JetUI21DynamicTextAppearanceV11lineSpacingSivM', '_$s5JetUI21DynamicTextAppearanceV11lineSpacingSivg', 
+                       '_$s5JetUI21DynamicTextAppearanceV11lineSpacingSivpMV', '_$s5JetUI21DynamicTextAppearanceV11lineSpacingSivs', 
                        '_$s5JetUI21DynamicTextAppearanceV13lineBreakModeSo06NSLinegH0VvM', 
                        '_$s5JetUI21DynamicTextAppearanceV13lineBreakModeSo06NSLinegH0Vvg', 
                        '_$s5JetUI21DynamicTextAppearanceV13lineBreakModeSo06NSLinegH0VvpMV', 
@@ -1073,6 +1093,7 @@ exports:
                        '_$s5JetUI21DynamicTextAppearanceV13textAlignmentSo06NSTextG0VvpMV', 
                        '_$s5JetUI21DynamicTextAppearanceV13textAlignmentSo06NSTextG0Vvs', 
                        '_$s5JetUI21DynamicTextAppearanceV15withFontUseCaseyAcA0ghI0OF', 
+                       '_$s5JetUI21DynamicTextAppearanceV15withLineSpacingyACSiF', 
                        '_$s5JetUI21DynamicTextAppearanceV17withLineBreakModeyACSo06NSLinehI0VF', 
                        '_$s5JetUI21DynamicTextAppearanceV17withNumberOfLinesyACSiF', 
                        '_$s5JetUI21DynamicTextAppearanceVACycfC', '_$s5JetUI21DynamicTextAppearanceVMa', 

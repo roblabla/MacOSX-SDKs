@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EAC9A66B-431B-399D-813E-3E0344978B12
+    value:           2E29AAB0-C9EB-3AF2-B4EB-2E086CE4341B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           488D7B1A-DB29-30E4-B670-748CC38B8EC6
+    value:           C6BC3DC9-5E8A-3B63-80DF-DC8C1D57C0CB
 install-name:    '/System/Library/PrivateFrameworks/Recap.framework/Versions/A/Recap'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

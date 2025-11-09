@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           228345FC-F379-3A47-924E-2003A0330610
+    value:           4DF9B087-E7E6-322B-9E31-9EFBA48236EA
   - target:          x86_64-maccatalyst
-    value:           228345FC-F379-3A47-924E-2003A0330610
+    value:           4DF9B087-E7E6-322B-9E31-9EFBA48236EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3015681A-B8EE-3513-80E4-A85F52FC4172
+    value:           E9B80448-F794-300C-822E-53AB096FD67C
   - target:          arm64e-maccatalyst
-    value:           3015681A-B8EE-3513-80E4-A85F52FC4172
+    value:           E9B80448-F794-300C-822E-53AB096FD67C
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitPrivate.framework/Versions/A/CryptoKitPrivate'
 swift-abi-version: 7
 exports:
@@ -50,7 +50,7 @@ exports:
                        '_$s16CryptoKitPrivate11DHPublicKeyP09EphemeralcE0AC_AA09DHPrivateE0Tn', 
                        '_$s16CryptoKitPrivate11DHPublicKeyP21ietfKEMRepresentationxqd___tKc10Foundation15ContiguousBytesRd__lufCTj', 
                        '_$s16CryptoKitPrivate11DHPublicKeyP21ietfKEMRepresentationxqd___tKc10Foundation15ContiguousBytesRd__lufCTq', 
-                       '_$s16CryptoKitPrivate11DHPublicKeyPAAE13encapsulateTo0aB009SymmetricE0V12sharedSecret_10Foundation4DataV12encapsulatedtyKF', 
+                       '_$s16CryptoKitPrivate11DHPublicKeyPAA09KEMPublicE0Tb', '_$s16CryptoKitPrivate11DHPublicKeyPAAE13encapsulateTo0aB009SymmetricE0V12sharedSecret_10Foundation4DataV12encapsulatedtyKF', 
                        '_$s16CryptoKitPrivate11DHPublicKeyTL', '_$s16CryptoKitPrivate12DHPrivateKeyMp', 
                        '_$s16CryptoKitPrivate12DHPrivateKeyP016sharedSecretFromE9Agreement4with0aB006SharedG0V06PublicE0Qz_tKFTj', 
                        '_$s16CryptoKitPrivate12DHPrivateKeyP016sharedSecretFromE9Agreement4with0aB006SharedG0V06PublicE0Qz_tKFTq', 
@@ -219,22 +219,25 @@ exports:
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMa', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMn', 
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMo', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMu', 
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCN', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCfD', 
-                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC12hashFunctionSPySo13ccdigest_infoVGSgyFTj', 
-                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC12hashFunctionSPySo13ccdigest_infoVGSgyFTq', 
-                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC13saltByteCounts6UInt64VyFTj', 
-                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC13saltByteCounts6UInt64VyFTq', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC14publicKeyBytes10Foundation4DataVyFTj', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC14publicKeyBytes10Foundation4DataVyFTq', 
-                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC3mgfSPySo13ccdigest_infoVGSgyFTj', 
-                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC3mgfSPySo13ccdigest_infoVGSgyFTq', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC4dataAC10Foundation4DataV_tKcfC', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC4dataAC10Foundation4DataV_tKcfCTj', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC4dataAC10Foundation4DataV_tKcfCTq', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC4dataAC10Foundation4DataV_tKcfc', 
+                       '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingC9serialize8keyBytes10Foundation4DataVAH_tKFZ', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCACycfC', '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCACycfc', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCMa', '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCMn', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCMo', '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCMu', 
                        '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCN', '_$s16CryptoKitPrivate19RSAPSSSPKI_BridgingCfD', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationC16evaluatedElement10Foundation4DataVvg', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationC16evaluatedElement10Foundation4DataVvpMV', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationC5proof10Foundation4DataVvg', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationC5proof10Foundation4DataVvpMV', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationCACycfC', '_$s16CryptoKitPrivate19TDMServerEvaluationCACycfc', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationCMa', '_$s16CryptoKitPrivate19TDMServerEvaluationCMn', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationCMo', '_$s16CryptoKitPrivate19TDMServerEvaluationCMu', 
+                       '_$s16CryptoKitPrivate19TDMServerEvaluationCN', '_$s16CryptoKitPrivate19TDMServerEvaluationCfD', 
                        '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedC10Kble_introSo6NSDataCvg', 
                        '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedC10Kble_introSo6NSDataCvpMV', 
                        '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedC12SymmetricLTSSo6NSDataCvg', 
@@ -342,6 +345,30 @@ exports:
                        '_$s16CryptoKitPrivate6ScryptCMa', '_$s16CryptoKitPrivate6ScryptCMn', 
                        '_$s16CryptoKitPrivate6ScryptCMo', '_$s16CryptoKitPrivate6ScryptCN', 
                        '_$s16CryptoKitPrivate6ScryptCfD', '_$s16CryptoKitPrivate6scrypt8pass_len0E005salt_F00G06cost_N12block_size_r15parallelization07output_F00L0s5Int32VSi_SPys5UInt8VGSiAPs6UInt64Vs6UInt32VATSiSpyAOGtF', 
+                       '_$s16CryptoKitPrivate9TDMClientC14blindedElement10Foundation4DataVyFTj', 
+                       '_$s16CryptoKitPrivate9TDMClientC14blindedElement10Foundation4DataVyFTq', 
+                       '_$s16CryptoKitPrivate9TDMClientC3TIDAC10Foundation4DataV_tcfC', 
+                       '_$s16CryptoKitPrivate9TDMClientC3TIDAC10Foundation4DataV_tcfCTj', 
+                       '_$s16CryptoKitPrivate9TDMClientC3TIDAC10Foundation4DataV_tcfCTq', 
+                       '_$s16CryptoKitPrivate9TDMClientC3TIDAC10Foundation4DataV_tcfc', 
+                       '_$s16CryptoKitPrivate9TDMClientC8finalize3FSR16evaluatedElement5proof9publicKey10Foundation4DataVAK_A3KtKFTj', 
+                       '_$s16CryptoKitPrivate9TDMClientC8finalize3FSR16evaluatedElement5proof9publicKey10Foundation4DataVAK_A3KtKFTq', 
+                       '_$s16CryptoKitPrivate9TDMClientCACycfC', '_$s16CryptoKitPrivate9TDMClientCACycfc', 
+                       '_$s16CryptoKitPrivate9TDMClientCMa', '_$s16CryptoKitPrivate9TDMClientCMn', 
+                       '_$s16CryptoKitPrivate9TDMClientCMo', '_$s16CryptoKitPrivate9TDMClientCMu', 
+                       '_$s16CryptoKitPrivate9TDMClientCN', '_$s16CryptoKitPrivate9TDMClientCfD', 
+                       '_$s16CryptoKitPrivate9TDMServerC11verifyToken6output3TID3FSRSb10Foundation4DataV_A2JtFTj', 
+                       '_$s16CryptoKitPrivate9TDMServerC11verifyToken6output3TID3FSRSb10Foundation4DataV_A2JtFTq', 
+                       '_$s16CryptoKitPrivate9TDMServerC4info10Foundation4DataVyFTj', 
+                       '_$s16CryptoKitPrivate9TDMServerC4info10Foundation4DataVyFTq', 
+                       '_$s16CryptoKitPrivate9TDMServerC8evaluate14blindedElementAA0D10EvaluationC10Foundation4DataV_tKFTj', 
+                       '_$s16CryptoKitPrivate9TDMServerC8evaluate14blindedElementAA0D10EvaluationC10Foundation4DataV_tKFTq', 
+                       '_$s16CryptoKitPrivate9TDMServerC9publicKey10Foundation4DataVyFTj', 
+                       '_$s16CryptoKitPrivate9TDMServerC9publicKey10Foundation4DataVyFTq', 
+                       '_$s16CryptoKitPrivate9TDMServerCACycfC', '_$s16CryptoKitPrivate9TDMServerCACycfc', 
+                       '_$s16CryptoKitPrivate9TDMServerCMa', '_$s16CryptoKitPrivate9TDMServerCMn', 
+                       '_$s16CryptoKitPrivate9TDMServerCMo', '_$s16CryptoKitPrivate9TDMServerCMu', 
+                       '_$s16CryptoKitPrivate9TDMServerCN', '_$s16CryptoKitPrivate9TDMServerCfD', 
                        '_$s19EphemeralPrivateKey09CryptoKitB008DHPublicC0PTl', '_$s7fromKEM16CryptoKitPrivate12KEMPublicKeyPTl', 
                        '_$s9CryptoKit10Curve25519O12KeyAgreementO06PublicD0V0aB7Private08DHPublicD0AHMc', 
                        '_$s9CryptoKit10Curve25519O12KeyAgreementO06PublicD0V0aB7Private08DHPublicD0AHWP', 
@@ -419,7 +446,9 @@ exports:
                        _CryptoKitPrivateVersionString, _ciphersuiteForKeyByteCount, 
                        _cryptokit_scrypt ]
     objc-classes:    [ RSABSSATokenBlinder, RSABSSATokenIssuer, RSABSSATokenReady, 
-                       RSABSSATokenWaitingActivation, _TtC16CryptoKitPrivate18AlishaSPAKE2Prover, 
-                       _TtC16CryptoKitPrivate19RSAPSSSPKI_Bridging, _TtC16CryptoKitPrivate27AlishaSPAKE2ProverConfirmed, 
-                       _TtC16CryptoKitPrivate6Scrypt ]
+                       RSABSSATokenWaitingActivation, TDMEvaluation, TDMTestServer, 
+                       TDMToken, _TtC16CryptoKitPrivate18AlishaSPAKE2Prover, _TtC16CryptoKitPrivate19RSAPSSSPKI_Bridging, 
+                       _TtC16CryptoKitPrivate19TDMServerEvaluation, _TtC16CryptoKitPrivate27AlishaSPAKE2ProverConfirmed, 
+                       _TtC16CryptoKitPrivate6Scrypt, _TtC16CryptoKitPrivate9TDMClient, 
+                       _TtC16CryptoKitPrivate9TDMServer ]
 ...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A99157E7-3028-3898-ACDD-38C10A05AD86
+    value:           20659CCD-ECB0-37C0-BD30-85011378888C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4516EDB0-6D46-3F1D-8A4B-D2C95133D405
+    value:           F3817811-76A8-3CC1-ACB3-2CD3B1E865EA
 install-name:    '/System/Library/PrivateFrameworks/IOCEC.framework/Versions/A/IOCEC'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

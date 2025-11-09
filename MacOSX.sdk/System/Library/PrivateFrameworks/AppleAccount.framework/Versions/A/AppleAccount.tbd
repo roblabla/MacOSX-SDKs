@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B0F20DE2-7B29-3C09-980E-2D4493879800
+    value:           F8E30BAF-1B22-3E5F-A074-BA9B86163E63
   - target:          x86_64-maccatalyst
-    value:           B0F20DE2-7B29-3C09-980E-2D4493879800
+    value:           F8E30BAF-1B22-3E5F-A074-BA9B86163E63
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19F4AC53-FA71-3B55-8F3F-ABA16CA34169
+    value:           DBC4346A-2DA6-3518-8D37-9BFAB9B9A433
   - target:          arm64e-maccatalyst
-    value:           19F4AC53-FA71-3B55-8F3F-ABA16CA34169
+    value:           DBC4346A-2DA6-3518-8D37-9BFAB9B9A433
 install-name:    '/System/Library/PrivateFrameworks/AppleAccount.framework/Versions/A/AppleAccount'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,19 +30,20 @@ exports:
                        _AADataclassesKey, _AADefaultGrandSlamTokenHeaderKey, _AAErrorDomain, 
                        _AAFamilyEligibilityKey, _AAFamilyGrandSlamTokenHeaderKey, 
                        _AAFollowUpActionDismiss, _AAFollowUpActionPrimary, _AAFollowUpClientIdentifier, 
-                       _AAFollowUpExtensionIdentifier, _AAFollowUpIdentifierBeneficiaryRemoved, 
-                       _AAFollowUpIdentifierCustodianEmbargo, _AAFollowUpIdentifierCustodianInvitationReminder, 
-                       _AAFollowUpIdentifierCustodianRemoved, _AAFollowUpIdentifierRenewCredentials, 
-                       _AAFollowUpIdentifierStartUsing, _AAFollowUpIdentifierUserInfoKey, 
-                       _AAFollowUpIdentifierVerifyTerms, _AAFollowUpOpenPrefPaneActionAddBeneficiary, 
-                       _AAFollowUpOpenPrefPaneActionAddCustodian, _AAFollowUpOpenPrefPaneActionCustodianRecovery, 
+                       _AAFollowUpExtensionIdentifier, _AAFollowUpIdentifierBeneficiaryIneligible, 
+                       _AAFollowUpIdentifierBeneficiaryRemoved, _AAFollowUpIdentifierCustodianEmbargo, 
+                       _AAFollowUpIdentifierCustodianInvitationReminder, _AAFollowUpIdentifierCustodianRemoved, 
+                       _AAFollowUpIdentifierRenewCredentials, _AAFollowUpIdentifierStartUsing, 
+                       _AAFollowUpIdentifierUserInfoKey, _AAFollowUpIdentifierVerifyTerms, 
+                       _AAFollowUpOpenPrefPaneActionAddBeneficiary, _AAFollowUpOpenPrefPaneActionAddCustodian, 
+                       _AAFollowUpOpenPrefPaneActionBeneficiaryList, _AAFollowUpOpenPrefPaneActionCustodianRecovery, 
                        _AAFollowUpOpenPrefPaneActionKey, _AAFollowUpOpenPrefPaneActionRenewAuth, 
                        _AAFollowUpOpenPrefPaneActionShowAppleIDLogin, _AAFollowUpOpenPrefPaneActionShowTrustedContacts, 
                        _AAFollowUpOpenPrefPaneActionTerms, _AAFollowUpOpenPrefPaneURL, 
-                       _AAFollowUpTrustedContactHandle, _AAFollowUpTrustedContactID, 
-                       _AAFollowUpTrustedContactInvitationURL, _AAFollowUpTrustedContactName, 
-                       _AAFollowUpUserInfoAccountIdentifier, _AAFollowUpUserInfoAltDSID, 
-                       _AAFollowUpUserInfoCFUType, _AAFollowUpUserInfoClientName, 
+                       _AAFollowUpTrustedContactFirstName, _AAFollowUpTrustedContactHandle, 
+                       _AAFollowUpTrustedContactID, _AAFollowUpTrustedContactInvitationURL, 
+                       _AAFollowUpTrustedContactName, _AAFollowUpUserInfoAccountIdentifier, 
+                       _AAFollowUpUserInfoAltDSID, _AAFollowUpUserInfoCFUType, _AAFollowUpUserInfoClientName, 
                        _AAFollowUpUserInfoCustodianSessionID, _AAFollowUpUserInfoNotificationAltButtonTitle, 
                        _AAFollowUpUserInfoNotificationBody, _AAFollowUpUserInfoNotificationButtonTitle, 
                        _AAFollowUpUserInfoNotificationDelay, _AAFollowUpUserInfoNotificationFrequency, 
@@ -51,10 +52,13 @@ exports:
                        _AAGrandSlamAppTokenIDAppleIDSettings, _AAGrandSlamAppTokenIDFamilySharing, 
                        _AAGrandSlamAppTokenIDiCloudSettings, _AAHTTPHeaderDeviceUDID, 
                        _AAHTTPHeaderMachineID, _AAHTTPHeaderOneTimePassword, _AAHTTPHeaderXAppleMDAction, 
-                       _AAHTTPHeaderXAppleMDData, _AAInheritanceAccessKeyKey, _AAInheritanceBenefactorAltDSIDKey, 
-                       _AAInheritanceBeneficiaryIDKey, _AAInheritanceContactChangedNotification, 
+                       _AAHTTPHeaderXAppleMDData, _AAIDSRegistrationPropertySupportsLegacyContact, 
+                       _AAInheritanceAccessKeyKey, _AAInheritanceBenefactorAltDSIDKey, 
+                       _AAInheritanceBeneficiaryIDKey, _AAInheritanceConfigDurationBeforeNotSetupCFUKey, 
+                       _AAInheritanceConfigStaleInviteDurationKey, _AAInheritanceContactChangedNotification, 
                        _AAInheritanceContactHandleKey, _AAInheritanceErrorDomain, 
-                       _AAInheritanceMachService, _AALocalizedStringForKey, _AALocalizedStringForServiceType, 
+                       _AAInheritanceMachService, _AAInheritanceSetupHelpURL, _AALocalizedStringForKey, 
+                       _AALocalizedStringForKeyInTable, _AALocalizedStringForServiceType, 
                        _AALoginDelegatesAppleIDKey, _AALoginDelegatesDSIDKey, _AALoginDelegatesDelegatesKey, 
                        _AALoginDelegatesPasswordKey, _AALoginDelegatesResponseParametersKey, 
                        _AALoginDelegatesServiceDataKey, _AALoginDelegatesStatusKey, 
@@ -96,6 +100,7 @@ exports:
                        _AAURLEndpointLoginDelegates, _AAURLEndpointLoginOrCreateAccount, 
                        _AAURLEndpointQualifyCertificate, _AAURLEndpointQualifySession, 
                        _AAURLKeyFlowType, _AAURLKeyFlowTypeBeneficiary, _AAURLKeyFlowTypeCustodian, 
+                       _AAURLKeyFlowTypeCustomDomain, _AAURLKeyFlowTypeMailManage, 
                        _AAURLKeyFlowTypePrivateEmailManage, _AAURLKeyID, _AAURLProtocolScheme, 
                        _IDSRegistrationPropertySupportsCustodian, _IDSRegistrationPropertyUnknown, 
                        __AABeneficiaryClaimUIURLKey, __AAErrorUnderlyingError, __AAIDSServiceName, 
@@ -227,28 +232,29 @@ exports:
                        _kLegacyAAAccountProtocolVersionKey ]
     objc-classes:    [ AAAbsintheContext, AAAbsintheSigner, AAAbsintheSignerContextCache, 
                        AAAcceptedTermsController, AAAccount, AAAccountBeneficiaryManagementViewModel, 
-                       AAAccountManagementUIResponse, AAAccountManager, AAAccountRecoveryManagementViewModel, 
-                       AAAddEmailUIRequest, AAAppleIDSettingsRequest, AAAppleTVRequest, 
-                       AAAttestationSigner, AAAuthenticateRequest, AAAuthenticationResponse, 
-                       AAAutoAccountVerifier, AAAvailabilityRequest, AAAvailabilityResponse, 
-                       AABenefactorInfo, AABeneficiary, AABeneficiaryClaimUIRequest, 
-                       AABeneficiaryInfo, AACertificatePinner, AACloudKitDevicesListRequest, 
-                       AACloudKitDevicesListResponse, AACloudKitMigrationStateRequest, 
-                       AACloudKitMigrationStateResponse, AACloudKitStartMigrationRequest, 
-                       AACloudKitStartMigrationResponse, AACompleteEmailVettingRequest, 
-                       AACompleteEmailVettingResponse, AAContactsManager, AAContactsProvider, 
-                       AACustodianChooseContactViewModel, AACustodianController, 
-                       AACustodianDaemonConnection, AACustodianDaemonInterface, AACustodianDataRecoveryKeys, 
-                       AACustodianInvitationResponseContext, AACustodianMessageInviteContext, 
-                       AACustodianPasswordResetInformation, AACustodianRecoveryConfiguration, 
-                       AACustodianRecoveryRequestContext, AACustodianSetupRequestContext, 
-                       AACustodianshipInfo, AADaemonController, AADataclassManager, 
-                       AADevice, AADeviceInfo, AADeviceList, AADeviceListRequest, 
-                       AADeviceListResponse, AADeviceProvisioningRequest, AADeviceProvisioningResponse, 
-                       AADeviceProvisioningSession, AAEmailVettingRequest, AAFMIPAuthenticateRequest, 
-                       AAFMIPAuthenticateResponse, AAFamilyDetailsRequest, AAFamilyDetailsResponse, 
-                       AAFamilyEligibilityRequest, AAFamilyEligibilityResponse, AAFamilyInvite, 
-                       AAFamilyMember, AAFamilyRequest, AAFollowUpController, AAFollowUpUtilities, 
+                       AAAccountContactPromptModel, AAAccountManagementUIResponse, 
+                       AAAccountManager, AAAccountRecoveryManagementViewModel, AAAddEmailUIRequest, 
+                       AAAppleIDSettingsRequest, AAAppleTVRequest, AAAttestationSigner, 
+                       AAAuthenticateRequest, AAAuthenticationResponse, AAAutoAccountVerifier, 
+                       AAAvailabilityRequest, AAAvailabilityResponse, AABenefactorInfo, 
+                       AABeneficiary, AABeneficiaryClaimUIRequest, AABeneficiaryInfo, 
+                       AACertificatePinner, AACloudKitDevicesListRequest, AACloudKitDevicesListResponse, 
+                       AACloudKitMigrationStateRequest, AACloudKitMigrationStateResponse, 
+                       AACloudKitStartMigrationRequest, AACloudKitStartMigrationResponse, 
+                       AACompleteEmailVettingRequest, AACompleteEmailVettingResponse, 
+                       AAContactsManager, AAContactsProvider, AACustodianChooseContactViewModel, 
+                       AACustodianController, AACustodianDaemonConnection, AACustodianDaemonInterface, 
+                       AACustodianDataRecoveryKeys, AACustodianInvitationResponseContext, 
+                       AACustodianMessageInviteContext, AACustodianPasswordResetInformation, 
+                       AACustodianRecoveryConfiguration, AACustodianRecoveryRequestContext, 
+                       AACustodianSetupRequestContext, AACustodianshipInfo, AADaemonController, 
+                       AADataclassManager, AADevice, AADeviceInfo, AADeviceList, 
+                       AADeviceListRequest, AADeviceListResponse, AADeviceProvisioningRequest, 
+                       AADeviceProvisioningResponse, AADeviceProvisioningSession, 
+                       AAEmailVettingRequest, AAFMIPAuthenticateRequest, AAFMIPAuthenticateResponse, 
+                       AAFamilyDetailsRequest, AAFamilyDetailsResponse, AAFamilyEligibilityRequest, 
+                       AAFamilyEligibilityResponse, AAFamilyInvite, AAFamilyMember, 
+                       AAFamilyRequest, AAFollowUpController, AAFollowUpUtilities, 
                        AAGenericTermsUIRequest, AAGenericTermsUIResponse, AAGrandSlamSigner, 
                        AAInheritance, AAInheritanceContactController, AAInheritanceContactsViewModel, 
                        AAInheritanceController, AAInheritanceInvitation, AAInheritanceMessageInviteContext, 

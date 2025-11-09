@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D25A02C1-7F01-3198-9C96-A426937A88FE
+    value:           530AC673-F2CB-3EB2-A757-E1D688645EAD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           994A968A-5F6A-3737-83F3-5FF68F8E57BC
+    value:           2FF1ED3D-E003-3A16-92D1-2792AF2272B1
 install-name:    '/System/Library/PrivateFrameworks/MallocStackLogging.framework/Versions/A/MallocStackLogging'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

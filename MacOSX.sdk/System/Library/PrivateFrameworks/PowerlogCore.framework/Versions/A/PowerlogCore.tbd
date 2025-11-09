@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           92AE74C5-1EE7-39B4-88E6-A6418E5F09C9
+    value:           59F09291-74BC-3248-93A1-E43C10E7A05A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F12DDC6-5D7B-375F-A8B4-F1274ACCEC2E
+    value:           72B30C19-B273-3DF8-869F-0021297D17CB
 install-name:    '/System/Library/PrivateFrameworks/PowerlogCore.framework/Versions/A/PowerlogCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -61,7 +61,7 @@ exports:
                        _kPLAccountingOperatorNameQualificationEventsQualificationID, 
                        _kPLAccountingOperatorNameQualificationEventsStartOffset, 
                        _kPLBB16, _kPLBB17, _kPLBB18, _kPLBB19, _kPLBB19B, _kPLBB20B, 
-                       _kPLCacheSizeForBackupDatabaseConnection, _kPLCanSleepSemaphore, 
+                       _kPLBB20C, _kPLCacheSizeForBackupDatabaseConnection, _kPLCanSleepSemaphore, 
                        _kPLDefaultCacheSize, _kPLDefaultCacheSpillSize, _kPLEDAggregateBucketRetainDuration, 
                        _kPLEDAggregateBuckets, _kPLEDAggregateFunction, _kPLEDAggregateKeys, 
                        _kPLEDAggregateWallClockBucket, _kPLEDAllowNilTimestamp, _kPLEDAppIdentifierKeys, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           90AF4153-163D-30FA-8A72-0E5DE7E7B417
+    value:           619BC1FA-B7AB-3729-8573-F741EA321B65
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66E7D3DC-8239-34CD-840D-17A4B27D6607
+    value:           880C9B49-2ED7-3BD9-8BCF-3297CEBAB735
 install-name:    '/System/Library/PrivateFrameworks/AudioDSPManager.framework/Versions/A/AudioDSPManager'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

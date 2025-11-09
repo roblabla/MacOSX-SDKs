@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F895069-27E3-3087-A30E-515F5FC9F493
+    value:           4F8F4769-F0FC-36D8-99F9-76FC48CE9639
   - target:          x86_64-maccatalyst
-    value:           4F895069-27E3-3087-A30E-515F5FC9F493
+    value:           4F8F4769-F0FC-36D8-99F9-76FC48CE9639
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD7CDF11-986E-3754-8011-E628C3BE8380
+    value:           589677DD-19B7-3F93-B2B6-EED7117729CA
   - target:          arm64e-maccatalyst
-    value:           CD7CDF11-986E-3754-8011-E628C3BE8380
+    value:           589677DD-19B7-3F93-B2B6-EED7117729CA
 install-name:    '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation'
-current-version: 1856.105
+current-version: 1858.112
 compatibility-version: 300
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -693,7 +693,8 @@ exports:
                        _NSLocalizedRecoveryOptionsErrorKey, _NSLocalizedRecoverySuggestionErrorKey, 
                        _NSLog, _NSLogPageSize, _NSLogv, _NSMachErrorDomain, _NSMallocZone, 
                        _NSMapGet, _NSMapInsert, _NSMapInsertIfAbsent, _NSMapInsertKnownAbsent, 
-                       _NSMapMember, _NSMapRemove, _NSMaximumKeyValueOperator, _NSMaximumValidValueErrorKey, 
+                       _NSMapMember, _NSMapRemove, _NSMarkdownSourcePositionAttributeName, 
+                       _NSMaximumKeyValueOperator, _NSMaximumValidValueErrorKey, 
                        _NSMetadataItemAcquisitionMakeKey, _NSMetadataItemAcquisitionModelKey, 
                        _NSMetadataItemAlbumKey, _NSMetadataItemAltitudeKey, _NSMetadataItemApertureKey, 
                        _NSMetadataItemAppleLoopDescriptorsKey, _NSMetadataItemAppleLoopsKeyFilterTypeKey, 
@@ -981,7 +982,8 @@ exports:
                        NSAlignmentLayoutRule, NSAppleEventDescriptor, NSAppleEventManager, 
                        NSAppleScript, NSArchiver, NSArrayChange, NSArrayChanges, 
                        NSAssertionHandler, NSAttributedString, NSAttributedStringMarkdownParsingOptions, 
-                       NSAutoreleasePool, NSAutoresizingMaskLayoutConstraint, NSBackgroundActivityScheduler, 
+                       NSAttributedStringMarkdownSourcePosition, NSAutoreleasePool, 
+                       NSAutoresizingMaskLayoutConstraint, NSBackgroundActivityScheduler, 
                        NSBigMutableString, NSBlockOperation, NSBlockPredicate, NSBoundKeyPath, 
                        NSBundle, NSBundleResourceRequest, NSByteCountFormatter, NSCachedURLResponse, 
                        NSCalendarDate, NSCharacterSet, NSCheapMutableString, NSClassDescription, 

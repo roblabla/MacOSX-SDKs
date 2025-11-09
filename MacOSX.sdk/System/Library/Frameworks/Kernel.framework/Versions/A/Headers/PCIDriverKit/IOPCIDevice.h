@@ -1,4 +1,4 @@
-/* iig(DriverKit-191.60.3) generated from IOPCIDevice.iig */
+/* iig(DriverKit-192.100.7) generated from IOPCIDevice.iig */
 
 /* IOPCIDevice.iig:1-71 */
 /*
@@ -72,7 +72,7 @@ enum IOPCIBARType
     kPCIBARTypeM64PF = 0x0c, /* 64-bit Prefetchable Memory */
 };
 
-/* source class IOPCIDevice IOPCIDevice.iig:72-369 */
+/* source class IOPCIDevice IOPCIDevice.iig:72-386 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -123,7 +123,7 @@ public:
 
     /*!
      * @brief       Close a session to the IOPCIDevice
-     * @discussion  This method closes an open session to an IOPCIDevice. Closing the open session will also turn off the Bus Master Enable and
+     * @discussion  This method closes an open session to an IOPCIDevice. Closing the open session will also turn off the Bus Lead Enable and
      *              Memory Space Enable bits defined in the command register in the PCI spec
      * @param       forClient The IOService that is closing its session.
      * @param       options See IOService.h
@@ -375,12 +375,29 @@ public:
                uint8_t*  memoryIndex,
                uint64_t* barSize = 0,
                uint8_t*  barType = 0);
+
+#pragma mark Interrupts Allocation
+
+    /*!
+     * @brief       Configure interrupts
+     * @discussion  This method allocates interrupts based on the passed parameters and the device's capabilities, i.e. MSI(X).
+     * @param       interruptType kIOInterruptTypeLevel, kIOInterruptTypePCIMessaged or kIOInterruptTypePCIMessagedX.
+     * @param       numRequired The minimum number of vectors for allocation to succeed.
+     * @param       numRequested The desired number of vectors to allocate.
+     * @param       options Unused.
+     * @result      kIOReturnSuccess if there were no errors.
+     */
+    virtual kern_return_t
+    ConfigureInterrupts(uint32_t interruptType,
+                        uint32_t numRequired  = 1,
+                        uint32_t numRequested = 1,
+                        IOOptionBits options  = 0);
 };
 
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOPCIDevice IOPCIDevice.iig:72-369 */
+/* generated class IOPCIDevice IOPCIDevice.iig:72-386 */
 
 #define IOPCIDevice__ManageSession_ID            0xd395e45429887c65ULL
 #define IOPCIDevice__CopyDeviceMemoryWithIndex_ID            0x8fbfd4a80b3ed3f1ULL
@@ -392,6 +409,7 @@ public:
 #define IOPCIDevice_SaveDeviceState_ID            0xf6f91d3296a44c78ULL
 #define IOPCIDevice_RestoreDeviceState_ID            0xa3652c7a818b5b57ULL
 #define IOPCIDevice_GetBARInfo_ID            0x921a80175d4aa69dULL
+#define IOPCIDevice_ConfigureInterrupts_ID            0xfce109388a474487ULL
 
 #define IOPCIDevice__ManageSession_Args \
         IOService * forClient, \
@@ -445,6 +463,12 @@ public:
         uint8_t * memoryIndex, \
         uint64_t * barSize, \
         uint8_t * barType
+
+#define IOPCIDevice_ConfigureInterrupts_Args \
+        uint32_t interruptType, \
+        uint32_t numRequired, \
+        uint32_t numRequested, \
+        IOOptionBits options
 
 #define IOPCIDevice_Methods \
 \
@@ -610,6 +634,14 @@ public:\
         uint8_t * barType = 0,\
         OSDispatchMethod supermethod = NULL);\
 \
+    kern_return_t\
+    ConfigureInterrupts(\
+        uint32_t interruptType,\
+        uint32_t numRequired = 1,\
+        uint32_t numRequested = 1,\
+        IOOptionBits options = 0,\
+        OSDispatchMethod supermethod = NULL);\
+\
 \
 protected:\
     /* _Impl methods */\
@@ -678,6 +710,12 @@ public:\
         OSMetaClassBase * target,\
         GetBARInfo_Handler func);\
 \
+    typedef kern_return_t (*ConfigureInterrupts_Handler)(OSMetaClassBase * target, IOPCIDevice_ConfigureInterrupts_Args);\
+    static kern_return_t\
+    ConfigureInterrupts_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        ConfigureInterrupts_Handler func);\
+\
 
 
 #define IOPCIDevice_KernelMethods \
@@ -720,6 +758,9 @@ protected:\
 \
     kern_return_t\
     GetBARInfo_Impl(IOPCIDevice_GetBARInfo_Args);\
+\
+    kern_return_t\
+    ConfigureInterrupts_Impl(IOPCIDevice_ConfigureInterrupts_Args);\
 \
 
 
@@ -800,9 +841,9 @@ IOPCIDevice_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOPCIDevice.iig:371-372 */
+/* IOPCIDevice.iig:388-389 */
 
 #pragma mark Private Class Extension
-/* IOPCIDevice.iig:395- */
+/* IOPCIDevice.iig:412- */
 
 #endif /* ! _IOKIT_UIOPCIDEVICE_H */

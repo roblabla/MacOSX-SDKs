@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           69AEBE9B-7CB4-318C-AC19-DCED220DA0A0
+    value:           DF3CA0E4-38AD-3440-8BE3-9D67BF46543B
   - target:          x86_64-maccatalyst
-    value:           69AEBE9B-7CB4-318C-AC19-DCED220DA0A0
+    value:           DF3CA0E4-38AD-3440-8BE3-9D67BF46543B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CCBB8DE0-AE0D-3893-BB73-E8F2B04939B8
+    value:           4FADC3F4-915F-36FB-A06E-5A2DB4348BEF
   - target:          arm64e-maccatalyst
-    value:           CCBB8DE0-AE0D-3893-BB73-E8F2B04939B8
+    value:           4FADC3F4-915F-36FB-A06E-5A2DB4348BEF
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderBrailleDriver.framework/Versions/A/ScreenReaderBrailleDriver'
 current-version: 390
 exports:

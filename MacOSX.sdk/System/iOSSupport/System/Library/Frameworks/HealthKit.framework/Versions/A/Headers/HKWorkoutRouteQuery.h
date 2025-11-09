@@ -18,7 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    Once instantiated, call HKHealthStore executeQuery to begin enumerating the route data. Call
                 HKHealthStore stopQuery to discontinue further route data reporting.
  */
-HK_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKWorkoutRouteQueryDescriptor", ios(11.0, API_TO_BE_DEPRECATED), watchos(4.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(11.0), watchos(4.0))
+#endif
 @interface HKWorkoutRouteQuery : HKQuery
 
 /*!

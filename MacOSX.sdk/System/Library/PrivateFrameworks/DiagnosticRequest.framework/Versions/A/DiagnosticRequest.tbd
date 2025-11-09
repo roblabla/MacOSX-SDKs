@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C6411D0A-BDC6-3F9E-8285-6A74C68B1B47
+    value:           FE5D7798-75A6-390E-854D-8F73B5C24E41
   - target:          x86_64-maccatalyst
-    value:           C6411D0A-BDC6-3F9E-8285-6A74C68B1B47
+    value:           FE5D7798-75A6-390E-854D-8F73B5C24E41
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FB888C1-09AA-3398-A8B1-7F2F903D2650
+    value:           93B771F6-D036-3539-90B2-89B77BC148F0
   - target:          arm64e-maccatalyst
-    value:           5FB888C1-09AA-3398-A8B1-7F2F903D2650
+    value:           93B771F6-D036-3539-90B2-89B77BC148F0
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequest.framework/Versions/A/DiagnosticRequest'
 current-version: 0
 exports:
@@ -24,14 +24,14 @@ exports:
                        _DRShouldGatherLog, _DRSubmitLog, _DRSubmitLogToCKContainer, 
                        _DRTailspinRequest, __DPCEnableLogGatheringQueryMessage, __DPCGetCloudChannelConfig, 
                        __DPCGetConfigStateForUUID, __DPCInjectEnableLogGatheringQueryResult, 
-                       __DPCMarkConfigUUIDCompletedOrRejected, __DPCRequestTeamIDBroadcast, 
-                       __DPCResetToDefaultCloudChannelConfig, __DPCSendClearTaskingStateMessage, 
-                       __DPCSendTaskingSystemJSONDataMessage, __DPCSetCloudChannelConfig, 
-                       __DPCSubmitLogRequestMessage, __DPCSubmitLogToCKContainerRequestMessage, 
-                       __DPCTailspinRequestMessage, __DPCTriggerRequestClean, __DPClientXPCSendMessage, 
-                       __DPClientXPCSendMessageWithReplySync, __DRCResetDampeningConfigurationToDefault, 
-                       __DRCSetDampeningConfigurationDefaults, __DRCSetDampeningIsEnabled, 
-                       __DRCTriggerCloudKitWork, __DRRequestPassesTailspinHysteresis, 
+                       __DPCMarkConfigUUIDCompletedOrRejected, __DPCRefreshDampeningConfiguration, 
+                       __DPCRequestTeamIDBroadcast, __DPCResetToDefaultCloudChannelConfig, 
+                       __DPCSendClearTaskingStateMessage, __DPCSendTaskingSystemJSONDataMessage, 
+                       __DPCSetCloudChannelConfig, __DPCSubmitLogRequestMessage, 
+                       __DPCSubmitLogToCKContainerRequestMessage, __DPCTailspinRequestMessage, 
+                       __DPCTriggerRequestClean, __DPClientXPCSendMessage, __DPClientXPCSendMessageWithReplySync, 
+                       __DRCResetDampeningConfigurationToDefault, __DRCSetDampeningConfigurationDefaults, 
+                       __DRCSetDampeningIsEnabled, __DRCTriggerCloudKitWork, __DRRequestPassesTailspinHysteresis, 
                        _kDRRequestClientError, _kDRRequestOversizedContextDictErrorString, 
                        _kMinimumTailspinLeewaySeconds ]
     objc-classes:    [ DRConfig, DRConfigMonitor, DRSubscriptionManager ]

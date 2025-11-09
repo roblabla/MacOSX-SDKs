@@ -251,6 +251,8 @@ typedef AUAudioUnitStatus (^AUInternalRenderBlock)(
         output in one render call, set this property to increase the buffer.
 
         This only provides a recommendation to the framework.
+ 
+        Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
 */
 @property (NS_NONATOMIC_IOSONLY) NSInteger MIDIOutputBufferSizeHint API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 

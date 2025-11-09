@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2A13B3EC-E3C6-339F-BAFB-B2EE39E0DBBD
+    value:           A85E75F1-60C3-34CC-B514-8A0D7CC184EA
   - target:          x86_64-maccatalyst
-    value:           2A13B3EC-E3C6-339F-BAFB-B2EE39E0DBBD
+    value:           A85E75F1-60C3-34CC-B514-8A0D7CC184EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           542C5525-F648-39E3-9647-715BFDDEC8E3
+    value:           B4B9989F-F2DD-380A-BBB5-A53002CE97DE
   - target:          arm64e-maccatalyst
-    value:           542C5525-F648-39E3-9647-715BFDDEC8E3
+    value:           B4B9989F-F2DD-380A-BBB5-A53002CE97DE
 install-name:    '/System/Library/PrivateFrameworks/perfdata.framework/Versions/A/perfdata'
-current-version: 78
+current-version: 82
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

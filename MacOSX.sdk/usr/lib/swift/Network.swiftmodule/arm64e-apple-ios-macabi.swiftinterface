@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -module-name Network
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Network
+// swift-module-flags-ignorable: -user-module-version 2750.100.70
 import Darwin
 import Dispatch
 import Foundation
@@ -376,6 +377,11 @@ public class NWProtocolFramer : Network.NWProtocol {
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class Options : Network.NWProtocolOptions {
     public init(definition: Network.NWProtocolFramer.Definition)
+    @available(macOS 12.3, iOS 15.4, watchOS 8.4, tvOS 15.4, *)
+    public subscript(key: Swift.String) -> Any? {
+      get
+      set(value)
+    }
     @objc deinit
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class Message : Network.NWProtocolMetadata {
@@ -425,6 +431,10 @@ public class NWProtocolFramer : Network.NWProtocol {
       get
     }
     final public var parameters: Network.NWParameters? {
+      get
+    }
+    @available(macOS 12.3, iOS 15.4, watchOS 8.4, tvOS 15.4, *)
+    final public var options: Network.NWProtocolFramer.Options {
       get
     }
     final public func prependApplicationProtocol(options: Network.NWProtocolOptions) throws

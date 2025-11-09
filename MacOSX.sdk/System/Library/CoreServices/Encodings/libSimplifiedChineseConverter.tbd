@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           258DF2BC-9590-3475-B427-CE4DD34EB963
+    value:           02112221-1338-3E81-81C0-9BDCA6426926
   - target:          x86_64-maccatalyst
-    value:           258DF2BC-9590-3475-B427-CE4DD34EB963
+    value:           02112221-1338-3E81-81C0-9BDCA6426926
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C62C15E1-ED51-358A-B943-017CEBD1B2AC
+    value:           8F75AE8F-12E0-3F4B-BEE6-382A515361F5
   - target:          arm64e-maccatalyst
-    value:           C62C15E1-ED51-358A-B943-017CEBD1B2AC
+    value:           8F75AE8F-12E0-3F4B-BEE6-382A515361F5
 install-name:    '/System/Library/CoreServices/Encodings/libSimplifiedChineseConverter.dylib'
 current-version: 100
 exports:

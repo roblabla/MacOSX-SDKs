@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           19186B55-4D36-36F4-A31D-8D0E1955F1A8
+    value:           36D0E6C5-1D4C-3F7B-BB8A-259CDC65B134
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FDD1D787-A7F6-3799-9382-9ACD5ADF0A16
+    value:           FF73EE39-C07A-3DDC-AD44-B056A2175E7D
 install-name:    '/System/Library/PrivateFrameworks/AppStoreKit.framework/Versions/A/AppStoreKit'
 swift-abi-version: 7
 allowable-clients:
@@ -765,6 +765,7 @@ exports:
                        '_$s11AppStoreKit7ArtworkC2idSSvg', '_$s11AppStoreKit7ArtworkC2idSSvpMV', 
                        '_$s11AppStoreKit7ArtworkC4CropV012squareCenterE0AEvgZ', '_$s11AppStoreKit7ArtworkC4CropV10sourceSizeAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV11boundingBoxAEvgZ', '_$s11AppStoreKit7ArtworkC4CropV17specificRectangleAEvgZ', 
+                       '_$s11AppStoreKit7ArtworkC4CropV20condensedSearchStoryAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV20preferredContentModeAC0gH0Ovg', 
                        '_$s11AppStoreKit7ArtworkC4CropV20preferredContentModeAC0gH0OvpMV', 
                        '_$s11AppStoreKit7ArtworkC4CropV2ekAEvgZ', '_$s11AppStoreKit7ArtworkC4CropV2elAEvgZ', 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3751D537-001B-35A7-AF7F-9E2AE7A42631
+    value:           DC86D47F-E44C-330D-886B-9CF35EA2ED8A
   - target:          x86_64-maccatalyst
-    value:           3751D537-001B-35A7-AF7F-9E2AE7A42631
+    value:           DC86D47F-E44C-330D-886B-9CF35EA2ED8A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24121B3B-EAAE-3A13-8CB2-9D881824526F
+    value:           7F8D9117-58CC-314A-B94D-73B4DF0841BB
   - target:          arm64e-maccatalyst
-    value:           24121B3B-EAAE-3A13-8CB2-9D881824526F
+    value:           7F8D9117-58CC-314A-B94D-73B4DF0841BB
 install-name:    '/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -31,10 +31,10 @@ exports:
                        _CWBaseStationPPPConnectionTimeKey, _CWBaseStationPPPHardwareTypeKey, 
                        _CWBaseStationPPPPhoneNumberKey, _CWBaseStationPPPProtocolKey, 
                        _CWBaseStationPPPRemainingTimeKey, _CWBaseStationPPPStatusDidChangeNotification, 
-                       _CWClearRecoveryNetworksFromNVRAM, _CWConfigurationAddNetworkProfile, 
-                       _CWConfigurationRemoveNetworkProfile, _CWConfigurationSetPreferredNetworkProfile, 
-                       _CWCountryCodeDidChangeNotification, _CWCurrentTimestamp, 
-                       _CWDHCPStatusDidChangeNotification, _CWDescriptionForAWDLSuspendReason, 
+                       _CWClearRecoveryNetworksFromNVRAM, _CWClearRecoveryNetworksFromNonSecureNVRAM, 
+                       _CWConfigurationAddNetworkProfile, _CWConfigurationRemoveNetworkProfile, 
+                       _CWConfigurationSetPreferredNetworkProfile, _CWCountryCodeDidChangeNotification, 
+                       _CWCurrentTimestamp, _CWDHCPStatusDidChangeNotification, _CWDescriptionForAWDLSuspendReason, 
                        _CWDescriptionForAutoJoinDeferralReason, _CWDescriptionForAutoJoinTrigger, 
                        _CWDescriptionForXPCErrorCode, _CWDeviceDidAttachNotification, 
                        _CWDeviceDidDetachNotification, _CWDumpTemporaryLog, _CWDynamicConfigurationDidChangeNotification, 

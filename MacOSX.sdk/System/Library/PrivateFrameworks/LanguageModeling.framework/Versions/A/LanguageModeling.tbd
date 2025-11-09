@@ -4,38 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3F7D450B-7BEB-3D0A-BD11-3E512537934B
+    value:           5E765CC3-26A0-3D25-8ED1-FA80CA06ACC5
   - target:          x86_64-maccatalyst
-    value:           3F7D450B-7BEB-3D0A-BD11-3E512537934B
+    value:           5E765CC3-26A0-3D25-8ED1-FA80CA06ACC5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6E4B8F5-E3D9-376D-8FE0-0615613D16A1
+    value:           0610D2A8-AE63-3D61-9620-6325DA3CB87A
   - target:          arm64e-maccatalyst
-    value:           B6E4B8F5-E3D9-376D-8FE0-0615613D16A1
+    value:           0610D2A8-AE63-3D61-9620-6325DA3CB87A
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 277.1
+current-version: 277.4
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 
                        __ZTINSt3__110__function6__baseIFbjEEE, __ZTINSt3__110__function6__baseIFdmEEE, 
                        __ZTINSt3__110__function6__baseIFfjjEEE, __ZTINSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__15dequeIiNS_9allocatorIiEEEE, __ZTSNSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__15dequeIiNS_9allocatorIiEEEE, 
+                       __ZTSNSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 
                        __ZTSNSt3__110__function6__baseIFbjEEE, __ZTSNSt3__110__function6__baseIFdmEEE, 
                        __ZTSNSt3__110__function6__baseIFfjjEEE, __ZTSNSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__15dequeIiNS_9allocatorIiEEEE ]
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__15dequeIiNS_9allocatorIiEEEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LMCreateMontrealIDsFromLMTokenIDSequence, _LMEnumerateAssetDataItems, 
@@ -151,7 +142,8 @@ exports:
                        __ZN17language_modeling2v123kExcludeMobileAssetsKeyE, __ZN17language_modeling2v123kNamedEntityWordLexiconE, 
                        __ZN17language_modeling2v125kClassLabelSingularNumberE, __ZN17language_modeling2v125kNamedEntityPhraseLexiconE, 
                        __ZN17language_modeling2v126kEnableAdaptationOptionKeyE, __ZN17language_modeling2v126kEnvironmentSessionTypeKeyE, 
-                       __ZN17language_modeling2v126kLocaleIdentifierOptionKeyE, __ZN17language_modeling2v128kClassLabelSentenceDelimiterE, 
+                       __ZN17language_modeling2v126kLocaleIdentifierOptionKeyE, __ZN17language_modeling2v127kWaitForABTestingParametersE, 
+                       __ZN17language_modeling2v128kClassLabelSentenceDelimiterE, 
                        __ZN17language_modeling2v128kDynamicLexiconNameOptionKeyE, 
                        __ZN17language_modeling2v128kEnvironmentAppIdentifierKeyE, 
                        __ZN17language_modeling2v131kClassLabelReplacementCharacterE, 
@@ -242,8 +234,8 @@ exports:
                        _kLMLanguageModelTagSpatialTemporalMatchCountWeightKey, _kLMLanguageModelUnknownTokenPenaltyKey, 
                        _kLMLanguageModelUseDynamicTokenCharacterFilterKey, _kLMLanguageModelUseMontrealKey, 
                        _kLMLanguageModelUseMontrealUNKKey, _kLMLanguageModelUseSerializedCacheKey, 
-                       _kLMLanguageModelUseSpecialNumberTokenKey, _kLMRecordFamilyNameKey, 
-                       _kLMRecordGivenNameKey, _kLMRecordHashKey, _kLMRecordNicknameKey, 
-                       _kLMTestingParametersGeometryModelBundlePathKey, _kLMVocabularyLocaleKey, 
-                       _lmga_getAttributeValue, _lmga_setAttributeValue ]
+                       _kLMLanguageModelUseSpecialNumberTokenKey, _kLMLanguageModelWaitForABTestingParameters, 
+                       _kLMRecordFamilyNameKey, _kLMRecordGivenNameKey, _kLMRecordHashKey, 
+                       _kLMRecordNicknameKey, _kLMTestingParametersGeometryModelBundlePathKey, 
+                       _kLMVocabularyLocaleKey, _lmga_getAttributeValue, _lmga_setAttributeValue ]
 ...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           289D9B8D-C29B-39FC-B121-D601BD7F6EEF
+    value:           4364C089-04FA-36F7-BFF7-322F58911FDC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           05AF1FB5-6E13-34FC-9437-37848010BC85
+    value:           18A63B5E-EC1B-3D07-B315-30F8FA21161A
 install-name:    '/System/Library/PrivateFrameworks/SystemMigrationUtils.framework/Versions/A/SystemMigrationUtils'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -29,6 +29,6 @@ exports:
     objc-classes:    [ SMAnalyticsConstantsTransformer, SMAnalyticsManager, SMConnectionFamilyIcons, 
                        SMLogging, SMPathSizer, SMSystemConfiguration, SMSystem_FileManager_DiskBased, 
                        SMSystem_FileManager_ROSV, SMSystem_FileManager_Traditional, 
-                       SMTask, SMToolBox, SMUDataTemplateUtilities, SMUPaneIdentifiersTransformer, 
-                       SMUVersion, SMUtilities ]
+                       SMSystem_FileManager_macOS, SMTask, SMToolBox, SMUDataTemplateUtilities, 
+                       SMUPaneIdentifiersTransformer, SMUVersion, SMUtilities ]
 ...

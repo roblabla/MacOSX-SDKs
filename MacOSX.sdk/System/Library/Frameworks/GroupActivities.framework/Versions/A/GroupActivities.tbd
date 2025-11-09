@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0D0C23BD-A7E0-3DFF-97D4-8F81FA95C25A
+    value:           DA6660DE-75F4-3962-BC08-A50EAD193573
   - target:          x86_64-maccatalyst
-    value:           0D0C23BD-A7E0-3DFF-97D4-8F81FA95C25A
+    value:           DA6660DE-75F4-3962-BC08-A50EAD193573
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           654BB05C-D302-3E00-8F28-BD3D25789DBE
+    value:           0AEF30FD-FAAB-3630-AF56-CC48CA67517F
   - target:          arm64e-maccatalyst
-    value:           654BB05C-D302-3E00-8F28-BD3D25789DBE
+    value:           0AEF30FD-FAAB-3630-AF56-CC48CA67517F
 install-name:    '/System/Library/Frameworks/GroupActivities.framework/Versions/A/GroupActivities'
 swift-abi-version: 7
 exports:
@@ -29,6 +29,8 @@ exports:
                        '_$s15GroupActivities03AnyA7SessionP9initiatorAA11ParticipantVvgTq', 
                        '_$s15GroupActivities03AnyA7SessionP9isInvalidSbvgTj', '_$s15GroupActivities03AnyA7SessionP9isInvalidSbvgTq', 
                        '_$s15GroupActivities03AnyA7SessionTL', '_$s15GroupActivities03AnyA8ActivityV014tuConversationD016metadataProviderACSo014TUConversationD0C_AC08MetadataH0OtKcfC', 
+                       '_$s15GroupActivities03AnyA8ActivityV014tuConversationD02asxxm_tYaKRlzClF', 
+                       '_$s15GroupActivities03AnyA8ActivityV014tuConversationD02asxxm_tYaKRlzClFTu', 
                        '_$s15GroupActivities03AnyA8ActivityV014tuConversationD07Combine6FutureCySo014TUConversationD0Cs5Error_pGvg', 
                        '_$s15GroupActivities03AnyA8ActivityV014tuConversationD07Combine6FutureCySo014TUConversationD0Cs5Error_pGvpMV', 
                        '_$s15GroupActivities03AnyA8ActivityV014tuConversationD0ACSo014TUConversationD0C_tKcfC', 
@@ -847,8 +849,8 @@ exports:
                        '_$s15GroupActivities12TopicManagerC18ConversationClientCN', 
                        '_$s15GroupActivities12TopicManagerC18ConversationClientCfD', 
                        '_$s15GroupActivities12TopicManagerC18ConversationClientCfd', 
-                       '_$s15GroupActivities12TopicManagerC18createPubSubClient9groupUUID18localParticipantID07virtuallM00nL6Config14CopresenceCore06PluginH0C_AI0fgH0Ct10Foundation0J0V_s6UInt64VARSo021TUConversationVirtuallO0CtF', 
-                       '_$s15GroupActivities12TopicManagerC18createPubSubClient9groupUUID18localParticipantID07virtuallM00nL6Config14CopresenceCore06PluginH0C_AI0fgH0Ct10Foundation0J0V_s6UInt64VARSo021TUConversationVirtuallO0CtFTq', 
+                       '_$s15GroupActivities12TopicManagerC18createPubSubClient16conversationUUID05groupJ018localParticipantID07virtualmN00oM6Config14CopresenceCore06PluginH0C_AJ0fgH0Ct10Foundation0J0V_AQs6UInt64VASSo021TUConversationVirtualmP0CtF', 
+                       '_$s15GroupActivities12TopicManagerC18createPubSubClient16conversationUUID05groupJ018localParticipantID07virtualmN00oM6Config14CopresenceCore06PluginH0C_AJ0fgH0Ct10Foundation0J0V_AQs6UInt64VASSo021TUConversationVirtualmP0CtFTq', 
                        '_$s15GroupActivities12TopicManagerC4lock14CopresenceCore4LockCvg', 
                        '_$s15GroupActivities12TopicManagerC4lock14CopresenceCore4LockCvpMV', 
                        '_$s15GroupActivities12TopicManagerC4lock14CopresenceCore4LockCvpWvd', 
@@ -1113,6 +1115,7 @@ exports:
                        '_$s15GroupActivities16BroadcastOptionsVSYAAMc', '_$s15GroupActivities16BroadcastOptionsVs10SetAlgebraAAMc', 
                        '_$s15GroupActivities16BroadcastOptionsVs25ExpressibleByArrayLiteralAAMc', 
                        '_$s15GroupActivities16BroadcastOptionsVs9OptionSetAAMc', 
+                       '_$s15GroupActivities16BroadcastOptionsVyACSo36TUConversationBroadcastingAttributesVcfC', 
                        '_$s15GroupActivities18PlaybackSyncerLinkMp', '_$s15GroupActivities18PlaybackSyncerLinkP11sendMessage_2toyAA0cD0C0G0V_Say10Foundation4UUIDVGSgtFTj', 
                        '_$s15GroupActivities18PlaybackSyncerLinkP11sendMessage_2toyAA0cD0C0G0V_Say10Foundation4UUIDVGSgtFTq', 
                        '_$s15GroupActivities18PlaybackSyncerLinkP11sessionUUID10Foundation0G0VvgTj', 
@@ -1196,6 +1199,11 @@ exports:
                        '_$s15GroupActivities19ConversationManagerC19activitySuggestionsSayAA03AnyA8ActivityVGvpMV', 
                        '_$s15GroupActivities19ConversationManagerC5begin8activity10completionyAA03AnyA8ActivityV_ySbctKFTj', 
                        '_$s15GroupActivities19ConversationManagerC5begin8activity10completionyAA03AnyA8ActivityV_ySbctKFTq', 
+                       '_$s15GroupActivities19ConversationManagerC6clientAC14CopresenceCore0cD14ClientProtocol_p_tcfC', 
+                       '_$s15GroupActivities19ConversationManagerC6clientAC14CopresenceCore0cD14ClientProtocol_p_tcfCTj', 
+                       '_$s15GroupActivities19ConversationManagerC6clientAC14CopresenceCore0cD14ClientProtocol_p_tcfCTq', 
+                       '_$s15GroupActivities19ConversationManagerC6clientAC14CopresenceCore0cD14ClientProtocol_p_tcfc', 
+                       '_$s15GroupActivities19ConversationManagerC6clientAC14CopresenceCore0cD14ClientProtocol_p_tcfcfA_', 
                        '_$s15GroupActivities19ConversationManagerC6sharedACvgZ', 
                        '_$s15GroupActivities19ConversationManagerC7Combine16ObservableObjectAAMc', 
                        '_$s15GroupActivities19ConversationManagerC7suggest8activity7Combine14AnyCancellableCAA0A8Activity_p_tKFTj', 
@@ -1603,6 +1611,9 @@ exports:
                        '_$s15GroupActivities3LogV17reliableBroadcast2os6LoggerVvau', 
                        '_$s15GroupActivities3LogV17reliableBroadcast2os6LoggerVvgZ', 
                        '_$s15GroupActivities3LogV17reliableBroadcast2os6LoggerVvpZ', 
+                       '_$s15GroupActivities3LogV19extensionController2os6LoggerVvau', 
+                       '_$s15GroupActivities3LogV19extensionController2os6LoggerVvgZ', 
+                       '_$s15GroupActivities3LogV19extensionController2os6LoggerVvpZ', 
                        '_$s15GroupActivities3LogV5topic2os6LoggerVvau', '_$s15GroupActivities3LogV5topic2os6LoggerVvgZ', 
                        '_$s15GroupActivities3LogV5topic2os6LoggerVvpZ', '_$s15GroupActivities3LogV7default2os6LoggerVvau', 
                        '_$s15GroupActivities3LogV7default2os6LoggerVvgZ', '_$s15GroupActivities3LogV7default2os6LoggerVvpZ', 
@@ -1773,6 +1784,7 @@ exports:
                        '_$s15GroupActivities9SubsystemOMa', '_$s15GroupActivities9SubsystemOMn', 
                        '_$s15GroupActivities9SubsystemON', '_$s15GroupActivities9SubsystemOSHAAMc', 
                        '_$s15GroupActivities9SubsystemOSQAAMc', '_$s15GroupActivities9SubsystemOSYAAMc', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV15GroupActivitiesE14_groupActivityACvgZ', 
                        '_$s2os6LoggerV15GroupActivitiesE10copmanagerACvau', '_$s2os6LoggerV15GroupActivitiesE10copmanagerACvgZ', 
                        '_$s2os6LoggerV15GroupActivitiesE10copmanagerACvpZ', '_$s2os6LoggerV15GroupActivitiesE13runtimeIssuesACvau', 
                        '_$s2os6LoggerV15GroupActivitiesE13runtimeIssuesACvgZ', '_$s2os6LoggerV15GroupActivitiesE13runtimeIssuesACvpZ', 
@@ -1783,8 +1795,16 @@ exports:
                        '_$s2os6LoggerV15GroupActivitiesE9modelsyncACvpZ', '_$s2os6LoggerV15GroupActivitiesE9sessionUIACvau', 
                        '_$s2os6LoggerV15GroupActivitiesE9sessionUIACvgZ', '_$s2os6LoggerV15GroupActivitiesE9sessionUIACvpZ', 
                        '_$s2os6LoggerV15GroupActivitiesE9subsystem8categoryACx_SStcSYRzSS8RawValueRtzlufC', 
-                       '_$sSE15GroupActivitiesE17messageIdentifierSSvgZ', '_$sSo10CGImageRefa15GroupActivitiesE18thumbnailImageDatay10Foundation0G0VSgSiF', 
+                       '_$sSE15GroupActivitiesE17messageIdentifierSSvgZ', '_$sSo10CGImageRefa15GroupActivitiesE14thumbnailImage4fromABSg10Foundation4DataV_tFZ', 
+                       '_$sSo10CGImageRefa15GroupActivitiesE18thumbnailImageDatay10Foundation0G0VSgSiF', 
                        '_$sSo10CGImageRefa15GroupActivitiesE18thumbnailImageDatay10Foundation0G0VSgSiFfA_', 
+                       '_$sSo14NSItemProviderC15GroupActivitiesE04loadC8Activity17completionHandlerSo10NSProgressCyAC03AnycF0VSg_s5Error_pSgtc_tF', 
+                       '_$sSo14NSItemProviderC15GroupActivitiesE04loadC8ActivityAC03AnycF0VyYaKF', 
+                       '_$sSo14NSItemProviderC15GroupActivitiesE04loadC8ActivityAC03AnycF0VyYaKFTu', 
+                       '_$sSo14NSItemProviderC15GroupActivitiesE04loadC8ActivitySo014TUConversationF0CyYaKF', 
+                       '_$sSo14NSItemProviderC15GroupActivitiesE04loadC8ActivitySo014TUConversationF0CyYaKFTu', 
+                       '_$sSo14NSItemProviderC15GroupActivitiesE08registerC8Activity18preparationHandleryxyYaKc_tAC0cF0RzlF', 
+                       '_$sSo14NSItemProviderC15GroupActivitiesE08registerC8ActivityyyxAC0cF0RzlF', 
                        '_$sSo21AVPlaybackCoordinatorC15GroupActivities20PlaybackCoordinatingACMc', 
                        '_$sSo21AVPlaybackCoordinatorC15GroupActivities20PlaybackCoordinatingACWP', 
                        '_$sSo21AVPlaybackCoordinatorC15GroupActivitiesE21coordinateWithSessionyyAC0cG0CyxGAC0C8ActivityRzlF', 

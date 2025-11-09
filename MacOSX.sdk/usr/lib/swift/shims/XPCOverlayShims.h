@@ -15,22 +15,28 @@
 
 @import XPC;
 
+#define _SWIFT_XPC_DEPRECATED __attribute((deprecated("The _SwiftXPCOverlayShims module is obsolete. Please stop importing it.")))
+
+_SWIFT_XPC_DEPRECATED
 static inline xpc_type_t
 _swift_xpc_get_type(xpc_object_t object) {
   return xpc_get_type(object);
 }
 
+_SWIFT_XPC_DEPRECATED
 static inline xpc_object_t
 _swift_xpc_bool_true() {
   return XPC_BOOL_TRUE;
 }
 
+_SWIFT_XPC_DEPRECATED
 static inline xpc_object_t
 _swift_xpc_bool_false() {
   return XPC_BOOL_FALSE;
 }
 
 #define SWIFT_XPC_TYPE(t) \
+  _SWIFT_XPC_DEPRECATED \
   static inline xpc_type_t \
   _swift_xpc_type_##t(void) { \
     return XPC_TYPE_##t; \
@@ -56,16 +62,19 @@ SWIFT_XPC_TYPE(ACTIVITY)
 
 #undef SWIFT_XPC_TYPE
 
+_SWIFT_XPC_DEPRECATED
 static inline xpc_object_t
 _swift_xpc_connection_interrupted(void) {
   return XPC_ERROR_CONNECTION_INTERRUPTED;
 }
 
+_SWIFT_XPC_DEPRECATED
 static inline xpc_object_t
 _swift_xpc_connection_invalid(void) {
   return XPC_ERROR_CONNECTION_INVALID;
 }
 
+_SWIFT_XPC_DEPRECATED
 static inline xpc_object_t
 _swift_xpc_connection_termination_imminent(void) {
   return XPC_ERROR_TERMINATION_IMMINENT;

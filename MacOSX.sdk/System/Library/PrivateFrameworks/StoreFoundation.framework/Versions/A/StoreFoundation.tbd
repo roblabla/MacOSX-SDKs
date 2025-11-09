@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A272940A-DBB0-3EF2-90FD-CCAA4FB1C942
+    value:           767980C5-BBE6-39AC-B989-C2BEAF2F4628
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D831B426-AAF8-33B9-9BD5-5A208DE7BBB1
+    value:           23E4A20B-CE92-32DD-B9CF-0A74D108B5F4
 install-name:    '/System/Library/PrivateFrameworks/StoreFoundation.framework/Versions/A/StoreFoundation'
 current-version: 379
 exports:

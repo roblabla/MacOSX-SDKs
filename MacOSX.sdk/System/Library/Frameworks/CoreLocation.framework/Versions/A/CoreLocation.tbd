@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5FBE606F-E479-3AC1-AB2D-34530D5AC328
+    value:           B076BC24-6E80-3D69-89BD-D81231F5BB2B
   - target:          x86_64-maccatalyst
-    value:           5FBE606F-E479-3AC1-AB2D-34530D5AC328
+    value:           B076BC24-6E80-3D69-89BD-D81231F5BB2B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           634474BB-88E8-3304-99BF-BBE8E5CA2727
+    value:           A43E31D7-46E9-3F0B-AA25-1D0144C1AF04
   - target:          arm64e-maccatalyst
-    value:           634474BB-88E8-3304-99BF-BBE8E5CA2727
+    value:           A43E31D7-46E9-3F0B-AA25-1D0144C1AF04
 install-name:    '/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation'
-current-version: 2665.0.9
+current-version: 2667.0.23
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

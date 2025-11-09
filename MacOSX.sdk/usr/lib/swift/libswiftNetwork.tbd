@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9EC6BB2A-C3F1-3A31-B7BF-73F7A4BC3470
+    value:           729E13B3-F02D-3581-BD7D-6B9BE275EF8F
   - target:          x86_64-maccatalyst
-    value:           9EC6BB2A-C3F1-3A31-B7BF-73F7A4BC3470
+    value:           729E13B3-F02D-3581-BD7D-6B9BE275EF8F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4E223842-4EE2-397B-8F13-35AADE1D9CDA
+    value:           BCAAEC1B-90C6-3D8F-8B16-2B906EB9027E
   - target:          arm64e-maccatalyst
-    value:           4E223842-4EE2-397B-8F13-35AADE1D9CDA
+    value:           BCAAEC1B-90C6-3D8F-8B16-2B906EB9027E
 install-name:    '/usr/lib/swift/libswiftNetwork.dylib'
-current-version: 2750.60.12
+current-version: 2750.100.70
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -47,6 +47,58 @@ exports:
                        '_$s7Network10HTTPFieldsVyAA9HTTPFieldVSicipMV', '_$s7Network10HTTPFieldsVyAA9HTTPFieldVSicis', 
                        '_$s7Network10HTTPFieldsVySSSgAA9HTTPFieldV4NameVciM', '_$s7Network10HTTPFieldsVySSSgAA9HTTPFieldV4NameVcig', 
                        '_$s7Network10HTTPFieldsVySSSgAA9HTTPFieldV4NameVcipMV', '_$s7Network10HTTPFieldsVySSSgAA9HTTPFieldV4NameVcis', 
+                       '_$s7Network10NWActivityC10isReportedSbvg', '_$s7Network10NWActivityC10isReportedSbvpMV', 
+                       '_$s7Network10NWActivityC11descriptionSSvg', '_$s7Network10NWActivityC11descriptionSSvpMV', 
+                       '_$s7Network10NWActivityC11isActivatedSbvg', '_$s7Network10NWActivityC11isActivatedSbvpMV', 
+                       '_$s7Network10NWActivityC13submitMetrics_4nameySDySSypG_SStF', 
+                       '_$s7Network10NWActivityC14activationTimes6UInt64Vvg', '_$s7Network10NWActivityC14activationTimes6UInt64VvpMV', 
+                       '_$s7Network10NWActivityC14parentActivityACSgvM', '_$s7Network10NWActivityC14parentActivityACSgvg', 
+                       '_$s7Network10NWActivityC14parentActivityACSgvpMV', '_$s7Network10NWActivityC14parentActivityACSgvs', 
+                       '_$s7Network10NWActivityC16CompletionReasonO26failureWithUnderlyingErroryAESi_SitcAEmFWC', 
+                       '_$s7Network10NWActivityC16CompletionReasonO4noneyA2EmFWC', 
+                       '_$s7Network10NWActivityC16CompletionReasonO7failureyA2EmFWC', 
+                       '_$s7Network10NWActivityC16CompletionReasonO7successyA2EmFWC', 
+                       '_$s7Network10NWActivityC16CompletionReasonO9cancelledyA2EmFWC', 
+                       '_$s7Network10NWActivityC16CompletionReasonOMa', '_$s7Network10NWActivityC16CompletionReasonOMn', 
+                       '_$s7Network10NWActivityC16CompletionReasonON', '_$s7Network10NWActivityC16debugDescriptionSSvg', 
+                       '_$s7Network10NWActivityC16debugDescriptionSSvpMV', '_$s7Network10NWActivityC17ReportingStrategyO13systemDefaultyA2EmFWC', 
+                       '_$s7Network10NWActivityC17ReportingStrategyO2eeoiySbAE_AEtFZ', 
+                       '_$s7Network10NWActivityC17ReportingStrategyO4hash4intoys6HasherVz_tF', 
+                       '_$s7Network10NWActivityC17ReportingStrategyO5neveryA2EmFWC', 
+                       '_$s7Network10NWActivityC17ReportingStrategyO6alwaysyA2EmFWC', 
+                       '_$s7Network10NWActivityC17ReportingStrategyO7sampledyA2EmFWC', 
+                       '_$s7Network10NWActivityC17ReportingStrategyO9hashValueSivg', 
+                       '_$s7Network10NWActivityC17ReportingStrategyO9hashValueSivpMV', 
+                       '_$s7Network10NWActivityC17ReportingStrategyOMa', '_$s7Network10NWActivityC17ReportingStrategyOMn', 
+                       '_$s7Network10NWActivityC17ReportingStrategyON', '_$s7Network10NWActivityC17ReportingStrategyOSHAAMc', 
+                       '_$s7Network10NWActivityC17ReportingStrategyOSQAAMc', '_$s7Network10NWActivityC17reportingStrategyAC09ReportingD0OvM', 
+                       '_$s7Network10NWActivityC17reportingStrategyAC09ReportingD0Ovg', 
+                       '_$s7Network10NWActivityC17reportingStrategyAC09ReportingD0OvpMV', 
+                       '_$s7Network10NWActivityC17reportingStrategyAC09ReportingD0Ovs', 
+                       '_$s7Network10NWActivityC21playgroundDescriptionypvg', '_$s7Network10NWActivityC21playgroundDescriptionypvpMV', 
+                       '_$s7Network10NWActivityC2eeoiySbAC_ACtFZ', '_$s7Network10NWActivityC2nwypvg', 
+                       '_$s7Network10NWActivityC2nwypvpMV', '_$s7Network10NWActivityC5labelSivg', 
+                       '_$s7Network10NWActivityC5labelSivpMV', '_$s7Network10NWActivityC5token10Foundation4UUIDVvg', 
+                       '_$s7Network10NWActivityC5token10Foundation4UUIDVvpMV', '_$s7Network10NWActivityC5tokenAC10Foundation4UUIDV_tcfC', 
+                       '_$s7Network10NWActivityC5tokenAC10Foundation4UUIDV_tcfCTj', 
+                       '_$s7Network10NWActivityC5tokenAC10Foundation4UUIDV_tcfCTq', 
+                       '_$s7Network10NWActivityC5tokenAC10Foundation4UUIDV_tcfc', 
+                       '_$s7Network10NWActivityC6domain5labelACSi_SitcfC', '_$s7Network10NWActivityC6domain5labelACSi_SitcfCTj', 
+                       '_$s7Network10NWActivityC6domain5labelACSi_SitcfCTq', '_$s7Network10NWActivityC6domain5labelACSi_Sitcfc', 
+                       '_$s7Network10NWActivityC6domainSivg', '_$s7Network10NWActivityC6domainSivpMV', 
+                       '_$s7Network10NWActivityC7isRetrySbvg', '_$s7Network10NWActivityC7isRetrySbvpMV', 
+                       '_$s7Network10NWActivityC7retryOfA2C_tcfC', '_$s7Network10NWActivityC7retryOfA2C_tcfCTj', 
+                       '_$s7Network10NWActivityC7retryOfA2C_tcfCTq', '_$s7Network10NWActivityC7retryOfA2C_tcfc', 
+                       '_$s7Network10NWActivityC8activateyyF', '_$s7Network10NWActivityC8complete6reasonyAC16CompletionReasonO_tF', 
+                       '_$s7Network10NWActivityCMa', '_$s7Network10NWActivityCMm', 
+                       '_$s7Network10NWActivityCMn', '_$s7Network10NWActivityCMo', 
+                       '_$s7Network10NWActivityCMu', '_$s7Network10NWActivityCN', 
+                       '_$s7Network10NWActivityCSQAAMc', '_$s7Network10NWActivityCfD', 
+                       '_$s7Network10NWActivityCfd', '_$s7Network10NWActivityCs23CustomStringConvertibleAAMc', 
+                       '_$s7Network10NWActivityCs28CustomDebugStringConvertibleAAMc', 
+                       '_$s7Network10NWActivityCs34CustomPlaygroundDisplayConvertibleAAMc', 
+                       '_$s7Network10NWActivityCyACypcfC', '_$s7Network10NWActivityCyACypcfCTj', 
+                       '_$s7Network10NWActivityCyACypcfCTq', '_$s7Network10NWActivityCyACypcfc', 
                        '_$s7Network10NWEndpointO16debugDescriptionSSvg', '_$s7Network10NWEndpointO16debugDescriptionSSvpMV', 
                        '_$s7Network10NWEndpointO2eeoiySbAC_ACtFZ', '_$s7Network10NWEndpointO2nwSo03OS_C9_endpoint_pSgvg', 
                        '_$s7Network10NWEndpointO2nwSo03OS_C9_endpoint_pSgvpMV', '_$s7Network10NWEndpointO3urlyAC10Foundation3URLVcACmFWC', 
@@ -432,7 +484,9 @@ exports:
                        '_$s7Network12NWConnectionC10parametersAA12NWParametersCvg', 
                        '_$s7Network12NWConnectionC10parametersAA12NWParametersCvpMV', 
                        '_$s7Network12NWConnectionC11currentPathAA6NWPathVSgvg', '_$s7Network12NWConnectionC11currentPathAA6NWPathVSgvpMV', 
-                       '_$s7Network12NWConnectionC11forceCancelyyF', '_$s7Network12NWConnectionC14ContentContextC10antecedentAESgvg', 
+                       '_$s7Network12NWConnectionC11endActivityyyAA10NWActivityCF', 
+                       '_$s7Network12NWConnectionC11forceCancelyyF', '_$s7Network12NWConnectionC13startActivityyyAA10NWActivityCF', 
+                       '_$s7Network12NWConnectionC14ContentContextC10antecedentAESgvg', 
                        '_$s7Network12NWConnectionC14ContentContextC10antecedentAESgvpMV', 
                        '_$s7Network12NWConnectionC14ContentContextC10identifier10expiration8priority7isFinal10antecedent8metadataAESS_s6UInt64VSdSbAESgSayAA18NWProtocolMetadataCGSgtcfC', 
                        '_$s7Network12NWConnectionC14ContentContextC10identifier10expiration8priority7isFinal10antecedent8metadataAESS_s6UInt64VSdSbAESgSayAA18NWProtocolMetadataCGSgtcfCTj', 
@@ -1331,7 +1385,10 @@ exports:
                        '_$s7Network16NWProtocolFramerC7OptionsCMn', '_$s7Network16NWProtocolFramerC7OptionsCMo', 
                        '_$s7Network16NWProtocolFramerC7OptionsCMu', '_$s7Network16NWProtocolFramerC7OptionsCN', 
                        '_$s7Network16NWProtocolFramerC7OptionsCfD', '_$s7Network16NWProtocolFramerC7OptionsCfd', 
-                       '_$s7Network16NWProtocolFramerC8InstanceC10WakeupTimeO12millisecondsyAGs6UInt64VcAGmFWC', 
+                       '_$s7Network16NWProtocolFramerC7OptionsCyypSgSSciMTj', '_$s7Network16NWProtocolFramerC7OptionsCyypSgSSciMTq', 
+                       '_$s7Network16NWProtocolFramerC7OptionsCyypSgSScigTj', '_$s7Network16NWProtocolFramerC7OptionsCyypSgSScigTq', 
+                       '_$s7Network16NWProtocolFramerC7OptionsCyypSgSScipMV', '_$s7Network16NWProtocolFramerC7OptionsCyypSgSScisTj', 
+                       '_$s7Network16NWProtocolFramerC7OptionsCyypSgSScisTq', '_$s7Network16NWProtocolFramerC8InstanceC10WakeupTimeO12millisecondsyAGs6UInt64VcAGmFWC', 
                        '_$s7Network16NWProtocolFramerC8InstanceC10WakeupTimeO7foreveryA2GmFWC', 
                        '_$s7Network16NWProtocolFramerC8InstanceC10WakeupTimeOMa', 
                        '_$s7Network16NWProtocolFramerC8InstanceC10WakeupTimeOMn', 
@@ -1353,11 +1410,14 @@ exports:
                        '_$s7Network16NWProtocolFramerC8InstanceC17writeOutputNoCopy6lengthySi_tKF', 
                        '_$s7Network16NWProtocolFramerC8InstanceC18deliverInputNoCopy6length7message10isCompleteSbSi_AC7MessageCSbtF', 
                        '_$s7Network16NWProtocolFramerC8InstanceC26prependApplicationProtocol7optionsyAA0B7OptionsC_tKF', 
+                       '_$s7Network16NWProtocolFramerC8InstanceC32prependApplicationProtocolUnsafe7optionsyAA0B7OptionsC_tKF', 
                        '_$s7Network16NWProtocolFramerC8InstanceC5async7executeyyyc_tF', 
                        '_$s7Network16NWProtocolFramerC8InstanceC5localAA10NWEndpointOSgvg', 
                        '_$s7Network16NWProtocolFramerC8InstanceC5localAA10NWEndpointOSgvpMV', 
                        '_$s7Network16NWProtocolFramerC8InstanceC6remoteAA10NWEndpointOSgvg', 
                        '_$s7Network16NWProtocolFramerC8InstanceC6remoteAA10NWEndpointOSgvpMV', 
+                       '_$s7Network16NWProtocolFramerC8InstanceC7optionsAC7OptionsCvg', 
+                       '_$s7Network16NWProtocolFramerC8InstanceC7optionsAC7OptionsCvpMV', 
                        '_$s7Network16NWProtocolFramerC8InstanceC9markReadyyyF', '_$s7Network16NWProtocolFramerC8InstanceCMa', 
                        '_$s7Network16NWProtocolFramerC8InstanceCMm', '_$s7Network16NWProtocolFramerC8InstanceCMn', 
                        '_$s7Network16NWProtocolFramerC8InstanceCMo', '_$s7Network16NWProtocolFramerC8InstanceCMu', 
@@ -2019,5 +2079,9 @@ exports:
                        '_$s7Network9NWBrowserCMa', '_$s7Network9NWBrowserCMm', '_$s7Network9NWBrowserCMn', 
                        '_$s7Network9NWBrowserCMo', '_$s7Network9NWBrowserCMu', '_$s7Network9NWBrowserCN', 
                        '_$s7Network9NWBrowserCfD', '_$s7Network9NWBrowserCfd', '_$s7Network9NWBrowserCs28CustomDebugStringConvertibleAAMc', 
+                       '_$sSo16NSURLSessionTaskC7NetworkE11_nwActivityAC10NWActivityCSgvM', 
+                       '_$sSo16NSURLSessionTaskC7NetworkE11_nwActivityAC10NWActivityCSgvg', 
+                       '_$sSo16NSURLSessionTaskC7NetworkE11_nwActivityAC10NWActivityCSgvpMV', 
+                       '_$sSo16NSURLSessionTaskC7NetworkE11_nwActivityAC10NWActivityCSgvs', 
                        '__swift_FORCE_LOAD_$_swiftNetwork' ]
 ...

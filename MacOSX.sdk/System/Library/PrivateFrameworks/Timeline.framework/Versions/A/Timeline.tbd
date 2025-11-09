@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           271DE78F-2DF6-3434-ADF0-EBB037BD2A93
+    value:           18116285-5A0C-3471-A985-C987D6FCE22E
   - target:          x86_64-maccatalyst
-    value:           271DE78F-2DF6-3434-ADF0-EBB037BD2A93
+    value:           18116285-5A0C-3471-A985-C987D6FCE22E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDD9B7E8-2B12-3673-BF8F-5736770AA463
+    value:           0530097E-EC51-37C0-BD94-BF259CB62A6C
   - target:          arm64e-maccatalyst
-    value:           BDD9B7E8-2B12-3673-BF8F-5736770AA463
+    value:           0530097E-EC51-37C0-BD94-BF259CB62A6C
 install-name:    '/System/Library/PrivateFrameworks/Timeline.framework/Versions/A/Timeline'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

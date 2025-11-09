@@ -186,6 +186,11 @@ enum{
 	kIODMAMapFixedAddress          = 0x00000200,
 };
 
+// Options used by IOMapper. example IOMappers are DART and VT-d
+enum {
+	kIOMapperUncached      = 0x0001,
+};
+
 
 enum{
 	kIOPreparationIDUnprepared = 0,
@@ -222,7 +227,12 @@ protected:
 	uint16_t            __iomd_reserved1[4];
 	uintptr_t           __iomd_reserved2;
 
-	uintptr_t           __iomd_reserved3;
+	uint16_t            _iomapperOptions;
+#ifdef __LP64__
+	uint16_t            __iomd_reserved3[3];
+#else
+	uint16_t            __iomd_reserved3;
+#endif
 	uintptr_t           __iomd_reserved4;
 
 #ifndef __LP64__
@@ -670,6 +680,20 @@ public:
 		task_t          task,
 		IOVirtualAddress        mapAddress,
 		IOOptionBits            options = 0 );
+
+/*! @function setMapperOptions
+ *   @abstract Set the IOMapper options
+ *   @discussion This method sets the IOMapper options
+ *   @param options  IOMapper options to be set. */
+
+	void setMapperOptions( uint16_t options );
+
+/*! @function getMapperOptions
+ *   @abstract return IOMapper Options
+ *   @discussion This method returns IOMapper Options set earlier using setMapperOptions
+ *   @result IOMapper options set. */
+
+	uint16_t getMapperOptions( void );
 
 // Following methods are private implementation
 

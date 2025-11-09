@@ -104,86 +104,74 @@ void perror(const char* s);
 
 _LIBCPP_BEGIN_NAMESPACE_STD
 
-#if !defined(_LIBCPP_DRIVERKIT_LIBC)
+using ::FILE _LIBCPP_USING_IF_EXISTS;
+using ::fpos_t _LIBCPP_USING_IF_EXISTS;
+using ::size_t _LIBCPP_USING_IF_EXISTS;
 
-_LIBCPP_USING_IF_EXISTS(::FILE);
-_LIBCPP_USING_IF_EXISTS(::fpos_t);
-using ::size_t;
-
-_LIBCPP_USING_IF_EXISTS(::fclose);
-_LIBCPP_USING_IF_EXISTS(::fflush);
-_LIBCPP_USING_IF_EXISTS(::setbuf);
-_LIBCPP_USING_IF_EXISTS(::setvbuf);
-_LIBCPP_USING_IF_EXISTS(::fprintf);
-_LIBCPP_USING_IF_EXISTS(::fscanf);
-_LIBCPP_USING_IF_EXISTS(::snprintf);
-_LIBCPP_USING_IF_EXISTS(::sprintf);
-_LIBCPP_USING_IF_EXISTS(::sscanf);
-_LIBCPP_USING_IF_EXISTS(::vfprintf);
-_LIBCPP_USING_IF_EXISTS(::vfscanf);
-_LIBCPP_USING_IF_EXISTS(::vsscanf);
-_LIBCPP_USING_IF_EXISTS(::vsnprintf);
-_LIBCPP_USING_IF_EXISTS(::vsprintf);
-_LIBCPP_USING_IF_EXISTS(::fgetc);
-_LIBCPP_USING_IF_EXISTS(::fgets);
-_LIBCPP_USING_IF_EXISTS(::fputc);
-_LIBCPP_USING_IF_EXISTS(::fputs);
-_LIBCPP_USING_IF_EXISTS(::getc);
-_LIBCPP_USING_IF_EXISTS(::putc);
-_LIBCPP_USING_IF_EXISTS(::ungetc);
-_LIBCPP_USING_IF_EXISTS(::fread);
-_LIBCPP_USING_IF_EXISTS(::fwrite);
+using ::fclose _LIBCPP_USING_IF_EXISTS;
+using ::fflush _LIBCPP_USING_IF_EXISTS;
+using ::setbuf _LIBCPP_USING_IF_EXISTS;
+using ::setvbuf _LIBCPP_USING_IF_EXISTS;
+using ::fprintf _LIBCPP_USING_IF_EXISTS;
+using ::fscanf _LIBCPP_USING_IF_EXISTS;
+using ::snprintf _LIBCPP_USING_IF_EXISTS;
+using ::sprintf _LIBCPP_USING_IF_EXISTS;
+using ::sscanf _LIBCPP_USING_IF_EXISTS;
+using ::vfprintf _LIBCPP_USING_IF_EXISTS;
+using ::vfscanf _LIBCPP_USING_IF_EXISTS;
+using ::vsscanf _LIBCPP_USING_IF_EXISTS;
+using ::vsnprintf _LIBCPP_USING_IF_EXISTS;
+using ::vsprintf _LIBCPP_USING_IF_EXISTS;
+using ::fgetc _LIBCPP_USING_IF_EXISTS;
+using ::fgets _LIBCPP_USING_IF_EXISTS;
+using ::fputc _LIBCPP_USING_IF_EXISTS;
+using ::fputs _LIBCPP_USING_IF_EXISTS;
+using ::getc _LIBCPP_USING_IF_EXISTS;
+using ::putc _LIBCPP_USING_IF_EXISTS;
+using ::ungetc _LIBCPP_USING_IF_EXISTS;
+using ::fread _LIBCPP_USING_IF_EXISTS;
+using ::fwrite _LIBCPP_USING_IF_EXISTS;
 #ifndef _LIBCPP_HAS_NO_FGETPOS_FSETPOS
-_LIBCPP_USING_IF_EXISTS(::fgetpos);
+using ::fgetpos _LIBCPP_USING_IF_EXISTS;
 #endif
-_LIBCPP_USING_IF_EXISTS(::fseek);
+using ::fseek _LIBCPP_USING_IF_EXISTS;
 #ifndef _LIBCPP_HAS_NO_FGETPOS_FSETPOS
-_LIBCPP_USING_IF_EXISTS(::fsetpos);
+using ::fsetpos _LIBCPP_USING_IF_EXISTS;
 #endif
-_LIBCPP_USING_IF_EXISTS(::ftell);
-_LIBCPP_USING_IF_EXISTS(::rewind);
-_LIBCPP_USING_IF_EXISTS(::clearerr);
-_LIBCPP_USING_IF_EXISTS(::feof);
-_LIBCPP_USING_IF_EXISTS(::ferror);
-_LIBCPP_USING_IF_EXISTS(::perror);
+using ::ftell _LIBCPP_USING_IF_EXISTS;
+using ::rewind _LIBCPP_USING_IF_EXISTS;
+using ::clearerr _LIBCPP_USING_IF_EXISTS;
+using ::feof _LIBCPP_USING_IF_EXISTS;
+using ::ferror _LIBCPP_USING_IF_EXISTS;
+using ::perror _LIBCPP_USING_IF_EXISTS;
 
 #ifndef _LIBCPP_HAS_NO_GLOBAL_FILESYSTEM_NAMESPACE
-_LIBCPP_USING_IF_EXISTS(::fopen);
-_LIBCPP_USING_IF_EXISTS(::freopen);
-#if !defined(_LIBCPP_ON_RTKIT)
-using ::remove; // TODO: Regularize this once using_if_exists can handle it
+using ::fopen _LIBCPP_USING_IF_EXISTS;
+using ::freopen _LIBCPP_USING_IF_EXISTS;
+#if !defined(_LIBCPP_ON_RTKIT) && !defined(_LIBCPP_ON_SEP) && !defined(_LIBCPP_DRIVERKIT)
+using ::remove _LIBCPP_USING_IF_EXISTS; // TODO: Regularize this once using_if_exists can handle it
 #endif
-_LIBCPP_USING_IF_EXISTS(::rename);
-_LIBCPP_USING_IF_EXISTS(::tmpfile);
-_LIBCPP_USING_IF_EXISTS(::tmpnam);
+using ::rename _LIBCPP_USING_IF_EXISTS;
+using ::tmpfile _LIBCPP_USING_IF_EXISTS;
+using ::tmpnam _LIBCPP_USING_IF_EXISTS;
 #endif
 
 #ifndef _LIBCPP_HAS_NO_STDIN
-_LIBCPP_USING_IF_EXISTS(::getchar);
+using ::getchar _LIBCPP_USING_IF_EXISTS;
 #if _LIBCPP_STD_VER <= 11 && !defined(_LIBCPP_C_HAS_NO_GETS)
-_LIBCPP_USING_IF_EXISTS(::gets);
+using ::gets _LIBCPP_USING_IF_EXISTS;
 #endif
-_LIBCPP_USING_IF_EXISTS(::scanf);
-_LIBCPP_USING_IF_EXISTS(::vscanf);
+using ::scanf _LIBCPP_USING_IF_EXISTS;
+using ::vscanf _LIBCPP_USING_IF_EXISTS;
 #endif
 
 #ifndef _LIBCPP_HAS_NO_STDOUT
-_LIBCPP_USING_IF_EXISTS(::printf);
-_LIBCPP_USING_IF_EXISTS(::putchar);
-_LIBCPP_USING_IF_EXISTS(::puts);
-_LIBCPP_USING_IF_EXISTS(::vprintf);
+using ::printf _LIBCPP_USING_IF_EXISTS;
+using ::putchar _LIBCPP_USING_IF_EXISTS;
+using ::puts _LIBCPP_USING_IF_EXISTS;
+using ::vprintf _LIBCPP_USING_IF_EXISTS;
 #endif
-
-#else // _LIBCPP_DRIVERKIT_LIBC
-
-using ::size_t;
-_LIBCPP_USING_IF_EXISTS(::snprintf);
-_LIBCPP_USING_IF_EXISTS(::sscanf);
-_LIBCPP_USING_IF_EXISTS(::vsscanf);
-_LIBCPP_USING_IF_EXISTS(::vsnprintf);
-
-#endif // _LIBCPP_DRIVERKIT_LIBC
 
 _LIBCPP_END_NAMESPACE_STD
 
-#endif  // _LIBCPP_CSTDIO
+#endif // _LIBCPP_CSTDIO

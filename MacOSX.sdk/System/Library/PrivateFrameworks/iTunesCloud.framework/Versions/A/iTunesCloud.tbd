@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8A93E8D6-928C-3CBD-8FA6-7235CD1F0901
+    value:           9A11F0FC-0C38-3D92-8644-74E464B35832
   - target:          x86_64-maccatalyst
-    value:           8A93E8D6-928C-3CBD-8FA6-7235CD1F0901
+    value:           9A11F0FC-0C38-3D92-8644-74E464B35832
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           138F49E9-F9C1-3324-95E0-ED0341E31EC9
+    value:           EF92AD29-443D-37F4-9C58-00CEAD609AE9
   - target:          arm64e-maccatalyst
-    value:           138F49E9-F9C1-3324-95E0-ED0341E31EC9
+    value:           EF92AD29-443D-37F4-9C58-00CEAD609AE9
 install-name:    '/System/Library/PrivateFrameworks/iTunesCloud.framework/Versions/A/iTunesCloud'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -28,7 +28,8 @@ exports:
                        _ICArtworkInfoKeyArtworkDictionaryTemplateURL, _ICArtworkInfoKeyPurchaseHistoryID, 
                        _ICArtworkInfoKeySagaID, _ICArtworkInfoKeyStatus, _ICAuthorizeMachineRequestReasonFamily, 
                        _ICAuthorizeMachineRequestReasonRefetch, _ICBundleIdentifierForSystemApplicationType, 
-                       _ICCDelegationProviderServiceXPCGetInterface, _ICCloudAvailabilityControllerCanShowCloudDownloadButtonsDidChangeNotification, 
+                       _ICCDelegationProviderServiceXPCGetInterface, _ICClientInfoDefaultProfileName, 
+                       _ICClientInfoDefaultProfileVersion, _ICCloudAvailabilityControllerCanShowCloudDownloadButtonsDidChangeNotification, 
                        _ICCloudAvailabilityControllerCanShowCloudTracksDidChangeNotification, 
                        _ICCloudAvailabilityControllerHasProperNetworkConditionsToShowCloudMediaDidChangeNotification, 
                        _ICCloudAvailabilityControllerIsCellularDataRestrictedDidChangeNotification, 
@@ -48,9 +49,10 @@ exports:
                        _ICCloudServiceStatusActiveAccountDidChangeNotification, _ICCloudServiceStatusAuthorizationWasGrantedNotification, 
                        _ICCloudServiceStatusCapabilitiesDidChangeNotification, _ICCloudServiceStatusStorefrontCountryCodeDidChangeNotification, 
                        _ICCloudServiceStatusStorefrontIdentifierDidChangeNotification, 
-                       _ICDAAPUtilitiesCreateData, _ICDAAPUtilitiesCreateDataForContainer, 
-                       _ICDAAPUtilitiesCreateDataForItemKindContainer, _ICDAAPUtilitiesWriteContainer, 
-                       _ICDAAPUtilitiesWriteProperty, _ICDefaultCacheDirectory, _ICDelegateAccountStoreDidChangeNotification, 
+                       _ICCreateLoggableValueForDSID, _ICDAAPUtilitiesCreateData, 
+                       _ICDAAPUtilitiesCreateDataForContainer, _ICDAAPUtilitiesCreateDataForItemKindContainer, 
+                       _ICDAAPUtilitiesWriteContainer, _ICDAAPUtilitiesWriteProperty, 
+                       _ICDefaultCacheDirectory, _ICDelegateAccountStoreDidChangeNotification, 
                        _ICDelegateAccountStoreExpiredTokenPruningInterval, _ICDelegateAccountStoreMetadataLastExpirationPruneDate, 
                        _ICDelegateAccountStorePrimaryKeyForUserIdentity, _ICDelegateAccountStoreRaiseInvalidUserIdentityException, 
                        _ICDelegateAccountStoreRaiseOutOfScopeException, _ICDelegateAccountStoreServiceClientGetInterface, 
@@ -149,8 +151,9 @@ exports:
                        _ICStoreFileAssetFairPlayInfoResponseKeySinf2, _ICStoreFinanceItemMetadataMediaTypeFeatureMovie, 
                        _ICStoreFinanceItemMetadataMediaTypeMusicVideo, _ICStoreFinanceItemMetadataMediaTypeSong, 
                        _ICStoreFinanceItemMetadataMediaTypeTVEpisode, _ICStoreHLSAssetInfoKeyProtocolTypeSimplified, 
-                       _ICStoreHLSAssetInfoKeyProtocolTypeStandard, _ICStoreHTTPCookieNameITRE, 
-                       _ICStoreHTTPCookieNameITRV, _ICStoreHTTPHeaderKeyCollectionPlaybackAuthorizationToken, 
+                       _ICStoreHLSAssetInfoKeyProtocolTypeStandard, _ICStoreHTTPCookieNameITFE, 
+                       _ICStoreHTTPCookieNameITRE, _ICStoreHTTPCookieNameITRV, _ICStoreHTTPCookieNameITST, 
+                       _ICStoreHTTPHeaderKeyCollectionPlaybackAuthorizationToken, 
                        _ICStoreHTTPHeaderKeyICloudDSID, _ICStoreHTTPHeaderKeyPlaybackAuthorizationToken, 
                        _ICStoreHTTPHeaderKeyXAppleAMD, _ICStoreHTTPHeaderKeyXAppleAMDAction, 
                        _ICStoreHTTPHeaderKeyXAppleAMDData, _ICStoreHTTPHeaderKeyXAppleAMDM, 
@@ -193,28 +196,38 @@ exports:
                        _ICSubscriptionStatusOfferTypeStudent1, _ICSubscriptionStatusOfferTypeWinback1, 
                        _ICSubscriptionStatusOfferTypeWinback2, _ICSubscriptionStatusOfferTypeWinback3, 
                        _ICSystemApplicationIsInstalled, _ICSystemApplicationTypeForBundleIdentifier, 
-                       _ICURLBagKeyAMDDomains, _ICURLBagKeyAMPMusicAPIDomains, _ICURLBagKeyAddToSiriTagHistoryBaseURL, 
+                       _ICURLBagKeyAMDDomains, _ICURLBagKeyAMPMusicAPIDomains, _ICURLBagKeyAMSUIJSURL, 
+                       _ICURLBagKeyAMSUISources, _ICURLBagKeyAddToSiriTagHistoryBaseURL, 
                        _ICURLBagKeyAddToTRHistoryBaseURL, _ICURLBagKeyAddToWishListURL, 
                        _ICURLBagKeyArtistNewContent, _ICURLBagKeyAuthCanPost, _ICURLBagKeyAuthorizeMachine, 
-                       _ICURLBagKeyBrowseGroupingURL, _ICURLBagKeyBuyProduct, _ICURLBagKeyCloudAddComputer, 
-                       _ICURLBagKeyCloudWelcome, _ICURLBagKeyCountryCode, _ICURLBagKeyDelegatePlayback, 
+                       _ICURLBagKeyAutoEnrollmentPercentage, _ICURLBagKeyBrowseGroupingURL, 
+                       _ICURLBagKeyBuyProduct, _ICURLBagKeyCloudAddComputer, _ICURLBagKeyCloudWelcome, 
+                       _ICURLBagKeyCommerceApp, _ICURLBagKeyCommerceAppBaseUrl, _ICURLBagKeyCommerceAppFallbackUrl, 
+                       _ICURLBagKeyCommerceUIURLs, _ICURLBagKeyCountryCode, _ICURLBagKeyDelegatePlayback, 
                        _ICURLBagKeyDisableSubscription, _ICURLBagKeyEnableSubscription, 
                        _ICURLBagKeyEnhancedAudio, _ICURLBagKeyExplicitContentAgeVerificationURL, 
                        _ICURLBagKeyExplicitContentRequiresAgeVerification, _ICURLBagKeyExplicitContentTreatment, 
-                       _ICURLBagKeyFetchMiniSinfs, _ICURLBagKeyForYouURL, _ICURLBagKeyFuseCarrierMccMncList, 
-                       _ICURLBagKeyFuseHeaderEnrichment, _ICURLBagKeyFuseHeaderEnrichmentResponse, 
-                       _ICURLBagKeyGUIDURLs, _ICURLBagKeyGetPlayInfo, _ICURLBagKeyGetShareIdentifiers, 
-                       _ICURLBagKeyGetSubscriptionStatus, _ICURLBagKeyGetSubscriptionStatusSrvURL, 
-                       _ICURLBagKeyGetWholeHouseAudioPlayInfo, _ICURLBagKeyInAppMessages, 
-                       _ICURLBagKeyIsMatchServiceEnabled, _ICURLBagKeyLibraryAuthServiceTokenURL, 
-                       _ICURLBagKeyLibraryDAAP, _ICURLBagKeyMachineDataFinishProvisioningURL_1_0, 
-                       _ICURLBagKeyMachineDataFinishProvisioningURL_1_5, _ICURLBagKeyMachineDataSyncURL_1_0, 
-                       _ICURLBagKeyMachineDataSyncURL_1_5, _ICURLBagKeyMatchRedownloadURL, 
-                       _ICURLBagKeyMatchStatusURL, _ICURLBagKeyMediaContentTastePostURL, 
-                       _ICURLBagKeyMediaContentTasteRefreshIntervalInMins, _ICURLBagKeyMescalCertificateURL, 
-                       _ICURLBagKeyMescalSetupURL, _ICURLBagKeyMobileNetworkConstraints, 
+                       _ICURLBagKeyFetchMiniSinfs, _ICURLBagKeyFinanceApp, _ICURLBagKeyForYouURL, 
+                       _ICURLBagKeyFuseCarrierMccMncList, _ICURLBagKeyFuseHeaderEnrichment, 
+                       _ICURLBagKeyFuseHeaderEnrichmentResponse, _ICURLBagKeyGUIDURLs, 
+                       _ICURLBagKeyGetPlayInfo, _ICURLBagKeyGetShareIdentifiers, 
+                       _ICURLBagKeyGetSubscriptionOffersSrv, _ICURLBagKeyGetSubscriptionStatus, 
+                       _ICURLBagKeyGetSubscriptionStatusSrvURL, _ICURLBagKeyGetWholeHouseAudioPlayInfo, 
+                       _ICURLBagKeyIOSAppURL, _ICURLBagKeyInAppMessages, _ICURLBagKeyIsMatchServiceEnabled, 
+                       _ICURLBagKeyJSAppURL, _ICURLBagKeyLanguage, _ICURLBagKeyLanguageTag, 
+                       _ICURLBagKeyLibraryAuthServiceTokenURL, _ICURLBagKeyLibraryDAAP, 
+                       _ICURLBagKeyMachineDataFinishProvisioningURL_1_0, _ICURLBagKeyMachineDataFinishProvisioningURL_1_5, 
+                       _ICURLBagKeyMachineDataSyncURL_1_0, _ICURLBagKeyMachineDataSyncURL_1_5, 
+                       _ICURLBagKeyManageAddFundsURL, _ICURLBagKeyManageSubscriptionsV2URL, 
+                       _ICURLBagKeyMarketingItemDynamicUIUrl, _ICURLBagKeyMarketingItemMediaAPIPath, 
+                       _ICURLBagKeyMarketingItemMediaAPIRealmMappings, _ICURLBagKeyMatchRedownloadURL, 
+                       _ICURLBagKeyMatchStatusURL, _ICURLBagKeyMaxMiniSinfBatchSize, 
+                       _ICURLBagKeyMediaContentTastePostURL, _ICURLBagKeyMediaContentTasteRefreshIntervalInMins, 
+                       _ICURLBagKeyMescalCertificateURL, _ICURLBagKeyMescalSetupURL, 
+                       _ICURLBagKeyMobileNetworkConstraints, _ICURLBagKeyModifyAccount, 
                        _ICURLBagKeyMusicCommon, _ICURLBagKeyMusicConnect, _ICURLBagKeyMusicFriends, 
-                       _ICURLBagKeyMusicSubscription, _ICURLBagKeyMusicUserToken, 
+                       _ICURLBagKeyMusicSubscription, _ICURLBagKeyMusicSubscriptionOffersForStorefront, 
+                       _ICURLBagKeyMusicTabs, _ICURLBagKeyMusicUserToken, _ICURLBagKeyPMFeedbackBaseURL, 
                        _ICURLBagKeyPastisCertificateURL, _ICURLBagKeyPastisKeyServerURL, 
                        _ICURLBagKeyPersonalizedStorePlatform, _ICURLBagKeyPlayActivityFeedRequestPostURL, 
                        _ICURLBagKeyPlayMoreLikeThisURL, _ICURLBagKeyPlaybackAuthorizationTokenTTLSeconds, 
@@ -227,8 +240,10 @@ exports:
                        _ICURLBagKeyStoreFrontID, _ICURLBagKeyStorefrontHeaderSuffix, 
                        _ICURLBagKeySubscriptionDownload, _ICURLBagKeySubscriptionStatusRefreshIntervalSeconds, 
                        _ICURLBagKeySuzeLeaseRenewURL, _ICURLBagKeySuzeLeaseStartURL, 
-                       _ICURLBagKeySuzeLeaseStopURL, _ICURLBagKeyURLRegexMap, _ICURLBagKeyUnpersonalizedStorePlatform, 
-                       _ICURLBagProviderDidUpdateBagNotification, _ICURLBagProviderDidUpdateBagNotificationRequestContextUserInfoKey, 
+                       _ICURLBagKeySuzeLeaseStopURL, _ICURLBagKeyTrustedDomains, 
+                       _ICURLBagKeyURLRegexMap, _ICURLBagKeyUnpersonalizedStorePlatform, 
+                       _ICURLBagKeyUseApplePayClassic, _ICURLBagProviderDidUpdateBagNotification, 
+                       _ICURLBagProviderDidUpdateBagNotificationRequestContextUserInfoKey, 
                        _ICURLBagProviderDidUpdateBagNotificationURLBagUserInfoKey, 
                        _ICURLBagRadioKeyBaseURL, _ICURLBagRadioKeyLikeEventURL, _ICURLResponseHandlingRetryReasonAuthenticationPerformed, 
                        _ICURLResponseHandlingRetryReasonDialogProcessed, _ICURLResponseHandlingRetryReasonMachineDataActionPerformed, 

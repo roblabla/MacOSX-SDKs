@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           80EEDBBA-CF9D-3858-B561-60687FFB0B07
+    value:           05BA5767-361D-3D62-8CCA-C1C531B8E23D
   - target:          x86_64-maccatalyst
-    value:           80EEDBBA-CF9D-3858-B561-60687FFB0B07
+    value:           05BA5767-361D-3D62-8CCA-C1C531B8E23D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CEE40A88-878C-3C26-8D83-5B86B7BE5A3D
+    value:           DEC352DB-87CA-32D9-A50B-8BCFDA500095
   - target:          arm64e-maccatalyst
-    value:           CEE40A88-878C-3C26-8D83-5B86B7BE5A3D
+    value:           DEC352DB-87CA-32D9-A50B-8BCFDA500095
 install-name:    '/usr/lib/libgermantok.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

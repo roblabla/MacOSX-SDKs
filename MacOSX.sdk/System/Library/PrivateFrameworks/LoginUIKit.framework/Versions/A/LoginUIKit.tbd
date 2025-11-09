@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2C01DEF1-1C35-3A0F-8A9A-E13B9ABA4E9F
+    value:           AB67AE2C-DFA4-3156-AD31-A97030CC8769
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           39B56593-B1DF-3D78-BB9B-CAA10DC21411
+    value:           850A1811-65C0-3CFE-898D-37B2BFCF553C
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -67,7 +67,7 @@ exports:
                        LUI2DarkenView, LUI2GBButton, LUI2GenericMessageViewController, 
                        LUI2GlyphButton, LUI2ImageViewController, LUI2InfoStatusViewController, 
                        LUI2InputMethodViewController, LUI2LWUIController, LUI2MessageViewController, 
-                       LUI2MicrophoneViewController, LUI2MultiWindowController, LUI2NetworkStatusViewController, 
+                       LUI2MultiWindowController, LUI2NetworkStatusViewController, 
                        LUI2PasswordHintViewController, LUI2PasswordViewController, 
                        LUI2PopoverViewController, LUI2PopupButtonViewController, 
                        LUI2ProgressBarWindowController, LUI2RecoveryKeyFormatter, 
@@ -154,11 +154,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1B25ED47-D08D-322A-AFCB-9A6268A8373E
+    value:           4B877DB8-7E87-3631-8C9E-FE814A931212
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55E22657-376E-37B3-BF9A-8E347C25F0B1
+    value:           E30E05FF-39DC-3FCE-A874-60AD2DD74841
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -199,13 +199,13 @@ exports:
                        _LUICImageSpinnerRegular22, _LUICImageSpinnerRegular23, _LUICImageSpinnerRegular3, 
                        _LUICImageSpinnerRegular4, _LUICImageSpinnerRegular5, _LUICImageSpinnerRegular6, 
                        _LUICImageSpinnerRegular7, _LUICImageSpinnerRegular8, _LUICImageSpinnerRegular9, 
-                       _LUICKeyboard, _LUICMicrophoneIndicator, _LUICMicrophoneIndicatorError, 
-                       _LUICScreenSharing, _LUICStringBatteryPercentage, _LUICTextFieldLeftCap, 
-                       _LUICTextFieldRightCap, _LUICTextFieldSelectionLeftCap, _LUICTextFieldSelectionRightCap, 
-                       _LUICTextFieldSelectionTile, _LUICTextFieldTile, _LUICopyColorForOptions, 
-                       _LUICopyLocalizedStringForIdentifier, _LUICoreBundleIdentifier, 
-                       _LUICreateImageForIdentifierWithOptions, _LUICreateImageFromImageWithColor, 
-                       _LUICreateImageFromJPEGData, _LUICreateUserImageFromImage, 
-                       _LUICreateUserImageFromImageWithOptions, _LUICreateUserImageFromURLWithOptions, 
-                       _LUIGetImageForIdentifierWithOptions, _LUIUseUpdatedUI ]
+                       _LUICKeyboard, _LUICScreenSharing, _LUICStringBatteryPercentage, 
+                       _LUICTextFieldLeftCap, _LUICTextFieldRightCap, _LUICTextFieldSelectionLeftCap, 
+                       _LUICTextFieldSelectionRightCap, _LUICTextFieldSelectionTile, 
+                       _LUICTextFieldTile, _LUICopyColorForOptions, _LUICopyLocalizedStringForIdentifier, 
+                       _LUICoreBundleIdentifier, _LUICreateImageForIdentifierWithOptions, 
+                       _LUICreateImageFromImageWithColor, _LUICreateImageFromJPEGData, 
+                       _LUICreateUserImageFromImage, _LUICreateUserImageFromImageWithOptions, 
+                       _LUICreateUserImageFromURLWithOptions, _LUIGetImageForIdentifierWithOptions, 
+                       _LUIUseUpdatedUI ]
 ...

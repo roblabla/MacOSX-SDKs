@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D2BC0B3-3CA5-304F-8994-9E0007CD50DA
+    value:           C4687EB5-77FD-3C03-B757-FE71963DF515
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5EAE8077-7138-315E-9E1B-3089F04A5E8A
+    value:           08CBA6E8-4AF4-3C30-9972-C1AE3874FB7E
 install-name:    '/System/Library/PrivateFrameworks/SystemDesktopAppearance.framework/Versions/A/SystemDesktopAppearance'
 current-version: 0
 compatibility-version: 0

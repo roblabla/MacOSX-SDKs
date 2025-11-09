@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           454F1048-9586-3C97-B8CD-DE43A9979576
+    value:           B22C7DC9-993F-36B7-BCCA-F742006FD26C
   - target:          x86_64-maccatalyst
-    value:           454F1048-9586-3C97-B8CD-DE43A9979576
+    value:           B22C7DC9-993F-36B7-BCCA-F742006FD26C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19C35837-13CB-370E-9F8B-9499181FB383
+    value:           69A58A4D-1302-348A-92BB-96D2A8F86AB7
   - target:          arm64e-maccatalyst
-    value:           19C35837-13CB-370E-9F8B-9499181FB383
+    value:           69A58A4D-1302-348A-92BB-96D2A8F86AB7
 install-name:    '/System/Library/PrivateFrameworks/KeychainCircle.framework/Versions/A/KeychainCircle'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

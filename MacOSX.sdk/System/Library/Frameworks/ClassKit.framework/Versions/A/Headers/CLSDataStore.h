@@ -2,7 +2,7 @@
 //  CLSDataStore.h
 //  ClassKit
 //
-//  Copyright © 2018-2020 Apple Inc. All rights reserved.
+//  Copyright © 2018-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -93,7 +93,7 @@ API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos
 
  /*!
   @abstract      Fetch contexts matching a predicate.
-  @discussion    For example: NSPredicate<topic == kCLSContextTopicPhysics AND parent == someContext>.  Completion block may be called on a background thread.
+  @discussion    For example: NSPredicate<topic == CLSContextTopicMath AND parent == someContext>.  Completion block may be called on a background thread.
   */
 - (void)contextsMatchingPredicate:(NSPredicate *)predicate
                        completion:(void(^)(NSArray<CLSContext *> *contexts, NSError * _Nullable error))completion;

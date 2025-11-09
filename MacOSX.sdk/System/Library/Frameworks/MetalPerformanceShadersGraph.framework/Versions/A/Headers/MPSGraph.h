@@ -36,6 +36,32 @@ typedef NS_ENUM(uint64_t, MPSGraphOptions)
     MPSGraphOptionsDefault                                         MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                      =   MPSGraphOptionsSynchronizeResults,
 };
 
+/*!
+ *  @typedef    MPSGraphOptimization
+ *  @abstract   Optimization levels
+ *
+ *  @constant   MPSGraphOptimizationLevel0                               Default optimizations
+ *  @constant   MPSGraphOptimizationLevel1                               Additional Optimizations
+ */
+typedef NS_ENUM(uint64_t, MPSGraphOptimization)
+{
+    MPSGraphOptimizationLevel0                        MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4)) MPS_SWIFT_NAME(level0) =   0,
+    MPSGraphOptimizationLevel1                        MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   1L,
+};
+
+/*!
+ *  @typedef    MPSGraphOptimizationProfile
+ *  @abstract   Optimization profile used as heuristic as graph compiler optimizes network
+ *
+ *  @constant   MPSGraphOptimizationProfilePerformance                               Default, optimize for performance
+ *  @constant   MPSGraphOptimizationProfilePowerEfficiency                          optimize for power efficiency
+ */
+typedef NS_ENUM(uint64_t, MPSGraphOptimizationProfile)
+{
+    MPSGraphOptimizationProfilePerformance                        MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4)) MPS_SWIFT_NAME(performance) =   0,
+    MPSGraphOptimizationProfilePowerEfficiency                    MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                             =   1L,
+};
+
 /*! @abstract   A dictionary of tensors and correspondiing tensorData for them
  */
 MPS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
@@ -60,6 +86,30 @@ typedef void (^MPSGraphCompletionHandler)(MPSGraphTensorDataDictionary * results
 typedef void (^MPSGraphScheduledHandler)(MPSGraphTensorDataDictionary * resultsDictionary,
                                          NSError * _Nullable error);
 
+/*! @class      MPSGraphCompilationDescriptor
+ *  @abstract   A structure which consists of all the levers users can use to compile their graphs
+ *
+ */
+MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+@interface MPSGraphCompilationDescriptor : NSObject <NSCopying>
+
+/*!
+ *  @brief Turns off type inference and we rely on type inference during runtime
+ */
+-(void) disableTypeInference;
+
+/*! @property   optimizationLevel
+ *  @discussion optimization level for the graph execution, default is MPSGraphOptimizationLevel0
+ */
+@property (readwrite, nonatomic) MPSGraphOptimization optimizationLevel MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*! @property   optimizationProfile
+ *  @discussion optimization profile for the graph optimization, default is MPSGraphOptimizationProfilePerformance
+ */
+@property (readwrite, nonatomic) MPSGraphOptimizationProfile optimizationProfile MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+@end
+
 /*! @class      MPSGraphExecutionDescriptor
  *  @abstract   A structure which consists of all the levers users can use to synchronize and schedule their graph execution
  *
@@ -82,21 +132,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  */
 @property (readwrite, atomic) BOOL waitUntilCompleted;
 
-
-@end
-
-
-/*! @class      MPSGraphCompilationDescriptor
- *  @abstract   A structure which consists of all the levers users can use to compile their graphs
- *
+/*! @property   compilationDescriptor
+ *  @discussion compilationDescriptor for the graph, default value is nil
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
-@interface MPSGraphCompilationDescriptor : NSObject
-
-/*!
- *  @brief Turns off type inference and we rely on type inference during runtime
- */
--(void) disableTypeInference;
+@property (readwrite, atomic, copy, nullable) MPSGraphCompilationDescriptor *compilationDescriptor
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
 @end
 

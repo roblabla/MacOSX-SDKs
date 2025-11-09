@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           662AFC8A-0F52-3BF3-AD62-436DA00550CE
+    value:           876C74F7-CF78-3C16-9D5B-FFE2D2CF5431
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0507F90B-2A08-3787-8CBC-C2D6D40FE95F
+    value:           666EB4D6-707D-3964-84AE-9FDDF41080AC
 install-name:    '/System/Library/PrivateFrameworks/ApplePDPHelper.framework/Versions/A/ApplePDPHelper'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

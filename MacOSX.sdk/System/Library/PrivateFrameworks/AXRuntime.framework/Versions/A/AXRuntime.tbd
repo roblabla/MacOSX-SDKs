@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AFCD5909-7466-3F2C-9295-7B545722DF38
+    value:           D738EEED-9ADF-3478-8C03-FB6AED5B7FF5
   - target:          x86_64-maccatalyst
-    value:           AFCD5909-7466-3F2C-9295-7B545722DF38
+    value:           D738EEED-9ADF-3478-8C03-FB6AED5B7FF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4CCEE3B7-5167-388B-A5CF-4FD3570520A3
+    value:           F8EC1B10-FCB9-311F-A38D-C42E71C22C3A
   - target:          arm64e-maccatalyst
-    value:           4CCEE3B7-5167-388B-A5CF-4FD3570520A3
+    value:           F8EC1B10-FCB9-311F-A38D-C42E71C22C3A
 install-name:    '/System/Library/PrivateFrameworks/AXRuntime.framework/Versions/A/AXRuntime'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -77,11 +77,11 @@ exports:
                        _AXUIElementSharedSystemWide, _AXUncaughtException, _AXUnserializeCFType, 
                        _AXUnserializeCFType3, _AXUnserializeWrapper, _AXValidateDictionaryAsDragWireFormat, 
                        _AXValidateDictionaryAsDropWireFormat, _AXValueCreate, _AXValueGetType, 
-                       _AXValueGetTypeID, _AXValueGetValue, _AX_CGPathEnumerateElementsUsingBlock, 
-                       _AccessibilityDefs_server, _AccessibilityDefs_server_routine, 
-                       _MSHCreateMIGServerSource, _MSHCreateMachServerSource, _MSHGetMachPortFromSource, 
-                       _MSHMIGSourceSetNoSendersCallback, _MSHMIGSourceSetSendOnceCallback, 
-                       _SerializeCFType, _UIAccessibilityCustomRotorActionIdentifierToken, 
+                       _AXValueGetTypeID, _AXValueGetValue, _AXXCAttributeForAttribute, 
+                       _AX_CGPathEnumerateElementsUsingBlock, _AccessibilityDefs_server, 
+                       _AccessibilityDefs_server_routine, _MSHCreateMIGServerSource, 
+                       _MSHCreateMachServerSource, _MSHGetMachPortFromSource, _MSHMIGSourceSetNoSendersCallback, 
+                       _MSHMIGSourceSetSendOnceCallback, _SerializeCFType, _UIAccessibilityCustomRotorActionIdentifierToken, 
                        _UIAccessibilityTableIndexToken, _UIAccessibilityTokenAccessibilityLanguage, 
                        _UIAccessibilityTokenAlternateInterpretation, _UIAccessibilityTokenAngularMeasurement, 
                        _UIAccessibilityTokenAnnounceEvenIfSystemSleeping, _UIAccessibilityTokenAnnouncementPriority, 
@@ -112,22 +112,22 @@ exports:
                        _UIAccessibilityTokenPhoneContext, _UIAccessibilityTokenPhoneNumber, 
                        _UIAccessibilityTokenPhoneticText, _UIAccessibilityTokenPlaceholder, 
                        _UIAccessibilityTokenPlaySoundSimultaneously, _UIAccessibilityTokenPoliteAnnouncement, 
-                       _UIAccessibilityTokenProactiveSuggestionSlot, _UIAccessibilityTokenReplaceWithWiFiSSID, 
-                       _UIAccessibilityTokenRequiresEditingStyleResolution, _UIAccessibilityTokenScreenDimmed, 
-                       _UIAccessibilityTokenSecure, _UIAccessibilityTokenShareSheetTextSlot, 
-                       _UIAccessibilityTokenShareSheetTransportSlot, _UIAccessibilityTokenSocialAttributionIds, 
-                       _UIAccessibilityTokenSpeakAsCharacter, _UIAccessibilityTokenSpeakDigits, 
-                       _UIAccessibilityTokenSpeakLiteralPunctuation, _UIAccessibilityTokenSpeakNoPunctuation, 
-                       _UIAccessibilityTokenSpeakPunctuationCounts, _UIAccessibilityTokenStrikethrough, 
-                       _UIAccessibilityTokenStyleName, _UIAccessibilityTokenSuppressBrailleOutput, 
-                       _UIAccessibilityTokenSystemAnnouncement, _UIAccessibilityTokenSystemNotificationAlert, 
-                       _UIAccessibilityTokenTelephonyCarrierString, _UIAccessibilityTokenTextDeletion, 
-                       _UIAccessibilityTokenTextInsertion, _UIAccessibilityTokenTextOperationRelated, 
-                       _UIAccessibilityTokenTextSubstitution, _UIAccessibilityTokenUnderline, 
-                       _UIAccessibilityTokenVeryPoliteAnnouncement, _UnserializeCFType, 
-                       __AXAddAssociatedPid, __AXAddNotificationObserver, __AXAddToElementCache, 
-                       __AXBroadcastEventProcessNotification, __AXCallingFromSameApp, 
-                       __AXClearElementCache, __AXCopyValueForTransformationsOnValue, 
+                       _UIAccessibilityTokenProactiveSuggestionSlot, _UIAccessibilityTokenReplaceWithActiveActivity, 
+                       _UIAccessibilityTokenReplaceWithWiFiSSID, _UIAccessibilityTokenRequiresEditingStyleResolution, 
+                       _UIAccessibilityTokenScreenDimmed, _UIAccessibilityTokenSecure, 
+                       _UIAccessibilityTokenShareSheetTextSlot, _UIAccessibilityTokenShareSheetTransportSlot, 
+                       _UIAccessibilityTokenSocialAttributionIds, _UIAccessibilityTokenSpeakAsCharacter, 
+                       _UIAccessibilityTokenSpeakDigits, _UIAccessibilityTokenSpeakLiteralPunctuation, 
+                       _UIAccessibilityTokenSpeakNoPunctuation, _UIAccessibilityTokenSpeakPunctuationCounts, 
+                       _UIAccessibilityTokenStrikethrough, _UIAccessibilityTokenStyleName, 
+                       _UIAccessibilityTokenSuppressBrailleOutput, _UIAccessibilityTokenSystemAnnouncement, 
+                       _UIAccessibilityTokenSystemNotificationAlert, _UIAccessibilityTokenTelephonyCarrierString, 
+                       _UIAccessibilityTokenTextDeletion, _UIAccessibilityTokenTextInsertion, 
+                       _UIAccessibilityTokenTextOperationRelated, _UIAccessibilityTokenTextSubstitution, 
+                       _UIAccessibilityTokenUnderline, _UIAccessibilityTokenVeryPoliteAnnouncement, 
+                       _UnserializeCFType, __AXAddAssociatedPid, __AXAddNotificationObserver, 
+                       __AXAddToElementCache, __AXBroadcastEventProcessNotification, 
+                       __AXCallingFromSameApp, __AXClearElementCache, __AXCopyValueForTransformationsOnValue, 
                        __AXCreateAXUIElementWithElement, __AXElementForAXUIElementUniqueId, 
                        __AXGetPortFromCache, __AXIgnoreNextNotification, __AXInitializeElementCache, 
                        __AXInitializeObserverAccess, __AXIsInElementCache, __AXIsPidAssociated, 

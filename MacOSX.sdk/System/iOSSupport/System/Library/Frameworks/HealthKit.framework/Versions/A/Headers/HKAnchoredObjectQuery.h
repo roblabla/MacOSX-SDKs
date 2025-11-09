@@ -20,7 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    This query can be used by an application to find out about new or deleted samples in the HealthKit
                 database.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKAnchoredObjectQueryDescriptor", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(8.0), watchos(2.0))
+#endif
 @interface HKAnchoredObjectQuery : HKQuery
 
 /*!

@@ -72,6 +72,11 @@ didDisconnectInterfaceController:(CPInterfaceController *)interfaceController AP
  */
 - (void)templateApplicationScene:(CPTemplateApplicationScene *)templateApplicationScene didSelectManeuver:(CPManeuver *)maneuver;
 
+/**
+ The CarPlay system suggested content style for this scene has changed.
+ */
+- (void)contentStyleDidChange:(UIUserInterfaceStyle)contentStyle API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos, tvos);
+
 @end
 
 
@@ -92,6 +97,8 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos)
     The CPWindow created for this CPTemplateApplicationScene
  */
 @property (nonnull, nonatomic, strong, readonly) CPWindow *carWindow;
+
+@property (nonatomic, readonly) UIUserInterfaceStyle contentStyle API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BC9C46EF-74C3-3FB2-BF5B-CE16726EDC53
+    value:           5DC5F513-3285-3650-9024-52A5DABAB039
   - target:          x86_64-maccatalyst
-    value:           BC9C46EF-74C3-3FB2-BF5B-CE16726EDC53
+    value:           5DC5F513-3285-3650-9024-52A5DABAB039
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C14EC365-57EC-3B7C-98E4-1EA4898DD439
+    value:           BD55D740-868C-367E-AB0E-58D4EAEE32EB
   - target:          arm64e-maccatalyst
-    value:           C14EC365-57EC-3B7C-98E4-1EA4898DD439
+    value:           BD55D740-868C-367E-AB0E-58D4EAEE32EB
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
-current-version: 560
+current-version: 615.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -28,8 +28,8 @@ exports:
                        _NewBase64Decode, _NewBase64Encode, _PropertyNameFromREMReminderChangeTrackingProperty, 
                        _RDHashtagLabelUpdaterAuthor, _RDNotificationConsumerLastBannerPresentationDateAuthor, 
                        _RDStoreControllerCKParentReminderIdentifierMigrationAuthor, 
-                       _RDStoreControllerDefaultValuesMigrationAuthor, _RDStoreControllerDeleteAccountStoreAuthor, 
-                       _RDStoreControllerDiacriticsInsensitiveHashtagLabelsMigrationAuthor, 
+                       _RDStoreControllerCreateAccountStoreAuthor, _RDStoreControllerDefaultValuesMigrationAuthor, 
+                       _RDStoreControllerDeleteAccountStoreAuthor, _RDStoreControllerDiacriticsInsensitiveHashtagLabelsMigrationAuthor, 
                        _RDStoreControllerDisplayDateUpdaterAuthor, _RDStoreControllerICCloudContextAuthor, 
                        _RDStoreControllerICCloudContextInternalAuthor, _RDStoreControllerICCloudContextServerChangeTokenAuthor, 
                        _RDStoreControllerJSONPropertiesMigrationAuthor, _RDStoreControllerOrphanedListMigrationAuthor, 

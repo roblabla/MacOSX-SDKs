@@ -4,35 +4,40 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5D50ACBC-E798-37E8-BDCD-F23317705CA0
+    value:           C834DC03-497C-315E-82E7-CAFDAE9E2FFD
   - target:          x86_64-maccatalyst
-    value:           5D50ACBC-E798-37E8-BDCD-F23317705CA0
+    value:           C834DC03-497C-315E-82E7-CAFDAE9E2FFD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           908D90A5-9BD1-3480-A0F3-CDBB1AEBF744
+    value:           7FB59747-5CCF-3A25-ADFB-E2B575C1E67A
   - target:          arm64e-maccatalyst
-    value:           908D90A5-9BD1-3480-A0F3-CDBB1AEBF744
+    value:           7FB59747-5CCF-3A25-ADFB-E2B575C1E67A
 install-name:    '/System/Library/PrivateFrameworks/CloudKitDistributedSync.framework/Versions/A/CloudKitDistributedSync'
-current-version: 1930.13
+current-version: 1950.31.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CKDSErrorDomain, _CKXAtomBinding, _CKXLatestFormatVersion, 
-                       _CKXUncompressedFormatVersion, _CKXUnknownFormatVersion ]
-    objc-classes:    [ CKAtomBatch, CKAtomBatchEnumerationOptions, CKAtomBatchMutableProxy, 
-                       CKAtomBatchProxy, CKAtomLocation, CKAtomLocationMutableProxy, 
-                       CKAtomLocationProxy, CKAtomMutableProxy, CKAtomProxy, CKAtomReference, 
-                       CKAtomReferenceMutableProxy, CKAtomReferenceProxy, CKDistributedTimestamp, 
-                       CKDistributedTimestampMutableProxy, CKDistributedTimestampProxy, 
-                       CKDistributedTimestampVector, CKDistributedTimestampVectorRange, 
-                       CKXArrayProxyBase, CKXAtom, CKXAtomBatch, CKXAtomLocation, 
-                       CKXAtomReference, CKXBackingStore, CKXDistributedTimestamp, 
-                       CKXORCReader, CKXORCReaderOptions, CKXORCWriter, CKXORCWriterOptions, 
-                       CKXProxyBase, CKXProxyCache, CKXReaderBase, CKXSchema, CKXStructArrayMutableProxy, 
-                       CKXStructArrayProxy, CKXStructMutableProxyBase, CKXStructProxyBase, 
-                       CKXUncompressedReader, CKXUncompressedWriter, CKXVersionedReaderWriterStore, 
+    symbols:         [ _CKByteTuple, _CKDSErrorDomain, _CKDSStringForBackingStoreFormatVersion, 
+                       _CKDSStringForErrorCode, _CKDistributedTimestampLWWCompare, 
+                       _CKDistributedTimestampVectorAtomStateFromTuple, _CKDistributedTimestampVectorClockTypeFromTuple, 
+                       _CKDistributedTimestampVectorTuple, _CKValue1FromByteTuple, 
+                       _CKValue2FromByteTuple, _CKXAtomBindingFormatVersionORC, _CKXAtomBindingFormatVersionORCv2 ]
+    objc-classes:    [ CKAtomBatch, CKAtomBatchEnumerationOptions, CKAtomBatchMetadata, 
+                       CKAtomBatchMutableProxy, CKAtomBatchProxy, CKAtomLocation, 
+                       CKAtomMutableProxy, CKAtomProxy, CKAtomReference, CKAtomReferenceMutableProxy, 
+                       CKAtomReferenceProxy, CKDSUtil, CKDistributedSiteIdentifier, 
+                       CKDistributedSiteIdentifierMutableProxy, CKDistributedSiteIdentifierProxy, 
+                       CKDistributedTimestamp, CKDistributedTimestampAttributedVector, 
+                       CKDistributedTimestampClockVector, CKDistributedTimestampMutableProxy, 
+                       CKDistributedTimestampProxy, CKDistributedTimestampSparseVector, 
+                       CKDistributedTimestampStateVector, CKDistributedTimestampVector, 
+                       CKMergeableValueID, CKMergeableValueIDMutableProxy, CKMergeableValueIDProxy, 
+                       CKXArrayProxyBase, CKXBackingStore, CKXORCReader, CKXORCReaderOptions, 
+                       CKXORCWriter, CKXORCWriterOptions, CKXProxyBase, CKXProxyCache, 
+                       CKXReaderBase, CKXSchema, CKXStructArrayMutableProxy, CKXStructArrayProxy, 
+                       CKXStructMutableProxyBase, CKXStructProxyBase, CKXVersionedReaderWriterStore, 
                        CKXWriterBase ]
 ...

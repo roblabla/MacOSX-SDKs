@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           56B642AF-8301-3098-8A2D-A0948D09011A
+    value:           9E495640-30DB-3F53-98F0-0EECD488B5C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB4A4FE0-005B-31B2-B357-A56A7F256F83
+    value:           C2B2FC09-DCA5-3DAD-978F-70DCBCD36F35
 install-name:    '/System/Library/PrivateFrameworks/CoreUtilsSwift.framework/Versions/A/CoreUtilsSwift'
 current-version: 0
 compatibility-version: 0
@@ -180,7 +180,11 @@ exports:
                        '_$s14CoreUtilsSwift14CLIHelpCommandCN', '_$s14CoreUtilsSwift14CLIHelpCommandC_9shortHelp04longG07handlerACSS_S2SSgyAA10CLIContextCKcSgtcfC', 
                        '_$s14CoreUtilsSwift14CLIHelpCommandC_9shortHelp04longG07handlerACSS_S2SSgyAA10CLIContextCKcSgtcfc', 
                        '_$s14CoreUtilsSwift14CLIHelpCommandCfD', '_$s14CoreUtilsSwift14CLIHelpCommandCfd', 
-                       '_$s14CoreUtilsSwift14MinutesPerHourSivg', '_$s14CoreUtilsSwift14SecondsPerHourSivg', 
+                       '_$s14CoreUtilsSwift14MinutesPerHourSivg', '_$s14CoreUtilsSwift14OSUnfairLockedV12wrappedValue4lockACyxGx_AA0D4LockCtcfC', 
+                       '_$s14CoreUtilsSwift14OSUnfairLockedV12wrappedValuexvM', '_$s14CoreUtilsSwift14OSUnfairLockedV12wrappedValuexvg', 
+                       '_$s14CoreUtilsSwift14OSUnfairLockedV12wrappedValuexvpMV', 
+                       '_$s14CoreUtilsSwift14OSUnfairLockedV12wrappedValuexvs', '_$s14CoreUtilsSwift14OSUnfairLockedVMa', 
+                       '_$s14CoreUtilsSwift14OSUnfairLockedVMn', '_$s14CoreUtilsSwift14SecondsPerHourSivg', 
                        '_$s14CoreUtilsSwift14SecondsPerWeekSivg', '_$s14CoreUtilsSwift14SecondsPerYearSivg', 
                        '_$s14CoreUtilsSwift14fatalErrorSafeySS7message_SS4fileSu4linetSgyycF', 
                        '_$s14CoreUtilsSwift15SecondsPerMonthSivg', '_$s14CoreUtilsSwift16CLIVersionOptionC9shortName04longG012argumentType0I4Help0fK00hK05flags7handlerACSJSg_SSSgAA9CLIOptionC08ArgumentJ0OAMSSAMShyAA7CLIFlagOGyAA10CLIContextCKcSgtcfC', 
@@ -211,8 +215,34 @@ exports:
                        '_$s14CoreUtilsSwift17CLIVersionCommandC_9shortHelp04longG07handlerACSS_S2SSgyAA10CLIContextCKcSgtcfc', 
                        '_$s14CoreUtilsSwift17CLIVersionCommandCfD', '_$s14CoreUtilsSwift17CLIVersionCommandCfd', 
                        '_$s14CoreUtilsSwift17SecondsToUpTicksFys6UInt64VSdF', '_$s14CoreUtilsSwift17UpTicksToSecondsFySds6UInt64VF', 
-                       '_$s14CoreUtilsSwift20AttosecondsPerSeconds5Int64Vvg', '_$s14CoreUtilsSwift20NanosecondsPerSecondSivg', 
-                       '_$s14CoreUtilsSwift20NanosecondsToUpTicksys6UInt64VADF', 
+                       '_$s14CoreUtilsSwift20AttosecondsPerSeconds5Int64Vvg', '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC10interfacesSay7Network11NWInterfaceVGvgTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC10interfacesSay7Network11NWInterfaceVGvgTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC10interfacesSay7Network11NWInterfaceVGvpMV', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC10invalidateyyFTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC10invalidateyyFTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC13dispatchQueueSo03OS_F6_queueCvMTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC13dispatchQueueSo03OS_F6_queueCvMTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC13dispatchQueueSo03OS_F6_queueCvgTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC13dispatchQueueSo03OS_F6_queueCvgTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC13dispatchQueueSo03OS_F6_queueCvpMV', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC13dispatchQueueSo03OS_F6_queueCvsTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC13dispatchQueueSo03OS_F6_queueCvsTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC24interfacesChangedHandleryycSgvMTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC24interfacesChangedHandleryycSgvMTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC24interfacesChangedHandleryycSgvgTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC24interfacesChangedHandleryycSgvgTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC24interfacesChangedHandleryycSgvpMV', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC24interfacesChangedHandleryycSgvsTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC24interfacesChangedHandleryycSgvsTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC8activateyyFTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorC8activateyyFTq', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCACycfC', '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCACycfCTj', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCACycfCTq', '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCACycfc', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCMa', '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCMm', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCMn', '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCMo', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCMu', '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCN', 
+                       '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCfD', '_$s14CoreUtilsSwift20CUNWInterfaceMonitorCfd', 
+                       '_$s14CoreUtilsSwift20NanosecondsPerSecondSivg', '_$s14CoreUtilsSwift20NanosecondsToUpTicksys6UInt64VADF', 
                        '_$s14CoreUtilsSwift20PicosecondsPerSeconds5Int64Vvg', '_$s14CoreUtilsSwift20SecondsFromAD1to1900s5Int64Vvg', 
                        '_$s14CoreUtilsSwift20SecondsFromAD1to1970s5Int64Vvg', '_$s14CoreUtilsSwift20SecondsFromAD1to2001s5Int64Vvg', 
                        '_$s14CoreUtilsSwift20UpTicksToNanosecondsys6UInt64VADF', 

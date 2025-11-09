@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           19636E6A-65A3-3CC6-BEBB-72C991930A9D
+    value:           29DD787A-F130-33F8-8B4E-EE142DA59292
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2DF4CBC-493D-30F7-997E-245D7E3FBE2E
+    value:           CFF96E29-B476-3D7B-BCCF-07EEF56D046C
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterCommandDrivers.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -72,11 +72,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFvN3xpc6objectEEEE, __ZTINSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_4lessIS4_EENS8_INS_4pairIKS4_SA_EEEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvRKNS_3mapIN10subscriber7SimSlotEtNS_4lessIS4_EENS_9allocatorINS_4pairIKS4_tEEEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvbEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__123enable_shared_from_thisI15ATCommandDriverEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__123enable_shared_from_thisI15ATCommandDriverEE, 
                        __ZTINSt3__123enable_shared_from_thisI15CallAudioDriverEE, 
                        __ZTINSt3__123enable_shared_from_thisI16AQMCommandDriverEE, 
                        __ZTINSt3__123enable_shared_from_thisI16DMSCommandDriverEE, 
@@ -166,11 +162,7 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvbEEE, __ZTSNSt3__110__function6__baseIFvvEEE, 
                        __ZTSNSt3__110shared_ptrI21CommandDriversFactoryE27__shared_ptr_default_deleteIS1_S1_EE, 
                        __ZTSNSt3__110shared_ptrI25InterfaceAppMapperServiceE27__shared_ptr_default_deleteIS1_S1_EE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__123enable_shared_from_thisI15ATCommandDriverEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__123enable_shared_from_thisI15ATCommandDriverEE, 
                        __ZTSNSt3__123enable_shared_from_thisI15CallAudioDriverEE, 
                        __ZTSNSt3__123enable_shared_from_thisI16AQMCommandDriverEE, 
                        __ZTSNSt3__123enable_shared_from_thisI16DMSCommandDriverEE, 
@@ -319,6 +311,7 @@ exports:
                        __ZN18EmbmsCommandDriverD1Ev, __ZN18EmbmsCommandDriverD2Ev, 
                        __ZN18VinylCommandDriver10getReceiptEN10subscriber7SimSlotENSt3__16vectorIhNS2_9allocatorIhEEEEU13block_pointerFvN3ctu6resultIS6_NS2_5tupleIJ16VinylDriverErrorhhEEEEEE, 
                        __ZN18VinylCommandDriver10getTapeEidEN10subscriber7SimSlotEU13block_pointerFvN3ctu6resultINSt3__15arrayIhLm16EEENS4_5tupleIJ16VinylDriverErrorhhEEEEEE, 
+                       __ZN18VinylCommandDriver10secureAuthEN10subscriber7SimSlotENSt3__16vectorIhNS2_9allocatorIhEEEEU13block_pointerFvN3ctu6resultIS6_NS2_5tupleIJ16VinylDriverErrorhhEEEEEE, 
                        __ZN18VinylCommandDriver11debugConfigEN10subscriber7SimSlotENSt3__16vectorIhNS2_9allocatorIhEEEEU13block_pointerFvN3ctu6resultIbNS2_5tupleIJ16VinylDriverErrorhhEEEEEE, 
                        __ZN18VinylCommandDriver11getCardInfoEN10subscriber7SimSlotEU13block_pointerFvN3ctu6resultINSt3__16vectorIhNS4_9allocatorIhEEEENS4_5tupleIJ16VinylDriverErrorhhEEEEEE, 
                        __ZN18VinylCommandDriver11signPayloadEN10subscriber7SimSlotENSt3__16vectorIhNS2_9allocatorIhEEEEU13block_pointerFvN3ctu6resultIS6_NS2_5tupleIJ16VinylDriverErrorhhEEEEEE, 
@@ -426,8 +419,8 @@ exports:
                        __ZN21NetworkListScanResult8setStateENS_5StateE, __ZN21SetupCallAlphaDisplayD0Ev, 
                        __ZN21SetupCallAlphaDisplayD1Ev, __ZN21SetupCallAlphaDisplayD2Ev, 
                        __ZN22AttachApnCommandDriver10start_syncEv, __ZN22AttachApnCommandDriver13shutdown_syncEv, 
-                       __ZN22AttachApnCommandDriver14bootstrap_syncEv, __ZN22AttachApnCommandDriver19AttachApnPushConfigC1ERKN8dispatch13group_sessionEbRKNSt3__16vectorItNS5_9allocatorItEEEE, 
-                       __ZN22AttachApnCommandDriver19AttachApnPushConfigC2ERKN8dispatch13group_sessionEbRKNSt3__16vectorItNS5_9allocatorItEEEE, 
+                       __ZN22AttachApnCommandDriver14bootstrap_syncEv, __ZN22AttachApnCommandDriver19AttachApnPushConfigC1ENSt3__18functionIFvvEEEbRKNS1_6vectorItNS1_9allocatorItEEEENS1_8optionalIbEE, 
+                       __ZN22AttachApnCommandDriver19AttachApnPushConfigC2ENSt3__18functionIFvvEEEbRKNS1_6vectorItNS1_9allocatorItEEEENS1_8optionalIbEE, 
                        __ZN22AttachApnCommandDriverC2ENSt3__110shared_ptrIK8RegistryEERKN8dispatch5queueEN10subscriber7SimSlotE, 
                        __ZN22AttachApnCommandDriverD0Ev, __ZN22AttachApnCommandDriverD1Ev, 
                        __ZN22AttachApnCommandDriverD2Ev, __ZN22BasebandSettingsDriver11readSegmentERKNSt3__110shared_ptrINS0_13basic_istreamIcNS0_11char_traitsIcEEEEEE, 

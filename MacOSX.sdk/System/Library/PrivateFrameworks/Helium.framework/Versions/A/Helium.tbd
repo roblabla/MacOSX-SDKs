@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4217A25C-FAAB-3FA1-B855-8BBF4045F206
+    value:           B6BB1713-ACEA-364D-AB30-F6B4C1A63D99
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           199B11BF-7915-38C3-86FD-ECFA5F0BA1DB
+    value:           3E90F7F0-420D-3C18-968B-93E0ECFA760C
 install-name:    '/System/Library/PrivateFrameworks/Helium.framework/Versions/A/Helium'
 current-version: 0
 compatibility-version: 0
@@ -41,13 +41,9 @@ exports:
                        __ZTIN6HGPool9AllocatorIPU19objcproto9MTLBuffer11objc_objectN30HGMetalBufferWrapperInfinipool10DescriptorEEE, 
                        __ZTIN6HGPool9AllocatorIPU21objcproto10MTLTexture11objc_objectN18HGMetalTexturePool10DescriptorEEE, 
                        __ZTIN6HGPool9AllocatorIPU21objcproto10MTLTexture11objc_objectN31HGMetalTextureWrapperInfinipool10DescriptorEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTS15HGComputeDevice, __ZTS15HGGLContextImpl, __ZTS18HGCPUComputeDevice, 
-                       __ZTS22HGTextureManagerHandle, __ZTSN6HGPool15ServicingPolicyE, 
-                       __ZTSN6HGPool16AllocationPolicyIN17HGMetalBufferPool10DescriptorEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTS15HGComputeDevice, 
+                       __ZTS15HGGLContextImpl, __ZTS18HGCPUComputeDevice, __ZTS22HGTextureManagerHandle, 
+                       __ZTSN6HGPool15ServicingPolicyE, __ZTSN6HGPool16AllocationPolicyIN17HGMetalBufferPool10DescriptorEEE, 
                        __ZTSN6HGPool16AllocationPolicyIN18HGMetalTexturePool10DescriptorEEE, 
                        __ZTSN6HGPool20FixedServicingPolicyE, __ZTSN6HGPool25FixedGroupServicingPolicyE, 
                        __ZTSN6HGPool30FixedTotalUsageServicingPolicyE, __ZTSN6HGPool8BasePoolE, 
@@ -55,10 +51,7 @@ exports:
                        __ZTSN6HGPool9AllocatorIPU19objcproto9MTLBuffer11objc_objectN30HGMetalBufferWrapperInfinipool10DescriptorEEE, 
                        __ZTSN6HGPool9AllocatorIPU21objcproto10MTLTexture11objc_objectN18HGMetalTexturePool10DescriptorEEE, 
                        __ZTSN6HGPool9AllocatorIPU21objcproto10MTLTexture11objc_objectN31HGMetalTextureWrapperInfinipool10DescriptorEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+                       __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _HFAcquireExclusive, _HFAcquireShared, _HFAddInstanceForFactory, 
                        _HFCreateInstance, _HFDecrementThenTestI32, _HFDecrementThenTestU32, 

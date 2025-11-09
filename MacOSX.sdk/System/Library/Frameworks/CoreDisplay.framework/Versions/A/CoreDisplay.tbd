@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FA01C52B-289C-3040-BCD4-B1DBB955E52D
+    value:           12835F73-F1EA-35BB-885B-DC8B4762A40D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           26642F2D-884F-3B3D-A2B8-53498675A9D9
+    value:           A0987E94-80F9-3961-A251-DF3A9B8776EA
 install-name:    '/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay'
-current-version: 263
+current-version: 265.2
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CDNotificationRegisterCallbackBlock, _CDNotificationRegisterCallbackBlockOnQueue, 

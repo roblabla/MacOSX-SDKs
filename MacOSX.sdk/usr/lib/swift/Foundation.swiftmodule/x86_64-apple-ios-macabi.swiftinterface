@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target x86_64-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -enable-experimental-concurrency -enable-experimental-concurrency -module-name Foundation
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target x86_64-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-experimental-concurrency -module-name Foundation
+// swift-module-flags-ignorable: -user-module-version 72.105
 import Combine
 import CoreFoundation
 import CoreGraphics
@@ -114,15 +115,31 @@ extension Foundation.URLSessionWebSocketTask {
   public func send(_ message: Foundation.URLSessionWebSocketTask.Message, completionHandler: @escaping (Swift.Error?) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
-  @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-  public func send(_ message: Foundation.URLSessionWebSocketTask.Message) async throws
+  @_silgen_name("_$sSo25NSURLSessionWebSocketTaskC10FoundationE4sendyyAbCE7MessageOYaKF")
+  @_alwaysEmitIntoClient public func send(_ message: Foundation.URLSessionWebSocketTask.Message) async throws {
+        try await withUnsafeThrowingContinuation { continuation in
+            send(message) {
+                if let error = $0 {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(returning: ())
+                }
+            }
+        } as Void
+    }
   #endif
 
   public func receive(completionHandler: @escaping (Swift.Result<Foundation.URLSessionWebSocketTask.Message, Swift.Error>) -> Swift.Void)
   
   #if compiler(>=5.3) && $AsyncAwait
-  @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-  public func receive() async throws -> Foundation.URLSessionWebSocketTask.Message
+  @_silgen_name("_$sSo25NSURLSessionWebSocketTaskC10FoundationE7receiveAbCE7MessageOyYaKF")
+  @_alwaysEmitIntoClient public func receive() async throws -> Foundation.URLSessionWebSocketTask.Message {
+        try await withUnsafeThrowingContinuation { continuation in
+            receive {
+                continuation.resume(with: $0)
+            }
+        }
+    }
   #endif
 
 }
@@ -140,6 +157,38 @@ extension Foundation.URLSessionTaskTransactionMetrics {
   public var negotiatedTLSCipherSuite: Security.tls_ciphersuite_t? {
     get
   }
+}
+extension Foundation.URLSession {
+  @_alwaysEmitIntoClient private func makeState() -> Swift.ManagedBuffer<(isCancelled: Swift.Bool, task: Foundation.URLSessionTask?), Darwin.os_unfair_lock> {
+        ManagedBuffer<(isCancelled: Bool, task: URLSessionTask?), os_unfair_lock>.create(minimumCapacity: 1) { buffer in
+            buffer.withUnsafeMutablePointerToElements { $0.initialize(to: os_unfair_lock()) }
+            return (isCancelled: false, task: nil)
+        }
+    }
+  @_alwaysEmitIntoClient private func cancel(state: Swift.ManagedBuffer<(isCancelled: Swift.Bool, task: Foundation.URLSessionTask?), Darwin.os_unfair_lock>) {
+        state.withUnsafeMutablePointers { state, lock in
+            os_unfair_lock_lock(lock)
+            let task = state.pointee.task
+            state.pointee = (isCancelled: true, task: nil)
+            os_unfair_lock_unlock(lock)
+            task?.cancel()
+        }
+    }
+  @_alwaysEmitIntoClient private func activate(state: Swift.ManagedBuffer<(isCancelled: Swift.Bool, task: Foundation.URLSessionTask?), Darwin.os_unfair_lock>, task: Foundation.URLSessionTask) {
+        state.withUnsafeMutablePointers { state, lock in
+            os_unfair_lock_lock(lock)
+            if state.pointee.task != nil {
+                fatalError("Cannot activate twice")
+            }
+            if state.pointee.isCancelled {
+                os_unfair_lock_unlock(lock)
+                task.cancel()
+            } else {
+                state.pointee = (isCancelled: false, task: task)
+                os_unfair_lock_unlock(lock)
+            }
+        }
+    }
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Foundation.URLSession {
@@ -198,7 +247,7 @@ extension Foundation.URLSession {
       #endif
 
     }
-    __consuming public func makeAsyncIterator() -> Foundation.URLSession.AsyncBytes.Iterator
+    public __consuming func makeAsyncIterator() -> Foundation.URLSession.AsyncBytes.Iterator
   }
   #endif
 
@@ -1461,8 +1510,8 @@ extension Foundation.Measurement where UnitType : Foundation.Dimension {
     public init(width: Foundation.Measurement<UnitType>.FormatStyle.UnitWidth, locale: Foundation.Locale = .autoupdatingCurrent, usage: Foundation.MeasurementFormatUnitUsage<UnitType> = .general, numberFormatStyle: Foundation.FloatingPointFormatStyle<Swift.Double>? = nil)
     public func locale(_ locale: Foundation.Locale) -> Foundation.Measurement<UnitType>.FormatStyle
     public func format(_ measurement: Foundation.Measurement<UnitType>) -> Swift.String
-    public static func == (a: Foundation.Measurement<UnitType>.FormatStyle, b: Foundation.Measurement<UnitType>.FormatStyle) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: Foundation.Measurement<UnitType>.FormatStyle, b: Foundation.Measurement<UnitType>.FormatStyle) -> Swift.Bool
     public typealias FormatInput = Foundation.Measurement<UnitType>
     public typealias FormatOutput = Swift.String
     public func encode(to encoder: Swift.Encoder) throws
@@ -3734,7 +3783,7 @@ extension Foundation.NotificationCenter {
       public typealias Element = Foundation.Notification
     }
     @objc deinit
-    __consuming final public func makeAsyncIterator() -> Foundation.NotificationCenter.Notifications.Iterator
+    final public __consuming func makeAsyncIterator() -> Foundation.NotificationCenter.Notifications.Iterator
     public typealias AsyncIterator = Foundation.NotificationCenter.Notifications.Iterator
   }
   #endif
@@ -8972,8 +9021,8 @@ public struct FormatStyleCapitalizationContext : Swift.Codable, Swift.Hashable {
   public static var middleOfSentence: Foundation.FormatStyleCapitalizationContext {
     get
   }
-  public static func == (a: Foundation.FormatStyleCapitalizationContext, b: Foundation.FormatStyleCapitalizationContext) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: Foundation.FormatStyleCapitalizationContext, b: Foundation.FormatStyleCapitalizationContext) -> Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get

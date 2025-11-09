@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9FB143C3-11BE-320A-A629-0FB7C44D2EA5
+    value:           BC68E676-7501-3296-A9A3-0B849679B0CE
   - target:          x86_64-maccatalyst
-    value:           9FB143C3-11BE-320A-A629-0FB7C44D2EA5
+    value:           BC68E676-7501-3296-A9A3-0B849679B0CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25927623-92D0-3EF2-BF28-3B702A84263E
+    value:           557899E1-1BFD-3428-8FCB-CAEE99CA2221
   - target:          arm64e-maccatalyst
-    value:           25927623-92D0-3EF2-BF28-3B702A84263E
+    value:           557899E1-1BFD-3428-8FCB-CAEE99CA2221
 install-name:    '/System/Library/PrivateFrameworks/CoreHandwriting.framework/Versions/A/CoreHandwriting'
 current-version: 0
 exports:
@@ -22,9 +22,10 @@ exports:
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CHDescriptionForCorrectionResultType, _CHRecognitionOptionAllowSecondaryLocale, 
                        _CHRecognitionOptionDrawingAnchorPoint, _CHRecognitionOptionFrameContext, 
-                       _CHRecognitionOptionInferenceCache, _CHRecognitionOptionPrecedingSpaceBehavior, 
-                       _CHRecognitionOptionShouldPreserveCaseVariantCandidates, _CHRecognitionOptionShouldRefineCandidates, 
-                       _CHRecognitionOptionTextAfter, _CHRecognitionOptionTextBefore ]
+                       _CHRecognitionOptionInferenceCache, _CHRecognitionOptionIsRunningSecondaryLocale, 
+                       _CHRecognitionOptionPrecedingSpaceBehavior, _CHRecognitionOptionShouldPreserveCaseVariantCandidates, 
+                       _CHRecognitionOptionShouldRefineCandidates, _CHRecognitionOptionTextAfter, 
+                       _CHRecognitionOptionTextBefore ]
     objc-classes:    [ CHBottomUpStrokeGroupingStrategy, CHBoxcarFilterPointFIFO, 
                        CHContextualTextResult, CHContextualTextResults, CHDataDetectorQuery, 
                        CHDataDetectorQueryItem, CHDrawing, CHEncodedStrokeIdentifier, 

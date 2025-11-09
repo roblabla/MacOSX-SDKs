@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8D5B5946-AD23-32E8-98AD-2B6D49FA1DFE
+    value:           FF24CD02-5EA6-3532-9BAC-C78FF22D506A
   - target:          x86_64-maccatalyst
-    value:           8D5B5946-AD23-32E8-98AD-2B6D49FA1DFE
+    value:           FF24CD02-5EA6-3532-9BAC-C78FF22D506A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8AFF2862-90EF-349A-92D7-430EC4557AE6
+    value:           D5A399C6-87E2-3FA3-8E53-588CB61F7F21
   - target:          arm64e-maccatalyst
-    value:           8AFF2862-90EF-349A-92D7-430EC4557AE6
+    value:           D5A399C6-87E2-3FA3-8E53-588CB61F7F21
 install-name:    '/System/Library/Frameworks/CoreSpotlight.framework/Versions/A/CoreSpotlight'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -58,19 +58,20 @@ exports:
                        _MDItemAppleLoopsLoopMode, _MDItemAppleLoopsRootKey, _MDItemApplicationCategories, 
                        _MDItemApplicationLastLaunchedDate, _MDItemApplicationName, 
                        _MDItemApprovedDate, _MDItemApprovedStatus, _MDItemApprovedStatusString, 
-                       _MDItemApproverContactIdentifiers, _MDItemApproverEmailAddresses, 
-                       _MDItemApprovers, _MDItemArtist, _MDItemAttachmentNames, _MDItemAttachmentPaths, 
-                       _MDItemAttachmentTypes, _MDItemAttributeChangeDate, _MDItemAudiences, 
-                       _MDItemAudioBitRate, _MDItemAudioChannelCount, _MDItemAudioEncodingApplication, 
+                       _MDItemApproverContactDSID, _MDItemApproverContactIdentifiers, 
+                       _MDItemApproverEmailAddresses, _MDItemApprovers, _MDItemArtist, 
+                       _MDItemAttachmentNames, _MDItemAttachmentPaths, _MDItemAttachmentTypes, 
+                       _MDItemAttributeChangeDate, _MDItemAudiences, _MDItemAudioBitRate, 
+                       _MDItemAudioChannelCount, _MDItemAudioEncodingApplication, 
                        _MDItemAudioSampleRate, _MDItemAudioTrackNumber, _MDItemAuthorAddresses, 
-                       _MDItemAuthorContactIdentifiers, _MDItemAuthorContactProperties, 
-                       _MDItemAuthorEmailAddresses, _MDItemAuthorPersons, _MDItemAuthors, 
-                       _MDItemAuthorsDictionary, _MDItemAutocompleteTriggers, _MDItemBackgroundRunnable, 
-                       _MDItemBitsPerSample, _MDItemBundleID, _MDItemBundleIdentifier, 
-                       _MDItemCFBundleIdentifier, _MDItemCalendarDelegateIdentifier, 
-                       _MDItemCalendarHolidayIdentifier, _MDItemCameraOwner, _MDItemCity, 
-                       _MDItemClientBundleID, _MDItemClientExternalID, _MDItemCodecs, 
-                       _MDItemColorSpace, _MDItemComment, _MDItemCompletionDate, 
+                       _MDItemAuthorContactDSID, _MDItemAuthorContactIdentifiers, 
+                       _MDItemAuthorContactProperties, _MDItemAuthorEmailAddresses, 
+                       _MDItemAuthorPersons, _MDItemAuthors, _MDItemAuthorsDictionary, 
+                       _MDItemAutocompleteTriggers, _MDItemBackgroundRunnable, _MDItemBitsPerSample, 
+                       _MDItemBundleID, _MDItemBundleIdentifier, _MDItemCFBundleIdentifier, 
+                       _MDItemCalendarDelegateIdentifier, _MDItemCalendarHolidayIdentifier, 
+                       _MDItemCameraOwner, _MDItemCity, _MDItemClientBundleID, _MDItemClientExternalID, 
+                       _MDItemCodecs, _MDItemColorSpace, _MDItemComment, _MDItemCompletionDate, 
                        _MDItemComposer, _MDItemContactIdentifier, _MDItemContactKeywords, 
                        _MDItemContainerDisplayName, _MDItemContainerIdentifier, _MDItemContainerOrder, 
                        _MDItemContainerTitle, _MDItemContentCreationDate, _MDItemContentCreationDate_Ranking, 

@@ -39,6 +39,15 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 - (void)pauseTripForReason:(CPTripPauseReason)reason description:(nullable NSString *)description;
 
 /**
+ Pause the current trip.
+ 
+ @param reason The reason navigation was paused.
+ @param description An optional description of the pause reason. If @c nil, a system-provided string will be used.
+ @param turnCardColor An optional color of the pause card. If @c nil, will fallback to the @c guidanceBackgroundColor on @c CPMapTemplate. If no color is specified there, will default to a system-provided color.
+ */
+- (void)pauseTripForReason:(CPTripPauseReason)reason description:(nullable NSString *)description turnCardColor:(nullable UIColor *)turnCardColor API_AVAILABLE(ios(15.4));
+
+/**
  Finish the trip.
  */
 - (void)finishTrip;

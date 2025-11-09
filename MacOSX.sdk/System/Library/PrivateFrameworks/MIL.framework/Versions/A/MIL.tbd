@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4349D652-01FA-372B-B720-2150DAA22683
+    value:           55F73584-64B8-3364-8A58-BB922E9B8B63
   - target:          x86_64-maccatalyst
-    value:           4349D652-01FA-372B-B720-2150DAA22683
+    value:           55F73584-64B8-3364-8A58-BB922E9B8B63
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA75138E-B7A1-36D0-918A-6D1D8E109F47
+    value:           D10EDFD9-852C-3A27-8159-30529428ACDD
   - target:          arm64e-maccatalyst
-    value:           AA75138E-B7A1-36D0-918A-6D1D8E109F47
+    value:           D10EDFD9-852C-3A27-8159-30529428ACDD
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
-current-version: 3.5.4
-compatibility-version: 3.5
+current-version: 3.6.1
+compatibility-version: 3.6
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTINSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 
@@ -25,11 +25,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFNS_10unique_ptrIN3MIL7IRBlockENS_14default_deleteIS4_EEEERKS4_EEE, 
                        __ZTINSt3__110__function6__baseIFvPvEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__117bad_function_callE, 
                        __ZTINSt3__121__basic_string_commonILb1EEE, __ZTIPFN3MIL16ValidationResultERKNS_11IROperationEE, 
                        __ZTSFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTSNSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_10shared_ptrIKN3MIL7IRValueEEERKNS3_11IROperationEEEE, 
@@ -38,10 +34,9 @@ exports:
                        __ZTSNSt3__110shared_ptrINS_6vectorIPKN3MIL11IRDimensionENS_9allocatorIS5_EEEEE27__shared_ptr_default_deleteIS8_S8_EE, 
                        __ZTSNSt3__110shared_ptrINS_6vectorIPKN3MIL11IRValueTypeENS_9allocatorIS5_EEEEE27__shared_ptr_default_deleteIS8_S8_EE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114default_deleteIKN3MIL11IRListValueEEE, __ZTSNSt3__114default_deleteIKN3MIL12IRTupleValueEEE, 
-                       __ZTSNSt3__114default_deleteIKN3MIL13IRTensorValueEEE, __ZTSNSt3__114default_deleteIKN3MIL17IRDictionaryValueEEE, 
+                       __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114default_deleteIKN3MIL11IRListValueEEE, 
+                       __ZTSNSt3__114default_deleteIKN3MIL12IRTupleValueEEE, __ZTSNSt3__114default_deleteIKN3MIL13IRTensorValueEEE, 
+                       __ZTSNSt3__114default_deleteIKN3MIL17IRDictionaryValueEEE, 
                        __ZTSNSt3__114default_deleteIKN3MIL7IRScopeEEE, __ZTSNSt3__114default_deleteIKN3MIL7IRValueEEE, 
                        __ZTSNSt3__114default_deleteIN3MIL10IRArgumentEEE, __ZTSNSt3__114default_deleteIN3MIL10IRFunctionEEE, 
                        __ZTSNSt3__114default_deleteIN3MIL10IROperatorEEE, __ZTSNSt3__114default_deleteIN3MIL10Validation22TensorDTypeConstraintsEEE, 
@@ -57,10 +52,8 @@ exports:
                        __ZTSNSt3__114default_deleteINS_13unordered_mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrIN3MIL11IRParameterEEENS_4hashIS7_EENS_8equal_toIS7_EENS5_INS_4pairIKS7_SB_EEEEEEEE, 
                        __ZTSNSt3__114default_deleteINS_6vectorINS_10shared_ptrIN3MIL11IRParameterEEENS_9allocatorIS5_EEEEEE, 
                        __ZTSNSt3__114default_deleteINS_6vectorIPKN3MIL11IRDimensionENS_9allocatorIS5_EEEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSPFN3MIL16ValidationResultERKNS_11IROperationEE ]
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__121__basic_string_commonILb1EEE, 
+                       __ZTSPFN3MIL16ValidationResultERKNS_11IROperationEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __ZN3MIL10IRArgument4MakeENSt3__110shared_ptrIKNS_7IRValueEEE, 

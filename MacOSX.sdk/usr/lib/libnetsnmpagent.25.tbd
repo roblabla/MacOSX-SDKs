@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           741380F0-F998-33A3-9C9A-2C519B825050
+    value:           44B6CC90-97F4-3AC8-AD66-ECFA2CC24B07
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6049A7B-66F3-372B-AD3C-60915FAC82AB
+    value:           5E1A83F6-0259-3063-9E5A-C8F549B759E2
 install-name:    '/usr/lib/libnetsnmpagent.25.dylib'
 current-version: 26.2
 compatibility-version: 26

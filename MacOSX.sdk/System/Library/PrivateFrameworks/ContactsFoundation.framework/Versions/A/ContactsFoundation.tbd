@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B4693E6-C320-318D-AF27-50BAE9722642
+    value:           288E0C3F-58E4-3191-9291-9636C2E813CB
   - target:          x86_64-maccatalyst
-    value:           0B4693E6-C320-318D-AF27-50BAE9722642
+    value:           288E0C3F-58E4-3191-9291-9636C2E813CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FEB74E7-8468-3D30-95DB-51E0E7BF0775
+    value:           382376C1-9CA0-3862-A7AC-EF7F7347BD33
   - target:          arm64e-maccatalyst
-    value:           5FEB74E7-8468-3D30-95DB-51E0E7BF0775
+    value:           382376C1-9CA0-3862-A7AC-EF7F7347BD33
 install-name:    '/System/Library/PrivateFrameworks/ContactsFoundation.framework/Versions/A/ContactsFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -222,11 +222,10 @@ exports:
                        CNDescriptionBuilder._separator, CNDispatchSource._source, 
                        CNEither._pair, CNEnvironment._defaultCountryCode, CNEnvironment._entitlementVerifier, 
                        CNEnvironment._fileManager, CNEnvironment._isCommLimitsEnabledStorage, 
-                       CNEnvironment._isCommLimitsPersistenceAccessibleStorage, CNEnvironment._isInternalBuildStorage, 
-                       CNEnvironment._localizationServices, CNEnvironment._mainBundleIdentifier, 
-                       CNEnvironment._notificationCenter, CNEnvironment._schedulerProvider, 
-                       CNEnvironment._timeProvider, CNEnvironment._userDefaults, 
-                       CNEnvironmentBase._storage, CNFoundationSocialProfile._displayName, 
+                       CNEnvironment._isInternalBuildStorage, CNEnvironment._localizationServices, 
+                       CNEnvironment._mainBundleIdentifier, CNEnvironment._notificationCenter, 
+                       CNEnvironment._schedulerProvider, CNEnvironment._timeProvider, 
+                       CNEnvironment._userDefaults, CNEnvironmentBase._storage, CNFoundationSocialProfile._displayName, 
                        CNFoundationSocialProfile._service, CNFoundationSocialProfile._urlString, 
                        CNFoundationSocialProfile._userIdentifier, CNFoundationSocialProfile._username, 
                        CNFoundationUserDefaults._userDefaults, CNFuture._calculationDependencies, 

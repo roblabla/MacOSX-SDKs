@@ -28,7 +28,7 @@ AX_EXTERN NSNotificationName const AXMFiHearingDeviceStreamingEarDidChangeNotifi
 AX_EXTERN BOOL AXSupportsBidirectionalAXMFiHearingDeviceStreaming(void) API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(tvos, macos) NS_SWIFT_NAME(AXMFiHearingDevice.supportsBidirectionalStreaming());
 
 /*
- Returns the CoreBluetooth UUIDs of the hearing device CBPeripherals. This requires that the value of the "hearing.aid.app" entitlement match the manufacturer of the CBPeripherals. For bimodal hearing devices the entitlement should be an array of the manufacturers.
+ Returns the CoreBluetooth UUIDs of the hearing device CBPeripherals. This requires that the value of the "com.apple.developer.hearing-aid-app" entitlement match the manufacturer of the CBPeripherals. For bimodal hearing devices the entitlement should be an array of the manufacturers.
  */
 AX_EXTERN NSArray<NSUUID *> * AXMFiHearingDevicePairedUUIDs(void) API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(tvos, macos)  NS_SWIFT_NAME(AXMFiHearingDevice.pairedDeviceIdentifiers());
 AX_EXTERN NSNotificationName const AXMFiHearingDevicePairedUUIDsDidChangeNotification API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(tvos, macos)  NS_SWIFT_NAME(AXMFiHearingDevice.pairedUUIDsDidChangeNotification);

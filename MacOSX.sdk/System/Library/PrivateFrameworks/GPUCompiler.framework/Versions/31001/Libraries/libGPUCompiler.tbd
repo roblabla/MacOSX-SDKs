@@ -3,25 +3,27 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           34535EA4-42D4-340F-8B94-CF3D56392219
+    value:           535526F8-27AF-338C-8D75-8391DE418266
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3403E0B9-0494-3A27-BF4B-20A41688DE02
+    value:           51BCB9A6-164F-3966-B360-4838EF66C0E0
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompiler.dylib'
-current-version: 31001.255
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LLVMExtraCreateBinary, _LLVMExtraDisposeBinary, _LLVMExtraDisposeSharedModule, 
-                       _LLVMExtraGetSymbolImplAddress, _LLVMExtraGetSymbolImplSize, 
-                       _LLVMExtraMachOUniversalBinaryCopyIRForArch, _LLVMExtraMakeSharedModule, 
-                       _MTLArchiveAddMember, _MTLArchiveCreate, _MTLArchiveDestroy, 
-                       _MTLArchiveGetAsObject, _MTLArchiveGetMemberNo, _MTLArchiveGetMembersCount, 
-                       _MTLCreateScript, _MTLDestroyScript, _MTLDowngradeAIRModule, 
-                       _MTLFunctionGroupCreate, _MTLFunctionGroupDestroy, _MTLFunctionGroupGetFunctionAtIndex, 
-                       _MTLFunctionGroupGetFunctionsCount, _MTLFunctionGroupGetName, 
-                       _MTLGPUArchiverAddUnit, _MTLGPUArchiverBuildToBuffer, _MTLGPUArchiverCreateCoreImageWriter, 
-                       _MTLGPUArchiverCreateDynamicLibraryWriter, _MTLGPUArchiverCreateExecutableWriter, 
+                       _LLVMExtraGetSymbolImplAddress, _LLVMExtraGetSymbolImplName, 
+                       _LLVMExtraGetSymbolImplSize, _LLVMExtraMachOUniversalBinaryCopyIRForArch, 
+                       _LLVMExtraMakeSharedModule, _MTLArchiveAddMember, _MTLArchiveCreate, 
+                       _MTLArchiveDestroy, _MTLArchiveGetAsObject, _MTLArchiveGetMemberNo, 
+                       _MTLArchiveGetMembersCount, _MTLCreateScript, _MTLDestroyScript, 
+                       _MTLDowngradeAIRModule, _MTLFunctionGroupCreate, _MTLFunctionGroupDestroy, 
+                       _MTLFunctionGroupGetFunctionAtIndex, _MTLFunctionGroupGetFunctionsCount, 
+                       _MTLFunctionGroupGetName, _MTLGPUArchiverAddUnit, _MTLGPUArchiverBuildToBuffer, 
+                       _MTLGPUArchiverCreateCoreImageWriter, _MTLGPUArchiverCreateCoreImageWriterWithId, 
+                       _MTLGPUArchiverCreateDynamicLibraryWriter, _MTLGPUArchiverCreateDynamicLibraryWriterWithId, 
+                       _MTLGPUArchiverCreateExecutableWriter, _MTLGPUArchiverCreateExecutableWriterWithId, 
                        _MTLGPUArchiverDestroy, _MTLGPUArchiverFlush, _MTLGPUArchiverFromId, 
                        _MTLGPUArchiverPackUnits, _MTLGPUArchiverSetInstallName, _MTLGPUArchiverToId, 
                        _MTLGPUCompilerBuildFromSource, _MTLGPUCompilerBuildFromSourceToBuffer, 
@@ -37,7 +39,7 @@ exports:
                        _MTLGPUCompilerSpecializeFunctionToBuffer, _MTLGPUCompilerStitchFunctions, 
                        _MTLGPUCompilerStitchFunctionsToBuffer, _MTLMetalDynamicLibraryGetInstallName, 
                        _MTLMetalFunctionCreate, _MTLMetalFunctionDestroy, _MTLMetalFunctionGetAIRVersion, 
-                       _MTLMetalFunctionGetKind, _MTLMetalFunctionGetMetalVersion, 
+                       _MTLMetalFunctionGetAlias, _MTLMetalFunctionGetKind, _MTLMetalFunctionGetMetalVersion, 
                        _MTLMetalFunctionGetModule, _MTLMetalFunctionGetName, _MTLMetalImportedSymbolGetName, 
                        _MTLMetalLibCreateCoreImage, _MTLMetalLibCreateCoreImageWithTriple, 
                        _MTLMetalLibCreateDynamicLibrary, _MTLMetalLibCreateDynamicLibraryWithTriple, 
@@ -49,9 +51,9 @@ exports:
                        _MTLMetalLibGetVariableNo, _MTLMetalLibGetVariablesCount, 
                        _MTLMetalLibInsertFunction, _MTLMetalLibInsertVariable, _MTLMetalVariableCreate, 
                        _MTLMetalVariableDestroy, _MTLMetalVariableGetAIRVersion, 
-                       _MTLMetalVariableGetMetalVersion, _MTLMetalVariableGetModule, 
-                       _MTLMetalVariableGetName, _MTLModuleGetAsObject, _MTLObjectCreate, 
-                       _MTLObjectDestroy, _MTLObjectGetAsArchive, _MTLObjectGetAsMetalLib, 
-                       _MTLObjectGetAsModule, _MTLUpgradeAIRModule, _MTLVerifyAIRModule, 
-                       _MTLWriteAIRBitcodeToMemoryBuffer, _MTLWriteMetalLibToMemoryBuffer ]
+                       _MTLMetalVariableGetAlias, _MTLMetalVariableGetMetalVersion, 
+                       _MTLMetalVariableGetModule, _MTLMetalVariableGetName, _MTLModuleGetAsObject, 
+                       _MTLObjectCreate, _MTLObjectDestroy, _MTLObjectGetAsArchive, 
+                       _MTLObjectGetAsMetalLib, _MTLObjectGetAsModule, _MTLUpgradeAIRModule, 
+                       _MTLVerifyAIRModule, _MTLWriteAIRBitcodeToMemoryBuffer, _MTLWriteMetalLibToMemoryBuffer ]
 ...

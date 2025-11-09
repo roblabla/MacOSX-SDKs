@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CAE5A51D-2F68-31E5-80FA-36C67C974665
+    value:           BC8E7761-E5AC-3DA2-98B5-43DD6711873D
   - target:          x86_64-maccatalyst
-    value:           CAE5A51D-2F68-31E5-80FA-36C67C974665
+    value:           BC8E7761-E5AC-3DA2-98B5-43DD6711873D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           744E19C0-433E-38DD-89EF-9501C1421F33
+    value:           632B9B3D-3CCA-3E7D-8CBE-85EC7F423BE4
   - target:          arm64e-maccatalyst
-    value:           744E19C0-433E-38DD-89EF-9501C1421F33
+    value:           632B9B3D-3CCA-3E7D-8CBE-85EC7F423BE4
 install-name:    '/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -299,10 +299,10 @@ exports:
                        _strip_circumflex, _strip_diaeresis, _strip_dialytika_tonos, 
                        _strip_grave_accent, _strip_greek_accent, _strip_macron, _strip_ring_above, 
                        _strip_small_tilde ]
-    objc-classes:    [ TIAccessibilityClient, TIAdhocEventDispatcher, TIAggdReporter, 
-                       TIAnalyticsBooleanFieldSpec, TIAnalyticsEventSpec, TIAnalyticsFieldSpec, 
-                       TIAnalyticsMetricsContext, TIAnalyticsNumberFieldSpec, TIAnalyticsService, 
-                       TIAnalyticsServiceProviderImpl, TIAnalyticsStringFieldSpec, 
+    objc-classes:    [ TIAccessibilityClient, TIActionWhenIdle, TIAdhocEventDispatcher, 
+                       TIAggdReporter, TIAnalyticsBooleanFieldSpec, TIAnalyticsEventSpec, 
+                       TIAnalyticsFieldSpec, TIAnalyticsMetricsContext, TIAnalyticsNumberFieldSpec, 
+                       TIAnalyticsService, TIAnalyticsServiceProviderImpl, TIAnalyticsStringFieldSpec, 
                        TIAnalyticsUtil, TIAssistantSettings, TIAutocorrectionList, 
                        TIAutofill, TIAutoshiftController, TICandidateRequestToken, 
                        TICharacterSetDescription, TIChineseShared, TICompositeMecabraCandidate, 

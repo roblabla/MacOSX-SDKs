@@ -91,7 +91,6 @@
 #ifndef _KERN_TASK_H_
 #define _KERN_TASK_H_
 
-#include <kern/btlog.h>
 #include <kern/kern_types.h>
 #include <kern/task_ref.h>
 #include <mach/mach_types.h>

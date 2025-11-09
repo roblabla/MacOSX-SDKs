@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F0B37B81-F85D-31CD-9CC9-E58B21A27084
+    value:           DD72B4A1-A6DF-3EC6-9EFE-B97DEE72ED30
   - target:          x86_64-maccatalyst
-    value:           F0B37B81-F85D-31CD-9CC9-E58B21A27084
+    value:           DD72B4A1-A6DF-3EC6-9EFE-B97DEE72ED30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E119E6A-735C-3A7E-902C-474689AEB406
+    value:           D74BA0F7-37C7-3C36-A6C0-4048E456EA47
   - target:          arm64e-maccatalyst
-    value:           5E119E6A-735C-3A7E-902C-474689AEB406
+    value:           D74BA0F7-37C7-3C36-A6C0-4048E456EA47
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -115,17 +115,16 @@ exports:
                        _VTPreprocessingSessionInvalidate, _VTPreprocessingSessionPreprocessFrame, 
                        _VTPreprocessingSessionSetProperties, _VTPreprocessingSessionSetProperty, 
                        _VTRateControlSessionCreate, _VTRateControlSessionGetTypeID, 
-                       _VTRateControlSessionInvalidate, _VTRegisterPixelTransferCapability, 
-                       _VTRegisterPixelTransferCapabilityMxN, _VTRegisterProfessionalVideoWorkflowVideoDecoders, 
-                       _VTRegisterProfessionalVideoWorkflowVideoEncoders, _VTRegisterSupplementalVideoDecoderIfAvailable, 
-                       _VTRegisterVideoDecoder, _VTRegisterVideoDecoderWithInfo, 
-                       _VTRegisterVideoEncoder, _VTRegisterVideoEncoderWithInfo, 
-                       _VTRemoteCompressionServer_ServiceConnectionHandler, _VTRemoteDecodeServer_XPCServiceConnectionHandler, 
-                       _VTRestrictVideoDecoders, _VTSelectAndCreateTemporalFilterInstance, 
-                       _VTSelectAndCreateVideoDecoderInstance, _VTSelectAndCreateVideoEncoderInstance, 
-                       _VTSessionCopyProperty, _VTSessionCopySerializableProperties, 
-                       _VTSessionCopySupportedPropertyDictionary, _VTSessionSetProperties, 
-                       _VTSessionSetProperty, _VTSetCodeCoverageFilePathPattern, 
+                       _VTRegisterPixelTransferCapability, _VTRegisterPixelTransferCapabilityMxN, 
+                       _VTRegisterProfessionalVideoWorkflowVideoDecoders, _VTRegisterProfessionalVideoWorkflowVideoEncoders, 
+                       _VTRegisterSupplementalVideoDecoderIfAvailable, _VTRegisterVideoDecoder, 
+                       _VTRegisterVideoDecoderWithInfo, _VTRegisterVideoEncoder, 
+                       _VTRegisterVideoEncoderWithInfo, _VTRemoteCompressionServer_ServiceConnectionHandler, 
+                       _VTRemoteDecodeServer_XPCServiceConnectionHandler, _VTRestrictVideoDecoders, 
+                       _VTSelectAndCreateTemporalFilterInstance, _VTSelectAndCreateVideoDecoderInstance, 
+                       _VTSelectAndCreateVideoEncoderInstance, _VTSessionCopyProperty, 
+                       _VTSessionCopySerializableProperties, _VTSessionCopySupportedPropertyDictionary, 
+                       _VTSessionSetProperties, _VTSessionSetProperty, _VTSetCodeCoverageFilePathPattern, 
                        _VTTemporalFilterPluginGetCMBaseObject, _VTTemporalFilterPluginGetClassID, 
                        _VTTemporalFilterPluginGetTypeID, _VTTemporalFilterPluginSessionConcludeInputFrame, 
                        _VTTemporalFilterPluginSessionEmitOutputFrame, _VTTemporalFilterPluginSessionGetClientInputPixelBufferAttributesHint, 

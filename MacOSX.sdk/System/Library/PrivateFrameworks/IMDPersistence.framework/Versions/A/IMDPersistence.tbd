@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4953A0A4-BC2E-316D-B2FC-15A4630895C6
+    value:           81A61DD3-1F71-3731-B00E-262CD384FF50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7E79585-A964-3E94-B56F-23F2949E2F63
+    value:           1852553D-6C00-3D92-B7F6-D538CF19CED8
 install-name:    '/System/Library/PrivateFrameworks/IMDPersistence.framework/Versions/A/IMDPersistence'
 current-version: 800
 exports:
@@ -112,10 +112,10 @@ exports:
                        _IMDCoreSpotlightMessageAttachmentIndexer_TestOverrideIsSticker, 
                        _IMDCoreSpotlightPhotoAtPathIsScreenshot, _IMDCoreSpotlightReIndexForHandles, 
                        _IMDCoreSpotlightRecipientIndexer_TestContact, _IMDCoreSpotlightRecipientIndexer_TestHandleID, 
-                       _IMDCoreSpotlightReindexMessages, _IMDCoreSpotlightSetNeedsMessageReindex, 
-                       _IMDCoreSpotlightUpdateRecentMessagesInChatGUIDs, _IMDCreateCFErrorWithQueryErrorCode, 
-                       _IMDCreateDeleteDeletedMessagesGuidsQuery, _IMDCreateIMDMessageRecordRefFromIMMessageItem, 
-                       _IMDCreateIMItemFromIMDMessageRecordRefCopyAttachmentsIfNeededWithAccountLookup, 
+                       _IMDCoreSpotlightReindexMessages, _IMDCoreSpotlightReindexQueue, 
+                       _IMDCoreSpotlightSetNeedsMessageReindex, _IMDCoreSpotlightUpdateRecentMessagesInChatGUIDs, 
+                       _IMDCreateCFErrorWithQueryErrorCode, _IMDCreateDeleteDeletedMessagesGuidsQuery, 
+                       _IMDCreateIMDMessageRecordRefFromIMMessageItem, _IMDCreateIMItemFromIMDMessageRecordRefCopyAttachmentsIfNeededWithAccountLookup, 
                        _IMDCreateIMItemFromIMDMessageRecordRefWithAccountLookup, 
                        _IMDCreateIndexes, _IMDCreateIndexesWithOperation, _IMDCreateMessageSortComparatorAscending, 
                        _IMDCreateMessageSortComparatorDescending, _IMDCreateQueryRemoveMessagesFromMessageTableWithMessageGuidCount, 

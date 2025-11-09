@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9ADCC0F1-8455-3807-AF07-293EEDE824B4
+    value:           74BD6539-CCDD-34A9-91F7-6F4C909078DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3C4A1A0-8CB6-3442-A0A6-CB273FDA619B
+    value:           B5DCD63D-8547-38C7-9C54-AC54B2316451
 install-name:    '/System/Library/PrivateFrameworks/OnBoardingKit.framework/Versions/A/OnBoardingKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

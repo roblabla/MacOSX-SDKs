@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BDD0ACD2-0160-39CD-9F61-C3B11BA088DC
+    value:           F08A4267-48AD-3996-AEAF-A6F9666FF488
   - target:          x86_64-maccatalyst
-    value:           BDD0ACD2-0160-39CD-9F61-C3B11BA088DC
+    value:           F08A4267-48AD-3996-AEAF-A6F9666FF488
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E4DA4BD-73FA-3E83-85AB-D973470CBB25
+    value:           6A644F94-88ED-31E3-B9E7-3B2A98A8192B
   - target:          arm64e-maccatalyst
-    value:           1E4DA4BD-73FA-3E83-85AB-D973470CBB25
+    value:           6A644F94-88ED-31E3-B9E7-3B2A98A8192B
 install-name:    '/System/Library/PrivateFrameworks/HearingCore.framework/Versions/A/HearingCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

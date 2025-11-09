@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A7441E4B-77EA-3726-8D82-FC7548B88081
+    value:           6D33DBEE-DC9A-38F3-B144-7F32B9D48409
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5410A623-63B5-3D10-B120-466047AAC04D
+    value:           530F52E9-9116-3C96-B534-6DBA38A27414
 install-name:    '/System/Library/PrivateFrameworks/SiriPlaybackControlSupport.framework/Versions/A/SiriPlaybackControlSupport'
 swift-abi-version: 7
 allowable-clients:
@@ -16,7 +16,7 @@ allowable-clients:
                        HomeAutomationFlowDelegatePluginTests, HomeAutomationInternal, 
                        HomeAutomationInternalTests, PlaybackControlDialogTests, SiriPlaybackControlIntents, 
                        SiriPlaybackControlIntentsTests, SiriPlaybackControlSupportTests, 
-                       UnifiedSiriTest ]
+                       SiriVideoIntents, UnifiedSiriTest ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s13AccessoryType26SiriPlaybackControlSupport11HomeWrapperPTl', 
@@ -35,6 +35,7 @@ exports:
                        '_$s26SiriPlaybackControlSupport015DeviceSelectionC4TypeOSHAAMc', 
                        '_$s26SiriPlaybackControlSupport015DeviceSelectionC4TypeOSQAAMc', 
                        '_$s26SiriPlaybackControlSupport015DeviceSelectionC4TypeOSYAAMc', 
+                       '_$s26SiriPlaybackControlSupport022systemLanguageRegionToF6TagMapSDyS2SGvg', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC11errorDomainSSvgZ', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC11fastForward7devices2by4withySaySSG_Sdys6ResultOyytAA0B16ControllingErrorOGctFTj', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC11fastForward7devices2by4withySaySSG_Sdys6ResultOyytAA0B16ControllingErrorOGctFTq', 

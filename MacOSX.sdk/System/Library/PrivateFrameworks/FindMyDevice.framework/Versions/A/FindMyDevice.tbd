@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A4C3A1B8-783A-3572-9293-9BE442840F5E
+    value:           BD94CA53-364A-3910-A78D-A391A50AB8A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6668227-6374-3717-9CA5-F46D8523130B
+    value:           CE55B715-26A1-3EB0-988A-D915965A6244
 install-name:    '/System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

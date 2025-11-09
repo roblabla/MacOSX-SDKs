@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           26754079-18F0-3066-8AFA-3A3C6D5E21BC
+    value:           F17B6871-0E5F-373E-AF01-1A2069C8983C
   - target:          x86_64-maccatalyst
-    value:           26754079-18F0-3066-8AFA-3A3C6D5E21BC
+    value:           F17B6871-0E5F-373E-AF01-1A2069C8983C
   - target:          x86_64h-macos
-    value:           F144CD86-98F2-3321-AE9C-063AED4CED51
+    value:           E2F7D6FC-4614-3117-9BC3-68A20ADFC68F
   - target:          x86_64h-maccatalyst
-    value:           F144CD86-98F2-3321-AE9C-063AED4CED51
+    value:           E2F7D6FC-4614-3117-9BC3-68A20ADFC68F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A416CA6A-AF03-3853-9326-A5F55C47DDFB
+    value:           DB3A2A8A-8593-3C9C-9E7C-8E76A5EBE556
   - target:          arm64e-maccatalyst
-    value:           A416CA6A-AF03-3853-9326-A5F55C47DDFB
+    value:           DB3A2A8A-8593-3C9C-9E7C-8E76A5EBE556
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 

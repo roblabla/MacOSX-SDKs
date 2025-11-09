@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E954D98C-B940-3ABA-92C3-84FCCA618C3B
+    value:           D5416DE4-4BD1-3DE8-92FA-48E96DE60002
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6783DADB-31DD-35D6-AF20-825E94D23BB6
+    value:           A4E2D432-9D51-3715-A824-11641E8F86C4
 install-name:    '/System/Library/PrivateFrameworks/SleepHealthUI.framework/Versions/A/SleepHealthUI'
 swift-abi-version: 7
 exports:

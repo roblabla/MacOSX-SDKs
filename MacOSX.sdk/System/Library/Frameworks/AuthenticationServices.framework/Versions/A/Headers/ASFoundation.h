@@ -16,13 +16,15 @@
 #if __has_include(<UIKit/UIWindow.h>)
 typedef UIWindow * ASPresentationAnchor;
 #endif
-#if __has_include(<UIKit/UIViewController.h>)
+#if __has_include(<UIKit/UIViewController.h>) && !defined(ASViewController)
 typedef UIViewController ASViewController;
 #endif
 typedef UIImage ASImage;
 #elif __has_include(<AppKit/AppKit.h>)
 #import <AppKit/AppKit.h>
 typedef NSWindow * ASPresentationAnchor;
+#if !defined(ASViewController)
 typedef NSViewController ASViewController;
 typedef NSImage ASImage;
+#endif
 #endif

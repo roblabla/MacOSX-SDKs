@@ -3,17 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CAE30A6C-6963-3E72-A504-A208EA587F67
+    value:           B1E7E5D4-188D-31B7-97A3-C69A613FEF5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2860A0AD-95DD-3F0D-90AA-9C4FE0480A9B
+    value:           976D175F-26B7-35F0-8572-6E39D6B55B72
 install-name:    '/System/Library/PrivateFrameworks/BridgeOSObliteration.framework/Versions/A/BridgeOSObliteration'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _BridgeOS_Obliterate, _kDisplayProgressBarKey, _kMobileObliterationError, 
-                       _kMobileObliterationInternalError, _kMobileObliterationRebootError, 
-                       _kObliterateDataPartition, _kObliterateMarkAndReboot, _kObliterationBrickIncludesFirmwareKey, 
+    symbols:         [ _BridgeOS_Obliterate, _kDisplayProgressBarKey, _kIgnoreInternalKey, 
+                       _kMobileObliterationError, _kMobileObliterationInternalError, 
+                       _kMobileObliterationRebootError, _kObliterateDataPartition, 
+                       _kObliterateMarkAndReboot, _kObliterationBrickIncludesFirmwareKey, 
                        _kObliterationDelayAfterReplyKey, _kObliterationExclusionPathsKey, 
                        _kObliterationIgnoreMissingPathKey, _kObliterationManagedDeviceWipeKey, 
                        _kObliterationMessageKey, _kObliterationTypeBrickOnly, _kObliterationTypeKey, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B8203714-5528-382B-802C-44E1EBCBBB49
+    value:           6B01A431-5AD1-3761-876E-1D18002EFD65
   - target:          x86_64-maccatalyst
-    value:           B8203714-5528-382B-802C-44E1EBCBBB49
+    value:           6B01A431-5AD1-3761-876E-1D18002EFD65
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ADB285DC-253E-3844-9E12-FC585B967116
+    value:           71180824-62B4-300D-B99E-006CDD690A5E
   - target:          arm64e-maccatalyst
-    value:           ADB285DC-253E-3844-9E12-FC585B967116
+    value:           71180824-62B4-300D-B99E-006CDD690A5E
 install-name:    '/System/Library/PrivateFrameworks/URLFormatting.framework/Versions/A/URLFormatting'
-current-version: 185.3
+current-version: 185.8
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -50,14 +50,13 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderCreateItemOptions) {
     NSFileProviderCreateItemMayAlreadyExist = 1 << 0,
 
     /**
-     The deletion from the disk of an item conflicted.
-
-     If the provider declares that an item has been deleted but the deletion of the
-     item by the system on disk conflicts with local edits of the item, the system will
-     attempt to create the edited item by calling createItemBasedOnTemplate with this
-     option specified.
+     This item is recreated after the system failed to apply a deletion requested
+     by the extension because the item was found to be edited locally.
+     This happens only if the edit wasn't yet known by the system at the time the
+     deletion was requested.
      */
     NSFileProviderCreateItemDeletionConflicted FILEPROVIDER_API_AVAILABILITY_V3_1 = 1 << 1,
+
 } FILEPROVIDER_API_AVAILABILITY_V3;
 
 /**
@@ -100,6 +99,31 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemFields) {
     NSFileProviderItemExtendedAttributes = 1 << 9,
     NSFileProviderItemTypeAndCreator FILEPROVIDER_API_AVAILABILITY_V4_0 = 1 << 10,
 } FILEPROVIDER_API_AVAILABILITY_V3;
+
+/**
+ NSFileProviderMaterializationFlags are used to inform the system about specific conditions
+ that apply to the content retrieved by the provider in fetchPartialContentsForItemWithIdentifier.
+
+ */
+typedef NS_OPTIONS(NSUInteger, NSFileProviderMaterializationFlags) {
+    /**
+     Mark the file as fully materialized even though it's sparse.
+     This flag is ignored if the provided range doesn't cover the entire file (ie. [0, EOF])
+     */
+    NSFileProviderMaterializationFlagsKnownSparseRanges = (1 << 0)
+} FILEPROVIDER_API_AVAILABILITY_V4_1;
+
+/**
+ Used by the system to express options and constraints to the provider in fetchPartialContentsForItemWithIdentifier.
+ */
+typedef NS_OPTIONS(NSUInteger, NSFileProviderFetchContentsOptions) {
+    /**
+     Set by the system to inform the provider that any other content version than the requested one
+     will be discarded.
+     If the provider cannot supply this version, it should fail with NSFileProviderErrorVersionNoLongerAvailable.
+     */
+    NSFileProviderFetchContentsOptionsStrictVersioning = (1 << 0)
+} FILEPROVIDER_API_AVAILABILITY_V4_1;
 
 #pragma mark - Extension with FPFS support
 
@@ -1096,5 +1120,108 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
 @end
 
+FILEPROVIDER_API_AVAILABILITY_V4_1
+@protocol NSFileProviderPartialContentFetching <NSObject>
+
+/**
+ Download the requested extent of an item for the given identifier and return it via the completion
+ handler.  If this protocol is not implemented the system defaults to fetchContentsForItemWithIdentifier.
+
+ The requestedVersion parameter specifies which version should be returned. This version will always be
+ specified by the system so as to prevent extents from different versions from being written into the same
+ file. The system tolerates a version mismatch for the first materialization of a fully dataless file (strictVersion=NO).
+
+ The requested range is <location, length>.  The implementation can provide any properly aligned range that
+ covers the requested range (including the entire item).  The system provides the minimal alignment value.
+ The location (or start offset) of the fetched range should be a multiple of this value for it to be considered
+ properly aligned. The length of the fetched range should be a multiple of this value, with an exception for
+ the end of the file, checked against the documentSize attribute the implementation supplied for this item.
+ The alignment value should not be expected to be stable across reboots. It is guaranteed by the system to be
+ a power of two.
+ In addition to the content the extension needs to fill in fetchedRange with either the requestest range,
+ <location, length>, or indicate full materialization with, <0, file size>.
+
+ Concurrent Downloads:
+ ----------
+ The system will call fetchContents concurrently if there are multiple outstanding file download requests.
+ The provider can control the concurrency by setting the key NSExtensionFileProviderDownloadPipelineDepth
+ in the Info.plist of the extension to the number of concurrent downloads that the system should create
+ per domain. This number must be between 1 and 128, inclusive.
+
+ File ownership:
+ ---------------
+ The system clones and unlinks the received fileContents. The extension should not mutate the corresponding
+ file after calling the completion handler. If the extension wishes to keep a copy of the content, it must
+ provide a clone of the that content as the URL passed to the completion handler.
+
+ In case the extension or the system crashes between the moment the completion handler is called and the
+ moment the system unlinks the file, the file may unexpectedly still be on disk the next time an instance
+ of the extension is created. The extension is then responsible for deleting that file.
+
+ Disallowing processes from fetching items:
+ ---------------
+
+ The system automatically downloads files on POSIX accesses. The extension may wish to disallow this class of
+ downloads for specific applications.  Currently only POSIX accesses trigger this message so that would render this
+ message superfluous in such cases.
+
+ The extension can set an array of strings into the UserDefault key
+ "NSFileProviderExtensionNonMaterializingProcessNames". A process whose name is an exact match for an
+ entry in this array will not be allowed to fetch items in the extension's domains.
+
+ This list will not be checked for downloads requested through file coordination.
+
+ Error cases:
+ ------------
+ If the download fails because the item is unknown, the call should
+ fail with the NSFileProviderErrorNoSuchItem error. In that case, the system
+ will consider the item has been removed from the domain and will attempt to
+ delete it from disk. In case that deletion fails because there are local
+ changes on this item, the system will re-create the item using createItemBasedOnTemplate.
+
+ If the user does not have access to the content of the file, the provider
+ can fail the call with NSCocoaErrorDomain and code NSFileReadNoPermissionError.
+ That error will then be presented to the user. The extension can also report
+ the NSFileProviderErrorNotAuthenticated, NSFileProviderErrorServerUnreachable
+ in case the item cannot be fetched because of the current state of the system / domain.
+ In those cases, the system will present an appropriate error message and back off
+ until the next time it is signalled.
+
+ If the requested version cannot be retrieved, the provider can choose to provide a different
+ version of the file, unless NSFileProviderFetchContentsOptionsStrictVersioning  is set. In this case,
+ the provider should fail with NSFileProviderErrorVersionNoLongerAvailable.
+ If some content is returned, the item must have the corresponding version. The system will detect
+ any mismatch and handle it as a remote update.
+ For the reading application, the materialization will fail with the same error as reading from
+ a dataless file that got remotely updated (-1/errno=ESTALE). Upon retry the new version will be
+ requested by the system.
+
+ Any other error will be considered to be transient and will cause the
+ download to be retried.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (nil, nil, someRange, 0, NSUserCancelledError) in the NSProgress
+ cancellation handler.
+
+ The returned NSProgress is used to show progress to the user. If the user cancels the
+ fetch, the extension should stop fetching the item, as it is no longer required.
+
+ */
+- (NSProgress *)fetchPartialContentsForItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
+                                                  version:(NSFileProviderItemVersion *)requestedVersion
+                                                  request:(NSFileProviderRequest *)request
+                                             minimalRange:(NSRange)requestedRange
+                                               aligningTo:(NSUInteger)alignment
+                                                  options:(NSFileProviderFetchContentsOptions)options
+                                        completionHandler:(void(^)(NSURL * _Nullable fileContents,
+                                                                   NSFileProviderItem _Nullable item,
+                                                                   NSRange retrievedRange,
+                                                                   NSFileProviderMaterializationFlags flags,
+                                                                   NSError * _Nullable error))completionHandler
+    NS_SWIFT_NAME(fetchPartialContents(for:version:request:minimalRange:aligningTo:options:completionHandler:));
+
+@end
 
 NS_ASSUME_NONNULL_END

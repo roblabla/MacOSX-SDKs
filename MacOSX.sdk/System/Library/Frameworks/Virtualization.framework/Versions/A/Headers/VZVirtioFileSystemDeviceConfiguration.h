@@ -29,7 +29,7 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
 - (instancetype)initWithTag:(NSString *)tag NS_DESIGNATED_INITIALIZER;
 
 /*!
- @abstract Check if tag is a valid virtio tag.
+ @abstract Check if tag is a valid Virtio file system tag.
  @param tag The tag to validate.
  @param error If not nil, assigned with an error describing why the tag is not valid.
  @discussion The tag must be non-empty and less than 36 bytes when encoded in UTF-8.

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1E5A3C79-4E9C-39A4-A063-EA3F418B7F88
+    value:           BD8EBFF0-2F5A-3F26-B506-61CE3B5E6610
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2486731-8F36-370A-926F-09204A0E2E3E
+    value:           6C5B5A3C-4910-3185-883B-FDFFAF3B48CE
 install-name:    '/System/Library/PrivateFrameworks/SocialAppsCore.framework/Versions/A/SocialAppsCore'
 current-version: 5500
 reexported-libraries:
@@ -60,11 +60,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           113FB526-BF4F-39FD-BE73-C709CD2E5CD7
+    value:           F7EF0ED5-9719-3F72-8B05-3BDB3B93EBDE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4BE26E1-978E-3896-B92B-9BD11A07C94C
+    value:           3D5305D1-EA9D-3B96-AF21-8B787F1EA79B
 install-name:    '/System/Library/PrivateFrameworks/IMCore.framework/Versions/A/IMCore'
 current-version: 800
 reexported-libraries:
@@ -311,9 +311,9 @@ exports:
                        IMAutomationGroupChat, IMAutomationMessageSend, IMBalloonApp, 
                        IMBalloonAppExtension, IMBalloonBrowserPlugin, IMBalloonPlugin, 
                        IMBalloonPluginAttributionController, IMBalloonPluginDataSource, 
-                       IMBalloonPluginManager, IMBlackholeChatItem, IMBlockContactChatItem, 
-                       IMChat, IMChatContext, IMChatHistoryController, IMChatItem, 
-                       IMChatRegistry, IMChatScrutinyController, IMCloudKitAccountNeedsRepairSyncProgress, 
+                       IMBalloonPluginManager, IMBalloonPluginManagerModel, IMBlackholeChatItem, 
+                       IMBlockContactChatItem, IMChat, IMChatContext, IMChatHistoryController, 
+                       IMChatItem, IMChatRegistry, IMChatScrutinyController, IMCloudKitAccountNeedsRepairSyncProgress, 
                        IMCloudKitCloudKitStorageIsFullSyncProgress, IMCloudKitDeviceStorageIsFullSyncProgress, 
                        IMCloudKitErrorProgressTest, IMCloudKitEventNotificationManager, 
                        IMCloudKitEventNotificationManagerRuntimeTest, IMCloudKitEventNotificationRuntimeTestSuite, 
@@ -355,12 +355,13 @@ exports:
                        IMServiceImpl, IMSimSwitchedChatItem, IMSimulatedAccount, 
                        IMSimulatedAccountController, IMSimulatedChat, IMSimulatedDaemonController, 
                        IMSuggestionsService, IMSyndicationStatusChatItem, IMTUConversationChatItem, 
-                       IMTextMessagePartChatItem, IMTranscriptChatItem, IMTranscriptChatItemRules, 
-                       IMTranscriptEffectHelper, IMTranscriptLocationChatItem, IMTranscriptPluginBreadcrumbChatItem, 
-                       IMTranscriptPluginChatItem, IMTranscriptPluginStatusChatItem, 
-                       IMTransientMessagePartChatItem, IMTypingChatItem, IMTypingPluginChatItem, 
-                       IMUnavailabilityIndicatorChatItem, IMUnavailableMomentShareMessagePartChatItem, 
-                       IMUnreadCountChatItem, _IMBalloonExtensionApp ]
+                       IMTextMessagePartChatItem, IMThreadSafeBalloonPluginMap, IMTranscriptChatItem, 
+                       IMTranscriptChatItemRules, IMTranscriptEffectHelper, IMTranscriptLocationChatItem, 
+                       IMTranscriptPluginBreadcrumbChatItem, IMTranscriptPluginChatItem, 
+                       IMTranscriptPluginStatusChatItem, IMTransientMessagePartChatItem, 
+                       IMTypingChatItem, IMTypingPluginChatItem, IMUnavailabilityIndicatorChatItem, 
+                       IMUnavailableMomentShareMessagePartChatItem, IMUnreadCountChatItem, 
+                       _IMBalloonExtensionApp ]
     objc-ivars:      [ IMAccount._accountImage, IMAccount._asleep, IMAccount._service, 
                        IMAccount._smallImage, IMAccountController._accountMap, IMAssociatedMessageChatItem._geometryDescriptor, 
                        IMAttachment._createdDate, IMAttachment._guid, IMAttachment._isSticker, 
@@ -386,17 +387,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           38C0450C-94A9-379E-BE8F-E5059E2DC0FE
+    value:           A68435FF-A9B0-3E10-8C37-2FBD35475232
   - target:          x86_64-maccatalyst
-    value:           38C0450C-94A9-379E-BE8F-E5059E2DC0FE
+    value:           A68435FF-A9B0-3E10-8C37-2FBD35475232
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           746F8D3D-BC31-396B-B015-A31AD0967122
+    value:           8C19C7FB-9DE2-33C5-A0E3-F887FDFCEAF6
   - target:          arm64e-maccatalyst
-    value:           746F8D3D-BC31-396B-B015-A31AD0967122
+    value:           8C19C7FB-9DE2-33C5-A0E3-F887FDFCEAF6
 install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
 exports:

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name StoreKit
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name StoreKit
+// swift-module-flags-ignorable: -user-module-version 810.4.19
 import AppKit
 import CoreFoundation
 import CryptoKit
@@ -78,23 +79,23 @@ public struct Transaction : Swift.Identifiable {
   public struct RevocationReason : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
     public let rawValue: Swift.Int
     public init(rawValue: Swift.Int)
-    public static var developerIssue: StoreKit.Transaction.RevocationReason
-    public static var other: StoreKit.Transaction.RevocationReason
+    public static let developerIssue: StoreKit.Transaction.RevocationReason
+    public static let other: StoreKit.Transaction.RevocationReason
     public typealias RawValue = Swift.Int
   }
   public struct OfferType : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
     public let rawValue: Swift.Int
     public init(rawValue: Swift.Int)
-    public static var introductory: StoreKit.Transaction.OfferType
-    public static var promotional: StoreKit.Transaction.OfferType
-    public static var code: StoreKit.Transaction.OfferType
+    public static let introductory: StoreKit.Transaction.OfferType
+    public static let promotional: StoreKit.Transaction.OfferType
+    public static let code: StoreKit.Transaction.OfferType
     public typealias RawValue = Swift.Int
   }
   public struct OwnershipType : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
     public let rawValue: Swift.String
     public init(rawValue: Swift.String)
-    public static var purchased: StoreKit.Transaction.OwnershipType
-    public static var familyShared: StoreKit.Transaction.OwnershipType
+    public static let purchased: StoreKit.Transaction.OwnershipType
+    public static let familyShared: StoreKit.Transaction.OwnershipType
     public typealias RawValue = Swift.String
   }
   @usableFromInline
@@ -353,16 +354,16 @@ extension StoreKit.Product {
     public struct OfferType : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
       public let rawValue: Swift.String
       public init(rawValue: Swift.String)
-      public static var introductory: StoreKit.Product.SubscriptionOffer.OfferType
-      public static var promotional: StoreKit.Product.SubscriptionOffer.OfferType
+      public static let introductory: StoreKit.Product.SubscriptionOffer.OfferType
+      public static let promotional: StoreKit.Product.SubscriptionOffer.OfferType
       public typealias RawValue = Swift.String
     }
     public struct PaymentMode : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
       public let rawValue: Swift.String
       public init(rawValue: Swift.String)
-      public static var payAsYouGo: StoreKit.Product.SubscriptionOffer.PaymentMode
-      public static var payUpFront: StoreKit.Product.SubscriptionOffer.PaymentMode
-      public static var freeTrial: StoreKit.Product.SubscriptionOffer.PaymentMode
+      public static let payAsYouGo: StoreKit.Product.SubscriptionOffer.PaymentMode
+      public static let payUpFront: StoreKit.Product.SubscriptionOffer.PaymentMode
+      public static let freeTrial: StoreKit.Product.SubscriptionOffer.PaymentMode
       public typealias RawValue = Swift.String
     }
     public let id: Swift.String?
@@ -379,27 +380,135 @@ extension StoreKit.Product {
     }
   }
 }
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.StoreKitError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var failureReason: Swift.String? {
+    get
+  }
+  public var recoverySuggestion: Swift.String? {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.PurchaseError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var failureReason: Swift.String? {
+    get
+  }
+  public var recoverySuggestion: Swift.String? {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, *)
+extension StoreKit.Transaction.RefundRequestError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var failureReason: Swift.String? {
+    get
+  }
+  public var recoverySuggestion: Swift.String? {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.VerificationResult.VerificationError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var failureReason: Swift.String? {
+    get
+  }
+  public var recoverySuggestion: Swift.String? {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.ProductType {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.SubscriptionInfo.RenewalState {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.SubscriptionInfo.RenewalInfo.PriceIncreaseStatus {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.SubscriptionOffer.OfferType {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Transaction.OfferType {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.SubscriptionOffer.PaymentMode {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Product.SubscriptionPeriod.Unit {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Transaction.RevocationReason {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+extension StoreKit.Transaction.OwnershipType {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.Product.SubscriptionInfo {
   public struct RenewalState : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
     public let rawValue: Swift.Int
     public init(rawValue: Swift.Int)
-    public static var subscribed: StoreKit.Product.SubscriptionInfo.RenewalState
-    public static var expired: StoreKit.Product.SubscriptionInfo.RenewalState
-    public static var inBillingRetryPeriod: StoreKit.Product.SubscriptionInfo.RenewalState
-    public static var inGracePeriod: StoreKit.Product.SubscriptionInfo.RenewalState
-    public static var revoked: StoreKit.Product.SubscriptionInfo.RenewalState
+    public static let subscribed: StoreKit.Product.SubscriptionInfo.RenewalState
+    public static let expired: StoreKit.Product.SubscriptionInfo.RenewalState
+    public static let inBillingRetryPeriod: StoreKit.Product.SubscriptionInfo.RenewalState
+    public static let inGracePeriod: StoreKit.Product.SubscriptionInfo.RenewalState
+    public static let revoked: StoreKit.Product.SubscriptionInfo.RenewalState
     public typealias RawValue = Swift.Int
   }
   public struct RenewalInfo {
     public struct ExpirationReason : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
       public let rawValue: Swift.Int
       public init(rawValue: Swift.Int)
-      public static var autoRenewDisabled: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
-      public static var billingError: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
-      public static var didNotConsentToPriceIncrease: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
-      public static var productUnavailable: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
-      public static var unknown: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
+      public static let autoRenewDisabled: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
+      public static let billingError: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
+      public static let didNotConsentToPriceIncrease: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
+      public static let productUnavailable: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
+      public static let unknown: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
       public typealias RawValue = Swift.Int
     }
     @frozen public enum PriceIncreaseStatus : Swift.Equatable, Swift.Hashable {
@@ -556,6 +665,8 @@ public enum StoreKitError : Swift.Error {
   case networkError(Foundation.URLError)
   case systemError(Swift.Error)
   case notAvailableInStorefront
+  @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, *)
+  case notEntitled
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension StoreKit.BackingValue : Swift.Decodable {
@@ -573,11 +684,11 @@ internal enum BackingValue : Swift.Equatable, Swift.Hashable {
   case `nil`
   public subscript(key: Swift.String) -> StoreKit.BackingValue {
     get
-    set(newValue)
+    set
   }
   public subscript(index: Swift.Int) -> StoreKit.BackingValue {
     get
-    set(newValue)
+    set
   }
   @usableFromInline
   internal static func == (a: StoreKit.BackingValue, b: StoreKit.BackingValue) -> Swift.Bool
@@ -661,10 +772,10 @@ public struct Product : Swift.Identifiable {
   public struct ProductType : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
     public let rawValue: Swift.String
     public init(rawValue: Swift.String)
-    public static var consumable: StoreKit.Product.ProductType
-    public static var nonConsumable: StoreKit.Product.ProductType
-    public static var nonRenewable: StoreKit.Product.ProductType
-    public static var autoRenewable: StoreKit.Product.ProductType
+    public static let consumable: StoreKit.Product.ProductType
+    public static let nonConsumable: StoreKit.Product.ProductType
+    public static let nonRenewable: StoreKit.Product.ProductType
+    public static let autoRenewable: StoreKit.Product.ProductType
     public typealias RawValue = Swift.String
   }
   @usableFromInline
@@ -812,3 +923,29 @@ extension Swift.Dictionary where Key == Swift.String, Value == StoreKit.BackingV
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
 }
+@available(iOS 15.0, macCatalyst 15.0, macOS 12.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension StoreKit.Transaction.RefundRequestError : Swift.Equatable {}
+@available(iOS 15.0, macCatalyst 15.0, macOS 12.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension StoreKit.Transaction.RefundRequestError : Swift.Hashable {}
+@available(iOS 15.0, macCatalyst 15.0, macOS 12.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension StoreKit.Transaction.RefundRequestStatus : Swift.Equatable {}
+@available(iOS 15.0, macCatalyst 15.0, macOS 12.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension StoreKit.Transaction.RefundRequestStatus : Swift.Hashable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.Product.PurchaseError : Swift.Equatable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.Product.PurchaseError : Swift.Hashable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.VerificationResult.VerificationError : Swift.Equatable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.VerificationResult.VerificationError : Swift.Hashable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension StoreKit.Product.SubscriptionInfo.RenewalInfo.PriceIncreaseStatus : Swift.Sendable {}

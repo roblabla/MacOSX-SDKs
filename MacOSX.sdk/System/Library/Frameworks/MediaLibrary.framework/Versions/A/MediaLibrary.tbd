@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           09D15441-CBB9-3638-BF8D-C9366B83C2AE
+    value:           28D57D20-A649-3F24-80BF-C16CF6985670
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B870915-A3A0-3A4F-9CC5-1871D4102538
+    value:           55C1B3CB-D8BF-3304-917D-4E7239C60F69
 install-name:    '/System/Library/Frameworks/MediaLibrary.framework/Versions/A/MediaLibrary'
 current-version: 797
 exports:

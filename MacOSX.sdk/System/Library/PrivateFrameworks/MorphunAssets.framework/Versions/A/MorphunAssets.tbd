@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           13958378-E2F9-3788-95FB-1C68A1BE6E15
+    value:           FFB03529-7BC8-3DAB-84A3-4E68FCA1E13C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20D70687-D9B0-37AB-85CB-BEFA9D89BAA0
+    value:           E8E461C8-8EBA-31E9-9DD1-3985F1C65AC3
 install-name:    '/System/Library/PrivateFrameworks/MorphunAssets.framework/Versions/A/MorphunAssets'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

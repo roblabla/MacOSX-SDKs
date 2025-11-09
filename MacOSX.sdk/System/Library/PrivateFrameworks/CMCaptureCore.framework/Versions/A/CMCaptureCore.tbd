@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2AE23E4B-DC19-3965-94C7-362F7E321DE7
+    value:           FB4B3957-6975-3A32-A349-B3C67CD74260
   - target:          x86_64-maccatalyst
-    value:           2AE23E4B-DC19-3965-94C7-362F7E321DE7
+    value:           FB4B3957-6975-3A32-A349-B3C67CD74260
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           65BAC59D-074A-37F7-8ED6-52C3C3C3083C
+    value:           CE271530-8C2C-3744-B7DC-B5037810CAA9
   - target:          arm64e-maccatalyst
-    value:           65BAC59D-074A-37F7-8ED6-52C3C3C3083C
+    value:           CE271530-8C2C-3744-B7DC-B5037810CAA9
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -76,8 +76,8 @@ exports:
                        _kFigApplePortraitMetadata_MaximumApertureFocalRatio, _kFigApplePortraitMetadata_MinimumApertureFocalRatio, 
                        _kFigApplePortraitMetadata_PortraitLightingEffectStrength, 
                        _kFigApplePortraitMetadata_SDOFFaceLandmarkIndexes, _kFigApplePortraitMetadata_SDOFRenderingVersion, 
-                       _kFigApplePortraitMetadata_Version, _kFigAutofocusSampleBufferProcessorMetadata_FocusWindow, 
-                       _kFigBarcodeScannerSampleBufferProcessorMetadata_AztecCodewordsCount, 
+                       _kFigApplePortraitMetadata_Version, _kFigAutofocusSampleBufferProcessorMetadata_ExposureWindow, 
+                       _kFigAutofocusSampleBufferProcessorMetadata_FocusWindow, _kFigBarcodeScannerSampleBufferProcessorMetadata_AztecCodewordsCount, 
                        _kFigBarcodeScannerSampleBufferProcessorMetadata_AztecDataLayerCount, 
                        _kFigBarcodeScannerSampleBufferProcessorMetadata_AztecIsCompact, 
                        _kFigBarcodeScannerSampleBufferProcessorMetadata_BarcodeCorners, 
@@ -104,13 +104,6 @@ exports:
                        _kFigBarcodeScannerSampleBufferProcessorProperty_OutputSampleBufferWithoutImage, 
                        _kFigBarcodeScannerSampleBufferProcessorProperty_Reset, _kFigBarcodeScannerSampleBufferProcessorProperty_RunDetectorOnNextFrame, 
                        _kFigBarcodeScannerSampleBufferProcessorProperty_SymbologiesArray, 
-                       _kFigBarcodeSymbology_Aztec, _kFigBarcodeSymbology_CODE128, 
-                       _kFigBarcodeSymbology_CODE39, _kFigBarcodeSymbology_CODE39Checksum, 
-                       _kFigBarcodeSymbology_CODE39fullAscii, _kFigBarcodeSymbology_CODE93, 
-                       _kFigBarcodeSymbology_CODE93i, _kFigBarcodeSymbology_DataMatrix, 
-                       _kFigBarcodeSymbology_EAN13, _kFigBarcodeSymbology_EAN8, _kFigBarcodeSymbology_I2OF5, 
-                       _kFigBarcodeSymbology_I2OF5Checksum, _kFigBarcodeSymbology_ITF14, 
-                       _kFigBarcodeSymbology_PDF417, _kFigBarcodeSymbology_QR, _kFigBarcodeSymbology_UPCE, 
                        _kFigCaptureAddAttachmentsOptionsKey_SelectedMetadataKeys, 
                        _kFigCaptureAggdKey_ExposureStat, _kFigCaptureAggdKey_QRMOutputType, 
                        _kFigCaptureAggdKey_SphereStat, _kFigCaptureCameraInfoKey_BaseZoomFactor, 
@@ -224,17 +217,20 @@ exports:
                        _kFigCaptureSampleBufferAttachmentKey_SubjectRelightingCurveParameter, 
                        _kFigCaptureSampleBufferAttachmentKey_SushiRaw, _kFigCaptureSampleBufferAttachmentKey_TextRegions, 
                        _kFigCaptureSampleBufferAttachmentKey_TextRegionsCount, _kFigCaptureSampleBufferAttachmentKey_TrackedFaces, 
+                       _kFigCaptureSampleBufferAttachmentKey_TransportLayerPropagatableAttachments, 
                        _kFigCaptureSampleBufferAttachmentKey_VideoPreviewHistogramData, 
                        _kFigCaptureSampleBufferAttachmentKey_VideoPreviewLumaHistogramData, 
                        _kFigCaptureSampleBufferAttachmentKey_VisionDataBuffer, _kFigCaptureSampleBufferAttachmentValue_MPFEncodingMode, 
                        _kFigCaptureSampleBufferAttachmentValue_MPFSampleBuffersArray, 
                        _kFigCaptureSampleBufferMetadata_AdditionalPreviewZoomToApply, 
                        _kFigCaptureSampleBufferMetadata_ExposureDurationType, _kFigCaptureSampleBufferMetadata_ExposureMode, 
+                       _kFigCaptureSampleBufferMetadata_FastCapturePrioritizationEnabled, 
                        _kFigCaptureSampleBufferMetadata_FinalCropRect, _kFigCaptureSampleBufferMetadata_FinalCropRectFromSource, 
                        _kFigCaptureSampleBufferMetadata_FinalCropRectHasBeenAppliedByBlackeningBorders, 
                        _kFigCaptureSampleBufferMetadata_FocalLenIn35mmFilmFromSource, 
                        _kFigCaptureSampleBufferMetadata_FocusAccelerometerVector, 
-                       _kFigCaptureSampleBufferMetadata_GainMapHeadroom, _kFigCaptureSampleBufferMetadata_GeometricDistortionCorrectionSource, 
+                       _kFigCaptureSampleBufferMetadata_GainMapHeadroom, _kFigCaptureSampleBufferMetadata_GeometricDistortionCorrectionEnabled, 
+                       _kFigCaptureSampleBufferMetadata_GeometricDistortionCorrectionSource, 
                        _kFigCaptureSampleBufferMetadata_GreenGhostMitigationLowLightMaskAverage, 
                        _kFigCaptureSampleBufferMetadata_GreenGhostMitigationStatus, 
                        _kFigCaptureSampleBufferMetadata_LTMDigitalGain, _kFigCaptureSampleBufferMetadata_LTMRelativeBrightness, 
@@ -1074,6 +1070,12 @@ exports:
                        _kFigMetadataIdentifier_QuickTimeMetadataDetectedDogHead, 
                        _kFigMetadataIdentifier_QuickTimeMetadataDetectedHumanHead, 
                        _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeAppClipCode, 
+                       _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeCodabar, 
+                       _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeGS1DataBar, 
+                       _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeGS1DataBarExpanded, 
+                       _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeGS1DataBarLimited, 
+                       _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeMicroPDF417, 
+                       _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeMicroQR, 
                        _kFigMetadataIdentifier_QuickTimeMetadataDetectedTextRegion, 
                        _kFigMetadataIdentifier_QuickTimeMetadataVideoPreviewHistogram, 
                        _kFigMotionAttachmentsSampleBufferProcessorMetadata_Acceleration, 

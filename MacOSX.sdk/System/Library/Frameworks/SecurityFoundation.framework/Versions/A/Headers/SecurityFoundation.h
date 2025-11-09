@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2015-2021 Apple Inc. All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -20,6 +20,8 @@
  *
  * @APPLE_LICENSE_HEADER_END@
  */
+
+#include <TargetConditionals.h>
 
 #if TARGET_OS_OSX
 #include <SecurityFoundation/SFAuthorization.h>

@@ -4,27 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           154F6446-1BC3-3C98-8697-A23B37BA4B4F
+    value:           4B002CBD-5312-3857-AF36-E1E897AC2047
   - target:          x86_64-maccatalyst
-    value:           154F6446-1BC3-3C98-8697-A23B37BA4B4F
+    value:           4B002CBD-5312-3857-AF36-E1E897AC2047
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88FA7A84-2CAC-3961-B29E-BBEA161A686D
+    value:           7FE54607-7936-3A16-A343-61899254A71B
   - target:          arm64e-maccatalyst
-    value:           88FA7A84-2CAC-3961-B29E-BBEA161A686D
+    value:           7FE54607-7936-3A16-A343-61899254A71B
 install-name:    '/System/Library/Frameworks/Vision.framework/libfaceCore.dylib'
-current-version: 5.0.71
+current-version: 5.0.93
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _FCRDetectionParamDetectionRegion, _FCRDetectionParamEnhancedEyesAndMouthLocalization, 

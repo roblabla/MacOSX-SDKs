@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class HKQuantityType;
 @class HKSeriesType;
 @class HKUnit;
+@class HKPrescriptionType;
 @class HKWorkoutType;
 
 /*!

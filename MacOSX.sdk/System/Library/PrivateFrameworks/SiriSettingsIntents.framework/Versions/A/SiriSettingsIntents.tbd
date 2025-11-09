@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9EC5ABAB-0AE9-301C-833B-E06FDA9FE1C6
+    value:           9BF7D5F1-2BEE-3A8F-959B-FB2EEF823124
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA0C8A31-911F-3A9F-8D27-D6C7019F26CF
+    value:           591518A8-5445-379A-8C2C-3256964256E8
 install-name:    '/System/Library/PrivateFrameworks/SiriSettingsIntents.framework/Versions/A/SiriSettingsIntents'
 swift-abi-version: 7
 allowable-clients:
@@ -24,7 +24,7 @@ exports:
                        '_$s19SiriSettingsIntents06NLv3ToA18KitIntentConverterOMa', 
                        '_$s19SiriSettingsIntents06NLv3ToA18KitIntentConverterOMn', 
                        '_$s19SiriSettingsIntents06NLv3ToA18KitIntentConverterON', 
-                       '_$s19SiriSettingsIntents06NLv4ToA18KitIntentConverterO03getafG013userDialogAct11deviceStateSo8INIntentCSgSo011SIRINLUUserkL0_p_0aF4Flow06DeviceN0_pSgtKFZ', 
+                       '_$s19SiriSettingsIntents06NLv4ToA18KitIntentConverterO03getafG09userParse11deviceStateSo8INIntentCSg0A8NLUTypes0a18_Nlu_External_UserK0V_0aF4Flow06DeviceM0_pSgtKFZ', 
                        '_$s19SiriSettingsIntents06NLv4ToA18KitIntentConverterOMa', 
                        '_$s19SiriSettingsIntents06NLv4ToA18KitIntentConverterOMn', 
                        '_$s19SiriSettingsIntents06NLv4ToA18KitIntentConverterON', 
@@ -144,9 +144,13 @@ exports:
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC0a3KitF00F0AAMc', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC13siriKitIntent33_7885BB3188CE19373D314EF3ED53BD92LLSo8INIntentCSgvpfi', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC17aceServiceInvoker11deviceState07metricsK015outputPublisherAC0a3KitF003AcehI0_p_AH06DeviceK0_pAH07MetricsK0_pAH06OutputN0_ptcfC', 
+                       '_$s19SiriSettingsIntents25AuthenticationSupportFlowC17aceServiceInvoker11deviceState15outputPublisherAC0a3KitF003AcehI0_p_AG06DeviceK0_pAG06OutputM0_ptcfC', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC2on5inputSb0a3KitF05InputV_tF', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC2on5inputSb0a3KitF05InputV_tFTq', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC5input33_7885BB3188CE19373D314EF3ED53BD92LL0a3KitF05InputVSgvpfi', 
+                       '_$s19SiriSettingsIntents25AuthenticationSupportFlowC7execute0a3KitF015ExecuteResponseVyYaF', 
+                       '_$s19SiriSettingsIntents25AuthenticationSupportFlowC7execute0a3KitF015ExecuteResponseVyYaFTq', 
+                       '_$s19SiriSettingsIntents25AuthenticationSupportFlowC7execute0a3KitF015ExecuteResponseVyYaFTu', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC7execute10completionyy0a3KitF015ExecuteResponseVc_tF', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowC7execute10completionyy0a3KitF015ExecuteResponseVc_tFTq', 
                        '_$s19SiriSettingsIntents25AuthenticationSupportFlowCMa', 

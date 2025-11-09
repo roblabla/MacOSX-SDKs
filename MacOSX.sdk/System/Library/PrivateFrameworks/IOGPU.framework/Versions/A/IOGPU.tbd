@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           542A76AE-1B93-3933-9E2B-B75B1A1E7BE0
+    value:           28B43739-C56C-35AF-9004-7886168734F0
   - target:          x86_64-maccatalyst
-    value:           542A76AE-1B93-3933-9E2B-B75B1A1E7BE0
+    value:           28B43739-C56C-35AF-9004-7886168734F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9203DE1F-FE69-3D0C-8F58-AAFAAB2A8240
+    value:           51396341-67FD-333D-A043-99BAADA3F29D
   - target:          arm64e-maccatalyst
-    value:           9203DE1F-FE69-3D0C-8F58-AAFAAB2A8240
+    value:           51396341-67FD-333D-A043-99BAADA3F29D
 install-name:    '/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/IOGPU'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -61,7 +61,8 @@ exports:
                        _IOGPUNotificationQueueRelease, _IOGPUNotificationQueueSetDispatchQueue, 
                        _IOGPUNotificationQueueWillSubmit, _IOGPUResourceCheckSysMem, 
                        _IOGPUResourceCreate, _IOGPUResourceCreateAllocationIdentifierSet, 
-                       _IOGPUResourceFinishEvent, _IOGPUResourceFinishSysMem, _IOGPUResourceGetClientShared, 
+                       _IOGPUResourceCreateIOSurface, _IOGPUResourceFinishEvent, 
+                       _IOGPUResourceFinishSysMem, _IOGPUResourceGetClientShared, 
                        _IOGPUResourceGetClientSharedPrivate, _IOGPUResourceGetDataBytes, 
                        _IOGPUResourceGetDataSize, _IOGPUResourceGetGPUVirtualAddress, 
                        _IOGPUResourceGetGPUVirtualAddressLength, _IOGPUResourceGetGlobalTraceObjectID, 
@@ -89,12 +90,13 @@ exports:
     objc-ivars:      [ IOGPUMTLEvent._deviceRef, IOGPUMTLEvent._eventName, IOGPUMTLEvent._globalTraceObjectID, 
                        IOGPUMTLFence._deviceRef, IOGPUMTLFence._fenceName, IOGPUMTLLateEvalEvent._deviceRef, 
                        IOGPUMTLLateEvalEvent._eventName, IOGPUMTLLateEvalEvent._globalTraceObjectID, 
-                       IOGPUMetalBuffer._deallocator, IOGPUMetalBuffer._iosurface, 
-                       IOGPUMetalBuffer._length, IOGPUMetalBuffer._pointer, IOGPUMetalBuffer._primaryBuffer, 
-                       IOGPUMetalBuffer._primaryBufferIndex, IOGPUMetalBuffer._primaryBufferOffset, 
-                       IOGPUMetalBuffer._primaryHeapIndex, IOGPUMetalCommandBuffer._device, 
-                       IOGPUMetalCommandQueue._commandQueue, IOGPUMetalCommandQueue._device, 
-                       IOGPUMetalDebugCommandEncoder._api_resourceList, IOGPUMetalDebugCommandEncoder._kernelCommandBufferCurrent, 
+                       IOGPUMetalBuffer._aneIOSurface, IOGPUMetalBuffer._deallocator, 
+                       IOGPUMetalBuffer._iosurface, IOGPUMetalBuffer._length, IOGPUMetalBuffer._pointer, 
+                       IOGPUMetalBuffer._primaryBuffer, IOGPUMetalBuffer._primaryBufferIndex, 
+                       IOGPUMetalBuffer._primaryBufferOffset, IOGPUMetalBuffer._primaryHeapIndex, 
+                       IOGPUMetalCommandBuffer._device, IOGPUMetalCommandQueue._commandQueue, 
+                       IOGPUMetalCommandQueue._device, IOGPUMetalDebugCommandEncoder._api_resourceList, 
+                       IOGPUMetalDebugCommandEncoder._kernelCommandBufferCurrent, 
                        IOGPUMetalDebugCommandEncoder._kernelCommandBufferEnd, IOGPUMetalDebugCommandEncoder._resourceList, 
                        IOGPUMetalDevice._accelID, IOGPUMetalDevice._acceleratorPort, 
                        IOGPUMetalDevice._acceleratorService, IOGPUMetalDevice._commandBufferStoragePool, 

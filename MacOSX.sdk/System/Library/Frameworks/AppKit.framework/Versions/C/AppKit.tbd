@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           802EC934-D54F-3D9C-B3D6-598FBC7FB97F
+    value:           36EC7E1B-AB12-377B-B3EB-FFC5BAABEE9F
   - target:          x86_64-maccatalyst
-    value:           802EC934-D54F-3D9C-B3D6-598FBC7FB97F
+    value:           36EC7E1B-AB12-377B-B3EB-FFC5BAABEE9F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8BBC643-113D-310F-96B6-77A973BF2DBA
+    value:           465B9570-6646-31EA-A082-AB0DFA538966
   - target:          arm64e-maccatalyst
-    value:           A8BBC643-113D-310F-96B6-77A973BF2DBA
+    value:           465B9570-6646-31EA-A082-AB0DFA538966
 install-name:    '/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit'
-current-version: 2113.20.111
+current-version: 2113.40.126
 compatibility-version: 45
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -844,18 +844,18 @@ exports:
                        _NSViewGlobalFrameDidChangeNotification, _NSViewNoInstrinsicMetric, 
                        _NSViewNoIntrinsicMetric, _NSVisibleBinding, _NSVoiceAge, 
                        _NSVoiceDemoText, _NSVoiceGender, _NSVoiceGenderFemale, _NSVoiceGenderMale, 
-                       _NSVoiceGenderNeuter, _NSVoiceIdentifier, _NSVoiceIndividuallySpokenCharacters, 
-                       _NSVoiceLanguage, _NSVoiceLocaleIdentifier, _NSVoiceName, 
-                       _NSVoiceSupportedCharacters, _NSWarningValueBinding, _NSWhite, 
-                       _NSWidthBinding, _NSWindowDidBecomeKeyNotification, _NSWindowDidBecomeMainNotification, 
-                       _NSWindowDidChangeBackingPropertiesNotification, _NSWindowDidChangeOcclusionStateNotification, 
-                       _NSWindowDidChangeScreenNotification, _NSWindowDidChangeScreenProfileNotification, 
-                       _NSWindowDidDeminiaturizeNotification, _NSWindowDidEndLiveResizeNotification, 
-                       _NSWindowDidEndSheetNotification, _NSWindowDidEnterFullScreenNotification, 
-                       _NSWindowDidEnterVersionBrowserNotification, _NSWindowDidExitFullScreenNotification, 
-                       _NSWindowDidExitVersionBrowserNotification, _NSWindowDidExposeNotification, 
-                       _NSWindowDidMiniaturizeNotification, _NSWindowDidMoveNotification, 
-                       _NSWindowDidOrderOffScreenAndFinishAnimatingNotification, 
+                       _NSVoiceGenderNeuter, _NSVoiceGenderNeutral, _NSVoiceIdentifier, 
+                       _NSVoiceIndividuallySpokenCharacters, _NSVoiceLanguage, _NSVoiceLocaleIdentifier, 
+                       _NSVoiceName, _NSVoiceSupportedCharacters, _NSWarningValueBinding, 
+                       _NSWhite, _NSWidthBinding, _NSWindowDidBecomeKeyNotification, 
+                       _NSWindowDidBecomeMainNotification, _NSWindowDidChangeBackingPropertiesNotification, 
+                       _NSWindowDidChangeOcclusionStateNotification, _NSWindowDidChangeScreenNotification, 
+                       _NSWindowDidChangeScreenProfileNotification, _NSWindowDidDeminiaturizeNotification, 
+                       _NSWindowDidEndLiveResizeNotification, _NSWindowDidEndSheetNotification, 
+                       _NSWindowDidEnterFullScreenNotification, _NSWindowDidEnterVersionBrowserNotification, 
+                       _NSWindowDidExitFullScreenNotification, _NSWindowDidExitVersionBrowserNotification, 
+                       _NSWindowDidExposeNotification, _NSWindowDidMiniaturizeNotification, 
+                       _NSWindowDidMoveNotification, _NSWindowDidOrderOffScreenAndFinishAnimatingNotification, 
                        _NSWindowDidOrderOffScreenNotification, _NSWindowDidOrderOnScreenAndFinishAnimatingNotification, 
                        _NSWindowDidOrderOnScreenNotification, _NSWindowDidResignKeyNotification, 
                        _NSWindowDidResignMainNotification, _NSWindowDidResizeNotification, 
@@ -1300,19 +1300,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B88DD7AD-8EE1-321B-9C99-540B94F2DA83
+    value:           FB32DA57-EAE8-3F41-850B-F5315DDD27B3
   - target:          x86_64-maccatalyst
-    value:           B88DD7AD-8EE1-321B-9C99-540B94F2DA83
+    value:           FB32DA57-EAE8-3F41-850B-F5315DDD27B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F6B1694-D191-31A7-A7B5-1DF98F368E6F
+    value:           F0D3190B-04A2-3928-924E-BA8D05EF9953
   - target:          arm64e-maccatalyst
-    value:           3F6B1694-D191-31A7-A7B5-1DF98F368E6F
+    value:           F0D3190B-04A2-3928-924E-BA8D05EF9953
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 785.1
+current-version: 786.9
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

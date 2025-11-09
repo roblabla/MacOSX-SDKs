@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9DCE8618-866E-3ACC-B85D-72F018311A31
+    value:           CE364D66-50E3-31E5-9426-9E42E13D1F37
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           85F7F10F-CB90-318F-A76B-F6840413B275
+    value:           90038AA4-A19E-37CF-9A19-9B16317DC06E
 install-name:    '/System/Library/PrivateFrameworks/MediaAnalysisServices.framework/Versions/A/MediaAnalysisServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

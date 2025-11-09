@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4A3C7E42-2624-3E1B-AD6E-D5013B04B170
+    value:           0D2DC310-5976-3C1F-AA81-68E18EE8782A
   - target:          x86_64-maccatalyst
-    value:           4A3C7E42-2624-3E1B-AD6E-D5013B04B170
+    value:           0D2DC310-5976-3C1F-AA81-68E18EE8782A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A71ABBCE-80E2-3B56-A85A-35AB1207FC61
+    value:           7BB70B26-DB0B-3337-9CC5-ED4E92D0F732
   - target:          arm64e-maccatalyst
-    value:           A71ABBCE-80E2-3B56-A85A-35AB1207FC61
+    value:           7BB70B26-DB0B-3337-9CC5-ED4E92D0F732
 install-name:    '/System/Library/PrivateFrameworks/MapsSuggestions.framework/Versions/A/MapsSuggestions'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -190,7 +190,8 @@ exports:
                        _GEOConfigMapsSuggestionsRatingRequestSourceBudgetPrevEntry, 
                        _GEOConfigMapsSuggestionsRatingRequestSourceBudgetShortCount, 
                        _GEOConfigMapsSuggestionsRatingRequestSourceBudgetShortDuration, 
-                       _GEOConfigMapsSuggestionsRatingRequestSourceEnabled, _GEOConfigMapsSuggestionsRatingRequestSourceUpdateInterval, 
+                       _GEOConfigMapsSuggestionsRatingRequestSourceEnabled, _GEOConfigMapsSuggestionsRatingRequestSourceEnabledForMaps, 
+                       _GEOConfigMapsSuggestionsRatingRequestSourceUpdateInterval, 
                        _GEOConfigMapsSuggestionsReInjectSourceEnabled, _GEOConfigMapsSuggestionsRecentHistoryDeduperEnabled, 
                        _GEOConfigMapsSuggestionsRecentHistoryImproverEnabled, _GEOConfigMapsSuggestionsRemoteSourceEnabled, 
                        _GEOConfigMapsSuggestionsRemovalBehaviorForAppConnection, 
@@ -238,6 +239,7 @@ exports:
                        _GEOConfigMapsSuggestionsRoutineInitialWeightFrequentLocation, 
                        _GEOConfigMapsSuggestionsRoutineInitialWeightHome, _GEOConfigMapsSuggestionsRoutineInitialWeightParkedCar, 
                        _GEOConfigMapsSuggestionsRoutineInitialWeightSchool, _GEOConfigMapsSuggestionsRoutineInitialWeightWork, 
+                       _GEOConfigMapsSuggestionsRoutineLoisLocationWithinDistance, 
                        _GEOConfigMapsSuggestionsRoutineMaxDistanceForTouristInfo, 
                        _GEOConfigMapsSuggestionsRoutineMaxMapItemCache, _GEOConfigMapsSuggestionsRoutineMinVisitsFrequentLocation, 
                        _GEOConfigMapsSuggestionsRoutineMinVisitsHome, _GEOConfigMapsSuggestionsRoutineMinVisitsSchool, 
@@ -498,14 +500,16 @@ exports:
                        _NSDataFromCLLocationCoordinate, _NSDataFromMapsSuggestionsEntries, 
                        _NSDataFromMapsSuggestionsShortcuts, _NSDataFromMapsSuggestionsSignalPack, 
                        _NSDataToMapsSuggestionsTransportModes, _NSStringFromCLLocationCoordinate, 
-                       _NSStringFromMapsSuggestionsAbbreviatedETA, _NSStringFromMapsSuggestionsCurrentBestLocation, 
-                       _NSStringFromMapsSuggestionsDistance, _NSStringFromMapsSuggestionsEntries, 
-                       _NSStringFromMapsSuggestionsEntry, _NSStringFromMapsSuggestionsEntryEngagement, 
-                       _NSStringFromMapsSuggestionsEntryType, _NSStringFromMapsSuggestionsEventTime, 
-                       _NSStringFromMapsSuggestionsEventTimeWithTimeZone, _NSStringFromMapsSuggestionsJSON, 
-                       _NSStringFromMapsSuggestionsMapItem, _NSStringFromMapsSuggestionsRemovalBehavior, 
-                       _NSStringFromMapsSuggestionsShortETA, _NSStringFromMapsSuggestionsShortcutType, 
-                       _NSStringFromMapsSuggestionsSignalType, __Z21MapsSuggestionsIsTrueP7NSArrayIPU35objcproto24MapsSuggestionsCondition11objc_objectE, 
+                       _NSStringFromCLLocationDistance, _NSStringFromMapsSuggestionsAbbreviatedETA, 
+                       _NSStringFromMapsSuggestionsCurrentBestLocation, _NSStringFromMapsSuggestionsDistance, 
+                       _NSStringFromMapsSuggestionsEntries, _NSStringFromMapsSuggestionsEntry, 
+                       _NSStringFromMapsSuggestionsEntryEngagement, _NSStringFromMapsSuggestionsEntryType, 
+                       _NSStringFromMapsSuggestionsEventTime, _NSStringFromMapsSuggestionsEventTimeWithTimeZone, 
+                       _NSStringFromMapsSuggestionsJSON, _NSStringFromMapsSuggestionsMapItem, 
+                       _NSStringFromMapsSuggestionsRemovalBehavior, _NSStringFromMapsSuggestionsShortETA, 
+                       _NSStringFromMapsSuggestionsShortcutType, _NSStringFromMapsSuggestionsSignalType, 
+                       __Z16_findMatchingLOIP17GEOMapItemStorageP7NSArrayIP20RTLocationOfInterestE, 
+                       __Z21MapsSuggestionsIsTrueP7NSArrayIPU35objcproto24MapsSuggestionsCondition11objc_objectE, 
                        __Z25isAuthorizedToUseContactsv, __ZN3MSg7jsonForEP10CLLocation, 
                        __ZN3MSg7jsonForEP12NSDictionaryIP8NSStringPU33objcproto22MapsSuggestionsAnyJSON11objc_objectE, 
                        __ZN3MSg7jsonForEP14NSDateInterval, __ZN3MSg7jsonForEP18NSAttributedString, 

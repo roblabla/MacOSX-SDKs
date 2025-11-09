@@ -201,12 +201,19 @@ typedef void (^ IOUSBHostControllerInterfaceDoorbellHandler)(IOUSBHostController
  */
 @property(nonatomic) NSUInteger interruptRateHz;
 
+#pragma mark debug utilities
+
+-(NSString*)descriptionForMessage:(const IOUSBHostCIMessage*)message;
+
 #pragma mark command state machines
 
 @property(nonatomic, readonly) IOUSBHostCIControllerStateMachine* controllerStateMachine;
 
 -(IOUSBHostCIPortStateMachine*) getPortStateMachineForCommand:(const IOUSBHostCIMessage*)command
                                                         error:(NSError**)error;
+
+-(IOUSBHostCIPortStateMachine*) getPortStateMachineForPort:(NSUInteger)port
+                                                     error:(NSError**)error;
 
 #pragma mark static properties
 

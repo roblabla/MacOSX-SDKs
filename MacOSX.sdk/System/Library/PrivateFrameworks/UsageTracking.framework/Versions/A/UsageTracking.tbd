@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB5F07F1-2F4B-31C2-8CC6-54C4E389ED1D
+    value:           C8A779B5-F6F0-3EB7-8505-1BE1D8B9E923
   - target:          x86_64-maccatalyst
-    value:           AB5F07F1-2F4B-31C2-8CC6-54C4E389ED1D
+    value:           C8A779B5-F6F0-3EB7-8505-1BE1D8B9E923
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1CBE2C69-923D-3243-B5CF-B68C336331EF
+    value:           FB2B79CB-7762-3452-8019-7EC2D6B557C4
   - target:          arm64e-maccatalyst
-    value:           1CBE2C69-923D-3243-B5CF-B68C336331EF
+    value:           FB2B79CB-7762-3452-8019-7EC2D6B557C4
 install-name:    '/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTracking'
-current-version: 220
+current-version: 223
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -26,7 +26,8 @@ allowable-clients:
                        FamilyControlsTests, PowerlogHelperdOperators, PowerlogLiteOperators, 
                        RemoteManagementTests, SafariShared, ScreenTime, ScreenTimeAgent, 
                        ScreenTimeSettingsUI, ScreenTimeTests, ScreenTimeUI, ScreenTimeWebExtension, 
-                       UsageTrackingAgent, dmd, remotemanagementd, usagetool ]
+                       UsageTrackingAgent, dmd, iCloudSubscriptionOptimizerCore, 
+                       remotemanagementd, usagetool ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9EEDEE8C-18BC-3541-A733-4F8D5D56168F
+    value:           6819FA02-3B16-3199-9290-01044FA4B21B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D73312D0-65BE-32C4-837C-04C82BC2AB01
+    value:           F163A96A-4B14-35CE-8F5E-30634EFFE44C
 install-name:    '/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit'
-current-version: 161.200
+current-version: 161.255
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           937C7409-3FFA-3161-AA08-0DFF8BBB0E1F
+    value:           FF50D571-5535-3542-A58C-638A8E6F4CC0
   - target:          x86_64-maccatalyst
-    value:           937C7409-3FFA-3161-AA08-0DFF8BBB0E1F
+    value:           FF50D571-5535-3542-A58C-638A8E6F4CC0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5F2DBCD-1DF5-3DFC-BD80-4BFECBB9018C
+    value:           48B2CC33-CF1E-391C-8790-572AF0DF473B
   - target:          arm64e-maccatalyst
-    value:           F5F2DBCD-1DF5-3DFC-BD80-4BFECBB9018C
+    value:           48B2CC33-CF1E-391C-8790-572AF0DF473B
 install-name:    '/System/Library/PrivateFrameworks/CorePhotogrammetry.framework/Versions/A/CorePhotogrammetry'
 current-version: 1.24
 compatibility-version: 1.24
@@ -22,25 +22,18 @@ exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
                        __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__112future_errorE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTIPFvvE, __ZTISt11logic_error, __ZTISt11range_error, __ZTISt12length_error, 
-                       __ZTISt12out_of_range, __ZTISt13runtime_error, __ZTISt16invalid_argument, 
-                       __ZTISt19bad_optional_access, __ZTISt8bad_cast, __ZTISt9bad_alloc, 
-                       __ZTISt9exception, __ZTSFvvE, __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTIPFvvE, __ZTISt11logic_error, 
+                       __ZTISt11range_error, __ZTISt12length_error, __ZTISt12out_of_range, 
+                       __ZTISt13runtime_error, __ZTISt16invalid_argument, __ZTISt19bad_optional_access, 
+                       __ZTISt9bad_alloc, __ZTISt9exception, __ZTSFvvE, __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
                        __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110shared_ptrIKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS7_S6_EE, 
                        __ZTSNSt3__110shared_ptrINS_14basic_ifstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
                        __ZTSNSt3__110shared_ptrINS_14basic_ofstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
                        __ZTSNSt3__110shared_ptrINS_18basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS6_S6_EE, 
-                       __ZTSNSt3__112future_errorE, __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__112future_errorE, __ZTSNSt3__117bad_function_callE, 
                        __ZTSPFvvE, __ZTSSt11logic_error, __ZTSSt11range_error, __ZTSSt12length_error, 
                        __ZTSSt12out_of_range, __ZTSSt13runtime_error, __ZTSSt16invalid_argument, 
-                       __ZTSSt19bad_optional_access, __ZTSSt8bad_cast, __ZTSSt9bad_alloc, 
-                       __ZTSSt9exception ]
+                       __ZTSSt19bad_optional_access, __ZTSSt9bad_alloc, __ZTSSt9exception ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AccelerateCVDoGCreateOctaveList, _AccelerateCVDoGExtractKeypoints, 

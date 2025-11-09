@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           314181F6-4035-30B1-9F11-6EA2E475C87B
+    value:           0DB3F994-07AC-3C74-A204-EF370EF0B622
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           849FE903-53E8-39F5-971B-8FD08A70A838
+    value:           598FB5A8-0CE2-3425-B610-5BAB3B6DA783
 install-name:    '/System/Library/PrivateFrameworks/DataDeliveryServices.framework/Versions/A/DataDeliveryServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

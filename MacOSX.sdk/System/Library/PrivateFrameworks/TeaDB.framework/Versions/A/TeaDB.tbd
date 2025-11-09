@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           74C425E9-25C8-3F43-A43C-41AF32C74A6C
+    value:           F715709C-CC08-3215-B04B-7BDDF6CF3092
   - target:          x86_64-maccatalyst
-    value:           74C425E9-25C8-3F43-A43C-41AF32C74A6C
+    value:           F715709C-CC08-3215-B04B-7BDDF6CF3092
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           165B35FE-926E-339D-8B1A-8FEA03946E0D
+    value:           7A1B9325-F23F-3E82-A71B-9557F52DE006
   - target:          arm64e-maccatalyst
-    value:           165B35FE-926E-339D-8B1A-8FEA03946E0D
+    value:           7A1B9325-F23F-3E82-A71B-9557F52DE006
 install-name:    '/System/Library/PrivateFrameworks/TeaDB.framework/Versions/A/TeaDB'
-current-version: 549.1
+current-version: 588
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -153,6 +153,8 @@ exports:
                        '_$s5TeaDB11TransactionO9immediateyA2CmFWC', '_$s5TeaDB11TransactionOMa', 
                        '_$s5TeaDB11TransactionOMn', '_$s5TeaDB11TransactionON', '_$s5TeaDB11TransactionOSHAAMc', 
                        '_$s5TeaDB11TransactionOSQAAMc', '_$s5TeaDB11TransactionOSYAAMc', 
+                       '_$s5TeaDB13KeyValueStoreC10writeAsyncy0A10Foundation7PromiseCySDySSq_GGAHF', 
+                       '_$s5TeaDB13KeyValueStoreC11deleteAsyncy0A10Foundation7PromiseCySaySSGGAHF', 
                        '_$s5TeaDB13KeyValueStoreC2peoiyyACyxq_G_SDySSq_GtFZ', '_$s5TeaDB13KeyValueStoreC4read_6maxAgeSDySSq_GSaySSG_SdtKF', 
                        '_$s5TeaDB13KeyValueStoreC5writeySDySSq_GAEKF', '_$s5TeaDB13KeyValueStoreC6deleteySaySSGAEKF', 
                        '_$s5TeaDB13KeyValueStoreC7allKeysSaySSGyKF', '_$s5TeaDB13KeyValueStoreC8PromisesV4read_6maxAge0A10Foundation7PromiseCySDySSq_GGSaySSG_SdtF', 
@@ -166,12 +168,15 @@ exports:
                        '_$s5TeaDB13KeyValueStoreC8databaseACyxq_GAA8DatabaseC_tKcfc', 
                        '_$s5TeaDB13KeyValueStoreC8promisesAC8PromisesVyxq__GSgvg', 
                        '_$s5TeaDB13KeyValueStoreC8promisesAC8PromisesVyxq__GSgvpMV', 
+                       '_$s5TeaDB13KeyValueStoreC9readAsync_6maxAge0A10Foundation7PromiseCySDySSq_GGSaySSG_SdtF', 
+                       '_$s5TeaDB13KeyValueStoreC9readAsyncy0A10Foundation7PromiseCySDySSq_GGSaySSGF', 
                        '_$s5TeaDB13KeyValueStoreCMa', '_$s5TeaDB13KeyValueStoreCMn', 
                        '_$s5TeaDB13KeyValueStoreCMo', '_$s5TeaDB13KeyValueStoreCMu', 
                        '_$s5TeaDB13KeyValueStoreCfD', '_$s5TeaDB13KeyValueStoreCfd', 
                        '_$s5TeaDB13KeyValueStoreCySDySSq_GSaySSG_Sdtcig', '_$s5TeaDB13KeyValueStoreCySDySSq_GSaySSG_SdtcipMV', 
                        '_$s5TeaDB13KeyValueStoreCyq_SgSSciM', '_$s5TeaDB13KeyValueStoreCyq_SgSScig', 
                        '_$s5TeaDB13KeyValueStoreCyq_SgSScipMV', '_$s5TeaDB13KeyValueStoreCyq_SgSScis', 
+                       '_$s5TeaDB13KeyValueStoreCyxq_G0A10Foundation0cdE4TypeAAMc', 
                        '_$s5TeaDB14ConnectionTypeMp', '_$s5TeaDB14ConnectionTypeP7prepare5queryAA17PreparedStatementCSS_tKFTj', 
                        '_$s5TeaDB14ConnectionTypeP7prepare5queryAA17PreparedStatementCSS_tKFTq', 
                        '_$s5TeaDB14ConnectionTypeTL', '_$s5TeaDB14FastEntityTypeMp', 

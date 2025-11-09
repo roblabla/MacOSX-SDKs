@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3086071B-80E6-374C-85FB-A999A7985FFF
+    value:           6311E709-6653-3DA9-93B1-9B5DEEDE0AC6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9F1967B-03F0-34D3-9C6B-BF6A2C4A39E1
+    value:           740F710B-C04E-397A-B3B6-85589D2D84C7
 install-name:    '/System/Library/PrivateFrameworks/CalendarWidget.framework/Versions/A/CalendarWidget'
 swift-abi-version: 7
 exports:
@@ -27,6 +27,7 @@ exports:
                        '_$s14CalendarWidget12EKUICalendarC10identifier7display17pronunciationHintACSSSg_SSAGtcfC', 
                        '_$s14CalendarWidget12EKUICalendarC10identifier7display17pronunciationHintACSSSg_SSAGtcfc', 
                        '_$s14CalendarWidget12EKUICalendarC19acAccountIdentifierSSSgvpMV', 
+                       '_$s14CalendarWidget12EKUICalendarC20supportsSecureCodingSbvgZ', 
                        '_$s14CalendarWidget12EKUICalendarC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s14CalendarWidget12EKUICalendarC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s14CalendarWidget12EKUICalendarCMa', '_$s14CalendarWidget12EKUICalendarCMn', 

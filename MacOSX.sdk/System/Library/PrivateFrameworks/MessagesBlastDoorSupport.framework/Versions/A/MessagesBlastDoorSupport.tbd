@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           755E6DCD-699C-3512-91D0-5FB7F69F7200
+    value:           FE385593-6D06-3767-86C4-6302BA349D2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B7BE468-8DCB-32E3-ADF0-48E21FF96667
+    value:           E46345C2-1C93-38A6-AD94-8A5D9D0B0538
 install-name:    '/System/Library/PrivateFrameworks/MessagesBlastDoorSupport.framework/Versions/A/MessagesBlastDoorSupport'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ IMDaemonCore, IMDaemonCoreEmbeddedTests, IMSharedUtilities, 
+    clients:         [ CopresenseCore, IMDaemonCore, IMDaemonCoreEmbeddedTests, IMSharedUtilities, 
                        MessagesBlastDoorTester, com.apple.photos.ImageConversionService, 
                        com.apple.photos.VideoConversionService ]
 exports:

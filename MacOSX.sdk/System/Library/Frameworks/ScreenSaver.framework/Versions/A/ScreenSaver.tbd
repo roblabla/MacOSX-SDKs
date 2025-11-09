@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA46E4C7-839D-36E7-8B76-3B50C3304316
+    value:           02ACF63D-A9E7-3119-A606-9FB5A42F2F82
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0B9CFB8-F403-36DA-AD7A-53D2678DE710
+    value:           4026C975-1989-38DC-B820-87AA9221BDDA
 install-name:    '/System/Library/Frameworks/ScreenSaver.framework/Versions/A/ScreenSaver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

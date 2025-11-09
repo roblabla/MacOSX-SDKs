@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8D126EE4-2F33-3FB5-82D3-DFBFD74EC423
+    value:           7E9A0CAA-C494-3C81-9AE4-940012A9C33F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BCEB577E-9C19-3E8B-9146-65BA3588E4FF
+    value:           4C6C8927-F562-383F-AC9B-C78AC8198ECA
 install-name:    '/usr/lib/libpartition2_dynamic.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -22,6 +22,6 @@ exports:
                        _LPAPFSVolumeUnmountOptionAll, _LPAPFSVolumeUnmountOptionDoNotLock, 
                        _LPAPFSVolumeUnmountOptionForce, _LPAPFSVolumeUnmountOptionSnapshotName, 
                        _LPLogSetOutput, _LPLogSetVerbosity, __LPLogPack, _iterateSafely ]
-    objc-classes:    [ LPAPFSContainer, LPAPFSPhysicalStore, LPAPFSVolume, LPDynamicStub, 
-                       LPMedia, LPPartitionMedia ]
+    objc-classes:    [ LPAPFSContainer, LPAPFSPhysicalStore, LPAPFSVolume, LPMedia, 
+                       LPPartitionMedia ]
 ...

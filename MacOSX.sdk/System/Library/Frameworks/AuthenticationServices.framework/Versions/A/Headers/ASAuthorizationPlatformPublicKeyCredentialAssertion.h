@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 @interface ASAuthorizationPlatformPublicKeyCredentialAssertion : NSObject<ASAuthorizationPublicKeyCredentialAssertion>
 
 + (instancetype)new NS_UNAVAILABLE;

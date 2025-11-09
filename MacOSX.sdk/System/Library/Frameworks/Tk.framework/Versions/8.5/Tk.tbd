@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           363DE6BE-53DD-3746-AD80-CA6DC74D9242
+    value:           3C88A0BC-264E-385B-8A3A-F493344435BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           354A5E39-0CE4-343B-903A-EB766457C3C6
+    value:           E43A4806-14B3-32BA-A377-81A3189090FB
 install-name:    '/System/Library/Frameworks/Tk.framework/Versions/8.5/Tk'
 current-version: 8.5.9
 compatibility-version: 8.5

@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 @protocol ASAuthorizationPublicKeyCredentialRegistration <ASPublicKeyCredential>
 
 /*! @abstract The raw data containing the authenticator's attestation statement, if one was provided.

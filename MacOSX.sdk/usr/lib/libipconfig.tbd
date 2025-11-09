@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           60861885-65EE-37CE-A01E-3C2614561504
+    value:           F4344E30-A593-3BBD-A596-DDBBF9C0404D
   - target:          x86_64-maccatalyst
-    value:           60861885-65EE-37CE-A01E-3C2614561504
+    value:           F4344E30-A593-3BBD-A596-DDBBF9C0404D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8262E79C-9468-3949-9ED0-0E294240D98C
+    value:           05C6F80E-C71F-300E-B8A9-7F5D1F5EDD34
   - target:          arm64e-maccatalyst
-    value:           8262E79C-9468-3949-9ED0-0E294240D98C
+    value:           05C6F80E-C71F-300E-B8A9-7F5D1F5EDD34
 install-name:    '/usr/lib/libipconfig.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

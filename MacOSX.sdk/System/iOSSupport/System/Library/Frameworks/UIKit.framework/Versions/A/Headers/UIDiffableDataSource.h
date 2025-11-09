@@ -73,7 +73,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
 
 // section operations
 
-- (void)appendSectionsWithIdentifiers:(NSArray*)sectionIdentifiers;
+- (void)appendSectionsWithIdentifiers:(NSArray<SectionIdentifierType>*)sectionIdentifiers;
 
 - (void)insertSectionsWithIdentifiers:(NSArray<SectionIdentifierType>*)sectionIdentifiers beforeSectionWithIdentifier:(SectionIdentifierType)toSectionIdentifier;
 - (void)insertSectionsWithIdentifiers:(NSArray<SectionIdentifierType>*)sectionIdentifiers afterSectionWithIdentifier:(SectionIdentifierType)toSectionIdentifier;

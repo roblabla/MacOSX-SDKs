@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BB2243F6-1BB9-3B04-8254-4971162B2241
+    value:           C2212024-4660-347B-875A-65078A9D437D
   - target:          x86_64-maccatalyst
-    value:           BB2243F6-1BB9-3B04-8254-4971162B2241
+    value:           C2212024-4660-347B-875A-65078A9D437D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5407AC2-EA45-38A1-9D7E-55EDD051BB09
+    value:           319A8D8D-FE51-3E33-8B12-4337B2031CDF
   - target:          arm64e-maccatalyst
-    value:           F5407AC2-EA45-38A1-9D7E-55EDD051BB09
+    value:           319A8D8D-FE51-3E33-8B12-4337B2031CDF
 install-name:    '/System/Library/PrivateFrameworks/PodcastsKit.framework/Versions/A/PodcastsKit'
 swift-abi-version: 7
 allowable-clients:
@@ -42,7 +42,7 @@ allowable-clients:
                        SiriAudioSupportIntegrationTests, SiriAudioSupportTests, UnifiedSiriTest, 
                        com.apple.podcasts.DiagnosticExtension, com.apple.podcasts.PodcastsProductPageExtension, 
                        com.apple.podcasts.SpotlightIndexExtension, com.apple.podcasts.appremoval, 
-                       iTunesPodcastLibrary, podcastsTool, podcastsctl, siriaudio_helper ]
+                       iTunesPodcastLibrary, podcastsctl, siriaudio_helper ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

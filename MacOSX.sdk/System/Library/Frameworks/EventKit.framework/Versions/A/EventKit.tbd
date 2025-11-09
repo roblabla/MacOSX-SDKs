@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5B6994F3-8A4A-3161-AEF7-84A958920CC1
+    value:           309DA2DB-ABB1-30BD-B413-2350DA6F5819
   - target:          x86_64-maccatalyst
-    value:           5B6994F3-8A4A-3161-AEF7-84A958920CC1
+    value:           309DA2DB-ABB1-30BD-B413-2350DA6F5819
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2AF9D6A-6CEE-3773-878E-7011D7087BB1
+    value:           F5CF87BB-7833-3541-BE6A-C60DBF53EE2B
   - target:          arm64e-maccatalyst
-    value:           C2AF9D6A-6CEE-3773-878E-7011D7087BB1
+    value:           F5CF87BB-7833-3541-BE6A-C60DBF53EE2B
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1442.1.1
+current-version: 1442.4.2
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -94,14 +94,18 @@ exports:
                        _EKTravelEngineLogInitialize, _EKTravelEngineThrottleLogHandle, 
                        _EKTravelLookupErrorDomain, _EKUtils_AdjustedAttendeeAddress, 
                        _EKViewModelAccountDisplayOrderKey, _EKViewModelChangedNotification, 
-                       _EKViewModelDisabledCalendarsKey, _EKViewModelDomain, _EKVirtualConferenceInfoDetailsKey, 
-                       _EKVirtualConferenceInfoTitleKey, _EKVirtualConferenceInfoTypeIdentifierKey, 
-                       _EKVirtualConferenceInvalidationResultFailed, _EKVirtualConferenceInvalidationResultKey, 
-                       _EKVirtualConferenceInvalidationResultSucceeded, _EKVirtualConferenceJoinMethodTitleKey, 
-                       _EKVirtualConferenceJoinMethodTypeIdentifierKey, _EKVirtualConferenceJoinMethodURLKey, 
+                       _EKViewModelDisabledCalendarsKey, _EKViewModelDomain, _EKVirtualConferenceErrorResultKey, 
+                       _EKVirtualConferenceInfoDetailsKey, _EKVirtualConferenceInfoTitleKey, 
+                       _EKVirtualConferenceInfoTypeIdentifierKey, _EKVirtualConferenceInvalidationResultFailed, 
+                       _EKVirtualConferenceInvalidationResultKey, _EKVirtualConferenceInvalidationResultSucceeded, 
+                       _EKVirtualConferenceJoinMethodTitleKey, _EKVirtualConferenceJoinMethodTypeIdentifierKey, 
+                       _EKVirtualConferenceJoinMethodURLKey, _EKVirtualConferenceProviderErrorDomain, 
+                       _EKVirtualConferenceRenewalResultFailed, _EKVirtualConferenceRenewalResultKey, 
+                       _EKVirtualConferenceRenewalResultSucceeded, _EKVirtualConferenceRequestDateParameterForRenewal, 
                        _EKVirtualConferenceRequestRoomTypeIdentifier, _EKVirtualConferenceRequestTypeJoinMethodsForRoomType, 
                        _EKVirtualConferenceRequestTypeKey, _EKVirtualConferenceRequestTypeRoomTypes, 
-                       _EKVirtualConferenceRequestTypeURLInvalidate, _EKVirtualConferenceRequestURLParameterForInvalidation, 
+                       _EKVirtualConferenceRequestTypeURLInvalidate, _EKVirtualConferenceRequestTypeURLRenew, 
+                       _EKVirtualConferenceRequestURLParameterForInvalidation, _EKVirtualConferenceRequestURLParameterForRenewal, 
                        _EKVirtualConferenceRoomTypeIdentifierKey, _EKVirtualConferenceRoomTypeTitleKey, 
                        _EKVirtualConferenceTypeIdentifierKey, __EKCalendarURLScheme, 
                        __EKEventURLScheme, __EKReminderURLHost, __EKReminderURLScheme, 

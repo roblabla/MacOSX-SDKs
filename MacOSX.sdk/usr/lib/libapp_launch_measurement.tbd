@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EF59FA96-5809-3D2A-AF69-71F8058F4E44
+    value:           4892DF6B-EF4E-32AA-B438-8609A803407B
   - target:          x86_64-maccatalyst
-    value:           EF59FA96-5809-3D2A-AF69-71F8058F4E44
+    value:           4892DF6B-EF4E-32AA-B438-8609A803407B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DBB59FE-1BB1-3950-8656-1627C69EDD69
+    value:           E38F2FE9-9098-32B1-8001-DF04627895F4
   - target:          arm64e-maccatalyst
-    value:           2DBB59FE-1BB1-3950-8656-1627C69EDD69
+    value:           E38F2FE9-9098-32B1-8001-DF04627895F4
 install-name:    '/usr/lib/libapp_launch_measurement.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

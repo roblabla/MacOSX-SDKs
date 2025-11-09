@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0A0D7BBB-3C69-391C-B4C2-F92A6BDAE843
+    value:           DD18E188-D8AC-3054-B172-7705B599234C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D806D7A-C80C-3B98-8915-8B48A141779D
+    value:           E9A5F60E-1AE4-3B79-9591-52E64177D8F4
 install-name:    '/System/Library/PrivateFrameworks/CorePDF.framework/Versions/A/CorePDF'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

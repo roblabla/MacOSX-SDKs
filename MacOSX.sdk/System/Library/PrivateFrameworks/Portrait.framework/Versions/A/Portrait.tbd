@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           71CE2E9D-04FF-3CEA-9F5E-7ABD5154DAE5
+    value:           1256F18D-566C-33BC-86B0-9828F83500ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3C97F18-9996-31B5-BF71-5927E36B0ABB
+    value:           C957D0FF-03C3-30C1-814C-2B5C6817F98E
 install-name:    '/System/Library/PrivateFrameworks/Portrait.framework/Versions/A/Portrait'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,7 +21,8 @@ exports:
                        _PTDetectionTypeParent, _PTDisparityInNormalizedRectFromLockedPixelBufferInfo, 
                        _PTDisparityInNormalizedRectFromLockedPixelBufferInfoWithPrior, 
                        _PTDisparityInNormalizedRectFromPixelBuffer, _PTDisparityInNormalizedRectFromPixelBufferWithPrior, 
-                       _PTGroupIDIsInvalid, _PTGroupIDIsValid, _PTImageBufferTransferFunction_Linear_1_6, 
+                       _PTGlobalRenderingMetadataErrorDomain, _PTGroupIDIsInvalid, 
+                       _PTGroupIDIsValid, _PTImageBufferTransferFunction_Linear_1_6, 
                        _PTIsInvalidTrackID, _PTIsValidTrackID, _PTKTraceInit, _PTSerializationErrorDomain, 
                        _PTSerializationVersionKey, _PTTrackIDFromNumber, _PTTrackIDIsInvalid, 
                        _PTTrackIDIsValid, _PTVersionFromString, _PTVersionGetMajor, 
@@ -50,7 +51,7 @@ exports:
                        _kPTCinematographyDictionary_x, _kPTCinematographyDictionary_y, 
                        _kPTTimedCinematography_mdta, _kPTTimedRendering_mdta, _kPTTimedStabilization_mdta, 
                        _kPortraitRuntimeAPIVersion, _numThreadgroups, _numThreadsPerGroupForKernel2D, 
-                       _textureDescriptor ]
+                       _textureDescriptor, _textureDescriptorWithResourceOptions ]
     objc-classes:    [ BlurMapSmoothing, DisparityRefinement, LKTFlowGPU, PTAssetReader, 
                        PTAssetReaderFrame, PTAtomStream, PTAtomWriter, PTCinematographyCustomTrack, 
                        PTCinematographyDecision, PTCinematographyDetection, PTCinematographyExistingGroupTrack, 
@@ -67,10 +68,11 @@ exports:
                        PTCinematographyStream, PTCinematographyStreamOptions, PTCinematographyTrack, 
                        PTCinematographyTrackAllocator, PTCinematographyTransition, 
                        PTCinematographyUserTap, PTColor, PTDataByteStream, PTDataByteWriter, 
-                       PTDisparityFilterDEMA_LKT, PTDisparityFilterExponentialMovingAverageLKT, 
-                       PTDisparityFilterExponentialMovingAverageLKTMotion, PTDisparityFilterPassThrough, 
-                       PTDisparityPostProcessing, PTDisparityPostProcessingDescriptor, 
-                       PTDisparityUpscale, PTEffect, PTEffectRendererSDOF, PTEffectUtil, 
+                       PTDisparityFilterColorSimilarity, PTDisparityFilterDEMA_LKT, 
+                       PTDisparityFilterExponentialMovingAverageLKT, PTDisparityFilterExponentialMovingAverageLKTMotion, 
+                       PTDisparityFilterPassThrough, PTDisparityPostProcessing, PTDisparityPostProcessingDescriptor, 
+                       PTDisparityUpscale, PTEffect, PTEffectDisparityFilter, PTEffectDisparityFilterColorSimilarities, 
+                       PTEffectDisparityFilterLKT, PTEffectRendererSDOF, PTEffectUtil, 
                        PTEspressoGenericExecutor, PTGlobalCinematographyMetadata, 
                        PTGlobalCinematographyMetadataVersion1, PTGlobalReduction, 
                        PTGlobalRenderingMetadata, PTGlobalRenderingMetadataVersion1, 
@@ -88,9 +90,9 @@ exports:
                        PTRaytracingV2RenderState, PTRaytracingV5, PTRaytracingV5RenderState, 
                        PTRaytracingV8, PTRaytracingV8RenderState, PTRenderDebugLayer, 
                        PTRenderEffectNetwork, PTRenderPipeline, PTRenderPipelineDescriptor, 
-                       PTRenderRequest, PTSDOFPyramid, PTSerialization, PTTapToTrack, 
-                       PTTapToTrackPrediction, PTTexture, PTTextureRGBA, PTTextureYUV420, 
-                       PTTimedRenderingMetadata, PTTimedRenderingMetadataVersion1, 
+                       PTRenderPipelineState, PTRenderRequest, PTSDOFPyramid, PTSerialization, 
+                       PTTapToTrack, PTTapToTrackPrediction, PTTexture, PTTextureRGBA, 
+                       PTTextureYUV420, PTTimedRenderingMetadata, PTTimedRenderingMetadataVersion1, 
                        PTTimedStabilizationMetadata, PTTimedStabilizationMetadataVersion1, 
                        PTUtil, SDOFResources ]
 ...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ABF6989E-44EF-39C0-8FF2-5E50EAE85967
+    value:           5BD27951-9EBE-3EFA-8EEB-5B1780791EE8
   - target:          x86_64-maccatalyst
-    value:           ABF6989E-44EF-39C0-8FF2-5E50EAE85967
+    value:           5BD27951-9EBE-3EFA-8EEB-5B1780791EE8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED3E0ACB-4BF8-3212-A377-5EE2CE330B2D
+    value:           D3E3A428-19CB-3E8E-8AE9-7CDC71629FF6
   - target:          arm64e-maccatalyst
-    value:           ED3E0ACB-4BF8-3212-A377-5EE2CE330B2D
+    value:           D3E3A428-19CB-3E8E-8AE9-7CDC71629FF6
 install-name:    '/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing'
 current-version: 0
 exports:

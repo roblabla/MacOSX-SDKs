@@ -39,6 +39,7 @@
 #include <stdarg.h>
 #include <sys/cdefs.h>
 #include <os/overflow.h>
+#include <os/alloc_util.h>
 
 #include <sys/appleapiopts.h>
 
@@ -207,7 +208,6 @@ void IOFreePageable(void * address, vm_size_t size);
 #define IODelete(...)          __IOKIT_DISPATCH(IODelete, ##__VA_ARGS__)
 #define IOSafeDeleteNULL(...)  __IOKIT_DISPATCH(IOSafeDeleteNULL, ##__VA_ARGS__)
 
-
 #define IONew_2(e_ty, count) \
 	((e_ty *)IOMalloc(IOMallocArraySize(0, sizeof(e_ty), count)))
 
@@ -220,20 +220,26 @@ void IOFreePageable(void * address, vm_size_t size);
 #define IONewZero_3(h_ty, e_ty, count) \
 	((h_ty *)IOMallocZero(IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count)))
 
-#define IODelete_3(ptr, e_ty, count) \
-	IOFree(ptr, IOMallocArraySize(0, sizeof(e_ty), count))
-
-#define IODelete_4(ptr, h_ty, e_ty, count) \
-	IOFree(ptr, IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count))
-
-#define IOSafeDeleteNULL_3(ptr, e_ty, count)  ({                               \
-	vm_size_t __s = IOMallocArraySize(0, sizeof(e_ty), count);             \
-	IOFree(__iokit_ptr_load_and_erase(ptr), __s);                          \
+#define IODelete_3(ptr, e_ty, count) ({                      \
+	IODELETE_ASSERT_COMPATIBLE_POINTER(ptr, e_ty);           \
+	IOFree(ptr, IOMallocArraySize(0, sizeof(e_ty), count));  \
 })
 
-#define IOSafeDeleteNULL_4(ptr, h_ty, e_ty, count)  ({                         \
-	vm_size_t __s = IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count)); \
-	IOFree(__iokit_ptr_load_and_erase(ptr), __s);                          \
+#define IODelete_4(ptr, h_ty, e_ty, count) ({                           \
+	IODELETE_ASSERT_COMPATIBLE_POINTER(ptr, e_ty);                      \
+	IOFree(ptr, IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count));  \
+})
+
+#define IOSafeDeleteNULL_3(ptr, e_ty, count)  ({                           \
+	vm_size_t __s = IOMallocArraySize(0, sizeof(e_ty), count);             \
+	IODELETE_ASSERT_COMPATIBLE_POINTER(ptr, e_ty);                         \
+	IOFree(os_ptr_load_and_erase(ptr), __s);                               \
+})
+
+#define IOSafeDeleteNULL_4(ptr, h_ty, e_ty, count)  ({                     \
+	vm_size_t __s = IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count);  \
+	IODELETE_ASSERT_COMPATIBLE_POINTER(ptr, h_ty);                         \
+	IOFree(os_ptr_load_and_erase(ptr), __s);                               \
 })
 
 /////////////////////////////////////////////////////////////////////////////
@@ -510,14 +516,11 @@ extern mach_timespec_t IOZeroTvalspec;
 #define __IOKIT_DISPATCH(base, ...) \
 	__IOKIT_DISPATCH1(base, __IOKIT_COUNT_ARGS(__VA_ARGS__), ##__VA_ARGS__)
 
-#define __iokit_ptr_load_and_erase(elem) ({             \
-	_Static_assert(sizeof(elem) == sizeof(void *),  \
-	    "elem isn't pointer sized");                \
-	__auto_type __eptr = &(elem);                   \
-	__auto_type __elem = *__eptr;                   \
-	*__eptr = (__typeof__(__elem))NULL;             \
-	__elem;                                         \
-})
+
+
+#define IOFREETYPE_ASSERT_COMPATIBLE_POINTER(ptr, type) do {} while (0)
+#define IODELETE_ASSERT_COMPATIBLE_POINTER(ptr, type) do {} while (0)
+
 
 
 __END_DECLS

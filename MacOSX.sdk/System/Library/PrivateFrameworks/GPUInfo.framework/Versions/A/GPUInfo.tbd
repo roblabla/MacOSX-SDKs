@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9FF7120B-6BF0-3D91-A37D-A19285FBAA73
+    value:           94DDA055-6BF6-3E39-A72A-941E4D9F8312
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7823F15A-EFFE-3442-8959-1BB65ABF5FA6
+    value:           8844D92D-ABD4-3150-9A0D-B7DD2714CE9B
 install-name:    '/System/Library/PrivateFrameworks/GPUInfo.framework/Versions/A/GPUInfo'
-current-version: 1.3.11
+current-version: 1.3.12
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__back_refIcEE, __ZTINSt3__111__alternateIcEE, 

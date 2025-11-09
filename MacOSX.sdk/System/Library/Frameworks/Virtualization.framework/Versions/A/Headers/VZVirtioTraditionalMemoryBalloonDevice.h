@@ -49,7 +49,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     and VZVirtualMachineConfiguration.memorySize. If those constraints aren't satisfied, targetVirtualMachineMemorySize will be rounded down to the nearest multiple of
     1 megabyte, clamped to VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.memorySize respectively.
 
-    The targetVMMemorySize represents the amount of physical memory to be made available to the guest.
+    The targetVirtualMachineMemorySize represents the amount of physical memory to be made available to the guest.
  @see VZVirtualMachineConfiguration.minimumAllowedMemorySize
  @see VZVirtualMachineConfiguration.memorySize
  */

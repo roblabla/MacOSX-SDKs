@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           15D19E29-BDC8-3AB6-979D-64CC3B86EA26
+    value:           1D796D75-64AB-3DD4-A162-52EC7CF95256
   - target:          x86_64-maccatalyst
-    value:           15D19E29-BDC8-3AB6-979D-64CC3B86EA26
+    value:           1D796D75-64AB-3DD4-A162-52EC7CF95256
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BABFB842-9D75-3C34-BE27-6CE1D8FC486E
+    value:           853ADF41-6D2A-3F16-A871-C90044CB5ACF
   - target:          arm64e-maccatalyst
-    value:           BABFB842-9D75-3C34-BE27-6CE1D8FC486E
+    value:           853ADF41-6D2A-3F16-A871-C90044CB5ACF
 install-name:    '/System/Library/PrivateFrameworks/MediaServices.framework/Versions/A/MediaServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

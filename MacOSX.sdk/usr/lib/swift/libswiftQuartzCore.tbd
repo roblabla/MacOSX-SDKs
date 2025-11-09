@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FA3F1C7-B6E1-3C6D-B755-CDAAF2A67E58
+    value:           1BF359A4-6C3D-3CA5-A66A-CB51ABE80787
   - target:          x86_64-maccatalyst
-    value:           2FA3F1C7-B6E1-3C6D-B755-CDAAF2A67E58
+    value:           1BF359A4-6C3D-3CA5-A66A-CB51ABE80787
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D11C8544-32E9-3A3E-AF29-E6C59995F18C
+    value:           0DB51ABB-323B-3FA3-A128-6747BFE1CE3E
   - target:          arm64e-maccatalyst
-    value:           D11C8544-32E9-3A3E-AF29-E6C59995F18C
+    value:           0DB51ABB-323B-3FA3-A128-6747BFE1CE3E
 install-name:    '/usr/lib/swift/libswiftQuartzCore.dylib'
 current-version: 3
 swift-abi-version: 7

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           22724762-1B84-3E19-A34C-6D24DC26DED1
+    value:           25633DE5-B829-3430-ACD1-476A2DA355EF
   - target:          x86_64-maccatalyst
-    value:           22724762-1B84-3E19-A34C-6D24DC26DED1
+    value:           25633DE5-B829-3430-ACD1-476A2DA355EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           76DD74BA-3B4D-30DF-B16F-92C3496A5FBD
+    value:           11B8F864-CC84-3607-8F3A-9083E8AB3DE0
   - target:          arm64e-maccatalyst
-    value:           76DD74BA-3B4D-30DF-B16F-92C3496A5FBD
+    value:           11B8F864-CC84-3607-8F3A-9083E8AB3DE0
 install-name:    '/System/Library/PrivateFrameworks/WeatherKit.framework/Versions/A/WeatherKit'
-current-version: 163
+current-version: 177
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

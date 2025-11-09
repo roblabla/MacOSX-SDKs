@@ -71,13 +71,4 @@ errno_t xcselect_host_sdk_path(xcselect_host_sdk_policy_t sdk_policy,
 
 XCSELECT_END_DECLS
 
-/* TODO: Remove this once dependents have either transitioned to public API or
- *       moved to including xcselect_private.h directly.
- */
-#ifdef __has_include
-#if __has_include(<xcselect_private.h>)
-#include <xcselect_private.h>
-#endif
-#endif
-
 #endif /* __XCSELECT_H__ */

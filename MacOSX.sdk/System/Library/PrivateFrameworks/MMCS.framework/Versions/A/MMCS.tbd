@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B868FC4-0D5F-3257-8AB7-7ACD7B36D5EA
+    value:           9C856DD7-662D-38F1-B9F5-8891AF9AEFE1
   - target:          x86_64-maccatalyst
-    value:           4B868FC4-0D5F-3257-8AB7-7ACD7B36D5EA
+    value:           9C856DD7-662D-38F1-B9F5-8891AF9AEFE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B610CDF-2BF7-370A-A1D8-BDEFDE647370
+    value:           AC8AACF1-CBE5-3B47-894C-38F022F182F0
   - target:          arm64e-maccatalyst
-    value:           8B610CDF-2BF7-370A-A1D8-BDEFDE647370
+    value:           AC8AACF1-CBE5-3B47-894C-38F022F182F0
 install-name:    '/System/Library/PrivateFrameworks/MMCS.framework/Versions/A/MMCS'
-current-version: 1930
+current-version: 1950.19
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -84,17 +84,18 @@ exports:
                        _kMMCSRequestOptionAllowsRetryForBackgroundDataTasks, _kMMCSRequestOptionAuthTokenTimeout, 
                        _kMMCSRequestOptionBackgroundConnectionPoolName, _kMMCSRequestOptionBackgroundConnectionPoolSize, 
                        _kMMCSRequestOptionBoundInterfaceIdentifier, _kMMCSRequestOptionCacheDeleteAvailableSpaceClass, 
-                       _kMMCSRequestOptionCallerRequestUUID, _kMMCSRequestOptionChunkingLibraryCorruptionMode, 
-                       _kMMCSRequestOptionClientLocation, _kMMCSRequestOptionContainerIdentifier, 
-                       _kMMCSRequestOptionDiscretionaryNetworkBehavior, _kMMCSRequestOptionDuetPreClearedMode, 
-                       _kMMCSRequestOptionErrorOnPreallocationFailure, _kMMCSRequestOptionForceGetChunks, 
-                       _kMMCSRequestOptionHTTPClass, _kMMCSRequestOptionInlineCompleteLogicInvertedMode, 
-                       _kMMCSRequestOptionInsertHeaders, _kMMCSRequestOptionInsufficientDiskSpaceMode, 
-                       _kMMCSRequestOptionItemOptions, _kMMCSRequestOptionMetaserverAllowedHostnamesOverride, 
-                       _kMMCSRequestOptionMetaserverAllowedSchemesOverride, _kMMCSRequestOptionMetaserverCheckDisabled, 
-                       _kMMCSRequestOptionMetricOptions, _kMMCSRequestOptionNetworkServiceType, 
-                       _kMMCSRequestOptionNetworkingDelegate, _kMMCSRequestOptionPreauthorization, 
-                       _kMMCSRequestOptionPriority, _kMMCSRequestOptionQoS, _kMMCSRequestOptionReaderWriterCallbackForDownloads, 
+                       _kMMCSRequestOptionCallerRequestUUID, _kMMCSRequestOptionCancelRequestOnVerificationQueue, 
+                       _kMMCSRequestOptionChunkingLibraryCorruptionMode, _kMMCSRequestOptionClientLocation, 
+                       _kMMCSRequestOptionContainerIdentifier, _kMMCSRequestOptionDiscretionaryNetworkBehavior, 
+                       _kMMCSRequestOptionDuetPreClearedMode, _kMMCSRequestOptionErrorOnPreallocationFailure, 
+                       _kMMCSRequestOptionForceGetChunks, _kMMCSRequestOptionHTTPClass, 
+                       _kMMCSRequestOptionInlineCompleteLogicInvertedMode, _kMMCSRequestOptionInsertHeaders, 
+                       _kMMCSRequestOptionInsufficientDiskSpaceMode, _kMMCSRequestOptionItemOptions, 
+                       _kMMCSRequestOptionMetaserverAllowedHostnamesOverride, _kMMCSRequestOptionMetaserverAllowedSchemesOverride, 
+                       _kMMCSRequestOptionMetaserverCheckDisabled, _kMMCSRequestOptionMetricOptions, 
+                       _kMMCSRequestOptionNetworkServiceType, _kMMCSRequestOptionNetworkingDelegate, 
+                       _kMMCSRequestOptionPreauthorization, _kMMCSRequestOptionPriority, 
+                       _kMMCSRequestOptionQoS, _kMMCSRequestOptionReaderWriterCallbackForDownloads, 
                        _kMMCSRequestOptionRequireInlineComplete, _kMMCSRequestOptionRequiresPowerPluggedIn, 
                        _kMMCSRequestOptionResumableContainerLimpMode, _kMMCSRequestOptionRetrievePastRegistration, 
                        _kMMCSRequestOptionReturnOpaqueCloneContext, _kMMCSRequestOptionReturnPreauthorizationRequestObject, 

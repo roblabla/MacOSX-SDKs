@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7F17301A-BC1E-361A-8419-58F7E6B44FE4
+    value:           DACA1CDC-1145-3C01-BF12-063C74EAAD9A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B43BE7AD-86D2-34CB-BBC5-2B138B30E1D5
+    value:           81E70861-B5F2-386A-80A5-30E284862F02
 install-name:    '/System/Library/PrivateFrameworks/SiriSpeechSynthesis.framework/Versions/A/SiriSpeechSynthesis'
 exports:
   - targets:         [ x86_64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DFDDDB62-8B3D-3454-A4BA-898AFFD493D6
+    value:           4183C9A4-6C3B-310C-B471-2EA48BBABADE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE8833EE-9AD6-3023-88FA-76D3D99D0624
+    value:           D7248BB4-5DE3-3573-9563-65779B77CCDE
 install-name:    '/System/Library/PrivateFrameworks/OpticalFlowFramework.framework/Versions/A/OpticalFlowFramework'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

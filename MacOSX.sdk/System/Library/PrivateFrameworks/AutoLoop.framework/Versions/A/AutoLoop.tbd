@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6799350D-D702-383D-9579-BC1922827CE1
+    value:           DA644953-C19C-349B-BC81-7D6B636ADED9
   - target:          x86_64-maccatalyst
-    value:           6799350D-D702-383D-9579-BC1922827CE1
+    value:           DA644953-C19C-349B-BC81-7D6B636ADED9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2D6174C-65F9-34FD-A904-3C95A8AC50F8
+    value:           E3DA7206-B253-3FF3-AF98-25F10D86D94C
   - target:          arm64e-maccatalyst
-    value:           D2D6174C-65F9-34FD-A904-3C95A8AC50F8
+    value:           E3DA7206-B253-3FF3-AF98-25F10D86D94C
 install-name:    '/System/Library/PrivateFrameworks/AutoLoop.framework/Versions/A/AutoLoop'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,9 +30,9 @@ exports:
                        _AUTOLOOP_LAR_KEY_VERSION, _AUTOLOOP_LA_FLAVOR_AUTOLOOP, _AUTOLOOP_LA_FLAVOR_BOUNCE, 
                        _AUTOLOOP_LA_FLAVOR_LONGEXP, _AUTOLOOP_LA_FLAVOR_NORMSTABILIZE, 
                        _alGatingResultsDestroy, _alGetFadeDuration, _alGetLoopPeriod, 
-                       _alGetLoopStart, _alGetNumerOfFrames, _alLoopRecipeDestroy, 
-                       _alLoopRecipeFromDictionary, _alLoopRecipeToDict, _alRender, 
-                       _alStabilizeParamsDestroy, _alStabilizeParamsFromDictionary, 
+                       _alGetLoopStart, _alGetNumerOfFrames, _alInterpolateMetadataForGap, 
+                       _alLoopRecipeDestroy, _alLoopRecipeFromDictionary, _alLoopRecipeToDict, 
+                       _alRender, _alStabilizeParamsDestroy, _alStabilizeParamsFromDictionary, 
                        _alStabilizeParamsToDict, _autoloopErrorCodeToString, _autoloopSettingsDestroy, 
                        _autoloopSettingsSetDisableStabilizationGPU, _autoloopSettingsSetGating, 
                        _autoloopSettingsSetGatingFeaturesProviderCallback, _autoloopSettingsSetLongerBounce, 

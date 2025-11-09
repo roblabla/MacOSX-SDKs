@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           95A6EB7F-340E-3202-964F-3912EB580A5E
+    value:           8DB0E796-B0E0-3DFF-8725-DD40116EFB2D
   - target:          x86_64-maccatalyst
-    value:           95A6EB7F-340E-3202-964F-3912EB580A5E
+    value:           8DB0E796-B0E0-3DFF-8725-DD40116EFB2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B27C4863-5513-378C-99F2-B18183743D4D
+    value:           93388DF9-A189-378E-B6D1-DEA03C91BE9B
   - target:          arm64e-maccatalyst
-    value:           B27C4863-5513-378C-99F2-B18183743D4D
+    value:           93388DF9-A189-378E-B6D1-DEA03C91BE9B
 install-name:    '/System/Library/PrivateFrameworks/UIKitServices.framework/Versions/A/UIKitServices'
-current-version: 5205.0.255
+current-version: 5522.2.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -52,7 +52,8 @@ exports:
                        UISNotificationResponseAction, UISOpenURLAction, UISPasteVariant, 
                        UISSceneRequestOptions, UISSlotEmptyContent, UISSlotLocalContent, 
                        UISSlotMachine, UISSlotRemoteContent, UISSlotStyle, UISTextLineDrawing, 
-                       UISTextParagraphDrawing, UISTransform3DGrader, UISVectorGlyphDrawing ]
+                       UISTextParagraphDrawing, UISTransform3DGrader, UISVectorGlyphDrawing, 
+                       _UISPlaygroundsPassthroughAction, _UISPlaygroundsPassthroughActionResponse ]
     objc-ivars:      [ UISApplicationInitializationContext._compatibilityContext, 
                        UISApplicationInitializationContext._defaultSceneToken, UISApplicationInitializationContext._deviceContext, 
                        UISApplicationInitializationContext._displayContext, UISApplicationInitializationContext._persistedSceneIdentifiers, 

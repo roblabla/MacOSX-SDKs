@@ -59,10 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @brief       Advance the state machine and respond to an IOUSBHostCIMessageTypeControllerFrameNumber command
- * @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is
- *              advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was
- *              not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel
- *              driver.
+ * @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, enqueueUpdatedFrame:timestamp:error
+ *              is called with the supplied parameters, and a properly formatted command response message is sent to the kernel driver.  If the client
+ *              indicates the command was not processed successfully, enqueueUpdatedFrame:timestamp:error is not called but a properly formatted
+ *              command response message is sent to the kernel driver.
  * @param       command IOUSBHostCIMessage command structure received from the kernel driver.  The Type field must be IOUSBHostCIMessageTypeControllerFrameNumber
  * @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response.
  * @param       frame uint64_t containing the number of 1ms frames that have elapsed since the controller began counting frames
@@ -80,6 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief       Enqueue frame and timestamp messages for delivery to the kernel driver
  * @discussion  If the controller interface is in the IOUSBHostCIControllerStateActive state, messages with the type IOUSBHostCIMessageTypeFrameNumberUpdate and
  *              IOUSBHostCIMessageTypeFrameTimestampUpdate will be generated using the provided inputs, and enqueued for delivery to the kernel driver.
+ *              The frame and timestamp information provided effectively measure the duration of the controller's 1ms frame in terms of system time.  A 1% frame duration
+ *              variation is permitted.  A larger frame duration variation will result in a IOUSBHostCIExceptionTypeFrameUpdateError.
  * @param       frame uint64_t containing the number of 1ms frames that have elapsed since the controller began counting frames
  * @param       timestamp uint64_t containing the mach_absolute_time() correlated to the beginning of the frameNumber
  * @return      BOOL YES if the messages were enqueued for delivery to the kernel.

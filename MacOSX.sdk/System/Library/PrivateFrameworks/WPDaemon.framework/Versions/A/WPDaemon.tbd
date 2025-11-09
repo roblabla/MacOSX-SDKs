@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DCFF35CD-6601-39E6-9A36-267078CE9531
+    value:           BE529A5F-6B14-3427-BFF0-43E76DB3FC4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BB536EC-91BC-3636-8BAF-139ACA42B057
+    value:           BBCD21AE-1DE5-3AAF-9596-D112434C17D1
 install-name:    '/System/Library/PrivateFrameworks/WPDaemon.framework/Versions/A/WPDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

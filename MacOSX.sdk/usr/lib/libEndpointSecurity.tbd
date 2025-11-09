@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           20D426C4-F85C-3615-9F4B-A05562596683
+    value:           D51DD65F-84EA-3A89-A421-E37A87508A3F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3275982F-45ED-3126-B98A-75DB7735610F
+    value:           B5561C54-DC5C-3A6E-91B9-92079B3E6F05
 install-name:    '/usr/lib/libEndpointSecurity.dylib'
-current-version: 270.60.3
+current-version: 271.100.29
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _es_authorize_file_provider_materialize, _es_authorize_file_provider_materialize_unsafe, 

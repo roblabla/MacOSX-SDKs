@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AA5D980C-B849-3CB4-ADF6-DD737564190A
+    value:           AA5AAC98-4F43-3319-8EE1-1AB3BD1B17E9
   - target:          x86_64-maccatalyst
-    value:           AA5D980C-B849-3CB4-ADF6-DD737564190A
+    value:           AA5AAC98-4F43-3319-8EE1-1AB3BD1B17E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF66A148-79E0-3AC9-B3A5-E222D83CD5F9
+    value:           9D7D3779-B1E2-335E-B075-0B0C7E8648EB
   - target:          arm64e-maccatalyst
-    value:           BF66A148-79E0-3AC9-B3A5-E222D83CD5F9
+    value:           9D7D3779-B1E2-335E-B075-0B0C7E8648EB
 install-name:    '/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -59,16 +59,18 @@ exports:
                        __ZN13CoreAnalytics6Client32sendAwdQueriableMetricsList_syncEv, 
                        __ZN13CoreAnalytics6Client3getEv, __ZN13CoreAnalytics6Client4initEv, 
                        __ZN13CoreAnalytics6ClientC1Ev, __ZN13CoreAnalytics6ClientC2Ev, 
-                       __ZNK13CoreAnalytics6Client11getXPCQueueEv, __ZNK13CoreAnalytics6Client13sendAwdMetricEjPKvm, 
-                       __ZNK13CoreAnalytics6Client14sendAwdTriggerEPKcjjjPKvm, __ZNK13CoreAnalytics6Client14sendXpcMessageEN10applesauce3xpc4dictE18XPCMessagePriority, 
-                       __ZNK13CoreAnalytics6Client15sendEventAlwaysEPKcRKN10applesauce3xpc6objectE18XPCMessagePriority, 
+                       __ZNK13CoreAnalytics6Client11getXPCQueueEv, __ZNK13CoreAnalytics6Client11isEventUsedENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
+                       __ZNK13CoreAnalytics6Client13sendAwdMetricEjPKvm, __ZNK13CoreAnalytics6Client14sendAwdTriggerEPKcjjjPKvm, 
+                       __ZNK13CoreAnalytics6Client14sendXpcMessageEN10applesauce3xpc4dictE18XPCMessagePriorityb, 
+                       __ZNK13CoreAnalytics6Client15isAwdMetricUsedEj, __ZNK13CoreAnalytics6Client15sendEventAlwaysEPKcRKN10applesauce3xpc6objectE18XPCMessagePriority, 
                        __ZNK13CoreAnalytics6Client16isEventNameValidEPKc, __ZNK13CoreAnalytics6Client16sendEventWithTagEPKcRKN10applesauce3xpc6objectES5_, 
-                       __ZNK13CoreAnalytics6Client18isEventWhitelistedENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
-                       __ZNK13CoreAnalytics6Client19sendXpcMessage_syncEN10applesauce3xpc4dictE18XPCMessagePriority, 
+                       __ZNK13CoreAnalytics6Client19sendXpcMessage_syncEN10applesauce3xpc4dictE18XPCMessagePriorityb, 
+                       __ZNK13CoreAnalytics6Client20retryXpcMessage_syncEN10applesauce3xpc4dictE18XPCMessagePriorityb, 
                        __ZNK13CoreAnalytics6Client20sendAwdMetricWithTagEPKcjN10applesauce3xpc6objectEPKvm, 
                        __ZNK13CoreAnalytics6Client21sendAwdTriggerWithTagEPKcjjN10applesauce3xpc6objectEPKvm, 
                        __ZNK13CoreAnalytics6Client21sendManagementCommandEPKcN10applesauce3xpc4dictE, 
-                       __ZNK13CoreAnalytics6Client22isAwdMetricWhitelistedEj, __ZNK13CoreAnalytics6Client26sendManagementCommand_syncEPKcN10applesauce3xpc4dictE, 
+                       __ZNK13CoreAnalytics6Client26retryXpcMessageHelper_syncEN10applesauce3xpc4dictE18XPCMessagePrioritybhy, 
+                       __ZNK13CoreAnalytics6Client26sendManagementCommand_syncEPKcN10applesauce3xpc4dictE, 
                        __ZNK13CoreAnalytics6Client30sendManagementCommandWithReplyEPKcN10applesauce3xpc4dictE, 
                        __ZNK13CoreAnalytics6Client9hasConfigEv, __ZTIN13CoreAnalytics13EventObserverE, 
                        __ZTIN13CoreAnalytics21ConfigurationObserverE, __ZTSN13CoreAnalytics13EventObserverE, 

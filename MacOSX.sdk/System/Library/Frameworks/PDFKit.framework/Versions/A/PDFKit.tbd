@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6C4BFA33-BCBB-3A17-8A33-0D126D08D6FE
+    value:           E41E2796-5E51-3D02-B422-B9AF35B016BA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E17B42A1-D62B-3609-9F5F-CB70BCC4CE9C
+    value:           DA66156C-23C1-3D6D-A259-9A2700306AC8
 install-name:    '/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

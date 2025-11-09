@@ -201,6 +201,64 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0));
                                              name:(NSString *_Nullable)name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0));
 
+/*!
+ *  @abstract   Create  reduction and op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axis              axis of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionAndWithTensor:(MPSGraphTensor *) tensor
+                                      axis:(NSInteger) axis
+                                      name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
+
+
+/*!
+ *  @abstract   Create  reduction and op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axes              axes of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionAndWithTensor:(MPSGraphTensor *)tensor
+                                      axes:(NSArray<NSNumber *> *_Nullable)axes
+                                      name:(NSString *_Nullable)name
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
+
+/*!
+ *  @abstract   Create  reduction or op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axis              axis of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionOrWithTensor:(MPSGraphTensor *) tensor
+                                     axis:(NSInteger) axis
+                                     name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
+
+
+/*!
+ *  @abstract   Create  reduction or op and return the result tensor.
+ *
+ *  @param      tensor          input tensor
+ *  @param      axes              axes of reduction
+ *  @param      name              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) reductionOrWithTensor:(MPSGraphTensor *)tensor
+                                     axes:(NSArray<NSNumber *> *_Nullable)axes
+                                     name:(NSString *_Nullable)name
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1CF77619-3C20-3428-AD4E-E557438EC1D7
+    value:           A5D6D4BA-5845-38D5-ABD8-4085E88EA104
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A40A7A9-8AD5-38EA-8C5E-5799384BA563
+    value:           8A618BF2-F96C-304F-9A82-345C5A7A0B2E
 install-name:    '/System/Library/Frameworks/InputMethodKit.framework/Versions/A/InputMethodKit'
-current-version: 485.2
+current-version: 485.5
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IMKButtonCallbackKey, _IMKButtonCallbackObjectKey, _IMKCandidateControllerFunctionViewPadding, 

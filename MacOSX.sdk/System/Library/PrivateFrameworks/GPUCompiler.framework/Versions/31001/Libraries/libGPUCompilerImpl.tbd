@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           67C27138-AB55-3B77-8221-FA6390E85120
+    value:           5454240E-F4EC-3B1F-B873-155FAEF99DFF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E255FDCD-3D25-397B-A0D7-B276F3DCE08F
+    value:           E90B2974-C891-30E0-B337-EFF4E5538E83
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompilerImpl.dylib'
-current-version: 31001.255
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __Z12isTracepointRKN4llvm8FunctionE, __Z15forwardArgumentPN4llvm3air10AIArgumentEPNS_4TypeEj, 
@@ -130,6 +130,7 @@ exports:
                        __ZN4llvm3air11AICIPadding7getImplERNS_11LLVMContextEjNS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air11AICIPointer7getImplERNS_11LLVMContextEjNS0_17AIAccessQualifierEPNS0_16AIStructTypeInfoEjjNS_9StringRefES7_NS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air11AICITexture7getImplERNS_11LLVMContextEjjNS0_17AIAccessQualifierENS_9StringRefES5_NS_8Metadata11StorageTypeEb, 
+                       __ZN4llvm3air11AIEmulation7classofEPKNS_8MetadataE, __ZN4llvm3air11AIEmulation7classofEPKNS_8MetadataENS_9StringRefEj, 
                        __ZN4llvm3air11AIFieldDesc7classofEPKNS_8MetadataE, __ZN4llvm3air11AIFieldDesc7getImplERNS_11LLVMContextEPNS0_18AIFunctionConstantEjjNS_9StringRefES6_S6_NS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air12AICIFunction7getImplERNS_11LLVMContextEPNS_8FunctionENS_24MDTupleTypedArrayWrapperINS0_12AIReturnTypeEEENS6_INS0_10AIArgumentEEENS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air12AIMatrixType7getImplERNS_11LLVMContextEjNS_24MDTupleTypedArrayWrapperINS0_10AITypeQualEEEPNS0_13AIBuiltinTypeEjjNS_8Metadata11StorageTypeEb, 
@@ -193,8 +194,8 @@ exports:
                        __ZN4llvm3air16AIStructTypeInfo7classofEPKNS_8MetadataE, __ZN4llvm3air16AIStructTypeInfo7getImplERNS_11LLVMContextENS_8ArrayRefINS0_21AIStructTypeInfoFieldEEENS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air16AIVertexFunction7getImplERNS_11LLVMContextEPNS_8FunctionENS_24MDTupleTypedArrayWrapperINS0_12AIReturnTypeEEENS6_INS0_10AIArgumentEEEPNS0_7AIPatchENS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air16AIVisiblePadding7getImplERNS_11LLVMContextEjNS_8Metadata11StorageTypeEb, 
-                       __ZN4llvm3air16MetalDefinedSymbC1ENSt3__110shared_ptrINS_6ModuleEEENS_9StringRefENS1_10SymbolFlagENS3_INS0_11MetalSourceEEENS_8ArrayRefIS9_EENSA_IhEE, 
-                       __ZN4llvm3air16MetalDefinedSymbC2ENSt3__110shared_ptrINS_6ModuleEEENS_9StringRefENS1_10SymbolFlagENS3_INS0_11MetalSourceEEENS_8ArrayRefIS9_EENSA_IhEE, 
+                       __ZN4llvm3air16MetalDefinedSymbC1ENSt3__110shared_ptrINS_6ModuleEEENS_9StringRefES6_NS1_10SymbolFlagENS3_INS0_11MetalSourceEEENS_8ArrayRefIS9_EENSA_IhEE, 
+                       __ZN4llvm3air16MetalDefinedSymbC2ENSt3__110shared_ptrINS_6ModuleEEENS_9StringRefES6_NS1_10SymbolFlagENS3_INS0_11MetalSourceEEENS_8ArrayRefIS9_EENSA_IhEE, 
                        __ZN4llvm3air16upgradeAIRModuleERNS_6ModuleENS_12VersionTupleE, 
                        __ZN4llvm3air17AIInterpolantType7getImplERNS_11LLVMContextEjjNS_24MDTupleTypedArrayWrapperINS0_10AITypeQualEEEbPNS0_13AIBuiltinTypeENS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air17AILanguageVersion7classofEPKNS_8MetadataE, 
@@ -457,11 +458,24 @@ exports:
                        __ZN4llvm7airdyld6Loader7preloadENS_15MutableArrayRefINS_3air15UniqueObjectPtrEEENS_8ArrayRefINS_9StringRefEEE, 
                        __ZN4llvm7airdyld6Loader9runScriptEv, __ZN4llvm7airdyld6Loader9setTargetERKNS_6TripleE, 
                        __ZN4llvm7airdyld6LoaderC1EPNS_11LLVMContextE, __ZN4llvm7airdyld6LoaderC2EPNS_11LLVMContextE, 
-                       __ZN4llvmlsERNS_11raw_ostreamERKNS_7APFloatE, __ZN7metalfe11GPUArchiver10dumpBufferEN4llvm9StringRefES2_PKNS1_12MemoryBufferE, 
+                       __ZN4llvmlsERNS_11raw_ostreamERKNS_7APFloatE, __ZN7metalfe11GPUArchiver10canAddUnitEN4llvm9StringRefE, 
+                       __ZN7metalfe11GPUArchiver10dumpBufferEN4llvm9StringRefES2_PKNS1_12MemoryBufferE, 
                        __ZN7metalfe11GPUArchiver12createWriterENS_22GPUArchiverProductKindEN4llvm9StringRefERNS2_11raw_ostreamEb, 
+                       __ZN7metalfe11GPUArchiver12emitMetalLibEN4llvm9StringRefE, 
+                       __ZN7metalfe11GPUArchiver13buildToBufferERN4llvm11raw_ostreamE, 
+                       __ZN7metalfe11GPUArchiver14createMetalLibERKN4llvm6TripleE, 
+                       __ZN7metalfe11GPUArchiver14createMetalLibEv, __ZN7metalfe11GPUArchiver14setInstallNameEN4llvm9StringRefERNS1_11raw_ostreamE, 
+                       __ZN7metalfe11GPUArchiver17removeAllFilesButEN4llvm9StringRefES2_, 
+                       __ZN7metalfe11GPUArchiver17serializeMetalLibENSt3__110unique_ptrIN4llvm3air8MetalLibENS1_14default_deleteIS5_EEEENS3_9StringRefE, 
+                       __ZN7metalfe11GPUArchiver18createWriterWithIdENS_22GPUArchiverProductKindEN4llvm9StringRefERNS2_11raw_ostreamEb, 
+                       __ZN7metalfe11GPUArchiver21addIRObjectToMetalLibERN4llvm3air8MetalLibENS1_9StringMapIjNS1_15MallocAllocatorEEENSt3__110unique_ptrINS1_6object12IRObjectFileENS8_14default_deleteISB_EEEE, 
+                       __ZN7metalfe11GPUArchiver22tryAliasMetalLibSymbolERN4llvm3air8MetalLibENS1_9StringRefE, 
                        __ZN7metalfe11GPUArchiver24guessDescriptorExtensionEN4llvm9StringRefE, 
+                       __ZN7metalfe11GPUArchiver25classifySymbolForMetalLibERN4llvm3air8MetalLibERKNS1_6object14BasicSymbolRefE, 
+                       __ZN7metalfe11GPUArchiver27addMetalLibObjectToMetalLibERN4llvm3air8MetalLibENS1_9StringMapIjNS1_15MallocAllocatorEEENSt3__110unique_ptrINS1_6object18MetalLibObjectFileENS8_14default_deleteISB_EEEE, 
                        __ZN7metalfe11GPUArchiver5flushERN4llvm11raw_ostreamE, __ZN7metalfe11GPUArchiver6createEN4llvm9StringRefERNS1_11raw_ostreamE, 
                        __ZN7metalfe11GPUArchiver7addUnitEN10llvm_utils5MachO12ArchitectureEPKN4llvm12MemoryBufferES7_S7_RNS4_11raw_ostreamE, 
+                       __ZN7metalfe11GPUArchiver9emitImageEN4llvm9StringRefE, __ZN7metalfe11GPUArchiver9packUnitsERN4llvm11raw_ostreamE, 
                        __ZN7metalfe11GPUArchiverD1Ev, __ZN7metalfe11GPUArchiverD2Ev, 
                        __ZN7metalfe11GPUCompiler12loadToBufferERN4llvm11LLVMContextENS1_15MutableArrayRefINSt3__110unique_ptrINS1_6ModuleENS5_14default_deleteIS7_EEEEEENS1_8ArrayRefIPKcEENS4_INS1_3air15UniqueObjectPtrEEESF_SI_SF_RNS1_11raw_ostreamE, 
                        __ZN7metalfe11GPUCompiler13lowerToBufferERN4llvm11LLVMContextENSt3__110unique_ptrINS1_6ModuleENS4_14default_deleteIS6_EEEERNS1_11raw_ostreamE, 
@@ -475,8 +489,10 @@ exports:
                        __ZN7metalfe11GPUCompiler5lowerERN4llvm11LLVMContextENSt3__110unique_ptrINS1_6ModuleENS4_14default_deleteIS6_EEEERNS1_11raw_ostreamE, 
                        __ZN7metalfe11GPUCompiler6stitchERN4llvm11LLVMContextENS1_15MutableArrayRefINSt3__110unique_ptrINS1_6ModuleENS5_14default_deleteIS7_EEEEEERNS1_11raw_ostreamE, 
                        __ZN7metalfe11GPUCompilerC1Eb, __ZN7metalfe11GPUCompilerC2Eb, 
-                       __ZN7metalfe6toJSONERKNS_22GPUArchiverProductKindE, __ZN7metalfe6toJSONERKNS_22GPUArchiverUnitMappingE, 
-                       __ZN7metalfe6toJSONERKNS_26GPUArchiverPersistentStateE, __ZN7metalfe8fromJSONERKN4llvm4json5ValueERNS_22GPUArchiverProductKindE, 
+                       __ZN7metalfe6toJSONERKNS_19GPUArchiverUnitPathE, __ZN7metalfe6toJSONERKNS_22GPUArchiverProductKindE, 
+                       __ZN7metalfe6toJSONERKNS_22GPUArchiverUnitMappingE, __ZN7metalfe6toJSONERKNS_26GPUArchiverPersistentStateE, 
+                       __ZN7metalfe8fromJSONERKN4llvm4json5ValueERNS_19GPUArchiverUnitPathE, 
+                       __ZN7metalfe8fromJSONERKN4llvm4json5ValueERNS_22GPUArchiverProductKindE, 
                        __ZN7metalfe8fromJSONERKN4llvm4json5ValueERNS_22GPUArchiverUnitMappingE, 
                        __ZN7metalfe8fromJSONERKN4llvm4json5ValueERNS_26GPUArchiverPersistentStateE, 
                        __ZNK4llvm10Tracepoint13getRelativeIDEv, __ZNK4llvm10Tracepoint14getBaseIDValueEv, 
@@ -491,7 +507,8 @@ exports:
                        __ZNK4llvm3air10AIArgument12getWithIndexEj, __ZNK4llvm3air10AIArgument13getWithUnusedEv, 
                        __ZNK4llvm3air10AIArgument14getWithoutNameEv, __ZNK4llvm3air10AIArgument15getWithTypeNameENS_9StringRefE, 
                        __ZNK4llvm3air10AIArgument16getWithoutUnusedEv, __ZNK4llvm3air10AIArgument26getWithoutFunctionConstantEv, 
-                       __ZNK4llvm3air11AIFieldDesc13getWithUnusedEv, __ZNK4llvm3air11AIFieldDesc26getWithoutFunctionConstantEv, 
+                       __ZNK4llvm3air11AIFieldDesc13getWithUnusedEv, __ZNK4llvm3air11AIFieldDesc16getWithoutUnusedEv, 
+                       __ZNK4llvm3air11AIFieldDesc26getWithoutFunctionConstantEv, 
                        __ZNK4llvm3air12AIReturnType14getWithoutNameEv, __ZNK4llvm3air12AIReturnType26getWithoutFunctionConstantEv, 
                        __ZNK4llvm3air13AIRTargetInfo4dumpEv, __ZNK4llvm3air13AIRTargetInfo5printERNS_11raw_ostreamE, 
                        __ZNK4llvm3air13ArchiveWriter17getLinkerInfoSizeEv, __ZNK4llvm3air13ArchiveWriter19getLinkerMemberSizeENS_9StringRefES2_, 

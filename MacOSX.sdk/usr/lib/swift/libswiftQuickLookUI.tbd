@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           95850709-D312-3CCC-9570-BAD935EBFD5E
+    value:           A660E24E-8075-327B-9EBC-A410CE59A875
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           870F5E06-0034-36F9-B582-5A57EA7DA2B9
+    value:           99F97E92-C4DD-3460-B6F9-53E6F917B7D8
 install-name:    '/usr/lib/swift/libswiftQuickLookUI.dylib'
-current-version: 950.1
+current-version: 950.2
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

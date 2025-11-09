@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           324241A6-7EC6-3276-A48A-C6D0CCA51385
+    value:           499378BD-8BF9-3876-83B1-48E714BCC13F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A47ADE8-978B-3E93-98A5-57145A0A7E1D
+    value:           45786B35-6AB6-35A6-9DCF-96B52285B090
 install-name:    '/System/Library/PrivateFrameworks/KnowledgeGraphKit.framework/Versions/A/KnowledgeGraphKit'
 swift-abi-version: 7
 allowable-clients:
@@ -15,9 +15,7 @@ allowable-clients:
     clients:         [ PhotoAnalysis, PhotosGraph, spotlightknowledged ]
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas19LabelIndex_SnapshotENS_10shared_ptrINS1_10LabelIndexEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+    weak-symbols:    [ __ZTINSt3__120__shared_ptr_pointerIPN5degas19LabelIndex_SnapshotENS_10shared_ptrINS1_10LabelIndexEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN5degas20LabelIndex_ImmediateENS_10shared_ptrINS1_10LabelIndexEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN5degas20LabelIndex_PersistedENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN5degas21CountedPathCollectionENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
@@ -33,8 +31,6 @@ exports:
                        __ZTSNSt3__110shared_ptrIN5degas23UncountedPathCollectionEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN5degas6BitmapEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN5degas9StatementEE27__shared_ptr_default_deleteIS2_S2_EE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN5degas19LabelIndex_SnapshotENS_10shared_ptrINS1_10LabelIndexEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN5degas20LabelIndex_ImmediateENS_10shared_ptrINS1_10LabelIndexEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN5degas20LabelIndex_PersistedENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 

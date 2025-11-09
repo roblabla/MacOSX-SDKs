@@ -205,6 +205,13 @@
 
 
 /*  Availability information for AppleEXR (Apple OpenEXR)
+ *  version 2:
+ *      Version 1 (and 2) requires that your application provide
+ *      image data in full tile sized chunks even when the image
+ *      was not a multiple of the tile size when compressing EXR
+ *      images. It did not however provide a way to find out what
+ *      the tile size is.  To remedy this problem axr_part_get_tile_size()
+ *      is added.
  *  version 1:
  *      Initial feature set.
  *         Decodes OpenEXR 1.7 and 2.0 images
@@ -216,9 +223,13 @@
 #ifdef AXR_SKIP_AVAILABILITY
 #   define AXR_AVAILABILITY_v1
 #   define AXR_ENUM_AVAILABILITY_v1
+#   define AXR_AVAILABILITY_v2
+#   define AXR_ENUM_AVAILABILITY_v2
 #else
 #   define AXR_AVAILABILITY_v1          __API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0))
 #   define AXR_ENUM_AVAILABILITY_v1     __API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0))
+#   define AXR_AVAILABILITY_v2          __API_AVAILABLE(macos(12.3),  ios(15.3), tvos(15.3), watchos(8.3))
+#   define AXR_ENUM_AVAILABILITY_v2     __API_AVAILABLE(macos(12.3),  ios(15.3), tvos(15.3), watchos(8.3))
 #endif
 
     
@@ -256,6 +267,8 @@ typedef enum axr_error_t
 {
     axr_error_success                       AXR_ENUM_AVAILABILITY_v1  =     0,
     
+    /* Please see axr_error_get_name below before needlessly duplicating this list */
+
     /* All failures are negative */
     axr_error_invalid_parameter             AXR_ENUM_AVAILABILITY_v1  =    -1,
     axr_error_unknown_file_type             AXR_ENUM_AVAILABILITY_v1  =    -2,
@@ -276,6 +289,8 @@ typedef enum axr_error_t
 #else
 OS_ENUM( axr_error, long,
     axr_error_success                       AXR_ENUM_AVAILABILITY_v1  =     0,
+    
+    /* Please see axr_error_get_name below before needlessly duplicating this list */
     
     /* All failures are negative */
     axr_error_invalid_parameter             AXR_ENUM_AVAILABILITY_v1  =    -1,
@@ -1623,13 +1638,26 @@ axr_part_create_colorspace( __nonnull axr_part_t part,
     
 /*! @abstract  Get the number of rip levels in X and Y dimensions */
 axr_size_t axr_part_get_rip_level_counts( __nonnull axr_part_t part );
+
+/*! @abstract Get the tile size used by the part.
+ *  @discussion This information may be needed to correctly size the pixel information passed to the axr_data_provider_read_t.
+ *  @part            The part
+ *  @return   The tile size used for encoding the part.   */
+axr_size_t axr_part_get_tile_size( __nonnull axr_part_t part ) AXR_AVAILABILITY_v2;
     
 /*! @abstract called to read more pixel data from your data store
  *  @discussion  The callback will not be called until after your application calls axr_encoder_compress
- *                When possible, the data copied to buf should be materialized  lazily to avoid using too much memory.
+ *               When possible, the data copied to buf should be materialized  lazily to avoid using too much memory.
+ *               The encoder will always ask for a full tile sized piece of data, even when a full tile is not available,
+ *               This can happen when the image is not a multiple of the tile size. Your application should fill the
+ *               right and bottom edges of the image, as needed, with extra padding to fill out these regions.
+ *               The data will actually be encoded into the file, so it would be best to either zero the extra regions
+ *               or fill them with the nearest valid pixel value.  Please see axr_part_get_tile_size to get
+ *               the expected tile size for the part.
  *  @param buf    The location to copy the data to
  *  @param size   The number of bytes to copy
  *  @param levelIndex   This is the mip level. If it is a rip level, then ripLevelX = levelIndex % ripLevelCountX.  ripLevelY = levelIndex / ripLevelCountX.
+ *  @param levelSize     The size of the current mip level. For mip level index 0, this is the full image size.
  *  @param userInfo  The userInfo pointer passed to axr_data_provider_create. This is your object. AppleEXR doesn't know what it is.
  *  @return  The number of bytes copied in.   If there is an error, return one of the following error codes:
  *              0:   The read operation is suspended. Do no further encoding.

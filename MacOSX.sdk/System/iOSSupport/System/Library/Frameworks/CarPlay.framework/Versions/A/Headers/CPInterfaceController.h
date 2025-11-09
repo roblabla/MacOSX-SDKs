@@ -47,7 +47,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (void)setRootTemplate:(__kindof CPTemplate *)rootTemplate
                animated:(BOOL)animated
-             completion:(nullable void (^)(BOOL, NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+             completion:(nullable void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(14.0));
 
 /**
  Push a new template onto the template navigation hierarchy, showing it immediately.
@@ -59,7 +59,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (void)pushTemplate:(__kindof CPTemplate *)templateToPush
             animated:(BOOL)animated
-          completion:(nullable void (^)(BOOL, NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+          completion:(nullable void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(14.0));
 
 /**
  Pop back a single level in the template navigation hierarchy.
@@ -67,7 +67,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  The success parameter in the completion block indicates if any template was popped.
  */
 - (void)popTemplateAnimated:(BOOL)animated
-                 completion:(nullable void (^)(BOOL, NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+                 completion:(nullable void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(14.0));
 
 /**
  Pop back to the first template in the template navigation hierarchy.
@@ -75,7 +75,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  The success parameter in the completion block indicates if any templates were popped.
  */
 - (void)popToRootTemplateAnimated:(BOOL)animated
-                       completion:(nullable void (^)(BOOL, NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+                       completion:(nullable void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(14.0));
 
 /**
  Pop back to a specified template.
@@ -88,7 +88,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (void)popToTemplate:(__kindof CPTemplate *)targetTemplate
              animated:(BOOL)animated
-           completion:(nullable void (^)(BOOL, NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+           completion:(nullable void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(14.0));
 
 /**
  Present a template modally over the navigation hierarchy. Only one template may be presented at a time.
@@ -102,7 +102,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (void)presentTemplate:(__kindof CPTemplate *)templateToPresent
                animated:(BOOL)animated
-             completion:(nullable void (^)(BOOL, NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+             completion:(nullable void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(14.0));
 
 /**
  Dismiss the current modally-presented template, optionally animating the dismissal.
@@ -113,7 +113,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  the boolean parameter will be YES. Otherwise, the boolean parameter will be NO and an @c NSError will be provided describing the failure.
  */
 - (void)dismissTemplateAnimated:(BOOL)animated
-                     completion:(nullable void (^)(BOOL, NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+                     completion:(nullable void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(14.0));
 
 #pragma mark - Template Access
 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0A2E790E-11AC-3FDA-BD5D-200B8DB165D1
+    value:           B4A657D7-524E-333D-85D6-A0A8A8F3E7FC
   - target:          x86_64-maccatalyst
-    value:           0A2E790E-11AC-3FDA-BD5D-200B8DB165D1
+    value:           B4A657D7-524E-333D-85D6-A0A8A8F3E7FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91A0621B-8CDD-3553-BB8D-D538B459C6C5
+    value:           EB10505C-199D-334D-9A5A-ED08C05FF463
   - target:          arm64e-maccatalyst
-    value:           91A0621B-8CDD-3553-BB8D-D538B459C6C5
+    value:           EB10505C-199D-334D-9A5A-ED08C05FF463
 install-name:    '/System/Library/PrivateFrameworks/Translation.framework/Versions/A/Translation'
-current-version: 173.11.5
+current-version: 173.23
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -27,8 +27,9 @@ exports:
                        __LTProductVersion, __LTTranslationErrorDomain, __LTTranslationModelTaskString, 
                        __LTTranslationServiceDelegateXPCInterface, __LTTranslationServiceXPCInterface, 
                        _kLTUnknownLanguageCode ]
-    objc-classes:    [ _LTAlignment, _LTBatchTextTranslationRequest, _LTCombinedEngine, 
-                       _LTCombinedRouteParagraphTranslationRequest, _LTDaemon, _LTInstallRequest, 
+    objc-classes:    [ _LTASRStateEventLog, _LTAlignment, _LTBatchEventLog, _LTBatchTextTranslationRequest, 
+                       _LTCombinedEngine, _LTCombinedRouteParagraphTranslationRequest, 
+                       _LTDaemon, _LTInstallRequest, _LTInvocationEventContext, _LTInvocationEventLog, 
                        _LTLanguageDetectionResult, _LTLanguageDetector, _LTLanguageDetectorFeatureCombinationModel, 
                        _LTLanguageInstallationStatus, _LTLanguageManager, _LTLanguagePairOfflineAvailability, 
                        _LTLocalePair, _LTParagraphTranslationRequest, _LTSafariLatencyLoggingRequest, 
@@ -41,5 +42,5 @@ exports:
                        _LTTranslationRequest, _LTTranslationResult, _LTTranslationSense, 
                        _LTTranslationSensesLoggingRequest, _LTTranslationSession, 
                        _LTTranslationSpan, _LTTranslationStatistics, _LTTranslationToken, 
-                       _LTTranslator ]
+                       _LTTranslator, _LTWordTimingInfo ]
 ...

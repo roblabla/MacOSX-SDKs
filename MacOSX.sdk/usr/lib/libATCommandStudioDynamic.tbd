@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ADFDF5E2-48E4-3B64-B34D-6126EDE43B1C
+    value:           C1180AA5-9566-34C0-9F25-4A1DB16653DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           211E30D3-6329-3239-B008-3299890E2507
+    value:           17DA54BB-C0EA-3F89-B402-60B069D788A0
 install-name:    '/usr/lib/libATCommandStudioDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -23,8 +23,7 @@ exports:
                        __ZTIN3ctu8LoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
                        __ZTIN3ctu8LoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
                        __ZTIN3qmi15QMuxClientIfaceE, __ZTIN3qmi18MutableMessageBase14TlvWrapperBaseE, 
-                       __ZTIN3qmi6Server8AccepterE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTIN3qmi6Server8AccepterE, __ZTINSt3__117bad_function_callE, 
                        __ZTINSt3__123enable_shared_from_thisI10QMIControlEE, __ZTINSt3__123enable_shared_from_thisIN3qmi11ClientProxy5StateEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN3qmi18QMuxServerAccepter5StateEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN3qmi6Client5StateEEE, 
@@ -41,9 +40,8 @@ exports:
                        __ZTSN3ctu8LoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
                        __ZTSN3qmi15QMuxClientIfaceE, __ZTSN3qmi16TransactionQueue5State7DeleterE, 
                        __ZTSN3qmi18MutableMessageBase14TlvWrapperBaseE, __ZTSN3qmi6Server8AccepterE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__123enable_shared_from_thisI10QMIControlEE, __ZTSNSt3__123enable_shared_from_thisIN3qmi11ClientProxy5StateEEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__123enable_shared_from_thisI10QMIControlEE, 
+                       __ZTSNSt3__123enable_shared_from_thisIN3qmi11ClientProxy5StateEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN3qmi18QMuxServerAccepter5StateEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN3qmi6Client5StateEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN3qmi6Server5StateEEE, 

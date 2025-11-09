@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           488AB2C6-5299-3EDE-A441-D1ACB7510FFD
+    value:           F15F033A-C268-3B12-9F39-27B85B49A1B2
   - target:          x86_64-maccatalyst
-    value:           488AB2C6-5299-3EDE-A441-D1ACB7510FFD
+    value:           F15F033A-C268-3B12-9F39-27B85B49A1B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E4CA4D97-FC33-3BA2-8179-EF5A7F7B3608
+    value:           4F6F9EF3-65C2-345C-8725-E64FABB84A3B
   - target:          arm64e-maccatalyst
-    value:           E4CA4D97-FC33-3BA2-8179-EF5A7F7B3608
+    value:           4F6F9EF3-65C2-345C-8725-E64FABB84A3B
 install-name:    '/System/Library/Frameworks/Accessibility.framework/Versions/A/Accessibility'
 swift-abi-version: 7
 exports:

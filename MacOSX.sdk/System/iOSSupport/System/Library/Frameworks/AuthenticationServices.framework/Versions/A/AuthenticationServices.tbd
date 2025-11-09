@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           8A0AF353-3290-3DB2-9100-1E17B1D4E8F5
+    value:           B5AF13BD-4844-36E7-8947-3737F9250C00
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           F8E48FA0-EDB0-319E-8080-7562C5EF0061
+    value:           04E42E38-2F76-35A3-855B-621B2D3A039F
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 612.3.6
+current-version: 613.1.17
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 
@@ -35,7 +35,8 @@ exports:
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitiesKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilityIsSupportedKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitySupportsEphemeralBrowserSessionKey, 
-                       _AuthenticationServicesAgentMain, __authenticationSessionRequestServerErrorDomain ]
+                       _AuthenticationServicesAgentMain, __authenticationSessionRequestServerErrorDomain, 
+                       _asTransportToWKTransport ]
     objc-classes:    [ ASAccountAuthenticationModificationController, ASAccountAuthenticationModificationExtensionContext, 
                        ASAccountAuthenticationModificationReplacePasswordWithSignInWithAppleRequest, 
                        ASAccountAuthenticationModificationRequest, ASAccountAuthenticationModificationUpgradePasswordToStrongPasswordRequest, 
@@ -59,5 +60,5 @@ exports:
                        ASCredentialProviderViewController, ASCredentialServiceIdentifier, 
                        ASPasswordCredential, ASPasswordCredentialIdentity, ASWebAuthenticationSession, 
                        ASWebAuthenticationSessionRequest, ASWebAuthenticationSessionRequestClient, 
-                       _ASDevice, _ASIncomingCallObserver, _ASWebAuthenticationSessionRequestServer ]
+                       _ASIncomingCallObserver, _ASWebAuthenticationSessionRequestServer ]
 ...

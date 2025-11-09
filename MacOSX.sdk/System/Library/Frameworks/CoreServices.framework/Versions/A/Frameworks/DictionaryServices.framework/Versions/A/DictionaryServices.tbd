@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BC953F4D-5F49-327B-8C8C-61402CEAA81A
+    value:           A386704C-9FF8-3035-9C26-9A46E178CD7A
   - target:          x86_64-maccatalyst
-    value:           BC953F4D-5F49-327B-8C8C-61402CEAA81A
+    value:           A386704C-9FF8-3035-9C26-9A46E178CD7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD3495B6-E31B-3487-9276-D12EBE660A76
+    value:           18BFAA45-3471-3B56-96E5-3B7876BD9D44
   - target:          arm64e-maccatalyst
-    value:           FD3495B6-E31B-3487-9276-D12EBE660A76
+    value:           18BFAA45-3471-3B56-96E5-3B7876BD9D44
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
 current-version: 350
 parent-umbrella:

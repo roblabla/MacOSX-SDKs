@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           60B8F0CD-BB4A-3179-89F9-DBE0B0F80CB9
+    value:           B0E6ACE2-5343-3ED1-A221-935D1DBF5310
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95ABF5E5-7356-3011-96CA-9F535A41DE67
+    value:           8DD23287-5E91-3E37-ABAC-DB1427AFAF70
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdate.framework/Versions/A/SoftwareUpdate'
 current-version: 747
 exports:
@@ -56,9 +56,10 @@ exports:
                        _SUJournalEntryReleaseNotes, _SUJournalEntryTitle, _SUJournalEntryVersion, 
                        _SULAOptionsUserId, _SULivabilityAPIBaseURL, _SULogObject, 
                        _SUMacBuddyInstallableUpdateTag, _SUManagedDoItLaterDeferralCount, 
-                       _SUManagedDoItLaterProductMarketingVersion, _SUManagedLastPostedUpdateLaterNotificationDate, 
-                       _SUManagedLastPostedUpdateLaterNotificationTimeInterval, _SUMaximumManagedDoItLaterDeferralCount, 
-                       _SUMessageTracerUniqueID, _SUNetErrorDomain, _SUPackageReferenceAdditionalInfoDistributionPackageURLStringKey, 
+                       _SUManagedDoItLaterProductMarketingVersion, _SUManagedDoItLaterUserNotificationTimes, 
+                       _SUManagedLastPostedUpdateLaterNotificationDate, _SUManagedLastPostedUpdateLaterNotificationTimeInterval, 
+                       _SUMaximumManagedDoItLaterDeferralCount, _SUMessageTracerUniqueID, 
+                       _SUNetErrorDomain, _SUPackageReferenceAdditionalInfoDistributionPackageURLStringKey, 
                        _SUPackageReferenceAdditionalInfoIntegrityDataDigestKey, _SUPackageReferenceAdditionalInfoIntegrityDataSizeKey, 
                        _SUPackageReferenceAdditionalInfoIntegrityDataURLKey, _SUPackageReferenceAdditionalInfoToCDigestChecksumKey, 
                        _SUPostLogoutUpdateErrorCodeKey, _SUPostLogoutUpdateErrorDomainKey, 
@@ -128,11 +129,12 @@ exports:
                        _SUStatisticsRTCPayloadKeyAppBundleIDs, _SUStatisticsRTCPayloadKeyAppNames, 
                        _SUStatisticsRTCPayloadKeyCatalogURL, _SUStatisticsRTCPayloadKeyCategory, 
                        _SUStatisticsRTCPayloadKeyCheckForUpdatesIsChecked, _SUStatisticsRTCPayloadKeyCheckForUpdatesIsManaged, 
-                       _SUStatisticsRTCPayloadKeyCurrentBuildVersion, _SUStatisticsRTCPayloadKeyCustomCatalogURLIsManaged, 
-                       _SUStatisticsRTCPayloadKeyCustomCatalogURLIsSet, _SUStatisticsRTCPayloadKeyDownloadUpdatesIsChecked, 
-                       _SUStatisticsRTCPayloadKeyDownloadUpdatesIsManaged, _SUStatisticsRTCPayloadKeyFailureCode, 
-                       _SUStatisticsRTCPayloadKeyFailureDescription, _SUStatisticsRTCPayloadKeyInstallAppUpdatesIsChecked, 
-                       _SUStatisticsRTCPayloadKeyInstallAppUpdatesIsManaged, _SUStatisticsRTCPayloadKeyInstallConfigAndSecurityIsChecked, 
+                       _SUStatisticsRTCPayloadKeyClientType, _SUStatisticsRTCPayloadKeyCurrentBuildVersion, 
+                       _SUStatisticsRTCPayloadKeyCustomCatalogURLIsManaged, _SUStatisticsRTCPayloadKeyCustomCatalogURLIsSet, 
+                       _SUStatisticsRTCPayloadKeyDownloadUpdatesIsChecked, _SUStatisticsRTCPayloadKeyDownloadUpdatesIsManaged, 
+                       _SUStatisticsRTCPayloadKeyFailureCode, _SUStatisticsRTCPayloadKeyFailureDescription, 
+                       _SUStatisticsRTCPayloadKeyInstallAppUpdatesIsChecked, _SUStatisticsRTCPayloadKeyInstallAppUpdatesIsManaged, 
+                       _SUStatisticsRTCPayloadKeyInstallConfigAndSecurityIsChecked, 
                        _SUStatisticsRTCPayloadKeyInstallConfigAndSecurityIsManaged, 
                        _SUStatisticsRTCPayloadKeyInstallMacUpdatesIsChecked, _SUStatisticsRTCPayloadKeyInstallMacUpdatesIsManaged, 
                        _SUStatisticsRTCPayloadKeyNotificationResponseDetails, _SUStatisticsRTCPayloadKeyNotificationResponseInstallInAnHour, 

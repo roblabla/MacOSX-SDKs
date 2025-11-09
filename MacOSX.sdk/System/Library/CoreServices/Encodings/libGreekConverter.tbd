@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9B3690F8-2220-38D9-82AA-0928C835A125
+    value:           32A819F9-DB44-348D-AFA8-26262457B08A
   - target:          x86_64-maccatalyst
-    value:           9B3690F8-2220-38D9-82AA-0928C835A125
+    value:           32A819F9-DB44-348D-AFA8-26262457B08A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A021195-771F-375E-B3A2-AD7018CC8F9B
+    value:           0E74FFC1-0D02-3334-B5B7-C4C9A0EFCD6C
   - target:          arm64e-maccatalyst
-    value:           7A021195-771F-375E-B3A2-AD7018CC8F9B
+    value:           0E74FFC1-0D02-3334-B5B7-C4C9A0EFCD6C
 install-name:    '/System/Library/CoreServices/Encodings/libGreekConverter.dylib'
 current-version: 100
 exports:

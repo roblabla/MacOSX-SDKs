@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6647B5F0-3991-39F7-A772-6D04EA1DBD82
+    value:           27B72408-CE98-3FE3-BC6A-7BE567735D24
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5ABC724-EF90-3BF4-A547-4E81CFBB6AE1
+    value:           A06FF886-1C49-3631-B63B-AAA1995FF52A
 install-name:    '/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 0
 exports:

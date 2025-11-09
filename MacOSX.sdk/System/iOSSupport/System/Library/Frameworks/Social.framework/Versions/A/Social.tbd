@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           167D8C9F-4827-34F7-907C-3AA328D8D62F
+    value:           CCBEC276-F04F-321B-BE35-73191D31C059
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           5FF38526-D288-3EB4-B46F-ED7FDD21B657
+    value:           B515B218-D9A0-319E-BD5D-5237327C672A
 install-name:    '/System/iOSSupport/System/Library/Frameworks/Social.framework/Versions/A/Social'
 current-version: 87
 exports:

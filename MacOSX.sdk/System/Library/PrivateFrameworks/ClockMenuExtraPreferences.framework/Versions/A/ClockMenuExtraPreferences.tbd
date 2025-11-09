@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           584BE429-EEAD-3E59-BBE6-B712B75DA5EC
+    value:           2CCDA720-9DB6-35F0-BB18-DB649CFC8EB4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35AAF996-4BB1-384A-8940-0DD5CD7253B4
+    value:           51F5A310-CB24-33C9-A500-F082572C58E2
 install-name:    '/System/Library/PrivateFrameworks/ClockMenuExtraPreferences.framework/Versions/A/ClockMenuExtraPreferences'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

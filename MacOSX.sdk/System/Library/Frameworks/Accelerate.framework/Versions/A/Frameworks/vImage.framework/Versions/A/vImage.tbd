@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E379634C-7EB2-3252-AD10-373ED17A43E1
+    value:           8964F0E5-CE41-3C47-8C07-D43FF64EFD9F
   - target:          x86_64-maccatalyst
-    value:           E379634C-7EB2-3252-AD10-373ED17A43E1
+    value:           8964F0E5-CE41-3C47-8C07-D43FF64EFD9F
   - target:          x86_64h-macos
-    value:           E9FA2322-57A0-325E-95D2-53004A38B478
+    value:           5BD9211B-787F-32F2-91B4-6FE29F830FF1
   - target:          x86_64h-maccatalyst
-    value:           E9FA2322-57A0-325E-95D2-53004A38B478
+    value:           5BD9211B-787F-32F2-91B4-6FE29F830FF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE8A6440-1407-39A5-A6D0-98A95A0727AC
+    value:           72494E17-CD53-36FC-BA80-374BBCE2ED4F
   - target:          arm64e-maccatalyst
-    value:           EE8A6440-1407-39A5-A6D0-98A95A0727AC
+    value:           72494E17-CD53-36FC-BA80-374BBCE2ED4F
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage'
-current-version: 555
+current-version: 555.3
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]

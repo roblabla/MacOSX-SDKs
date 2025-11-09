@@ -213,13 +213,18 @@ CF_INLINE MIDIMessage_64 MIDI1UPSysEx(UInt8 group, UInt8 status, UInt8 bytesUsed
     return sysExOut;
 }
 
+static const UInt8 kMIDI1UPMaxSysexSize = 6;
 CF_INLINE MIDIMessage_64 MIDI1UPSysExArray(UInt8 group, UInt8 status, const Byte *begin, const Byte *end)
 {
-    Byte arrayCopy[6] = {};
-    int numberOfBytes = end <= begin ? 0 : end - begin;
-    for (int i = 0; i < numberOfBytes; ++i)
-        arrayCopy[i] = *(begin + i);
-    return MIDI1UPSysEx(group, status, numberOfBytes, arrayCopy[0], arrayCopy[1], arrayCopy[2], arrayCopy[3], arrayCopy[4], arrayCopy[5]);
+	int numberOfBytes = end <= begin ? 0 : end - begin;
+	if (numberOfBytes > kMIDI1UPMaxSysexSize) numberOfBytes = kMIDI1UPMaxSysexSize; // prevent overflow
+    return MIDI1UPSysEx(group, status, numberOfBytes,
+						numberOfBytes > 0 ? *begin : 0,
+						numberOfBytes > 1 ? *(begin + 1) : 0,
+						numberOfBytes > 2 ? *(begin + 2) : 0,
+						numberOfBytes > 3 ? *(begin + 3) : 0,
+						numberOfBytes > 4 ? *(begin + 4) : 0,
+						numberOfBytes > 5 ? *(begin + 5) : 0);
 }
 
 //==================================================================================================
@@ -232,7 +237,7 @@ CF_INLINE MIDIMessage_64 MIDI1UPSysExArray(UInt8 group, UInt8 status, const Byte
 	Word0: [aaaa][bbbb][cccc][dddd][eeeeeeeeeeeeeeee]
 	Word1: [nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn]
 	
-	a: Message Type (type 1 for all voice messages)
+	a: Message Type (type 4 for all voice messages)
 	b: Channel group number
 	c: MIDI status
 	d: MIDI channel

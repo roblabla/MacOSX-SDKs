@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
 // swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -enforce-exclusivity=unchecked -enable-experimental-concurrency -module-name _Concurrency -disable-availability-checking
+// swift-module-flags-ignorable: -user-module-version 5.6.0.323.32
 import Swift
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol Actor : AnyObject, Swift.Sendable {
@@ -64,8 +65,11 @@ public func _asyncLet_finish(_ asyncLet: Builtin.RawPointer, _ resultBuffer: Bui
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public struct CheckedContinuation<T, E> where E : Swift.Error {
   public init(continuation: _Concurrency.UnsafeContinuation<T, E>, function: Swift.String = #function)
-  public func resume(returning x: __owned T)
-  public func resume(throwing x: __owned E)
+  public func resume(returning value: __owned T)
+  public func resume(throwing error: __owned E)
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension _Concurrency.CheckedContinuation : Swift.Sendable where T : Swift.Sendable {
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.CheckedContinuation {
@@ -118,7 +122,7 @@ public protocol SerialExecutor : _Concurrency.Executor {
   func asUnownedSerialExecutor() -> _Concurrency.UnownedSerialExecutor
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@frozen public struct UnownedSerialExecutor {
+@frozen public struct UnownedSerialExecutor : Swift.Sendable {
   
   #if compiler(>=5.3) && $BuiltinExecutor
   @usableFromInline
@@ -161,7 +165,7 @@ public protocol SerialExecutor : _Concurrency.Executor {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func compactMap<ElementOfResult>(_ transform: @escaping (Self.Element) async -> ElementOfResult?) -> _Concurrency.AsyncCompactMapSequence<Self, ElementOfResult> {
+  @inlinable public __consuming func compactMap<ElementOfResult>(_ transform: @escaping (Self.Element) async -> ElementOfResult?) -> _Concurrency.AsyncCompactMapSequence<Self, ElementOfResult> {
     return AsyncCompactMapSequence(self, transform: transform)
   }
   #endif
@@ -220,7 +224,7 @@ extension _Concurrency.AsyncCompactMapSequence : _Concurrency.AsyncSequence {
     #endif
 
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncCompactMapSequence<Base, ElementOfResult>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncCompactMapSequence<Base, ElementOfResult>.Iterator {
     return Iterator(base.makeAsyncIterator(), transform: transform)
   }
 }
@@ -230,7 +234,7 @@ extension _Concurrency.AsyncCompactMapSequence : _Concurrency.AsyncSequence {
 #if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncSequence {
-  @inlinable __consuming public func dropFirst(_ count: Swift.Int = 1) -> _Concurrency.AsyncDropFirstSequence<Self> {
+  @inlinable public __consuming func dropFirst(_ count: Swift.Int = 1) -> _Concurrency.AsyncDropFirstSequence<Self> {
     precondition(count >= 0, 
       "Can't drop a negative number of elements from an async sequence")
     return AsyncDropFirstSequence(self, dropping: count)
@@ -282,7 +286,7 @@ extension _Concurrency.AsyncDropFirstSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncDropFirstSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncDropFirstSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), count: count)
   }
 }
@@ -292,7 +296,7 @@ extension _Concurrency.AsyncDropFirstSequence : _Concurrency.AsyncSequence {
 #if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncDropFirstSequence {
-  @inlinable __consuming public func dropFirst(_ count: Swift.Int = 1) -> _Concurrency.AsyncDropFirstSequence<Base> {
+  @inlinable public __consuming func dropFirst(_ count: Swift.Int = 1) -> _Concurrency.AsyncDropFirstSequence<Base> {
     // If this is already a AsyncDropFirstSequence, we can just sum the current 
     // drop count and additional drop count.
     precondition(count >= 0, 
@@ -308,7 +312,7 @@ extension _Concurrency.AsyncDropFirstSequence {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func drop(while predicate: @escaping (Self.Element) async -> Swift.Bool) -> _Concurrency.AsyncDropWhileSequence<Self> {
+  @inlinable public __consuming func drop(while predicate: @escaping (Self.Element) async -> Swift.Bool) -> _Concurrency.AsyncDropWhileSequence<Self> {
     AsyncDropWhileSequence(self, predicate: predicate)
   }
   #endif
@@ -368,7 +372,7 @@ extension _Concurrency.AsyncDropWhileSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncDropWhileSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncDropWhileSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), predicate: predicate)
   }
 }
@@ -380,7 +384,7 @@ extension _Concurrency.AsyncDropWhileSequence : _Concurrency.AsyncSequence {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func filter(_ isIncluded: @escaping (Self.Element) async -> Swift.Bool) -> _Concurrency.AsyncFilterSequence<Self> {
+  @inlinable public __consuming func filter(_ isIncluded: @escaping (Self.Element) async -> Swift.Bool) -> _Concurrency.AsyncFilterSequence<Self> {
     return AsyncFilterSequence(self, isIncluded: isIncluded)
   }
   #endif
@@ -438,7 +442,7 @@ extension _Concurrency.AsyncFilterSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncFilterSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncFilterSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), isIncluded: isIncluded)
   }
 }
@@ -450,7 +454,7 @@ extension _Concurrency.AsyncFilterSequence : _Concurrency.AsyncSequence {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func flatMap<SegmentOfResult>(_ transform: @escaping (Self.Element) async -> SegmentOfResult) -> _Concurrency.AsyncFlatMapSequence<Self, SegmentOfResult> where SegmentOfResult : _Concurrency.AsyncSequence {
+  @inlinable public __consuming func flatMap<SegmentOfResult>(_ transform: @escaping (Self.Element) async -> SegmentOfResult) -> _Concurrency.AsyncFlatMapSequence<Self, SegmentOfResult> where SegmentOfResult : _Concurrency.AsyncSequence {
     return AsyncFlatMapSequence(self, transform: transform)
   }
   #endif
@@ -539,7 +543,7 @@ extension _Concurrency.AsyncFlatMapSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = SegmentOfResult.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncFlatMapSequence<Base, SegmentOfResult>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncFlatMapSequence<Base, SegmentOfResult>.Iterator {
     return Iterator(base.makeAsyncIterator(), transform: transform)
   }
 }
@@ -564,7 +568,7 @@ extension _Concurrency.AsyncFlatMapSequence : _Concurrency.AsyncSequence {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func map<Transformed>(_ transform: @escaping (Self.Element) async -> Transformed) -> _Concurrency.AsyncMapSequence<Self, Transformed> {
+  @inlinable public __consuming func map<Transformed>(_ transform: @escaping (Self.Element) async -> Transformed) -> _Concurrency.AsyncMapSequence<Self, Transformed> {
     return AsyncMapSequence(self, transform: transform)
   }
   #endif
@@ -618,7 +622,7 @@ extension _Concurrency.AsyncMapSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = Transformed
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncMapSequence<Base, Transformed>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncMapSequence<Base, Transformed>.Iterator {
     return Iterator(base.makeAsyncIterator(), transform: transform)
   }
 }
@@ -628,7 +632,7 @@ extension _Concurrency.AsyncMapSequence : _Concurrency.AsyncSequence {
 #if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncSequence {
-  @inlinable __consuming public func prefix(_ count: Swift.Int) -> _Concurrency.AsyncPrefixSequence<Self> {
+  @inlinable public __consuming func prefix(_ count: Swift.Int) -> _Concurrency.AsyncPrefixSequence<Self> {
     precondition(count >= 0,
       "Can't prefix a negative number of elements from an async sequence")
     return AsyncPrefixSequence(self, count: count)
@@ -676,7 +680,7 @@ extension _Concurrency.AsyncPrefixSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncPrefixSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncPrefixSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), count: count)
   }
 }
@@ -688,7 +692,7 @@ extension _Concurrency.AsyncPrefixSequence : _Concurrency.AsyncSequence {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func prefix(while predicate: @escaping (Self.Element) async -> Swift.Bool) rethrows -> _Concurrency.AsyncPrefixWhileSequence<Self> {
+  @inlinable public __consuming func prefix(while predicate: @escaping (Self.Element) async -> Swift.Bool) rethrows -> _Concurrency.AsyncPrefixWhileSequence<Self> {
     return AsyncPrefixWhileSequence(self, predicate: predicate)
   }
   #endif
@@ -748,7 +752,7 @@ extension _Concurrency.AsyncPrefixWhileSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncPrefixWhileSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncPrefixWhileSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), predicate: predicate)
   }
 }
@@ -945,7 +949,7 @@ extension _Concurrency.AsyncSequence where Self.Element : Swift.Comparable {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func compactMap<ElementOfResult>(_ transform: @escaping (Self.Element) async throws -> ElementOfResult?) -> _Concurrency.AsyncThrowingCompactMapSequence<Self, ElementOfResult> {
+  @inlinable public __consuming func compactMap<ElementOfResult>(_ transform: @escaping (Self.Element) async throws -> ElementOfResult?) -> _Concurrency.AsyncThrowingCompactMapSequence<Self, ElementOfResult> {
     return AsyncThrowingCompactMapSequence(self, transform: transform)
   }
   #endif
@@ -1012,7 +1016,7 @@ extension _Concurrency.AsyncThrowingCompactMapSequence : _Concurrency.AsyncSeque
     #endif
 
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncThrowingCompactMapSequence<Base, ElementOfResult>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncThrowingCompactMapSequence<Base, ElementOfResult>.Iterator {
     return Iterator(base.makeAsyncIterator(), transform: transform)
   }
 }
@@ -1024,7 +1028,7 @@ extension _Concurrency.AsyncThrowingCompactMapSequence : _Concurrency.AsyncSeque
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func drop(while predicate: @escaping (Self.Element) async throws -> Swift.Bool) -> _Concurrency.AsyncThrowingDropWhileSequence<Self> {
+  @inlinable public __consuming func drop(while predicate: @escaping (Self.Element) async throws -> Swift.Bool) -> _Concurrency.AsyncThrowingDropWhileSequence<Self> {
     AsyncThrowingDropWhileSequence(self, predicate: predicate)
   }
   #endif
@@ -1096,7 +1100,7 @@ extension _Concurrency.AsyncThrowingDropWhileSequence : _Concurrency.AsyncSequen
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncThrowingDropWhileSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncThrowingDropWhileSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), predicate: predicate)
   }
 }
@@ -1108,7 +1112,7 @@ extension _Concurrency.AsyncThrowingDropWhileSequence : _Concurrency.AsyncSequen
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func filter(_ isIncluded: @escaping (Self.Element) async throws -> Swift.Bool) -> _Concurrency.AsyncThrowingFilterSequence<Self> {
+  @inlinable public __consuming func filter(_ isIncluded: @escaping (Self.Element) async throws -> Swift.Bool) -> _Concurrency.AsyncThrowingFilterSequence<Self> {
     return AsyncThrowingFilterSequence(self, isIncluded: isIncluded)
   }
   #endif
@@ -1175,7 +1179,7 @@ extension _Concurrency.AsyncThrowingFilterSequence : _Concurrency.AsyncSequence 
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncThrowingFilterSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncThrowingFilterSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), isIncluded: isIncluded)
   }
 }
@@ -1187,7 +1191,7 @@ extension _Concurrency.AsyncThrowingFilterSequence : _Concurrency.AsyncSequence 
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func flatMap<SegmentOfResult>(_ transform: @escaping (Self.Element) async throws -> SegmentOfResult) -> _Concurrency.AsyncThrowingFlatMapSequence<Self, SegmentOfResult> where SegmentOfResult : _Concurrency.AsyncSequence {
+  @inlinable public __consuming func flatMap<SegmentOfResult>(_ transform: @escaping (Self.Element) async throws -> SegmentOfResult) -> _Concurrency.AsyncThrowingFlatMapSequence<Self, SegmentOfResult> where SegmentOfResult : _Concurrency.AsyncSequence {
     return AsyncThrowingFlatMapSequence(self, transform: transform)
   }
   #endif
@@ -1277,7 +1281,7 @@ extension _Concurrency.AsyncThrowingFlatMapSequence : _Concurrency.AsyncSequence
 
     public typealias Element = SegmentOfResult.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncThrowingFlatMapSequence<Base, SegmentOfResult>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncThrowingFlatMapSequence<Base, SegmentOfResult>.Iterator {
     return Iterator(base.makeAsyncIterator(), transform: transform)
   }
 }
@@ -1289,7 +1293,7 @@ extension _Concurrency.AsyncThrowingFlatMapSequence : _Concurrency.AsyncSequence
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func map<Transformed>(_ transform: @escaping (Self.Element) async throws -> Transformed) -> _Concurrency.AsyncThrowingMapSequence<Self, Transformed> {
+  @inlinable public __consuming func map<Transformed>(_ transform: @escaping (Self.Element) async throws -> Transformed) -> _Concurrency.AsyncThrowingMapSequence<Self, Transformed> {
     return AsyncThrowingMapSequence(self, transform: transform)
   }
   #endif
@@ -1350,7 +1354,7 @@ extension _Concurrency.AsyncThrowingMapSequence : _Concurrency.AsyncSequence {
 
     public typealias Element = Transformed
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncThrowingMapSequence<Base, Transformed>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncThrowingMapSequence<Base, Transformed>.Iterator {
     return Iterator(base.makeAsyncIterator(), transform: transform)
   }
 }
@@ -1362,7 +1366,7 @@ extension _Concurrency.AsyncThrowingMapSequence : _Concurrency.AsyncSequence {
 extension _Concurrency.AsyncSequence {
   
   #if compiler(>=5.3) && $AsyncAwait
-  @inlinable __consuming public func prefix(while predicate: @escaping (Self.Element) async throws -> Swift.Bool) rethrows -> _Concurrency.AsyncThrowingPrefixWhileSequence<Self> {
+  @inlinable public __consuming func prefix(while predicate: @escaping (Self.Element) async throws -> Swift.Bool) rethrows -> _Concurrency.AsyncThrowingPrefixWhileSequence<Self> {
     return AsyncThrowingPrefixWhileSequence(self, predicate: predicate)
   }
   #endif
@@ -1427,7 +1431,7 @@ extension _Concurrency.AsyncThrowingPrefixWhileSequence : _Concurrency.AsyncSequ
 
     public typealias Element = Base.Element
   }
-  @inlinable __consuming public func makeAsyncIterator() -> _Concurrency.AsyncThrowingPrefixWhileSequence<Base>.Iterator {
+  @inlinable public __consuming func makeAsyncIterator() -> _Concurrency.AsyncThrowingPrefixWhileSequence<Base>.Iterator {
     return Iterator(base.makeAsyncIterator(), predicate: predicate)
   }
 }
@@ -1482,15 +1486,13 @@ extension _Concurrency.GlobalActor {
 extension _Concurrency.MainActor {
   
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
-  @_silgen_name("$sScM3run10resultType4bodyxxm_xyYbKScMYcXEtYaKlFZ")
   @usableFromInline
-  internal static func _historicalRunForABI<T>(resultType: T.Type = T.self, body: @_Concurrency.MainActor @Sendable () throws -> T) async rethrows -> T
+  internal static func run<T>(resultType: T.Type = T.self, body: @_Concurrency.MainActor @Sendable () throws -> T) async rethrows -> T
   #endif
 
   
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
-  @_silgen_name("$sScM12runAndReturn10resultType4bodyxxm_xyYbKScMYcXEtYaKlFZ")
-  @_alwaysEmitIntoClient public static func run<T>(resultType: T.Type = T.self, body: @_Concurrency.MainActor @Sendable () throws -> T) async rethrows -> T {
+  @_alwaysEmitIntoClient public static func run<T>(resultType: T.Type = T.self, body: @_Concurrency.MainActor @Sendable () throws -> T) async rethrows -> T where T : Swift.Sendable {
     return try await body()
   }
   #endif
@@ -1503,7 +1505,7 @@ extension _Concurrency.MainActor {
 @usableFromInline
 internal func _swiftJobRun(_ job: _Concurrency.UnownedJob, _ executor: _Concurrency.UnownedSerialExecutor)
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@frozen public struct UnownedJob {
+@frozen public struct UnownedJob : Swift.Sendable {
   
   #if compiler(>=5.3) && $BuiltinJob
   private var context: Builtin.Job
@@ -1541,6 +1543,9 @@ internal func _swiftJobRun(_ job: _Concurrency.UnownedJob, _ executor: _Concurre
     fatalError("Swift compiler is incompatible with this SDK version")
 #endif
   }
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension _Concurrency.UnsafeContinuation : Swift.Sendable where T : Swift.Sendable {
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.UnsafeContinuation {
@@ -1637,7 +1642,7 @@ extension _Concurrency.TaskPriority {
 
 #if compiler(>=5.3) && $AsyncAwait && $Sendable
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_alwaysEmitIntoClient public func withTaskCancellationHandler<T>(handler: @Sendable () -> (), operation: () async throws -> T) async rethrows -> T {
+@_alwaysEmitIntoClient public func withTaskCancellationHandler<T>(handler: @Sendable () -> Swift.Void, operation: () async throws -> T) async rethrows -> T {
   try await withTaskCancellationHandler(operation: operation, onCancel: handler)
 }
 #endif
@@ -1647,7 +1652,7 @@ extension _Concurrency.Task where Success == Swift.Never, Failure == Swift.Never
   
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   @available(*, deprecated, message: "`Task.withCancellationHandler` has been replaced by `withTaskCancellationHandler` and will be removed shortly.")
-  @_alwaysEmitIntoClient public static func withCancellationHandler<T>(handler: @Sendable () -> (), operation: () async throws -> T) async rethrows -> T {
+  @_alwaysEmitIntoClient public static func withCancellationHandler<T>(handler: @Sendable () -> Swift.Void, operation: () async throws -> T) async rethrows -> T {
     try await withTaskCancellationHandler(handler: handler, operation: operation)
   }
   #endif
@@ -1670,7 +1675,7 @@ extension _Concurrency.Task where Failure == Swift.Error {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @discardableResult
 @available(*, deprecated, message: "`detach` was replaced by `Task.detached` and will be removed shortly.")
-@_alwaysEmitIntoClient public func detach<T>(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async -> T) -> _Concurrency.Task<T, Swift.Never> {
+@_alwaysEmitIntoClient public func detach<T>(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async -> T) -> _Concurrency.Task<T, Swift.Never> where T : Swift.Sendable {
   Task.detached(priority: priority, operation: operation)
 }
 #endif
@@ -1680,7 +1685,7 @@ extension _Concurrency.Task where Failure == Swift.Error {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @discardableResult
 @available(*, deprecated, message: "`detach` was replaced by `Task.detached` and will be removed shortly.")
-@_alwaysEmitIntoClient public func detach<T>(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async throws -> T) -> _Concurrency.Task<T, Swift.Error> {
+@_alwaysEmitIntoClient public func detach<T>(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async throws -> T) -> _Concurrency.Task<T, Swift.Error> where T : Swift.Sendable {
   Task.detached(priority: priority, operation: operation)
 }
 #endif
@@ -1690,7 +1695,7 @@ extension _Concurrency.Task where Failure == Swift.Error {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @discardableResult
 @available(*, deprecated, message: "`asyncDetached` was replaced by `Task.detached` and will be removed shortly.")
-@_alwaysEmitIntoClient public func asyncDetached<T>(priority: _Concurrency.TaskPriority? = nil, @_implicitSelfCapture operation: __owned @escaping @Sendable () async -> T) -> _Concurrency.Task<T, Swift.Never> {
+@_alwaysEmitIntoClient public func asyncDetached<T>(priority: _Concurrency.TaskPriority? = nil, @_implicitSelfCapture operation: __owned @escaping @Sendable () async -> T) -> _Concurrency.Task<T, Swift.Never> where T : Swift.Sendable {
   return Task.detached(priority: priority, operation: operation)
 }
 #endif
@@ -1700,7 +1705,7 @@ extension _Concurrency.Task where Failure == Swift.Error {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @discardableResult
 @available(*, deprecated, message: "`asyncDetached` was replaced by `Task.detached` and will be removed shortly.")
-@_alwaysEmitIntoClient public func asyncDetached<T>(priority: _Concurrency.TaskPriority? = nil, @_implicitSelfCapture operation: __owned @escaping @Sendable () async throws -> T) -> _Concurrency.Task<T, Swift.Error> {
+@_alwaysEmitIntoClient public func asyncDetached<T>(priority: _Concurrency.TaskPriority? = nil, @_implicitSelfCapture operation: __owned @escaping @Sendable () async throws -> T) -> _Concurrency.Task<T, Swift.Error> where T : Swift.Sendable {
   return Task.detached(priority: priority, operation: operation)
 }
 #endif
@@ -1710,7 +1715,7 @@ extension _Concurrency.Task where Failure == Swift.Error {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @available(*, deprecated, message: "`async` was replaced by `Task.init` and will be removed shortly.")
 @discardableResult
-@_alwaysEmitIntoClient public func async<T>(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: __owned @escaping @Sendable () async -> T) -> _Concurrency.Task<T, Swift.Never> {
+@_alwaysEmitIntoClient public func async<T>(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: __owned @escaping @Sendable () async -> T) -> _Concurrency.Task<T, Swift.Never> where T : Swift.Sendable {
   .init(priority: priority, operation: operation)
 }
 #endif
@@ -1720,7 +1725,7 @@ extension _Concurrency.Task where Failure == Swift.Error {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @available(*, deprecated, message: "`async` was replaced by `Task.init` and will be removed shortly.")
 @discardableResult
-@_alwaysEmitIntoClient public func async<T>(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: __owned @escaping @Sendable () async throws -> T) -> _Concurrency.Task<T, Swift.Error> {
+@_alwaysEmitIntoClient public func async<T>(priority: _Concurrency.TaskPriority? = nil, @_inheritActorContext @_implicitSelfCapture operation: __owned @escaping @Sendable () async throws -> T) -> _Concurrency.Task<T, Swift.Error> where T : Swift.Sendable {
   .init(priority: priority, operation: operation)
 }
 #endif
@@ -1728,11 +1733,11 @@ extension _Concurrency.Task where Failure == Swift.Error {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.Task where Success == Swift.Never, Failure == Swift.Never {
   @available(*, deprecated, message: "`Task.Group` was replaced by `ThrowingTaskGroup` and `TaskGroup` and will be removed shortly.")
-  public typealias Group<TaskResult> = _Concurrency.ThrowingTaskGroup<TaskResult, Swift.Error>
+  public typealias Group<TaskResult> = _Concurrency.ThrowingTaskGroup<TaskResult, Swift.Error> where TaskResult : Swift.Sendable
   
   #if compiler(>=5.3) && $AsyncAwait
   @available(*, deprecated, message: "`Task.withGroup` was replaced by `withThrowingTaskGroup` and `withTaskGroup` and will be removed shortly.")
-  @_alwaysEmitIntoClient public static func withGroup<TaskResult, BodyResult>(resultType: TaskResult.Type, returning returnType: BodyResult.Type = BodyResult.self, body: (inout _Concurrency.Task<Success, Failure>.Group<TaskResult>) async throws -> BodyResult) async rethrows -> BodyResult {
+  @_alwaysEmitIntoClient public static func withGroup<TaskResult, BodyResult>(resultType: TaskResult.Type, returning returnType: BodyResult.Type = BodyResult.self, body: (inout _Concurrency.Task<Success, Failure>.Group<TaskResult>) async throws -> BodyResult) async rethrows -> BodyResult where TaskResult : Swift.Sendable {
     try await withThrowingTaskGroup(of: resultType) { group in
       try await body(&group)
     }
@@ -1861,13 +1866,13 @@ extension _Concurrency.ThrowingTaskGroup {
 
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@available(*, deprecated, message: "please use UnsafeContination<..., Error>")
+@available(*, deprecated, message: "please use UnsafeContinuation<..., Error>")
 public typealias UnsafeThrowingContinuation<T> = _Concurrency.UnsafeContinuation<T, Swift.Error>
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @available(*, deprecated, renamed: "UnownedJob")
 public typealias PartialAsyncTask = _Concurrency.UnownedJob
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@frozen public struct Task<Success, Failure> : Swift.Sendable where Failure : Swift.Error {
+@frozen public struct Task<Success, Failure> : Swift.Sendable where Success : Swift.Sendable, Failure : Swift.Error {
   @usableFromInline
   internal let _task: Builtin.NativeObject
   @_alwaysEmitIntoClient internal init(_ task: Builtin.NativeObject) {
@@ -2092,6 +2097,10 @@ public struct UnsafeCurrentTask {
   public func cancel()
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(*, unavailable)
+extension _Concurrency.UnsafeCurrentTask : Swift.Sendable {
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.UnsafeCurrentTask : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2116,6 +2125,18 @@ internal func _enqueueJobGlobal(_ task: Builtin.Job)
 @_silgen_name("swift_task_enqueueGlobalWithDelay")
 @usableFromInline
 internal func _enqueueJobGlobalWithDelay(_ delay: Swift.UInt64, _ task: Builtin.Job)
+#endif
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@usableFromInline
+@_silgen_name("swift_task_asyncMainDrainQueue")
+internal func _asyncMainDrainQueue() -> Swift.Never
+
+#if compiler(>=5.3) && $BuiltinExecutor
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@usableFromInline
+@_silgen_name("swift_task_getMainExecutor")
+internal func _getMainExecutor() -> Builtin.Executor
 #endif
 
 
@@ -2205,7 +2226,8 @@ public struct CancellationError : Swift.Error {
 
 #if compiler(>=5.3) && $AsyncAwait
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@inlinable public func withTaskGroup<ChildTaskResult, GroupResult>(of childTaskResultType: ChildTaskResult.Type, returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.TaskGroup<ChildTaskResult>) async -> GroupResult) async -> GroupResult {
+@_silgen_name("$ss13withTaskGroup2of9returning4bodyq_xm_q_mq_ScGyxGzYaXEtYar0_lF")
+@inlinable public func withTaskGroup<ChildTaskResult, GroupResult>(of childTaskResultType: ChildTaskResult.Type, returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.TaskGroup<ChildTaskResult>) async -> GroupResult) async -> GroupResult where ChildTaskResult : Swift.Sendable {
   #if compiler(>=5.5) && $BuiltinTaskGroupWithArgument
 
   let _group = Builtin.createTaskGroup(ChildTaskResult.self)
@@ -2228,7 +2250,8 @@ public struct CancellationError : Swift.Error {
 
 #if compiler(>=5.3) && $AsyncAwait
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@inlinable public func withThrowingTaskGroup<ChildTaskResult, GroupResult>(of childTaskResultType: ChildTaskResult.Type, returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.ThrowingTaskGroup<ChildTaskResult, Swift.Error>) async throws -> GroupResult) async rethrows -> GroupResult {
+@_silgen_name("$ss21withThrowingTaskGroup2of9returning4bodyq_xm_q_mq_Scgyxs5Error_pGzYaKXEtYaKr0_lF")
+@inlinable public func withThrowingTaskGroup<ChildTaskResult, GroupResult>(of childTaskResultType: ChildTaskResult.Type, returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.ThrowingTaskGroup<ChildTaskResult, Swift.Error>) async throws -> GroupResult) async rethrows -> GroupResult where ChildTaskResult : Swift.Sendable {
   #if compiler(>=5.5) && $BuiltinTaskGroupWithArgument
 
   let _group = Builtin.createTaskGroup(ChildTaskResult.self)
@@ -2258,7 +2281,7 @@ public struct CancellationError : Swift.Error {
 #endif
 
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@frozen public struct TaskGroup<ChildTaskResult> {
+@frozen public struct TaskGroup<ChildTaskResult> where ChildTaskResult : Swift.Sendable {
   @usableFromInline
   internal let _group: Builtin.RawPointer
   @inlinable internal init(group: Builtin.RawPointer) {
@@ -2336,7 +2359,11 @@ public struct CancellationError : Swift.Error {
   }
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@frozen public struct ThrowingTaskGroup<ChildTaskResult, Failure> where Failure : Swift.Error {
+@available(*, unavailable)
+extension _Concurrency.TaskGroup : Swift.Sendable {
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@frozen public struct ThrowingTaskGroup<ChildTaskResult, Failure> where ChildTaskResult : Swift.Sendable, Failure : Swift.Error {
   @usableFromInline
   internal let _group: Builtin.RawPointer
   @inlinable internal init(group: Builtin.RawPointer) {
@@ -2433,6 +2460,10 @@ public struct CancellationError : Swift.Error {
     get
   }
 }
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(*, unavailable)
+extension _Concurrency.ThrowingTaskGroup : Swift.Sendable {
+}
 
 #if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -2486,7 +2517,7 @@ extension _Concurrency.ThrowingTaskGroup : _Concurrency.AsyncSequence {
 @usableFromInline
 internal func _taskGroupAddPendingTask(group: Builtin.RawPointer, unconditionally: Swift.Bool) -> Swift.Bool
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@propertyWrapper final public class TaskLocal<Value> : Swift.UnsafeSendable, Swift.CustomStringConvertible {
+@propertyWrapper final public class TaskLocal<Value> : Swift.Sendable, Swift.CustomStringConvertible where Value : Swift.Sendable {
   public init(wrappedValue defaultValue: Value)
   final public func get() -> Value
   
@@ -2502,6 +2533,7 @@ internal func _taskGroupAddPendingTask(group: Builtin.RawPointer, unconditionall
     @available(*, unavailable, message: "use '$myTaskLocal.withValue(_:do:)' instead")
     set
   }
+  @available(*, unavailable, message: "property wrappers cannot be instance members")
   public static subscript(_enclosingInstance object: Swift.Never, wrapped wrappedKeyPath: Swift.ReferenceWritableKeyPath<Swift.Never, Value>, storage storageKeyPath: Swift.ReferenceWritableKeyPath<Swift.Never, _Concurrency.TaskLocal<Value>>) -> Value {
     get
   }
@@ -2657,53 +2689,8 @@ extension _Concurrency.AsyncThrowingStream.Continuation {
   @discardableResult
   public func yield() -> _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.YieldResult where Element == Swift.Void
 }
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@available(*, deprecated, message: "`YieldingContinuation` was replaced by `AsyncStream` and will be removed shortly.")
-public struct YieldingContinuation<Element, Failure> : Swift.Sendable where Failure : Swift.Error {
-  public init()
-  public init(yielding: Element.Type, throwing: Failure.Type)
-  public func yield(_ value: __owned Element) -> Swift.Bool
-  public func yield(throwing error: __owned Failure) -> Swift.Bool
+@_alwaysEmitIntoClient @_transparent internal func _internalInvariant(_ condition: @autoclosure () -> Swift.Bool, _ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #file, line: Swift.UInt = #line) {
 }
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.YieldingContinuation where Failure == Swift.Error {
-  
-  #if compiler(>=5.3) && $AsyncAwait
-  @available(*, deprecated, message: "`YieldingContinuation` was replaced by `AsyncStream` and will be removed shortly.")
-  public func next() async throws -> Element
-  #endif
-
-}
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.YieldingContinuation where Failure == Swift.Never {
-  @available(*, deprecated, message: "`YieldingContinuation` was replaced by `AsyncStream` and will be removed shortly.")
-  public init(yielding: Element.Type)
-  
-  #if compiler(>=5.3) && $AsyncAwait
-  @available(*, deprecated, message: "`YieldingContinuation` was replaced by `AsyncStream` and will be removed shortly.")
-  public func next() async -> Element
-  #endif
-
-}
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.YieldingContinuation {
-  @available(*, deprecated, message: "`YieldingContinuation` was replaced by `AsyncStream` and will be removed shortly.")
-  public func yield<Er>(with result: Swift.Result<Element, Er>) -> Swift.Bool where Failure == Swift.Error, Er : Swift.Error
-  @available(*, deprecated, message: "`YieldingContinuation` was replaced by `AsyncStream` and will be removed shortly.")
-  public func yield(with result: Swift.Result<Element, Failure>) -> Swift.Bool
-  @available(*, deprecated, message: "`YieldingContinuation` was replaced by `AsyncStream` and will be removed shortly.")
-  public func yield() -> Swift.Bool where Element == Swift.Void
-}
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.UnownedSerialExecutor : Swift.Sendable {}
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.UnownedJob : Swift.Sendable {}
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.UnsafeContinuation : Swift.Sendable {}
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.TaskGroup : Swift.Sendable {}
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension _Concurrency.ThrowingTaskGroup : Swift.Sendable {}
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncStream.Continuation.Termination : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)

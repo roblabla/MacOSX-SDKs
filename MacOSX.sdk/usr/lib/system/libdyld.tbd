@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AFE6C76A-B47A-35F5-91D0-4E9FC439E90D
+    value:           6627654A-F427-3E04-98AC-492A1CA26FCC
   - target:          x86_64-maccatalyst
-    value:           AFE6C76A-B47A-35F5-91D0-4E9FC439E90D
+    value:           6627654A-F427-3E04-98AC-492A1CA26FCC
   - target:          arm64-macos
-    value:           2EA09BDB-811B-33AA-BB58-4B53AA2DB522
+    value:           23F54944-4C0C-3479-93BE-F3A9D0B05724
   - target:          arm64-maccatalyst
-    value:           2EA09BDB-811B-33AA-BB58-4B53AA2DB522
+    value:           23F54944-4C0C-3479-93BE-F3A9D0B05724
   - target:          arm64e-macos
-    value:           09AB3723-C26D-3762-93BA-98E9C38B89C1
+    value:           D9C3F911-6697-3B95-A4F6-4FB979F04A6E
   - target:          arm64e-maccatalyst
-    value:           09AB3723-C26D-3762-93BA-98E9C38B89C1
+    value:           D9C3F911-6697-3B95-A4F6-4FB979F04A6E
 install-name:    '/usr/lib/system/libdyld.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -39,6 +39,7 @@ exports:
                        _NSVersionOfLinkTimeLibrary, _NSVersionOfRunTimeLibrary, _NXArgc, 
                        _NXArgv, __NSGetExecutablePath, ___progname, __dyld_all_twolevel_modules_prebound, 
                        __dyld_atfork_parent, __dyld_atfork_prepare, __dyld_bind_fully_image_containing_address, 
+                       __dyld_dlopen_atfork_child, __dyld_dlopen_atfork_parent, __dyld_dlopen_atfork_prepare, 
                        __dyld_find_foreign_type_protocol_conformance, __dyld_find_protocol_conformance, 
                        __dyld_find_unwind_sections, __dyld_for_each_objc_class, __dyld_for_each_objc_protocol, 
                        __dyld_fork_child, __dyld_get_image_header, __dyld_get_image_header_containing_address, 

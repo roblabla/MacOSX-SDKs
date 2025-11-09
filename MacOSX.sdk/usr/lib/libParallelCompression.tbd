@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FC0A4E54-5763-3CE3-A565-871D8809F225
+    value:           45EA5736-1846-3DD7-8C10-F0278EC38D83
   - target:          x86_64-maccatalyst
-    value:           FC0A4E54-5763-3CE3-A565-871D8809F225
+    value:           45EA5736-1846-3DD7-8C10-F0278EC38D83
   - target:          arm64-macos
-    value:           FA74B964-8DC8-3EB9-9168-B9283537FED4
+    value:           7DF86D3F-979F-3F9F-ABC7-52F3AE2D111D
   - target:          arm64-maccatalyst
-    value:           FA74B964-8DC8-3EB9-9168-B9283537FED4
+    value:           7DF86D3F-979F-3F9F-ABC7-52F3AE2D111D
   - target:          arm64e-macos
-    value:           9BF06B0B-169D-3DC1-B22F-353E25B1A787
+    value:           00C6650B-4BD6-368F-8591-931CD53CEDFB
   - target:          arm64e-maccatalyst
-    value:           9BF06B0B-169D-3DC1-B22F-353E25B1A787
+    value:           00C6650B-4BD6-368F-8591-931CD53CEDFB
 install-name:    '/usr/lib/libParallelCompression.dylib'
 exports:
   - targets:         [ arm64-macos, arm64e-macos, x86_64-macos, x86_64-maccatalyst, 
@@ -42,10 +42,10 @@ exports:
                        _ParallelArchiveWriteEntryHeader, _ParallelArchiveWriterCreate, 
                        _ParallelArchiveWriterCreateLegacy, _ParallelArchiveWriterDestroy, 
                        _ParallelCompressionAFSCCompress, _ParallelCompressionAFSCFixupMetadata, 
-                       _ParallelCompressionAFSCGetMetadata, _ParallelCompressionAFSCStreamClose, 
-                       _ParallelCompressionAFSCStreamOpen, _ParallelCompressionAFSCStreamWrite, 
-                       _ParallelCompressionAFSCUseMaxEmbeddedSize, _ParallelCompressionDecode, 
-                       _ParallelCompressionEncode, _ParallelCompressionEnterThreadErrorContext, 
+                       _ParallelCompressionAFSCGetMetadata, _ParallelCompressionAFSCGetMetadataFD, 
+                       _ParallelCompressionAFSCStreamClose, _ParallelCompressionAFSCStreamOpen, 
+                       _ParallelCompressionAFSCStreamWrite, _ParallelCompressionAFSCUseMaxEmbeddedSize, 
+                       _ParallelCompressionDecode, _ParallelCompressionEncode, _ParallelCompressionEnterThreadErrorContext, 
                        _ParallelCompressionFileClose, _ParallelCompressionFileOpen, 
                        _ParallelCompressionFileRead, _ParallelCompressionFileSeek, 
                        _ParallelCompressionFileWrite, _ParallelCompressionGetCompressedSize, 

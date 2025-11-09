@@ -3,25 +3,29 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9258725A-D749-376E-9EBD-9AC52E265B8F
+    value:           C8FA0855-889D-3E71-9B72-12A2ACBEE07D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC2DAF0A-ED08-3000-A5DC-3BAD66ABD2F4
+    value:           070CE2B9-A13C-3C6B-936D-71630AE426FE
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarks.framework/Versions/A/WebBookmarks'
+current-version: 613.1.17
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BookmarksBarSpecialID, _BookmarksFrequentlyVisitedSitesSpecialID, 
                        _BookmarksMenuSpecialID, _BookmarksNotificationBookmarkIdentifierKey, 
                        _BookmarksReadingListSpecialID, _BookmarksRootID, _BookmarksWebFilterWhiteListSpecialID, 
-                       _DidDownloadBookmarkIconsNotification, _WBChangeTypeKey, _WBCurrentProcessContainerPath, 
-                       _WBDatabaseLockAcquisitorDefaultTimeout, _WBLocalAttributesCurrentVersion, 
-                       _WBLocalAttributesVersionKey, _WBLocalURLKey, _WBNSStringFromCollectionStoreOwner, 
-                       _WBNSStringFromCollectionType, _WBPageWebArchiveName, _WBReaderWebArchiveName, 
-                       _WBSafariContainerPath, _WBSafariDirectoryPath, _WBSafariPreferencesDomain, 
-                       _WBTabGroupSyncAgentErrorDomain, _WBTabGroupsDatabaseDidUpdateNotification, 
+                       _DidDownloadBookmarkIconsNotification, _WBBookmarkSyncModifiedAttributesForKey, 
+                       _WBBookmarkSyncModifiedAttributesForKeys, _WBCurrentProcessContainerPath, 
+                       _WBDatabaseLockAcquisitorDefaultTimeout, _WBDefaultPositionKey, 
+                       _WBDescriptionForBookmarkSyncModifiedAttributes, _WBKeysForBookmarkSyncModifiedAttributes, 
+                       _WBLocalAttributesCurrentVersion, _WBLocalAttributesVersionKey, 
+                       _WBLocalURLKey, _WBNSStringFromCollectionStoreOwner, _WBNSStringFromCollectionType, 
+                       _WBPageWebArchiveName, _WBReaderWebArchiveName, _WBSafariContainerPath, 
+                       _WBSafariDirectoryPath, _WBSafariPreferencesDomain, _WBTabGroupSyncAgentDidFinishSyncNotificationName, 
+                       _WBTabGroupSyncAgentErrorDomain, _WBTabGroupSyncAgentSyncResultKey, 
                        _WebBookmarkChangeSetFirstBookmarkIDForAddingBookmarkInMemory, 
-                       _WebBookmarkIDFromNSString, _WebBookmarksBookmarksBarFolderTitle, 
+                       _WebBookmarkIDFromNSString, _WebBookmarkSyncErrorDomain, _WebBookmarksBookmarksBarFolderTitle, 
                        _WebBookmarksBookmarksMenuFolderTitle, _WebBookmarksChangedFolderIDKey, 
                        _WebBookmarksDatabaseResetReasonKey, _WebBookmarksDataclassDidChangeNotification, 
                        _WebBookmarksDetectedLocalMigrationStateTransitionNotification, 
@@ -34,8 +38,7 @@ exports:
                        _WebBookmarksRootBookmarkTitle, _WebBookmarksSQLiteErrorDomain, 
                        _WebBookmarksServerMachServiceName, _WebBookmarksSpecialFoldersDidChangeNotification, 
                        _WebBookmarksToMigrationStateKey, _WebBookmarksWebFilterWhiteListFolderTitle, 
-                       _WebBookmarksXPCConnectionErrorDomain, _WebBookmarksXPCConnectionInterruptedErrorCode, 
-                       _WebNSStringFromBookmarkID, _bindAttributesToSQLStatement, 
+                       _WebBookmarksXPCConnectionErrorDomain, _WebNSStringFromBookmarkID, 
                        _kSafariFetcherClearAllReadingListArchivesMessageName, _kSafariFetcherClearReadingListArchiveMessageName, 
                        _kSafariFetcherDServiceName, _kSafariFetcherDidFinishFetchingMessageName, 
                        _kSafariFetcherDidStartFetchingItemMessageName, _kSafariFetcherDidStopFetchingItemMessageName, 
@@ -56,10 +59,11 @@ exports:
                        _webBookmarksMetaDataDidChangeNotification, _webBookmarksPasswordIconsCleanupMessageName, 
                        _webBookmarksScheduleBookmarksDatabaseMaintenanceTask, _webBookmarksScheduleBookmarksDatabaseMigrationTask ]
     objc-classes:    [ CloudTabServices, SafariFetcherServerProxy, WBBookmarkDBAccess, 
-                       WBBookmarksDatabaseHealthInformation, WBBrowserState, WBCollectionConfiguration, 
-                       WBDatabaseLockAcquisitor, WBFeatureManager, WBLocalTabAttributes, 
-                       WBReadonlyTabCollection, WBReusableTabManager, WBSavedStateManager, 
-                       WBSettingsSyncEngineAccess, WBSettingsTask, WBTab, WBTabCollection, 
+                       WBBookmarkDatabaseSyncData, WBBookmarkSyncData, WBBookmarksDatabaseHealthInformation, 
+                       WBBrowserState, WBCollectionConfiguration, WBDatabaseLockAcquisitor, 
+                       WBFeatureManager, WBLocalTabAttributes, WBReadonlyTabCollection, 
+                       WBReusableTabManager, WBSavedStateManager, WBSettingsSyncEngineAccess, 
+                       WBSettingsTask, WBTab, WBTabCollection, WBTabCyclerCommandHandler, 
                        WBTabGroup, WBTabGroupManager, WBTabGroupSyncAgent, WBWebsiteDataRecord, 
                        WBWindow, WBWindowState, WebBookmark, WebBookmarkChange, WebBookmarkChangeSet, 
                        WebBookmarkCollection, WebBookmarkDeviceIdentifier, WebBookmarkList, 
@@ -68,19 +72,4 @@ exports:
                        WebBookmarkSafariTechnologyPreviewTabCollection, WebBookmarkSecondaryCollection, 
                        WebBookmarkTabCollection, WebBookmarksSettingsGateway, WebBookmarksXPCConnection, 
                        WebBookmarksXPCListener ]
-    objc-ivars:      [ WebBookmark._UUID, WebBookmark._archiveStatus, WebBookmark._deletable, 
-                       WebBookmark._editable, WebBookmark._extraAttributes, WebBookmark._fetchedIconData, 
-                       WebBookmark._folder, WebBookmark._hidden, WebBookmark._iconData, 
-                       WebBookmark._id, WebBookmark._inserted, WebBookmark._lastSelectedChildID, 
-                       WebBookmark._localAttributes, WebBookmark._locallyAdded, WebBookmark._modifiedAttributes, 
-                       WebBookmark._needsSyncUpdate, WebBookmark._orderIndex, WebBookmark._parentID, 
-                       WebBookmark._serverID, WebBookmark._specialID, WebBookmark._syncData, 
-                       WebBookmark._syncKey, WebBookmark._syncable, WebBookmark._title, 
-                       WebBookmark._url, WebBookmark._usedForInMemoryChangeTracking, 
-                       WebBookmark._webFilterStatus, WebBookmarkCollection._configuration, 
-                       WebBookmarkCollection._db, WebBookmarkCollection._dirty, WebBookmarkCollection._favoritesFolderIdentifier, 
-                       WebBookmarkCollection._locale, WebBookmarkCollection._rootBookmark, 
-                       WebBookmarkCollection._safariFetcherServerProxy, WebBookmarkCollection._wordTokenizer, 
-                       WebBookmarkList._bookmarkCount, WebBookmarkList._bookmarks, 
-                       WebBookmarkList._collection, WebBookmarkList._query, WebBookmarkList._skipOffset ]
 ...

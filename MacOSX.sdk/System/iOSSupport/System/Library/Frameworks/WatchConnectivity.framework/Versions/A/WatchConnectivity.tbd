@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           88F2B400-1B80-325D-8712-4557E737089A
+    value:           05AA4D6A-16C3-3853-B8C4-3E478BFD7F1E
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           3C56CC7F-DD33-373A-AA17-485317A7D93E
+    value:           68EAF50F-1D02-3E9F-83A1-64BCC61F08A5
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WatchConnectivity.framework/Versions/A/WatchConnectivity'
 current-version: 200
 exports:

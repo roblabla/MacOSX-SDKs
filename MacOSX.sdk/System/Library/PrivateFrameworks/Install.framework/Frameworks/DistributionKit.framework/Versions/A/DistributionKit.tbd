@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AD425CEB-6D49-32C5-A705-20E704AED93A
+    value:           A50F51B0-741D-3A2B-8A86-5B61BE109BF7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4E3B1605-45FC-3897-8215-3B64F7E01380
+    value:           FE1AFC54-B1BE-3D7D-B601-96B254718222
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Frameworks/DistributionKit.framework/Versions/A/DistributionKit'
 current-version: 1000
 exports:

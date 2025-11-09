@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E1CCA72A-11FC-3F8F-86E7-13891DFD8A00
+    value:           D46F7D18-914C-3795-9AD6-FF40C8B315A3
   - target:          arm64-macos
-    value:           290592EF-EB4A-38BD-8636-A56694D06F73
+    value:           1678A550-C452-349B-9375-142E86B8D5F6
   - target:          arm64e-macos
-    value:           C4C5BD96-1E0C-3046-A7B7-3F1D6FEC9FCF
+    value:           FE81FF90-C459-372A-A35B-9B48748B580B
 install-name:    '/usr/lib/libFDR.dylib'
 exports:
   - targets:         [ arm64-macos, arm64e-macos, x86_64-macos ]
@@ -25,9 +25,9 @@ exports:
                        _AMFDRDataCopyRawAndFormatted, _AMFDRDataCopySealingManifestProperty, 
                        _AMFDRDataCopySslRoots, _AMFDRDataCopyTrustObject, _AMFDRDataCreateInstanceString, 
                        _AMFDRDataCreatePermissionsString, _AMFDRDataCreateSikInstanceString, 
-                       _AMFDRDataDelete, _AMFDRDataDictCopy, _AMFDRDataDictMultiCopy, 
-                       _AMFDRDataDictMultiPut, _AMFDRDataDictPut, _AMFDRDataExport, 
-                       _AMFDRDataGetSigningVersion, _AMFDRDataHTTPChallengeClaim, 
+                       _AMFDRDataDecodeAndSetSealingManifest, _AMFDRDataDelete, _AMFDRDataDictCopy, 
+                       _AMFDRDataDictMultiCopy, _AMFDRDataDictMultiPut, _AMFDRDataDictPut, 
+                       _AMFDRDataExport, _AMFDRDataGetSigningVersion, _AMFDRDataHTTPChallengeClaim, 
                        _AMFDRDataIterate, _AMFDRDataLocalCreateFullKey, _AMFDRDataMake, 
                        _AMFDRDataMultiClaim, _AMFDRDataMultiCopy, _AMFDRDataMultiCopyDigest, 
                        _AMFDRDataMultiCopyManifest, _AMFDRDataMultiDelete, _AMFDRDataMultiExport, 

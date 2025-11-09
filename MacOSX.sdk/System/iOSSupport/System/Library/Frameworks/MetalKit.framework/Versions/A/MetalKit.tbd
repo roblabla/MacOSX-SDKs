@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           4EA3D6C9-4723-3E73-9DAD-FA73D30900A7
+    value:           D7DDDFF8-CD55-3126-85F2-4CAFD3EB9932
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           334FBDDD-6095-35A0-97E1-1247BA4C69D1
+    value:           1CC2C1E1-5308-3B6C-AC1F-30B5F0012AD2
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit'
 current-version: 151
 exports:

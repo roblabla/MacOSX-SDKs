@@ -57,11 +57,11 @@ extern "C" {
 #endif
 #endif
 
-extern void     *memcpy(void *dst , const void *src , size_t n);
-extern int      memcmp(const void *s1 , const void *s2 , size_t n) __stateful_pure;
-extern void     *memmove(void *dst , const void *src , size_t n);
-extern void     *memset(void *s , int, size_t n);
-extern int      memset_s(void *s , size_t smax, int c, size_t n);
+extern void     *memcpy(void *dst __sized_by(n), const void *src __sized_by(n), size_t n);
+extern int      memcmp(const void *s1 __sized_by(n), const void *s2 __sized_by(n), size_t n) __stateful_pure;
+extern void     *memmove(void *dst __sized_by(n), const void *src __sized_by(n), size_t n);
+extern void     *memset(void *s __sized_by(n), int, size_t n);
+extern int      memset_s(void *s __sized_by(smax), size_t smax, int c, size_t n);
 
 
 extern size_t   strlen(const char *) __stateful_pure;
@@ -94,10 +94,10 @@ extern char     *strchr(const char *s, int c) __stateful_pure;
 extern char     *STRDUP(const char *, int);
 extern int      strprefix(const char *s1, const char *s2) __stateful_pure;
 
-extern int      bcmp(const void *s1 , const void *s2 , size_t n) __stateful_pure;
-extern void     bcopy(const void *src , void *dst , size_t n);
-extern void     bzero(void *s , size_t n);
-extern int      timingsafe_bcmp(const void *b1 , const void *b2 , size_t n);
+extern int      bcmp(const void *s1 __sized_by(n), const void *s2 __sized_by(n), size_t n) __stateful_pure;
+extern void     bcopy(const void *src __sized_by(n), void *dst __sized_by(n), size_t n);
+extern void     bzero(void *s __sized_by(n), size_t n);
+extern int      timingsafe_bcmp(const void *b1 __sized_by(n), const void *b2 __sized_by(n), size_t n);
 
 
 #if __has_builtin(__builtin_dynamic_object_size)
@@ -108,17 +108,17 @@ extern int      timingsafe_bcmp(const void *b1 , const void *b2 , size_t n);
 
 /* __nochk_ functions for opting out of type 1 bounds checking */
 __attribute__((always_inline)) static inline void *
-__nochk_memcpy(void *dest , const void *src , size_t len)
+__nochk_memcpy(void *dest __sized_by(len), const void *src __sized_by(len), size_t len)
 {
 	return __builtin___memcpy_chk(dest, src, len, XNU_BOS(dest, 0));
 }
 __attribute__((always_inline)) static inline void *
-__nochk_memmove(void *dest , const void *src , size_t len)
+__nochk_memmove(void *dest __sized_by(len), const void *src __sized_by(len), size_t len)
 {
 	return __builtin___memmove_chk(dest, src, len, XNU_BOS(dest, 0));
 }
 __attribute__((always_inline)) static inline void
-__nochk_bcopy(const void *src , void *dest , size_t len)
+__nochk_bcopy(const void *src __sized_by(len), void *dest __sized_by(len), size_t len)
 {
 	__builtin___memmove_chk(dest, src, len, XNU_BOS(dest, 0));
 }

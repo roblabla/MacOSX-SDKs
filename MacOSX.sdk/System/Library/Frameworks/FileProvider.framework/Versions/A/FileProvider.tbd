@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           40F316E9-8440-3A92-8F91-8FFFF8F1233D
+    value:           38B5EEB1-64FE-395F-AA59-4CA579A1F132
   - target:          x86_64-maccatalyst
-    value:           40F316E9-8440-3A92-8F91-8FFFF8F1233D
+    value:           38B5EEB1-64FE-395F-AA59-4CA579A1F132
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           67C6EC7F-B164-312C-A57E-6E6620BBEE46
+    value:           D6283D65-D8DA-3FC6-8840-EDEF663B808A
   - target:          arm64e-maccatalyst
-    value:           67C6EC7F-B164-312C-A57E-6E6620BBEE46
+    value:           D6283D65-D8DA-3FC6-8840-EDEF663B808A
 install-name:    '/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -154,13 +154,14 @@ exports:
                        _fpfs_fix_parent_and_child_permissions, _fpfs_fix_permissions, 
                        _fpfs_fix_permissions_and_restore_mode, _fpfs_fopendir, _fpfs_free_metadata_tag_data, 
                        _fpfs_free_tag_data, _fpfs_fremovexattr, _fpfs_fset_acl, _fpfs_fset_metadata, 
-                       _fpfs_fset_syncroot, _fpfs_fsetxattr, _fpfs_funload_hierarchy, 
-                       _fpfs_get_dataless_cmpfs_xattr_owner, _fpfs_get_favorite_rank, 
-                       _fpfs_get_finder_info, _fpfs_get_finder_info_buffer, _fpfs_get_flock_type, 
-                       _fpfs_get_is_ignore_root, _fpfs_get_is_pinned, _fpfs_get_last_use_date, 
-                       _fpfs_get_syncable_xattrs, _fpfs_get_tag_data, _fpfs_gethandle_at, 
-                       _fpfs_is_busy_date, _fpfs_is_dataless_fault, _fpfs_is_dataless_fault_at, 
-                       _fpfs_is_evictable, _fpfs_is_finder_alias_at, _fpfs_is_type_purgeable, 
+                       _fpfs_fset_syncroot, _fpfs_fsetxattr, _fpfs_funload_file, 
+                       _fpfs_funload_hierarchy, _fpfs_get_dataless_cmpfs_xattr_owner, 
+                       _fpfs_get_favorite_rank, _fpfs_get_finder_info, _fpfs_get_finder_info_buffer, 
+                       _fpfs_get_flock_type, _fpfs_get_fs_blocksize, _fpfs_get_is_ignore_root, 
+                       _fpfs_get_is_pinned, _fpfs_get_last_use_date, _fpfs_get_syncable_xattrs, 
+                       _fpfs_get_tag_data, _fpfs_gethandle_at, _fpfs_is_busy_date, 
+                       _fpfs_is_dataless_fault, _fpfs_is_dataless_fault_at, _fpfs_is_evictable, 
+                       _fpfs_is_finder_alias_at, _fpfs_is_resurrected, _fpfs_is_type_purgeable, 
                        _fpfs_item_handle_gencmp, _fpfs_load_additional_attrs, _fpfs_make_fsevent, 
                        _fpfs_materialize, _fpfs_materialize_at, _fpfs_move_with_fix_permissions, 
                        _fpfs_open, _fpfs_openat, _fpfs_openbyid, _fpfs_openbyid_ext, 
@@ -174,17 +175,19 @@ exports:
                        _fpfs_pkg_is_promoted, _fpfs_pkg_is_promoted_at, _fpfs_pkg_path_lookup, 
                        _fpfs_pkg_promote, _fpfs_pkg_promote_at, _fpfs_pkg_remove_demotion_xattr, 
                        _fpfs_pkg_set_bundle_bit, _fpfs_pkg_system_lookup, _fpfs_recursive_prune_fault, 
-                       _fpfs_recursive_unlinkat, _fpfs_removeat, _fpfs_renameat, 
-                       _fpfs_revoke_children, _fpfs_serialize_favorite_rank, _fpfs_serialize_last_use_date, 
-                       _fpfs_serialize_tags, _fpfs_set_before_bounce_filename, _fpfs_set_before_bounce_filename_on_path, 
-                       _fpfs_set_dataless_cmpfs_attrs, _fpfs_set_dataless_cmpfs_xattr, 
-                       _fpfs_set_evictable, _fpfs_set_favorite_rank, _fpfs_set_finder_info, 
-                       _fpfs_set_is_ignore_root, _fpfs_set_is_pinned, _fpfs_set_last_use_date, 
-                       _fpfs_set_metadata, _fpfs_set_syncable_xattrs, _fpfs_set_tag_data, 
-                       _fpfs_set_vfs_ignore_permissions_iopolicy, _fpfs_set_vfs_parent_mtime_iopolicy, 
-                       _fpfs_should_be_tracked, _fpfs_supports_dir_eviction, _fpfs_supports_endpoint_security, 
+                       _fpfs_recursive_unlinkat, _fpfs_remove_resurrected, _fpfs_removeat, 
+                       _fpfs_renameat, _fpfs_revoke_children, _fpfs_serialize_favorite_rank, 
+                       _fpfs_serialize_last_use_date, _fpfs_serialize_tags, _fpfs_set_before_bounce_filename, 
+                       _fpfs_set_before_bounce_filename_on_path, _fpfs_set_dataless_cmpfs_attrs, 
+                       _fpfs_set_dataless_cmpfs_xattr, _fpfs_set_evictable, _fpfs_set_favorite_rank, 
+                       _fpfs_set_finder_info, _fpfs_set_is_ignore_root, _fpfs_set_is_pinned, 
+                       _fpfs_set_last_use_date, _fpfs_set_metadata, _fpfs_set_resurrected, 
+                       _fpfs_set_syncable_xattrs, _fpfs_set_tag_data, _fpfs_set_vfs_ignore_permissions_iopolicy, 
+                       _fpfs_set_vfs_parent_mtime_iopolicy, _fpfs_should_be_tracked, 
+                       _fpfs_supports_dir_eviction, _fpfs_supports_endpoint_security, 
                        _fpfs_supports_flock_timer_handler, _fpfs_supports_indexing_xpc_activity, 
-                       _fpfs_supports_initial_sql_telemetry, _fpfs_supports_parent_mtime_iopolicy, 
+                       _fpfs_supports_initial_sql_telemetry, _fpfs_supports_materialization_helpers, 
+                       _fpfs_supports_parent_mtime_iopolicy, _fpfs_supports_partial_materialization, 
                        _fpfs_supports_periodic_FPCK_run, _fpfs_supports_pkg_dataless_escape_prevention, 
                        _fpfs_supports_pkg_eviction, _fpfs_supports_targeted_purge, 
                        _fpfs_supports_vfs_ignore_permissions_iopolicy, _fpfs_synthesize_metadata, 

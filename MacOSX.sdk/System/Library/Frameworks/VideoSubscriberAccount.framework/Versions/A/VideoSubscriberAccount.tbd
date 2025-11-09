@@ -4,27 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           499B8566-7C8B-3E00-B32D-9E9597B20801
+    value:           3440CCBD-0A99-3074-82C8-9B34278B9518
   - target:          x86_64-maccatalyst
-    value:           499B8566-7C8B-3E00-B32D-9E9597B20801
+    value:           3440CCBD-0A99-3074-82C8-9B34278B9518
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1CC165E-0C12-34FC-98DB-3F5FF4445108
+    value:           EC59815D-2F33-33DE-A601-48889ABCF7AE
   - target:          arm64e-maccatalyst
-    value:           C1CC165E-0C12-34FC-98DB-3F5FF4445108
+    value:           EC59815D-2F33-33DE-A601-48889ABCF7AE
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 402.20.2
+current-version: 402.40.25
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _VSAMPProviderResponseAppsData, _VSAMPProviderResponseKeyApps, 
                        _VSAMPProviderResponseKeyRelationships, _VSAMSBagKeyAppsMediaAPIHost, 
-                       _VSAMSBagKeyCountryCode, _VSAMSBagKeyIdentityProviders, _VSAMSBagKeyMaxFeaturedProviders, 
-                       _VSAMSBagKeySoleProviderFeatureEnabled, _VSAMSBagKeyVerificationStateReset, 
-                       _VSAMSHTTPMethodNameGET, _VSAMSHTTPMethodNamePOST, _VSAMSProviderResponseKeyAppPlacementPosition, 
+                       _VSAMSBagKeyCountryCode, _VSAMSBagKeyIdentityProviders, _VSAMSBagKeyLanguageTag, 
+                       _VSAMSBagKeyMaxFeaturedProviders, _VSAMSBagKeySoleProviderFeatureEnabled, 
+                       _VSAMSBagKeyVerificationStateReset, _VSAMSHTTPMethodNameGET, 
+                       _VSAMSHTTPMethodNamePOST, _VSAMSProviderResponseKeyAppPlacementPosition, 
                        _VSAMSProviderResponseKeyAppStoreRoomURL, _VSAMSProviderResponseKeyAttributes, 
                        _VSAMSProviderResponseKeyAuthProtocols, _VSAMSProviderResponseKeyAuthTemplates, 
                        _VSAMSProviderResponseKeyAuthURL, _VSAMSProviderResponseKeyDisplayName, 
@@ -33,6 +34,7 @@ exports:
                        _VSAMSProviderResponseKeyProviderArtworkKey, _VSAMSProviderResponseKeyProviderArtworkURL, 
                        _VSAMSProviderResponseKeyProviderIdentifier, _VSAMSProviderResponseKeyRoot, 
                        _VSAMSProviderResponseKeySetTopBoxOptOutAllowed, _VSAMSProviderResponseKeySetTopBoxSupported, 
+                       _VSAMSProviderResponseKeyShouldShowChannelApps, _VSAMSProviderResponseKeyShouldShowSubscriptionApps, 
                        _VSAMSProviderResponseKeyStorefrontIsFeatured, _VSAMSProviderResponseKeyStorefrontSortOrdinal, 
                        _VSAMSProviderResponseKeySupportedStorefrontsKey, _VSAccountMonitorAccountStoreDidChange, 
                        _VSAccountProviderAuthenticationSchemeAPI, _VSAccountProviderAuthenticationSchemeSAML, 
@@ -105,14 +107,15 @@ exports:
                        VSFileWriteOperation, VSIdentityProvider, VSIdentityProviderAvailabilityInfoCenter, 
                        VSIdentityProviderInfoCenter, VSIdentityProviderInfoQueryResult, 
                        VSIdentityProviderStorefrontMetadata, VSKeyPathBasedTreeNode, 
-                       VSMetricsCenter, VSOpaqueAuthenticationToken, VSOptional, 
-                       VSPersistentStorage, VSPreferences, VSPrivacyConsentVoucher, 
+                       VSManagedProfileConnection, VSMetricsCenter, VSOpaqueAuthenticationToken, 
+                       VSOptional, VSPersistentStorage, VSPreferences, VSPrivacyConsentVoucher, 
                        VSPrivacyFacade, VSProxyDetector, VSRemoteNotifier, VSRestrictionsCenter, 
                        VSReverseValueTransformer, VSSAMLAuthenticationToken, VSSecurityTask, 
-                       VSSemaphore, VSSetTopBoxProfile, VSStateMachine, VSStateTransition, 
-                       VSStorefrontCodeLoadOperation, VSSubscription, VSSubscriptionRegistrationCenter, 
-                       VSSubscriptionSource, VSTestSetupPreparationOperation, VSTimeoutOperation, 
-                       VSTreeNode, VSValueType, VSValueTypeProperty, VSVerificationDataOperation, 
+                       VSSemaphore, VSSetTopBoxInfoQueryResult, VSSetTopBoxProfile, 
+                       VSStateMachine, VSStateTransition, VSStorefrontCodeLoadOperation, 
+                       VSSubscription, VSSubscriptionRegistrationCenter, VSSubscriptionSource, 
+                       VSTestSetupPreparationOperation, VSTimeoutOperation, VSTreeNode, 
+                       VSTrie, VSValueType, VSValueTypeProperty, VSVerificationDataOperation, 
                        VSVerificationStateResetOperation, VSViewServiceResponse, 
                        VSViewServiceXPCInterface, VSWeakForwardingTarget ]
 ...

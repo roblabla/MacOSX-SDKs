@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2D98E79C-3664-33DC-A5E7-8925C239D2D4
+    value:           04B43CD8-B7EA-354C-892C-C5C30D95A3D4
   - target:          x86_64-maccatalyst
-    value:           2D98E79C-3664-33DC-A5E7-8925C239D2D4
+    value:           04B43CD8-B7EA-354C-892C-C5C30D95A3D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6737BE7-5618-3306-AD89-3D26B6EBD14E
+    value:           6DC71B79-FA24-3F40-B0D1-19B2FAAAEDD0
   - target:          arm64e-maccatalyst
-    value:           F6737BE7-5618-3306-AD89-3D26B6EBD14E
+    value:           6DC71B79-FA24-3F40-B0D1-19B2FAAAEDD0
 install-name:    '/usr/lib/swift/libswiftCoreData.dylib'
 current-version: 19
 swift-abi-version: 7

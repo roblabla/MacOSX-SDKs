@@ -95,6 +95,8 @@ private:
 
 	static void				AsyncReadWriteComplete ( SCSITaskIdentifier	completedTask );
 
+    static void             AbortPMTransition ( thread_call_param_t whichDevice );
+
 protected:
 
 	// Reserve space for future expansion.
@@ -116,6 +118,7 @@ protected:
         UInt8               fLBPRZ;
 		bool				fUnmapAllowed;
         bool                fUseWriteSame;
+        thread_call_t       fPMAbortThread;
 	};
     IOSCSIBlockCommandsDeviceExpansionData * fIOSCSIBlockCommandsDeviceReserved;
 
@@ -158,6 +161,8 @@ protected:
 	// Device requires START_STOP_UNIT for ejects, regardless if PREVENT_ALLOW_MEIDUMREMOVAL
 	// failed. 
 	#define fRequiresEjectWithStartStopUnit fIOSCSIBlockCommandsDeviceReserved->fRequiresEjectWithStartStopUnit
+
+    #define fPMAbortThread fIOSCSIBlockCommandsDeviceReserved->fPMAbortThread
 
 private:
 	/* OBSOLETE. Use IOSCSIPrimaryCommandsDevice::Get/SetANSIVersion */

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB6BD6DD-0026-3AA2-BB3C-4CA357501382
+    value:           59111727-7C5B-3527-897C-D3317B9D95AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE618DFE-44DA-3A1D-87D4-4EC964392E29
+    value:           4FB19D61-552A-30FC-83FC-65D6B288C79B
 install-name:    '/System/Library/PrivateFrameworks/PAImaging.framework/Versions/A/PAImaging'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CATransform3DFromNSString, _CGAffineTransformFromNSString, 

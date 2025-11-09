@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C49F03A6-376C-313E-841E-9930B8D320C1
+    value:           9E12049E-EFE6-3F2C-9561-08AF857950F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3335BE0C-1D5B-386D-892A-41887FCE3F28
+    value:           5AD00294-9B45-35BA-9DBA-73F5234B5A26
 install-name:    '/System/Library/PrivateFrameworks/StatusKitAgentCore.framework/Versions/A/StatusKitAgentCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

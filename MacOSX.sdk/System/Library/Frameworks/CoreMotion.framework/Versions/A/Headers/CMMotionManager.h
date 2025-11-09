@@ -74,7 +74,7 @@ typedef void (^CMDeviceMotionHandler)(CMDeviceMotion * __nullable motion, NSErro
  *  Discussion:
  *    Typedef of block to be invoked when magnetometer data is available.
  */
-typedef void (^CMMagnetometerHandler)(CMMagnetometerData * __nullable magnetometerData, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
+typedef void (^CMMagnetometerHandler)(CMMagnetometerData * __nullable magnetometerData, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
 
 /*
  *  CMMotionManager
@@ -321,7 +321,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *    is undefined.
  *
  */
-@property(readonly, nonatomic) CMAttitudeReferenceFrame attitudeReferenceFrame COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
+@property(readonly, nonatomic) CMAttitudeReferenceFrame attitudeReferenceFrame COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
 
 /*
  *  deviceMotionAvailable

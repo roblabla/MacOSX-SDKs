@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A6A4BAD2-4639-3677-8EF2-721B58C111F2
+    value:           4F027C0D-BB6A-3D77-AA1D-67C75BACC69D
   - target:          x86_64-maccatalyst
-    value:           A6A4BAD2-4639-3677-8EF2-721B58C111F2
+    value:           4F027C0D-BB6A-3D77-AA1D-67C75BACC69D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0080DF6C-2A52-3E2C-AEE4-0648C3A53513
+    value:           CAFA1486-B9EB-3BA6-A266-A21BBCACE742
   - target:          arm64e-maccatalyst
-    value:           0080DF6C-2A52-3E2C-AEE4-0648C3A53513
+    value:           CAFA1486-B9EB-3BA6-A266-A21BBCACE742
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupportFramework.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

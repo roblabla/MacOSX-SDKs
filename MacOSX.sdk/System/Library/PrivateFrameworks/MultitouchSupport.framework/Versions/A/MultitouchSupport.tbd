@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           12C881B4-BF51-3DCF-8A46-AFF71641D8C5
+    value:           C0052689-9EAB-3084-9992-3F497A482D81
   - target:          x86_64-maccatalyst
-    value:           12C881B4-BF51-3DCF-8A46-AFF71641D8C5
+    value:           C0052689-9EAB-3084-9992-3F497A482D81
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2726CA18-7B6E-3BB5-832E-0F3DA3AC0FE3
+    value:           724ED186-4A9C-33F5-99AE-D2148BD1FE4D
   - target:          arm64e-maccatalyst
-    value:           2726CA18-7B6E-3BB5-832E-0F3DA3AC0FE3
+    value:           724ED186-4A9C-33F5-99AE-D2148BD1FE4D
 install-name:    '/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport'
-current-version: 5430.1
+current-version: 5440.11
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

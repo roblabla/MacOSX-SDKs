@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDCDCF97-B57B-3853-BEE6-F7D67E0A68E3
+    value:           006EEA73-1339-35CB-8AE5-27F1918B437F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4198410-2FA9-3022-8251-A9808F1B32BA
+    value:           04B800BF-6A8C-3D5A-95D2-6C3EC2F3F6DA
 install-name:    '/usr/lib/libxpc_datastores.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

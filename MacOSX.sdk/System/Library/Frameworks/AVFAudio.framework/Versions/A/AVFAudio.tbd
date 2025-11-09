@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3D75BAB2-4A81-3E53-BACF-1078C281C2B2
+    value:           0843736A-EDEA-3F67-B16A-8DE7B5AC635D
   - target:          x86_64-maccatalyst
-    value:           3D75BAB2-4A81-3E53-BACF-1078C281C2B2
+    value:           0843736A-EDEA-3F67-B16A-8DE7B5AC635D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69E3AD82-D6BF-3F69-AFE6-85FDAC3B5001
+    value:           2182345F-9A39-30E0-87AD-0195572F9329
   - target:          arm64e-maccatalyst
-    value:           69E3AD82-D6BF-3F69-AFE6-85FDAC3B5001
+    value:           2182345F-9A39-30E0-87AD-0195572F9329
 install-name:    '/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -101,7 +101,8 @@ exports:
                        _AVVoiceControllerMetricAudioSessionSetActiveTime, _AVVoiceControllerMetricAudioSessionSetInactiveTime, 
                        _AVVoiceControllerMetricDataBeginHostTime, _AVVoiceControllerMetricDataDurationMilliSeconds, 
                        _AVVoiceControllerMetricDataEndHostTime, _AVVoiceControllerNoRecordRoute, 
-                       _AVVoiceControllerRemoteInputJarvisRoute, _AVVoiceControllerStartTimeKey ]
+                       _AVVoiceControllerRemoteInputDarwinRoute, _AVVoiceControllerRemoteInputJarvisRoute, 
+                       _AVVoiceControllerStartTimeKey ]
     objc-classes:    [ AVAudioBuffer, AVAudioChannelLayout, AVAudioCompressedBuffer, 
                        AVAudioConnectionPoint, AVAudioConverter, AVAudioEngine, AVAudioEnvironmentDistanceAttenuationParameters, 
                        AVAudioEnvironmentNode, AVAudioEnvironmentReverbParameters, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           88F69B74-233C-32A0-8D4A-3FCDD556D829
+    value:           A1C57F3C-0B85-367D-AFD8-CE4B01B638C6
   - target:          x86_64-maccatalyst
-    value:           88F69B74-233C-32A0-8D4A-3FCDD556D829
+    value:           A1C57F3C-0B85-367D-AFD8-CE4B01B638C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E100E89-39E4-3EB8-B107-74F2128EF205
+    value:           D07777F4-2044-30E7-82FB-8F239F71A802
   - target:          arm64e-maccatalyst
-    value:           3E100E89-39E4-3EB8-B107-74F2128EF205
+    value:           D07777F4-2044-30E7-82FB-8F239F71A802
 install-name:    '/usr/lib/system/libsystem_darwin.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9C73122A-6EAD-3217-BED4-F67A82441109
+    value:           7A368AB5-5939-30E2-A8BD-B54710E51572
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9D015E8-414E-3C58-BAD4-979B03075F61
+    value:           FF6A6790-6029-313E-868D-91C7DBDD18A7
 install-name:    '/System/Library/PrivateFrameworks/RecapPerformanceTesting.framework/Versions/A/RecapPerformanceTesting'
 current-version: 17
 exports:

@@ -2,7 +2,7 @@
 //  MediaPlayerDefines.h
 //  MediaPlayer
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2022 Apple Inc. All rights reserved.
 //
 
 #ifndef MP_DEFINES

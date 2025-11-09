@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3047EEC2-C14C-3AC9-8B58-81C671CBCA79
+    value:           4C0151CC-0E8A-3092-96BA-13A853133C26
   - target:          x86_64-maccatalyst
-    value:           3047EEC2-C14C-3AC9-8B58-81C671CBCA79
+    value:           4C0151CC-0E8A-3092-96BA-13A853133C26
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F2E77A8-09FA-3C7A-A691-14A26644A722
+    value:           9AD6B954-32FF-3525-A54F-A3B7B309F88F
   - target:          arm64e-maccatalyst
-    value:           6F2E77A8-09FA-3C7A-A691-14A26644A722
+    value:           9AD6B954-32FF-3525-A54F-A3B7B309F88F
 install-name:    '/usr/lib/swift/libswiftShazamKit.dylib'
-current-version: 162.1
+current-version: 163.6
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

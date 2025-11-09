@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2DE543BF-CC65-3CBE-A4C7-41A84535C3C2
+    value:           CB506CCE-E25D-3219-8B16-A09D7E4C173B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D7A84D21-1E8F-3C93-AA44-7C58087F6F0E
+    value:           E996FFD2-8F43-312E-9EFE-F6C62A971342
 install-name:    '/System/Library/PrivateFrameworks/CalendarUI.framework/Versions/A/CalendarUI'
-current-version: 1101.1.2
+current-version: 1101.4.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALGroupPboardType, _CALLocationPboardType, _CALPixelAlignedPoint, 
@@ -153,10 +153,10 @@ exports:
                        EKUITokenAttachmentCell, EKUITokenButton, EKUITokenField, 
                        EKUITokenFieldCell, EKUITokenFieldWithCustomFieldEditor, EKUITravelTimeCustomViewController, 
                        EKUITravelTimeGadget, EKUITravelTimeSpinnerView, EKUITravelTimeSummaryGadget, 
-                       EKUIURLGadget, EKUIVibrantView, EKUIVirtualConference, EKUIVirtualConferencePopupButton, 
-                       EKUIVirtualConferencePopupButtonCell, EKUIWeatherBox, EKView, 
-                       EKViewController, EKViewControllerSettings, EKViewScrollView, 
-                       GroupedTableViewController, HourLabel, IGPopupContentView, 
+                       EKUIURLGadget, EKUIUnsubscribeGadget, EKUIVibrantView, EKUIVirtualConference, 
+                       EKUIVirtualConferencePopupButton, EKUIVirtualConferencePopupButtonCell, 
+                       EKUIWeatherBox, EKView, EKViewController, EKViewControllerSettings, 
+                       EKViewScrollView, GroupedTableViewController, HourLabel, IGPopupContentView, 
                        IGPopupWindow, IGPopupWindowController, IIClosableDatePicker, 
                        IIDatePicker, IIDatePickerForPanel, IIDatePickerPanel, IIDatePickerPanelContentView, 
                        IIDatePickerWithMiniCal, IIInsetImageCell, IITimeSuggestionPanelContentView, 

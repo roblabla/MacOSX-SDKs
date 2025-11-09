@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           40143879-011D-3B0D-8F3F-E3D9CF52AB5B
+    value:           1033B5E7-5E35-31FC-A50C-64D184B255EB
   - target:          x86_64-maccatalyst
-    value:           40143879-011D-3B0D-8F3F-E3D9CF52AB5B
+    value:           1033B5E7-5E35-31FC-A50C-64D184B255EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3635486-9113-35E8-926A-EADD81C744A5
+    value:           45E2E330-F73B-339E-90DE-7F94ACE3ED40
   - target:          arm64e-maccatalyst
-    value:           E3635486-9113-35E8-926A-EADD81C744A5
+    value:           45E2E330-F73B-339E-90DE-7F94ACE3ED40
 install-name:    '/System/Library/Frameworks/CoreML.framework/Versions/A/CoreML'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F760FB04-2B82-344B-A785-0623668EF867
+    value:           1FB12E39-9D1D-309D-BE1D-5D90B5C68ED7
   - target:          x86_64-maccatalyst
-    value:           F760FB04-2B82-344B-A785-0623668EF867
+    value:           1FB12E39-9D1D-309D-BE1D-5D90B5C68ED7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B629FDD-C8C2-3A4B-B6DA-912DC3985D0B
+    value:           4D02B77F-C818-3DC0-AC13-3C014ACB1069
   - target:          arm64e-maccatalyst
-    value:           0B629FDD-C8C2-3A4B-B6DA-912DC3985D0B
+    value:           4D02B77F-C818-3DC0-AC13-3C014ACB1069
 install-name:    '/System/Library/PrivateFrameworks/ProtectedCloudStorage.framework/Versions/A/ProtectedCloudStorage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -99,12 +99,15 @@ exports:
                        _PCSIdentitySetEnableICDP, _PCSIdentitySetEnumeratePublicKeys, 
                        _PCSIdentitySetGetCurrentCreationTime, _PCSIdentitySetGetTypeID, 
                        _PCSIdentitySetIsICDP, _PCSIdentitySetIsICDPNetwork, _PCSIdentitySetIsICDPNetworkWithOptions, 
-                       _PCSIdentitySetIsPlesio, _PCSIdentitySetRemoveIdentity, _PCSIdentitySetRollManateeServices, 
-                       _PCSIdentitySetSetCurrentIdentity, _PCSIdentitySetSetCurrentIdentityWithError, 
-                       _PCSIdentitySetSetPlesio, _PCSIdentitySetValidate, _PCSIdentitySetup, 
-                       _PCSIdentityShouldRecoverHSMBackup, _PCSIdentitySynchronizeKeys, 
-                       _PCSIdentityWebSafePublicKeyID, _PCSIdentityiCDPPlesio, _PCSIdentityiCDPSignOut, 
-                       _PCSKeyCreateKeyFromRandomData, _PCSKeyCreateWithPCSSPKey, 
+                       _PCSIdentitySetIsPlesio, _PCSIdentitySetIsWalrus, _PCSIdentitySetRemoveIdentity, 
+                       _PCSIdentitySetRollManateeServices, _PCSIdentitySetSetCurrentIdentity, 
+                       _PCSIdentitySetSetCurrentIdentityWithError, _PCSIdentitySetSetPlesio, 
+                       _PCSIdentitySetValidate, _PCSIdentitySetup, _PCSIdentityShouldRecoverHSMBackup, 
+                       _PCSIdentitySynchronizeKeys, _PCSIdentityWebSafePublicKeyID, 
+                       _PCSIdentityiCDPPlesio, _PCSIdentityiCDPSignOut, _PCSKeyCreateKeyFromRandomData, 
+                       _PCSKeyCreateWithPCSSPKey, _PCSKeyEnvelopeAuthenticate, _PCSKeyEnvelopeCreate, 
+                       _PCSKeyEnvelopeCreateWithValues, _PCSKeyEnvelopeDecrypt, _PCSKeyEnvelopeEncrypt, 
+                       _PCSKeyEnvelopeGetEnvelope, _PCSKeyEnvelopeGetTypeID, _PCSKeyEnvelopeVerify, 
                        _PCSKeyRollingEnabled, _PCSKeySyncingGetAllClients, _PCSKeySyncingRequestKeys, 
                        _PCSKeySyncingRequestKeysAsync, _PCSKeySyncingSyncKeys, _PCSKeySyncingTriggerDaily, 
                        _PCSMMCSCopyDecryptedData, _PCSMMCSCopyEncryptedData, _PCSManateeKeyRollingEnabled, 
@@ -163,8 +166,8 @@ exports:
                        __PCSKeychainForwardTable, __PCSMakeDigest, __PCSMessagesBackupPath, 
                        __PCSMobileBackupOverride, __PCSPostHaveCredentials, __PCSPublicIdentityGetKey, 
                        __PCSRunningInUnitTests, __PCSSecItemDeleteIfPresent, __PCSSecureBackupSymbols, 
-                       __PCSServiceItemsGetTooRolledServiceTypes, __PCSSignAlgToDI, 
-                       __PCSStingrayCopyDecryptedData, __PCSStingrayCopyEncryptedData, 
+                       __PCSServiceItemsGetNoRollStingrayServiceTypes, __PCSServiceItemsGetTooRolledServiceTypes, 
+                       __PCSSignAlgToDI, __PCSStingrayCopyDecryptedData, __PCSStingrayCopyEncryptedData, 
                        __PCSStingrayCreateRandomKey, __PCSSyncingSetupInterface, 
                        __PCSValidateKey, __PCSVerifyHash, __PCSYESNO, ___PCSAccountHasStingrayIdentities, 
                        ___PCSCopyFromKeychain, ___PCSCopyFromiCloudKeychain, ___PCSCopyHSMData, 
@@ -226,18 +229,18 @@ exports:
                        _kPCSServiceRaw, _kPCSServiceRoutined, _kPCSServiceSafari, 
                        _kPCSServiceSharing, _kPCSServiceSiriKnowledge, _kPCSServiceSiriProfile, 
                        _kPCSServiceTTYCallHistory, _kPCSServiceWalletPaymentServices, 
-                       _kPCSServiceiAD, _kPCSServiceiMessage, _kPCSSettingsSuiteName, 
-                       _kPCSSetupAuthToken, _kPCSSetupBoundaryNoCreate, _kPCSSetupDSID, 
-                       _kPCSSetupDSIDAny, _kPCSSetupDeviceIdentifier, _kPCSSetupDisableiCDP, 
-                       _kPCSSetupDontImportManatee, _kPCSSetupEnvionment, _kPCSSetupEscrowURL, 
-                       _kPCSSetupForceLogging, _kPCSSetupForceNewIdentity, _kPCSSetupForceUpdate, 
-                       _kPCSSetupForceValidateKey, _kPCSSetupHSMContent, _kPCSSetupHSMMetaData, 
-                       _kPCSSetupICSC, _kPCSSetupInitialSyncState, _kPCSSetupInitialSyncStateComplete, 
-                       _kPCSSetupInitialSyncStateSecureBackup, _kPCSSetupInitialSyncStateTimeout, 
-                       _kPCSSetupInitialSyncStateTimeoutNotInCircle, _kPCSSetupKeychain, 
-                       _kPCSSetupLimitToServices, _kPCSSetupLogContext, _kPCSSetupLogFacility, 
-                       _kPCSSetupMTTCallback, _kPCSSetupMetadata, _kPCSSetupPassword, 
-                       _kPCSSetupPreferLocalKeyPreference, _kPCSSetupReadwriteKeyset, 
+                       _kPCSServiceiAD, _kPCSServiceiMessage, _kPCSSettingStingrayRoll, 
+                       _kPCSSettingsSuiteName, _kPCSSetupAuthToken, _kPCSSetupBoundaryNoCreate, 
+                       _kPCSSetupDSID, _kPCSSetupDSIDAny, _kPCSSetupDeviceIdentifier, 
+                       _kPCSSetupDisableiCDP, _kPCSSetupDontImportManatee, _kPCSSetupEnvionment, 
+                       _kPCSSetupEscrowURL, _kPCSSetupForceLogging, _kPCSSetupForceNewIdentity, 
+                       _kPCSSetupForceUpdate, _kPCSSetupForceValidateKey, _kPCSSetupHSMContent, 
+                       _kPCSSetupHSMMetaData, _kPCSSetupICSC, _kPCSSetupInitialSyncState, 
+                       _kPCSSetupInitialSyncStateComplete, _kPCSSetupInitialSyncStateSecureBackup, 
+                       _kPCSSetupInitialSyncStateTimeout, _kPCSSetupInitialSyncStateTimeoutNotInCircle, 
+                       _kPCSSetupKeychain, _kPCSSetupLimitToServices, _kPCSSetupLogContext, 
+                       _kPCSSetupLogFacility, _kPCSSetupMTTCallback, _kPCSSetupMetadata, 
+                       _kPCSSetupPassword, _kPCSSetupPreferLocalKeyPreference, _kPCSSetupReadwriteKeyset, 
                        _kPCSSetupRecoverMode, _kPCSSetupRegistryCleanup, _kPCSSetupRollIdentity, 
                        _kPCSSetupService, _kPCSSetupStatistics, _kPCSSetupStingray, 
                        _kPCSSetupStingrayLargeDataSupport, _kPCSSetupStingrayUpdateSupport, 

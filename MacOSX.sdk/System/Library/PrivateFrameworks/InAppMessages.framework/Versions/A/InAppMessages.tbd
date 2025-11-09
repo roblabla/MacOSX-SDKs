@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           57D420BB-E6DE-3931-B5B9-250281A7BCFF
+    value:           BF948202-019D-3978-B922-C3429B725F76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36CB7739-B2E2-3B15-BBEC-3712C3BE2EA8
+    value:           86CE6015-9491-3FF1-AD97-AAF0EA3CCB89
 install-name:    '/System/Library/PrivateFrameworks/InAppMessages.framework/Versions/A/InAppMessages'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -28,17 +28,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E0E479B2-EBEE-380A-A63E-56E4DE6EFAAC
+    value:           BC263A8B-FAD2-375F-8909-6669B40551FA
   - target:          x86_64-maccatalyst
-    value:           E0E479B2-EBEE-380A-A63E-56E4DE6EFAAC
+    value:           BC263A8B-FAD2-375F-8909-6669B40551FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1BB0E533-D9D6-3A27-A1B9-B51FAF2D4C25
+    value:           15A9AB66-EC26-3DBF-A875-35F29DD680C9
   - target:          arm64e-maccatalyst
-    value:           1BB0E533-D9D6-3A27-A1B9-B51FAF2D4C25
+    value:           15A9AB66-EC26-3DBF-A875-35F29DD680C9
 install-name:    '/System/Library/PrivateFrameworks/InAppMessagesCore.framework/Versions/A/InAppMessagesCore'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

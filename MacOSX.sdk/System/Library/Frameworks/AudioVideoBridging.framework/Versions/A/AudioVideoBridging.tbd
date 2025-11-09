@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4D60CDAA-2B46-36FB-B10A-AE41843C6054
+    value:           D458E0A0-F337-3998-B434-76C69AD337F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E30E4D7-A616-3304-AF26-590FAC93F1D2
+    value:           AE02F191-40E1-3996-A83F-2B12A4A37B9D
 install-name:    '/System/Library/Frameworks/AudioVideoBridging.framework/Versions/A/AudioVideoBridging'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

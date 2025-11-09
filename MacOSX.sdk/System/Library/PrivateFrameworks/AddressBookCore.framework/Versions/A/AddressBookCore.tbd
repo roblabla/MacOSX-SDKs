@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           187E16BF-F115-327E-B904-D92582EF6CA6
+    value:           8D06AF90-58F4-326B-B36E-5199405926FE
   - target:          x86_64-maccatalyst
-    value:           187E16BF-F115-327E-B904-D92582EF6CA6
+    value:           8D06AF90-58F4-326B-B36E-5199405926FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           87F017F6-6AD1-3614-8A2F-D8157AF81FBF
+    value:           00F16ECC-7FAD-3F93-BF9D-775C35A542AA
   - target:          arm64e-maccatalyst
-    value:           87F017F6-6AD1-3614-8A2F-D8157AF81FBF
+    value:           00F16ECC-7FAD-3F93-BF9D-775C35A542AA
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2498.2.1
+current-version: 2498.4
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -709,17 +709,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4F53DF6-A324-33E8-A75E-D0BA58CE9588
+    value:           39582191-C26D-34D0-9208-5C8801853CDE
   - target:          x86_64-maccatalyst
-    value:           E4F53DF6-A324-33E8-A75E-D0BA58CE9588
+    value:           39582191-C26D-34D0-9208-5C8801853CDE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9A21D76-D4B4-3726-9B9C-9E7E76383092
+    value:           FBB99A75-798E-3759-BAC6-5E950EE97BD0
   - target:          arm64e-maccatalyst
-    value:           D9A21D76-D4B4-3726-9B9C-9E7E76383092
+    value:           FBB99A75-798E-3759-BAC6-5E950EE97BD0
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 swift-abi-version: 7
 exports:

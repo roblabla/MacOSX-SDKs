@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           91FB1704-5961-30C5-ACCE-E15DC0F5A624
+    value:           8CA141A4-399B-3246-BCBC-FE00E3FF96B2
   - target:          x86_64-maccatalyst
-    value:           91FB1704-5961-30C5-ACCE-E15DC0F5A624
+    value:           8CA141A4-399B-3246-BCBC-FE00E3FF96B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB09334A-62BC-3921-BAFC-7A9B7B446B51
+    value:           D62B274A-5EF7-3B7E-9774-74F1909FBB0B
   - target:          arm64e-maccatalyst
-    value:           DB09334A-62BC-3921-BAFC-7A9B7B446B51
+    value:           D62B274A-5EF7-3B7E-9774-74F1909FBB0B
 install-name:    '/System/Library/PrivateFrameworks/ClassroomKit.framework/Versions/A/ClassroomKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -334,19 +334,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F235EEAA-AC64-33C3-847A-B0172C57A27B
+    value:           9BB9E5AE-FFF1-3110-A7C8-D4ABEBC92568
   - target:          x86_64-maccatalyst
-    value:           F235EEAA-AC64-33C3-847A-B0172C57A27B
+    value:           9BB9E5AE-FFF1-3110-A7C8-D4ABEBC92568
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFE4AEC9-DD27-3736-BA70-52B9609301A5
+    value:           EBC560A6-4CDD-3F04-BA17-83F086C56BDE
   - target:          arm64e-maccatalyst
-    value:           AFE4AEC9-DD27-3736-BA70-52B9609301A5
+    value:           EBC560A6-4CDD-3F04-BA17-83F086C56BDE
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 8.9
+current-version: 8.41
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -378,19 +378,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29E757FE-31C2-3BED-BB27-7C3CC81540C9
+    value:           546EAC85-FAB0-3D0F-8201-F8F89728F31F
   - target:          x86_64-maccatalyst
-    value:           29E757FE-31C2-3BED-BB27-7C3CC81540C9
+    value:           546EAC85-FAB0-3D0F-8201-F8F89728F31F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1B442F5-00C6-3ADA-B88B-70584C59627B
+    value:           AC39F078-AD65-3D12-B434-5FC40FFCC932
   - target:          arm64e-maccatalyst
-    value:           D1B442F5-00C6-3ADA-B88B-70584C59627B
+    value:           AC39F078-AD65-3D12-B434-5FC40FFCC932
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 65
+current-version: 67
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

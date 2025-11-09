@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C986962B-3C5C-37B1-B26D-EC45991D3581
+    value:           8ACFAF99-05A2-3411-A3AD-67A7FA075C3A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           103E31AC-CCD3-37DF-AD28-88381341A29F
+    value:           ACE46012-EAF2-3065-AEAA-133A55C96095
 install-name:    '/usr/lib/libnwswifttls.dylib'
 swift-abi-version: 7
 exports:
@@ -27,6 +27,7 @@ exports:
                        '_$s10nwswifttls14STLSHandshakerC_10serverName23quicTransportParameters4alpnACSgSo7NSArrayCSg_So8NSStringCSgSo6NSDataCSgAPtcfCTq', 
                        '_$s10nwswifttls14STLSHandshakerC_10serverName23quicTransportParameters4alpnACSgSo7NSArrayCSg_So8NSStringCSgSo6NSDataCSgAPtcfc', 
                        '_$s10nwswifttls14STLSHandshakerCfD', '_OBJC_CLASS_$__TtC10nwswifttls14STLSHandshaker', 
-                       '_OBJC_METACLASS_$__TtC10nwswifttls14STLSHandshaker', _nwswifttls_copy_definition ]
+                       '_OBJC_METACLASS_$__TtC10nwswifttls14STLSHandshaker', _nwswifttls_copy_definition, 
+                       _nwswifttls_identifier ]
     objc-classes:    [ _TtC10nwswifttls14STLSHandshaker ]
 ...

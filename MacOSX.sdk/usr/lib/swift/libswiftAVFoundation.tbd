@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B22BBF71-6B30-3322-9FD8-C2AC365237F8
+    value:           2E20E7EF-3CFE-32FD-AAB0-96B06AF401F5
   - target:          x86_64-maccatalyst
-    value:           B22BBF71-6B30-3322-9FD8-C2AC365237F8
+    value:           2E20E7EF-3CFE-32FD-AAB0-96B06AF401F5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           696D6B37-46FB-3EFC-8639-D7D03D20902F
+    value:           F2BBEB51-5011-3FE2-AA4C-7875D157E5A1
   - target:          arm64e-maccatalyst
-    value:           696D6B37-46FB-3EFC-8639-D7D03D20902F
+    value:           F2BBEB51-5011-3FE2-AA4C-7875D157E5A1
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2070.8.1
+current-version: 2080.20.4
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -149,6 +149,8 @@ exports:
                        '_$sSo14AVAssetVariantC12AVFoundationE11peakBitRateSdSgvpMV', 
                        '_$sSo14AVAssetVariantC12AVFoundationE14averageBitRateSdSgvg', 
                        '_$sSo14AVAssetVariantC12AVFoundationE14averageBitRateSdSgvpMV', 
+                       '_$sSo14AVCapturePhotoC12AVFoundationE21cgImageRepresentations9UnmanagedVySo10CGImageRefaGSgyF', 
+                       '_$sSo14AVCapturePhotoC12AVFoundationE28previewCGImageRepresentations9UnmanagedVySo0E3RefaGSgyF', 
                        '_$sSo16AVMutableCaptionC12AVFoundationE10removeRuby2inySo8_NSRangeV_tF', 
                        '_$sSo16AVMutableCaptionC12AVFoundationE12setFontStyle_2inySo09AVCaptioneF0V_So8_NSRangeVtF', 
                        '_$sSo16AVMutableCaptionC12AVFoundationE12setTextColor_2inySo10CGColorRefa_So8_NSRangeVtF', 
@@ -167,8 +169,10 @@ exports:
                        '_$sSo18AVVideoCompositionC12AVFoundationE24sourceSampleDataTrackIDsSays5Int32VGvpMV', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE012availableRawB16PixelFormatTypesSays6UInt32VGvg', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE012availableRawB16PixelFormatTypesSays6UInt32VGvpMV', 
+                       '_$sSo20AVCapturePhotoOutputC12AVFoundationE012supportedRawB16PixelFormatTypes3forSaySo8NSNumberCGSo10AVFileTypea_tF', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE09availableB16PixelFormatTypesSays6UInt32VGvg', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE09availableB16PixelFormatTypesSays6UInt32VGvpMV', 
+                       '_$sSo20AVCapturePhotoOutputC12AVFoundationE09supportedB16PixelFormatTypes3forSaySo8NSNumberCGSo10AVFileTypea_tF', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE19supportedFlashModesSaySo0aF4ModeVGvg', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE19supportedFlashModesSaySo0aF4ModeVGvpMV', 
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE20supportedColorSpacesSaySo0aF5SpaceVGvg', 

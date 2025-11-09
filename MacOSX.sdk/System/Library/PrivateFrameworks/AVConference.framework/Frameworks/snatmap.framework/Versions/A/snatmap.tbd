@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           838071CC-3CB5-3A91-BFA0-FFFC418A571E
+    value:           8CBBB89E-7AB4-3E3B-8A52-0886E076FA67
   - target:          x86_64-maccatalyst
-    value:           838071CC-3CB5-3A91-BFA0-FFFC418A571E
+    value:           8CBBB89E-7AB4-3E3B-8A52-0886E076FA67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E74FF9B1-B264-37CC-8663-69957D5062F5
+    value:           86AF124C-3D4A-3611-8F68-72AF8F5C7A41
   - target:          arm64e-maccatalyst
-    value:           E74FF9B1-B264-37CC-8663-69957D5062F5
+    value:           86AF124C-3D4A-3611-8F68-72AF8F5C7A41
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/snatmap.framework/Versions/A/snatmap'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

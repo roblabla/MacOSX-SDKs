@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B4734899-1B73-3941-821E-96BF473FEE62
+    value:           6F0B1F08-B9B6-39A2-9862-A5457891F4BD
   - target:          x86_64-maccatalyst
-    value:           B4734899-1B73-3941-821E-96BF473FEE62
+    value:           6F0B1F08-B9B6-39A2-9862-A5457891F4BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0169FB76-F2A4-3412-94C6-129A4EF5F8C1
+    value:           79DA25B3-59D7-35C9-9DA9-447B89A8D3F3
   - target:          arm64e-maccatalyst
-    value:           0169FB76-F2A4-3412-94C6-129A4EF5F8C1
+    value:           79DA25B3-59D7-35C9-9DA9-447B89A8D3F3
 install-name:    '/System/Library/PrivateFrameworks/NewsURLBucket.framework/Versions/A/NewsURLBucket'
 swift-abi-version: 7
 exports:

@@ -121,6 +121,16 @@ API_AVAILABLE(macos(10.11), ios(9)) __WATCHOS_PROHIBITED
  */
 @property (copy, nonatomic, nullable) NSString *transactionAuthor API_AVAILABLE(macos(12), ios(15));
 
+/*!
+ * @abstract    Should the contacts be refetched as part of executing the save request.
+ *
+ * @discussion  Default is `YES` where added and updated contacts are refetched by the executing save request.
+ *              Set to `NO` to suppress this refetch behavior and reduce the execution time of the save request.
+ *
+ * @note        If set to `NO` do not use the contacts after the executed save request as they may not be in a current state.
+ */
+@property (assign, nonatomic) BOOL shouldRefetchContacts API_AVAILABLE(macos(12.3), ios(15.4));
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           85583759-BD66-3146-AF62-7D25102B0D76
+    value:           394DF714-25EF-3539-9CEC-0337F85B7D20
   - target:          x86_64-maccatalyst
-    value:           85583759-BD66-3146-AF62-7D25102B0D76
+    value:           394DF714-25EF-3539-9CEC-0337F85B7D20
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8351DD1-5FBF-3C05-B11B-467D295F1F27
+    value:           30FC827B-BCDD-3FA6-A551-2FF9272F2986
   - target:          arm64e-maccatalyst
-    value:           F8351DD1-5FBF-3C05-B11B-467D295F1F27
+    value:           30FC827B-BCDD-3FA6-A551-2FF9272F2986
 install-name:    '/System/Library/PrivateFrameworks/SPShared.framework/Versions/A/SPShared'
 swift-abi-version: 7
 allowable-clients:
@@ -372,10 +372,22 @@ exports:
                        '_$s8SPShared17DataRepresentableP18dataRepresentation10Foundation0B0VvgTq', 
                        '_$s8SPShared17DataRepresentableP18dataRepresentationx10Foundation0B0V_tKcfCTj', 
                        '_$s8SPShared17DataRepresentableP18dataRepresentationx10Foundation0B0V_tKcfCTq', 
-                       '_$s8SPShared17DataRepresentableTL', '_$s8SPShared17DispatchUtilitiesO010logCurrentB8QueueQoSyyFZ', 
+                       '_$s8SPShared17DataRepresentableTL', '_$s8SPShared17DirectorySequenceV2at26includingPropertiesForKeys7optionsAC10Foundation3URLV_SaySo16NSURLResourceKeyaGSgSo29NSDirectoryEnumerationOptionsVtcfC', 
+                       '_$s8SPShared17DirectorySequenceV4next10Foundation3URLVSgyF', 
+                       '_$s8SPShared17DirectorySequenceVMa', '_$s8SPShared17DirectorySequenceVMn', 
+                       '_$s8SPShared17DirectorySequenceVN', '_$s8SPShared17DirectorySequenceVSTAAMc', 
+                       '_$s8SPShared17DirectorySequenceVStAAMc', '_$s8SPShared17DispatchUtilitiesO010logCurrentB8QueueQoSyyFZ', 
                        '_$s8SPShared17DispatchUtilitiesOMa', '_$s8SPShared17DispatchUtilitiesOMn', 
-                       '_$s8SPShared17DispatchUtilitiesON', '_$s8SPShared17SchedulerProtocolMp', 
-                       '_$s8SPShared17SchedulerProtocolP5after5delay7performAA11Cancellable_pSd_yyctFTj', 
+                       '_$s8SPShared17DispatchUtilitiesON', '_$s8SPShared17QueueSynchronizerC15conditionalSyncyxxyKXEKlF', 
+                       '_$s8SPShared17QueueSynchronizerC5queueACSo012OS_dispatch_D0C_tcfC', 
+                       '_$s8SPShared17QueueSynchronizerC5queueACSo012OS_dispatch_D0C_tcfCTj', 
+                       '_$s8SPShared17QueueSynchronizerC5queueACSo012OS_dispatch_D0C_tcfCTq', 
+                       '_$s8SPShared17QueueSynchronizerC5queueACSo012OS_dispatch_D0C_tcfc', 
+                       '_$s8SPShared17QueueSynchronizerCMa', '_$s8SPShared17QueueSynchronizerCMm', 
+                       '_$s8SPShared17QueueSynchronizerCMn', '_$s8SPShared17QueueSynchronizerCMo', 
+                       '_$s8SPShared17QueueSynchronizerCMu', '_$s8SPShared17QueueSynchronizerCN', 
+                       '_$s8SPShared17QueueSynchronizerCfD', '_$s8SPShared17QueueSynchronizerCfd', 
+                       '_$s8SPShared17SchedulerProtocolMp', '_$s8SPShared17SchedulerProtocolP5after5delay7performAA11Cancellable_pSd_yyctFTj', 
                        '_$s8SPShared17SchedulerProtocolP5after5delay7performAA11Cancellable_pSd_yyctFTq', 
                        '_$s8SPShared17SchedulerProtocolP7perform16cancellableBlockAA11Cancellable_pyAaF_pc_tFTj', 
                        '_$s8SPShared17SchedulerProtocolP7perform16cancellableBlockAA11Cancellable_pyAaF_pc_tFTq', 
@@ -747,11 +759,11 @@ exports:
                        '_$sSo12NSFileHandleC8SPSharedE04FileB9HashErrorOSQACMc', 
                        '_$sSo12NSFileHandleC8SPSharedE04FileB9HashErrorOs0F0ACMc', 
                        '_$sSo12NSFileHandleC8SPSharedE10bufferSizeSivgZ', '_$sSo12NSFileHandleC8SPSharedE4hash7fileURL9algorithm10Foundation4DataVAG0F0V_AC13HashAlgorithmOtKFZ', 
-                       '_$sSo13NSFileManagerC8SPSharedE14deepEnumerator2at26includingPropertiesForKeysSo011NSDirectoryE0CSg10Foundation3URLV_SaySo16NSURLResourceKeyaGSgtF', 
+                       '_$sSo13NSFileManagerC8SPSharedE12deepSequence2at26includingPropertiesForKeysAC09DirectoryE0V10Foundation3URLV_SaySo16NSURLResourceKeyaGSgtF', 
+                       '_$sSo13NSFileManagerC8SPSharedE12flatSequence2at26includingPropertiesForKeysAC09DirectoryE0V10Foundation3URLV_SaySo16NSURLResourceKeyaGSgtF', 
                        '_$sSo13NSFileManagerC8SPSharedE14emptyDirectory3urly10Foundation3URLV_tFZ', 
-                       '_$sSo13NSFileManagerC8SPSharedE14flatEnumerator2at26includingPropertiesForKeysSo011NSDirectoryE0CSg10Foundation3URLV_SaySo16NSURLResourceKeyaGSgtF', 
+                       '_$sSo13NSFileManagerC8SPSharedE14referenceCount9directorySi10Foundation3URLV_tKF', 
                        '_$sSo13NSFileManagerC8SPSharedE15removeDirectory3urly10Foundation3URLV_tKFZ', 
-                       '_$sSo13NSFileManagerC8SPSharedE15shallowContents2ofSay10Foundation3URLVGAH_tFZ', 
                        '_$sSo13NSFileManagerC8SPSharedE26createDirectoryIfNecessary3url10attributesSb10Foundation3URLV_SDySo0A12AttributeKeyaypGSgtFZ', 
                        '_$sSo13NSFileManagerC8SPSharedE30daemonAgentDirectoryAttributesSDySo0A12AttributeKeyaypGvMZ', 
                        '_$sSo13NSFileManagerC8SPSharedE30daemonAgentDirectoryAttributesSDySo0A12AttributeKeyaypGvgZ', 

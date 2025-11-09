@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           989C8D66-4D72-3DBE-8057-F575A1188E30
+    value:           CB46A324-F57D-3A42-96C9-C2DAD53600C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           47587FD9-13CF-348B-81B1-4B079551013D
+    value:           B94C823C-BDC8-3B43-A240-79FE4E0DD4F0
 install-name:    '/System/Library/PrivateFrameworks/ChronoKit.framework/Versions/A/ChronoKit'
-current-version: 181.5.6
+current-version: 181.16
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -412,8 +412,12 @@ exports:
                        '_$s9ChronoKit14WidgetCacheKeyV10allMetrics2of3forACSo9CHSWidgetC_10Foundation3URLVtFZ', 
                        '_$s9ChronoKit14WidgetCacheKeyV11descriptionSSvg', '_$s9ChronoKit14WidgetCacheKeyV11descriptionSSvpMV', 
                        '_$s9ChronoKit14WidgetCacheKeyV20allWidgetsAndMetrics3forAC10Foundation3URLV_tFZ', 
+                       '_$s9ChronoKit14WidgetCacheKeyV6widgetSo9CHSWidgetCSgvg', 
+                       '_$s9ChronoKit14WidgetCacheKeyV6widgetSo9CHSWidgetCSgvpMV', 
                        '_$s9ChronoKit14WidgetCacheKeyV7baseURL05entryE0AC10Foundation0G0V_AA0c5EntryE0VtcfC', 
                        '_$s9ChronoKit14WidgetCacheKeyV7baseURL6widget7metricsAC10Foundation0G0V_So9CHSWidgetCSo0K7MetricsCtcfC', 
+                       '_$s9ChronoKit14WidgetCacheKeyV7metricsSo16CHSWidgetMetricsCSgvg', 
+                       '_$s9ChronoKit14WidgetCacheKeyV7metricsSo16CHSWidgetMetricsCSgvpMV', 
                        '_$s9ChronoKit14WidgetCacheKeyVMa', '_$s9ChronoKit14WidgetCacheKeyVMn', 
                        '_$s9ChronoKit14WidgetCacheKeyVN', '_$s9ChronoKit14WidgetCacheKeyVs23CustomStringConvertibleAAMc', 
                        '_$s9ChronoKit14WidgetEntryKeyV11descriptionSSvg', '_$s9ChronoKit14WidgetEntryKeyV11descriptionSSvpMV', 

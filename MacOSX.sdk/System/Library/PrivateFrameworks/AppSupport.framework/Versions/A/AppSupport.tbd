@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           53E6F144-CF27-399F-8C29-5826CED53174
+    value:           984E6D31-8BDE-3614-9A41-64FB4F8D9A58
   - target:          x86_64-maccatalyst
-    value:           53E6F144-CF27-399F-8C29-5826CED53174
+    value:           984E6D31-8BDE-3614-9A41-64FB4F8D9A58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4AFEAE6B-1F11-3FDC-8397-9379AEBD77E4
+    value:           EBE9F62A-B573-3915-8CD9-D77E9C8A4FB2
   - target:          arm64e-maccatalyst
-    value:           4AFEAE6B-1F11-3FDC-8397-9379AEBD77E4
+    value:           EBE9F62A-B573-3915-8CD9-D77E9C8A4FB2
 install-name:    '/System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport'
 current-version: 29
 reexported-libraries:
@@ -318,17 +318,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ABB0AE76-7862-3A0A-B03D-CD0BC35A4333
+    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
   - target:          x86_64-maccatalyst
-    value:           ABB0AE76-7862-3A0A-B03D-CD0BC35A4333
+    value:           D125D91F-3071-3105-8D88-04CB43BFFB61
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DAC4DE9-8B49-3979-96FE-E569155BA995
+    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
   - target:          arm64e-maccatalyst
-    value:           5DAC4DE9-8B49-3979-96FE-E569155BA995
+    value:           CBC6A057-C2A4-3B89-8938-24E0E12AB6C6
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

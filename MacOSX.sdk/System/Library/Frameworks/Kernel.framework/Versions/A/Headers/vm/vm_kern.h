@@ -74,6 +74,7 @@ extern "C" {
 #include <mach/mach_types.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
+#include <mach/vm_types.h>
 
 
 

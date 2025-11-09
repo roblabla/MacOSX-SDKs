@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           369A3D84-269C-35C8-A5DC-DD6C8569085B
+    value:           985A04FE-4EAC-366D-A396-B90C611F8EB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A905B004-B205-3667-A0AD-8E1927CEA042
+    value:           B8D280AB-54E9-3124-8266-FE935FDF9BB0
 install-name:    '/System/Library/Frameworks/GLKit.framework/Versions/A/GLKit'
 current-version: 125
 exports:

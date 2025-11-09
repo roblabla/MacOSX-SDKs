@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           47BD0D56-A3F3-3C9B-82CC-1D0CA647C34C
+    value:           E160CCF9-3F67-3B0C-B149-4CD0E4450E4B
   - target:          x86_64-maccatalyst
-    value:           47BD0D56-A3F3-3C9B-82CC-1D0CA647C34C
+    value:           E160CCF9-3F67-3B0C-B149-4CD0E4450E4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           907B68A7-DDC9-3211-8A1D-2AF2AED2C452
+    value:           3637DF5C-6C69-304A-AF29-943EA6716F4A
   - target:          arm64e-maccatalyst
-    value:           907B68A7-DDC9-3211-8A1D-2AF2AED2C452
+    value:           3637DF5C-6C69-304A-AF29-943EA6716F4A
 install-name:    '/System/Library/PrivateFrameworks/PromotedContentSupport.framework/Versions/A/PromotedContentSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

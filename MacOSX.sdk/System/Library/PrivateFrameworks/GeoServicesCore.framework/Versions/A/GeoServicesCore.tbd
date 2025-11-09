@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A7F01FDD-BE16-377C-BEEF-8E9A3DD42255
+    value:           9CC158C3-1E8F-3CF3-A11F-1EF4B68CF2EE
   - target:          x86_64-maccatalyst
-    value:           A7F01FDD-BE16-377C-BEEF-8E9A3DD42255
+    value:           9CC158C3-1E8F-3CF3-A11F-1EF4B68CF2EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55997FC2-0765-3060-8050-A03F5679C88B
+    value:           F9A5183C-8C0C-37A4-8492-C622C00B40AF
   - target:          arm64e-maccatalyst
-    value:           55997FC2-0765-3060-8050-A03F5679C88B
+    value:           F9A5183C-8C0C-37A4-8492-C622C00B40AF
 install-name:    '/System/Library/PrivateFrameworks/GeoServicesCore.framework/Versions/A/GeoServicesCore'
-current-version: 1830.22.9
+current-version: 1830.24.11
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

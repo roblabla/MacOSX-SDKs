@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0F489840-937A-322E-8B1A-B5037DEC04E7
+    value:           A80AF2B7-5DD0-3E09-83CC-631F22C06AA6
   - target:          x86_64-maccatalyst
-    value:           0F489840-937A-322E-8B1A-B5037DEC04E7
+    value:           A80AF2B7-5DD0-3E09-83CC-631F22C06AA6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9679F90-CD6F-3590-A763-624DA7D23C74
+    value:           C14BC70B-4F34-3C6A-9521-205090815842
   - target:          arm64e-maccatalyst
-    value:           E9679F90-CD6F-3590-A763-624DA7D23C74
+    value:           C14BC70B-4F34-3C6A-9521-205090815842
 install-name:    '/System/Library/PrivateFrameworks/CallHistory.framework/Versions/A/CallHistory'
 current-version: 2
 exports:

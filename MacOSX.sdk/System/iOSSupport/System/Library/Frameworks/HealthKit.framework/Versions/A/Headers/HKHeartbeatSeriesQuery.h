@@ -16,7 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      An HKHeartbeatSeriesQuery is used to access data associated with an HKHeartbeatSeriesSample.
  @discussion    Once instantiated, call HKHealthStore executeQuery to begin enumerating the heartbeat series data.
  */
-HK_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKHeartbeatSeriesQueryDescriptor", ios(13.0, API_TO_BE_DEPRECATED), watchos(6.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(13.0), watchos(6.0))
+#endif
 @interface HKHeartbeatSeriesQuery : HKQuery
 
 /*!

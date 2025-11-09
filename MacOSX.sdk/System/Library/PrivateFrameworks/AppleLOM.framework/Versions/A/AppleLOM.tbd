@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           79C26291-7469-37E9-B3AB-DE7F630589A6
+    value:           79CEE492-E346-3D2F-A551-BFD52525F0EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD348F44-1692-3CA6-92AB-491B01D1F196
+    value:           916C9A17-810E-3E42-A7CD-A68B3793A0A0
 install-name:    '/System/Library/PrivateFrameworks/AppleLOM.framework/Versions/A/AppleLOM'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

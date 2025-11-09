@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EEB174A9-A759-3E96-A878-6975631DFFE4
+    value:           DDCC009B-0196-3B56-B4FA-BC16EC227D5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           143DE6B5-36FE-3A1C-B406-C2A11FB88E70
+    value:           5268856F-E1B1-3CDA-9861-68AA27DDB32B
 install-name:    '/System/Library/PrivateFrameworks/MDMClientLibrary.framework/Versions/A/MDMClientLibrary'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

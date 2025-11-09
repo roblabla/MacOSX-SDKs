@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A111C6A7-F071-3FF4-9DB6-5429462ED423
+    value:           959A9A64-31DB-33F6-AE9B-65C2B5869A76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3FD6410-F038-386D-B99C-C76E16B9510B
+    value:           81EF62D9-467B-3267-AE1A-E5DBBED00C43
 install-name:    '/System/Library/PrivateFrameworks/MiniSoftwareUpdate.framework/Versions/A/MiniSoftwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

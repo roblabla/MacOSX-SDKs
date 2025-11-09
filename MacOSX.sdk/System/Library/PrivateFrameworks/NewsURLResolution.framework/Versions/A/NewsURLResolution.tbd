@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F8EC5315-49BD-3C3A-8D67-7FE12464DE63
+    value:           663AFC6E-101A-3153-9684-D482C2822A99
   - target:          x86_64-maccatalyst
-    value:           F8EC5315-49BD-3C3A-8D67-7FE12464DE63
+    value:           663AFC6E-101A-3153-9684-D482C2822A99
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7AD9130A-47B9-3CF6-B4DF-ED6E8A7411B0
+    value:           944CC26A-22E4-3518-81D9-F5369A9776E4
   - target:          arm64e-maccatalyst
-    value:           7AD9130A-47B9-3CF6-B4DF-ED6E8A7411B0
+    value:           944CC26A-22E4-3518-81D9-F5369A9776E4
 install-name:    '/System/Library/PrivateFrameworks/NewsURLResolution.framework/Versions/A/NewsURLResolution'
-current-version: 2981.3
+current-version: 3032.1.2
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

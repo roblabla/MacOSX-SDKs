@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3C94D3C1-E3C1-365C-9EB8-2ACEC638127B
+    value:           671D61F0-C989-3524-A7A9-AD8D9462A748
   - target:          x86_64-maccatalyst
-    value:           3C94D3C1-E3C1-365C-9EB8-2ACEC638127B
+    value:           671D61F0-C989-3524-A7A9-AD8D9462A748
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABB194C3-C837-3586-94A2-B6650A1236EB
+    value:           95DE155D-528F-39BA-8B03-E875A466413E
   - target:          arm64e-maccatalyst
-    value:           ABB194C3-C837-3586-94A2-B6650A1236EB
+    value:           95DE155D-528F-39BA-8B03-E875A466413E
 install-name:    '/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -168,16 +168,19 @@ exports:
                        _CBUUIDStartStreamingCharacteristicString, _CBUUIDStopStreamingCharacteristicString, 
                        _CBUUIDSupportedCodecsCharacteristicString, _CBUUIDSystemIDCharacteristicString, 
                        _CBUUIDUARPDataControlPointCharacteristicString, _CBUUIDUnifiedAccessoryRestoreProtocolServiceString, 
-                       _CBUnpairOptionForceDisconnect, _CBXPCGetNextClientID, _gCBDaemonServer ]
+                       _CBUnpairOptionForceDisconnect, _CBUseCaseFromString, _CBXPCGetNextClientID, 
+                       _gCBDaemonServer ]
     objc-classes:    [ CBATTRequest, CBAccessoryLogging, CBAdvertiser, CBAttribute, 
-                       CBAudioLinkQualityInfo, CBCentral, CBCentralManager, CBCharacteristic, 
-                       CBClassicManager, CBClassicPeer, CBConnection, CBController, 
-                       CBControllerInfo, CBControllerSettings, CBDescriptor, CBDevice, 
-                       CBDeviceRequest, CBDeviceResponse, CBDeviceSettings, CBDiscovery, 
-                       CBHIDPerformanceMonitor, CBHIDPerformanceSummary, CBIdentity, 
-                       CBL2CAPChannel, CBManager, CBMutableCharacteristic, CBMutableDescriptor, 
-                       CBMutableService, CBPacketLoggerClient, CBPairingAgent, CBPeer, 
-                       CBPeripheral, CBPeripheralManager, CBReadRequest, CBScalablePipe, 
-                       CBScalablePipeManager, CBServer, CBService, CBSpatialInteractionSession, 
-                       CBSpatialMeasurement, CBUUID, CBWriteRequest ]
+                       CBAudioLinkQualityInfo, CBBLEServiceDataInfo, CBCentral, CBCentralManager, 
+                       CBCharacteristic, CBClassicManager, CBClassicPeer, CBConnection, 
+                       CBController, CBControllerInfo, CBControllerSettings, CBDescriptor, 
+                       CBDevice, CBDeviceRequest, CBDeviceResponse, CBDeviceSettings, 
+                       CBDiscovery, CBDiscoverySummary, CBHIDPerformanceMonitor, 
+                       CBHIDPerformanceSummary, CBIdentity, CBL2CAPChannel, CBManager, 
+                       CBMutableCharacteristic, CBMutableDescriptor, CBMutableService, 
+                       CBPacketLoggerClient, CBPairingAgent, CBPairingInfo, CBPeer, 
+                       CBPeripheral, CBPeripheralManager, CBProductInfo, CBReadRequest, 
+                       CBScalablePipe, CBScalablePipeManager, CBServer, CBService, 
+                       CBSpatialInteractionSession, CBSpatialMeasurement, CBUUID, 
+                       CBUtil, CBWriteRequest ]
 ...

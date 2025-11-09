@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BD24597B-48E5-30C3-89B3-7FC2BC8E8896
+    value:           360D3664-3303-3F47-838F-117C700CF143
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04E9B9DC-9FC7-34B5-A2F4-67281CC8680E
+    value:           4610AF60-68F0-3A71-9340-90348363F99B
 install-name:    '/System/Library/PrivateFrameworks/AutomationMode.framework/Versions/A/AutomationMode'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

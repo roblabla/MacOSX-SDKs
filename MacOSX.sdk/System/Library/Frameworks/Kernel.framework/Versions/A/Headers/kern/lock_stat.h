@@ -27,29 +27,13 @@
  */
 #ifndef _KERN_LOCKSTAT_H
 #define _KERN_LOCKSTAT_H
+
 #include <machine/locks.h>
 #include <machine/atomic.h>
 #include <kern/lock_group.h>
 
-/*
- * N.B.: On x86, statistics are currently recorded for all indirect mutexes.
- * Also, only the acquire attempt count (GRP_MTX_STAT_UTIL) is maintained
- * as a 64-bit quantity (the new x86 specific statistics are also maintained
- * as 32-bit quantities).
- *
- *
- * Enable this preprocessor define to record the first miss alone
- * By default, we count every miss, hence multiple misses may be
- * recorded for a single lock acquire attempt via lck_mtx_lock
- */
-#undef LOG_FIRST_MISS_ALONE
-
-/*
- * This preprocessor define controls whether the R-M-W update of the
- * per-group statistics elements are atomic (LOCK-prefixed)
- * Enabled by default.
- */
-#define ATOMIC_STAT_UPDATES 1
+__BEGIN_DECLS
+#pragma GCC visibility push(hidden)
 
 /*
  * DTrace lockstat probe definitions
@@ -68,19 +52,21 @@ enum lockstat_probe_id {
 	 */
 	LS_LCK_MTX_LOCK_ACQUIRE,
 	LS_LCK_MTX_LOCK_BLOCK,
-	LS_LCK_MTX_LOCK_SPIN,
+	LS_LCK_MTX_LOCK_ADAPTIVE_SPIN,
+	LS_LCK_MTX_LOCK_SPIN_SPIN,
+	LS_LCK_MTX_LOCK_SPIN_ACQUIRE,
 	LS_LCK_MTX_LOCK_ILK_SPIN,
 	LS_LCK_MTX_TRY_LOCK_ACQUIRE,
-	LS_LCK_MTX_TRY_SPIN_LOCK_ACQUIRE,
+	LS_LCK_MTX_TRY_LOCK_SPIN_ACQUIRE,
 	LS_LCK_MTX_UNLOCK_RELEASE,
-	LS_LCK_MTX_LOCK_SPIN_ACQUIRE,
 
 	/*
 	 * Provide a parallel set for indirect mutexes
 	 */
 	LS_LCK_MTX_EXT_LOCK_ACQUIRE,
 	LS_LCK_MTX_EXT_LOCK_BLOCK,
-	LS_LCK_MTX_EXT_LOCK_SPIN,
+	LS_LCK_MTX_EXT_LOCK_SPIN_SPIN,
+	LS_LCK_MTX_EXT_LOCK_ADAPTIVE_SPIN,
 	LS_LCK_MTX_EXT_LOCK_ILK_SPIN,
 	LS_LCK_MTX_EXT_UNLOCK_RELEASE,
 
@@ -119,48 +105,8 @@ enum lockstat_probe_id {
 	LS_NPROBES
 };
 
-#if CONFIG_DTRACE
-extern uint32_t lockstat_probemap[LS_NPROBES];
-extern void dtrace_probe(uint32_t, uint64_t, uint64_t,
-    uint64_t, uint64_t, uint64_t);
-/*
- * Macros to record lockstat probes.
- */
-#define LOCKSTAT_RECORD4(probe, lp, arg0, arg1, arg2, arg3)             \
-	{                                                                   \
-	        uint32_t id;                                                \
-	        if (__improbable(id = lockstat_probemap[(probe)])) {        \
-	                dtrace_probe(id, (uintptr_t)(lp), (arg0),           \
-	                    (arg1), (arg2), (arg3));                        \
-	        }                                                           \
-	}
-#define LOCKSTAT_RECORD_(probe, lp, arg0, arg1, arg2, arg3, ...) LOCKSTAT_RECORD4(probe, lp, arg0, arg1, arg2, arg3)
-#define LOCKSTAT_RECORD__(probe, lp, arg0, arg1, arg2, arg3, ...) LOCKSTAT_RECORD_(probe, lp, arg0, arg1, arg2, arg3)
-#define LOCKSTAT_RECORD(probe, lp, ...) LOCKSTAT_RECORD__(probe, lp, ##__VA_ARGS__, 0, 0, 0, 0)
-#else
-#define LOCKSTAT_RECORD()
-#endif /* CONFIG_DTRACE */
 
-/*
- * Time threshold before dtrace lockstat spin
- * probes are triggered
- */
-extern machine_timeout32_t dtrace_spin_threshold;
-
-#if CONFIG_DTRACE
-void lockprof_invoke(lck_grp_t*, lck_grp_stat_t*, uint64_t);
-#endif /* CONFIG_DTRACE */
-
-static inline void
-lck_grp_stat_enable(lck_grp_stat_t *stat)
-{
-	stat->lgs_enablings++;
-}
-
-static inline void
-lck_grp_stat_disable(lck_grp_stat_t *stat)
-{
-	stat->lgs_enablings--;
-}
+#pragma GCC visibility pop
+__END_DECLS
 
 #endif /* _KERN_LOCKSTAT_H */

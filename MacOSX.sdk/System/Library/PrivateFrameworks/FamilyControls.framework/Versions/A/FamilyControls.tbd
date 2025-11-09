@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4F514779-F519-35B1-84B6-76A809C170F2
+    value:           B7FEC652-0013-3245-931E-4DEBB24D6B2C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           76E47B1D-91A2-32E5-A5D0-8CA9306CEF56
+    value:           910E608A-E477-31EB-8536-50487D4B8ED2
 install-name:    '/System/Library/PrivateFrameworks/FamilyControls.framework/Versions/A/FamilyControls'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

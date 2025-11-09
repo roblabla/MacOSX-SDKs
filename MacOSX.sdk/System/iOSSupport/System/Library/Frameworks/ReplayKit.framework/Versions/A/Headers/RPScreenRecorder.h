@@ -88,13 +88,13 @@ API_AVAILABLE(ios(9.0), tvos(10.0))
 @abstract Start clip recording buffering with a completion handler. Note that before recording actually starts, the user may be prompted with UI to confirm recording.
 @discussion handler Called after clip recording is started. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting clip record buffering.
 */
-- (void)startClipBufferingWithCompletionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(tvos);
+- (void)startClipBufferingWithCompletionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.2));
 
 /*!
 @abstract Stop clip recording buffering with a completion handler.
 @discussion handler Called after clip recording session is stopped. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping clip record buffering.
 */
-- (void)stopClipBufferingWithCompletionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(tvos);
+- (void)stopClipBufferingWithCompletionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.2));
 
 /*!
 @abstract Exports clip recording
@@ -102,7 +102,7 @@ API_AVAILABLE(ios(9.0), tvos(10.0))
 @param duration Length of time in seconds for clip recording, capped at either the elapsed time, or a maximum of 15 seconds, depending on which is the shorter amount of time
 @discussion Must be called after startClipBufferingWithCompletionHandler:, otherwise this will return an error. Exports clip recording from newest samples in buffer for duration. handler Will be called after asset is finished writing to output path. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue generating the clip recording.
 */
-- (void)exportClipToURL:(NSURL *)url duration:(NSTimeInterval)duration completionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(tvos);
+- (void)exportClipToURL:(NSURL *)url duration:(NSTimeInterval)duration completionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.2));
 
 /* @abstract Delegate instance for RPScreenRecorder. */
 @property (nonatomic, weak, nullable) id<RPScreenRecorderDelegate> delegate;

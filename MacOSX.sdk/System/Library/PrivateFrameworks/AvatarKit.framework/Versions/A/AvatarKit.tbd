@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           94124BE8-57A3-3E23-84BA-A5E3BD211E63
+    value:           8778DF56-4D85-3E18-BDC2-F15ACFEA252D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16948413-A2DC-3CD2-871A-8E9E94D9423E
+    value:           5E583A62-029A-3CA8-ABA9-5890A6FAA5D3
 install-name:    '/System/Library/PrivateFrameworks/AvatarKit.framework/Versions/A/AvatarKit'
-current-version: 312.200
+current-version: 312.255
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AVTAnimojiThumbnailCameraKey, _AVTAnimojiThumbnailLargeSizeKey, 

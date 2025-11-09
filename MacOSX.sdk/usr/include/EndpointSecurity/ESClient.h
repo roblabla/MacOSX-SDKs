@@ -372,15 +372,15 @@ typedef void (^es_handler_block_t)(es_client_t * _Nonnull, const es_message_t * 
  * @param handler The handler block that will be run on all messages sent to this client
  * @return es_new_client_result_t indicating success or a specific error.
  * @discussion Messages are handled strictly serially and in the order they are delivered.
- *			   Returning control from the handler causes the next available message to be dequeued.
- *        	   Messages can be responded to out of order by returning control before calling es_respond_*.
- *			   The es_message_t is only guaranteed to live as long as the scope it is passed into.
- *			   The memory for the given es_message_t is NOT owned by clients and it must not be freed.
- *		  	   For out of order responding the handler must retain the message with es_retain_message.
- *		  	   Callers are required to be entitled with com.apple.developer.endpoint-security.client.
- *		  	   The application calling this interface must also be approved by users via Transparency, Consent & Control
- *		  	   (TCC) mechanisms using the Privacy Preferences pane and adding the application to Full Disk Access.
- *		  	   When a new client is successfully created, all cached results are automatically cleared.
+ *             Returning control from the handler causes the next available message to be dequeued.
+ *             Messages can be responded to out of order by returning control before calling es_respond_*.
+ *             The es_message_t is only guaranteed to live as long as the scope it is passed into.
+ *             The memory for the given es_message_t is NOT owned by clients and it must not be freed.
+ *             For out of order responding the handler must retain the message with es_retain_message.
+ *             Callers are required to be entitled with com.apple.developer.endpoint-security.client.
+ *             The application calling this interface must also be approved by users via Transparency, Consent & Control
+ *             (TCC) mechanisms using the Privacy Preferences pane and adding the application to Full Disk Access.
+ *             When a new client is successfully created, all cached results are automatically cleared.
  *
  * @note When a new client is initialized, there will be a set of paths and a subset of `es_event_type_t` events that are
  *       automatically muted by default. Generally, most AUTH event variants are muted but NOTIFY event variants will

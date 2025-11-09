@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           48C5CF93-78AF-3DAA-847B-1ABE5C36B07F
+    value:           4B2FF4EE-FF5E-3FDE-96B4-7C129286D17F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2FC7D4B-847D-3F8F-9DC7-261CA54DF34E
+    value:           0062D56C-9B3D-35DB-9175-841D495A1667
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 59.4
+current-version: 74.2
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __VZVirtualMachineGuestTypeMacOS ]
@@ -46,18 +46,22 @@ exports:
                        _VZEFIVariableStore, _VZFramebuffer, _VZFramebufferView, _VZGDBDebugStub, 
                        _VZGDBDebugStubConfiguration, _VZGraphicsDevice, _VZHostOnlyNetworkDeviceAttachment, 
                        _VZKeyEvent, _VZKeyboard, _VZLinearFramebufferGraphicsDeviceConfiguration, 
-                       _VZMemory, _VZMouse, _VZMouseEvent, _VZPL011SerialPortConfiguration, 
-                       _VZPointingDevice, _VZScreenCoordinatePointerEvent, _VZScreenCoordinatePointingDevice, 
-                       _VZScrollWheelEvent, _VZSerialPort, _VZSocketSerialPortAttachment, 
-                       _VZUSBMouseConfiguration, _VZVNCAuthenticationSecurityConfiguration, 
+                       _VZMagnifyEvent, _VZMemory, _VZMouse, _VZMouseEvent, _VZMultiTouchDevice, 
+                       _VZMultiTouchDeviceConfiguration, _VZMultiTouchEvent, _VZPL011SerialPortConfiguration, 
+                       _VZPointingDevice, _VZQuickLookEvent, _VZRotationEvent, _VZScreenCoordinatePointerEvent, 
+                       _VZScreenCoordinatePointingDevice, _VZScrollWheelEvent, _VZSerialPort, 
+                       _VZSmartMagnifyEvent, _VZSocketSerialPortAttachment, _VZTouch, 
+                       _VZUSBKeyboard, _VZUSBMassStorageDeviceConfiguration, _VZUSBMouseConfiguration, 
+                       _VZUSBTouchScreenConfiguration, _VZVNCAuthenticationSecurityConfiguration, 
                        _VZVNCNoSecuritySecurityConfiguration, _VZVNCSecurityConfiguration, 
                        _VZVNCServer, _VZVirtioDeviceSpecificConfiguration, _VZVirtioGenericDeviceSpecificConfiguration, 
                        _VZVirtioInputDeviceSpecificConfiguration, _VZVirtioMouseInputDeviceConfiguration, 
                        _VZVirtioQueue, _VZVirtioQueueElement, _VZVirtioSoundDevice, 
                        _VZVirtualMachineConfigurationDecoder, _VZVirtualMachineConfigurationEncoder, 
-                       _VZVirtualMachineStartOptions, _VZXNUBootLoader ]
+                       _VZVirtualMachineStartOptions ]
   - targets:         [ arm64e-macos, arm64-macos ]
     objc-classes:    [ VZMacAuxiliaryStorage, VZMacHardwareModel, VZMacMachineIdentifier, 
                        VZMacOSBootLoader, VZMacOSConfigurationRequirements, VZMacOSInstaller, 
-                       VZMacOSRestoreImage, VZMacPlatformConfiguration ]
+                       VZMacOSRestoreImage, VZMacPlatformConfiguration, _VZAppleTouchScreenConfiguration, 
+                       _VZMacKeyboardConfiguration, _VZMacTrackpadConfiguration ]
 ...

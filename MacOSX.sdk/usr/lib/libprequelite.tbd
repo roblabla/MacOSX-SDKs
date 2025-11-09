@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FEF390A0-C31D-30C2-8DE0-AE4FCE134D6D
+    value:           30BFED14-2CCC-3A88-887F-FE45305DDC4B
   - target:          x86_64-maccatalyst
-    value:           FEF390A0-C31D-30C2-8DE0-AE4FCE134D6D
+    value:           30BFED14-2CCC-3A88-887F-FE45305DDC4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71850DAF-E174-3E98-83BB-9D3CE030C714
+    value:           742861F0-A3C0-344F-8B2B-5F94D8A4150C
   - target:          arm64e-maccatalyst
-    value:           71850DAF-E174-3E98-83BB-9D3CE030C714
+    value:           742861F0-A3C0-344F-8B2B-5F94D8A4150C
 install-name:    '/usr/lib/libprequelite.dylib'
-current-version: 117
+current-version: 119
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

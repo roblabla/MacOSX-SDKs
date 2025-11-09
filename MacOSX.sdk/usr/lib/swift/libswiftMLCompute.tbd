@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           586213B9-1D39-3D29-9249-D8C361D62D46
+    value:           E98AFC06-2848-3CC3-A27B-91E900FA9AC6
   - target:          x86_64-maccatalyst
-    value:           586213B9-1D39-3D29-9249-D8C361D62D46
+    value:           E98AFC06-2848-3CC3-A27B-91E900FA9AC6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F0D4C60-2FCB-3C0C-B60F-D998C933D911
+    value:           527F58C9-77A4-3329-8B8F-EE2C12560EF5
   - target:          arm64e-maccatalyst
-    value:           5F0D4C60-2FCB-3C0C-B60F-D998C933D911
+    value:           527F58C9-77A4-3329-8B8F-EE2C12560EF5
 install-name:    '/usr/lib/swift/libswiftMLCompute.dylib'
 current-version: 66
 swift-abi-version: 7

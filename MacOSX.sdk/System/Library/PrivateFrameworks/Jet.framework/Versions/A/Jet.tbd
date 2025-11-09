@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B5AD1992-1564-3510-8E12-417782CD29DB
+    value:           E8D0A6DE-7576-3A51-91E1-E34617C298A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C788B1E0-6716-3C93-B2C4-0262C7E84BA2
+    value:           F86C7638-33A7-3E36-AF0A-2A4195D10A7A
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
 current-version: 9.12
 exports:

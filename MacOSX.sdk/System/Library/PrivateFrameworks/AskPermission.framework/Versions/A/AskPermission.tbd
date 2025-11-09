@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DA3CAAC0-770B-3185-9ACA-30BB9B0388EA
+    value:           5CCA5BD4-2B23-3C33-9C86-9EC7A348F2D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           83E3F6FB-C8BC-37BC-9ABB-BC325A79BEA4
+    value:           9A13BDAD-8FAE-3E97-B746-224DF75282AA
 install-name:    '/System/Library/PrivateFrameworks/AskPermission.framework/Versions/A/AskPermission'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

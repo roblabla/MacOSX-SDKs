@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           46869C15-E9C9-38EF-82AC-0616F6522515
+    value:           C594308D-E7B8-33F1-9F60-A693EC94D390
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           9171BBD9-F7D4-3C7F-9E4D-E98B02F58E8B
+    value:           D1948DA3-9432-3928-A7A2-10D176C6E534
 install-name:    '/System/iOSSupport/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1017
+current-version: 1021
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
@@ -130,7 +130,7 @@ exports:
                        '_$s14FamilyControls0aB23AuthenticationUIServiceCMn', '_$s14FamilyControls0aB23AuthenticationUIServiceCMo', 
                        '_$s14FamilyControls0aB23AuthenticationUIServiceCMu', '_$s14FamilyControls0aB23AuthenticationUIServiceCN', 
                        '_$s14FamilyControls0aB23AuthenticationUIServiceCfD', '_$s14FamilyControls0aB23AuthenticationUIServiceCfd', 
-                       '_$s14FamilyControls0aB5ErrorO10Foundation09LocalizedC0AAMc', 
+                       '_$s14FamilyControls0aB5ErrorO07networkC0yA2CmFWC', '_$s14FamilyControls0aB5ErrorO10Foundation09LocalizedC0AAMc', 
                        '_$s14FamilyControls0aB5ErrorO10restrictedyA2CmFWC', '_$s14FamilyControls0aB5ErrorO11unavailableyA2CmFWC', 
                        '_$s14FamilyControls0aB5ErrorO15invalidArgumentyA2CmFWC', 
                        '_$s14FamilyControls0aB5ErrorO16errorDescriptionSSSgvg', '_$s14FamilyControls0aB5ErrorO16errorDescriptionSSSgvpMV', 

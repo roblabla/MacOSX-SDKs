@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C1607661-45EA-3E2B-A4A5-794A0F3F2979
+    value:           67ADAE53-D456-3204-AA96-439572CBB55D
   - target:          x86_64-maccatalyst
-    value:           C1607661-45EA-3E2B-A4A5-794A0F3F2979
+    value:           67ADAE53-D456-3204-AA96-439572CBB55D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A44081C9-A038-3CC3-BB4D-7DFE165F4536
+    value:           A1E2AE2E-8EA5-36E9-A28E-D3C29F1FF347
   - target:          arm64e-maccatalyst
-    value:           A44081C9-A038-3CC3-BB4D-7DFE165F4536
+    value:           A1E2AE2E-8EA5-36E9-A28E-D3C29F1FF347
 install-name:    '/System/Library/PrivateFrameworks/VisualIntelligence.framework/Versions/A/VisualIntelligence'
 swift-abi-version: 7
 exports:
@@ -234,7 +234,7 @@ exports:
                        '_$s18VisualIntelligence0aB7ServiceC14CollectedErrorVMn', 
                        '_$s18VisualIntelligence0aB7ServiceC14CollectedErrorVN', '_$s18VisualIntelligence0aB7ServiceC14CollectedErrorVs0E0AAMc', 
                        '_$s18VisualIntelligence0aB7ServiceC14CollectedErrorVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s18VisualIntelligence0aB7ServiceC14parseAndSearch5image16regionOfInterest7domains10annotation12queryContext18debugMetricsBucket10completionAA0A12QuerySession_pSgAA0aB5ImageC_AA14NormalizedRectVShyAA0A6DomainVGSo12VIAnnotationCSgSo07VIQueryN0CSgAA05DebugpQ0_pSgys6ResultOyAA0aF6ResultVs5Error_pGctF', 
+                       '_$s18VisualIntelligence0aB7ServiceC14parseAndSearch5image16regionOfInterest7domains10annotation12queryContext18debugMetricsBucket10completionAA0A12QuerySession_pSgAA15AttributedImage_p_AA14NormalizedRectVShyAA0A6DomainVGSo12VIAnnotationCSgSo07VIQueryN0CSgAA05DebugpQ0_pSgys6ResultOyAA0aF6ResultVs5Error_pGctF', 
                        '_$s18VisualIntelligence0aB7ServiceC14serviceOptions13responseQueueA2C0E0VSg_So17OS_dispatch_queueCSgtcfC', 
                        '_$s18VisualIntelligence0aB7ServiceC5parse_4with12queryContext13cachedResults10completionAA0A12QuerySession_pAA0aG0C_AA0aK0VSo07VIQueryG0CSgSo6NSDataCSgys6ResultOyAA05ParseO0Vs5Error_pGctF', 
                        '_$s18VisualIntelligence0aB7ServiceC7OptionsV15debugParametersSSSgvg', 
@@ -372,7 +372,19 @@ exports:
                        '_$s18VisualIntelligence14ObjectOntologyCMn', '_$s18VisualIntelligence14ObjectOntologyCMo', 
                        '_$s18VisualIntelligence14ObjectOntologyCMu', '_$s18VisualIntelligence14ObjectOntologyCN', 
                        '_$s18VisualIntelligence14ObjectOntologyCfD', '_$s18VisualIntelligence14ObjectOntologyCfd', 
-                       '_$s18VisualIntelligence15ObjectKnowledgeV12thumbnailURL10Foundation0F0VSgvg', 
+                       '_$s18VisualIntelligence15AttributedImageMp', '_$s18VisualIntelligence15AttributedImageP012createVisionD7HandlerSo014VNImageRequestG0CSgyFTj', 
+                       '_$s18VisualIntelligence15AttributedImageP012createVisionD7HandlerSo014VNImageRequestG0CSgyFTq', 
+                       '_$s18VisualIntelligence15AttributedImageP11orientationSo26CGImagePropertyOrientationVvgTj', 
+                       '_$s18VisualIntelligence15AttributedImageP11orientationSo26CGImagePropertyOrientationVvgTq', 
+                       '_$s18VisualIntelligence15AttributedImageP15toCVPixelBufferSo11CVBufferRefaSgyFTj', 
+                       '_$s18VisualIntelligence15AttributedImageP15toCVPixelBufferSo11CVBufferRefaSgyFTq', 
+                       '_$s18VisualIntelligence15AttributedImageP4sizeSo6CGSizeVvgTj', 
+                       '_$s18VisualIntelligence15AttributedImageP4sizeSo6CGSizeVvgTq', 
+                       '_$s18VisualIntelligence15AttributedImageP8isLoadedSbvgTj', 
+                       '_$s18VisualIntelligence15AttributedImageP8isLoadedSbvgTq', 
+                       '_$s18VisualIntelligence15AttributedImageP9toCGImageSo0F3RefaSgyFTj', 
+                       '_$s18VisualIntelligence15AttributedImageP9toCGImageSo0F3RefaSgyFTq', 
+                       '_$s18VisualIntelligence15AttributedImageTL', '_$s18VisualIntelligence15ObjectKnowledgeV12thumbnailURL10Foundation0F0VSgvg', 
                        '_$s18VisualIntelligence15ObjectKnowledgeV12thumbnailURL10Foundation0F0VSgvpMV', 
                        '_$s18VisualIntelligence15ObjectKnowledgeV16knowledgeGraphIDSSSgvg', 
                        '_$s18VisualIntelligence15ObjectKnowledgeV16knowledgeGraphIDSSSgvpMV', 
@@ -477,16 +489,17 @@ exports:
                        _kVIDomainObject2D ]
     objc-classes:    [ VIAEntryPointEvent, VIAEntryPointLogger, VIAnalytics, VIAnnotation, 
                        VICVNLPCommSafetyHandlerInternal, VIDetectedResult, VIEntitlementManager, 
-                       VIImage, VIImageRegion, VIImageRegionDomainInfo, VIObjectCategory, 
-                       VIObjectKnowledge, VIObjectKnowledgeProperty, VIOntologyGraph, 
-                       VIOntologyNode, VIParseResult, VIParsedVisualQuery, VIQueryContext, 
-                       VIQueryContextApplicationIdentifierMapper, VIQueryContextBuilder, 
-                       VIQueryContextFeatureIdentifierMapper, VIQueryContextImageTypeMapper, 
-                       VIQueryContextImageURLMapper, VIQueryContextLocationMapper, 
-                       VIQueryContextPreferredMetalDeviceMapper, VIQueryContextQueryIDMapper, 
-                       VIQueryContextReferralURLMapper, VIQueryContextUIScaleMapper, 
-                       VIRegionOfInterestResult, VIRegionOfInterestResultItem, VIRegionalAnnotation, 
-                       VISearchResult, VIService, VITextAnnotation, VITextBlockAnnotation, 
-                       VIVisualQuery, VIVisualUnderstanding, _TtC18VisualIntelligence23OntologyGraphCompatible, 
-                       _TtC18VisualIntelligence24VisualIntelligenceLogger, _TtC18VisualIntelligence35VisualIntelligenceServiceCompatible ]
+                       VIImage, VIImageRegion, VIImageRegionDomainInfo, VILazyImage, 
+                       VIObjectCategory, VIObjectKnowledge, VIObjectKnowledgeProperty, 
+                       VIOntologyGraph, VIOntologyNode, VIParseResult, VIParsedVisualQuery, 
+                       VIQueryContext, VIQueryContextApplicationIdentifierMapper, 
+                       VIQueryContextBuilder, VIQueryContextFeatureIdentifierMapper, 
+                       VIQueryContextImageTypeMapper, VIQueryContextImageURLMapper, 
+                       VIQueryContextLocationMapper, VIQueryContextPreferredMetalDeviceMapper, 
+                       VIQueryContextQueryIDMapper, VIQueryContextReferralURLMapper, 
+                       VIQueryContextUIScaleMapper, VIRegionOfInterestResult, VIRegionOfInterestResultItem, 
+                       VIRegionalAnnotation, VISearchResult, VIService, VITextAnnotation, 
+                       VITextBlockAnnotation, VIVisualQuery, VIVisualUnderstanding, 
+                       _TtC18VisualIntelligence23OntologyGraphCompatible, _TtC18VisualIntelligence24VisualIntelligenceLogger, 
+                       _TtC18VisualIntelligence35VisualIntelligenceServiceCompatible ]
 ...

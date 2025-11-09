@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E1D737BB-BDFD-3D7D-8B77-0530DFD76CD8
+    value:           D7FB703F-CE98-30C0-9ED0-FE6B76183A13
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           930AF9B1-E722-3C03-AAF6-307E1BC08064
+    value:           E6E28A1B-DF36-35C8-924A-5A83FCB291F0
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -22,11 +22,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BE5D1D1C-B17B-3706-BC42-F63CB119B333
+    value:           C91F51A3-855E-3C28-8F69-13CC98ABC721
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC6D1734-A4D8-3E2D-9A64-A4F3DD0784E9
+    value:           96BE89B5-0248-309A-B4EE-1091550887FB
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -243,11 +243,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3BA9D52B-29EC-3FBF-A60E-8023F60B15DB
+    value:           FE5E0A2A-0FAF-3449-A7C3-FED0EED3F656
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78C77531-2F20-3922-A262-2A9B8EE10C92
+    value:           E90D2CE8-3624-3ED5-BDC9-75308A6E9CF1
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
@@ -3148,11 +3148,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F5530D01-E0DF-3896-97C4-CAF47A8974EA
+    value:           614CAA2B-42D1-3190-A0DC-5A1D3B978531
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9B2EFDCE-0F4B-31F6-98EB-C816A9CFB99D
+    value:           A1534FDB-1B2E-39A1-9C43-0E082430B46E
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzFilters.framework/Versions/A/QuartzFilters'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F1869540-C8D2-336B-A707-850B32FB762A
+    value:           FB6243F2-4917-3B4A-AE43-6CDB8178CF93
   - target:          x86_64-maccatalyst
-    value:           F1869540-C8D2-336B-A707-850B32FB762A
+    value:           FB6243F2-4917-3B4A-AE43-6CDB8178CF93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CBB93201-F479-3630-9374-72E37181A816
+    value:           354A4B52-A304-3236-9144-2ACFCB202C0C
   - target:          arm64e-maccatalyst
-    value:           CBB93201-F479-3630-9374-72E37181A816
+    value:           354A4B52-A304-3236-9144-2ACFCB202C0C
 install-name:    '/System/Library/PrivateFrameworks/AvatarPersistence.framework/Versions/A/AvatarPersistence'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

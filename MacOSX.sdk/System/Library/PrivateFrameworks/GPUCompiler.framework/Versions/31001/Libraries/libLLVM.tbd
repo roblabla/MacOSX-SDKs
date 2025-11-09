@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           225AC2D9-D9AD-3104-B612-4EFD1FD8170B
+    value:           BBF9F143-934B-36CE-B659-C6EBA17C069C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2B8B137-6116-3113-8F88-4C18501D9797
+    value:           8E4CCC60-088D-32D4-8C7F-FC6AEB3D0FB8
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libLLVM.dylib'
-current-version: 31001.255
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BlockExtractorEraseFuncs, _EnableHotColdSplit, _FSEC, _ForceSummaryEdgesCold, 
@@ -7387,6 +7387,7 @@ exports:
                        __ZNK4llvm6object18MetalLibObjectFile17getFileFormatNameEv, 
                        __ZNK4llvm6object18MetalLibObjectFile17getRelocationTypeENS0_11DataRefImplE, 
                        __ZNK4llvm6object18MetalLibObjectFile17getSectionAddressENS0_11DataRefImplE, 
+                       __ZNK4llvm6object18MetalLibObjectFile17getSymbolImplNameENS0_11DataRefImplE, 
                        __ZNK4llvm6object18MetalLibObjectFile17getSymbolImplSizeENS0_11DataRefImplE, 
                        __ZNK4llvm6object18MetalLibObjectFile17linkerCommandLineEv, 
                        __ZNK4llvm6object18MetalLibObjectFile17section_rel_beginENS0_11DataRefImplE, 

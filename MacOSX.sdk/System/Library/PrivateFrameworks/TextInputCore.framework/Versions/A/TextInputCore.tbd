@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           904DFFB5-CC60-3658-A389-9445BD57FA9B
+    value:           B28123F5-C032-3E16-8626-082F2163B03F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           03E7E9F2-3E56-3E6D-BCFE-C26CBFEEEA8E
+    value:           771F113D-037F-3C5C-9382-25923B2CCAB1
 install-name:    '/System/Library/PrivateFrameworks/TextInputCore.framework/Versions/A/TextInputCore'
 exports:
   - targets:         [ x86_64-macos ]
@@ -2031,25 +2031,27 @@ exports:
                        _kTIACRARevisedCapitalizationKey, _kTIACRARevisedDiacriticsKey, 
                        _kTIACRARevisedEditDistanceKey, _kTIACRARevisedModalityKey, 
                        _kTIACRARevisedSourceKey, _kTIACRARevisedWordLengthKey, _kTIACRARevisedWordRevisionCount, 
-                       _kTIACRASourceAddressBook, _kTIACRASourceEmoji, _kTIACRASourceNamedEntity, 
-                       _kTIACRASourcePQT, _kTIACRASourcePrimaryLanguageDynamic, _kTIACRASourcePrimaryLanguageStatic, 
+                       _kTIACRASourceAddressBook, _kTIACRASourceEmoji, _kTIACRASourceNamedEntities, 
+                       _kTIACRASourceOOV, _kTIACRASourceOffensive, _kTIACRASourcePQT, 
+                       _kTIACRASourcePrimaryLanguageDynamic, _kTIACRASourcePrimaryLanguageStatic, 
                        _kTIACRASourceSecondaryLanguageDynamic, _kTIACRASourceSecondaryLanguageStatic, 
-                       _kTIACRASourceSupplemental, _kTIACRASourceTextReplacement, 
-                       _kTIACRASourceUnknown, _kTIACRATextTraitAutocorrectionEnabledKey, 
-                       _kTIACRATypingEngineCpSearch, _kTIACRATypingEngineFavonius, 
-                       _kTIACRATypingEngineInputTranscoder, _kTIACRATypingEngineKey, 
-                       _kTIAPIsNewUserKey, _kTIAPTimeSinceChangeBucketDay, _kTIAPTimeSinceChangeBucketLongerThanYear, 
-                       _kTIAPTimeSinceChangeBucketMonth, _kTIAPTimeSinceChangeBucketWeek, 
-                       _kTIAPTimeSinceChangeBucketYear, _kTIDPSentenceSentinelEnd, 
-                       _kTIDPSentenceSentinelStart, _kTIOfflineLearningDelay, _kTIPAActiveInputModesKey, 
-                       _kTIPABuildAtChangeKey, _kTIPACurrentValueKey, _kTIPADaysSinceLastChangeBucketKey, 
-                       _kTIPAEventName, _kTIPAPreferenceNameKey, _kTIPAPreviousValueKey, 
-                       _kTIPAValueDidChangeKey, _kTIPersonCompositeName, _kTIPersonFirstName, 
-                       _kTIPersonLastName, _kTISK123ToAnyTapMetric, _kTISK123ToCharMetric, 
-                       _kTISKAnyTapTo123Metric, _kTISKAnyTapToCharMetric, _kTISKCharTo123Metric, 
-                       _kTISKCharToAnyTapMetric, _kTISKCharToPredictionMetric, _kTISKCharToSpaceMetric, 
-                       _kTISKDeleteDownErrorDistance, _kTISKDeleteTo123Metric, _kTISKDeleteToCharMetric, 
-                       _kTISKDeleteToDeleteMetric, _kTISKDeleteToDeletePositionalMetric, 
+                       _kTIACRASourceSensitive, _kTIACRASourceSupplementalLexicon, 
+                       _kTIACRASourceTextReplacement, _kTIACRASourceUnknown, _kTIACRASourceVulgar, 
+                       _kTIACRATextTraitAutocorrectionEnabledKey, _kTIACRATypingEngineCpSearch, 
+                       _kTIACRATypingEngineFavonius, _kTIACRATypingEngineInputTranscoder, 
+                       _kTIACRATypingEngineKey, _kTIAPIsNewUserKey, _kTIAPTimeSinceChangeBucketDay, 
+                       _kTIAPTimeSinceChangeBucketLongerThanYear, _kTIAPTimeSinceChangeBucketMonth, 
+                       _kTIAPTimeSinceChangeBucketWeek, _kTIAPTimeSinceChangeBucketYear, 
+                       _kTIDPSentenceSentinelEnd, _kTIDPSentenceSentinelStart, _kTIOfflineLearningDelay, 
+                       _kTIPAActiveInputModesKey, _kTIPABuildAtChangeKey, _kTIPACurrentValueKey, 
+                       _kTIPADaysSinceLastChangeBucketKey, _kTIPADaysSinceLastChangeKey, 
+                       _kTIPADaysSinceUpgradeToOff, _kTIPAEventName, _kTIPAPreferenceNameKey, 
+                       _kTIPAPreviousValueKey, _kTIPAValueDidChangeKey, _kTIPersonCompositeName, 
+                       _kTIPersonFirstName, _kTIPersonLastName, _kTISK123ToAnyTapMetric, 
+                       _kTISK123ToCharMetric, _kTISKAnyTapTo123Metric, _kTISKAnyTapToCharMetric, 
+                       _kTISKCharTo123Metric, _kTISKCharToAnyTapMetric, _kTISKCharToPredictionMetric, 
+                       _kTISKCharToSpaceMetric, _kTISKDeleteDownErrorDistance, _kTISKDeleteTo123Metric, 
+                       _kTISKDeleteToCharMetric, _kTISKDeleteToDeleteMetric, _kTISKDeleteToDeletePositionalMetric, 
                        _kTISKDeleteToPathMetric, _kTISKDeleteToShiftMetric, _kTISKDeleteToSpaceMetric, 
                        _kTISKDeleteTouchDownUpMetric, _kTISKDeleteUpErrorDistance, 
                        _kTISKDownErrorDistance, _kTISKEpisodeCount, _kTISKKeyToDeleteMetric, 
@@ -2078,14 +2080,15 @@ exports:
                        _kTISKtotalAnxietyEmoji, _kTISKtotalAnxietyWords, _kTISKtotalConfusedEmoji, 
                        _kTISKtotalDeathWords, _kTISKtotalDownWords, _kTISKtotalFeelEmoji, 
                        _kTISKtotalHealthFeelingWords, _kTISKtotalLowEnergyEmoji, 
-                       _kTISKtotalPositiveEmoji, _kTISKtotalSadEmoji, _kTIStatistics1stPersonCategory, 
-                       _kTIStatistics3rdPersonCategory, _kTIStatisticsContactAddressHomeCategory, 
-                       _kTIStatisticsContactAddressWorkCategory, _kTIStatisticsContactAnyAddressCategory, 
-                       _kTIStatisticsContactAnyPhoneCategory, _kTIStatisticsContactBioCategory, 
-                       _kTIStatisticsContactEmailCategory, _kTIStatisticsContactFaceTimeCategory, 
-                       _kTIStatisticsContactFaxCategory, _kTIStatisticsContactSpecificPhoneCategory, 
-                       _kTIStatisticsEventAvailabilityCategory, _kTIStatisticsEventNextCategory, 
-                       _kTIStatisticsFieldTypeNA, _kTIStatisticsHealthCategory, _kTIStatisticsLocationAutocompleteSendCurrentButtonCategory, 
+                       _kTISKtotalPositiveEmoji, _kTISKtotalPositiveWords, _kTISKtotalSadEmoji, 
+                       _kTIStatistics1stPersonCategory, _kTIStatistics3rdPersonCategory, 
+                       _kTIStatisticsContactAddressHomeCategory, _kTIStatisticsContactAddressWorkCategory, 
+                       _kTIStatisticsContactAnyAddressCategory, _kTIStatisticsContactAnyPhoneCategory, 
+                       _kTIStatisticsContactBioCategory, _kTIStatisticsContactEmailCategory, 
+                       _kTIStatisticsContactFaceTimeCategory, _kTIStatisticsContactFaxCategory, 
+                       _kTIStatisticsContactSpecificPhoneCategory, _kTIStatisticsEventAvailabilityCategory, 
+                       _kTIStatisticsEventNextCategory, _kTIStatisticsFieldTypeNA, 
+                       _kTIStatisticsHealthCategory, _kTIStatisticsLocationAutocompleteSendCurrentButtonCategory, 
                        _kTIStatisticsMoneyCategory, _kTIStatisticsNavigationCategory, 
                        _kTIStatisticsRecentAddressCategory, _kTIStatisticsRecentGenericAddressCategory, 
                        _kTIStatisticsRecentPhoneCategory, _kTIStatisticsSocialMediaCategory, 
@@ -2223,7 +2226,7 @@ exports:
                        TIWordSearchOperationPerformMaintenance, TIWordSearchOperationResetLearningDictionaries, 
                        TIWordSearchOperationSetLanguageModelAdaptationContext, TPSDiscoverabilitySignal, 
                        _TIInputModePreferenceProvider, _TILanguageLikelihoodModel, 
-                       _TIMultilingualPreferences ]
+                       _TIMultilingualPreferences, _TIPreferencesAnalyzerProperty ]
     objc-ivars:      [ HCBurstTrie._burstTrie, HCBurstTrie._keysAdded, HCHuffmanCoder._burstTrie, 
                        HCHuffmanCoder._indexTable, HCIndexTable._fileHeader, HCIndexTable._huffmanCodesMemoryMappedData, 
                        HCIndexTable._mutableHuffmanCodes, HCIndexTable._versionUUID, 

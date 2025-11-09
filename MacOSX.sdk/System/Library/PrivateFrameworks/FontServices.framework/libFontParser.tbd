@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8AE944D7-37EF-3045-911A-A92C2CB9B0C9
+    value:           9550E597-33BC-3D19-A632-DDB170A2C5C8
   - target:          x86_64-maccatalyst
-    value:           8AE944D7-37EF-3045-911A-A92C2CB9B0C9
+    value:           9550E597-33BC-3D19-A632-DDB170A2C5C8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F782033E-8DA2-3EC4-B70E-34980A45537B
+    value:           2E874A5E-86AF-3966-82AB-9FE74BE5370E
   - target:          arm64e-maccatalyst
-    value:           F782033E-8DA2-3EC4-B70E-34980A45537B
+    value:           2E874A5E-86AF-3966-82AB-9FE74BE5370E
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -77,13 +77,14 @@ exports:
                        __ZN14MDataReferenceC1ERKS_im, __ZN14MDataReferenceC2ERKS_im, 
                        __ZN14MDataReferenceD0Ev, __ZN14MDataReferenceD1Ev, __ZN14MDataReferenceD2Ev, 
                        __ZN14TDataReference5ResetEv, __ZN14TDataReferenceC1EOS_, 
-                       __ZN14TDataReferenceC1ERK9TFragmentim, __ZN14TDataReferenceC1ERKS_, 
-                       __ZN14TDataReferenceC1ERKS_im, __ZN14TDataReferenceC1Ev, __ZN14TDataReferenceC2EOS_, 
-                       __ZN14TDataReferenceC2ERK9TFragmentim, __ZN14TDataReferenceC2ERKS_, 
-                       __ZN14TDataReferenceC2ERKS_im, __ZN14TDataReferenceC2Ev, __ZN14TDataReferenceD0Ev, 
-                       __ZN14TDataReferenceD1Ev, __ZN14TDataReferenceD2Ev, __ZN14TDataReferenceaSEOS_, 
-                       __ZN14TDataReferenceaSERKS_, __ZN14TFontSurrogateC1EPK5TFont, 
-                       __ZN14TFontSurrogateC1ERKS_, __ZN14TFontSurrogateC1Ev, __ZN14TFontSurrogateC2EPK5TFont, 
+                       __ZN14TDataReferenceC1ERK9TFragmentiNSt3__18optionalImEE, 
+                       __ZN14TDataReferenceC1ERKS_, __ZN14TDataReferenceC1ERKS_iNSt3__18optionalImEE, 
+                       __ZN14TDataReferenceC1Ev, __ZN14TDataReferenceC2EOS_, __ZN14TDataReferenceC2ERK9TFragmentiNSt3__18optionalImEE, 
+                       __ZN14TDataReferenceC2ERKS_, __ZN14TDataReferenceC2ERKS_iNSt3__18optionalImEE, 
+                       __ZN14TDataReferenceC2Ev, __ZN14TDataReferenceD0Ev, __ZN14TDataReferenceD1Ev, 
+                       __ZN14TDataReferenceD2Ev, __ZN14TDataReferenceaSEOS_, __ZN14TDataReferenceaSERKS_, 
+                       __ZN14TFontSurrogateC1EPK5TFont, __ZN14TFontSurrogateC1ERKS_, 
+                       __ZN14TFontSurrogateC1Ev, __ZN14TFontSurrogateC2EPK5TFont, 
                        __ZN14TFontSurrogateC2ERKS_, __ZN14TFontSurrogateC2Ev, __ZN14TFontSurrogateD0Ev, 
                        __ZN14TFontSurrogateD1Ev, __ZN14TFontSurrogateD2Ev, __ZN14TFontSurrogateaSERKS_, 
                        __ZN18TFileDataSurrogateC1EPK22TFileFragmentReference, __ZN18TFileDataSurrogateC1EPK22TFileFragmentReferenceb, 

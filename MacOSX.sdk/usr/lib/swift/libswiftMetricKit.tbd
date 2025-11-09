@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           026B8068-27A5-3230-BFAE-F2287A817526
+    value:           0304A4C0-8ED8-34B3-9939-CEE56E942FAD
   - target:          x86_64-maccatalyst
-    value:           026B8068-27A5-3230-BFAE-F2287A817526
+    value:           0304A4C0-8ED8-34B3-9939-CEE56E942FAD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C8C4192-2811-36E0-A87E-726C05A374AD
+    value:           C2962CDA-5582-382B-A008-42C8A5A6AB63
   - target:          arm64e-maccatalyst
-    value:           6C8C4192-2811-36E0-A87E-726C05A374AD
+    value:           C2962CDA-5582-382B-A008-42C8A5A6AB63
 install-name:    '/usr/lib/swift/libswiftMetricKit.dylib'
 current-version: 6
 swift-abi-version: 7

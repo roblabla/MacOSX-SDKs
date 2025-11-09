@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C322185-C00D-3A9D-9497-368E2D989040
+    value:           F0AEFD86-BB94-3102-A5A5-3F3398ADDEC0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BBBB99CE-114B-3681-801E-DC3C1A2A6CF7
+    value:           2B5C3B73-7AC5-3429-8F81-27B63B91AF57
 install-name:    '/System/Library/PrivateFrameworks/DisplayTransportServices.framework/Versions/A/DisplayTransportServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

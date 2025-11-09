@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           34349B4D-2E68-3FDE-B227-3B733CF06D01
+    value:           445C6A6E-FBB0-3B5D-A12B-1C1015FE2911
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A2F35EC-A5E7-31F9-88F6-4DAA5B3B531D
+    value:           DFBE825C-EF3C-3152-A03B-AE39FF32296F
 install-name:    '/usr/lib/swift/libswiftGLKit.dylib'
 current-version: 1.1
 swift-abi-version: 7

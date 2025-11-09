@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0FC787B3-90AE-35BA-971E-6F246CCD1942
+    value:           F26101E0-6359-3E11-BF8F-E7D78EC8A88B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B97F299A-7CD8-3A1F-B91F-EA36FC334F9B
+    value:           C20EBDEA-59C3-3E70-A810-8902D55D8A14
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateMacController.framework/Versions/A/SoftwareUpdateMacController'
 current-version: 0
 compatibility-version: 0
@@ -26,21 +26,21 @@ exports:
                        _SUMAC_A_BeforeReadyRequestCancel, _SUMAC_A_BeforeReadyRequestCommitStash, 
                        _SUMAC_A_BeforeReadyRequestDownload, _SUMAC_A_BeforeReadyRequestPrecheck, 
                        _SUMAC_A_BeforeReadyRequestPreparePackage, _SUMAC_A_BeforeReadyRequestPrepareUpdate, 
-                       _SUMAC_A_BeforeReadyRequestWakeup, _SUMAC_A_CancelCompleted, 
-                       _SUMAC_A_CancelCurrentSUCoreUpdate, _SUMAC_A_CancelCurrentScan, 
-                       _SUMAC_A_CancelCurrentState, _SUMAC_A_CancelDownloadSFR, _SUMAC_A_CancelDownloadUpdateBrain, 
-                       _SUMAC_A_CancelRecoveryOSUpdate, _SUMAC_A_CancellingRequestApply, 
-                       _SUMAC_A_CancellingRequestCancel, _SUMAC_A_CancellingRequestCommitStash, 
-                       _SUMAC_A_CancellingRequestDownload, _SUMAC_A_CancellingRequestPrecheck, 
-                       _SUMAC_A_CancellingRequestPreparePackage, _SUMAC_A_CancellingRequestPrepareUpdate, 
-                       _SUMAC_A_CancellingRequestWakeup, _SUMAC_A_CheckPreviousState, 
-                       _SUMAC_A_CommitStash, _SUMAC_A_ConfigurePersistedDownload, 
+                       _SUMAC_A_BeforeReadyRequestWakeup, _SUMAC_A_CancelBridgeOSUpdate, 
+                       _SUMAC_A_CancelCompleted, _SUMAC_A_CancelCurrentSUCoreUpdate, 
+                       _SUMAC_A_CancelCurrentScan, _SUMAC_A_CancelCurrentState, _SUMAC_A_CancelDownloadSFR, 
+                       _SUMAC_A_CancelDownloadUpdateBrain, _SUMAC_A_CancelRecoveryOSUpdate, 
+                       _SUMAC_A_CancellingRequestApply, _SUMAC_A_CancellingRequestCancel, 
+                       _SUMAC_A_CancellingRequestCommitStash, _SUMAC_A_CancellingRequestDownload, 
+                       _SUMAC_A_CancellingRequestPrecheck, _SUMAC_A_CancellingRequestPreparePackage, 
+                       _SUMAC_A_CancellingRequestPrepareUpdate, _SUMAC_A_CancellingRequestWakeup, 
+                       _SUMAC_A_CheckPreviousState, _SUMAC_A_CommitStash, _SUMAC_A_ConfigurePersistedDownload, 
                        _SUMAC_A_ConfigurePersistedPrepare, _SUMAC_A_ControllerNotReady, 
                        _SUMAC_A_ControllerSetupCompleted, _SUMAC_A_DecidePackageUpdate, 
-                       _SUMAC_A_DecideRequiresDocs, _SUMAC_A_DecideRequiresMinorDocs, 
-                       _SUMAC_A_DecideSupportingSoftware, _SUMAC_A_DownloadBridgeOSProgress, 
-                       _SUMAC_A_DownloadBridgeOSUpdate, _SUMAC_A_DownloadFailed, 
-                       _SUMAC_A_DownloadProgress, _SUMAC_A_DownloadRosettaProgress, 
+                       _SUMAC_A_DecidePersonalization, _SUMAC_A_DecideRequiresDocs, 
+                       _SUMAC_A_DecideRequiresMinorDocs, _SUMAC_A_DecideSupportingSoftware, 
+                       _SUMAC_A_DownloadBridgeOSProgress, _SUMAC_A_DownloadBridgeOSUpdate, 
+                       _SUMAC_A_DownloadFailed, _SUMAC_A_DownloadProgress, _SUMAC_A_DownloadRosettaProgress, 
                        _SUMAC_A_DownloadRosettaUpdate, _SUMAC_A_DownloadSFRProgress, 
                        _SUMAC_A_DownloadSFRUpdate, _SUMAC_A_DownloadSFRUpdateFailed, 
                        _SUMAC_A_DownloadUpdate, _SUMAC_A_DownloadUpdateBrain, _SUMAC_A_DownloadUpdateBrainFailed, 
@@ -124,7 +124,8 @@ exports:
                        _SUMAC_E_DownloadedUpdate, _SUMAC_E_DownloadedUpdateBrain, 
                        _SUMAC_E_InvalidUpdateFound, _SUMAC_E_LocateRecoveryOSComplete, 
                        _SUMAC_E_LocateRecoveryOSFailed, _SUMAC_E_LocateRecoveryOSSuccess, 
-                       _SUMAC_E_NoPendingScan, _SUMAC_E_PackageSetupCompleted, _SUMAC_E_PersistedDownloadLoaded, 
+                       _SUMAC_E_NoPendingScan, _SUMAC_E_PackageSetupCompleted, _SUMAC_E_PerformPersonalization, 
+                       _SUMAC_E_PerformSFROnlyDownload, _SUMAC_E_PersistedDownloadLoaded, 
                        _SUMAC_E_PersistedPrepareLoaded, _SUMAC_E_PersistedStateDownloaded, 
                        _SUMAC_E_PersistedStateError, _SUMAC_E_PersistedStatePrepared, 
                        _SUMAC_E_PreflightFDRRecovery, _SUMAC_E_PreflightFDRRecoveryFailed, 
@@ -168,11 +169,11 @@ exports:
                        _SUMAC_E_UpdateRecoveryOSSuccess, _SUMAC_E_UpdateResumeFailed, 
                        _SUMAC_E_UpdateResumed, _SUMAC_E_ValidUpdateFound, _SUMAC_E_WaitForControllerSetup, 
                        _SUMAC_S_AppliedWaitingForReboot, _SUMAC_S_Applying, _SUMAC_S_CancelCurrentState, 
-                       _SUMAC_S_CancelingMSUUpdate, _SUMAC_S_CancelingRecoveryOSUpdate, 
-                       _SUMAC_S_CancelingRosettaPrepare, _SUMAC_S_CancelingSUCoreUpdate, 
-                       _SUMAC_S_CancellingCommitStash, _SUMAC_S_CancellingRecoveryOSScan, 
-                       _SUMAC_S_CancellingResumeUpdate, _SUMAC_S_CancellingScan, 
-                       _SUMAC_S_CheckingPreviousState, _SUMAC_S_CommittingStash, 
+                       _SUMAC_S_CancelingBridgeOSUpdate, _SUMAC_S_CancelingMSUUpdate, 
+                       _SUMAC_S_CancelingRecoveryOSUpdate, _SUMAC_S_CancelingRosettaPrepare, 
+                       _SUMAC_S_CancelingSUCoreUpdate, _SUMAC_S_CancellingCommitStash, 
+                       _SUMAC_S_CancellingRecoveryOSScan, _SUMAC_S_CancellingResumeUpdate, 
+                       _SUMAC_S_CancellingScan, _SUMAC_S_CheckingPreviousState, _SUMAC_S_CommittingStash, 
                        _SUMAC_S_DownloadedSFRUpdate, _SUMAC_S_DownloadedUpdate, _SUMAC_S_DownloadingBridgeOSUpdate, 
                        _SUMAC_S_DownloadingRosettaUpdate, _SUMAC_S_DownloadingSFRUpdate, 
                        _SUMAC_S_DownloadingUpdate, _SUMAC_S_DownloadingUpdateBrain, 

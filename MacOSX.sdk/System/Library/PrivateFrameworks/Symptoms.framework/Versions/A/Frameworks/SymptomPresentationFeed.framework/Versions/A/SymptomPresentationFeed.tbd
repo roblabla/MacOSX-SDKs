@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FF26A300-E326-376E-B068-AC84924B36D3
+    value:           07F193BB-75BA-3735-94A8-47BA11E8D69F
   - target:          x86_64-maccatalyst
-    value:           FF26A300-E326-376E-B068-AC84924B36D3
+    value:           07F193BB-75BA-3735-94A8-47BA11E8D69F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69CC1549-0B42-3A1E-AC29-CEC6BBDDF581
+    value:           63F84B10-C077-34D1-87C4-01E394C38847
   - target:          arm64e-maccatalyst
-    value:           69CC1549-0B42-3A1E-AC29-CEC6BBDDF581
+    value:           63F84B10-C077-34D1-87C4-01E394C38847
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
-current-version: 1617.60.24
+current-version: 1617.101.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

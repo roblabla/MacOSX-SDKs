@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E69EFD5A-EB34-34EB-8669-4B65A5E023B0
+    value:           84FE85C1-0C19-310E-A728-0E0AE534ACD3
   - target:          x86_64-maccatalyst
-    value:           E69EFD5A-EB34-34EB-8669-4B65A5E023B0
+    value:           84FE85C1-0C19-310E-A728-0E0AE534ACD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           380DA586-B020-3788-B712-611AF981EB50
+    value:           42DD5732-F19F-3A19-B469-0B2E5BEC38E2
   - target:          arm64e-maccatalyst
-    value:           380DA586-B020-3788-B712-611AF981EB50
+    value:           42DD5732-F19F-3A19-B469-0B2E5BEC38E2
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -25,10 +25,10 @@ exports:
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AVAUVoiceIOGetPreferredChatFlavorForBundleID, _AVAUVoiceIOInitializeListenersForBundleID, 
                        _AVAUVoiceIONotificationBundleIdentifierKey, _AVAUVoiceIOPreferredChatFlavorDidChangeNotification, 
-                       _AVAUVoiceIOSetActiveChatFlavorForBundleID, _AVAUVoiceIOSetSupportedChatFlavorsForBundleID, 
-                       _AVAUVoiceIOSetVoiceProcessingBypassedForBundleID, _AVAppleMakerNote_ARKitPhoto, 
-                       _AVAppleMakerNote_AssetIdentifier, _AVAppleMakerNote_BurstUUID, 
-                       _AVAppleMakerNote_Camera, _AVAppleMakerNote_ImageCaptureRequestIdentifier, 
+                       _AVAUVoiceIORemoveActiveChatFlavorForBundleID, _AVAUVoiceIOSetActiveChatFlavorForBundleID, 
+                       _AVAUVoiceIOSetSupportedChatFlavorsForBundleID, _AVAUVoiceIOSetVoiceProcessingBypassedForBundleID, 
+                       _AVAppleMakerNote_ARKitPhoto, _AVAppleMakerNote_AssetIdentifier, 
+                       _AVAppleMakerNote_BurstUUID, _AVAppleMakerNote_Camera, _AVAppleMakerNote_ImageCaptureRequestIdentifier, 
                        _AVAppleMakerNote_ImageGroupIdentifier, _AVAppleMakerNote_LuminanceNoiseAmplitude, 
                        _AVAppleMakerNote_MeteorHeadroom, _AVAppleMakerNote_MeteorPlusGainMap, 
                        _AVAppleMakerNote_OriginatingAppID, _AVAppleMakerNote_PhotoIdentifier, 
@@ -53,11 +53,11 @@ exports:
                        _AVCaptureDeviceShallowDepthOfFieldStatusChangedNotification, 
                        _AVCaptureDeviceSubjectAreaDidChangeNotification, _AVCaptureDeviceTypeBuiltInDualCamera, 
                        _AVCaptureDeviceTypeBuiltInDualWideCamera, _AVCaptureDeviceTypeBuiltInDuoCamera, 
-                       _AVCaptureDeviceTypeBuiltInMicrophone, _AVCaptureDeviceTypeBuiltInTelephotoCamera, 
-                       _AVCaptureDeviceTypeBuiltInTimeOfFlightCamera, _AVCaptureDeviceTypeBuiltInTripleCamera, 
-                       _AVCaptureDeviceTypeBuiltInTrueDepthCamera, _AVCaptureDeviceTypeBuiltInUltraWideCamera, 
-                       _AVCaptureDeviceTypeBuiltInWideAngleCamera, _AVCaptureDeviceTypeExternalUnknown, 
-                       _AVCaptureDeviceUserDefaultsKey_BackgroundBlurControlMode, 
+                       _AVCaptureDeviceTypeBuiltInLiDARDepthCamera, _AVCaptureDeviceTypeBuiltInMicrophone, 
+                       _AVCaptureDeviceTypeBuiltInTelephotoCamera, _AVCaptureDeviceTypeBuiltInTimeOfFlightCamera, 
+                       _AVCaptureDeviceTypeBuiltInTripleCamera, _AVCaptureDeviceTypeBuiltInTrueDepthCamera, 
+                       _AVCaptureDeviceTypeBuiltInUltraWideCamera, _AVCaptureDeviceTypeBuiltInWideAngleCamera, 
+                       _AVCaptureDeviceTypeExternalUnknown, _AVCaptureDeviceUserDefaultsKey_BackgroundBlurControlMode, 
                        _AVCaptureDeviceUserDefaultsKey_BackgroundBlurEnabled, _AVCaptureDeviceUserDefaultsKey_CenterStageControlMode, 
                        _AVCaptureDeviceUserDefaultsKey_CenterStageEnabled, _AVCaptureDeviceUserDefaultsKey_CinematicFramingControlMode, 
                        _AVCaptureDeviceUserDefaultsKey_CinematicFramingEnabled, _AVCaptureDeviceWasConnectedNotification, 
@@ -153,9 +153,9 @@ exports:
                        _AVGQCaptureConnectionAlwaysSelectsStandardVISFor720p30, _AVGQCaptureConnectionCinematicVISAwareAPIsAreAvailable, 
                        _AVGQCaptureConnectionFrameRatePropertiesAreDeprecated, _AVGQCaptureDefaultDevicePrefersUnsuspendedAndAllowsAnyPosition, 
                        _AVGQCaptureDeviceSupportsCinematicVideoFocusAtPoint, _AVGQCaptureDevicesShouldBeSortedByDeviceType, 
-                       _AVGQCaptureExtendedCinematicVISSupported, _AVGQCaptureHighPhotoQualityFrameDropAllowed, 
-                       _AVGQCaptureMFOStabilizationIsAlwaysOn, _AVGQCaptureMFOSupportsPhotoFormats, 
-                       _AVGQCaptureMFOVideoSettingsSupportCompressionProperties, 
+                       _AVGQCaptureExtendedCinematicVISSupported, _AVGQCaptureFaceDrivenAEAFOnByDefault, 
+                       _AVGQCaptureHighPhotoQualityFrameDropAllowed, _AVGQCaptureMFOStabilizationIsAlwaysOn, 
+                       _AVGQCaptureMFOSupportsPhotoFormats, _AVGQCaptureMFOVideoSettingsSupportCompressionProperties, 
                        _AVGQCaptureMetadataOutputCapturesFacesByDefault, _AVGQCaptureMicrophoneUsesDecoupledIO, 
                        _AVGQCapturePhotoSettingsSupportRawEmbeddedThumbnailFormat, 
                        _AVGQCaptureSessionMaxMultiCamRGBStreamsSupported, _AVGQCaptureSessionSupportsMultiCamCapture, 
@@ -199,13 +199,16 @@ exports:
                        _AVMetadataMakeMetadataObjectFromBoxedMetadata, _AVMetadataObjectCreateBoxedMetadataFromObjectAndFormatDescription, 
                        _AVMetadataObjectTypeAppClipCode, _AVMetadataObjectTypeAztecCode, 
                        _AVMetadataObjectTypeCatBody, _AVMetadataObjectTypeCatHead, 
-                       _AVMetadataObjectTypeCode128Code, _AVMetadataObjectTypeCode39Code, 
-                       _AVMetadataObjectTypeCode39Mod43Code, _AVMetadataObjectTypeCode93Code, 
-                       _AVMetadataObjectTypeDataMatrixCode, _AVMetadataObjectTypeDogBody, 
-                       _AVMetadataObjectTypeDogHead, _AVMetadataObjectTypeEAN13Code, 
-                       _AVMetadataObjectTypeEAN8Code, _AVMetadataObjectTypeFace, 
+                       _AVMetadataObjectTypeCodabarCode, _AVMetadataObjectTypeCode128Code, 
+                       _AVMetadataObjectTypeCode39Code, _AVMetadataObjectTypeCode39Mod43Code, 
+                       _AVMetadataObjectTypeCode93Code, _AVMetadataObjectTypeDataMatrixCode, 
+                       _AVMetadataObjectTypeDogBody, _AVMetadataObjectTypeDogHead, 
+                       _AVMetadataObjectTypeEAN13Code, _AVMetadataObjectTypeEAN8Code, 
+                       _AVMetadataObjectTypeFace, _AVMetadataObjectTypeGS1DataBarCode, 
+                       _AVMetadataObjectTypeGS1DataBarExpandedCode, _AVMetadataObjectTypeGS1DataBarLimitedCode, 
                        _AVMetadataObjectTypeHumanBody, _AVMetadataObjectTypeHumanHead, 
                        _AVMetadataObjectTypeITF14Code, _AVMetadataObjectTypeInterleaved2of5Code, 
+                       _AVMetadataObjectTypeMicroPDF417Code, _AVMetadataObjectTypeMicroQRCode, 
                        _AVMetadataObjectTypeOfflineVideoStabilizationMotion, _AVMetadataObjectTypePDF417Code, 
                        _AVMetadataObjectTypeQRCode, _AVMetadataObjectTypeSaliencyHeatMap, 
                        _AVMetadataObjectTypeSalientObject, _AVMetadataObjectTypeTextRegion, 
@@ -233,10 +236,11 @@ exports:
                        AVCaptureSynchronizedPointCloudData, AVCaptureSynchronizedSampleBufferData, 
                        AVCaptureSynchronizedVisionData, AVCaptureSystemPressureState, 
                        AVCaptureVideoDataOutput, AVCaptureVideoPreviewLayer, AVCaptureVideoThumbnailOutput, 
-                       AVCaptureVisionDataOutput, AVDepthData, AVFlashlight, AVFrameRateRange, 
-                       AVMetadataBodyObject, AVMetadataCatBodyObject, AVMetadataCatHeadObject, 
-                       AVMetadataDogBodyObject, AVMetadataDogHeadObject, AVMetadataFaceObject, 
-                       AVMetadataHumanBodyObject, AVMetadataHumanHeadObject, AVMetadataMachineReadableCodeObject, 
+                       AVCaptureVisionDataOutput, AVCenterStageOnBoardingManager, 
+                       AVDepthData, AVFlashlight, AVFrameRateRange, AVMetadataBodyObject, 
+                       AVMetadataCatBodyObject, AVMetadataCatHeadObject, AVMetadataDogBodyObject, 
+                       AVMetadataDogHeadObject, AVMetadataFaceObject, AVMetadataHumanBodyObject, 
+                       AVMetadataHumanHeadObject, AVMetadataMachineReadableCodeObject, 
                        AVMetadataObject, AVMetadataOfflineVideoStabilizationMotionObject, 
                        AVMetadataSaliencyHeatMap, AVMetadataSalientObject, AVMetadataTextRegionObject, 
                        AVMetadataTrackedFacesObject, AVMetadataVideoPreviewHistogramObject, 

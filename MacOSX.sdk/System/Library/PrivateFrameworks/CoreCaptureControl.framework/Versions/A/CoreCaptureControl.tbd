@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1AC7EF7-526F-3429-921F-27305068DBE4
+    value:           1A8E250C-29EA-3779-AE07-AE1872FCFF8C
   - target:          x86_64-maccatalyst
-    value:           E1AC7EF7-526F-3429-921F-27305068DBE4
+    value:           1A8E250C-29EA-3779-AE07-AE1872FCFF8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B199201-B349-3A50-99FC-54E755BBCF6A
+    value:           F2366467-1501-3CA5-976E-CF4C5741EEF1
   - target:          arm64e-maccatalyst
-    value:           5B199201-B349-3A50-99FC-54E755BBCF6A
+    value:           F2366467-1501-3CA5-976E-CF4C5741EEF1
 install-name:    '/System/Library/PrivateFrameworks/CoreCaptureControl.framework/Versions/A/CoreCaptureControl'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

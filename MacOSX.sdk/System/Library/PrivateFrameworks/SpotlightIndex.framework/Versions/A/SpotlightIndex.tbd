@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5AF5A51E-EF32-39CF-9057-8A5DE03284DF
+    value:           EF10D0B8-281A-3BAB-85CB-F08E0FF39EA4
   - target:          x86_64-maccatalyst
-    value:           5AF5A51E-EF32-39CF-9057-8A5DE03284DF
+    value:           EF10D0B8-281A-3BAB-85CB-F08E0FF39EA4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDC309B5-C0BB-388B-B627-36B7F05F048A
+    value:           A7F9B121-66C0-35DA-BAD5-97C25C12EB06
   - target:          arm64e-maccatalyst
-    value:           BDC309B5-C0BB-388B-B627-36B7F05F048A
+    value:           A7F9B121-66C0-35DA-BAD5-97C25C12EB06
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2183.10
+current-version: 2183.17
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

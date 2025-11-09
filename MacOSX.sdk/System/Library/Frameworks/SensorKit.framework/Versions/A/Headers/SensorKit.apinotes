@@ -5,6 +5,9 @@ Classes:
   - Selector: "requestAuthorizationForSensors:completion:"
     MethodKind: Class
     SwiftName: "requestAuthorization(sensors:completion:)"
+  - Selector: "_requestAuthorizationMigrationForSensors:completion:"
+    MethodKind: Class
+    SwiftName: "_requestAuthorizationMigration(sensors:completion:)"
 - Name: SRKeyboardProbabilityMetric
   SwiftName: SRKeyboardMetrics.ProbabilityMetric
 - Name: SRApplicationUsage

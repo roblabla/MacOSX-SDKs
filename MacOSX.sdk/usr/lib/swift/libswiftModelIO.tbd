@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           67095E30-E5BE-37A2-B437-CBCCF942868E
+    value:           8DA5A363-E50A-3A9B-BA3B-F1A9ECD1F321
   - target:          x86_64-maccatalyst
-    value:           67095E30-E5BE-37A2-B437-CBCCF942868E
+    value:           8DA5A363-E50A-3A9B-BA3B-F1A9ECD1F321
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D98C591-77B2-3CF9-9F10-BD0B15F55882
+    value:           82C52EF3-DB1A-35A7-9A43-C554311D3871
   - target:          arm64e-maccatalyst
-    value:           3D98C591-77B2-3CF9-9F10-BD0B15F55882
+    value:           82C52EF3-DB1A-35A7-9A43-C554311D3871
 install-name:    '/usr/lib/swift/libswiftModelIO.dylib'
 swift-abi-version: 7
 exports:

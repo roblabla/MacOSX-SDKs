@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           77D959E7-B171-36C2-8BE5-42F2174E10DE
+    value:           C492E807-55E5-3C68-B00B-C6FAAEA69316
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B10EA841-EB99-3C71-805C-147BA7F7D1AF
+    value:           6F6EA689-97C4-3318-839B-B7C08954ADAF
 install-name:    '/System/Library/PrivateFrameworks/ExchangeSync.framework/Versions/A/ExchangeSync'
 current-version: 2007.0.1
 exports:

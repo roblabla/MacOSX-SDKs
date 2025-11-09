@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6C35B26D-EC5C-37A9-9F68-56BC47AFF972
+    value:           51552E01-E54E-30A1-B858-E27BC59CE796
   - target:          x86_64-maccatalyst
-    value:           6C35B26D-EC5C-37A9-9F68-56BC47AFF972
+    value:           51552E01-E54E-30A1-B858-E27BC59CE796
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5F1FF93-CF8C-328F-9E80-C85999A2A60F
+    value:           81EAF29D-94A4-34D5-BC10-70338DC8998C
   - target:          arm64e-maccatalyst
-    value:           F5F1FF93-CF8C-328F-9E80-C85999A2A60F
+    value:           81EAF29D-94A4-34D5-BC10-70338DC8998C
 install-name:    '/usr/lib/swift/libswiftCoreMedia.dylib'
-current-version: 2930.8.1
+current-version: 2940.20.4
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

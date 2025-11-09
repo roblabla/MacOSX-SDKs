@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B460F3B7-40BF-320B-9415-0783FED0593E
+    value:           4D57E3AA-CBDD-352B-857A-B4A46722CFC6
   - target:          x86_64-maccatalyst
-    value:           B460F3B7-40BF-320B-9415-0783FED0593E
+    value:           4D57E3AA-CBDD-352B-857A-B4A46722CFC6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D8A0963-8617-3610-8CD7-255F78929D82
+    value:           CA22C389-C73C-3322-BF28-723E610E82EE
   - target:          arm64e-maccatalyst
-    value:           9D8A0963-8617-3610-8CD7-255F78929D82
+    value:           CA22C389-C73C-3322-BF28-723E610E82EE
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DF2BFE96-3561-311B-96AD-432B41FCB350
+    value:           55A1E48E-2E5F-3E51-939A-8C20DCB9F7CE
   - target:          x86_64-maccatalyst
-    value:           DF2BFE96-3561-311B-96AD-432B41FCB350
+    value:           55A1E48E-2E5F-3E51-939A-8C20DCB9F7CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B23D2522-D758-3626-BB9E-98E8DDCF8570
+    value:           5C4E10A8-EA1E-3CDC-A456-516484733B38
   - target:          arm64e-maccatalyst
-    value:           B23D2522-D758-3626-BB9E-98E8DDCF8570
+    value:           5C4E10A8-EA1E-3CDC-A456-516484733B38
 install-name:    '/System/Library/Frameworks/Accounts.framework/Versions/A/Accounts'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

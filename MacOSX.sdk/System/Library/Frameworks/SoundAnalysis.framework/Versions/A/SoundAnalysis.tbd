@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3C9B7A94-53C9-3A29-9642-99B6E058D657
+    value:           346DB072-2CDF-3316-B99B-7DF756516E19
   - target:          x86_64-maccatalyst
-    value:           3C9B7A94-53C9-3A29-9642-99B6E058D657
+    value:           346DB072-2CDF-3316-B99B-7DF756516E19
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4704AFD-38CD-31F0-884A-70CEAFB2FB05
+    value:           8231C1B8-E7F6-3BD2-915E-762AB54C4601
   - target:          arm64e-maccatalyst
-    value:           B4704AFD-38CD-31F0-884A-70CEAFB2FB05
+    value:           8231C1B8-E7F6-3BD2-915E-762AB54C4601
 install-name:    '/System/Library/Frameworks/SoundAnalysis.framework/Versions/A/SoundAnalysis'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

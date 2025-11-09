@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9B0A9D76-996B-37EF-AD47-9FB99C20F355
+    value:           9E74CDE5-3CD1-3B65-865C-03394C666E8A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A92A1DCC-2586-374C-8725-D009E07CC4C9
+    value:           66344314-27B1-39AC-9D2E-A4760253FFAB
 install-name:    '/System/Library/PrivateFrameworks/CharacterPicker.framework/Versions/A/CharacterPicker'
-current-version: 190
+current-version: 191
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CPKCategoryTitleFavorites, _CPKCategoryTitleMore, _CPKCategoryTitleRecents, 

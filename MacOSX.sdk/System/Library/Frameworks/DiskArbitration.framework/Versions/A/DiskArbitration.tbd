@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CDF29069-553A-3C0C-B755-C7BA807DCE15
+    value:           53A3D652-7473-3BAB-8F9E-1D7F97B7DF8F
   - target:          x86_64-maccatalyst
-    value:           CDF29069-553A-3C0C-B755-C7BA807DCE15
+    value:           53A3D652-7473-3BAB-8F9E-1D7F97B7DF8F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB02888E-3096-39D6-87E2-DB7C65A8260E
+    value:           BFB7DBD6-EE49-33DA-8874-237F1D082357
   - target:          arm64e-maccatalyst
-    value:           EB02888E-3096-39D6-87E2-DB7C65A8260E
+    value:           BFB7DBD6-EE49-33DA-8874-237F1D082357
 install-name:    '/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

@@ -142,13 +142,17 @@ enum
                     one scope, kCMIOObjectPropertyScopeGlobal, and only a main element.
     @constant       kCMIOPlugInPropertyBundleID
                         A CFString that contains the bundle identifier for the CMIOPlugIn. The caller is responsible for releasing the returned CFObject.
+    @constant       kCMIOPlugInPropertyIsExtension
+                        A UInt32 boolean that returns 1 if the DAL is loaded by a CMIOExtension, returns 0 otherwise.
 */
 enum
 {
-    kCMIOPlugInPropertyBundleID = 'piid'
+    kCMIOPlugInPropertyBundleID    = 'piid',
+    kCMIOPlugInPropertyIsExtension = 'piie'
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 #pragma clang diagnostic pop
 #pragma pack(pop)
     

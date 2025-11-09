@@ -851,6 +851,27 @@ CF_ENUM(AudioUnitScope) {
 						this property to detect the hosts MIDI protocol.
 
 						Note: This property should not be changed after the audio unit has been initialized.
+
+	@constant        kAudioUnitProperty_MIDIOutputBufferSizeHint
+						Scope:                  Global
+						Value Type:          UInt32
+						Access:                 read/write
+
+						This property allows the plug-in to provide a hint to the framework regarding the size of
+						its outgoing MIDI data buffer.
+
+						If the plug-in produces more MIDI output data than the default size of the allocated buffer,
+						then the plug-in can provide this property to increase the size of this buffer.
+
+						The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or
+						a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's).
+
+						This property is set to the default value by the framework.
+
+						In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI
+						output in one render call, set this property to increase the buffer.
+
+						This only provides a recommendation to the framework.
 */
 CF_ENUM(AudioUnitPropertyID)
 {
@@ -910,13 +931,16 @@ CF_ENUM(AudioUnitPropertyID)
 	kAudioUnitProperty_AUHostIdentifier				= 46,
 #endif
 
-	kAudioUnitProperty_MIDIOutputCallbackInfo       = 47,
-	kAudioUnitProperty_MIDIOutputCallback           = 48,
+	kAudioUnitProperty_MIDIOutputCallbackInfo		= 47,
+	kAudioUnitProperty_MIDIOutputCallback			= 48,
 
-    kAudioUnitProperty_MIDIOutputEventListCallback      = 63,
+    kAudioUnitProperty_MIDIOutputEventListCallback	= 63,
 
-    kAudioUnitProperty_AudioUnitMIDIProtocol            = 64,
-    kAudioUnitProperty_HostMIDIProtocol                 = 65
+    kAudioUnitProperty_AudioUnitMIDIProtocol		= 64,
+    kAudioUnitProperty_HostMIDIProtocol				= 65,
+	
+	kAudioUnitProperty_MIDIOutputBufferSizeHint		= 66
+
 };
 
 #if AU_SUPPORT_INTERAPP_AUDIO
@@ -2844,6 +2868,14 @@ typedef struct AudioUnitMeterClipping AudioUnitMeterClipping;
 						
 						Sets in-head rendering mode when using kSpatializationAlgorithm_UseOutputType and
 						kSpatialMixerSourceMode_PointSource. See kSpatialMixerPointSourceInHeadMode_
+ 
+    @constant       kAudioUnitProperty_SpatialMixerEnableHeadTracking
+                        Scope:          Global
+                        Value Type:     UInt32
+                        Access:         Read / Write
+                          
+                        Enables or disables head-tracking using AirPods motion sensors. This tracking will
+                        apply a second rotation on top of head yaw, pitch, and roll parameters.
 */
 CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_ReverbRoomType						= 10,
@@ -2854,7 +2886,8 @@ CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_SpatialMixerDistanceParams			= 3010,
 	kAudioUnitProperty_SpatialMixerAttenuationCurve			= 3013,
 	kAudioUnitProperty_SpatialMixerOutputType				= 3100,
-	kAudioUnitProperty_SpatialMixerPointSourceInHeadMode	= 3103
+	kAudioUnitProperty_SpatialMixerPointSourceInHeadMode	= 3103,
+    kAudioUnitProperty_SpatialMixerEnableHeadTracking API_AVAILABLE(macos(12.3)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = 3111
 };
 
 /*!

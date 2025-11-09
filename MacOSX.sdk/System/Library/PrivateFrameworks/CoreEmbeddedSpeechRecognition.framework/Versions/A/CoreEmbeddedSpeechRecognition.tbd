@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BF22FC42-9BB4-3339-B942-06A0BECB455C
+    value:           E5B85BD9-AEE1-34E4-B85F-F1B536B7B627
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E93573F-7717-32DA-A695-AD759E3EDC00
+    value:           FDB854F3-B875-3AF0-9744-2062EC155DD8
 install-name:    '/System/Library/PrivateFrameworks/CoreEmbeddedSpeechRecognition.framework/Versions/A/CoreEmbeddedSpeechRecognition'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -25,9 +25,11 @@ exports:
                        _CoreEmbeddedSpeechRecognizerInstanceUUIDInteractive, _CoreEmbeddedSpeechRecognizerTaskDictation, 
                        _CoreEmbeddedSpeechRecognizerTaskSearchOrMessaging, _CoreEmbeddedSpeechRecognizerTaskSiriDictation, 
                        _CoreEmbeddedSpeechRecognizerTaskTshot, _CoreEmbeddedSpeechRecognizerTaskVoiceMail, 
-                       _CoreEmbeddedSpeechRecognizerTaskWebSearch ]
-    objc-classes:    [ CESRAssetConfig, CESRAssistantOnDeviceSampling, CESRContextualData, 
-                       CESRCorrectionPronunciation, CESRFidesASRRecord, CESRModelProperties, 
+                       _CoreEmbeddedSpeechRecognizerTaskWebSearch, _MAX_SAMPLED_REQUESTS_SELECTED_PER_DAY ]
+    objc-classes:    [ CESRAssetConfig, CESRAssistantOnDeviceSampling, CESRAudioSamplingConfig, 
+                       CESRAudioSamplingConfigManager, CESRAudioSamplingPolicy, CESRAudioSamplingUtilities, 
+                       CESRContextualData, CESRCorrectionPronunciation, CESRDictationOnDeviceSampling, 
+                       CESRFidesASRRecord, CESRModelProperties, CESRSamplingDimension, 
                        CESRSpeechParameters, CESRTrialAssetManager, CESRUserCorrectionsProfileEntry, 
                        CESRUserData, CESRUserDataContactWord, CESRUserDataOptions, 
                        CESRVocabularyCategory, CoreEmbeddedSpeechRecognizer, FetchHomeKitDataDelegate, 

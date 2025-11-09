@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           63FE5509-0C37-3241-881A-C5872D68F7A6
+    value:           2949D64C-87B5-3CF7-8310-F4050C9E369D
   - target:          x86_64-maccatalyst
-    value:           63FE5509-0C37-3241-881A-C5872D68F7A6
+    value:           2949D64C-87B5-3CF7-8310-F4050C9E369D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0EF42DD-51EF-31F8-8E1E-DCEC722C3C54
+    value:           DAD0976F-645F-3449-89BC-7D5338FE0637
   - target:          arm64e-maccatalyst
-    value:           B0EF42DD-51EF-31F8-8E1E-DCEC722C3C54
+    value:           DAD0976F-645F-3449-89BC-7D5338FE0637
 install-name:    '/System/Library/PrivateFrameworks/MobileIcons.framework/Versions/A/MobileIcons'
 current-version: 372
 exports:

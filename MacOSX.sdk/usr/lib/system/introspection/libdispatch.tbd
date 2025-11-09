@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           386F7010-927A-325C-83A0-109E30FD048A
+    value:           ED70D65C-C302-3D5C-8E8A-90FC5423A41C
   - target:          x86_64-maccatalyst
-    value:           386F7010-927A-325C-83A0-109E30FD048A
+    value:           ED70D65C-C302-3D5C-8E8A-90FC5423A41C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           147AE966-CF22-3A9D-B2AD-0C6F5D24A4C3
+    value:           4374E484-0105-3CBF-826E-E6E7A47668FC
   - target:          arm64e-maccatalyst
-    value:           147AE966-CF22-3A9D-B2AD-0C6F5D24A4C3
+    value:           4374E484-0105-3CBF-826E-E6E7A47668FC
 install-name:    '/usr/lib/system/introspection/libdispatch.dylib'
-current-version: 1324.60.3
+current-version: 1325.100.36
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -132,8 +132,9 @@ exports:
                        _dispatch_source_set_registration_handler, _dispatch_source_set_registration_handler_f, 
                        _dispatch_source_set_timer, _dispatch_source_testcancel, _dispatch_suspend, 
                        _dispatch_swift_job_should_yield, _dispatch_sync, _dispatch_sync_f, 
-                       _dispatch_time, _dispatch_time_to_nsecs, _dispatch_tsd_indexes, 
-                       _dispatch_walltime, _dispatch_workloop_copy_current, _dispatch_workloop_create, 
+                       _dispatch_time, _dispatch_time_from_nsec, _dispatch_time_to_nsec, 
+                       _dispatch_time_to_nsecs, _dispatch_tsd_indexes, _dispatch_walltime, 
+                       _dispatch_workloop_copy_current, _dispatch_workloop_create, 
                        _dispatch_workloop_create_inactive, _dispatch_workloop_is_current, 
                        _dispatch_workloop_set_autorelease_frequency, _dispatch_workloop_set_cpupercent, 
                        _dispatch_workloop_set_os_workgroup, _dispatch_workloop_set_qos_class, 
@@ -166,7 +167,8 @@ exports:
                        _voucher_get_activity_id, _voucher_get_activity_id_and_creator, 
                        _voucher_get_current_persona, _voucher_get_current_persona_originator_info, 
                        _voucher_get_current_persona_proximate_info, _voucher_kvoucher_debug, 
-                       _voucher_process_can_use_arbitrary_personas, _voucher_replace_default_voucher ]
+                       _voucher_process_can_use_arbitrary_personas, _voucher_release, 
+                       _voucher_replace_default_voucher, _voucher_retain ]
     objc-classes:    [ OS_dispatch_channel, OS_dispatch_data, OS_dispatch_disk, OS_dispatch_group, 
                        OS_dispatch_io, OS_dispatch_mach, OS_dispatch_mach_msg, OS_dispatch_object, 
                        OS_dispatch_operation, OS_dispatch_queue, OS_dispatch_queue_attr, 

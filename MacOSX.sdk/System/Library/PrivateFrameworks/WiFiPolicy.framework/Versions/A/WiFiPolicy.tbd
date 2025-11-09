@@ -3,18 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           18072113-8A3C-3986-8304-D32455339D6F
+    value:           4B554228-03EC-36A5-A772-27334C88FAD5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E44B521-AF73-3401-A510-596EA7A04D93
+    value:           13E97A84-8324-3507-A3B5-506BA9B4A5CC
 install-name:    '/System/Library/PrivateFrameworks/WiFiPolicy.framework/Versions/A/WiFiPolicy'
 exports:
-  - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ASL_LOG, _Apple80211Associate, _Apple80211Associate2, _Apple80211BindToInterface, 
                        _Apple80211Close, _Apple80211CopyAwdlPreferredChannels, _Apple80211CopyLeakyAPStatus, 
@@ -109,31 +104,33 @@ exports:
                        _kWiFiUsageAccessPointProfileConfigDefinition, _kWiFiUsageAccessPointProfileConfigInterval, 
                        _kWiFiUsageAccessPointProfileConfigMaxAgeDays, _kWiFiUsageAccessPointProfileConfigMaxCount, 
                        _kWiFiUsageAccessPointProfileConfigMinAssoc, _kWiFiUsageAccessPointProfileConfigOccurrencies, 
+                       _kWiFiUsageAccessPointProfileConfigShortLen, _kWiFiUsageAccessPointProfileConfigUseShort, 
                        _kWiFiUsageAccessPointProfileCreated, _kWiFiUsageAccessPointProfileDefaultsSuiteName, 
                        _kWiFiUsageAccessPointProfileForAssoc, _kWiFiUsageAccessPointProfileIdentifier, 
                        _kWiFiUsageAccessPointProfileInfoElementPrefix, _kWiFiUsageAccessPointProfileInfoExtendedElementPrefix, 
                        _kWiFiUsageAccessPointProfileInfoVendorElementPrefix, _kWiFiUsageAccessPointProfileLastRefresh, 
                        _kWiFiUsageAccessPointProfileMaxAssoc, _kWiFiUsageAccessPointProfileOccurrencies, 
-                       _kWiFiUsageAccessPointProfileReason, _kWiFiUsageAccessPointProfileSubmittedToCA, 
-                       _kWiFiUsageAccessPointProfileVersion, _kWiFiUsageAccessPointProfileWPSDeviceCategory, 
-                       _kWiFiUsageAccessPointProfileWPSDeviceManufacturer, _kWiFiUsageAccessPointProfileWPSDeviceModelName, 
-                       _kWiFiUsageAccessPointProfileWPSDeviceModelNumber, _kWiFiUsageAccessPointProfileWPSDeviceSubcategory, 
-                       _kWiFiUsageAccessPointProfileWPSInfo, _kWiFiUsageBeaconParsingElements, 
-                       _kWiFiUsageBeaconParsingExElements, _kWiFiUsageLQMWindowAnalysisReasonDataTriggered, 
-                       _kWiFiUsageLQMWindowAnalysisReasonDatapathStall, _kWiFiUsageLQMWindowAnalysisReasonFaceTime, 
+                       _kWiFiUsageAccessPointProfileReason, _kWiFiUsageAccessPointProfileShortIdentifier, 
+                       _kWiFiUsageAccessPointProfileSubmittedToCA, _kWiFiUsageAccessPointProfileVersion, 
+                       _kWiFiUsageAccessPointProfileWPSDeviceCategory, _kWiFiUsageAccessPointProfileWPSDeviceManufacturer, 
+                       _kWiFiUsageAccessPointProfileWPSDeviceModelName, _kWiFiUsageAccessPointProfileWPSDeviceModelNumber, 
+                       _kWiFiUsageAccessPointProfileWPSDeviceSubcategory, _kWiFiUsageAccessPointProfileWPSInfo, 
+                       _kWiFiUsageBeaconParsingElements, _kWiFiUsageBeaconParsingExElements, 
+                       _kWiFiUsageLQMWindowAnalysisReasonDataTriggered, _kWiFiUsageLQMWindowAnalysisReasonDatapathStall, 
+                       _kWiFiUsageLQMWindowAnalysisReasonFaceTime, _kWiFiUsageLQMWindowAnalysisReasonInCall, 
                        _kWiFiUsageLQMWindowAnalysisReasonJoin, _kWiFiUsageLQMWindowAnalysisReasonLinkChange, 
                        _kWiFiUsageLQMWindowAnalysisReasonLinkTest, _kWiFiUsageLQMWindowAnalysisReasonNetworkQuality, 
                        _kWiFiUsageLQMWindowAnalysisReasonRoaming, _kWiFiUsageLQMWindowAnalysisReasonSlowWiFiAP, 
                        _kWiFiUsageLQMWindowAnalysisReasonSlowWiFiDUT, _kWiFiUsageLQMWindowAnalysisReasonSymptomArpFail, 
                        _kWiFiUsageLQMWindowAnalysisReasonSymptomDnsFail, _kWiFiUsageLQMWindowAnalysisReasonSymptomLowRssiArp, 
                        _kWiFiUsageLQMWindowAnalysisReasonSymptomLowRssiDns, _kWiFiUsageLQMWindowAnalysisReasonSymptomLowRssiStall, 
-                       _kWiFiUsageMaxDeviceSessionDurationInSecs, _kWiFiUsageTimeBetweenFaultIndicationInSecs, 
-                       _kWiFiUsageTimeBetweenLinkRecoveryInSecs, _kWiFiUsageTimeBetweenLinkTestInSecs, 
-                       _loadAirplayStatsHistogramBin, _loadSidecarHistogramBin, _mccIsoMap, 
-                       _setFamilyDebugFlagsForInterface, _setVendorDebugFlagsForInterface, 
-                       _unified_logger_deinit, _unified_logger_init, _unified_temp_logger_deinit, 
-                       _unified_temp_logger_init, _updateDebugFlagPreferences, _wifi_prefs_deinit, 
-                       _wifi_prefs_init ]
+                       _kWiFiUsageMaxDeviceSessionDurationInSecs, _kWiFiUsageRoamPingPongThreshold, 
+                       _kWiFiUsageTimeBetweenFaultIndicationInSecs, _kWiFiUsageTimeBetweenLinkRecoveryInSecs, 
+                       _kWiFiUsageTimeBetweenLinkTestInSecs, _loadAirplayStatsHistogramBin, 
+                       _loadSidecarHistogramBin, _mccIsoMap, _setFamilyDebugFlagsForInterface, 
+                       _setVendorDebugFlagsForInterface, _unified_logger_deinit, 
+                       _unified_logger_init, _unified_temp_logger_deinit, _unified_temp_logger_init, 
+                       _updateDebugFlagPreferences, _wifi_prefs_deinit, _wifi_prefs_init ]
     objc-classes:    [ TBAccessPointMO, TBAnalytics, TBCacheAnalyticsEvent, TBCentroidCalculator, 
                        TBCoreDataSource, TBCoreDataStoreDescriptor, TBDataSource, 
                        TBDataSourceMediator, TBDefaults, TBError, TBErrorFetchResponse, 
@@ -158,27 +155,29 @@ exports:
                        WiFi3BarsTileFetcher, WiFiAvailabilityEngine, WiFiAvailabilityMatch, 
                        WiFiLexicon, WiFiLocaleManager, WiFiLocationManager, WiFiSoftError, 
                        WiFiUsageAccessPointProfile, WiFiUsageAccessPointProfileConfiguration, 
-                       WiFiUsageApplicationSession, WiFiUsageBeaconParsingConfiguration, 
-                       WiFiUsageBssDetails, WiFiUsageBssSession, WiFiUsageConnectionQualityRecord, 
-                       WiFiUsageDeviceSession, WiFiUsageInterfaceCapabilities, WiFiUsageInterfaceStats, 
-                       WiFiUsageLQMAnalysisSamplingRate, WiFiUsageLQMConfiguration, 
-                       WiFiUsageLQMFeature, WiFiUsageLQMKernelRollingWindow, WiFiUsageLQMKernelSampleAWDLCoex, 
-                       WiFiUsageLQMKernelSampleBTCoex, WiFiUsageLQMKernelSampleCCA, 
-                       WiFiUsageLQMKernelSampleInfraTXRX, WiFiUsageLQMKernelSampleOfdmDesense, 
-                       WiFiUsageLQMKernelSamplePerACTxStats, WiFiUsageLQMKernelSamplePerACTxStatsMcast, 
-                       WiFiUsageLQMKernelSamplePerACTxStatsUcast, WiFiUsageLQMKernelSampleRC1Coex, 
-                       WiFiUsageLQMKernelSampleRC2Coex, WiFiUsageLQMKernelSampleRxAmpdu, 
-                       WiFiUsageLQMKernelSampleScanSummary, WiFiUsageLQMKernelSampleSecurityErrors, 
-                       WiFiUsageLQMModes, WiFiUsageLQMPreceedingTrigger, WiFiUsageLQMRollingWindow, 
+                       WiFiUsageAppleWiFiNameBlocks, WiFiUsageApplicationSession, 
+                       WiFiUsageBeaconParsingConfiguration, WiFiUsageBssDetails, 
+                       WiFiUsageBssSession, WiFiUsageConnectionQualityRecord, WiFiUsageDeviceSession, 
+                       WiFiUsageInterfaceCapabilities, WiFiUsageInterfaceStats, WiFiUsageLQMAnalysisSamplingRate, 
+                       WiFiUsageLQMConfiguration, WiFiUsageLQMFeature, WiFiUsageLQMKernelRollingWindow, 
+                       WiFiUsageLQMKernelSampleAWDLCoex, WiFiUsageLQMKernelSampleBTCoex, 
+                       WiFiUsageLQMKernelSampleCCA, WiFiUsageLQMKernelSampleInfraTXRX, 
+                       WiFiUsageLQMKernelSampleOfdmDesense, WiFiUsageLQMKernelSamplePerACTxStats, 
+                       WiFiUsageLQMKernelSamplePerACTxStatsMcast, WiFiUsageLQMKernelSamplePerACTxStatsUcast, 
+                       WiFiUsageLQMKernelSampleRC1Coex, WiFiUsageLQMKernelSampleRC2Coex, 
+                       WiFiUsageLQMKernelSampleRxAmpdu, WiFiUsageLQMKernelSampleScanSummary, 
+                       WiFiUsageLQMKernelSampleSecurityErrors, WiFiUsageLQMModes, 
+                       WiFiUsageLQMPreceedingTrigger, WiFiUsageLQMRollingWindow, 
                        WiFiUsageLQMSample, WiFiUsageLQMTransformations, WiFiUsageLQMTriggerCriteria, 
                        WiFiUsageLQMTriggerCriteriaFilter, WiFiUsageLQMUserSample, 
                        WiFiUsageLQMWindowAnalysis, WiFiUsageLQMWindowAnalysisDataTriggered, 
-                       WiFiUsageLQMWindowAnalysisJoin, WiFiUsageLQMWindowAnalysisLinkDown, 
-                       WiFiUsageLQMWindowAnalysisLinkTest, WiFiUsageLQMWindowAnalysisNetworkQuality, 
-                       WiFiUsageLQMWindowAnalysisRoaming, WiFiUsageLinkSession, WiFiUsageMonitor, 
-                       WiFiUsageNetworkDetails, WiFiUsageNetworkSession, WiFiUsageParsedBeacon, 
-                       WiFiUsagePrivacyFilter, WiFiUsageRangingRttSample, WiFiUsageRangingSession, 
-                       WiFiUsageSession, WiFiUsageSessionLQM, WiFiUsageSoftApSession, 
-                       WiFiUsageUserSession, WiFiWalletPass, WiFiWalletSource ]
+                       WiFiUsageLQMWindowAnalysisInCall, WiFiUsageLQMWindowAnalysisJoin, 
+                       WiFiUsageLQMWindowAnalysisLinkDown, WiFiUsageLQMWindowAnalysisLinkTest, 
+                       WiFiUsageLQMWindowAnalysisNetworkQuality, WiFiUsageLQMWindowAnalysisRoaming, 
+                       WiFiUsageLinkSession, WiFiUsageMonitor, WiFiUsageNetworkDetails, 
+                       WiFiUsageNetworkSession, WiFiUsageParsedBeacon, WiFiUsagePrivacyFilter, 
+                       WiFiUsageRangingRttSample, WiFiUsageRangingSession, WiFiUsageSession, 
+                       WiFiUsageSessionLQM, WiFiUsageSoftApSession, WiFiUsageUserSession, 
+                       WiFiWalletPass, WiFiWalletSource ]
     objc-ivars:      [ WFLoggerBase._ctxt, WFLoggerBase._dispatchQueue, WFLoggerBase._internalInstall ]
 ...

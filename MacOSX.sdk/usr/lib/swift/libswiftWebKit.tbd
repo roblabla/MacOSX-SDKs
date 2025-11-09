@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           30246748-E75F-3A78-B64E-A3A8A970EF38
+    value:           79E20176-E8B5-31E4-B229-9826FF73263F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9882368E-A278-3390-A011-DA99DA9558A0
+    value:           938AFB60-C251-3D2B-A4B9-BB0BAA65D49E
 install-name:    '/usr/lib/swift/libswiftWebKit.dylib'
-current-version: 612.3.6
+current-version: 613.1.17
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

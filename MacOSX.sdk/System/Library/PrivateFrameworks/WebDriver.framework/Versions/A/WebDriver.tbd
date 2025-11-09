@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1A08514E-1980-38F4-B15B-1B38C0666CBF
+    value:           4096E04C-62CC-3AF6-8C6D-3AA72BD0C6A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92AE8970-A553-3915-97F8-ABB5B62D1890
+    value:           5DD469FE-5DD8-345F-A57F-15E4C8CFE873
 install-name:    '/System/Library/PrivateFrameworks/WebDriver.framework/Versions/A/WebDriver'
-current-version: 612.3.6
+current-version: 613.1.17
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDExtractFileNameWithoutExtension, _DDIntersectionRange, 
@@ -29,10 +29,7 @@ exports:
                        _WDOSLogValidation, _WDOSLogWebService, _WDOSLogXPCService, 
                        _WDRemoteElementSearchStrategyFromString, _WDSafariDriverMain, 
                        _WebDriverFailureDetailsErrorKey, __Z18baseTypeFromStringP8NSString, 
-                       _allocSimDeviceInstance, _allocSimDeviceSetInstance, _allocSimDeviceTypeInstance, 
-                       _allocSimServiceContextInstance, _authenticateWebDeveloperRightName, 
-                       _canLoadCoreSimulator, _extractParamValue, _findChar, _getSimDeviceClass, 
-                       _getSimDeviceSetClass, _getSimDeviceTypeClass, _getSimServiceContextClass, 
+                       _authenticateWebDeveloperRightName, _extractParamValue, _findChar, 
                        _httpMethodToString, _isWebDeveloperRightName, _safariDriverAllowRightName, 
                        _stringToHTTPMethod, _webDriverErrorDomain ]
     objc-classes:    [ ContextBlacklistFilterLogFormatter, ContextWhitelistFilterLogFormatter, 
@@ -56,14 +53,16 @@ exports:
                        WDProtocolAutomationInputSource, WDProtocolAutomationInputSourceState, 
                        WDProtocolAutomationInteractionStep, WDProtocolAutomationKeyboardInteraction, 
                        WDProtocolAutomationPoint, WDProtocolAutomationRect, WDProtocolAutomationSessionPermissionData, 
-                       WDProtocolAutomationSize, WDProtocolBackendProxy, WDProtocolCommand, 
-                       WDProtocolEvent, WDProtocolModel, WDProtocolParameter, WDProtocolType, 
-                       WDProtocolTypeConversions, WDProtocolTypeParser, WDRemoteElement, 
-                       WDRemoteElementLayoutResult, WDRemoteSession, WDRemoteSessionHost, 
-                       WDRemoteSessionManager, WDSafariDriver, WDSafariDriverXPCClient, 
-                       WDSessionDiagnosticLogFileManager, WDSessionNotificationHandler, 
-                       WDSessionNotificationManager, WDSessionQueueState, WDToplevelBrowsingContext, 
-                       WDW3CError, WDW3CRouteHandler, WebSocket ]
+                       WDProtocolAutomationSize, WDProtocolAutomationVirtualAuthenticatorConfiguration, 
+                       WDProtocolAutomationVirtualAuthenticatorCredential, WDProtocolBackendProxy, 
+                       WDProtocolCommand, WDProtocolEvent, WDProtocolModel, WDProtocolParameter, 
+                       WDProtocolType, WDProtocolTypeConversions, WDProtocolTypeParser, 
+                       WDRemoteElement, WDRemoteElementLayoutResult, WDRemoteSession, 
+                       WDRemoteSessionHost, WDRemoteSessionManager, WDSafariDriver, 
+                       WDSafariDriverXPCClient, WDSessionDiagnosticLogFileManager, 
+                       WDSessionNotificationHandler, WDSessionNotificationManager, 
+                       WDSessionQueueState, WDToplevelBrowsingContext, WDW3CError, 
+                       WDW3CRouteHandler, WebSocket ]
     objc-ivars:      [ DDASLLogger.client, DDAbstractDatabaseLogger.deleteInterval, 
                        DDAbstractDatabaseLogger.deleteOnEverySave, DDAbstractDatabaseLogger.deleteTimer, 
                        DDAbstractDatabaseLogger.lastDeleteTime, DDAbstractDatabaseLogger.maxAge, 

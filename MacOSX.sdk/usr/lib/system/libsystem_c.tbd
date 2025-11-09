@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E58814CC-DCB7-35A5-BADC-E367ED3AC207
+    value:           8E54ECA2-9BD8-3482-9589-B9574434D1AA
   - target:          x86_64-maccatalyst
-    value:           E58814CC-DCB7-35A5-BADC-E367ED3AC207
+    value:           8E54ECA2-9BD8-3482-9589-B9574434D1AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           00FC01C7-36BC-3193-86A3-5C03046B45FB
+    value:           FD566A15-42D8-314A-A99A-B59237DDF5BC
   - target:          arm64e-maccatalyst
-    value:           00FC01C7-36BC-3193-86A3-5C03046B45FB
+    value:           FD566A15-42D8-314A-A99A-B59237DDF5BC
 install-name:    '/usr/lib/system/libsystem_c.dylib'
-current-version: 1506.40.4
+current-version: 1507.100.9
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -136,13 +136,13 @@ exports:
                        _dbopen, _devname, _devname_r, _difftime, _digittoint, _digittoint_l, 
                        _dirfd, _dirname, _dirname_r, _div, _dprintf, _dprintf_l, 
                        _drand48, _duplocale, _dxprintf, _dxprintf_exec, _ecvt, _encrypt, 
-                       _endttyent, _endusershell, _endutxent, _endutxent_wtmp, _erand48, 
-                       _err, _err_set_exit, _err_set_exit_b, _err_set_file, _errc, 
-                       _errx, _execl, _execle, _execlp, _execv, _execvP, _execvp, 
-                       _exit, _f_prealloc, _fchmodx_np, _fclose, _fcvt, _fdopen, 
-                       '_fdopen$DARWIN_EXTSN', _fdopendir, _feof, _feof_unlocked, 
-                       _ferror, _ferror_unlocked, _fflagstostr, _fflush, _fgetc, 
-                       _fgetln, _fgetpos, _fgetrune, _fgets, _fgetwc, _fgetwc_l, 
+                       _endttyent, _endusershell, _endutxent, _endutxent_wtmp, _environ_lock_np, 
+                       _environ_unlock_np, _erand48, _err, _err_set_exit, _err_set_exit_b, 
+                       _err_set_file, _errc, _errx, _execl, _execle, _execlp, _execv, 
+                       _execvP, _execvp, _exit, _f_prealloc, _fchmodx_np, _fclose, 
+                       _fcvt, _fdopen, '_fdopen$DARWIN_EXTSN', _fdopendir, _feof, 
+                       _feof_unlocked, _ferror, _ferror_unlocked, _fflagstostr, _fflush, 
+                       _fgetc, _fgetln, _fgetpos, _fgetrune, _fgets, _fgetwc, _fgetwc_l, 
                        _fgetwln, _fgetwln_l, _fgetws, _fgetws_l, _fileno, _fileno_unlocked, 
                        _filesec_dup, _filesec_free, _filesec_get_property, _filesec_init, 
                        _filesec_query_property, _filesec_set_property, _filesec_unset_property, 

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -module-name SwiftUI
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -library-level api -module-name SwiftUI
+// swift-module-flags-ignorable: -user-module-version 3.4.12
 import Accessibility
 import AppKit
 import Combine
@@ -557,12 +558,12 @@ extension SwiftUI.AppStorage {
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.AppStorage where Value : Swift.ExpressibleByNilLiteral {
-  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Bool?
-  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Int?
-  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Double?
-  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.String?
-  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Foundation.URL?
-  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Foundation.Data?
+  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Optional<Swift.Bool>
+  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Optional<Swift.Int>
+  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Optional<Swift.Double>
+  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Optional<Swift.String>
+  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Optional<Foundation.URL>
+  public init(_ key: Swift.String, store: Foundation.UserDefaults? = nil) where Value == Swift.Optional<Foundation.Data>
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.AppStorage {
@@ -1249,7 +1250,7 @@ extension SwiftUI.Scene {
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-@_Concurrency.MainActor(unsafe) public protocol NSViewRepresentable : SwiftUI.View where Self.Body == Swift.Never {
+public protocol NSViewRepresentable : SwiftUI.View where Self.Body == Swift.Never {
   associatedtype NSViewType : AppKit.NSView
   @_Concurrency.MainActor(unsafe) func makeNSView(context: Self.Context) -> Self.NSViewType
   @_Concurrency.MainActor(unsafe) func updateNSView(_ nsView: Self.NSViewType, context: Self.Context)
@@ -1260,7 +1261,7 @@ extension SwiftUI.Scene {
   @_Concurrency.MainActor(unsafe) func _overrideSizeThatFits(_ size: inout CoreGraphics.CGSize, in proposedSize: SwiftUI._ProposedSize, nsView: Self.NSViewType)
   @_Concurrency.MainActor(unsafe) func _overrideLayoutTraits(_ layoutTraits: inout SwiftUI._LayoutTraits, for nsView: Self.NSViewType)
   @available(macOS 11.3, *)
-  @_Concurrency.MainActor(unsafe) static func _modifyBridgedViewInputs(_ inputs: inout SwiftUI._ViewInputs)
+  static func _modifyBridgedViewInputs(_ inputs: inout SwiftUI._ViewInputs)
   typealias Context = SwiftUI.NSViewRepresentableContext<Self>
 }
 @available(macOS 10.15, *)
@@ -1268,7 +1269,7 @@ extension SwiftUI.Scene {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.NSViewRepresentable where Self.Coordinator == Swift.Void {
-  @_Concurrency.MainActor(unsafe) public func makeCoordinator() -> Self.Coordinator
+  public func makeCoordinator() -> Self.Coordinator
 }
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
@@ -1276,16 +1277,16 @@ extension SwiftUI.NSViewRepresentable where Self.Coordinator == Swift.Void {
 @available(watchOS, unavailable)
 extension SwiftUI.NSViewRepresentable {
   @available(macOS 12.0, *)
-  @_Concurrency.MainActor(unsafe) public func _resetNSView(_ nsView: Self.NSViewType, coordinator: Self.Coordinator, destroy: () -> Swift.Void)
-  @_Concurrency.MainActor(unsafe) public static func dismantleNSView(_ nsView: Self.NSViewType, coordinator: Self.Coordinator)
-  @_Concurrency.MainActor(unsafe) public static func _makeView(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs
-  @_Concurrency.MainActor(unsafe) public static func _makeViewList(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs
-  @_Concurrency.MainActor(unsafe) public func _identifiedViewTree(in nsView: Self.NSViewType) -> SwiftUI._IdentifiedViewTree
-  @_Concurrency.MainActor(unsafe) public func _overrideSizeThatFits(_ size: inout CoreGraphics.CGSize, in proposedSize: SwiftUI._ProposedSize, nsView: Self.NSViewType)
-  @_Concurrency.MainActor(unsafe) public func _overrideLayoutTraits(_ layoutTraits: inout SwiftUI._LayoutTraits, for nsView: Self.NSViewType)
+  public func _resetNSView(_ nsView: Self.NSViewType, coordinator: Self.Coordinator, destroy: () -> Swift.Void)
+  public static func dismantleNSView(_ nsView: Self.NSViewType, coordinator: Self.Coordinator)
+  public static func _makeView(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewInputs) -> SwiftUI._ViewOutputs
+  public static func _makeViewList(view: SwiftUI._GraphValue<Self>, inputs: SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs
+  public func _identifiedViewTree(in nsView: Self.NSViewType) -> SwiftUI._IdentifiedViewTree
+  public func _overrideSizeThatFits(_ size: inout CoreGraphics.CGSize, in proposedSize: SwiftUI._ProposedSize, nsView: Self.NSViewType)
+  public func _overrideLayoutTraits(_ layoutTraits: inout SwiftUI._LayoutTraits, for nsView: Self.NSViewType)
   @available(macOS 11.3, *)
-  @_Concurrency.MainActor(unsafe) public static func _modifyBridgedViewInputs(_ inputs: inout SwiftUI._ViewInputs)
-  @_Concurrency.MainActor(unsafe) public var body: Swift.Never {
+  public static func _modifyBridgedViewInputs(_ inputs: inout SwiftUI._ViewInputs)
+  public var body: Swift.Never {
     get
   }
 }
@@ -2297,12 +2298,12 @@ extension SwiftUI._ValueActionModifier : SwiftUI._SceneModifier {
 @available(watchOS, unavailable)
 public protocol NSViewControllerRepresentable : SwiftUI.View where Self.Body == Swift.Never {
   associatedtype NSViewControllerType : AppKit.NSViewController
-  func makeNSViewController(context: Self.Context) -> Self.NSViewControllerType
-  func updateNSViewController(_ nsViewController: Self.NSViewControllerType, context: Self.Context)
-  static func dismantleNSViewController(_ nsViewController: Self.NSViewControllerType, coordinator: Self.Coordinator)
+  @_Concurrency.MainActor(unsafe) func makeNSViewController(context: Self.Context) -> Self.NSViewControllerType
+  @_Concurrency.MainActor(unsafe) func updateNSViewController(_ nsViewController: Self.NSViewControllerType, context: Self.Context)
+  @_Concurrency.MainActor(unsafe) static func dismantleNSViewController(_ nsViewController: Self.NSViewControllerType, coordinator: Self.Coordinator)
   associatedtype Coordinator = Swift.Void
-  func makeCoordinator() -> Self.Coordinator
-  func _identifiedViewTree(in nsViewController: Self.NSViewControllerType) -> SwiftUI._IdentifiedViewTree
+  @_Concurrency.MainActor(unsafe) func makeCoordinator() -> Self.Coordinator
+  @_Concurrency.MainActor(unsafe) func _identifiedViewTree(in nsViewController: Self.NSViewControllerType) -> SwiftUI._IdentifiedViewTree
   typealias Context = SwiftUI.NSViewControllerRepresentableContext<Self>
 }
 @available(macOS 10.15, *)
@@ -2331,12 +2332,12 @@ extension SwiftUI.NSViewControllerRepresentable {
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct NSViewControllerRepresentableContext<ViewController> where ViewController : SwiftUI.NSViewControllerRepresentable {
-  public let coordinator: ViewController.Coordinator
-  public var transaction: SwiftUI.Transaction {
+@_Concurrency.MainActor(unsafe) public struct NSViewControllerRepresentableContext<ViewController> where ViewController : SwiftUI.NSViewControllerRepresentable {
+  @_Concurrency.MainActor(unsafe) public let coordinator: ViewController.Coordinator
+  @_Concurrency.MainActor(unsafe) public var transaction: SwiftUI.Transaction {
     get
   }
-  public var environment: SwiftUI.EnvironmentValues {
+  @_Concurrency.MainActor(unsafe) public var environment: SwiftUI.EnvironmentValues {
     get
   }
 }
@@ -5496,7 +5497,7 @@ extension SwiftUI.Section where Parent == SwiftUI.EmptyView, Content : SwiftUI.V
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.Section where Parent == SwiftUI.Text, Content : SwiftUI.View, Footer == SwiftUI.EmptyView {
   public init(_ titleKey: SwiftUI.LocalizedStringKey, @SwiftUI.ViewBuilder content: () -> Content)
-  public init<S>(_ title: S, @SwiftUI.ViewBuilder content: () -> Content) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, @SwiftUI.ViewBuilder content: () -> Content) where S : Swift.StringProtocol
 }
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
@@ -6378,13 +6379,13 @@ extension SwiftUI.DatePicker where Label == SwiftUI.Text {
   @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<Foundation.Date>, displayedComponents: SwiftUI.DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : Swift.StringProtocol
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  public init<S>(_ title: S, selection: SwiftUI.Binding<Foundation.Date>, in range: Swift.ClosedRange<Foundation.Date>, displayedComponents: SwiftUI.DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<Foundation.Date>, in range: Swift.ClosedRange<Foundation.Date>, displayedComponents: SwiftUI.DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : Swift.StringProtocol
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  public init<S>(_ title: S, selection: SwiftUI.Binding<Foundation.Date>, in range: Swift.PartialRangeFrom<Foundation.Date>, displayedComponents: SwiftUI.DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<Foundation.Date>, in range: Swift.PartialRangeFrom<Foundation.Date>, displayedComponents: SwiftUI.DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : Swift.StringProtocol
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  public init<S>(_ title: S, selection: SwiftUI.Binding<Foundation.Date>, in range: Swift.PartialRangeThrough<Foundation.Date>, displayedComponents: SwiftUI.DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<Foundation.Date>, in range: Swift.PartialRangeThrough<Foundation.Date>, displayedComponents: SwiftUI.DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : Swift.StringProtocol
 }
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -7489,8 +7490,8 @@ extension SwiftUI._SceneModifier {
   }
   @frozen public struct ID : Swift.Hashable {
     fileprivate var id: Swift.Int
-    public static func == (a: SwiftUI.Namespace.ID, b: SwiftUI.Namespace.ID) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: SwiftUI.Namespace.ID, b: SwiftUI.Namespace.ID) -> Swift.Bool
     public var hashValue: Swift.Int {
       get
     }
@@ -7640,7 +7641,7 @@ extension SwiftUI.View {
   
   public func badge(_ key: SwiftUI.LocalizedStringKey?) -> some SwiftUI.View
   
-  public func badge<S>(_ label: S?) -> some SwiftUI.View where S : Swift.StringProtocol
+  @_disfavoredOverload public func badge<S>(_ label: S?) -> some SwiftUI.View where S : Swift.StringProtocol
   
 }
 @available(macOS 11.0, *)
@@ -8736,12 +8737,12 @@ extension SwiftUI.SceneStorage {
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.SceneStorage where Value : Swift.ExpressibleByNilLiteral {
-  public init(_ key: Swift.String) where Value == Swift.Bool?
-  public init(_ key: Swift.String) where Value == Swift.Int?
-  public init(_ key: Swift.String) where Value == Swift.Double?
-  public init(_ key: Swift.String) where Value == Swift.String?
-  public init(_ key: Swift.String) where Value == Foundation.URL?
-  public init(_ key: Swift.String) where Value == Foundation.Data?
+  public init(_ key: Swift.String) where Value == Swift.Optional<Swift.Bool>
+  public init(_ key: Swift.String) where Value == Swift.Optional<Swift.Int>
+  public init(_ key: Swift.String) where Value == Swift.Optional<Swift.Double>
+  public init(_ key: Swift.String) where Value == Swift.Optional<Swift.String>
+  public init(_ key: Swift.String) where Value == Swift.Optional<Foundation.URL>
+  public init(_ key: Swift.String) where Value == Swift.Optional<Foundation.Data>
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUI.SceneStorage {
@@ -10188,7 +10189,7 @@ extension SwiftUI.GroupBox where Label == SwiftUI.EmptyView {
 @available(watchOS, unavailable)
 extension SwiftUI.GroupBox where Label == SwiftUI.Text {
   public init(_ titleKey: SwiftUI.LocalizedStringKey, @SwiftUI.ViewBuilder content: () -> Content)
-  public init<S>(_ title: S, @SwiftUI.ViewBuilder content: () -> Content) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, @SwiftUI.ViewBuilder content: () -> Content) where S : Swift.StringProtocol
 }
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -11074,6 +11075,11 @@ extension SwiftUI.View {
   public func keyboardShortcut(_ key: SwiftUI.KeyEquivalent, modifiers: SwiftUI.EventModifiers = .command) -> some SwiftUI.View
   
   public func keyboardShortcut(_ shortcut: SwiftUI.KeyboardShortcut) -> some SwiftUI.View
+  
+  @available(iOS 15.4, macOS 12.3, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public func keyboardShortcut(_ shortcut: SwiftUI.KeyboardShortcut?) -> some SwiftUI.View
   
 }
 @available(iOS 15.0, macOS 12.0, *)
@@ -12791,8 +12797,8 @@ extension SwiftUI.Font {
     public static let bold: SwiftUI.Font.Weight
     public static let heavy: SwiftUI.Font.Weight
     public static let black: SwiftUI.Font.Weight
-    public static func == (a: SwiftUI.Font.Weight, b: SwiftUI.Font.Weight) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: SwiftUI.Font.Weight, b: SwiftUI.Font.Weight) -> Swift.Bool
     public var hashValue: Swift.Int {
       get
     }
@@ -13149,7 +13155,7 @@ public struct MenuButton<Label, Content> : SwiftUI.View where Label : SwiftUI.Vi
 @available(watchOS, unavailable)
 extension SwiftUI.MenuButton where Label == SwiftUI.Text {
   public init(_ titleKey: SwiftUI.LocalizedStringKey, @SwiftUI.ViewBuilder content: () -> Content)
-  public init<S>(_ title: S, @SwiftUI.ViewBuilder content: () -> Content) where S : Swift.StringProtocol
+  @_disfavoredOverload public init<S>(_ title: S, @SwiftUI.ViewBuilder content: () -> Content) where S : Swift.StringProtocol
 }
 @available(tvOS 15.0, *)
 @available(iOS, unavailable)
@@ -13429,8 +13435,9 @@ public struct InlinePickerStyle : SwiftUI.PickerStyle {
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var acceptsFirstResponder: Swift.Bool {
     @_Concurrency.MainActor(unsafe) @objc get
   }
-  @objc @_Concurrency.MainActor(unsafe) public func validateUserInterfaceItem(_ item: AppKit.NSValidatedUserInterfaceItem) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func validateUserInterfaceItem(_ item: AppKit.NSValidatedUserInterfaceItem) -> Swift.Bool
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func keyDown(with event: AppKit.NSEvent)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func doCommand(by selector: ObjectiveC.Selector)
   @objc override dynamic open func responds(to selector: ObjectiveC.Selector!) -> Swift.Bool
   @objc override dynamic open func forwardingTarget(for selector: ObjectiveC.Selector!) -> Any?
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func validRequestor(forSendType sendType: AppKit.NSPasteboard.PasteboardType?, returnType: AppKit.NSPasteboard.PasteboardType?) -> Any?
@@ -17178,6 +17185,11 @@ extension SwiftUI.__SpiralLayout : SwiftUI._VariadicView_UnaryViewRoot {}
 extension SwiftUI.__SpiralLayout : SwiftUI.Animatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI._ViewDebug.Property : Swift.RawRepresentable {}
+@available(macOS 10.15, *)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.NSViewControllerRepresentableContext : Swift.Sendable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Axis : Swift.Equatable {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)

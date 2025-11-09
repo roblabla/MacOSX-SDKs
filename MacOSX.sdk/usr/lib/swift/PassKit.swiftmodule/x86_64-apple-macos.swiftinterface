@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target x86_64-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -module-name PassKit
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target x86_64-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PassKit
+// swift-module-flags-ignorable: -user-module-version 1504.5.22.3
 @_exported import PassKit
 import Swift
 import _Concurrency
@@ -16,7 +17,7 @@ extension PassKit.PKStoredValuePassProperties {
 }
 @available(iOS 11.3, watchOS 4.3, *)
 extension PassKit.PKTransitPassProperties {
-  @objc @_alwaysEmitIntoClient override dynamic public var isBlocked: Swift.Bool {
+  @_alwaysEmitIntoClient @objc override dynamic public var isBlocked: Swift.Bool {
     @objc get {
         // Because this computed property is @_alwaysEmitIntoClient, changes to it will
         // require clients to rebuild their binaries for the changes to take effect.
@@ -26,7 +27,7 @@ extension PassKit.PKTransitPassProperties {
 }
 @available(iOS 10.1, watchOS 3.1, *)
 extension PassKit.PKSuicaPassProperties {
-  @objc @_alwaysEmitIntoClient override dynamic public var isBlocked: Swift.Bool {
+  @_alwaysEmitIntoClient @objc override dynamic public var isBlocked: Swift.Bool {
     @objc get {
         // Because this computed property is @_alwaysEmitIntoClient, changes to it will
         // require clients to rebuild their binaries for the changes to take effect.

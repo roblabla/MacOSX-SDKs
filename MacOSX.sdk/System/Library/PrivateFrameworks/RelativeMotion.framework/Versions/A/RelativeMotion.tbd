@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D07A6FAF-21C4-3E38-8794-1B440E75E8CB
+    value:           8A02A8B8-78F5-3F78-8EF9-8F0DC592D3C8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F0BF1A6-AF5D-3CDB-BE13-DDD800E0D583
+    value:           62CA5D5D-B0B5-3C4E-B7E1-AD11BD0362BB
 install-name:    '/System/Library/PrivateFrameworks/RelativeMotion.framework/Versions/A/RelativeMotion'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

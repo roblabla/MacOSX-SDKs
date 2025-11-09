@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F0207DDD-917D-39B7-A829-0C6DE8D962D9
+    value:           26BB8880-1A67-37F1-B8CB-E001D1B1AFE8
   - target:          x86_64-maccatalyst
-    value:           F0207DDD-917D-39B7-A829-0C6DE8D962D9
+    value:           26BB8880-1A67-37F1-B8CB-E001D1B1AFE8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F171BDA9-254E-30EC-B394-2A505A1DE14A
+    value:           DD4088E7-E73D-3CEA-B556-CDA197FEAF08
   - target:          arm64e-maccatalyst
-    value:           F171BDA9-254E-30EC-B394-2A505A1DE14A
+    value:           DD4088E7-E73D-3CEA-B556-CDA197FEAF08
 install-name:    '/System/Library/PrivateFrameworks/DAAPKit.framework/Versions/A/DAAPKit'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

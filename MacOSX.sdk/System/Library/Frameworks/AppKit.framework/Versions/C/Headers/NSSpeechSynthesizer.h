@@ -43,6 +43,7 @@ typedef NSString * NSVoiceGenderName NS_TYPED_ENUM;
 APPKIT_EXTERN NSVoiceGenderName const NSVoiceGenderNeuter;
 APPKIT_EXTERN NSVoiceGenderName const NSVoiceGenderMale;
 APPKIT_EXTERN NSVoiceGenderName const NSVoiceGenderFemale;
+APPKIT_EXTERN NSVoiceGenderName const NSVoiceGenderNeutral API_AVAILABLE(macos(12.3));
 
 // Synthesizer Properties (including object type)
 typedef NSString * NSSpeechPropertyKey NS_TYPED_ENUM;

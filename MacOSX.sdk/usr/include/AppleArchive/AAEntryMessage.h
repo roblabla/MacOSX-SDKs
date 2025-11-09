@@ -18,8 +18,11 @@ extern "C" {
 typedef uint32_t AAEntryMessage APPLE_ARCHIVE_SWIFT_PRIVATE;
 APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
+#pragma mark - directory search (1x)
+
   /*!
     @abstract Skip directory \p path in search?
+
     @discussion If the callback returns a >0 value, the directory is not searched. \p data is not used.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
@@ -27,6 +30,7 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Exclude entry \p path in search?
+
     @discussion If the callback returns a >0 value, the entry is skipped. \p data is not used.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
@@ -34,13 +38,17 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Error on entry \p path in search
+
     @discussion If the callback returns a >0 value, signals an error when searching \p path. \p data is not used.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
   AA_ENTRY_MESSAGE_SEARCH_FAIL      = 12,
 
+#pragma mark - extract archive stream (2x)
+
   /*!
     @abstract Begin entry \p path, skip?
+
     @discussion If the callback returns a >0 value, the entry is skipped. \p data is a AAHeader instance.
     If the entry is skipped, this will be the last message relative to this entry.
     Otherwise, more messages may be received, with a final END or FAIL.
@@ -50,6 +58,7 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract End entry \p path
+
     @discussion Signals we are done processing entry \p path.
     If not NULL, \p data is a pointer to two uint64_t values containing the entry IDX,IDZ.
     This will be the last message relative to this entry.
@@ -59,6 +68,7 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Processing entry \p path failed, abort?
+
     @discussion Signals an error processing entry \p path. If the callback returns a >0 value, the current action is interrupted.
     If not NULL, \p data is a pointer to two uint64_t values containing the entry IDX,IDZ.
     This will be the last message relative to this entry.
@@ -68,6 +78,7 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Modify entry attributes
+
     @discussion \p data is a pointer to a AAEntryAttributes structure, which can be modified by the callback before being applied.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
@@ -75,6 +86,7 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Modify entry XAT blob
+
     @discussion \p data is a AAEntryXATBlob instance, which can be modified by the callback before being applied.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
@@ -82,13 +94,17 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Modify entry ACL blob
+
     @discussion \p data is a AAEntryACLBlob instance, which can be modified by the callback before being applied.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
   AA_ENTRY_MESSAGE_EXTRACT_ACL      = 25,
 
+#pragma mark - encode archive stream (3x)
+
   /*!
     @abstract Report entry scanning (hashing data, collecting attributes) from the archive encoder
+
     @discussion \p data is not used
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
@@ -96,6 +112,7 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Report entry writing from the archive encoder
+
     @discussion If not NULL, \p data is a pointer to two uint64_t values containing the total DAT blob size,
     and the currently processed DAT blob size.  For files with large data blobs, this callback will be received
     several times to allow progress tracking and cancellation.
@@ -103,22 +120,31 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
   */
   AA_ENTRY_MESSAGE_ENCODE_WRITING   = 31,
 
+#pragma mark - convert archive stream (4x)
+
   /*!
     @abstract Exclude entry \p path in conversion?
+
     @discussion If the callback returns a >0 value, the entry is skipped. \p data is a AAHeader instance.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
   AA_ENTRY_MESSAGE_CONVERT_EXCLUDE  = 40,
 
+#pragma mark - process archive (5x)
+
   /*!
     @abstract Exclude entry \p path in processing?
+
     @discussion If the callback returns a >0 value, the entry is skipped. \p data is a AAHeader instance.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
   AA_ENTRY_MESSAGE_PROCESS_EXCLUDE  = 50,
 
+#pragma mark - decode archive stream (6x)
+
   /*!
     @abstract Report entry reading from the archive decoder
+
     @discussion If not NULL, \p data is a pointer to two uint64_t values containing the total DAT blob size,
     and the currently processed DAT blob size.  For files with large data blobs, this callback will be received
     several times to allow progress tracking and cancellation.

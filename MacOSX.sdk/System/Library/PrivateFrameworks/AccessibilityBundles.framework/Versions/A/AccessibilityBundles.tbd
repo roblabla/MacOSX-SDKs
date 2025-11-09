@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AAFD85C7-3570-3E93-A1BC-71D9F2FAAB05
+    value:           12A4C7E1-1491-3029-93F3-D1DC5FD4FC67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           595A7307-C1C1-33E4-8040-70A93DE33C75
+    value:           576C032E-194D-391B-AFE0-373747D97225
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityBundles.framework/Versions/A/AccessibilityBundles'
 current-version: 12
 exports:

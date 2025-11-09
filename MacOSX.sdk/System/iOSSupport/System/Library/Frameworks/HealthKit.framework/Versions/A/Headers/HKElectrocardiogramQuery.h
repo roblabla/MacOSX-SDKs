@@ -38,7 +38,12 @@ HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0)) NS_SWIFT_NAME(HKElectrocardiogr
 @abstract      An HKElectrocardiogramQuery is used to access voltage data associated with an HKElectrocardiogram.
 @discussion    Once instantiated, call HKHealthStore executeQuery to begin enumerating the HKElectrocardiogram voltage data.
 */
-HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKElectrocardiogramQueryDescriptor", ios(14.0, API_TO_BE_DEPRECATED), watchos(7.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(14.0), watchos(7.0))
+#endif
 @interface HKElectrocardiogramQuery : HKQuery
 
 /*!

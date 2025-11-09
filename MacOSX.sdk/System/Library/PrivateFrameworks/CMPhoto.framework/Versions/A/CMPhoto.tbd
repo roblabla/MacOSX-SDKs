@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C178CB4A-2B25-3774-A600-5CDF8F1A5F65
+    value:           55E74EF9-DAEA-3F5D-9155-9EC7D22F032D
   - target:          x86_64-maccatalyst
-    value:           C178CB4A-2B25-3774-A600-5CDF8F1A5F65
+    value:           55E74EF9-DAEA-3F5D-9155-9EC7D22F032D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48AE81F6-CADA-3CD6-86A5-32D71A161DE0
+    value:           9C6B742B-7197-363D-A299-F58D81172B33
   - target:          arm64e-maccatalyst
-    value:           48AE81F6-CADA-3CD6-86A5-32D71A161DE0
+    value:           9C6B742B-7197-363D-A299-F58D81172B33
 install-name:    '/System/Library/PrivateFrameworks/CMPhoto.framework/Versions/A/CMPhoto'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

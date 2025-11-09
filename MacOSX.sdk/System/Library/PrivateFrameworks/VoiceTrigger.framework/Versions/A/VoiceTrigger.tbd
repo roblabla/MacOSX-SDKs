@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           17BE4D1A-6888-37FE-B51C-C617E50A0E2D
+    value:           33C17515-8EC8-32B9-ADFC-3CAA56D3F34D
   - target:          x86_64-maccatalyst
-    value:           17BE4D1A-6888-37FE-B51C-C617E50A0E2D
+    value:           33C17515-8EC8-32B9-ADFC-3CAA56D3F34D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A76F23A-E5D2-3C9F-A8BD-FE0AB0BFC646
+    value:           6DCB9BD9-A7E2-389D-9504-FFFAFF148F2E
   - target:          arm64e-maccatalyst
-    value:           2A76F23A-E5D2-3C9F-A8BD-FE0AB0BFC646
+    value:           6DCB9BD9-A7E2-389D-9504-FFFAFF148F2E
 install-name:    '/System/Library/PrivateFrameworks/VoiceTrigger.framework/Versions/A/VoiceTrigger'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -59,10 +59,9 @@ exports:
                        __ZTIN11NLinkedListIN4NMapI7NString14NConfigSectionE8HashItemEE8NElementE, 
                        __ZTIN11NLinkedListIN4NMapI7NStringS1_E8HashItemEE8NElementE, 
                        __ZTIN11NLinkedListIN4NMapI7NStringjE8HashItemEE8NElementE, 
-                       __ZTIN14NResizingQueueI6NFrameE8NElementE, __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTS10NAutoArrayI9NPhoneHMME, 
-                       __ZTS10NAutoArrayIjE, __ZTS10NAutoArrayItE, __ZTS10NBaseLayer, 
-                       __ZTS10NClipLayer, __ZTS10NLSTMLayer, __ZTS11NDEPhoneHMM, 
+                       __ZTIN14NResizingQueueI6NFrameE8NElementE, __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
+                       __ZTS10NAutoArrayI9NPhoneHMME, __ZTS10NAutoArrayIjE, __ZTS10NAutoArrayItE, 
+                       __ZTS10NBaseLayer, __ZTS10NClipLayer, __ZTS10NLSTMLayer, __ZTS11NDEPhoneHMM, 
                        __ZTS11NLinkedListI6NArrayIN14NResizingQueueI6NFrameE8NElementEEE, 
                        __ZTS11NLinkedListI6NArrayIfEE, __ZTS11NLinkedListI7NStringE, 
                        __ZTS11NLinkedListIN4NMapI7NString14NConfigSectionE8HashItemEE, 
@@ -101,8 +100,7 @@ exports:
                        __ZTSN11NLinkedListIN4NMapI7NString14NConfigSectionE8HashItemEE8NElementE, 
                        __ZTSN11NLinkedListIN4NMapI7NStringS1_E8HashItemEE8NElementE, 
                        __ZTSN11NLinkedListIN4NMapI7NStringjE8HashItemEE8NElementE, 
-                       __ZTSN14NResizingQueueI6NFrameE8NElementE, __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE ]
+                       __ZTSN14NResizingQueueI6NFrameE8NElementE, __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NDBlobBuildBlob, _NDBlobBuildDefaultBlob, _NDBlobGetBlobSize, 
@@ -286,35 +284,33 @@ exports:
                        __ZN33NChunkGaussianMixtureModelsHeaderD1Ev, __ZN33NChunkGaussianMixtureModelsHeaderD2Ev, 
                        __ZN5Error5chuckEPKcz, __ZN5Error5errorEPKcz, __ZN5Error6headerEPKcl, 
                        __ZN5Error7warningEPKcz, __ZN5NFile10readStringEv, __ZN5NFile11getPositionEv, 
-                       __ZN5NFile11setPositionERKj, __ZN5NFile11writeStringERK7NString, 
-                       __ZN5NFile4openERK7NStringS2_, __ZN5NFile4readERKj, __ZN5NFile4readERKjR7NString, 
-                       __ZN5NFile4readEv, __ZN5NFile5closeEv, __ZN5NFile5flushEv, 
-                       __ZN5NFile5printERK7NString, __ZN5NFile5writeERK7NString, 
-                       __ZN5NFile6printfEPKcz, __ZN5NFile8readLineERKc, __ZN5NFile8readLineERKcR7NString, 
+                       __ZN5NFile11setPositionERKj, __ZN5NFile4openERK7NStringS2_, 
+                       __ZN5NFile4readERKj, __ZN5NFile4readERKjR7NString, __ZN5NFile4readEv, 
+                       __ZN5NFile5closeEv, __ZN5NFile5flushEv, __ZN5NFile5writeERK7NString, 
+                       __ZN5NFile8readLineERKc, __ZN5NFile8readLineERKcR7NString, 
                        __ZN5NFileC1ERK7NStringS2_, __ZN5NFileC1Ev, __ZN5NFileC2ERK7NStringS2_, 
                        __ZN5NFileC2Ev, __ZN5NFileD0Ev, __ZN5NFileD1Ev, __ZN5NFileD2Ev, 
                        __ZN6NDelta4initERKjS1_, __ZN6NDelta7isFrameERK11NLinkedListI6NArrayIfEE, 
                        __ZN6NTimer4stopEv, __ZN6NTimer5startEv, __ZN6NTimerC1Ev, 
                        __ZN6NTimerC2Ev, __ZN6NTimerD0Ev, __ZN6NTimerD1Ev, __ZN6NTimerD2Ev, 
                        __ZN6NZFile10readStringEv, __ZN6NZFile11getPositionEv, __ZN6NZFile11setPositionERKj, 
-                       __ZN6NZFile11writeStringERK7NString, __ZN6NZFile4openERK7NStringS2_, 
-                       __ZN6NZFile4openERK7NStringS2_RKj, __ZN6NZFile4readERKj, __ZN6NZFile4readERKjR7NString, 
-                       __ZN6NZFile4readEv, __ZN6NZFile5closeEv, __ZN6NZFile5writeERK7NString, 
-                       __ZN6NZFile8readLineERKc, __ZN6NZFileC1ERK7NStringS2_RKj, 
-                       __ZN6NZFileC1Ev, __ZN6NZFileC2ERK7NStringS2_RKj, __ZN6NZFileC2Ev, 
-                       __ZN6NZFileD0Ev, __ZN6NZFileD1Ev, __ZN6NZFileD2Ev, __ZN7NConfig10loadStringERK7NStringS2_S2_, 
-                       __ZN7NConfig4loadERK7NStringS2_, __ZN7NConfigC1ERKb, __ZN7NConfigC2ERKb, 
-                       __ZN7NString13newAllocationERKj, __ZN7NString13stripCommentsEc, 
-                       __ZN7NString5chompEv, __ZN7NString6printfEPKcz, __ZN7NString7replaceERKS_S1_, 
-                       __ZN7NString8appendToEPKvRKj, __ZN7NString8assignToEPKvRKj, 
-                       __ZN7NStringC1EPKc, __ZN7NStringC1EPKcRKj, __ZN7NStringC1ERKS_, 
-                       __ZN7NStringC1ERKcRKj, __ZN7NStringC1ERKd, __ZN7NStringC1ERKi, 
-                       __ZN7NStringC1ERKj, __ZN7NStringC1Ev, __ZN7NStringC2EPKc, 
-                       __ZN7NStringC2EPKcRKj, __ZN7NStringC2ERKS_, __ZN7NStringC2ERKcRKj, 
-                       __ZN7NStringC2ERKd, __ZN7NStringC2ERKi, __ZN7NStringC2ERKj, 
-                       __ZN7NStringC2Ev, __ZN7NStringD0Ev, __ZN7NStringD1Ev, __ZN7NStringD2Ev, 
-                       __ZN7NStringaSEPKc, __ZN7NStringaSERKS_, __ZN7NStringixERKj, 
-                       __ZN7NStringpLERKS_, __ZN8AccelFFT11zeroPadDataERK6NArrayIfE, 
+                       __ZN6NZFile4openERK7NStringS2_, __ZN6NZFile4openERK7NStringS2_RKj, 
+                       __ZN6NZFile4readERKj, __ZN6NZFile4readERKjR7NString, __ZN6NZFile4readEv, 
+                       __ZN6NZFile5closeEv, __ZN6NZFile5writeERK7NString, __ZN6NZFile8readLineERKc, 
+                       __ZN6NZFileC1ERK7NStringS2_RKj, __ZN6NZFileC1Ev, __ZN6NZFileC2ERK7NStringS2_RKj, 
+                       __ZN6NZFileC2Ev, __ZN6NZFileD0Ev, __ZN6NZFileD1Ev, __ZN6NZFileD2Ev, 
+                       __ZN7NConfig10loadStringERK7NStringS2_S2_, __ZN7NConfig4loadERK7NStringS2_, 
+                       __ZN7NConfigC1ERKb, __ZN7NConfigC2ERKb, __ZN7NString13newAllocationERKj, 
+                       __ZN7NString13stripCommentsEc, __ZN7NString5chompEv, __ZN7NString6printfEPKcz, 
+                       __ZN7NString7replaceERKS_S1_, __ZN7NString8appendToEPKvRKj, 
+                       __ZN7NString8assignToEPKvRKj, __ZN7NStringC1EPKc, __ZN7NStringC1EPKcRKj, 
+                       __ZN7NStringC1ERKS_, __ZN7NStringC1ERKcRKj, __ZN7NStringC1ERKd, 
+                       __ZN7NStringC1ERKi, __ZN7NStringC1ERKj, __ZN7NStringC1Ev, 
+                       __ZN7NStringC2EPKc, __ZN7NStringC2EPKcRKj, __ZN7NStringC2ERKS_, 
+                       __ZN7NStringC2ERKcRKj, __ZN7NStringC2ERKd, __ZN7NStringC2ERKi, 
+                       __ZN7NStringC2ERKj, __ZN7NStringC2Ev, __ZN7NStringD0Ev, __ZN7NStringD1Ev, 
+                       __ZN7NStringD2Ev, __ZN7NStringaSEPKc, __ZN7NStringaSERKS_, 
+                       __ZN7NStringixERKj, __ZN7NStringpLERKS_, __ZN8AccelFFT11zeroPadDataERK6NArrayIfE, 
                        __ZN8AccelFFT3runER6NArrayIfER15DSPSplitComplex, __ZN8AccelFFT4initERKjS1_S1_, 
                        __ZN8AccelFFTD1Ev, __ZN8AccelFFTD2Ev, __ZN8AccelPSD4initERKjRKb, 
                        __ZN8NFidFile10getSubFileERK7NStringR8NFilePtr, __ZN8NFidFile10readHeaderEv, 
@@ -337,21 +333,22 @@ exports:
                        __ZN8TSAcAnal13getFrameByRefEv, __ZN8TSAcAnal4feedERK7NString, 
                        __ZN8TSAcAnal4initERK7NStringjS2_bb, __ZN8TSAcAnal5resetEv, 
                        __ZN8TSAcAnal7endfeedEv, __ZN8TSAcAnal8getframeEv, __ZN9AccelLoga4initERKjf, 
-                       __ZN9NDEAcAnal10initStaticEv, __ZN9NDEAcAnal10setSamRateERKj, 
-                       __ZN9NDEAcAnal11feedFromIntEPKsRKj, __ZN9NDEAcAnal4initEPK15NDEAcAnalConfigRKj, 
-                       __ZN9NDEAcAnal5resetEv, __ZN9NDEAcAnal8c0InvertEv, __ZN9NDEAcAnal9toOutTypeERK6NArrayIfE, 
+                       __ZN9NBaseFile11writeStringERK7NString, __ZN9NBaseFile5printERK7NString, 
+                       __ZN9NBaseFile6printfEPKcz, __ZN9NDEAcAnal10initStaticEv, 
+                       __ZN9NDEAcAnal10setSamRateERKj, __ZN9NDEAcAnal11feedFromIntEPKsRKj, 
+                       __ZN9NDEAcAnal4initEPK15NDEAcAnalConfigRKj, __ZN9NDEAcAnal5resetEv, 
+                       __ZN9NDEAcAnal8c0InvertEv, __ZN9NDEAcAnal9toOutTypeERK6NArrayIfE, 
                        __ZN9NGaussian13refreshOffsetEv, __ZN9NPipeFile10readStringEv, 
                        __ZN9NPipeFile11getPositionEv, __ZN9NPipeFile11setPositionERKj, 
-                       __ZN9NPipeFile11writeStringERK7NString, __ZN9NPipeFile4openERK7NStringS2_, 
-                       __ZN9NPipeFile4readERKj, __ZN9NPipeFile4readERKjR7NString, 
-                       __ZN9NPipeFile4readEv, __ZN9NPipeFile5closeEv, __ZN9NPipeFile5writeERK7NString, 
-                       __ZN9NPipeFile8readLineERKc, __ZN9NPipeFileC1ERK7NStringS2_, 
-                       __ZN9NPipeFileC1Ev, __ZN9NPipeFileC2ERK7NStringS2_, __ZN9NPipeFileC2Ev, 
-                       __ZN9NPipeFileD0Ev, __ZN9NPipeFileD1Ev, __ZN9NPipeFileD2Ev, 
-                       __ZNK11AccelCosine3runEPKfR6NArrayIfE, __ZNK11AccelWindow10getHammingEv, 
-                       __ZNK11AccelWindow12applyHammingER6NArrayIfE, __ZNK11AccelWindow16getScalingFactorEv, 
-                       __ZNK11AccelWindow9getOffsetER6NArrayIfE, __ZNK11NOffsetFile3eofEv, 
-                       __ZNK11NOffsetFile4goodEv, __ZNK11NSATSpeaker10bubbleSortEPKfPfRKj, 
+                       __ZN9NPipeFile4openERK7NStringS2_, __ZN9NPipeFile4readERKj, 
+                       __ZN9NPipeFile4readERKjR7NString, __ZN9NPipeFile4readEv, __ZN9NPipeFile5closeEv, 
+                       __ZN9NPipeFile5writeERK7NString, __ZN9NPipeFile8readLineERKc, 
+                       __ZN9NPipeFileC1ERK7NStringS2_, __ZN9NPipeFileC1Ev, __ZN9NPipeFileC2ERK7NStringS2_, 
+                       __ZN9NPipeFileC2Ev, __ZN9NPipeFileD0Ev, __ZN9NPipeFileD1Ev, 
+                       __ZN9NPipeFileD2Ev, __ZNK11AccelCosine3runEPKfR6NArrayIfE, 
+                       __ZNK11AccelWindow10getHammingEv, __ZNK11AccelWindow12applyHammingER6NArrayIfE, 
+                       __ZNK11AccelWindow16getScalingFactorEv, __ZNK11AccelWindow9getOffsetER6NArrayIfE, 
+                       __ZNK11NOffsetFile3eofEv, __ZNK11NOffsetFile4goodEv, __ZNK11NSATSpeaker10bubbleSortEPKfPfRKj, 
                        __ZNK11NSATSpeaker11numInsertedEv, __ZNK11NSATSpeaker12matrixvectorEPKfRK6NArrayIfEPfRKjS8_S8_, 
                        __ZNK11NSATSpeaker14findPercentileEPKfRKjRS0_, __ZNK11NSATSpeaker15findTopNAverageEPKfRKjS3_RKbRS0_, 
                        __ZNK11NSATSpeaker18calcModelNormScaleEv, __ZNK11NSATSpeaker5scoreERK6NArrayIfERKfS5_, 
@@ -495,6 +492,7 @@ exports:
                        _kVTNotBackedupPreferencesDomain, _kVTOtherBiometricResultKey, 
                        _kVTPreferencesDomain, _kVTPreferencesPhraseSpotterEnabledDidChangeDarwinNotification, 
                        _kVTPreferencesRemoraVoiceTriggerEnabledDidChangeDarwinNotification, 
+                       _kVTPreferencesRemoteDarwinVoiceTriggerEnabledDidChangeDarwinNotification, 
                        _kVTPreferencesVoiceTriggerEnabledDidChangeDarwinNotification, 
                        _kVTRecordingTimeStampKey, _nd_close, _nd_create, _nd_error, 
                        _nd_getoption, _nd_getphraseresults, _nd_getresults, _nd_getresultsstr, 

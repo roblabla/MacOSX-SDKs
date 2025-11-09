@@ -45,7 +45,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTO
 @property(nonatomic) UIContentInsetsReference contentInsetsReference API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));    // default is UIContentInsetsReferenceSafeArea
 @end
 
-typedef NSCollectionLayoutSection * _Nullable (^UICollectionViewCompositionalLayoutSectionProvider)(NSInteger section, id<NSCollectionLayoutEnvironment>);
+typedef NSCollectionLayoutSection * _Nullable (^UICollectionViewCompositionalLayoutSectionProvider)(NSInteger sectionIndex, id<NSCollectionLayoutEnvironment> layoutEnvironment);
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewCompositionalLayout : UICollectionViewLayout

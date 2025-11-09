@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           030028B5-BD20-3290-9BAD-FDF177DBC18F
+    value:           4910BBED-D91B-3FB5-83B7-6BA23471108F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D05B3768-0C65-3D50-9AD8-207783D33C34
+    value:           6B972FA2-8374-31AA-817A-A4A69EFF66DF
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 181.5.6
+current-version: 181.16
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D19002E6-1A1E-3E48-8EC7-1E6D7746AF86
+    value:           27848866-2A6A-3273-943A-F4A7BC4AFA4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8BF21730-3FF1-34EA-8EF1-F9E9D30D3919
+    value:           DCA3F438-AE48-381F-9D5B-71A412B77DBF
 install-name:    '/System/Library/PrivateFrameworks/QuickLookThumbnailingDaemon.framework/Versions/A/QuickLookThumbnailingDaemon'
 current-version: 0
 exports:
@@ -50,12 +50,14 @@ exports:
                        QLMemoryCache._memoryLock, QLMemoryCache._memoryUsed, QLMemoryCache._pendingSavesTransaction, 
                        QLMemoryCache._thumbnailData, QLMemoryCache._thumbnailDataToSave, 
                        QLMemoryCacheQueryOperation._cacheThread, QLMemoryCacheQueryOperation._generatorRequest, 
-                       QLMemoryCacheQueryOperation._queue, QLServerThread._currentFetchThumbnailsOperations, 
-                       QLServerThread._downloadsOperationQueue, QLServerThread._externalThumbnailCacheAvailablePendingBlocks, 
+                       QLMemoryCacheQueryOperation._queue, QLServerThread._downloadResponseProcessingQueue, 
+                       QLServerThread._downloadsOperationQueue, QLServerThread._drainScheduled, 
+                       QLServerThread._externalThumbnailCacheAvailablePendingBlocks, 
                        QLServerThread._externalThumbnailCacheInboxURLs, QLServerThread._externalThumbnailCacheQueue, 
                        QLServerThread._externalThumbnailCacheThumbnailURLs, QLServerThread._externalThumbnailCaches, 
                        QLServerThread._knownDomainsWithoutExternalThumbnailCaches, 
-                       QLServerThread._queue, QLServerThread._queuedDownloadRequests, 
+                       QLServerThread._pendingDownloadsQueue, QLServerThread._queue, 
+                       QLServerThread._queuedDownloadRequests, QLServerThread._thumbnailDownloadsInFlight, 
                        QLThumbnailAdditionIndex._db, QLThumbnailAdditionIndex._dbWatcher, 
                        QLThumbnailAdditionIndex._url, _QLCacheThread._cleanUpDatabaseThread, 
                        _QLCacheThread._cleanupBlocks, _QLCacheThread._currentDiskCacheQueryOperation, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B2C1FBBB-AA1A-353C-BC34-5831E3F3C045
+    value:           71DEEEDD-00FD-385E-B84C-B15A0770F174
   - target:          x86_64-maccatalyst
-    value:           B2C1FBBB-AA1A-353C-BC34-5831E3F3C045
+    value:           71DEEEDD-00FD-385E-B84C-B15A0770F174
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E023851B-4215-3825-B0B4-D71023D3066D
+    value:           996FDA41-341F-3C23-AC72-ADD52737F5C4
   - target:          arm64e-maccatalyst
-    value:           E023851B-4215-3825-B0B4-D71023D3066D
+    value:           996FDA41-341F-3C23-AC72-ADD52737F5C4
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -242,6 +242,8 @@ exports:
                        __ZN3ctu15RestModuleState7connectEONSt3__110shared_ptrINS_4rest21RestDispatchConnectorEEE, 
                        __ZN3ctu15RestModuleStateC1EONSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEON8dispatch5queueEONS9_8workloopE, 
                        __ZN3ctu15RestModuleStateC2EONSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEON8dispatch5queueEONS9_8workloopE, 
+                       __ZN3ctu15RestXpcListener13ConfigurationC1ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZN3ctu15RestXpcListener13ConfigurationC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN3ctu15RestXpcListener14startListeningEv, __ZN3ctu15RestXpcListener14weak_from_thisEv, 
                        __ZN3ctu15RestXpcListener15handleNewClientEN3xpc10connectionE, 
                        __ZN3ctu15RestXpcListener17handleClientErrorEN3xpc10connectionENS1_6objectE, 
@@ -249,9 +251,9 @@ exports:
                        __ZN3ctu15RestXpcListener19handleListenerErrorEN3xpc6objectE, 
                        __ZN3ctu15RestXpcListener26getResourceConnection_syncERKN3xpc10connectionE, 
                        __ZN3ctu15RestXpcListener34getOrCreateResourceConnection_syncERKN3xpc10connectionENSt3__112basic_stringIcNS5_11char_traitsIcEENS5_9allocatorIcEEEE, 
-                       __ZN3ctu15RestXpcListener6createEN3xpc10connectionEN8dispatch5queueE, 
-                       __ZN3ctu15RestXpcListenerC1EN3xpc10connectionEN8dispatch5queueE, 
-                       __ZN3ctu15RestXpcListenerC2EN3xpc10connectionEN8dispatch5queueE, 
+                       __ZN3ctu15RestXpcListener6createEN3xpc10connectionEN8dispatch5queueENS0_13ConfigurationE, 
+                       __ZN3ctu15RestXpcListenerC1EN3xpc10connectionEN8dispatch5queueENS0_13ConfigurationE, 
+                       __ZN3ctu15RestXpcListenerC2EN3xpc10connectionEN8dispatch5queueENS0_13ConfigurationE, 
                        __ZN3ctu15XpcClientHelper18setServer_internalEN3xpc10connectionE, 
                        __ZN3ctu15XpcClientHelper9setServerEDn, __ZN3ctu15XpcClientHelperD1Ev, 
                        __ZN3ctu15XpcClientHelperD2Ev, __ZN3ctu15XpcServerHelper11setListenerEN3xpc10connectionE, 
@@ -742,15 +744,15 @@ exports:
                        __ZNK3ctu15RestModuleState11isConnectedEv, __ZNK3ctu15RestModuleState11sendRawPushEONSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEON3xpc6objectE, 
                        __ZNK3ctu15RestModuleState13sendRawNotifyEONSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEON3xpc6objectE, 
                        __ZNK3ctu15RestModuleState20setSubscriptionValueEONSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEON3xpc6objectE, 
-                       __ZNK3ctu15RestModuleState7getNameEv, __ZNK3ctu15RestXpcListener14getXpcEndpointEv, 
-                       __ZNK3ctu15RestXpcListener15createConnectorEv, __ZNK3ctu15RestXpcListener20createPeerConnectionEv, 
-                       __ZNK3ctu15XpcClientHelper5flushERKN8dispatch5groupE, __ZNK3ctu15XpcServerHelper11getListenerEv, 
-                       __ZNK3ctu15XpcServerHelper5flushERKN8dispatch5groupE, __ZNK3ctu16LogMessageBuffer5emptyEv, 
-                       __ZNK3ctu16LoggerCommonBase11getLogLevelEv, __ZNK3ctu16LoggerCommonBase12getLogDomainEv, 
-                       __ZNK3ctu16LoggerCommonBase16getLocalLogLevelEv, __ZNK3ctu16LoggerCommonBase20getInheritedLogLevelEv, 
-                       __ZNK3ctu16LoggerCommonBase7enabledENS_8LogLevelE, __ZNK3ctu18XpcJetsamAssertion14dumpState_syncEv, 
-                       __ZNK3ctu18XpcJetsamAssertion9dumpStateEv, __ZNK3ctu19RequestRestResource16getResourceArrayEv, 
-                       __ZNK3ctu20DispatchTimerService15dispatchClockIDERKNSt3__15tupleIJNS_8TimeTypeENS1_6chrono8durationIxNS1_5ratioILl1ELl1000000EEEEEEEE, 
+                       __ZNK3ctu15RestModuleState7getNameEv, __ZNK3ctu15RestXpcListener13Configuration10isEntitledEN3xpc10connectionE, 
+                       __ZNK3ctu15RestXpcListener14getXpcEndpointEv, __ZNK3ctu15RestXpcListener15createConnectorEv, 
+                       __ZNK3ctu15RestXpcListener20createPeerConnectionEv, __ZNK3ctu15XpcClientHelper5flushERKN8dispatch5groupE, 
+                       __ZNK3ctu15XpcServerHelper11getListenerEv, __ZNK3ctu15XpcServerHelper5flushERKN8dispatch5groupE, 
+                       __ZNK3ctu16LogMessageBuffer5emptyEv, __ZNK3ctu16LoggerCommonBase11getLogLevelEv, 
+                       __ZNK3ctu16LoggerCommonBase12getLogDomainEv, __ZNK3ctu16LoggerCommonBase16getLocalLogLevelEv, 
+                       __ZNK3ctu16LoggerCommonBase20getInheritedLogLevelEv, __ZNK3ctu16LoggerCommonBase7enabledENS_8LogLevelE, 
+                       __ZNK3ctu18XpcJetsamAssertion14dumpState_syncEv, __ZNK3ctu18XpcJetsamAssertion9dumpStateEv, 
+                       __ZNK3ctu19RequestRestResource16getResourceArrayEv, __ZNK3ctu20DispatchTimerService15dispatchClockIDERKNSt3__15tupleIJNS_8TimeTypeENS1_6chrono8durationIxNS1_5ratioILl1ELl1000000EEEEEEEE, 
                        __ZNK3ctu20DispatchTimerService16makeDispatchTimeERKNSt3__15tupleIJNS_8TimeTypeENS1_6chrono8durationIxNS1_5ratioILl1ELl1000000EEEEEEEE, 
                        __ZNK3ctu20DispatchTimerService19createDispatchTimerEP16dispatch_queue_sRKNSt3__15tupleIJNS_8TimeTypeENS3_6chrono8durationIxNS3_5ratioILl1ELl1000000EEEEEEEEy11qos_class_tU13block_pointerFvvE, 
                        __ZNK3ctu20PropertyRestResource16getResourceArrayEv, __ZNK3ctu20PropertyRestResource23getWatchedResourceArrayEv, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D0D4F311-769D-3942-BF79-1601E40B630C
+    value:           B7D6BB5E-517E-307F-9DB6-769A06B82677
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA1FDA56-DDC6-370D-9F85-C86ED094F471
+    value:           C8093824-9D6B-3602-985D-6FD322A67F6E
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:

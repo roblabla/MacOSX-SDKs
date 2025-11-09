@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1E53C2C3-42CB-37CE-9E92-2EC116BB14A5
+    value:           84F64AD1-0CDA-3DAF-9531-7422817400E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F9369AFC-CC8D-3FEC-AD55-AB732244678A
+    value:           7B457F84-9A3B-35F8-BC18-6E62A2079B86
 install-name:    '/System/Library/Frameworks/LDAP.framework/Versions/A/LDAP'
 current-version: 2.4
 exports:

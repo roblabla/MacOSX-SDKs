@@ -232,10 +232,9 @@ CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
 
 #if COREIMAGE_SUPPORTS_IOSURFACE
 /* Render 'image' to the given IOSurface.
- * The 'bounds' parameter has the following behavior:
- *    The 'image' is rendered into 'surface' so that
- *      point (0,0) of 'image' aligns to the lower left corner of 'surface'.
- *      The 'bounds' acts like a clip rect to limit what region of 'surface' is modified.
+ * Point (0,0) in the image coordinate sysyem will align to the lower left corner of 'surface'.
+ * The 'bounds' parameter acts as a clip rect to limit what region of 'surface' is modified.
+ * If 'colorSpace' is nil, CI will not color match to the destination.
  */
 - (void)render:(CIImage *)image
    toIOSurface:(IOSurfaceRef)surface
@@ -253,12 +252,8 @@ CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
 toCVPixelBuffer:(CVPixelBufferRef)buffer NS_AVAILABLE(10_11,5_0);
 
 /* Render 'image' to the given CVPixelBufferRef.
- * The 'bounds' parameter has the following behavior:
- *    In OS X and iOS 9 and later:  The 'image' is rendered into 'buffer' so that
- *      point (0,0) of 'image' aligns to the lower left corner of 'buffer'.
- *      The 'bounds' acts like a clip rect to limit what region of 'buffer' is modified.
- *    In iOS 8 and earlier: The 'bounds' parameter acts to specify the region of 'image' to render.
- *      This region (regardless of its origin) is rendered at upper-left corner of 'buffer'.
+ * Point (0,0) in the image coordinate sysyem will align to the lower left corner of 'buffer'.
+ * The 'bounds' parameter acts as a clip rect to limit what region of 'buffer' is modified.
  * If 'colorSpace' is nil, CI will not color match to the destination.
  */
 - (void)render:(CIImage *)image

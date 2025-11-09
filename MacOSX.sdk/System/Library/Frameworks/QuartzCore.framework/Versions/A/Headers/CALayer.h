@@ -313,9 +313,9 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 
 /** Layer content properties and methods. **/
 
-/* An object providing the contents of the layer, typically a CGImageRef,
- * but may be something else. (For example, NSImage objects are
- * supported on Mac OS X 10.6 and later.) Default value is nil.
+/* An object providing the contents of the layer, typically a CGImageRef
+ * or an IOSurfaceRef, but may be something else. (For example, NSImage
+ * objects are supported on Mac OS X 10.6 and later.) Default value is nil.
  * Animatable. */
 
 @property(nullable, strong) id contents;

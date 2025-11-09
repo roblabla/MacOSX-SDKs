@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6BB3CA6B-FF2C-39D0-BBF2-C92732529FDD
+    value:           50914B6B-39F3-3FA4-95CF-F1A406EF35F9
   - target:          x86_64-maccatalyst
-    value:           6BB3CA6B-FF2C-39D0-BBF2-C92732529FDD
+    value:           50914B6B-39F3-3FA4-95CF-F1A406EF35F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F40A026-369E-3CF1-B26B-72A71255B602
+    value:           28EB219F-623C-3538-B566-CBC0FDC44C52
   - target:          arm64e-maccatalyst
-    value:           4F40A026-369E-3CF1-B26B-72A71255B602
+    value:           28EB219F-623C-3538-B566-CBC0FDC44C52
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -550,6 +550,8 @@ exports:
                        _AVOutputContextDeviceConnectionFailureReasonDeviceNotMFiCertified, 
                        _AVOutputContextDeviceConnectionFailureReasonDeviceOutOfRange, 
                        _AVOutputContextDeviceConnectionFailureReasonIPAliasingNotSupported, 
+                       _AVOutputContextDeviceConnectionFailureReasonInfraRelayFailed2GHzNetwork, 
+                       _AVOutputContextDeviceConnectionFailureReasonInfraRelayFailedMultiDFSNetwork, 
                        _AVOutputContextDeviceConnectionFailureReasonNotAPeerInHomeGroup, 
                        _AVOutputContextDeviceGroupControlOptionCancelAddDeviceIfAuthRequired, 
                        _AVOutputContextGlobalOutputDeviceConfigurationDidChangeNotification, 

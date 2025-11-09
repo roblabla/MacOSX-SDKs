@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DB76FBC2-4D37-3E6C-AC11-CDD7845837B4
+    value:           00E76CED-EE33-3B2F-9459-8D21B0B54468
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB7FFE9B-8413-3377-8596-1CBCADCAE868
+    value:           2ABFE10B-E274-3B3F-BF39-E8350247CFAC
 install-name:    '/System/Library/Frameworks/GameplayKit.framework/Versions/A/GameplayKit'
 current-version: 96.1
 exports:

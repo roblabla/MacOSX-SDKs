@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           993DFE46-18CE-3168-B571-AE8D2BF5CAE5
+    value:           18377D7D-D953-3099-9604-21E2C5720ED4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7AC235AF-8829-35DB-94CB-194D77B65AB3
+    value:           D119F796-3CA0-3165-8104-7024CF4CB1E3
 install-name:    '/usr/lib/libhunspell-1.2.0.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

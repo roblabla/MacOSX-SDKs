@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1F88A4C1-67C2-365E-B31A-6F831B6C3CDE
+    value:           38C53A9A-8ACB-31AF-BF46-23DA4598729B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A191B50E-78CD-3B27-911D-A781FE4A35F8
+    value:           9666635C-8B45-3B04-B2C1-996FD59905DB
 install-name:    '/System/Library/PrivateFrameworks/SearchUI.framework/Versions/A/SearchUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -77,11 +77,13 @@ exports:
                        SearchUINowPlayingLabelContainer, SearchUINowPlayingSingleMovieCard, 
                        SearchUIOfferButtonView, SearchUIPhotosLibraryImage, SearchUIPhotosUtilities, 
                        SearchUIPlayButtonViewController, SearchUIPurchaseRequestButton, 
-                       SearchUIQuickLookThumbnailImage, SearchUIResponseWrapperCardSectionView, 
+                       SearchUIPurchaseRequestStatusManager, SearchUIQuickLookThumbnailImage, 
+                       SearchUIRequestButton, SearchUIResponseWrapperCardSectionView, 
                        SearchUIResultEngagementFeedback, SearchUIResultsTableGroupHeaderCellView, 
                        SearchUIResultsTableViewController, SearchUIRichTitleCardSectionView, 
                        SearchUIRowCardSectionView, SearchUIRowModel, SearchUIScoreSummaryCardSectionView, 
-                       SearchUIScreenTimeManager, SearchUIScreenTimeResultsRowModel, 
+                       SearchUIScreenTimeManager, SearchUIScreenTimeRequestButton, 
+                       SearchUIScreenTimeRequestStatusManager, SearchUIScreenTimeResultsRowModel, 
                        SearchUISectionHeaderCardSectionView, SearchUISelectableGridCardSectionView, 
                        SearchUISelectableTextView, SearchUISeparatorView, SearchUISingleResultTableCellView, 
                        SearchUISplitCardSectionView, SearchUIStock, SearchUIStockChartData, 

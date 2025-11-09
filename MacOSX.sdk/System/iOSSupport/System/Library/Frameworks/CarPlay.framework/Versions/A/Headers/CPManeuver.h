@@ -24,6 +24,11 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @property (nullable, nonatomic, strong) CPImageSet *symbolSet API_DEPRECATED_WITH_REPLACEMENT("symbolImage", ios(12.0, 13.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /**
+ Takes precedence over @c guidanceBackgroundColor set in @c CPMapTemplate.
+ */
+@property (nullable, nonatomic, strong) UIColor *cardBackgroundColor API_AVAILABLE(ios(15.4));
+
+/**
  symbolImage is a @c UIImage representing the maneuver. Provide variants for UIUserInterfaceStyleLight and UIUserInterfaceStyleDark that will be used against light backgrounds and dark backgrounds.
  */
 @property (nullable, nonatomic, strong) UIImage *symbolImage;

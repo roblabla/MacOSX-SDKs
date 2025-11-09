@@ -4,25 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E7C5C2D8-32CA-3DF1-83E6-0229DF7743EC
+    value:           DB8E3D8B-14C0-3D42-BA53-0791865EBDE6
   - target:          x86_64-maccatalyst
-    value:           E7C5C2D8-32CA-3DF1-83E6-0229DF7743EC
+    value:           DB8E3D8B-14C0-3D42-BA53-0791865EBDE6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2FC2666-34E4-3E2B-97AB-C8ECC1EB40B1
+    value:           F17B7E40-927E-3018-997E-C89B0038F131
   - target:          arm64e-maccatalyst
-    value:           F2FC2666-34E4-3E2B-97AB-C8ECC1EB40B1
+    value:           F17B7E40-927E-3018-997E-C89B0038F131
 install-name:    '/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer'
 current-version: 288.22.9
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _PBDataWriterPlaceMark, _PBDataWriterRecallMark, _PBDataWriterWriteBOOLField, 

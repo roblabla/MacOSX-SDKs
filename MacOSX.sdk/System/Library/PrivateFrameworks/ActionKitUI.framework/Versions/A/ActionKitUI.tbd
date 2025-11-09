@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5C6D6279-78FD-3B5C-B191-DBCF0A297EC1
+    value:           2AFA271C-C14B-3478-84B5-C9D76D5F5E9C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A1F153F3-B770-324B-A799-3B217C438A9E
+    value:           1E9A2AA4-A6B3-3BC7-936F-9D150E18FFF0
 install-name:    '/System/Library/PrivateFrameworks/ActionKitUI.framework/Versions/A/ActionKitUI'
 swift-abi-version: 7
 exports:

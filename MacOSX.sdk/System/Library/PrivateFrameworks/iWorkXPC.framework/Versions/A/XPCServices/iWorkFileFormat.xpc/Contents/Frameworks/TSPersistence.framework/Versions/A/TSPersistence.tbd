@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7059D541-DC14-33C0-8A27-DDE81445DEA5
+    value:           544CEA5F-84B2-34CA-99C4-F62334501BB5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D51AE97-8C53-3B72-8DF0-51277E12C259
+    value:           7DCB3EF0-73CC-38A9-B2BF-8AB89CD746C1
 install-name:    '/System/Library/PrivateFrameworks/iWorkXPC.framework/Versions/A/XPCServices/iWorkFileFormat.xpc/Contents/Frameworks/TSPersistence.framework/Versions/A/TSPersistence'
 swift-abi-version: 7
 exports:
@@ -58,9 +58,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFbiiEEE, __ZTINSt3__110__function6__baseIFvPNS_6vectorIiNS_9allocatorIiEEEES6_EEE, 
                        __ZTINSt3__110__function6__funcIPFvPNS_6vectorIiNS_9allocatorIiEEEES6_ENS3_IS8_EES7_EE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN3TSP11ArchiveInfoENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__120__shared_ptr_pointerIPN3TSP11ArchiveInfoENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN3TSP13FieldInfoNodeENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN3TSP13IdentifierMapIbEENS_10shared_ptrIS3_E27__shared_ptr_default_deleteIS3_S3_EENS_9allocatorIS3_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN6google8protobuf15UnknownFieldSetENS_10shared_ptrIS3_E27__shared_ptr_default_deleteIS3_S3_EENS_9allocatorIS3_EEEE, 
@@ -117,9 +115,7 @@ exports:
                        __ZTSNSt3__110shared_ptrINS_13unordered_mapIKN3TSP9FieldPathENS2_23FieldInfoRuleAttributesENS2_13FieldPathHashENS2_16FieldPathEqualToENS_9allocatorINS_4pairIS4_S5_EEEEEEE27__shared_ptr_default_deleteISC_SC_EE, 
                        __ZTSNSt3__110shared_ptrINS_3mapIyNS_5tupleIJNS0_IN6google8protobuf7MessageEEENS0_INS_13unordered_mapIKN3TSP9FieldPathENS8_23FieldInfoRuleAttributesENS8_13FieldPathHashENS8_16FieldPathEqualToENS_9allocatorINS_4pairISA_SB_EEEEEEEENS0_INS8_13IdentifierMapIbEEEEEEENS_4lessIyEENSE_INSF_IKySN_EEEEEEE27__shared_ptr_default_deleteIST_ST_EE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN3TSP11ArchiveInfoENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__shared_ptr_pointerIPN3TSP11ArchiveInfoENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN3TSP13FieldInfoNodeENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN3TSP13IdentifierMapIbEENS_10shared_ptrIS3_E27__shared_ptr_default_deleteIS3_S3_EENS_9allocatorIS3_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN6google8protobuf15UnknownFieldSetENS_10shared_ptrIS3_E27__shared_ptr_default_deleteIS3_S3_EENS_9allocatorIS3_EEEE, 

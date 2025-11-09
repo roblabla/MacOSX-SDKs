@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ABB3E41E-95D7-3BD8-8013-3CD2772B00A7
+    value:           8A61D163-84B7-3F79-8261-2C28B5427234
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59A24E3C-6203-3EC9-AD67-1584F26F6A92
+    value:           780CB608-AFCA-327D-AAC6-4A91FB23768F
 install-name:    '/System/Library/Frameworks/CoreAudioKit.framework/Versions/A/CoreAudioKit'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

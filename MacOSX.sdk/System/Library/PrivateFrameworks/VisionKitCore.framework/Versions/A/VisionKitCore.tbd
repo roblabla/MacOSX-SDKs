@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           442C678E-1D00-3EE1-A701-EE2405F86C60
+    value:           46EFE07A-6BD6-31C9-9D70-D33D74C6AC68
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E87DEBD7-B273-3FFB-A7B3-116B0DD6BD4B
+    value:           186E6FBD-B495-3178-8974-FCEF3833D1A4
 install-name:    '/System/Library/PrivateFrameworks/VisionKitCore.framework/Versions/A/VisionKitCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

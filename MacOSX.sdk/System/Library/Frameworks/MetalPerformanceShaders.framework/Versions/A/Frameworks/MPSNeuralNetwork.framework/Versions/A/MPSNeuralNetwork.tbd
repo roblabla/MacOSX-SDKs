@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8599CBF4-96C4-3E9E-8209-ED60B70CFD86
+    value:           13C7FCE9-EA60-3FF8-B6D5-DF89295F3D5C
   - target:          x86_64-maccatalyst
-    value:           8599CBF4-96C4-3E9E-8209-ED60B70CFD86
+    value:           13C7FCE9-EA60-3FF8-B6D5-DF89295F3D5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           000EF8C4-67A5-31E6-ABC8-77F9774D61CB
+    value:           1DD8C78C-2645-3B61-8559-8C48BE2BA53E
   - target:          arm64e-maccatalyst
-    value:           000EF8C4-67A5-31E6-ABC8-77F9774D61CB
+    value:           1DD8C78C-2645-3B61-8559-8C48BE2BA53E
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork'
-current-version: 125.2.1
+current-version: 125.4.6
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           347F10FA-5395-345B-8D11-1B257F7F9F38
+    value:           25F63B6A-F183-351A-AB00-B5A438BD59E6
   - target:          x86_64-maccatalyst
-    value:           347F10FA-5395-345B-8D11-1B257F7F9F38
+    value:           25F63B6A-F183-351A-AB00-B5A438BD59E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A34459A7-7A49-38D3-ACF2-F800642AF637
+    value:           046FD33C-3142-3A46-B89D-976E224A77C5
   - target:          arm64e-maccatalyst
-    value:           A34459A7-7A49-38D3-ACF2-F800642AF637
+    value:           046FD33C-3142-3A46-B89D-976E224A77C5
 install-name:    '/System/Library/PrivateFrameworks/Montreal.framework/Versions/A/Montreal'
-current-version: 165
+current-version: 165.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -91,11 +91,12 @@ exports:
                        _kMRLModelParametersKey, _kMRLNeuralNetworkModelTypeEspressoModel, 
                        _kMRLNeuralNetworkModelTypeFlatModel, _kMRLNeuralNetworkModelTypeNLModel, 
                        _kMRLNeuralNetworkOptionANEEndNodeName, _kMRLNeuralNetworkOptionANENetworkURLKey, 
-                       _kMRLNeuralNetworkOptionANEStartNodeName, _kMRLNeuralNetworkOptionInputNamesKey, 
-                       _kMRLNeuralNetworkOptionModelDataKey, _kMRLNeuralNetworkOptionModelNameKey, 
-                       _kMRLNeuralNetworkOptionModelTypeKey, _kMRLNeuralNetworkOptionModelURLKey, 
-                       _kMRLNeuralNetworkOptionModelVersionKey, _kMRLNeuralNetworkOptionOutputNamesKey, 
-                       _kMRLNeuralNetworkOptionQuantizationParamsKey, _kMRLNeuralNetworkOptionQuantizationSchemeLinearInt8RangeMaxKey, 
+                       _kMRLNeuralNetworkOptionANEStartNodeName, _kMRLNeuralNetworkOptionEngineKey, 
+                       _kMRLNeuralNetworkOptionInputNamesKey, _kMRLNeuralNetworkOptionModelDataKey, 
+                       _kMRLNeuralNetworkOptionModelNameKey, _kMRLNeuralNetworkOptionModelTypeKey, 
+                       _kMRLNeuralNetworkOptionModelURLKey, _kMRLNeuralNetworkOptionModelVersionKey, 
+                       _kMRLNeuralNetworkOptionOutputNamesKey, _kMRLNeuralNetworkOptionQuantizationParamsKey, 
+                       _kMRLNeuralNetworkOptionQuantizationSchemeLinearInt8RangeMaxKey, 
                        _kMRLNeuralNetworkOptionQuantizationSchemeLinearInt8RangeMinKey, 
                        _kMRLNeuralNetworkOptionQuantizationSchemeNameKey, _kMRLNeuralNetworkOptionQuantizationSchemeNameLinearInt8, 
                        _kMRLNeuralNetworkTensorInfoChannelKey, _kMRLNeuralNetworkTensorInfoDataTypeKey, 

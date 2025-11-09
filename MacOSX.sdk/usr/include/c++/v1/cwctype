@@ -59,28 +59,30 @@ wctrans_t wctrans(const char* property);
 
 _LIBCPP_BEGIN_NAMESPACE_STD
 
-_LIBCPP_USING_IF_EXISTS(::wint_t);
-_LIBCPP_USING_IF_EXISTS(::wctrans_t);
-_LIBCPP_USING_IF_EXISTS(::wctype_t);
-_LIBCPP_USING_IF_EXISTS(::iswalnum);
-_LIBCPP_USING_IF_EXISTS(::iswalpha);
-_LIBCPP_USING_IF_EXISTS(::iswblank);
-_LIBCPP_USING_IF_EXISTS(::iswcntrl);
-_LIBCPP_USING_IF_EXISTS(::iswdigit);
-_LIBCPP_USING_IF_EXISTS(::iswgraph);
-_LIBCPP_USING_IF_EXISTS(::iswlower);
-_LIBCPP_USING_IF_EXISTS(::iswprint);
-_LIBCPP_USING_IF_EXISTS(::iswpunct);
-_LIBCPP_USING_IF_EXISTS(::iswspace);
-_LIBCPP_USING_IF_EXISTS(::iswupper);
-_LIBCPP_USING_IF_EXISTS(::iswxdigit);
-_LIBCPP_USING_IF_EXISTS(::iswctype);
-_LIBCPP_USING_IF_EXISTS(::wctype);
-_LIBCPP_USING_IF_EXISTS(::towlower);
-_LIBCPP_USING_IF_EXISTS(::towupper);
-_LIBCPP_USING_IF_EXISTS(::towctrans);
-_LIBCPP_USING_IF_EXISTS(::wctrans);
+#if defined(_LIBCPP_INCLUDED_C_LIBRARY_WCTYPE_H)
+using ::wint_t _LIBCPP_USING_IF_EXISTS;
+using ::wctrans_t _LIBCPP_USING_IF_EXISTS;
+using ::wctype_t _LIBCPP_USING_IF_EXISTS;
+using ::iswalnum _LIBCPP_USING_IF_EXISTS;
+using ::iswalpha _LIBCPP_USING_IF_EXISTS;
+using ::iswblank _LIBCPP_USING_IF_EXISTS;
+using ::iswcntrl _LIBCPP_USING_IF_EXISTS;
+using ::iswdigit _LIBCPP_USING_IF_EXISTS;
+using ::iswgraph _LIBCPP_USING_IF_EXISTS;
+using ::iswlower _LIBCPP_USING_IF_EXISTS;
+using ::iswprint _LIBCPP_USING_IF_EXISTS;
+using ::iswpunct _LIBCPP_USING_IF_EXISTS;
+using ::iswspace _LIBCPP_USING_IF_EXISTS;
+using ::iswupper _LIBCPP_USING_IF_EXISTS;
+using ::iswxdigit _LIBCPP_USING_IF_EXISTS;
+using ::iswctype _LIBCPP_USING_IF_EXISTS;
+using ::wctype _LIBCPP_USING_IF_EXISTS;
+using ::towlower _LIBCPP_USING_IF_EXISTS;
+using ::towupper _LIBCPP_USING_IF_EXISTS;
+using ::towctrans _LIBCPP_USING_IF_EXISTS;
+using ::wctrans _LIBCPP_USING_IF_EXISTS;
+#endif // _LIBCPP_INCLUDED_C_LIBRARY_WCTYPE_H
 
 _LIBCPP_END_NAMESPACE_STD
 
-#endif  // _LIBCPP_CWCTYPE
+#endif // _LIBCPP_CWCTYPE

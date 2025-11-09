@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           136EE721-D570-38CE-AE72-1BBF632A3DBA
+    value:           BCD5BD0F-1473-323C-AB7E-1ADD392FA425
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E6250D8D-BDEB-3148-B324-9B8BC3AFBB3D
+    value:           BD3B52F3-72A5-302E-B44E-B5C455CBC08F
 install-name:    '/System/Library/PrivateFrameworks/NewDeviceOutreachMacUI.framework/Versions/A/NewDeviceOutreachMacUI'
 swift-abi-version: 7
 exports:

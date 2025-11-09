@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9928D413-EDAC-34CE-92A9-714152967EAB
+    value:           C7F7A0E7-9495-3C6A-A1B4-CD36E67F0F02
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0176A23-C9D3-3C26-933C-BA299015A3A4
+    value:           0AEB90FE-7877-35A3-9D5B-457B3CFACCFE
 install-name:    '/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -30,15 +30,15 @@ exports:
                        _getDictionaryValue, _getVolumePrefix, _hasCodeRequirementString, 
                        _historyEntriesContainPolicyMatch, _historyEntryMatchesPolicyEntry, 
                        _isAdhocSignature, _isAppleInternalMachine, _isAppleSignedCode, 
-                       _isCodelessKext, _isConnectionEntitled, _isDeveloperIDKextSignedCode, 
-                       _isDeveloperIDSignedCode, _isInstallerOrRecoveryEnvironment, 
+                       _isCodelessKext, _isConnectionEntitled, _isDarwinOSEnvironment, 
+                       _isDeveloperIDKextSignedCode, _isDeveloperIDSignedCode, _isInstallerOrRecoveryEnvironment, 
                        _isKernelExtensionShippedWithOS, _isKernelExtensionSystemRequired, 
                        _isKextAllowedWithoutNotarization, _isKextSecurityDisabledMachine, 
                        _isMacAppStoreSignedCode, _isNotarizedKext, _isSIPDisabledMachine, 
                        _isSKELDisabledMachine, _isValidInfoPlist, _normalizeURL, 
-                       _opaqueSignCode, _scanForBundledKernelExtensions, _scanForBundles, 
-                       _scanForKernelExtensions, _shouldFilterOutScanTarget, _systemUptime, 
-                       _urlLooksLikeBundle ]
+                       _opaqueSignCode, _sSystemPolicySubsystem, _scanForBundledKernelExtensions, 
+                       _scanForBundles, _scanForKernelExtensions, _shouldFilterOutScanTarget, 
+                       _systemUptime, _urlLooksLikeBundle ]
     objc-classes:    [ AKELData, AMFI, AppWrapper, AppWrapperPolicy, AppWrapperPolicyResult, 
                        BundleData, GKScanResult, MIS, PolicyCacheMeta, PolicyScanTarget, 
                        SPDeveloperPolicy, SPExecutionHistoryItem, SPExecutionPolicy, 
@@ -49,15 +49,17 @@ exports:
     objc-ivars:      [ PolicyCacheMeta._forEntry, PolicyCacheMeta._lastMiss, PolicyCacheMeta._metaId, 
                        PolicyCacheMeta._missCount, PolicyCacheMeta._sourceTable, 
                        PolicyCacheMeta._target, PolicyScanTarget._blockDevice, PolicyScanTarget._bundle, 
-                       PolicyScanTarget._bundleID, PolicyScanTarget._cdhash, PolicyScanTarget._cdhashData, 
-                       PolicyScanTarget._cdhashDigestAlgorithm, PolicyScanTarget._checkValidity, 
-                       PolicyScanTarget._chgTime, PolicyScanTarget._fsTypeName, PolicyScanTarget._isAppWrapper, 
-                       PolicyScanTarget._isBundled, PolicyScanTarget._isDirectory, 
-                       PolicyScanTarget._isQuarantined, PolicyScanTarget._isQuarantinedMount, 
-                       PolicyScanTarget._isScript, PolicyScanTarget._isUserApproved, 
-                       PolicyScanTarget._mainExecutableURL, PolicyScanTarget._modTime, 
-                       PolicyScanTarget._mountTime, PolicyScanTarget._objectID, PolicyScanTarget._originalURL, 
-                       PolicyScanTarget._pathOnVolume, PolicyScanTarget._pid, PolicyScanTarget._quarantineChecked, 
+                       PolicyScanTarget._bundleID, PolicyScanTarget._bundleVersion, 
+                       PolicyScanTarget._cdhash, PolicyScanTarget._cdhashData, PolicyScanTarget._cdhashDigestAlgorithm, 
+                       PolicyScanTarget._checkValidity, PolicyScanTarget._chgTime, 
+                       PolicyScanTarget._entitlements, PolicyScanTarget._fsTypeName, 
+                       PolicyScanTarget._isAppWrapper, PolicyScanTarget._isBundled, 
+                       PolicyScanTarget._isDirectory, PolicyScanTarget._isQuarantined, 
+                       PolicyScanTarget._isQuarantinedMount, PolicyScanTarget._isScript, 
+                       PolicyScanTarget._isUserApproved, PolicyScanTarget._mainExecutableURL, 
+                       PolicyScanTarget._modTime, PolicyScanTarget._mountTime, PolicyScanTarget._objectID, 
+                       PolicyScanTarget._originalURL, PolicyScanTarget._pathOnVolume, 
+                       PolicyScanTarget._pid, PolicyScanTarget._quarantineChecked, 
                        PolicyScanTarget._signingID, PolicyScanTarget._signingInfo, 
                        PolicyScanTarget._staticCodeRef, PolicyScanTarget._teamID, 
                        PolicyScanTarget._triggeredByLibraryLoad, PolicyScanTarget._url, 

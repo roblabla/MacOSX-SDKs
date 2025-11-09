@@ -62,6 +62,21 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                          dataType:(MPSDataType) dataType
 MPS_SWIFT_NAME( init(_:shape:dataType:) );
 
+/*! @abstract   Initialize an MPSGraphTensorData with an MTLBuffer
+ *              The device of the MTLBuffer will be used to get the MPSDevice for this MPSGraphTensorData.
+ *  @param      buffer  MTLBuffer to be used within the MPSGraphTensorData
+ *  @param      shape  shape of the output tensor
+ *  @param      dataType  dataType of the placeholder tensor
+ *  @param      rowBytes rowBytes for the fastest moving dimension, must be larger than or equal to sizeOf(dataType) * shape[rank - 1] and must be a multiple of sizeOf(dataType)
+ *  @return     A valid MPSGraphTensorData, or nil if allocation failure.
+ */
+-(instancetype) initWithMTLBuffer:(id<MTLBuffer>) buffer
+                            shape:(MPSShape *) shape
+                         dataType:(MPSDataType) dataType
+                         rowBytes:(NSUInteger) rowBytes
+MPS_SWIFT_NAME( init(_:shape:dataType:rowBytes:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
 /*! @abstract   Initialize an MPSGraphTensorData with an MPSMatrix
  *              The device of the MPSMatrix will be used to get the MPSDevice for this MPSGraphTensorData.
  *  @param      matrix  MPSMatrix to be used within the MPSGraphTensorData

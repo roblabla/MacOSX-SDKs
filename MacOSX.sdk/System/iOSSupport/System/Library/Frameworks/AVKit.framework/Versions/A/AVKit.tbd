@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           7D774908-A9AC-384A-AA5A-80F97294B6FC
+    value:           F8E2D6B6-9C18-3D90-9A9A-448FFB9828CE
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           49F0F8BF-3A87-31C0-A351-35D4926E4217
+    value:           1130084D-E792-3F44-B286-84534FD8FDBB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit'
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -37,11 +37,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           537FBD08-FA83-330F-B14B-04275FFCD5F1
+    value:           FEDE7846-6F79-3DA1-9367-D60A31E41110
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D207C54C-6D41-3F0C-B2F9-42355599EC93
+    value:           6E051FBB-5AB7-38D7-B1B0-11703DCC5749
 install-name:    '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

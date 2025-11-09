@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3147B518-7189-3289-BC6C-D99C7E9EE24B
+    value:           4FAF8D1F-C119-3A4A-8EEF-45E24618ADF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BAC7055F-D5D6-35B2-BF21-794BED75D98F
+    value:           FB45E065-E879-3F22-BD6A-9CE4E34C5460
 install-name:    '/System/Library/PrivateFrameworks/PAImagingCore.framework/Versions/A/PAImagingCore'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN2PA10RectFinderE, __ZTIN2PA14PathRectFinderE, __ZTIN2PA16AnchorRectFinderE, 

@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKShippingMethod;
 @class PKPaymentSummaryItem;
 @class PKPaymentMerchantSession;
-@class PKPaymentTokenConfiguration;
 
 API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 @interface PKPaymentAuthorizationResult : NSObject
@@ -46,6 +45,8 @@ API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 // The new shipping methods to update the payment request with. An empty array, the default value,
 // indicates that the shipping methods don't need updating.
 @property (nonatomic, copy) NSArray<PKShippingMethod *> *shippingMethods API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
+
+
 
 @end
 

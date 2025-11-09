@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0A3643E2-92BE-304C-B0EC-D62EF1008746
+    value:           B2D5E027-947F-3A60-9A32-6637EB7D9504
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38BE533E-F484-3F21-9582-FF17D6FED85D
+    value:           FA6D99E2-6A76-3E2C-A59D-1917675B4F09
 install-name:    '/System/Library/PrivateFrameworks/AMPDesktopUI.framework/Versions/A/AMPDesktopUI'
 current-version: 0
 compatibility-version: 0

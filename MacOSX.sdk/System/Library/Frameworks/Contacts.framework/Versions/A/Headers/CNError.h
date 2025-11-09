@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, CNErrorCode)
     CNErrorCodeRecordIdentifierInvalid = 205,
     CNErrorCodeRecordNotWritable API_AVAILABLE(macos(10.14), ios(13.0), watchos(6.0)) = 206,
     CNErrorCodeParentContainerNotWritable API_AVAILABLE(macos(10.14), ios(13.0), watchos(6.0)) = 207,
-
     
     CNErrorCodeValidationMultipleErrors = 300,
     CNErrorCodeValidationTypeMismatch = 301,

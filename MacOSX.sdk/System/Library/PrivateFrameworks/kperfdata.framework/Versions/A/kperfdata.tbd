@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           389AF18C-097C-33C8-A8FA-788A83A7B689
+    value:           2C558983-9D48-3DFA-A5AC-5C65535E13E3
   - target:          x86_64-maccatalyst
-    value:           389AF18C-097C-33C8-A8FA-788A83A7B689
+    value:           2C558983-9D48-3DFA-A5AC-5C65535E13E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACB41EE6-728E-3D82-8B94-F33AD8F026B5
+    value:           289B7836-649E-3D3C-98BA-6BCBF537251B
   - target:          arm64e-maccatalyst
-    value:           ACB41EE6-728E-3D82-8B94-F33AD8F026B5
+    value:           289B7836-649E-3D3C-98BA-6BCBF537251B
 install-name:    '/System/Library/PrivateFrameworks/kperfdata.framework/Versions/A/kperfdata'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

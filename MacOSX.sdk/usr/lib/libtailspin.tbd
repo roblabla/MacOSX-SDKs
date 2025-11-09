@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7B672269-E7F2-36D8-89D4-5EC8FF1D8BD2
+    value:           A12EE9CD-7569-3B94-AB8E-1601EEF15F00
   - target:          x86_64-maccatalyst
-    value:           7B672269-E7F2-36D8-89D4-5EC8FF1D8BD2
+    value:           A12EE9CD-7569-3B94-AB8E-1601EEF15F00
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B36AA268-2051-38CC-8F4A-58C149B99400
+    value:           E3FEF3EB-0CD9-3F65-B7FB-F8E90D933DAF
   - target:          arm64e-maccatalyst
-    value:           B36AA268-2051-38CC-8F4A-58C149B99400
+    value:           E3FEF3EB-0CD9-3F65-B7FB-F8E90D933DAF
 install-name:    '/usr/lib/libtailspin.dylib'
-current-version: 113.1
+current-version: 123
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -96,5 +96,5 @@ exports:
                        _tailspin_symbolicator_copy_symbol_data_using_uuid_pid_path, 
                        _tailspin_symbolicator_create, _tailspin_symbolicator_destroy, 
                        _tailspin_write_metadata_chunk, _tailspin_write_os_signpost_support_chunks, 
-                       _tailspin_write_symbolless_binary_info_chunk, _tailspin_write_time_snapshot_chunk ]
+                       _tailspin_write_symbolless_binary_info_chunk ]
 ...

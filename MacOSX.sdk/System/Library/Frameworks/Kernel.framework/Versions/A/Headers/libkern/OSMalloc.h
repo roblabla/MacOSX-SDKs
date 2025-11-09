@@ -30,10 +30,10 @@
 #define LIBKERN_OSMALLOC_h
 
 #include <sys/cdefs.h>
+#include <stdint.h>
 
 __BEGIN_DECLS
 
-#include <stdint.h>
 
 /*!
  * @header
@@ -232,6 +232,7 @@ extern void OSFree(
 	void      * addr,
 	uint32_t    size,
 	OSMallocTag tag);
+
 
 __END_DECLS
 

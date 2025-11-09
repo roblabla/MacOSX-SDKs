@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -module-name System
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name System
+// swift-module-flags-ignorable: -user-module-version 21
 import Darwin
 import Swift
 import _Concurrency
@@ -10,7 +11,7 @@ import _Concurrency
   @_alwaysEmitIntoClient public init(rawValue: Swift.CInt) { self.rawValue = rawValue }
   public typealias RawValue = Swift.CInt
 }
-@available(macOS 11, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor {
   @_alwaysEmitIntoClient public static var standardInput: System.FileDescriptor {
     get { .init(rawValue: 0) }
@@ -110,6 +111,13 @@ extension System.FileDescriptor {
     @_alwaysEmitIntoClient public static var O_NOFOLLOW: System.FileDescriptor.OpenOptions {
       get { noFollow }
     }
+    @_alwaysEmitIntoClient public static var directory: System.FileDescriptor.OpenOptions {
+      get { OpenOptions(_O_DIRECTORY) }
+    }
+    @available(*, unavailable, renamed: "directory")
+    @_alwaysEmitIntoClient public static var O_DIRECTORY: System.FileDescriptor.OpenOptions {
+      get { directory }
+    }
     @_alwaysEmitIntoClient public static var symlink: System.FileDescriptor.OpenOptions {
       get { OpenOptions(_O_SYMLINK) }
     }
@@ -203,7 +211,7 @@ extension System.FileDescriptor.OpenOptions : Swift.CustomStringConvertible, Swi
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public var isAbsolute: Swift.Bool {
     get
@@ -217,24 +225,24 @@ extension System.FilePath {
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public var root: System.FilePath.Root? {
     get
     set
   }
-  __consuming public func removingRoot() -> System.FilePath
+  public __consuming func removingRoot() -> System.FilePath
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public var lastComponent: System.FilePath.Component? {
     get
   }
-  __consuming public func removingLastComponent() -> System.FilePath
+  public __consuming func removingLastComponent() -> System.FilePath
   @discardableResult
   public mutating func removeLastComponent() -> Swift.Bool
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
   public var `extension`: Swift.String? {
     get
@@ -243,7 +251,7 @@ extension System.FilePath.Component {
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public var `extension`: Swift.String? {
     get
@@ -253,30 +261,30 @@ extension System.FilePath {
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public var isLexicallyNormal: Swift.Bool {
     get
   }
   public mutating func lexicallyNormalize()
-  __consuming public func lexicallyNormalized() -> System.FilePath
-  __consuming public func lexicallyResolving(_ subpath: __owned System.FilePath) -> System.FilePath?
+  public __consuming func lexicallyNormalized() -> System.FilePath
+  public __consuming func lexicallyResolving(_ subpath: __owned System.FilePath) -> System.FilePath?
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public mutating func removePrefix(_ prefix: System.FilePath) -> Swift.Bool
   public mutating func append(_ component: __owned System.FilePath.Component)
   public mutating func append<C>(_ components: __owned C) where C : Swift.Collection, C.Element == System.FilePath.Component
   public mutating func append(_ other: __owned Swift.String)
-  __consuming public func appending(_ other: __owned System.FilePath.Component) -> System.FilePath
-  __consuming public func appending<C>(_ components: __owned C) -> System.FilePath where C : Swift.Collection, C.Element == System.FilePath.Component
-  __consuming public func appending(_ other: __owned Swift.String) -> System.FilePath
+  public __consuming func appending(_ other: __owned System.FilePath.Component) -> System.FilePath
+  public __consuming func appending<C>(_ components: __owned C) -> System.FilePath where C : Swift.Collection, C.Element == System.FilePath.Component
+  public __consuming func appending(_ other: __owned Swift.String) -> System.FilePath
   public mutating func push(_ other: __owned System.FilePath)
-  __consuming public func pushing(_ other: __owned System.FilePath) -> System.FilePath
+  public __consuming func pushing(_ other: __owned System.FilePath) -> System.FilePath
   public mutating func removeAll(keepingCapacity: Swift.Bool = false)
   public mutating func reserveCapacity(_ minimumCapacity: Swift.Int)
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   @available(*, unavailable, renamed: "removingLastComponent()")
   public var dirname: System.FilePath {
@@ -287,20 +295,20 @@ extension System.FilePath {
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
   public init(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
   public init?(validatingPlatformString platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public struct Root {
   }
   public struct Component {
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
   @frozen public enum Kind {
     case currentDirectory
@@ -316,7 +324,7 @@ extension System.FilePath.Component {
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
@@ -324,7 +332,7 @@ extension System.FilePath.Component {
   }
   public init(from decoder: Swift.Decoder) throws
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root {
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
@@ -332,7 +340,7 @@ extension System.FilePath.Root {
   }
   public init(from decoder: Swift.Decoder) throws
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public struct ComponentView {
   }
@@ -341,7 +349,7 @@ extension System.FilePath {
     _modify
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.BidirectionalCollection {
   public typealias Element = System.FilePath.Component
   public struct Index : Swift.Comparable, Swift.Hashable {
@@ -367,18 +375,18 @@ extension System.FilePath.ComponentView : Swift.BidirectionalCollection {
   public typealias Iterator = Swift.IndexingIterator<System.FilePath.ComponentView>
   public typealias SubSequence = Swift.Slice<System.FilePath.ComponentView>
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.RangeReplaceableCollection {
   public init()
   public mutating func replaceSubrange<C>(_ subrange: Swift.Range<System.FilePath.ComponentView.Index>, with newElements: C) where C : Swift.Collection, C.Element == System.FilePath.ComponentView.Element
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public init<C>(root: System.FilePath.Root?, _ components: C) where C : Swift.Collection, C.Element == System.FilePath.Component
   public init(root: System.FilePath.Root?, components: System.FilePath.Component...)
   public init(root: System.FilePath.Root?, _ components: System.FilePath.ComponentView.SubSequence)
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView {
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
@@ -478,12 +486,12 @@ extension System.FilePermissions : Swift.CustomStringConvertible, Swift.CustomDe
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public typealias CModeT = Darwin.mode_t
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public enum CInterop {
+  public typealias Mode = Darwin.mode_t
   public typealias Char = Swift.CChar
   public typealias PlatformChar = System.CInterop.Char
   public typealias PlatformUnicodeEncoding = Swift.UTF8
-  public typealias Mode = Darwin.mode_t
 }
 @_alwaysEmitIntoClient internal var _ERRNO_NOT_USED: Swift.CInt {
   get { 0 }
@@ -621,13 +629,19 @@ public enum CInterop {
   get { EPROTONOSUPPORT }
 }
 @_alwaysEmitIntoClient internal var _ESOCKTNOSUPPORT: Swift.CInt {
-  get { ESOCKTNOSUPPORT }
+  get {
+  return ESOCKTNOSUPPORT
+}
 }
 @_alwaysEmitIntoClient internal var _ENOTSUP: Swift.CInt {
-  get { ENOTSUP }
+  get {
+  return ENOTSUP
+}
 }
 @_alwaysEmitIntoClient internal var _EPFNOSUPPORT: Swift.CInt {
-  get { EPFNOSUPPORT }
+  get {
+  return EPFNOSUPPORT
+}
 }
 @_alwaysEmitIntoClient internal var _EAFNOSUPPORT: Swift.CInt {
   get { EAFNOSUPPORT }
@@ -663,10 +677,14 @@ public enum CInterop {
   get { ENOTCONN }
 }
 @_alwaysEmitIntoClient internal var _ESHUTDOWN: Swift.CInt {
-  get { ESHUTDOWN }
+  get {
+  return ESHUTDOWN
+}
 }
 @_alwaysEmitIntoClient internal var _ETOOMANYREFS: Swift.CInt {
-  get { ETOOMANYREFS }
+  get {
+  return ETOOMANYREFS
+}
 }
 @_alwaysEmitIntoClient internal var _ETIMEDOUT: Swift.CInt {
   get { ETIMEDOUT }
@@ -681,7 +699,9 @@ public enum CInterop {
   get { ENAMETOOLONG }
 }
 @_alwaysEmitIntoClient internal var _EHOSTDOWN: Swift.CInt {
-  get { EHOSTDOWN }
+  get {
+  return EHOSTDOWN
+}
 }
 @_alwaysEmitIntoClient internal var _EHOSTUNREACH: Swift.CInt {
   get { EHOSTUNREACH }
@@ -693,16 +713,24 @@ public enum CInterop {
   get { EPROCLIM }
 }
 @_alwaysEmitIntoClient internal var _EUSERS: Swift.CInt {
-  get { EUSERS }
+  get {
+  return EUSERS
+}
 }
 @_alwaysEmitIntoClient internal var _EDQUOT: Swift.CInt {
-  get { EDQUOT }
+  get {
+  return EDQUOT
+}
 }
 @_alwaysEmitIntoClient internal var _ESTALE: Swift.CInt {
-  get { ESTALE }
+  get {
+  return ESTALE
+}
 }
 @_alwaysEmitIntoClient internal var _EREMOTE: Swift.CInt {
-  get { EREMOTE }
+  get {
+  return EREMOTE
+}
 }
 @_alwaysEmitIntoClient internal var _EBADRPC: Swift.CInt {
   get { EBADRPC }
@@ -897,7 +925,7 @@ extension System.FileDescriptor {
   @usableFromInline
   internal func _writeAll<S>(toAbsoluteOffset offset: Swift.Int64, _ sequence: S) -> Swift.Result<Swift.Int, System.Errno> where S : Swift.Sequence, S.Element == Swift.UInt8
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public init(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
   @_alwaysEmitIntoClient public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result {
@@ -905,12 +933,12 @@ extension System.FilePath {
     return try withCString(body)
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
   public init?(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root {
   public init?(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
@@ -923,7 +951,7 @@ extension System.FilePath : Swift.ExpressibleByStringLiteral {
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
   public init?(_ string: Swift.String)
@@ -931,7 +959,7 @@ extension System.FilePath.Component : Swift.ExpressibleByStringLiteral {
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
   public init?(_ string: Swift.String)
@@ -948,7 +976,7 @@ extension System.FilePath : Swift.CustomStringConvertible, Swift.CustomDebugStri
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -957,7 +985,7 @@ extension System.FilePath.Component : Swift.CustomStringConvertible, Swift.Custo
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -966,19 +994,19 @@ extension System.FilePath.Root : Swift.CustomStringConvertible, Swift.CustomDebu
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public var string: Swift.String {
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
   public var string: Swift.String {
     get
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root {
   public var string: Swift.String {
     get
@@ -987,18 +1015,23 @@ extension System.FilePath.Root {
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Swift.String {
   public init(decoding path: System.FilePath)
+}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension Swift.String {
+  @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   public init?(validating path: System.FilePath)
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
   public init(decoding component: System.FilePath.Component)
   public init?(validating component: System.FilePath.Component)
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
   public init(decoding root: System.FilePath.Root)
   public init?(validating root: System.FilePath.Root)
 }
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Swift.String {
   @available(macOS, introduced: 11.0, deprecated: 12.0, renamed: "init(decoding:)")
   @available(iOS, introduced: 14.0, deprecated: 15.0, renamed: "init(decoding:)")
@@ -1044,13 +1077,13 @@ extension System.FileDescriptor {
         $0, mode, options: options, permissions: permissions, retryOnInterrupt: retryOnInterrupt)
     }
   }
-  @_alwaysEmitIntoClient public static func open(_ path: Swift.UnsafePointer<System.CInterop.PlatformChar>, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions = FileDescriptor.OpenOptions(), permissions: System.FilePermissions? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
+  @_alwaysEmitIntoClient public static func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions = FileDescriptor.OpenOptions(), permissions: System.FilePermissions? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
     try FileDescriptor._open(
       path, mode, options: options, permissions: permissions, retryOnInterrupt: retryOnInterrupt
     ).get()
   }
   @usableFromInline
-  internal static func _open(_ path: Swift.UnsafePointer<System.CInterop.PlatformChar>, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions, permissions: System.FilePermissions?, retryOnInterrupt: Swift.Bool = true) -> Swift.Result<System.FileDescriptor, System.Errno>
+  internal static func _open(_ path: Swift.UnsafePointer<Swift.CChar>, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions, permissions: System.FilePermissions?, retryOnInterrupt: Swift.Bool) -> Swift.Result<System.FileDescriptor, System.Errno>
   @_alwaysEmitIntoClient public func close() throws { try _close().get() }
   @usableFromInline
   internal func _close() -> Swift.Result<(), System.Errno>
@@ -1068,7 +1101,7 @@ extension System.FileDescriptor {
     try _read(into: buffer, retryOnInterrupt: retryOnInterrupt).get()
   }
   @usableFromInline
-  internal func _read(into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Result<Swift.Int, System.Errno>
+  internal func _read(into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool) throws -> Swift.Result<Swift.Int, System.Errno>
   @_alwaysEmitIntoClient public func read(fromAbsoluteOffset offset: Swift.Int64, into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Int {
     try _read(
       fromAbsoluteOffset: offset,
@@ -1103,11 +1136,13 @@ extension System.FileDescriptor {
       retryOnInterrupt: retryOnInterrupt)
   }
 }
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FileDescriptor {
+  @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   @_alwaysEmitIntoClient public func duplicate(as target: System.FileDescriptor? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
     try _duplicate(as: target, retryOnInterrupt: retryOnInterrupt).get()
   }
+  @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   @usableFromInline
   internal func _duplicate(as target: System.FileDescriptor?, retryOnInterrupt: Swift.Bool) throws -> Swift.Result<System.FileDescriptor, System.Errno>
   @available(*, unavailable, renamed: "duplicate")
@@ -1118,6 +1153,16 @@ extension System.FileDescriptor {
   @_alwaysEmitIntoClient public func dup2() throws -> System.FileDescriptor {
     fatalError("Not implemented")
   }
+}
+@available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
+extension System.FileDescriptor {
+  @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
+  @_alwaysEmitIntoClient public static func pipe() throws -> (readEnd: System.FileDescriptor, writeEnd: System.FileDescriptor) {
+    try _pipe().get()
+  }
+  @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
+  @usableFromInline
+  internal static func _pipe() -> Swift.Result<(readEnd: System.FileDescriptor, writeEnd: System.FileDescriptor), System.Errno>
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct Errno : Swift.RawRepresentable, Swift.Error, Swift.Hashable, Swift.Codable {
@@ -1925,29 +1970,29 @@ extension System.FileDescriptor.AccessMode : Swift.Sendable {}
 extension System.FileDescriptor.OpenOptions : Swift.Sendable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor.SeekOrigin : Swift.Sendable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.Encodable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.Decodable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.Hashable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root : Swift.Encodable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root : Swift.Decodable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root : Swift.Hashable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component.Kind : Swift.Equatable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component.Kind : Swift.Hashable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component.Kind : Swift.Sendable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Encodable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Decodable {}
-@available(macOS 12, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Hashable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FilePermissions : Swift.Sendable {}

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F0BF1CF8-5B55-3A7E-93C3-9C2D63B738D0
+    value:           D669E114-A81A-3386-9107-7F26E5722064
   - target:          x86_64-maccatalyst
-    value:           F0BF1CF8-5B55-3A7E-93C3-9C2D63B738D0
+    value:           D669E114-A81A-3386-9107-7F26E5722064
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F1E0F427-98C8-323C-8C61-C65A31473E8E
+    value:           E07C7BBB-A79B-3D00-A8DF-4F0FAA4B6203
   - target:          arm64e-maccatalyst
-    value:           F1E0F427-98C8-323C-8C61-C65A31473E8E
+    value:           E07C7BBB-A79B-3D00-A8DF-4F0FAA4B6203
 install-name:    '/usr/lib/swift/libswiftFoundation.dylib'
-current-version: 70.101
+current-version: 72.105
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -6280,16 +6280,12 @@ exports:
                        '_$sSo22NSPersonNameComponentsC10FoundationE20_toCustomAnyHashables0gH0VSgyF', 
                        '_$sSo22NSPersonNameComponentsCs35_HasCustomAnyHashableRepresentation10FoundationMc', 
                        '_$sSo25NSURLSessionWebSocketTaskC10FoundationE4send_17completionHandleryAbCE7MessageO_ys5Error_pSgctF', 
-                       '_$sSo25NSURLSessionWebSocketTaskC10FoundationE4sendyyAbCE7MessageOYaKF', 
-                       '_$sSo25NSURLSessionWebSocketTaskC10FoundationE4sendyyAbCE7MessageOYaKFTu', 
                        '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7MessageO4datayAeC4DataVcAEmFWC', 
                        '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7MessageO6stringyAESScAEmFWC', 
                        '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7MessageOMa', 
                        '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7MessageOMn', 
                        '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7MessageON', 
                        '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7receive17completionHandleryys6ResultOyAbCE7MessageOs5Error_pGc_tF', 
-                       '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7receiveAbCE7MessageOyYaKF', 
-                       '_$sSo25NSURLSessionWebSocketTaskC10FoundationE7receiveAbCE7MessageOyYaKFTu', 
                        '_$sSo26NSISO8601DateFormatOptionsVSH10FoundationMc', '_$sSo26NSInlinePresentationIntentVSE10FoundationMc', 
                        '_$sSo26NSInlinePresentationIntentVSH10FoundationMc', '_$sSo26NSInlinePresentationIntentVSe10FoundationMc', 
                        '_$sSo34NSURLSessionTaskTransactionMetricsC10FoundationE10remotePortSiSgvg', 

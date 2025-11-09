@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           837CA972-20BB-338A-A731-AC1D8435E3A3
+    value:           3B52DDCE-BFB7-331F-B621-8A31ECCC43B1
   - target:          x86_64-maccatalyst
-    value:           837CA972-20BB-338A-A731-AC1D8435E3A3
+    value:           3B52DDCE-BFB7-331F-B621-8A31ECCC43B1
   - target:          x86_64h-macos
-    value:           65503E80-99AC-3122-8C75-5A00C04314A1
+    value:           1971E271-8379-3B27-A5F0-D7FB36D4165C
   - target:          x86_64h-maccatalyst
-    value:           65503E80-99AC-3122-8C75-5A00C04314A1
+    value:           1971E271-8379-3B27-A5F0-D7FB36D4165C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           18EFBD20-C3A3-382E-B9B4-C01214BB9A12
+    value:           AA8F3097-FE1E-3B85-9879-3C7B1EE45B4D
   - target:          arm64e-maccatalyst
-    value:           18EFBD20-C3A3-382E-B9B4-C01214BB9A12
+    value:           AA8F3097-FE1E-3B85-9879-3C7B1EE45B4D
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 

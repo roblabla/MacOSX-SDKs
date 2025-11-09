@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9FD5D529-8F7A-3197-8A4C-C16B49ABF315
+    value:           A0E025F4-FCE2-3AF1-9707-AC803920A6AF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           260E5D4A-A624-3619-BFE9-BDE4A9A10BF9
+    value:           D1DDB723-3B10-315B-B94A-FF54B681A5F4
 install-name:    '/System/Library/PrivateFrameworks/MorphunSwift.framework/Versions/A/MorphunSwift'
 swift-abi-version: 7
 exports:
@@ -31,6 +31,12 @@ exports:
                        '_$s12MorphunSwift10TokenChainCStAAMc', '_$s12MorphunSwift10TokenChainCfD', 
                        '_$s12MorphunSwift10TokenChainCfd', '_$s12MorphunSwift10TokenChainCs23CustomStringConvertibleAAMc', 
                        '_$s12MorphunSwift10TokenChainCs28CustomDebugStringConvertibleAAMc', 
+                       '_$s12MorphunSwift11LocaleUtilsC23getSupportedLocalesListSay10Foundation0C0VGyFZTj', 
+                       '_$s12MorphunSwift11LocaleUtilsC23getSupportedLocalesListSay10Foundation0C0VGyFZTq', 
+                       '_$s12MorphunSwift11LocaleUtilsCMa', '_$s12MorphunSwift11LocaleUtilsCMm', 
+                       '_$s12MorphunSwift11LocaleUtilsCMn', '_$s12MorphunSwift11LocaleUtilsCMo', 
+                       '_$s12MorphunSwift11LocaleUtilsCMu', '_$s12MorphunSwift11LocaleUtilsCN', 
+                       '_$s12MorphunSwift11LocaleUtilsCfD', '_$s12MorphunSwift11LocaleUtilsCfd', 
                        '_$s12MorphunSwift12LoggerConfigC010unregisterC014loggerDelegateSbAA0cG0_p_tKFZ', 
                        '_$s12MorphunSwift12LoggerConfigC08registerC014loggerDelegateSbAA0cG0_p_tKFZ', 
                        '_$s12MorphunSwift12LoggerConfigC11getLogLevelAA0fG0OSgyFZ', 

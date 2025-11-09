@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           650E3053-B349-3B14-892F-8F44428E597C
+    value:           787CE82A-F154-3DC9-A76D-9B013B24F793
   - target:          x86_64-maccatalyst
-    value:           650E3053-B349-3B14-892F-8F44428E597C
+    value:           787CE82A-F154-3DC9-A76D-9B013B24F793
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78847D4A-E296-3FEC-B7F9-7926212A397F
+    value:           EE085EA1-25BE-3784-8600-506A107414D1
   - target:          arm64e-maccatalyst
-    value:           78847D4A-E296-3FEC-B7F9-7926212A397F
+    value:           EE085EA1-25BE-3784-8600-506A107414D1
 install-name:    '/usr/lib/libAXSafeCategoryBundle.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

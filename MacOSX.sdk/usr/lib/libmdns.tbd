@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E71ACB66-5166-3AE1-8652-95C87B7DB917
+    value:           D61EFB58-70E2-3D9B-9E5D-8DEC7363605A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2E2FECE-DB03-3014-BB43-E92BEB8670BB
+    value:           EE758459-ADE8-342B-9BC9-E3DA86F9CD41
 install-name:    '/usr/lib/libmdns.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -86,8 +86,8 @@ exports:
                        _mdns_resolver_add_server_address, _mdns_resolver_create, 
                        _mdns_resolver_create_querier, _mdns_resolver_disable_connection_reuse, 
                        _mdns_resolver_enable_problematic_qtype_workaround, _mdns_resolver_enable_symptom_reporting, 
-                       _mdns_resolver_invalidate, _mdns_resolver_set_event_handler, 
-                       _mdns_resolver_set_initial_datagram_retransmission_interval, 
+                       _mdns_resolver_invalidate, _mdns_resolver_set_connection_hostname, 
+                       _mdns_resolver_set_event_handler, _mdns_resolver_set_initial_datagram_retransmission_interval, 
                        _mdns_resolver_set_port, _mdns_resolver_set_provider_name, 
                        _mdns_resolver_set_queue, _mdns_resolver_set_squash_cnames, 
                        _mdns_resolver_set_url_path, _mdns_resolver_type_uses_encryption, 

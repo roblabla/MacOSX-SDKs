@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CBFB56B1-DA44-324B-B020-C5ADA2BD1AC4
+    value:           EBA1CFDF-403D-3628-978C-444EF220CDC8
   - target:          x86_64-maccatalyst
-    value:           CBFB56B1-DA44-324B-B020-C5ADA2BD1AC4
+    value:           EBA1CFDF-403D-3628-978C-444EF220CDC8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3EDE4121-EB32-341B-9364-5A873874E3CA
+    value:           ACDE5FB9-9CF3-3AEC-B50B-7BAD9F62BC52
   - target:          arm64e-maccatalyst
-    value:           3EDE4121-EB32-341B-9364-5A873874E3CA
+    value:           ACDE5FB9-9CF3-3AEC-B50B-7BAD9F62BC52
 install-name:    '/usr/lib/libmecabra.dylib'
-current-version: 972.2
+current-version: 972.10
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -72,17 +72,17 @@ exports:
                        _MecabraCreateArrayWithContentOfPhraseLearningDictionary, 
                        _MecabraCreateCPGesture, _MecabraCreateCandidateFromContextString, 
                        _MecabraCreateCangjieStringFromASCII, _MecabraCreateCustomDebugInfo, 
-                       _MecabraCreateFacemarkCandidates, _MecabraCreateHandwritingCandidate, 
-                       _MecabraCreateInputKeyFromASCIIString, _MecabraCreateLayoutKey, 
-                       _MecabraCreatePinyinSyllableArray, _MecabraCreateRemainingGestures, 
-                       _MecabraCreateSegments, _MecabraCreateSyllableSequences, _MecabraCreateTypeGesture, 
-                       _MecabraCreateTypeGestureWithTouchEvent, _MecabraCreateWithAdditionalDictionariesAndOptions, 
-                       _MecabraCreateWithOptions, _MecabraCreateWubixingCodesFromSurface, 
-                       _MecabraCreateWubixingStringFromASCII, _MecabraDeclareEndOfSentence, 
-                       _MecabraDeleteCandidateFromLearningDictionary, _MecabraDeleteEntryFromLearningDictionary, 
-                       _MecabraEnumerateSyllabifiedStringLengths, _MecabraFlushDynamicData, 
-                       _MecabraGestureAddKeyAndLoglikelihoodPair, _MecabraGetConversionEngine, 
-                       _MecabraGetDebuggingLog, _MecabraGetInputCodeForCharacters, 
+                       _MecabraCreateFacemarkCandidates, _MecabraCreateFacemarkCandidatesWithContext, 
+                       _MecabraCreateHandwritingCandidate, _MecabraCreateInputKeyFromASCIIString, 
+                       _MecabraCreateLayoutKey, _MecabraCreatePinyinSyllableArray, 
+                       _MecabraCreateRemainingGestures, _MecabraCreateSegments, _MecabraCreateSyllableSequences, 
+                       _MecabraCreateTypeGesture, _MecabraCreateTypeGestureWithTouchEvent, 
+                       _MecabraCreateWithAdditionalDictionariesAndOptions, _MecabraCreateWithOptions, 
+                       _MecabraCreateWubixingCodesFromSurface, _MecabraCreateWubixingStringFromASCII, 
+                       _MecabraDeclareEndOfSentence, _MecabraDeleteCandidateFromLearningDictionary, 
+                       _MecabraDeleteEntryFromLearningDictionary, _MecabraEnumerateSyllabifiedStringLengths, 
+                       _MecabraFlushDynamicData, _MecabraGestureAddKeyAndLoglikelihoodPair, 
+                       _MecabraGetConversionEngine, _MecabraGetDebuggingLog, _MecabraGetInputCodeForCharacters, 
                        _MecabraGetInputKeys, _MecabraGetLastOfflineAdaptationTime, 
                        _MecabraGetLengthForContextString, _MecabraGetMaximalCharacterInputCodeLength, 
                        _MecabraGetNextCandidate, _MecabraGetRNNLMProbabilities, _MecabraGetWubixingStandard, 
@@ -113,7 +113,8 @@ exports:
                        _MecabraWaitForAsyncDataLoading, _MecabraWaitForLanguageSpecificAsyncDataLoading, 
                        _MecabraWordPropertiesCreate, _MecabraWordPropertiesGetProperty, 
                        _MecabraWordPropertiesGetSortedRadicalList, _MecabraWordPropertiesRelease, 
-                       _MecabraWorkingSetAddString, _MecabraWorkingSetContainsString, 
+                       _MecabraWorkingSetAddString, _MecabraWorkingSetAddStringWithContext, 
+                       _MecabraWorkingSetContainsString, _MecabraWorkingSetContainsStringWithContext, 
                        _ReadingLookupDictionaryBuild, _ReverseDictionaryBuild, _SeaweedChineseDictionaryBuild, 
                        _kFacemarkCategoryAngry, _kFacemarkCategoryAnimal, _kFacemarkCategoryCrying, 
                        _kFacemarkCategoryDecorative, _kFacemarkCategoryGreeting, 
@@ -126,7 +127,8 @@ exports:
                        _kMecabraContextOptionDisabledLearningBasedGenerationNonLexicalPreference, 
                        _kMecabraContextOptionDisabledLearningBasedGenerationUnigramPhrase, 
                        _kMecabraContextOptionHistorySimulation, _kMecabraContextOptionNoPruning, 
-                       _kMecabraContextOptionSuppressSensitiveWords, _kMecabraCreationCustomAdditionalDictionaryDirectoriesKey, 
+                       _kMecabraContextOptionPrivateMode, _kMecabraContextOptionSuppressSensitiveWords, 
+                       _kMecabraCreationCustomAdditionalDictionaryDirectoriesKey, 
                        _kMecabraCreationCustomDynamicLanguageModelDirectoryKey, _kMecabraCreationCustomLearningDictionaryDirectoryKey, 
                        _kMecabraCreationCustomStaticDialectLanguageModelBundleKey, 
                        _kMecabraCreationCustomStaticLanguageModelBundleKey, _kMecabraCreationCustomSystemDictionaryDirectoryKey, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DF6A70A2-C12F-3A7D-8323-181A4815EA35
+    value:           0F6BBD9F-8681-3C9A-B1BB-2349890B7E39
   - target:          x86_64-maccatalyst
-    value:           DF6A70A2-C12F-3A7D-8323-181A4815EA35
+    value:           0F6BBD9F-8681-3C9A-B1BB-2349890B7E39
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB0FC57F-D7F0-3195-889B-3F816744A99D
+    value:           28995FF5-77C8-3664-9381-77A3C0E9087F
   - target:          arm64e-maccatalyst
-    value:           BB0FC57F-D7F0-3195-889B-3F816744A99D
+    value:           28995FF5-77C8-3664-9381-77A3C0E9087F
 install-name:    '/System/Library/PrivateFrameworks/SPOwner.framework/Versions/A/SPOwner'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

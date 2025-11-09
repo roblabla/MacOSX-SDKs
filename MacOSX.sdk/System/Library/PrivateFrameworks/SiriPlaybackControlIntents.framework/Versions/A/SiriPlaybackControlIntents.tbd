@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           009B3C83-BBF8-30F2-B596-735A78402AFB
+    value:           96498102-F230-30D5-B814-4EBD531B54B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DBFE60D7-6850-3948-8B30-7EE4D3263907
+    value:           60A837F2-79C0-36D1-AB16-2E1B6299A9CE
 install-name:    '/System/Library/PrivateFrameworks/SiriPlaybackControlIntents.framework/Versions/A/SiriPlaybackControlIntents'
 swift-abi-version: 7
 allowable-clients:
@@ -62,6 +62,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents11DeviceGroupC10identifier7display17pronunciationHintACSSSg_SSAGtcfc', 
                        '_$s26SiriPlaybackControlIntents11DeviceGroupC11descriptionSSvg', 
                        '_$s26SiriPlaybackControlIntents11DeviceGroupC11includesTVsSo8NSNumberCSgvpMV', 
+                       '_$s26SiriPlaybackControlIntents11DeviceGroupC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents11DeviceGroupC4typeAA0F4TypeOvpMV', 
                        '_$s26SiriPlaybackControlIntents11DeviceGroupC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s26SiriPlaybackControlIntents11DeviceGroupC5coderACSgSo7NSCoderC_tcfc', 
@@ -89,6 +90,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents11DeviceQueryC16deviceQuantifier0abC7Support0eH0OSgvpMV', 
                        '_$s26SiriPlaybackControlIntents11DeviceQueryC16deviceQuantifier0abC7Support0eH0OSgvs', 
                        '_$s26SiriPlaybackControlIntents11DeviceQueryC16deviceTypeStringSSSgvpMV', 
+                       '_$s26SiriPlaybackControlIntents11DeviceQueryC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents11DeviceQueryC22deviceQuantifierStringSSSgvpMV', 
                        '_$s26SiriPlaybackControlIntents11DeviceQueryC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s26SiriPlaybackControlIntents11DeviceQueryC5coderACSgSo7NSCoderC_tcfc', 
@@ -104,6 +106,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents11MediaStreamC10identifier7display17pronunciationHintACSSSg_SSAGtcfc', 
                        '_$s26SiriPlaybackControlIntents11MediaStreamC11descriptionSSvg', 
                        '_$s26SiriPlaybackControlIntents11MediaStreamC11groupLeaderAA6DeviceCSgvpMV', 
+                       '_$s26SiriPlaybackControlIntents11MediaStreamC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents11MediaStreamC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s26SiriPlaybackControlIntents11MediaStreamC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s26SiriPlaybackControlIntents11MediaStreamC7devicesSayAA6DeviceCGSgvpMV', 
@@ -134,6 +137,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents11VolumeLevelC17volumeSettingUnitAA0ehI0OvpMV', 
                        '_$s26SiriPlaybackControlIntents11VolumeLevelC18volumeSettingStateAA0ehI0OvpMV', 
                        '_$s26SiriPlaybackControlIntents11VolumeLevelC18volumeSettingValueSo8NSNumberCSgvpMV', 
+                       '_$s26SiriPlaybackControlIntents11VolumeLevelC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents11VolumeLevelC22volumeSettingQualifierAA0ehI0OvpMV', 
                        '_$s26SiriPlaybackControlIntents11VolumeLevelC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s26SiriPlaybackControlIntents11VolumeLevelC5coderACSgSo7NSCoderC_tcfc', 
@@ -161,6 +165,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents13DeviceContextC15nowPlayingStateAA03NowhI0OvpMV', 
                        '_$s26SiriPlaybackControlIntents13DeviceContextC19nowPlayingMediaTypeAA03NowhiJ0OvpMV', 
                        '_$s26SiriPlaybackControlIntents13DeviceContextC19nowPlayingTimestamp10Foundation4DateVSgvpMV', 
+                       '_$s26SiriPlaybackControlIntents13DeviceContextC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents13DeviceContextC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s26SiriPlaybackControlIntents13DeviceContextC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s26SiriPlaybackControlIntents13DeviceContextC7groupIdSSSgvpMV', 
@@ -180,6 +185,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents14LanguageOptionC11descriptionSSvg', 
                        '_$s26SiriPlaybackControlIntents14LanguageOptionC11languageTagSSSgvpMV', 
                        '_$s26SiriPlaybackControlIntents14LanguageOptionC18languageIdentifierSSSgvpMV', 
+                       '_$s26SiriPlaybackControlIntents14LanguageOptionC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents14LanguageOptionC4nameSSSgvpMV', 
                        '_$s26SiriPlaybackControlIntents14LanguageOptionC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s26SiriPlaybackControlIntents14LanguageOptionC5coderACSgSo7NSCoderC_tcfc', 
@@ -205,6 +211,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents14SeekTimeIntentCMo', '_$s26SiriPlaybackControlIntents14SeekTimeIntentCN', 
                        '_$s26SiriPlaybackControlIntents14SeekTimeIntentCfD', '_$s26SiriPlaybackControlIntents14SignedDurationC10identifier7display17pronunciationHintACSSSg_SSAGtcfC', 
                        '_$s26SiriPlaybackControlIntents14SignedDurationC10identifier7display17pronunciationHintACSSSg_SSAGtcfc', 
+                       '_$s26SiriPlaybackControlIntents14SignedDurationC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents14SignedDurationC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s26SiriPlaybackControlIntents14SignedDurationC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s26SiriPlaybackControlIntents14SignedDurationC8durationSo8NSNumberCSgvpMV', 
@@ -1510,6 +1517,8 @@ exports:
                        '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP16deviceQuantifier0abC7Support06DeviceK0OSgvgTq', 
                        '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP19destinationDeviceIdSSSgvgTj', 
                        '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP19destinationDeviceIdSSSgvgTq', 
+                       '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP4from24fetchDestinationDeviceIdxSg0A7KitFlow5ParseO_SbtcfCTj', 
+                       '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP4from24fetchDestinationDeviceIdxSg0A7KitFlow5ParseO_SbtcfCTq', 
                        '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP8homeNameSSSgvgTj', 
                        '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP8homeNameSSSgvgTq', 
                        '_$s26SiriPlaybackControlIntents35HomeAutomationEntityProvidingIntentP9placeHint0abC7Support05PlaceK0OSgvgTj', 
@@ -1767,6 +1776,7 @@ exports:
                        '_$s26SiriPlaybackControlIntents6DeviceC16deviceQuantifier0abC7Support0eG0OSgvpMV', 
                        '_$s26SiriPlaybackControlIntents6DeviceC16deviceQuantifier0abC7Support0eG0OSgvs', 
                        '_$s26SiriPlaybackControlIntents6DeviceC16skipConfirmationSo8NSNumberCSgvpMV', 
+                       '_$s26SiriPlaybackControlIntents6DeviceC20supportsSecureCodingSbvgZ', 
                        '_$s26SiriPlaybackControlIntents6DeviceC21numberOfAffectedRoomsSo8NSNumberCSgvpMV', 
                        '_$s26SiriPlaybackControlIntents6DeviceC4nameSSSgvpMV', '_$s26SiriPlaybackControlIntents6DeviceC4typeSSSgvpMV', 
                        '_$s26SiriPlaybackControlIntents6DeviceC5coderACSgSo7NSCoderC_tcfC', 

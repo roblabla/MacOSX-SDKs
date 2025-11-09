@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B1ECAB51-53EB-33A8-8EE0-D060807CB61C
+    value:           00E71D1F-D07A-3DE7-8E9A-24DD56841DA1
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           EBE3E244-FDBE-334D-9B61-4C0E75F2253A
+    value:           75661110-F28E-3538-BE7E-944564B1EEE7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

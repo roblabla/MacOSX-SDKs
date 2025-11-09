@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FCAD42FA-E072-3A25-AB15-F3A80D888903
+    value:           F0B8EADF-1126-3EAB-B95A-5FCCE372F188
   - target:          x86_64-maccatalyst
-    value:           FCAD42FA-E072-3A25-AB15-F3A80D888903
+    value:           F0B8EADF-1126-3EAB-B95A-5FCCE372F188
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8D1E009-E583-3782-B221-6333FE2EAA2D
+    value:           8FE46AD4-0D55-3FAB-91DF-AE7459A2684C
   - target:          arm64e-maccatalyst
-    value:           E8D1E009-E583-3782-B221-6333FE2EAA2D
+    value:           8FE46AD4-0D55-3FAB-91DF-AE7459A2684C
 install-name:    '/System/Library/PrivateFrameworks/NetworkServiceProxy.framework/Versions/A/NetworkServiceProxy'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -103,14 +103,15 @@ exports:
                        NPTunnelFlowTelemetry, NPTunnelFlowUDP, NPTunnelTuscany, NPTunnelTuscanyEndpoint, 
                        NPTunnelTuscanyLoopback, NPTuscanyEdge, NPTuscanyLoopbackConnection, 
                        NPTuscanyOnRamp, NPUsageReport, NPUtilities, NPWaldo, NSPAnisette, 
-                       NSPAppRule, NSPBAA, NSPBAA_Anisette, NSPByteParser, NSPCandidateFallbackProxyPath, 
-                       NSPCandidateProxyPath, NSPCandidateQuicProxyPath, NSPCaptiveWiFiHandler, 
-                       NSPConfiguration, NSPConfigurationFetchAnalytics, NSPConfigurationManager, 
-                       NSPConfigurationSignatureInfo, NSPConfigurationStats, NSPConnectionInfo, 
-                       NSPControlConnection, NSPDNSPacket, NSPDNSQuery, NSPDNSResourceRecord, 
-                       NSPDeviceIdentityCertificate, NSPDeviceIdentityStats, NSPFallbackProxyPath, 
-                       NSPFlowDivert, NSPFlowDivertProvider, NSPKeyNetworkAgent, 
-                       NSPManager, NSPNetworkAgent, NSPNetworkStatusStats, NSPOutageReasonStats, 
+                       NSPAppRule, NSPBAA, NSPBAA_Anisette, NSPBadTokenInfoStats, 
+                       NSPByteParser, NSPCandidateFallbackProxyPath, NSPCandidateProxyPath, 
+                       NSPCandidateQuicProxyPath, NSPCaptiveWiFiHandler, NSPConfiguration, 
+                       NSPConfigurationFetchAnalytics, NSPConfigurationManager, NSPConfigurationSignatureInfo, 
+                       NSPConfigurationStats, NSPConnectionInfo, NSPControlConnection, 
+                       NSPDNSPacket, NSPDNSQuery, NSPDNSResourceRecord, NSPDeviceIdentityCertificate, 
+                       NSPDeviceIdentityStats, NSPFallbackProxyPath, NSPFlowDivert, 
+                       NSPFlowDivertProvider, NSPKeyNetworkAgent, NSPManager, NSPNetworkAgent, 
+                       NSPNetworkStatusStats, NSPOutageDurationStats, NSPOutageReasonStats, 
                        NSPPrivacyProxyAgentManager, NSPPrivacyProxyAuthenticationInfo, 
                        NSPPrivacyProxyBAAValidation, NSPPrivacyProxyBootstrapDNSAgent, 
                        NSPPrivacyProxyConfigAgent, NSPPrivacyProxyConfiguration, 
@@ -122,13 +123,15 @@ exports:
                        NSPPrivacyProxySingleHopFallbackNetworkRegistration, NSPPrivacyProxySingleHopNetworkRegistration, 
                        NSPPrivacyProxyTokenActivationQuery, NSPPrivacyProxyTokenActivationResponse, 
                        NSPPrivacyProxyTokenAgent, NSPPrivacyProxyTokenInfo, NSPPrivacyProxyTokenRegistration, 
-                       NSPPrivacyTokenManager, NSPProber, NSPProxyAgentNetworkStatistics, 
+                       NSPPrivacyTokenManager, NSPPrivateRelayIncompatibleNetworkStats, 
+                       NSPProbeHTTPErrorCodeStats, NSPProbeStats, NSPProber, NSPProxyAgentNetworkStatistics, 
                        NSPProxyAgentStats, NSPProxyAnalytics, NSPProxyPath, NSPProxyTokenInfo, 
                        NSPQuicProxyPath, NSPServerClient, NSPServiceStatusManager, 
-                       NSPServiceStatusStats, NSPToken, NSPTokenFetchAnalytics, NSPUserNotification, 
-                       NSURLSessionDelegate, PrivacyProxyClient, PrivacyProxyInfo, 
-                       PrivacyProxyNetworkStatus, PrivacyProxyNetworkStatusTime, 
-                       PrivacyProxyServiceStatus, PrivacyProxyServiceStatusTime ]
+                       NSPServiceStatusStats, NSPSwitchEgressProxyStats, NSPToken, 
+                       NSPTokenFetchAnalytics, NSPUserNotification, NSURLSessionDelegate, 
+                       PrivacyProxyClient, PrivacyProxyInfo, PrivacyProxyNetworkStatus, 
+                       PrivacyProxyNetworkStatusTime, PrivacyProxyServiceStatus, 
+                       PrivacyProxyServiceStatusTime, PrivacyProxyTokenInfo ]
     objc-ivars:      [ NPTunnel._protocol, NPTunnelFlow._hasTunnel, NPTunnelFlow._tunnelError, 
                        NPTuscanyLoopbackConnection._blobSizes, NPTuscanyLoopbackConnection._currentInputFrames, 
                        NPTuscanyLoopbackConnection._protocol ]

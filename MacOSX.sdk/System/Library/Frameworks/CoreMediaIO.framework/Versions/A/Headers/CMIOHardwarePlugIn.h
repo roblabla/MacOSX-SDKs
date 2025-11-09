@@ -510,7 +510,7 @@ struct  CMIOHardwarePlugInInterface
                         Float64                 frameNumber,
                         Boolean                 playOnCue);
     
-} API_AVAILABLE(macos(10.7));
+} API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    CMIOObject Functions
@@ -538,7 +538,7 @@ extern OSStatus
 CMIOObjectCreate(   CMIOHardwarePlugInRef   owningPlugIn,
                     CMIOObjectID            owningObjectID,
                     CMIOClassID             classID,
-                    CMIOObjectID*           objectID) API_AVAILABLE(macos(10.7));
+					CMIOObjectID*           objectID) API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
 
 /*!
     @function       CMIOObjectsPublishedAndDied
@@ -567,7 +567,7 @@ CMIOObjectsPublishedAndDied(    CMIOHardwarePlugInRef   owningPlugIn,
                                 UInt32                  numberPublishedCMIOObjects,
                                 const CMIOObjectID      publishedCMIOObjects[],
                                 UInt32                  numberDeadCMIOObjects,
-                                const CMIOObjectID      deadCMIOObjects[]) API_AVAILABLE(macos(10.7));
+								const CMIOObjectID      deadCMIOObjects[]) API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
 
 /*!
     @function       CMIOObjectPropertiesChanged
@@ -589,7 +589,7 @@ extern OSStatus
 CMIOObjectPropertiesChanged(    CMIOHardwarePlugInRef           owningPlugIn,
                                 CMIOObjectID                    objectID,
                                 UInt32                          numberAddresses,
-                                const CMIOObjectPropertyAddress addresses[]) API_AVAILABLE(macos(10.7));
+								const CMIOObjectPropertyAddress addresses[]) API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    CMIODevice Functions

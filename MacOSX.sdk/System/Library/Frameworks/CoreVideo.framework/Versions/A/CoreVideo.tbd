@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4A3D1CF7-87B6-3FEE-8767-F1CB54EB0D9F
+    value:           1F916BE5-077B-3103-ADCE-C69E661CC102
   - target:          x86_64-maccatalyst
-    value:           4A3D1CF7-87B6-3FEE-8767-F1CB54EB0D9F
+    value:           1F916BE5-077B-3103-ADCE-C69E661CC102
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A3A7DB7-5CB8-35BE-92F8-30D21083899E
+    value:           F988DBD8-B383-38C8-A141-F80E0252430E
   - target:          arm64e-maccatalyst
-    value:           3A3A7DB7-5CB8-35BE-92F8-30D21083899E
+    value:           F988DBD8-B383-38C8-A141-F80E0252430E
 install-name:    '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo'
 current-version: 1.5
 compatibility-version: 1.2

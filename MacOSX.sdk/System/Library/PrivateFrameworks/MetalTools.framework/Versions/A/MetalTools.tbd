@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EFC6768F-8840-346A-B4B4-8967496501A4
+    value:           D555F5B8-96EC-3DDE-AA1B-0AA50BCBAEE7
   - target:          x86_64-maccatalyst
-    value:           EFC6768F-8840-346A-B4B4-8967496501A4
+    value:           D555F5B8-96EC-3DDE-AA1B-0AA50BCBAEE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0151C670-0A29-3ABD-B5E2-BFB5168D5738
+    value:           A1AFBE2E-8862-34B2-9AC8-52A21A617FCE
   - target:          arm64e-maccatalyst
-    value:           0151C670-0A29-3ABD-B5E2-BFB5168D5738
+    value:           A1AFBE2E-8862-34B2-9AC8-52A21A617FCE
 install-name:    '/System/Library/PrivateFrameworks/MetalTools.framework/Versions/A/MetalTools'
 current-version: 0
 compatibility-version: 0
@@ -78,24 +78,25 @@ exports:
                        MTLDebugVideoCommandEncoder, MTLDebugVisibleFunctionTable, 
                        MTLGPUDebugAccelerationStructure, MTLGPUDebugAccelerationStructureCommandEncoder, 
                        MTLGPUDebugArgumentEncoder, MTLGPUDebugBinaryArchive, MTLGPUDebugBlitCommandEncoder, 
-                       MTLGPUDebugBuffer, MTLGPUDebugCommandBuffer, MTLGPUDebugCommandQueue, 
-                       MTLGPUDebugComputeCommandEncoder, MTLGPUDebugComputePipelineState, 
-                       MTLGPUDebugDevice, MTLGPUDebugDynamicLibrary, MTLGPUDebugFunction, 
-                       MTLGPUDebugFunctionHandle, MTLGPUDebugHeap, MTLGPUDebugIndirectCommandBuffer, 
-                       MTLGPUDebugIndirectComputeCommand, MTLGPUDebugIndirectRenderCommand, 
-                       MTLGPUDebugIntersectionFunctionTable, MTLGPUDebugLibrary, 
-                       MTLGPUDebugParallelRenderCommandEncoder, MTLGPUDebugRenderCommandEncoder, 
-                       MTLGPUDebugRenderPipelineState, MTLGPUDebugVisibleFunctionTable, 
-                       MTLTelemetryBlitCommandEncoder, MTLTelemetryBuffer, MTLTelemetryCommandBuffer, 
-                       MTLTelemetryCommandQueue, MTLTelemetryComputeCommandEncoder, 
-                       MTLTelemetryComputePipelineState, MTLTelemetryDepthStencilState, 
-                       MTLTelemetryDevice, MTLTelemetryHeap, MTLTelemetryParallelRenderCommandEncoder, 
-                       MTLTelemetryRenderCommandEncoder, MTLTelemetryRenderPipelineState, 
-                       MTLTelemetrySamplerState, MTLTelemetryTexture, MTLToolsAccelerationStructure, 
-                       MTLToolsAccelerationStructureCommandEncoder, MTLToolsArgumentEncoder, 
-                       MTLToolsBinaryArchive, MTLToolsBlitCommandEncoder, MTLToolsBuffer, 
-                       MTLToolsCommandBuffer, MTLToolsCommandEncoder, MTLToolsCommandQueue, 
-                       MTLToolsComputeCommandEncoder, MTLToolsComputePipelineState, 
+                       MTLGPUDebugBuffer, MTLGPUDebugBufferErrorLog, MTLGPUDebugCommandBuffer, 
+                       MTLGPUDebugCommandQueue, MTLGPUDebugComputeCommandEncoder, 
+                       MTLGPUDebugComputePipelineState, MTLGPUDebugDevice, MTLGPUDebugDynamicLibrary, 
+                       MTLGPUDebugFunction, MTLGPUDebugFunctionHandle, MTLGPUDebugGPULog, 
+                       MTLGPUDebugHeap, MTLGPUDebugIndirectCommandBuffer, MTLGPUDebugIndirectComputeCommand, 
+                       MTLGPUDebugIndirectRenderCommand, MTLGPUDebugIntersectionFunctionTable, 
+                       MTLGPUDebugLibrary, MTLGPUDebugParallelRenderCommandEncoder, 
+                       MTLGPUDebugRenderCommandEncoder, MTLGPUDebugRenderPipelineState, 
+                       MTLGPUDebugTexture, MTLGPUDebugTextureErrorLog, MTLGPUDebugTrapErrorLog, 
+                       MTLGPUDebugVisibleFunctionTable, MTLTelemetryBlitCommandEncoder, 
+                       MTLTelemetryBuffer, MTLTelemetryCommandBuffer, MTLTelemetryCommandQueue, 
+                       MTLTelemetryComputeCommandEncoder, MTLTelemetryComputePipelineState, 
+                       MTLTelemetryDepthStencilState, MTLTelemetryDevice, MTLTelemetryHeap, 
+                       MTLTelemetryParallelRenderCommandEncoder, MTLTelemetryRenderCommandEncoder, 
+                       MTLTelemetryRenderPipelineState, MTLTelemetrySamplerState, 
+                       MTLTelemetryTexture, MTLToolsAccelerationStructure, MTLToolsAccelerationStructureCommandEncoder, 
+                       MTLToolsArgumentEncoder, MTLToolsBinaryArchive, MTLToolsBlitCommandEncoder, 
+                       MTLToolsBuffer, MTLToolsCommandBuffer, MTLToolsCommandEncoder, 
+                       MTLToolsCommandQueue, MTLToolsComputeCommandEncoder, MTLToolsComputePipelineState, 
                        MTLToolsCounterSampleBuffer, MTLToolsDepthStencilState, MTLToolsDevice, 
                        MTLToolsDynamicLibrary, MTLToolsEvent, MTLToolsFence, MTLToolsFunction, 
                        MTLToolsFunctionHandle, MTLToolsGLDrawable, MTLToolsHeap, 
@@ -150,7 +151,8 @@ exports:
                        MTLTelemetryRenderPipelineState.activeFragmentTextures, MTLTelemetryRenderPipelineState.device, 
                        MTLTelemetryRenderPipelineState.hasAnisoConstantSampler, MTLTelemetryRenderPipelineState.uniqueID, 
                        MTLTelemetrySamplerState.isAniso, MTLTelemetryTexture.mipmapClipType, 
-                       MTLToolsCommandBuffer._flags, MTLToolsDevice._deviceWrapper, 
+                       MTLToolsCommandBuffer._flags, MTLToolsCommandBuffer._retainedObjectsLock, 
+                       MTLToolsCommandBuffer._useRetainedObjectsLock, MTLToolsDevice._deviceWrapper, 
                        MTLToolsDevice.depthStencilObjectCache, MTLToolsDevice.dynamicLibraryObjectCache, 
                        MTLToolsDevice.functionHandleObjectCache, MTLToolsDevice.functionObjectCache, 
                        MTLToolsDevice.samplerObjectCache, MTLToolsDevice.sourceLibraryObjectCache, 

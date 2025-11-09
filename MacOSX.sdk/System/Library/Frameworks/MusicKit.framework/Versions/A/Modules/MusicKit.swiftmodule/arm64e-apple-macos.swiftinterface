@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name MusicKit
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name MusicKit
+// swift-module-flags-ignorable: -user-module-version 4019.500.27
 import Combine
 import CoreGraphics
 import Foundation
@@ -94,6 +95,109 @@ extension MusicKit.MusicItem where Self : MusicKit.MusicPropertyContainer, Self 
   public func with(_ properties: [MusicKit.PartialMusicAsyncProperty<Self>]) async throws -> Self
   #endif
 
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+public struct Curator : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable {
+  public let id: MusicKit.MusicItemID
+  public var artwork: MusicKit.Artwork? {
+    get
+  }
+  public var editorialNotes: MusicKit.EditorialNotes? {
+    get
+  }
+  public var kind: MusicKit.Curator.Kind {
+    get
+  }
+  public var name: Swift.String {
+    get
+  }
+  public var url: Foundation.URL? {
+    get
+  }
+  public var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
+    get
+  }
+  public static func == (a: MusicKit.Curator, b: MusicKit.Curator) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias ID = MusicKit.MusicItemID
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.Curator : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Curator, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Curator, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Curator, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.PartialMusicProperty where Root == MusicKit.Curator {
+  public static let playlists: MusicKit.MusicRelationshipProperty<MusicKit.Curator, MusicKit.Playlist>
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+public protocol CuratorFilter {
+  var id: MusicKit.MusicItemID { get }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.Curator : MusicKit.FilterableMusicItem {
+  public typealias FilterType = MusicKit.CuratorFilter
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.Curator : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.Curator : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.Curator {
+  public enum Kind : Swift.Codable, Swift.Equatable, Swift.Hashable {
+    case editorial
+    case external
+    public static func == (a: MusicKit.Curator.Kind, b: MusicKit.Curator.Kind) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public func encode(to encoder: Swift.Encoder) throws
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: Swift.Decoder) throws
+  }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol FilterableMusicItem : MusicKit.MusicItem {
@@ -243,6 +347,30 @@ public struct Station : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swi
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Station : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Station, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Station, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Station, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol StationFilter {
@@ -299,6 +427,30 @@ public struct RecordLabel : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable,
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.RecordLabel : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.RecordLabel, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.RecordLabel, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.RecordLabel, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol RecordLabelFilter {
@@ -368,6 +520,8 @@ public class PartialMusicAsyncProperty<Root> : MusicKit.PartialMusicProperty<Roo
 }
 @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public class MusicAttributeProperty<Root, Value> : MusicKit.PartialMusicProperty<Root>, Swift.CustomStringConvertible where Value : Swift.Decodable {
+  @usableFromInline
+  internal init(_ name: Swift.String)
   public var description: Swift.String {
     get
   }
@@ -375,6 +529,8 @@ public class MusicAttributeProperty<Root, Value> : MusicKit.PartialMusicProperty
 }
 @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public class MusicExtendedAttributeProperty<Root, Value> : MusicKit.PartialMusicAsyncProperty<Root>, Swift.CustomStringConvertible where Value : Swift.Decodable {
+  @usableFromInline
+  internal init(_ name: Swift.String)
   public var description: Swift.String {
     get
   }
@@ -382,10 +538,29 @@ public class MusicExtendedAttributeProperty<Root, Value> : MusicKit.PartialMusic
 }
 @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public class MusicRelationshipProperty<Root, RelatedMusicItemType> : MusicKit.PartialMusicAsyncProperty<Root>, Swift.CustomStringConvertible where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+  @usableFromInline
+  internal init(_ name: Swift.String, kind: MusicKit.MusicRelationshipPropertyKind = .model)
+  @usableFromInline
+  final internal let kind: MusicKit.MusicRelationshipPropertyKind
   public var description: Swift.String {
     get
   }
   @objc deinit
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@usableFromInline
+internal enum MusicRelationshipPropertyKind {
+  case model
+  case association
+  @usableFromInline
+  internal static func == (a: MusicKit.MusicRelationshipPropertyKind, b: MusicKit.MusicRelationshipPropertyKind) -> Swift.Bool
+  @usableFromInline
+  internal func hash(into hasher: inout Swift.Hasher)
+  @usableFromInline
+  internal var hashValue: Swift.Int {
+    @usableFromInline
+    get
+  }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol MusicPropertyContainer {
@@ -480,6 +655,94 @@ public typealias MusicTokenProvider = MusicKit.MusicUserTokenProvider & MusicKit
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.MusicDataRequest {
   public static var tokenProvider: MusicKit.MusicTokenProvider
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+public struct RadioShow : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable {
+  public let id: MusicKit.MusicItemID
+  public var artwork: MusicKit.Artwork? {
+    get
+  }
+  public var editorialNotes: MusicKit.EditorialNotes? {
+    get
+  }
+  public var hostName: Swift.String? {
+    get
+  }
+  public var name: Swift.String {
+    get
+  }
+  public var url: Foundation.URL? {
+    get
+  }
+  public var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
+    get
+  }
+  public static func == (a: MusicKit.RadioShow, b: MusicKit.RadioShow) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias ID = MusicKit.MusicItemID
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.RadioShow : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.RadioShow, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.RadioShow, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.RadioShow, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.PartialMusicProperty where Root == MusicKit.RadioShow {
+  public static let playlists: MusicKit.MusicRelationshipProperty<MusicKit.RadioShow, MusicKit.Playlist>
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+public protocol RadioShowFilter {
+  var id: MusicKit.MusicItemID { get }
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.RadioShow : MusicKit.FilterableMusicItem {
+  public typealias FilterType = MusicKit.RadioShowFilter
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.RadioShow : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.RadioShow : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.MusicSubscription {
@@ -686,6 +949,30 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Track : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Track, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Track, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Track, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Track : Swift.Codable {
@@ -736,7 +1023,16 @@ extension MusicKit.Artwork : Swift.CustomStringConvertible, Swift.CustomDebugStr
 public struct MusicCatalogSearchResponse : Swift.Equatable, Swift.Hashable {
   public let albums: MusicKit.MusicItemCollection<MusicKit.Album>
   public let artists: MusicKit.MusicItemCollection<MusicKit.Artist>
+  @available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+  @available(watchOS, unavailable)
+  public let curators: MusicKit.MusicItemCollection<MusicKit.Curator>
+  @available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+  @available(watchOS, unavailable)
+  public let musicVideos: MusicKit.MusicItemCollection<MusicKit.MusicVideo>
   public let playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>
+  @available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+  @available(watchOS, unavailable)
+  public let radioShows: MusicKit.MusicItemCollection<MusicKit.RadioShow>
   public let recordLabels: MusicKit.MusicItemCollection<MusicKit.RecordLabel>
   public let songs: MusicKit.MusicItemCollection<MusicKit.Song>
   public let stations: MusicKit.MusicItemCollection<MusicKit.Station>
@@ -878,7 +1174,7 @@ extension MusicKit.ApplicationMusicPlayer {
       public init()
       public static func == (left: MusicKit.ApplicationMusicPlayer.Queue.Entries, right: MusicKit.ApplicationMusicPlayer.Queue.Entries) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
-      __consuming public func makeIterator() -> MusicKit.ApplicationMusicPlayer.Queue.Entries.Iterator
+      public __consuming func makeIterator() -> MusicKit.ApplicationMusicPlayer.Queue.Entries.Iterator
       public typealias Element = MusicKit.MusicPlayer.Queue.Entry
       public typealias Iterator = Swift.Array<MusicKit.MusicPlayer.Queue.Entry>.Iterator
       public var startIndex: MusicKit.ApplicationMusicPlayer.Queue.Entries.Index {
@@ -1068,9 +1364,38 @@ public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, 
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.MusicVideo, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.MusicVideo, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.MusicVideo, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.MusicVideo {
+  @_alwaysEmitIntoClient public static var artistURL: MusicKit.MusicExtendedAttributeProperty<MusicKit.MusicVideo, Foundation.URL> {
+    get {
+        MusicExtendedAttributeProperty("artistUrl")
+    }
+  }
   public static let albums: MusicKit.MusicRelationshipProperty<MusicKit.MusicVideo, MusicKit.Album>
   public static let artists: MusicKit.MusicRelationshipProperty<MusicKit.MusicVideo, MusicKit.Artist>
   public static let genres: MusicKit.MusicRelationshipProperty<MusicKit.MusicVideo, MusicKit.Genre>
@@ -1119,6 +1444,30 @@ public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Genre : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Genre, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Genre, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Genre, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol GenreFilter {
@@ -1214,6 +1563,30 @@ public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Artist : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Artist, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Artist, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Artist, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Artist {
@@ -1307,6 +1680,30 @@ public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Sw
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Playlist : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Playlist, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Playlist, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Playlist {
@@ -1378,6 +1775,30 @@ extension MusicKit.MusicPlayer.Queue.Entry {
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.Entry.Item : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.MusicPlayer.Queue.Entry.Item, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.MusicPlayer.Queue.Entry.Item, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.MusicPlayer.Queue.Entry.Item, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, tvOS 15.0, *)
 @available(macOS, unavailable)
@@ -1421,8 +1842,20 @@ extension MusicKit.Album : MusicKit.MusicCatalogSearchable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Artist : MusicKit.MusicCatalogSearchable {
 }
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.Curator : MusicKit.MusicCatalogSearchable {
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.MusicVideo : MusicKit.MusicCatalogSearchable {
+}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Playlist : MusicKit.MusicCatalogSearchable {
+}
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension MusicKit.RadioShow : MusicKit.MusicCatalogSearchable {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.RecordLabel : MusicKit.MusicCatalogSearchable {
@@ -1585,9 +2018,38 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Song : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Song, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Song, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Song, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Song {
+  @_alwaysEmitIntoClient public static var artistURL: MusicKit.MusicExtendedAttributeProperty<MusicKit.Song, Foundation.URL> {
+    get {
+        MusicExtendedAttributeProperty("artistUrl")
+    }
+  }
   public static let albums: MusicKit.MusicRelationshipProperty<MusicKit.Song, MusicKit.Album>
   public static let artists: MusicKit.MusicRelationshipProperty<MusicKit.Song, MusicKit.Artist>
   public static let genres: MusicKit.MusicRelationshipProperty<MusicKit.Song, MusicKit.Genre>
@@ -1733,9 +2195,38 @@ public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.Album : MusicKit.MusicPropertyContainer {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Album, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Album, Value>) -> Value? where Value : Swift.Decodable {
+    get throws
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  @usableFromInline
+  internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Album, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
+    get throws
+  }
+  #endif
+
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Album {
+  @_alwaysEmitIntoClient public static var artistURL: MusicKit.MusicExtendedAttributeProperty<MusicKit.Album, Foundation.URL> {
+    get {
+        MusicExtendedAttributeProperty("artistUrl")
+    }
+  }
   public static let artists: MusicKit.MusicRelationshipProperty<MusicKit.Album, MusicKit.Artist>
   public static let genres: MusicKit.MusicRelationshipProperty<MusicKit.Album, MusicKit.Genre>
   public static let tracks: MusicKit.MusicRelationshipProperty<MusicKit.Album, MusicKit.Track>
@@ -1895,6 +2386,10 @@ extension MusicKit.MusicPlayer.ShuffleMode : Swift.Equatable {}
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.ShuffleMode : Swift.Hashable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension MusicKit.MusicRelationshipPropertyKind : Swift.Equatable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension MusicKit.MusicRelationshipPropertyKind : Swift.Hashable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension MusicKit.MusicSubscription.Error : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)

@@ -459,11 +459,11 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
 - (void)stopRunning;
 
 /*!
- @property masterClock
+ @property synchronizationClock
  @abstract
-    Provides the master clock being used for output synchronization.
+    Provides the clock being used for synchronization.
  @discussion
-    The masterClock is readonly. Use masterClock to synchronize AVCaptureOutput data with external data sources (e.g motion samples). All capture output sample buffer timestamps are on the masterClock timebase.
+    synchronizationClock is readonly. Use synchronizationClock to synchronize AVCaptureOutput data with external data sources (e.g motion samples). All capture output sample buffer timestamps are on the synchronizationClock timebase.
  
     For example, if you want to reverse synchronize the output timestamps to the original timestamps, you can do the following: In captureOutput:didOutputSampleBuffer:fromConnection:
  
@@ -471,11 +471,20 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
     CMClockRef originalClock = [port clock];
  
     CMTime syncedPTS = CMSampleBufferGetPresentationTime( sampleBuffer );
-    CMTime originalPTS = CMSyncConvertTime( syncedPTS, [session masterClock], originalClock );
+    CMTime originalPTS = CMSyncConvertTime( syncedPTS, [session synchronizationClock], originalClock );
  
     This property is key-value observable.
  */
-@property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef masterClock API_AVAILABLE(macos(10.9), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef synchronizationClock API_AVAILABLE(macos(12.3), ios(15.4), macCatalyst(15.4)) API_UNAVAILABLE(tvos);
+
+/*!
+ @property masterClock
+ @abstract
+    Provides the clock being used for synchronization.
+ @discussion
+    Deprecated. Please use synchronizationClock instead.
+ */
+@property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef masterClock API_DEPRECATED_WITH_REPLACEMENT("synchronizationClock", macos(10.9, 12.3), ios(7.0, 15.4), macCatalyst(14.0, 15.4)) API_UNAVAILABLE(tvos);
 
 @end
 

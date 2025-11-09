@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4AC70DFC-2E6F-34EE-A635-6F4E9875FEE3
+    value:           75AEB818-CC9D-3229-83E3-6694035FD9BC
   - target:          x86_64-maccatalyst
-    value:           4AC70DFC-2E6F-34EE-A635-6F4E9875FEE3
+    value:           75AEB818-CC9D-3229-83E3-6694035FD9BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E0605F9-B4BE-336D-A282-BDBDA55539F2
+    value:           826E6001-3C50-3F11-8D08-BC08AD4483B6
   - target:          arm64e-maccatalyst
-    value:           9E0605F9-B4BE-336D-A282-BDBDA55539F2
+    value:           826E6001-3C50-3F11-8D08-BC08AD4483B6
 install-name:    '/System/Library/PrivateFrameworks/SiriCore.framework/Versions/A/SiriCore'
 current-version: 0
 compatibility-version: 0

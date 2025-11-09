@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A391D963-EE82-3B2C-9028-14F5126F2E76
+    value:           54F1D22E-3F9B-3A00-98CF-37DBE331912F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC994940-9CEA-34D9-B9CF-4A1E27DFA6CA
+    value:           8520885F-E20B-33EB-A1AE-279D516467A4
 install-name:    '/System/Library/PrivateFrameworks/NotesShared.framework/Versions/A/NotesShared'
-current-version: 1974
+current-version: 1992
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -32,9 +32,11 @@ exports:
                        '_$s10Foundation4DateV11NotesSharedE014shortFormattedB0SSvpMV', 
                        '_$s10Foundation4DateV11NotesSharedE05localB11WithSecondsSSvg', 
                        '_$s10Foundation4DateV11NotesSharedE05localB11WithSecondsSSvpMV', 
+                       '_$s10Foundation4DateV11NotesSharedE10startOfDayACvg', '_$s10Foundation4DateV11NotesSharedE10startOfDayACvpMV', 
                        '_$s10Foundation4DateV11NotesSharedE11isYesterdaySbvg', '_$s10Foundation4DateV11NotesSharedE11isYesterdaySbvpMV', 
                        '_$s10Foundation4DateV11NotesSharedE4dateACSgSS_tcfC', '_$s10Foundation4DateV11NotesSharedE7isLater4thanSbAC_tF', 
                        '_$s10Foundation4DateV11NotesSharedE7isTodaySbvg', '_$s10Foundation4DateV11NotesSharedE7isTodaySbvpMV', 
+                       '_$s10Foundation4DateV11NotesSharedE8endOfDayACvg', '_$s10Foundation4DateV11NotesSharedE8endOfDayACvpMV', 
                        '_$s10Foundation4DateV11NotesSharedE9isEarlier4thanSbAC_tF', 
                        '_$s10Foundation4DateV11NotesSharedE9truncatedACvg', '_$s10Foundation4DateV11NotesSharedE9truncatedACvpMV', 
                        '_$s10Identifier11NotesShared17ICObjectProvidingPTl', '_$s11NotesShared0A10ServiceAPIO13PingOperationC12functionName7requestAESS_AA0E7RequestVSgtcfC', 
@@ -129,10 +131,39 @@ exports:
                        '_$s11NotesShared0A21ServiceAPIAsyncClientCMa', '_$s11NotesShared0A21ServiceAPIAsyncClientCMm', 
                        '_$s11NotesShared0A21ServiceAPIAsyncClientCMn', '_$s11NotesShared0A21ServiceAPIAsyncClientCN', 
                        '_$s11NotesShared0A21ServiceAPIAsyncClientCfD', '_$s11NotesShared0A21ServiceAPIAsyncClientCfd', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0O8rawValueAESgSi_tcfC', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0O8rawValueSivg', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0O8rawValueSivpMV', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0OMa', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0OMn', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0ON', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0OSEAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0OSHAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0OSQAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0OSYAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO017RelativeDateRangeD0OSeAAMc', 
                        '_$s11NotesShared11ICQueryTypeO11canBeEditedSbvg', '_$s11NotesShared11ICQueryTypeO11canBeEditedSbvpMV', 
                        '_$s11NotesShared11ICQueryTypeO13allowsDeletedSbvg', '_$s11NotesShared11ICQueryTypeO13allowsDeletedSbvpMV', 
                        '_$s11NotesShared11ICQueryTypeO14tagIdentifiersSaySSGvg', 
                        '_$s11NotesShared11ICQueryTypeO14tagIdentifiersSaySSGvpMV', 
+                       '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeV23__derived_struct_equalsySbAE_AEtFZ', 
+                       '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeV4fromAEs7Decoder_p_tKcfC', 
+                       '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeV6encode2toys7Encoder_p_tKF', 
+                       '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeVMa', '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeVMn', 
+                       '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeVN', '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeVSEAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeVSQAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO17RelativeDateRangeVSeAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitO8rawValueAESgSi_tcfC', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitO8rawValueSivg', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitO8rawValueSivpMV', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitOMa', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitOMn', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitON', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitOSEAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitOSHAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitOSQAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitOSYAAMc', 
+                       '_$s11NotesShared11ICQueryTypeO21RelativeDateRangeUnitOSeAAMc', 
                        '_$s11NotesShared11ICQueryTypeO21__derived_enum_equalsySbAC_ACtFZ', 
                        '_$s11NotesShared11ICQueryTypeO4fromACs7Decoder_p_tKcfC', 
                        '_$s11NotesShared11ICQueryTypeO6encode2toys7Encoder_p_tKF', 
@@ -827,18 +858,18 @@ exports:
                        _ICRTCServiceName, _ICServerChangeTokenEntityName, _ICShareRecordKeyRootRecord, 
                        _ICShareRecordKeyRootRecordType, _ICTestUnsupportedAttachmentsDefaultKey, 
                        _ICTestUnsupportedRecordsDefaultKey, _ICTransformFromImageOrientation, 
-                       _ICUserRecordKeyCryptoVerifier, _ICUserRecordKeyDidChooseToMigrate, 
-                       _ICUserRecordKeyDidFinishMigration, _ICUserRecordKeyDidMigrateOnMac, 
-                       _ICWidgetExtensionBundleIdentifier, _ICWidgetKindNote, _ICWidgetKindNotesFolder, 
-                       _ICWillAddAttachmentForNoteNotification, _NSReaderDelegateDocumentOption, 
-                       _NSStringFromICAppearanceType, _NSStringFromICImageClassOrientation, 
-                       _NotesSharedVersionNumber, _NotesSharedVersionString, _TTAttributeNameFont, 
-                       _TTAttributeNameFontHints, _TTAttributeNameForegroundColor, 
-                       _TTAttributeNameParagraphStyle, _TTAttributeNameReplicaID, 
-                       _TTAttributeNameStrikethrough, _TTAttributeNameSuperscript, 
-                       _TTAttributeNameTimestamp, _TTAttributeNameUnderline, _TTBoundedCheckedCastNSUIntegerToUInt32, 
-                       _TTMergeableUndoStringDidAddUndoNotification, _TTNSAttachmentAttributeName, 
-                       _TTNSLinkAttributeName, _TTNSParagraphStyleAttributeName, 
+                       _ICUserNotificationRegistrationCompleted, _ICUserRecordKeyCryptoVerifier, 
+                       _ICUserRecordKeyDidChooseToMigrate, _ICUserRecordKeyDidFinishMigration, 
+                       _ICUserRecordKeyDidMigrateOnMac, _ICWidgetExtensionBundleIdentifier, 
+                       _ICWidgetKindNote, _ICWidgetKindNotesFolder, _ICWillAddAttachmentForNoteNotification, 
+                       _NSReaderDelegateDocumentOption, _NSStringFromICAppearanceType, 
+                       _NSStringFromICImageClassOrientation, _NotesSharedVersionNumber, 
+                       _NotesSharedVersionString, _TTAttributeNameFont, _TTAttributeNameFontHints, 
+                       _TTAttributeNameForegroundColor, _TTAttributeNameParagraphStyle, 
+                       _TTAttributeNameReplicaID, _TTAttributeNameStrikethrough, 
+                       _TTAttributeNameSuperscript, _TTAttributeNameTimestamp, _TTAttributeNameUnderline, 
+                       _TTBoundedCheckedCastNSUIntegerToUInt32, _TTMergeableUndoStringDidAddUndoNotification, 
+                       _TTNSAttachmentAttributeName, _TTNSLinkAttributeName, _TTNSParagraphStyleAttributeName, 
                        _TTNSTextAlternativesAttributeName, _TTNSWritingDirectionAttributeName, 
                        _TTNamedStyleIsList, _TTParagraphStyleAlignmentDefault, _TTParagraphStyleAlignmentLeft, 
                        _TTParagraphStyleAlignmentRight, _TTPresentationAttributeNameApproxMaxItemNumber, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D5C965FC-F8D8-3CD2-BC29-128980CCCE29
+    value:           D06C1ECD-AA93-3658-A867-F7C6CC95E1E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D3CD910-E1D7-3537-A18E-066015BEA80C
+    value:           B1FE38D2-A996-3164-8554-9AC112CA9DFF
 install-name:    '/usr/lib/libAccountPolicyTranslation.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -20,9 +20,11 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos) __TVOS_
 + (void)endImpression:(SKAdImpression *)impression completionHandler:(nullable void (^)(NSError *__nullable error))completion NS_SWIFT_NAME(endImpression(_:completionHandler:)) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 // Participating apps should call this on launch to complete the install+open action associated with a product view
-+ (void)registerAppForAdNetworkAttribution API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
++ (void)registerAppForAdNetworkAttribution API_DEPRECATED("Use updatePostbackConversionValue:completionHandler: instead", ios(11.3, 15.4)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
-+ (void)updateConversionValue:(NSInteger)conversionValue API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
++ (void)updateConversionValue:(NSInteger)conversionValue API_DEPRECATED("Use updatePostbackConversionValue:completionHandler: instead", ios(14.0, 15.4)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+
++ (void)updatePostbackConversionValue:(NSInteger)conversionValue completionHandler:(nullable void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 @end
 

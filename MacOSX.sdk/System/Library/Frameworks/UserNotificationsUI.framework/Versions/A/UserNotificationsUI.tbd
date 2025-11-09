@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           876E773C-C7BA-3679-B45B-1A7F31215D9D
+    value:           B952D6AF-A826-3F55-B803-1614C42EA51D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           12FC3B69-1D2A-3B9F-B1F4-FD2A35D1B215
+    value:           783ACC77-F883-340F-ABB0-F2D98C05C7B3
 install-name:    '/System/Library/Frameworks/UserNotificationsUI.framework/Versions/A/UserNotificationsUI'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

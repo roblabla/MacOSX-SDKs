@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B4AB92EC-6CCC-30E2-8CD0-9282AC1FE97E
+    value:           D940EEE2-1CED-35A4-9470-CB7EE938E4BA
   - target:          x86_64-maccatalyst
-    value:           B4AB92EC-6CCC-30E2-8CD0-9282AC1FE97E
+    value:           D940EEE2-1CED-35A4-9470-CB7EE938E4BA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE2F720A-2FBF-3D6A-BB83-75CF64C77737
+    value:           C3C3FEE2-D88C-3C8E-A1D8-0F91B003E0AD
   - target:          arm64e-maccatalyst
-    value:           BE2F720A-2FBF-3D6A-BB83-75CF64C77737
+    value:           C3C3FEE2-D88C-3C8E-A1D8-0F91B003E0AD
 install-name:    '/usr/lib/swift/libswiftSystem.dylib'
-current-version: 19
+current-version: 21
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -58,6 +58,7 @@ exports:
                        '_$s6System14FileDescriptorV11OpenOptionsVs28CustomDebugStringConvertibleAAMc', 
                        '_$s6System14FileDescriptorV11OpenOptionsVs9OptionSetAAMc', 
                        '_$s6System14FileDescriptorV5_open__7options11permissions16retryOnInterrupts6ResultOyAcA5ErrnoVGSPys4Int8VG_AC10AccessModeVAC11OpenOptionsVAA0B11PermissionsVSgSbtFZ', 
+                       '_$s6System14FileDescriptorV5_pipes6ResultOyAC7readEnd_AC05writeG0tAA5ErrnoVGyFZ', 
                        '_$s6System14FileDescriptorV5_read18fromAbsoluteOffset4into16retryOnInterrupts6ResultOySiAA5ErrnoVGs5Int64V_SwSbtF', 
                        '_$s6System14FileDescriptorV5_read4into16retryOnInterrupts6ResultOySiAA5ErrnoVGSw_SbtKF', 
                        '_$s6System14FileDescriptorV5_seek6offset4froms6ResultOys5Int64VAA5ErrnoVGAJ_AC10SeekOriginVtF', 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B00AFB8E-BBB4-3B98-A79B-BE2478BFE490
+    value:           E7DB3D39-D0FA-3DEB-B7CA-7BF664D2AF37
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0AC26F09-B667-3D90-9725-5A39F3B73724
+    value:           4A5D3BF8-4E5C-320F-943A-59FC73E190B1
 install-name:    '/usr/lib/swift/libswiftVirtualization.dylib'
-current-version: 59.4
+current-version: 74.2
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

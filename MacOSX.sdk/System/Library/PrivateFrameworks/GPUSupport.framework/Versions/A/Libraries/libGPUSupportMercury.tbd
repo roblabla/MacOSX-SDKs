@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F63B09A9-5317-301C-9434-1034CAC8B3AE
+    value:           A6F41A87-A451-3CE7-9A3A-AB9282D1D1B3
   - target:          x86_64-maccatalyst
-    value:           F63B09A9-5317-301C-9434-1034CAC8B3AE
+    value:           A6F41A87-A451-3CE7-9A3A-AB9282D1D1B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2F5DDFF-64A5-3397-9D21-92F9509FE733
+    value:           A9A72A45-3F59-3837-9BE5-5FB6B1379088
   - target:          arm64e-maccatalyst
-    value:           A2F5DDFF-64A5-3397-9D21-92F9509FE733
+    value:           A9A72A45-3F59-3837-9BE5-5FB6B1379088
 install-name:    '/System/Library/PrivateFrameworks/GPUSupport.framework/Versions/A/Libraries/libGPUSupportMercury.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

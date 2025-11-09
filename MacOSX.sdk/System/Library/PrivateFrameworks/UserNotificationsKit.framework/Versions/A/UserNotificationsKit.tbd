@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C39756EA-6A85-3D13-BDB5-D5E406228BCA
+    value:           A20DDA99-E406-3BBE-AD94-F1EF9202EE68
   - target:          x86_64-maccatalyst
-    value:           C39756EA-6A85-3D13-BDB5-D5E406228BCA
+    value:           A20DDA99-E406-3BBE-AD94-F1EF9202EE68
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           098EDBBC-B0FE-3319-857B-A20FE29D27B6
+    value:           CE663D99-AB26-3F96-87D2-C93E937053A5
   - target:          arm64e-maccatalyst
-    value:           098EDBBC-B0FE-3319-857B-A20FE29D27B6
+    value:           CE663D99-AB26-3F96-87D2-C93E937053A5
 install-name:    '/System/Library/PrivateFrameworks/UserNotificationsKit.framework/Versions/A/UserNotificationsKit'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

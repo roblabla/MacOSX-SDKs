@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           50CBED62-EFE3-3259-A508-4E95DF55B380
+    value:           F13E3E17-5BED-3144-9FA3-BE55E16E2673
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E6D522FF-2456-3BD9-8CC6-C26D13541986
+    value:           FB2D1656-7A37-3B8A-8167-B2E9E022F5B3
 install-name:    '/System/Library/PrivateFrameworks/NotesUI.framework/Versions/A/NotesUI'
-current-version: 1974
+current-version: 1992
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -140,11 +140,11 @@ exports:
                        _TSUPatternColorFromGradient, _TTNSTextStorageWillProcessEditingNotification, 
                        _TTTextStorageDidProcessEndEditingNotification, ___ICAccessibilityStringForVariables, 
                        ___ICAccessibilityStringForVariablesSentinel, _kICDefaultChecklistParagraphSpacing, 
-                       _kICDefaultPaddingForList, _kICDefaultTodoButtonWidth, _kICLayoutManagerFadedLinkMultiplier, 
-                       _kICPasswordNumberOfAttemptsForHint, _kICSaveDelay, _kICSearchFieldTokenString, 
-                       _kICShowEditorDebugTooltips, _kICTTChangeInLengthNotificationKey, 
-                       _kICTTEditedMaskNotificationKey, _kICTTEditedRangeNotificationKey, 
-                       _kICTextViewDidMarkTextNotification, _kICTextViewDidUnmarkTextNotification ]
+                       _kICDefaultPaddingForList, _kICDefaultTodoButtonWidth, _kICPasswordNumberOfAttemptsForHint, 
+                       _kICSaveDelay, _kICSearchFieldTokenString, _kICShowEditorDebugTooltips, 
+                       _kICTTChangeInLengthNotificationKey, _kICTTEditedMaskNotificationKey, 
+                       _kICTTEditedRangeNotificationKey, _kICTextViewDidMarkTextNotification, 
+                       _kICTextViewDidUnmarkTextNotification ]
     objc-classes:    [ ICAbstractTextAttachment, ICAccessibility, ICAccessibilityCustomizableTextFieldCell, 
                        ICAddAttachmentsManager, ICAddAttachmentsManagerAttachmentInfo, 
                        ICAppGroupDefaultsController, ICArcLayer, ICAttachmentBrickAudioPlayerViewV2, 

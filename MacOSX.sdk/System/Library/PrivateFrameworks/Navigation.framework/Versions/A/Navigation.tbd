@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A404CB1-DE34-3B51-B531-33E7A8CA83D9
+    value:           768467E3-07B7-3765-9BE4-9E6326A6C767
   - target:          x86_64-maccatalyst
-    value:           5A404CB1-DE34-3B51-B531-33E7A8CA83D9
+    value:           768467E3-07B7-3765-9BE4-9E6326A6C767
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E84E60AA-9944-308E-A142-8F99B9144F73
+    value:           EA17FC7B-3530-3D86-82ED-5EEAA535EB77
   - target:          arm64e-maccatalyst
-    value:           E84E60AA-9944-308E-A142-8F99B9144F73
+    value:           EA17FC7B-3530-3D86-82ED-5EEAA535EB77
 install-name:    '/System/Library/PrivateFrameworks/Navigation.framework/Versions/A/Navigation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -28,7 +28,7 @@ exports:
                        _MNGetMNDirectionsRequestLog, _MNGetMNLocationProviderLog, 
                        _MNGetMNLocationTrackerLog, _MNGetMNNavigationDetailsLog, 
                        _MNGetMNNavigationStateManagerLog, _MNGetMNRouteAttributesLog, 
-                       _MNGetMNRouteStorageLog, _MNGetMNVirtualGarageManagerLog, 
+                       _MNGetMNRouteStorageLog, _MNGetMNTunnelProjectorLog, _MNGetMNVirtualGarageManagerLog, 
                        _MNGetMNXPCTransactionManagerLog, _MNGetProcessHandlingLog, 
                        _MNGetRouteWithID, _MNGuidanceEventFeedbackReadFrom, _MNHeadphonesAreInUse, 
                        _MNInstructionsCalculateDistanceUnits, _MNInstructionsCalculateScaledDistanceUnits, 
@@ -58,9 +58,9 @@ exports:
                        _MNLogFacilityTimeballRequester, _MNLogFacilityTimeballRoutingProvider, 
                        _MNLogFacilityTimeballServer, _MNLogFacilityTimeballService, 
                        _MNLogFacilityTimeballXPC, _MNLogFacilityTrace, _MNLogFacilityTransitUpdateRequest, 
-                       _MNLogFacilityTunnelProjector, _MNLogFacilityVehicleMonitor, 
-                       _MNLogFacilityXPC, _MNLogFacilityXPCTransactionCounter, _MNLogFacilityXPCTransactionManager, 
-                       _MNLoggingAudioSubsystem, _MNLoggingSubsystem, _MNMap, _MNNavigationServiceStateAsString, 
+                       _MNLogFacilityVehicleMonitor, _MNLogFacilityXPC, _MNLogFacilityXPCTransactionCounter, 
+                       _MNLogFacilityXPCTransactionManager, _MNLoggingAudioSubsystem, 
+                       _MNLoggingSubsystem, _MNMap, _MNNavigationServiceStateAsString, 
                        _MNNavigationServiceStateChangedFromNavigatingToStopped, _MNNavigationServiceStateChangedToNavigating, 
                        _MNNavigationServiceStateIsNavigating, _MNNavigationTypeForRouteInCountry, 
                        _MNProtocolDeclaresSelector, _MNRouteCoordinateReadFrom, _MNRouteRequestOptionsAsString, 
@@ -85,8 +85,8 @@ exports:
                        _NavigationConfig_LPRBoundingRegionRadius, _NavigationConfig_LPRDebugKeysResetAfter_DEBUG, 
                        _NavigationConfig_LPRMaskPlateFailureCode_DEBUG, _NavigationConfig_LPRMaskingRulesDateOverride, 
                        _NavigationConfig_LPRProvideBadVersion_DEBUG, _NavigationConfig_LeechingThrottleTimeout, 
-                       _NavigationConfig_LocationOverdueTimeoutForNotTunnel, _NavigationConfig_LocationOverdueTimeoutForTunnel, 
-                       _NavigationConfig_LocationOverdueTimeoutForUnknown, _NavigationConfig_LogRoutes_RoutePreview_AlternateRoutes, 
+                       _NavigationConfig_LocationOverdueTimeoutForTunnel, _NavigationConfig_LocationProjectionTimeSeconds, 
+                       _NavigationConfig_LogRoutes_RoutePreview_AlternateRoutes, 
                        _NavigationConfig_LogRoutes_RoutePreview_MainRoute, _NavigationConfig_MNAudioHardwareEngine_ChangedToAlertsOnly, 
                        _NavigationConfig_MapLocalizeLabels, _NavigationConfig_MinLocationAccuracyForPreArrivalReroute, 
                        _NavigationConfig_MinimumDistanceBetweenReroutes, _NavigationConfig_MinimumTimeBetweenReroutes, 

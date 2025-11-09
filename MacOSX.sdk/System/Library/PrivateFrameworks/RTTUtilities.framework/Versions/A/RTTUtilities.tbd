@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4FFEF321-A3A8-3A12-BB30-C9E8EC243742
+    value:           ADCDF4C8-43B0-360E-A578-AC544159B8E0
   - target:          x86_64-maccatalyst
-    value:           4FFEF321-A3A8-3A12-BB30-C9E8EC243742
+    value:           ADCDF4C8-43B0-360E-A578-AC544159B8E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A81D601-89E5-3A39-B6C5-E3714C229393
+    value:           C487DCE5-F5B4-3A73-928C-9612C98814A3
   - target:          arm64e-maccatalyst
-    value:           4A81D601-89E5-3A39-B6C5-E3714C229393
+    value:           C487DCE5-F5B4-3A73-928C-9612C98814A3
 install-name:    '/System/Library/PrivateFrameworks/RTTUtilities.framework/Versions/A/RTTUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -33,10 +33,10 @@ exports:
                        _RTTServiceUpdateTypeIncomingHold, _RTTServiceUpdateTypeMuted, 
                        _RTTServiceUpdateTypeRemoteInterrupt, _RTTServiceUpdateTypeUnmuted, 
                        _RTTUtilitiesVersionNumber, _RTTUtilitiesVersionString, _accessibilityRTTUtilitiesBundle, 
-                       _kAXSRTTSettingsVersionPreference, _kAXSTTYHardwareEnabledPreference, 
-                       _kAXSTTYIncomingCallsTTYPreference, _kAXSTTYPreferredRelayNumberPreference, 
-                       _kAXSTTYShouldBeRealtimePreference, _kAXSTTYSoftwareEnabledPreference, 
-                       _ttyLocString, _ttyLocStringAndLocale ]
+                       _kAXSRTTSettingsVersionPreference, _kAXSRTTShowsNotificationsPreference, 
+                       _kAXSTTYHardwareEnabledPreference, _kAXSTTYIncomingCallsTTYPreference, 
+                       _kAXSTTYPreferredRelayNumberPreference, _kAXSTTYShouldBeRealtimePreference, 
+                       _kAXSTTYSoftwareEnabledPreference, _ttyLocString, _ttyLocStringAndLocale ]
     objc-classes:    [ AXRTTSettingsListenerHelper, AXTTYSimulatorSubscriptionContext, 
                        RTTCall, RTTController, RTTConversation, RTTDatabaseManager, 
                        RTTDictionaryManager, RTTNanoSettings, RTTRemoteCall, RTTServer, 

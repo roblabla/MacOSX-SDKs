@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9A8F4473-754D-33DC-9C81-0FC43CA81E08
+    value:           EFA4DE4F-811C-39AE-93E3-34C80F0FC52B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           477A194A-669B-3EC3-BCD0-FB446732D087
+    value:           036AB30D-F734-373F-9239-40DBB2688B92
 install-name:    '/System/Library/PrivateFrameworks/IMAP.framework/Versions/A/IMAP'
 current-version: 3662
 allowable-clients:

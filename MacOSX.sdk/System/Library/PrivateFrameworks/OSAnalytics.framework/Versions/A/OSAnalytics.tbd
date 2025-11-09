@@ -4,23 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
+    value:           DBD68739-D373-3501-A7B3-B66A50B73B81
   - target:          x86_64-maccatalyst
-    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
+    value:           DBD68739-D373-3501-A7B3-B66A50B73B81
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19F84EC7-6918-3A3E-865C-836650829DB3
+    value:           F87F7C23-9C38-3FAE-BEC7-D14733532B5C
   - target:          arm64e-maccatalyst
-    value:           19F84EC7-6918-3A3E-865C-836650829DB3
+    value:           F87F7C23-9C38-3FAE-BEC7-D14733532B5C
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _OSADateFormat, _OSAIsDebugEnabledForRSD, _OSAIsRSDDevice, 
-                       _OSAIsRSDHost, _OSANSDateFormat, _OSASafeMoveItem, _OSASafeMoveItemAtURL, 
+                       _OSAIsRSDDisplay, _OSAIsRSDHost, _OSANSDateFormat, _OSARTCIsProcessOfInterest, 
+                       _OSASafeCreateDirectory, _OSASafeMoveItem, _OSASafeMoveItemAtURL, 
                        _OSASafeOpen, _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, 
                        _OSASafeRemoveFile, _OSASafeRemoveFileAtURL, _OSASanitizeOptionHomeDirectory, 
                        _OSASanitizeOptionKeepFilename, _OSASanitizeOptionMountedVolume, 
@@ -63,8 +64,9 @@ exports:
     objc-classes:    [ AWDClientHelpers, KCContainer, OSABinaryImageCatalog, OSABinaryImageSegment, 
                        OSABridgeLinkProxy, OSACrackShotReport, OSAGPUEventReport, 
                        OSAJetsamReport, OSALegacyXform, OSALog, OSALogCounterObject, 
-                       OSAProxyConfiguration, OSAReport, OSAStackShotReport, OSASymbolInfo, 
-                       OSASystemConfiguration, OSATasking ]
+                       OSAProxyConfiguration, OSAReport, OSASafeCreateDirectoryOptions, 
+                       OSAStackShotReport, OSASymbolInfo, OSASystemConfiguration, 
+                       OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 
                        OSABinaryImageCatalog._kernel_segments, OSABinaryImageCatalog._kernel_text_exec_segments, 
                        OSABinaryImageCatalog._notes, OSABinaryImageCatalog._rootedCacheLibs, 

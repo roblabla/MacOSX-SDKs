@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DEA962F7-D732-3EEC-AD37-5814A6A93709
+    value:           AC0B182A-F6E8-326B-A3B8-41345327DD4A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           83892A7B-7E03-3EF6-92C2-95FCB2AC817D
+    value:           706BAF24-BD94-3036-9419-580F406BB218
 install-name:    '/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 181.5.6
+current-version: 181.16
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

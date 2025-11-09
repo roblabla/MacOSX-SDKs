@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           40F12A6F-C212-3FC1-93C8-99502CEAB73A
+    value:           0F52D47A-B4C6-3DE9-85E9-DEF4C27AD1F9
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           FCF7E3F3-4B42-30A4-9231-6AA08772005C
+    value:           6C17439C-5C4A-37A6-AD5E-CE0B22525D0D
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SpriteKit.framework/Versions/A/SpriteKit'
 current-version: 47.2
 exports:

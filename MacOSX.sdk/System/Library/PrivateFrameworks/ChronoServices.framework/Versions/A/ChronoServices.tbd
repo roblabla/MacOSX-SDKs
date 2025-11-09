@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DBD9F5E8-D04F-313D-A301-D5C3242686CF
+    value:           73ED00FB-5302-3E45-B5C7-FC532DA5FE7C
   - target:          x86_64-maccatalyst
-    value:           DBD9F5E8-D04F-313D-A301-D5C3242686CF
+    value:           73ED00FB-5302-3E45-B5C7-FC532DA5FE7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EF78E4FE-C8B6-3190-82CE-643F4C266109
+    value:           744B487E-F333-3B80-A0AE-1C3B7048D6C5
   - target:          arm64e-maccatalyst
-    value:           EF78E4FE-C8B6-3190-82CE-643F4C266109
+    value:           744B487E-F333-3B80-A0AE-1C3B7048D6C5
 install-name:    '/System/Library/PrivateFrameworks/ChronoServices.framework/Versions/A/ChronoServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -23,9 +23,10 @@ exports:
                        _CHSChronoServicesStartupNotification, _CHSColorSchemeDescription, 
                        _CHSDescriptionForAvocadoSizeClass, _CHSDescriptionForAvocadoSizeClassMask, 
                        _CHSDescriptionForWidgetVisibility, _CHSErrorDomain, _CHSFlushPowerlog, 
-                       _CHSIsWidgetExtensionPoint, _CHSLogChronoServices, _CHSNSURLSessiondServiceInfoKeyIsHighPriority, 
-                       _CHSNSURLSessiondServiceInfoKeySessionIdentifier, _CHSWidgetEnvironmentDataForBundleIdentifier, 
-                       _CHSWidgetFamilyDescription, _CHSWidgetFamilyFromString, _CHSWidgetFamilyMaskContainsFamily, 
+                       _CHSIsWidgetExtensionPoint, _CHSLogChronoServices, _CHSLogClientSnapshots, 
+                       _CHSNSURLSessiondServiceInfoKeyIsHighPriority, _CHSNSURLSessiondServiceInfoKeySessionIdentifier, 
+                       _CHSWidgetEnvironmentDataForBundleIdentifier, _CHSWidgetFamilyDescription, 
+                       _CHSWidgetFamilyFromString, _CHSWidgetFamilyMaskContainsFamily, 
                        _CHSWidgetFamilyMaskDescription, _CHSWidgetFamilyMaskEnumerateFamilies, 
                        _CHSWidgetFamilyMaskFromWidgetFamily, _CHSWidgetLocationDescription, 
                        _CHSWidgetTextSizeAdjustmentDescription, _CHSWidgetVisibilityKey, 

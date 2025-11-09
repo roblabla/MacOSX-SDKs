@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9E1A3552-44C7-3DDF-9198-6CAD7F586DB3
+    value:           7712EABF-9576-3E96-B6D2-B552051288E2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54355483-614B-39B4-8F34-A3F0C72187F5
+    value:           E6183B9D-EA5B-39E7-8052-7A749C372344
 install-name:    '/System/Library/PrivateFrameworks/RealityIO.framework/Versions/A/RealityIO'
 swift-abi-version: 7
 exports:
@@ -453,28 +453,14 @@ exports:
                        '_$s9RealityIO16ToolsFoundationsO5TokenVs43ExpressibleByExtendedGraphemeClusterLiteralAAMc', 
                        '_$s9RealityIO16ToolsFoundationsO5TokenVyAESScfC', '_$s9RealityIO16ToolsFoundationsOMa', 
                        '_$s9RealityIO16ToolsFoundationsOMn', '_$s9RealityIO16ToolsFoundationsON', 
-                       '_$s9RealityIO16USDImportServiceC0A10FoundationAbAMc', '_$s9RealityIO16USDImportServiceC14loadModelAsync10contentsOf8withName21generateDecimatedMesh7fulfilly10Foundation3URLV_SSSgSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTj', 
-                       '_$s9RealityIO16USDImportServiceC14loadModelAsync10contentsOf8withName21generateDecimatedMesh7fulfilly10Foundation3URLV_SSSgSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTq', 
-                       '_$s9RealityIO16USDImportServiceC14loadModelAsync5named2in21generateDecimatedMesh7fulfillySS_So8NSBundleCSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTj', 
-                       '_$s9RealityIO16USDImportServiceC14loadModelAsync5named2in21generateDecimatedMesh7fulfillySS_So8NSBundleCSbys6ResultOy0A3Kit0F6EntityCs5Error_pGctFTq', 
-                       '_$s9RealityIO16USDImportServiceC4load10contentsOf8withName0A3Kit6EntityC10Foundation3URLV_SSSgtFTj', 
-                       '_$s9RealityIO16USDImportServiceC4load10contentsOf8withName0A3Kit6EntityC10Foundation3URLV_SSSgtFTq', 
-                       '_$s9RealityIO16USDImportServiceC4load4with0A3Kit6EntityCSDySSypG_tKFTj', 
+                       '_$s9RealityIO16USDImportServiceC0A10FoundationAbAMc', '_$s9RealityIO16USDImportServiceC4load4with0A3Kit6EntityCSDySSypG_tKFTj', 
                        '_$s9RealityIO16USDImportServiceC4load4with0A3Kit6EntityCSDySSypG_tKFTq', 
                        '_$s9RealityIO16USDImportServiceC7canLoad10contentsOfSb10Foundation3URLV_tFTj', 
                        '_$s9RealityIO16USDImportServiceC7canLoad10contentsOfSb10Foundation3URLV_tFTq', 
                        '_$s9RealityIO16USDImportServiceC7canLoad5named2inSbSS_So8NSBundleCtFTj', 
                        '_$s9RealityIO16USDImportServiceC7canLoad5named2inSbSS_So8NSBundleCtFTq', 
-                       '_$s9RealityIO16USDImportServiceC9loadAsync10contentsOf8withName21generateDecimatedMesh7fulfill8postLoady10Foundation3URLV_SSSgSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAR_Say0aQ016USDImportedSceneVGtKcSgtFTj', 
-                       '_$s9RealityIO16USDImportServiceC9loadAsync10contentsOf8withName21generateDecimatedMesh7fulfill8postLoady10Foundation3URLV_SSSgSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAR_Say0aQ016USDImportedSceneVGtKcSgtFTq', 
                        '_$s9RealityIO16USDImportServiceC9loadAsync4withySDySSypG_tKFTj', 
                        '_$s9RealityIO16USDImportServiceC9loadAsync4withySDySSypG_tKFTq', 
-                       '_$s9RealityIO16USDImportServiceC9loadAsync5named2in21generateDecimatedMesh7fulfill8postLoadySS_So8NSBundleCSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAP_Say0A10Foundation16USDImportedSceneVGtKcSgtFTj', 
-                       '_$s9RealityIO16USDImportServiceC9loadAsync5named2in21generateDecimatedMesh7fulfill8postLoadySS_So8NSBundleCSbys6ResultOy0A3Kit6EntityCs5Error_pGcyAP_Say0A10Foundation16USDImportedSceneVGtKcSgtFTq', 
-                       '_$s9RealityIO16USDImportServiceC9loadModel10contentsOf8withName0A3Kit0F6EntityC10Foundation3URLV_SSSgtKFTj', 
-                       '_$s9RealityIO16USDImportServiceC9loadModel10contentsOf8withName0A3Kit0F6EntityC10Foundation3URLV_SSSgtKFTq', 
-                       '_$s9RealityIO16USDImportServiceC9loadModel5named2in0A3Kit0F6EntityCSS_So8NSBundleCtKFTj', 
-                       '_$s9RealityIO16USDImportServiceC9loadModel5named2in0A3Kit0F6EntityCSS_So8NSBundleCtKFTq', 
                        '_$s9RealityIO16USDImportServiceCACycfC', '_$s9RealityIO16USDImportServiceCACycfCTj', 
                        '_$s9RealityIO16USDImportServiceCACycfCTq', '_$s9RealityIO16USDImportServiceCACycfc', 
                        '_$s9RealityIO16USDImportServiceCMa', '_$s9RealityIO16USDImportServiceCMm', 
@@ -1291,8 +1277,11 @@ exports:
                        '_$s9RealityIO4PrimCMo', '_$s9RealityIO4PrimCN', '_$s9RealityIO4PrimCfD', 
                        '_$s9RealityIO4PrimCfd', '_$s9RealityIO5GprimMp', '_$s9RealityIO5GprimPAA9BoundableTb', 
                        '_$s9RealityIO5GprimTL', '_$s9RealityIO5ScopeMp', '_$s9RealityIO5ScopePAA9ImageableTb', 
-                       '_$s9RealityIO5ScopeTL', '_$s9RealityIO5StageC10editTargetAA04EditE0VyF', 
-                       '_$s9RealityIO5StageC10removePrim2atSbAA27SceneDescriptionFoundationsO4PathV_tF', 
+                       '_$s9RealityIO5ScopeTL', '_$s9RealityIO5StageC10contentsOfACSg10Foundation3URLV_tcfC', 
+                       '_$s9RealityIO5StageC10contentsOfACSg10Foundation3URLV_tcfCTj', 
+                       '_$s9RealityIO5StageC10contentsOfACSg10Foundation3URLV_tcfCTq', 
+                       '_$s9RealityIO5StageC10contentsOfACSg10Foundation3URLV_tcfc', 
+                       '_$s9RealityIO5StageC10editTargetAA04EditE0VyF', '_$s9RealityIO5StageC10removePrim2atSbAA27SceneDescriptionFoundationsO4PathV_tF', 
                        '_$s9RealityIO5StageC10usedLayersSayAA27SceneDescriptionFoundationsO5LayerCGyF', 
                        '_$s9RealityIO5StageC11defaultPrimAA0E0CvM', '_$s9RealityIO5StageC11defaultPrimAA0E0Cvg', 
                        '_$s9RealityIO5StageC11defaultPrimAA0E0CvpMV', '_$s9RealityIO5StageC11defaultPrimAA0E0Cvs', 
@@ -1300,9 +1289,12 @@ exports:
                        '_$s9RealityIO5StageC11setBehavior_2at7mappingAA4PrimC0A3Kit34__RKEntityInteractionSpecificationV_SSSDy10Foundation4UUIDVAHGtKF', 
                        '_$s9RealityIO5StageC12addReference10identifier2at4froms6ResultOyAA4PrimCAC5ErrorOGSS_AA27SceneDescriptionFoundationsO4PathVSgARtF', 
                        '_$s9RealityIO5StageC12addReference2of2at4froms6ResultOyAA4PrimCAC5ErrorOG10Foundation3URLV_AA27SceneDescriptionFoundationsO4PathVSgAUtF', 
+                       '_$s9RealityIO5StageC12withFilePathACSgSS_tcfC', '_$s9RealityIO5StageC12withFilePathACSgSS_tcfCTj', 
+                       '_$s9RealityIO5StageC12withFilePathACSgSS_tcfCTq', '_$s9RealityIO5StageC12withFilePathACSgSS_tcfc', 
                        '_$s9RealityIO5StageC13setEditTarget2onyAA27SceneDescriptionFoundationsO5LayerC_tKF', 
                        '_$s9RealityIO5StageC13setEditTarget2toyAA0eF0V_tF', '_$s9RealityIO5StageC14makeParentPrim4from8baseNameAA27SceneDescriptionFoundationsO4PathVAJ_SStKF', 
-                       '_$s9RealityIO5StageC14pseudoRootPrimAA0F0CyF', '_$s9RealityIO5StageC15preliminaryText2atAA011PreliminaryE4PrimCAA27SceneDescriptionFoundationsO4PathV_tF', 
+                       '_$s9RealityIO5StageC14pseudoRootPrimAA0F0CyF', '_$s9RealityIO5StageC15isSupportedFileySb10Foundation3URLVFZ', 
+                       '_$s9RealityIO5StageC15preliminaryText2atAA011PreliminaryE4PrimCAA27SceneDescriptionFoundationsO4PathV_tF', 
                        '_$s9RealityIO5StageC16debugDescriptionSSvg', '_$s9RealityIO5StageC16debugDescriptionSSvpMV', 
                        '_$s9RealityIO5StageC16generatePrimPath3forAA27SceneDescriptionFoundationsO0F0VSS_tF', 
                        '_$s9RealityIO5StageC18customLayerDataKeyxSgAA16ToolsFoundationsO5TokenV_tcAA10UsdVtValueRzluiM', 
@@ -1329,6 +1321,8 @@ exports:
                        '_$s9RealityIO5StageC8cylinder2atAA12CylinderPrimCAA27SceneDescriptionFoundationsO4PathV_tF', 
                        '_$s9RealityIO5StageC8toStringSSyF', '_$s9RealityIO5StageC9classPrim2atAA0E0CAA27SceneDescriptionFoundationsO4PathV_tF', 
                        '_$s9RealityIO5StageC9rootLayerAA27SceneDescriptionFoundationsO0E0CyF', 
+                       '_$s9RealityIO5StageCACycfC', '_$s9RealityIO5StageCACycfCTj', 
+                       '_$s9RealityIO5StageCACycfCTq', '_$s9RealityIO5StageCACycfc', 
                        '_$s9RealityIO5StageCMa', '_$s9RealityIO5StageCMm', '_$s9RealityIO5StageCMn', 
                        '_$s9RealityIO5StageCMo', '_$s9RealityIO5StageCMu', '_$s9RealityIO5StageCN', 
                        '_$s9RealityIO5StageCfD', '_$s9RealityIO5StageCfd', '_$s9RealityIO5StageCs23CustomStringConvertibleAAMc', 

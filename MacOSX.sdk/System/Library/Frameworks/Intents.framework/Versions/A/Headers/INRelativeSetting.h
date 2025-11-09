@@ -2,7 +2,7 @@
 //  INRelativeSetting.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #ifndef INRelativeSetting_h

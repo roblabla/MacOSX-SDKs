@@ -19,3 +19,5 @@
 #define FILEPROVIDER_API_AVAILABILITY_V3_1 API_AVAILABLE(macos(11.3)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macCatalyst)
 // macOS API with second revision of FPFS
 #define FILEPROVIDER_API_AVAILABILITY_V4_0 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macCatalyst)
+// macOS API with third revision of FPFS
+#define FILEPROVIDER_API_AVAILABILITY_V4_1 API_AVAILABLE(macos(12.3)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macCatalyst)

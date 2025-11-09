@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6A38AFEE-5CF7-3585-B1AB-75EDE7621FED
+    value:           70A87157-B8D9-38DC-BCB9-0F981924D3B0
   - target:          x86_64-maccatalyst
-    value:           6A38AFEE-5CF7-3585-B1AB-75EDE7621FED
+    value:           70A87157-B8D9-38DC-BCB9-0F981924D3B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C419D605-4619-3C84-8B3C-FF3DFA9D6615
+    value:           0DC9CA43-3709-39C4-A0D3-66FEC020E8DD
   - target:          arm64e-maccatalyst
-    value:           C419D605-4619-3C84-8B3C-FF3DFA9D6615
+    value:           0DC9CA43-3709-39C4-A0D3-66FEC020E8DD
 install-name:    '/System/Library/PrivateFrameworks/AppleSRP.framework/Versions/A/AppleSRP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -38,6 +38,6 @@ exports:
                        _cstr_append, _cstr_append_str, _cstr_appendn, _cstr_clear_free, 
                        _cstr_copy, _cstr_create, _cstr_createn, _cstr_dup, _cstr_dup_alloc, 
                        _cstr_empty, _cstr_free, _cstr_new, _cstr_new_alloc, _cstr_set, 
-                       _cstr_set_allocator, _cstr_set_length, _cstr_setn, _cstr_use, 
-                       _t_cstrfromb64, _t_random, _t_sessionkey, _t_tob64cstr, _t_tohex ]
+                       _cstr_set_length, _cstr_setn, _cstr_use, _t_cstrfromb64, _t_random, 
+                       _t_sessionkey, _t_tob64cstr, _t_tohex ]
 ...

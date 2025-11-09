@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA7B493B-6FC9-365B-A85B-1301435F3705
+    value:           0BD48174-5F35-3010-A126-B8CBC8008C8A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D64B6BAB-7347-36E6-B9B7-1D08470A99C1
+    value:           08E9F066-199E-3BCA-A238-AC47A1C3128F
 install-name:    '/System/Library/PrivateFrameworks/SystemWake.framework/Versions/A/SystemWake'
 current-version: 0
 exports:

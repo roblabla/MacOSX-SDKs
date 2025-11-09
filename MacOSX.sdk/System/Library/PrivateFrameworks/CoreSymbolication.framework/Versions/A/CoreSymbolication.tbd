@@ -4,38 +4,40 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1DD60F8-77F2-35C5-9944-391209A6A93E
+    value:           D5B247E9-5B7C-3FDE-B88C-85D207A879C8
   - target:          x86_64-maccatalyst
-    value:           A1DD60F8-77F2-35C5-9944-391209A6A93E
+    value:           D5B247E9-5B7C-3FDE-B88C-85D207A879C8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           61C14F3F-E0B2-3EDF-AEDE-7D4FC077B1C2
+    value:           8E43DB32-A5FD-34FE-A22B-9B5F671ECDA5
   - target:          arm64e-maccatalyst
-    value:           61C14F3F-E0B2-3EDF-AEDE-7D4FC077B1C2
+    value:           8E43DB32-A5FD-34FE-A22B-9B5F671ECDA5
 install-name:    '/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication'
-current-version: 64550.88.2
+current-version: 64552.31
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CSAddressSetAdd, _CSAddressSetCreate, _CSArchitectureGetArchitectureForName, 
-                       _CSArchitectureGetCurrent, _CSArchitectureGetFamily, _CSArchitectureGetFamilyName, 
-                       _CSArchitectureIs32Bit, _CSArchitectureIs64Bit, _CSArchitectureIsArm, 
-                       _CSArchitectureIsArm64, _CSArchitectureIsBigEndian, _CSArchitectureIsI386, 
-                       _CSArchitectureIsLittleEndian, _CSArchitectureIsX86_64, _CSArchitectureMatchesArchitecture, 
+    symbols:         [ _CSAddressSetAdd, _CSAddressSetAddRange, _CSAddressSetCreate, 
+                       _CSArchitectureGetArchitectureForName, _CSArchitectureGetCurrent, 
+                       _CSArchitectureGetFamily, _CSArchitectureGetFamilyName, _CSArchitectureIs32Bit, 
+                       _CSArchitectureIs64Bit, _CSArchitectureIsArm, _CSArchitectureIsArm64, 
+                       _CSArchitectureIsBigEndian, _CSArchitectureIsI386, _CSArchitectureIsLittleEndian, 
+                       _CSArchitectureIsX86_64, _CSArchitectureMatchesArchitecture, 
                        _CSCopyDescription, _CSCopyDescriptionWithIndent, _CSCppAddMmapArchivesFromSymbolicatorToDirectory, 
                        _CSCppAddMmapArchivesToDirectory, _CSCppConvertLegacyPreVersion5ArchiveToModernCopy, 
-                       _CSCppConvertLegacyPreVersion6ArchiveToModernCopy, _CSCppConvertModernArchiveToLegacyPreVersion6Copy, 
-                       _CSCppConvertSymbolOwnerLegacyPreVersion5ArchiveToModernCopy, 
+                       _CSCppConvertLegacyPreVersion6ArchiveToModernCopy, _CSCppConvertLegacyPreVersion7ArchiveToModernCopy, 
+                       _CSCppConvertModernArchiveToLegacyPreVersion6Copy, _CSCppConvertSymbolOwnerLegacyPreVersion5ArchiveToModernCopy, 
                        _CSCppConvertSymbolOwnerLegacyPreVersion6ArchiveToModernCopy, 
                        _CSCppConvertSymbolOwnerModernArchiveToLegacyPreVersion6Copy, 
                        _CSCppExtractMMapArchiveFromSymbolOwner, _CSCppExtractTRawSymbolOwnerDataFromSymbolOwner, 
                        _CSCppPopulateCachesWithMmapArchives, _CSCppPopulateCachesWithMmapArchivesAndGroupKey, 
                        _CSDemangleSymbolName, _CSEqual, _CSExceptionSafeThreadRunBlock, 
-                       _CSGetDebugLoggingLevel, _CSGetForceSafeMachVMReads, _CSGetRetainCount, 
-                       _CSIsNull, _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
+                       _CSExceptionSafeThreadSetRecoveryBlock, _CSGetDebugLoggingLevel, 
+                       _CSGetForceSafeMachVMReads, _CSGetRetainCount, _CSIsNull, 
+                       _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
                        _CSMMapArchiveCacheSetShouldStoreToDaemon, _CSPlatformForTask, 
                        _CSRangeContainsRange, _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
                        _CSRegionForeachSourceInfo, _CSRegionForeachSymbol, _CSRegionGetName, 
@@ -68,16 +70,16 @@ exports:
                        _CSSymbolOwnerCacheSetMemoryLimit, _CSSymbolOwnerCopyDescriptionWithIndent, 
                        _CSSymbolOwnerCreateSignature, _CSSymbolOwnerCreateSignatureWithSlide, 
                        _CSSymbolOwnerCreateSparseDataWithBlock, _CSSymbolOwnerCreateSparseSignature, 
-                       _CSSymbolOwnerEditRelocations, _CSSymbolOwnerForEachStackFrameAtAddress, 
-                       _CSSymbolOwnerForeachRegion, _CSSymbolOwnerForeachRegionWithName, 
-                       _CSSymbolOwnerForeachSection, _CSSymbolOwnerForeachSegment, 
-                       _CSSymbolOwnerForeachSourceInfo, _CSSymbolOwnerForeachSymbol, 
-                       _CSSymbolOwnerForeachSymbolWithMangledName, _CSSymbolOwnerForeachSymbolWithName, 
-                       _CSSymbolOwnerGetArchitecture, _CSSymbolOwnerGetBaseAddress, 
-                       _CSSymbolOwnerGetCFUUIDBytes, _CSSymbolOwnerGetCompatibilityVersion, 
-                       _CSSymbolOwnerGetCurrentVersion, _CSSymbolOwnerGetDataFlags, 
-                       _CSSymbolOwnerGetDataTypeID, _CSSymbolOwnerGetDsymPath, _CSSymbolOwnerGetDsymVersion, 
-                       _CSSymbolOwnerGetFlags, _CSSymbolOwnerGetLastModifiedTimestamp, 
+                       _CSSymbolOwnerCreateSparseSignatureWithFlags, _CSSymbolOwnerEditRelocations, 
+                       _CSSymbolOwnerForEachStackFrameAtAddress, _CSSymbolOwnerForeachRegion, 
+                       _CSSymbolOwnerForeachRegionWithName, _CSSymbolOwnerForeachSection, 
+                       _CSSymbolOwnerForeachSegment, _CSSymbolOwnerForeachSourceInfo, 
+                       _CSSymbolOwnerForeachSymbol, _CSSymbolOwnerForeachSymbolWithMangledName, 
+                       _CSSymbolOwnerForeachSymbolWithName, _CSSymbolOwnerGetArchitecture, 
+                       _CSSymbolOwnerGetBaseAddress, _CSSymbolOwnerGetCFUUIDBytes, 
+                       _CSSymbolOwnerGetCompatibilityVersion, _CSSymbolOwnerGetCurrentVersion, 
+                       _CSSymbolOwnerGetDataFlags, _CSSymbolOwnerGetDataTypeID, _CSSymbolOwnerGetDsymPath, 
+                       _CSSymbolOwnerGetDsymVersion, _CSSymbolOwnerGetFlags, _CSSymbolOwnerGetLastModifiedTimestamp, 
                        _CSSymbolOwnerGetLoadTimestamp, _CSSymbolOwnerGetName, _CSSymbolOwnerGetPath, 
                        _CSSymbolOwnerGetPathForSymbolication, _CSSymbolOwnerGetRegionCount, 
                        _CSSymbolOwnerGetRegionWithAddress, _CSSymbolOwnerGetRegionWithName, 
@@ -96,7 +98,8 @@ exports:
                        _CSSymbolOwnerIsObject, _CSSymbolOwnerIsObsolete, _CSSymbolOwnerIsPIE, 
                        _CSSymbolOwnerIsProtected, _CSSymbolOwnerIsRestricted, _CSSymbolOwnerIsSlid, 
                        _CSSymbolOwnerIsStaticLibraryArchiveEntry, _CSSymbolOwnerMakeMutableInContext, 
-                       _CSSymbolOwnerMakeMutableInContextWithSOD, _CSSymbolOwnerNeedsResymbolication, 
+                       _CSSymbolOwnerMakeMutableInContextWithSOD, _CSSymbolOwnerMarkAsFromDSC, 
+                       _CSSymbolOwnerMarkAsResymbolicated, _CSSymbolOwnerNeedsResymbolication, 
                        _CSSymbolOwnerRemoveInContext, _CSSymbolOwnerReplaceInContextWithSOD, 
                        _CSSymbolOwnerSegmentsMatch, _CSSymbolOwnerSetLoadTimestamp, 
                        _CSSymbolOwnerSetPath, _CSSymbolOwnerSetPathForSymbolication, 
@@ -113,7 +116,8 @@ exports:
                        _CSSymbolicatorCreateWithMachKernelFlagsAndNotification, _CSSymbolicatorCreateWithPathAndArchitecture, 
                        _CSSymbolicatorCreateWithPathArchitectureFlagsAndNotification, 
                        _CSSymbolicatorCreateWithPid, _CSSymbolicatorCreateWithPidFlagsAndNotification, 
-                       _CSSymbolicatorCreateWithSignature, _CSSymbolicatorCreateWithSignatureAdditionalSymbolOwnersFlagsAndNotification, 
+                       _CSSymbolicatorCreateWithSharedCacheUUID, _CSSymbolicatorCreateWithSignature, 
+                       _CSSymbolicatorCreateWithSignatureAdditionalSymbolOwnersFlagsAndNotification, 
                        _CSSymbolicatorCreateWithSignatureAndAdditionalSymbolOwners, 
                        _CSSymbolicatorCreateWithSignatureAndNotification, _CSSymbolicatorCreateWithSignatureFlagsAndNotification, 
                        _CSSymbolicatorCreateWithSingleSymbolOwnerSignaturesAndFlags, 

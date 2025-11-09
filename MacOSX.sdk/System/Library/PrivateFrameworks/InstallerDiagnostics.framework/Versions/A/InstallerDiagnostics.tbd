@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0BE1CE94-398A-30CA-8C3E-A794CAF1787C
+    value:           5387539D-6628-3392-BF80-414D831AA936
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           12E4BAED-AFD0-30A7-9A6B-886EBC6AF6E6
+    value:           8820AF91-36A8-3FA6-B4C0-5790884880CC
 install-name:    '/System/Library/PrivateFrameworks/InstallerDiagnostics.framework/Versions/A/InstallerDiagnostics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

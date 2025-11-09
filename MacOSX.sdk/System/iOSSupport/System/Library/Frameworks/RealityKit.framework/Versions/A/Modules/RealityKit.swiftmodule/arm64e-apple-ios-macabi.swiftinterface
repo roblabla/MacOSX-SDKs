@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -enable-library-evolution -enable-experimental-concurrency -module-name RealityKit
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-experimental-concurrency -module-name RealityKit
+// swift-module-flags-ignorable: -user-module-version 161.404
 import ARKit
 import Combine
 import CoreGraphics
@@ -73,6 +74,7 @@ extension RealityKit.ARView {
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension Swift.SIMD3 where Scalar == Swift.Float {
   @usableFromInline
   internal var _xy: Swift.SIMD2<Swift.Float> {
@@ -83,6 +85,7 @@ extension Swift.SIMD3 where Scalar == Swift.Float {
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension Swift.SIMD4 where Scalar == Swift.Float {
   @usableFromInline
   internal var _xyz: Swift.SIMD3<Swift.Float> {
@@ -114,6 +117,7 @@ extension simd.simd_float3x3 {
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension simd.simd_float4x4 {
   @inlinable internal static var identity: RealityKit.REMatrix4x4F {
     get { return REMatrix4x4F( diagonal: SIMD4<Float>(repeating: 1.0)) }
@@ -398,6 +402,7 @@ extension RealityFoundation.SpotLightComponent {
 @usableFromInline
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 internal struct REAngleF {
   public init(radians: Swift.Float)
   public init(degrees: Swift.Float)
@@ -415,6 +420,7 @@ internal struct REAngleF {
 @usableFromInline
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 internal enum RotationOrder : Swift.UInt8 {
   public static let `default`: RealityKit.RotationOrder
   public static let sceneKit: RealityKit.RotationOrder
@@ -437,6 +443,7 @@ internal enum RotationOrder : Swift.UInt8 {
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension simd.simd_quatf {
   @usableFromInline
   internal init(eulerAngles: Swift.SIMD3<Swift.Float>, order: RealityKit.RotationOrder = .default)
@@ -729,7 +736,7 @@ public enum MaterialColorParameter : Swift._ExpressibleByColorLiteral, Swift.Has
   }
 }
 extension RealityKit.ARView : ARKit.ARSessionProviding {
-  @objc @_Concurrency.MainActor(unsafe) dynamic public var session: ARKit.ARSession {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public var session: ARKit.ARSession {
     @objc get
     @objc set
   }
@@ -821,10 +828,19 @@ extension RealityKit.ARView.__RenderQuality : Swift.Equatable {}
 @available(*, deprecated, message: "Use RenderOptions instead")
 extension RealityKit.ARView.__RenderQuality : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 12.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityKit.RotationOrder : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 12.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityKit.RotationOrder : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
+@_originallyDefinedIn(module: "RealityKit", macOS 12.0)
+@_originallyDefinedIn(module: "RealityKit", iOS 15.0)
+@_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityKit.RotationOrder : Swift.RawRepresentable {}
 extension RealityKit.ARView.CameraMode : Swift.Equatable {}
 extension RealityKit.ARView.CameraMode : Swift.Hashable {}

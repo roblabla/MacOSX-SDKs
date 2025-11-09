@@ -1,7 +1,5 @@
-#ifndef _WAITQ_H_
-#define _WAITQ_H_
 /*
- * Copyright (c) 2014-2015 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2014-2021 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -27,4 +25,6 @@
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
+#ifndef _WAITQ_H_
+#define _WAITQ_H_
 #endif  /* _WAITQ_H_ */

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CFDAEC7A-F76F-386A-A4FD-B9E3EE23E9E5
+    value:           F63FE4BA-8D29-3AE2-9828-93DB45D2182E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           293828CA-243C-3840-9CFA-DA6482C86A30
+    value:           82E2B750-DE1C-3A9D-93DE-A2BF38A630B1
 install-name:    '/System/Library/PrivateFrameworks/AMPDevices.framework/Versions/A/AMPDevices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

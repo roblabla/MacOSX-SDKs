@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -module-name Accelerate
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Accelerate
+// swift-module-flags-ignorable: -user-module-version 29
 @_exported import Accelerate
 @_exported import Accelerate.vecLib.BNNS
 import Swift
@@ -5761,12 +5762,14 @@ public protocol AccelerateMutableBuffer : Accelerate.AccelerateBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.AccelerateBuffer where Self : Swift.Collection {
+  @_silgen_name("$s10Accelerate0A6BufferPAASlRzrlE010withUnsafeB7Pointeryqd__qd__SRy7ElementSTQzGKXEKlF")
   @inlinable public func withUnsafeBufferPointer<R>(_ body: (Swift.UnsafeBufferPointer<Self.Element>) throws -> R) rethrows -> R {
         return try withContiguousStorageIfAvailable(body)!
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.AccelerateMutableBuffer where Self : Swift.MutableCollection {
+  @_silgen_name("$s10Accelerate0A13MutableBufferPAASMRzrlE010withUnsafebC7Pointeryqd__qd__Sry7ElementSTQzGzKXEKlF")
   @inlinable public mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Self.Element>) throws -> R) rethrows -> R {
         return try withContiguousMutableStorageIfAvailable(body)!
     }

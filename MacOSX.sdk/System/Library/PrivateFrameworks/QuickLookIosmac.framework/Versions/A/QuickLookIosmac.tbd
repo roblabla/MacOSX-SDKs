@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           627356ED-83AF-31C9-BF52-1C9778E438D2
+    value:           17BB33CA-817C-3FFD-8DB9-EF0F2A6D96B6
   - target:          x86_64-maccatalyst
-    value:           627356ED-83AF-31C9-BF52-1C9778E438D2
+    value:           17BB33CA-817C-3FFD-8DB9-EF0F2A6D96B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA1F3FFB-92F6-3F00-8B52-A077F526B699
+    value:           AB563EB4-53FB-386A-87CD-CC5A4A5DC6EB
   - target:          arm64e-maccatalyst
-    value:           AA1F3FFB-92F6-3F00-8B52-A077F526B699
+    value:           AB563EB4-53FB-386A-87CD-CC5A4A5DC6EB
 install-name:    '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac'
 current-version: 0
 exports:

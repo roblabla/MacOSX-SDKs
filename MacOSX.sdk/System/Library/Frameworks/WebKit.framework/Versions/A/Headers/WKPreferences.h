@@ -64,6 +64,17 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 */
 @property (nonatomic, getter=isTextInteractionEnabled) BOOL textInteractionEnabled API_AVAILABLE(macos(11.3), ios(14.5));
 
+/*! @abstract A Boolean value indicating whether WebKit will apply built-in workarounds (quirks)
+ to improve compatibility with certain known websites. You can disable site-specific quirks
+ to help test your website without these workarounds. Enabled by default.
+ */
+@property (nonatomic, getter=isSiteSpecificQuirksModeEnabled) BOOL siteSpecificQuirksModeEnabled API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*! @abstract A Boolean value indicating whether Fullscreen API is enabled.
+ @discussion The default value is NO. We can set it to YES to enable support for the fullscreen API.
+ */
+@property (nonatomic, getter=isElementFullscreenEnabled) BOOL elementFullscreenEnabled API_AVAILABLE(macos(12.0), ios(15.0));
+
 @end
 
 @interface WKPreferences (WKDeprecated)

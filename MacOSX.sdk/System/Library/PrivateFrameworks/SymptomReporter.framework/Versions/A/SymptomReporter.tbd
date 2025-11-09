@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FEF62B41-F36B-30AE-AFCA-7AA6EC90F469
+    value:           B7DA9586-917C-3436-994A-91D9F378930A
   - target:          x86_64-maccatalyst
-    value:           FEF62B41-F36B-30AE-AFCA-7AA6EC90F469
+    value:           B7DA9586-917C-3436-994A-91D9F378930A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99E05DAB-6D61-321D-8B5E-CC121F7C1218
+    value:           F92BF389-BCC0-3215-B8E8-556E0DA968E2
   - target:          arm64e-maccatalyst
-    value:           99E05DAB-6D61-321D-8B5E-CC121F7C1218
+    value:           F92BF389-BCC0-3215-B8E8-556E0DA968E2
 install-name:    '/System/Library/PrivateFrameworks/SymptomReporter.framework/Versions/A/SymptomReporter'
-current-version: 1617.60.24
+current-version: 1617.101.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

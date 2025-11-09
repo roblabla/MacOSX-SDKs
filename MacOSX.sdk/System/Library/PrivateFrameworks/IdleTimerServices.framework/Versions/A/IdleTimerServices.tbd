@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E5C7D2F-0018-3E4A-A83E-C2FE91CB2525
+    value:           E186BCB5-CBDD-3212-BA31-3AEA916FC658
   - target:          x86_64-maccatalyst
-    value:           1E5C7D2F-0018-3E4A-A83E-C2FE91CB2525
+    value:           E186BCB5-CBDD-3212-BA31-3AEA916FC658
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7170901E-FC64-3291-827D-90F77DD0ECCC
+    value:           3138B6C3-E80E-3EBB-9BC8-C2DAA84C55DF
   - target:          arm64e-maccatalyst
-    value:           7170901E-FC64-3291-827D-90F77DD0ECCC
+    value:           3138B6C3-E80E-3EBB-9BC8-C2DAA84C55DF
 install-name:    '/System/Library/PrivateFrameworks/IdleTimerServices.framework/Versions/A/IdleTimerServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

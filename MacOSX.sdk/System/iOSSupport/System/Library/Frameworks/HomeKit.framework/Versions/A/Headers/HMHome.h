@@ -168,7 +168,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories());
+- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError * __nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories()) API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(10.0, 15.4)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Add accessory with the given setup payload to the home.
@@ -179,7 +179,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *>* __nullable accessories, NSError * __nullable error))completion API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories(payload:));
+- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *>* __nullable accessories, NSError * __nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories(payload:)) API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(11.3, 15.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief True if this home supports all of the requirements for adding a network router.

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           15897D86-FB41-3D77-8441-C2AC51014107
+    value:           DE181BF9-CD35-3142-922C-144D18A7B0A5
   - target:          arm64-macos
-    value:           6AEA7BB3-3189-3541-8788-A2B3EC896A65
+    value:           8C68D833-7106-3289-A25E-DF7C3C1ABA3B
   - target:          arm64e-macos
-    value:           58872A36-5AF1-3F30-B7BD-427513DFBC8F
+    value:           79ECA279-6718-3281-B6C2-6C05CA4506DB
 install-name:    '/System/Library/PrivateFrameworks/acfsSupport.framework/Versions/A/acfsSupport'
 current-version: 0
 compatibility-version: 0
@@ -55,11 +55,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           852A05A2-2DC1-3A68-9222-F905F82B0460
+    value:           3F6B2D2C-C9DD-3D4F-85D9-96A910E616E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE7112EA-EF26-3874-A570-28E46F8DC68D
+    value:           ABD2ADF8-2778-3764-A040-4BF9DE975177
 install-name:    '/System/Library/PrivateFrameworks/acfs.framework/Versions/A/acfs'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

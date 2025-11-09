@@ -30,6 +30,11 @@ NS_CLASS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED @interface UIActivityViewControlle
 
 @property(nullable, nonatomic, copy) NSArray<UIActivityType> *excludedActivityTypes; // default is nil. activity types listed will not be displayed
 
+/// In some contexts, the activity view controller can elevate a specific activity in the header view to enhance it.
+/// The prominent activity can only be chosen by the system.
+/// Defaults to YES.
+@property (nonatomic) BOOL allowsProminentActivity API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos);
+
 @end
 
 @interface UIActivityViewController (UIActivityItemsConfiguration)

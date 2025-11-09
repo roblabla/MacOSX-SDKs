@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           23E94D89-E0F9-3DA6-80D8-E5E17A613D65
+    value:           56A9EFB6-F1A7-341E-84A2-411CF75E828F
   - target:          x86_64-maccatalyst
-    value:           23E94D89-E0F9-3DA6-80D8-E5E17A613D65
+    value:           56A9EFB6-F1A7-341E-84A2-411CF75E828F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E8DB846-6DE1-32DC-BD13-0EF98E684299
+    value:           B4D970A6-82F7-370C-B372-E7CBB339CEDF
   - target:          arm64e-maccatalyst
-    value:           1E8DB846-6DE1-32DC-BD13-0EF98E684299
+    value:           B4D970A6-82F7-370C-B372-E7CBB339CEDF
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsInternals.framework/Versions/A/CoreSuggestionsInternals'
-current-version: 1153.10
+current-version: 1153.16.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN3re217NumCapturesWalkerE, __ZTIN3re218CaptureNamesWalkerE, 

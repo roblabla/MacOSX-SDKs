@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4866D86D-FB8D-37DB-A594-1FB36D2F2209
+    value:           D8DEFA19-61C3-36E5-9E6E-EBCE9F3538E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           62FAD99C-0BF7-3FD3-865C-1B0157634DD9
+    value:           EFB76038-68B7-3F06-B365-C5C33623A29D
 install-name:    '/System/Library/PrivateFrameworks/TrustedPeers.framework/Versions/A/TrustedPeers'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

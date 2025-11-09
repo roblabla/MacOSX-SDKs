@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C2453B5E-88D9-341E-8EF6-20A723525999
+    value:           A7F0344C-767D-3A46-A18E-A1DCA0061601
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFB37859-58E7-3071-AF55-62E683CD3D74
+    value:           07B42EAD-57B1-36E8-A94F-EF81F9D778CB
 install-name:    '/System/Library/PrivateFrameworks/ReplayKitMacHelper.framework/Versions/A/ReplayKitMacHelper'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

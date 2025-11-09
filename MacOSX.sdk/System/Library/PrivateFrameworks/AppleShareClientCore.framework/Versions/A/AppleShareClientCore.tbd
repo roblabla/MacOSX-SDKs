@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           66E90672-FE0A-34FA-B022-3B55739223F1
+    value:           ECADF2D7-6253-3D0B-AD67-3C15D90FDF74
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           70D7BBC1-4113-3610-A205-DC3954D88F26
+    value:           B5AF9924-BE87-3159-908F-F8D64C71454D
 install-name:    '/System/Library/PrivateFrameworks/AppleShareClientCore.framework/Versions/A/AppleShareClientCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

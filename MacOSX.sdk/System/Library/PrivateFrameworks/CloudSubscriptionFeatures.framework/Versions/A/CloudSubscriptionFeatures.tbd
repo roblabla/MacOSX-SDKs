@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4F2D444F-E250-36A5-A9AA-46D53C861895
+    value:           5EC90A83-8DDB-37EF-A8B4-C35C227A8539
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E000EE1C-3632-34D9-A769-23CCDF88070A
+    value:           30CE9899-0B3F-3F75-B795-3F36B13D7B49
 install-name:    '/System/Library/PrivateFrameworks/CloudSubscriptionFeatures.framework/Versions/A/CloudSubscriptionFeatures'
 swift-abi-version: 7
 exports:

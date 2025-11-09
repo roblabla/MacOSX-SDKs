@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DA78B09A-F58E-3E46-B5A3-F11ECC13F296
+    value:           3049DCC9-6FE0-38BD-98A0-3F84A5FFC9A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A529E8F-7337-3B2A-83CF-FD4B87E34D36
+    value:           5F59CD0E-D0A1-3942-9945-F7A6BFE1F3D8
 install-name:    '/System/Library/Frameworks/MultipeerConnectivity.framework/Versions/A/MultipeerConnectivity'
 current-version: 173.1
 exports:

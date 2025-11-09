@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4C6D4910-CAD3-3982-A16D-EE43C9310870
+    value:           B451D602-A0DD-315F-B1D9-C993F6957C39
   - target:          x86_64-maccatalyst
-    value:           4C6D4910-CAD3-3982-A16D-EE43C9310870
+    value:           B451D602-A0DD-315F-B1D9-C993F6957C39
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1B41C9C-75D9-37F5-8236-54D4A9B3C693
+    value:           6AF75346-0EED-38D4-A935-A5F2C57A56A0
   - target:          arm64e-maccatalyst
-    value:           C1B41C9C-75D9-37F5-8236-54D4A9B3C693
+    value:           6AF75346-0EED-38D4-A935-A5F2C57A56A0
 install-name:    '/usr/lib/libboringssl.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -175,12 +175,11 @@ exports:
                        _boringssl_session_set_trust_reference, _boringssl_session_was_resumed, 
                        _boringssl_session_write, _d2i_ECPrivateKey, _d2i_PrivateKey, 
                        _datapath_logging_enabled, _i2d_ECPrivateKey, _i2o_ECPublicKey, 
-                       _lh_delete, _lh_doall_arg, _lh_free, _lh_insert, _lh_new, 
-                       _lh_num_items, _lh_retrieve, _nw_protocol_boringssl_copy_definition, 
-                       _nw_protocol_boringssl_disconnect, _nw_protocol_boringssl_identifier, 
-                       _rsa_default_decrypt, _rsa_default_sign_raw, _rsa_default_size, 
-                       _sk_deep_copy, _sk_free, _sk_new_null, _sk_num, _sk_pop, _sk_pop_free, 
-                       _sk_pop_free_ex, _sk_push, _sk_set, _sk_shift, _sk_value ]
+                       _nw_protocol_boringssl_copy_definition, _nw_protocol_boringssl_disconnect, 
+                       _nw_protocol_boringssl_identifier, _rsa_default_decrypt, _rsa_default_sign_raw, 
+                       _rsa_default_size, _sk_deep_copy, _sk_free, _sk_new_null, 
+                       _sk_num, _sk_pop, _sk_pop_free, _sk_pop_free_ex, _sk_push, 
+                       _sk_set, _sk_shift, _sk_value ]
     objc-classes:    [ boringssl_concrete_nw_protocol_boringssl ]
     objc-ivars:      [ boringssl_concrete_boringssl_ctx.boringssl_handle, boringssl_concrete_boringssl_ctx.handshake_timer_fires, 
                        boringssl_concrete_boringssl_ctx.max_allowed_dtls_version, 

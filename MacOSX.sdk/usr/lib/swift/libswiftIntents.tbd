@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0585AE18-F41C-300D-AF7F-C2072851629D
+    value:           BD25A4F7-7351-379B-B43A-B95153D06F9D
   - target:          x86_64-maccatalyst
-    value:           0585AE18-F41C-300D-AF7F-C2072851629D
+    value:           BD25A4F7-7351-379B-B43A-B95153D06F9D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DAB7AA3-1CAA-3315-AB89-831FC9654928
+    value:           16B6E633-59A8-3387-9E30-47720294F793
   - target:          arm64e-maccatalyst
-    value:           5DAB7AA3-1CAA-3315-AB89-831FC9654928
+    value:           16B6E633-59A8-3387-9E30-47720294F793
 install-name:    '/usr/lib/swift/libswiftIntents.dylib'
 current-version: 11
 swift-abi-version: 7

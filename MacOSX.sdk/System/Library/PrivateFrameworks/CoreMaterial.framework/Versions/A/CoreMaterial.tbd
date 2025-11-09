@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C7DAA069-0247-3FF8-9039-678E245F6297
+    value:           3EF72CC4-B2E2-3A91-9219-5934AC481B99
   - target:          x86_64-maccatalyst
-    value:           C7DAA069-0247-3FF8-9039-678E245F6297
+    value:           3EF72CC4-B2E2-3A91-9219-5934AC481B99
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8007FD58-734E-3D3A-B2EB-32B59CB3C462
+    value:           54BAE3C9-F520-3871-AE63-2F31738BA79F
   - target:          arm64e-maccatalyst
-    value:           8007FD58-734E-3D3A-B2EB-32B59CB3C462
+    value:           54BAE3C9-F520-3871-AE63-2F31738BA79F
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ CoreMaterialTester, MaterialKit, Materials, MaterialsPlugIn, 
+    clients:         [ AssetViewer, CoreMaterialTester, MaterialKit, Materials, MaterialsPlugIn, 
                        PointerUIServices, SpringBoard, SpringBoard-Tests, SpringBoardCore, 
                        SpringBoardHome, SwiftUI, UIKitCore, UIKitester, VisionKitCore ]
 exports:

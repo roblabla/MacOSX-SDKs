@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5FD459CD-C5F3-3B82-9148-799E0321CAAF
+    value:           D1014C5F-09CF-3481-9BB0-2DA363B8C87C
   - target:          x86_64-maccatalyst
-    value:           5FD459CD-C5F3-3B82-9148-799E0321CAAF
+    value:           D1014C5F-09CF-3481-9BB0-2DA363B8C87C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A270B525-9AB0-3408-90B9-32CAAE1FD080
+    value:           BAD250CB-1520-30D9-AE10-1486A195E8A6
   - target:          arm64e-maccatalyst
-    value:           A270B525-9AB0-3408-90B9-32CAAE1FD080
+    value:           BAD250CB-1520-30D9-AE10-1486A195E8A6
 install-name:    '/System/Library/Frameworks/MetalPerformanceShadersGraph.framework/Versions/A/MetalPerformanceShadersGraph'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -25,10 +25,11 @@ exports:
                        MPSGraphCropResizeOpDescriptor, MPSGraphDepthwiseConvolution2DOpDescriptor, 
                        MPSGraphDepthwiseConvolution3DOpDescriptor, MPSGraphDevice, 
                        MPSGraphExecutable, MPSGraphExecutableDescriptor, MPSGraphExecutableExecutionDescriptor, 
-                       MPSGraphExecutionDescriptor, MPSGraphList, MPSGraphListData, 
-                       MPSGraphListType, MPSGraphOperation, MPSGraphOptimizer, MPSGraphPooling2DOpDescriptor, 
-                       MPSGraphPooling4DOpDescriptor, MPSGraphPruningDescriptor, 
-                       MPSGraphRandomOpDescriptor, MPSGraphShapedType, MPSGraphStencilOpDescriptor, 
+                       MPSGraphExecutionDescriptor, MPSGraphLSTMDescriptor, MPSGraphList, 
+                       MPSGraphListData, MPSGraphListType, MPSGraphOperation, MPSGraphOptimizer, 
+                       MPSGraphPooling2DOpDescriptor, MPSGraphPooling4DOpDescriptor, 
+                       MPSGraphPruningDescriptor, MPSGraphRandomOpDescriptor, MPSGraphShapedType, 
+                       MPSGraphSingleGateRNNDescriptor, MPSGraphStencilOpDescriptor, 
                        MPSGraphStochasticGradientDescentOptimizer, MPSGraphTensor, 
                        MPSGraphTensorData, MPSGraphType, MPSGraphVariableInitializer, 
                        MPSGraphVariableOp ]

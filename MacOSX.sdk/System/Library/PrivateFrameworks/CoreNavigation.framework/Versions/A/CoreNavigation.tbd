@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B6581EC-23A4-34D3-943B-B46691494613
+    value:           D504786B-8A47-3B3B-8B90-CA394902169C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2A28332-625F-3FB5-87A2-57227348D8D0
+    value:           7C5E1C1E-3AAD-3124-A738-453B074EBAD4
 install-name:    '/System/Library/PrivateFrameworks/CoreNavigation.framework/Versions/A/CoreNavigation'
 current-version: 0
 compatibility-version: 0
@@ -402,16 +402,11 @@ exports:
                        __ZTINSt3__111__alternateIcEE, __ZTINSt3__111__end_stateIcEE, 
                        __ZTINSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, __ZTINSt3__111__match_anyIcEE, 
                        __ZTINSt3__112__match_charIcEE, __ZTINSt3__113__empty_stateIcEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115__has_one_stateIcEE, 
-                       __ZTINSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__115__has_one_stateIcEE, __ZTINSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEEE, __ZTINSt3__116__owns_one_stateIcEE, 
                        __ZTINSt3__117__owns_two_statesIcEE, __ZTINSt3__117__repeat_one_loopIcEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__118__match_char_icaseIcNS_12regex_traitsIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__120__l_anchor_multilineIcEE, __ZTINSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__120__r_anchor_multilineIcEE, __ZTINSt3__120__shared_ptr_emplaceIKN11cnframework12GenericEventENS_9allocatorIS3_EEEE, 
@@ -807,16 +802,11 @@ exports:
                        __ZTSNSt3__111__alternateIcEE, __ZTSNSt3__111__end_stateIcEE, 
                        __ZTSNSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, __ZTSNSt3__111__match_anyIcEE, 
                        __ZTSNSt3__112__match_charIcEE, __ZTSNSt3__113__empty_stateIcEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115__has_one_stateIcEE, 
-                       __ZTSNSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__115__has_one_stateIcEE, __ZTSNSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEEE, __ZTSNSt3__116__owns_one_stateIcEE, 
                        __ZTSNSt3__117__owns_two_statesIcEE, __ZTSNSt3__117__repeat_one_loopIcEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__118__match_char_icaseIcNS_12regex_traitsIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__120__l_anchor_multilineIcEE, __ZTSNSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__120__r_anchor_multilineIcEE, __ZTSNSt3__120__shared_ptr_emplaceIKN11cnframework12GenericEventENS_9allocatorIS3_EEEE, 
@@ -7116,6 +7106,7 @@ exports:
                        __ZNK12cnnavigation7TAITime13ToGalileoTimeEv, __ZNK12cnnavigation7TAITime9ToGPSTimeERKNS_17GNSSUTCParametersE, 
                        __ZNK12cnnavigation7TAITime9ToGPSTimeEv, __ZNK12cnnavigation8GNSSData11DescriptionEv, 
                        __ZNK12cnnavigation8GNSSData2IdEv, __ZNK12cnnavigation8GNSSData3MapERKNS_7TAITimeEPKdRdS6_, 
+                       __ZNK12cnnavigation8GNSSData3MapERKNS_7TAITimeERKNS_17GNSSUTCParametersEPKdRdS9_, 
                        __ZNK12cnnavigation8GNSSData7IsValidEv, __ZNK12cnquaternion12CNQuaternion2q1Ev, 
                        __ZNK12cnquaternion12CNQuaternion2q2Ev, __ZNK12cnquaternion12CNQuaternion2q3Ev, 
                        __ZNK12cnquaternion12CNQuaternion2q4Ev, __ZNK12cnquaternion12CNQuaternionmiERKS0_, 

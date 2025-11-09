@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1C6DF89-956D-3446-BB4A-056D6C4A7DEB
+    value:           63382431-3CE9-30CF-AEAE-A7C3F13D534F
   - target:          x86_64-maccatalyst
-    value:           A1C6DF89-956D-3446-BB4A-056D6C4A7DEB
+    value:           63382431-3CE9-30CF-AEAE-A7C3F13D534F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           810DDDD3-54E8-34C4-AB77-647ABD0287BE
+    value:           69023775-0AA0-36AA-AC15-F3C2244EA52A
   - target:          arm64e-maccatalyst
-    value:           810DDDD3-54E8-34C4-AB77-647ABD0287BE
+    value:           69023775-0AA0-36AA-AC15-F3C2244EA52A
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServices.framework/Versions/A/PreviewsServices'
-current-version: 19.20.23
+current-version: 19.30.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

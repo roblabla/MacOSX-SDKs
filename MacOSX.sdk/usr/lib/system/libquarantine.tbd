@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           69A71B56-CEA7-379B-8A08-757209815C7B
+    value:           BFB0329D-28B0-3FF8-AF71-FB8798721547
   - target:          x86_64-maccatalyst
-    value:           69A71B56-CEA7-379B-8A08-757209815C7B
+    value:           BFB0329D-28B0-3FF8-AF71-FB8798721547
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F140B2F-8214-30B8-9CDA-7F0DB8DE13FE
+    value:           49C11AB5-FD65-39BE-A1C7-AD885809511E
   - target:          arm64e-maccatalyst
-    value:           0F140B2F-8214-30B8-9CDA-7F0DB8DE13FE
+    value:           49C11AB5-FD65-39BE-A1C7-AD885809511E
 install-name:    '/usr/lib/system/libquarantine.dylib'
-current-version: 133
+current-version: 133.100.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

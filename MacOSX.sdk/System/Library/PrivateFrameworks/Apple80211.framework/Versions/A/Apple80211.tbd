@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7023D777-BF7E-3863-B7FA-86CD59259EB1
+    value:           42E1F269-8B97-30F6-9C39-D2C094723CAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11E4C9F8-F9EC-3510-82D1-7E7919DD5C35
+    value:           E249DDD7-80A5-3A83-97D2-7E7006DE1BD1
 install-name:    '/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Apple80211'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

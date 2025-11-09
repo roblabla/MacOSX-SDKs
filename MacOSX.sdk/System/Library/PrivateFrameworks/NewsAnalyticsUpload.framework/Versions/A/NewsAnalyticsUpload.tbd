@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A565A24-355B-3C27-8EC2-6AE86D73410D
+    value:           213E20BB-4A67-3166-9F7D-1296126EFF6B
   - target:          x86_64-maccatalyst
-    value:           5A565A24-355B-3C27-8EC2-6AE86D73410D
+    value:           213E20BB-4A67-3166-9F7D-1296126EFF6B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0AC51D4F-5044-38A3-A4F1-D961C66E8D8F
+    value:           A74C2900-5AE6-3BE5-A37A-D0009FA98DE6
   - target:          arm64e-maccatalyst
-    value:           0AC51D4F-5044-38A3-A4F1-D961C66E8D8F
+    value:           A74C2900-5AE6-3BE5-A37A-D0009FA98DE6
 install-name:    '/System/Library/PrivateFrameworks/NewsAnalyticsUpload.framework/Versions/A/NewsAnalyticsUpload'
-current-version: 2981.3
+current-version: 3032.1.2
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

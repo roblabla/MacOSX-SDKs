@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BD309172-2B83-3B76-840F-3D48F82CD147
+    value:           04DCCD53-7172-34F0-AF26-6CF8D1515983
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DDB6F84-0BC3-361F-8137-B763D8079636
+    value:           7D63DE13-280E-3CCA-BA9A-DCB59507989D
 install-name:    '/System/Library/PrivateFrameworks/MobileStorage.framework/Versions/A/MobileStorage'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

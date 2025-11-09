@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DADB89E1-28B4-3141-9698-76959D5E6C97
+    value:           3D12051D-9FD0-38FC-8D24-C21249860A43
   - target:          x86_64-maccatalyst
-    value:           DADB89E1-28B4-3141-9698-76959D5E6C97
+    value:           3D12051D-9FD0-38FC-8D24-C21249860A43
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F38256E-A9D3-3EF0-B8F5-F0FD53741422
+    value:           18087F8F-3A02-31EE-B46E-F8620D9C3866
   - target:          arm64e-maccatalyst
-    value:           5F38256E-A9D3-3EF0-B8F5-F0FD53741422
+    value:           18087F8F-3A02-31EE-B46E-F8620D9C3866
 install-name:    '/System/Library/PrivateFrameworks/CVNLP.framework/Versions/A/CVNLP'
 current-version: 119
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           93B18B67-B40E-387A-8796-F7B71B5D54A2
+    value:           F083C713-32F5-33A9-A74D-54D868AD8E2A
   - target:          x86_64-maccatalyst
-    value:           93B18B67-B40E-387A-8796-F7B71B5D54A2
+    value:           F083C713-32F5-33A9-A74D-54D868AD8E2A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F441AC2-0C57-3FF4-8BBC-24DF7FE17281
+    value:           2E781ECF-6067-3B37-989B-39E810F57BA3
   - target:          arm64e-maccatalyst
-    value:           2F441AC2-0C57-3FF4-8BBC-24DF7FE17281
+    value:           2E781ECF-6067-3B37-989B-39E810F57BA3
 install-name:    '/usr/lib/libnetworkextension.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           56B338E2-0FD3-3FD1-8899-9B2BA2862D60
+    value:           996D7F69-FF55-3160-954F-A4B6A7ED3D50
   - target:          x86_64-maccatalyst
-    value:           56B338E2-0FD3-3FD1-8899-9B2BA2862D60
+    value:           996D7F69-FF55-3160-954F-A4B6A7ED3D50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF0442D1-43FB-32AD-BE44-3AA838842871
+    value:           1A0691B0-D93F-3CBD-AE71-34E7A858EE7F
   - target:          arm64e-maccatalyst
-    value:           BF0442D1-43FB-32AD-BE44-3AA838842871
+    value:           1A0691B0-D93F-3CBD-AE71-34E7A858EE7F
 install-name:    '/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox'
 current-version: 1000
 reexported-libraries:
@@ -337,17 +337,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           821E4EB4-AB5B-3FA7-AC66-208FFA94E72E
+    value:           EC8DE8C8-04EA-3934-B350-102809170C67
   - target:          x86_64-maccatalyst
-    value:           821E4EB4-AB5B-3FA7-AC66-208FFA94E72E
+    value:           EC8DE8C8-04EA-3934-B350-102809170C67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4FFE1A69-3F5F-30E5-94B3-B78DC5ABE07C
+    value:           16FAAE1C-3EFD-34C3-9C2F-0F60956778F1
   - target:          arm64e-maccatalyst
-    value:           4FFE1A69-3F5F-30E5-94B3-B78DC5ABE07C
+    value:           16FAAE1C-3EFD-34C3-9C2F-0F60956778F1
 install-name:    '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore'
 exports:
   - targets:         [ x86_64-macos ]

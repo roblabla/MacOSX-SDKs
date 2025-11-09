@@ -3,20 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A08A9DE6-0DE9-32BC-BDD6-87B627FD2CFC
+    value:           09A0282E-93FC-3735-94B0-F0E2ACBA77A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC3ADB86-13F2-3B4F-9162-EB1845390454
+    value:           44EF92AA-EA53-314D-B3A0-D75B124938F5
 install-name:    '/System/Library/PrivateFrameworks/SiriAudioInternal.framework/Versions/A/SiriAudioInternal'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, AudioInternalIntentExtension, 
-                       IntentsServices, SearchUI, SiriAudioDESPlugin, SiriAudioHeavyweightTests, 
-                       SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
-                       SiriAudioSupportIntegrationTests, SiriAudioSupportTests, SiriMediaFlowDelegatePlugin, 
-                       UnifiedSiriTest, siriaudio_helper ]
+                       IntentsServices, MediaPlaybackCore, SearchUI, SiriAudioDESPlugin, 
+                       SiriAudioHeavyweightTests, SiriAudioInternal, SiriAudioInternalTests, 
+                       SiriAudioSupport, SiriAudioSupportIntegrationTests, SiriAudioSupportTests, 
+                       SiriMediaFlowDelegatePlugin, SystemPlugin, UnifiedSiriTest, 
+                       siriaudio_helper ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s17SiriAudioInternal21INLocalSearchProviderV05localE0AC0aB7Support22PlaybackLocalSearching_p_tcfC', 

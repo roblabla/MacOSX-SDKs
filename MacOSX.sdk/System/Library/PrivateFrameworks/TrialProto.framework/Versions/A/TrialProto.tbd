@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7CE7A936-1FD5-372C-808D-BA6939C10045
+    value:           2BF11630-4FD7-3F10-90ED-AF776BFEE9FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           590D7A60-DFDF-30D9-9102-D4219E6AF8C8
+    value:           659AC550-A124-3CDB-823F-F2F2DD9E87F4
 install-name:    '/System/Library/PrivateFrameworks/TrialProto.framework/Versions/A/TrialProto'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -24,10 +24,10 @@ exports:
                        _TRIDeploymentEnvironment_IsValidValue, _TRIFactor_FactorType_EnumDescriptor, 
                        _TRIFactor_FactorType_IsValidValue, _TRILevel_ClearLevelOneOfCase, 
                        _TRILogContextReadFrom, _TRILogEventReadFrom, _TRILogNamespaceReadFrom, 
-                       _TRILogTimeReadFrom, _TRILogTreatmentReadFrom, _TRIMLRuntimeSchedulingPolicy_QOS_EnumDescriptor, 
-                       _TRIMLRuntimeSchedulingPolicy_QOS_IsValidValue, _TRIMetricReadFrom, 
-                       _TRINamespace_NamespaceId_EnumDescriptor, _TRINamespace_NamespaceId_IsValidValue, 
-                       _TRINotificationProcessingPolicy_AssetDownloadPolicy_EnumDescriptor, 
+                       _TRILogTimeReadFrom, _TRILogTreatmentReadFrom, _TRIMLRuntimeDimensionsReadFrom, 
+                       _TRIMLRuntimeSchedulingPolicy_QOS_EnumDescriptor, _TRIMLRuntimeSchedulingPolicy_QOS_IsValidValue, 
+                       _TRIMetricReadFrom, _TRINamespace_NamespaceId_EnumDescriptor, 
+                       _TRINamespace_NamespaceId_IsValidValue, _TRINotificationProcessingPolicy_AssetDownloadPolicy_EnumDescriptor, 
                        _TRINotificationProcessingPolicy_AssetDownloadPolicy_IsValidValue, 
                        _TRIPBApi_Syntax_RawValue, _TRIPBAutocreatedArrayModified, 
                        _TRIPBAutocreatedDictionaryModified, _TRIPBBecomeVisibleToAutocreator, 
@@ -122,18 +122,19 @@ exports:
                        _TRITrialDownloadStatusFieldsReadFrom, _TRITrialExperimentFieldsReadFrom, 
                        _TRITrialFactorFieldsReadFrom, _TRITrialOnDemandFactorFieldsReadFrom, 
                        _TRITrialRolloutFieldsReadFrom, _TRITrialSystemTelemetryReadFrom, 
-                       _TRIUnit_Device, _TRIUnit_Session, _TRIUnit_Unknown, _TRIUnit_User, 
-                       _TRIUserDimensionReadFrom, _TrialProtoVersionNumber, _TrialProtoVersionString ]
+                       _TRIUIAssignment_ClearBucketingOneOfCase, _TRIUnit_Device, 
+                       _TRIUnit_Session, _TRIUnit_Unknown, _TRIUnit_User, _TRIUserDimensionReadFrom, 
+                       _TrialProtoVersionNumber, _TrialProtoVersionString ]
     objc-classes:    [ TRIAsset, TRIAssignment, TRIClientExperiment, TRIClientFactorPack, 
                        TRIClientRollout, TRIClientSelectedNamespace, TRIClientTreatment, 
                        TRICloudKitSupport, TRICoreMLAssignmentLanguage, TRICoreMlassignmentRoot, 
                        TRIDenormalizedEvent, TRIDeploymentRule, TRIExperimentRollbackPushNotification, 
                        TRIFactor, TRIFactorLevel, TRIFactorLevels, TRIFactors, TRIFile, 
                        TRILevel, TRILogContext, TRILogEvent, TRILogNamespace, TRILogTime, 
-                       TRILogTreatment, TRIMLRuntimeEvaluation, TRIMLRuntimeSchedulingPolicy, 
-                       TRIMetric, TRINSExpressionAssignmentLanguage, TRINamespace, 
-                       TRINamespaces, TRINotificationProcessingPolicy, TRIPBAny, 
-                       TRIPBAnyRoot, TRIPBApi, TRIPBApiRoot, TRIPBAutocreatedArray, 
+                       TRILogTreatment, TRIMLRuntimeDimensions, TRIMLRuntimeEvaluation, 
+                       TRIMLRuntimeSchedulingPolicy, TRIMetric, TRINSExpressionAssignmentLanguage, 
+                       TRINamespace, TRINamespaces, TRINotificationProcessingPolicy, 
+                       TRIPBAny, TRIPBAnyRoot, TRIPBApi, TRIPBApiRoot, TRIPBAutocreatedArray, 
                        TRIPBAutocreatedDictionary, TRIPBBoolArray, TRIPBBoolBoolDictionary, 
                        TRIPBBoolDoubleDictionary, TRIPBBoolEnumDictionary, TRIPBBoolFloatDictionary, 
                        TRIPBBoolInt32Dictionary, TRIPBBoolInt64Dictionary, TRIPBBoolObjectDictionary, 
@@ -191,29 +192,32 @@ exports:
                        TRITrifactorRoot, TRITrifactorTypesRoot, TRITrinamespaceRoot, 
                        TRITriprojectIdRoot, TRITriprovisionalFactorPackMetadataRoot, 
                        TRITripushNotificationRoot, TRITrishadowEvaluationRoot, TRIUIAssignment, 
-                       TRIUIAssignmentLanguage, TRIUiassignmentRoot, TRIUserDimension ]
-    objc-ivars:      [ TRIDenormalizedEvent._metrics, TRIDenormalizedEvent._subject, 
-                       TRIDenormalizedEvent._systemDimensions, TRIDenormalizedEvent._treatments, 
-                       TRIDenormalizedEvent._trialSystemTelemetry, TRIDenormalizedEvent._userDimensions, 
-                       TRILogContext._deviceLogTime, TRILogContext._deviceTrackingTime, 
-                       TRILogContext._has, TRILogContext._processEventIndex, TRILogContext._projectId, 
-                       TRILogContext._trackingId, TRILogEvent._context, TRILogEvent._denormalizedEvent, 
-                       TRILogEvent._logEventId, TRILogNamespace._has, TRILogNamespace._hashData, 
-                       TRILogNamespace._hashIncludesDefaults, TRILogNamespace._latestRolloutId, 
-                       TRILogNamespace._name, TRILogNamespace._rolloutCount, TRILogTime._has, 
-                       TRILogTime._minutesDstOffset, TRILogTime._secondsFromUtc, 
+                       TRIUIAssignmentLanguage, TRIUIAssignment_ExplicitBuckets, 
+                       TRIUiassignmentRoot, TRIUserDimension ]
+    objc-ivars:      [ TRIDenormalizedEvent._metrics, TRIDenormalizedEvent._mlruntimeDimensions, 
+                       TRIDenormalizedEvent._subject, TRIDenormalizedEvent._systemDimensions, 
+                       TRIDenormalizedEvent._treatments, TRIDenormalizedEvent._trialSystemTelemetry, 
+                       TRIDenormalizedEvent._userDimensions, TRILogContext._deviceLogTime, 
+                       TRILogContext._deviceTrackingTime, TRILogContext._has, TRILogContext._processEventIndex, 
+                       TRILogContext._projectId, TRILogContext._trackingId, TRILogEvent._context, 
+                       TRILogEvent._denormalizedEvent, TRILogEvent._logEventId, TRILogNamespace._has, 
+                       TRILogNamespace._hashData, TRILogNamespace._hashIncludesDefaults, 
+                       TRILogNamespace._latestRolloutId, TRILogNamespace._name, TRILogNamespace._rolloutCount, 
+                       TRILogTime._has, TRILogTime._minutesDstOffset, TRILogTime._secondsFromUtc, 
                        TRILogTime._secondsSince1970, TRILogTreatment._deploymentId, 
                        TRILogTreatment._experimentId, TRILogTreatment._has, TRILogTreatment._namespaceIds, 
                        TRILogTreatment._namespaceNames, TRILogTreatment._namespaces, 
-                       TRILogTreatment._treatmentId, TRIMetric._categoricalValue, 
-                       TRIMetric._doubleValue, TRIMetric._has, TRIMetric._integerValue, 
-                       TRIMetric._name, TRIMetric._userDefinedValue, TRIPBUnknownField.mutableFixed32List_, 
-                       TRIPBUnknownField.mutableFixed64List_, TRIPBUnknownField.mutableGroupList_, 
-                       TRIPBUnknownField.mutableLengthDelimitedList_, TRIPBUnknownField.mutableVarintList_, 
-                       TRIPBUnknownField.number_, TRISubject._deviceId, TRISystemDimensions._deviceClass, 
-                       TRISystemDimensions._has, TRISystemDimensions._isBetaUser, 
-                       TRISystemDimensions._isInternalBuild, TRISystemDimensions._osBuild, 
-                       TRISystemDimensions._targetedPopulation, TRISystemDimensions._userKeyboardEnabledInputModeIdentifiers, 
+                       TRILogTreatment._treatmentId, TRIMLRuntimeDimensions._crashPrefixHash, 
+                       TRIMLRuntimeDimensions._pluginId, TRIMLRuntimeDimensions._underlyingDomainCode, 
+                       TRIMetric._categoricalValue, TRIMetric._doubleValue, TRIMetric._has, 
+                       TRIMetric._integerValue, TRIMetric._name, TRIMetric._userDefinedValue, 
+                       TRIPBUnknownField.mutableFixed32List_, TRIPBUnknownField.mutableFixed64List_, 
+                       TRIPBUnknownField.mutableGroupList_, TRIPBUnknownField.mutableLengthDelimitedList_, 
+                       TRIPBUnknownField.mutableVarintList_, TRIPBUnknownField.number_, 
+                       TRISubject._deviceId, TRISystemDimensions._deviceClass, TRISystemDimensions._has, 
+                       TRISystemDimensions._isBetaUser, TRISystemDimensions._isInternalBuild, 
+                       TRISystemDimensions._osBuild, TRISystemDimensions._targetedPopulation, 
+                       TRISystemDimensions._userKeyboardEnabledInputModeIdentifiers, 
                        TRISystemDimensions._userSettingsBcp47DeviceLocale, TRISystemDimensions._userSettingsLanguageCode, 
                        TRISystemDimensions._userSettingsRegionCode, TRISystemDimensions._versionTag, 
                        TRITrialAssetPurgeFields._has, TRITrialAssetPurgeFields._purgeabilityLevel, 

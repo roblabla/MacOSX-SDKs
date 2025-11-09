@@ -18,56 +18,54 @@
 #include <stdarg.h>
 #include "Visibility.h"
 
+#define _SWIFT_OS_DEPRECATED __attribute((deprecated("The _SwiftOSOverlayShims module is obsolete. Please stop importing it.")))
+
+_SWIFT_OS_DEPRECATED
 static inline os_log_t _Nonnull
 _swift_os_log_default(void) {
   return OS_LOG_DEFAULT;
 }
 
+_SWIFT_OS_DEPRECATED
 static inline os_log_t _Nonnull
 _swift_os_log_disabled(void) {
   return OS_LOG_DISABLED;
 }
 
-static inline const unsigned char * _Nonnull
-_swift_os_log_dynamic_tracing(void) {
-  /* OS_LOG_CATEGORY_DYNAMIC_TRACING */
-  return "DynamicTracing";
-}
-
-static inline const unsigned char * _Nonnull
-_swift_os_log_dynamic_stack_tracing(void) {
-  /* OS_LOG_CATEGORY_DYNAMIC_STACK_TRACING */
-  return "DynamicStackTracing";
-}
-
+_SWIFT_OS_DEPRECATED
 static inline const unsigned char * _Nonnull
 _swift_os_signpost_points_of_interest(void) {
   /* OS_LOG_CATEGORY_POINTS_OF_INTEREST */
   return "PointsOfInterest";
 }
 
+_SWIFT_OS_DEPRECATED
 static inline os_signpost_id_t
 _swift_os_signpost_id_exclusive(void) {
   /* OS_SIGNPOST_ID_EXCLUSIVE */
   return (os_signpost_id_t)0xEEEEB0B5B2B2EEEE;
 }
 
+_SWIFT_OS_DEPRECATED
 static inline os_signpost_id_t
 _swift_os_signpost_id_invalid(void) {
   /* OS_SIGNPOST_ID_INVALID */
   return (os_signpost_id_t)~0;
 }
 
+_SWIFT_OS_DEPRECATED
 static inline os_signpost_id_t
 _swift_os_signpost_id_null(void) {
   /* OS_SIGNPOST_ID_NULL */
   return (os_signpost_id_t)0;
 }
 
+_SWIFT_OS_DEPRECATED
 SWIFT_RUNTIME_STDLIB_INTERNAL
 extern const void * _Nullable
 _swift_os_log_return_address(void);
 
+_SWIFT_OS_DEPRECATED
 SWIFT_RUNTIME_STDLIB_INTERNAL
 extern void
 _swift_os_log(
@@ -78,6 +76,7 @@ _swift_os_log(
     const char * _Nonnull fmt,
     va_list args);
 
+_SWIFT_OS_DEPRECATED
 SWIFT_RUNTIME_STDLIB_INTERNAL
 extern void
 _swift_os_signpost_with_format(
@@ -90,6 +89,7 @@ _swift_os_signpost_with_format(
     const char * _Nullable fmt,
     va_list args);
 
+_SWIFT_OS_DEPRECATED
 SWIFT_RUNTIME_STDLIB_INTERNAL
 extern void
 _swift_os_signpost(

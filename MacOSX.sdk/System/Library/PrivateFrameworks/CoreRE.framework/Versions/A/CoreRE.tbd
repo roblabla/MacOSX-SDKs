@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0EF87301-25B6-3CA3-85C4-BE63C9C23D32
+    value:           D21A743F-A120-3810-9E31-5FCFF696CF04
   - target:          x86_64-maccatalyst
-    value:           0EF87301-25B6-3CA3-85C4-BE63C9C23D32
+    value:           D21A743F-A120-3810-9E31-5FCFF696CF04
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2FC6987-AFFE-3CF1-B100-5F823242A831
+    value:           067124A9-9B85-37F7-A71A-9A49CAA55A09
   - target:          arm64e-maccatalyst
-    value:           F2FC6987-AFFE-3CF1-B100-5F823242A831
+    value:           067124A9-9B85-37F7-A71A-9A49CAA55A09
 install-name:    '/System/Library/PrivateFrameworks/CoreRE.framework/Versions/A/CoreRE'
-current-version: 161.200
+current-version: 161.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIFvPKvE, __ZTIFvxE, __ZTIPFvPKvE, __ZTIU13block_pointerFvbE, 
@@ -198,7 +198,14 @@ exports:
                        _REAnimationLibraryDefinitionSetEntryAsset, _REAnimationLoopEventCycle, 
                        _REAnimationLoopEventEntryIndex, _REAnimationLoopEventSubscribe, 
                        _REAnimationLoopEventTime, _REAnimationLoopEventTimelineIndex, 
-                       _REAnimationSceneAssetCreateWithTimeline, _REAnimationSceneAssetGetRootTimeline, 
+                       _REAnimationSceneAssetCreateWithTimeline, _REAnimationSceneAssetCreateWithTimelineAndEntityDefinition, 
+                       _REAnimationSceneAssetGetRootTimeline, _REAnimationSceneEntityDefinitionAddChildDefinition, 
+                       _REAnimationSceneEntityDefinitionCreate, _REAnimationSceneEntityDefinitionGetChildAtIndex, 
+                       _REAnimationSceneEntityDefinitionGetChildCount, _REAnimationSceneEntityDefinitionGetEntityName, 
+                       _REAnimationSceneEntityDefinitionGetHasTransformAnimations, 
+                       _REAnimationSceneEntityDefinitionGetSkeletalPoseDefinitionAsset, 
+                       _REAnimationSceneEntityDefinitionSetHasTransformAnimations, 
+                       _REAnimationSceneEntityDefinitionSetSkeletalPoseDefinitionAsset, 
                        _REAnimationServiceGetRootTimebase, _REAnimationServiceStartAnimation, 
                        _REAnimationStartEventEntryIndex, _REAnimationStartEventSubscribe, 
                        _REAnimationStartEventTime, _REAnimationStartEventTimelineIndex, 
@@ -221,8 +228,8 @@ exports:
                        _REAssetHandleCopyCompiledExtension, _REAssetHandleCopyDeviceAssetPath, 
                        _REAssetHandleCopyToCFPropertyBag, _REAssetHandleCopyToPropertyBag, 
                        _REAssetHandleCreateFromAssetRegistrationOptions, _REAssetHandleCreateWithAssetDescriptor, 
-                       _REAssetHandleIsLoaded, _REAssetHandleIsMutable, _REAssetHandleLoadAsync, 
-                       _REAssetHandleLoadFailed, _REAssetHandleLoadFromCFPropertyBag, 
+                       _REAssetHandleIsLoaded, _REAssetHandleIsMutable, _REAssetHandleIsMutated, 
+                       _REAssetHandleLoadAsync, _REAssetHandleLoadFailed, _REAssetHandleLoadFromCFPropertyBag, 
                        _REAssetHandleLoadFromPropertyBag, _REAssetHandleLoadNow, 
                        _REAssetHandleReloadAsync, _REAssetHandleResolvesToSameAssetPath, 
                        _REAssetHandleUnloadAsync, _REAssetIsMemoryAsset, _REAssetIsMemoryAssetWithNetworkSyncingEnabled, 
@@ -336,10 +343,12 @@ exports:
                        _REAttributionGetContextCount, _REAttributionGetContextMetrics, 
                        _REAttributionGetEngineMetrics, _REAttributionGetLocalPeerFromAttributionContext, 
                        _REAttributionGetRawContextMetrics, _REAttributionGetRawEngineMetrics, 
-                       _REAudioAnimationComponentGetComponentType, _REAudioAnimationComponentGetLinearGain, 
+                       _REAudioAnimationComponentGetAnimationGain, _REAudioAnimationComponentGetComponentType, 
+                       _REAudioAnimationComponentGetLinearGain, _REAudioAnimationComponentGetMediaOffset, 
                        _REAudioAnimationComponentGetMute, _REAudioAnimationComponentGetPlaybackTokenForEvent, 
-                       _REAudioAnimationComponentRemoveAudioAssetForEvent, _REAudioAnimationComponentSetAudioAsset, 
-                       _REAudioAnimationComponentSetAudioAssetForEvent, _REAudioAnimationComponentSetLinearGain, 
+                       _REAudioAnimationComponentRemoveAudioAssetForEvent, _REAudioAnimationComponentSetAnimationGain, 
+                       _REAudioAnimationComponentSetAudioAsset, _REAudioAnimationComponentSetAudioAssetForEvent, 
+                       _REAudioAnimationComponentSetLinearGain, _REAudioAnimationComponentSetMediaOffset, 
                        _REAudioAnimationComponentSetMute, _REAudioChannelDataCaptureStart, 
                        _REAudioChannelDataCaptureStop, _REAudioEngineAVAudio, _REAudioEngineReady, 
                        _REAudioFileAssetCompleteLoad, _REAudioFileAssetCompleteLoadWithService, 
@@ -690,9 +699,9 @@ exports:
                        _REComponentGetClass, _REComponentGetEntity, _REComponentLoadFromPropertyBag, 
                        _REComponentPredicateDestroy, _REComponentQueryDestroy, _REComponentSaveToStream, 
                        _REComponentSerializeCopyToJSONData, _REComponentSerializeCopyToOPACKData, 
-                       _REComposeMatrix, _RECompoundShapeAssetGetChildCount, _RECompoundShapeAssetGetChildPose, 
-                       _RECompoundShapeAssetGetChildShape, _RECompoundShapeCreate, 
-                       _RECompoundShapeGetChildCount, _RECompoundShapeGetChildPose, 
+                       _REComponentTypeSetCloneCallback, _REComposeMatrix, _RECompoundShapeAssetGetChildCount, 
+                       _RECompoundShapeAssetGetChildPose, _RECompoundShapeAssetGetChildShape, 
+                       _RECompoundShapeCreate, _RECompoundShapeGetChildCount, _RECompoundShapeGetChildPose, 
                        _RECompoundShapeGetChildShape, _RECompressionCreate, _RECompressionCreateBank, 
                        _RECompressionDeinit, _RECompressionDestroy, _RECompressionDestroyBank, 
                        _RECompressionInit, _RECompressionProcess, _RECompressionProcessBank, 
@@ -724,7 +733,8 @@ exports:
                        _RECustomComponentGetObject, _RECustomComponentGetType, _RECustomComponentTypeCreate, 
                        _RECustomComponentTypeCreateWithIsTransient, _RECustomComponentTypeCreateWithType, 
                        _RECustomComponentTypeDestroy, _RECustomComponentTypeGetContext, 
-                       _RECustomComponentTypeGetObjectIntrospection, _RECustomDeformerAllocationCPUBuffer, 
+                       _RECustomComponentTypeGetObjectIntrospection, _RECustomComponentTypeSetDecodeCallback, 
+                       _RECustomComponentTypeSetEncodeCallback, _RECustomDeformerAllocationCPUBuffer, 
                        _RECustomDeformerAllocationConstCPUBuffer, _RECustomDeformerAllocationConstGPUBuffer, 
                        _RECustomDeformerAllocationGPUBuffer, _RECustomDeformerAllocationIsCPUBuffer, 
                        _RECustomDeformerAllocationIsGPUBuffer, _RECustomDeformerAllocatorAllocateCPUBuffer, 
@@ -1176,20 +1186,20 @@ exports:
                        _REMeshAssetGetModelPartBufferName, _REMeshAssetGetModelPartCount, 
                        _REMeshAssetGetModelPartMaterial, _REMeshAssetGetModelPartMaterialIndex, 
                        _REMeshAssetGetModelPartName, _REMeshAssetGetModelPartVertexCount, 
-                       _REMeshAssetGetModelVertexCount, _REMeshAssetGetSkeletonBindPoseTransform, 
-                       _REMeshAssetGetSkeletonCount, _REMeshAssetGetSkeletonInverseBindPoseTransform, 
-                       _REMeshAssetGetSkeletonJointCount, _REMeshAssetGetSkeletonJointName, 
-                       _REMeshAssetGetSkeletonJointParent, _REMeshAssetGetSkinnedVertexCount, 
-                       _REMeshAssetGetTotalSkeletonCount, _REMeshAssetGetTotalVertexCount, 
-                       _REMeshAssetReplaceAllWithModel, _REMeshAssetReplaceAllWithModels, 
-                       _REMeshAttributeDescriptorArrayCreate, _REMeshAttributeDescriptorArraySetCustomName, 
-                       _REMeshAttributeDescriptorCopyBitangentsToBuffer, _REMeshAttributeDescriptorCopyColor3sToBuffer, 
-                       _REMeshAttributeDescriptorCopyColor4sToBuffer, _REMeshAttributeDescriptorCopyCustom2sToBuffer, 
-                       _REMeshAttributeDescriptorCopyCustom3sToBuffer, _REMeshAttributeDescriptorCopyCustom4sToBuffer, 
-                       _REMeshAttributeDescriptorCopyNormalsToBuffer, _REMeshAttributeDescriptorCopyPositionsToBuffer, 
-                       _REMeshAttributeDescriptorCopyTangentsToBuffer, _REMeshAttributeDescriptorCopyUVsToBuffer, 
-                       _REMeshCompileOptionsCreate, _REMeshCompileOptionsGetGenerateDecimatedMesh, 
-                       _REMeshCompileOptionsGetGenerateVertexFaceAdjacencyAttributes, 
+                       _REMeshAssetGetModelVertexCount, _REMeshAssetGetSkeletonAtIndex, 
+                       _REMeshAssetGetSkeletonBindPoseTransform, _REMeshAssetGetSkeletonCount, 
+                       _REMeshAssetGetSkeletonInverseBindPoseTransform, _REMeshAssetGetSkeletonJointCount, 
+                       _REMeshAssetGetSkeletonJointName, _REMeshAssetGetSkeletonJointParent, 
+                       _REMeshAssetGetSkinnedVertexCount, _REMeshAssetGetTotalSkeletonCount, 
+                       _REMeshAssetGetTotalVertexCount, _REMeshAssetReplaceAllWithModel, 
+                       _REMeshAssetReplaceAllWithModels, _REMeshAttributeDescriptorArrayCreate, 
+                       _REMeshAttributeDescriptorArraySetCustomName, _REMeshAttributeDescriptorCopyBitangentsToBuffer, 
+                       _REMeshAttributeDescriptorCopyColor3sToBuffer, _REMeshAttributeDescriptorCopyColor4sToBuffer, 
+                       _REMeshAttributeDescriptorCopyCustom2sToBuffer, _REMeshAttributeDescriptorCopyCustom3sToBuffer, 
+                       _REMeshAttributeDescriptorCopyCustom4sToBuffer, _REMeshAttributeDescriptorCopyNormalsToBuffer, 
+                       _REMeshAttributeDescriptorCopyPositionsToBuffer, _REMeshAttributeDescriptorCopyTangentsToBuffer, 
+                       _REMeshAttributeDescriptorCopyUVsToBuffer, _REMeshCompileOptionsCreate, 
+                       _REMeshCompileOptionsGetGenerateDecimatedMesh, _REMeshCompileOptionsGetGenerateVertexFaceAdjacencyAttributes, 
                        _REMeshCompileOptionsGetMergeVerticesIfPolygonSoup, _REMeshCompileOptionsGetPreserveSharpFeatures, 
                        _REMeshCompileOptionsGetPreserveSubdivisonSurfaceData, _REMeshCompileOptionsGetReorderVertexCaching, 
                        _REMeshCompileOptionsGetRepairTangents, _REMeshCompileOptionsSetGenerateDecimatedMesh, 
@@ -2241,16 +2251,17 @@ exports:
                        _RETimelineDefinitionSetSkeletalPoseToJointNames, _RETimelineDefinitionSetSkeletalPoseToJointValue, 
                        _RETimelineDefinitionSetSkeletalPoseToValue, _RETimelineDefinitionSetSkeletalPoseTranslationChannelMask, 
                        _RETimelineDefinitionSetSkeletalPoses, _RETimelineDefinitionSetSkeletalPosesValues, 
-                       _RETimelineDefinitionSetSpinClockwise, _RETimelineDefinitionSetStartTime, 
-                       _RETimelineDefinitionSetStartTransform, _RETimelineDefinitionSetTargetPath, 
-                       _RETimelineDefinitionSetValueCount, _RETimelineEventFilter, 
-                       _RETimelineEventGetParameterFloat, _RETimelineEventGetParameterInt, 
-                       _RETimelineEventGetParameterString, _RETimelineEventGetParameterVector4, 
-                       _RETimelineEventHandleIsValid, _RETintComponentGetComponentType, 
-                       _RETintComponentGetTintColor, _RETintComponentGetTintVirtualObject, 
-                       _RETintComponentSetTintColor, _RETintComponentSetTintVirtualObject, 
-                       _RETraceClientConnect, _RETraceClientConnectWithFileHandle, 
-                       _RETraceClientCreate, _RETraceClientDisconnect, _RETraceClientSetConnectedHandler, 
+                       _RETimelineDefinitionSetSkeleton, _RETimelineDefinitionSetSpinClockwise, 
+                       _RETimelineDefinitionSetStartTime, _RETimelineDefinitionSetStartTransform, 
+                       _RETimelineDefinitionSetTargetPath, _RETimelineDefinitionSetValueCount, 
+                       _RETimelineEventFilter, _RETimelineEventGetParameterFloat, 
+                       _RETimelineEventGetParameterInt, _RETimelineEventGetParameterString, 
+                       _RETimelineEventGetParameterVector4, _RETimelineEventHandleIsValid, 
+                       _RETintComponentGetComponentType, _RETintComponentGetTintColor, 
+                       _RETintComponentGetTintVirtualObject, _RETintComponentSetTintColor, 
+                       _RETintComponentSetTintVirtualObject, _RETraceClientConnect, 
+                       _RETraceClientConnectWithFileHandle, _RETraceClientCreate, 
+                       _RETraceClientDisconnect, _RETraceClientSetConnectedHandler, 
                        _RETraceClientSetDisconnectedHandler, _RETraceClientSetLoadHandler, 
                        _RETraceDeltaCopyToData, _RETraceDeltaCreateFromData, _RETraceDeltaCreateMerged, 
                        _RETraceDeltaFindEntry, _RETraceDeltaGetEntryAt, _RETraceDeltaGetEntryCount, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           96402EE0-B1F5-3E34-9351-40512A3033E0
+    value:           4316E8F2-BE49-38C6-8507-40CA7F705899
   - target:          x86_64-maccatalyst
-    value:           96402EE0-B1F5-3E34-9351-40512A3033E0
+    value:           4316E8F2-BE49-38C6-8507-40CA7F705899
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4382B155-737F-3939-9900-DF5AAAB88860
+    value:           5A9AD2D7-F268-34B6-914E-88CE480D14EE
   - target:          arm64e-maccatalyst
-    value:           4382B155-737F-3939-9900-DF5AAAB88860
+    value:           5A9AD2D7-F268-34B6-914E-88CE480D14EE
 install-name:    '/System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore'
-current-version: 3693.40
+current-version: 3696.80.82
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -40,6 +40,8 @@ exports:
                        _ECGmailLabelTrash, _ECHeadersForPromotionalCategorization, 
                        _ECLocalActionReplayErrorDomain, _ECMailAccountsDidChangeNotification, 
                        _ECMailAccountsDidChangeNotificationAccountsNeedInitializationKey, 
+                       _ECMailAccountsDidChangeNotificationKeyAccountIdentifiers, 
+                       _ECMailAccountsDidChangeNotificationKeyPreviousAccountIdentifiers, 
                        _ECMailDataclassPropertyAccountDirectoryTildeAbbreviatedPath, 
                        _ECMailDataclassPropertyArchiveMailboxName, _ECMailDataclassPropertyBigMessageWarningSize, 
                        _ECMailDataclassPropertyCompactWhenClosingMailboxes, _ECMailDataclassPropertyDateOfLastSync, 
@@ -66,12 +68,13 @@ exports:
                        _ECMessageHeaderKeyContentLanguage, _ECMessageHeaderKeyContentLocation, 
                        _ECMessageHeaderKeyContentTransferEncoding, _ECMessageHeaderKeyContentType, 
                        _ECMessageHeaderKeyDKIMSignature, _ECMessageHeaderKeyDate, 
-                       _ECMessageHeaderKeyFrom, _ECMessageHeaderKeyHMEAddress, _ECMessageHeaderKeyImageArchiveURL, 
-                       _ECMessageHeaderKeyInReplyTo, _ECMessageHeaderKeyListID, _ECMessageHeaderKeyListUnsubscribe, 
-                       _ECMessageHeaderKeyMIMEVersion, _ECMessageHeaderKeyMessageID, 
-                       _ECMessageHeaderKeyReceived, _ECMessageHeaderKeyReferences, 
-                       _ECMessageHeaderKeyRemoteAttachmentURL, _ECMessageHeaderKeyReplyTo, 
-                       _ECMessageHeaderKeyResentCC, _ECMessageHeaderKeyResentDate, 
+                       _ECMessageHeaderKeyFrom, _ECMessageHeaderKeyHMEAddress, _ECMessageHeaderKeyHMEDraft, 
+                       _ECMessageHeaderKeyImageArchiveURL, _ECMessageHeaderKeyInReplyTo, 
+                       _ECMessageHeaderKeyListID, _ECMessageHeaderKeyListUnsubscribe, 
+                       _ECMessageHeaderKeyListUnsubscribePost, _ECMessageHeaderKeyMIMEVersion, 
+                       _ECMessageHeaderKeyMessageID, _ECMessageHeaderKeyReceived, 
+                       _ECMessageHeaderKeyReferences, _ECMessageHeaderKeyRemoteAttachmentURL, 
+                       _ECMessageHeaderKeyReplyTo, _ECMessageHeaderKeyResentCC, _ECMessageHeaderKeyResentDate, 
                        _ECMessageHeaderKeyResentFrom, _ECMessageHeaderKeyResentMessageID, 
                        _ECMessageHeaderKeyResentTo, _ECMessageHeaderKeySubject, _ECMessageHeaderKeyTo, 
                        _ECMessageHeaderKeyUserAgent, _ECMessageHeaderKeyXAppleUnsubscribe, 
@@ -83,8 +86,9 @@ exports:
                        _ECSASLMechanismCramMD5, _ECSASLMechanismDigestMD5, _ECSASLMechanismExternal, 
                        _ECSASLMechanismGSSAPI, _ECSASLMechanismLogin, _ECSASLMechanismNTLM, 
                        _ECSASLMechanismOAuth2, _ECSASLMechanismPlain, _ECSASLMechanismPlainClientToken, 
-                       _ECTaggedHeaderParserTagHMEAddress, _ECWhiteMailboxNameGmail, 
-                       _ECWhiteMailboxNameGoogleMail, _ECWhiteMailboxNameGoogleSpaceMail, 
+                       _ECTaggedHeaderParserTagHMEAddress, _ECTaggedHeaderParserTagHMEForwardingAddress, 
+                       _ECTaggedHeaderParserTagHMESenderAddress, _ECTaggedHeaderParserTagIsHMEReply, 
+                       _ECWhiteMailboxNameGmail, _ECWhiteMailboxNameGoogleMail, _ECWhiteMailboxNameGoogleSpaceMail, 
                        __ECBeginAllowingMainThreadNetworking, __ECEndAllowingMainThreadNetworking, 
                        __ECIsNetworkActivityAllowed, __ef_log_ECDKIMCryptoUtil, __ef_log_ECDKIMVerifier, 
                        __ef_log_ECTaggedHeaderParser ]

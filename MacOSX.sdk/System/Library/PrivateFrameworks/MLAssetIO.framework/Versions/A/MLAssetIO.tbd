@@ -3,38 +3,28 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A7B1A429-0E5B-3167-8521-CFF466FF82B7
+    value:           34E8B967-AB50-3D63-AFEA-D52D3E6B195B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA55B648-B6ED-3D01-8FDD-93CBCD73F65D
+    value:           1E8A9A71-244B-3288-87FB-6F267921D7FF
 install-name:    '/System/Library/PrivateFrameworks/MLAssetIO.framework/Versions/A/MLAssetIO'
-current-version: 1127.60.2
+current-version: 1127.100.41
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTINSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 
                        __ZTINSt3__110__function6__baseIFbRKN3MIL11IROperationEEEE, 
                        __ZTINSt3__110__function6__baseIFvxEEE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__114unary_functionIxmEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__114unary_functionIxmEE, __ZTINSt3__117bad_function_callE, 
                        __ZTINSt3__121__basic_string_commonILb1EEE, __ZTINSt3__14hashIxEE, 
                        __ZTIPFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTSFN3MIL16ValidationResultERKNS_11IROperationEE, 
                        __ZTSNSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 
                        __ZTSNSt3__110__function6__baseIFbRKN3MIL11IROperationEEEE, 
                        __ZTSNSt3__110__function6__baseIFvxEEE, __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114default_deleteIN3MIL10IROperatorEEE, 
-                       __ZTSNSt3__114default_deleteIN3MIL10MILContextEEE, __ZTSNSt3__114default_deleteIN3MIL11IRParameterEEE, 
-                       __ZTSNSt3__114default_deleteINS_13unordered_mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrIN3MIL11IRParameterEEENS_4hashIS7_EENS_8equal_toIS7_EENS5_INS_4pairIKS7_SB_EEEEEEEE, 
+                       __ZTSNSt3__114default_deleteIN3MIL10IROperatorEEE, __ZTSNSt3__114default_deleteIN3MIL10MILContextEEE, 
+                       __ZTSNSt3__114default_deleteIN3MIL11IRParameterEEE, __ZTSNSt3__114default_deleteINS_13unordered_mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrIN3MIL11IRParameterEEENS_4hashIS7_EENS_8equal_toIS7_EENS5_INS_4pairIKS7_SB_EEEEEEEE, 
                        __ZTSNSt3__114default_deleteINS_6vectorINS_10shared_ptrIN3MIL11IRParameterEEENS_9allocatorIS5_EEEEEE, 
-                       __ZTSNSt3__114unary_functionIxmEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__114unary_functionIxmEE, __ZTSNSt3__117bad_function_callE, 
                        __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSNSt3__14hashIxEE, 
                        __ZTSPFN3MIL16ValidationResultERKNS_11IROperationEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

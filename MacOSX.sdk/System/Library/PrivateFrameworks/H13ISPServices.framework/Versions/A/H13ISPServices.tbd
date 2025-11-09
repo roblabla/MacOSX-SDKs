@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E29F78B0-391F-36D0-AA83-DE81F71A2F13
+    value:           0D586286-21CD-3AF8-9601-1BB70328D4A5
 install-name:    '/System/Library/PrivateFrameworks/H13ISPServices.framework/Versions/A/H13ISPServices'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

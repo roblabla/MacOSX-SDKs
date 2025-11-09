@@ -42,7 +42,6 @@
 #import <HomeKit/HMEventTriggerActivationState.h>
 #import <HomeKit/HMSignificantEvents.h>
 #import <HomeKit/HMPresenceEventDefines.h>
-#import <HomeKit/HMAccessorySetupPayload.h>
 #import <HomeKit/HMAddAccessoryRequest.h>
 #import <HomeKit/HMNetworkConfigurationProfile.h>
 
@@ -62,7 +61,11 @@
 #import <HomeKit/HMCameraAudioControl.h>
 
 #import <HomeKit/HMAccessorySetupManager.h>
+#import <HomeKit/HMAccessorySetupPayload.h>
+#import <HomeKit/HMAccessorySetupRequest.h>
+#import <HomeKit/HMAccessorySetupResult.h>
+
 #import <HomeKit/HMMatterHome.h>
+#import <HomeKit/HMMatterRequestHandler.h>
 #import <HomeKit/HMMatterRoom.h>
 #import <HomeKit/HMMatterTopology.h>
-#import <HomeKit/HMMatterRequestHandler.h>

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           585F68B7-053A-3BE4-BAA1-42884284A92B
+    value:           21526BAC-D528-36FD-B4BB-C7C0C5DF02B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BC2EEB71-53D2-3E67-B859-334C86647DDD
+    value:           ED935A9C-C1CB-3BCD-B79A-2E4F64281075
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libSystemDetermination.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -30,10 +30,7 @@ exports:
                        __ZTIN3ctu8LoggableIN2sd23IMSSubscriberControllerENS_11OsLogLoggerEEE, 
                        __ZTIN3ims18StackEventDelegateE, __ZTINSt3__110__function6__baseIFKPKcN10subscriber7SimSlotEEEE, 
                        __ZTINSt3__110__function6__baseIFvbbEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__123enable_shared_from_thisI26SystemDeterminationManagerEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__123enable_shared_from_thisI26SystemDeterminationManagerEE, 
                        __ZTINSt3__123enable_shared_from_thisIN2sd10DCNManagerEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN2sd18IMSSubscriberModelEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN2sd19IMSSubscriberConfigEEE, 
@@ -60,10 +57,7 @@ exports:
                        __ZTSNSt3__110shared_ptrIN2sd10ImsFeatureEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN2sd18IMSSubscriberModelEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN2sd19IMSSubscriberConfigEE27__shared_ptr_default_deleteIS2_S2_EE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__123enable_shared_from_thisI26SystemDeterminationManagerEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__123enable_shared_from_thisI26SystemDeterminationManagerEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN2sd10DCNManagerEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN2sd18IMSSubscriberModelEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN2sd19IMSSubscriberConfigEEE, 

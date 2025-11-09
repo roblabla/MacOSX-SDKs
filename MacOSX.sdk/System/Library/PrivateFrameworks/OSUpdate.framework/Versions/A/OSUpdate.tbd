@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CDC6A812-8BAA-3954-8876-AE670F702BEE
+    value:           CD569FD7-3A78-32E9-B93C-E5D4E16833B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E66E3CDF-063E-310C-8B65-3C017D6FC11E
+    value:           F3C489CC-DE24-36B2-B0C3-1788679D7C44
 install-name:    '/System/Library/PrivateFrameworks/OSUpdate.framework/Versions/A/OSUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -125,23 +125,27 @@ exports:
                        _SUOSUInstallOptionsDoItLaterDeferralMaximumKey, _SUOSUInstallOptionsDoItLaterKey, 
                        _SUOSUInstallOptionsDoItLaterTimeKey, _SUOSUInstallOptionsDownloadAndNotifyKey, 
                        _SUOSUInstallOptionsDownloadOnlyKey, _SUOSUInstallOptionsForceRestartKey, 
-                       _SUOSUInstallOptionsForegroundKey, _SUOSUInstallOptionsMDMInitiatedKey, 
-                       _SUOSUInstallOptionsProductKeysKey, _SUOSUInstallOptionsProductMarketingVersionKey, 
-                       _SUOSUInstallOptionsScheduleUpdateForLaterKey, _SUOSUInstallOptionsSkipRestartCountdownNotificationKey, 
-                       _SUOSUInstallOptionsUserIDKey, _SUOSUInstallOptionsUserPasswordKey, 
-                       _SUOSUInstallScanningForUpdate, _SUOSUInsufficientPowerIdentifier, 
-                       _SUOSULaterModeKey, _SUOSUMDMBundleId, _SUOSUMDMError, _SUOSUMDMMajorOSVersion, 
-                       _SUOSUMDMNotificationOptionKeyUpdateTitle, _SUOSUMDMNotificationOptionKeyUpdateVersion, 
-                       _SUOSUMDMPostInstalledIdentifier, _SUOSUMDMProductKeys, _SUOSUMDMProductMarketingVersion, 
-                       _SUOSUMDMProgress, _SUOSUMDMRequestedIdentifier, _SUOSUMDMState, 
-                       _SUOSUMajorOSAction, _SUOSUMajorOSOtherAction, _SUOSUMajorOSUpdateAutoDownloadedType, 
-                       _SUOSUMajorOSUpdateAvailableForDownloadType, _SUOSUMajorOSUpdateIdentifier, 
+                       _SUOSUInstallOptionsForegroundKey, _SUOSUInstallOptionsInitiatingClientKey, 
+                       _SUOSUInstallOptionsMDMInitiatedKey, _SUOSUInstallOptionsProductKeysKey, 
+                       _SUOSUInstallOptionsProductMarketingVersionKey, _SUOSUInstallOptionsScheduleUpdateForLaterKey, 
+                       _SUOSUInstallOptionsSkipRestartCountdownNotificationKey, _SUOSUInstallOptionsUserIDKey, 
+                       _SUOSUInstallOptionsUserPasswordKey, _SUOSUInstallScanningForUpdate, 
+                       _SUOSUInsufficientPowerIdentifier, _SUOSULaterModeKey, _SUOSUMDMBundleId, 
+                       _SUOSUMDMDeferralsLeft, _SUOSUMDMDoItLaterScheduledDate, _SUOSUMDMError, 
+                       _SUOSUMDMMajorOSVersion, _SUOSUMDMMaxDeferrals, _SUOSUMDMNotificationOptionKeyUpdateTitle, 
+                       _SUOSUMDMNotificationOptionKeyUpdateVersion, _SUOSUMDMPostInstalledIdentifier, 
+                       _SUOSUMDMProductKeys, _SUOSUMDMProductMarketingVersion, _SUOSUMDMProgress, 
+                       _SUOSUMDMRequestedIdentifier, _SUOSUMDMState, _SUOSUMDMUserDeferrals, 
+                       _SUOSUMDMUserNotificationTimes, _SUOSUMajorOSAction, _SUOSUMajorOSOtherAction, 
+                       _SUOSUMajorOSUpdateAutoDownloadedType, _SUOSUMajorOSUpdateAvailableForDownloadType, 
+                       _SUOSUMajorOSUpdateIdentifier, _SUOSUMajorOSUpdateMSUType, 
                        _SUOSUMajorOSUpdatePendingType, _SUOSUMajorOSUpdateRestartingType, 
                        _SUOSUMajorOSVariantCustomer, _SUOSUMajorOSVariantInternal, 
                        _SUOSUMigrationInlineSUKey, _SUOSUNotNowAction, _SUOSUNotificationManagerServiceInterface, 
                        _SUOSUNotificationOfferLaterUserInfoKey, _SUOSUNotificationRestartCountdownIdentifier, 
                        _SUOSUNotificationRestartRequiredUserInfoKey, _SUOSUNotificationUpdatesDownloadedUserInfoKey, 
                        _SUOSUNotificationUserInfoMajorOSTagsKey, _SUOSUNotificationUserInfoMajorOSURLKey, 
+                       _SUOSUNotificationUserInfoOSVersionKey, _SUOSUNotificationUserInfoShouldAutoDownloadKey, 
                        _SUOSUNotificationUserInfoSourceKey, _SUOSUNotificationUserInfoTypeKey, 
                        _SUOSUNotificationUserInfoUpdateKeysKey, _SUOSUOkAction, _SUOSUOtherUsersLoggedInIdentifier, 
                        _SUOSUPostDoItLaterSuccessIdentifier, _SUOSUPostLogoutInstallOptionsDoItLaterKey, 

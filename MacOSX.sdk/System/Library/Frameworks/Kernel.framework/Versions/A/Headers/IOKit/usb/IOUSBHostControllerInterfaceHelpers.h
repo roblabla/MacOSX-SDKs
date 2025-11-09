@@ -41,6 +41,14 @@ const char* IOUSBHostCIDeviceSpeedToString(IOUSBHostCIDeviceSpeed speed);
 
 const char* IOUSBHostCIExceptionTypeToString(IOUSBHostCIExceptionType exceptionType);
 
+const char* IOUSBHostCIControllerStateToString(IOUSBHostCIControllerState controllerState);
+
+const char* IOUSBHostCIPortStateToString(IOUSBHostCIPortState portState);
+
+const char* IOUSBHostCIDeviceStateToString(IOUSBHostCIDeviceState deviceState);
+
+const char* IOUSBHostCIEndpointStateToString(IOUSBHostCIEndpointState endpointState);
+
 #ifdef  __cplusplus
 }   // extern "C"
 #endif

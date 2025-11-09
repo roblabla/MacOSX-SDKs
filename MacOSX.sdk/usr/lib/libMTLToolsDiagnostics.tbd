@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           616AA725-5A5B-3222-8A65-EE31C283B988
+    value:           9026A742-5F0D-300F-B4B6-704327FD4248
   - target:          x86_64-maccatalyst
-    value:           616AA725-5A5B-3222-8A65-EE31C283B988
+    value:           9026A742-5F0D-300F-B4B6-704327FD4248
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           89E9C5DB-2D93-340C-9706-54A5D56F6F23
+    value:           E1C8EB1A-F9DD-3185-A41B-0FE0F68D2ABC
   - target:          arm64e-maccatalyst
-    value:           89E9C5DB-2D93-340C-9706-54A5D56F6F23
+    value:           E1C8EB1A-F9DD-3185-A41B-0FE0F68D2ABC
 install-name:    '/usr/lib/libMTLToolsDiagnostics.dylib'
-current-version: 210.52
+current-version: 214.17
 compatibility-version: 1.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

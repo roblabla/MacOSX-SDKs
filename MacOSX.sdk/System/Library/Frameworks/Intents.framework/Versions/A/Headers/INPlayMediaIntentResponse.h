@@ -2,7 +2,7 @@
 //  INPlayMediaIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, INPlayMediaIntentResponseCode) {
     INPlayMediaIntentResponseCodeFailureUnknownMediaType,
     INPlayMediaIntentResponseCodeFailureNoUnplayedContent,
     INPlayMediaIntentResponseCodeFailureRestrictedContent,
+    INPlayMediaIntentResponseCodeFailureMaxStreamLimitReached API_AVAILABLE(ios(15.4), watchos(8.5), tvos(15.4)) API_UNAVAILABLE(macos),
 } API_AVAILABLE(ios(12.0), watchos(5.0), tvos(14.0)) API_UNAVAILABLE(macos);
 
 NS_ASSUME_NONNULL_BEGIN

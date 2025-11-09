@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           78E72A9C-F5CD-37AD-884E-2D5127BF9E55
+    value:           1432B696-F92F-3EDD-AD4E-8FFEA498E485
   - target:          x86_64-maccatalyst
-    value:           78E72A9C-F5CD-37AD-884E-2D5127BF9E55
+    value:           1432B696-F92F-3EDD-AD4E-8FFEA498E485
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E204BE56-BB3D-3D33-85B5-1BA6F8EFD19B
+    value:           46515FEB-0F4B-36D2-8BD2-A2AB5FC2418F
   - target:          arm64e-maccatalyst
-    value:           E204BE56-BB3D-3D33-85B5-1BA6F8EFD19B
+    value:           46515FEB-0F4B-36D2-8BD2-A2AB5FC2418F
 install-name:    '/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers'
 current-version: 709
 exports:

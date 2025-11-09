@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D13E2E0E-A0BA-3E88-A5AF-3EBF284C4C53
+    value:           F93DA606-2FF3-3146-8136-33E3B99D9C1C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           39165872-0496-303A-8B1B-C6AC3D8225EF
+    value:           DFF831B9-5A0C-331E-A174-82728F6FB91E
 install-name:    '/System/Library/PrivateFrameworks/OSPersonalization.framework/Versions/A/OSPersonalization'
-current-version: 118
+current-version: 122
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DERAccessDescriptionItemSpecs, _DERAlgorithmIdItemSpecs, 

@@ -35,6 +35,8 @@ typedef NS_ERROR_ENUM(PHPhotosErrorDomain, PHPhotosError) {
     PHPhotosErrorAccessRestricted API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3310, // Access restricted by system configuration
     PHPhotosErrorAccessUserDenied API_AVAILABLE(macos(12), ios(15), tvos(15)) = 3311, // The user has denied access
 
+    PHPhotosErrorLibraryInFileProviderSyncRoot API_AVAILABLE(macos(12.3), ios(15.4), tvos(15.4)) = 5423, // The Photos library bundle is in a File Provider Sync Root directory, which is not supported because it can corrupt the photo library
+
     PHPhotosErrorInvalid API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorInternalError", macos(10.15, 12), ios(13, 15), tvos(13, 15)) = -1, // DEPRECATED An unknown error occured
 };
 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           463DA7D5-0696-3D4F-A7A8-BDC853ED53D4
+    value:           EC71689C-D6A9-38E1-8442-009CC2178B4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A39C987-F9CA-3178-A5ED-18FC1BE4FC1B
+    value:           5001271A-167E-3AB5-A94C-544D68F4CE14
 install-name:    '/System/Library/PrivateFrameworks/BehaviorMiner.framework/Versions/A/BehaviorMiner'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

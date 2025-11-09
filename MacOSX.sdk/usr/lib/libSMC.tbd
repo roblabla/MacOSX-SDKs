@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B34555C6-06C3-3C48-8050-6489FB32F34C
+    value:           525D3ABD-8AF9-30E3-8B41-2A80771BEACD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5182275-3396-30BB-8101-024E0CE73EB1
+    value:           0899CD7F-B327-3929-9096-CBDDF9358E3D
 install-name:    '/usr/lib/libSMC.dylib'
 current-version: 21
 exports:

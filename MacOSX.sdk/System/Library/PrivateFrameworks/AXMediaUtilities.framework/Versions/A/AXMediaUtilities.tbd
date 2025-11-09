@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CA3CDA0B-E3D7-31C9-9214-855AEDCC135F
+    value:           4E3A84A7-240F-31E5-A673-3C6B4FC13B01
   - target:          x86_64-maccatalyst
-    value:           CA3CDA0B-E3D7-31C9-9214-855AEDCC135F
+    value:           4E3A84A7-240F-31E5-A673-3C6B4FC13B01
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           555DBD43-3EE8-3BBA-8CE2-6E28FBFACD3F
+    value:           4074528F-21C9-31AA-BE1C-4A7403FB8C5A
   - target:          arm64e-maccatalyst
-    value:           555DBD43-3EE8-3BBA-8CE2-6E28FBFACD3F
+    value:           4074528F-21C9-31AA-BE1C-4A7403FB8C5A
 install-name:    '/System/Library/PrivateFrameworks/AXMediaUtilities.framework/Versions/A/AXMediaUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

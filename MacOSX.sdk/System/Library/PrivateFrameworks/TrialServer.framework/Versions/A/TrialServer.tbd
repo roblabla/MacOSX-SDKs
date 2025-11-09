@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4888BF9F-5F88-3DD5-AC11-0DA7E32A368D
+    value:           F2E4BD6B-C0A7-38FC-8751-27D75684640F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFDF05BB-2B3B-3F15-AE47-152F46D73B76
+    value:           69867328-D2AD-3F1B-81AF-5D466B5FC8F0
 install-name:    '/System/Library/PrivateFrameworks/TrialServer.framework/Versions/A/TrialServer'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,10 +21,12 @@ exports:
                        _TRILoggedNamespaceName, _TRIMetricName_AllowsCellularDownload, 
                        _TRIMetricName_BuddyDownloadLatency, _TRIMetricName_BytesRead, 
                        _TRIMetricName_ClientTreatmentInfo, _TRIMetricName_CloudkitError, 
-                       _TRIMetricName_FactorPackAssetsPurged, _TRIMetricName_FactorPackPromotion, 
-                       _TRIMetricName_FactorPackRejection, _TRIMetricName_ImmediateDownloadLatency, 
-                       _TRIMetricName_OnDemandFactorDownloadedByRequest, _TRIMetricName_OnDemandFactorDownloadedBySubscription, 
-                       _TRIMetricName_OnDemandFactorFailedToDownloadByRequest, _TRIMetricName_OnDemandFactorFailedToDownloadBySubscription, 
+                       _TRIMetricName_DirectoryTreeAssetDiffResult, _TRIMetricName_DirectoryTreeAssetDiffSize, 
+                       _TRIMetricName_DirectoryTreeDeltaError, _TRIMetricName_FactorPackAssetsPurged, 
+                       _TRIMetricName_FactorPackPromotion, _TRIMetricName_FactorPackRejection, 
+                       _TRIMetricName_ImmediateDownloadLatency, _TRIMetricName_OnDemandFactorDownloadedByRequest, 
+                       _TRIMetricName_OnDemandFactorDownloadedBySubscription, _TRIMetricName_OnDemandFactorFailedToDownloadByRequest, 
+                       _TRIMetricName_OnDemandFactorFailedToDownloadBySubscription, 
                        _TRIMetricName_OnDemandFactorSubscribed, _TRIMetricName_OnDemandRequestedFactorFailedToDownloadWithoutAssetFetch, 
                        _TRIMetricName_OnDemandSubscribedFactorFailedToDownloadWithoutAssetFetch, 
                        _TRIMetricName_Retrycount, _TRIMetricName_RolloutsRead, _TRIMetricName_ServerError, 
@@ -64,8 +66,9 @@ exports:
                        TRIConfigurationPersistedTask, TRIConfigurationTask, TRIContentDescriptorUnion, 
                        TRIContentTracker, TRIContentTrackingId, TRIDServer, TRIDatabase, 
                        TRIDeactivateTreatmentPersistedTask, TRIDeactivateTreatmentTask, 
-                       TRIDeferredDeleter, TRIDiffableAssetBuilder, TRIDisenrollRolloutPersistedTask, 
-                       TRIDisenrollRolloutTask, TRIDiskUsage, TRIDownloadLatencyTaskResultTelemetryBuilder, 
+                       TRIDeferralNotifier, TRIDeferredDeleter, TRIDiffableAssetBuilder, 
+                       TRIDisenrollRolloutPersistedTask, TRIDisenrollRolloutTask, 
+                       TRIDiskUsage, TRIDownloadLatencyTaskResultTelemetryBuilder, 
                        TRIDynamicNamespaceRecord, TRIExperimentBaseTask, TRIExperimentBaseTaskGuardedData, 
                        TRIExperimentDatabase, TRIExperimentDeploymentRefStore, TRIExperimentHistoryDatabase, 
                        TRIExperimentRecord, TRIExperimentTaskSupport, TRIExperimentTaskSupportGuardedData, 
@@ -114,20 +117,20 @@ exports:
                        TRISetupAssistantFetchUtils, TRISignatureKey, TRISignedAssetURL, 
                        TRISizedCKRecordID, TRIStorageManagement, TRISystemCovariates, 
                        TRITargetingPersistedTask, TRITargetingTask, TRITaskAttributionInternalInsecure, 
-                       TRITaskCapabilityUtilities, TRITaskDatabase, TRITaskQueue, 
-                       TRITaskQueueGuardedData, TRITaskQueueOperation, TRITaskQueuingOptions, 
-                       TRITaskRecord, TRITaskRunResult, TRITaskSupport, TRITaskUtils, 
-                       TRITelemetryFactory, TRITempDirScopeGuard, TRITreatmentAssetFetchPlan, 
+                       TRITaskCapabilityUtilities, TRITaskDatabase, TRITaskOptions, 
+                       TRITaskQueue, TRITaskQueueGuardedData, TRITaskQueueOperation, 
+                       TRITaskQueuingOptions, TRITaskRecord, TRITaskRunResult, TRITaskSupport, 
+                       TRITaskUtils, TRITelemetryFactory, TRITempDirScopeGuard, TRITreatmentAssetFetchPlan, 
                        TRITreatmentBaseTask, TRITreatmentContentDescriptor, TRITreatmentQualifiedAssetIndex, 
                        TRITreatmentRecordFetchPlan, TRITripersistedClientRolloutArtifactRoot, 
                        TRITripersistedExperimentArtifactRoot, TRITripersistedTasksRoot, 
-                       TRITripersistedTreatmentRoot, TRIUnitTestStorageManagement, 
+                       TRITripersistedTreatmentRoot, TRITritaskOptionsRoot, TRIUnitTestStorageManagement, 
                        TRIUrgentRollbackScheduler, TRIUserCovariates, TRIXPCActivityCriteria, 
                        TRIXPCActivityManager, TRIXPCActivityState, TRIXPCActivitySupport, 
                        TRIXPCHandlerWrapper, TRIXPCInternalServiceClient, TRIXPCInternalServiceListener, 
                        TRIXPCInternalServiceWrapper, TRIXPCNamespaceManagementRequestHandler, 
                        TRIXPCNamespaceManagementServiceListener, TRIXPCNamespaceManagementServiceWrapper, 
-                       TRIXPCRefuseConnectionListener, TRIXPCServices, TRIXPCStatusRequestHandler, 
+                       TRIXPCServerContextPromise, TRIXPCServices, TRIXPCStatusRequestHandler, 
                        TRIXPCStatusServiceListener, TRIXPCStatusServiceWrapper ]
     objc-ivars:      [ TRIAggregateFetchRecordsProgressGuardedData.actualBytesTransferred, 
                        TRIAggregateFetchRecordsProgressGuardedData.expectedTotalBytes, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6ACE6608-1942-38A1-9F6A-6783E35ADD00
+    value:           D397C419-41A5-3423-948B-6162858DA9EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           136FE71B-378F-3D71-8EDA-F8152FAC0828
+    value:           96044C56-C34E-3E54-8E83-6F9172BC4FE6
 install-name:    '/System/Library/Frameworks/Hypervisor.framework/Versions/A/Hypervisor'
 exports:
   - targets:         [ x86_64-macos ]

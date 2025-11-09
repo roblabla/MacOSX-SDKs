@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0A754831-B416-3ABC-B4E3-911744263FEE
+    value:           B27B9B63-ED14-3A42-8A30-9A8DC0A61132
   - target:          x86_64-maccatalyst
-    value:           0A754831-B416-3ABC-B4E3-911744263FEE
+    value:           B27B9B63-ED14-3A42-8A30-9A8DC0A61132
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71AB2DC8-B23D-3F82-A067-544A21E3BD9D
+    value:           208A2E2C-4C7E-3F6C-ABFC-D55F6B7366E2
   - target:          arm64e-maccatalyst
-    value:           71AB2DC8-B23D-3F82-A067-544A21E3BD9D
+    value:           208A2E2C-4C7E-3F6C-ABFC-D55F6B7366E2
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/Versions/A/PhotoLibraryServices'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -225,9 +225,10 @@ exports:
                        _PLMigrationLibraryBundleKey, _PLMigrationPathManagerKey, 
                        _PLMobileSlideshowBundleId, _PLModelMigrationActionRegistration_15000, 
                        _PLModelMigrationActionRegistration_Background, _PLModelMigrationActionRegistration_Repairs, 
-                       _PLModelMigrationActionRegistration_Staged, _PLModelMigrationActionUtilityIncrementalUpdateLog, 
-                       _PLModelMigrationActionUtilityIncrementalUpdateSize, _PLModelMigrationStagedVersions, 
-                       _PLModelMigrationSubclassesForClass, _PLModelVersionKey, _PLMomentAggregationScoreFromAggregationScoreType, 
+                       _PLModelMigrationActionRegistration_Staged, _PLModelMigrationActionUtilityConvertObjectIDResumeMarkerString, 
+                       _PLModelMigrationActionUtilityIncrementalUpdateLog, _PLModelMigrationActionUtilityIncrementalUpdateSize, 
+                       _PLModelMigrationStagedVersions, _PLModelMigrationSubclassesForClass, 
+                       _PLModelVersionKey, _PLMomentAggregationScoreFromAggregationScoreType, 
                        _PLMomentClusteringDBSCANLowTimeHighSpeedFactor, _PLMomentDescriptionForProcessedLocationType, 
                        _PLMomentGenerationShouldDeleteAllHighlightsKey, _PLMomentGenerationShouldDeleteAllMomentsKey, 
                        _PLMomentListGroupDidChangeNotification, _PLMomentsLocalizedFrameworkString, 
@@ -726,9 +727,10 @@ exports:
                        _PLSearchableItemMessagesLivePhotoVideoURL, _PLSearchableUniqueIdentifierHashFromSearchableIdentifier, 
                        _PLSearchedCategoriesForUserCategory, _PLSearchedCategoriesSpecificToUserCategory, 
                        _PLSendCTMFinishProcessingEvent, _PLSendCTMScheduleAnalytics, 
-                       _PLSetMaximumPixelDimensionForDisplayedImage, _PLSetShouldCacheIOSurfaces, 
-                       _PLSetShouldLogImageDecodeTime, _PLShareAddToPhotoBundleId, 
-                       _PLSharedStreamSizeKey, _PLSharedStreamsResourceTypeIsHighestQuality, 
+                       _PLSendDeferredProcessingAnalytics, _PLSendFRCBailOutAnalytics, 
+                       _PLSendFRCCompletedAnalytics, _PLSetMaximumPixelDimensionForDisplayedImage, 
+                       _PLSetShouldCacheIOSurfaces, _PLSetShouldLogImageDecodeTime, 
+                       _PLShareAddToPhotoBundleId, _PLSharedStreamSizeKey, _PLSharedStreamsResourceTypeIsHighestQuality, 
                        _PLSharedStreamsResourceTypeName, _PLSharingDaemonBundleId, 
                        _PLShortDescriptionForAnalysisState, _PLShortDescriptionForVerifiedType, 
                        _PLShortDescriptionForWorkerType, _PLShouldCacheIOSurfaces, 
@@ -1019,7 +1021,8 @@ exports:
                        PLModelMigrationAction_CPLPrompting, PLModelMigrationAction_CinematicVideoPopulateDepthType, 
                        PLModelMigrationAction_ClearPurgeableIsCloneState, PLModelMigrationAction_CreateManualIndexes, 
                        PLModelMigrationAction_FixBackgroundResourceWorkerModifyingIncorrectResources, 
-                       PLModelMigrationAction_FixBadExtendedAttribute, PLModelMigrationAction_FixResourcesIncorrectlyAssignedToSyndicationDataStore, 
+                       PLModelMigrationAction_FixBadExtendedAttribute, PLModelMigrationAction_FixPackedBadgeAttributesForRAWPlusJPEG, 
+                       PLModelMigrationAction_FixResourcesIncorrectlyAssignedToSyndicationDataStore, 
                        PLModelMigrationAction_FixupTombstonedPeople, PLModelMigrationAction_GreenTeaSetDefaultContactsAuthorizationState, 
                        PLModelMigrationAction_MigrateLastGuestAssetSyncToken, PLModelMigrationAction_MigrateProResPackedBadgeAttributes, 
                        PLModelMigrationAction_PopulateBundleScopeOnAssets, PLModelMigrationAction_PopulateExtendedAttributes, 
@@ -1029,6 +1032,7 @@ exports:
                        PLModelMigrationAction_RepushAssetsWithImportedByBundleIdentifier, 
                        PLModelMigrationAction_ResetBackgroundJobServicePersistedBundleRecords, 
                        PLModelMigrationAction_ResetCurationScoreSyndicatedAsset, 
+                       PLModelMigrationAction_ResetSceneAnalysisTimestampForProblematicAssets, 
                        PLModelMigrationAction_ResetSyndication, PLModelMigrationAction_RevalidateFaceAreaPoints, 
                        PLModelMigrationAction_SetDefaultFaceAnalysisVersion, PLModelMigrator, 
                        PLModelMigratorLog, PLModelMigratorRebuildProgressFraction, 
@@ -1104,11 +1108,11 @@ exports:
                        PLSpotlightDonationOperation, PLSpotlightProgressManager, 
                        PLSpotlightResetOperation, PLSqliteQueryPlan, PLSqliteQueryPlanNode, 
                        PLStreamShareSource, PLSubstandardPhotoEditSource, PLSuggestion, 
-                       PLSyncSaveJob, PLSyndicationDeleteManager, PLSyndicationResourceDataStore, 
-                       PLSyndicationResourcePrefetchManager, PLSyndicationSanitizedResourceGenerator, 
-                       PLSyndicationSyncManager, PLSyndicationValidatedExternalResource, 
-                       PLTCCObserver, PLTableThumbnailEncoder, PLTableThumbnailEncoderResult, 
-                       PLTableThumbnailMigrator, PLTableThumbnailVirtualResource, 
+                       PLSyncSaveJob, PLSyndicationDeleteManager, PLSyndicationIngestMutex, 
+                       PLSyndicationResourceDataStore, PLSyndicationResourcePrefetchManager, 
+                       PLSyndicationSanitizedResourceGenerator, PLSyndicationSyncManager, 
+                       PLSyndicationValidatedExternalResource, PLTCCObserver, PLTableThumbnailEncoder, 
+                       PLTableThumbnailEncoderResult, PLTableThumbnailMigrator, PLTableThumbnailVirtualResource, 
                        PLTaggedPointerDataStoreKey, PLTemporaryImageTable, PLThrottleTimer, 
                        PLThumbFileManager, PLThumbnailContextCleanupTimer, PLThumbnailIndexes, 
                        PLThumbnailManager, PLThumbnailMigratorWorkItem, PLThumbnailResourceDataStore, 

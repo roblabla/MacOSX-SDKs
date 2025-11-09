@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           68EF92EC-322E-3A75-B4CD-545721D0E571
+    value:           E953B47A-1B0F-301E-9454-9659BC32BEDA
   - target:          x86_64-maccatalyst
-    value:           68EF92EC-322E-3A75-B4CD-545721D0E571
+    value:           E953B47A-1B0F-301E-9454-9659BC32BEDA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           347B45E1-1CC3-378E-842E-DFB448BFDB84
+    value:           2FF2170D-9990-3884-AB10-F1000B8D7F3D
   - target:          arm64e-maccatalyst
-    value:           347B45E1-1CC3-378E-842E-DFB448BFDB84
+    value:           2FF2170D-9990-3884-AB10-F1000B8D7F3D
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeCore.framework/Versions/A/ScreenTimeCore'
-current-version: 500.6.1
+current-version: 500.8.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -50,8 +50,9 @@ exports:
                        _STFamilyMemberTypeAdult, _STFamilyMemberTypeChild, _STFamilyMemberTypeTeen, 
                        _STFamilyMemberTypeUnknown, _STFamilyMembersKey, _STGetDeviceName, 
                        _STGetDeviceUUID, _STHealthAppBundleID, _STLocalDateFromUTCErasedDate, 
-                       _STMachServiceEntitlementAsk, _STMachServiceEntitlementCommunication, 
-                       _STMachServiceEntitlementSetup, _STMachServiceNameAsk, _STMachServiceNameCommunication, 
+                       _STMachServiceEntitlementAsk, _STMachServiceEntitlementCapabilities, 
+                       _STMachServiceEntitlementCommunication, _STMachServiceEntitlementSetup, 
+                       _STMachServiceNameAsk, _STMachServiceNameCapabilities, _STMachServiceNameCommunication, 
                        _STMachServiceNameContacts, _STMachServiceNameScreenTimePrivate, 
                        _STMachServiceNameSetup, _STMailAppBundleID, _STManagementStateStateDidChange, 
                        _STNotificationActionIdentifierApproveDay, _STNotificationActionIdentifierApproveFifteen, 
@@ -102,24 +103,25 @@ exports:
                        STBlueprintUsageLimitScheduleRepresentation, STBlueprintUsageLimitScheduleSimpleItem, 
                        STCloudActivation, STCommunicationClient, STCommunicationClientAuthenticationSource, 
                        STCommunicationConfiguration, STCommunicationLimitsCoreAnalyticsEvent, 
+                       STCommunicationSafetyChangedCoreAnalyticsEvent, STCommunicationSafetyStateCoreAnalyticsEvent, 
                        STConcretePersistentStoreChangeHandler, STConversation, STConversationContext, 
                        STCoreAnalyticsReporter, STCoreDataPersistenceSource, STCoreDevice, 
                        STCoreDowntimeOverride, STCoreOrganization, STCoreOrganizationSettings, 
                        STCoreTransportPayload, STCoreUser, STCoreUsersController, 
-                       STDailySchedule, STDebouncer, STDeviceDowntimeUserNotificationContext, 
-                       STDowntime, STDowntimeConfiguration, STDowntimeOverride, STDowntimeOverrideBuilder, 
-                       STDowntimeOverrideCoreAnalyticsEvent, STDowntimeOverrideTransformer, 
-                       STDowntimeOverrideUpdater, STDowntimeWarningUserNotificationContext, 
-                       STFamily, STFamilyMember, STFamilyOrganization, STFamilyOrganizationSettings, 
-                       STFetchResultsRequest, STGroupFetchedResultsController, STInstalledApp, 
-                       STLocalOrganization, STLocations, STLog, STManagementState, 
-                       STManagementStateObserver, STOpaquePasscode, STPINController, 
-                       STPersistenceConfiguration, STPersistenceController, STReconciler, 
-                       STRestrictionsCoreAnalyticsEvent, STScreenTimeAgentPrivateConnection, 
-                       STScreenTimeCoreBundle, STScreenTimeEnabledUserNotificationContext, 
-                       STScreenTimeEnablementCoreAnalyticsEvent, STScreenTimeSettings, 
-                       STSetupClient, STSetupConfiguration, STTestSyncableObject, 
-                       STTestSyncableSubObject, STUnifiedTransportPayloadDestination, 
+                       STDailySchedule, STDebouncer, STDeviceCapabilitiesClient, 
+                       STDeviceDowntimeUserNotificationContext, STDowntime, STDowntimeConfiguration, 
+                       STDowntimeOverride, STDowntimeOverrideBuilder, STDowntimeOverrideCoreAnalyticsEvent, 
+                       STDowntimeOverrideTransformer, STDowntimeOverrideUpdater, 
+                       STDowntimeWarningUserNotificationContext, STFamily, STFamilyMember, 
+                       STFamilyOrganization, STFamilyOrganizationSettings, STFetchResultsRequest, 
+                       STGroupFetchedResultsController, STInstalledApp, STLocalOrganization, 
+                       STLocations, STLog, STManagementState, STManagementStateObserver, 
+                       STOpaquePasscode, STPINController, STPersistenceConfiguration, 
+                       STPersistenceController, STReconciler, STRestrictionsCoreAnalyticsEvent, 
+                       STScreenTimeAgentPrivateConnection, STScreenTimeCoreBundle, 
+                       STScreenTimeEnabledUserNotificationContext, STScreenTimeEnablementCoreAnalyticsEvent, 
+                       STScreenTimeSettings, STSetupClient, STSetupConfiguration, 
+                       STTestSyncableObject, STTestSyncableSubObject, STUnifiedTransportPayloadDestination, 
                        STUnique, STUniquedManagedObject, STUsage, STUsageBlock, STUsageCategory, 
                        STUsageCountedItem, STUsageDetailItem, STUsageReporter, STUsageRequest, 
                        STUsageTimedItem, STUsageTrustIdentifier, STUserData, STUserDescription, 

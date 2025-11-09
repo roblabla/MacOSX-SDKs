@@ -4,22 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B9318351-FDE8-389A-8B68-B3FEC19102A4
+    value:           C25AE67D-2601-3905-9595-244D9EDDA4DC
   - target:          x86_64-maccatalyst
-    value:           B9318351-FDE8-389A-8B68-B3FEC19102A4
+    value:           C25AE67D-2601-3905-9595-244D9EDDA4DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E4A826AC-553E-32E4-92D6-CAD1C84AB4B4
+    value:           848C2042-1748-3D09-86AC-8DC67AEB7B9E
   - target:          arm64e-maccatalyst
-    value:           E4A826AC-553E-32E4-92D6-CAD1C84AB4B4
+    value:           848C2042-1748-3D09-86AC-8DC67AEB7B9E
 install-name:    '/System/Library/PrivateFrameworks/Espresso.framework/Versions/A/Espresso'
 current-version: 123
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTIFbPN8Espresso6zephyr6node_tEE, __ZTIFbRKN3MIL11IROperationEE, 
+    weak-symbols:    [ __ZTIFNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKS5_E, 
+                       __ZTIFbPN8Espresso6zephyr6node_tEE, __ZTIFbRKN3MIL11IROperationEE, 
                        __ZTIFhmPKhE, __ZTIFvPDF16_PKamE, __ZTIFvPDF16_PKfmE, __ZTIFvPDF16_PKhmE, 
                        __ZTIFvPKfS0_S0_PfmE, __ZTIFvPKflS0_PflmE, __ZTIFvPKflS0_lPflmE, 
                        __ZTIFvPaPKDF16_mE, __ZTIFvPaPKfmE, __ZTIFvPfPKDF16_mE, __ZTIFvPfPKamE, 
@@ -442,6 +443,7 @@ exports:
                        __ZTIN8Espresso9factory_tINS_6SerDes13layer_io_baseEEE, __ZTIN8Espresso9factory_tINS_6SerDes21generic_serdes_objectEEE, 
                        __ZTINSt3__110__function6__baseIFNS_10shared_ptrIN8Espresso11base_kernelEEEvEEE, 
                        __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERN8Espresso14unpack_optionsERKS7_EEE, 
+                       __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EEE, 
                        __ZTINSt3__110__function6__baseIFbN8Espresso6zephyr5use_tEEEE, 
                        __ZTINSt3__110__function6__baseIFbPN8Espresso6zephyr15ordered_block_tEEEE, 
                        __ZTINSt3__110__function6__baseIFbPN8Espresso6zephyr6node_tEEEE, 
@@ -472,25 +474,22 @@ exports:
                        __ZTINSt3__110__function6__baseIFvRN8Espresso3netERNS2_18sequential_builderEEEE, 
                        __ZTINSt3__110__function6__baseIFvRNS_4pairINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrIN8Espresso23abstract_blob_containerEEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__121__basic_string_commonILb1EEE, __ZTINSt3__123enable_shared_from_thisIN8Espresso13interpreter_tEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__121__basic_string_commonILb1EEE, 
+                       __ZTINSt3__123enable_shared_from_thisIN8Espresso13interpreter_tEEE, 
                        __ZTINSt3__123enable_shared_from_thisIN8Espresso6SerDes21generic_serdes_objectEEE, 
+                       __ZTIPFNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKS5_E, 
                        __ZTIPFbPN8Espresso6zephyr6node_tEE, __ZTIPFbRKN3MIL11IROperationEE, 
                        __ZTIPFhmPKhE, __ZTIPFvPDF16_PKamE, __ZTIPFvPDF16_PKfmE, __ZTIPFvPDF16_PKhmE, 
                        __ZTIPFvPKfS0_S0_PfmE, __ZTIPFvPKflS0_PflmE, __ZTIPFvPKflS0_lPflmE, 
                        __ZTIPFvPaPKDF16_mE, __ZTIPFvPaPKfmE, __ZTIPFvPfPKDF16_mE, 
                        __ZTIPFvPfPKamE, __ZTIPFvPfPKhmE, __ZTIPFvPhPKDF16_mE, __ZTIPFvPhPKfmE, 
                        __ZTIPFvRKNSt3__110shared_ptrIN8Espresso14abstract_batchEEERKNS1_5layerEE, 
-                       __ZTIU13block_pointerFvvE, __ZTSFbPN8Espresso6zephyr6node_tEE, 
-                       __ZTSFbRKN3MIL11IROperationEE, __ZTSFhmPKhE, __ZTSFvPDF16_PKamE, 
-                       __ZTSFvPDF16_PKfmE, __ZTSFvPDF16_PKhmE, __ZTSFvPKfS0_S0_PfmE, 
-                       __ZTSFvPKflS0_PflmE, __ZTSFvPKflS0_lPflmE, __ZTSFvPaPKDF16_mE, 
-                       __ZTSFvPaPKfmE, __ZTSFvPfPKDF16_mE, __ZTSFvPfPKamE, __ZTSFvPfPKhmE, 
-                       __ZTSFvPhPKDF16_mE, __ZTSFvPhPKfmE, __ZTSFvRKNSt3__110shared_ptrIN8Espresso14abstract_batchEEERKNS1_5layerEE, 
+                       __ZTIU13block_pointerFvvE, __ZTSFNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKS5_E, 
+                       __ZTSFbPN8Espresso6zephyr6node_tEE, __ZTSFbRKN3MIL11IROperationEE, 
+                       __ZTSFhmPKhE, __ZTSFvPDF16_PKamE, __ZTSFvPDF16_PKfmE, __ZTSFvPDF16_PKhmE, 
+                       __ZTSFvPKfS0_S0_PfmE, __ZTSFvPKflS0_PflmE, __ZTSFvPKflS0_lPflmE, 
+                       __ZTSFvPaPKDF16_mE, __ZTSFvPaPKfmE, __ZTSFvPfPKDF16_mE, __ZTSFvPfPKamE, 
+                       __ZTSFvPfPKhmE, __ZTSFvPhPKDF16_mE, __ZTSFvPhPKfmE, __ZTSFvRKNSt3__110shared_ptrIN8Espresso14abstract_batchEEERKNS1_5layerEE, 
                        __ZTSN4E5RT15ProgramFunctionE, __ZTSN4E5RT6IOPortE, __ZTSN4E5RT6StatusE, 
                        __ZTSN8Espresso20kernel_with_uniformsINS_10lrn_paramsEEE, 
                        __ZTSN8Espresso20kernel_with_uniformsINS_11crop_paramsEEE, 
@@ -909,6 +908,7 @@ exports:
                        __ZTSN8Espresso9factory_tINS_6SerDes13layer_io_baseEEE, __ZTSN8Espresso9factory_tINS_6SerDes21generic_serdes_objectEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_10shared_ptrIN8Espresso11base_kernelEEEvEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERN8Espresso14unpack_optionsERKS7_EEE, 
+                       __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EEE, 
                        __ZTSNSt3__110__function6__baseIFbN8Espresso6zephyr5use_tEEEE, 
                        __ZTSNSt3__110__function6__baseIFbPN8Espresso6zephyr15ordered_block_tEEEE, 
                        __ZTSNSt3__110__function6__baseIFbPN8Espresso6zephyr6node_tEEEE, 
@@ -941,24 +941,22 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110shared_ptrIN8Espresso11base_kernelEEE, 
                        __ZTSNSt3__110shared_ptrIfE27__shared_ptr_default_deleteIffEE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114default_deleteIA_DhEE, 
-                       __ZTSNSt3__114default_deleteIA_dEE, __ZTSNSt3__114default_deleteIA_fEE, 
-                       __ZTSNSt3__114default_deleteIA_hEE, __ZTSNSt3__114default_deleteIA_iEE, 
-                       __ZTSNSt3__114default_deleteIKN3MIL13IRTensorValueEEE, __ZTSNSt3__114default_deleteIKN3MIL7IRValueEEE, 
-                       __ZTSNSt3__114default_deleteIN3MIL10IRArgumentEEE, __ZTSNSt3__114default_deleteIN3MIL10IRFunctionEEE, 
-                       __ZTSNSt3__114default_deleteIN3MIL10MILContextEEE, __ZTSNSt3__114default_deleteIN3MIL11IROperationEEE, 
-                       __ZTSNSt3__114default_deleteIN3MIL16IRNamedValueTypeEEE, __ZTSNSt3__114default_deleteIN3MIL8LocationEEE, 
-                       __ZTSNSt3__114default_deleteIN3MIL9IRProgramEEE, __ZTSNSt3__114default_deleteIN4E5RT12BufferObjectEEE, 
-                       __ZTSNSt3__114default_deleteIN4E5RT13SurfaceObjectEEE, __ZTSNSt3__114default_deleteIN4E5RT15ExecutionStreamEEE, 
-                       __ZTSNSt3__114default_deleteIN4E5RT16TensorDescriptorEEE, 
+                       __ZTSNSt3__114default_deleteIA_DhEE, __ZTSNSt3__114default_deleteIA_dEE, 
+                       __ZTSNSt3__114default_deleteIA_fEE, __ZTSNSt3__114default_deleteIA_hEE, 
+                       __ZTSNSt3__114default_deleteIA_iEE, __ZTSNSt3__114default_deleteIKN3MIL13IRTensorValueEEE, 
+                       __ZTSNSt3__114default_deleteIKN3MIL17IRDictionaryValueEEE, 
+                       __ZTSNSt3__114default_deleteIKN3MIL7IRValueEEE, __ZTSNSt3__114default_deleteIN3MIL10IRArgumentEEE, 
+                       __ZTSNSt3__114default_deleteIN3MIL10IRFunctionEEE, __ZTSNSt3__114default_deleteIN3MIL10MILContextEEE, 
+                       __ZTSNSt3__114default_deleteIN3MIL11IROperationEEE, __ZTSNSt3__114default_deleteIN3MIL15UnknownLocationEEE, 
+                       __ZTSNSt3__114default_deleteIN3MIL16IRNamedValueTypeEEE, __ZTSNSt3__114default_deleteIN3MIL7IRBlockEEE, 
+                       __ZTSNSt3__114default_deleteIN3MIL8LocationEEE, __ZTSNSt3__114default_deleteIN3MIL9IRProgramEEE, 
+                       __ZTSNSt3__114default_deleteIN4E5RT12BufferObjectEEE, __ZTSNSt3__114default_deleteIN4E5RT13SurfaceObjectEEE, 
+                       __ZTSNSt3__114default_deleteIN4E5RT15ExecutionStreamEEE, __ZTSNSt3__114default_deleteIN4E5RT16TensorDescriptorEEE, 
                        __ZTSNSt3__114default_deleteIN8Espresso21blob_storage_abstractEEE, 
-                       __ZTSNSt3__114default_deleteIN8Espresso8blob_cpuEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__114default_deleteIN8Espresso8blob_cpuEEE, __ZTSNSt3__117bad_function_callE, 
                        __ZTSNSt3__121__basic_string_commonILb1EEE, __ZTSNSt3__123enable_shared_from_thisIN8Espresso13interpreter_tEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN8Espresso6SerDes21generic_serdes_objectEEE, 
+                       __ZTSPFNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKS5_E, 
                        __ZTSPFbPN8Espresso6zephyr6node_tEE, __ZTSPFbRKN3MIL11IROperationEE, 
                        __ZTSPFhmPKhE, __ZTSPFiPvE, __ZTSPFvPDF16_PKamE, __ZTSPFvPDF16_PKfmE, 
                        __ZTSPFvPDF16_PKhmE, __ZTSPFvPKfS0_S0_PfmE, __ZTSPFvPKflS0_PflmE, 
@@ -3427,7 +3425,7 @@ exports:
                        __ZNK8Espresso17dev_op_kernel_cpu19is_valid_for_engineENSt3__110shared_ptrINS_27kernels_validation_status_tEEERKNS_11base_kernel26validate_for_engine_args_tE, 
                        __ZNK8Espresso17generic_factory_t4get_ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZNK8Espresso17generic_factory_t5make_ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
-                       __ZNK8Espresso18generic_rnn_kernel19supports_weight_keyERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
+                       __ZNK8Espresso18blob_file_metadata6equalsERKS0_, __ZNK8Espresso18generic_rnn_kernel19supports_weight_keyERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZNK8Espresso19abstract_executor_t14get_subnetworkERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZNK8Espresso19deconv3d_kernel_cpu19supports_weight_keyERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZNK8Espresso19generic_bias_kernel19supports_weight_keyERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
@@ -4085,7 +4083,8 @@ exports:
                        _espresso_recommended_device_id, _espresso_set_analysis_model_metadata_for_key, 
                        _espresso_set_breakpoint, _espresso_set_compilation_platform, 
                        _espresso_set_image_preprocessing_params, _espresso_set_quantization_flags, 
-                       _espresso_tmp_enable_montreal, _espresso_upgrade_to_mil, _espresso_will_share_intermediate_buffer_with_existing_plan, 
+                       _espresso_tmp_enable_montreal, _espresso_upgrade_to_mil, _espresso_upgrade_to_mil_with_input_shapes, 
+                       _espresso_will_share_intermediate_buffer_with_existing_plan, 
                        _get_main_function_name, _kETOptimizationParameterBatchSize, 
                        _kETOptimizationParameterBeta1, _kETOptimizationParameterBeta2, 
                        _kETOptimizationParameterEpsilon, _kETOptimizationParameterLearningRate, 

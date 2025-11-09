@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           32BCDAFE-0993-3277-AE7A-2BD619C040A4
+    value:           FDE47317-3471-3971-A68A-8796C2ABDCFF
   - target:          x86_64-maccatalyst
-    value:           32BCDAFE-0993-3277-AE7A-2BD619C040A4
+    value:           FDE47317-3471-3971-A68A-8796C2ABDCFF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           275B9E24-D684-3754-9300-285AFAACDBF2
+    value:           E8057AE1-00AF-32F0-AE07-1B997D7D77E4
   - target:          arm64e-maccatalyst
-    value:           275B9E24-D684-3754-9300-285AFAACDBF2
+    value:           E8057AE1-00AF-32F0-AE07-1B997D7D77E4
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoCore.framework/Versions/A/NeutrinoCore'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN2NU10RectFinderE, __ZTIN2NU14PathRectFinderE, __ZTIN2NU16AnchorRectFinderE, 

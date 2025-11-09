@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7AC751AA-ABDE-3954-BEF0-B4DB5BBFE676
+    value:           1B291115-48C1-3626-AAFB-46C31785D6A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0AB97B2D-85EF-31E8-854D-F0FC655781C1
+    value:           BC03A2A4-4E38-398A-8D0D-02934FA98D25
 install-name:    '/System/Library/PrivateFrameworks/AdID.framework/Versions/A/AdID'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

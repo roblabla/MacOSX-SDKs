@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F1B54A8F-9CDB-33CA-8DDC-B66894DE31AD
+    value:           110E575D-CC33-332E-BA7C-30261569E4ED
   - target:          x86_64-maccatalyst
-    value:           F1B54A8F-9CDB-33CA-8DDC-B66894DE31AD
+    value:           110E575D-CC33-332E-BA7C-30261569E4ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59F4ABA3-F985-34F4-9A92-BAB0156723C3
+    value:           94032FA2-E9D8-30BB-B4D9-FC6C6FCEEE69
   - target:          arm64e-maccatalyst
-    value:           59F4ABA3-F985-34F4-9A92-BAB0156723C3
+    value:           94032FA2-E9D8-30BB-B4D9-FC6C6FCEEE69
 install-name:    '/System/Library/PrivateFrameworks/SearchFoundation.framework/Versions/A/SearchFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -49,15 +49,16 @@ exports:
                        __SFPBCoreSpotlightShareItemReadFrom, __SFPBDateHandwrittenTranslator, 
                        __SFPBDateReadFrom, __SFPBDescriptionCardSectionReadFrom, 
                        __SFPBDetailedRowCardSectionReadFrom, __SFPBDynamicURLImageResourceReadFrom, 
-                       __SFPBEmailCommandReadFrom, __SFPBFindMyCardSectionReadFrom, 
-                       __SFPBFlightCardSectionReadFrom, __SFPBFlightLegReadFrom, 
-                       __SFPBFlightReadFrom, __SFPBFormattedTextReadFrom, __SFPBGraphicalFloatHandwrittenTranslator, 
-                       __SFPBGraphicalFloatReadFrom, __SFPBGridCardSectionReadFrom, 
-                       __SFPBHeroCardSectionReadFrom, __SFPBHorizontalButtonCardSectionReadFrom, 
-                       __SFPBHorizontalScrollCardSectionReadFrom, __SFPBImageCopyItemReadFrom, 
-                       __SFPBImageOptionReadFrom, __SFPBImageReadFrom, __SFPBImagesCardSectionReadFrom, 
-                       __SFPBIndexStateReadFrom, __SFPBIndexedUserActivityCommandReadFrom, 
-                       __SFPBInfoCardSectionReadFrom, __SFPBInfoTupleReadFrom, __SFPBInvokeSiriCommandReadFrom, 
+                       __SFPBEmailCommandReadFrom, __SFPBExpandInlineCommandReadFrom, 
+                       __SFPBFindMyCardSectionReadFrom, __SFPBFlightCardSectionReadFrom, 
+                       __SFPBFlightLegReadFrom, __SFPBFlightReadFrom, __SFPBFormattedTextReadFrom, 
+                       __SFPBGraphicalFloatHandwrittenTranslator, __SFPBGraphicalFloatReadFrom, 
+                       __SFPBGridCardSectionReadFrom, __SFPBHeroCardSectionReadFrom, 
+                       __SFPBHorizontalButtonCardSectionReadFrom, __SFPBHorizontalScrollCardSectionReadFrom, 
+                       __SFPBImageCopyItemReadFrom, __SFPBImageOptionReadFrom, __SFPBImageReadFrom, 
+                       __SFPBImagesCardSectionReadFrom, __SFPBIndexStateReadFrom, 
+                       __SFPBIndexedUserActivityCommandReadFrom, __SFPBInfoCardSectionReadFrom, 
+                       __SFPBInfoTupleReadFrom, __SFPBInvokeSiriCommandReadFrom, 
                        __SFPBKeyValueDataCardSectionReadFrom, __SFPBKeyValueTupleReadFrom, 
                        __SFPBLatLngReadFrom, __SFPBLaunchAppCommandReadFrom, __SFPBLinkPresentationCardSectionReadFrom, 
                        __SFPBListenToCardSectionReadFrom, __SFPBLocalImageReadFrom, 
@@ -133,9 +134,9 @@ exports:
                        SFDidGoToSearchFeedback, SFDidGoToSiteFeedback, SFDynamicButtonVisibilityFeedback, 
                        SFDynamicURLImageResource, SFEmailCommand, SFEndLocalSearchFeedback, 
                        SFEndNetworkSearchFeedback, SFEndSearchFeedback, SFErrorFeedback, 
-                       SFExperimentTriggeredFeedback, SFFeedback, SFFindMyCardSection, 
-                       SFFlight, SFFlightCardSection, SFFlightLeg, SFFormattedText, 
-                       SFGridCardSection, SFHeroCardSection, SFHorizontalButtonCardSection, 
+                       SFExpandInlineCommand, SFExperimentTriggeredFeedback, SFFeedback, 
+                       SFFindMyCardSection, SFFlight, SFFlightCardSection, SFFlightLeg, 
+                       SFFormattedText, SFGridCardSection, SFHeroCardSection, SFHorizontalButtonCardSection, 
                        SFHorizontalScrollCardSection, SFImage, SFImageContext, SFImageCopyItem, 
                        SFImageOption, SFImagesCardSection, SFIndexState, SFIndexedUserActivityCommand, 
                        SFInfoCardSection, SFInfoTuple, SFInvokeSiriCommand, SFKeyValueDataCardSection, 
@@ -201,10 +202,10 @@ exports:
                        _SFPBContactImage, _SFPBCopyCommand, _SFPBCopyItem, _SFPBCoreSpotlightButtonItem, 
                        _SFPBCoreSpotlightCopyItem, _SFPBCoreSpotlightShareItem, _SFPBDate, 
                        _SFPBDescriptionCardSection, _SFPBDetailedRowCardSection, 
-                       _SFPBDynamicURLImageResource, _SFPBEmailCommand, _SFPBFindMyCardSection, 
-                       _SFPBFlight, _SFPBFlightCardSection, _SFPBFlightLeg, _SFPBFormattedText, 
-                       _SFPBGraphicalFloat, _SFPBGridCardSection, _SFPBHeroCardSection, 
-                       _SFPBHorizontalButtonCardSection, _SFPBHorizontalScrollCardSection, 
+                       _SFPBDynamicURLImageResource, _SFPBEmailCommand, _SFPBExpandInlineCommand, 
+                       _SFPBFindMyCardSection, _SFPBFlight, _SFPBFlightCardSection, 
+                       _SFPBFlightLeg, _SFPBFormattedText, _SFPBGraphicalFloat, _SFPBGridCardSection, 
+                       _SFPBHeroCardSection, _SFPBHorizontalButtonCardSection, _SFPBHorizontalScrollCardSection, 
                        _SFPBImage, _SFPBImageCopyItem, _SFPBImageOption, _SFPBImagesCardSection, 
                        _SFPBIndexState, _SFPBIndexedUserActivityCommand, _SFPBInfoCardSection, 
                        _SFPBInfoTuple, _SFPBInvokeSiriCommand, _SFPBKeyValueDataCardSection, 

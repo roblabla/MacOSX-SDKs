@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           699EABA9-49CC-395E-93F0-0E37BDDEA648
+    value:           FD24C495-6CC6-38E3-963A-5D774E18C8AE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9CC9C90-6C61-3421-8EDA-3FFEEC058975
+    value:           C3D52C74-56E3-3E15-B40C-439E9EEA8DF8
 install-name:    '/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller'
 current-version: 660
 exports:

@@ -31,6 +31,21 @@
 #if __has_include(<PassKit/PKPaymentRequest.h>)
 #import <PassKit/PKPaymentRequest.h>
 #endif
+#if __has_include(<PassKit/PKAutomaticReloadPaymentRequest.h>)
+#import <PassKit/PKAutomaticReloadPaymentRequest.h>
+#endif
+#if __has_include(<PassKit/PKAutomaticReloadPaymentSummaryItem.h>)
+#import <PassKit/PKAutomaticReloadPaymentSummaryItem.h>
+#endif
+#if __has_include(<PassKit/PKRecurringPaymentRequest.h>)
+#import <PassKit/PKRecurringPaymentRequest.h>
+#endif
+#if __has_include(<PassKit/PKRecurringPaymentSummaryItem.h>)
+#import <PassKit/PKRecurringPaymentSummaryItem.h>
+#endif
+#if __has_include(<PassKit/PKPaymentTokenContext.h>)
+#import <PassKit/PKPaymentTokenContext.h>
+#endif
 #if __has_include(<PassKit/PKPaymentRequestStatus.h>)
 #import <PassKit/PKPaymentRequestStatus.h>
 #endif

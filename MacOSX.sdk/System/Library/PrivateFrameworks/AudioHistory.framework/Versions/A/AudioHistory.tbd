@@ -3,34 +3,26 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2C00D576-01D4-37BB-9121-B5CA37209C38
+    value:           A41E0C2F-3A81-369D-BE5B-8A84AD3301E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8548CBED-4132-3EC7-BBB5-C9E5F03077D5
+    value:           5B499E2C-B303-3F19-9206-30ADCB6A5F48
 install-name:    '/System/Library/PrivateFrameworks/AudioHistory.framework/Versions/A/AudioHistory'
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN12AudioHistory14EventInterfaceE, __ZTIN12AudioHistory21ObjectDelegateFactoryE, 
                        __ZTIN12AudioHistory26OutputAudioStreamInterfaceE, __ZTINSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES9_EEE, 
-                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__117bad_function_callE, 
                        __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__15tupleIJjjjEEE, 
                        __ZTINSt3__16vectorINS_5tupleIJjjjEEENS_9allocatorIS2_EEEE, 
                        __ZTSN12AudioHistory14EventInterfaceE, __ZTSN12AudioHistory21ObjectDelegateFactoryE, 
                        __ZTSN12AudioHistory26OutputAudioStreamInterfaceE, __ZTSNSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES9_EEE, 
                        __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110shared_ptrIN12AudioHistory6ObjectEE27__shared_ptr_default_deleteIS2_S2_EE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114default_deleteIN12AudioHistory21ObjectDelegateFactoryEEE, 
+                       __ZTSNSt3__114default_deleteIN12AudioHistory21ObjectDelegateFactoryEEE, 
                        __ZTSNSt3__114default_deleteIN12AudioHistory26OutputAudioStreamInterfaceEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__15tupleIJjjjEEE, 
-                       __ZTSNSt3__16vectorINS_5tupleIJjjjEEENS_9allocatorIS2_EEEE ]
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__vector_base_commonILb1EEE, 
+                       __ZTSNSt3__15tupleIJjjjEEE, __ZTSNSt3__16vectorINS_5tupleIJjjjEEENS_9allocatorIS2_EEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AudioHistoryCreateEventTimeStamp, _AudioHistoryCreateObject, 
                        _AudioHistoryEnumerateEventRange, _AudioHistoryIsReading, 

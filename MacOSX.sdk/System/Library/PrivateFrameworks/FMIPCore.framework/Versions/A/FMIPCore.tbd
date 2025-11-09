@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F2113D6D-C734-338A-9448-4FC37F520707
+    value:           DF0007A8-B4B9-3557-A9AF-490907CEC859
   - target:          x86_64-maccatalyst
-    value:           F2113D6D-C734-338A-9448-4FC37F520707
+    value:           DF0007A8-B4B9-3557-A9AF-490907CEC859
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3588C716-10F7-3A92-9A0A-F53D7001FB95
+    value:           D8E8A868-7814-3797-B3C9-E555B36EB24D
   - target:          arm64e-maccatalyst
-    value:           3588C716-10F7-3A92-9A0A-F53D7001FB95
+    value:           D8E8A868-7814-3797-B3C9-E555B36EB24D
 install-name:    '/System/Library/PrivateFrameworks/FMIPCore.framework/Versions/A/FMIPCore'
 swift-abi-version: 7
 allowable-clients:
@@ -138,6 +138,7 @@ exports:
                        '_$s8FMIPCore11FMIPAddressV7countrySSSgvpMV', '_$s8FMIPCore11FMIPAddressV7mapItemACSo06GEOMapD0_p_tcfC', 
                        '_$s8FMIPCore11FMIPAddressV8localitySSSgvg', '_$s8FMIPCore11FMIPAddressV8localitySSSgvpMV', 
                        '_$s8FMIPCore11FMIPAddressV9stateCodeSSSgvg', '_$s8FMIPCore11FMIPAddressV9stateCodeSSSgvpMV', 
+                       '_$s8FMIPCore11FMIPAddressVAA17FMAddressProtocolAAMc', '_$s8FMIPCore11FMIPAddressVAA17FMAddressProtocolAAWP', 
                        '_$s8FMIPCore11FMIPAddressVMa', '_$s8FMIPCore11FMIPAddressVMn', 
                        '_$s8FMIPCore11FMIPAddressVN', '_$s8FMIPCore11FMIPAddressVSEAAMc', 
                        '_$s8FMIPCore11FMIPAddressVSQAAMc', '_$s8FMIPCore11FMIPAddressVSeAAMc', 
@@ -229,6 +230,8 @@ exports:
                        '_$s8FMIPCore11FMIPManagerC7devicesSayAA10FMIPDeviceVGvgTq', 
                        '_$s8FMIPCore11FMIPManagerC7devicesSayAA10FMIPDeviceVGvpMV', 
                        '_$s8FMIPCore11FMIPManagerC7enqueue15separationEventyAA014FMIPSeparationE0V_tF', 
+                       '_$s8FMIPCore11FMIPManagerC7enqueue23notificationLaunchEventyAA020FMIPNotificationAutheF0V_tF', 
+                       '_$s8FMIPCore11FMIPManagerC7enqueue23notificationPromptEventyAA020FMIPNotificationAutheF0V_tF', 
                        '_$s8FMIPCore11FMIPManagerC7enqueue7UTEvent4itemyAA16FMIPUTAlertEventV_AA15FMIPUnknownItemVtF', 
                        '_$s8FMIPCore11FMIPManagerC7perform6action10completionyAA14FMIPItemActionC_yAA0fG6StatusO_SayAA0F0VGSgs5Error_pSgtctFTj', 
                        '_$s8FMIPCore11FMIPManagerC7perform6action10completionyAA14FMIPItemActionC_yAA0fG6StatusO_SayAA0F0VGSgs5Error_pSgtctFTq', 
@@ -418,6 +421,7 @@ exports:
                        '_$s8FMIPCore13FMDemoManagerCMu', '_$s8FMIPCore13FMDemoManagerCN', 
                        '_$s8FMIPCore13FMDemoManagerCfD', '_$s8FMIPCore13FMDemoManagerCfd', 
                        '_$s8FMIPCore13FMIPAlertTypeO12networkIssueyA2CmFWC', '_$s8FMIPCore13FMIPAlertTypeO14initializationyA2CmFWC', 
+                       '_$s8FMIPCore13FMIPAlertTypeO18deprecationWarningyA2CmFWC', 
                        '_$s8FMIPCore13FMIPAlertTypeO6serveryA2CmFWC', '_$s8FMIPCore13FMIPAlertTypeO8rawValueACSgSS_tcfC', 
                        '_$s8FMIPCore13FMIPAlertTypeO8rawValueSSvg', '_$s8FMIPCore13FMIPAlertTypeO8rawValueSSvpMV', 
                        '_$s8FMIPCore13FMIPAlertTypeOMa', '_$s8FMIPCore13FMIPAlertTypeOMn', 
@@ -603,6 +607,7 @@ exports:
                        '_$s8FMIPCore15FMIPUnknownItemV6encode2toys7Encoder_p_tKF', 
                        '_$s8FMIPCore15FMIPUnknownItemV6handleSSSgvg', '_$s8FMIPCore15FMIPUnknownItemV6handleSSSgvpMV', 
                        '_$s8FMIPCore15FMIPUnknownItemV9hashValueSivg', '_$s8FMIPCore15FMIPUnknownItemV9hashValueSivpMV', 
+                       '_$s8FMIPCore15FMIPUnknownItemV9isAirPodsSbvg', '_$s8FMIPCore15FMIPUnknownItemV9isAirPodsSbvpMV', 
                        '_$s8FMIPCore15FMIPUnknownItemV9isIgnoredSbvg', '_$s8FMIPCore15FMIPUnknownItemV9isIgnoredSbvpMV', 
                        '_$s8FMIPCore15FMIPUnknownItemV9locationsSayAA12FMIPLocationVGvg', 
                        '_$s8FMIPCore15FMIPUnknownItemV9locationsSayAA12FMIPLocationVGvpMV', 
@@ -791,13 +796,17 @@ exports:
                        '_$s8FMIPCore16FMIPUTItemActionCMu', '_$s8FMIPCore16FMIPUTItemActionCN', 
                        '_$s8FMIPCore16FMIPUTItemActionCfD', '_$s8FMIPCore16FMIPUTItemActionCfd', 
                        '_$s8FMIPCore16FMIPUTItemActionCs28CustomDebugStringConvertibleAAMc', 
-                       '_$s8FMIPCore17FMIPBatteryStatusO11notChargingyA2CmFWC', '_$s8FMIPCore17FMIPBatteryStatusO7chargedyA2CmFWC', 
-                       '_$s8FMIPCore17FMIPBatteryStatusO7unknownyA2CmFWC', '_$s8FMIPCore17FMIPBatteryStatusO8chargingyA2CmFWC', 
-                       '_$s8FMIPCore17FMIPBatteryStatusO8rawValueACSgSS_tcfC', '_$s8FMIPCore17FMIPBatteryStatusO8rawValueSSvg', 
-                       '_$s8FMIPCore17FMIPBatteryStatusO8rawValueSSvpMV', '_$s8FMIPCore17FMIPBatteryStatusOMa', 
-                       '_$s8FMIPCore17FMIPBatteryStatusOMn', '_$s8FMIPCore17FMIPBatteryStatusON', 
-                       '_$s8FMIPCore17FMIPBatteryStatusOSHAAMc', '_$s8FMIPCore17FMIPBatteryStatusOSQAAMc', 
-                       '_$s8FMIPCore17FMIPBatteryStatusOSYAAMc', '_$s8FMIPCore17FMIPConnectActionC4itemAcA8FMIPItemV_tcfC', 
+                       '_$s8FMIPCore17FMAddressProtocolMp', '_$s8FMIPCore17FMAddressProtocolP7mapItemxSo06GEOMapE0_p_tcfCTj', 
+                       '_$s8FMIPCore17FMAddressProtocolP7mapItemxSo06GEOMapE0_p_tcfCTq', 
+                       '_$s8FMIPCore17FMAddressProtocolPs28CustomDebugStringConvertibleTb', 
+                       '_$s8FMIPCore17FMAddressProtocolTL', '_$s8FMIPCore17FMIPBatteryStatusO11notChargingyA2CmFWC', 
+                       '_$s8FMIPCore17FMIPBatteryStatusO7chargedyA2CmFWC', '_$s8FMIPCore17FMIPBatteryStatusO7unknownyA2CmFWC', 
+                       '_$s8FMIPCore17FMIPBatteryStatusO8chargingyA2CmFWC', '_$s8FMIPCore17FMIPBatteryStatusO8rawValueACSgSS_tcfC', 
+                       '_$s8FMIPCore17FMIPBatteryStatusO8rawValueSSvg', '_$s8FMIPCore17FMIPBatteryStatusO8rawValueSSvpMV', 
+                       '_$s8FMIPCore17FMIPBatteryStatusOMa', '_$s8FMIPCore17FMIPBatteryStatusOMn', 
+                       '_$s8FMIPCore17FMIPBatteryStatusON', '_$s8FMIPCore17FMIPBatteryStatusOSHAAMc', 
+                       '_$s8FMIPCore17FMIPBatteryStatusOSQAAMc', '_$s8FMIPCore17FMIPBatteryStatusOSYAAMc', 
+                       '_$s8FMIPCore17FMIPConnectActionC4itemAcA8FMIPItemV_tcfC', 
                        '_$s8FMIPCore17FMIPConnectActionC4itemAcA8FMIPItemV_tcfc', 
                        '_$s8FMIPCore17FMIPConnectActionCMa', '_$s8FMIPCore17FMIPConnectActionCMm', 
                        '_$s8FMIPCore17FMIPConnectActionCMn', '_$s8FMIPCore17FMIPConnectActionCMo', 
@@ -1183,6 +1192,12 @@ exports:
                        '_$s8FMIPCore20FMIPUTAlertSheetTypeOMa', '_$s8FMIPCore20FMIPUTAlertSheetTypeOMn', 
                        '_$s8FMIPCore20FMIPUTAlertSheetTypeON', '_$s8FMIPCore20FMIPUTAlertSheetTypeOSHAAMc', 
                        '_$s8FMIPCore20FMIPUTAlertSheetTypeOSQAAMc', '_$s8FMIPCore20FMIPUTAlertSheetTypeOSYAAMc', 
+                       '_$s8FMIPCore21FMIPAuthEventResponseO6deniedyA2CmFWC', '_$s8FMIPCore21FMIPAuthEventResponseO6notNowyA2CmFWC', 
+                       '_$s8FMIPCore21FMIPAuthEventResponseO7grantedyA2CmFWC', '_$s8FMIPCore21FMIPAuthEventResponseO8rawValueACSgSS_tcfC', 
+                       '_$s8FMIPCore21FMIPAuthEventResponseO8rawValueSSvg', '_$s8FMIPCore21FMIPAuthEventResponseO8rawValueSSvpMV', 
+                       '_$s8FMIPCore21FMIPAuthEventResponseOMa', '_$s8FMIPCore21FMIPAuthEventResponseOMn', 
+                       '_$s8FMIPCore21FMIPAuthEventResponseON', '_$s8FMIPCore21FMIPAuthEventResponseOSHAAMc', 
+                       '_$s8FMIPCore21FMIPAuthEventResponseOSQAAMc', '_$s8FMIPCore21FMIPAuthEventResponseOSYAAMc', 
                        '_$s8FMIPCore21FMIPCancelEraseActionC2eeoiySbAC_ACtFZ', '_$s8FMIPCore21FMIPCancelEraseActionC6deviceAcA10FMIPDeviceV_tcfC', 
                        '_$s8FMIPCore21FMIPCancelEraseActionC6deviceAcA10FMIPDeviceV_tcfc', 
                        '_$s8FMIPCore21FMIPCancelEraseActionCMa', '_$s8FMIPCore21FMIPCancelEraseActionCMm', 
@@ -1437,6 +1452,13 @@ exports:
                        '_$s8FMIPCore23FMIPPlaySoundItemActionCMn', '_$s8FMIPCore23FMIPPlaySoundItemActionCMo', 
                        '_$s8FMIPCore23FMIPPlaySoundItemActionCMu', '_$s8FMIPCore23FMIPPlaySoundItemActionCN', 
                        '_$s8FMIPCore23FMIPPlaySoundItemActionCfD', '_$s8FMIPCore23FMIPPlaySoundItemActionCfd', 
+                       '_$s8FMIPCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfC', 
+                       '_$s8FMIPCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfCTj', 
+                       '_$s8FMIPCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfCTq', 
+                       '_$s8FMIPCore23FMReverseGeocodingCacheC15preferredLocaleACyxG10Foundation0F0VSg_tcfc', 
+                       '_$s8FMIPCore23FMReverseGeocodingCacheCMa', '_$s8FMIPCore23FMReverseGeocodingCacheCMn', 
+                       '_$s8FMIPCore23FMReverseGeocodingCacheCMo', '_$s8FMIPCore23FMReverseGeocodingCacheCMu', 
+                       '_$s8FMIPCore23FMReverseGeocodingCacheCfD', '_$s8FMIPCore23FMReverseGeocodingCacheCfd', 
                        '_$s8FMIPCore24FMIPFirmwareUpdateActionC4item15updateInitiatedAcA8FMIPItemV_SbtcfC', 
                        '_$s8FMIPCore24FMIPFirmwareUpdateActionC4item15updateInitiatedAcA8FMIPItemV_SbtcfCTj', 
                        '_$s8FMIPCore24FMIPFirmwareUpdateActionC4item15updateInitiatedAcA8FMIPItemV_SbtcfCTq', 
@@ -1562,8 +1584,6 @@ exports:
                        '_$s8FMIPCore25FMIPRemoveItemGroupActionCN', '_$s8FMIPCore25FMIPRemoveItemGroupActionCSQAAMc', 
                        '_$s8FMIPCore25FMIPRemoveItemGroupActionCfD', '_$s8FMIPCore25FMIPRemoveItemGroupActionCfd', 
                        '_$s8FMIPCore25FMIPReverseGeocodingCacheC15preferredLocaleAC10Foundation0F0VSg_tcfC', 
-                       '_$s8FMIPCore25FMIPReverseGeocodingCacheC15preferredLocaleAC10Foundation0F0VSg_tcfCTj', 
-                       '_$s8FMIPCore25FMIPReverseGeocodingCacheC15preferredLocaleAC10Foundation0F0VSg_tcfCTq', 
                        '_$s8FMIPCore25FMIPReverseGeocodingCacheC15preferredLocaleAC10Foundation0F0VSg_tcfc', 
                        '_$s8FMIPCore25FMIPReverseGeocodingCacheC7address3for10completionyAA16FMIPSafeLocationV_yAA11FMIPAddressVSgctFTj', 
                        '_$s8FMIPCore25FMIPReverseGeocodingCacheC7address3for10completionyAA16FMIPSafeLocationV_yAA11FMIPAddressVSgctFTq', 
@@ -1636,6 +1656,28 @@ exports:
                        '_$s8FMIPCore25FMLocationShiftingRequestCMn', '_$s8FMIPCore25FMLocationShiftingRequestCMo', 
                        '_$s8FMIPCore25FMLocationShiftingRequestCMu', '_$s8FMIPCore25FMLocationShiftingRequestCN', 
                        '_$s8FMIPCore25FMLocationShiftingRequestCfD', '_$s8FMIPCore25FMLocationShiftingRequestCfd', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV10identifierSSvg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV10identifierSSvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV14referenceFrameSo025CLClientLocationReferenceF0aSgvg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV14referenceFrameSo025CLClientLocationReferenceF0aSgvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV16debugDescriptionSSvg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV16debugDescriptionSSvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV16isCoarseLocationSbvg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV16isCoarseLocationSbvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV18isRealtimeLocationSbvg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV18isRealtimeLocationSbvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV2eeoiySbAC_ACtFZ', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV4hash4intoys6HasherVz_tF', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV6locale10Foundation6LocaleVSgvg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV6locale10Foundation6LocaleVSgvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV7geoHashSSvg', '_$s8FMIPCore25FMReverseGeocodingRequestV7geoHashSSvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV8locationSo10CLLocationCvg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV8locationSo10CLLocationCvpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV9hashValueSivg', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestV9hashValueSivpMV', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestVMa', '_$s8FMIPCore25FMReverseGeocodingRequestVMn', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestVN', '_$s8FMIPCore25FMReverseGeocodingRequestVSHAAMc', 
+                       '_$s8FMIPCore25FMReverseGeocodingRequestVSQAAMc', '_$s8FMIPCore25FMReverseGeocodingRequestVs28CustomDebugStringConvertibleAAMc', 
                        '_$s8FMIPCore26FMIPB389ProductInformationV12antennaPowerSdvg', 
                        '_$s8FMIPCore26FMIPB389ProductInformationV12antennaPowerSdvpMV', 
                        '_$s8FMIPCore26FMIPB389ProductInformationV16manufacturerNameSSvg', 
@@ -1876,10 +1918,6 @@ exports:
                        '_$s8FMIPCore29FMIPItemActionControllerErrorOMa', '_$s8FMIPCore29FMIPItemActionControllerErrorOMn', 
                        '_$s8FMIPCore29FMIPItemActionControllerErrorON', '_$s8FMIPCore29FMIPItemActionControllerErrorOSHAAMc', 
                        '_$s8FMIPCore29FMIPItemActionControllerErrorOSQAAMc', '_$s8FMIPCore29FMIPItemActionControllerErrorOs0E0AAMc', 
-                       '_$s8FMIPCore29FMIPReverseGeocodingOperationCACycfC', '_$s8FMIPCore29FMIPReverseGeocodingOperationCACycfc', 
-                       '_$s8FMIPCore29FMIPReverseGeocodingOperationCMa', '_$s8FMIPCore29FMIPReverseGeocodingOperationCMn', 
-                       '_$s8FMIPCore29FMIPReverseGeocodingOperationCMo', '_$s8FMIPCore29FMIPReverseGeocodingOperationCMu', 
-                       '_$s8FMIPCore29FMIPReverseGeocodingOperationCN', '_$s8FMIPCore29FMIPReverseGeocodingOperationCfD', 
                        '_$s8FMIPCore29FMIPSafeLocationApprovalStateO7ignoredyA2CmFWC', 
                        '_$s8FMIPCore29FMIPSafeLocationApprovalStateO7unknownyA2CmFWC', 
                        '_$s8FMIPCore29FMIPSafeLocationApprovalStateO8acceptedyA2CmFWC', 
@@ -1965,7 +2003,23 @@ exports:
                        '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCMa', '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCMm', 
                        '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCMn', '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCMo', 
                        '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCN', '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCfD', 
-                       '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCfd', '_$s8FMIPCore32FMIPAccessoryDiscoveryControllerC04stopC010completionyys6ResultOyytAA0B5ErrorOGcSg_tFTj', 
+                       '_$s8FMIPCore31FMIPFetchEncryptedPayloadActionCfd', '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV018findMyNotificationC6Status07utAlertcI0ACSo015UNAuthorizationI0V_AGtcfC', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV018findMyNotificationC6StatusSo015UNAuthorizationI0VvM', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV018findMyNotificationC6StatusSo015UNAuthorizationI0Vvg', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV018findMyNotificationC6StatusSo015UNAuthorizationI0VvpMV', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV018findMyNotificationC6StatusSo015UNAuthorizationI0Vvs', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV07utAlertC6StatusSo015UNAuthorizationH0VvM', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV07utAlertC6StatusSo015UNAuthorizationH0Vvg', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV07utAlertC6StatusSo015UNAuthorizationH0VvpMV', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventV07utAlertC6StatusSo015UNAuthorizationH0Vvs', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventVMa', '_$s8FMIPCore31FMIPNotificationAuthLaunchEventVMn', 
+                       '_$s8FMIPCore31FMIPNotificationAuthLaunchEventVN', '_$s8FMIPCore31FMIPNotificationAuthPromptEventV04authE8ResponseAA08FMIPAutheG0OvM', 
+                       '_$s8FMIPCore31FMIPNotificationAuthPromptEventV04authE8ResponseAA08FMIPAutheG0Ovg', 
+                       '_$s8FMIPCore31FMIPNotificationAuthPromptEventV04authE8ResponseAA08FMIPAutheG0OvpMV', 
+                       '_$s8FMIPCore31FMIPNotificationAuthPromptEventV04authE8ResponseAA08FMIPAutheG0Ovs', 
+                       '_$s8FMIPCore31FMIPNotificationAuthPromptEventV04authE8ResponseAcA08FMIPAutheG0O_tcfC', 
+                       '_$s8FMIPCore31FMIPNotificationAuthPromptEventVMa', '_$s8FMIPCore31FMIPNotificationAuthPromptEventVMn', 
+                       '_$s8FMIPCore31FMIPNotificationAuthPromptEventVN', '_$s8FMIPCore32FMIPAccessoryDiscoveryControllerC04stopC010completionyys6ResultOyytAA0B5ErrorOGcSg_tFTj', 
                        '_$s8FMIPCore32FMIPAccessoryDiscoveryControllerC04stopC010completionyys6ResultOyytAA0B5ErrorOGcSg_tFTq', 
                        '_$s8FMIPCore32FMIPAccessoryDiscoveryControllerC05startC010completionyys6ResultOyytAA0B5ErrorOGcSg_tFTj', 
                        '_$s8FMIPCore32FMIPAccessoryDiscoveryControllerC05startC010completionyys6ResultOyytAA0B5ErrorOGcSg_tFTq', 
@@ -2330,6 +2384,5 @@ exports:
                        '_$sSo30CLClientLocationReferenceFrameaSH8FMIPCoreMc', '_$sSo30CLClientLocationReferenceFrameaSQ8FMIPCoreMc' ]
     objc-classes:    [ _TtC8FMIPCore17FMPhoneNumberUtil, _TtC8FMIPCore22FMAPSConnectionHandler, 
                        _TtC8FMIPCore22FMIPLocationController, _TtC8FMIPCore27FMIPItemImageCacheOperation, 
-                       _TtC8FMIPCore29FMIPDeviceImageCacheOperation, _TtC8FMIPCore29FMIPReverseGeocodingOperation, 
-                       _TtC8FMIPCore37FMIPEphemeralAuthenticationController ]
+                       _TtC8FMIPCore29FMIPDeviceImageCacheOperation, _TtC8FMIPCore37FMIPEphemeralAuthenticationController ]
 ...

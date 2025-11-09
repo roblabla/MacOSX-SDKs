@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           46421210-3B7B-30B5-A9A2-71394A070103
+    value:           3B8CB76F-8DA6-3FD5-862B-8845B481DE63
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3841E51B-3ACD-3916-AF87-CC9D2CA3D31B
+    value:           13FD331E-F85C-3EBF-BC8F-41630068C7ED
 install-name:    '/System/Library/PrivateFrameworks/WatchdogClient.framework/Versions/A/WatchdogClient'
-current-version: 127.40.8
+current-version: 127.100.16
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

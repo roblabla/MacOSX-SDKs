@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA4E637E-2B46-3413-BD5B-057A65F7D1B1
+    value:           4F75B153-8C39-38DA-B30F-50044F799C33
   - target:          x86_64-maccatalyst
-    value:           EA4E637E-2B46-3413-BD5B-057A65F7D1B1
+    value:           4F75B153-8C39-38DA-B30F-50044F799C33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           22E5B0EA-9511-328D-8A53-EBB7E2F0F500
+    value:           E5D1864C-A8C3-3CCF-909D-12DCC5E330E6
   - target:          arm64e-maccatalyst
-    value:           22E5B0EA-9511-328D-8A53-EBB7E2F0F500
+    value:           E5D1864C-A8C3-3CCF-909D-12DCC5E330E6
 install-name:    '/System/Library/Frameworks/ImageCaptureCore.framework/Versions/A/ImageCaptureCore'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

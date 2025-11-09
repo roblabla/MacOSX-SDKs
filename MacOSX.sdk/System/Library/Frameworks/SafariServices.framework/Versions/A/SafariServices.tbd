@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9AB7A1C7-0E53-34A1-B967-09D56C391F9F
+    value:           74041F79-E795-3DC5-9EC0-118C17E88349
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           94F6D24F-5F29-3E4D-8F29-22F6BEAAE076
+    value:           4950A85D-3381-30C2-A6BF-C3205ADA264D
 install-name:    '/System/Library/Frameworks/SafariServices.framework/Versions/A/SafariServices'
-current-version: 612.3.6
+current-version: 613.1.17
 compatibility-version: 535
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4582C6B7-8645-3A3C-8E88-8384B8E9A7AC
+    value:           FF220A1F-D662-365B-944A-AFA393A5AE37
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2993000-86F9-3B7A-8ED2-3648E5C7DA82
+    value:           44153400-5FA0-3541-B52F-C32960B7DE77
 install-name:    '/System/Library/PrivateFrameworks/CoreBluetoothUI.framework/Versions/A/CoreBluetoothUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -27,8 +27,7 @@ exports:
                        CBUIBackgroundStyle2AlternateRemoveButton, CBUIBackgroundStyle2GrayColorTransformer, 
                        CBUIBackgroundStyle2RemoveButton, CBUIBatteryControl, CBUIBool2BWColorTransformer, 
                        CBUIConnected2ImageIndicatorTransformer, CBUIConnected2StatusTransformer, 
-                       CBUIPaired2ActionTitle, CBUIPairedColorTransformer, CBUtil, 
-                       DeviceOptionsControllerShareGestures ]
+                       CBUIPaired2ActionTitle, CBUIPairedColorTransformer, DeviceOptionsControllerShareGestures ]
     objc-ivars:      [ AudioOptions._peer, AudioOptions.isReferenceUsed, AudioOptions.optionViewControllers, 
                        AudioOptionsViewListeningMode.buttonsLocked, AudioOptionsViewListeningMode.mReady, 
                        AudioOptionsViewListeningMode.unlockTimer, CBAssetHelper.mDictCache, 

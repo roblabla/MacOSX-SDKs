@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D394CFAF-CDFF-3980-AE6D-769715E3200C
+    value:           709DE7CC-CD66-301F-B413-522BBA20B9D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3B1C076C-6DB1-33CD-AB6A-9DD14F4D8DCF
+    value:           C513E58D-8E92-3AEB-B500-31E334A16A92
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesUI.framework/Versions/A/AppleMediaServicesUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -27,9 +27,9 @@ exports:
                        AMSUICommonView, AMSUICommonViewController, AMSUICommonVisualEffectView, 
                        AMSUIDynamicImpressionItem, AMSUIDynamicImpressionMetrics, 
                        AMSUIDynamicImpressionMetricsIdentifier, AMSUIDynamicViewController, 
-                       AMSUIEngagementTask, AMSUIImageLoader, AMSUIInlineDialogViewController, 
-                       AMSUIMarketingItemViewController, AMSUIMessageGroup, AMSUIMessageRequest, 
-                       AMSUIPaymentVerificationTokenFetchTask, AMSUISubscriptionsViewController, 
-                       AMSUIToastAppearance, AMSUIToastViewController, AMSUIWebAppearance, 
-                       AMSUIWebViewController ]
+                       AMSUIEngagementTask, AMSUIEngagementTaskViewController, AMSUIImageLoader, 
+                       AMSUIInlineDialogViewController, AMSUIMarketingItemViewController, 
+                       AMSUIMessageGroup, AMSUIMessageRequest, AMSUIPaymentVerificationTokenFetchTask, 
+                       AMSUISubscriptionsViewController, AMSUIToastAppearance, AMSUIToastViewController, 
+                       AMSUIWebAppearance, AMSUIWebViewController ]
 ...

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CDFE5BD4-FEFD-3B97-9A90-0513B05F91D4
+    value:           ED42C002-0A3D-3CFC-A5B4-007E9F8450FD
   - target:          x86_64-maccatalyst
-    value:           CDFE5BD4-FEFD-3B97-9A90-0513B05F91D4
+    value:           ED42C002-0A3D-3CFC-A5B4-007E9F8450FD
   - target:          x86_64h-macos
-    value:           7E808C0B-093E-3488-9C32-5C58A3606357
+    value:           5063016F-C5E4-3455-A057-CB3C3EEED7E8
   - target:          x86_64h-maccatalyst
-    value:           7E808C0B-093E-3488-9C32-5C58A3606357
+    value:           5063016F-C5E4-3455-A057-CB3C3EEED7E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F0D5F29-693F-36A2-8C57-0D6E1919586B
+    value:           E02AEB06-0AB6-3743-BF8C-02CEFA571365
   - target:          arm64e-maccatalyst
-    value:           2F0D5F29-693F-36A2-8C57-0D6E1919586B
+    value:           E02AEB06-0AB6-3743-BF8C-02CEFA571365
 install-name:    '/usr/lib/system/libsystem_m.dylib'
-current-version: 3204
+current-version: 3204.80.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]

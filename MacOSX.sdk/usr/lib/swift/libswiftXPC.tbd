@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D1BA41AF-87FC-349B-8CA3-2B0F50A2D54D
+    value:           B097A93C-E0C5-3C91-A48D-3D9EA0A47048
   - target:          x86_64-maccatalyst
-    value:           D1BA41AF-87FC-349B-8CA3-2B0F50A2D54D
+    value:           B097A93C-E0C5-3C91-A48D-3D9EA0A47048
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6009C90D-DBCC-392E-A2DF-C33A90CE62B0
+    value:           8512287A-0096-3431-95C1-4F0304D94C76
   - target:          arm64e-maccatalyst
-    value:           6009C90D-DBCC-392E-A2DF-C33A90CE62B0
+    value:           8512287A-0096-3431-95C1-4F0304D94C76
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
 current-version: 1.1
 swift-abi-version: 7

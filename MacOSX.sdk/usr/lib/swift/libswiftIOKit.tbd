@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           81E15FD7-56F4-3261-BD6C-F08458A58CA6
+    value:           3A3CBAC2-AC41-3316-8BF8-7B198AF6E93A
   - target:          x86_64-maccatalyst
-    value:           81E15FD7-56F4-3261-BD6C-F08458A58CA6
+    value:           3A3CBAC2-AC41-3316-8BF8-7B198AF6E93A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3A6DAAD-A7F5-34E5-A1A7-F683A7649044
+    value:           5BAA8D57-F740-342A-9979-77C05058B23F
   - target:          arm64e-maccatalyst
-    value:           F3A6DAAD-A7F5-34E5-A1A7-F683A7649044
+    value:           5BAA8D57-F740-342A-9979-77C05058B23F
 install-name:    '/usr/lib/swift/libswiftIOKit.dylib'
 swift-abi-version: 7
 exports:

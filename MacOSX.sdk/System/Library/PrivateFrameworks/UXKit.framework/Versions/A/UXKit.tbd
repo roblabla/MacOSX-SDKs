@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB4233B3-BAE7-3666-ADEE-2D1D5FDAF348
+    value:           438FE64C-4DCB-367F-8B5C-2DE2FAF718B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A67E773-195F-3F0E-8163-0E0D98C68A6D
+    value:           2DBFD5F7-9B71-3B04-A523-3555E323130C
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 421.0.100
+current-version: 441.0.120
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUIApps, 

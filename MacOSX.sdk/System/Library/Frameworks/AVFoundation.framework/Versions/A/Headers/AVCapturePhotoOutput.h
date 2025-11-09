@@ -1580,7 +1580,7 @@ AV_INIT_UNAVAILABLE
 /*!
  @property timestamp
  @abstract
-    The time at which this image was captured, synchronized to the masterClock of the AVCaptureSession
+    The time at which this image was captured, synchronized to the synchronizationClock of the AVCaptureSession
 
  @discussion
     The timestamp property indicates the time the image was captured, and is analogous to CMSampleBufferGetPresentationTimeStamp(). If an error was provided in the -captureOutput:didFinishingProcessingPhoto:error: callback, timestamp returns kCMTimeInvalid.

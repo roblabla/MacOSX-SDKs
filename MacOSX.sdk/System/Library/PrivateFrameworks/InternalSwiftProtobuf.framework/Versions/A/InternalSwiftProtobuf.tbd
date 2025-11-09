@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           894DDD0A-C676-3982-922C-E90DC9CACED1
+    value:           5BA244C3-8720-3867-AA58-479A6DD7AD06
   - target:          x86_64-maccatalyst
-    value:           894DDD0A-C676-3982-922C-E90DC9CACED1
+    value:           5BA244C3-8720-3867-AA58-479A6DD7AD06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDE31B06-3F82-360D-A03A-2D6BA743B6D3
+    value:           BBC84F88-1377-35AA-B5C6-10D177A0506A
   - target:          arm64e-maccatalyst
-    value:           BDE31B06-3F82-360D-A03A-2D6BA743B6D3
+    value:           BBC84F88-1377-35AA-B5C6-10D177A0506A
 install-name:    '/System/Library/PrivateFrameworks/InternalSwiftProtobuf.framework/Versions/A/InternalSwiftProtobuf'
 swift-abi-version: 7
 exports:
@@ -2118,6 +2118,7 @@ exports:
                        '_$s21InternalSwiftProtobuf07Google_C4_AnyV13unknownFieldsAA14UnknownStorageVvs', 
                        '_$s21InternalSwiftProtobuf07Google_C4_AnyV16protoMessageNameSSvgZ', 
                        '_$s21InternalSwiftProtobuf07Google_C4_AnyV16textFormatString10extensionsACSS_AA12ExtensionMap_pSgtKcfC', 
+                       '_$s21InternalSwiftProtobuf07Google_C4_AnyV16textFormatString7options10extensionsACSS_AA04TextG15DecodingOptionsVAA12ExtensionMap_pSgtKcfC', 
                        '_$s21InternalSwiftProtobuf07Google_C4_AnyV17_protobuf_nameMapAA05_NameH0VvgZ', 
                        '_$s21InternalSwiftProtobuf07Google_C4_AnyV2eeoiySbAC_ACtFZ', 
                        '_$s21InternalSwiftProtobuf07Google_C4_AnyV3isAySbxmAA7MessageRzlF', 
@@ -3199,6 +3200,7 @@ exports:
                        '_$s21InternalSwiftProtobuf23TextFormatDecodingErrorO15malformedNumberyA2CmFWC', 
                        '_$s21InternalSwiftProtobuf23TextFormatDecodingErrorO15trailingGarbageyA2CmFWC', 
                        '_$s21InternalSwiftProtobuf23TextFormatDecodingErrorO16conflictingOneOfyA2CmFWC', 
+                       '_$s21InternalSwiftProtobuf23TextFormatDecodingErrorO17messageDepthLimityA2CmFWC', 
                        '_$s21InternalSwiftProtobuf23TextFormatDecodingErrorO17missingFieldNamesyA2CmFWC', 
                        '_$s21InternalSwiftProtobuf23TextFormatDecodingErrorO21unrecognizedEnumValueyA2CmFWC', 
                        '_$s21InternalSwiftProtobuf23TextFormatDecodingErrorO2eeoiySbAC_ACtFZ', 
@@ -3238,6 +3240,14 @@ exports:
                        '_$s21InternalSwiftProtobuf24PackedEnumExtensionFieldVyxGSHAAMc', 
                        '_$s21InternalSwiftProtobuf24PackedEnumExtensionFieldVyxGSQAAMc', 
                        '_$s21InternalSwiftProtobuf24PackedEnumExtensionFieldVyxGs28CustomDebugStringConvertibleAAMc', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsV17messageDepthLimitSivM', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsV17messageDepthLimitSivg', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsV17messageDepthLimitSivpMV', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsV17messageDepthLimitSivs', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsVACycfC', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsVMa', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsVMn', 
+                       '_$s21InternalSwiftProtobuf25TextFormatDecodingOptionsVN', 
                        '_$s21InternalSwiftProtobuf25TextFormatEncodingOptionsV18printUnknownFieldsSbvM', 
                        '_$s21InternalSwiftProtobuf25TextFormatEncodingOptionsV18printUnknownFieldsSbvg', 
                        '_$s21InternalSwiftProtobuf25TextFormatEncodingOptionsV18printUnknownFieldsSbvpMV', 
@@ -3580,6 +3590,7 @@ exports:
                        '_$s21InternalSwiftProtobuf7MessagePAAE16debugDescriptionSSvg', 
                        '_$s21InternalSwiftProtobuf7MessagePAAE16debugDescriptionSSvpMV', 
                        '_$s21InternalSwiftProtobuf7MessagePAAE16textFormatString10extensionsxSS_AA12ExtensionMap_pSgtKcfC', 
+                       '_$s21InternalSwiftProtobuf7MessagePAAE16textFormatString7options10extensionsxSS_AA04TextF15DecodingOptionsVAA12ExtensionMap_pSgtKcfC', 
                        '_$s21InternalSwiftProtobuf7MessagePAAE16textFormatString7optionsSSAA04TextF15EncodingOptionsV_tF', 
                        '_$s21InternalSwiftProtobuf7MessagePAAE16textFormatStringSSyF', 
                        '_$s21InternalSwiftProtobuf7MessagePAAE4hash4intoys6HasherVz_tF', 

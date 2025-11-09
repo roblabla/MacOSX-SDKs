@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A2B27A1-4FEF-3892-B467-C354904963BD
+    value:           13976DCD-431D-3097-A59C-DA64CE9FF884
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           651446E2-4FC3-30E2-9E71-54E19DC30BEC
+    value:           A8641DD1-9E6D-3AE2-8571-ABC80699B38D
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Libraries/libAlembic.1.7.10.dylib'
 current-version: 1.7.10
 compatibility-version: 1.7
@@ -61,10 +61,6 @@ exports:
                        __ZTIN7Alembic7AbcGeom3v1115OGeomBaseSchemaINS1_18PolyMeshSchemaInfoEEE, 
                        __ZTIN7Alembic7AbcGeom3v1115OPolyMeshSchemaE, __ZTIN7Iex_2_27MathExcE, 
                        __ZTIN9Imath_2_212ZeroScaleExcE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN7Alembic11AbcMaterial3v1115OMaterialSchema4DataENS_10shared_ptrIS5_E27__shared_ptr_default_deleteIS5_S5_EENS_9allocatorIS5_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN7Alembic12AbcCoreLayer3v116ArImplENS_10shared_ptrIS4_E27__shared_ptr_default_deleteIS4_S4_EENS_9allocatorIS4_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIPN7Alembic12AbcCoreLayer3v116OrImplENS_10shared_ptrIS4_E27__shared_ptr_default_deleteIS4_S4_EENS_9allocatorIS4_EEEE, 
@@ -218,10 +214,6 @@ exports:
                        __ZTSNSt3__110shared_ptrIN7Alembic7AbcGeom3v1112OXformSchema4DataEE27__shared_ptr_default_deleteIS5_S5_EE, 
                        __ZTSNSt3__110shared_ptrINS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_NS_4lessIS7_EENS5_INS_4pairIKS7_S7_EEEEEEE27__shared_ptr_default_deleteISE_SE_EE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN7Alembic11AbcMaterial3v1115OMaterialSchema4DataENS_10shared_ptrIS5_E27__shared_ptr_default_deleteIS5_S5_EENS_9allocatorIS5_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN7Alembic12AbcCoreLayer3v116ArImplENS_10shared_ptrIS4_E27__shared_ptr_default_deleteIS4_S4_EENS_9allocatorIS4_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN7Alembic12AbcCoreLayer3v116OrImplENS_10shared_ptrIS4_E27__shared_ptr_default_deleteIS4_S4_EENS_9allocatorIS4_EEEE, 

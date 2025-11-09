@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BD1970BC-7B53-3FC4-870E-497018B145A5
+    value:           8D891F80-DF53-3535-B3C8-97273455A9B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BBA238FA-04BE-39F2-93A8-92410904A6F9
+    value:           73EA71AA-79FC-3DA8-A324-E5DA686D85C2
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

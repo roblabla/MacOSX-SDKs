@@ -26,13 +26,13 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
-#import <WebKit/WebKitAvailability.h>
-
 #ifndef WebDownload_h
 #define WebDownload_h
 
-#if (defined TARGET_OS_MACCATALYST && TARGET_OS_MACCATALYST)
+#import <Foundation/Foundation.h>
+#import <WebKit/WebKitAvailability.h>
+
+#if defined(TARGET_OS_MACCATALYST) && TARGET_OS_MACCATALYST
 #import <CFNetwork/CFNSURLConnection.h>
 #else
 #import <Foundation/NSURLDownload.h>

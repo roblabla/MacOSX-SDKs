@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C09CBAAD-3128-3F67-AEAF-64A5CBD53274
+    value:           A218D9DF-62C7-3F90-81FF-54A178BD034E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F94CB7F3-446D-363C-954A-D59001925D66
+    value:           EBFF3674-436B-3856-B5D1-A61E0278E940
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompilerImplLazy.dylib'
-current-version: 31001.255
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ ___clang_metalfe_GPUCompiler_compileFromSourceToBufferWrapper, 

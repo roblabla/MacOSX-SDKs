@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           129B1912-EEAF-3EEA-93BE-79E201C13F7C
+    value:           8507B51E-2CFE-3790-A25C-C47C7C8B0DE8
   - target:          x86_64-maccatalyst
-    value:           129B1912-EEAF-3EEA-93BE-79E201C13F7C
+    value:           8507B51E-2CFE-3790-A25C-C47C7C8B0DE8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           540088B6-CC81-381F-901C-5632F4A73C45
+    value:           E0FC64A3-790D-34B3-A092-432A0E6B1C82
   - target:          arm64e-maccatalyst
-    value:           540088B6-CC81-381F-901C-5632F4A73C45
+    value:           E0FC64A3-790D-34B3-A092-432A0E6B1C82
 install-name:    '/usr/lib/libc++abi.dylib'
-current-version: 1200.3
+current-version: 1300.23
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

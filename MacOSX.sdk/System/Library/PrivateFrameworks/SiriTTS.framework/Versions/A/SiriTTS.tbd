@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9588A21D-949C-34FB-9A90-7373FDC55EA5
+    value:           B0D71467-C997-338A-B89E-D55CE5797C0D
   - target:          x86_64-maccatalyst
-    value:           9588A21D-949C-34FB-9A90-7373FDC55EA5
+    value:           B0D71467-C997-338A-B89E-D55CE5797C0D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A1856D6-AA85-3D79-9DC1-517EE35673C8
+    value:           2C829E35-09B7-3DD2-B90D-0B47F5B64C70
   - target:          arm64e-maccatalyst
-    value:           8A1856D6-AA85-3D79-9DC1-517EE35673C8
+    value:           2C829E35-09B7-3DD2-B90D-0B47F5B64C70
 install-name:    '/System/Library/PrivateFrameworks/SiriTTS.framework/Versions/A/SiriTTS'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

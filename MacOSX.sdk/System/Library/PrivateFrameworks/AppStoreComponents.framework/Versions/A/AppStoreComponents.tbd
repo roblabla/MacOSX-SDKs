@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7AA25A90-C021-3ADF-BF25-D19C160D49E1
+    value:           BBA6428C-40E7-3205-A0DC-9B442FD02417
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB742D74-9AFE-3EAE-A484-9A298AD4412E
+    value:           E99E6218-0C52-37E1-BDA6-78A67B706221
 install-name:    '/System/Library/PrivateFrameworks/AppStoreComponents.framework/Versions/A/AppStoreComponents'
 swift-abi-version: 7
 exports:

@@ -1,7 +1,7 @@
-.\"	$OpenBSD: mg.1,v 1.122 2021/03/26 15:02:10 lum Exp $
+.\"	$OpenBSD: mg.1,v 1.125 2021/05/02 14:13:17 lum Exp $
 .\" This file is in the public domain.
 .\"
-.Dd $Mdocdate: March 26 2021 $
+.Dd $Mdocdate: May 2 2021 $
 .Dt MG 1
 .Os
 .Sh NAME
@@ -205,6 +205,8 @@ list-buffers
 save-buffers-kill-emacs
 .It C-x C-f
 find-file
+.It C-x C-j
+dired-jump
 .It C-x C-g
 keyboard-quit
 .It C-x C-l
@@ -530,6 +532,8 @@ Display the name of the function currently bound to the key.
 View the differences between buffer and its associated file.
 .It digit-argument
 Process a numerical argument for keyboard-invoked functions.
+.It dired-jump
+Open a dired buffer containing the current buffer's directory location.
 .It downcase-region
 Set all characters in the region to lower case.
 .It downcase-word
@@ -774,6 +778,8 @@ Display current (global) working directory in the status area.
 .It query-replace
 Query Replace.
 Search and replace strings selectively, prompting after each match.
+.It replace-regexp
+Replace regular expression globally without individual prompting.
 .It replace-string
 Replace string globally without individual prompting.
 .It query-replace-regexp
@@ -1062,6 +1068,8 @@ Refresh the dired buffer while retaining any flags.
 Scroll down the dired buffer.
 .It dired-scroll-up
 Scroll up the dired buffer.
+.It dired-shell-command
+Pipe the file under the current cursor position through a shell command.
 .It dired-unmark
 Remove the deletion flag for the file on the current line.
 .It dired-unmark-backward

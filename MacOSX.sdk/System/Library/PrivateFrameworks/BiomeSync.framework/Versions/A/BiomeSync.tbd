@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           48BE174E-5D11-3820-8B9A-1BA370E7C5E6
+    value:           D3F46621-C11C-389D-A8E6-0AB0A71D9E36
   - target:          x86_64-maccatalyst
-    value:           48BE174E-5D11-3820-8B9A-1BA370E7C5E6
+    value:           D3F46621-C11C-389D-A8E6-0AB0A71D9E36
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54640415-ACD9-33FB-89FB-BBAD1CF46A5A
+    value:           2C39A68B-E1FD-3984-B09D-83D0A55DA60E
   - target:          arm64e-maccatalyst
-    value:           54640415-ACD9-33FB-89FB-BBAD1CF46A5A
+    value:           2C39A68B-E1FD-3984-B09D-83D0A55DA60E
 install-name:    '/System/Library/PrivateFrameworks/BiomeSync.framework/Versions/A/BiomeSync'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

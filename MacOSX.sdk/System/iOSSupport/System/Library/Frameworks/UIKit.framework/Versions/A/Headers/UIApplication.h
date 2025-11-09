@@ -525,6 +525,7 @@ UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsUserA
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsCloudKitShareMetadataKey NS_SWIFT_NAME(cloudKitShareMetadata) API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos); // The presence of this key indicates that the app was launched in order to handle a CloudKit sharing invitation. The value of this key is a CKShareMetadata object.
 
 UIKIT_EXTERN NSString *const UIApplicationOpenSettingsURLString API_AVAILABLE(ios(8.0));
+UIKIT_EXTERN NSString *const UIApplicationOpenNotificationSettingsURLString API_AVAILABLE(ios(15.4));
 
 // Keys for application:openURL:options:
 UIKIT_EXTERN UIApplicationOpenURLOptionsKey const UIApplicationOpenURLOptionsSourceApplicationKey NS_SWIFT_NAME(sourceApplication) API_AVAILABLE(ios(9.0));   // value is an NSString containing the bundle ID of the originating application; non-nil if the originating application and this application share the same team identifier

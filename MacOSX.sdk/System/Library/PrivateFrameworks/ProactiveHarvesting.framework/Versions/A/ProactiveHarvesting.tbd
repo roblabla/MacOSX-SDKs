@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8E9E0B65-D1A7-3025-9488-C7C54634B681
+    value:           D239B438-5BFC-3395-8819-DF37B526875B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           961B5695-703B-3B1C-B0B3-BFBDAA14B019
+    value:           2CDC6637-4CCE-341E-8545-DBB2BF1921C8
 install-name:    '/System/Library/PrivateFrameworks/ProactiveHarvesting.framework/Versions/A/ProactiveHarvesting'
-current-version: 1153.10
+current-version: 1153.16.1
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestions, CoreSuggestionsInternals, CoreSuggestionsML, 

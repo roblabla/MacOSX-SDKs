@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF7499E7-7BAE-3C9E-806F-52317A8339A4
+    value:           5EB16FEC-7CC0-3CD8-96F9-A6DAF3873D25
 install-name:    '/System/Library/PrivateFrameworks/CPMS.framework/Versions/A/CPMS'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]
@@ -30,16 +30,17 @@ exports:
                        _getClientSpecialBehaviorsThermalBudgetSeparate, _getClientSpecialBehaviorsTimeScaleForSyscapComparison, 
                        _getClientSpecialBehaviorsUncontrolledThermallyOnWatch, _getClientState, 
                        _getClientThermalMonitorMitigationType, _getClientThermalMonitorName, 
-                       _getPowerForTimescale, _isClientNameValid, _kCPMSPowerTimeScale100ms, 
-                       _kCPMSPowerTimeScale1s, _kCPMSPowerTimeScaleInstantaneous, 
+                       _getPowerForTimescale, _hasModelPrefix, _isClientNameValid, 
+                       _kCPMSPowerTimeScale100ms, _kCPMSPowerTimeScale1s, _kCPMSPowerTimeScaleInstantaneous, 
                        _kCPMSPowerTimeScaleThermal, _laneInputDisplayName, _openIOConnectionToPPM, 
                        _operationModeNames, _outputForEffort, _printBudget, _printBudgetArray, 
                        _printBudgetItem, _printCPMSBatteryPmaxState, _printCPMSControlState, 
                        _printCPMSControlStateSnapshotDict, _printCPMSControlStateSnapshotDictCSV, 
                        _printClientState, _printClientStateCSV, _printDecisionTreeCurve, 
-                       _printGenericStructElement, _sendPowerBudgetToCPMSClient, 
-                       _setApplePPMArrayProperty, _setApplePPMFloatProperty, _setClientDemandScaleFactor, 
-                       _setDetailedThermalBudgetsToKext, _setOverrideClientPowerBudget, 
+                       _printGenericStructElement, _removeAllOverrides, _removeThermalOverrides, 
+                       _runCmd, _sendPowerBudgetToCPMSClient, _setApplePPMArrayProperty, 
+                       _setApplePPMFloatProperty, _setClientDemandScaleFactor, _setDetailedThermalBudgetsToKext, 
+                       _setOverrideClientPowerBudget, _shouldPreferSmcifToThermtune, 
                        _suppressAssert, _timescaleDisplayName, _timescaleIntDisplayName ]
     objc-classes:    [ CPMSAgent, CPMSClientDescription, CPMSStateReader ]
 ...

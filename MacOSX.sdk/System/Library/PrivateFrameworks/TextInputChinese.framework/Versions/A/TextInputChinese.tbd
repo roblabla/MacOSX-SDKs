@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           38F5FB6E-7CF9-3714-AFAE-7F8184BAFAD7
+    value:           0E392931-9B23-33E5-A5A0-F7F46905D774
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           63513BCB-9BCA-3AF3-B9FC-2CAED4C74675
+    value:           421D8F67-BCF1-38A8-9590-16D3BC23C1F8
 install-name:    '/System/Library/PrivateFrameworks/TextInputChinese.framework/Versions/A/TextInputChinese'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

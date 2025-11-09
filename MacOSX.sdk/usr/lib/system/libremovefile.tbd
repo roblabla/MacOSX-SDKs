@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3611DC3A-03D7-3B5E-A7F3-89C5FB002F2B
+    value:           06A5E617-FB01-3F34-9A4C-CA3894CE0438
   - target:          x86_64-maccatalyst
-    value:           3611DC3A-03D7-3B5E-A7F3-89C5FB002F2B
+    value:           06A5E617-FB01-3F34-9A4C-CA3894CE0438
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DCBB4D26-765D-3FE9-825D-40CB4CBD2D6A
+    value:           4880993D-A23B-3DCE-942A-4201CE7E5461
   - target:          arm64e-maccatalyst
-    value:           DCBB4D26-765D-3FE9-825D-40CB4CBD2D6A
+    value:           4880993D-A23B-3DCE-942A-4201CE7E5461
 install-name:    '/usr/lib/system/libremovefile.dylib'
 current-version: 60
 parent-umbrella:

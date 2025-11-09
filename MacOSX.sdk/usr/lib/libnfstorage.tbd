@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8D969457-2EB2-33CA-B04A-504B992C9CC3
+    value:           0975CE82-8FB1-30AE-98F4-10959550193E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD64F350-E245-3152-903E-97AE5772F177
+    value:           A4DD07E6-EFB1-3B09-A3B5-08FBB7FDC3A2
 install-name:    '/usr/lib/libnfstorage.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

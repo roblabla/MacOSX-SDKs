@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           73C7C5FE-F7F9-3290-9CD1-D271A050B44D
+    value:           73B27E40-82EA-3866-980D-58C651194075
   - target:          x86_64-maccatalyst
-    value:           73C7C5FE-F7F9-3290-9CD1-D271A050B44D
+    value:           73B27E40-82EA-3866-980D-58C651194075
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C25CFD73-0C98-30FB-A985-B292BB010D4A
+    value:           1F1EF130-1E28-3211-9568-363BD23FF71D
   - target:          arm64e-maccatalyst
-    value:           C25CFD73-0C98-30FB-A985-B292BB010D4A
+    value:           1F1EF130-1E28-3211-9568-363BD23FF71D
 install-name:    '/usr/lib/swift/libswiftSystem_Foundation.dylib'
-current-version: 19
+current-version: 21
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4342C193-D8C6-3D14-992B-F517E88D79D5
+    value:           BF07CA31-7B45-3C23-97E4-13ACBD4F7D55
   - target:          x86_64-maccatalyst
-    value:           4342C193-D8C6-3D14-992B-F517E88D79D5
+    value:           BF07CA31-7B45-3C23-97E4-13ACBD4F7D55
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7833995C-A46B-391C-B2E3-E05F7472B137
+    value:           665D6E76-5BE0-3AC8-9103-80ADACDB6C09
   - target:          arm64e-maccatalyst
-    value:           7833995C-A46B-391C-B2E3-E05F7472B137
+    value:           665D6E76-5BE0-3AC8-9103-80ADACDB6C09
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 737.2
+current-version: 738.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           65A7EE7E-8E48-3E81-A727-FC807B49C5CB
+    value:           59B5F9B2-FF5A-3547-8219-E1102586E8D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FB6EA80-9F48-3F79-959B-FA976F806158
+    value:           14A0D6F2-DA78-3EB1-A11C-1679140A0A4A
 install-name:    '/System/Library/PrivateFrameworks/BluetoothAudio.framework/Versions/A/BluetoothAudio'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

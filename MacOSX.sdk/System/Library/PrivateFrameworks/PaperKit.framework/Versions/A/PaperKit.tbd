@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CD48094C-B2FF-3795-AB48-C36F5ED6AEB4
+    value:           8A6DB2FC-A1F2-351F-9817-6B0A33DE24E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           76500870-E451-36BA-9695-BBCD462A306D
+    value:           02965634-6788-306F-98FC-C80F3F9B8DEA
 install-name:    '/System/Library/PrivateFrameworks/PaperKit.framework/Versions/A/PaperKit'
 swift-abi-version: 7
 allowable-clients:

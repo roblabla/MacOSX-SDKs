@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           76FB8FBF-381B-3B39-B49E-4F5716ADB81F
+    value:           B08526CB-9E2C-3606-9FCD-A23C7CAD0484
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           4ECA5BC1-E452-3F26-B472-CA376132635D
+    value:           2C4F77E5-9062-33D1-A835-E5759E54D3E7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CarPlay.framework/Versions/A/CarPlay'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
@@ -17,8 +17,8 @@ exports:
                        _CPCurrentProcessHasMapsEntitlement, _CPCurrentProcessHasParkingEntitlement, 
                        _CPCurrentProcessHasPublicSafetyEntitlement, _CPCurrentProcessHasQuickOrderingEntitlement, 
                        _CPCurrentProcessHasTemplateEntitlement, _CPDistanceUnitsFromNSUnitLength, 
-                       _CPGridTemplateMaximumItems, _CPGuidanceStyleForColor, _CPLuminanceForColor, 
-                       _CPMaximumListSectionImageSize, _CPMaximumMessageItemImageSize, 
+                       _CPGridTemplateMaximumItems, _CPGuidanceStyleForColor, _CPImageByScalingImageToSize, 
+                       _CPLuminanceForColor, _CPMaximumListSectionImageSize, _CPMaximumMessageItemImageSize, 
                        _CPMaximumNumberOfGridImages, _CPNowPlayingButtonMaximumImageSize, 
                        _CPSStringFromBOOL, _CPSanitizedBackgroundColor, _CPTemplateApplicationDashboardSceneSessionRoleApplication, 
                        _CPTemplateApplicationInstrumentClusterSceneSessionRoleApplication, 
@@ -53,8 +53,8 @@ exports:
                        CPTabBarTemplate, CPTemplate, CPTemplateApplicationDashboardScene, 
                        CPTemplateApplicationInstrumentClusterScene, CPTemplateApplicationScene, 
                        CPTextButton, CPTravelEstimates, CPTrip, CPTripPreviewTextConfiguration, 
-                       CPUIMutableTemplateApplicationSceneSettings, CPUITemplateApplicationSceneSettings, 
-                       CPUITemplateApplicationSceneSpecification, CPUITemplateDashboardSceneSpecification, 
-                       CPUITemplateInstrumentClusterSceneSpecification, CPVoiceControlState, 
-                       CPVoiceControlTemplate, CPWindow ]
+                       CPUIContentStyleDiffInspector, CPUIMutableTemplateApplicationSceneSettings, 
+                       CPUITemplateApplicationSceneSettings, CPUITemplateApplicationSceneSpecification, 
+                       CPUITemplateDashboardSceneSpecification, CPUITemplateInstrumentClusterSceneSpecification, 
+                       CPVoiceControlState, CPVoiceControlTemplate, CPWindow ]
 ...

@@ -71,6 +71,7 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
 
     /**
      Returned by NSFileProviderManager if the provider registered in the system is an older version than the one corresponding to this app.
+     The `NSFilePathErrorKey` key points to the location of the older version. If the location of the older version cannot be determined (e.g. because it was since deleted), the `NSFilePathErrorKey` will not be set.
      */
     NSFileProviderErrorOlderExtensionVersionRunning FILEPROVIDER_API_AVAILABILITY_V3 = -2003,
 
@@ -106,21 +107,30 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
     + domain: NSPOSIXErrorDomain errorCode: EBUSY - if the item had open file descriptors on it.
     + domain: NSPOSIXErrorDomain errorCode: EMLINK : if the item had several hardlinks.
     */
-    NSFileProviderErrorNonEvictableChildren API_AVAILABLE(macos(11.3)) = -2006,
+    NSFileProviderErrorNonEvictableChildren FILEPROVIDER_API_AVAILABILITY_V3_1 = -2006,
 
     /**
      Returned by NSFileProviderManager if item eviction is failing because the item has edits that have not been synced yet
 
      The NSURLErrorKey will be set to with the item URL that has unsynced content.
     */
-    NSFileProviderErrorUnsyncedEdits API_AVAILABLE(macos(11.3)) = -2007,
+    NSFileProviderErrorUnsyncedEdits FILEPROVIDER_API_AVAILABILITY_V3_1 = -2007,
 
     /**
      Returned by NSFileProviderManager if item eviction is failing because the item has not been assigned the evictable capability.
 
      The NSURLErrorKey will be set to with the corresponding item URL.
     */
-    NSFileProviderErrorNonEvictable API_AVAILABLE(macos(11.3)) = -2008,
+    NSFileProviderErrorNonEvictable FILEPROVIDER_API_AVAILABILITY_V3_1 = -2008,
+
+    /**
+     Returned by the provider to indicate that the requested version for an item cannot be provided.
+
+     When a provider returns that error, it means the version for this item is definitively unavailable. It is intended to be returned by
+     fetchPartialContentsForItemWithIdentifier, when NSFileProviderFetchContentsOptionsStrictVersioning is set, to tell the system that a remote update
+     happened to the item that outdated the requested version.
+    */
+    NSFileProviderErrorVersionNoLongerAvailable FILEPROVIDER_API_AVAILABILITY_V4_1 = -2009,
 } FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 @interface NSError (NSFileProviderError)

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E3FB2D1-4ECA-3856-B7B5-972FA680E91A
+    value:           6242B8C1-FA90-3054-A2CB-6EC874B3DFD6
   - target:          x86_64-maccatalyst
-    value:           1E3FB2D1-4ECA-3856-B7B5-972FA680E91A
+    value:           6242B8C1-FA90-3054-A2CB-6EC874B3DFD6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CEEE207E-4F57-303A-8627-CC38CD2C9289
+    value:           602BE042-1E85-301A-ACA8-C6D963103CB9
   - target:          arm64e-maccatalyst
-    value:           CEEE207E-4F57-303A-8627-CC38CD2C9289
+    value:           602BE042-1E85-301A-ACA8-C6D963103CB9
 install-name:    '/usr/lib/swift/libswiftDispatch.dylib'
 current-version: 11
 swift-abi-version: 7

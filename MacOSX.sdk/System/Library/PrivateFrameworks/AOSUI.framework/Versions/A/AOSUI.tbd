@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           835D260A-F8CB-396E-B189-0FCC1F008DAA
+    value:           0B4DF5CF-3332-3B26-8920-4EC1CA83E59A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33F173A3-875B-3ABD-9311-1FC5F6683EED
+    value:           36B40FEB-1E78-36B9-BEC3-90B4F0587055
 install-name:    '/System/Library/PrivateFrameworks/AOSUI.framework/Versions/A/AOSUI'
 current-version: 415
 exports:
@@ -49,8 +49,13 @@ exports:
                        _Shared_JS_AuthenticateUser, _Shared_JS_GetAuthToken, _Shared_JS_GetClientIdentifer, 
                        _Shared_JS_GetDateFieldsOrder, _Shared_JS_GetDeviceUDID, _Shared_JS_GetFormattedDate, 
                        _Shared_JS_GetPrsId, _Shared_JS_Logger, _Shared_JS_ShowConfirmDialogWithMessage, 
-                       _Shared_JS_UpdatePET, __AOSUILogSystem, __AOSUIProfilePhotoDiameter, 
-                       __AOSUISignpostCreate, __AOSUISignpostCreateNull, __AOSUISignpostGetNanoseconds, 
+                       _Shared_JS_UpdatePET, __AOSUILogSystem, __AOSUIReAuthAccountNameKey, 
+                       __AOSUIReAuthBiometricsKey, __AOSUIReAuthBodyKey, __AOSUIReAuthCancelKey, 
+                       __AOSUIReAuthIconImageKey, __AOSUIReAuthOKKey, __AOSUIReAuthResultAuthTypeBiometric, 
+                       __AOSUIReAuthResultAuthTypeKey, __AOSUIReAuthResultAuthTypePasscode, 
+                       __AOSUIReAuthResultAuthTypePassword, __AOSUIReAuthResultPasswordKey, 
+                       __AOSUIReAuthResultSuccessKey, __AOSUIReAuthTitleKey, __AOSUISignpostCreate, 
+                       __AOSUISignpostCreateNull, __AOSUISignpostGetNanoseconds, 
                        __AOSUISignpostLogSystem, __IsJSValueAnArray, __NSDictionaryFromJSObject, 
                        __boldAttributedString, __centeredParagraphStyle, __fmipStateChangeNotificationReceived, 
                        __frameDelta, __privateEmailController, __smallAttributedString, 
@@ -218,8 +223,8 @@ exports:
                        _webViewPersonalInfoUI, _webViewSetupFamilyUI, _webViewTransferRequestsUI, 
                        _webViewTrustedDeviceUI ]
     objc-classes:    [ AOSUIAccessKeyBorderView, AOSUIAccountBeneficiaryViewController, 
-                       AOSUIAccountContactBaseViewModel, AOSUIAccountContactDetailsViewController, 
-                       AOSUIAccountContactInvitationViewModel, AOSUIAccountContactInviteMessageViewModel, 
+                       AOSUIAccountContactBaseViewModel, AOSUIAccountContactInvitationViewModel, 
+                       AOSUIAccountContactInviteMessageViewModel, AOSUIAccountContactPromptController, 
                        AOSUIAccountContactSelectorItem, AOSUIAccountContactSelectorViewModel, 
                        AOSUIAccountContactSetupCompletedViewModel, AOSUIAccountContactSetupFlowController, 
                        AOSUIAccountContactSplashScreenViewModel, AOSUIAccountContactsAccessKeyViewController, 
@@ -229,21 +234,23 @@ exports:
                        AOSUIAccountContactsTopContentViewController, AOSUIAccountContactsViewController, 
                        AOSUIAccountRecoveryContext, AOSUIAccountRecoveryViewController, 
                        AOSUIBeneficiaryRadioListView, AOSUICircularImageView, AOSUICloudDataProtectionStateValidator, 
-                       AOSUICodeEntryContext, AOSUICodeEntryViewController, AOSUICollapsingTextField, 
-                       AOSUIContactsProvider, AOSUICustodianHelpNowViewModel, AOSUICustodianRecoveryApprovalController, 
-                       AOSUICustodianRecoveryController, AOSUICustodianshipActionHandler, 
-                       AOSUID2DEncryptionFlowContext, AOSUIImageFetcher, AOSUIInheritanceAccessKeyPDFGenerator, 
+                       AOSUICloudMailViewController, AOSUICodeEntryContext, AOSUICodeEntryViewController, 
+                       AOSUICollapsingTextField, AOSUIContactsProvider, AOSUICustodianHelpNowViewModel, 
+                       AOSUICustodianRecoveryApprovalController, AOSUICustodianRecoveryController, 
+                       AOSUICustodianshipActionHandler, AOSUID2DEncryptionFlowContext, 
+                       AOSUIImageFetcher, AOSUIInheritanceAccessKeyPDFGenerator, 
                        AOSUIInheritanceSetupCompletedViewModel, AOSUIInheritanceShareAccessKeyOptionsViewModel, 
                        AOSUIInheritanceShareDataViewModel, AOSUIInviteLinkMetadata, 
                        AOSUIInviteLinkMetadataProvider, AOSUIInviteMessagesFlowController, 
                        AOSUIMessageInviteView, AOSUIMsgActionViewController, AOSUIMyBenefactorActionHandler, 
                        AOSUIMyBeneficiaryActionHandler, AOSUIMyCustodianActionHandler, 
-                       AOSUIMyPendingCustodianActionHandler, AOSUIOBBaseView, AOSUIOBBaseViewController, 
-                       AOSUIOBTemplateContainerViewController, AOSUIPrivateConnectService, 
-                       AOSUIPrivateEmailController, AOSUIPrivateEmailService, AOSUIProfilePictureStore, 
-                       AOSUIProfileRemoteViewController, AOSUIProfileViewCacheController, 
-                       AOSUIProfileViewCacheViewController, AOSUIProfileViewRootViewController, 
-                       AOSUIProfileViewUtility, AOSUIQuotaFetcher, AOSUISignInDataclassManager, 
+                       AOSUIMyPendingBeneficiaryActionHandler, AOSUIMyPendingCustodianActionHandler, 
+                       AOSUIOBBaseView, AOSUIOBBaseViewController, AOSUIOBTemplateContainerViewController, 
+                       AOSUIPrivateConnectService, AOSUIPrivateEmailController, AOSUIPrivateEmailService, 
+                       AOSUIProfilePictureStore, AOSUIProfileRemoteViewController, 
+                       AOSUIProfileViewCacheController, AOSUIProfileViewCacheViewController, 
+                       AOSUIProfileViewRootViewController, AOSUIProfileViewUtility, 
+                       AOSUIQuotaFetcher, AOSUIRecoveryFactorController, AOSUISignInDataclassManager, 
                        AOSUISignInFlowControllerDelegate, AOSUISignOutController, 
                        AOSUISignOutFlowControllerDelegate, AOSUISpyglassAccountChangeHelper, 
                        AOSUISpyglassAvatarProfileViewController, AOSUISpyglassBaseViewController, 

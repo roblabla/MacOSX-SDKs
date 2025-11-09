@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AD8658C1-C7C7-3367-A1F3-929F2CB991BE
+    value:           0C25924D-5101-3DB7-8C5B-F8F05DF35CD3
   - target:          x86_64-maccatalyst
-    value:           AD8658C1-C7C7-3367-A1F3-929F2CB991BE
+    value:           0C25924D-5101-3DB7-8C5B-F8F05DF35CD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D75D0C7-656B-37BB-8DA0-7B9E6237D463
+    value:           04785EED-E40C-3512-BEF6-F40F48573E20
   - target:          arm64e-maccatalyst
-    value:           1D75D0C7-656B-37BB-8DA0-7B9E6237D463
+    value:           04785EED-E40C-3512-BEF6-F40F48573E20
 install-name:    '/System/Library/PrivateFrameworks/CoreLocationProtobuf.framework/Versions/A/CoreLocationProtobuf'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -116,12 +116,13 @@ exports:
                        CLPCellNeighbor._uarfcn, CLPCellNeighborsGroup._cdmaNeighbors, 
                        CLPCellNeighborsGroup._gsmNeighbors, CLPCellNeighborsGroup._lteNeighbors, 
                        CLPCellNeighborsGroup._nrNeighbors, CLPCellNeighborsGroup._scdmaNeighbors, 
+                       CLPCellOutOfServiceInfo._has, CLPCellOutOfServiceInfo._hasWifiFallback, 
                        CLPCellOutOfServiceInfo._location, CLPCellOutOfServiceInfo._serviceProviderName, 
-                       CLPCellTowerLocation._appBundleId, CLPCellTowerLocation._arfcn, 
-                       CLPCellTowerLocation._ci, CLPCellTowerLocation._ecn0, CLPCellTowerLocation._has, 
-                       CLPCellTowerLocation._isLimitedService, CLPCellTowerLocation._lac, 
-                       CLPCellTowerLocation._location, CLPCellTowerLocation._mcc, 
-                       CLPCellTowerLocation._mnc, CLPCellTowerLocation._neighborGroup, 
+                       CLPCellOutOfServiceInfo._uniqueCount, CLPCellTowerLocation._appBundleId, 
+                       CLPCellTowerLocation._arfcn, CLPCellTowerLocation._ci, CLPCellTowerLocation._ecn0, 
+                       CLPCellTowerLocation._has, CLPCellTowerLocation._isLimitedService, 
+                       CLPCellTowerLocation._lac, CLPCellTowerLocation._location, 
+                       CLPCellTowerLocation._mcc, CLPCellTowerLocation._mnc, CLPCellTowerLocation._neighborGroup, 
                        CLPCellTowerLocation._neighbors, CLPCellTowerLocation._operatorName, 
                        CLPCellTowerLocation._psc, CLPCellTowerLocation._rat, CLPCellTowerLocation._rscp, 
                        CLPCellTowerLocation._rssi, CLPCellTowerLocation._serverHash, 
@@ -185,37 +186,44 @@ exports:
                        CLPLocationConsumptionScoreInfo._clientKey, CLPLocationConsumptionScoreInfo._has, 
                        CLPLocationConsumptionScoreInfo._score, CLPLocationConsumptionScoreInfo._startTime, 
                        CLPLocationConsumptionScoreInfo._stopTime, CLPLocationConsumptionScoreInfoRequest._locationConsumptionScoreInfos, 
-                       CLPLteCellNeighbor._ecn0, CLPLteCellNeighbor._has, CLPLteCellNeighbor._pid, 
-                       CLPLteCellNeighbor._rscp, CLPLteCellNeighbor._rssi, CLPLteCellNeighbor._uarfcn, 
-                       CLPLteCellTowerLocation._appBundleId, CLPLteCellTowerLocation._bandInfo, 
-                       CLPLteCellTowerLocation._bandwidth, CLPLteCellTowerLocation._cellLatitude, 
-                       CLPLteCellTowerLocation._cellLongitude, CLPLteCellTowerLocation._ci, 
-                       CLPLteCellTowerLocation._deploymentType, CLPLteCellTowerLocation._downlinkBandwidth, 
-                       CLPLteCellTowerLocation._ecn0, CLPLteCellTowerLocation._has, 
-                       CLPLteCellTowerLocation._isLimitedService, CLPLteCellTowerLocation._isStalled, 
-                       CLPLteCellTowerLocation._latency, CLPLteCellTowerLocation._location, 
+                       CLPLteCellNeighbor._bandwidth, CLPLteCellNeighbor._ecn0, CLPLteCellNeighbor._has, 
+                       CLPLteCellNeighbor._maxThroughput, CLPLteCellNeighbor._neighborType, 
+                       CLPLteCellNeighbor._pid, CLPLteCellNeighbor._rscp, CLPLteCellNeighbor._rssi, 
+                       CLPLteCellNeighbor._uarfcn, CLPLteCellTowerLocation._appBundleId, 
+                       CLPLteCellTowerLocation._bandInfo, CLPLteCellTowerLocation._bandwidth, 
+                       CLPLteCellTowerLocation._cellLatitude, CLPLteCellTowerLocation._cellLongitude, 
+                       CLPLteCellTowerLocation._ci, CLPLteCellTowerLocation._csgId, 
+                       CLPLteCellTowerLocation._csgIndication, CLPLteCellTowerLocation._deploymentType, 
+                       CLPLteCellTowerLocation._downlinkBandwidth, CLPLteCellTowerLocation._ecn0, 
+                       CLPLteCellTowerLocation._has, CLPLteCellTowerLocation._isLimitedService, 
+                       CLPLteCellTowerLocation._isStalled, CLPLteCellTowerLocation._latency, 
+                       CLPLteCellTowerLocation._location, CLPLteCellTowerLocation._maxThroughput, 
                        CLPLteCellTowerLocation._mcc, CLPLteCellTowerLocation._mnc, 
                        CLPLteCellTowerLocation._neighborGroup, CLPLteCellTowerLocation._neighbors, 
                        CLPLteCellTowerLocation._operatorName, CLPLteCellTowerLocation._pid, 
-                       CLPLteCellTowerLocation._rscp, CLPLteCellTowerLocation._rssi, 
-                       CLPLteCellTowerLocation._serverHash, CLPLteCellTowerLocation._serviceProviderName, 
-                       CLPLteCellTowerLocation._tac, CLPLteCellTowerLocation._uarfcn, 
-                       CLPMeta._has, CLPMeta._probeId, CLPMeta._productId, CLPMeta._softwareVersion, 
-                       CLPMeta._submissionId, CLPMotionActivity._confidence, CLPMotionActivity._has, 
-                       CLPMotionActivity._type, CLPNRCellNeighbor._bandwidth, CLPNRCellNeighbor._ecn0, 
-                       CLPNRCellNeighbor._has, CLPNRCellNeighbor._nrarfcn, CLPNRCellNeighbor._pid, 
-                       CLPNRCellNeighbor._rscp, CLPNRCellNeighbor._rssi, CLPNRCellNeighbor._saOrNsaNeighbor, 
-                       CLPNRCellNeighbor._scs, CLPNRCellTowerLocation._appBundleId, 
-                       CLPNRCellTowerLocation._bandInfo, CLPNRCellTowerLocation._bandwidth, 
+                       CLPLteCellTowerLocation._pmax, CLPLteCellTowerLocation._rscp, 
+                       CLPLteCellTowerLocation._rssi, CLPLteCellTowerLocation._serverHash, 
+                       CLPLteCellTowerLocation._serviceProviderName, CLPLteCellTowerLocation._tac, 
+                       CLPLteCellTowerLocation._uarfcn, CLPMeta._has, CLPMeta._probeId, 
+                       CLPMeta._productId, CLPMeta._softwareVersion, CLPMeta._submissionId, 
+                       CLPMotionActivity._confidence, CLPMotionActivity._has, CLPMotionActivity._type, 
+                       CLPNRCellNeighbor._bandwidth, CLPNRCellNeighbor._bwpSupport, 
+                       CLPNRCellNeighbor._ecn0, CLPNRCellNeighbor._has, CLPNRCellNeighbor._maxThroughput, 
+                       CLPNRCellNeighbor._neighborType, CLPNRCellNeighbor._nrarfcn, 
+                       CLPNRCellNeighbor._pid, CLPNRCellNeighbor._rscp, CLPNRCellNeighbor._rssi, 
+                       CLPNRCellNeighbor._saOrNsaNeighbor, CLPNRCellNeighbor._scs, 
+                       CLPNRCellTowerLocation._appBundleId, CLPNRCellTowerLocation._bandInfo, 
+                       CLPNRCellTowerLocation._bandwidth, CLPNRCellTowerLocation._bwpSupport, 
                        CLPNRCellTowerLocation._cellLatitude, CLPNRCellTowerLocation._cellLongitude, 
                        CLPNRCellTowerLocation._ci, CLPNRCellTowerLocation._downlinkBandwidth, 
                        CLPNRCellTowerLocation._ecn0, CLPNRCellTowerLocation._gscn, 
                        CLPNRCellTowerLocation._has, CLPNRCellTowerLocation._isLimitedService, 
                        CLPNRCellTowerLocation._isStalled, CLPNRCellTowerLocation._latency, 
-                       CLPNRCellTowerLocation._location, CLPNRCellTowerLocation._mcc, 
-                       CLPNRCellTowerLocation._mnc, CLPNRCellTowerLocation._neighborGroup, 
-                       CLPNRCellTowerLocation._neighbors, CLPNRCellTowerLocation._nrarfcn, 
-                       CLPNRCellTowerLocation._operatorName, CLPNRCellTowerLocation._pid, 
+                       CLPNRCellTowerLocation._location, CLPNRCellTowerLocation._maxThroughput, 
+                       CLPNRCellTowerLocation._mcc, CLPNRCellTowerLocation._mnc, 
+                       CLPNRCellTowerLocation._neighborGroup, CLPNRCellTowerLocation._neighbors, 
+                       CLPNRCellTowerLocation._nrarfcn, CLPNRCellTowerLocation._operatorName, 
+                       CLPNRCellTowerLocation._pid, CLPNRCellTowerLocation._pmax, 
                        CLPNRCellTowerLocation._rscp, CLPNRCellTowerLocation._rssi, 
                        CLPNRCellTowerLocation._scs, CLPNRCellTowerLocation._serverHash, 
                        CLPNRCellTowerLocation._serviceProviderName, CLPNRCellTowerLocation._tac, 

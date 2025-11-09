@@ -1,5 +1,5 @@
-.\" Copyright (c) 1998-2017  Apple Inc. All rights reserved.
-.Dd May 9, 2017
+.\" Copyright (c) 1998-2021  Apple Inc. All rights reserved.
+.Dd NOV 18, 2021
 .Dt "atos" 1
 .Os
 .Sh NAME
@@ -12,6 +12,7 @@
 .Op Fl arch Ar architecture
 .Op Fl l Ar <load-address>
 .Op Fl s Ar <slide>
+.Op Fl offset
 .Op Fl printHeader
 .Op Fl fullPath
 .Op Fl i
@@ -68,6 +69,13 @@ This slide value is subtracted from the input addresses.
 It is usually easier to directly specify the load address with the
 .Fl l
 argument than to manually calculate a slide value.
+.It Fl offset
+Treat all given addresses as offsets into the binary. Only one of the following options can be used at a time:
+.Fl s
+,
+.Fl l
+or
+.Fl offset.
 .It Fl printHeader
 If a process was specified, the first line of atos output should be a header of the form "Looking up symbols in process <pid> named:  <process-name>".
 This is primarily used when

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C9C06654-3409-380D-A4B0-12286F285E67
+    value:           0783D336-AB25-3D27-8B26-583EC2682F02
   - target:          x86_64-maccatalyst
-    value:           C9C06654-3409-380D-A4B0-12286F285E67
+    value:           0783D336-AB25-3D27-8B26-583EC2682F02
   - target:          x86_64h-macos
-    value:           2239A869-3275-3E4C-987B-B8AFCE4520E7
+    value:           6D51B7B2-136E-336D-95CA-442AF1009EC2
   - target:          x86_64h-maccatalyst
-    value:           2239A869-3275-3E4C-987B-B8AFCE4520E7
+    value:           6D51B7B2-136E-336D-95CA-442AF1009EC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A930227-747E-381F-BB29-2DFE267A84F7
+    value:           4B5AB8FB-60E0-3992-BA0E-A073A3FA86A7
   - target:          arm64e-maccatalyst
-    value:           8A930227-747E-381F-BB29-2DFE267A84F7
+    value:           4B5AB8FB-60E0-3992-BA0E-A073A3FA86A7
 install-name:    '/usr/lib/libobjc.A.dylib'
 current-version: 228
 exports:
@@ -117,20 +117,20 @@ exports:
                        _objc_getProperty, _objc_getProtocol, _objc_getRequiredClass, 
                        _objc_indexed_classes, _objc_indexed_classes_count, _objc_initWeak, 
                        _objc_initWeakOrNil, _objc_initializeClassPair, _objc_isAuto, 
-                       _objc_loadClassref, _objc_loadWeak, _objc_loadWeakRetained, 
-                       _objc_lookUpClass, _objc_moveWeak, _objc_msgLookup, _objc_msgLookupSuper2, 
-                       _objc_msgLookupSuper2_stret, _objc_msgLookup_stret, _objc_msgSend, 
-                       _objc_msgSendSuper, _objc_msgSendSuper2, _objc_msgSendSuper2_debug, 
-                       _objc_msgSendSuper2_stret, _objc_msgSendSuper2_stret_debug, 
-                       _objc_msgSendSuper_stret, _objc_msgSend_debug, _objc_msgSend_noarg, 
-                       _objc_msgSend_stret, _objc_msgSend_stret_debug, _objc_opt_class, 
-                       _objc_opt_isKindOfClass, _objc_opt_new, _objc_opt_respondsToSelector, 
-                       _objc_opt_self, _objc_readClassPair, _objc_registerClassPair, 
-                       _objc_registerProtocol, _objc_release, _objc_removeAssociatedObjects, 
-                       _objc_removeExceptionHandler, _objc_retain, _objc_retainAutorelease, 
-                       _objc_retainAutoreleaseReturnValue, _objc_retainAutoreleasedReturnValue, 
-                       _objc_retainBlock, _objc_retain_autorelease, _objc_retainedObject, 
-                       _objc_setAssociatedObject, _objc_setEnumerationMutationHandler, 
+                       _objc_isUniquelyReferenced, _objc_loadClassref, _objc_loadWeak, 
+                       _objc_loadWeakRetained, _objc_lookUpClass, _objc_moveWeak, 
+                       _objc_msgLookup, _objc_msgLookupSuper2, _objc_msgLookupSuper2_stret, 
+                       _objc_msgLookup_stret, _objc_msgSend, _objc_msgSendSuper, 
+                       _objc_msgSendSuper2, _objc_msgSendSuper2_debug, _objc_msgSendSuper2_stret, 
+                       _objc_msgSendSuper2_stret_debug, _objc_msgSendSuper_stret, 
+                       _objc_msgSend_debug, _objc_msgSend_noarg, _objc_msgSend_stret, 
+                       _objc_msgSend_stret_debug, _objc_opt_class, _objc_opt_isKindOfClass, 
+                       _objc_opt_new, _objc_opt_respondsToSelector, _objc_opt_self, 
+                       _objc_readClassPair, _objc_registerClassPair, _objc_registerProtocol, 
+                       _objc_release, _objc_removeAssociatedObjects, _objc_removeExceptionHandler, 
+                       _objc_retain, _objc_retainAutorelease, _objc_retainAutoreleaseReturnValue, 
+                       _objc_retainAutoreleasedReturnValue, _objc_retainBlock, _objc_retain_autorelease, 
+                       _objc_retainedObject, _objc_setAssociatedObject, _objc_setEnumerationMutationHandler, 
                        _objc_setExceptionMatcher, _objc_setExceptionPreprocessor, 
                        _objc_setForwardHandler, _objc_setHook_getClass, _objc_setHook_getImageName, 
                        _objc_setHook_lazyClassNamer, _objc_setProperty, _objc_setProperty_atomic, 

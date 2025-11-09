@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BC47B13F-2C62-3F6F-84A4-65256D053435
+    value:           75E87218-AA84-3372-93E6-4CD8A62F9489
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDE8607F-3BAD-34C1-BAD9-FAB25D6633AC
+    value:           DD3E954A-B378-37D6-B421-DA427867E844
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/CommerceKit'
 current-version: 379
 reexported-libraries:
@@ -119,11 +119,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F9C024EB-1C97-3350-9812-8C8B37912473
+    value:           42D2322E-7F95-3ECC-AF5E-CF8CCD6D34F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1449013D-5D74-36C4-B35F-A1D7ABE5BEBB
+    value:           DE898959-0656-3F1A-A4B1-28D28EFD290D
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore'
 current-version: 379
 exports:

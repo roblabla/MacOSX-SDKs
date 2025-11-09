@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           184035F2-B93C-3DF2-BB65-9BA7E8622D71
+    value:           D1D8335B-8208-304E-A08D-BF2C5E3902D6
   - target:          x86_64-maccatalyst
-    value:           184035F2-B93C-3DF2-BB65-9BA7E8622D71
+    value:           D1D8335B-8208-304E-A08D-BF2C5E3902D6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B83C2E3-65D5-3714-A615-C14CB6ACB4DB
+    value:           128A4979-2909-3922-AE7D-F41B07B40E77
   - target:          arm64e-maccatalyst
-    value:           7B83C2E3-65D5-3714-A615-C14CB6ACB4DB
+    value:           128A4979-2909-3922-AE7D-F41B07B40E77
 install-name:    '/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication'
-current-version: 64550.83.1
+current-version: 64552.29.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -37,9 +37,10 @@ exports:
                        _VMUmallocMetadataLabel, _VMUmappedFileLabel, _VMUobjcAdditionalDataLabel, 
                        _VMUunusedSharedLibDataLabel, _VMUunusedSharedLibLabelPrefix, 
                        _VMUunusedSharedLibTextLabel, __VMUEnumerateMarkedObjects, 
-                       _kVMUAutoreleasePoolBoundaryClassName, _kVMUAutoreleasePoolThreadSpecificDataKeyString, 
-                       _kVMUPrintArchivingTiming, _kVMURootRetainCycle, _kVMUThreadSpecificDataKeyString, 
-                       _pidFromHint, _psName, _task_enumerate_malloc_blocks, _task_find_leaks, 
+                       _dispositionDescription, _kVMUAutoreleasePoolBoundaryClassName, 
+                       _kVMUAutoreleasePoolThreadSpecificDataKeyString, _kVMUPrintArchivingTiming, 
+                       _kVMURootRetainCycle, _kVMUThreadSpecificDataKeyString, _pidFromHint, 
+                       _psName, _task_enumerate_malloc_blocks, _task_find_leaks, 
                        _task_foreach_malloc_zone, _task_get_malloc_ptrs, _task_get_malloc_ptrs_by_zone, 
                        _task_peek, _task_peek_natural_size, _task_peek_string, _task_read_ptr_at, 
                        _task_read_unsigned_at, _task_start_peeking, _task_stop_peeking, 
@@ -63,8 +64,8 @@ exports:
                        VMUStackLogConsolidator, VMUStackLogReaderBase, VMUSwiftRuntimeInfo, 
                        VMUSymbol, VMUSymbolOwnerCache, VMUSymbolStore, VMUSymbolicator, 
                        VMUTaskMemoryCache, VMUTaskMemoryScanner, VMUTaskStackLogReader, 
-                       VMUTaskThreadStates, VMUVMRegion, VMUVMRegionIdentifier, VMUVMRegionRangeInfo, 
-                       VMUVMRegionTracker ]
+                       VMUTaskThreadStates, VMUTerminalColorizer, VMUVMRegion, VMUVMRegionIdentifier, 
+                       VMUVMRegionRangeInfo, VMUVMRegionTracker ]
     objc-ivars:      [ VMUBacktrace._callstack, VMUBacktrace._flavor, VMUCallTreeNode._address, 
                        VMUCallTreeNode._children, VMUCallTreeNode._count, VMUCallTreeNode._name, 
                        VMUCallTreeNode._numBytes, VMUCallTreeNode._numChildren, VMUCallTreeNode._parent, 

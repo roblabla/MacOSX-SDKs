@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B3C80D5-49DC-30AE-AAE4-BB2D2B4E8E9A
+    value:           FCEC8142-4299-395C-A1A1-5F00BADA394D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EFADCEAC-8813-3E5A-BF18-93F5138B0C05
+    value:           B102642C-6698-365E-9A21-E10CD6348D9B
 install-name:    '/System/Library/PrivateFrameworks/HealthDomainsTools.framework/Versions/A/HealthDomainsTools'
 swift-abi-version: 7
 exports:

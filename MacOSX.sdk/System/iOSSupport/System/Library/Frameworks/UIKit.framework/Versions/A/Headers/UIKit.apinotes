@@ -99,6 +99,8 @@ Classes:
   SwiftPrivate: true
 - Name: UICellAccessoryDisclosureIndicator
   SwiftPrivate: true
+- Name: UICellAccessoryDetail
+  SwiftPrivate: true
 - Name: UICellAccessoryCheckmark
   SwiftPrivate: true
 - Name: UICellAccessoryDelete

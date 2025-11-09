@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-macos12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name CreateML
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-macos12.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -library-level api -module-name CreateML
+// swift-module-flags-ignorable: -user-module-version 563.100.6
 import AVFoundation
 import Combine
 import CoreGraphics
@@ -24,7 +25,7 @@ import IOKit.pwr_mgt
 @available(macOS 10.15, *)
 public struct MLActivityClassifier {
   @available(macOS 11.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel {
     get
   }
@@ -98,7 +99,7 @@ extension CreateML.MLActivityClassifier.ModelParameters : Swift.CustomStringConv
 }
 @available(macOS 12.0, iOS 15.0, *)
 public struct MLHandPoseClassifier {
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel
   public let modelParameters: CreateML.MLHandPoseClassifier.ModelParameters
   public var trainingMetrics: CreateML.MLClassifierMetrics
@@ -136,8 +137,10 @@ public enum MLRegressor {
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil) throws
+  @available(macOS 12.0, *)
   public func predictions(from data: TabularData.DataFrame) throws -> TabularData.AnyColumn
   public func predictions(from data: CreateML.MLDataTable) throws -> CreateML.MLUntypedColumn
+  @available(macOS 12.0, *)
   public func evaluation(on labeledData: TabularData.DataFrame) -> CreateML.MLRegressorMetrics
   public func evaluation(on labeledData: CreateML.MLDataTable) -> CreateML.MLRegressorMetrics
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata?) throws
@@ -174,7 +177,7 @@ extension CreateML.MLRegressor : Swift.CustomStringConvertible, Swift.CustomDebu
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
-public var MLCreateErrorDomain: Swift.String
+public let MLCreateErrorDomain: Swift.String
 @available(macOS 10.14, iOS 15.0, *)
 public enum MLCreateError : Swift.Error {
   case generic(reason: Swift.String)
@@ -244,12 +247,12 @@ public struct MLSupportVectorClassifier {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, *)
     public var validation: CreateML.MLSupportVectorClassifier.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var penalty: Swift.Double
     public var convergenceThreshold: Swift.Double
@@ -307,7 +310,7 @@ public struct MLRandomForestRegressor {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -337,12 +340,12 @@ public struct MLRandomForestRegressor {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public var validation: CreateML.MLRandomForestRegressor.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var maxDepth: Swift.Int
     public var maxIterations: Swift.Int
@@ -547,27 +550,27 @@ public struct MLWordTagger {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property.")
     public var tokenColumnValidationData: Swift.String? {
       get
-      set(newValue)
+      set
     }
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property.")
     public var labelColumnValidationData: Swift.String? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, *)
     public var maxIterations: Swift.Int? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, *)
     public var validation: CreateML.MLWordTagger.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, *)
     public init(validation: CreateML.MLWordTagger.ModelParameters.ValidationData = .split(strategy: .automatic), algorithm: CreateML.MLWordTagger.ModelAlgorithmType = .crf(revision: 1), language: NaturalLanguage.NLLanguage? = nil)
@@ -697,7 +700,7 @@ public struct MLModelMetadata {
 extension CreateML.MLObjectDetector {
   @available(macOS 11.0, *)
   public struct __Defaults {
-    public static var sessionParameters: CreateML.MLTrainingSessionParameters
+    public static let sessionParameters: CreateML.MLTrainingSessionParameters
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
@@ -708,7 +711,7 @@ extension CreateML.MLImageClassifier {
     @available(macOS 11.0, iOS 15.0, *)
     public var algorithm: CreateML.MLImageClassifier.ModelParameters.ModelAlgorithmType {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public enum ModelAlgorithmType : Swift.CustomStringConvertible {
@@ -720,17 +723,17 @@ extension CreateML.MLImageClassifier {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: [Swift.String : [Foundation.URL]]? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, iOS 15.0, *)
     public var validation: CreateML.MLImageClassifier.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use featureExtractor in ModelAlgorithmType instead.")
     public var featureExtractor: CreateML.MLImageClassifier.FeatureExtractorType {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public init(validation: CreateML.MLImageClassifier.ModelParameters.ValidationData = __Defaults.validation, maxIterations: Swift.Int = __Defaults.maximumIterations, augmentation: CreateML.MLImageClassifier.ImageAugmentationOptions, algorithm: CreateML.MLImageClassifier.ModelParameters.ModelAlgorithmType = __Defaults.algorithm)
@@ -950,12 +953,12 @@ extension CreateML.MLSoundClassifier {
     @available(macOS 11.0, iOS 15.0, *)
     public var algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType {
       get
-      set(newValue)
+      set
     }
     @available(macOS 12.0, iOS 15.0, *)
     public var featureExtractionTimeWindowSize: Foundation.TimeInterval {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public init(validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData = __Defaults.validation, maxIterations: Swift.Int = __Defaults.maximumIterations, overlapFactor: Swift.Double = __Defaults.overlapFactor, algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType = __Defaults.algorithm)
@@ -1039,7 +1042,7 @@ public struct MLLogisticRegressionClassifier {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLogisticRegressionClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -1070,12 +1073,12 @@ public struct MLLogisticRegressionClassifier {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, iOS 15.0, *)
     public var validation: CreateML.MLLogisticRegressionClassifier.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var l1Penalty: Swift.Double
     public var l2Penalty: Swift.Double
@@ -1120,42 +1123,6 @@ extension CreateML.MLLogisticRegressionClassifier : Swift.CustomStringConvertibl
     get
   }
 }
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV25correctClassProbabilities13probabilities12oneHotLabels7SwiftNN6TensorVAK_AKtF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV25correctClassProbabilities13probabilities12oneHotLabels7SwiftNN6TensorVAK_AKtF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV21otherClassProbability13probabilities12oneHotLabels7SwiftNN6TensorVAK_AKtF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV21otherClassProbability13probabilities12oneHotLabels7SwiftNN6TensorVAK_AKtF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV23differenceProbabilities6logits12oneHotLabels7SwiftNN6TensorVAK_AKtF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV23differenceProbabilities6logits12oneHotLabels7SwiftNN6TensorVAK_AKtF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV9localLoss13probabilities9gradients7SwiftNN6TensorVAK_AKtF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LargeMarginV9localLoss13probabilities9gradients7SwiftNN6TensorVAK_AKtF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML7maxReluy7SwiftNN6TensorVAE_AEtF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML7maxReluy7SwiftNN6TensorVAE_AEtF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML13euclideanNorm5input9alongAxis7SwiftNN6TensorVAG_SitF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML13euclideanNorm5input9alongAxis7SwiftNN6TensorVAG_SitF_bb0__Pred__src_0_wrt_0 {
-}
 @available(macOS 10.14, iOS 15.0, *)
 public struct MLDecisionTreeRegressor {
   public var model: CoreML.MLModel {
@@ -1171,7 +1138,7 @@ public struct MLDecisionTreeRegressor {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -1201,12 +1168,12 @@ public struct MLDecisionTreeRegressor {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public var validation: CreateML.MLDecisionTreeRegressor.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var maxDepth: Swift.Int
     public var minLossReduction: Swift.Double
@@ -1251,12 +1218,12 @@ extension CreateML.MLDecisionTreeRegressor : Swift.CustomStringConvertible, Swif
 extension CreateML.MLImageClassifier {
   public struct ImageAugmentationOptions : Swift.OptionSet {
     public let rawValue: Swift.Int
-    public static var blur: CreateML.MLImageClassifier.ImageAugmentationOptions
-    public static var flip: CreateML.MLImageClassifier.ImageAugmentationOptions
-    public static var exposure: CreateML.MLImageClassifier.ImageAugmentationOptions
-    public static var noise: CreateML.MLImageClassifier.ImageAugmentationOptions
-    public static var rotation: CreateML.MLImageClassifier.ImageAugmentationOptions
-    public static var crop: CreateML.MLImageClassifier.ImageAugmentationOptions
+    public static let blur: CreateML.MLImageClassifier.ImageAugmentationOptions
+    public static let flip: CreateML.MLImageClassifier.ImageAugmentationOptions
+    public static let exposure: CreateML.MLImageClassifier.ImageAugmentationOptions
+    public static let noise: CreateML.MLImageClassifier.ImageAugmentationOptions
+    public static let rotation: CreateML.MLImageClassifier.ImageAugmentationOptions
+    public static let crop: CreateML.MLImageClassifier.ImageAugmentationOptions
     public init(rawValue: Swift.Int)
     public typealias ArrayLiteralElement = CreateML.MLImageClassifier.ImageAugmentationOptions
     public typealias Element = CreateML.MLImageClassifier.ImageAugmentationOptions
@@ -1462,15 +1429,15 @@ extension CreateML.MLDataColumn where Element == CreateML.MLDataValue.SequenceTy
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
 @available(macOS 10.14, iOS 15.0, *)
-extension CreateML.MLDataColumn where Element == [Swift.Int] {
+extension CreateML.MLDataColumn where Element == Swift.Array<Swift.Int> {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
 @available(macOS 10.14, iOS 15.0, *)
-extension CreateML.MLDataColumn where Element == [Swift.Double] {
+extension CreateML.MLDataColumn where Element == Swift.Array<Swift.Double> {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
 @available(macOS 10.14, iOS 15.0, *)
-extension CreateML.MLDataColumn where Element == [Swift.String] {
+extension CreateML.MLDataColumn where Element == Swift.Array<Swift.String> {
   public init<T>(column: CreateML.MLDataColumn<T>) where T : CreateML.MLDataValueConvertible
 }
 @available(macOS 10.14, iOS 15.0, *)
@@ -1667,7 +1634,7 @@ final public class MLTrainingSession<Task> {
 @available(macOS 10.14, iOS 15.0, *)
 public struct MLImageClassifier {
   @available(macOS 11.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel {
     get
   }
@@ -1716,7 +1683,7 @@ extension CreateML.MLImageClassifier : Swift.CustomStringConvertible, Swift.Cust
 extension CreateML.MLActionClassifier {
   public struct VideoAugmentationOptions : Swift.OptionSet, Swift.Codable {
     public let rawValue: Swift.Int
-    public static var horizontalFlip: CreateML.MLActionClassifier.VideoAugmentationOptions
+    public static let horizontalFlip: CreateML.MLActionClassifier.VideoAugmentationOptions
     public init(rawValue: Swift.Int)
     public typealias ArrayLiteralElement = CreateML.MLActionClassifier.VideoAugmentationOptions
     public typealias Element = CreateML.MLActionClassifier.VideoAugmentationOptions
@@ -1755,33 +1722,33 @@ public struct MLProgress : Swift.Codable {
 }
 @available(macOS 11.0, iOS 15.0, *)
 extension CreateML.MLProgress {
-  public static var elapsedTimeKey: Foundation.ProgressUserInfoKey
-  public static var phaseKey: Foundation.ProgressUserInfoKey
-  public static var itemCountKey: Foundation.ProgressUserInfoKey
-  public static var totalItemCountKey: Foundation.ProgressUserInfoKey
-  public static var lossKey: Foundation.ProgressUserInfoKey
-  public static var contentLossKey: Foundation.ProgressUserInfoKey
-  public static var styleLossKey: Foundation.ProgressUserInfoKey
-  public static var accuracyKey: Foundation.ProgressUserInfoKey
-  public static var validationLossKey: Foundation.ProgressUserInfoKey
-  public static var validationAccuracyKey: Foundation.ProgressUserInfoKey
-  public static var stylizedImageKey: Foundation.ProgressUserInfoKey
+  public static let elapsedTimeKey: Foundation.ProgressUserInfoKey
+  public static let phaseKey: Foundation.ProgressUserInfoKey
+  public static let itemCountKey: Foundation.ProgressUserInfoKey
+  public static let totalItemCountKey: Foundation.ProgressUserInfoKey
+  public static let lossKey: Foundation.ProgressUserInfoKey
+  public static let contentLossKey: Foundation.ProgressUserInfoKey
+  public static let styleLossKey: Foundation.ProgressUserInfoKey
+  public static let accuracyKey: Foundation.ProgressUserInfoKey
+  public static let validationLossKey: Foundation.ProgressUserInfoKey
+  public static let validationAccuracyKey: Foundation.ProgressUserInfoKey
+  public static let stylizedImageKey: Foundation.ProgressUserInfoKey
 }
 @available(macOS 12.0, iOS 15.0, *)
 extension CreateML.MLHandPoseClassifier {
   public struct __Defaults {
-    public static var batchSize: Swift.Int
-    public static var maximumIterations: Swift.Int
-    public static var sessionIdColumnName: Swift.String
-    public static var featureColumnName: Swift.String
-    public static var labelColumnName: Swift.String
-    public static var imageColumnName: Swift.String
+    public static let batchSize: Swift.Int
+    public static let maximumIterations: Swift.Int
+    public static let sessionIdColumnName: Swift.String
+    public static let featureColumnName: Swift.String
+    public static let labelColumnName: Swift.String
+    public static let imageColumnName: Swift.String
   }
 }
 @available(macOS 11.0, *)
 public struct MLActionClassifier {
   @available(macOS 11.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel {
     get
   }
@@ -1820,199 +1787,19 @@ extension CreateML.MLActionClassifier : Swift.CustomStringConvertible, Swift.Cus
     get
   }
 }
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7padding7SwiftNN9ZeroPad1DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7padding7SwiftNN9ZeroPad1DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7paddingAC0G7PaddingCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7paddingAC0G7PaddingCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC11convolution7SwiftNN0H1DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC11convolution7SwiftNN0H1DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC9leakyRelu7SwiftNN9LeakyReLUCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC9leakyRelu7SwiftNN9LeakyReLUCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense17SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense17SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense27SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense27SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC6conv2d7SwiftNN0H1DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC6conv2d7SwiftNN0H1DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC9leakyRelu7SwiftNN0G4ReLUCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC9leakyRelu7SwiftNN0G4ReLUCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC16featureReductionAC11LeakyConv2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC16featureReductionAC11LeakyConv2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC6causalSayAC12CausalConv1DCGvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC6causalSayAC12CausalConv1DCGvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C13convolutionalAC20ConvolutionalNetworkCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C13convolutionalAC20ConvolutionalNetworkCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C16featureExtractorAC3MLPCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C16featureExtractorAC3MLPCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
 @available(macOS 12.0, iOS 15.0, *)
 extension CreateML.MLHandActionClassifier {
   public struct __Defaults {
-    public static var batchSize: Swift.Int
-    public static var maximumIterations: Swift.Int
-    public static var predictionWindowSize: Swift.Int
-    public static var sessionIdColumnName: Swift.String
-    public static var featureColumnName: Swift.String
-    public static var labelColumnName: Swift.String
-    public static var videoColumnName: Swift.String
-    public static var startTimeColumnName: Swift.String
-    public static var endTimeColumnName: Swift.String
-    public static var targetFrameRate: Swift.Double
+    public static let batchSize: Swift.Int
+    public static let maximumIterations: Swift.Int
+    public static let predictionWindowSize: Swift.Int
+    public static let sessionIdColumnName: Swift.String
+    public static let featureColumnName: Swift.String
+    public static let labelColumnName: Swift.String
+    public static let videoColumnName: Swift.String
+    public static let startTimeColumnName: Swift.String
+    public static let endTimeColumnName: Swift.String
+    public static let targetFrameRate: Swift.Double
   }
 }
 @available(macOS 10.15, *)
@@ -2115,7 +1902,7 @@ public enum MLBoundingBoxAnchor {
 }
 @available(macOS 12.0, iOS 15.0, *)
 public struct MLHandActionClassifier {
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel
   public let modelParameters: CreateML.MLHandActionClassifier.ModelParameters
   public var trainingMetrics: CreateML.MLClassifierMetrics
@@ -2150,23 +1937,24 @@ extension CreateML.MLHandActionClassifier : Swift.CustomStringConvertible, Swift
 }
 @available(macOS 11.0, iOS 15.0, *)
 extension CreateML.MLSoundClassifier {
+  @available(macOS 11.0, iOS 15.0, *)
   public struct __Defaults {
-    public static var overlapFactor: Swift.Double
-    public static var batchSize: Swift.Int
-    public static var maximumIterations: Swift.Int
-    public static var validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData
+    public static let overlapFactor: Swift.Double
+    public static let batchSize: Swift.Int
+    public static let maximumIterations: Swift.Int
+    public static let validation: CreateML.MLSoundClassifier.ModelParameters.ValidationData
     @available(macOS 11.0, iOS 15.0, *)
     public static var featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType {
       get
     }
     @available(macOS 11.0, iOS 15.0, *)
-    public static var classifier: CreateML.MLSoundClassifier.ModelParameters.ClassifierType
+    public static let classifier: CreateML.MLSoundClassifier.ModelParameters.ClassifierType
     @available(macOS 11.0, iOS 15.0, *)
-    public static var algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType
-    public static var featureColumnName: Swift.String
-    public static var labelColumnName: Swift.String
+    public static let algorithm: CreateML.MLSoundClassifier.ModelParameters.ModelAlgorithmType
+    public static let featureColumnName: Swift.String
+    public static let labelColumnName: Swift.String
     @available(macOS 12.0, iOS 15.0, *)
-    public static var defaultVGGishTimeWindow: Swift.Double
+    public static let defaultVGGishTimeWindow: Swift.Double
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
@@ -2215,7 +2003,7 @@ public struct MLRandomForestClassifier {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLRandomForestClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -2245,12 +2033,12 @@ public struct MLRandomForestClassifier {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, iOS 15.0, *)
     public var validation: CreateML.MLRandomForestClassifier.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var maxDepth: Swift.Int
     public var maxIterations: Swift.Int
@@ -2297,354 +2085,6 @@ extension CreateML.MLRandomForestClassifier : Swift.CustomStringConvertible, Swi
     get
   }
 }
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC13dataBatchNorm7SwiftNN0iJ0Cvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC13dataBatchNorm7SwiftNN0iJ0Cvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC26traverseMatrixInnerProduct7SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC26traverseMatrixInnerProduct7SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC14inputBatchNorm7SwiftNN0iJ0Cvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC14inputBatchNorm7SwiftNN0iJ0Cvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7dropout7SwiftNN7DropoutCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7dropout7SwiftNN7DropoutCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC5torsoAC5TorsoVvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC5torsoAC5TorsoVvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb6__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__Pred__src_0_wrt_0 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__Pred__src_0_wrt_0 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__Pred__src_0_wrt_0 {
-  case bb1(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0)
-  case bb2(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__Pred__src_0_wrt_0 {
-  case bb3(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__Pred__src_0_wrt_0 {
-  case bb3(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb6__Pred__src_0_wrt_0 {
-  case bb4(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__PB__src_0_wrt_0)
-  case bb5(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb6__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__Pred__src_0_wrt_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__Pred__src_0_wrt_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__Pred__src_0_wrt_1 {
-  case bb1(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_1)
-  case bb2(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__Pred__src_0_wrt_1 {
-  case bb3(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__Pred__src_0_wrt_1 {
-  case bb3(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb6__Pred__src_0_wrt_1 {
-  case bb4(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__PB__src_0_wrt_1)
-  case bb5(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb6__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__Pred__src_0_wrt_0_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__Pred__src_0_wrt_0_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__Pred__src_0_wrt_0_1 {
-  case bb1(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0_1)
-  case bb2(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__Pred__src_0_wrt_0_1 {
-  case bb3(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__Pred__src_0_wrt_0_1 {
-  case bb3(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb6__Pred__src_0_wrt_0_1 {
-  case bb4(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb4__PB__src_0_wrt_0_1)
-  case bb5(CreateML._AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7forwardy7SwiftNN6TensorVAIF_bb5__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV12singleStream7SwiftNN10SequentialVyAG6TensorVAKGvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV12singleStream7SwiftNN10SequentialVyAG6TensorVAKGvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV13avgPoolGlobal7SwiftNN0I13AveragePool2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV13avgPoolGlobal7SwiftNN0I13AveragePool2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV11linearLayer7SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV11linearLayer7SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv17SwiftNN6Conv2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv17SwiftNN6Conv2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV8avgPool37SwiftNN13AveragePool2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV8avgPool37SwiftNN13AveragePool2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv27SwiftNN6Conv2DCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv27SwiftNN6Conv2DCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10batchNorm27SwiftNN9BatchNormCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10batchNorm27SwiftNN9BatchNormCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7dropout7SwiftNN7DropoutCvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7dropout7SwiftNN7DropoutCvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10downSample7SwiftNN10SequentialVyAG6TensorVAKGSgvg_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10downSample7SwiftNN10SequentialVyAG6TensorVAKGSgvg_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__Pred__src_0_wrt_0 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__Pred__src_0_wrt_0 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb3__Pred__src_0_wrt_0 {
-  case bb2(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0)
-  case bb1(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0)
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__Pred__src_0_wrt_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__Pred__src_0_wrt_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb3__Pred__src_0_wrt_1 {
-  case bb2(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_1)
-  case bb1(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_1)
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb3__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__Pred__src_0_wrt_0_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__Pred__src_0_wrt_0_1 {
-  case bb0(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb3__Pred__src_0_wrt_0_1 {
-  case bb2(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb2__PB__src_0_wrt_0_1)
-  case bb1(CreateML._AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7forwardy7SwiftNN6TensorVAIF_bb1__PB__src_0_wrt_0_1)
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC10poseMotiony7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC10poseMotiony7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0_1 {
-}
-@usableFromInline
-@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC10poseMotiony7SwiftNN6TensorVAIF_bb0__PB__src_0_wrt_0 {
-}
-@usableFromInline
-@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC10poseMotiony7SwiftNN6TensorVAIF_bb0__Pred__src_0_wrt_0 {
-}
 @available(macOS 10.14, iOS 15.0, *)
 public struct MLBoostedTreeRegressor {
   public var model: CoreML.MLModel {
@@ -2660,7 +2100,7 @@ public struct MLBoostedTreeRegressor {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -2690,12 +2130,12 @@ public struct MLBoostedTreeRegressor {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public var validation: CreateML.MLBoostedTreeRegressor.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var maxDepth: Swift.Int
     public var maxIterations: Swift.Int
@@ -2745,16 +2185,16 @@ extension CreateML.MLBoostedTreeRegressor : Swift.CustomStringConvertible, Swift
 @available(macOS 11.0, *)
 extension CreateML.MLActionClassifier {
   public struct __Defaults {
-    public static var batchSize: Swift.Int
-    public static var maximumIterations: Swift.Int
-    public static var predictionWindowSize: Swift.Int
-    public static var sessionIdColumnName: Swift.String
-    public static var featureColumnName: Swift.String
-    public static var labelColumnName: Swift.String
-    public static var videoColumnName: Swift.String
-    public static var startTimeColumnName: Swift.String
-    public static var endTimeColumnName: Swift.String
-    public static var targetFrameRate: Swift.Double
+    public static let batchSize: Swift.Int
+    public static let maximumIterations: Swift.Int
+    public static let predictionWindowSize: Swift.Int
+    public static let sessionIdColumnName: Swift.String
+    public static let featureColumnName: Swift.String
+    public static let labelColumnName: Swift.String
+    public static let videoColumnName: Swift.String
+    public static let startTimeColumnName: Swift.String
+    public static let endTimeColumnName: Swift.String
+    public static let targetFrameRate: Swift.Double
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
@@ -2972,15 +2412,16 @@ extension Swift.Dictionary : CreateML.MLDataValueConvertible where Key : CreateM
 public func timestampSeed() -> Swift.Int
 @available(macOS 11.0, iOS 15.0, *)
 extension CreateML.MLImageClassifier {
+  @available(macOS 11.0, iOS 15.0, *)
   public struct __Defaults {
-    public static var batchSize: Swift.Int
-    public static var maximumIterations: Swift.Int
-    public static var validation: CreateML.MLImageClassifier.ModelParameters.ValidationData
-    public static var augmentationOptions: CreateML.MLImageClassifier.ImageAugmentationOptions
-    public static var classifier: CreateML.MLImageClassifier.ModelParameters.ClassifierType
-    public static var algorithm: CreateML.MLImageClassifier.ModelParameters.ModelAlgorithmType
-    public static var featureColumnName: Swift.String
-    public static var labelColumnName: Swift.String
+    public static let batchSize: Swift.Int
+    public static let maximumIterations: Swift.Int
+    public static let validation: CreateML.MLImageClassifier.ModelParameters.ValidationData
+    public static let augmentationOptions: CreateML.MLImageClassifier.ImageAugmentationOptions
+    public static let classifier: CreateML.MLImageClassifier.ModelParameters.ClassifierType
+    public static let algorithm: CreateML.MLImageClassifier.ModelParameters.ModelAlgorithmType
+    public static let featureColumnName: Swift.String
+    public static let labelColumnName: Swift.String
   }
 }
 @available(macOS 10.15, *)
@@ -2996,9 +2437,9 @@ public enum MLBoundingBoxCoordinatesOrigin {
 @available(macOS 11.0, iOS 15.0, *)
 extension CreateML.MLStyleTransfer {
   public struct __Defaults {
-    public static var maxIterations: Swift.Int
-    public static var textelDensity: Swift.Int
-    public static var styleStrength: Swift.Int
+    public static let maxIterations: Swift.Int
+    public static let textelDensity: Swift.Int
+    public static let styleStrength: Swift.Int
   }
 }
 @available(macOS 10.14, iOS 15.0, *)
@@ -3016,7 +2457,7 @@ public struct MLDecisionTreeClassifier {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLDecisionTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -3047,12 +2488,12 @@ public struct MLDecisionTreeClassifier {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, iOS 15.0, *)
     public var validation: CreateML.MLDecisionTreeClassifier.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var minLossReduction: Swift.Double
     public var minChildWeight: Swift.Double
@@ -3151,27 +2592,27 @@ public struct MLTextClassifier {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, iOS 15.0, *)
     public var validation: CreateML.MLTextClassifier.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property.")
     public var textColumnValidationData: Swift.String? {
       get
-      set(newValue)
+      set
     }
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property.")
     public var labelColumnValidationData: Swift.String? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public var maxIterations: Swift.Int? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, iOS 15.0, *)
     public init(validation: CreateML.MLTextClassifier.ModelParameters.ValidationData = .split(strategy: .automatic), algorithm: CreateML.MLTextClassifier.ModelAlgorithmType = .maxEnt(revision: 1), language: NaturalLanguage.NLLanguage? = nil)
@@ -3254,7 +2695,7 @@ extension CreateML.MLTextClassifier.FeatureExtractorType : Swift.CustomStringCon
 @available(macOS 10.15, iOS 15.0, *)
 public struct MLSoundClassifier {
   @available(macOS 11.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   public var model: CoreML.MLModel {
     get
   }
@@ -3293,7 +2734,7 @@ public struct MLSoundClassifier {
     @available(macOS 12.0, iOS 15.0, *)
     public var featureExtractionTimeWindowSize: Foundation.TimeInterval {
       get
-      set(newValue)
+      set
     }
     public var featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType
     public init(overlapFactor: Swift.Double = __Defaults.overlapFactor, featureExtractor: CreateML.MLSoundClassifier.ModelParameters.FeatureExtractorType = __Defaults.featureExtractor)
@@ -3320,12 +2761,12 @@ extension CreateML.MLSoundClassifier : Swift.CustomStringConvertible, Swift.Cust
 extension CreateML.MLHandActionClassifier {
   public struct VideoAugmentationOptions : Swift.OptionSet, Swift.Codable {
     public let rawValue: Swift.Int
-    public static var horizontallyFlip: CreateML.MLHandActionClassifier.VideoAugmentationOptions
-    public static var rotate: CreateML.MLHandActionClassifier.VideoAugmentationOptions
-    public static var translate: CreateML.MLHandActionClassifier.VideoAugmentationOptions
-    public static var scale: CreateML.MLHandActionClassifier.VideoAugmentationOptions
-    public static var interpolateFrames: CreateML.MLHandActionClassifier.VideoAugmentationOptions
-    public static var dropFrames: CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    public static let horizontallyFlip: CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    public static let rotate: CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    public static let translate: CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    public static let scale: CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    public static let interpolateFrames: CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    public static let dropFrames: CreateML.MLHandActionClassifier.VideoAugmentationOptions
     public init(rawValue: Swift.Int)
     public typealias ArrayLiteralElement = CreateML.MLHandActionClassifier.VideoAugmentationOptions
     public typealias Element = CreateML.MLHandActionClassifier.VideoAugmentationOptions
@@ -3475,7 +2916,9 @@ public struct MLDataTable {
   public func randomSplit(by proportion: Swift.Double, seed: Swift.Int = 1) -> (CreateML.MLDataTable, CreateML.MLDataTable)
   public func stratifiedSplit(proportions: [Swift.Double], on column: Swift.String, seed: Swift.Int = timestampSeed()) throws -> CreateML.MLDataTable
   public func stratifiedSplit<RNG>(proportions: [Swift.Double], on column: Swift.String, generator: inout RNG) throws -> CreateML.MLDataTable where RNG : Swift.RandomNumberGenerator
+  @available(macOS 11.0, *)
   public func stratifiedSplitBySequence<RNG>(proportions: [Swift.Double], by sequenceIdentifierColumn: Swift.String, on column: Swift.String, generator: inout RNG) throws -> CreateML.MLDataTable where RNG : Swift.RandomNumberGenerator
+  @available(macOS 11.0, *)
   public func stratifiedSplitBySequence(proportions: [Swift.Double], by sequenceIdentifierColumn: Swift.String, on column: Swift.String, seed: Swift.Int = timestampSeed()) throws -> CreateML.MLDataTable
   public func randomSample(by proportion: Swift.Double, seed: Swift.Int = 42) -> CreateML.MLDataTable
   public func intersect<T>(_ values: T..., of columnNamed: Swift.String) -> CreateML.MLDataTable where T : CreateML.MLDataValueConvertible
@@ -3779,12 +3222,12 @@ public struct MLObjectDetector {
     @available(macOS 11.0, *)
     public var gridSize: CoreGraphics.CGSize {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, *)
     public var algorithm: CreateML.MLObjectDetector.ModelParameters.ModelAlgorithmType {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, *)
     public init(validation: CreateML.MLObjectDetector.ModelParameters.ValidationData = .split(strategy: .automatic), batchSize: Swift.Int? = nil, maxIterations: Swift.Int? = nil, gridSize: CoreGraphics.CGSize = CGSize(width: 13, height: 13), algorithm: CreateML.MLObjectDetector.ModelParameters.ModelAlgorithmType = .darknetYolo)
@@ -3898,7 +3341,7 @@ public struct MLBoostedTreeClassifier {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLBoostedTreeClassifier.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -3928,12 +3371,12 @@ public struct MLBoostedTreeClassifier {
     @available(macOS, introduced: 10.14, deprecated: 10.15, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 10.15, iOS 15.0, *)
     public var validation: CreateML.MLBoostedTreeClassifier.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var maxDepth: Swift.Int
     public var maxIterations: Swift.Int
@@ -4028,7 +3471,7 @@ public struct MLLinearRegressor {
     get
   }
   @available(macOS 12.0, iOS 15.0, *)
-  public static var _defaultSessionParameters: CreateML.MLTrainingSessionParameters
+  public static let _defaultSessionParameters: CreateML.MLTrainingSessionParameters
   @available(macOS 12.0, *)
   public init(trainingData: TabularData.DataFrame, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
   public init(trainingData: CreateML.MLDataTable, targetColumn: Swift.String, featureColumns: [Swift.String]? = nil, parameters: CreateML.MLLinearRegressor.ModelParameters = ModelParameters(validation: .split(strategy: .automatic))) throws
@@ -4058,12 +3501,12 @@ public struct MLLinearRegressor {
     @available(macOS, introduced: 10.14, deprecated: 11.0, message: "Use the validation property instead.")
     public var validationData: CreateML.MLDataTable? {
       get
-      set(newValue)
+      set
     }
     @available(macOS 11.0, iOS 15.0, *)
     public var validation: CreateML.MLLinearRegressor.ModelParameters.ValidationData {
       get
-      set(newValue)
+      set
     }
     public var maxIterations: Swift.Int
     public var l1Penalty: Swift.Double
@@ -4128,10 +3571,10 @@ extension CreateML.MLActionClassifier {
 extension CreateML.MLHandPoseClassifier {
   public struct ImageAugmentationOptions : Swift.OptionSet, Swift.Codable {
     public let rawValue: Swift.Int
-    public static var horizontallyFlip: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
-    public static var rotate: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
-    public static var translate: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
-    public static var scale: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
+    public static let horizontallyFlip: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
+    public static let rotate: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
+    public static let translate: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
+    public static let scale: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
     public init(rawValue: Swift.Int)
     public typealias ArrayLiteralElement = CreateML.MLHandPoseClassifier.ImageAugmentationOptions
     public typealias Element = CreateML.MLHandPoseClassifier.ImageAugmentationOptions
@@ -4329,3 +3772,213 @@ public func show(_ column: CreateML.MLUntypedColumn) -> CreateML.MLStreamingVisu
 public func show<Element>(_ column: CreateML.MLDataColumn<Element>) -> CreateML.MLStreamingVisualizable where Element : CreateML.MLDataValueConvertible
 @available(macOS 10.15, *)
 public func show(_ table: CreateML.MLDataTable) -> CreateML.MLStreamingVisualizable
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7padding7SwiftNN9ZeroPad1DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV13CausalPaddingC7padding7SwiftNN9ZeroPad1DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7paddingAC0G7PaddingCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC7paddingAC0G7PaddingCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC11convolution7SwiftNN0H1DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC11convolution7SwiftNN0H1DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC9leakyRelu7SwiftNN9LeakyReLUCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV12CausalConv1DC9leakyRelu7SwiftNN9LeakyReLUCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense17SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense17SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense27SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV3MLPC6dense27SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC6conv2d7SwiftNN0H1DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC6conv2d7SwiftNN0H1DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC9leakyRelu7SwiftNN0G4ReLUCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV11LeakyConv2DC9leakyRelu7SwiftNN0G4ReLUCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC16featureReductionAC11LeakyConv2DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC16featureReductionAC11LeakyConv2DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC6causalSayAC12CausalConv1DCGvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV20ConvolutionalNetworkC6causalSayAC12CausalConv1DCGvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C13convolutionalAC20ConvolutionalNetworkCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C13convolutionalAC20ConvolutionalNetworkCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C16featureExtractorAC3MLPCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML24MLFewShotSoundClassifierV08TemporalF0C16featureExtractorAC3MLPCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC13dataBatchNorm7SwiftNN0iJ0Cvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC13dataBatchNorm7SwiftNN0iJ0Cvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC26traverseMatrixInnerProduct7SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC26traverseMatrixInnerProduct7SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC14inputBatchNorm7SwiftNN0iJ0Cvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC14inputBatchNorm7SwiftNN0iJ0Cvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7dropout7SwiftNN7DropoutCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC7dropout7SwiftNN7DropoutCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC5torsoAC5TorsoVvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV8GraphCNNC5torsoAC5TorsoVvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV12singleStream7SwiftNN10SequentialVyAG6TensorVAKGvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV12singleStream7SwiftNN10SequentialVyAG6TensorVAKGvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV13avgPoolGlobal7SwiftNN0I13AveragePool2DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV13avgPoolGlobal7SwiftNN0I13AveragePool2DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV5TorsoV11linearLayer7SwiftNN5DenseCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV5TorsoV11linearLayer7SwiftNN5DenseCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv17SwiftNN6Conv2DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv17SwiftNN6Conv2DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV8avgPool37SwiftNN13AveragePool2DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV8avgPool37SwiftNN13AveragePool2DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv27SwiftNN6Conv2DCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV5conv27SwiftNN6Conv2DCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10batchNorm27SwiftNN9BatchNormCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10batchNorm27SwiftNN9BatchNormCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7dropout7SwiftNN7DropoutCvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV7dropout7SwiftNN7DropoutCvg_bb0__Pred__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal struct _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10downSample7SwiftNN10SequentialVyAG6TensorVAKGSgvg_bb0__PB__src_0_wrt_0 {
+}
+@usableFromInline
+@frozen internal enum _AD__$s8CreateML22MLHandActionClassifierV16InvertedResidualV10downSample7SwiftNN10SequentialVyAG6TensorVAKGSgvg_bb0__Pred__src_0_wrt_0 {
+}
+@available(macOS 11.0, iOS 15.0, *)
+extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.Equatable {}
+@available(macOS 11.0, iOS 15.0, *)
+extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.Hashable {}
+@available(macOS 11.0, iOS 15.0, *)
+extension CreateML.MLStyleTransfer.ModelParameters.ModelAlgorithmType : Swift.RawRepresentable {}
+@available(macOS 11.0, *)
+extension CreateML.MLWordTagger.FeatureExtractorType : Swift.Equatable {}
+@available(macOS 11.0, *)
+extension CreateML.MLWordTagger.FeatureExtractorType : Swift.Hashable {}
+@available(macOS 12.0, iOS 15.0, *)
+extension CreateML.MLHandActionClassifier.ModelParameters.ModelAlgorithmType : Swift.Hashable {}
+@available(macOS 12.0, iOS 15.0, *)
+extension CreateML.MLHandPoseClassifier.ModelParameters.ModelAlgorithmType : Swift.Hashable {}
+@available(macOS 10.15, *)
+extension CreateML.MLRecommender.SimilarityType : Swift.Equatable {}
+@available(macOS 10.15, *)
+extension CreateML.MLRecommender.SimilarityType : Swift.Hashable {}
+@available(macOS 12.0, iOS 15.0, *)
+extension CreateML.MLSoundClassifier.ModelParameters.FeaturePrintType : Swift.Hashable {}
+@available(macOS 11.0, iOS 15.0, *)
+extension CreateML.MLProgress.Metric : Swift.RawRepresentable {}
+@available(macOS 11.0, *)
+extension CreateML.MLActionClassifier.ModelParameters.ModelAlgorithmType : Swift.Hashable {}
+@available(macOS 10.15, *)
+extension CreateML.MLBoundingBoxAnchor : Swift.Equatable {}
+@available(macOS 10.15, *)
+extension CreateML.MLBoundingBoxAnchor : Swift.Hashable {}
+@available(macOS 10.14, iOS 15.0, *)
+extension CreateML.MLDataValue.ValueType : Swift.Equatable {}
+@available(macOS 10.14, iOS 15.0, *)
+extension CreateML.MLDataValue.ValueType : Swift.Hashable {}
+@available(macOS 10.15, *)
+extension CreateML.MLBoundingBoxCoordinatesOrigin : Swift.Equatable {}
+@available(macOS 10.15, *)
+extension CreateML.MLBoundingBoxCoordinatesOrigin : Swift.Hashable {}
+@available(macOS 11.0, iOS 15.0, *)
+extension CreateML.MLPhase : Swift.Equatable {}
+@available(macOS 11.0, iOS 15.0, *)
+extension CreateML.MLPhase : Swift.Hashable {}
+@available(macOS 11.0, iOS 15.0, *)
+extension CreateML.MLPhase : Swift.RawRepresentable {}
+@available(macOS 10.15, *)
+extension CreateML.MLBoundingBoxUnits : Swift.Equatable {}
+@available(macOS 10.15, *)
+extension CreateML.MLBoundingBoxUnits : Swift.Hashable {}
+@available(macOS 10.14, iOS 15.0, *)
+extension CreateML.MLDataTable.JoinType : Swift.Equatable {}
+@available(macOS 10.14, iOS 15.0, *)
+extension CreateML.MLDataTable.JoinType : Swift.Hashable {}
+@available(macOS 10.14, iOS 15.0, *)
+extension CreateML.MLDataTable.PackType : Swift.Equatable {}
+@available(macOS 10.14, iOS 15.0, *)
+extension CreateML.MLDataTable.PackType : Swift.Hashable {}

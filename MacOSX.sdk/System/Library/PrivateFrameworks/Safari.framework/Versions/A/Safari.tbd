@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A8A58221-2867-39B8-9C82-6FAC9D6C0B8C
+    value:           797AE731-945E-32AA-BCDB-C26300226A65
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5BB5E97E-6B34-3E61-A4FB-5C65D7B86740
+    value:           1D68CCB3-F4E7-3F17-A7F4-BA7174517D7B
 install-name:    '/System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari'
-current-version: 612.3.6
+current-version: 613.1.17
 compatibility-version: 528
 exports:
   - targets:         [ x86_64-macos ]
@@ -56,14 +56,14 @@ exports:
                        _safariProductionApplicationBundleIdentifier, _safariQuickLookPreviewBundleIdentifier, 
                        _safariSharedFrameworkBundleIdentifier, _safariTechnologyPreviewApplicationBundleIdentifier, 
                        _touchIDAvailabilityMayHaveChangedNotification, _touchIDToAutoFillToggledNotification ]
-    objc-classes:    [ AutoFillAuthorizationController, AutoFillCredentialPicker, 
+    objc-classes:    [ AccountManagerContainerViewController, AccountManagerViewController, 
+                       AutoFillAuthorizationController, AutoFillCredentialPicker, 
                        AutoFillLocalAuthenticationManager, BookmarksController, CredentialCompletionAutoFillCellView, 
                        FeatureAvailability, MacSafariBookmarkDBAccess, MenuTableRowView, 
-                       MenuTableSeparatorRowView, OneTimeCodeAutoFillCellView, PasswordManagerContainerViewController, 
-                       PasswordManagerViewController, PurgeableDirectory, PurgeableItemController, 
-                       PurgeableWebCache, RestrictedSandboxBroker, SafariAppExtensionsController, 
-                       SafariContentBlockerAppExtensionsController, SafariSandboxBroker, 
-                       SafariSettingsSyncEngineAccessMac, SafariWebBookmarkList, 
+                       MenuTableSeparatorRowView, OneTimeCodeAutoFillCellView, PurgeableDirectory, 
+                       PurgeableItemController, PurgeableWebCache, RestrictedSandboxBroker, 
+                       SafariAppExtensionsController, SafariContentBlockerAppExtensionsController, 
+                       SafariSandboxBroker, SafariSettingsSyncEngineAccessMac, SafariWebBookmarkList, 
                        SafariWebExtensionsController, SearchProvider, SearchProvidersController, 
                        SnapshotCache, SnapshotRequest, SnapshotResponse, WebBookmarkGroup, 
                        WebBookmarkLeaf, WebBookmarkProxy ]

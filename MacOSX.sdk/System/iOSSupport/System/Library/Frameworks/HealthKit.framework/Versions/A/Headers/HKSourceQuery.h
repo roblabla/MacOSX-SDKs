@@ -13,7 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKSourceQuery
  @abstract      A query that returns a set of sources that have saved objects matching certain criteria.
  */
-HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
+HK_EXTERN
+#if defined(__swift__) && __swift__
+API_DEPRECATED("Use HKSourceQueryDescriptor", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
+#else
+API_AVAILABLE(ios(8.0), watchos(2.0))
+#endif
 @interface HKSourceQuery : HKQuery
 
 /*!

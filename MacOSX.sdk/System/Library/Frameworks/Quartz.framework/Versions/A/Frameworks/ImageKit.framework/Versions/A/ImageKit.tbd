@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BE5D1D1C-B17B-3706-BC42-F63CB119B333
+    value:           C91F51A3-855E-3C28-8F69-13CC98ABC721
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC6D1734-A4D8-3E2D-9A64-A4F3DD0784E9
+    value:           96BE89B5-0248-309A-B4EE-1091550887FB
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

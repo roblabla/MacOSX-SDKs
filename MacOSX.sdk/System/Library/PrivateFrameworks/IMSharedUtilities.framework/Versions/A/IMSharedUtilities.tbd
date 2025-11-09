@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1F1E4E1-7D55-30A0-90F7-8F88FF34DCFF
+    value:           96C94B05-5C34-3FB4-980B-7AF1FE72378A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B16B475F-4A13-3C53-BCCF-6433CC0A3B98
+    value:           DAA457AA-8361-385A-9C90-84382233E678
 install-name:    '/System/Library/PrivateFrameworks/IMSharedUtilities.framework/Versions/A/IMSharedUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -48,24 +48,25 @@ exports:
                        _IMBalloonLayoutInfoSecondarySubcaptionKey, _IMBalloonLayoutInfoSubcaptionKey, 
                        _IMBalloonLayoutInfoTertiarySubcaptionKey, _IMBalloonPluginIdentifierActivity, 
                        _IMBalloonPluginIdentifierAnimojiCameraApp, _IMBalloonPluginIdentifierAnimojiStickers, 
-                       _IMBalloonPluginIdentifierAppStore, _IMBalloonPluginIdentifierBusiness, 
-                       _IMBalloonPluginIdentifierCamera, _IMBalloonPluginIdentifierDT, 
-                       _IMBalloonPluginIdentifierFMF, _IMBalloonPluginIdentifierFilters, 
-                       _IMBalloonPluginIdentifierFunCam, _IMBalloonPluginIdentifierGameCenter, 
-                       _IMBalloonPluginIdentifierHandwriting, _IMBalloonPluginIdentifierJellyFish, 
-                       _IMBalloonPluginIdentifierMessageExtension, _IMBalloonPluginIdentifierMusic, 
-                       _IMBalloonPluginIdentifierPhotos, _IMBalloonPluginIdentifierPhotosExtension, 
-                       _IMBalloonPluginIdentifierRecent, _IMBalloonPluginIdentifierRichLinks, 
-                       _IMBalloonPluginIdentifierSearchToShare, _IMBalloonPluginIdentifierShapes, 
-                       _IMBalloonPluginIdentifierSurf, _IMBalloonPluginIdentifierSurfDeprecated, 
-                       _IMBalloonPluginIdentifierText, _IMBalloonProviderBundlePaths, 
-                       _IMBalloonProviderBundleRootDirectory, _IMBlockListControllerListDidChangeNotification, 
-                       _IMBrandManagerErrorDomain, _IMBundleIdentifiersShowingMessagesTranscript, 
-                       _IMCKAHDSyncAttempts, _IMCKCoreDuetSyncAttempts, _IMCKCurrentUserDefaultName, 
-                       _IMCKDictionaryOfDaysKey, _IMCKErrorDomain, _IMCKErrorRetryAfterKey, 
-                       _IMCKFinishedFetchingAttachmentsFromCloudKit, _IMCKFirstSyncInProgress, 
-                       _IMCKLastConnectedToPowerWifiDate, _IMCKLastConnectedToPowerWifiDateExternal, 
-                       _IMCKMOCAccountsMatch, _IMCKPartialErrorsByItemIDKey, _IMCKPowerLastConnectedDate, 
+                       _IMBalloonPluginIdentifierAppStore, _IMBalloonPluginIdentifierAudioMessage, 
+                       _IMBalloonPluginIdentifierBusiness, _IMBalloonPluginIdentifierCamera, 
+                       _IMBalloonPluginIdentifierDT, _IMBalloonPluginIdentifierFMF, 
+                       _IMBalloonPluginIdentifierFilters, _IMBalloonPluginIdentifierFunCam, 
+                       _IMBalloonPluginIdentifierGameCenter, _IMBalloonPluginIdentifierHandwriting, 
+                       _IMBalloonPluginIdentifierJellyFish, _IMBalloonPluginIdentifierMessageExtension, 
+                       _IMBalloonPluginIdentifierMusic, _IMBalloonPluginIdentifierPhotos, 
+                       _IMBalloonPluginIdentifierPhotosExtension, _IMBalloonPluginIdentifierRecent, 
+                       _IMBalloonPluginIdentifierRichLinks, _IMBalloonPluginIdentifierSearchToShare, 
+                       _IMBalloonPluginIdentifierShapes, _IMBalloonPluginIdentifierSurf, 
+                       _IMBalloonPluginIdentifierSurfDeprecated, _IMBalloonPluginIdentifierText, 
+                       _IMBalloonProviderBundlePaths, _IMBalloonProviderBundleRootDirectory, 
+                       _IMBlockListControllerListDidChangeNotification, _IMBrandManagerErrorDomain, 
+                       _IMBundleIdentifiersShowingMessagesTranscript, _IMCKAHDSyncAttempts, 
+                       _IMCKCoreDuetSyncAttempts, _IMCKCurrentUserDefaultName, _IMCKDictionaryOfDaysKey, 
+                       _IMCKErrorDomain, _IMCKErrorRetryAfterKey, _IMCKFinishedFetchingAttachmentsFromCloudKit, 
+                       _IMCKFirstSyncInProgress, _IMCKLastConnectedToPowerWifiDate, 
+                       _IMCKLastConnectedToPowerWifiDateExternal, _IMCKMOCAccountsMatch, 
+                       _IMCKPartialErrorsByItemIDKey, _IMCKPowerLastConnectedDate, 
                        _IMCKPowerTotalDuration, _IMCKPowerWifiDictionaryDay1, _IMCKPowerWifiDictionaryDay2, 
                        _IMCKPowerWifiDictionaryDay3, _IMCKPowerWifiDictionaryDay4, 
                        _IMCKPowerWifiDictionaryDay5, _IMCKPowerWifiDictionaryDay6, 
@@ -136,6 +137,7 @@ exports:
                        _IMCloudKitUseCloudKitMock, _IMCloudKitUserTypeKey, _IMCloudKitZoneDeletedDate, 
                        _IMCloudKitiCloudLoggedIntoHSA2AccountNotification, _IMCloudKitiCloudLoggedIntoNonHSA2AccountNotification, 
                        _IMCombinedPayloadDictionaryAttachmentsKey, _IMCombinedPayloadDictionaryPayloadKey, 
+                       _IMCommSafetyCheckSensitive, _IMCommSafetyDomain, _IMCommSafetyIsYoungAgeGroup, 
                        _IMComputeRecordName, _IMContactStoreBatchLoadCompleteNotification, 
                        _IMContactStoreChangedNotification, _IMContactStoreMeCardChangedNotification, 
                        _IMCopyNormalizedAttributes, _IMCopySafeNameOfFontFamilyName, 
@@ -195,7 +197,7 @@ exports:
                        _IMIsRunningInMessagesComposeViewService, _IMIsRunningInMessagesExtension, 
                        _IMIsRunningInMessagesMacOSX, _IMIsRunningInMessagesTranscriptExtension, 
                        _IMIsRunningInMobileSMS, _IMIsRunningInPhotosPersistenceDependentClient, 
-                       _IMIsRunningInScreenshotTesting, _IMIsRunningInScreenshotTesting_IsolatedTranscriptUI, 
+                       _IMIsRunningInSafari, _IMIsRunningInScreenshotTesting, _IMIsRunningInScreenshotTesting_IsolatedTranscriptUI, 
                        _IMIsRunningInShareSheet, _IMIsRunningInUnitTesting, _IMIsRunningOnAudioAccessory, 
                        _IMIsSupportedUTIType, _IMKeyValueCollectionChangedNotification, 
                        _IMKeyValueCollectionChangedValuesKey, _IMLegacyCalculateFileSizeForPath, 

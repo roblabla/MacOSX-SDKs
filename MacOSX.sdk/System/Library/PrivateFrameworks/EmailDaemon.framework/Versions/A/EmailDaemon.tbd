@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A5371EE4-35EE-3F8B-810E-FE632F6D3D3B
+    value:           A25EEE46-8770-36FB-B6EC-BF0601A765FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D6A6EEE-5201-3032-88E5-C51B3EB29122
+    value:           98800906-4EB7-32DA-B6E5-108F22F22557
 install-name:    '/System/Library/PrivateFrameworks/EmailDaemon.framework/Versions/A/EmailDaemon'
-current-version: 3693.40
+current-version: 3696.80.82
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _EDAttachmentsLog, _EDClientStateForegroundStateDidChangeKeyIsForeground, 
@@ -69,27 +69,26 @@ exports:
                        EDAttachmentPersistence, EDAttachmentPersistenceManager, EDBiomeInteractionEventLog, 
                        EDCachingMailboxPredictor, EDCategorySubsystem, EDClientResumer, 
                        EDClientState, EDCloudKitControl, EDCloudMirroringPersistentStore, 
-                       EDContentRuleListManager, EDConversationDailyCloudExportActivityManager, 
-                       EDConversationDailyiCloudExporter, EDConversationInfo, EDConversationMultipleRemoteStorage, 
-                       EDConversationPersistence, EDConversationPruningActivityManager, 
-                       EDConversationRemoteCloudKitStorage, EDConversationRemoteKVSStorage, 
-                       EDDaemonInterfaceFactory, EDDiagnosticInfoGatherer, EDDifferentialPrivacyReporter, 
-                       EDExistingMessageWithMessageIDHeader, EDFetchController, EDGmailLabelPersistence, 
-                       EDHeuristicsMailboxPredictor, EDInMemoryThread, EDInMemoryThreadQueryHandler, 
-                       EDInteractionEvent, EDInteractionEventLogLegacyPersistentBitsProvider, 
-                       EDInteractionEventLogMultiplexer, EDInteractionEventLogSaltProvider, 
-                       EDInteractionLogger, EDListUnsubscribeHandler, EDLocalActionPersistence, 
-                       EDMailDropMetadataGenerator, EDMailDropWebViewScriptHandler, 
+                       EDConversationDailyCloudExportActivityManager, EDConversationDailyiCloudExporter, 
+                       EDConversationInfo, EDConversationMultipleRemoteStorage, EDConversationPersistence, 
+                       EDConversationPruningActivityManager, EDConversationRemoteCloudKitStorage, 
+                       EDConversationRemoteKVSStorage, EDDaemonInterfaceFactory, 
+                       EDDiagnosticInfoGatherer, EDDifferentialPrivacyReporter, EDExistingMessageWithMessageIDHeader, 
+                       EDFetchController, EDGmailLabelPersistence, EDHeuristicsMailboxPredictor, 
+                       EDInMemoryThread, EDInMemoryThreadQueryHandler, EDInteractionEvent, 
+                       EDInteractionEventLogLegacyPersistentBitsProvider, EDInteractionEventLogMultiplexer, 
+                       EDInteractionEventLogSaltProvider, EDInteractionLogger, EDListUnsubscribeHandler, 
+                       EDLocalActionPersistence, EDMailDropMetadataGenerator, EDMailDropWebViewScriptHandler, 
                        EDMailDynamicDataAsset, EDMailboxPersistence, EDMailboxPredictionController, 
                        EDMailboxProvider, EDMailboxRepository, EDMessageActionHandler, 
                        EDMessageActionProvider, EDMessageAttachmentMetadata, EDMessageChangeManager, 
                        EDMessageComparisonPredicateParser, EDMessageCompoundPredicateParser, 
                        EDMessageCountQueryHandler, EDMessageDataLayoutManager, EDMessageDecoder, 
-                       EDMessageListItemPredicates, EDMessagePersistence, EDMessagePredicateParser, 
-                       EDMessageQueryEvaluator, EDMessageQueryHandler, EDMessageQueryHelper, 
-                       EDMessageQueryParser, EDMessageQueryParserObject, EDMessageQueryTransformer, 
-                       EDMessageRepository, EDMessageRepositoryQueryHandler, EDMessageTransformer, 
-                       EDMigrateBlockedSenderEnabledToBlockedSenderActionEnumUpgradeStep, 
+                       EDMessageListItemPredicates, EDMessagePersistence, EDMessagePersistenceStatistics, 
+                       EDMessagePredicateParser, EDMessageQueryEvaluator, EDMessageQueryHandler, 
+                       EDMessageQueryHelper, EDMessageQueryParser, EDMessageQueryParserObject, 
+                       EDMessageQueryTransformer, EDMessageRepository, EDMessageRepositoryQueryHandler, 
+                       EDMessageTransformer, EDMigrateBlockedSenderEnabledToBlockedSenderActionEnumUpgradeStep, 
                        EDMigrateUserDefaultsUpgradeStep, EDNonAcceptingServer, EDOutgoingMessageRepository, 
                        EDPBInteractionEvent, EDPBInteractionEventAppBackground, EDPBInteractionEventAppLaunch, 
                        EDPBInteractionEventAppResume, EDPBInteractionEventCategoryInferred, 

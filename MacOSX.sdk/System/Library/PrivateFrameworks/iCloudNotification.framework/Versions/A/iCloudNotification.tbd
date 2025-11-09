@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6C281FD4-E6BB-342B-9BFE-5FE0FA749278
+    value:           5D173E59-AA1F-32DB-AB7A-8C718B711F26
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7EDC2E6-F7FC-3819-A06F-36230CB31FF4
+    value:           B960417E-1E99-3826-B1B0-329A064B8530
 install-name:    '/System/Library/PrivateFrameworks/iCloudNotification.framework/Versions/A/iCloudNotification'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

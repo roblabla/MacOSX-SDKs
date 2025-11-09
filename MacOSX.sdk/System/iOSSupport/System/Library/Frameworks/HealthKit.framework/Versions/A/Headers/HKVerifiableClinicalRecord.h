@@ -11,6 +11,46 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * HKVerifiableClinicalRecordSourceType NS_TYPED_ENUM API_AVAILABLE(ios(15.4));
+
+/*!
+ @constant      HKVerifiableClinicalRecordSourceTypeSMARTHealthCard
+ @abstract      Represents a SMART Health Card source type for a verifiable record.
+ */
+HK_EXTERN HKVerifiableClinicalRecordSourceType const HKVerifiableClinicalRecordSourceTypeSMARTHealthCard API_AVAILABLE(ios(15.4));
+
+/*!
+ @constant      HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate
+ @abstract      Represents a EU Digital COVID Certificate source type for a verifiable record.
+ */
+HK_EXTERN HKVerifiableClinicalRecordSourceType const HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate API_AVAILABLE(ios(15.4));
+
+typedef NSString * HKVerifiableClinicalRecordCredentialType NS_TYPED_ENUM API_AVAILABLE(ios(15.4));
+
+/*!
+ @constant      HKVerifiableClinicalRecordCredentialTypeCOVID19
+ @abstract      Represents the COVID-19 credential type for a verifiable record.
+ */
+HK_EXTERN HKVerifiableClinicalRecordCredentialType const HKVerifiableClinicalRecordCredentialTypeCOVID19 NS_SWIFT_NAME(covid19) API_AVAILABLE(ios(15.4));
+
+/*!
+ @constant      HKVerifiableClinicalRecordCredentialTypeImmunization
+ @abstract      Represents the immunization credential type for a verifiable record.
+ */
+HK_EXTERN HKVerifiableClinicalRecordCredentialType const HKVerifiableClinicalRecordCredentialTypeImmunization API_AVAILABLE(ios(15.4));
+
+/*!
+ @constant      HKVerifiableClinicalRecordCredentialTypeLaboratory
+ @abstract      Represents the laboratory credential type for a verifiable record.
+ */
+HK_EXTERN HKVerifiableClinicalRecordCredentialType const HKVerifiableClinicalRecordCredentialTypeLaboratory API_AVAILABLE(ios(15.4));
+
+/*!
+ @constant      HKVerifiableClinicalRecordCredentialTypeRecovery
+ @abstract      Represents the recovery credential type for a verifiable record.
+ */
+HK_EXTERN HKVerifiableClinicalRecordCredentialType const HKVerifiableClinicalRecordCredentialTypeRecovery API_AVAILABLE(ios(15.4));
+
 /*!
  @class         HKVerifiableClinicalRecord
  @abstract      An NSObject that represents a verifiable clinical record.
@@ -59,13 +99,25 @@ HK_EXTERN API_AVAILABLE(ios(15.0)) __WATCHOS_PROHIBITED
  @property      itemNames
  @abstract      A list of display names for each item contained in this record.
  */
-@property (readonly, copy) NSArray<NSString*> *itemNames;
+@property (readonly, copy) NSArray<NSString *> *itemNames;
+
+/*!
+ @property      sourceType
+ @abstract      The type of the source leading to this verifiable record.
+ */
+@property (readonly, copy, nullable) HKVerifiableClinicalRecordSourceType sourceType API_AVAILABLE(ios(15.4));
+
+/*!
+ @property      dataRepresentation
+ @abstract      The record's data representation, determined by source type.
+ */
+@property (readonly, copy) NSData *dataRepresentation API_AVAILABLE(ios(15.4));
 
 /*!
  @property      JWSRepresentation
  @abstract      The record's entirety as JSON Web Signature (JWS) data.
  */
-@property (readonly, copy) NSData *JWSRepresentation;
+@property (readonly, copy) NSData *JWSRepresentation API_DEPRECATED_WITH_REPLACEMENT("dataRepresentation", ios(15.0, 15.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

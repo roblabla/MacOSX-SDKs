@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4CE97123-1197-36D9-B640-A516AAE0C49D
+    value:           1A33E1F9-DD2A-38D5-99E8-9DC8A51F9A15
   - target:          x86_64-maccatalyst
-    value:           4CE97123-1197-36D9-B640-A516AAE0C49D
+    value:           1A33E1F9-DD2A-38D5-99E8-9DC8A51F9A15
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DD5A432-33BA-3B20-840E-1AA5919C79CB
+    value:           31616AD7-ABFA-34F7-BDA8-1106BC55E0EC
   - target:          arm64e-maccatalyst
-    value:           5DD5A432-33BA-3B20-840E-1AA5919C79CB
+    value:           31616AD7-ABFA-34F7-BDA8-1106BC55E0EC
 install-name:    '/System/Library/PrivateFrameworks/DuetActivityScheduler.framework/Versions/A/DuetActivityScheduler'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

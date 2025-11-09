@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.46.202 clang-1300.0.29.30)
-// swift-module-flags: -target arm64e-apple-ios15.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -module-name AVFoundation
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.32 clang-1316.0.20.8)
+// swift-module-flags: -target arm64e-apple-ios15.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AVFoundation
+// swift-module-flags-ignorable: -user-module-version 2080.20.4.1
 @_exported import AVFoundation
 import CoreGraphics
 import CoreMedia
@@ -524,17 +525,28 @@ extension AVFoundation.AVCapturePhotoOutput {
   @nonobjc @_alwaysEmitIntoClient public func supportedPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Darwin.OSType] {
 		return __supportedPhotoPixelFormatTypes(forFileType: fileType).map { $0.uint32Value } as [OSType]
 	}
+  @available(*, unavailable, message: "Use 'supportedPhotoPixelFormatTypes(for:) -> [OSType]' instead")
+  @nonobjc public func supportedPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Foundation.NSNumber]
   @available(iOS 11.0, macCatalyst 14.0, *)
   @available(macOS, unavailable)
   @nonobjc @_alwaysEmitIntoClient public func supportedRawPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Darwin.OSType] {
 		return __supportedRawPhotoPixelFormatTypes(forFileType: fileType).map { $0.uint32Value } as [OSType]
 	}
+  @available(*, unavailable, message: "Use 'supportedRawPhotoPixelFormatTypes(for:) -> [OSType]' instead")
+  @nonobjc public func supportedRawPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Foundation.NSNumber]
 }
 @available(macOS 11.0, iOS 10.0, macCatalyst 14.0, *)
 extension AVFoundation.AVCapturePhotoSettings {
   @nonobjc public var availablePreviewPhotoPixelFormatTypes: [Darwin.OSType] {
     get
   }
+}
+@available(macOS 10.15, iOS 11.0, macCatalyst 14.0, *)
+extension AVFoundation.AVCapturePhoto {
+  @available(*, unavailable, message: "Use 'cgImageRepresentation() -> CGImage?' instead")
+  @nonobjc public func cgImageRepresentation() -> Swift.Unmanaged<CoreGraphics.CGImage>?
+  @available(*, unavailable, message: "Use 'previewCGImageRepresentation() -> CGImage?' instead")
+  @nonobjc public func previewCGImageRepresentation() -> Swift.Unmanaged<CoreGraphics.CGImage>?
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAssetTrack {

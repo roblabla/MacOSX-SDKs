@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D723F4CC-5646-3E1C-BA53-368347C41CE3
+    value:           9394E64A-D1D5-362C-98DB-760C7C15B9BE
   - target:          x86_64-maccatalyst
-    value:           D723F4CC-5646-3E1C-BA53-368347C41CE3
+    value:           9394E64A-D1D5-362C-98DB-760C7C15B9BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C204B86-D6D2-325E-BDA1-C25A88CC8E0E
+    value:           8D842641-0F27-34B1-AEFC-C95B178E5433
   - target:          arm64e-maccatalyst
-    value:           4C204B86-D6D2-325E-BDA1-C25A88CC8E0E
+    value:           8D842641-0F27-34B1-AEFC-C95B178E5433
 install-name:    '/usr/lib/system/libsystem_networkextension.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -78,10 +78,11 @@ exports:
                        _ne_session_start_with_options, _ne_session_status_to_string, 
                        _ne_session_stop, _ne_session_stop_all_with_plugin_type, _ne_session_stop_reason_to_string, 
                        _ne_session_type_to_string, _ne_session_use_as_system_vpn, 
-                       _ne_session_vpn_include_all_networks_configs_present, _ne_socket_set_attribution, 
-                       _ne_socket_set_domains, _ne_socket_set_is_app_initiated, _ne_socket_set_website_attribution, 
-                       _ne_tracker_build_cache, _ne_tracker_build_trie, _ne_tracker_check_info_changed, 
-                       _ne_tracker_clear_cache, _ne_tracker_context_get_domain, _ne_tracker_context_get_domain_owner, 
+                       _ne_session_vod_evaluate_connection_present, _ne_session_vpn_include_all_networks_configs_present, 
+                       _ne_socket_set_attribution, _ne_socket_set_domains, _ne_socket_set_is_app_initiated, 
+                       _ne_socket_set_website_attribution, _ne_tracker_build_cache, 
+                       _ne_tracker_build_trie, _ne_tracker_check_info_changed, _ne_tracker_clear_cache, 
+                       _ne_tracker_context_get_domain, _ne_tracker_context_get_domain_owner, 
                        _ne_tracker_context_is_from_app_list, _ne_tracker_context_is_from_web_list, 
                        _ne_tracker_get_ddg_dictionary, _ne_tracker_lookup_app_domains, 
                        _ne_tracker_set_test_domains, _ne_tracker_validate_domain, 

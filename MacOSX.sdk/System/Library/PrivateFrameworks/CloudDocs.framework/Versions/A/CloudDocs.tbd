@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C0E794E9-5399-3FB4-A052-29F629129895
+    value:           0055A0F6-B67C-3D0A-95FB-0CB36ECBA57D
   - target:          x86_64-maccatalyst
-    value:           C0E794E9-5399-3FB4-A052-29F629129895
+    value:           0055A0F6-B67C-3D0A-95FB-0CB36ECBA57D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AEB10982-102E-3C1D-B2B1-0F7E08633D0A
+    value:           0C7406F8-7807-3BDE-98AF-1E9236569C52
   - target:          arm64e-maccatalyst
-    value:           AEB10982-102E-3C1D-B2B1-0F7E08633D0A
+    value:           0C7406F8-7807-3BDE-98AF-1E9236569C52
 install-name:    '/System/Library/PrivateFrameworks/CloudDocs.framework/Versions/A/CloudDocs'
-current-version: 902.60.2
+current-version: 946.101.2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -102,9 +102,8 @@ exports:
                        _BRNotifyNameForForegroundChangeWithContainerID, _BRPartialErrorsByContainerIDKey, 
                        _BRPartialErrorsByURLKey, _BRPassbookContainerID, _BRPerAccountSessionFolderName, 
                        _BRPerAccountSessionRemoteDocumentVersionFolderName, _BRPerformWithAccountDescriptor, 
-                       _BRPerformWithAccountDescriptorAndError, _BRPerformWithPersona, 
-                       _BRPerformWithPersonaAndError, _BRPerformWithPersonaAndErrorForURLIfAble, 
-                       _BRPerformWithPersonaForURLIfAble, _BRPersonaSpecificName, 
+                       _BRPerformWithAccountDescriptorAndError, _BRPerformWithPersonaAndError, 
+                       _BRPerformWithPersonaAndErrorForURLIfAble, _BRPersonaSpecificName, 
                        _BRPlatform, _BRPostAccountTokenChangedNotification, _BRPrepareDocumentForForcedConflict, 
                        _BRPreserveUploadedDataXattrKey, _BRPrimaryiCloudAccountCopyStatus, 
                        _BRProgressIsCreatedByCloudDocsKey, _BRPushTopicGetContainerID, 
@@ -158,18 +157,18 @@ exports:
                        __BRFolderShareType, __BRLocalizedStringWithFormat, __BRNSMetadataUbiquitousSharedItemLastEditorNameComponentsKey, 
                        __BRNSMetadataUbiquitousSharedItemLastEditorNameKey, __BRPathIsUbiquityFault, 
                        __BRRestorePersona, __BRSetResourcePropertyForKey, ___brc_create_section, 
-                       ___brc_leave_section, __brc_assert_failure, __brc_log_is_internal_install, 
-                       _abc_report_assert_with_signature, _abc_report_panic_with_signature, 
-                       _br_pacer_cancel, _br_pacer_create, _br_pacer_pretend_event_handler_fired, 
-                       _br_pacer_resume, _br_pacer_set_event_handler, _br_pacer_signal, 
-                       _br_pacer_signal_at_most_after_min_interval, _br_pacer_suspend, 
-                       _br_pacer_test_cancel, _brc_append_system_info_to_message, 
-                       _brc_backtrace, _brc_backtrace_detailed_snprint, _brc_backtrace_exception_snprint, 
-                       _brc_block_remember_persona, _brc_current_date_nsec, _brc_default_log, 
-                       _brc_interval_from_nsec, _brc_interval_to_nsec, _brc_is_before_deadline, 
-                       _brc_monotonic_time_diff_to_interval, _brc_monotonic_time_now, 
-                       _brc_notifications_log, _brc_notify_get_state, _brc_notify_post, 
-                       _brc_notify_register_check, _brc_notify_set_state_and_post, 
+                       ___brc_leave_section, __br_parseUUIDString, __brc_assert_failure, 
+                       __brc_log_is_internal_install, _abc_report_assert_with_signature, 
+                       _abc_report_panic_with_signature, _br_pacer_cancel, _br_pacer_create, 
+                       _br_pacer_pretend_event_handler_fired, _br_pacer_resume, _br_pacer_set_event_handler, 
+                       _br_pacer_signal, _br_pacer_signal_at_most_after_min_interval, 
+                       _br_pacer_suspend, _br_pacer_test_cancel, _brc_activity_block_remember_persona, 
+                       _brc_append_system_info_to_message, _brc_backtrace, _brc_backtrace_detailed_snprint, 
+                       _brc_backtrace_exception_snprint, _brc_block_remember_persona, 
+                       _brc_current_date_nsec, _brc_default_log, _brc_interval_from_nsec, 
+                       _brc_interval_to_nsec, _brc_is_before_deadline, _brc_monotonic_time_diff_to_interval, 
+                       _brc_monotonic_time_now, _brc_notifications_log, _brc_notify_get_state, 
+                       _brc_notify_post, _brc_notify_register_check, _brc_notify_set_state_and_post, 
                        _getSharingServiceInterface, _kBRCDaemonApplicationSupportURLKey, 
                        _kBRCDaemonRootURLKey, _kBRCMachServiceName, _kBRCMachTokenServiceName, 
                        _kBRCUpdateSenderBundleVersionNumber, _kBRCUpdateSenderSandboxExtension, 
@@ -178,14 +177,14 @@ exports:
                        _kBRQueryItemInflightProgress, _kBRQueryItemLastEditorNameComponentsKey, 
                        _kBRQueryItemLocalRepresentationPathKey, _kBRQueryItemNeedsDownloadSize, 
                        _kBRQueryItemNeedsFaultingCount, _kBRQueryItemNeedsSyncUpCount, 
-                       _kBRQueryItemNeedsUploadSize, _kBRQueryItemNumberOfFaults, 
-                       _kBRQueryItemOwnerNameComponentsKey, _kBRQueryItemQuotaAvailableKey, 
-                       _kBRQueryItemSyncedUpCount, _kBRQueryItemTagsKey, _kBRQueryItemULErrorKey, 
-                       _kBRQueryItemULPercentKey, _kBRQueryItemUploadedSize, _kBRSideCarContainerID, 
-                       _kBRSyncedLocationsChangedNotification ]
+                       _kBRQueryItemNeedsUploadSize, _kBRQueryItemNumberOfDirFaults, 
+                       _kBRQueryItemNumberOfFaults, _kBRQueryItemOwnerNameComponentsKey, 
+                       _kBRQueryItemQuotaAvailableKey, _kBRQueryItemSyncedUpCount, 
+                       _kBRQueryItemTagsKey, _kBRQueryItemULErrorKey, _kBRQueryItemULPercentKey, 
+                       _kBRQueryItemUploadedSize, _kBRSideCarContainerID, _kBRSyncedLocationsChangedNotification ]
     objc-classes:    [ BRAccount, BRAccountDescriptor, BRCloudPathComponentDisplayMetadata, 
                        BRContainer, BRContainerCache, BRContainersMonitor, BRDSIDString, 
-                       BRDaemonConnection, BRDocObjectID, BRDownloadAllFilesForLogOutOperation, 
+                       BRDaemonConnection, BRDbRowObjectID, BRDocObjectID, BRDownloadAllFilesForLogOutOperation, 
                        BRDownloadAndUploadAllFilesForLogOutOperation, BRFetchQuotaOperation, 
                        BRFileObjectID, BRFileProvidingOperation, BRGetPausedFileListUpdater, 
                        BRInodeObjectID, BRListNonLocalVersionsOperation, BRMangledID, 
@@ -207,7 +206,8 @@ exports:
                        BRCloudPathComponentDisplayMetadata._icon, BRCloudPathComponentDisplayMetadata._url, 
                        BRContainersMonitor._notifyTokenByContainerID, BRContainersMonitor._observersByContainerID, 
                        BRContainersMonitor._queue, BRDaemonConnection._isUsingTokenService, 
-                       BRDaemonConnection._uuid, BRDocObjectID._docID, BRFetchQuotaOperation._fetchQuotaCompletionBlock, 
+                       BRDaemonConnection._uuid, BRDbRowObjectID._rowId, BRDbRowObjectID._type, 
+                       BRDocObjectID._docID, BRFetchQuotaOperation._fetchQuotaCompletionBlock, 
                        BRGetPausedFileListUpdater._callback, BRInodeObjectID._ino, 
                        BRNotificationQueue._array, BRNotificationQueue._callbacks, 
                        BRNotificationQueue._dequeued, BRNotificationQueue._index, 
@@ -215,12 +215,12 @@ exports:
                        BRProgressUpdate._folderID, BRProgressUpdate._parentFileIDs, 
                        BRProgressUpdate._uploadCompletedSize, BRProgressUpdate._uploadTotalSize, 
                        BRQueryItem._appLibraryID, BRQueryItem._attrs, BRQueryItem._bookmarkData, 
-                       BRQueryItem._btime, BRQueryItem._childItemCount, BRQueryItem._diffs, 
-                       BRQueryItem._favoriteRank, BRQueryItem._fileObjectID, BRQueryItem._flags, 
-                       BRQueryItem._lastUsedTime, BRQueryItem._localRepresentationURL, 
-                       BRQueryItem._logicalHandle, BRQueryItem._logicalName, BRQueryItem._mtime, 
-                       BRQueryItem._parentFileID, BRQueryItem._parentFileObjectID, 
-                       BRQueryItem._parentPath, BRQueryItem._parentZoneRowID, BRQueryItem._physicalHandle, 
+                       BRQueryItem._btime, BRQueryItem._diffs, BRQueryItem._favoriteRank, 
+                       BRQueryItem._fileObjectID, BRQueryItem._flags, BRQueryItem._lastUsedTime, 
+                       BRQueryItem._localRepresentationURL, BRQueryItem._logicalHandle, 
+                       BRQueryItem._logicalName, BRQueryItem._mtime, BRQueryItem._parentFileID, 
+                       BRQueryItem._parentFileObjectID, BRQueryItem._parentPath, 
+                       BRQueryItem._parentZoneRowID, BRQueryItem._physicalHandle, 
                        BRQueryItem._physicalName, BRQueryItem._replacement, BRQueryItem._shareRootFileObjectID, 
                        BRQueryItem._size, BRQueryItem._url, BRQueryItem._zoneRowID, 
                        BRReachabilityMonitor._queue, BRReachabilityMonitor._reachabilityFlags, 
@@ -258,5 +258,6 @@ exports:
                        BRXPCSyncProxy._error, BRXPCSyncProxy._result, BRXPCSyncProxy._target, 
                        BRiWorkWebShareMigrateOperation._operationQueue, BRiWorkWebShareMigrateOperation._shareMigrationCompletionBlock, 
                        BRiWorkWebShareMigrateOperation._url, _BRContainerItem._containerClientIDs, 
-                       _BRContainerItem._containerID, _BRContainerItem._localizedName ]
+                       _BRContainerItem._containerID, _BRContainerItem._isPristine, 
+                       _BRContainerItem._localizedName ]
 ...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           17AED761-574D-3A53-845D-B46E820AF849
+    value:           70EFBEB2-3FD8-3F81-96DC-A54B9D5F2D3F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EEFFE61D-FF6B-3E08-93FA-D8D9E827E710
+    value:           810378D3-2579-3BCF-A1A2-334F6DA86FF6
 install-name:    '/System/Library/PrivateFrameworks/DeauthorizationKit.framework/Versions/A/DeauthorizationKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -25,7 +25,7 @@ exports:
                        _DKPrefFakeValidDiskLayout, _DKPrefFakeiMessageFacetimeSignout, 
                        _DKPrefMDMAllowEraseContentAndSettings, _DKPrefMDMInitiated, 
                        _DKPrefObliterationOptionsOverridePath, _DKPrefPerformDryRunObliteration, 
-                       _DKPrefSkipBootPolicyCalls, _DKPrefSkipFindMyDeactivation, 
+                       _DKPrefSkipApplePayRemoval, _DKPrefSkipBootPolicyCalls, _DKPrefSkipFindMyDeactivation, 
                        _DKPrefSkipNVRAM, _DKPrefSkipReboot, _DKPrefSkipSystemModalBlur, 
                        _DKPrefiCloudSyncTime, _DKSyncingAppPhotos, _DKSyncingAppiCloud, 
                        _DKTaskConfirmationCheckIdentifier, _DKTaskDeactivateFindMyIdentifier, 

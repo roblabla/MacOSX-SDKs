@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B034007F-4B20-35BE-8CA8-089E41412391
+    value:           4352DFA4-3AAC-3F21-89AA-ABD7F707A28F
   - target:          x86_64-maccatalyst
-    value:           B034007F-4B20-35BE-8CA8-089E41412391
+    value:           4352DFA4-3AAC-3F21-89AA-ABD7F707A28F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B32A2DE1-389F-3387-AE4B-9C522384B2C7
+    value:           84DD9802-BEAA-356C-B149-D69F669B88CA
   - target:          arm64e-maccatalyst
-    value:           B32A2DE1-389F-3387-AE4B-9C522384B2C7
+    value:           84DD9802-BEAA-356C-B149-D69F669B88CA
 install-name:    '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage'
 current-version: 5
 compatibility-version: 1.0.1

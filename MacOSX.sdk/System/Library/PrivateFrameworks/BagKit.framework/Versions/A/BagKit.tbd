@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1E2E423-3A5F-3443-B273-7FEDED92BC2C
+    value:           1ACE0491-2199-3211-BDF3-7CB81D5F81D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FCCC847-016D-39BA-BECD-D7C00D3700E8
+    value:           D9AD522A-283F-391A-AF71-557FF31CF2E7
 install-name:    '/System/Library/PrivateFrameworks/BagKit.framework/Versions/A/BagKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

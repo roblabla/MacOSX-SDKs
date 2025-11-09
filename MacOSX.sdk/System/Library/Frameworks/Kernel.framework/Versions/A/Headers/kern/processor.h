@@ -70,7 +70,7 @@
 #include <sys/cdefs.h>
 
 
-__BEGIN_DECLS
+__BEGIN_DECLS __ASSUME_PTR_ABI_SINGLE_BEGIN
 
 
 extern void             pset_deallocate(
@@ -80,6 +80,6 @@ extern void             pset_reference(
 	processor_set_t         pset);
 
 
-__END_DECLS
+__ASSUME_PTR_ABI_SINGLE_END __END_DECLS
 
 #endif  /* _KERN_PROCESSOR_H_ */

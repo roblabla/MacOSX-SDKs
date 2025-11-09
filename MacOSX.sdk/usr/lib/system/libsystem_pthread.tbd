@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6C7561B4-4B92-3F45-921E-ABE669299844
+    value:           2F6C275D-7E14-3D31-A924-E1BB41D2415F
   - target:          x86_64-maccatalyst
-    value:           6C7561B4-4B92-3F45-921E-ABE669299844
+    value:           2F6C275D-7E14-3D31-A924-E1BB41D2415F
   - target:          arm64-macos
-    value:           0C35CA59-6C83-3758-966F-C69972E2CEE8
+    value:           9507407A-B251-3158-BC81-8CABBEBE34DE
   - target:          arm64-maccatalyst
-    value:           0C35CA59-6C83-3758-966F-C69972E2CEE8
+    value:           9507407A-B251-3158-BC81-8CABBEBE34DE
   - target:          arm64e-macos
-    value:           ED328B18-EEEF-3B15-8858-798B19B0C2CD
+    value:           CEE8BC77-6923-34D9-89A3-6F8F7279605E
   - target:          arm64e-maccatalyst
-    value:           ED328B18-EEEF-3B15-8858-798B19B0C2CD
+    value:           CEE8BC77-6923-34D9-89A3-6F8F7279605E
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 485.60.2
+current-version: 486.100.11
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

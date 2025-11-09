@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C446D0E-9C1C-3E77-8E64-6EA1CC278A67
+    value:           1D8372E0-E8CD-36FB-B5EA-1D214EA39DFE
   - target:          x86_64-maccatalyst
-    value:           0C446D0E-9C1C-3E77-8E64-6EA1CC278A67
+    value:           1D8372E0-E8CD-36FB-B5EA-1D214EA39DFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92B9A907-1113-3313-9A02-AA576D4407F4
+    value:           00DC5D22-2A60-3AB3-839A-85E7A75155FA
   - target:          arm64e-maccatalyst
-    value:           92B9A907-1113-3313-9A02-AA576D4407F4
+    value:           00DC5D22-2A60-3AB3-839A-85E7A75155FA
 install-name:    '/System/Library/Frameworks/PHASE.framework/Versions/A/PHASE'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AE11F674-51F9-3EBE-9458-80EDFF65988B
+    value:           8A63E0D1-D35E-317A-926A-3154B96743A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C68FA970-5E71-3A4F-B102-0E4C36E0E9A8
+    value:           5DAB42E9-E8ED-3D53-8042-60392EDCEEC3
 install-name:    '/System/Library/PrivateFrameworks/JavaScriptAppleEvents.framework/Versions/A/JavaScriptAppleEvents'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

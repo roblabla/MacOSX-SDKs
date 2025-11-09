@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BB30E95C-9006-3FB0-876E-7B53B077FA8C
+    value:           B1518F7B-0B6B-3D6C-8CFC-BD67FE648EA4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53F85F2A-34E5-336F-8E5A-11904DD898B2
+    value:           482FBFB6-715E-3EAD-ADAE-7D187232EB4B
 install-name:    '/System/Library/PrivateFrameworks/SiriIntentEvents.framework/Versions/A/SiriIntentEvents'
 current-version: 0
 compatibility-version: 0
@@ -297,6 +297,17 @@ exports:
                        '_$s16SiriIntentEvents17ConfirmationOfferCMu', '_$s16SiriIntentEvents17ConfirmationOfferCN', 
                        '_$s16SiriIntentEvents17ConfirmationOfferCSEAAMc', '_$s16SiriIntentEvents17ConfirmationOfferCSeAAMc', 
                        '_$s16SiriIntentEvents17ConfirmationOfferCfD', '_$s16SiriIntentEvents17ConfirmationOfferCfd', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorO16RowCountMismatchyA2EmFWC', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorO2eeoiySbAE_AEtFZ', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorO9hashValueSivg', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorO9hashValueSivpMV', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorOMa', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorOMn', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorON', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorOSHAAMc', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorOSQAAMc', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorOs0H0AAMc', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC20supportsSecureCodingSbvMZ', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC20supportsSecureCodingSbvgZ', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC20supportsSecureCodingSbvsZ', 
@@ -320,6 +331,8 @@ exports:
                        '_$s16SiriIntentEvents18AppSelectionSignalC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC6encode4withySo7NSCoderC_tFTj', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC6encode4withySo7NSCoderC_tFTq', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC7merging05otherF0A2C_tKFTj', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC7merging05otherF0A2C_tKFTq', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC7versionSivg', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC7versionSivpMV', 
                        '_$s16SiriIntentEvents18AppSelectionSignalCACycfC', '_$s16SiriIntentEvents18AppSelectionSignalCACycfc', 

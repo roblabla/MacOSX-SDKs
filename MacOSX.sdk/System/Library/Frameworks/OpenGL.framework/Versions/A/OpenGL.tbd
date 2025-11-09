@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           71F0B771-64E7-311F-9FB5-DB71E6867021
+    value:           D33C33C7-588A-3F42-80D0-FB3BCE6BA674
   - target:          x86_64-maccatalyst
-    value:           71F0B771-64E7-311F-9FB5-DB71E6867021
+    value:           D33C33C7-588A-3F42-80D0-FB3BCE6BA674
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24AEB776-038B-37B4-B6AC-22E9AD8C8EF1
+    value:           2B24125C-0D8B-3F3D-8625-6C50DDF2F4CC
   - target:          arm64e-maccatalyst
-    value:           24AEB776-038B-37B4-B6AC-22E9AD8C8EF1
+    value:           2B24125C-0D8B-3F3D-8625-6C50DDF2F4CC
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
@@ -48,15 +48,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9D22DD8F-CAE8-35DE-8EE6-16DC9106C181
+    value:           7BB2FA9B-7BB1-368D-9456-8F3075014716
   - target:          x86_64-maccatalyst
-    value:           9D22DD8F-CAE8-35DE-8EE6-16DC9106C181
+    value:           7BB2FA9B-7BB1-368D-9456-8F3075014716
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           431D9CA1-35B4-31AE-B961-EF3A884FF913
+    value:           E826F545-1CA8-3882-AEB7-4431BA92ED38
   - target:          arm64e-maccatalyst
-    value:           431D9CA1-35B4-31AE-B961-EF3A884FF913
+    value:           E826F545-1CA8-3882-AEB7-4431BA92ED38
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
@@ -450,15 +450,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           22AE20DE-2ECB-376D-ADBC-85A1D45DAC84
+    value:           6EBFD03E-2AE8-3D69-975A-2981A9EE3587
   - target:          x86_64-maccatalyst
-    value:           22AE20DE-2ECB-376D-ADBC-85A1D45DAC84
+    value:           6EBFD03E-2AE8-3D69-975A-2981A9EE3587
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D1C09A0-BC8C-309A-BEA5-96E1F1AEE71F
+    value:           273DBBA5-5C7E-3F01-8A5B-417BC5C67432
   - target:          arm64e-maccatalyst
-    value:           8D1C09A0-BC8C-309A-BEA5-96E1F1AEE71F
+    value:           273DBBA5-5C7E-3F01-8A5B-417BC5C67432
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           37213968-2E58-3780-95A4-7861D0859A6B
+    value:           F7BD34BF-4F11-3C48-BD8B-BFC81C09CF2A
   - target:          x86_64-maccatalyst
-    value:           37213968-2E58-3780-95A4-7861D0859A6B
+    value:           F7BD34BF-4F11-3C48-BD8B-BFC81C09CF2A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1485320D-2587-35BA-AAD4-441D6C39C98C
+    value:           9180A377-715B-3790-81DB-AB51A9F0C3C0
   - target:          arm64e-maccatalyst
-    value:           1485320D-2587-35BA-AAD4-441D6C39C98C
+    value:           9180A377-715B-3790-81DB-AB51A9F0C3C0
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 1656.60.9
+current-version: 1657.101.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -51,12 +51,12 @@ exports:
                        _sandbox_check_message_filter_string, _sandbox_consume_extension, 
                        _sandbox_consume_fs_extension, _sandbox_consume_mach_extension, 
                        _sandbox_container_path_for_audit_token, _sandbox_container_path_for_pid, 
-                       _sandbox_enable_root_translation, _sandbox_extension_consume, 
-                       _sandbox_extension_issue_file, _sandbox_extension_issue_file_to_process, 
-                       _sandbox_extension_issue_file_to_process_by_pid, _sandbox_extension_issue_file_to_self, 
-                       _sandbox_extension_issue_generic, _sandbox_extension_issue_generic_to_process, 
-                       _sandbox_extension_issue_generic_to_process_by_pid, _sandbox_extension_issue_iokit_registry_entry_class, 
-                       _sandbox_extension_issue_iokit_registry_entry_class_to_process, 
+                       _sandbox_enable_root_translation, _sandbox_enable_state_flag, 
+                       _sandbox_extension_consume, _sandbox_extension_issue_file, 
+                       _sandbox_extension_issue_file_to_process, _sandbox_extension_issue_file_to_process_by_pid, 
+                       _sandbox_extension_issue_file_to_self, _sandbox_extension_issue_generic, 
+                       _sandbox_extension_issue_generic_to_process, _sandbox_extension_issue_generic_to_process_by_pid, 
+                       _sandbox_extension_issue_iokit_registry_entry_class, _sandbox_extension_issue_iokit_registry_entry_class_to_process, 
                        _sandbox_extension_issue_iokit_registry_entry_class_to_process_by_pid, 
                        _sandbox_extension_issue_iokit_user_client_class, _sandbox_extension_issue_mach, 
                        _sandbox_extension_issue_mach_to_process, _sandbox_extension_issue_mach_to_process_by_pid, 
@@ -66,14 +66,16 @@ exports:
                        _sandbox_init_from_pid, _sandbox_init_with_extensions, _sandbox_init_with_parameters, 
                        _sandbox_issue_extension, _sandbox_issue_fs_extension, _sandbox_issue_fs_rw_extension, 
                        _sandbox_issue_mach_extension, _sandbox_message_filter_query, 
-                       _sandbox_message_filter_release, _sandbox_note, _sandbox_passthrough_access, 
-                       _sandbox_proc_getcontainer, _sandbox_proc_getprofilename, 
-                       _sandbox_query_approval_policy_for_path, _sandbox_query_user_intent_for_process_with_audit_token, 
-                       _sandbox_reference_release, _sandbox_reference_retain_by_audit_token, 
+                       _sandbox_message_filter_release, _sandbox_message_filter_retain, 
+                       _sandbox_note, _sandbox_passthrough_access, _sandbox_proc_getcontainer, 
+                       _sandbox_proc_getprofilename, _sandbox_query_approval_policy_for_path, 
+                       _sandbox_query_user_intent_for_process_with_audit_token, _sandbox_reference_release, 
+                       _sandbox_reference_retain_by_audit_token, _sandbox_register_app_bundle, 
                        _sandbox_release_fs_extension, _sandbox_requests_integrity_protection_for_preference_domain, 
                        _sandbox_set_container_path_for_application_group, _sandbox_set_container_path_for_application_group_with_persona, 
                        _sandbox_set_container_path_for_signing_id, _sandbox_set_container_path_for_signing_id_with_persona, 
                        _sandbox_spawnattrs_getcontainer, _sandbox_spawnattrs_getprofilename, 
                        _sandbox_spawnattrs_init, _sandbox_spawnattrs_setcontainer, 
-                       _sandbox_spawnattrs_setprofilename, _sandbox_suspend, _sandbox_unsuspend ]
+                       _sandbox_spawnattrs_setprofilename, _sandbox_suspend, _sandbox_unregister_app_bundle, 
+                       _sandbox_unsuspend ]
 ...

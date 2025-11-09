@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           39099A23-A4AA-3B16-950E-104D9F2AEBA4
+    value:           B45C9C78-706E-3F19-9BA4-C33F7A0F294A
   - target:          x86_64-maccatalyst
-    value:           39099A23-A4AA-3B16-950E-104D9F2AEBA4
+    value:           B45C9C78-706E-3F19-9BA4-C33F7A0F294A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB02A499-741B-3C14-B701-40BA6C9C6825
+    value:           EDCED8F4-202E-360B-84E0-CD694856B7A7
   - target:          arm64e-maccatalyst
-    value:           EB02A499-741B-3C14-B701-40BA6C9C6825
+    value:           EDCED8F4-202E-360B-84E0-CD694856B7A7
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf.dylib'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1374,17 +1374,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CA3CC3DA-40D3-3868-BFCE-8B74A1F06B73
+    value:           894BA16B-A2ED-3765-A0EC-1AA9E372035F
   - target:          x86_64-maccatalyst
-    value:           CA3CC3DA-40D3-3868-BFCE-8B74A1F06B73
+    value:           894BA16B-A2ED-3765-A0EC-1AA9E372035F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DD85F4A-DAE3-39E0-BF62-F4FA65A0C471
+    value:           2A5357FB-1C1D-3DDB-B658-69E3E7267BB1
   - target:          arm64e-maccatalyst
-    value:           2DD85F4A-DAE3-39E0-BF62-F4FA65A0C471
+    value:           2A5357FB-1C1D-3DDB-B658-69E3E7267BB1
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

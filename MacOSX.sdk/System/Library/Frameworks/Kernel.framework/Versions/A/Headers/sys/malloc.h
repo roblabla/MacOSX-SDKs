@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -71,8 +71,11 @@
 #ifndef _SYS_MALLOC_H_
 #define _SYS_MALLOC_H_
 
+#include <sys/cdefs.h>
 #include <sys/appleapiopts.h>
 
+
+__BEGIN_DECLS
 
 /*
  * flags to malloc
@@ -92,6 +95,7 @@
 #define M_UDFNODE       84      /* UDF inodes (udf)*/
 #define M_UDFMNT        85      /* UDF mount structures (udf)*/
 #define M_KAUTH         100     /* kauth subsystem (smb) */
+
 
 #define MALLOC(space, cast, size, type, flags) \
 	(space) = (cast)_MALLOC(size, type, flags)
@@ -125,5 +129,6 @@ extern void     _FREE_ZONE(
 	int             type);
 
 
+__END_DECLS
 
 #endif  /* _SYS_MALLOC_H_ */

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CA23E9A2-F18F-3313-BB56-127584857FEC
+    value:           B40B8777-7751-33E9-902E-3A2007EBE401
   - target:          x86_64-maccatalyst
-    value:           CA23E9A2-F18F-3313-BB56-127584857FEC
+    value:           B40B8777-7751-33E9-902E-3A2007EBE401
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6380D72-77AF-3E0B-8C00-D8C908621D53
+    value:           EA359F25-0A96-3710-AAD3-1EA1434357B6
   - target:          arm64e-maccatalyst
-    value:           F6380D72-77AF-3E0B-8C00-D8C908621D53
+    value:           EA359F25-0A96-3710-AAD3-1EA1434357B6
 install-name:    '/System/Library/PrivateFrameworks/HearingUtilities.framework/Versions/A/HearingUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -54,8 +54,9 @@ exports:
                        AXHAListenerHelper, AXHAMessageHandlerContext, AXHAServer, 
                        AXHASettings, AXHASettingsListenerHelper, AXHeardController, 
                        AXHearingAidDevice, AXHearingAidDeviceController, AXHearingAidMode, 
-                       AXPSAPDevice, AXRemoteHearingAidDevice, HANanoSettings, HUDeviceController, 
-                       HUFakeXPCClient, HUNearbyController, HUNearbyDevice, HUUtilities ]
+                       AXPSAPDevice, AXRemoteHearingAidDevice, HANanoSettings, HUAccessoryListenerHelper, 
+                       HUAccessoryManager, HUDeviceController, HUFakeXPCClient, HUNearbyController, 
+                       HUNearbyDevice, HUUtilities ]
     objc-ivars:      [ AXFakeHearingAidDevice._leftFakePrograms, AXFakeHearingAidDevice._rightFakePrograms, 
                        AXFakePSAPDevice._leftFakePrograms, AXFakePSAPDevice._rightFakePrograms ]
 ...

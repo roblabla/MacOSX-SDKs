@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           69B946BB-1982-3CC4-9280-C0FE985D687C
+    value:           3716A37A-2421-32E0-BC0D-C899273B9403
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D56DDF38-7D0A-3C2E-A5A3-04BF0B690603
+    value:           38AB4BCA-444B-3AC5-AF12-5699F2916FE7
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libllvm-flatbuffers.dylib'
 current-version: 0
 compatibility-version: 0

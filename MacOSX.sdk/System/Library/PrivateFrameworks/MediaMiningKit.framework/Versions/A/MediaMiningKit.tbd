@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4573B318-4274-31F8-89AA-D87AD1FEAFD0
+    value:           E6C6C640-2548-3BB6-AC95-AC12F2D7E12D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           830B53C7-1ACA-3A68-9974-1AC6671FBE31
+    value:           D0FA1913-4707-31D8-A929-69A3FA232CC4
 install-name:    '/System/Library/PrivateFrameworks/MediaMiningKit.framework/Versions/A/MediaMiningKit'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

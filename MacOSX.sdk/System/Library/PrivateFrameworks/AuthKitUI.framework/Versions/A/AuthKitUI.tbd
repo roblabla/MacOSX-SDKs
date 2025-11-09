@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0EA7715D-49DB-322F-A448-50D75D89BC59
+    value:           03D8C3CE-BFD8-3136-942E-16176CB9F2FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7EE2ECE9-825B-306B-BECB-6E32B48B6441
+    value:           72C4B498-B2FF-3CD5-BEB3-78B77A5B3F6E
 install-name:    '/System/Library/PrivateFrameworks/AuthKitUI.framework/Versions/A/AuthKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -15,8 +15,8 @@ exports:
                        _AKContentAlignmentCentered, _AKContentAlignmentMake, _AKCreateAppleIDButtonImage, 
                        _AKCreateAppleIDButtonImageWithCornerRadius, _AKDrawAppleIDButton, 
                        _AKDrawAppleIDButtonWithCornerRadius, _AKErrorAlertShouldDismissUIAfterPresentationKey, 
-                       _AKFloatRoundToPixelWithScale, _AKIconDefaultDimension, _AKIconDefaultSize, 
-                       _AKPaymentVerificationErrorKey, _AKPaymentVerificationTokenKey, 
+                       _AKFloatRoundToPixelWithScale, _AKIDPUtilityIDPScheme, _AKIconDefaultDimension, 
+                       _AKIconDefaultSize, _AKPaymentVerificationErrorKey, _AKPaymentVerificationTokenKey, 
                        _AKPointRoundToPixelWithScale, _AKPushEditOptionShouldClearKey, 
                        _AKRectRoundToPixelWithScale, _AKServerPresentationActionModal, 
                        _AKServerPresentationActionPush, _AKSizeAlignedInRectWithScale, 
@@ -25,9 +25,9 @@ exports:
                        _EvaluateJavaScript, _JSCopyStringValue, _JSValueFromNSString, 
                        _JSValueRefsAreEqual, _NSObjectFromJSValue, _NSStringFromJSString, 
                        _NSStringFromJSValue, __AKActionContinuation, __AKFollowUpPushMessageIDKey, 
-                       __AKIDMSAppleIDContinuationData, __AKUIMainBundle, __CreateAttributedStringWithFontSize, 
-                       __DrawBorder, __DrawLogoPDFIntoContext, __IsJSValueAnArray, 
-                       __MaximumFontSizeForStringInRect, __NSDictionaryFromJSObject, 
+                       __AKFollowupOpenAction, __AKIDMSAppleIDContinuationData, __AKUIMainBundle, 
+                       __CreateAttributedStringWithFontSize, __DrawBorder, __DrawLogoPDFIntoContext, 
+                       __IsJSValueAnArray, __MaximumFontSizeForStringInRect, __NSDictionaryFromJSObject, 
                        _kAKCAAppID, _kAKCAAuthorizationRequestSuccess, _kAKCAClientID, 
                        _kAKCAClientTypeApp, _kAKCAClientTypeApple, _kAKCAClientTypeAppleWeb, 
                        _kAKCAClientTypeTV, _kAKCAClientTypeWeb, _kAKCADidCancel, 
@@ -119,9 +119,9 @@ exports:
                        AKDefaultSignInPromptViewController, AKDeviceInfo, AKExtensionlessFollowUpHelperContext, 
                        AKGeneratedComplexCodeFormatter, AKICAWebKitViewController, 
                        AKIDPHandler, AKIDPProvidedSignInViewController, AKIDPProvidedSignInWindow, 
-                       AKIcon, AKInAppAuthenticationMacOSUIProvider, AKInAssistantSecondFactorCodeEntry, 
-                       AKInfoLabel, AKInlineSignInViewController, AKKeepUsingController, 
-                       AKLargeSignInBackground, AKLargeSignInPromptViewController, 
+                       AKIDPUtility, AKIcon, AKInAppAuthenticationMacOSUIProvider, 
+                       AKInAssistantSecondFactorCodeEntry, AKInfoLabel, AKInlineSignInViewController, 
+                       AKKeepUsingController, AKLargeSignInBackground, AKLargeSignInPromptViewController, 
                        AKLargeSignInSecureTextField, AKLargeSignInTextField, AKLargeSignInTextFieldBackgroundView, 
                        AKLegacyInlineSignInViewController, AKLoginRowData, AKMaxLengthFormatter, 
                        AKNameTextField, AKNavigationController, AKNavigationItem, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           A22C56BD-EB9B-3396-A1B9-A0EA8FF8C2D3
+    value:           1299BF0C-5F7E-3E97-81D8-6AF09DB23B97
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           29206805-6D5E-3572-85EC-E1D22B6DA65E
+    value:           4B37A3B2-388D-3EC9-ADDA-CDDC1B24F6DB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _PHDisplayVelocityZero, _PUAdjustPointsToBeWithinRect, _PUAffineTransformIsApproximatelyEqualToTransform, 

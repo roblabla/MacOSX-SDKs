@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6C814D96-7E23-3177-B978-A280193568D4
+    value:           169F9C8F-7241-34C6-B083-178E1323C01A
   - target:          x86_64-maccatalyst
-    value:           6C814D96-7E23-3177-B978-A280193568D4
+    value:           169F9C8F-7241-34C6-B083-178E1323C01A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B91F391-D25D-39FA-BE8B-F371992B30AF
+    value:           A165AB58-1261-352F-A5D3-451CDD2A3AF1
   - target:          arm64e-maccatalyst
-    value:           7B91F391-D25D-39FA-BE8B-F371992B30AF
+    value:           A165AB58-1261-352F-A5D3-451CDD2A3AF1
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/Frameworks/RemoteManagementModel.framework/Versions/A/RemoteManagementModel'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -40,14 +40,14 @@ exports:
                        _RMModelManagementTestCommandCommand_ReturnStatus_failed, 
                        _RMModelManagementTestCommandCommand_ReturnStatus_pendingClient, 
                        _RMModelManagementTestDeclaration_ReturnStatus_failed, _RMModelManagementTestDeclaration_ReturnStatus_installed, 
-                       _RMModelManagementTestDeclaration_ReturnStatus_pendingClient, 
-                       _RMModelStatusItemAll, _RMModelStatusItemDeviceModelFamily, 
-                       _RMModelStatusItemDeviceModelIdentifier, _RMModelStatusItemDeviceModelMarketingName, 
-                       _RMModelStatusItemDeviceOperatingSystemBuildVersion, _RMModelStatusItemDeviceOperatingSystemFamily, 
-                       _RMModelStatusItemDeviceOperatingSystemMarketingName, _RMModelStatusItemDeviceOperatingSystemVersion, 
-                       _RMModelStatusItemDeviceSerialNumber, _RMModelStatusItemDeviceUDID, 
-                       _RMModelStatusItemManagementClientCapabilities, _RMModelStatusItemManagementDeclarations, 
-                       _RMModelStatusItemManagementPushToken, _RMModelStatusManagementDeclarations_Declaration_Valid_invalid, 
+                       _RMModelManagementTestDeclaration_ReturnStatus_unlocked, _RMModelStatusItemAll, 
+                       _RMModelStatusItemDeviceModelFamily, _RMModelStatusItemDeviceModelIdentifier, 
+                       _RMModelStatusItemDeviceModelMarketingName, _RMModelStatusItemDeviceOperatingSystemBuildVersion, 
+                       _RMModelStatusItemDeviceOperatingSystemFamily, _RMModelStatusItemDeviceOperatingSystemMarketingName, 
+                       _RMModelStatusItemDeviceOperatingSystemVersion, _RMModelStatusItemDeviceSerialNumber, 
+                       _RMModelStatusItemDeviceUDID, _RMModelStatusItemManagementClientCapabilities, 
+                       _RMModelStatusItemManagementDeclarations, _RMModelStatusItemManagementPushToken, 
+                       _RMModelStatusManagementDeclarations_Declaration_Valid_invalid, 
                        _RMModelStatusManagementDeclarations_Declaration_Valid_unknown, 
                        _RMModelStatusManagementDeclarations_Declaration_Valid_valid ]
     objc-classes:    [ RMModelAccountCalDAVDeclaration, RMModelAccountCardDAVDeclaration, 

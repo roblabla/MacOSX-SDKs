@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E6397B67-2E39-3806-9379-994B3D843B27
+    value:           9D05F833-EFC7-3F13-9FB5-28F0624FD75B
   - target:          x86_64-maccatalyst
-    value:           E6397B67-2E39-3806-9379-994B3D843B27
+    value:           9D05F833-EFC7-3F13-9FB5-28F0624FD75B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A0AFF90B-651A-319E-B8D3-81633EAFC076
+    value:           BFABA8CD-58C6-35AF-A124-073A59AF0811
   - target:          arm64e-maccatalyst
-    value:           A0AFF90B-651A-319E-B8D3-81633EAFC076
+    value:           BFABA8CD-58C6-35AF-A124-073A59AF0811
 install-name:    '/System/Library/PrivateFrameworks/BiometricKit.framework/Versions/A/BiometricKit'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -33,13 +33,14 @@ exports:
                        _kBiometricKitEnrollProgressDetailResultComponentID, _kBiometricKitIdentityAccessoryKey, 
                        _kBiometricKitIdentityAttributeKey, _kBiometricKitIdentityCreationTimeKey, 
                        _kBiometricKitIdentityEntityKey, _kBiometricKitIdentityFlagsKey, 
-                       _kBiometricKitIdentityMatchCountKey, _kBiometricKitIdentityNameKey, 
-                       _kBiometricKitIdentityTypeKey, _kBiometricKitIdentityUUIDKey, 
-                       _kBiometricKitIdentityUpdateCountKey, _kBiometricKitIdentityUserIDKey, 
-                       _kBiometricKitTemplateDetailLargestComponentArea, _kBiometricKitTemplateDetailLargestComponentNodes, 
-                       _kBiometricKitTemplateDetailTotalArea, _kBiometricKitTemplateDetailTotalNodes, 
-                       _kBiometricKitTemplateUpdated, _localizeAbsolute, _nanosecondsToAbsolute, 
-                       _rotateBitmap90Data16, _rotateBitmap90Data8, _roundMostSignificant ]
+                       _kBiometricKitIdentityMatchCountContinuousKey, _kBiometricKitIdentityMatchCountKey, 
+                       _kBiometricKitIdentityNameKey, _kBiometricKitIdentityTypeKey, 
+                       _kBiometricKitIdentityUUIDKey, _kBiometricKitIdentityUpdateCountKey, 
+                       _kBiometricKitIdentityUserIDKey, _kBiometricKitTemplateDetailLargestComponentArea, 
+                       _kBiometricKitTemplateDetailLargestComponentNodes, _kBiometricKitTemplateDetailTotalArea, 
+                       _kBiometricKitTemplateDetailTotalNodes, _kBiometricKitTemplateUpdated, 
+                       _localizeAbsolute, _nanosecondsToAbsolute, _rotateBitmap90Data16, 
+                       _rotateBitmap90Data8, _roundMostSignificant ]
     objc-classes:    [ BKAccessory, BKAccessoryGroup, BKDevice, BKDeviceDescriptor, 
                        BKDeviceManager, BKDevicePearl, BKDeviceTouchID, BKEnrollOperation, 
                        BKEnrollPearlOperation, BKEnrollPearlProgressInfo, BKEnrollPearlResultInfo, 

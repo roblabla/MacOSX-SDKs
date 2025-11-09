@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5747A72A-645A-3C2A-B695-6AFBBBDC5C3A
+    value:           3B7F7849-3DCD-34AF-92EE-C4562426BDE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE79985E-8557-3A85-BD94-0EFCF8E12B07
+    value:           019E3A1E-A2EA-3E39-BC41-BE70B5B2FB1D
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels'
 current-version: 101
 parent-umbrella:

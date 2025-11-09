@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           91F2C21A-A11B-3093-8C82-8B7E634FF04A
+    value:           5BDD8F34-DEE9-3DD4-B0AA-E18A03919145
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           06B524F6-4E8A-303C-AB4E-78CE373AF02A
+    value:           89A6445E-4E08-3A32-95B5-90B38537567B
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ReplayKit.framework/Versions/A/ReplayKit'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
@@ -23,7 +23,7 @@ exports:
                        _RPVideoEditorExtensionFileAttachmentKey, _RPVideoEditorExtensionMoviePathKey, 
                        _RPVideoEditorExtensionOverrideShareMessageKey, _RPVideoEditorExtensionOverrideTintColorKey, 
                        _RPVideoSampleOrientationKey, _ReplayKitVersionNumber, _ReplayKitVersionString, 
-                       ___RPLogLevel ]
+                       _SCStreamErrorDomain, ___RPLogLevel ]
     objc-classes:    [ RPAppAudioCaptureManager, RPAudioMixUtility, RPBroadcastActivityExtensionHostContext, 
                        RPBroadcastActivityHostViewController, RPBroadcastActivityViewController, 
                        RPBroadcastConfiguration, RPBroadcastController, RPBroadcastExtensionHostContext, 

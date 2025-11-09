@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AADA5A3F-4AE9-3BE9-85F7-D8AECD44CAAA
+    value:           2F6CE0A8-F953-3C43-B3AA-5E525CB6C933
   - target:          x86_64-maccatalyst
-    value:           AADA5A3F-4AE9-3BE9-85F7-D8AECD44CAAA
+    value:           2F6CE0A8-F953-3C43-B3AA-5E525CB6C933
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53BE9C7D-0DCB-3371-8090-F9C202B132FB
+    value:           A128E4CF-97A1-312A-8ED6-751FCC87587F
   - target:          arm64e-maccatalyst
-    value:           53BE9C7D-0DCB-3371-8090-F9C202B132FB
+    value:           A128E4CF-97A1-312A-8ED6-751FCC87587F
 install-name:    '/usr/lib/libCTGreenTeaLogger.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

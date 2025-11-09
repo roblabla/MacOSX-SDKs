@@ -9,10 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/* A BrailleMap object represents a connected two-dimensional braille display.
+/* An AXBrailleMap object represents a connected two-dimensional braille display.
    A display is comprised of a grid of pins that can be raised and lowered.
    This is useful for representing graphics, images, and other visual data to VoiceOver users.
-  - Post an accessibility announcement notification with a braille map as an argument to update.-
  */
 AX_EXTERN API_AVAILABLE(ios(15.2), tvos(15.2), watchos(8.2), macos(12.1))
 @interface AXBrailleMap : NSObject <NSCopying, NSSecureCoding>
@@ -38,6 +37,7 @@ AX_EXTERN
 // Implement one of the following methods in order to provide data for a braille map to be rendered.
 @protocol AXBrailleMapRenderer <NSObject>
 
+@optional
 // If the element displays a region that should be rendered into the braille map automatically,
 // specify it here (relative to the bounds of the object). VoiceOver will snapshot that region of the element
 // and convert to a braille map internally.

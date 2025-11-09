@@ -312,7 +312,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCodi
 
 @end
 
-#if __has_include(<UIKit/NSTextAttachment.h>)
+#if __has_include(<UIKit/NSTextAttachment.h>) && UIKIT_HAS_UIFOUNDATION_SYMBOLS
 @interface NSTextAttachment (UIImage)
 
 + (NSTextAttachment *)textAttachmentWithImage:(UIImage *)image API_AVAILABLE(ios(13.0),tvos(13.0));

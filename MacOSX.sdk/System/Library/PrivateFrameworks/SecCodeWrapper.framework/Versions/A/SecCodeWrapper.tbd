@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64978360-2795-3A64-BF0C-FADC0EF8AC4D
+    value:           400403D9-842A-3D61-BDDF-B48D62905FA6
   - target:          x86_64-maccatalyst
-    value:           64978360-2795-3A64-BF0C-FADC0EF8AC4D
+    value:           400403D9-842A-3D61-BDDF-B48D62905FA6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3EC68DE3-A54D-3C53-95F3-8B5C34920258
+    value:           90EC7E3F-D7D1-3458-BBAA-8A5C8AEBBE0D
   - target:          arm64e-maccatalyst
-    value:           3EC68DE3-A54D-3C53-95F3-8B5C34920258
+    value:           90EC7E3F-D7D1-3458-BBAA-8A5C8AEBBE0D
 install-name:    '/System/Library/PrivateFrameworks/SecCodeWrapper.framework/Versions/A/SecCodeWrapper'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

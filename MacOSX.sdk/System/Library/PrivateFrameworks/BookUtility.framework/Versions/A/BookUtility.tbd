@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           915639E2-2A15-361B-AB91-4AADE6671A02
+    value:           D9CCF8F3-4F21-3F20-8664-F037273924B6
   - target:          x86_64-maccatalyst
-    value:           915639E2-2A15-361B-AB91-4AADE6671A02
+    value:           D9CCF8F3-4F21-3F20-8664-F037273924B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5346ECFE-BEC0-3B0D-A43F-6A39AF54AFAD
+    value:           444B6184-B862-3820-A148-B88590FB2F45
   - target:          arm64e-maccatalyst
-    value:           5346ECFE-BEC0-3B0D-A43F-6A39AF54AFAD
+    value:           444B6184-B862-3820-A148-B88590FB2F45
 install-name:    '/System/Library/PrivateFrameworks/BookUtility.framework/Versions/A/BookUtility'
-current-version: 1632
+current-version: 1672
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -36,7 +36,7 @@ exports:
                        _BUProtocolCast, _BURandom, _BURandomBetween, _BUReportAssertionFailureWithMessage, 
                        _BUReverseSquare, _BURound, _BUShouldStopInDebugger, _BUSineMap, 
                        _BUStaticCast, _BUStaticClassAndProtocolCast, _BUStaticProtocolCast, 
-                       _BUStoreIdFromObject, _BUZip64EndOfCentralDirectoryLocatorSignature, 
+                       _BUStoreIdFromObject, _BUStoreIdStringFromObject, _BUZip64EndOfCentralDirectoryLocatorSignature, 
                        _BUZip64EndOfCentralDirectorySignature, _BUZip64EndOfCentralDirectorySizeOfRecordLeadingBytes, 
                        _BUZip64ExtraFieldSignature, _BUZipCentralFileHeaderSignature, 
                        _BUZipDataDescriptorSignature, _BUZipDeflateCompressionMethod, 

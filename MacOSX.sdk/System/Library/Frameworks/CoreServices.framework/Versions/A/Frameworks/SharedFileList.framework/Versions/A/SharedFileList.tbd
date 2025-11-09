@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           974A02E1-C245-3E74-B60A-2881CDCF05E4
+    value:           5970ABAA-BBFC-34B4-911A-78BD149D6F4F
   - target:          x86_64-maccatalyst
-    value:           974A02E1-C245-3E74-B60A-2881CDCF05E4
+    value:           5970ABAA-BBFC-34B4-911A-78BD149D6F4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           58F90D2C-65C4-317F-B795-06D998B2D34C
+    value:           807CB9F0-17E2-31FE-9228-A576CF76A1AD
   - target:          arm64e-maccatalyst
-    value:           58F90D2C-65C4-317F-B795-06D998B2D34C
+    value:           807CB9F0-17E2-31FE-9228-A576CF76A1AD
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
 current-version: 155
 parent-umbrella:

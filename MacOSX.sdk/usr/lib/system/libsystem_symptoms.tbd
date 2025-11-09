@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           26DE61C0-0368-3443-8C22-FBDFE6EE41B3
+    value:           8C17C62F-C82C-3A4C-A832-70EBEED5B0CA
   - target:          x86_64-maccatalyst
-    value:           26DE61C0-0368-3443-8C22-FBDFE6EE41B3
+    value:           8C17C62F-C82C-3A4C-A832-70EBEED5B0CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           843F619F-8A94-378D-B840-CB8D2CABB98E
+    value:           753D2289-1662-3922-8A94-FAC9DED81CD5
   - target:          arm64e-maccatalyst
-    value:           843F619F-8A94-378D-B840-CB8D2CABB98E
+    value:           753D2289-1662-3922-8A94-FAC9DED81CD5
 install-name:    '/usr/lib/system/libsystem_symptoms.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

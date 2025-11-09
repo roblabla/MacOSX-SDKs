@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B65D15E3-BCF5-3D8C-BE9A-2F4DCF56050E
+    value:           31633CA8-8396-3A66-8959-DCBA0BD4F2FD
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           7D4DB3AF-93B7-3B5E-A8CC-9C1CE0F8F054
+    value:           566E8D85-28F1-3BD8-B3AA-0310D78DE05A
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CoreLocationUI.framework/Versions/A/CoreLocationUI'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

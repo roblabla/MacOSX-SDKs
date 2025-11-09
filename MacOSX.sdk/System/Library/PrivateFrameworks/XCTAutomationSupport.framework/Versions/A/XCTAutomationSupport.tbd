@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E5BFA874-7A6D-3AB2-A1D7-82D7C938DD30
+    value:           72ED9D38-8F5A-30F2-A39B-5D649BF44314
   - target:          x86_64-maccatalyst
-    value:           E5BFA874-7A6D-3AB2-A1D7-82D7C938DD30
+    value:           72ED9D38-8F5A-30F2-A39B-5D649BF44314
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0FF71616-722E-3F91-9E2E-23E45A967F41
+    value:           DB23B62F-3FC5-324B-922D-9484DDAE23C8
   - target:          arm64e-maccatalyst
-    value:           0FF71616-722E-3F91-9E2E-23E45A967F41
+    value:           DB23B62F-3FC5-324B-922D-9484DDAE23C8
 install-name:    '/System/Library/PrivateFrameworks/XCTAutomationSupport.framework/Versions/A/XCTAutomationSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -54,19 +54,20 @@ exports:
                        _XCTProtectedResourceCalendarIdentifier, _XCTProtectedResourceCameraIdentifier, 
                        _XCTProtectedResourceContactsIdentifier, _XCTProtectedResourceFocusIdentifier, 
                        _XCTProtectedResourceHealthIdentifier, _XCTProtectedResourceHomeKitIdentifier, 
-                       _XCTProtectedResourceKeyboardNetworkIdentifier, _XCTProtectedResourceLocationIdentifier, 
-                       _XCTProtectedResourceMediaLibraryIdentifier, _XCTProtectedResourceMicrophoneIdentifier, 
-                       _XCTProtectedResourceNetworkVolumesIdentifier, _XCTProtectedResourcePhotosIdentifier, 
-                       _XCTProtectedResourceRemindersIdentifier, _XCTProtectedResourceRemovableVolumesIdentifier, 
-                       _XCTProtectedResourceSystemRootDirectoryIdentifier, _XCTProtectedResourceUserDesktopDirectoryIdentifier, 
-                       _XCTProtectedResourceUserDocumentsDirectoryIdentifier, _XCTProtectedResourceUserDownloadsDirectoryIdentifier, 
-                       _XCTProtectedResourceUserTrackingIdentifier, _XCTRuntimeIssueClasses, 
-                       _XCTRuntimeIssueEncodingClasses, _XCTStringFromAXAction, _XCTStringFromAXError, 
-                       _XCTStringFromAXNotification, _XCTValueOrPrivilegedValuePlaceholderForValue, 
-                       _XCUILargestRect, _XCUIRectToRectTransform, _XCUIRectsOverlap, 
-                       _XCUIStringFromApplicationActivationPolicy, _XCUIStringFromApplicationRunState, 
-                       _XCUIStringFromRect, _XCUIUnoccludedSubrects, _XCUIUnoccludedSubrectsWithMultipleOccluders, 
-                       _XCValueIsAXError, _XC_kAXXCAttributeAbsoluteValue, _XC_kAXXCAttributeActiveKeyboard, 
+                       _XCTProtectedResourceKeyboardNetworkIdentifier, _XCTProtectedResourceLocalNetworkIdentifier, 
+                       _XCTProtectedResourceLocationIdentifier, _XCTProtectedResourceMediaLibraryIdentifier, 
+                       _XCTProtectedResourceMicrophoneIdentifier, _XCTProtectedResourceNetworkVolumesIdentifier, 
+                       _XCTProtectedResourcePhotosIdentifier, _XCTProtectedResourceRemindersIdentifier, 
+                       _XCTProtectedResourceRemovableVolumesIdentifier, _XCTProtectedResourceSystemRootDirectoryIdentifier, 
+                       _XCTProtectedResourceUserDesktopDirectoryIdentifier, _XCTProtectedResourceUserDocumentsDirectoryIdentifier, 
+                       _XCTProtectedResourceUserDownloadsDirectoryIdentifier, _XCTProtectedResourceUserTrackingIdentifier, 
+                       _XCTRuntimeIssueClasses, _XCTRuntimeIssueEncodingClasses, 
+                       _XCTStringFromAXAction, _XCTStringFromAXError, _XCTStringFromAXNotification, 
+                       _XCTValueOrPrivilegedValuePlaceholderForValue, _XCUILargestRect, 
+                       _XCUIRectToRectTransform, _XCUIRectsOverlap, _XCUIStringFromApplicationActivationPolicy, 
+                       _XCUIStringFromApplicationRunState, _XCUIStringFromRect, _XCUIUnoccludedSubrects, 
+                       _XCUIUnoccludedSubrectsWithMultipleOccluders, _XCValueIsAXError, 
+                       _XC_kAXXCAttributeAbsoluteValue, _XC_kAXXCAttributeActiveKeyboard, 
                        _XC_kAXXCAttributeApplication, _XC_kAXXCAttributeApplicationOrientation, 
                        _XC_kAXXCAttributeAutomationType, _XC_kAXXCAttributeAvailableKeyplanes, 
                        _XC_kAXXCAttributeBannerIsStickyAttribute, _XC_kAXXCAttributeCallState, 
@@ -125,6 +126,7 @@ exports:
                        XCTImageEncoding, XCTImageMetadata, XCTLogArchiveRequest, 
                        XCTMainRunLoopIdleNotifier, XCTMatchingElementIterator, XCTRuntimeIssueContext, 
                        XCTScreenshotRequest, XCTSerializedTransportWrapper2, XCTSignpostEvent, 
-                       XCTSignpostInterval, XCTSpindumpRequestSpecification, XCTTimeoutControls, 
-                       XCUIElementSnapshotRequestResult, XCUIPoint, XCUIRect ]
+                       XCTSignpostInterval, XCTSpindumpRequestSpecification, XCTTailspinRequest, 
+                       XCTTimeoutControls, XCUIElementSnapshotRequestResult, XCUIPoint, 
+                       XCUIRect ]
 ...

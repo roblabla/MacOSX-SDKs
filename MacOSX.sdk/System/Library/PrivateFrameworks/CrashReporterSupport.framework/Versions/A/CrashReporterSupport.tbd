@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8DE20A11-3475-3E1B-AFD8-F935D9865764
+    value:           8800EB91-E523-3DF1-A9B2-89C9C1AB71C2
   - target:          x86_64-maccatalyst
-    value:           8DE20A11-3475-3E1B-AFD8-F935D9865764
+    value:           8800EB91-E523-3DF1-A9B2-89C9C1AB71C2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5F25BC2-0FA7-3302-8C20-2D8B17865D61
+    value:           BA4133C1-BC80-3FF5-BCFE-BE72388C29C4
   - target:          arm64e-maccatalyst
-    value:           C5F25BC2-0FA7-3302-8C20-2D8B17865D61
+    value:           BA4133C1-BC80-3FF5-BCFE-BE72388C29C4
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15088
+current-version: 15094
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -73,14 +73,13 @@ exports:
                        __CRWriteCrashHistoryForProcess, __CRWritePropertyListWithPathAndMode, 
                        __CreateASLQueryWithDomainList, ___crashreporter_binary_image_hints__, 
                        __canModifyPreferences, __createAutoSubmitSettingObject, __migrateLegacyAutoSubmitEnabledSetting, 
-                       __setPreference, __updateHasBeenAppleInternalCookiePath, _cr_stashUpdate, 
-                       _dlaggd_addScalarForKey, _dlaggd_pushDistrubtionForKey, _dlca_sendEvent, 
-                       _kCRBinaryInfoDisplayNameKey, _kCRBinaryInfoDwarfUUIDKey, 
-                       _kCRBinaryInfoDylibCompatibilityVersionKey, _kCRBinaryInfoDylibCurrentVersionKey, 
-                       _kCRBinaryInfoExecutablePathKey, _kCRBinaryInfoIdentifierKey, 
-                       _kCRBinaryInfoIndexKey, _kCRBinaryInfoIsAppleCodeKey, _kCRBinaryInfoShortVersionStringKey, 
-                       _kCRBinaryInfoSourceVersionKey, _kCRBinaryInfoVersionKey, 
-                       _kCRCrashHistoryDateKey, _kCRCrashHistoryForceQuitDateKey, 
+                       __setPreference, _cr_stashUpdate, _dlaggd_addScalarForKey, 
+                       _dlaggd_pushDistrubtionForKey, _dlca_sendEvent, _kCRBinaryInfoDisplayNameKey, 
+                       _kCRBinaryInfoDwarfUUIDKey, _kCRBinaryInfoDylibCompatibilityVersionKey, 
+                       _kCRBinaryInfoDylibCurrentVersionKey, _kCRBinaryInfoExecutablePathKey, 
+                       _kCRBinaryInfoIdentifierKey, _kCRBinaryInfoIndexKey, _kCRBinaryInfoIsAppleCodeKey, 
+                       _kCRBinaryInfoShortVersionStringKey, _kCRBinaryInfoSourceVersionKey, 
+                       _kCRBinaryInfoVersionKey, _kCRCrashHistoryDateKey, _kCRCrashHistoryForceQuitDateKey, 
                        _kCRCrashHistoryLastAutoSubmissionDate, _kCRCrashHistoryPathKey, 
                        _kCRCrashHistorySuspectThirdPartyBinaryInfoKey, _kCRDiagnosticMessagesDirectory, 
                        _kCRProblemReportAppAdamIDKey, _kCRProblemReportAppBuildVersionKey, 
@@ -133,23 +132,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
+    value:           DBD68739-D373-3501-A7B3-B66A50B73B81
   - target:          x86_64-maccatalyst
-    value:           A1FFC2BF-E8FC-3EDF-9B8D-47D7F23AEC4A
+    value:           DBD68739-D373-3501-A7B3-B66A50B73B81
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19F84EC7-6918-3A3E-865C-836650829DB3
+    value:           F87F7C23-9C38-3FAE-BEC7-D14733532B5C
   - target:          arm64e-maccatalyst
-    value:           19F84EC7-6918-3A3E-865C-836650829DB3
+    value:           F87F7C23-9C38-3FAE-BEC7-D14733532B5C
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _OSADateFormat, _OSAIsDebugEnabledForRSD, _OSAIsRSDDevice, 
-                       _OSAIsRSDHost, _OSANSDateFormat, _OSASafeMoveItemAtURL, _OSASafeOpen, 
+                       _OSAIsRSDDisplay, _OSAIsRSDHost, _OSANSDateFormat, _OSARTCIsProcessOfInterest, 
+                       _OSASafeCreateDirectory, _OSASafeMoveItemAtURL, _OSASafeOpen, 
                        _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, _OSASafeRemoveFileAtURL, 
                        _OSASanitizeOptionHomeDirectory, _OSASanitizeOptionKeepFilename, 
                        _OSASanitizeOptionMountedVolume, _OSASanitizeOptionNetworkVolume, 
@@ -186,8 +186,9 @@ exports:
     objc-classes:    [ AWDClientHelpers, OSABinaryImageCatalog, OSABinaryImageSegment, 
                        OSABridgeLinkProxy, OSACrackShotReport, OSAGPUEventReport, 
                        OSAJetsamReport, OSALegacyXform, OSALog, OSALogCounterObject, 
-                       OSAProxyConfiguration, OSAReport, OSAStackShotReport, OSASymbolInfo, 
-                       OSASystemConfiguration, OSATasking ]
+                       OSAProxyConfiguration, OSAReport, OSASafeCreateDirectoryOptions, 
+                       OSAStackShotReport, OSASymbolInfo, OSASystemConfiguration, 
+                       OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 
                        OSABinaryImageCatalog._kernel_segments, OSABinaryImageCatalog._kernel_text_exec_segments, 
                        OSABinaryImageCatalog._notes, OSABinaryImageCatalog._rootedCacheLibs, 

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           47A66707-68B8-3769-AEFD-57C53AD3F8A7
+    value:           C906A86B-9BFC-32C9-A6FD-4AEC5D78D501
   - target:          x86_64-maccatalyst
-    value:           47A66707-68B8-3769-AEFD-57C53AD3F8A7
+    value:           C906A86B-9BFC-32C9-A6FD-4AEC5D78D501
   - target:          x86_64h-macos
-    value:           01B48EF5-4ED3-3615-A7CC-19B7B92F6619
+    value:           FD28E92F-D05A-33E8-964F-5A317C92C33A
   - target:          x86_64h-maccatalyst
-    value:           01B48EF5-4ED3-3615-A7CC-19B7B92F6619
+    value:           FD28E92F-D05A-33E8-964F-5A317C92C33A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           254CB973-15D6-3068-9AC4-96A63BC39FF9
+    value:           0598A995-9BC7-3F22-868C-50C5A1CF9C7A
   - target:          arm64e-maccatalyst
-    value:           254CB973-15D6-3068-9AC4-96A63BC39FF9
+    value:           0598A995-9BC7-3F22-868C-50C5A1CF9C7A
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1557.3.2
+current-version: 1557.5.4
 compatibility-version: 64
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 

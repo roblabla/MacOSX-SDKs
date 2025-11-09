@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E95EC69A-8316-3B0E-BDE3-E700093CA5EF
+    value:           B02565DB-4D4C-3696-BCFC-A72734005AE6
   - target:          x86_64-maccatalyst
-    value:           E95EC69A-8316-3B0E-BDE3-E700093CA5EF
+    value:           B02565DB-4D4C-3696-BCFC-A72734005AE6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71DF8B55-D3D5-3204-BD97-61B70DC2E8F1
+    value:           B7CBACD6-EC30-39C5-BAE9-4E5D3E842FCD
   - target:          arm64e-maccatalyst
-    value:           71DF8B55-D3D5-3204-BD97-61B70DC2E8F1
+    value:           B7CBACD6-EC30-39C5-BAE9-4E5D3E842FCD
 install-name:    '/System/Library/Frameworks/NaturalLanguage.framework/Versions/A/NaturalLanguage'
-current-version: 100
+current-version: 100.1
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

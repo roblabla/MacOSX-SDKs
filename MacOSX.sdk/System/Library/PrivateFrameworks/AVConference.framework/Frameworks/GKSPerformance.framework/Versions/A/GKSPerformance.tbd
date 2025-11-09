@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A072431E-DD9C-3A53-9444-AA562A02C991
+    value:           759AB411-39BD-3CB9-92BF-5E5DF392953B
   - target:          x86_64-maccatalyst
-    value:           A072431E-DD9C-3A53-9444-AA562A02C991
+    value:           759AB411-39BD-3CB9-92BF-5E5DF392953B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           01ADAD90-8AE8-3CA0-8471-708A6EDB55C2
+    value:           FA9CBEA0-BE3B-3FB4-9F54-A36C161A71F3
   - target:          arm64e-maccatalyst
-    value:           01ADAD90-8AE8-3CA0-8471-708A6EDB55C2
+    value:           FA9CBEA0-BE3B-3FB4-9F54-A36C161A71F3
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/GKSPerformance.framework/Versions/A/GKSPerformance'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

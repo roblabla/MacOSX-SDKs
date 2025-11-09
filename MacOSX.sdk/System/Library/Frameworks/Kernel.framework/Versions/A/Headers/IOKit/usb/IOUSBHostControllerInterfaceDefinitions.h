@@ -372,11 +372,18 @@ typedef enum
 
 /*!
  * @brief       IOUSBHostCIMessageTypeControllerFrameNumber command handling expectations
- * @discussion  An IOUSBHostCIMessageTypeControllerFrameNumber command is valid for an IOUSBHostCIControllerStateMachine in the IOUSBHostCIControllerStateActive state.
+ * @discussion  An IOUSBHostCIMessageTypeControllerFrameNumber command is valid for an IOUSBHostCIControllerStateMachine in the IOUSBHostCIControllerStateActive state.  It is sent periodically
+ *              during the lifetime of any isochronous endpoints.
  *              When received, the client should perform the following actions:
  *              1. Utilize the IOUSBHostCIControllerStateMachine inspectCommand interface to determine if the command should be handled
- *              2. If successful, utilize the IOUSBHostCIControllerStateMachine enqueueUpdatedFrame interface to post frame update messages to the kernel driver
- *              3. Utilize the IOUSBHostCIControllerStateMachine respondToCommand interface to submit a command response to the kernel driver
+ *              2. If successful, determine the controller's current frame number and the timestamp associated with the beginning of that frame number
+ *              3. Utilize the IOUSBHostCIControllerStateMachine respondToCommand:status:frame:timestamp:error interface to submit the frame, timestamp, and a command response to the kernel driver
+ *
+ *              Refer to IOUSBHostCIControllerStateMachine enqueueUpdatedFrame:timestamp:error for documentation on content and precision requirements for frame and timestamp values.
+ *              
+ *              An IOUSBHostControllerInterface client can proactively send frame and timestamp updates to the kernel without receiving an IOUSBHostCIMessageTypeControllerFrameNumber command.
+ *              The IOUSBHostCIControllerStateMachine enqueueUpdatedFrame:timestamp:error interface can be used to generate these messages and send them to the kernel.  Frame updates received
+ *              at one-second intervals while the controller is in the IOUSBHostCIControllerStateActive state are frequent enough to preempt most IOUSBHostCIMessageTypeControllerFrameNumber commands.
  */
 
 #pragma mark port states and IOUSBHostCIMessages
@@ -449,7 +456,7 @@ enum
  *              When received, the client should perform the following actions:
  *              1. Utilize the IOUSBHostControllerInterface getPortStateMachineForCommand interface to locate an IOUSBHostCIPortStateMachine instance for the command
  *              2. Utilize the IOUSBHostCIPortStateMachine inspectCommand interface to determine if the command should be processed
- *              3. If successful, power on the specified port hardware and enable it to accept connections
+ *              3. If successful, power on the specified port hardware, enable it to accept connections, and set the IOUSBHostCIPortStateMachine's powered property to YES.
  *              4. Utilize the IOUSBHostCIPortStateMachine respondToCommand interface to submit a command response to the kernel driver
  */
 
@@ -460,7 +467,7 @@ enum
  *              1. Utilize the IOUSBHostControllerInterface getPortStateMachineForCommand interface to locate an IOUSBHostCIPortStateMachine instance for the command
  *              2. Utilize the IOUSBHostCIPortStateMachine inspectCommand interface to determine if the command should be processed
  *              3. If successful, confirm that all downstream IOUSBHostCIDeviceStateMachine instances are in the IOUSBHostCIDeviceStateDestroyed state
- *              4. If device state machine requirements are satisfied, power off the specified port hardware and disable connection detection for that port
+ *              4. If device state machine requirements are satisfied, power off the specified port hardware, disable connection detection for that port, and set the IOUSBHostCIPortStateMachine's powered property to NO.
  *              5. Utilize the IOUSBHostCIPortStateMachine respondToCommand interface to submit a command response to the kernel driver
  */
 

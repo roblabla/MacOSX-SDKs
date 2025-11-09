@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4A919E69-88DC-3059-9D05-8E1A698BD1D3
+    value:           109D69CC-9508-3C66-ACFA-CC815315BED4
   - target:          x86_64-maccatalyst
-    value:           4A919E69-88DC-3059-9D05-8E1A698BD1D3
+    value:           109D69CC-9508-3C66-ACFA-CC815315BED4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C57B71C3-B4CA-3D13-86CA-7DCFC3F2B37B
+    value:           87259E6B-8A10-3502-A225-3413F52A9431
   - target:          arm64e-maccatalyst
-    value:           C57B71C3-B4CA-3D13-86CA-7DCFC3F2B37B
+    value:           87259E6B-8A10-3502-A225-3413F52A9431
 install-name:    '/System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -115,9 +115,9 @@ exports:
                        TSClockPulser, TSFrequencyAnalysis, TSGPSTime, TSIntervalFilter, 
                        TSIntervalTimeLineFilter, TSKernelClock, TSMADEVValue, TSMTIEMask, 
                        TSMTIEMaskElement, TSMTIEMaskError, TSMTIEValue, TSMaximumTimeIntervalErrorAnalysis, 
-                       TSModifiedAllanDeviationAnalysis, TSPortInterface, TSRMSTIEValue, 
-                       TSRootMeanSquaredTimeIntervalErrorAnalysis, TSTAIUTCValue, 
-                       TSTDEVValue, TSTime, TSTimeConverter, TSTimeDeviationAnalysis, 
+                       TSModifiedAllanDeviationAnalysis, TSPortInterface, TSPythonRunner, 
+                       TSRMSTIEValue, TSRootMeanSquaredTimeIntervalErrorAnalysis, 
+                       TSTAIUTCValue, TSTDEVValue, TSTime, TSTimeConverter, TSTimeDeviationAnalysis, 
                        TSTimeErrorAnalysis, TSTimeErrorSequence, TSTimeErrorValue, 
                        TSTimeLineFilter, TSTimeSyncClock, TSUserFilteredClock, TSgPTPClock, 
                        TSgPTPEthernetPort, TSgPTPFDEtEPort, TSgPTPFDPtPPort, TSgPTPLocalClockPort, 

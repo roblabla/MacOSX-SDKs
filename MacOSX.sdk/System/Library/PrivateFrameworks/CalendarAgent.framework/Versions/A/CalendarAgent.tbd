@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           79EFC397-A3E2-3278-86D3-18D3E7D0EEFC
+    value:           571EF64E-DFE3-38A9-8652-8C1DAEA0815F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5042D4A-6DD2-350A-8E18-F65A0ACE3BAC
+    value:           648BA957-2441-3E91-9FC1-E0E4564FE905
 install-name:    '/System/Library/PrivateFrameworks/CalendarAgent.framework/Versions/A/CalendarAgent'
-current-version: 961
+current-version: 961.4.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CalAgentErrorDomain, _CalAgentErrorGenerateStringVersion, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8C744149-1804-3761-B331-585487EFB907
+    value:           23446AFF-5752-3C62-9FD7-D6B2CC68996A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B7E4341-B1E6-331C-B11B-F6CC27EEE957
+    value:           3A48A5F4-65A5-33A1-8CE5-193C4CB82C84
 install-name:    '/System/Library/PrivateFrameworks/WiFiAnalytics.framework/Versions/A/WiFiAnalytics'
 swift-abi-version: 7
 exports:
@@ -167,19 +167,19 @@ exports:
                        _kWAMessageMetricName11axLinkChange, _kWAMessageMetricNameAJPowerMetric, 
                        _kWAMessageMetricNameActionFrameEvent, _kWAMessageMetricNameAssociationFailure, 
                        _kWAMessageMetricNameBeaconCache, _kWAMessageMetricNameCarPlayConnectMetrics, 
-                       _kWAMessageMetricNameCarPlayLinkQualityMetrics, _kWAMessageMetricNameCatsScanMetrics, 
-                       _kWAMessageMetricNameClientAssociation, _kWAMessageMetricNameCompanionAssistedAJ, 
-                       _kWAMessageMetricNameHistoricalKnownNetworkQuality, _kWAMessageMetricNameHotspotTransportUsed, 
-                       _kWAMessageMetricNameIpv4Latency, _kWAMessageMetricNameKnownNetworkEvent, 
-                       _kWAMessageMetricNameLPMReport, _kWAMessageMetricNameLastSSIDInfo, 
-                       _kWAMessageMetricNameLinkChange, _kWAMessageMetricNameLinkQualityStats, 
-                       _kWAMessageMetricNameNetworkGeotag, _kWAMessageMetricNameOtaSystemInfo, 
-                       _kWAMessageMetricNameParsedBeaconInfo, _kWAMessageMetricNamePowerState, 
-                       _kWAMessageMetricNamePrivateMacStats, _kWAMessageMetricNameRoamStatus, 
-                       _kWAMessageMetricNameSidekickMetrics, _kWAMessageMetricNameSoftAP, 
-                       _kWAMessageMetricNameSoftAPClient, _kWAMessageMetricNameTxInhibit, 
-                       _kWAMessageMetricNameWatchdogEvent, _kWAMessageOptions, _kWAMessageValue, 
-                       _roamCacheInfo, _roamInfo ]
+                       _kWAMessageMetricNameCarPlayLinkDownSuppressionMetrics, _kWAMessageMetricNameCarPlayLinkQualityMetrics, 
+                       _kWAMessageMetricNameCatsScanMetrics, _kWAMessageMetricNameClientAssociation, 
+                       _kWAMessageMetricNameCompanionAssistedAJ, _kWAMessageMetricNameHistoricalKnownNetworkQuality, 
+                       _kWAMessageMetricNameHotspotTransportUsed, _kWAMessageMetricNameIpv4Latency, 
+                       _kWAMessageMetricNameKnownNetworkEvent, _kWAMessageMetricNameLPMReport, 
+                       _kWAMessageMetricNameLastSSIDInfo, _kWAMessageMetricNameLinkChange, 
+                       _kWAMessageMetricNameLinkQualityStats, _kWAMessageMetricNameNetworkGeotag, 
+                       _kWAMessageMetricNameOtaSystemInfo, _kWAMessageMetricNameParsedBeaconInfo, 
+                       _kWAMessageMetricNamePowerState, _kWAMessageMetricNamePrivateMacStats, 
+                       _kWAMessageMetricNameRoamStatus, _kWAMessageMetricNameSidekickMetrics, 
+                       _kWAMessageMetricNameSoftAP, _kWAMessageMetricNameSoftAPClient, 
+                       _kWAMessageMetricNameTxInhibit, _kWAMessageMetricNameWatchdogEvent, 
+                       _kWAMessageOptions, _kWAMessageValue, _roamCacheInfo, _roamInfo ]
     objc-classes:    [ AnalyticsPersistenceManager, AnalyticsProcessor, AnalyticsReader, 
                        AnalyticsStoreDescriptor, AnalyticsStoreFileWriter, AnalyticsStoreMOContext, 
                        AnalyticsStoreMOHandler, AnalyticsStoreProxy, AnalyticsStoreRemoteServerHandlingPolicy, 

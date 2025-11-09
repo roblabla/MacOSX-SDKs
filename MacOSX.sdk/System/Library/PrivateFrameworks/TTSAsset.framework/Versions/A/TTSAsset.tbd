@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           745A2E9C-E3F8-3B56-892C-67B85A38B279
+    value:           BE3F2D0F-3DD5-3361-A39C-F2BAE607857E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F33EBE0C-C554-3E55-AED8-7E2DAAC13B67
+    value:           48EE5969-6B70-3E7A-8784-66431295E197
 install-name:    '/System/Library/PrivateFrameworks/TTSAsset.framework/Versions/A/TTSAsset'
-current-version: 3102.6.1
+current-version: 3104.33.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -33,14 +33,15 @@ exports:
                        '_$s8TTSAsset0A10TrialAssetC13isDownloadingSbvpfi', '_$s8TTSAsset0A10TrialAssetC13versionNumberSivg', 
                        '_$s8TTSAsset0A10TrialAssetC16locallyAvailableSbvg', '_$s8TTSAsset0A10TrialAssetC17cancelDownloading4thenyySoAACSgc_tF', 
                        '_$s8TTSAsset0A10TrialAssetC18supportedLanguagesSaySSGvg', 
-                       '_$s8TTSAsset0A10TrialAssetC18versionDescriptionSSvg', '_$s8TTSAsset0A10TrialAssetC5assetSo8NSBundleCSgvpfi', 
+                       '_$s8TTSAsset0A10TrialAssetC18versionDescriptionSSvg', '_$s8TTSAsset0A10TrialAssetC4pathSSSgvpfi', 
                        '_$s8TTSAsset0A10TrialAssetC5purgeyyF', '_$s8TTSAsset0A10TrialAssetC6bundleSo8NSBundleCSgvg', 
                        '_$s8TTSAsset0A10TrialAssetC8diskSizeSo8NSNumberCSgvg', '_$s8TTSAsset0A10TrialAssetC8download11reservation10useBattery8progress4thenySSSg_SbySd_S2itcySoAACSgctF', 
-                       '_$s8TTSAsset0A10TrialAssetC9purgeableSbvg', '_$s8TTSAsset0A10TrialAssetCACycfC', 
-                       '_$s8TTSAsset0A10TrialAssetCACycfc', '_$s8TTSAsset0A10TrialAssetCMa', 
-                       '_$s8TTSAsset0A10TrialAssetCMn', '_$s8TTSAsset0A10TrialAssetCN', 
-                       '_$s8TTSAsset0A10TrialAssetCfD', '_$s8TTSAsset0A11LegacyAssetC10attributesSDySSypGvg', 
-                       '_$s8TTSAsset0A11LegacyAssetC10identifierSSvg', '_$s8TTSAsset0A11LegacyAssetC10technologySo0A10TechnologyCvg', 
+                       '_$s8TTSAsset0A10TrialAssetC9assetAttrSDySSypGvpfi', '_$s8TTSAsset0A10TrialAssetC9purgeableSbvg', 
+                       '_$s8TTSAsset0A10TrialAssetCACycfC', '_$s8TTSAsset0A10TrialAssetCACycfc', 
+                       '_$s8TTSAsset0A10TrialAssetCMa', '_$s8TTSAsset0A10TrialAssetCMn', 
+                       '_$s8TTSAsset0A10TrialAssetCN', '_$s8TTSAsset0A10TrialAssetCfD', 
+                       '_$s8TTSAsset0A11LegacyAssetC10attributesSDySSypGvg', '_$s8TTSAsset0A11LegacyAssetC10identifierSSvg', 
+                       '_$s8TTSAsset0A11LegacyAssetC10technologySo0A10TechnologyCvg', 
                        '_$s8TTSAsset0A11LegacyAssetC11assetSourceSo0aE0Cvg', '_$s8TTSAsset0A11LegacyAssetC13versionNumberSivg', 
                        '_$s8TTSAsset0A11LegacyAssetC18supportedLanguagesSaySSGvg', 
                        '_$s8TTSAsset0A11LegacyAssetC18versionDescriptionSSvg', '_$s8TTSAsset0A11LegacyAssetC27$__lazy_storage_$_voiceDesc33_22992D1BA48AC32844E07291469CAB98LLSDySoAACAAE14VoiceAttributeOypGSgvpfi', 
@@ -84,22 +85,23 @@ exports:
                        '_$sSo14TTSAssetSourceC0A0E11macosLegacyABvau', '_$sSo14TTSAssetSourceC0A0E11macosLegacyABvgZ', 
                        '_$sSo14TTSAssetSourceC0A0E11macosLegacyABvpZ', '_$sSo14TTSAssetSourceC0A0E11mobileAssetABvau', 
                        '_$sSo14TTSAssetSourceC0A0E11mobileAssetABvgZ', '_$sSo14TTSAssetSourceC0A0E11mobileAssetABvpZ', 
-                       '_$sSo14TTSAssetSourceC0A0E9turiTrialABvau', '_$sSo14TTSAssetSourceC0A0E9turiTrialABvgZ', 
-                       '_$sSo14TTSAssetSourceC0A0E9turiTrialABvpZ', '_$sSo15TTSAssetQualityC0A0E11premiumhighABvau', 
-                       '_$sSo15TTSAssetQualityC0A0E11premiumhighABvgZ', '_$sSo15TTSAssetQualityC0A0E11premiumhighABvpZ', 
-                       '_$sSo15TTSAssetQualityC0A0E4betaABvau', '_$sSo15TTSAssetQualityC0A0E4betaABvgZ', 
-                       '_$sSo15TTSAssetQualityC0A0E4betaABvpZ', '_$sSo15TTSAssetQualityC0A0E7compactABvau', 
-                       '_$sSo15TTSAssetQualityC0A0E7compactABvgZ', '_$sSo15TTSAssetQualityC0A0E7compactABvpZ', 
-                       '_$sSo15TTSAssetQualityC0A0E7premiumABvau', '_$sSo15TTSAssetQualityC0A0E7premiumABvgZ', 
-                       '_$sSo15TTSAssetQualityC0A0E7premiumABvpZ', '_$sSo18TTSAssetTechnologyC0A0E6customABvau', 
-                       '_$sSo18TTSAssetTechnologyC0A0E6customABvgZ', '_$sSo18TTSAssetTechnologyC0A0E6customABvpZ', 
-                       '_$sSo18TTSAssetTechnologyC0A0E6neuralABvau', '_$sSo18TTSAssetTechnologyC0A0E6neuralABvgZ', 
-                       '_$sSo18TTSAssetTechnologyC0A0E6neuralABvpZ', '_$sSo18TTSAssetTechnologyC0A0E7gryphonABvau', 
-                       '_$sSo18TTSAssetTechnologyC0A0E7gryphonABvgZ', '_$sSo18TTSAssetTechnologyC0A0E7gryphonABvpZ', 
-                       '_$sSo18TTSAssetTechnologyC0A0E9macintalkABvau', '_$sSo18TTSAssetTechnologyC0A0E9macintalkABvgZ', 
-                       '_$sSo18TTSAssetTechnologyC0A0E9macintalkABvpZ', '_$sSo18TTSAssetTechnologyC0A0E9vocalizerABvau', 
-                       '_$sSo18TTSAssetTechnologyC0A0E9vocalizerABvgZ', '_$sSo18TTSAssetTechnologyC0A0E9vocalizerABvpZ', 
-                       '_$sSo8TTSAssetCAAE10listAssets7ofTypes8matchingSayABGSaySo0A4TypeCG_SDySiyXlGtFZ', 
+                       '_$sSo14TTSAssetSourceC0A0E5adhocABvau', '_$sSo14TTSAssetSourceC0A0E5adhocABvgZ', 
+                       '_$sSo14TTSAssetSourceC0A0E5adhocABvpZ', '_$sSo14TTSAssetSourceC0A0E9turiTrialABvau', 
+                       '_$sSo14TTSAssetSourceC0A0E9turiTrialABvgZ', '_$sSo14TTSAssetSourceC0A0E9turiTrialABvpZ', 
+                       '_$sSo15TTSAssetQualityC0A0E11premiumhighABvau', '_$sSo15TTSAssetQualityC0A0E11premiumhighABvgZ', 
+                       '_$sSo15TTSAssetQualityC0A0E11premiumhighABvpZ', '_$sSo15TTSAssetQualityC0A0E4betaABvau', 
+                       '_$sSo15TTSAssetQualityC0A0E4betaABvgZ', '_$sSo15TTSAssetQualityC0A0E4betaABvpZ', 
+                       '_$sSo15TTSAssetQualityC0A0E7compactABvau', '_$sSo15TTSAssetQualityC0A0E7compactABvgZ', 
+                       '_$sSo15TTSAssetQualityC0A0E7compactABvpZ', '_$sSo15TTSAssetQualityC0A0E7premiumABvau', 
+                       '_$sSo15TTSAssetQualityC0A0E7premiumABvgZ', '_$sSo15TTSAssetQualityC0A0E7premiumABvpZ', 
+                       '_$sSo18TTSAssetTechnologyC0A0E6customABvau', '_$sSo18TTSAssetTechnologyC0A0E6customABvgZ', 
+                       '_$sSo18TTSAssetTechnologyC0A0E6customABvpZ', '_$sSo18TTSAssetTechnologyC0A0E6neuralABvau', 
+                       '_$sSo18TTSAssetTechnologyC0A0E6neuralABvgZ', '_$sSo18TTSAssetTechnologyC0A0E6neuralABvpZ', 
+                       '_$sSo18TTSAssetTechnologyC0A0E7gryphonABvau', '_$sSo18TTSAssetTechnologyC0A0E7gryphonABvgZ', 
+                       '_$sSo18TTSAssetTechnologyC0A0E7gryphonABvpZ', '_$sSo18TTSAssetTechnologyC0A0E9macintalkABvau', 
+                       '_$sSo18TTSAssetTechnologyC0A0E9macintalkABvgZ', '_$sSo18TTSAssetTechnologyC0A0E9macintalkABvpZ', 
+                       '_$sSo18TTSAssetTechnologyC0A0E9vocalizerABvau', '_$sSo18TTSAssetTechnologyC0A0E9vocalizerABvgZ', 
+                       '_$sSo18TTSAssetTechnologyC0A0E9vocalizerABvpZ', '_$sSo8TTSAssetCAAE10listAssets7ofTypes8matchingSayABGSaySo0A4TypeCG_SDySiyXlGtFZ', 
                        '_$sSo8TTSAssetCAAE10listAssets7ofTypes8matchingSayABGSaySo0A4TypeCG_SDySo0A8PropertyVypGtFZ', 
                        '_$sSo8TTSAssetCAAE11descriptionSSvg', '_$sSo8TTSAssetCAAE11downloadingSbvg', 
                        '_$sSo8TTSAssetCAAE11downloadingSbvpMV', '_$sSo8TTSAssetCAAE11handleProxy5event5reply10connectionSbSo13OS_xpc_object_p_SoAG_pSoAG_ptFZ', 

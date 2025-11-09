@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A0B601E7-DA94-3F50-AF4D-DD428DD62DB3
+    value:           E136B7A2-751A-3F1C-9825-412E647DE6D5
   - target:          x86_64-maccatalyst
-    value:           A0B601E7-DA94-3F50-AF4D-DD428DD62DB3
+    value:           E136B7A2-751A-3F1C-9825-412E647DE6D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF090A27-92FB-3487-A64E-7019051C4877
+    value:           BA52C382-BFCC-3DC8-AE94-380ED0B4D966
   - target:          arm64e-maccatalyst
-    value:           CF090A27-92FB-3487-A64E-7019051C4877
+    value:           BA52C382-BFCC-3DC8-AE94-380ED0B4D966
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 421.0.100
+current-version: 441.0.120
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN2pf17ArchiveLineParserE, __ZTIN5boost12interprocess14lock_exceptionE, 
@@ -208,19 +208,20 @@ exports:
                        __ZTVN2pf23SceneTaxonomyLineParserE, __ZTVN2pf25TimezoneArchiveLineParserE, 
                        ___PFVideoAVCFObjectBuilderClassInitialize, _b, _cleanJSON, 
                        _copiedStringValueForKeyInDictionary, _createURLForAbsolutePathKeyInDictionary, 
-                       _defaultDateFormat, _kCGImageHorizontalAccuracyNotSet, _kPFAssetPropertyAudioTrackFormat, 
-                       _kPFAssetPropertyAudioTrackFormatFlags, _kPFAssetPropertyAudioTrackSampleRate, 
-                       _kPFAssetPropertyCommonMetadata, _kPFAssetPropertyDuration, 
-                       _kPFAssetPropertyEstimatedDataRate, _kPFAssetPropertyFormatDescriptions, 
-                       _kPFAssetPropertyMediaType, _kPFAssetPropertyNaturalSize, 
-                       _kPFAssetPropertyNominalFrameRate, _kPFAssetPropertyTracks, 
-                       _kPFAssetPropertyVideoTrackFormatName, _kPFFilePropertyOriginalFilename, 
-                       _kPFFilePropertyUniformTypeIdentifier, _kPFImagePropertyBurstUuid, 
-                       _kPFImagePropertyCaptureMode, _kPFImagePropertyCustomPhotoProcessingFlags, 
-                       _kPFImagePropertyExifCameraSerialNumber, _kPFImagePropertyExifFocusDistance, 
-                       _kPFImagePropertyExifFocusMode, _kPFImagePropertyExifLensMaximumMM, 
-                       _kPFImagePropertyExifLensMinimumMM, _kPFImagePropertyFrontFacingCamera, 
-                       _kPFImagePropertyGPSDateTime, _kPFImagePropertyHDRGain, _kPFImagePropertyHasHDRGainMap, 
+                       _defaultDateFormat, _kCGImageHorizontalAccuracyNotSet, _kPFAssetImageCapturePropertyDuration, 
+                       _kPFAssetPropertyAudioTrackFormat, _kPFAssetPropertyAudioTrackFormatFlags, 
+                       _kPFAssetPropertyAudioTrackSampleRate, _kPFAssetPropertyCommonMetadata, 
+                       _kPFAssetPropertyDuration, _kPFAssetPropertyEstimatedDataRate, 
+                       _kPFAssetPropertyFormatDescriptions, _kPFAssetPropertyMediaType, 
+                       _kPFAssetPropertyNaturalSize, _kPFAssetPropertyNominalFrameRate, 
+                       _kPFAssetPropertyTracks, _kPFAssetPropertyVideoTrackFormatName, 
+                       _kPFFilePropertyOriginalFilename, _kPFFilePropertyUniformTypeIdentifier, 
+                       _kPFImagePropertyBurstUuid, _kPFImagePropertyCaptureMode, 
+                       _kPFImagePropertyCustomPhotoProcessingFlags, _kPFImagePropertyExifCameraSerialNumber, 
+                       _kPFImagePropertyExifFocusDistance, _kPFImagePropertyExifFocusMode, 
+                       _kPFImagePropertyExifLensMaximumMM, _kPFImagePropertyExifLensMinimumMM, 
+                       _kPFImagePropertyFrontFacingCamera, _kPFImagePropertyGPSDateTime, 
+                       _kPFImagePropertyHDRGain, _kPFImagePropertyHasHDRGainMap, 
                        _kPFImagePropertyIsPhotoBooth, _kPFImagePropertyMakerAppleLivePhotoMinimumClientVersion, 
                        _kPFImagePropertySemanticStylePreset, _kPFImagePropertySemanticStyleRenderingVersion, 
                        _kPFImagePropertySemanticStyleSceneBias, _kPFImagePropertySemanticStyleWarmthBias, 

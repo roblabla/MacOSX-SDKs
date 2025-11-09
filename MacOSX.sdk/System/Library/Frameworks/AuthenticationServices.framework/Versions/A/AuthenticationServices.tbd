@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FCA69DB4-AEAF-3199-91FF-3C04A357B639
+    value:           1874EACD-FC9D-318A-BF8B-8C80FB6C4F78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           82E0C4F2-E7AE-31C2-B624-CD2B12F8B4AF
+    value:           53CB70FF-DF3C-307E-9084-EE45BD8B078C
 install-name:    '/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 612.3.6
+current-version: 613.1.17
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 
@@ -34,7 +34,8 @@ exports:
                        _ASWebAuthenticationSessionErrorDomain, _ASWebAuthenticationSessionWebBrowserSupportCapabilitiesKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilityIsSupportedKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitySupportsEphemeralBrowserSessionKey, 
-                       _AuthenticationServicesAgentMain, __authenticationSessionRequestServerErrorDomain ]
+                       _AuthenticationServicesAgentMain, __authenticationSessionRequestServerErrorDomain, 
+                       _asTransportToWKTransport ]
     objc-classes:    [ ASAuthorization, ASAuthorizationAppleIDButton, ASAuthorizationAppleIDCredential, 
                        ASAuthorizationAppleIDProvider, ASAuthorizationAppleIDRequest, 
                        ASAuthorizationController, ASAuthorizationOpenIDRequest, ASAuthorizationPasswordProvider, 
@@ -56,6 +57,6 @@ exports:
                        ASWebAuthenticationSession, ASWebAuthenticationSessionRequest, 
                        ASWebAuthenticationSessionRequestClient, ASWebAuthenticationSessionWebBrowserSessionManager, 
                        _ASCredentialListViewController, _ASCredentialProviderExtensionConfigurationViewController, 
-                       _ASDevice, _ASExtensionViewController, _ASIncomingCallObserver, 
-                       _ASPasswordCredentialAuthenticationViewController, _ASWebAuthenticationSessionRequestServer ]
+                       _ASExtensionViewController, _ASIncomingCallObserver, _ASPasswordCredentialAuthenticationViewController, 
+                       _ASWebAuthenticationSessionRequestServer ]
 ...

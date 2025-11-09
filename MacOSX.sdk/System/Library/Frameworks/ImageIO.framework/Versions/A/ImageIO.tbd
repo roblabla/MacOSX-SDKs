@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F179210A-AFA5-3D27-8F90-C95848B4A2AB
+    value:           14C30022-B5A2-3A11-86EC-5EEB29FE1FE5
   - target:          x86_64-maccatalyst
-    value:           F179210A-AFA5-3D27-8F90-C95848B4A2AB
+    value:           14C30022-B5A2-3A11-86EC-5EEB29FE1FE5
   - target:          x86_64h-macos
-    value:           8B453E5D-0E60-39C6-B993-F35A8354A182
+    value:           EB2BFD77-D666-39BC-BE84-47E0D31A3E04
   - target:          x86_64h-maccatalyst
-    value:           8B453E5D-0E60-39C6-B993-F35A8354A182
+    value:           EB2BFD77-D666-39BC-BE84-47E0D31A3E04
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9BA37C3A-5D12-3648-9ED9-058AF455F6A1
+    value:           3D78F847-399D-3D41-B420-2C5C99B5941A
   - target:          arm64e-maccatalyst
-    value:           9BA37C3A-5D12-3648-9ED9-058AF455F6A1
+    value:           3D78F847-399D-3D41-B420-2C5C99B5941A
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO'
 exports:
   - targets:         [ x86_64-macos, x86_64h-macos, x86_64-maccatalyst, x86_64h-maccatalyst ]

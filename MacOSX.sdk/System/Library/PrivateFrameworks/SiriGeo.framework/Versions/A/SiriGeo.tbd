@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3F57AA1A-5EDF-3971-9696-EBD005319672
+    value:           AFCC3BFF-16CB-3455-92ED-BD4E7E2D5EF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B57B1C2C-CD60-3757-9A5A-DB5A02BC91ED
+    value:           D3FB5CE4-EBF7-30D6-A4CC-D06500191235
 install-name:    '/System/Library/PrivateFrameworks/SiriGeo.framework/Versions/A/SiriGeo'
 swift-abi-version: 7
 exports:

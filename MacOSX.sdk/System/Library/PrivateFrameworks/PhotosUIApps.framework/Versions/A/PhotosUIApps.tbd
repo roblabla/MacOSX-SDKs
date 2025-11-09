@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA27937E-4A8F-3040-97E6-54362901DFA0
+    value:           8C3EF6C8-F766-319D-96BF-462D6ADB0E05
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E1F0C69-859E-30A7-BAA2-2F9F41065D1C
+    value:           AEFD17DE-DB0D-3732-929C-76BA9F796EB6
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIApps.framework/Versions/A/PhotosUIApps'
-current-version: 421.0.100
+current-version: 441.0.120
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -95,6 +95,7 @@ exports:
                        '_$s12PhotosUIApps22PUXStoryViewControllerC12deleteMemoryyyF', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC12deleteMemoryyyFTq', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC12exportHelper33_5BF6D8BA2827A0DD93E854D677F00F33LLAA0c6ExportG0CSgvpfi', 
+                       '_$s12PhotosUIApps22PUXStoryViewControllerC12isAppVisible33_5BF6D8BA2827A0DD93E854D677F00F33LLSbvpfi', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC12makeKeyPhotoyyypSgF', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC13configurationACSo20PXStoryConfigurationC_tcfC', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC13configurationACSo20PXStoryConfigurationC_tcfCTq', 
@@ -184,6 +185,7 @@ exports:
                        '_$s12PhotosUIApps22PUXStoryViewControllerC24presentAppleMusicPreview12selectedSong12curatedSongsySo12PXAudioAsset_p_So0nO11FetchResult_ptFTq', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC27$__lazy_storage_$_viewModel33_5BF6D8BA2827A0DD93E854D677F00F33LLSo07PXStorydI0CSgvpfi', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC27applicationStateObservation33_5BF6D8BA2827A0DD93E854D677F00F33LLAA13PXObservationCSgvpfi', 
+                       '_$s12PhotosUIApps22PUXStoryViewControllerC27lastAppVisibilityChangeDate33_5BF6D8BA2827A0DD93E854D677F00F33LL10Foundation0J0VSgvpfi', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC28collectTapToRadarDiagnostics4intoySo05PXTaphI19DiagnosticContainer_p_tF', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC28collectTapToRadarDiagnostics4intoySo05PXTaphI19DiagnosticContainer_p_tFTq', 
                        '_$s12PhotosUIApps22PUXStoryViewControllerC30$__lazy_storage_$_eventTracker33_5BF6D8BA2827A0DD93E854D677F00F33LLSo07PXMediade5EventI0_pSgvpfi', 

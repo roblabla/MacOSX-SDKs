@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B526DC0-6B7B-3EFB-9E4F-74FD5DD246A8
+    value:           1B3510C8-9711-33CB-B047-E783C29792F2
   - target:          x86_64-maccatalyst
-    value:           0B526DC0-6B7B-3EFB-9E4F-74FD5DD246A8
+    value:           1B3510C8-9711-33CB-B047-E783C29792F2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04E498FF-5503-3582-9146-2CB1D80B88A1
+    value:           B75BA991-4F59-39BD-885B-A9A5CF1BCB2F
   - target:          arm64e-maccatalyst
-    value:           04E498FF-5503-3582-9146-2CB1D80B88A1
+    value:           B75BA991-4F59-39BD-885B-A9A5CF1BCB2F
 install-name:    '/System/Library/PrivateFrameworks/SiriVOX.framework/Versions/A/SiriVOX'
 current-version: 0
 compatibility-version: 0
@@ -109,9 +109,8 @@ exports:
                        SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupFlowSiriCapabilitiesHint, 
                        SVXDeviceSetupOptions, SVXMyriadDeviceManager, SVXMyriadHostDevice, 
                        SVXMyriadWiFiAssertion, SVXPlatformDependency, SVXQueuePerformer, 
-                       SVXServiceCommandResult, SVXSpeechSynthesisConfiguration, 
-                       SVXSpeechSynthesisRequest, SVXSpeechSynthesisResult, SVXSpeechSynthesisUtteranceInfo, 
-                       SVXSpeechSynthesisWordTiming, SVXStoreDemo, SVXSystemEvent, 
-                       SVXTStubExpressionParsingService, SVXTaskContext, _SVXAddViewsExpressionParser, 
-                       _SVXRemoteExpressionParsingService ]
+                       SVXServiceCommandResult, SVXSpeechSynthesisRequest, SVXSpeechSynthesisResult, 
+                       SVXSpeechSynthesisUtteranceInfo, SVXSpeechSynthesisWordTiming, 
+                       SVXStoreDemo, SVXSystemEvent, SVXTStubExpressionParsingService, 
+                       SVXTaskContext, _SVXAddViewsExpressionParser, _SVXRemoteExpressionParsingService ]
 ...

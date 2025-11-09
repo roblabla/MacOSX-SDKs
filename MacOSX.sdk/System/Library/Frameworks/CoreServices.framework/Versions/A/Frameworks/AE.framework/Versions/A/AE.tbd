@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6220E4CA-3706-3A8A-A363-AD24628A79AE
+    value:           C1696D61-282D-368F-B94A-C3D5E5615943
   - target:          x86_64-maccatalyst
-    value:           6220E4CA-3706-3A8A-A363-AD24628A79AE
+    value:           C1696D61-282D-368F-B94A-C3D5E5615943
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9545DA42-F6A6-311E-95FE-6745BD9D552D
+    value:           0A3AB363-B23B-3956-8E4C-7C5F72680481
   - target:          arm64e-maccatalyst
-    value:           9545DA42-F6A6-311E-95FE-6745BD9D552D
+    value:           0A3AB363-B23B-3956-8E4C-7C5F72680481
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
 current-version: 924
 compatibility-version: 0

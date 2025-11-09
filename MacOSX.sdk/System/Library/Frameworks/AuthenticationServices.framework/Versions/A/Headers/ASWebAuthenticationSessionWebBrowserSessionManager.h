@@ -16,6 +16,8 @@ AS_EXTERN API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos)
 @property (nonatomic) id<ASWebAuthenticationSessionWebBrowserSessionHandling> sessionHandler;
 @property (nonatomic, readonly) BOOL wasLaunchedByAuthenticationServices;
 
++ (void)registerDefaultsForASWASInSetupAssistantIfNeeded;
+
 @end
 
 NS_ASSUME_NONNULL_END

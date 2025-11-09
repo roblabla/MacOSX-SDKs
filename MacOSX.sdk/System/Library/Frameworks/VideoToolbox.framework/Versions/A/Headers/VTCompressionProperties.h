@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright 2007-2020 Apple Inc. All rights reserved.
+	Copyright 2007-2021 Apple Inc. All rights reserved.
 	
 	Standard Video Toolbox compression properties.
 */
@@ -38,6 +38,29 @@ CM_ASSUME_NONNULL_BEGIN
 		Some properties are supported by individual encoders.
 		
 		Clients can query supported properties by calling VTSessionCopySupportedPropertyDictionary.
+*/
+
+/*
+	Recommendations for configuring VTCompressionSessions
+
+	These are recommendations for configuring VTCompressionSessions for some common scenarios.  
+	These are starting points; you may find that the details of your application necessitate further adjustments.
+
+	Video-conferencing, live capture, and live broadcast scenarios:
+		• kVTCompressionPropertyKey_RealTime: kCFBooleanTrue
+		• kVTCompressionPropertyKey_ExpectedFrameRate: set to real-time frame rate if possible
+
+	Offline transcode initiated by a user, who is waiting for the results:
+		• kVTCompressionPropertyKey_RealTime: kCFBooleanFalse
+		• kVTCompressionPropertyKey_MaximizePowerEfficiency: kCFBooleanFalse
+
+	Offline transcode in the background (when the user is not aware):
+		• kVTCompressionPropertyKey_RealTime: kCFBooleanFalse
+		• kVTCompressionPropertyKey_MaximizePowerEfficiency: kCFBooleanTrue
+
+	Ultra-low-latency capture / conferencing / cloud gaming (cases where every millisecond counts):
+		• kVTCompressionPropertyKey_RealTime: kCFBooleanTrue
+		• kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality: kCFBooleanTrue
 */
 
 #pragma mark Buffers
@@ -256,10 +279,16 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd API_AVA
 	@abstract
 		Hint for the video encoder that it should maximize its speed during encode, sacrificing quality if needed
 	@discussion
+		Video encoders sometimes have a tradeoff available between encoding speed and quality at a given bitrate.
+		For example, by spending more time refining encoding decisions, it may be possible to make marginal improvements on quality.
+		This property lets a client indicate its preference for any such tradeoff.
 		Clients may set this property to kCFBooleanTrue to indicate that
-		the encoder can take steps to maximize its speed by reducing quality.
-		Setting the property to NULL is equivalent to setting it to kCFBooleanFalse.
-		Not all video encoders support this property
+		the encoder can take steps to maximize its speed by reducing quality, 
+		or to kCFBooleanFalse to indicate that the priority should be maximizing quality (at a given bitrate).
+		When the property value is NULL, the video encoder will choose its default behavior.
+		H.264 and HEVC hardware video encoders prioritize quality over speed by default.
+		ProRes hardware encoders currently prioritize speed over quality by default.
+		Not all video encoders support this property.
 		By default, this property is NULL.
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // CFBoolean, Optional
@@ -278,6 +307,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProfileLevel API_AVAILABLE
 	
 VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main_AutoLevel API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
 VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main10_AutoLevel API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
+VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main42210_AutoLevel API_AVAILABLE(macosx(12.3), ios(15.4), tvos(15.4));
 
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_1_3 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
@@ -331,6 +361,14 @@ VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L4 API_AVAILABLE
 VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level10 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level45 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+
+/*!
+	@constant	kVTCompressionPropertyKey_OutputBitDepth
+	@abstract
+		 When set, requires the encoder to output bitstream with the requested bit depth, if supported by the configured profile level setting.
+		 In the absence of this property, the video encoder will assume the highest bit depth allowable by the configured profile level setting.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_OutputBitDepth API_AVAILABLE(macosx(12.3), ios(15.4), tvos(15.4), watchos(8.4)); // Read/write, Optional, CFNumber, NULL by default
 
 /*!
     @constant    kVTCompressionPropertyKey_HDRMetadataInsertionMode
@@ -411,9 +449,18 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes API_AVAI
 	@abstract
 		Hints the video encoder that compression is, or is not, being performed in real time.
 	@discussion
-		For offline compression, clients may set this property to kCFBooleanFalse, which indicates that 
-		it is OK for the video encoder to work slower than real time in order to produce a better result.
-		For real-time compression, clients may set this property to kCFBooleanTrue to recommend that encoding stay timely.
+		For offline compression, clients are advised to set this property to kCFBooleanFalse.
+		This indicates that the timeline of the frames is not connected to wall-clock time at all.
+		This allows the video encoder to run either slower than real-time or faster than real-time, 
+		depending upon the situation and device capabilities.
+		For real-time compression, clients are advised to set this property to kCFBooleanTrue.
+		This indicates that the timeline of frames is connected to real time (so, for example, 
+		the client expects to encode one second of frames each second, on average). 
+		In such a case, it is important that encoding keep up, but it is also not valuable to encode 
+		substantially faster than real time.  
+		When this property is set to kCFBooleanTrue, the video encoder may use the value of the 
+		kVTCompressionPropertyKey_ExpectedFrameRate property to optimize energy usage, 
+		by anticipating that encoding requests will happen at this rate.
 		By default, this property is NULL, indicating unknown.  
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RealTime API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // Read/write, CFBoolean or NULL, Optional, default NULL
@@ -426,8 +473,10 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RealTime API_AVAILABLE(mac
 		For compression where the client is operating in the background, clients may set this property to kCFBooleanTrue, which indicates that
 		the encoder can take steps to minimize impact on power usage and other system activity.
 		Setting the property to NULL is equivalent to setting it to kCFBooleanFalse.
- 		Not all video encoders support this property
+		Not all video encoders support this property.
 		By default, this property is NULL.
+		If the kVTCompressionPropertyKey_RealTime property is set to kCFBooleanTrue, 
+		the video encoder may act as though this property were set to kCFBooleanFalse.
  */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaximizePowerEfficiency API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)); // Read/write, CFBoolean or NULL, Optional, default is false
 
@@ -457,6 +506,9 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SourceFrameCount API_AVAIL
 		This is not used to control the frame rate; it is provided as a hint to the 
 		video encoder so that it can set up internal configuration before compression begins. 
 		The actual frame rate will depend on frame durations and may vary. 
+		When the kVTCompressionPropertyKey_RealTime property is set to kCFBooleanTrue, 
+		the video encoder may use this property's value to optimize energy usage,
+		by anticipating that encoding requests will happen at this rate.
 		By default, this is zero, indicating "unknown".
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber, Optional

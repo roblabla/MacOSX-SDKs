@@ -3,32 +3,31 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B80714AF-FA03-36A4-ACA5-0221D42C552E
+    value:           C30C315F-F148-32E6-872D-4AEFC26542D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           077DC1D2-F961-33FD-BEE1-CBD3A886BC34
+    value:           0C808CA1-D744-3749-A282-CB9651FEC2E7
 install-name:    '/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon'
-current-version: 902.60.2
+current-version: 946.101.2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AppTelemetryInvestigationReadFrom, _AppTelemetryTelemetryMessageReadFrom, 
-                       _AppTelemetryTimeSeriesEventReadFrom, _BRCBundleIDForProcessIdentifier, 
-                       _BRCCopyQuarantineInfo, _BRCCoreAnalyticsReporterDSIDKey, 
-                       _BRCCoreAnalyticsReporterErrorCountKey, _BRCCoreAnalyticsReporterErrorMessageKey, 
-                       _BRCCoreAnalyticsReporterErrorNameKey, _BRCCoreAnalyticsReporterFolderSharingEnabledKey, 
-                       _BRCCoreAnalyticsReporterLastErrorTimestampKey, _BRCCoreAnalyticsReporterPCSStateKey, 
-                       _BRCCoreAnalyticsReporterRampNumberKey, _BRCCoreAnalyticsReporterSyncTypeKey, 
-                       _BRCCoreAnalyticsReporterTotalItemsCountKey, _BRCCoreAnalyticsReporterZoneErrorCountKey, 
-                       _BRCCoreAnalyticsReporterZoneTypeKey, _BRCDeleteAPFSSnapshot, 
-                       _BRCExecutableNameForProcessIdentifier, _BRCExtensionErrorPayloadReadFrom, 
-                       _BRCFSSchedulerBaseDidUpdateHasWorkNotification, _BRCFSWithPermissionsUpgrade, 
-                       _BRCFSWithPermissionsUpgradeStripping, _BRCGenerateAPFSSnapshot, 
-                       _BRCGenerationCountFromData, _BRCGetOrAllocateDocID, _BRCHasAPFSSnapshot, 
-                       _BRCItemFieldsPrettyPrint, _BRCItemIDDocuments, _BRCItemIDZoneRoot, 
-                       _BRCMountAPFSSnapshot, _BRCPrettyPrintBitmapWithContext, _BRCPrettyPrintEnumWithContext, 
-                       _BRCRecursiveRemove, _BRCRecursivelyChangeOwnerAndGroupToMobile, 
+                       _AppTelemetryTimeSeriesEventReadFrom, _BRCCopyQuarantineInfo, 
+                       _BRCCoreAnalyticsReporterDSIDKey, _BRCCoreAnalyticsReporterErrorCountKey, 
+                       _BRCCoreAnalyticsReporterErrorMessageKey, _BRCCoreAnalyticsReporterErrorNameKey, 
+                       _BRCCoreAnalyticsReporterFolderSharingEnabledKey, _BRCCoreAnalyticsReporterLastErrorTimestampKey, 
+                       _BRCCoreAnalyticsReporterPCSStateKey, _BRCCoreAnalyticsReporterRampNumberKey, 
+                       _BRCCoreAnalyticsReporterSyncTypeKey, _BRCCoreAnalyticsReporterTotalItemsCountKey, 
+                       _BRCCoreAnalyticsReporterZoneErrorCountKey, _BRCCoreAnalyticsReporterZoneTypeKey, 
+                       _BRCDeleteAPFSSnapshot, _BRCExecutableNameForProcessIdentifier, 
+                       _BRCExtensionErrorPayloadReadFrom, _BRCFSSchedulerBaseDidUpdateHasWorkNotification, 
+                       _BRCFSWithPermissionsUpgrade, _BRCFSWithPermissionsUpgradeStripping, 
+                       _BRCGenerateAPFSSnapshot, _BRCGenerationCountFromData, _BRCGetOrAllocateDocID, 
+                       _BRCHasAPFSSnapshot, _BRCItemFieldsPrettyPrint, _BRCItemIDDocuments, 
+                       _BRCItemIDZoneRoot, _BRCMountAPFSSnapshot, _BRCPrettyPrintBitmapWithContext, 
+                       _BRCPrettyPrintEnumWithContext, _BRCRecursiveRemove, _BRCRecursivelyChangeOwnerAndGroupToMobile, 
                        _BRCRegisterAndSendNewContainerReset, _BRCServerZoneStatePrettyPrintWithContext, 
                        _BRCSharingNoOverrideString, _BRCSizeInfoCompletedUnitCountKey, 
                        _BRCSizeInfoTotalUnitCountKey, _BRCSyncContextDidBecomeBackground, 
@@ -50,8 +49,8 @@ exports:
                        _kBRCXPCActivityRepeating, _kBRCXPCActivityRequireScreenSleep, 
                        _kBRRecordIDPrefixAlias, _kBRRecordIDPrefixContent, _kBRRecordIDPrefixDirectoryStructure, 
                        _kBRRecordIDPrefixDocumentStructure, _kBRRecordIDPrefixFinderBookmark, 
-                       _kBRRecordIDPrefixShareAlias, _kBRRecordIDPrefixSymlink, _kBRRecordKeyBirthtime, 
-                       _kBRRecordKeyCountMetrics, _kBRRecordKeyDontLearnPkgExtension, 
+                       _kBRRecordIDPrefixShareAlias, _kBRRecordIDPrefixSymlink, _kBRRecordIDPrefixZoneMovedDocumentStructure, 
+                       _kBRRecordKeyBirthtime, _kBRRecordKeyCountMetrics, _kBRRecordKeyDontLearnPkgExtension, 
                        _kBRRecordKeyFavoriteRank, _kBRRecordKeyFileContent, _kBRRecordKeyFilenameBaseHash, 
                        _kBRRecordKeyFilenameBounceNo, _kBRRecordKeyFilenameEncryptedBasename, 
                        _kBRRecordKeyFilenameExtension, _kBRRecordKeyFinderBookmarkContent, 
@@ -60,7 +59,8 @@ exports:
                        _kBRRecordKeyLastUsedTime, _kBRRecordKeyModificationTime, 
                        _kBRRecordKeyPackageContent, _kBRRecordKeyPackageManifest, 
                        _kBRRecordKeyPackageSignature, _kBRRecordKeyPackageXattrs, 
-                       _kBRRecordKeyParentRef, _kBRRecordKeyQuarantineInfo, _kBRRecordKeyShareReference, 
+                       _kBRRecordKeyParentRef, _kBRRecordKeyParticipantDocumentToken, 
+                       _kBRRecordKeyQuarantineInfo, _kBRRecordKeyShareReference, 
                        _kBRRecordKeySize, _kBRRecordKeySymlinkTarget, _kBRRecordKeyTargetRef, 
                        _kBRRecordKeyThumbnail1024x1024, _kBRRecordKeyThumbnailQuickLookMetadata, 
                        _kBRRecordKeyTrashPutBackParent, _kBRRecordKeyTrashPutBackPath, 
@@ -124,10 +124,10 @@ exports:
                        AppTelemetryTimeSeriesEvent._magnitudeBool, AppTelemetryTimeSeriesEvent._magnitudeDouble, 
                        AppTelemetryTimeSeriesEvent._magnitudeFloat, AppTelemetryTimeSeriesEvent._magnitudeInt, 
                        AppTelemetryTimeSeriesEvent._timestamp, BRCAccountSession._accountHandler, 
-                       BRCAccountSession._clientTruthWorkloop, BRCAccountSession._cloudDocsFD, 
-                       BRCAccountSession._databaseID, BRCAccountSession._dbCorruptionQueue, 
-                       BRCAccountSession._dbProfilingHook, BRCAccountSession._dbURL, 
-                       BRCAccountSession._dbWatcher, BRCAccountSession._dbWatcherQueue, 
+                       BRCAccountSession._backgroundListOperations, BRCAccountSession._clientTruthWorkloop, 
+                       BRCAccountSession._cloudDocsFD, BRCAccountSession._databaseID, 
+                       BRCAccountSession._dbCorruptionQueue, BRCAccountSession._dbProfilingHook, 
+                       BRCAccountSession._dbURL, BRCAccountSession._dbWatcher, BRCAccountSession._dbWatcherQueue, 
                        BRCAccountSession._defaultScheduler, BRCAccountSession._isDataSeparated, 
                        BRCAccountSession._miscOperations, BRCAccountSession._personaIdentifier, 
                        BRCAccountSession._readOnlyWorkloop, BRCAccountSession._serverTruthWorkloop, 
@@ -151,7 +151,8 @@ exports:
                        BRCServerItem._zone, BRCServerZone._changeState, BRCServerZone._clientZone, 
                        BRCServerZone._db, BRCServerZone._dbRowID, BRCServerZone._session, 
                        BRCServerZone._zoneName, BRCSyncDownOperation._serverZone, 
-                       BRCZonePurgeOperation._serverZone, BRFieldCKInfo._etag, BRFieldCKInfo._etagBeforeCrossZoneMove, 
+                       BRCZonePurgeOperation._serverZone, BRFieldCKInfo._deletionChangeToken, 
+                       BRFieldCKInfo._etag, BRFieldCKInfo._etagBeforeCrossZoneMove, 
                        BRFieldCKInfo._has, BRFieldCKInfo._knownToServer, BRFieldCKInfo._wasCached, 
                        BRFieldFinderTags._tags, BRFieldPkgHeader._version, BRFieldPkgItem._has, 
                        BRFieldPkgItem._isExecutable, BRFieldPkgItem._isWritable, 

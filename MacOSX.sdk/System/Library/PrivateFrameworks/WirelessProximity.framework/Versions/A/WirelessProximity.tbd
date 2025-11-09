@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EE7D78E3-C8DA-3F37-8FA2-013273F7F7FC
+    value:           BC91D90A-4665-32DB-9ECA-C3A216C32D7C
   - target:          x86_64-maccatalyst
-    value:           EE7D78E3-C8DA-3F37-8FA2-013273F7F7FC
+    value:           BC91D90A-4665-32DB-9ECA-C3A216C32D7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3CF490A1-0770-3288-ABAF-C3656717B3E1
+    value:           B30FF9EE-85BB-3310-A18C-816372EE9E66
   - target:          arm64e-maccatalyst
-    value:           3CF490A1-0770-3288-ABAF-C3656717B3E1
+    value:           B30FF9EE-85BB-3310-A18C-816372EE9E66
 install-name:    '/System/Library/PrivateFrameworks/WirelessProximity.framework/Versions/A/WirelessProximity'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -40,13 +40,13 @@ exports:
                        _WPObjectDiscoveryScanKeyAdvBufferRate, _WPObjectDiscoveryScanKeyAllowDuplicates, 
                        _WPObjectDiscoveryScanKeyScanWhenLocked, _WPObjectDiscoveryScanKeyScreenOffRate, 
                        _WPObjectDiscoveryScanKeyScreenOnRate, _WPObjectDiscoveryScanKeyTimeout, 
-                       _WPPairingKeyAdvertisingChannel, _WPPairingKeyDeviceTime, 
-                       _WPPairingKeyName, _WPPairingKeyPaired, _WPPairingKeyRSSI, 
-                       _WPPuckType, _WPPuckTypeAirPlaySoloAdvertisingChannel, _WPPuckTypeAirPlaySoloAdvertisingData, 
-                       _WPPuckTypeAirPlaySoloRSSI, _WPPuckTypeAirPlaySoloSourcePresence, 
-                       _WPPuckTypeAirPlaySoloTargetPresence, _WPZoneTrackerKeyMajor, 
-                       _WPZoneTrackerKeyMinor, _WPZoneTrackerKeyZone, _WiProxLog, 
-                       _WiproxBTPairingLaunchNotification, _kSPAdvertisementData, 
+                       _WPPairingKeyAdvertisingChannel, _WPPairingKeyDeviceAddress, 
+                       _WPPairingKeyDeviceTime, _WPPairingKeyName, _WPPairingKeyPaired, 
+                       _WPPairingKeyRSSI, _WPPuckType, _WPPuckTypeAirPlaySoloAdvertisingChannel, 
+                       _WPPuckTypeAirPlaySoloAdvertisingData, _WPPuckTypeAirPlaySoloRSSI, 
+                       _WPPuckTypeAirPlaySoloSourcePresence, _WPPuckTypeAirPlaySoloTargetPresence, 
+                       _WPZoneTrackerKeyMajor, _WPZoneTrackerKeyMinor, _WPZoneTrackerKeyZone, 
+                       _WiProxLog, _WiproxBTPairingLaunchNotification, _kSPAdvertisementData, 
                        _kSPChannel, _kSPDeviceAddress, _kSPOptional, _kSPSaturated, 
                        _kSPScanDate, _kSPStatus, _kSPrssi ]
     objc-classes:    [ WPAWDL, WPAdvertising, WPAdvertisingRequest, WPAirPlaySolo, 

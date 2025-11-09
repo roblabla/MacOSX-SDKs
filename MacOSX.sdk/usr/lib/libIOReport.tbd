@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E63CA965-19E1-32A2-BCEF-00470AA5D12A
+    value:           8A18891D-1D48-328E-B8FE-063C2A687AF6
   - target:          x86_64-maccatalyst
-    value:           E63CA965-19E1-32A2-BCEF-00470AA5D12A
+    value:           8A18891D-1D48-328E-B8FE-063C2A687AF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B049D87-9C08-3BC9-9B1F-24D39E223A3F
+    value:           13E02E6B-7D4C-3029-B96C-6613720E08F5
   - target:          arm64e-maccatalyst
-    value:           5B049D87-9C08-3BC9-9B1F-24D39E223A3F
+    value:           13E02E6B-7D4C-3029-B96C-6613720E08F5
 install-name:    '/usr/lib/libIOReport.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -36,8 +36,9 @@ exports:
                        _IOReportHistogramGetBucketCount, _IOReportHistogramGetBucketHits, 
                        _IOReportHistogramGetBucketMaxValue, _IOReportHistogramGetBucketMinValue, 
                        _IOReportHistogramGetBucketSum, _IOReportHistogramGetMaxValue, 
-                       _IOReportHistogramGetMinValue, _IOReportIterate, _IOReportMergeChannels, 
-                       _IOReportPrune, _IOReportSampleCopyDescription, _IOReportSampleCreateDelta, 
+                       _IOReportHistogramGetMinValue, _IOReportIterate, _IOReportIterateNewSamples, 
+                       _IOReportIterateSamplesRaw, _IOReportMergeChannels, _IOReportPrune, 
+                       _IOReportSampleCopyDescription, _IOReportSampleCreateDelta, 
                        _IOReportScaleValue, _IOReportSelectChannelsInGroup, _IOReportSimpleGetIntegerValue, 
                        _IOReportStateGetCount, _IOReportStateGetCurrent, _IOReportStateGetDutyCycle, 
                        _IOReportStateGetIDForIndex, _IOReportStateGetInTransitions, 

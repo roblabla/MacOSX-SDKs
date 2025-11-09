@@ -447,6 +447,66 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeITF14Code API_AVAILABL
  */
 AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDataMatrixCode API_AVAILABLE(macos(10.15), ios(8.0), macCatalyst(14.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
+/*!
+ @constant AVMetadataObjectTypeCodabarCode
+ @abstract
+    An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCodabarCode.
+ 
+ @discussion
+    AVMetadataMachineReadableCodeObject objects generated from Codabar codes return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCodabarCode NS_SWIFT_NAME(codabar) API_AVAILABLE(macos(12.3), ios(15.4), macCatalyst(15.4), tvos(15.4)) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVMetadataObjectTypeGS1DataBarCode
+ @abstract
+    An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarCode.
+ 
+ @discussion
+    AVMetadataMachineReadableCodeObject objects generated from GS1DataBar codes return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeGS1DataBarCode NS_SWIFT_NAME(gs1DataBar) API_AVAILABLE(macos(12.3), ios(15.4), macCatalyst(15.4), tvos(15.4)) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVMetadataObjectTypeGS1DataBarExpandedCode
+ @abstract
+    An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarExpandedCode.
+ 
+ @discussion
+    AVMetadataMachineReadableCodeObject objects generated from GS1DataBarExpanded codes return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeGS1DataBarExpandedCode NS_SWIFT_NAME(gs1DataBarExpanded) API_AVAILABLE(macos(12.3), ios(15.4), macCatalyst(15.4), tvos(15.4)) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVMetadataObjectTypeGS1DataBarLimitedCode
+ @abstract
+    An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarLimitedCode.
+ 
+ @discussion
+    AVMetadataMachineReadableCodeObject objects generated from GS1DataBarLimited codes return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeGS1DataBarLimitedCode NS_SWIFT_NAME(gs1DataBarLimited) API_AVAILABLE(macos(12.3), ios(15.4), macCatalyst(15.4), tvos(15.4)) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVMetadataObjectTypeMicroQRCode
+ @abstract
+    An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroQRCode.
+ 
+ @discussion
+    AVMetadataMachineReadableCodeObject objects generated from MicroQR codes return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeMicroQRCode NS_SWIFT_NAME(microQR) API_AVAILABLE(macos(12.3), ios(15.4), macCatalyst(15.4), tvos(15.4)) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVMetadataObjectTypeMicroPDF417Code
+ @abstract
+    An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroPDF417Code.
+ 
+ @discussion
+    AVMetadataMachineReadableCodeObject objects generated from MicroPDF417 codes return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeMicroPDF417Code NS_SWIFT_NAME(microPDF417) API_AVAILABLE(macos(12.3), ios(15.4), macCatalyst(15.4), tvos(15.4)) API_UNAVAILABLE(watchos);
+
 
 #pragma mark - AVMetadataMachineReadableCodeObject
 

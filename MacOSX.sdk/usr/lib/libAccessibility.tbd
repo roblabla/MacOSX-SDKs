@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3952B608-BBFD-34DD-B46C-E897DAF9DD3A
+    value:           6E272A45-43EB-32CB-BFB6-71BE9DA678DD
   - target:          x86_64-maccatalyst
-    value:           3952B608-BBFD-34DD-B46C-E897DAF9DD3A
+    value:           6E272A45-43EB-32CB-BFB6-71BE9DA678DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A34F6CD1-D44B-3137-8805-E4C918FA4E0A
+    value:           C9B11C7D-C944-3DE5-86A2-A564BCEBB74F
   - target:          arm64e-maccatalyst
-    value:           A34F6CD1-D44B-3137-8805-E4C918FA4E0A
+    value:           C9B11C7D-C944-3DE5-86A2-A564BCEBB74F
 install-name:    '/usr/lib/libAccessibility.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

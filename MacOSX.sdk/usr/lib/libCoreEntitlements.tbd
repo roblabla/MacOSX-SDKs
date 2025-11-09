@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EB54FAA4-B854-37B4-84D0-5634F75AB98C
+    value:           5DC2D267-744D-3112-9E39-9DB67DEA7060
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5505FEB-F12A-375E-9FB5-91BB689B2BCF
+    value:           6079244A-D20B-37E1-AD4F-510338FF0CAC
 install-name:    '/usr/lib/libCoreEntitlements.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

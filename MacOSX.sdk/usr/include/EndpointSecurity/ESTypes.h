@@ -208,17 +208,17 @@ typedef enum {
  */
 typedef enum {
 	ES_NEW_CLIENT_RESULT_SUCCESS
-	///One or more invalid arguments were provided
+	/// One or more invalid arguments were provided.
   , ES_NEW_CLIENT_RESULT_ERR_INVALID_ARGUMENT
-	///Communication with the ES subsystem failed
+	/// Communication with the ES subsystem failed, or other error condition.
   , ES_NEW_CLIENT_RESULT_ERR_INTERNAL
-	///The caller is not properly entitled to connect
+	/// The caller is not properly entitled to connect.
   , ES_NEW_CLIENT_RESULT_ERR_NOT_ENTITLED
-	///The caller is not permitted to connect. They lack Transparency, Consent, and Control (TCC) approval form the user.
+	/// The caller lacks Transparency, Consent, and Control (TCC) approval from the user.
   , ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED
-	///The caller is not running as root
+	/// The caller is not running as root.
   , ES_NEW_CLIENT_RESULT_ERR_NOT_PRIVILEGED
-	/// The caller has reached the maximum number of allowed simultaneously connected clients
+	/// The caller has reached the maximum number of allowed simultaneously connected clients.
   , ES_NEW_CLIENT_RESULT_ERR_TOO_MANY_CLIENTS
 } es_new_client_result_t;
 

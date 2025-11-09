@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Contains a single rotation rate measurement.
  *
  */
-COREMOTION_EXPORT API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos)
+COREMOTION_EXPORT API_AVAILABLE(ios(14.0), watchos(7.0))
 @interface CMRotationRateData : CMLogItem
 {
 @private
@@ -41,7 +41,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos)
  * Discussion:
  *   CMRecordedRotationRateData contains data for each rotation rate sample.
  */
-COREMOTION_EXPORT API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos)
+COREMOTION_EXPORT API_AVAILABLE(ios(14.0), watchos(7.0))
 @interface CMRecordedRotationRateData : CMRotationRateData
 
 /*

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE254405-1664-3615-9DEE-07CFB2922090
+    value:           78D34CC2-02BE-35A7-8F96-1013764D54CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0BE59B64-F91E-374E-BE00-1A4A8206C2D4
+    value:           5432F9AC-5BEE-3C56-A706-9CFE432B4CBF
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationProfiles.framework/Versions/A/ConfigurationProfiles'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -39,8 +39,9 @@ exports:
                        _CPInstalledProvisioningProfilesDictionaryUUIDKey, _CPInstalledProvisioningProfilesDictionaryVersionKey, 
                        _CPInstalledProvisioningProfilesDidChangeNotification, _CPInstalledProvisioningProfilesEntitlementsKey, 
                        _CPInstalledProvisioningProfilesUUIDKey, _CPInstalledProvisioningProfilesUserDataKey, 
-                       _CPMF_AddArrayIndexToKeyPath, _CPMF_AddDictKeyToKeyPath, _CPMF_GetLocStrFmt, 
-                       _CPMF_IsKeyMissing, _CPMF_SplitKeyPaths, _CPManagedClientLoginAgentCheckinNotification, 
+                       _CPIsProvisionallyEnrolled, _CPMF_AddArrayIndexToKeyPath, 
+                       _CPMF_AddDictKeyToKeyPath, _CPMF_GetLocStrFmt, _CPMF_IsKeyMissing, 
+                       _CPMF_SplitKeyPaths, _CPManagedClientLoginAgentCheckinNotification, 
                        _CPPayloadCountStringsDictKey_CountFirst, _CPPayloadCountStringsDictKey_CountLast, 
                        _CPPayloadCountStringsDictKey_SingularOnly, _CPPayloadCountStringsKeySuffix, 
                        _CPProcessDEPUserConfiguration, _CPProfilePreferencesChangedNotification, 

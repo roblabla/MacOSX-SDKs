@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           43AE9CB0-AA76-377E-A944-2CBD48F3E5E8
+    value:           CBD0C7D1-9882-3722-8B06-55702555BEF3
   - target:          x86_64-maccatalyst
-    value:           43AE9CB0-AA76-377E-A944-2CBD48F3E5E8
+    value:           CBD0C7D1-9882-3722-8B06-55702555BEF3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9196A42-C69E-3BCA-A962-9A5DD235583F
+    value:           8B25693C-958F-3CF7-B149-1BBA36B147B4
   - target:          arm64e-maccatalyst
-    value:           D9196A42-C69E-3BCA-A962-9A5DD235583F
+    value:           8B25693C-958F-3CF7-B149-1BBA36B147B4
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3693.40
+current-version: 3696.80.82
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -131,13 +131,13 @@ exports:
                        MSGetMailIntentResponse, MSIntentMail, MSIntentMailResolutionResult, 
                        MSIntentReadStatusResolutionResult, MSJunkTriageAction, MSMessageListItemSelection, 
                        MSMessageLoadingAnalyticController, MSMoveTriageAction, MSMuteTriageAction, 
-                       MSNotifyTriageAction, MSParsecSearchSession, MSParsecSearchSessionMessageListResult, 
-                       MSParsecSearchSessionMessageResult, MSParsecSearchSessionQueryComponent, 
-                       MSParsecSearchSessionSuggestion, MSParsecSearchSessionTopHit, 
-                       MSRadarInteraction, MSRadarURLBuilder, MSReadTriageAction, 
-                       MSSearchSessionController, MSSendMailIntent, MSSendMailIntentFormatter, 
-                       MSSendMailIntentResponse, MSSiriIntelligenceSettings, MSTriageAction, 
-                       _MSCountableMatchesContext ]
+                       MSNotifyTriageAction, MSParsecSearchIndexState, MSParsecSearchSession, 
+                       MSParsecSearchSessionMessageListResult, MSParsecSearchSessionMessageResult, 
+                       MSParsecSearchSessionQueryComponent, MSParsecSearchSessionSuggestion, 
+                       MSParsecSearchSessionTopHit, MSRadarInteraction, MSRadarURLBuilder, 
+                       MSReadTriageAction, MSSearchSessionController, MSSendMailIntent, 
+                       MSSendMailIntentFormatter, MSSendMailIntentResponse, MSSiriIntelligenceSettings, 
+                       MSTriageAction, _MSCountableMatchesContext ]
     objc-ivars:      [ AWDMailAutoFetchReport._bucketedLocalNonDeletedCount, AWDMailAutoFetchReport._didTimeout, 
                        AWDMailAutoFetchReport._duration, AWDMailAutoFetchReport._emailProvider, 
                        AWDMailAutoFetchReport._fetchSize, AWDMailAutoFetchReport._foreground, 

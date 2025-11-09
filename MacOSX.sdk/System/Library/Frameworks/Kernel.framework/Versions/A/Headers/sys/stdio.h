@@ -31,4 +31,12 @@
 
 #include <sys/cdefs.h>
 
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
+#define RENAME_SECLUDE                  0x00000001
+#define RENAME_SWAP                     0x00000002
+#define RENAME_EXCL                     0x00000004
+#define RENAME_RESERVED1                0x00000008
+#define RENAME_NOFOLLOW_ANY             0x00000010
+#endif
+
 #endif /* _SYS_STDIO_H_ */

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4DCD432B-7E66-3535-82E2-BEEF6945F222
+    value:           E7E2106F-BDCD-30AF-8633-7E558A5E4238
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1EACFB26-EF63-3597-B265-DE402B799F76
+    value:           C4FA9FFB-2E27-390E-B3A5-1EF8704BA3AD
 install-name:    '/System/Library/PrivateFrameworks/PreviewsInjection.framework/Versions/A/PreviewsInjection'
-current-version: 19.20.23
+current-version: 19.30.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -124,6 +124,11 @@ exports:
                        '_$s7SwiftUI12_PreviewHostC17PreviewsInjection0cD8ProtocolADMc', 
                        '_$s7SwiftUI12_PreviewHostC17PreviewsInjection0cD8ProtocolADWP', 
                        '_$s7SwiftUI12_PreviewHostC17PreviewsInjectionE12refreshViewsyyF', 
+                       '_$s7SwiftUI13PreviewLayoutO17PreviewsInjectionE2eeoiySbAC_ACtFZ', 
+                       '_$s7SwiftUI13PreviewLayoutO17PreviewsInjectionE4hash4intoys6HasherVz_tF', 
+                       '_$s7SwiftUI13PreviewLayoutO17PreviewsInjectionE9hashValueSivg', 
+                       '_$s7SwiftUI13PreviewLayoutO17PreviewsInjectionE9hashValueSivpMV', 
+                       '_$s7SwiftUI13PreviewLayoutOSH17PreviewsInjectionMc', '_$s7SwiftUI13PreviewLayoutOSQ17PreviewsInjectionMc', 
                        '_$s7SwiftUI14AppPreviewHostC17PreviewsInjection0dE8ProtocolADMc', 
                        '_$s7SwiftUI14AppPreviewHostC17PreviewsInjection0dE8ProtocolADWP', 
                        '_$s7SwiftUI14AppPreviewHostC17PreviewsInjectionE11environmentAA17EnvironmentValuesVvM', 

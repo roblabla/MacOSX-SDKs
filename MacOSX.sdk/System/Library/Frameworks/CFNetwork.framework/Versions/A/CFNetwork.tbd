@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DAF237F6-3FEB-3773-9751-F8576EA26ACB
+    value:           7FFE1D94-A85E-3AC2-BCA3-BD233899ECB5
   - target:          x86_64-maccatalyst
-    value:           DAF237F6-3FEB-3773-9751-F8576EA26ACB
+    value:           7FFE1D94-A85E-3AC2-BCA3-BD233899ECB5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C82C3FB0-E798-3BC6-8B67-8A806089B2CA
+    value:           CFDB5CCD-A5E9-3E08-AD4F-087F420DB6A0
   - target:          arm64e-maccatalyst
-    value:           C82C3FB0-E798-3BC6-8B67-8A806089B2CA
+    value:           CFDB5CCD-A5E9-3E08-AD4F-087F420DB6A0
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1327.0.4
+current-version: 1331.0.7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '$ld$hide$os10.9$_NSHTTPCookieComment', '$ld$hide$os10.9$_NSHTTPCookieCommentURL', 
@@ -282,8 +282,9 @@ exports:
                        __CFURLStorageSessionCopyCache, __CFURLStorageSessionCopyCookieStorage, 
                        __CFURLStorageSessionCopyCredentialStorage, __CFURLStorageSessionCopyIdentifier, 
                        __CFURLStorageSessionCopyProcessDefault, __CFURLStorageSessionCreate, 
-                       __CFURLStorageSessionCreateWithData, __CFURLStorageSessionGetTypeID, 
-                       __CFURLWriteDataAndPropertiesToResource, __NSServerConfigurationOutboundConnectionProxyDictionary, 
+                       __CFURLStorageSessionCreateWithData, __CFURLStorageSessionDisableCache, 
+                       __CFURLStorageSessionGetTypeID, __CFURLWriteDataAndPropertiesToResource, 
+                       __NSServerConfigurationOutboundConnectionProxyDictionary, 
                        __NSServerConfigurationSOCKS5ServerCredentials, __NSURLErrorNWPathKey, 
                        __NSURLErrorPrivacyProxyFailureKey, __NSURLErrorWebSocketHandshakeFailureReasonKey, 
                        ___AuthBrokerMain, ___CFNetworkAgentMessageProcessorMain, 

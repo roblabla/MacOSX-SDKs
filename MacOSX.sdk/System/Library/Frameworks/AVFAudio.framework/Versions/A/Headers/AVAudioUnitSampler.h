@@ -76,7 +76,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 /*! @property stereoPan
 	@abstract
 		adjusts the pan for all the notes played.
-		Range:     -1 -> +1
+		Range:     -100 -> +100
 		Default:   0
  */
 @property (nonatomic) float     stereoPan;

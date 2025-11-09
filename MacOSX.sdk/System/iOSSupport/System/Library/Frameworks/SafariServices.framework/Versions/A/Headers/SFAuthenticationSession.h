@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+SF_EXTERN NSString * const SFAuthenticationErrorDomain API_DEPRECATED_WITH_REPLACEMENT("ASWebAuthenticationSessionErrorDomain", ios(11.0, 12.0));
+
 /*! @enum SFAuthenticationError
  @abstract Error code of the NSError object passed in by SFAuthenticationCompletionHandler.
  @constant SFAuthenticationErrorCanceledLogin The user has canceled login by cancelling the alert asking for permission to log in to this app, or by dismissing the view controller for loading the authentication webpage.
@@ -17,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SFAuthenticationError) {
     SFAuthenticationErrorCanceledLogin = 1,
 } API_DEPRECATED("Use ASWebAuthenticationSessionErrorCode instead", ios(11.0, 12.0));
-
-SF_EXTERN NSString * const SFAuthenticationErrorDomain API_DEPRECATED_WITH_REPLACEMENT("ASWebAuthenticationSessionErrorDomain", ios(11.0, 12.0));
 
 typedef void (^SFAuthenticationCompletionHandler)(NSURL *_Nullable callbackURL, NSError *_Nullable error) NS_SWIFT_NAME(SFAuthenticationSession.CompletionHandler);
 

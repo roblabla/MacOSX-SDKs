@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           D586562B-5A94-35B3-BDE5-B2D08CE8B9B5
+    value:           63626146-75E8-3FD5-8BB8-D251B993BD11
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A64D4059-7342-30BE-A453-3B2305B6D415
+    value:           970DF050-7572-3E78-B2B1-E92BC5079E86
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameController.framework/Versions/A/GameController'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

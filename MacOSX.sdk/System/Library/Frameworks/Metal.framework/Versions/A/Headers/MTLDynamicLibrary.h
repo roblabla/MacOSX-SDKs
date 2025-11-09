@@ -1,5 +1,5 @@
 //
-//  MTLDynamicLibrary_Private.h
+//  MTLDynamicLibrary.h
 //  Metal
 //
 //  Copyright (c) 2020 Apple Inc. All rights reserved.

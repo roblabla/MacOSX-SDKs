@@ -4,25 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9BD42213-6BB2-37A3-90BB-DDF401C77B4F
+    value:           EC80DFD4-12A6-385D-A729-978C8A58E40A
   - target:          x86_64-maccatalyst
-    value:           9BD42213-6BB2-37A3-90BB-DDF401C77B4F
+    value:           EC80DFD4-12A6-385D-A729-978C8A58E40A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFE0746E-99C6-3AA2-8488-4D8A7B00E8B3
+    value:           0DAB851B-17C4-39F3-82F3-752BE8301107
   - target:          arm64e-maccatalyst
-    value:           AFE0746E-99C6-3AA2-8488-4D8A7B00E8B3
+    value:           0DAB851B-17C4-39F3-82F3-752BE8301107
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1785.22.9
+current-version: 1785.24.11
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__110__function6__baseIFvimEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__117bad_function_callE, 
+                       __ZTSNSt3__110__function6__baseIFvimEEE, __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _GEOMapRectEnclosingCameraProperties, _GEOPDCameraPathFrameFromVKCameraFrame, 

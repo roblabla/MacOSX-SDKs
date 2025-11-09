@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0764A480-F978-3C53-94E7-593E69821282
+    value:           B6846E82-0A6B-387F-A237-4473B6F75395
   - target:          arm64-macos
-    value:           FD2B114E-D1E0-39D4-BC3A-7BD643FDFF3B
+    value:           7E85AB17-A4E0-3035-86B6-842ABF3C7F50
   - target:          arm64e-macos
-    value:           E513F1FA-7DFF-390F-B967-81DB2E7FDBC1
+    value:           41271541-81BA-3496-9CE7-DA1982929B85
 install-name:    '/usr/lib/libcryptex_interface.dylib'
-current-version: 169.60.2
+current-version: 170.100.24
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ cryptex, cryptexctl, cryptexd, cryptexd.diagnostic ]

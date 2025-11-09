@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           923B9E3C-6074-3EE9-B3DD-0835D292A1A7
+    value:           FC0CD11C-075C-349B-8DD0-0A40A55F3171
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24F25F16-AF92-35B5-8E2D-CBFFA97581B2
+    value:           9BA655F9-A317-301A-BCC2-048A737CA7E6
 install-name:    '/System/Library/PrivateFrameworks/Feedback.framework/Versions/A/Feedback'
 swift-abi-version: 7
 exports:

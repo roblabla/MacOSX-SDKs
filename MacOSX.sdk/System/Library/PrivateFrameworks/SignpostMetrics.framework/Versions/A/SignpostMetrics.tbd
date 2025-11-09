@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           692A8345-F42C-34DF-92AD-4F8B1ECE563F
+    value:           E46B4DDC-BA54-3BC0-93DF-73870747CE26
   - target:          x86_64-maccatalyst
-    value:           692A8345-F42C-34DF-92AD-4F8B1ECE563F
+    value:           E46B4DDC-BA54-3BC0-93DF-73870747CE26
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFBB0FAC-5E99-30EA-A106-0DC8598C9FE8
+    value:           88EE9D52-989B-3309-A3BE-62E125C27E39
   - target:          arm64e-maccatalyst
-    value:           FFBB0FAC-5E99-30EA-A106-0DC8598C9FE8
+    value:           88EE9D52-989B-3309-A3BE-62E125C27E39
 install-name:    '/System/Library/PrivateFrameworks/SignpostMetrics.framework/Versions/A/SignpostMetrics'
-current-version: 69
+current-version: 76
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

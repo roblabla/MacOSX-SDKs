@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EE2283E6-EA19-37B5-84FE-00E140172B2E
+    value:           9A895F2D-CF62-34C7-A8AB-55DCB41FD8CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A68D9565-924C-3AC7-B8CB-B0F006B0FC3F
+    value:           7812D31A-042B-3075-A7F7-96CB7A949556
 install-name:    '/System/Library/PrivateFrameworks/PhotoPrintProduct.framework/Versions/A/PhotoPrintProduct'
 current-version: 690
 exports:

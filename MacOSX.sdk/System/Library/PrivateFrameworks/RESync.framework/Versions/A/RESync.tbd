@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           21EA39C1-B5F7-3EAA-9E40-F6E488DFB24F
+    value:           20E093D5-BF3F-322C-8F05-220F41B085D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F567C077-5177-36B6-9753-5D7D158F34C0
+    value:           71F267D9-05A6-3127-9F4E-DA85AE58137E
 install-name:    '/System/Library/PrivateFrameworks/RESync.framework/Versions/A/RESync'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

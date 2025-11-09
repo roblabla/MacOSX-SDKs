@@ -91,6 +91,50 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 
 @end
 
+@interface MPSGraph(MPSGraphGatherAlongAxisOps)
+
+/*!
+ *  @abstract   Create GatherAlongAxis op and return the result tensor
+ *  @discussion Gather values from `updatesTensor` along the specified `axis` at indices in `indicesTensor`.
+ *              The shape of `updatesTensor` and `indicesTensor` must match except at `axis`.
+ *              The shape of the result tensor is equal to the shape of `indicesTensor`.
+ *              If an index is out of bounds of the `updatesTensor` along `axis` a 0 is inserted.
+ *
+ *  @param      axis                          The axis to gather from. Negative values wrap around
+ *  @param      updatesTensor      The input tensor to gather values from
+ *  @param      indicesTensor      Int32 or Int64 tensor used to index `updatesTensor`
+ *  @param      name                          The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+*/
+
+-(MPSGraphTensor *) gatherAlongAxis:(NSInteger) axis
+                  withUpdatesTensor:(MPSGraphTensor *) updatesTensor
+                      indicesTensor:(MPSGraphTensor *) indicesTensor
+                               name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( gatherAlongAxis(_:updates:indices:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create GatherAlongAxis op and return the result tensor
+ *  @discussion See above discussion of gatherAlongAxis: withUpdatesTensor: indicesTensor: name:
+ *
+ *  @param      axisTensor            Scalar Int32 tensor. The axis to gather from. Negative values wrap around
+ *  @param      updatesTensor      The input tensor to gather values from
+ *  @param      indicesTensor      Int32 or Int64 tensor used to index `updatesTensor`
+ *  @param      name                          The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+*/
+-(MPSGraphTensor *) gatherAlongAxisTensor:(MPSGraphTensor *) axisTensor
+                        withUpdatesTensor:(MPSGraphTensor *) updatesTensor
+                            indicesTensor:(MPSGraphTensor *) indicesTensor
+                                     name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( gatherAlongAxisTensor(_:updates:indices:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 #endif /* MPSGatherOps_h */

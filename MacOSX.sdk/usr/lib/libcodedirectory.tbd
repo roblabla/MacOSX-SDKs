@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A16C08FC-EE04-3A14-AEFE-BA862BD78374
+    value:           AFA45029-3BC7-3DA1-8D49-DB03EEF64130
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           725DDEF1-67E6-3709-96FB-80AEEEE3BADC
+    value:           28D2DEBA-2CA0-3D79-8CB9-A1FCEE12089B
 install-name:    '/usr/lib/libcodedirectory.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

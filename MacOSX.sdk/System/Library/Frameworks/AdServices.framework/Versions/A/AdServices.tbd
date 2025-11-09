@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FFB3D0DC-766B-390F-B183-9DAA78E801EC
+    value:           FB153A08-B5BB-3A36-BF71-013744AE134B
   - target:          x86_64-maccatalyst
-    value:           FFB3D0DC-766B-390F-B183-9DAA78E801EC
+    value:           FB153A08-B5BB-3A36-BF71-013744AE134B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7351EACD-6F38-32A1-8ED4-A66D6FF45F2A
+    value:           4D4C5380-B582-3AF6-81DA-A7E1A9C29732
   - target:          arm64e-maccatalyst
-    value:           7351EACD-6F38-32A1-8ED4-A66D6FF45F2A
+    value:           4D4C5380-B582-3AF6-81DA-A7E1A9C29732
 install-name:    '/System/Library/Frameworks/AdServices.framework/Versions/A/AdServices'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

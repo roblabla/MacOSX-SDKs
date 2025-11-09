@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A7F13B88-C6E3-3530-9AC5-6939766EBB1B
+    value:           D33F868A-3E51-3EFF-9AF8-53486026ECA7
   - target:          x86_64-maccatalyst
-    value:           A7F13B88-C6E3-3530-9AC5-6939766EBB1B
+    value:           D33F868A-3E51-3EFF-9AF8-53486026ECA7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6DABCA96-F610-3DFF-A980-86B73E49B4F6
+    value:           53FBD3CA-4AB1-3F9D-99DD-8396D4CAAD0E
   - target:          arm64e-maccatalyst
-    value:           6DABCA96-F610-3DFF-A980-86B73E49B4F6
+    value:           53FBD3CA-4AB1-3F9D-99DD-8396D4CAAD0E
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
 current-version: 62
 exports:
@@ -22,11 +22,7 @@ exports:
     symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mP13__va_list_tag, 
                        __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mP13__va_list_tag ]
     weak-symbols:    [ __ZTI23IOPresentmentFailTracer, __ZTI35IOPresentmentTransactionDisplayPipe, 
-                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTS23IOPresentmentFailTracer, __ZTS35IOPresentmentTransactionDisplayPipe, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+                       __ZTS23IOPresentmentFailTracer, __ZTS35IOPresentmentTransactionDisplayPipe ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IOPresentmentBegin, _IOPresentmentBindIOAccelSurfaceToResource, 

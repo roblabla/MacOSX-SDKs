@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6873DD08-6FDC-31BE-9DC2-773E3CF997BB
+    value:           21343DEC-9418-33B9-98D1-159C0896DEF8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8580845E-B987-3CD8-A3FC-1FA1F82C8000
+    value:           1F2195C6-A6A5-38B1-AA6C-81682FD01BA7
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help'
-current-version: 71
+current-version: 73
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon

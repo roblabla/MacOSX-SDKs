@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           42C0AD1E-867C-366F-9756-883117C271D2
+    value:           25A2FDE0-151E-3DAE-ABC2-D9866ED5F48A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A14EC4D7-0CAB-3EA6-B053-9845B5939D43
+    value:           C59BD4AB-FCFE-35F8-A3F4-CBEBF46FAD32
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocompleteUI.framework/Versions/A/ContactsAutocompleteUI'
 current-version: 9999.99.99
 exports:

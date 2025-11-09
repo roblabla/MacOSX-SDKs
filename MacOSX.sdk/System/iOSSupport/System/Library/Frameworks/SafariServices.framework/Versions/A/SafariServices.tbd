@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           C3E33E93-AADF-338D-A647-93355D0B16F1
+    value:           487A8773-3A4D-33B7-B8EC-56CE54A6940E
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           E5DA2254-6217-3085-B846-98AC07885F83
+    value:           2FFE793D-F34A-314A-A4AF-85AB2B07384E
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SafariServices.framework/Versions/A/SafariServices'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
@@ -24,8 +24,9 @@ exports:
     objc-classes:    [ SFAuthenticationSession, SFContentBlockerManager, SFContentBlockerState, 
                        SFSafariViewController, SFSafariViewControllerActivityButton, 
                        SFSafariViewControllerConfiguration, SFSafariViewControllerPrewarmingToken, 
-                       SSReadingList, _SFAuthenticationContext, _SFEditablePasswordTableViewController, 
-                       _SFFeatureAvailability, _SFFormDataController, _SFPasswordAuditingViewController, 
-                       _SFPasswordIconController, _SFPasswordManagerLockedView, _SFPasswordPickerTableViewController, 
-                       _SFSearchEngineController, _SFSearchEngineInfo ]
+                       SSReadingList, _SFAccountIconController, _SFAccountManagerLockedView, 
+                       _SFAccountManagerViewController, _SFAccountPickerTableViewController, 
+                       _SFAuthenticationContext, _SFFeatureAvailability, _SFFormDataController, 
+                       _SFPasswordAuditingViewController, _SFSearchEngineController, 
+                       _SFSearchEngineInfo ]
 ...

@@ -17,6 +17,7 @@
 #import <MetalPerformanceShadersGraph/MPSGraphControlFlowOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphDepthwiseConvolutionOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphGatherOps.h>
+#import <MetalPerformanceShadersGraph/MPSGraphLinearAlgebraOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphLossOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphMatrixMultiplicationOps.h>
 #import <MetalPerformanceShadersGraph/MPSGraphSparseOps.h>

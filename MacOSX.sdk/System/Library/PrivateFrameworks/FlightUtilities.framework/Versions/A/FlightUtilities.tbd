@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BDBD9195-FE27-38F9-9EF5-BA8C9F655AF9
+    value:           29F2C93A-C2ED-3674-8A5F-9FF452C430AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1A031EE8-20C7-373E-BE05-20C3EE4308CF
+    value:           CD3DA73A-1734-339D-9693-FDAFFACF4C96
 install-name:    '/System/Library/PrivateFrameworks/FlightUtilities.framework/Versions/A/FlightUtilities'
 current-version: 144
 reexported-libraries:
@@ -22,17 +22,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           32E24C28-84CD-38FC-B3A2-4B2F0696C77C
+    value:           9A28D775-D240-369C-907E-7B68CB97390A
   - target:          x86_64-maccatalyst
-    value:           32E24C28-84CD-38FC-B3A2-4B2F0696C77C
+    value:           9A28D775-D240-369C-907E-7B68CB97390A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13B2E3D5-4D00-397C-ABAA-949841CB1D8D
+    value:           CC8656F6-02CC-3374-93A7-92631761EC94
   - target:          arm64e-maccatalyst
-    value:           13B2E3D5-4D00-397C-ABAA-949841CB1D8D
+    value:           CC8656F6-02CC-3374-93A7-92631761EC94
 install-name:    '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore'
 current-version: 144
 exports:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CBBE830B-0CEB-3E49-BDAA-A0884890AE61
+    value:           35748808-496A-380C-B7A3-CE1D28A656FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45DE51CC-D14D-3158-AF1B-0C876DE7B518
+    value:           1AEBD905-A584-3468-9584-2A5A359E4FAA
 install-name:    '/System/Library/PrivateFrameworks/ProactiveBlendingLayer_macOS.framework/Versions/A/ProactiveBlendingLayer_macOS'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

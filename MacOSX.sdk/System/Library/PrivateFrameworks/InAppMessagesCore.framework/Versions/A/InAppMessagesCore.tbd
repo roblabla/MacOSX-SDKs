@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E0E479B2-EBEE-380A-A63E-56E4DE6EFAAC
+    value:           BC263A8B-FAD2-375F-8909-6669B40551FA
   - target:          x86_64-maccatalyst
-    value:           E0E479B2-EBEE-380A-A63E-56E4DE6EFAAC
+    value:           BC263A8B-FAD2-375F-8909-6669B40551FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1BB0E533-D9D6-3A27-A1B9-B51FAF2D4C25
+    value:           15A9AB66-EC26-3DBF-A875-35F29DD680C9
   - target:          arm64e-maccatalyst
-    value:           1BB0E533-D9D6-3A27-A1B9-B51FAF2D4C25
+    value:           15A9AB66-EC26-3DBF-A875-35F29DD680C9
 install-name:    '/System/Library/PrivateFrameworks/InAppMessagesCore.framework/Versions/A/InAppMessagesCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

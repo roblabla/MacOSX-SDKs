@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B0E50E4B-FBB2-34D5-B015-3DC4ADB5FF75
+    value:           96A81C98-C21D-3AC3-84EC-FAE0C02D8DD0
   - target:          x86_64-maccatalyst
-    value:           B0E50E4B-FBB2-34D5-B015-3DC4ADB5FF75
+    value:           96A81C98-C21D-3AC3-84EC-FAE0C02D8DD0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DAB74BE-D3DC-3450-81E1-C2349D883E37
+    value:           8E503FA2-58D8-3E8A-AB4B-53D9717961CA
   - target:          arm64e-maccatalyst
-    value:           5DAB74BE-D3DC-3450-81E1-C2349D883E37
+    value:           8E503FA2-58D8-3E8A-AB4B-53D9717961CA
 install-name:    '/usr/lib/libperfcheck.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

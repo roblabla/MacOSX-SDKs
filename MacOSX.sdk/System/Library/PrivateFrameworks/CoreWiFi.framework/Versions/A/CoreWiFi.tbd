@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A2FF38FD-1AB1-38E4-84D7-199C1039E5C2
+    value:           B3581743-A485-3B39-8965-22D05A4FDF30
   - target:          x86_64-maccatalyst
-    value:           A2FF38FD-1AB1-38E4-84D7-199C1039E5C2
+    value:           B3581743-A485-3B39-8965-22D05A4FDF30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F06CD82B-6486-379C-ABB4-200F53D87932
+    value:           AB6749B5-B828-393D-B7FC-88484A5CC947
   - target:          arm64e-maccatalyst
-    value:           F06CD82B-6486-379C-ABB4-200F53D87932
+    value:           AB6749B5-B828-393D-B7FC-88484A5CC947
 install-name:    '/System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -29,12 +29,12 @@ exports:
                        _CWFEthernetAddressStringFromData, _CWFEventAutoJoinStatusKey, 
                        _CWFEventJoinStatusKey, _CWFEventLinkChangeStatusKey, _CWFEventLinkQualityMetricKey, 
                        _CWFEventRoamStatusKey, _CWFFastestPHYMode, _CWFFilteredScanResults, 
-                       _CWFHexadecimalStringFromData, _CWFInternalEventAutoJoinResultKey, 
-                       _CWFInternalEventAutoJoinStateKey, _CWFInternalEventAutoJoinTriggerKey, 
-                       _CWFInternalEventErrorKey, _CWFInternalEventIsAutoJoinKey, 
-                       _CWFInternalEventScanResultKey, _CWFKnownNetworksStoreIdentifier, 
-                       _CWFLog, _CWFMachineSerialNumber, _CWFManagerErrorDomain, 
-                       _CWFNetworkConfigurationTimeout, _CWFNetworkProfilePropertyAddReasonKey, 
+                       _CWFHexadecimalStringFromData, _CWFHumanReadableStringFromData, 
+                       _CWFInternalEventAutoJoinResultKey, _CWFInternalEventAutoJoinStateKey, 
+                       _CWFInternalEventAutoJoinTriggerKey, _CWFInternalEventErrorKey, 
+                       _CWFInternalEventIsAutoJoinKey, _CWFInternalEventScanResultKey, 
+                       _CWFKnownNetworksStoreIdentifier, _CWFLog, _CWFMachineSerialNumber, 
+                       _CWFManagerErrorDomain, _CWFNetworkConfigurationTimeout, _CWFNetworkProfilePropertyAddReasonKey, 
                        _CWFNetworkProfilePropertyAddedAtKey, _CWFNetworkProfilePropertyAutoJoinDisabledKey, 
                        _CWFNetworkProfilePropertyBSSListKey, _CWFNetworkProfilePropertyBundleIDKey, 
                        _CWFNetworkProfilePropertyCaptiveProfileKey, _CWFNetworkProfilePropertyCarPlayUUIDKey, 

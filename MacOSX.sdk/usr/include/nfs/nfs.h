@@ -219,7 +219,6 @@ extern int nfs_ticks;
 #define NFS_MFLAG_NOQUOTA               15      /* don't support QUOTA requests */
 #define NFS_MFLAG_MNTUDP                16      /* MOUNT protocol should use UDP */
 #define NFS_MFLAG_MNTQUICK              17      /* use short timeouts while mounting */
-/*                                      18         reserved */
 #define NFS_MFLAG_NOOPAQUE_AUTH         19      /* don't make the mount AUTH_OPAQUE. Used by V3 */
 
 /* Macros for packing and unpacking packed versions */

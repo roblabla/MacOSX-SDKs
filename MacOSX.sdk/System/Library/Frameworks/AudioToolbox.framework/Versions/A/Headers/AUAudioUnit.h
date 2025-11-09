@@ -160,6 +160,9 @@ typedef void (^AURenderObserver)(AudioUnitRenderActionFlags actionFlags, const A
 	@brief		Block to schedule parameter changes.
 	@discussion
 		Not all parameters are rampable; check the parameter's flags.
+		Note: If the parameter is not rampable, a rampDuration of zero will result in an immediate change to
+		the target value, however, if rampDuration is non-zero, the parameter will not change.
+ 
 	@param eventSampleTime
 		The sample time (timestamp->mSampleTime) at which the parameter is to begin changing. When
 		scheduling parameters during the render cycle (e.g. via a render observer) this time can be

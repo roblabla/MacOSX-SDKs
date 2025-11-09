@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           63DB4EC4-0C3B-3944-B14C-C0590F912E5E
+    value:           C836847E-4CDB-39D6-8DE3-00AE93F505DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           441D9368-F551-31FA-A6ED-B7C187B99890
+    value:           7309F081-F089-37CC-B471-E7356611ECFC
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPInternal.framework/Versions/A/CoreCDPInternal'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -18,9 +18,10 @@ exports:
                        _CDPBackupMetadataPasswordResetKey, _CDPDConnectionInvalidatedNotification, 
                        _CoreCDPInternalVersionNumber, _CoreCDPInternalVersionString, 
                        _kCDPCABackupRecoveryAttemptBundleID, _kCDPCABackupRecoveryAttemptedMethods, 
-                       _kCDPCABackupRecoveryDidCancel, _kCDPCABackupRecoveryDidFail, 
-                       _kCDPCABackupRecoveryDidReset, _kCDPCABackupRecoveryDidSucceed, 
-                       _kCDPCABackupRecoveryDidSucceedWithoutLocalSecret, _kCDPCABackupRecoveryJoinMethod, 
+                       _kCDPCABackupRecoveryAvailableMethods, _kCDPCABackupRecoveryDidCancel, 
+                       _kCDPCABackupRecoveryDidFail, _kCDPCABackupRecoveryDidReset, 
+                       _kCDPCABackupRecoveryDidSucceed, _kCDPCABackupRecoveryDidSucceedWithoutLocalSecret, 
+                       _kCDPCABackupRecoveryEscrowDeviceCount, _kCDPCABackupRecoveryJoinMethod, 
                        _kCDPCABackupRecoveryResult, _kCDPCADidAttemptEscrowPreRecord, 
                        _kCDPCADidChangeLocalSecret, _kCDPCADidRemoveLocalSecret, 
                        _kCDPCADuration, _kCDPCAErrorCode, _kCDPCAErrorDomain, _kCDPCAEscrowPreRecordResult, 

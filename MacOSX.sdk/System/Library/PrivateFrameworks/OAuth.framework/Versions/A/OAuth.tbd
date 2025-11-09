@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B38ADA79-77B5-3768-B0C6-AF1A8A498F4C
+    value:           0A781899-D3B7-3A1A-99A6-DA89584DE8E0
   - target:          x86_64-maccatalyst
-    value:           B38ADA79-77B5-3768-B0C6-AF1A8A498F4C
+    value:           0A781899-D3B7-3A1A-99A6-DA89584DE8E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5BF0111E-8115-377F-9C50-ECE57B8E458D
+    value:           E744C218-C4C8-35A6-BDCE-D50CF0F03872
   - target:          arm64e-maccatalyst
-    value:           5BF0111E-8115-377F-9C50-ECE57B8E458D
+    value:           E744C218-C4C8-35A6-BDCE-D50CF0F03872
 install-name:    '/System/Library/PrivateFrameworks/OAuth.framework/Versions/A/OAuth'
 current-version: 25
 exports:

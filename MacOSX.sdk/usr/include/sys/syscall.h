@@ -585,7 +585,11 @@
 #define	SYS_proc_info_extended_id 545
 #define	SYS_tracker_action 546
 #define	SYS_debug_syscall_reject 547
-#define	SYS_MAXSYSCALL	548
+			/* 548  */
+			/* 549  */
+			/* 550  */
+#define	SYS_freadlink      551
+#define	SYS_MAXSYSCALL	552
 #define	SYS_invalid	63
 
 #endif /* __APPLE_API_PRIVATE */

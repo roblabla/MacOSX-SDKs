@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA37A59D-5516-3088-9670-DCEC6787267D
+    value:           045E4AF8-EFB9-34CA-9276-60BE037479ED
   - target:          x86_64-maccatalyst
-    value:           FA37A59D-5516-3088-9670-DCEC6787267D
+    value:           045E4AF8-EFB9-34CA-9276-60BE037479ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E52159AA-9538-3019-AF3D-B1448705978D
+    value:           FF196417-92B5-3F78-AA86-199160E6629D
   - target:          arm64e-maccatalyst
-    value:           E52159AA-9538-3019-AF3D-B1448705978D
+    value:           FF196417-92B5-3F78-AA86-199160E6629D
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

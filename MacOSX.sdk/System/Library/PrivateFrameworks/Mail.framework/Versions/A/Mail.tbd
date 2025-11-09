@@ -3,14 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78BA1476-0B9D-3EA8-B0C2-958C031E52A0
+    value:           539C9BC5-171B-38E7-89C9-B1235FF27E8D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A9BCF67-38A8-35AC-BBD3-5D8937107678
+    value:           032C1389-455F-3A79-9D70-39B5A1929111
 install-name:    '/System/Library/PrivateFrameworks/Mail.framework/Versions/A/Mail'
-current-version: 3693.40
-swift-abi-version: 7
+current-version: 3696.80.82
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
@@ -276,23 +275,22 @@ exports:
                        _SwipeActionDefaultsKey, __MFLibraryStringSearch, __ef_log_EMMessageActionToMFMessageActionRuleTransformer, 
                        __ef_log_MFSearchableIndexManager_macOS, _and64, _cacheSizeForFSAndDBType, 
                        _compareChildrenIndexes, _databaseIsRemote, _findEntity, _getRangeOfMessageFromCacheFileData, 
-                       _handleSqliteError, _kArchiveOrDeleteMutedMessagesKey, _kFlagSymbolName, 
-                       _mf_sqlite3_bind_blob, _mf_sqlite3_bind_int, _mf_sqlite3_bind_int64, 
-                       _mf_sqlite3_bind_null, _mf_sqlite3_bind_parameter_index, _mf_sqlite3_bind_text, 
-                       _mf_sqlite3_bind_text_or_null, _mf_sqlite3_exec_printf, _mf_sqlite3_get_table_printf, 
-                       _pageSizeForFSType, _sStringKeyAXFlaggedWithName, _sTopHitsCollectorResultLimit, 
-                       _sTopHitsSpotlightQueryMaxCount, _tablesForBaseTableAndOtherTables, 
-                       _uuid ]
+                       _handleSqliteError, _kArchiveOrDeleteMutedMessagesKey, _mf_sqlite3_bind_blob, 
+                       _mf_sqlite3_bind_int, _mf_sqlite3_bind_int64, _mf_sqlite3_bind_null, 
+                       _mf_sqlite3_bind_parameter_index, _mf_sqlite3_bind_text, _mf_sqlite3_bind_text_or_null, 
+                       _mf_sqlite3_exec_printf, _mf_sqlite3_get_table_printf, _pageSizeForFSType, 
+                       _sTopHitsCollectorResultLimit, _sTopHitsSpotlightQueryMaxCount, 
+                       _tablesForBaseTableAndOtherTables, _uuid ]
     objc-classes:    [ EMMailboxPredictionResult, EMMessageActionToMFMessageActionRuleTransformer, 
-                       FlagIconFactory, MCMessageToMEMessageTransformer, MFAccount, 
-                       MFAccountFactory_macOS, MFAccountMappingCleanupUpgradeStep, 
-                       MFAccountProvider, MFAccountStatus, MFAccountURLMigrator, 
-                       MFAccountsFrameworkCleanupUpgradeStep, MFAddDeletedColumnUpgradeStep, 
-                       MFAddEWSActionColumnsUpgradeStep, MFAddLastSpotlightCheckDateTableUpgradeStep, 
-                       MFAddMessageGlobalDataUpgradeStep, MFAddMessageListIDColumnUpgradeStep, 
-                       MFAddMessagesDeletedDateReceivedIndexUpgradeStep, MFAddMessagesSearchableMessageColumnUpgradeStep, 
-                       MFAddRemoteContentLinksTableUpgradeStep, MFAddServerMessagesUniquenessIndexUpgradeStep, 
-                       MFAddressManager, MFAdoptSharedSchemaUpgradeStep, MFAutoincrementMailboxesRowidUpgradeStep, 
+                       MCMessageToMEMessageTransformer, MFAccount, MFAccountFactory_macOS, 
+                       MFAccountMappingCleanupUpgradeStep, MFAccountProvider, MFAccountStatus, 
+                       MFAccountURLMigrator, MFAccountsFrameworkCleanupUpgradeStep, 
+                       MFAddDeletedColumnUpgradeStep, MFAddEWSActionColumnsUpgradeStep, 
+                       MFAddLastSpotlightCheckDateTableUpgradeStep, MFAddMessageGlobalDataUpgradeStep, 
+                       MFAddMessageListIDColumnUpgradeStep, MFAddMessagesDeletedDateReceivedIndexUpgradeStep, 
+                       MFAddMessagesSearchableMessageColumnUpgradeStep, MFAddRemoteContentLinksTableUpgradeStep, 
+                       MFAddServerMessagesUniquenessIndexUpgradeStep, MFAddressManager, 
+                       MFAdoptSharedSchemaUpgradeStep, MFAutoincrementMailboxesRowidUpgradeStep, 
                        MFBackupManager, MFBasicPersistenceMigrator, MFBlockedSenderRule, 
                        MFCacheDeleteAttachmentPurger, MFCachedMailboxInfo, MFChangeMessageIDHashFormatUpgradeStep, 
                        MFConversationCalculationContext, MFConversationCalculator, 
@@ -372,24 +370,25 @@ exports:
                        MFRecalculateConversationsWithoutMessageIDUpgradeStep, MFRecalculateTotalCountsUpgradeStep, 
                        MFRecoveredMessage, MFRecoveredStore, MFRedundantContentMarkup, 
                        MFRedundantTextIdentifier, MFReindexCoreSpotlightAttachmentTypeUpgradeStep, 
-                       MFReindexCoreSpotlightEncryptionStatusUpgradeStep, MFReindexCoreSpotlightUpgradeStep, 
-                       MFReindexCoreSpotlightUpgradeStep2, MFRemoteAttachmentDataSource, 
-                       MFRemoteStore, MFRemoteStoreAccount, MFRemoteStoreSizeEngine, 
-                       MFRemoteURLAttachmentDataSource, MFRemoveCategoryColumnUpgradeStep, 
-                       MFRemoveIMAPMessagesWithTempUIDsUpgradeStep, MFRemoveMessagesFromGmailLabelsUpgradeStep, 
-                       MFRemoveMessagesUpgradeStep, MFRemoveOrphanedMailboxRowsUpgradeStep, 
-                       MFRemoveRelevanceColumnUpgradeStep, MFRemoveRemoteContentLinksTableUpgradeStep, 
-                       MFRemoveUnusedFeedsTableAndMessagesColumnsUpgradeStep, MFRemoveUnusedSchemaTableUpgradeStep, 
-                       MFRenameThreadsTableUpgradeStep, MFReparseInvalidInReplyToHeadersUpgradeStep, 
-                       MFReparseReferenceHeadersUpgradeStep, MFResetEWSFolderHierarchyUpgradeStep, 
-                       MFResetPartsHaveBeenCachedUpgradeStep, MFRulesUpgrader, MFSMTPAccount, 
-                       MFSMTPConnection, MFSMTPDeliverer, MFSearchableIndexBasicQueryResultProcessor, 
-                       MFSearchableIndexItem_macOS, MFSearchableIndexManager_macOS, 
-                       MFSearchableIndexPersistence_macOS, MFSearchableIndexQueryFactory_macOS, 
-                       MFSearchableIndexQueryResult, MFSearchableIndexQueryResultCollector, 
-                       MFSearchableIndexThreadedQueryResultProcessor, MFSearchableIndexTopHitsResultsCollector, 
-                       MFSearchableIndex_macOS, MFSearchableMessagesIndexReindexTypeUpgradeStep, 
-                       MFSeenMessage, MFSeenMessagesManager, MFServerMessagePersistenceFactory_macOS, 
+                       MFReindexCoreSpotlightEncryptionStatusUpgradeStep, MFReindexCoreSpotlightMailMessageIDUpgradeStep, 
+                       MFReindexCoreSpotlightUpgradeStep, MFReindexCoreSpotlightUpgradeStep2, 
+                       MFRemoteAttachmentDataSource, MFRemoteStore, MFRemoteStoreAccount, 
+                       MFRemoteStoreSizeEngine, MFRemoteURLAttachmentDataSource, 
+                       MFRemoveCategoryColumnUpgradeStep, MFRemoveIMAPMessagesWithTempUIDsUpgradeStep, 
+                       MFRemoveMessagesFromGmailLabelsUpgradeStep, MFRemoveMessagesUpgradeStep, 
+                       MFRemoveOrphanedMailboxRowsUpgradeStep, MFRemoveRelevanceColumnUpgradeStep, 
+                       MFRemoveRemoteContentLinksTableUpgradeStep, MFRemoveUnusedFeedsTableAndMessagesColumnsUpgradeStep, 
+                       MFRemoveUnusedSchemaTableUpgradeStep, MFRenameThreadsTableUpgradeStep, 
+                       MFReparseInvalidInReplyToHeadersUpgradeStep, MFReparseReferenceHeadersUpgradeStep, 
+                       MFResetEWSFolderHierarchyUpgradeStep, MFResetPartsHaveBeenCachedUpgradeStep, 
+                       MFRulesUpgrader, MFSMTPAccount, MFSMTPConnection, MFSMTPDeliverer, 
+                       MFSearchableIndexBasicQueryResultProcessor, MFSearchableIndexItem_macOS, 
+                       MFSearchableIndexManager_macOS, MFSearchableIndexPersistence_macOS, 
+                       MFSearchableIndexQueryFactory_macOS, MFSearchableIndexQueryResult, 
+                       MFSearchableIndexQueryResultCollector, MFSearchableIndexThreadedQueryResultProcessor, 
+                       MFSearchableIndexTopHitsResultsCollector, MFSearchableIndex_macOS, 
+                       MFSearchableMessagesIndexReindexTypeUpgradeStep, MFSeenMessage, 
+                       MFSeenMessagesManager, MFServerMessagePersistenceFactory_macOS, 
                        MFSetPartsHaveBeenCachedUpgradeStep, MFSignature, MFSignatureManager, 
                        MFSizeEngine, MFSmartMailboxSpecialMailboxCriteriaAccountUpgradeStep, 
                        MFSmartMailboxUnreadCountManager, MFSmartMailboxesUpgrader, 

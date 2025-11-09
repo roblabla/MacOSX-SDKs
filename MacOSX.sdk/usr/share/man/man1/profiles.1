@@ -1,6 +1,6 @@
 .\" see 'man mdoc' for syntax examples
 .\" this should go in /usr/share/man/man1/
-.Dd October 20, 2020
+.Dd November 30, 2021
 .Dt profiles 1
 .Os macOS
 .Sh NAME
@@ -40,7 +40,7 @@ List profiles for a user or when running as root, the device.
 .Sy -user Ar user_name
 .Sy -output Ar output_path
 .br
-Show expanded information for profiles.   For an enrollment, this will show the current DEP configuration.
+Show expanded information for profiles.   For an enrollment, this will show the current DEP configuration, and the call may be rate limited to once every 23 hours.
 .Pp
 .\"             -- remove --
 .It Sy remove
@@ -80,7 +80,7 @@ For configuration profiles, renews any certificates for the specified profile.  
 .Sy -path Ar file_path
 .br
 For provisioning profiles, validate the provisioning profile located at the file_path.
-For enrollments, re-validate the installed DEP server information and update any local information, displaying any major changes.  If this information is different from the current enrolled server, this will not unenroll the client from the current server.
+For enrollments, re-validate the installed DEP server information and update any local information, displaying any major changes.  If this information is different from the current enrolled server, this will not unenroll the client from the current server.  This call may be rate limited to once every 23 hours.
 .Pp
 .\"             -- version --
 .It Sy version

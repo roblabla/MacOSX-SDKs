@@ -273,12 +273,15 @@ enum
     @constant       kCMIOSelectorControlPropertyItemName
                         This property translates the given item ID into a human readable name. The qualifier contains the ID of the item to be translated and name is returned as a CFString as
                         the property data. The caller is responsible for releasing the returned CFObject.
+	@constant       kCMIOSelectorControlPropertyAvailableItemNames
+						An array of CFStringRefs that contains the item names of all items available. The CFStringRefs in this array correspond to the ID of the same index in the kCMIOSelectorControlPropertyAvailableItems array.
 */
 enum
 {
-    kCMIOSelectorControlPropertyCurrentItem     = 'scci',
-    kCMIOSelectorControlPropertyAvailableItems  = 'scai',
-    kCMIOSelectorControlPropertyItemName        = 'scin'
+    kCMIOSelectorControlPropertyCurrentItem        = 'scci',
+    kCMIOSelectorControlPropertyAvailableItems     = 'scai',
+    kCMIOSelectorControlPropertyItemName           = 'scin',
+	kCMIOSelectorControlPropertyAvailableItemNames = 'scan'
 };
 
 #pragma mark FeatureControl Properties

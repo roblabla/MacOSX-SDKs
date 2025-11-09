@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D9E03270-12C2-3E96-ACFB-B09CB772D64A
+    value:           937BD638-D168-32E7-84C3-E3992DC33A0D
   - target:          x86_64-maccatalyst
-    value:           D9E03270-12C2-3E96-ACFB-B09CB772D64A
+    value:           937BD638-D168-32E7-84C3-E3992DC33A0D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           523D0261-53F7-3CEE-8ED9-9EF83E2DFCC4
+    value:           9B8A3A33-7961-3115-A6D4-90027A189ACF
   - target:          arm64e-maccatalyst
-    value:           523D0261-53F7-3CEE-8ED9-9EF83E2DFCC4
+    value:           9B8A3A33-7961-3115-A6D4-90027A189ACF
 install-name:    '/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG'
-current-version: 175.3.2
+current-version: 175.5.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -56,19 +56,19 @@ exports:
                        _CGSVGDocumentCreate, _CGSVGDocumentCreateFromData, _CGSVGDocumentCreateFromDataProvider, 
                        _CGSVGDocumentCreateFromURL, _CGSVGDocumentCreateOptionVariablesKey, 
                        _CGSVGDocumentGetCanvas, _CGSVGDocumentGetCanvasSize, _CGSVGDocumentGetNamedStyle, 
-                       _CGSVGDocumentGetRootNode, _CGSVGDocumentGetTypeID, _CGSVGDocumentOptionSecurityLevelKey, 
-                       _CGSVGDocumentOptionShowPlaceholderKey, _CGSVGDocumentOptionStrictKey, 
-                       _CGSVGDocumentRelease, _CGSVGDocumentRetain, _CGSVGDocumentWriteToData, 
-                       _CGSVGDocumentWriteToURL, _CGSVGGradientAddStop, _CGSVGGradientCreate, 
-                       _CGSVGGradientGetCenter, _CGSVGGradientGetEnd, _CGSVGGradientGetFocal, 
-                       _CGSVGGradientGetGradientTransform, _CGSVGGradientGetNumberOfStops, 
-                       _CGSVGGradientGetRadius, _CGSVGGradientGetSpread, _CGSVGGradientGetStart, 
-                       _CGSVGGradientGetStop, _CGSVGGradientGetType, _CGSVGGradientGetTypeID, 
-                       _CGSVGGradientRelease, _CGSVGGradientRetain, _CGSVGGradientSetCenter, 
-                       _CGSVGGradientSetEnd, _CGSVGGradientSetFocal, _CGSVGGradientSetGradientTransform, 
-                       _CGSVGGradientSetRadius, _CGSVGGradientSetSpread, _CGSVGGradientSetStart, 
-                       _CGSVGGradientStopCreateWithColor, _CGSVGGradientStopGetColor, 
-                       _CGSVGGradientStopGetOffset, _CGSVGGradientStopGetOpacity, 
+                       _CGSVGDocumentGetRootNode, _CGSVGDocumentGetTypeID, _CGSVGDocumentIsMonochrome, 
+                       _CGSVGDocumentOptionSecurityLevelKey, _CGSVGDocumentOptionShowPlaceholderKey, 
+                       _CGSVGDocumentOptionStrictKey, _CGSVGDocumentRelease, _CGSVGDocumentRetain, 
+                       _CGSVGDocumentWriteToData, _CGSVGDocumentWriteToURL, _CGSVGGradientAddStop, 
+                       _CGSVGGradientCreate, _CGSVGGradientGetCenter, _CGSVGGradientGetEnd, 
+                       _CGSVGGradientGetFocal, _CGSVGGradientGetGradientTransform, 
+                       _CGSVGGradientGetNumberOfStops, _CGSVGGradientGetRadius, _CGSVGGradientGetSpread, 
+                       _CGSVGGradientGetStart, _CGSVGGradientGetStop, _CGSVGGradientGetType, 
+                       _CGSVGGradientGetTypeID, _CGSVGGradientRelease, _CGSVGGradientRetain, 
+                       _CGSVGGradientSetCenter, _CGSVGGradientSetEnd, _CGSVGGradientSetFocal, 
+                       _CGSVGGradientSetGradientTransform, _CGSVGGradientSetRadius, 
+                       _CGSVGGradientSetSpread, _CGSVGGradientSetStart, _CGSVGGradientStopCreateWithColor, 
+                       _CGSVGGradientStopGetColor, _CGSVGGradientStopGetOffset, _CGSVGGradientStopGetOpacity, 
                        _CGSVGGradientStopGetTypeID, _CGSVGGradientStopRelease, _CGSVGGradientStopRetain, 
                        _CGSVGImageCreateWithNoImage, _CGSVGImageCreateWithRasterImage, 
                        _CGSVGImageCreateWithSVGDocument, _CGSVGImageGetRasterImage, 

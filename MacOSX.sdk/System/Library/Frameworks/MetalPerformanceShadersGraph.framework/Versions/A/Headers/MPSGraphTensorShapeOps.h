@@ -427,6 +427,239 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
                          name:(NSString *)name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
+/*!
+ *  @abstract   Create stack op and return the result
+ *  @discussion Stacks all input tensors along `axis` into a result tensor of rank + 1. Tensors must be broadcast
+ *              compatible along all dimensions, and have the same type.
+ *
+ *  @param      inputTensors        Input tensors
+ *  @param      axis            The dimension to stack tensors into result. Must be in range - rank + 1 <= dimension < rank + 1
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) stackTensors:(NSArray<MPSGraphTensor *> *) inputTensors
+                            axis:(NSInteger) axis
+                            name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( stack(_:axis:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create split op and return the result
+ *  @discussion Splits the input tensor along `axis` into multiple result tensors of size determined by `splitSizes`.
+ *              Requires that the sum of `splitSizes` is equal to the lenth of the input along `axis`.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      splitSizes        The length of the result tensors along the split axis
+ *  @param      axis        The dimension to split the input along
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(NSArray<MPSGraphTensor *> *) splitTensor:(MPSGraphTensor *) tensor
+                                splitSizes:(NSArray<NSNumber *> *) splitSizes
+                                      axis:(NSInteger) axis
+                                      name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( split(_:splitSizes:axis:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create split op and return the result
+ *  @discussion Splits the input tensor along `axis` into multiple result tensors of size determined by `splitSizes`.
+ *              Requires that the sum of `splitSizesTensor` is equal to the lenth of the input along `axis`.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      splitSizesTensor        The length of the result tensors along the split axis
+ *  @param      axis        The dimension to split the input along
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(NSArray<MPSGraphTensor *> *) splitTensor:(MPSGraphTensor *) tensor
+                          splitSizesTensor:(MPSGraphTensor *) splitSizesTensor
+                                      axis:(NSInteger) axis
+                                      name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( split(_:splitSizesTensor:axis:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create split op and return the result
+ *  @discussion Splits the input tensor along `axis` into `numsplits` result tensors of equal size.
+ *              Requires that the lenth of the input along `axis` is divisible by `num_splits`.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      numSplits        The number of result tensors to split to
+ *  @param      axis        The dimension to split the input along
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(NSArray<MPSGraphTensor *> *) splitTensor:(MPSGraphTensor *) tensor
+                                 numSplits:(NSUInteger) numSplits
+                                      axis:(NSInteger) axis
+                                      name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( split(_:numSplits:axis:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create squeeze op and return the result
+ *  @discussion Squeezes the tensor, removing any dimensions with size 1.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) squeezeTensor:(MPSGraphTensor *) tensor
+                             name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( squeeze(_:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create squeeze op and return the result
+ *  @discussion Squeezes the tensor, removing a dimension with size 1 at specified axis.
+ *              Size must be 1 at specified axis.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      axis            The axis to squeeze
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) squeezeTensor:(MPSGraphTensor *) tensor
+                             axis:(NSInteger) axis
+                             name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( squeeze(_:axis:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create squeeze op and return the result
+ *  @discussion Squeezes the tensor, removing dimensions with size 1 at specified axes.
+ *              Size must be 1 at all specified axes.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      axes            The axes to squeeze
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) squeezeTensor:(MPSGraphTensor *) tensor
+                             axes:(NSArray<NSNumber *> *) axes
+                             name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( squeeze(_:axes:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+-(MPSGraphTensor *) squeezeTensor:(MPSGraphTensor *) tensor
+                       axesTensor:(MPSGraphTensor *) axesTensor
+                             name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( squeeze(_:axesTensor:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create expand_dims op and return the result
+ *  @discussion Expands the tensor, inserting a dimension with size 1 at specified axis.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      axis            The axis to expand
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) expandDimsOfTensor:(MPSGraphTensor *) tensor
+                                  axis:(NSInteger) axis
+                                  name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( expandDims(_:axis:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create expand_dims op and return the result
+ *  @discussion Expands the tensor, inserting dimensions with size 1 at specified axes.
+ *
+ *  @param      tensor        Input tensor
+ *  @param      axes            The axes to expand
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) expandDimsOfTensor:(MPSGraphTensor *) tensor
+                                  axes:(NSArray<NSNumber *> *) axes
+                                  name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( expandDims(_:axes:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+-(MPSGraphTensor *) expandDimsOfTensor:(MPSGraphTensor *) tensor
+                            axesTensor:(MPSGraphTensor *) axesTensor
+                                  name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( expandDims(_:axesTensor:name:) )
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create get coord op and return the result
+ *  @discussion Creates a tensor of specified shape with value at index @code [i_0, i_1, ... , i_N] = i_axis @endcode
+ *              For example,
+ *              @code
+ *              coordinateAlongAxis(0, withShape=[5]) = [0, 1, 2, 3, 4]
+ *              coordinateAlongAxis(1, withShape=[3,2]) = [[0, 0],
+ *                                                         [1, 1],
+ *                                                         [2, 2]]
+ *              @endcode
+ *
+ *  @param      axis            The coordinate axis an element's value is set to. Negative values wrap around
+ *  @param      shape           The shape of the result tensor
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) coordinateAlongAxis:(NSInteger) axis
+                              withShape:(MPSShape *) shape
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create get coord op and return the result
+ *  @discussion See above discussion of getCoordinateValueWithShape: axis: name:
+ *
+ *  @param      axisTensor            Scalar Int32 tensor. The coordinate axis an element's value is set to.  Negative values wrap around
+ *  @param      shape           The shape of the result tensor
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) coordinateAlongAxisTensor:(MPSGraphTensor *) axisTensor
+                                    withShape:(MPSShape *) shape
+                                         name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create get coord op and return the result
+ *  @discussion See above discussion of getCoordinateValueWithShape: axis: name:
+ *
+ *  @param      axis            The coordinate axis an element's value is set to.  Negative values wrap around
+ *  @param      shapeTensor           1D Int32 or Int64 tensor. The shape of the result tensor.
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) coordinateAlongAxis:(NSInteger) axis
+                        withShapeTensor:(MPSGraphTensor *) shapeTensor
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
+/*!
+ *  @abstract   Create get coord op and return the result
+ *  @discussion See above discussion of getCoordinateValueWithShape: axis: name:
+ *
+ *  @param      axisTensor            Scalar Int32 tensor. The coordinate axis an element's value is set to.  Negative values wrap around
+ *  @param      shapeTensor           1D Int32 or Int64 tensor. The shape of the result tensor.
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) coordinateAlongAxisTensor:(MPSGraphTensor *) axisTensor
+                              withShapeTensor:(MPSGraphTensor *) shapeTensor
+                                         name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
+
 @end
 
 NS_ASSUME_NONNULL_END

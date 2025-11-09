@@ -13,6 +13,34 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ *  @typedef    MPSGraphPoolingReturnIndicesMode
+ *  @abstract   Flattening mode for returned indices with max pooling
+ *
+ *  @constant   MPSGraphPoolingReturnIndicesNone                            No indices returned
+ *  @constant   MPSGraphPoolingReturnIndicesGlobalFlatten1D           Return indices flattened in inner most (last) dimension
+ *  @constant   MPSGraphPoolingReturnIndicesGlobalFlatten2D           Return indices flattened in 2 innermost dimensions. eg: HW in NCHW
+ *  @constant   MPSGraphPoolingReturnIndicesGlobalFlatten3D           Return indices flattened in 3 innernost dimensions. eg: HWC in NHWC
+ *  @constant   MPSGraphPoolingReturnIndicesGlobalFlatten4D           Return indices flattened in 4 innermost dimensions.
+ *  @constant   MPSGraphPoolingReturnIndicesLocalFlatten1D             Return indices within pooling window, flattened in inner most dimension
+ *  @constant   MPSGraphPoolingReturnIndicesLocalFlatten2D             Return indices within pooling window, flattened in 2 innermost dimensions. eg: HW in NCHW
+ *  @constant   MPSGraphPoolingReturnIndicesLocalFlatten3D             Return indices within pooling window, flattened in 3 innernost dimensions. eg: HWC in NHWC
+ *  @constant   MPSGraphPoolingReturnIndicesLocalFlatten4D             Return indices within pooling window, flattened in 4 innermost dimensions.
+ */
+MPS_ENUM_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3))
+typedef NS_ENUM(NSUInteger, MPSGraphPoolingReturnIndicesMode)
+{
+    MPSGraphPoolingReturnIndicesNone,
+    MPSGraphPoolingReturnIndicesGlobalFlatten1D,
+    MPSGraphPoolingReturnIndicesGlobalFlatten2D,
+    MPSGraphPoolingReturnIndicesGlobalFlatten3D,
+    MPSGraphPoolingReturnIndicesGlobalFlatten4D,
+    MPSGraphPoolingReturnIndicesLocalFlatten1D,
+    MPSGraphPoolingReturnIndicesLocalFlatten2D,
+    MPSGraphPoolingReturnIndicesLocalFlatten3D,
+    MPSGraphPoolingReturnIndicesLocalFlatten4D,
+};
+
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraphPooling2DOpDescriptor : NSObject<NSCopying>
 
@@ -34,6 +62,25 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 
 @property (readwrite, nonatomic) MPSGraphPaddingStyle paddingStyle;
 @property (readwrite, nonatomic) MPSGraphTensorNamedDataLayout dataLayout;
+
+/*
+ *  @property   returnIndicesMode
+ *  @discussion Used in conjunction with maxPooling2DAndReturnIndicesWithSourceTensor API.
+ *              If MPSGraphPoolingReturnIndicesNone, returns a nil tensor for indices.
+ *              Default value: @code MPSGraphPoolingReturnIndicesNone @endcode
+ */
+@property (readwrite, nonatomic) MPSGraphPoolingReturnIndicesMode returnIndicesMode
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
+
+/*
+ *  @property   returnIndicesDataType
+ *  @discussion Used in conjunction with maxPooling4DAndReturnIndicesWithSourceTensor API.
+ *              If MPSGraphPoolingReturnIndicesNone, this property is not used.
+ *              Currently supports MPSDataTypeInt32
+ *              Default value: @code MPSDataTypeInt32 @endcode
+ */
+@property (readwrite, nonatomic) MPSDataType returnIndicesDataType
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
 
 /*!
  *  @property   ceilMode
@@ -143,6 +190,24 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
  */
 @property (readwrite, nonatomic) BOOL includeZeroPadToAverage;
 
+/*
+ *  @property   returnIndicesMode
+ *  @discussion Used in conjunction with maxPooling4DAndReturnIndicesWithSourceTensor API.
+ *              If MPSGraphPoolingReturnIndicesNone, returns a nil tensor for indices.
+ *              Default value: @code MPSGraphPoolingReturnIndicesNone @endcode
+ */
+@property (readwrite, nonatomic) MPSGraphPoolingReturnIndicesMode returnIndicesMode
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
+
+/*
+ *  @property   returnIndicesDataType
+ *  @discussion Used in conjunction with maxPooling4DAndReturnIndicesWithSourceTensor API.
+ *              If MPSGraphPoolingReturnIndicesNone, this property is not used.
+ *              Currently supports MPSDataTypeInt32
+ *              Default value: @code MPSDataTypeInt32 @endcode
+ */
+@property (readwrite, nonatomic) MPSDataType returnIndicesDataType
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
 
 /*!
  *  @abstract   Creates a 4d pooling descriptor with given values.
@@ -177,6 +242,21 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                       descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
                                             name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   MaxPool2D API that returns max pool result and corresponding indices
+ *  @param      source               Source tensor on which pooling will be performed
+ *  @param      descriptor      See corresponding property above.
+ *  @return     NSArray of 2 MPSGraphTensors. The first tensor holds the result of max pool and the second tensor holds the corresponding indices
+ *  @discussion In order to compute the indices, returnIndicesMode of the descriptor must be set. The datatype of indices tensor can be set using returnIndicesDataType
+ *              If returnIndicesMode is set to default value of MPSGraphPoolingReturnIndicesNone, the second tensor in returned NSArray is nil.
+ *              If returnIndicesDataType is not set, indices tensor will default to MPSDataTypeInt32
+ */
+-(NSArray<MPSGraphTensor *> *) maxPooling2DReturnIndicesWithSourceTensor:(MPSGraphTensor *) source
+                                                              descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
+                                                                    name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( maxPooling2DReturnIndices(_:descriptor:name:))
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
+
 -(MPSGraphTensor *) maxPooling2DGradientWithGradientTensor:(MPSGraphTensor *) gradient
                                               sourceTensor:(MPSGraphTensor *) source
                                                 descriptor:(MPSGraphPooling2DOpDescriptor *) descriptor
@@ -197,6 +277,21 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                             name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( maxPooling4D(_:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   MaxPool4D API that returns max pool result and corresponding indices
+ *  @param      source               Source tensor on which pooling will be performed
+ *  @param      descriptor      See corresponding property above.
+ *  @return     NSArray of 2 MPSGraphTensors. The first tensor holds the result of max pool and the second tensor holds the corresponding indices
+ *  @discussion In order to compute the indices, returnIndicesMode of the descriptor must be set. The datatype of indices tensor can be set using returnIndicesDataType
+ *              If returnIndicesMode is set to default value of MPSGraphPoolingReturnIndicesNone, the second tensor in returned NSArray is nil.
+ *              If returnIndicesDataType is not set, indices tensor will default to MPSDataTypeInt32
+ */
+-(NSArray<MPSGraphTensor *> *) maxPooling4DReturnIndicesWithSourceTensor:(MPSGraphTensor *) source
+                                                              descriptor:(MPSGraphPooling4DOpDescriptor *) descriptor
+                                                                    name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( maxPooling4DReturnIndices(_:descriptor:name:))
+MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), tvos(15.3));
 
 -(MPSGraphTensor *) maxPooling4DGradientWithGradientTensor:(MPSGraphTensor *) gradient
                                               sourceTensor:(MPSGraphTensor *) source

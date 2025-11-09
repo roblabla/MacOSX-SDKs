@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <AuthenticationServices/ASFoundation.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NSString * ASAuthorizationCustomMethod NS_TYPED_ENUM API_AVAILABLE(tvos(15.0)) API_UNAVAILABLE(ios, macos, watchos);

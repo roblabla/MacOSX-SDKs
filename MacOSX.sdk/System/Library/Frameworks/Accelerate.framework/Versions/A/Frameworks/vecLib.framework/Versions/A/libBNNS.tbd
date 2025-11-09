@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           211F3764-2F7A-396B-8927-98C21FBCE165
+    value:           0964F829-628A-3F8B-94A7-8908F2AFD1E3
   - target:          x86_64-maccatalyst
-    value:           211F3764-2F7A-396B-8927-98C21FBCE165
+    value:           0964F829-628A-3F8B-94A7-8908F2AFD1E3
   - target:          x86_64h-macos
-    value:           4E0F5F1B-4DB2-36AA-9453-C7031A929D7E
+    value:           81B92EF9-461C-3FFC-B4E4-A98A9709AC75
   - target:          x86_64h-maccatalyst
-    value:           4E0F5F1B-4DB2-36AA-9453-C7031A929D7E
+    value:           81B92EF9-461C-3FFC-B4E4-A98A9709AC75
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6AC5D38-DB1D-340A-A367-CFA7AE775B7C
+    value:           3FAEAC04-F7D4-3092-84EE-A9235E95A2D3
   - target:          arm64e-maccatalyst
-    value:           B6AC5D38-DB1D-340A-A367-CFA7AE775B7C
+    value:           3FAEAC04-F7D4-3092-84EE-A9235E95A2D3
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 

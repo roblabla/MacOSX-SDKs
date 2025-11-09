@@ -23,9 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_ENUM(uint64_t, MPSGraphRandomDistribution)
 {
-    MPSGraphRandomDistributionUniform            MPS_ENUM_AVAILABLE_STARTING(macos(12.4), ios(15.4), tvos(15.4)) MPS_SWIFT_NAME(uniform) =   0,
-    MPSGraphRandomDistributionNormal         MPS_ENUM_AVAILABLE_STARTING(macos(12.4), ios(15.4), tvos(15.4))                        =   1L,
-    MPSGraphRandomDistributionTruncatedNormal         MPS_ENUM_AVAILABLE_STARTING(macos(12.4), ios(15.4), tvos(15.4))                        =   2L,
+    MPSGraphRandomDistributionUniform            MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4)) MPS_SWIFT_NAME(uniform) =   0,
+    MPSGraphRandomDistributionNormal         MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   1L,
+    MPSGraphRandomDistributionTruncatedNormal         MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   2L,
 };
 
 /*!
@@ -37,8 +37,8 @@ typedef NS_ENUM(uint64_t, MPSGraphRandomDistribution)
  */
 typedef NS_ENUM(uint64_t, MPSGraphRandomNormalSamplingMethod)
 {
-    MPSGraphRandomNormalSamplingInvCDF            MPS_ENUM_AVAILABLE_STARTING(macos(12.4), ios(15.4), tvos(15.4)) MPS_SWIFT_NAME(invCDF) =   0,
-    MPSGraphRandomNormalSamplingBoxMuller         MPS_ENUM_AVAILABLE_STARTING(macos(12.4), ios(15.4), tvos(15.4))                        =   1L,
+    MPSGraphRandomNormalSamplingInvCDF            MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4)) MPS_SWIFT_NAME(invCDF) =   0,
+    MPSGraphRandomNormalSamplingBoxMuller         MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   1L,
 };
 
 @interface MPSGraphRandomOpDescriptor : NSObject<NSCopying>

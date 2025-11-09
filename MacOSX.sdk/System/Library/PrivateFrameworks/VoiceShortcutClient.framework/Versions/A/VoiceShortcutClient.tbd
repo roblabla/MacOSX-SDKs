@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3AC199EE-FF3E-3AA2-8102-5C1193504F3C
+    value:           2ECC3DA3-758E-3E35-A4D2-69310A9859BD
   - target:          x86_64-maccatalyst
-    value:           3AC199EE-FF3E-3AA2-8102-5C1193504F3C
+    value:           2ECC3DA3-758E-3E35-A4D2-69310A9859BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E64F445-17CD-39AB-890C-F403E72CD0AC
+    value:           3448D84A-5907-32DE-A2D2-5FF48B46BBA7
   - target:          arm64e-maccatalyst
-    value:           2E64F445-17CD-39AB-890C-F403E72CD0AC
+    value:           3448D84A-5907-32DE-A2D2-5FF48B46BBA7
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcutClient.framework/Versions/A/VoiceShortcutClient'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -22,7 +22,7 @@ exports:
     symbols:         [ _INAppDescriptorAppNameKey, _INAppDescriptorBundleIdentifierKey, 
                        _INAppDescriptorExtensionBundleIdentifierKey, _INAppDescriptorIntentClassNameKey, 
                        _INAppDescriptorTeamIdentifierKey, _INAppDescriptorUserActivityTypeKey, 
-                       _VCBundleIdentifierAppStore, _VCBundleIdentifierCalendar, 
+                       _VCBundleIdentifierAppStore, _VCBundleIdentifierBooks, _VCBundleIdentifierCalendar, 
                        _VCBundleIdentifierCamera, _VCBundleIdentifierContacts, _VCBundleIdentifierDaemon, 
                        _VCBundleIdentifierDocuments, _VCBundleIdentifierFaceTime, 
                        _VCBundleIdentifierFinder, _VCBundleIdentifierHealth, _VCBundleIdentifierHome, 
@@ -58,7 +58,8 @@ exports:
                        _VCVoiceShortcutManagerConfigureXPCInterface, _VCVoiceShortcutManagerXPCInterface, 
                        _VCVoiceShortcutManagerXPCInterfaceMachServiceName, _VCVoiceShortcutsErrorDomain, 
                        _VoiceShortcutClientVersionNumber, _VoiceShortcutClientVersionString, 
-                       _WFColorErrorDomain, _WFContextualActionDescribeSurface, _WFCurrentProcessIsFinder, 
+                       _WFAllowedClassesForDecodingNSError, _WFColorErrorDomain, 
+                       _WFContextualActionDescribeSurface, _WFCurrentProcessIsFinder, 
                        _WFDatabaseChangedNotification, _WFDescribeFinderImageResizeFormat, 
                        _WFDescribeFinderImageResizeSize, _WFDescribeWorkflowOutputBehavior, 
                        _WFDialogNotificationCategoryIdentifier, _WFDialogNotificationConfirmationCategoryIdentifier, 
@@ -70,8 +71,9 @@ exports:
                        _WFOnScreenContentNodeSourceGlobalNSUserActivity, _WFOnScreenContentNodeSourceUIActivityItemsConfiguration, 
                        _WFOnScreenContentServiceErrorDomain, _WFRotateImageLeftFilesActionIdentifier, 
                        _WFRotateImageRightFilesActionIdentifier, _WFServicesRunWorkflowMessage, 
-                       _WFViewServiceDismissalReasonNotification, _WFViewServiceDismissalReasonSystemCancelled, 
-                       _WFViewServiceDismissalReasonUserCancelled, _WFViewServiceDismissalReasonUserCancelledWithHomeButton, 
+                       _WFViewServiceDismissalReasonBadState, _WFViewServiceDismissalReasonNotification, 
+                       _WFViewServiceDismissalReasonSystemCancelled, _WFViewServiceDismissalReasonUserCancelled, 
+                       _WFViewServiceDismissalReasonUserCancelledWithHomeButton, 
                        _WFWorkflowControllerCurrentActionFractionCompletedKey, _WFWorkflowControllerCurrentActionIndexKey, 
                        _WFWorkflowControllerRunningStateKey, _WFWorkflowRunSourceAccessibilityMagicTap, 
                        _WFWorkflowRunSourceActionExtension, _WFWorkflowRunSourceActionExtensionDrag, 

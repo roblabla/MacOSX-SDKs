@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A851EFCE-91CF-3A0E-9297-227AEA68D6B1
+    value:           984F643F-6B32-34F9-922A-933E1DE8C294
   - target:          x86_64-maccatalyst
-    value:           A851EFCE-91CF-3A0E-9297-227AEA68D6B1
+    value:           984F643F-6B32-34F9-922A-933E1DE8C294
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A0A7434-4A4D-31C0-BCF7-91DA9B840141
+    value:           318E28A6-F38F-3ECC-9D28-63C397105B6D
   - target:          arm64e-maccatalyst
-    value:           2A0A7434-4A4D-31C0-BCF7-91DA9B840141
+    value:           318E28A6-F38F-3ECC-9D28-63C397105B6D
 install-name:    '/System/Library/PrivateFrameworks/SpeakerRecognition.framework/Versions/A/SpeakerRecognition'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -83,21 +83,21 @@ exports:
                        _kSSRVoiceProfilePath, _kSSRVoiceProfilePitchKey, _kSSRVoiceProfileProductType, 
                        _kSSRVoiceProfilePruningCookie, _kSSRVoiceProfileRecordPayloadAllowedKey, 
                        _kSSRVoiceProfileSWVersion, _kSSRVoiceProfileUserName, _kVTUIRemoteRecordGibraltarDeviceId ]
-    objc-classes:    [ CSVTUIASRGrammars, CSVTUIAudioRecorder, CSVTUIAudioSessionRecorder, 
-                       CSVTUIEndpointAnalyzer, CSVTUIKeywordDetector, CSVTUIRegularExpressionMatcher, 
-                       CSVTUIRemoteRecordClient, CSVTUITrainingSession, CSVTUITrainingSessionWithPayload, 
-                       SSRAESKeyManager, SSRAssetManager, SSRBiometricMatch, SSRDESRecordWriter, 
-                       SSREncryptedAudioFileReader, SSREncryptedAudioFileWriter, 
-                       SSREnrollmentDataManager, SSRLoggingAggregator, SSRMobileAssetProvider, 
-                       SSRPitchExtractor, SSRRemoteControlClient, SSRSpeakerAnalyzerPSR, 
-                       SSRSpeakerAnalyzerSAT, SSRSpeakerRecognitionContext, SSRSpeakerRecognitionController, 
-                       SSRSpeakerRecognitionModelContext, SSRSpeakerRecognitionOrchestrator, 
-                       SSRSpeakerRecognitionScorer, SSRSpeakerRecognizerPSR, SSRSpeakerRecognizerSAT, 
-                       SSRTrialAssetProvider, SSRTriggerPhraseDetector, SSRTriggerPhraseDetectorNDAPI, 
-                       SSRTriggerPhraseDetectorNDAPIResult, SSRTriggerPhraseDetectorQuasar, 
-                       SSRUtils, SSRVTUITrainingManager, SSRVoiceActivityDetector, 
-                       SSRVoiceProfile, SSRVoiceProfileComposer, SSRVoiceProfileManager, 
-                       SSRVoiceProfileMetaContext, SSRVoiceProfileMetadataManager, 
+    objc-classes:    [ CSVTUIASRGrammars, CSVTUIAudioRecorder, CSVTUIAudioRecorderRemoteDeviceContext, 
+                       CSVTUIAudioSessionRecorder, CSVTUIEndpointAnalyzer, CSVTUIKeywordDetector, 
+                       CSVTUIRegularExpressionMatcher, CSVTUIRemoteRecordClient, 
+                       CSVTUITrainingSession, CSVTUITrainingSessionWithPayload, SSRAESKeyManager, 
+                       SSRAssetManager, SSRBiometricMatch, SSRDESRecordWriter, SSREncryptedAudioFileReader, 
+                       SSREncryptedAudioFileWriter, SSREnrollmentDataManager, SSRLoggingAggregator, 
+                       SSRMobileAssetProvider, SSRPitchExtractor, SSRRemoteControlClient, 
+                       SSRSpeakerAnalyzerPSR, SSRSpeakerAnalyzerSAT, SSRSpeakerRecognitionContext, 
+                       SSRSpeakerRecognitionController, SSRSpeakerRecognitionModelContext, 
+                       SSRSpeakerRecognitionOrchestrator, SSRSpeakerRecognitionScorer, 
+                       SSRSpeakerRecognizerPSR, SSRSpeakerRecognizerSAT, SSRTrialAssetProvider, 
+                       SSRTriggerPhraseDetector, SSRTriggerPhraseDetectorNDAPI, SSRTriggerPhraseDetectorNDAPIResult, 
+                       SSRTriggerPhraseDetectorQuasar, SSRUtils, SSRVTUITrainingManager, 
+                       SSRVoiceActivityDetector, SSRVoiceProfile, SSRVoiceProfileComposer, 
+                       SSRVoiceProfileManager, SSRVoiceProfileMetaContext, SSRVoiceProfileMetadataManager, 
                        SSRVoiceProfileModelContext, SSRVoiceProfilePruner, SSRVoiceProfileRetrainerFactory, 
                        SSRVoiceProfileRetrainerPSR, SSRVoiceProfileRetrainerSAT, 
                        SSRVoiceProfileRetrainingContext, SSRVoiceProfileStore, SSRVoiceProfileStoreCleaner, 

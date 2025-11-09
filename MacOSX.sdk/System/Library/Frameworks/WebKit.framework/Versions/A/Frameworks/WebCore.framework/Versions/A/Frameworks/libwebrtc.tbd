@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B96A1A2-25B3-3340-8B73-7281A2A17A60
+    value:           8675A327-E184-3C77-83D3-9E569D81FB8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4AD6B77-F21E-3A18-A21E-4D9B901E1F0D
+    value:           057F6CF5-8009-3C77-B5B8-D18A18AAF12B
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libwebrtc.dylib'
-current-version: 612.3.6
+current-version: 613.1.17
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ConvertToI420, __ZN10vp9_parser15Vp9HeaderParser23ParseUncompressedHeaderEPKhm, 
@@ -17,9 +17,9 @@ exports:
                        __ZN3rtc10PacketInfoC1ERKS0_, __ZN3rtc10PacketInfoD1Ev, __ZN3rtc10SentPacketC1Exx, 
                        __ZN3rtc10TimeMillisEv, __ZN3rtc11CryptStringC1ERKNS_15CryptStringImplE, 
                        __ZN3rtc11CryptStringC1ERKS0_, __ZN3rtc11CryptStringD1Ev, 
-                       __ZN3rtc13PacketOptionsC1ERKS0_, __ZN3rtc13PacketOptionsC1Ev, 
-                       __ZN3rtc13PacketOptionsD1Ev, __ZN3rtc13SocketAddress13SetResolvedIPERKNS_9IPAddressE, 
-                       __ZN3rtc13SocketAddress5SetIPERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
+                       __ZN3rtc12SSLCertChainD1Ev, __ZN3rtc13PacketOptionsC1ERKS0_, 
+                       __ZN3rtc13PacketOptionsC1Ev, __ZN3rtc13PacketOptionsD1Ev, 
+                       __ZN3rtc13SocketAddress13SetResolvedIPERKNS_9IPAddressE, __ZN3rtc13SocketAddress5SetIPERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN3rtc13SocketAddress7SetPortEi, __ZN3rtc13SocketAddressC1ERKNS_9IPAddressEi, 
                        __ZN3rtc13SocketAddressC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEi, 
                        __ZN3rtc13SocketAddressC1ERKS0_, __ZN3rtc13SocketAddressC1Ev, 
@@ -38,10 +38,10 @@ exports:
                        __ZN3rtc22AsyncResolverInterfaceC2Ev, __ZN3rtc22AsyncResolverInterfaceD2Ev, 
                        __ZN3rtc22PacketTimeUpdateParamsC1Ev, __ZN3rtc22PacketTimeUpdateParamsD1Ev, 
                        __ZN3rtc23RTCCertificateGeneratorC1EPNS_6ThreadES2_, __ZN3rtc24BasicPacketSocketFactory19CreateAsyncResolverEv, 
-                       __ZN3rtc24BasicPacketSocketFactoryC1EPNS_6ThreadE, __ZN3rtc24BasicPacketSocketFactoryC2Ev, 
+                       __ZN3rtc24BasicPacketSocketFactoryC1EPNS_13SocketFactoryE, 
                        __ZN3rtc24BasicPacketSocketFactoryD2Ev, __ZN3rtc5Event3SetEv, 
                        __ZN3rtc5Event4WaitEii, __ZN3rtc5EventC1Ebb, __ZN3rtc5EventC1Ev, 
-                       __ZN3rtc5EventD1Ev, __ZN3rtc6Thread14InvokeInternalERKNS_8LocationENS_12FunctionViewIFvvEEE, 
+                       __ZN3rtc5EventD1Ev, __ZN3rtc6Thread12socketserverEv, __ZN3rtc6Thread14InvokeInternalERKNS_8LocationENS_12FunctionViewIFvvEEE, 
                        __ZN3rtc6Thread22CreateWithSocketServerEv, __ZN3rtc6Thread5StartEv, 
                        __ZN3rtc6Thread6CreateEv, __ZN3rtc6Thread7SetNameERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPKv, 
                        __ZN3rtc6Thread7SleepMsEi, __ZN3rtc7Network6SetIPsERKNSt3__16vectorINS_16InterfaceAddressENS1_9allocatorIS3_EEEEb, 
@@ -98,9 +98,10 @@ exports:
                        __ZN6webrtc12RtcpFeedbackC1ERKS0_, __ZN6webrtc12RtcpFeedbackD1Ev, 
                        __ZN6webrtc12RtpExtensionC1Ev, __ZN6webrtc12RtpExtensionD1Ev, 
                        __ZN6webrtc13CryptoOptions5NoGcmEv, __ZN6webrtc13CryptoOptionsC1ERKS0_, 
-                       __ZN6webrtc13CryptoOptionsD1Ev, __ZN6webrtc13RTCCodecStats5kTypeE, 
-                       __ZN6webrtc13RtpParametersC1ERKS0_, __ZN6webrtc13RtpParametersC1Ev, 
-                       __ZN6webrtc13RtpParametersD1Ev, __ZN6webrtc14ParseCandidateERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPN7cricket9CandidateEPNS_13SdpParseErrorEb, 
+                       __ZN6webrtc13CryptoOptionsC1Ev, __ZN6webrtc13CryptoOptionsD1Ev, 
+                       __ZN6webrtc13RTCCodecStats5kTypeE, __ZN6webrtc13RtpParametersC1ERKS0_, 
+                       __ZN6webrtc13RtpParametersC1Ev, __ZN6webrtc13RtpParametersD1Ev, 
+                       __ZN6webrtc14ParseCandidateERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPN7cricket9CandidateEPNS_13SdpParseErrorEb, 
                        __ZN6webrtc14RTCStatsReport13ConstIteratorD1Ev, __ZN6webrtc14RTCStatsReport13ConstIteratorppEv, 
                        __ZN6webrtc14SdpVideoFormatC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_3mapIS7_S7_NS1_4lessIS7_EENS5_INS1_4pairIS8_S7_EEEEEE, 
                        __ZN6webrtc14SdpVideoFormatD1Ev, __ZN6webrtc15RtpCapabilitiesC1Ev, 
@@ -136,9 +137,10 @@ exports:
                        __ZN6webrtc23RtpTransceiverInterface21SetDirectionWithErrorENS_23RtpTransceiverDirectionE, 
                        __ZN6webrtc23RtpTransceiverInterface29SetOfferedRtpHeaderExtensionsEN3rtc9ArrayViewIKNS_28RtpHeaderExtensionCapabilityELln4711EEE, 
                        __ZN6webrtc23RtpTransceiverInterface4StopEv, __ZN6webrtc23encodeLocalEncoderFrameEPvP10__CVBufferxjNS_13VideoRotationEb, 
-                       __ZN6webrtc24CreateSessionDescriptionERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES8_PNS_13SdpParseErrorE, 
+                       __ZN6webrtc24CreateSessionDescriptionENS_7SdpTypeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPNS_13SdpParseErrorE, 
                        __ZN6webrtc24RTCIceCandidatePairStats5kTypeE, __ZN6webrtc24RTCInboundRTPStreamStats5kTypeE, 
-                       __ZN6webrtc24RTCMediaStreamTrackStats5kTypeE, __ZN6webrtc24encoderVideoTaskCompleteEPvNS_14VideoCodecTypeEPKhmRKNS_22WebKitEncodedFrameInfoE, 
+                       __ZN6webrtc24RTCMediaStreamTrackStats5kTypeE, __ZN6webrtc24SctpTransportInformationD1Ev, 
+                       __ZN6webrtc24encoderVideoTaskCompleteEPvNS_14VideoCodecTypeEPKhmRKNS_22WebKitEncodedFrameInfoE, 
                        __ZN6webrtc24registerWebKitVP8DecoderEv, __ZN6webrtc24registerWebKitVP9DecoderEv, 
                        __ZN6webrtc24setVideoDecoderCallbacksEPFPvRKNS_14SdpVideoFormatEEPFiS0_EPFiS0_jPKhmttEPFiS0_S0_E, 
                        __ZN6webrtc24setVideoEncoderCallbacksEPFPvRKNS_14SdpVideoFormatEEPFiS0_EPFiS0_RKNS_10VideoCodecEEPFiS0_RKNS_10VideoFrameEbEPFiS0_S0_EPFvS0_RKNS_12VideoEncoder21RateControlParametersEE, 
@@ -157,15 +159,15 @@ exports:
                        __ZN6webrtc30PeerConnectionFactoryInterface20CreatePeerConnectionERKNS_23PeerConnectionInterface16RTCConfigurationENSt3__110unique_ptrIN7cricket13PortAllocatorENS5_14default_deleteIS8_EEEENS6_IN3rtc32RTCCertificateGeneratorInterfaceENS9_ISD_EEEEPNS_22PeerConnectionObserverE, 
                        __ZN6webrtc30PeerConnectionFactoryInterface27CreatePeerConnectionOrErrorERKNS_23PeerConnectionInterface16RTCConfigurationENS_26PeerConnectionDependenciesE, 
                        __ZN6webrtc30RTCRemoteInboundRtpStreamStats5kTypeE, __ZN6webrtc32CreateBuiltinAudioDecoderFactoryEv, 
-                       __ZN6webrtc32CreateBuiltinAudioEncoderFactoryEv, __ZN6webrtc8RTCError2OKEv, 
-                       __ZN7cricket12AudioOptionsD1Ev, __ZN7cricket17MediaTypeToStringENS_9MediaTypeE, 
-                       __ZN7cricket18BasicPortAllocatorC1EPN3rtc14NetworkManagerEPNS1_19PacketSocketFactoryEPN6webrtc14TurnCustomizerEPNS_25RelayPortFactoryInterfaceE, 
+                       __ZN6webrtc32CreateBuiltinAudioEncoderFactoryEv, __ZN6webrtc32webrtc_sequence_checker_internal19SequenceCheckerImplC2Ev, 
+                       __ZN6webrtc8RTCError2OKEv, __ZN7cricket12AudioOptionsD1Ev, 
+                       __ZN7cricket17MediaTypeToStringENS_9MediaTypeE, __ZN7cricket18BasicPortAllocatorC1EPN3rtc14NetworkManagerEPNS1_19PacketSocketFactoryEPN6webrtc14TurnCustomizerEPNS_25RelayPortFactoryInterfaceE, 
                        __ZN7cricket27ICE_CANDIDATE_COMPONENT_RTPE, __ZN7cricket9CandidateC1Ev, 
                        __ZN7cricket9CandidateD1Ev, __ZNK3rtc13SocketAddress14IsUnresolvedIPEv, 
                        __ZNK3rtc13SocketAddress15HostAsURIStringEv, __ZNK3rtc13SocketAddress4HashEv, 
                        __ZNK3rtc13SocketAddress4portEv, __ZNK3rtc13SocketAddress5IsNilEv, 
                        __ZNK3rtc13SocketAddress6ipaddrEv, __ZNK3rtc13SocketAddresseqERKS0_, 
-                       __ZNK3rtc14NetworkManager16GetMdnsResponderEv, __ZNK3rtc14RTCCertificate15ssl_certificateEv, 
+                       __ZNK3rtc14NetworkManager16GetMdnsResponderEv, __ZNK3rtc14RTCCertificate17GetSSLCertificateEv, 
                        __ZNK3rtc14RTCCertificate5ToPEMEv, __ZNK3rtc14RTCCertificate7ExpiresEv, 
                        __ZNK3rtc14SSLCertificate8GetStatsEv, __ZNK3rtc18NetworkManagerBase11GetNetworksEPNSt3__16vectorIPNS_7NetworkENS1_9allocatorIS4_EEEE, 
                        __ZNK3rtc18NetworkManagerBase22GetDefaultLocalAddressEiPNS_9IPAddressE, 
@@ -202,5 +204,6 @@ exports:
                        __ZTVN6webrtc20AudioSourceInterfaceE, __ZTVN6webrtc20DataChannelInterfaceE, 
                        __ZTVN6webrtc20RtpReceiverInterfaceE, __ZTVN6webrtc21IceCandidateInterfaceE, 
                        __ZTVN6webrtc23PeerConnectionInterfaceE, __ZTVN6webrtc23RtpTransceiverInterfaceE, 
-                       __ZTVN6webrtc27SessionDescriptionInterfaceE, __ZTVN6webrtc30PeerConnectionFactoryInterfaceE ]
+                       __ZTVN6webrtc27SessionDescriptionInterfaceE, __ZTVN6webrtc30PeerConnectionFactoryInterfaceE, 
+                       __ZTVN6webrtc30WrappingAsyncDnsResolverResultE ]
 ...

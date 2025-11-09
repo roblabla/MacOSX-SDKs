@@ -521,6 +521,12 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTripleCamera API_
 AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTrueDepthCamera API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
+ @constant AVCaptureDeviceTypeBuiltInLiDARDepthCamera
+    A device that consists of two cameras, one YUV and one LiDAR. The LiDAR camera provides high quality, high accuracy depth information by measuring the round trip of an artifical light signal emitted by a laser. The depth is synchronized and perspective corrected to frames produced by the paired YUV camera. While the resolution of the depth data and YUV frames may differ, their field of view and aspect ratio always match. Note that devices of this type may only be discovered using an AVCaptureDeviceDiscoverySession or -[AVCaptureDevice defaultDeviceWithDeviceType:mediaType:position:].
+ */
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInLiDARDepthCamera API_AVAILABLE(ios(15.4), macCatalyst(15.4)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
  @constant AVCaptureDeviceTypeBuiltInDuoCamera
     A deprecated synonym for AVCaptureDeviceTypeBuiltInDualCamera. Please use AVCaptureDeviceTypeBuiltInDualCamera instead.
  */
@@ -1089,6 +1095,26 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
 @property(nonatomic, getter=isSmoothAutoFocusEnabled) BOOL smoothAutoFocusEnabled API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
+ @property automaticallyAdjustsFaceDrivenAutoFocusEnabled
+ @abstract
+    Indicates whether the receiver should automatically adjust face-driven autofocus.
+ 
+ @discussion
+    The value of this property is a BOOL that determines the receiver's automatic adjustment of face-driven autofocus. Default is YES on all platforms, if the receiver supports autofocus. This property must be set to NO before manually setting faceDrivenAutoFocusEnabled to YES/NO. -setAutomaticallyAdjustsFaceDrivenAutoFocusEnabled: throws an NSInvalidArgumentException if the receiver doesn't support autofocus. -setAutomaticallyAdjustsFaceDrivenAutoFocusEnabled: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. After setting automaticallyAdjustsFaceDrivenAutoFocusEnabled, call -setFocusMode: to apply the change.
+ */
+@property(nonatomic) BOOL automaticallyAdjustsFaceDrivenAutoFocusEnabled API_AVAILABLE(ios(15.4), macCatalyst(15.4)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property faceDrivenAutoFocusEnabled
+ @abstract
+    Indicates whether face-driven autofocus is enabled on the receiver.
+ 
+ @discussion
+    Default is YES for all apps linked on or after iOS 15.4 when the receiver supports autofocus. -setFaceDrivenAutoFocusEnabled: throws an NSInvalidArgumentException if automaticallyAdjustsFaceDrivenAutoFocusEnabled returns YES.  -setFaceDrivenAutoFocusEnabled: throws an NSInvalidArgumentException if the receiver doesn't support autofocus. -setFaceDrivenAutoFocusEnabled: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. Note that setting faceDrivenAutoFocusEnabled alone does not initiate this focus change operation. After setting faceDrivenAutoFocusEnabled, call -setFocusMode: to apply the change.
+ */
+@property(nonatomic, getter=isFaceDrivenAutoFocusEnabled) BOOL faceDrivenAutoFocusEnabled API_AVAILABLE(ios(15.4), macCatalyst(15.4)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
  @property lensPosition
  @abstract
     Indicates the focus position of the lens.
@@ -1201,6 +1227,26 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
     The value of this property is a CGPoint that determines the receiver's exposure point of interest, if it has adjustable exposure. A value of (0,0) indicates that the camera should adjust exposure based on the top left corner of the image, while a value of (1,1) indicates that it should adjust exposure based on the bottom right corner. The default value is (0.5,0.5). -setExposurePointOfInterest: throws an NSInvalidArgumentException if isExposurePointOfInterestSupported returns NO. -setExposurePointOfInterest: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Note that setting exposurePointOfInterest alone does not initiate an exposure operation. After setting exposurePointOfInterest, call -setExposureMode: to apply the new point of interest.
  */
 @property(nonatomic) CGPoint exposurePointOfInterest;
+
+/*!
+ @property automaticallyAdjustsFaceDrivenAutoExposureEnabled
+ @abstract
+    Indicates whether the receiver should automatically adjust face-driven auto exposure.
+ 
+ @discussion
+    The value of this property is a BOOL that determines the receiver's automatic adjustment of face-driven auto exposure. Default is YES on all platforms, if the receiver supports auto exposure. This property must be set to NO before manually setting faceDrivenAutoExposureEnabled to YES/NO. -setAutomaticallyAdjustsFaceDrivenAutoExposureEnabled: throws an NSInvalidArgumentException if the receiver doesn't support auto exposure. -setAutomaticallyAdjustsFaceDrivenAutoExposureEnabled: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. After setting automaticallyAdjustsFaceDrivenAutoExposureEnabled, call -setExposureMode: to apply the change.
+ */
+@property(nonatomic) BOOL automaticallyAdjustsFaceDrivenAutoExposureEnabled API_AVAILABLE(ios(15.4), macCatalyst(15.4)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property faceDrivenAutoExposureEnabled
+ @abstract
+    Indicates whether face-driven auto exposure is enabled on the receiver.
+ 
+ @discussion
+    Default is YES for all apps linked on or after iOS 15.4 when the receiver supports auto exposure. -setFaceDrivenAutoExposureEnabled: throws an NSInvalidArgumentException if automaticallyAdjustsFaceDrivenAutoExposureEnabled returns YES. -setFaceDrivenAutoExposureEnabled: throws an NSInvalidArgumentException if the receiver doesn't support auto exposure. -setFaceDrivenAutoExposureEnabled: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. Note that setting faceDrivenAutoExposureEnabled alone does not initiate this exposure change operation. After setting faceDrivenAutoExposureEnabled, call -setExposureMode: to apply the change.
+ */
+@property(nonatomic, getter=isFaceDrivenAutoExposureEnabled) BOOL faceDrivenAutoExposureEnabled API_AVAILABLE(ios(15.4), macCatalyst(15.4)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant activeMaxExposureDuration
@@ -2048,7 +2094,7 @@ typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
     AVCaptureCenterStageControlModeUser          = 0,
     AVCaptureCenterStageControlModeApp           = 1,
     AVCaptureCenterStageControlModeCooperative   = 2,
-} API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property centerStageControlMode
@@ -2058,7 +2104,7 @@ typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
  @discussion
     This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Control Center. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Control Center). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Control Center).
  */
-@property(class) AVCaptureCenterStageControlMode centerStageControlMode API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+@property(class) AVCaptureCenterStageControlMode centerStageControlMode API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property centerStageEnabled
@@ -2068,7 +2114,7 @@ typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
  @discussion
     This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Control Center), so you should key-value observe it.
  */
-@property(class, getter=isCenterStageEnabled) BOOL centerStageEnabled API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+@property(class, getter=isCenterStageEnabled) BOOL centerStageEnabled API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property centerStageActive
@@ -2084,7 +2130,7 @@ typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
         - If geometricDistortionCorrectionSupported is YES, geometricDistortionCorrectionEnabled must also be YES, or Center Stage is deactivated.
     This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isCenterStageActive) BOOL centerStageActive API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly, getter=isCenterStageActive) BOOL centerStageActive API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -2698,7 +2744,7 @@ API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     This property returns YES if the format supports "Center Stage", which automatically adjusts the camera to keep people optimally framed within the field of view. See +AVCaptureDevice.centerStageEnabled for a detailed discussion.
  */
-@property(nonatomic, readonly, getter=isCenterStageSupported) BOOL centerStageSupported API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly, getter=isCenterStageSupported) BOOL centerStageSupported API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property videoMinZoomFactorForCenterStage
@@ -2708,7 +2754,7 @@ API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns 1.0.
  */
-@property(nonatomic, readonly) CGFloat videoMinZoomFactorForCenterStage API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) CGFloat videoMinZoomFactorForCenterStage API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property videoMaxZoomFactorForCenterStage
@@ -2718,7 +2764,7 @@ API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns videoMaxZoomFactor.
  */
-@property(nonatomic, readonly) CGFloat videoMaxZoomFactorForCenterStage API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) CGFloat videoMaxZoomFactorForCenterStage API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property videoFrameRateRangeForCenterStage
@@ -2728,7 +2774,7 @@ API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  @discussion
     Devices may support a limited frame rate range when Center Stage is active. If this device format does not support Center Stage, this property returns nil.
  */
-@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForCenterStage API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForCenterStage API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 

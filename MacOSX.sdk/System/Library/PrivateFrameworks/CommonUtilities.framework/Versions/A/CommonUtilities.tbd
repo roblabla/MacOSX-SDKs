@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5ED23259-D3CB-34EC-B353-789900EBFDC0
+    value:           FA7EDAF3-42A1-3ACD-AE55-C7E9D74EEF66
   - target:          x86_64-maccatalyst
-    value:           5ED23259-D3CB-34EC-B353-789900EBFDC0
+    value:           FA7EDAF3-42A1-3ACD-AE55-C7E9D74EEF66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           165E9955-4558-320F-93D8-2882E96018DB
+    value:           2AD0546E-40B4-350E-A024-D4539BDCD68F
   - target:          arm64e-maccatalyst
-    value:           165E9955-4558-320F-93D8-2882E96018DB
+    value:           2AD0546E-40B4-350E-A024-D4539BDCD68F
 install-name:    '/System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities'
 current-version: 800
 exports:

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           54BE5942-EE13-31F0-ACFB-19A3A828F2E9
+    value:           0808A872-031B-3D48-AA29-DD924A134A9E
   - target:          x86_64-maccatalyst
-    value:           54BE5942-EE13-31F0-ACFB-19A3A828F2E9
+    value:           0808A872-031B-3D48-AA29-DD924A134A9E
   - target:          x86_64h-macos
-    value:           98A35C4E-B257-3E07-99CA-B5A28ABDC560
+    value:           9C107D8C-6B76-331A-BD7D-962090BD53B5
   - target:          x86_64h-maccatalyst
-    value:           98A35C4E-B257-3E07-99CA-B5A28ABDC560
+    value:           9C107D8C-6B76-331A-BD7D-962090BD53B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CFC87BC3-C056-3D84-9575-8AF4F9B90739
+    value:           4F8F416B-40C9-3F1C-AF32-6483A114BFB6
   - target:          arm64e-maccatalyst
-    value:           CFC87BC3-C056-3D84-9575-8AF4F9B90739
+    value:           4F8F416B-40C9-3F1C-AF32-6483A114BFB6
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 

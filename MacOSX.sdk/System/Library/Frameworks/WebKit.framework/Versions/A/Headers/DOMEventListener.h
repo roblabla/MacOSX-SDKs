@@ -24,6 +24,7 @@
  */
 
 #import <WebKit/WebKitAvailability.h>
+#import <objc/NSObject.h>
 
 @class DOMEvent;
 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2DE2E2B1-A277-3407-8798-2232559A6F42
+    value:           D48D9139-2A41-31C1-A78B-4A41311C202F
   - target:          x86_64-maccatalyst
-    value:           2DE2E2B1-A277-3407-8798-2232559A6F42
+    value:           D48D9139-2A41-31C1-A78B-4A41311C202F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54953ADD-98D3-3F99-8F78-AF4496A7ACCC
+    value:           1193D6B5-19F2-31CC-93CB-586C28D3E0E7
   - target:          arm64e-maccatalyst
-    value:           54953ADD-98D3-3F99-8F78-AF4496A7ACCC
+    value:           1193D6B5-19F2-31CC-93CB-586C28D3E0E7
 install-name:    '/System/Library/PrivateFrameworks/Bom.framework/Versions/A/Bom'
 current-version: 195
 compatibility-version: 2
@@ -55,35 +55,62 @@ exports:
                        _BOMCRC32ForBuffer, _BOMCRC32ForBufferSegment, _BOMCRC32ForBufferSegmentFinal, 
                        _BOMCRC32ForFile, _BOMCRC32ForFileDesc, _BOMCRC32ForFileDescWithSys, 
                        _BOMCRC32ForFileWithSys, _BOMCopierCancelCopy, _BOMCopierCopy, 
-                       _BOMCopierCopyWithOptions, _BOMCopierCountFilesInArchive, 
-                       _BOMCopierCountFilesInDirectory, _BOMCopierFree, _BOMCopierGetArchiveFileDescriptor, 
+                       _BOMCopierCopySourceEntryToDestinationSet, _BOMCopierCopyWithOptions, 
+                       _BOMCopierCountFilesInArchive, _BOMCopierCountFilesInDirectory, 
+                       _BOMCopierDataAnalyzerFinalize, _BOMCopierDataAnalyzerFree, 
+                       _BOMCopierDataAnalyzerGetDigest, _BOMCopierDataAnalyzerNew, 
+                       _BOMCopierDataAnalyzerReset, _BOMCopierDataAnalyzerUpdate, 
+                       _BOMCopierDestinationCreateEntry, _BOMCopierDestinationEntryFree, 
+                       _BOMCopierDestinationEntryGetMatchRecord, _BOMCopierDestinationEntryGetMatchRecordCount, 
+                       _BOMCopierDestinationEntryGetMatchType, _BOMCopierDestinationEntrySeek, 
+                       _BOMCopierDestinationEntryWrite, _BOMCopierDestinationEntryWriteFatHeader, 
+                       _BOMCopierDestinationFinalizeEntry, _BOMCopierDestinationFree, 
+                       _BOMCopierDestinationNew, _BOMCopierDestinationSetAllowBom, 
+                       _BOMCopierDestinationSetChecksumBom, _BOMCopierDestinationSetConflictResolver, 
+                       _BOMCopierDestinationSetDenyBom, _BOMCopierDestinationSetInit, 
+                       _BOMCopierDestinationSetRelease, _BOMCopierErrorCapture, _BOMCopierErrorFree, 
+                       _BOMCopierErrorGetCode, _BOMCopierErrorGetCompilationDate, 
+                       _BOMCopierErrorGetFileName, _BOMCopierErrorGetFunctionName, 
+                       _BOMCopierErrorGetLineNumber, _BOMCopierErrorGetMessage, _BOMCopierFree, 
+                       _BOMCopierGetArchiveFileDescriptor, _BOMCopierMatchBinary, 
                        _BOMCopierMultiCopy, _BOMCopierMultiCopyWithOptions, _BOMCopierNew, 
-                       _BOMCopierNewWithSys, _BOMCopierRedirectPath, _BOMCopierRedirectSourcePath, 
+                       _BOMCopierNewWithSys, _BOMCopierPrepareMatchContext, _BOMCopierRedirectPath, 
+                       _BOMCopierRedirectSourcePath, _BOMCopierReleaseMatchContext, 
                        _BOMCopierSetCopyFileFinishedHandler, _BOMCopierSetCopyFileStartedHandler, 
                        _BOMCopierSetCopyFileUpdateHandler, _BOMCopierSetCountFilesUpdateHandler, 
                        _BOMCopierSetFatalErrorHandler, _BOMCopierSetFatalFileErrorHandler, 
                        _BOMCopierSetFileConflictErrorHandler, _BOMCopierSetFileErrorHandler, 
                        _BOMCopierSetMultiCopySourceStartedHandler, _BOMCopierSetPKZipPasswordRequester, 
                        _BOMCopierSetUserData, _BOMCopierSourceEntryCompare, _BOMCopierSourceEntryFree, 
-                       _BOMCopierSourceEntryGetAccessTime, _BOMCopierSourceEntryGetActualPath, 
-                       _BOMCopierSourceEntryGetGroupID, _BOMCopierSourceEntryGetMode, 
-                       _BOMCopierSourceEntryGetModificationTime, _BOMCopierSourceEntryGetName, 
-                       _BOMCopierSourceEntryGetParent, _BOMCopierSourceEntryGetPath, 
+                       _BOMCopierSourceEntryGetACL, _BOMCopierSourceEntryGetAccessTime, 
+                       _BOMCopierSourceEntryGetActualPath, _BOMCopierSourceEntryGetArchCount, 
+                       _BOMCopierSourceEntryGetArchRecord, _BOMCopierSourceEntryGetBinaryType, 
+                       _BOMCopierSourceEntryGetDevice, _BOMCopierSourceEntryGetExtendedAttributeCount, 
+                       _BOMCopierSourceEntryGetExtendedAttributeName, _BOMCopierSourceEntryGetExtendedAttributeValue, 
+                       _BOMCopierSourceEntryGetFlags, _BOMCopierSourceEntryGetGroupID, 
+                       _BOMCopierSourceEntryGetHardlinkCount, _BOMCopierSourceEntryGetInode, 
+                       _BOMCopierSourceEntryGetMode, _BOMCopierSourceEntryGetModificationTime, 
+                       _BOMCopierSourceEntryGetName, _BOMCopierSourceEntryGetParent, 
+                       _BOMCopierSourceEntryGetPath, _BOMCopierSourceEntryGetQuarantine, 
                        _BOMCopierSourceEntryGetSize, _BOMCopierSourceEntryGetStatusTime, 
                        _BOMCopierSourceEntryGetSymlinkTarget, _BOMCopierSourceEntryGetType, 
-                       _BOMCopierSourceEntryGetUserID, _BOMCopierSourceEntryIsResourceFork, 
-                       _BOMCopierSourceEntryIsRoot, _BOMCopierSourceEntryNew, _BOMCopierSourceEntryNewFromFSObject, 
+                       _BOMCopierSourceEntryGetUserID, _BOMCopierSourceEntryIsCompressed, 
+                       _BOMCopierSourceEntryIsResourceFork, _BOMCopierSourceEntryIsRestricted, 
+                       _BOMCopierSourceEntryIsRoot, _BOMCopierSourceEntryIsSegmentedFile, 
+                       _BOMCopierSourceEntryNew, _BOMCopierSourceEntryNewFromFSObject, 
                        _BOMCopierSourceEntryNewFromFTSENT, _BOMCopierSourceEntryNewFromLibarchive, 
                        _BOMCopierSourceEntryNewFromPath, _BOMCopierSourceEntryNewFromResourceFork, 
-                       _BOMCopierSourceEntryRead, _BOMCopierSourceEntrySetAccessTime, 
+                       _BOMCopierSourceEntryRead, _BOMCopierSourceEntrySeek, _BOMCopierSourceEntrySetAccessTime, 
                        _BOMCopierSourceEntrySetData, _BOMCopierSourceEntrySetGroupID, 
                        _BOMCopierSourceEntrySetMode, _BOMCopierSourceEntrySetModificationTime, 
                        _BOMCopierSourceEntrySetName, _BOMCopierSourceEntrySetOption, 
                        _BOMCopierSourceEntrySetParent, _BOMCopierSourceEntrySetPath, 
-                       _BOMCopierSourceEntrySetRoot, _BOMCopierSourceEntrySetStatusTime, 
-                       _BOMCopierSourceEntrySetSymlinkTarget, _BOMCopierSourceEntrySetUserID, 
-                       _BOMCopierSourceEntrySkip, _BOMCopierSourceEntryTypeString, 
-                       _BOMCopierSourceFree, _BOMCopierSourceNew, _BOMCopierSourceNext, 
+                       _BOMCopierSourceEntrySetQuarantine, _BOMCopierSourceEntrySetRoot, 
+                       _BOMCopierSourceEntrySetSegmentedFile, _BOMCopierSourceEntrySetSize, 
+                       _BOMCopierSourceEntrySetStatusTime, _BOMCopierSourceEntrySetSymlinkTarget, 
+                       _BOMCopierSourceEntrySetUserID, _BOMCopierSourceEntrySkip, 
+                       _BOMCopierSourceEntryTypeString, _BOMCopierSourceFree, _BOMCopierSourceNew, 
+                       _BOMCopierSourceNext, _BOMCopierSourceSetPassphraseCallback, 
                        _BOMCopierUserData, _BOMExceptionHandlerMessage, _BOMExceptionHandlerSet, 
                        _BOMFSEnumeratorFree, _BOMFSEnumeratorNew, _BOMFSEnumeratorNewWithSys, 
                        _BOMFSEnumeratorNext, _BOMFSObjectArchCount, _BOMFSObjectBlockID, 

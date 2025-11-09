@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           95E4F582-CC70-3292-8E0F-7891ABC7D10D
+    value:           C132AD60-7E04-3452-8ACE-E422DFF3CDF6
   - target:          x86_64-maccatalyst
-    value:           95E4F582-CC70-3292-8E0F-7891ABC7D10D
+    value:           C132AD60-7E04-3452-8ACE-E422DFF3CDF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16675D01-8DDF-3575-AE38-ADDE3351B029
+    value:           E2436D53-C0B8-35B6-B8FD-4A35C091481D
   - target:          arm64e-maccatalyst
-    value:           16675D01-8DDF-3575-AE38-ADDE3351B029
+    value:           E2436D53-C0B8-35B6-B8FD-4A35C091481D
 install-name:    '/System/Library/PrivateFrameworks/RealityFusion.framework/Versions/A/RealityFusion'
-current-version: 161.200
+current-version: 161.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

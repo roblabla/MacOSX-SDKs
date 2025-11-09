@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AA87514F-9573-32E9-A794-8144E821521E
+    value:           D5431D79-D793-31A4-A0EC-EF6804B456A8
   - target:          x86_64-maccatalyst
-    value:           AA87514F-9573-32E9-A794-8144E821521E
+    value:           D5431D79-D793-31A4-A0EC-EF6804B456A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A557009-4013-34BE-9E6B-2A4EF57507A4
+    value:           959F69B7-A09D-3A64-9DAD-95B376312352
   - target:          arm64e-maccatalyst
-    value:           2A557009-4013-34BE-9E6B-2A4EF57507A4
+    value:           959F69B7-A09D-3A64-9DAD-95B376312352
 install-name:    '/System/Library/PrivateFrameworks/MapsSupport.framework/Versions/A/MapsSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -80,14 +80,14 @@ exports:
                        _kMSPContainerUnavailableKeysKey, _kMSPContainerUntransferableObjectKey, 
                        _kMSPDuplicateStorageIdentifierObjectsKey, _kMSPSearchResultHistoryItemDataKey, 
                        _kMSPUnderlyingErrorsKey ]
-    objc-classes:    [ MSPAppleMediaServicesServer, MSPBookmarkStorage, MSPCloudClientRegistration, 
-                       MSPCloudClientRegistrationRecord, MSPCloudContainer, MSPCloudContainerCache, 
-                       MSPCloudContainerChangeSet, MSPCloudKitAccountAccess, MSPCloudMigrator, 
-                       MSPCloudSynchronizer, MSPCloudSynchronizerRunConditions, MSPCollection, 
-                       MSPCollectionItem, MSPCollectionItemRecord, MSPCollectionItemReplica, 
-                       MSPCollectionItemReplicaStorage, MSPCollectionItemStorage, 
-                       MSPCollectionStorage, MSPCollectionsContainer, MSPCollectionsFileContainerPersister, 
-                       MSPCollectionsQuery, MSPCollectionsReplica, MSPCollectionsReplicaRecordFromCloudKit, 
+    objc-classes:    [ MSPBookmarkStorage, MSPCloudClientRegistration, MSPCloudClientRegistrationRecord, 
+                       MSPCloudContainer, MSPCloudContainerCache, MSPCloudContainerChangeSet, 
+                       MSPCloudKitAccountAccess, MSPCloudMigrator, MSPCloudSynchronizer, 
+                       MSPCloudSynchronizerRunConditions, MSPCollection, MSPCollectionItem, 
+                       MSPCollectionItemRecord, MSPCollectionItemReplica, MSPCollectionItemReplicaStorage, 
+                       MSPCollectionItemStorage, MSPCollectionStorage, MSPCollectionsContainer, 
+                       MSPCollectionsFileContainerPersister, MSPCollectionsQuery, 
+                       MSPCollectionsReplica, MSPCollectionsReplicaRecordFromCloudKit, 
                        MSPCollectionsReplicaSimpleRecord, MSPCompanionSyncedItem, 
                        MSPContainer, MSPContainerArrayStateSnapshot, MSPContainerPersister, 
                        MSPContainerPolicyObserver, MSPDirectionsSearch, MSPDroppedPin, 

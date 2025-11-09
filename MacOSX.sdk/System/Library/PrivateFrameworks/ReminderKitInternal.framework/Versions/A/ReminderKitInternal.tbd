@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B56D20B9-508A-38DF-9F9B-70C5B3DC28B7
+    value:           70F96402-097A-3F9D-B48C-A90239343714
   - target:          x86_64-maccatalyst
-    value:           B56D20B9-508A-38DF-9F9B-70C5B3DC28B7
+    value:           70F96402-097A-3F9D-B48C-A90239343714
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E169FA3-DBA8-312B-8DB8-3E5B5F48D151
+    value:           969CE41D-3DC4-376F-ADAB-7172EF416DB0
   - target:          arm64e-maccatalyst
-    value:           9E169FA3-DBA8-312B-8DB8-3E5B5F48D151
+    value:           969CE41D-3DC4-376F-ADAB-7172EF416DB0
 install-name:    '/System/Library/PrivateFrameworks/ReminderKitInternal.framework/Versions/A/ReminderKitInternal'
-current-version: 560
+current-version: 615.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -35,6 +35,8 @@ exports:
                        '_$s10Foundation4DateV19ReminderKitInternalE09referenceB0ACvpZ', 
                        '_$s10Foundation4DateV19ReminderKitInternalE10startOfDayACvg', 
                        '_$s10Foundation4DateV19ReminderKitInternalE10startOfDayACvpMV', 
+                       '_$s10Foundation4DateV19ReminderKitInternalE11isInThePastSbvg', 
+                       '_$s10Foundation4DateV19ReminderKitInternalE11isInThePastSbvpMV', 
                        '_$s10Foundation4DateV19ReminderKitInternalE15fussyParsedFromACSgSS_tcfC', 
                        '_$s10Foundation4DateV19ReminderKitInternalE16eveningStartHourSivgZ', 
                        '_$s10Foundation4DateV19ReminderKitInternalE18testing_parsedFromACSgSS_tcfC', 
@@ -1127,6 +1129,8 @@ exports:
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0V7dueDateyAESSF', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0V7hashtag_4typeAESS_So14REMHashtagTypeVtF', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0V8hashtags33_5F7D22EC3CAFE1E43A670F609018406BLLSayAE7HashtagAGLLVGvpfi', 
+                       '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0V8priority33_5F7D22EC3CAFE1E43A670F609018406BLLSo24REMReminderPriorityLevelVvpfi', 
+                       '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0V8priorityyAESo24REMReminderPriorityLevelVF', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0V9isFlagged33_5F7D22EC3CAFE1E43A670F609018406BLLSbvpfi', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0V9isFlaggedyAESbF', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC04TestA0VMa', 
@@ -1670,6 +1674,27 @@ exports:
                        '_$s19ReminderKitInternal23REMComplicationDataViewCMn', '_$s19ReminderKitInternal23REMComplicationDataViewCN', 
                        '_$s19ReminderKitInternal23REMComplicationDataViewCfD', '_$s19ReminderKitInternal23REMComplicationDataViewCfd', 
                        '_$s19ReminderKitInternal23REMContactsProviderTypeMp', '_$s19ReminderKitInternal23REMContactsProviderTypeTL', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersV07hashtageK8ToSearchAGShySSG_tcfC', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersV07hashtageK8ToSearchShySSGvg', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersV07hashtageK8ToSearchShySSGvpMV', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersV4fromAGs7Decoder_p_tKcfC', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersV6encode2toys7Encoder_p_tKF', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersVMa', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersVMn', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersVN', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersVSEAAMc', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC10ParametersVSeAAMc', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC20supportsSecureCodingSbvgZ', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC29fetchResultTokenToDiffAgainstAESo08REMFetchnO0CSg_tcfC', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC29fetchResultTokenToDiffAgainstAESo08REMFetchnO0CSg_tcfc', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC5coderAESgSo7NSCoderC_tcfC', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationC5coderAESgSo7NSCoderC_tcfc', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationCAA25REMSwiftInvocableProtocolAAMc', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationCAA25REMSwiftInvocableProtocolAAWP', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationCMa', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationCMn', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationCN', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC014HashtagIDsWithhE15NamesInvocationCfD', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC015fetchAllHashtagE20SuggestionsPublisher5store11combineType7Combine03AnyL0VyAC0jK0Vs5Error_pGSo8REMStoreC_AC0pO0OtFZ', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC05fetchA3IDs7withAll5storeShyAA19REMObjectID_CodableCGShySSG_So8REMStoreCtKFZ', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC05fetchA3IDs8withSome5storeSDySSShyAA19REMObjectID_CodableCGGShySSG_So8REMStoreCtKFZ', 
@@ -1737,6 +1762,7 @@ exports:
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC11CombineTypeON', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC11CombineTypeOSHAAMc', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC11CombineTypeOSQAAMc', 
+                       '_$s19ReminderKitInternal23REMHashtagLabelDataViewC15fetchHashtagIDs4with5storeShyAA19REMObjectID_CodableCGShySSG_So8REMStoreCtKFZ', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC16ManualOrderingIDV04listJ0SSvg', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC16ManualOrderingIDV04listJ0SSvpMV', 
                        '_$s19ReminderKitInternal23REMHashtagLabelDataViewC16ManualOrderingIDV06objectJ004listJ0AeA09REMObjectJ8_CodableC_SStcfC', 
@@ -1900,7 +1926,7 @@ exports:
                        '_$s19ReminderKitInternal24REMAsyncOperationManagerC011isRerunningE03forSbx_tF', 
                        '_$s19ReminderKitInternal24REMAsyncOperationManagerC07restartE10IfFinished3forSbx_tF', 
                        '_$s19ReminderKitInternal24REMAsyncOperationManagerC10syncResult3fors0H0Oyq_s5Error_pGx_tF', 
-                       '_$s19ReminderKitInternal24REMAsyncOperationManagerC20l_operationStateByID33_1270C8B2925014900A7061CDD2FAA6EDLLSDy8CacheKeyAA0dE6ParamsPQzAC0ceH0AELLOyxq__GGvpfi', 
+                       '_$s19ReminderKitInternal24REMAsyncOperationManagerC20l_operationStateByID33_1270C8B2925014900A7061CDD2FAA6EDLLSDy8CacheKeyQzAC0ceH0AELLOyxq__GGvpfi', 
                        '_$s19ReminderKitInternal24REMAsyncOperationManagerC23unitTest_operationState3forAA0deJ0Oyq_GSgx_tF', 
                        '_$s19ReminderKitInternal24REMAsyncOperationManagerC30operationStateStartingIfNeeded3forAA0deH0Oyq_Gx_tF', 
                        '_$s19ReminderKitInternal24REMAsyncOperationManagerC4lock33_1270C8B2925014900A7061CDD2FAA6EDLLAA10UnfairLockCvpfi', 
@@ -4789,7 +4815,7 @@ exports:
                        '_$sSo23CLAccuracyAuthorizationV19ReminderKitInternalE11descriptionSSvg', 
                        '_$sSo23CLAccuracyAuthorizationV19ReminderKitInternalE11descriptionSSvpMV', 
                        '_$sSo23CLAccuracyAuthorizationVs23CustomStringConvertible19ReminderKitInternalMc', 
-                       '_$sSo23REMOrderedIdentifierMapC19ReminderKitInternalE7reorder7objectsSayxGAF_tSo23REMObjectIDIdentifiableRzlF', 
+                       '_$sSo23REMOrderedIdentifierMapC19ReminderKitInternalE7reorder7objectsSayxGAF_tKSo23REMObjectIDIdentifiableRzlF', 
                        '_$sSo24REMContactRepresentationC19ReminderKitInternalE14parsableStringSSyF', 
                        '_$sSo24REMContactRepresentationC19ReminderKitInternalE17contactIdentifier0F5StoreABSgSS_So09CNContactH0CtcfC', 
                        '_$sSo24REMContactRepresentationC19ReminderKitInternalE5parse4fromABSgSS_tFZ', 
@@ -4874,12 +4900,17 @@ exports:
                        '_$sSo8REMStoreC19ReminderKitInternalE05fetchB022notificationIdentifierSo11REMReminderCAC015REMNotificationG0O_tKF', 
                        '_$sSo8REMStoreC19ReminderKitInternalE10asyncFetch2on4bodyAC7PromiseCyxGSo17OS_dispatch_queueC_xABKctlF', 
                        '_$sSo8REMStoreC19ReminderKitInternalE14fetchReminders23notificationIdentifiersSaySo11REMReminderCGSayAC25REMNotificationIdentifierOG_tKF', 
+                       '_$sSo8REMStoreC19ReminderKitInternalE21deletePhantomHashtags4withSaySo11REMObjectIDCGShySSG_tKF', 
                        '_$sSo8REMStoreC19ReminderKitInternalE23fetchNonCustomSmartList8withTypeSo08REMSmartI0CAgCE0fG0O_tKF', 
                        '_$sSo8REMStoreC19ReminderKitInternalE31fetchOrCreateNonCustomSmartList8withTypeSo08REMSmartK0CAgCE0hI0O_tKF', 
                        '_$sSo8REMStoreC19ReminderKitInternalE5storeABvg', '_$sSo8REMStoreC19ReminderKitInternalE5storeABvpMV', 
                        '_$sSo8REMStoreC19ReminderKitInternalE6invokeyq_xKSo0A10InvocationCRbzAC20REMInvocableProtocolRz12ClientResultQzRs_r0_lF', 
                        '_$sSo9CNContactC19ReminderKitInternalE13addressByTypeSDyAC016REMMeCardAddressG0OSo08CNPostalJ0CGvg', 
                        '_$sSo9CNContactC19ReminderKitInternalE13addressByTypeSDyAC016REMMeCardAddressG0OSo08CNPostalJ0CGvpMV', 
+                       '_$sSq19ReminderKitInternal10Foundation4DateVRszlE13orDistantPastADvg', 
+                       '_$sSq19ReminderKitInternal10Foundation4DateVRszlE13orDistantPastADvpMV', 
+                       '_$sSq19ReminderKitInternal10Foundation4DateVRszlE15orDistantFutureADvg', 
+                       '_$sSq19ReminderKitInternal10Foundation4DateVRszlE15orDistantFutureADvpMV', 
                        '_$sSq19ReminderKitInternalAA21PartialDecodableValueRzSeRzlE13partialDecode3key2inypSgqd___s22KeyedDecodingContainerVyqd__GtKs9CodingKeyRd__lFZ', 
                        '_$sSq19ReminderKitInternalE16descriptionOrNilSSvg', '_$sSq19ReminderKitInternalE16descriptionOrNilSSvpMV', 
                        '_$sSq19ReminderKitInternalE9tryUnwrap_4file4linexSS_SSSitKF', 
@@ -4895,6 +4926,7 @@ exports:
                        '_$ss4Int8V19ReminderKitInternal21PartialDecodableValueACWP', 
                        '_$ss4Int8V19ReminderKitInternal23REMStoreInvocationValueACMc', 
                        '_$ss4Int8V19ReminderKitInternal23REMStoreInvocationValueACWP', 
+                       '_$ss5ErrorP19ReminderKitInternalE10isREMError04withA4CodeSbSo0fH0V_tF', 
                        '_$ss5ErrorP19ReminderKitInternalE20rem_errorDescriptionSSvg', 
                        '_$ss5ErrorP19ReminderKitInternalE20rem_errorDescriptionSSvpMV', 
                        '_$ss5Int16V19ReminderKitInternal16PartialPrimitiveACMc', 
@@ -4957,6 +4989,7 @@ exports:
     objc-classes:    [ REMAccount_Codable, REMAccountsListDataView_Invocation, REMColor_Codable, 
                        REMComplicationDataViewFetchModelInvocation, REMComplicationDataViewFetchModelInvocationResult, 
                        REMFetchResultToken_Codable, REMHashtagLabelDataView_AllHashtagLabelsInvocation, 
+                       REMHashtagLabelDataView_HashtagIDsWithHashtagLabelNamesInvocation, 
                        REMHashtagLabelDataView_HashtagLabelsReferencedByCustomSmartListFiltersInvocation, 
                        REMHashtagLabelDataView_ManualOrderingIDForTaggedSmartListInvocation, 
                        REMHashtagLabelDataView_ReminderIDsWithAllHashtagLabelNamesInvocation, 

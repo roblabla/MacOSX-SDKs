@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AABA3382-2715-376A-90BE-144DC43CE459
+    value:           946F08A6-4C7F-343E-A1D4-5D5CEB080D7F
   - target:          x86_64-maccatalyst
-    value:           AABA3382-2715-376A-90BE-144DC43CE459
+    value:           946F08A6-4C7F-343E-A1D4-5D5CEB080D7F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           17311292-FF5E-3412-8935-3A67599869B2
+    value:           686E7376-D1F3-3EB7-8AA2-D37A34DD280B
   - target:          arm64e-maccatalyst
-    value:           17311292-FF5E-3412-8935-3A67599869B2
+    value:           686E7376-D1F3-3EB7-8AA2-D37A34DD280B
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1163.60.3
+current-version: 1163.100.19
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -211,20 +211,21 @@ exports:
                        __SCNetworkInterfaceIsCarPlay, __SCNetworkInterfaceIsEphemeral, 
                        __SCNetworkInterfaceIsHiddenConfiguration, __SCNetworkInterfaceIsHiddenInterface, 
                        __SCNetworkInterfaceIsPhysicalEthernet, __SCNetworkInterfaceIsQoSMarkingProfileInstalled, 
-                       __SCNetworkInterfaceIsTethered, __SCNetworkInterfaceIsThunderbolt, 
-                       __SCNetworkInterfaceIsTrustRequired, __SCNetworkInterfaceIsVMNET, 
-                       __SCNetworkMigrationAreConfigurationsIdentical, __SCNetworkProtocolCompare, 
-                       __SCNetworkServiceCompare, __SCNetworkServiceCopyActive, __SCNetworkServiceCreatePreconfigured, 
-                       __SCNetworkServiceIsVPN, __SCNetworkServiceSetServiceID, __SCNetworkSetCompare, 
-                       __SCNetworkSetCreateDefault, __SCNetworkSetSetSetID, __SCPreferencesCopyComputerName, 
-                       __SCPreferencesCopyLocalHostName, __SCPreferencesSystemKeychainPasswordItemCopy, 
-                       __SCPreferencesSystemKeychainPasswordItemExists, __SCPreferencesSystemKeychainPasswordItemRemove, 
-                       __SCPreferencesSystemKeychainPasswordItemSet, __SCSecKeychainCopySystemKeychain, 
-                       __SCSecKeychainPasswordItemCopy, __SCSecKeychainPasswordItemExists, 
-                       __SCSecKeychainPasswordItemRemove, __SCSecKeychainPasswordItemSet, 
-                       __SCSerialize, __SCSerializeData, __SCSerializeMultiple, __SCSerializeString, 
-                       __SCUnserialize, __SCUnserializeData, __SCUnserializeMultiple, 
-                       __SCUnserializeString, __SCVLANInterfaceCopyActive, __SCVLANInterfaceUpdateConfiguration, 
+                       __SCNetworkInterfaceIsSelfNamed, __SCNetworkInterfaceIsTethered, 
+                       __SCNetworkInterfaceIsThunderbolt, __SCNetworkInterfaceIsTrustRequired, 
+                       __SCNetworkInterfaceIsVMNET, __SCNetworkMigrationAreConfigurationsIdentical, 
+                       __SCNetworkProtocolCompare, __SCNetworkServiceCompare, __SCNetworkServiceCopyActive, 
+                       __SCNetworkServiceCreatePreconfigured, __SCNetworkServiceIsVPN, 
+                       __SCNetworkServiceSetServiceID, __SCNetworkSetCompare, __SCNetworkSetCreateDefault, 
+                       __SCNetworkSetSetSetID, __SCPreferencesCopyComputerName, __SCPreferencesCopyLocalHostName, 
+                       __SCPreferencesSystemKeychainPasswordItemCopy, __SCPreferencesSystemKeychainPasswordItemExists, 
+                       __SCPreferencesSystemKeychainPasswordItemRemove, __SCPreferencesSystemKeychainPasswordItemSet, 
+                       __SCSecKeychainCopySystemKeychain, __SCSecKeychainPasswordItemCopy, 
+                       __SCSecKeychainPasswordItemExists, __SCSecKeychainPasswordItemRemove, 
+                       __SCSecKeychainPasswordItemSet, __SCSerialize, __SCSerializeData, 
+                       __SCSerializeMultiple, __SCSerializeString, __SCUnserialize, 
+                       __SCUnserializeData, __SCUnserializeMultiple, __SCUnserializeString, 
+                       __SCVLANInterfaceCopyActive, __SCVLANInterfaceUpdateConfiguration, 
                        __SC_CFBundleCopyNonLocalizedString, __SC_CFBundleGet, __SC_CFMachPortCreateWithPort, 
                        __SC_CFStringIsValidDNSName, __SC_CFStringIsValidNetBIOSName, 
                        __SC_LOG_DEFAULT, __SC_cfstring_to_cstring, __SC_checkMachPortReceive, 

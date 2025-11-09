@@ -655,59 +655,98 @@ typedef struct {
 	uint8_t reserved[64];
 } es_event_iokit_open_t;
 
+typedef enum {
+	// Task port obtained by calling e.g. task_for_pid(), where the caller
+	// obtains a task port for a process identified by pid.
+	ES_GET_TASK_TYPE_TASK_FOR_PID,
+	// Task port obtained by calling e.g. processor_set_tasks(), where the
+	// caller obtains a set of task ports.
+	ES_GET_TASK_TYPE_EXPOSE_TASK,
+	// Task port obtained by calling e.g. task_identity_token_get_task_port(),
+	// where the caller obtains a task port for a process identified by an
+	// identity token.  Task identity tokens generally have to be given up
+	// by the target process voluntarily prior to the conversion into task
+	// ports.
+	ES_GET_TASK_TYPE_IDENTITY_TOKEN,
+} es_get_task_type_t;
+
 /**
  * @brief Get a process's task control port
  *
  * @field target The process for which the task control port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task control
  * port (e.g. task_for_pid(), task_identity_token_get_task_port(),
  * processor_set_tasks() and other means).
  *
  * @note Task control ports were formerly known as simply "task ports".
+ *
+ * @note There are many legitimate reasons why a process might need to obtain
+ * a send right to a task control port of another process, not limited to intending
+ * to debug or suspend the target process.  For instance, frameworks and their
+ * daemons may need to obtain a task control port to fulfill requests made by the
+ * target process.  Obtaining a task control port is in itself not indicative of
+ * malicious activity.  Denying system processes acquiring task control ports may
+ * result in breaking system functionality in potentially fatal ways.
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_t;
 
 /**
  * @brief Get a process's task read port
  *
  * @field target The process for which the task read port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task read
  * port (e.g. task_read_for_pid(), task_identity_token_get_task_port()).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_read_t;
 
 /**
  * @brief Get a process's task inspect port
  *
  * @field target The process for which the task inspect port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task inspect
  * port (e.g. task_inspect_for_pid(), task_identity_token_get_task_port()).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_inspect_t;
 
 /**
  * @brief Get a process's task name port
  *
  * @field target The process for which the task name port will be retrieved.
+ * @field type Type indicating how the process is obtaining the task port for
+ *        the target process.
+ *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task name
  * port (e.g. task_name_for_pid(), task_identity_token_get_task_port()).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
-	uint8_t reserved[64];
+	es_get_task_type_t type; /* field available only if message version >= 5 */
+	uint8_t reserved[60];
 } es_event_get_task_name_t;
 
 /**

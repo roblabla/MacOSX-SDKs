@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6DF09802-0EFE-3AA7-A56B-74666277EEB5
+    value:           A5646420-9E2B-3548-87FE-56FEA6951003
   - target:          x86_64-maccatalyst
-    value:           6DF09802-0EFE-3AA7-A56B-74666277EEB5
+    value:           A5646420-9E2B-3548-87FE-56FEA6951003
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E4604C3-EC6C-344E-8676-917FB5AF8719
+    value:           297B0C66-AD6E-33DE-9812-A741E258B52B
   - target:          arm64e-maccatalyst
-    value:           5E4604C3-EC6C-344E-8676-917FB5AF8719
+    value:           297B0C66-AD6E-33DE-9812-A741E258B52B
 install-name:    '/usr/lib/libdscsym.dylib'
-current-version: 302.1
+current-version: 302.2
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

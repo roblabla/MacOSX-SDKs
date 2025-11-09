@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           E2FE69D1-DE93-3AEC-B96A-0C462BDC3691
+    value:           053A88F0-33D1-38EF-8EEA-8EED7A97833C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           7F84682C-5636-3788-8962-2B421902D649
+    value:           4F99B071-5660-34B9-A1E8-6AEEA151BFE8
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameplayKit.framework/Versions/A/GameplayKit'
 current-version: 96.1
 exports:

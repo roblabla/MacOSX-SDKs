@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           326DA0E1-5213-3765-85A7-B423316AAB7D
+    value:           56887FB3-BEC5-3856-9DBE-96818D2A7583
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8095F213-BD7A-3E0A-B942-7656C3F4D0BC
+    value:           30614410-5700-3A18-87F2-9D35F88BF7E6
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 244.20.7
+current-version: 244.40.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -103,6 +103,13 @@ exports:
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCMa', '_$s13ControlCenter0aB27ModulePreferencesControllerCMm', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCMn', '_$s13ControlCenter0aB27ModulePreferencesControllerCN', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCfD', '_$s13ControlCenter0aB27ModulePreferencesControllerCfd', 
+                       '_$s13ControlCenter11DeviceModelV3usbACSgSS_tcfC', '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16VvM', 
+                       '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16Vvg', '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16VvpMV', 
+                       '_$s13ControlCenter11DeviceModelV8vendorIDs6UInt16Vvs', '_$s13ControlCenter11DeviceModelV9bluetoothACSgSS_tcfC', 
+                       '_$s13ControlCenter11DeviceModelV9productIDs6UInt16VvM', '_$s13ControlCenter11DeviceModelV9productIDs6UInt16Vvg', 
+                       '_$s13ControlCenter11DeviceModelV9productIDs6UInt16VvpMV', 
+                       '_$s13ControlCenter11DeviceModelV9productIDs6UInt16Vvs', '_$s13ControlCenter11DeviceModelVMa', 
+                       '_$s13ControlCenter11DeviceModelVMn', '_$s13ControlCenter11DeviceModelVN', 
                        '_$s13ControlCenter11PreferencesV11synchronizeSbyF', '_$s13ControlCenter11PreferencesV3appACSS_tcfC', 
                        '_$s13ControlCenter11PreferencesV6DomainV3app4user4hostAESS_So11CFStringRefaAJtcfC', 
                        '_$s13ControlCenter11PreferencesV6DomainV3app4user4hostAESo11CFStringRefa_A2JtcfC', 
@@ -343,6 +350,29 @@ exports:
                        '_$s13ControlCenter27UserSwitcherHostPreferencesCMa', '_$s13ControlCenter27UserSwitcherHostPreferencesCMm', 
                        '_$s13ControlCenter27UserSwitcherHostPreferencesCMn', '_$s13ControlCenter27UserSwitcherHostPreferencesCN', 
                        '_$s13ControlCenter27UserSwitcherHostPreferencesCfD', '_$s13ControlCenter27UserSwitcherHostPreferencesCfd', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC12cancellables33_B4678F39DC139F85BAAE39F550D537ACLLShy7Combine14AnyCancellableCGvpfi', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC15receiverEnabledSbvg', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC15receiverEnabledSbvpMV', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufC', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufc', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufC', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufc', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC6domain4keysAcA0G0V6DomainV_xtcSTRzSS7ElementRtzlufC', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC6domain4keysAcA0G0V6DomainV_xtcSTRzSS7ElementRtzlufc', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC6domain4keysAcA0G0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufC', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC6domain4keysAcA0G0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufc', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC6sharedACvau', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC6sharedACvgZ', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesC6sharedACvpZ', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCACycfC', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCACycfCTq', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCACycfc', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCMa', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCMm', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCMn', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCN', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCfD', 
+                       '_$s13ControlCenter34AirPlayReceiverSecurityPreferencesCfd', 
                        _ControlCenterClockDateFormatterChangedNotification, _ControlCenterCopyClockDateFormatter, 
                        __ControlCenterCopyClockDateFormatter ]
 ...

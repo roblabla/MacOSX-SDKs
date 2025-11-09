@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AE5FAEB2-2D1E-38C9-99D6-6A909063447D
+    value:           06831E6B-13A8-3A7B-847B-4E5446E07485
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           15BDE3EC-1853-3652-B598-2E7B8FB99375
+    value:           2D7888E2-0D33-3676-B21B-D95AC8295B1B
 install-name:    '/System/Library/PrivateFrameworks/PhotoAnalysis.framework/Versions/A/PhotoAnalysis'
-current-version: 421.0.100
+current-version: 441.0.120
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ photoanalysisd ]

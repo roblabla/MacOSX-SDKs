@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E7CF05CC-5434-3225-BF50-8C907506AEA7
+    value:           28E69CAF-DF75-3AAC-B0EE-05BCD942EB50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79436DC2-3910-3BB9-BCF7-7283153EF53E
+    value:           172D9BD6-852D-39C4-B7E1-0BED8084E0D4
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 644.23.1
+current-version: 644.43.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALayerKeyBoundsSize, _CALayerKeyShadowPath, _VUIAccessibilityReduceMotionStatusDidChangeNotification, 

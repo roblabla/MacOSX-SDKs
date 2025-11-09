@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           933FDBEA-BC6C-36DA-8E75-17F47D6A3726
+    value:           67015119-C360-332F-A214-7A662072C999
   - target:          x86_64-maccatalyst
-    value:           933FDBEA-BC6C-36DA-8E75-17F47D6A3726
+    value:           67015119-C360-332F-A214-7A662072C999
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           37622E05-EE77-3BCF-BB57-F8AABDF4B88F
+    value:           357BA67B-1C56-356D-B850-519789DA619C
   - target:          arm64e-maccatalyst
-    value:           37622E05-EE77-3BCF-BB57-F8AABDF4B88F
+    value:           357BA67B-1C56-356D-B850-519789DA619C
 install-name:    '/System/Library/PrivateFrameworks/DifferentialPrivacy.framework/Versions/A/DifferentialPrivacy'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
