@@ -128,6 +128,7 @@ typedef NS_ENUM(NSUInteger, MTLDataType) {
     MTLDataTypeBFloat2 API_AVAILABLE(macos(14.0), ios(17.0)) = 122,
     MTLDataTypeBFloat3 API_AVAILABLE(macos(14.0), ios(17.0)) = 123,
     MTLDataTypeBFloat4 API_AVAILABLE(macos(14.0), ios(17.0)) = 124,
+    
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 @class MTLArgument;

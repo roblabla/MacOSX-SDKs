@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveEventTracker.framework/Versions/A/ProactiveEventTracker'
-current-version: 405.0.1
+current-version: 408
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -13,16 +13,16 @@ exports:
                        '_$s21ProactiveEventTracker0bC0C3log7message13objcClassName8subGroupy21InternalSwiftProtobuf7Message_p_S2SSgtYaFTj', 
                        '_$s21ProactiveEventTracker0bC0C3log7message13objcClassName8subGroupy21InternalSwiftProtobuf7Message_p_S2SSgtYaFTjTu', 
                        '_$s21ProactiveEventTracker0bC0C3log7message13objcClassName8subGroupy21InternalSwiftProtobuf7Message_p_S2SSgtYaFTq', 
-                       '_$s21ProactiveEventTracker0bC0C6sharedACvgZ', '_$s21ProactiveEventTracker0bC0CMa', 
-                       '_$s21ProactiveEventTracker0bC0CMm', '_$s21ProactiveEventTracker0bC0CMn', 
-                       '_$s21ProactiveEventTracker0bC0CMo', '_$s21ProactiveEventTracker0bC0CMu', 
-                       '_$s21ProactiveEventTracker0bC0CN', '_$s21ProactiveEventTracker0bC0CfD', 
-                       '_$s21ProactiveEventTracker0bC0Cfd', _COMAPPLEPETCOMMONPETMetadataReadFrom, 
-                       _COMAPPLEPROACTIVEGMSGMSAssetEventReadFrom, _COMAPPLEPROACTIVEGMSGMSErrorReadFrom, 
-                       _COMAPPLEPROACTIVEGMSGMSGenerativeFunctionEventReadFrom, _COMAPPLEPROACTIVEGMSGMSInferenceEventReadFrom, 
-                       _COMAPPLEPROACTIVEGMSGMSPETUploadEventReadFrom, _COMAPPLEPROACTIVEGMSGMSPrewarmEventReadFrom, 
-                       _COMAPPLEPROACTIVEGMSGMSUberEventReadFrom, _PET1KeyReadFrom, 
-                       _PETAggregatedMessageReadFrom, _PETAggregationKeyReadFrom, 
+                       '_$s21ProactiveEventTracker0bC0C6sharedACvgZ', '_$s21ProactiveEventTracker0bC0C6sharedACvpZMV', 
+                       '_$s21ProactiveEventTracker0bC0CMa', '_$s21ProactiveEventTracker0bC0CMm', 
+                       '_$s21ProactiveEventTracker0bC0CMn', '_$s21ProactiveEventTracker0bC0CMo', 
+                       '_$s21ProactiveEventTracker0bC0CMu', '_$s21ProactiveEventTracker0bC0CN', 
+                       '_$s21ProactiveEventTracker0bC0CfD', '_$s21ProactiveEventTracker0bC0Cfd', 
+                       _COMAPPLEPETCOMMONPETMetadataReadFrom, _COMAPPLEPROACTIVEGMSGMSAssetEventReadFrom, 
+                       _COMAPPLEPROACTIVEGMSGMSErrorReadFrom, _COMAPPLEPROACTIVEGMSGMSGenerativeFunctionEventReadFrom, 
+                       _COMAPPLEPROACTIVEGMSGMSInferenceEventReadFrom, _COMAPPLEPROACTIVEGMSGMSPETUploadEventReadFrom, 
+                       _COMAPPLEPROACTIVEGMSGMSPrewarmEventReadFrom, _COMAPPLEPROACTIVEGMSGMSUberEventReadFrom, 
+                       _PET1KeyReadFrom, _PETAggregatedMessageReadFrom, _PETAggregationKeyReadFrom, 
                        _PETDistributionReadFrom, _PETMetadataReadFrom, _PETRawMessageReadFrom, 
                        _PETUploadReadFrom, _ProactiveEventTrackerVersionNumber, _ProactiveEventTrackerVersionString ]
     objc-classes:    [ COMAPPLEPETCOMMONPETMetadata, COMAPPLEPROACTIVEGMSGMSAssetEvent, 

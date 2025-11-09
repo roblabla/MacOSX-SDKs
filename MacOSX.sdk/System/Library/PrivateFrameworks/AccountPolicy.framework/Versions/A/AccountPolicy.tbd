@@ -8,7 +8,7 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _APCreateError, _APCreateErrorWithEvalDetails, _kAPErrorDomain, 
-                       _kAPHelperName, _kAPMessageDataKeyCacheContents, _kAPMessageDataKeyEvaluationDetails, 
+                       _kAPMessageDataKeyCacheContents, _kAPMessageDataKeyEvaluationDetails, 
                        _kAPMessageDataKeyExpiresIn, _kAPMessageDataKeyFailureReason, 
                        _kAPMessageDataKeyNeedMoreData, _kAPMessageDataKeyPolicyCategory, 
                        _kAPMessageDataKeyPolicyParameters, _kAPMessageDataKeyPolicySetGUID, 

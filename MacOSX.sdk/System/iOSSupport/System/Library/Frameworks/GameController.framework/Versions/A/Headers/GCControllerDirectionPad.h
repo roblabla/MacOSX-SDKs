@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  A direction pad is a common grouping of 2 axis inputs where the input can also be interpreted as 2 sets of mutually exclusive button pairs.
  Only one button in each pair, {up, down} and {left, right}, can be pressed at any one time.
  */
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0))
 @interface GCControllerDirectionPad : GCControllerElement
 
 /**
@@ -26,7 +26,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  @param xValue the value the x axis was set to at the time the valueChangedHandler fired.
  @param yValue the value the y axis was set to at the time the valueChangedHandler fired.
  */
-typedef void (^GCControllerDirectionPadValueChangedHandler)(GCControllerDirectionPad *dpad, float xValue, float yValue);
+typedef void (^GCControllerDirectionPadValueChangedHandler)(GCControllerDirectionPad *dpad, float xValue, float yValue) API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0));
 @property (nonatomic, copy, nullable) GCControllerDirectionPadValueChangedHandler valueChangedHandler;
 
 @property (nonatomic, readonly) GCControllerAxisInput *xAxis;

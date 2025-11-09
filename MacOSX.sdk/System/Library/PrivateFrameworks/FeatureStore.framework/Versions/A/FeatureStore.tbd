@@ -53,6 +53,7 @@ exports:
                        '_$s12FeatureStore0aB7ServiceC12streamEventsScSyxGySeRzSERzlFZ', 
                        '_$s12FeatureStore0aB7ServiceC14insertNSCoding13interactionId4itemySS_xtSo8NSObjectCRbzSo0E0RzlFZ', 
                        '_$s12FeatureStore0aB7ServiceC15insertAceObject13interactionId4itemySS_xtSo0eF0CRbzlFZ', 
+                       '_$s12FeatureStore0aB7ServiceC15insertPBCodable13interactionId4itemySS_So0E0CtFZ', 
                        '_$s12FeatureStore0aB7ServiceC16retrieveNSCoding5querySayxGAA11StreamQueryC_tKSo8NSObjectCRbzSo0E0RzlFZ', 
                        '_$s12FeatureStore0aB7ServiceC17retrieveAceObject13interactionIdxSS_tKSo0eF0CRbzlFZ', 
                        '_$s12FeatureStore0aB7ServiceC17retrieveAceObject5querySayxGAA11StreamQueryC_tKSo0eF0CRbzlFZ', 

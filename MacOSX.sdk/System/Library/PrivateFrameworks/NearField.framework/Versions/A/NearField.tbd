@@ -47,11 +47,11 @@ exports:
                        NFSecureElementManagerSession, NFSecureElementManagerSessionInterface, 
                        NFSecureElementReaderSession, NFSecureTransactionServicesHandoverHybridSession, 
                        NFSecureTransactionServicesHandoverSession, NFSeshatSession, 
-                       NFSession, NFSignatureInfo, NFTNEPService, NFTag, NFTapToRadar, 
-                       NFTechnologyEvent, NFTrustKey, NFTrustKeyRequest, NFTrustLocalValidation, 
-                       NFTrustObject, NFTrustPaymentSignResponse, NFTrustSession, 
-                       NFTrustSessionInterface, NFTrustSignRequest, NFTrustSignResponse, 
-                       NFUnifiedAccessAssertion, NFUnifiedAccessSession, NFVASRequest, 
-                       NFVASResponse, NFValueAddedServiceCard, NFValueAddedServiceTransaction, 
+                       NFSession, NFSignatureInfo, NFSingleUserSession, NFSingleUserSessionInterface, 
+                       NFTNEPService, NFTag, NFTapToRadar, NFTechnologyEvent, NFTrustKey, 
+                       NFTrustKeyRequest, NFTrustLocalValidation, NFTrustObject, 
+                       NFTrustPaymentSignResponse, NFTrustSession, NFTrustSessionInterface, 
+                       NFTrustSignRequest, NFTrustSignResponse, NFUnifiedAccessSession, 
+                       NFVASRequest, NFVASResponse, NFValueAddedServiceCard, NFValueAddedServiceTransaction, 
                        NFVehicleReport, NFWalletPresentation, NFXPCServiceClient ]
 ...

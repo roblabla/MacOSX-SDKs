@@ -1,7 +1,7 @@
 /*
     NSEntityMapping.h
     Core Data
-    Copyright (c) 2004-2024, Apple Inc.
+    Copyright (c) 2004-2025, Apple Inc.
     All rights reserved.
 */
 

@@ -86,9 +86,9 @@ exports:
                        '_$s19USTBridgeConnection0aB8ProtocolP43handleStoppedListeningForSpeechContinuation9withTrpId0J14BridgeDelegate10completionySS_AA0aN0_pyAA0aB5ErrorOSgctFTj', 
                        '_$s19USTBridgeConnection0aB8ProtocolP43handleStoppedListeningForSpeechContinuation9withTrpId0J14BridgeDelegate10completionySS_AA0aN0_pyAA0aB5ErrorOSgctFTq', 
                        '_$s19USTBridgeConnection0aB8ProtocolTL', '_$s19USTBridgeConnection39UnifiedSiriTestBridgeXPCInterfaceCreateSo14NSXPCInterfaceCyF', 
-                       '_$s19USTBridgeConnection6LoggerO6bridge2osABVvgZ', '_$s19USTBridgeConnection6LoggerOMa', 
-                       '_$s19USTBridgeConnection6LoggerOMn', '_$s19USTBridgeConnection6LoggerON', 
-                       _USTBridgeConnectionVersionNumber, _USTBridgeConnectionVersionString, 
-                       _USTBridgeXPCInterfaceCreate ]
+                       '_$s19USTBridgeConnection6LoggerO6bridge2osABVvgZ', '_$s19USTBridgeConnection6LoggerO6bridge2osABVvpZMV', 
+                       '_$s19USTBridgeConnection6LoggerOMa', '_$s19USTBridgeConnection6LoggerOMn', 
+                       '_$s19USTBridgeConnection6LoggerON', _USTBridgeConnectionVersionNumber, 
+                       _USTBridgeConnectionVersionString, _USTBridgeXPCInterfaceCreate ]
     objc-classes:    [ BridgeServiceDelegate, USTBridgeConnectionProxy, USTBridgeListenerManager ]
 ...

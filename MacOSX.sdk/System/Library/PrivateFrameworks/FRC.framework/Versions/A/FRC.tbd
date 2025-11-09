@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FRC.framework/Versions/A/FRC'
-current-version: 222
+current-version: 224
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _FRCFlowConsistencyFrameScoreKey, _FRCFlowConsistencyRegionScoreKey, 

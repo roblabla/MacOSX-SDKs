@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 @protocol BADownloadManagerDelegate <NSObject>
 
 @optional
@@ -43,7 +43,7 @@ API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
 
 @end
 
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 @interface BADownloadManager : NSObject
 
 - (instancetype)init
@@ -53,12 +53,12 @@ NS_UNAVAILABLE;
 
 /// @brief Gets the singleton downloader object.
 @property (class, readonly, strong) BADownloadManager *sharedManager
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 NS_SWIFT_NAME(shared);
 
 /// @brief A object confroming to BADownloadManagerDelegate to get notified when actions occur.
 @property (weak) id<BADownloadManagerDelegate> delegate
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 /// @brief Fetches current downloads.
 /// @discussion Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
@@ -67,13 +67,13 @@ API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos);
 /// @warning This method can block and should not be called from the main thread.
 /// @seealso BADownloadManager:fetchCurrentDownloadsWithCompletionHandler
 - (nullable NSArray<BADownload *> *)fetchCurrentDownloads:(NSError* _Nullable __autoreleasing *)error
-API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(13.3), ios(16.4), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 /// @brief Fetches current downloads.
 /// @discussion Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
 /// @param completionHandler A block to recieve the currently scheduled or in-flight downloads. The block is called on the same queue as all the other completion blocks in the class.
-- (void)fetchCurrentDownloadsWithCompletionHandler:(void(^)(NSArray<BADownload *> *downloads, NSError *_Nullable error))completionHandler
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+- (void)fetchCurrentDownloadsWithCompletionHandler:(void(^ NS_SWIFT_SENDABLE)(NSArray<BADownload *> *downloads, NSError *_Nullable error))completionHandler
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 NS_SWIFT_NAME(fetchCurrentDownloads(completionHandler:))
 NS_SWIFT_ASYNC_NAME(getter:currentDownloads());
 
@@ -85,15 +85,15 @@ NS_SWIFT_ASYNC_NAME(getter:currentDownloads());
 /// @return YES if @c download was scheduled. NO and @c error set if the download could not be scheduled.
 - (BOOL)scheduleDownload:(BADownload *)download
                    error:(NSError* _Nullable __autoreleasing *)error
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 /// @brief Acquires exclusive access to the BADownloadManager across the app and application extension.
 /// @discussion Acquires exclusive access to the BADownloadManager across the app and application extension. This ensures that your extension and app
 /// do not perform operations at the same time. Both the extension and app must use this API to ensure exclusive access.
 /// @param performHandler A block that will be executed once exclusive control is acquired.
 /// If an error is non-nil then a problem occurred acquiring exclusive access.
-- (void)performWithExclusiveControl:(void (^)(BOOL acquiredLock, NSError *_Nullable error))performHandler
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+- (void)performWithExclusiveControl:(void (^ NS_SWIFT_SENDABLE)(BOOL acquiredLock, NSError *_Nullable error))performHandler
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 NS_SWIFT_NAME(withExclusiveControl(_:))
 NS_SWIFT_DISABLE_ASYNC;
 
@@ -104,8 +104,8 @@ NS_SWIFT_DISABLE_ASYNC;
 /// @param performHandler A block that will be executed once exclusive control is acquired.
 /// If an error is non-nil then a problem occurred acquiring exclusive access.
 - (void)performWithExclusiveControlBeforeDate:(NSDate *)date
-                               performHandler:(void (^)(BOOL acquiredLock, NSError *_Nullable error))performHandler
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+                               performHandler:(void (^ NS_SWIFT_SENDABLE)(BOOL acquiredLock, NSError *_Nullable error))performHandler
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 NS_SWIFT_NAME(withExclusiveControl(beforeDate:perform:))
 NS_SWIFT_DISABLE_ASYNC;
 
@@ -117,7 +117,7 @@ NS_SWIFT_DISABLE_ASYNC;
 /// with the settings BAErrorDomain : BAErrorCodeCallFromInactiveProcessNotAllowed.
 - (BOOL)startForegroundDownload:(BADownload *)download
                           error:(NSError* _Nullable __autoreleasing *)error
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 /// @brief Cancels a download.
 /// @discussion Attempts to cancel a BADownload. If the download has not been schduled or has already completed, NO is returned along with a NSError set
@@ -125,7 +125,7 @@ API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos);
 /// @return YES if the download is canceled. NO if the download could not be canceled, @c error will be set with a reason why.
 - (BOOL)cancelDownload:(BADownload *)download
                  error:(NSError **)error
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 @end
 

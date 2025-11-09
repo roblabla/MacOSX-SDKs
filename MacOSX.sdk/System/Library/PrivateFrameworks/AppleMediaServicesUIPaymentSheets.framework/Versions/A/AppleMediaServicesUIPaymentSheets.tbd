@@ -7,6 +7,7 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV12defaultValue7SwiftUI0H0VvMZ', 
                        '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV12defaultValue7SwiftUI0H0VvgZ', 
+                       '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV12defaultValue7SwiftUI0H0VvpZMV', 
                        '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV12defaultValue7SwiftUI0H0VvsZ', 
                        '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV7SwiftUI011EnvironmentI0AAMc', 
                        '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyVMa', 
@@ -14,6 +15,7 @@ exports:
                        '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyVN', 
                        '_$s33AppleMediaServicesUIPaymentSheets21SecondaryTextColorKeyV12defaultValue7SwiftUI0H0VvMZ', 
                        '_$s33AppleMediaServicesUIPaymentSheets21SecondaryTextColorKeyV12defaultValue7SwiftUI0H0VvgZ', 
+                       '_$s33AppleMediaServicesUIPaymentSheets21SecondaryTextColorKeyV12defaultValue7SwiftUI0H0VvpZMV', 
                        '_$s33AppleMediaServicesUIPaymentSheets21SecondaryTextColorKeyV12defaultValue7SwiftUI0H0VvsZ', 
                        '_$s33AppleMediaServicesUIPaymentSheets21SecondaryTextColorKeyV7SwiftUI011EnvironmentI0AAMc', 
                        '_$s33AppleMediaServicesUIPaymentSheets21SecondaryTextColorKeyVMa', 

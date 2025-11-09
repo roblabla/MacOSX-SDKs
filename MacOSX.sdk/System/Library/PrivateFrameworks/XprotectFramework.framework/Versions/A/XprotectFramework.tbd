@@ -17,11 +17,12 @@ exports:
                        _XProtectMatchedRule, _XProtectMatchedURL, _XProtectNotarizationTicketDate, 
                        _XProtectRevokedByNotaryService, _XProtectShouldSkipAnalysis, 
                        _XProtectShouldTranslocateDMG, _XProtectSignatureName, _XProtectSignatureVersion, 
-                       _XProtectUpdateLocation, _YARAErrorDomain, _assessmentClassForURL, 
-                       _assessmentClassForUTI, _executableStillRequiresAnalysis, 
-                       _fileIsQuarantined, _fileIsUnixExecutable, _hasLibraryValidation, 
-                       _isAppleInternalSystem, _isInAppBundle, _isSIPEnabled, _itemConformsToUTI, 
-                       _usableRulePath, _xprotectGetLog, _xprotectGetSignpostLog ]
+                       _XProtectUpdateLocation, _XProtectUpdateServiceErrorNeedsDefer, 
+                       _YARAErrorDomain, _assessmentClassForURL, _assessmentClassForUTI, 
+                       _executableStillRequiresAnalysis, _fileIsQuarantined, _fileIsUnixExecutable, 
+                       _hasLibraryValidation, _isAppleInternalSystem, _isInAppBundle, 
+                       _isSIPEnabled, _itemConformsToUTI, _usableRulePath, _xprotectGetLog, 
+                       _xprotectGetSignpostLog ]
     objc-classes:    [ FTSEnumerator, XPEvaluation, XPMalwareEvaluation, XPMalwareEvaluationCallbackContainer, 
                        XPProcess, XProtectAnalysis, XProtectEventReporter, XProtectScan, 
                        XProtectScanResult, XProtectUpdate, XProtectUpdateBundle, 

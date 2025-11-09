@@ -11,14 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN NSErrorDomain const UIPrintErrorDomain API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSErrorDomain const UIPrintErrorDomain API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ERROR_ENUM(UIPrintErrorDomain, UIPrintErrorCode) {
     UIPrintingNotAvailableError = 1,  // cannot print at this time
     UIPrintNoContentError,            // empty list of files or images
     UIPrintUnknownImageFormatError,   // unrecognized image format
     UIPrintJobFailedError,            // internal error with print job
-} API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 NS_ASSUME_NONNULL_END
 

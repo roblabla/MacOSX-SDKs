@@ -180,7 +180,7 @@
 #define HAVE_OPENSSL_INIT_SSL 1
 
 /* Detected PCRE2 */
-/* #undef HAVE_PCRE2 */
+#define HAVE_PCRE2 1
 
 /* Define to 1 if you have the 'port_create' function. */
 /* #undef HAVE_PORT_CREATE */

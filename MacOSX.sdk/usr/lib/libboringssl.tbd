@@ -124,7 +124,7 @@ exports:
                        _X25519, _X25519_public_from_private, __ZN4bssl11SSLKeyShare6CreateEt, 
                        __ZN4bssl13dtls1_min_mtuEv, __ZN4bssl19ssl_nid_to_group_idEPti, 
                        __ZN4bssl20ssl_client_handshakeEPNS_13SSL_HANDSHAKEE, __ZN4bssl20ssl_name_to_group_idEPtPKcm, 
-                       __ZN4bssl20ssl_server_handshakeEPNS_13SSL_HANDSHAKEE, __ZN4bssl22dtls_max_seal_overheadEPK6ssl_stNS_17dtls1_use_epoch_tE, 
+                       __ZN4bssl20ssl_server_handshakeEPNS_13SSL_HANDSHAKEE, __ZN4bssl22dtls_max_seal_overheadEPK6ssl_stt, 
                        __ZN4bssl24tls13_rotate_traffic_keyEP6ssl_st20evp_aead_direction_t, 
                        __ZN4bssl26ssl_client_handshake_stateEPNS_13SSL_HANDSHAKEE, 
                        __ZN4bssl26ssl_server_handshake_stateEPNS_13SSL_HANDSHAKEE, 

@@ -99,14 +99,14 @@
 @class GKVoiceChatService;
 
 // GKVoiceChatService provides voice chat capabilities depending on your networking situation.
-NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use SharePlay instead") API_UNAVAILABLE(tvos)
+API_DEPRECATED("Use SharePlay instead", ios(3.0,7.0), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(macos, tvos)
 @interface GKVoiceChatService : NSObject
 
 + (GKVoiceChatService *)defaultVoiceChatService;
 
 + (BOOL)isVoIPAllowed;
 
-@property(assign) id<GKVoiceChatClient> client NS_DEPRECATED_IOS(3_0, 7_0) __TVOS_UNAVAILABLE;
+@property(assign) id<GKVoiceChatClient> client API_DEPRECATED("No longer supported.", ios(3.0,7.0), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(macos, tvos);
 
 // May fail if you already in a chat, or if there is no peer-to-peer channel that can be made to the participant.
 - (BOOL)startVoiceChatWithParticipantID:(NSString *)participantID error:(NSError **)error;
@@ -143,5 +143,3 @@ NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use SharePlay instead") API_UNAVAILABLE(tvos)
 @property(readonly) float inputMeterLevel;  //changes frequently as the near-end participant speaks
 
 @end
-
-

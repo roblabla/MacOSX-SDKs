@@ -61,7 +61,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// characters of your <doc://com.apple.documentation/documentation/foundation/nsattributedstring>
 /// object. You might add this attribute if the text string includes a code
 /// listing or readonly content that you don’t want Writing Tools to change.
-UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_SENDABLE NS_SWIFT_NAME(UIWritingToolsCoordinator.Context)
+UIKIT_EXTERN API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_SENDABLE NS_SWIFT_NAME(UIWritingToolsCoordinator.Context)
 @interface UIWritingToolsCoordinatorContext : NSObject
 
 /// Creates a context object with the specified attributed string and range
@@ -91,10 +91,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 
 /// The portion of your view’s text to evaluate.
 ///
-/// The `NSWritingToolsCoordinator/Context` object initializes the value of this
+/// The `UIWritingToolsCoordinator/Context` object initializes the value of this
 /// property at creation time and doesn’t change it during the course of an operation.
 /// Instead, it suggests changes to the text in the indicated range and reports
-/// those changes to your ``NS/UIWritingToolsCoordinatorDelegate`` object. Use the methods
+/// those changes to your ``UIWritingToolsCoordinator/Delegate`` object. Use the methods
 /// of your delegate object to integrate those changes back into your view’s text storage.
 ///
 /// It’s your responsibility to track the location of this text in your
@@ -107,13 +107,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 
 /// The unique identifier of the context object.
 ///
-/// The ``UIWritingToolsCoordinator.Context`` object initializes the value of this property
+/// The ``UIWritingToolsCoordinator/Context`` object initializes the value of this property
 /// at creation time. Use this value to identify the context object within your app.
 @property (nonatomic, readonly) NSRange range; // The range it was initialized with
 
 /// The unique identifier of the context object.
 ///
-/// The ``UIWritingToolsCoordinator.Context`` object initializes the value of
+/// The ``UIWritingToolsCoordinator/Context`` object initializes the value of
 /// this property at creation time. Use this value to identify the
 /// context object within your app.
 @property (nonatomic, strong, readonly) NSUUID *identifier;
@@ -129,11 +129,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 /// to the text.
 ///
 /// While the Writing Tools operation is active, make sure Writing Tools has
-/// exclusive access to the text in this range. Your ``UIWritingToolsCoordinatorDelegate``
+/// exclusive access to the text in this range. Your ``UIWritingToolsCoordinator/Delegate``
 /// object can make changes to the text as part of incorporating Writing Tools
 /// results, but don’t allow changes to come from other sources. For example,
 /// don’t let someone edit the text in this range directly until Writing Tools finishes.
-@property (nonatomic, readonly) NSRange resolvedRange; // The range that Writing Tools ends up using (sometimes larger than range)
+@property (nonatomic, readonly) NSRange resolvedRange; // The range where Writing Tools suggests replacements, may be larger than range
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

@@ -1,30 +1,19 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreAudio -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 328.356 -module-name CoreAudio
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreAudio -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 328.526 -module-name CoreAudio
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import CoreAudio
 import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.UnsafeBufferPointer {
   public init(_ audioBuffer: CoreAudioTypes.AudioBuffer)
 }
-#else
-extension Swift.UnsafeBufferPointer {
-  public init(_ audioBuffer: CoreAudioTypes.AudioBuffer)
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.UnsafeMutableBufferPointer {
   public init(_ audioBuffer: CoreAudioTypes.AudioBuffer)
 }
-#else
-extension Swift.UnsafeMutableBufferPointer {
-  public init(_ audioBuffer: CoreAudioTypes.AudioBuffer)
-}
-#endif
 extension CoreAudioTypes.AudioBuffer {
   public init<Element>(_ typedBuffer: Swift.UnsafeMutableBufferPointer<Element>, numberOfChannels: Swift.Int)
 }

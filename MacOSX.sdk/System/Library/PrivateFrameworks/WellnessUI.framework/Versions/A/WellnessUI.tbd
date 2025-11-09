@@ -6,7 +6,8 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10WellnessUI0A8SnippetsO10SnippetKit0D11PluginModelAAMc', 
-                       '_$s10WellnessUI0A8SnippetsO10bundleNameSSvgZ', '_$s10WellnessUI0A8SnippetsO10phoneRingsyAcA05PhoneE5ModelVcACmFWC', 
+                       '_$s10WellnessUI0A8SnippetsO10bundleNameSSvgZ', '_$s10WellnessUI0A8SnippetsO10bundleNameSSvpZMV', 
+                       '_$s10WellnessUI0A8SnippetsO10phoneRingsyAcA05PhoneE5ModelVcACmFWC', 
                        '_$s10WellnessUI0A8SnippetsO10sleepQueryyAcA05SleepE5ModelVcACmFWC', 
                        '_$s10WellnessUI0A8SnippetsO10watchRingsyAcA05WatchE5ModelVcACmFWC', 
                        '_$s10WellnessUI0A8SnippetsO13genericButtonyAcA07GenericE5ModelVcACmFWC', 

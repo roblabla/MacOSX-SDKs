@@ -56,6 +56,7 @@ exports:
                        '_$s15MediaMLServices11_MLServiceSC6logger2os6LoggerVvau', 
                        '_$s15MediaMLServices11_MLServiceSC6logger2os6LoggerVvgZ', 
                        '_$s15MediaMLServices11_MLServiceSC6logger2os6LoggerVvpZ', 
+                       '_$s15MediaMLServices11_MLServiceSC6logger2os6LoggerVvpZMV', 
                        '_$s15MediaMLServices11_MLServiceSC7serviceAA16MLServerProtocol_pSgvg', 
                        '_$s15MediaMLServices11_MLServiceSC7serviceAA16MLServerProtocol_pSgvpMV', 
                        '_$s15MediaMLServices11_MLServiceSC7serviceAA16MLServerProtocol_pSgvpWvd', 

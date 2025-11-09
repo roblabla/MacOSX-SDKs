@@ -4,7 +4,8 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationProfilesUI.framework/Versions/A/ConfigurationProfilesUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CPUI_DisableActivationLockWithBypassCode, _CPUI_DisableActivationLockWithUsername, 
+    symbols:         [ _CPUI_AMPCoDProxyInstallSystemProfileData, _CPUI_AMPCoDProxyRemoveSystemProfileWithIdentifier, 
+                       _CPUI_DisableActivationLockWithBypassCode, _CPUI_DisableActivationLockWithUsername, 
                        _CPUI_EnrollInRemoteManagementPriv, _CPUI_GetProfilesPrefPaneIcon, 
                        _CPUI_GetWindowForSheet, _CPUI_MDMSimulator_ProcessSystemRequest, 
                        _CPUI_MDMSimulator_ProcessUserRequest, _CPUI_PreflightMDMUnenrollmentViaUI, 

@@ -21,6 +21,8 @@ exports:
                        '_$s12SiriUIBridge0B7ServiceC14startAttending4with8deviceIdySo24SUIBAttendingStartReasonV_SSSgtFTj', 
                        '_$s12SiriUIBridge0B7ServiceC14startAttending4with8deviceIdySo24SUIBAttendingStartReasonV_SSSgtFTq', 
                        '_$s12SiriUIBridge0B7ServiceC14startAttendingyyFTj', '_$s12SiriUIBridge0B7ServiceC14startAttendingyyFTq', 
+                       '_$s12SiriUIBridge0B7ServiceC19notifyTypingStarted4withySo017SUIBTypingSessionF0C_tFTj', 
+                       '_$s12SiriUIBridge0B7ServiceC19notifyTypingStarted4withySo017SUIBTypingSessionF0C_tFTq', 
                        '_$s12SiriUIBridge0B7ServiceC21connectionInterruptedyyFTj', 
                        '_$s12SiriUIBridge0B7ServiceC21connectionInterruptedyyFTq', 
                        '_$s12SiriUIBridge0B7ServiceC21connectionInvalidatedyyFTj', 
@@ -65,6 +67,7 @@ exports:
                        '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE14siriWillPromptyyF', 
                        '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE14startAttending4with8deviceIdySo24SUIBAttendingStartReasonV_SSSgtF', 
                        '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE14startAttendingyyF', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE19notifyTypingStarted4withySo017SUIBTypingSessionG0C_tF', 
                        '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE7preheatyyF', '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE8delegate0E5QueueABSo0A15ServiceDelegate_p_So17OS_dispatch_queueCSgtcfC', 
                        '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE8delegate0E5QueueABSo0A15ServiceDelegate_p_So17OS_dispatch_queueCSgtcfc', 
                        '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE8delegateABSo0A15ServiceDelegate_p_tcfC', 
@@ -75,9 +78,11 @@ exports:
     objc-classes:    [ SUIBBridgedMatch, SUIBIntelligenceFlowActionSummary, SUIBIntelligenceFlowActionSummaryMutation, 
                        SUIBIntelligenceFlowActionSummaryParameterMatcher, SUIBIntelligenceFlowParameterSummary, 
                        SUIBIntelligenceFlowParameterSummaryMutation, SUIBIntelligenceFlowProgressUpdate, 
-                       SUIBIntelligenceFlowProgressUpdateMutation, SUIBNLRouterSummary, 
+                       SUIBIntelligenceFlowProgressUpdateMutation, SUIBIntelligenceFlowStatusNotification, 
+                       SUIBIntelligenceFlowStatusNotificationMutation, SUIBNLRouterSummary, 
                        SUIBNLRouterSummaryMutation, SUIBOrchestrationTask, SUIBOrchestrationTaskMutation, 
                        SUIBRegexMatch, SUIBRequestProgress, SUIBRequestProgressMutation, 
                        SUIBSiriInAppResponse, SUIBSiriInAppResponseMutation, SUIBSiriResponse, 
-                       SUIBSiriResponseMutation, SUIBUIBridgeClient, _TtC12SiriUIBridge15UIBridgeService ]
+                       SUIBSiriResponseMutation, SUIBTypingSessionStarted, SUIBTypingSessionStartedMutation, 
+                       SUIBUIBridgeClient, _TtC12SiriUIBridge15UIBridgeService ]
 ...

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 721.0.150 -module-name _PhotosUI_SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature ObjCImplementation -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 751.0.104 -module-name _PhotosUI_SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import CoreTransferable
 @_exported import PhotosUI
 import Swift
@@ -9,7 +10,6 @@ import UniformTypeIdentifiers
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(iOS 16.0, macOS 13.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -22,20 +22,6 @@ extension Photos.PHLivePhoto : @retroactive CoreTransferable.Transferable {
   @available(watchOS, unavailable)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo11PHLivePhotoC015_PhotosUI_SwiftD0E22transferRepresentationQrvpZ", 0) __
 }
-#else
-@available(iOS 16.0, macOS 13.0, *)
-@available(watchOS, unavailable)
-@available(tvOS, unavailable)
-extension Photos.PHLivePhoto : CoreTransferable.Transferable {
-  public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
-    get
-  }
-  @available(iOS 16.0, macOS 13.0, *)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
-  public typealias Representation = @_opaqueReturnTypeOf("$sSo11PHLivePhotoC015_PhotosUI_SwiftD0E22transferRepresentationQrvpZ", 0) __
-}
-#endif
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
 public struct PhotosPickerSelectionBehavior : Swift.Equatable, Swift.Hashable, Swift.Sendable {

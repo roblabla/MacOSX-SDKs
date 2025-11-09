@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
     
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPrinter : NSObject
 
 /*!
@@ -39,7 +39,7 @@ typedef NS_OPTIONS(NSInteger, UIPrinterJobTypes) {
     UIPrinterJobTypeRoll = 1 << 5,
     UIPrinterJobTypeLargeFormat = 1 << 6,
     UIPrinterJobTypePostcard = 1 << 7
-} API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos);
 
 
 /*!

@@ -149,8 +149,8 @@ exports:
                        '_$s15SiriMailUIModel0aB6ActionON', '_$s15SiriMailUIModel0aB6ActionOSEAAMc', 
                        '_$s15SiriMailUIModel0aB6ActionOSHAAMc', '_$s15SiriMailUIModel0aB6ActionOSQAAMc', 
                        '_$s15SiriMailUIModel0aB6ActionOSYAAMc', '_$s15SiriMailUIModel0aB6ActionOSeAAMc', 
-                       '_$s15SiriMailUIModel6LoggerO04siriB02osABVvgZ', '_$s15SiriMailUIModel6LoggerOMa', 
-                       '_$s15SiriMailUIModel6LoggerOMn', '_$s15SiriMailUIModel6LoggerON', 
-                       '_$s16EncoreXPCService11ServiceNameV15SiriMailUIModelE4mailACvgZ', 
+                       '_$s15SiriMailUIModel6LoggerO04siriB02osABVvgZ', '_$s15SiriMailUIModel6LoggerO04siriB02osABVvpZMV', 
+                       '_$s15SiriMailUIModel6LoggerOMa', '_$s15SiriMailUIModel6LoggerOMn', 
+                       '_$s15SiriMailUIModel6LoggerON', '_$s16EncoreXPCService11ServiceNameV15SiriMailUIModelE4mailACvgZ', 
                        _SiriMailUIModelVersionNumber, _SiriMailUIModelVersionString ]
 ...

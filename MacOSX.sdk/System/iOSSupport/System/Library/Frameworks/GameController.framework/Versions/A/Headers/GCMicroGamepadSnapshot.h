@@ -21,8 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see -[GCMicroGamepad saveSnapshot]
  */
-API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0))
+API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0))
 @interface GCMicroGamepadSnapshot : GCMicroGamepad
+
 @property (atomic, copy) NSData *snapshotData;
 
 - (instancetype)initWithSnapshotData:(NSData *)data;
@@ -30,11 +31,12 @@ API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController co
 
 @end
 
+
 typedef NS_ENUM(NSInteger, GCMicroGamepadSnapshotDataVersion) {
     GCMicroGamepadSnapshotDataVersion1 = 0x0100
-} API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+} API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.15, 10.15), ios(13.0, 13.0), tvos(13.0, 13.0));
 
-extern const GCMicroGamepadSnapshotDataVersion GCCurrentMicroGamepadSnapshotDataVersion API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+extern const GCMicroGamepadSnapshotDataVersion GCCurrentMicroGamepadSnapshotDataVersion API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.15, 10.15), ios(13.0, 13.0), tvos(13.0, 13.0));
 
 #pragma pack(push, 1)
 typedef struct {
@@ -52,21 +54,21 @@ typedef struct {
     float buttonA;
     float buttonX;
     
-} GCMicroGamepadSnapshotData API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+} GCMicroGamepadSnapshotData API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.15, 10.15), ios(13.0, 13.0), tvos(13.0, 13.0));
 #pragma pack(pop)
 
 /**Fills out a snapshot from any compatible NSData source
  
  @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
  */
-BOOL GCMicroGamepadSnapshotDataFromNSData(GCMicroGamepadSnapshotData *__nullable snapshotData, NSData *__nullable data) API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+BOOL GCMicroGamepadSnapshotDataFromNSData(GCMicroGamepadSnapshotData * _Nullable snapshotData, NSData * _Nullable data) API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.15, 10.15), ios(13.0, 13.0), tvos(13.0, 13.0));
 
 /**Creates an NSData object from a snapshot.
  If the version and size is not set in the snapshot the data will automatically have version GCCurrentMicroGamepadSnapshotDataVersion and sizeof(GCMicroGamepadSnapshotData) set as the values implicitly.
  
  @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCGamepadSnapshot.snapshotData
  */
-NSData *__nullable NSDataFromGCMicroGamepadSnapshotData(GCMicroGamepadSnapshotData *__nullable snapshotData) API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+NSData * _Nullable NSDataFromGCMicroGamepadSnapshotData(GCMicroGamepadSnapshotData * _Nullable snapshotData) API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.15, 10.15), ios(13.0, 13.0), tvos(13.0, 13.0));
 
 
 
@@ -87,20 +89,20 @@ typedef struct {
     float buttonA;
     float buttonX;
     
-} GCMicroGamepadSnapShotDataV100 API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+} GCMicroGamepadSnapShotDataV100 API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
 #pragma pack(pop)
 
 /**Fills out a v100 snapshot from any compatible NSData source
  
  @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
  */
-BOOL GCMicroGamepadSnapShotDataV100FromNSData(GCMicroGamepadSnapShotDataV100 *__nullable snapshotData, NSData *__nullable data) API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+BOOL GCMicroGamepadSnapShotDataV100FromNSData(GCMicroGamepadSnapShotDataV100 * _Nullable snapshotData, NSData * _Nullable data) API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
 
 /**Creates an NSData object from a v100 snapshot.
  If the version and size is not set in the snapshot the data will automatically have version 0x100 and sizeof(GCMicroGamepadSnapShotDataV100) set as the values implicitly.
  
  @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCGamepadSnapshot.snapshotData
  */
-NSData *__nullable NSDataFromGCMicroGamepadSnapShotDataV100(GCMicroGamepadSnapShotDataV100 *__nullable snapshotData) API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController controllerWithMicroGamepad] instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
+NSData * _Nullable NSDataFromGCMicroGamepadSnapShotDataV100(GCMicroGamepadSnapShotDataV100 * _Nullable snapshotData) API_DEPRECATED("Use the -[GCController controllerWithMicroGamepad] method instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
 
 NS_ASSUME_NONNULL_END

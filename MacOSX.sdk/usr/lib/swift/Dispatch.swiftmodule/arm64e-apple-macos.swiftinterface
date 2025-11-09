@@ -1,21 +1,22 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macos15.2 -target-variant arm64e-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 49 -module-name Dispatch
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macos15.4 -target-variant arm64e-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 54 -module-name Dispatch
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Combine
 @_exported import Dispatch
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBridgeable {
+public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBridgeable, Swift.Sendable {
   public typealias Iterator = Dispatch.DispatchDataIterator
   public typealias Index = Swift.Int
   public typealias Indices = Swift.DefaultIndices<Dispatch.DispatchData>
   public static let empty: Dispatch.DispatchData
-  public enum Deallocator {
+  public enum Deallocator : Swift.Sendable {
     case free
     case unmap
-    case custom(Dispatch.DispatchQueue?, @convention(block) () -> Swift.Void)
+    @preconcurrency case custom(Dispatch.DispatchQueue?, @Sendable @convention(block) () -> Swift.Void)
   }
   @available(swift, deprecated: 4, message: "Use init(bytes: UnsafeRawBufferPointer) instead")
   public init(bytes buffer: Swift.UnsafeBufferPointer<Swift.UInt8>)
@@ -64,7 +65,7 @@ public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBrid
   public typealias SubSequence = Swift.Slice<Dispatch.DispatchData>
   public typealias _ObjectiveCType = Dispatch.__DispatchData
 }
-public struct DispatchDataIterator : Swift.IteratorProtocol, Swift.Sequence {
+public struct DispatchDataIterator : Swift.IteratorProtocol, Swift.Sequence, @unchecked Swift.Sendable {
   public typealias Element = Swift.UInt8
   public init(_data: Dispatch.DispatchData)
   public mutating func next() -> Dispatch.DispatchData.Element?
@@ -190,6 +191,11 @@ extension Dispatch._DispatchSerialExecutorQueue : _Concurrency.SerialExecutor {
 		dispatchPrecondition(condition: .onQueue(self))
 	}
 }
+@available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, *)
+extension Dispatch.DispatchQueue : _Concurrency.TaskExecutor {
+  public func enqueue(_ job: _Concurrency.UnownedJob)
+  public func asUnownedTaskExecutor() -> _Concurrency.UnownedTaskExecutor
+}
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchSerialQueue {
   public struct Attributes : Swift.OptionSet, Swift.Sendable {
@@ -272,16 +278,13 @@ extension Dispatch.DispatchSource {
     public typealias Element = Dispatch.DispatchSource.MachSendEvent
     public typealias RawValue = Swift.UInt
   }
-  public struct MemoryPressureEvent : Swift.OptionSet, Swift.RawRepresentable, Swift.CustomStringConvertible {
+  public struct MemoryPressureEvent : Swift.OptionSet, Swift.RawRepresentable {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
     public static let normal: Dispatch.DispatchSource.MemoryPressureEvent
     public static let warning: Dispatch.DispatchSource.MemoryPressureEvent
     public static let critical: Dispatch.DispatchSource.MemoryPressureEvent
     public static let all: Dispatch.DispatchSource.MemoryPressureEvent
-    public var description: Swift.String {
-      get
-    }
     public typealias ArrayLiteralElement = Dispatch.DispatchSource.MemoryPressureEvent
     public typealias Element = Dispatch.DispatchSource.MemoryPressureEvent
     public typealias RawValue = Swift.UInt
@@ -322,8 +325,8 @@ extension Dispatch.DispatchSource {
     public typealias Element = Dispatch.DispatchSource.FileSystemEvent
     public typealias RawValue = Swift.UInt
   }
-  public class func makeMachSendSource(port: _mach_port_t.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachSend
-  public class func makeMachReceiveSource(port: _mach_port_t.mach_port_t, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachReceive
+  public class func makeMachSendSource(port: mach.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachSend
+  public class func makeMachReceiveSource(port: mach.mach_port_t, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachReceive
   public class func makeMemoryPressureSource(eventMask: Dispatch.DispatchSource.MemoryPressureEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMemoryPressure
   public class func makeProcessSource(identifier: sys_types.pid_t, eventMask: Dispatch.DispatchSource.ProcessEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceProcess
   public class func makeReadSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceRead
@@ -335,8 +338,14 @@ extension Dispatch.DispatchSource {
   public class func makeFileSystemObjectSource(fileDescriptor: Swift.Int32, eventMask: Dispatch.DispatchSource.FileSystemEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceFileSystemObject
   public class func makeWriteSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceWrite
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Dispatch.DispatchSource.MemoryPressureEvent : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
 extension Dispatch.DispatchSourceMachSend {
-  public var handle: _mach_port_t.mach_port_t {
+  public var handle: mach.mach_port_t {
     get
   }
   public var data: Dispatch.DispatchSource.MachSendEvent {
@@ -347,7 +356,7 @@ extension Dispatch.DispatchSourceMachSend {
   }
 }
 extension Dispatch.DispatchSourceMachReceive {
-  public var handle: _mach_port_t.mach_port_t {
+  public var handle: mach.mach_port_t {
     get
   }
 }
@@ -496,9 +505,9 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
       public static func milliseconds(_ ms: Swift.Int) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
       public static func microseconds(_ us: Swift.Int) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
       public static func nanoseconds(_ ns: Swift.Int) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Dispatch.DispatchQueue.SchedulerTimeType.Stride, b: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }

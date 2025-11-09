@@ -75,30 +75,30 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  The current lane guidance to be used for navigation metdata.
  Must be set to nil if there is no current lane guidance. CPLaneGuidances set here must first be added to the session using addLaneGuidances:
  */
-@property (nullable, nonatomic, readwrite, copy) CPLaneGuidance *currentLaneGuidance;
+@property (nullable, nonatomic, readwrite, copy) CPLaneGuidance *currentLaneGuidance API_AVAILABLE(ios(17.4));
 
 /**
  Use this method to add CPManeuvers in chronological order to the navigation session.
  The application must provide as many maneuvers as possible, as soon as they are available. All
  maneuvers set in upcomingManeuvers must be first added using this method.
  */
-- (void)addManeuvers:(NSArray<CPManeuver *> *)maneuvers;
+- (void)addManeuvers:(NSArray<CPManeuver *> *)maneuvers API_AVAILABLE(ios(17.4));
 
 /**
  Use this method to add CPLaneGuidances in chronological order to the navigation session.
  CPLaneGuidance objects must be added as soon as they are available.
  */
-- (void)addLaneGuidances:(NSArray<CPLaneGuidance *> *)laneGuidances;
+- (void)addLaneGuidances:(NSArray<CPLaneGuidance *> *)laneGuidances API_AVAILABLE(ios(17.4));
 
 /**
  Set this property with variants of the current road name. From most to least verbose.
  */
-@property (nonatomic, copy) NSArray<NSString *> *currentRoadNameVariants;
+@property (nonatomic, copy) NSArray<NSString *> *currentRoadNameVariants API_AVAILABLE(ios(17.4));
 
 /**
  Set this property with the current maneuver state based on how close the maneuver is.
  */
-@property (nonatomic) CPManeuverState maneuverState;
+@property (nonatomic) CPManeuverState maneuverState API_AVAILABLE(ios(17.4));
 
 /**
  The trip associated with this navigation session.

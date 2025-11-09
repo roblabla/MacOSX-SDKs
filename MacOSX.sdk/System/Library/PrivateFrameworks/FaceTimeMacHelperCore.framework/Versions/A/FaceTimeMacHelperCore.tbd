@@ -257,6 +257,7 @@ exports:
                        '_$s21FaceTimeMacHelperCore20NotificationResponseV8userInfoSDySSypGvpMV', 
                        '_$s21FaceTimeMacHelperCore20NotificationResponseVMa', '_$s21FaceTimeMacHelperCore20NotificationResponseVMn', 
                        '_$s21FaceTimeMacHelperCore20NotificationResponseVN', '_$s21FaceTimeMacHelperCore22ScreenLockStateMonitorC6sharedACvgZ', 
+                       '_$s21FaceTimeMacHelperCore22ScreenLockStateMonitorC6sharedACvpZMV', 
                        '_$s21FaceTimeMacHelperCore22ScreenLockStateMonitorCAA0fgH10MonitoringAAMc', 
                        '_$s21FaceTimeMacHelperCore22ScreenLockStateMonitorCAA0fgH10MonitoringAAWP', 
                        '_$s21FaceTimeMacHelperCore22ScreenLockStateMonitorCACycfC', 

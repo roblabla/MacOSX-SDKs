@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIPrinterPickerController, UIPrinter, UIView, UIViewController, UIBarButtonItem;
 
-typedef void (^UIPrinterPickerCompletionHandler)(UIPrinterPickerController *printerPickerController, BOOL userDidSelect, NSError * __nullable error);
+typedef void (^UIPrinterPickerCompletionHandler)(UIPrinterPickerController *printerPickerController, BOOL userDidSelect, NSError * __nullable error) API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPrinterPickerControllerDelegate <NSObject>
 @optional
 
@@ -43,7 +43,7 @@ API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPrinterPickerController : NSObject
 
 /*!

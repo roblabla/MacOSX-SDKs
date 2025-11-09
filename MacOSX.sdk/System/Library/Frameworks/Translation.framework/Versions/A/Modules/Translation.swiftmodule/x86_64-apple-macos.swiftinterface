@@ -1,7 +1,8 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 300.2 -module-name Translation -module-alias Module___Translation=Translation -module-alias Module____StringProcessing=_StringProcessing -module-alias Module____SwiftConcurrencyShims=_SwiftConcurrencyShims -module-alias Module____Concurrency=_Concurrency -module-alias Module___Foundation=Foundation
-import Module___Foundation
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -target-variant x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 300.12 -module-name Translation -module-alias Module___Translation=Translation -module-alias Module____StringProcessing=_StringProcessing -module-alias Module____SwiftConcurrencyShims=_SwiftConcurrencyShims -module-alias Module____Concurrency=_Concurrency
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
+import Foundation
 import Swift
 @_exported import Module___Translation
 import Module____Concurrency
@@ -23,11 +24,11 @@ public class LanguageAvailability {
       get
     }
   }
-  public var supportedLanguages: [Module___Foundation.Locale.Language] {
+  public var supportedLanguages: [Foundation.Locale.Language] {
     get async
   }
-  public func status(from source: Module___Foundation.Locale.Language, to target: Module___Foundation.Locale.Language?) async -> Module___Translation.LanguageAvailability.Status
-  public func status(for text: Swift.String, to target: Module___Foundation.Locale.Language?) async throws -> Module___Translation.LanguageAvailability.Status
+  public func status(from source: Foundation.Locale.Language, to target: Foundation.Locale.Language?) async -> Module___Translation.LanguageAvailability.Status
+  public func status(for text: Swift.String, to target: Foundation.Locale.Language?) async throws -> Module___Translation.LanguageAvailability.Status
   public init()
   @objc deinit
 }
@@ -36,7 +37,7 @@ public class LanguageAvailability {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 @available(macCatalyst, unavailable)
-public struct TranslationError : Module___Foundation.LocalizedError {
+public struct TranslationError : Foundation.LocalizedError {
   public static let unsupportedSourceLanguage: Module___Translation.TranslationError
   public static let unsupportedTargetLanguage: Module___Translation.TranslationError
   public static let unsupportedLanguagePairing: Module___Translation.TranslationError
@@ -57,20 +58,20 @@ public struct TranslationError : Module___Foundation.LocalizedError {
 @available(visionOS, unavailable)
 @available(macCatalyst, unavailable)
 public class TranslationSession {
-  final public let sourceLanguage: Module___Foundation.Locale.Language?
-  final public let targetLanguage: Module___Foundation.Locale.Language?
+  final public let sourceLanguage: Foundation.Locale.Language?
+  final public let targetLanguage: Foundation.Locale.Language?
   public struct Request {
     public var sourceText: Swift.String
     public var clientIdentifier: Swift.String?
     public init(sourceText: Swift.String, clientIdentifier: Swift.String? = nil)
   }
   public struct Response : Swift.Sendable {
-    public let sourceLanguage: Module___Foundation.Locale.Language
-    public let targetLanguage: Module___Foundation.Locale.Language
+    public let sourceLanguage: Foundation.Locale.Language
+    public let targetLanguage: Foundation.Locale.Language
     public let sourceText: Swift.String
     public let targetText: Swift.String
     public let clientIdentifier: Swift.String?
-    public init(sourceLanguage: Module___Foundation.Locale.Language, targetLanguage: Module___Foundation.Locale.Language, sourceText: Swift.String, targetText: Swift.String, clientIdentifier: Swift.String? = nil)
+    public init(sourceLanguage: Foundation.Locale.Language, targetLanguage: Foundation.Locale.Language, sourceText: Swift.String, targetText: Swift.String, clientIdentifier: Swift.String? = nil)
   }
   public struct BatchResponse : Module____Concurrency.AsyncSequence {
     public typealias Element = Module___Translation.TranslationSession.Response
@@ -83,46 +84,28 @@ public class TranslationSession {
       @available(visionOS, unavailable)
       @available(macCatalyst, unavailable)
       public typealias Element = Module___Translation.TranslationSession.BatchResponse.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, macOS 15.0, *)
       @available(tvOS, unavailable, introduced: 18.0)
       @available(watchOS, unavailable, introduced: 11.0)
       @available(visionOS, unavailable, introduced: 2.0)
       @available(macCatalyst, unavailable)
       @_implements(Module____Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #else
-      @available(iOS 18.0, macOS 15.0, *)
-      @available(tvOS, unavailable, introduced: 18.0)
-      @available(watchOS, unavailable, introduced: 11.0)
-      @available(visionOS, unavailable, introduced: 2.0)
-      @available(macCatalyst, unavailable)
-      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #endif
     }
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, macOS 15.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @available(watchOS, unavailable, introduced: 11.0)
     @available(visionOS, unavailable, introduced: 2.0)
     @available(macCatalyst, unavailable)
     @_implements(Module____Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, macOS 15.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    @available(watchOS, unavailable, introduced: 11.0)
-    @available(visionOS, unavailable, introduced: 2.0)
-    @available(macCatalyst, unavailable)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
   public struct Configuration : Swift.Equatable {
-    public var source: Module___Foundation.Locale.Language?
-    public var target: Module___Foundation.Locale.Language?
+    public var source: Foundation.Locale.Language?
+    public var target: Foundation.Locale.Language?
     public var version: Swift.Int {
       get
     }
     public mutating func invalidate()
-    public init(source: Module___Foundation.Locale.Language? = nil, target: Module___Foundation.Locale.Language? = nil)
+    public init(source: Foundation.Locale.Language? = nil, target: Foundation.Locale.Language? = nil)
     public static func == (lhs: Module___Translation.TranslationSession.Configuration, rhs: Module___Translation.TranslationSession.Configuration) -> Swift.Bool
   }
   public func translate(_ string: Swift.String) async throws -> Module___Translation.TranslationSession.Response

@@ -1,7 +1,7 @@
 /*
     NSIncrementalStoreNode.h
     Core Data
-    Copyright (c) 2010-2024, Apple Inc.
+    Copyright (c) 2010-2025, Apple Inc.
     All rights reserved.
 */
 

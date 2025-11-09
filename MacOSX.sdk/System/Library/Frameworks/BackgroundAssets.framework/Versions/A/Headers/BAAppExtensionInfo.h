@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 NS_SWIFT_SENDABLE
 @interface BAAppExtensionInfo : NSObject <NSSecureCoding>
 
@@ -28,7 +28,7 @@ NS_REFINED_FOR_SWIFT;
 /// before the application is launched. Once the application is launched, this restriction is removed.
 /// @result The result is `nil` if downloads are not restricted. It returns a valid number with the remaining available download size otherwise.
 @property (readonly, strong, nullable) NSNumber *restrictedEssentialDownloadSizeRemaining
-API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(13.3), ios(16.4), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 NS_REFINED_FOR_SWIFT;
 
 - (instancetype)init

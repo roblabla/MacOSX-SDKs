@@ -123,6 +123,7 @@ exports:
                        STBackgroundActivityVisualDescriptor._preferredContinuousAnimationName, 
                        STBackgroundActivityVisualDescriptor._preferredVisualEffectName, 
                        STBackgroundActivityVisualDescriptor._prefersToKeepContentVisible, 
+                       STBackgroundActivityVisualDescriptor._prefersToSuppressDefaultUserInteractionHandler, 
                        STBackgroundActivityVisualDescriptor._systemImageName, STBackgroundActivityVisualDescriptor._textLabel, 
                        STBackgroundActivityVisualDescriptor._verticalOffsetInPixels, 
                        STBatteryStatusDomainData._batterySaverModeActive, STBatteryStatusDomainData._chargingDescription, 

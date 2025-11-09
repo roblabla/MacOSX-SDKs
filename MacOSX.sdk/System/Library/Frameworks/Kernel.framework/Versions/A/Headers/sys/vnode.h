@@ -1379,6 +1379,16 @@ vnode_t  vnode_drop(vnode_t vp);
  */
 int     vnode_recycle(vnode_t vp);
 
+/*!
+ *  @function vnode_ismonitored
+ *  @abstract Check whether a file has watchers that would make it useful to query a server
+ *  for file changes.
+ *  @param vp Vnode to examine.
+ *  @discussion Will not reenter the filesystem.
+ *  @return Zero if not monitored, nonzero if monitored.
+ */
+int     vnode_ismonitored(vnode_t vp);
+
 
 #define VNODE_UPDATE_PARENT     0x01
 #define VNODE_UPDATE_NAMEDSTREAM_PARENT VNODE_UPDATE_PARENT

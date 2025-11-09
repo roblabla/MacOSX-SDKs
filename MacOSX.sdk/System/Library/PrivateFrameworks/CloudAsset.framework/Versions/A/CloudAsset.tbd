@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudAsset.framework/Versions/A/CloudAsset'
-current-version: 2230.24
+current-version: 2250.36.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -176,7 +176,7 @@ exports:
                        '_$s10CloudAsset0B19DownloadCoordinatorCfd', '_$s10CloudAsset0B7ManagerC11serviceNameACSS_tcfC', 
                        '_$s10CloudAsset0B7ManagerC11serviceNameACSS_tcfCTj', '_$s10CloudAsset0B7ManagerC11serviceNameACSS_tcfCTq', 
                        '_$s10CloudAsset0B7ManagerC11serviceNameACSS_tcfc', '_$s10CloudAsset0B7ManagerC6sharedACvgZ', 
-                       '_$s10CloudAsset0B7ManagerC7process7requestAA0B0VAA0B13UploadRequestV_tYaKF', 
+                       '_$s10CloudAsset0B7ManagerC6sharedACvpZMV', '_$s10CloudAsset0B7ManagerC7process7requestAA0B0VAA0B13UploadRequestV_tYaKF', 
                        '_$s10CloudAsset0B7ManagerC7process7requestAA0B0VAA0B13UploadRequestV_tYaKFTu', 
                        '_$s10CloudAsset0B7ManagerC7process7requestAA0B0VAA0B15DownloadRequestV_tYaKF', 
                        '_$s10CloudAsset0B7ManagerC7process7requestAA0B0VAA0B15DownloadRequestV_tYaKFTu', 
@@ -196,12 +196,12 @@ exports:
                        '_$s10CloudAsset0B7ManagerC7process8requestsScsys6ResultOyAA0B0Vs5Error_pGsAJ_pGSayAA0B15DownloadRequestVG_tYaKFTu', 
                        '_$s10CloudAsset0B7ManagerC7process8requestsScsys6ResultOyAA0B16DownloadResponseVs5Error_pGsAJ_pGSayAA0bG7RequestVG_tYaKF', 
                        '_$s10CloudAsset0B7ManagerC7process8requestsScsys6ResultOyAA0B16DownloadResponseVs5Error_pGsAJ_pGSayAA0bG7RequestVG_tYaKFTu', 
-                       '_$s10CloudAsset0B7ManagerC8testableACvgZ', '_$s10CloudAsset0B7ManagerCMa', 
-                       '_$s10CloudAsset0B7ManagerCMm', '_$s10CloudAsset0B7ManagerCMn', 
-                       '_$s10CloudAsset0B7ManagerCMo', '_$s10CloudAsset0B7ManagerCMu', 
-                       '_$s10CloudAsset0B7ManagerCN', '_$s10CloudAsset0B7ManagerCfD', 
-                       '_$s10CloudAsset0B7ManagerCfd', '_$s10CloudAsset0B7RequestMp', 
-                       '_$s10CloudAsset0B7RequestP10credentialAA10CredentialVvgTj', 
+                       '_$s10CloudAsset0B7ManagerC8testableACvgZ', '_$s10CloudAsset0B7ManagerC8testableACvpZMV', 
+                       '_$s10CloudAsset0B7ManagerCMa', '_$s10CloudAsset0B7ManagerCMm', 
+                       '_$s10CloudAsset0B7ManagerCMn', '_$s10CloudAsset0B7ManagerCMo', 
+                       '_$s10CloudAsset0B7ManagerCMu', '_$s10CloudAsset0B7ManagerCN', 
+                       '_$s10CloudAsset0B7ManagerCfD', '_$s10CloudAsset0B7ManagerCfd', 
+                       '_$s10CloudAsset0B7RequestMp', '_$s10CloudAsset0B7RequestP10credentialAA10CredentialVvgTj', 
                        '_$s10CloudAsset0B7RequestP10credentialAA10CredentialVvgTq', 
                        '_$s10CloudAsset0B7RequestP10tenantNameSSvgTj', '_$s10CloudAsset0B7RequestP10tenantNameSSvgTq', 
                        '_$s10CloudAsset0B7RequestP16workingDirectory10Foundation3URLVvgTj', 
@@ -240,10 +240,13 @@ exports:
                        '_$s10CloudAsset10CredentialVMn', '_$s10CloudAsset10CredentialVN', 
                        '_$s10CloudAsset10CredentialVSEAAMc', '_$s10CloudAsset10CredentialVSHAAMc', 
                        '_$s10CloudAsset10CredentialVSQAAMc', '_$s10CloudAsset10CredentialVSeAAMc', 
-                       '_$s10CloudAsset15LoggerSubsystemO6clientSSvgZ', '_$s10CloudAsset15LoggerSubsystemO6serverSSvgZ', 
+                       '_$s10CloudAsset15LoggerSubsystemO6clientSSvgZ', '_$s10CloudAsset15LoggerSubsystemO6clientSSvpZMV', 
+                       '_$s10CloudAsset15LoggerSubsystemO6serverSSvgZ', '_$s10CloudAsset15LoggerSubsystemO6serverSSvpZMV', 
                        '_$s10CloudAsset15LoggerSubsystemOMa', '_$s10CloudAsset15LoggerSubsystemOMn', 
                        '_$s10CloudAsset15LoggerSubsystemON', '_$s10CloudAsset15XPCServiceNamesO11testServiceSSvgZ', 
-                       '_$s10CloudAsset15XPCServiceNamesO11userServiceSSvgZ', '_$s10CloudAsset15XPCServiceNamesO13systemServiceSSvgZ', 
+                       '_$s10CloudAsset15XPCServiceNamesO11testServiceSSvpZMV', '_$s10CloudAsset15XPCServiceNamesO11userServiceSSvgZ', 
+                       '_$s10CloudAsset15XPCServiceNamesO11userServiceSSvpZMV', '_$s10CloudAsset15XPCServiceNamesO13systemServiceSSvgZ', 
+                       '_$s10CloudAsset15XPCServiceNamesO13systemServiceSSvpZMV', 
                        '_$s10CloudAsset15XPCServiceNamesOMa', '_$s10CloudAsset15XPCServiceNamesOMn', 
                        '_$s10CloudAsset15XPCServiceNamesON', '_$s10CloudAsset16XPCMessageSenderC15machServiceNameACSS_tKcfC', 
                        '_$s10CloudAsset16XPCMessageSenderC15machServiceNameACSS_tKcfCTj', 

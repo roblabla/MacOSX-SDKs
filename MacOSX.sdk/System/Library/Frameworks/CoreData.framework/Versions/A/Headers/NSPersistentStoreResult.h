@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreResult.h
     Core Data
-    Copyright (c) 2014-2024, Apple Inc.
+    Copyright (c) 2014-2025, Apple Inc.
     All rights reserved.
 */
 

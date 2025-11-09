@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.60.13.0.1 -module-name RealityKit
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 366.100.14 -module-name RealityKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import ARKit
 import Combine
 import CoreGraphics
@@ -106,7 +107,6 @@ extension RealityFoundation.MeshResource {
   @_Concurrency.MainActor @preconcurrency public static func generateText(_ string: Swift.String, extrusionDepth: Swift.Float = 0.25, font: RealityFoundation.MeshResource.Font = .systemFont(ofSize: MeshResource.Font.systemFontSize), containerFrame: CoreFoundation.CGRect = CGRect.zero, alignment: CoreText.CTTextAlignment = .left, lineBreakMode: CoreText.CTLineBreakMode = .byTruncatingTail) -> RealityFoundation.MeshResource
   @_Concurrency.MainActor @preconcurrency public static func __generateText(_ string: Swift.String, extrusionDepth: Swift.Float = 0.25, font: RealityFoundation.MeshResource.Font = .systemFont(ofSize: MeshResource.Font.systemFontSize), containerFrame: CoreFoundation.CGRect = CGRect.zero, alignment: CoreText.CTTextAlignment = .left, lineBreakMode: CoreText.CTLineBreakMode = .byTruncatingTail, segmentCount: Swift.UInt8 = 6) -> RealityFoundation.MeshResource
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(visionOS 2.0, iOS 18.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
@@ -118,19 +118,6 @@ extension RealityFoundation.SpatialTrackingSession.UnavailableCapabilities : @re
     get
   }
 }
-#else
-@available(visionOS 2.0, iOS 18.0, *)
-@available(macOS, unavailable)
-@available(macCatalyst, unavailable)
-extension RealityFoundation.SpatialTrackingSession.UnavailableCapabilities : Swift.CustomStringConvertible {
-  public var description: Swift.String {
-    get
-  }
-  public var debugDescription: Swift.String {
-    get
-  }
-}
-#endif
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @available(visionOS, unavailable)
 extension RealityKit.ARView {

@@ -87,6 +87,7 @@ exports:
                        '_$s16SiriMessagesFlow22ConversationEventStoreV4HintO23multilingualReadAnywaysyA2EmFWC', 
                        '_$s16SiriMessagesFlow22ConversationEventStoreV4HintO23spokenMultilingualReplyyA2EmFWC', 
                        '_$s16SiriMessagesFlow22ConversationEventStoreV4HintO8allCasesSayAEGvgZ', 
+                       '_$s16SiriMessagesFlow22ConversationEventStoreV4HintO8allCasesSayAEGvpZMV', 
                        '_$s16SiriMessagesFlow22ConversationEventStoreV4HintO8rawValueAESgSS_tcfC', 
                        '_$s16SiriMessagesFlow22ConversationEventStoreV4HintO8rawValueSSvg', 
                        '_$s16SiriMessagesFlow22ConversationEventStoreV4HintO8rawValueSSvpMV', 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2013-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -406,6 +406,16 @@ vmnet_enable_isolation_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watch
  */
 extern const char *
 vmnet_enable_checksum_offload_key API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @constant vmnet_enable_virtio_header_key
+ * Enable virtio headers in all packets.
+ * - see "5.1.6 Device Operation" at
+ *   https://docs.oasis-open.org/virtio/virtio/v1.1/virtio-v1.1.html
+ */
+extern const char *
+vmnet_enable_virtio_header_key API_AVAILABLE(macos(15.4)) API_UNAVAILABLE(ios, watchos, tvos);
+#define vmnet_enable_virtio_header_key vmnet_enable_virtio_header_key
 
 /*!
  * @constant vmnet_read_max_packets_key

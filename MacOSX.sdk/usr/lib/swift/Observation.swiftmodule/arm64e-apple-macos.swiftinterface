@@ -1,28 +1,17 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macosx15.2 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftObservation -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -user-module-version 6.0.3.1.5 -module-name Observation
-// swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macosx15.4 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftObservation -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -user-module-version 6.1.0.110.5 -module-name Observation
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -interface-compiler-version 6.1
 import Swift
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public protocol Observable {
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
-#if compiler(>=5.3) && $ExtensionMacroAttr
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @attached(member, names: named(_$observationRegistrar), named(access), named(withMutation)) @attached(memberAttribute) @attached(extension, conformances: Observation.Observable) public macro Observable() = #externalMacro(module: "ObservationMacros", type: "ObservableMacro")
-#else
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-@attached(member, names: named(_$observationRegistrar), named(access), named(withMutation)) @attached(memberAttribute)  public macro Observable() = #externalMacro(module: "ObservationMacros", type: "ObservableMacro")
-#endif
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @attached(accessor, names: named(init), named(get), named(set), named(_modify)) @attached(peer, names: prefixed(`_`)) public macro ObservationTracked() = #externalMacro(module: "ObservationMacros", type: "ObservationTrackedMacro")
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @attached(accessor, names: named(willSet)) public macro ObservationIgnored() = #externalMacro(module: "ObservationMacros", type: "ObservationIgnoredMacro")
-#endif
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public struct ObservationRegistrar : Swift.Sendable {
   public init()

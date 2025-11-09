@@ -17,6 +17,10 @@ SH_EXPORT SHMediaItemProperty const SHMediaItemMatchOffset;
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 SH_EXPORT SHMediaItemProperty const SHMediaItemFrequencySkew;
 
+/// The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
+API_AVAILABLE(macos(15.4), ios(18.4), tvos(18.4), watchos(11.4), visionos(2.4))
+SH_EXPORT SHMediaItemProperty const SHMediaItemConfidence;
+
 /// @brief @c SHMatchedMediaItem represents metadata that has been matched against a @c SHCatalog
 /// @discussion Extra information is presented that can only be generated from a match. The properties provided here
 /// that are not available on @c SHMediaItem are ephemeral and can differ each time there is a match of the @c SHSignature that this
@@ -37,6 +41,11 @@ SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), wa
 
 /// @brief The auto updating playback position in the reference signature
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) NSTimeInterval predictedCurrentMatchOffset;
+
+/// The level of confidence in the match result.
+/// @note This may be fetched using the key @c SHMediaItemConfidence
+/// @discussion The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
+@property (NS_NONATOMIC_IOSONLY, assign, readonly) float confidence API_AVAILABLE(macos(15.4), ios(18.4), tvos(18.4), watchos(11.4), visionos(2.4));
 
 @end
 

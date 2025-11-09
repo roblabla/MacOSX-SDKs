@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  and depend on, no matter the underlying hardware.
  */
 
-API_DEPRECATED_WITH_REPLACEMENT("GCExtendedGamepad", macos(10.9, 10.12), ios(7.0, 10.0), tvos(7.0, 10.0))
+API_DEPRECATED_WITH_REPLACEMENT("GCExtendedGamepad", macos(10.9, 10.12), ios(7.0, 10.0), tvos(9.0, 10.0))
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunguarded-availability"
 @interface GCGamepad : GCPhysicalInputProfile
@@ -30,11 +30,7 @@ API_DEPRECATED_WITH_REPLACEMENT("GCExtendedGamepad", macos(10.9, 10.12), ios(7.0
 /**
  A profile keeps a reference to the controller that this profile is mapping input from.
  */
-#if !__has_feature(objc_arc)
-@property (nonatomic, readonly, assign) GCController *controller;
-#else
 @property (nonatomic, readonly, weak) GCController *controller;
-#endif
 
 /**
  Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called
@@ -44,8 +40,7 @@ API_DEPRECATED_WITH_REPLACEMENT("GCExtendedGamepad", macos(10.9, 10.12), ios(7.0
  @param gamepad this gamepad that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons.
  @param element the element that has been modified.
  */
-API_DEPRECATED("GCGamepad has been deprecated", macos(10.9, 10.12), ios(7.0, 10.0), tvos(7.0, 10.0))
-typedef void (^GCGamepadValueChangedHandler)(GCGamepad *gamepad, GCControllerElement *element);
+typedef void (^GCGamepadValueChangedHandler)(GCGamepad *gamepad, GCControllerElement *element) API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0));
 @property (nonatomic, copy, nullable) GCGamepadValueChangedHandler valueChangedHandler;
 
 /**

@@ -117,6 +117,10 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 */
 @property (nonatomic, strong) WKUserContentController *userContentController;
 
+/*! @abstract The web extension controller to associate with the web view.
+*/
+@property (nullable, nonatomic, strong) WKWebExtensionController *webExtensionController API_AVAILABLE(macos(NA), ios(18.4), visionos(NA));
+
 /*! @abstract The website data store to be used by the web view.
  */
 @property (nonatomic, strong) WKWebsiteDataStore *websiteDataStore API_AVAILABLE(macos(10.11), ios(9.0));
@@ -228,11 +232,11 @@ on the system setting.
     */
 @property (nonatomic) BOOL supportsAdaptiveImageGlyph API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0));
 
-#if (TARGET_OS_IOS && !TARGET_OS_VISION) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 180000
+#if (TARGET_OS_IOS && __IPHONE_OS_VERSION_MAX_ALLOWED >= 180000) || (defined(TARGET_OS_VISION) && TARGET_OS_VISION && __has_include(<GameKit/GKReleaseState.h>))
 /*! @abstract The preferred behavior of Writing Tools.
     @discussion The default behavior is equivalent to `UIWritingToolsBehaviorLimited`.
     */
-@property (nonatomic) UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0));
+@property (nonatomic) UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0), visionos(NA));
 #elif TARGET_OS_OSX && __MAC_OS_X_VERSION_MAX_ALLOWED >= 150000
 /*! @abstract The preferred behavior of Writing Tools.
     @discussion The default behavior is equivalent to `NSWritingToolsBehaviorLimited`.

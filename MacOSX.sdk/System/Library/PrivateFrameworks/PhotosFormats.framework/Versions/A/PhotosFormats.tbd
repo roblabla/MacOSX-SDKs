@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 721.0.150
+current-version: 751.0.104
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2pf17ArchiveLineParserE, __ZTIN5boost10wrapexceptINS_7bad_getEEE, 
@@ -68,16 +68,17 @@ exports:
                        _CAMUserPreferenceVideoConfiguration, _PFAdjustmentIdentifierInPaint, 
                        _PFAdjustmentIdentifierSemanticStyle, _PFAdjustmentStyleCastFromString, 
                        _PFAdjustmentStyleCastKey, _PFAllPlatformsLivePhotoBundleTypes, 
-                       _PFApertureLibraryExtension, _PFApertureVaultExtension, _PFArchiveFileIsAppleInternal, 
-                       _PFArchiveFileMagicFound, _PFArrayRandomObjectWithRandomNumberGenerator, 
-                       _PFAssetAdjustmentsBaseVersionKey, _PFAssetAdjustmentsDataBlobKey, 
-                       _PFAssetAdjustmentsEditorBundleIDKey, _PFAssetAdjustmentsFormatIdentifierKey, 
-                       _PFAssetAdjustmentsFormatIdentifierPhoto, _PFAssetAdjustmentsFormatVersionKey, 
-                       _PFAssetAdjustmentsRenderTypesKey, _PFAssetAdjustmentsTimestampKey, 
-                       _PFAssetBundleAllAuxiliaryResourceKeys, _PFAssetBundleFileExtension, 
-                       _PFAssetBundleMetadataAccessibilityDescriptionKey, _PFAssetBundleMetadataAssetDescriptionKey, 
-                       _PFAssetBundleMetadataAssetTitleKey, _PFAssetBundleMetadataKeywordTitlesKey, 
-                       _PFAssetBundleMetadataLibraryCreationDateKey, _PFAssetBundleMetadataLibraryCreationDateTimeZoneNameKey, 
+                       _PFApertureLibraryExtension, _PFApertureVaultExtension, _PFAppleArchiveEncryptedExtension, 
+                       _PFAppleArchiveExtension, _PFArchiveFileIsAppleInternal, _PFArchiveFileMagicFound, 
+                       _PFArrayRandomObjectWithRandomNumberGenerator, _PFAssetAdjustmentsBaseVersionKey, 
+                       _PFAssetAdjustmentsDataBlobKey, _PFAssetAdjustmentsEditorBundleIDKey, 
+                       _PFAssetAdjustmentsFormatIdentifierKey, _PFAssetAdjustmentsFormatIdentifierPhoto, 
+                       _PFAssetAdjustmentsFormatVersionKey, _PFAssetAdjustmentsRenderTypesKey, 
+                       _PFAssetAdjustmentsTimestampKey, _PFAssetBundleAllAuxiliaryResourceKeys, 
+                       _PFAssetBundleFileExtension, _PFAssetBundleMetadataAccessibilityDescriptionKey, 
+                       _PFAssetBundleMetadataAssetDescriptionKey, _PFAssetBundleMetadataAssetTitleKey, 
+                       _PFAssetBundleMetadataKeywordTitlesKey, _PFAssetBundleMetadataLibraryCreationDateKey, 
+                       _PFAssetBundleMetadataLibraryCreationDateTimeZoneNameKey, 
                        _PFAssetBundleMetadataLibraryCreationDateTimeZoneOffsetSecondsKey, 
                        _PFAssetBundleMetadataLibraryLocationAltitudeKey, _PFAssetBundleMetadataLibraryLocationCourseKey, 
                        _PFAssetBundleMetadataLibraryLocationHorizontalAccuracyKey, 

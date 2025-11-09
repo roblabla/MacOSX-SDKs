@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature VariadicGenerics -enable-experimental-feature ExtensionMacros -enable-bare-slash-regex -user-module-version 92.1 -module-name SwiftData
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature VariadicGenerics -enable-experimental-feature ExtensionMacros -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 98.1 -module-name SwiftData
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Foundation
 @_exported import Observation
 import Swift
@@ -397,9 +398,7 @@ public class ModelContext : Swift.Equatable {
   public func insert<T>(_ model: T) where T : SwiftData.PersistentModel
   public func rollback()
   public func processPendingChanges()
-  #if compiler(>=5.3) && $ParameterPacks
   public func delete<T>(model: T.Type, where predicate: Foundation.Predicate<T>? = nil, includeSubclasses: Swift.Bool = true) throws where T : SwiftData.PersistentModel
-  #endif
   public func delete<T>(_ model: T) where T : SwiftData.PersistentModel
   public func transaction(block: () throws -> Swift.Void) throws
   public func save() throws
@@ -435,68 +434,36 @@ public class ModelContext : Swift.Equatable {
 @available(*, unavailable, message: "contexts cannot be shared across concurrency contexts")
 extension SwiftData.ModelContext : @unchecked Swift.Sendable {
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
-#if compiler(>=5.3) && $ExtensionMacroAttr
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
-@attached(member, names: named(_$backingData), named(persistentBackingData), named(schemaMetadata), named(init), named(_$observationRegistrar), named(_SwiftDataNoType), named(access), named(withMutation)) @attached(memberAttribute) @attached(extension, conformances: Observation.Observable, SwiftData.PersistentModel) public macro Model() = #externalMacro(module: "SwiftDataMacros", type: "PersistentModelMacro")
-#else
-@available(swift 5.9)
-@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
-@attached(member, names: named(_$backingData), named(persistentBackingData), named(schemaMetadata), named(init), named(_$observationRegistrar), named(_SwiftDataNoType), named(access), named(withMutation)) @attached(memberAttribute)  public macro Model() = #externalMacro(module: "SwiftDataMacros", type: "PersistentModelMacro")
-#endif
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
-#if compiler(>=5.3) && $ExtensionMacroAttr
+@attached(member, names: named(_$backingData), named(persistentBackingData), named(schemaMetadata), named(init), named(_$observationRegistrar), named(_SwiftDataNoType), named(access), named(withMutation)) @attached(memberAttribute) @attached(extension, conformances: Observation.Observable, SwiftData.PersistentModel, Swift.Sendable) public macro Model() = #externalMacro(module: "SwiftDataMacros", type: "PersistentModelMacro")
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 @attached(member, names: named(modelExecutor), named(modelContainer), named(init)) @attached(extension, conformances: SwiftData.ModelActor) public macro ModelActor() = #externalMacro(module: "SwiftDataMacros", type: "PersistentModelActorMacro")
-#else
-@available(swift 5.9)
-@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
-@attached(member, names: named(modelExecutor), named(modelContainer), named(init))  public macro ModelActor() = #externalMacro(module: "SwiftDataMacros", type: "PersistentModelActorMacro")
-#endif
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 @attached(peer) public macro Attribute(_ options: SwiftData.Schema.Attribute.Option..., originalName: Swift.String? = nil, hashModifier: Swift.String? = nil) = #externalMacro(module: "SwiftDataMacros", type: "AttributePropertyMacro")
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 @attached(peer) public macro Relationship(_ options: SwiftData.Schema.Relationship.Option..., deleteRule: SwiftData.Schema.Relationship.DeleteRule = .nullify, minimumModelCount: Swift.Int? = 0, maximumModelCount: Swift.Int? = 0, originalName: Swift.String? = nil, inverse: Swift.AnyKeyPath? = nil, hashModifier: Swift.String? = nil) = #externalMacro(module: "SwiftDataMacros", type: "RelationshipPropertyMacro")
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 @attached(peer) public macro Transient() = #externalMacro(module: "SwiftDataMacros", type: "TransientPropertyMacro")
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, *)
 @freestanding(declaration) public macro Unique<T>(_ constraints: [Swift.PartialKeyPath<T>]...) = #externalMacro(module: "SwiftDataMacros", type: "UniqueConstraintsMacro") where T : SwiftData.PersistentModel
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, *)
 @freestanding(declaration) public macro Index<T>(_ indices: SwiftData.Schema.Index<T>.Types<T>...) = #externalMacro(module: "SwiftDataMacros", type: "IndexMacro") where T : SwiftData.PersistentModel
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, *)
 @freestanding(declaration) public macro Index<T>(_ indices: [Swift.PartialKeyPath<T>]...) = #externalMacro(module: "SwiftDataMacros", type: "IndexMacro") where T : SwiftData.PersistentModel
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`)) public macro _PersistedProperty() = #externalMacro(module: "SwiftDataMacros", type: "PersistedPropertyMacro")
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`)) public macro _TransformablePersistedProperty() = #externalMacro(module: "SwiftDataMacros", type: "TransformablePersistedPropertyMacro")
-#endif
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 public protocol PersistentModel : AnyObject, Observation.Observable, Swift.Hashable, Swift.Identifiable {
@@ -561,7 +528,6 @@ public enum HistoryChange : Swift.Sendable {
   case update(any SwiftData.HistoryUpdate)
   case delete(any SwiftData.HistoryDelete)
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
 public protocol HistoryInsert<Model> : Swift.Sendable {
@@ -572,19 +538,6 @@ public protocol HistoryInsert<Model> : Swift.Sendable {
   var transactionIdentifier: Self.TransactionIdentifier { get }
   var changedPersistentIdentifier: SwiftData.PersistentIdentifier { get }
 }
-#else
-@available(swift 5.9)
-@available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
-public protocol HistoryInsert : Swift.Sendable {
-  associatedtype Model : SwiftData.PersistentModel
-  associatedtype TransactionIdentifier : Swift.Comparable, Swift.Hashable, Swift.Sendable
-  associatedtype ChangeIdentifier : Swift.Comparable, Swift.Hashable, Swift.Sendable
-  var changeIdentifier: Self.ChangeIdentifier { get }
-  var transactionIdentifier: Self.TransactionIdentifier { get }
-  var changedPersistentIdentifier: SwiftData.PersistentIdentifier { get }
-}
-#endif
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
 public protocol HistoryUpdate<Model> : Swift.Sendable {
@@ -597,21 +550,6 @@ public protocol HistoryUpdate<Model> : Swift.Sendable {
   var changedPersistentIdentifier: SwiftData.PersistentIdentifier { get }
   var updatedAttributes: [any Swift.PartialKeyPath<Self.Model> & Swift.Sendable] { get }
 }
-#else
-@available(swift 5.9)
-@available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
-public protocol HistoryUpdate : Swift.Sendable {
-  associatedtype Model : SwiftData.PersistentModel
-  associatedtype TransactionIdentifier : Swift.Comparable, Swift.Hashable, Swift.Sendable
-  associatedtype ChangeIdentifier : Swift.Comparable, Swift.Hashable, Swift.Sendable
-  typealias PropertyUpdate = Swift.PartialKeyPath<Self.Model> & Swift.Sendable
-  var changeIdentifier: Self.ChangeIdentifier { get }
-  var transactionIdentifier: Self.TransactionIdentifier { get }
-  var changedPersistentIdentifier: SwiftData.PersistentIdentifier { get }
-  var updatedAttributes: [any Swift.PartialKeyPath<Self.Model> & Swift.Sendable] { get }
-}
-#endif
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
 public protocol HistoryDelete<Model> : Swift.Sendable {
@@ -623,19 +561,6 @@ public protocol HistoryDelete<Model> : Swift.Sendable {
   var changedPersistentIdentifier: SwiftData.PersistentIdentifier { get }
   var tombstone: SwiftData.HistoryTombstone<Self.Model> { get }
 }
-#else
-@available(swift 5.9)
-@available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
-public protocol HistoryDelete : Swift.Sendable {
-  associatedtype Model : SwiftData.PersistentModel
-  associatedtype TransactionIdentifier : Swift.Comparable, Swift.Hashable, Swift.Sendable
-  associatedtype ChangeIdentifier : Swift.Comparable, Swift.Hashable, Swift.Sendable
-  var changeIdentifier: Self.ChangeIdentifier { get }
-  var transactionIdentifier: Self.TransactionIdentifier { get }
-  var changedPersistentIdentifier: SwiftData.PersistentIdentifier { get }
-  var tombstone: SwiftData.HistoryTombstone<Self.Model> { get }
-}
-#endif
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
 public protocol HistoryToken : Swift.Comparable, Swift.Decodable, Swift.Encodable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
@@ -666,9 +591,7 @@ public struct HistoryTombstone<Model> : Swift.Sequence, @unchecked Swift.Sendabl
 public struct HistoryDescriptor<TransactionType> where TransactionType : SwiftData.HistoryTransaction {
   public var predicate: Foundation.Predicate<TransactionType>?
   public var fetchLimit: Swift.UInt64
-  #if compiler(>=5.3) && $ParameterPacks
   public init(predicate: Foundation.Predicate<TransactionType>? = nil)
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -815,8 +738,8 @@ final public class Schema : Swift.Codable, Swift.Hashable {
     public var description: Swift.String {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -849,9 +772,7 @@ public struct FetchDescriptor<T> where T : SwiftData.PersistentModel {
   public var includePendingChanges: Swift.Bool
   public var propertiesToFetch: [Swift.PartialKeyPath<T>]
   public var relationshipKeyPathsForPrefetching: [Swift.PartialKeyPath<T>]
-  #if compiler(>=5.3) && $ParameterPacks
   public init(predicate: Foundation.Predicate<T>? = nil, sortBy: [Foundation.SortDescriptor<T>] = [])
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -1051,9 +972,9 @@ extension SwiftData.Schema {
       public var debugDescription: Swift.String {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: SwiftData.Schema.Relationship.Option, b: SwiftData.Schema.Relationship.Option) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -1113,10 +1034,10 @@ extension SwiftData.Schema {
     }
     public enum CodingKeys : Swift.CodingKey {
       case indices
-      public static func == (a: SwiftData.Schema.Index<T>.CodingKeys, b: SwiftData.Schema.Index<T>.CodingKeys) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public init?(stringValue: Swift.String)
       public init?(intValue: Swift.Int)
+      public static func == (a: SwiftData.Schema.Index<T>.CodingKeys, b: SwiftData.Schema.Index<T>.CodingKeys) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -1161,10 +1082,10 @@ extension SwiftData.Schema {
     }
     public enum CodingKeys : Swift.CodingKey {
       case constraints
-      public static func == (a: SwiftData.Schema.Unique<T>.CodingKeys, b: SwiftData.Schema.Unique<T>.CodingKeys) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public init?(stringValue: Swift.String)
       public init?(intValue: Swift.Int)
+      public static func == (a: SwiftData.Schema.Unique<T>.CodingKeys, b: SwiftData.Schema.Unique<T>.CodingKeys) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -1243,20 +1164,11 @@ public protocol RelationshipCollection {
 extension Swift.Array : SwiftData.RelationshipCollection where Element : SwiftData.PersistentModel {
   public typealias PersistentElement = Element
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension Swift.Optional : SwiftData.RelationshipCollection where Wrapped : Swift.Sequence, Wrapped.Element : SwiftData.PersistentModel {
   public typealias PersistentElement = Wrapped.Element
 }
-#else
-@available(swift 5.9)
-@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
-extension Swift.Optional : SwiftData.RelationshipCollection where Wrapped : Swift.Sequence, Wrapped.Element : SwiftData.PersistentModel {
-  public typealias PersistentElement = Wrapped.Element
-}
-#endif
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 public protocol BackingData<Model> {
@@ -1277,28 +1189,6 @@ public protocol BackingData<Model> {
   func setValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : Swift.Encodable, Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   func setTransformableValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value)
 }
-#else
-@available(swift 5.9)
-@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
-public protocol BackingData {
-  associatedtype Model : SwiftData.PersistentModel
-  init(for modelType: Self.Model.Type)
-  var persistentModelID: SwiftData.PersistentIdentifier? { get set }
-  var metadata: Any { get }
-  @_disfavoredOverload func getValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : Swift.Decodable
-  func getValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : SwiftData.PersistentModel
-  func getValue<Value>(forKey: Swift.KeyPath<Self.Model, Value?>) -> Value? where Value : SwiftData.PersistentModel
-  func getValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
-  func getValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : Swift.Decodable, Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
-  func getTransformableValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value
-  @_disfavoredOverload func setValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : Swift.Encodable
-  func setValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : SwiftData.PersistentModel
-  func setValue<Value>(forKey: Swift.KeyPath<Self.Model, Value?>, to newValue: Value?) where Value : SwiftData.PersistentModel
-  func setValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
-  func setValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : Swift.Encodable, Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
-  func setTransformableValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value)
-}
-#endif
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 public struct FetchResultsCollection<Element> : Swift.RandomAccessCollection {

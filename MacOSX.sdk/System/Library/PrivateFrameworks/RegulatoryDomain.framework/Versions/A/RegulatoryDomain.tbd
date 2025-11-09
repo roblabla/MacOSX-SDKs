@@ -10,12 +10,12 @@ exports:
     symbols:         [ _RDClearCacheData, _RDForceCacheRecompute, _RDKickstartDaemon, 
                        _RDSetCacheLockState, _RDTriggerUpdateToEligibilityEngine, 
                        _RDUpdateCountryCodeFromMCC, _RDUpdateCountryCodeFromPeer, 
-                       _RDUpdateCountryCodeFromPeerData, _RDUpdateCountryCodeFromPeerInfo, 
-                       _RDUpdateCountryCodeFromWiFiAPs, _RDUpdateCountryCodeInfoFromLocation, 
-                       _RDUpdateCountryCodesFromLocation, _RDUpdateCountryCodesFromNearbyCells, 
-                       _RDUpdateCountryCodesFromPeer, _RDUpdateCountryCodesFromServingCell, 
-                       _RDUpdateCountryCodesFromWiFiAPs, _kRDPriorityNearbyCellsMCC, 
-                       _kRDPriorityServingCellMCC, _kRDPrioritySingleLocation, _kRDPriorityWiFiAP, 
-                       _kRDUpdateKeyCountryCodes, _kRDUpdateKeyInDisputedArea, _kRegulatoryDomainUpdateNotification ]
+                       _RDUpdateCountryCodeFromPeerInfo, _RDUpdateCountryCodeFromWiFiAPs, 
+                       _RDUpdateCountryCodeInfoFromLocation, _RDUpdateCountryCodesFromLocation, 
+                       _RDUpdateCountryCodesFromNearbyCells, _RDUpdateCountryCodesFromPeer, 
+                       _RDUpdateCountryCodesFromServingCell, _RDUpdateCountryCodesFromWiFiAPs, 
+                       _kRDPriorityNearbyCellsMCC, _kRDPriorityServingCellMCC, _kRDPrioritySingleLocation, 
+                       _kRDPriorityWiFiAP, _kRDUpdateKeyCountryCodes, _kRDUpdateKeyInDisputedArea, 
+                       _kRegulatoryDomainUpdateNotification ]
     objc-classes:    [ RDCachedData, RDEstimate, RDStatusShareWrapper ]
 ...

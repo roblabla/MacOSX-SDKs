@@ -33,6 +33,7 @@ typedef enum {
 
 #define CANCELLED_QUEUE_MAX_LENGTH 10
 #define DROPPED_QUEUE_MAX_LENGTH 10
+#define SECURE_TE_INFO_MAX_LENGTH 10
 
 typedef struct
 {
@@ -79,6 +80,25 @@ typedef struct
     uint8_t cancelledCount;
     uint8_t droppedCount;
 } EXDisplayPipeStatus;
+
+typedef struct
+{
+    EXDisplayPipeHealthRecord healthRecord;
+    uint64_t errorCount;
+    uint64_t lastErrorTimestamp;
+    uint64_t maxConsecutiveErrors;
+    uint64_t lastErrorVal;
+    bool enabled;
+    struct {
+        uint64_t prevTimebase;
+        uint64_t prevTimestamp;
+        uint64_t currTimebase;
+        uint64_t currTimestamp;
+        uint64_t timeDiff;
+        uint64_t timebaseDiff;
+    } errorInfo[SECURE_TE_INFO_MAX_LENGTH];
+    int errorInfoCount;
+} EXDisplayPipeSecureTEStatus;
 
 // kEXBrightMessageFunction API
 // callPlatformFunction( kEXBrightMessageFunction, false,

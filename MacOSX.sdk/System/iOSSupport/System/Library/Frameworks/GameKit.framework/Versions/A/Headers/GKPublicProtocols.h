@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Callbacks to the GKSession delegate.
 */
-API_DEPRECATED_WITH_REPLACEMENT("GKMatchDelegate", ios(3.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
+API_DEPRECATED_WITH_REPLACEMENT("Use ``GKMatchDelegate`` instead.", ios(3.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 @protocol GKSessionDelegate <NSObject>
 
 @optional
@@ -42,7 +42,7 @@ Deny by calling -denyConnectionFromPeer:
 @class GKVoiceChatService;
 
 //All clients will need to implement this protocol
-API_DEPRECATED_WITH_REPLACEMENT("GKVoiceChat", ios(3.0,7.0), macos(10.6,10.8)) __TVOS_UNAVAILABLE
+API_DEPRECATED_WITH_REPLACEMENT("Use ``GKVoiceChat`` instead.", ios(3.0,7.0), macos(10.6,10.8), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos)
 @protocol GKVoiceChatClient <NSObject>
 
 @required

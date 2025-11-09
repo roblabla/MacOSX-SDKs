@@ -10,6 +10,7 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s15NotesPreviewKit010WidgetNoteB8ProviderC6sharedACvgZ', 
+                       '_$s15NotesPreviewKit010WidgetNoteB8ProviderC6sharedACvpZMV', 
                        '_$s15NotesPreviewKit010WidgetNoteB8ProviderC7preview9accountId04noteI04typeAA0eB0VSSSg_AJSo15ICThumbnailTypeVtKF', 
                        '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMa', '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMm', 
                        '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMn', '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMo', 
@@ -27,7 +28,8 @@ exports:
                        '_$s15NotesPreviewKit04NoteB8ProviderC06recentB0AA0dB0VyKF', 
                        '_$s15NotesPreviewKit04NoteB8ProviderC07defaultB0AA0dB0VyKF', 
                        '_$s15NotesPreviewKit04NoteB8ProviderC19__previewDictionary3forSDySo06NPNoteB3KeyaypGSo14NSUserActivityC_tKF', 
-                       '_$s15NotesPreviewKit04NoteB8ProviderC6sharedACvgZ', '_$s15NotesPreviewKit04NoteB8ProviderC7preview3forAA0dB0VSo14NSUserActivityC_tKF', 
+                       '_$s15NotesPreviewKit04NoteB8ProviderC6sharedACvgZ', '_$s15NotesPreviewKit04NoteB8ProviderC6sharedACvpZMV', 
+                       '_$s15NotesPreviewKit04NoteB8ProviderC7preview3forAA0dB0VSo14NSUserActivityC_tKF', 
                        '_$s15NotesPreviewKit04NoteB8ProviderC7preview9accountId04noteH022prefersDefaultFallbackAA0dB0VSSSg_AJSbtKF', 
                        '_$s15NotesPreviewKit04NoteB8ProviderCACycfC', '_$s15NotesPreviewKit04NoteB8ProviderCACycfc', 
                        '_$s15NotesPreviewKit04NoteB8ProviderCMa', '_$s15NotesPreviewKit04NoteB8ProviderCMn', 
@@ -35,6 +37,7 @@ exports:
                        '_$s15NotesPreviewKit04NoteB8ProviderCfD', '_$s15NotesPreviewKit12ThumbnailKeyC11descriptionSSvg', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC11thumbnailIdSSvg', '_$s15NotesPreviewKit12ThumbnailKeyC11thumbnailIdSSvpMV', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC14recentObjectIdSSvgZ', 
+                       '_$s15NotesPreviewKit12ThumbnailKeyC14recentObjectIdSSvpZMV', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC4copy4withyp10ObjectiveC6NSZoneVSg_tF', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC4fromACs7Decoder_p_tKcfC', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC4fromACs7Decoder_p_tKcfCTj', 

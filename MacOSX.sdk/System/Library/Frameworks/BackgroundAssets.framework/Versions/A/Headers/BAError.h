@@ -20,7 +20,7 @@ __BEGIN_DECLS
 /// @brief The error domain used for Background Assets errors.
 BA_EXPORT
 NSString * const BAErrorDomain
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(14.0), ios(17.0), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 /// @typedef Background Assets error codes.
 /// @constant BAErrorCodeDownloadInvalid Invalid error code.
@@ -35,6 +35,7 @@ API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 /// @constant BAErrorCodeDownloadEssentialDownloadNotPermitted The requested download could not be enqueued because the download is marked as essential, which is prohibited in this context.
 /// @constant BAErrorCodeDownloadBackgroundActivityProhibited The requested download could not be enqueued. Check the device‘s Low Power Mode or Background App Refresh settings.
 /// @constant BAErrorCodeDownloadWouldExceedAllowance The requested download cannot be enqueued. The download would exceed the download allowance.
+/// @constant BAErrorCodeDownloadDoesNotExist The operation for a download cannot be performed because that BADownload object does not exist.
 /// @constant BAErrorCodeSessionDownloadDisallowedByDomain The requested URL is not permitted to be downloaded until the application is launched.
 /// @constant BAErrorCodeSessionDownloadDisallowedByAllowance The requested download will not be allowed due to running out of download allowance.
 /// @constant BAErrorCodeSessionDownloadAllowanceExceeded The requested download failed because the download allowance has been exceeded.
@@ -54,13 +55,14 @@ typedef NS_ENUM(NSInteger, BAErrorCode) {
     BAErrorCodeDownloadEssentialDownloadNotPermitted = 109,
     BAErrorCodeDownloadBackgroundActivityProhibited = 111,
     BAErrorCodeDownloadWouldExceedAllowance = 112,
+    BAErrorCodeDownloadDoesNotExist = 113,
 
     BAErrorCodeSessionDownloadDisallowedByDomain = 202,
     BAErrorCodeSessionDownloadDisallowedByAllowance = 203,
     BAErrorCodeSessionDownloadAllowanceExceeded = 204,
     BAErrorCodeSessionDownloadNotPermittedBeforeAppLaunch = 206,
 }
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(14.0), ios(17.0), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 __END_DECLS
 

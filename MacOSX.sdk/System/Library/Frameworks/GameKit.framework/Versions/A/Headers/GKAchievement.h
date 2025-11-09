@@ -7,7 +7,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 // GKAchievement represents a game achievement that the player has started or completely achieved.
-NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKAchievement : NSObject <NSCoding, NSSecureCoding>
 
 /// Asynchronously load all achievements for the local player
@@ -23,7 +23,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 - (instancetype)initWithIdentifier:(nullable NSString *)identifier;
 
 /// Initialize the achievement for a specific player. Use to submit participant achievements when ending a turn-based match.
-- (instancetype)initWithIdentifier:(nullable NSString *)identifier player:(GKPlayer *)player NS_AVAILABLE(10_10, 8_0);
+- (instancetype)initWithIdentifier:(nullable NSString *)identifier player:(GKPlayer *)player API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 
 /// Report an array of achievements to the server. Percent complete is required. Points, completed state are set based on percentComplete. isHidden is set to NO anytime this method is invoked. Date is optional. Error will be nil on success.
@@ -31,7 +31,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 /// 1. Local player not authenticated
 /// 2. Communications failure
 /// 3. Reported Achievement does not exist
-+ (void)reportAchievements:(NSArray<GKAchievement *> *)achievements withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 6_0);
++ (void)reportAchievements:(NSArray<GKAchievement *> *)achievements withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// Achievement identifier
 @property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *identifier;
@@ -43,22 +43,22 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @property(copy, readonly, NS_NONATOMIC_IOSONLY) NSDate *lastReportedDate;
 
 /// A banner will be momentarily displayed after reporting a completed achievement
-@property(assign, NS_NONATOMIC_IOSONLY) BOOL showsCompletionBanner NS_AVAILABLE(10_8, 5_0);
+@property(assign, NS_NONATOMIC_IOSONLY) BOOL showsCompletionBanner API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// The identifier of the player that earned the achievement.
-@property(readonly, strong, nullable, NS_NONATOMIC_IOSONLY) GKPlayer *player NS_AVAILABLE(10_10, 8_0);
+@property(readonly, strong, nullable, NS_NONATOMIC_IOSONLY) GKPlayer *player API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 @end
 
 @interface GKAchievement (Deprecated)
-- (void)reportAchievementWithCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("+reportAchievements:withCompletionHandler:", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
-@property(assign, getter=isHidden, readonly, NS_NONATOMIC_IOSONLY) BOOL hidden API_DEPRECATED_WITH_REPLACEMENT("-[GKAchievementDescription isHidden:]", ios(4.1,6.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (void)reportAchievementWithCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKAchievement/report(_:withCompletionHandler:)`` instead.", ios(4.1,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
+@property(assign, getter=isHidden, readonly, NS_NONATOMIC_IOSONLY) BOOL hidden API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievementDescription/isHidden`` property on the ``GKAchievementDescription`` class instead.", ios(4.1,6.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 @end
 
 @interface GKAchievement (Obsoleted)
-/*** This method is obsolete. Calling this initialiser does nothing and will return nil ***/
-- (nullable instancetype)initWithIdentifier:(nullable NSString *)identifier forPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-initWithIdentifier:player:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
+/*** This method is obsolete. Calling this initializer does nothing and will return nil ***/
+- (nullable instancetype)initWithIdentifier:(nullable NSString *)identifier forPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("Use ``GKAchievement/init(identifier:player:)`` instead.", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 /*** This property is obsolete. ***/
-@property(readonly, copy, nullable, NS_NONATOMIC_IOSONLY)  NSString * playerID API_DEPRECATED_WITH_REPLACEMENT("-player:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
+@property(readonly, copy, nullable, NS_NONATOMIC_IOSONLY)  NSString * playerID API_DEPRECATED_WITH_REPLACEMENT("Use ``GKAchievement/player`` instead.", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 @end
 NS_ASSUME_NONNULL_END

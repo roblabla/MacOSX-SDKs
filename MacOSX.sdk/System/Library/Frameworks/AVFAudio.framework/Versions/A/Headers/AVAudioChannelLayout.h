@@ -37,7 +37,8 @@ NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 - (nullable instancetype)initWithLayoutTag:(AudioChannelLayoutTag)layoutTag;
 
 /*!	@method initWithLayout:
-	@abstract Initialize from an AudioChannelLayout.
+	@abstract
+        Initialize from an AudioChannelLayout.
 	@param layout
 		The AudioChannelLayout.
 	@discussion

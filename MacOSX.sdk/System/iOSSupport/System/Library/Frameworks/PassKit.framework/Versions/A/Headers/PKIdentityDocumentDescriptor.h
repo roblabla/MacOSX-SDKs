@@ -6,7 +6,6 @@
 //  Copyright © 2022 Apple, Inc. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 
 @class PKIdentityElement;
@@ -49,7 +48,6 @@ API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @end
 
 NS_ASSUME_NONNULL_END
-
 
 #else
 #import <TargetConditionals.h>

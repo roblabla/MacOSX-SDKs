@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/HumanUnderstandingFoundation.framework/Versions/A/HumanUnderstandingFoundation'
-current-version: 121.4
+current-version: 124.12.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -28,6 +28,7 @@ exports:
                        '_$s28HumanUnderstandingFoundation11XPCActivityCMu', '_$s28HumanUnderstandingFoundation11XPCActivityCN', 
                        '_$s28HumanUnderstandingFoundation11XPCActivityCfD', '_$s28HumanUnderstandingFoundation11XPCActivityCfd', 
                        '_$s28HumanUnderstandingFoundation14FeatureManagerC07defaultE0ACvgZ', 
+                       '_$s28HumanUnderstandingFoundation14FeatureManagerC07defaultE0ACvpZMV', 
                        '_$s28HumanUnderstandingFoundation14FeatureManagerC13featureValues3forSo17MLFeatureProvider_s8SendablepSgSaySSG_tFTj', 
                        '_$s28HumanUnderstandingFoundation14FeatureManagerC13featureValues3forSo17MLFeatureProvider_s8SendablepSgSaySSG_tFTq', 
                        '_$s28HumanUnderstandingFoundation14FeatureManagerC15unownedExecutorScevg', 
@@ -108,6 +109,7 @@ exports:
                        '_$s28HumanUnderstandingFoundation18DeferrableActivityTL', 
                        '_$s28HumanUnderstandingFoundation19AmbientLightMonitorC010getCurrentdE4TypeAA0deI0OyF', 
                        '_$s28HumanUnderstandingFoundation19AmbientLightMonitorC6sharedACvgZ', 
+                       '_$s28HumanUnderstandingFoundation19AmbientLightMonitorC6sharedACvpZMV', 
                        '_$s28HumanUnderstandingFoundation19AmbientLightMonitorC9sendEventyySo012BMContextualbdE0CF', 
                        '_$s28HumanUnderstandingFoundation19AmbientLightMonitorCMa', 
                        '_$s28HumanUnderstandingFoundation19AmbientLightMonitorCMm', 
@@ -133,6 +135,7 @@ exports:
                        '_$s28HumanUnderstandingFoundation5PathsO05humanB21EvidenceBaseDirectory0C03URLVyFZ', 
                        '_$s28HumanUnderstandingFoundation5PathsO11EnvironmentO6deviceyA2EmFWC', 
                        '_$s28HumanUnderstandingFoundation5PathsO11EnvironmentO8allCasesSayAEGvgZ', 
+                       '_$s28HumanUnderstandingFoundation5PathsO11EnvironmentO8allCasesSayAEGvpZMV', 
                        '_$s28HumanUnderstandingFoundation5PathsO11EnvironmentO8rawValueAESgSS_tcfC', 
                        '_$s28HumanUnderstandingFoundation5PathsO11EnvironmentO8rawValueSSvg', 
                        '_$s28HumanUnderstandingFoundation5PathsO11EnvironmentO8rawValueSSvpMV', 
@@ -147,6 +150,7 @@ exports:
                        '_$s28HumanUnderstandingFoundation5PathsO11EnvironmentOs12CaseIterableAAMc', 
                        '_$s28HumanUnderstandingFoundation5PathsO12topDirectory0C03URLVyFZ', 
                        '_$s28HumanUnderstandingFoundation5PathsO13baseDirectory0C03URLVvgZ', 
+                       '_$s28HumanUnderstandingFoundation5PathsO13baseDirectory0C03URLVvpZMV', 
                        '_$s28HumanUnderstandingFoundation5PathsO13baseDirectory4with0C03URLVSgAC11EnvironmentO_tFZ', 
                        '_$s28HumanUnderstandingFoundation5PathsO13baseDirectory4with14createIfNeeded0C03URLVSS_SbtFZ', 
                        '_$s28HumanUnderstandingFoundation5PathsO21biomeStreamsDirectory0C03URLVyFZ', 

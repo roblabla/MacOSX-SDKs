@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
  @see GCControllerElement.boundToSystemGesture
  @see GCControllerElement.preferredSystemGestureState
  */
-API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 typedef NS_ENUM(NSInteger, GCSystemGestureState) {
     /** System gesture recognizers will run before input is sent to app, this is the default state */
     GCSystemGestureStateEnabled = 0,
@@ -37,12 +36,12 @@ typedef NS_ENUM(NSInteger, GCSystemGestureState) {
     GCSystemGestureStateAlwaysReceive,
     /** System gesture recognizers will not run at all. Input is passed directly to app */
     GCSystemGestureStateDisabled
-} NS_SWIFT_NAME(GCControllerElement.SystemGestureState);
+} NS_SWIFT_NAME(GCControllerElement.SystemGestureState) API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  Every controller element knows which collection it belongs to and whether its input value is analog or digital.
  */
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0))
 @interface GCControllerElement : NSObject
 
 /**

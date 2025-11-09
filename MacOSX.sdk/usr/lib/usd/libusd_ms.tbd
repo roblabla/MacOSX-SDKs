@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/usd/libusd_ms.dylib'
-current-version: 22.3.2
+current-version: 22.5.5
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]
@@ -5720,7 +5720,6 @@ exports:
                        __ZN32pxrInternal__aapl__pxrReserved__21UsdUtilsTimeCodeRange19CreateFromFrameSpecERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN32pxrInternal__aapl__pxrReserved__21intrusive_ptr_add_refEPNS_16PcpMapExpression5_NodeE, 
                        __ZN32pxrInternal__aapl__pxrReserved__21intrusive_ptr_releaseEPNS_16PcpMapExpression5_NodeE, 
-                       __ZN32pxrInternal__aapl__pxrReserved__22AaplUtilsCreateTempDirEv, 
                        __ZN32pxrInternal__aapl__pxrReserved__22ArSetPreferredResolverERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN32pxrInternal__aapl__pxrReserved__22Ar_ResolverFactoryBaseD0Ev, 
                        __ZN32pxrInternal__aapl__pxrReserved__22Ar_ResolverFactoryBaseD1Ev, 

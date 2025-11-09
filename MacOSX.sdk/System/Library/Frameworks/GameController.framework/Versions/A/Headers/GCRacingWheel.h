@@ -32,8 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
  @see NSNotificationCenter
  @see GCRacingWheel.connectedRacingWheels
  */
-GAMECONTROLLER_EXTERN NSString *const GCRacingWheelDidConnectNotification API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
-GAMECONTROLLER_EXTERN NSString *const GCRacingWheelDidDisconnectNotification API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT NSString *const GCRacingWheelDidConnectNotification API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT NSString *const GCRacingWheelDidDisconnectNotification API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
 
 
 API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos)

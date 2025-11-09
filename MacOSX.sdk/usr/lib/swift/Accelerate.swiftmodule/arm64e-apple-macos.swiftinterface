@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macos15.2 -target-variant arm64e-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 62 -module-name Accelerate
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macos15.4 -target-variant arm64e-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 62 -module-name Accelerate
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import Accelerate
 @_exported import Accelerate.vecLib.BNNS
 import Swift
@@ -1246,9 +1247,9 @@ extension Accelerate.BNNS {
       get
     }
     public static func == (a: Accelerate.BNNS.DataLayout, b: Accelerate.BNNS.DataLayout) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias AllCases = [Accelerate.BNNS.DataLayout]
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -3236,15 +3237,9 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
         }
     }
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
 extension Swift.UnsafeMutableBufferPointer : Accelerate.BNNSGraph.PointerArgument where Element : Accelerate.BNNSScalar {
 }
-#else
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
-extension Swift.UnsafeMutableBufferPointer : Accelerate.BNNSGraph.PointerArgument where Element : Accelerate.BNNSScalar {
-}
-#endif
 @available(*, unavailable)
 extension Accelerate.BNNSGraph.Context : Swift.Sendable {
 }
@@ -10306,32 +10301,16 @@ extension Accelerate.BNNSPoolingLayerParameters {
 extension Accelerate.BNNSFullyConnectedLayerParameters {
   public init(in_size: Swift.Int, out_size: Swift.Int, weights: Accelerate.BNNSLayerData)
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol AccelerateBuffer<Element> {
   associatedtype Element
   var count: Swift.Int { get }
   func withUnsafeBufferPointer<R>(_ body: (Swift.UnsafeBufferPointer<Self.Element>) throws -> R) rethrows -> R
 }
-#else
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-public protocol AccelerateBuffer {
-  associatedtype Element
-  var count: Swift.Int { get }
-  func withUnsafeBufferPointer<R>(_ body: (Swift.UnsafeBufferPointer<Self.Element>) throws -> R) rethrows -> R
-}
-#endif
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol AccelerateMutableBuffer<Element> : Accelerate.AccelerateBuffer {
   mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Self.Element>) throws -> R) rethrows -> R
 }
-#else
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-public protocol AccelerateMutableBuffer : Accelerate.AccelerateBuffer {
-  mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Self.Element>) throws -> R) rethrows -> R
-}
-#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.AccelerateBuffer where Self : Swift.Collection {
   @_silgen_name("$s10Accelerate0A6BufferPAASlRzrlE010withUnsafeB7Pointeryqd__qd__SRy7ElementSTQzGKXEKlF")
@@ -10355,24 +10334,12 @@ extension Swift.ContiguousArray : Accelerate.AccelerateMutableBuffer {
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.ArraySlice : Accelerate.AccelerateMutableBuffer {
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.UnsafeBufferPointer : Accelerate.AccelerateBuffer {
 }
-#else
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Swift.UnsafeBufferPointer : Accelerate.AccelerateBuffer {
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.UnsafeMutableBufferPointer : Accelerate.AccelerateMutableBuffer {
 }
-#else
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Swift.UnsafeMutableBufferPointer : Accelerate.AccelerateMutableBuffer {
-}
-#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Slice : Accelerate.AccelerateBuffer where Base : Accelerate.AccelerateBuffer {
 }
@@ -10446,7 +10413,6 @@ extension Accelerate.AccelerateMutableBuffer where Self.Element == Swift.UInt16 
     get
   }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
 public protocol AccelerateMatrixBuffer<Element> {
   associatedtype Element
@@ -10456,28 +10422,10 @@ public protocol AccelerateMatrixBuffer<Element> {
   var leadingDimension: Swift.Int { get }
   func withUnsafeBufferPointer<R>(_ body: (Swift.UnsafeBufferPointer<Self.Element>) throws -> R) rethrows -> R
 }
-#else
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
-public protocol AccelerateMatrixBuffer {
-  associatedtype Element
-  var rowCount: Swift.Int { get }
-  var columnCount: Swift.Int { get }
-  var accelerateMatrixOrder: Accelerate.AccelerateMatrixOrder { get }
-  var leadingDimension: Swift.Int { get }
-  func withUnsafeBufferPointer<R>(_ body: (Swift.UnsafeBufferPointer<Self.Element>) throws -> R) rethrows -> R
-}
-#endif
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
 public protocol AccelerateMutableMatrixBuffer<Element> : Accelerate.AccelerateMatrixBuffer {
   mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Self.Element>) throws -> R) rethrows -> R
 }
-#else
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
-public protocol AccelerateMutableMatrixBuffer : Accelerate.AccelerateMatrixBuffer {
-  mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Self.Element>) throws -> R) rethrows -> R
-}
-#endif
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
 extension Accelerate.vImage.PixelBuffer : Accelerate.AccelerateMatrixBuffer where Format : Accelerate.StaticPixelFormat {
   public var rowCount: Swift.Int {
@@ -10981,13 +10929,13 @@ extension Accelerate.BNNS {
       get
     }
     public static func == (a: Accelerate.BNNS.ArithmeticUnaryFunction, b: Accelerate.BNNS.ArithmeticUnaryFunction) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(*, deprecated, message: "Use the BNNSGraph API instead.")
     @available(iOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
     @available(tvOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
     @available(watchOS, introduced: 7.0, message: "Use the BNNSGraph API instead.")
     @available(macOS, introduced: 11.0, message: "Use the BNNSGraph API instead.")
     public typealias AllCases = [Accelerate.BNNS.ArithmeticUnaryFunction]
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -11014,13 +10962,13 @@ extension Accelerate.BNNS {
       get
     }
     public static func == (a: Accelerate.BNNS.ArithmeticBinaryFunction, b: Accelerate.BNNS.ArithmeticBinaryFunction) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(*, deprecated, message: "Use the BNNSGraph API instead.")
     @available(iOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
     @available(tvOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
     @available(watchOS, introduced: 7.0, message: "Use the BNNSGraph API instead.")
     @available(macOS, introduced: 11.0, message: "Use the BNNSGraph API instead.")
     public typealias AllCases = [Accelerate.BNNS.ArithmeticBinaryFunction]
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -15869,12 +15817,12 @@ extension Accelerate.vDSP {
       get
     }
     public static func == (a: Accelerate.vDSP.DCTTransformType, b: Accelerate.vDSP.DCTTransformType) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias AllCases = [Accelerate.vDSP.DCTTransformType]
     nonisolated public static var allCases: [Accelerate.vDSP.DCTTransformType] {
       get
     }
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }

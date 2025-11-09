@@ -94,6 +94,8 @@ extern bool proc_is_alien(proc_t p);
 proc_t current_proc_EXTERNAL(void);
 
 
+struct proc_ident;
+
 /*
  * __unsafe_indexable is a workaround for
  * rdar://88409003 (PredefinedExpr trips C string detection)
@@ -132,6 +134,8 @@ void proc_selfname(char * buf, int size);
 extern proc_t proc_find(int pid);
 /* find a process with a given process identity */
 extern proc_t proc_find_ident(struct proc_ident const *i);
+/* find a process with a given audit token */
+extern proc_t proc_find_audit_token(const audit_token_t token);
 /* returns a handle to current process which is referenced. The reference needs to be dropped with proc_rele */
 extern proc_t proc_self(void);
 /* releases the held reference on the process */
@@ -142,6 +146,8 @@ extern int proc_pid(proc_t);
 extern int proc_ppid(proc_t);
 /* returns the original pid of the parent of a given process */
 extern int proc_original_ppid(proc_t);
+/* returns the pid version of the original parent of a given process */
+extern int proc_orig_ppidversion(proc_t);
 /* returns the start time of the given process */
 extern int proc_starttime(proc_t, struct timeval *);
 /* returns whether the given process is on simulated platform */

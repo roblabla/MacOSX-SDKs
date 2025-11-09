@@ -1,8 +1,8 @@
 // Copyright © Apple Inc. All rights reserved.
 
-#import <TargetConditionals.h>
-#import <os/lock.h>
 #import <GameKit/GKPlayer.h>
+#import <GameKit/GKReleaseState.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_TV
 #import <Contacts/Contacts.h>
@@ -12,19 +12,18 @@ typedef NS_ENUM(NSInteger, GKLeaderboardTimeScope) {
     GKLeaderboardTimeScopeToday = 0,
     GKLeaderboardTimeScopeWeek,
     GKLeaderboardTimeScopeAllTime
-};
+} API_AVAILABLE(ios(4.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 typedef NS_ENUM(NSInteger, GKLeaderboardPlayerScope) {
     GKLeaderboardPlayerScopeGlobal = 0,
     GKLeaderboardPlayerScopeFriendsOnly
-};
+} API_AVAILABLE(ios(4.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
-API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0))
 typedef NS_ENUM(NSInteger, GKLeaderboardType)
 {
     GKLeaderboardTypeClassic,
     GKLeaderboardTypeRecurring,
-};
+} API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0), watchos(7.0));
 
 @class GKScore;
 @class UIImage;
@@ -37,14 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 ///      1. Classic - Traditional, non-expiring leaderboards
 ///      2. Recurring - Periodic timed leaderboards that follow a recurrence rule defined in App Store Connect.
 
-NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKLeaderboard : NSObject
 
 /// Localized title
 @property(readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *title;
 
 /// set when leaderboards have been designated a game group; set when loadLeaderboardsWithCompletionHandler has been called for leaderboards that support game groups
-@property(nonatomic, readonly, nullable, strong) NSString *groupIdentifier NS_AVAILABLE(10_9, 6_0);
+@property(nonatomic, readonly, nullable, strong) NSString *groupIdentifier API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// Leaderboard ID defined in App Store Connect that this instance is associated with
 @property (strong, readonly, nonatomic) NSString *baseLeaderboardID API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
@@ -118,57 +117,57 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 
 @interface GKLeaderboard (Deprecated)
 
-@property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *category API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+@property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *category API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` method instead.", ios(4.1,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 
-- (nullable instancetype)initWithPlayerIDs:(nullable NSArray<NSString *> *)playerIDs API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayers:timeScope:completionHandler:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (nullable instancetype)initWithPlayerIDs:(nullable NSArray<NSString *> *)playerIDs API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLeaderboard/loadEntries(for:timeScope:completionHandler:)`` method instead.", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 
-+ (void)loadCategoriesWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable categories, NSArray<NSString *> * __nullable titles, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadLeaderboardsWithIDs:completionHandler:", ios(4.1,6.0), macos(10.8,10.9)) __TVOS_UNAVAILABLE;
++ (void)loadCategoriesWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable categories, NSArray<NSString *> * __nullable titles, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLeaderboard/loadLeaderboards(completionHandler:)`` method instead.", ios(4.1,6.0), macos(10.8,10.9)) API_UNAVAILABLE(tvos);
 
-+ (void)setDefaultLeaderboard:(nullable NSString *)leaderboardIdentifier withCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-setDefaultLeaderboardIdentifier:completionHandler:", ios(5.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
++ (void)setDefaultLeaderboard:(nullable NSString *)leaderboardIdentifier withCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/setDefaultLeaderboardIdentifier(_:completionHandler:)`` method instead.", ios(5.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 
-@property(assign, NS_NONATOMIC_IOSONLY) GKLeaderboardTimeScope timeScope API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+@property(assign, NS_NONATOMIC_IOSONLY) GKLeaderboardTimeScope timeScope API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// Filter on friends. Does not apply to leaderboard initialized with players.
-@property(assign, NS_NONATOMIC_IOSONLY) GKLeaderboardPlayerScope playerScope API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+@property(assign, NS_NONATOMIC_IOSONLY) GKLeaderboardPlayerScope playerScope API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// leaderboardID. If nil, fetch the aggregate leaderboard.
-@property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *identifier API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(7.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0), watchos(2.0, 7.0));
+@property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *identifier API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(7.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0), watchos(3.0, 7.0));
 
 /// Leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
-@property(assign, NS_NONATOMIC_IOSONLY) NSRange range API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+@property(assign, NS_NONATOMIC_IOSONLY) NSRange range API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// Scores are not valid until loadScores: has completed.
-@property(readonly, strong, nullable, NS_NONATOMIC_IOSONLY) NSArray<GKScore *> *scores API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+@property(readonly, strong, nullable, NS_NONATOMIC_IOSONLY) NSArray<GKScore *> *scores API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// The maxRange which represents the size of the leaderboard is not valid until loadScores: has completed.
-@property(readonly, assign, NS_NONATOMIC_IOSONLY) NSUInteger maxRange API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+@property(readonly, assign, NS_NONATOMIC_IOSONLY) NSUInteger maxRange API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// The local player's score
-@property(readonly, strong, nullable, NS_NONATOMIC_IOSONLY) GKScore *localPlayerScore API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+@property(readonly, strong, nullable, NS_NONATOMIC_IOSONLY) GKScore *localPlayerScore API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// This property is true if the leaderboard is currently loading
-@property(readonly, getter=isLoading) BOOL loading API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.1, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+@property(readonly, getter=isLoading) BOOL loading API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.1, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// Default is the range 1-10 with Global/AllTime scopes.
 /// If you want to change the scopes or range, set the properites before loading the scores.
-- (instancetype)init API_DEPRECATED_WITH_REPLACEMENT("+loadLeaderboardsWithIDs:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
+- (instancetype)init API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLeaderboard/loadLeaderboards(IDs:completionHandler:)`` method instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 /// Specify an array of GKPlayers. For example, the players who are in a match together
 /// Defaults to AllTime score, if you want to change the timeScope, set the property before loading the scores. Range and playerScope are not applicable. players may not be nil.
-- (instancetype)initWithPlayers:(NSArray<GKPlayer *> *)players API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayers:timeScope:completionHandler:", ios(8.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0), watchos(2.0, 7.0));
+- (instancetype)initWithPlayers:(NSArray<GKPlayer *> *)players API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLeaderboard/loadEntries(for:timeScope:completionHandler:)`` method instead.", ios(8.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0), watchos(3.0, 7.0));
 
 /// Load the scores for this leader board asynchronously. Error will be nil on success.
 /// Possible reasons for error:
 /// 1. Communications problem
 /// 2. Unauthenticated player
-- (void)loadScoresWithCompletionHandler:(void(^__nullable)(NSArray<GKScore *> * __nullable scores, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadEntriesForPlayerScope:timeScope:range:completionHandler:", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0)) NS_SWIFT_DISABLE_ASYNC;
+- (void)loadScoresWithCompletionHandler:(void(^__nullable)(NSArray<GKScore *> * __nullable scores, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLeaderboard/loadEntries(for:timeScope:range:completionHandler:)`` instead.", ios(4.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0)) NS_SWIFT_DISABLE_ASYNC;
 
 /// Loads the array of GKLeaderboard for your app
 /// Possible reasons for error:
 /// 1. Communications problem
 /// 2. Unauthenticated player
 /// 3. Leaderboard not present
-+ (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("+loadLeaderboardsWithIDs:completionHandler:", ios(6.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(2.0, 7.0));
++ (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLeaderboard/loadLeaderboards(IDs:completionHandler:)`` method instead.", ios(6.0, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0));
 
 @end
 NS_ASSUME_NONNULL_END
@@ -179,9 +178,9 @@ NS_ASSUME_NONNULL_END
  
  // Asynchronously load the image. Error will be nil on success.
 #if TARGET_OS_IPHONE
-- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 7_0) __TVOS_UNAVAILABLE;
+- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.8), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #else
-- (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 7_0);
+- (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.8), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #endif
 
 @end

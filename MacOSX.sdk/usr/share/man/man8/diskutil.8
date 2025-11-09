@@ -197,12 +197,19 @@ will force-unmount the volumes (less kind to any open files; see also
 You should specify a whole disk, but all volumes of the whole disk are attempted to be unmounted even if you specify a partition.
 .\"
 .\"             -- eject --
-.It Sy eject Ar device
+.It Sy eject
+.Op Sy force
+.Ar device
 .br
 Eject a disk.  Media will become offline for the purposes of being a data store for file systems or
 being a member of constructs such as software RAID or direct data.  Additionally, removable media will
 become eligible for safe manual removal; automatically-removable media will begin its
 physical (motorized) eject sequence.
+
+The disk's volumes will first be unmounted.
+.Sy Force
+will force-unmount the volumes, as in
+.Sy unmountDisk force
 .\"
 .\"             -- mount --
 .It Sy mount Op Sy readOnly
@@ -591,8 +598,9 @@ destroying (or losing) the key (password), because this renders your data irretr
 Consider using APFS encryption (FileVault).
 .\"
 .\"             -- partitionDisk --
-.It Sy partitionDisk Ar device
+.It Sy partitionDisk
 .Op -noEFI
+.Ar device
 .Op Ar numberOfPartitions
 .Op Nm APM[Format] | MBR[Format] | GPT[Format]
 .Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...

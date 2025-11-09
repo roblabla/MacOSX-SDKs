@@ -44,7 +44,7 @@ exports:
                        _TVPMediaItemMetadataGaplessHeuristicInfo, _TVPMediaItemMetadataGaplessLastPacketsResync, 
                        _TVPMediaItemMetadataGenre, _TVPMediaItemMetadataHLSMetadataIsLoaded, 
                        _TVPMediaItemMetadataHLSProgramID, _TVPMediaItemMetadataHTTPHeaders, 
-                       _TVPMediaItemMetadataHasAttemptedPlaybackRetryDueToError, 
+                       _TVPMediaItemMetadataHapticsURLString, _TVPMediaItemMetadataHasAttemptedPlaybackRetryDueToError, 
                        _TVPMediaItemMetadataHasAudioDescriptions, _TVPMediaItemMetadataHasDolbyAtmos, 
                        _TVPMediaItemMetadataHasSDH, _TVPMediaItemMetadataHighMotionWarningDescription, 
                        _TVPMediaItemMetadataHighMotionWarningDuration, _TVPMediaItemMetadataHighMotionWarningImageURL, 

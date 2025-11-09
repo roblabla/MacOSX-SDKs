@@ -1,8 +1,8 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 131.3 -module-name ProximityReader
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 134.20 -module-name ProximityReader
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Contacts
-import CryptoKit
 import Foundation
 import OSLog
 @_exported import ProximityReader
@@ -12,8 +12,20 @@ import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-import os.log
 import os
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct StoreAndForwardBatchDeletionToken : Swift.RawRepresentable, Swift.Hashable, Swift.Sendable {
+  public let rawValue: Swift.String
+  public init(rawValue: Swift.String)
+  @available(iOS 18.4, visionOS 2.4, macCatalyst 18.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
+  public typealias RawValue = Swift.String
+}
 @available(iOS 15.4, macCatalyst 17.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -30,6 +42,30 @@ public struct PaymentCardReadResult : Swift.Identifiable, Swift.Sendable {
       get
     }
   }
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public enum CardEffectiveState : Swift.Sendable {
+    case active
+    case inactive
+    case invalid
+    case unknown
+    public static func == (a: ProximityReader.PaymentCardReadResult.CardEffectiveState, b: ProximityReader.PaymentCardReadResult.CardEffectiveState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public enum CardExpirationState : Swift.Sendable {
+    case notExpired
+    case expired
+    case invalid
+    case unknown
+    public static func == (a: ProximityReader.PaymentCardReadResult.CardExpirationState, b: ProximityReader.PaymentCardReadResult.CardExpirationState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
   public let id: Swift.String
   public let paymentCardData: Swift.String?
   public let generalCardData: Swift.String?
@@ -41,11 +77,51 @@ public struct PaymentCardReadResult : Swift.Identifiable, Swift.Sendable {
   public let pinBypassed: Swift.Bool
   @available(iOS 17.0, *)
   public let isPINFallback: Swift.Bool
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public let cardEffectiveState: ProximityReader.PaymentCardReadResult.CardEffectiveState?
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public let cardExpirationState: ProximityReader.PaymentCardReadResult.CardExpirationState?
   @available(iOS 15.4, macCatalyst 17.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @available(macOS, unavailable)
   public typealias ID = Swift.String
+}
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct StoreAndForwardBatch : Swift.Sendable, Swift.Encodable, Swift.Identifiable {
+  public let id: Swift.String
+  public let count: Swift.Int
+  public let signature: Swift.String
+  public let intermediateCertificate: [Swift.String]
+  public let leafCertificate: Swift.String
+  public let payments: [ProximityReader.StoreAndForwardBatch.StoredPaymentCardReadResult]
+  @available(iOS 18.4, visionOS 2.4, macCatalyst 18.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
+  public typealias ID = Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+extension ProximityReader.StoreAndForwardBatch {
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public struct StoredPaymentCardReadResult : Swift.Sendable, Swift.Encodable, Swift.Identifiable {
+    public let id: Swift.String
+    public let paymentCardData: Swift.String
+    public let generalCardData: Swift.String
+    public let signature: Swift.String
+    @available(iOS 18.4, visionOS 2.4, macCatalyst 18.4, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
+    public typealias ID = Swift.String
+    public func encode(to encoder: any Swift.Encoder) throws
+  }
 }
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
@@ -54,12 +130,23 @@ public struct PaymentCardReadResult : Swift.Identifiable, Swift.Sendable {
 extension ProximityReader.MobileDocumentReader {
   public struct Configuration : Swift.Hashable, Swift.Sendable {
     public let readerInstanceIdentifier: Swift.String
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDocumentReader.Configuration, b: ProximityReader.MobileDocumentReader.Configuration) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
   }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public class StoreAndForwardPaymentCardReaderSession : ProximityReader.PaymentCardReaderSession, @unchecked Swift.Sendable {
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public func decline() async throws
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public func status() async throws -> ProximityReader.StoreAndForwardStatus
+  @objc deinit
 }
 @available(iOS 15.4, macCatalyst 17.0, *)
 @available(macOS, unavailable)
@@ -117,6 +204,14 @@ public enum PaymentCardReaderError : Swift.Error, Swift.Sendable {
   @available(iOS 17.0, *)
   case accountDeactivated
   case invalidMerchant
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  case storeAndForwardNotAllowed
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  case storeAndForwardSessionExpired
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  case storeAndForwardSessionInvalidated
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  case storeAndForwardTokenIssuerChanged
   @available(iOS 18.0, macCatalyst 18.0, visionOS 2.0, *)
   case unknown(code: Swift.Int)
   public var errorDescription: Swift.String {
@@ -205,6 +300,23 @@ public class PaymentCardReader : @unchecked Swift.Sendable {
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use events instead of passing in updateHandler")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use events instead of passing in updateHandler")
   public func prepare(using token: ProximityReader.PaymentCardReader.Token, updateHandler: ((ProximityReader.PaymentCardReader.UpdateEvent) -> Swift.Void)?) async throws -> ProximityReader.PaymentCardReaderSession
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public func prepareStoreAndForward() async throws -> ProximityReader.StoreAndForwardPaymentCardReaderSession
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  public func fetchPaymentCardReaderStore() throws -> ProximityReader.PaymentCardReaderStore
+}
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct StoreAndForwardStatus : Swift.Hashable, Swift.Sendable {
+  public let readCount: Swift.Int
+  public let expiration: Foundation.Date
+  public static func == (a: ProximityReader.StoreAndForwardStatus, b: ProximityReader.StoreAndForwardStatus) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
@@ -216,8 +328,8 @@ extension ProximityReader.MobileDriversLicenseDisplayRequest {
     public static let familyName: ProximityReader.MobileDriversLicenseDisplayRequest.Element
     public static let age: ProximityReader.MobileDriversLicenseDisplayRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileDriversLicenseDisplayRequest.Element
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDisplayRequest.Element, b: ProximityReader.MobileDriversLicenseDisplayRequest.Element) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -279,8 +391,8 @@ public struct MobileNationalIDCardDisplayRequest : ProximityReader.MobileDocumen
   public var elements: [ProximityReader.MobileNationalIDCardDisplayRequest.Element]
   public var options: ProximityReader.MobileNationalIDCardDisplayRequest.Options
   public init(region: Foundation.Locale.Region, elements: [ProximityReader.MobileNationalIDCardDisplayRequest.Element] = [], options: ProximityReader.MobileNationalIDCardDisplayRequest.Options = .init())
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProximityReader.MobileNationalIDCardDisplayRequest, b: ProximityReader.MobileNationalIDCardDisplayRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -350,8 +462,10 @@ extension ProximityReader.MobileNationalIDCardDataRequest.Response {
     public let age: Swift.Int?
     public let dateOfBirth: Foundation.DateComponents?
     public let sex: ProximityReader.MobileNationalIDCardDataRequest.Response.DocumentElements.Sex?
-    public func hash(into hasher: inout Swift.Hasher)
+    @available(iOS 18.4, visionOS 2.4, *)
+    public let documentNumber: Swift.String?
     public static func == (a: ProximityReader.MobileNationalIDCardDataRequest.Response.DocumentElements, b: ProximityReader.MobileNationalIDCardDataRequest.Response.DocumentElements) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -367,8 +481,8 @@ extension ProximityReader.MobileNationalIDCardDisplayRequest {
     public static let familyName: ProximityReader.MobileNationalIDCardDisplayRequest.Element
     public static let age: ProximityReader.MobileNationalIDCardDisplayRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileNationalIDCardDisplayRequest.Element
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardDisplayRequest.Element, b: ProximityReader.MobileNationalIDCardDisplayRequest.Element) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -382,8 +496,8 @@ extension ProximityReader.MobileNationalIDCardDisplayRequest {
   public struct Options : Swift.Hashable, Swift.Sendable {
     public var validationMode: ProximityReader.MobileNationalIDCardDisplayRequest.Options.ValidationMode
     public init(validationMode: ProximityReader.MobileNationalIDCardDisplayRequest.Options.ValidationMode = .check)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardDisplayRequest.Options, b: ProximityReader.MobileNationalIDCardDisplayRequest.Options) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -417,9 +531,11 @@ extension ProximityReader.MobileNationalIDCardDataRequest {
     public static let age: ProximityReader.MobileNationalIDCardDataRequest.Element
     public static let dateOfBirth: ProximityReader.MobileNationalIDCardDataRequest.Element
     public static let sex: ProximityReader.MobileNationalIDCardDataRequest.Element
+    @available(iOS 18.4, visionOS 2.4, *)
+    public static let documentNumber: ProximityReader.MobileNationalIDCardDataRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileNationalIDCardDataRequest.Element
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardDataRequest.Element, b: ProximityReader.MobileNationalIDCardDataRequest.Element) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -435,8 +551,8 @@ public struct MobileNationalIDCardRawDataRequest : ProximityReader.MobileDocumen
   public var retainedElements: [ProximityReader.MobileNationalIDCardRawDataRequest.Element]
   public var nonRetainedElements: [ProximityReader.MobileNationalIDCardRawDataRequest.Element]
   public init(region: Foundation.Locale.Region, retainedElements: [ProximityReader.MobileNationalIDCardRawDataRequest.Element] = [], nonRetainedElements: [ProximityReader.MobileNationalIDCardRawDataRequest.Element] = [])
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProximityReader.MobileNationalIDCardRawDataRequest, b: ProximityReader.MobileNationalIDCardRawDataRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -458,8 +574,8 @@ public struct MobileNationalIDCardDataRequest : ProximityReader.MobileDocumentRe
   public var retainedElements: [ProximityReader.MobileNationalIDCardDataRequest.Element]
   public var nonRetainedElements: [ProximityReader.MobileNationalIDCardDataRequest.Element]
   public init(region: Foundation.Locale.Region, retainedElements: [ProximityReader.MobileNationalIDCardDataRequest.Element] = [], nonRetainedElements: [ProximityReader.MobileNationalIDCardDataRequest.Element] = [])
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProximityReader.MobileNationalIDCardDataRequest, b: ProximityReader.MobileNationalIDCardDataRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -510,9 +626,11 @@ extension ProximityReader.MobileNationalIDCardRawDataRequest {
     public static let dateOfBirth: ProximityReader.MobileNationalIDCardRawDataRequest.Element
     public static let sex: ProximityReader.MobileNationalIDCardRawDataRequest.Element
     public static let address: ProximityReader.MobileNationalIDCardRawDataRequest.Element
+    @available(iOS 18.4, visionOS 2.4, *)
+    public static let documentNumber: ProximityReader.MobileNationalIDCardRawDataRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileNationalIDCardRawDataRequest.Element
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardRawDataRequest.Element, b: ProximityReader.MobileNationalIDCardRawDataRequest.Element) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -526,8 +644,8 @@ extension ProximityReader.MobileNationalIDCardRawDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let responseData: Foundation.Data
     public let sessionTranscript: Foundation.Data
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardRawDataRequest.Response, b: ProximityReader.MobileNationalIDCardRawDataRequest.Response) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -540,8 +658,8 @@ extension ProximityReader.MobileNationalIDCardRawDataRequest {
 extension ProximityReader.MobileNationalIDCardDisplayRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let validationOutcome: ProximityReader.MobileNationalIDCardDisplayRequest.Response.ValidationOutcome
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardDisplayRequest.Response, b: ProximityReader.MobileNationalIDCardDisplayRequest.Response) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -554,8 +672,8 @@ extension ProximityReader.MobileNationalIDCardDisplayRequest {
 extension ProximityReader.MobileNationalIDCardDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let documentElements: ProximityReader.MobileNationalIDCardDataRequest.Response.DocumentElements
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardDataRequest.Response, b: ProximityReader.MobileNationalIDCardDataRequest.Response) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -570,8 +688,8 @@ extension ProximityReader.MobileNationalIDCardDisplayRequest.Options {
     public static let check: ProximityReader.MobileNationalIDCardDisplayRequest.Options.ValidationMode
     public static let checkMultiple: ProximityReader.MobileNationalIDCardDisplayRequest.Options.ValidationMode
     public static let confirm: ProximityReader.MobileNationalIDCardDisplayRequest.Options.ValidationMode
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileNationalIDCardDisplayRequest.Options.ValidationMode, b: ProximityReader.MobileNationalIDCardDisplayRequest.Options.ValidationMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -592,8 +710,8 @@ extension ProximityReader.MobileDriversLicenseRawDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let responseData: Foundation.Data
     public let sessionTranscript: Foundation.Data
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseRawDataRequest.Response, b: ProximityReader.MobileDriversLicenseRawDataRequest.Response) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -621,8 +739,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest {
     @available(iOS 17.2, *)
     public static let documentDHSComplianceStatus: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileDriversLicenseDataRequest.Element
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Element, b: ProximityReader.MobileDriversLicenseDataRequest.Element) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -636,8 +754,8 @@ public struct MobileDriversLicenseRawDataRequest : ProximityReader.MobileDocumen
   public var retainedElements: [ProximityReader.MobileDriversLicenseRawDataRequest.Element]
   public var nonRetainedElements: [ProximityReader.MobileDriversLicenseRawDataRequest.Element]
   public init(retainedElements: [ProximityReader.MobileDriversLicenseRawDataRequest.Element] = [], nonRetainedElements: [ProximityReader.MobileDriversLicenseRawDataRequest.Element] = [])
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProximityReader.MobileDriversLicenseRawDataRequest, b: ProximityReader.MobileDriversLicenseRawDataRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -658,8 +776,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentEleme
     public let name: Swift.String?
     public let jurisdiction: Swift.String?
     public let isoCountryCode: Swift.String?
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.IssuingAuthority, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.IssuingAuthority) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -673,8 +791,8 @@ extension ProximityReader.MobileDocumentReader {
   public struct Token : Swift.Hashable, Swift.Sendable {
     public let tokenString: Swift.String
     public init(_ tokenString: Swift.String)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDocumentReader.Token, b: ProximityReader.MobileDocumentReader.Token) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -801,8 +919,8 @@ extension ProximityReader.MobileDriversLicenseRawDataRequest {
     @available(iOS 17.2, *)
     public static let documentDHSComplianceStatus: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileDriversLicenseRawDataRequest.Element
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseRawDataRequest.Element, b: ProximityReader.MobileDriversLicenseRawDataRequest.Element) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -817,8 +935,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentEleme
     public let vehicleClass: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleClass?
     public let vehicleRestrictions: [ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleRestriction]
     public let vehicleEndorsements: [ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleEndorsement]
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -834,8 +952,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentEleme
     public let description: Swift.String
     public let issueDate: Foundation.DateComponents?
     public let expirationDate: Foundation.DateComponents?
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleClass, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleClass) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -849,8 +967,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentEleme
   public struct VehicleRestriction : Swift.Hashable, Swift.Sendable {
     public let code: Swift.String?
     public let description: Swift.String
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleRestriction, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleRestriction) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -864,8 +982,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentEleme
   public struct VehicleEndorsement : Swift.Hashable, Swift.Sendable {
     public let code: Swift.String?
     public let description: Swift.String
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleEndorsement, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege.VehicleEndorsement) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -924,8 +1042,8 @@ public struct MobileDriversLicenseDisplayRequest : ProximityReader.MobileDocumen
   public var elements: [ProximityReader.MobileDriversLicenseDisplayRequest.Element]
   public var options: ProximityReader.MobileDriversLicenseDisplayRequest.Options
   public init(elements: [ProximityReader.MobileDriversLicenseDisplayRequest.Element] = [], options: ProximityReader.MobileDriversLicenseDisplayRequest.Options = .init())
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProximityReader.MobileDriversLicenseDisplayRequest, b: ProximityReader.MobileDriversLicenseDisplayRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -945,6 +1063,8 @@ public class PaymentCardReaderSession : @unchecked Swift.Sendable {
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use ObjectIdentifier instead")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use ObjectIdentifier instead")
   final public let id: Swift.String
+  @available(iOS 18.4, macCatalyst 18.4, *)
+  final public let currentOSVersionDeprecationDate: Foundation.Date?
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use PaymentCardReader.Event")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use PaymentCardReader.Event")
   public enum Event : Swift.Sendable {
@@ -999,6 +1119,12 @@ public class PaymentCardReaderSession : @unchecked Swift.Sendable {
     case pinCancelled
     @available(iOS 16.0, macCatalyst 17.0, *)
     case pinNotAllowed
+    @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+    case storeAndForwardDeclineFailed
+    @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+    case storeAndForwardResultNotFound
+    @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+    case unknown(code: Swift.Int)
     public var errorDescription: Swift.String {
       get
     }
@@ -1049,8 +1175,8 @@ extension ProximityReader.MobileDriversLicenseDisplayRequest {
   public struct Options : Swift.Hashable, Swift.Sendable {
     public var validationMode: ProximityReader.MobileDriversLicenseDisplayRequest.Options.ValidationMode
     public init(validationMode: ProximityReader.MobileDriversLicenseDisplayRequest.Options.ValidationMode = .check)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDisplayRequest.Options, b: ProximityReader.MobileDriversLicenseDisplayRequest.Options) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1063,8 +1189,8 @@ extension ProximityReader.MobileDriversLicenseDisplayRequest {
 extension ProximityReader.MobileDriversLicenseDisplayRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let validationOutcome: ProximityReader.MobileDriversLicenseDisplayRequest.Response.ValidationOutcome
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDisplayRequest.Response, b: ProximityReader.MobileDriversLicenseDisplayRequest.Response) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1110,6 +1236,35 @@ final public class MobileDocumentReader : Swift.Sendable {
   final public func prepare(using token: ProximityReader.MobileDocumentReader.Token? = nil) async throws -> ProximityReader.MobileDocumentReaderSession
   @objc deinit
 }
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct PaymentCardReaderStore : Swift.Sendable {
+  public func fetchStoredPaymentCardReadResultCount() async throws -> Swift.Int
+  public func fetchStoredPaymentCardReadResultBatch(size: Swift.Int = 0) async throws -> ProximityReader.StoreAndForwardBatch
+  public func resetBatchState() async throws
+  public func resolveBatch(batchDeletionToken: ProximityReader.StoreAndForwardBatchDeletionToken) async throws -> Swift.Int
+}
+extension ProximityReader.PaymentCardReaderStore {
+  @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public enum StoreError : Swift.Error {
+    case notAllowed
+    case busy
+    case unknown(code: Swift.Int)
+    case networkError
+    case passcodeDisabled
+    case storeAndForwardResultsNotFound
+    case storeAndForwardBatchNotFound
+    case storeAndForwardBatchSizeInvalid
+    case storeAndForwardBatchAlreadyExists
+    case storeAndForwardDeletionTokenInvalid
+    case storeAndForwardDeletionTokenExpired
+  }
+}
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -1119,8 +1274,8 @@ extension ProximityReader.MobileDriversLicenseDisplayRequest.Options {
     public static let check: ProximityReader.MobileDriversLicenseDisplayRequest.Options.ValidationMode
     public static let checkMultiple: ProximityReader.MobileDriversLicenseDisplayRequest.Options.ValidationMode
     public static let confirm: ProximityReader.MobileDriversLicenseDisplayRequest.Options.ValidationMode
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDisplayRequest.Options.ValidationMode, b: ProximityReader.MobileDriversLicenseDisplayRequest.Options.ValidationMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1136,8 +1291,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentEleme
     public let issueDate: Foundation.DateComponents?
     public let expirationDate: Foundation.DateComponents?
     public let codes: [ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DrivingPrivilege.Code]
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DrivingPrivilege, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DrivingPrivilege) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1152,8 +1307,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentEleme
     public let code: Swift.String
     public let sign: Swift.String?
     public let value: Swift.String?
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DrivingPrivilege.Code, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DrivingPrivilege.Code) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1167,8 +1322,8 @@ public struct MobileDriversLicenseDataRequest : ProximityReader.MobileDocumentRe
   public var retainedElements: [ProximityReader.MobileDriversLicenseDataRequest.Element]
   public var nonRetainedElements: [ProximityReader.MobileDriversLicenseDataRequest.Element]
   public init(retainedElements: [ProximityReader.MobileDriversLicenseDataRequest.Element] = [], nonRetainedElements: [ProximityReader.MobileDriversLicenseDataRequest.Element] = [])
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProximityReader.MobileDriversLicenseDataRequest, b: ProximityReader.MobileDriversLicenseDataRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1187,8 +1342,8 @@ extension ProximityReader.MobileDocumentRequest where Self == ProximityReader.Mo
 extension ProximityReader.MobileDriversLicenseDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let documentElements: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response, b: ProximityReader.MobileDriversLicenseDataRequest.Response) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1218,8 +1373,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response {
     public let documentExpirationDate: Foundation.DateComponents?
     @available(iOS 17.2, *)
     public let documentDHSComplianceStatus: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DHSComplianceStatus?
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1235,6 +1390,26 @@ extension ProximityReader.PaymentCardReadResult.ReadOutcome : Swift.Equatable {}
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension ProximityReader.PaymentCardReadResult.ReadOutcome : Swift.Hashable {}
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension ProximityReader.PaymentCardReadResult.CardEffectiveState : Swift.Equatable {}
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension ProximityReader.PaymentCardReadResult.CardEffectiveState : Swift.Hashable {}
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension ProximityReader.PaymentCardReadResult.CardExpirationState : Swift.Equatable {}
+@available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension ProximityReader.PaymentCardReadResult.CardExpirationState : Swift.Hashable {}
 @available(iOS 15.4, macCatalyst 17.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

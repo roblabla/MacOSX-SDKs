@@ -239,9 +239,15 @@ which is a number interpreted based on its prefix:
 .It Sy @
 event timestamp
 .It Sy +
-seconds since the start of tracing
+time since the start of tracing, with a suffix indicating the units
+.Po
+.Ql s ,
+.Ql ms ,
+or
+.Ql us
+.Pc
 .It Sy -
-seconds before the end of tracing
+time before the end of tracing, with a suffix indicating the units
 .El
 .It Fl Fl to Ar time-spec
 Removes all events after the provided

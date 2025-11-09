@@ -8,29 +8,7 @@ reexported-libraries:
     libraries:       [ '/System/Library/Frameworks/BrowserEngineCore.framework/Versions/A/BrowserEngineCore' ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s16BrowserEngineKit15URLWithBookmarkCMa', '_$s16BrowserEngineKit15URLWithBookmarkCMn', 
-                       '_$s16BrowserEngineKit15URLWithBookmarkCMo', '_$s16BrowserEngineKit15URLWithBookmarkCN', 
-                       '_$s16BrowserEngineKit15URLWithBookmarkCfD', '_$s16BrowserEngineKit16DownloadProgressC11beginLegacyAA15URLWithBookmarkCSgyYaKFTj', 
-                       '_$s16BrowserEngineKit16DownloadProgressC11beginLegacyAA15URLWithBookmarkCSgyYaKFTjTu', 
-                       '_$s16BrowserEngineKit16DownloadProgressC11beginLegacyAA15URLWithBookmarkCSgyYaKFTq', 
-                       '_$s16BrowserEngineKit16DownloadProgressC12resumeLegacy14placeholderURLy10Foundation0I0V_tYaKFTj', 
-                       '_$s16BrowserEngineKit16DownloadProgressC12resumeLegacy14placeholderURLy10Foundation0I0V_tYaKFTjTu', 
-                       '_$s16BrowserEngineKit16DownloadProgressC12resumeLegacy14placeholderURLy10Foundation0I0V_tYaKFTq', 
-                       '_$s16BrowserEngineKit16DownloadProgressC17setUsePlaceholder_4type18fileCreatedHandlerySb_22UniformTypeIdentifiers6UTTypeVSgyAA15URLWithBookmarkCSgYbcSgtFTj', 
-                       '_$s16BrowserEngineKit16DownloadProgressC17setUsePlaceholder_4type18fileCreatedHandlerySb_22UniformTypeIdentifiers6UTTypeVSgyAA15URLWithBookmarkCSgYbcSgtFTq', 
-                       '_$s16BrowserEngineKit16DownloadProgressC8progressSo10NSProgressCvgTj', 
-                       '_$s16BrowserEngineKit16DownloadProgressC8progressSo10NSProgressCvgTq', 
-                       '_$s16BrowserEngineKit16DownloadProgressC8progressSo10NSProgressCvpMV', 
-                       '_$s16BrowserEngineKit16DownloadProgressC9sourceURL011destinationG008observedE023liveActivityAccessTokenAC10Foundation0G0V_AJSo10NSProgressCAH4DataVtcfC', 
-                       '_$s16BrowserEngineKit16DownloadProgressC9sourceURL011destinationG008observedE023liveActivityAccessTokenAC10Foundation0G0V_AJSo10NSProgressCAH4DataVtcfc', 
-                       '_$s16BrowserEngineKit16DownloadProgressC9sourceURL011destinationG08progress23liveActivityAccessTokenAC10Foundation0G0V_AJSo10NSProgressCAH4DataVtcfC', 
-                       '_$s16BrowserEngineKit16DownloadProgressC9sourceURL011destinationG08progress23liveActivityAccessTokenAC10Foundation0G0V_AJSo10NSProgressCAH4DataVtcfCTj', 
-                       '_$s16BrowserEngineKit16DownloadProgressC9sourceURL011destinationG08progress23liveActivityAccessTokenAC10Foundation0G0V_AJSo10NSProgressCAH4DataVtcfCTq', 
-                       '_$s16BrowserEngineKit16DownloadProgressC9sourceURL011destinationG08progress23liveActivityAccessTokenAC10Foundation0G0V_AJSo10NSProgressCAH4DataVtcfc', 
-                       '_$s16BrowserEngineKit16DownloadProgressCMa', '_$s16BrowserEngineKit16DownloadProgressCMn', 
-                       '_$s16BrowserEngineKit16DownloadProgressCMo', '_$s16BrowserEngineKit16DownloadProgressCMu', 
-                       '_$s16BrowserEngineKit16DownloadProgressCN', '_$s16BrowserEngineKit16DownloadProgressCfD', 
-                       '_$s16BrowserEngineKit16MediaEnvironmentV17xpcRepresentationACSo03OS_F7_object_p_tKcfC', 
+    symbols:         [ '_$s16BrowserEngineKit16MediaEnvironmentV17xpcRepresentationACSo03OS_F7_object_p_tKcfC', 
                        '_$s16BrowserEngineKit16MediaEnvironmentV18makeCaptureSessionSo09AVCaptureH0CyKF', 
                        '_$s16BrowserEngineKit16MediaEnvironmentV23createXPCRepresentationSo13OS_xpc_object_pyF', 
                        '_$s16BrowserEngineKit16MediaEnvironmentV7suspendyyKF', '_$s16BrowserEngineKit16MediaEnvironmentV7webPageAC10Foundation3URLV_tcfC', 
@@ -49,6 +27,7 @@ exports:
                        '_$s16BrowserEngineKit16RenderingProcessVMa', '_$s16BrowserEngineKit16RenderingProcessVMn', 
                        '_$s16BrowserEngineKit16RenderingProcessVN', '_$s16BrowserEngineKit16_LockdownVersionO1loiySbAC_ACtFZ', 
                        '_$s16BrowserEngineKit16_LockdownVersionO3oneyA2CmFWC', '_$s16BrowserEngineKit16_LockdownVersionO8allCasesSayACGvgZ', 
+                       '_$s16BrowserEngineKit16_LockdownVersionO8allCasesSayACGvpZMV', 
                        '_$s16BrowserEngineKit16_LockdownVersionO8rawValueACSgSS_tcfC', 
                        '_$s16BrowserEngineKit16_LockdownVersionO8rawValueSSvg', '_$s16BrowserEngineKit16_LockdownVersionO8rawValueSSvpMV', 
                        '_$s16BrowserEngineKit16_LockdownVersionOMa', '_$s16BrowserEngineKit16_LockdownVersionOMn', 
@@ -200,6 +179,7 @@ exports:
                        '_$s16BrowserEngineKit25RestrictedSandboxRevisionO2eeoiySbAC_ACtFZ', 
                        '_$s16BrowserEngineKit25RestrictedSandboxRevisionO4hash4intoys6HasherVz_tF', 
                        '_$s16BrowserEngineKit25RestrictedSandboxRevisionO8allCasesSayACGvgZ', 
+                       '_$s16BrowserEngineKit25RestrictedSandboxRevisionO8allCasesSayACGvpZMV', 
                        '_$s16BrowserEngineKit25RestrictedSandboxRevisionO9hashValueSivg', 
                        '_$s16BrowserEngineKit25RestrictedSandboxRevisionO9hashValueSivpMV', 
                        '_$s16BrowserEngineKit25RestrictedSandboxRevisionO9revision1yA2CmFWC', 
@@ -235,8 +215,7 @@ exports:
                        '_$s16BrowserEngineKit32WebContentExtensionConfigurationVN', 
                        '_$s17BrowserEngineCore0aB11EntitlementO0aB3KitE5check10auditTokenSbSo0G8_token_taSg_tF' ]
     objc-classes:    [ BEAccessibilityTextMarker, BEAccessibilityTextMarkerRange, 
-                       BEDownloadMonitor, BEDownloadMonitorLocation, BEDownloadProgress, 
-                       BENetworkingProcess, BEProcessCapability, BERenderingProcess, 
-                       BETextAlternatives, BETextSuggestion, BEURLWithBookmark, BEWebAppManifest, 
-                       BEWebContentProcess, _TtC16BrowserEngineKit18BEMediaEnvironment ]
+                       BEDownloadMonitor, BEDownloadMonitorLocation, BENetworkingProcess, 
+                       BEProcessCapability, BERenderingProcess, BETextAlternatives, 
+                       BETextSuggestion, BEWebAppManifest, BEWebContentProcess, _TtC16BrowserEngineKit18BEMediaEnvironment ]
 ...

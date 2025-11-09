@@ -8,22 +8,27 @@
 #import <Foundation/Foundation.h>
 #import <GameController/GCExtern.h>
 
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 __attribute__((objc_non_runtime_protocol)) NS_REFINED_FOR_SWIFT
 @protocol GCPhysicalInputElementName
 @end
 
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 __attribute__((objc_non_runtime_protocol)) NS_REFINED_FOR_SWIFT
 @protocol GCButtonElementName <GCPhysicalInputElementName>
 @end
 
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 __attribute__((objc_non_runtime_protocol)) NS_REFINED_FOR_SWIFT
 @protocol GCAxisElementName <GCPhysicalInputElementName>
 @end
 
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 __attribute__((objc_non_runtime_protocol)) NS_REFINED_FOR_SWIFT
 @protocol GCSwitchElementName <GCPhysicalInputElementName>
 @end
 
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 __attribute__((objc_non_runtime_protocol)) NS_REFINED_FOR_SWIFT
 @protocol GCDirectionPadElementName <GCPhysicalInputElementName>
 @end
@@ -45,34 +50,34 @@ A set of commonly used strings that can be used to access controller buttons
 @see GCPhysicalInputProfile.h
 */
 
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonA API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(a);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonB API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(b);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonX API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(x);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonY API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(y);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonA API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(a);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonB API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(b);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonX API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(x);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonY API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(y);
 
-GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputDirectionPad API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(directionPad);
-GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputLeftThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputRightThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputDirectionPad API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(directionPad);
+GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputLeftThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputRightThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /*
  * Shoulder Buttons
  */
 
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  *  Identifies the button element located at the top-left/right of a gamepad,
  *  between the left/right shoulder button and the gamepad's horizontal center.
  */
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
 
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /*
  * Back Buttons
@@ -101,13 +106,13 @@ GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightTrigger API_AVAILABLE(macos(
  */
 
 /* Note: The `position` argument begins at index 0. */
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputBackLeftButton(NSInteger position) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputBackRightButton(NSInteger position) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputBackLeftButton(NSInteger position) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputBackRightButton(NSInteger position) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
 
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonHome API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonMenu API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonOptions API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonShare API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonHome API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonMenu API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonOptions API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonShare API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
 A set of strings commonly used to access Xbox buttons
@@ -117,10 +122,10 @@ A set of strings commonly used to access Xbox buttons
 @see GCController.h
 @see GCPhysicalInputProfile.h
 */
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputXboxPaddleOne API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputXboxPaddleTwo API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputXboxPaddleThree API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputXboxPaddleFour API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputXboxPaddleOne API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputXboxPaddleTwo API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputXboxPaddleThree API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputXboxPaddleFour API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
 A set of strings commonly used to access DualShock buttons
@@ -130,20 +135,20 @@ A set of strings commonly used to access DualShock buttons
 @see GCController.h
 @see GCPhysicalInputProfile.h
 */
-GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputDualShockTouchpadOne API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputDualShockTouchpadTwo API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputDualShockTouchpadButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputDualShockTouchpadOne API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputDualShockTouchpadTwo API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputDualShockTouchpadButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
 A set of strings commonly used by racing wheels.
 */
-GAMECONTROLLER_EXTERN GCInputAxisName GCInputSteeringWheel API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
-GAMECONTROLLER_EXTERN GCInputElementName GCInputShifter API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputPedalAccelerator API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputPedalBrake API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputPedalClutch API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftPaddle API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightPaddle API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT GCInputAxisName GCInputSteeringWheel API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT GCInputElementName GCInputShifter API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputPedalAccelerator API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputPedalBrake API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputPedalClutch API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftPaddle API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightPaddle API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos);
 
 /// Gets the name of an arcade button at a certain position.
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputArcadeButtonName(NSInteger row, NSInteger column) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputArcadeButtonName(NSInteger row, NSInteger column) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 377.2.9 -module-name _DeviceActivity_SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 377.4.6 -module-name _DeviceActivity_SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import DeviceActivity
 import ExtensionFoundation
 import ExtensionKit
@@ -171,17 +172,10 @@ public struct DeviceActivityResults<Element> : _Concurrency.AsyncSequence {
     @available(watchOS, unavailable)
     @available(macOS, unavailable)
     public typealias Element = IteratorElement
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @available(watchOS, unavailable, introduced: 11.0)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    @available(watchOS, unavailable, introduced: 11.0)
-    public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-    #endif
     @objc deinit
   }
   @available(iOS 16.0, *)
@@ -189,17 +183,10 @@ public struct DeviceActivityResults<Element> : _Concurrency.AsyncSequence {
   @available(watchOS, unavailable)
   @available(macOS, unavailable)
   public typealias AsyncIterator = _DeviceActivity_SwiftUI.DeviceActivityResults<Element>.Iterator<Element>
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
   @available(tvOS, unavailable, introduced: 18.0)
   @available(watchOS, unavailable, introduced: 11.0)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-  #else
-  @available(iOS 18.0, visionOS 2.0, macOS 15.0, *)
-  @available(tvOS, unavailable, introduced: 18.0)
-  @available(watchOS, unavailable, introduced: 11.0)
-  public typealias __AsyncSequence_Failure = Swift.Never
-  #endif
 }
 @available(iOS 16.0, *)
 @available(macOS, unavailable)

@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// run alongside the Writing Tools animations.
 ///
 /// When Writing Tools replaces text in one of your context objects,
-/// it provides an `NS/UIWritingToolsAnimationParameters` object for
+/// it provides a `UIWritingToolsCoordinator.AnimationParameters` object for
 /// you to use to configure any additional animations. During a Writing
 /// Tools session, you hide the text under evaluation and provide a
 /// targeted preview of your content. Writing Tools animations changes
@@ -25,12 +25,12 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// removal of text in other parts of your view. Use this object to
 /// configure those animations.
 ///
-/// You don’t create an `NS/UIWritingToolsCoordinator.AnimationParameters`
+/// You don’t create a `UIWritingToolsCoordinator.AnimationParameters`
 /// object directly. Instead, the system creates one and passes it to the
 ///``UIWritingToolsCoordinator/writingToolsCoordinator(_:replaceRange:inContext:proposedText:reason:animationParameters:completion:)``
 ///method of your ``UIWritingToolsCoordinatorDelegate`` object. Use that
 ///object to specify the blocks to run during and after the system animations.
-UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_SENDABLE NS_SWIFT_NAME(UIWritingToolsCoordinator.AnimationParameters)
+UIKIT_EXTERN API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_SENDABLE NS_SWIFT_NAME(UIWritingToolsCoordinator.AnimationParameters)
 @interface UIWritingToolsCoordinatorAnimationParameters : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 

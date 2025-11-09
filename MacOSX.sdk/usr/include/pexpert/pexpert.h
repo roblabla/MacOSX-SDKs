@@ -420,8 +420,31 @@ void * PE_get_kc_vp(kc_kind_t type);
 void PE_reset_all_kc_vp(void);
 
 
+/*!
+ * @function PE_init_socd_client
+ *
+ * @brief
+ * Initialize the SOCD client mechanism, used for Xnu to contribute data to the SOCD buffers
+ * managed by the SMC in it's SRAM.
+ */
 extern vm_size_t PE_init_socd_client(void);
-extern void PE_write_socd_client_buffer(vm_offset_t offset, const void *buff, vm_size_t size);
+
+
+/*!
+ * @function PE_read_socd_client_buffer
+ *
+ * @brief
+ * read data from the SOCD client buffer in SMC SRAM.
+ */
+extern void PE_read_socd_client_buffer(vm_offset_t offset, void *out_buff, vm_size_t size);
+
+/*!
+ * @function PE_write_socd_client_buffer
+ *
+ * @brief
+ * Write data to the SOCD client buffer in SMC SRAM
+ */
+extern void PE_write_socd_client_buffer(vm_offset_t offset, const void *in_buff, vm_size_t size);
 
 __END_DECLS
 

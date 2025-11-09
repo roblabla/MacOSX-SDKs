@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature IsolatedAny -enable-experimental-feature ImplicitOpenExistentials -enable-experimental-feature InferSendableFromCaptures -enable-experimental-feature IsolatedAny -enable-experimental-feature ImplicitOpenExistentials -enable-experimental-feature InferSendableFromCaptures -package-name com.apple.TipKit -target-min-inlining-version min -enable-upcoming-feature ExistentialAny -user-module-version 92.2.6 -module-name TipKit
+// swift-compiler-version: Apple Swift version 6.1 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature IsolatedAny -enable-experimental-feature IsolatedAny -package-name com.apple.TipKit -target-min-inlining-version min -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature ExistentialAny -user-module-version 92.4.19 -module-name TipKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Foundation
 import Swift
 @_exported import SwiftUI
@@ -65,9 +66,9 @@ extension TipKit.Tips {
     public static func days(_ value: Swift.Int) -> TipKit.Tips.DonationTimeRange
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func weeks(_ value: Swift.Int) -> TipKit.Tips.DonationTimeRange
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: TipKit.Tips.DonationTimeRange, b: TipKit.Tips.DonationTimeRange) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -103,15 +104,9 @@ extension TipKit.Tips.Event {
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   public func sendDonation(_ donation: DonationInfo, _ completion: (@Sendable () -> Swift.Void)? = nil)
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) public protocol EventPredicateExpression<Output> : Foundation.PredicateExpression {
 }
-#else
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
-@_documentation(visibility: private) public protocol EventPredicateExpression : Foundation.PredicateExpression {
-}
-#endif
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions.Equal : TipKit.EventPredicateExpression where LHS : TipKit.EventPredicateExpression, RHS : TipKit.EventPredicateExpression {
 }
@@ -184,8 +179,8 @@ extension Foundation.PredicateExpressions {
     case greaterThan
     case greaterThanOrEqual
     public static func == (a: Foundation.PredicateExpressions.DonationFilterOperator, b: Foundation.PredicateExpressions.DonationFilterOperator) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -235,10 +230,8 @@ extension TipKit.Tips.ParameterOption {
     get
   }
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) @attached(accessor, names: named(get), named(set)) @attached(peer, names: prefixed(`$`)) public macro Parameter(_ options: TipKit.Tips.ParameterOption...) = #externalMacro(module: "TipKitMacros", type: "ParameterMacro")
-#endif
 extension TipKit.Tips {
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   public struct ParameterOption : Swift.Sendable {
@@ -253,14 +246,10 @@ extension TipKit.Tips {
     @_documentation(visibility: private) public init<Value>(_ parameter: TipKit.Tips.Parameter<Value>, _ parameterBuilder: (Foundation.PredicateExpressions.Variable<Value>) -> any Foundation.StandardPredicateExpression<Swift.Bool>) where Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Sendable
   }
 }
-#if compiler(>=5.3) && $Macros && $FreestandingExpressionMacros
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) @freestanding(expression) public macro Rule<Donation>(_ event: TipKit.Tips.Event<Donation>, _ body: (TipKit.Tips.Event<Donation>) -> Swift.Bool) -> TipKit.Tips.Rule = #externalMacro(module: "TipKitMacros", type: "EventRuleMacro") where Donation : Swift.Decodable, Donation : Swift.Encodable, Donation : Swift.Sendable
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingExpressionMacros
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) @freestanding(expression) public macro Rule<Value>(_ parameter: TipKit.Tips.Parameter<Value>, _ body: (Value) -> Swift.Bool) -> TipKit.Tips.Rule = #externalMacro(module: "TipKitMacros", type: "ParameterRuleMacro") where Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Sendable
-#endif
 extension TipKit.Tips {
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @_functionBuilder public struct RuleBuilder {
@@ -367,7 +356,7 @@ extension TipKit.Tips {
     @usableFromInline
     internal func with(index: Swift.Int) -> TipKit.Tips.Action
     @usableFromInline
-    internal func with(viewHandler: @escaping (TipKit.Tips.Action) -> Swift.Void) -> TipKit.Tips.Action
+    internal func with(index: Swift.Int, viewHandler: ((TipKit.Tips.Action) -> Swift.Void)? = nil) -> TipKit.Tips.Action
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
     public typealias ID = Swift.String
   }
@@ -538,8 +527,8 @@ extension TipKit.Tips {
     case available
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     case invalidated(TipKit.Tips.InvalidationReason)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: TipKit.Tips.Status, b: TipKit.Tips.Status) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -654,8 +643,8 @@ public struct TipKitError : Swift.Error, Foundation.LocalizedError, Swift.Hashab
   public var errorDescription: Swift.String? {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: TipKit.TipKitError, b: TipKit.TipKitError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -707,13 +696,19 @@ extension SwiftUICore.View {
   
 }
 extension SwiftUICore.View {
+  @available(macOS 15.4, iOS 18.4, macCatalyst 18.4, tvOS 18.4, visionOS 2.4, *)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor @preconcurrency public func popoverTip(_ tip: (any TipKit.Tip)?, arrowEdge: SwiftUICore.Edge? = nil, action: @escaping (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View
+  
+}
+extension SwiftUICore.View {
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, *)
   @available(watchOS, unavailable)
-  @_Concurrency.MainActor @preconcurrency public func popoverTip(_ tip: (any TipKit.Tip)?, arrowEdge: SwiftUICore.Edge = .top, action: @escaping (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View
+  @_disfavoredOverload @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency public func popoverTip(_ tip: (any TipKit.Tip)?, arrowEdge: SwiftUICore.Edge = .top, action: @escaping (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View
   
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.1, visionOS 1.0, *)
   @available(watchOS, unavailable)
-  @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency public func popoverTip<Content>(_ tip: Content, arrowEdge: SwiftUICore.Edge = .top, action: @escaping (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View where Content : TipKit.Tip
+  @_disfavoredOverload @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency public func popoverTip<Content>(_ tip: Content, arrowEdge: SwiftUICore.Edge = .top, action: @escaping (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View where Content : TipKit.Tip
   
   @available(tvOS 17.0, *)
   @available(iOS, unavailable)
@@ -978,11 +973,11 @@ extension TipKit.Tips {
   @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
   @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc override final public func loadView()
   @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
+  @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLoad()
+  @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
   @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLayoutSubviews()
   @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
   @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc override final public func viewWillAppear(_ animated: Swift.Bool)
-  @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
-  @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit

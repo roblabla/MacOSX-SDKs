@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMIDI -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 6 -module-name CoreMIDI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMIDI -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 6 -module-name CoreMIDI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import CoreMIDI
 import Foundation
 import Swift
@@ -92,21 +93,12 @@ extension CoreMIDI.UnsafeMutableMIDIEventPacketPointer : Swift.Sequence {
   @available(macOS 11.0, iOS 14.0, *)
   public func makeIterator() -> CoreMIDI.MIDIEventPacket.WordSequence.Iterator
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIEventPacket {
   @available(macOS 11.0, iOS 14.0, *)
   public func sequence() -> CoreMIDI.MIDIEventPacket.WordSequence
   @available(macOS 11.0, iOS 14.0, *)
   public func words() -> CoreMIDI.MIDIEventPacket.WordCollection
 }
-#else
-extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIEventPacket {
-  @available(macOS 11.0, iOS 14.0, *)
-  public func sequence() -> CoreMIDI.MIDIEventPacket.WordSequence
-  @available(macOS 11.0, iOS 14.0, *)
-  public func words() -> CoreMIDI.MIDIEventPacket.WordCollection
-}
-#endif
 extension CoreMIDI.MIDIEventPacket {
   @available(macOS 11.0, iOS 14.0, *)
   public class Builder {
@@ -127,17 +119,10 @@ extension CoreMIDI.MIDIEventPacket {
     public func withUnsafeMutableMIDIEventPacketPointer<Result>(_ body: (inout CoreMIDI.UnsafeMutableMIDIEventPacketPointer) -> Result) -> Result
   }
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIEventList {
   @available(macOS 11.0, iOS 14.0, *)
   public func unsafeSequence() -> CoreMIDI.MIDIEventList.UnsafeSequence
 }
-#else
-extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIEventList {
-  @available(macOS 11.0, iOS 14.0, *)
-  public func unsafeSequence() -> CoreMIDI.MIDIEventList.UnsafeSequence
-}
-#endif
 extension CoreMIDI.MIDIEventList {
   @available(macOS 11.0, iOS 14.0, *)
   public static func sizeInBytes(pktList: Swift.UnsafePointer<CoreMIDI.MIDIEventList>) -> Swift.Int
@@ -282,21 +267,12 @@ extension CoreMIDI.UnsafeMutableMIDIPacketPointer : Swift.Sequence {
   @available(macOS 10.15, iOS 13.0, *)
   public func makeIterator() -> CoreMIDI.MIDIPacket.ByteSequence.Iterator
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIPacket {
   @available(macOS 10.15, iOS 13.0, *)
   public func sequence() -> CoreMIDI.MIDIPacket.ByteSequence
   @available(macOS 10.15, iOS 13.0, *)
   public func bytes() -> CoreMIDI.MIDIPacket.ByteCollection
 }
-#else
-extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIPacket {
-  @available(macOS 10.15, iOS 13.0, *)
-  public func sequence() -> CoreMIDI.MIDIPacket.ByteSequence
-  @available(macOS 10.15, iOS 13.0, *)
-  public func bytes() -> CoreMIDI.MIDIPacket.ByteCollection
-}
-#endif
 extension CoreMIDI.MIDIPacket {
   @available(macOS 10.15, iOS 13.0, *)
   public class Builder {
@@ -317,17 +293,10 @@ extension CoreMIDI.MIDIPacket {
     public func withUnsafeMutableMIDIPacketPointer<Result>(_ body: (inout CoreMIDI.UnsafeMutableMIDIPacketPointer) -> Result) -> Result
   }
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIPacketList {
   @available(macOS 10.15, iOS 13.0, *)
   public func unsafeSequence() -> CoreMIDI.MIDIPacketList.UnsafeSequence
 }
-#else
-extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIPacketList {
-  @available(macOS 10.15, iOS 13.0, *)
-  public func unsafeSequence() -> CoreMIDI.MIDIPacketList.UnsafeSequence
-}
-#endif
 extension CoreMIDI.MIDIPacketList {
   @available(macOS 10.15, iOS 13.0, *)
   public static func sizeInBytes(pktList: Swift.UnsafePointer<CoreMIDI.MIDIPacketList>) -> Swift.Int

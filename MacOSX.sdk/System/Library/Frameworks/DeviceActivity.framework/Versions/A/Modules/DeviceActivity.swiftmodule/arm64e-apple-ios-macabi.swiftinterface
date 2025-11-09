@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 377.2.9 -module-name DeviceActivity
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 377.4.6 -module-name DeviceActivity
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Foundation
 import ManagedSettings
 import Swift
@@ -179,8 +180,8 @@ extension DeviceActivity.DeviceActivityData {
     public var longestActivity: Foundation.DateInterval?
     public var firstPickup: Foundation.Date?
     public var totalPickupsWithoutApplicationActivity: Swift.Int
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityData.ActivitySegment, b: DeviceActivity.DeviceActivityData.ActivitySegment) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -196,8 +197,8 @@ extension DeviceActivity.DeviceActivityData {
     public var totalActivityDuration: Foundation.TimeInterval
     public var numberOfPickups: Swift.Int
     public var numberOfNotifications: Swift.Int
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityData.ApplicationActivity, b: DeviceActivity.DeviceActivityData.ApplicationActivity) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -211,8 +212,8 @@ extension DeviceActivity.DeviceActivityData {
   public struct CategoryActivity : Swift.Hashable {
     public var category: ManagedSettings.ActivityCategory
     public var totalActivityDuration: Foundation.TimeInterval
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityData.CategoryActivity, b: DeviceActivity.DeviceActivityData.CategoryActivity) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -285,8 +286,8 @@ extension DeviceActivity.DeviceActivityData {
   public struct WebDomainActivity : Swift.Hashable {
     public var webDomain: ManagedSettings.WebDomain
     public var totalActivityDuration: Foundation.TimeInterval
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityData.WebDomainActivity, b: DeviceActivity.DeviceActivityData.WebDomainActivity) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -313,8 +314,8 @@ public struct DeviceActivityFilter : Swift.Equatable {
   public struct Users : Swift.Hashable {
     public static let children: DeviceActivity.DeviceActivityFilter.Users
     public static let all: DeviceActivity.DeviceActivityFilter.Users
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityFilter.Users, b: DeviceActivity.DeviceActivityFilter.Users) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -322,8 +323,8 @@ public struct DeviceActivityFilter : Swift.Equatable {
   public struct Devices : Swift.Hashable {
     public static let all: DeviceActivity.DeviceActivityFilter.Devices
     public init(_ models: Swift.Set<DeviceActivity.DeviceActivityData.Device.Model>)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityFilter.Devices, b: DeviceActivity.DeviceActivityFilter.Devices) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKitDefines.h>
+#import <UIKit/UIDropInteraction.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol UITabBarControllerSidebarDelegate, UIContentConfiguration;
 @class UITabSidebarScrollTarget, UITab, UITabBarController, UIView;
-@class UISwipeActionsConfiguration, UIContextMenuConfiguration;
+@class UISwipeActionsConfiguration, UIContextMenuConfiguration, UIDeferredMenuElement;
 
 #pragma mark - UITabBarControllerSidebarLayout
 
@@ -71,6 +72,11 @@ NS_SWIFT_NAME(UITabBarController.Sidebar)
 
 #pragma mark Content
 
+/// Additional items to add to the overflow menu in the sidebar's navigation bar. Setting this property to a non-nil value will force the overflow button
+/// to appear, regardless of if you provide any content in the element's callback. Items returned are displayed directly in the presented menu. When
+/// set, the "Edit Sidebar" action will also be moved into the overflow menu after the app-provided items.
+@property (nonatomic, strong, nullable) UIDeferredMenuElement *navigationOverflowItems API_AVAILABLE(ios(18.2), visionos(2.2));
+
 /// Content configuration for an optional header to display in the sidebar.
 /// The header is displayed above all tab content in the sidebar.
 @property (nonatomic, copy, nullable) id<UIContentConfiguration> headerContentConfiguration NS_REFINED_FOR_SWIFT;
@@ -110,9 +116,10 @@ NS_SWIFT_NAME(UITabBarControllerSidebar.Animating)
 
 #pragma mark - UITabBarControllerSidebarDelegate
 
-@class UITabSidebarItem, UITabSidebarItemRequest;
+@class UITabSidebarItem, UITabSidebarItemRequest, UIDragItem, UIAction, UITabGroup;
+@protocol UIDragSession;
 
-API_AVAILABLE(ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 NS_SWIFT_NAME(UITabBarControllerSidebar.Delegate)
 @protocol UITabBarControllerSidebarDelegate <NSObject>
 
@@ -166,6 +173,38 @@ NS_SWIFT_NAME(UITabBarControllerSidebar.Delegate)
 - (nullable UIContextMenuConfiguration *)tabBarController:(UITabBarController *)tabBarController
                                                   sidebar:(UITabBarControllerSidebar *)sidebar
                            contextMenuConfigurationForTab:(__kindof UITab *)tab;
+
+#pragma mark Drag and Drop
+
+/// Called when a new drag session has begun in the sidebar from the specified `tab`. Return drag items if the specified tab can be dragged, or an empty array if no drags should begin.
+/// Note that if drag items are returned on tabs in groups that allow reordering, then tab reordering is disabled when the sidebar is not in editing.
+- (NSArray<UIDragItem *> *)tabBarController:(UITabBarController *)tabBarController
+                                    sidebar:(UITabBarControllerSidebar *)sidebar
+               itemsForBeginningDragSession:(id<UIDragSession>)dragSession
+                                        tab:(UITab *)tab API_AVAILABLE(ios(18.4), visionos(2.4)) API_UNAVAILABLE(tvos);
+
+/// Called when a new drag session is requesting items to add to the existing drag session in the sidebar from the specified `tab`.
+/// Return items if the specified tab can add to the drag session, or an empty array if nothing should be added.
+- (NSArray<UIDragItem *> *)tabBarController:(UITabBarController *)tabBarController
+                                    sidebar:(UITabBarControllerSidebar *)sidebar
+                itemsForAddingToDragSession:(id<UIDragSession>)dragSession tab:(UITab *)tab API_AVAILABLE(ios(18.4), visionos(2.4)) API_UNAVAILABLE(tvos);
+
+/// Determines if items from the specified drop session can be dropped into the specified `sidebarAction`. If the operation is either a `.move` or `.copy`,
+/// then the drop will proceed and `tabBarController:sidebar:sidebarAction:acceptItemsFromDropSession:` is called. By default, the drop will be
+/// treated as a cancel operation if this is not implemented.
+- (UIDropOperation)tabBarController:(UITabBarController *)tabBarController
+                            sidebar:(UITabBarControllerSidebar *)sidebar
+                      sidebarAction:(UIAction *)sidebarAction
+                              group:(UITabGroup *)group
+operationForAcceptingItemsFromDropSession:(id<UIDropSession>)session API_AVAILABLE(ios(18.4), visionos(2.4)) API_UNAVAILABLE(tvos);
+
+/// Receive the drop from into the `sidebarAction` using the specified session. This is only called if the drop operation returned
+/// from `tabBarController:sidebar:sidebarAction:operationForAcceptingItemsFromDropSession` is valid for a drop.
+- (void)tabBarController:(UITabBarController *)tabBarController
+                 sidebar:(UITabBarControllerSidebar *)sidebar
+           sidebarAction:(UIAction *)sidebarAction
+                   group:(UITabGroup *)group
+acceptItemsFromDropSession:(id<UIDropSession>)session API_AVAILABLE(ios(18.4), visionos(2.4)) API_UNAVAILABLE(tvos);
 
 @end
 

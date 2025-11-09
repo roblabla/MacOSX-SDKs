@@ -5,7 +5,8 @@ install-name:    '/System/Library/PrivateFrameworks/SiriUI.framework/Versions/A/
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AFUIPresentationPropertiesRequestSourceKey, _AFUIPresentationPropertiesSupportsTouchKey, 
+    symbols:         [ '_$sSo22GMAvailabilityListenerC6SiriUIEABycfC', '_$sSo22GMAvailabilityListenerCMa', 
+                       _AFUIPresentationPropertiesRequestSourceKey, _AFUIPresentationPropertiesSupportsTouchKey, 
                        _AFUISpeechSynthesisQueueDidEmptyNotification, _AFUISpeechSynthesisWillStartSpeakingNotification, 
                        _NSEdgeInsetsInsetRect, _NSStringFromCGSize, '_OBJC_CLASS_$_SiriUICollectionMenuView', 
                        '_OBJC_CLASS_$_SiriUIDynamicProperties', '_OBJC_CLASS_$_SiriUIEdgeLightWindow', 
@@ -44,8 +45,8 @@ exports:
                        _kSiriUICardCategoryMicroblogTwitter, _kSiriUICardCategoryMicroblogWeibo, 
                        _kSiriUICardCategoryStocks, _kSiriUICardCategoryWeather, _kSiriUICardCategoryWebSearch ]
     objc-classes:    [ AFUIDelayedActionCommandCache, AFUIRequestTrigger, AFUISiriSession, 
-                       AFUISiriViewController, AFUISpeechSynthesis, AFUISpeechSynthesisElement, 
-                       GMAvailabilityListener, SAEVoiceTrainingController, SAEVoiceTrainingIntroController, 
+                       AFUISiriViewController, AFUISpeechSynthesisElement, GMAvailabilityListener, 
+                       SAEVoiceTrainingController, SAEVoiceTrainingIntroController, 
                        SAEVoiceTrainingReadyController, SiriInstrumentationManager, 
                        SiriUIAceObjectCollectionViewItem, SiriUIAceObjectControllerCell, 
                        SiriUIAceObjectViewController, SiriUIAcousticIDSpinner, SiriUIActionableFooterView, 
@@ -65,8 +66,9 @@ exports:
                        SiriUIImageMaskView, SiriUIKeyline, SiriUILabel, SiriUILaunchOptions, 
                        SiriUIMediaPauser, SiriUIObjectPickerButtonView, SiriUIObjectPickerViewController, 
                        SiriUIPluginManager, SiriUIPreferences, SiriUIPrivatePeoplePickerViewController, 
-                       SiriUIPrivateViewControllerOverrides, SiriUIReusableConfirmationFooterView, 
-                       SiriUIReusableFooterView, SiriUIReusableHeaderView, SiriUIReusableSubtitledHeaderView, 
+                       SiriUIPrivateViewControllerOverrides, SiriUIReplayWindowController, 
+                       SiriUIReusableConfirmationFooterView, SiriUIReusableFooterView, 
+                       SiriUIReusableHeaderView, SiriUIReusableSubtitledHeaderView, 
                        SiriUIReviewItemCell, SiriUIReviewItemViewItem, SiriUIReviewsHeaderView, 
                        SiriUIReviewsViewController, SiriUIScrollView, SiriUISetup, 
                        SiriUISetupAlert, SiriUISiriLanguage, SiriUISiriStatusView, 

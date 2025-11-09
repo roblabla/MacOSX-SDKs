@@ -174,7 +174,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
                  commandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                   sourceArrays: (nonnull NSArray <MPSNDArray *> *) sourceArrays
               destinationArray: (nonnull MPSNDArray *) destination
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 @end
 

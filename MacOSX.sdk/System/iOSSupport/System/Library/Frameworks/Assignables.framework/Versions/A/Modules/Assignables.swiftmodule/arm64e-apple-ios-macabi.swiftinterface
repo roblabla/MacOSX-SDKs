@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1.0.2 -module-name Assignables
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1.4.1 -module-name Assignables
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AppKit
 import AppleArchive
 @_exported import Assignables
@@ -26,8 +27,8 @@ public struct MergeablePartsContainerPartID : Swift.Hashable {
   public var rawValue: Swift.String
   @available(iOS 17.5, *)
   public init(_ rawValue: Swift.String)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Assignables.MergeablePartsContainerPartID, b: Assignables.MergeablePartsContainerPartID) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -268,9 +269,9 @@ public struct AnonymousUserIdentity : Assignables.UserIdentity {
     get
   }
   public init()
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Assignables.AnonymousUserIdentity, b: Assignables.AnonymousUserIdentity) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -292,9 +293,9 @@ public struct StringUserIdentity : Assignables.UserIdentity {
   }
   public var value: Swift.String
   public init(value: Swift.String)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Assignables.StringUserIdentity, b: Assignables.StringUserIdentity) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -507,9 +508,9 @@ extension Assignables.AssignableDocument {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct BasicDocumentElementID<Element> : Assignables.DocumentElementID where Element : Assignables.DocumentElement {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Assignables.BasicDocumentElementID<Element>, b: Assignables.BasicDocumentElementID<Element>) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -533,9 +534,9 @@ extension Assignables.AssignedWorkDocument {
       public var assignableDocumentPageID: Assignables.AssignableDocument.Page.ID {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Assignables.AssignedWorkDocument.Page.ID, b: Assignables.AssignedWorkDocument.Page.ID) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -650,7 +651,6 @@ public struct AssignableDocument : Swift.Identifiable {
       get
     }
     public static func == (a: Assignables.AssignableDocument.CorrectMarkType, b: Assignables.AssignableDocument.CorrectMarkType) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 17.4, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -664,6 +664,7 @@ public struct AssignableDocument : Swift.Identifiable {
     nonisolated public static var allCases: [Assignables.AssignableDocument.CorrectMarkType] {
       get
     }
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -707,9 +708,9 @@ extension Assignables.AssignableDocument {
       public var debugDescription: Swift.String {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Assignables.AssignableDocument.Page.ID, b: Assignables.AssignableDocument.Page.ID) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }

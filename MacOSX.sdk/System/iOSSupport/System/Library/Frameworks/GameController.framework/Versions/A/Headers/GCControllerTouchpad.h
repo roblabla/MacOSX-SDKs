@@ -19,14 +19,14 @@ typedef NS_ENUM(NSInteger, GCTouchState) {
     GCTouchStateUp,
     GCTouchStateDown,
     GCTouchStateMoving
-} NS_SWIFT_NAME(GCControllerTouchpad.TouchState);
+} NS_SWIFT_NAME(GCControllerTouchpad.TouchState) API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 /**
  A touchpad is a touch-based two axis input with a notion of "touch state". It keeps track of
  whether the touchpad is actively being touched, and generates events based on a
  change in touch state.
  */
-API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 @interface GCControllerTouchpad : GCControllerElement
 
 /**
@@ -44,7 +44,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @param buttonValue the value of the touch surface button at the time the handler fired.
  @param buttonPressed the pressed state of the touch surface button at the time the handler fired.
  */
-typedef void (^GCControllerTouchpadHandler)(GCControllerTouchpad *touchpad, float xValue, float yValue, float buttonValue, BOOL buttonPressed);
+typedef void (^GCControllerTouchpadHandler)(GCControllerTouchpad *touchpad, float xValue, float yValue, float buttonValue, BOOL buttonPressed) API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 /**
  Called when a touch event begins on the touchpad.

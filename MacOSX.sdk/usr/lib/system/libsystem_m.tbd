@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_m.dylib'
-current-version: 3289
+current-version: 3291.100.4
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]

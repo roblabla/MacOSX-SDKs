@@ -34,7 +34,6 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 NS_ASSUME_NONNULL_END
 
-
 #else
 #import <TargetConditionals.h>
 #import <PassKitCore/PKIdentityIntentToStore.h>

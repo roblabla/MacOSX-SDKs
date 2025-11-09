@@ -518,5 +518,4 @@ exports:
                        _sessionManagerXPCInterface, _temp_AVAudioSessionErrorCodeActivationInterrupted, 
                        _temp_AVAudioSessionErrorCodeActivationStateUnchanged ]
     objc-classes:    [ AVAudioApplicationSpecification, HALDeviceInfo ]
-    weak-symbols:    [ __ZNSt3__124__width_estimation_table9__entriesE, __ZNSt3__144__extended_grapheme_custer_property_boundary9__entriesE ]
 ...

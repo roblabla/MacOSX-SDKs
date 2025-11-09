@@ -25,7 +25,7 @@ exports:
                        _pcap_free_if_info, _pcap_free_proc_info, _pcap_free_selectable_fd_list, 
                        _pcap_free_tstamp_types, _pcap_freealldevs, _pcap_freecode, 
                        _pcap_get_compression_stats, _pcap_get_divert_input, _pcap_get_head_drop, 
-                       _pcap_get_max_write_size, _pcap_get_required_select_timeout, 
+                       _pcap_get_max_write_size, _pcap_get_packet_read_count, _pcap_get_required_select_timeout, 
                        _pcap_get_selectable_fd, _pcap_get_selectable_fd_list, _pcap_get_send_multiple, 
                        _pcap_get_tstamp_precision, _pcap_geterr, _pcap_getnonblock, 
                        _pcap_if_info_set_add, _pcap_if_info_set_clear, _pcap_if_info_set_find_by_id, 

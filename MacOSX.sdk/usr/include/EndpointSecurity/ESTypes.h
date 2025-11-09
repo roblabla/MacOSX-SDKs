@@ -260,6 +260,9 @@ typedef enum {
 
 	// The following events are available beginning in macOS 15.0
 	ES_EVENT_TYPE_NOTIFY_GATEKEEPER_USER_OVERRIDE,
+
+	// The following events are available beginning in macOS 15.4
+	ES_EVENT_TYPE_NOTIFY_TCC_MODIFY,
 	// ES_EVENT_TYPE_LAST is not a valid event type but a convenience
 	// value for operating on the range of defined event types.
 	// This value may change between releases and was available
@@ -546,5 +549,71 @@ typedef struct {
 	es_string_token_t signing_id;
 	es_string_token_t team_id;
 } es_signed_file_info_t;
+
+/**
+ * @typedef ess_tcc_event_type_t
+ *
+ *  Represent the type of TCC modification event.
+ *
+ * - ES_TCC_EVENT_TYPE_UNKNOWN: Unknown prior state.
+ * - ES_TCC_EVENT_TYPE_CREATE: A new TCC authorization record was created.
+ * - ES_TCC_EVENT_TYPE_MODIFY: An existing TCC authorization record was modified.
+ * - ES_TCC_EVENT_TYPE_DELETE: An existing TCC authorization record was deleted.
+ */
+typedef enum {
+	ES_TCC_EVENT_TYPE_UNKNOWN,
+	ES_TCC_EVENT_TYPE_CREATE,
+	ES_TCC_EVENT_TYPE_MODIFY,
+	ES_TCC_EVENT_TYPE_DELETE,
+} es_tcc_event_type_t;
+
+/**
+ * ess_tcc_authorization_right_t
+ *
+ * Represents the type of authorization permission an application has to a TCC Service.
+ */
+typedef enum {
+	ES_TCC_AUTHORIZATION_RIGHT_DENIED,           // 0
+	ES_TCC_AUTHORIZATION_RIGHT_UNKNOWN,          // 1
+	ES_TCC_AUTHORIZATION_RIGHT_ALLOWED,          // 2
+	ES_TCC_AUTHORIZATION_RIGHT_LIMITED,          // 3
+	ES_TCC_AUTHORIZATION_RIGHT_ADD_MODIFY_ADDED, // 4
+	ES_TCC_AUTHORIZATION_RIGHT_SESSION_PID,      // 5
+	ES_TCC_AUTHORIZATION_RIGHT_LEARN_MORE,       // 6
+} es_tcc_authorization_right_t;
+
+/**
+ * ess_tcc_authorization_reason_t
+ *
+ * Represents the reason a TCC permission was updated.
+ */
+typedef enum {
+	ES_TCC_AUTHORIZATION_REASON_NONE = 0,
+	ES_TCC_AUTHORIZATION_REASON_ERROR,
+	ES_TCC_AUTHORIZATION_REASON_USER_CONSENT, /// User answered a prompt
+	ES_TCC_AUTHORIZATION_REASON_USER_SET,     /// User changed the authorization right via Preferences
+	ES_TCC_AUTHORIZATION_REASON_SYSTEM_SET,   /// A system process changed the authorization right
+	ES_TCC_AUTHORIZATION_REASON_SERVICE_POLICY,
+	ES_TCC_AUTHORIZATION_REASON_MDM_POLICY,
+	ES_TCC_AUTHORIZATION_REASON_SERVICE_OVERRIDE_POLICY,
+	ES_TCC_AUTHORIZATION_REASON_MISSING_USAGE_STRING,
+	ES_TCC_AUTHORIZATION_REASON_PROMPT_TIMEOUT,
+	ES_TCC_AUTHORIZATION_REASON_PREFLIGHT_UNKNOWN,
+	ES_TCC_AUTHORIZATION_REASON_ENTITLED,
+	ES_TCC_AUTHORIZATION_REASON_APP_TYPE_POLICY,
+	ES_TCC_AUTHORIZATION_REASON_PROMPT_CANCEL,
+} es_tcc_authorization_reason_t;
+
+/**
+ * es_tcc_identity_type_t
+ *
+ * Represent the identity type of an application which has access to a TCC service.
+ */
+typedef enum {
+	ES_TCC_IDENTITY_TYPE_BUNDLE_ID,
+	ES_TCC_IDENTITY_TYPE_EXECUTABLE_PATH,
+	ES_TCC_IDENTITY_TYPE_POLICY_ID,
+	ES_TCC_IDENTITY_TYPE_FILE_PROVIDER_DOMAIN_ID,
+} es_tcc_identity_type_t;
 
 #endif /* __ENDPOINT_SECURITY_TYPES_H */

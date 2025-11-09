@@ -55,6 +55,11 @@
 .Op Fl -archive Ar archive
 .Op Fl -sort Ar events | Ar bytes
 .Op Fl -count Ar count | Ar all
+.Op Fl -start Ar date/time
+.Op Fl -end Ar date/time
+.Op Fl -last Ar time Op m|h|d
+
+.Op Fl -[no-]pager
 .Op Fl -overview | -per-book | -per-file | -sender Ar sender | Fl -process Ar process | Fl -predicate Ar predicate
 .Pp
 .Nm
@@ -267,6 +272,8 @@ The following date/time formats are accepted:
 "YYYY-MM-DD HH:MM:SSZZZZZ"
 .It Fl -end Ar date/time
 Shows statistics for events up to the provided date.
+.It Fl -[no-]pager
+Enable or disable pagination of output via less.
 .El
 .Pp
 In addition, one of the following output modes can be supplied:

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macosx15.2 -target-variant x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.0.3.1.5 -module-name RegexBuilder
-// swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macosx15.4 -target-variant x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.1.0.110.5 -module-name RegexBuilder
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -interface-compiler-version 6.1
 import Swift
 import _StringProcessing
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
@@ -189,7 +189,6 @@ extension RegexBuilder.CharacterClass {
 extension _StringProcessing.Regex {
   public init(@RegexBuilder.RegexComponentBuilder _ content: () -> some RegexComponent<Output>)
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.String : @retroactive _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
@@ -199,18 +198,6 @@ extension Swift.String : @retroactive _StringProcessing.RegexComponent {
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.String.Output
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension Swift.String : _StringProcessing.RegexComponent {
-  public typealias Output = Swift.Substring
-  public var regex: _StringProcessing.Regex<Swift.String.Output> {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias RegexOutput = Swift.String.Output
-}
-#endif
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Substring : @retroactive _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
@@ -220,18 +207,6 @@ extension Swift.Substring : @retroactive _StringProcessing.RegexComponent {
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Substring.Output
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension Swift.Substring : _StringProcessing.RegexComponent {
-  public typealias Output = Swift.Substring
-  public var regex: _StringProcessing.Regex<Swift.Substring.Output> {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias RegexOutput = Swift.Substring.Output
-}
-#endif
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Character : @retroactive _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
@@ -241,18 +216,6 @@ extension Swift.Character : @retroactive _StringProcessing.RegexComponent {
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Character.Output
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension Swift.Character : _StringProcessing.RegexComponent {
-  public typealias Output = Swift.Substring
-  public var regex: _StringProcessing.Regex<Swift.Character.Output> {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias RegexOutput = Swift.Character.Output
-}
-#endif
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Unicode.Scalar : @retroactive _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
@@ -262,17 +225,6 @@ extension Swift.Unicode.Scalar : @retroactive _StringProcessing.RegexComponent {
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Unicode.Scalar.Output
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension Swift.Unicode.Scalar : _StringProcessing.RegexComponent {
-  public typealias Output = Swift.Substring
-  public var regex: _StringProcessing.Regex<Swift.Unicode.Scalar.Output> {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias RegexOutput = Swift.Unicode.Scalar.Output
-}
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct One<Output> : _StringProcessing.RegexComponent {
   public var regex: _StringProcessing.Regex<Output>

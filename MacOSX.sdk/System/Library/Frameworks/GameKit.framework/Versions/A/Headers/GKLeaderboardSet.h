@@ -8,7 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /// GKLeaderboardSet represents the sets that leaderboards can be broken out into.
-NS_CLASS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKLeaderboardSet : NSObject <NSCoding, NSSecureCoding>
 
 /// Localized set title.
@@ -26,7 +26,7 @@ NS_CLASS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0)
 /// 1. Communications problem
 /// 2. Unauthenticated player
 /// 3. Set not present
-+ (void)loadLeaderboardSetsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboardSet *> * __nullable leaderboardSets, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0);
++ (void)loadLeaderboardSetsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboardSet *> * __nullable leaderboardSets, NSError * __nullable error))completionHandler;
 
 /// Loads array with all classic leaderboards and current instances of recurring leaderboards for this leaderboardSet
 /// Possible reasons for error:
@@ -42,7 +42,7 @@ NS_CLASS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0)
 /// Possible reasons for error:
 /// 1. Communications problem
 /// 2. Unauthenticated player
-- (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadLeaderboardsWithHandler:.", ios(7.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0), watchos(3.0, 7.0));
+- (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLeaderboardSet/loadLeaderboards(handler:)`` method instead.", ios(7.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0), watchos(3.0, 7.0));
 
 @end
 NS_ASSUME_NONNULL_END
@@ -53,9 +53,9 @@ NS_ASSUME_NONNULL_END
 
 // Asynchronously load the image. Error will be nil on success.
 #if TARGET_OS_IPHONE
-- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler __TVOS_UNAVAILABLE;
+- (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #else
-- (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler;
+- (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #endif
 
 @end

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MathTypesetting.framework/Versions/A/MathTypesetting'
-current-version: 3.2
+current-version: 3.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -23,6 +23,7 @@ exports:
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentV21allowSingleLineHeightSbvpMV', 
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentV21allowSingleLineHeightSbvs', 
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentV7defaultAEvgZ', 
+                       '_$s15MathTypesetting0A12PresentationV11EnvironmentV7defaultAEvpZMV', 
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentVAEycfC', 
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentVMa', '_$s15MathTypesetting0A12PresentationV11EnvironmentVMn', 
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentVN', '_$s15MathTypesetting0A12PresentationV13LayoutContextV10targetSizeSo6CGSizeVSgvM', 
@@ -57,6 +58,7 @@ exports:
                        '_$s15MathTypesetting0A12PresentationV14DrawingContextV14highlightColorSo10CGColorRefaSgvpMV', 
                        '_$s15MathTypesetting0A12PresentationV14DrawingContextV14highlightColorSo10CGColorRefaSgvs', 
                        '_$s15MathTypesetting0A12PresentationV14DrawingContextV7OptionsV10debugRectsAGvgZ', 
+                       '_$s15MathTypesetting0A12PresentationV14DrawingContextV7OptionsV10debugRectsAGvpZMV', 
                        '_$s15MathTypesetting0A12PresentationV14DrawingContextV7OptionsV8rawValueAGs6UInt32V_tcfC', 
                        '_$s15MathTypesetting0A12PresentationV14DrawingContextV7OptionsV8rawValues6UInt32VvM', 
                        '_$s15MathTypesetting0A12PresentationV14DrawingContextV7OptionsV8rawValues6UInt32Vvg', 
@@ -106,9 +108,11 @@ exports:
                        '_$s15MathTypesetting0A12PresentationV5width12CoreGraphics7CGFloatVvpMV', 
                        '_$s15MathTypesetting0A12PresentationV6FormatV2eeoiySbAE_AEtFZ', 
                        '_$s15MathTypesetting0A12PresentationV6FormatV5laTeXAEvgZ', 
+                       '_$s15MathTypesetting0A12PresentationV6FormatV5laTeXAEvpZMV', 
                        '_$s15MathTypesetting0A12PresentationV6FormatV6format4fromAESg10Foundation4DataV_tFZ', 
                        '_$s15MathTypesetting0A12PresentationV6FormatV6format4fromAESgSS_tFZ', 
                        '_$s15MathTypesetting0A12PresentationV6FormatV6mathMLAEvgZ', 
+                       '_$s15MathTypesetting0A12PresentationV6FormatV6mathMLAEvpZMV', 
                        '_$s15MathTypesetting0A12PresentationV6FormatVMa', '_$s15MathTypesetting0A12PresentationV6FormatVMn', 
                        '_$s15MathTypesetting0A12PresentationV6FormatVN', '_$s15MathTypesetting0A12PresentationV6FormatVSQAAMc', 
                        '_$s15MathTypesetting0A12PresentationV6height12CoreGraphics7CGFloatVvg', 

@@ -6,7 +6,8 @@ install-name:    '/System/Library/PrivateFrameworks/MediaAnalysisServices.framew
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _MADSignpostLog, _MADVIDomainArt, _MADVIDomainMedia, _MADVIDomainPackagedProducts, 
+    symbols:         [ _MADSignpostLog, _MADTextEmbeddingCalibrationVersionCurrent, 
+                       _MADVIDomainArt, _MADVIDomainMedia, _MADVIDomainPackagedProducts, 
                        _MADVIFeatureARKitThirdParty, _MADVISuggestionTypeAutomatic, 
                        _MADVISuggestionTypeGlyph, _MADVISuggestionTypeHighlightedSubject, 
                        _MADVISuggestionTypeInfoPanel, _MediaAnalysisServicesVersionNumber, 

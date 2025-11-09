@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
+#import <UIKit/UIConversationContext.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -186,7 +187,7 @@ typedef NS_ENUM(NSInteger, UIWritingToolsBehavior) {
     
     /// The limited, overlay-panel experience will be provided if possible.
     UIWritingToolsBehaviorLimited, 
-} API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(visionos, tvos, watchos);
+} API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 //
 // UIWritingToolsResultOptions
@@ -208,7 +209,7 @@ typedef NS_OPTIONS(NSUInteger, UIWritingToolsResultOptions) {
     
     /// implies `RichText`,  and Writing Tools may provide attributes for tabular layout
     UIWritingToolsResultTable = 1 << 3,
-} API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(visionos, tvos, watchos);
+} API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 typedef NSString * UITextContentType NS_TYPED_ENUM API_UNAVAILABLE(watchos);
 
@@ -262,8 +263,13 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 // on the Password Rules documentation guide.
 @property(nullable,nonatomic,copy) UITextInputPasswordRules *passwordRules API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos); // default is nil
 
-@property UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(visionos, tvos, watchos);
-@property UIWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(visionos, tvos, watchos);
+@property UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
+@property UIWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
+
+/// A reference to a conversation, such as a mail or messaging thread.
+/// 
+/// Set this conversation context before the keyboard appears; the keyboard uses this context to initialize its conversation context value. When updates occur in the conversation, call ``UITextInputDelegate/conversationContext(_:didChange:)`` on the ``inputDelegate`` property for ``UITextInput`` objects, such as UITextView/inputDelegate`` or ``UITextField/inputDelegate``.
+@property(nonatomic,strong,nullable) UIConversationContext *conversationContext API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos, watchos, visionos, macCatalyst);
 
 @end
 

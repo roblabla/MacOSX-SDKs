@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 561.20.17 -module-name VideoSubscriberAccount
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 561.40.17 -module-name VideoSubscriberAccount
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import DeveloperToolsSupport
 import Foundation
 import Swift
@@ -21,8 +22,8 @@ public struct VSAppleSubscription : Swift.Sendable, Swift.Hashable {
     get
     set
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: VideoSubscriberAccount.VSAppleSubscription, b: VideoSubscriberAccount.VSAppleSubscription) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -86,8 +87,8 @@ public struct VSUserAccount : Swift.Sendable, Swift.Hashable {
     get
   }
   public init(accountType: VideoSubscriberAccount.VSUserAccount.AccountType = .free, updateURL: Foundation.URL?)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: VideoSubscriberAccount.VSUserAccount, b: VideoSubscriberAccount.VSUserAccount) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

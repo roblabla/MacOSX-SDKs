@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GamePolicy.framework/Versions/A/GamePolicy'
-current-version: 2.2.1
+current-version: 2.4.2
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -30,6 +30,7 @@ exports:
                        '_$s10GamePolicy012ModelManagerA15AssertionStatusC20aaaBundleIdentifiersSaySSGvpMV', 
                        '_$s10GamePolicy012ModelManagerA15AssertionStatusC20aaaBundleIdentifiersSaySSGvpWvd', 
                        '_$s10GamePolicy012ModelManagerA15AssertionStatusC20supportsSecureCodingSbvgZ', 
+                       '_$s10GamePolicy012ModelManagerA15AssertionStatusC20supportsSecureCodingSbvpZMV', 
                        '_$s10GamePolicy012ModelManagerA15AssertionStatusC24$__lazy_storage_$_config33_CC7B24DD3D70886D74E34C82B612D333LLAC6ConfigVSgvpfi', 
                        '_$s10GamePolicy012ModelManagerA15AssertionStatusC25impactedBundleIdentifiersSaySSGvg', 
                        '_$s10GamePolicy012ModelManagerA15AssertionStatusC25impactedBundleIdentifiersSaySSGvpMV', 
@@ -123,7 +124,7 @@ exports:
                        '_$s10GamePolicy01kaB17MenuExtraBundleIDSSvp', '_$s10GamePolicy01kaB20MenuExtraInstallPathSSvau', 
                        '_$s10GamePolicy01kaB20MenuExtraInstallPathSSvp', '_$s10GamePolicy01kaB25PrivilegedToolEntitlementSSvau', 
                        '_$s10GamePolicy01kaB25PrivilegedToolEntitlementSSvp', '_$s10GamePolicy0aB11AgentUpdateC05emptyD0ACvgZ', 
-                       '_$s10GamePolicy0aB11AgentUpdateC0A5EventC10auditTokenSo0F8_token_tavg', 
+                       '_$s10GamePolicy0aB11AgentUpdateC05emptyD0ACvpZMV', '_$s10GamePolicy0aB11AgentUpdateC0A5EventC10auditTokenSo0F8_token_tavg', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC10auditTokenSo0F8_token_tavgTq', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC10auditTokenSo0F8_token_tavpMV', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC11descriptionSSvg', 
@@ -138,6 +139,7 @@ exports:
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC20supportsSecureCodingSbvau', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC20supportsSecureCodingSbvgZ', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC20supportsSecureCodingSbvpZ', 
+                       '_$s10GamePolicy0aB11AgentUpdateC0A5EventC20supportsSecureCodingSbvpZMV', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC20supportsSecureCodingSbvsZ', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC4dateSo6NSDateCvg', 
                        '_$s10GamePolicy0aB11AgentUpdateC0A5EventC4dateSo6NSDateCvpMV', 
@@ -164,6 +166,7 @@ exports:
                        '_$s10GamePolicy0aB11AgentUpdateC20supportsSecureCodingSbvau', 
                        '_$s10GamePolicy0aB11AgentUpdateC20supportsSecureCodingSbvgZ', 
                        '_$s10GamePolicy0aB11AgentUpdateC20supportsSecureCodingSbvpZ', 
+                       '_$s10GamePolicy0aB11AgentUpdateC20supportsSecureCodingSbvpZMV', 
                        '_$s10GamePolicy0aB11AgentUpdateC20supportsSecureCodingSbvsZ', 
                        '_$s10GamePolicy0aB11AgentUpdateC23consoleModePausedByUserSbvg', 
                        '_$s10GamePolicy0aB11AgentUpdateC23consoleModePausedByUserSbvpMV', 
@@ -190,6 +193,7 @@ exports:
                        '_$s10GamePolicy0aB17TargetDescriptionC10auditTokenSo0E8_token_tavpWvd', 
                        '_$s10GamePolicy0aB17TargetDescriptionC11descriptionSSvg', 
                        '_$s10GamePolicy0aB17TargetDescriptionC20supportsSecureCodingSbvgZ', 
+                       '_$s10GamePolicy0aB17TargetDescriptionC20supportsSecureCodingSbvpZMV', 
                        '_$s10GamePolicy0aB17TargetDescriptionC2eeoiySbAC_ACtFZ', 
                        '_$s10GamePolicy0aB17TargetDescriptionC4euid10auditToken06targetD0ACs6UInt32V_So0F8_token_taSStcfC', 
                        '_$s10GamePolicy0aB17TargetDescriptionC4euid10auditToken06targetD0ACs6UInt32V_So0F8_token_taSStcfCTq', 
@@ -235,6 +239,7 @@ exports:
                        '_$s10GamePolicy0aB9AssertionC12hasAttribute4typeSbxm_tlF', 
                        '_$s10GamePolicy0aB9AssertionC12hasAttribute4typeSbxm_tlFTq', 
                        '_$s10GamePolicy0aB9AssertionC20supportsSecureCodingSbvgZ', 
+                       '_$s10GamePolicy0aB9AssertionC20supportsSecureCodingSbvpZMV', 
                        '_$s10GamePolicy0aB9AssertionC2eeoiySbAC_ACtFZ', '_$s10GamePolicy0aB9AssertionC2idSuvg', 
                        '_$s10GamePolicy0aB9AssertionC2idSuvgTq', '_$s10GamePolicy0aB9AssertionC2idSuvpMV', 
                        '_$s10GamePolicy0aB9AssertionC4hashSivg', '_$s10GamePolicy0aB9AssertionC5GrantC11descriptionSSvg', 
@@ -259,6 +264,7 @@ exports:
                        '_$s10GamePolicy0aB9AssertionC8delegateAA0abC8Delegate_pSgvau', 
                        '_$s10GamePolicy0aB9AssertionC8delegateAA0abC8Delegate_pSgvgZ', 
                        '_$s10GamePolicy0aB9AssertionC8delegateAA0abC8Delegate_pSgvpZ', 
+                       '_$s10GamePolicy0aB9AssertionC8delegateAA0abC8Delegate_pSgvpZMV', 
                        '_$s10GamePolicy0aB9AssertionC8delegateAA0abC8Delegate_pSgvsZ', 
                        '_$s10GamePolicy0aB9AssertionC9AttributeC10PrivilegedC11descriptionSSvg', 
                        '_$s10GamePolicy0aB9AssertionC9AttributeC10PrivilegedC20supportsSecureCodingSbvgZ', 
@@ -274,6 +280,7 @@ exports:
                        '_$s10GamePolicy0aB9AssertionC9AttributeC11descriptionSSvg', 
                        '_$s10GamePolicy0aB9AssertionC9AttributeC20supportsSecureCodingSbvgZ', 
                        '_$s10GamePolicy0aB9AssertionC9AttributeC20supportsSecureCodingSbvgZTq', 
+                       '_$s10GamePolicy0aB9AssertionC9AttributeC20supportsSecureCodingSbvpZMV', 
                        '_$s10GamePolicy0aB9AssertionC9AttributeC5coderAESgSo7NSCoderC_tcfC', 
                        '_$s10GamePolicy0aB9AssertionC9AttributeC5coderAESgSo7NSCoderC_tcfCTq', 
                        '_$s10GamePolicy0aB9AssertionC9AttributeC5coderAESgSo7NSCoderC_tcfc', 
@@ -327,7 +334,8 @@ exports:
                        '_$s10GamePolicy29ConsoleModeEnablementStrategyOSQAAMc', '_$s10GamePolicy29ConsoleModeEnablementStrategyOSYAAMc', 
                        '_$s10GamePolicy7VersionV013currentSourceC0ACvMZ', '_$s10GamePolicy7VersionV013currentSourceC0ACvau', 
                        '_$s10GamePolicy7VersionV013currentSourceC0ACvgZ', '_$s10GamePolicy7VersionV013currentSourceC0ACvpZ', 
-                       '_$s10GamePolicy7VersionV013currentSourceC0ACvsZ', '_$s10GamePolicy7VersionV015isEqualToSourceC006sourceC0SbAC_tF', 
+                       '_$s10GamePolicy7VersionV013currentSourceC0ACvpZMV', '_$s10GamePolicy7VersionV013currentSourceC0ACvsZ', 
+                       '_$s10GamePolicy7VersionV015isEqualToSourceC006sourceC0SbAC_tF', 
                        '_$s10GamePolicy7VersionV016isLessThanSourceC006sourceC0SbAC_tF', 
                        '_$s10GamePolicy7VersionV019isGreaterThanSourceC006sourceC0SbAC_tF', 
                        '_$s10GamePolicy7VersionV025isLessThanOrEqualToSourceC006sourceC0SbAC_tF', 

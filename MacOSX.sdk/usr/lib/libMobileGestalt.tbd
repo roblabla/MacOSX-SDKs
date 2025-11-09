@@ -365,6 +365,7 @@ exports:
                        _MobileGestalt_get_deviceSupportsTimeInDaylight, _MobileGestalt_get_deviceSupportsToneMapping, 
                        _MobileGestalt_get_deviceSupportsTwilight, _MobileGestalt_get_deviceSupportsUSBTypeC, 
                        _MobileGestalt_get_deviceSupportsUSBTypeCDisplay, _MobileGestalt_get_deviceSupportsUnconditionalPluckItCollection, 
+                       _MobileGestalt_get_deviceSupportsUntrustedRemoteSysdiagnose, 
                        _MobileGestalt_get_deviceSupportsVirtualResearchEnvironment, 
                        _MobileGestalt_get_deviceSupportsVoiceOverCanUseSiriVoice, 
                        _MobileGestalt_get_deviceSupportsWalkingRadiusAnimation, _MobileGestalt_get_deviceSupportsWatchSpeakerPlayback, 

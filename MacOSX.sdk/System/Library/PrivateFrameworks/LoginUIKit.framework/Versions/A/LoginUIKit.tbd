@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
-current-version: 370.3.2
+current-version: 370.5.3
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -13,6 +13,7 @@ exports:
                        '_$s15WallpaperAccess06publicA5Image11forUserUUIDSo10CGImageRefa10Foundation0G0V_tKF', 
                        '_$s15WallpaperAccess06publicA5Image9forUserIDSo10CGImageRefas6UInt32V_tKF', 
                        '_$s15WallpaperAccess9ModelInfoO24desktopPictureSystemPathSSSgvgZ', 
+                       '_$s15WallpaperAccess9ModelInfoO24desktopPictureSystemPathSSSgvpZMV', 
                        '_$s15WallpaperAccess9ModelInfoOMa', '_$s15WallpaperAccess9ModelInfoOMn', 
                        '_$s15WallpaperAccess9ModelInfoON', '_$sSo22LUI2VibrancyEffectViewC10LoginUIKitE10wantsLayerSbvg', 
                        '_$sSo22LUI2VibrancyEffectViewC10LoginUIKitE10wantsLayerSbvs', 
@@ -128,13 +129,13 @@ exports:
                        _kSmartCardServiceProvider, _kXCBuilddUserName, _kXCTestUserName ]
     objc-classes:    [ LUI2Appearance, LUI2AuthHintViewController, LUI2AuthorizationPluginViewController, 
                        LUI2AvatarBackgroundView, LUI2BackgroundViewController, LUI2BatteryView, 
-                       LUI2BatteryViewController, LUI2BigTimeViewController, LUI2Button, 
-                       LUI2ButtonViewController, LUI2CircleButtonView, LUI2ClassroomLockController, 
-                       LUI2CollectionView, LUI2Constants, LUI2Control, LUI2ControlSpecification, 
-                       LUI2DarkenView, LUI2DateViewController, LUI2GBButton, LUI2GenericMessageViewController, 
-                       LUI2GlyphButton, LUI2ImageViewController, LUI2InfoStatusViewController, 
-                       LUI2InputMethodViewController, LUI2MessageViewController, 
-                       LUI2MultiWindowController, LUI2NetworkStatusViewController, 
+                       LUI2BatteryViewController, LUI2BigTimeTextField, LUI2BigTimeViewController, 
+                       LUI2Button, LUI2ButtonViewController, LUI2CircleButtonView, 
+                       LUI2ClassroomLockController, LUI2CollectionView, LUI2Constants, 
+                       LUI2Control, LUI2ControlSpecification, LUI2DarkenView, LUI2DateViewController, 
+                       LUI2GBButton, LUI2GenericMessageViewController, LUI2GlyphButton, 
+                       LUI2ImageViewController, LUI2InfoStatusViewController, LUI2InputMethodViewController, 
+                       LUI2MessageViewController, LUI2MultiWindowController, LUI2NetworkStatusViewController, 
                        LUI2NoAnimationLayer, LUI2PasswordHelpViewController, LUI2PasswordHintViewController, 
                        LUI2PasswordViewController, LUI2PopoverViewController, LUI2PopupButtonViewController, 
                        LUI2PowerViewController, LUI2ProgressBarWindowController, 
@@ -217,7 +218,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
-current-version: 370.3.2
+current-version: 370.5.3
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 

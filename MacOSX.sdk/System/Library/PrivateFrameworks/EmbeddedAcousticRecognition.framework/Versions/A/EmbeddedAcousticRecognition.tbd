@@ -3,6 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -38,7 +39,8 @@ exports:
                        _EARContextualNamedEntityLanguageKey, _EARContextualNamedEntityRequestApplicationKey, 
                        _EARContextualNamedEntityScoreKey, _EARContextualNamedEntitySourceApplicationKey, 
                        _EARContextualNamedEntitySourceFrameworkKey, _EARDocumentDataTypeKey, 
-                       _EARErrorDomain, _EARLanguageDetectorRequestContextFromJson, 
+                       _EARErrorDomain, _EARFullPayloadCorrectorCorrections, _EARFullPayloadCorrectorErrorDomain, 
+                       _EARFullPayloadCorrectorGrammarRange, _EARLanguageDetectorRequestContextFromJson, 
                        _EARLanguageDetectorRequestContextFromJsonStr, _EARMil2BnnsCompilationErrorDomain, 
                        _EARModelAssetsVersionKey, _EARModelDataHashKey, _EARModelLanguageKey, 
                        _EARModelOovsKey, _EARModelTrainingDataKey, _EARPhoneticMatchBuildingKey, 
@@ -53,7 +55,6 @@ exports:
                        _EARPhoneticMatchOnDeviceDataSourcesKey, _EARPhoneticMatchRankingMethodKey, 
                        _EARPhoneticMatchRankingMethodMostRecentlyPlayed, _EARPhoneticMatchRankingMethodPlayCount, 
                        _EARRecognitionStatisticAverageActiveTokensPerFrame, _EARRecognitionStatisticRecogCpuTime, 
-                       _EARVoiceCommandRecognizeAnyText, _EARVoiceCommandRecognizeText, 
                        _EARe5mlCompilationErrorDomain, '_OBJC_CLASS_$_EARAudioReader', 
                        '_OBJC_CLASS_$_EARAudioResult', '_OBJC_CLASS_$_EARAudioResultsGenerator', 
                        '_OBJC_CLASS_$_EARCaesuraSilencePosteriorGenerator', '_OBJC_CLASS_$_EARClientSilenceFeatures', 
@@ -77,8 +78,9 @@ exports:
                        '_OBJC_CLASS_$__EARCustomPronData', '_OBJC_CLASS_$__EARDefaultServerEndpointFeatures', 
                        '_OBJC_CLASS_$__EAREditDistance', '_OBJC_CLASS_$__EAREmojiRecognition', 
                        '_OBJC_CLASS_$__EAREndpointFeatures', '_OBJC_CLASS_$__EAREndpointer', 
-                       '_OBJC_CLASS_$__EAREuclid', '_OBJC_CLASS_$__EAREuclidNeighbor', 
-                       '_OBJC_CLASS_$__EARFeatureFlags', '_OBJC_CLASS_$__EARFormatter', 
+                       '_OBJC_CLASS_$__EAREntityTagger', '_OBJC_CLASS_$__EAREuclid', 
+                       '_OBJC_CLASS_$__EAREuclidNeighbor', '_OBJC_CLASS_$__EARFeatureFlags', 
+                       '_OBJC_CLASS_$__EARFormatter', '_OBJC_CLASS_$__EARFullPayloadCorrector', 
                        '_OBJC_CLASS_$__EARGeoLMHelper', '_OBJC_CLASS_$__EARInterpolator', 
                        '_OBJC_CLASS_$__EARJitProfile', '_OBJC_CLASS_$__EARLMTGlobalNNLM', 
                        '_OBJC_CLASS_$__EARLMTKaldiVocab', '_OBJC_CLASS_$__EARLanguageDetector', 
@@ -103,8 +105,8 @@ exports:
                        '_OBJC_CLASS_$__EARRelevantTextContext', '_OBJC_CLASS_$__EARResultCombiner', 
                        '_OBJC_CLASS_$__EARSdapiTokenizer', '_OBJC_CLASS_$__EARSpeakerCodeInfo', 
                        '_OBJC_CLASS_$__EARSpeakerCodeReader', '_OBJC_CLASS_$__EARSpeakerCodeWriter', 
-                       '_OBJC_CLASS_$__EARSpeechModelInfo', '_OBJC_CLASS_$__EARSpeechRecognition', 
-                       '_OBJC_CLASS_$__EARSpeechRecognitionActiveConfiguration', 
+                       '_OBJC_CLASS_$__EARSpeechMessagesContext', '_OBJC_CLASS_$__EARSpeechModelInfo', 
+                       '_OBJC_CLASS_$__EARSpeechRecognition', '_OBJC_CLASS_$__EARSpeechRecognitionActiveConfiguration', 
                        '_OBJC_CLASS_$__EARSpeechRecognitionAudioBuffer', '_OBJC_CLASS_$__EARSpeechRecognitionResult', 
                        '_OBJC_CLASS_$__EARSpeechRecognitionResultPackage', '_OBJC_CLASS_$__EARSpeechRecognitionToken', 
                        '_OBJC_CLASS_$__EARSpeechRecognizer', '_OBJC_CLASS_$__EARSyncResultStreamHelper', 
@@ -112,7 +114,8 @@ exports:
                        '_OBJC_CLASS_$__EARTextNormalization', '_OBJC_CLASS_$__EARTokenizer', 
                        '_OBJC_CLASS_$__EARTransformUtil', '_OBJC_CLASS_$__EARUserProfile', 
                        '_OBJC_CLASS_$__EARUserProfileBuilder', '_OBJC_CLASS_$__EARUserProfileConfig', 
-                       '_OBJC_CLASS_$__EARUserProfileContainer', '_OBJC_CLASS_$__EARVoiceCommandDebugInfo', 
+                       '_OBJC_CLASS_$__EARUserProfileContainer', '_OBJC_CLASS_$__EARVisualContextEvaluation', 
+                       '_OBJC_CLASS_$__EARVisualContextMetrics', '_OBJC_CLASS_$__EARVoiceCommandDebugInfo', 
                        '_OBJC_CLASS_$__EARWordPart', '_OBJC_CLASS_$__EARe5mlCompiler', 
                        '_OBJC_CLASS_$__EARmil2BnnsCompiler', _QuasarCCorrectiveRerankingParser_delete, 
                        _QuasarCCorrectiveRerankingParser_new, _QuasarCCorrectiveRerankingParser_runJson, 

@@ -8,7 +8,8 @@ exports:
                        _DMCEnrollmentLibraryVersionString, _kMCBridgeAssignedManagedAppleIDKey, 
                        _kMCBridgeEnrollmentModeKey, _kMCBridgeFriendlyNameKey, _kMCBridgeManagedAppleIDKey, 
                        _kMCBridgeOrganizationNameKey, _kMCBridgeProfileIdentifierKey, 
-                       _kMCBridgeRequiredAppIDKey, _kMCBridgeServerCapabilitiesKey ]
+                       _kMCBridgeRequiredAppIDKey, _kMCBridgeServerCapabilitiesKey, 
+                       _kRMBridgeAppStoreIDKey, _kRMBridgeBundleIDKey ]
     objc-classes:    [ DMCEnrollmentAccountUtilities, DMCEnrollmentDirtyState, DMCEnrollmentFlowController, 
                        DMCEnrollmentFlowControllerBase, DMCReturnToServiceHelper, 
                        DMCServiceDiscoveryHelper, DMCUnenrollmentFlowController ]

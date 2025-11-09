@@ -2,16 +2,15 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PerformanceControlKit.framework/Versions/A/PerformanceControlKit'
-current-version: 1175.60.51
+current-version: 1175.100.103
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFbN4clpc4user8ioreport7ChannelEEEE, 
                        __ZTINSt3__110__function6__baseIFvN4clpc4user8ioreport6SampleEEEE, 
                        __ZTINSt3__110__function6__baseIFvN4clpc4user8ioreport7ChannelEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTSNSt3__110__function6__baseIFbN4clpc4user8ioreport7ChannelEEEE, 
+                       __ZTSNSt3__110__function6__baseIFbN4clpc4user8ioreport7ChannelEEEE, 
                        __ZTSNSt3__110__function6__baseIFvN4clpc4user8ioreport6SampleEEEE, 
-                       __ZTSNSt3__110__function6__baseIFvN4clpc4user8ioreport7ChannelEEEE, 
-                       __ZTSNSt3__117bad_function_callE ]
+                       __ZTSNSt3__110__function6__baseIFvN4clpc4user8ioreport7ChannelEEEE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CLPCReportingSchemaVersionMajor, _CLPCReportingSchemaVersionMinor, 
                        __ZN4clpc4user5iokit13RegistryEntryD0Ev, __ZN4clpc4user5iokit13RegistryEntryD1Ev, 

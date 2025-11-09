@@ -61,11 +61,11 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @brief Tries to authorize the right.
 /// @param localizedReason Localized explanation for the authorization. Appears in the UI presented to the user.
 /// @param handler Completion handler called after the authorization finishes. Returns an error when the authorization fails.
-- (void)authorizeWithLocalizedReason:(NSString *)localizedReason completion:(void (^)(NSError *_Nullable error))handler NS_SWIFT_NAME(authorize(localizedReason:completion:));
+- (void)authorizeWithLocalizedReason:(NSString *)localizedReason completion:(void (NS_SWIFT_SENDABLE ^)(NSError *_Nullable error))handler NS_SWIFT_NAME(authorize(localizedReason:completion:));
 
 /// @brief Checks whether the client can eventually be granted the right.
 /// @param handler Completion handler. Returns @c nil if the right can be authorized or an error otherwise.
-- (void)checkCanAuthorizeWithCompletion:(void (^)(NSError *_Nullable error))handler;
+- (void)checkCanAuthorizeWithCompletion:(void (NS_SWIFT_SENDABLE ^)(NSError *_Nullable error))handler;
 
 /// @brief Invalidates a previously authorized right.
 /// @param handler Completion handler called after the right is deauthorized.

@@ -6,7 +6,7 @@ exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTI40TGITextGenerationInferenceModelInterface, __ZTINSt3__110__function6__baseIFvNS_17basic_string_viewIcNS_11char_traitsIcEEEEPNS_6vectorINS_4pairIS5_iEENS_9allocatorIS8_EEEEEEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__120__shared_ptr_emplaceI48TGITextGenerationInferenceSessionStateCacheEntryNS_9allocatorIS1_EEEE, 
+                       __ZTINSt3__120__shared_ptr_emplaceI48TGITextGenerationInferenceSessionStateCacheEntryNS_9allocatorIS1_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIP31TGITextGenerationInferenceModelNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIP40TGITextGenerationInferenceDecodingPolicyNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
                        __ZTINSt3__120__shared_ptr_pointerIP43TGITextGenerationInferenceSessionStateCacheNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
@@ -20,7 +20,7 @@ exports:
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__114default_deleteIN13sentencepiece22SentencePieceProcessorEEE, 
                        __ZTSNSt3__114default_deleteIN4E5RT12BufferObjectEEE, __ZTSNSt3__114default_deleteIN4E5RT24ExecutionStreamOperationEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__shared_ptr_emplaceI48TGITextGenerationInferenceSessionStateCacheEntryNS_9allocatorIS1_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_emplaceI48TGITextGenerationInferenceSessionStateCacheEntryNS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP31TGITextGenerationInferenceModelNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP40TGITextGenerationInferenceDecodingPolicyNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP43TGITextGenerationInferenceSessionStateCacheNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 

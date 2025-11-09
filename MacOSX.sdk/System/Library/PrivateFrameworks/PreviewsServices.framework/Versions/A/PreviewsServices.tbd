@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServices.framework/Versions/A/PreviewsServices'
-current-version: 22.20.7
+current-version: 22.30.25
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -114,11 +114,14 @@ exports:
                        '_$s2os6LoggerV16PreviewsServicesE6libxpcACvgZ', '_$s2os6LoggerV16PreviewsServicesE8servicesACvgZ', 
                        '_$s8Metadata16PreviewsServices18RegistryExecutablePTl', '_$sSo9OS_os_logC16PreviewsServicesE02uvA0ABvgZ', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesV2uvSSvgZ', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesV2uvSSvpZMV', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesV6libxpcSSvgZ', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesV6libxpcSSvpZMV', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesVMa', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesVMn', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV10CategoriesVN', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV9subsystemSSvgZ', 
+                       '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsV9subsystemSSvpZMV', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVMa', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVMn', 
                        '_$sSo9OS_os_logC16PreviewsServicesE20UltravioletConstantsVN', 

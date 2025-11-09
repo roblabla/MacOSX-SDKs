@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/USDKit.framework/Versions/A/USDKit'
-current-version: 57.1.10
+current-version: 57.5.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _USDKitAdditionalErrorsKey, _USDKitErrorDomain, _USDKitVersionNumber, 
@@ -53,5 +53,5 @@ exports:
                        _USKShaderNodeTypeUVTransformReader, _USKShaderNodeTypeUnknown ]
     objc-classes:    [ USKData, USKLayerOffset, USKNode, USKObject, USKObjectPath, 
                        USKProperty, USKResource, USKResourcePath, USKScene, USKTimeCode, 
-                       USKToken, USKUtility ]
+                       USKToken, USKUtility, USKXForm, USKXFormOp ]
 ...

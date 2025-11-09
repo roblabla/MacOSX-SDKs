@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities'
-current-version: 2328.7.7
+current-version: 2333.22.13
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -14,10 +14,10 @@ exports:
                        _MDDictionaryUIntUIntGetValue, _MDDictionaryUIntUIntIncrementValue, 
                        _MDDictionaryUIntUIntIterateValues, _MDDictionaryUIntUIntRemoveAllValues, 
                        _MDDictionaryUIntUIntReplaceValue, _MDDictionaryUIntUIntSetValue, 
-                       _MDGetBestAvailableLanguage, _MDMatch, _MDMatchUTF8, _MDMatchWithFuzzyIndicies, 
-                       _MDMatchWithFuzzyIndiciesRange, _MDMatcherCreate, _MDMatcherDispose, 
-                       _MDPropertyCopyDecodedUserTags, _MDPropertyCopyDecodedValue, 
-                       _MDPropertyCopyEncodedData, _MDPropertyCopyEncodedDataForFavoriteRank, 
+                       _MDExtendedAttributeBlockList, _MDGetBestAvailableLanguage, 
+                       _MDMatch, _MDMatchUTF8, _MDMatchWithFuzzyIndicies, _MDMatchWithFuzzyIndiciesRange, 
+                       _MDMatcherCreate, _MDMatcherDispose, _MDPropertyCopyDecodedUserTags, 
+                       _MDPropertyCopyDecodedValue, _MDPropertyCopyEncodedData, _MDPropertyCopyEncodedDataForFavoriteRank, 
                        _MDPropertyCopyEncodedDataForLastUsedDateWithAsoluteTime, 
                        _MDPropertyCopyEncodedDataForLastUsedDateWithTimeSpec, _MDPropertyCopyEncodedDataForUserTagStrings, 
                        _MDPropertyCopyName, _MDPropertyCopyUserTagName, _MDPropertyCopyUserTagString, 
@@ -99,7 +99,7 @@ exports:
                        __MDStoreOIDArrayCreateWithDeallocator, __MDStoreOIDArrayEndBulkAdd, 
                        __MDStoreOIDArrayEndSequence, __MDStoreOIDArrayGetMappedVector, 
                        __MDStoreOIDArrayGetTypeID, __MDStoreOIDArrayGetVector, __MDStoreOIDArrayGetVectorCount, 
-                       __MDStoreOIDArrayRoom, __MDStoreOIDArraySetShouldDeallocate, 
+                       __MDStoreOIDArrayIsMutable, __MDStoreOIDArrayRoom, __MDStoreOIDArraySetShouldDeallocate, 
                        __MDStoreOIDArraySetShouldUseMalloc, __MDStringCopyAbbreviations, 
                        __MDUniquiedStringDictCreate, ___MDCopyTokensFromString, ___MDPlistBytesAddObject, 
                        ___MDPlistBytesAddUInt64Array, ___MDPlistBytesAddURL, ___MDPlistBytesAppendChunk, 
@@ -143,8 +143,8 @@ exports:
                        _MDMutablePlistBytes._rleTagPtr, _MDPlistBytes._byteVector, 
                        _MDPlistBytes._byteVectorCapacity, _MDPlistBytes._byteVectorCnt, 
                        _MDPlistBytes._deallocator, _MDPlistBytes._didFinalize, _MDPlistBytes._isBad, 
-                       _MDPlistBytes._isMutable, _MDPlistBytes._isMutating, _MDPlistBytes._rleQueue, 
-                       _MDPlistBytes._uidCapacity, _MDPlistBytes._uidCount, _MDPlistBytes._uidVector, 
-                       _MDPlistBytes._useMalloc, _MDPlistBytes._wrapperPtr, _MDPlistBytes._zone ]
+                       _MDPlistBytes._isMutable, _MDPlistBytes._isMutating, _MDPlistBytes._uidCapacity, 
+                       _MDPlistBytes._uidCount, _MDPlistBytes._uidVector, _MDPlistBytes._useMalloc, 
+                       _MDPlistBytes._wrapperPtr, _MDPlistBytes._zone ]
     thread-local-symbols: [ _si_tracing_current_span ]
 ...

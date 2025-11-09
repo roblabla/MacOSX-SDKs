@@ -8,8 +8,8 @@ allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMFCore, FMFCoreTests, FMIPCore, FMIPCoreTests, FMNetworkingTests, 
-                       SPSharedTests, fmipcoretool, searchpartyd, searchpartydTests, 
-                       searchpartyuseragent, sptool ]
+                       SPSharedTests, findmylocateagent, findmylocated, fmipcoretool, 
+                       searchpartyd, searchpartydTests, searchpartyuseragent, sptool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -21,7 +21,9 @@ exports:
                        '_$s12FMNetworking0A10URLSessionP8dataTask4with17completionHandlerSo016NSURLSessionDataD0C10Foundation10URLRequestV_yAI0I0VSg_So13NSURLResponseCSgs5Error_pSgtctFTq', 
                        '_$s12FMNetworking0A10URLSessionTL', '_$s12FMNetworking0A16PreferenceDomainSSvg', 
                        '_$s12FMNetworking13FMNHttpClientC10StatusCodeO10redirectedSivgZ', 
+                       '_$s12FMNetworking13FMNHttpClientC10StatusCodeO10redirectedSivpZMV', 
                        '_$s12FMNetworking13FMNHttpClientC10StatusCodeO12unauthorizedSivgZ', 
+                       '_$s12FMNetworking13FMNHttpClientC10StatusCodeO12unauthorizedSivpZMV', 
                        '_$s12FMNetworking13FMNHttpClientC10StatusCodeOMa', '_$s12FMNetworking13FMNHttpClientC10StatusCodeOMn', 
                        '_$s12FMNetworking13FMNHttpClientC10StatusCodeON', '_$s12FMNetworking13FMNHttpClientC10credential17urlSessionFactoryAcA20FMNRequestCredential_pSg_AA013FMNURLSessionG0CtcfC', 
                        '_$s12FMNetworking13FMNHttpClientC10credential17urlSessionFactoryAcA20FMNRequestCredential_pSg_AA013FMNURLSessionG0CtcfCTj', 
@@ -59,6 +61,7 @@ exports:
                        '_$s12FMNetworking13FMNHttpClientCMn', '_$s12FMNetworking13FMNHttpClientCMo', 
                        '_$s12FMNetworking13FMNHttpClientCMu', '_$s12FMNetworking13FMNHttpClientCN', 
                        '_$s12FMNetworking13FMNHttpClientCfD', '_$s12FMNetworking13HeaderKeyNameO13authorizationSSvgZ', 
+                       '_$s12FMNetworking13HeaderKeyNameO13authorizationSSvpZMV', 
                        '_$s12FMNetworking13HeaderKeyNameOMa', '_$s12FMNetworking13HeaderKeyNameOMn', 
                        '_$s12FMNetworking13HeaderKeyNameON', '_$s12FMNetworking14FMNAccountTypeO11descriptionSSvg', 
                        '_$s12FMNetworking14FMNAccountTypeO11descriptionSSvpMV', '_$s12FMNetworking14FMNAccountTypeO11itemSharingyA2CmFWC', 

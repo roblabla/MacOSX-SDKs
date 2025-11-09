@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0))
 @interface GCControllerAxisInput : GCControllerElement
 
 /**
@@ -18,7 +18,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  @param axis the element that has been modified.
  @param value the value the axis was set to at the time the valueChangedHandler fired.
  */
-typedef void (^GCControllerAxisValueChangedHandler)(GCControllerAxisInput *axis, float value);
+typedef void (^GCControllerAxisValueChangedHandler)(GCControllerAxisInput *axis, float value) API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0));
 @property (nonatomic, copy, nullable) GCControllerAxisValueChangedHandler valueChangedHandler;
 
 /**

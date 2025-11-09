@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 7.3 -module-name BrowserEngineKit
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 7621.1.15.11.6 -module-name BrowserEngineKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AVFoundation
 @_exported import BrowserEngineCore
 @_exported import BrowserEngineKit
@@ -52,7 +53,7 @@ extension BrowserEngineKit.WebContentExtension {
     @objc deinit
   }
   @objc(initWithSourceURL:destinationURL:observedProgress:liveActivityAccessToken:) public init(sourceURL: Foundation.URL, destinationURL: Foundation.URL, observedProgress: Foundation.Progress, liveActivityAccessToken: Foundation.Data)
-  @objc(useDownloadsFolderWithPlaceholderType:finalFileCreatedHandler:) public func useDownloadsFolder(placeholderType: UniformTypeIdentifiers.UTType? = nil, finalFileCreatedHandler: @escaping (@Sendable (BrowserEngineKit.BEDownloadMonitor.Location?) -> Swift.Void))
+  @objc(useDownloadsFolderWithPlaceholderType:finalFileCreatedHandler:) public func useDownloadsFolder(placeholderType: UniformTypeIdentifiers.UTType? = nil, finalFileCreatedHandler: @escaping @Sendable (BrowserEngineKit.BEDownloadMonitor.Location?) -> Swift.Void)
   @objc(beginMonitoring:) public func beginMonitoring() async throws -> BrowserEngineKit.BEDownloadMonitor.Location?
   @objc(resumeMonitoring:completionHandler:) public func resumeMonitoring(placeholderURL: Foundation.URL) async throws
   @objc(createAccessToken) public static func createAccessToken() -> Foundation.Data?
@@ -155,7 +156,6 @@ public enum RestrictedSandboxRevision : Swift.CaseIterable, Swift.Comparable {
   case revision1
   public static func < (lhs: BrowserEngineKit.RestrictedSandboxRevision, rhs: BrowserEngineKit.RestrictedSandboxRevision) -> Swift.Bool
   public static func == (a: BrowserEngineKit.RestrictedSandboxRevision, b: BrowserEngineKit.RestrictedSandboxRevision) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 17.4, macOS 14.3, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -164,6 +164,7 @@ public enum RestrictedSandboxRevision : Swift.CaseIterable, Swift.Comparable {
   nonisolated public static var allCases: [BrowserEngineKit.RestrictedSandboxRevision] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

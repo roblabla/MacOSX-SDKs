@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 224.2.7 -module-name FinanceKit
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 224.4.19 -module-name FinanceKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import CoreData
 import CoreGraphics
 @_exported import FinanceKit
@@ -9,6 +10,7 @@ import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+import os.log
 import os
 @available(iOS 17, *)
 @available(tvOS, unavailable)
@@ -21,7 +23,6 @@ extension FinanceKit.FinanceStore {
     case newerExists
     case olderExists
     public static func == (a: FinanceKit.FinanceStore.ContainsOrderResult, b: FinanceKit.FinanceStore.ContainsOrderResult) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 17, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -30,6 +31,7 @@ extension FinanceKit.FinanceStore {
     nonisolated public static var allCases: [FinanceKit.FinanceStore.ContainsOrderResult] {
       get
     }
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -52,7 +54,6 @@ extension FinanceKit.FinanceStore {
     case cancelled
     case newerExisting
     public static func == (a: FinanceKit.FinanceStore.SaveOrderResult, b: FinanceKit.FinanceStore.SaveOrderResult) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 17, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -61,6 +62,7 @@ extension FinanceKit.FinanceStore {
     nonisolated public static var allCases: [FinanceKit.FinanceStore.SaveOrderResult] {
       get
     }
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -80,8 +82,8 @@ extension FinanceKit.FinanceStore {
 extension FinanceKit.FinanceStore {
   public enum DataType : Swift.Equatable, Swift.Sendable {
     case orders
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: FinanceKit.FinanceStore.DataType, b: FinanceKit.FinanceStore.DataType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -103,8 +105,8 @@ public struct FullyQualifiedOrderIdentifier : Swift.Codable, Swift.Hashable, Swi
   public var orderIdentifier: Swift.String
   public init(orderTypeIdentifier: Swift.String, orderIdentifier: Swift.String)
   public static func == (a: FinanceKit.FullyQualifiedOrderIdentifier, b: FinanceKit.FullyQualifiedOrderIdentifier) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

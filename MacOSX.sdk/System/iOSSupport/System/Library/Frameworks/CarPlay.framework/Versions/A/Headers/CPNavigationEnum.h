@@ -11,10 +11,10 @@
 #import <CarPlay/CPManeuver.h>
 
 #pragma mark - Maneuver
-NSString *NSStringFromCPManeuverType(CPManeuverType maneuverType);
-NSString *NSStringFromCPJunctionType(CPJunctionType junctionType);
-NSString *NSStringFromCPTrafficSide(CPTrafficSide trafficSide);
+NSString *NSStringFromCPManeuverType(CPManeuverType maneuverType) API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
+NSString *NSStringFromCPJunctionType(CPJunctionType junctionType) API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
+NSString *NSStringFromCPTrafficSide(CPTrafficSide trafficSide) API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 #pragma mark - Lane
-NSString *NSStringFromCPLaneStatus(CPLaneStatus laneStatus);
+NSString *NSStringFromCPLaneStatus(CPLaneStatus laneStatus) API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 

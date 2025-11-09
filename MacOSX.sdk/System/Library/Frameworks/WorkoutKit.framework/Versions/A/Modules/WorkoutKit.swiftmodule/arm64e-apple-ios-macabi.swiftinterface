@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 906.24 -module-name WorkoutKit
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 907.15 -module-name WorkoutKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import CoreLocation
 import Foundation
 import HealthKit
@@ -487,9 +488,9 @@ public struct WorkoutPlan : Swift.Equatable, Swift.Hashable, Swift.Sendable, Swi
     get throws
   }
   public static func == (a: WorkoutKit.WorkoutPlan, b: WorkoutKit.WorkoutPlan) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 17.0, watchOS 10.0, macOS 15.0, macCatalyst 18.0, *)
   public typealias ID = Foundation.UUID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

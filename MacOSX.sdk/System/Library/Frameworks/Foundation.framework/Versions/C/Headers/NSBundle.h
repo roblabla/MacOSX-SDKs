@@ -97,6 +97,15 @@ NS_SWIFT_SENDABLE
 - (NSAttributedString *)localizedAttributedStringForKey:(NSString *)key value:(nullable NSString *)value table:(nullable NSString *)tableName NS_FORMAT_ARGUMENT(1) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 #endif 
 
+/// Look up a localized string given a list of available localizations.
+/// - Parameters:
+///   - key: The key for the localized string to retrieve.
+///   - value: A default value to return if a localized string for ``key`` cannot be found.
+///   - tableName: The name of the strings file to search. If `nil`, the method uses tables in `Localizable.strings`.
+///   - localizations: An array of BCP 47 language codes corresponding to available localizations. Bundle compares the array against its available localizations, and uses the best result to retrieve the localized string. If empty, we treat it as no localization is available, and may return a fallback.
+/// - Returns: A localized version of the string designated by ``key`` in table ``tableName``.
+- (NSString *)localizedStringForKey:(NSString *)key value:(nullable NSString *)value table:(nullable NSString *)tableName localizations:(NSArray<NSString *>*)localizations NS_FORMAT_ARGUMENT(1) API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4), tvos(18.4), visionos(2.4)) NS_REFINED_FOR_SWIFT;
+
 /* Methods for obtaining various information about a bundle. */
 @property (nullable, readonly, copy) NSString *bundleIdentifier;
 @property (nullable, readonly, copy) NSDictionary<NSString *, id> *infoDictionary;

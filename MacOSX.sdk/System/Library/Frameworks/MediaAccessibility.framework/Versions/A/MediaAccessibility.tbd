@@ -9,6 +9,7 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo14MAMusicHapticsV18MediaAccessibilityE34enabledStatusDidChangeNotificationSo18NSNotificationNameavgZ', 
+                       '_$sSo14MAMusicHapticsV18MediaAccessibilityE34enabledStatusDidChangeNotificationSo18NSNotificationNameavpZMV', 
                        '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE14processSurface_03outG09timestamp7optionsAbCE6ResultVSo12IOSurfaceRefa_AKzSdSDySo0abC9OptionKeyaypGSgtF', 
                        '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV14intensityLevelSfvg', 
                        '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV14intensityLevelSfvpMV', 

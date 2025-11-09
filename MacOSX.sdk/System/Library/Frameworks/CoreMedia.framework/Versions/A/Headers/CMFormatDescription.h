@@ -1000,12 +1000,18 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HasAdditionalViews API
 	@abstract	 Indicates the projection that should be applied to presented decoded video frames.
 	@constant    `kCMFormatDescriptionProjectionKind_Rectilinear`
 		Indicates rectilinear projection. Generally less than 90 degree field of view with no barrel distortion.
+	@constant    `kCMFormatDescriptionProjectionKind_Equirectangular`
+ 		Indicates equirectangular projection of a 360 degree sphere to a rectangular plane, where longitude and latitude of the sphere are mapped linearly to the x,y axes of the plane.
+ 	@constant    `kCMFormatDescriptionProjectionKind_HalfEquirectangular`
+ 		Indicates half equirectangular projection of a 180 degree hemisphere to a rectangular plane, where longitude and latitude of the sphere are mapped linearly to the x,y axes of the plane
 	@discussion
 		The value is a CFString holding one of the kCMFormatDescriptionProjectionKind_* constants.
 */
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ProjectionKind
 	API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 	CM_EXPORT const CFStringRef kCMFormatDescriptionProjectionKind_Rectilinear API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
+	CM_EXPORT const CFStringRef kCMFormatDescriptionProjectionKind_Equirectangular API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
+	CM_EXPORT const CFStringRef kCMFormatDescriptionProjectionKind_HalfEquirectangular API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@constant 	`kCMFormatDescriptionExtension_ViewPackingKind`

@@ -8,6 +8,7 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s26IntelligentRoutingServices12PlatformInfoO15isInternalBuildSbvgZ', 
+                       '_$s26IntelligentRoutingServices12PlatformInfoO15isInternalBuildSbvpZMV', 
                        '_$s26IntelligentRoutingServices12PlatformInfoOMa', '_$s26IntelligentRoutingServices12PlatformInfoOMn', 
                        '_$s26IntelligentRoutingServices12PlatformInfoON', '_$s26IntelligentRoutingServices24DarwinNotificationHelperC11addObserver03forE4Name7handlerSbSS_yyctFTj', 
                        '_$s26IntelligentRoutingServices24DarwinNotificationHelperC11addObserver03forE4Name7handlerSbSS_yyctFTq', 

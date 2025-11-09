@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Hypervisor.framework/Versions/A/Hypervisor'
-current-version: 210.3.12
+current-version: 210.5.6
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _hv_capability, _hv_tsc_clock, _hv_vcpu_apic_ctrl, _hv_vcpu_apic_get_state, 

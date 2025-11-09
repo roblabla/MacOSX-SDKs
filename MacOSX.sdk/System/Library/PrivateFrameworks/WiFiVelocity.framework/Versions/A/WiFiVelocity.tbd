@@ -35,9 +35,9 @@ exports:
     objc-classes:    [ W5AWDLStatus, W5BluetoothDevice, W5BluetoothStatus, W5Client, 
                        W5DebugConfiguration, W5DiagnosticsMode, W5DiagnosticsModePeer, 
                        W5DiagnosticsTestRequest, W5DiagnosticsTestResult, W5Event, 
-                       W5LogItemReceipt, W5LogItemRequest, W5NetworkStatus, W5Peer, 
-                       W5PeerDiscoveryConfiguration, W5PeerDiscoveryEvent, W5PingResult, 
-                       W5PowerStatus, W5Status, W5SummaryFaults, W5SummaryLinkTests, 
+                       W5FeatureAvailability, W5LogItemReceipt, W5LogItemRequest, 
+                       W5NetworkStatus, W5Peer, W5PeerDiscoveryConfiguration, W5PeerDiscoveryEvent, 
+                       W5PingResult, W5PowerStatus, W5Status, W5SummaryFaults, W5SummaryLinkTests, 
                        W5SummaryRecoveries, W5WiFiChannel, W5WiFiLinkQualityUpdate, 
                        W5WiFiPreferredNetwork, W5WiFiScanResult, W5WiFiStatus ]
 ...

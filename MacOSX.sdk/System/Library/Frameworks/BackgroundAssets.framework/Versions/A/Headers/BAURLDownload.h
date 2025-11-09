@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 @interface BAURLDownload : BADownload<NSCopying>
 
 + (instancetype)new NS_UNAVAILABLE;
@@ -26,7 +27,7 @@ API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
                            request:(NSURLRequest *)request
                           fileSize:(NSUInteger)fileSize
         applicationGroupIdentifier:(NSString *)applicationGroupIdentifier
-API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(13.3), ios(16.4), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 /// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request.
 /// @param identifier A unique identifier that is used to track the download across the app and extension.
@@ -44,7 +45,7 @@ API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos);
         applicationGroupIdentifier:(NSString *)applicationGroupIdentifier
                           priority:(BADownloaderPriority)priority
 NS_DESIGNATED_INITIALIZER
-API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos);
+API_AVAILABLE(macos(13.3), ios(16.4), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos);
 
 #pragma mark -
 #pragma mark Deprecated APIs
@@ -57,7 +58,7 @@ API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos);
                            request:(NSURLRequest *)request
         applicationGroupIdentifier:(NSString *)applicationGroupIdentifier
 API_DEPRECATED_WITH_REPLACEMENT("initWithIdentifier:request:fileSize:applicationGroupIdentifier:", ios(16.1, 16.4), macos(13.0, 13.3))
-API_UNAVAILABLE(tvos, watchos);
+API_UNAVAILABLE(tvos, watchos, visionos);
 
 /// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request.
 /// @param identifier A unique identifier that is used to track the download across the app and extension.
@@ -70,7 +71,7 @@ API_UNAVAILABLE(tvos, watchos);
         applicationGroupIdentifier:(NSString *)applicationGroupIdentifier
                           priority:(BADownloaderPriority)priority
 API_DEPRECATED_WITH_REPLACEMENT("initWithIdentifier:request:essential:fileSize:applicationGroupIdentifier:priority:", ios(16.1, 16.4), macos(13.0, 13.3))
-API_UNAVAILABLE(tvos, watchos);
+API_UNAVAILABLE(tvos, watchos, visionos);
 
 @end
 

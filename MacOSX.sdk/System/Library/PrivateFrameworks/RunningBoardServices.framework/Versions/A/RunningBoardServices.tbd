@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 945.60.6
+current-version: 961.100.17
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -13,11 +13,12 @@ exports:
                        _NSStringFromRBSLegacyFlags, _NSStringFromRBSLegacyReason, 
                        _NSStringFromRBSMemoryLimitStrength, _NSStringFromRBSPreventLaunchState, 
                        _NSStringFromRBSRole, _NSStringFromRBSTaskState, _NSStringFromRBSTerminationResistance, 
-                       _RBSAcquisitionCompletionPolicyIsValid, _RBSArrayForKey, _RBSAssertionErrorAttributeKey, 
-                       _RBSAssertionErrorDomain, _RBSAssertionErrorDomainKey, _RBSAtomicGetFlag, 
-                       _RBSAtomicSetFlag, _RBSAuditTokenRepresentsPlatformBinary, 
-                       _RBSBoolForKey, _RBSBundleIDForPID, _RBSCaptureStateToFile, 
-                       _RBSConnectionServiceName, _RBSContainedExtensionBundleIDs, 
+                       _RBSAcquisitionCompletionPolicyIsValid, _RBSAppViewServiceMachServiceName, 
+                       _RBSAppViewServiceSessionVendingEntitlement, _RBSArrayForKey, 
+                       _RBSAssertionErrorAttributeKey, _RBSAssertionErrorDomain, 
+                       _RBSAssertionErrorDomainKey, _RBSAtomicGetFlag, _RBSAtomicSetFlag, 
+                       _RBSAuditTokenRepresentsPlatformBinary, _RBSBoolForKey, _RBSBundleIDForPID, 
+                       _RBSCaptureStateToFile, _RBSConnectionServiceName, _RBSContainedExtensionBundleIDs, 
                        _RBSCreateDeserializedCFValueFromXPCDictionaryWithKey, _RBSCreateDeserializedDataFromXPCDictionaryWithKey, 
                        _RBSCreateDeserializedNSSecureEncodableObjectOfClassFromXPCDictionaryWithKey, 
                        _RBSCreateDeserializedStringFromXPCDictionaryWithKey, _RBSCurrentUserDirectory, 

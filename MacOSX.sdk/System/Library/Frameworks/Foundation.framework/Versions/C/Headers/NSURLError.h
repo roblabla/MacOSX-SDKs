@@ -39,14 +39,14 @@ FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLErrorKey API_AVAILABLE(ma
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail.
     @discussion This constant supersedes NSErrorFailingURLStringKey, which was deprecated in Mac OS X 10.6.  Both constants refer to the same value for backward-compatibility, but this symbol name has a better prefix.
 */
-FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLStringErrorKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLStringErrorKey API_DEPRECATED("Use NSURLErrorFailingURLErrorKey instead", macos(10.6,15.4), ios(4.0,18.4), watchos(2.0,11.4), tvos(9.0,18.4), visionos(1.0,2.4));
 
 /*!
     @const NSErrorFailingURLStringKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail.
     @discussion This constant is deprecated in Mac OS X 10.6, and is superseded by NSURLErrorFailingURLStringErrorKey.  Both constants refer to the same value for backward-compatibility, but the new symbol name has a better prefix.
 */
-FOUNDATION_EXPORT NSString * const NSErrorFailingURLStringKey API_DEPRECATED("Use NSURLErrorFailingURLStringErrorKey instead", macos(10.0,10.6), ios(2.0,4.0), watchos(2.0,2.0), tvos(9.0,9.0));
+FOUNDATION_EXPORT NSString * const NSErrorFailingURLStringKey API_DEPRECATED("Use NSURLErrorFailingURLErrorKey instead", macos(10.0,10.6), ios(2.0,4.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /*!
     @const NSURLErrorFailingURLPeerTrustErrorKey

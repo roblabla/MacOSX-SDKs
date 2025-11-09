@@ -45,6 +45,9 @@ typedef NS_ENUM(NSInteger, NSFormattingUnitStyle) {
     NSFormattingUnitStyleLong,
 } API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
+// NSFormatter does not specify if it is Sendable. Subclasses should annotate themselves.
+// This allows subclasses to declare sendable conformances without requiring that all subclasses must be sendable
+NS_HEADER_AUDIT_END(sendability)
 @interface NSFormatter : NSObject <NSCopying, NSCoding>
 
 - (nullable NSString *)stringForObjectValue:(nullable id)obj;
@@ -61,5 +64,6 @@ typedef NS_ENUM(NSInteger, NSFormattingUnitStyle) {
 - (BOOL)isPartialStringValid:(NSString * _Nonnull * _Nonnull)partialStringPtr proposedSelectedRange:(nullable NSRangePointer)proposedSelRangePtr originalString:(NSString *)origString originalSelectedRange:(NSRange)origSelRange errorDescription:(NSString * _Nullable * _Nullable)error;
 
 @end
+NS_HEADER_AUDIT_BEGIN(sendability)
 
 NS_HEADER_AUDIT_END(nullability, sendability)

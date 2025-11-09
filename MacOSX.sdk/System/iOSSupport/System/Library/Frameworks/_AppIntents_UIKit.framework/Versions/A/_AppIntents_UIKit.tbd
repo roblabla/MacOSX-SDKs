@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AppIntents_UIKit.framework/Versions/A/_AppIntents_UIKit'
-current-version: 226.3
+current-version: 227.13
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -12,9 +12,11 @@ exports:
                        '_$s10AppIntents0A7ManagerC01_aB6_UIKitE08registerD5HooksyyFZ', 
                        '_$s10AppIntents0A7ManagerC01_aB6_UIKitE17sceneConfiguratorAD011IntentSceneF0_pvMZ', 
                        '_$s10AppIntents0A7ManagerC01_aB6_UIKitE17sceneConfiguratorAD011IntentSceneF0_pvgZ', 
+                       '_$s10AppIntents0A7ManagerC01_aB6_UIKitE17sceneConfiguratorAD011IntentSceneF0_pvpZMV', 
                        '_$s10AppIntents0A7ManagerC01_aB6_UIKitE17sceneConfiguratorAD011IntentSceneF0_pvsZ', 
                        '_$s10AppIntents15ShareableEntityP01_aB6_UIKitE13configuration4fromSo35UIActivityItemsConfigurationReading_pSayxG_tFZ', 
                        '_$s10AppIntents15ShareableEntityP01_aB6_UIKitSo35UIActivityItemsConfigurationReadingRzrlE13configuration4fromSoAE_pSayxG_tFZ', 
+                       '_$s10AppIntents21DisplayRepresentationV5ImageV01_aB6_UIKitE10systemName15foregroundColor010backgroundJ019symbolConfigurationAESgSS_So7UIColorCSgANSo013UIImageSymbolM0CSgtcfC', 
                        '_$s10AppIntents21DisplayRepresentationV5ImageV01_aB6_UIKitE10systemName9tintColor19symbolConfigurationAESgSS_So7UIColorCSgSo013UIImageSymbolL0CSgtcfC', 
                        '_$s17_AppIntents_UIKit011UITableViewaB10DataSourceMp', '_$s17_AppIntents_UIKit011UITableViewaB10DataSourceP05tableE0_27appEntityIdentifierForRowAt0aB00jK0VSgSo0dE0C_10Foundation9IndexPathVtFTj', 
                        '_$s17_AppIntents_UIKit011UITableViewaB10DataSourceP05tableE0_27appEntityIdentifierForRowAt0aB00jK0VSgSo0dE0C_10Foundation9IndexPathVtFTq', 
@@ -170,17 +172,27 @@ exports:
                        '_$sSo11NSPredicateC17_AppIntents_UIKitE20matchingAnyExecution2ofABxm_t0bC00B6IntentRzlFZ', 
                        '_$sSo11NSPredicateC17_AppIntents_UIKitE8matching6intentAB0bC001_B16IntentProjectionVyxG_tAF0bG0RzlFZ', 
                        '_$sSo11NSPredicateC17_AppIntents_UIKitE8matching6intentABx_t0bC00B6IntentRzlFZ', 
+                       '_$sSo11UITableViewC10AppIntents26CollectionsEntityProviding01_cD6_UIKitMc', 
                        '_$sSo11UITableViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvM', 
                        '_$sSo11UITableViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvg', 
                        '_$sSo11UITableViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvpMV', 
                        '_$sSo11UITableViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvs', 
+                       '_$sSo11UITableViewC17_AppIntents_UIKitE20appEntityIdentifiers3forSDy21UIIntelligenceSupport26IntelligenceDataSourceItemO0cD00G10IdentifierVGAF0lmnO7RequestV_tF', 
+                       '_$sSo16UICollectionViewC10AppIntents26CollectionsEntityProviding01_cD6_UIKitMc', 
                        '_$sSo16UICollectionViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvM', 
                        '_$sSo16UICollectionViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvg', 
                        '_$sSo16UICollectionViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvpMV', 
                        '_$sSo16UICollectionViewC17_AppIntents_UIKitE03appD10DataSourceAC0abcdgH0_pSgvs', 
+                       '_$sSo16UICollectionViewC17_AppIntents_UIKitE20appEntityIdentifiers3forSDy21UIIntelligenceSupport26IntelligenceDataSourceItemO0cD00G10IdentifierVGAF0lmnO7RequestV_tF', 
                        '_$sSo24UISceneConnectionOptionsC17_AppIntents_UIKitE19_appIntentExecutionAC01_dhI0VSgvg', 
                        '_$sSo24UISceneConnectionOptionsC17_AppIntents_UIKitE19_appIntentExecutionAC01_dhI0VSgvpMV', 
+                       '_$sSo5UITabC10AppIntents0B17EntityAnnotatable01_bC6_UIKitMc', 
+                       '_$sSo5UITabC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvM', 
+                       '_$sSo5UITabC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvg', 
+                       '_$sSo5UITabC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvpMV', 
+                       '_$sSo5UITabC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvs', 
                        '_$sSo6UIViewC10AppIntents0B17EntityAnnotatable01_bC6_UIKitMc', 
+                       '_$sSo6UIViewC10AppIntents0B25EntityUIElementsProviding01_bC6_UIKitMc', 
                        '_$sSo6UIViewC10AppIntents17GeometryProviding01_bC6_UIKitMc', 
                        '_$sSo6UIViewC10AppIntents19IdentifierProviding01_bC6_UIKitMc', 
                        '_$sSo6UIViewC10AppIntents19VisibilityProviding01_bC6_UIKitMc', 
@@ -189,6 +201,7 @@ exports:
                        '_$sSo6UIViewC17_AppIntents_UIKitE014setRepresentedB6Entity_10identifieryxm_2IDQzSgt0bC00bG0RzlF', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE014setRepresentedB6Entityyy0bC00bG0_pSgF', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE06updateB16EntityAnnotation4withy0bC00bF11VisualStateV_tF', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE10uiElements3forSay0bC00B15EntityUIElementVGAF0bH17UIElementsContextV_tF', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE11visualState0bC00b12EntityVisualF0Vvg', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE11visualState0bC00b12EntityVisualF0VvpMV', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE12viewProvider21UIIntelligenceSupport012IntelligencebC16PayloadProviding_AE0i10SubelementK0pSgvg', 
@@ -201,6 +214,10 @@ exports:
                        '_$sSo6UIViewC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvg', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvpMV', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvs', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE26appEntityUIElementProviderSay0bC00bfG0VGAB_AE0bF17UIElementsContextVtcSgvM', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE26appEntityUIElementProviderSay0bC00bfG0VGAB_AE0bF17UIElementsContextVtcSgvg', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE26appEntityUIElementProviderSay0bC00bfG0VGAB_AE0bF17UIElementsContextVtcSgvpMV', 
+                       '_$sSo6UIViewC17_AppIntents_UIKitE26appEntityUIElementProviderSay0bC00bfG0VGAB_AE0bF17UIElementsContextVtcSgvs', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE6bridge0bC00B27ViewBridgeAnnotationManager_pSgvg', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE6bridge0bC00B27ViewBridgeAnnotationManager_pSgvpMV', 
                        '_$sSo6UIViewC17_AppIntents_UIKitE8annotate4withyAC0B20EntityViewAnnotationC_tF', 

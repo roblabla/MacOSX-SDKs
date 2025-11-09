@@ -39,7 +39,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
  *  @abstract   If YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
  */
 @property (readwrite, nonatomic) BOOL preferPackedRows
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 /*! @abstract   The number of elements of type dataType in the indicated dimension.
  *  @discussion If dimensionIndex >= numberOfDimensions, 1 will be returned.
@@ -83,7 +83,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
  *
  */
 -(void) permuteWithDimensionOrder: (NSUInteger*__nonnull) dimensionOrder
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 /*! @abstract    The new ordering of dimensions
  *  @discussion  If a transpose is applied, it will change the order
@@ -95,7 +95,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
 /*! @abstract    Returns the shape of the NDArray as MPSShape
  *  @discussion  The length of the array is the number of dimensions and the size of the fastest running dimension is the last element in the array.   */
 -(NSArray<NSNumber *> * _Nonnull) getShape
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 /*! @abstract   Create an MPSNDArrayDescriptor object for a given size of dimensions.
  *  @discussion Sample code:
@@ -304,12 +304,12 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
 -(nonnull instancetype) initWithBuffer:(id<MTLBuffer> _Nonnull) buffer
                                 offset:(NSUInteger) offset
                             descriptor:(MPSNDArrayDescriptor * _Nonnull) descriptor
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 /*! @abstract   Returns the user buffer in case the NDArray was initialized with an MTLBuffer.
  *   @return    The user-provided MTLBuffer that was used to initialize this MPSNDArray or nil, in case it was not.. */
 -(__nullable id <MTLBuffer>) userBuffer
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 /*! @abstract       Get the number of bytes used to allocate underyling MTLResources
  *  @discussion     This is the size of the backing store of underlying MTLResources.
@@ -353,7 +353,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
  *  @param      descriptor  A MPSNDArrayDescriptor describing the shape of the new view of the data
  *  @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased. */
 -(MPSNDArray * __nullable)     arrayViewWithDescriptor: (MPSNDArrayDescriptor * _Nonnull) descriptor
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 /*! @abstract   Make a new representation of a MPSNDArray with given strides and a new shape.
  *  @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
@@ -364,7 +364,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
  *  @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased. */
 -(MPSNDArray * __nullable)     arrayViewWithShape:(MPSShape * _Nullable) shape
                                           strides:(MPSShape * _Nonnull)  strides
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 /*! @abstract   Make a new representation of a MPSNDArray with given strides and a new shape.
  *  @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
@@ -377,7 +377,7 @@ MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xr
 -(MPSNDArray * __nullable)     arrayViewWithDimensionCount:(NSUInteger) numberOfDimensions
                                             dimensionSizes:(const NSUInteger * _Nonnull) dimensionSizes
                                                    strides:(const NSUInteger * _Nonnull) dimStrides
-MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0));
 
 
 /*! @abstract   The parent MPSNDArray that this object aliases

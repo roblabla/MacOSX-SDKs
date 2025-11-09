@@ -302,7 +302,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
-current-version: 807.1
+current-version: 807.2
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -558,7 +558,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 592.1
+current-version: 592.3
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -696,15 +696,14 @@ exports:
                        _PMTicketSetTicket, _PMTicketSetUInt32, _PMTicketToLightXML, 
                        _PMTicketToXML, _PMWorkflowCopyItems, _PMWorkflowSubmitPDFWithOptions, 
                        _PMWorkflowSubmitPDFWithSettings, _PMXMLToTicket, __PMLog, 
-                       __PMLogLocalize, __PMLogPerf, __Z11_PMTraceLogv, __Z12_PMLogWhencePKcS0_S0_PKv, 
-                       __ZN12PMBaseObject14SetAppReadOnlyEh, __ZN12PMBaseObject15CopyObjectStateEPS_, 
-                       __ZN12PMBaseObject16CreateEmptyArrayEv, __ZN12PMBaseObject21SetUsingRemoteObjectsEh, 
-                       __ZN14OpaquePMPresetC1EPK14__CFDictionary, __ZN14OpaquePMPresetC2EPK14__CFDictionary, 
-                       __ZN15OpaquePMPrinter14GetPrinterNameEv, __ZN15OpaquePMPrinter14IsQueueStoppedEv, 
-                       __ZN15OpaquePMPrinter16IsGenericPrinterEv, __ZN15OpaquePMPrinter19GetPaperListForMenuEv, 
-                       __ZN15OpaquePMPrinter19SetPaperListForMenuEPK9__CFArray, __ZN15OpaquePMPrinter22IsPrinterDirectConnectEv, 
-                       __ZN18OpaquePMPageFormat21PJCValidPageFormatKeyEPS_, __ZN18PMTicketBaseObject12GetTicketRefEv, 
-                       __ZN18PMTicketBaseObject12SetTicketRefEP17OpaquePMTicketRef, 
+                       __PMLogLocalize, __PMLogPerf, __ZN12PMBaseObject14SetAppReadOnlyEh, 
+                       __ZN12PMBaseObject15CopyObjectStateEPS_, __ZN12PMBaseObject16CreateEmptyArrayEv, 
+                       __ZN12PMBaseObject21SetUsingRemoteObjectsEh, __ZN14OpaquePMPresetC1EPK14__CFDictionary, 
+                       __ZN14OpaquePMPresetC2EPK14__CFDictionary, __ZN15OpaquePMPrinter14GetPrinterNameEv, 
+                       __ZN15OpaquePMPrinter14IsQueueStoppedEv, __ZN15OpaquePMPrinter16IsGenericPrinterEv, 
+                       __ZN15OpaquePMPrinter19GetPaperListForMenuEv, __ZN15OpaquePMPrinter19SetPaperListForMenuEPK9__CFArray, 
+                       __ZN15OpaquePMPrinter22IsPrinterDirectConnectEv, __ZN18OpaquePMPageFormat21PJCValidPageFormatKeyEPS_, 
+                       __ZN18PMTicketBaseObject12GetTicketRefEv, __ZN18PMTicketBaseObject12SetTicketRefEP17OpaquePMTicketRef, 
                        __ZN18PMTicketBaseObject23ReleaseAndReplaceTicketEP17OpaquePMTicketRef, 
                        __ZN20OpaquePMPrintSession10ClearErrorEv, __ZN20OpaquePMPrintSession10SetPreviewEhj, 
                        __ZN20OpaquePMPrintSession12GetJobTicketEv, __ZN20OpaquePMPrintSession16GetXPCConnectionEv, 

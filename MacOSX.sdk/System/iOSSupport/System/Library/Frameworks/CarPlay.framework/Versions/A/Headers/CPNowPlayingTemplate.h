@@ -9,6 +9,7 @@
 #import <CarPlay/CPTemplate.h>
 #import <UIKit/UIKit.h>
 #import <CarPlay/CPNowPlayingButton.h>
+#import <CarPlay/CPNowPlayingMode.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -100,6 +101,11 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  Update the buttons displayed in this Now Playing template.
  */
 - (void)updateNowPlayingButtons:(NSArray <__kindof CPNowPlayingButton *> *)nowPlayingButtons;
+
+/**
+ The currently-active now playing mode. See @c CPNowPlayingMode.
+ */
+@property (nonatomic, strong, nullable) CPNowPlayingMode *nowPlayingMode API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 @end
 

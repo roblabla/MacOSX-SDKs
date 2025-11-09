@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalDrag.framework/Versions/A/UniversalDrag'
-current-version: 16
+current-version: 19
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -67,6 +67,7 @@ exports:
                        '_$s13UniversalDrag0B10ControllerC8DelegatePAAE04dragC0_15sendContentData2to10completionyAC_10Foundation0H0VAJ4UUIDVyycSgtF', 
                        '_$s13UniversalDrag0B10ControllerC8DelegatePAAE04dragC14DidUpdateBadge_5styleyAC_AA0bH5StyleOtF', 
                        '_$s13UniversalDrag0B10ControllerC8DelegatePAAE04dragC14SurrogateEnded_7success5erroryAC_Sbs5Error_pSgtF', 
+                       '_$s13UniversalDrag0B10ControllerC8DelegatePAAE04dragC19WillSnapshotPreviewyAA0G8SettingsVSgACF', 
                        '_$s13UniversalDrag0B10ControllerC8DelegatePAAE04dragC23SurrogateDidEndTracking_7successyAC_SbtF', 
                        '_$s13UniversalDrag0B10ControllerC8DelegatePAAE04dragc24SurrogateDidPrepareLocalB0_2atyAC_So7CGPointVtF', 
                        '_$s13UniversalDrag0B10ControllerC8DelegatePAAE04dragc25SurrogateWillPrepareLocalB0_2atyAC_So7CGPointVtF', 
@@ -84,7 +85,8 @@ exports:
                        '_$s13UniversalDrag0B10ControllerCMn', '_$s13UniversalDrag0B10ControllerCMo', 
                        '_$s13UniversalDrag0B10ControllerCMu', '_$s13UniversalDrag0B10ControllerCN', 
                        '_$s13UniversalDrag0B10ControllerCfD', '_$s13UniversalDrag0B10ControllerCfd', 
-                       '_$sSo6CGRectV13UniversalDragE11descriptionSSvg', '_$sSo6CGRectV13UniversalDragE11descriptionSSvpMV', 
-                       '_$sSo6CGRectVs23CustomStringConvertible13UniversalDragMc' ]
+                       '_$s13UniversalDrag16SnapshotSettingsVMa', '_$s13UniversalDrag16SnapshotSettingsVMn', 
+                       '_$s13UniversalDrag16SnapshotSettingsVN', '_$sSo6CGRectV13UniversalDragE11descriptionSSvg', 
+                       '_$sSo6CGRectV13UniversalDragE11descriptionSSvpMV', '_$sSo6CGRectVs23CustomStringConvertible13UniversalDragMc' ]
     objc-classes:    [ CoreDragImageWrapper ]
 ...

@@ -37,17 +37,6 @@
 #include <kern/kern_types.h>
 #include <kern/ledger.h>
 
-extern void sfi_init(void);
-extern sfi_class_id_t sfi_get_ledger_alias_for_class(sfi_class_id_t class_id);
-extern int sfi_ledger_entry_add(ledger_template_t template, sfi_class_id_t class_id);
-
-kern_return_t sfi_set_window(uint64_t window_usecs);
-kern_return_t sfi_window_cancel(void);
-kern_return_t sfi_get_window(uint64_t *window_usecs);
-
-kern_return_t sfi_set_class_offtime(sfi_class_id_t class_id, uint64_t offtime_usecs);
-kern_return_t sfi_class_offtime_cancel(sfi_class_id_t class_id);
-kern_return_t sfi_get_class_offtime(sfi_class_id_t class_id, uint64_t *offtime_usecs);
 
 
 #endif /* _KERN_SFI_H_ */

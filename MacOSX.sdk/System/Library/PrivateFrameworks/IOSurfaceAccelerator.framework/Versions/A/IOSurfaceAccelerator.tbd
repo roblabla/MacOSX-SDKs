@@ -48,11 +48,11 @@ exports:
                        _kIOSurfaceAcceleratorSharpenerSourceSharpness_Sharp, _kIOSurfaceAcceleratorSharpenerStrength, 
                        _kIOSurfaceAcceleratorSharpenerStrength_Normal, _kIOSurfaceAcceleratorSharpenerStrength_Strong, 
                        _kIOSurfaceAcceleratorSharpenerStrength_Weak, _kIOSurfaceAcceleratorSkipAsyncCallback, 
-                       _kIOSurfaceAcceleratorSymmetricTransformKey, _kIOSurfaceAcceleratorUnwireSurfaceKey, 
-                       _kIOSurfaceAcceleratorUseCustomFilter, _kIOSurfaceAcceleratorUseNearestFilter, 
-                       _kIOSurfaceAcceleratorVraScaling, _kIOSurfaceAcceleratorWriteOnlyModeAlpha, 
-                       _kIOSurfaceAcceleratorWriteOnlyModeBlueCr, _kIOSurfaceAcceleratorWriteOnlyModeGreenCb, 
-                       _kIOSurfaceAcceleratorWriteOnlyModeRedLuma, _kIOSurfaceAcceleratorZeroFill, 
-                       _prepareCustomFilter, _prepareTransformBuffersAndOptions, 
+                       _kIOSurfaceAcceleratorSymmetricScaling, _kIOSurfaceAcceleratorSymmetricTransformKey, 
+                       _kIOSurfaceAcceleratorUnwireSurfaceKey, _kIOSurfaceAcceleratorUseCustomFilter, 
+                       _kIOSurfaceAcceleratorUseNearestFilter, _kIOSurfaceAcceleratorVraScaling, 
+                       _kIOSurfaceAcceleratorWriteOnlyModeAlpha, _kIOSurfaceAcceleratorWriteOnlyModeBlueCr, 
+                       _kIOSurfaceAcceleratorWriteOnlyModeGreenCb, _kIOSurfaceAcceleratorWriteOnlyModeRedLuma, 
+                       _kIOSurfaceAcceleratorZeroFill, _prepareCustomFilter, _prepareTransformBuffersAndOptions, 
                        _prepareTransformRectangles ]
 ...

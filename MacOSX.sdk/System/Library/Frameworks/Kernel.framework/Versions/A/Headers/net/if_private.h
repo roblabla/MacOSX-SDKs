@@ -238,6 +238,7 @@ struct  ifreq {
 #define IFRTYPE_QOSMARKING_CUSTOM       3       /* supported: socket/channel */
 		u_int32_t ifru_qosmarking_enabled;
 		u_int32_t ifru_disable_output;
+		int32_t   ifru_point_to_point_mdns;
 		u_int32_t ifru_low_internet;
 #define IFRTYPE_LOW_INTERNET_DISABLE_UL_DL      0x0000
 #define IFRTYPE_LOW_INTERNET_ENABLE_UL          0x0001
@@ -302,6 +303,7 @@ struct  ifreq {
 #define ifr_qosmarking_enabled  ifr_ifru.ifru_qosmarking_enabled
 #define ifr_fastlane_enabled    ifr_qosmarking_enabled
 #define ifr_disable_output      ifr_ifru.ifru_disable_output
+#define ifr_point_to_point_mdns ifr_ifru.ifru_point_to_point_mdns
 #define ifr_low_internet        ifr_ifru.ifru_low_internet
 #define ifr_low_power_mode      ifr_ifru.ifru_low_power_mode
 #define ifr_tcp_kao_max         ifr_ifru.ifru_tcp_kao_max
@@ -435,8 +437,6 @@ enum {
 	IFNET_RSSI_UNKNOWN      = ((-2147483647) - 1),    /* INT32_MIN */
 };
 
-
-#if !__has_ptrcheck
 /*
  * DLIL KEV_DL_NODE_PRESENCE/KEV_DL_NODE_ABSENCE event structures
  */
@@ -455,7 +455,6 @@ struct kev_dl_node_absence {
 	struct sockaddr_in6     sin6_node_address;
 	struct sockaddr_dl      sdl_node_address;
 };
-#endif
 
 /*
  * Structure for SIOC[SG]IFTHROTTLE
@@ -656,6 +655,7 @@ struct if_protolistreq {
  * Entitlement to allow socket access on ultra-constrained interfaces
  */
 #define ULTRA_CONSTRAINED_ENTITLEMENT "com.apple.private.network.ultraconstrained"
+
 
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 

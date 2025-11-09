@@ -4,7 +4,9 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _RXAdLibCreate, _RXEngineTypeForLocaleIdentifier, _RXGetAssetFallbackLocaleIdentifier, 
+    symbols:         [ _RXAdLibCreate, _RXCopyAssetFallbackLocaleIdentifier, _RXCopyAssetFallbackLocales, 
+                       _RXCopyLocalizedStringForSpacebar, _RXCopyReplaceHyphensWithSpace, 
+                       _RXEngineTypeForLocaleIdentifier, _RXGetAssetFallbackLocaleIdentifier, 
                        _RXGetAssetFallbackLocales, _RXGetSupportedNashvilleLocaleIdentifiers, 
                        _RXGetSupportedQuasarLocaleIdentifiers, _RXGlobalSetDownloadProgressCallback, 
                        _RXIsAudioDonationOptedIn, _RXIsAudioDonationSupported, _RXIsKeywordSpotterEnabled, 

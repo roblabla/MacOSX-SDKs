@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1575.3.2
+current-version: 1575.5.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -232,9 +232,10 @@ exports:
                        CalLocationPrediction, CalMemorySensor, CalMessageTracer, 
                        CalMockCalendarDataContainerInfo, CalMockCalendarDataContainerProvider, 
                        CalMockPreferenceStore, CalNSDateProvider, CalNWideQueue, 
-                       CalPerformSelectorAsyncBlockPerformer, CalPersonNameComponentsFormatter, 
-                       CalPersonaUtils, CalPreferences, CalProxyUtils, CalRateLimitingQueue, 
-                       CalRecurrenceDayOfWeek, CalRecurrenceGenerator, CalRecurrenceRuleDescriptionGenerator, 
+                       CalOpenFileURLWrapper, CalPerformSelectorAsyncBlockPerformer, 
+                       CalPersonNameComponentsFormatter, CalPersonaUtils, CalPreferences, 
+                       CalProxyUtils, CalRateLimitingQueue, CalRecurrenceDayOfWeek, 
+                       CalRecurrenceGenerator, CalRecurrenceRuleDescriptionGenerator, 
                        CalRoute, CalScriptSecurityPolicy, CalSigTermCancellableTask, 
                        CalSignalSensor, CalSpotlightPendingSearch, CalSpotlightQueryController, 
                        CalSpotlightQueryResult, CalStopwatch, CalStructuredDataArchiver, 

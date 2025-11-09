@@ -118,7 +118,9 @@ public:
 	virtual void		free	( void ) APPLE_KEXT_OVERRIDE;
 	
 	virtual IOReturn	message ( UInt32 type, IOService * nub, void * arg ) APPLE_KEXT_OVERRIDE;
-										
+						
+    virtual IOReturn    setProperties ( OSObject * properties ) APPLE_KEXT_OVERRIDE;
+
 	virtual bool		matchPropertyTable ( OSDictionary * table,
 											 SInt32 * score ) APPLE_KEXT_OVERRIDE;
 	

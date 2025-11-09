@@ -308,7 +308,15 @@ module _signal [system] {
   }
 }
 
+// This stddef.h should never be seen, clang's stddef.h completely replaces
+// it. However, if client search paths are set up incorrectly, this header
+// can be seen which will cause an include cycle. When building with modules,
+// its sub-headers like sys/_types/_null.h defer to clang's stddef.h for their
+// definitions. If client search paths are set up incorrectly, that deferral
+// will instead include this header and create a cycle. This module is here
+// to generate early errors if client search paths are set up incorrectly.
 module _stddef [system] {
+  requires found_incompatible_headers__check_search_paths
   header "stddef.h"
   export *
 }

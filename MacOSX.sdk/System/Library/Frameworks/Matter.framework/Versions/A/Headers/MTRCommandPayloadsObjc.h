@@ -1102,10 +1102,10 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRAccessControlClusterReviewFabricRestrictionsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull arl MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull arl MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -1132,10 +1132,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRAccessControlClusterReviewFabricRestrictionsResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull token MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull token MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRAccessControlClusterReviewFabricRestrictionsResponseParams with a response-value dictionary
@@ -1148,7 +1148,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -2754,7 +2754,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRGeneralDiagnosticsClusterTimeSnapshotParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -2782,12 +2782,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull systemTimeMs MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull systemTimeMs MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable posixTimeMs MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable posixTimeMs MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary
@@ -2800,17 +2800,17 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRGeneralDiagnosticsClusterPayloadTestRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull enableKey MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull enableKey MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull value MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull value MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy, getter=getCount) NSNumber * _Nonnull count MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getCount) NSNumber * _Nonnull count MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -2837,10 +2837,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRGeneralDiagnosticsClusterPayloadTestResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull payload MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull payload MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary
@@ -2853,7 +2853,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -3036,10 +3036,10 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRTimeSynchronizationClusterSetTrustedTimeSourceParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct * _Nullable trustedTimeSource MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct * _Nullable trustedTimeSource MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3066,10 +3066,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRTimeSynchronizationClusterSetTimeZoneParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull timeZone MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull timeZone MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3096,10 +3096,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRTimeSynchronizationClusterSetTimeZoneResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull dstOffsetRequired MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull dstOffsetRequired MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary
@@ -3112,13 +3112,13 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRTimeSynchronizationClusterSetDSTOffsetParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull dstOffset MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull dstOffset MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3145,10 +3145,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRTimeSynchronizationClusterSetDefaultNTPParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nullable defaultNTP MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable defaultNTP MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3175,12 +3175,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRBridgedDeviceBasicInformationClusterKeepActiveParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull timeoutMs MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull timeoutMs MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3714,6 +3714,95 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy) NSData * _Nonnull rootCertificate MTR_DEPRECATED("Please use rootCACertificate", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTROperationalCredentialsClusterSetVidVerificationStatementParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable vendorID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable vidVerificationStatement MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable vvsc MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTROperationalCredentialsClusterSignVidVerificationRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull fabricIndex MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull clientChallenge MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTROperationalCredentialsClusterSignVidVerificationResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull fabricIndex MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull fabricBindingVersion MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull signature MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTROperationalCredentialsClusterSignVidVerificationResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface MTRGroupKeyManagementClusterKeySetWriteParams : NSObject <NSCopying>
 
@@ -3900,18 +3989,18 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
                                          error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRICDManagementClusterRegisterClientParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull monitoredSubject MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull monitoredSubject MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull key MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull key MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nullable verificationKey MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable verificationKey MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull clientType MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull clientType MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3938,10 +4027,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRICDManagementClusterRegisterClientResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull icdCounter MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull icdCounter MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary
@@ -3954,15 +4043,15 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRICDManagementClusterUnregisterClientParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nullable verificationKey MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable verificationKey MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3989,10 +4078,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRICDManagementClusterStayActiveRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4019,10 +4108,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRICDManagementClusterStayActiveResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull promisedActiveDuration MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull promisedActiveDuration MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary
@@ -4035,7 +4124,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
@@ -4156,35 +4245,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
-@interface MTROvenCavityOperationalStateClusterPauseParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTROvenCavityOperationalStateClusterStopParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -4212,7 +4273,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTROvenCavityOperationalStateClusterStartParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -4240,38 +4301,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
-@interface MTROvenCavityOperationalStateClusterResumeParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTROvenCavityOperationalStateClusterOperationalCommandResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) MTROvenCavityOperationalStateClusterErrorStateStruct * _Nonnull commandResponseState MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) MTROvenCavityOperationalStateClusterErrorStateStruct * _Nonnull commandResponseState MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTROvenCavityOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary
@@ -4284,13 +4317,13 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTROvenModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4317,12 +4350,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTROvenModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTROvenModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4335,7 +4368,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -4368,10 +4401,10 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRLaundryWasherModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4398,12 +4431,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRLaundryWasherModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRLaundryWasherModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4416,13 +4449,13 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4449,12 +4482,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4467,7 +4500,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
@@ -4572,12 +4605,12 @@ MTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
                                          error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRTemperatureControlClusterSetTemperatureParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable targetTemperature MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable targetTemperature MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable targetTemperatureLevel MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable targetTemperatureLevel MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4604,10 +4637,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDishwasherModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4634,12 +4667,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDishwasherModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRDishwasherModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4652,7 +4685,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
@@ -4683,10 +4716,10 @@ MTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDishwasherAlarmClusterResetParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull alarms MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull alarms MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4713,10 +4746,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDishwasherAlarmClusterModifyEnabledAlarmsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull mask MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull mask MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4743,18 +4776,18 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRMicrowaveOvenControlClusterSetCookingParametersParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable cookMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable cookMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable cookTime MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable cookTime MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable powerSetting MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable powerSetting MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSNumber * _Nullable wattSettingIndex MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nullable startAfterSetting MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable startAfterSetting MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4781,10 +4814,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRMicrowaveOvenControlClusterAddMoreTimeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull timeToAdd MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull timeToAdd MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -5017,7 +5050,7 @@ MTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
                                          error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRRVCOperationalStateClusterGoHomeParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -5654,10 +5687,10 @@ MTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRWaterHeaterManagementClusterBoostParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct * _Nonnull boostInfo MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct * _Nonnull boostInfo MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -5684,7 +5717,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRWaterHeaterManagementClusterCancelBoostParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -5862,22 +5895,22 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRMessagesClusterPresentMessagesRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull messageID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull messageID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull priority MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull priority MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull messageControl MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull messageControl MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable startTime MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable startTime MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable duration MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable duration MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nonnull messageText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull messageText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nullable responses MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nullable responses MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -5904,10 +5937,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRMessagesClusterCancelMessagesRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull messageIDs MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull messageIDs MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -5934,14 +5967,14 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterPowerAdjustRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull power MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull power MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull duration MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull duration MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -5968,7 +6001,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -5996,12 +6029,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull requestedStartTime MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull requestedStartTime MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6028,12 +6061,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterPauseRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull duration MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull duration MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6060,7 +6093,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterResumeRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6088,14 +6121,14 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterModifyForecastRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull forecastID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull forecastID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nonnull slotAdjustments MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull slotAdjustments MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6122,12 +6155,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull constraints MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull constraints MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull cause MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6154,7 +6187,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementClusterCancelRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6182,10 +6215,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEClusterGetTargetsResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary
@@ -6198,10 +6231,10 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEClusterDisableParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6229,14 +6262,14 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEClusterEnableChargingParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable chargingEnabledUntil MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable chargingEnabledUntil MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull minimumChargeCurrent MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull minimumChargeCurrent MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull maximumChargeCurrent MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull maximumChargeCurrent MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6295,7 +6328,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEClusterStartDiagnosticsParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6323,10 +6356,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEClusterSetTargetsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6353,7 +6386,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEClusterGetTargetsParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6381,7 +6414,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEClusterClearTargetsParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6409,10 +6442,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6439,12 +6472,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTREnergyEVSEModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTREnergyEVSEModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -6457,13 +6490,13 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRWaterHeaterModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6490,12 +6523,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRWaterHeaterModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRWaterHeaterModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -6508,13 +6541,13 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6541,12 +6574,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -6559,7 +6592,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -7373,7 +7406,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 @property (nonatomic, copy) NSNumber * _Nullable nextCredentialIndex MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-@property (nonatomic, copy) NSData * _Nullable credentialData MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable credentialData MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7434,10 +7467,10 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDoorLockClusterUnboltDoorParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nullable pinCode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable pinCode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7464,16 +7497,16 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDoorLockClusterSetAliroReaderConfigParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull signingKey MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull signingKey MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull verificationKey MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull verificationKey MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull groupIdentifier MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull groupIdentifier MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nullable groupResolvingKey MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable groupResolvingKey MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7500,7 +7533,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRDoorLockClusterClearAliroReaderConfigParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -7733,9 +7766,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
-@interface MTRServiceAreaClusterSelectAreasParams : NSObject <NSCopying>
-
-@property (nonatomic, copy, getter=getNewAreas) NSArray * _Nonnull newAreas MTR_PROVISIONALLY_AVAILABLE;
+@interface MTRClosureControlClusterStopParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7763,11 +7794,167 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
+@interface MTRClosureControlClusterMoveToParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable tag MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable latch MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable speed MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRClosureControlClusterCalibrateParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRClosureControlClusterConfigureFallbackParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable restingProcedure MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable triggerCondition MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable triggerPosition MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable waitingDelay MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRClosureControlClusterCancelFallbackParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface MTRServiceAreaClusterSelectAreasParams : NSObject <NSCopying>
+
+@property (nonatomic, copy, getter=getNewAreas) NSArray * _Nonnull newAreas MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRServiceAreaClusterSelectAreasResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nonnull statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRServiceAreaClusterSelectAreasResponseParams with a response-value dictionary
@@ -7780,13 +7967,13 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRServiceAreaClusterSkipAreaParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull skippedArea MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull skippedArea MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7813,12 +8000,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRServiceAreaClusterSkipAreaResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nonnull statusText MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull statusText MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRServiceAreaClusterSkipAreaResponseParams with a response-value dictionary
@@ -7831,7 +8018,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -8002,10 +8189,10 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThermostatClusterSetActiveScheduleRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull scheduleHandle MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull scheduleHandle MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8032,10 +8219,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThermostatClusterSetActivePresetRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nullable presetHandle MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable presetHandle MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8062,14 +8249,14 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThermostatClusterAtomicResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull statusCode MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull statusCode MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nonnull attributeStatus MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull attributeStatus MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable timeout MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable timeout MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary
@@ -8082,17 +8269,17 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThermostatClusterAtomicRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull requestType MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull requestType MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nonnull attributeRequests MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull attributeRequests MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable timeout MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable timeout MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8872,7 +9059,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -8900,10 +9087,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull passphrase MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull passphrase MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary
@@ -8916,10 +9103,10 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -8947,7 +9134,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -8975,10 +9162,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadBorderRouterManagementClusterDatasetResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull dataset MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull dataset MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary
@@ -8991,15 +9178,15 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull activeDataset MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull activeDataset MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable breadcrumb MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable breadcrumb MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9026,10 +9213,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull pendingDataset MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull pendingDataset MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9056,10 +9243,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadNetworkDirectoryClusterAddNetworkParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull operationalDataset MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull operationalDataset MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9086,10 +9273,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadNetworkDirectoryClusterRemoveNetworkParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull extendedPanID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull extendedPanID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9116,10 +9303,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull extendedPanID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull extendedPanID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9146,10 +9333,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull operationalDataset MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull operationalDataset MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary
@@ -9162,7 +9349,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -9293,22 +9480,22 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRChannelClusterGetProgramGuideParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable startTime MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable startTime MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable endTime MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable endTime MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nullable channelList MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nullable channelList MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) MTRChannelClusterPageTokenStruct * _Nullable pageToken MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) MTRChannelClusterPageTokenStruct * _Nullable pageToken MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable recordingFlag MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable recordingFlag MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSArray * _Nullable externalIDList MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSData * _Nullable data MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable data MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9335,12 +9522,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRChannelClusterProgramGuideResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) MTRChannelClusterChannelPagingStruct * _Nonnull paging MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) MTRChannelClusterChannelPagingStruct * _Nonnull paging MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nonnull programList MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull programList MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary
@@ -9353,19 +9540,19 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRChannelClusterRecordProgramParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull programIdentifier MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull programIdentifier MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSArray * _Nonnull externalIDList MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSData * _Nonnull data MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull data MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9392,16 +9579,16 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRChannelClusterCancelRecordProgramParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull programIdentifier MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull programIdentifier MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSArray * _Nonnull externalIDList MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSData * _Nonnull data MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull data MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9695,7 +9882,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface MTRMediaPlaybackClusterRewindParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9725,7 +9912,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface MTRMediaPlaybackClusterFastForwardParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9878,12 +10065,12 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRMediaPlaybackClusterActivateAudioTrackParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull trackID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull trackID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull audioOutputIndex MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull audioOutputIndex MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9910,10 +10097,10 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRMediaPlaybackClusterActivateTextTrackParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull trackID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull trackID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9940,7 +10127,7 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRMediaPlaybackClusterDeactivateTextTrackParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -10189,7 +10376,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 @property (nonatomic, copy) MTRContentLauncherClusterPlaybackPreferencesStruct * _Nullable playbackPreferences MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nullable useCurrentContext MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable useCurrentContext MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10570,7 +10757,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 @property (nonatomic, copy) NSString * _Nonnull setupPIN MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-@property (nonatomic, copy) NSNumber * _Nullable node MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable node MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10600,7 +10787,7 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface MTRAccountLoginClusterLogoutParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable node MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable node MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10940,12 +11127,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRContentAppObserverClusterContentAppMessageParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nullable data MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable data MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nonnull encodingHint MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull encodingHint MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10972,14 +11159,14 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRContentAppObserverClusterContentAppMessageResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable data MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable data MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable encodingHint MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable encodingHint MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRContentAppObserverClusterContentAppMessageResponseParams with a response-value dictionary
@@ -10992,7 +11179,7 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
@@ -11158,7 +11345,7 @@ MTR_PROVISIONALLY_AVAILABLE
 MTR_PROVISIONALLY_AVAILABLE
 @interface MTRCameraAVStreamManagementClusterAudioStreamAllocateParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull streamType MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage MTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy) NSNumber * _Nonnull audioCodec MTR_PROVISIONALLY_AVAILABLE;
 
@@ -11247,7 +11434,7 @@ MTR_PROVISIONALLY_AVAILABLE
 MTR_PROVISIONALLY_AVAILABLE
 @interface MTRCameraAVStreamManagementClusterVideoStreamAllocateParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull streamType MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage MTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy) NSNumber * _Nonnull videoCodec MTR_PROVISIONALLY_AVAILABLE;
 
@@ -11320,8 +11507,6 @@ MTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSNumber * _Nonnull videoStreamID MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) MTRCameraAVStreamManagementClusterVideoResolutionStruct * _Nullable resolution MTR_PROVISIONALLY_AVAILABLE;
-
 @property (nonatomic, copy) NSNumber * _Nullable watermarkEnabled MTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy) NSNumber * _Nullable osdEnabled MTR_PROVISIONALLY_AVAILABLE;
@@ -11386,7 +11571,7 @@ MTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSNumber * _Nonnull imageCodec MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull frameRate MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull maxFrameRate MTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy) NSNumber * _Nonnull bitRate MTR_PROVISIONALLY_AVAILABLE;
 
@@ -11556,9 +11741,13 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
-@interface MTRCameraAVStreamManagementClusterSetViewportParams : NSObject <NSCopying>
+@interface MTRCameraAVSettingsUserLevelManagementClusterMPTZSetPositionParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) MTRCameraAVStreamManagementClusterViewportStruct * _Nonnull viewport MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable pan MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable tilt MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable zoom MTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11586,9 +11775,13 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
-@interface MTRCameraAVStreamManagementClusterSetImageRotationParams : NSObject <NSCopying>
+@interface MTRCameraAVSettingsUserLevelManagementClusterMPTZRelativeMoveParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull angle MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable panDelta MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable tiltDelta MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable zoomDelta MTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11616,9 +11809,9 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
-@interface MTRCameraAVStreamManagementClusterSetImageFlipHorizontalParams : NSObject <NSCopying>
+@interface MTRCameraAVSettingsUserLevelManagementClusterMPTZMoveToPresetParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull enabled MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull presetID MTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11646,9 +11839,109 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
-@interface MTRCameraAVStreamManagementClusterSetImageFlipVerticalParams : NSObject <NSCopying>
+@interface MTRCameraAVSettingsUserLevelManagementClusterMPTZSavePresetParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull enabled MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable presetID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull name MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRCameraAVSettingsUserLevelManagementClusterMPTZRemovePresetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull presetID MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRCameraAVSettingsUserLevelManagementClusterDPTZSetViewportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) MTRCameraAVSettingsUserLevelManagementClusterViewportStruct * _Nonnull viewport MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRCameraAVSettingsUserLevelManagementClusterDPTZRelativeMoveParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable deltaX MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable deltaY MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable zoomDelta MTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11678,7 +11971,7 @@ MTR_PROVISIONALLY_AVAILABLE
 MTR_PROVISIONALLY_AVAILABLE
 @interface MTRWebRTCTransportProviderClusterSolicitOfferParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull streamType MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage MTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy) NSNumber * _Nullable videoStreamID MTR_PROVISIONALLY_AVAILABLE;
 
@@ -11747,7 +12040,7 @@ MTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSString * _Nonnull sdp MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull streamType MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage MTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy) NSNumber * _Nullable videoStreamID MTR_PROVISIONALLY_AVAILABLE;
 
@@ -11789,9 +12082,9 @@ MTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable videoStreamID MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull audioStreamID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable audioStreamID MTR_PROVISIONALLY_AVAILABLE;
 
 /**
  * Initialize an MTRWebRTCTransportProviderClusterProvideOfferResponseParams with a response-value dictionary
@@ -11840,11 +12133,11 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
-@interface MTRWebRTCTransportProviderClusterProvideICECandidateParams : NSObject <NSCopying>
+@interface MTRWebRTCTransportProviderClusterProvideICECandidatesParams : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSString * _Nonnull iceCandidate MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull iceCandidates MTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11972,11 +12265,11 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
-@interface MTRWebRTCTransportRequestorClusterICECandidateParams : NSObject <NSCopying>
+@interface MTRWebRTCTransportRequestorClusterICECandidatesParams : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID MTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSString * _Nonnull iceCandidate MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull iceCandidates MTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -12036,6 +12329,236 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterAllocatePushTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) MTRPushAVStreamTransportClusterTransportOptionsStruct * _Nonnull transportOptions MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterAllocatePushTransportResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) MTRPushAVStreamTransportClusterTransportOptionsStruct * _Nonnull transportOptions MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull transportStatus MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRPushAVStreamTransportClusterAllocatePushTransportResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterDeallocatePushTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterModifyPushTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) MTRPushAVStreamTransportClusterTransportOptionsStruct * _Nonnull transportOptions MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterSetTransportStatusParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull transportStatus MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterManuallyTriggerTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull activationReason MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) MTRPushAVStreamTransportClusterTransportMotionTriggerTimeControlStruct * _Nullable timeControl MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterFindTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable connectionID MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRPushAVStreamTransportClusterFindTransportResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull streamConfigurations MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRPushAVStreamTransportClusterFindTransportResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
 @interface MTRChimeClusterPlayChimeSoundParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -12063,16 +12586,16 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRCommissionerControlClusterRequestCommissioningApprovalParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull requestID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull requestID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull vendorID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull vendorID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull productID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull productID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable label MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable label MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -12099,12 +12622,12 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRCommissionerControlClusterCommissionNodeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull requestID MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull requestID MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull responseTimeoutSeconds MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull responseTimeoutSeconds MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -12131,18 +12654,18 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-MTR_PROVISIONALLY_AVAILABLE
+MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface MTRCommissionerControlClusterReverseOpenCommissioningWindowParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull commissioningTimeout MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull commissioningTimeout MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull pakePasscodeVerifier MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull pakePasscodeVerifier MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull discriminator MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull discriminator MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull iterations MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull iterations MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull salt MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull salt MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an MTRCommissionerControlClusterReverseOpenCommissioningWindowParams with a response-value dictionary
@@ -12155,7 +12678,418 @@ MTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterProvisionRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull certificate MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable caid MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterProvisionRootCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull caid MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRTLSCertificateManagementClusterProvisionRootCertificateResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
                                          error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterFindRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable caid MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterFindRootCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull certificateDetails MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRTLSCertificateManagementClusterFindRootCertificateResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterLookupRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull fingerprint MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterLookupRootCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull caid MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRTLSCertificateManagementClusterLookupRootCertificateResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterRemoveRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull caid MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterTLSClientCSRParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull nonce MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterTLSClientCSRResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull csr MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull nonce MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRTLSCertificateManagementClusterTLSClientCSRResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterProvisionClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid MTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) MTRTLSCertificateManagementClusterTLSClientCertificateDetailStruct * _Nonnull clientCertificateDetails MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterProvisionClientCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRTLSCertificateManagementClusterProvisionClientCertificateResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterFindClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterFindClientCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull certificateDetails MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRTLSCertificateManagementClusterFindClientCertificateResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterLookupClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull fingerprint MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterLookupClientCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid MTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an MTRTLSCertificateManagementClusterLookupClientCertificateResponseParams with a response-value dictionary
+ * of the sort that MTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error MTR_PROVISIONALLY_AVAILABLE;
+@end
+
+MTR_PROVISIONALLY_AVAILABLE
+@interface MTRTLSCertificateManagementClusterRemoveClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid MTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the sever to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
 MTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))

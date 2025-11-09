@@ -24,13 +24,14 @@ exports:
                        WiFiAwareDataSessionIssueReport, WiFiAwareDataSessionStatisticsHistogramBin, 
                        WiFiAwareDataSessionStatisticsReport, WiFiAwareDatapathConfiguration, 
                        WiFiAwareDeviceCapabilities, WiFiAwareDiscoveryResult, WiFiAwareFastDiscoveryConfiguration, 
-                       WiFiAwareInternetSharingConfiguration, WiFiAwarePairingConfiguration, 
-                       WiFiAwarePublishConfiguration, WiFiAwarePublishDatapathConfiguration, 
-                       WiFiAwarePublishDatapathSecurityConfiguration, WiFiAwarePublishDatapathServiceSpecificInfo, 
-                       WiFiAwarePublishServiceSpecificInfo, WiFiAwarePublisher, WiFiAwarePublisherDataSessionHandle, 
-                       WiFiAwareSubscribeConfiguration, WiFiAwareSubscriber, WiFiChannel, 
-                       WiFiMACAddress, WiFiP2PAWDLState, WiFiP2PAWDLStateMonitor, 
-                       WiFiP2PAWDLStateMonitorConfiguration, WiFiP2PDNSServiceDiscoveryManager, 
-                       WiFiP2PSPITransactionRequestor, WiFiP2PTrafficRegistrationReservation, 
-                       WiFiP2PUIAgent, WiFiP2PXPCConnection ]
+                       WiFiAwareInternetSharingConfiguration, WiFiAwareMulticastConfiguration, 
+                       WiFiAwarePairingConfiguration, WiFiAwarePublishConfiguration, 
+                       WiFiAwarePublishDatapathConfiguration, WiFiAwarePublishDatapathSecurityConfiguration, 
+                       WiFiAwarePublishDatapathServiceSpecificInfo, WiFiAwarePublishServiceSpecificInfo, 
+                       WiFiAwarePublisher, WiFiAwarePublisherDataSessionHandle, WiFiAwareSubscribeConfiguration, 
+                       WiFiAwareSubscriber, WiFiChannel, WiFiMACAddress, WiFiP2PAWDLState, 
+                       WiFiP2PAWDLStateMonitor, WiFiP2PAWDLStateMonitorConfiguration, 
+                       WiFiP2PDNSServiceDiscoveryManager, WiFiP2PSPITransactionRequestor, 
+                       WiFiP2PTrafficRegistrationReservation, WiFiP2PUIAgent, WiFiP2PXPCConnection, 
+                       WiFiRemoteClientCountryCodeMonitor ]
 ...

@@ -52,8 +52,8 @@ exports:
                        _kSCROStatusAttribute, _kSCROStatusAttributeCellIndex, _kSCROStatusAttributeCellTitle, 
                        _kSCROStatusAttributeDotText, _kSCROSuggestionTextAttribute, 
                        _kSCROSystemVirtualBrailleDisplayToken, _kSCROTechnicalContextAttribute, 
-                       _kSCROTerminalOutputAttribute, _kSCROTokenAttribute, _kSCROUnderlineTextAttribute, 
-                       _kSCROUnreadAttribute ]
+                       _kSCROTerminalOutputAttribute, _kSCROTokenAttribute, _kSCROTokenSecureAttribute, 
+                       _kSCROUnderlineTextAttribute, _kSCROUnreadAttribute ]
     objc-classes:    [ SCRO2DBrailleCanvas, SCRO2DBrailleCanvasDescriptor, SCRO2DBrailleData, 
                        SCROBrailleClient, SCROBrailleDisplay, SCROBrailleDisplayAutoDetector, 
                        SCROBrailleDisplayCommandDispatcher, SCROBrailleDisplayHistory, 

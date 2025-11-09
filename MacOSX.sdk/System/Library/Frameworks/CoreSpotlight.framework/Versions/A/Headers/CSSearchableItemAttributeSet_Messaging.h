@@ -86,7 +86,14 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @property(nullable, copy) NSArray<NSString*> *instantMessageAddresses;
 
 //This attribute indicates if the document is likely to be considered junk.  Should be 1 if true, 0 otherwise
-@property (nonatomic, strong, getter=isLikelyJunk) NSNumber *likelyJunk;
+@property(nonatomic, strong, getter=isLikelyJunk) NSNumber *likelyJunk;
+
+@property(nonatomic, nullable, strong, readonly) NSNumber *isPriority NS_AVAILABLE(15_4, 18_4);
+
+@property(nonatomic, nullable, copy, readonly) NSString *textContentSummary NS_AVAILABLE(15_4, 18_4);
+
+// Write-only accessor for transcribed textContent. This property can be queried as textContent.
+@property(nonatomic, nullable, strong) NSString *transcribedTextContent NS_AVAILABLE(15_4, 18_4);
 
 @end
 

@@ -27,6 +27,7 @@ exports:
                        '_$s9ASRBridge16JitGrammarOutputVMa', '_$s9ASRBridge16JitGrammarOutputVMn', 
                        '_$s9ASRBridge16JitGrammarOutputVN', '_$s9ASRBridge16JitGrammarOutputVSEAAMc', 
                        '_$s9ASRBridge16JitGrammarOutputVSeAAMc', '_$s9ASRBridge9AsrBridgeC27configuredMaxEagerRCAllowedSivgZ', 
+                       '_$s9ASRBridge9AsrBridgeC27configuredMaxEagerRCAllowedSivpZMV', 
                        '_$s9ASRBridge9AsrBridgeC4name16messagePublisher13serviceHelper5queue27conversationSessionsManager6logger32waitBeforeReplacingActiveRequestACSS_16SiriMessageTypes0T10Publishing_pSo026AFRequestDispatcherServiceH0_pSo012OS_dispatch_I0CAK012ConversationK8Managing_p2os6LoggerVSbtcfC', 
                        '_$s9ASRBridge9AsrBridgeC4name16messagePublisher13serviceHelper5queue27conversationSessionsManager6logger32waitBeforeReplacingActiveRequestACSS_16SiriMessageTypes0T10Publishing_pSo026AFRequestDispatcherServiceH0_pSo012OS_dispatch_I0CAK012ConversationK8Managing_p2os6LoggerVSbtcfc', 
                        '_$s9ASRBridge9AsrBridgeCMa', '_$s9ASRBridge9AsrBridgeCMm', 

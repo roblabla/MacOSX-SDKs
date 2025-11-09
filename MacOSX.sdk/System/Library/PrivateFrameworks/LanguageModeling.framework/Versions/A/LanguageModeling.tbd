@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 423
+current-version: 425.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN5boost10wrapexceptINS_17bad_function_callEEE, __ZTIN5boost16exception_detail10clone_baseE, 
@@ -13,7 +13,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFbjEEE, __ZTINSt3__110__function6__baseIFdmEEE, 
                        __ZTINSt3__110__function6__baseIFfjjEEE, __ZTINSt3__110__function6__baseIFvNS_17basic_string_viewIcNS_11char_traitsIcEEEEPNS_6vectorINS_4pairIS5_iEENS_9allocatorIS8_EEEEEEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__120__shared_ptr_emplaceINS_6vectorIN17language_modeling2v110PredictionENS_9allocatorIS4_EEEENS5_IS7_EEEE, 
+                       __ZTINSt3__120__shared_ptr_emplaceINS_6vectorIN17language_modeling2v110PredictionENS_9allocatorIS4_EEEENS5_IS7_EEEE, 
                        __ZTINSt3__15dequeIiNS_9allocatorIiEEEE, __ZTSN5boost10wrapexceptINS_17bad_function_callEEE, 
                        __ZTSN5boost16exception_detail10clone_baseE, __ZTSN5boost17bad_function_callE, 
                        __ZTSN5boost9exceptionE, __ZTSNSt3__110__function6__baseIFbRKN17language_modeling2v110PredictionEEEE, 
@@ -21,7 +21,7 @@ exports:
                        __ZTSNSt3__110__function6__baseIFbjEEE, __ZTSNSt3__110__function6__baseIFdmEEE, 
                        __ZTSNSt3__110__function6__baseIFfjjEEE, __ZTSNSt3__110__function6__baseIFvNS_17basic_string_viewIcNS_11char_traitsIcEEEEPNS_6vectorINS_4pairIS5_iEENS_9allocatorIS8_EEEEEEE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIN17language_modeling2v110PredictionENS_9allocatorIS4_EEEENS5_IS7_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIN17language_modeling2v110PredictionENS_9allocatorIS4_EEEENS5_IS7_EEEE, 
                        __ZTSNSt3__15dequeIiNS_9allocatorIiEEEE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -184,6 +184,7 @@ typedef u_int32_t protocol_family_t;
  *       @constant IFNET_SW_TIMESTAMP Driver supports time stamping in software.
  *       @constant IFNET_LRO Driver supports TCP Large Receive Offload.
  *       @constant IFNET_RX_CSUM Driver supports receive checksum offload.
+ *       @constant IFNET_LRO_NUM_SEG Driver is able to report number of segments in LRO packet.
  *
  */
 
@@ -206,6 +207,7 @@ enum {
 	IFNET_SW_TIMESTAMP      = 0x02000000,
 	IFNET_LRO               = 0x10000000,
 	IFNET_RX_CSUM           = 0x20000000,
+	IFNET_LRO_NUM_SEG       = 0x40000000,
 };
 /*!
  *       @typedef ifnet_offload_t
@@ -344,9 +346,27 @@ typedef void (*ifnet_event_func)(ifnet_t interface, const struct kev_msg *msg);
  *               If the result is anything else, the processing will stop and
  *                       the packet will be freed.
  */
+
+#define IFNET_MAX_FRAME_TYPE_BUFFER_SIZE 16
+
+#define IFNET_MAX_LINKADDR_BUFFER_SIZE 16
+
+#if defined(__sized_by_or_null)
+#define IFNET_LLADDR_T     const char *__sized_by_or_null (IFNET_MAX_LINKADDR_BUFFER_SIZE)
+#define IFNET_FRAME_TYPE_T const char *__sized_by_or_null (IFNET_MAX_FRAME_TYPE_BUFFER_SIZE)
+#define IFNET_LLADDR_RW_T        char *__sized_by_or_null (IFNET_MAX_LINKADDR_BUFFER_SIZE)
+#define IFNET_FRAME_TYPE_RW_T    char *__sized_by_or_null (IFNET_MAX_FRAME_TYPE_BUFFER_SIZE)
+#else
+#define IFNET_LLADDR_T     const char *
+#define IFNET_FRAME_TYPE_T const char *
+#define IFNET_LLADDR_RW_T        char *
+#define IFNET_FRAME_TYPE_RW_T    char *
+#endif
+
 typedef errno_t (*ifnet_framer_func)(ifnet_t interface, mbuf_t *packet,
-    const struct sockaddr *dest, const char *dest_linkaddr,
-    const char *frame_type
+    const struct sockaddr *dest,
+    IFNET_LLADDR_T dest_linkaddr,
+    IFNET_FRAME_TYPE_T frame_type
 #if KPI_INTERFACE_EMBEDDED
     , u_int32_t *prepend_len, u_int32_t *postpend_len
 #endif /* KPI_INTERFACE_EMBEDDED */
@@ -489,8 +509,9 @@ typedef errno_t (*proto_media_input_v2)(ifnet_t ifp, protocol_family_t protocol,
  *               caller.
  */
 typedef errno_t (*proto_media_preout)(ifnet_t ifp, protocol_family_t protocol,
-    mbuf_t *packet, const struct sockaddr *dest, void *route, char *frame_type,
-    char *link_layer_dest);
+    mbuf_t *packet, const struct sockaddr *dest, void *route,
+    IFNET_FRAME_TYPE_RW_T frame_type,
+    IFNET_LLADDR_RW_T link_layer_dest);
 
 /*!
  *       @typedef proto_media_event

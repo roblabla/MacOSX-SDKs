@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libSMC.dylib'
-current-version: 34
+current-version: 38
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AccumSetupSettingsCPU, _AccumSetupSettingsGPU, _AccumSetupSettingsHP, 
@@ -19,7 +19,7 @@ exports:
                        _SMCProgramAccumDefaults, _SMCProgramAccumWithoutReset, _SMCReadBigEndianArrayToUIntMax, 
                        _SMCReadKey, _SMCReadKeyAsNumeric, _SMCReadKeyAsNumericWithKnownKeyInfo, 
                        _SMCReadKeyWithKnownSize, _SMCReadLittleEndianArrayToUIntMax, 
-                       _SMCRegisterForNotification, _SMCRegisterForSubTypeNotification, 
+                       _SMCReadPKey, _SMCRegisterForNotification, _SMCRegisterForSubTypeNotification, 
                        _SMCRequestMacOSWakeFromAP, _SMCSetAccum1msChannels, _SMCSetAccum1secChannels, 
                        _SMCSetAccumBitShift, _SMCSetAccumMode, _SMCSignExtendToIntMax, 
                        _SMCStartAccum, _SMCStopAccum, _SMCUInt32ToString, _SMCUnregisterForNotification, 

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macos15.2 -target-variant arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 1357.60.3 -module-name CreateMLComponents
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macos15.4 -target-variant arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 1362 -module-name CreateMLComponents
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AVFAudio
 import AVFoundation
 import Accelerate
@@ -115,13 +116,8 @@ extension CreateMLComponents.AudioFeaturePrint {
     public func makeAsyncIterator() -> CreateMLComponents.AudioFeaturePrint.FeatureSequence.AsyncIterator
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.AudioFeaturePrint.FeatureSequence.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -133,13 +129,8 @@ extension CreateMLComponents.AudioFeaturePrint.FeatureSequence {
     public mutating func next() async throws -> CreateMLComponents.TemporalFeature<CoreML.MLShapedArray<Swift.Float>>?
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CoreML.MLShapedArray<Swift.Float>>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -669,15 +660,9 @@ extension CreateMLComponents.AudioReader {
     @available(iOS 16.0, macOS 13.0, *)
     @available(tvOS, unavailable, introduced: 16.0)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.AudioReader.MicrophoneAsyncBuffers.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(macOS 13.0, iOS 16.0, *)
@@ -691,15 +676,9 @@ extension CreateMLComponents.AudioReader.MicrophoneAsyncBuffers {
     @available(iOS 16.0, macOS 13.0, *)
     @available(tvOS, unavailable, introduced: 16.0)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.AudioReader.MicrophoneAsyncBuffers.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -717,13 +696,13 @@ public struct LinearTransformer<Element> : CreateMLComponents.Transformer, Swift
   @inlinable public func applied<S>(to input: S, eventHandler: CreateMLComponents.EventHandler? = nil) -> [Element] where Element == S.Element, S : Swift.Sequence {
         input.map({ applied(to: $0, eventHandler: eventHandler) })
     }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.LinearTransformer<Element>, b: CreateMLComponents.LinearTransformer<Element>) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
   public typealias Input = Element
   @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
   public typealias Output = Element
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -972,12 +951,12 @@ extension CreateMLComponents.MaxAbsScaler {
     @inlinable public func applied(to input: Element, eventHandler: CreateMLComponents.EventHandler? = nil) -> Element {
             input / maximumAbsoluteValue
         }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.MaxAbsScaler<Element>.Transformer, b: CreateMLComponents.MaxAbsScaler<Element>.Transformer) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Input = Element
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Output = Element
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1026,12 +1005,12 @@ extension CreateMLComponents.MinMaxScaler {
              
             return unitScaledInput * (desiredRange.upperBound - desiredRange.lowerBound) + desiredRange.lowerBound
         }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.MinMaxScaler<Element>.Transformer, b: CreateMLComponents.MinMaxScaler<Element>.Transformer) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Input = Element
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Output = Element
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1054,7 +1033,6 @@ extension CreateMLComponents.MinMaxScaler.Transformer : Swift.Decodable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 extension CreateMLComponents.MinMaxScaler.Transformer : Swift.Sendable where Element : Swift.Sendable {
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol SupervisedTabularEstimator<Transformer, Annotation> {
   associatedtype Transformer : CreateMLComponents.TabularTransformer
@@ -1064,17 +1042,6 @@ public protocol SupervisedTabularEstimator<Transformer, Annotation> {
   func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol SupervisedTabularEstimator {
-  associatedtype Transformer : CreateMLComponents.TabularTransformer
-  associatedtype Annotation
-  var annotationColumnID: TabularData.ColumnID<Self.Annotation> { get set }
-  func fitted(to input: TabularData.DataFrame, validateOn validation: TabularData.DataFrame?, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer
-  func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.SupervisedTabularEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func fitted(to input: TabularData.DataFrame, validateOn validation: TabularData.DataFrame? = nil) async throws -> Self.Transformer {
@@ -1089,7 +1056,6 @@ extension CreateMLComponents.SupervisedTabularEstimator where Self.Transformer :
 extension CreateMLComponents.SupervisedTabularEstimator where Self.Transformer : Swift.Decodable {
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol UpdatableSupervisedTabularEstimator<Transformer, Annotation> : CreateMLComponents.SupervisedTabularEstimator {
   func makeTransformer() -> Self.Transformer
@@ -1097,15 +1063,6 @@ public protocol UpdatableSupervisedTabularEstimator<Transformer, Annotation> : C
   func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol UpdatableSupervisedTabularEstimator : CreateMLComponents.SupervisedTabularEstimator {
-  func makeTransformer() -> Self.Transformer
-  func update(_ transformer: inout Self.Transformer, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler?) async throws
-  func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.UpdatableSupervisedTabularEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func update(_ transformer: inout Self.Transformer, with input: TabularData.DataFrame) async throws {
@@ -1175,13 +1132,8 @@ public struct PreprocessedFeatureSequence<Feature> : CreateMLComponents.Temporal
   public func makeAsyncIterator() -> CreateMLComponents.PreprocessedFeatureSequence<Feature>.AsyncIterator
   @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
   public typealias Element = CreateMLComponents.TemporalFeature<Feature>
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-  #else
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias __AsyncSequence_Failure = Swift.Never
-  #endif
 }
 extension CreateMLComponents.PreprocessedFeatureSequence {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
@@ -1201,13 +1153,8 @@ extension CreateMLComponents.PreprocessedFeatureSequence {
         }
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-    #endif
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
@@ -1414,8 +1361,8 @@ public struct TemporalSegmentIdentifier : Swift.Hashable, Swift.Sendable {
     get
   }
   public init(source: Swift.String, range: Swift.Range<Swift.Int>, timescale: Swift.Int)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.TemporalSegmentIdentifier, b: CreateMLComponents.TemporalSegmentIdentifier) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1469,13 +1416,8 @@ extension CreateMLComponents.VideoReader {
     public func makeAsyncIterator() -> CreateMLComponents.VideoReader.AsyncFrames.Iterator
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.VideoReader.AsyncFrames.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -1487,13 +1429,8 @@ extension CreateMLComponents.VideoReader.AsyncFrames {
     public mutating func next() async throws -> CreateMLComponents.TemporalFeature<CoreImage.CIImage>?
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CoreImage.CIImage>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -1630,12 +1567,12 @@ extension CreateMLComponents.StandardScaler {
 
             return result
         }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.StandardScaler<Element>.Transformer, b: CreateMLComponents.StandardScaler<Element>.Transformer) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Input = Element
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Output = Element
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1681,21 +1618,12 @@ extension CreateMLComponents.TimeSeriesForecasterAnnotatedWindows {
     public typealias Element = CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, CoreML.MLShapedArray<Scalar>>
   }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol Transformer<Input, Output> {
   associatedtype Input
   associatedtype Output
   func applied(to input: Self.Input, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Output
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol Transformer {
-  associatedtype Input
-  associatedtype Output
-  func applied(to input: Self.Input, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Output
-}
-#endif
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 extension CreateMLComponents.Transformer {
   @inlinable public func applied<S>(to input: S, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> [Self.Output] where S : Swift.Sequence, Self.Input == S.Element {
@@ -1770,13 +1698,8 @@ public struct AugmentationSequence<Base, RandomTransformer, RandomNumberGenerato
   public typealias Element = Base.Element
   public var transformer: RandomTransformer
   public func makeAsyncIterator() -> CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.AsyncIterator
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-  #else
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias __AsyncSequence_Failure = any Swift.Error
-  #endif
 }
 @available(*, unavailable)
 extension CreateMLComponents.AugmentationSequence : Swift.Sendable {
@@ -1787,13 +1710,8 @@ extension CreateMLComponents.AugmentationSequence {
     public mutating func next() async throws -> Base.Element?
     @available(iOS 17.0, tvOS 17.0, watchOS 11.0, macOS 14.0, *)
     public typealias Element = CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 extension CreateMLComponents.AugmentationSequence {
@@ -1803,13 +1721,8 @@ extension CreateMLComponents.AugmentationSequence {
   public struct BatchedSequence : _Concurrency.AsyncSequence {
     public typealias Element = [CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.Element]
     public func makeAsyncIterator() -> CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.BatchedSequence.AsyncIterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 extension CreateMLComponents.AugmentationSequence.BatchedSequence {
@@ -1818,13 +1731,8 @@ extension CreateMLComponents.AugmentationSequence.BatchedSequence {
     public mutating func next() async throws -> [CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.Element]?
     @available(iOS 17.0, tvOS 17.0, watchOS 11.0, macOS 14.0, *)
     public typealias Element = [CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.Element]
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -1846,7 +1754,6 @@ public protocol EstimatorDecoder {
   mutating func decode<T>(_ type: T.Type) throws -> T where T : Swift.Decodable
   mutating func decodeOptimizer<T>(_ value: T.Type) throws -> T where T : Swift.Decodable
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -1858,19 +1765,6 @@ public protocol TemporalEstimator<Transformer> {
   func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS, introduced: 13.0, deprecated: 15.0)
-@available(iOS, introduced: 16.0, deprecated: 18.0)
-@available(tvOS, introduced: 16.0, deprecated: 18.0)
-@available(visionOS, introduced: 1.0, deprecated: 2.0)
-@available(watchOS, unavailable)
-public protocol TemporalEstimator {
-  associatedtype Transformer : CreateMLComponents.TemporalTransformer
-  func fitted<InputSequence>(to input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where InputSequence : Swift.Sequence, InputSequence.Element : CreateMLComponents.TemporalSequence, Self.Transformer.Input == InputSequence.Element.Feature
-  func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -1881,7 +1775,6 @@ extension CreateMLComponents.TemporalEstimator {
         try await fitted(to: input, eventHandler: nil)
     }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -1893,19 +1786,6 @@ public protocol UpdatableTemporalEstimator<Transformer> : CreateMLComponents.Tem
   func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS, introduced: 13.0, deprecated: 15.0)
-@available(iOS, introduced: 16.0, deprecated: 18.0)
-@available(tvOS, introduced: 16.0, deprecated: 18.0)
-@available(visionOS, introduced: 1.0, deprecated: 2.0)
-@available(watchOS, unavailable)
-public protocol UpdatableTemporalEstimator : CreateMLComponents.TemporalEstimator {
-  func makeTransformer() -> Self.Transformer
-  func update<InputSequence>(_ transformer: inout Self.Transformer, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws where InputSequence : Swift.Sequence, InputSequence.Element : CreateMLComponents.TemporalSequence, Self.Transformer.Input == InputSequence.Element.Feature
-  func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -1943,7 +1823,6 @@ public struct ImageBlur : CreateMLComponents.Transformer, Swift.Sendable {
   @available(iOS 17.0, tvOS 17.0, macOS 14.0, *)
   public typealias Output = CoreImage.CIImage
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol Estimator<Transformer> {
   associatedtype Transformer : CreateMLComponents.Transformer
@@ -1951,22 +1830,12 @@ public protocol Estimator<Transformer> {
   func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol Estimator {
-  associatedtype Transformer : CreateMLComponents.Transformer
-  func fitted<S>(to input: S, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where S : Swift.Sequence, S.Element == Self.Transformer.Input
-  func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.Estimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func fitted<S>(to input: S) async throws -> Self.Transformer where S : Swift.Sequence, S.Element == Self.Transformer.Input {
         try await fitted(to: input, eventHandler: nil)
     }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol UpdatableEstimator<Transformer> : CreateMLComponents.Estimator {
   func makeTransformer() -> Self.Transformer
@@ -1974,15 +1843,6 @@ public protocol UpdatableEstimator<Transformer> : CreateMLComponents.Estimator {
   func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol UpdatableEstimator : CreateMLComponents.Estimator {
-  func makeTransformer() -> Self.Transformer
-  func update<InputSequence>(_ transformer: inout Self.Transformer, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws where InputSequence : Swift.Sequence, InputSequence.Element == Self.Transformer.Input
-  func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.UpdatableEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func update<InputSequence>(_ transformer: inout Self.Transformer, with input: InputSequence) async throws where InputSequence : Swift.Sequence, InputSequence.Element == Self.Transformer.Input {
@@ -2013,13 +1873,8 @@ public struct AnyTemporalSequence<Feature> : CreateMLComponents.TemporalSequence
   public init<S>(_ sequence: S) where Feature == S.Feature, S : CreateMLComponents.TemporalSequence
   public init<S>(_ sequence: S, count: Swift.Int?) where S : _Concurrency.AsyncSequence, S.Element == CreateMLComponents.TemporalFeature<Feature>
   public func makeAsyncIterator() -> CreateMLComponents.AnyTemporalIterator<CreateMLComponents.AnyTemporalSequence<Feature>.Element>
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-  #else
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias __AsyncSequence_Failure = any Swift.Error
-  #endif
 }
 @available(*, unavailable)
 extension CreateMLComponents.AnyTemporalSequence : Swift.Sendable {
@@ -2027,13 +1882,8 @@ extension CreateMLComponents.AnyTemporalSequence : Swift.Sendable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public struct AnyTemporalIterator<Element> : _Concurrency.AsyncIteratorProtocol {
   public func next() async throws -> Element?
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-  #else
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-  #endif
 }
 @available(*, unavailable)
 extension CreateMLComponents.AnyTemporalIterator : Swift.Sendable {
@@ -2046,8 +1896,8 @@ public struct ModelMetadata : Swift.Hashable, Swift.Sendable {
   public var license: Swift.String
   public var creatorDefined: [Swift.String : Swift.String]
   public init(description: Swift.String = "", version: Swift.String = "", author: Swift.String = "", license: Swift.String = "", creatorDefined: [Swift.String : Swift.String] = [:])
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.ModelMetadata, b: CreateMLComponents.ModelMetadata) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2249,13 +2099,8 @@ public struct UpsampledAugmentationSequence<Base, RandomTransformer, RandomNumbe
   public typealias Element = Base.Element
   public let transformer: RandomTransformer
   public func makeAsyncIterator() -> CreateMLComponents.UpsampledAugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.AsyncIterator
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-  #else
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias __AsyncSequence_Failure = any Swift.Error
-  #endif
 }
 @available(*, unavailable)
 extension CreateMLComponents.UpsampledAugmentationSequence : Swift.Sendable {
@@ -2266,13 +2111,8 @@ extension CreateMLComponents.UpsampledAugmentationSequence {
     public mutating func next() async throws -> Base.Element?
     @available(iOS 17.0, tvOS 17.0, watchOS 11.0, macOS 14.0, *)
     public typealias Element = CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -2426,9 +2266,9 @@ public struct MultivariateLinearRegressorConfiguration : Swift.Hashable, Swift.C
   public var learningRate: Swift.Float
   public var randomSeed: Swift.Int?
   public init()
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.MultivariateLinearRegressorConfiguration, b: CreateMLComponents.MultivariateLinearRegressorConfiguration) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2523,13 +2363,8 @@ extension CreateMLComponents.SlidingWindowTransformer {
     public func makeAsyncIterator() -> CreateMLComponents.SlidingWindowTransformer<Input>.WindowSequence.Iterator
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.SlidingWindowTransformer<Input>.WindowSequence.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -2541,13 +2376,8 @@ extension CreateMLComponents.SlidingWindowTransformer.WindowSequence {
     public mutating func next() async throws -> CreateMLComponents.TemporalFeature<CreateMLComponents.SlidingWindowTransformer<Input>.Output>?
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.SlidingWindowTransformer<Input>.Output>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -2654,8 +2484,8 @@ public enum AudioReaderError : Foundation.LocalizedError, Swift.Equatable, Swift
   public var errorDescription: Swift.String? {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.AudioReaderError, b: CreateMLComponents.AudioReaderError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2681,19 +2511,11 @@ extension CreateMLComponents.UpdatableSupervisedTabularEstimator {
   public func writeWithOptimizer(_ transformer: Self.Transformer, to url: Foundation.URL, overwrite: Swift.Bool = true) throws
   public func readWithOptimizer(from url: Foundation.URL) throws -> Self.Transformer
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol TemporalSequence<Feature> : _Concurrency.AsyncSequence {
   associatedtype Feature where Self.Element == CreateMLComponents.TemporalFeature<Self.Feature>
   var count: Swift.Int? { get }
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol TemporalSequence : _Concurrency.AsyncSequence {
-  associatedtype Feature where Self.Element == CreateMLComponents.TemporalFeature<Self.Feature>
-  var count: Swift.Int? { get }
-}
-#endif
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public struct TemporalFeature<Feature> : Swift.Identifiable {
   public var id: CreateMLComponents.TemporalSegmentIdentifier
@@ -2756,8 +2578,8 @@ extension CreateMLComponents.MultiLabelClassificationMetrics {
     case precision(Swift.Float, minimumRecall: Swift.Float)
     case recall(Swift.Float, minimumPrecision: Swift.Float)
     case fixed([Label : Swift.Float])
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy, b: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2932,13 +2754,8 @@ extension CreateMLComponents.HumanBodyActionCounter {
     public func makeAsyncIterator() -> CreateMLComponents.HumanBodyActionCounter.CumulativeSumSequence.Iterator
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.HumanBodyActionCounter.CumulativeSumSequence.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
@@ -2947,13 +2764,8 @@ extension CreateMLComponents.HumanBodyActionCounter.CumulativeSumSequence {
     public mutating func next() async throws -> CreateMLComponents.TemporalFeature<Swift.Float>?
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<Swift.Float>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -3022,9 +2834,9 @@ public struct LinearTimeSeriesForecasterConfiguration : Swift.Hashable, Swift.Co
   public var learningRate: Swift.Float
   public var randomSeed: Swift.Int?
   public init(inputWindowSize: Swift.Int, forecastWindowSize: Swift.Int)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.LinearTimeSeriesForecasterConfiguration, b: CreateMLComponents.LinearTimeSeriesForecasterConfiguration) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3178,13 +2990,8 @@ extension CreateMLComponents.Downsampler {
     public func makeAsyncIterator() -> CreateMLComponents.Downsampler<Input>.DownStreamSequence.Iterator
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.Downsampler<Input>.DownStreamSequence.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -3196,13 +3003,8 @@ extension CreateMLComponents.Downsampler.DownStreamSequence {
     public mutating func next() async throws -> CreateMLComponents.TemporalFeature<CreateMLComponents.Downsampler<Input>.Output>?
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.Downsampler<Input>.Output>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -3297,13 +3099,8 @@ extension CreateMLComponents.AudioReader {
     public func makeAsyncIterator() -> CreateMLComponents.AudioReader.AsyncBuffers.Iterator
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.AudioReader.AsyncBuffers.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -3315,33 +3112,19 @@ extension CreateMLComponents.AudioReader.AsyncBuffers {
     public mutating func next() async throws -> CreateMLComponents.TemporalFeature<AVFAudio.AVAudioPCMBuffer>?
     @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
     public typealias Element = CreateMLComponents.TemporalFeature<AVFAudio.AVAudioPCMBuffer>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
 extension CreateMLComponents.AudioReader.AsyncBuffers.Iterator : Swift.Sendable {
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 11.0, *)
 public protocol RandomTransformer<Input, Output> {
   associatedtype Input
   associatedtype Output
   func applied(to input: Self.Input, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Output
 }
-#else
-@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 11.0, *)
-public protocol RandomTransformer {
-  associatedtype Input
-  associatedtype Output
-  func applied(to input: Self.Input, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Output
-}
-#endif
 extension Swift.Sequence {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   public func randomSplit<Feature, Annotation>(by proportion: Swift.Double, seed: Swift.Int? = nil) -> ([CreateMLComponents.AnnotatedFeature<Feature, Annotation>], [CreateMLComponents.AnnotatedFeature<Feature, Annotation>]) where Annotation : Swift.Hashable, Self.Element == CreateMLComponents.AnnotatedFeature<Feature, Annotation>
@@ -3441,9 +3224,9 @@ public struct FullyConnectedNetworkConfiguration : Swift.Hashable, Swift.Codable
   public var earlyStopIterationCount: Swift.Int
   public var randomSeed: Swift.Int
   public init()
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.FullyConnectedNetworkConfiguration, b: CreateMLComponents.FullyConnectedNetworkConfiguration) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3538,8 +3321,8 @@ public enum OptimizationStrategy : Swift.Hashable, Swift.Codable, Swift.Sendable
   case lowMemory
   case fast
   public static func == (a: CreateMLComponents.OptimizationStrategy, b: CreateMLComponents.OptimizationStrategy) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3563,15 +3346,9 @@ extension CreateMLComponents.VideoReader {
     @available(iOS 16.0, macOS 13.0, *)
     @available(tvOS, unavailable, introduced: 16.0)
     public typealias Element = CreateMLComponents.TemporalFeature<CreateMLComponents.VideoReader.CameraAsyncBuffers.Feature>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(macOS 15.0, iOS 18.0, *)
@@ -3589,15 +3366,9 @@ extension CreateMLComponents.VideoReader.CameraAsyncBuffers {
     @available(iOS 16.0, macOS 13.0, *)
     @available(tvOS, unavailable, introduced: 16.0)
     public typealias Element = CreateMLComponents.TemporalFeature<CoreImage.CIImage>
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -3859,16 +3630,15 @@ extension CreateMLComponents.LogisticRegressionClassifier {
       set
     }
     public init()
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Configuration, b: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Configuration) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol TemporalTransformer<Input, Output> {
   associatedtype Input
@@ -3876,15 +3646,6 @@ public protocol TemporalTransformer<Input, Output> {
   associatedtype OutputSequence : CreateMLComponents.TemporalSequence
   func applied<S>(to input: S, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.OutputSequence where S : CreateMLComponents.TemporalSequence, Self.Input == S.Feature
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol TemporalTransformer {
-  associatedtype Input
-  associatedtype Output where Self.Output == Self.OutputSequence.Feature
-  associatedtype OutputSequence : CreateMLComponents.TemporalSequence
-  func applied<S>(to input: S, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.OutputSequence where S : CreateMLComponents.TemporalSequence, Self.Input == S.Feature
-}
-#endif
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 extension CreateMLComponents.TemporalTransformer {
   @inlinable public func applied<S>(to input: S, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> [Self.OutputSequence] where S : Swift.Sequence, Self.Input == S.Element.Feature, S.Element : CreateMLComponents.TemporalSequence {
@@ -4573,8 +4334,8 @@ public struct Classification<Label> : Swift.Hashable where Label : Swift.Hashabl
   public var label: Label
   public var probability: Swift.Float
   public init(label: Label, probability: Swift.Float)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.Classification<Label>, b: CreateMLComponents.Classification<Label>) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -4915,9 +4676,9 @@ public struct TimeSeriesClassifierConfiguration : Swift.Hashable, Swift.Codable,
   public var learningRate: Swift.Float
   public var randomSeed: Swift.Int?
   public init()
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.TimeSeriesClassifierConfiguration, b: CreateMLComponents.TimeSeriesClassifierConfiguration) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5075,8 +4836,8 @@ public struct MLModelClassifierAdaptor<Scalar> : CreateMLComponents.Classifier w
   public enum Label : Swift.Hashable, Swift.Sendable {
     case string(Swift.String)
     case int(Swift.Int)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.MLModelClassifierAdaptor<Scalar>.Label, b: CreateMLComponents.MLModelClassifierAdaptor<Scalar>.Label) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -5155,8 +4916,8 @@ public enum OptimizationError : Foundation.LocalizedError, Swift.Equatable, Swif
   public var errorDescription: Swift.String? {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.OptimizationError, b: CreateMLComponents.OptimizationError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5577,15 +5338,14 @@ public struct BoostedTreeConfiguration : Swift.Hashable, Swift.Codable, Swift.Se
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 11.0, *)
   public var parallelTreeCount: Swift.Int
   public init()
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.BoostedTreeConfiguration, b: CreateMLComponents.BoostedTreeConfiguration) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
   public init(from decoder: any Swift.Decoder) throws
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol SupervisedEstimator<Transformer, Annotation> {
   associatedtype Transformer : CreateMLComponents.Transformer
@@ -5595,17 +5355,6 @@ public protocol SupervisedEstimator<Transformer, Annotation> {
   func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol SupervisedEstimator {
-  associatedtype Transformer : CreateMLComponents.Transformer
-  associatedtype Annotation : Swift.Equatable
-  func fitted<Input>(to input: Input, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where Input : Swift.Sequence, Input.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>
-  func fitted<Input, Validation>(to input: Input, validateOn validation: Validation, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where Input : Swift.Sequence, Validation : Swift.Sequence, Input.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>, Validation.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>
-  func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.SupervisedEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func fitted<Input>(to input: Input) async throws -> Self.Transformer where Input : Swift.Sequence, Input.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation> {
@@ -5616,7 +5365,6 @@ extension CreateMLComponents.SupervisedEstimator {
         try await fitted(to: input, validateOn: validation, eventHandler: nil)
     }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol UpdatableSupervisedEstimator<Transformer, Annotation> : CreateMLComponents.SupervisedEstimator {
   func makeTransformer() -> Self.Transformer
@@ -5624,15 +5372,6 @@ public protocol UpdatableSupervisedEstimator<Transformer, Annotation> : CreateML
   func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol UpdatableSupervisedEstimator : CreateMLComponents.SupervisedEstimator {
-  func makeTransformer() -> Self.Transformer
-  func update<InputSequence>(_ transformer: inout Self.Transformer, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws where InputSequence : Swift.Sequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>
-  func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.UpdatableSupervisedEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func update<InputSequence>(_ transformer: inout Self.Transformer, with input: InputSequence) async throws where InputSequence : Swift.Sequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation> {
@@ -5688,12 +5427,12 @@ extension CreateMLComponents.NormalizationScaler {
     @inlinable public func applied(to input: Element, eventHandler: CreateMLComponents.EventHandler? = nil) -> Element {
             input / scale
         }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.NormalizationScaler<Element>.Transformer, b: CreateMLComponents.NormalizationScaler<Element>.Transformer) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Input = Element
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Output = Element
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -5882,7 +5621,6 @@ extension CreateMLComponents.FullyConnectedNetworkRegressor : CreateMLComponents
   public func makeTransformer() -> CreateMLComponents.FullyConnectedNetworkRegressorModel<Scalar>
   public func update<InputSequence>(_ transformer: inout CreateMLComponents.FullyConnectedNetworkRegressorModel<Scalar>, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler? = nil) async throws where InputSequence : Swift.Sequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Swift.Float>
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -5896,21 +5634,6 @@ public protocol SupervisedTemporalEstimator<Transformer, Annotation> {
   func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS, introduced: 13.0, deprecated: 15.0)
-@available(iOS, introduced: 16.0, deprecated: 18.0)
-@available(tvOS, introduced: 16.0, deprecated: 18.0)
-@available(visionOS, introduced: 1.0, deprecated: 2.0)
-@available(watchOS, unavailable)
-public protocol SupervisedTemporalEstimator {
-  associatedtype Transformer : CreateMLComponents.TemporalTransformer
-  associatedtype Annotation : Swift.Equatable, Swift.Sendable
-  func fitted<InputSequence, FeatureSequence>(to input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where InputSequence : Swift.Sequence, FeatureSequence : CreateMLComponents.TemporalSequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<FeatureSequence, Self.Annotation>, FeatureSequence.Feature == Self.Transformer.Input
-  func fitted<InputSequence, Validation, FeatureSequence>(to input: InputSequence, validateOn validation: Validation, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where InputSequence : Swift.Sequence, Validation : Swift.Sequence, FeatureSequence : CreateMLComponents.TemporalSequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<FeatureSequence, Self.Annotation>, Validation.Element == CreateMLComponents.AnnotatedFeature<FeatureSequence, Self.Annotation>, FeatureSequence.Feature == Self.Transformer.Input
-  func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -5924,7 +5647,6 @@ extension CreateMLComponents.SupervisedTemporalEstimator {
         try await fitted(to: input, validateOn: validation, eventHandler: nil)
     }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -5936,19 +5658,6 @@ public protocol UpdatableSupervisedTemporalEstimator<Transformer, Annotation> : 
   func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS, introduced: 13.0, deprecated: 15.0)
-@available(iOS, introduced: 16.0, deprecated: 18.0)
-@available(tvOS, introduced: 16.0, deprecated: 18.0)
-@available(visionOS, introduced: 1.0, deprecated: 2.0)
-@available(watchOS, unavailable)
-public protocol UpdatableSupervisedTemporalEstimator : CreateMLComponents.SupervisedTemporalEstimator {
-  func makeTransformer() -> Self.Transformer
-  func update<InputSequence, FeatureSequence>(_ transformer: inout Self.Transformer, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws where InputSequence : Swift.Sequence, FeatureSequence : CreateMLComponents.TemporalSequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<FeatureSequence, Self.Annotation>, FeatureSequence.Feature == Self.Transformer.Input
-  func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 @available(macOS, introduced: 13.0, deprecated: 15.0)
 @available(iOS, introduced: 16.0, deprecated: 18.0)
 @available(tvOS, introduced: 16.0, deprecated: 18.0)
@@ -6068,12 +5777,12 @@ extension CreateMLComponents.RobustScaler {
 
             return result
         }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.RobustScaler<Element>.Transformer, b: CreateMLComponents.RobustScaler<Element>.Transformer) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Input = Element
     @available(iOS 16.0, tvOS 16.0, watchOS 11.0, macOS 13.0, *)
     public typealias Output = Element
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -6180,16 +5889,15 @@ extension CreateMLComponents.LinearRegressor {
       set
     }
     public init()
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.LinearRegressor<Scalar>.Configuration, b: CreateMLComponents.LinearRegressor<Scalar>.Configuration) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol TabularEstimator<Transformer> {
   associatedtype Transformer : CreateMLComponents.TabularTransformer
@@ -6197,15 +5905,6 @@ public protocol TabularEstimator<Transformer> {
   func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol TabularEstimator {
-  associatedtype Transformer : CreateMLComponents.TabularTransformer
-  func fitted(to input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer
-  func encode(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.TabularEstimator where Self.Transformer : Swift.Encodable {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func fitted(to input: TabularData.DataFrame) async throws -> Self.Transformer {
@@ -6228,7 +5927,6 @@ extension CreateMLComponents.TabularEstimator where Self.Transformer : Swift.Dec
         try decoder.decode(Transformer.self)
     }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
 public protocol UpdatableTabularEstimator<Transformer> : CreateMLComponents.TabularEstimator {
   func makeTransformer() -> Self.Transformer
@@ -6236,15 +5934,6 @@ public protocol UpdatableTabularEstimator<Transformer> : CreateMLComponents.Tabu
   func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
 }
-#else
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
-public protocol UpdatableTabularEstimator : CreateMLComponents.TabularEstimator {
-  func makeTransformer() -> Self.Transformer
-  func update(_ transformer: inout Self.Transformer, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler?) async throws
-  func encodeWithOptimizer(_ transformer: Self.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
-  func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> Self.Transformer
-}
-#endif
 extension CreateMLComponents.UpdatableTabularEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 11.0, *)
   @inlinable public func update(_ transformer: inout Self.Transformer, with input: TabularData.DataFrame) async throws {

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 2305.18.1.1 -module-name AVFoundation
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 2320.19.1 -module-name AVFoundation
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import AVFoundation
 import CoreGraphics
 import CoreMedia
@@ -574,26 +575,13 @@ public struct AVMetrics<MetricEvent> : _Concurrency.AsyncSequence, @unchecked Sw
     public mutating func next() async throws -> MetricEvent?
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
     public typealias Element = MetricEvent
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
-  #if compiler(>=5.3) && $ParameterPacks
   public func chronologicalMerge<OtherSecondMetric, each MetricEventPack>(with secondMetric: AVFoundation.AVMetrics<OtherSecondMetric>, _ metrics: repeat AVFoundation.AVMetrics<each MetricEventPack>) -> AVFoundation.AVMergedMetrics<MetricEvent, OtherSecondMetric, repeat each MetricEventPack> where OtherSecondMetric : AVFoundation.AVMetricEvent, repeat each MetricEventPack : AVFoundation.AVMetricEvent
-  #endif
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-  #else
-  @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
-  public typealias __AsyncSequence_Failure = any Swift.Error
-  #endif
 }
-#if compiler(>=5.3) && $ParameterPacks
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
 public struct AVMergedMetrics<MetricEvent1, MetricEvent2, each MetricEventPack> : _Concurrency.AsyncSequence where MetricEvent1 : AVFoundation.AVMetricEvent, MetricEvent2 : AVFoundation.AVMetricEvent, repeat each MetricEventPack : AVFoundation.AVMetricEvent {
   public func makeAsyncIterator() -> AVFoundation.AVMergedMetrics<MetricEvent1, MetricEvent2, repeat each MetricEventPack>.AsyncIterator
@@ -602,23 +590,12 @@ public struct AVMergedMetrics<MetricEvent1, MetricEvent2, each MetricEventPack> 
     public mutating func next() async throws -> (AVFoundation.AVMetricEvent, any AVFoundation.AVMetricEventStreamPublisher)?
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
     public typealias Element = (AVFoundation.AVMetricEvent, any AVFoundation.AVMetricEventStreamPublisher)
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #else
-    @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
-    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-    #endif
   }
-  #if compiler(>=5.3) && $AssociatedTypeImplements
   @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-  #else
-  @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
-  public typealias __AsyncSequence_Failure = any Swift.Error
-  #endif
 }
-#endif
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
 extension AVFoundation.AVMetricPlayerItemLikelyToKeepUpEvent {
   @nonobjc public var loadedTimeRanges: [CoreMedia.CMTimeRange] {
@@ -732,23 +709,13 @@ extension AVFoundation.AVPlayerItemIntegratedTimeline {
       public mutating func next() async -> AVFoundation.AVPlayerItemIntegratedTimeline.PeriodicTimes.Element?
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
       public typealias Element = AVFoundation.AVPlayerItemIntegratedTimeline.PeriodicTimes.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
     public typealias AsyncIterator = AVFoundation.AVPlayerItemIntegratedTimeline.PeriodicTimes.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
   public struct BoundaryTimes : _Concurrency.AsyncSequence, Swift.Sendable {
     public typealias Element = CoreMedia.CMTime
@@ -757,23 +724,13 @@ extension AVFoundation.AVPlayerItemIntegratedTimeline {
       public mutating func next() async -> AVFoundation.AVPlayerItemIntegratedTimeline.BoundaryTimes.Element?
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
       public typealias Element = AVFoundation.AVPlayerItemIntegratedTimeline.BoundaryTimes.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
     public typealias AsyncIterator = AVFoundation.AVPlayerItemIntegratedTimeline.BoundaryTimes.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
   public func periodicTimes(forInterval: CoreMedia.CMTime) -> AVFoundation.AVPlayerItemIntegratedTimeline.PeriodicTimes
   public func boundaryTimes(for segment: AVFoundation.AVPlayerItemSegment, offsetsIntoSegment: [CoreMedia.CMTime]) -> AVFoundation.AVPlayerItemIntegratedTimeline.BoundaryTimes
@@ -894,24 +851,12 @@ extension AVFoundation.AVAssetImageGenerator {
     @available(iOS 16, tvOS 16, visionOS 1, macOS 13, *)
     @available(watchOS, unavailable)
     public typealias AsyncIterator = AVFoundation.AVAssetImageGenerator.Images
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     @available(watchOS, unavailable, introduced: 11.0)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-    @available(watchOS, unavailable, introduced: 11.0)
-    public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-    #endif
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     @available(watchOS, unavailable, introduced: 11.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-    @available(watchOS, unavailable, introduced: 11.0)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
 }
 @available(macOS 13, iOS 16, tvOS 16, visionOS 1, *)
@@ -930,9 +875,7 @@ extension AVFoundation.AVAssetImageGenerator.Images.Element {
 @available(macOS 15, iOS 18, tvOS 18, visionOS 2.0, *)
 @available(watchOS, unavailable)
 extension AVFoundation.AVAssetExportSession {
-  #if compiler(>=5.3) && $OptionalIsolatedParameters && $ExpressionMacroDefaultArguments
   public func export(to url: Foundation.URL, as fileType: AVFoundation.AVFileType, isolation: isolated (any _Concurrency.Actor)? = #isolation) async throws
-  #endif
   @usableFromInline
   @_unsafeInheritExecutor internal func export(to url: Foundation.URL, as fileType: AVFoundation.AVFileType) async throws
   public enum State : Swift.Sendable {
@@ -955,7 +898,6 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMutabl
 }
 @available(macOS 13, iOS 16, tvOS 16, watchOS 9, visionOS 1, *)
 extension AVFoundation.AVMutableComposition {
-  #if compiler(>=5.3) && $OptionalIsolatedParameters && $ExpressionMacroDefaultArguments
   @backDeployed(before: macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2)
   final public func insertTimeRange(_ timeRange: CoreMedia.CMTimeRange, of asset: AVFoundation.AVAsset, at time: CoreMedia.CMTime, isolation: isolated (any _Concurrency.Actor)? = #isolation) async throws {
 		 
@@ -972,7 +914,6 @@ extension AVFoundation.AVMutableComposition {
 			try insertTimeRange(timeRange, of: asset, at: time)
 		}()
 	}
-  #endif
 }
 @available(macOS 11.0, iOS 10.0, macCatalyst 14.0, tvOS 17.0, *)
 @available(visionOS, unavailable)

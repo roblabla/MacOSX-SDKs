@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-MP_UNAVAILABLE_BEGIN(watchos, macos, macCatalyst)
+MP_UNAVAILABLE_BEGIN(watchos, macos)
 
 @interface AVPlayerItem (MPAdditions)
 
@@ -23,3 +23,4 @@ MP_UNAVAILABLE_BEGIN(watchos, macos, macCatalyst)
 MP_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END
+

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalIntelligenceCore.framework/Versions/A/PersonalIntelligenceCore'
-current-version: 1271.5
+current-version: 1276.10.4
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -33,6 +33,7 @@ exports:
                        '_$s24PersonalIntelligenceCore11MetricStoreC14sharedInstanceACvau', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC14sharedInstanceACvgZ', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC14sharedInstanceACvpZ', 
+                       '_$s24PersonalIntelligenceCore11MetricStoreC14sharedInstanceACvpZMV', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC16messageListenersSaySbSS_SDySSypGtcGvM', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC16messageListenersSaySbSS_SDySSypGtcGvg', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC16messageListenersSaySbSS_SDySSypGtcGvpMV', 

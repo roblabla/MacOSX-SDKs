@@ -34,6 +34,7 @@
 #include <__memory/pointer_traits.h>
 #include <__type_traits/add_pointer.h>
 #include <__type_traits/common_reference.h>
+#include <__type_traits/integral_constant.h>
 #include <__type_traits/is_pointer.h>
 #include <__type_traits/is_reference.h>
 #include <__type_traits/remove_cv.h>
@@ -177,19 +178,19 @@ concept __has_arrow = input_iterator<_Ip> && (is_pointer_v<_Ip> || requires(_Ip 
 template <class _Fp, class _It>
 concept indirectly_unary_invocable =
     indirectly_readable<_It> && copy_constructible<_Fp> && invocable<_Fp&, iter_value_t<_It>&> &&
-    invocable<_Fp&, iter_reference_t<_It>> && invocable<_Fp&, iter_common_reference_t<_It>> &&
+    invocable<_Fp&, iter_reference_t<_It>> &&
     common_reference_with< invoke_result_t<_Fp&, iter_value_t<_It>&>, invoke_result_t<_Fp&, iter_reference_t<_It>>>;
 
 template <class _Fp, class _It>
 concept indirectly_regular_unary_invocable =
     indirectly_readable<_It> && copy_constructible<_Fp> && regular_invocable<_Fp&, iter_value_t<_It>&> &&
-    regular_invocable<_Fp&, iter_reference_t<_It>> && regular_invocable<_Fp&, iter_common_reference_t<_It>> &&
+    regular_invocable<_Fp&, iter_reference_t<_It>> &&
     common_reference_with< invoke_result_t<_Fp&, iter_value_t<_It>&>, invoke_result_t<_Fp&, iter_reference_t<_It>>>;
 
 template <class _Fp, class _It>
 concept indirect_unary_predicate =
     indirectly_readable<_It> && copy_constructible<_Fp> && predicate<_Fp&, iter_value_t<_It>&> &&
-    predicate<_Fp&, iter_reference_t<_It>> && predicate<_Fp&, iter_common_reference_t<_It>>;
+    predicate<_Fp&, iter_reference_t<_It>>;
 
 template <class _Fp, class _It1, class _It2>
 concept indirect_binary_predicate =
@@ -197,8 +198,7 @@ concept indirect_binary_predicate =
     predicate<_Fp&, iter_value_t<_It1>&, iter_value_t<_It2>&> &&
     predicate<_Fp&, iter_value_t<_It1>&, iter_reference_t<_It2>> &&
     predicate<_Fp&, iter_reference_t<_It1>, iter_value_t<_It2>&> &&
-    predicate<_Fp&, iter_reference_t<_It1>, iter_reference_t<_It2>> &&
-    predicate<_Fp&, iter_common_reference_t<_It1>, iter_common_reference_t<_It2>>;
+    predicate<_Fp&, iter_reference_t<_It1>, iter_reference_t<_It2>>;
 
 template <class _Fp, class _It1, class _It2 = _It1>
 concept indirect_equivalence_relation =
@@ -206,8 +206,7 @@ concept indirect_equivalence_relation =
     equivalence_relation<_Fp&, iter_value_t<_It1>&, iter_value_t<_It2>&> &&
     equivalence_relation<_Fp&, iter_value_t<_It1>&, iter_reference_t<_It2>> &&
     equivalence_relation<_Fp&, iter_reference_t<_It1>, iter_value_t<_It2>&> &&
-    equivalence_relation<_Fp&, iter_reference_t<_It1>, iter_reference_t<_It2>> &&
-    equivalence_relation<_Fp&, iter_common_reference_t<_It1>, iter_common_reference_t<_It2>>;
+    equivalence_relation<_Fp&, iter_reference_t<_It1>, iter_reference_t<_It2>>;
 
 template <class _Fp, class _It1, class _It2 = _It1>
 concept indirect_strict_weak_order =
@@ -215,8 +214,7 @@ concept indirect_strict_weak_order =
     strict_weak_order<_Fp&, iter_value_t<_It1>&, iter_value_t<_It2>&> &&
     strict_weak_order<_Fp&, iter_value_t<_It1>&, iter_reference_t<_It2>> &&
     strict_weak_order<_Fp&, iter_reference_t<_It1>, iter_value_t<_It2>&> &&
-    strict_weak_order<_Fp&, iter_reference_t<_It1>, iter_reference_t<_It2>> &&
-    strict_weak_order<_Fp&, iter_common_reference_t<_It1>, iter_common_reference_t<_It2>>;
+    strict_weak_order<_Fp&, iter_reference_t<_It1>, iter_reference_t<_It2>>;
 
 template <class _Fp, class... _Its>
   requires(indirectly_readable<_Its> && ...) && invocable<_Fp, iter_reference_t<_Its>...>

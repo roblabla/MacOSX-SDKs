@@ -25,6 +25,6 @@ exports:
                        _encryptPrivacyData, _getCertificatePublicKey, _getCertificateSubjectCN, 
                        _getPublicKeyBytes, _getSecKeyPublicBytes ]
     objc-classes:    [ CALogger, CertificationLogging, KmlRoutingInformation, SESAlarm, 
-                       SESAtomicArray, SESBootUUID, SESConfigDCK, SESTLV, SESTapToRadar, 
-                       SESXPCEventListener ]
+                       SESAtomicArray, SESBootUUID, SESConfigAliro, SESConfigDCK, 
+                       SESTLV, SESTapToRadar, SESXPCEventListener ]
 ...

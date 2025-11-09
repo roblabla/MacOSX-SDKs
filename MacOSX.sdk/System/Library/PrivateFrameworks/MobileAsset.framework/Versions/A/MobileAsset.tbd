@@ -25,7 +25,8 @@ exports:
                        _ASSetAssetServerURLForAssetType, _ASSetDefaultAssetServerURLForAssetType, 
                        _ASSetLogLevel, _ASStateOperation, _ASStateOperationEstimatedTimeRemaining, 
                        _ASStateOperationProgress, _ASStatePausedOperation, _ASStateStallError, 
-                       _ASStateStallReason, _MACleanV1Repository, _MAEnsureDataVault, 
+                       _ASStateStallReason, _MAAutoAssetSuspendResumeForSoftwareUpdateStatusString, 
+                       _MACleanV1Repository, _MAConvertTicksToSeconds, _MAEnsureDataVault, 
                        _MAGetAssetIdFromDict, _MAGetPallasAudience, _MAGetPallasEnabled, 
                        _MAGetPallasUrl, _MAGetPallasUrlForType, _MAGetServerUrl, 
                        _MAIsCancelDownloadResultFailure, _MAIsDownloadResultFailure, 
@@ -62,9 +63,8 @@ exports:
                        __MAsendPurgeAsset, __MAsendQueryMetaData, __MAsendSetPallasAudience, 
                        __MAsendSetPallasEnabled, __MAsendSetPallasUrl, __MAsendSetPallasUrlForType, 
                        __MAsendSetPreferences, __MAsendUpdateClientAccessGetPathSync, 
-                       __MAsendUpdateClientAccessGetPathWithPurposeSync, __MobileAssetFault, 
-                       __MobileAssetLog, __SecureMABundleCommand, ___ForceMigration, 
-                       __getClientCallbackQueue, _addObjectToMessage ]
+                       __MAsendUpdateClientAccessGetPathWithPurposeSync, __SecureMABundleCommand, 
+                       ___ForceMigration, __getClientCallbackQueue, _addObjectToMessage ]
     objc-classes:    [ ASAsset, ASAssetQuery, MAAbsoluteAssetId, MAAsset, MAAssetDiff, 
                        MAAssetQuery, MAAutoAsset, MAAutoAssetControl, MAAutoAssetControlStatistics, 
                        MAAutoAssetControlStatisticsByCommand, MAAutoAssetControlStatisticsBySize, 
@@ -80,10 +80,15 @@ exports:
                        MAAutoAssetSetInfoInstance, MAAutoAssetSetInstanceDescriptor, 
                        MAAutoAssetSetLock, MAAutoAssetSetLockTracker, MAAutoAssetSetNotifications, 
                        MAAutoAssetSetOverview, MAAutoAssetSetPolicy, MAAutoAssetSetProgress, 
-                       MAAutoAssetSetShortTermLock, MAAutoAssetSetStatus, MAAutoAssetSetSummary, 
-                       MAAutoAssetSetTarget, MAAutoAssetStatus, MAAutoAssetSummary, 
+                       MAAutoAssetSetRapidLock, MAAutoAssetSetShortTermLock, MAAutoAssetSetStatus, 
+                       MAAutoAssetSetSummary, MAAutoAssetSetTarget, MAAutoAssetStatus, 
+                       MAAutoAssetSummary, MAAutoAssetSuspendResumeForSoftwareUpdateEstimateEvictableBytesResponseInfo, 
+                       MAAutoAssetSuspendResumeForSoftwareUpdateInfo, MAAutoAssetSuspendResumeForSoftwareUpdateRequestInfo, 
+                       MAAutoAssetSuspendResumeForSoftwareUpdateResponseInfo, MAAutoAssetSuspendResumeForSoftwareUpdateStatusResponseInfo, 
+                       MAAutoAssetSuspendResumeForSoftwareUpdateSuspendWithNeededBytesRequestInfo, 
                        MAAutoAssetUpdatePolicy, MADownloadConfig, MADownloadOptions, 
                        MAMsuDownloadOptions, MAProgressHandler, MAProgressNotification, 
                        MAPushNotificationController, MAPushNotificationInterfaces, 
-                       MASecureManifestStorage, MASecureMobileAssetTypes, MAXpcConnection ]
+                       MASecureManifestStorage, MASecureMobileAssetTypes, MAThirdPartyCompatibility, 
+                       MAXpcConnection ]
 ...

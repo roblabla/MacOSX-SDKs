@@ -53,7 +53,7 @@ UIKIT_EXTERN NSAttributedStringKey const NSTextHighlightColorSchemeAttributeName
 UIKIT_EXTERN NSAttributedStringKey const NSAdaptiveImageGlyphAttributeName API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0)); // NSAdaptiveImageGlyph, default nil
 
 // NSNumber (Boolean) value. Default is false. The range of text with NSWritingToolsExclusionAttributeName=true is excluded from the WritingTools processing and preserved.
-UIKIT_EXTERN NSAttributedStringKey const NSWritingToolsExclusionAttributeName API_AVAILABLE(ios(18.2), macos(15.2)) API_UNAVAILABLE(visionos, tvos, watchos);
+UIKIT_EXTERN NSAttributedStringKey const NSWritingToolsExclusionAttributeName API_AVAILABLE(ios(18.2), macos(15.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 /************************ Attribute values ************************/
 // This defines currently supported values for NSUnderlineStyleAttributeName and NSStrikethroughStyleAttributeName. These values are or'ed together to produce an underline style.

@@ -6,5 +6,5 @@ install-name:    '/System/Library/Frameworks/ThreadNetwork.framework/Versions/A/
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    objc-classes:    [ THClient, THCredentials ]
+    objc-classes:    [ THClient, THCredentials, THPreferredNetworkEntry ]
 ...

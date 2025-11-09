@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsOSSupportUI.framework/Versions/A/PreviewsOSSupportUI'
-current-version: 22.20.7
+current-version: 22.30.25
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -80,26 +80,39 @@ exports:
                        '_$s19PreviewsOSSupportUI16PreviewSceneRoleOSQAAMc', '_$s19PreviewsOSSupportUI16PreviewSceneRoleOSYAAMc', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV0A12FoundationOS25PropertyListRepresentableAAMc', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV10runningAppACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV10runningAppACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV11descriptionSSvg', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV11descriptionSSvpMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV11mainPreviewACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV11mainPreviewACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV13legacyMacLiveACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV13legacyMacLiveACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV13stringLiteralACSS_tcfC', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV15previewInstanceACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV15previewInstanceACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV15previewProviderACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV15previewProviderACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV16previewPreflightACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV16previewPreflightACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV17nsPreviewHostableACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV17nsPreviewHostableACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV17propertyListValue0A12FoundationOS08PropertyH0Vvg', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV17propertyListValue0A12FoundationOS08PropertyH0VvpMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV17propertyListValueAC0A12FoundationOS08PropertyH0V_tKcfC', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV17registryExecutionACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV17registryExecutionACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV17registryPreflightACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV17registryPreflightACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV20complicationInstanceACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV20complicationInstanceACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV22legacyMacStaticHostingACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV22legacyMacStaticHostingACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV2eeoiySbAC_ACtFZ', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV4hash4intoys6HasherVz_tF', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV4noopACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV4noopACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV9cFunctionACvgZ', 
+                       '_$s19PreviewsOSSupportUI18EntryPointCategoryV9cFunctionACvpZMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV9hashValueSivg', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryV9hashValueSivpMV', 
                        '_$s19PreviewsOSSupportUI18EntryPointCategoryVMa', '_$s19PreviewsOSSupportUI18EntryPointCategoryVMn', 

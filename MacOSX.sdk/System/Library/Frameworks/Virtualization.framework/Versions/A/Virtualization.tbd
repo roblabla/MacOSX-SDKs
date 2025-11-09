@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 210.3.12
+current-version: 210.5.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -94,8 +94,11 @@ exports:
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO10unixSocketyAESScAEmFWC', 
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO14abstractSocketyAESScAEmFWC', 
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO17defaultUnixSocketAEvgZ', 
+                       '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO17defaultUnixSocketAEvpZMV', 
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO17maximumNameLengthSivgZ', 
+                       '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO17maximumNameLengthSivpZMV', 
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO17maximumPathLengthSivgZ', 
+                       '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsO17maximumPathLengthSivpZMV', 
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsOMa', 
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsOMn', 
                        '_$sSo28VZLinuxRosettaDirectoryShareC14VirtualizationE14CachingOptionsON', 

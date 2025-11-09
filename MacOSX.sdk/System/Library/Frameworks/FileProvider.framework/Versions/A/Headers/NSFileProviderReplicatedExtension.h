@@ -14,10 +14,9 @@
 #import <FileProvider/NSFileProviderActions.h>
 #import <FileProvider/NSFileProviderRequest.h>
 #import <FileProvider/NSFileProviderModifyItemOptions.h>
+#import <FileProvider/NSFileProviderDomain.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class NSFileProviderDomain;
 
 #pragma mark - Options
 

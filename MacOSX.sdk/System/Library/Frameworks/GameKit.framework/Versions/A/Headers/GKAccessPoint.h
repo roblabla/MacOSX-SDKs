@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, GKAccessPointLocation) {
     GKAccessPointLocationTopTrailing,
     GKAccessPointLocationBottomLeading,
     GKAccessPointLocationBottomTrailing
-} NS_SWIFT_NAME(GKAccessPoint.Location);
+} NS_SWIFT_NAME(GKAccessPoint.Location) API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0));
 
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @interface GKAccessPoint : NSObject

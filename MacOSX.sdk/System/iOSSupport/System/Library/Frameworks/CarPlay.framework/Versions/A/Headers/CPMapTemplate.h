@@ -188,7 +188,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  Determines if the template should provide navigation metadata.
  @return YES if the template should provide navigation metadata, otherwise NO
  */
-- (BOOL)mapTemplateShouldProvideNavigationMetadata:(CPMapTemplate *)mapTemplate;
+- (BOOL)mapTemplateShouldProvideNavigationMetadata:(CPMapTemplate *)mapTemplate API_AVAILABLE(ios(17.4));
 
 #pragma mark - Notification Policy
 /**

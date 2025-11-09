@@ -5,7 +5,6 @@
 //  Copyright © 2022 Apple, Inc. All rights reserved.
 //
 
-
 #ifndef __PKIDENTITYBUTTON_H
 #define __PKIDENTITYBUTTON_H
 
@@ -59,4 +58,3 @@ NS_ASSUME_NONNULL_END
 #endif // TARGET_OS_IOS
 
 #endif // __PKIDENTITYBUTTON_H
-

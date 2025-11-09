@@ -3,7 +3,7 @@
 #import <GameKit/GKBasePlayer.h>
 NS_ASSUME_NONNULL_BEGIN
 
-API_DEPRECATED_WITH_REPLACEMENT("GKPlayer", ios(10.0, 12.0), tvos(10.0, 12.0), macos(10.12, 10.14)) API_UNAVAILABLE(watchos)
+API_DEPRECATED_WITH_REPLACEMENT("Use ``GKPlayer`` instead.", ios(10.0, 12.0), tvos(10.0, 12.0), macos(10.12, 10.14)) API_UNAVAILABLE(watchos)
 @interface GKCloudPlayer : GKBasePlayer
 #if !__OBJC2__
 {

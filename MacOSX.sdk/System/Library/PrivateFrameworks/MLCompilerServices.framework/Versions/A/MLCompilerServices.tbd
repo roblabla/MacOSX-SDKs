@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MLCompilerServices.framework/Versions/A/MLCompilerServices'
-current-version: 3400.8.1
-compatibility-version: 3400.8.1
+current-version: 3404.3.1
+compatibility-version: 3404.3.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _mlc_services_compile, _mlc_services_compile_to_cache, _mlc_services_model_bind_ports, 

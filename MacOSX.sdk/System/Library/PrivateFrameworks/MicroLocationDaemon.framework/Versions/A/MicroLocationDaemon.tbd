@@ -17,7 +17,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvRKyEEE, __ZTINSt3__110__function6__funcIPFdRKNS_8multisetIdNS_4lessIdEENS_9allocatorIdEEEEENS5_ISB_EEFdS7_EEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTIPFdRKNSt3__18multisetIdNS_4lessIdEENS_9allocatorIdEEEEE, 
+                       __ZTIPFdRKNSt3__18multisetIdNS_4lessIdEENS_9allocatorIdEEEEE, 
                        __ZTSFdRKNSt3__18multisetIdNS_4lessIdEENS_9allocatorIdEEEEE, 
                        __ZTSN5boost10wrapexceptINS_16bad_lexical_castEEE, __ZTSN5boost10wrapexceptINS_5uuids13entropy_errorEEE, 
                        __ZTSN5boost10wrapexceptISt13runtime_errorEE, __ZTSN5boost16bad_lexical_castE, 
@@ -29,7 +29,7 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvRKyEEE, __ZTSNSt3__110__function6__funcIPFdRKNS_8multisetIdNS_4lessIdEENS_9allocatorIdEEEEENS5_ISB_EEFdS7_EEE, 
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSPFdRKNSt3__18multisetIdNS_4lessIdEENS_9allocatorIdEEEEE ]
+                       __ZTSPFdRKNSt3__18multisetIdNS_4lessIdEENS_9allocatorIdEEEEE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s19MicroLocationDaemon10ULKeychainC17storeSymmetricKey09symmetricG05labelSb9CryptoKit0fG0V_SStFZ', 

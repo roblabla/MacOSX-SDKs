@@ -1,7 +1,6 @@
-framework module GameKit {
-  umbrella header "GameKit.h"
+framework module GameKit [system] {
+    umbrella header "GameKit.h"
 
-  export *
-  module * { export * }
+    export *
+    module * { export * }
 }
-

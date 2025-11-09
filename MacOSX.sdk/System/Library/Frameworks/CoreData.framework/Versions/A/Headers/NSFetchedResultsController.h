@@ -1,7 +1,7 @@
 /*
     NSFetchedResultsController.h
     Core Data
-    Copyright (c) 2009-2024, Apple Inc.
+    Copyright (c) 2009-2025, Apple Inc.
     All rights reserved.
 */
 

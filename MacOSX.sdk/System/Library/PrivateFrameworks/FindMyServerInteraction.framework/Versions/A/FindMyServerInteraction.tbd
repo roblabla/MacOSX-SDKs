@@ -132,7 +132,9 @@ exports:
                        '_$s23FindMyServerInteraction8ResponseVMa', '_$s23FindMyServerInteraction8ResponseVMn', 
                        '_$s23FindMyServerInteraction8ResponseVN', '_$s23FindMyServerInteraction8ResponseVs23CustomStringConvertibleAAMc', 
                        '_$s23FindMyServerInteraction8StandardO10clientTimeSSvgZ', 
+                       '_$s23FindMyServerInteraction8StandardO10clientTimeSSvpZMV', 
                        '_$s23FindMyServerInteraction8StandardO15clientInfoValueSSvgZ', 
+                       '_$s23FindMyServerInteraction8StandardO15clientInfoValueSSvpZMV', 
                        '_$s23FindMyServerInteraction8StandardOMa', '_$s23FindMyServerInteraction8StandardOMn', 
                        '_$s23FindMyServerInteraction8StandardON' ]
 ...

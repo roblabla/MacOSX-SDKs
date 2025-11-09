@@ -163,6 +163,7 @@ exports:
                        '_$s29SiriNaturalLanguageGeneration19NLGDialogScorerTypeOSHAAMc', 
                        '_$s29SiriNaturalLanguageGeneration19NLGDialogScorerTypeOSQAAMc', 
                        '_$s29SiriNaturalLanguageGeneration20NLGUtteranceProviderO16currentUtteranceSSSgvgZ', 
+                       '_$s29SiriNaturalLanguageGeneration20NLGUtteranceProviderO16currentUtteranceSSSgvpZMV', 
                        '_$s29SiriNaturalLanguageGeneration20NLGUtteranceProviderOMa', 
                        '_$s29SiriNaturalLanguageGeneration20NLGUtteranceProviderOMn', 
                        '_$s29SiriNaturalLanguageGeneration20NLGUtteranceProviderON', 

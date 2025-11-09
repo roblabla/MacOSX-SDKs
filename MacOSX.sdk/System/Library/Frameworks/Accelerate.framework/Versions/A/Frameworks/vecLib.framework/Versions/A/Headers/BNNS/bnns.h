@@ -3,7 +3,9 @@
 #ifndef __BNNS_HEADER__
 #define __BNNS_HEADER__
 
+#if __has_include( <TargetConditionals.h> )
 #include <TargetConditionals.h>
+#endif // __has_include( <TargetConditionals.h> )
 
 #include "bnns_constants.h"
 #include "bnns_structures.h"
@@ -13,10 +15,11 @@
 
 #if __has_include( <Availability.h> )
 #include <Availability.h>
-#else
+#else // __has_include( <Availability.h> )
 #define __API_AVAILABLE(...)
+#define __API_DEPRECATED(...)
 #define __API_DEPRECATED_WITH_REPLACEMENT(...)
-#endif
+#endif // __has_include( <Availability.h> )
 
 #if __has_feature(assume_nonnull)
 _Pragma("clang assume_nonnull begin")
@@ -1752,7 +1755,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 #if !0
 
 /*!
- * @abstract Returns required workspace size for a call to BNNSMatMul() with the given paramters.
+ * @abstract Returns required workspace size for a call to BNNSMatMul() with the given parameters.
  *
  * @discussion
  * This routine does not access the data pointers on the array descriptors, so they need not point to actual data.
@@ -1765,7 +1768,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  * @param output - descriptor for tensor C
  * @param filter_params - filter runtime parameters, may be NULL for default parameters
  *
- * @returns Required allocation size for workspace paramter to BNNSMatMul, in bytes.
+ * @returns Required allocation size for workspace parameter to BNNSMatMul, in bytes.
  *          If parameters are invalid, a negative value is returned.
  */
 ssize_t BNNSMatMulWorkspaceSize(const bool transA,
@@ -2715,6 +2718,7 @@ __API_DEPRECATED_WITH_REPLACEMENT("BNNSFilterCreateLayerActivation", macos(10.13
 
 #if !__has_include( <Availability.h> )
 #undef __API_AVAILABLE
+#undef __API_DEPRECATED
 #undef __API_DEPRECATED_WITH_REPLACEMENT
 #endif
 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AppIntents_SwiftUI.framework/Versions/A/_AppIntents_SwiftUI'
-current-version: 226.3
+current-version: 227.13
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -72,6 +72,7 @@ exports:
                        '_$s19_AppIntents_SwiftUI11SiriTipViewVMa', '_$s19_AppIntents_SwiftUI11SiriTipViewVMn', 
                        '_$s19_AppIntents_SwiftUI11SiriTipViewVN', '_$s19_AppIntents_SwiftUI12SearchStringV0cD014EnvironmentKeyAAMc', 
                        '_$s19_AppIntents_SwiftUI12SearchStringV12defaultValueSSvgZ', 
+                       '_$s19_AppIntents_SwiftUI12SearchStringV12defaultValueSSvpZMV', 
                        '_$s19_AppIntents_SwiftUI12SearchStringVMa', '_$s19_AppIntents_SwiftUI12SearchStringVMn', 
                        '_$s19_AppIntents_SwiftUI12SearchStringVN', '_$s19_AppIntents_SwiftUI13ShortcutsLinkV0cD04ViewAAMc', 
                        '_$s19_AppIntents_SwiftUI13ShortcutsLinkV4bodyQrvg', '_$s19_AppIntents_SwiftUI13ShortcutsLinkV4bodyQrvpMV', 
@@ -87,8 +88,11 @@ exports:
                        '_$s19_AppIntents_SwiftUI15DisplayLocationOMa', '_$s19_AppIntents_SwiftUI15DisplayLocationOMn', 
                        '_$s19_AppIntents_SwiftUI15DisplayLocationON', '_$s19_AppIntents_SwiftUI15DisplayLocationOSHAAMc', 
                        '_$s19_AppIntents_SwiftUI15DisplayLocationOSQAAMc', '_$s19_AppIntents_SwiftUI16SiriTipViewStyleV4darkACvgZ', 
+                       '_$s19_AppIntents_SwiftUI16SiriTipViewStyleV4darkACvpZMV', 
                        '_$s19_AppIntents_SwiftUI16SiriTipViewStyleV5lightACvgZ', 
+                       '_$s19_AppIntents_SwiftUI16SiriTipViewStyleV5lightACvpZMV', 
                        '_$s19_AppIntents_SwiftUI16SiriTipViewStyleV9automaticACvgZ', 
+                       '_$s19_AppIntents_SwiftUI16SiriTipViewStyleV9automaticACvpZMV', 
                        '_$s19_AppIntents_SwiftUI16SiriTipViewStyleVMa', '_$s19_AppIntents_SwiftUI16SiriTipViewStyleVMn', 
                        '_$s19_AppIntents_SwiftUI16SiriTipViewStyleVN', '_$s19_AppIntents_SwiftUI16ViewCodableErrorO14decodingFailedyA2CmFWC', 
                        '_$s19_AppIntents_SwiftUI16ViewCodableErrorO2eeoiySbAC_ACtFZ', 
@@ -102,16 +106,24 @@ exports:
                        '_$s19_AppIntents_SwiftUI17SharedIndexedViewPSETb', '_$s19_AppIntents_SwiftUI17SharedIndexedViewPSeTb', 
                        '_$s19_AppIntents_SwiftUI17SharedIndexedViewTL', '_$s19_AppIntents_SwiftUI18DisplayLocationKeyV0cD0011EnvironmentG0AAMc', 
                        '_$s19_AppIntents_SwiftUI18DisplayLocationKeyV12defaultValueAA0eF0OvgZ', 
+                       '_$s19_AppIntents_SwiftUI18DisplayLocationKeyV12defaultValueAA0eF0OvpZMV', 
                        '_$s19_AppIntents_SwiftUI18DisplayLocationKeyVMa', '_$s19_AppIntents_SwiftUI18DisplayLocationKeyVMn', 
                        '_$s19_AppIntents_SwiftUI18DisplayLocationKeyVN', '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV11darkOutlineACvgZ', 
+                       '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV11darkOutlineACvpZMV', 
                        '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV12lightOutlineACvgZ', 
+                       '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV12lightOutlineACvpZMV', 
                        '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV16automaticOutlineACvgZ', 
+                       '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV16automaticOutlineACvpZMV', 
                        '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV4darkACvgZ', 
+                       '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV4darkACvpZMV', 
                        '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV5lightACvgZ', 
+                       '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV5lightACvpZMV', 
                        '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV9automaticACvgZ', 
+                       '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleV9automaticACvpZMV', 
                        '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleVMa', '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleVMn', 
                        '_$s19_AppIntents_SwiftUI18ShortcutsLinkStyleVN', '_$s19_AppIntents_SwiftUI31CSSearchableItemAttributeSetKeyV0cD0011EnvironmentI0AAMc', 
                        '_$s19_AppIntents_SwiftUI31CSSearchableItemAttributeSetKeyV12defaultValueSo0efgH0CvgZ', 
+                       '_$s19_AppIntents_SwiftUI31CSSearchableItemAttributeSetKeyV12defaultValueSo0efgH0CvpZMV', 
                        '_$s19_AppIntents_SwiftUI31CSSearchableItemAttributeSetKeyVMa', 
                        '_$s19_AppIntents_SwiftUI31CSSearchableItemAttributeSetKeyVMn', 
                        '_$s19_AppIntents_SwiftUI31CSSearchableItemAttributeSetKeyVN', 
@@ -169,6 +181,8 @@ exports:
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifier16forSelectionType10identifierQrqd__m_0dE00gH0VSgqd__ctSHRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifieryQr0dE00gH0VSgF', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifieryQr0dE00gH0VSgFQOMQ', 
+                       '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityUIElementsyQrSay0dE00dG9UIElementVGAF0dgH7ContextVScMYccF', 
+                       '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityUIElementsyQrSay0dE00dG9UIElementVGAF0dgH7ContextVScMYccFQOMQ', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E7_handle6intent7handlerQrqd__m_y0dE001_D16IntentProjectionVyqd__GctAH0dI0Rd__lF', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E7_handle6intent7handlerQrqd__m_y0dE001_D16IntentProjectionVyqd__GctAH0dI0Rd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E9appEntity10entityType10identifier5stateQrqd__m_2IDQyd__0dE00dG11VisualStateVtAK0dG0Rd__lF', 

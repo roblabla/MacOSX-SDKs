@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -63,6 +63,7 @@
 
 #ifndef _NETINET_TCP_VAR_H_
 #define _NETINET_TCP_VAR_H_
+#include <stdint.h>
 #include <sys/types.h>
 #include <sys/appleapiopts.h>
 #include <sys/queue.h>
@@ -485,6 +486,11 @@ struct tcpstat_local {
 	u_int64_t dospacket;
 	u_int64_t cleanup;
 	u_int64_t synwindow;
+	u_int64_t linkheur_stealthdrop;
+	u_int64_t linkheur_noackpri;
+	u_int64_t linkheur_comprxmt;
+	u_int64_t linkheur_synrxmt;
+	u_int64_t linkheur_rxmtfloor;
 };
 
 #pragma pack(4)

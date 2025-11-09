@@ -49,14 +49,19 @@ __API_UNAVAILABLE(tvos, watchos, driverkit, macCatalyst)
 __attribute__((noinline))
 BROWSERENGINE_EXPORT int be_memory_inline_jit_restrict_with_witness_supported(void);
 
-// This is the globally unique diversifier used in the implementation
-// of be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl
-// Ensure that your implementation does not use this diversifier for anything else.
+/*
+   This is the globally unique diversifier used in the implementation
+   of be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl
+   Ensure that your implementation does not use this diversifier for anything else.
+*/
 #define BE_JIT_WRITE_PROTECT_TAG 0x4a4954l
 
 #define _BE_STRINGIZE(exp) #exp
 #define _BE_STRINGIZE_VALUE_OF(exp) _BE_STRINGIZE(exp)
 #define _BE_SYMBOL_STRING(name) "_" #name
+
+#define _BE_INST_PACIBZ ".int 0xd503235f"
+#define _BE_INST_PACIB_X0_X1 ".int 0xdac10420"
 
 /*
     These functions that can toggle JIT R^X permissions, while enforcing
@@ -116,17 +121,24 @@ void be_memory_inline_jit_restrict_rwx_to_rw_with_witness(void)
 #ifdef __arm64e__
     ".arch_extension pauth" "\n"
 #endif
-    "adr x0, %=f" "\n"
+    "adr x0, %=2f" "\n"
 
     "movz x1, #" _BE_STRINGIZE_VALUE_OF(((BE_JIT_WRITE_PROTECT_TAG >>  0) & 0xFFFF)) ", lsl #0 \n"
     "movk x1, #" _BE_STRINGIZE_VALUE_OF(((BE_JIT_WRITE_PROTECT_TAG >> 16) & 0xFFFF)) ", lsl #16\n"
 
 #ifdef __arm64e__
     "pacib x0, x1" "\n"
-#endif
+#else
+    "mov x30, x1" "\n"
+    _BE_INST_PACIBZ "\n"
+    "cmp x30, x1" "\n"
+    "beq %=1f" "\n"
+    _BE_INST_PACIB_X0_X1 "\n"
+    "%=1:" "\n"
+#endif // !__arm64e__
 
     "bl " _BE_SYMBOL_STRING(be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl) "\n"
-    "%=:" "\n"
+    "%=2:" "\n"
     "nop" "\n"
     : /* no output */
     : /* no input */
@@ -156,6 +168,9 @@ void be_memory_inline_jit_restrict_rwx_to_rx_with_witness(void)
     : "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r16", "r17", "lr", "memory", "cc"
     );
 }
+
+#undef _BE_INST_PACIBZ
+#undef _BE_INST_PACIB_X0_X1
 
 #undef _BE_STRINGIZE
 #undef _BE_STRINGIZE_VALUE_OF

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.2.17 -module-name _StoreKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 814.4.24.1.3 -module-name _StoreKit_SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AppKit
 import Combine
 import CoreGraphics
@@ -373,9 +374,9 @@ extension _StoreKit_SwiftUI.SubscriptionStoreControlStyle where Self == _StoreKi
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 @_Concurrency.MainActor @preconcurrency public struct SubscriptionStoreView<Content> : SwiftUICore.View where Content : SwiftUICore.View {
-  nonisolated public init(groupID: Swift.String, visibleRelationships: StoreKit.Product.SubscriptionRelationship = .all, @SwiftUICore.ViewBuilder marketingContent: () -> (Content))
-  nonisolated public init(productIDs: some Collection<Product.ID>, @SwiftUICore.ViewBuilder marketingContent: () -> (Content))
-  nonisolated public init(subscriptions: some Collection<Product>, @SwiftUICore.ViewBuilder marketingContent: () -> (Content))
+  nonisolated public init(groupID: Swift.String, visibleRelationships: StoreKit.Product.SubscriptionRelationship = .all, @SwiftUICore.ViewBuilder marketingContent: () -> Content)
+  nonisolated public init(productIDs: some Collection<Product.ID>, @SwiftUICore.ViewBuilder marketingContent: () -> Content)
+  nonisolated public init(subscriptions: some Collection<Product>, @SwiftUICore.ViewBuilder marketingContent: () -> Content)
   nonisolated public init(groupID: Swift.String, visibleRelationships: StoreKit.Product.SubscriptionRelationship = .all) where Content == _StoreKit_SwiftUI.AutomaticSubscriptionStoreMarketingContent
   nonisolated public init(productIDs: some Collection<Product.ID>) where Content == _StoreKit_SwiftUI.AutomaticSubscriptionStoreMarketingContent
   nonisolated public init(subscriptions: some Collection<Product>) where Content == _StoreKit_SwiftUI.AutomaticSubscriptionStoreMarketingContent
@@ -505,8 +506,8 @@ public struct SubscriptionStoreControlPlacementKey : Swift.Hashable, Swift.Senda
   public static var bottom: _StoreKit_SwiftUI.SubscriptionStoreControlPlacementKey {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _StoreKit_SwiftUI.SubscriptionStoreControlPlacementKey, b: _StoreKit_SwiftUI.SubscriptionStoreControlPlacementKey) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -514,12 +515,8 @@ public struct SubscriptionStoreControlPlacementKey : Swift.Hashable, Swift.Senda
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 @preconcurrency @_Concurrency.MainActor public protocol SubscriptionStoreControlStyle {
   associatedtype Body : SwiftUICore.View
-  #if compiler(>=5.3) && $AssociatedTypeAvailability
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   associatedtype Placement : _StoreKit_SwiftUI.SubscriptionStoreControlPlacement = _StoreKit_SwiftUI.AutomaticSubscriptionStoreControlPlacement
-  #else
-  associatedtype Placement : _StoreKit_SwiftUI.SubscriptionStoreControlPlacement = _StoreKit_SwiftUI.AutomaticSubscriptionStoreControlPlacement
-  #endif
   typealias Configuration = _StoreKit_SwiftUI.SubscriptionStoreControlStyleConfiguration
   @SwiftUICore.ViewBuilder @_Concurrency.MainActor @preconcurrency func makeBody(configuration: Self.Configuration) -> Self.Body
 }
@@ -538,8 +535,8 @@ public struct SubscriptionStoreControlStyleConfiguration {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public struct Section : Swift.Identifiable {
     public struct ID : Swift.Hashable {
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: _StoreKit_SwiftUI.SubscriptionStoreControlStyleConfiguration.Section.ID, b: _StoreKit_SwiftUI.SubscriptionStoreControlStyleConfiguration.Section.ID) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -1007,9 +1004,9 @@ internal enum SubscriptionItemBaseConfigurationCurrentOption : Swift.Hashable {
   case currentIndex(Swift.Int)
   case hiddenCurrent(StoreKit.Product, StoreKit.Product.SubscriptionInfo)
   @usableFromInline
-  internal func hash(into hasher: inout Swift.Hasher)
-  @usableFromInline
   internal static func == (a: _StoreKit_SwiftUI.SubscriptionItemBaseConfigurationCurrentOption, b: _StoreKit_SwiftUI.SubscriptionItemBaseConfigurationCurrentOption) -> Swift.Bool
+  @usableFromInline
+  internal func hash(into hasher: inout Swift.Hasher)
   @usableFromInline
   internal var hashValue: Swift.Int {
     @usableFromInline
@@ -1227,7 +1224,6 @@ extension Swift.Never : _StoreKit_SwiftUI.StoreContent {
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias _IdentifiedView = @_opaqueReturnTypeOf("$s17_StoreKit_SwiftUI0A7ContentPAAE011_identifiedE0AA010IdentifiedaE0VyQrGvp", 0) __<Swift.Never>
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Swift.Optional : _StoreKit_SwiftUI.StoreContent where Wrapped : _StoreKit_SwiftUI.StoreContent {
   @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
@@ -1240,20 +1236,6 @@ extension Swift.Optional : _StoreKit_SwiftUI.StoreContent where Wrapped : _Store
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias _IdentifiedView = @_opaqueReturnTypeOf("$sSq17_StoreKit_SwiftUIAA0A7ContentRzlE011_identifiedE0AA010IdentifiedaE0VyQrGvp", 0) __<Wrapped>
 }
-#else
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension Swift.Optional : _StoreKit_SwiftUI.StoreContent where Wrapped : _StoreKit_SwiftUI.StoreContent {
-  @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
-    get
-  }
-  public typealias Body = Swift.Never
-  @_Concurrency.MainActor @preconcurrency public var _identifiedContent: _StoreKit_SwiftUI.IdentifiedStoreContent<some SwiftUICore.View> {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias _IdentifiedView = @_opaqueReturnTypeOf("$sSq17_StoreKit_SwiftUIAA0A7ContentRzlE011_identifiedE0AA010IdentifiedaE0VyQrGvp", 0) __<Wrapped>
-}
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore._ConditionalContent : _StoreKit_SwiftUI.StoreContent where TrueContent : _StoreKit_SwiftUI.StoreContent, FalseContent : _StoreKit_SwiftUI.StoreContent {
   public typealias Body = Swift.Never
@@ -1266,7 +1248,6 @@ extension SwiftUICore._ConditionalContent : _StoreKit_SwiftUI.StoreContent where
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias _IdentifiedView = @_opaqueReturnTypeOf("$s7SwiftUI19_ConditionalContentV010_StoreKit_aB0AD0eD0RzAdER_rlE011_identifiedD0AD010IdentifiedeD0VyQrGvp", 0) __<TrueContent, FalseContent>
 }
-#if compiler(>=5.3) && $ParameterPacks
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @_Concurrency.MainActor @preconcurrency public struct TupleStoreContent<each Content> : _StoreKit_SwiftUI.StoreContent where repeat each Content : _StoreKit_SwiftUI.StoreContent {
   @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
@@ -1280,12 +1261,9 @@ extension SwiftUICore._ConditionalContent : _StoreKit_SwiftUI.StoreContent where
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias _IdentifiedView = SwiftUICore.TupleView<(repeat (each Content)._IdentifiedView)>
 }
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @_functionBuilder public struct StoreContentBuilder {
-  #if compiler(>=5.3) && $ParameterPacks
   public static func buildBlock<each Content>(_ content: repeat each Content) -> _StoreKit_SwiftUI.TupleStoreContent<repeat each Content> where repeat each Content : _StoreKit_SwiftUI.StoreContent
-  #endif
   public static func buildExpression<Content>(_ content: Content) -> some _StoreKit_SwiftUI.StoreContent where Content : _StoreKit_SwiftUI.StoreContent
   
   public static func buildIf<Content>(_ section: Content?) -> Content? where Content : _StoreKit_SwiftUI.StoreContent
@@ -1392,8 +1370,8 @@ public struct SubscriptionStorePolicyKind : Swift.Hashable {
   public static var privacyPolicy: _StoreKit_SwiftUI.SubscriptionStorePolicyKind {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _StoreKit_SwiftUI.SubscriptionStorePolicyKind, b: _StoreKit_SwiftUI.SubscriptionStorePolicyKind) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1418,11 +1396,11 @@ extension SwiftUICore.View {
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension SwiftUICore.View {
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal func _productDescriptionHidden(_ hidden: Swift.Bool = true) -> some SwiftUICore.View
+  nonisolated internal func _productDescriptionHidden(_ hidden: Swift.Bool = true) -> some SwiftUICore.View
   
   @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
   @usableFromInline
-  @_Concurrency.MainActor @preconcurrency internal func _productDescription(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
+  nonisolated internal func _productDescription(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
   @_alwaysEmitIntoClient nonisolated public func productDescription(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View {
         if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *) {
@@ -1519,8 +1497,8 @@ public struct SubscriptionStoreButtonLabel : Swift.Hashable {
   public var price: _StoreKit_SwiftUI.SubscriptionStoreButtonLabel {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _StoreKit_SwiftUI.SubscriptionStoreButtonLabel, b: _StoreKit_SwiftUI.SubscriptionStoreButtonLabel) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1603,10 +1581,8 @@ extension _StoreKit_SwiftUI.SubscriptionOptionSection : Swift.Sendable {}
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension _StoreKit_SwiftUI.CompactProductViewStyle : Swift.Sendable {}
-#if compiler(>=5.3) && $ParameterPacks
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension _StoreKit_SwiftUI.TupleStoreContent : Swift.Sendable {}
-#endif
 @available(iOS 16.0, macCatalyst 16.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

@@ -83,9 +83,10 @@ boolean_t ml_at_interrupt_context(void);
 /* Generate a fake interrupt */
 void ml_cause_interrupt(void);
 
-#if HAS_SIQ
 void siq_init(void);
 void siq_cpu_init(void);
+#if HAS_SIQ
+void machine_switch_perfcontrol_siq(thread_t thread);
 #endif
 
 
@@ -276,7 +277,7 @@ struct ml_processor_info {
 	uint64_t                        regmap_paddr;
 	uint32_t                        phys_id;
 	uint32_t                        log_id;
-	uint32_t                        l2_access_penalty;
+	uint32_t                        l2_access_penalty; /* unused */
 	uint32_t                        cluster_id;
 	cluster_type_t                  cluster_type;
 	uint32_t                        l2_cache_id;
@@ -323,14 +324,6 @@ typedef kern_return_t (*mcache_flush_function)(void *service);
 kern_return_t ml_mcache_flush_callback_register(mcache_flush_function func, void *service);
 kern_return_t ml_mcache_flush(void);
 
-
-/* Initialize Interrupts */
-void ml_install_interrupt_handler(
-	void *nub,
-	int source,
-	void *target,
-	IOInterruptHandler handler,
-	void *refCon);
 
 vm_offset_t
     ml_static_vtop(
@@ -479,6 +472,8 @@ void bzero_phys(
 
 void bzero_phys_nc(addr64_t src64, vm_size_t bytes);
 
+void bzero_phys_with_options(addr64_t src, vm_size_t bytes, int options);
+
 
 void ml_thread_policy(
 	thread_t thread,
@@ -594,6 +589,8 @@ void ml_report_minor_badness(uint32_t badness_id);
 #define ML_MINOR_BADNESS_CONSOLE_BUFFER_FULL              0
 #define ML_MINOR_BADNESS_MEMFAULT_REPORTING_NOT_ENABLED   1
 #define ML_MINOR_BADNESS_PIO_WRITTEN_FROM_USERSPACE       2
+
+
 
 
 

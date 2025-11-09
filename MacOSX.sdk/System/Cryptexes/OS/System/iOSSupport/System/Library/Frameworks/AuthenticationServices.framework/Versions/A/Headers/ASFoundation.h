@@ -36,12 +36,12 @@
 #if __has_include(<UIKit/UIKit.h>)
 #import <UIKit/UIKit.h>
 #if __has_include(<UIKit/UIWindow.h>)
-typedef UIWindow * ASPresentationAnchor;
+typedef UIWindow * ASPresentationAnchor API_UNAVAILABLE(watchos);
 #endif
 #if __has_include(<UIKit/UIViewController.h>) && !defined(ASViewController)
-typedef UIViewController ASViewController;
+typedef UIViewController ASViewController API_UNAVAILABLE(watchos);
 #endif
-typedef UIImage ASImage;
+typedef UIImage ASImage API_UNAVAILABLE(watchos);
 #elif __has_include(<AppKit/AppKit.h>)
 #import <AppKit/AppKit.h>
 typedef NSWindow * ASPresentationAnchor;

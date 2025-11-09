@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 enum {
     /** The number of discrete control positions supported by the DualSense adaptive triggers. Each of these positions can be configured separately in multi-position feedback and multi-position vibration modes. */
-    GCDualSenseAdaptiveTriggerDiscretePositionCount NS_SWIFT_NAME(GCDualSenseAdaptiveTrigger.discretePositionCount) = 10,
+    GCDualSenseAdaptiveTriggerDiscretePositionCount NS_SWIFT_NAME(GCDualSenseAdaptiveTrigger.discretePositionCount) API_AVAILABLE(macos(12.3), ios(15.4), tvos(15.4)) = 10,
 };
 
 typedef NS_ENUM(NSInteger, GCDualSenseAdaptiveTriggerMode) {

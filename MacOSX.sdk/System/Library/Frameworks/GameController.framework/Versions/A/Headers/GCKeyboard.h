@@ -26,8 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
  @see NSNotificationCetner
  @note All connected keyboards are coalesced into one keyboard object, so notification about connection/disconnection will only be delivered once until last keyboard disconnects.
  */
-GAMECONTROLLER_EXTERN NSString *const GCKeyboardDidConnectNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN NSString *const GCKeyboardDidDisconnectNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT NSString *const GCKeyboardDidConnectNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT NSString *const GCKeyboardDidDisconnectNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  GCKeyboard is available to an application that links to GameController.framework

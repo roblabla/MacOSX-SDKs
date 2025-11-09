@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
  @see NSNotificationCenter
  @see GCMouse.mice
  */
-GAMECONTROLLER_EXTERN NSString *const GCMouseDidConnectNotification API_AVAILABLE(macos(11.0), ios(14.0));
-GAMECONTROLLER_EXTERN NSString *const GCMouseDidDisconnectNotification API_AVAILABLE(macos(11.0), ios(14.0));
+GAMECONTROLLER_EXPORT NSString *const GCMouseDidConnectNotification API_AVAILABLE(macos(11.0), ios(14.0));
+GAMECONTROLLER_EXPORT NSString *const GCMouseDidDisconnectNotification API_AVAILABLE(macos(11.0), ios(14.0));
 
 /**
 Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used mouse.
@@ -56,8 +56,8 @@ GCMouse *mouse = note.object;
 @see GCMouse.mice
 @see GCMouse.current
 */
-GAMECONTROLLER_EXTERN NSString *const GCMouseDidBecomeCurrentNotification API_AVAILABLE(macos(11.0), ios(14.0));
-GAMECONTROLLER_EXTERN NSString *const GCMouseDidStopBeingCurrentNotification API_AVAILABLE(macos(11.0), ios(14.0));
+GAMECONTROLLER_EXPORT NSString *const GCMouseDidBecomeCurrentNotification API_AVAILABLE(macos(11.0), ios(14.0));
+GAMECONTROLLER_EXPORT NSString *const GCMouseDidStopBeingCurrentNotification API_AVAILABLE(macos(11.0), ios(14.0));
 
 /**
  Mice are available to an application that links to GameController.framework. There are 2 ways to access mice

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1325.300.181 -module-name IdentityLookup
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1325.500.161 -module-name IdentityLookup
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import CoreData
 import ExtensionFoundation
 import Foundation
@@ -41,9 +42,9 @@ public struct LiveCallerIDLookupExtensionContext : Swift.Hashable, Swift.Sendabl
   public let tokenIssuerURL: Foundation.URL
   public let userTierToken: Foundation.Data
   public init(serviceURL: Foundation.URL, tokenIssuerURL: Foundation.URL, userTierToken: Foundation.Data)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: IdentityLookup.LiveCallerIDLookupExtensionContext, b: IdentityLookup.LiveCallerIDLookupExtensionContext) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

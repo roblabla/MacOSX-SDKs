@@ -73,6 +73,7 @@ exports:
                        '_$s19SiriAudioSnippetKit0aB23DisambiguationItemModelVs12IdentifiableAAMc', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO0cD00C11PluginModelAAMc', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO10bundleNameSSvgZ', 
+                       '_$s19SiriAudioSnippetKit0aB8SnippetsO10bundleNameSSvpZMV', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO10simpleTextyAcA0ab6SimplegC5ModelVcACmFWC', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO12actionButtonyAcA0ab6ActiongC5ModelVcACmFWC', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO12alternativesyAcA0ab11AlternativeC5ModelVcACmFWC', 

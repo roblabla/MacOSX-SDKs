@@ -11,14 +11,14 @@ exports:
                        __ZTINSt3__110__function6__baseIFvcRKN8internal6marisa6CursorERbEEE, 
                        __ZTINSt3__110__function6__baseIFvmNS_17basic_string_viewIcNS_11char_traitsIcEEEERbEEE, 
                        __ZTINSt3__110__function6__baseIFvtNS_17basic_string_viewIDsNS_11char_traitsIDsEEEERbEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__120__shared_ptr_emplaceIN3CEM18AdaptationDatabaseENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_emplaceIN3CEM18AdaptationDatabaseENS_9allocatorIS2_EEEE, 
                        __ZTSN4trie10MarisaTrieItDsEE, __ZTSN4trie4TrieItDsN8internal6marisa6CursorEEE, 
                        __ZTSN4trie8TrieBaseE, __ZTSN8internal6marisa9ExceptionE, 
                        __ZTSNSt3__110__function6__baseIFvRKNS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_7variantIJNS_9monostateEjdS8_NS_6vectorIhNS6_IhEEEEEEENS_4lessIS8_EENS6_INS_4pairIKS8_SE_EEEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvcRKN8internal6marisa6CursorERbEEE, 
                        __ZTSNSt3__110__function6__baseIFvmNS_17basic_string_viewIcNS_11char_traitsIcEEEERbEEE, 
                        __ZTSNSt3__110__function6__baseIFvtNS_17basic_string_viewIDsNS_11char_traitsIDsEEEERbEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__shared_ptr_emplaceIN3CEM18AdaptationDatabaseENS_9allocatorIS2_EEEE ]
+                       __ZTSNSt3__120__shared_ptr_emplaceIN3CEM18AdaptationDatabaseENS_9allocatorIS2_EEEE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s15EmojiFoundation016centeredImageForA0_2in9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSS_So6CGRectVSo6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 
                        '_$s15EmojiFoundation016centeredImageForA0_9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSS_So6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 

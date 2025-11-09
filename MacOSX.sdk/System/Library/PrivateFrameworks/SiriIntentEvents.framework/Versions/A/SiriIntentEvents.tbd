@@ -231,6 +231,7 @@ exports:
                        '_$s16SiriIntentEvents18AppSelectionSignalC15ValidationErrorOs0H0AAMc', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC20supportsSecureCodingSbvMZ', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC20supportsSecureCodingSbvgZ', 
+                       '_$s16SiriIntentEvents18AppSelectionSignalC20supportsSecureCodingSbvpZMV', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC20supportsSecureCodingSbvsZ', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC4infoSDySSypGvMTj', 
                        '_$s16SiriIntentEvents18AppSelectionSignalC4infoSDySSypGvMTq', 

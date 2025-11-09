@@ -18,30 +18,30 @@
 
 /// Game Controller Product Categories
 
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryDualSense API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryDualShock4 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryMFi API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryXboxOne API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryHID API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryDualSense API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryDualShock4 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryMFi API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryXboxOne API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryHID API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
 
 
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryArcadeStick API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryArcadeStick API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 
 
 /// Remote Product Categories
 
 /// The Siri Remote (1st generation), or Apple TV Remote (1st generation), was first introduced in 2015. It features a Touch surface for touch navigation, and supports device motion.
-GAMECONTROLLER_EXTERN NSString *const GCProductCategorySiriRemote1stGen API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategorySiriRemote1stGen API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /// The Siri Remote (2nd generation), or Apple TV Remote (2nd generation), was first introduced in 2021. It features a touch-enabled clickpad for navigation.
-GAMECONTROLLER_EXTERN NSString *const GCProductCategorySiriRemote2ndGen API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategorySiriRemote2ndGen API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /// Users can use Apple TV Remote controls in Control Center on an iOS or iPadOS device.
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryControlCenterRemote API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryControlCenterRemote API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /// The Universal Electronics remote is an infrared and Bluetooth Low Energy remote designed to work with the Apple TV.
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryUniversalElectronicsRemote API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryUniversalElectronicsRemote API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
  If multiple remotes have been combined into one, the device will have the GCProductCategoryCoalescedRemote product category.
@@ -50,11 +50,11 @@ GAMECONTROLLER_EXTERN NSString *const GCProductCategoryUniversalElectronicsRemot
  virtual Control Center remote and treat them as a single GCDevice instance. By setting GCSupportsMultipleMicroGamepads in your
  app's plist to true, you can disable this behavior.
 */
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryCoalescedRemote API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryCoalescedRemote API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 
 
 /// Keyboards and Mice Product Categories
 
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryMouse API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
-GAMECONTROLLER_EXTERN NSString *const GCProductCategoryKeyboard API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryMouse API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCProductCategoryKeyboard API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));

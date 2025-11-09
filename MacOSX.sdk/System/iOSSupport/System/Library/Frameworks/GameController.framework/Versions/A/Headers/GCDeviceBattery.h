@@ -22,13 +22,15 @@ typedef NS_ENUM(NSInteger, GCDeviceBatteryState) {
     GCDeviceBatteryStateDischarging,
     GCDeviceBatteryStateCharging,
     GCDeviceBatteryStateFull
-} NS_SWIFT_NAME(GCDeviceBattery.State);
+} NS_SWIFT_NAME(GCDeviceBattery.State) API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  A controller battery is an abstract representation of the battery level and battery status of a GCController instance.
 */
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @interface GCDeviceBattery : NSObject
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  This is the battery level for controller.
@@ -42,9 +44,6 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @note This property might be useful if you display the information about currently connected controller for player's convenience
  */
 @property(nonatomic, readonly) GCDeviceBatteryState batteryState;
-
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

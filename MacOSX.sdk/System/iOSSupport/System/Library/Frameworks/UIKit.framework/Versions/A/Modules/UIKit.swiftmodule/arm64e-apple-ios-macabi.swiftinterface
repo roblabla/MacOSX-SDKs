@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-bare-slash-regex -user-module-version 8220.1.402 -module-name UIKit
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 8444.1.402 -module-name UIKit
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
 @_exported import Accessibility
 @_exported import CoreGraphics
 import CoreText
@@ -1072,8 +1072,8 @@ extension UIButton {
       get
       set
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIButton.Configuration, b: UIButton.Configuration) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1272,8 +1272,8 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
       set
     }
     public static let standardDimension: CoreFoundation.CGFloat
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIKit.UIListContentConfiguration.ImageProperties, b: UIKit.UIListContentConfiguration.ImageProperties) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1350,8 +1350,8 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
       get
       set
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIKit.UIListContentConfiguration.TextProperties, b: UIKit.UIListContentConfiguration.TextProperties) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1432,8 +1432,8 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
     get
     set
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIListContentConfiguration, b: UIKit.UIListContentConfiguration) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1715,8 +1715,8 @@ public struct UISceneSessionActivationRequest : Swift.Hashable {
   }
   public init(role: UISceneSession.Role = .windowApplication, userActivity: Foundation.NSUserActivity? = nil, options: UIScene.ActivationRequestOptions? = nil)
   public init(session: UISceneSession, userActivity: Foundation.NSUserActivity? = nil, options: UIScene.ActivationRequestOptions? = nil)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UISceneSessionActivationRequest, b: UIKit.UISceneSessionActivationRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1889,8 +1889,8 @@ extension UIBarButtonItem {
 @available(iOS 17.0, *)
 public struct UIWindowSceneProminentPlacement : UIKit.UIWindowScenePlacement {
   public init()
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIWindowSceneProminentPlacement, b: UIKit.UIWindowSceneProminentPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1900,7 +1900,6 @@ extension UIKit.UIWindowScenePlacement where Self == UIKit.UIWindowSceneProminen
   public static func prominent() -> Self
 }
 extension UIFontPickerViewController.Configuration {
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -1908,7 +1907,6 @@ extension UIFontPickerViewController.Configuration {
     get
     set
   }
-  #endif
 }
 @available(iOS 14.5, *)
 @available(tvOS, unavailable)
@@ -1955,8 +1953,8 @@ public struct UIListSeparatorConfiguration : Swift.Hashable {
     set
   }
   public init(listAppearance: UIKit.UICollectionLayoutListConfiguration.Appearance)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIListSeparatorConfiguration, b: UIKit.UIListSeparatorConfiguration) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2000,8 +1998,8 @@ extension UIKit.UIPointerShape : Swift.Sendable {
 public enum UIPointerEffect : Swift.Sendable, Swift.Equatable {
   public enum TintMode : Swift.Sendable, Swift.Equatable {
     case none, overlay, underlay
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIKit.UIPointerEffect.TintMode, b: UIKit.UIPointerEffect.TintMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2136,8 +2134,8 @@ extension UITextFormattingViewController {
 @available(macCatalyst, unavailable)
 public struct UIWindowSceneReplacePlacement : UIKit.UIWindowScenePlacement {
   public init(replacing sceneSession: UISceneSession)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIWindowSceneReplacePlacement, b: UIKit.UIWindowSceneReplacePlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2155,8 +2153,8 @@ extension UIKit.UIWindowScenePlacement where Self == UIKit.UIWindowSceneReplaceP
 @available(macCatalyst, unavailable)
 public struct UIWindowScenePushPlacement : UIKit.UIWindowScenePlacement {
   public init(target sceneSession: UISceneSession)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIWindowScenePushPlacement, b: UIKit.UIWindowScenePushPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2180,8 +2178,8 @@ extension UIKit.UIWindowScenePlacement where Self == UIKit.UIWindowScenePushPlac
   public mutating func expand(_ items: [ItemIdentifierType])
   public mutating func collapse(_ items: [ItemIdentifierType])
   public mutating func replace(childrenOf parent: ItemIdentifierType, using snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>)
-  public mutating func insert(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, before item: (ItemIdentifierType))
-  public mutating func insert(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, after item: (ItemIdentifierType))
+  public mutating func insert(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, before item: ItemIdentifierType)
+  public mutating func insert(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, after item: ItemIdentifierType)
   public func isExpanded(_ item: ItemIdentifierType) -> Swift.Bool
   public func isVisible(_ item: ItemIdentifierType) -> Swift.Bool
   public func contains(_ item: ItemIdentifierType) -> Swift.Bool
@@ -2453,14 +2451,10 @@ extension DeveloperToolsSupport.Preview {
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> UIView)
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> UIViewController)
 }
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<UIView> body: @escaping @_Concurrency.MainActor () -> UIView) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<UIViewController> body: @escaping @_Concurrency.MainActor () -> UIViewController) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
-#endif
 @available(swift 5.1)
 @available(iOS 15, tvOS 15, *)
 public protocol UIViewInvalidating {
@@ -2674,8 +2668,8 @@ public struct UIContentUnavailableConfiguration : UIKit.UIContentConfiguration, 
       get
       set
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIKit.UIContentUnavailableConfiguration.ImageProperties, b: UIKit.UIContentUnavailableConfiguration.ImageProperties) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2709,8 +2703,8 @@ public struct UIContentUnavailableConfiguration : UIKit.UIContentConfiguration, 
       get
       set
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIKit.UIContentUnavailableConfiguration.TextProperties, b: UIKit.UIContentUnavailableConfiguration.TextProperties) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2732,8 +2726,8 @@ public struct UIContentUnavailableConfiguration : UIKit.UIContentConfiguration, 
       get
       set
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: UIKit.UIContentUnavailableConfiguration.ButtonProperties, b: UIKit.UIContentUnavailableConfiguration.ButtonProperties) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2832,8 +2826,8 @@ public struct UIContentUnavailableConfiguration : UIKit.UIContentConfiguration, 
     get
     set
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIContentUnavailableConfiguration, b: UIKit.UIContentUnavailableConfiguration) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3437,8 +3431,8 @@ extension UIKit.UIMutableTraits {
 @available(iOS 17.0, tvOS 17.0, *)
 public struct UIWindowSceneStandardPlacement : UIKit.UIWindowScenePlacement {
   public init()
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIWindowSceneStandardPlacement, b: UIKit.UIWindowSceneStandardPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -4306,8 +4300,8 @@ public struct UIBackgroundConfiguration : Swift.Hashable {
     get
     set
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: UIKit.UIBackgroundConfiguration, b: UIKit.UIBackgroundConfiguration) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

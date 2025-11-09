@@ -30,6 +30,7 @@
 #define _IOEPORTERDEFS_H
 
 #include <DriverKit/OSSharedPtr.h>
+#include <DriverKit/IOReporters.h>
 
 //#include "IOReportHubCommon.h"
 

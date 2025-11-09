@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftVideoToolbox.dylib'
-current-version: 3185.18.5
+current-version: 3210.19.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -146,5 +146,9 @@ exports:
                        '_$sSo25VTRAWProcessingSessionRefa12VideoToolboxE9ParameterOMn', 
                        '_$sSo25VTRAWProcessingSessionRefa12VideoToolboxE9ParameterON', 
                        '_$sSo25VTRAWProcessingSessionRefa12VideoToolboxE9ParameterOSQACMc', 
+                       '_$sSo31VTFrameRateConversionParametersC12VideoToolboxE11sourceFrame04nextH011opticalFlow18interpolationPhase14submissionMode17destinationFramesABSgSo0a9ProcessorH0C_ALSo0ar7OpticalK0CSgSaySfGSo0abcd10SubmissionO0VSayALGtcfC', 
+                       '_$sSo31VTFrameRateConversionParametersC12VideoToolboxE11sourceFrame04nextH011opticalFlow18interpolationPhase14submissionMode17destinationFramesABSgSo0a9ProcessorH0C_ALSo0ar7OpticalK0CSgSaySfGSo0abcd10SubmissionO0VSayALGtcfc', 
+                       '_$sSo31VTFrameRateConversionParametersC12VideoToolboxE18interpolationPhaseSaySfGvg', 
+                       '_$sSo31VTFrameRateConversionParametersC12VideoToolboxE18interpolationPhaseSaySfGvpMV', 
                        '__swift_FORCE_LOAD_$_swiftVideoToolbox' ]
 ...

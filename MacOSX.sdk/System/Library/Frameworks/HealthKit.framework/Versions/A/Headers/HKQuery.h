@@ -5,6 +5,8 @@
 //  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
+
+
 #import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 #import <HealthKit/HKElectrocardiogram.h>
@@ -592,7 +594,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  @param         valence The value to be compared against.
  @param         operatorType The comparison operator type for the expression.
  */
-+ (NSPredicate *)predicateForStatesOfMindWithValence:(double)valence 
++ (NSPredicate *)predicateForStatesOfMindWithValence:(double)valence
                                         operatorType:(NSPredicateOperatorType)operatorType;
 
 /**
@@ -623,5 +625,6 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
 + (NSPredicate *)predicateForStatesOfMindWithAssociation:(HKStateOfMindAssociation)association;
 
 @end
+
 
 NS_ASSUME_NONNULL_END

@@ -27,6 +27,7 @@ exports:
                        '_$s18AppStoreComponents14ASCLayoutProxyC26axOfferButtonHeightForSizey12CoreGraphics7CGFloatVSSFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC28offerProgressDiameterForSizey12CoreGraphics7CGFloatVSSFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC28traitCollectionForMainScreenSo07JUTraitG0CvgZ', 
+                       '_$s18AppStoreComponents14ASCLayoutProxyC28traitCollectionForMainScreenSo07JUTraitG0CvpZMV', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC29offerButtonFixedHeightForSizey12CoreGraphics7CGFloatVSSFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC30offerButtonRegularWidthForSizey12CoreGraphics7CGFloatVSSFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC35smallOfferButtonLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_So17JUTraitCollectionCtFZ', 

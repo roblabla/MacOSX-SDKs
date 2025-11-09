@@ -318,6 +318,7 @@ API_AVAILABLE(macos(14.0), ios(17.0));
  */
 - (void)setDepthBias:(float)depthBias slopeScale:(float)slopeScale clamp:(float)clamp;
 
+
 /*!
  @method setScissorRect:
  @brief Specifies a rectangle for a fragment scissor test.  All fragments outside of this rectangle are discarded.

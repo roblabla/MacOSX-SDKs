@@ -1,4 +1,4 @@
-framework module CoreNFC [extern_c][system] {
+framework module CoreNFC [system] {
     umbrella header "CoreNFC.h"
     header "NFCError.h"
     header "NFCTag.h"

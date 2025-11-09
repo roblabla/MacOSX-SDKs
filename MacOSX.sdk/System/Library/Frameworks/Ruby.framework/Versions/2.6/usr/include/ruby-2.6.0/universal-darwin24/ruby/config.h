@@ -160,6 +160,7 @@
 #define FUNC_FASTCALL(x) __attribute__ ((__fastcall__)) x /* only if defined __i386__ */
 #endif /* defined __i386__ */
 #define RUBY_FUNC_EXPORTED __attribute__ ((__visibility__("default"))) extern
+#define RUBY_FUNCTION_NAME_STRING __func__
 #define ENUM_OVER_INT 1
 #define HAVE_DECL_SYS_NERR 1
 #define HAVE_DECL_GETENV 1

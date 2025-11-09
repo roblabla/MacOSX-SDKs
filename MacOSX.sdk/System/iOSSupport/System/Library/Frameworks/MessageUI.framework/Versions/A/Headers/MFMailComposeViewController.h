@@ -131,6 +131,12 @@ API_AVAILABLE(ios(3.0))
 /// @param      emailAddress  A NSString specifying the preferred email address used to send this message.
 - (void)setPreferredSendingEmailAddress:(NSString *)emailAddress API_AVAILABLE(ios(11.0));
 
+/// @method     insertCollaborationItemProvider:
+/// @param      itemProvider specifying the intended content for collaboration
+/// @abstract   Returns <tt>YES</tt> if the item provider was added to the composition successfully.
+/// @discussion If the return value is YES, the itemProvider was added to the composition.  The itemProvider must be non-nil.
+- (void)insertCollaborationItemProvider:(NSItemProvider *)itemProvider completionHandler:(void (^)(BOOL))completionHandler API_AVAILABLE(ios(18.4));
+
 @end
 
 

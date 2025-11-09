@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ScreenTime/STWebHistory.h>
 
 #if TARGET_OS_OSX
 #import <AppKit/AppKit.h>
@@ -61,6 +62,14 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 /// When a parent or guardian blocks the webpage’s URL, the webpage controller
 /// displays a blocking UI and then sets this property to <doc://com.apple.documentation/documentation/objectivec/yes>.
 @property (readonly) BOOL URLIsBlocked NS_SWIFT_NAME(urlIsBlocked);
+
+/// An optional identifier for the current browsing profile.
+///
+/// The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate
+/// for topics like work, personal, or school. Using `nil` will report web history without a profile identifier.
+/// Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior
+/// to this API.
+@property (nullable, nonatomic, copy) STWebHistoryProfileIdentifier profileIdentifier API_AVAILABLE(macos(15.4), ios(18.4));
 
 /// Changes the bundle identifier used to report web usage.
 ///

@@ -57,6 +57,11 @@ uint64_t                        mach_continuous_time(void);
  */
 uint64_t                        mach_continuous_approximate_time(void);
 
+/*
+ * variant of mach_continuous_time that uses speculative timebase
+ */
+uint64_t                        mach_continuous_speculative_time(void);
+
 __END_DECLS
 
 

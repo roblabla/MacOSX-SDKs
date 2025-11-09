@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DynamicDesktop.framework/Versions/A/DynamicDesktop'
-current-version: 2341.2.6
+current-version: 2341.4.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -15,6 +15,7 @@ exports:
                        '_$s14DynamicDesktop010AppearanceB0V4kindAA0B11PictureKindOvg', 
                        '_$s14DynamicDesktop010AppearanceB0V4kindAA0B11PictureKindOvgZ', 
                        '_$s14DynamicDesktop010AppearanceB0V4kindAA0B11PictureKindOvpMV', 
+                       '_$s14DynamicDesktop010AppearanceB0V4kindAA0B11PictureKindOvpZMV', 
                        '_$s14DynamicDesktop010AppearanceB0V6FormatV10lightIndex04darkF0AEs6UInt32V_AItcfC', 
                        '_$s14DynamicDesktop010AppearanceB0V6FormatV10lightIndexs6UInt32Vvg', 
                        '_$s14DynamicDesktop010AppearanceB0V6FormatV10lightIndexs6UInt32VvpMV', 
@@ -40,6 +41,7 @@ exports:
                        '_$s14DynamicDesktop04HourB0V20usesLocationServicesSbvpMV', 
                        '_$s14DynamicDesktop04HourB0V4kindAA0B11PictureKindOvg', '_$s14DynamicDesktop04HourB0V4kindAA0B11PictureKindOvgZ', 
                        '_$s14DynamicDesktop04HourB0V4kindAA0B11PictureKindOvpMV', 
+                       '_$s14DynamicDesktop04HourB0V4kindAA0B11PictureKindOvpZMV', 
                        '_$s14DynamicDesktop04HourB0V6FormatV11TimeToIndexV010normalizedE0Sdvg', 
                        '_$s14DynamicDesktop04HourB0V6FormatV11TimeToIndexV010normalizedE0SdvpMV', 
                        '_$s14DynamicDesktop04HourB0V6FormatV11TimeToIndexV4fromAGs7Decoder_p_tKcfC', 
@@ -87,6 +89,7 @@ exports:
                        '_$s14DynamicDesktop05SolarB0V4kindAA0B11PictureKindOvg', 
                        '_$s14DynamicDesktop05SolarB0V4kindAA0B11PictureKindOvgZ', 
                        '_$s14DynamicDesktop05SolarB0V4kindAA0B11PictureKindOvpMV', 
+                       '_$s14DynamicDesktop05SolarB0V4kindAA0B11PictureKindOvpZMV', 
                        '_$s14DynamicDesktop05SolarB0V6FormatV0C7ToIndexV4fromAGs7Decoder_p_tKcfC', 
                        '_$s14DynamicDesktop05SolarB0V6FormatV0C7ToIndexV5indexs6UInt32Vvg', 
                        '_$s14DynamicDesktop05SolarB0V6FormatV0C7ToIndexV5indexs6UInt32VvpMV', 
@@ -157,6 +160,7 @@ exports:
                        '_$s14DynamicDesktop0B11PictureImplPAAE4dataxSg10Foundation4DataV_tcfC', 
                        '_$s14DynamicDesktop0B11PictureImplTL', '_$s14DynamicDesktop0B11PictureKindO10appearanceyA2CmFWC', 
                        '_$s14DynamicDesktop0B11PictureKindO5solaryA2CmFWC', '_$s14DynamicDesktop0B11PictureKindO8allCasesSayACGvgZ', 
+                       '_$s14DynamicDesktop0B11PictureKindO8allCasesSayACGvpZMV', 
                        '_$s14DynamicDesktop0B11PictureKindO8rawValueACSgs6UInt32V_tcfC', 
                        '_$s14DynamicDesktop0B11PictureKindO8rawValues6UInt32Vvg', 
                        '_$s14DynamicDesktop0B11PictureKindO8rawValues6UInt32VvpMV', 
@@ -195,13 +199,14 @@ exports:
                        '_$s14DynamicDesktop12QueryContextP8locationSd8latitude_Sd9longitudetvgTj', 
                        '_$s14DynamicDesktop12QueryContextP8locationSd8latitude_Sd9longitudetvgTq', 
                        '_$s14DynamicDesktop12QueryContextTL', '_$s14DynamicDesktop12QueryOptionsV7useDarkACvgZ', 
-                       '_$s14DynamicDesktop12QueryOptionsV8rawValueACs6UInt64V_tcfC', 
+                       '_$s14DynamicDesktop12QueryOptionsV7useDarkACvpZMV', '_$s14DynamicDesktop12QueryOptionsV8rawValueACs6UInt64V_tcfC', 
                        '_$s14DynamicDesktop12QueryOptionsV8rawValues6UInt64Vvg', 
                        '_$s14DynamicDesktop12QueryOptionsV8rawValues6UInt64VvpMV', 
-                       '_$s14DynamicDesktop12QueryOptionsV8useLightACvgZ', '_$s14DynamicDesktop12QueryOptionsVMa', 
-                       '_$s14DynamicDesktop12QueryOptionsVMn', '_$s14DynamicDesktop12QueryOptionsVN', 
-                       '_$s14DynamicDesktop12QueryOptionsVSQAAMc', '_$s14DynamicDesktop12QueryOptionsVSYAAMc', 
-                       '_$s14DynamicDesktop12QueryOptionsVs10SetAlgebraAAMc', '_$s14DynamicDesktop12QueryOptionsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s14DynamicDesktop12QueryOptionsV8useLightACvgZ', '_$s14DynamicDesktop12QueryOptionsV8useLightACvpZMV', 
+                       '_$s14DynamicDesktop12QueryOptionsVMa', '_$s14DynamicDesktop12QueryOptionsVMn', 
+                       '_$s14DynamicDesktop12QueryOptionsVN', '_$s14DynamicDesktop12QueryOptionsVSQAAMc', 
+                       '_$s14DynamicDesktop12QueryOptionsVSYAAMc', '_$s14DynamicDesktop12QueryOptionsVs10SetAlgebraAAMc', 
+                       '_$s14DynamicDesktop12QueryOptionsVs25ExpressibleByArrayLiteralAAMc', 
                        '_$s14DynamicDesktop12QueryOptionsVs9OptionSetAAMc', '_$s14DynamicDesktop4data3url10Foundation4DataV_AA0B11PictureKindOtSgAD3URLV_tF', 
                        '_$s14DynamicDesktop7factory3urlAA0B7Picture_pSg10Foundation3URLV_tF', 
                        '_$s14DynamicDesktop7factory4data4kindAA0B7Picture_pSg10Foundation4DataV_AA0bF4KindOtF', 

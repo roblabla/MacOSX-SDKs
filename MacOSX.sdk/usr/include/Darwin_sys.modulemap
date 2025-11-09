@@ -79,6 +79,11 @@ module Darwin.sys {
     export *
   }
 
+  module fileport {
+    header "sys/fileport.h"
+    export *
+  }
+
   module filio {
     header "sys/filio.h"
     export *

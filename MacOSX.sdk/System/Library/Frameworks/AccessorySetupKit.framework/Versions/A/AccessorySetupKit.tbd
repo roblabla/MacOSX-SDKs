@@ -10,6 +10,7 @@ exports:
                        '_$s17AccessorySetupKit17ASUIClientManagerC4fail9accessory17completionHandlerySo11ASAccessoryC_ys5Error_pSgctFTj', 
                        '_$s17AccessorySetupKit17ASUIClientManagerC4fail9accessory17completionHandlerySo11ASAccessoryC_ys5Error_pSgctFTq', 
                        '_$s17AccessorySetupKit17ASUIClientManagerC6sharedACvgZ', 
+                       '_$s17AccessorySetupKit17ASUIClientManagerC6sharedACvpZMV', 
                        '_$s17AccessorySetupKit17ASUIClientManagerC6update9accessory7options3for17completionHandlerySo11ASAccessoryC_So0L13RenameOptionsVSSSgys5Error_pSgctFTj', 
                        '_$s17AccessorySetupKit17ASUIClientManagerC6update9accessory7options3for17completionHandlerySo11ASAccessoryC_So0L13RenameOptionsVSSSgys5Error_pSgctFTq', 
                        '_$s17AccessorySetupKit17ASUIClientManagerCACycfC', '_$s17AccessorySetupKit17ASUIClientManagerCACycfc', 

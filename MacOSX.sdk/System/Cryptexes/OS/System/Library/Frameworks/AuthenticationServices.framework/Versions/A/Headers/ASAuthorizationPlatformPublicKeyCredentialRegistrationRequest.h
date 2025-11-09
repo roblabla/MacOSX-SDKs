@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, ASAuthorizationPlatformPublicKeyCredentialRegistratio
     /// this request will return an error without showing any UI to the user, and may be retried the next time they
     /// sign in.
     ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional,
-} NS_SWIFT_NAME(ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.RequestStyle) AS_API_AVAILABLE(macos(15.0), ios(18.0), xros(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+} NS_SWIFT_NAME(ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.RequestStyle) AS_API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 AS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -35,7 +35,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 
 @property (nonatomic, nullable) ASAuthorizationPublicKeyCredentialPRFRegistrationInput *prf NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
-@property (nonatomic) ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle requestStyle AS_API_AVAILABLE(macos(15.0), ios(18.0), xros(2.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic) ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle requestStyle AS_API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

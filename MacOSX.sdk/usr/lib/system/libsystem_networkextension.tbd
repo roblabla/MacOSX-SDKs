@@ -22,7 +22,7 @@ exports:
                        _NEHelperCopyXPCEndpointForIdentityProxyExtended, _NEHelperGetAppTrackerDomains, 
                        _NEHelperGetIKESocket, _NEHelperGetIKESocketWithResult, _NEHelperGetKernelControlSocket, 
                        _NEHelperGetKernelControlSocketExtended, _NEHelperGetNECPSessionFD, 
-                       _NEHelperGetPFKeySocket, _NEHelperHandleConfigurationsChangedBySC, 
+                       _NEHelperGetPFKeySocket, _NEHelperGetPid, _NEHelperHandleConfigurationsChangedBySC, 
                        _NEHelperInit, _NEHelperInterfaceCreate, _NEHelperInterfaceDestroy, 
                        _NEHelperInterfaceRemoveAddress, _NEHelperInterfaceSetAddress, 
                        _NEHelperInterfaceSetAddressWithLifetime, _NEHelperInterfaceSetDelegate, 

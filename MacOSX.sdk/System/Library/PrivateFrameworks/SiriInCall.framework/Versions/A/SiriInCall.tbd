@@ -25,6 +25,7 @@ exports:
                        '_$s10SiriInCall0abC11FeatureFlagON', '_$s10SiriInCall0abC11FeatureFlagOSHAAMc', 
                        '_$s10SiriInCall0abC11FeatureFlagOSQAAMc', '_$s10SiriInCall0abC11FeatureFlagOs23CustomStringConvertibleAAMc', 
                        '_$s10SiriInCall0abC19InstrumentationUtilC14sharedInstanceACvgZ', 
+                       '_$s10SiriInCall0abC19InstrumentationUtilC14sharedInstanceACvpZMV', 
                        '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext12occurringFor2at12callMetadataySS_s6UInt64VAA7SICCallVtF', 
                        '_$s10SiriInCall0abC19InstrumentationUtilC20logInvocationContext8endedFor11isCancelledySS_SbtF', 
                        '_$s10SiriInCall0abC19InstrumentationUtilCMa', '_$s10SiriInCall0abC19InstrumentationUtilCMm', 

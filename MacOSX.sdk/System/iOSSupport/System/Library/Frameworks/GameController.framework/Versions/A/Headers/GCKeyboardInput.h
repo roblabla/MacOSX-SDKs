@@ -27,7 +27,7 @@ cd  for each key that changed.
  @param key the key that has been modified
  @param pressed the state of the key at the moment of block calling
  */
-typedef void (^GCKeyboardValueChangedHandler)(GCKeyboardInput *keyboard, GCDeviceButtonInput *key, GCKeyCode keyCode, BOOL pressed);
+typedef void (^GCKeyboardValueChangedHandler)(GCKeyboardInput *keyboard, GCDeviceButtonInput *key, GCKeyCode keyCode, BOOL pressed) API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 @property (nonatomic, copy, nullable) GCKeyboardValueChangedHandler keyChangedHandler;
 
 /**

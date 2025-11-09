@@ -188,6 +188,13 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  */
 @property (nonatomic, copy) NSArray<NSString *> *emptyViewSubtitleVariants API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
+/**
+ If YES, a spinning activity indicator will be displayed while the list template contains no items.
+ The activity indicator will be displayed in addition to any @c emptyViewTitleVariants or
+ @c emptyViewSubtitleVariants.
+ */
+@property (nonatomic, assign) BOOL showsSpinnerWhileEmpty API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos);
+
 #pragma mark - Assistant Cell
 
 /**

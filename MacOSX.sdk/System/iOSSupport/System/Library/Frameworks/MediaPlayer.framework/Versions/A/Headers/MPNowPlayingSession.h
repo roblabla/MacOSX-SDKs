@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVPlayer;
 @protocol MPNowPlayingSessionDelegate;
 
-MP_UNAVAILABLE_BEGIN(watchos, macos, macCatalyst)
+MP_UNAVAILABLE_BEGIN(watchos, macos)
 
 MP_API(ios(16.0), tvos(16.0))
 @interface MPAdTimeRange : NSObject <NSCopying>

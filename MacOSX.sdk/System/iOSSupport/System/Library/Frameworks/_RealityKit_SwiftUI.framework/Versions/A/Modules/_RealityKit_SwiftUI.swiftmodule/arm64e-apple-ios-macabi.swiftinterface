@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.60.13.0.1 -module-name _RealityKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 366.100.14 -module-name _RealityKit_SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import ARKit
 import Foundation
 import Observation
@@ -8,6 +9,7 @@ import RealityFoundation
 @_exported import RealityKit
 import Swift
 import SwiftUI
+import SwiftUICore
 import UIKit
 import _Concurrency
 import _StringProcessing
@@ -64,7 +66,6 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
   public struct Updates<Element> : _Concurrency.AsyncSequence, Swift.Sendable where Element : Swift.Sendable {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       public mutating func next() async -> Element?
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, *)
       @available(tvOS, unavailable, introduced: 18.0)
       @available(watchOS, unavailable, introduced: 11.0)
@@ -72,15 +73,6 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
       @available(macOS, unavailable, introduced: 15.0)
       @available(macCatalyst, unavailable)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(iOS 18.0, *)
-      @available(tvOS, unavailable, introduced: 18.0)
-      @available(watchOS, unavailable, introduced: 11.0)
-      @available(visionOS, unavailable, introduced: 2.0)
-      @available(macOS, unavailable, introduced: 15.0)
-      @available(macCatalyst, unavailable)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     public func makeAsyncIterator() -> _RealityKit_SwiftUI.ObjectCaptureSession.Updates<Element>.Iterator
     @available(iOS 17.0, *)
@@ -90,7 +82,6 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
     @available(macOS, unavailable, introduced: 15.0)
     @available(macCatalyst, unavailable)
     public typealias AsyncIterator = _RealityKit_SwiftUI.ObjectCaptureSession.Updates<Element>.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @available(watchOS, unavailable, introduced: 11.0)
@@ -98,15 +89,6 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
     @available(macOS, unavailable, introduced: 15.0)
     @available(macCatalyst, unavailable)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    @available(watchOS, unavailable, introduced: 11.0)
-    @available(visionOS, unavailable, introduced: 2.0)
-    @available(macOS, unavailable, introduced: 15.0)
-    @available(macCatalyst, unavailable)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
   public enum Error : Swift.Error, Foundation.LocalizedError {
     case directoryNotEmpty(Foundation.URL)
@@ -154,8 +136,8 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
     @available(tvOS, unavailable)
     @available(visionOS, unavailable)
     case objectNotDetected
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: _RealityKit_SwiftUI.ObjectCaptureSession.Feedback, b: _RealityKit_SwiftUI.ObjectCaptureSession.Feedback) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -609,8 +591,8 @@ public struct RealityViewRenderingEffectMode : Swift.Hashable, Swift.Sendable {
   public static var disabled: _RealityKit_SwiftUI.RealityViewRenderingEffectMode {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _RealityKit_SwiftUI.RealityViewRenderingEffectMode, b: _RealityKit_SwiftUI.RealityViewRenderingEffectMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -630,8 +612,8 @@ public struct RealityViewDynamicRange : Swift.Hashable, Swift.Sendable {
   internal static var _hdrRendering: _RealityKit_SwiftUI.RealityViewDynamicRange {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _RealityKit_SwiftUI.RealityViewDynamicRange, b: _RealityKit_SwiftUI.RealityViewDynamicRange) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

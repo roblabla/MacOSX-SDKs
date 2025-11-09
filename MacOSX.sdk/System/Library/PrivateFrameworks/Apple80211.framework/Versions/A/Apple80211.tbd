@@ -22,13 +22,13 @@ reexports:
                        _Apple80211Get, _Apple80211GetIOReportingService, _Apple80211GetIfListCopy, 
                        _Apple80211GetInfoCopy, _Apple80211GetInterfaceNameCopy, _Apple80211GetPower, 
                        _Apple80211GetRangingPhyErrorString, _Apple80211GetVirtualIfListCopy, 
-                       _Apple80211MaxLinkSpeed, _Apple80211MonitorEventsWithBlock, 
+                       _Apple80211MapUserBuffer, _Apple80211MaxLinkSpeed, _Apple80211MonitorEventsWithBlock, 
                        _Apple80211Open, _Apple80211ParseWPAPassword, _Apple80211RangeAsync, 
                        _Apple80211RangingStopAsync, _Apple80211RawEventMonitoringInit, 
                        _Apple80211RawEventMonitoringInitWithCFRunLoop, _Apple80211RawGet, 
                        _Apple80211RawP2PEventMonitoringInit, _Apple80211RawSet, _Apple80211RawStartMonitoringEventAll, 
-                       _Apple80211Scan, _Apple80211ScanAsync, _Apple80211ScanDynamic, 
-                       _Apple80211Set, _Apple80211SetPower, _Apple80211SetProperty, 
-                       _Apple80211StartMonitoringEvent, _Apple80211StopMonitoringEvent, 
-                       _get_apple80211_log ]
+                       _Apple80211ReturnToString, _Apple80211Scan, _Apple80211ScanAsync, 
+                       _Apple80211ScanDynamic, _Apple80211Set, _Apple80211SetPower, 
+                       _Apple80211SetProperty, _Apple80211StartMonitoringEvent, _Apple80211StopMonitoringEvent, 
+                       _convertToApple80211Error, _get_apple80211_log ]
 ...

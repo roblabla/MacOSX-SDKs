@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 366.60.13.0.1 -module-name RealityFoundation
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 366.100.14 -module-name RealityFoundation
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AVFAudio
 import AVFoundation
 import Accessibility
@@ -727,8 +728,8 @@ extension RealityFoundation.AudioFileResource.LoadingStrategy : Swift.RawReprese
 public struct ReverbComponent : RealityFoundation.Component, Swift.Hashable, Swift.Sendable {
   public var reverb: RealityFoundation.Reverb
   public init(reverb: RealityFoundation.Reverb)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: RealityFoundation.ReverbComponent, b: RealityFoundation.ReverbComponent) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -789,8 +790,8 @@ extension RealityFoundation.Audio.DistanceAttenuation {
 @available(visionOS 2.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
 extension RealityFoundation.Audio.DistanceAttenuation : Swift.Equatable, Swift.Hashable, Swift.Codable {
   public static func == (a: RealityFoundation.Audio.DistanceAttenuation, b: RealityFoundation.Audio.DistanceAttenuation) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1410,7 +1411,7 @@ extension RealityFoundation.HasModel {
   }
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-public struct EntityQuery {
+public struct EntityQuery : @unchecked Swift.Sendable {
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
   public init()
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -1773,8 +1774,8 @@ extension RealityFoundation.TextureResource {
     @available(tvOS, unavailable)
     @available(visionOS, unavailable)
     public static func astc(blockSize: RealityFoundation.TextureResource.Compression.ASTCBlockSize, quality: RealityFoundation.TextureResource.Compression.ASTCQuality = .fast) -> RealityFoundation.TextureResource.Compression
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: RealityFoundation.TextureResource.Compression, b: RealityFoundation.TextureResource.Compression) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1894,7 +1895,7 @@ public class RealityRenderer {
   @_Concurrency.MainActor public init() throws
   @objc deinit
   @_Concurrency.MainActor public func update(_ deltaTime: Foundation.TimeInterval) throws
-  @_Concurrency.MainActor public func updateAndRender(deltaTime: Foundation.TimeInterval, cameraOutput: RealityFoundation.RealityRenderer.CameraOutput, whenScheduled: ((RealityFoundation.RealityRenderer) -> Swift.Void)? = nil, onComplete: ((RealityFoundation.RealityRenderer) -> Swift.Void)? = nil, actionsBeforeRender: [RealityFoundation.RealityRenderer.MetalEventAction] = [], actionsAfterRender: [RealityFoundation.RealityRenderer.MetalEventAction] = []) throws
+  @preconcurrency @_Concurrency.MainActor public func updateAndRender(deltaTime: Foundation.TimeInterval, cameraOutput: RealityFoundation.RealityRenderer.CameraOutput, whenScheduled: (@Sendable (RealityFoundation.RealityRenderer) -> Swift.Void)? = nil, onComplete: (@Sendable (RealityFoundation.RealityRenderer) -> Swift.Void)? = nil, actionsBeforeRender: [RealityFoundation.RealityRenderer.MetalEventAction] = [], actionsAfterRender: [RealityFoundation.RealityRenderer.MetalEventAction] = []) throws
 }
 @available(visionOS 2.0, iOS 18.0, macCatalyst 18.0, macOS 15.0, *)
 extension RealityFoundation.RealityRenderer.CameraSettings {
@@ -2595,12 +2596,12 @@ extension RealityFoundation.Entity.ComponentSet : Swift.Sequence {
   public struct Iterator : Swift.IteratorProtocol {
     public mutating func next() -> (any RealityFoundation.Component)?
     @available(iOS 18.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
-    public typealias Element = (any RealityFoundation.Component)
+    public typealias Element = any RealityFoundation.Component
   }
 }
 @available(visionOS 2.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
 extension RealityFoundation.Entity.ComponentSet : Swift.Collection {
-  public typealias Element = (any RealityFoundation.Component)
+  public typealias Element = any RealityFoundation.Component
   public struct Index : Swift.Comparable, Swift.Sendable {
     public static func < (lhs: RealityFoundation.Entity.ComponentSet.Index, rhs: RealityFoundation.Entity.ComponentSet.Index) -> Swift.Bool
     public static func == (a: RealityFoundation.Entity.ComponentSet.Index, b: RealityFoundation.Entity.ComponentSet.Index) -> Swift.Bool
@@ -3490,8 +3491,8 @@ public class __MaterialResource {
       public var asString: Swift.String {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.__MaterialResource.BuildParameters.Value, b: RealityFoundation.__MaterialResource.BuildParameters.Value) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -3897,7 +3898,7 @@ open class __RKEntityAction : Swift.CustomStringConvertible, Foundation.NSCopyin
   }
   @preconcurrency @_Concurrency.MainActor public init(targetEntity: RealityFoundation.Entity? = nil)
   @objc deinit
-  public typealias CompletionHandler = ((_ success: Swift.Bool) -> Swift.Void)
+  public typealias CompletionHandler = (_ success: Swift.Bool) -> Swift.Void
   public var targetEntity: RealityFoundation.Entity?
   public var completionHandler: RealityFoundation.__RKEntityAction.CompletionHandler?
   public var isAlternate: Swift.Bool
@@ -4043,8 +4044,8 @@ public struct AudioMixGroupsComponent {
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
 extension RealityFoundation.AudioMixGroupsComponent : Swift.Hashable {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: RealityFoundation.AudioMixGroupsComponent, b: RealityFoundation.AudioMixGroupsComponent) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -4163,8 +4164,8 @@ public struct IKRig {
   public init(for skeleton: RealityFoundation.MeshResource.Skeleton) throws
   public struct Joint : Swift.Identifiable {
     public struct ID : Swift.Hashable, Swift.Equatable {
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.IKRig.Joint.ID, b: RealityFoundation.IKRig.Joint.ID) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -4200,8 +4201,8 @@ public struct IKRig {
   }
   public struct Constraint : Swift.Identifiable {
     public struct ID : Swift.Hashable, Swift.Equatable {
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.IKRig.Constraint.ID, b: RealityFoundation.IKRig.Constraint.ID) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -4785,8 +4786,8 @@ public struct AnimationTimingFunction : Swift.Hashable {
     get
   }
   public static func cubicBezier(controlPoint1: Swift.SIMD2<Swift.Float>, controlPoint2: Swift.SIMD2<Swift.Float>) -> RealityFoundation.AnimationTimingFunction
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: RealityFoundation.AnimationTimingFunction, b: RealityFoundation.AnimationTimingFunction) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5634,14 +5635,14 @@ extension RealityFoundation.EntityAction {
     get
   }
   public static func registerAction()
-  public static func subscribe(to eventType: RealityFoundation.ActionEventType, _ handler: @escaping (RealityFoundation.ActionEvent<Self>) -> Swift.Void)
-  public static func unsubscribe(from eventType: RealityFoundation.ActionEventType)
-  public static func unsubscribeAll()
+  @preconcurrency @_Concurrency.MainActor public static func subscribe(to eventType: RealityFoundation.ActionEventType, _ handler: @escaping @_Concurrency.MainActor (RealityFoundation.ActionEvent<Self>) -> Swift.Void)
+  @preconcurrency @_Concurrency.MainActor public static func unsubscribe(from eventType: RealityFoundation.ActionEventType)
+  @preconcurrency @_Concurrency.MainActor public static func unsubscribeAll()
 }
 @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, visionOS 2.0, *)
 extension RealityFoundation.EntityAction where Self : Swift.Decodable, Self : Swift.Encodable, Self.EventParameterType : Swift.Decodable, Self.EventParameterType : Swift.Encodable {
   public static func registerAction()
-  public static func subscribe(to eventType: RealityFoundation.ActionEventType, _ handler: @escaping (RealityFoundation.ActionEvent<Self>) -> Swift.Void)
+  @preconcurrency @_Concurrency.MainActor public static func subscribe(to eventType: RealityFoundation.ActionEventType, _ handler: @escaping @_Concurrency.MainActor (RealityFoundation.ActionEvent<Self>) -> Swift.Void)
 }
 @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, visionOS 2.0, *)
 public struct ActionEventDefinition<ActionType> where ActionType : RealityFoundation.EntityAction {
@@ -5813,8 +5814,8 @@ extension RealityFoundation.SpatialAudioComponent : RealityFoundation.Component 
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
 extension RealityFoundation.SpatialAudioComponent : Swift.Equatable, Swift.Hashable, Swift.Codable {
   public static func == (a: RealityFoundation.SpatialAudioComponent, b: RealityFoundation.SpatialAudioComponent) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -7526,8 +7527,8 @@ public struct IKComponent : RealityFoundation.Component {
   public init(resource: RealityFoundation.IKResource?)
   @_hasMissingDesignatedInitializers public class Solver : Swift.Identifiable {
     public struct ID : Swift.Hashable, Swift.Equatable {
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.IKComponent.Solver.ID, b: RealityFoundation.IKComponent.Solver.ID) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -7902,8 +7903,8 @@ extension RealityFoundation.EnvironmentResource {
     public var samplingQuality: RealityFoundation.EnvironmentResource.CreateOptions.SamplingQuality
     public var specularCubeDimension: Swift.Int?
     public init(samplingQuality: RealityFoundation.EnvironmentResource.CreateOptions.SamplingQuality = .fast, specularCubeDimension: Swift.Int? = nil, compression: RealityFoundation.EnvironmentResource.Compression = .default)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: RealityFoundation.EnvironmentResource.CreateOptions, b: RealityFoundation.EnvironmentResource.CreateOptions) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -7919,8 +7920,8 @@ public struct __SkyboxMaterial : RealityFoundation.Material {
 public struct Reverb : Swift.Hashable, Swift.Sendable {
   public static let anechoic: RealityFoundation.Reverb
   public static func preset(_ preset: RealityFoundation.Reverb.Preset) -> RealityFoundation.Reverb
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: RealityFoundation.Reverb, b: RealityFoundation.Reverb) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -7938,8 +7939,8 @@ extension RealityFoundation.Reverb {
     public static let smallRoomBright: RealityFoundation.Reverb.Preset
     public static let smallRoom: RealityFoundation.Reverb.Preset
     public static let verySmallRoomBright: RealityFoundation.Reverb.Preset
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: RealityFoundation.Reverb.Preset, b: RealityFoundation.Reverb.Preset) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -7981,10 +7982,6 @@ extension RealityFoundation.HasModel {
   @discardableResult
   @_Concurrency.MainActor @preconcurrency public func __addPostProcessingAudioEffect(_ auDesc: AudioToolbox.AudioComponentDescription) -> AudioToolbox.AUAudioUnit?
   @_Concurrency.MainActor @preconcurrency public var __defaultCamera: RealityFoundation.Entity! {
-    get
-  }
-  @available(*, deprecated, message: "Will be removed after D12. Instead of `__entities`, use `Scene.anchors` to iterate over non-ninja root level entities, or RESceneGetEntitiesArray.")
-  @_Concurrency.MainActor @preconcurrency public var __entities: [RealityFoundation.Entity] {
     get
   }
   @available(visionOS, unavailable)
@@ -8431,8 +8428,8 @@ extension RealityFoundation.Audio {
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
 extension RealityFoundation.Audio.Directivity : Swift.Equatable, Swift.Hashable, Swift.Codable {
   public static func == (a: RealityFoundation.Audio.Directivity, b: RealityFoundation.Audio.Directivity) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -8536,8 +8533,8 @@ public struct AnimationLibraryComponent : RealityFoundation.Component, Swift.Exp
     }
     public struct Index : Swift.Comparable, Swift.Hashable, Swift.Sendable {
       public static func < (lhs: RealityFoundation.AnimationLibraryComponent.AnimationCollection.Index, rhs: RealityFoundation.AnimationLibraryComponent.AnimationCollection.Index) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.AnimationLibraryComponent.AnimationCollection.Index, b: RealityFoundation.AnimationLibraryComponent.AnimationCollection.Index) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -9031,8 +9028,8 @@ extension RealityFoundation.ChannelAudioComponent : RealityFoundation.Component 
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
 extension RealityFoundation.ChannelAudioComponent : Swift.Equatable, Swift.Hashable, Swift.Codable {
   public static func == (a: RealityFoundation.ChannelAudioComponent, b: RealityFoundation.ChannelAudioComponent) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -9996,8 +9993,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
     case cylinder
     case torus
     public static func == (a: RealityFoundation.ParticleEmitterComponent.EmitterShape, b: RealityFoundation.ParticleEmitterComponent.EmitterShape) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10008,8 +10005,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
     case volume
     case vertices(count: Swift.SIMD3<Swift.UInt>)
     public static func == (a: RealityFoundation.ParticleEmitterComponent.BirthLocation, b: RealityFoundation.ParticleEmitterComponent.BirthLocation) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10020,8 +10017,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
     case local
     case normal
     public static func == (a: RealityFoundation.ParticleEmitterComponent.BirthDirection, b: RealityFoundation.ParticleEmitterComponent.BirthDirection) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10032,8 +10029,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
     case onUpdate
     case onDeath
     public static func == (a: RealityFoundation.ParticleEmitterComponent.SpawnOccasion, b: RealityFoundation.ParticleEmitterComponent.SpawnOccasion) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10043,8 +10040,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
     case local
     case global
     public static func == (a: RealityFoundation.ParticleEmitterComponent.SimulationSpace, b: RealityFoundation.ParticleEmitterComponent.SimulationSpace) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10055,8 +10052,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
     case pause
     case stop
     public static func == (a: RealityFoundation.ParticleEmitterComponent.SimulationState, b: RealityFoundation.ParticleEmitterComponent.SimulationState) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10096,8 +10093,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
       case billboardYAligned
       case free(axis: Swift.SIMD3<Swift.Float>, variation: Swift.Float)
       public static func == (a: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.BillboardMode, b: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.BillboardMode) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -10112,8 +10109,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
       case easeFadeOut
       case constant
       public static func == (a: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.OpacityCurve, b: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.OpacityCurve) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -10128,8 +10125,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
       case decreasingAge
       case unsorted
       public static func == (a: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.SortOrder, b: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.SortOrder) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -10140,8 +10137,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
       case opaque
       case additive
       public static func == (a: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.BlendMode, b: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.BlendMode) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -10160,8 +10157,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
         case looping
         case autoReverse
         public static func == (a: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.ImageSequence.AnimationRepeatMode, b: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.ImageSequence.AnimationRepeatMode) -> Swift.Bool
-        public func hash(into hasher: inout Swift.Hasher)
         public func encode(to encoder: any Swift.Encoder) throws
+        public func hash(into hasher: inout Swift.Hasher)
         public var hashValue: Swift.Int {
           get
         }
@@ -10169,8 +10166,8 @@ public struct ParticleEmitterComponent : RealityFoundation.Component, Swift.Coda
       }
       public init()
       public static func == (a: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.ImageSequence, b: RealityFoundation.ParticleEmitterComponent.ParticleEmitter.ImageSequence) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -10285,9 +10282,9 @@ public enum ForceMode : Swift.Codable, Swift.Equatable {
   case acceleration
   case impulse
   case velocity
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: RealityFoundation.ForceMode, b: RealityFoundation.ForceMode) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -10305,11 +10302,11 @@ extension RealityFoundation.ForceEffectProtocol {
     get
   }
   public func update(parameters: inout RealityFoundation.ForceEffectParameters)
-  public static func register(_ updateHandler: ((inout RealityFoundation.ForceEffectEvent<Self>) -> Swift.Void)? = nil)
+  @preconcurrency @_Concurrency.MainActor public static func register(_ updateHandler: (@_Concurrency.MainActor (inout RealityFoundation.ForceEffectEvent<Self>) -> Swift.Void)? = nil)
 }
 @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, visionOS 2.0, *)
 extension RealityFoundation.ForceEffectProtocol where Self : Swift.Decodable, Self : Swift.Encodable {
-  public static func register(_ updateHandler: ((inout RealityFoundation.ForceEffectEvent<Self>) -> Swift.Void)? = nil)
+  @preconcurrency @_Concurrency.MainActor public static func register(_ updateHandler: (@_Concurrency.MainActor (inout RealityFoundation.ForceEffectEvent<Self>) -> Swift.Void)? = nil)
 }
 @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, visionOS 2.0, *)
 public protocol ForceEffectBase {
@@ -10577,8 +10574,8 @@ public struct CameraControls : Swift.Hashable, Swift.Sendable {
   public static var dolly: RealityFoundation.CameraControls {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: RealityFoundation.CameraControls, b: RealityFoundation.CameraControls) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -10756,12 +10753,18 @@ extension RealityFoundation.Entity {
     get
     set
   }
-  @available(*, deprecated, message: "Use accessibilityLabelKey instead")
+  @available(visionOS, deprecated: 1.0, renamed: "accessibilityLabelKey")
+  @available(macOS, deprecated: 14.0, renamed: "accessibilityLabelKey")
+  @available(macCatalyst, deprecated: 17.0, renamed: "accessibilityLabelKey")
+  @available(iOS, deprecated: 17.0, renamed: "accessibilityLabelKey")
   @_Concurrency.MainActor @preconcurrency public var accessibilityLabel: Swift.String? {
     get
     set
   }
-  @available(*, deprecated, message: "Use accessibilityCustomContent instead")
+  @available(visionOS, deprecated: 1.0, renamed: "accessibilityCustomContent")
+  @available(macOS, deprecated: 14.0, renamed: "accessibilityCustomContent")
+  @available(macCatalyst, deprecated: 17.0, renamed: "accessibilityCustomContent")
+  @available(iOS, deprecated: 17.0, renamed: "accessibilityCustomContent")
   @_Concurrency.MainActor @preconcurrency public var accessibilityDescription: Swift.String? {
     get
     set
@@ -11377,8 +11380,8 @@ extension RealityFoundation.AmbientAudioComponent : RealityFoundation.Component 
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, *)
 extension RealityFoundation.AmbientAudioComponent : Swift.Equatable, Swift.Hashable, Swift.Codable {
   public static func == (a: RealityFoundation.AmbientAudioComponent, b: RealityFoundation.AmbientAudioComponent) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -11631,12 +11634,10 @@ public class __RKEntitySpinAction : RealityFoundation.__RKEntityAction {
 }
 @available(visionOS 1.0, macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 extension RealityFoundation.Entity {
-  #if compiler(>=5.3) && $ParameterPacks
   @_alwaysEmitIntoClient @inline(__always) @_Concurrency.MainActor @preconcurrency convenience public init<each T>(components: repeat each T) where repeat each T : RealityFoundation.Component {
         self.init()
         repeat self.components.set(each components)
     }
-  #endif
   @_alwaysEmitIntoClient @inline(__always) @_Concurrency.MainActor @preconcurrency convenience public init(components: [any RealityFoundation.Component]) {
         self.init()
         self.components.set(components)
@@ -11807,8 +11808,8 @@ public class PhotogrammetrySession {
     public enum MeshPrimitive : Swift.Equatable {
       case triangle
       case quad
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.PhotogrammetrySession.Configuration.MeshPrimitive, b: RealityFoundation.PhotogrammetrySession.Configuration.MeshPrimitive) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -11883,15 +11884,15 @@ public class PhotogrammetrySession {
       @available(iOS 17.0, macOS 13.0, macCatalyst 16.0, *)
       public init(orientedBounds: RealityFoundation.OrientedBoundingBox, transform: RealityFoundation.Transform = Transform.identity)
       public init(bounds: RealityFoundation.BoundingBox = BoundingBox.empty, transform: RealityFoundation.Transform = Transform.identity)
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.PhotogrammetrySession.Request.Geometry, b: RealityFoundation.PhotogrammetrySession.Request.Geometry) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
     }
     public init(modelFile: Foundation.URL)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: RealityFoundation.PhotogrammetrySession.Request, b: RealityFoundation.PhotogrammetrySession.Request) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -11974,19 +11975,11 @@ public class PhotogrammetrySession {
       @available(watchOS, unavailable)
       @available(visionOS, unavailable)
       public typealias Element = RealityFoundation.PhotogrammetrySession.Outputs.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, macOS 15.0, macCatalyst 15.0, *)
       @available(tvOS, unavailable, introduced: 18.0)
       @available(watchOS, unavailable, introduced: 11.0)
       @available(visionOS, unavailable, introduced: 2.0)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #else
-      @available(iOS 18.0, macOS 15.0, macCatalyst 15.0, *)
-      @available(tvOS, unavailable, introduced: 18.0)
-      @available(watchOS, unavailable, introduced: 11.0)
-      @available(visionOS, unavailable, introduced: 2.0)
-      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #endif
     }
     public func makeAsyncIterator() -> RealityFoundation.PhotogrammetrySession.Outputs.Iterator
     @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
@@ -11994,19 +11987,11 @@ public class PhotogrammetrySession {
     @available(watchOS, unavailable)
     @available(visionOS, unavailable)
     public typealias AsyncIterator = RealityFoundation.PhotogrammetrySession.Outputs.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, macOS 15.0, macCatalyst 15.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @available(watchOS, unavailable, introduced: 11.0)
     @available(visionOS, unavailable, introduced: 2.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, macOS 15.0, macCatalyst 15.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    @available(watchOS, unavailable, introduced: 11.0)
-    @available(visionOS, unavailable, introduced: 2.0)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
   public func process(requests: [RealityFoundation.PhotogrammetrySession.Request]) throws
   public func cancel()
@@ -13119,8 +13104,8 @@ public struct AnchoringComponent : RealityFoundation.Component, Swift.Equatable 
     @available(macOS, unavailable)
     @available(iOS, unavailable)
     public struct HandLocation : Swift.Hashable {
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: RealityFoundation.AnchoringComponent.Target.HandLocation, b: RealityFoundation.AnchoringComponent.Target.HandLocation) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -13174,8 +13159,8 @@ extension RealityFoundation.AnchoringComponent {
     public static let continuous: RealityFoundation.AnchoringComponent.TrackingMode
     @available(visionOS 2.0, *)
     public static let predicted: RealityFoundation.AnchoringComponent.TrackingMode
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: RealityFoundation.AnchoringComponent.TrackingMode, b: RealityFoundation.AnchoringComponent.TrackingMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }

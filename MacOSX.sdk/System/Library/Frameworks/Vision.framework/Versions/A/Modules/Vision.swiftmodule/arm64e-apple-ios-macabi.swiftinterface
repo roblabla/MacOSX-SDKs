@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 8.0.61 -module-name Vision
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 8.0.76 -module-name Vision
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AVFoundation
 import Accelerate
 import CoreFoundation
@@ -18,7 +19,6 @@ import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-import os
 import simd
 import simd.types
 import Accelerate.vecLib.vDSP
@@ -60,8 +60,8 @@ public enum RequestDescriptor : Swift.CustomStringConvertible, Swift.Equatable, 
     get
   }
   public static func == (a: Vision.RequestDescriptor, b: Vision.RequestDescriptor) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -74,8 +74,8 @@ public struct GenerateObjectnessBasedSaliencyImageRequest : Vision.ImageProcessi
     case revision2
     public static func < (a: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision, b: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision, b: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -88,8 +88,8 @@ public struct GenerateObjectnessBasedSaliencyImageRequest : Vision.ImageProcessi
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.GenerateObjectnessBasedSaliencyImageRequest, b: Vision.GenerateObjectnessBasedSaliencyImageRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -100,8 +100,8 @@ public struct HumanBodyPose3DObservation : Vision.VisionObservation {
     case reference
     case measured
     public static func == (a: Vision.HumanBodyPose3DObservation.EstimationTechnique, b: Vision.HumanBodyPose3DObservation.EstimationTechnique) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -265,10 +265,10 @@ public struct DetectAnimalBodyPoseRequest : Vision.ImageProcessingRequest {
   public typealias Result = [Vision.AnimalBodyPoseObservation]
   public enum Revision : Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable, Swift.Comparable {
     case revision1
-    public static func == (a: Vision.DetectAnimalBodyPoseRequest.Revision, b: Vision.DetectAnimalBodyPoseRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public static func < (a: Vision.DetectAnimalBodyPoseRequest.Revision, b: Vision.DetectAnimalBodyPoseRequest.Revision) -> Swift.Bool
+    public static func == (a: Vision.DetectAnimalBodyPoseRequest.Revision, b: Vision.DetectAnimalBodyPoseRequest.Revision) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -287,8 +287,8 @@ public struct DetectAnimalBodyPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectAnimalBodyPoseRequest, b: Vision.DetectAnimalBodyPoseRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -305,9 +305,7 @@ final public class TargetedImageRequestHandler : Swift.Sendable {
   convenience public init(source: CoreMedia.CMSampleBuffer, target: CoreMedia.CMSampleBuffer, orientation: ImageIO.CGImagePropertyOrientation? = nil)
   convenience public init(source: Foundation.Data, target: Foundation.Data, orientation: ImageIO.CGImagePropertyOrientation? = nil)
   final public func perform<T>(_ request: T) async throws -> T.Result where T : Vision.TargetedRequest
-  #if compiler(>=5.3) && $ParameterPacks
   final public func perform<each T>(_ request: repeat each T) async throws -> (repeat (each T).Result) where repeat each T : Vision.TargetedRequest
-  #endif
   final public func performAll(_ requests: some Collection<any TargetedRequest>) -> some _Concurrency.AsyncSequence<Vision.VisionResult, Swift.Never>
   
   @objc deinit
@@ -319,8 +317,8 @@ public struct GenerateAttentionBasedSaliencyImageRequest : Vision.ImageProcessin
     case revision2
     public static func < (a: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision, b: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision, b: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -333,8 +331,8 @@ public struct GenerateAttentionBasedSaliencyImageRequest : Vision.ImageProcessin
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.GenerateAttentionBasedSaliencyImageRequest, b: Vision.GenerateAttentionBasedSaliencyImageRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -374,8 +372,8 @@ final public class TrackTranslationalImageRegistrationRequest : Vision.ImageProc
     case revision1
     public static func < (a: Vision.TrackTranslationalImageRegistrationRequest.Revision, b: Vision.TrackTranslationalImageRegistrationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackTranslationalImageRegistrationRequest.Revision, b: Vision.TrackTranslationalImageRegistrationRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -466,8 +464,8 @@ public struct DetectFaceCaptureQualityRequest : Vision.ImageProcessingRequest {
     case revision3
     public static func < (a: Vision.DetectFaceCaptureQualityRequest.Revision, b: Vision.DetectFaceCaptureQualityRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectFaceCaptureQualityRequest.Revision, b: Vision.DetectFaceCaptureQualityRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -481,8 +479,8 @@ public struct DetectFaceCaptureQualityRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectFaceCaptureQualityRequest, b: Vision.DetectFaceCaptureQualityRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -494,8 +492,8 @@ final public class TrackObjectRequest : Vision.ImageProcessingRequest, Vision.St
     case revision2
     public static func < (a: Vision.TrackObjectRequest.Revision, b: Vision.TrackObjectRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackObjectRequest.Revision, b: Vision.TrackObjectRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -541,8 +539,8 @@ public struct GenerateImageFeaturePrintRequest : Vision.ImageProcessingRequest {
     case revision2
     public static func < (a: Vision.GenerateImageFeaturePrintRequest.Revision, b: Vision.GenerateImageFeaturePrintRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateImageFeaturePrintRequest.Revision, b: Vision.GenerateImageFeaturePrintRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -556,8 +554,8 @@ public struct GenerateImageFeaturePrintRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.GenerateImageFeaturePrintRequest, b: Vision.GenerateImageFeaturePrintRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -620,8 +618,8 @@ public struct Joint : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Send
     get
   }
   public static func == (a: Vision.Joint, b: Vision.Joint) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -676,45 +674,24 @@ final public class VideoProcessor : Swift.Sendable {
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public enum VisionError : Swift.Error {
   case dataUnavailable(Swift.String)
-  public static func dataUnavailable(message: Swift.String) -> Vision.VisionError
   case internalError(Swift.String)
-  public static func internalError(message: Swift.String) -> Vision.VisionError
   case invalidArgument(Swift.String)
-  public static func invalidArgument(message: Swift.String) -> Vision.VisionError
   case invalidFormat(Swift.String)
-  public static func invalidFormat(message: Swift.String) -> Vision.VisionError
   case invalidImage(Swift.String)
-  public static func invalidImage(message: Swift.String) -> Vision.VisionError
   case invalidModel(Swift.String)
-  public static func invalidModel(message: Swift.String) -> Vision.VisionError
   case invalidOperation(Swift.String)
-  public static func invalidOperation(message: Swift.String) -> Vision.VisionError
   case ioError(Swift.String)
-  public static func ioError(message: Swift.String) -> Vision.VisionError
   case operationFailed(Swift.String)
-  public static func operationFailed(message: Swift.String) -> Vision.VisionError
   case outOfBoundsError(Swift.String)
-  public static func outOfBoundsError(message: Swift.String) -> Vision.VisionError
   case outOfMemory(Swift.String)
-  public static func outOfMemory(message: Swift.String) -> Vision.VisionError
   case pixelBufferCreationFailed(CoreVideo.CVReturn)
-  public static func pixelBufferCreationFailed(errorCode: CoreVideo.CVReturn) -> Vision.VisionError
   case requestCancelled(Swift.String)
-  public static func requestCancelled(message: Swift.String) -> Vision.VisionError
   case timeout(Swift.String)
-  public static func timeout(message: Swift.String) -> Vision.VisionError
   case timeStampNotFound(Swift.String)
-  public static func timeStampNotFound(message: Swift.String) -> Vision.VisionError
   case unsupportedComputeDevice(Swift.String)
-  public static func unsupportedComputeDevice(message: Swift.String) -> Vision.VisionError
   case unsupportedComputeStage(Swift.String)
-  public static func unsupportedComputeStage(message: Swift.String) -> Vision.VisionError
   case unsupportedRequest(Swift.String)
-  public static func unsupportedRequest(message: Swift.String) -> Vision.VisionError
   case unsupportedRevision(Swift.String)
-  public static func unsupportedRevision(message: Swift.String) -> Vision.VisionError
-  public static func espressoE5RTError(message: Swift.String, errorCode: Swift.UInt32) -> Vision.VisionError
-  public static func unimplementedFunction(message: Swift.String) -> Vision.VisionError
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 extension Vision.VisionError : Foundation.LocalizedError {
@@ -722,9 +699,11 @@ extension Vision.VisionError : Foundation.LocalizedError {
     get
   }
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 extension Vision.VisionError {
-  public static func requestCancelled(_ request: (any Vision.VisionRequest)) -> Vision.VisionError
-  public static func performDisallowedFromMultipleThreads(_ request: (any Vision.VisionRequest)) -> Vision.VisionError
+  public var description: Swift.String {
+    get
+  }
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct HumanHandPoseObservation : Vision.VisionObservation, Vision.PoseProviding {
@@ -732,8 +711,8 @@ public struct HumanHandPoseObservation : Vision.VisionObservation, Vision.PosePr
     case left
     case right
     public static func == (a: Vision.HumanHandPoseObservation.Chirality, b: Vision.HumanHandPoseObservation.Chirality) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -821,8 +800,8 @@ public struct DetectFaceLandmarksRequest : Vision.ImageProcessingRequest {
     case revision3
     public static func < (a: Vision.DetectFaceLandmarksRequest.Revision, b: Vision.DetectFaceLandmarksRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectFaceLandmarksRequest.Revision, b: Vision.DetectFaceLandmarksRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -836,8 +815,8 @@ public struct DetectFaceLandmarksRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectFaceLandmarksRequest, b: Vision.DetectFaceLandmarksRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -849,8 +828,8 @@ public struct RecognizeAnimalsRequest : Vision.ImageProcessingRequest {
     case revision2
     public static func < (a: Vision.RecognizeAnimalsRequest.Revision, b: Vision.RecognizeAnimalsRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.RecognizeAnimalsRequest.Revision, b: Vision.RecognizeAnimalsRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -876,8 +855,8 @@ public struct RecognizeAnimalsRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.RecognizeAnimalsRequest, b: Vision.RecognizeAnimalsRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -889,8 +868,8 @@ public struct DetectBarcodesRequest : Vision.ImageProcessingRequest {
     case revision4
     public static func < (a: Vision.DetectBarcodesRequest.Revision, b: Vision.DetectBarcodesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectBarcodesRequest.Revision, b: Vision.DetectBarcodesRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -908,8 +887,8 @@ public struct DetectBarcodesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectBarcodesRequest, b: Vision.DetectBarcodesRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1132,8 +1111,8 @@ public struct DetectHumanBodyPoseRequest : Vision.ImageProcessingRequest {
     case revision2
     public static func < (a: Vision.DetectHumanBodyPoseRequest.Revision, b: Vision.DetectHumanBodyPoseRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanBodyPoseRequest.Revision, b: Vision.DetectHumanBodyPoseRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1153,8 +1132,8 @@ public struct DetectHumanBodyPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectHumanBodyPoseRequest, b: Vision.DetectHumanBodyPoseRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1166,8 +1145,8 @@ final public class DetectTrajectoriesRequest : Vision.ImageProcessingRequest, Vi
     case revision1
     public static func < (a: Vision.DetectTrajectoriesRequest.Revision, b: Vision.DetectTrajectoriesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectTrajectoriesRequest.Revision, b: Vision.DetectTrajectoriesRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1238,8 +1217,8 @@ public struct DetectHumanHandPoseRequest : Vision.ImageProcessingRequest {
     case revision1
     public static func < (a: Vision.DetectHumanHandPoseRequest.Revision, b: Vision.DetectHumanHandPoseRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanHandPoseRequest.Revision, b: Vision.DetectHumanHandPoseRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1259,8 +1238,8 @@ public struct DetectHumanHandPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectHumanHandPoseRequest, b: Vision.DetectHumanHandPoseRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1272,8 +1251,8 @@ public struct CalculateImageAestheticsScoresRequest : Vision.ImageProcessingRequ
     case revision1
     public static func < (a: Vision.CalculateImageAestheticsScoresRequest.Revision, b: Vision.CalculateImageAestheticsScoresRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.CalculateImageAestheticsScoresRequest.Revision, b: Vision.CalculateImageAestheticsScoresRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1287,8 +1266,8 @@ public struct CalculateImageAestheticsScoresRequest : Vision.ImageProcessingRequ
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.CalculateImageAestheticsScoresRequest, b: Vision.CalculateImageAestheticsScoresRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1436,8 +1415,8 @@ public struct DetectDocumentSegmentationRequest : Vision.ImageProcessingRequest 
     case revision1
     public static func < (a: Vision.DetectDocumentSegmentationRequest.Revision, b: Vision.DetectDocumentSegmentationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectDocumentSegmentationRequest.Revision, b: Vision.DetectDocumentSegmentationRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1450,8 +1429,8 @@ public struct DetectDocumentSegmentationRequest : Vision.ImageProcessingRequest 
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectDocumentSegmentationRequest, b: Vision.DetectDocumentSegmentationRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1463,8 +1442,8 @@ final public class TrackHomographicImageRegistrationRequest : Vision.ImageProces
     case revision1
     public static func < (a: Vision.TrackHomographicImageRegistrationRequest.Revision, b: Vision.TrackHomographicImageRegistrationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackHomographicImageRegistrationRequest.Revision, b: Vision.TrackHomographicImageRegistrationRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1506,8 +1485,8 @@ public struct CoreMLRequest : Vision.ImageProcessingRequest {
     case revision1
     public static func < (a: Vision.CoreMLRequest.Revision, b: Vision.CoreMLRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.CoreMLRequest.Revision, b: Vision.CoreMLRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1528,8 +1507,8 @@ public struct CoreMLRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.CoreMLRequest, b: Vision.CoreMLRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1541,8 +1520,8 @@ public struct DetectHumanRectanglesRequest : Vision.ImageProcessingRequest {
     case revision2
     public static func < (a: Vision.DetectHumanRectanglesRequest.Revision, b: Vision.DetectHumanRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanRectanglesRequest.Revision, b: Vision.DetectHumanRectanglesRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1556,8 +1535,8 @@ public struct DetectHumanRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectHumanRectanglesRequest, b: Vision.DetectHumanRectanglesRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1569,8 +1548,8 @@ final public class GeneratePersonSegmentationRequest : Vision.ImageProcessingReq
     case revision1
     public static func < (a: Vision.GeneratePersonSegmentationRequest.Revision, b: Vision.GeneratePersonSegmentationRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GeneratePersonSegmentationRequest.Revision, b: Vision.GeneratePersonSegmentationRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1582,13 +1561,13 @@ final public class GeneratePersonSegmentationRequest : Vision.ImageProcessingReq
     case balanced
     case fast
     public static func == (a: Vision.GeneratePersonSegmentationRequest.QualityLevel, b: Vision.GeneratePersonSegmentationRequest.QualityLevel) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.GeneratePersonSegmentationRequest.QualityLevel]
     nonisolated public static var allCases: [Vision.GeneratePersonSegmentationRequest.QualityLevel] {
       get
     }
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1700,8 +1679,8 @@ public struct GeneratePersonInstanceMaskRequest : Vision.ImageProcessingRequest 
     case revision1
     public static func < (a: Vision.GeneratePersonInstanceMaskRequest.Revision, b: Vision.GeneratePersonInstanceMaskRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GeneratePersonInstanceMaskRequest.Revision, b: Vision.GeneratePersonInstanceMaskRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1714,8 +1693,8 @@ public struct GeneratePersonInstanceMaskRequest : Vision.ImageProcessingRequest 
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.GeneratePersonInstanceMaskRequest, b: Vision.GeneratePersonInstanceMaskRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1725,8 +1704,8 @@ public enum ComputeStage : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift
   case main
   case postProcessing
   public static func == (a: Vision.ComputeStage, b: Vision.ComputeStage) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1739,8 +1718,8 @@ public struct GenerateForegroundInstanceMaskRequest : Vision.ImageProcessingRequ
     case revision1
     public static func < (a: Vision.GenerateForegroundInstanceMaskRequest.Revision, b: Vision.GenerateForegroundInstanceMaskRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.GenerateForegroundInstanceMaskRequest.Revision, b: Vision.GenerateForegroundInstanceMaskRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1753,8 +1732,8 @@ public struct GenerateForegroundInstanceMaskRequest : Vision.ImageProcessingRequ
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.GenerateForegroundInstanceMaskRequest, b: Vision.GenerateForegroundInstanceMaskRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1793,8 +1772,8 @@ public struct DetectTextRectanglesRequest : Vision.ImageProcessingRequest {
     case revision1
     public static func < (a: Vision.DetectTextRectanglesRequest.Revision, b: Vision.DetectTextRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectTextRectanglesRequest.Revision, b: Vision.DetectTextRectanglesRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1808,8 +1787,8 @@ public struct DetectTextRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectTextRectanglesRequest, b: Vision.DetectTextRectanglesRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1821,8 +1800,8 @@ final public class TrackOpticalFlowRequest : Vision.ImageProcessingRequest, Visi
     case revision1
     public static func < (a: Vision.TrackOpticalFlowRequest.Revision, b: Vision.TrackOpticalFlowRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackOpticalFlowRequest.Revision, b: Vision.TrackOpticalFlowRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1835,13 +1814,13 @@ final public class TrackOpticalFlowRequest : Vision.ImageProcessingRequest, Visi
     case high
     case veryHigh
     public static func == (a: Vision.TrackOpticalFlowRequest.ComputationAccuracy, b: Vision.TrackOpticalFlowRequest.ComputationAccuracy) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.TrackOpticalFlowRequest.ComputationAccuracy]
     nonisolated public static var allCases: [Vision.TrackOpticalFlowRequest.ComputationAccuracy] {
       get
     }
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1881,8 +1860,8 @@ public struct BarcodeObservation : Vision.VisionObservation, Vision.Quadrilatera
     case gs1TypeC
     case linked
     public static func == (a: Vision.BarcodeObservation.CompositeType, b: Vision.BarcodeObservation.CompositeType) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1930,9 +1909,7 @@ final public class ImageRequestHandler : @unchecked Swift.Sendable {
   convenience public init(_ sampleBuffer: CoreMedia.CMSampleBuffer, depthData: AVFoundation.AVDepthData? = nil, orientation: ImageIO.CGImagePropertyOrientation? = nil)
   convenience public init(_ data: Foundation.Data, orientation: ImageIO.CGImagePropertyOrientation? = nil)
   final public func perform<T>(_ request: T) async throws -> T.Result where T : Vision.VisionRequest
-  #if compiler(>=5.3) && $ParameterPacks
   final public func perform<each T>(_ request: repeat each T) async throws -> (repeat (each T).Result) where repeat each T : Vision.VisionRequest
-  #endif
   final public func performAll(_ requests: some Collection<any VisionRequest>) -> some _Concurrency.AsyncSequence<Vision.VisionResult, Swift.Never>
   
   @objc deinit
@@ -1966,9 +1943,9 @@ extension Vision.FaceObservation {
     public var description: Swift.String {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Vision.FaceObservation.CaptureQuality, b: Vision.FaceObservation.CaptureQuality) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2022,8 +1999,8 @@ extension Vision.FaceObservation {
     }
     public let originatingRequestDescriptor: Vision.RequestDescriptor?
     public static func == (a: Vision.FaceObservation.Landmarks2D, b: Vision.FaceObservation.Landmarks2D) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2037,9 +2014,9 @@ extension Vision.FaceObservation.Landmarks2D {
       case closedPath
       case disconnected
       case openPath
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Vision.FaceObservation.Landmarks2D.Region.PointsClassification, b: Vision.FaceObservation.Landmarks2D.Region.PointsClassification) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -2200,8 +2177,8 @@ public struct DetectRectanglesRequest : Vision.ImageProcessingRequest {
     case revision1
     public static func < (a: Vision.DetectRectanglesRequest.Revision, b: Vision.DetectRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectRectanglesRequest.Revision, b: Vision.DetectRectanglesRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2220,8 +2197,8 @@ public struct DetectRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectRectanglesRequest, b: Vision.DetectRectanglesRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2233,8 +2210,8 @@ public struct ClassifyImageRequest : Vision.ImageProcessingRequest {
     case revision2
     public static func < (a: Vision.ClassifyImageRequest.Revision, b: Vision.ClassifyImageRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.ClassifyImageRequest.Revision, b: Vision.ClassifyImageRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2251,8 +2228,8 @@ public struct ClassifyImageRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.ClassifyImageRequest, b: Vision.ClassifyImageRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2264,8 +2241,8 @@ public struct RecognizeTextRequest : Vision.ImageProcessingRequest {
     case revision3
     public static func < (a: Vision.RecognizeTextRequest.Revision, b: Vision.RecognizeTextRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.RecognizeTextRequest.Revision, b: Vision.RecognizeTextRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2276,13 +2253,13 @@ public struct RecognizeTextRequest : Vision.ImageProcessingRequest {
     case accurate
     case fast
     public static func == (a: Vision.RecognizeTextRequest.RecognitionLevel, b: Vision.RecognizeTextRequest.RecognitionLevel) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.RecognizeTextRequest.RecognitionLevel]
     nonisolated public static var allCases: [Vision.RecognizeTextRequest.RecognitionLevel] {
       get
     }
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2303,8 +2280,8 @@ public struct RecognizeTextRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.RecognizeTextRequest, b: Vision.RecognizeTextRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2316,8 +2293,8 @@ final public class TrackRectangleRequest : Vision.ImageProcessingRequest, Vision
     case revision1
     public static func < (a: Vision.TrackRectangleRequest.Revision, b: Vision.TrackRectangleRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.TrackRectangleRequest.Revision, b: Vision.TrackRectangleRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2328,13 +2305,13 @@ final public class TrackRectangleRequest : Vision.ImageProcessingRequest, Vision
     case accurate
     case fast
     public static func == (a: Vision.TrackRectangleRequest.TrackingLevel, b: Vision.TrackRectangleRequest.TrackingLevel) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.TrackRectangleRequest.TrackingLevel]
     nonisolated public static var allCases: [Vision.TrackRectangleRequest.TrackingLevel] {
       get
     }
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2396,8 +2373,8 @@ public struct DetectContoursRequest : Vision.ImageProcessingRequest {
     case revision1
     public static func < (a: Vision.DetectContoursRequest.Revision, b: Vision.DetectContoursRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectContoursRequest.Revision, b: Vision.DetectContoursRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2414,8 +2391,8 @@ public struct DetectContoursRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectContoursRequest, b: Vision.DetectContoursRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2428,13 +2405,13 @@ public enum ImageCropAndScaleAction : Swift.CaseIterable, Swift.Codable, Swift.E
   case scaleToFitPlus90CCWRotation
   case scaleToFillPlus90CCWRotation
   public static func == (a: Vision.ImageCropAndScaleAction, b: Vision.ImageCropAndScaleAction) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
   public typealias AllCases = [Vision.ImageCropAndScaleAction]
   nonisolated public static var allCases: [Vision.ImageCropAndScaleAction] {
     get
   }
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2448,8 +2425,8 @@ public enum Chirality : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Se
   case left
   case right
   public static func == (a: Vision.Chirality, b: Vision.Chirality) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2482,13 +2459,13 @@ public enum BarcodeSymbology : Swift.CaseIterable, Swift.Codable, Swift.Equatabl
   case microQR
   case msiPlessey
   public static func == (a: Vision.BarcodeSymbology, b: Vision.BarcodeSymbology) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
   public typealias AllCases = [Vision.BarcodeSymbology]
   nonisolated public static var allCases: [Vision.BarcodeSymbology] {
     get
   }
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2499,8 +2476,8 @@ public enum ElementType : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.
   case float
   case double
   public static func == (a: Vision.ElementType, b: Vision.ElementType) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2513,8 +2490,8 @@ public struct DetectFaceRectanglesRequest : Vision.ImageProcessingRequest {
     case revision3
     public static func < (a: Vision.DetectFaceRectanglesRequest.Revision, b: Vision.DetectFaceRectanglesRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectFaceRectanglesRequest.Revision, b: Vision.DetectFaceRectanglesRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2527,8 +2504,8 @@ public struct DetectFaceRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectFaceRectanglesRequest, b: Vision.DetectFaceRectanglesRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2657,8 +2634,8 @@ public struct DetectHorizonRequest : Vision.ImageProcessingRequest {
     case revision1
     public static func < (a: Vision.DetectHorizonRequest.Revision, b: Vision.DetectHorizonRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHorizonRequest.Revision, b: Vision.DetectHorizonRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2671,8 +2648,8 @@ public struct DetectHorizonRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: Vision.DetectHorizonRequest, b: Vision.DetectHorizonRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2893,8 +2870,8 @@ final public class DetectHumanBodyPose3DRequest : Vision.ImageProcessingRequest,
     case revision1
     public static func < (a: Vision.DetectHumanBodyPose3DRequest.Revision, b: Vision.DetectHumanBodyPose3DRequest.Revision) -> Swift.Bool
     public static func == (a: Vision.DetectHumanBodyPose3DRequest.Revision, b: Vision.DetectHumanBodyPose3DRequest.Revision) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }

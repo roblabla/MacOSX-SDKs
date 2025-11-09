@@ -21,7 +21,7 @@
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayIdentity : MPSNDArrayUnaryKernel
 
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER;

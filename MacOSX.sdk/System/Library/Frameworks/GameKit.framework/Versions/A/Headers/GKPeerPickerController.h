@@ -19,15 +19,15 @@
  */
 typedef NS_ENUM(NSUInteger, GKPeerPickerConnectionType)
 {
-	GKPeerPickerConnectionTypeOnline = 1 << 0,		// Online (Internet) based multiplayer connection
-	GKPeerPickerConnectionTypeNearby = 1 << 1		// Nearby (Bluetooth) based multiplayer connection
-} NS_ENUM_DEPRECATED_IOS(3_0, 7_0);
+    GKPeerPickerConnectionTypeOnline = 1 << 0,      // Online (Internet) based multiplayer connection
+    GKPeerPickerConnectionTypeNearby = 1 << 1       // Nearby (Bluetooth) based multiplayer connection
+} API_DEPRECATED("No longer supported", ios(3.0, 7.0), visionos(1.0, 1.0));
 
 NS_ASSUME_NONNULL_BEGIN
 
 /* callbacks to the GKPeerPickerController delegate
  */
-API_DEPRECATED("Use MCBrowserViewController along with MCBrowserViewControllerDelegate from the MultipeerConnectivity framework.", ios(3.0,7.0)) __TVOS_UNAVAILABLE
+API_DEPRECATED("Use MCBrowserViewController along with MCBrowserViewControllerDelegate from the MultipeerConnectivity framework.", ios(3.0,7.0)) API_UNAVAILABLE(tvos)
 @protocol GKPeerPickerControllerDelegate <NSObject>
 
 @optional
@@ -36,23 +36,23 @@ API_DEPRECATED("Use MCBrowserViewController along with MCBrowserViewControllerDe
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 /* Notifies delegate that a connection type was chosen by the user.
  */
-- (void)peerPickerController:(GKPeerPickerController *)picker didSelectConnectionType:(GKPeerPickerConnectionType)type __TVOS_UNAVAILABLE;
+- (void)peerPickerController:(GKPeerPickerController *)picker didSelectConnectionType:(GKPeerPickerConnectionType)type;
 
 /* Notifies delegate that the connection type is requesting a GKSession object.
  
  You should return a valid GKSession object for use by the picker. If this method is not implemented or returns 'nil', a default GKSession is created on the delegate's behalf.
  */
 
-- (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type __TVOS_UNAVAILABLE;
+- (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type;
 
 /* Notifies delegate that the peer was connected to a GKSession.
  */
-- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session __TVOS_UNAVAILABLE;
+- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session;
 #pragma clang diagnostic pop
 
 /* Notifies delegate that the user cancelled the picker.
  */
-- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker __TVOS_UNAVAILABLE;
+- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker;
 
 @end
 
@@ -63,7 +63,7 @@ API_DEPRECATED("Use MCBrowserViewController along with MCBrowserViewControllerDe
  
  You must provide a delegate that conforms to the GKPeerPickerControllerDelegate protocol in order to use this class. After the user interface starts, this class notifies your delegate of the user’s actions.
  */
-API_DEPRECATED("Use MCBrowserViewController from the MultipeerConnectivity framework.", ios(3.0,7.0)) __TVOS_UNAVAILABLE
+API_DEPRECATED("Use MCBrowserViewController from the MultipeerConnectivity framework.", ios(3.0,7.0)) API_UNAVAILABLE(tvos)
 @interface GKPeerPickerController : NSObject
 
 /* An integer bit mask that determines what connection types are supported by the application, and displays system-supplied UI as appropriate. 
@@ -74,7 +74,7 @@ API_DEPRECATED("Use MCBrowserViewController from the MultipeerConnectivity frame
 
 /* The delegate receives notifications when the user interacts with the picker interface. If this property is nil, the picker is dismissed immediately if you try to show it.
  */
-@property(nonatomic, nullable, weak) id<GKPeerPickerControllerDelegate> delegate NS_DEPRECATED_IOS(3_0, 7_0) __TVOS_UNAVAILABLE;
+@property(nonatomic, nullable, weak) id<GKPeerPickerControllerDelegate> delegate API_DEPRECATED("No longer supported", ios(3.0,7.0), visionos(1.0,1.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /* Show the picker.
  */

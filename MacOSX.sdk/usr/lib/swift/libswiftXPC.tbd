@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
-current-version: 62.0.1
+current-version: 69.100.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -80,12 +80,15 @@ exports:
                        '_$s3XPC10XPCSessionC20setTargetUserSession14userIdentifierys6UInt32V_tF', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV10privilegedAEvMZ', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV10privilegedAEvgZ', 
+                       '_$s3XPC10XPCSessionC21InitializationOptionsV10privilegedAEvpZMV', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV10privilegedAEvsZ', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV4noneAEvMZ', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV4noneAEvgZ', 
+                       '_$s3XPC10XPCSessionC21InitializationOptionsV4noneAEvpZMV', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV4noneAEvsZ', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV8inactiveAEvMZ', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV8inactiveAEvgZ', 
+                       '_$s3XPC10XPCSessionC21InitializationOptionsV8inactiveAEvpZMV', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV8inactiveAEvsZ', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV8rawValueAEs6UInt64V_tcfC', 
                        '_$s3XPC10XPCSessionC21InitializationOptionsV8rawValues6UInt64Vvg', 
@@ -145,9 +148,11 @@ exports:
                        '_$s3XPC11XPCListenerC16debugDescriptionSSvg', '_$s3XPC11XPCListenerC16debugDescriptionSSvpMV', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV4noneAEvMZ', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV4noneAEvgZ', 
+                       '_$s3XPC11XPCListenerC21InitializationOptionsV4noneAEvpZMV', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV4noneAEvsZ', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV8inactiveAEvMZ', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV8inactiveAEvgZ', 
+                       '_$s3XPC11XPCListenerC21InitializationOptionsV8inactiveAEvpZMV', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV8inactiveAEvsZ', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV8rawValueAEs6UInt64V_tcfC', 
                        '_$s3XPC11XPCListenerC21InitializationOptionsV8rawValues6UInt64Vvg', 
@@ -300,8 +305,10 @@ exports:
                        '_$s3XPC21xpc_listener_activateySbSo03OS_b1_C0C_SAySo0e1_B7_object_pSgGSgtF', 
                        '_$s3XPC24xpc_listener_reject_peeryySo03OS_B7_object_p_SPys4Int8VGtF', 
                        '_$s3XPC24xpc_session_send_messageySo03OS_B7_object_pSgSoAC_p_SoAC_ptF', 
-                       '_$s3XPC26xpc_session_create_flags_tV10privilegedACvgZ', '_$s3XPC26xpc_session_create_flags_tV4noneACvgZ', 
-                       '_$s3XPC26xpc_session_create_flags_tV8inactiveACvgZ', '_$s3XPC26xpc_session_create_flags_tV8rawValueACs6UInt64V_tcfC', 
+                       '_$s3XPC26xpc_session_create_flags_tV10privilegedACvgZ', '_$s3XPC26xpc_session_create_flags_tV10privilegedACvpZMV', 
+                       '_$s3XPC26xpc_session_create_flags_tV4noneACvgZ', '_$s3XPC26xpc_session_create_flags_tV4noneACvpZMV', 
+                       '_$s3XPC26xpc_session_create_flags_tV8inactiveACvgZ', '_$s3XPC26xpc_session_create_flags_tV8inactiveACvpZMV', 
+                       '_$s3XPC26xpc_session_create_flags_tV8rawValueACs6UInt64V_tcfC', 
                        '_$s3XPC26xpc_session_create_flags_tV8rawValues6UInt64Vvg', 
                        '_$s3XPC26xpc_session_create_flags_tV8rawValues6UInt64VvpMV', 
                        '_$s3XPC26xpc_session_create_flags_tVMa', '_$s3XPC26xpc_session_create_flags_tVMn', 
@@ -359,5 +366,6 @@ exports:
                        '_$s3XPC8XPCArrayVyxSgSicSZRzluipMV', '_$s3XPC8XPCArrayVyxSgSicSZRzluis', 
                        '_$s5Input3XPC14XPCPeerHandlerPTl', '_$s6Output3XPC14XPCPeerHandlerPTl', 
                        '_$sSa3XPCs5UInt8VRszlE15byteDescriptionSSvg', '_$sSa3XPCs5UInt8VRszlE15byteDescriptionSSvpMV', 
-                       '_$ss17CodingUserInfoKeyV3XPCE10xpcCodableABvgZ', '__swift_FORCE_LOAD_$_swiftXPC' ]
+                       '_$ss17CodingUserInfoKeyV3XPCE10xpcCodableABvgZ', '_$ss17CodingUserInfoKeyV3XPCE10xpcCodableABvpZMV', 
+                       '__swift_FORCE_LOAD_$_swiftXPC' ]
 ...

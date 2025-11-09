@@ -23,16 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
  @see GCDeviceHaptics
 */
 typedef NSString* GCHapticsLocality NS_TYPED_ENUM API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityDefault API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)); // guaranteed to be supported
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityAll API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)); // guaranteed to be supported
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityHandles API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityLeftHandle API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityRightHandle API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityTriggers API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCHapticsLocality const GCHapticsLocalityRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityDefault API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)); // guaranteed to be supported
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityAll API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)); // guaranteed to be supported
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityHandles API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityLeftHandle API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityRightHandle API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityTriggers API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT GCHapticsLocality const GCHapticsLocalityRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
-GAMECONTROLLER_EXTERN const float GCHapticDurationInfinite API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXPORT const float GCHapticDurationInfinite API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @interface GCDeviceHaptics : NSObject

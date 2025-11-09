@@ -53,6 +53,7 @@ exports:
                        '_$s17SignalCompression0A7EncoderCfd', '_$sSo7SCErrorV10Foundation15_BridgedNSError17SignalCompressionMc', 
                        '_$sSo7SCErrorV10Foundation26_ObjectiveCBridgeableError17SignalCompressionMc', 
                        '_$sSo7SCErrorV17SignalCompressionE14_nsErrorDomainSSvgZ', 
+                       '_$sSo7SCErrorV17SignalCompressionE14_nsErrorDomainSSvpZMV', 
                        '_$sSo7SCErrorVs5Error17SignalCompressionMc', _SignalCompressionVersionNumber, 
                        _SignalCompressionVersionString, __ZN3gcl12computeCRC32EPKhm, 
                        __ZN3gcl15kMortonCode256XE, __ZN3gcl15kMortonCode256YE, __ZN3gcl15kMortonCode256ZE, 

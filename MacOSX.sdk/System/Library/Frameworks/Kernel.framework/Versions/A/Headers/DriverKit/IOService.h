@@ -1,4 +1,4 @@
-/* iig(DriverKit-402.60.12) generated from IOService.iig */
+/* iig(DriverKit-427.100.5) generated from IOService.iig */
 
 /* IOService.iig:1-71 */
 /*

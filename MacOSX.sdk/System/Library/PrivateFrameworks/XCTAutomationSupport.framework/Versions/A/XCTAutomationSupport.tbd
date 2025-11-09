@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/XCTAutomationSupport.framework/Versions/A/XCTAutomationSupport'
-current-version: 23196.3
+current-version: 23790
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -13,10 +13,10 @@ allowable-clients:
                        IDEApplicationTests, IDEFoundationTestingTests, IDEXcodeUITesting, 
                        TestResultsUI, XCTAutomationSupportTests, XCTDaemon, XCTDaemonControl, 
                        XCTDaemonControlTests, XCTDaemonTests, XCTHarness, XCTHarnessTests, 
-                       XCTest-AppHostedTests, XCTest-PerformanceTests, XCTest-ToolHostedTests, 
+                       XCTest, XCTest-AppHostedTests, XCTest-PerformanceTests, XCTest-ToolHostedTests, 
                        XCTest-UITests-iOS, XCTest-UITests-macOS, XCTest-UITests-tvOS, 
-                       XCTestCore, XCUIAutomation, XCUIRecorderService, testmanagerd, 
-                       xctest ]
+                       XCTestCore, XCTestSwiftSupport, XCUIAutomation, XCUIRecorderService, 
+                       testmanagerd, xctest ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -124,7 +124,8 @@ exports:
                        _XC_kAXXCParameterizedAttributeConvertPositionToContext, _XC_kAXXCParameterizedAttributeKeyboardKeyForString, 
                        _XC_kAXXCParameterizedAttributeUserTestingSnapshotParameterized, 
                        __XCTASFormatArraysAsMatrix, __XCTASFormatArraysAsMatrixWithRowPrefix, 
-                       __XCTASLog, __XCUIStringFromElementType ]
+                       __XCTASLog, __XCUIFilterStringFromElementType, __XCUIStringFromElementType, 
+                       __XCUITypeStringFromElementType ]
     objc-classes:    [ XCAXAuditConfiguration, XCAXAuditResult, XCAXAuditResultCollection, 
                        XCAXCycleDetector, XCAccessibilityElement, XCDeviceEvent, 
                        XCElementSnapshot, XCTAccessibilityFramework, XCTAnimationsIdleNotifier, 

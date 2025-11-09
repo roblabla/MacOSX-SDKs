@@ -20,7 +20,7 @@ exports:
                        _PRP2PArgsRangingRole, _PRP2PArgsRoseDebugFlags, _PRP2PArgsRxAntennaMask, 
                        _PRP2PArgsRxPacketType, _PRP2PArgsRxPreamble, _PRP2PArgsRxSyncSearchAntennaMask, 
                        _PRP2PArgsStartTimeOffsetUsec, _PRP2PArgsTxAntennaMask, _PRP2PArgsTxPacketType, 
-                       _PRP2PArgsTxPreamble, _PRPingRadio, _PRProcessIdentifierKey, 
+                       _PRP2PArgsTxPreamble, _PRP2PBaseAddress, _PRPingRadio, _PRProcessIdentifierKey, 
                        _PRProcessNameKey, _PRRangingServiceStateCauseToString, _PRRangingServiceStateToString, 
                        _PRRequestPowerChange, _PRRoseHasFailedUpdate, _PRSendHelloWithTimeout, 
                        _PRSetAccessoryState, _PRSetIsoCountry, _PRSetMcc, _PRSetNarrowbandSARState, 

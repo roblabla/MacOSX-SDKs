@@ -41,10 +41,10 @@ exports:
                        '_$s15CrisisResources0aB8ProviderVMn', '_$s15CrisisResources0aB8ProviderVN', 
                        '_$s15CrisisResources0aB9ProvidingMp', '_$s15CrisisResources0aB9ProvidingTL', 
                        '_$s15CrisisResources3LogO06crisisB0So9OS_os_logCvau', '_$s15CrisisResources3LogO06crisisB0So9OS_os_logCvgZ', 
-                       '_$s15CrisisResources3LogO06crisisB0So9OS_os_logCvpZ', '_$s15CrisisResources3LogOMa', 
-                       '_$s15CrisisResources3LogOMn', '_$s15CrisisResources3LogON', 
-                       '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvMZ', '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvau', 
-                       '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvgZ', '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvpZ', 
-                       '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvsZ', _CrisisResourcesVersionNumber, 
-                       _CrisisResourcesVersionString ]
+                       '_$s15CrisisResources3LogO06crisisB0So9OS_os_logCvpZ', '_$s15CrisisResources3LogO06crisisB0So9OS_os_logCvpZMV', 
+                       '_$s15CrisisResources3LogOMa', '_$s15CrisisResources3LogOMn', 
+                       '_$s15CrisisResources3LogON', '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvMZ', 
+                       '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvau', '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvgZ', 
+                       '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvpZ', '_$s2os6LoggerV15CrisisResourcesE06crisisD0ACvsZ', 
+                       _CrisisResourcesVersionNumber, _CrisisResourcesVersionString ]
 ...

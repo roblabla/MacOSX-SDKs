@@ -74,13 +74,14 @@ exports:
                        _kNWEndpointKey, _kNWParametersKey ]
     objc-classes:    [ _DASActivity, _DASActivityDependency, _DASActivityGroup, _DASActivityProgressWrapper, 
                        _DASActivityRateLimit, _DASActivityRateLimitConfiguration, 
-                       _DASActivityResult, _DASConfigurationLimiter, _DASExtension, 
-                       _DASExtensionRemoteContext, _DASFastPass, _DASFileProtection, 
-                       _DASInternalPolicyEvaluationMetadata, _DASLimiterResponse, 
-                       _DASLimitsUtilities, _DASPlistParser, _DASPriorityQueue, _DASScheduler, 
-                       _DASStrings, _DASSubmissionManager, _DASSubmissionRateLimiter, 
-                       _DASSystemContext, _DASWidgetBudget, _DASWidgetBudgetMigrationHelper, 
-                       _DASWidgetBudgetParameters, _DASWidgetInfo, _DASWidgetRefresh, 
-                       _DASWidgetRefreshParameters, _DASWidgetRefreshScheduler, _DASWidgetView, 
-                       _DASWigetBudgetDecrementRequestResult, _OSPrewarmScheduler ]
+                       _DASActivityResult, _DASBMHistogramBuilder, _DASBMMinimumSpanConfiguration, 
+                       _DASConfigurationLimiter, _DASExtension, _DASExtensionRemoteContext, 
+                       _DASFastPass, _DASFileProtection, _DASHistogram, _DASInternalPolicyEvaluationMetadata, 
+                       _DASLimiterResponse, _DASLimitsUtilities, _DASPlistParser, 
+                       _DASPriorityQueue, _DASScheduler, _DASStrings, _DASSubmissionManager, 
+                       _DASSubmissionRateLimiter, _DASSystemContext, _DASWidgetBudget, 
+                       _DASWidgetBudgetMigrationHelper, _DASWidgetBudgetParameters, 
+                       _DASWidgetInfo, _DASWidgetRefresh, _DASWidgetRefreshParameters, 
+                       _DASWidgetRefreshScheduler, _DASWidgetView, _DASWigetBudgetDecrementRequestResult, 
+                       _OSPrewarmScheduler ]
 ...

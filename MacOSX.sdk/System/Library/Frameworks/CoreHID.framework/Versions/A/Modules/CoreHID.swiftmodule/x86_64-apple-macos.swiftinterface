@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 2104.61.1 -module-name CoreHID
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 2115.100.21 -module-name CoreHID
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Foundation
 import Swift
 import _Concurrency
@@ -3477,8 +3478,8 @@ public enum HIDDeviceLocalizationCode : Swift.Equatable, Swift.Sendable {
   case unitedStates
   case yugoslavia
   case turkeyStandard
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CoreHID.HIDDeviceLocalizationCode, b: CoreHID.HIDDeviceLocalizationCode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3510,8 +3511,8 @@ public enum HIDDeviceError : Swift.Equatable, Swift.Sendable, Foundation.Localiz
 public actor HIDDeviceClient {
   public struct DeviceReference : Swift.Hashable, Swift.Sendable {
     public let deviceID: Swift.UInt64
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CoreHID.HIDDeviceClient.DeviceReference, b: CoreHID.HIDDeviceClient.DeviceReference) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -3582,8 +3583,8 @@ public actor HIDDeviceClient {
   public struct ProvideElementUpdate : CoreHID.HIDElementUpdate {
     public var values: [CoreHID.HIDElement.Value]
     public init(values: [CoreHID.HIDElement.Value])
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CoreHID.HIDDeviceClient.ProvideElementUpdate, b: CoreHID.HIDDeviceClient.ProvideElementUpdate) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -3592,8 +3593,8 @@ public actor HIDDeviceClient {
     public var elements: [CoreHID.HIDElement]
     public var pollDevice: Swift.Bool
     public init(elements: [CoreHID.HIDElement], pollDevice: Swift.Bool = true)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CoreHID.HIDDeviceClient.RequestElementUpdate, b: CoreHID.HIDDeviceClient.RequestElementUpdate) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }

@@ -109,4 +109,6 @@ typedef NS_ENUM(NSInteger, WKInactiveSchedulingPolicy) {
 
 @property (nonatomic) BOOL javaScriptEnabled API_DEPRECATED("Use WKWebpagePreferences.allowsContentJavaScript to disable content JavaScript on a per-navigation basis", macos(10.10, 11.0), ios(8.0, 14.0));
 
+
+
 @end

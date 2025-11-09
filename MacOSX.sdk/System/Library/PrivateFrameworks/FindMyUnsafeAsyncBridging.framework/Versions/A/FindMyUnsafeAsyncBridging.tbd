@@ -7,7 +7,8 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ SPShared, SPSharedTests, searchpartyd, searchpartydTests, 
+    clients:         [ FindMyRemoteUIService, SPShared, SPSharedTests, findmylocateagent, 
+                       findmylocated, findmylocatedTests, searchpartyd, searchpartydTests, 
                        searchpartyuseragent ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

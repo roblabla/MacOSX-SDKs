@@ -124,8 +124,6 @@ extern int PAGE_SHIFT_CONST;
 #define VM_MAP_MAX_ADDRESS      VM_MAX_ADDRESS
 
 
-#include <vm/vm_memtag.h>
-
 #if defined (__arm__)
 #define VM_KERNEL_POINTER_SIGNIFICANT_BITS  31
 #define VM_MIN_KERNEL_ADDRESS   ((vm_address_t) 0x80000000)
@@ -181,7 +179,7 @@ extern int PAGE_SHIFT_CONST;
  * the sign bit. In kernel space the sign bit is 1, so 0xFF is a valid mask
  * here.
  */
-#define VM_KERNEL_STRIP_TAG(_v)         (vm_memtag_canonicalize_address((vm_offset_t)_v))
+#define VM_KERNEL_STRIP_TAG(_v)         (vm_memtag_canonicalize_kernel((vm_offset_t)_v))
 #else /* CONFIG_KERNEL_TAGGING */
 #define VM_KERNEL_STRIP_TAG(_v)         (_v)
 #endif /* CONFIG_KERNEL_TAGGING */

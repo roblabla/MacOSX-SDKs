@@ -104,6 +104,7 @@ exports:
                        '_$s12Transparency0A7SWIssueVMa', '_$s12Transparency0A7SWIssueVMn', 
                        '_$s12Transparency0A7SWIssueVN', '_$s12Transparency0A7SWIssueVSEAAMc', 
                        '_$s12Transparency0A7SWIssueVSeAAMc', '_$s12Transparency15SWTFollowUpTypeO8allCasesSayACGvgZ', 
+                       '_$s12Transparency15SWTFollowUpTypeO8allCasesSayACGvpZMV', 
                        '_$s12Transparency15SWTFollowUpTypeO8rawValueACSgSS_tcfC', 
                        '_$s12Transparency15SWTFollowUpTypeO8rawValueSSvg', '_$s12Transparency15SWTFollowUpTypeO8rawValueSSvpMV', 
                        '_$s12Transparency15SWTFollowUpTypeO8rollbackyA2CmFWC', '_$s12Transparency15SWTFollowUpTypeO8treeForkyA2CmFWC', 
@@ -202,13 +203,13 @@ exports:
                        KTStaticKeyPeer, KTStatus, KTStatusResult, KTVaudenaySAS, 
                        KTVaudenaySASConfiguration, KTVerificationInfo, KTVerifier, 
                        KTVerifierResult, SWTransparencyExpiringVerificationResult, 
-                       SWTransparencySFAnalytics, SWTransparencyXPCInterface, SoftwareTransparency, 
-                       TransparencyAccountsSupportInterface, TransparencyAnalytics, 
-                       TransparencyApplication, TransparencyAuditorReport, TransparencyCloudDevice, 
-                       TransparencyDaemon, TransparencyError, TransparencyGossip, 
-                       TransparencyIDSRegistrationData, TransparencyIDSRegistrationRequest, 
+                       SWTransparencyOperationConfiguration, SWTransparencySFAnalytics, 
+                       SWTransparencyXPCInterface, SoftwareTransparency, TransparencyAccountsSupportInterface, 
+                       TransparencyAnalytics, TransparencyApplication, TransparencyAuditorReport, 
+                       TransparencyCloudDevice, TransparencyDaemon, TransparencyError, 
+                       TransparencyGossip, TransparencyIDSRegistrationData, TransparencyIDSRegistrationRequest, 
                        TransparencyIDSRegistrationRequestData, TransparencyIDSRegistrationResponse, 
                        TransparencyIDSSupportInterface, TransparencySFAnalytics, 
-                       TransparencySettings, TransparencyStaticKey, TransparencyXPCConnection, 
-                       TransparencyXPCIDSInterface, TransparencyXPCInterface ]
+                       TransparencySelfValidationStatus, TransparencySettings, TransparencyStaticKey, 
+                       TransparencyXPCConnection, TransparencyXPCIDSInterface, TransparencyXPCInterface ]
 ...

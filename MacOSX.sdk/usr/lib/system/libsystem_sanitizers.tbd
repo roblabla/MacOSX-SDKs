@@ -29,5 +29,6 @@ exports:
                        ___asan_get_report_pc, ___asan_get_report_sp, ___asan_get_shadow_mapping, 
                        ___asan_locate_address, ___asan_report_present, __sanitizers_init, 
                        _sanitizers_address_on_report, _sanitizers_diagnose_memory_error, 
-                       _sanitizers_report_globals ]
+                       _sanitizers_report_globals, _sanitizers_testonly_diagnose_error, 
+                       _sanitizers_testonly_get_shadow_address ]
 ...

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(13.0), ios(16.1), visionos(2.4), tvos(18.4)) API_UNAVAILABLE(watchos)
 NS_REFINED_FOR_SWIFT
 @protocol BADownloaderExtension <NSObject>
 
@@ -39,7 +39,7 @@ NS_REFINED_FOR_SWIFT
 /// @brief Download is about to begin but requires an authentication challenge to continue.
 - (void)backgroundDownload:(BADownload *)download
        didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
-         completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
+         completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
 
 /// @abstract This method is called when a download has failed but there is no `BADownloadManager` delegate to handle the completion event.
 /// @discussion When a download has failed, this method will be invoked.
@@ -65,7 +65,7 @@ NS_REFINED_FOR_SWIFT
 /// Do not rely on this method being invoked before the extension is terminated.
 - (void)extensionWillTerminate
 API_DEPRECATED("extensionWillTerminate will not be invoked in all applicable circumstances and should not be relied upon.", ios(16.1, 16.4), macos(13.0, 13.3))
-API_UNAVAILABLE(tvos, watchos);
+API_UNAVAILABLE(tvos, watchos, visionos);
 
 @end
 

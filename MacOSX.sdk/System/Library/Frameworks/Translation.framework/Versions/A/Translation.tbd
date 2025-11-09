@@ -3,19 +3,25 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Translation.framework/Versions/A/Translation'
-current-version: 300.2
+current-version: 300.12
 compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s11Translation0A5ErrorV08internalB0ACvgZ', '_$s11Translation0A5ErrorV10Foundation09LocalizedB0AAMc', 
+    symbols:         [ '_$s11Translation0A5ErrorV08internalB0ACvgZ', '_$s11Translation0A5ErrorV08internalB0ACvpZMV', 
+                       '_$s11Translation0A5ErrorV10Foundation09LocalizedB0AAMc', 
                        '_$s11Translation0A5ErrorV13failureReasonSSSgvg', '_$s11Translation0A5ErrorV13failureReasonSSSgvpMV', 
                        '_$s11Translation0A5ErrorV16errorDescriptionSSSgvg', '_$s11Translation0A5ErrorV16errorDescriptionSSSgvpMV', 
-                       '_$s11Translation0A5ErrorV18nothingToTranslateACvgZ', '_$s11Translation0A5ErrorV24unableToIdentifyLanguageACvgZ', 
+                       '_$s11Translation0A5ErrorV18nothingToTranslateACvgZ', '_$s11Translation0A5ErrorV18nothingToTranslateACvpZMV', 
+                       '_$s11Translation0A5ErrorV24unableToIdentifyLanguageACvgZ', 
+                       '_$s11Translation0A5ErrorV24unableToIdentifyLanguageACvpZMV', 
                        '_$s11Translation0A5ErrorV25unsupportedSourceLanguageACvgZ', 
+                       '_$s11Translation0A5ErrorV25unsupportedSourceLanguageACvpZMV', 
                        '_$s11Translation0A5ErrorV25unsupportedTargetLanguageACvgZ', 
+                       '_$s11Translation0A5ErrorV25unsupportedTargetLanguageACvpZMV', 
                        '_$s11Translation0A5ErrorV26unsupportedLanguagePairingACvgZ', 
+                       '_$s11Translation0A5ErrorV26unsupportedLanguagePairingACvpZMV', 
                        '_$s11Translation0A5ErrorV2teoiySbAC_s0B0_ptFZ', '_$s11Translation0A5ErrorVMa', 
                        '_$s11Translation0A5ErrorVMn', '_$s11Translation0A5ErrorVN', 
                        '_$s11Translation0A5ErrorVs0B0AAMc', '_$s11Translation0A7SessionC011allowOnlineA0SbvM', 

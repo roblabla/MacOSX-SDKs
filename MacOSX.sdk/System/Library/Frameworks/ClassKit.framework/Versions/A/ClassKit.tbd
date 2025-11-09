@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 150.2.2
+current-version: 150.4.10
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -20,18 +20,19 @@ exports:
                        _CLSClassKitEnvironmentDevelopment, _CLSClassKitEnvironmentEntitlement, 
                        _CLSClassKitEnvironmentProduction, _CLSClassKitInternalEntitlement, 
                        _CLSClassKitRegisterDashboardEntitlement, _CLSClassKitSearchEntitlement, 
-                       _CLSClientInterface, _CLSClientRemoteObjectInterface, _CLSCollaborationStateClasses, 
-                       _CLSCollectionItemTypeFromString, _CLSCollectionTypeFromString, 
-                       _CLSConfigFileName, _CLSContextClasses, _CLSContextPropertyAssignable, 
-                       _CLSContextPropertyContentStoreIdentifier, _CLSContextPropertyCurrentActivityID, 
-                       _CLSContextPropertyCustomTypeName, _CLSContextPropertyDisplayOrder, 
-                       _CLSContextPropertyIdentifierPath, _CLSContextPropertyObjectIDPath, 
-                       _CLSContextPropertyStableObjectIDPath, _CLSContextPropertyStoreIdentifier, 
-                       _CLSContextPropertyStoreTeamID, _CLSContextPropertySuggestedAge, 
-                       _CLSContextPropertySuggestedAgeLen, _CLSContextPropertySuggestedAgeLoc, 
-                       _CLSContextPropertySuggestedCompletionTime, _CLSContextPropertySuggestedCompletionTimeLen, 
-                       _CLSContextPropertySuggestedCompletionTimeLoc, _CLSContextPropertySummary, 
-                       _CLSContextPropertyThumbnail, _CLSContextPropertyType, _CLSContextThumbnailMaximumAllowedDimension, 
+                       _CLSClassKitUIEntitlement, _CLSClientInterface, _CLSClientRemoteObjectInterface, 
+                       _CLSCollaborationStateClasses, _CLSCollectionItemTypeFromString, 
+                       _CLSCollectionTypeFromString, _CLSConfigFileName, _CLSContextClasses, 
+                       _CLSContextPropertyAssignable, _CLSContextPropertyContentStoreIdentifier, 
+                       _CLSContextPropertyCurrentActivityID, _CLSContextPropertyCustomTypeName, 
+                       _CLSContextPropertyDisplayOrder, _CLSContextPropertyIdentifierPath, 
+                       _CLSContextPropertyObjectIDPath, _CLSContextPropertyStableObjectIDPath, 
+                       _CLSContextPropertyStoreIdentifier, _CLSContextPropertyStoreTeamID, 
+                       _CLSContextPropertySuggestedAge, _CLSContextPropertySuggestedAgeLen, 
+                       _CLSContextPropertySuggestedAgeLoc, _CLSContextPropertySuggestedCompletionTime, 
+                       _CLSContextPropertySuggestedCompletionTimeLen, _CLSContextPropertySuggestedCompletionTimeLoc, 
+                       _CLSContextPropertySummary, _CLSContextPropertyThumbnail, 
+                       _CLSContextPropertyType, _CLSContextThumbnailMaximumAllowedDimension, 
                        _CLSContextThumbnailMinimumAllowedDimension, _CLSContextTopicArtsAndMusic, 
                        _CLSContextTopicComputerScienceAndEngineering, _CLSContextTopicHealthAndFitness, 
                        _CLSContextTopicLiteracyAndWriting, _CLSContextTopicMath, 

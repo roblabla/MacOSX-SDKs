@@ -53,13 +53,13 @@
 		The string "com.apple.mediaextension.rawprocessor" (kMERAWProcessorExtensionPointName).
 	- EXPrincipalClass
 		The name of the RAW Processor factory class, conforming to the MERAWProcessorExtension protocol.
-	- CodecInfo
+	- ProcessorInfo
 		An array of one or more dictionaries describing the formats that the RAW Processor supports. Each dictionary must include the
 		following keys:
 		* CodecType
 			A string describing the four-character code of the codec associated with the RAW processor. Each string should be exactly four
 			characters long and use ASCII character set encoding.
-		* ProcessorName
+		* CodecName
 			A user-readable string describing the name of the RAW processor. This string may be used in user-visible scenarios.
 	- ObjectName
 		A user-readable string describing the RAW processor. This string is used for uniquely identifying processors and possibly for

@@ -585,7 +585,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  is received.  NO if the receiver should wait for the previous response
  before transmitting.
  */
-@property (readonly) BOOL HTTPShouldUsePipelining API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
+@property (readonly) BOOL HTTPShouldUsePipelining API_DEPRECATED("Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead", macos(10.7,15.4), ios(4.0,18.4), watchos(2.0,11.4), tvos(9.0,18.4), visionos(1.0,2.4));
 
 @end
 
@@ -687,7 +687,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  pipelining (disconnecting, sending resources misordered, omitting part of
  a resource, etc.).
  */
-@property BOOL HTTPShouldUsePipelining API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
+@property BOOL HTTPShouldUsePipelining API_DEPRECATED("Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead", macos(10.7,15.4), ios(4.0,18.4), watchos(2.0,11.4), tvos(9.0,18.4), visionos(1.0,2.4));
 
 @end
 

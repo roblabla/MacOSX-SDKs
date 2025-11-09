@@ -109,25 +109,27 @@ This generally contains additional details about problems found.
 When writing bug reports for
 .Nm ,
 it is usually helpful to include the output generated from this option.
-.It Fl S Ar path_prefix
+.It Fl S Ar directory
 Causes
 .Nm
 to create a shadow file containing all metadata read from the device. This functionality
 is intended for inclusion with bug reports regarding excpetional problems. One file
-is created for each checked device. A shadow file's name is created by taking
-.Ar path_prefix ,
-appending a
-.Em -
-character, and then appending the
-.Em basename
-of the device being checked. For instance, given a
-.Ar path_prefix
+is created for each checked device. A shadow file is created in the given
+.Ar directory .
+The shadow file's name will be shadow-diskXsY or shadow-fd<X>, depends on the information
+given to
+.Nm .
+If this file already exists,
+.Nm
+will attempt to add a counter postfix to the name.
+For instance, given a
+.Ar directory
 of
-.Ar ./metadata ,
+.Ar /tmp/ ,
 a check of disk
 .Em /dev/rdisk3s1
 would create the shadow file
-.Em ./metadata-rdisk3s1 .
+.Em /tmp/shadow-rdisk3s1 .
 Note that the shadow file captures all metadata as read from disk. In some
 cases with large volumes,
 .Nm

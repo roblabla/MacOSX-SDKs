@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 242.2.2 -module-name ManagedSettings
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -target-variant x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 242.4.10 -module-name ManagedSettings
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Combine
 import Foundation
 import Swift
@@ -74,8 +75,8 @@ public struct ApplicationSettings : ManagedSettings.ManagedSettingsGroup {
 @available(watchOS, unavailable)
 public struct Token<T> : Swift.Codable, Swift.Equatable, Swift.Hashable {
   public static func == (a: ManagedSettings.Token<T>, b: ManagedSettings.Token<T>) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FlightUtilities.framework/Versions/A/FlightUtilities'
-current-version: 155
+current-version: 155.2
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore' ]
@@ -14,7 +14,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore'
-current-version: 155
+current-version: 155.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

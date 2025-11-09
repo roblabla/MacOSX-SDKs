@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -user-module-version 43 -module-name TabularData
+// swift-compiler-version: Apple Swift version 6.1 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 50 -module-name TabularData
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Combine
 import Dispatch
 import Foundation
@@ -8,28 +9,14 @@ import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol ColumnProtocol<Element> : Swift.BidirectionalCollection {
   var name: Swift.String { get set }
 }
-#else
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-public protocol ColumnProtocol : Swift.BidirectionalCollection {
-  var name: Swift.String { get set }
-}
-#endif
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol OptionalColumnProtocol<WrappedElement> : TabularData.ColumnProtocol {
   associatedtype WrappedElement where Self.Element == Self.WrappedElement?
 }
-#else
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-public protocol OptionalColumnProtocol : TabularData.ColumnProtocol {
-  associatedtype WrappedElement where Self.Element == Self.WrappedElement?
-}
-#endif
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol AnyColumnProtocol {
   var name: Swift.String { get set }
@@ -124,21 +111,71 @@ extension TabularData.DataFrame {
     get
     set
   }
+  @backDeployed(before: macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
   public subscript(columnName: Swift.String) -> TabularData.AnyColumn {
-    get
-    set
+    get {
+            guard let columnIndex = indexOfColumn(columnName) else {
+                fatalError("There is no column named '\(columnName)' in the DataFrame.")
+            }
+            return columns[columnIndex]
+        }
+    set {
+            if indexOfColumn(columnName) != nil {
+                replaceColumn(columnName, with: newValue)
+            } else {
+                 
+                 
+                var newColumn = newValue
+                newColumn.name = columnName
+                append(column: newColumn)
+            }
+        }
   }
+  @backDeployed(before: macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
   @_disfavoredOverload public subscript<T>(columnName: Swift.String, type: T.Type = T.self) -> [T?] {
-    get
-    set
+    get {
+            guard let columnIndex = indexOfColumn(columnName) else {
+                fatalError("There is no column named '\(columnName)' in the DataFrame.")
+            }
+            return Array(self[column: columnIndex, T.self])
+        }
+    set {
+            if indexOfColumn(columnName) != nil {
+                replaceColumn(columnName, with: Column(name: columnName, contents: newValue).eraseToAnyColumn())
+            } else {
+                append(column: Column(name: columnName, contents: newValue))
+            }
+        }
   }
   public subscript<T>(columnName: Swift.String, type: T.Type) -> TabularData.Column<T> {
     get
-    set
+    @backDeployed(before: macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
+    set {
+            if indexOfColumn(columnName) != nil {
+                replaceColumn(columnName, with: newValue.eraseToAnyColumn())
+            } else {
+                 
+                 
+                var newColumn = newValue
+                newColumn.name = columnName
+                append(column: newColumn)
+            }
+        }
   }
   public subscript<T>(id: TabularData.ColumnID<T>) -> TabularData.Column<T> {
     get
-    set
+    @backDeployed(before: macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
+    set {
+            if indexOfColumn(id.name) != nil {
+                replaceColumn(id.name, with: newValue.eraseToAnyColumn())
+            } else {
+                 
+                 
+                var newColumn = newValue
+                newColumn.name = id.name
+                append(column: newColumn)
+            }
+        }
   }
   public subscript<S>(columnNames: S) -> TabularData.DataFrame where S : Swift.Sequence, S.Element == Swift.String {
     get
@@ -308,7 +345,7 @@ public struct JSONReadingOptions {
   public init()
   public mutating func addDateParseStrategy<T>(_ strategy: T) where T : Foundation.ParseStrategy, T.ParseInput == Swift.String, T.ParseOutput == Foundation.Date
 }
-@available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 public struct JSONWritingOptions {
   public var sortKeys: Swift.Bool
   public var prettyPrint: Swift.Bool
@@ -470,9 +507,9 @@ extension TabularData.Column : Swift.RandomAccessCollection, Swift.MutableCollec
   }
   public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeBufferPointer<WrappedElement?>) throws -> R) rethrows -> R?
   public mutating func withContiguousMutableStorageIfAvailable<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<WrappedElement?>) throws -> R) rethrows -> R?
-  @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeBufferPointer<WrappedElement>) throws -> R) rethrows -> R?
-  @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public mutating func withContiguousMutableStorageIfAvailable<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<WrappedElement>) throws -> R) rethrows -> R?
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -501,6 +538,10 @@ extension TabularData.Column : Swift.Sendable where WrappedElement : Swift.Senda
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public struct ColumnID<T> : Swift.Sendable {
   public var name: Swift.String
+  @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  public var type: any Any.Type {
+    get
+  }
   public init(_ name: Swift.String, _ type: T.Type)
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1084,6 +1125,10 @@ extension TabularData.SFrameReadingError : Foundation.LocalizedError {
 extension TabularData.DataFrame {
   public init(contentsOfCSVFile url: Foundation.URL, columns: [Swift.String]? = nil, rows: Swift.Range<Swift.Int>? = nil, types: [Swift.String : TabularData.CSVType] = [:], options: TabularData.CSVReadingOptions = .init()) throws
   public init(csvData data: Foundation.Data, columns: [Swift.String]? = nil, rows: Swift.Range<Swift.Int>? = nil, types: [Swift.String : TabularData.CSVType] = [:], options: TabularData.CSVReadingOptions = .init()) throws
+  @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  public init<each T>(contentsOfCSVFile url: Foundation.URL, columns: repeat TabularData.ColumnID<each T>, rows: Swift.Range<Swift.Int>? = nil, options: TabularData.CSVReadingOptions = .init()) throws
+  @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  public init<each T>(csvData data: Foundation.Data, columns: repeat TabularData.ColumnID<each T>, rows: Swift.Range<Swift.Int>? = nil, options: TabularData.CSVReadingOptions = .init()) throws
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol DataFrameProtocol {
@@ -1215,8 +1260,8 @@ public struct CategoricalSummary<Element> : Swift.Hashable, Swift.CustomDebugStr
   public var debugDescription: Swift.String {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: TabularData.CategoricalSummary<Element>, b: TabularData.CategoricalSummary<Element>) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1273,8 +1318,10 @@ public enum CSVReadingError : Swift.Error {
   case wrongNumberOfColumns(row: Swift.Int, columns: Swift.Int, expected: Swift.Int)
   case failedToParse(row: Swift.Int, column: Swift.Int, type: TabularData.CSVType, cellContents: Foundation.Data)
   case missingColumn(columnName: Swift.String)
-  @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   case outOfBounds(requested: Swift.Int, actual: Swift.Int)
+  @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  case unsupportedColumnType(columnIndex: Swift.Int, columnName: Swift.String, type: Swift.String)
   public var row: Swift.Int {
     get
   }
@@ -1825,8 +1872,8 @@ public struct NumericSummary<Element> : Swift.Hashable, Swift.CustomDebugStringC
   public var debugDescription: Swift.String {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: TabularData.NumericSummary<Element>, b: TabularData.NumericSummary<Element>) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1996,7 +2043,7 @@ extension TabularData.ColumnSlice where WrappedElement : Swift.BinaryInteger {
   public func mean() -> Swift.Double?
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> Swift.Double?
 }
-@available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension TabularData.DataFrameProtocol {
   public func writeJSON(to url: Foundation.URL, options: TabularData.JSONWritingOptions = .init()) throws
   public func jsonRepresentation(options: TabularData.JSONWritingOptions = .init()) throws -> Foundation.Data

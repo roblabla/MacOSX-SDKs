@@ -1,4 +1,4 @@
-framework module ThreadNetwork {
+framework module ThreadNetwork [system] {
   umbrella header "ThreadNetwork.h"
   export *
 

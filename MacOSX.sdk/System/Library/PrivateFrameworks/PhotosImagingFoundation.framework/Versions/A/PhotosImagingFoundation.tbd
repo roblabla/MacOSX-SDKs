@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosImagingFoundation.framework/Versions/A/PhotosImagingFoundation'
-current-version: 721.0.150
+current-version: 751.0.104
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -49,7 +49,8 @@ exports:
                        _IPAPhotoAdjustmentEnabledKey, _IPAPhotoAdjustmentFormat, 
                        _IPAPhotoAdjustmentFormatVersion_1_0, _IPAPhotoAdjustmentFormatVersion_1_1, 
                        _IPAPhotoAdjustmentFormatVersion_1_10, _IPAPhotoAdjustmentFormatVersion_1_11, 
-                       _IPAPhotoAdjustmentFormatVersion_1_12, _IPAPhotoAdjustmentFormatVersion_1_2, 
+                       _IPAPhotoAdjustmentFormatVersion_1_12, _IPAPhotoAdjustmentFormatVersion_1_12_1, 
+                       _IPAPhotoAdjustmentFormatVersion_1_12_2, _IPAPhotoAdjustmentFormatVersion_1_2, 
                        _IPAPhotoAdjustmentFormatVersion_1_3, _IPAPhotoAdjustmentFormatVersion_1_4, 
                        _IPAPhotoAdjustmentFormatVersion_1_5, _IPAPhotoAdjustmentFormatVersion_1_5_1, 
                        _IPAPhotoAdjustmentFormatVersion_1_6, _IPAPhotoAdjustmentFormatVersion_1_7, 

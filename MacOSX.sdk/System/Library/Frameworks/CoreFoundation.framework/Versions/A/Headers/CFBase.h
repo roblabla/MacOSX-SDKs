@@ -89,12 +89,11 @@
 typedef unsigned long long CFAllocatorTypeID;
 
 #if TARGET_OS_MAC && (defined(CF_BUILDING_CF) || defined(NSBUILDINGFOUNDATION))
-    #if defined(__has_feature) && __has_feature(typed_memory_operations)
-        #if __has_builtin(__is_target_os) && (__is_target_os(ios) || __is_target_os(driverkit) || __is_target_os(macos) || (__has_builtin(__is_target_environment) && (__is_target_environment(exclavekit) || __is_target_environment(exclavecore))))
-            #define _CF_TYPED_ALLOC(override, type_param_pos) __attribute__((typed_memory_operation(override, type_param_pos)))
-            #define CF_HAS_TYPED_ALLOCATOR 1
-        #endif
-    #endif /* defined(__has_feature) && __has_feature(typed_memory_operations) */
+    #include <malloc/_malloc.h>
+    #if defined(_MALLOC_TYPE_ENABLED) && _MALLOC_TYPE_ENABLED && defined(_MALLOC_TYPED)
+        #define _CF_TYPED_ALLOC(override, type_param_pos) _MALLOC_TYPED(override, type_param_pos)
+        #define CF_HAS_TYPED_ALLOCATOR 1
+    #endif /* defined(_MALLOC_TYPE_ENABLED) && _MALLOC_TYPE_ENABLED && defined(_MALLOC_TYPED) */
 #endif /* TARGET_OS_MAC && (defined(CF_BUILDING_CF) || defined(NSBUILDINGFOUNDATION)) */
 
 #if !defined(_CF_TYPED_ALLOC)

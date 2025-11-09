@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, GCDevicePhysicalInputElementChange) {
     GCDevicePhysicalInputElementNoChange = 0,
     /** Indicates that a value of the element changed. */
     GCDevicePhysicalInputElementChanged = 1,
-};
+} API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
 
 
 /**

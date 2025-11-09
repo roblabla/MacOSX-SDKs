@@ -14,6 +14,7 @@
 #import <AVFoundation/AVMediaSelection.h>
 #import <AVFoundation/AVAssetVariant.h>
 #import <CoreMedia/CMTimeRange.h>
+#import <AVFoundation/AVPlayerMediaSelectionCriteria.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -171,6 +172,18 @@ AV_INIT_UNAVAILABLE
  */
 @property (nonatomic) BOOL downloadsInterstitialAssets API_UNAVAILABLE(macos, ios, tvos, watchos, visionos);
 
+/*!
+ @method		setInterstitialMediaSelectionCriteria:forMediaCharacteristic:
+ @abstract		Sets media selection on interstitials for this asset
+ @discussion	Typically, interstitial assets have not been discovered when the main download is initiated.
+				This method allows the user to specify AVMediaSelectionCriteria for all interstitials that are discovered.
+				Each AVPlayerMediaSelectionCriteria in the array of criteria specfies a set of criteria for a variant to download.
+ @param			criteria
+				The array of selection criteria to set
+ @param			mediaCharacteristic
+				The AVMediaCharacteristic to which the criteria will be applied
+*/
+- (void)setInterstitialMediaSelectionCriteria:(NSArray<AVPlayerMediaSelectionCriteria *> *) criteria forMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic API_AVAILABLE(macos(15.4), ios(18.4), tvos(18.4), watchos(11.4), visionos(2.4));
 @end
 
 /*!

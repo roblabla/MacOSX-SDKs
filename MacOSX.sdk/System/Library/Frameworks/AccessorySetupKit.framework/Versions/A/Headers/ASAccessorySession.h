@@ -11,7 +11,7 @@
 #import <AccessorySetupKit/ASCommon.h>
 #import <Foundation/Foundation.h>
 
-NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+NS_ASSUME_NONNULL_BEGIN
 
 @class ASAccessory;
 @class ASAccessorySettings;
@@ -25,6 +25,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// Manages accessories.
 AS_EXTERN
 API_AVAILABLE( ios( 18.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos)
+NS_SWIFT_SENDABLE
 @interface ASAccessorySession : NSObject
 
 /// An array of previously-selected accessories for this application.
@@ -104,4 +105,4 @@ NS_SWIFT_NAME(renameAccessory(_:options:completionHandler:));
 
 @end
 
-NS_HEADER_AUDIT_END(nullability, sendability)
+NS_ASSUME_NONNULL_END

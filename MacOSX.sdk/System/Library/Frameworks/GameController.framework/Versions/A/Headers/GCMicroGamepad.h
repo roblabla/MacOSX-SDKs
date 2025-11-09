@@ -19,14 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
  
  @note For the 1st generation and 2nd generation Siri Remotes, this represents touching anywhere on the entire touch surface.
 */
-GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadDpad API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCInputMicroGamepadDpad API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
  The primary button for the microgamepad
  
  @note For the 1st generation and 2nd generation Siri Remotes, this represents pressing anywhere on the touch surface.
 */
-GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonA API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCInputMicroGamepadButtonA API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
  The secondary button for the microgamepad
@@ -35,7 +35,7 @@ GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonA API_AVAILABLE(m
  
  @note For the 1st and 2nd generation Siri Remotes, this represents pressing the play/pause button.
 */
-GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonX API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCInputMicroGamepadButtonX API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
  The primary menu button for the microgamepad
@@ -47,7 +47,7 @@ GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonX API_AVAILABLE(m
  @note You should avoid polling this button every frame. tvOS will run a gesture recognizer on events before forwarding them to your application that can reduce the window
     to poll button changes. Instead, register a pressedChangedHandler or a valueChangedHandler.
 */
-GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonMenu API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+GAMECONTROLLER_EXPORT NSString *const GCInputMicroGamepadButtonMenu API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 /**
  Micro Gamepad profile.
@@ -66,11 +66,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 /**
  A profile keeps a reference to the controller that this profile is mapping input from.
  */
-#if !__has_feature(objc_arc)
-@property (nonatomic, readonly, assign) GCController *controller;
-#else
 @property (nonatomic, readonly, weak) GCController *controller;
-#endif
 
 /**
  Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called
@@ -80,7 +76,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
  @param gamepad this gamepad that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons.
  @param element the element that has been modified.
  */
-typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCControllerElement *element);
+typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCControllerElement *element) API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 @property (nonatomic, copy, nullable) GCMicroGamepadValueChangedHandler valueChangedHandler;
 
 /**
@@ -93,7 +89,7 @@ typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCCon
  
  @see GCMicroGamepadSnapshot
  */
-- (GCMicroGamepadSnapshot *)saveSnapshot API_DEPRECATED("GCMicroGamepadSnapshot has been deprecated, use [GCController capture] instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(7.0, 13.0));
+- (GCMicroGamepadSnapshot *)saveSnapshot API_DEPRECATED("Use the -[GCController capture] method instead", macos(10.11, 10.15), ios(9.0, 13.0), tvos(9.0, 13.0));
 
 /**
  Optionally analog in the Micro profile. All the elements of this directional input are either analog or digital.
@@ -146,7 +142,7 @@ typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCCon
  @note If the controller's snapshot flag is set to NO, this method has no effect.
  @see GCController.snapshot
  */
-- (void) setStateFromMicroGamepad:(GCMicroGamepad *)microGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+- (void)setStateFromMicroGamepad:(GCMicroGamepad *)microGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 @end
 

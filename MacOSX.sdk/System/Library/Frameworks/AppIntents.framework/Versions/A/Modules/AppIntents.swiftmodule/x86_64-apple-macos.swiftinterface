@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 226.3.0.4 -module-name AppIntents
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -target-variant x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 227.13.0.3 -module-name AppIntents
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import AppIntents
 import CoreGraphics
 import CoreLocation
@@ -15,7 +16,6 @@ import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 import notify
-import os
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter where Value.ValueType == Foundation.AttributedString {
   convenience public init(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, default defaultValue: _const Value.UnwrappedType? = nil, requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default)
@@ -81,15 +81,8 @@ extension AppIntents.AssistantSchemaEntity {
     get
   }
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
-#if compiler(>=5.3) && $ExtensionMacroAttr
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @attached(memberAttribute) @attached(extension, conformances: AppIntents.AppEntity, AppIntents.AssistantSchemaEntity, names: named(__assistantSchemaEntity)) public macro AssistantEntity<T>(schema: T) = #externalMacro(module: "AppIntentsMacros", type: "AssistantEntityMacros") where T : AppIntents.AssistantSchemas.Entity
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
-@attached(memberAttribute)  public macro AssistantEntity<T>(schema: T) = #externalMacro(module: "AppIntentsMacros", type: "AssistantEntityMacros") where T : AppIntents.AssistantSchemas.Entity
-#endif
-#endif
 @available(iOS 18.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -879,15 +872,8 @@ extension AppIntents.AssistantSchemaIntent {
     get
   }
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
-#if compiler(>=5.3) && $ExtensionMacroAttr
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @attached(memberAttribute) @attached(extension, conformances: AppIntents.AssistantSchemaIntent, AppIntents.ShowInAppSearchResultsIntent, names: named(__assistantSchemaIntent)) public macro AssistantIntent<T>(schema: T) = #externalMacro(module: "AppIntentsMacros", type: "AssistantIntentMacros") where T : AppIntents.AssistantSchemas.Intent
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
-@attached(memberAttribute)  public macro AssistantIntent<T>(schema: T) = #externalMacro(module: "AppIntentsMacros", type: "AssistantIntentMacros") where T : AppIntents.AssistantSchemas.Intent
-#endif
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public enum AppShortcutPhraseToken {
   case applicationName
@@ -1572,17 +1558,10 @@ extension AppIntents.IntentParameter {
 extension AppIntents.IntentParameter.ValueState : Swift.Equatable where Value : Swift.Equatable {
   public static func == (lhs: AppIntents.IntentParameter<Value>.ValueState, rhs: AppIntents.IntentParameter<Value>.ValueState) -> Swift.Bool
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public protocol AppShortcutOptionsCollectionSpecification<Value> : Swift.Sendable, Swift.Sequence where Self.Element == any AppIntents.AppShortcutOptionsCollectionProtocol {
   associatedtype Value : AppIntents._IntentValue
 }
-#else
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-public protocol AppShortcutOptionsCollectionSpecification : Swift.Sendable, Swift.Sequence where Self.Element == any AppIntents.AppShortcutOptionsCollectionProtocol {
-  associatedtype Value : AppIntents._IntentValue
-}
-#endif
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @_functionBuilder public enum AppShortcutOptionsCollectionSpecificationBuilder<Value> where Value : AppIntents._IntentValue {
 }
@@ -1870,12 +1849,12 @@ extension Swift.Int : AppIntents.RangeComparableProperty {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct IntResolver : AppIntents.RangeCheckingResolver {
   public func resolve(from input: Swift.Int, context: AppIntents.IntentParameterContext<Swift.Int>) async throws -> Swift.Int?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.IntResolver, b: AppIntents.IntResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.Int
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.Int
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1885,12 +1864,12 @@ public struct IntFromStringResolver : AppIntents.RangeCheckingResolver {
   public var radix: Swift.Int
   public init(radix: Swift.Int = 10)
   public func resolve(from input: Swift.String, context: AppIntents.IntentParameterContext<Swift.Int>) async throws -> Swift.Int?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.IntFromStringResolver, b: AppIntents.IntFromStringResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.String
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.Int
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1900,12 +1879,12 @@ public struct IntFromDoubleResolver : AppIntents.RangeCheckingResolver {
   public var roundingRule: Swift.FloatingPointRoundingRule
   public init(roundingRule: Swift.FloatingPointRoundingRule = .towardZero)
   public func resolve(from input: Swift.Double, context: AppIntents.IntentParameterContext<Swift.Int>) async throws -> Swift.Int?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.IntFromDoubleResolver, b: AppIntents.IntFromDoubleResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.Double
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.Int
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1938,7 +1917,7 @@ extension AppIntents.IntentParameterContext where Value.ValueType == Swift.Int {
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension Foundation.AttributedString : AppIntents._IntentValue, @unchecked Swift.Sendable {
+extension Foundation.AttributedString : AppIntents._IntentValue {
   public static var defaultResolverSpecification: some AppIntents.ResolverSpecification {
     get
   }
@@ -1952,12 +1931,12 @@ extension Foundation.AttributedString : AppIntents._IntentValue, @unchecked Swif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct AttributedStringFromStringResolver : AppIntents.Resolver {
   public func resolve(from input: Swift.String, context: AppIntents.IntentParameterContext<Foundation.AttributedString>) async throws -> Foundation.AttributedString?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.AttributedStringFromStringResolver, b: AppIntents.AttributedStringFromStringResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.String
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Foundation.AttributedString
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2386,7 +2365,6 @@ public enum IntentWidgetFamily : AppIntents._IntentValue {
   case accessoryInline
   public static var defaultResolverSpecification: AppIntents.EmptyResolverSpecification<AppIntents.IntentWidgetFamily>
   public static func == (a: AppIntents.IntentWidgetFamily, b: AppIntents.IntentWidgetFamily) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 17.0, watchOS 10.0, macOS 14.0, *)
   @available(tvOS, unavailable)
   public typealias Specification = AppIntents.EmptyResolverSpecification<AppIntents.IntentWidgetFamily>
@@ -2396,6 +2374,7 @@ public enum IntentWidgetFamily : AppIntents._IntentValue {
   @available(iOS 17.0, watchOS 10.0, macOS 14.0, *)
   @available(tvOS, unavailable)
   public typealias ValueType = AppIntents.IntentWidgetFamily
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2435,7 +2414,7 @@ public protocol ForegroundContinuableIntent : AppIntents.AppIntent {
 extension AppIntents.ForegroundContinuableIntent {
   public func needsToContinueInForegroundError(_ dialog: AppIntents.IntentDialog? = nil, continuation: (@_Concurrency.MainActor () async throws -> Swift.Void)? = nil) -> AppIntents.AppIntentError
   @discardableResult
-  public func requestToContinueInForeground<ResultValue>(_ dialog: AppIntents.IntentDialog? = nil, continuation: (@_Concurrency.MainActor () async throws -> ResultValue) = { () }) async throws -> ResultValue where ResultValue : Swift.Sendable
+  public func requestToContinueInForeground<ResultValue>(_ dialog: AppIntents.IntentDialog? = nil, continuation: @_Concurrency.MainActor () async throws -> ResultValue = { () }) async throws -> ResultValue where ResultValue : Swift.Sendable
 }
 @_hasMissingDesignatedInitializers @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 final public class EqualToComparator<Property, PropertyType, ComparatorMappingType> : AppIntents.EntityQueryComparator<Property, PropertyType, PropertyType, ComparatorMappingType> where Property : AppIntents.EntityProperty<PropertyType>, PropertyType : AppIntents._IntentValue, PropertyType : Swift.Equatable, PropertyType : Swift.Sendable {
@@ -2541,7 +2520,6 @@ extension AppIntents.EntityProperty where Value.ValueType == Foundation.DateComp
   associatedtype Specification : AppIntents.ResolverSpecification
   static var defaultResolverSpecification: Self.Specification { get }
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Optional : AppIntents._IntentValue where Wrapped : AppIntents._IntentValue {
   public typealias ValueType = Wrapped.ValueType
@@ -2552,18 +2530,6 @@ extension Swift.Optional : AppIntents._IntentValue where Wrapped : AppIntents._I
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Specification = Wrapped.UnwrappedType.Specification
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension Swift.Optional : AppIntents._IntentValue where Wrapped : AppIntents._IntentValue {
-  public typealias ValueType = Wrapped.ValueType
-  public typealias UnwrappedType = Wrapped.UnwrappedType
-  public static var defaultResolverSpecification: Wrapped.UnwrappedType.Specification {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias Specification = Wrapped.UnwrappedType.Specification
-}
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter where Value.ValueType : AppIntents.AppEntity {
   @available(macOS, introduced: 13.0, deprecated: 15.0)
@@ -3080,9 +3046,9 @@ public struct FileEntityIdentifier : Swift.Sendable, Swift.Hashable, Swift.Equat
   public var isDraft: Swift.Bool {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.FileEntityIdentifier, b: AppIntents.FileEntityIdentifier) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3402,7 +3368,6 @@ extension AppIntents.IntentParameter {
     }
   }
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension CoreLocation.CLPlacemark : AppIntents.DisplayRepresentable, @retroactive Foundation.CustomLocalizedStringResourceConvertible {
   public static var typeDisplayRepresentation: AppIntents.TypeDisplayRepresentation {
@@ -3412,20 +3377,8 @@ extension CoreLocation.CLPlacemark : AppIntents.DisplayRepresentable, @retroacti
     get
   }
 }
-#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension CoreLocation.CLPlacemark : AppIntents.DisplayRepresentable, Foundation.CustomLocalizedStringResourceConvertible {
-  public static var typeDisplayRepresentation: AppIntents.TypeDisplayRepresentation {
-    get
-  }
-  public var displayRepresentation: AppIntents.DisplayRepresentation {
-    get
-  }
-}
-#endif
-#if compiler(>=5.3) && $RetroactiveAttribute
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension CoreLocation.CLPlacemark : AppIntents._IntentValue, @unchecked @retroactive Swift.Sendable {
+extension CoreLocation.CLPlacemark : AppIntents._IntentValue {
   public static var defaultResolverSpecification: AppIntents.EmptyResolverSpecification<CoreLocation.CLPlacemark> {
     get
   }
@@ -3436,20 +3389,6 @@ extension CoreLocation.CLPlacemark : AppIntents._IntentValue, @unchecked @retroa
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias ValueType = CoreLocation.CLPlacemark
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension CoreLocation.CLPlacemark : AppIntents._IntentValue, @unchecked Swift.Sendable {
-  public static var defaultResolverSpecification: AppIntents.EmptyResolverSpecification<CoreLocation.CLPlacemark> {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias Specification = AppIntents.EmptyResolverSpecification<CoreLocation.CLPlacemark>
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias UnwrappedType = CoreLocation.CLPlacemark
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias ValueType = CoreLocation.CLPlacemark
-}
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter where Value.ValueType == CoreLocation.CLPlacemark {
   final public var displayStyle: AppIntents.IntentParameter<Value>.PlacemarkDisplayStyle? {
@@ -3480,12 +3419,12 @@ extension Swift.Double : AppIntents.RangeComparableProperty {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct DoubleResolver : AppIntents.RangeCheckingResolver {
   public func resolve(from input: Swift.Double, context: AppIntents.IntentParameterContext<Swift.Double>) async throws -> Swift.Double?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.DoubleResolver, b: AppIntents.DoubleResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.Double
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.Double
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3493,12 +3432,12 @@ public struct DoubleResolver : AppIntents.RangeCheckingResolver {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct DoubleFromStringResolver : AppIntents.RangeCheckingResolver {
   public func resolve(from input: Swift.String, context: AppIntents.IntentParameterContext<Swift.Double>) async throws -> Swift.Double?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.DoubleFromStringResolver, b: AppIntents.DoubleFromStringResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.String
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.Double
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3506,12 +3445,12 @@ public struct DoubleFromStringResolver : AppIntents.RangeCheckingResolver {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct DoubleFromIntResolver : AppIntents.RangeCheckingResolver {
   public func resolve(from input: Swift.Int, context: AppIntents.IntentParameterContext<Swift.Double>) async throws -> Swift.Double?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.DoubleFromIntResolver, b: AppIntents.DoubleFromIntResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.Int
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.Double
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3688,7 +3627,7 @@ extension AppIntents.AppShortcutsBuilder {
   @available(*, unavailable, message: "if statements in an AppShortcutsBuilder can only be used with #available clauses")
   public static func buildOptional(_ appShortcuts: [AppIntents.AppShortcut]?) -> [AppIntents.AppShortcut]
   @_disfavoredOverload public static func buildOptional(_ component: (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)?) -> [AppIntents.AppShortcut]
-  public static func buildLimitedAvailability(_ components: [AppIntents.AppShortcut]) -> (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)
+  public static func buildLimitedAvailability(_ components: [AppIntents.AppShortcut]) -> any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker
 }
 @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
 public protocol AppShortcutsContent {
@@ -4724,25 +4663,15 @@ public protocol IntentResult : Swift.Sendable {
   associatedtype Snippet = Swift.Never
   associatedtype Dialog = Swift.Never
   var value: Self.Value? { get }
-  #if compiler(>=5.3) && $AssociatedTypeAvailability
   @available(iOS, deprecated: 18.2)
   @available(watchOS, deprecated: 11.2)
   @available(tvOS, deprecated: 18.2)
   @available(visionOS, deprecated: 2.2)
   associatedtype OpensAppIntent : AppIntents.AppIntent = Swift.Never
-  #else
-  associatedtype OpensAppIntent : AppIntents.AppIntent = Swift.Never
-  #endif
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol ReturnsValue<Value> : AppIntents.IntentResult {
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-public protocol ReturnsValue : AppIntents.IntentResult {
-}
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol OpensIntent : AppIntents.IntentResult {
 }
@@ -4962,19 +4891,11 @@ extension AppIntents.EntityProperty where Value.ValueType == Swift.Bool {
 extension AppIntents.EntityProperty where Value.ValueType == Swift.Bool {
   convenience public init()
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public protocol SetValueIntent<ValueType> : AppIntents.AppIntent {
   associatedtype ValueType : AppIntents._IntentValue
   var value: Self.ValueType { get set }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-public protocol SetValueIntent : AppIntents.AppIntent {
-  associatedtype ValueType : AppIntents._IntentValue
-  var value: Self.ValueType { get set }
-}
-#endif
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @_alwaysEmitConformanceMetadata public protocol AppIntentsPackage {
   static var includedPackages: [any AppIntents.AppIntentsPackage.Type] { get }
@@ -5008,12 +4929,12 @@ extension AppIntents.DeprecatedAppIntent {
 extension Foundation.NSNull : AppIntents._IntentValue {
   public struct NullResolver : AppIntents.Resolver {
     public func resolve(from input: Foundation.NSNull, context: AppIntents.IntentParameterContext<Foundation.NSNull>) async throws -> Foundation.NSNull?
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Foundation.NSNull.NullResolver, b: Foundation.NSNull.NullResolver) -> Swift.Bool
     @available(*, unavailable)
     public typealias Input = Foundation.NSNull
     @available(*, unavailable)
     public typealias Output = Foundation.NSNull
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -5321,12 +5242,12 @@ extension AppIntents.StringSearchCriteria {
 @available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
 public struct StringSearchCriteriaFromStringResolverSpecificification : AppIntents.Resolver {
   public func resolve(from input: Swift.String, context: AppIntents.IntentParameterContext<AppIntents.StringSearchCriteria>) async throws -> AppIntents.StringSearchCriteria?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.StringSearchCriteriaFromStringResolverSpecificification, b: AppIntents.StringSearchCriteriaFromStringResolverSpecificification) -> Swift.Bool
   @available(iOS 17.2, tvOS 17.2, watchOS 10.2, macOS 14.2, *)
   public typealias Input = Swift.String
   @available(iOS 17.2, tvOS 17.2, watchOS 10.2, macOS 14.2, *)
   public typealias Output = AppIntents.StringSearchCriteria
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5598,6 +5519,8 @@ extension AppIntents.StartWorkoutIntent {
 @available(tvOS, unavailable)
 public protocol IndexedEntity : AppIntents.AppEntity {
   var attributeSet: CoreSpotlight.CSSearchableItemAttributeSet { get }
+  @available(macOS 15.4, iOS 18.4, visionOS 2.4, *)
+  var hideInSpotlight: Swift.Bool { get }
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
@@ -5607,6 +5530,14 @@ extension AppIntents.IndexedEntity {
     get
   }
   public var attributeSet: CoreSpotlight.CSSearchableItemAttributeSet {
+    get
+  }
+}
+@available(macOS 15.4, iOS 18.4, visionOS 2.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AppIntents.IndexedEntity {
+  public var hideInSpotlight: Swift.Bool {
     get
   }
 }
@@ -5733,12 +5664,12 @@ extension Foundation.URL : AppIntents._IntentValue {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct URLFromStringResolver : AppIntents.Resolver {
   public func resolve(from input: Swift.String, context: AppIntents.IntentParameterContext<Foundation.URL>) async throws -> Foundation.URL?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.URLFromStringResolver, b: AppIntents.URLFromStringResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.String
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Foundation.URL
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5808,12 +5739,12 @@ public struct EmptyResolverSpecification<Value> : AppIntents.ResolverSpecificati
   public typealias Output = Value
   public init()
   public func makeIterator() -> Swift.IndexingIterator<[any AppIntents.Resolver]>
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.EmptyResolverSpecification<Value>, b: AppIntents.EmptyResolverSpecification<Value>) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Element = any AppIntents.Resolver
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Iterator = Swift.IndexingIterator<[any AppIntents.Resolver]>
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5825,7 +5756,6 @@ extension AppIntents.ResolverSpecificationBuilder {
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension AppIntents.ResolverSpecificationBuilder {
-  #if compiler(>=5.3) && $ParameterPacks
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public struct Specification<Output, each R> : AppIntents.ResolverSpecification where Output : AppIntents._IntentValue, repeat each R : AppIntents.Resolver {
     public func hash(into hasher: inout Swift.Hasher)
@@ -5839,15 +5769,9 @@ extension AppIntents.ResolverSpecificationBuilder {
       get
     }
   }
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   public static func buildPartialBlock<R>(first: R) -> AppIntents.ResolverSpecificationBuilder<Property>.Specification<Property, R> where R : AppIntents.Resolver
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   public static func buildPartialBlock<each Accumulated, R>(accumulated: AppIntents.ResolverSpecificationBuilder<Property>.Specification<Property, repeat each Accumulated>, next: R) -> AppIntents.ResolverSpecificationBuilder<Property>.Specification<Property, repeat each Accumulated, R> where repeat each Accumulated : AppIntents.Resolver, R : AppIntents.Resolver
-  #endif
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol ResultsCollection<Result> {
   associatedtype Result : AppIntents._IntentValue
@@ -5856,16 +5780,6 @@ public protocol ResultsCollection<Result> {
   var items: [Self.Result.ValueType] { get }
   static var empty: Self { get }
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-public protocol ResultsCollection {
-  associatedtype Result : AppIntents._IntentValue
-  var promptLabel: Foundation.LocalizedStringResource? { get }
-  var usesIndexedCollation: Swift.Bool { get }
-  var items: [Self.Result.ValueType] { get }
-  static var empty: Self { get }
-}
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Array : AppIntents.ResultsCollection where Element : AppIntents._IntentValue {
   public typealias Result = Element
@@ -6065,15 +5979,8 @@ extension AppIntents.AssistantSchemaEnum {
     get
   }
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
-#if compiler(>=5.3) && $ExtensionMacroAttr
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @attached(extension, conformances: AppIntents.AssistantSchemaEnum, names: named(__assistantSchemaEnum)) public macro AssistantEnum<T>(schema: T) = #externalMacro(module: "AppIntentsMacros", type: "AssistantEnumMacros") where T : AppIntents.AssistantSchemas.Enum
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
- public macro AssistantEnum<T>(schema: T) = #externalMacro(module: "AppIntentsMacros", type: "AssistantEnumMacros") where T : AppIntents.AssistantSchemas.Enum
-#endif
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol OpenIntent : AppIntents.SystemIntent {
   associatedtype Value : AppIntents.AppValue
@@ -6126,8 +6033,8 @@ extension Swift.String : AppIntents._IntentValue {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct StringFromIntResolver<Input, Output> : AppIntents.Resolver where Input : AppIntents._IntentValue, Output : AppIntents._IntentValue, Output.ValueType == Swift.String {
   public func resolve(from input: Input, context: AppIntents.IntentParameterContext<Output>) async throws -> Output?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.StringFromIntResolver<Input, Output>, b: AppIntents.StringFromIntResolver<Input, Output>) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -6135,12 +6042,12 @@ public struct StringFromIntResolver<Input, Output> : AppIntents.Resolver where I
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct StringFromDoubleResolver : AppIntents.Resolver {
   public func resolve(from input: Swift.Double, context: AppIntents.IntentParameterContext<Swift.String>) async throws -> Swift.String?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.StringFromDoubleResolver, b: AppIntents.StringFromDoubleResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.Double
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.String
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -6266,8 +6173,8 @@ public enum SetFocusFilterIntentError : Foundation.LocalizedError, Swift.Equatab
   case notFound
   @available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
   case missingParameterValue
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.SetFocusFilterIntentError, b: AppIntents.SetFocusFilterIntentError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -6454,15 +6361,8 @@ public protocol _IntentValueRepresentable : AppIntents._IntentValue {
   static var allIntentValueTypes: [any AppIntents._IntentValue.Type] { get }
   var asIntentValue: any AppIntents._IntentValue { get }
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
-#if compiler(>=5.3) && $ExtensionMacroAttr
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @attached(extension, conformances: AppIntents._IntentValueRepresentable, names: arbitrary) public macro UnionValue() = #externalMacro(module: "AppIntentsMacros", type: "_UnionValueMacro")
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
- public macro UnionValue() = #externalMacro(module: "AppIntentsMacros", type: "_UnionValueMacro")
-#endif
-#endif
 @available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
 public protocol SearchCriteria : AppIntents._IntentValue, Swift.Hashable, Swift.Sendable {
   associatedtype SearchScopes = Swift.Void
@@ -6677,11 +6577,6 @@ public struct IntentParameterContext<Value> : AppIntents.AnyIntentValue, @unchec
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension AppIntents.DisplayRepresentation.Image : Swift.Codable {
-  public init(from decoder: any Swift.Decoder) throws
-  public func encode(to encoder: any Swift.Encoder) throws
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension AppIntents.DisplayRepresentation.Image.DisplayStyle : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
@@ -7545,7 +7440,7 @@ extension AppIntents.AssistantSchemas.WhiteboardEnum {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.DisplayRepresentation {
-  public struct Image : Swift.Equatable, Swift.Sendable {
+  public struct Image : Swift.Equatable, @unchecked Swift.Sendable {
     public init(named name: Swift.String, isTemplate: Swift.Bool? = nil)
     public init(systemName name: Swift.String, isTemplate: Swift.Bool? = nil)
     public init(data: Foundation.Data, isTemplate: Swift.Bool? = nil)
@@ -7597,12 +7492,12 @@ extension Swift.Bool : AppIntents._IntentValue {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct BoolFromStringResolver : AppIntents.Resolver {
   public func resolve(from input: Swift.String, context: AppIntents.IntentParameterContext<Swift.Bool>) async throws -> Swift.Bool?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AppIntents.BoolFromStringResolver, b: AppIntents.BoolFromStringResolver) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Input = Swift.String
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Output = Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -7801,13 +7696,13 @@ public struct StringSearchCriteria : AppIntents.SearchCriteria {
   public var term: Swift.String
   public init(term: Swift.String)
   public static func == (a: AppIntents.StringSearchCriteria, b: AppIntents.StringSearchCriteria) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 17.2, tvOS 17.2, watchOS 10.2, macOS 14.2, *)
   public typealias Specification = @_opaqueReturnTypeOf("$s10AppIntents20StringSearchCriteriaV28defaultResolverSpecificationQrvpZ", 0) __
   @available(iOS 17.2, tvOS 17.2, watchOS 10.2, macOS 14.2, *)
   public typealias UnwrappedType = AppIntents.StringSearchCriteria
   @available(iOS 17.2, tvOS 17.2, watchOS 10.2, macOS 14.2, *)
   public typealias ValueType = AppIntents.StringSearchCriteria
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

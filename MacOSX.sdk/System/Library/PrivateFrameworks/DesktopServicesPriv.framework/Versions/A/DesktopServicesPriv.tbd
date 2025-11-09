@@ -2,14 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv'
-current-version: 1732.2.4
+current-version: 1732.4.6
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CopyNodeRef, _DSArchiveServiceErrorDomain, _DSArchiveServiceStreamingXPCInterface, 
                        _DSArchiveServiceXPCInterface, _DSDebugStateString, _DSMoveAsideHomeSubDirectories, 
-                       _DSMoveAsideSyncedDocumentsAndDesktopToHome, _DSMoveOldDocumentsAndDesktopToHomeDirectory, 
-                       _DSMoveSyncDirectoriesToHome, _DSMoveSyncedDocumentsAndDesktopToHomeDirectory, 
-                       _DSMoveSyncedDocumentsAndDesktopToHomeDirectory_V1, _DSMoveSyncedDocumentsAndDesktopToICloud, 
+                       _DSMoveAsideSyncedDocumentsAndDesktopToHome, _DSMoveSyncDirectoriesToHome, 
                        _DSMoveSyncedHomeSubDirectoriesBackToSyncRoot, _DSPopDebugStateString, 
                        _DSPropertyTypeToPropertyReferenceDataType, _DSPushDebugStateString, 
                        _DSRemoveSharedSpotlightAttributesForINode, _DSRunTests, _DSSetDefaultPermissionOnHomeSubdirectories, 
@@ -56,11 +54,11 @@ exports:
                        _NodeCreateNewReplicaNode, _NodeCreateNewRequest, _NodeCreateNewVirtualChildAtIndex, 
                        _NodeCreateNewVirtualChildAtIndexWithProperties, _NodeCreateNewVirtualNode, 
                        _NodeCreateNewVirtualQueryNode, _NodeCreateSemanticNodeQuery, 
-                       _NodeCreateTagNameCollationKey, _NodeDSCreateOperation, _NodeDiagnosticLogging, 
-                       _NodeDisconnectShare, _NodeDispatchEvent, _NodeDisposeEventQueue, 
-                       _NodeDisposeIterator, _NodeDisposeNodeQueryRef, _NodeDisposeNodeRef, 
-                       _NodeDisposeNotifier, _NodeDisposeOperation, _NodeDisposeRequest, 
-                       _NodeEventBlockUntilNextEventNew, _NodeEventCopyFSPermissionInfo, 
+                       _NodeCreateTagNameCollationKey, _NodeDSCreateOperation, _NodeDSCreateOperation_v2, 
+                       _NodeDiagnosticLogging, _NodeDisconnectShare, _NodeDispatchEvent, 
+                       _NodeDisposeEventQueue, _NodeDisposeIterator, _NodeDisposeNodeQueryRef, 
+                       _NodeDisposeNodeRef, _NodeDisposeNotifier, _NodeDisposeOperation, 
+                       _NodeDisposeRequest, _NodeEventBlockUntilNextEventNew, _NodeEventCopyFSPermissionInfo, 
                        _NodeEventCopyHandlerDebugString, _NodeEventCopyNode, _NodeEventCopyRegistrationParent, 
                        _NodeEventCopyResolvedParent, _NodeEventDisposeEventQueue, 
                        _NodeEventGetBookmarkData, _NodeEventGetChild, _NodeEventGetClippingData, 

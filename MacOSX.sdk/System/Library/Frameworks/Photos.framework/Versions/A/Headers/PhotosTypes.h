@@ -111,10 +111,12 @@ typedef NS_ENUM(NSInteger, PHAssetCollectionSubtype) {
 
 #pragma mark - PHAsset types
 
+
 typedef NS_ENUM(NSInteger, PHAssetEditOperation) {
-    PHAssetEditOperationDelete     = 1,
-    PHAssetEditOperationContent    = 2,
-    PHAssetEditOperationProperties = 3,
+    PHAssetEditOperationDelete      = 1,
+    PHAssetEditOperationContent     = 2,
+    PHAssetEditOperationProperties  = 3,
+
 };
 
 typedef NS_ENUM(NSInteger, PHAssetPlaybackStyle) {

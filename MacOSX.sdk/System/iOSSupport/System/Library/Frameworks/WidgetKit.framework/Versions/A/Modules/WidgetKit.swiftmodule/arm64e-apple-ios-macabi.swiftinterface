@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-bare-slash-regex -user-module-version 537.3.23.1 -module-name WidgetKit -package-name com.apple.chrono.internal
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature InternalImportsByDefault -enable-bare-slash-regex -user-module-version 537.5.41 -module-name WidgetKit -package-name com.apple.chrono.internal
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 public import ActivityKit
 public import AppIntents
 @_exported public import DeveloperToolsSupport
@@ -18,9 +19,9 @@ public struct TimelineEntryRelevance : Swift.Codable, Swift.Hashable {
   public var score: Swift.Float
   public var duration: Foundation.TimeInterval
   public init(score: Swift.Float, duration: Foundation.TimeInterval = 0.0)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: WidgetKit.TimelineEntryRelevance, b: WidgetKit.TimelineEntryRelevance) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -145,8 +146,8 @@ public struct WidgetAccentedRenderingMode : Swift.Hashable {
   public static let desaturated: WidgetKit.WidgetAccentedRenderingMode
   public static let accentedDesaturated: WidgetKit.WidgetAccentedRenderingMode
   public static let fullColor: WidgetKit.WidgetAccentedRenderingMode
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: WidgetKit.WidgetAccentedRenderingMode, b: WidgetKit.WidgetAccentedRenderingMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -557,26 +558,18 @@ extension DeveloperToolsSupport.Preview {
   @_Concurrency.MainActor public init<Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, using intent: Provider.Intent, widget: @escaping () -> some Widget, timelineProvider: @escaping () -> Provider) where Provider : WidgetKit.IntentTimelineProvider
   @_Concurrency.MainActor public init<Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, using intent: Provider.Intent, widget: @escaping () -> some Widget, timelineProvider: @escaping () -> Provider) where Provider : WidgetKit.AppIntentTimelineProvider
 }
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, widget: @escaping () -> Widget, @WidgetKit.PreviewTimelineBuilder timeline: @escaping @_Concurrency.MainActor () async -> [any WidgetKit.TimelineEntry]) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget, Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, widget: @escaping () -> Widget, timelineProvider: @escaping () -> Provider) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget, Provider : WidgetKit.TimelineProvider
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget, Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, using intent: Provider.Intent, widget: @escaping () -> Widget, timelineProvider: @escaping () -> Provider) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget, Provider : WidgetKit.IntentTimelineProvider
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget, Provider>(_ name: Swift.String? = nil, as family: WidgetKit.WidgetFamily, using intent: Provider.Intent, widget: @escaping () -> Widget, timelineProvider: @escaping () -> Provider) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget, Provider : WidgetKit.AppIntentTimelineProvider
-#endif
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
 @_functionBuilder public struct PreviewTimelineBuilder {
@@ -1237,7 +1230,6 @@ extension SwiftUICore.View {
 extension DeveloperToolsSupport.Preview {
   @_Concurrency.MainActor public init<Attributes>(_ name: Swift.String? = nil, as viewKind: WidgetKit.ActivityPreviewViewKind, using attributes: Attributes, widget: @escaping () -> some Widget, @WidgetKit.PreviewActivityBuilder<Attributes> contentStates: @escaping @_Concurrency.MainActor () async -> [Attributes.ContentState]) where Attributes : ActivityKit.ActivityAttributes
 }
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
 @available(visionOS, unavailable)
@@ -1245,7 +1237,6 @@ extension DeveloperToolsSupport.Preview {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @freestanding(declaration) public macro Preview<Widget, Attributes>(_ name: Swift.String? = nil, as viewKind: WidgetKit.ActivityPreviewViewKind, using attributes: Attributes, widget: @escaping () -> Widget, @WidgetKit.PreviewActivityBuilder<Attributes> contentStates: @escaping @_Concurrency.MainActor () async -> [Attributes.ContentState]) = #externalMacro(module: "PreviewsMacros", type: "Common") where Widget : SwiftUI.Widget, Attributes : ActivityKit.ActivityAttributes
-#endif
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
 @available(visionOS, unavailable)
@@ -1315,8 +1306,8 @@ extension SwiftUI.WidgetConfiguration {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 public struct WidgetLocation : Swift.Sendable, Swift.Hashable {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: WidgetKit.WidgetLocation, b: WidgetKit.WidgetLocation) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

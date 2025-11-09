@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature ExistentialAny -enable-upcoming-feature InternalImportsByDefault -user-module-version 2230.24 -module-name CloudKit
+// swift-compiler-version: Apple Swift version 6.1 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature ExistentialAny -enable-upcoming-feature InternalImportsByDefault -user-module-version 2250.36.1 -module-name CloudKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported public import CloudKit
 public import CoreTransferable
 public import Swift
@@ -34,7 +35,7 @@ extension CloudKit.CKSyncEngine : Swift.CustomStringConvertible {
   }
 }
 @available(macOS, introduced: 10.12, deprecated: 14.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-@available(macCatalyst, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+@available(macCatalyst, introduced: 13.1, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(iOS, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(tvOS, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(watchOS, introduced: 3.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
@@ -64,12 +65,12 @@ extension Foundation.NSItemProvider {
   @available(tvOS, unavailable)
   public func registerCKShare(_ share: CloudKit.CKShare, container: CloudKit.CKContainer, allowedSharingOptions: CloudKit.CKAllowedSharingOptions = CKAllowedSharingOptions.standard)
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecordZone.ID {
-  @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
   convenience public init(zoneName: Swift.String = CKRecordZone.ID.defaultZoneName, ownerName: Swift.String = CKCurrentUserDefaultName)
   @available(macOS, introduced: 10.10, deprecated: 10.12)
-  @available(macCatalyst, introduced: 8.0, deprecated: 10.0)
+  @available(macCatalyst, introduced: 13.1, deprecated: 13.1)
   @available(iOS, introduced: 8.0, deprecated: 10.0)
   @available(tvOS, introduced: 9.0, deprecated: 10.0)
   @available(watchOS, introduced: 3.0, deprecated: 3.0)
@@ -77,50 +78,53 @@ extension Foundation.NSItemProvider {
   @_alwaysEmitIntoClient @_disfavoredOverload convenience public init(zoneName: Swift.String = CKRecordZone.ID.defaultZoneName, ownerName: Swift.String? = CKOwnerDefaultName) {
         self.init(__zoneName: zoneName, ownerName: ownerName ?? CKOwnerDefaultName)
     }
-  @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+  @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
   public static let `default`: CloudKit.CKRecordZone.ID
-  @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+  @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
   public static let defaultZoneName: Swift.String
 }
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKRecordZone.ID : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKRecordZone.ID.defaultZoneName")
 @nonobjc public let CKRecordZoneDefaultName: Swift.String
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKShare {
   @available(swift 4.2)
   public enum SystemFieldKey {
-    @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let title: CloudKit.CKRecord.FieldKey
-    @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let thumbnailImageData: CloudKit.CKRecord.FieldKey
-    @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let shareType: CloudKit.CKRecord.FieldKey
   }
+}
+@available(*, unavailable)
+extension CloudKit.CKShare.SystemFieldKey : Swift.Sendable {
 }
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 @nonobjc extension CloudKit.CKShare : @unchecked Swift.Sendable {
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKRecord.SystemType.share")
 @nonobjc public let CKRecordTypeShare: Swift.String
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKShare.SystemFieldKey.title")
 @nonobjc public let CKShareTitleKey: Swift.String
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKShare.SystemFieldKey.thumbnailImageData")
 @nonobjc public let CKShareThumbnailImageDataKey: Swift.String
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKShare.SystemFieldKey.shareType")
 @nonobjc public let CKShareTypeKey: Swift.String
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 public protocol CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 public typealias CKRecordValue = CloudKit.__CKRecordObjCValue
-@available(macOS 10.11, macCatalyst 9.0, iOS 9.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.11, macCatalyst 13.1, iOS 9.0, tvOS 9.0, watchOS 3.0, *)
 extension CloudKit.CKRecordKeyValueSetting {
   @nonobjc public subscript<T>(key: CloudKit.CKRecord.FieldKey) -> T? where T : CloudKit.CKRecordValueProtocol {
     get
@@ -131,79 +135,79 @@ extension CloudKit.CKRecordKeyValueSetting {
     set
   }
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.String : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Foundation.Date : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Foundation.Data : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Bool : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Double : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Int : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.UInt : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Int8 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.UInt8 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Int16 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.UInt16 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Int32 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.UInt32 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Int64 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.UInt64 : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Float : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension Swift.Array : CloudKit.CKRecordValueProtocol where Element : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension Foundation.NSString : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension Foundation.NSDate : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension Foundation.NSData : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension Foundation.NSNumber : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension Foundation.NSArray : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecord.Reference : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKAsset : CloudKit.CKRecordValueProtocol {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CoreLocation.CLLocation : CloudKit.CKRecordValueProtocol {
 }
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
@@ -223,7 +227,7 @@ extension CloudKit.CKSyncEngine.Configuration : Swift.CustomStringConvertible {
     get
   }
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchRecordZonesOperation {
   @available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var perRecordZoneResultBlock: ((_ recordZoneID: CloudKit.CKRecordZone.ID, _ recordZoneResult: Swift.Result<CloudKit.CKRecordZone, any Swift.Error>) -> Swift.Void)? {
@@ -236,10 +240,10 @@ extension CloudKit.CKSyncEngine.Configuration : Swift.CustomStringConvertible {
     set
   }
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchRecordZoneChangesOperation {
   @available(swift 4.2)
-  @available(macOS 10.14, macCatalyst 12.0, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+  @available(macOS 10.14, macCatalyst 13.1, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
   convenience public init(recordZoneIDs: [CloudKit.CKRecordZone.ID]? = nil, configurationsByRecordZoneID: [CloudKit.CKRecordZone.ID : CloudKit.CKFetchRecordZoneChangesOperation.ZoneConfiguration]? = nil)
   @available(swift 4.2)
   public var recordWithIDWasDeletedBlock: ((_ recordID: CloudKit.CKRecord.ID, _ recordType: CloudKit.CKRecord.RecordType) -> Swift.Void)? {
@@ -262,7 +266,7 @@ extension CloudKit.CKSyncEngine.Configuration : Swift.CustomStringConvertible {
     set
   }
 }
-@available(macOS 10.14, macCatalyst 12.0, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+@available(macOS 10.14, macCatalyst 13.1, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
 @nonobjc extension CloudKit.CKFetchRecordZoneChangesOperation.ZoneConfiguration {
   @available(swift 4.2)
   public var desiredKeys: [CloudKit.CKRecord.FieldKey]? {
@@ -275,7 +279,7 @@ extension CloudKit.CKSyncEngine.Configuration : Swift.CustomStringConvertible {
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKFetchRecordZoneChangesOperation.ZoneConfiguration : @unchecked Swift.Sendable {
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 6.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 6.0, *)
 @nonobjc extension CloudKit.CKDatabaseSubscription {
   @available(swift 4.2)
   convenience public init(subscriptionID: CloudKit.CKSubscription.ID)
@@ -462,7 +466,7 @@ extension CloudKit.CKSyncEngine.Event.DidSendChanges : Swift.CustomStringConvert
     get
   }
 }
-@available(macOS 10.11, macCatalyst 9.2, iOS 9.2, tvOS 9.1, watchOS 3.0, *)
+@available(macOS 10.11, macCatalyst 13.1, iOS 9.2, tvOS 9.1, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchWebAuthTokenOperation {
   @available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var fetchWebAuthTokenResultBlock: ((_ operationResult: Swift.Result<Swift.String, any Swift.Error>) -> Swift.Void)? {
@@ -470,7 +474,7 @@ extension CloudKit.CKSyncEngine.Event.DidSendChanges : Swift.CustomStringConvert
     set
   }
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 6.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 6.0, *)
 @nonobjc extension CloudKit.CKRecordZoneSubscription {
   @available(swift 4.2)
   convenience public init(zoneID: CloudKit.CKRecordZone.ID, subscriptionID: CloudKit.CKSubscription.ID)
@@ -483,7 +487,7 @@ extension CloudKit.CKSyncEngine.Event.DidSendChanges : Swift.CustomStringConvert
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKRecordZoneSubscription : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
 @nonobjc extension CloudKit.CKSubscription.NotificationInfo {
   @available(swift 4.2)
   @available(tvOS, unavailable)
@@ -492,14 +496,14 @@ extension CloudKit.CKSyncEngine.Event.DidSendChanges : Swift.CustomStringConvert
     set
   }
   @available(swift 4.2)
-  @available(macOS 10.13, macCatalyst 11.0, iOS 11.0, *)
+  @available(macOS 10.13, macCatalyst 13.1, iOS 11.0, *)
   @available(tvOS, unavailable)
   public var titleLocalizationArgs: [CloudKit.CKRecord.FieldKey]? {
     get
     set
   }
   @available(swift 4.2)
-  @available(macOS 10.13, macCatalyst 11.0, iOS 11.0, *)
+  @available(macOS 10.13, macCatalyst 13.1, iOS 11.0, *)
   @available(tvOS, unavailable)
   public var subtitleLocalizationArgs: [CloudKit.CKRecord.FieldKey]? {
     get
@@ -515,7 +519,7 @@ extension CloudKit.CKSyncEngine.Event.DidSendChanges : Swift.CustomStringConvert
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKSubscription.NotificationInfo : @unchecked Swift.Sendable {
 }
-@available(macOS 10.12, macCatalyst 9.3, iOS 9.3, tvOS 9.2, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 9.3, tvOS 9.2, watchOS 3.0, *)
 extension CloudKit.CKContainer {
   @available(swift 4.2)
   @preconcurrency public func fetchAllLongLivedOperationIDs(completionHandler: @escaping @Sendable ([CloudKit.CKOperation.ID]?, (any Swift.Error)?) -> Swift.Void)
@@ -597,13 +601,13 @@ extension CloudKit.CKContainer {
   @available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func accept(_ metadatas: [CloudKit.CKShare.Metadata]) async throws -> [CloudKit.CKShare.Metadata : Swift.Result<CloudKit.CKShare, any Swift.Error>]
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKContainer {
   @available(swift 4.2)
   public enum Application {
     @available(swift 4.2)
     @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissions")
-    @available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissions")
+    @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKContainer.ApplicationPermissions")
     @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissions")
     @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissions")
     @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissions")
@@ -611,7 +615,7 @@ extension CloudKit.CKContainer {
     public typealias Permissions = CloudKit.CKContainer.ApplicationPermissions
     @available(swift 4.2)
     @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionStatus")
-    @available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
+    @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKContainer.ApplicationPermissionStatus")
     @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
     @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
     @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
@@ -619,7 +623,7 @@ extension CloudKit.CKContainer {
     public typealias PermissionStatus = CloudKit.CKContainer.ApplicationPermissionStatus
     @available(swift 4.2)
     @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionBlock")
-    @available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
+    @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKContainer.ApplicationPermissionBlock")
     @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
     @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
     @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
@@ -627,9 +631,12 @@ extension CloudKit.CKContainer {
     public typealias PermissionBlock = CloudKit.CKContainer.ApplicationPermissionBlock
   }
 }
+@available(*, unavailable)
+extension CloudKit.CKContainer.Application : Swift.Sendable {
+}
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissions")
-@available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissions")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKContainer.ApplicationPermissions")
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissions")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissions")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissions")
@@ -637,7 +644,7 @@ extension CloudKit.CKContainer {
 public typealias CKContainer_Application_Permissions = CloudKit.CKContainer.ApplicationPermissions
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionStatus")
-@available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKContainer.ApplicationPermissionStatus")
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
@@ -645,17 +652,17 @@ public typealias CKContainer_Application_Permissions = CloudKit.CKContainer.Appl
 public typealias CKContainer_Application_PermissionStatus = CloudKit.CKContainer.ApplicationPermissionStatus
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionBlock")
-@available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKContainer.ApplicationPermissionBlock")
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
 @available(visionOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionBlock")
 public typealias CKContainer_Application_PermissionBlock = CloudKit.CKContainer.ApplicationPermissionBlock
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecord.Reference {
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKRecord.ReferenceAction")
-  @available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKRecord.ReferenceAction")
+  @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKRecord.ReferenceAction")
   @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKRecord.ReferenceAction")
   @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKRecord.ReferenceAction")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKRecord.ReferenceAction")
@@ -664,13 +671,13 @@ public typealias CKContainer_Application_PermissionBlock = CloudKit.CKContainer.
 }
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKRecord.ReferenceAction")
-@available(macCatalyst, deprecated, introduced: 8.0, message: "renamed to CKRecord.ReferenceAction")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKRecord.ReferenceAction")
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKRecord.ReferenceAction")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKRecord.ReferenceAction")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKRecord.ReferenceAction")
 @available(visionOS, deprecated, message: "renamed to CKRecord.ReferenceAction")
 public typealias CKRecord_Reference_Action = CloudKit.CKRecord.ReferenceAction
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchRecordsOperation {
   @available(swift 4.2)
   public var desiredKeys: [CloudKit.CKRecord.FieldKey]? {
@@ -688,7 +695,7 @@ public typealias CKRecord_Reference_Action = CloudKit.CKRecord.ReferenceAction
     set
   }
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchDatabaseChangesOperation {
   @available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var fetchDatabaseChangesResultBlock: ((_ operationResult: Swift.Result<(serverChangeToken: CloudKit.CKServerChangeToken, moreComing: Swift.Bool), any Swift.Error>) -> Swift.Void)? {
@@ -704,7 +711,7 @@ public struct CKShareTransferRepresentation<Item> : CoreTransferable.TransferRep
   public var body: some CoreTransferable.TransferRepresentation {
     get
   }
-  public struct ExportedShare : CoreTransferable.Transferable {
+  public struct ExportedShare : CoreTransferable.Transferable, Swift.Sendable {
     public static func prepareShare(container: CloudKit.CKContainer, allowedSharingOptions: CloudKit.CKAllowedSharingOptions = CKAllowedSharingOptions.standard, preparationHandler: @escaping @Sendable () async throws -> CloudKit.CKShare) -> CloudKit.CKShareTransferRepresentation<Item>.ExportedShare
     public static func existing(_ share: CloudKit.CKShare, container: CloudKit.CKContainer, allowedSharingOptions: CloudKit.CKAllowedSharingOptions = CKAllowedSharingOptions.standard) -> CloudKit.CKShareTransferRepresentation<Item>.ExportedShare
     public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
@@ -726,7 +733,7 @@ extension CloudKit.CKSyncEngine {
     public var recordsToSave: [CloudKit.CKRecord]
     public var recordIDsToDelete: [CloudKit.CKRecord.ID]
     public var atomicByZone: Swift.Bool
-    public init?(pendingChanges: [CloudKit.CKSyncEngine.PendingRecordZoneChange], recordProvider: @Sendable (CloudKit.CKRecord.ID) async -> (CloudKit.CKRecord?)) async
+    public init?(pendingChanges: [CloudKit.CKSyncEngine.PendingRecordZoneChange], recordProvider: @Sendable (CloudKit.CKRecord.ID) async -> CloudKit.CKRecord?) async
     public init(recordsToSave: [CloudKit.CKRecord] = [], recordIDsToDelete: [CloudKit.CKRecord.ID] = [], atomicByZone: Swift.Bool = false)
   }
 }
@@ -739,7 +746,7 @@ extension CloudKit.CKSyncEngine.RecordZoneChangeBatch : Swift.CustomStringConver
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKOperation.Configuration : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKDatabase {
   @available(macOS, introduced: 12.0, deprecated: 12.0, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
   @available(macCatalyst, introduced: 15.0, deprecated: 15.0, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
@@ -749,7 +756,7 @@ extension CloudKit.CKSyncEngine.RecordZoneChangeBatch : Swift.CustomStringConver
   @available(visionOS, deprecated, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
   public func records(matching query: CloudKit.CKQuery, inZoneWith zoneID: CloudKit.CKRecordZone.ID?) async throws -> [CloudKit.CKRecord]
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
 extension CloudKit.CKDatabase {
   @available(swift 4.2)
   @preconcurrency public func fetch(withSubscriptionID subscriptionID: CloudKit.CKSubscription.ID, completionHandler: @escaping @Sendable (CloudKit.CKSubscription?, (any Swift.Error)?) -> Swift.Void)
@@ -821,8 +828,8 @@ extension CloudKit.CKDatabase {
         case deleted
         case purged
         case encryptedDataReset
-        public func hash(into hasher: inout Swift.Hasher)
         public static func == (a: CloudKit.CKDatabase.DatabaseChange.Deletion.Reason, b: CloudKit.CKDatabase.DatabaseChange.Deletion.Reason) -> Swift.Bool
+        public func hash(into hasher: inout Swift.Hasher)
         public var hashValue: Swift.Int {
           get
         }
@@ -863,6 +870,12 @@ extension CloudKit.CKDatabase {
   @available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func recordZoneChanges(inZoneWith zoneID: CloudKit.CKRecordZone.ID, since changeToken: CloudKit.CKServerChangeToken?, desiredKeys: [CloudKit.CKRecord.FieldKey]? = nil, resultsLimit: Swift.Int? = nil) async throws -> (modificationResultsByID: [CloudKit.CKRecord.ID : Swift.Result<CloudKit.CKDatabase.RecordZoneChange.Modification, any Swift.Error>], deletions: [CloudKit.CKDatabase.RecordZoneChange.Deletion], changeToken: CloudKit.CKServerChangeToken, moreComing: Swift.Bool)
 }
+@available(*, unavailable)
+extension CloudKit.CKDatabase.DatabaseChange : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CloudKit.CKDatabase.RecordZoneChange : Swift.Sendable {
+}
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension CloudKit.CKDatabase.DatabaseChange.Modification : Swift.Equatable, Swift.Hashable {
   public static func == (a: CloudKit.CKDatabase.DatabaseChange.Modification, b: CloudKit.CKDatabase.DatabaseChange.Modification) -> Swift.Bool
@@ -895,14 +908,11 @@ extension CloudKit.CKDatabase.RecordZoneChange.Deletion : Swift.Equatable, Swift
     get
   }
 }
-@available(*, unavailable)
-extension CloudKit.CKDatabase.RecordZoneChange.Modification : Swift.Sendable {
-}
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 6.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 6.0, *)
 @nonobjc extension CloudKit.CKQuerySubscription {
   @available(swift 4.2)
   @available(macOS, introduced: 10.12, deprecated: 10.12, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
-  @available(macCatalyst, introduced: 10.0, deprecated: 10.0, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
+  @available(macCatalyst, introduced: 13.1, deprecated: 13.1, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
   @available(iOS, introduced: 10.0, deprecated: 10.0, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
   @available(tvOS, introduced: 10.0, deprecated: 10.0, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
   @available(watchOS, introduced: 6.0, deprecated: 6.0, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
@@ -919,7 +929,7 @@ extension CloudKit.CKDatabase.RecordZoneChange.Modification : Swift.Sendable {
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 @nonobjc extension CloudKit.CKQuerySubscription : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
 @nonobjc extension CloudKit.CKModifySubscriptionsOperation {
   @available(swift 4.2)
   convenience public init(subscriptionsToSave: [CloudKit.CKSubscription]? = nil, subscriptionIDsToDelete: [CloudKit.CKSubscription.ID]? = nil)
@@ -939,7 +949,7 @@ extension CloudKit.CKDatabase.RecordZoneChange.Modification : Swift.Sendable {
     set
   }
   @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use modifySubscriptionsResultBlock instead")
-  @available(macCatalyst, introduced: 8.0, deprecated: 15.0, message: "Use modifySubscriptionsResultBlock instead")
+  @available(macCatalyst, introduced: 13.1, deprecated: 15.0, message: "Use modifySubscriptionsResultBlock instead")
   @available(iOS, introduced: 8.0, deprecated: 15.0, message: "Use modifySubscriptionsResultBlock instead")
   @available(tvOS, introduced: 9.0, deprecated: 15.0, message: "Use modifySubscriptionsResultBlock instead")
   @available(watchOS, introduced: 6.0, deprecated: 8.0, message: "Use modifySubscriptionsResultBlock instead")
@@ -954,7 +964,7 @@ extension CloudKit.CKDatabase.RecordZoneChange.Modification : Swift.Sendable {
     set
   }
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKQuery {
   @available(swift 4.2)
   convenience public init(recordType: CloudKit.CKRecord.RecordType, predicate: Foundation.NSPredicate)
@@ -972,7 +982,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
 @nonobjc extension CloudKit.CKAllowedSharingOptions : @unchecked Swift.Sendable {
 }
 @available(macOS, introduced: 10.12, deprecated: 14.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-@available(macCatalyst, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+@available(macCatalyst, introduced: 13.1, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(iOS, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(watchOS, introduced: 3.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
@@ -988,7 +998,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
     set
   }
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKQueryOperation {
   @available(swift 4.2)
   public var desiredKeys: [CloudKit.CKRecord.FieldKey]? {
@@ -1009,7 +1019,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKQueryOperation.Cursor : @unchecked Swift.Sendable {
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchShareMetadataOperation {
   @available(swift 4.2)
   public var rootRecordDesiredKeys: [CloudKit.CKRecord.FieldKey]? {
@@ -1027,7 +1037,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
     set
   }
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
 @nonobjc extension CloudKit.CKFetchSubscriptionsOperation {
   @available(swift 4.2)
   convenience public init(subscriptionIDs: [CloudKit.CKSubscription.ID])
@@ -1043,7 +1053,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
   }
   @available(swift 4.2)
   @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use fetchSubscriptionsResultBlock instead")
-  @available(macCatalyst, introduced: 8.0, deprecated: 15.0, message: "Use fetchSubscriptionsResultBlock instead")
+  @available(macCatalyst, introduced: 13.1, deprecated: 15.0, message: "Use fetchSubscriptionsResultBlock instead")
   @available(iOS, introduced: 8.0, deprecated: 15.0, message: "Use fetchSubscriptionsResultBlock instead")
   @available(tvOS, introduced: 9.0, deprecated: 15.0, message: "Use fetchSubscriptionsResultBlock instead")
   @available(watchOS, introduced: 6.0, deprecated: 8.0, message: "Use fetchSubscriptionsResultBlock instead")
@@ -1058,7 +1068,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
     set
   }
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchShareParticipantsOperation {
   @available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var perShareParticipantResultBlock: ((_ lookupInfo: CloudKit.CKUserIdentity.LookupInfo, _ shareParticipantResult: Swift.Result<CloudKit.CKShare.Participant, any Swift.Error>) -> Swift.Void)? {
@@ -1114,8 +1124,8 @@ extension CloudKit.CKSyncEngine.PendingRecordZoneChange : Swift.Hashable, Swift.
   public var description: Swift.String {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CloudKit.CKSyncEngine.PendingRecordZoneChange, b: CloudKit.CKSyncEngine.PendingRecordZoneChange) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1155,11 +1165,11 @@ extension CloudKit.CKSyncEngine.PendingDatabaseChange : Swift.Hashable, Swift.Cu
 @available(tvOS, unavailable)
 @nonobjc extension CloudKit.CKSystemSharingUIObserver : @unchecked Swift.Sendable {
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKShare.Participant {
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantAcceptanceStatus")
-  @available(macCatalyst, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
+  @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantAcceptanceStatus")
   @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
   @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
@@ -1167,7 +1177,7 @@ extension CloudKit.CKSyncEngine.PendingDatabaseChange : Swift.Hashable, Swift.Cu
   public typealias AcceptanceStatus = CloudKit.CKShare.ParticipantAcceptanceStatus
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantPermission")
-  @available(macCatalyst, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
+  @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantPermission")
   @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
   @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantPermission")
@@ -1175,7 +1185,7 @@ extension CloudKit.CKSyncEngine.PendingDatabaseChange : Swift.Hashable, Swift.Cu
   public typealias Permission = CloudKit.CKShare.ParticipantPermission
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.14, message: "renamed to CKShare.ParticipantRole")
-  @available(macCatalyst, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
+  @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantRole")
   @available(iOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
   @available(tvOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
   @available(watchOS, deprecated, introduced: 5.0, message: "renamed to CKShare.ParticipantRole")
@@ -1183,7 +1193,7 @@ extension CloudKit.CKSyncEngine.PendingDatabaseChange : Swift.Hashable, Swift.Cu
   public typealias Role = CloudKit.CKShare.ParticipantRole
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantType")
-  @available(macCatalyst, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
+  @available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantType")
   @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
   @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantType")
@@ -1209,7 +1219,7 @@ extension CloudKit.CKShare.Participant {
 }
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantAcceptanceStatus")
-@available(macCatalyst, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantAcceptanceStatus")
 @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
 @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
@@ -1217,7 +1227,7 @@ extension CloudKit.CKShare.Participant {
 public typealias CKShare_Participant_AcceptanceStatus = CloudKit.CKShare.ParticipantAcceptanceStatus
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantPermission")
-@available(macCatalyst, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantPermission")
 @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
 @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantPermission")
@@ -1225,7 +1235,7 @@ public typealias CKShare_Participant_AcceptanceStatus = CloudKit.CKShare.Partici
 public typealias CKShare_Participant_Permission = CloudKit.CKShare.ParticipantPermission
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.14, message: "renamed to CKShare.ParticipantRole")
-@available(macCatalyst, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantRole")
 @available(iOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
 @available(tvOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
 @available(watchOS, deprecated, introduced: 5.0, message: "renamed to CKShare.ParticipantRole")
@@ -1233,7 +1243,7 @@ public typealias CKShare_Participant_Permission = CloudKit.CKShare.ParticipantPe
 public typealias CKShare_Participant_Role = CloudKit.CKShare.ParticipantRole
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantType")
-@available(macCatalyst, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
+@available(macCatalyst, deprecated, introduced: 13.1, message: "renamed to CKShare.ParticipantType")
 @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
 @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantType")
@@ -1347,7 +1357,7 @@ extension CloudKit.CKSyncEngine.FetchChangesOptions.Scope : Swift.CustomStringCo
     get
   }
 }
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKAcceptSharesOperation {
   @available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var perShareResultBlock: ((_ metadata: CloudKit.CKShare.Metadata, _ metadataResult: Swift.Result<CloudKit.CKShare, any Swift.Error>) -> Swift.Void)? {
@@ -1360,7 +1370,7 @@ extension CloudKit.CKSyncEngine.FetchChangesOptions.Scope : Swift.CustomStringCo
     set
   }
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecord.ID {
   @available(swift 4.2)
   convenience public init(recordName: Swift.String = UUID().uuidString, zoneID: CloudKit.CKRecordZone.ID = CKRecordZone.ID.default)
@@ -1368,7 +1378,7 @@ extension CloudKit.CKSyncEngine.FetchChangesOptions.Scope : Swift.CustomStringCo
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKOperationGroup : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKModifyRecordsOperation {
   @available(swift 4.2)
   convenience public init(recordsToSave: [CloudKit.CKRecord]? = nil, recordIDsToDelete: [CloudKit.CKRecord.ID]? = nil)
@@ -1391,7 +1401,7 @@ extension CloudKit.CKSyncEngine.FetchChangesOptions.Scope : Swift.CustomStringCo
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 @nonobjc extension CloudKit.CKShare.Metadata : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKModifyRecordZonesOperation {
   @available(swift 4.2)
   convenience public init(recordZonesToSave: [CloudKit.CKRecordZone]? = nil, recordZoneIDsToDelete: [CloudKit.CKRecordZone.ID]? = nil)
@@ -1414,12 +1424,12 @@ extension CloudKit.CKSyncEngine.FetchChangesOptions.Scope : Swift.CustomStringCo
 @available(macOS 13.3, macCatalyst 16.4, iOS 16.4, tvOS 16.4, watchOS 9.4, *)
 @nonobjc extension CloudKit.CKUserIdentity : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension CloudKit.CKSubscription {
   @available(swift 4.2)
   public typealias ID = Swift.String
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
 @nonobjc extension CloudKit.CKSubscription {
   @available(swift 4.2)
   public var subscriptionID: CloudKit.CKSubscription.ID {
@@ -1442,7 +1452,7 @@ extension CloudKit.CKSyncEngineDelegate {
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 @nonobjc extension CloudKit.CKRecordZone : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 extension CloudKit.CKError {
   public var partialErrorsByItemID: [Swift.AnyHashable : any Swift.Error]? {
     get
@@ -1460,66 +1470,69 @@ extension CloudKit.CKError {
     get
   }
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 public struct CKRecordKeyValueIterator : Swift.IteratorProtocol {
   public mutating func next() -> (CloudKit.CKRecord.FieldKey, any CloudKit.CKRecordValueProtocol)?
-  @available(iOS 8.0, tvOS 9.0, watchOS 3.0, macOS 10.10, macCatalyst 8.0, *)
+  @available(iOS 8.0, tvOS 9.0, watchOS 3.0, macOS 10.10, macCatalyst 13.1, *)
   public typealias Element = (CloudKit.CKRecord.FieldKey, any CloudKit.CKRecordValueProtocol)
 }
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 @nonobjc extension CloudKit.CKRecord : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(*, unavailable)
+extension CloudKit.CKRecordKeyValueIterator : Swift.Sendable {
+}
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecord : Swift.Sequence {
   public func makeIterator() -> CloudKit.CKRecordKeyValueIterator
-  @available(iOS 8.0, tvOS 9.0, watchOS 3.0, macOS 10.10, macCatalyst 8.0, *)
+  @available(iOS 8.0, tvOS 9.0, watchOS 3.0, macOS 10.10, macCatalyst 13.1, *)
   public typealias Element = (CloudKit.CKRecord.FieldKey, any CloudKit.CKRecordValueProtocol)
-  @available(iOS 8.0, tvOS 9.0, watchOS 3.0, macOS 10.10, macCatalyst 8.0, *)
+  @available(iOS 8.0, tvOS 9.0, watchOS 3.0, macOS 10.10, macCatalyst 13.1, *)
   public typealias Iterator = CloudKit.CKRecordKeyValueIterator
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecord {
   public typealias RecordType = Swift.String
   public typealias FieldKey = Swift.String
   @available(swift 4.2)
-  @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+  @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
   public enum SystemType {
-    @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+    @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
     public static let userRecord: CloudKit.CKRecord.RecordType
-    @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let share: CloudKit.CKRecord.RecordType
   }
   @available(swift 4.2)
-  @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+  @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
   public enum SystemFieldKey {
-    @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+    @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
     @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0)
     public static var recordID: CloudKit.CKRecord.FieldKey {
       get { __CKRecordRecordIDKey as CKRecord.FieldKey }
     }
-    @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+    @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
     @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0)
     public static var creatorUserRecordID: CloudKit.CKRecord.FieldKey {
       get { __CKRecordCreatorUserRecordIDKey as CKRecord.FieldKey }
     }
-    @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+    @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
     @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0)
     public static var creationDate: CloudKit.CKRecord.FieldKey {
       get { __CKRecordCreationDateKey as CKRecord.FieldKey }
     }
-    @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+    @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
     @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0)
     public static var lastModifiedUserRecordID: CloudKit.CKRecord.FieldKey {
       get { __CKRecordLastModifiedUserRecordIDKey as CKRecord.FieldKey }
     }
-    @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+    @available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
     @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0)
     public static var modificationDate: CloudKit.CKRecord.FieldKey {
       get { __CKRecordModificationDateKey as CKRecord.FieldKey }
     }
-    @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let parent: CloudKit.CKRecord.FieldKey
-    @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let share: CloudKit.CKRecord.FieldKey
   }
   @available(swift, introduced: 4.2, deprecated: 4.2, message: "Use init(recordType:recordID:) + CKRecord.ID(zoneID:) instead")
@@ -1544,16 +1557,22 @@ public struct CKRecordKeyValueIterator : Swift.IteratorProtocol {
   @available(swift 4.2)
   public func changedKeys() -> [CloudKit.CKRecord.FieldKey]
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(*, unavailable)
+extension CloudKit.CKRecord.SystemType : Swift.Sendable {
+}
+@available(*, unavailable)
+extension CloudKit.CKRecord.SystemFieldKey : Swift.Sendable {
+}
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKRecord.SystemType.userRecord")
 @nonobjc public let CKRecordTypeUserRecord: Swift.String
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKRecord.SystemFieldKey.parent")
 @nonobjc public let CKRecordParentKey: Swift.String
-@available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, macCatalyst 13.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, obsoleted: 4.2, renamed: "CKRecord.SystemFieldKey.share")
 @nonobjc public let CKRecordShareKey: Swift.String
-@available(macOS 10.11, macCatalyst 9.0, iOS 9.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.11, macCatalyst 13.1, iOS 9.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKNotification {
   @available(swift 4.2)
   public var subscriptionID: CloudKit.CKSubscription.ID? {
@@ -1561,14 +1580,14 @@ public struct CKRecordKeyValueIterator : Swift.IteratorProtocol {
   }
 }
 @available(swift 4.2)
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKNotification.ID : @unchecked Swift.Sendable {
 }
-@available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
+@available(macOS 10.10, macCatalyst 13.1, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKOperation {
   public typealias ID = Swift.String
   @available(swift 4.2)
-  @available(macOS 10.12, macCatalyst 9.3, iOS 9.3, tvOS 9.2, watchOS 3.0, *)
+  @available(macOS 10.12, macCatalyst 13.1, iOS 9.3, tvOS 9.2, watchOS 3.0, *)
   public var operationID: CloudKit.CKOperation.ID {
     get
   }

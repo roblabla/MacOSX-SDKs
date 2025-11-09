@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipKitServices.framework/Versions/A/TipKitServices'
-current-version: 92.2.6
+current-version: 92.4.19
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -18,6 +18,7 @@ exports:
                        '_$s14TipKitServices0A10EventProxyCScAAAMc', '_$s14TipKitServices0A10EventProxyCfD', 
                        '_$s14TipKitServices0A10EventProxyCfd', '_$s14TipKitServices0A13ConfigurationO24bundleIdentifierOverrideSSSgvMZ', 
                        '_$s14TipKitServices0A13ConfigurationO24bundleIdentifierOverrideSSSgvgZ', 
+                       '_$s14TipKitServices0A13ConfigurationO24bundleIdentifierOverrideSSSgvpZMV', 
                        '_$s14TipKitServices0A13ConfigurationO24bundleIdentifierOverrideSSSgvsZ', 
                        '_$s14TipKitServices0A13ConfigurationOMa', '_$s14TipKitServices0A13ConfigurationOMn', 
                        '_$s14TipKitServices0A13ConfigurationON', '_$s14TipKitServices0A15EventProxySwiftC6donate15eventIdentifier3forySS_SStYaKFZ', 
@@ -33,8 +34,11 @@ exports:
                        '_$s14TipKitServices0A5ProxyC10invalidate13tipIdentifier3for4withySS_SSAC18InvalidationReasonVtYaKFZTu', 
                        '_$s14TipKitServices0A5ProxyC15unownedExecutorScevg', '_$s14TipKitServices0A5ProxyC15unownedExecutorScevpMV', 
                        '_$s14TipKitServices0A5ProxyC18InvalidationReasonV010userClosedA0AEvgZ', 
+                       '_$s14TipKitServices0A5ProxyC18InvalidationReasonV010userClosedA0AEvpZMV', 
                        '_$s14TipKitServices0A5ProxyC18InvalidationReasonV19userPerformedActionAEvgZ', 
+                       '_$s14TipKitServices0A5ProxyC18InvalidationReasonV19userPerformedActionAEvpZMV', 
                        '_$s14TipKitServices0A5ProxyC18InvalidationReasonV23maxDisplayCountExceededAEvgZ', 
+                       '_$s14TipKitServices0A5ProxyC18InvalidationReasonV23maxDisplayCountExceededAEvpZMV', 
                        '_$s14TipKitServices0A5ProxyC18InvalidationReasonV2eeoiySbAE_AEtFZ', 
                        '_$s14TipKitServices0A5ProxyC18InvalidationReasonVMa', '_$s14TipKitServices0A5ProxyC18InvalidationReasonVMn', 
                        '_$s14TipKitServices0A5ProxyC18InvalidationReasonVN', '_$s14TipKitServices0A5ProxyC18InvalidationReasonVSQAAMc', 

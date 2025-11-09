@@ -45,7 +45,8 @@ exports:
                        _GeoAnalyticsConfig_RealtimeTrafficProbeWindowXmitCountLimit, 
                        _GeoAnalyticsConfig_StateTimingEventEnabled, _GeoAnalyticsConfig_TileCacheMetricsEnabled, 
                        _GeoAnalyticsConfig_TimeToLeaveEventEnabled, _GeoAnalyticsConfig_TrafficShiftingINEnabled, 
-                       _GeoAnalyticsConfig_UseriCloudAccountAvailable, _GeoAnalyticsConfig__debug_AlwaysUseExpensiveUpload, 
+                       _GeoAnalyticsConfig_UseriCloudAccountAvailable, _GeoAnalyticsConfig_WebPlaceCardStates, 
+                       _GeoAnalyticsConfig_WebPlaceCardUploadPolicy, _GeoAnalyticsConfig__debug_AlwaysUseExpensiveUpload, 
                        _GeoAnalyticsConfig__debug_KeepUploadFiles, _GeoAnalyticsConfig__debug_UploadCountersEnabled, 
                        _GeoAnalyticsEventConfig_DetailedExperimentsState_disabled, 
                        _GeoAnalyticsEventConfig_ExperimentsState_disabled, _GeoAnalyticsEventConfig_GeoAPAnalyticsSessionType_15MO_disabled, 
@@ -167,6 +168,7 @@ exports:
                        _GeoAnalyticsUploadPolicyConfig_MED_COST_90D_config, _GeoAnalyticsUploadPolicyConfig_POI_BUSYNESS_POLICY_config, 
                        _GeoAnalyticsUploadPolicyConfig_UP_POLICY_00_config, _GeoAnalyticsUploadPolicyConfig_UP_POLICY_01_config, 
                        _GeoAnalyticsUploadPolicyConfig_UP_POLICY_02_config, _GeoAnalyticsUploadPolicyConfig_UP_POLICY_03_config, 
+                       _GeoAnalyticsUserActionConfig_MapViewEngagement_dropRate, 
                        _GeoAnalyticsUserActionConfig_UGCSessionlessUserActionTargetPair_dropRate, 
                        _GeoAnalyticsUserActionConfig_UGCShortUserActionTargetPair_dropRate, 
                        _GeoAnalyticsUserActionConfig_accountSessionlessUserActionTargetPair_dropRate, 
@@ -194,6 +196,6 @@ exports:
     objc-classes:    [ GEOAPFuzzers, GEOAPNetworkSelectionHarvestReporter, GEOAPPortal, 
                        GEOAPServiceManager, GEOAPSharedStateData, GEOAPStateFactory, 
                        GEOAPURLSessionConfig, GEOAPUploadPolicies, GEOAPUploadPolicy, 
-                       GEOAPUploadStage, GEOAPUtils, GEOAPWiFiConnectionQualityReporter, 
+                       GEOAPUploadStage, GEOAPUtils, GEOAPWebPortal, GEOAPWiFiConnectionQualityReporter, 
                        GEOMetroRegionAssetProvider, GEOMetroRegionLookup ]
 ...

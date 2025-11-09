@@ -69,6 +69,7 @@ exports:
                        '_$s17DeviceDiscoveryUI36_DDNodeAskRequestDecorationViewModelVN', 
                        '_$s17DeviceDiscoveryUI36_DDNodeAskRequestDecorationViewModelVSQAAMc', 
                        '_$sSo25SFAirDropDiscoverableModeV17DeviceDiscoveryUIE8allCasesSayABGvgZ', 
+                       '_$sSo25SFAirDropDiscoverableModeV17DeviceDiscoveryUIE8allCasesSayABGvpZMV', 
                        '_$sSo25SFAirDropDiscoverableModeVs12CaseIterable17DeviceDiscoveryUIMc' ]
     objc-classes:    [ DDDevicePickerDebugErrorAction, DDDevicePickerDismissSceneAction ]
 ...

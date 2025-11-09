@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiskImages2.framework/Versions/A/DiskImages2'
-current-version: 379.60.1
+current-version: 385.101.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -26,13 +26,13 @@ exports:
                        __ZTINSt3__126__end_marked_subexpressionIcEE, __ZTINSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTINSt3__16__loopIcEE, __ZTINSt3__16__nodeIcEE, __ZTSNSt3__110__back_refIcEE, 
                        __ZTSNSt3__110__function6__baseIFvPyEEE, __ZTSNSt3__110shared_ptrINS_13__empty_stateIcEEE27__shared_ptr_default_deleteIS2_S2_EE, 
-                       __ZTSNSt3__111__alternateIcEE, __ZTSNSt3__111__end_stateIcEE, 
-                       __ZTSNSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, __ZTSNSt3__111__match_anyIcEE, 
-                       __ZTSNSt3__112__match_charIcEE, __ZTSNSt3__113__empty_stateIcEE, 
-                       __ZTSNSt3__115__has_one_stateIcEE, __ZTSNSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, 
-                       __ZTSNSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEEE, __ZTSNSt3__116__owns_one_stateIcEE, 
-                       __ZTSNSt3__117__owns_two_statesIcEE, __ZTSNSt3__117__repeat_one_loopIcEE, 
-                       __ZTSNSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE, 
+                       __ZTSNSt3__110unique_ptrIA_hNS_14default_deleteIS1_EEEE, __ZTSNSt3__111__alternateIcEE, 
+                       __ZTSNSt3__111__end_stateIcEE, __ZTSNSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, 
+                       __ZTSNSt3__111__match_anyIcEE, __ZTSNSt3__112__match_charIcEE, 
+                       __ZTSNSt3__113__empty_stateIcEE, __ZTSNSt3__115__has_one_stateIcEE, 
+                       __ZTSNSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, __ZTSNSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEEE, 
+                       __ZTSNSt3__116__owns_one_stateIcEE, __ZTSNSt3__117__owns_two_statesIcEE, 
+                       __ZTSNSt3__117__repeat_one_loopIcEE, __ZTSNSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__118__match_char_icaseIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__120__l_anchor_multilineIcEE, __ZTSNSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE, 

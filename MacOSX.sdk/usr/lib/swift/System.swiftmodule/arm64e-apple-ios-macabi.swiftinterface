@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 61 -module-name System
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 64 -module-name System
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Darwin
 import Darwin.Mach
 import Swift
@@ -220,86 +221,85 @@ extension System.FileDescriptor {
   @frozen public struct OpenOptions : Swift.OptionSet, Swift.Sendable, Swift.Hashable, Swift.Codable {
     @_alwaysEmitIntoClient public var rawValue: Swift.CInt
     @_alwaysEmitIntoClient public init(rawValue: Swift.CInt) { self.rawValue = rawValue }
-    @_alwaysEmitIntoClient private init(_ raw: Swift.CInt) { self.init(rawValue: raw) }
     @_alwaysEmitIntoClient public static var nonBlocking: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_NONBLOCK) }
+      get { .init(rawValue: _O_NONBLOCK) }
     }
     @available(*, unavailable, renamed: "nonBlocking")
     @_alwaysEmitIntoClient public static var O_NONBLOCK: System.FileDescriptor.OpenOptions {
       get { nonBlocking }
     }
     @_alwaysEmitIntoClient public static var append: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_APPEND) }
+      get { .init(rawValue: _O_APPEND) }
     }
     @available(*, unavailable, renamed: "append")
     @_alwaysEmitIntoClient public static var O_APPEND: System.FileDescriptor.OpenOptions {
       get { append }
     }
     @_alwaysEmitIntoClient public static var create: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_CREAT) }
+      get { .init(rawValue: _O_CREAT) }
     }
     @available(*, unavailable, renamed: "create")
     @_alwaysEmitIntoClient public static var O_CREAT: System.FileDescriptor.OpenOptions {
       get { create }
     }
     @_alwaysEmitIntoClient public static var truncate: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_TRUNC) }
+      get { .init(rawValue: _O_TRUNC) }
     }
     @available(*, unavailable, renamed: "truncate")
     @_alwaysEmitIntoClient public static var O_TRUNC: System.FileDescriptor.OpenOptions {
       get { truncate }
     }
     @_alwaysEmitIntoClient public static var exclusiveCreate: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_EXCL) }
+      get { .init(rawValue: _O_EXCL) }
     }
     @available(*, unavailable, renamed: "exclusiveCreate")
     @_alwaysEmitIntoClient public static var O_EXCL: System.FileDescriptor.OpenOptions {
       get { exclusiveCreate }
     }
     @_alwaysEmitIntoClient public static var sharedLock: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_SHLOCK) }
+      get { .init(rawValue: _O_SHLOCK) }
     }
     @available(*, unavailable, renamed: "sharedLock")
     @_alwaysEmitIntoClient public static var O_SHLOCK: System.FileDescriptor.OpenOptions {
       get { sharedLock }
     }
     @_alwaysEmitIntoClient public static var exclusiveLock: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_EXLOCK) }
+      get { .init(rawValue: _O_EXLOCK) }
     }
     @available(*, unavailable, renamed: "exclusiveLock")
     @_alwaysEmitIntoClient public static var O_EXLOCK: System.FileDescriptor.OpenOptions {
       get { exclusiveLock }
     }
     @_alwaysEmitIntoClient public static var noFollow: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_NOFOLLOW) }
+      get { .init(rawValue: _O_NOFOLLOW) }
     }
     @available(*, unavailable, renamed: "noFollow")
     @_alwaysEmitIntoClient public static var O_NOFOLLOW: System.FileDescriptor.OpenOptions {
       get { noFollow }
     }
     @_alwaysEmitIntoClient public static var directory: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_DIRECTORY) }
+      get { .init(rawValue: _O_DIRECTORY) }
     }
     @available(*, unavailable, renamed: "directory")
     @_alwaysEmitIntoClient public static var O_DIRECTORY: System.FileDescriptor.OpenOptions {
       get { directory }
     }
     @_alwaysEmitIntoClient public static var symlink: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_SYMLINK) }
+      get { .init(rawValue: _O_SYMLINK) }
     }
     @available(*, unavailable, renamed: "symlink")
     @_alwaysEmitIntoClient public static var O_SYMLINK: System.FileDescriptor.OpenOptions {
       get { symlink }
     }
     @_alwaysEmitIntoClient public static var eventOnly: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_EVTONLY) }
+      get { .init(rawValue: _O_EVTONLY) }
     }
     @available(*, unavailable, renamed: "eventOnly")
     @_alwaysEmitIntoClient public static var O_EVTONLY: System.FileDescriptor.OpenOptions {
       get { eventOnly }
     }
     @_alwaysEmitIntoClient public static var closeOnExec: System.FileDescriptor.OpenOptions {
-      get { OpenOptions(_O_CLOEXEC) }
+      get { .init(rawValue: _O_CLOEXEC) }
     }
     @available(*, unavailable, renamed: "closeOnExec")
     @_alwaysEmitIntoClient public static var O_CLOEXEC: System.FileDescriptor.OpenOptions {
@@ -587,8 +587,8 @@ extension System.FilePath.ComponentView : Swift.BidirectionalCollection {
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   public struct Index : Swift.Sendable, Swift.Comparable, Swift.Hashable {
     public static func < (lhs: System.FilePath.ComponentView.Index, rhs: System.FilePath.ComponentView.Index) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: System.FilePath.ComponentView.Index, b: System.FilePath.ComponentView.Index) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -634,78 +634,77 @@ extension System.FilePath.ComponentView {
 @frozen public struct FilePermissions : Swift.OptionSet, Swift.Sendable, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: System.CModeT
   @_alwaysEmitIntoClient public init(rawValue: System.CModeT) { self.rawValue = rawValue }
-  @_alwaysEmitIntoClient private init(_ raw: System.CModeT) { self.init(rawValue: raw) }
   @_alwaysEmitIntoClient public static var otherRead: System.FilePermissions {
-    get { FilePermissions(0o4) }
+    get { .init(rawValue: 0o4) }
   }
   @_alwaysEmitIntoClient public static var otherWrite: System.FilePermissions {
-    get { FilePermissions(0o2) }
+    get { .init(rawValue: 0o2) }
   }
   @_alwaysEmitIntoClient public static var otherExecute: System.FilePermissions {
-    get { FilePermissions(0o1) }
+    get { .init(rawValue: 0o1) }
   }
   @_alwaysEmitIntoClient public static var otherReadWrite: System.FilePermissions {
-    get { FilePermissions(0o6) }
+    get { .init(rawValue: 0o6) }
   }
   @_alwaysEmitIntoClient public static var otherReadExecute: System.FilePermissions {
-    get { FilePermissions(0o5) }
+    get { .init(rawValue: 0o5) }
   }
   @_alwaysEmitIntoClient public static var otherWriteExecute: System.FilePermissions {
-    get { FilePermissions(0o3) }
+    get { .init(rawValue: 0o3) }
   }
   @_alwaysEmitIntoClient public static var otherReadWriteExecute: System.FilePermissions {
-    get { FilePermissions(0o7) }
+    get { .init(rawValue: 0o7) }
   }
   @_alwaysEmitIntoClient public static var groupRead: System.FilePermissions {
-    get { FilePermissions(0o40) }
+    get { .init(rawValue: 0o40) }
   }
   @_alwaysEmitIntoClient public static var groupWrite: System.FilePermissions {
-    get { FilePermissions(0o20) }
+    get { .init(rawValue: 0o20) }
   }
   @_alwaysEmitIntoClient public static var groupExecute: System.FilePermissions {
-    get { FilePermissions(0o10) }
+    get { .init(rawValue: 0o10) }
   }
   @_alwaysEmitIntoClient public static var groupReadWrite: System.FilePermissions {
-    get { FilePermissions(0o60) }
+    get { .init(rawValue: 0o60) }
   }
   @_alwaysEmitIntoClient public static var groupReadExecute: System.FilePermissions {
-    get { FilePermissions(0o50) }
+    get { .init(rawValue: 0o50) }
   }
   @_alwaysEmitIntoClient public static var groupWriteExecute: System.FilePermissions {
-    get { FilePermissions(0o30) }
+    get { .init(rawValue: 0o30) }
   }
   @_alwaysEmitIntoClient public static var groupReadWriteExecute: System.FilePermissions {
-    get { FilePermissions(0o70) }
+    get { .init(rawValue: 0o70) }
   }
   @_alwaysEmitIntoClient public static var ownerRead: System.FilePermissions {
-    get { FilePermissions(0o400) }
+    get { .init(rawValue: 0o400) }
   }
   @_alwaysEmitIntoClient public static var ownerWrite: System.FilePermissions {
-    get { FilePermissions(0o200) }
+    get { .init(rawValue: 0o200) }
   }
   @_alwaysEmitIntoClient public static var ownerExecute: System.FilePermissions {
-    get { FilePermissions(0o100) }
+    get { .init(rawValue: 0o100) }
   }
   @_alwaysEmitIntoClient public static var ownerReadWrite: System.FilePermissions {
-    get { FilePermissions(0o600) }
+    get { .init(rawValue: 0o600) }
   }
   @_alwaysEmitIntoClient public static var ownerReadExecute: System.FilePermissions {
-    get { FilePermissions(0o500) }
+    get { .init(rawValue: 0o500) }
   }
   @_alwaysEmitIntoClient public static var ownerWriteExecute: System.FilePermissions {
-    get { FilePermissions(0o300) }
+    get { .init(rawValue: 0o300) }
   }
   @_alwaysEmitIntoClient public static var ownerReadWriteExecute: System.FilePermissions {
-    get { FilePermissions(0o700) }
+    get { .init(rawValue: 0o700) }
   }
   @_alwaysEmitIntoClient public static var setUserID: System.FilePermissions {
-    get { FilePermissions(0o4000) }
+    get { .init(rawValue: 0o4000) }
   }
   @_alwaysEmitIntoClient public static var setGroupID: System.FilePermissions {
-    get { FilePermissions(0o2000) }
+    get { .init(rawValue: 0o2000) }
   }
   @_alwaysEmitIntoClient public static var saveText: System.FilePermissions {
-    get { FilePermissions(0o1000) }
+    get { .init(rawValue: 0o1000) }
   }
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias ArrayLiteralElement = System.FilePermissions
@@ -841,7 +840,9 @@ public enum CInterop {
   get { EAGAIN }
 }
 @_alwaysEmitIntoClient internal var _EWOULDBLOCK: Swift.CInt {
-  get { EWOULDBLOCK }
+  get {
+  EWOULDBLOCK
+}
 }
 @_alwaysEmitIntoClient internal var _EINPROGRESS: Swift.CInt {
   get { EINPROGRESS }
@@ -1062,7 +1063,9 @@ public enum CInterop {
   get { ETIME }
 }
 @_alwaysEmitIntoClient internal var _EOPNOTSUPP: Swift.CInt {
-  get { EOPNOTSUPP }
+  get {
+  EOPNOTSUPP
+}
 }
 @_alwaysEmitIntoClient internal var _ENOPOLICY: Swift.CInt {
   get { ENOPOLICY }
@@ -1089,13 +1092,19 @@ public enum CInterop {
   get { O_RDWR }
 }
 @_alwaysEmitIntoClient internal var _O_ACCMODE: Swift.CInt {
-  get { O_ACCMODE }
+  get {
+  O_ACCMODE
+}
 }
 @_alwaysEmitIntoClient internal var _O_NONBLOCK: Swift.CInt {
-  get { O_NONBLOCK }
+  get {
+  O_NONBLOCK
+}
 }
 @_alwaysEmitIntoClient internal var _O_APPEND: Swift.CInt {
-  get { O_APPEND }
+  get {
+  O_APPEND
+}
 }
 @_alwaysEmitIntoClient internal var _O_SHLOCK: Swift.CInt {
   get { O_SHLOCK }
@@ -1110,13 +1119,19 @@ public enum CInterop {
   get { O_NOFOLLOW }
 }
 @_alwaysEmitIntoClient internal var _O_CREAT: Swift.CInt {
-  get { O_CREAT }
+  get {
+  O_CREAT
+}
 }
 @_alwaysEmitIntoClient internal var _O_TRUNC: Swift.CInt {
-  get { O_TRUNC }
+  get {
+  O_TRUNC
+}
 }
 @_alwaysEmitIntoClient internal var _O_EXCL: Swift.CInt {
-  get { O_EXCL }
+  get {
+  O_EXCL
+}
 }
 @_alwaysEmitIntoClient internal var _O_EVTONLY: Swift.CInt {
   get { O_EVTONLY }
@@ -1125,7 +1140,9 @@ public enum CInterop {
   get { O_NOCTTY }
 }
 @_alwaysEmitIntoClient internal var _O_DIRECTORY: Swift.CInt {
-  get { O_DIRECTORY }
+  get {
+  O_DIRECTORY
+}
 }
 @_alwaysEmitIntoClient internal var _O_SYMLINK: Swift.CInt {
   get { O_SYMLINK }
@@ -1444,14 +1461,17 @@ extension System.FilePath {
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension System.FilePath : Swift.Hashable, Swift.Codable {
-  public init(from decoder: any Swift.Decoder) throws
+extension System.FilePath : Swift.Hashable {
   public static func == (a: System.FilePath, b: System.FilePath) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
-  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
+}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FilePath : Swift.Codable {
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor {
@@ -1565,709 +1585,708 @@ extension System.FileDescriptor {
 @frozen public struct Errno : Swift.RawRepresentable, Swift.Error, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: Swift.CInt
   @_alwaysEmitIntoClient public init(rawValue: Swift.CInt) { self.rawValue = rawValue }
-  @_alwaysEmitIntoClient private init(_ raw: Swift.CInt) { self.init(rawValue: raw) }
   @_alwaysEmitIntoClient public static var notUsed: System.Errno {
-    get { Errno(_ERRNO_NOT_USED) }
+    get { .init(rawValue: _ERRNO_NOT_USED) }
   }
   @available(*, unavailable, renamed: "notUsed")
   @_alwaysEmitIntoClient public static var ERRNO_NOT_USED: System.Errno {
     get { notUsed }
   }
   @_alwaysEmitIntoClient public static var notPermitted: System.Errno {
-    get { Errno(_EPERM) }
+    get { .init(rawValue: _EPERM) }
   }
   @available(*, unavailable, renamed: "notPermitted")
   @_alwaysEmitIntoClient public static var EPERM: System.Errno {
     get { notPermitted }
   }
   @_alwaysEmitIntoClient public static var noSuchFileOrDirectory: System.Errno {
-    get { Errno(_ENOENT) }
+    get { .init(rawValue: _ENOENT) }
   }
   @available(*, unavailable, renamed: "noSuchFileOrDirectory")
   @_alwaysEmitIntoClient public static var ENOENT: System.Errno {
     get { noSuchFileOrDirectory }
   }
   @_alwaysEmitIntoClient public static var noSuchProcess: System.Errno {
-    get { Errno(_ESRCH) }
+    get { .init(rawValue: _ESRCH) }
   }
   @available(*, unavailable, renamed: "noSuchProcess")
   @_alwaysEmitIntoClient public static var ESRCH: System.Errno {
     get { noSuchProcess }
   }
   @_alwaysEmitIntoClient public static var interrupted: System.Errno {
-    get { Errno(_EINTR) }
+    get { .init(rawValue: _EINTR) }
   }
   @available(*, unavailable, renamed: "interrupted")
   @_alwaysEmitIntoClient public static var EINTR: System.Errno {
     get { interrupted }
   }
   @_alwaysEmitIntoClient public static var ioError: System.Errno {
-    get { Errno(_EIO) }
+    get { .init(rawValue: _EIO) }
   }
   @available(*, unavailable, renamed: "ioError")
   @_alwaysEmitIntoClient public static var EIO: System.Errno {
     get { ioError }
   }
   @_alwaysEmitIntoClient public static var noSuchAddressOrDevice: System.Errno {
-    get { Errno(_ENXIO) }
+    get { .init(rawValue: _ENXIO) }
   }
   @available(*, unavailable, renamed: "noSuchAddressOrDevice")
   @_alwaysEmitIntoClient public static var ENXIO: System.Errno {
     get { noSuchAddressOrDevice }
   }
   @_alwaysEmitIntoClient public static var argListTooLong: System.Errno {
-    get { Errno(_E2BIG) }
+    get { .init(rawValue: _E2BIG) }
   }
   @available(*, unavailable, renamed: "argListTooLong")
   @_alwaysEmitIntoClient public static var E2BIG: System.Errno {
     get { argListTooLong }
   }
   @_alwaysEmitIntoClient public static var execFormatError: System.Errno {
-    get { Errno(_ENOEXEC) }
+    get { .init(rawValue: _ENOEXEC) }
   }
   @available(*, unavailable, renamed: "execFormatError")
   @_alwaysEmitIntoClient public static var ENOEXEC: System.Errno {
     get { execFormatError }
   }
   @_alwaysEmitIntoClient public static var badFileDescriptor: System.Errno {
-    get { Errno(_EBADF) }
+    get { .init(rawValue: _EBADF) }
   }
   @available(*, unavailable, renamed: "badFileDescriptor")
   @_alwaysEmitIntoClient public static var EBADF: System.Errno {
     get { badFileDescriptor }
   }
   @_alwaysEmitIntoClient public static var noChildProcess: System.Errno {
-    get { Errno(_ECHILD) }
+    get { .init(rawValue: _ECHILD) }
   }
   @available(*, unavailable, renamed: "noChildProcess")
   @_alwaysEmitIntoClient public static var ECHILD: System.Errno {
     get { noChildProcess }
   }
   @_alwaysEmitIntoClient public static var deadlock: System.Errno {
-    get { Errno(_EDEADLK) }
+    get { .init(rawValue: _EDEADLK) }
   }
   @available(*, unavailable, renamed: "deadlock")
   @_alwaysEmitIntoClient public static var EDEADLK: System.Errno {
     get { deadlock }
   }
   @_alwaysEmitIntoClient public static var noMemory: System.Errno {
-    get { Errno(_ENOMEM) }
+    get { .init(rawValue: _ENOMEM) }
   }
   @available(*, unavailable, renamed: "noMemory")
   @_alwaysEmitIntoClient public static var ENOMEM: System.Errno {
     get { noMemory }
   }
   @_alwaysEmitIntoClient public static var permissionDenied: System.Errno {
-    get { Errno(_EACCES) }
+    get { .init(rawValue: _EACCES) }
   }
   @available(*, unavailable, renamed: "permissionDenied")
   @_alwaysEmitIntoClient public static var EACCES: System.Errno {
     get { permissionDenied }
   }
   @_alwaysEmitIntoClient public static var badAddress: System.Errno {
-    get { Errno(_EFAULT) }
+    get { .init(rawValue: _EFAULT) }
   }
   @available(*, unavailable, renamed: "badAddress")
   @_alwaysEmitIntoClient public static var EFAULT: System.Errno {
     get { badAddress }
   }
   @_alwaysEmitIntoClient public static var notBlockDevice: System.Errno {
-    get { Errno(_ENOTBLK) }
+    get { .init(rawValue: _ENOTBLK) }
   }
   @available(*, unavailable, renamed: "notBlockDevice")
   @_alwaysEmitIntoClient public static var ENOTBLK: System.Errno {
     get { notBlockDevice }
   }
   @_alwaysEmitIntoClient public static var resourceBusy: System.Errno {
-    get { Errno(_EBUSY) }
+    get { .init(rawValue: _EBUSY) }
   }
   @available(*, unavailable, renamed: "resourceBusy")
   @_alwaysEmitIntoClient public static var EBUSY: System.Errno {
     get { resourceBusy }
   }
   @_alwaysEmitIntoClient public static var fileExists: System.Errno {
-    get { Errno(_EEXIST) }
+    get { .init(rawValue: _EEXIST) }
   }
   @available(*, unavailable, renamed: "fileExists")
   @_alwaysEmitIntoClient public static var EEXIST: System.Errno {
     get { fileExists }
   }
   @_alwaysEmitIntoClient public static var improperLink: System.Errno {
-    get { Errno(_EXDEV) }
+    get { .init(rawValue: _EXDEV) }
   }
   @available(*, unavailable, renamed: "improperLink")
   @_alwaysEmitIntoClient public static var EXDEV: System.Errno {
     get { improperLink }
   }
   @_alwaysEmitIntoClient public static var operationNotSupportedByDevice: System.Errno {
-    get { Errno(_ENODEV) }
+    get { .init(rawValue: _ENODEV) }
   }
   @available(*, unavailable, renamed: "operationNotSupportedByDevice")
   @_alwaysEmitIntoClient public static var ENODEV: System.Errno {
     get { operationNotSupportedByDevice }
   }
   @_alwaysEmitIntoClient public static var notDirectory: System.Errno {
-    get { Errno(_ENOTDIR) }
+    get { .init(rawValue: _ENOTDIR) }
   }
   @available(*, unavailable, renamed: "notDirectory")
   @_alwaysEmitIntoClient public static var ENOTDIR: System.Errno {
     get { notDirectory }
   }
   @_alwaysEmitIntoClient public static var isDirectory: System.Errno {
-    get { Errno(_EISDIR) }
+    get { .init(rawValue: _EISDIR) }
   }
   @available(*, unavailable, renamed: "isDirectory")
   @_alwaysEmitIntoClient public static var EISDIR: System.Errno {
     get { isDirectory }
   }
   @_alwaysEmitIntoClient public static var invalidArgument: System.Errno {
-    get { Errno(_EINVAL) }
+    get { .init(rawValue: _EINVAL) }
   }
   @available(*, unavailable, renamed: "invalidArgument")
   @_alwaysEmitIntoClient public static var EINVAL: System.Errno {
     get { invalidArgument }
   }
   @_alwaysEmitIntoClient public static var tooManyOpenFilesInSystem: System.Errno {
-    get { Errno(_ENFILE) }
+    get { .init(rawValue: _ENFILE) }
   }
   @available(*, unavailable, renamed: "tooManyOpenFilesInSystem")
   @_alwaysEmitIntoClient public static var ENFILE: System.Errno {
     get { tooManyOpenFilesInSystem }
   }
   @_alwaysEmitIntoClient public static var tooManyOpenFiles: System.Errno {
-    get { Errno(_EMFILE) }
+    get { .init(rawValue: _EMFILE) }
   }
   @available(*, unavailable, renamed: "tooManyOpenFiles")
   @_alwaysEmitIntoClient public static var EMFILE: System.Errno {
     get { tooManyOpenFiles }
   }
   @_alwaysEmitIntoClient public static var inappropriateIOCTLForDevice: System.Errno {
-    get { Errno(_ENOTTY) }
+    get { .init(rawValue: _ENOTTY) }
   }
   @available(*, unavailable, renamed: "inappropriateIOCTLForDevice")
   @_alwaysEmitIntoClient public static var ENOTTY: System.Errno {
     get { inappropriateIOCTLForDevice }
   }
   @_alwaysEmitIntoClient public static var textFileBusy: System.Errno {
-    get { Errno(_ETXTBSY) }
+    get { .init(rawValue: _ETXTBSY) }
   }
   @available(*, unavailable, renamed: "textFileBusy")
   @_alwaysEmitIntoClient public static var ETXTBSY: System.Errno {
     get { textFileBusy }
   }
   @_alwaysEmitIntoClient public static var fileTooLarge: System.Errno {
-    get { Errno(_EFBIG) }
+    get { .init(rawValue: _EFBIG) }
   }
   @available(*, unavailable, renamed: "fileTooLarge")
   @_alwaysEmitIntoClient public static var EFBIG: System.Errno {
     get { fileTooLarge }
   }
   @_alwaysEmitIntoClient public static var noSpace: System.Errno {
-    get { Errno(_ENOSPC) }
+    get { .init(rawValue: _ENOSPC) }
   }
   @available(*, unavailable, renamed: "noSpace")
   @_alwaysEmitIntoClient public static var ENOSPC: System.Errno {
     get { noSpace }
   }
   @_alwaysEmitIntoClient public static var illegalSeek: System.Errno {
-    get { Errno(_ESPIPE) }
+    get { .init(rawValue: _ESPIPE) }
   }
   @available(*, unavailable, renamed: "illegalSeek")
   @_alwaysEmitIntoClient public static var ESPIPE: System.Errno {
     get { illegalSeek }
   }
   @_alwaysEmitIntoClient public static var readOnlyFileSystem: System.Errno {
-    get { Errno(_EROFS) }
+    get { .init(rawValue: _EROFS) }
   }
   @available(*, unavailable, renamed: "readOnlyFileSystem")
   @_alwaysEmitIntoClient public static var EROFS: System.Errno {
     get { readOnlyFileSystem }
   }
   @_alwaysEmitIntoClient public static var tooManyLinks: System.Errno {
-    get { Errno(_EMLINK) }
+    get { .init(rawValue: _EMLINK) }
   }
   @available(*, unavailable, renamed: "tooManyLinks")
   @_alwaysEmitIntoClient public static var EMLINK: System.Errno {
     get { tooManyLinks }
   }
   @_alwaysEmitIntoClient public static var brokenPipe: System.Errno {
-    get { Errno(_EPIPE) }
+    get { .init(rawValue: _EPIPE) }
   }
   @available(*, unavailable, renamed: "brokenPipe")
   @_alwaysEmitIntoClient public static var EPIPE: System.Errno {
     get { brokenPipe }
   }
   @_alwaysEmitIntoClient public static var outOfDomain: System.Errno {
-    get { Errno(_EDOM) }
+    get { .init(rawValue: _EDOM) }
   }
   @available(*, unavailable, renamed: "outOfDomain")
   @_alwaysEmitIntoClient public static var EDOM: System.Errno {
     get { outOfDomain }
   }
   @_alwaysEmitIntoClient public static var outOfRange: System.Errno {
-    get { Errno(_ERANGE) }
+    get { .init(rawValue: _ERANGE) }
   }
   @available(*, unavailable, renamed: "outOfRange")
   @_alwaysEmitIntoClient public static var ERANGE: System.Errno {
     get { outOfRange }
   }
   @_alwaysEmitIntoClient public static var resourceTemporarilyUnavailable: System.Errno {
-    get { Errno(_EAGAIN) }
+    get { .init(rawValue: _EAGAIN) }
   }
   @available(*, unavailable, renamed: "resourceTemporarilyUnavailable")
   @_alwaysEmitIntoClient public static var EAGAIN: System.Errno {
     get { resourceTemporarilyUnavailable }
   }
   @_alwaysEmitIntoClient public static var nowInProgress: System.Errno {
-    get { Errno(_EINPROGRESS) }
+    get { .init(rawValue: _EINPROGRESS) }
   }
   @available(*, unavailable, renamed: "nowInProgress")
   @_alwaysEmitIntoClient public static var EINPROGRESS: System.Errno {
     get { nowInProgress }
   }
   @_alwaysEmitIntoClient public static var alreadyInProcess: System.Errno {
-    get { Errno(_EALREADY) }
+    get { .init(rawValue: _EALREADY) }
   }
   @available(*, unavailable, renamed: "alreadyInProcess")
   @_alwaysEmitIntoClient public static var EALREADY: System.Errno {
     get { alreadyInProcess }
   }
   @_alwaysEmitIntoClient public static var notSocket: System.Errno {
-    get { Errno(_ENOTSOCK) }
+    get { .init(rawValue: _ENOTSOCK) }
   }
   @available(*, unavailable, renamed: "notSocket")
   @_alwaysEmitIntoClient public static var ENOTSOCK: System.Errno {
     get { notSocket }
   }
   @_alwaysEmitIntoClient public static var addressRequired: System.Errno {
-    get { Errno(_EDESTADDRREQ) }
+    get { .init(rawValue: _EDESTADDRREQ) }
   }
   @available(*, unavailable, renamed: "addressRequired")
   @_alwaysEmitIntoClient public static var EDESTADDRREQ: System.Errno {
     get { addressRequired }
   }
   @_alwaysEmitIntoClient public static var messageTooLong: System.Errno {
-    get { Errno(_EMSGSIZE) }
+    get { .init(rawValue: _EMSGSIZE) }
   }
   @available(*, unavailable, renamed: "messageTooLong")
   @_alwaysEmitIntoClient public static var EMSGSIZE: System.Errno {
     get { messageTooLong }
   }
   @_alwaysEmitIntoClient public static var protocolWrongTypeForSocket: System.Errno {
-    get { Errno(_EPROTOTYPE) }
+    get { .init(rawValue: _EPROTOTYPE) }
   }
   @available(*, unavailable, renamed: "protocolWrongTypeForSocket")
   @_alwaysEmitIntoClient public static var EPROTOTYPE: System.Errno {
     get { protocolWrongTypeForSocket }
   }
   @_alwaysEmitIntoClient public static var protocolNotAvailable: System.Errno {
-    get { Errno(_ENOPROTOOPT) }
+    get { .init(rawValue: _ENOPROTOOPT) }
   }
   @available(*, unavailable, renamed: "protocolNotAvailable")
   @_alwaysEmitIntoClient public static var ENOPROTOOPT: System.Errno {
     get { protocolNotAvailable }
   }
   @_alwaysEmitIntoClient public static var protocolNotSupported: System.Errno {
-    get { Errno(_EPROTONOSUPPORT) }
+    get { .init(rawValue: _EPROTONOSUPPORT) }
   }
   @available(*, unavailable, renamed: "protocolNotSupported")
   @_alwaysEmitIntoClient public static var EPROTONOSUPPORT: System.Errno {
     get { protocolNotSupported }
   }
   @_alwaysEmitIntoClient public static var socketTypeNotSupported: System.Errno {
-    get { Errno(_ESOCKTNOSUPPORT) }
+    get { .init(rawValue: _ESOCKTNOSUPPORT) }
   }
   @available(*, unavailable, renamed: "socketTypeNotSupported")
   @_alwaysEmitIntoClient public static var ESOCKTNOSUPPORT: System.Errno {
     get { socketTypeNotSupported }
   }
   @_alwaysEmitIntoClient public static var notSupported: System.Errno {
-    get { Errno(_ENOTSUP) }
+    get { .init(rawValue: _ENOTSUP) }
   }
   @available(*, unavailable, renamed: "notSupported")
   @_alwaysEmitIntoClient public static var ENOTSUP: System.Errno {
     get { notSupported }
   }
   @_alwaysEmitIntoClient public static var protocolFamilyNotSupported: System.Errno {
-    get { Errno(_EPFNOSUPPORT) }
+    get { .init(rawValue: _EPFNOSUPPORT) }
   }
   @available(*, unavailable, renamed: "protocolFamilyNotSupported")
   @_alwaysEmitIntoClient public static var EPFNOSUPPORT: System.Errno {
     get { protocolFamilyNotSupported }
   }
   @_alwaysEmitIntoClient public static var addressFamilyNotSupported: System.Errno {
-    get { Errno(_EAFNOSUPPORT) }
+    get { .init(rawValue: _EAFNOSUPPORT) }
   }
   @available(*, unavailable, renamed: "addressFamilyNotSupported")
   @_alwaysEmitIntoClient public static var EAFNOSUPPORT: System.Errno {
     get { addressFamilyNotSupported }
   }
   @_alwaysEmitIntoClient public static var addressInUse: System.Errno {
-    get { Errno(_EADDRINUSE) }
+    get { .init(rawValue: _EADDRINUSE) }
   }
   @available(*, unavailable, renamed: "addressInUse")
   @_alwaysEmitIntoClient public static var EADDRINUSE: System.Errno {
     get { addressInUse }
   }
   @_alwaysEmitIntoClient public static var addressNotAvailable: System.Errno {
-    get { Errno(_EADDRNOTAVAIL) }
+    get { .init(rawValue: _EADDRNOTAVAIL) }
   }
   @available(*, unavailable, renamed: "addressNotAvailable")
   @_alwaysEmitIntoClient public static var EADDRNOTAVAIL: System.Errno {
     get { addressNotAvailable }
   }
   @_alwaysEmitIntoClient public static var networkDown: System.Errno {
-    get { Errno(_ENETDOWN) }
+    get { .init(rawValue: _ENETDOWN) }
   }
   @available(*, unavailable, renamed: "networkDown")
   @_alwaysEmitIntoClient public static var ENETDOWN: System.Errno {
     get { networkDown }
   }
   @_alwaysEmitIntoClient public static var networkUnreachable: System.Errno {
-    get { Errno(_ENETUNREACH) }
+    get { .init(rawValue: _ENETUNREACH) }
   }
   @available(*, unavailable, renamed: "networkUnreachable")
   @_alwaysEmitIntoClient public static var ENETUNREACH: System.Errno {
     get { networkUnreachable }
   }
   @_alwaysEmitIntoClient public static var networkReset: System.Errno {
-    get { Errno(_ENETRESET) }
+    get { .init(rawValue: _ENETRESET) }
   }
   @available(*, unavailable, renamed: "networkReset")
   @_alwaysEmitIntoClient public static var ENETRESET: System.Errno {
     get { networkReset }
   }
   @_alwaysEmitIntoClient public static var connectionAbort: System.Errno {
-    get { Errno(_ECONNABORTED) }
+    get { .init(rawValue: _ECONNABORTED) }
   }
   @available(*, unavailable, renamed: "connectionAbort")
   @_alwaysEmitIntoClient public static var ECONNABORTED: System.Errno {
     get { connectionAbort }
   }
   @_alwaysEmitIntoClient public static var connectionReset: System.Errno {
-    get { Errno(_ECONNRESET) }
+    get { .init(rawValue: _ECONNRESET) }
   }
   @available(*, unavailable, renamed: "connectionReset")
   @_alwaysEmitIntoClient public static var ECONNRESET: System.Errno {
     get { connectionReset }
   }
   @_alwaysEmitIntoClient public static var noBufferSpace: System.Errno {
-    get { Errno(_ENOBUFS) }
+    get { .init(rawValue: _ENOBUFS) }
   }
   @available(*, unavailable, renamed: "noBufferSpace")
   @_alwaysEmitIntoClient public static var ENOBUFS: System.Errno {
     get { noBufferSpace }
   }
   @_alwaysEmitIntoClient public static var socketIsConnected: System.Errno {
-    get { Errno(_EISCONN) }
+    get { .init(rawValue: _EISCONN) }
   }
   @available(*, unavailable, renamed: "socketIsConnected")
   @_alwaysEmitIntoClient public static var EISCONN: System.Errno {
     get { socketIsConnected }
   }
   @_alwaysEmitIntoClient public static var socketNotConnected: System.Errno {
-    get { Errno(_ENOTCONN) }
+    get { .init(rawValue: _ENOTCONN) }
   }
   @available(*, unavailable, renamed: "socketNotConnected")
   @_alwaysEmitIntoClient public static var ENOTCONN: System.Errno {
     get { socketNotConnected }
   }
   @_alwaysEmitIntoClient public static var socketShutdown: System.Errno {
-    get { Errno(_ESHUTDOWN) }
+    get { .init(rawValue: _ESHUTDOWN) }
   }
   @available(*, unavailable, renamed: "socketShutdown")
   @_alwaysEmitIntoClient public static var ESHUTDOWN: System.Errno {
     get { socketShutdown }
   }
   @_alwaysEmitIntoClient public static var timedOut: System.Errno {
-    get { Errno(_ETIMEDOUT) }
+    get { .init(rawValue: _ETIMEDOUT) }
   }
   @available(*, unavailable, renamed: "timedOut")
   @_alwaysEmitIntoClient public static var ETIMEDOUT: System.Errno {
     get { timedOut }
   }
   @_alwaysEmitIntoClient public static var connectionRefused: System.Errno {
-    get { Errno(_ECONNREFUSED) }
+    get { .init(rawValue: _ECONNREFUSED) }
   }
   @available(*, unavailable, renamed: "connectionRefused")
   @_alwaysEmitIntoClient public static var ECONNREFUSED: System.Errno {
     get { connectionRefused }
   }
   @_alwaysEmitIntoClient public static var tooManySymbolicLinkLevels: System.Errno {
-    get { Errno(_ELOOP) }
+    get { .init(rawValue: _ELOOP) }
   }
   @available(*, unavailable, renamed: "tooManySymbolicLinkLevels")
   @_alwaysEmitIntoClient public static var ELOOP: System.Errno {
     get { tooManySymbolicLinkLevels }
   }
   @_alwaysEmitIntoClient public static var fileNameTooLong: System.Errno {
-    get { Errno(_ENAMETOOLONG) }
+    get { .init(rawValue: _ENAMETOOLONG) }
   }
   @available(*, unavailable, renamed: "fileNameTooLong")
   @_alwaysEmitIntoClient public static var ENAMETOOLONG: System.Errno {
     get { fileNameTooLong }
   }
   @_alwaysEmitIntoClient public static var hostIsDown: System.Errno {
-    get { Errno(_EHOSTDOWN) }
+    get { .init(rawValue: _EHOSTDOWN) }
   }
   @available(*, unavailable, renamed: "hostIsDown")
   @_alwaysEmitIntoClient public static var EHOSTDOWN: System.Errno {
     get { hostIsDown }
   }
   @_alwaysEmitIntoClient public static var noRouteToHost: System.Errno {
-    get { Errno(_EHOSTUNREACH) }
+    get { .init(rawValue: _EHOSTUNREACH) }
   }
   @available(*, unavailable, renamed: "noRouteToHost")
   @_alwaysEmitIntoClient public static var EHOSTUNREACH: System.Errno {
     get { noRouteToHost }
   }
   @_alwaysEmitIntoClient public static var directoryNotEmpty: System.Errno {
-    get { Errno(_ENOTEMPTY) }
+    get { .init(rawValue: _ENOTEMPTY) }
   }
   @available(*, unavailable, renamed: "directoryNotEmpty")
   @_alwaysEmitIntoClient public static var ENOTEMPTY: System.Errno {
     get { directoryNotEmpty }
   }
   @_alwaysEmitIntoClient public static var tooManyProcesses: System.Errno {
-    get { Errno(_EPROCLIM) }
+    get { .init(rawValue: _EPROCLIM) }
   }
   @available(*, unavailable, renamed: "tooManyProcesses")
   @_alwaysEmitIntoClient public static var EPROCLIM: System.Errno {
     get { tooManyProcesses }
   }
   @_alwaysEmitIntoClient public static var tooManyUsers: System.Errno {
-    get { Errno(_EUSERS) }
+    get { .init(rawValue: _EUSERS) }
   }
   @available(*, unavailable, renamed: "tooManyUsers")
   @_alwaysEmitIntoClient public static var EUSERS: System.Errno {
     get { tooManyUsers }
   }
   @_alwaysEmitIntoClient public static var diskQuotaExceeded: System.Errno {
-    get { Errno(_EDQUOT) }
+    get { .init(rawValue: _EDQUOT) }
   }
   @available(*, unavailable, renamed: "diskQuotaExceeded")
   @_alwaysEmitIntoClient public static var EDQUOT: System.Errno {
     get { diskQuotaExceeded }
   }
   @_alwaysEmitIntoClient public static var staleNFSFileHandle: System.Errno {
-    get { Errno(_ESTALE) }
+    get { .init(rawValue: _ESTALE) }
   }
   @available(*, unavailable, renamed: "staleNFSFileHandle")
   @_alwaysEmitIntoClient public static var ESTALE: System.Errno {
     get { staleNFSFileHandle }
   }
   @_alwaysEmitIntoClient public static var rpcUnsuccessful: System.Errno {
-    get { Errno(_EBADRPC) }
+    get { .init(rawValue: _EBADRPC) }
   }
   @available(*, unavailable, renamed: "rpcUnsuccessful")
   @_alwaysEmitIntoClient public static var EBADRPC: System.Errno {
     get { rpcUnsuccessful }
   }
   @_alwaysEmitIntoClient public static var rpcVersionMismatch: System.Errno {
-    get { Errno(_ERPCMISMATCH) }
+    get { .init(rawValue: _ERPCMISMATCH) }
   }
   @available(*, unavailable, renamed: "rpcVersionMismatch")
   @_alwaysEmitIntoClient public static var ERPCMISMATCH: System.Errno {
     get { rpcVersionMismatch }
   }
   @_alwaysEmitIntoClient public static var rpcProgramUnavailable: System.Errno {
-    get { Errno(_EPROGUNAVAIL) }
+    get { .init(rawValue: _EPROGUNAVAIL) }
   }
   @available(*, unavailable, renamed: "rpcProgramUnavailable")
   @_alwaysEmitIntoClient public static var EPROGUNAVAIL: System.Errno {
     get { rpcProgramUnavailable }
   }
   @_alwaysEmitIntoClient public static var rpcProgramVersionMismatch: System.Errno {
-    get { Errno(_EPROGMISMATCH) }
+    get { .init(rawValue: _EPROGMISMATCH) }
   }
   @available(*, unavailable, renamed: "rpcProgramVersionMismatch")
   @_alwaysEmitIntoClient public static var EPROGMISMATCH: System.Errno {
     get { rpcProgramVersionMismatch }
   }
   @_alwaysEmitIntoClient public static var rpcProcedureUnavailable: System.Errno {
-    get { Errno(_EPROCUNAVAIL) }
+    get { .init(rawValue: _EPROCUNAVAIL) }
   }
   @available(*, unavailable, renamed: "rpcProcedureUnavailable")
   @_alwaysEmitIntoClient public static var EPROCUNAVAIL: System.Errno {
     get { rpcProcedureUnavailable }
   }
   @_alwaysEmitIntoClient public static var noLocks: System.Errno {
-    get { Errno(_ENOLCK) }
+    get { .init(rawValue: _ENOLCK) }
   }
   @available(*, unavailable, renamed: "noLocks")
   @_alwaysEmitIntoClient public static var ENOLCK: System.Errno {
     get { noLocks }
   }
   @_alwaysEmitIntoClient public static var noFunction: System.Errno {
-    get { Errno(_ENOSYS) }
+    get { .init(rawValue: _ENOSYS) }
   }
   @available(*, unavailable, renamed: "noFunction")
   @_alwaysEmitIntoClient public static var ENOSYS: System.Errno {
     get { noFunction }
   }
   @_alwaysEmitIntoClient public static var badFileTypeOrFormat: System.Errno {
-    get { Errno(_EFTYPE) }
+    get { .init(rawValue: _EFTYPE) }
   }
   @available(*, unavailable, renamed: "badFileTypeOrFormat")
   @_alwaysEmitIntoClient public static var EFTYPE: System.Errno {
     get { badFileTypeOrFormat }
   }
   @_alwaysEmitIntoClient public static var authenticationError: System.Errno {
-    get { Errno(_EAUTH) }
+    get { .init(rawValue: _EAUTH) }
   }
   @available(*, unavailable, renamed: "authenticationError")
   @_alwaysEmitIntoClient public static var EAUTH: System.Errno {
     get { authenticationError }
   }
   @_alwaysEmitIntoClient public static var needAuthenticator: System.Errno {
-    get { Errno(_ENEEDAUTH) }
+    get { .init(rawValue: _ENEEDAUTH) }
   }
   @available(*, unavailable, renamed: "needAuthenticator")
   @_alwaysEmitIntoClient public static var ENEEDAUTH: System.Errno {
     get { needAuthenticator }
   }
   @_alwaysEmitIntoClient public static var devicePowerIsOff: System.Errno {
-    get { Errno(_EPWROFF) }
+    get { .init(rawValue: _EPWROFF) }
   }
   @available(*, unavailable, renamed: "devicePowerIsOff")
   @_alwaysEmitIntoClient public static var EPWROFF: System.Errno {
     get { devicePowerIsOff }
   }
   @_alwaysEmitIntoClient public static var deviceError: System.Errno {
-    get { Errno(_EDEVERR) }
+    get { .init(rawValue: _EDEVERR) }
   }
   @available(*, unavailable, renamed: "deviceError")
   @_alwaysEmitIntoClient public static var EDEVERR: System.Errno {
     get { deviceError }
   }
   @_alwaysEmitIntoClient public static var overflow: System.Errno {
-    get { Errno(_EOVERFLOW) }
+    get { .init(rawValue: _EOVERFLOW) }
   }
   @available(*, unavailable, renamed: "overflow")
   @_alwaysEmitIntoClient public static var EOVERFLOW: System.Errno {
     get { overflow }
   }
   @_alwaysEmitIntoClient public static var badExecutable: System.Errno {
-    get { Errno(_EBADEXEC) }
+    get { .init(rawValue: _EBADEXEC) }
   }
   @available(*, unavailable, renamed: "badExecutable")
   @_alwaysEmitIntoClient public static var EBADEXEC: System.Errno {
     get { badExecutable }
   }
   @_alwaysEmitIntoClient public static var badCPUType: System.Errno {
-    get { Errno(_EBADARCH) }
+    get { .init(rawValue: _EBADARCH) }
   }
   @available(*, unavailable, renamed: "badCPUType")
   @_alwaysEmitIntoClient public static var EBADARCH: System.Errno {
     get { badCPUType }
   }
   @_alwaysEmitIntoClient public static var sharedLibraryVersionMismatch: System.Errno {
-    get { Errno(_ESHLIBVERS) }
+    get { .init(rawValue: _ESHLIBVERS) }
   }
   @available(*, unavailable, renamed: "sharedLibraryVersionMismatch")
   @_alwaysEmitIntoClient public static var ESHLIBVERS: System.Errno {
     get { sharedLibraryVersionMismatch }
   }
   @_alwaysEmitIntoClient public static var malformedMachO: System.Errno {
-    get { Errno(_EBADMACHO) }
+    get { .init(rawValue: _EBADMACHO) }
   }
   @available(*, unavailable, renamed: "malformedMachO")
   @_alwaysEmitIntoClient public static var EBADMACHO: System.Errno {
     get { malformedMachO }
   }
   @_alwaysEmitIntoClient public static var canceled: System.Errno {
-    get { Errno(_ECANCELED) }
+    get { .init(rawValue: _ECANCELED) }
   }
   @available(*, unavailable, renamed: "canceled")
   @_alwaysEmitIntoClient public static var ECANCELED: System.Errno {
     get { canceled }
   }
   @_alwaysEmitIntoClient public static var identifierRemoved: System.Errno {
-    get { Errno(_EIDRM) }
+    get { .init(rawValue: _EIDRM) }
   }
   @available(*, unavailable, renamed: "identifierRemoved")
   @_alwaysEmitIntoClient public static var EIDRM: System.Errno {
     get { identifierRemoved }
   }
   @_alwaysEmitIntoClient public static var noMessage: System.Errno {
-    get { Errno(_ENOMSG) }
+    get { .init(rawValue: _ENOMSG) }
   }
   @available(*, unavailable, renamed: "noMessage")
   @_alwaysEmitIntoClient public static var ENOMSG: System.Errno {
     get { noMessage }
   }
   @_alwaysEmitIntoClient public static var illegalByteSequence: System.Errno {
-    get { Errno(_EILSEQ) }
+    get { .init(rawValue: _EILSEQ) }
   }
   @available(*, unavailable, renamed: "illegalByteSequence")
   @_alwaysEmitIntoClient public static var EILSEQ: System.Errno {
     get { illegalByteSequence }
   }
   @_alwaysEmitIntoClient public static var attributeNotFound: System.Errno {
-    get { Errno(_ENOATTR) }
+    get { .init(rawValue: _ENOATTR) }
   }
   @available(*, unavailable, renamed: "attributeNotFound")
   @_alwaysEmitIntoClient public static var ENOATTR: System.Errno {
     get { attributeNotFound }
   }
   @_alwaysEmitIntoClient public static var badMessage: System.Errno {
-    get { Errno(_EBADMSG) }
+    get { .init(rawValue: _EBADMSG) }
   }
   @available(*, unavailable, renamed: "badMessage")
   @_alwaysEmitIntoClient public static var EBADMSG: System.Errno {
     get { badMessage }
   }
   @_alwaysEmitIntoClient public static var multiHop: System.Errno {
-    get { Errno(_EMULTIHOP) }
+    get { .init(rawValue: _EMULTIHOP) }
   }
   @available(*, unavailable, renamed: "multiHop")
   @_alwaysEmitIntoClient public static var EMULTIHOP: System.Errno {
     get { multiHop }
   }
   @_alwaysEmitIntoClient public static var noData: System.Errno {
-    get { Errno(_ENODATA) }
+    get { .init(rawValue: _ENODATA) }
   }
   @available(*, unavailable, renamed: "noData")
   @_alwaysEmitIntoClient public static var ENODATA: System.Errno {
     get { noData }
   }
   @_alwaysEmitIntoClient public static var noLink: System.Errno {
-    get { Errno(_ENOLINK) }
+    get { .init(rawValue: _ENOLINK) }
   }
   @available(*, unavailable, renamed: "noLink")
   @_alwaysEmitIntoClient public static var ENOLINK: System.Errno {
     get { noLink }
   }
   @_alwaysEmitIntoClient public static var noStreamResources: System.Errno {
-    get { Errno(_ENOSR) }
+    get { .init(rawValue: _ENOSR) }
   }
   @available(*, unavailable, renamed: "noStreamResources")
   @_alwaysEmitIntoClient public static var ENOSR: System.Errno {
     get { noStreamResources }
   }
   @_alwaysEmitIntoClient public static var notStream: System.Errno {
-    get { Errno(_ENOSTR) }
+    get { .init(rawValue: _ENOSTR) }
   }
   @available(*, unavailable, renamed: "notStream")
   @_alwaysEmitIntoClient public static var ENOSTR: System.Errno {
     get { notStream }
   }
   @_alwaysEmitIntoClient public static var protocolError: System.Errno {
-    get { Errno(_EPROTO) }
+    get { .init(rawValue: _EPROTO) }
   }
   @available(*, unavailable, renamed: "protocolError")
   @_alwaysEmitIntoClient public static var EPROTO: System.Errno {
     get { protocolError }
   }
   @_alwaysEmitIntoClient public static var timeout: System.Errno {
-    get { Errno(_ETIME) }
+    get { .init(rawValue: _ETIME) }
   }
   @available(*, unavailable, renamed: "timeout")
   @_alwaysEmitIntoClient public static var ETIME: System.Errno {
     get { timeout }
   }
   @_alwaysEmitIntoClient public static var notSupportedOnSocket: System.Errno {
-    get { Errno(_EOPNOTSUPP) }
+    get { .init(rawValue: _EOPNOTSUPP) }
   }
   @available(*, unavailable, renamed: "notSupportedOnSocket")
   @_alwaysEmitIntoClient public static var EOPNOTSUPP: System.Errno {
@@ -2279,56 +2298,56 @@ extension System.FileDescriptor {
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.Errno {
   @_alwaysEmitIntoClient public static var wouldBlock: System.Errno {
-    get { Errno(_EWOULDBLOCK) }
+    get { .init(rawValue: _EWOULDBLOCK) }
   }
   @available(*, unavailable, renamed: "wouldBlock")
   @_alwaysEmitIntoClient public static var EWOULDBLOCK: System.Errno {
     get { wouldBlock }
   }
   @_alwaysEmitIntoClient public static var tooManyReferences: System.Errno {
-    get { Errno(_ETOOMANYREFS) }
+    get { .init(rawValue: _ETOOMANYREFS) }
   }
   @available(*, unavailable, renamed: "tooManyReferences")
   @_alwaysEmitIntoClient public static var ETOOMANYREFS: System.Errno {
     get { tooManyReferences }
   }
   @_alwaysEmitIntoClient public static var tooManyRemoteLevels: System.Errno {
-    get { Errno(_EREMOTE) }
+    get { .init(rawValue: _EREMOTE) }
   }
   @available(*, unavailable, renamed: "tooManyRemoteLevels")
   @_alwaysEmitIntoClient public static var EREMOTE: System.Errno {
     get { tooManyRemoteLevels }
   }
   @_alwaysEmitIntoClient public static var noSuchPolicy: System.Errno {
-    get { Errno(_ENOPOLICY) }
+    get { .init(rawValue: _ENOPOLICY) }
   }
   @available(*, unavailable, renamed: "noSuchPolicy")
   @_alwaysEmitIntoClient public static var ENOPOLICY: System.Errno {
     get { noSuchPolicy }
   }
   @_alwaysEmitIntoClient public static var notRecoverable: System.Errno {
-    get { Errno(_ENOTRECOVERABLE) }
+    get { .init(rawValue: _ENOTRECOVERABLE) }
   }
   @available(*, unavailable, renamed: "notRecoverable")
   @_alwaysEmitIntoClient public static var ENOTRECOVERABLE: System.Errno {
     get { notRecoverable }
   }
   @_alwaysEmitIntoClient public static var previousOwnerDied: System.Errno {
-    get { Errno(_EOWNERDEAD) }
+    get { .init(rawValue: _EOWNERDEAD) }
   }
   @available(*, unavailable, renamed: "previousOwnerDied")
   @_alwaysEmitIntoClient public static var EOWNERDEAD: System.Errno {
     get { previousOwnerDied }
   }
   @_alwaysEmitIntoClient public static var outputQueueFull: System.Errno {
-    get { Errno(_EQFULL) }
+    get { .init(rawValue: _EQFULL) }
   }
   @available(*, unavailable, renamed: "outputQueueFull")
   @_alwaysEmitIntoClient public static var EQFULL: System.Errno {
     get { outputQueueFull }
   }
   @_alwaysEmitIntoClient public static var lastErrnoValue: System.Errno {
-    get { Errno(_ELAST) }
+    get { .init(rawValue: _ELAST) }
   }
   @available(*, unavailable, renamed: "lastErrnoValue")
   @_alwaysEmitIntoClient public static var ELAST: System.Errno {

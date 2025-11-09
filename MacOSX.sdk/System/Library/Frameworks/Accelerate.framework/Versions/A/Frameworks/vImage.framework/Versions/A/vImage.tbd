@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage'
-current-version: 602.60.8
+current-version: 611.100.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -52,14 +52,14 @@ exports:
                        _vImageCVImageFormat_SetColorSpace, _vImageCVImageFormat_SetUserData, 
                        _vImageClipToAlpha_ARGB8888, _vImageClipToAlpha_ARGBFFFF, 
                        _vImageClipToAlpha_Planar8, _vImageClipToAlpha_PlanarF, _vImageClipToAlpha_RGBA8888, 
-                       _vImageClipToAlpha_RGBAFFFF, _vImageClip_PlanarF, _vImageComputeScaFactor_RGBAFFFF, 
-                       _vImageContrastStretch_ARGB8888, _vImageContrastStretch_ARGBFFFF, 
-                       _vImageContrastStretch_Planar8, _vImageContrastStretch_PlanarF, 
-                       _vImageConvert_12UTo16U, _vImageConvert_16Fto16Q12, _vImageConvert_16Fto16U, 
-                       _vImageConvert_16Q12to16F, _vImageConvert_16Q12to16U, _vImageConvert_16Q12to8, 
-                       _vImageConvert_16Q12toF, _vImageConvert_16SToF, _vImageConvert_16UTo12U, 
-                       _vImageConvert_16UToF, _vImageConvert_16UToPlanar8, _vImageConvert_16Uto16F, 
-                       _vImageConvert_16Uto16Q12, _vImageConvert_420Yp10_CbCr10ToARGB16F, 
+                       _vImageClipToAlpha_RGBAFFFF, _vImageClip_PlanarF, _vImageComputeBufferLumas_RGBAFFFF, 
+                       _vImageComputeScaFactor_RGBAFFFF, _vImageContrastStretch_ARGB8888, 
+                       _vImageContrastStretch_ARGBFFFF, _vImageContrastStretch_Planar8, 
+                       _vImageContrastStretch_PlanarF, _vImageConvert_12UTo16U, _vImageConvert_16Fto16Q12, 
+                       _vImageConvert_16Fto16U, _vImageConvert_16Q12to16F, _vImageConvert_16Q12to16U, 
+                       _vImageConvert_16Q12to8, _vImageConvert_16Q12toF, _vImageConvert_16SToF, 
+                       _vImageConvert_16UTo12U, _vImageConvert_16UToF, _vImageConvert_16UToPlanar8, 
+                       _vImageConvert_16Uto16F, _vImageConvert_16Uto16Q12, _vImageConvert_420Yp10_CbCr10ToARGB16F, 
                        _vImageConvert_420Yp10_CbCr10ToXRGB2101010W, _vImageConvert_420Yp8_Cb8_Cr8ToARGB8888, 
                        _vImageConvert_420Yp8_CbCr8ToARGB8888, _vImageConvert_422CbYpCrYp10ToARGB16F, 
                        _vImageConvert_422CbYpCrYp10ToXRGB2101010W, _vImageConvert_422CbYpCrYp16ToARGB16U, 

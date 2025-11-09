@@ -834,7 +834,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
-current-version: 368.200
+current-version: 368.203
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -904,7 +904,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
-current-version: 1400
+current-version: 1400.100.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1415,7 +1415,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2328.7.7
+current-version: 2333.22.13
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1612,20 +1612,22 @@ exports:
                        __MDQueryGetResultCountForAllGroups, __MDQueryGetResultCountForGroup, 
                        __MDQueryGetSortFlagsForAttribute, __MDQueryIgnoreAllLastUsedUpdatesForItem, 
                        __MDQueryIgnoreNextLastUsedUpdateForItem, __MDQueryProcessUpdates, 
-                       __MDQuerySendPerformanceFeedback, __MDQuerySetCompletionOptions, 
+                       __MDQuerySendPerformanceFeedback, __MDQuerySetAttributedUserQuery, 
+                       __MDQuerySetClientBundleID, __MDQuerySetCompletionOptions, 
                        __MDQuerySetCompletionQuery, __MDQuerySetCompletionQueryWithWeights, 
                        __MDQuerySetCompletionResultCount, __MDQuerySetCreateResultFunctionWithKeyCallBacks, 
                        __MDQuerySetGroupComparator, __MDQuerySetGroupingRules, __MDQuerySetHasUpdateNotification, 
                        __MDQuerySetLabel, __MDQuerySetMDFilter, __MDQuerySetMDFilterQueries, 
                        __MDQuerySetMatchesOnlyFinderFiles, __MDQuerySetMaxCountPerGroup, 
                        __MDQuerySetMenuSortFlagsForQuery, __MDQuerySetNoProgress, 
+                       __MDQuerySetPommesRanking, __MDQuerySetQueryUnderstanding, 
                        __MDQuerySetRankingTerms, __MDQuerySetResultMatchingAttributes, 
                        __MDQuerySetSearchScopes, __MDQuerySetSortFlagsForAttribute, 
-                       __MDQuerySetSortOrder, __MDQuerySetSortToNone, __MDQuerySortDatesDescending, 
-                       __MDQueryStringCopyUserInput, __MDQueryStringCreateForRanking, 
-                       __MDQueryStringPreload, __MDQueryTotalCount, __MDQueryUserStringFacetsApplyDoWhileBlock, 
-                       __MDQueryWillSendPerformanceFeedback, __MDRankBitForShortcut, 
-                       __MDRankIsExactPhraseMatch, __MDRankIsMeaningfulForTopHit, 
+                       __MDQuerySetSortOrder, __MDQuerySetSortToNone, __MDQuerySetTokenRewrites, 
+                       __MDQuerySortDatesDescending, __MDQueryStringCopyUserInput, 
+                       __MDQueryStringCreateForRanking, __MDQueryStringPreload, __MDQueryTotalCount, 
+                       __MDQueryUserStringFacetsApplyDoWhileBlock, __MDQueryWillSendPerformanceFeedback, 
+                       __MDRankBitForShortcut, __MDRankIsExactPhraseMatch, __MDRankIsMeaningfulForTopHit, 
                        __MDRankIsOnOldBootVolume, __MDRegisterFileProviderPaths, 
                        __MDRegisterMailClient, __MDRemoveExtendedAttributes, __MDRemoveExtendedAttributesForPath, 
                        __MDRemoveExtenedAttributes, __MDRemoveExtenedAttributesForPath, 
@@ -1641,9 +1643,10 @@ exports:
                        __MDStringPrefixOfString, __MDSuspendIndexing, __MDSuspendIndexingDirectory, 
                        __MDTransferExtendedAttributes, __MDUserListChange, __MDWaitForServerDeath, 
                        ___MDItemCopyAttributesEllipsis1, ___MDItemRemoveAttributesEllipsis1, 
-                       ___MDItemSetAttributesEllipsis1, __kMDImportIsForBackup, __kMDImporterTextLimitInK, 
-                       __kMDItemAdamID, __kMDItemContentChangeDate, __kMDItemCreationDate, 
-                       __kMDItemCreatorCode, __kMDItemExportImporterAvaliable, __kMDItemFSContentType, 
+                       ___MDItemSetAttributesEllipsis1, __kMDAttributedUserQuery, 
+                       __kMDImportIsForBackup, __kMDImporterTextLimitInK, __kMDItemAdamID, 
+                       __kMDItemContentChangeDate, __kMDItemCreationDate, __kMDItemCreatorCode, 
+                       __kMDItemExportImporterAvaliable, __kMDItemFSContentType, 
                        __kMDItemFSContentTypeTree, __kMDItemFSDisplayName, __kMDItemFileName, 
                        __kMDItemFinderFlags, __kMDItemFinderLabel, __kMDItemHasCustomIcon, 
                        __kMDItemHasExtensionHidden, __kMDItemImporterResult, __kMDItemIncomingCalendarCounts, 
@@ -1659,7 +1662,9 @@ exports:
                        __kMDItemSortIdentityAttr, __kMDItemStaticInterestScore, __kMDItemSupportFileType, 
                        __kMDItemTextContentIndexExists, __kMDItemTypeCode, __kMDItemURLCanBeHiddenBySystem, 
                        __kMDItemUserTags, __kMDParametersForImporter, __kMDQueryAnnSearchParams, 
-                       __kMDQueryItemInScopeForRankingOnly, __kMDQueryScope, __kMDUserQueryAttributedInputDateKey, 
+                       __kMDQueryClientBundleID, __kMDQueryItemInScopeForRankingOnly, 
+                       __kMDQueryPommesRanking, __kMDQueryScope, __kMDQueryTokenRewrites, 
+                       __kMDQueryUnderstanding, __kMDUserQueryAttributedInputDateKey, 
                        __kMDUserQueryAttributedInputRecipientKey, __kMDUserQueryAttributedInputSenderKey, 
                        __kMDUserQueryAttributedInputTitleKey, __kMDUserQueryAttributedInputTopicKey, 
                        __kMDUserQueryDictionaryAttributedInputSourceRuleBased, __kMDUserQueryDictionaryAttributedInputSourceU2Based, 
@@ -1882,7 +1887,7 @@ reexports:
                        _MDStoreOIDArrayCreateMutableWithOids, _MDStoreOIDArrayCreateWithDeallocator, 
                        _MDStoreOIDArrayEndBulkAdd, _MDStoreOIDArrayEndSequence, _MDStoreOIDArrayGetMappedVector, 
                        _MDStoreOIDArrayGetTypeID, _MDStoreOIDArrayGetVector, _MDStoreOIDArrayGetVectorCount, 
-                       _MDStoreOIDArrayRoom, _MDStoreOIDArraySetShouldDeallocate, 
+                       _MDStoreOIDArrayIsMutable, _MDStoreOIDArrayRoom, _MDStoreOIDArraySetShouldDeallocate, 
                        _MDStoreOIDArraySetShouldUseMalloc, _MDUniquiedStringDictCreate, 
                        __MDPlistBytesAddObject, __MDPlistBytesAddUInt64Array, __MDPlistBytesAddURL, 
                        __MDPlistBytesAppendChunk, __MDPlistBytesFirstChunk, __MDPlistBytesNextChunk, 

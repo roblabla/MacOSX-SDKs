@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
-current-version: 3185.18.5
+current-version: 3210.19.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -42,7 +42,7 @@ exports:
                        _VTDecompressionSessionDecodeFrameWithOptions, _VTDecompressionSessionDecodeFrameWithOptionsAndMultiImageCapableOutputHandler, 
                        _VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler, 
                        _VTDecompressionSessionDecodeFrameWithOutputHandler, _VTDecompressionSessionFinishDelayedFrames, 
-                       _VTDecompressionSessionGetMinAndMaxOutputPresentationTimeStampOfFramesBeingDecoded, 
+                       _VTDecompressionSessionFlushPixelBufferPool, _VTDecompressionSessionGetMinAndMaxOutputPresentationTimeStampOfFramesBeingDecoded, 
                        _VTDecompressionSessionGetMinOutputPresentationTimeStampOfFramesBeingDecoded, 
                        _VTDecompressionSessionGetTypeID, _VTDecompressionSessionInvalidate, 
                        _VTDecompressionSessionSetMultiImageCallback, _VTDecompressionSessionSetProperties, 
@@ -60,11 +60,12 @@ exports:
                        _VTEncoderSessionSetPixelBufferAttributes, _VTEncoderSessionSetTimeRangesForNextPass, 
                        _VTEnsureReadyToCollectIncrementalCoverageData, _VTFillPixelBufferBorderWithBlack, 
                        _VTFillPixelBufferWithBlack, _VTFinishUpdatingIncrementalCodeCoverageData, 
-                       _VTFrameSiloAddSampleBuffer, _VTFrameSiloCallBlockForEachSampleBuffer, 
-                       _VTFrameSiloCallFunctionForEachSampleBuffer, _VTFrameSiloCreate, 
-                       _VTFrameSiloGetProgressOfCurrentPass, _VTFrameSiloGetTypeID, 
-                       _VTFrameSiloSetTimeRangesForNextPass, _VTGetDecoderCapabilitesForFormatDescription, 
-                       _VTGetDefaultColorAttributesWithHints, _VTGetDefaultYCbCrMatrixWithColorSpaceNameAndDimensionHints, 
+                       _VTFrameProcessorErrorDomain, _VTFrameSiloAddSampleBuffer, 
+                       _VTFrameSiloCallBlockForEachSampleBuffer, _VTFrameSiloCallFunctionForEachSampleBuffer, 
+                       _VTFrameSiloCreate, _VTFrameSiloGetProgressOfCurrentPass, 
+                       _VTFrameSiloGetTypeID, _VTFrameSiloSetTimeRangesForNextPass, 
+                       _VTGetDecoderCapabilitesForFormatDescription, _VTGetDefaultColorAttributesWithHints, 
+                       _VTGetDefaultYCbCrMatrixWithColorSpaceNameAndDimensionHints, 
                        _VTGetDefaultYCbCrMatrixWithDimensionHints, _VTGetDefaultYCbCrMatrixWithNoHints, 
                        _VTGetHEVCCapabilitesForFormatDescription, _VTHDRImageStatisticsGenerationSessionCreate, 
                        _VTHDRImageStatisticsGenerationSessionCreateStatistics, _VTHDRImageStatisticsGenerationSessionGetTypeID, 
@@ -664,6 +665,10 @@ exports:
                        _kVTVideoEncoder_Rating, _kVTVideoEncoder_SupportsMultiPass, 
                        _kVTVideoEncoder_SupportsTiledCompression, _kVTVideoEncoder_WrappedInstanceCount, 
                        _kVTVideoEncoder_WrapsCodecType, _kVTVideoEncoder_WrapsSoftwareCodecOnly ]
+    objc-classes:    [ VTFrameProcessor, VTFrameProcessorFrame, VTFrameProcessorOpticalFlow, 
+                       VTFrameRateConversionConfiguration, VTFrameRateConversionParameters, 
+                       VTMotionBlurConfiguration, VTMotionBlurParameters, VTOpticalFlowConfiguration, 
+                       VTOpticalFlowParameters, VTTestProcessorConfiguration, VTTestProcessorParameters ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _VTCopyRAWProcessorExtensionProperties, _VTCopyVideoDecoderExtensionProperties, 
                        _VTGetGVADecoderAvailability, _VTIsSecTaskEntitledForInProcessH264AndVP9Decode, 

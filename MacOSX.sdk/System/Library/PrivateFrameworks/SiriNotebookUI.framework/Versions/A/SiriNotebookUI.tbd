@@ -13,7 +13,9 @@ exports:
                        '_$s14SiriNotebookUI0B8UIPluginCMn', '_$s14SiriNotebookUI0B8UIPluginCMo', 
                        '_$s14SiriNotebookUI0B8UIPluginCMu', '_$s14SiriNotebookUI0B8UIPluginCN', 
                        '_$s14SiriNotebookUI0B8UIPluginCfD', '_$s14SiriNotebookUI0B8UIPluginCfd', 
-                       '_$s14SiriNotebookUI0aB9ConstantsO13notesBundleIdSSvgZ', '_$s14SiriNotebookUI0aB9ConstantsO17remindersBundleIdSSvgZ', 
+                       '_$s14SiriNotebookUI0aB9ConstantsO13notesBundleIdSSvgZ', '_$s14SiriNotebookUI0aB9ConstantsO13notesBundleIdSSvpZMV', 
+                       '_$s14SiriNotebookUI0aB9ConstantsO17remindersBundleIdSSvgZ', 
+                       '_$s14SiriNotebookUI0aB9ConstantsO17remindersBundleIdSSvpZMV', 
                        '_$s14SiriNotebookUI0aB9ConstantsOMa', '_$s14SiriNotebookUI0aB9ConstantsOMn', 
                        '_$s14SiriNotebookUI0aB9ConstantsON' ]
 ...

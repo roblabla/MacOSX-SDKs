@@ -57,6 +57,7 @@ typedef NS_ENUM( NSInteger, ASAccessoryEventType )
 /// Event for status and other updates.
 AS_EXTERN
 API_AVAILABLE( ios( 18.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos)
+NS_SWIFT_SENDABLE
 @interface ASAccessoryEvent : NSObject
 
 /// The type of event, such as accessory addition or removal, or picker presentation or removal.

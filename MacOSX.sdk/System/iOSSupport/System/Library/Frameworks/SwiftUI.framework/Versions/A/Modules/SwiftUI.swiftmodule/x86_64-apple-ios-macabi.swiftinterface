@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 6.2.16.1.201 -module-name SwiftUI -package-name SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 6.4.41 -module-name SwiftUI -package-name SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Combine
 import CoreData
 import CoreFoundation
@@ -486,8 +487,8 @@ public struct WindowLevel : Swift.Sendable, Swift.Hashable {
   public static var normal: SwiftUI.WindowLevel {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.WindowLevel, b: SwiftUI.WindowLevel) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -607,7 +608,6 @@ extension SwiftUICore._ConditionalContent : SwiftUI.TableColumnContent where Tru
   @available(watchOS, unavailable, introduced: 6.0)
   public typealias TableColumnBody = Swift.Never
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -622,22 +622,6 @@ extension Swift.Optional : SwiftUI.TableColumnContent where Wrapped : SwiftUI.Ta
   @available(watchOS, unavailable)
   public typealias TableColumnBody = Swift.Never
 }
-#else
-@available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension Swift.Optional : SwiftUI.TableColumnContent where Wrapped : SwiftUI.TableColumnContent {
-  public typealias TableRowValue = Wrapped.TableRowValue
-  public typealias TableColumnSortComparator = Wrapped.TableColumnSortComparator
-  public typealias TableRowBody = Swift.Never
-  nonisolated public static func _makeContent(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
-  nonisolated public static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
-  @available(iOS 17.4, visionOS 1.1, macOS 14.4, *)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
-  public typealias TableColumnBody = Swift.Never
-}
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.View {
   nonisolated public func accessibilityLabel(_ label: SwiftUICore.Text, isEnabled: Swift.Bool) -> SwiftUICore.ModifiedContent<Self, SwiftUI.AccessibilityAttachmentModifier>
@@ -847,6 +831,16 @@ extension SwiftUICore.View {
 @available(visionOS, unavailable)
 extension SwiftUI.Scene {
   nonisolated public func dialogIcon(_ icon: SwiftUICore.Image?) -> some SwiftUI.Scene
+  
+}
+@available(macOS 15.4, *)
+@available(iOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension SwiftUICore.View {
+  nonisolated public func dialogPreventsAppTermination(_ prevents: Swift.Bool?) -> some SwiftUICore.View
   
 }
 @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use View.alert(_:isPresented:presenting:actions:) instead.")
@@ -1097,8 +1091,8 @@ public struct AlternatingRowBackgroundBehavior : Swift.Hashable, Swift.Sendable 
   public static let automatic: SwiftUI.AlternatingRowBackgroundBehavior
   public static let enabled: SwiftUI.AlternatingRowBackgroundBehavior
   public static let disabled: SwiftUI.AlternatingRowBackgroundBehavior
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.AlternatingRowBackgroundBehavior, b: SwiftUI.AlternatingRowBackgroundBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1106,7 +1100,13 @@ public struct AlternatingRowBackgroundBehavior : Swift.Hashable, Swift.Sendable 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public protocol ScrollTargetBehavior {
   func updateTarget(_ target: inout SwiftUICore.ScrollTarget, context: Self.TargetContext)
+  @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  func properties(context: Self.PropertiesContext) -> Self.Properties
   typealias TargetContext = SwiftUI.ScrollTargetBehaviorContext
+  @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  typealias Properties = SwiftUI.ScrollTargetBehaviorProperties
+  @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  typealias PropertiesContext = SwiftUI.ScrollTargetBehaviorPropertiesContext
   static func _makeInputs(_ behavior: SwiftUICore._GraphValue<Self>, inputs: inout SwiftUICore._ViewInputs)
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   func _updateEnvironment(_ env: inout SwiftUICore.EnvironmentValues, context: SwiftUI._ScrollTargetBehaviorEnvironmentContext)
@@ -1118,6 +1118,32 @@ extension SwiftUI.ScrollTargetBehavior {
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUI.ScrollTargetBehavior {
   public func _updateEnvironment(_ env: inout SwiftUICore.EnvironmentValues, context: SwiftUI._ScrollTargetBehaviorEnvironmentContext)
+}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+extension SwiftUI.ScrollTargetBehavior {
+  public func properties(context: Self.PropertiesContext) -> Self.Properties
+}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+public struct ScrollTargetBehaviorProperties : Swift.Equatable, Swift.Sendable {
+  @available(macOS, unavailable)
+  public var limitsScrolls: Swift.Bool {
+    get
+    set
+  }
+  public init()
+  public static func == (a: SwiftUI.ScrollTargetBehaviorProperties, b: SwiftUI.ScrollTargetBehaviorProperties) -> Swift.Bool
+}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+public struct ScrollTargetBehaviorPropertiesContext {
+  public var environment: SwiftUICore.EnvironmentValues {
+    get
+  }
+  public var axes: SwiftUICore.Axis.Set {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUI.ScrollTargetBehaviorPropertiesContext : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct _ScrollTargetBehaviorEnvironmentContext {
@@ -1220,34 +1246,31 @@ extension SwiftUICore.View {
   
 }
 extension SwiftUICore.View {
-  @available(iOS 18.0, macOS 15.0, *)
+  @available(iOS 18.0, macOS 15.0, visionOS 2.4, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  @available(visionOS, unavailable)
   @inlinable @_Concurrency.MainActor @preconcurrency public func writingToolsBehavior(_ behavior: SwiftUI.WritingToolsBehavior) -> some SwiftUICore.View {
         environment(\.writingToolsBehavior, behavior)
     }
   
 }
-@available(iOS 18.0, macOS 15.0, *)
+@available(iOS 18.0, macOS 15.0, visionOS 2.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 public struct WritingToolsBehavior : Swift.Sendable, Swift.Hashable {
   public static let automatic: SwiftUI.WritingToolsBehavior
   public static let complete: SwiftUI.WritingToolsBehavior
   public static let limited: SwiftUI.WritingToolsBehavior
   public static let disabled: SwiftUI.WritingToolsBehavior
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.WritingToolsBehavior, b: SwiftUI.WritingToolsBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 18.0, macOS 15.0, *)
+@available(iOS 18.0, macOS 15.0, visionOS 2.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 extension SwiftUICore.EnvironmentValues {
   @usableFromInline
   internal var writingToolsBehavior: SwiftUI.WritingToolsBehavior? {
@@ -2984,7 +3007,6 @@ extension SwiftUICore.VisualEffect {
   public func layerEffect(_ shader: SwiftUICore.Shader, maxSampleOffset: CoreFoundation.CGSize, isEnabled: Swift.Bool = true) -> some SwiftUICore.VisualEffect
   
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension SwiftUICore._ShaderFilterEffect : @retroactive SwiftUICore.VisualEffect {
@@ -2993,16 +3015,6 @@ extension SwiftUICore._ShaderFilterEffect : @retroactive SwiftUICore.VisualEffec
   @available(watchOS, unavailable)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
 }
-#else
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
-@available(watchOS, unavailable)
-extension SwiftUICore._ShaderFilterEffect : SwiftUICore.VisualEffect {
-  public static func _makeVisualEffect(effect: SwiftUICore._GraphValue<SwiftUICore._ShaderFilterEffect>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
-  @available(iOS 17.0, tvOS 17.0, macOS 14.0, *)
-  @available(watchOS, unavailable)
-  public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
-}
-#endif
 extension SwiftUI.FocusedValue {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public init(_ objectType: Value.Type) where Value : AnyObject, Value : Observation.Observable
@@ -3346,7 +3358,6 @@ extension SwiftUI.LabeledContent where Label == SwiftUICore.Text, Content == Swi
 extension SwiftUI.LabeledContent where Label == SwiftUI.LabeledContentStyleConfiguration.Label, Content == SwiftUI.LabeledContentStyleConfiguration.Content {
   public init(_ configuration: SwiftUI.LabeledContentStyleConfiguration)
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUICore.Color : @retroactive CoreTransferable.Transferable {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -3356,17 +3367,6 @@ extension SwiftUICore.Color : @retroactive CoreTransferable.Transferable {
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$s7SwiftUI5ColorV22transferRepresentationQrvpZ", 0) __
 }
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUICore.Color : CoreTransferable.Transferable {
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-  public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias Representation = @_opaqueReturnTypeOf("$s7SwiftUI5ColorV22transferRepresentationQrvpZ", 0) __
-}
-#endif
 @available(iOS 14.0, tvOS 14.0, watchOS 8.0, *)
 @available(macOS, unavailable)
 public protocol IndexViewStyle {
@@ -3854,8 +3854,8 @@ public struct SpatialEventCollection : Swift.Collection {
   @available(tvOS, unavailable)
   public struct Event : Swift.Identifiable, Swift.Hashable {
     public struct ID : Swift.Hashable {
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: SwiftUI.SpatialEventCollection.Event.ID, b: SwiftUI.SpatialEventCollection.Event.ID) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -3904,8 +3904,8 @@ public struct SpatialEventCollection : Swift.Collection {
     public struct InputDevicePose : Swift.Hashable {
       public var altitude: SwiftUICore.Angle
       public var azimuth: SwiftUICore.Angle
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: SwiftUI.SpatialEventCollection.Event.InputDevicePose, b: SwiftUI.SpatialEventCollection.Event.InputDevicePose) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -4048,6 +4048,10 @@ public struct PagingScrollTargetBehavior : SwiftUI.ScrollTargetBehavior {
 extension SwiftUI.PagingScrollTargetBehavior {
   public func _updateEnvironment(_ env: inout SwiftUICore.EnvironmentValues, context: SwiftUI._ScrollTargetBehaviorEnvironmentContext)
 }
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+extension SwiftUI.PagingScrollTargetBehavior {
+  public func properties(context: SwiftUI.PagingScrollTargetBehavior.PropertiesContext) -> SwiftUI.PagingScrollTargetBehavior.Properties
+}
 extension SwiftUI.ScrollTargetBehavior where Self == SwiftUI.PagingScrollTargetBehavior {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @_alwaysEmitIntoClient public static var paging: SwiftUI.PagingScrollTargetBehavior {
@@ -4086,6 +4090,10 @@ public struct ViewAlignedScrollTargetBehavior : SwiftUI.ScrollTargetBehavior {
 extension SwiftUI.ViewAlignedScrollTargetBehavior {
   public func _updateEnvironment(_ env: inout SwiftUICore.EnvironmentValues, context: SwiftUI._ScrollTargetBehaviorEnvironmentContext)
 }
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+extension SwiftUI.ViewAlignedScrollTargetBehavior {
+  public func properties(context: SwiftUI.ViewAlignedScrollTargetBehavior.PropertiesContext) -> SwiftUI.ViewAlignedScrollTargetBehavior.Properties
+}
 extension SwiftUI.ScrollTargetBehavior where Self == SwiftUI.ViewAlignedScrollTargetBehavior {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @_alwaysEmitIntoClient public static var viewAligned: SwiftUI.ViewAlignedScrollTargetBehavior {
@@ -4104,7 +4112,7 @@ extension SwiftUI.ViewAlignedScrollTargetBehavior.LimitBehavior : Swift.Sendable
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @frozen public struct AnyScrollTargetBehavior : SwiftUI.ScrollTargetBehavior {
-  public var base: (any SwiftUI.ScrollTargetBehavior)
+  public var base: any SwiftUI.ScrollTargetBehavior
   @inlinable public init(_ base: some ScrollTargetBehavior) {
         self.base = base
     }
@@ -4115,8 +4123,24 @@ extension SwiftUI.ViewAlignedScrollTargetBehavior.LimitBehavior : Swift.Sendable
         base._updateEnvironment(&env, context: context)
     }
 }
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+extension SwiftUI.AnyScrollTargetBehavior {
+  @inlinable public func properties(context: SwiftUI.AnyScrollTargetBehavior.PropertiesContext) -> SwiftUI.AnyScrollTargetBehavior.Properties {
+        base.properties(context: context)
+    }
+}
 @available(*, unavailable)
 extension SwiftUI.AnyScrollTargetBehavior : Swift.Sendable {
+}
+@available(macOS 15.4, *)
+@available(iOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension SwiftUICore.View {
+  nonisolated public func presentationPreventsAppTermination(_ prevents: Swift.Bool?) -> some SwiftUICore.View
+  
 }
 extension SwiftUI.TabContent {
   @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
@@ -4534,8 +4558,8 @@ public struct SpringLoadingBehavior : Swift.Hashable, Swift.Sendable {
   public static let automatic: SwiftUI.SpringLoadingBehavior
   public static let enabled: SwiftUI.SpringLoadingBehavior
   public static let disabled: SwiftUI.SpringLoadingBehavior
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.SpringLoadingBehavior, b: SwiftUI.SpringLoadingBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -4555,8 +4579,8 @@ extension SwiftUICore.EnvironmentValues {
 public struct __DesignTimeSelectionIdentifier : Swift.Hashable {
   public let identifier: Swift.String
   public init(_ identifier: Swift.String)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.__DesignTimeSelectionIdentifier, b: SwiftUI.__DesignTimeSelectionIdentifier) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -4580,8 +4604,8 @@ public struct TabBarPlacement : Swift.Hashable {
   public static let bottomBar: SwiftUI.TabBarPlacement
   public static let ornament: SwiftUI.TabBarPlacement
   public static let pageIndicator: SwiftUI.TabBarPlacement
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.TabBarPlacement, b: SwiftUI.TabBarPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -4600,9 +4624,9 @@ public enum ScenePhase : Swift.Comparable {
   case background
   case inactive
   case active
+  public static func < (a: SwiftUI.ScenePhase, b: SwiftUI.ScenePhase) -> Swift.Bool
   public static func == (a: SwiftUI.ScenePhase, b: SwiftUI.ScenePhase) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
-  public static func < (a: SwiftUI.ScenePhase, b: SwiftUI.ScenePhase) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
@@ -4904,13 +4928,16 @@ extension SwiftUI.IndexedIdentifierCollection : Swift.BidirectionalCollection wh
 extension SwiftUI.IndexedIdentifierCollection : Swift.RandomAccessCollection where Base : Swift.RandomAccessCollection {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-@frozen public struct _GeometryActionModifier<Value> where Value : Swift.Equatable {
-  public var value: (SwiftUICore.GeometryProxy) -> Value
+@frozen @preconcurrency public struct _GeometryActionModifier<Value> where Value : Swift.Equatable, Value : Swift.Sendable {
+  @preconcurrency public var value: @Sendable (SwiftUICore.GeometryProxy) -> Value
   public var action: (Value) -> Swift.Void
-  @inlinable public init(value: @escaping (SwiftUICore.GeometryProxy) -> Value, action: @escaping (Value) -> Swift.Void) {
+  @preconcurrency @inlinable public init(value: @escaping @Sendable (SwiftUICore.GeometryProxy) -> Value, action: @escaping (Value) -> Swift.Void) {
         self.value = value
         self.action = action
     }
+  @_silgen_name("$s7SwiftUI23_GeometryActionModifierV5valueyxAA0C5ProxyVYbcvi")
+  @usableFromInline
+  internal mutating func valueInitAccessorABIShim(value: @escaping @Sendable (SwiftUICore.GeometryProxy) -> Value)
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUI._GeometryActionModifier<Value>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
@@ -4919,10 +4946,20 @@ extension SwiftUI.IndexedIdentifierCollection : Swift.RandomAccessCollection whe
 extension SwiftUI._GeometryActionModifier : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 10.0, *)
-@frozen public struct _GeometryActionModifier2<Value> where Value : Swift.Equatable {
-  public var value: (SwiftUICore.GeometryProxy) -> Value
+@frozen @preconcurrency public struct _GeometryActionModifier2<Value> where Value : Swift.Equatable, Value : Swift.Sendable {
+  private var _value: @Sendable (SwiftUICore.GeometryProxy) -> Value
+  public var value: @Sendable (SwiftUICore.GeometryProxy) -> Value {
+    @usableFromInline
+    @storageRestrictions(initializes: _value) init(initialValue)
+    @_silgen_name("$s7SwiftUI24_GeometryActionModifier2V5valueyxAA0C5ProxyVcvg")
+    get
+    @_silgen_name("$s7SwiftUI24_GeometryActionModifier2V5valueyxAA0C5ProxyVcvs")
+    set
+    @_silgen_name("$s7SwiftUI24_GeometryActionModifier2V5valueyxAA0C5ProxyVcvM")
+    _modify
+  }
   public var action: (Value, Value) -> Swift.Void
-  @inlinable public init(value: @escaping (SwiftUICore.GeometryProxy) -> Value, action: @escaping (Value, Value) -> Swift.Void) {
+  @preconcurrency @inlinable public init(value: @escaping @Sendable (SwiftUICore.GeometryProxy) -> Value, action: @escaping (Value, Value) -> Swift.Void) {
         self.value = value
         self.action = action
     }
@@ -4935,14 +4972,14 @@ extension SwiftUI._GeometryActionModifier2 : Swift.Sendable {
 }
 extension SwiftUICore.View {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-  @_alwaysEmitIntoClient nonisolated public func onGeometryChange<T>(for type: T.Type, of transform: @escaping (SwiftUICore.GeometryProxy) -> T, action: @escaping (_ newValue: T) -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable {
+  @_alwaysEmitIntoClient @preconcurrency nonisolated public func onGeometryChange<T>(for type: T.Type, of transform: @escaping @Sendable (SwiftUICore.GeometryProxy) -> T, action: @escaping (_ newValue: T) -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable, T : Swift.Sendable {
         modifier(_GeometryActionModifier<T>(value: transform, action: action))
     }
   
 }
 extension SwiftUICore.View {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 10.0, *)
-  nonisolated public func onGeometryChange<T>(for type: T.Type, of transform: @escaping (SwiftUICore.GeometryProxy) -> T, action: @escaping (_ oldValue: T, _ newValue: T) -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable
+  @preconcurrency nonisolated public func onGeometryChange<T>(for type: T.Type, of transform: @escaping @Sendable (SwiftUICore.GeometryProxy) -> T, action: @escaping (_ oldValue: T, _ newValue: T) -> Swift.Void) -> some SwiftUICore.View where T : Swift.Equatable, T : Swift.Sendable
   
 }
 @available(iOS 14.0, macOS 11.0, *)
@@ -4992,6 +5029,11 @@ extension SwiftUI.NavigationSplitViewStyleConfiguration : Swift.Sendable {
 extension SwiftUICore.View {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func navigationSplitViewStyle<S>(_ style: S) -> some SwiftUICore.View where S : SwiftUI.NavigationSplitViewStyle
+  
+}
+extension SwiftUICore.View {
+  @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  @_Concurrency.MainActor @preconcurrency public func writingToolsAffordanceVisibility(_ visibility: SwiftUICore.Visibility) -> some SwiftUICore.View
   
 }
 @available(macOS 11.0, visionOS 1.0, *)
@@ -5143,8 +5185,8 @@ extension SwiftUICore.Transaction {
 public struct AnimationCompletionCriteria : Swift.Hashable, Swift.Sendable {
   public static let logicallyComplete: SwiftUI.AnimationCompletionCriteria
   public static let removed: SwiftUI.AnimationCompletionCriteria
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.AnimationCompletionCriteria, b: SwiftUI.AnimationCompletionCriteria) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5959,10 +6001,8 @@ extension SwiftUICore.View {
   
   @_disfavoredOverload nonisolated public func fileExporterFilenameLabel<S>(_ label: S) -> some SwiftUICore.View where S : Swift.StringProtocol
   
-  #if compiler(>=5.3) && $ParameterPacks
   nonisolated public func fileDialogURLEnabled(_ predicate: Foundation.Predicate<Foundation.URL>) -> some SwiftUICore.View
   
-  #endif
   nonisolated public func fileDialogImportsUnresolvedAliases(_ imports: Swift.Bool) -> some SwiftUICore.View
   
   nonisolated public func fileDialogBrowserOptions(_ options: SwiftUI.FileDialogBrowserOptions) -> some SwiftUICore.View
@@ -6133,6 +6173,13 @@ extension SwiftUI.TabContent {
   
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   nonisolated public func springLoadingBehavior(_ behavior: SwiftUI.SpringLoadingBehavior) -> some SwiftUI.TabContent<Self.TabValue>
+  
+}
+extension SwiftUI.TabContent {
+  @available(iOS 18.1, macOS 15.1, visionOS 2.1, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @_Concurrency.MainActor @preconcurrency public func draggable<T>(_ payload: @autoclosure @escaping () -> T) -> some SwiftUI.TabContent<Self.TabValue> where T : CoreTransferable.Transferable
   
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -6564,7 +6611,7 @@ extension SwiftUI.ReferenceFileDocumentConfiguration : Swift.Sendable {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension SwiftUICore.View {
-  nonisolated public func onSubmit(of triggers: SwiftUI.SubmitTriggers = .text, _ action: @escaping (() -> Swift.Void)) -> some SwiftUICore.View
+  nonisolated public func onSubmit(of triggers: SwiftUI.SubmitTriggers = .text, _ action: @escaping () -> Swift.Void) -> some SwiftUICore.View
   
   nonisolated public func submitScope(_ isBlocking: Swift.Bool = true) -> some SwiftUICore.View
   
@@ -8763,7 +8810,6 @@ extension SwiftUICore.View {
   nonisolated public func ornament<Content>(visibility: SwiftUICore.Visibility = .automatic, attachmentAnchor: SwiftUI.OrnamentAttachmentAnchor, contentAlignment: SwiftUICore.Alignment = .center, @SwiftUICore.ViewBuilder ornament: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @preconcurrency @_Concurrency.MainActor public protocol TabContent<TabValue> {
   associatedtype TabValue : Swift.Hashable where Self.TabValue == Self.Body.TabValue
@@ -8772,16 +8818,6 @@ extension SwiftUICore.View {
   associatedtype Body : SwiftUI.TabContent
   @SwiftUI.TabContentBuilder<Self.TabValue> @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
 }
-#else
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-@preconcurrency @_Concurrency.MainActor public protocol TabContent {
-  associatedtype TabValue : Swift.Hashable where Self.TabValue == Self.Body.TabValue
-  associatedtype _IdentifiedView : SwiftUICore.View = SwiftUI._TabContentBodyAdaptor<Self>
-  @_Concurrency.MainActor @preconcurrency var _identifiedView: Self._IdentifiedView { get }
-  associatedtype Body : SwiftUI.TabContent
-  @SwiftUI.TabContentBuilder<Self.TabValue> @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
-}
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUI.TabContent where Self._IdentifiedView == SwiftUI._TabContentBodyAdaptor<Self> {
   @_Concurrency.MainActor @preconcurrency public var _identifiedView: SwiftUI._TabContentBodyAdaptor<Self> {
@@ -8856,7 +8892,6 @@ extension SwiftUICore._ConditionalContent : SwiftUI.TabContent where TrueContent
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias _IdentifiedView = SwiftUICore._ConditionalContent<TrueContent._IdentifiedView, FalseContent._IdentifiedView>
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Swift.Optional : SwiftUI.TabContent where Wrapped : SwiftUI.TabContent {
   public typealias TabValue = Wrapped.TabValue
@@ -8872,23 +8907,6 @@ extension Swift.Optional : SwiftUI.TabContent where Wrapped : SwiftUI.TabContent
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias _IdentifiedView = Wrapped._IdentifiedView?
 }
-#else
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension Swift.Optional : SwiftUI.TabContent where Wrapped : SwiftUI.TabContent {
-  public typealias TabValue = Wrapped.TabValue
-  @inlinable @_Concurrency.MainActor @preconcurrency public var _identifiedView: Wrapped._IdentifiedView? {
-    get {
-        self.map { $0._identifiedView }
-    }
-  }
-  public typealias Body = Swift.Optional<Wrapped>
-  @_Concurrency.MainActor @preconcurrency public var body: Swift.Optional<Wrapped> {
-    get
-  }
-  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-  public typealias _IdentifiedView = Wrapped._IdentifiedView?
-}
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.ForEach : SwiftUI.TabContent where Content : SwiftUI.TabContent {
   public typealias TabValue = Content.TabValue
@@ -10497,8 +10515,8 @@ public struct ScrollAnchorRole : Swift.Hashable, Swift.Sendable {
   public static var alignment: SwiftUI.ScrollAnchorRole {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.ScrollAnchorRole, b: SwiftUI.ScrollAnchorRole) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -10533,7 +10551,6 @@ extension SwiftUICore.View {
                 arrowEdges: arrowEdge.map { .init($0) },
                 content: content)
         }
-
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
              
             return popover(
@@ -10994,8 +11011,8 @@ public struct ContainerBackgroundPlacement : Swift.Sendable, Swift.Hashable {
   @available(visionOS, unavailable)
   @available(watchOS, unavailable)
   public static let window: SwiftUI.ContainerBackgroundPlacement
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.ContainerBackgroundPlacement, b: SwiftUI.ContainerBackgroundPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -11677,8 +11694,8 @@ extension SwiftUICore.View {
 @available(visionOS, unavailable)
 public struct PencilDoubleTapGestureValue : Swift.Hashable {
   public let hoverPose: SwiftUI.PencilHoverPose?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.PencilDoubleTapGestureValue, b: SwiftUI.PencilDoubleTapGestureValue) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -11713,8 +11730,8 @@ extension SwiftUI.PencilSqueezeGesturePhase : Swift.Sendable {
 @available(visionOS, unavailable)
 public struct PencilSqueezeGestureValue : Swift.Hashable {
   public let hoverPose: SwiftUI.PencilHoverPose?
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.PencilSqueezeGestureValue, b: SwiftUI.PencilSqueezeGestureValue) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -11750,8 +11767,8 @@ public struct TabRole : Swift.Hashable, Swift.Sendable {
   public static var search: SwiftUI.TabRole {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.TabRole, b: SwiftUI.TabRole) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -11981,8 +11998,8 @@ public struct TableColumnAlignment : Swift.Hashable, Swift.Sendable {
     get
   }
   public static func numeric(_ numberingSystem: Foundation.Locale.NumberingSystem) -> SwiftUI.TableColumnAlignment
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.TableColumnAlignment, b: SwiftUI.TableColumnAlignment) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -12340,7 +12357,6 @@ extension SwiftUICore._ConditionalContent : SwiftUI.TableRowContent where TrueCo
   @usableFromInline
   internal init(storage: SwiftUICore._ConditionalContent<TrueContent, FalseContent>.Storage)
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -12354,21 +12370,6 @@ extension Swift.Optional : SwiftUI.TableRowContent where Wrapped : SwiftUI.Table
   @available(watchOS, unavailable)
   nonisolated public static func _containsOutlineSymbol(inputs: SwiftUI._TableRowInputs) -> Swift.Bool
 }
-#else
-@available(iOS 16.0, macOS 13.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension Swift.Optional : SwiftUI.TableRowContent where Wrapped : SwiftUI.TableRowContent {
-  public typealias TableRowValue = Wrapped.TableRowValue
-  public typealias TableRowBody = Swift.Never
-  nonisolated public static func _makeRows(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUI._TableRowInputs) -> SwiftUI._TableRowOutputs
-  nonisolated public static func _tableRowCount(inputs: SwiftUI._TableRowInputs) -> Swift.Int?
-  @available(iOS 17.0, macOS 14.0, *)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
-  nonisolated public static func _containsOutlineSymbol(inputs: SwiftUI._TableRowInputs) -> Swift.Bool
-}
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.View {
   nonisolated public func accessibilityInputLabels(_ inputLabels: [SwiftUICore.Text], isEnabled: Swift.Bool) -> SwiftUICore.ModifiedContent<Self, SwiftUI.AccessibilityAttachmentModifier>
@@ -12593,7 +12594,6 @@ public struct UtilityWindow<Content> : SwiftUI.Scene where Content : SwiftUICore
 @available(*, unavailable)
 extension SwiftUI.UtilityWindow : Swift.Sendable {
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUICore.Image : @retroactive CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
@@ -12602,16 +12602,6 @@ extension SwiftUICore.Image : @retroactive CoreTransferable.Transferable {
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$s7SwiftUI5ImageV22transferRepresentationQrvpZ", 0) __
 }
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUICore.Image : CoreTransferable.Transferable {
-  public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
-    get
-  }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias Representation = @_opaqueReturnTypeOf("$s7SwiftUI5ImageV22transferRepresentationQrvpZ", 0) __
-}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : SwiftUICore.View where Content : SwiftUICore.View {
   public var content: Content
@@ -12704,15 +12694,15 @@ extension SwiftUI.MatchedTransitionSourceConfiguration {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct AccessibilityRotorEntry<ID> where ID : Swift.Hashable {
-  public init(_ label: SwiftUICore.Text, id: ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping (() -> Swift.Void) = {})
-  public init(_ label: SwiftUICore.Text, id: ID, in namespace: SwiftUICore.Namespace.ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping (() -> Swift.Void) = {})
-  public init(_ label: SwiftUICore.Text? = nil, textRange: Swift.Range<Swift.String.Index>, prepare: @escaping (() -> Swift.Void) = {}) where ID == Swift.Never
-  public init(_ labelKey: SwiftUICore.LocalizedStringKey, id: ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping (() -> Swift.Void) = {})
-  @_disfavoredOverload public init<L>(_ label: L, id: ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping (() -> Swift.Void) = {}) where L : Swift.StringProtocol
-  public init(_ labelKey: SwiftUICore.LocalizedStringKey, id: ID, in namespace: SwiftUICore.Namespace.ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping (() -> Swift.Void) = {})
-  @_disfavoredOverload public init<L>(_ label: L, _ id: ID, in namespace: SwiftUICore.Namespace.ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping (() -> Swift.Void) = {}) where L : Swift.StringProtocol
-  public init(_ labelKey: SwiftUICore.LocalizedStringKey, textRange: Swift.Range<Swift.String.Index>, prepare: @escaping (() -> Swift.Void) = {})
-  @_disfavoredOverload public init<L>(_ label: L, textRange: Swift.Range<Swift.String.Index>, prepare: @escaping (() -> Swift.Void) = {}) where ID == Swift.Never, L : Swift.StringProtocol
+  public init(_ label: SwiftUICore.Text, id: ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping () -> Swift.Void = {})
+  public init(_ label: SwiftUICore.Text, id: ID, in namespace: SwiftUICore.Namespace.ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping () -> Swift.Void = {})
+  public init(_ label: SwiftUICore.Text? = nil, textRange: Swift.Range<Swift.String.Index>, prepare: @escaping () -> Swift.Void = {}) where ID == Swift.Never
+  public init(_ labelKey: SwiftUICore.LocalizedStringKey, id: ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping () -> Swift.Void = {})
+  @_disfavoredOverload public init<L>(_ label: L, id: ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping () -> Swift.Void = {}) where L : Swift.StringProtocol
+  public init(_ labelKey: SwiftUICore.LocalizedStringKey, id: ID, in namespace: SwiftUICore.Namespace.ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping () -> Swift.Void = {})
+  @_disfavoredOverload public init<L>(_ label: L, _ id: ID, in namespace: SwiftUICore.Namespace.ID, textRange: Swift.Range<Swift.String.Index>? = nil, prepare: @escaping () -> Swift.Void = {}) where L : Swift.StringProtocol
+  public init(_ labelKey: SwiftUICore.LocalizedStringKey, textRange: Swift.Range<Swift.String.Index>, prepare: @escaping () -> Swift.Void = {})
+  @_disfavoredOverload public init<L>(_ label: L, textRange: Swift.Range<Swift.String.Index>, prepare: @escaping () -> Swift.Void = {}) where ID == Swift.Never, L : Swift.StringProtocol
 }
 @available(*, unavailable)
 extension SwiftUI.AccessibilityRotorEntry : Swift.Sendable {
@@ -12936,7 +12926,6 @@ public struct Viewpoint3D : Swift.Equatable, Swift.Sendable, Swift.CustomDebugSt
     public typealias RawValue = Swift.Int
   }
   public static func == (a: SwiftUI.SquareAzimuth, b: SwiftUI.SquareAzimuth) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(visionOS 2.0, *)
   @available(iOS, unavailable)
   @available(tvOS, unavailable)
@@ -12946,6 +12935,7 @@ public struct Viewpoint3D : Swift.Equatable, Swift.Sendable, Swift.CustomDebugSt
   nonisolated public static var allCases: [SwiftUI.SquareAzimuth] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -13452,7 +13442,6 @@ extension SwiftUI.TabContent {
   nonisolated public func contextMenu<M>(@SwiftUICore.ViewBuilder menuItems: () -> M) -> some SwiftUI.TabContent<Self.TabValue> where M : SwiftUICore.View
   
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -13465,20 +13454,6 @@ extension SwiftUI.TabContent {
   @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
   nonisolated static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
 }
-#else
-@available(iOS 16.0, macOS 12.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@preconcurrency @_Concurrency.MainActor public protocol TableColumnContent {
-  associatedtype TableRowValue : Swift.Identifiable = Self.TableColumnBody.TableRowValue
-  associatedtype TableColumnSortComparator : Foundation.SortComparator = Self.TableColumnBody.TableColumnSortComparator
-  associatedtype TableColumnBody : SwiftUI.TableColumnContent
-  nonisolated var tableColumnBody: Self.TableColumnBody { get }
-  nonisolated static func _makeContent(content: SwiftUICore._GraphValue<Self>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
-  @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
-  nonisolated static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
-}
-#endif
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -13968,23 +13943,13 @@ extension SwiftUI.WidgetConfiguration {
 @available(tvOS, unavailable)
 extension Swift.Never : SwiftUI.WidgetConfiguration {
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 17.0, macOS 14.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol DocumentBaseBox<Document> : AnyObject {
   associatedtype Document
-  var base: Self.Document! { get set }
+  var base: Self.Document? { get set }
 }
-#else
-@available(iOS 17.0, macOS 14.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-public protocol DocumentBaseBox : AnyObject {
-  associatedtype Document
-  var base: Self.Document! { get set }
-}
-#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUI.List {
   @available(watchOS, unavailable)
@@ -14423,14 +14388,10 @@ extension NSUnderlineStyle {
   public static func buildBlock() -> some SwiftUI.Scene
   
   public static func buildBlock<Content>(_ content: Content) -> Content where Content : SwiftUI.Scene
-  #if compiler(>=5.3) && $ParameterPacks
   @_disfavoredOverload @_alwaysEmitIntoClient public static func buildBlock<each Content>(_ content: repeat each Content) -> some SwiftUI.Scene where repeat each Content : SwiftUI.Scene {
         _TupleScene((repeat each content))
     }
-  #if compiler(>=5.3) && $ParameterPacks
-
-  #endif
-  #endif
+  
 }
 @available(*, unavailable)
 extension SwiftUI.SceneBuilder : Swift.Sendable {
@@ -15287,8 +15248,8 @@ public struct PencilPreferredAction : Swift.Hashable {
   public static let showContextualPalette: SwiftUI.PencilPreferredAction
   public static let runSystemShortcut: SwiftUI.PencilPreferredAction
   public static let ignore: SwiftUI.PencilPreferredAction
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.PencilPreferredAction, b: SwiftUI.PencilPreferredAction) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -15559,7 +15520,6 @@ extension SwiftUICore._ConditionalContent : SwiftUI.Commands where TrueContent :
   @available(watchOS, unavailable, introduced: 6.0)
   public typealias Body = Swift.Never
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -15570,18 +15530,6 @@ extension Swift.Optional : SwiftUI.Commands where Wrapped : SwiftUI.Commands {
   @available(watchOS, unavailable)
   public typealias Body = Swift.Never
 }
-#else
-@available(iOS 16.0, macOS 13.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension Swift.Optional : SwiftUI.Commands where Wrapped : SwiftUI.Commands {
-  nonisolated public static func _makeCommands(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUI._CommandsInputs) -> SwiftUI._CommandsOutputs
-  @available(iOS 16.0, macOS 13.0, *)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
-  public typealias Body = Swift.Never
-}
-#endif
 extension SwiftUICore.EdgeInsets {
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
@@ -15897,19 +15845,11 @@ extension SwiftUICore.Color {
 extension SwiftUICore.Color {
   public init(uiColor: UIKit.UIColor)
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 extension UIKit.UIColor {
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   @available(macOS, unavailable)
   convenience public init(_ color: SwiftUICore.Color)
 }
-#else
-extension UIKit.UIColor {
-  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-  @available(macOS, unavailable)
-  convenience public init(_ color: SwiftUICore.Color)
-}
-#endif
 extension SwiftUICore.ColorScheme {
   @available(iOS 14.0, tvOS 14.0, *)
   @available(macOS, unavailable)
@@ -16017,25 +15957,19 @@ public struct CarouselListStyle : SwiftUI.ListStyle {
 @available(*, unavailable)
 extension SwiftUI.CarouselListStyle : Swift.Sendable {
 }
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>, _ additionalTraits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @SwiftUICore.ViewBuilder body: @escaping @_Concurrency.MainActor () -> any SwiftUICore.View) = #externalMacro(module: "PreviewsMacros", type: "SwiftUIView")
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, @SwiftUICore.ViewBuilder body: @escaping @_Concurrency.MainActor () -> any SwiftUICore.View) = #externalMacro(module: "PreviewsMacros", type: "SwiftUIView")
-#endif
 extension DeveloperToolsSupport.Preview {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> any SwiftUICore.View)
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 @attached(peer) public macro Previewable() = #externalMacro(
     module: "PreviewsMacros",
     type: "Previewable"
 )
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct _Previewable {
   public init()
@@ -16096,7 +16030,6 @@ extension SwiftUICore.View {
     }
   
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -16109,20 +16042,6 @@ extension SwiftUICore.View {
   @available(iOS 17.0, macOS 14.0, *)
   nonisolated static func _containsOutlineSymbol(inputs: SwiftUI._TableRowInputs) -> Swift.Bool
 }
-#else
-@available(iOS 16.0, macOS 12.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@preconcurrency @_Concurrency.MainActor public protocol TableRowContent {
-  associatedtype TableRowValue : Swift.Identifiable = Self.TableRowBody.TableRowValue
-  associatedtype TableRowBody : SwiftUI.TableRowContent
-  @_Concurrency.MainActor @preconcurrency var tableRowBody: Self.TableRowBody { get }
-  nonisolated static func _makeRows(content: SwiftUICore._GraphValue<Self>, inputs: SwiftUI._TableRowInputs) -> SwiftUI._TableRowOutputs
-  nonisolated static func _tableRowCount(inputs: SwiftUI._TableRowInputs) -> Swift.Int?
-  @available(iOS 17.0, macOS 14.0, *)
-  nonisolated static func _containsOutlineSymbol(inputs: SwiftUI._TableRowInputs) -> Swift.Bool
-}
-#endif
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -16228,6 +16147,26 @@ extension SwiftUICore.View {
         return modifier(_IdentifiedModifier(identifier: identifier))
     }
   
+}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+extension SwiftUICore.View {
+  nonisolated public func contentToolbar<Content>(for placement: SwiftUI.ContentToolbarPlacement, @SwiftUICore.ViewBuilder content: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
+  
+  nonisolated public func contentToolbar<Content>(for placement: SwiftUI.ContentToolbarPlacement, @SwiftUI.ToolbarContentBuilder content: () -> Content) -> some SwiftUICore.View where Content : SwiftUI.ToolbarContent
+  
+}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+public struct ContentToolbarPlacement : Swift.Hashable, Swift.Sendable {
+  @available(iOS 18.4, visionOS 2.4, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public static let tabViewSidebar: SwiftUI.ContentToolbarPlacement
+  public static func == (a: SwiftUI.ContentToolbarPlacement, b: SwiftUI.ContentToolbarPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 extension SwiftUICore.View {
   @available(iOS 13.0, tvOS 13.0, *)
@@ -17408,19 +17347,71 @@ extension SwiftUI.FetchedResults where Result : CoreData.NSManagedObject {
 @available(watchOS, unavailable)
 public struct TabViewCustomization : Swift.Equatable, Swift.Sendable, Swift.Codable {
   public init()
+  @available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
+  public subscript(tab id: Swift.String) -> SwiftUI.TabViewCustomization.TabCustomization {
+    get
+    set
+  }
+  @available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
+  public subscript(section id: Swift.String) -> SwiftUI.TabViewCustomization.SectionCustomization {
+    get
+    set
+  }
+  public mutating func resetVisibility()
+  public mutating func resetSectionOrder()
+  @available(iOS, introduced: 18.0, deprecated: 100000.0, message: "Use the `section` subscript and read `tabOrder` instead.")
+  @available(macOS, introduced: 15.0, deprecated: 100000.0, message: "Use the `section` subscript and read `tabOrder` instead.")
+  @available(visionOS, introduced: 2.0, deprecated: 100000.0, message: "Use the `section` subscript and read `tabOrder` instead.")
+  public subscript(sectionID id: Swift.String) -> [Swift.String]? {
+    get
+  }
+  @available(iOS, introduced: 18.0, deprecated: 100000.0, message: "Use the `tab` subscript and read `sidebarVisibility` instead.")
+  @available(macOS, introduced: 15.0, deprecated: 100000.0, message: "Use the `tab` subscript and read `sidebarVisibility` instead.")
+  @available(visionOS, introduced: 2.0, deprecated: 100000.0, message: "Use the `tab` subscript and read `sidebarVisibility` instead.")
   public subscript(sidebarVisibility id: Swift.String) -> SwiftUICore.Visibility {
     get
     set
   }
-  public subscript(sectionID id: Swift.String) -> [Swift.String]? {
-    get
-  }
-  public mutating func resetVisibility()
+  @available(iOS, introduced: 18.0, deprecated: 100000.0, message: "Use the `section` subscript and call `resetTabOrder` instead.")
+  @available(macOS, introduced: 15.0, deprecated: 100000.0, message: "Use the `section` subscript and call `resetTabOrder` instead.")
+  @available(visionOS, introduced: 2.0, deprecated: 100000.0, message: "Use the `section` subscript and call `resetTabOrder` instead.")
   public mutating func resetSectionOrder(for sectionID: Swift.String)
-  public mutating func resetSectionOrder()
   public static func == (a: SwiftUI.TabViewCustomization, b: SwiftUI.TabViewCustomization) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.TabViewCustomization {
+  public struct TabCustomization {
+    public var sidebarVisibility: SwiftUICore.Visibility {
+      get
+      set
+    }
+    @available(macOS, unavailable)
+    @available(visionOS, unavailable)
+    public var tabBarVisibility: SwiftUICore.Visibility {
+      get
+    }
+  }
+}
+@available(*, unavailable)
+extension SwiftUI.TabViewCustomization.TabCustomization : Swift.Sendable {
+}
+@available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.TabViewCustomization {
+  public struct SectionCustomization {
+    public var tabOrder: [Swift.String]? {
+      get
+    }
+    public mutating func resetTabOrder()
+  }
+}
+@available(*, unavailable)
+extension SwiftUI.TabViewCustomization.SectionCustomization : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
@@ -17612,8 +17603,8 @@ public struct KeyEquivalent : Swift.Sendable {
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension SwiftUI.KeyEquivalent : Swift.Hashable {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.KeyEquivalent, b: SwiftUI.KeyEquivalent) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -18062,30 +18053,15 @@ extension SwiftUICore._ConditionalContent : SwiftUI.ToolbarContent where TrueCon
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUICore._ConditionalContent : SwiftUI.CustomizableToolbarContent where TrueContent : SwiftUI.CustomizableToolbarContent, FalseContent : SwiftUI.CustomizableToolbarContent {
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : SwiftUI.ToolbarContent where Wrapped : SwiftUI.ToolbarContent {
   nonisolated public static func _makeToolbar(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUI._ToolbarInputs) -> SwiftUI._ToolbarOutputs
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Swift.Optional : SwiftUI.ToolbarContent where Wrapped : SwiftUI.ToolbarContent {
-  nonisolated public static func _makeToolbar(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUI._ToolbarInputs) -> SwiftUI._ToolbarOutputs
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias Body = Swift.Never
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : SwiftUI.CustomizableToolbarContent where Wrapped : SwiftUI.CustomizableToolbarContent {
 }
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Swift.Optional : SwiftUI.CustomizableToolbarContent where Wrapped : SwiftUI.CustomizableToolbarContent {
-}
-#endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct ToolbarLabelStyle : Swift.Sendable, Swift.Equatable {
   public static var automatic: SwiftUI.ToolbarLabelStyle {
@@ -18256,13 +18232,19 @@ extension SwiftUI.TabContent {
   nonisolated public func hidden(_ hidden: Swift.Bool = true) -> some SwiftUI.TabContent<Self.TabValue>
   
 }
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, visionOS 2.4, *)
+@available(watchOS, unavailable)
+extension SwiftUI.TabContent {
+  nonisolated public func disabled(_ disabled: Swift.Bool) -> some SwiftUI.TabContent<Self.TabValue>
+  
+}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct TabPlacement : Swift.Hashable {
   public static let automatic: SwiftUI.TabPlacement
   public static let pinned: SwiftUI.TabPlacement
   public static let sidebarOnly: SwiftUI.TabPlacement
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.TabPlacement, b: SwiftUI.TabPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -18381,14 +18363,10 @@ extension SwiftUI._UIHostingView {
   
   public static func buildBlock<Content>(_ content: Content) -> some SwiftUI.Widget where Content : SwiftUI.Widget
   
-  #if compiler(>=5.3) && $ParameterPacks
   @_disfavoredOverload @_alwaysEmitIntoClient public static func buildBlock<each C>(_ c: repeat each C) -> some SwiftUI.Widget where repeat each C : SwiftUI.Widget {
         TupleWidget((repeat each c))
     }
-  #if compiler(>=5.3) && $ParameterPacks
-
-  #endif
-  #endif
+  
 }
 @available(*, unavailable)
 extension SwiftUI.WidgetBundleBuilder : Swift.Sendable {
@@ -18618,8 +18596,8 @@ public struct PresentationDetent : Swift.Hashable, Swift.Sendable {
       get
     }
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.PresentationDetent, b: SwiftUI.PresentationDetent) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -18724,8 +18702,8 @@ public struct ButtonRepeatBehavior : Swift.Hashable, Swift.Sendable {
   public static let automatic: SwiftUI.ButtonRepeatBehavior
   public static let enabled: SwiftUI.ButtonRepeatBehavior
   public static let disabled: SwiftUI.ButtonRepeatBehavior
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.ButtonRepeatBehavior, b: SwiftUI.ButtonRepeatBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -18908,8 +18886,8 @@ public struct NavigationSplitViewColumn : Swift.Hashable, Swift.Sendable {
   public static var detail: SwiftUI.NavigationSplitViewColumn {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.NavigationSplitViewColumn, b: SwiftUI.NavigationSplitViewColumn) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -19230,9 +19208,9 @@ public struct TimelineView<Schedule, Content> where Schedule : SwiftUICore.Timel
       case live
       case seconds
       case minutes
+      public static func < (a: SwiftUI.TimelineView<Schedule, Content>.Context.Cadence, b: SwiftUI.TimelineView<Schedule, Content>.Context.Cadence) -> Swift.Bool
       public static func == (a: SwiftUI.TimelineView<Schedule, Content>.Context.Cadence, b: SwiftUI.TimelineView<Schedule, Content>.Context.Cadence) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
-      public static func < (a: SwiftUI.TimelineView<Schedule, Content>.Context.Cadence, b: SwiftUI.TimelineView<Schedule, Content>.Context.Cadence) -> Swift.Bool
       public var hashValue: Swift.Int {
         get
       }
@@ -20230,8 +20208,8 @@ public struct BadgeProminence : Swift.Hashable, Swift.Sendable {
   public static let decreased: SwiftUI.BadgeProminence
   public static let standard: SwiftUI.BadgeProminence
   public static let increased: SwiftUI.BadgeProminence
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.BadgeProminence, b: SwiftUI.BadgeProminence) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -20384,8 +20362,8 @@ public struct AdaptableTabBarPlacement : Swift.Hashable {
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public static let sidebar: SwiftUI.AdaptableTabBarPlacement
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUI.AdaptableTabBarPlacement, b: SwiftUI.AdaptableTabBarPlacement) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

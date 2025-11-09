@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
-current-version: 370.3.2
+current-version: 370.5.3
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 

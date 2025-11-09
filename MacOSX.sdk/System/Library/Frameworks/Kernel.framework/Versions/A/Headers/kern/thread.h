@@ -126,6 +126,30 @@ extern void thread_set_thread_name(thread_t th, const char* name);
 
 extern thread_t current_thread(void) __pure2;
 
+#if HAS_MTE
+/*! @function current_thread_enter_iomd_faultable_access_with_buffer_provider
+ *   @abstract Store context for a critical faultable region while accessing tagged memory.
+ *       @discussion We have paths in which the kernel is holding a tagged mapping which
+ *              has a true share with userspace. Therefore, userspace can induce the kernel
+ *              to take a TCF by changing the tag after handing the memory to the kernel.
+ *              To deal with this, we enter a critical region while accessing this sort of
+ *              memory, during which we'll recognize the fault as being 'caused by' the
+ *              userspace task.
+ *   @param provider The task to whom tag mismatches should be attributed.
+ */
+void current_thread_enter_iomd_faultable_access_with_buffer_provider(task_t provider);
+/*! @function current_thread_exit_iomd_faultable_access
+ *   @abstract Exit a critical region of accessing uncontrolled tagged memory.
+ *       @discussion See current_thread_enter_iomd_faultable_access_with_buffer_provider
+ */
+void current_thread_exit_iomd_faultable_access(void);
+/*! @function current_thread_get_iomd_faultable_access_buffer_provider
+ *   @abstract Retrieve the task pointer storing the current faultable buffer provider.
+ *       @discussion See current_thread_enter_iomd_faultable_access_with_buffer_provider
+ */
+task_t current_thread_get_iomd_faultable_access_buffer_provider(void);
+#endif /* HAS_MTE */
+
 extern uint64_t thread_tid(thread_t thread) __pure2;
 
 extern void thread_reference(

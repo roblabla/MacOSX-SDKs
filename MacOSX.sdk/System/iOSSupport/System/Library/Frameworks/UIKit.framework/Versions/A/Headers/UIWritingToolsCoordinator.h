@@ -38,8 +38,7 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorTextUpdateReason) {
     /// Specify this option when an undo or redo command initiated the
     /// change to your view.
     UIWritingToolsCoordinatorTextUpdateReasonUndoRedo,
-    // Others? Paste?
-} API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.TextUpdateReason);
+} API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.TextUpdateReason);
 
 /// The states that indicate the current activity, if any, Writing Tools
 /// is performing in your view.
@@ -54,7 +53,6 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorTextUpdateReason) {
 /// its ``UIWritingToolsCoordinator/state`` property. You can use
 /// the current state as a guide to making decisions in other parts of your view.
 typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorState) {
-    // Open question: Do we also want a `Disabled` state?
     
     /// A state that indicates Writing Tools isn’t currently performing
     /// any work on your view’s content.
@@ -102,7 +100,7 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorState) {
     /// the results back to your view. When the coordinator finishes delivering
     /// the results, it transitions back to the ``interactiveResting`` state.
     UIWritingToolsCoordinatorStateInteractiveStreaming, // Writing Tools is providing the full inline-editing experience, and is updating text, either because results are provided from AppleIntelligence, or because user interaction has requested changes, such as showing a different revision
-} API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.State);
+} API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.State);
 
 
 // MARK: - Coordinator
@@ -140,7 +138,7 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorState) {
 /// <doc://com.apple.documentation/documentation/swiftui/texteditor> view.
 /// Those views already include the required support to handle Writing Tools
 /// interactions.
-UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIWritingToolsCoordinator : NSObject <UIInteraction>
 
 /// A Boolean value that indicates whether Writing Tools features are
@@ -152,7 +150,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 /// ready to process Writing Tools requests.
 @property (class, nonatomic, assign, readonly) BOOL isWritingToolsAvailable;
 
-// The delegate must be non-nil before the writingToolsCoodinator is added to a view.
+// The delegate must be non-nil when the UIWritingToolsCoordinator is added to a view.
 
 /// Creates a writing tools coordinator and assigns the specified
 /// delegate object to it.
@@ -175,7 +173,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 /// refreshing the view’s layout and appearance.
 @property(nonatomic,weak,nullable,readonly) id<UIWritingToolsCoordinatorDelegate> delegate;
 
-// Note: The effectContainerView and decorationContainerView may only be changed when UIWritingToolsCoordinator.State is .inactive, otherwise the setters will throw an exception
+// Note: The effectContainerView and decorationContainerView may only be changed when UIWritingToolsCoordinator.State is .inactive, otherwise the setters will throw an exception.
 
 /// The view that Writing Tools uses to display visual effects during
 /// the text-rewriting process.
@@ -189,7 +187,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 /// uses the object in its ``UIInteraction/view`` property to host any visual effects.
 ///
 /// If you display your view’s text using multiple text containers, implement the
-/// ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:singleContainerSubrangesOf:in:)``
+/// ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)``
 /// method to request multiple previews.
 @property(nonatomic,weak,nullable) UIView *effectContainerView;
 
@@ -208,8 +206,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 /// property to host any visual elements.
 ///
 /// If you display your view’s text using multiple text containers, implement the
-/// ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:singleContainerSubrangesOf:in:)``
-/// and ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:decorationContainerViewFor:in:)``
+/// ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)``
+/// and ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsDecorationContainerViewFor:in:completion:)``
 /// methods to provide separate decoration views for each container.
 @property(nonatomic,weak,nullable) UIView *decorationContainerView;
 
@@ -225,7 +223,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 // Clients may cancel Writing Tools if external events occur such that further input 
 // from Writing Tools is not supportable, and then UIWritingToolsCoordinator will change 
 // to the Inactive state.
-// Also see UIResponder.startWritingTools.
+// Also see UIResponder.showWritingTools().
 
 /// Stops the current Writing Tools operation and dismisses the system UI.
 ///
@@ -250,7 +248,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 /// making the choice. The value in this property is never the default option,
 /// and is instead one of the specific options such as ``UIWritingToolsBehavior/none``,
 /// ``UIWritingToolsBehavior/limited``, or ``UIWritingToolsBehavior/complete``.
-@property(nonatomic,readonly) UIWritingToolsBehavior behavior; // Returns Inactive, Limited, or Complete after considering system information along with the value of preferredBehavior
+@property(nonatomic,readonly) UIWritingToolsBehavior behavior; // Returns None, Limited, or Complete after considering system information along with the value of preferredBehavior.
 
 /// The type of content you allow Writing Tools to generate for your custom
 /// text view.
@@ -258,7 +256,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) N
 /// Writing Tools can create plain text or rich text, and it can format text
 /// using lists or tables as needed. If your view doesn’t support specific
 /// types of content, specify the types you do support in this property.
-/// The default value of this property is ``UIWritingToolsResult/default``,
+/// The default value of this property is ``UIWritingToolsResultOptions/default``,
 /// which lets the system determine the type of content to generate.
 @property(nonatomic) UIWritingToolsResultOptions preferredResultOptions; // Defaults to "Default"
 
@@ -354,7 +352,7 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorTextReplacementReason) {
     /// An option to animate the replacement of text in your view.
     ///
     /// When Writing Tools requests an interactive change in your delegate’s
-    /// ``UIWritingToolsCoordinator/writingToolsCoordinator(_:replaceRange:inContext:proposedText:reason:animationParameters:completion:)``
+    /// ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:replaceRange:inContext:proposedText:reason:animationParameters:completion:)``
     /// method, it passes a valid set of animation parameters to that method.
     /// Update your view’s text storage and use the provided ``UIWritingToolsCoordinator/AnimationParameters``
     /// type to create any view-specific animations you need to support the
@@ -364,15 +362,15 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorTextReplacementReason) {
     /// An option to replace the text in your view without animating the change.
     ///
     /// When Writing Tools requests a noninteractive change in your delegate’s
-    /// ``UIWritingToolsCoordinator/writingToolsCoordinator(_:replaceRange:inContext:proposedText:reason:animationParameters:completion:)``
+    /// ``UIWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:replaceRange:inContext:proposedText:reason:animationParameters:completion:)``
     /// method, update your view’s text storage without animating the change.
     UIWritingToolsCoordinatorTextReplacementReasonNoninteractive, // an unanimated replacement prompted from writing tools, perhaps copied from the overlay-panel experience, perhaps a reverted rewrite or individual proofreading suggestion, and so forth
-} API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.TextReplacementReason);
+} API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.TextReplacementReason);
 
 /// Options that indicate how much of your content Writing Tools requested.
 ///
 /// At the start of any Writing Tools interaction, you provide the text for
-/// the system to evaluate from your ``NS/UIWritingToolsCoordinator/Delegate``
+/// the system to evaluate from your ``UIWritingToolsCoordinator/Delegate``
 /// object. The request for your content comes with a scope constant that
 /// indicates how much of your view’s text to provide.
 typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorContextScope) {
@@ -399,7 +397,7 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorContextScope) {
     /// with some additional text before and after the visible text.
     UIWritingToolsCoordinatorContextScopeVisibleArea, // For best results return a context where attributedString includes all visible text.
     
-} API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.ContextScope);
+} API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.ContextScope);
 
 /// The types of animations that Writing Tools performs during an interactive
 /// update of your view.
@@ -440,10 +438,10 @@ typedef NS_ENUM(NSInteger, UIWritingToolsCoordinatorTextAnimation) {
     /// also prepare any other animations you need. Writing Tools uses a preview
     /// object you provide to animate the insertion of the text.
     UIWritingToolsCoordinatorTextAnimationInsert, // The amimation effect for washing in replacement text from a Writing Tools delivery
-} API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.TextAnimation);
+} API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(UIWritingToolsCoordinator.TextAnimation);
 
 UIKIT_EXTERN 
-API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos)
+API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos)
 NSString *UIWritingToolsCoordinatorTextAnimationDebugDescription(UIWritingToolsCoordinatorTextAnimation animationType);
 
 /// An interface that you use to manage interactions between Writing Tools
@@ -463,7 +461,7 @@ NSString *UIWritingToolsCoordinatorTextAnimationDebugDescription(UIWritingToolsC
 /// timely manner to allow Writing Tools to perform subsequent tasks. For example,
 /// Writing Tools waits for you to execute the handlers for animation-related methods
 /// before moving on to the next stage of the animations.
-API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos)
+API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos)
 NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 @protocol UIWritingToolsCoordinatorDelegate <NSObject>
 
@@ -500,7 +498,7 @@ NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 /// example, it might use an entire paragraph, instead of only the selected sentence,
 /// to evaluate ways to rewrite that sentence. It’s best to include the text up
 /// to the nearest paragraph boundary before and after the selection. If you
-/// include extra text in your context object, set the ``NS/UIWritingToolsCoordinator/Context/range``
+/// include extra text in your context object, set the ``UIWritingToolsCoordinator/Context/range``
 /// property to the range of the selected text.
 ///
 /// > Note: When a context object stores only a subset of your view’s text, record
@@ -591,42 +589,6 @@ NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 /// current selection in your view’s text storage. When you finish making the
 /// changes, call the provided completion block to let Writing Tools know you’re finished.
 - (void)writingToolsCoordinator:(UIWritingToolsCoordinator *)writingToolsCoordinator selectRanges:(NSArray<NSValue * /* NSRange */> *)ranges inContext:(UIWritingToolsCoordinatorContext *)context completion:(void(^)(void))completion NS_SWIFT_NAME(writingToolsCoordinator(_:select:in:completion:));
-
-/// Asks the delegate to provide the location of the character at the
-/// specified point in your view’s coordinate system.
-///
-/// - Parameters:
-///     - writingToolsCoordinator: The coordinator object requesting
-///     information from your custom view.
-///     - point: A point in your view’s coordinate space. Find the
-///     location of the text under this point, if any.
-///     - completion: A handler to execute with the required information.
-///     This handler has no return value and takes an <doc://com.apple.documentation/documentation/foundation/nsrange>
-///     and <doc://com.apple.documentation/documentation/foundation/uuid>
-///     as parameters. Set the range to the character’s location in one of your
-///     ``UIWritingToolsCoordinator/Context`` objects, which you specify using
-///     the <doc://com.apple.documentation/documentation/foundation/uuid> parameter.
-///     You must call this handler at some point during your method’s implementation.
-///
-/// When someone interacts with your view during a proofreading operation, Writing Tools
-/// calls this method to get the location of the interaction. If the interaction
-/// occurs in the text of one of your ``UIWritingToolsCoordinator/Context`` objects,
-/// configure an <doc://com.apple.documentation/documentation/foundation/nsrange>
-/// with the character’s location in that context object and a length of `1`. If
-/// the interaction occurs outside of the text of your context objects, configure
-/// the range with a location of `NSNotFound`.
-///
-/// When specifying the location of a character in your context object, provide a
-/// location relative to the start of your context object’s text. The first character
-/// in a context object’s text is always at location `0`, and it’s your responsibility
-/// to track the location of the context object’s text in your text storage object.
-/// When the context object’s text begins in the middle of your text storage,
-/// subtract the starting location of the context object’s text from the location
-/// you specify in your range value. For example, if the context object’s text
-/// starts at character `100` in your text storage, and an interaction occurs
-/// with the character at location `102`, specify a range with a location of
-/// `2` and a length of `1`.
-- (void)writingToolsCoordinator:(UIWritingToolsCoordinator *)writingToolsCoordinator requestsRangeInContextWithIdentifierForPoint:(CGPoint)point completion:(void(^)(NSRange range, NSUUID *contextID))completion NS_SWIFT_ASYNC_NAME(writingToolsCoordinator(_:rangeInContextWithIdentifierFor:));
 
 /// Asks the delegate to provide the bounding paths for the specified
 /// text in your view.
@@ -745,7 +707,7 @@ NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 /// method to undo any changes you make to your content.
 ///
 /// For a single animation type, the system calls the
-/// ``writingToolsCoordinator(_:previewFor:range:context:completion:)`` method,
+/// ``writingToolsCoordinator(_:requestsPreviewFor:range:context:completion:)`` method,
 /// followed sequentially by this method and the ``writingToolsCoordinator(_:finish:for:in:completion:)``
 /// method. Each method executes asynchronously, but the system calls the next
 /// method in the sequence only after you call the completion handler of the previous
@@ -884,7 +846,7 @@ NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 /// you finish your cleanup work, call the completion handler to notify Writing Tools.
 ///
 /// Writing Tools calls this method only after previous calls to the
-/// ``writingToolsCoordinator(_:previewFor:range:context:completion:)``
+/// ``writingToolsCoordinator(_:requestsPreviewFor:range:context:completion:)``
 /// and ``writingToolsCoordinator(_:prepareFor:range:context:completion:)``
 /// methods for the same animation type. However, Writing Tools can interleave
 /// calls to this method with calls to prepare an animation of a different
@@ -936,7 +898,7 @@ NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 ///
 /// When configuring animations for your view, Writing Tools asks your delegate to
 /// provide separate previews for each of your view’s container object. Specifically,
-/// it calls your delegate’s ``writingToolsCoordinator(_:previewFor:range:context:completion:)``
+/// it calls your delegate’s ``writingToolsCoordinator(_:requestsPreviewFor:range:context:completion:)``
 /// method separately for each range of text you return in the completion handler.
 /// Your implementation of that method must create a preview suitable for animating
 /// the content from the underlying text container.
@@ -964,7 +926,7 @@ NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 ///
 /// If your view uses multiple ``NSTextContainer`` objects to draw text in different
 /// regions, use this method to provide Writing Tools with the view to use for the
-/// specified range of text. After calling your delegate’s ``writingToolsCoordinator(_:singleContainerSubrangesOf:in:)``
+/// specified range of text. After calling your delegate’s ``writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)``
 /// method, Writing Tools calls this method for each subrange of text you provided.
 /// Find or provide a view situated visibly below the specified text in your text
 /// view. It's also satisfactory to provide a view that’s visually in front of the
@@ -1009,6 +971,46 @@ NS_SWIFT_NAME(UIWritingToolsCoordinator.Delegate)
 /// your view’s content. For example, it moves to the ``UIWritingToolsCoordinator/State/interactiveStreaming``
 /// state when it’s making changes to your view’s text storage.
 - (void)writingToolsCoordinator:(UIWritingToolsCoordinator *)writingToolsCoordinator willChangeToState:(UIWritingToolsCoordinatorState)newState completion:(void(^)(void))completion;
+
+
+// Deprecated. Not called in iOS 18.4 or visionOS 2.4 or later
+
+/// Asks the delegate to provide the location of the character at the
+/// specified point in your view’s coordinate system.
+///
+/// - Parameters:
+///     - writingToolsCoordinator: The coordinator object requesting
+///     information from your custom view.
+///     - point: A point in your view’s coordinate space. Find the
+///     location of the text under this point, if any.
+///     - completion: A handler to execute with the required information.
+///     This handler has no return value and takes an <doc://com.apple.documentation/documentation/foundation/nsrange>
+///     and <doc://com.apple.documentation/documentation/foundation/uuid>
+///     as parameters. Set the range to the character’s location in one of your
+///     ``UIWritingToolsCoordinator/Context`` objects, which you specify using
+///     the <doc://com.apple.documentation/documentation/foundation/uuid> parameter.
+///     You must call this handler at some point during your method’s implementation.
+///
+/// When someone interacts with your view during a proofreading operation, Writing Tools
+/// calls this method to get the location of the interaction. If the interaction
+/// occurs in the text of one of your ``UIWritingToolsCoordinator/Context`` objects,
+/// configure an <doc://com.apple.documentation/documentation/foundation/nsrange>
+/// with the character’s location in that context object and a length of `1`. If
+/// the interaction occurs outside of the text of your context objects, configure
+/// the range with a location of `NSNotFound`.
+///
+/// When specifying the location of a character in your context object, provide a
+/// location relative to the start of your context object’s text. The first character
+/// in a context object’s text is always at location `0`, and it’s your responsibility
+/// to track the location of the context object’s text in your text storage object.
+/// When the context object’s text begins in the middle of your text storage,
+/// subtract the starting location of the context object’s text from the location
+/// you specify in your range value. For example, if the context object’s text
+/// starts at character `100` in your text storage, and an interaction occurs
+/// with the character at location `102`, specify a range with a location of
+/// `2` and a length of `1`.
+- (void)writingToolsCoordinator:(UIWritingToolsCoordinator *)writingToolsCoordinator requestsRangeInContextWithIdentifierForPoint:(CGPoint)point completion:(void(^)(NSRange range, NSUUID *contextID))completion API_DEPRECATED("In iOS 18.4 and later and visionOS 2.4 and later, UIWritingToolsCoordinator automatically determines the location of the character at the specified point in your view's coordinate system and no longer calls this method.", ios(18.2,18.4)) API_UNAVAILABLE(visionos) NS_SWIFT_ASYNC_NAME(writingToolsCoordinator(_:rangeInContextWithIdentifierFor:));
+
 @end
 NS_HEADER_AUDIT_END(nullability, sendability)
 

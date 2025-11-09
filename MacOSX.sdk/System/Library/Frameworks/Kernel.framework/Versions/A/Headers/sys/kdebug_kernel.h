@@ -33,6 +33,7 @@
 #include <mach/clock_types.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stddef.h>
 #include <sys/cdefs.h>
 
 __BEGIN_DECLS

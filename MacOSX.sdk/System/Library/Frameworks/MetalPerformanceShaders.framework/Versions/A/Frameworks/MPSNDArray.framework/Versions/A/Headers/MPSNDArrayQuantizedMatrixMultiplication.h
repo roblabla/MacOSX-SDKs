@@ -31,7 +31,7 @@
  *              NOTE: For affine scale, zeropoint and minValue must have same transposes as quantized input.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayQuantizedMatrixMultiplication : MPSNDArrayMatrixMultiplication
 
 -(nonnull instancetype) initWithDevice:(nonnull id<MTLDevice>)device
@@ -57,7 +57,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18
  *
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayLUTDequantize : MPSNDArrayMultiaryKernel
 
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
@@ -76,7 +76,7 @@ NS_DESIGNATED_INITIALIZER;
  *  @discussion The kernel works with 2 inputs: 1) The quantized input, 2) The LookUp table array.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayVectorLUTDequantize : MPSNDArrayMultiaryKernel
 
 /*! @property  vectorAxis
@@ -106,7 +106,7 @@ NS_DESIGNATED_INITIALIZER;
  *  @discussion The kernel works with 2-4 inputs, order of inputs: 1) quantized input, 2) scale, 3) zeropoint, 4) minValue
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayAffineInt4Dequantize : MPSNDArrayMultiaryKernel
 
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_UNAVAILABLE;

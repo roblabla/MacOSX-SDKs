@@ -16,7 +16,7 @@
  
  This a not a Game Center feature. To support Game Center and online play, see GKMatch.
 */
-API_DEPRECATED_WITH_REPLACEMENT("GKMatch", ios(3.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
+API_DEPRECATED_WITH_REPLACEMENT("Use ``GKMatch`` instead.", ios(3.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 @interface GKSession : NSObject
 
 /** Creating a GKSession requires a unique identifier, sessionID, and mode.  All instances of the application must have the same sessionID in order to be able to join a game network.  Additionally, the GKSession requires a name, which is used to identify the specific instances of the application.
@@ -26,14 +26,14 @@ If name = nil then GKSession will use the device name.
 */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-- (id)initWithSessionID:(NSString *)sessionID displayName:(NSString *)name sessionMode:(GKSessionMode)mode NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);
+- (id)initWithSessionID:(NSString *)sessionID displayName:(NSString *)name sessionMode:(GKSessionMode)mode API_DEPRECATED("No longer available", ios(3.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 #pragma clang diagnostic pop
 
-@property(weak) id<GKSessionDelegate> delegate NS_DEPRECATED(10_8, 10_10, 3_0, 7_0) API_UNAVAILABLE(tvos);
+@property(weak) id<GKSessionDelegate> delegate API_DEPRECATED("No longer supported.", ios(3.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
 @property(readonly) NSString *sessionID;
 @property(readonly) NSString *displayName;
-@property(readonly) GKSessionMode sessionMode NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);
+@property(readonly) GKSessionMode sessionMode API_DEPRECATED("No longer supported.", ios(3.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 @property(readonly) NSString *peerID;            // session's peerID
 
 /** Toggle availability on the network based on session mode and search criteria.  Delegate will get a callback -session:didReceiveConnectionRequestFromPeer: when a peer attempts a connection.
@@ -50,11 +50,11 @@ If name = nil then GKSession will use the device name.
 
 /** Asynchronous delivery of data to one or more peers.  Returns YES if delivery started, NO if unable to start sending, and error will be set.  Delivery will be reliable or unreliable as set by mode.
 */
-- (BOOL)sendData:(NSData *) data toPeers:(NSArray *)peers withDataMode:(GKSendDataMode)mode error:(NSError **)error NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);
+- (BOOL)sendData:(NSData *) data toPeers:(NSArray *)peers withDataMode:(GKSendDataMode)mode error:(NSError **)error API_DEPRECATED("No longer supported.", ios(3.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
 /** Asynchronous delivery to all peers.  Returns YES if delivery started, NO if unable to start sending, and error will be set.  Delivery will be reliable or unreliable as set by mode.
 */
-- (BOOL)sendDataToAllPeers:(NSData *) data withDataMode:(GKSendDataMode)mode error:(NSError **)error NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);    // errors: buffer full, data too big
+- (BOOL)sendDataToAllPeers:(NSData *) data withDataMode:(GKSendDataMode)mode error:(NSError **)error API_DEPRECATED("No longer supported.", ios(3.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);    // errors: buffer full, data too big
 
 /** Set the handler to receive data sent from remote peers.
 */
@@ -83,5 +83,5 @@ Failure results in a call to delegate -session:connectionWithPeerFailed:withErro
 
 /** Returns peers according to connection state
 */ 
-- (NSArray *)peersWithConnectionState:(GKPeerConnectionState)state NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);
+- (NSArray *)peersWithConnectionState:(GKPeerConnectionState)state API_DEPRECATED("No longer supported.", ios(3.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 @end

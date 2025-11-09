@@ -811,7 +811,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @property tls_protocol_version_t TLSMaximumSupportedProtocolVersion API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /* Allow the use of HTTP pipelining */
-@property BOOL HTTPShouldUsePipelining;
+@property BOOL HTTPShouldUsePipelining API_DEPRECATED("Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead", macos(10.9,15.4), ios(7.0,18.4), watchos(2.0,11.4), tvos(9.0,18.4), visionos(1.0,2.4));
 
 /* Allow the session to set cookies on requests */
 @property BOOL HTTPShouldSetCookies;
@@ -835,10 +835,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 /* The URL resource cache, or nil to indicate that no caching is to be performed */
 @property (nullable, retain) NSURLCache *URLCache;
 
-/* Enable extended background idle mode for any tcp sockets created.    Enabling this mode asks the system to keep the socket open
- *  and delay reclaiming it when the process moves to the background (see https://developer.apple.com/library/ios/technotes/tn2277/_index.html) 
- */
-@property BOOL shouldUseExtendedBackgroundIdleMode API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+@property BOOL shouldUseExtendedBackgroundIdleMode API_DEPRECATED("Not supported", macos(10.11,15.4), ios(9.0,18.4), watchos(2.0,11.4), tvos(9.0,18.4), visionos(1.0,2.4));
 
 /* An optional array of Class objects which subclass NSURLProtocol.
    The Class will be sent +canInitWithRequest: when determining if
@@ -853,6 +850,15 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 
 /* multipath service type to use for connections.  The default is NSURLSessionMultipathServiceTypeNone */
 @property NSURLSessionMultipathServiceType multipathServiceType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*
+ * Uses the classic network loader.
+ *
+ * NOTE: FTP and HTTP/1 pipelining are only supported in the classic loading mode.
+ *
+ * Defaults to YES. The default may be NO in a future OS update.
+ */
+@property BOOL usesClassicLoadingMode API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4), tvos(18.4), visionos(2.4));
 
 
 - (instancetype)init API_DEPRECATED("Please use NSURLSessionConfiguration.defaultSessionConfiguration or other class methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
@@ -1220,7 +1226,7 @@ FOUNDATION_EXPORT NSString * const NSURLSessionUploadTaskResumeData API_AVAILABL
 typedef NS_ENUM(NSInteger, NSURLSessionTaskMetricsResourceFetchType) {
     NSURLSessionTaskMetricsResourceFetchTypeUnknown,
     NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad,   /* The resource was loaded over the network. */
-    NSURLSessionTaskMetricsResourceFetchTypeServerPush,    /* The resource was pushed by the server to the client. */
+    NSURLSessionTaskMetricsResourceFetchTypeServerPush API_DEPRECATED("Server push is no longer supported as of iOS 17 and aligned releases", macos(10.12,15.4), ios(10.0,18.4), watchos(3.0,11.4), tvos(10.0,18.4), visionos(1.0,2.4)),    /* The resource was pushed by the server to the client. */
     NSURLSessionTaskMetricsResourceFetchTypeLocalCache,    /* The resource was retrieved from the local storage. */
 } API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 

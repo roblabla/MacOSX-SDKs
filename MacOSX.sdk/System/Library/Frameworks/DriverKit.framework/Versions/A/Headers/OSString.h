@@ -1,4 +1,4 @@
-/* iig(DriverKit-402.60.12) generated from OSString.iig */
+/* iig(DriverKit-427.100.5) generated from OSString.iig */
 
 /* OSString.iig:1-40 */
 /*

@@ -673,6 +673,20 @@ void BNNSGraphContextEnableNanAndInfChecks(bnns_graph_context_t context,
 __asm__("_BNNSGraphContextEnableNanAndInfChecks")
 __API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
+/// Sets streaming advancement amount for cases with dynamically shaped inputs.
+///
+/// For models compiled with the `BNNSOption` attribute `StateMode=Streaming` enabled, where
+/// `slice_update` ops use an update parameter of dynamic shape, BNNS cannot unambigiously
+/// determine the streaming advancement size. Instead the user must use this function *prior* to calling
+/// `BNNSGraphContextExecute()` to set the advancement size for each frame. 
+///
+/// The internal state pointer will then be advanced by `advance_count` elements in the streaming
+/// dimension prior to returning from `BNNSGraphContextExecute()`. The BNNS streaming APIs
+/// do not support models that require different advancement amounts for different states.
+int BNNSGraphContextSetStreamingAdvanceCount(const bnns_graph_context_t context,
+                                             size_t advance_count)
+__API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4), tvos(18.4));
+
 #pragma mark - Execution - with Graph Context
 
 /// Executes the specified function with the provided context

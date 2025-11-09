@@ -21,6 +21,7 @@
 #import <UIKit/UIContentSizeCategoryAdjusting.h>
 #import <UIKit/UILetterformAwareAdjusting.h>
 #import <UIKit/UITextPasteConfigurationSupporting.h>
+#import <UIKit/UIInputSuggestion.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -116,14 +117,14 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
  *
  * @param textView  The text view interacting with Writing Tools
  */
-- (void)textViewWritingToolsWillBegin:(UITextView *)textView API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+- (void)textViewWritingToolsWillBegin:(UITextView *)textView API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 /**
  * @abstract Informs the delegate that Writing Tools has finished manipulating the text view
  *
  * @param textView  The text view interacting with Writing Tools
  */
-- (void)textViewWritingToolsDidEnd:(UITextView *)textView API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+- (void)textViewWritingToolsDidEnd:(UITextView *)textView API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 /**
  * @abstract Allows the delegate to specify ranges of text to be ignored by Writing Tools
@@ -133,7 +134,7 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
  *
  * @return Return an array of ranges in the attributed substring of the textView storage with the enclosing range representing portions of text to be ignored by Writing Tools when evaluating the text for proofreading, summarization, rewrites, and so forth.
  */
-- (NSArray<NSValue *> *)textView:(UITextView *)textView writingToolsIgnoredRangesInEnclosingRange:(NSRange)enclosingRange API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+- (NSArray<NSValue *> *)textView:(UITextView *)textView writingToolsIgnoredRangesInEnclosingRange:(NSRange)enclosingRange API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_DEPRECATED("Replaced by primaryActionForTextItem: and menuConfigurationForTextItem: for additional customization options.", ios(10.0, 17.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
@@ -169,6 +170,13 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
  * @param viewController  The text formatting controller that is being presented.
  */
 - (void)textView:(UITextView *)textView didEndFormattingWithViewController:(UITextFormattingViewController *)viewController API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(visionos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+
+/// Tells the delegate when the keyboard delivers an input suggestion.
+///
+/// - Parameters:
+///   - textView: The text view that is currently the first responder.
+///   - inputSuggestion: The input suggestion that the user or system selected.
+- (void)textView:(UITextView *)textView insertInputSuggestion:(UIInputSuggestion *)inputSuggestion NS_SWIFT_NAME(textView(_:insertInputSuggestion:)) API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos, watchos, visionos, macCatalyst);
 
 @end
 
@@ -264,15 +272,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
  *
  * @return Returns @c YES while Writing Tools is interacting with the receiver (after @c -textViewWritingToolsWillBegin: completes until @c -textViewWritingToolsDidEnd: completes)
  */
-@property(nonatomic,readonly,getter=isWritingToolsActive) BOOL writingToolsActive API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+@property(nonatomic,readonly,getter=isWritingToolsActive) BOOL writingToolsActive API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 // Also see UITextInputTraits.h
-@property UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(visionos, tvos, watchos);
+@property UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 // WARNING: UITextView does not support UIWritingToolsResultOptionsTable and will throw an exception for this value
-@property UIWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(visionos, tvos, watchos);
+@property UIWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
-@property(nonatomic,readonly) UIWritingToolsCoordinator *writingToolsCoordinator API_AVAILABLE(ios(18.2)) API_UNAVAILABLE(visionos, tvos, watchos);
+@property(nonatomic,readonly) Class subclassForWritingToolsCoordinator API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos); // Asserts this is actually a subclass of UIWritingToolsCoordinator
+@property(nonatomic,readonly) UIWritingToolsCoordinator *writingToolsCoordinator API_AVAILABLE(ios(18.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 /// For text views that have flag `allowsEditingTextAttributes` set,
 /// this configuration will be used for `UITextFormattingViewController`

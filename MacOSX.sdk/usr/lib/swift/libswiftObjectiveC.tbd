@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftObjectiveC.dylib'
-current-version: 10
+current-version: 940.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -11,12 +11,7 @@ exports:
                        '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvpMV', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvs' ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftObjectiveC.dylib', 
-                       '$ld$install_name$os10.11$@rpath/libswiftObjectiveC.dylib', 
-                       '$ld$install_name$os10.12$@rpath/libswiftObjectiveC.dylib', 
-                       '$ld$install_name$os10.13$@rpath/libswiftObjectiveC.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftObjectiveC.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftObjectiveC.dylib', 
+    symbols:         [ '$ld$previous$@rpath/libswiftObjectiveC.dylib$$1$10.9$10.14.4$$', 
                        '_$s10ObjectiveC13ObjCClassListV12makeIteratorAC0F0CyF', '_$s10ObjectiveC13ObjCClassListV8IteratorC4nextyXlXpSgyFTj', 
                        '_$s10ObjectiveC13ObjCClassListV8IteratorC4nextyXlXpSgyFTq', 
                        '_$s10ObjectiveC13ObjCClassListV8IteratorCMa', '_$s10ObjectiveC13ObjCClassListV8IteratorCMm', 

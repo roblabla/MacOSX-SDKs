@@ -18,6 +18,7 @@
 #import <UIKit/UIContentSizeCategoryAdjusting.h>
 #import <UIKit/UILetterformAwareAdjusting.h>
 #import <UIKit/UITextPasteConfigurationSupporting.h>
+#import <UIKit/UIInputSuggestion.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -180,6 +181,13 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
  * @param animator      Dismissal animator. Add animations to this object to run them alongside the dismissal transition.
  */
 - (void)textField:(UITextField *)textField willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0))  API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/// Tells the delegate when the keyboard delivers an input suggestion.
+///
+/// - Parameters:
+///   - textField: The text field that is currently the first responder.
+///   - inputSuggestion: The input suggestion that the user or system selected.
+- (void)textField:(UITextField *)textField insertInputSuggestion:(UIInputSuggestion *)inputSuggestion API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(macCatalyst, watchos, tvos, visionos, macos) NS_SWIFT_NAME(textField(_:insertInputSuggestion:));
 
 @end
 

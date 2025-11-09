@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSwift.framework/Versions/A/ScreenTimeSwift'
-current-version: 537.2.14
+current-version: 537.4.20
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -171,7 +171,11 @@ exports:
                        '_$s15ScreenTimeSwift11STSwiftUserCMm', '_$s15ScreenTimeSwift11STSwiftUserCMn', 
                        '_$s15ScreenTimeSwift11STSwiftUserCMo', '_$s15ScreenTimeSwift11STSwiftUserCMu', 
                        '_$s15ScreenTimeSwift11STSwiftUserCN', '_$s15ScreenTimeSwift11STSwiftUserCfD', 
-                       '_$s15ScreenTimeSwift11STSwiftUserCfd', '_$s15ScreenTimeSwift17LocalRestrictionsC023updateDefaultWebContentE04withySo014CEMSystemBasichI17FilterDeclarationC_tFTj', 
+                       '_$s15ScreenTimeSwift11STSwiftUserCfd', '_$s15ScreenTimeSwift12DependenciesO4bind10identifier4livexycxm_xyctlFZ', 
+                       '_$s15ScreenTimeSwift12DependenciesO4mock_2toyxm_xyctlFZ', 
+                       '_$s15ScreenTimeSwift12DependenciesO6unMockyyFZ', '_$s15ScreenTimeSwift12DependenciesOMa', 
+                       '_$s15ScreenTimeSwift12DependenciesOMn', '_$s15ScreenTimeSwift12DependenciesON', 
+                       '_$s15ScreenTimeSwift17LocalRestrictionsC023updateDefaultWebContentE04withySo014CEMSystemBasichI17FilterDeclarationC_tFTj', 
                        '_$s15ScreenTimeSwift17LocalRestrictionsC023updateDefaultWebContentE04withySo014CEMSystemBasichI17FilterDeclarationC_tFTq', 
                        '_$s15ScreenTimeSwift17LocalRestrictionsC039denyiCloudLogoutAndRequireAutomaticDateiB04denyySb_tFTj', 
                        '_$s15ScreenTimeSwift17LocalRestrictionsC039denyiCloudLogoutAndRequireAutomaticDateiB04denyySb_tFTq', 
@@ -260,6 +264,7 @@ exports:
                        '_$s15ScreenTimeSwift19STUserNotificationsV21UserNotificationErrorOSQAAMc', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV21UserNotificationErrorOs0H0AAMc', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV27notificationCentersByBundleSDySSSo24UNUserNotificationCenterCGvgZ', 
+                       '_$s15ScreenTimeSwift19STUserNotificationsV27notificationCentersByBundleSDySSSo24UNUserNotificationCenterCGvpZMV', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV4post12notificationyAC16NotificationTypeO_tYaKFZ', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV4post12notificationyAC16NotificationTypeO_tYaKFZTu', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV6remove12notificationyAC16NotificationTypeO_tYaKFZ', 

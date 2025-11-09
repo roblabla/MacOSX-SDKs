@@ -10,9 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos, visionos, watchos)
 @protocol GKViewController
 @end
 
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos, visionos, watchos)
 @interface GKDialogController : NSResponder
 
 @property (weak, nullable) IBOutlet NSWindow *parentWindow;
@@ -22,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos, visionos, watchos)
 @interface GKDialogController (SharedDialogController)
 + (GKDialogController *)sharedDialogController;
 @end

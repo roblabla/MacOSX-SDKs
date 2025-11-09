@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macosx15.2 -target-variant x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.0.3.1.5 -module-name _StringProcessing
-// swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macosx15.4 -target-variant x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.1.0.110.5 -module-name _StringProcessing
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -interface-compiler-version 6.1
 import Swift
 extension Swift.Collection where Self.Element : Swift.Equatable {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -99,7 +99,10 @@ extension Swift.RangeReplaceableCollection where Self : Swift.BidirectionalColle
 }
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-  public func firstMatch<Output>(of r: some RegexComponent<Output>) -> _StringProcessing.Regex<Output>.Match?
+  @inlinable public func firstMatch<Output>(of r: some RegexComponent<Output>) -> _StringProcessing.Regex<Output>.Match? {
+    let slice = self[...]
+    return try? r.regex.firstMatch(in: slice)
+  }
 }
 extension Swift.RangeReplaceableCollection where Self.SubSequence == Swift.Substring {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -207,19 +210,11 @@ extension _StringProcessing.Regex.Match where Output == _StringProcessing.AnyReg
 extension _StringProcessing.Regex {
   public init?(_ regex: _StringProcessing.Regex<_StringProcessing.AnyRegexOutput>, as outputType: Output.Type = Output.self)
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol RegexComponent<RegexOutput> {
   associatedtype RegexOutput
   var regex: _StringProcessing.Regex<Self.RegexOutput> { get }
 }
-#else
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-public protocol RegexComponent {
-  associatedtype RegexOutput
-  var regex: _StringProcessing.Regex<Self.RegexOutput> { get }
-}
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct Regex<Output> : _StringProcessing.RegexComponent {
   @usableFromInline
@@ -276,8 +271,12 @@ extension _StringProcessing.Regex {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
-  public func wholeMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent
-  public func prefixMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent
+  @inlinable public func wholeMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent {
+    try? regex.regex.wholeMatch(in: self[...])
+  }
+  @inlinable public func prefixMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent {
+    try? regex.regex.prefixMatch(in: self[...])
+  }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
@@ -300,8 +299,8 @@ public struct RegexSemanticLevel : Swift.Hashable {
   public static var unicodeScalar: _StringProcessing.RegexSemanticLevel {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _StringProcessing.RegexSemanticLevel, b: _StringProcessing.RegexSemanticLevel) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -314,16 +313,16 @@ public struct RegexWordBoundaryKind : Swift.Hashable {
   public static var `default`: _StringProcessing.RegexWordBoundaryKind {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _StringProcessing.RegexWordBoundaryKind, b: _StringProcessing.RegexWordBoundaryKind) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct RegexRepetitionBehavior : Swift.Hashable {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _StringProcessing.RegexRepetitionBehavior, b: _StringProcessing.RegexRepetitionBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

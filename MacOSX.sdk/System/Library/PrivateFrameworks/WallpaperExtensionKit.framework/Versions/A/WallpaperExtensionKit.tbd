@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperExtensionKit.framework/Versions/A/WallpaperExtensionKit'
-current-version: 147.2.1
+current-version: 147.4.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -245,7 +245,9 @@ exports:
                        '_$s21WallpaperExtensionKit0aB9DiscoveryV010RegisteredA10ExtensionsVN', 
                        '_$s21WallpaperExtensionKit0aB9DiscoveryV010RegisteredA10ExtensionsVSciAAMc', 
                        '_$s21WallpaperExtensionKit0aB9DiscoveryV10registeredAC010RegisteredA10ExtensionsVvgZ', 
+                       '_$s21WallpaperExtensionKit0aB9DiscoveryV10registeredAC010RegisteredA10ExtensionsVvpZMV', 
                        '_$s21WallpaperExtensionKit0aB9DiscoveryV24extensionPointIdentifierSSvgZ', 
+                       '_$s21WallpaperExtensionKit0aB9DiscoveryV24extensionPointIdentifierSSvpZMV', 
                        '_$s21WallpaperExtensionKit0aB9DiscoveryVMa', '_$s21WallpaperExtensionKit0aB9DiscoveryVMn', 
                        '_$s21WallpaperExtensionKit0aB9DiscoveryVN', '_$sSo18NSNotificationNamea21WallpaperExtensionKitE21interfaceThemeChangedABvgZ', 
                        '_$sSo18NSNotificationNamea21WallpaperExtensionKitE21significantTimeChangeABvgZ' ]

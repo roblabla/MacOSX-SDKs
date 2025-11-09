@@ -336,5 +336,6 @@ exports:
                        '_$sSo35MRContentItemMetadataAudioRouteTypeV15MediaFoundationE4nameSSvpMV', 
                        '_$sSo7NSErrorC15MediaFoundationE5error6domain4code15underlyingError0G6Errors8userInfo16debugDescriptionABSS_xABSgSayABGSgSDys11AnyHashableVypGSStSYRzSi8RawValueRtzlFZ', 
                        '_$sSo7NSErrorC15MediaFoundationE8wrapWith6domain4code8userInfo16debugDescriptionABSS_xSDys11AnyHashableVypGSStSYRzSi8RawValueRtzlF', 
-                       '_$sSo8MROriginC15MediaFoundationE9availableSayABGvgZ', '_$sSo8MROriginC15MediaFoundationE9availableSayABGvgZTu' ]
+                       '_$sSo8MROriginC15MediaFoundationE9availableSayABGvgZ', '_$sSo8MROriginC15MediaFoundationE9availableSayABGvgZTu', 
+                       '_$sSo8MROriginC15MediaFoundationE9availableSayABGvpZMV' ]
 ...

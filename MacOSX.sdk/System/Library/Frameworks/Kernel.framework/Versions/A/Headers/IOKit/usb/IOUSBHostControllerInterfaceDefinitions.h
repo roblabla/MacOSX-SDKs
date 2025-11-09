@@ -558,7 +558,10 @@ enum
     IOUSBHostCIDeviceCreateCommandData0RootPort                            = IOUSBBitRange(0, 3),
     IOUSBHostCIDeviceCreateCommandData0RootPortPhase                       = IOUSBBitRangePhase(0, 3),
     IOUSBHostCIDeviceCreateCommandData0Route                               = IOUSBBitRange(4, 23),
-    IOUSBHostCIDeviceCreateCommandData0RoutePhase                          = IOUSBBitRangePhase(4, 23),
+    IOUSBHostCIDeviceCreateCommandData0RoutePhase                          = IOUSBBitRangePhase(4, 23)
+};
+enum
+{
     IOUSBHostCIDeviceCreateCommandData1DeviceAddress                       = IOUSBBitRange64(0, 7),
     IOUSBHostCIDeviceCreateCommandData1DeviceAddressPhase                  = IOUSBBitRangePhase(0, 7)
 };
@@ -614,7 +617,7 @@ enum
  */
 enum
 {
-    IOUSBHostCIDeviceUpdateCommandData1DescriptorAddress                    = IOUSBBitRange(0, 63),
+    IOUSBHostCIDeviceUpdateCommandData1DescriptorAddress                    = IOUSBBitRange64(0, 63),
     IOUSBHostCIDeviceUpdateCommandData1DescriptorAddressPhase               = IOUSBBitRangePhase(0, 63)
 };
 
@@ -793,8 +796,11 @@ enum
 enum
 {
     IOUSBHostCINormalTransferData0Length                                    = IOUSBBitRange(0, 27),
-    IOUSBHostCINormalTransferData0LengthPhase                               = IOUSBBitRangePhase(0, 27),
-    IOUSBHostCINormalTransferData1Buffer                                    = IOUSBBitRange(0, 63),
+    IOUSBHostCINormalTransferData0LengthPhase                               = IOUSBBitRangePhase(0, 27)
+};
+enum
+{
+    IOUSBHostCINormalTransferData1Buffer                                    = IOUSBBitRange64(0, 63),
     IOUSBHostCINormalTransferData1BufferPhase                               = IOUSBBitRangePhase(0, 63)
 };
 
@@ -810,9 +816,15 @@ enum
 {
     IOUSBHostCIIsochronousTransferControlFrameNumber                        = IOUSBBitRange(16, 23),
     IOUSBHostCIIsochronousTransferControlFrameNumberPhase                   = IOUSBBitRangePhase(16, 23),
-    IOUSBHostCIIsochronousTransferControlASAP                               = IOUSBBit(24),
+    IOUSBHostCIIsochronousTransferControlASAP                               = IOUSBBit(24)
+};
+enum
+{
     IOUSBHostCIIsochronousTransferData0Length                               = IOUSBHostCINormalTransferData0Length,
-    IOUSBHostCIIsochronousTransferData0LengthPhase                          = IOUSBHostCINormalTransferData0LengthPhase,
+    IOUSBHostCIIsochronousTransferData0LengthPhase                          = IOUSBHostCINormalTransferData0LengthPhase
+};
+enum
+{
     IOUSBHostCIIsochronousTransferData1Buffer                               = IOUSBHostCINormalTransferData1Buffer,
     IOUSBHostCIIsochronousTransferData1BufferPhase                          = IOUSBHostCINormalTransferData1BufferPhase
 };
@@ -824,7 +836,7 @@ enum
  */
 enum
 {
-    IOUSBHostCILinkData1TransferStructureAddress                            = IOUSBBitRange(0, 63),
+    IOUSBHostCILinkData1TransferStructureAddress                            = IOUSBBitRange64(0, 63),
     IOUSBHostCILinkData1TransferStructureAddressPhase                       = IOUSBBitRangePhase(0, 63)
 };
 
@@ -844,11 +856,15 @@ enum
     IOUSBHostCITransferCompletionMessageControlDeviceAddress               = IOUSBBitRange(16, 23),
     IOUSBHostCITransferCompletionMessageControlDeviceAddressPhase          = IOUSBBitRangePhase(16, 23),
     IOUSBHostCITransferCompletionMessageControlEndpointAddress             = IOUSBBitRange(24, 31),
-    IOUSBHostCITransferCompletionMessageControlEndpointAddressPhase        = IOUSBBitRangePhase(24, 31),
-    
+    IOUSBHostCITransferCompletionMessageControlEndpointAddressPhase        = IOUSBBitRangePhase(24, 31)
+};
+enum
+{
     IOUSBHostCITransferCompletionMessageData0TransferLength                = IOUSBBitRange(0, 27),
-    IOUSBHostCITransferCompletionMessageData0TransferLengthPhase           = IOUSBBitRangePhase(0, 27),
-    
+    IOUSBHostCITransferCompletionMessageData0TransferLengthPhase           = IOUSBBitRangePhase(0, 27)
+};
+enum
+{
     IOUSBHostCITransferCompletionMessageData1TransferStructure             = IOUSBBitRange64(0, 63),
     IOUSBHostCITransferCompletionMessageData1TransferStructurePhase        = IOUSBBitRangePhase(0, 63)
 };

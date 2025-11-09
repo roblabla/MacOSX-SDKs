@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 3402.5.1 -module-name CoreML
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3404.24.1 -module-name CoreML
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import CoreML
 import CoreVideo
 import Foundation
@@ -163,7 +164,6 @@ extension CoreML.MLFeatureValue {
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   convenience public init(_ value: CoreML.MLSendableFeatureValue)
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public protocol MLShapedArrayProtocol<Scalar> : Swift.ExpressibleByArrayLiteral, Swift.MutableCollection, Swift.RandomAccessCollection where Self.Index == Swift.Int {
   associatedtype Scalar : CoreML.MLShapedArrayScalar
@@ -177,21 +177,6 @@ public protocol MLShapedArrayProtocol<Scalar> : Swift.ExpressibleByArrayLiteral,
   func withUnsafeShapedBufferPointer<R>(_ body: (_ ptr: Swift.UnsafeBufferPointer<Self.Scalar>, _ shape: [Swift.Int], _ strides: [Swift.Int]) throws -> R) rethrows -> R
   mutating func withUnsafeMutableShapedBufferPointer<R>(_ body: (_ ptr: inout Swift.UnsafeMutableBufferPointer<Self.Scalar>, _ shape: [Swift.Int], _ strides: [Swift.Int]) throws -> R) rethrows -> R
 }
-#else
-@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-public protocol MLShapedArrayProtocol : Swift.ExpressibleByArrayLiteral, Swift.MutableCollection, Swift.RandomAccessCollection where Self.Index == Swift.Int {
-  associatedtype Scalar : CoreML.MLShapedArrayScalar
-  init(bytesNoCopy bytes: Swift.UnsafeRawPointer, shape: [Swift.Int], strides: [Swift.Int], deallocator: Foundation.Data.Deallocator)
-  init(unsafeUninitializedShape shape: [Swift.Int], initializingWith initializer: (_ ptr: inout Swift.UnsafeMutableBufferPointer<Self.Scalar>, _ strides: [Swift.Int]) throws -> Swift.Void) rethrows
-  var shape: [Swift.Int] { get }
-  var strides: [Swift.Int] { get }
-  subscript<C>(sliceRanges: C) -> CoreML.MLShapedArraySlice<Self.Scalar> where C : Swift.Collection, C.Element == Swift.Range<Swift.Int> { get set }
-  subscript<C>(indices: C) -> CoreML.MLShapedArraySlice<Self.Scalar> where C : Swift.Collection, C.Element == Swift.Int { get set }
-  subscript<C>(scalarAt indices: C) -> Self.Scalar where C : Swift.Collection, C.Element == Swift.Int { get set }
-  func withUnsafeShapedBufferPointer<R>(_ body: (_ ptr: Swift.UnsafeBufferPointer<Self.Scalar>, _ shape: [Swift.Int], _ strides: [Swift.Int]) throws -> R) rethrows -> R
-  mutating func withUnsafeMutableShapedBufferPointer<R>(_ body: (_ ptr: inout Swift.UnsafeMutableBufferPointer<Self.Scalar>, _ shape: [Swift.Int], _ strides: [Swift.Int]) throws -> R) rethrows -> R
-}
-#endif
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension CoreML.MLShapedArrayProtocol {
   public subscript<C>(partialSliceRanges: C) -> CoreML.MLShapedArraySlice<Self.Scalar> where C : Swift.Collection, C.Element == any CoreML.MLShapedArrayRangeExpression {
@@ -369,8 +354,8 @@ extension CoreML.MLTensor {
   public enum ResizeMethod : Swift.Sendable, Swift.Hashable {
     case bilinear(alignCorners: Swift.Bool = false)
     case nearestNeighbor
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CoreML.MLTensor.ResizeMethod, b: CoreML.MLTensor.ResizeMethod) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -463,8 +448,8 @@ extension CoreML.MLTensor {
     case constant(Swift.Float)
     case reflection
     case symmetric
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CoreML.MLTensor.PaddingMode, b: CoreML.MLTensor.PaddingMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -727,7 +712,6 @@ extension CoreML.MLMultiArray {
   @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
   public func withUnsafeMutableBufferPointer<S, R>(ofType type: S.Type, _ body: (_ ptr: Swift.UnsafeMutableBufferPointer<S>, _ strides: [Swift.Int]) throws -> R) rethrows -> R where S : CoreML.MLShapedArrayScalar
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @available(macOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
 @available(iOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
@@ -736,17 +720,6 @@ extension CoreML.MLMultiArray {
 extension Swift.UnsafeBufferPointer {
   public init(_ multiArray: CoreML.MLMultiArray) throws
 }
-#else
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@available(macOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-@available(iOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-@available(watchOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-@available(tvOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-extension Swift.UnsafeBufferPointer {
-  public init(_ multiArray: CoreML.MLMultiArray) throws
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @available(macOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
 @available(iOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
@@ -755,16 +728,6 @@ extension Swift.UnsafeBufferPointer {
 extension Swift.UnsafeMutableBufferPointer {
   public init(_ multiArray: CoreML.MLMultiArray) throws
 }
-#else
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@available(macOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-@available(iOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-@available(watchOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-@available(tvOS, deprecated: 100000.0, message: "Use .dataPointer and withExtendedLifetime instead")
-extension Swift.UnsafeMutableBufferPointer {
-  public init(_ multiArray: CoreML.MLMultiArray) throws
-}
-#endif
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public enum MLComputeDevice : Swift.Equatable, Swift.Hashable, Swift.CustomStringConvertible, Swift.Sendable {
   case cpu(CoreML.MLCPUComputeDevice)

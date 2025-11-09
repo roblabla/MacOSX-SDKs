@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 561.20.17
+current-version: 561.40.17
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -140,6 +140,7 @@ exports:
                        '_$s22VideoSubscriberAccount10VSPageTypeO11viewServiceyA2CmFWC', 
                        '_$s22VideoSubscriberAccount10VSPageTypeO5buddyyA2CmFWC', 
                        '_$s22VideoSubscriberAccount10VSPageTypeO8allCasesSayACGvgZ', 
+                       '_$s22VideoSubscriberAccount10VSPageTypeO8allCasesSayACGvpZMV', 
                        '_$s22VideoSubscriberAccount10VSPageTypeO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount10VSPageTypeO8rawValueSSvg', '_$s22VideoSubscriberAccount10VSPageTypeO8rawValueSSvpMV', 
                        '_$s22VideoSubscriberAccount10VSPageTypeO8settingsyA2CmFWC', 
@@ -156,6 +157,7 @@ exports:
                        '_$s22VideoSubscriberAccount13VSClickTargetO7openAppyA2CmFWC', 
                        '_$s22VideoSubscriberAccount13VSClickTargetO7signOutyA2CmFWC', 
                        '_$s22VideoSubscriberAccount13VSClickTargetO8allCasesSayACGvgZ', 
+                       '_$s22VideoSubscriberAccount13VSClickTargetO8allCasesSayACGvpZMV', 
                        '_$s22VideoSubscriberAccount13VSClickTargetO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount13VSClickTargetO8rawValueSSvg', 
                        '_$s22VideoSubscriberAccount13VSClickTargetO8rawValueSSvpMV', 
@@ -169,6 +171,7 @@ exports:
                        '_$s22VideoSubscriberAccount16VSTVProviderKeysO13bundleVersionyA2CmFWC', 
                        '_$s22VideoSubscriberAccount16VSTVProviderKeysO16signedInProvideryA2CmFWC', 
                        '_$s22VideoSubscriberAccount16VSTVProviderKeysO8allCasesSayACGvgZ', 
+                       '_$s22VideoSubscriberAccount16VSTVProviderKeysO8allCasesSayACGvpZMV', 
                        '_$s22VideoSubscriberAccount16VSTVProviderKeysO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount16VSTVProviderKeysO8rawValueSSvg', 
                        '_$s22VideoSubscriberAccount16VSTVProviderKeysO8rawValueSSvpMV', 
@@ -179,6 +182,7 @@ exports:
                        '_$s22VideoSubscriberAccount16VSTVProviderKeysOs12CaseIterableAAMc', 
                        '_$s22VideoSubscriberAccount17VSClickstreamKeysO6pageIdyA2CmFWC', 
                        '_$s22VideoSubscriberAccount17VSClickstreamKeysO8allCasesSayACGvgZ', 
+                       '_$s22VideoSubscriberAccount17VSClickstreamKeysO8allCasesSayACGvpZMV', 
                        '_$s22VideoSubscriberAccount17VSClickstreamKeysO8pageTypeyA2CmFWC', 
                        '_$s22VideoSubscriberAccount17VSClickstreamKeysO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount17VSClickstreamKeysO8rawValueSSvg', 
@@ -199,6 +203,7 @@ exports:
                        '_$s22VideoSubscriberAccount19VSAccountUpdateKeysO3ttlyA2CmFWC', 
                        '_$s22VideoSubscriberAccount19VSAccountUpdateKeysO7apiTypeyA2CmFWC', 
                        '_$s22VideoSubscriberAccount19VSAccountUpdateKeysO8allCasesSayACGvgZ', 
+                       '_$s22VideoSubscriberAccount19VSAccountUpdateKeysO8allCasesSayACGvpZMV', 
                        '_$s22VideoSubscriberAccount19VSAccountUpdateKeysO8modifieryA2CmFWC', 
                        '_$s22VideoSubscriberAccount19VSAccountUpdateKeysO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount19VSAccountUpdateKeysO8rawValueSSvg', 
@@ -231,6 +236,7 @@ exports:
                        '_$s22VideoSubscriberAccount21VSAnalyticsCommonKeysO16errorsUnderlyingyA2CmFWC', 
                        '_$s22VideoSubscriberAccount21VSAnalyticsCommonKeysO16storeFrontHeaderyA2CmFWC', 
                        '_$s22VideoSubscriberAccount21VSAnalyticsCommonKeysO8allCasesSayACGvgZ', 
+                       '_$s22VideoSubscriberAccount21VSAnalyticsCommonKeysO8allCasesSayACGvpZMV', 
                        '_$s22VideoSubscriberAccount21VSAnalyticsCommonKeysO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount21VSAnalyticsCommonKeysO8rawValueSSvg', 
                        '_$s22VideoSubscriberAccount21VSAnalyticsCommonKeysO8rawValueSSvpMV', 
@@ -248,6 +254,7 @@ exports:
                        '_$s22VideoSubscriberAccount23VSFederatedPlaybackKeysO3ttlyA2CmFWC', 
                        '_$s22VideoSubscriberAccount23VSFederatedPlaybackKeysO6adamIDyA2CmFWC', 
                        '_$s22VideoSubscriberAccount23VSFederatedPlaybackKeysO8allCasesSayACGvgZ', 
+                       '_$s22VideoSubscriberAccount23VSFederatedPlaybackKeysO8allCasesSayACGvpZMV', 
                        '_$s22VideoSubscriberAccount23VSFederatedPlaybackKeysO8bundleIDyA2CmFWC', 
                        '_$s22VideoSubscriberAccount23VSFederatedPlaybackKeysO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount23VSFederatedPlaybackKeysO8rawValueSSvg', 
@@ -266,8 +273,8 @@ exports:
                        '_$s22VideoSubscriberAccount6VSPageO14settingsPickeryA2CmFWC', 
                        '_$s22VideoSubscriberAccount6VSPageO15viewServiceMainyA2CmFWC', 
                        '_$s22VideoSubscriberAccount6VSPageO19buddySingleProvideryA2CmFWC', 
-                       '_$s22VideoSubscriberAccount6VSPageO8allCasesSayACGvgZ', '_$s22VideoSubscriberAccount6VSPageO8buddyZSOyA2CmFWC', 
-                       '_$s22VideoSubscriberAccount6VSPageO8rawValueACSgSS_tcfC', 
+                       '_$s22VideoSubscriberAccount6VSPageO8allCasesSayACGvgZ', '_$s22VideoSubscriberAccount6VSPageO8allCasesSayACGvpZMV', 
+                       '_$s22VideoSubscriberAccount6VSPageO8buddyZSOyA2CmFWC', '_$s22VideoSubscriberAccount6VSPageO8rawValueACSgSS_tcfC', 
                        '_$s22VideoSubscriberAccount6VSPageO8rawValueSSvg', '_$s22VideoSubscriberAccount6VSPageO8rawValueSSvpMV', 
                        '_$s22VideoSubscriberAccount6VSPageO9buddyMainyA2CmFWC', '_$s22VideoSubscriberAccount6VSPageOMa', 
                        '_$s22VideoSubscriberAccount6VSPageOMn', '_$s22VideoSubscriberAccount6VSPageON', 

@@ -3,14 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MediaExtension.framework/Versions/A/MediaExtension'
-current-version: 3185.18.5
+current-version: 3210.19.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14MediaExtension26MERAWProcessorNotificationO012readyForMoreA13DataDidChangeSo18NSNotificationNameavgZ', 
+                       '_$s14MediaExtension26MERAWProcessorNotificationO012readyForMoreA13DataDidChangeSo18NSNotificationNameavpZMV', 
                        '_$s14MediaExtension26MERAWProcessorNotificationO15valuesDidChangeSo18NSNotificationNameavgZ', 
+                       '_$s14MediaExtension26MERAWProcessorNotificationO15valuesDidChangeSo18NSNotificationNameavpZMV', 
                        '_$s14MediaExtension26MERAWProcessorNotificationOMa', '_$s14MediaExtension26MERAWProcessorNotificationOMn', 
                        '_$s14MediaExtension26MERAWProcessorNotificationON', '_$sSo24MERAWProcessingParameterC14MediaExtensionE11listElement4name11description9elementIDSo0a4ListfB0CSS_SSSitFZ', 
                        '_$sSo24MERAWProcessingParameterC14MediaExtensionE4list4name3key11descriptionAD12initialValue07neutralJ006cameraJ0So0a4ListB0CSS_S2SSaySo0am7ElementB0CGS2iSgAPtFZ', 

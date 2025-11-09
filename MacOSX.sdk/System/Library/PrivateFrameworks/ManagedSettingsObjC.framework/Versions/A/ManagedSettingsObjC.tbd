@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ManagedSettingsObjC.framework/Versions/A/ManagedSettingsObjC'
-current-version: 242.2.2
+current-version: 242.4.10
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -56,11 +56,12 @@ exports:
                        _MOSettingsGroupNamePrivacy, _MOSettingsGroupNameSafari, _MOSettingsGroupNameScreenTime, 
                        _MOSettingsGroupNameShield, _MOSettingsGroupNameSiri, _MOSettingsGroupNameUser, 
                        _MOSettingsGroupNameUserSafety, _MOSettingsGroupNameWebContent, 
-                       _MOSubtractDemand, _MOUserSafetyInterventionTypeChild, _MOUserSafetyInterventionTypeTeen, 
-                       _MOUserSafetyScannableServicesAirDrop, _MOUserSafetyScannableServicesContacts, 
-                       _MOUserSafetyScannableServicesMessages, _MOUserSafetyScannableServicesPhotos, 
-                       _MOUserSafetyScannableServicesVideoVoiceMail, _MOUserSharingPolicyNone, 
-                       _MOUserSharingPolicyRestricted, _MOUserSharingPolicyUnrestricted ]
+                       _MOSettingsStoreErrorDomain, _MOSubtractDemand, _MOUserSafetyInterventionTypeChild, 
+                       _MOUserSafetyInterventionTypeTeen, _MOUserSafetyScannableServicesAirDrop, 
+                       _MOUserSafetyScannableServicesContacts, _MOUserSafetyScannableServicesMessages, 
+                       _MOUserSafetyScannableServicesPhotos, _MOUserSafetyScannableServicesVideoVoiceMail, 
+                       _MOUserSharingPolicyNone, _MOUserSharingPolicyRestricted, 
+                       _MOUserSharingPolicyUnrestricted ]
     objc-classes:    [ MOAccountSettingsGroup, MOAirDropSettingsGroup, MOAllowedClientSettingsGroup, 
                        MOAppStoreSettingsGroup, MOApplication, MOApplicationCategoryShieldPolicy, 
                        MOApplicationCategoryShieldPolicySettingMetadata, MOApplicationSetSettingMetadata, 

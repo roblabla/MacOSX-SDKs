@@ -49,6 +49,10 @@ typedef struct __swift_shims_builtin_CFString {
 } _swift_shims_builtin_CFString;
 
 SWIFT_RUNTIME_STDLIB_API
+const void * _Nullable
+_swift_stdlib_CFStringCreateTaggedPointerString(const __swift_uint8_t * _Nonnull bytes, _swift_shims_CFIndex numBytes);
+
+SWIFT_RUNTIME_STDLIB_API
 __swift_uint8_t _swift_stdlib_isNSString(id _Nonnull obj);
 
 SWIFT_RUNTIME_STDLIB_API

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 340.60.2
+current-version: 349
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -58,6 +58,7 @@ exports:
                        __simple_vdprintf, __simple_vesprintf, __simple_vsprintf, 
                        __spin_lock, __spin_lock_try, __spin_unlock, _ffs, _ffsl, 
                        _ffsll, _fls, _flsl, _flsll, _getcontext, _longjmp, _makecontext, 
+                       _os_apt_msg_async_task_running_4swift, _os_apt_msg_async_task_waiting_on_4swift, 
                        _os_lock_lock, _os_lock_trylock, _os_lock_unlock, _os_log_simple_now, 
                        _os_log_simple_type_from_asl, _os_sync_wait_on_address, _os_sync_wait_on_address_with_deadline, 
                        _os_sync_wait_on_address_with_timeout, _os_sync_wake_by_address_all, 

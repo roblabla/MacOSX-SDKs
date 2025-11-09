@@ -132,6 +132,38 @@ struct if_packet_stats {
 	u_int64_t               _reserved[4];
 };
 
+/*
+ * Structure to report link heuristics
+ */
+#define HAS_IF_LINK_HEURISTICS_STATS 1
+struct if_linkheuristics {
+	u_int64_t       iflh_link_heuristics_cnt;  /* Count of congested link indications */
+	u_int64_t       iflh_link_heuristics_time; /* Duration of congested link indications (msec) */
+
+	u_int64_t       iflh_congested_link_cnt;  /* Count of congested link indications */
+	u_int64_t       iflh_congested_link_time; /* Duration of congested link indications (msec) */
+
+	u_int64_t       iflh_lqm_good_cnt;       /* Count of LQM good */
+	u_int64_t       iflh_lqm_good_time;      /* Duration of LQM good (msec) */
+
+	u_int64_t       iflh_lqm_poor_cnt;       /* Count of LQM poor */
+	u_int64_t       iflh_lqm_poor_time;      /* Duration of LQM poor (msec) */
+
+	u_int64_t       iflh_lqm_min_viable_cnt;  /* Count of LQM minimally viable */
+	u_int64_t       iflh_lqm_min_viable_time; /* Duration of LQM minimally viable (msec) */
+
+	u_int64_t       iflh_lqm_bad_cnt;         /* Count of LQM bad */
+	u_int64_t       iflh_lqm_bad_time;        /* Duration of LQM bad (msec) */
+
+	u_int64_t       iflh_tcp_linkheur_stealthdrop;
+	u_int64_t       iflh_tcp_linkheur_noackpri;
+	u_int64_t       iflh_tcp_linkheur_comprxmt;
+	u_int64_t       iflh_tcp_linkheur_synrxmt;
+	u_int64_t       iflh_tcp_linkheur_rxmtfloor;
+
+	u_int64_t       iflh_udp_linkheur_stealthdrop;
+};
+
 struct if_description {
 	u_int32_t       ifd_maxlen; /* must be IF_DESCSIZE */
 	u_int32_t       ifd_len;    /* actual ifd_desc length */
@@ -308,6 +340,7 @@ struct if_lim_perf_stat {
 };
 
 #define IF_VAR_H_HAS_IFNET_STATS_PER_FLOW 1
+#define IF_VAR_H_HAS_IFNET_STATS_PER_FLOW_LINKHEUR 1
 struct ifnet_stats_per_flow {
 	u_int64_t bk_txpackets;
 	u_int64_t txpackets;
@@ -339,7 +372,14 @@ struct ifnet_stats_per_flow {
 	    ecn_fallback_droprst:1,
 	    ecn_fallback_droprxmt:1,
 	    ecn_fallback_ce:1,
-	    ecn_fallback_reorder:1;
+	    ecn_fallback_reorder:1,
+	    _reserved_6:6;
+	u_int16_t _reserved_16;
+	u_int32_t _reserved_32;
+	u_int64_t linkheur_noackpri;
+	u_int64_t linkheur_comprxmt;
+	u_int64_t linkheur_synrxmt;
+	u_int64_t linkheur_rxmtfloor;
 };
 
 struct if_interface_state {

@@ -77,6 +77,14 @@ typedef NS_ENUM(NSInteger, NSDecodingFailurePolicy) {
 - (double)decodeDoubleForKey:(NSString *)key;
 - (nullable const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(nullable NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;   // returned bytes immutable!
 
+/// Decode bytes from the decoder. The length of the bytes must be greater than or equal to the `length` parameter.
+/// If the result exists, but is of insufficient length, then the decoder uses `failWithError` to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using `NSDecodingFailurePolicy`.
+- (nullable void *)decodeBytesWithMinimumLength:(NSUInteger)length API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4), tvos(18.4), visionos(2.4)) NS_RETURNS_INNER_POINTER;
+
+/// Decode bytes from the decoder for a given key. The length of the bytes must be greater than or equal to the `length` parameter.
+/// If the result exists, but is of insufficient length, then the decoder uses `failWithError` to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using `NSDecodingFailurePolicy`.
+- (nullable const uint8_t *)decodeBytesForKey:(NSString *)key minimumLength:(NSUInteger)length API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4), tvos(18.4), visionos(2.4)) NS_RETURNS_INNER_POINTER;
+
 - (void)encodeInteger:(NSInteger)value forKey:(NSString *)key API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 - (NSInteger)decodeIntegerForKey:(NSString *)key API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 

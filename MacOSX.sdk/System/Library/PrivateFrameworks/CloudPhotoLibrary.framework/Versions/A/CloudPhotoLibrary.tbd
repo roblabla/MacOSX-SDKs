@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoLibrary.framework/Versions/A/CloudPhotoLibrary'
-current-version: 721.0.150
+current-version: 751.0.104
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CPLAccountFlagsReadFrom, _CPLAllLibraryScopeIdentifierPrefixes, 
                        _CPLAllowsInactiveSharedLibraryScope, _CPLAnalysisReferenceUnadjustedFingerprint, 
-                       _CPLAppBundleIdentifierForLibraryIdentifier, _CPLAppLibraryIdentifierPrefix, 
-                       _CPLConfigurationDirectClientIntervalKey, _CPLConfigurationDirectClientMinInterval, 
-                       _CPLConfigurationMinimumIntervalBetweenOverQuotaRechecksKey, 
+                       _CPLAppBundleIdentifierForContainerIdentifier, _CPLAppBundleIdentifierForLibraryIdentifier, 
+                       _CPLAppLibraryIdentifierPrefix, _CPLConfigurationDirectClientIntervalKey, 
+                       _CPLConfigurationDirectClientMinInterval, _CPLConfigurationMinimumIntervalBetweenOverQuotaRechecksKey, 
                        _CPLConfigurationPickerMitigationDictionaryKey, _CPLConfigurationPrefetchDictionaryKey, 
                        _CPLConfigurationRefreshIntervalKey, _CPLConfigurationRefreshMinInterval, 
                        _CPLConfigurationWallpaperDownloadDictionaryKey, _CPLContainerIdentifierForLibraryIdentifier, 
@@ -46,7 +46,7 @@ exports:
                        _CPLErrorRetryAfterReasonKey, _CPLErrorScopeBusyKey, _CPLErrorScopeIdentifiers, 
                        _CPLErrorScopesHaveNotBeenActivatedKey, _CPLErrorServerGeneratedLocalizedDescriptionKey, 
                        _CPLErrorWipeReasonKey, _CPLFaceAnalysisReadFrom, _CPLFaceInstanceReadFrom, 
-                       _CPLFeatureNameMomentShare, _CPLForceSharedLibraryFeatureEnabled, 
+                       _CPLFeatureNameEPP, _CPLFeatureNameMomentShare, _CPLForceSharedLibraryFeatureEnabled, 
                        _CPLGetDynamicVersionForDownloadResource, _CPLIgnoredDateForRecord, 
                        _CPLIsDynamicResourceFingerprint, _CPLIsInTestReadonlyMode, 
                        _CPLIsSharedLibraryFeatureEnabled, _CPLLibraryIdentifierForApp, 
@@ -229,7 +229,7 @@ exports:
                        CPLFaceInstance._faceState, CPLFaceInstance._has, CPLFaceInstance._nameSource, 
                        CPLFaceInstance._personIdentifier, CPLFaceInstance._rejectedPersonIdentifiers, 
                        CPLFaceInstance._size, CPLMemoryAsset._assetFlag, CPLMemoryAsset._assetIdentifier, 
-                       CPLMemoryAsset._assetMovieData, CPLMemoryAsset._masterFingerprint, 
+                       CPLMemoryAsset._assetMovieData, CPLMemoryAsset._masterIdentifier, 
                        CPLMemoryAssetFlag._has, CPLMemoryAssetFlag._isCurated, CPLMemoryAssetFlag._isCustomUserAsset, 
                        CPLMemoryAssetFlag._isExtendedCurated, CPLMemoryAssetFlag._isKeyAsset, 
                        CPLMemoryAssetFlag._isMovieCurated, CPLMemoryAssetFlag._isRepresentative, 
@@ -246,7 +246,7 @@ exports:
                        CPLSocialGroupPerson._personIdentifier, CPLSocialGroupPersonList._has, 
                        CPLSocialGroupPersonList._persons, CPLSocialGroupPersonList._version, 
                        CPLSuggestionAsset._actionData, CPLSuggestionAsset._assetFlag, 
-                       CPLSuggestionAsset._assetIdentifier, CPLSuggestionAsset._masterFingerprint, 
+                       CPLSuggestionAsset._assetIdentifier, CPLSuggestionAsset._masterIdentifier, 
                        CPLSuggestionAssetFlag._has, CPLSuggestionAssetFlag._isKeyAsset, 
                        CPLSuggestionAssetFlag._isRepresentative, CPLSuggestionMemory._context, 
                        CPLSuggestionMemory._feature, CPLSuggestionMemory._has, CPLSuggestionMemory._memoryIdentifier, 

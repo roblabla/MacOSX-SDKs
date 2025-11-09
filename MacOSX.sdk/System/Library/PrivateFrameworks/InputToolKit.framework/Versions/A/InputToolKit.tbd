@@ -86,9 +86,9 @@ exports:
                        _InputToolKitVersionNumber, _InputToolKitVersionString, _itk_deviceHasNeuralEngine, 
                        _itk_deviceSupportsASTC, _itk_dispatchMainAfterDelay, _itk_isCatalyst, 
                        _itk_isDeviceLocked, _itk_isInternalBuild, _itk_isMacOS, _itk_isSeedBuild, 
-                       _itk_isiOS, _itk_performBlockOnMainThread, _itk_performBlockOnMainThreadAndWait, 
-                       _itk_performBlockOnMainThreadWithStrongSelf, _itk_performBlockOnQueueWithStrongSelf, 
-                       _itk_performWhileLocked, _itk_processHasUnlockEntitlement, 
-                       _itk_requestDeviceUnlockIfNecessaryWithCompletion ]
+                       _itk_isVisionOS, _itk_isiOS, _itk_performBlockOnMainThread, 
+                       _itk_performBlockOnMainThreadAndWait, _itk_performBlockOnMainThreadWithStrongSelf, 
+                       _itk_performBlockOnQueueWithStrongSelf, _itk_performWhileLocked, 
+                       _itk_processHasUnlockEntitlement, _itk_requestDeviceUnlockIfNecessaryWithCompletion ]
     objc-classes:    [ ITKAssert, ITKLexiconChecker, ITKLine, ITKLineSegment ]
 ...

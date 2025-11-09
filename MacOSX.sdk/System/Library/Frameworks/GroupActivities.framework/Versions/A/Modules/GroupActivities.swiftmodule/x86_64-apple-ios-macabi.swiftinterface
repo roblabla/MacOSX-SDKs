@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 225.300.181 -module-name GroupActivities
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 225.500.171 -module-name GroupActivities
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AVFoundation
 import CloudKit
 import Combine
@@ -267,28 +268,16 @@ extension GroupActivities.GroupSessionJournal {
       @available(iOS 17, tvOS 17, macOS 14, *)
       @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSessionJournal.Attachments.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
       @available(watchOS, unavailable, introduced: 11.0)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-      @available(watchOS, unavailable, introduced: 11.0)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     @available(iOS 17, tvOS 17, macOS 14, *)
     @available(watchOS, unavailable)
     public typealias AsyncIterator = GroupActivities.GroupSessionJournal.Attachments.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     @available(watchOS, unavailable, introduced: 11.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-    @available(watchOS, unavailable, introduced: 11.0)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
 }
 @objc extension Foundation.NSItemProvider {
@@ -362,11 +351,11 @@ public protocol CustomMessageIdentifiable {
 @available(watchOS, unavailable)
 public struct Participant : Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: Foundation.UUID
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: GroupActivities.Participant, b: GroupActivities.Participant) -> Swift.Bool
   @available(iOS 15, tvOS 15, macOS 12, *)
   @available(watchOS, unavailable)
   public typealias ID = Foundation.UUID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -424,21 +413,12 @@ extension GroupActivities.SystemCoordinator {
       @available(watchOS, unavailable)
       @available(macOS, unavailable)
       public typealias Element = GroupActivities.SystemCoordinator.ParticipantStates.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(visionOS 2.0, *)
       @available(iOS, unavailable, introduced: 18.0)
       @available(tvOS, unavailable, introduced: 18.0)
       @available(watchOS, unavailable, introduced: 11.0)
       @available(macOS, unavailable, introduced: 15.0)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(visionOS 2.0, *)
-      @available(iOS, unavailable, introduced: 18.0)
-      @available(tvOS, unavailable, introduced: 18.0)
-      @available(watchOS, unavailable, introduced: 11.0)
-      @available(macOS, unavailable, introduced: 15.0)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     @available(visionOS 1.0, *)
     @available(iOS, unavailable)
@@ -446,21 +426,12 @@ extension GroupActivities.SystemCoordinator {
     @available(watchOS, unavailable)
     @available(macOS, unavailable)
     public typealias AsyncIterator = GroupActivities.SystemCoordinator.ParticipantStates.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(visionOS 2.0, *)
     @available(iOS, unavailable, introduced: 18.0)
     @available(tvOS, unavailable, introduced: 18.0)
     @available(watchOS, unavailable, introduced: 11.0)
     @available(macOS, unavailable, introduced: 15.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(visionOS 2.0, *)
-    @available(iOS, unavailable, introduced: 18.0)
-    @available(tvOS, unavailable, introduced: 18.0)
-    @available(watchOS, unavailable, introduced: 11.0)
-    @available(macOS, unavailable, introduced: 15.0)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
 }
 @available(visionOS 2.0, *)
@@ -519,8 +490,8 @@ public struct SpatialTemplateElementDirection : Swift.Hashable, Swift.Sendable {
   public static func alignedWith(appAxis: GroupActivities.SpatialTemplateElementAxis) -> GroupActivities.SpatialTemplateElementDirection
   public static func + (lhs: GroupActivities.SpatialTemplateElementDirection, rhs: Spatial.Angle2D) -> GroupActivities.SpatialTemplateElementDirection
   public func rotatedBy(_ rotationAngle: Spatial.Angle2D) -> GroupActivities.SpatialTemplateElementDirection
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: GroupActivities.SpatialTemplateElementDirection, b: GroupActivities.SpatialTemplateElementDirection) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -533,8 +504,8 @@ public struct SpatialTemplateElementDirection : Swift.Hashable, Swift.Sendable {
 public struct SpatialTemplateElementAxis : Swift.Hashable, Swift.Sendable {
   public static let x: GroupActivities.SpatialTemplateElementAxis
   public static let z: GroupActivities.SpatialTemplateElementAxis
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: GroupActivities.SpatialTemplateElementAxis, b: GroupActivities.SpatialTemplateElementAxis) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -549,8 +520,8 @@ public struct SpatialTemplateElementPosition : Swift.Hashable, Swift.Sendable {
     get
   }
   public func offsetBy(x: Swift.Double, z: Swift.Double) -> GroupActivities.SpatialTemplateElementPosition
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: GroupActivities.SpatialTemplateElementPosition, b: GroupActivities.SpatialTemplateElementPosition) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -639,28 +610,16 @@ extension GroupActivities.GroupSessionMessenger {
       @available(iOS 15, tvOS 15, macOS 12, *)
       @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSessionMessenger.Messages<Message>.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
       @available(watchOS, unavailable, introduced: 11.0)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-      @available(watchOS, unavailable, introduced: 11.0)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     @available(iOS 15, tvOS 15, macOS 12, *)
     @available(watchOS, unavailable)
     public typealias AsyncIterator = GroupActivities.GroupSessionMessenger.Messages<Message>.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     @available(watchOS, unavailable, introduced: 11.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-    @available(watchOS, unavailable, introduced: 11.0)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
 }
 extension GroupActivities.GroupSessionMessenger.Messages : Swift.Sendable where Message : Swift.Sendable {
@@ -692,28 +651,16 @@ extension GroupActivities.GroupSession {
       @available(iOS 15, tvOS 15, macOS 12, *)
       @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSession<ActivityType>
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
       @available(watchOS, unavailable, introduced: 11.0)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-      @available(watchOS, unavailable, introduced: 11.0)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     @available(iOS 15, tvOS 15, macOS 12, *)
     @available(watchOS, unavailable)
     public typealias AsyncIterator = GroupActivities.GroupSession<ActivityType>.Sessions.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     @available(watchOS, unavailable, introduced: 11.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
-    @available(watchOS, unavailable, introduced: 11.0)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
 }
 extension GroupActivities.GroupSession.Sessions : Swift.Sendable where ActivityType : Swift.Sendable {
@@ -800,8 +747,8 @@ public struct GroupActivityMetadata : Swift.Equatable, Swift.Sendable {
     @available(iOS 17, macOS 14, tvOS 17, *)
     @available(watchOS, unavailable)
     public static let createTogether: GroupActivities.GroupActivityMetadata.ActivityType
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: GroupActivities.GroupActivityMetadata.ActivityType, b: GroupActivities.GroupActivityMetadata.ActivityType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -811,8 +758,8 @@ public struct GroupActivityMetadata : Swift.Equatable, Swift.Sendable {
   public struct LifetimePolicy : Swift.Hashable, Swift.Sendable {
     public static let automatic: GroupActivities.GroupActivityMetadata.LifetimePolicy
     public static let endsWhenInitiatorLeaves: GroupActivities.GroupActivityMetadata.LifetimePolicy
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: GroupActivities.GroupActivityMetadata.LifetimePolicy, b: GroupActivities.GroupActivityMetadata.LifetimePolicy) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }

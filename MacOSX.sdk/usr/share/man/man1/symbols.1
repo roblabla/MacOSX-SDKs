@@ -63,18 +63,18 @@ Specify the target architecture cpu type as a numeric value
 .It Fl cpuSubtype Ar #
 Specify the target architecture cpu subtype as a numeric value
 .It Fl noHeaders
-Do not print library level information. This also supresses printing of any lower level information, which implies
+Do not print library level information. This also suppresses printing of any lower level information, which implies
 .Fl noRegions ,
 .Fl noSymbols ,
 and
 .Fl noSources
 .It Fl noRegions
-Do not print segment/section level information. This also supresses printing of any lower level information, which implies
+Do not print segment/section level information. This also suppresses printing of any lower level information, which implies
 .Fl noSymbols
 and
 .Fl noSources
 .It Fl noSymbols
-Do not print symbol level information. This also supresses printing of any lower level information, which implies
+Do not print symbol level information. This also suppresses printing of any lower level information, which implies
 .Fl noSources
 .It Fl noSources
 Do not print source level information
@@ -245,5 +245,5 @@ Attempt to find a process named Safari, and save a copy of all discoverable info
 .It Li "symbols /tmp/Safari.signature -lookup \(dq*alloc*\(dq"
 Using the cached information in /tmp/Safari.signature, find every method/function matching the wildcard name *alloc*
 .It Li "symbols -w -1"
-Print out in wide format all available information on kernel symbols"
+Print out in wide format all available information on kernel symbols
 .El

@@ -1,8 +1,6 @@
 //
-//  GenerativePlaygroundUI.modulemap
-//  GenerativePlaygroundUI
-//
-//  Created by Antonio Chiappetta on 11/27/23.
+//  ImagePlayground.modulemap
+//  ImagePlayground
 //
 
 framework module ImagePlayground [system] {

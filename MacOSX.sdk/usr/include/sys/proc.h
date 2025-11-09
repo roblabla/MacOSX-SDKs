@@ -86,7 +86,6 @@
 struct session;
 struct pgrp;
 struct proc;
-struct proc_ident;
 
 /* Exported fields for kern sysctls */
 struct extern_proc {

@@ -26,13 +26,13 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @see GCControllerDirectionPad.valueChangedHandler
  @see GCMotion.valueChangedHandler
  */
-@property (nonatomic, strong) dispatch_queue_t handlerQueue API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0));
+@property (nonatomic, strong) dispatch_queue_t handlerQueue API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 
 /**
  A vendor supplied name. May be nil, and is not guaranteed to be unique. This should not be used as a key in a dictionary,
  but simply as a way to present some basic information about the device in testing or to the user.
  */
-@property (nonatomic, readonly, copy, nullable) NSString *vendorName API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0));
+@property (nonatomic, readonly, copy, nullable) NSString *vendorName API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0));
 
 /**
  The product category the device belongs to. This is useful for setting appropriate UI elements based on what type of device is connected.

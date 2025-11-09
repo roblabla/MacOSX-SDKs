@@ -10,7 +10,8 @@ parent-umbrella:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CMFSSEAM_DEFAULT, _CONTAINER_NOTIFY_USER_INVALIDATED, _CONTAINER_PERSONA_CURRENT, 
+    symbols:         [ _CMCONTAINERSEAM_DEFAULT, _CMFSSEAM_DEFAULT, _CMPWDSEAM_DEFAULT, 
+                       _CONTAINER_NOTIFY_USER_INVALIDATED, _CONTAINER_PERSONA_CURRENT, 
                        _CONTAINER_PERSONA_PRIMARY, __container_init, __container_query_get_servicing_pid, 
                        __container_references_get_servicing_pid, __container_traverse_continuation_create, 
                        __container_traverse_continuation_free, __container_traverse_continuation_pop, 
@@ -87,6 +88,7 @@ exports:
                        _container_get_path, _container_get_persona_unique_string, 
                        _container_get_uid, _container_get_unique_path_component, 
                        _container_get_user_managed_assets_relative_path, _container_group_container_identifiers_for_current_user, 
+                       _container_info_delete, _container_info_modify, _container_info_put, 
                        _container_internal_get_first_boot_uuid, _container_invalidate_code_signing_cache, 
                        _container_is_equal, _container_is_new, _container_is_transient, 
                        _container_log_client_fault_logging_is_enabled, _container_log_error, 
@@ -124,8 +126,9 @@ exports:
                        _container_persona_collect_all_ids, _container_persona_convert_unique_string_to_persona_uid, 
                        _container_persona_foreach, _container_process_restored_container, 
                        _container_pwd_copy_user_home_path, _container_pwd_for_name, 
-                       _container_pwd_for_uid, _container_query_copy, _container_query_count_results, 
-                       _container_query_create, _container_query_create_from_container, 
+                       _container_pwd_for_uid, _container_pwd_get_cached_current_user_home_path, 
+                       _container_pwd_get_mobile_user_uid, _container_query_copy, 
+                       _container_query_count_results, _container_query_create, _container_query_create_from_container, 
                        _container_query_free, _container_query_get_last_error, _container_query_get_single_result, 
                        _container_query_iterate_results_sync, _container_query_iterate_results_with_identifier_sync, 
                        _container_query_iterate_results_with_subquery_sync, _container_query_operation_set_client, 
@@ -138,8 +141,10 @@ exports:
                        _container_regenerate_uuid, _container_repair_user_data, _container_replace, 
                        _container_retry_test, _container_sandbox_extension_consume, 
                        _container_sandbox_extension_revoke, _container_sandbox_issue_custom_extension, 
-                       _container_sandbox_issue_extension, _container_seam_fs_ensure_lazy_loaded, 
-                       _container_seam_fs_reset, _container_seam_fs_set_common, _container_serialize_copy_deserialized_reference, 
+                       _container_sandbox_issue_extension, _container_seam_container_reset, 
+                       _container_seam_container_set_common, _container_seam_fs_ensure_lazy_loaded, 
+                       _container_seam_fs_reset, _container_seam_fs_set_common, _container_seam_pwd_reset, 
+                       _container_seam_pwd_set_common, _container_serialize_copy_deserialized_reference, 
                        _container_serialize_copy_serialized_reference, _container_set_code_signing_info_for_identifier, 
                        _container_set_data_protection_for_current_user, _container_set_info_value, 
                        _container_set_test_lock, _container_stage_shared_system_content, 
@@ -173,7 +178,8 @@ exports:
                        _container_xpc_send_sync_message_with_object, _container_xpc_set_client_context_during_block, 
                        _container_xpc_set_incoming_reply_preprocess_block, _container_xpc_set_outgoing_message_postprocess_block, 
                        _container_xpc_set_outgoing_message_send_block, _container_xpc_set_use_shared_connection, 
-                       _container_xpc_shared_copy_connection, _gCMFSSeam ]
+                       _container_xpc_shared_copy_connection, _gCMContainerSeam, 
+                       _gCMFSSeam, _gCMPWDSeam ]
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _CONTAINER_CURRENT_MOBILE_UID, _CONTAINER_INSTALLATION_UID, 
                        _CONTAINER_SYSTEM_UID, _container_create_or_lookup, _container_create_or_lookup_app_group_paths, 

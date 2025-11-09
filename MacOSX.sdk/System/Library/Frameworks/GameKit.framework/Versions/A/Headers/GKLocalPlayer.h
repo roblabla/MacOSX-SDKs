@@ -11,20 +11,24 @@
 
 #if TARGET_OS_IPHONE
 @class UIViewController;
+@class UIWindow;
 #else
 @class NSViewController;
+@class NSWindow;
 #endif
+
+@protocol GKGameActivityListener;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKLocalPlayer : GKPlayer
 
 /** Obtain the primary GKLocalPlayer object.
     The player is only available for offline play until logged in.
     A temporary player is created if no account is set up.
  */
-@property (class, readonly, nonnull) GKLocalPlayer *local API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property (class, readonly, nonnull) GKLocalPlayer *local API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @property (class, readonly, nonnull) GKLocalPlayer *localPlayer;
 
@@ -36,13 +40,13 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @property(readonly, getter=isUnderage, NS_NONATOMIC_IOSONLY)       BOOL underage;
 
 /// A Boolean value that declares whether or not multiplayer gaming is restricted on this device.
-@property(readonly, getter=isMultiplayerGamingRestricted, nonatomic) BOOL multiplayerGamingRestricted API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property(readonly, getter=isMultiplayerGamingRestricted, nonatomic) BOOL multiplayerGamingRestricted API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /// A Boolean value that declares whether personalized communication is restricted on this device. If it is restricted, the player will not be able to read or write personalized messages on game invites, challenges, or enable voice communication in multiplayer games.  Note: this value will always be true when isUnderage is true.
-@property(readonly, getter=isPersonalizedCommunicationRestricted, nonatomic) BOOL personalizedCommunicationRestricted API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+@property(readonly, getter=isPersonalizedCommunicationRestricted, nonatomic) BOOL personalizedCommunicationRestricted API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 #if TARGET_OS_WATCH
-@property(atomic, nullable, copy) void(^authenticateHandler)(NSError * __nullable error)  __WATCHOS_AVAILABLE(3_0);
+@property(atomic, nullable, copy) void(^authenticateHandler)(NSError * __nullable error)  API_AVAILABLE(watchos(3.0));
 #endif
 
 /** Asynchronously load the recent players list as an array of GKPlayer.  A recent player is someone that you have played a game with or is a legacy game center friend.  Calls completionHandler when finished. Error will be nil on success.
@@ -50,7 +54,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
     1. Communications problem
     2. Unauthenticated player
  */
-- (void)loadRecentPlayersWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable recentPlayers, NSError * __nullable error))completionHandler NS_AVAILABLE(10_11, 10_0) __WATCHOS_AVAILABLE(3_0);
+- (void)loadRecentPlayersWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable recentPlayers, NSError * __nullable error))completionHandler API_AVAILABLE(ios(10.0), macos(10.11), tvos(10.0), visionos(1.0), watchos(3.0));
 
 /** Asynchronously load the challengable friends list as an array of GKPlayer.  A challengable player is a friend player with friend level FL1 and FL2.  Calls completionHandler when finished. Error will be nil on success.
    Possible reasons for error:
@@ -66,7 +70,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
     2. Unauthenticated player
     3. Leaderboard not present
  */
-- (void)setDefaultLeaderboardIdentifier:(NSString *)leaderboardIdentifier completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)setDefaultLeaderboardIdentifier:(NSString *)leaderboardIdentifier completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 
 /** Load the default leaderboard identifier for the local player
@@ -75,7 +79,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
     2. Unauthenticated player
     3. Leaderboard not present
  */
-- (void)loadDefaultLeaderboardIdentifierWithCompletionHandler:(void(^__nullable)(NSString * __nullable leaderboardIdentifier, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)loadDefaultLeaderboardIdentifierWithCompletionHandler:(void(^__nullable)(NSString * __nullable leaderboardIdentifier, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 
 /**Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer
@@ -83,18 +87,17 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
     1. Communications problem
     2. Unauthenticated player
  */
-- (void)fetchItemsForIdentityVerificationSignature:(void (^__nullable)(NSURL * __nullable publicKeyURL, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler API_AVAILABLE(ios(13.5), macos(10.15.5), tvos(13.4.8), watchos(6.5));
+- (void)fetchItemsForIdentityVerificationSignature:(void (^__nullable)(NSURL * __nullable publicKeyURL, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler API_AVAILABLE(ios(13.5), macos(10.15.5), tvos(13.4.8), visionos(1.0), watchos(6.5));
 
 @end
 
 
-#if TARGET_OS_WATCH
-@protocol GKLocalPlayerListener <GKChallengeListener, GKInviteEventListener, GKTurnBasedEventListener>
-@end
-#elif TARGET_OS_TV
+#if TARGET_OS_TV || TARGET_OS_WATCH
+API_AVAILABLE(tvos(9.0), watchos(3.0))
 @protocol GKLocalPlayerListener <GKChallengeListener, GKInviteEventListener, GKTurnBasedEventListener>
 @end
 #else
+API_AVAILABLE(ios(7.0), macos(10.10), visionos(1.0))
 @protocol GKLocalPlayerListener <GKChallengeListener, GKInviteEventListener, GKTurnBasedEventListener, GKSavedGameListener>
 @end
 #endif
@@ -103,24 +106,24 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @interface GKLocalPlayer (GKLocalPlayerEvents)
 
 /// A single listener may be registered once. Registering multiple times results in undefined behavior. The registered listener will receive callbacks for any selector it responds to.
-- (void)registerListener:(id<GKLocalPlayerListener>)listener NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)registerListener:(id<GKLocalPlayerListener>)listener API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
-- (void)unregisterListener:(id<GKLocalPlayerListener>)listener NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)unregisterListener:(id<GKLocalPlayerListener>)listener API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
-- (void)unregisterAllListeners NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)unregisterAllListeners API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 @end
 
 /// Notification will be posted whenever authentication status changes.
-GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName NS_AVAILABLE(10_8, 4_1);
+GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 @interface GKLocalPlayer (Deprecated)
 
-- (void)setDefaultLeaderboardCategoryID:(nullable NSString *)categoryID completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-setDefaultLeaderboardIdentifier:completionHandler:", ios(6.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
-- (void)loadDefaultLeaderboardCategoryIDWithCompletionHandler:(void(^__nullable)(NSString * __nullable categoryID, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadDefaultLeaderboardIdentifierWithCompletionHandler:", ios(6.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
-- (void)authenticateWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-authenticateHandler", ios(4.1,6.0), macos(10.8,10.8)) __TVOS_UNAVAILABLE;
+- (void)setDefaultLeaderboardCategoryID:(nullable NSString *)categoryID completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/setDefaultLeaderboardIdentifier(_:completionHandler:)`` instead.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
+- (void)loadDefaultLeaderboardCategoryIDWithCompletionHandler:(void(^__nullable)(NSString * __nullable categoryID, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/loadDefaultLeaderboardIdentifier(completionHandler:)`` instead.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
+- (void)authenticateWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/authenticateHandler`` instead.", ios(4.1,6.0), macos(10.8,10.8)) API_UNAVAILABLE(tvos);
 
-- (void)loadFriendPlayersWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable friendPlayers, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadFriends:", ios(8.0,10.0), macos(10.10,10.11));
+- (void)loadFriendPlayersWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable friendPlayers, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/loadFriends(_:)`` instead.", ios(8.0,10.0), macos(10.10,10.11), tvos(9.0,10.0), visionos(1.0,1.0), watchos(3.0,3.0));
 
 
 /** Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer
@@ -128,19 +131,20 @@ GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName NS_
     1. Communications problem
     2. Unauthenticated player
  */
-- (void)generateIdentityVerificationSignatureWithCompletionHandler:(void (^__nullable)(NSURL * __nullable publicKeyUrl, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("-fetchItemsForIdentityVerificationSignature:completionHandler:", ios(7.0, 13.5), tvos(9.0, 13.4.8), macos(10.10, 10.15.5), watchos(3.0,6.5));
+- (void)generateIdentityVerificationSignatureWithCompletionHandler:(void (^__nullable)(NSURL * __nullable publicKeyUrl, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/fetchItems(forIdentityVerificationSignature:)`` instead.", ios(7.0,13.5), macos(10.10,10.15.5), tvos(9.0,13.4.8), visionos(1.0,1.0), watchos(3.0,6.5));
 @end
 NS_ASSUME_NONNULL_END
 
 @interface GKLocalPlayer (Obsoleted)
 /** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadFriends:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE NS_SWIFT_NAME(loadFriendsObsoleted(completionHandler:));;
+- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/loadFriends(_:)`` instead.", ios(4.1,8.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos) NS_SWIFT_NAME(loadFriendsObsoleted(completionHandler:));
 
 /** This property is obsolete. ***/
-@property(nonatomic, readonly, nullable, retain) NSArray<NSString *> *friends API_DEPRECATED_WITH_REPLACEMENT("-loadFriendPlayersWithCompletionHandler:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE; // Array of player identifiers of friends for the local player. Not valid until loadFriendsWithCompletionHandler: has completed.
+@property(nonatomic, readonly, nullable, retain) NSArray<NSString *> *friends API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/loadFriendPlayers(completionHandler:)`` instead.", ios(4.1,8.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos); // Array of player identifiers of friends for the local player. Not valid until loadFriendsWithCompletionHandler: has completed.
 @end
 
 NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
     // User has not yet made a choice with regards to this application.
     // A call to loadFriendsListWithHandler: in this state will result
@@ -162,7 +166,7 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
     // A call to loadFriends: will return the player's
     // friend list via a completion block
     GKFriendsAuthorizationStatusAuthorized,
-}API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3));
+} API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), visionos(1.0), watchos(7.3));
 
 @interface GKLocalPlayer (FriendsList)
 
@@ -182,7 +186,7 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  *          - User is not online
  *          - Unauthenticated player
  */
-- (void)loadFriendsAuthorizationStatus:(void(^)(GKFriendsAuthorizationStatus authorizationStatus, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3));
+- (void)loadFriendsAuthorizationStatus:(void(^)(GKFriendsAuthorizationStatus authorizationStatus, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), visionos(1.0), watchos(7.3));
 
 /*
  *  loadFriends:
@@ -211,7 +215,7 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  *          - User is not online
  *          - Unauthenticated player
  */
-- (void)loadFriends:(void(^)(NSArray<GKPlayer *> * __nullable friends, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3));
+- (void)loadFriends:(void(^)(NSArray<GKPlayer *> * __nullable friends, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), visionos(1.0), watchos(7.3));
 
 /*
  *  loadFriendsWithIdentifiers:completionHandler:
@@ -243,23 +247,21 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  *          - Unauthenticated player
  *          - User is not online
  */
-- (void)loadFriendsWithIdentifiers:(NSArray<NSString *> *)identifiers completionHandler:(void(^)(NSArray<GKPlayer *> * __nullable friends, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3)) NS_SWIFT_NAME(loadFriends(identifiedBy:completionHandler:));
+- (void)loadFriendsWithIdentifiers:(NSArray<NSString *> *)identifiers completionHandler:(void(^)(NSArray<GKPlayer *> * __nullable friends, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), visionos(1.0), watchos(7.3)) NS_SWIFT_NAME(loadFriends(identifiedBy:completionHandler:));
 @end
 
 @interface GKLocalPlayer (UI)
 
 #if TARGET_OS_WATCH
 #elif TARGET_OS_IPHONE
-@property(nonatomic, nullable, copy) void(^authenticateHandler)(UIViewController * __nullable viewController, NSError * __nullable error) NS_AVAILABLE_IOS(6_0);
+@property(nonatomic, nullable, copy) void(^authenticateHandler)(UIViewController * __nullable viewController, NSError * __nullable error) API_AVAILABLE(ios(6.0), tvos(9.0), visionos(1.0));
 #else
-@property(atomic, nullable, copy) void(^authenticateHandler)(NSViewController * __nullable viewController, NSError * __nullable error) NS_AVAILABLE_MAC(10_9);
+@property(atomic, nullable, copy) void(^authenticateHandler)(NSViewController * __nullable viewController, NSError * __nullable error) API_AVAILABLE(macos(10.9));
 #endif
 
-#if !TARGET_OS_WATCH && !TARGET_OS_TV
 /// observable property that becomes true when the friend request view controller is displayed.  It becomes false when it is dismissed
-@property (nonatomic, readonly) BOOL isPresentingFriendRequestViewController API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) BOOL isPresentingFriendRequestViewController API_AVAILABLE(ios(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
 /**
  *  presentFriendRequestCreatorFromViewController:
  *
@@ -271,9 +273,12 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  *          - The local player user account is not allowed to add friends
  *            - The device is not allowing outgoing traffic at the time of the operation
 */
-- (BOOL)presentFriendRequestCreatorFromViewController:(UIViewController *)viewController error:(NSError **)error API_AVAILABLE(ios(15.0))  API_UNAVAILABLE(macos, watchos, tvos);
+#if TARGET_OS_IPHONE
+- (BOOL)presentFriendRequestCreatorFromViewController:(UIViewController *)viewController error:(NSError **)error API_AVAILABLE(ios(15.0), visionos(1.0))  API_UNAVAILABLE(macos, macCatalyst, watchos, tvos);
+#else
+- (BOOL)presentFriendRequestCreatorFromViewController:(NSViewController *)viewController error:(NSError **)error API_AVAILABLE(ios(15.0), visionos(1.0))  API_UNAVAILABLE(macos, macCatalyst, watchos, tvos);
+#endif
 
-#elif TARGET_OS_OSX
 /**
  *  presentFriendRequestCreatorFromWindow:
  *
@@ -285,10 +290,12 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  *          - The local player user account is not allowed to add friends
  *            - The device is not allowing outgoing traffic at the time of the operation
 */
-- (BOOL)presentFriendRequestCreatorFromWindow:(nullable NSWindow *)window error:(NSError **)error API_AVAILABLE(macos(12.0))  API_UNAVAILABLE(ios, watchos, tvos);
+#if TARGET_OS_OSX
+- (BOOL)presentFriendRequestCreatorFromWindow:(nullable NSWindow *)window error:(NSError **)error API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, visionos, watchos);
+#else
+- (BOOL)presentFriendRequestCreatorFromWindow:(nullable UIWindow *)window error:(NSError **)error API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, visionos, watchos);
 #endif
 
-#endif
 @end
 
 NS_ASSUME_NONNULL_END

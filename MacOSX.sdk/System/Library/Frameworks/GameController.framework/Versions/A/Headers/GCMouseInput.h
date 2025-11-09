@@ -29,7 +29,7 @@ API_AVAILABLE(macos(11.0), ios(14.0))
  @param deltaX the value of raw mouse delta along x axis. Not affected by mouse sensitivity settings
  @param deltaY the value of raw mouse delta along y axis. Not affected by mouse sensitivity settings
 */
-typedef void (^GCMouseMoved)(GCMouseInput* mouse, float deltaX, float deltaY);
+typedef void (^GCMouseMoved)(GCMouseInput* mouse, float deltaX, float deltaY) API_AVAILABLE(macos(11.0), ios(14.0));
 @property (nonatomic, copy, nullable) GCMouseMoved mouseMovedHandler;
 
 /**

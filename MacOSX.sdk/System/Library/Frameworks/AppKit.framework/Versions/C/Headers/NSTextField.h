@@ -58,6 +58,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 #endif
 
 @property BOOL allowsWritingTools API_AVAILABLE(macos(15.2)); // Default is YES. Configures its field editor to work with Writing Tools.
+@property BOOL allowsWritingToolsAffordance API_AVAILABLE(macos(15.4)); // Default is NO.
 @end
 
 #pragma mark NSTextField NSTouchBar Properties

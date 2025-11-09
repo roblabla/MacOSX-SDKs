@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2695.255.1
+current-version: 2695.255.71
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -713,6 +713,7 @@ exports:
                        '_$s19ContactsPersistence11URLVerifierCN', '_$s19ContactsPersistence11URLVerifierCfD', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvMZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvgZ', 
+                       '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvpZMV', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvsZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC4copy4withyp10ObjectiveC6NSZoneVSg_tFTj', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC4copy4withyp10ObjectiveC6NSZoneVSg_tFTq', 

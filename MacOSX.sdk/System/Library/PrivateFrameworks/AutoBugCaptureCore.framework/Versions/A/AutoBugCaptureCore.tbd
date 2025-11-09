@@ -140,13 +140,13 @@ exports:
                        ABCPeriodicMaintenanceActivity, ABCPersistentStoreController, 
                        ABCPreferences, ABCSemiDailyMaintenanceActivity, ABCWeeklyMaintenanceActivity, 
                        AnalyticsAgent, AnalyticsReportOutlet, AnalyticsWorkspace, 
-                       AutoBugCaptureCacheDelete, CaseReportOutlet, CloudKitUploadController, 
-                       CoreAnalyticsReportOutlet, CrashReportOutlet, CrossDeviceTransportCore, 
-                       DiagnosticCase, DiagnosticCaseManager, DiagnosticCaseStorage, 
-                       DiagnosticCaseStorageAnalytics, DiagnosticCaseSummary, DiagnosticCaseSummaryAnalytics, 
-                       DiagnosticCaseUsage, DiagnosticLiaison, DiagnosticPipelineOutlet, 
-                       DiagnosticReportGenerator, DiagnosticStatisticsManager, DiagnosticStorageManager, 
-                       DiagnosticsController, IDSCrossDeviceTransport, NetDiagnosticsShim, 
-                       ObjectAnalytics, SystemProperties ]
+                       AutoBugCaptureCacheDelete, CaseDampeningExceptions, CaseReportOutlet, 
+                       CloudKitUploadController, CoreAnalyticsReportOutlet, CrashReportOutlet, 
+                       CrossDeviceTransportCore, DiagnosticCase, DiagnosticCaseManager, 
+                       DiagnosticCaseStorage, DiagnosticCaseStorageAnalytics, DiagnosticCaseSummary, 
+                       DiagnosticCaseSummaryAnalytics, DiagnosticCaseUsage, DiagnosticLiaison, 
+                       DiagnosticPipelineOutlet, DiagnosticReportGenerator, DiagnosticStatisticsManager, 
+                       DiagnosticStorageManager, DiagnosticsController, IDSCrossDeviceTransport, 
+                       NetDiagnosticsShim, ObjectAnalytics, SystemProperties ]
     objc-ivars:      [ ABCPersistentStoreController._workspace ]
 ...

@@ -9,8 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSFileProviderDomain;
-
 FILEPROVIDER_API_AVAILABILITY_V1
 @interface NSFileProviderExtension : NSObject
 

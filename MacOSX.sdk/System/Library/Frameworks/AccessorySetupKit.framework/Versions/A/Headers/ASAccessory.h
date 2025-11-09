@@ -40,11 +40,13 @@ typedef NS_OPTIONS( NSUInteger, ASAccessoryRenameOptions )
 typedef NS_OPTIONS( NSUInteger, ASAccessorySupportOptions )
 {
     /// The accessory supports Bluetooth Low Energy pairing.
-    ASAccessorySupportBluetoothPairingLE             = ( 1U << 1 ),  // Accessory supports Bluetooth Low Energy pairing.
+    ASAccessorySupportBluetoothPairingLE                           = ( 1U << 1 ),
     /// The accessory supports bridging to Bluetooth classic transport.
     ///
     /// This option indicates that when connecting with low energy transport, the accessory supports activating Bluetooth classic transport profiles.
-    ASAccessorySupportBluetoothTransportBridging     = ( 1U << 2 ),  // Accessory supports bring up of classic transport profiles when low energy transport for peripheral is connected.
+    ASAccessorySupportBluetoothTransportBridging                   = ( 1U << 2 ),
+    /// The accessory supports Bluetooth Low Energy HID service.
+    ASAccessorySupportBluetoothHID API_AVAILABLE( ios( 18.4 ) )    = ( 1U << 3 ),
 } NS_SWIFT_NAME(ASAccessory.SupportOptions);
 
 AS_EXTERN

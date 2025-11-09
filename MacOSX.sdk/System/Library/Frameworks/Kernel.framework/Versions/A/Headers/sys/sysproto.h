@@ -295,6 +295,20 @@ struct vfork_args {
 };
 #else
 #endif
+struct oslog_coproc_reg_args {
+	char uuid_l_[PADL_(user_addr_t)]; user_addr_t uuid; char uuid_r_[PADR_(user_addr_t)];
+	char file_path_l_[PADL_(user_addr_t)]; user_addr_t file_path; char file_path_r_[PADR_(user_addr_t)];
+	char file_path_len_l_[PADL_(user_size_t)]; user_size_t file_path_len; char file_path_len_r_[PADR_(user_size_t)];
+};
+struct oslog_coproc_args {
+	char buff_l_[PADL_(user_addr_t)]; user_addr_t buff; char buff_r_[PADR_(user_addr_t)];
+	char buff_len_l_[PADL_(uint64_t)]; uint64_t buff_len; char buff_len_r_[PADR_(uint64_t)];
+	char type_l_[PADL_(uint32_t)]; uint32_t type; char type_r_[PADR_(uint32_t)];
+	char uuid_l_[PADL_(user_addr_t)]; user_addr_t uuid; char uuid_r_[PADR_(user_addr_t)];
+	char timestamp_l_[PADL_(uint64_t)]; uint64_t timestamp; char timestamp_r_[PADR_(uint64_t)];
+	char offset_l_[PADL_(uint32_t)]; uint32_t offset; char offset_r_[PADR_(uint32_t)];
+	char stream_log_l_[PADL_(uint32_t)]; uint32_t stream_log; char stream_log_r_[PADR_(uint32_t)];
+};
 struct munmap_args {
 	char addr_l_[PADL_(user_addr_ut)]; user_addr_ut addr; char addr_r_[PADR_(user_addr_ut)];
 	char len_l_[PADL_(user_size_ut)]; user_size_ut len; char len_r_[PADR_(user_size_ut)];
@@ -2600,6 +2614,8 @@ int msync(struct proc *, struct msync_args *, int *);
 int vfork(struct proc *, struct vfork_args *, int *);
 #else
 #endif
+int oslog_coproc_reg(struct proc *, struct oslog_coproc_reg_args *, int *);
+int oslog_coproc(struct proc *, struct oslog_coproc_args *, int *);
 int munmap(struct proc *, struct munmap_args *, int *);
 int mprotect(struct proc *, struct mprotect_args *, int *);
 int madvise(struct proc *, struct madvise_args *, int *);

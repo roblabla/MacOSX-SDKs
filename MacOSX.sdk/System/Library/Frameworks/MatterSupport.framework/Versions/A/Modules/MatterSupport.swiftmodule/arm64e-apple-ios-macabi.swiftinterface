@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -user-module-version 1241.3.7 -module-name MatterSupport
+// swift-compiler-version: Apple Swift version 6.1 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature ExistentialAny -user-module-version 1278.5.13.4.1 -module-name MatterSupport
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 public import Matter
 @_exported public import MatterSupport
 public import Swift
@@ -16,9 +17,9 @@ extension MatterSupport.MatterAddDeviceExtensionRequestHandler {
       get
     }
     public static func network(ssid: Foundation.Data, credentials: Foundation.Data) -> MatterSupport.MatterAddDeviceExtensionRequestHandler.WiFiNetworkAssociation
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceExtensionRequestHandler.WiFiNetworkAssociation, b: MatterSupport.MatterAddDeviceExtensionRequestHandler.WiFiNetworkAssociation) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -47,8 +48,8 @@ public struct MatterAddDeviceRequest {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension MatterSupport.MatterAddDeviceRequest : Swift.Hashable {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: MatterSupport.MatterAddDeviceRequest, b: MatterSupport.MatterAddDeviceRequest) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -72,9 +73,9 @@ extension MatterSupport.MatterAddDeviceRequest {
   public struct Room : Swift.Hashable, Swift.Codable, Swift.Sendable {
     public var displayName: Swift.String
     public init(displayName: Swift.String)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceRequest.Room, b: MatterSupport.MatterAddDeviceRequest.Room) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -95,9 +96,9 @@ extension MatterSupport.MatterAddDeviceExtensionRequestHandler {
     public var version: Swift.UInt8
     public var linkQualityIndicator: Swift.UInt8
     public init(networkName: Swift.String, panID: Swift.UInt16, extendedPANID: Swift.UInt64, channel: Swift.UInt16, extendedAddress: Foundation.Data, rssi: Swift.Int8, version: Swift.UInt8, linkQualityIndicator: Swift.UInt8)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceExtensionRequestHandler.ThreadScanResult, b: MatterSupport.MatterAddDeviceExtensionRequestHandler.ThreadScanResult) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -112,9 +113,9 @@ extension MatterSupport.MatterAddDeviceRequest {
     public var ecosystemName: Swift.String
     public var homes: [MatterSupport.MatterAddDeviceRequest.Home]
     public init(ecosystemName: Swift.String, homes: [MatterSupport.MatterAddDeviceRequest.Home])
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceRequest.Topology, b: MatterSupport.MatterAddDeviceRequest.Topology) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -135,9 +136,9 @@ extension MatterSupport.MatterAddDeviceRequest {
     case productID(_: Swift.Int)
     case serialNumber(_: Swift.String)
     case fabricNode(rootPublicKey: Foundation.Data, nodeID: Swift.UInt64)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceRequest.DeviceCriteria, b: MatterSupport.MatterAddDeviceRequest.DeviceCriteria) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -153,9 +154,9 @@ extension MatterSupport.MatterAddDeviceExtensionRequestHandler {
       get
     }
     public static func network(extendedPANID: Swift.UInt64) -> MatterSupport.MatterAddDeviceExtensionRequestHandler.ThreadNetworkAssociation
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceExtensionRequestHandler.ThreadNetworkAssociation, b: MatterSupport.MatterAddDeviceExtensionRequestHandler.ThreadNetworkAssociation) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -203,9 +204,9 @@ extension MatterSupport.MatterAddDeviceRequest {
   public struct Home : Swift.Hashable, Swift.Codable, Swift.Sendable {
     public var displayName: Swift.String
     public init(displayName: Swift.String)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceRequest.Home, b: MatterSupport.MatterAddDeviceRequest.Home) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -235,9 +236,9 @@ extension MatterSupport.MatterAddDeviceExtensionRequestHandler {
     public var deviceAttestationCertificate: Foundation.Data
     public var productAttestationIntermediateCertificate: Foundation.Data
     public init(certificationDeclaration: Foundation.Data, deviceAttestationCertificate: Foundation.Data, productAttestationIntermediateCertificate: Foundation.Data)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: MatterSupport.MatterAddDeviceExtensionRequestHandler.DeviceCredential, b: MatterSupport.MatterAddDeviceExtensionRequestHandler.DeviceCredential) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }

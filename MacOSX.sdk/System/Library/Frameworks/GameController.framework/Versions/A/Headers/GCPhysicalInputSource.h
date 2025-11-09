@@ -19,7 +19,7 @@ typedef NS_OPTIONS(NSUInteger, GCPhysicalInputSourceDirection) {
     GCPhysicalInputSourceDirectionRight           = (1<<1UL),
     GCPhysicalInputSourceDirectionDown            = (1<<2UL),
     GCPhysicalInputSourceDirectionLeft            = (1<<3UL),
-};
+} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 
 /**

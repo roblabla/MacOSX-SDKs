@@ -15,6 +15,7 @@ exports:
                        _PKComponentPreInstallScript, _PKComponentPreflightScript, 
                        _PKCoreShoveDstAttributesKey, _PKCoreShoveDstPathKey, _PKCoreShoveErrorCannotCopyDirectoryToFile, 
                        _PKCoreShoveErrorCannotCreateDirectoryAtPath, _PKCoreShoveErrorDestinationDirectoryNotEmpty, 
+                       _PKCoreShoveErrorDestinationNotAccessible, _PKCoreShoveErrorDestinationParentNotAccessible, 
                        _PKCoreShoveErrorFailedGetPathSymbolicLink, _PKCoreShoveErrorFailedOpenOnSymbolicLink, 
                        _PKCoreShoveErrorFailedToCopyItemAtPath, _PKCoreShoveErrorFailedToFindUniquePath, 
                        _PKCoreShoveErrorFailedToListContentsOfDirectory, _PKCoreShoveErrorFailedToReadlink, 

@@ -27,9 +27,9 @@
     typedef NS_OPTIONS(NSUInteger, MPSNDArrayQuantizationScheme)
 #endif
 {
-    MPSNDArrayQuantizationTypeNone MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) ) MPS_SWIFT_NAME( none ) = 0,
-    MPSNDArrayQuantizationTypeAffine MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) ),
-    MPSNDArrayQuantizationTypeLUT MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) ),
+    MPSNDArrayQuantizationTypeNone MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) ) MPS_SWIFT_NAME( none ) = 0,
+    MPSNDArrayQuantizationTypeAffine MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) ),
+    MPSNDArrayQuantizationTypeLUT MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) ),
 }
 #if defined(DOXYGEN)
     MPSNDArrayQuantizationScheme
@@ -45,7 +45,7 @@
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayQuantizationDescriptor : NSObject <NSCopying>
 
 /*! @property  quantizationDataType
@@ -67,7 +67,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18
  *  @abstract   Describes an affine quantization scheme
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayAffineQuantizationDescriptor : MPSNDArrayQuantizationDescriptor
 
 /*! @property  hasZeroPoint
@@ -114,7 +114,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18
  *  @abstract   Describes a lookup-table based quantization scheme
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0) )
 @interface MPSNDArrayLUTQuantizationDescriptor : MPSNDArrayQuantizationDescriptor
 
 /*! @abstract   Initializes a scalar lookup-table quantization descriptor.

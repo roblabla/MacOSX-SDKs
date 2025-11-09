@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2.12 -module-name RoomPlan
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2.15 -module-name RoomPlan
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import ARKit
 import CoreGraphics
 import CoreVideo
@@ -45,6 +46,7 @@ extension RoomPlan.CapturedRoom.Object.Category {
   public func supportsCombination(_ attributes: [any RoomPlan.CapturedRoomAttribute]) -> Swift.Bool
 }
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 public class RoomCaptureSession {
   @available(iOS 16.0, *)
   public init()
@@ -95,6 +97,7 @@ public class RoomCaptureSession {
   @objc deinit
 }
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 public protocol RoomCaptureSessionDelegate : AnyObject {
   func captureSession(_ session: RoomPlan.RoomCaptureSession, didUpdate room: RoomPlan.CapturedRoom)
   func captureSession(_ session: RoomPlan.RoomCaptureSession, didAdd room: RoomPlan.CapturedRoom)
@@ -105,6 +108,7 @@ public protocol RoomCaptureSessionDelegate : AnyObject {
   func captureSession(_ session: RoomPlan.RoomCaptureSession, didEndWith data: RoomPlan.CapturedRoomData, error: (any Swift.Error)?)
 }
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomCaptureSessionDelegate {
   public func captureSession(_ session: RoomPlan.RoomCaptureSession, didUpdate room: RoomPlan.CapturedRoom)
   public func captureSession(_ session: RoomPlan.RoomCaptureSession, didAdd room: RoomPlan.CapturedRoom)
@@ -115,6 +119,7 @@ extension RoomPlan.RoomCaptureSessionDelegate {
   public func captureSession(_ session: RoomPlan.RoomCaptureSession, didEndWith data: RoomPlan.CapturedRoomData, error: (any Swift.Error)?)
 }
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 public class RoomBuilder {
   public init(options: RoomPlan.RoomBuilder.ConfigurationOptions)
   public func capturedRoom(from capturedRoomData: RoomPlan.CapturedRoomData) async throws -> RoomPlan.CapturedRoom
@@ -123,10 +128,13 @@ public class RoomBuilder {
     public static let beautifyObjects: RoomPlan.RoomBuilder.ConfigurationOptions
     public init(rawValue: Swift.Int)
     @available(iOS 16.0, *)
+    @available(visionOS, deprecated: 1.0)
     public typealias ArrayLiteralElement = RoomPlan.RoomBuilder.ConfigurationOptions
     @available(iOS 16.0, *)
+    @available(visionOS, deprecated: 1.0)
     public typealias Element = RoomPlan.RoomBuilder.ConfigurationOptions
     @available(iOS 16.0, *)
+    @available(visionOS, deprecated: 1.0)
     public typealias RawValue = Swift.Int
   }
   public enum BuildError : Foundation.LocalizedError {
@@ -152,6 +160,7 @@ public struct CapturedRoomData : Swift.Codable, Swift.Sendable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @objc @_inheritsConvenienceInitializers @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 @_Concurrency.MainActor @preconcurrency public class RoomCaptureView : UIKit.UIView {
   @_Concurrency.MainActor @preconcurrency public var captureSession: RoomPlan.RoomCaptureSession! {
     get
@@ -165,16 +174,19 @@ public struct CapturedRoomData : Swift.Codable, Swift.Sendable {
   @objc deinit
 }
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 public protocol RoomCaptureViewDelegate : Foundation.NSCoding {
   func captureView(shouldPresent roomDataForProcessing: RoomPlan.CapturedRoomData, error: (any Swift.Error)?) -> Swift.Bool
   func captureView(didPresent processedResult: RoomPlan.CapturedRoom, error: (any Swift.Error)?)
 }
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomCaptureViewDelegate {
   public func captureView(shouldPresent roomDataForProcessing: RoomPlan.CapturedRoomData, error: (any Swift.Error)?) -> Swift.Bool
   public func captureView(didPresent processedResult: RoomPlan.CapturedRoom, error: (any Swift.Error)?)
 }
 @available(iOS 17.0, *)
+@available(visionOS, deprecated: 1.0)
 public class StructureBuilder {
   public typealias ConfigurationOptions = RoomPlan.RoomBuilder.ConfigurationOptions
   public init(options: RoomPlan.StructureBuilder.ConfigurationOptions)
@@ -301,8 +313,8 @@ public struct CapturedRoom : Swift.Codable, Swift.Sendable {
     case medium
     case low
     public static func == (a: RoomPlan.CapturedRoom.Confidence, b: RoomPlan.CapturedRoom.Confidence) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -381,8 +393,8 @@ public struct CapturedRoom : Swift.Codable, Swift.Sendable {
       @available(iOS 17.0, *)
       case floor
       public static func == (a: RoomPlan.CapturedRoom.Surface.Category, b: RoomPlan.CapturedRoom.Surface.Category) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -411,13 +423,13 @@ public struct CapturedRoom : Swift.Codable, Swift.Sendable {
       case bottom
       case left
       public static func == (a: RoomPlan.CapturedRoom.Surface.Edge, b: RoomPlan.CapturedRoom.Surface.Edge) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       @available(iOS 16.0, *)
       public typealias AllCases = [RoomPlan.CapturedRoom.Surface.Edge]
       nonisolated public static var allCases: [RoomPlan.CapturedRoom.Surface.Edge] {
         get
       }
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -476,13 +488,13 @@ public struct CapturedRoom : Swift.Codable, Swift.Sendable {
         get
       }
       public static func == (a: RoomPlan.CapturedRoom.Object.Category, b: RoomPlan.CapturedRoom.Object.Category) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
       @available(iOS 16.0, *)
       public typealias AllCases = [RoomPlan.CapturedRoom.Object.Category]
       nonisolated public static var allCases: [RoomPlan.CapturedRoom.Object.Category] {
         get
       }
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -717,20 +729,28 @@ extension RoomPlan.CapturedRoom.Object.Category : Swift.Equatable {}
 @available(iOS 16.0, *)
 extension RoomPlan.CapturedRoom.Object.Category : Swift.Hashable {}
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomCaptureSession.CaptureError : Swift.Equatable {}
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomCaptureSession.CaptureError : Swift.Hashable {}
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomCaptureSession.Instruction : Swift.Equatable {}
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomCaptureSession.Instruction : Swift.Hashable {}
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomBuilder.BuildError : Swift.Equatable {}
 @available(iOS 16.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomBuilder.BuildError : Swift.Hashable {}
 @available(iOS 17.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.StructureBuilder.BuildError : Swift.Equatable {}
 @available(iOS 17.0, *)
+@available(visionOS, deprecated: 1.0)
 extension RoomPlan.StructureBuilder.BuildError : Swift.Hashable {}
 @available(iOS 16.0, *)
 extension RoomPlan.CapturedRoom.Error : Swift.Equatable {}

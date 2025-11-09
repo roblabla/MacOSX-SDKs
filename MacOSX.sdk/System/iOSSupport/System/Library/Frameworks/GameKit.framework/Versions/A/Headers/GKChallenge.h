@@ -16,9 +16,9 @@ typedef NS_ENUM(NSInteger, GKChallengeState) {
     GKChallengeStatePending = 1, // The challenge has been issued, but neither completed nor declined
     GKChallengeStateCompleted = 2, // The challenge has been completed by the receiving player
     GKChallengeStateDeclined = 3, // The challenge has been declined by the receiving player
-};
+} API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
-NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface GKChallenge : NSObject <NSCoding, NSSecureCoding>
 
 /// Query challenges for the current game issued to the local player -- equivalent GKChallenge objects are not guaranteed to be pointer equivalent across calls, but equal GKChallenge objects will have equal hashes
@@ -28,9 +28,9 @@ NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 - (void)decline;
 
 /// The GKPlayer who issued the challenge
-@property (nonatomic, readonly, nullable, copy) GKPlayer *issuingPlayer NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, nullable, copy) GKPlayer *issuingPlayer API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 /// The GKPlayer who has received the challenge
-@property (nonatomic, readonly, nullable, copy) GKPlayer *receivingPlayer NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, nullable, copy) GKPlayer *receivingPlayer API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 /// Current state of the challenge
 @property (nonatomic, readonly, assign) GKChallengeState state;
 /// Date the challenge was issued
@@ -43,26 +43,26 @@ NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 
 @end
 
-__WATCHOS_PROHIBITED
+API_UNAVAILABLE(watchos)
 @interface GKChallenge (Obsoleted)
 /*** This property is obsolete. ***/
-@property (nonatomic, readonly, nullable, copy) NSString *issuingPlayerID API_DEPRECATED_WITH_REPLACEMENT("-issuingPlayer:", ios(6.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+@property (nonatomic, readonly, nullable, copy) NSString *issuingPlayerID API_DEPRECATED_WITH_REPLACEMENT("Use ``GKChallenge/issuingPlayer`` instead.", ios(6.0,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos, watchos);
 /*** This property is obsolete. ***/
-@property (nonatomic, readonly, nullable, copy) NSString *receivingPlayerID API_DEPRECATED_WITH_REPLACEMENT("-receivingPlayer:", ios(6.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+@property (nonatomic, readonly, nullable, copy) NSString *receivingPlayerID API_DEPRECATED_WITH_REPLACEMENT("Use ``GKChallenge/receivingPlayer`` instead", ios(6.0,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos, watchos);
 @end
 
-NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface GKScoreChallenge : GKChallenge
 
 /// The score to meet to satisfy this challenge
-@property (nonatomic, readonly, nullable, retain) GKScore *score API_DEPRECATED_WITH_REPLACEMENT("-leaderboardEntry:", ios(6.0, 17.4), macos(10.8, 14.4), tvos(9.0, 17.4), visionos(1.0, 1.1));
+@property (nonatomic, readonly, nullable, retain) GKScore *score API_DEPRECATED_WITH_REPLACEMENT("Use ``GKChallenge/leaderboardEntry`` instead", ios(6.0, 17.4), macos(10.8, 14.4), tvos(9.0, 17.4), visionos(1.0, 1.1)) API_UNAVAILABLE(watchos);
 
 /// The leaderboard entry to meet to satisfy this challenge
-@property (nonatomic, readonly, nullable, retain) GKLeaderboardEntry *leaderboardEntry API_AVAILABLE(ios(17.4), macos(14.4), tvos(17.4));
+@property (nonatomic, readonly, nullable, retain) GKLeaderboardEntry *leaderboardEntry API_AVAILABLE(ios(17.4), macos(14.4), tvos(17.4)) API_UNAVAILABLE(watchos);
 
 @end
 
-NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface GKAchievementChallenge : GKChallenge
 
 /// The achievement to achieve to satisfy this challenge
@@ -70,48 +70,48 @@ NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 @end
 
 
-#if !TARGET_OS_WATCH
+API_UNAVAILABLE_BEGIN(watchos)
 
 /// Use the following category methods to issue GKScoreChallenges and GKAchievementChallenges to an array of playerIDs. Players may not issue challenges to themselves nor to non-friends. Please see the GameKit reference documentation for further details on these methods.
 @interface GKScore (GKChallenge)
 
 /// Use this alternative to reportScores:withCompletionHandler: to allow only certain specific challenges to be completed. Pass nil to avoid completing any challenges.
-+ (void)reportScores:(NSArray<GKScore *> *)scores withEligibleChallenges:(NSArray<GKChallenge *> *)challenges withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-reportLeaderboardScores:withEligibleChallenges:withCompletionHandler", ios(6.0,14.0), macos(10.10,11.0));
++ (void)reportScores:(NSArray<GKScore *> *)scores withEligibleChallenges:(NSArray<GKChallenge *> *)challenges withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use ``GKScore/report(_:withEligibleChallenges:withCompletionHandler:)`` instead.", ios(6.0,14.0), macos(10.10,11.0));
 
-+ (void)reportLeaderboardScores:(NSArray<GKLeaderboardScore *> *)scores withEligibleChallenges:(NSArray<GKChallenge *> *)challenges withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(11_0, 14_0);
++ (void)reportLeaderboardScores:(NSArray<GKLeaderboardScore *> *)scores withEligibleChallenges:(NSArray<GKChallenge *> *)challenges withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 @interface GKAchievement (GKChallenge)
 
 /// Given a list of players, return a subset of that list containing only players that are eligible to receive a challenge for the achievement.
-- (void)selectChallengeablePlayers:(NSArray<GKPlayer *> *)players withCompletionHandler:(void(^ __nullable)(NSArray<GKPlayer *> * __nullable challengeablePlayers, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)selectChallengeablePlayers:(NSArray<GKPlayer *> *)players withCompletionHandler:(void(^ __nullable)(NSArray<GKPlayer *> * __nullable challengeablePlayers, NSError * __nullable error))completionHandler API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /// Use this alternative to reportAchievements:withCompletionHandler: to allow only certain specific challenges to be completed. Pass nil to avoid completing any challenges.
-+ (void)reportAchievements:(NSArray<GKAchievement *> *)achievements withEligibleChallenges:(NSArray<GKChallenge *> *)challenges withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0);
++ (void)reportAchievements:(NSArray<GKAchievement *> *)achievements withEligibleChallenges:(NSArray<GKChallenge *> *)challenges withCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 @interface GKScore (GKChallengeObsoleted)
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)issueChallengeToPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completionHandler:", ios(6.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (void)issueChallengeToPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completionHandler:)`` method of the ``GKAchievement`` class instead.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 @end
 
 @interface GKAchievement (GKChallengeObsoleted)
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)issueChallengeToPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completionHandler:", ios(6.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (void)issueChallengeToPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completionHandler:)`` method of the ``GKAchievement`` class instead.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)selectChallengeablePlayerIDs:(nullable NSArray<NSString *> *)playerIDs withCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable challengeablePlayerIDs, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-selectChallengeablePlayers:", ios(6.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (void)selectChallengeablePlayerIDs:(nullable NSArray<NSString *> *)playerIDs withCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable challengeablePlayerIDs, NSError * __nullable error))completionHandler API_DEPRECATED("This method is obsolete.", ios(6.0,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 @end
 
 #if TARGET_OS_IPHONE
 @class UIViewController;
-typedef void (^GKChallengeComposeCompletionBlock)(UIViewController *composeController, BOOL didIssueChallenge, NSArray<NSString *> * __nullable sentPlayerIDs) API_DEPRECATED_WITH_REPLACEMENT("GKChallengeComposeHandler", ios(8.0, 17.0), tvos(9.0, 17.0));
+typedef void (^GKChallengeComposeCompletionBlock)(UIViewController *composeController, BOOL didIssueChallenge, NSArray<NSString *> * __nullable sentPlayerIDs) API_DEPRECATED_WITH_REPLACEMENT("Use ``GKChallengeComposeHandler`` instead.", ios(8.0, 17.0), tvos(9.0, 17.0));
 typedef void (^GKChallengeComposeHandler)(UIViewController *composeController, BOOL didIssueChallenge, NSArray<GKPlayer *> * __nullable sentPlayers) API_AVAILABLE(ios(17.0), tvos(17.0));
 #else
 @class NSViewController;
-typedef void (^GKChallengeComposeCompletionBlock)(NSViewController *composeController, BOOL didIssueChallenge, NSArray<NSString *> * __nullable sentPlayerIDs) API_DEPRECATED_WITH_REPLACEMENT("GKChallengeComposeHandler", macos(10.10, 14.0));
+typedef void (^GKChallengeComposeCompletionBlock)(NSViewController *composeController, BOOL didIssueChallenge, NSArray<NSString *> * __nullable sentPlayerIDs) API_DEPRECATED_WITH_REPLACEMENT("Use ``GKChallengeComposeHandler`` instead.", macos(10.10, 14.0));
 typedef void (^GKChallengeComposeHandler)(NSViewController *composeController, BOOL didIssueChallenge, NSArray<GKPlayer *> * __nullable sentPlayers) API_AVAILABLE(macos(14.0));
 #endif
 
@@ -122,10 +122,10 @@ typedef void (^GKChallengeComposeHandler)(NSViewController *composeController, B
 
 // Return a challenge compose view controller with pre-selected GKPlayers and a preformatted, player-editable message. Once this view controller is displayed, and the player sends or cancels sending the challenge, the completion handler will be called. This block contains the view controller, the reason why the handler was called, as well as which (if any) GKPlayers the challenge was sent to. Present modally from the top view controller. The completion handler should dismiss the view controller.
 #if TARGET_OS_IPHONE
-- (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", ios(8.0, 17.0), tvos(9.0, 17.0));
+- (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", ios(8.0, 17.0), tvos(9.0, 17.0));
 - (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completion:(nullable GKChallengeComposeHandler)completionHandler API_AVAILABLE(ios(17.0), tvos(17.0));
 #else
-- (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", macos(10.10, 14.0));
+- (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", macos(10.10, 14.0));
 - (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completion:(nullable GKChallengeComposeHandler)completionHandler API_AVAILABLE(macos(14.0));
 #endif
 
@@ -135,10 +135,10 @@ typedef void (^GKChallengeComposeHandler)(NSViewController *composeController, B
 
 // Return a challenge compose view controller with pre-selected GKPlayers and a preformatted, player-editable message. Once this view controller is displayed, and the player sends or cancels sending the challenge, the completion handler will be called. This block contains the view controller, the reason why the handler was called, as well as which (if any) GKPlayers the challenge was sent to. Present modally from the top view controller. The completion handler should dismiss the view controller.
 #if TARGET_OS_IPHONE
-- (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", ios(14.0, 17.0), tvos(14.0, 17.0));
+- (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", ios(14.0, 17.0), tvos(14.0, 17.0));
 - (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completion:(nullable GKChallengeComposeHandler)completionHandler API_AVAILABLE(ios(17.0), tvos(17.0));
 #else
-- (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", macos(11.0, 14.0));
+- (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", macos(11.0, 14.0));
 - (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(nullable NSArray<GKPlayer *> *)players completion:(nullable GKChallengeComposeHandler)completionHandler API_AVAILABLE(macos(14.0));
 #endif
 
@@ -150,10 +150,10 @@ typedef void (^GKChallengeComposeHandler)(NSViewController *composeController, B
 
 // Return a challenge compose view controller with pre-selected GKPlayers and a preformatted, player-editable message. Once this view controller is displayed, and the player sends or cancels sending the challenge, the completion handler will be called. This block contains the view controller, the reason why the handler was called, as well as which (if any) GKPlayers the challenge was sent to. Present modally from the top view controller. The completion handler should dismiss the view controller.
 #if TARGET_OS_IPHONE
-- (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(NSArray<GKPlayer *> *)players completionHandler:(__nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", ios(8.0, 17.0), tvos(9.0, 17.0));
+- (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(NSArray<GKPlayer *> *)players completionHandler:(__nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", ios(8.0, 17.0), tvos(9.0, 17.0));
 - (UIViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(NSArray<GKPlayer *> *)players completion:(__nullable GKChallengeComposeHandler)completionHandler API_AVAILABLE(ios(17.0), tvos(17.0));
 #else
-- (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(NSArray<GKPlayer *> *)players completionHandler:(__nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", macos(10.10, 14.0));
+- (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(NSArray<GKPlayer *> *)players completionHandler:(__nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", macos(10.10, 14.0));
 - (NSViewController *)challengeComposeControllerWithMessage:(nullable NSString *)message players:(NSArray<GKPlayer *> *)players completion:(__nullable GKChallengeComposeHandler)completionHandler API_AVAILABLE(macos(14.0));
 #endif
 
@@ -163,7 +163,10 @@ typedef void (^GKChallengeComposeHandler)(NSViewController *composeController, B
 
 #if TARGET_OS_IPHONE
 /*** This method is obsolete. Calling this method does nothing and will return nil ***/
-- (nullable UIViewController *)challengeComposeControllerWithPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message completionHandler:(__nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", ios(7.0, 8.0), tvos(9.0, 17.0));
+- (nullable UIViewController *)challengeComposeControllerWithPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message completionHandler:(__nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", ios(7.0, 8.0), tvos(9.0, 17.0));
+#else
+/*** This method is obsolete. Calling this method does nothing and will return nil ***/
+- (nullable NSViewController *)challengeComposeControllerWithPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message completionHandler:(__nullable GKChallengeComposeCompletionBlock)completionHandler API_UNAVAILABLE(macos);
 #endif
 
 @end
@@ -172,11 +175,14 @@ typedef void (^GKChallengeComposeHandler)(NSViewController *composeController, B
 
 #if TARGET_OS_IPHONE
 /*** This method is obsolete. Calling this method does nothing and will return nil ***/
-- (nullable UIViewController *)challengeComposeControllerWithPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("-challengeComposeControllerWithMessage:players:completion:", ios(7.0, 8.0), tvos(9.0, 17.0));
+- (nullable UIViewController *)challengeComposeControllerWithPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKAchievement/challengeComposeController(withMessage:players:completion:)`` method instead.", ios(7.0, 8.0), tvos(9.0, 17.0));
+#else
+/*** This method is obsolete. Calling this method does nothing and will return nil ***/
+- (nullable NSViewController *)challengeComposeControllerWithPlayers:(nullable NSArray<NSString *> *)playerIDs message:(nullable NSString *)message completionHandler:(nullable GKChallengeComposeCompletionBlock)completionHandler API_UNAVAILABLE(macos);
 #endif
 
 @end
 
-#endif // TARGET_OS_WATCH
+API_UNAVAILABLE_END // watchos
 
 NS_ASSUME_NONNULL_END

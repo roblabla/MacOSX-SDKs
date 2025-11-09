@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol OSSystemExtensionRequestDelegate;
 
-OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
+OS_EXPORT API_AVAILABLE(macos(10.15), ios(18.4)) API_UNAVAILABLE(watchos, tvos)
 NSErrorDomain const OSSystemExtensionErrorDomain;
 
 /*!
@@ -21,7 +21,7 @@ NSErrorDomain const OSSystemExtensionErrorDomain;
  @discussion The 'OSBundleUsageDescription' key is required in your Driver
  Extension if your app uses APIs that install them.
  */
-OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
+OS_EXPORT API_AVAILABLE(macos(10.15), ios(18.4)) API_UNAVAILABLE(watchos, tvos)
 NSString* const OSBundleUsageDescriptionKey;
 
 /*!
@@ -31,7 +31,7 @@ NSString* const OSBundleUsageDescriptionKey;
  @discussion The 'NSSystemExtensionUsageDescription' key is required in your
  System Extension if your app uses APIs that install them.
  */
-OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
+OS_EXPORT API_AVAILABLE(macos(10.15), ios(18.4)) API_UNAVAILABLE(watchos, tvos)
 NSString* const NSSystemExtensionUsageDescriptionKey;
 
 /*!
@@ -59,7 +59,7 @@ typedef NS_ERROR_ENUM(OSSystemExtensionErrorDomain, OSSystemExtensionErrorCode) 
     OSSystemExtensionErrorRequestCanceled = 11,
     OSSystemExtensionErrorRequestSuperseded = 12,
     OSSystemExtensionErrorAuthorizationRequired = 13,
-} NS_ENUM_AVAILABLE_MAC(10.15);
+} NS_ENUM_AVAILABLE(10.15, 18.4);
 
 typedef NS_ENUM(NSInteger, OSSystemExtensionReplacementAction) {
     /// Returned by the delegate when it determines that replacing an existing
@@ -157,7 +157,7 @@ OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 
 @end
 
-OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
+OS_EXPORT API_AVAILABLE(macos(10.15), ios(18.4)) API_UNAVAILABLE(watchos, tvos)
 @interface OSSystemExtensionProperties : NSObject
 /*!
  @brief The file URL locating an indicating the extension bundle these properties
@@ -168,23 +168,23 @@ OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 /*!
  @brief The bundle identifier of the extension (CFBundleIdentifier)
  */
-@property (strong, readonly) NSString *bundleIdentifier API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (strong, readonly) NSString *bundleIdentifier API_AVAILABLE(macos(10.15), ios(18.4)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @brief The bundle version of the extension (CFBundleVersion)
  */
-@property (strong, readonly) NSString *bundleVersion API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (strong, readonly) NSString *bundleVersion API_AVAILABLE(macos(10.15), ios(18.4)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @brief The bundle short version string of the extension (CFBundleShortVersionString)
  */
-@property (strong, readonly) NSString *bundleShortVersion API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (strong, readonly) NSString *bundleShortVersion API_AVAILABLE(macos(10.15), ios(18.4)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @brief Returns the enabled state of the extension
  */
 @property (readonly) BOOL isEnabled
-    API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+    API_AVAILABLE(macos(12.0), ios(18.4)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @brief Returns whether an extension is waiting for user approval
@@ -340,7 +340,7 @@ OS_EXPORT API_AVAILABLE(macos(15.1)) API_UNAVAILABLE(ios, watchos, tvos)
 /*!
  @note Using the workspace API requires the system extension entitlement
  */
-OS_EXPORT API_AVAILABLE(macos(15.1)) API_UNAVAILABLE(ios, watchos, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.1), ios(18.4)) API_UNAVAILABLE(watchos, tvos)
 NS_SWIFT_SENDABLE
 @interface OSSystemExtensionsWorkspace : NSObject
 
@@ -348,12 +348,23 @@ NS_SWIFT_SENDABLE
 /*!
  @brief Start observing changes to System Extension(s) which are enabled or ready to be enabled.
  */
-- (BOOL)addObserver:(id<OSSystemExtensionsWorkspaceObserver>)observer error:(NSError *__autoreleasing *)error NS_SWIFT_NAME(addObserver(_:));
+- (BOOL)addObserver:(id<OSSystemExtensionsWorkspaceObserver>)observer error:(NSError *__autoreleasing *)error NS_SWIFT_NAME(addObserver(_:)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief Stop observing changes to System Extension(s).
  */
-- (void)removeObserver:(id<OSSystemExtensionsWorkspaceObserver>)observer NS_SWIFT_NAME(removeObserver(_:));
+- (void)removeObserver:(id<OSSystemExtensionsWorkspaceObserver>)observer NS_SWIFT_NAME(removeObserver(_:)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Get information about system extension(s) in an app with a bundle identifier
+
+ @param bundleID BundleIdentifier of the application containing the system extension(s)
+ @param out_error Error parameter to be populated with relevant error information
+
+ @return A set of system extension property objects on success, nil otherwise.
+
+ */
+- (nullable NSSet<OSSystemExtensionProperties *> *)systemExtensionsForApplicationWithBundleID:(NSString *)bundleID error:(NSError * __autoreleasing _Nullable *)out_error NS_SWIFT_NAME(systemExtensions(forApplicationWithBundleID:)) API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

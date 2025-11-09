@@ -16,21 +16,21 @@ typedef NS_ENUM(NSInteger, UIPrintInfoOutputType) {
     UIPrintInfoOutputGeneral,           // B&W or color, normal quality output for mixed text, graphics, and images
     UIPrintInfoOutputPhoto,             // B&W or color, best quality output for images
     UIPrintInfoOutputGrayscale,         // B&W content only
-    UIPrintInfoOutputPhotoGrayscale API_AVAILABLE(ios(7.0)),    // B&W only, best quality output for images
- } API_UNAVAILABLE(tvos);
+    UIPrintInfoOutputPhotoGrayscale API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos),    // B&W only, best quality output for images
+ } API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UIPrintInfoOrientation) {
     UIPrintInfoOrientationPortrait,
     UIPrintInfoOrientationLandscape,
-} API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UIPrintInfoDuplex) {
     UIPrintInfoDuplexNone,
     UIPrintInfoDuplexLongEdge,       // flip back page along long edge (same orientation in portrait, flipped for landscape)
     UIPrintInfoDuplexShortEdge,      // flip back page along short edge (flipped orientation for portrait, same in landscape)
-} API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPrintInfo : NSObject <NSCopying, NSCoding>
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;

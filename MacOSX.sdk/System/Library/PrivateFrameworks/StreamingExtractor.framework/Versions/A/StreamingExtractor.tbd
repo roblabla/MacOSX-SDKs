@@ -6,7 +6,8 @@ install-name:    '/System/Library/PrivateFrameworks/StreamingExtractor.framework
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _STAEAExtractorOptionsArchiveID, _STAEAExtractorOptionsAsymmetricDecryptionKey, 
+    symbols:         [ _STAEAExtractorErrorDomain, _STAEAExtractorErrorKeyErrno, 
+                       _STAEAExtractorOptionsArchiveID, _STAEAExtractorOptionsAsymmetricDecryptionKey, 
                        _STAEAExtractorOptionsSigningPublicKey, _STAEAExtractorOptionsSourceDirectory, 
                        _STAEAExtractorOptionsSourceDirectorySandboxExtension, _STAEAExtractorOptionsSymmetricDecryptionKey, 
                        _STExtractorErrorDomain, _STRemoteExtractorEntitlementPrivileged, 

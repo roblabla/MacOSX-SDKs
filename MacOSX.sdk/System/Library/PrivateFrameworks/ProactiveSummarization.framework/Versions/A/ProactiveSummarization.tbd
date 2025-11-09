@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSummarization.framework/Versions/A/ProactiveSummarization'
-current-version: 1271.5
+current-version: 1276.10.4
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,9 +24,10 @@ exports:
                        _PSUINMessageReactionTypeTapbackEmphasizedReaction, _PSUINMessageReactionTypeTapbackLaughedReaction, 
                        _PSUINMessageReactionTypeTapbackLikedReaction, _PSUINMessageReactionTypeTapbackLovedReaction, 
                        _PSUINMessageReactionTypeTapbackQuestionedReaction, _PSUMailAttachmentSpotlightPrefix, 
-                       _PSUMailRichLinkSpotlightPrefix, _PSUSpotlightMessageTypeLink, 
-                       _PSUSpotlightMessageTypeSticker, _PSUSummarizationLogging, 
-                       _ProactiveSummarizationVersionNumber, _ProactiveSummarizationVersionString ]
+                       _PSUMailRichLinkSpotlightPrefix, _PSUSpotlightMessageTypeAudio, 
+                       _PSUSpotlightMessageTypeLink, _PSUSpotlightMessageTypeSticker, 
+                       _PSUSummarizationLogging, _ProactiveSummarizationVersionNumber, 
+                       _ProactiveSummarizationVersionString ]
     objc-classes:    [ PSUCurrentActivityManager, PSUIntentMessageHistorySearcher, 
                        PSUModeConfigurationService, PSUSummarizationAnalytics, PSUSummarizationPipeline, 
                        PSUSummarizationXPCServer, PSUVIPManager ]

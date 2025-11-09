@@ -2,7 +2,7 @@
 //  HKTypeIdentifiers.h
 //  HealthKit
 //
-//  Copyright © 2014-2024 Apple, Inc. All rights reserved.
+//  Copyright © 2014-2025 Apple, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -328,6 +328,8 @@ HK_EXTERN NSString * const HKVisionPrescriptionTypeIdentifier API_AVAILABLE(ios(
 
 // Mindfulness
 HK_EXTERN NSString * const HKDataTypeIdentifierStateOfMind API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(17.0), macos(14.0), visionos(2.0));
+
+
 
 /*----------------*/
 /*   Deprecated   */

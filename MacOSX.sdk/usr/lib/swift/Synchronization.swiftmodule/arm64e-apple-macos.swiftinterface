@@ -1,11 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macosx15.2 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.0.3.1.5 -enable-builtin-module -module-name Synchronization
-// swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macosx15.4 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.1.0.110.5 -enable-builtin-module -module-name Synchronization
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -interface-compiler-version 6.1
 import Builtin
 import Darwin
 import Swift
-#if compiler(>=5.3) && $RawLayout && $StaticExclusiveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_rawLayout(like: Value.AtomicRepresentation) @_staticExclusiveOnly public struct Atomic<Value> : ~Swift.Copyable where Value : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -32,7 +31,6 @@ import Swift
     _address.deinitialize(count: 1)
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Atomic : @unchecked Swift.Sendable where Value : Swift.Sendable {
 }
@@ -227,7 +225,6 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
     Double(bitPattern: UInt64.decodeAtomicRepresentation(representation))
   }
 }
-#if compiler(>=5.3) && $StaticExclusiveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_staticExclusiveOnly public struct AtomicLazyReference<Instance> : ~Swift.Copyable where Instance : AnyObject {
   @usableFromInline
@@ -242,7 +239,6 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
     }
   }
 }
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLazyReference {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -491,7 +487,6 @@ extension Swift.RawRepresentable where Self : Synchronization.AtomicOptionalRepr
     }
   }
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Optional : Synchronization.AtomicRepresentable where Wrapped : Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -505,22 +500,6 @@ extension Swift.Optional : Synchronization.AtomicRepresentable where Wrapped : S
     Wrapped.decodeAtomicOptionalRepresentation(representation)
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.Optional : Synchronization.AtomicRepresentable where Wrapped : Synchronization.AtomicOptionalRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Wrapped.AtomicOptionalRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Wrapped?) -> Swift.Optional<Wrapped>.AtomicRepresentation {
-    Wrapped.encodeAtomicOptionalRepresentation(value)
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.Optional<Wrapped>.AtomicRepresentation) -> Wrapped? {
-    Wrapped.decodeAtomicOptionalRepresentation(representation)
-  }
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafePointer : Synchronization.AtomicRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -538,26 +517,6 @@ extension Swift.UnsafePointer : Synchronization.AtomicRepresentable where Pointe
     )!
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafePointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>) -> Swift.UnsafePointer<Pointee>.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicRepresentation) -> Swift.UnsafePointer<Pointee> {
-    UnsafePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )!
-  }
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -575,26 +534,6 @@ extension Swift.UnsafePointer : Synchronization.AtomicOptionalRepresentable wher
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafePointer : Synchronization.AtomicOptionalRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>?) -> Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafePointer<Pointee>? {
-    UnsafePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )
-  }
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutablePointer : Synchronization.AtomicRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -612,26 +551,6 @@ extension Swift.UnsafeMutablePointer : Synchronization.AtomicRepresentable where
     )!
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutablePointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>) -> Swift.UnsafeMutablePointer<Pointee>.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicRepresentation) -> Swift.UnsafeMutablePointer<Pointee> {
-    UnsafeMutablePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )!
-  }
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutablePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -649,25 +568,6 @@ extension Swift.UnsafeMutablePointer : Synchronization.AtomicOptionalRepresentab
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutablePointer : Synchronization.AtomicOptionalRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>?) -> Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafeMutablePointer<Pointee>? {
-    UnsafeMutablePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )
-  }
-}
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeRawPointer : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -852,7 +752,6 @@ extension Swift.ObjectIdentifier : Synchronization.AtomicOptionalRepresentable {
     )
   }
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeBufferPointer : Synchronization.AtomicRepresentable where Element : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -878,34 +777,6 @@ extension Swift.UnsafeBufferPointer : Synchronization.AtomicRepresentable where 
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeBufferPointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeBufferPointer<Element>) -> Swift.UnsafeBufferPointer<Element>.AtomicRepresentation {
-    let valueCopy = value
-
-    return WordPair.encodeAtomicRepresentation(
-      WordPair(
-        first: UInt(bitPattern: valueCopy.baseAddress),
-        second: UInt(truncatingIfNeeded: valueCopy.count)
-      )
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeBufferPointer<Element>.AtomicRepresentation) -> Swift.UnsafeBufferPointer<Element> {
-    let wp = WordPair.decodeAtomicRepresentation(representation)
-
-    return UnsafeBufferPointer<Element>(
-      start: UnsafePointer<Element>(bitPattern: wp.first),
-      count: Int(truncatingIfNeeded: wp.second)
-    )
-  }
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableBufferPointer : Synchronization.AtomicRepresentable where Element : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -931,33 +802,6 @@ extension Swift.UnsafeMutableBufferPointer : Synchronization.AtomicRepresentable
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutableBufferPointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutableBufferPointer<Element>) -> Swift.UnsafeMutableBufferPointer<Element>.AtomicRepresentation {
-    let valueCopy = value
-
-    return WordPair.encodeAtomicRepresentation(
-      WordPair(
-        first: UInt(bitPattern: valueCopy.baseAddress),
-        second: UInt(truncatingIfNeeded: valueCopy.count)
-      )
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutableBufferPointer<Element>.AtomicRepresentation) -> Swift.UnsafeMutableBufferPointer<Element> {
-    let wp = WordPair.decodeAtomicRepresentation(representation)
-
-    return UnsafeMutableBufferPointer<Element>(
-      start: UnsafeMutablePointer<Element>(bitPattern: wp.first),
-      count: Int(truncatingIfNeeded: wp.second)
-    )
-  }
-}
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeRawBufferPointer : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1110,6 +954,13 @@ extension Synchronization.WordPair : Swift.Hashable {
     get
   }
 }
+@available(macOS 15.4, iOS 18.4, watchOS 11.4, tvOS 18.4, visionOS 2.4, *)
+extension Synchronization.WordPair : Swift.Comparable {
+  @available(macOS 15.4, iOS 18.4, watchOS 11.4, tvOS 18.4, visionOS 2.4, *)
+  @_alwaysEmitIntoClient @_transparent public static func < (lhs: Synchronization.WordPair, rhs: Synchronization.WordPair) -> Swift.Bool {
+    (lhs.first, lhs.second) < (rhs.first, rhs.second)
+  }
+}
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.WordPair : Swift.CustomStringConvertible {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1127,8 +978,6 @@ extension Synchronization.WordPair : Swift.CustomDebugStringConvertible {
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.WordPair : Swift.Sendable {
 }
-#if compiler(>=5.3) && $RawLayout
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @usableFromInline
 @frozen @_rawLayout(like: Value) internal struct _Cell<Value> : ~Swift.Copyable where Value : ~Copyable {
@@ -1141,11 +990,7 @@ extension Synchronization.WordPair : Swift.Sendable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent internal var _rawAddress: Builtin.RawPointer {
     @_transparent get {
-#if $BuiltinAddressOfRawLayout
     Builtin.addressOfRawLayout(self)
-#else
-    fatalError()
-#endif
   }
   }
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1157,38 +1002,6 @@ extension Synchronization.WordPair : Swift.Sendable {
     _address.deinitialize(count: 1)
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@usableFromInline
-@frozen @_rawLayout(like: Value) internal struct _Cell<Value> {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal var _address: Swift.UnsafeMutablePointer<Value> {
-    @_transparent get {
-    UnsafeMutablePointer<Value>(_rawAddress)
-  }
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal var _rawAddress: Builtin.RawPointer {
-    @_transparent get {
-#if $BuiltinAddressOfRawLayout
-    Builtin.addressOfRawLayout(self)
-#else
-    fatalError()
-#endif
-  }
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal init(_ initialValue: consuming Value) {
-    _address.initialize(to: initialValue)
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @inlinable deinit {
-    _address.deinitialize(count: 1)
-  }
-}
-#endif
-#endif
-#if compiler(>=5.3) && $StaticExclusiveOnly
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_staticExclusiveOnly public struct _MutexHandle : ~Swift.Copyable {
   @usableFromInline
@@ -1210,9 +1023,6 @@ extension Synchronization.WordPair : Swift.Sendable {
     os_unfair_lock_unlock(value._address)
   }
 }
-#endif
-#if compiler(>=5.3) && $StaticExclusiveOnly
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_staticExclusiveOnly public struct Mutex<Value> : ~Swift.Copyable where Value : ~Copyable {
   @usableFromInline
@@ -1231,40 +1041,11 @@ extension Synchronization.WordPair : Swift.Sendable {
   }
   #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_staticExclusiveOnly public struct Mutex<Value> {
-  @usableFromInline
-  internal let handle: Synchronization._MutexHandle = _MutexHandle()
-  @usableFromInline
-  internal let value: Synchronization._Cell<Value>
-  #if compiler(>=5.3) && $SendingArgsAndResults
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ initialValue: consuming sending Value) {
-    value = _Cell(initialValue)
-  }
-  #else
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ initialValue: consuming Value) {
-    value = _Cell(initialValue)
-  }
-  #endif
-}
-#endif
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Mutex : @unchecked Swift.Sendable where Value : ~Copyable {
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Mutex : @unchecked Swift.Sendable {
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Mutex where Value : ~Copyable {
-  #if compiler(>=5.3) && $TypedThrows
   #if compiler(>=5.3) && $SendingArgsAndResults
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public borrowing func withLock<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result where E : Swift.Error, Result : ~Copyable {
@@ -1288,8 +1069,6 @@ extension Synchronization.Mutex where Value : ~Copyable {
     return try body(&value._address.pointee)
   }
   #endif
-  #endif
-  #if compiler(>=5.3) && $TypedThrows
   #if compiler(>=5.3) && $SendingArgsAndResults
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public borrowing func withLockIfAvailable<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result? where E : Swift.Error, Result : ~Copyable {
@@ -1317,68 +1096,7 @@ extension Synchronization.Mutex where Value : ~Copyable {
     return try body(&value._address.pointee)
   }
   #endif
-  #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Mutex {
-  #if compiler(>=5.3) && $TypedThrows
-  #if compiler(>=5.3) && $SendingArgsAndResults
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLock<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result where E : Swift.Error {
-    handle._lock()
-
-    defer {
-      handle._unlock()
-    }
-
-    return try body(&value._address.pointee)
-  }
-  #else
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLock<Result, E>(_ body: (inout Value) throws(E) -> Result) throws(E) -> Result where E : Swift.Error {
-    handle._lock()
-
-    defer {
-      handle._unlock()
-    }
-
-    return try body(&value._address.pointee)
-  }
-  #endif
-  #endif
-  #if compiler(>=5.3) && $TypedThrows
-  #if compiler(>=5.3) && $SendingArgsAndResults
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLockIfAvailable<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result? where E : Swift.Error {
-    guard handle._tryLock() else {
-      return nil
-    }
-
-    defer {
-      handle._unlock()
-    }
-
-    return try body(&value._address.pointee)
-  }
-  #else
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLockIfAvailable<Result, E>(_ body: (inout Value) throws(E) -> Result) throws(E) -> Result? where E : Swift.Error {
-    guard handle._tryLock() else {
-      return nil
-    }
-
-    defer {
-      handle._unlock()
-    }
-
-    return try body(&value._address.pointee)
-  }
-  #endif
-  #endif
-}
-#endif
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Mutex where Value == () {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1394,37 +1112,41 @@ extension Synchronization.Mutex where Value == () {
     handle._unlock()
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Mutex where Value == () {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeLock() {
-    handle._lock()
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeTryLock() -> Swift.Bool {
-    handle._tryLock()
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeUnlock() {
-    handle._unlock()
-  }
-}
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization._MutexHandle {
+  #if compiler(>=5.3) && $AllowUnsafeAttribute
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeLock() {
+    _lock()
+  }
+  #else
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public borrowing func unsafeLock() {
     _lock()
   }
+  #endif
+  #if compiler(>=5.3) && $AllowUnsafeAttribute
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeTryLock() -> Swift.Bool {
+    _tryLock()
+  }
+  #else
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public borrowing func unsafeTryLock() -> Swift.Bool {
     _tryLock()
   }
+  #endif
+  #if compiler(>=5.3) && $AllowUnsafeAttribute
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeUnlock() {
+    _unlock()
+  }
+  #else
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public borrowing func unsafeUnlock() {
     _unlock()
   }
+  #endif
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Int : Synchronization.AtomicRepresentable {
@@ -1447,35 +1169,30 @@ extension Synchronization.Atomic where Value == Swift.Int {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_add_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_add_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_add_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_add_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_add_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -1499,35 +1216,30 @@ extension Synchronization.Atomic where Value == Swift.Int {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_sub_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_sub_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_sub_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_sub_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_sub_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -1551,35 +1263,30 @@ extension Synchronization.Atomic where Value == Swift.Int {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_and_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_and_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_and_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_and_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_and_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -1603,35 +1310,30 @@ extension Synchronization.Atomic where Value == Swift.Int {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_or_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_or_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_or_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_or_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_or_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -1655,35 +1357,30 @@ extension Synchronization.Atomic where Value == Swift.Int {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_xor_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_xor_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_xor_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_xor_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_xor_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -1707,35 +1404,30 @@ extension Synchronization.Atomic where Value == Swift.Int {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_min_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_min_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_min_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_min_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_min_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -1759,35 +1451,30 @@ extension Synchronization.Atomic where Value == Swift.Int {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_max_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_max_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_max_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_max_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_max_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -3979,35 +3666,30 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_add_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_add_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_add_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_add_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_add_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -4031,35 +3713,30 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_sub_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_sub_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_sub_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_sub_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_sub_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -4083,35 +3760,30 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_and_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_and_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_and_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_and_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_and_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -4135,35 +3807,30 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_or_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_or_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_or_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_or_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_or_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -4187,35 +3854,30 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_xor_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_xor_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_xor_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_xor_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_xor_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -4239,35 +3901,30 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_min_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_min_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_min_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_min_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_min_seqcst_Int64(
         _rawAddress,
         operand._value
@@ -4291,35 +3948,30 @@ extension Synchronization.Atomic where Value == Swift.UInt {
     let original = switch ordering {
  
     case .relaxed:
- 
       Builtin.atomicrmw_max_monotonic_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiring:
- 
       Builtin.atomicrmw_max_acquire_Int64(
         _rawAddress,
         operand._value
       )
  
     case .releasing:
- 
       Builtin.atomicrmw_max_release_Int64(
         _rawAddress,
         operand._value
       )
  
     case .acquiringAndReleasing:
- 
       Builtin.atomicrmw_max_acqrel_Int64(
         _rawAddress,
         operand._value
       )
  
     case .sequentiallyConsistent:
- 
       Builtin.atomicrmw_max_seqcst_Int64(
         _rawAddress,
         operand._value

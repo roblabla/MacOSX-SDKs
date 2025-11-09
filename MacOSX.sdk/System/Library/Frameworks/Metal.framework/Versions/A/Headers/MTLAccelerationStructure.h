@@ -978,7 +978,7 @@ typedef NS_ENUM(NSInteger, MTLTransformType) {
      * to be a 4x4 matrix with the last row being (0, 0, 0, 1).
      */
     MTLTransformTypePackedFloat4x3 = 0,
-
+    
     /**
      * @brief A transformation represented by individual components such as translation and
      * rotation. The rotation is represented by a quaternion, allowing for correct motion
@@ -1054,7 +1054,6 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
  * @brief Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
  */
 @property (nonatomic) MTLTransformType motionTransformType API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.1), visionos(2.1));
-
 /**
  * @brief Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the
  * motion transform type.

@@ -1,17 +1,20 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macos15.2 -target-variant arm64e-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2575.30.19 -module-name AppKit
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macos15.4 -target-variant arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2575.50.26 -module-name AppKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import Accessibility
 @_exported import AppKit
 @_exported import CoreGraphics
 import CoreText
 import CoreTransferable
+import DataDetection
 @_exported import DeveloperToolsSupport
 import Foundation
 import OSLog
 import OpenGL
 import Swift
 import Symbols
+import UniformTypeIdentifiers.UTType
 import UniformTypeIdentifiers
 @_exported import _Concurrency
 import _StringProcessing
@@ -855,14 +858,10 @@ extension DeveloperToolsSupport.Preview {
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSView)
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSViewController)
 }
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(macOS 14.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<AppKit.NSView> body: @escaping @_Concurrency.MainActor () -> AppKit.NSView) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
-#endif
-#if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(macOS 14.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<AppKit.NSViewController> body: @escaping @_Concurrency.MainActor () -> AppKit.NSViewController) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
-#endif
 @available(macOS 15.0, *)
 public struct NSSuggestionItem<SuggestionItemType> {
   public var representedValue: SuggestionItemType
@@ -1137,29 +1136,16 @@ extension AppKit.NSEvent.SpecialKey {
   public static let lineSeparator: AppKit.NSEvent.SpecialKey
   public static let paragraphSeparator: AppKit.NSEvent.SpecialKey
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 15.0, *)
 @_Concurrency.MainActor public protocol NSTextSuggestionsDelegate<SuggestionItemType> : AnyObject {
   associatedtype SuggestionItemType
   typealias Item = AppKit.NSSuggestionItem<Self.SuggestionItemType>
   typealias ItemSection = AppKit.NSSuggestionItemSection<Self.SuggestionItemType>
   typealias ItemResponse = AppKit.NSSuggestionItemResponse<Self.SuggestionItemType>
-  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, provideUpdatedSuggestions responseHandler: @escaping ((Self.ItemResponse) -> Swift.Void))
+  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, provideUpdatedSuggestions responseHandler: @escaping (Self.ItemResponse) -> Swift.Void)
   @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
   @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, didSelect item: Self.Item)
 }
-#else
-@available(macOS 15.0, *)
-@_Concurrency.MainActor public protocol NSTextSuggestionsDelegate : AnyObject {
-  associatedtype SuggestionItemType
-  typealias Item = AppKit.NSSuggestionItem<Self.SuggestionItemType>
-  typealias ItemSection = AppKit.NSSuggestionItemSection<Self.SuggestionItemType>
-  typealias ItemResponse = AppKit.NSSuggestionItemResponse<Self.SuggestionItemType>
-  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, provideUpdatedSuggestions responseHandler: @escaping ((Self.ItemResponse) -> Swift.Void))
-  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
-  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, didSelect item: Self.Item)
-}
-#endif
 extension AppKit.NSTextSuggestionsDelegate {
   @available(macOS 15.0, *)
   @_Concurrency.MainActor public func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
@@ -1414,10 +1400,10 @@ extension AppKit.NSMenuItem {
 }
 extension AppKit.NSTextSuggestionsDelegate where Self.SuggestionItemType : Swift.Hashable {
   @available(macOS 15.0, *)
-  @_Concurrency.MainActor public func appending(_ other: (some NSTextSuggestionsDelegate<SuggestionItemType>)) -> some AppKit.NSTextSuggestionsDelegate<Self.SuggestionItemType>
+  @_Concurrency.MainActor public func appending(_ other: some NSTextSuggestionsDelegate<SuggestionItemType>) -> some AppKit.NSTextSuggestionsDelegate<Self.SuggestionItemType>
   
   @available(macOS 15.0, *)
-  @_disfavoredOverload @_Concurrency.MainActor public func appending<T>(_ other: (some NSTextSuggestionsDelegate<T>)) -> some AppKit.NSTextSuggestionsDelegate<Swift.AnyHashable> where T : Swift.Hashable
+  @_disfavoredOverload @_Concurrency.MainActor public func appending<T>(_ other: some NSTextSuggestionsDelegate<T>) -> some AppKit.NSTextSuggestionsDelegate<Swift.AnyHashable> where T : Swift.Hashable
   
 }
 @available(macOS 14.0, *)
@@ -1492,6 +1478,84 @@ extension AppKit.NSColor : CoreTransferable.Transferable {
   }
   @available(macOS 14.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSColorC6AppKitE22transferRepresentationQrvpZ", 0) __
+}
+extension AppKit.NSPasteboard {
+  @available(macOS 15.4, *)
+  @objc dynamic public var accessBehavior: AppKit.NSPasteboard.AccessBehavior {
+    @objc get
+  }
+}
+extension AppKit.NSPasteboard {
+  @available(macOS 15.4, *)
+  public struct DetectedValues {
+    public var patterns: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedValues>> {
+      get
+    }
+    public var probableWebURL: Swift.String {
+      get
+    }
+    public var probableWebSearch: Swift.String {
+      get
+    }
+    public var number: Swift.Double? {
+      get
+    }
+    public var links: [DataDetection.DDMatchLink] {
+      get
+    }
+    public var phoneNumbers: [DataDetection.DDMatchPhoneNumber] {
+      get
+    }
+    public var emailAddresses: [DataDetection.DDMatchEmailAddress] {
+      get
+    }
+    public var postalAddresses: [DataDetection.DDMatchPostalAddress] {
+      get
+    }
+    public var calendarEvents: [DataDetection.DDMatchCalendarEvent] {
+      get
+    }
+    public var shipmentTrackingNumbers: [DataDetection.DDMatchShipmentTrackingNumber] {
+      get
+    }
+    public var flightNumbers: [DataDetection.DDMatchFlightNumber] {
+      get
+    }
+    public var moneyAmounts: [DataDetection.DDMatchMoneyAmount] {
+      get
+    }
+  }
+}
+extension AppKit.NSPasteboard {
+  @available(macOS 15.4, *)
+  public struct DetectedMetadata {
+    public var metadataTypes: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedMetadata>> {
+      get
+    }
+    public var contentType: UniformTypeIdentifiers.UTType? {
+      get
+    }
+  }
+}
+extension AppKit.NSPasteboard {
+  @available(macOS 15.4, *)
+  public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedValues>>) async throws -> Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedValues>>
+  @available(macOS 15.4, *)
+  public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedValues>>) async throws -> AppKit.NSPasteboard.DetectedValues
+  @available(macOS 15.4, *)
+  public func detectedMetadata(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedMetadata>>) async throws -> AppKit.NSPasteboard.DetectedMetadata
+}
+extension AppKit.NSPasteboardItem {
+  @available(macOS 15.4, *)
+  public typealias DetectedValues = AppKit.NSPasteboard.DetectedValues
+  @available(macOS 15.4, *)
+  public typealias DetectedMetadata = AppKit.NSPasteboard.DetectedMetadata
+  @available(macOS 15.4, *)
+  public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboardItem.DetectedValues>>) async throws -> Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboardItem.DetectedValues>>
+  @available(macOS 15.4, *)
+  public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboardItem.DetectedValues>>) async throws -> AppKit.NSPasteboardItem.DetectedValues
+  @available(macOS 15.4, *)
+  public func detectedMetadata(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboardItem.DetectedMetadata>>) async throws -> AppKit.NSPasteboardItem.DetectedMetadata
 }
 @available(macCatalyst 18.0, macOS 15.0, *)
 extension AppKit.NSHorizontalDirection : Swift.Equatable {}

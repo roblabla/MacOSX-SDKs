@@ -1,4 +1,4 @@
-/* iig(DriverKit-402.60.12) generated from IOBufferMemoryDescriptor.iig */
+/* iig(DriverKit-427.100.5) generated from IOBufferMemoryDescriptor.iig */
 
 /* IOBufferMemoryDescriptor.iig:1-40 */
 /*

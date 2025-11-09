@@ -62,6 +62,8 @@ tessellationFactorBufferOffset:(NSUInteger)offset tessellationFactorBufferInstan
 - (void)setBarrier API_AVAILABLE(macos(14.0), ios(17.0), tvos(18.1), visionos(2.1));
 - (void)clearBarrier API_AVAILABLE(macos(14.0), ios(17.0), tvos(18.1), visionos(2.1));
 
+
+
 - (void)reset;
 
 

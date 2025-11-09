@@ -20,11 +20,12 @@
 #endif
 
 
-#if TARGET_OS_IPHONE && !__has_include(<UIKit/UIView.h>)
-#define SKVIEW_AVAILABLE 0
-#else
+#if TARGET_OS_OSX || (__has_include(<UIKit/UIView.h>) && !TARGET_OS_WATCH)
 #define SKVIEW_AVAILABLE 1
+#else
+#define SKVIEW_AVAILABLE 0
 #endif
+
 
 #ifdef __cplusplus
 #define SK_EXPORT extern "C" __attribute__((visibility ("default")))

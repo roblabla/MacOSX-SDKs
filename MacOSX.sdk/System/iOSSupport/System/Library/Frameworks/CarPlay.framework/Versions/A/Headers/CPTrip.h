@@ -90,7 +90,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  this trip, arranged from most to least preferred. You must provide at least one variant.
  The variant strings should be provided as localized, displayable content.
  */
-@property (nonatomic, copy, nullable) NSArray<NSString *> *destinationNameVariants;
+@property (nonatomic, copy, nullable) NSArray<NSString *> *destinationNameVariants API_AVAILABLE(ios(17.4));
 
 @end
 

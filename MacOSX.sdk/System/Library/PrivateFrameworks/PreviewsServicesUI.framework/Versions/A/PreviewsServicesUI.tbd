@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServicesUI.framework/Versions/A/PreviewsServicesUI'
-current-version: 22.20.7
+current-version: 22.30.25
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -81,9 +81,11 @@ exports:
                        '_$s18PreviewsServicesUI18PreviewPreferencesV20preferredOrientationAC09InterfaceG0Ovg', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesV20preferredOrientationAC09InterfaceG0OvpMV', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesV7defaultACvgZ', 
+                       '_$s18PreviewsServicesUI18PreviewPreferencesV7defaultACvpZMV', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesVMa', '_$s18PreviewsServicesUI18PreviewPreferencesVMn', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesVN', '_$s18PreviewsServicesUI18PreviewPreferencesVs23CustomStringConvertibleAAMc', 
                        '_$s18PreviewsServicesUI19WindowChromeContextV6radius12CoreGraphics7CGFloatVvgZ', 
+                       '_$s18PreviewsServicesUI19WindowChromeContextV6radius12CoreGraphics7CGFloatVvpZMV', 
                        '_$s18PreviewsServicesUI19WindowChromeContextVMa', '_$s18PreviewsServicesUI19WindowChromeContextVMn', 
                        '_$s18PreviewsServicesUI19WindowChromeContextVN', '_$s18PreviewsServicesUI22SuppressedPresentationO10fontPickeryA2CmFWC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO10printPanelyA2CmFWC', 

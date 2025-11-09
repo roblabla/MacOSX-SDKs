@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/HealthKitAdditions.framework/Versions/A/HealthKitAdditions'
-current-version: 5200.2.11
+current-version: 5200.4.25
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -249,6 +249,7 @@ exports:
                        '_$s18HealthKitAdditions23SampleDataEncodingErrorVs0G0AAMc', 
                        '_$s18HealthKitAdditions26DefaultOnlyLoggingCategoryO7defaultyA2CmFWC', 
                        '_$s18HealthKitAdditions26DefaultOnlyLoggingCategoryO8allCasesSayACGvgZ', 
+                       '_$s18HealthKitAdditions26DefaultOnlyLoggingCategoryO8allCasesSayACGvpZMV', 
                        '_$s18HealthKitAdditions26DefaultOnlyLoggingCategoryO8rawValueACSgSS_tcfC', 
                        '_$s18HealthKitAdditions26DefaultOnlyLoggingCategoryO8rawValueSSvg', 
                        '_$s18HealthKitAdditions26DefaultOnlyLoggingCategoryO8rawValueSSvpMV', 
@@ -319,7 +320,9 @@ exports:
                        '_$s18HealthKitAdditions27DarwinNotificationPublisherCfD', 
                        '_$s18HealthKitAdditions27DarwinNotificationPublisherCfd', 
                        '_$s18HealthKitAdditions27HKSampleDataCodingConstantsO28categoryTypeIdentifierPrefixSSvgZ', 
+                       '_$s18HealthKitAdditions27HKSampleDataCodingConstantsO28categoryTypeIdentifierPrefixSSvpZMV', 
                        '_$s18HealthKitAdditions27HKSampleDataCodingConstantsO28quantityTypeIdentifierPrefixSSvgZ', 
+                       '_$s18HealthKitAdditions27HKSampleDataCodingConstantsO28quantityTypeIdentifierPrefixSSvpZMV', 
                        '_$s18HealthKitAdditions27HKSampleDataCodingConstantsOMa', 
                        '_$s18HealthKitAdditions27HKSampleDataCodingConstantsOMn', 
                        '_$s18HealthKitAdditions27HKSampleDataCodingConstantsON', 
@@ -411,6 +414,7 @@ exports:
                        '_$s18HealthKitAdditions32HKSharingAuthorizationIdentifierO20healthRecordsConceptyACSS_SSSgAEtcACmFWC', 
                        '_$s18HealthKitAdditions32HKSharingAuthorizationIdentifierO25medicationTrackingConceptyACSS_SSSgAEtcACmFWC', 
                        '_$s18HealthKitAdditions32HKSharingAuthorizationIdentifierO26clinicalSharingIdentifiersSayACGvgZ', 
+                       '_$s18HealthKitAdditions32HKSharingAuthorizationIdentifierO26clinicalSharingIdentifiersSayACGvpZMV', 
                        '_$s18HealthKitAdditions32HKSharingAuthorizationIdentifierO26medicationTrackingCategoryyA2CmFWC', 
                        '_$s18HealthKitAdditions32HKSharingAuthorizationIdentifierO2eeoiySbAC_ACtFZ', 
                        '_$s18HealthKitAdditions32HKSharingAuthorizationIdentifierO4fromACSgSS_tcfC', 
@@ -521,6 +525,7 @@ exports:
                        '_$s9HealthKit8DayIndexV0aB9AdditionsE3pdsoiySnyACGAC_SitFZ', 
                        '_$sSL18HealthKitAdditionsE7clamped6withinxSNyxG_tF', '_$sSn18HealthKitAdditions0aB08DayIndexVRszrlE3pdsoiySnyADGAF_SitFZ', 
                        '_$sSo11HKBloodTypeV18HealthKitAdditionsE8allCasesSayABGvgZ', 
+                       '_$sSo11HKBloodTypeV18HealthKitAdditionsE8allCasesSayABGvpZMV', 
                        '_$sSo11HKBloodTypeVs12CaseIterable18HealthKitAdditionsMc', 
                        '_$sSo12HKObjectTypeC18HealthKitAdditionsE30sharingAuthorizationIdentifierAC09HKSharinggH0Ovg', 
                        '_$sSo12HKObjectTypeC18HealthKitAdditionsE30sharingAuthorizationIdentifierAC09HKSharinggH0OvpMV', 
@@ -579,6 +584,7 @@ exports:
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE23DateRangeQueryPublisherV13configurationAE13ConfigurationVvg', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE23DateRangeQueryPublisherV13configurationAE13ConfigurationVvpMV', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE23DateRangeQueryPublisherV19defaultFactoryBlocky7Combine03AnyI0Vys6ResultOySDySo12HKSampleTypeC10Foundation0F8IntervalVGs5Error_pGsAR_pGAB_SSSgtcvgZ', 
+                       '_$sSo13HKHealthStoreC18HealthKitAdditionsE23DateRangeQueryPublisherV19defaultFactoryBlocky7Combine03AnyI0Vys6ResultOySDySo12HKSampleTypeC10Foundation0F8IntervalVGs5Error_pGsAR_pGAB_SSSgtcvpZMV', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE23DateRangeQueryPublisherV7Combine0I0ACMc', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE23DateRangeQueryPublisherVAC07HKQueryI0ACMc', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE23DateRangeQueryPublisherVAC07HKQueryI0ACWP', 
@@ -648,6 +654,7 @@ exports:
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE24DatabaseChangesPublisherV13configurationAE13ConfigurationVvg', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE24DatabaseChangesPublisherV13configurationAE13ConfigurationVvpMV', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE24DatabaseChangesPublisherV19defaultFactoryBlocky7Combine03AnyH0Vys6ResultOyAE11QueryOutputVs5Error_pGsAN_pGAE13ConfigurationV_ABtcvgZ', 
+                       '_$sSo13HKHealthStoreC18HealthKitAdditionsE24DatabaseChangesPublisherV19defaultFactoryBlocky7Combine03AnyH0Vys6ResultOyAE11QueryOutputVs5Error_pGsAN_pGAE13ConfigurationV_ABtcvpZMV', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE24DatabaseChangesPublisherV7Combine0H0ACMc', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE24DatabaseChangesPublisherV9makeQuery4with13outputHandlerSo7HKQueryCAE13ConfigurationV_yAC0nH6ResultOys0P0OyAE0J6OutputVs5Error_pGGctFZ', 
                        '_$sSo13HKHealthStoreC18HealthKitAdditionsE24DatabaseChangesPublisherVAC07HKQueryH0ACMc', 
@@ -720,10 +727,13 @@ exports:
                        '_$sSo13HKQueryAnchorC18HealthKitAdditionsE1loiySbAB_ABtFZ', 
                        '_$sSo13HKQueryAnchorCSL18HealthKitAdditionsMc', '_$sSo14HKProfileStoreC18HealthKitAdditionsE31createFetchDisplayNamePublisher7Combine6FutureCySSSg05firstI0_AH04lastI0ts5Error_pGyF', 
                        '_$sSo15HKBiologicalSexV18HealthKitAdditionsE8allCasesSayABGvgZ', 
+                       '_$sSo15HKBiologicalSexV18HealthKitAdditionsE8allCasesSayABGvpZMV', 
                        '_$sSo15HKBiologicalSexVs12CaseIterable18HealthKitAdditionsMc', 
                        '_$sSo15HKWheelchairUseV18HealthKitAdditionsE8allCasesSayABGvgZ', 
+                       '_$sSo15HKWheelchairUseV18HealthKitAdditionsE8allCasesSayABGvpZMV', 
                        '_$sSo15HKWheelchairUseVs12CaseIterable18HealthKitAdditionsMc', 
                        '_$sSo15NSDateFormatterC18HealthKitAdditionsE016sampleDataCodingB0ABvgZ', 
+                       '_$sSo15NSDateFormatterC18HealthKitAdditionsE016sampleDataCodingB0ABvpZMV', 
                        '_$sSo16HKKeyValueDomainC18HealthKitAdditionsE015getPropertyListB03for7Combine6FutureCyypSgs5Error_pGSS_tF', 
                        '_$sSo16HKKeyValueDomainC18HealthKitAdditionsE015setPropertyListB0_3for7Combine6FutureCyyts5Error_pGypSg_SStF', 
                        '_$sSo16HKKeyValueDomainC18HealthKitAdditionsE024makePublisherWithCurrentB06forKey16observingChanges7Combine03AnyH0VyxSgs5Error_pGSS_SbtSQRzlF', 
@@ -758,8 +768,11 @@ exports:
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyV8rawValueSSvpMV', 
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyV8rawValueSSvs', 
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVACSbRszlE22onboardingAcknowledgedAEy_SbGvgZ', 
+                       '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVACSbRszlE22onboardingAcknowledgedAEy_SbGvpZMV', 
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVACSbRszlE23liveOnTermsAcknowledgedAEy_SbGvgZ', 
+                       '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVACSbRszlE23liveOnTermsAcknowledgedAEy_SbGvpZMV', 
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVACSbRszlE7enabledAEy_SbGvgZ', 
+                       '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVACSbRszlE7enabledAEy_SbGvpZMV', 
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVMa', '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVMn', 
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsE3KeyVy_xGSYACMc', 
                        '_$sSo17HKFeatureSettingsC18HealthKitAdditionsEy10Foundation4DateVSgAbCE3KeyVy_AFGcig', 
@@ -822,6 +835,7 @@ exports:
                        '_$sSo21HKDeviceKeyValueStoreC18HealthKitAdditionsE9setNumber_3key7Combine12AnyPublisherVyyts5Error_pGSo8NSNumberCSg_SStF', 
                        '_$sSo21HKDeviceKeyValueStoreC18HealthKitAdditionsE9setString_3key7Combine12AnyPublisherVyyts5Error_pGSSSg_SStF', 
                        '_$sSo21HKFitzpatrickSkinTypeV18HealthKitAdditionsE8allCasesSayABGvgZ', 
+                       '_$sSo21HKFitzpatrickSkinTypeV18HealthKitAdditionsE8allCasesSayABGvpZMV', 
                        '_$sSo21HKFitzpatrickSkinTypeVs12CaseIterable18HealthKitAdditionsMc', 
                        '_$sSo22HKFeatureStatusManagerC18HealthKitAdditions07FeatureB9ProvidingACMc', 
                        '_$sSo22HKFeatureStatusManagerC18HealthKitAdditions07FeatureB9ProvidingACWP', 
@@ -862,5 +876,6 @@ exports:
                        '_$sSp18HealthKitAdditionsSo16os_unfair_lock_sVRszlE6unlockyyF', 
                        '_$sSpyxG18HealthKitAdditions13LockProvidingABSo16os_unfair_lock_sVRszlMc', 
                        '_$sSpyxG18HealthKitAdditions13LockProvidingABSo16os_unfair_lock_sVRszlWP', 
-                       '_$ss6ResultO18HealthKitAdditionsytRszrlE7successAByytq_GvgZ' ]
+                       '_$ss6ResultO18HealthKitAdditionsytRszrlE7successAByytq_GvgZ', 
+                       '_$ss6ResultO18HealthKitAdditionsytRszrlE7successAByytq_GvpZMV' ]
 ...

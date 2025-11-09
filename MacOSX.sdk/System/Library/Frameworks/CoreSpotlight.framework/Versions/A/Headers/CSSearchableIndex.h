@@ -144,5 +144,11 @@ CS_TVOS_UNAVAILABLE
 // The developer may provide a NSURL to file representation representation if type was specified from providerDataTypeIdentifiers or providerInPlaceFileTypeIdentifiers property.
 - (nullable NSURL *)fileURLForSearchableIndex:(CSSearchableIndex *)searchableIndex itemIdentifier:(NSString *)itemIdentifier typeIdentifier:(NSString *)typeIdentifier inPlace:(BOOL)inPlace error:(out NSError ** __nullable)outError CS_AVAILABLE(10_13, 11_0) CS_TVOS_UNAVAILABLE;
 
+// The index requests that the delegate provide searchable items for the provided identifiers
+- (void)searchableItemsForIdentifiers:(NSArray <NSString *> *)identifiers searchableItemsHandler:(void (^)(NSArray<CSSearchableItem *> *items))searchableItemsHandler NS_AVAILABLE(15_4, 18_4);
+
+// The developer may want to be notified when an item has been updated with specific attributes (see: CSSearchableItemUpdateListenerOptions for Apple Intelligence attributes)
+- (void)searchableItemsDidUpdate:(NSArray<CSSearchableItem *> *)items NS_AVAILABLE(15_4, 18_4);
+
 @end
 NS_ASSUME_NONNULL_END

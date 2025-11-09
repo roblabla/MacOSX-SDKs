@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/MechanismBase.framework/Versions/A/MechanismBase'
-current-version: 1656.60.132
+current-version: 1656.100.223
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ '-allowable_client', CoreAuthUI, DaemonUtils, LARecoveryUITest, 
@@ -22,7 +22,8 @@ exports:
     objc-classes:    [ ACMContextRecord, MechanismACM, MechanismAssertion, MechanismAssertionHolding, 
                        MechanismAssertionKeyBagUnlocked, MechanismAssertionLoginWindowShield, 
                        MechanismAssertionWithDarwinNotifications, MechanismBase, 
-                       MechanismBiometry, MechanismContext, MechanismKofN, MechanismKofNReorganizer, 
-                       MechanismTouchIDWatch, MechanismUI, RemoteUIActivator, RemoteUIManager, 
-                       RemoteUIManagerConfig, RemoteUIParams ]
+                       MechanismBaseComposite, MechanismBiometry, MechanismContext, 
+                       MechanismKofN, MechanismKofNReorganizer, MechanismTouchIDWatch, 
+                       MechanismUI, RemoteUIActivator, RemoteUIManager, RemoteUIManagerConfig, 
+                       RemoteUIParams ]
 ...

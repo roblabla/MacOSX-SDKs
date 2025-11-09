@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudAssets.framework/Versions/A/CloudAssets'
-current-version: 2230.24
+current-version: 2250.36.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -75,7 +75,7 @@ exports:
                        '_$s11CloudAssets12AssetManagerC11serviceNameACSS_tcfC', '_$s11CloudAssets12AssetManagerC11serviceNameACSS_tcfCTj', 
                        '_$s11CloudAssets12AssetManagerC11serviceNameACSS_tcfCTq', 
                        '_$s11CloudAssets12AssetManagerC11serviceNameACSS_tcfc', '_$s11CloudAssets12AssetManagerC6sharedACvgZ', 
-                       '_$s11CloudAssets12AssetManagerC7process7requestAA0C0VAA0C13UploadRequestV_tYaKF', 
+                       '_$s11CloudAssets12AssetManagerC6sharedACvpZMV', '_$s11CloudAssets12AssetManagerC7process7requestAA0C0VAA0C13UploadRequestV_tYaKF', 
                        '_$s11CloudAssets12AssetManagerC7process7requestAA0C0VAA0C13UploadRequestV_tYaKFTu', 
                        '_$s11CloudAssets12AssetManagerC7process7requestAA0C0VAA0C15DownloadRequestV_tYaKF', 
                        '_$s11CloudAssets12AssetManagerC7process7requestAA0C0VAA0C15DownloadRequestV_tYaKFTu', 
@@ -95,12 +95,12 @@ exports:
                        '_$s11CloudAssets12AssetManagerC7process8requestsScsys6ResultOyAA0C0Vs5Error_pGsAJ_pGSayAA0C15DownloadRequestVG_tYaKFTu', 
                        '_$s11CloudAssets12AssetManagerC7process8requestsScsys6ResultOyAA0C16DownloadResponseVs5Error_pGsAJ_pGSayAA0cH7RequestVG_tYaKF', 
                        '_$s11CloudAssets12AssetManagerC7process8requestsScsys6ResultOyAA0C16DownloadResponseVs5Error_pGsAJ_pGSayAA0cH7RequestVG_tYaKFTu', 
-                       '_$s11CloudAssets12AssetManagerC8testableACvgZ', '_$s11CloudAssets12AssetManagerCMa', 
-                       '_$s11CloudAssets12AssetManagerCMm', '_$s11CloudAssets12AssetManagerCMn', 
-                       '_$s11CloudAssets12AssetManagerCMo', '_$s11CloudAssets12AssetManagerCMu', 
-                       '_$s11CloudAssets12AssetManagerCN', '_$s11CloudAssets12AssetManagerCfD', 
-                       '_$s11CloudAssets12AssetManagerCfd', '_$s11CloudAssets12AssetRequestMp', 
-                       '_$s11CloudAssets12AssetRequestP10credentialAA10CredentialVvgTj', 
+                       '_$s11CloudAssets12AssetManagerC8testableACvgZ', '_$s11CloudAssets12AssetManagerC8testableACvpZMV', 
+                       '_$s11CloudAssets12AssetManagerCMa', '_$s11CloudAssets12AssetManagerCMm', 
+                       '_$s11CloudAssets12AssetManagerCMn', '_$s11CloudAssets12AssetManagerCMo', 
+                       '_$s11CloudAssets12AssetManagerCMu', '_$s11CloudAssets12AssetManagerCN', 
+                       '_$s11CloudAssets12AssetManagerCfD', '_$s11CloudAssets12AssetManagerCfd', 
+                       '_$s11CloudAssets12AssetRequestMp', '_$s11CloudAssets12AssetRequestP10credentialAA10CredentialVvgTj', 
                        '_$s11CloudAssets12AssetRequestP10credentialAA10CredentialVvgTq', 
                        '_$s11CloudAssets12AssetRequestP10tenantNameSSvgTj', '_$s11CloudAssets12AssetRequestP10tenantNameSSvgTq', 
                        '_$s11CloudAssets12AssetRequestP16workingDirectory10Foundation3URLVvgTj', 
@@ -130,10 +130,13 @@ exports:
                        '_$s11CloudAssets13AssetSkeletonVN', '_$s11CloudAssets13AssetSkeletonVSEAAMc', 
                        '_$s11CloudAssets13AssetSkeletonVSHAAMc', '_$s11CloudAssets13AssetSkeletonVSQAAMc', 
                        '_$s11CloudAssets13AssetSkeletonVSeAAMc', '_$s11CloudAssets15LoggerSubsystemO6clientSSvgZ', 
-                       '_$s11CloudAssets15LoggerSubsystemO6serverSSvgZ', '_$s11CloudAssets15LoggerSubsystemOMa', 
+                       '_$s11CloudAssets15LoggerSubsystemO6clientSSvpZMV', '_$s11CloudAssets15LoggerSubsystemO6serverSSvgZ', 
+                       '_$s11CloudAssets15LoggerSubsystemO6serverSSvpZMV', '_$s11CloudAssets15LoggerSubsystemOMa', 
                        '_$s11CloudAssets15LoggerSubsystemOMn', '_$s11CloudAssets15LoggerSubsystemON', 
-                       '_$s11CloudAssets15XPCServiceNamesO11testServiceSSvgZ', '_$s11CloudAssets15XPCServiceNamesO11userServiceSSvgZ', 
+                       '_$s11CloudAssets15XPCServiceNamesO11testServiceSSvgZ', '_$s11CloudAssets15XPCServiceNamesO11testServiceSSvpZMV', 
+                       '_$s11CloudAssets15XPCServiceNamesO11userServiceSSvgZ', '_$s11CloudAssets15XPCServiceNamesO11userServiceSSvpZMV', 
                        '_$s11CloudAssets15XPCServiceNamesO13systemServiceSSvgZ', 
+                       '_$s11CloudAssets15XPCServiceNamesO13systemServiceSSvpZMV', 
                        '_$s11CloudAssets15XPCServiceNamesOMa', '_$s11CloudAssets15XPCServiceNamesOMn', 
                        '_$s11CloudAssets15XPCServiceNamesON', '_$s11CloudAssets16AssetUploadEventO14resultReceivedyAcA9XPCResultOyAA0C0VGcACmFWC', 
                        '_$s11CloudAssets16AssetUploadEventO14signalReceivedyAcA6SignalVcACmFWC', 

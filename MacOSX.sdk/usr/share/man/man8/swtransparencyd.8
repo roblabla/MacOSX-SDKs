@@ -1,5 +1,5 @@
-.\" Copyright (c) 2023-2024 Apple Inc. All rights reserved.
-.Dd 1 Dec, 2023
+.\" Copyright (c) 2023-2025 Apple Inc. All rights reserved.
+.Dd 7 Jan, 2025
 .Dt swtransparencyd 8
 .Os Darwin
 .Sh NAME
@@ -7,8 +7,13 @@
 .Nd The swtransparency daemon.
 .Sh DESCRIPTION
 .Nm
-swtransparencyd is a system daemon that verifies software transparency information for requesting clients.
-It is not intended to be invoked directly.
+swtransparencyd is a system daemon that verifies software transparency information for
+Apple Inteligence and other clients.
+.Pp
+.Nm
+is not intended to be invoked directly, but launchd though
+.Nm launchd .
 .Sh SEE ALSO
+.Xr transparencyd 8
 .Xr launchd 8
 .Xr launchd.conf 5

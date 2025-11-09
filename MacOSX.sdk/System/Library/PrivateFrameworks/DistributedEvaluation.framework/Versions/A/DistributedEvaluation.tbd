@@ -4,8 +4,6 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DistributedEvaluation.framework/Versions/A/DistributedEvaluation'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AddRecordsForType, _AddRecordsForTypeWithUUIDs, _DESAmendedRecordInfo, 

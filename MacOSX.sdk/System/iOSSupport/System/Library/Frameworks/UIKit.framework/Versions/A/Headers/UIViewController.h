@@ -642,13 +642,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIViewController (UIScreenEdgesDeferringSystemGestures)
 
 // Override to return a child view controller or nil. If non-nil, that view controller's screen edges deferring system gestures will be used. If nil, self is used. Whenever the return value changes, -setNeedsScreenEdgesDeferringSystemGesturesUpdate should be called.
-@property (nonatomic, readonly, nullable) UIViewController *childViewControllerForScreenEdgesDeferringSystemGestures API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) UIViewController *childViewControllerForScreenEdgesDeferringSystemGestures API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Controls the application's preferred screen edges deferring system gestures when this view controller is shown. Default is UIRectEdgeNone.
-@property (nonatomic, readonly) UIRectEdge preferredScreenEdgesDeferringSystemGestures API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) UIRectEdge preferredScreenEdgesDeferringSystemGestures API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // This should be called whenever the return values for the view controller's screen edges deferring system gestures have changed.
-- (void)setNeedsUpdateOfScreenEdgesDeferringSystemGestures API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)setNeedsUpdateOfScreenEdgesDeferringSystemGestures API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -656,13 +656,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIViewController (UIHomeIndicatorAutoHidden)
 
 // Override to return a child view controller or nil. If non-nil, that view controller's home indicator auto-hiding will be used. If nil, self is used. Whenever the return value changes, -setNeedsHomeIndicatorAutoHiddenUpdate should be called.
-@property (nonatomic, readonly, nullable) UIViewController *childViewControllerForHomeIndicatorAutoHidden API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) UIViewController *childViewControllerForHomeIndicatorAutoHidden API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // Controls the application's preferred home indicator auto-hiding when this view controller is shown.
-@property (nonatomic, readonly) BOOL prefersHomeIndicatorAutoHidden API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) BOOL prefersHomeIndicatorAutoHidden API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // This should be called whenever the return values for the view controller's home indicator auto-hiding have changed.
-- (void)setNeedsUpdateOfHomeIndicatorAutoHidden API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)setNeedsUpdateOfHomeIndicatorAutoHidden API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 

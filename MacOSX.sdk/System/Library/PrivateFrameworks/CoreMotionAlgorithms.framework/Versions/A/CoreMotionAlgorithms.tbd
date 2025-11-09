@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMotionAlgorithms.framework/Versions/A/CoreMotionAlgorithms'
-current-version: 2953.0.28
+current-version: 2960.0.57
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__back_refIcEE, __ZTINSt3__111__alternateIcEE, 

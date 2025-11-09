@@ -10,9 +10,10 @@ exports:
                        _BTNestedErrorF, _BTXPCGetNextClientID ]
     objc-classes:    [ AAAudioRoutingControl, AAAudioSessionControl, AACloudServicesClient, 
                        AAController, AADeviceConfig, AADeviceManager, AAProxCardsInfo, 
-                       AudioAccessoryDevice, BTAirPodsControlServiceClient, BTAudioRoutingRequest, 
-                       BTAudioRoutingResponse, BTAudioSession, BTBannerUISession, 
-                       BTBluetoothPairingSession, BTCloudAccountInfo, BTCloudDevice, 
-                       BTCloudDeviceSupportInformation, BTCloudServicesClient, BTCloudSoundProfileRecord, 
-                       BTMagicPairingSettings, BTServicesClient, HMDeviceCloudRecordInfo ]
+                       AASystemStateMonitor, AAUSBSupportedDeviceManager, AudioAccessoryDevice, 
+                       BTAirPodsControlServiceClient, BTAudioRoutingRequest, BTAudioRoutingResponse, 
+                       BTAudioSession, BTBannerUISession, BTBluetoothPairingSession, 
+                       BTCloudAccountInfo, BTCloudDevice, BTCloudDeviceSupportInformation, 
+                       BTCloudServicesClient, BTCloudSoundProfileRecord, BTMagicPairingSettings, 
+                       BTServicesClient, HMDeviceCloudRecordInfo ]
 ...

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 221.2.6
+current-version: 221.4.7
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -143,7 +143,8 @@ exports:
                        DMFDisableLostModeRequest, DMFEchoRequest, DMFEchoResultObject, 
                        DMFEffectivePolicy, DMFEmergencyModeMonitor, DMFEnableLostModeRequest, 
                        DMFEndTransactionRequest, DMFFetchActivationLockBypassCodeRequest, 
-                       DMFFetchActivationLockBypassCodeResultObject, DMFFetchApplicationsRequest, 
+                       DMFFetchActivationLockBypassCodeResultObject, DMFFetchAppInfoRequest, 
+                       DMFFetchAppInfoResultObject, DMFFetchApplicationsRequest, 
                        DMFFetchApplicationsResultObject, DMFFetchAppsRequest, DMFFetchAppsResultObject, 
                        DMFFetchAvailableOSUpdatesRequest, DMFFetchAvailableOSUpdatesResultObject, 
                        DMFFetchCertificatesRequest, DMFFetchCertificatesResultObject, 
@@ -204,10 +205,10 @@ exports:
                        DMFSetVoiceRoamingEnabledRequest, DMFSetVolumeRequest, DMFShutDownDeviceRequest, 
                        DMFStartAppLockRequest, DMFStopAirPlayMirroringRequest, DMFStopAppLockRequest, 
                        DMFStopManagingAppRequest, DMFStopManagingBooksRequest, DMFTaskRequest, 
-                       DMFTriggerDiagnosticsRequest, DMFUpdateAppRequest, DMFUpdateDeclarationsRequest, 
-                       DMFUpdateEnqueuedCommandsRequest, DMFUpdatePickableAirPlayRoutesRequest, 
-                       DMFUser, DMFValidateApplicationsRequest, DMFWebsitePolicyMonitor, 
-                       DMFiCloudPolicyMonitor ]
+                       DMFTriggerDiagnosticsRequest, DMFUpdateAppAttributesRequest, 
+                       DMFUpdateAppRequest, DMFUpdateDeclarationsRequest, DMFUpdateEnqueuedCommandsRequest, 
+                       DMFUpdatePickableAirPlayRoutesRequest, DMFUser, DMFValidateApplicationsRequest, 
+                       DMFWebsitePolicyMonitor, DMFiCloudPolicyMonitor ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

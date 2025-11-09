@@ -89,6 +89,7 @@
  *   ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER
  *   ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP
  *   ES_EVENT_TYPE_NOTIFY_GATEKEEPER_USER_OVERRIDE
+ *   ES_EVENT_TYPE_NOTIFY_TCC_MODIFY
  */
 
 /**
@@ -368,6 +369,36 @@ typedef struct {
 } es_event_exec_t;
 
 /**
+ * @brief TCC Modification Event. Occurs when a TCC permission is granted
+ * or revoked.
+ *
+ * @field service             The TCC service for which permissions are being modified.
+ * @field identity            The identity of the application that is the subject of the permission.
+ * @field identity_type       The identity type of the application string (Bundle ID, path, etc).
+ * @field update_type         The type of TCC modification event (Grant/Revoke etc)
+ * @field instigator_token    Audit token of the instigator of the modification.
+ * @field instigator          (Optional) The process information for the instigator.
+ * @field responsible_token   (Optional) Audit token of the responsible process for the modification.
+ * @field responsible         (Optional) The process information for the responsible process.
+ * @field right               The resulting TCC permission of the operation/modification.
+ * @field reason              The reason the TCC permissions were updated.
+ *
+ * @note This event type does not support caching.
+ */
+typedef struct {
+	es_string_token_t service;
+	es_string_token_t identity;
+	es_tcc_identity_type_t identity_type;
+	es_tcc_event_type_t update_type;
+	audit_token_t instigator_token;
+	es_process_t *_Nullable instigator;
+	audit_token_t *_Nullable responsible_token;
+	es_process_t *_Nullable responsible;
+	es_tcc_authorization_right_t right;
+	es_tcc_authorization_reason_t reason;
+} es_event_tcc_modify_t;
+
+/**
  * @brief Open a file system object
  *
  * @field fflag The desired flags to be used when opening `file` (see note)
@@ -551,17 +582,35 @@ typedef struct {
 /**
  * @brief Send a signal to a process
  *
- * @field sig The signal number to be delivered
- * @field target The process that will receive the signal
+ * Signals may be sent on behalf of another process or directly. Notably launchd often sends signals
+ * on behalf of another process for service start/stop operations. If this is the case an
+ * instigator will be provided. The relationship between each process is illustrated below:
+ *
+ * Delegated Signal:
+ *
+ *     Instigator Process -> IPC to Sender Process (launchd) -> Target Process
+ *
+ * Direct Signal:
+ *
+ *     Sender Process -> Target Process
+ *
+ * Clients may wish to block delegated signals from launchd for non-authorized instigators, while still
+ * allowing direct signals initiated by launchd for shutdown/reboot/restart.
+ *
+ * @field sig              The signal number to be delivered
+ * @field target           The process that will receive the signal
+ * @field instigator       Process information for the instigator (if applicable).
  *
  * @note This event will not fire if a process sends a signal to itself.
- *
- * @note Cache key for this event type:  (process executable file, target process executable file)
+ * @note This event type does not support caching.
+ * @note Be aware of the nullablity of some of the fields. The instigator may not be
+ *       applicable.
  */
 typedef struct {
 	int sig;
 	es_process_t *_Nonnull target;
-	uint8_t reserved[64];
+	es_process_t *_Nullable instigator;
+	uint8_t reserved[56];
 } es_event_signal_t;
 
 typedef enum {
@@ -2697,6 +2746,7 @@ typedef union {
 	es_event_od_delete_group_t *_Nonnull od_delete_group;
 	es_event_xpc_connect_t *_Nonnull xpc_connect;
 	es_event_gatekeeper_user_override_t *_Nonnull gatekeeper_user_override;
+	es_event_tcc_modify_t *_Nonnull tcc_modify;
 } es_events_t;
 
 /**

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIPrivate.framework/Versions/A/PhotosUIPrivate'
-current-version: 721.0.150
+current-version: 751.0.104
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -216,8 +216,6 @@ exports:
                        '_$s15PhotosUIPrivate19StoryViewControllerC24metadataMenuItemsEnabledSbvpMV', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC24presentAppleMusicPreview12selectedSong12curatedSongsySo12PXAudioAsset_p_So0nO11FetchResult_ptFTj', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC24presentAppleMusicPreview12selectedSong12curatedSongsySo12PXAudioAsset_p_So0nO11FetchResult_ptFTq', 
-                       '_$s15PhotosUIPrivate19StoryViewControllerC26appIntentsDebugDescriptionSSvg', 
-                       '_$s15PhotosUIPrivate19StoryViewControllerC26appIntentsDebugDescriptionSSvpMV', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC26requestExportConfiguration17completionHandleryySo07PXStorygH0CSg_s5Error_pSgtc_tF', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC28collectTapToRadarDiagnostics4intoySo05PXTaphI19DiagnosticContainer_p_tFTj', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC28collectTapToRadarDiagnostics4intoySo05PXTaphI19DiagnosticContainer_p_tFTq', 
@@ -238,7 +236,6 @@ exports:
                        '_$s15PhotosUIPrivate19StoryViewControllerC32musicFeedbackContextMenuDelegate19audioAssetProvidingSo8NSObject_pSgSo07PXAudioL0_pSgyc_tFTq', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC33summaryItemReferenceForTransition19withSummaryEndPointypSgSo07PXGViewejmN0_pSg_tFTj', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC33summaryItemReferenceForTransition19withSummaryEndPointypSgSo07PXGViewejmN0_pSg_tFTq', 
-                       '_$s15PhotosUIPrivate19StoryViewControllerC35appIntentsEnumerateAssetCollections_17completionHandleryySo17PHAssetCollectionC_Sbtc_yyctF', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC37remainsActiveWhileApplicationIsHiddenSbvMTj', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC37remainsActiveWhileApplicationIsHiddenSbvMTq', 
                        '_$s15PhotosUIPrivate19StoryViewControllerC37remainsActiveWhileApplicationIsHiddenSbvgTj', 

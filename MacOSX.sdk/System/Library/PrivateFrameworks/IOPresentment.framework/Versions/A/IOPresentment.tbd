@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
-current-version: 66
+current-version: 67
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mP13__va_list_tag, 

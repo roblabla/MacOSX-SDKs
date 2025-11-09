@@ -15,4 +15,3 @@
 #endif
 
 typedef NSDictionary<NSString *, id> GKMatchProperties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2), visionos(1.1));
-

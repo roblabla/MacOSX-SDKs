@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeFunctions.framework/Versions/A/GenerativeFunctions'
-current-version: 150.255
+current-version: 154.255.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -160,7 +160,8 @@ exports:
                        '_$s19GenerativeFunctions15JsonStreamFieldV4hash4intoys6HasherVz_tF', 
                        '_$s19GenerativeFunctions15JsonStreamFieldV4nameACSS_tcfC', 
                        '_$s19GenerativeFunctions15JsonStreamFieldV4nameSSvg', '_$s19GenerativeFunctions15JsonStreamFieldV4nameSSvpMV', 
-                       '_$s19GenerativeFunctions15JsonStreamFieldV4rootACvgZ', '_$s19GenerativeFunctions15JsonStreamFieldV9hashValueSivg', 
+                       '_$s19GenerativeFunctions15JsonStreamFieldV4rootACvgZ', '_$s19GenerativeFunctions15JsonStreamFieldV4rootACvpZMV', 
+                       '_$s19GenerativeFunctions15JsonStreamFieldV9hashValueSivg', 
                        '_$s19GenerativeFunctions15JsonStreamFieldV9hashValueSivpMV', 
                        '_$s19GenerativeFunctions15JsonStreamFieldVMa', '_$s19GenerativeFunctions15JsonStreamFieldVMn', 
                        '_$s19GenerativeFunctions15JsonStreamFieldVN', '_$s19GenerativeFunctions15JsonStreamFieldVSHAAMc', 
@@ -376,9 +377,9 @@ exports:
                        '_$s19GenerativeFunctions40CompletionOneShotGenerableResponseOutputV8response0aB10Foundation0cG0VyxGvpMV', 
                        '_$s19GenerativeFunctions40CompletionOneShotGenerableResponseOutputVMa', 
                        '_$s19GenerativeFunctions40CompletionOneShotGenerableResponseOutputVMn', 
-                       '_$s19GenerativeFunctions8JsonNullV6sharedACvgZ', '_$s19GenerativeFunctions8JsonNullVMa', 
-                       '_$s19GenerativeFunctions8JsonNullVMn', '_$s19GenerativeFunctions8JsonNullVN', 
-                       '_$s19GenerativeFunctions9JsonTokenO10startArrayyA2CmFWC', 
+                       '_$s19GenerativeFunctions8JsonNullV6sharedACvgZ', '_$s19GenerativeFunctions8JsonNullV6sharedACvpZMV', 
+                       '_$s19GenerativeFunctions8JsonNullVMa', '_$s19GenerativeFunctions8JsonNullVMn', 
+                       '_$s19GenerativeFunctions8JsonNullVN', '_$s19GenerativeFunctions9JsonTokenO10startArrayyA2CmFWC', 
                        '_$s19GenerativeFunctions9JsonTokenO11startObjectyA2CmFWC', 
                        '_$s19GenerativeFunctions9JsonTokenO11stringValueyACSScACmFWC', 
                        '_$s19GenerativeFunctions9JsonTokenO12booleanValueyACSbcACmFWC', 

@@ -10,6 +10,10 @@
 CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSDocuments)
 
+// Move the internals from a source object to this object,
+// sourceAttributeSet param should NOT be used after calling this method.
+-(void)moveFrom:(CSSearchableItemAttributeSet * _Nonnull)sourceAttributeSet;
+
 ///Subject of the this item.
 @property(nullable, copy) NSString *subject;
 

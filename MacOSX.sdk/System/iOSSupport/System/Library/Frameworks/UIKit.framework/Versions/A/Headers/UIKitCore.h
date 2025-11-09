@@ -387,4 +387,12 @@
 #import <UIKit/UIWritingToolsCoordinator.h>
 #import <UIKit/UIWritingToolsCoordinatorContext.h>
 #import <UIKit/UIWritingToolsCoordinatorAnimationParameters.h>
+#import <UIKit/UIInputSuggestion.h>
+#import <UIKit/UISmartReplySuggestion.h>
+#import <UIKit/UIConversationContext.h>
+#import <UIKit/UIConversationEntry.h>
+#import <UIKit/UIMailConversationContext.h>
+#import <UIKit/UIMailConversationEntry.h>
+#import <UIKit/UIMessageConversationContext.h>
+#import <UIKit/UIMessageConversationEntry.h>
 #endif

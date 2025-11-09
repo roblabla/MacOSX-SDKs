@@ -72,6 +72,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.14), ios(12.0))
  */
 @property (readwrite, nonatomic) BOOL inheritBuffers;
 
+
 /*!
  @abstract
  The maximum bind index of vertex argument buffers that can be set per command.
@@ -102,7 +103,6 @@ MTL_EXPORT API_AVAILABLE(macos(10.14), ios(12.0))
  The maximum bind index of object stage buffers that can be set per render command.
  */
 @property (readwrite, nonatomic) NSUInteger maxObjectBufferBindCount API_AVAILABLE(macos(14.0), ios(17.0), tvos(18.1), visionos(2.1));
-
 /*!
  @abstract
  The maximum bind index of mesh stage buffers that can be set per render command.

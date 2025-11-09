@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-bare-slash-regex -user-module-version 6.2.16.1.201 -module-name SwiftUICore -package-name SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 6.4.41 -module-name SwiftUICore -package-name SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Accessibility
 import Combine
 import CoreFoundation
@@ -37,12 +38,12 @@ public enum LayoutDirection : Swift.Hashable, Swift.CaseIterable, Swift.Sendable
   case leftToRight
   case rightToLeft
   public static func == (a: SwiftUICore.LayoutDirection, b: SwiftUICore.LayoutDirection) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AllCases = [SwiftUICore.LayoutDirection]
   nonisolated public static var allCases: [SwiftUICore.LayoutDirection] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -595,8 +596,8 @@ extension SwiftUICore.View where Self : SwiftUICore.Animatable {
   public var isScrolling: Swift.Bool {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.ScrollPhase, b: SwiftUICore.ScrollPhase) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -626,13 +627,13 @@ extension SwiftUICore.SystemFormatStyle {
 extension SwiftUICore.SystemFormatStyle.DateReference : Foundation.FormatStyle {
   public func format(_ referenceDate: Foundation.Date) -> Foundation.AttributedString
   public func locale(_ locale: Foundation.Locale) -> SwiftUICore.SystemFormatStyle.DateReference
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.SystemFormatStyle.DateReference, b: SwiftUICore.SystemFormatStyle.DateReference) -> Swift.Bool
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias FormatInput = Foundation.Date
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias FormatOutput = Foundation.AttributedString
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1299,8 +1300,6 @@ extension SwiftUICore.View {
     }
   
   @inlinable nonisolated public func fixedSize() -> some SwiftUICore.View {
-         
-         
         return fixedSize(horizontal: true, vertical: true)
     }
   
@@ -1851,8 +1850,8 @@ extension SwiftUICore.EnvironmentValues {
     @_hasStorage package var id: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Namespace.ID, b: SwiftUICore.Namespace.ID) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2354,7 +2353,7 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public func _defaultContext() -> some SwiftUICore.View
+  nonisolated public func _defaultContext() -> some SwiftUICore.View
   
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2668,8 +2667,8 @@ extension SwiftUICore.UnitCurve : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.UnitCurve : Swift.Hashable {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.UnitCurve, b: SwiftUICore.UnitCurve) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2690,16 +2689,12 @@ extension SwiftUICore.UnitCurve {
   public static let circularEaseInOut: SwiftUICore.UnitCurve
   public static let linear: SwiftUICore.UnitCurve
 }
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @attached(accessor) @attached(peer, names: prefixed(__Key_)) public macro Entry() = #externalMacro(
     module: "SwiftUIMacros", type: "EntryMacro"
 )
-#endif
-#if compiler(>=5.3) && $Macros && $AttachedMacros
 @attached(accessor) public macro __EntryDefaultValue() = #externalMacro(
     module: "SwiftUIMacros", type: "EntryDefaultValueMacro"
 )
-#endif
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -2833,8 +2828,8 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public struct Spring : Swift.Hashable, Swift.Sendable {
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.Spring, b: SwiftUICore.Spring) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3759,8 +3754,8 @@ public enum LayoutDirectionBehavior : Swift.Hashable, Swift.Sendable {
   public static var mirrors: SwiftUICore.LayoutDirectionBehavior {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.LayoutDirectionBehavior, b: SwiftUICore.LayoutDirectionBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -4166,11 +4161,9 @@ extension SwiftUICore.Anchor.Source where Value == CoreFoundation.CGPoint {
   @_alwaysEmitIntoClient public static func buildBlock<Content>(_ content: Content) -> Content where Content : SwiftUICore.View {
         content
     }
-  #if compiler(>=5.3) && $ParameterPacks
   @_disfavoredOverload @_alwaysEmitIntoClient public static func buildBlock<each Content>(_ content: repeat each Content) -> SwiftUICore.TupleView<(repeat each Content)> where repeat each Content : SwiftUICore.View {
         TupleView((repeat each content))
     }
-  #endif
 }
 @available(*, unavailable)
 extension SwiftUICore.ViewBuilder : Swift.Sendable {
@@ -4367,6 +4360,38 @@ extension Swift.Comparable {
         result.clamp(to: limits)
         return result
     }
+}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+@frozen @_Concurrency.MainActor @preconcurrency public struct _AlphaThresholdEffect : SwiftUICore.EnvironmentalModifier {
+  @_Concurrency.MainActor @preconcurrency public var color: SwiftUICore.Color
+  @_Concurrency.MainActor @preconcurrency public var amount: Swift.Double
+  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency public init(color: SwiftUICore.Color = .black, amount: Swift.Double = 0.5) {
+        self.color = color
+        self.amount = amount
+    }
+  @_Concurrency.MainActor @preconcurrency public func resolve(in environment: SwiftUICore.EnvironmentValues) -> SwiftUICore._AlphaThresholdEffect._Resolved
+  @_Concurrency.MainActor @preconcurrency public static var _requiresMainThread: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public struct _Resolved {
+    public typealias AnimatableData = SwiftUICore.AnimatablePair<Swift.Float, SwiftUICore.AnimatablePair<Swift.Float, SwiftUICore.AnimatablePair<Swift.Float, SwiftUICore.AnimatablePair<Swift.Float, Swift.Float>>>>
+    @_Concurrency.MainActor @preconcurrency public var animatableData: SwiftUICore._AlphaThresholdEffect._Resolved.AnimatableData {
+      get
+      set
+    }
+    @available(iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, macOS 15.4, *)
+    public typealias Body = Swift.Never
+  }
+  @available(iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, macOS 15.4, *)
+  public typealias Body = Swift.Never
+  @available(iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, macOS 15.4, *)
+  public typealias ResolvedModifier = SwiftUICore._AlphaThresholdEffect._Resolved
+}
+@available(*, unavailable)
+extension SwiftUICore._AlphaThresholdEffect._Resolved : Swift.Sendable {
+}
+@available(*, unavailable)
+extension SwiftUICore._AlphaThresholdEffect : Swift.Sendable {
 }
 extension CoreFoundation.CGPoint {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -4919,7 +4944,6 @@ extension SwiftUICore.View {
     }
   
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -4931,19 +4955,6 @@ public protocol Keyframes<Value> {
   @SwiftUICore.KeyframesBuilder<Self.Value> var body: Self.Body { get }
   func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframes<Self.Value>, initialValue: Self.Value, initialVelocity: Self.Value?)
 }
-#else
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-public protocol Keyframes {
-  associatedtype Value = Self.Body.Value
-  associatedtype Body : SwiftUICore.Keyframes
-  @SwiftUICore.KeyframesBuilder<Self.Value> var body: Self.Body { get }
-  func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframes<Self.Value>, initialValue: Self.Value, initialVelocity: Self.Value?)
-}
-#endif
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -5219,8 +5230,8 @@ extension SwiftUICore.Text {
       public static let dashDotDot: SwiftUICore.Text.LineStyle.Pattern
     }
     public static let single: SwiftUICore.Text.LineStyle
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Text.LineStyle, b: SwiftUICore.Text.LineStyle) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -5396,10 +5407,10 @@ public enum ControlSize : Swift.CaseIterable, Swift.Sendable {
     get
   }
   public static func == (a: SwiftUICore.ControlSize, b: SwiftUICore.ControlSize) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, watchOS 9.0, macOS 10.15, *)
   @available(tvOS, unavailable)
   public typealias AllCases = [SwiftUICore.ControlSize]
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -5441,13 +5452,13 @@ extension SwiftUICore.SystemFormatStyle {
 extension SwiftUICore.SystemFormatStyle.DateOffset : Foundation.FormatStyle {
   public func format(_ referenceDate: Foundation.Date) -> Foundation.AttributedString
   public func locale(_ locale: Foundation.Locale) -> SwiftUICore.SystemFormatStyle.DateOffset
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.SystemFormatStyle.DateOffset, b: SwiftUICore.SystemFormatStyle.DateOffset) -> Swift.Bool
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias FormatInput = Foundation.Date
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias FormatOutput = Foundation.AttributedString
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -6112,8 +6123,8 @@ extension SwiftUICore.Shader {
     public static let colorEffect: SwiftUICore.Shader.UsageType
     public static let distortionEffect: SwiftUICore.Shader.UsageType
     public static let layerEffect: SwiftUICore.Shader.UsageType
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Shader.UsageType, b: SwiftUICore.Shader.UsageType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -6533,12 +6544,12 @@ extension SwiftUICore.GraphicsContext.Storage : Swift.Sendable {
   case fit
   case fill
   public static func == (a: SwiftUICore.ContentMode, b: SwiftUICore.ContentMode) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AllCases = [SwiftUICore.ContentMode]
   nonisolated public static var allCases: [SwiftUICore.ContentMode] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -7714,6 +7725,18 @@ extension SwiftUICore.Transaction {
   }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
+extension SwiftUICore.Transaction {
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public var scrollPositionUpdatePreservesVelocity: Swift.Bool {
+    get
+    set
+  }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
@@ -8189,12 +8212,8 @@ public protocol ShapeStyle : Swift.Sendable {
   func _apply(to shape: inout SwiftUICore._ShapeStyle_Shape)
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   static func _apply(to type: inout SwiftUICore._ShapeStyle_ShapeType)
-  #if compiler(>=5.3) && $AssociatedTypeAvailability
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @_weakLinked associatedtype Resolved : SwiftUICore.ShapeStyle = Swift.Never
-  #else
-  @_weakLinked associatedtype Resolved : SwiftUICore.ShapeStyle = Swift.Never
-  #endif
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   func resolve(in environment: SwiftUICore.EnvironmentValues) -> Self.Resolved
 }
@@ -10217,7 +10236,6 @@ extension SwiftUICore._Velocity : Swift.Hashable where Value : Swift.Hashable {
     get
   }
 }
-#if compiler(>=5.3) && $RetroactiveAttribute
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
@@ -10230,20 +10248,6 @@ extension SwiftUICore._Velocity : @retroactive SwiftUICore.Animatable where Valu
     @inlinable set { valuePerSecond.animatableData = newValue }
   }
 }
-#else
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
-extension SwiftUICore._Velocity : SwiftUICore.Animatable where Value : SwiftUICore.Animatable {
-  public typealias AnimatableData = Value.AnimatableData
-  public var animatableData: SwiftUICore._Velocity<Value>.AnimatableData {
-    @inlinable get { return valuePerSecond.animatableData }
-    @inlinable set { valuePerSecond.animatableData = newValue }
-  }
-}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -10325,14 +10329,14 @@ public enum DynamicTypeSize : Swift.Hashable, Swift.Comparable, Swift.CaseIterab
   public var isAccessibilitySize: Swift.Bool {
     get
   }
-  public static func == (a: SwiftUICore.DynamicTypeSize, b: SwiftUICore.DynamicTypeSize) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public static func < (a: SwiftUICore.DynamicTypeSize, b: SwiftUICore.DynamicTypeSize) -> Swift.Bool
+  public static func == (a: SwiftUICore.DynamicTypeSize, b: SwiftUICore.DynamicTypeSize) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias AllCases = [SwiftUICore.DynamicTypeSize]
   nonisolated public static var allCases: [SwiftUICore.DynamicTypeSize] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -10647,7 +10651,6 @@ public enum ContentSizeCategory : Swift.Hashable, Swift.CaseIterable {
     get
   }
   public static func == (a: SwiftUICore.ContentSizeCategory, b: SwiftUICore.ContentSizeCategory) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "DynamicTypeSize")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "DynamicTypeSize")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "DynamicTypeSize")
@@ -10657,6 +10660,7 @@ public enum ContentSizeCategory : Swift.Hashable, Swift.CaseIterable {
   nonisolated public static var allCases: [SwiftUICore.ContentSizeCategory] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -10785,9 +10789,9 @@ extension SwiftUICore.Font {
     case extraLargeTitle2
     public static let allCases: [SwiftUICore.Font.TextStyle]
     public static func == (a: SwiftUICore.Font.TextStyle, b: SwiftUICore.Font.TextStyle) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias AllCases = [SwiftUICore.Font.TextStyle]
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10836,8 +10840,8 @@ extension SwiftUICore.Font {
     public static let bold: SwiftUICore.Font.Weight
     public static let heavy: SwiftUICore.Font.Weight
     public static let black: SwiftUICore.Font.Weight
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Font.Weight, b: SwiftUICore.Font.Weight) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -10850,8 +10854,8 @@ extension SwiftUICore.Font {
     public static let standard: SwiftUICore.Font.Width
     public static let expanded: SwiftUICore.Font.Width
     public init(_ value: CoreFoundation.CGFloat)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Font.Width, b: SwiftUICore.Font.Width) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -11083,7 +11087,6 @@ extension SwiftUICore.View {
 @available(*, unavailable)
 extension SwiftUICore._AnchorWritingModifier : Swift.Sendable {
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -11095,19 +11098,6 @@ extension Swift.Optional : SwiftUICore.Gesture where Wrapped : SwiftUICore.Gestu
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
-#else
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-extension Swift.Optional : SwiftUICore.Gesture where Wrapped : SwiftUICore.Gesture {
-  public typealias Value = Wrapped.Value
-  nonisolated public static func _makeGesture(gesture: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUICore._GestureInputs) -> SwiftUICore._GestureOutputs<Wrapped.Value>
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  public typealias Body = Swift.Never
-}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -11310,9 +11300,9 @@ extension SwiftUICore.Text {
       @_alwaysEmitIntoClient public func distance(to other: SwiftUICore.Text.Layout.CharacterIndex) -> Swift.Int {
                 return other.value - value
             }
-      public func hash(into hasher: inout Swift.Hasher)
       @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
       public typealias Stride = Swift.Int
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -11567,8 +11557,8 @@ extension SwiftUICore.Text {
   public struct Scale : Swift.Sendable, Swift.Hashable {
     public static let `default`: SwiftUICore.Text.Scale
     public static let secondary: SwiftUICore.Text.Scale
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Text.Scale, b: SwiftUICore.Text.Scale) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -11785,8 +11775,8 @@ public enum _DeviceVariant : Swift.Equatable {
   case regular
   case h394
   case h448
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore._DeviceVariant, b: SwiftUICore._DeviceVariant) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -12060,7 +12050,6 @@ extension SwiftUICore._UnaryViewAdaptor : Swift.Sendable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUICore.AnimatablePair : Swift.Sendable where First : Swift.Sendable, Second : Swift.Sendable {
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -12072,19 +12061,6 @@ extension SwiftUICore.AnimatablePair : Swift.Sendable where First : Swift.Sendab
   associatedtype Body : SwiftUICore.Gesture
   @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
 }
-#else
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-@preconcurrency @_Concurrency.MainActor public protocol Gesture {
-  associatedtype Value
-  nonisolated static func _makeGesture(gesture: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._GestureInputs) -> SwiftUICore._GestureOutputs<Self.Value>
-  associatedtype Body : SwiftUICore.Gesture
-  @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
-}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -12306,9 +12282,9 @@ extension SwiftUICore.Text {
 }
 extension SwiftUICore.LocalizedStringKey.StringInterpolation {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  public mutating func appendInterpolation<V, F>(_ source: SwiftUICore.TimeDataSource<V>, format: F) where V == F.FormatInput, F : Foundation.DiscreteFormatStyle, F.FormatOutput == Foundation.AttributedString
+  @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation<V, F>(_ source: SwiftUICore.TimeDataSource<V>, format: F) where V == F.FormatInput, F : Foundation.DiscreteFormatStyle, F.FormatOutput == Foundation.AttributedString
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  @_disfavoredOverload public mutating func appendInterpolation<V, F>(_ source: SwiftUICore.TimeDataSource<V>, format: F) where V == F.FormatInput, F : Foundation.DiscreteFormatStyle, F.FormatOutput == Swift.String
+  @_disfavoredOverload @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation<V, F>(_ source: SwiftUICore.TimeDataSource<V>, format: F) where V == F.FormatInput, F : Foundation.DiscreteFormatStyle, F.FormatOutput == Swift.String
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -12419,7 +12395,6 @@ extension SwiftUICore.View {
 @available(*, unavailable)
 extension SwiftUICore._ContainerShapeModifier : Swift.Sendable {
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -12431,19 +12406,6 @@ public protocol KeyframeTrackContent<Value> {
   @SwiftUICore.KeyframeTrackContentBuilder<Self.Value> var body: Self.Body { get }
   func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframeTrackContent<Self.Value>)
 }
-#else
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-public protocol KeyframeTrackContent {
-  associatedtype Value : SwiftUICore.Animatable = Self.Body.Value
-  associatedtype Body : SwiftUICore.KeyframeTrackContent
-  @SwiftUICore.KeyframeTrackContentBuilder<Self.Value> var body: Self.Body { get }
-  func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframeTrackContent<Self.Value>)
-}
-#endif
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -12779,7 +12741,7 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
 extension SwiftUICore.View {
-  @preconcurrency @inlinable nonisolated public func onPreferenceChange<K>(_ key: K.Type = K.self, perform action: @escaping @Sendable (K.Value) -> Swift.Void) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey, K.Value : Swift.Equatable {
+  @inlinable nonisolated public func onPreferenceChange<K>(_ key: K.Type = K.self, perform action: @escaping (K.Value) -> Swift.Void) -> some SwiftUICore.View where K : SwiftUICore.PreferenceKey, K.Value : Swift.Equatable {
         return modifier(_PreferenceActionModifier<K>(action: action))
     }
   
@@ -13288,7 +13250,6 @@ public struct MeshGradient : SwiftUICore.ShapeStyle, Swift.Equatable, Swift.Send
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Resolved = Swift.Never
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -13301,20 +13262,6 @@ extension Swift.Optional : SwiftUICore.View where Wrapped : SwiftUICore.View {
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
 }
-#else
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-extension Swift.Optional : SwiftUICore.View where Wrapped : SwiftUICore.View {
-  public typealias Body = Swift.Never
-  nonisolated public static func _makeView(view: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
-  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-}
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -13560,8 +13507,8 @@ extension SwiftUICore.Image {
     public static let standard: SwiftUICore.Image.DynamicRange
     public static let constrainedHigh: SwiftUICore.Image.DynamicRange
     public static let high: SwiftUICore.Image.DynamicRange
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Image.DynamicRange, b: SwiftUICore.Image.DynamicRange) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -13618,8 +13565,8 @@ public struct SymbolVariants : Swift.Hashable, Swift.Sendable {
     get
   }
   public func contains(_ other: SwiftUICore.SymbolVariants) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.SymbolVariants, b: SwiftUICore.SymbolVariants) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -13662,12 +13609,12 @@ extension SwiftUICore.Image {
   case visible
   case hidden
   public static func == (a: SwiftUICore.Visibility, b: SwiftUICore.Visibility) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias AllCases = [SwiftUICore.Visibility]
   nonisolated public static var allCases: [SwiftUICore.Visibility] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -14603,12 +14550,12 @@ extension SwiftUICore.Color {
   case center
   case trailing
   public static func == (a: SwiftUICore.TextAlignment, b: SwiftUICore.TextAlignment) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AllCases = [SwiftUICore.TextAlignment]
   nonisolated public static var allCases: [SwiftUICore.TextAlignment] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -14848,7 +14795,6 @@ public enum ControlActiveState : Swift.Equatable, Swift.CaseIterable, Swift.Send
   case key
   case active
   case inactive
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.ControlActiveState, b: SwiftUICore.ControlActiveState) -> Swift.Bool
   @available(iOS, unavailable, message: "Use `EnvironmentValues.appearsActive` instead.")
   @available(tvOS, unavailable, message: "Use `EnvironmentValues.appearsActive` instead.")
@@ -14860,6 +14806,7 @@ public enum ControlActiveState : Swift.Equatable, Swift.CaseIterable, Swift.Send
   nonisolated public static var allCases: [SwiftUICore.ControlActiveState] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -15035,8 +14982,8 @@ extension SwiftUICore.Gradient {
   public struct ColorSpace : Swift.Hashable, Swift.Sendable {
     public static let device: SwiftUICore.Gradient.ColorSpace
     public static let perceptual: SwiftUICore.Gradient.ColorSpace
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Gradient.ColorSpace, b: SwiftUICore.Gradient.ColorSpace) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -15745,7 +15692,6 @@ extension SwiftUICore.ShapeStyle where Self : SwiftUICore.View, Self.Body == Swi
 @available(*, unavailable)
 extension SwiftUICore._ShapeView : Swift.Sendable {
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -15755,17 +15701,6 @@ public protocol ShapeView<Content> : SwiftUICore.View {
   associatedtype Content : SwiftUICore.Shape
   var shape: Self.Content { get }
 }
-#else
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
-@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
-@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
-public protocol ShapeView : SwiftUICore.View {
-  associatedtype Content : SwiftUICore.Shape
-  var shape: Self.Content { get }
-}
-#endif
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -16493,12 +16428,12 @@ public enum ColorScheme : Swift.CaseIterable, Swift.Sendable {
   case light
   case dark
   public static func == (a: SwiftUICore.ColorScheme, b: SwiftUICore.ColorScheme) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AllCases = [SwiftUICore.ColorScheme]
   nonisolated public static var allCases: [SwiftUICore.ColorScheme] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -16512,12 +16447,12 @@ public enum ColorSchemeContrast : Swift.CaseIterable, Swift.Sendable {
   case standard
   case increased
   public static func == (a: SwiftUICore.ColorSchemeContrast, b: SwiftUICore.ColorSchemeContrast) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AllCases = [SwiftUICore.ColorSchemeContrast]
   nonisolated public static var allCases: [SwiftUICore.ColorSchemeContrast] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -17040,8 +16975,8 @@ extension SwiftUICore.SectionCollection : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
 public struct SectionConfiguration : Swift.Identifiable {
   public struct ID : Swift.Hashable {
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.SectionConfiguration.ID, b: SwiftUICore.SectionConfiguration.ID) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -17307,11 +17242,11 @@ extension SwiftUICore.SystemFormatStyle {
 extension SwiftUICore.SystemFormatStyle.Timer : Foundation.FormatStyle {
   public func format(_ input: Foundation.Date) -> Foundation.AttributedString
   public func locale(_ locale: Foundation.Locale) -> SwiftUICore.SystemFormatStyle.Timer
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.SystemFormatStyle.Timer, b: SwiftUICore.SystemFormatStyle.Timer) -> Swift.Bool
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias FormatOutput = Foundation.AttributedString
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -17337,10 +17272,10 @@ extension SwiftUICore.SystemFormatStyle {
 extension SwiftUICore.SystemFormatStyle.Stopwatch : Foundation.FormatStyle {
   public func format(_ input: Foundation.Date) -> Foundation.AttributedString
   public func locale(_ locale: Foundation.Locale) -> SwiftUICore.SystemFormatStyle.Stopwatch
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: SwiftUICore.SystemFormatStyle.Stopwatch, b: SwiftUICore.SystemFormatStyle.Stopwatch) -> Swift.Bool
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias FormatOutput = Foundation.AttributedString
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -17363,8 +17298,8 @@ extension SwiftUICore.SystemFormatStyle.Stopwatch {
 @_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
 public struct Subview : SwiftUICore.View, Swift.Identifiable {
   public struct ID : Swift.Hashable {
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: SwiftUICore.Subview.ID, b: SwiftUICore.Subview.ID) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -18358,6 +18293,10 @@ extension SwiftUICore.EnvironmentObject : Swift.Sendable {}
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentObject.Wrapper : Swift.Sendable {}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+extension SwiftUICore._AlphaThresholdEffect._Resolved : SwiftUICore.Animatable {}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+extension SwiftUICore._AlphaThresholdEffect._Resolved : SwiftUICore.ViewModifier {}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)

@@ -4,7 +4,7 @@
 #import <GameKit/GKDefines.h>
 
 // domain
-GK_EXTERN_WEAK NSString * __nonnull const GKSessionErrorDomain;
+GK_EXTERN_WEAK NSString * __nonnull const GKSessionErrorDomain API_DEPRECATED("No longer supported", ios(3.0, 18.4), macos(10.10,15.4), tvos(9.0, 18.4), visionos(1.0, 2.4), watchos(3.0, 11.4));
 
 // code
 typedef NS_ENUM(int, GKSessionError)
@@ -26,5 +26,5 @@ typedef NS_ENUM(int, GKSessionError)
     GKSessionInternalError = 30203,
     GKSessionUnknownError = 30204,
     GKSessionSystemError = 30205
-}  NS_ENUM_DEPRECATED_IOS(3_0, 7_0);
+} API_DEPRECATED("No longer supported", ios(3.0, 7.0), tvos(9.0, 18.4), visionos(1.0, 1.0), watchos(3.0, 3.0)) API_UNAVAILABLE(macos);
 

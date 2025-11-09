@@ -9,12 +9,11 @@ exports:
                        __ZTIN5apple4aiml12flatbuffers216DefaultAllocatorE, __ZTIN5apple4aiml12flatbuffers29AllocatorE, 
                        __ZTINSt3__110__function6__baseIFN5apple4aiml12flatbuffers26OffsetIvEEmEEE, 
                        __ZTINSt3__110__function6__baseIFvmP10BoxedInt64EEE, __ZTINSt3__110__function6__baseIFvmP11BoxedDoubleEEE, 
-                       __ZTINSt3__110__function6__baseIFvmP9BoxedBoolEEE, __ZTINSt3__117bad_function_callE, 
-                       __ZTSN5apple4aiml12flatbuffers210objc_apple18AllocatorExceptionE, 
+                       __ZTINSt3__110__function6__baseIFvmP9BoxedBoolEEE, __ZTSN5apple4aiml12flatbuffers210objc_apple18AllocatorExceptionE, 
                        __ZTSN5apple4aiml12flatbuffers216DefaultAllocatorE, __ZTSN5apple4aiml12flatbuffers29AllocatorE, 
                        __ZTSNSt3__110__function6__baseIFN5apple4aiml12flatbuffers26OffsetIvEEmEEE, 
                        __ZTSNSt3__110__function6__baseIFvmP10BoxedInt64EEE, __ZTSNSt3__110__function6__baseIFvmP11BoxedDoubleEEE, 
-                       __ZTSNSt3__110__function6__baseIFvmP9BoxedBoolEEE, __ZTSNSt3__117bad_function_callE ]
+                       __ZTSNSt3__110__function6__baseIFvmP9BoxedBoolEEE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TRICloudKitComparator_Equals, _TRICloudKitComparator_GreaterThan, 
@@ -82,7 +81,7 @@ exports:
                        _TRIPurgeabilityLevel_IsValidValue, _TRIValidateAssetId, _TRIValidateFactorPackId, 
                        _TRIValidateFactorPackSetId, _TRIValidateMLRuntimeEvaluationId, 
                        _TRIValidateRampId, _TrialVersionNumber, _TrialVersionString, 
-                       _kBundleIdentifierCa, _kRotationDateSecondsSinceReferenceDate, 
+                       _dummyValue, _kBundleIdentifierCa, _kRotationDateSecondsSinceReferenceDate, 
                        _kTRIAllocationStatusEntitlement, _kTRIAllocationStatusNamespaceNameEntitlment, 
                        _kTRIBundleIdentifierTrialcontroller, _kTRIBundleIdentifierTriald, 
                        _kTRIBundleIdentifierTrialdSystem, _kTRIBundleIdentifierTrialtool, 
@@ -151,7 +150,8 @@ exports:
                        TRITripersistedNetworkBehaviorRoot, TRITripurgeabilityLevelRoot, 
                        TRITypedFactorProvider, TRIVersion, TRIVersionedNamespace, 
                        TRIXPCNamespaceManagementClient, TRIXPCUtils ]
-    objc-ivars:      [ TRIActiveFactorProvidersParserGuardedData.hasIssuedWarnings, 
+    objc-ivars:      [ TRIActiveFactorProvidersParserGuardedData.counterfactualFactorPackDeploymentMap, 
+                       TRIActiveFactorProvidersParserGuardedData.hasIssuedWarnings, 
                        TRIActiveFactorProvidersParserGuardedData.plplist, TRIActiveFactorProvidersParserGuardedData.targetedExperimentFactorPackDeploymentMap, 
                        TRIActiveFactorProvidersParserGuardedData.targetedRolloutDeploymentMap, 
                        TRIAllocationStatusProviderGuardedData.callbackTokens, TRICellularParameterGuardedData.guardedCarrierBundleIdentifier, 

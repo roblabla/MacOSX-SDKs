@@ -1,4 +1,4 @@
-/* iig(DriverKit-402.60.12) generated from IODataQueueDispatchSource.iig */
+/* iig(DriverKit-427.100.5) generated from IODataQueueDispatchSource.iig */
 
 /* IODataQueueDispatchSource.iig:1-37 */
 /*
@@ -38,7 +38,7 @@
 typedef void (^IODataQueueClientEnqueueEntryBlock)(void *data, size_t dataSize);
 typedef void (^IODataQueueClientDequeueEntryBlock)(const void *data, size_t dataSize);
 
-/* source class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-236 */
+/* source class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-235 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -64,8 +64,7 @@ public:
 
     /*!
      * @brief Represents the size of the data queue entry header independent of the actual size of the data in the entry.  This is the overhead of each entry in the queue.
-     * @param       dataQueueEntryHeaderSize  Out parameter for data queue entry header size
-     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     * @return      Size of the entry header.
      */
     static size_t
     GetDataQueueEntryHeaderSize() LOCALONLY;
@@ -247,7 +246,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-236 */
+/* generated class IODataQueueDispatchSource IODataQueueDispatchSource.iig:38-235 */
 
 #define IODataQueueDispatchSource_Create_ID            0xe8544306a54d09e0ULL
 #define IODataQueueDispatchSource_SetDataAvailableHandler_ID            0xd2c1d8cc6ec3a591ULL
@@ -563,6 +562,6 @@ IODataQueueDispatchSource_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IODataQueueDispatchSource.iig:238- */
+/* IODataQueueDispatchSource.iig:237- */
 
 #endif /* ! _IOKIT_UIODATAQUEUEDISPATCHSOURCE_H */

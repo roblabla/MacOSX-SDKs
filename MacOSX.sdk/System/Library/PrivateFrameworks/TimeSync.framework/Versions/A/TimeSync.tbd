@@ -151,5 +151,5 @@ exports:
                        TSAudioTimeErrorCorrelatorResampler._channelBBuffer, TSAudioTimeErrorCorrelatorResampler._correlationBuffer, 
                        TSAudioTimeErrorCorrelatorResampler._scratchBuffer, TSAudioTimeErrorCorrelatorResampler._upsamplerFilterCoefficientsBuffer, 
                        TSAudioTimeErrorCorrelatorResampler._upsamplerFilterCoefficientsLength, 
-                       _TSF_TSDIOKServiceMatcher._identifier ]
+                       _TSF_TSDIOKServiceMatcher._identifier, _TSF_TSDgPTPPort._logNotifyTest ]
 ...

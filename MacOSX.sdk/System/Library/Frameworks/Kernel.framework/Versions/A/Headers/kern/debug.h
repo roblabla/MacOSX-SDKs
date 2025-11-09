@@ -39,6 +39,7 @@
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
 #include <mach/vm_types.h>
+#include <kern/panic_call.h>
 
 #include <TargetConditionals.h>
 
@@ -241,15 +242,16 @@ enum micro_snapshot_flags {
 	/*
 	 * (Timer) interrupt records are no longer supported.
 	 */
-	kInterruptRecord        = 0x1,
+	kInterruptRecord        = 0x01,
 	/*
 	 * Timer arming records are no longer supported.
 	 */
-	kTimerArmingRecord      = 0x2,
-	kUserMode               = 0x4, /* interrupted usermode, or armed by usermode */
-	kIORecord               = 0x8,
+	kTimerArmingRecord      = 0x02,
+	kUserMode               = 0x04, /* interrupted usermode, or armed by usermode */
+	kIORecord               = 0x08,
 	kPMIRecord              = 0x10,
 	kMACFRecord             = 0x20, /* armed by MACF policy */
+	kKernelThread           = 0x40, /* sampled a kernel thread */
 };
 
 /*
@@ -309,10 +311,34 @@ __options_decl(stackshot_flags_t, uint64_t, {
 }); // Note: Add any new flags to kcdata.py (stackshot_in_flags)
 
 __options_decl(microstackshot_flags_t, uint32_t, {
-	STACKSHOT_GET_MICROSTACKSHOT               = 0x10,
-	STACKSHOT_GLOBAL_MICROSTACKSHOT_ENABLE     = 0x20,
-	STACKSHOT_GLOBAL_MICROSTACKSHOT_DISABLE    = 0x40,
-	STACKSHOT_SET_MICROSTACKSHOT_MARK          = 0x80,
+	/*
+	 * Collect and consume kernel thread microstackshots.
+	 */
+	STACKSHOT_GET_KERNEL_MICROSTACKSHOT        = 0x0008,
+	/*
+	 * Collect user thread microstackshots.
+	 */
+	STACKSHOT_GET_MICROSTACKSHOT               = 0x0010,
+	/*
+	 * Enable and disable are longer supported; use telemetry(2) instead.
+	 */
+	STACKSHOT_GLOBAL_MICROSTACKSHOT_ENABLE     = 0x0020,
+	STACKSHOT_GLOBAL_MICROSTACKSHOT_DISABLE    = 0x0040,
+	/*
+	 * For user thread microstackshots, set a mark to consume the entries.
+	 */
+	STACKSHOT_SET_MICROSTACKSHOT_MARK          = 0x0080,
+});
+
+__options_decl(telemetry_notice_t, uint32_t, {
+	/*
+	 * User space microstackshots should be read.
+	 */
+	TELEMETRY_NOTICE_BASE                 = 0x00,
+	/*
+	 * Kernel microstackshots should be read.
+	 */
+	TELEMETRY_NOTICE_KERNEL_MICROSTACKSHOT = 0x01,
 });
 
 #define STACKSHOT_THREAD_SNAPSHOT_MAGIC     0xfeedface
@@ -333,7 +359,7 @@ __options_closed_decl(kf_override_flag_t, uint32_t, {
 	KF_IOTRACE_OVRD                           = 0x100,
 	KF_INTERRUPT_MASKED_DEBUG_STACKSHOT_OVRD  = 0x200,
 	KF_SCHED_HYGIENE_DEBUG_PMC_OVRD           = 0x400,
-	KF_RW_LOCK_DEBUG_OVRD                     = 0x800,
+	KF_MACH_ASSERT_OVRD                       = 0x800,
 	KF_MADVISE_FREE_DEBUG_OVRD                = 0x1000,
 	KF_DISABLE_FP_POPC_ON_PGFLT               = 0x2000,
 	KF_DISABLE_PROD_TRC_VALIDATION            = 0x4000,
@@ -344,6 +370,20 @@ __options_closed_decl(kf_override_flag_t, uint32_t, {
 	 */
 	KF_DISABLE_PROCREF_TRACKING_OVRD          = 0x20000,
 });
+
+#define KF_SERVER_PERF_MODE_OVRD ( \
+	KF_SERIAL_OVRD | \
+	KF_PMAPV_OVRD | \
+	KF_MATV_OVRD | \
+	KF_COMPRSV_OVRD | \
+	KF_INTERRUPT_MASKED_DEBUG_OVRD | \
+	KF_TRAPTRACE_OVRD | \
+	KF_IOTRACE_OVRD  | \
+	KF_SCHED_HYGIENE_DEBUG_PMC_OVRD | \
+	KF_MACH_ASSERT_OVRD | \
+	KF_MADVISE_FREE_DEBUG_OVRD | \
+	KF_DISABLE_PROD_TRC_VALIDATION | \
+	0)
 
 boolean_t kern_feature_override(kf_override_flag_t fmask);
 
@@ -490,11 +530,6 @@ struct efi_aurr_extended_panic_log {
  * If non-zero, this physical address had an ECC error that led to a panic.
  */
 extern uint64_t ecc_panic_physical_address;
-
-
-__abortlike __printflike(1, 2)
-extern void panic(const char *string, ...);
-
 
 
 

@@ -601,42 +601,6 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// changes, call the provided completion block to let Writing Tools know you’re finished.
 - (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator selectRanges:(NSArray<NSValue * /* NSRange */> *)ranges inContext:(NSWritingToolsCoordinatorContext *)context completion:(void(^)(void))completion NS_SWIFT_NAME(writingToolsCoordinator(_:select:in:completion:));
 
-/// Asks the delegate to provide the location of the character at the
-/// specified point in your view’s coordinate system.
-///
-/// - Parameters:
-///     - writingToolsCoordinator: The coordinator object requesting
-///     information from your custom view.
-///     - point: A point in your view’s coordinate space. Find the
-///     location of the text under this point, if any.
-///     - completion: A handler to execute with the required information.
-///     This handler has no return value and takes an <doc://com.apple.documentation/documentation/foundation/nsrange>
-///     and <doc://com.apple.documentation/documentation/foundation/uuid>
-///     as parameters. Set the range to the character’s location in one of your
-///     ``NSWritingToolsCoordinator/Context`` objects, which you specify using
-///     the <doc://com.apple.documentation/documentation/foundation/uuid> parameter.
-///     You must call this handler at some point during your method’s implementation.
-///
-/// When someone interacts with your view during a proofreading operation, Writing Tools
-/// calls this method to get the location of the interaction. If the interaction
-/// occurs in the text of one of your ``NSWritingToolsCoordinator/Context`` objects,
-/// configure an <doc://com.apple.documentation/documentation/foundation/nsrange>
-/// with the character’s location in that context object and a length of `1`. If
-/// the interaction occurs outside of the text of your context objects, configure
-/// the range with a location of `NSNotFound`.
-///
-/// When specifying the location of a character in your context object, provide a
-/// location relative to the start of your context object’s text. The first character
-/// in a context object’s text is always at location `0`, and it’s your responsibility
-/// to track the location of the context object’s text in your text storage object.
-/// When the context object’s text begins in the middle of your text storage,
-/// subtract the starting location of the context object’s text from the location
-/// you specify in your range value. For example, if the context object’s text
-/// starts at character `100` in your text storage, and an interaction occurs
-/// with the character at location `102`, specify a range with a location of
-/// `2` and a length of `1`.
-- (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator requestsRangeInContextWithIdentifierForPoint:(NSPoint)point completion:(void(^)(NSRange range, NSUUID *contextID))completion NS_SWIFT_ASYNC_NAME(writingToolsCoordinator(_:rangeInContextWithIdentifierFor:));
-
 /// Asks the delegate to provide the bounding paths for the specified
 /// text in your view.
 ///
@@ -999,6 +963,45 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// your view’s content. For example, it moves to the ``NSWritingToolsCoordinator/State/interactiveUpdating``
 /// state when it’s making changes to your view’s text storage.
 - (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator willChangeToState:(NSWritingToolsCoordinatorState)newState completion:(void(^)(void))completion;
+
+
+#pragma mark Deprecated NSWritingToolsCoordinatorDelegate methods
+
+/// Asks the delegate to provide the location of the character at the
+/// specified point in your view’s coordinate system.
+///
+/// - Parameters:
+///     - writingToolsCoordinator: The coordinator object requesting
+///     information from your custom view.
+///     - point: A point in your view’s coordinate space. Find the
+///     location of the text under this point, if any.
+///     - completion: A handler to execute with the required information.
+///     This handler has no return value and takes an <doc://com.apple.documentation/documentation/foundation/nsrange>
+///     and <doc://com.apple.documentation/documentation/foundation/uuid>
+///     as parameters. Set the range to the character’s location in one of your
+///     ``NSWritingToolsCoordinator/Context`` objects, which you specify using
+///     the <doc://com.apple.documentation/documentation/foundation/uuid> parameter.
+///     You must call this handler at some point during your method’s implementation.
+///
+/// When someone interacts with your view during a proofreading operation, Writing Tools
+/// calls this method to get the location of the interaction. If the interaction
+/// occurs in the text of one of your ``NSWritingToolsCoordinator/Context`` objects,
+/// configure an <doc://com.apple.documentation/documentation/foundation/nsrange>
+/// with the character’s location in that context object and a length of `1`. If
+/// the interaction occurs outside of the text of your context objects, configure
+/// the range with a location of `NSNotFound`.
+///
+/// When specifying the location of a character in your context object, provide a
+/// location relative to the start of your context object’s text. The first character
+/// in a context object’s text is always at location `0`, and it’s your responsibility
+/// to track the location of the context object’s text in your text storage object.
+/// When the context object’s text begins in the middle of your text storage,
+/// subtract the starting location of the context object’s text from the location
+/// you specify in your range value. For example, if the context object’s text
+/// starts at character `100` in your text storage, and an interaction occurs
+/// with the character at location `102`, specify a range with a location of
+/// `2` and a length of `1`.
+- (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator requestsRangeInContextWithIdentifierForPoint:(NSPoint)point completion:(void(^)(NSRange range, NSUUID *contextID))completion API_DEPRECATED("Not used anymore", macos(15.2, 15.4)) NS_SWIFT_ASYNC_NAME(writingToolsCoordinator(_:rangeInContextWithIdentifierFor:));
 @end
 
 #pragma mark NSTextPreview

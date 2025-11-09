@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1902.3.1
+current-version: 1902.5.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -43,6 +43,7 @@ exports:
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerC15isPendingInsertSbvg', 
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerC15isPendingInsertSbvpMV', 
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerC20supportsSecureCodingSbvgZ', 
+                       '_$s8EventKit33EKRemoteUIPersistentObjectPointerC20supportsSecureCodingSbvpZMV', 
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerC5coderACSgSo7NSCoderC_tcfCTj', 
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerC5coderACSgSo7NSCoderC_tcfCTq', 
@@ -60,8 +61,11 @@ exports:
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerCMa', '_$s8EventKit33EKRemoteUIPersistentObjectPointerCMn', 
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerCMo', '_$s8EventKit33EKRemoteUIPersistentObjectPointerCMu', 
                        '_$s8EventKit33EKRemoteUIPersistentObjectPointerCN', '_$s8EventKit33EKRemoteUIPersistentObjectPointerCfD', 
-                       '_$sSo12EKSourceTypeV8EventKitE12integrationsABvgZ', '_$sSo6EKSpanV8EventKitE15automaticChangeABvgZ', 
-                       '_$sSo6EKSpanV8EventKitE15everyOccurrenceABvgZ', '_$sSo6EKSpanV8EventKitE29everyOccurrenceUnlessDetachedABvgZ', 
+                       '_$sSo12EKSourceTypeV8EventKitE12integrationsABvgZ', '_$sSo12EKSourceTypeV8EventKitE12integrationsABvpZMV', 
+                       '_$sSo6EKSpanV8EventKitE15automaticChangeABvgZ', '_$sSo6EKSpanV8EventKitE15automaticChangeABvpZMV', 
+                       '_$sSo6EKSpanV8EventKitE15everyOccurrenceABvgZ', '_$sSo6EKSpanV8EventKitE15everyOccurrenceABvpZMV', 
+                       '_$sSo6EKSpanV8EventKitE29everyOccurrenceUnlessDetachedABvgZ', 
+                       '_$sSo6EKSpanV8EventKitE29everyOccurrenceUnlessDetachedABvpZMV', 
                        _CalAttendeeStatusToEKParticipantStatus, _EKAlarmLocationBundlePath, 
                        _EKAutoCommentPrefix, _EKAvailabilityCacheErrorDomain, _EKAvailabilitySpanTypeAsString, 
                        _EKBirthdayCalendarExtensionBundleIdentifier, _EKBirthdayCalendarExternalIdentifier, 

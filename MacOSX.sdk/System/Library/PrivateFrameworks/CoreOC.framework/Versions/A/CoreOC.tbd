@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreOC.framework/Versions/A/CoreOC'
-current-version: 10.12
-compatibility-version: 10.12
+current-version: 10.13.1
+compatibility-version: 10.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -158,6 +158,8 @@ exports:
                        '_$s6CoreOC20PhotogrammetrySampleV11captureTime10Foundation4DateVSgvg', 
                        '_$s6CoreOC20PhotogrammetrySampleV11captureTime10Foundation4DateVSgvpMV', 
                        '_$s6CoreOC20PhotogrammetrySampleV11captureTime10Foundation4DateVSgvs', 
+                       '_$s6CoreOC20PhotogrammetrySampleV11orientationSo26CGImagePropertyOrientationVvg', 
+                       '_$s6CoreOC20PhotogrammetrySampleV11orientationSo26CGImagePropertyOrientationVvpMV', 
                        '_$s6CoreOC20PhotogrammetrySampleV12depthDataMapSo11CVBufferRefaSgvM', 
                        '_$s6CoreOC20PhotogrammetrySampleV12depthDataMapSo11CVBufferRefaSgvg', 
                        '_$s6CoreOC20PhotogrammetrySampleV12depthDataMapSo11CVBufferRefaSgvpMV', 
@@ -178,6 +180,7 @@ exports:
                        '_$s6CoreOC20PhotogrammetrySampleV24objectCaptureSessionUUID10Foundation0H0VSgvg', 
                        '_$s6CoreOC20PhotogrammetrySampleV24objectCaptureSessionUUID10Foundation0H0VSgvpMV', 
                        '_$s6CoreOC20PhotogrammetrySampleV24objectCaptureSessionUUID10Foundation0H0VSgvs', 
+                       '_$s6CoreOC20PhotogrammetrySampleV2id5image11orientationACSi_So11CVBufferRefaSo26CGImagePropertyOrientationVtcfC', 
                        '_$s6CoreOC20PhotogrammetrySampleV2id5imageACSi_So11CVBufferRefatcfC', 
                        '_$s6CoreOC20PhotogrammetrySampleV2idSivg', '_$s6CoreOC20PhotogrammetrySampleV2idSivpMV', 
                        '_$s6CoreOC20PhotogrammetrySampleV5SceneV11boundingBoxAESo13simd_float4x4a_tcfC', 
@@ -249,6 +252,7 @@ exports:
                        '_$s6CoreOC21PhotogrammetrySessionC10PointCloudV6pointsSayAE0E0VGvpMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC10PointCloudVMa', '_$s6CoreOC21PhotogrammetrySessionC10PointCloudVMn', 
                        '_$s6CoreOC21PhotogrammetrySessionC10PointCloudVN', '_$s6CoreOC21PhotogrammetrySessionC11isSupportedSbvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC11isSupportedSbvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC11snapshotURLAC10Foundation0F0V_tKcfC', 
                        '_$s6CoreOC21PhotogrammetrySessionC12ProcessStageO12optimizationyA2EmFWC', 
                        '_$s6CoreOC21PhotogrammetrySessionC12ProcessStageO13preprocessingyA2EmFWC', 
@@ -338,14 +342,20 @@ exports:
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV16TextureDimensionOSQAAMc', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV16TextureDimensionOSYAAMc', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV12diffuseColorAIvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV12diffuseColorAIvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV12displacementAIvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV12displacementAIvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV16ambientOcclusionAIvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV16ambientOcclusionAIvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV3allAIvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV3allAIvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV6normalAIvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV6normalAIvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV8rawValueAISu_tcfC', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV8rawValueSuvg', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV8rawValueSuvpMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV9roughnessAIvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsV9roughnessAIvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsVMa', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsVMn', 
                        '_$s6CoreOC21PhotogrammetrySessionC13ConfigurationV25CustomDetailSpecificationV17TextureMapOutputsVN', 
@@ -410,6 +420,7 @@ exports:
                        '_$s6CoreOC21PhotogrammetrySessionC13configurationAC13ConfigurationVvgTq', 
                        '_$s6CoreOC21PhotogrammetrySessionC13configurationAC13ConfigurationVvpMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC13hardwareSpecsAC08HardwareF0VvgZ', 
+                       '_$s6CoreOC21PhotogrammetrySessionC13hardwareSpecsAC08HardwareF0VvpZMV', 
                        '_$s6CoreOC21PhotogrammetrySessionC14activeRequestsSayAC7RequestOGvgTj', 
                        '_$s6CoreOC21PhotogrammetrySessionC14activeRequestsSayAC7RequestOGvgTq', 
                        '_$s6CoreOC21PhotogrammetrySessionC14activeRequestsSayAC7RequestOGvpMV', 

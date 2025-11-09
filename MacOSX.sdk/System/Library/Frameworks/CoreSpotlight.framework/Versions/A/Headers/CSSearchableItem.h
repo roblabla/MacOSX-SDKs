@@ -33,6 +33,11 @@ CORESPOTLIGHT_EXPORT NSString * const CSActionIdentifier API_AVAILABLE(ios(15.0)
 CORESPOTLIGHT_EXPORT NSString * const CSQueryContinuationActionType CS_AVAILABLE(10_13, 10_0) CS_TVOS_UNAVAILABLE;
 CORESPOTLIGHT_EXPORT NSString * const CSSearchQueryString CS_AVAILABLE(10_13, 10_0) CS_TVOS_UNAVAILABLE;
 
+typedef NS_OPTIONS(NSUInteger, CSSearchableItemUpdateListenerOptions) {
+    CSSearchableItemUpdateListenerOptionDefault = 0,
+    CSSearchableItemUpdateListenerOptionSummarization = 1 << 1,     // textContentSummary
+    CSSearchableItemUpdateListenerOptionPriority = 1 << 2,          // isPriority
+} NS_SWIFT_NAME(CSSearchableItem.UpdateListenerOptions) API_AVAILABLE(macos(15_4), ios(18_4));
 
 CS_CLASS_AVAILABLE(10_13, 9_0)
 CS_TVOS_UNAVAILABLE
@@ -70,6 +75,11 @@ CS_TVOS_UNAVAILABLE
 // If an item is marked as an update, but does not already exist in the index, it will be dropped during the attempted indexing.
 // In update mode, attributes can be marked as deleted by setting their value to nil.
 @property (assign) BOOL isUpdate API_AVAILABLE(macos(10.11), ios(9.0)) CS_TVOS_UNAVAILABLE;
+
+// An option flag to specify whether to listen for specific attribute updates that Spotlight can provide.
+// A developer may be notified by a call of searchableItemsDidUpdate to its delegate, where specific properties will be available on the item.
+@property (assign) CSSearchableItemUpdateListenerOptions updateListenerOptions NS_AVAILABLE(15_4, 18_4);
+
 @end
 
 NS_ASSUME_NONNULL_END

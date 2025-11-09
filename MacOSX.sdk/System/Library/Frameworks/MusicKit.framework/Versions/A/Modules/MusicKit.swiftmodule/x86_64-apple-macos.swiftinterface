@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 4024.300.23 -module-name MusicKit
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -target-variant x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 4024.540.1 -module-name MusicKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Combine
 import CoreGraphics
 import DeveloperToolsSupport
@@ -141,9 +142,9 @@ public struct Curator : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swi
     get
   }
   public static func == (a: MusicKit.Curator, b: MusicKit.Curator) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.4, tvOS 15.4, watchOS 9.0, visionOS 1.0, macOS 12.3, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -198,8 +199,8 @@ extension MusicKit.Curator {
     case editorial
     case external
     public static func == (a: MusicKit.Curator.Kind, b: MusicKit.Curator.Kind) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -238,10 +239,10 @@ extension MusicKit.MusicCatalogSearchSuggestionsResponse {
     public let displayTerm: Swift.String
     public let searchTerm: Swift.String
     public static func == (a: MusicKit.MusicCatalogSearchSuggestionsResponse.Suggestion, b: MusicKit.MusicCatalogSearchSuggestionsResponse.Suggestion) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = Swift.String
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -355,7 +356,6 @@ extension MusicKit.MusicPlayer {
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   @_hasMissingDesignatedInitializers public class State : Combine.ObservableObject {
-    @objc deinit
     public var playbackStatus: MusicKit.MusicPlayer.PlaybackStatus {
       get
     }
@@ -381,6 +381,7 @@ extension MusicKit.MusicPlayer {
     @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
     @available(watchOS, unavailable)
     public typealias ObjectWillChangePublisher = Combine.AnyPublisher<Swift.Void, Swift.Never>
+    @objc deinit
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
@@ -417,9 +418,9 @@ public struct Station : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swi
     get
   }
   public static func == (a: MusicKit.Station, b: MusicKit.Station) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -499,9 +500,9 @@ public struct RecordLabel : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable,
     get
   }
   public static func == (a: MusicKit.RecordLabel, b: MusicKit.RecordLabel) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -564,8 +565,8 @@ public enum ContentRating : Swift.Codable, Swift.Equatable, Swift.Hashable, Swif
   case clean
   case explicit
   public static func == (a: MusicKit.ContentRating, b: MusicKit.ContentRating) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -590,10 +591,10 @@ public enum MusicPropertySource : Swift.CaseIterable, Swift.Codable, Swift.Equat
     get
   }
   public static func == (a: MusicKit.MusicPropertySource, b: MusicKit.MusicPropertySource) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
   public typealias AllCases = [MusicKit.MusicPropertySource]
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -845,25 +846,15 @@ extension MusicKit.MusicSubscription {
       public mutating func next() async -> MusicKit.MusicSubscription?
       @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = MusicKit.MusicSubscription
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #else
-      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
-      #endif
     }
     public typealias Element = MusicKit.MusicSubscription
     public func makeAsyncIterator() -> MusicKit.MusicSubscription.Updates.Iterator
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias AsyncIterator = MusicKit.MusicSubscription.Updates.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = Swift.Never
-    #endif
   }
   public static var subscriptionUpdates: MusicKit.MusicSubscription.Updates {
     get
@@ -1056,9 +1047,9 @@ public struct RadioShow : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, S
     get
   }
   public static func == (a: MusicKit.RadioShow, b: MusicKit.RadioShow) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.4, tvOS 15.4, watchOS 9.0, visionOS 1.0, macOS 12.3, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1114,9 +1105,9 @@ public struct TitledSection : Swift.Equatable, Swift.Hashable, Swift.Identifiabl
     get
   }
   public static func == (a: MusicKit.TitledSection, b: MusicKit.TitledSection) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1130,12 +1121,12 @@ public enum MusicCatalogChartKind : Swift.CaseIterable, Swift.Equatable, Swift.H
   case cityTop
   case dailyGlobalTop
   public static func == (a: MusicKit.MusicCatalogChartKind, b: MusicKit.MusicCatalogChartKind) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
   public typealias AllCases = [MusicKit.MusicCatalogChartKind]
   nonisolated public static var allCases: [MusicKit.MusicCatalogChartKind] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1176,9 +1167,9 @@ extension MusicKit.MusicCatalogSearchResponse {
       get
     }
     public static func == (a: MusicKit.MusicCatalogSearchResponse.TopResult, b: MusicKit.MusicCatalogSearchResponse.TopResult) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = MusicKit.MusicItemID
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1275,9 +1266,9 @@ public struct MusicPersonalRecommendation : MusicKit.MusicItem, Swift.Equatable,
     get
   }
   public static func == (a: MusicKit.MusicPersonalRecommendation, b: MusicKit.MusicPersonalRecommendation) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1415,10 +1406,10 @@ extension MusicKit.MusicPlayer.Queue {
       get
     }
     public static func == (a: MusicKit.MusicPlayer.Queue.Entry, b: MusicKit.MusicPlayer.Queue.Entry) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
     @available(watchOS, unavailable)
     public typealias ID = Swift.String
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1515,9 +1506,9 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
     get
   }
   public static func == (a: MusicKit.Track, b: MusicKit.Track) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1684,9 +1675,9 @@ extension MusicKit.Playlist.Entry {
       get
     }
     public static func == (a: MusicKit.Playlist.Entry.Item, b: MusicKit.Playlist.Entry.Item) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = MusicKit.MusicItemID
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1747,9 +1738,9 @@ extension MusicKit.MusicPersonalRecommendation {
       get
     }
     public static func == (a: MusicKit.MusicPersonalRecommendation.Item, b: MusicKit.MusicPersonalRecommendation.Item) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = MusicKit.MusicItemID
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1896,7 +1887,6 @@ extension MusicKit.PreviewAsset : Swift.CustomStringConvertible, Swift.CustomDeb
 @_hasMissingDesignatedInitializers @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 public class MusicPlayer {
-  @objc deinit
   final public let state: MusicKit.MusicPlayer.State
   public var isPreparedToPlay: Swift.Bool {
     get
@@ -1915,6 +1905,7 @@ public class MusicPlayer {
   public func skipToNextEntry() async throws
   public func restartCurrentEntry()
   public func skipToPreviousEntry() async throws
+  @objc deinit
 }
 @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
@@ -2179,9 +2170,9 @@ public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, 
     get
   }
   public static func == (a: MusicKit.MusicVideo, b: MusicKit.MusicVideo) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2294,9 +2285,9 @@ public enum AudioVariant : Swift.CaseIterable, Swift.Equatable, Swift.Hashable, 
     get
   }
   public static func == (a: MusicKit.AudioVariant, b: MusicKit.AudioVariant) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
   public typealias AllCases = [MusicKit.AudioVariant]
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2364,9 +2355,9 @@ public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
     get
   }
   public static func == (a: MusicKit.Genre, b: MusicKit.Genre) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2502,9 +2493,9 @@ public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swif
     get
   }
   public static func == (a: MusicKit.Artist, b: MusicKit.Artist) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2615,9 +2606,9 @@ extension MusicKit.MusicLibrarySearchResponse {
       get
     }
     public static func == (a: MusicKit.MusicLibrarySearchResponse.TopResult, b: MusicKit.MusicLibrarySearchResponse.TopResult) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
     public typealias ID = MusicKit.MusicItemID
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2658,9 +2649,9 @@ public enum RecentlyPlayedMusicItem : MusicKit.MusicItem, Swift.Equatable, Swift
     get
   }
   public static func == (a: MusicKit.RecentlyPlayedMusicItem, b: MusicKit.RecentlyPlayedMusicItem) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2749,9 +2740,9 @@ public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Sw
     get
   }
   public static func == (a: MusicKit.Playlist, b: MusicKit.Playlist) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2854,8 +2845,8 @@ extension MusicKit.Playlist {
     case replay
     case userShared
     public static func == (a: MusicKit.Playlist.Kind, b: MusicKit.Playlist.Kind) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -2875,10 +2866,10 @@ extension MusicKit.MusicPlayer.Queue.Entry {
       get
     }
     public static func == (a: MusicKit.MusicPlayer.Queue.Entry.Item, b: MusicKit.MusicPlayer.Queue.Entry.Item) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
     @available(watchOS, unavailable)
     public typealias ID = MusicKit.MusicItemID
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -3004,9 +2995,9 @@ extension MusicKit.Playlist {
       get
     }
     public static func == (a: MusicKit.Playlist.Entry, b: MusicKit.Playlist.Entry) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = MusicKit.MusicItemID
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -3243,9 +3234,9 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
     get
   }
   public static func == (a: MusicKit.Song, b: MusicKit.Song) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -3481,9 +3472,9 @@ public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
     get
   }
   public static func == (a: MusicKit.Album, b: MusicKit.Album) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

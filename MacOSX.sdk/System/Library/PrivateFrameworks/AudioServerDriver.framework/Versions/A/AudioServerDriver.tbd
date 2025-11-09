@@ -181,12 +181,13 @@ exports:
                        ASDDSPDevice, ASDDSPGraph, ASDDSPGraphBox, ASDDSPGraphInfo, 
                        ASDDSPGraphInterpreter, ASDDSPGraphLoader, ASDDSPGraphUtilities, 
                        ASDDSPItemInfo, ASDDSPStream, ASDDevice, ASDLevelControl, 
-                       ASDManagedRingBuffer, ASDNullStream, ASDObject, ASDPlugin, 
-                       ASDPluginDSPDatabase, ASDProperty, ASDPropertyAddress, ASDPropertyStripInfo, 
-                       ASDRingBuffer, ASDRingBufferInputStream, ASDRingBufferOutputStream, 
-                       ASDRingBufferStreamPair, ASDSRCAudioDevice, ASDSRCStream, 
-                       ASDSelectorControl, ASDSelectorValue, ASDSliderControl, ASDStereoPanControl, 
-                       ASDStream, ASDStreamDSPConfiguration, ASDStreamFormat ]
+                       ASDManagedRingBuffer, ASDNullStream, ASDObject, ASDPassthroughProperty, 
+                       ASDPlugin, ASDPluginDSPDatabase, ASDProperty, ASDPropertyAddress, 
+                       ASDPropertyStripInfo, ASDRingBuffer, ASDRingBufferInputStream, 
+                       ASDRingBufferOutputStream, ASDRingBufferStreamPair, ASDSRCAudioDevice, 
+                       ASDSRCStream, ASDSelectorControl, ASDSelectorValue, ASDSliderControl, 
+                       ASDStereoPanControl, ASDStream, ASDStreamDSPConfiguration, 
+                       ASDStreamFormat ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN5CALog6log_vaEiPKNS_5ScopeEPKciS4_S4_PK10__CFStringPc, 
                        __ZN5CALog7vprintfEiPKcPc ]

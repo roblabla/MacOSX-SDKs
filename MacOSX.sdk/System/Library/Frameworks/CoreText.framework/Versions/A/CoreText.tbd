@@ -3,12 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText'
-current-version: 844.2
+current-version: 844.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation16AttributedStringV8CoreTextE18AdaptiveImageGlyphV11contentType07UniformJ11Identifiers6UTTypeVvgZ', 
+                       '_$s10Foundation16AttributedStringV8CoreTextE18AdaptiveImageGlyphV11contentType07UniformJ11Identifiers6UTTypeVvpZMV', 
                        '_$s10Foundation16AttributedStringV8CoreTextE18AdaptiveImageGlyphV12imageContentAA4DataVvg', 
                        '_$s10Foundation16AttributedStringV8CoreTextE18AdaptiveImageGlyphV12imageContentAA4DataVvpMV', 
                        '_$s10Foundation16AttributedStringV8CoreTextE18AdaptiveImageGlyphV12imageContentAfA4DataV_tcfC', 
@@ -103,18 +104,19 @@ exports:
                        _CTFontGetExuberatedLineHeightForLineHeight, _CTFontGetGlyphCount, 
                        _CTFontGetGlyphWithName, _CTFontGetGlyphsAndAdvancesForCharacterRange, 
                        _CTFontGetGlyphsForCharacterRange, _CTFontGetGlyphsForCharacters, 
-                       _CTFontGetLanguageAwareOutsets, _CTFontGetLanguageAwareOutsetsForLanguage, 
-                       _CTFontGetLatin1GlyphsAndAdvanceWidths, _CTFontGetLeading, 
-                       _CTFontGetLigatureCaretPositions, _CTFontGetMatrix, _CTFontGetMaximumAdvance, 
-                       _CTFontGetOpticalBoundsForGlyphs, _CTFontGetPhysicalSymbolicTraits, 
-                       _CTFontGetSbixImageSizeForGlyph, _CTFontGetSbixImageSizeForGlyphAndContentsScale, 
-                       _CTFontGetSize, _CTFontGetSlantAngle, _CTFontGetStringEncoding, 
-                       _CTFontGetSymbolicTraits, _CTFontGetTextStyle, _CTFontGetTrackingFloor, 
-                       _CTFontGetTransformedAdvancesForGlyphsAndStyle, _CTFontGetTransformedBoundingRectsForGlyphsAndStyle, 
-                       _CTFontGetTypeID, _CTFontGetTypographicBoundsForAdaptiveImageProvider, 
-                       _CTFontGetTypographicBoundsForEmojiImageProvider, _CTFontGetTypographicMetrics, 
-                       _CTFontGetUIFontDesign, _CTFontGetUIFontType, _CTFontGetUnderlinePosition, 
-                       _CTFontGetUnderlineThickness, _CTFontGetUnitsPerEm, _CTFontGetUnsummedAdvancesForGlyphsAndStyle, 
+                       _CTFontGetGlyphsForLongCharacters, _CTFontGetLanguageAwareOutsets, 
+                       _CTFontGetLanguageAwareOutsetsForLanguage, _CTFontGetLatin1GlyphsAndAdvanceWidths, 
+                       _CTFontGetLeading, _CTFontGetLigatureCaretPositions, _CTFontGetMatrix, 
+                       _CTFontGetMaximumAdvance, _CTFontGetOpticalBoundsForGlyphs, 
+                       _CTFontGetPhysicalSymbolicTraits, _CTFontGetSbixImageSizeForGlyph, 
+                       _CTFontGetSbixImageSizeForGlyphAndContentsScale, _CTFontGetSize, 
+                       _CTFontGetSlantAngle, _CTFontGetStringEncoding, _CTFontGetSymbolicTraits, 
+                       _CTFontGetTextStyle, _CTFontGetTrackingFloor, _CTFontGetTransformedAdvancesForGlyphsAndStyle, 
+                       _CTFontGetTransformedBoundingRectsForGlyphsAndStyle, _CTFontGetTypeID, 
+                       _CTFontGetTypographicBoundsForAdaptiveImageProvider, _CTFontGetTypographicBoundsForEmojiImageProvider, 
+                       _CTFontGetTypographicMetrics, _CTFontGetUIFontDesign, _CTFontGetUIFontType, 
+                       _CTFontGetUnderlinePosition, _CTFontGetUnderlineThickness, 
+                       _CTFontGetUnitsPerEm, _CTFontGetUnsummedAdvancesForGlyphsAndStyle, 
                        _CTFontGetVerticalGlyphsForCharacters, _CTFontGetVerticalTranslationsForGlyphs, 
                        _CTFontGetWeight, _CTFontGetWidth, _CTFontGetXHeight, _CTFontHasDerivedOpticalSize, 
                        _CTFontHasExuberatedLineHeight, _CTFontHasFeatureSettingWithTypeAndSelector, 

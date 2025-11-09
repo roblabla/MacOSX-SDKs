@@ -16,6 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Options indicating which Accessibility features will be turned on or off when an override session is held by your app.
+API_AVAILABLE(ios(18.2))
 typedef NS_OPTIONS(NSUInteger, AXFeatureOverrideSessionOptions) {
     AXFeatureOverrideSessionOptionsGrayscale = 1 << 0,
     AXFeatureOverrideSessionOptionsInvertColors = 1 << 1,
@@ -24,7 +25,9 @@ typedef NS_OPTIONS(NSUInteger, AXFeatureOverrideSessionOptions) {
     AXFeatureOverrideSessionOptionsZoom = 1 << 4
 } NS_SWIFT_NAME(AXFeatureOverrideSession.Options);
 
-static NSErrorDomain const AXFeatureOverrideSessionErrorDomain = @"AXFeatureOverrideSessionErrorDomain";
+AX_EXTERN API_AVAILABLE(ios(18.2))
+NSErrorDomain const AXFeatureOverrideSessionErrorDomain;
+API_AVAILABLE(ios(18.2))
 typedef NS_ERROR_ENUM(AXFeatureOverrideSessionErrorDomain, AXFeatureOverrideSessionError) {
     AXFeatureOverrideSessionErrorUndefined = 0,
     AXFeatureOverrideSessionErrorAppNotEntitled,

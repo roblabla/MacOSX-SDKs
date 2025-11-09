@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0))
 @interface GCControllerButtonInput : GCControllerElement
 
 /**
@@ -21,7 +21,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  @see value
  @see pressed
  */
-typedef void (^GCControllerButtonValueChangedHandler)(GCControllerButtonInput *button, float value, BOOL pressed);
+typedef void (^GCControllerButtonValueChangedHandler)(GCControllerButtonInput *button, float value, BOOL pressed) API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0));
 @property (nonatomic, copy, nullable) GCControllerButtonValueChangedHandler valueChangedHandler;
 
 /**
@@ -29,7 +29,7 @@ typedef void (^GCControllerButtonValueChangedHandler)(GCControllerButtonInput *b
  will get called less often than the valueChangedHandler with the additional feature of the pressed state
  being different to the last time it was called.
  */
-@property (nonatomic, copy, nullable) GCControllerButtonValueChangedHandler pressedChangedHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(8.0));
+@property (nonatomic, copy, nullable) GCControllerButtonValueChangedHandler pressedChangedHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0));
 
 /**
  Set this block if you want to be notified when the touched state on this button changes.
@@ -41,7 +41,7 @@ typedef void (^GCControllerButtonValueChangedHandler)(GCControllerButtonInput *b
  @see value
  @see pressed
 */
-typedef void (^GCControllerButtonTouchedChangedHandler)(GCControllerButtonInput *button, float value, BOOL pressed, BOOL touched);
+typedef void (^GCControllerButtonTouchedChangedHandler)(GCControllerButtonInput *button, float value, BOOL pressed, BOOL touched) API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 @property (nonatomic, copy, nullable) GCControllerButtonTouchedChangedHandler touchedChangedHandler API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**

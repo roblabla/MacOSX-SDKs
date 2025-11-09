@@ -11,7 +11,7 @@ typedef NS_ENUM(NSInteger, GKTurnBasedMatchStatus) {
     GKTurnBasedMatchStatusOpen      = 1,
     GKTurnBasedMatchStatusEnded     = 2,
     GKTurnBasedMatchStatusMatching  = 3
-};
+} API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// Constants that describe the state of individual participants in the match
 typedef NS_ENUM(NSInteger, GKTurnBasedParticipantStatus) {
@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, GKTurnBasedParticipantStatus) {
     GKTurnBasedParticipantStatusMatching    = 3,    // a participant that is waiting to be matched
     GKTurnBasedParticipantStatusActive      = 4,    // a participant that is active in this match
     GKTurnBasedParticipantStatusDone        = 5,    // a participant is done with this session
-};
+} API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// Constants that describe the game result for a given participant who has reached the done state.  The developer is free to use these constants or add additional ones
 typedef NS_ENUM(NSInteger, GKTurnBasedMatchOutcome) {
@@ -36,10 +36,9 @@ typedef NS_ENUM(NSInteger, GKTurnBasedMatchOutcome) {
     GKTurnBasedMatchOutcomeSecond       = 7,
     GKTurnBasedMatchOutcomeThird        = 8,
     GKTurnBasedMatchOutcomeFourth       = 9,
-    
+
     GKTurnBasedMatchOutcomeCustomRange = 0x00FF0000    // game result range available for custom app use
-    
-};
+} API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// GKTurnBasedMatch represents an ongoing turn-based game among the matched group of participants
 /// Existing matches can be shown and new matches created using GKTurnBasedMatchmakerViewController
@@ -47,28 +46,29 @@ typedef NS_ENUM(NSInteger, GKTurnBasedMatchOutcome) {
 ///
 /// By default turn based events will badge your app.  To opt out of this add GKGameCenterBadgingDisabled  with a boolean value of YES to your info plist
 
-NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKTurnBasedParticipant : NSObject
 
-@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY) GKPlayer            *player NS_AVAILABLE(10_10, 8_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY) GKPlayer            *player API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 @property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSDate                *lastTurnDate;
 @property(readonly, NS_NONATOMIC_IOSONLY)       GKTurnBasedParticipantStatus    status;
 @property(assign, NS_NONATOMIC_IOSONLY)         GKTurnBasedMatchOutcome         matchOutcome;
-@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSDate                *timeoutDate NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSDate                *timeoutDate API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 @end
 
 @interface GKTurnBasedParticipant (Obsoleted)
 /*** This property is obsolete. ***/
-@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSString              *playerID API_DEPRECATED_WITH_REPLACEMENT("-player:", ios(5.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSString              *playerID API_DEPRECATED_WITH_REPLACEMENT("Use ``GKTurnBasedParticipant/player`` instead.", ios(5.0,8.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 @end
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0))
 @protocol GKTurnBasedEventListener
 @optional
 
 /// If Game Center initiates a match the developer should create a GKTurnBasedMatch from playersToInvite and present a GKTurnbasedMatchmakerViewController.
-- (void)player:(GKPlayer *)player didRequestMatchWithOtherPlayers:(NSArray<GKPlayer *> *)playersToInvite NS_AVAILABLE(10_10, 8_0) API_UNAVAILABLE(watchos);
+- (void)player:(GKPlayer *)player didRequestMatchWithOtherPlayers:(NSArray<GKPlayer *> *)playersToInvite API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /// called when it becomes this player's turn.  It also gets called under the following conditions:
 ///      the player's turn has a timeout and it is about to expire.
@@ -77,34 +77,34 @@ NS_ASSUME_NONNULL_BEGIN
 ///      turn was passed to another player
 ///      another player saved the match data
 /// Because of this the app needs to be prepared to handle this even while the player is taking a turn in an existing match.  The boolean indicates whether this event launched or brought to forground the app.
-- (void)player:(GKPlayer *)player receivedTurnEventForMatch:(GKTurnBasedMatch *)match didBecomeActive:(BOOL)didBecomeActive NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)player:(GKPlayer *)player receivedTurnEventForMatch:(GKTurnBasedMatch *)match didBecomeActive:(BOOL)didBecomeActive API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// called when the match has ended.
 - (void)player:(GKPlayer *)player matchEnded:(GKTurnBasedMatch *)match;
 
 /// this is called when a player receives an exchange request from another player.
-- (void)player:(GKPlayer *)player receivedExchangeRequest:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)player:(GKPlayer *)player receivedExchangeRequest:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// this is called when an exchange is canceled by the sender.
-- (void)player:(GKPlayer *)player receivedExchangeCancellation:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)player:(GKPlayer *)player receivedExchangeCancellation:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// called when all players either respond or timeout responding to this request.  This is sent to both the turn holder and the initiator of the exchange
-- (void)player:(GKPlayer *)player receivedExchangeReplies:(NSArray<GKTurnBasedExchangeReply *> *)replies forCompletedExchange:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)player:(GKPlayer *)player receivedExchangeReplies:(NSArray<GKTurnBasedExchangeReply *> *)replies forCompletedExchange:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// Called when a player chooses to quit a match and that player has the current turn.  The developer should call participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler: on the match passing in appropriate values.  They can also update matchOutcome for other players as appropriate.
-- (void)player:(GKPlayer *)player wantsToQuitMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3_0);
+- (void)player:(GKPlayer *)player wantsToQuitMatch:(GKTurnBasedMatch *)match API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// Deprecated
-- (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite API_DEPRECATED_WITH_REPLACEMENT("-didRequestMatchWithOtherPlayers:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
+- (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKTurnBasedEventListener/player(_:didRequestMatchWithOtherPlayers:)`` method instead.", ios(7.0,8.0), macos(10.9,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
 @end
 
 // Turn timeout constants
 
-GK_EXTERN NSTimeInterval        GKTurnTimeoutDefault NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);    // use a default timeout of one week
-GK_EXTERN NSTimeInterval        GKTurnTimeoutNone NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);
+GK_EXTERN NSTimeInterval        GKTurnTimeoutDefault API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0), watchos(3.0));    // use a default timeout of one week
+GK_EXTERN NSTimeInterval        GKTurnTimeoutNone API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0), watchos(3.0));
 
-NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKTurnBasedMatch : NSObject
 
 @property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSString                           *matchID;
@@ -127,29 +127,29 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 // Notes: The localized message will be evaluated locally from these keys and sent across as well so that devices that do not have the game installed will see the message in the sender's localization
 //        The developer can access resulting string using the message property
 //        This is a similar concept to the way we handle localization for Push Notifications. See the "Local and Push Notification Programming Guide" for more details.
-- (void)setLocalizableMessageWithKey:(NSString*)key arguments:(nullable NSArray<NSString *> *)arguments NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)setLocalizableMessageWithKey:(NSString*)key arguments:(nullable NSArray<NSString *> *)arguments API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // returns the localizable message in the current locale. Setting this is equivalent to calling [self setLocalizableMessageWithKey:message arguments:nil]
 @property(readwrite, nullable, copy, NS_NONATOMIC_IOSONLY)   NSString                *message;
 
 
 // Returns the maximum size for the match data.
-@property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              matchDataMaximumSize NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              matchDataMaximumSize API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // exchanges that are in progress on this match.  Once an exchange has completed and has been resolved by merging it into the match data by the current turn holder then it will be removed from this list
-@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *exchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *exchanges API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // returns the exchanges that currently await a reply from the local player
-@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *activeExchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *activeExchanges API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // returns the exchanges that have been completed and need to be merged by the local participant.  This will be nil unless the local participant is the current turn holder for this match
-@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *completedExchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *completedExchanges API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // maximum data allowed for exchange data
-@property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              exchangeDataMaximumSize NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              exchangeDataMaximumSize API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // limit of the number of exchanges that this player can have initiated at a given time
-@property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              exchangeMaxInitiatedExchangesPerPlayer NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              exchangeMaxInitiatedExchangesPerPlayer API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // Attempt to find a turn-based match for the specified request. Error will be nil on success.
 // Possible reasons for error:
@@ -161,19 +161,19 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 + (void)loadMatchesWithCompletionHandler:(void(^__nullable)(NSArray<GKTurnBasedMatch *> * __nullable matches, NSError * __nullable error))completionHandler;
 
 // load a match based on a previously known match ID
-+ (void)loadMatchWithID:(NSString *)matchID withCompletionHandler:(void(^__nullable)(GKTurnBasedMatch * __nullable match, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0);
++ (void)loadMatchWithID:(NSString *)matchID withCompletionHandler:(void(^__nullable)(GKTurnBasedMatch * __nullable match, NSError * __nullable error))completionHandler API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // Recreate a previously existing turn based match that ended. A new match with the same set of players will be returned by the completion handler. If multiple players do this then multiple new matches will be created. Error will be nil on success.
 // Possible reasons for error:
 // 1. Communications failure
 // 2. Unauthenticated player
-- (void)rematchWithCompletionHandler:(void(^__nullable)(GKTurnBasedMatch * __nullable match, NSError * __nullable error))completionHandler NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);
+- (void)rematchWithCompletionHandler:(void(^__nullable)(GKTurnBasedMatch * __nullable match, NSError * __nullable error))completionHandler API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // If the local participant has status invited then accept the invite, otherwise returns an error
-- (void)acceptInviteWithCompletionHandler:(void(^__nullable)(GKTurnBasedMatch * __nullable match, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0);
+- (void)acceptInviteWithCompletionHandler:(void(^__nullable)(GKTurnBasedMatch * __nullable match, NSError * __nullable error))completionHandler API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // If the local participant has status invited then decline the invite, otherwise returns an error
-- (void)declineInviteWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0);
+- (void)declineInviteWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // Remove a declined or completed match (one with a matchOutcome set) from the player's list of matches. If using the GKTurnBasedMatchmakerViewController UI, this will remove it from the finished sessions.  The developer should not do this without user input.
 - (void)removeWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler;
@@ -190,7 +190,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 - (void)endTurnWithNextParticipants:(NSArray<GKTurnBasedParticipant *> *)nextParticipants
                         turnTimeout:(NSTimeInterval)timeout
                           matchData:(NSData*)matchData
-                 completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);
+                 completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0), watchos(3.0));
 
 
 // Ends the current player's turn by quitting the match.  The caller must indicate the next player and pass in updated matchData (if used).  All completed exchanges must be resolved or canceled before calling this.
@@ -198,7 +198,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
                         nextParticipants:(NSArray<GKTurnBasedParticipant *> *)nextParticipants
                              turnTimeout:(NSTimeInterval)timeout
                                matchData:(NSData*)matchData
-                       completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);
+                       completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // Abandon the match when it is not the current participant's turn.  In this there is no update to matchData and no need to set nextParticipant.
 - (void)participantQuitOutOfTurnWithOutcome:(GKTurnBasedMatchOutcome)matchOutcome withCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler;
@@ -207,17 +207,17 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 - (void)endMatchInTurnWithMatchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler;
 
 // This will end the match and submit scores and achievements for all participants. Scores should be submitted for all involved players, and multiple scores may be submitted for each to different leaderboards. Earned achievements may also be submitted for any participants. You must set each participant’s matchOutcome before calling this method. All completed exchanges must be resolved or canceled before calling this.
-- (void)endMatchInTurnWithMatchData:(NSData*)matchData scores:(nullable NSArray<GKScore *> *)scores achievements:(nullable NSArray<GKAchievement *> *)achievements completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-endMatchInTurnWithMatchData:scores:completionHandler", ios(6.0,14.0), macos(10.10,11.0));
+- (void)endMatchInTurnWithMatchData:(NSData*)matchData scores:(nullable NSArray<GKScore *> *)scores achievements:(nullable NSArray<GKAchievement *> *)achievements completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKTurnBasedMatch/endMatchInTurn(withMatch:scores:achievements:completionHandler:)`` method instead.", ios(6.0,14.0), macos(10.10,11.0), tvos(9.0,14.0), visionos(1.0,1.0), watchos(3.0,7.0));
 
-- (void)endMatchInTurnWithMatchData:(NSData*)matchData leaderboardScores:(NSArray<GKLeaderboardScore *> *)scores achievements:(NSArray *)achievements completionHandler:(void(^)(NSError * __nullable error))completionHandler NS_AVAILABLE(11_0, 14_0);
+- (void)endMatchInTurnWithMatchData:(NSData*)matchData leaderboardScores:(NSArray<GKLeaderboardScore *> *)scores achievements:(NSArray *)achievements completionHandler:(void(^)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0), watchos(7.0));
 
 // saves the matchData for the current turn without ending the turn.  If other players have the game running they will receive a handleTurnEventForMatch to indicate that the matchData has changed.  This is useful to initialize the game state for the first player when they take their turn or for updating the turn data due to the user taking an irreversible action within their turn.  All completed exchanges must be resolved or canceled before calling this. If you are using exchanges use saveMergedMatchData instead.  
-- (void)saveCurrentTurnWithMatchData:(NSData *)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
+- (void)saveCurrentTurnWithMatchData:(NSData *)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // saves the merged matchData for the current turn without ending the turn and mark the supplied exchanges as resolved meaning that the data has been merged into the match data. If other players have the game running they will receive a handleTurnEventForMatch to indicate that the matchData has changed.  It is required that all completed exchanges are resolved before ending a turn.  Otherwise calling endTurn, participantQuitInTurnWithOutCome or endMatchInTurn will return an error
 - (void)saveMergedMatchData:(NSData *)matchData
       withResolvedExchanges:(NSArray<GKTurnBasedExchange *> *)exchanges
-          completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+          completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // Send an exchange request to one or more participants.  Each recipient will receive a push notification using supplied localizable message.  If any of the participants have an inactive status (GKTurnBasedParticipantStatusDone) then this will return an error.  completionHandler gets passed the updated exchange with identifier, sender and recipients set
 - (void)sendExchangeToParticipants:(NSArray<GKTurnBasedParticipant *> *)participants
@@ -225,38 +225,37 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
              localizableMessageKey:(NSString *)key
                          arguments:(NSArray<NSString *> *)arguments
                            timeout:(NSTimeInterval)timeout
-                 completionHandler:(void(^__nullable)(GKTurnBasedExchange * __nullable exchange, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0)  __WATCHOS_AVAILABLE(3_0);
+                 completionHandler:(void(^__nullable)(GKTurnBasedExchange * __nullable exchange, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // Send a reminder to one or more participants.  Each recipient will receive a push notification using supplied localizable message.  This allows a game to send reminders that a turn or exchange request needs action.  On the receiver side this will generate a turn event for the match.
 - (void)sendReminderToParticipants:(NSArray<GKTurnBasedParticipant *> *)participants
              localizableMessageKey:(NSString *)key
                          arguments:(NSArray<NSString *> *)arguments
-                 completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+                 completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // deprecated methods
-- (void)endTurnWithNextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-endTurnWithNextParticipants:turnTimeout:matchData:completionHandler:", ios(5.0,6.0), macos(10.8,10.9)) __TVOS_UNAVAILABLE;
-- (void)participantQuitInTurnWithOutcome:(GKTurnBasedMatchOutcome)matchOutcome nextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler:", ios(5.0,6.0), macos(10.8,10.9)) __TVOS_UNAVAILABLE;
+- (void)endTurnWithNextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKTurnBasedMatch/endTurn(withNextParticipants:turnTimeout:match:completionHandler:)`` method instead.", ios(5.0,6.0), macos(10.8,10.9), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
+- (void)participantQuitInTurnWithOutcome:(GKTurnBasedMatchOutcome)matchOutcome nextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("Use the  ``GKTurnBasedMatch/participantQuitInTurn(with:nextParticipants:turnTimeout:match:completionHandler:)`` method instead.", ios(5.0,6.0), macos(10.8,10.9), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
 @end
 
 // Turn Based Exchanges
 
 // Constants that describe the status of exchanges and their replies
-
 typedef NS_ENUM(int8_t, GKTurnBasedExchangeStatus) {
     GKTurnBasedExchangeStatusUnknown = 0,
     GKTurnBasedExchangeStatusActive = 1,
     GKTurnBasedExchangeStatusComplete = 2,
     GKTurnBasedExchangeStatusResolved = 3,
     GKTurnBasedExchangeStatusCanceled = 4
-}  NS_ENUM_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+} API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // Exchange timeout constants
 
-GK_EXTERN NSTimeInterval        GKExchangeTimeoutDefault NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);    // use a default timeout of one day
-GK_EXTERN NSTimeInterval        GKExchangeTimeoutNone NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+GK_EXTERN NSTimeInterval        GKExchangeTimeoutDefault API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));    // use a default timeout of one day
+GK_EXTERN NSTimeInterval        GKExchangeTimeoutNone API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
-NS_CLASS_AVAILABLE(10_10,7_0) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface  GKTurnBasedExchange : NSObject
 
 @property (readonly, nullable, NS_NONATOMIC_IOSONLY)     NSString                            *exchangeID;         // persistent identifier used to refer to this exchange.
@@ -272,43 +271,43 @@ NS_CLASS_AVAILABLE(10_10,7_0) __WATCHOS_AVAILABLE(3_0)
 @property (readonly, nullable, NS_NONATOMIC_IOSONLY)     NSArray<GKTurnBasedExchangeReply *> *replies;            // Array of GKTurnBasedExchangeReply.
 
 // cancel an exchange. It is possible to cancel an exchange that is active or complete. Each recipient will receive a push notification using supplied localizable message. Returns an error if the exchange has already been canceled.
-- (void)cancelWithLocalizableMessageKey:(NSString *)key arguments:(NSArray<NSString *> *)arguments completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)cancelWithLocalizableMessageKey:(NSString *)key arguments:(NSArray<NSString *> *)arguments completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 // reply to an exchange. The sender will receive a push notification using supplied localizable message. Returns an error if the exchange has already been canceled.
-- (void)replyWithLocalizableMessageKey:(NSString *)key arguments:(NSArray<NSString *> *)arguments data:(NSData *)data completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)replyWithLocalizableMessageKey:(NSString *)key arguments:(NSArray<NSString *> *)arguments data:(NSData *)data completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
 
 @end
 
-NS_CLASS_AVAILABLE(10_10,7_0) __WATCHOS_AVAILABLE(3_0)
+API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKTurnBasedExchangeReply  : NSObject
 
 @property (readonly, nullable, NS_NONATOMIC_IOSONLY)          GKTurnBasedParticipant         *recipient;          // the recipient who this reply is from
 @property (readonly, nullable, NS_NONATOMIC_IOSONLY)          NSString                       *message;            // localized message for the push notification generated by the reply of this exchange
 @property (readonly, nullable, NS_NONATOMIC_IOSONLY)          NSData                         *data;               // data sent by the replying recipient
-@property (readonly, nullable, NS_NONATOMIC_IOSONLY)          NSDate                         *replyDate NS_AVAILABLE(10_10, 8_0) __WATCHOS_AVAILABLE(3_0); // send date for the exchange.
+@property (readonly, nullable, NS_NONATOMIC_IOSONLY)          NSDate                         *replyDate API_AVAILABLE(ios(8.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0)); // send date for the exchange.
 @end
 
 // deprecated
 
 // see documentation for GKTurnBasedEventListener for the equivalent methods
-API_DEPRECATED_WITH_REPLACEMENT("-[GKLocalPlayer registerListener:]", ios(5.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
+API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(5.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos)
 @protocol  GKTurnBasedEventHandlerDelegate
 
-- (void)handleInviteFromGameCenter:(NSArray<NSString *> *)playersToInvite NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);
-- (void)handleTurnEventForMatch:(GKTurnBasedMatch *)match didBecomeActive:(BOOL)didBecomeActive NS_DEPRECATED(10_9, 10_10, 6_0, 7_0);
+- (void)handleInviteFromGameCenter:(NSArray<NSString *> *)playersToInvite API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(5.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
+- (void)handleTurnEventForMatch:(GKTurnBasedMatch *)match didBecomeActive:(BOOL)didBecomeActive API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(6.0,7.0), macos(10.9,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
 @optional
-- (void)handleTurnEventForMatch:(GKTurnBasedMatch *)match NS_DEPRECATED(10_8, 10_9, 5_0, 7_0);
-- (void)handleMatchEnded:(GKTurnBasedMatch *)match NS_DEPRECATED(10_8, 10_10, 6_0, 7_0);
+- (void)handleTurnEventForMatch:(GKTurnBasedMatch *)match API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(5.0,7.0), macos(10.8,10.9), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
+- (void)handleMatchEnded:(GKTurnBasedMatch *)match API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(6.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
 @end
 
-API_DEPRECATED_WITH_REPLACEMENT("-[GKTurnBasedEventListener registerListener:]", ios(5.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
+API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(5.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos)
 @interface GKTurnBasedEventHandler : NSObject
 
-+ (GKTurnBasedEventHandler *)sharedTurnBasedEventHandler NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);
++ (GKTurnBasedEventHandler *)sharedTurnBasedEventHandler API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(5.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
-@property (weak, NS_NONATOMIC_IOSONLY)         NSObject<GKTurnBasedEventHandlerDelegate>    *delegate NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);
+@property (weak, NS_NONATOMIC_IOSONLY)         NSObject<GKTurnBasedEventHandlerDelegate>    *delegate API_DEPRECATED_WITH_REPLACEMENT("Use the ``GKLocalPlayer/register(_:)`` method of the ``GKLocalPlayer`` class instead.", ios(5.0,7.0), macos(10.8,10.10), visionos(1.0,1.0), watchos(3.0,3.0)) API_UNAVAILABLE(tvos);
 
 @end
 

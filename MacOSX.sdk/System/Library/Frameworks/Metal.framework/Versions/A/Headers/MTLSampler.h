@@ -89,6 +89,7 @@ typedef NS_ENUM(NSUInteger, MTLSamplerBorderColor) {
     MTLSamplerBorderColorOpaqueWhite = 2,       // {1,1,1,1}
 } API_AVAILABLE(macos(10.12), ios(14.0));
 
+
 /*!
  @class MTLSamplerDescriptor
  @abstract A mutable descriptor used to configure a sampler.  When complete, this can be used to create an immutable MTLSamplerState.
@@ -148,6 +149,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (nonatomic) MTLSamplerBorderColor borderColor API_AVAILABLE(macos(10.12), ios(14.0));
 
+
 /*!
  @property normalizedCoordinates.
  @abstract If YES, texture coordates are from 0 to 1.  If NO, texture coordinates are 0..width, 0..height.
@@ -175,6 +177,8 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @discussion lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
  */
 @property (nonatomic) BOOL lodAverage API_AVAILABLE(ios(9.0), macos(11.0), macCatalyst(14.0));
+
+
 
 /*!
  @property compareFunction

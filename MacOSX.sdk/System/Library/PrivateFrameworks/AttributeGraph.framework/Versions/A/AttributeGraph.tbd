@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AttributeGraph.framework/Versions/A/AttributeGraph'
-current-version: 6.2.5
+current-version: 6.4.39
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -20,7 +20,8 @@ exports:
                        '_$s14AttributeGraph011AnyOptionalA0V11descriptionSSvg', '_$s14AttributeGraph011AnyOptionalA0V11descriptionSSvpMV', 
                        '_$s14AttributeGraph011AnyOptionalA0V2eeoiySbAC_ACtFZ', '_$s14AttributeGraph011AnyOptionalA0V3mapyxSgxSo11AGAttributeaXElF', 
                        '_$s14AttributeGraph011AnyOptionalA0V4hash4intoys6HasherVz_tF', 
-                       '_$s14AttributeGraph011AnyOptionalA0V7currentACvgZ', '_$s14AttributeGraph011AnyOptionalA0V9attributeSo11AGAttributeaSgvM', 
+                       '_$s14AttributeGraph011AnyOptionalA0V7currentACvgZ', '_$s14AttributeGraph011AnyOptionalA0V7currentACvpZMV', 
+                       '_$s14AttributeGraph011AnyOptionalA0V9attributeSo11AGAttributeaSgvM', 
                        '_$s14AttributeGraph011AnyOptionalA0V9attributeSo11AGAttributeaSgvg', 
                        '_$s14AttributeGraph011AnyOptionalA0V9attributeSo11AGAttributeaSgvpMV', 
                        '_$s14AttributeGraph011AnyOptionalA0V9attributeSo11AGAttributeaSgvs', 
@@ -236,6 +237,7 @@ exports:
                        '_$s14AttributeGraph3MapV3argAA0A0VyxGvpMV', '_$s14AttributeGraph3MapV3argAA0A0VyxGvs', 
                        '_$s14AttributeGraph3MapV4bodyyq_xcvg', '_$s14AttributeGraph3MapV4bodyyq_xcvpMV', 
                        '_$s14AttributeGraph3MapV5flagsSo20AGAttributeTypeFlagsVvgZ', 
+                       '_$s14AttributeGraph3MapV5flagsSo20AGAttributeTypeFlagsVvpZMV', 
                        '_$s14AttributeGraph3MapV5valueq_vg', '_$s14AttributeGraph3MapV5valueq_vpMV', 
                        '_$s14AttributeGraph3MapVMa', '_$s14AttributeGraph3MapVMn', 
                        '_$s14AttributeGraph3MapVyACyxq_GAA0A0VyxG_q_xctcfC', '_$s14AttributeGraph3MapVyxq_GAA01_A4BodyAAMc', 
@@ -258,6 +260,7 @@ exports:
                        '_$s14AttributeGraph5FocusV4rootAA0A0VyxGvM', '_$s14AttributeGraph5FocusV4rootAA0A0VyxGvg', 
                        '_$s14AttributeGraph5FocusV4rootAA0A0VyxGvpMV', '_$s14AttributeGraph5FocusV4rootAA0A0VyxGvs', 
                        '_$s14AttributeGraph5FocusV5flagsSo20AGAttributeTypeFlagsVvgZ', 
+                       '_$s14AttributeGraph5FocusV5flagsSo20AGAttributeTypeFlagsVvpZMV', 
                        '_$s14AttributeGraph5FocusV5valueq_vg', '_$s14AttributeGraph5FocusV5valueq_vpMV', 
                        '_$s14AttributeGraph5FocusV7keyPaths03KeyE0Cyxq_GvM', '_$s14AttributeGraph5FocusV7keyPaths03KeyE0Cyxq_Gvg', 
                        '_$s14AttributeGraph5FocusV7keyPaths03KeyE0Cyxq_GvpMV', '_$s14AttributeGraph5FocusV7keyPaths03KeyE0Cyxq_Gvs', 
@@ -266,7 +269,9 @@ exports:
                        '_$s14AttributeGraph5FocusVyxq_GAA4RuleAAMc', '_$s14AttributeGraph5FocusVyxq_Gs23CustomStringConvertibleAAMc', 
                        '_$s14AttributeGraph8ExternalV11descriptionSSvg', '_$s14AttributeGraph8ExternalV11descriptionSSvpMV', 
                        '_$s14AttributeGraph8ExternalV14comparisonModeSo012AGComparisonE0VvgZ', 
+                       '_$s14AttributeGraph8ExternalV14comparisonModeSo012AGComparisonE0VvpZMV', 
                        '_$s14AttributeGraph8ExternalV5flagsSo20AGAttributeTypeFlagsVvgZ', 
+                       '_$s14AttributeGraph8ExternalV5flagsSo20AGAttributeTypeFlagsVvpZMV', 
                        '_$s14AttributeGraph8ExternalV7_update_9attributeySv_So11AGAttributeatFZ', 
                        '_$s14AttributeGraph8ExternalVACyxGycfC', '_$s14AttributeGraph8ExternalVMa', 
                        '_$s14AttributeGraph8ExternalVMn', '_$s14AttributeGraph8ExternalVyxGAA01_A4BodyAAMc', 
@@ -291,8 +296,8 @@ exports:
                        '_$sSo10AGGraphRefa14AttributeGraphE21withMainThreadHandler_2doyyyyXEXE_yyXEtF', 
                        '_$sSo10AGGraphRefa14AttributeGraphE27withoutSubgraphInvalidationyxxyXElF', 
                        '_$sSo10AGGraphRefa14AttributeGraphE5print13includeValuesySb_tF', 
-                       '_$sSo10AGGraphRefa14AttributeGraphE8onUpdateyyyycF', '_$sSo10AGGraphRefaSQ14AttributeGraphMc', 
-                       '_$sSo11AGAttributea14AttributeGraphE10mutateBody2as12invalidating_yxm_SbyxzXEtlF', 
+                       '_$sSo10AGGraphRefa14AttributeGraphE8onUpdateyyyycF', '_$sSo10AGGraphRefa14AttributeGraphE9tracePathSSSgvpZMV', 
+                       '_$sSo10AGGraphRefaSQ14AttributeGraphMc', '_$sSo11AGAttributea14AttributeGraphE10mutateBody2as12invalidating_yxm_SbyxzXEtlF', 
                        '_$sSo11AGAttributea14AttributeGraphE10unsafeCast2toAC0B0VyxGxm_tlF', 
                        '_$sSo11AGAttributea14AttributeGraphE11descriptionSSvg', '_$sSo11AGAttributea14AttributeGraphE11descriptionSSvpMV', 
                        '_$sSo11AGAttributea14AttributeGraphE12_bodyPointerSVvg', 
@@ -304,7 +309,8 @@ exports:
                        '_$sSo11AGAttributea14AttributeGraphE18indirectDependencyABSgvpMV', 
                        '_$sSo11AGAttributea14AttributeGraphE18indirectDependencyABSgvs', 
                        '_$sSo11AGAttributea14AttributeGraphE2eeoiySbAB_ABtFZ', '_$sSo11AGAttributea14AttributeGraphE4hash4intoys6HasherVz_tF', 
-                       '_$sSo11AGAttributea14AttributeGraphE7currentABSgvgZ', '_$sSo11AGAttributea14AttributeGraphE8addInput_7options5tokenyAB_So14AGInputOptionsVSitF', 
+                       '_$sSo11AGAttributea14AttributeGraphE7currentABSgvgZ', '_$sSo11AGAttributea14AttributeGraphE7currentABSgvpZMV', 
+                       '_$sSo11AGAttributea14AttributeGraphE8addInput_7options5tokenyAB_So14AGInputOptionsVSitF', 
                        '_$sSo11AGAttributea14AttributeGraphE8addInput_7options5tokenyAC0B0VyxG_So14AGInputOptionsVSitlF', 
                        '_$sSo11AGAttributea14AttributeGraphE8setFlags_4maskySo0aE0V_AGtF', 
                        '_$sSo11AGAttributea14AttributeGraphE9_bodyTypeypXpvg', '_$sSo11AGAttributea14AttributeGraphE9_bodyTypeypXpvpMV', 
@@ -348,6 +354,9 @@ exports:
                        '_$sSo15AGWeakAttributea0B5GraphEyAbC04WeakB0VyxGclufC', '_$sSo15AGWeakAttributeaSH0B5GraphMc', 
                        '_$sSo15AGWeakAttributeaSQ0B5GraphMc', '_$sSo15AGWeakAttributeas23CustomStringConvertible0B5GraphMc', 
                        '_$sSo19AGComparisonOptionsV14AttributeGraphE4modeABSo0A4ModeV_tcfC', 
+                       '_$sSo20AGComparisonPrioritya14AttributeGraphE3lowABvpZMV', 
+                       '_$sSo20AGComparisonPrioritya14AttributeGraphE4highABvpZMV', 
+                       '_$sSo20AGComparisonPrioritya14AttributeGraphE7defaultABvpZMV', 
                        '_$sSo20AGUnsafeMutableTuplea14AttributeGraphE10deallocate11initializedySb_tF', 
                        '_$sSo20AGUnsafeMutableTuplea14AttributeGraphE10initialize2at2toySi_xtlF', 
                        '_$sSo20AGUnsafeMutableTuplea14AttributeGraphE12deinitialize2atySi_tF', 

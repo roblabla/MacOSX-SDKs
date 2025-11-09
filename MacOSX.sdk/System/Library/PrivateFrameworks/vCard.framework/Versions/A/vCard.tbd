@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard'
-current-version: 3770.255.1
+current-version: 3770.255.41
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -152,11 +152,6 @@ exports:
     objc-ivars:      [ CNVCard30PHOTOHelper._maxBytes, CNVCard30PHOTOHelper._options, 
                        CNVCard30PHOTOHelper._person, CNVCardActivityAlertScanner._position, 
                        CNVCardActivityAlertScanner._string, CNVCardDataStorage._data, 
-                       CNVCardDateComponentsFormatter._compactYearMonthDayDateFormatter, 
-                       CNVCardDateComponentsFormatter._compactYearMonthDayDateHourMinuteSecondZFormatter, 
-                       CNVCardDateComponentsFormatter._gregorianCalendar, CNVCardDateComponentsFormatter._monthDayDateFormatter, 
-                       CNVCardDateComponentsFormatter._yearMonthDayDateFormatter, 
-                       CNVCardDateComponentsFormatter._yearMonthDayDateHourMinuteSecondZFormatter, 
                        CNVCardDateComponentsParser._formatter, CNVCardDateComponentsParser._gregorianCalendar, 
                        CNVCardDateScanner._position, CNVCardDateScanner._string, 
                        CNVCardEncoding._name, CNVCardEncoding._stringEncoding, CNVCardImage._cropRects, 

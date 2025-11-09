@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIKitServices.framework/Versions/A/UIKitServices'
-current-version: 8220.1.255
+current-version: 8444.1.255
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -15,11 +15,12 @@ exports:
                        _UISCreateImageFromDrawing, _UISDeviceContextDeviceClassKey, 
                        _UISDeviceContextDeviceCornerRadiusKey, _UISDeviceContextDeviceIdiomKey, 
                        _UISDeviceContextHomeButtonTypeKey, _UISDidCreateWindowForSceneNotification, 
-                       _UISFontWeightForIndex, _UISGetColorSRGBComponents, _UISGetFontContentSizeCategory, 
-                       _UISIndexForFontWeight, _UISIsColorInDisplayP3Gamut, _UISLocalizedStringForSecureName, 
-                       _UISMainHostWindowDidBecomeKeyNotification, _UISMainHostWindowDidChangeNotification, 
-                       _UISMainHostWindowDidResignKeyNotification, _UISOpenApplicationOptionAppBasedViewService, 
-                       _UISOpenApplicationOptionClickAttribution, _UISOpenApplicationOptionKeySceneSessionPersistentIdentifier, 
+                       _UISFontWeightForIndex, _UISGetColorSRGBComponents, _UISGetCurrentTextStylePlatform, 
+                       _UISGetFontContentSizeCategory, _UISIndexForFontWeight, _UISIsColorInDisplayP3Gamut, 
+                       _UISLocalizedStringForSecureName, _UISMainHostWindowDidBecomeKeyNotification, 
+                       _UISMainHostWindowDidChangeNotification, _UISMainHostWindowDidResignKeyNotification, 
+                       _UISOpenApplicationOptionAppBasedViewService, _UISOpenApplicationOptionClickAttribution, 
+                       _UISOpenApplicationOptionKeySceneSessionPersistentIdentifier, 
                        _UISOpenApplicationOptionKeyTargetContentIdentifier, _UISOpenApplicationOptionPasteSharingToken, 
                        _UISSecureControlServiceInterface, _UISSecureControlServiceName, 
                        _UISSecureControlServiceSharedRemoteInterface, _UISServiceContextDidBecomeInsecureNotification, 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2023 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -409,7 +409,7 @@ __NKE_API_DEPRECATED;
  *               ENOMEM - Not enough memory available
  */
 extern errno_t mbuf_attachcluster(mbuf_how_t how, mbuf_type_t type,
-    mbuf_t *mbuf, caddr_t extbuf, void (*extfree)(caddr_t, u_int, caddr_t),
+    mbuf_t *mbuf, caddr_t extbuf __sized_by_or_null(extsize), void (*extfree)(caddr_t, u_int, caddr_t),
     size_t extsize, caddr_t extarg)
 __NKE_API_DEPRECATED;
 
@@ -436,7 +436,7 @@ __NKE_API_DEPRECATED;
  *               In this case, the caller is advised to use 4096 bytes or
  *               smaller during subseqent requests.
  */
-extern errno_t mbuf_alloccluster(mbuf_how_t how, size_t *size, caddr_t *addr)
+extern errno_t mbuf_alloccluster(mbuf_how_t how, size_t *size, char * __sized_by_or_null(*size) * addr)
 __NKE_API_DEPRECATED;
 
 /*!
@@ -801,7 +801,7 @@ __NKE_API_DEPRECATED;
  *       @result 0 upon success otherwise the errno error.
  */
 extern errno_t mbuf_copydata(const mbuf_t mbuf, size_t offset, size_t length,
-    void *out_data)
+    void *out_data __sized_by_or_null(length))
 __NKE_API_DEPRECATED;
 
 /*!
@@ -827,7 +827,7 @@ __NKE_API_DEPRECATED;
  *       @result 0 upon success, EINVAL or ENOBUFS upon failure.
  */
 extern errno_t mbuf_copyback(mbuf_t mbuf, size_t offset, size_t length,
-    const void *data, mbuf_how_t how)
+    const void *data __sized_by_or_null(length), mbuf_how_t how)
 __NKE_API_DEPRECATED;
 
 /*!
@@ -1158,17 +1158,19 @@ __NKE_API_DEPRECATED;
 
 /*!
  *       @function mbuf_get_tso_requested
- *       @discussion This function is used by the driver to determine which
- *               checksum operations should be performed in hardware.
+ *       @discussion This function is used by the driver to determine
+ *               whether TSO should be performed.
  *       @param mbuf The mbuf containing the packet.
- *       @param request Flags indicating which values are being requested
+ *       @param request Flags indicating which TSO offload is requested
  *               for this packet.
- *       @param value The requested value.
+ *       @param mss The returned MSS.
  *       @result 0 upon success otherwise the errno error.
  */
 extern errno_t mbuf_get_tso_requested(mbuf_t mbuf,
-    mbuf_tso_request_flags_t *request, u_int32_t *value)
+    mbuf_tso_request_flags_t *request, u_int32_t *mss)
 __NKE_API_DEPRECATED;
+
+
 
 /*!
  *       @function mbuf_clear_csum_requested

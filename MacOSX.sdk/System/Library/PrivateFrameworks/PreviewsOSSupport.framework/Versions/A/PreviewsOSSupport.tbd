@@ -3,19 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsOSSupport.framework/Versions/A/PreviewsOSSupport'
-current-version: 22.20.7
+current-version: 22.30.25
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation3URLV17PreviewsOSSupportE016rootRelativeFileB012relativePath11isDirectoryACSS_SbtFZ', 
                        '_$s17BSEndpointContext17PreviewsOSSupport24ShellConnectionInterfacePTl', 
-                       '_$s17PreviewsOSSupport10ClientRoleV11descriptionSSvgZ', '_$s17PreviewsOSSupport10ClientRoleV16handleActivationyySo26BSServiceConnectionContext_So0gH0CXcF', 
+                       '_$s17PreviewsOSSupport10ClientRoleV11descriptionSSvgZ', '_$s17PreviewsOSSupport10ClientRoleV11descriptionSSvpZMV', 
+                       '_$s17PreviewsOSSupport10ClientRoleV16handleActivationyySo26BSServiceConnectionContext_So0gH0CXcF', 
                        '_$s17PreviewsOSSupport10ClientRoleV18handleInvalidationyyF', 
                        '_$s17PreviewsOSSupport10ClientRoleVAA015ShellConnectionD0AAMc', 
                        '_$s17PreviewsOSSupport10ClientRoleVAA015ShellConnectionD0AAWP', 
                        '_$s17PreviewsOSSupport10ClientRoleVMa', '_$s17PreviewsOSSupport10ClientRoleVMn', 
                        '_$s17PreviewsOSSupport10ClientRoleVN', '_$s17PreviewsOSSupport10ServerRoleV11descriptionSSvgZ', 
+                       '_$s17PreviewsOSSupport10ServerRoleV11descriptionSSvpZMV', 
                        '_$s17PreviewsOSSupport10ServerRoleV13clientContext0A12FoundationOS12PropertyListVvg', 
                        '_$s17PreviewsOSSupport10ServerRoleV13clientContext0A12FoundationOS12PropertyListVvpMV', 
                        '_$s17PreviewsOSSupport10ServerRoleV16clientAuditTokenSo07BSAuditG0Cvg', 
@@ -81,9 +83,9 @@ exports:
                        '_$s17PreviewsOSSupport13JITSetupReplyV17propertyListValue0A12FoundationOS08PropertyF0Vvg', 
                        '_$s17PreviewsOSSupport13JITSetupReplyV17propertyListValue0A12FoundationOS08PropertyF0VvpMV', 
                        '_$s17PreviewsOSSupport13JITSetupReplyV17propertyListValueAC0A12FoundationOS08PropertyF0V_tKcfC', 
-                       '_$s17PreviewsOSSupport13JITSetupReplyV5emptyACvgZ', '_$s17PreviewsOSSupport13JITSetupReplyVMa', 
-                       '_$s17PreviewsOSSupport13JITSetupReplyVMn', '_$s17PreviewsOSSupport13JITSetupReplyVN', 
-                       '_$s17PreviewsOSSupport15JITSetupPayloadV0A12FoundationOS25PropertyListRepresentableAAMc', 
+                       '_$s17PreviewsOSSupport13JITSetupReplyV5emptyACvgZ', '_$s17PreviewsOSSupport13JITSetupReplyV5emptyACvpZMV', 
+                       '_$s17PreviewsOSSupport13JITSetupReplyVMa', '_$s17PreviewsOSSupport13JITSetupReplyVMn', 
+                       '_$s17PreviewsOSSupport13JITSetupReplyVN', '_$s17PreviewsOSSupport15JITSetupPayloadV0A12FoundationOS25PropertyListRepresentableAAMc', 
                        '_$s17PreviewsOSSupport15JITSetupPayloadV0A12FoundationOS27StructuredStringConvertibleAAMc', 
                        '_$s17PreviewsOSSupport15JITSetupPayloadV17propertyListValue0A12FoundationOS08PropertyF0Vvg', 
                        '_$s17PreviewsOSSupport15JITSetupPayloadV17propertyListValue0A12FoundationOS08PropertyF0VvpMV', 
@@ -179,6 +181,7 @@ exports:
                        '_$s17PreviewsOSSupport18TransactionManagerC16debugDescriptionSSvg', 
                        '_$s17PreviewsOSSupport18TransactionManagerC16debugDescriptionSSvpMV', 
                        '_$s17PreviewsOSSupport18TransactionManagerC6sharedACvgZ', 
+                       '_$s17PreviewsOSSupport18TransactionManagerC6sharedACvpZMV', 
                        '_$s17PreviewsOSSupport18TransactionManagerCMa', '_$s17PreviewsOSSupport18TransactionManagerCMm', 
                        '_$s17PreviewsOSSupport18TransactionManagerCMn', '_$s17PreviewsOSSupport18TransactionManagerCMo', 
                        '_$s17PreviewsOSSupport18TransactionManagerCMu', '_$s17PreviewsOSSupport18TransactionManagerCN', 
@@ -187,6 +190,7 @@ exports:
                        '_$s17PreviewsOSSupport19CrashReportListenerC04nextcD03for7timeout0A12FoundationOS6FutureCyAG0cD0VG0a9MessagingJ017ProcessIdentifierO_SdtF', 
                        '_$s17PreviewsOSSupport19CrashReportListenerC22startListeningIfNeededyyF', 
                        '_$s17PreviewsOSSupport19CrashReportListenerC7defaultACvgZ', 
+                       '_$s17PreviewsOSSupport19CrashReportListenerC7defaultACvpZMV', 
                        '_$s17PreviewsOSSupport19CrashReportListenerCACycfC', '_$s17PreviewsOSSupport19CrashReportListenerCACycfc', 
                        '_$s17PreviewsOSSupport19CrashReportListenerCMa', '_$s17PreviewsOSSupport19CrashReportListenerCMn', 
                        '_$s17PreviewsOSSupport19CrashReportListenerCMo', '_$s17PreviewsOSSupport19CrashReportListenerCMu', 
@@ -249,6 +253,7 @@ exports:
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerC010takeActivecD03for0A12FoundationOS17CancellationTokenVs5Int32V_tF', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerC022takeSubordinateProcessD03forys5Int32V_tF', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerC6sharedACvgZ', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerC6sharedACvpZMV', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerCMa', '_$s17PreviewsOSSupport23PreviewAssertionManagerCMm', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerCMn', '_$s17PreviewsOSSupport23PreviewAssertionManagerCMo', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerCMu', '_$s17PreviewsOSSupport23PreviewAssertionManagerCN', 

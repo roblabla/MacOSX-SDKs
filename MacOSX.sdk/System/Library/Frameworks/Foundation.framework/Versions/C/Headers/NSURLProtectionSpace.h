@@ -30,7 +30,7 @@ FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPS API_AVAILABLE(macos
    @const NSURLProtectionSpaceFTP
    @abstract The protocol for FTP
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP API_DEPRECATED("FTP is deprecated and only supported in the classic loading mode", macos(10.5,15.4), ios(2.0,18.4), watchos(2.0,11.4), tvos(9.0,18.4), visionos(1.0,2.4));
 
 /*!
     @const NSURLProtectionSpaceHTTPProxy
@@ -48,7 +48,7 @@ FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPSProxy API_AVAILABLE(
     @const NSURLProtectionSpaceFTPProxy
     @abstract The proxy type for ftp proxies
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTPProxy API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTPProxy API_DEPRECATED("FTP is deprecated and only supported in the classic loading mode", macos(10.2,15.4), ios(2.0,18.4), watchos(2.0,11.4), tvos(9.0,18.4), visionos(1.0,2.4));
 
 /*!
     @const NSURLProtectionSpaceSOCKSProxy

@@ -167,7 +167,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) API_UNAVAILABLE(tvos)
 /// @li          LAErrorSystemCancel if some system event interrupted the evaluation (e.g. Home button pressed).
 - (void)evaluatePolicy:(LAPolicy)policy
        localizedReason:(NSString *)localizedReason
-                 reply:(void(^)(BOOL success, NSError * __nullable error))reply
+                 reply:(void(NS_SWIFT_SENDABLE ^)(BOOL success, NSError * __nullable error))reply
     NS_SWIFT_ASYNC_THROWS_ON_FALSE(0)
     API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) API_UNAVAILABLE(tvos);
 
@@ -294,7 +294,7 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 - (void)evaluateAccessControl:(SecAccessControlRef)accessControl
                     operation:(LAAccessControlOperation)operation
               localizedReason:(NSString *)localizedReason
-                        reply:(void(^)(BOOL success, NSError * __nullable error))reply
+                        reply:(void(NS_SWIFT_SENDABLE ^)(BOOL success, NSError * __nullable error))reply
                         NS_SWIFT_ASYNC_THROWS_ON_FALSE(0)
                         API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0)) API_UNAVAILABLE(tvos);
 

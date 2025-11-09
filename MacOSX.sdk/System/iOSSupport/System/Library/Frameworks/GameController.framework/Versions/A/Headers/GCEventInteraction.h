@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, GCUIEventTypes) {
     GCUIEventTypeNone           = (0U),
     GCUIEventTypeGamepad        = (1U << 0),
-};
+} API_AVAILABLE(macCatalyst(18.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos);
 
 /**
  *  An interaction that indicates your views's intent to receive game controller

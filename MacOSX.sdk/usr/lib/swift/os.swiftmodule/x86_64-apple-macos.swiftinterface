@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1062.0.2 -module-name os
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -target-variant x86_64-apple-ios18.4-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1062.100.1 -module-name os
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Swift
 import _Concurrency
 import _StringProcessing
@@ -1225,9 +1226,9 @@ extension os.OSLogIntegerFormatting {
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension os_workgroup.WorkGroup {
   @available(macOS 11.0, *)
-  public func copyPort() -> _mach_port_t.mach_port_t
+  public func copyPort() -> mach.mach_port_t
   @available(macOS 11.0, *)
-  convenience public init?(port: _mach_port_t.mach_port_t, name: Swift.String? = nil)
+  convenience public init?(port: mach.mach_port_t, name: Swift.String? = nil)
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public func copy(name: Swift.String? = nil) -> os_workgroup.WorkGroup?
   public struct JoinToken {
@@ -1443,7 +1444,7 @@ internal enum OSSignpostError {
   }
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-public class OSSignpostIntervalState : Swift.Codable {
+public class OSSignpostIntervalState : Swift.Codable, @unchecked Swift.Sendable {
   @usableFromInline
   final internal let signpostID: os.OSSignpostID
   @usableFromInline

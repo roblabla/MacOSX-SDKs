@@ -6,10 +6,16 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s15SafetyMonitorUI11PayloadKeysO015recipientHandleD3KeySSvgZ', 
+                       '_$s15SafetyMonitorUI11PayloadKeysO015recipientHandleD3KeySSvpZMV', 
                        '_$s15SafetyMonitorUI11PayloadKeysO019workoutActivityTypeD3KeySSvgZ', 
+                       '_$s15SafetyMonitorUI11PayloadKeysO019workoutActivityTypeD3KeySSvpZMV', 
                        '_$s15SafetyMonitorUI11PayloadKeysO027workoutActivityTypeIsIndoorD3KeySSvgZ', 
-                       '_$s15SafetyMonitorUI11PayloadKeysO04dataD3KeySSvgZ', '_$s15SafetyMonitorUI11PayloadKeysO17groupIDPayloadKeySSvgZ', 
+                       '_$s15SafetyMonitorUI11PayloadKeysO027workoutActivityTypeIsIndoorD3KeySSvpZMV', 
+                       '_$s15SafetyMonitorUI11PayloadKeysO04dataD3KeySSvgZ', '_$s15SafetyMonitorUI11PayloadKeysO04dataD3KeySSvpZMV', 
+                       '_$s15SafetyMonitorUI11PayloadKeysO17groupIDPayloadKeySSvgZ', 
+                       '_$s15SafetyMonitorUI11PayloadKeysO17groupIDPayloadKeySSvpZMV', 
                        '_$s15SafetyMonitorUI11PayloadKeysO24sessionStartEntryTypeKeySSvgZ', 
+                       '_$s15SafetyMonitorUI11PayloadKeysO24sessionStartEntryTypeKeySSvpZMV', 
                        '_$s15SafetyMonitorUI11PayloadKeysOMa', '_$s15SafetyMonitorUI11PayloadKeysOMn', 
                        '_$s15SafetyMonitorUI11PayloadKeysON', '_$s15SafetyMonitorUI12GeofenceSizeO2eeoiySbAC_ACtFZ', 
                        '_$s15SafetyMonitorUI12GeofenceSizeO4hash4intoys6HasherVz_tF', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ManagedSettingsSupport.framework/Versions/A/ManagedSettingsSupport'
-current-version: 242.2.2
+current-version: 242.4.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -52,7 +52,9 @@ exports:
                        '_$s22ManagedSettingsSupport13KeyRetrievingTL', '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverV04teamE04fromSSSo13audit_token_taSg_tKFZ', 
                        '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverV04teamE21FromCurrentConnectionSSyKFZ', 
                        '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverV08internaldE0SSvgZ', 
+                       '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverV08internaldE0SSvpZMV', 
                        '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverV09simulatordE0SSvgZ', 
+                       '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverV09simulatordE0SSvpZMV', 
                        '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverVAA0dE10RetrievingAAMc', 
                        '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverVAA0dE10RetrievingAAWP', 
                        '_$s22ManagedSettingsSupport23TeamIdentifierRetrieverVMa', 

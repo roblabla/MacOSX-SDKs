@@ -2,13 +2,16 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 620.1.16
+current-version: 621.1.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V10standaloneAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V10standaloneAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V6sharedAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V6sharedAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V9ephemeralAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V9ephemeralAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0VMa', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0VMn', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0VN', 
@@ -32,14 +35,20 @@ exports:
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV4bodyQrvpMV', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV4bodyQrvpQOMQ', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV04signF0AEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV04signF0AEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV6signUpAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV6signUpAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV8continueAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV8continueAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelVMa', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelVMn', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelVN', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV12whiteOutlineAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV12whiteOutlineAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV5blackAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV5blackAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV5whiteAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV5whiteAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleVMa', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleVMn', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleVN', 

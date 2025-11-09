@@ -52,6 +52,7 @@ exports:
                        _CMIOExtensionPropertyStreamSinkEndOfData, _CMIOExtensionPropertyStreamStartPanningAtPoint, 
                        _CMIOExtensionPropertyStreamStudioLightingActive, _CMIOExtensionPropertyStreamStudioLightingEnabled, 
                        _CMIOExtensionPropertyStreamStudioLightingIntensity, _CMIOExtensionPropertyStreamSuppressVideoEffects, 
+                       _CMIOExtensionPropertyStreamSuppressedGesture, _CMIOExtensionPropertyStreamSuppressedGesturesEnabled, 
                        _CMIOExtensionPropertyStreamZoom, _CMIOExtensionPropertyStreamZoomFactorConstantsByManualFramingDeviceType, 
                        _CMIOExtensionPropertyStreamZoomUsingRamp, _CMIOFileWritingControlTokenAllVolumesAreOutOfDiskSpace, 
                        _CMIOFileWritingControlTokenBufferIsIncompatibleWithCurrentFile, 

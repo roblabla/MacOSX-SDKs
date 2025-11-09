@@ -112,7 +112,7 @@ kern_return_t receive_nspace_resolve_path
 	uint32_t pid,
 	uint32_t op,
 	nspace_path_t path,
-	int *xxx_rdar44371223
+	int *resolve_error
 );
 
 /* Routine vfs_resolve_file */
@@ -415,7 +415,7 @@ union __RequestUnion__receive_vfs_nspace_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-		int xxx_rdar44371223;
+		int resolve_error;
 	} __Reply__nspace_resolve_path_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)

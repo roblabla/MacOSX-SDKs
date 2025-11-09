@@ -2,11 +2,9 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCompute.framework/Versions/A/IntelligencePlatformCompute'
-current-version: 165.7
+current-version: 166.17.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos ]
-    symbols:         [ '__swift_FORCE_LOAD_$_swiftFoundation.23' ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerC0aB4Core0e16UpdateGenerationF0AAMc', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerC11fullRebuild8viewName8requestsSaySo26GDViewUpdateSourceResponseCGSS_SaySo0lmN7RequestCGtYaKF', 
@@ -70,6 +68,4 @@ exports:
                        _kGDCComputeServiceName ]
     objc-classes:    [ GDCComputeService, GDComputeOrchestration, GDComputeOrchestrationInner, 
                        GDNullEventReporter ]
-  - targets:         [ arm64-macos, arm64e-macos ]
-    symbols:         [ '__swift_FORCE_LOAD_$_swiftFoundation.57' ]
 ...

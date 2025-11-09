@@ -136,6 +136,7 @@ extern struct vnodeop_desc vnop_offtoblk_desc;
 extern struct vnodeop_desc vnop_blockmap_desc;
 extern struct vnodeop_desc vnop_strategy_desc;
 extern struct vnodeop_desc vnop_bwrite_desc;
+extern struct vnodeop_desc vnop_monitor_desc;
 
 #ifdef __APPLE_API_UNSTABLE
 
@@ -1361,8 +1362,41 @@ struct vnop_kqfilt_remove_args {
 extern struct vnodeop_desc vnop_kqfilt_remove_desc;
 
 
+#define VNODE_MONITOR_BEGIN     0x01
+#define VNODE_MONITOR_END       0x02
+#define VNODE_MONITOR_UPDATE    0x04
 
+struct vnop_monitor_args {
+	struct vnodeop_desc *a_desc;
+	vnode_t a_vp;
+	uint32_t a_events;
+	uint32_t a_flags;
+	void *a_handle;
+	vfs_context_t a_context;
+};
 
+/*!
+ *  @function VNOP_MONITOR
+ *  @abstract Indicate to a filesystem that the number of watchers of a file has changed.
+ *  @param vp The vnode whose watch state has changed.
+ *  @param events Unused.  Filesystems can ignore this parameter.
+ *  @param flags Type of change to the watch state.  VNODE_MONITOR_BEGIN is passed when the kernel
+ *  begins tracking a new watcher of a file.  VNODE_MONITOR_END is passed when a watcher stops watching a file.
+ *  VNODE_MONITOR_UPDATE is currently unused.  A filesystem is guaranteed that each VNODE_MONITOR_BEGIN
+ *  will be matched by a VNODE_MONITOR_END with the same "handle" argument.
+ *  @param handle Unique identifier for a given watcher. A VNODE_MONITOR_BEGIN for a given handle will be matched with a
+ *  VNODE_MONITOR_END for the same handle; a filesystem need not consider this parameter unless
+ *  it for some reason wants be able to match specific VNOP_MONITOR calls rather than just keeping
+ *  a count.
+ *  @param ctx The context which is starting to monitor a file or ending a watch on a file.  A matching
+ *  pair of VNODE_MONITOR_BEGIN and VNODE_MONITOR_END need not have the same context.
+ *  @discussion VNOP_MONITOR() is intended to let networked filesystems know when they should bother
+ *  listening for changes to files which occur remotely, so that they can post notifications using
+ *  vnode_notify().  Local filesystems should not implement a monitor vnop.
+ *  It is called when there is a new watcher for a file or when a watcher for a file goes away.
+ *  Each BEGIN will be matched with an END with the same handle.  Note that vnode_ismonitored() can
+ *  be used to see if there are currently watchers for a file.
+ */
 
 struct label;
 struct vnop_setlabel_args {

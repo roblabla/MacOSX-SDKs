@@ -1,7 +1,9 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -user-module-version 55.300.181 -module-name LiveCommunicationKit
+// swift-compiler-version: Apple Swift version 6.1 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 55.500.181.1.1 -module-name LiveCommunicationKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import AVFoundation
+import ExtensionFoundation
 import Foundation
 import Swift
 import _Concurrency
@@ -149,9 +151,9 @@ extension LiveCommunicationKit.Conversation {
     case conversationStartedConnecting(Foundation.Date)
     case conversationConnected(Foundation.Date)
     case conversationEnded(Foundation.Date, LiveCommunicationKit.Conversation.EndedReason)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: LiveCommunicationKit.Conversation.Event, b: LiveCommunicationKit.Conversation.Event) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -180,9 +182,9 @@ extension LiveCommunicationKit.Conversation {
     public var activeRemoteMembers: Swift.Set<LiveCommunicationKit.Handle>?
     public var capabilities: LiveCommunicationKit.Conversation.Capabilities?
     public init(localMember: LiveCommunicationKit.Handle? = nil, members: Swift.Set<LiveCommunicationKit.Handle>? = nil, activeRemoteMembers: Swift.Set<LiveCommunicationKit.Handle>? = nil, capabilities: LiveCommunicationKit.Conversation.Capabilities? = nil)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: LiveCommunicationKit.Conversation.Update, b: LiveCommunicationKit.Conversation.Update) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -272,9 +274,9 @@ extension LiveCommunicationKit.ConversationAction {
     case running
     case complete
     case failed(reason: Swift.String)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: LiveCommunicationKit.ConversationAction.State, b: LiveCommunicationKit.ConversationAction.State) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -300,9 +302,9 @@ public struct Handle : Swift.Sendable, Swift.Codable, Swift.Hashable {
   public var value: Swift.String
   public var displayName: Swift.String
   public init(type: LiveCommunicationKit.Handle.Kind, value: Swift.String, displayName: Swift.String? = nil)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: LiveCommunicationKit.Handle, b: LiveCommunicationKit.Handle) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

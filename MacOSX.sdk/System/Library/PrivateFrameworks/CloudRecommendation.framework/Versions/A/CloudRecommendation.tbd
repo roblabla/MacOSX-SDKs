@@ -8,6 +8,7 @@ exports:
     symbols:         [ '_$s19CloudRecommendation20RecommendationsErrorO011clientFetchD0yA2CmFWC', 
                        '_$s19CloudRecommendation20RecommendationsErrorO10Foundation13CustomNSErrorAAMc', 
                        '_$s19CloudRecommendation20RecommendationsErrorO11errorDomainSSvgZ', 
+                       '_$s19CloudRecommendation20RecommendationsErrorO11errorDomainSSvpZMV', 
                        '_$s19CloudRecommendation20RecommendationsErrorO13errorUserInfoSDySSypGvg', 
                        '_$s19CloudRecommendation20RecommendationsErrorO13errorUserInfoSDySSypGvpMV', 
                        '_$s19CloudRecommendation20RecommendationsErrorO14invalidAccountyA2CmFWC', 

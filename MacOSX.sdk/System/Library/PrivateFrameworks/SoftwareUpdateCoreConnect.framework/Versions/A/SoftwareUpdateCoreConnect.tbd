@@ -6,7 +6,7 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kSUCoreConnectClientIDTypeAny, _kSUCoreConnectMonitorReplyErrorKey, 
                        _kSUCoreConnectMonitorReplyMessageKey ]
-    objc-classes:    [ SUCoreConnectClient, SUCoreConnectClientPolicy, SUCoreConnectClientProxy, 
-                       SUCoreConnectConstants, SUCoreConnectMessage, SUCoreConnectServer, 
-                       SUCoreConnectServerPolicy, SUCoreConnectVersion ]
+    objc-classes:    [ SUCoreConnectBoost, SUCoreConnectClient, SUCoreConnectClientPolicy, 
+                       SUCoreConnectClientProxy, SUCoreConnectConstants, SUCoreConnectMessage, 
+                       SUCoreConnectServer, SUCoreConnectServerPolicy, SUCoreConnectVersion ]
 ...

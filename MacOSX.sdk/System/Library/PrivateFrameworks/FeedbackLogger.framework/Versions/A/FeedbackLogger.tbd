@@ -14,6 +14,7 @@ exports:
                        '_$s14FeedbackLogger32Com_Apple_Ve_Common_BuildVariantO4seedyA2CmFWC', 
                        '_$s14FeedbackLogger32Com_Apple_Ve_Common_BuildVariantO5carryyA2CmFWC', 
                        '_$s14FeedbackLogger32Com_Apple_Ve_Common_BuildVariantO8allCasesSayACGvgZ', 
+                       '_$s14FeedbackLogger32Com_Apple_Ve_Common_BuildVariantO8allCasesSayACGvpZMV', 
                        '_$s14FeedbackLogger32Com_Apple_Ve_Common_BuildVariantO8rawValueACSgSi_tcfC', 
                        '_$s14FeedbackLogger32Com_Apple_Ve_Common_BuildVariantO8rawValueSivg', 
                        '_$s14FeedbackLogger32Com_Apple_Ve_Common_BuildVariantO8rawValueSivpMV', 
@@ -60,8 +61,8 @@ exports:
                        _FLIgnoreQuotaFilename, _FLMachServiceName, _FLSignpostLoggingInit, 
                        _FLUploadHeadersKey, _FLUploadImmediately, _FL_LOG_SIGNPOSTS, 
                        _FeedbackLoggerVersionNumber, _FeedbackLoggerVersionString, 
-                       _flLogForObject, _kMaxBatchContinuesDuration, _tryGetDataProperty, 
-                       _tryGetDateProperty, _tryGetTextProperty ]
+                       _flAnnotatedLogForObject, _flLogForObject, _kMaxBatchContinuesDuration, 
+                       _tryGetDataProperty, _tryGetDateProperty, _tryGetTextProperty ]
     objc-classes:    [ BatchMetadata, FLAutoBugCapture, FLAutoBugHelper, FLContainerStorePathManager, 
                        FLDPGBatch, FLDPGBatchFactory, FLLogger, FLLoggingContext, 
                        FLSQLiteDatabaseConnection, FLSQLitePersistence, FLWriteTransaction, 

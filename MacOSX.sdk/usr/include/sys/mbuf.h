@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -208,6 +208,7 @@ typedef struct mb_class_stat {
 #define MCS_ONLINE      1       /* cache is online */
 #define MCS_PURGING     2       /* cache is being purged */
 #define MCS_OFFLINE     3       /* cache is offline (resizing) */
+
 
 
 typedef struct mb_stat {

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsInjection.framework/Versions/A/PreviewsInjection'
-current-version: 22.20.7
+current-version: 22.30.25
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -54,7 +54,8 @@ exports:
                        '_$s17PreviewsInjection10EntryPointTL', '_$s17PreviewsInjection13RenderEffectsV11descriptionSSvg', 
                        '_$s17PreviewsInjection13RenderEffectsV11descriptionSSvpMV', 
                        '_$s17PreviewsInjection13RenderEffectsV2eeoiySbAC_ACtFZ', 
-                       '_$s17PreviewsInjection13RenderEffectsV5emptyACvgZ', '_$s17PreviewsInjection13RenderEffectsV7applied2to7SwiftUI4View_px_tAfGRzlF', 
+                       '_$s17PreviewsInjection13RenderEffectsV5emptyACvgZ', '_$s17PreviewsInjection13RenderEffectsV5emptyACvpZMV', 
+                       '_$s17PreviewsInjection13RenderEffectsV7applied2to7SwiftUI4View_px_tAfGRzlF', 
                        '_$s17PreviewsInjection13RenderEffectsVMa', '_$s17PreviewsInjection13RenderEffectsVMn', 
                        '_$s17PreviewsInjection13RenderEffectsVN', '_$s17PreviewsInjection13RenderEffectsVSQAAMc', 
                        '_$s17PreviewsInjection13RenderEffectsVs23CustomStringConvertibleAAMc', 
@@ -259,6 +260,7 @@ exports:
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryV0A8Services0dE0AAMc', 
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryV14makeExecutable21DeveloperToolsSupport01_C0VyKF', 
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryV20registryTypeRawValueSSvgZ', 
+                       '_$s17PreviewsInjection23PlaygroundRegistryEntryV20registryTypeRawValueSSvpZMV', 
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryV23scrapeRuntimeForEntriesSayACGyFZ', 
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryV4lineSivg', 
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryV4lineSivpMV', 
@@ -270,7 +272,8 @@ exports:
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryVN', '_$s17PreviewsInjection24SelectableRegionProviderMp', 
                        '_$s17PreviewsInjection24SelectableRegionProviderP22_forEachIdentifiedView4bodyyy7SwiftUI01_hI5ProxyVXE_tFTj', 
                        '_$s17PreviewsInjection24SelectableRegionProviderP22_forEachIdentifiedView4bodyyy7SwiftUI01_hI5ProxyVXE_tFTq', 
-                       '_$s17PreviewsInjection24SelectableRegionProviderTL', '_$s19PreviewsMessagingOS20PreviewSpecificationV0A9InjectionE06locateD0AD07LocatedD0OyKF', 
+                       '_$s17PreviewsInjection24SelectableRegionProviderTL', '_$s17PreviewsInjection52___abort_timed_out_waiting_for_previews_jit_executoryyF', 
+                       '_$s19PreviewsMessagingOS20PreviewSpecificationV0A9InjectionE06locateD0AD07LocatedD0OyKF', 
                        '_$s21DeveloperToolsSupport11_PlaygroundV16PreviewsServices18RegistryExecutable0E9InjectionMc', 
                        '_$s21DeveloperToolsSupport11_PlaygroundV17PreviewsInjectionE3runScSy0E11MessagingOS0D5EventOGyF', 
                        '_$s21DeveloperToolsSupport11_PlaygroundV17PreviewsInjectionE8metadata0E11MessagingOS0D8MetadataVvg', 
@@ -289,7 +292,8 @@ exports:
                        '_$s7SwiftUI19NSHostingControllerCyxG17PreviewsInjection16_HostingViewableAEMc', 
                        '_$s7SwiftUI19NSHostingControllerCyxG17PreviewsInjection16_HostingViewableAEWP', 
                        _PreviewsInjectionVersionNumber, _PreviewsInjectionVersionString, 
-                       _UVMakeAppActive, ___SERVICEHUB_ATTACH_POINT__, ___previews_injection_get_debug_dodylib_swift_entry_section_data, 
+                       _UVMakeAppActive, ___SERVICEHUB_ATTACH_POINT__, ____abort_timed_out_waiting_for_previews_jit_executor, 
+                       ___previews_injection_get_debug_dodylib_swift_entry_section_data, 
                        ___previews_injection_jit_link_entrypoint, ___previews_injection_perform_first_jit_link, 
                        ___previews_injection_register_swift_extension_entry_section, 
                        ___previews_injection_run_user_entrypoint ]

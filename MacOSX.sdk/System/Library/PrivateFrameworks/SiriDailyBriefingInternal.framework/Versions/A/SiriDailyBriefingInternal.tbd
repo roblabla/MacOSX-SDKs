@@ -12,6 +12,7 @@ exports:
     symbols:         [ '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreC20setLastInvocationFor7podcast2atySS_SdtFTj', 
                        '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreC20setLastInvocationFor7podcast2atySS_SdtFTq', 
                        '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreC8instanceACvgZ', 
+                       '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreC8instanceACvpZMV', 
                        '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreCMa', '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreCMm', 
                        '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreCMn', '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreCMo', 
                        '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreCMu', '_$s25SiriDailyBriefingInternal16DBKnowledgeStoreCN', 

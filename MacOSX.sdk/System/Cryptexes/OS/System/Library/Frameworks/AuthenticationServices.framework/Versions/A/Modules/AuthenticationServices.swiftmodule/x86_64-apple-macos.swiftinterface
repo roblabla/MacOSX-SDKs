@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 7620.1.16.11.8 -module-name AuthenticationServices
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7621.1.15.11.6 -module-name AuthenticationServices
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import AuthenticationServices
 import CryptoKit
 import DeveloperToolsSupport
@@ -11,6 +12,14 @@ import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 import os
+@available(macOS 15.4, *)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension AuthenticationServices.ASAuthorizationProviderExtensionLoginManager {
+  public func attestKey(ofType keyType: AuthenticationServices.ASAuthorizationProviderExtensionKeyType, clientDataHash: Foundation.Data) async throws -> [Security.SecCertificate]
+  public func attestPendingKey(ofType pendingKeyType: AuthenticationServices.ASAuthorizationProviderExtensionKeyType, clientDataHash: Foundation.Data) async throws -> [Security.SecCertificate]
+}
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -593,13 +602,13 @@ public struct ASExportedCredentialData : Swift.Codable, Swift.Identifiable, Swif
   public var accounts: [AuthenticationServices.ASImportableAccount]
   public let id: Foundation.UUID
   public init(accounts: [AuthenticationServices.ASImportableAccount])
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AuthenticationServices.ASExportedCredentialData, b: AuthenticationServices.ASExportedCredentialData) -> Swift.Bool
   @available(iOS 18.2, visionOS 2.2, macOS 15.2, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public typealias ID = Foundation.UUID
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -618,8 +627,8 @@ public struct ASImportableAccount : Swift.Codable, Swift.Hashable, Swift.Sendabl
   public init(id: Foundation.Data, userName: Swift.String, email: Swift.String, fullName: Swift.String? = nil, collections: [AuthenticationServices.ASImportableCollection], items: [AuthenticationServices.ASImportableItem])
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AuthenticationServices.ASImportableAccount, b: AuthenticationServices.ASImportableAccount) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -636,8 +645,8 @@ public struct ASImportableCollection : Swift.Codable, Swift.Hashable, Swift.Send
   public init(id: Foundation.Data, title: Swift.String, subtitle: Swift.String? = nil, items: [AuthenticationServices.ASImportableLinkedItem], subcollections: [AuthenticationServices.ASImportableCollection] = [])
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AuthenticationServices.ASImportableCollection, b: AuthenticationServices.ASImportableCollection) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -651,8 +660,8 @@ public struct ASImportableLinkedItem : Swift.Codable, Swift.Hashable, Swift.Send
   public init(item: Foundation.Data, account: Foundation.Data? = nil)
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AuthenticationServices.ASImportableLinkedItem, b: AuthenticationServices.ASImportableLinkedItem) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -685,8 +694,8 @@ public struct ASImportableItem : Swift.Codable, Swift.Hashable, Swift.Sendable {
   public init(id: Foundation.Data, created: Foundation.Date, lastModified: Foundation.Date, type: AuthenticationServices.ASImportableItem.ItemType, title: Swift.String, subtitle: Swift.String? = nil, credentials: [AuthenticationServices.ASImportableCredential], tags: [Swift.String] = [])
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AuthenticationServices.ASImportableItem, b: AuthenticationServices.ASImportableItem) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -718,8 +727,8 @@ public struct ASImportableEditableField : Swift.Codable, Swift.Hashable, Swift.S
   public init(id: Foundation.Data, fieldType: AuthenticationServices.ASImportableEditableField.FieldType, value: Swift.String, label: Swift.String? = nil)
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AuthenticationServices.ASImportableEditableField, b: AuthenticationServices.ASImportableEditableField) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -738,9 +747,9 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var username: AuthenticationServices.ASImportableEditableField?
     public var password: AuthenticationServices.ASImportableEditableField?
     public init(urls: [Swift.String], username: AuthenticationServices.ASImportableEditableField? = nil, password: AuthenticationServices.ASImportableEditableField? = nil)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: AuthenticationServices.ASImportableCredential.BasicAuthentication, b: AuthenticationServices.ASImportableCredential.BasicAuthentication) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -756,8 +765,8 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public init(credentialID: Foundation.Data, relyingPartyIdentifier: Swift.String, userName: Swift.String, userDisplayName: Swift.String, userHandle: Foundation.Data, key: Foundation.Data)
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: AuthenticationServices.ASImportableCredential.Passkey, b: AuthenticationServices.ASImportableCredential.Passkey) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -770,9 +779,9 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var expiryDate: Swift.String?
     public var validFrom: Swift.String?
     public init(number: Swift.String, fullName: Swift.String, cardType: Swift.String? = nil, verificationNumber: Swift.String? = nil, expiryDate: Swift.String? = nil, validFrom: Swift.String? = nil)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: AuthenticationServices.ASImportableCredential.CreditCard, b: AuthenticationServices.ASImportableCredential.CreditCard) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -801,8 +810,8 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public init(secret: Foundation.Data, period: Swift.UInt16, digits: Swift.UInt16, username: Swift.String, algorithm: AuthenticationServices.ASImportableCredential.TOTP.Algorithm, issuer: Swift.String? = nil)
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: AuthenticationServices.ASImportableCredential.TOTP, b: AuthenticationServices.ASImportableCredential.TOTP) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -810,9 +819,9 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
   public struct Note : Swift.Codable, Swift.Hashable, Swift.Sendable {
     public var content: Swift.String
     public init(content: Swift.String)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: AuthenticationServices.ASImportableCredential.Note, b: AuthenticationServices.ASImportableCredential.Note) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -820,8 +829,8 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
   }
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AuthenticationServices.ASImportableCredential, b: AuthenticationServices.ASImportableCredential) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

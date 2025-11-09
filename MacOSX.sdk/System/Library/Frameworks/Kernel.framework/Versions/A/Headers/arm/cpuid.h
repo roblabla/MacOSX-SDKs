@@ -241,7 +241,6 @@ typedef union {
 /* H16H Donan p-Core. */
 #define CPU_PART_PCORE_DONAN 0x53
 
-
 /* H16S Brava S e-Core. */
 #define CPU_PART_ECORE_BRAVA_S 0x54
 
@@ -253,7 +252,6 @@ typedef union {
 
 /* H16C Brava C p-Core. */
 #define CPU_PART_PCORE_BRAVA_C 0x59
-
 
 
 /* H17P Tahiti e-Core. */
@@ -284,6 +282,15 @@ typedef enum {
 	CACHE_UNKNOWN
 } cache_type_t;
 
+#if __ARM_VHE__
+/* Cache register raw values */
+typedef struct {
+	uint64_t clidr_el1;
+	uint64_t ccsidr_el1_inst[7];
+	uint64_t ccsidr_el1_data_or_unified[7];
+} cache_registers_t;
+#endif
+
 typedef struct {
 	boolean_t    c_valid;            /* has this cache info been populated? */
 	boolean_t    c_unified;          /* unified I & D cache? */
@@ -299,6 +306,10 @@ typedef struct {
 	uint32_t     c_l2size;           /* L2 size, if present */
 	uint32_t     c_bulksize_op;      /* bulk operation size limit. 0 if disabled */
 	uint32_t     c_inner_cache_size; /* inner dache size */
+
+#if __ARM_VHE__
+	cache_registers_t c_registers;   /* cache register raw values for hv_vcpu_capabilities */
+#endif
 } cache_info_t;
 
 typedef struct {

@@ -14,13 +14,13 @@
 @protocol GKAchievementViewControllerDelegate;
 
 /// View controller that provides the standard user interface for achievements. Present modally from the top view controller.
-API_DEPRECATED_WITH_REPLACEMENT("GKGameCenterViewController", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE
+API_DEPRECATED_WITH_REPLACEMENT("Use ``GKGameCenterViewController`` instead.", ios(4.1,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 @interface GKAchievementViewController : GKGameCenterViewController
 @property (weak, NS_NONATOMIC_IOSONLY) id<GKAchievementViewControllerDelegate> achievementDelegate;
 @end
 
 /// Optional delegate
-API_DEPRECATED_WITH_REPLACEMENT("GKGameCenterViewController", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE
+API_DEPRECATED_WITH_REPLACEMENT("Use ``GKGameCenterViewController`` instead.", ios(4.1,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 @protocol GKAchievementViewControllerDelegate <NSObject>
 @required
 /// The achievement view has finished

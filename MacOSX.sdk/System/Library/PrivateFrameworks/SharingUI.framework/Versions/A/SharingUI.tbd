@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SharingUI.framework/Versions/A/SharingUI'
-current-version: 2060.30.131
+current-version: 2060.50.171
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -44,10 +44,12 @@ exports:
                        '_$s9SharingUI18SFAirDropUtilitiesC20standardPreviewImage3for4sizeSo7NSImageCSay10Foundation3URLVG_So6CGSizeVtYaKFZ', 
                        '_$s9SharingUI18SFAirDropUtilitiesC20standardPreviewImage3for4sizeSo7NSImageCSay10Foundation3URLVG_So6CGSizeVtYaKFZTu', 
                        '_$s9SharingUI18SFAirDropUtilitiesC22defaultPreviewIconSizeSo6CGSizeVvgZ', 
+                       '_$s9SharingUI18SFAirDropUtilitiesC22defaultPreviewIconSizeSo6CGSizeVvpZMV', 
                        '_$s9SharingUI18SFAirDropUtilitiesC23generateWebPreviewImage3urlSo7NSImageCSg10Foundation3URLV_tYaFZ', 
                        '_$s9SharingUI18SFAirDropUtilitiesC23generateWebPreviewImage3urlSo7NSImageCSg10Foundation3URLV_tYaFZTu', 
                        '_$s9SharingUI18SFAirDropUtilitiesC23highestFidelityDataType3for012conformingToH5TypesSSSgSo14NSItemProviderC_SaySSGtFZ', 
                        '_$s9SharingUI18SFAirDropUtilitiesC23standardTypeIdentifiersSaySSGvgZ', 
+                       '_$s9SharingUI18SFAirDropUtilitiesC23standardTypeIdentifiersSaySSGvpZMV', 
                        '_$s9SharingUI18SFAirDropUtilitiesC8loadFile4from14dataTypesToTry14customDataType011acceptOtherG15Representations13ignoreStrings20generatePreviewImage10renameURLs22suggestedThumbnailSize8filename9sessionID9fileIndexAC0G10LoadResultVSo14NSItemProviderC_SaySSGSSSgS4bSo6CGSizeVAUSSSitYaKFZ', 
                        '_$s9SharingUI18SFAirDropUtilitiesC8loadFile4from14dataTypesToTry14customDataType011acceptOtherG15Representations13ignoreStrings20generatePreviewImage10renameURLs22suggestedThumbnailSize8filename9sessionID9fileIndexAC0G10LoadResultVSo14NSItemProviderC_SaySSGSSSgS4bSo6CGSizeVAUSSSitYaKFZTu', 
                        '_$s9SharingUI18SFAirDropUtilitiesC9imageData3for10Foundation0G0VSgSo7NSImageCSg_tFZ', 

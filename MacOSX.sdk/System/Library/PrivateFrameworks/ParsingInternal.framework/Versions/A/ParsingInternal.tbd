@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ParsingInternal.framework/Versions/A/ParsingInternal'
-current-version: 102
-compatibility-version: 102
+current-version: 103.1
+compatibility-version: 103.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -45,7 +45,8 @@ exports:
                        '_$s15ParsingInternal10ByteBufferV21currentParserPositionAA0fG0Vvg', 
                        '_$s15ParsingInternal10ByteBufferV21currentParserPositionAA0fG0VvpMV', 
                        '_$s15ParsingInternal10ByteBufferV2eeoiySbAC_ACtFZ', '_$s15ParsingInternal10ByteBufferV5countSivg', 
-                       '_$s15ParsingInternal10ByteBufferV5countSivpMV', '_$s15ParsingInternal10ByteBufferV6buffers5SliceVySays5UInt8VGGvM', 
+                       '_$s15ParsingInternal10ByteBufferV5countSivpMV', '_$s15ParsingInternal10ByteBufferV6bufferACSW_tcfC', 
+                       '_$s15ParsingInternal10ByteBufferV6buffers5SliceVySays5UInt8VGGvM', 
                        '_$s15ParsingInternal10ByteBufferV6buffers5SliceVySays5UInt8VGGvg', 
                        '_$s15ParsingInternal10ByteBufferV6buffers5SliceVySays5UInt8VGGvpMV', 
                        '_$s15ParsingInternal10ByteBufferV6buffers5SliceVySays5UInt8VGGvs', 
@@ -67,7 +68,8 @@ exports:
                        '_$s15ParsingInternal10ByteBufferVyACxcSlRzs5UInt8V7ElementRtzlufC', 
                        '_$s15ParsingInternal10EndiannessV11isBigEndianACSb_tcfC', 
                        '_$s15ParsingInternal10EndiannessV11isBigEndianSbvg', '_$s15ParsingInternal10EndiannessV11isBigEndianSbvpMV', 
-                       '_$s15ParsingInternal10EndiannessV3bigACvgZ', '_$s15ParsingInternal10EndiannessV6littleACvgZ', 
+                       '_$s15ParsingInternal10EndiannessV3bigACvgZ', '_$s15ParsingInternal10EndiannessV3bigACvpZMV', 
+                       '_$s15ParsingInternal10EndiannessV6littleACvgZ', '_$s15ParsingInternal10EndiannessV6littleACvpZMV', 
                        '_$s15ParsingInternal10EndiannessVMa', '_$s15ParsingInternal10EndiannessVMn', 
                        '_$s15ParsingInternal10EndiannessVN', '_$s15ParsingInternal10Flatten_10V4basexvM', 
                        '_$s15ParsingInternal10Flatten_10V4basexvg', '_$s15ParsingInternal10Flatten_10V4basexvpMV', 
@@ -1117,6 +1119,7 @@ exports:
                        '_$s6Output15ParsingInternal14ParserSequencePTl', '_$s6Output15ParsingInternal16ContextfulParserPTl', 
                        '_$s6Output15ParsingInternal19ParserSliceIteratorPTl', '_$s7Context15ParsingInternal14ParserSequencePTl', 
                        '_$s7Context15ParsingInternal16ContextfulParserPTl', '_$sSS15ParsingInternalE7parsersAA13StringParsersVvgZ', 
+                       '_$sSS15ParsingInternalE7parsersAA13StringParsersVvpZMV', 
                        '_$sSY15ParsingInternals17FixedWidthInteger8RawValueRpzrlE7parsersAA0F20RepresentableParsersVyxGvgZ', 
                        '_$sSi15ParsingInternal20PlatformWidthIntegerAAMc', '_$sSi15ParsingInternal20PlatformWidthIntegerAAWP', 
                        '_$sSu15ParsingInternal20PlatformWidthIntegerAAMc', '_$sSu15ParsingInternal20PlatformWidthIntegerAAWP', 

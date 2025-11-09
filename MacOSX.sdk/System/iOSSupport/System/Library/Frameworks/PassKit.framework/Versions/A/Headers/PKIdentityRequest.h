@@ -17,7 +17,7 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface PKIdentityRequest: NSObject
 
 /// A descriptor describing the identity document to request.
-@property (nonatomic, nullable) id<PKIdentityDocumentDescriptor> descriptor;
+@property (nonatomic, nullable, strong) id<PKIdentityDocumentDescriptor> descriptor;
 
 /// A caller-specified nonce that will be included in the signed response payload.
 /// This is treated as opaque by the PKIdentityAuthorizationController, and has a

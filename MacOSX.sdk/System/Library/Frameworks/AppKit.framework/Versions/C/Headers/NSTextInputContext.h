@@ -73,6 +73,12 @@ API_AVAILABLE(macos(10.6))
   This method should be called after -invalidateCharacterCoordinates. */
 - (void)textInputClientDidEndScrollingOrZooming API_AVAILABLE(macos(14.0));
 
+// Notify when the text view selection is changed.
+- (void)textInputClientDidUpdateSelection API_AVAILABLE(macos(15.4));
+
+// Notify when the text view scroll location is changed.
+- (void)textInputClientDidScroll API_AVAILABLE(macos(15.4));
+
 /**** Text Input sources handling ****/
 /* Text Input source handling API identifies text input sources with text input source identifier strings (i.e. "com.apple.inputmethod.Kotoeri.Japanese") supplied by the underlying TextInputSources framework. The ID corresponds to the kTISPropertyInputSourceID attribute.
  */

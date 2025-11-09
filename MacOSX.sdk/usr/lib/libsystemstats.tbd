@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libsystemstats.dylib'
-current-version: 498
+current-version: 498.100.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -26,7 +26,8 @@ exports:
                        _systemstats_microstackshot_checkpoint_async, _systemstats_persistence_is_allowed, 
                        _systemstats_stream_delete, _systemstats_stream_flush, _systemstats_stream_get_attr, 
                        _systemstats_unlink_if_present, _systemstats_write_and_dispose_record, 
-                       _systemstats_write_checkpoint, _systemstats_write_microstackshot ]
+                       _systemstats_write_checkpoint, _systemstats_write_microstackshot, 
+                       _systemstats_zipper_buffers_foreach_micro ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SystemStatsLogCoreDuetEventsAggregate, _SystemStatsReportDiscretionaryBudgetForDuet, 
                        _SystemStatsReportTotalDiscretionaryEnergyCoreDuet, __systemstats_init, 

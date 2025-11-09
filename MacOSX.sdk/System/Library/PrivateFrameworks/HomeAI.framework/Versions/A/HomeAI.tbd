@@ -82,7 +82,7 @@ exports:
                        _HMITaskTypeHomePersonClusteringTaskDoImpurePersonCleanupKey, 
                        _HMITaskTypeKey, _HMITaskTypePersonsModelsSummaryTask, _HMITaskTypeRemovePersonsModelTask, 
                        _HMITaskTypeUpdatePersonsModelTask, _HMITaskTypeUpdateTorsoModelTask, 
-                       _HMITimeString, _HMITorsoPersonsModelClassificationThresholdKnown, 
+                       _HMIThermalLevelDidChangeNotification, _HMITimeString, _HMITorsoPersonsModelClassificationThresholdKnown, 
                        _HMITranscodeFragmentPreference, _HMITransformBoundingBoxCoordinatesFromImageSpaceToRoISpace, 
                        _HMIURLForCacheDirectory, _HMIURLForDirectoryPathRelativeToCacheDirectory, 
                        _HMIUUIDShortDescription, _HMIUpdatePersonsModelTaskIsExternalKey, 

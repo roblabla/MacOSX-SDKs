@@ -16,5 +16,6 @@ exports:
                        _LPAPFSVolumeUnmountOptionForce, _LPAPFSVolumeUnmountOptionSnapshotName, 
                        _LPLogSetOutput, _LPLogSetVerbosity, __LPLogPack, _iterateSafely ]
     objc-classes:    [ LPAPFSContainer, LPAPFSPhysicalStore, LPAPFSVolume, LPMedia, 
-                       LPPartitionMedia ]
+                       LPPartitionMedia, LPStaticAPFSContainer, LPStaticAPFSPhysicalStore, 
+                       LPStaticAPFSVolume, LPStaticMedia, LPStaticPartitionMedia ]
 ...

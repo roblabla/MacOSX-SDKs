@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
-current-version: 2001.60.18
+current-version: 2022.100.26
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -44,7 +44,11 @@ exports:
                        _kUsageNetworkAwdlInBytes, _kUsageNetworkAwdlInBytes_mean, 
                        _kUsageNetworkAwdlInBytes_var, _kUsageNetworkAwdlOutBytes, 
                        _kUsageNetworkAwdlOutBytes_mean, _kUsageNetworkAwdlOutBytes_var, 
-                       _kUsageNetworkAwdlSampleCount, _kUsageNetworkCell, _kUsageNetworkCellExpensiveInBytes, 
+                       _kUsageNetworkAwdlSampleCount, _kUsageNetworkBt, _kUsageNetworkBtExpensiveInBytes, 
+                       _kUsageNetworkBtExpensiveOutBytes, _kUsageNetworkBtInBytes, 
+                       _kUsageNetworkBtInBytes_mean, _kUsageNetworkBtInBytes_var, 
+                       _kUsageNetworkBtOutBytes, _kUsageNetworkBtOutBytes_mean, _kUsageNetworkBtOutBytes_var, 
+                       _kUsageNetworkBtSampleCount, _kUsageNetworkCell, _kUsageNetworkCellExpensiveInBytes, 
                        _kUsageNetworkCellExpensiveOutBytes, _kUsageNetworkCellInBytes, 
                        _kUsageNetworkCellInBytes_mean, _kUsageNetworkCellInBytes_var, 
                        _kUsageNetworkCellOutBytes, _kUsageNetworkCellOutBytes_mean, 

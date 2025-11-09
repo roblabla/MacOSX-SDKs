@@ -9,7 +9,8 @@ exports:
     symbols:         [ _TVLibraryVersionNumber, _TVLibraryVersionString, _TVPlaybackEngineDidFinishPlaybackNotification, 
                        _TVPlaybackEngineDidReportPlaybackToUTSNotification, _TVPlaybackEngineDidStopPlaybackNotification, 
                        _TVPlaybackEngineVideoDidCrossPostPlayBoundaryNotification, 
-                       _TVPlaybackEngineWillStartPlaybackNotification ]
+                       _TVPlaybackEngineWillStartPlaybackNotification, _TVPlaybackPIPModeExitedNotification, 
+                       _TVPlaybackPlayheadPositionRangeChangedNotification ]
     objc-classes:    [ TVDownloadManagerProvider, TVLibraryActivityButtonController, 
                        TVLibraryInterfaceGlue, TVLibraryViewController, TVPlaybackEngineProvider ]
 ...

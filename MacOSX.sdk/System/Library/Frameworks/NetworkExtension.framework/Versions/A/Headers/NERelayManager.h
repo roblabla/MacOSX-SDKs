@@ -136,6 +136,11 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @property (getter=isEnabled) BOOL enabled;
 
 /*!
+ * @property uiToggleEnabled
+ * @discussion Determines if the user will have the ability to enable and disable the relay */
+@property (getter=isUIToggleEnabled) BOOL UIToggleEnabled;
+
+/*!
  * @property relays
  * @discussion An array of relay configurations describing one or more relay hops.
  */
@@ -143,15 +148,27 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 
 /*!
  * @property matchDomains
- * @discussion An array of strings containing domain names. If this property is non-nil, the relay will only be used to access hosts within the specified domains. If the property is nil, the relay will be used for all domains.
+ * @discussion An array of strings containing domain names. If this property is non-nil, the relay will be used to access hosts within the specified domains. If this and the match FQDNs property is nil, the relay will be used for all domains.
  */
 @property (copy, nullable) NSArray<NSString *> *matchDomains;
+
+/*!
+ * @property matchFQDNs
+ * @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
+ */
+@property (copy, nullable) NSArray<NSString *> *matchFQDNs;
 
 /*!
  * @property excludedDomains
  * @discussion An array of strings containing domain names. If the destination host name of a connection shares a suffix with one of these strings then the relay will not be used.
  */
 @property (copy, nullable) NSArray<NSString *> *excludedDomains;
+
+/*!
+ * @property excludedFQDNs
+ * @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
+ */
+@property (copy, nullable) NSArray<NSString *> *excludedFQDNs;
 
 /*!
  * @property onDemandRules

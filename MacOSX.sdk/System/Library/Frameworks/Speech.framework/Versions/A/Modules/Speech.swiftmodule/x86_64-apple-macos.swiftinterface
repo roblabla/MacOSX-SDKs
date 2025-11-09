@@ -1,20 +1,21 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-bare-slash-regex -user-module-version 3402.43.2 -module-name Speech -package-name com.apple.Speech
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -target-variant x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature InternalImportsByDefault -enable-bare-slash-regex -user-module-version 3404.78.1 -module-name Speech -package-name com.apple.Speech
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported public import Speech
 public import Swift
 public import _Concurrency
 public import _StringProcessing
 public import _SwiftConcurrencyShims
-@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, visionOS 1.1, *)
 public protocol DataInsertable {
   func insert(data: Speech.SFCustomLanguageModelData)
 }
-@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, visionOS 1.1, *)
 public protocol TemplateInsertable {
   func insert(generator: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator)
 }
-@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, visionOS 1.1, *)
 public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
   public struct PhraseCount : Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible, Swift.Codable, Speech.DataInsertable {
     public let phrase: Swift.String
@@ -24,9 +25,9 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
       get
     }
     public func insert(data: Speech.SFCustomLanguageModelData)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Speech.SFCustomLanguageModelData.PhraseCount, b: Speech.SFCustomLanguageModelData.PhraseCount) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -40,9 +41,9 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
       get
     }
     public func insert(data: Speech.SFCustomLanguageModelData)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Speech.SFCustomLanguageModelData.CustomPronunciation, b: Speech.SFCustomLanguageModelData.CustomPronunciation) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -63,25 +64,15 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
     @_hasMissingDesignatedInitializers public class Iterator : _Concurrency.AsyncIteratorProtocol {
       public typealias Element = Speech.SFCustomLanguageModelData.PhraseCount
       public func next() async throws -> Speech.SFCustomLanguageModelData.PhraseCount?
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #else
-      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #endif
       @objc deinit
     }
     public static func == (lhs: Speech.SFCustomLanguageModelData.PhraseCountGenerator, rhs: Speech.SFCustomLanguageModelData.PhraseCountGenerator) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public func insert(data: Speech.SFCustomLanguageModelData)
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
     @objc deinit
     public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
@@ -95,9 +86,9 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
       public let count: Swift.Int
       public init(_ body: Swift.String, count: Swift.Int)
       public func insert(generator: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator)
-      public func hash(into hasher: inout Swift.Hasher)
       public static func == (a: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator.Template, b: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator.Template) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
@@ -156,17 +147,5 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
 extension Speech.SFAcousticFeature {
   public var acousticFeatureValuePerFrame: [Swift.Double] {
     get
-  }
-}
-extension Swift.Sequence {
-  @inlinable internal func uniqued<Subject>(on projection: (Self.Element) throws -> Subject) rethrows -> [Self.Element] where Subject : Swift.Hashable {
-    var seen: Set<Subject> = []
-    var result: [Element] = []
-    for element in self {
-      if seen.insert(try projection(element)).inserted {
-        result.append(element)
-      }
-    }
-    return result
   }
 }

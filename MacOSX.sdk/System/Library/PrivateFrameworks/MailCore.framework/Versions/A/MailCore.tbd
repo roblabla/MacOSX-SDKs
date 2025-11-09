@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3826.255.87
+current-version: 3826.255.181
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
@@ -11,7 +11,7 @@ allowable-clients:
                        MailCoreTests, MailFrameworkTests, MailMigratorPlugin, MailNotificationContentExtension, 
                        MailQuickLookExtension, MailService, MailShareExtension, MailStorageManagement, 
                        MailTests, MailUI, MailUIWebBundle, MailWebPlugIn, MessageIMAPTests, 
-                       ProactiveSummarization, Rot13Encryption, TestSuggestions, 
+                       OmniSearch, ProactiveSummarization, Rot13Encryption, TestSuggestions, 
                        WebDocumentViewTestApp, com.apple.MailServiceAgent, maild, 
                        mailtool, migrationhelper ]
 exports:
@@ -70,16 +70,17 @@ exports:
                        _MCMailBundleIdentifier, _MCMailDaemonBundleIdentifier, _MCMailDataclassPropertyIMAPAuthenticationScheme, 
                        _MCMailDataclassPropertyLegacyUID, _MCMailDataclassPropertySMTPAuthenticationScheme, 
                        _MCMailErrorDomain, _MCMailErrorInvalidSigningIdentityTrustKey, 
-                       _MCMailServiceAgentBundleIdentifier, _MCMailboxDidEndSyncNotification, 
-                       _MCMailboxDidStartSyncNotification, _MCMailboxDoubleSuffixTracerIdentifier, 
-                       _MCMessageDataSourceMessagesCompactedNotification, _MCMessageDataSourceMessagesDeletedNotification, 
-                       _MCMessageDataSourceMessagesReadNotification, _MCMessageFlagColorFromECMessageFlagColor, 
-                       _MCMessageFlagsForECMessageFlags, _MCMessageScheme, _MCMessageURLPrefix, 
-                       _MCMigrationAttachmentCountIdentifier, _MCMigrationEmlxCountIdentifier, 
-                       _MCMigrationLostEmlxCountIdentifier, _MCMigrationMessageCountIdentifier, 
-                       _MCMimeCompleteTypeAttachment, _MCMimeHtmlClassPlainTextBody, 
-                       _MCMonitoredActivityDidAddActivityTarget, _MCMonitoredActivityDidRemoveActivityTarget, 
-                       _MCMonitoredActivityEnded, _MCMonitoredActivityStarted, _MCNetworkConfigurationDidChangeNotification, 
+                       _MCMailServiceAgentBundleIdentifier, _MCMailSpotlightIndexExtensionBundleIdentifier, 
+                       _MCMailboxDidEndSyncNotification, _MCMailboxDidStartSyncNotification, 
+                       _MCMailboxDoubleSuffixTracerIdentifier, _MCMessageDataSourceMessagesCompactedNotification, 
+                       _MCMessageDataSourceMessagesDeletedNotification, _MCMessageDataSourceMessagesReadNotification, 
+                       _MCMessageFlagColorFromECMessageFlagColor, _MCMessageFlagsForECMessageFlags, 
+                       _MCMessageScheme, _MCMessageURLPrefix, _MCMigrationAttachmentCountIdentifier, 
+                       _MCMigrationEmlxCountIdentifier, _MCMigrationLostEmlxCountIdentifier, 
+                       _MCMigrationMessageCountIdentifier, _MCMimeCompleteTypeAttachment, 
+                       _MCMimeHtmlClassPlainTextBody, _MCMonitoredActivityDidAddActivityTarget, 
+                       _MCMonitoredActivityDidRemoveActivityTarget, _MCMonitoredActivityEnded, 
+                       _MCMonitoredActivityStarted, _MCNetworkConfigurationDidChangeNotification, 
                        _MCNewUnreadMailReceivedNotification, _MCNoUsageInfo, _MCNotificationKeyMailbox, 
                        _MCNotificationKeyMessages, _MCNotificationKeyOldMessagesByNewMessage, 
                        _MCNotificationKeySecondaryMessages, _MCPerformDiagnosticsNotification, 

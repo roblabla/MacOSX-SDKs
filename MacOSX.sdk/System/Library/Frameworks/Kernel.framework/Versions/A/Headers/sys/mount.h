@@ -1318,4 +1318,5 @@ OS_ENUM(cryptex_auth_type, uint32_t,
     // Update this when a new type is added
     CRYPTEX_AUTH_MAX = 8);
 
+
 #endif /* !_SYS_MOUNT_H_ */

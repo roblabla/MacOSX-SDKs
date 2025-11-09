@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PromptKit.framework/Versions/A/PromptKit'
-current-version: 150.255
+current-version: 154.255.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -123,8 +123,9 @@ exports:
                        '_$s9PromptKit06CustomA7BuilderV15buildExpressionyAA0A0VxFZ', 
                        '_$s9PromptKit06CustomA7BuilderVMa', '_$s9PromptKit06CustomA7BuilderVMn', 
                        '_$s9PromptKit0A0V02toA0ACyF', '_$s9PromptKit0A0V07currentA7VersionAC0aD0VvgZ', 
-                       '_$s9PromptKit0A0V0A7VersionV2eeoiySbAE_AEtFZ', '_$s9PromptKit0A0V0A7VersionV4fromAEs7Decoder_p_tKcfC', 
-                       '_$s9PromptKit0A0V0A7VersionV4hash4intoys6HasherVz_tF', '_$s9PromptKit0A0V0A7VersionV6encode2toys7Encoder_p_tKF', 
+                       '_$s9PromptKit0A0V07currentA7VersionAC0aD0VvpZMV', '_$s9PromptKit0A0V0A7VersionV2eeoiySbAE_AEtFZ', 
+                       '_$s9PromptKit0A0V0A7VersionV4fromAEs7Decoder_p_tKcfC', '_$s9PromptKit0A0V0A7VersionV4hash4intoys6HasherVz_tF', 
+                       '_$s9PromptKit0A0V0A7VersionV6encode2toys7Encoder_p_tKF', 
                        '_$s9PromptKit0A0V0A7VersionV9hashValueSivg', '_$s9PromptKit0A0V0A7VersionV9hashValueSivpMV', 
                        '_$s9PromptKit0A0V0A7VersionVMa', '_$s9PromptKit0A0V0A7VersionVMn', 
                        '_$s9PromptKit0A0V0A7VersionVN', '_$s9PromptKit0A0V0A7VersionVSEAAMc', 

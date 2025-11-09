@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRC.framework/Versions/A/CoreRC'
-current-version: 249.60.1
+current-version: 254.100.6
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CECAbortReasonString, _CECAddressPreferredForDevice, _CECAddressString, 
@@ -23,9 +23,7 @@ exports:
                        _CoreCECDeviceTypeForCECDeviceType, _CoreCECDeviceTypeString, 
                        _CoreCECDeviceTypesMaskForCECAllDeviceTypesMask, _CoreCECErrorDomain, 
                        _CoreCECFeatureAbortMethodErrorKey, _CoreCECFeatureAbortOpcodeErrorKey, 
-                       _CoreCECFeatureAbortReasonErrorKey, _CoreCECPhysicalAddressForPackedPhysicalAddress, 
-                       _CoreCECPhysicalAddressIsOnStreamPath, _CoreCECPhysicalAddressIsValid, 
-                       _CoreCECPhysicalAddressString, _CoreCECPhysicalDevicePropertyListChildrenKey, 
+                       _CoreCECFeatureAbortReasonErrorKey, _CoreCECPhysicalDevicePropertyListChildrenKey, 
                        _CoreCECPhysicalDevicePropertyListLogicalAddressesKey, _CoreCECPhysicalDevicePropertyListPhysicalAddressKey, 
                        _CoreCECPlayModeForCECPlayMode, _CoreCECPlayModeString, _CoreCECPowerStatusForCECPowerStatus, 
                        _CoreCECPowerStatusString, _CoreCECRCProfileForCECRCProfile, 
@@ -38,15 +36,14 @@ exports:
                        _CoreRCCommandForString, _CoreRCCommandFromHIDUsage, _CoreRCCommandFromLegacyHIDUsage, 
                        _CoreRCCommandIsBasicButton, _CoreRCCommandIsLeftButton, _CoreRCCommandIsMenuButton, 
                        _CoreRCCommandIsPlayOrPauseButton, _CoreRCCommandIsRightButton, 
-                       _CoreRCCommandString, _CoreRCCommandToHIDUsage, _CoreRCVersionNumber, 
-                       _CoreRCVersionString, _CoreRCWaitForAsyncOperation, _CoreRCXPCClientInterface, 
-                       _CoreRCXPCServiceInterface, _IRDecoder_Decode, _PackedPhysicalAddressForCoreCECPhysicalAddress, 
+                       _CoreRCCommandString, _CoreRCCommandToHIDUsage, _CoreRCWaitForAsyncOperation, 
+                       _CoreRCXPCClientInterface, _CoreRCXPCServiceInterface, _IRDecoder_Decode, 
                        _gLogCategory_CoreIRLearningSession, _gLogCategory_CoreRC, 
                        _gLogCategory_CoreRCBus, _gLogCategory_CoreRCDevice, _gLogCategory_CoreRCHID, 
                        _gLogCategory_CoreRCInterface, _gLogCategory_CoreRCManager, 
                        _gLogCategory_CoreRCXPC, _gLogCategory_IRDecoder, _kAppleIRVendorIDApple, 
                        _kCECAbortReasonStringUnknown, _kCECDeckControlModeStringUnknown, 
-                       _kCECDeviceTypeStringUnknown, _kCECInterfacePropertyEDID, 
+                       _kCECDeviceTypeStringUnknown, _kCECInterfacePropertyEDIDAttributes, 
                        _kCECInterfacePropertyHasLink, _kCECInterfacePropertyIsValid, 
                        _kCECInterfacePropertyPhysicalAddress, _kCECMessageTypeStringUnknown, 
                        _kCECPlayModeStringUnknown, _kCECPowerStatusStringUnknown, 
@@ -85,13 +82,14 @@ exports:
                        _kCoreIRVendorIDUnknown, _kCoreRCEntitlementControl, _kCoreRCEntitlementLogging, 
                        _kCoreRCEntitlementObserver, _kCoreRCEntitlementPrivate, _kCoreRCXPCServiceName ]
     objc-classes:    [ AppleIRCommand, AppleIRDeviceClient, AppleIRDeviceProvider, 
-                       CECBusPollingOperation, CECFakeInterface, CECFakeInterfaceListener, 
-                       CECInterface, CECMessage, CECRouter, CECRouterInterface, CoreCECBus, 
-                       CoreCECBusClient, CoreCECBusProvider, CoreCECDevice, CoreCECDeviceBasicAttributes, 
-                       CoreCECDeviceClient, CoreCECDeviceProvider, CoreCECOverride, 
-                       CoreCECPhysicalDevice, CoreCECStandardOverride, CoreCECTypesInternal, 
-                       CoreIRBus, CoreIRBusClient, CoreIRBusProvider, CoreIRButton, 
-                       CoreIRDevice, CoreIRDeviceClient, CoreIRDeviceProvider, CoreIRLearningSession, 
+                       CECBusPollingOperation, CECEDIDAttributes, CECFakeInterface, 
+                       CECFakeInterfaceListener, CECInterface, CECMessage, CECRouter, 
+                       CECRouterInterface, CoreCECBus, CoreCECBusClient, CoreCECBusProvider, 
+                       CoreCECDevice, CoreCECDeviceBasicAttributes, CoreCECDeviceClient, 
+                       CoreCECDeviceProvider, CoreCECOverride, CoreCECPhysicalDevice, 
+                       CoreCECStandardOverride, CoreCECTypesInternal, CoreIRBus, 
+                       CoreIRBusClient, CoreIRBusProvider, CoreIRButton, CoreIRDevice, 
+                       CoreIRDeviceClient, CoreIRDeviceProvider, CoreIRLearningSession, 
                        CoreIRLearningSessionClient, CoreIRLearningSessionProvider, 
                        CoreRCBus, CoreRCDevice, CoreRCHIDEvent, CoreRCInterface, 
                        CoreRCInterfaceController, CoreRCInterfaceListener, CoreRCManager, 

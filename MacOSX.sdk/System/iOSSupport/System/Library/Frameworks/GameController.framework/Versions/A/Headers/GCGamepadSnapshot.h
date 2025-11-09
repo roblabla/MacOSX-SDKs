@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see -[GCGamepad saveSnapshot]
  */
-API_DEPRECATED("GCGamepad has been deprecated, use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(7.0, 13.0))
+API_DEPRECATED("Use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0))
 @interface GCGamepadSnapshot : GCGamepad
 @property (atomic, copy) NSData *snapshotData;
 
@@ -49,20 +49,20 @@ typedef struct {
     float leftShoulder;
     float rightShoulder;
     
-} GCGamepadSnapShotDataV100 API_DEPRECATED("GCGamepad has been deprecated, use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(7.0, 13.0));
+} GCGamepadSnapShotDataV100 API_DEPRECATED("Use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0));
 #pragma pack(pop)
 
 /**Fills out a v100 snapshot from any compatible NSData source
  
  @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
  */
-BOOL GCGamepadSnapShotDataV100FromNSData(GCGamepadSnapShotDataV100 *__nullable snapshotData, NSData *__nullable data) API_DEPRECATED("GCGamepad has been deprecated, use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(7.0, 13.0));
+BOOL GCGamepadSnapShotDataV100FromNSData(GCGamepadSnapShotDataV100 * _Nullable snapshotData, NSData * _Nullable data) API_DEPRECATED("Use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0));
 
 /**Creates an NSData object from a v100 snapshot.
  If the version and size is not set in the snapshot the data will automatically have version 0x100 and sizeof(GCGamepadSnapShotDataV100) set as the values implicitly.
  
  @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCGamepadSnapshot.snapshotData
  */
-NSData *__nullable NSDataFromGCGamepadSnapShotDataV100(GCGamepadSnapShotDataV100 *__nullable snapshotData) API_DEPRECATED("GCGamepad has been deprecated, use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(7.0, 13.0));
+NSData * _Nullable NSDataFromGCGamepadSnapShotDataV100(GCGamepadSnapShotDataV100 * _Nullable snapshotData) API_DEPRECATED("Use GCExtendedGamepad instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0));
 
 NS_ASSUME_NONNULL_END

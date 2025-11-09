@@ -48,7 +48,6 @@ typedef NS_ERROR_ENUM(PKIdentityErrorDomain, PKIdentityError) {
 
 NS_ASSUME_NONNULL_END
 
-
 #else
 #import <TargetConditionals.h>
 #import <PassKitCore/PKIdentityError.h>

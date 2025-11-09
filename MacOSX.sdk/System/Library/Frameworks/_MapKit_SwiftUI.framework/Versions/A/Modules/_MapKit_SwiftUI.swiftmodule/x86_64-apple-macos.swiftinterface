@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2464.22.8.22.10 -module-name _MapKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2464.24.9.12.31 -module-name _MapKit_SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import CoreLocation
 import Foundation
 @_exported import MapKit
@@ -519,21 +520,12 @@ extension _MapKit_SwiftUI._ConditionalMapContent : _MapKit_SwiftUI.MapContent wh
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Swift.Optional : _MapKit_SwiftUI.MapContent where Wrapped : _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
-#else
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension Swift.Optional : _MapKit_SwiftUI.MapContent where Wrapped : _MapKit_SwiftUI.MapContent {
-  @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
-  public typealias Body = Swift.Never
-}
-#endif
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func mapControls(@SwiftUICore.ViewBuilder _ content: () -> some View) -> some SwiftUICore.View
@@ -571,6 +563,14 @@ public struct UserLocation {
   public var heading: CoreLocation.CLHeading? {
     get
   }
+}
+@available(iOS 17.5, macOS 14.5, watchOS 10.5, tvOS 17.5, visionOS 1.2, *)
+@_Concurrency.MainActor @preconcurrency public struct AnyMapContent : _MapKit_SwiftUI.MapContent {
+  @_Concurrency.MainActor @preconcurrency public init<Content>(_ base: Content) where Content : _MapKit_SwiftUI.MapContent
+  @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.AnyMapContent>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
+  @available(iOS 17.5, tvOS 17.5, watchOS 10.5, visionOS 1.2, macOS 14.5, *)
+  public typealias Body = Swift.Never
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension _MapKit_SwiftUI.MapContent {
@@ -752,8 +752,8 @@ public struct MapSelection<SelectionValue> : _MapKit_SwiftUI.MapSelectable where
   }
   public init(_ value: SelectionValue)
   public init(_ feature: _MapKit_SwiftUI.MapFeature?)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: _MapKit_SwiftUI.MapSelection<SelectionValue>, b: _MapKit_SwiftUI.MapSelection<SelectionValue>) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -867,15 +867,17 @@ extension _MapKit_SwiftUI.MapPolyline : _MapKit_SwiftUI.MapContent {
   @_alwaysEmitIntoClient public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _MapKit_SwiftUI._ConditionalMapContent<TrueContent, FalseContent> where TrueContent : _MapKit_SwiftUI.MapContent, FalseContent : _MapKit_SwiftUI.MapContent {
         _ConditionalMapContent(falseContent: second, trueType: TrueContent.self)
     }
-  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> some _MapKit_SwiftUI.MapContent where Content : _MapKit_SwiftUI.MapContent {
-        content
+  @available(iOS 17.5, macOS 14.5, watchOS 10.5, tvOS 17.5, visionOS 1.2, *)
+  @_alwaysEmitIntoClient public static func buildLimitedAvailability(_ content: any _MapKit_SwiftUI.MapContent) -> some _MapKit_SwiftUI.MapContent {
+        if #unavailable(iOS 17.5, macOS 14.5, watchOS 10.5, tvOS 17.5, visionOS 1.2) {
+            return EmptyMapContent()
+        }
+        return AnyMapContent(content)
     }
   
-  #if compiler(>=5.3) && $ParameterPacks
   @_disfavoredOverload @_alwaysEmitIntoClient public static func buildBlock<each Content>(_ content: repeat each Content) -> _MapKit_SwiftUI.TupleMapContent<(repeat each Content)> where repeat each Content : _MapKit_SwiftUI.MapContent {
         TupleMapContent((repeat each content))
     }
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 public struct MapFeature {
@@ -1029,6 +1031,8 @@ extension _MapKit_SwiftUI.LookAroundPreview : Swift.Sendable {}
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _MapKit_SwiftUI.MapPitchSlider : Swift.Sendable {}
+@available(iOS 17.5, macOS 14.5, watchOS 10.5, tvOS 17.5, visionOS 1.2, *)
+extension _MapKit_SwiftUI.AnyMapContent : Swift.Sendable {}
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension _MapKit_SwiftUI.Annotation : Swift.Sendable {}
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)

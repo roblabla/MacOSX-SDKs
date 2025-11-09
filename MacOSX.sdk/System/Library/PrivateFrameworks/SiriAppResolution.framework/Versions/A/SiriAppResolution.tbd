@@ -86,6 +86,7 @@ exports:
                        '_$s17SiriAppResolution0B12SupportQueryV8intentIDSSvs', '_$s17SiriAppResolution0B12SupportQueryVMa', 
                        '_$s17SiriAppResolution0B12SupportQueryVMn', '_$s17SiriAppResolution0B12SupportQueryVN', 
                        '_$s17SiriAppResolution0B14SupportServiceC14sharedInstanceACvgZ', 
+                       '_$s17SiriAppResolution0B14SupportServiceC14sharedInstanceACvpZMV', 
                        '_$s17SiriAppResolution0B14SupportServiceC8findApps8matchingSayAA0B0CGAA0bD5QueryV_tYaFTj', 
                        '_$s17SiriAppResolution0B14SupportServiceC8findApps8matchingSayAA0B0CGAA0bD5QueryV_tYaFTjTu', 
                        '_$s17SiriAppResolution0B14SupportServiceC8findApps8matchingSayAA0B0CGAA0bD5QueryV_tYaFTq', 

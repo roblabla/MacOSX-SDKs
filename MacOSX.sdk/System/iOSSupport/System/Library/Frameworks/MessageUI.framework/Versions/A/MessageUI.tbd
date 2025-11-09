@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3826.255.87
+current-version: 3826.255.181
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -25,6 +25,7 @@ exports:
                        '_$s9MessageUI15PhotoPickerItemC17contentIdentifierSSvg', 
                        '_$s9MessageUI15PhotoPickerItemC17contentIdentifierSSvpMV', 
                        '_$s9MessageUI15PhotoPickerItemC23contentIdentifierPrefixSSvgZ', 
+                       '_$s9MessageUI15PhotoPickerItemC23contentIdentifierPrefixSSvpZMV', 
                        '_$s9MessageUI15PhotoPickerItemC7isVideoSbvgTj', '_$s9MessageUI15PhotoPickerItemC7isVideoSbvgTq', 
                        '_$s9MessageUI15PhotoPickerItemC7isVideoSbvpMV', '_$s9MessageUI15PhotoPickerItemC8assetURL10Foundation0G0VSgvg', 
                        '_$s9MessageUI15PhotoPickerItemC8assetURL10Foundation0G0VSgvpMV', 
@@ -60,10 +61,10 @@ exports:
                        _MFImageGlyphAll, _MFImageGlyphArchive, _MFImageGlyphArchiveFill, 
                        _MFImageGlyphBold, _MFImageGlyphCamera, _MFImageGlyphCameraEllipsis, 
                        _MFImageGlyphCheckmark, _MFImageGlyphCheckmarkCircle, _MFImageGlyphChevronForward, 
-                       _MFImageGlyphCircleXMark, _MFImageGlyphClose, _MFImageGlyphColorPicker, 
-                       _MFImageGlyphCommerceMessage, _MFImageGlyphCommerceSender, 
-                       _MFImageGlyphCompose, _MFImageGlyphComposeEncrypted, _MFImageGlyphComposeMoreFormats, 
-                       _MFImageGlyphComposeMute, _MFImageGlyphComposeNotify, _MFImageGlyphComposeNotifyEnabled, 
+                       _MFImageGlyphCircleXMark, _MFImageGlyphColorPicker, _MFImageGlyphCommerceMessage, 
+                       _MFImageGlyphCommerceSender, _MFImageGlyphCompose, _MFImageGlyphComposeEncrypted, 
+                       _MFImageGlyphComposeMoreFormats, _MFImageGlyphComposeMute, 
+                       _MFImageGlyphComposeNotify, _MFImageGlyphComposeNotifyEnabled, 
                        _MFImageGlyphComposeUnencrypted, _MFImageGlyphDecreaseIndent, 
                        _MFImageGlyphDecreaseQuoteLevel, _MFImageGlyphDocuments, _MFImageGlyphDownArrow, 
                        _MFImageGlyphDownloads, _MFImageGlyphEditDrawing, _MFImageGlyphEnvelope, 

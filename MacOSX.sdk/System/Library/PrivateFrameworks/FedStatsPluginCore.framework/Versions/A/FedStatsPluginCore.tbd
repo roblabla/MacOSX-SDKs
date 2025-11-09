@@ -8,12 +8,14 @@ exports:
                        _FedStatsPluginErrorDomain, _FedStatsPluginSQLQueryValidatorAllowListFilename, 
                        _FedStatsPluginSQLQueryValidatorBlockListFilename, _kFedStatsCohortMissingField, 
                        _kFedStatsDataCohortAllowList, _kFedStatsDataEncoderCollectionKeyPrefix, 
-                       _kFedStatsPluginUserDefaultsDomain, _kFedStatsPluginUserDefaultsKeyExperimentList ]
+                       _kFedStatsPluginExperimentRetentionPeriod, _kFedStatsPluginUserDefaultsDomain, 
+                       _kFedStatsPluginUserDefaultsKeyExperimentList ]
     objc-classes:    [ FedStatsCohortFactory, FedStatsCohortGeohash, FedStatsCohortQueryDeviceType, 
                        FedStatsCohortQueryFieldGeneric, FedStatsCohortQueryInstalledApps, 
                        FedStatsCohortQueryInstalledAppsMedia, FedStatsCohortQueryInstalledAppsPhone, 
-                       FedStatsCohortQueryLocale, FedStatsCohortQueryURLBits, FedStatsCollectionKeyGenerator, 
-                       FedStatsDataCohort, FedStatsPluginClientValidator, FedStatsPluginDnUConsentChecker, 
+                       FedStatsCohortQueryLocale, FedStatsCohortQueryURLBits, FedStatsCohortQueryUserSetDeviceRegion, 
+                       FedStatsCollectionKeyGenerator, FedStatsDataCohort, FedStatsPluginClientValidator, 
+                       FedStatsPluginDefaultDonationParameters, FedStatsPluginDnUConsentChecker, 
                        FedStatsPluginEngine, FedStatsPluginError, FedStatsPluginIHAConsentChecker, 
                        FedStatsPluginLocationServiceConsentChecker, FedStatsPluginLog, 
                        FedStatsPluginRecipe, FedStatsPluginSQL, FedStatsPluginSQLQueryValidator, 

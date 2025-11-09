@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos15.2 -target-variant x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 808 -module-name WeatherKit
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-macos15.4 -target-variant x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 868.0.1 -module-name WeatherKit
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import CoreLocation
 import Foundation
 import Network
@@ -556,9 +557,9 @@ public struct SnowfallAmount : Swift.Codable, Swift.Equatable {
 public struct TrendBaseline<Dimension> : Swift.Codable, Swift.Equatable where Dimension : Foundation.Dimension {
   public enum Kind : Swift.Codable, Swift.Equatable {
     case mean
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: WeatherKit.TrendBaseline<Dimension>.Kind, b: WeatherKit.TrendBaseline<Dimension>.Kind) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -659,7 +660,7 @@ public struct DailyWeatherStatistics<T> : Swift.Codable, Swift.Equatable, Swift.
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct Percentiles<Dimension> : Swift.Codable, Swift.Equatable, Swift.Sendable where Dimension : Foundation.Dimension, Dimension : Swift.Sendable {
+public struct Percentiles<Dimension> : Swift.Codable, Swift.Equatable, Swift.Sendable where Dimension : Foundation.Dimension {
   public var p10: Foundation.Measurement<Dimension>
   public var p50: Foundation.Measurement<Dimension>
   public var p90: Foundation.Measurement<Dimension>
@@ -919,54 +920,30 @@ final public class WeatherService : @unchecked Swift.Sendable {
   final public func weather<T1, T2, T3, T4>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>) async throws -> (T1, T2, T3, T4)
   final public func weather<T1, T2, T3, T4, T5>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>, _ dataSet5: WeatherKit.WeatherQuery<T5>) async throws -> (T1, T2, T3, T4, T5)
   final public func weather<T1, T2, T3, T4, T5, T6>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>, _ dataSet5: WeatherKit.WeatherQuery<T5>, _ dataSet6: WeatherKit.WeatherQuery<T6>) async throws -> (T1, T2, T3, T4, T5, T6)
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func weather<each T>(for location: CoreLocation.CLLocation, including dataSet: repeat WeatherKit.WeatherQuery<each T>) async throws -> (repeat each T)
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func dailyStatistics<each T>(for location: CoreLocation.CLLocation, forDaysIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func dailyStatistics<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func dailyStatistics<each T>(for location: CoreLocation.CLLocation, startDay: Swift.Int, endDay: Swift.Int, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func dailySummary<each T>(for location: CoreLocation.CLLocation, forDaysIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.DailyWeatherSummaryQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherSummary<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func dailySummary<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.DailyWeatherSummaryQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherSummary<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func hourlyStatistics<each T>(for location: CoreLocation.CLLocation, forHoursIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func hourlyStatistics<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func hourlyStatistics<each T>(for location: CoreLocation.CLLocation, startHour: Swift.Int, endHour: Swift.Int, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func monthlyStatistics<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func monthlyStatistics<each T>(for location: CoreLocation.CLLocation, forMonthsIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   final public func monthlyStatistics<each T>(for location: CoreLocation.CLLocation, startMonth: Swift.Int, endMonth: Swift.Int, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
-  #endif
   @objc deinit
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -1050,9 +1027,9 @@ public enum Deviation : Swift.Codable, Swift.Equatable {
   case normal
   case lower
   case muchLower
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: WeatherKit.Deviation, b: WeatherKit.Deviation) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }

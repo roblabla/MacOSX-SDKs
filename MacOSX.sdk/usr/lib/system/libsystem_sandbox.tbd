@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 2401.61.2
+current-version: 2401.101.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -16,10 +16,9 @@ exports:
                        _SANDBOX_CHECK_ALLOW_APPROVAL, _SANDBOX_CHECK_CANONICAL, _SANDBOX_CHECK_NOFOLLOW, 
                        _SANDBOX_CHECK_NO_APPROVAL, _SANDBOX_CHECK_NO_REPORT, _SANDBOX_CHECK_POSIX_READABLE, 
                        _SANDBOX_CHECK_POSIX_WRITEABLE, _SANDBOX_EXTENSION_CANONICAL, 
-                       _SANDBOX_EXTENSION_DEFAULT, _SANDBOX_EXTENSION_MAGIC, _SANDBOX_EXTENSION_NOFOLLOW, 
-                       _SANDBOX_EXTENSION_NOFOLLOW_ANY, _SANDBOX_EXTENSION_NO_REPORT, 
-                       _SANDBOX_EXTENSION_NO_STORAGE_CLASS, _SANDBOX_EXTENSION_PREFIXMATCH, 
-                       _SANDBOX_EXTENSION_UNRESOLVED, __amkrtemp, __sandbox_enter_notify_libxpc, 
+                       _SANDBOX_EXTENSION_DEFAULT, _SANDBOX_EXTENSION_NOFOLLOW, _SANDBOX_EXTENSION_NOFOLLOW_ANY, 
+                       _SANDBOX_EXTENSION_NO_REPORT, _SANDBOX_EXTENSION_NO_STORAGE_CLASS, 
+                       _SANDBOX_EXTENSION_PREFIXMATCH, __amkrtemp, __sandbox_enter_notify_libxpc, 
                        __sandbox_in_a_container, __sandbox_register_app_bundle_0, 
                        __sandbox_register_app_bundle_1, _kSBXProfileNoInternet, _kSBXProfileNoNetwork, 
                        _kSBXProfileNoWrite, _kSBXProfileNoWriteExceptTemporary, _kSBXProfilePureComputation, 
@@ -50,15 +49,13 @@ exports:
                        _sandbox_extension_issue_generic_to_process, _sandbox_extension_issue_generic_to_process_by_pid, 
                        _sandbox_extension_issue_iokit_registry_entry_class, _sandbox_extension_issue_iokit_registry_entry_class_to_process, 
                        _sandbox_extension_issue_iokit_registry_entry_class_to_process_by_pid, 
-                       _sandbox_extension_issue_iokit_user_client_class, _sandbox_extension_issue_mach, 
-                       _sandbox_extension_issue_mach_to_process, _sandbox_extension_issue_mach_to_process_by_pid, 
-                       _sandbox_extension_issue_posix_ipc, _sandbox_extension_issue_related_file_to_process, 
+                       _sandbox_extension_issue_mach, _sandbox_extension_issue_mach_to_process, 
+                       _sandbox_extension_issue_mach_to_process_by_pid, _sandbox_extension_issue_related_file_to_process, 
                        _sandbox_extension_reap, _sandbox_extension_release, _sandbox_extension_release_and_detect_last_reference, 
                        _sandbox_extension_release_file, _sandbox_extension_update_file, 
                        _sandbox_extension_update_file_by_fileid, _sandbox_free_error, 
                        _sandbox_get_container_expected, _sandbox_init, _sandbox_init_from_pid, 
-                       _sandbox_init_with_extensions, _sandbox_init_with_parameters, 
-                       _sandbox_issue_extension, _sandbox_issue_fs_extension, _sandbox_issue_fs_rw_extension, 
+                       _sandbox_init_with_parameters, _sandbox_issue_fs_extension, 
                        _sandbox_issue_mach_extension, _sandbox_message_filter_query, 
                        _sandbox_message_filter_release, _sandbox_message_filter_retain, 
                        _sandbox_note, _sandbox_passthrough_access, _sandbox_proc_getcontainer, 

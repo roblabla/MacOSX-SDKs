@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 1656.60.132
+current-version: 1656.100.223
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -24,14 +24,11 @@ exports:
     symbols:         [ _LAAssertionsProxyFactory, _LAFeatureFlagOysterSkipSDKVerification, 
                        _LALogCategoryForOptions, _LALogCategoryForPolicy, _LALogForCategory, 
                        _LALogForPolicy, _LALogSetProcessCategory, _LALogTypeForInternalError, 
-                       _LASerialScheduler, _NSStringFromACMRequirement, _NSStringFromLAPasscodeType, 
-                       _NSStringFromMechanismEvent, _NSStringFromMechanismEventAndValue, 
-                       _NSStringFromRemoteUIEvent, _NSStringFromRemoteUIEventAndOptions ]
+                       _LASerialScheduler, _NSStringFromACMRequirement, _NSStringFromLAPasscodeType ]
     objc-classes:    [ LAACMBiometricAttemptNotifier, LAACMHelper, LAAssertionsProxy, 
-                       LABaseService, LABaseServiceManager, LACachedExternalizedContext, 
-                       LADFR, LADecriptionBuilder, LAErrorHelper, LAErrorOysterRedactor, 
-                       LAErrorRedactor, LAInstanceIDGenerator, LAInternalProtocols, 
-                       LALocalBackoffCounter, LAManagedACMParameters, LAParamChecker, 
+                       LABaseService, LABaseServiceManager, LADFR, LADecriptionBuilder, 
+                       LAErrorHelper, LAErrorOysterRedactor, LAErrorRedactor, LAInstanceIDGenerator, 
+                       LAInternalProtocols, LAManagedACMParameters, LAParamChecker, 
                        LAPasscodeHelper, LAPasscodeHelperPasscodeStateManagedSettings, 
                        LAPasscodeHelperPasscodeStateRepository, LAPasscodeHelperPasscodeStateSimulator, 
                        LAServiceAdapter, LAUtils, LAWeakBox ]

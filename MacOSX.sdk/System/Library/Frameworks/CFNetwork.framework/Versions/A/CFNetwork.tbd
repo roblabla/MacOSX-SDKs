@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1568.255.101
+current-version: 3826.255.111
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -409,8 +409,9 @@ exports:
                        NSURLSessionUploadTask, NSURLSessionWebSocketMessage, NSURLSessionWebSocketTask, 
                        _NSCFServer, _NSHSTSStorage, _NSHTTPAlternativeServiceEntry, 
                        _NSHTTPAlternativeServicesFilter, _NSHTTPAlternativeServicesStorage, 
-                       _NSHTTPConnectionInfo, __CFN_TaskMetrics, __NSCFURLSessionTaskInfo, 
-                       __NSCFURLSessionXPC, __NSURLSessionStatistics ]
+                       _NSHTTPConnectionInfo, _NSURLSessionBackgroundTaskOverrides, 
+                       __CFN_TaskMetrics, __NSCFURLSessionTaskInfo, __NSCFURLSessionXPC, 
+                       __NSURLSessionStatistics ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CFNetServiceGetProtocolSpecificInformation, _CFNetServiceRegister, 
                        _CFNetServiceResolve, _CFNetServiceSetProtocolSpecificInformation, 

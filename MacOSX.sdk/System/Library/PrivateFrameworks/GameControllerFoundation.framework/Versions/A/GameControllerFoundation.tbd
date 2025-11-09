@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GameControllerFoundation.framework/Versions/A/GameControllerFoundation'
-current-version: 12.2.1
+current-version: 12.4.12
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -161,13 +161,14 @@ exports:
                        GCDevicePhysicalInputElementDescription, GCDevicePhysicalInputGroupDescription, 
                        GCDevicePhysicalInputSourceDescription, GCDevicePhysicalInputSwitchElementDescription, 
                        GCDevicePhysicalInputSymbolDescription, GCDevicePhysicalInputViewDescription, 
-                       GCFLocalizedString, GCFuture, GCGenericArcadeStickModel, GCGenericArcadeStickModelBuilder, 
-                       GCGenericDeviceDataAddExpressionModel, GCGenericDeviceDataAddExpressionModelBuilder, 
-                       GCGenericDeviceDataBitTestExpressionModel, GCGenericDeviceDataBitTestExpressionModelBuilder, 
-                       GCGenericDeviceDataClampExpressionModel, GCGenericDeviceDataClampExpressionModelBuilder, 
-                       GCGenericDeviceDataConstantExpressionModel, GCGenericDeviceDataConstantExpressionModelBuilder, 
-                       GCGenericDeviceDataElementExistsExpressionModel, GCGenericDeviceDataElementExistsExpressionModelBuilder, 
-                       GCGenericDeviceDataInputElementAttributeExpressionModel, GCGenericDeviceDataInputElementAttributeExpressionModelBuilder, 
+                       GCDisposable, GCFLocalizedString, GCFuture, GCGenericArcadeStickModel, 
+                       GCGenericArcadeStickModelBuilder, GCGenericDeviceDataAddExpressionModel, 
+                       GCGenericDeviceDataAddExpressionModelBuilder, GCGenericDeviceDataBitTestExpressionModel, 
+                       GCGenericDeviceDataBitTestExpressionModelBuilder, GCGenericDeviceDataClampExpressionModel, 
+                       GCGenericDeviceDataClampExpressionModelBuilder, GCGenericDeviceDataConstantExpressionModel, 
+                       GCGenericDeviceDataConstantExpressionModelBuilder, GCGenericDeviceDataElementExistsExpressionModel, 
+                       GCGenericDeviceDataElementExistsExpressionModelBuilder, GCGenericDeviceDataInputElementAttributeExpressionModel, 
+                       GCGenericDeviceDataInputElementAttributeExpressionModelBuilder, 
                        GCGenericDeviceDataInputElementValueExpressionModel, GCGenericDeviceDataInputElementValueExpressionModelBuilder, 
                        GCGenericDeviceDataInterpolateExpressionModel, GCGenericDeviceDataInterpolateExpressionModelBuilder, 
                        GCGenericDeviceDataMultiplyExpressionModel, GCGenericDeviceDataMultiplyExpressionModelBuilder, 
@@ -180,7 +181,8 @@ exports:
                        GCGenericDeviceElementModel, GCGenericDeviceElementModelBuilder, 
                        GCGenericDeviceInputEventDriverModel, GCGenericDeviceInputEventDriverModelBuilder, 
                        GCGenericDeviceInputGamepadEventFieldModel, GCGenericDeviceInputGamepadEventFieldModelBuilder, 
-                       GCGenericDeviceModel, GCGenericDeviceModelBuilder, GCGenericDevicePhysicalInputButtonModel, 
+                       GCGenericDeviceModel, GCGenericDeviceModelBuilder, GCGenericDeviceMotionEventDriverModel, 
+                       GCGenericDeviceMotionEventDriverModelBuilder, GCGenericDevicePhysicalInputButtonModel, 
                        GCGenericDevicePhysicalInputButtonModelBuilder, GCGenericDevicePhysicalInputDpadModel, 
                        GCGenericDevicePhysicalInputDpadModelBuilder, GCGenericDevicePhysicalInputElementModel, 
                        GCGenericDevicePhysicalInputElementModelBuilder, GCGenericDevicePhysicalInputModel, 
@@ -189,11 +191,12 @@ exports:
                        GCGenericDeviceRumbleModelBuilder, GCGenericDeviceRumbleOutputFieldModel, 
                        GCGenericDeviceRumbleOutputFieldModelBuilder, GCGenericDeviceRumbleOutputModel, 
                        GCGenericDeviceRumbleOutputModelBuilder, GCHIDDevice, GCHIDDeviceInput, 
-                       GCHIDDeviceSnapshot, GCHIDElementSnapshot, GCHIDInputElement, 
-                       GCHIDServiceInfo, GCIPCRemoteConnection, GCIPCRemoteIncomingConnection, 
-                       GCIPCRemoteOutgoingConnection, GCOperation, GCPromise, GCVersion, 
-                       IOGCFastPathProxyConnection, IOGCFastPathProxyQueue, IOGCFastPathProxyServer, 
-                       _GCDeviceConfiguration, _GCDeviceConfigurationEvaluator, _GCGenericDeviceManager, 
+                       GCHIDDeviceSnapshot, GCHIDElementSnapshot, GCHIDEventSystemClient, 
+                       GCHIDInputElement, GCHIDServiceInfo, GCIPCRemoteConnection, 
+                       GCIPCRemoteIncomingConnection, GCIPCRemoteOutgoingConnection, 
+                       GCOperation, GCPromise, GCVersion, IOGCFastPathProxyConnection, 
+                       IOGCFastPathProxyQueue, IOGCFastPathProxyServer, _GCDeviceConfiguration, 
+                       _GCDeviceConfigurationEvaluator, _GCGenericDeviceManager, 
                        _GCGenericPhysicalDevicePending, _GCLogitechRacingWheelDeviceManager, 
                        _GCMutableDeviceConfiguration ]
 ...

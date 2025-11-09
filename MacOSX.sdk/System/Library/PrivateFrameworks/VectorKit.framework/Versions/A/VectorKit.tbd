@@ -3,16 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1948.22.8
+current-version: 1948.24.9
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__110__function6__baseIFvmPKyEEE, 
                        __ZTINSt3__110__function6__baseIFvmfEEE, __ZTINSt3__110__function6__baseIFvmmPKcEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
+                       __ZTINSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
                        __ZTISt9exception, __ZTSNSt3__110__function6__baseIFvimEEE, 
                        __ZTSNSt3__110__function6__baseIFvmPKyEEE, __ZTSNSt3__110__function6__baseIFvmfEEE, 
-                       __ZTSNSt3__110__function6__baseIFvmmPKcEEE, __ZTSNSt3__117bad_function_callE, 
-                       __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
+                       __ZTSNSt3__110__function6__baseIFvmmPKcEEE, __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
                        __ZTSSt9exception ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -93,18 +92,20 @@ exports:
                        _VectorKitDebugConfig_EnableEnhancedCommandBufferErrors, _VectorKitDebugConfig_EnableFlyoverUnification, 
                        _VectorKitDebugConfig_EnableRTEVChargerInfo, _VectorKitDebugConfig_EnableRenderableCollectorLogic, 
                        _VectorKitDebugConfig_EnableShadowMapCache, _VectorKitDebugConfig_EnableVerboseEntityLogging, 
-                       _VectorKitDebugConfig_EnableVerboseLayoutReasonLogging, _VectorKitDebugConfig_HideLabels, 
-                       _VectorKitDebugConfig_HikingDisplayEnabled, _VectorKitDebugConfig_HikingOverrideEnabled, 
-                       _VectorKitDebugConfig_HillshadeDisplayEnabled, _VectorKitDebugConfig_LabelHighlighting, 
-                       _VectorKitDebugConfig_LabelLogMissingStyles, _VectorKitDebugConfig_LabelLogStyleQueries, 
-                       _VectorKitDebugConfig_LockWatchFpsTo30hz, _VectorKitDebugConfig_LogStreamingPoiFeatureID, 
-                       _VectorKitDebugConfig_NavCameraEnableAttributes, _VectorKitDebugConfig_NavCameraEnableConsole, 
+                       _VectorKitDebugConfig_EnableVerboseLayoutReasonLogging, _VectorKitDebugConfig_FixedLightingHour, 
+                       _VectorKitDebugConfig_HideLabels, _VectorKitDebugConfig_HikingDisplayEnabled, 
+                       _VectorKitDebugConfig_HikingOverrideEnabled, _VectorKitDebugConfig_HillshadeDisplayEnabled, 
+                       _VectorKitDebugConfig_LabelHighlighting, _VectorKitDebugConfig_LabelLogMissingStyles, 
+                       _VectorKitDebugConfig_LabelLogStyleQueries, _VectorKitDebugConfig_LockWatchFpsTo30hz, 
+                       _VectorKitDebugConfig_LogStreamingPoiFeatureID, _VectorKitDebugConfig_NavCameraDebugPage, 
                        _VectorKitDebugConfig_NavCameraEnableLegend, _VectorKitDebugConfig_NavCameraEnableOverlay, 
-                       _VectorKitDebugConfig_NavCameraEnableProperties, _VectorKitDebugConfig_OverrideMSAASampleCount, 
-                       _VectorKitDebugConfig_OverrideVariableLogicRate, _VectorKitDebugConfig_PolygonStrokeMaskingEnabled, 
-                       _VectorKitDebugConfig_SSAODemoButtonEnabled, _VectorKitDebugConfig_ShowLabelCounts, 
-                       _VectorKitDebugConfig_TopographicDisplayEnabled, _VectorKitDebugConfig_VariableLogicRateForNav, 
-                       _VectorKitDebugConfig_VariableLogicUpdateFrequencyEnabled, 
+                       _VectorKitDebugConfig_OverrideMSAASampleCount, _VectorKitDebugConfig_OverrideVariableLogicRate, 
+                       _VectorKitDebugConfig_PolygonStrokeMaskingEnabled, _VectorKitDebugConfig_SSAODemoButtonEnabled, 
+                       _VectorKitDebugConfig_ShowLabelCounts, _VectorKitDebugConfig_TopographicDisplayEnabled, 
+                       _VectorKitDebugConfig_VariableLogicNavigationHeadingRate, 
+                       _VectorKitDebugConfig_VariableLogicNavigationPitchRateMax, 
+                       _VectorKitDebugConfig_VariableLogicNavigationPitchRateMin, 
+                       _VectorKitDebugConfig_VariableLogicRateForNav, _VectorKitDebugConfig_VariableLogicUpdateFrequencyEnabled, 
                        _VectorKitDebugConfig_ZoomBounceSpringFriction, _VectorKitDebugConfig_ZoomBounceSpringTension, 
                        _VectorKitDebugConfig_ZoomRubberBandMaxAmount, _dynamicValueAnimation, 
                        _dynamicValueAnimationDuration, _dynamicValueAnimationTimingFunction, 

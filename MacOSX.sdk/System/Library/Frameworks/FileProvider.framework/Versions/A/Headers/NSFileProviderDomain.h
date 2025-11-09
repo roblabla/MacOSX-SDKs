@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 FILEPROVIDER_API_AVAILABILITY_V2_V3
-typedef NSString *NSFileProviderDomainIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *NSFileProviderDomainIdentifier NS_TYPED_EXTENSIBLE_ENUM;
 
 /**
  File provider domain version.

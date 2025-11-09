@@ -1,7 +1,7 @@
 /*
     NSPersistentCloudKitContainerEventRequest.h
     Core Data
-    Copyright (c) 2020-2024, Apple Inc.
+    Copyright (c) 2020-2025, Apple Inc.
     All rights reserved.
 */
 

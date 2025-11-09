@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-ios18.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreLocation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 42 -module-name CoreLocation
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreLocation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 44.0.1 -module-name CoreLocation
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 @_exported import CoreLocation
 import Foundation
 import Swift
@@ -110,13 +111,8 @@ public actor CLMonitor {
       @available(watchOS, unavailable)
       @available(visionOS, unavailable)
       public typealias Element = CoreLocation.CLMonitor.Events.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #else
-      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #endif
     }
     public func makeAsyncIterator() -> CoreLocation.CLMonitor.Events.Iterator
     @available(iOS 17.0, macOS 14.0, *)
@@ -124,13 +120,8 @@ public actor CLMonitor {
     @available(watchOS, unavailable)
     @available(visionOS, unavailable)
     public typealias AsyncIterator = CoreLocation.CLMonitor.Events.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
   public struct CircularGeographicCondition : CoreLocation.CLCondition, Swift.Sendable {
     public let center: CoreLocation.CLLocationCoordinate2D
@@ -233,29 +224,17 @@ extension CoreLocation.CLServiceSession {
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, *)
       @available(macOS, unavailable)
       public typealias Element = CoreLocation.CLServiceSession.Diagnostics.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
       @available(macOS, unavailable, introduced: 15.0)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #else
-      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-      @available(macOS, unavailable, introduced: 15.0)
-      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #endif
     }
     final public func makeAsyncIterator() -> CoreLocation.CLServiceSession.Diagnostics.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, *)
     @available(macOS, unavailable)
     public typealias AsyncIterator = CoreLocation.CLServiceSession.Diagnostics.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     @available(macOS, unavailable, introduced: 15.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-    @available(macOS, unavailable, introduced: 15.0)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
     @objc deinit
   }
   final public var diagnostics: CoreLocation.CLServiceSession.Diagnostics {
@@ -344,24 +323,14 @@ public struct CLLocationUpdate : Swift.Sendable {
       public mutating func next() async throws -> CoreLocation.CLLocationUpdate.Updates.Element?
       @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
       public typealias Element = CoreLocation.CLLocationUpdate.Updates.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #else
-      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #endif
     }
     public func makeAsyncIterator() -> CoreLocation.CLLocationUpdate.Updates.Iterator
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias AsyncIterator = CoreLocation.CLLocationUpdate.Updates.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
   }
 }
 @available(*, unavailable)
@@ -407,34 +376,20 @@ extension CoreLocation.CLBackgroundActivitySession {
       @available(tvOS, unavailable)
       @available(macOS, unavailable)
       public typealias Element = CoreLocation.CLBackgroundActivitySession.Diagnostics.Element
-      #if compiler(>=5.3) && $AssociatedTypeImplements
       @available(iOS 18.0, watchOS 11.0, visionOS 2.0, *)
       @available(tvOS, unavailable, introduced: 18.0)
       @available(macOS, unavailable, introduced: 15.0)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #else
-      @available(iOS 18.0, watchOS 11.0, visionOS 2.0, *)
-      @available(tvOS, unavailable, introduced: 18.0)
-      @available(macOS, unavailable, introduced: 15.0)
-      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
-      #endif
     }
     final public func makeAsyncIterator() -> CoreLocation.CLBackgroundActivitySession.Diagnostics.Iterator
     @available(iOS 18.0, watchOS 11.0, *)
     @available(tvOS, unavailable)
     @available(macOS, unavailable)
     public typealias AsyncIterator = CoreLocation.CLBackgroundActivitySession.Diagnostics.Iterator
-    #if compiler(>=5.3) && $AssociatedTypeImplements
     @available(iOS 18.0, watchOS 11.0, visionOS 2.0, *)
     @available(tvOS, unavailable, introduced: 18.0)
     @available(macOS, unavailable, introduced: 15.0)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
-    #else
-    @available(iOS 18.0, watchOS 11.0, visionOS 2.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    @available(macOS, unavailable, introduced: 15.0)
-    public typealias __AsyncSequence_Failure = any Swift.Error
-    #endif
     @objc deinit
   }
   final public var diagnostics: CoreLocation.CLBackgroundActivitySession.Diagnostics {

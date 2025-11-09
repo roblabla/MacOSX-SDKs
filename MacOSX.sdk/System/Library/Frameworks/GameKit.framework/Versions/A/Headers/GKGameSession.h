@@ -8,12 +8,12 @@
 typedef NS_ENUM(NSInteger, GKConnectionState) {
     GKConnectionStateNotConnected,
     GKConnectionStateConnected
-};
+} API_AVAILABLE(ios(10.0), macos(10.12), tvos(10.0), visionos(1.0), watchos(3.0));
 
 typedef NS_ENUM(NSInteger, GKTransportType) {
     GKTransportTypeUnreliable,
     GKTransportTypeReliable
-};
+} API_AVAILABLE(ios(10.0), macos(10.12), tvos(10.0), visionos(1.0), watchos(3.0));
 
 NS_ASSUME_NONNULL_BEGIN
 

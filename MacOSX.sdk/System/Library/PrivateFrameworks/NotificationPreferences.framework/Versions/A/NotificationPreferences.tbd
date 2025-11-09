@@ -5,13 +5,13 @@ install-name:    '/System/Library/PrivateFrameworks/NotificationPreferences.fram
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s23NotificationPreferences06UNUserA9CenterKeySSvg', '_$s23NotificationPreferences15NotifierDetailsV10identifier4type03forB010backupPath012preferBackupI0ACSgSS_So12NCCenterTypeVSbSSSgSbtcfC', 
+    symbols:         [ '_$s23NotificationPreferences06UNUserA9CenterKeySSvg', '_$s23NotificationPreferences15NotifierDetailsV10identifier4type03forB010backupPath012preferBackupI09skipImageACSgSS_So12NCCenterTypeVSbSSSgS2btcfC', 
                        '_$s23NotificationPreferences15NotifierDetailsV3url10Foundation3URLVvg', 
                        '_$s23NotificationPreferences15NotifierDetailsV3url10Foundation3URLVvpMV', 
                        '_$s23NotificationPreferences15NotifierDetailsV4nameSSvg', 
                        '_$s23NotificationPreferences15NotifierDetailsV4nameSSvpMV', 
-                       '_$s23NotificationPreferences15NotifierDetailsV5imageSo7NSImageCvg', 
-                       '_$s23NotificationPreferences15NotifierDetailsV5imageSo7NSImageCvpMV', 
+                       '_$s23NotificationPreferences15NotifierDetailsV5imageSo7NSImageCSgvg', 
+                       '_$s23NotificationPreferences15NotifierDetailsV5imageSo7NSImageCSgvpMV', 
                        '_$s23NotificationPreferences15NotifierDetailsVMa', '_$s23NotificationPreferences15NotifierDetailsVMn', 
                        '_$s23NotificationPreferences15NotifierDetailsVN', '_$s23NotificationPreferences22UNNotificationIconsKeySSvg', 
                        '_$s23NotificationPreferences24UNNotificationIconMacKeySSvg', 
@@ -55,10 +55,6 @@ exports:
                        '_$s23NotificationPreferences8DNDPrefsV19facetimeCanBreakDNDSbvg', 
                        '_$s23NotificationPreferences8DNDPrefsV19facetimeCanBreakDNDSbvpMV', 
                        '_$s23NotificationPreferences8DNDPrefsV19facetimeCanBreakDNDSbvs', 
-                       '_$s23NotificationPreferences8DNDPrefsV22summarizeNotificationsSbvM', 
-                       '_$s23NotificationPreferences8DNDPrefsV22summarizeNotificationsSbvg', 
-                       '_$s23NotificationPreferences8DNDPrefsV22summarizeNotificationsSbvpMV', 
-                       '_$s23NotificationPreferences8DNDPrefsV22summarizeNotificationsSbvs', 
                        '_$s23NotificationPreferences8DNDPrefsV2eeoiySbAC_ACtFZ', 
                        '_$s23NotificationPreferences8DNDPrefsV30debugLoggingDictRepresentationSDySSyXlGvg', 
                        '_$s23NotificationPreferences8DNDPrefsV30debugLoggingDictRepresentationSDySSyXlGvpMV', 

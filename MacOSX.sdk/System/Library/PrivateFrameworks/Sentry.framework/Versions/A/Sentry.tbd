@@ -7,9 +7,11 @@ exports:
     symbols:         [ _HTConfigChangeNotificationToken, _HangTracerCollectOSSignposts, 
                        _STYAbsoluteTimeToMachContinuousTime, _STYDiagnosticsCollectorErrorDomain, 
                        _STYFrameworkDefaults, _STYMachAbsoluteTimeToMachContinuousTime, 
+                       _STYMachAbsoluteTimeToMilliseconds, _STYMachAbsoluteTimeToSeconds, 
                        _STYMachContinuousTimeIntervalToCFTimeInterval, _STYMachContinuousTimeToCFAbsoluteTime, 
                        _STYMachContinuousTimeToMachAbsoluteTime, _STYMachContinuousTimeToTimespec, 
-                       _STYPerformanceCheckerErrorDomain, _STYTimeIntervalToMachContinuousTimeInterval, 
+                       _STYMillisecondsToMachAbsoluteTime, _STYPerformanceCheckerErrorDomain, 
+                       _STYSecondsToMachAbsoluteTime, _STYTimeIntervalToMachContinuousTimeInterval, 
                        _STYUserScenarioErrorDomain, _STYWakeDebuggingSignposts, _STYWakeFromDarkWakeSignposts, 
                        _STYWakeFromSleepSignposts, _STYWakeFromStandbySignposts, 
                        _STYWakeLog, _SentryVersionNumber, _SentryVersionString, __reportToAbc, 
@@ -34,15 +36,16 @@ exports:
                        _refreshPreferences, _reportToAbc, _responseRecieved, _sentryConfigChangeNotificationToken, 
                        _signpostSupportQueue, _startMonitoringSystemConditions, _stateVariableUpdateQueue, 
                        _stopMonitoringSystemConditions, _symptomsSignatureForEvent, 
-                       _symptomsSignatureForInterval, _valueForInfoPlistKeyInImagePath ]
+                       _symptomsSignatureForInterval, _timebaseConversionFactor, 
+                       _valueForInfoPlistKeyInImagePath ]
     objc-classes:    [ STYAbcHelper, STYDeviceInfo, STYDiagCollectorLogger, STYDiagnosticUploader, 
                        STYDiagnosticsCollector, STYDirectories, STYFrameworkHelper, 
                        STYGeneralSignpostMonitorHelper, STYHIDWakeEventFetcher, STYIOPMNotificationMonitor, 
                        STYPendingDiagnostic, STYPerformanceChecker, STYScenarioReport, 
-                       STYScenarioReportLogger, STYSentryDiagnosticsHelper, STYSignpostsMonitor, 
-                       STYSignpostsMonitorHelper, STYSlowWakeMonitor, STYSpecialAppLaunchSignpostMonitorHelper, 
-                       STYSystemWakeDataProvider, STYURLSessionHelper, STYUserScenario, 
-                       STYUserScenarioCache, STYWakeDetector, STYWakeDetectorDebugInfo, 
-                       STYWakeDiagnosticManager, STYWakeEvent, STYWorkflowEventTracker, 
-                       STYWorkflowResponsivenessMonitorHelper ]
+                       STYScenarioReportLogger, STYSentryDiagnosticsHelper, STYSignpostStreamingStatistics, 
+                       STYSignpostsMonitor, STYSignpostsMonitorHelper, STYSlowWakeMonitor, 
+                       STYSpecialAppLaunchSignpostMonitorHelper, STYSystemWakeDataProvider, 
+                       STYURLSessionHelper, STYUserScenario, STYUserScenarioCache, 
+                       STYWakeDetector, STYWakeDetectorDebugInfo, STYWakeDiagnosticManager, 
+                       STYWakeEvent, STYWorkflowEventTracker, STYWorkflowResponsivenessMonitorHelper ]
 ...

@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target arm64e-apple-macos15.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 3.2.7 -module-name Charts
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target arm64e-apple-macos15.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3.4.11 -module-name Charts
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Foundation
 import Swift
 import SwiftUI
@@ -352,18 +353,10 @@ extension Charts.ChartContent {
   @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Self, _ inputs: Charts._ChartContentLayoutInputs)
   @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Self, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public protocol VectorizedChartContent<DataElement> : Charts.ChartContent {
   associatedtype DataElement
 }
-#else
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public protocol VectorizedChartContent : Charts.ChartContent {
-  associatedtype DataElement
-}
-#endif
-#if compiler(>=5.3) && $ParameterPacks
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @usableFromInline
 @frozen internal struct BuilderTuple<each T> {
@@ -373,8 +366,6 @@ public protocol VectorizedChartContent : Charts.ChartContent {
         self.elements = elements
     }
 }
-#endif
-#if compiler(>=5.3) && $ParameterPacks
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Charts.BuilderTuple : Charts.ChartContent where repeat each T : Charts.ChartContent {
   @inlinable @_Concurrency.MainActor @preconcurrency internal var body: Swift.Never {
@@ -392,7 +383,6 @@ extension Charts.BuilderTuple : Charts.ChartContent where repeat each T : Charts
   @usableFromInline
   internal typealias Body = Swift.Never
 }
-#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension SwiftUICore.View {
   nonisolated public func chartLegend<Content>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
@@ -1224,15 +1214,11 @@ extension Charts.ChartContent {
   @_alwaysEmitIntoClient public static func buildBlock<C>(_ content: C) -> C where C : Charts.ChartContent {
         return content
     }
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_disfavoredOverload public static func buildBlock<each C>(_ content: repeat each C) -> some Charts.ChartContent where repeat each C : Charts.ChartContent {
         return BuilderTuple(elements: (repeat each content))
     }
-  #if compiler(>=5.3) && $ParameterPacks
-
-  #endif
-  #endif
+  
   @_alwaysEmitIntoClient public static func buildIf<T>(_ content: T?) -> T? where T : Charts.ChartContent {
         return content
     }
@@ -1257,7 +1243,6 @@ extension Swift.Never : Charts.ChartContent {
   @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Swift.Never, _ inputs: Charts._ChartContentLayoutInputs)
   @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Swift.Never, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : Charts.ChartContent where Wrapped : Charts.ChartContent {
   @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
@@ -1268,18 +1253,6 @@ extension Swift.Optional : Charts.ChartContent where Wrapped : Charts.ChartConte
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Swift.Optional : Charts.ChartContent where Wrapped : Charts.ChartContent {
-  @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
-    get
-  }
-  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentLayoutInputs)
-  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
-  public typealias Body = Swift.Never
-}
-#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @usableFromInline
 @frozen @_Concurrency.MainActor @preconcurrency internal struct BuilderEmpty : Charts.ChartContent {
@@ -1659,15 +1632,11 @@ extension SwiftUICore.ForEach where Content : Charts.ChartContent {
   @_alwaysEmitIntoClient public static func buildBlock<T>(_ content: T) -> T where T : Charts.AxisMark {
         content
     }
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_disfavoredOverload public static func buildBlock<each T>(_ content: repeat each T) -> some Charts.AxisMark where repeat each T : Charts.AxisMark {
         BuilderTuple(elements: (repeat each content))
     }
-  #if compiler(>=5.3) && $ParameterPacks
-
-  #endif
-  #endif
+  
   @_alwaysEmitIntoClient public static func buildIf<T>(_ content: T?) -> T? where T : Charts.AxisMark {
         return content
     }
@@ -1684,7 +1653,6 @@ extension SwiftUICore.ForEach where Content : Charts.ChartContent {
         content
     }
 }
-#if compiler(>=5.3) && $ParameterPacks
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Charts.BuilderTuple : Charts.AxisMark where repeat each T : Charts.AxisMark {
   @usableFromInline
@@ -1692,7 +1660,6 @@ extension Charts.BuilderTuple : Charts.AxisMark where repeat each T : Charts.Axi
   @usableFromInline
   internal static func _renderAxisMark(_ content: Charts.BuilderTuple<repeat each T>, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
-#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderPair : Charts.AxisContent where T0 : Charts.AxisContent, T1 : Charts.AxisContent {
   @inlinable internal init(_ first: T0, _ second: T1) {
@@ -1995,15 +1962,11 @@ extension Charts.ChartSymbolShape where Self == Charts.BasicChartSymbolShape {
   @_alwaysEmitIntoClient public static func buildBlock<T>(_ content: T) -> T where T : Charts.AxisContent {
         content
     }
-  #if compiler(>=5.3) && $ParameterPacks
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_disfavoredOverload public static func buildBlock<each T>(_ content: repeat each T) -> some Charts.AxisContent where repeat each T : Charts.AxisContent {
         BuilderTuple(elements: (repeat each content))
     }
-  #if compiler(>=5.3) && $ParameterPacks
-
-  #endif
-  #endif
+  
   @_alwaysEmitIntoClient public static func buildIf<T>(_ content: T?) -> T? where T : Charts.AxisContent {
         content
     }
@@ -2020,13 +1983,11 @@ extension Charts.ChartSymbolShape where Self == Charts.BasicChartSymbolShape {
         content
     }
 }
-#if compiler(>=5.3) && $ParameterPacks
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Charts.BuilderTuple : Charts.AxisContent where repeat each T : Charts.AxisContent {
   @usableFromInline
   internal static func _makeAxisContent(_ content: Charts.BuilderTuple<repeat each T>, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
-#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_Concurrency.MainActor @preconcurrency public struct PointMark {
   nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
@@ -2068,17 +2029,10 @@ extension Swift.Never : Charts.AxisContent {
     }
   public static func _makeAxisContent(_ content: Charts.AnyAxisContent, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : Charts.AxisContent where Wrapped : Charts.AxisContent {
   public static func _makeAxisContent(_ content: Wrapped?, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Swift.Optional : Charts.AxisContent where Wrapped : Charts.AxisContent {
-  public static func _makeAxisContent(_ content: Wrapped?, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
-}
-#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderConditional : Charts.AxisContent where TrueContent : Charts.AxisContent, FalseContent : Charts.AxisContent {
   public static func _makeAxisContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
@@ -2356,19 +2310,11 @@ extension Swift.Never : Charts.AxisMark {
   public static func _layoutAxisMark(_ content: Charts.AnyAxisMark, _ inputs: Charts._AxisMarkLayoutInputs)
   public static func _renderAxisMark(_ content: Charts.AnyAxisMark, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
-#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : Charts.AxisMark where Wrapped : Charts.AxisMark {
   public static func _layoutAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkLayoutInputs)
   public static func _renderAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
-#else
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Swift.Optional : Charts.AxisMark where Wrapped : Charts.AxisMark {
-  public static func _layoutAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkLayoutInputs)
-  public static func _renderAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
-}
-#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderEmpty : Charts.AxisMark {
   @usableFromInline

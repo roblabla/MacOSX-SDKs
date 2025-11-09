@@ -4,8 +4,7 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMLTestFramework.framework/Versions/A/CoreMLTestFramework'
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPvEEE, __ZTINSt3__117bad_function_callE, 
-                       __ZTSNSt3__110__function6__baseIFvPvEEE, __ZTSNSt3__117bad_function_callE ]
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPvEEE, __ZTSNSt3__110__function6__baseIFvPvEEE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CoreMLTestFrameworkVersionNumber, _CoreMLTestFrameworkVersionString, 
                        __ZN7MILBlob4Fp168SetFloatEf, __ZN7MILBlob4Fp169FromFloatEf, 

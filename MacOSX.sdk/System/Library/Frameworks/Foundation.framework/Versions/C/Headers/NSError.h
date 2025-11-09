@@ -42,13 +42,7 @@ FOUNDATION_EXPORT NSErrorUserInfoKey const NSURLErrorKey;              // NSURL
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSString
 
 NS_SWIFT_SENDABLE // Immutable, and NSError must be Sendable because it conforms to Error in Swift
-@interface NSError : NSObject <NSCopying, NSSecureCoding> {
-    @private
-    void *_reserved;
-    NSInteger _code;
-    NSString *_domain;
-    NSDictionary *_userInfo;
-}
+@interface NSError : NSObject <NSCopying, NSSecureCoding>
 
 /* Domain cannot be nil; dict may be nil if no userInfo desired.
 */

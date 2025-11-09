@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUICore.framework/Versions/A/ScreenTimeUICore'
-current-version: 537.2.14
+current-version: 537.4.20
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -182,7 +182,15 @@ exports:
                        '_$s16ScreenTimeUICore16UsageDetailChartV5modelA2C5ModelV_tcfC', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV7SwiftUI4ViewAAMc', 
                        '_$s16ScreenTimeUICore16UsageDetailChartVMa', '_$s16ScreenTimeUICore16UsageDetailChartVMn', 
-                       '_$s16ScreenTimeUICore16UsageDetailChartVN', '_$s16ScreenTimeUICore17NotificationsViewV10helpAnchor11userAltDSID15lastUpdatedDate16showDevicePicker05usageO7Options013selectedUsageO0ACSS_SSSg7SwiftUI7BindingVySSGSbSayAA0tO6OptionOGAMyAPGtcfC', 
+                       '_$s16ScreenTimeUICore16UsageDetailChartVN', '_$s16ScreenTimeUICore17AppLimitViewModelC6userIDAC0aB4Core04UserI0C_tcfC', 
+                       '_$s16ScreenTimeUICore17AppLimitViewModelC6userIDAC0aB4Core04UserI0C_tcfCTj', 
+                       '_$s16ScreenTimeUICore17AppLimitViewModelC6userIDAC0aB4Core04UserI0C_tcfCTq', 
+                       '_$s16ScreenTimeUICore17AppLimitViewModelC6userIDAC0aB4Core04UserI0C_tcfc', 
+                       '_$s16ScreenTimeUICore17AppLimitViewModelCMa', '_$s16ScreenTimeUICore17AppLimitViewModelCMm', 
+                       '_$s16ScreenTimeUICore17AppLimitViewModelCMn', '_$s16ScreenTimeUICore17AppLimitViewModelCMo', 
+                       '_$s16ScreenTimeUICore17AppLimitViewModelCMu', '_$s16ScreenTimeUICore17AppLimitViewModelCN', 
+                       '_$s16ScreenTimeUICore17AppLimitViewModelCfD', '_$s16ScreenTimeUICore17AppLimitViewModelCfd', 
+                       '_$s16ScreenTimeUICore17NotificationsViewV10helpAnchor11userAltDSID15lastUpdatedDate16showDevicePicker05usageO7Options013selectedUsageO0ACSS_SSSg7SwiftUI7BindingVySSGSbSayAA0tO6OptionOGAMyAPGtcfC', 
                        '_$s16ScreenTimeUICore17NotificationsViewV4bodyQrvg', '_$s16ScreenTimeUICore17NotificationsViewV4bodyQrvpMV', 
                        '_$s16ScreenTimeUICore17NotificationsViewV4bodyQrvpQOMQ', 
                        '_$s16ScreenTimeUICore17NotificationsViewV5ModelV11startOfWeek0gH3DayAE10Foundation4DateV_AJtcfC', 

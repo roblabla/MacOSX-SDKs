@@ -92,8 +92,8 @@ API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED @protocol UID
 - (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(nullable NSString *)application;
 
 // Used to handle additional menu items that can be performed on the item specified by URL.  Currently only supports the "copy:", "print:" and "saveToCameraRoll:" actions.
-- (BOOL)documentInteractionController:(UIDocumentInteractionController *)controller canPerformAction:(nullable SEL)action NS_DEPRECATED_IOS(3_2, 6_0);
-- (BOOL)documentInteractionController:(UIDocumentInteractionController *)controller performAction:(nullable SEL)action NS_DEPRECATED_IOS(3_2, 6_0);
+- (BOOL)documentInteractionController:(UIDocumentInteractionController *)controller canPerformAction:(nullable SEL)action NS_DEPRECATED_IOS(3_2, 6_0, "");
+- (BOOL)documentInteractionController:(UIDocumentInteractionController *)controller performAction:(nullable SEL)action NS_DEPRECATED_IOS(3_2, 6_0, "");
 
 @end 
 

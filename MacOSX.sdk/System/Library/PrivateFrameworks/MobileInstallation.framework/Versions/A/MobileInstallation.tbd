@@ -77,7 +77,7 @@ exports:
                        MIDaemonConfiguration, MIDriverKitBundle, MIExecutableBundle, 
                        MIExtensionKitBundle, MIFileManager, MIFilesystemScanner, 
                        MIGlobalConfiguration, MIInstalledInfoGatherer, MILaunchServicesDatabaseGatherer, 
-                       MIMachOImageSlice, MIPluginKitBundle, MIStoreMetadata, MIStoreMetadataDistributor, 
-                       MIStoreMetadataSubGenre, MITestManager, MIWrappedBundleContainer, 
-                       MIWrappedBundleContainerToken ]
+                       MIMCMContainer, MIMachOImageSlice, MIPluginKitBundle, MIStoreMetadata, 
+                       MIStoreMetadataDistributor, MIStoreMetadataSubGenre, MITestManager, 
+                       MIWrappedBundleContainer, MIWrappedBundleContainerToken ]
 ...

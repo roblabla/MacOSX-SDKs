@@ -37,12 +37,12 @@ exports:
                        _PLSysdiagnoseCopyPowerlog, _PLSysdiagnoseTimeSensitivePhase, 
                        _PLTalkToPowerlogHelper, _PPSCreateTelemetryIdentifier, _PPSSendTelemetry, 
                        _PerfPowerTelemetryCreateIdentifier, _PerfPowerTelemetrySendEvent, 
-                       _batteryUIHasNoteworthyInformation, _kPLHPDConfigPath, _perfpowertelemetry_create_identifier, 
-                       _perfpowertelemetry_send_event, _pps_create_telemetry_identifier, 
-                       _pps_send_telemetry ]
+                       _batteryUIHasNoteworthyInformation, _kPLHPDConfigPath, _kPPSUrsaErrorDomain, 
+                       _perfpowertelemetry_create_identifier, _perfpowertelemetry_send_event, 
+                       _pps_create_telemetry_identifier, _pps_send_telemetry ]
     objc-classes:    [ PLBatteryUIExternalData, PLCoreDuetEvent, PLCoreDuetEventInterval, 
                        PLDiscretionaryEnergyMonitor, PLDiscretionaryIntervalManager, 
                        PLDuetActivitySchedulerUsageSnapshot, PLEnergyBucket, PLHUDControl, 
                        PLModelingUtilities, PLNetworkEnergyModel, PLUsageSnapshot, 
-                       SafeguardsClient ]
+                       SafeguardsClient, SafeguardsManagingClient ]
 ...

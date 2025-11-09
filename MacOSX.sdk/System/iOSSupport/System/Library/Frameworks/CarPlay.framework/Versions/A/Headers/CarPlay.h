@@ -39,6 +39,7 @@
 #import <CarPlay/CPNavigationAlert.h>
 #import <CarPlay/CPNavigationSession.h>
 #import <CarPlay/CPNowPlayingButton.h>
+#import <CarPlay/CPNowPlayingMode.h>
 #import <CarPlay/CPNowPlayingTemplate.h>
 #import <CarPlay/CPPointOfInterest.h>
 #import <CarPlay/CPPointOfInterestTemplate.h>

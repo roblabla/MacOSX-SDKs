@@ -151,6 +151,17 @@ CFArrayRef CFBundleCopyResourceURLsOfType(CFBundleRef bundle, CFStringRef resour
 CF_EXPORT
 CFStringRef CFBundleCopyLocalizedString(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName) CF_FORMAT_ARGUMENT(2);
 
+/// Returns a localized string given a list of possible localizations. The one most suitable to use with the given ``bundle`` is returned.
+/// - Parameters:
+///   - bundle: The bundle to examine.
+///   - key: The key for the localized string to retrieve.
+///   - value: A default value to return if no value exists for ``key``.
+///   - tableName: The name of the strings file to search.
+///   - localizations: An array of BCP 47 language codes corresponding to available localizations. Bundle compares the array against its available localizations, and uses the best result to retrieve the localized string. If empty, we treat it as no localization is available, and may return a fallback.
+/// - Returns: A localized version of the string designated by ``key`` in table ``tableName``.
+CF_EXPORT
+CFStringRef CFBundleCopyLocalizedStringForLocalizations(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName, CFArrayRef localizations) CF_RETURNS_RETAINED CF_FORMAT_ARGUMENT(2) API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4), tvos(18.4), visionos(2.4)) ;
+
 #define CFCopyLocalizedString(key, comment) \
             CFBundleCopyLocalizedString(CFBundleGetMainBundle(), (key), (key), NULL)
 #define CFCopyLocalizedStringFromTable(key, tbl, comment) \

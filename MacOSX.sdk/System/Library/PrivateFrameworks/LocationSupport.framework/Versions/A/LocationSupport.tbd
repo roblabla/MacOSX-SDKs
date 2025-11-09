@@ -3,11 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LocationSupport.framework/Versions/A/LocationSupport'
-current-version: 2953.0.28
+current-version: 2960.0.57
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CLISP_ME_TOKEN, _CLProfilingIdentify, _CLProfilingIdentifySiloInvocation, 
+    symbols:         [ _CLISP_ME_TOKEN, _CLLogEncryptData, _CLLogEncryptDataSize, 
+                       _CLLogEncryptionClearObsoleteKeys, _CLLogEncryptionInit, _CLLogEncryptionSetDisabled, 
+                       _CLProfilingIdentify, _CLProfilingIdentifySiloInvocation, 
                        _CLWriteStackshot, __ZN12CLConnection10isEntitledERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN12CLConnection11getUserNameEv, __ZN12CLConnection11sendMessageENSt3__110shared_ptrI19CLConnectionMessageEE, 
                        __ZN12CLConnection11sendMessageENSt3__110shared_ptrI19CLConnectionMessageEEU13block_pointerFvS3_E, 

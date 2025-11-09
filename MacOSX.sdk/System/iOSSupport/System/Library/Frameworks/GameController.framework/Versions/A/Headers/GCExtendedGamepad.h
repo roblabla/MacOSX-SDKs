@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  A profile maps the hardware notion of a controller into a logical controller. One that a developer can
  design for and depend on, no matter the underlying hardware.
  */
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0))
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunguarded-availability"
 @interface GCExtendedGamepad : GCPhysicalInputProfile
@@ -32,11 +32,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
 /**
  A profile keeps a reference to the controller that this profile is mapping input from.
  */
-#if !__has_feature(objc_arc)
-@property (nonatomic, readonly, assign) GCController *controller;
-#else
 @property (nonatomic, readonly, weak) GCController *controller;
-#endif
 
 /**
  Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called
@@ -46,7 +42,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  @param gamepad this gamepad that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons.
  @param element the element that has been modified.
  */
-typedef void (^GCExtendedGamepadValueChangedHandler)(GCExtendedGamepad *gamepad, GCControllerElement *element);
+typedef void (^GCExtendedGamepadValueChangedHandler)(GCExtendedGamepad *gamepad, GCControllerElement *element) API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0));
 @property (nonatomic, copy, nullable) GCExtendedGamepadValueChangedHandler valueChangedHandler;
 
 /**
@@ -57,7 +53,7 @@ typedef void (^GCExtendedGamepadValueChangedHandler)(GCExtendedGamepad *gamepad,
  If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as
  a snapshot will not change based on user input once it is taken.
  */
-- (GCExtendedGamepadSnapshot *)saveSnapshot API_DEPRECATED("GCExtendedGamepadSnapshot has been deprecated, use [GCController capture] instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(7.0, 13.0));
+- (GCExtendedGamepadSnapshot *)saveSnapshot API_DEPRECATED("Use the -[GCController capture] method instead", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0));
 
 /**
  Required to be analog in the Extended profile. All the elements of this directional input are thus analog.
@@ -132,7 +128,7 @@ typedef void (^GCExtendedGamepadValueChangedHandler)(GCExtendedGamepad *gamepad,
  @note If the controller's snapshot flag is set to NO, this method has no effect.
  @see GCController.snapshot
  */
-- (void) setStateFromExtendedGamepad:(GCExtendedGamepad *)extendedGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+- (void)setStateFromExtendedGamepad:(GCExtendedGamepad *)extendedGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 @end
 

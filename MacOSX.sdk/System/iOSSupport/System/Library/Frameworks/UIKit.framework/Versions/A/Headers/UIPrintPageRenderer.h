@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIPrintFormatter;
 
-API_AVAILABLE(ios(14.5)) typedef NS_ENUM(NSInteger, UIPrintRenderingQuality) {
+typedef NS_ENUM(NSInteger, UIPrintRenderingQuality) {
     /* Renders the printing at the best possible quality, regardless of speed.
      */
     UIPrintRenderingQualityBest,
@@ -22,9 +22,9 @@ API_AVAILABLE(ios(14.5)) typedef NS_ENUM(NSInteger, UIPrintRenderingQuality) {
     /* Sacrifices the least possible amount of rendering quality for speed to maintain a responsive user interface. This option should be used only after establishing that best quality rendering does indeed make the user interface unresponsive.
      */
     UIPrintRenderingQualityResponsive
-};
+} API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPrintPageRenderer : NSObject
 
 @property(nonatomic) CGFloat   headerHeight;   // top of contentRect from printableRect
@@ -45,7 +45,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
    Return value is the quality you current actually used for the rendering.
    Returns UIPrintRenderingQualityBest by default.
  */
-- (UIPrintRenderingQuality)currentRenderingQualityForRequestedRenderingQuality:(UIPrintRenderingQuality)requestedRenderingQuality NS_SWIFT_NAME(currentRenderingQuality(forRequested:)) API_AVAILABLE(ios(14.5));
+- (UIPrintRenderingQuality)currentRenderingQualityForRequestedRenderingQuality:(UIPrintRenderingQuality)requestedRenderingQuality NS_SWIFT_NAME(currentRenderingQuality(forRequested:)) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos);
 
 - (void)prepareForDrawingPages:(NSRange)range;     // override point. default does nothing. called before requesting a set of pages to draw
 

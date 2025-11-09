@@ -27,21 +27,21 @@ typedef struct PGPhysicalMemoryRange_s
 {
     uint64_t physicalAddress;
     uint64_t physicalLength;
-} PGPhysicalMemoryRange_t API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+} PGPhysicalMemoryRange_t API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGTask_t
  @abstract Opaque type to represent a Task.  The ParavirtualizedGraphics framework will not
  access the contents of this type.
  */
-typedef struct PGTask_s PGTask_t API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef struct PGTask_s PGTask_t API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGTraceRange_t
  @abstract Opaque type to represent a memory trace range.  The ParavirtualizedGraphics framework will not
  access the contents of this type.
  */
-typedef struct PGTraceRange_s PGTraceRange_t API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef struct PGTraceRange_s PGTraceRange_t API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGCreateTask
@@ -53,14 +53,14 @@ typedef struct PGTraceRange_s PGTraceRange_t API_AVAILABLE(macos(11.0)) API_UNAV
  @return A PGTask_t pointer.  The framework will not attempt to access the contents of this pointer.
  Implementation should return NULL on failure.  This pointer will be passed to other task access blocks.
  */
-typedef PGTask_t * _Nullable (^PGCreateTask)(uint64_t vmSize, void * _Nullable * _Nonnull baseAddress) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef PGTask_t * _Nullable (^PGCreateTask)(uint64_t vmSize, void * _Nullable * _Nonnull baseAddress) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGDestroyTask
  @abstract A block that will be invoked to destroy a task object.
  @param task The APVTask object created by an invocation of the APVCreateTask block.
  */
-typedef void (^PGDestroyTask)(PGTask_t * _Nonnull task) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef void (^PGDestroyTask)(PGTask_t * _Nonnull task) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGMapMemory
@@ -72,7 +72,7 @@ typedef void (^PGDestroyTask)(PGTask_t * _Nonnull task) API_AVAILABLE(macos(11.0
  @param ranges The set of PGPhysicalMemoryRange to map.
  @return true if the mapping was successful, false otherwise.
  */
-typedef bool(^PGMapMemory)(PGTask_t * _Nonnull task, uint32_t rangeCount, uint64_t virtualOffset, bool readOnly, PGPhysicalMemoryRange_t * _Nonnull ranges) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef bool(^PGMapMemory)(PGTask_t * _Nonnull task, uint32_t rangeCount, uint64_t virtualOffset, bool readOnly, PGPhysicalMemoryRange_t * _Nonnull ranges) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGUnmapMemory
@@ -81,7 +81,7 @@ typedef bool(^PGMapMemory)(PGTask_t * _Nonnull task, uint32_t rangeCount, uint64
  @param virtualOffset The offset to start unmapping from.
  @param length The number of bytes to unmap.
  */
-typedef bool(^PGUnmapMemory)(PGTask_t * _Nonnull task, uint64_t virtualOffset, uint64_t length) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef bool(^PGUnmapMemory)(PGTask_t * _Nonnull task, uint64_t virtualOffset, uint64_t length) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGReadMemory
@@ -90,14 +90,14 @@ typedef bool(^PGUnmapMemory)(PGTask_t * _Nonnull task, uint64_t virtualOffset, u
  @param length The length of region to read.
  @param dst The destination to write the read bytes into.
  */
-typedef bool(^PGReadMemory)(uint64_t physicalAddress, uint64_t length, void * _Nonnull dst) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef bool(^PGReadMemory)(uint64_t physicalAddress, uint64_t length, void * _Nonnull dst) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGRaiseInterrupt
  @abstract A block that is invoked to raise an interrupt to the guest.
  @param vector The MSI vector to raise an interrupt on.
  */
-typedef void(^PGRaiseInterrupt)(uint32_t vector) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef void(^PGRaiseInterrupt)(uint32_t vector) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGTraceRangeHandler
@@ -109,7 +109,7 @@ typedef void(^PGRaiseInterrupt)(uint32_t vector) API_AVAILABLE(macos(11.0)) API_
  @discussion The returned range may be larger than the range that was actually written, for example, if the client can only determine at page granularity the memory that was
  affected by guest writes, then it may report a larger region.  Clients are also encouraged to coalesce writes over a period of time into a single notification of activity.
  */
-typedef void(^PGTraceRangeHandler)(PGPhysicalMemoryRange_t * _Nonnull dirty) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef void(^PGTraceRangeHandler)(PGPhysicalMemoryRange_t * _Nonnull dirty) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGAddTraceRange
@@ -119,7 +119,7 @@ typedef void(^PGTraceRangeHandler)(PGPhysicalMemoryRange_t * _Nonnull dirty) API
  @param handler The handler to invoke when a range has been modified by the guest.
  @return An opaque handle to the trace range.  The device code will not attempt to access the contents of this structure.
  */
-typedef PGTraceRange_t* _Nullable(^PGAddTraceRange)(PGPhysicalMemoryRange_t * _Nonnull range, PGTraceRangeHandler _Nonnull handler) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef PGTraceRange_t* _Nullable(^PGAddTraceRange)(PGPhysicalMemoryRange_t * _Nonnull range, PGTraceRangeHandler _Nonnull handler) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @typedef PGRemoveTraceRange
@@ -127,16 +127,16 @@ typedef PGTraceRange_t* _Nullable(^PGAddTraceRange)(PGPhysicalMemoryRange_t * _N
  @param range The range to remove.
  @discussion The client should consume any pending invocations of the range handler before the end of this block invocation.
  */
-typedef void(^PGRemoveTraceRange)(PGTraceRange_t * _Nonnull range) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+typedef void(^PGRemoveTraceRange)(PGTraceRange_t * _Nonnull range) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 
-PG_EXTERN API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
+PG_EXTERN API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 @interface PGDeviceDescriptor : NSObject
 /*!
  @property device
  @abstract The metal device to use to back the PGDevice
  */
-@property (readwrite, nonatomic, retain, nullable) id<MTLDevice> device API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, retain, nullable) id<MTLDevice> device API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property mmioLength
@@ -144,72 +144,72 @@ PG_EXTERN API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @discussion By default, the value of mmioLength will be the recommended default size for
  the MMIO memory.
  */
-@property (readwrite, nonatomic) size_t mmioLength API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic) size_t mmioLength API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property createTask
  @abstract The block to invoke to create a task.
  */
-@property (readwrite, nonatomic, copy, nullable) PGCreateTask createTask API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGCreateTask createTask API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property destroyTask
  @abstract The block to invoke to destroy a task.
  */
-@property (readwrite, nonatomic, copy, nullable) PGDestroyTask destroyTask API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGDestroyTask destroyTask API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property mapMemory
  @abstract The block to invoke to map guest memory into a task.
  */
-@property (readwrite, nonatomic, copy, nullable) PGMapMemory mapMemory API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGMapMemory mapMemory API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property unmapMemory
  @abstract The block to invoke to unmap guest memory from a task.
  */
-@property (readwrite, nonatomic, copy, nullable) PGUnmapMemory unmapMemory API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGUnmapMemory unmapMemory API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property readMemory
  @abstract The block to invoke to perform a read of guest memory
  */
-@property (readwrite, nonatomic, copy, nullable) PGReadMemory readMemory API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGReadMemory readMemory API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property raiseInterrupt
  @abstract The block to invoke to raise an interrupt to the guest.  May be raised from a dispatch queue
  must be thread safe.
  */
-@property (readwrite, nonatomic, copy, nullable) PGRaiseInterrupt raiseInterrupt API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGRaiseInterrupt raiseInterrupt API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property addTraceRange
  @abstract The block to invoke to add a trace range.
  @discussion If the client is unable to provide range tracing, it should not populate this property or removeTraceRange.
  */
-@property (readwrite, nonatomic, copy, nullable) PGAddTraceRange addTraceRange API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGAddTraceRange addTraceRange API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property removeTraceRange
  @abstract The block to invoke to remove a trace range.
  @discussion This property must be populated if addTraceRange is populated.
  */
-@property (readwrite, nonatomic, copy, nullable) PGRemoveTraceRange removeTraceRange API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic, copy, nullable) PGRemoveTraceRange removeTraceRange API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @property displayPortCount
  @abstract The number of PGDisplay ports configured into the VM.
  @discussion By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
  */
-@property (readwrite, nonatomic) uint32_t displayPortCount API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic) uint32_t displayPortCount API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos);
 @end
 
 /*!
  @protocol PGDevice
  @abstract The PGDevice protocol represents a paravirtualized GPU device.
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
 @protocol PGDevice<NSObject>
 /*!
  @method mmioReadAtOffset:
@@ -217,7 +217,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @param offset The offset into the MMIO BAR to read from.
  @return The 32-bit value for the read.
  */
--(uint32_t)mmioReadAtOffset:(size_t) offset API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(uint32_t)mmioReadAtOffset:(size_t) offset API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method mmioWriteAtOffset:value:
@@ -225,7 +225,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @param offset The offset into the MMIO bar to write to.
  @param value The 32-bit value to write to the device.
  */
--(void)mmioWriteAtOffset:(size_t) offset value:(uint32_t)value API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(void)mmioWriteAtOffset:(size_t) offset value:(uint32_t)value API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method newDisplayWithDescriptor:port:serialNum
@@ -235,7 +235,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @param serialNum Serial Number of display (should be unique so Guest compositor can maintain persistent layout of displays on desktop across boots).
  @discussion New display won't hot-plug until first modeList is established.  Releasing this object emulates a hot-unplug.
  */
--(id<PGDisplay> _Nullable)newDisplayWithDescriptor:(PGDisplayDescriptor * _Nonnull)descriptor port:(NSUInteger)port serialNum:(uint32_t)serialNum API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(id<PGDisplay> _Nullable)newDisplayWithDescriptor:(PGDisplayDescriptor * _Nonnull)descriptor port:(NSUInteger)port serialNum:(uint32_t)serialNum API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method willSuspend
@@ -244,7 +244,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @note Mac guests have several wall-clock time limits on command buffer completion so the guest CPUs need to be halted within a short interval
  after this method is called.
  */
--(void)willSuspend API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(void)willSuspend API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method finishSuspend
@@ -252,7 +252,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @return The suspend state data.  This data should be serialized and returned to the device on resume.  Returns nil on suspend failure.
  @note It is not legal to perform any further operations on this device after finishSuspend is called, the device must be released.
  */
--(NSData *_Nullable)finishSuspend NS_RETURNS_RETAINED API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(NSData *_Nullable)finishSuspend NS_RETURNS_RETAINED API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method willResumeWithSuspendState:error:
@@ -264,41 +264,41 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @note Suspended displays should be reattached after this method has been called, but before -[PGDevice didResume:] is invoked.
  @note For resume, this method must be invoked before any calls to `-[PGDevice mmioWriteAtOffset:value:]` or `-[PGDevice mmioReadAtOffset:]` are made.
  */
--(bool)willResumeWithSuspendState:(NSData *_Nonnull)suspendState error:(NSError * __autoreleasing _Nullable * _Nullable)error API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(bool)willResumeWithSuspendState:(NSData *_Nonnull)suspendState error:(NSError * __autoreleasing _Nullable * _Nullable)error API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method didResume
  @abstract Complete the resume.  After this method is invoked, new interrupts may be generated by the device.  Guest memory must be accessible at the time this method is invoked.
  @note An initial interrupt may be generated during the duration of this call.
  */
--(void)didResume API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(void)didResume API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method pause
  @abstract Pause the device, completing all pending operations and writes to guest memory.
  @note This is a lighter weight operation than suspend.  Guest CPUs should be suspended while the device is paused.
  */
--(void)pause API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(void)pause API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method unpause
  @abstract Resume the device from pause state, allowing operations to continue.
  @note An initial interrupt may be generated during the duration of this call.
  */
--(void)unpause API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(void)unpause API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method stop
  @abstract Stop the device entirely, releasing all the guest memory.
  @note Guest CPUs should be suspended or stopped when this method is called.
  */
--(void)stop API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(void)stop API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @method reset
  @abstract Reset the device to a clean state.  This will block until work is quiesced.
  */
--(void)reset API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+-(void)reset API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos);
 @end
 
 /*!
@@ -307,8 +307,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @param descriptor The device descriptor for the new device.
  @deprecated Use PGCreateDeviceWithDescriptor instead as it's annotated correctly for ARC.
  */
-PG_EXTERN id<PGDevice> _Nullable PGNewDeviceWithDescriptor(PGDeviceDescriptor * _Nonnull descriptor) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos) API_DEPRECATED_WITH_REPLACEMENT("PGCreateDeviceWithDescriptor", macos(11.0, 15.2));
-
+PG_EXTERN id<PGDevice> _Nullable PGNewDeviceWithDescriptor(PGDeviceDescriptor * _Nonnull descriptor) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos) API_DEPRECATED_WITH_REPLACEMENT("PGCreateDeviceWithDescriptor", macos(11.0, 15.2));
 
 /*!
  @function PGCreateDeviceWithDescriptor
@@ -322,12 +321,12 @@ PG_EXTERN id<PGDevice> _Nullable PGCreateDeviceWithDescriptor(PGDeviceDescriptor
  @abstract Returns the maximum number of PGDisplay ports that a PGDevice can be configured with.
  @note See PGDeviceDescriptor's displayPortCount property.
  */
-PG_EXTERN uint32_t PGMaxDisplayPortCount(void) API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+PG_EXTERN uint32_t PGMaxDisplayPortCount(void) API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @const PGResumeErrorDomain The error domain for reporting errors in resume.
  */
-PG_EXTERN NSErrorDomain const _Nonnull PGResumeErrorDomain API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+PG_EXTERN NSErrorDomain const _Nonnull PGResumeErrorDomain API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @enum PGResumeErrorCode
@@ -346,7 +345,7 @@ typedef NS_ENUM(NSUInteger, PGResumeErrorCode) {
     PGResumeErrorCodeInvalidGuestVersion,
     PGResumeErrorCodeIncompatibleDevice,
     PGResumeErrorCodeInvalidDisplayPortCount,
-} API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
 /*!
  @function PGCopyOptionROMURL

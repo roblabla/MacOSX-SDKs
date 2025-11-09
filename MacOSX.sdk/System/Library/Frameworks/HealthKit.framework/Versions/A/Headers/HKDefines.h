@@ -5,6 +5,7 @@
 //  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <os/availability.h>
 
@@ -104,6 +105,7 @@ typedef NS_ENUM(NSInteger, HKAuthorizationRequestStatus) {
 
 /// Returns the set of `HKCategoryValueSleepAnalysis` values that are considered to be asleep.
 HK_EXTERN NSSet<NSNumber *> * HKCategoryValueSleepAnalysisAsleepValues(void) API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_REFINED_FOR_SWIFT;
+
 
 NS_ASSUME_NONNULL_END
 

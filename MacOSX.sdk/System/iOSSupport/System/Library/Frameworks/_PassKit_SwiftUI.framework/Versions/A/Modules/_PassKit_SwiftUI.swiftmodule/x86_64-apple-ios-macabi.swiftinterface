@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.5 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios18.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1591.3.10 -module-name _PassKit_SwiftUI
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1591.5.17.3 -module-name _PassKit_SwiftUI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1
 import Foundation
 @_exported import PassKit
 import Swift
@@ -154,7 +155,7 @@ extension _PassKit_SwiftUI.PayWithApplePayButton where Fallback == SwiftUICore.E
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.VerifyIdentityWithWalletButton {
-  nonisolated public init(_ label: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonLabel = .verifyIdentity, request: PassKit.PKIdentityRequest, onCompletion: @escaping ((Swift.Result<PassKit.PKIdentityDocument, any Swift.Error>) -> Swift.Void), @SwiftUICore.ViewBuilder fallback: () -> Fallback)
+  nonisolated public init(_ label: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonLabel = .verifyIdentity, request: PassKit.PKIdentityRequest, onCompletion: @escaping (Swift.Result<PassKit.PKIdentityDocument, any Swift.Error>) -> Swift.Void, @SwiftUICore.ViewBuilder fallback: () -> Fallback)
 }
 @available(iOS 16.0, *)
 @available(macOS, unavailable)
@@ -162,7 +163,7 @@ extension _PassKit_SwiftUI.VerifyIdentityWithWalletButton {
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.VerifyIdentityWithWalletButton where Fallback == SwiftUICore.EmptyView {
   nonisolated public init(_ label: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonLabel = .verifyIdentity, action: @escaping () -> Swift.Void)
-  nonisolated public init(_ label: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonLabel = .verifyIdentity, request: PassKit.PKIdentityRequest, onCompletion: @escaping ((Swift.Result<PassKit.PKIdentityDocument, any Swift.Error>) -> Swift.Void))
+  nonisolated public init(_ label: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonLabel = .verifyIdentity, request: PassKit.PKIdentityRequest, onCompletion: @escaping (Swift.Result<PassKit.PKIdentityDocument, any Swift.Error>) -> Swift.Void)
 }
 @available(iOS 15.5, macOS 12.5, watchOS 8.5, *)
 @available(tvOS, unavailable)
@@ -251,7 +252,10 @@ public struct VerifyIdentityWithWalletButtonLabel {
 @available(watchOS, unavailable)
 public struct VerifyIdentityWithWalletButtonStyle {
   public static let black: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonStyle
-  public static var blackOutline: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonStyle
+  public static let blackOutline: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonStyle
+  @_silgen_name("$s16_PassKit_SwiftUI35VerifyIdentityWithWalletButtonStyleV12blackOutlineACvsZ")
+  @usableFromInline
+  internal func _setVerifyIdentityWithWalletButtonStyleBlackOutline(_ blackOutline: _PassKit_SwiftUI.VerifyIdentityWithWalletButtonStyle)
 }
 @available(iOS 16.0, *)
 @available(macOS, unavailable)

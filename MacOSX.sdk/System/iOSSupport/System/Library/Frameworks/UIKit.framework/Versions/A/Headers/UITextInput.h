@@ -41,6 +41,8 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @class UIBarButtonItem;
 @class NSAdaptiveImageGlyph;
 @class NSAttributedString;
+@class UIConversationContext;
+@class UIInputSuggestion;
 
 @protocol UITextInputTokenizer;
 @protocol UITextInputDelegate;
@@ -264,8 +266,11 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 - (void)replaceRange:(UITextRange *)range withAttributedText:(NSAttributedString *)attributedText API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // These methods are called when the Writing Tools panel is presented and dismissed
-- (void)willPresentWritingTools API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
-- (void)didDismissWritingTools API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+- (void)willPresentWritingTools API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
+- (void)didDismissWritingTools API_AVAILABLE(ios(18.0), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
+
+/// Inserts the user or system’s input suggestion into the document.
+- (void)insertInputSuggestion:(UIInputSuggestion *)inputSuggestion API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos, watchos, visionos, macCatalyst);
 @end
 
 //---------------------------------------------------------------------------------------------------
@@ -321,6 +326,8 @@ API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 - (void)textWillChange:(nullable id <UITextInput>)textInput;
 - (void)textDidChange:(nullable id <UITextInput>)textInput;
 
+/// Tells the input delegate when text has changed in the input object for a conversation.
+- (void)conversationContext:(nullable UIConversationContext *)context didChange:(nullable id <UITextInput>)textInput API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos, watchos, visionos, macCatalyst);
 @end
 
 

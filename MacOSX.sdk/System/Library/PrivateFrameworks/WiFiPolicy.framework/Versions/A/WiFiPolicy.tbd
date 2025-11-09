@@ -137,6 +137,7 @@ exports:
                        WiFiUsagePrivacyFilter, WiFiUsageRangingRttSample, WiFiUsageRangingSession, 
                        WiFiUsageRealTimeCoexSession, WiFiUsageSession, WiFiUsageSessionCAConfig, 
                        WiFiUsageSessionLQM, WiFiUsageSessionPingPongStats, WiFiUsageSoftApSession, 
-                       WiFiUsageUserSession, WiFiWalletPass, WiFiWalletSource ]
+                       WiFiUsageUserSession, WiFiUsageWatchdogDetails, WiFiWalletPass, 
+                       WiFiWalletSource ]
     objc-ivars:      [ WFLoggerBase._ctxt, WFLoggerBase._dispatchQueue, WFLoggerBase._internalInstall ]
 ...

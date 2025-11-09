@@ -17,6 +17,7 @@ NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(18.2))
 API_UNAVAILABLE(macos)
 API_UNAVAILABLE(watchos, tvos, visionos)
+BROWSERENGINE_EXPORT
 @interface BEDownloadMonitorLocation : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -24,10 +25,12 @@ API_UNAVAILABLE(watchos, tvos, visionos)
 @property (readonly) NSData* bookmarkData;
 @end
 
+NS_REFINED_FOR_SWIFT
 NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(18.2))
 API_UNAVAILABLE(macos)
 API_UNAVAILABLE(watchos, tvos, visionos)
+BROWSERENGINE_EXPORT
 @interface BEDownloadMonitor : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

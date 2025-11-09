@@ -10,6 +10,7 @@
 #define _LIBCPP___TYPE_TRAITS_IS_TRIVIALLY_LEXICOGRAPHICALLY_COMPARABLE_H
 
 #include <__config>
+#include <__fwd/byte.h>
 #include <__type_traits/integral_constant.h>
 #include <__type_traits/is_same.h>
 #include <__type_traits/is_unsigned.h>

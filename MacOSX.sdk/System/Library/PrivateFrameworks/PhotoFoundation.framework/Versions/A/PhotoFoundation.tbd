@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundation.framework/Versions/A/PhotoFoundation'
-current-version: 721.0.150
+current-version: 751.0.104
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _PFAbstractMethodException, _PFBackendGetLog, _PFCount, _PFExists, 
-                       _PFFilter, _PFFind, _PFFloatNan, _PFLargestSalientAspectFilledCropRect, 
+    symbols:         [ _PFAbstractMethodException, _PFBackendGetLog, _PFCount, _PFCrashWithErrno, 
+                       _PFExists, _PFFilter, _PFFind, _PFFloatNan, _PFLargestSalientAspectFilledCropRect, 
                        _PFLocalizedStringWithValidatedFormat, _PFMap, _PFMapDictionary, 
                        _PFMapIndexes, _PFMethodNotImplementedException, _PFOSVariantHasInternalDiagnostics, 
                        _PFOSVariantHasInternalUI, _PFObjc_classIsSubclassOfClass, 
@@ -23,12 +23,13 @@ exports:
                        _PFStringVersionOfLinkTimeLibrary, _PFStringVersionOfRunTimeLibrary, 
                        _PFStringWithValidatedFormat, _PFStringWithValidatedFormatAndLocale, 
                        _PFUIGetLog, __PFAssertContinueHandler, __PFAssertFailHandler ]
-    objc-classes:    [ PFAssertionHandler, PFAssertionInfo, PFAssertionPolicyAbort, 
-                       PFAssertionPolicyAlert, PFAssertionPolicyAlertRadar, PFAssertionPolicyComposite, 
-                       PFAssertionPolicyCrashReport, PFAssertionPolicyDebuggerFatal, 
-                       PFAssertionPolicyDebuggerWarning, PFAssertionPolicyLog, PFAssertionPolicyThrow, 
-                       PFAssertionPolicyThrowAlways, PFAssertionPolicyUnique, PFAssertionPolicyUnitTest, 
-                       PFCoalescer, PFCoalescerActivityToken, PFCoalescerContext, 
-                       PFMutualExclusionAssertion, PFStateCaptureHandler, PFTimeService, 
-                       PFTokenBucket ]
+    objc-classes:    [ PFAbstractStateCaptureEvent, PFAssertionHandler, PFAssertionInfo, 
+                       PFAssertionPolicyAbort, PFAssertionPolicyAlert, PFAssertionPolicyAlertRadar, 
+                       PFAssertionPolicyComposite, PFAssertionPolicyCrashReport, 
+                       PFAssertionPolicyDebuggerFatal, PFAssertionPolicyDebuggerWarning, 
+                       PFAssertionPolicyLog, PFAssertionPolicyThrow, PFAssertionPolicyThrowAlways, 
+                       PFAssertionPolicyUnique, PFAssertionPolicyUnitTest, PFCoalescer, 
+                       PFCoalescerActivityToken, PFCoalescerContext, PFMutualExclusionAssertion, 
+                       PFStateCaptureEventDescription, PFStateCaptureEventLog, PFStateCaptureHandler, 
+                       PFTimeService, PFTokenBucket ]
 ...

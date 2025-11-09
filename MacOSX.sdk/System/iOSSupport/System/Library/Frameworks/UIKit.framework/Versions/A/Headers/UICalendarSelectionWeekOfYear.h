@@ -29,7 +29,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 @end
 
-API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UICalendarSelectionWeekOfYearDelegate <NSObject>
 
 /**

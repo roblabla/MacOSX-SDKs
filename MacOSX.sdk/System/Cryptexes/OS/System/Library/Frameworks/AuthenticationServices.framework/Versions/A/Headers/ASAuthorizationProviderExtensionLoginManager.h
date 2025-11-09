@@ -125,6 +125,28 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 - (void)resetUserSecureEnclaveKey API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
+
+/*!
+ @abstract Provides a new or cached attestation for the specified key type.
+ @param keyType The key type for the attestation.
+ @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server.
+ @param completion A closure that the method calls upon completion with the following parameters:
+ *  * attestationCertificates An array of certificates that verify the validity of the key associated with the keyType. Send this to your server for processing.
+ *  * error A DCError instance that indicates the reason for failure, or nil on success.
+ */
+- (void)attestKey:(ASAuthorizationProviderExtensionKeyType)keyType clientDataHash:(NSData *)clientDataHash completion:(void (^)(NSArray * _Nullable attestationCertificates, NSError * _Nullable error))completion NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.4)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Provides a new or cached attestation for the specified pending key type.
+ @param keyType The pending key type for the attestation.
+ @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server.
+ @param completion A closure that the method calls upon completion with the following parameters:
+ *  * attestationCertificates An array of certificates that verify the validity of the pending key associated with the keyType. Send this to your server for processing.
+ *  * error A DCError instance that indicates the reason for failure, or nil on success.
+ */
+- (void)attestPendingKey:(ASAuthorizationProviderExtensionKeyType)keyType clientDataHash:(NSData *)clientDataHash completion:(void (^)(NSArray * _Nullable attestationCertificates, NSError * _Nullable error))completion NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.4)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
 /*! @abstract Asks authorization service to show extension view controller for registration. If the controller cannot be shown an error is returned.  This is only valid during registration.
 */
 - (void)presentRegistrationViewControllerWithCompletion:(void(^)(NSError * _Nullable error))completion;

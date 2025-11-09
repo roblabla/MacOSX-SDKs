@@ -5,7 +5,7 @@
 #import <GameKit/GKChallenge.h>
 
 /// GKChallengeEventHandler's delegate must implement the following protocol to be notified of challenge-related events. All of these methods are called on the main thread.
-API_DEPRECATED("You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.", ios(6.0,7.0), macos(10.8,10.10)) __WATCHOS_PROHIBITED API_UNAVAILABLE(tvos)
+API_DEPRECATED("You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos, watchos)
 @protocol GKChallengeEventHandlerDelegate <NSObject>
 
 @optional
@@ -33,13 +33,11 @@ API_DEPRECATED("You should instead implement the GKChallengeListener protocol an
 
 @end
 
-#if !TARGET_OS_WATCH
-API_DEPRECATED("You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
+API_DEPRECATED("You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos, watchos)
 /// A singleton object responsible for dispatching challenge-related events to its delegate
 @interface GKChallengeEventHandler : NSObject
 
-+ (GKChallengeEventHandler *) challengeEventHandler NS_DEPRECATED(10_8, 10_10, 6_0, 7_0);
++ (GKChallengeEventHandler *) challengeEventHandler API_DEPRECATED("No longer supported.", ios(6.0,7.0), macos(10.8,10.10), visionos(1.0,1.0)) API_UNAVAILABLE(tvos, watchos);
 
-@property (nonatomic, weak) id<GKChallengeEventHandlerDelegate> delegate NS_DEPRECATED(10_8, 10_10, 6_0, 7_0); /// It is not safe to read or write this property on anything other than the main thread
+@property (nonatomic, weak) id<GKChallengeEventHandlerDelegate> delegate API_DEPRECATED("No longer supported.", ios(6.0,7.0), macos(10.8,10.10), visionos(1.0,1.0)) API_UNAVAILABLE(tvos, watchos); /// It is not safe to read or write this property on anything other than the main thread
 @end
-#endif

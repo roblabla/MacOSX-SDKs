@@ -6,7 +6,6 @@
 //  Copyright © 2022 Apple, Inc. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 
 @class PKIdentityDocument;
@@ -46,7 +45,6 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @end
 
 NS_ASSUME_NONNULL_END
-
 
 #else
 #import <TargetConditionals.h>

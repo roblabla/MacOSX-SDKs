@@ -12,6 +12,8 @@
 #import <GameController/GCTypes.h>
 #import <GameController/GCColor.h>
 
+#import <GameController/GCProductCategories.h>
+
 #import <GameController/GCDevice.h>
 #import <GameController/GCDevicePhysicalInput.h>
 
@@ -64,7 +66,6 @@
 #import <GameController/GCMicroGamepadSnapshot.h>
 #import <GameController/GCDirectionalGamepad.h>
 
-#import <GameController/GCProductCategories.h>
 #import <GameController/GCController.h>
 #import <GameController/GCKeyboard.h>
 #import <GameController/GCMouse.h>

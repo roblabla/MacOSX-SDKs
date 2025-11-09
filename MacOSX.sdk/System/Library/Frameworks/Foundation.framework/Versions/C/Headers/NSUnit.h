@@ -85,6 +85,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 /*
  NSUnit is the base class for all unit types (dimensional and dimensionless).
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @interface NSUnit : NSObject <NSCopying, NSSecureCoding> {
 @private
@@ -103,6 +104,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 #pragma mark Dimensions
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @interface NSDimension : NSUnit <NSSecureCoding> {
 @private

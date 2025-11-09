@@ -5,6 +5,7 @@
 //  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 #import <HealthKit/HKQuantityAggregationStyle.h>
@@ -236,6 +237,7 @@ API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0))
 @interface HKElectrocardiogramType : HKSampleType
 @end
 
+
 /*!
  @class         HKPrescriptionType
  @abstract      Represents a prescription type
@@ -265,5 +267,6 @@ NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
 @interface HKStateOfMindType : HKSampleType
 @end
+
 
 NS_ASSUME_NONNULL_END

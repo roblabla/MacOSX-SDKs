@@ -20,7 +20,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @param data The data to be signed, typically the digest of the actual data.
 /// @param algorithm A  @c SecKeyAlgorithm suitable for generating signatures with this key – e.g: @c kSecKeyAlgorithmECDSASignatureMessageX962SHA256
 /// @param handler Completion handler with the signature of given data or an error on failure.
-- (void)signData:(NSData *)data secKeyAlgorithm:(SecKeyAlgorithm)algorithm completion:(void (^)(NSData *_Nullable, NSError *_Nullable))handler NS_SWIFT_NAME(sign(_:algorithm:completion:));
+- (void)signData:(NSData *)data secKeyAlgorithm:(SecKeyAlgorithm)algorithm completion:(void (NS_SWIFT_SENDABLE ^)(NSData *_Nullable, NSError *_Nullable))handler NS_SWIFT_NAME(sign(_:algorithm:completion:));
 
 /// @brief Checks if the the provided algorithm can be used for signing data
 /// @param algorithm Cryptographic algorithm
@@ -32,7 +32,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// typically be less or equal to the value returned by SecKeyGetBlockSize().
 /// @param algorithm A @c SecKeyAlgorithm suitable for decrypting data with this key –e.g: @c kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM
 /// @param handler Completion handler with plaintext or an error on failure.
-- (void)decryptData:(NSData *)data secKeyAlgorithm:(SecKeyAlgorithm)algorithm completion:(void (^)(NSData *_Nullable, NSError *_Nullable))handler NS_SWIFT_NAME(decrypt(_:algorithm:completion:));
+- (void)decryptData:(NSData *)data secKeyAlgorithm:(SecKeyAlgorithm)algorithm completion:(void (NS_SWIFT_SENDABLE ^)(NSData *_Nullable, NSError *_Nullable))handler NS_SWIFT_NAME(decrypt(_:algorithm:completion:));
 
 /// @brief Checks if the the provided algorithm can be used for decryption
 /// @param algorithm Cryptographic algorithm
@@ -44,7 +44,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @param algorithm A @c SecKeyAlgorithm suitable for performing a key exchange with this key –e.g: @c kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA256
 /// @param parameters Dictionary with parameters, see @c SecKeyKeyExchangeParameter constants.  Used algorithm determines the set of required and optional parameters to be used.
 /// @param handler Completion handler with the result of the key exchange or an error on failure.
-- (void)exchangeKeysWithPublicKey:(NSData *)publicKey secKeyAlgorithm:(SecKeyAlgorithm)algorithm secKeyParameters:(NSDictionary *)parameters completion:(void (^)(NSData *_Nullable, NSError *_Nullable))handler NS_SWIFT_NAME(exchangeKeys(publicKey:algorithm:parameters:completion:));
+- (void)exchangeKeysWithPublicKey:(NSData *)publicKey secKeyAlgorithm:(SecKeyAlgorithm)algorithm secKeyParameters:(NSDictionary *)parameters completion:(void (NS_SWIFT_SENDABLE ^)(NSData *_Nullable, NSError *_Nullable))handler NS_SWIFT_NAME(exchangeKeys(publicKey:algorithm:parameters:completion:));
 
 /// @brief Checks if the the provided algorithm can be used for performing key exchanges
 /// @param algorithm Cryptographic algorithm

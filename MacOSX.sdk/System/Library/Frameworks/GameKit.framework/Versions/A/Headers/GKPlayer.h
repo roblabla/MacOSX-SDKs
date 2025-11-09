@@ -14,8 +14,7 @@
 /// Deprecated methods that previously returned player IDs will return GKPlayerIDNoLongerAvailable instead.
 GK_EXTERN NSString * _Nonnull const GKPlayerIDNoLongerAvailable API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
-NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
-
+API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 @interface GKPlayer : GKBasePlayer
 
 ///  This convenience method checks if the gamePlayerID and the teamPlayerID (scopedIDs) are persistent or unique for the instantiation of this app.
@@ -28,16 +27,16 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @property(NS_NONATOMIC_IOSONLY, readonly, nonnull, retain) NSString *teamPlayerID API_AVAILABLE(ios(12.4), macos(10.14.6), tvos(12.4)) API_UNAVAILABLE(watchos);
 
 /// This is player's alias to be displayed. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
-@property(readonly, nonnull, NS_NONATOMIC_IOSONLY)          NSString    *displayName NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nonnull, NS_NONATOMIC_IOSONLY)          NSString    *displayName API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 /// The alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
 @property(readonly, copy, nonnull, NS_NONATOMIC_IOSONLY)    NSString    *alias;
 
-+ (nonnull instancetype)anonymousGuestPlayerWithIdentifier:(nonnull NSString *)guestIdentifier NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
-@property(readonly, nullable, NS_NONATOMIC_IOSONLY) NSString *guestIdentifier NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
++ (nonnull instancetype)anonymousGuestPlayerWithIdentifier:(nonnull NSString *)guestIdentifier API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property(readonly, nullable, NS_NONATOMIC_IOSONLY) NSString *guestIdentifier API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // This convenience method checks if you can invite the player to multiplayer game.
-@property(readonly, NS_NONATOMIC_IOSONLY) BOOL isInvitable API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) __WATCHOS_PROHIBITED;
+@property(readonly, NS_NONATOMIC_IOSONLY) BOOL isInvitable API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 @end
 
 #if !TARGET_OS_WATCH
@@ -48,15 +47,15 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 typedef NS_ENUM(NSInteger, GKPhotoSize) {
     GKPhotoSizeSmall = 0,
     GKPhotoSizeNormal,
-};
+} API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0));
 
 // Asynchronously load the player's photo. Error will be nil on success.
 // Possible reasons for error:
 // 1. Communications failure
 #if TARGET_OS_IPHONE
-- (void)loadPhotoForSize:(GKPhotoSize)size withCompletionHandler:(void(^__nullable)(UIImage * __nullable photo, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 5_0);
+- (void)loadPhotoForSize:(GKPhotoSize)size withCompletionHandler:(void(^__nullable)(UIImage * __nullable photo, NSError * __nullable error))completionHandler API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 #else
-- (void)loadPhotoForSize:(GKPhotoSize)size withCompletionHandler:(void(^__nullable)(NSImage * __nullable photo, NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 5_0);
+- (void)loadPhotoForSize:(GKPhotoSize)size withCompletionHandler:(void(^__nullable)(NSImage * __nullable photo, NSError * __nullable error))completionHandler API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 #endif
 
 @end
@@ -64,17 +63,17 @@ typedef NS_ENUM(NSInteger, GKPhotoSize) {
 #endif
 
 /// Notification will be posted whenever the player details changes. The object of the notification will be the player.
-GK_EXTERN_WEAK NSNotificationName __nonnull GKPlayerDidChangeNotificationName;
+GK_EXTERN_WEAK NSNotificationName __nonnull GKPlayerDidChangeNotificationName API_AVAILABLE(ios(4.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 
 @interface GKPlayer (Deprecated)
 
-@property(readonly, NS_NONATOMIC_IOSONLY)          BOOL         isFriend API_DEPRECATED_WITH_REPLACEMENT("-[GKLocalPlayer loadFriendPlayersWithCompletionHandler:]", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;    // True if this player is a friend of the local player
-@property(readonly, nonnull, retain, NS_NONATOMIC_IOSONLY)  NSString *playerID API_DEPRECATED("Use either the gamePlayerID or teamPlayerID property to identify a player.",ios(4.1,13.0),tvos(9.0,13.0),macos(10.8,10.15));
+@property(readonly, NS_NONATOMIC_IOSONLY)          BOOL         isFriend API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/loadFriendPlayers(completionHandler:)`` instead.", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);    // True if this player is a friend of the local player
+@property(readonly, nonnull, retain, NS_NONATOMIC_IOSONLY)  NSString *playerID API_DEPRECATED("Use ``GKPlayer/gamePlayerID`` or ``GKPlayer/teamPlayerID`` instead.", ios(4.1,13.0), tvos(9.0,13.0), macos(10.8,10.15));
 
 /// Load the Game Center players for the playerIDs provided. Error will be nil on success.
 /// Possible reasons for error:
 /// 1. Unauthenticated local player
 /// 2. Communications failure
 /// 3. Invalid player identifier
-+ (void)loadPlayersForIdentifiers:(nonnull NSArray<NSString *> *)identifiers withCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable players, NSError * __nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED_WITH_REPLACEMENT("-[GKLocalPlayer loadFriendsWithIdentifiers:completionHandler:]",ios(4.1,14.5),tvos(9.0,14.5),macos(10.8,11.3), watchos(3.0,7.4));
++ (void)loadPlayersForIdentifiers:(nonnull NSArray<NSString *> *)identifiers withCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable players, NSError * __nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/loadFriends(identifiedBy:completionHandler:)`` instead.", ios(4.1,14.5), tvos(9.0,14.5), macos(10.8,11.3), watchos(3.0,7.4));
 @end

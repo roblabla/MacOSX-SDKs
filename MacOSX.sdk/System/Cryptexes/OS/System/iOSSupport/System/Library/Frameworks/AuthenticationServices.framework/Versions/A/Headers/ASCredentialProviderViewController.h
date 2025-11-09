@@ -208,6 +208,7 @@ API_DEPRECATED_WITH_REPLACEMENT("prepareInterfaceToProvideCredentialForRequest:"
 ///                 ├─ SupportsConditionalPasskeyRegistration => true
 - (void)performPasskeyRegistrationWithoutUserInteractionIfPossible:(ASPasskeyCredentialRequest *)registrationRequest NS_SWIFT_NAME(performWithoutUserInteractionIfPossible(passkeyRegistration:)) AS_API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
+
 @end
 
 NS_ASSUME_NONNULL_END

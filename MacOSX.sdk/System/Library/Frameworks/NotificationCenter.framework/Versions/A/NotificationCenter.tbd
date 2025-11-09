@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/NotificationCenter.framework/Versions/A/NotificationCenter'
-current-version: 1459.2.19
+current-version: 1459.4.21
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NCMaterialComputedStyle, _NCMaterialControlColor, _NCMaterialGetCustomAppearance, 

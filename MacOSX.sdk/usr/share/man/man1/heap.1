@@ -60,7 +60,9 @@ or the Xcode Memory Graph Debugger.
 The following options are available:
 .Bl -tag -width indent
 .It Fl s | Fl sortBySize
-Sort output by total size of class instances, rather than by count.
+Sort output by total size of class instances, rather than by count. In
+.Nm -addresses
+mode sort output by allocation size.
 .It Fl z | Fl zones
 Show the output separated out into the different malloc zones, instead of an aggregated summary of all zones.
 .It Fl H | Fl humanReadable
@@ -83,6 +85,10 @@ Show only the new objects since the specified memgraph.
 Print the addresses of all malloc blocks found on the heap in ascending address order, or the 
 addresses of those objects whose full class name is matched by the regular expression <classes-pattern>.
 The string "all" indicates that the addresses of all blocks should be printed.
+.Pp
+When combined with
+.Nm —-sortBySize
+option, print malloc blocks in descending order of sizes.
 .Pp
 The <classes-pattern> regular expression is interpreted as an extended (modern) regular expression as
 described by the re_format(7) manual page.  "malloc" or "non-object" can be used to refer to blocks that

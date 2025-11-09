@@ -30,7 +30,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 @end
 
-API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UICalendarSelectionSingleDateDelegate <NSObject>
 
 /**

@@ -99,7 +99,7 @@ API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0))
 
 	@note   This is available on macOS only - for all other platforms input muting will be handled internally. It is recommended only to
 			perform your input muting logic within this block, and to perform your UI updates for input mute state changes within the handler
-			for AVAudioApplicationInputMuteStateChangeNotification.
+			for AVAudioApplicationInputMuteStateChangeNotification. This handler should be set by the process doing the call's audio I/O.
  */
 - (BOOL)setInputMuteStateChangeHandler:(BOOL (^_Nullable)(BOOL inputShouldBeMuted))inputMuteHandler error:(NSError**)outError API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
 

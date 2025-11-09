@@ -8,5 +8,5 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _KRExperimentsHandleUpdate, _KRExperimentsInit, _KRExperimentsVersionNumber, 
-                       _KRExperimentsVersionString ]
+                       _KRExperimentsVersionString, _PrewarmingExperimentUpdated ]
 ...

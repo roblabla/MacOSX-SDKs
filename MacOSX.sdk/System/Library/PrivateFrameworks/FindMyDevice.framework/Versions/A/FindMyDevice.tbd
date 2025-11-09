@@ -29,7 +29,7 @@ exports:
                        _kFMMEnabledPrefKey, _kFMMLocateAlertPendingNotification, 
                        _kFMMRemoveAuthRight, _kFMMUCRTUnlockPendingPrefKey, _kFMWEnabledNotification, 
                        _kFindMyDeviceEmergencyCallInfoPublisherXPCInterfaceErrorDomain, 
-                       _kFindMyDeviceIdentityXPCInterfaceErrorDomain, _kLostModeChangedNotification, 
+                       _kFindMyDeviceIdentityXPCInterfaceErrorDomain, _kLostModeChangedRestrictedNotification, 
                        _kStopLostModeAlarmNotification ]
     objc-classes:    [ FMDAccessoryIdentifier, FMDActivationLockContext, FMDActivationLockInfo, 
                        FMDAudioAccessoryInfo, FMDBAAAttestation, FMDDeviceIdentityFactory, 
