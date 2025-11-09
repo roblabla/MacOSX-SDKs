@@ -705,6 +705,8 @@ exports:
                        '_$s15ImagePlayground5GPLogV17predictableOutput2os6LoggerVvpZMV', 
                        '_$s15ImagePlayground5GPLogV18sessionUndoManager2os6LoggerVvgZ', 
                        '_$s15ImagePlayground5GPLogV18sessionUndoManager2os6LoggerVvpZMV', 
+                       '_$s15ImagePlayground5GPLogV20inputAnalyticsHelper2os6LoggerVvgZ', 
+                       '_$s15ImagePlayground5GPLogV20inputAnalyticsHelper2os6LoggerVvpZMV', 
                        '_$s15ImagePlayground5GPLogV22imageGenerationManager2os6LoggerVvgZ', 
                        '_$s15ImagePlayground5GPLogV22imageGenerationManager2os6LoggerVvpZMV', 
                        '_$s15ImagePlayground5GPLogV25creationStateTransitioner2os6LoggerVvgZ', 

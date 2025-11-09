@@ -12,7 +12,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos, visionos) API_UNAVAILABLE(macos, macCatalyst)
-    @interface HMAccessorySetupResult : NSObject<NSCopying>
+@interface HMAccessorySetupResult : NSObject<NSCopying>
 
 /*!
  *  @abstract   The -[HMHome uniqueIdentifier] that the accessories were added to

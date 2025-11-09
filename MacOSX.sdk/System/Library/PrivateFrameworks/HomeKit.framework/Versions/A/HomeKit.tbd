@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKit.framework/Versions/A/HomeKit'
-current-version: 1278.5.13
+current-version: 1278.6.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -328,7 +328,8 @@ exports:
                        _HMAccessoryMFiCertifiedACWGCodingKey, _HMAccessoryManagedConfigurationIdentifierMessageKey, 
                        _HMAccessoryManagedConfigurationProfileDataMessageKey, _HMAccessoryManagedConfigurationProfilesCodingKey, 
                        _HMAccessoryMatterDeviceTypeIDCodingKey, _HMAccessoryMatterDeviceTypeIDUpdateMessage, 
-                       _HMAccessoryMatterDeviceTypeIDUpdateMessageKey, _HMAccessoryMatterNodeIDCodingKey, 
+                       _HMAccessoryMatterDeviceTypeIDUpdateMessageKey, _HMAccessoryMatterExtendedMACAddressCodingKey, 
+                       _HMAccessoryMatterNodeIDCodingKey, _HMAccessoryMatterWEDSupportCodingKey, 
                        _HMAccessoryMultiUserSupportCodingKey, _HMAccessoryNetworkAccessViolationCodingKey, 
                        _HMAccessoryNetworkAccessViolationLastOccurrenceDateCodingKey, 
                        _HMAccessoryNetworkAccessViolationLastResetDateCodingKey, 
@@ -400,9 +401,9 @@ exports:
                        _HMAccessorySoftwareUpdateControllerV2MessageKeyShouldApplyUpdate, 
                        _HMAccessorySoftwareUpdateControllerV2ScanMessage, _HMAccessorySoftwareUpdateControllerV2ScanRepeatedlyAndApplyMessage, 
                        _HMAccessorySoftwareVersionCodingKey, _HMAccessorySupportedDiagnosticsCodingKey, 
-                       _HMAccessorySupportsAccessCodeCodingKey, _HMAccessorySupportsAnnounceCodingKey, 
-                       _HMAccessorySupportsAudioReturnChannelCodingKey, _HMAccessorySupportsCHIPCodingKey, 
-                       _HMAccessorySupportsCompanionInitiatedObliterateCodingKey, 
+                       _HMAccessorySupportedLinkLayerTypesCodingKey, _HMAccessorySupportsAccessCodeCodingKey, 
+                       _HMAccessorySupportsAnnounceCodingKey, _HMAccessorySupportsAudioReturnChannelCodingKey, 
+                       _HMAccessorySupportsCHIPCodingKey, _HMAccessorySupportsCompanionInitiatedObliterateCodingKey, 
                        _HMAccessorySupportsCompanionInitiatedRestartCodingKey, _HMAccessorySupportsCoordinationDoorbellChimeCodingKey, 
                        _HMAccessorySupportsDoorbellChimeCodingKey, _HMAccessorySupportsIdentifyCodingKey, 
                        _HMAccessorySupportsJustSiriCodingKey, _HMAccessorySupportsManagedConfigurationProfileCodingKey, 

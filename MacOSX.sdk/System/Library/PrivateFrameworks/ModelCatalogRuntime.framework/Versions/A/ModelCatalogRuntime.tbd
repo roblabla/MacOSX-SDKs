@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ModelCatalogRuntime.framework/Versions/A/ModelCatalogRuntime'
-current-version: 162.255.6
+current-version: 162.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -26,6 +26,7 @@ exports:
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C24resourceBundleContainers4withyySay0aB008ResourceG9ContainerCGSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C24siriResourceAvailability4withyy0aB004SirigH4InfoCSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C27useCaseResourceAvailability2by4withySay0aB003UseG17IdentifierWrapperCG_ySDyAkI0lgI4InfoCGSg_s5Error_pSgtctF', 
+                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C31donateGenerativeGuardrailResult09guardrailI04withy0aB00hI7WrapperC_ySSSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C44generativeExperiencesEssentialResourcesReady4withyySo8NSNumberCSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C58hasEnoughStorageForGenerativeExperiencesEssentialResources4withyySo8NSNumberCSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C8sideload14resourceBundle4withy0aB008ResourceH9ContainerC_ySo8NSNumberCSg_s5Error_pSgtctF', 

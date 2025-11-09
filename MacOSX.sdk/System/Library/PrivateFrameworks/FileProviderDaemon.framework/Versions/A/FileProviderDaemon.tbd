@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FileProviderDaemon.framework/Versions/A/FileProviderDaemon'
-current-version: 2882.101.2
+current-version: 2882.120.74
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -638,13 +638,14 @@ exports:
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO26unstableEntryWithMisingJobyACs0G0_pSg_tcACmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO31blockedByNotEmptyDeletionStatusyACs0G0_pSg_tcACmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO33posixPermissionsHasReadPermissionyA2CmFWC', 
-                       '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO36itemIsAPendingUpdateEvictedWithCloneyA2CmFWC', 
+                       '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO36itemIsAPendingUpdateEvictedWithCloneyACs0G0_pSg_tcACmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO36posixPermissionsDataProtectionClassAyA2CmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO36posixPermissionsDataProtectionClassByA2CmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO37posixPermissionsMissingReadPermissionyA2CmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO38itemInTransientStateForMoreThan24HoursyACs0G0_p_tcACmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO38posixPermissionsHasReadWritePermissionyA2CmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO40blockedByIgnoredHierarchyMaterializationyACs0G0_pSg_tcACmFWC', 
+                       '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO45itemEvictedWithCloneWithoutBackgroundDownloadyA2CmFWC', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO9errorCodeSivg', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorO9errorCodeSivpMV', 
                        '_$s18FileProviderDaemon27FPCKPendingSetInternalErrorOMa', 

@@ -36,7 +36,7 @@ API_UNAVAILABLE(macos, macCatalyst)
  *  @param completion A block that is invoked once the setup process finishes. On failure, the result will be
  *                    nil and the error will provide additional information
  */
-- (void)performAccessorySetupUsingRequest:(HMAccessorySetupRequest *)request completionHandler:(void (^)(HMAccessorySetupResult *_Nullable result, NSError *_Nullable error))completion API_AVAILABLE(ios(15.4))API_UNAVAILABLE(watchos, tvos);
+- (void)performAccessorySetupUsingRequest:(HMAccessorySetupRequest *)request completionHandler:(void (^)(HMAccessorySetupResult *_Nullable result, NSError *_Nullable error))completion API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

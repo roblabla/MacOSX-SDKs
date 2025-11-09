@@ -43882,6 +43882,7 @@ exports:
                        '_$s12SiriOntology5GraphC2eeoiySbAC_ACtFZ', '_$s12SiriOntology5GraphC35getAllValuesWithUtteranceAlignmentsSayAA8UsoValueCGyFTj', 
                        '_$s12SiriOntology5GraphC35getAllValuesWithUtteranceAlignmentsSayAA8UsoValueCGyFTq', 
                        '_$s12SiriOntology5GraphC4hash4intoys6HasherVz_tFTj', '_$s12SiriOntology5GraphC4hash4intoys6HasherVz_tFTq', 
+                       '_$s12SiriOntology5GraphC4task14fixEntityEdgesAcA11DynamicTaskVyxG_SbtclufC', 
                        '_$s12SiriOntology5GraphC4taskAcA11DynamicTaskVyxG_tclufC', 
                        '_$s12SiriOntology5GraphC5edgesSayAA4EdgeVGvgTj', '_$s12SiriOntology5GraphC5edgesSayAA4EdgeVGvgTq', 
                        '_$s12SiriOntology5GraphC5edgesSayAA4EdgeVGvpMV', '_$s12SiriOntology5GraphC5nodesSayAA4NodeVGvgTj', 

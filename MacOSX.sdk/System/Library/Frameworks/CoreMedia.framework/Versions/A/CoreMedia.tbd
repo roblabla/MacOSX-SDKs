@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia'
-current-version: 3210.19.1
+current-version: 3225.7.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -399,12 +399,12 @@ exports:
                        _FigCFNumberGetUInt8, _FigCFParseISO8601Date, _FigCFPropertyListCreateFromFigFileFork, 
                        _FigCFPropertyListWriteToFigFileFork, _FigCFRangeCopyAsDictionary, 
                        _FigCFRangeEqual, _FigCFRangeGetLimit, _FigCFRangeMakeFromDictionary, 
-                       _FigCFSetApplyBlock, _FigCFSetContainsValue, _FigCFSetCopyValuesAsCFArray, 
-                       _FigCFSetCreateFromArray, _FigCFSetPropertyToTime, _FigCFStringCopyWithIndent, 
-                       _FigCFStringCreateCacheKeyFromURLString, _FigCFStringCreateLoggingIdentifierOfLength, 
-                       _FigCFStringCreateWithBytesAndMovieLangCode, _FigCFStringCreateWithBytesWithUnknownEncoding, 
-                       _FigCFStringCreateWithJSONArray, _FigCFStringCreateWithJSONDictionary, 
-                       _FigCFStringFind, _FigCFStringGetCStringPtrAndBufferToFree, 
+                       _FigCFSetAddSet, _FigCFSetApplyBlock, _FigCFSetContainsValue, 
+                       _FigCFSetCopyValuesAsCFArray, _FigCFSetCreateFromArray, _FigCFSetPropertyToTime, 
+                       _FigCFStringCopyWithIndent, _FigCFStringCreateCacheKeyFromURLString, 
+                       _FigCFStringCreateLoggingIdentifierOfLength, _FigCFStringCreateWithBytesAndMovieLangCode, 
+                       _FigCFStringCreateWithBytesWithUnknownEncoding, _FigCFStringCreateWithJSONArray, 
+                       _FigCFStringCreateWithJSONDictionary, _FigCFStringFind, _FigCFStringGetCStringPtrAndBufferToFree, 
                        _FigCFStringGetCStringPtrMaybeUsingPreallocatedBuffer, _FigCFStringGetIntAfterString, 
                        _FigCFStringGetOSTypeValue, _FigCFStringInsertIndent, _FigCFTypeIsPListSerializable, 
                        _FigCFURLCopyCanonicalPath, _FigCFURLCreateCacheKey, _FigCFURLCreateDirectory, 
@@ -831,7 +831,8 @@ exports:
                        _FigNetworkPredictorGetClassID, _FigNote_AllowInternalDefaultLogs, 
                        _FigNote_ChangeValue, _FigNote_ConfigureRingBuffer, _FigNote_CopyAndClearNoteBBuf, 
                        _FigNote_CopyKeys, _FigNote_CopyRingBufferBacking, _FigNote_CopyRingBufferLogArrayAndResetRing, 
-                       _FigNote_EnableRingBuffer, _FigNote_GetValue, _FigNote_OneTimeInitializationForMediaServerd, 
+                       _FigNote_EnableRingBuffer, _FigNote_GetRingBufferDispatchQueue, 
+                       _FigNote_GetValue, _FigNote_OneTimeInitializationForMediaServerd, 
                        _FigNote_RefreshControlPreferences, _FigNote_SetPreferences, 
                        _FigNotificationCenterAddListeners, _FigNotificationCenterAddWeakListener, 
                        _FigNotificationCenterAddWeakListeners, _FigNotificationCenterRemoveListeners, 
@@ -2260,8 +2261,10 @@ exports:
                        _kFigThreadCreateKey_StackSize, _kFigThreadPropertyKey_ClientPID, 
                        _kFigThreadPropertyKey_MachThreadPriority, _kFigThreadPropertyKey_MachTimeSharePolicy, 
                        _kFigThreadPropertyKey_Priority, _kFigTimebaseNotification_EffectiveRateChanged, 
-                       _kFigTimebaseNotification_TimeJumped, _kFigTimelineCoordinatorCreationOption_IsInterstitialTimelineCoordinator, 
+                       _kFigTimebaseNotification_TimeJumped, _kFigTimelineCoordinatorCreationOption_InitialLamportTimestamps, 
+                       _kFigTimelineCoordinatorCreationOption_IsInterstitialTimelineCoordinator, 
                        _kFigTimelineCoordinatorCreationOption_OnlySendFullyDefinedCommands, 
+                       _kFigTimelineCoordinatorCreationOption_ShouldOverrideGroupState, 
                        _kFigTimelineCoordinatorCreationOption_SkipEndSuspensionCommandsWhenAlone, 
                        _kFigTimelineCoordinatorDidIssueCommandToTimelineControlNotificationPayloadKey_Command, 
                        _kFigTimelineCoordinatorDidIssueCommandToTimelineControlNotificationPayloadKey_ParticipantUUID, 

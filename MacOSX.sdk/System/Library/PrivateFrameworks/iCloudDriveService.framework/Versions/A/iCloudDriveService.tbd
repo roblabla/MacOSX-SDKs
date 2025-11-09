@@ -2,6 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/iCloudDriveService.framework/Versions/A/iCloudDriveService'
-current-version: 3437.101.1
+current-version: 3437.120.20
 compatibility-version: 0
 ...

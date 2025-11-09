@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, NEProviderStopReason) {
 	NEProviderStopReasonSleep API_AVAILABLE(macos(10.15), ios(13.0), tvos(17.0)) = 15,
 	/*! @const NEProviderStopReasonAppUpdate The NEProvider is being updated */
 	NEProviderStopReasonAppUpdate API_AVAILABLE(macos(10.15), ios(13.0), tvos(17.0)) = 16,
-	/*! @const NEProviderStopReasonInternalError */
+	/*! @const NEProviderStopReasonInternalError An internal error occurred in the NetworkExtension framework */
 	NEProviderStopReasonInternalError API_AVAILABLE(macos(15.1), ios(18.1), tvos(18.1)) = 17,
 } API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 

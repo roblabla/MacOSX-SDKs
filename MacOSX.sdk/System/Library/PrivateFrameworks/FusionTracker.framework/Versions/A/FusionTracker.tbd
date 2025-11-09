@@ -185,6 +185,7 @@ exports:
                        __ZNK10AcAttrNode9getParamsERK15AcAttrNodeStateR12AcAttrParams, 
                        __ZNK12TtTrkRpnNode6configEv, __ZNK12TtTrkRpnNode9getParamsERK17TtTrkRpnNodeStateR14TtTrkRpnParams, 
                        __ZNK14AcSaliencyNode9getParamsERK19AcSaliencyNodeStateR11AcDetParams, 
+                       __ZNK2ft16HungarianMatcher30IsMunkresSolverBufferAllocatedEv, 
                        __ZNK2ft17SiameseRpnSession12CurrentStageEv, __ZNK2ft17SiameseRpnSession12PutativeSizeEv, 
                        __ZNK2ft17SiameseRpnSession13EnsureAtStageENS_15SiameseRpnStageE, 
                        __ZNK2ft17SiameseRpnSession24ComputeInstanceInputRectEv, __ZNK9AcDetNode13yawBufChCountEjRK14AcDetNodeState, 

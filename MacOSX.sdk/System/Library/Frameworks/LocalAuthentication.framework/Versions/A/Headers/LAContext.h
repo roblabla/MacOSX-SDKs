@@ -231,22 +231,22 @@ typedef NS_ENUM(NSInteger, LACredentialType)
 typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 {
     /// Access control will be used for item creation.
-    LAAccessControlOperationCreateItem,
+    LAAccessControlOperationCreateItem = kLAAccessControlOperationCreateItem,
 
     /// Access control will be used for accessing existing item.
-    LAAccessControlOperationUseItem,
+    LAAccessControlOperationUseItem = kLAAccessControlOperationUseItem,
 
     /// Access control will be used for key creation.
-    LAAccessControlOperationCreateKey,
+    LAAccessControlOperationCreateKey = kLAAccessControlOperationCreateKey,
 
     /// Access control will be used for sign operation with existing key.
-    LAAccessControlOperationUseKeySign,
-    
+    LAAccessControlOperationUseKeySign = kLAAccessControlOperationUseKeySign,
+
     /// Access control will be used for data decryption using existing key.
-    LAAccessControlOperationUseKeyDecrypt API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos),
+    LAAccessControlOperationUseKeyDecrypt API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos) = kLAAccessControlOperationUseKeyDecrypt,
 
     /// Access control will be used for key exchange.
-    LAAccessControlOperationUseKeyKeyExchange API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos),
+    LAAccessControlOperationUseKeyKeyExchange API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos) = kLAAccessControlOperationUseKeyKeyExchange,
 } API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0)) API_UNAVAILABLE(tvos);
 
 /// Evaluates access control object for the specified operation.

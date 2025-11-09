@@ -43,6 +43,6 @@ exports:
                        NFPowerAssertion, NFPowerObserver, NFPreferenceObserver, NFReaderModeCardIngestionCALogger, 
                        NFReaderSessionConfig, NFResponseAPDU, NFRunScriptParametersInternal, 
                        NFSecureXPCEventPublisher, NFServiceWhitelistChecker, NFTLV, 
-                       NFTagInternal, NFTimer, NFVASPassConfig, NFXPCEventPublisher, 
-                       PaceInfo, SecurityInfo ]
+                       NFTagInternal, NFTimer, NFVASPassConfig, NFXPCConnectionUserInfoDictionary, 
+                       NFXPCEventPublisher, PaceInfo, SecurityInfo ]
 ...

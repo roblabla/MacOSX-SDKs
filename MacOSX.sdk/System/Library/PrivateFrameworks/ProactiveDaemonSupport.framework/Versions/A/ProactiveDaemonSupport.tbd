@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveDaemonSupport.framework/Versions/A/ProactiveDaemonSupport'
-current-version: 197.0.8
+current-version: 218.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -389,9 +389,12 @@ exports:
                        '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegateP09translateD5Errory0fI4TypeQzAA0dI0OFZTj', 
                        '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegateP09translateD5Errory0fI4TypeQzAA0dI0OFZTq', 
                        '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegateP0F9ErrorTypeAC_s0H0Tn', 
+                       '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegateP9customize10connectionySo15NSXPCConnectionC_tFTj', 
+                       '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegateP9customize10connectionySo15NSXPCConnectionC_tFTq', 
                        '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegatePAAE03xpcF14WasInvalidatedyyF', 
                        '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegatePAAE03xpcF9IsAllowedyyKF', 
                        '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegatePAAE09translateD5ErroryAA0dI0OAFFZ', 
+                       '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegatePAAE9customize10connectionySo15NSXPCConnectionC_tF', 
                        '_$s22ProactiveDaemonSupport34XPCServiceClientConnectionDelegateTL', 
                        '_$s22ProactiveDaemonSupport34XPCServiceServerInstanceParametersV27clientApplicationIdentifierSSSgvg', 
                        '_$s22ProactiveDaemonSupport34XPCServiceServerInstanceParametersV27clientApplicationIdentifierSSSgvpMV', 
@@ -487,9 +490,12 @@ exports:
                        '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegateP09translateE5Errory0gJ4TypeQzAA0eJ0OFZTj', 
                        '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegateP09translateE5Errory0gJ4TypeQzAA0eJ0OFZTq', 
                        '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegateP0G9ErrorTypeAC_s0I0Tn', 
+                       '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegateP9customize10connectionySo15NSXPCConnectionC_tFTj', 
+                       '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegateP9customize10connectionySo15NSXPCConnectionC_tFTq', 
                        '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegatePAAE03xpcdG14WasInvalidatedyyF', 
                        '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegatePAAE03xpcdG9IsAllowedyyKF', 
                        '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegatePAAE09translateE5ErroryAA0eJ0OAFFZ', 
+                       '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegatePAAE9customize10connectionySo15NSXPCConnectionC_tF', 
                        '_$s22ProactiveDaemonSupport47BidirectionalXPCServiceClientConnectionDelegateTL', 
                        '_$s22ProactiveDaemonSupport47XPCServiceBidirectionalServerInstanceParametersV27clientApplicationIdentifierSSSgvg', 
                        '_$s22ProactiveDaemonSupport47XPCServiceBidirectionalServerInstanceParametersV27clientApplicationIdentifierSSSgvpMV', 
@@ -519,7 +525,8 @@ exports:
                        '_$s7Service22ProactiveDaemonSupport0A18ConnectionProtocolPTl', 
                        '_$s7Service22ProactiveDaemonSupport16XPCServiceServerPTl', 
                        '_$s7Service22ProactiveDaemonSupport35InitializableFromExistingConnectionPTl', 
-                       '_$s9Interface22ProactiveDaemonSupport10XPCServicePTl', '_$sScT22ProactiveDaemonSupportytRszs5Error_pRs_rlE15pds_xpcCallback8priority8callback4bodyScTyytsAB_pGScPSg_yqd__Sg_sAB_pSgtcqd__yYaYbKctlFZ', 
+                       '_$s9Interface22ProactiveDaemonSupport10XPCServicePTl', '_$sScT22ProactiveDaemonSupportytRszs5Error_pRs_rlE15pds_xpcCallback24discardUserInfoForErrors8priority8callback4bodyScTyytsAB_pGSb_ScPSgyqd__Sg_sAB_pSgtcqd__yYaYbKctlFZ', 
+                       '_$sScT22ProactiveDaemonSupportytRszs5Error_pRs_rlE15pds_xpcCallback8priority8callback4bodyScTyytsAB_pGScPSg_yqd__Sg_sAB_pSgtcqd__yYaYbKctlFZ', 
                        '_$sSo18NSNotificationNamea22ProactiveDaemonSupportE19pds_SIGTERMReceivedABvgZ', 
                        '_$sSo7NSErrorC22ProactiveDaemonSupportE019pds_unlaunderSimpleA0s5Error_pSgyF', 
                        '_$ss5ErrorP22ProactiveDaemonSupportE26pds_launderToSimpleNSError15discardUserInfoSo0I0CSb_tF', 

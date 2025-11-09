@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowRuntime.framework/Versions/A/IntelligenceFlowRuntime'
-current-version: 197.0.8
+current-version: 218.5
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -63,9 +63,9 @@ exports:
                        '_$s23IntelligenceFlowRuntime15PSELearningUtilOMa', '_$s23IntelligenceFlowRuntime15PSELearningUtilOMn', 
                        '_$s23IntelligenceFlowRuntime15PSELearningUtilON', '_$s23IntelligenceFlowRuntime15StandardPlannerC15unownedExecutorScevg', 
                        '_$s23IntelligenceFlowRuntime15StandardPlannerC15unownedExecutorScevpMV', 
-                       '_$s23IntelligenceFlowRuntime15StandardPlannerC8makePlan12sessionState14newEventsRangeSay0abE7Support7SessionO5EventVGAI0nI0V_SnySiGtYaKFTj', 
-                       '_$s23IntelligenceFlowRuntime15StandardPlannerC8makePlan12sessionState14newEventsRangeSay0abE7Support7SessionO5EventVGAI0nI0V_SnySiGtYaKFTjTu', 
-                       '_$s23IntelligenceFlowRuntime15StandardPlannerC8makePlan12sessionState14newEventsRangeSay0abE7Support7SessionO5EventVGAI0nI0V_SnySiGtYaKFTq', 
+                       '_$s23IntelligenceFlowRuntime15StandardPlannerC8makePlan12sessionState14newEventsRangeSay0abE7Support7SessionO5EventVGAI0nI0V_SnySiGtYaAG0E5ErrorOYKFTj', 
+                       '_$s23IntelligenceFlowRuntime15StandardPlannerC8makePlan12sessionState14newEventsRangeSay0abE7Support7SessionO5EventVGAI0nI0V_SnySiGtYaAG0E5ErrorOYKFTjTu', 
+                       '_$s23IntelligenceFlowRuntime15StandardPlannerC8makePlan12sessionState14newEventsRangeSay0abE7Support7SessionO5EventVGAI0nI0V_SnySiGtYaAG0E5ErrorOYKFTq', 
                        '_$s23IntelligenceFlowRuntime15StandardPlannerCMa', '_$s23IntelligenceFlowRuntime15StandardPlannerCMm', 
                        '_$s23IntelligenceFlowRuntime15StandardPlannerCMn', '_$s23IntelligenceFlowRuntime15StandardPlannerCMo', 
                        '_$s23IntelligenceFlowRuntime15StandardPlannerCMu', '_$s23IntelligenceFlowRuntime15StandardPlannerCN', 
@@ -244,7 +244,6 @@ exports:
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO17TaskFailureReasonO2eeoiySbAE_AEtFZ', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO17TaskFailureReasonO4fromAEs7Decoder_p_tKcfC', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO17TaskFailureReasonO6encode2toys7Encoder_p_tKF', 
-                       '_$s23IntelligenceFlowRuntime16FeedbackLearningO17TaskFailureReasonO7unknownyA2EmFWC', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO17TaskFailureReasonOMa', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO17TaskFailureReasonOMn', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO17TaskFailureReasonON', 
@@ -275,6 +274,8 @@ exports:
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO18TelemetryInsertingP6insertyy0A15PlatformLibrary0abF0VFTj', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO18TelemetryInsertingP6insertyy0A15PlatformLibrary0abF0VFTq', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO18TelemetryInsertingTL', 
+                       '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionO11descriptionSSvg', 
+                       '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionO11descriptionSSvpMV', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionO2eeoiySbAE_AEtFZ', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionO4fromAEs7Decoder_p_tKcfC', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionO4toolyAE7ToolKit0iG0VcAEmFWC', 
@@ -287,6 +288,7 @@ exports:
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionOSEAAMc', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionOSQAAMc', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionOSeAAMc', 
+                       '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateDefinitionOs23CustomStringConvertibleAAMc', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateEvaluationV2eeoiySbAE_AEtFZ', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateEvaluationV4fromAEs7Decoder_p_tKcfC', 
                        '_$s23IntelligenceFlowRuntime16FeedbackLearningO19CandidateEvaluationV6encode2toys7Encoder_p_tKF', 
@@ -637,6 +639,13 @@ exports:
                        '_$s23IntelligenceFlowRuntime25SessionPersistenceManagerVMa', 
                        '_$s23IntelligenceFlowRuntime25SessionPersistenceManagerVMn', 
                        '_$s23IntelligenceFlowRuntime25SessionPersistenceManagerVN', 
+                       '_$s23IntelligenceFlowRuntime26ExecutorRequestIdentifiersV4fromACs7Decoder_p_tKcfC', 
+                       '_$s23IntelligenceFlowRuntime26ExecutorRequestIdentifiersV6encode2toys7Encoder_p_tKF', 
+                       '_$s23IntelligenceFlowRuntime26ExecutorRequestIdentifiersVMa', 
+                       '_$s23IntelligenceFlowRuntime26ExecutorRequestIdentifiersVMn', 
+                       '_$s23IntelligenceFlowRuntime26ExecutorRequestIdentifiersVN', 
+                       '_$s23IntelligenceFlowRuntime26ExecutorRequestIdentifiersVSEAAMc', 
+                       '_$s23IntelligenceFlowRuntime26ExecutorRequestIdentifiersVSeAAMc', 
                        '_$s23IntelligenceFlowRuntime26ToolInvocationSummaryInputV04toolE00D3Kit0dE0Vvg', 
                        '_$s23IntelligenceFlowRuntime26ToolInvocationSummaryInputV04toolE00D3Kit0dE0VvpMV', 
                        '_$s23IntelligenceFlowRuntime26ToolInvocationSummaryInputV04toolE0AC0D3Kit0dE0V_tcfC', 

@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * @brief This class is used to represent a significant time event.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMSignificantTimeEvent : HMTimeEvent<NSCopying, NSMutableCopying>
+@interface HMSignificantTimeEvent : HMTimeEvent<NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -50,7 +50,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
  * @brief This class is used to represent a significant time event.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMMutableSignificantTimeEvent : HMSignificantTimeEvent
+@interface HMMutableSignificantTimeEvent : HMSignificantTimeEvent
 
 /*!
  * @brief significantEvent The significant event for the trigger.

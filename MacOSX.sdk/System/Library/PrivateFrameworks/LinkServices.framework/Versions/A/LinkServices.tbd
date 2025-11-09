@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LinkServices.framework/Versions/A/LinkServices'
-current-version: 227.13
+current-version: 227.19
 compatibility-version: 0
 swift-abi-version: 7
 reexported-libraries:
@@ -236,7 +236,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LinkMetadata.framework/Versions/A/LinkMetadata'
-current-version: 227.13
+current-version: 227.19
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -414,8 +414,7 @@ exports:
                        '_$s12LinkMetadata21SystemProtocolSupportO06systemD7MappingSDySSAA0cdB0VGvgZ', 
                        '_$s12LinkMetadata21SystemProtocolSupportO06systemD7MappingSDySSAA0cdB0VGvpZMV', 
                        '_$s12LinkMetadata21SystemProtocolSupportOMa', '_$s12LinkMetadata21SystemProtocolSupportOMn', 
-                       '_$s12LinkMetadata21SystemProtocolSupportON', '_$s12LinkMetadata22AssistantSchemaLibraryC04loadE06domainACSS_tKFZ', 
-                       '_$s12LinkMetadata22AssistantSchemaLibraryC04loadE0ACyKFZ', 
+                       '_$s12LinkMetadata21SystemProtocolSupportON', '_$s12LinkMetadata22AssistantSchemaLibraryC04loadE0ACyKFZ', 
                        '_$s12LinkMetadata22AssistantSchemaLibraryC5enumsSDyAA0cD10IdentifierVAA0C12PrebuiltEnumVGvg', 
                        '_$s12LinkMetadata22AssistantSchemaLibraryC5enumsSDyAA0cD10IdentifierVAA0C12PrebuiltEnumVGvpMV', 
                        '_$s12LinkMetadata22AssistantSchemaLibraryC7intents8entities5enumsACSDyAA0cD10IdentifierVAA0C14PrebuiltIntentVG_SDyAhA0cJ6EntityVGSDyAhA0cJ4EnumVGtcfC', 
@@ -493,8 +492,7 @@ exports:
                        '_$s12LinkMetadata23AssistantPrebuiltIntentV8metadataSo08LNActionB0CvpMV', 
                        '_$s12LinkMetadata23AssistantPrebuiltIntentVMa', '_$s12LinkMetadata23AssistantPrebuiltIntentVMn', 
                        '_$s12LinkMetadata23AssistantPrebuiltIntentVN', '_$s12LinkMetadata23AssistantPrebuiltIntentVSEAAMc', 
-                       '_$s12LinkMetadata23AssistantPrebuiltIntentVSeAAMc', '_$s12LinkMetadata24AssistantPrebuiltLibraryC04loadE06domainACSS_tKFZ', 
-                       '_$s12LinkMetadata24AssistantPrebuiltLibraryC04loadE0ACyKFZ', 
+                       '_$s12LinkMetadata23AssistantPrebuiltIntentVSeAAMc', '_$s12LinkMetadata24AssistantPrebuiltLibraryC04loadE0ACyKFZ', 
                        '_$s12LinkMetadata24AssistantPrebuiltLibraryC4fromACs7Decoder_p_tKcfC', 
                        '_$s12LinkMetadata24AssistantPrebuiltLibraryC4fromACs7Decoder_p_tKcfCTj', 
                        '_$s12LinkMetadata24AssistantPrebuiltLibraryC4fromACs7Decoder_p_tKcfCTq', 

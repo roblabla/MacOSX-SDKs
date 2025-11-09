@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SafariSharedUI.framework/Versions/A/SafariSharedUI'
-current-version: 621.1.15
+current-version: 621.2.5
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -282,7 +282,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 621.1.15
+current-version: 621.2.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -702,9 +702,7 @@ exports:
                        __WBSRunOnceImpl, __ZN12SafariShared25SuddenTerminationDisabler23enableSuddenTerminationEv, 
                        __ZN12SafariShared25SuddenTerminationDisabler24disableSuddenTerminationEv, 
                        __ZN12SafariShared25SuddenTerminationDisablerC1EP8NSString, 
-                       __ZN12SafariShared25SuddenTerminationDisablerC1EP8NSStringU13block_pointerFvvE, 
                        __ZN12SafariShared25SuddenTerminationDisablerC2EP8NSString, 
-                       __ZN12SafariShared25SuddenTerminationDisablerC2EP8NSStringU13block_pointerFvvE, 
                        _canImportBrowsingDataToSafariEntitlement, _canonicalizedCharacterClasses, 
                        _parseCustomCharacterClass, _parseIdentifier, _parseNamedCharacterClass, 
                        _parsePasswordRequiredOrAllowedPropertyValue, _parsePasswordRule, 
@@ -816,7 +814,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/SafariShared'
-current-version: 621.1.15
+current-version: 621.2.5
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -841,6 +839,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s12SafariShared26WBSDefaultSearchParametersC33prefixNavigationalIntentThresholdSo8NSNumberCvgZ', 
                        '_$s12SafariShared26WBSDefaultSearchParametersC33prefixNavigationalIntentThresholdSo8NSNumberCvpZMV', 
+                       '_$s12SafariShared26WBSDefaultSearchParametersC36recentSearchesDisplayThresholdInDaysSo8NSNumberCvgZ', 
+                       '_$s12SafariShared26WBSDefaultSearchParametersC36recentSearchesDisplayThresholdInDaysSo8NSNumberCvpZMV', 
                        '_$s12SafariShared26WBSDefaultSearchParametersCACycfC', '_$s12SafariShared26WBSDefaultSearchParametersCACycfc', 
                        '_$s12SafariShared26WBSDefaultSearchParametersCMa', '_$s12SafariShared26WBSDefaultSearchParametersCMn', 
                        '_$s12SafariShared26WBSDefaultSearchParametersCMo', '_$s12SafariShared26WBSDefaultSearchParametersCN', 
@@ -859,13 +859,14 @@ exports:
                        _TRIAL_matchingWordsInTitleThreshold, _TRIAL_maxBookmarksAndHistoryItems, 
                        _TRIAL_normalizedTopSitesScoreAndVisitCountMultiplier, _TRIAL_percentageThresholdForAnywhereInTitle, 
                        _TRIAL_percentageThresholdForAnywhereInURL, _TRIAL_prefixNavigationalIntentThreshold, 
-                       _TRIAL_shouldHideIgnoredSiriSuggestedSites, _TRIAL_strengthenAutocompleteTriggerExtensionMatching, 
-                       _TRIAL_thresholdForHidingIgnoredSiriSuggestedSites, _WBHistoryVisitWeightForAttributesAndOrigin, 
-                       _WBSAdditionalNameOrderedPartToken, _WBSAddressBookMatchIdentifierKey, 
-                       _WBSAddressBookMatchKeyKey, _WBSAddressBookMatchLabelKey, 
-                       _WBSAddressBookMatchPropertyKey, _WBSAddressBookMatchUniqueIDKey, 
-                       _WBSAddressBookMatchValueKey, _WBSAllowUnsignedExtensionsTimeoutNotification, 
-                       _WBSAutoFillGetSavedDataClasses, _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataExpectedFilledData, 
+                       _TRIAL_recentSearchesDisplayThresholdInDays, _TRIAL_shouldHideIgnoredSiriSuggestedSites, 
+                       _TRIAL_strengthenAutocompleteTriggerExtensionMatching, _TRIAL_thresholdForHidingIgnoredSiriSuggestedSites, 
+                       _WBHistoryVisitWeightForAttributesAndOrigin, _WBSAdditionalNameOrderedPartToken, 
+                       _WBSAddressBookMatchIdentifierKey, _WBSAddressBookMatchKeyKey, 
+                       _WBSAddressBookMatchLabelKey, _WBSAddressBookMatchPropertyKey, 
+                       _WBSAddressBookMatchUniqueIDKey, _WBSAddressBookMatchValueKey, 
+                       _WBSAllowUnsignedExtensionsTimeoutNotification, _WBSAutoFillGetSavedDataClasses, 
+                       _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataExpectedFilledData, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectDataIncorrectFields, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectFormatExpectedFormat, 
                        _WBSAutoFillInternalFeedbackDetailTypeAutoFillFilledIncorrectFormatIncorrectFields, 
@@ -1052,6 +1053,7 @@ exports:
                        _WBSFormMetadataUsesGeneratedPasswordKey, _WBSGeolocationPreferenceIdentifier, 
                        _WBSGivenNameOrderedPartToken, _WBSHasExtensionsInstalledKey, 
                        _WBSHideMyEmailRecordStateStringForRecordState, _WBSHistoryAddAutocompleteTriggerToArray, 
+                       _WBSHistoryClearEndDateKey, _WBSHistoryClearStartDateKey, 
                        _WBSHistoryCompletionListEntitlement, _WBSHistoryConnectionInterface, 
                        _WBSHistoryConnectionOptionCheckIntegrity, _WBSHistoryConnectionOptionCryptographicKey, 
                        _WBSHistoryConnectionOptionDatabaseID, _WBSHistoryConnectionOptionDatabaseURL, 
@@ -1097,10 +1099,11 @@ exports:
                        _WBSHistoryVisitScoreSecondsPerDay, _WBSHistoryVisitScoreTimeIntervalForDailyAndWeeklyVisitCountScores, 
                        _WBSHistoryVisitWasAddedNotification, _WBSHistoryVisitWeightedVisitCountFromScore, 
                        _WBSHistoryVisitsKey, _WBSHistoryVisitsWereRemovedFromDatabaseNotification, 
-                       _WBSHistoryWasClearedNotification, _WBSHistoryWasLoadedNotification, 
-                       _WBSIgnoredClassificationToken, _WBSInitialBookmarksDonationDelay, 
-                       _WBSIsWebAppKey, _WBSJSTestPathToElementFunctionScript, _WBSLastKnownStartPageAppearancePreferenceKey, 
-                       _WBSLastKnownStartPageBackgroundImageNameKey, _WBSLastPrivateSearchEngineStringExplicitlyChosenByUserKey, 
+                       _WBSHistoryWasClearedNotification, _WBSHistoryWasClearedWithIntervalNotification, 
+                       _WBSHistoryWasLoadedNotification, _WBSIgnoredClassificationToken, 
+                       _WBSInitialBookmarksDonationDelay, _WBSIsWebAppKey, _WBSJSTestPathToElementFunctionScript, 
+                       _WBSLastKnownStartPageAppearancePreferenceKey, _WBSLastKnownStartPageBackgroundImageNameKey, 
+                       _WBSLastPrivateSearchEngineStringExplicitlyChosenByUserKey, 
                        _WBSLastTimeManageExtensionSheetWasViewedPreferenceKey, _WBSLastWeakPasswordReportTimePreferenceKey, 
                        _WBSLegacyHideFrequentlyVisitedSitesDefaultsKey, _WBSLegacySafariSettingsStartPageBackgroundImageVisibilityKey, 
                        _WBSLegacySafariSettingsStartPageCloudTabsVisibilityKey, _WBSLegacySafariSettingsStartPageFavoritesVisibilityKey, 

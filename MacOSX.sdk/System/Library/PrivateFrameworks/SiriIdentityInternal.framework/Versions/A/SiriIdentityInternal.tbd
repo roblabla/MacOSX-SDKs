@@ -31,6 +31,7 @@ exports:
                        '_$s20SiriIdentityInternal0B0C10identifier7display17pronunciationHintACSSSg_SSAGtcfC', 
                        '_$s20SiriIdentityInternal0B0C10identifier7display17pronunciationHintACSSSg_SSAGtcfc', 
                        '_$s20SiriIdentityInternal0B0C12negativeNameSSSgvpMV', '_$s20SiriIdentityInternal0B0C14fullConfidenceSo8NSNumberCSgvpMV', 
+                       '_$s20SiriIdentityInternal0B0C14highConfidenceSo8NSNumberCSgvpMV', 
                        '_$s20SiriIdentityInternal0B0C15setupInProgressSo8NSNumberCSgvpMV', 
                        '_$s20SiriIdentityInternal0B0C18isMultiUserContextSo8NSNumberCSgvpMV', 
                        '_$s20SiriIdentityInternal0B0C20isIdentifiedOrUnsureSo8NSNumberCSgvpMV', 

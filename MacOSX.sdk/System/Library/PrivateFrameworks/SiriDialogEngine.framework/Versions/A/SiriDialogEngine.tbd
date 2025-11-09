@@ -3266,6 +3266,7 @@ exports:
                        '_$s16SiriDialogEngine9CATOptionV11createTraceACvgZ', '_$s16SiriDialogEngine9CATOptionV11createTraceACvpZMV', 
                        '_$s16SiriDialogEngine9CATOptionV11defaultModeACvgZ', '_$s16SiriDialogEngine9CATOptionV11defaultModeACvpZMV', 
                        '_$s16SiriDialogEngine9CATOptionV13deterministicACvgZ', '_$s16SiriDialogEngine9CATOptionV13deterministicACvpZMV', 
+                       '_$s16SiriDialogEngine9CATOptionV14disableLoggingACvgZ', '_$s16SiriDialogEngine9CATOptionV14disableLoggingACvpZMV', 
                        '_$s16SiriDialogEngine9CATOptionV14disableUpdatesACvgZ', '_$s16SiriDialogEngine9CATOptionV14disableUpdatesACvpZMV', 
                        '_$s16SiriDialogEngine9CATOptionV5isSetySbACF', '_$s16SiriDialogEngine9CATOptionV8rawValueACSi_tcfC', 
                        '_$s16SiriDialogEngine9CATOptionV8rawValueSivg', '_$s16SiriDialogEngine9CATOptionV8rawValueSivpMV', 

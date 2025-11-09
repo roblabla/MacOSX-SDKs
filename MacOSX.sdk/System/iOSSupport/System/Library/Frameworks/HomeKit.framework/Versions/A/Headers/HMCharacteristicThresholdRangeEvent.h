@@ -19,7 +19,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * number range.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMCharacteristicThresholdRangeEvent : HMEvent<NSCopying, NSMutableCopying>
+@interface HMCharacteristicThresholdRangeEvent : HMEvent<NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -54,7 +54,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
  * number range.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMMutableCharacteristicThresholdRangeEvent : HMCharacteristicThresholdRangeEvent
+@interface HMMutableCharacteristicThresholdRangeEvent : HMCharacteristicThresholdRangeEvent
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -177,29 +177,6 @@ extern int task_get_no_footprint_for_debug(
 extern bool task_is_translated(task_t task);
 #endif
 
-#if HAS_MTE || HAS_MTE_EMULATION_SHIMS
-/* These need full functions so they are callable in bsd/ */
-extern bool task_has_sec_inherit(task_t task);
-extern void task_set_sec_inherit(task_t task);
-extern void task_clear_sec_inherit(task_t task);
-
-extern bool task_has_sec_enabled(task_t task);
-extern bool current_task_has_sec_enabled(void);
-extern void task_set_sec_enabled(task_t task);
-extern void task_clear_sec_enabled(task_t task);
-extern void task_set_sec_enable_support(task_t task);
-
-extern bool task_has_sec_never_check(task_t task);
-extern void task_set_sec_never_check(task_t task);
-extern void task_set_sec_never_check_support(task_t task);
-
-extern bool task_has_sec_vm_policy_bypass(task_t task);
-extern void task_set_sec_vm_policy_bypass(task_t task);
-
-extern bool task_has_sec_tag_bypass(task_t task);
-extern void task_set_sec_tag_bypass(task_t task);
-#endif /* HAS_MTE || HAS_MTE_EMULATION_SHIMS */
-
 #if CONFIG_X86_64_COMPAT
 extern bool task_is_x86_64_compat(task_t task);
 #endif

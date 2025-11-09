@@ -52,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_vm_MSG_COUNT
-#define	mach_vm_MSG_COUNT	27
+#define	mach_vm_MSG_COUNT	28
 #endif	/* mach_vm_MSG_COUNT */
 
 #include <Availability.h>
@@ -422,6 +422,21 @@ kern_return_t mach_vm_range_create
 	mach_vm_range_flavor_t flavor,
 	mach_vm_range_recipes_raw_t recipes,
 	mach_msg_type_number_t recipesCnt
+);
+
+/* Routine mach_vm_update_pointers_with_remote_tags */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_vm_update_pointers_with_remote_tags
+(
+	vm_map_t target,
+	mach_vm_offset_list_t in_pointer_list,
+	mach_msg_type_number_t in_pointer_listCnt,
+	mach_vm_offset_list_t out_pointer_list,
+	mach_msg_type_number_t *out_pointer_listCnt
 );
 
 __END_DECLS
@@ -796,6 +811,20 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t in_pointer_listCnt;
+		mach_vm_offset_t in_pointer_list[512];
+		mach_msg_type_number_t out_pointer_listCnt;
+	} __Request__mach_vm_update_pointers_with_remote_tags_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__mach_vm_subsystem__defined */
 
 /* union of all requests */
@@ -826,6 +855,7 @@ union __RequestUnion__mach_vm_subsystem {
 	__Request__mach_vm_page_range_query_t Request_mach_vm_page_range_query;
 	__Request__mach_vm_remap_new_t Request_mach_vm_remap_new;
 	__Request__mach_vm_range_create_t Request_mach_vm_range_create;
+	__Request__mach_vm_update_pointers_with_remote_tags_t Request_mach_vm_update_pointers_with_remote_tags;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 /* typedefs for all replies */
@@ -1145,6 +1175,20 @@ union __RequestUnion__mach_vm_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t out_pointer_listCnt;
+		mach_vm_offset_t out_pointer_list[512];
+	} __Reply__mach_vm_update_pointers_with_remote_tags_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__mach_vm_subsystem__defined */
 
 /* union of all replies */
@@ -1175,6 +1219,7 @@ union __ReplyUnion__mach_vm_subsystem {
 	__Reply__mach_vm_page_range_query_t Reply_mach_vm_page_range_query;
 	__Reply__mach_vm_remap_new_t Reply_mach_vm_remap_new;
 	__Reply__mach_vm_range_create_t Reply_mach_vm_range_create;
+	__Reply__mach_vm_update_pointers_with_remote_tags_t Reply_mach_vm_update_pointers_with_remote_tags;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 
@@ -1202,7 +1247,8 @@ union __ReplyUnion__mach_vm_subsystem {
     { "mach_vm_page_info", 4819 },\
     { "mach_vm_page_range_query", 4820 },\
     { "mach_vm_remap_new", 4821 },\
-    { "mach_vm_range_create", 4825 }
+    { "mach_vm_range_create", 4825 },\
+    { "mach_vm_update_pointers_with_remote_tags", 4827 }
 #endif
 
 #ifdef __AfterMigUserHeader

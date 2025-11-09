@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReminderKitInternal.framework/Versions/A/ReminderKitInternal'
-current-version: 1225.1
+current-version: 1238
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -8067,6 +8067,8 @@ exports:
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV020eligibleForAutoClouddF0SbvpMV', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV05cloudD0So0A0Cvg', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV05cloudD0So0A0CvpMV', 
+                       '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV11descriptionSSvg', 
+                       '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV11descriptionSSvpMV', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV6calDAVSo0A0Cvg', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV6calDAVSo0A0CvpMV', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetV6parentSo0A0Cvg', 
@@ -8075,6 +8077,7 @@ exports:
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetVMa', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetVMn', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetVN', 
+                       '_$sSo14ACAccountStoreC19ReminderKitInternalE12MigrationSetVs23CustomStringConvertibleACMc', 
                        '_$sSo14ACAccountStoreC19ReminderKitInternalE17rem_migrationSetsSayAbCE12MigrationSetVGyF', 
                        '_$sSo14CNContactStoreC19ReminderKitInternalE11contactFrom14emailAddresses12phoneNumbers11keysToFetchSo0A0CSgSaySSSgG_ALSaySo15CNKeyDescriptor_pGtF', 
                        '_$sSo14CNContactStoreC19ReminderKitInternalE7contact8matching11keysToFetchSo0A0CSgSo24REMContactRepresentationC_SaySo15CNKeyDescriptor_pGtF', 
@@ -8549,6 +8552,8 @@ exports:
                        '_$sSo8REMStoreC19ReminderKitInternalE53clearGroceryLocalCorrectionsOfListsOwnedByCurrentUseryyYaKFTu', 
                        '_$sSo8REMStoreC19ReminderKitInternalE5storeABvg', '_$sSo8REMStoreC19ReminderKitInternalE5storeABvpMV', 
                        '_$sSo8REMStoreC19ReminderKitInternalE6invokeyq_xKSo0A10InvocationCRbzAC20REMInvocableProtocolRz12ClientResultQzRs_r0_lF', 
+                       '_$sSo9ACAccountC19ReminderKitInternalE23rem_loggableDescriptionSSvg', 
+                       '_$sSo9ACAccountC19ReminderKitInternalE23rem_loggableDescriptionSSvpMV', 
                        '_$sSo9ACAccountC19ReminderKitInternalE41rem_childCalDAVAccountEnabledForRemindersABSgvg', 
                        '_$sSo9ACAccountC19ReminderKitInternalE41rem_childCalDAVAccountEnabledForRemindersABSgvpMV', 
                        '_$sSo9CNContactC19ReminderKitInternalE13addressByTypeSDyAC016REMMeCardAddressG0OSo08CNPostalJ0CGvg', 

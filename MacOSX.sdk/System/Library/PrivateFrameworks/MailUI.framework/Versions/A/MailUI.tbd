@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI'
-current-version: 3826.255.181
+current-version: 3826.255.51
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -691,21 +691,27 @@ exports:
                        '_$s6MailUI18GroupedSearchItemsVyAA0D4ItemOSgSo19MUISearchSuggestionCcipMV', 
                        '_$s6MailUI18GroupedSearchItemsVySo19MUISearchSuggestionCSgAA0D4ItemOcig', 
                        '_$s6MailUI18GroupedSearchItemsVySo19MUISearchSuggestionCSgAA0D4ItemOcipMV', 
-                       '_$s6MailUI18ManualSummaryErrorO022externalSafetyRejectedE0yA2CmFWC', 
                        '_$s6MailUI18ManualSummaryErrorO10Foundation13CustomNSErrorAAMc', 
-                       '_$s6MailUI18ManualSummaryErrorO10restrictedyA2CmFWC', '_$s6MailUI18ManualSummaryErrorO11errorDomainSSvgZ', 
+                       '_$s6MailUI18ManualSummaryErrorO10restrictedyA2CmFWC', '_$s6MailUI18ManualSummaryErrorO10thirdPartyyACSScACmFWC', 
+                       '_$s6MailUI18ManualSummaryErrorO11errorDomainSSvgZ', '_$s6MailUI18ManualSummaryErrorO11inputSafetyyA2CmFWC', 
+                       '_$s6MailUI18ManualSummaryErrorO12outputSafetyyA2CmFWC', '_$s6MailUI18ManualSummaryErrorO13errorUserInfoSDySSypGvg', 
+                       '_$s6MailUI18ManualSummaryErrorO13errorUserInfoSDySSypGvpMV', 
                        '_$s6MailUI18ManualSummaryErrorO13policyLimitedyA2CmFWC', 
+                       '_$s6MailUI18ManualSummaryErrorO14safetyRejectedyA2CmFWC', 
                        '_$s6MailUI18ManualSummaryErrorO15messageTooShortyA2CmFWC', 
+                       '_$s6MailUI18ManualSummaryErrorO17thirdPartyMessageSSSgvg', 
+                       '_$s6MailUI18ManualSummaryErrorO17thirdPartyMessageSSSgvpMV', 
+                       '_$s6MailUI18ManualSummaryErrorO18guardrailOutOfDateyA2CmFWC', 
                        '_$s6MailUI18ManualSummaryErrorO19summarizationFailedyA2CmFWC', 
                        '_$s6MailUI18ManualSummaryErrorO22noOriginalContentItemsyA2CmFWC', 
                        '_$s6MailUI18ManualSummaryErrorO23noContentRepresentationyA2CmFWC', 
                        '_$s6MailUI18ManualSummaryErrorO30needsToUseExternalIntelligenceyA2CmFWC', 
+                       '_$s6MailUI18ManualSummaryErrorO4fromACSgSo7NSErrorC_tcfC', 
                        '_$s6MailUI18ManualSummaryErrorO6noSelfyA2CmFWC', '_$s6MailUI18ManualSummaryErrorO7unknownyA2CmFWC', 
                        '_$s6MailUI18ManualSummaryErrorO8rawValueACSgSi_tcfC', '_$s6MailUI18ManualSummaryErrorO8rawValueSivg', 
                        '_$s6MailUI18ManualSummaryErrorO8rawValueSivpMV', '_$s6MailUI18ManualSummaryErrorO9errorCodeSivg', 
                        '_$s6MailUI18ManualSummaryErrorO9errorCodeSivpMV', '_$s6MailUI18ManualSummaryErrorOMa', 
                        '_$s6MailUI18ManualSummaryErrorOMn', '_$s6MailUI18ManualSummaryErrorON', 
-                       '_$s6MailUI18ManualSummaryErrorOSHAAMc', '_$s6MailUI18ManualSummaryErrorOSQAAMc', 
                        '_$s6MailUI18ManualSummaryErrorOSYAAMc', '_$s6MailUI18ManualSummaryErrorOs0E0AAMc', 
                        '_$s6MailUI19CornerConfigurationV0C0O10topLeadingyA2EmFWC', 
                        '_$s6MailUI19CornerConfigurationV0C0O11topTrailingyA2EmFWC', 
@@ -1422,11 +1428,11 @@ exports:
                        _MFImageGlyphSearchReply, _MFImageGlyphSearchSourceCode, _MFImageGlyphSearchSubject, 
                        _MFImageGlyphSecondarySender, _MFImageGlyphSecondarySenderPreference, 
                        _MFImageGlyphSeeMore, _MFImageGlyphSendLater, _MFImageGlyphSendLaterOnboarding, 
-                       _MFImageGlyphSenderHeaderMenu, _MFImageGlyphShowWritingTools, 
-                       _MFImageGlyphSidebarAddMailbox, _MFImageGlyphSidebarAllInboxes, 
-                       _MFImageGlyphSidebarAllMailboxes, _MFImageGlyphSidebarArchive, 
-                       _MFImageGlyphSidebarBusinesses, _MFImageGlyphSidebarDrafts, 
-                       _MFImageGlyphSidebarError, _MFImageGlyphSidebarFlagFilled, 
+                       _MFImageGlyphSenderHeaderMenu, _MFImageGlyphShowContactAvatar, 
+                       _MFImageGlyphShowWritingTools, _MFImageGlyphSidebarAddMailbox, 
+                       _MFImageGlyphSidebarAllInboxes, _MFImageGlyphSidebarAllMailboxes, 
+                       _MFImageGlyphSidebarArchive, _MFImageGlyphSidebarBusinesses, 
+                       _MFImageGlyphSidebarDrafts, _MFImageGlyphSidebarError, _MFImageGlyphSidebarFlagFilled, 
                        _MFImageGlyphSidebarFlagged, _MFImageGlyphSidebarFolder, _MFImageGlyphSidebarFollowUp, 
                        _MFImageGlyphSidebarInbox, _MFImageGlyphSidebarJunk, _MFImageGlyphSidebarOffline, 
                        _MFImageGlyphSidebarOutbox, _MFImageGlyphSidebarReadLater, 

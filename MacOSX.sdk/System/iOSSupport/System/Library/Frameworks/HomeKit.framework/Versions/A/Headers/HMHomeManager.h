@@ -87,7 +87,7 @@ API_UNAVAILABLE(macos)
  *                          will be nil on success.
  *
  */
-- (void)addHomeWithName:(NSString *)homeName completionHandler:(void (^)(HMHome *__nullable home, NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos)NS_SWIFT_ASYNC_NAME(addHome(named:));
+- (void)addHomeWithName:(NSString *)homeName completionHandler:(void (^)(HMHome *__nullable home, NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addHome(named:));
 
 /*!
  *  @abstract   Removes an existing home from the collection.
@@ -107,7 +107,7 @@ API_UNAVAILABLE(macos)
  */
 API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0))
 API_UNAVAILABLE(macos)
-@protocol HMHomeManagerDelegate <NSObject>
+@protocol HMHomeManagerDelegate<NSObject>
 
 @optional
 
@@ -117,7 +117,7 @@ API_UNAVAILABLE(macos)
  *  @param      manager     Sender of this message.
  *  @param      status      The updated authorization status.
  */
-- (void)homeManager:(HMHomeManager *)manager didUpdateAuthorizationStatus:(HMHomeManagerAuthorizationStatus)status API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0))API_UNAVAILABLE(macos);
+- (void)homeManager:(HMHomeManager *)manager didUpdateAuthorizationStatus:(HMHomeManagerAuthorizationStatus)status API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0)) API_UNAVAILABLE(macos);
 
 /*!
  *  @abstract   Informs the delegate when homes configured by the user have been detected by the system.
@@ -163,7 +163,7 @@ API_UNAVAILABLE(macos)
  *
  *  @param      request     Information for the add accessory request.
  */
-- (void)homeManager:(HMHomeManager *)manager didReceiveAddAccessoryRequest:(HMAddAccessoryRequest *)request API_DEPRECATED("No longer supported", ios(13.0, 15.0))API_UNAVAILABLE(ios, macos, watchos, tvos, macCatalyst)NS_SWIFT_NAME(homeManager(_:didReceiveAddAccessoryRequest:));
+- (void)homeManager:(HMHomeManager *)manager didReceiveAddAccessoryRequest:(HMAddAccessoryRequest *)request API_DEPRECATED("No longer supported", ios(13.0, 15.0)) API_UNAVAILABLE(ios, macos, watchos, tvos, macCatalyst) NS_SWIFT_NAME(homeManager(_:didReceiveAddAccessoryRequest:));
 
 @end
 

@@ -952,7 +952,7 @@ NS_SWIFT_NAME(FSVolume.RenameOperations)
 ///   - name: The new volume name.
 ///   - reply: A block or closure to indicate success or failure. If renaming succeeds, pass an ``FSFileName`` of the new volume name and a `nil` error. If renaming fails, pass the relevant error as the second parameter; FSKit ignores any ``FSFileName`` in this case. For an `async` Swift implementation, there's no reply handler; simply return the ``FSFileName`` or throw an error.
 -(void)setVolumeName:(FSFileName *)name
-        replyHandler:(void(^)(FSFileName *newName,
+        replyHandler:(void(^)(FSFileName * _Nullable newName,
                               NSError * _Nullable error))reply;
 
 @end

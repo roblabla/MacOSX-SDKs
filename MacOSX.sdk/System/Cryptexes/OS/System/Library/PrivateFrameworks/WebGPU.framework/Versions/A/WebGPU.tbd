@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebGPU.framework/Versions/A/WebGPU'
-current-version: 621.1.15
+current-version: 621.2.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __Z15wgpuBufferUnmapP14WGPUBufferImpl, __Z15wgpuQueueSubmitP13WGPUQueueImplmPKP21WGPUCommandBufferImpl, 

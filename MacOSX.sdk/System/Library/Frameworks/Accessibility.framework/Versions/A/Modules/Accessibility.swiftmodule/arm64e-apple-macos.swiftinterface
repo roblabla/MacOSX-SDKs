@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
-// swift-module-flags: -target arm64e-apple-macos15.4 -target-variant arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 502.7.5 -module-name Accessibility
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64e-apple-macos15.5 -target-variant arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 502.7.8 -module-name Accessibility
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
 @_exported import Accessibility
 import Foundation
 import Swift
@@ -239,11 +239,14 @@ extension Accessibility.AccessibilitySettings {
     get
   }
 }
+@backDeployed(before: macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
 @available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
 @available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
 @available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
 @available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
-public func AXPrefersHorizontalTextLayout() -> Swift.Bool
+public func AXPrefersHorizontalTextLayout() -> Swift.Bool {
+    return __AXPrefersHorizontalTextLayout()
+}
 extension Accessibility.AccessibilitySettings {
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public static var prefersHorizontalTextLayout: Swift.Bool {
@@ -254,11 +257,14 @@ extension Accessibility.AccessibilitySettings {
     get
   }
 }
+@backDeployed(before: macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
 @available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
 @available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
 @available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
 @available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
-public func AXAnimatedImagesEnabled() -> Swift.Bool
+public func AXAnimatedImagesEnabled() -> Swift.Bool {
+    return __AXAnimatedImagesEnabled()
+}
 extension Accessibility.AccessibilitySettings {
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public static var animatedImagesEnabled: Swift.Bool {
@@ -274,16 +280,26 @@ extension Accessibility.AccessibilitySettings {
   public static func openSettings(for feature: Accessibility.AccessibilitySettings.Feature) async throws
 }
 extension Foundation.NSNotification.Name {
+  @backDeployed(before: macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
   @available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
   @available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayoutDidChangeNotification")
   @available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayoutDidChangeNotification")
   @available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayoutDidChangeNotification")
-  public static let AXPrefersHorizontalTextLayoutDidChange: Foundation.Notification.Name
+  public static var AXPrefersHorizontalTextLayoutDidChange: Foundation.NSNotification.Name {
+    get {
+        __AXPrefersHorizontalTextLayoutDidChange
+    }
+  }
+  @backDeployed(before: macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
   @available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
   @available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
   @available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
   @available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
-  public static let AXAnimatedImagesEnabledDidChange: Foundation.Notification.Name
+  public static var AXAnimatedImagesEnabledDidChange: Foundation.NSNotification.Name {
+    get {
+        NSNotification.Name.__AXAnimatedImagesEnabledDidChange
+    }
+  }
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute : Swift.Sendable {}

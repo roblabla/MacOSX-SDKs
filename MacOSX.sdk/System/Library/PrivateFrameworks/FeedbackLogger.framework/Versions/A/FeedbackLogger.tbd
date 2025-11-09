@@ -61,6 +61,7 @@ exports:
                        _FLIgnoreQuotaFilename, _FLMachServiceName, _FLSignpostLoggingInit, 
                        _FLUploadHeadersKey, _FLUploadImmediately, _FL_LOG_SIGNPOSTS, 
                        _FeedbackLoggerVersionNumber, _FeedbackLoggerVersionString, 
+                       _convertBatchStatusToCAOutcome, _convertUploadStatusToCAOutcome, 
                        _flAnnotatedLogForObject, _flLogForObject, _kMaxBatchContinuesDuration, 
                        _tryGetDataProperty, _tryGetDateProperty, _tryGetTextProperty ]
     objc-classes:    [ BatchMetadata, FLAutoBugCapture, FLAutoBugHelper, FLContainerStorePathManager, 

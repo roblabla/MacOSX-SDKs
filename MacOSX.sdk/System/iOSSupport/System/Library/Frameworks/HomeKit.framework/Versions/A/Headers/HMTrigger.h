@@ -19,7 +19,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  *             be used to execute one or more action sets when the event fires.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMTrigger : NSObject
+@interface HMTrigger : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 

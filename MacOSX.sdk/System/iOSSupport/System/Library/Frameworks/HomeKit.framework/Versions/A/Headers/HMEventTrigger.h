@@ -45,7 +45,7 @@ HM_EXTERN NSString *const HMPresenceKeyPath API_AVAILABLE(ios(11.0), watchos(4.0
  * @discussion This class represents a trigger that is based on events.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMEventTrigger : HMTrigger
+@interface HMEventTrigger : HMTrigger
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -88,7 +88,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
                       events:(NSArray<HMEvent *> *)events
                    endEvents:(nullable NSArray<HMEvent *> *)endEvents
                  recurrences:(nullable NSArray<NSDateComponents *> *)recurrences
-                   predicate:(nullable NSPredicate *)predicate API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
+                   predicate:(nullable NSPredicate *)predicate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief The events associated with the trigger.
@@ -132,7 +132,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addEvent:(HMEvent *)event completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0))API_UNAVAILABLE(watchos, tvos);
+- (void)addEvent:(HMEvent *)event completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Removes the specified event from the event trigger.
@@ -143,7 +143,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)removeEvent:(HMEvent *)event completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0))API_UNAVAILABLE(watchos, tvos);
+- (void)removeEvent:(HMEvent *)event completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("Use updateEvents:completionHandler: instead", ios(9.0, 11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Updates the set of events in the event trigger.
@@ -154,7 +154,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateEvents:(NSArray<HMEvent *> *)events completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
+- (void)updateEvents:(NSArray<HMEvent *> *)events completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief Updates the set of events in the event trigger.
@@ -165,7 +165,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateEndEvents:(NSArray<HMEvent *> *)endEvents completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
+- (void)updateEndEvents:(NSArray<HMEvent *> *)endEvents completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method replaces the predicate used to evaluate execution of the action sets associated with the trigger.
@@ -187,7 +187,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *                   The NSError provides more information on the status of the request,
  *                   error will be nil on success.
  */
-- (void)updateRecurrences:(nullable NSArray<NSDateComponents *> *)recurrences completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
+- (void)updateRecurrences:(nullable NSArray<NSDateComponents *> *)recurrences completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief This method is used to update whether the event trigger repeats or not.
@@ -198,7 +198,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateExecuteOnce:(BOOL)executeOnce completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0))API_UNAVAILABLE(watchos, tvos);
+- (void)updateExecuteOnce:(BOOL)executeOnce completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

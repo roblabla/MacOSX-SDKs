@@ -288,7 +288,9 @@ exports:
                        '_$sSo31IMServiceReachabilityControllerC6IMCoreE19accountsForQueryingSaySo9IMAccountCGvpMV', 
                        '_$sSo31IMServiceReachabilityControllerC6IMCoreE26calculateServiceForSending9toHandles20servicesToAccountIDs11withContext15completionBlockySaySSG_SDyS2SGSo0abP0CySo0agH6ResultCctF', 
                        '_$sSo31IMServiceReachabilityControllerC6IMCoreEABycfC', '_$sSo31IMServiceReachabilityControllerC6IMCoreEABycfc', 
-                       '_$sSo31IMServiceReachabilityControllerCMa', '_$sSo33IMSPICollaborationMessageListenerC6IMCoreEABycfC', 
+                       '_$sSo31IMServiceReachabilityControllerCMa', '_$sSo32IMUltraConstrainedNetworkMonitorC6IMCoreEABycfC', 
+                       '_$sSo32IMUltraConstrainedNetworkMonitorC6IMCoreEABycfc', 
+                       '_$sSo32IMUltraConstrainedNetworkMonitorCMa', '_$sSo33IMSPICollaborationMessageListenerC6IMCoreEABycfC', 
                        '_$sSo33IMSPICollaborationMessageListenerC6IMCoreEABycfc', 
                        '_$sSo33IMSPICollaborationMessageListenerCMa', _ABIMHandlesChangedNotification, 
                        _FZPersonStatusFromIMPersonStatus, _IMAIMListPrefKey, _IMAIMServiceName, 
@@ -656,9 +658,9 @@ exports:
                        IMTranscriptLocationChatItem, IMTranscriptPluginBreadcrumbChatItem, 
                        IMTranscriptPluginChatItem, IMTranscriptPluginStatusChatItem, 
                        IMTranscriptSharingChatItem, IMTransientMessagePartChatItem, 
-                       IMTypingChatItem, IMTypingPluginChatItem, IMUnavailabilityIndicatorChatItem, 
-                       IMUnavailableMomentShareMessagePartChatItem, IMUnknownInternationalSenderChatItem, 
-                       _IMBalloonExtensionApp ]
+                       IMTypingChatItem, IMTypingPluginChatItem, IMUltraConstrainedNetworkMonitor, 
+                       IMUnavailabilityIndicatorChatItem, IMUnavailableMomentShareMessagePartChatItem, 
+                       IMUnknownInternationalSenderChatItem, _IMBalloonExtensionApp ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

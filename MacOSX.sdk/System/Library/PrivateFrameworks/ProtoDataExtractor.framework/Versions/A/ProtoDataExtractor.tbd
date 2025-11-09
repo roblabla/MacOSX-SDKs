@@ -17,7 +17,10 @@ exports:
                        '_$s18ProtoDataExtractor10AllDemandsVMa', '_$s18ProtoDataExtractor10AllDemandsVMn', 
                        '_$s18ProtoDataExtractor10AllDemandsVN', '_$s18ProtoDataExtractor11PFAUploaderV6append4data9timestampy10Foundation0B0V_SdtKF', 
                        '_$s18ProtoDataExtractor11PFAUploaderV6commityyYaKF', '_$s18ProtoDataExtractor11PFAUploaderV6commityyYaKFTu', 
+                       '_$s18ProtoDataExtractor11PFAUploaderV6config8bundleId16innerTransformerACyxGAA15PFAIngestConfigVyxG_SS10Foundation0B0VSgAMctcfC', 
                        '_$s18ProtoDataExtractor11PFAUploaderV6config8bundleIdACyxGAA15PFAIngestConfigVyxG_SStcfC', 
+                       '_$s18ProtoDataExtractor11PFAUploaderVA2A19PFADataSerializableRzlE14wrappingConfig8bundleIdACyxGAA09PFAIngestH0VyxG_SStcfC', 
+                       '_$s18ProtoDataExtractor11PFAUploaderVAA21InternalSwiftProtobuf7MessageRzlE14wrappingConfig8bundleIdACyxGAA09PFAIngestJ0VyxG_SStcfC', 
                        '_$s18ProtoDataExtractor11PFAUploaderVMa', '_$s18ProtoDataExtractor11PFAUploaderVMn', 
                        '_$s18ProtoDataExtractor11PFAUploaderVyxGAA13EventIngestorAAMc', 
                        '_$s18ProtoDataExtractor11PFAUploaderVyxGAA13EventIngestorAAWP', 
@@ -121,7 +124,10 @@ exports:
                        '_$s18ProtoDataExtractor17RequestLinkConfigV9exclusiveSbvg', 
                        '_$s18ProtoDataExtractor17RequestLinkConfigV9exclusiveSbvpMV', 
                        '_$s18ProtoDataExtractor17RequestLinkConfigVMa', '_$s18ProtoDataExtractor17RequestLinkConfigVMn', 
-                       '_$s18ProtoDataExtractor17RequestLinkConfigVN', '_$s18ProtoDataExtractor20BiomeUploadProcessorV12biomeUseCaseACSS_tcfC', 
+                       '_$s18ProtoDataExtractor17RequestLinkConfigVN', '_$s18ProtoDataExtractor19PFADataSerializableMp', 
+                       '_$s18ProtoDataExtractor19PFADataSerializableP013pfaSerializedB010Foundation0B0VSgvgTj', 
+                       '_$s18ProtoDataExtractor19PFADataSerializableP013pfaSerializedB010Foundation0B0VSgvgTq', 
+                       '_$s18ProtoDataExtractor19PFADataSerializableTL', '_$s18ProtoDataExtractor20BiomeUploadProcessorV12biomeUseCaseACSS_tcfC', 
                        '_$s18ProtoDataExtractor20BiomeUploadProcessorV6doWork7contexty20LighthouseBackground22MLHostExtensionContextC_tYaKF', 
                        '_$s18ProtoDataExtractor20BiomeUploadProcessorV6doWork7contexty20LighthouseBackground22MLHostExtensionContextC_tYaKFTu', 
                        '_$s18ProtoDataExtractor20BiomeUploadProcessorVMa', '_$s18ProtoDataExtractor20BiomeUploadProcessorVMn', 
@@ -231,6 +237,10 @@ exports:
                        '_$s18ProtoDataExtractor9EventPathON', '_$s9InnerType18ProtoDataExtractor12IngestConfigPTl', 
                        '_$sSo33BMFeedbackLearningUserInteractionC18ProtoDataExtractorE22messageFilteringPolicyAC07MessageiJ0OyKFZ', 
                        '_$sSo43BMIntelligenceFlowTranscriptDatastreamEventC18ProtoDataExtractorE22messageFilteringPolicyAC07MessagejK0OyKFZ', 
+                       '_$sSo9PBCodableC18ProtoDataExtractor19PFADataSerializableACMc', 
+                       '_$sSo9PBCodableC18ProtoDataExtractor19PFADataSerializableACWP', 
+                       '_$sSo9PBCodableC18ProtoDataExtractorE013pfaSerializedC010Foundation0C0VSgvg', 
+                       '_$sSo9PBCodableC18ProtoDataExtractorE013pfaSerializedC010Foundation0C0VSgvpMV', 
                        _ProtoDataExtractorVersionNumber, _ProtoDataExtractorVersionString ]
     objc-classes:    [ _TtC18ProtoDataExtractor30DillSiriInstrumentationWrapper ]
 ...

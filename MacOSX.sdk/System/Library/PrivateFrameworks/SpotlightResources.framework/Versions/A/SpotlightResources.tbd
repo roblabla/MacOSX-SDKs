@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightResources.framework/Versions/A/SpotlightResources'
-current-version: 2333.22.13
+current-version: 2333.50.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SRGetResourcePath, _SRIsAppleInternalInstall, _SRIsRunningInServer, 

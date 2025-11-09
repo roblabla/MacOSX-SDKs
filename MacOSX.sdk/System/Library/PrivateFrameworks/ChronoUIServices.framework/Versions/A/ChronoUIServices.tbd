@@ -1016,7 +1016,8 @@ exports:
                        _NSStringFromCHUISWidgetColorScheme, _NSStringFromCHUISWidgetContentType, 
                        _NSStringFromCHUISWidgetPresentationMode, _NSStringFromCHUISWidgetVisibility, 
                        __FileDescriptorKey ]
-    objc-classes:    [ CHUISControlInstanceConfiguration, CHUISKeybag, CHUISMutableControlInstanceConfiguration, 
-                       CHUISPreferences, CHUISTouchEvent, CHUISWatchComplicationsWidgetSnapshotMetadataLabelData, 
+    objc-classes:    [ CHSWidgetRenderSchemeArrayBox, CHUISControlInstanceConfiguration, 
+                       CHUISKeybag, CHUISMutableControlInstanceConfiguration, CHUISPreferences, 
+                       CHUISTouchEvent, CHUISWatchComplicationsWidgetSnapshotMetadataLabelData, 
                        CHUISWidgetHostCancelTouchesAssertion ]
 ...

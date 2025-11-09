@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 751.0.104
+current-version: 760.6.150
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -294,12 +294,13 @@ exports:
                        _PHResourceLocalAvailabilityRequestSpatialOvercapturePhotoURLKey, 
                        _PHResourceLocalAvailabilityRequestSpatialOvercaptureVideoURLKey, 
                        _PHResourceLocalAvailabilityRequestVideoURLKey, _PHResourceLocalAvailabilityRequestVideoUTIKey, 
-                       _PHSanitizeNormalizedCropRect, _PHScaleImageFromURL, _PHSearchFeedbackOnScreenAssetsKey, 
-                       _PHSearchFeedbackQueryDetailsRequestNotification, _PHSearchFeedbackQueryResultKey, 
-                       _PHSearchIndexIndexingPausedKey, _PHSearchIndexIndexingStatusDidChangeNotification, 
-                       _PHSearchIndexItemsRemainingKey, _PHSearchQueryAllTimeAttributeKey, 
-                       _PHSearchQueryAttributeKey, _PHSearchQueryOptionsCollectionThresholdDefaultValue, 
-                       _PHSearchQueryOptionsEmbeddingGenerationTimeoutSpotlightDefaultValue, 
+                       _PHSanitizeNormalizedCropRect, _PHScaleImageFromURL, _PHSearchFeedbackDiagnosticExtensionParameterKey, 
+                       _PHSearchFeedbackDiagnosticExtensionSearchQueryInfoKey, _PHSearchFeedbackDiagnosticExtensionVisibleAssetUUIDsKey, 
+                       _PHSearchFeedbackOnScreenAssetsKey, _PHSearchFeedbackQueryDetailsRequestNotification, 
+                       _PHSearchFeedbackQueryResultKey, _PHSearchIndexIndexingPausedKey, 
+                       _PHSearchIndexIndexingStatusDidChangeNotification, _PHSearchIndexItemsRemainingKey, 
+                       _PHSearchQueryAllTimeAttributeKey, _PHSearchQueryAttributeKey, 
+                       _PHSearchQueryOptionsCollectionThresholdDefaultValue, _PHSearchQueryOptionsEmbeddingGenerationTimeoutSpotlightDefaultValue, 
                        _PHSearchQueryOptionsEmbeddingRelevanceThresholdSpotlightDefaultValue, 
                        _PHSearchQueryOptionsMinNumberOfResultsForNextTokenGeneration, 
                        _PHSearchQueryOptionsSpotlightTimeoutSecondsDefaultValue, 

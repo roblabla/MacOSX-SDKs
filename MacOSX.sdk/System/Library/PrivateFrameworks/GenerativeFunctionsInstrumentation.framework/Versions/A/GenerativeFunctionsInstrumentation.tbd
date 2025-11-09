@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeFunctionsInstrumentation.framework/Versions/A/GenerativeFunctionsInstrumentation'
-current-version: 154.255.6
+current-version: 154.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -201,6 +201,7 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation18EventReporterErrorOs0F0AAMc', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC0dE5ErrorO10openFailedyA2EmFWC', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC0dE5ErrorO15invalidArgumentyA2EmFWC', 
+                       '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC0dE5ErrorO25dataWrittenToMemoryFailedyA2EmFWC', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC0dE5ErrorO2eeoiySbAE_AEtFZ', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC0dE5ErrorO4hash4intoys6HasherVz_tF', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC0dE5ErrorO9hashValueSivg', 
@@ -216,6 +217,8 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC11lastChanged10Foundation4DateVSgvg', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC11lastChanged10Foundation4DateVSgvpMV', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC11lastChanged10Foundation4DateVSgvs', 
+                       '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC15durationOptionsSaySdGvgZ', 
+                       '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC15durationOptionsSaySdGvpZMV', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC5prune2to6reasonySd_AC6ReasonOtF', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6ReasonO20reportSettingChangedyA2EmFWC', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6ReasonO3cliyA2EmFWC', 
@@ -230,6 +233,8 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6ReasonOSHAAMc', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6ReasonOSQAAMc', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6ReasonOSYAAMc', 
+                       '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6export10Foundation4DataVyYaKF', 
+                       '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6export10Foundation4DataVyYaKFTu', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6export2toy10Foundation3URLV_tYaKF', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC6export2toy10Foundation3URLV_tYaKFTu', 
                        '_$s34GenerativeFunctionsInstrumentation18TransparencyReportC7enabledSbvg', 

@@ -25,6 +25,10 @@ typedef struct sparse_m_float* sparse_matrix_float;
  */
 typedef struct sparse_m_double* sparse_matrix_double;
 
+typedef struct sparse_m_float_complex* sparse_matrix_float_complex;
+
+typedef struct sparse_m_double_complex* sparse_matrix_double_complex;
+
 /*!
  @abstract The dimension type. All dimensions are positive values.
  */

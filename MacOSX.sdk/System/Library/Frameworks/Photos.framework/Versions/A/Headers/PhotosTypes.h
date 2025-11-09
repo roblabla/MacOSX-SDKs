@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 API_AVAILABLE_BEGIN(macos(10.11), ios(8), tvos(10))
 
 #pragma mark - PHCollectionListTypes
@@ -165,6 +166,7 @@ typedef NS_OPTIONS(NSUInteger, PHAssetSourceType) {
     PHAssetSourceTypeUserLibrary     = (1UL << 0),
     PHAssetSourceTypeCloudShared     = (1UL << 1),
     PHAssetSourceTypeiTunesSynced    = (1UL << 2),
+
 } API_AVAILABLE(ios(9));
 
 typedef NS_ENUM(NSInteger, PHAssetResourceType) {

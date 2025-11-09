@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/OnDeviceEvalRuntime.framework/Versions/A/OnDeviceEvalRuntime'
-current-version: 1.0.19
+current-version: 1.0.20
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -184,6 +184,8 @@ exports:
                        '_$s19OnDeviceEvalRuntime0C6ResultV9appEntitySSSgvg', '_$s19OnDeviceEvalRuntime0C6ResultV9appEntitySSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime0C6ResultV9appIntentSSSgvg', '_$s19OnDeviceEvalRuntime0C6ResultV9appIntentSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime0C6ResultV9csvValuesSaySSGvg', '_$s19OnDeviceEvalRuntime0C6ResultV9csvValuesSaySSGvpMV', 
+                       '_$s19OnDeviceEvalRuntime0C6ResultV9queryTierSSSgvM', '_$s19OnDeviceEvalRuntime0C6ResultV9queryTierSSSgvg', 
+                       '_$s19OnDeviceEvalRuntime0C6ResultV9queryTierSSSgvpMV', '_$s19OnDeviceEvalRuntime0C6ResultV9queryTierSSSgvs', 
                        '_$s19OnDeviceEvalRuntime0C6ResultV9queryTimeSSSgvg', '_$s19OnDeviceEvalRuntime0C6ResultV9queryTimeSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime0C6ResultVMa', '_$s19OnDeviceEvalRuntime0C6ResultVMn', 
                        '_$s19OnDeviceEvalRuntime0C6ResultVN', '_$s19OnDeviceEvalRuntime0C6ResultVSEAAMc', 
@@ -343,13 +345,14 @@ exports:
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV19goldenSourceDocURLsSaySSGSgvpMV', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV24expectedSearchEntityTypeAA0hI6DomainOvg', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV24expectedSearchEntityTypeAA0hI6DomainOvpMV', 
-                       '_$s19OnDeviceEvalRuntime10TruthJsonlV2id13queryCategory8rawQuery09rewrittenK010goldenData0M13SourceDocURLs15plannerOverride0m9ComponentN024expectedSearchEntityType04dataO07version6domain9appIntent11appBundleId03appW00H4Time010structuredK0ACSS_S3SSgSaySSGAVSgAUSDySSAA0T6ResultOGAA0vW6DomainOSSA7UtcfC', 
+                       '_$s19OnDeviceEvalRuntime10TruthJsonlV2id13queryCategory8rawQuery09rewrittenK010goldenData0M13SourceDocURLs15plannerOverride0m9ComponentN024expectedSearchEntityType04dataO07version6domain9appIntent11appBundleId03appW00H4Time010structuredK00K4TierACSS_S3SSgSaySSGAWSgAVSDySSAA0T6ResultOGAA0vW6DomainOSSA8VtcfC', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV2idSSvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV2idSSvpMV', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV4fromACs7Decoder_p_tKcfC', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV6domainSSSgvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV6domainSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV6encode2toys7Encoder_p_tKF', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV7versionSSSgvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV7versionSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV8rawQuerySSvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV8rawQuerySSvpMV', 
+                       '_$s19OnDeviceEvalRuntime10TruthJsonlV9QueryTierSSSgvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV9QueryTierSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV9appEntitySSSgvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV9appEntitySSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV9appIntentSSSgvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV9appIntentSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime10TruthJsonlV9queryTimeSSSgvg', '_$s19OnDeviceEvalRuntime10TruthJsonlV9queryTimeSSSgvpMV', 
@@ -752,7 +755,7 @@ exports:
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV15plannerOverrideSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV19goldenSourceDocURLsSaySSGSgvg', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV19goldenSourceDocURLsSaySSGSgvpMV', 
-                       '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV2id13queryCategory8rawQuery0I4Time09rewrittenL010goldenData0O13SourceDocURLs15plannerOverride11predictionsACSS_S3SSgSSSaySSGANSgAmNtcfC', 
+                       '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV2id13queryCategory8rawQuery0I4Time09rewrittenL010goldenData0O13SourceDocURLs15plannerOverride11predictions0L4TierACSS_S3SSgSSSaySSGAOSgAnoNtcfC', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV2idSSvg', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV2idSSvpMV', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV4fromACs7Decoder_p_tKcfC', 
@@ -760,6 +763,8 @@ exports:
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV6encode2toys7Encoder_p_tKF', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV8rawQuerySSvg', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV8rawQuerySSvpMV', 
+                       '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV9QueryTierSSSgvg', 
+                       '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV9QueryTierSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV9queryTimeSSSgvg', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsV9queryTimeSSSgvpMV', 
                        '_$s19OnDeviceEvalRuntime20TruthWithPredictionsVMa', '_$s19OnDeviceEvalRuntime20TruthWithPredictionsVMn', 

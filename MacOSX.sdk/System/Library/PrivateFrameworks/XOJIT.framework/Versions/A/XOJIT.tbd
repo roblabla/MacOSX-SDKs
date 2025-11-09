@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/XOJIT.framework/Versions/A/XOJIT'
-current-version: 59
+current-version: 68
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -150,9 +150,23 @@ exports:
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV20compatibilityVersions6UInt32Vvg', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV20compatibilityVersions6UInt32VvpMV', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV20compatibilityVersions6UInt32Vvs', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV4name9timestamp14currentVersion013compatibilityI08loadKindAFSS_s6UInt32VA2mF04LoadL0OtcfC', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV4name9timestamp14currentVersion013compatibilityI0AFSS_s6UInt32VA2LtcfC', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV4nameSSvM', '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV4nameSSvg', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV4nameSSvpMV', '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV4nameSSvs', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindO2eeoiySbAH_AHtFZ', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindO4hash4intoys6HasherVz_tF', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindO4weakyA2HmFWC', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindO8standardyA2HmFWC', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindO9hashValueSivg', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindO9hashValueSivpMV', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindOMa', '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindOMn', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindON', '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindOSHAAMc', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8LoadKindOSQAAMc', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8loadKindAF04LoadG0OvM', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8loadKindAF04LoadG0Ovg', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8loadKindAF04LoadG0OvpMV', 
+                       '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV8loadKindAF04LoadG0Ovs', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV9timestamps6UInt32VvM', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV9timestamps6UInt32Vvg', 
                        '_$s5XOJITAAC18MachOHeaderOptionsV5DylibV9timestamps6UInt32VvpMV', 
@@ -210,7 +224,8 @@ exports:
                        '_$s5XOJITAAC22addSymbolTableCallbackyyyAB14UVSymbolStringV_s6UInt64VtYbcF', 
                        '_$s5XOJITAAC22runProgramOnMainThread6symbol12jitDylibName9argumentss5Int32VSS_SSSaySSGtKF', 
                        '_$s5XOJITAAC25listenToSymbolTableStreamAB0deF0VyF', '_$s5XOJITAAC25setLoadableAtPathViaRegex2jd5regex11replacementyAB8JITDylibV_S2StKF', 
-                       '_$s5XOJITAAC6internyAB14UVSymbolStringVSSF', '_$s5XOJITAAC6lookup11searchOrder4name0B5Flags0B4Kind13requiredStateAB18JITEvaluatedSymbolVSayAB8JITDylibV_AB0l6LookupF0OtG_SSAB0kmF0OAB0mG0OAB0kI0OtKF', 
+                       '_$s5XOJITAAC26addNullableSymbolsFromPathyySSKF', '_$s5XOJITAAC6internyAB14UVSymbolStringVSSF', 
+                       '_$s5XOJITAAC6lookup11searchOrder4name0B5Flags0B4Kind13requiredStateAB18JITEvaluatedSymbolVSayAB8JITDylibV_AB0l6LookupF0OtG_SSAB0kmF0OAB0mG0OAB0kI0OtKF', 
                        '_$s5XOJITAAC8JITDylibV14addToLinkOrder_5flagsyAD_AB0B11LookupFlagsOtF', 
                        '_$s5XOJITAAC8JITDylibV16executionSessionAB09ExecutionD0Vvg', 
                        '_$s5XOJITAAC8JITDylibV16executionSessionAB09ExecutionD0VvpMV', 

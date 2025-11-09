@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideosUI.framework/Versions/A/VideosUI'
-current-version: 973.44.1
+current-version: 973.50.8
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -833,8 +833,11 @@ exports:
                        '_$s8VideosUI29SportsAccessibilityIdentifierV8LocationOSQAAMc', 
                        '_$s8VideosUI29SportsAccessibilityIdentifierVMa', '_$s8VideosUI29SportsAccessibilityIdentifierVMn', 
                        '_$s8VideosUI29SportsAccessibilityIdentifierVN', '_$s8VideosUI2eeoiySbAA23WritingDirectionsCountsC_ADtF', 
-                       '_$s8VideosUI2peoiyyAA23WritingDirectionsCountsCz_ADtF', '_$s8VideosUI30DocumentViewModelEventDelegateMp', 
-                       '_$s8VideosUI30DocumentViewModelEventDelegateTL', '_$s8VideosUI30SportsRunningClockLocalizationV0C3Kit0dE11LocalizableAAMc', 
+                       '_$s8VideosUI2peoiyyAA23WritingDirectionsCountsCz_ADtF', '_$s8VideosUI30AMSNetworkMetricsExtractorObjcC06createD10Dictionary12amsURLResultSDySSypGSo12AMSURLResultC_tFZ', 
+                       '_$s8VideosUI30AMSNetworkMetricsExtractorObjcCMa', '_$s8VideosUI30AMSNetworkMetricsExtractorObjcCMn', 
+                       '_$s8VideosUI30AMSNetworkMetricsExtractorObjcCN', '_$s8VideosUI30AMSNetworkMetricsExtractorObjcCfD', 
+                       '_$s8VideosUI30DocumentViewModelEventDelegateMp', '_$s8VideosUI30DocumentViewModelEventDelegateTL', 
+                       '_$s8VideosUI30SportsRunningClockLocalizationV0C3Kit0dE11LocalizableAAMc', 
                        '_$s8VideosUI30SportsRunningClockLocalizationV15localizedString3keySSSg0C3Kit0dE9ViewModelC0F3KeyO_tF', 
                        '_$s8VideosUI30SportsRunningClockLocalizationV17hasSeparatorGlyphSbvg', 
                        '_$s8VideosUI30SportsRunningClockLocalizationV17hasSeparatorGlyphSbvpMV', 
@@ -858,8 +861,7 @@ exports:
                        '_$s8VideosUI3minyxx_xSgACtSLRzlF', '_$s8VideosUI3minyxx_xSgtSLRzlF', 
                        '_$s8VideosUI5clampyxxSg_xACtSLRzlF', '_$s8VideosUI8DocumentC10appContextSo06VUIAppE0CSgvpfi', 
                        '_$s8VideosUI8DocumentC13navigationBarAA9ViewModelCSgvpfi', 
-                       '_$s8VideosUI8DocumentC15pagePerfMetricsAA20ThreadSafeDictionaryCySSSdGSgvpfi', 
-                       '_$s8VideosUI8DocumentC17templateViewModelAA08TemplateeF0CSgvg', 
+                       '_$s8VideosUI8DocumentC15pagePerfMetricsSDySSypGSgvpfi', '_$s8VideosUI8DocumentC17templateViewModelAA08TemplateeF0CSgvg', 
                        '_$s8VideosUI8DocumentC17templateViewModelAA08TemplateeF0CSgvpMV', 
                        '_$s8VideosUI8DocumentC17templateViewModelAA08TemplateeF0CSgvpWvd', 
                        '_$s8VideosUI8DocumentC17templateViewModelAA08TemplateeF0CSgvpfi', 
@@ -1394,6 +1396,6 @@ exports:
                        _TtC8VideosUI22SearchRACViewPresenter, _TtC8VideosUI24VUISportsFavoriteService, 
                        _TtC8VideosUI26VUIBarItemSelectionManager, _TtC8VideosUI26VUIUserConsentModification, 
                        _TtC8VideosUI28VUIJetPackControllerResponse, _TtC8VideosUI29DocumentRequestViewController, 
-                       _TtC8VideosUI32RemoteNetworkReachabilityMonitor, _TtC8VideosUI8VideosUI, 
-                       _VUITVAppNavigationController ]
+                       _TtC8VideosUI30AMSNetworkMetricsExtractorObjc, _TtC8VideosUI32RemoteNetworkReachabilityMonitor, 
+                       _TtC8VideosUI8VideosUI, _VUITVAppNavigationController ]
 ...

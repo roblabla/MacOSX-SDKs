@@ -282,11 +282,12 @@ exports:
                        _kVTEItriggerStartSampleCount, _kVTEItriggerStartSeconds, 
                        _kVTEItriggerStartTime, _kVTEItwoShotAudibleFeedbackDelay, 
                        _kVTEIuptime, _kVTTranscriberDefaultKeywordConfidence, _kXPCEncodeKeyHalDeviceUID, 
-                       _kXPCEncodeKeyIsRemoteDevice, _kXPCEncodeKeyPlaybackDeviceType, 
-                       _kXPCEncodeKeyPlaybackRoute, _kXPCEncodeKeyRecordDeviceInfo, 
-                       _kXPCEncodeKeyRemoteDeviceProductIdentifier, _kXPCEncodeKeyRemoteDeviceUID, 
-                       _kXPCEncodeKeyRemoteDeviceUIDString, _kXPCEncodeKeyRoute, 
-                       _machXPCEntitlementPrefix, _machXPCEntitlementPrefixOSX, _msnExceptionAnnounceMessage ]
+                       _kXPCEncodeKeyIsNarrowBand, _kXPCEncodeKeyIsRemoteDevice, 
+                       _kXPCEncodeKeyPlaybackDeviceType, _kXPCEncodeKeyPlaybackRoute, 
+                       _kXPCEncodeKeyRecordDeviceInfo, _kXPCEncodeKeyRemoteDeviceProductIdentifier, 
+                       _kXPCEncodeKeyRemoteDeviceUID, _kXPCEncodeKeyRemoteDeviceUIDString, 
+                       _kXPCEncodeKeyRoute, _machXPCEntitlementPrefix, _machXPCEntitlementPrefixOSX, 
+                       _msnExceptionAnnounceMessage ]
     objc-classes:    [ CSADPPreventStandbyAssertion, CSAVVoiceTriggerClientManager, 
                        CSAdamSpeechMetricsManager, CSAlertBehaviorPredictor, CSAlwaysDisabledPolicy, 
                        CSAlwaysEnabledPolicy, CSAlwaysOnProcessorStateMonitor, CSAsset, 

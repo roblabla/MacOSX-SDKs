@@ -14,8 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * @abstract This enumeration describes the current activation state of the event trigger.
  */
 API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0))
-API_UNAVAILABLE(macos)
-typedef NS_ENUM(NSUInteger, HMEventTriggerActivationState) {
+API_UNAVAILABLE(macos) typedef NS_ENUM(NSUInteger, HMEventTriggerActivationState) {
     /*!
      * Trigger is not active because it is disabled
      */

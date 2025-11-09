@@ -18,7 +18,7 @@ NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(15.4))
 API_UNAVAILABLE(watchos, tvos, visionos)
 API_UNAVAILABLE(macos, macCatalyst)
-@interface HMAccessorySetupRequest : NSObject <NSCopying>
+@interface HMAccessorySetupRequest : NSObject<NSCopying>
 
 - (instancetype)init;
 

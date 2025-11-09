@@ -172,6 +172,20 @@ double sparse_inner_product_dense_double( sparse_dimension nz,
                                        sparse_stride incy )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+float _Complex sparse_inner_product_dense_float_complex( sparse_dimension nz,
+                                                        const float _Complex * __restrict x,
+                                                        const sparse_index * __restrict indx,
+                                                        const float _Complex * __restrict y,
+                                                        sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+double _Complex sparse_inner_product_dense_double_complex( sparse_dimension nz,
+                                                          const double _Complex * __restrict x,
+                                                          const sparse_index * __restrict indx,
+                                                          const double _Complex * __restrict y,
+                                                          sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 
 /*!
  @abstract
@@ -232,6 +246,20 @@ double sparse_inner_product_sparse_double( sparse_dimension nzx, sparse_dimensio
                                         const double * __restrict y,
                                         const sparse_index * __restrict indy )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+float _Complex sparse_inner_product_sparse_float_complex( sparse_dimension nzx, sparse_dimension nzy,
+                                                         const float _Complex * __restrict x,
+                                                         const sparse_index * __restrict indx,
+                                                         const float _Complex * __restrict y,
+                                                         const sparse_index * __restrict indy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+double _Complex sparse_inner_product_sparse_double_complex( sparse_dimension nzx, sparse_dimension nzy,
+                                                           const double _Complex * __restrict x,
+                                                           const sparse_index * __restrict indx,
+                                                           const double _Complex * __restrict y,
+                                                           const sparse_index * __restrict indy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -295,6 +323,20 @@ void sparse_vector_add_with_scale_dense_double( sparse_dimension nz, double alph
                                              sparse_stride incy )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+void sparse_vector_add_with_scale_dense_float_complex( sparse_dimension nz, float _Complex alpha,
+                                                      const float _Complex * __restrict x,
+                                                      const sparse_index * __restrict indx,
+                                                      float _Complex * __restrict y,
+                                                      sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+void sparse_vector_add_with_scale_dense_double_complex( sparse_dimension nz, double _Complex alpha,
+                                                       const double _Complex * __restrict x,
+                                                       const sparse_index * __restrict indx,
+                                                       double _Complex * __restrict y,
+                                                       sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Compute the specified norm of the sparse vector x.
@@ -342,6 +384,13 @@ double sparse_vector_norm_double( sparse_dimension nz, const double * __restrict
                                  const sparse_index * __restrict indx, sparse_norm norm )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+float sparse_vector_norm_float_complex( sparse_dimension nz, const float _Complex * __restrict x,
+                                                const sparse_index * __restrict indx, sparse_norm norm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+double sparse_vector_norm_double_complex( sparse_dimension nz, const double _Complex * __restrict x,
+                                                  const sparse_index * __restrict indx, sparse_norm norm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 
 #pragma mark - Level 2 Routines -
@@ -423,6 +472,24 @@ sparse_status sparse_matrix_vector_product_dense_double( enum CBLAS_TRANSPOSE tr
                                                    sparse_stride incy )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_matrix_vector_product_dense_float_complex( enum CBLAS_TRANSPOSE transa,
+                                                               float _Complex alpha,
+                                                               sparse_matrix_float_complex A,
+                                                               const float _Complex * __restrict x,
+                                                               sparse_stride incx,
+                                                               float _Complex * __restrict y,
+                                                               sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_matrix_vector_product_dense_double_complex( enum CBLAS_TRANSPOSE transa,
+                                                                double _Complex alpha,
+                                                                sparse_matrix_double_complex A,
+                                                                const double _Complex * __restrict x,
+                                                                sparse_stride incx,
+                                                                double _Complex * __restrict y,
+                                                                sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Solve the system of equations x = alpha * T^{-1} * x for x where x is a dense
@@ -474,6 +541,18 @@ sparse_status sparse_vector_triangular_solve_dense_double( enum CBLAS_TRANSPOSE 
                                                sparse_stride incx )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_vector_triangular_solve_dense_float_complex( enum CBLAS_TRANSPOSE transt,
+                                                                 float _Complex alpha, sparse_matrix_float_complex T,
+                                                                 float _Complex * __restrict x,
+                                                                 sparse_stride incx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_vector_triangular_solve_dense_double_complex( enum CBLAS_TRANSPOSE transt,
+                                                                  double _Complex alpha,
+                                                                  sparse_matrix_double_complex T,
+                                                                  double _Complex * __restrict x,
+                                                                  sparse_stride incx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -553,6 +632,22 @@ sparse_status sparse_outer_product_dense_double( sparse_dimension M, sparse_dime
                                      sparse_matrix_double * __restrict C)
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_outer_product_dense_float_complex( sparse_dimension M, sparse_dimension N,
+                                                       sparse_dimension nz, float _Complex alpha,
+                                                       const float _Complex * __restrict x, sparse_stride incx,
+                                                       const float _Complex * __restrict y,
+                                                       const sparse_index * __restrict indy,
+                                                       sparse_matrix_float_complex * __restrict C)
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_outer_product_dense_double_complex( sparse_dimension M, sparse_dimension N,
+                                                        sparse_dimension nz, double _Complex alpha,
+                                                        const double _Complex * __restrict x,
+                                                        sparse_stride incx, const double _Complex * __restrict y,
+                                                        const sparse_index * __restrict indy,
+                                                        sparse_matrix_double_complex * __restrict C)
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Permute the rows of the sparse matrix A based on the provided permutation
@@ -586,6 +681,14 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 sparse_status sparse_permute_rows_double( sparse_matrix_double A,
                               const sparse_index * __restrict perm )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+sparse_status sparse_permute_rows_float_complex( sparse_matrix_float_complex A,
+                                                const sparse_index * __restrict perm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_permute_rows_double_complex( sparse_matrix_double_complex A,
+                                                 const sparse_index * __restrict perm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -621,6 +724,13 @@ sparse_status sparse_permute_cols_double( sparse_matrix_double A,
                               const sparse_index * __restrict perm )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_permute_cols_float_complex( sparse_matrix_float_complex A,
+                             const sparse_index * __restrict perm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_permute_cols_double_complex( sparse_matrix_double_complex A,
+                              const sparse_index * __restrict perm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -655,6 +765,12 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 double sparse_elementwise_norm_double( sparse_matrix_double A, sparse_norm norm )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+float sparse_elementwise_norm_float_complex( sparse_matrix_float_complex A, sparse_norm norm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+double sparse_elementwise_norm_double_complex( sparse_matrix_double_complex A, sparse_norm norm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Compute the specified operator norm of the sparse matrix A.  For elementwise
@@ -688,7 +804,13 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
 double sparse_operator_norm_double( sparse_matrix_double A, sparse_norm norm )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
-    
+
+float sparse_operator_norm_float_complex( sparse_matrix_float_complex A, sparse_norm norm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+double sparse_operator_norm_double_complex( sparse_matrix_double_complex A, sparse_norm norm )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Compute the sum along the specified diagonal of the sparse matrix A.
@@ -722,7 +844,11 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 double sparse_matrix_trace_double( sparse_matrix_double A, sparse_index offset )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+float _Complex sparse_matrix_trace_float_complex( sparse_matrix_float_complex A, sparse_index offset )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
+double _Complex sparse_matrix_trace_double_complex( sparse_matrix_double_complex A, sparse_index offset )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 
 
@@ -816,6 +942,26 @@ sparse_status sparse_matrix_product_dense_double( enum CBLAS_ORDER order,
                                             sparse_dimension ldc )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_matrix_product_dense_float_complex( enum CBLAS_ORDER order,
+                                           enum CBLAS_TRANSPOSE transa,
+                                           sparse_dimension n, float _Complex alpha,
+                                           sparse_matrix_float_complex A,
+                                           const float _Complex * __restrict B,
+                                           sparse_dimension ldb,
+                                           float _Complex * __restrict C,
+                                           sparse_dimension ldc )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_matrix_product_dense_double_complex( enum CBLAS_ORDER order,
+                                            enum CBLAS_TRANSPOSE transa,
+                                            sparse_dimension n, double _Complex alpha,
+                                            sparse_matrix_double_complex A,
+                                            const double _Complex * __restrict B,
+                                            sparse_dimension ldb,
+                                            double _Complex * __restrict C,
+                                            sparse_dimension ldc )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Multiplies the sparse matrix B by the sparse matrix A and adds the result to
@@ -886,6 +1032,24 @@ sparse_status sparse_matrix_product_sparse_double(enum CBLAS_ORDER order,
                                                   sparse_dimension ldc )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_matrix_product_sparse_float_complex(enum CBLAS_ORDER order,
+                                                 enum CBLAS_TRANSPOSE transa,
+                                                 float _Complex alpha,
+                                                 sparse_matrix_float_complex A,
+                                                 sparse_matrix_float_complex B,
+                                                 float _Complex * __restrict C,
+                                                 sparse_dimension ldc )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_matrix_product_sparse_double_complex(enum CBLAS_ORDER order,
+                                                  enum CBLAS_TRANSPOSE transa,
+                                                  double _Complex alpha,
+                                                  sparse_matrix_double_complex A,
+                                                  sparse_matrix_double_complex B,
+                                                  double _Complex * __restrict C,
+                                                  sparse_dimension ldc )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Solve the system of equations B = alpha * T^{-1} * B for B where B is a dense
@@ -947,7 +1111,19 @@ sparse_status sparse_matrix_triangular_solve_dense_double( enum CBLAS_ORDER orde
                                     double * __restrict B, sparse_dimension ldb )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_matrix_triangular_solve_dense_float_complex( enum CBLAS_ORDER order,
+                                   enum CBLAS_TRANSPOSE transt,
+                                   sparse_dimension nrhs, float _Complex alpha,
+                                   sparse_matrix_float_complex T,
+                                   float _Complex * __restrict B, sparse_dimension ldb )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
+sparse_status sparse_matrix_triangular_solve_dense_double_complex( enum CBLAS_ORDER order,
+                                    enum CBLAS_TRANSPOSE transt,
+                                    sparse_dimension nrhs, double _Complex alpha,
+                                    sparse_matrix_double_complex T,
+                                    double _Complex * __restrict B, sparse_dimension ldb )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 
 #pragma mark - Point Wise Sparse Matrix Routines -
@@ -989,6 +1165,12 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
 sparse_matrix_double sparse_matrix_create_double( sparse_dimension M, sparse_dimension N )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+sparse_matrix_float_complex sparse_matrix_create_float_complex( sparse_dimension M, sparse_dimension N )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_matrix_double_complex sparse_matrix_create_double_complex( sparse_dimension M, sparse_dimension N )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1041,6 +1223,14 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 sparse_status sparse_insert_entry_double( sparse_matrix_double A, double val,
                                     sparse_index i, sparse_index j )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+sparse_status sparse_insert_entry_float_complex( sparse_matrix_float_complex A, float _Complex val,
+                                   sparse_index i, sparse_index j )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_insert_entry_double_complex( sparse_matrix_double_complex A, double _Complex val,
+                                    sparse_index i, sparse_index j )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1114,6 +1304,18 @@ sparse_status sparse_insert_entries_double( sparse_matrix_double A, sparse_dimen
                                       const sparse_index * __restrict jndx )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_insert_entries_float_complex( sparse_matrix_float_complex A, sparse_dimension N,
+                                     const float _Complex * __restrict val,
+                                     const sparse_index * __restrict indx,
+                                     const sparse_index * __restrict jndx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_insert_entries_double_complex( sparse_matrix_double_complex A, sparse_dimension N,
+                                      const double _Complex * __restrict val,
+                                      const sparse_index * __restrict indx,
+                                      const sparse_index * __restrict jndx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Use to build a sparse matrix by providing a list of point entries for a single
@@ -1181,6 +1383,16 @@ sparse_status sparse_insert_col_double( sparse_matrix_double A, sparse_index j,
                                   sparse_dimension nz, const double * __restrict val,
                                   const sparse_index * __restrict indx )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+sparse_status sparse_insert_col_float_complex( sparse_matrix_float_complex A, sparse_index j,
+                                 sparse_dimension nz, const float _Complex * __restrict val,
+                                 const sparse_index * __restrict indx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_insert_col_double_complex( sparse_matrix_double_complex A, sparse_index j,
+                                  sparse_dimension nz, const double _Complex * __restrict val,
+                                  const sparse_index * __restrict indx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1250,6 +1462,15 @@ sparse_status sparse_insert_row_double( sparse_matrix_double A, sparse_index i,
                                   const sparse_index * __restrict jndx )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_insert_row_float_complex( sparse_matrix_float_complex A, sparse_index i,
+                                 sparse_dimension nz, const float _Complex * __restrict val,
+                                 const sparse_index * __restrict jndx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_insert_row_double_complex( sparse_matrix_double_complex A, sparse_index i,
+                                  sparse_dimension nz, const double _Complex * __restrict val,
+                                  const sparse_index * __restrict jndx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1325,6 +1546,18 @@ sparse_status sparse_extract_sparse_row_double( sparse_matrix_double A, sparse_i
                                   sparse_dimension nz, double * __restrict val,
                                   sparse_index * __restrict jndx )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+sparse_status sparse_extract_sparse_row_float_complex( sparse_matrix_float_complex A, sparse_index row,
+                                  sparse_index column_start, sparse_index *column_end,
+                                  sparse_dimension nz, float _Complex * __restrict val,
+                                  sparse_index * __restrict jndx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_extract_sparse_row_double_complex( sparse_matrix_double_complex A, sparse_index row,
+                                  sparse_index column_start, sparse_index *column_end,
+                                  sparse_dimension nz, double _Complex * __restrict val,
+                                  sparse_index * __restrict jndx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1409,7 +1642,23 @@ sparse_status sparse_extract_sparse_column_double( sparse_matrix_double A,
                                              sparse_index * __restrict indx )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_extract_sparse_column_float_complex( sparse_matrix_float_complex A,
+                                            sparse_index column,
+                                            sparse_index row_start,
+                                            sparse_index *row_end,
+                                            sparse_dimension nz,
+                                            float _Complex * __restrict val,
+                                            sparse_index * __restrict indx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
+sparse_status sparse_extract_sparse_column_double_complex( sparse_matrix_double_complex A,
+                                             sparse_index column,
+                                             sparse_index row_start,
+                                             sparse_index *row_end,
+                                             sparse_dimension nz,
+                                             double _Complex * __restrict val,
+                                             sparse_index * __restrict indx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 #pragma mark - Block Wise Matrix Routines -
 
@@ -1467,6 +1716,18 @@ sparse_matrix_double sparse_matrix_block_create_double( sparse_dimension Mb,
                                                   sparse_dimension l )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_matrix_float_complex sparse_matrix_block_create_float_complex( sparse_dimension Mb,
+                                                sparse_dimension Nb,
+                                                sparse_dimension k,
+                                                sparse_dimension l )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_matrix_double_complex sparse_matrix_block_create_double_complex( sparse_dimension Mb,
+                                                  sparse_dimension Nb,
+                                                  sparse_dimension k,
+                                                  sparse_dimension l )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Create a sparse matrix object that is stored in block-entry format and is ready
@@ -1518,6 +1779,19 @@ sparse_matrix_double sparse_matrix_variable_block_create_double( sparse_dimensio
                                                            const sparse_dimension *K,
                                                            const sparse_dimension *L )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+sparse_matrix_float_complex sparse_matrix_variable_block_create_float_complex( sparse_dimension Mb,
+                                                         sparse_dimension Nb,
+                                                         const sparse_dimension *K,
+                                                         const sparse_dimension *L )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_matrix_double_complex sparse_matrix_variable_block_create_double_complex( sparse_dimension Mb,
+                                                           sparse_dimension Nb,
+                                                           const sparse_dimension *K,
+                                                           const sparse_dimension *L )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Use to build a sparse matrix by providing a dense block for entry at block
@@ -1597,6 +1871,19 @@ sparse_status sparse_insert_block_double( sparse_matrix_double A,
                                     sparse_index bi, sparse_index bj )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+sparse_status sparse_insert_block_float_complex( sparse_matrix_float_complex A,
+                                   const float _Complex * __restrict val,
+                                   sparse_dimension row_stride,
+                                   sparse_dimension col_stride,
+                                   sparse_index bi, sparse_index bj )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_insert_block_double_complex( sparse_matrix_double_complex A,
+                                    const double _Complex * __restrict val,
+                                    sparse_dimension row_stride,
+                                    sparse_dimension col_stride,
+                                    sparse_index bi, sparse_index bj )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1660,6 +1947,18 @@ sparse_status sparse_extract_block_double( sparse_matrix_double A, sparse_index 
                                      sparse_dimension col_stride,
                                      double * __restrict val )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+sparse_status sparse_extract_block_float_complex( sparse_matrix_float_complex A, sparse_index bi,
+                                    sparse_index bj, sparse_dimension row_stride,
+                                    sparse_dimension col_stride,
+                                    float _Complex * __restrict val )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+sparse_status sparse_extract_block_double_complex( sparse_matrix_double_complex A, sparse_index bi,
+                                     sparse_index bj, sparse_dimension row_stride,
+                                     sparse_dimension col_stride,
+                                     double _Complex * __restrict val )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1864,6 +2163,16 @@ long sparse_get_vector_nonzero_count_double( sparse_dimension N,
                                           sparse_stride incx )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+long sparse_get_vector_nonzero_count_float_complex( sparse_dimension N,
+                                                   const float _Complex * __restrict x,
+                                                   sparse_stride incx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+long sparse_get_vector_nonzero_count_double_complex( sparse_dimension N,
+                                                    const double _Complex * __restrict x,
+                                                    sparse_stride incx )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
 /*!
  @abstract
  Pack the first nz nonzero values and indices from the dense vector x and
@@ -1921,6 +2230,17 @@ long sparse_pack_vector_double( sparse_dimension N, sparse_dimension nz,
                                    sparse_index * __restrict indy )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
 
+long sparse_pack_vector_float_complex( sparse_dimension N, sparse_dimension nz,
+                                  const float _Complex * __restrict x,
+                                  sparse_stride incx, float _Complex * __restrict y,
+                                  sparse_index * __restrict indy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+long sparse_pack_vector_double_complex( sparse_dimension N, sparse_dimension nz,
+                                   const double _Complex * __restrict x,
+                                   sparse_stride incx, double _Complex * __restrict y,
+                                   sparse_index * __restrict indy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 /*!
  @abstract
@@ -1987,6 +2307,18 @@ void sparse_unpack_vector_double( sparse_dimension N, sparse_dimension nz, bool 
                                 const sparse_index * __restrict indx,
                                 double * __restrict y, sparse_stride incy )
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(9.0));
+
+void sparse_unpack_vector_float_complex( sparse_dimension N, sparse_dimension nz, bool zero,
+                               const float _Complex * __restrict x,
+                               const sparse_index * __restrict indx,
+                               float _Complex * __restrict y, sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
+
+void sparse_unpack_vector_double_complex( sparse_dimension N, sparse_dimension nz, bool zero,
+                                const double _Complex * __restrict x,
+                                const sparse_index * __restrict indx,
+                                double _Complex * __restrict y, sparse_stride incy )
+API_AVAILABLE(macos(15.5), ios(18.5), watchos(11.5), tvos(18.5));
 
 #ifdef __cplusplus
 }

@@ -11,7 +11,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
-    @interface HMAccessoryOwnershipToken : NSObject
+@interface HMAccessoryOwnershipToken : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -31,7 +31,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watc
 @end
 
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
-    @interface HMAccessorySetupPayload : NSObject
+@interface HMAccessorySetupPayload : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -54,7 +54,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watc
  *
  * @return Returns an accessory setup payload object if successful or nil on error.
  */
-- (nullable instancetype)initWithURL:(NSURL *)setupPayloadURL ownershipToken:(nullable HMAccessoryOwnershipToken *)ownershipToken API_AVAILABLE(ios(13.0))API_UNAVAILABLE(macos, watchos, tvos);
+- (nullable instancetype)initWithURL:(NSURL *)setupPayloadURL ownershipToken:(nullable HMAccessoryOwnershipToken *)ownershipToken API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

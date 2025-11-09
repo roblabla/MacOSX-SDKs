@@ -1553,6 +1553,8 @@ exports:
                        '_$s19TokenGenerationCore14AutomationJSONV0aB0E16samplingStrategyAD08SamplingG0VSgvpMV', 
                        '_$s19TokenGenerationCore14AutomationJSONV19ParameterizedPromptV0aB0E16samplingStrategyAF08SamplingI0VSgvg', 
                        '_$s19TokenGenerationCore14AutomationJSONV19ParameterizedPromptV0aB0E16samplingStrategyAF08SamplingI0VSgvpMV', 
+                       '_$s26GenerativeModelsFoundation14PromptTemplateV15TokenGenerationE04loaddE013catalogClient0D3Kit0D0V12ModelCatalog0mJ0C_tYaKF', 
+                       '_$s26GenerativeModelsFoundation14PromptTemplateV15TokenGenerationE04loaddE013catalogClient0D3Kit0D0V12ModelCatalog0mJ0C_tYaKFTu', 
                        '_$s26GenerativeModelsFoundation14PromptTemplateV15TokenGenerationE0dE11RenderErrorO06promptE8NotFoundyA2FmFWC', 
                        '_$s26GenerativeModelsFoundation14PromptTemplateV15TokenGenerationE0dE11RenderErrorO2eeoiySbAF_AFtFZ', 
                        '_$s26GenerativeModelsFoundation14PromptTemplateV15TokenGenerationE0dE11RenderErrorO4hash4intoys6HasherVz_tF', 

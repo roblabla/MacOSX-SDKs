@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
-current-version: 69.100.1
+current-version: 69.120.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -225,15 +225,17 @@ exports:
                        '_$s3XPC13XPCDictionaryVSQAAMc', '_$s3XPC13XPCDictionaryV_2as7defaultSbSS_SbmSbyXKtcig', 
                        '_$s3XPC13XPCDictionaryV_2as7defaultxSS_xmxyXKtcSBRzluig', 
                        '_$s3XPC13XPCDictionaryV_2asAA11XPCEndpointVSgSS_AFmtcig', 
-                       '_$s3XPC13XPCDictionaryV_2asACSgSS_ACmtcig', '_$s3XPC13XPCDictionaryV_2asSSSgSS_SSmtcig', 
-                       '_$s3XPC13XPCDictionaryV_2asSays5UInt8VGSgSS_AGmtcig', '_$s3XPC13XPCDictionaryV_2asSbSgSS_Sbmtcig', 
-                       '_$s3XPC13XPCDictionaryV_2asSo13OS_xpc_object_pSgSS_SoAE_pXptcig', 
+                       '_$s3XPC13XPCDictionaryV_2asAA8XPCArrayVSgSS_AFmtcig', '_$s3XPC13XPCDictionaryV_2asACSgSS_ACmtcig', 
+                       '_$s3XPC13XPCDictionaryV_2asSSSgSS_SSmtcig', '_$s3XPC13XPCDictionaryV_2asSays5UInt8VGSgSS_AGmtcig', 
+                       '_$s3XPC13XPCDictionaryV_2asSbSgSS_Sbmtcig', '_$s3XPC13XPCDictionaryV_2asSo13OS_xpc_object_pSgSS_SoAE_pXptcig', 
                        '_$s3XPC13XPCDictionaryV_2asSo13OS_xpc_object_pSgSS_s13OpaquePointerVtcig', 
                        '_$s3XPC13XPCDictionaryV_2asSo13OS_xpc_object_pSgSS_s13OpaquePointerVtcipMV', 
                        '_$s3XPC13XPCDictionaryV_2asxSgSS_xmtcSBRzluig', '_$s3XPC13XPCDictionaryV_2asxSgSS_xmtcSzRzluig', 
                        '_$s3XPC13XPCDictionaryVs28CustomDebugStringConvertibleAAMc', 
                        '_$s3XPC13XPCDictionaryVyAA11XPCEndpointVSgSSciM', '_$s3XPC13XPCDictionaryVyAA11XPCEndpointVSgSScig', 
                        '_$s3XPC13XPCDictionaryVyAA11XPCEndpointVSgSScipMV', '_$s3XPC13XPCDictionaryVyAA11XPCEndpointVSgSScis', 
+                       '_$s3XPC13XPCDictionaryVyAA8XPCArrayVSgSSciM', '_$s3XPC13XPCDictionaryVyAA8XPCArrayVSgSScig', 
+                       '_$s3XPC13XPCDictionaryVyAA8XPCArrayVSgSScipMV', '_$s3XPC13XPCDictionaryVyAA8XPCArrayVSgSScis', 
                        '_$s3XPC13XPCDictionaryVyACSgSSciM', '_$s3XPC13XPCDictionaryVyACSgSScig', 
                        '_$s3XPC13XPCDictionaryVyACSgSScipMV', '_$s3XPC13XPCDictionaryVyACSgSScis', 
                        '_$s3XPC13XPCDictionaryVyACSo13OS_xpc_object_pcfC', '_$s3XPC13XPCDictionaryVySSSgSSciM', 

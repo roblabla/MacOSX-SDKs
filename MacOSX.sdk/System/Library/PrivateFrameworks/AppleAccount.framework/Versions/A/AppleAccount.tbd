@@ -162,6 +162,8 @@ exports:
                        _kAAAnalyticsEventCustodianKeyExchangeGenerateOwnerKeys, _kAAAnalyticsEventCustodianKeyExchangeRetry, 
                        _kAAAnalyticsEventCustodianKeyExchangeSendMessage, _kAAAnalyticsEventCustodianOpenAccountRecoveryScreen, 
                        _kAAAnalyticsEventCustodianOpenCustodianDetails, _kAAAnalyticsEventCustodianRecoveryCancel, 
+                       _kAAAnalyticsEventCustodianRecoveryExperimentalCustodianRecordNotFoundFetchFromCloud, 
+                       _kAAAnalyticsEventCustodianRecoveryExperimentalCustodianshipInfoRecordNotFoundFetchFromCloud, 
                        _kAAAnalyticsEventCustodianRecoveryExperimentalHasCachedCustodianList, 
                        _kAAAnalyticsEventCustodianRecoveryExperimentalRecoveryInfoNotFoundFetchFromCloud, 
                        _kAAAnalyticsEventCustodianRecoveryFetchAPSToken, _kAAAnalyticsEventCustodianRecoveryInitializeWithServer, 

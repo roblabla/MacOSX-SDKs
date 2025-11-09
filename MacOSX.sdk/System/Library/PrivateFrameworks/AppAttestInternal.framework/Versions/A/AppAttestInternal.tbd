@@ -37,12 +37,13 @@ exports:
                        _AppAttest_AppAttestation_CreateKey, _AppAttest_AppAttestation_CreateKeyWithTeamIdentifier, 
                        _AppAttest_AppAttestation_IsEligibleApplication, _AppAttest_AppAttestation_IsEligibleApplicationPriv, 
                        _AppAttest_AppAttestation_IsSupported, _AppAttest_AppAttestation_Sign, 
-                       _AppAttest_Common_AttestKey, _AppAttest_Common_AttestKeyRequest, 
-                       _AppAttest_DeviceAttestation_AttestKey, _AppAttest_DeviceAttestation_AttestKeyWithAuditToken, 
-                       _AppAttest_DeviceAttestation_IsSupported, _AppAttest_DeviceAttestation_IsSupportedWithAuditToken, 
-                       _AppAttest_WebAuthentication_AttestKey, _AppAttest_WebAuthentication_IsSupported, 
-                       _createAppAttestError, _createGenericAuthenticatorDataFull, 
-                       _createGenericAuthenticatorDataShort ]
-    objc-classes:    [ AppAttestTaskCreator, DCBGSTask, _TtC17AppAttestInternal16AppAttestHandler, 
+                       _AppAttest_AppAttestation_SignWithTeamIdentifier, _AppAttest_Common_AttestKey, 
+                       _AppAttest_Common_AttestKeyRequest, _AppAttest_DeviceAttestation_AttestKey, 
+                       _AppAttest_DeviceAttestation_AttestKeyWithAuditToken, _AppAttest_DeviceAttestation_IsSupported, 
+                       _AppAttest_DeviceAttestation_IsSupportedWithAuditToken, _AppAttest_WebAuthentication_AttestKey, 
+                       _AppAttest_WebAuthentication_IsSupported, _createAppAttestError, 
+                       _createGenericAuthenticatorDataFull, _createGenericAuthenticatorDataShort, 
+                       _fetchCdHash, _fetchOptInEntitlements ]
+    objc-classes:    [ AppAttestCDHash, AppAttestTaskCreator, DCBGSTask, _TtC17AppAttestInternal16AppAttestHandler, 
                        _TtC17AppAttestInternal19DeviceAttestHandler ]
 ...

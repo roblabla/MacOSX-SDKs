@@ -85,7 +85,8 @@ exports:
                        _kMSUUpdateToleratedStepValueUnrecognizedStep, _kMSUUpdateToleratedStepValueUpdateBaseband, 
                        _kMobileSoftwareUpdateAllowLegacyUpdateKey, _kMobileSoftwareUpdateBrainLocationOverride, 
                        _kMobileSoftwareUpdateDisableApplyToPrebootKey, _kMobileSoftwareUpdateDisablePreSoftwareUpdateAssetStagingKey, 
-                       _kMobileSoftwareUpdateDisableSnapshotUpdateKey, _kMobileSoftwareUpdatePreferencesDomain, 
+                       _kMobileSoftwareUpdateDisableSnapshotUpdateKey, _kMobileSoftwareUpdatePreSUStagingDetermineTimeoutKey, 
+                       _kMobileSoftwareUpdatePreSUStagingStageTimeoutKey, _kMobileSoftwareUpdatePreferencesDomain, 
                        _qos_class_for_msu_qos ]
     objc-classes:    [ MSUUpdateBrainAssetLoader, MSUUpdateBrainLoader ]
   - targets:         [ arm64-macos, arm64e-macos ]

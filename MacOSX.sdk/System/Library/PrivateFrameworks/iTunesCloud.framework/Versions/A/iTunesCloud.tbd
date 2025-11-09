@@ -285,7 +285,7 @@ exports:
                        ICAMSBagAdapter, ICAVAssetDownloadURLSession, ICAddToWishListRequest, 
                        ICAddToWishListResponse, ICAgeVerificationManager, ICAgeVerificationState, 
                        ICAgeVerifier, ICAsyncBlockOperation, ICAsyncOperation, ICAuthServiceClientTokenProviderDebugConfiguration, 
-                       ICAuthorizeMachineRequest, ICAuthorizeMachineResponse, ICBackgroundTaskScheduler, 
+                       ICAuthorizeMachineRequest, ICAuthorizeMachineResponse, ICBGTaskScheduler, 
                        ICBook, ICBuyProductRequest, ICClientInfo, ICCloudAddReferral, 
                        ICCloudAvailabilityController, ICCloudClient, ICCloudClientAvailabilityService, 
                        ICCloudClientCollaborationEditParams, ICCloudContentTasteRequestListener, 

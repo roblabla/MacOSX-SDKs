@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 1389.255.71
+current-version: 1389.255.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -322,6 +322,9 @@ exports:
                        '_$s10ContactsUI33ContactListMergeUnifyActionHelperCMo', '_$s10ContactsUI33ContactListMergeUnifyActionHelperCMu', 
                        '_$s10ContactsUI33ContactListMergeUnifyActionHelperCN', '_$s10ContactsUI33ContactListMergeUnifyActionHelperCfD', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC11Observation10ObservableAAMc', 
+                       '_$s10ContactsUI34ContactCardBackgroundConfigurationC13wallpaperTypeSo011CNWallpaperH0aSgvgTj', 
+                       '_$s10ContactsUI34ContactCardBackgroundConfigurationC13wallpaperTypeSo011CNWallpaperH0aSgvgTq', 
+                       '_$s10ContactsUI34ContactCardBackgroundConfigurationC13wallpaperTypeSo011CNWallpaperH0aSgvpMV', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC15foregroundColor05SwiftB00H0VvMTj', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC15foregroundColor05SwiftB00H0VvMTq', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC15foregroundColor05SwiftB00H0VvgTj', 
@@ -334,13 +337,9 @@ exports:
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC15foregroundColor9wallpaperAC05SwiftB00H0V_So11CNWallpaperCSgtcfCTq', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC15foregroundColor9wallpaperAC05SwiftB00H0V_So11CNWallpaperCSgtcfc', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC2eeoiySbAC_ACtFZ', 
-                       '_$s10ContactsUI34ContactCardBackgroundConfigurationC9wallpaperSo11CNWallpaperCSgvMTj', 
-                       '_$s10ContactsUI34ContactCardBackgroundConfigurationC9wallpaperSo11CNWallpaperCSgvMTq', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC9wallpaperSo11CNWallpaperCSgvgTj', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC9wallpaperSo11CNWallpaperCSgvgTq', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationC9wallpaperSo11CNWallpaperCSgvpMV', 
-                       '_$s10ContactsUI34ContactCardBackgroundConfigurationC9wallpaperSo11CNWallpaperCSgvsTj', 
-                       '_$s10ContactsUI34ContactCardBackgroundConfigurationC9wallpaperSo11CNWallpaperCSgvsTq', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationCMa', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationCMm', 
                        '_$s10ContactsUI34ContactCardBackgroundConfigurationCMn', 

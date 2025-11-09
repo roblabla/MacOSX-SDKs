@@ -12,8 +12,7 @@
  * @abstract This enumeration describes the different types of presence events.
  */
 API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0))
-API_UNAVAILABLE(macos)
-typedef NS_ENUM(NSUInteger, HMPresenceEventType) {
+API_UNAVAILABLE(macos) typedef NS_ENUM(NSUInteger, HMPresenceEventType) {
     /*!
      * This corresponds to trigger an event for every user entering a home.
      * This cannot be added as predicate.
@@ -51,8 +50,7 @@ typedef NS_ENUM(NSUInteger, HMPresenceEventType) {
  * @abstract This enumeration describes the different types of user sets in presence events.
  */
 API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0))
-API_UNAVAILABLE(macos)
-typedef NS_ENUM(NSUInteger, HMPresenceEventUserType) {
+API_UNAVAILABLE(macos) typedef NS_ENUM(NSUInteger, HMPresenceEventUserType) {
     /*!
      * Only current user's presence is used.
      */

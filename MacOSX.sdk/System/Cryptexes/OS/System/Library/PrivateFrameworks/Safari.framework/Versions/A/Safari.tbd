@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari'
-current-version: 621.1.15
+current-version: 621.2.5
 compatibility-version: 528
 swift-abi-version: 7
 exports:

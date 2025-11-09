@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libwebrtc.dylib'
-current-version: 621.1.15
+current-version: 621.2.5
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ WebCore, WebCoreTestSupport, WebKit ]
@@ -161,7 +161,7 @@ exports:
                        __ZN6webrtc24CreateSessionDescriptionENS_7SdpTypeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPNS_13SdpParseErrorE, 
                        __ZN6webrtc24RTCIceCandidatePairStats5kTypeE, __ZN6webrtc24RTCInboundRtpStreamStats5kTypeE, 
                        __ZN6webrtc24SctpTransportInformationD1Ev, __ZN6webrtc24encoderVideoTaskCompleteEPvNS_14VideoCodecTypeEPKhmRKNS_22WebKitEncodedFrameInfoE, 
-                       __ZN6webrtc24setVideoDecoderCallbacksEPFNS_18WebKitVideoDecoderERKNS_14SdpVideoFormatEEPFiPvEPFiS6_jPKhmttEPFiS6_S6_E, 
+                       __ZN6webrtc24registerWebKitVP9DecoderEv, __ZN6webrtc24setVideoDecoderCallbacksEPFNS_18WebKitVideoDecoderERKNS_14SdpVideoFormatEEPFiPvEPFiS6_jPKhmttEPFiS6_S6_E, 
                        __ZN6webrtc24setVideoEncoderCallbacksEPFPvRKNS_14SdpVideoFormatEEPFiS0_EPFiS0_RKNS_10VideoCodecEEPFiS0_RKNS_10VideoFrameEbEPFiS0_S0_EPFvS0_RKNS_12VideoEncoder21RateControlParametersEE, 
                        __ZN6webrtc24toWebRTCVideoFrameBufferEPvPFP10__CVBufferS0_EPFvS0_Eii, 
                        __ZN6webrtc24videoDecoderTaskCompleteEPvjP10__CVBuffer, __ZN6webrtc24videoDecoderTaskCompleteEPvjS0_PFP10__CVBufferS0_EPFvS0_Eii, 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AttributeGraph.framework/Versions/A/AttributeGraph'
-current-version: 6.4.39
+current-version: 6.5.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -330,6 +330,16 @@ exports:
                        '_$sSo13AGSubgraphRefa14AttributeGraphE14endTreeElement5valueyAC0C0VyxG_tlFZ', 
                        '_$sSo13AGSubgraphRefa14AttributeGraphE16beginTreeElement5value5flagsyAC0C0VyxG_s6UInt32VtlFZ', 
                        '_$sSo13AGSubgraphRefa14AttributeGraphE5applyyxxyXElF', '_$sSo13AGSubgraphRefa14AttributeGraphE7forEachyySo16AGAttributeFlagsV_ySo0G0aXEtF', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenV4baseSo0aB13ChildIteratoravM', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenV4baseSo0aB13ChildIteratoravg', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenV4baseSo0aB13ChildIteratoravpMV', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenV4baseSo0aB13ChildIteratoravs', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenVMa', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenVMn', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenVN', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenVSTACMc', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13LocalChildrenVStACMc', 
+                       '_$sSo13AGTreeElementa14AttributeGraphE13localChildrenAbCE05LocalF0VvpMV', 
                        '_$sSo13AGTreeElementa14AttributeGraphE5valueSo11AGAttributeaSgvg', 
                        '_$sSo13AGTreeElementa14AttributeGraphE5valueSo11AGAttributeaSgvpMV', 
                        '_$sSo13AGUnsafeTuplea14AttributeGraphE5countSivg', '_$sSo13AGUnsafeTuplea14AttributeGraphE5countSivpMV', 
@@ -449,9 +459,9 @@ exports:
                        _AGSubgraphRemoveChild, _AGSubgraphRemoveObserver, _AGSubgraphSetCurrent, 
                        _AGSubgraphSetIndex, _AGSubgraphSetShouldRecordTree, _AGSubgraphSetTreeOwner, 
                        _AGSubgraphShouldRecordTree, _AGSubgraphUpdate, _AGTreeElementGetFlags, 
-                       _AGTreeElementGetNextChild, _AGTreeElementGetNextNode, _AGTreeElementGetNextValue, 
-                       _AGTreeElementGetParent, _AGTreeElementGetType, _AGTreeElementGetValue, 
-                       _AGTreeElementMakeChildIterator, _AGTreeElementMakeNodeIterator, 
+                       _AGTreeElementGetNextChild, _AGTreeElementGetNextChild2, _AGTreeElementGetNextNode, 
+                       _AGTreeElementGetNextValue, _AGTreeElementGetParent, _AGTreeElementGetType, 
+                       _AGTreeElementGetValue, _AGTreeElementMakeChildIterator, _AGTreeElementMakeNodeIterator, 
                        _AGTreeElementMakeValueIterator, _AGTreeValueGetFlags, _AGTreeValueGetKey, 
                        _AGTreeValueGetType, _AGTreeValueGetValue, _AGTupleCount, 
                        _AGTupleDestroy, _AGTupleDestroyElement, _AGTupleElementOffset, 

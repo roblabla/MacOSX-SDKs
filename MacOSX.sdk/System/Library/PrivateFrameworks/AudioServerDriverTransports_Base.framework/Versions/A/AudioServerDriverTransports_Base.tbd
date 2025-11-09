@@ -344,6 +344,5 @@ exports:
                        ASDTPMDeviceProxy, ASDTPMEnabler, ASDTPMSequencer, ASDTPlugin, 
                        ASDTRawProperty, ASDTSelectorControl, ASDTSpeakerThieleSmall, 
                        ASDTStream, ASDTSystemPowerNotifier, ASDTSystemStatus, ASDTTrimGain, 
-                       ASDTUInt32Property, ASDTUserActivityNotifier, ASDTUtils, MockASDTSelectorControl, 
-                       MockASDTSystemStatus ]
+                       ASDTUInt32Property, ASDTUserActivityNotifier, ASDTUtils, MockASDTSelectorControl ]
 ...

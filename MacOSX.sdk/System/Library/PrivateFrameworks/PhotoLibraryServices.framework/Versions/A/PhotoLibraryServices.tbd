@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/Versions/A/PhotoLibraryServices'
-current-version: 751.0.104
+current-version: 760.6.150
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1173,7 +1173,8 @@ exports:
                        PLModelMigrationAction_DeleteInvalidSocialGroups, PLModelMigrationAction_DeleteOrphanedFaces, 
                        PLModelMigrationAction_DeletePLGeneratedAssetDescriptionNodesAndLabel, 
                        PLModelMigrationAction_DeletePetPersonsAndDetectedFaces, PLModelMigrationAction_DrawAssetPersonEdges, 
-                       PLModelMigrationAction_FixAppDomainLibraryCreateOptions, PLModelMigrationAction_FixAssetsWithMissingSaliencyRects, 
+                       PLModelMigrationAction_FixAppDomainLibraryCreateOptions, PLModelMigrationAction_FixAssetDeferredProcessingNeededState, 
+                       PLModelMigrationAction_FixAssetsWithMissingSaliencyRects, 
                        PLModelMigrationAction_FixBackgroundResourceWorkerModifyingIncorrectResources, 
                        PLModelMigrationAction_FixBadExtendedAttribute, PLModelMigrationAction_FixBlankPhotosFromVideoMode, 
                        PLModelMigrationAction_FixComputeSyncResourceFileExtension, 
@@ -1318,8 +1319,8 @@ exports:
                        PLRevGeoPlace, PLRevGeoPlaceAnnotation, PLRevGeoPlaceInfo, 
                        PLRoutineService, PLRoutineServiceResult, PLSMetadataUtilities, 
                        PLSamplingClustering, PLSceneClassification, PLSceneprint, 
-                       PLScopedSearchSuggestionGeneration, PLScopedSearchUtilities, 
-                       PLSearchDonationProgress, PLSearchDonationProgressVersionProvider, 
+                       PLSchemaUpgradeUserNotification, PLScopedSearchSuggestionGeneration, 
+                       PLScopedSearchUtilities, PLSearchDonationProgress, PLSearchDonationProgressVersionProvider, 
                        PLSearchEntity, PLSearchEntityRelationToPerson, PLSearchIndexConfiguration, 
                        PLSearchIndexDateFormatter, PLSearchIndexKnowledgeGraphDataValidator, 
                        PLSearchIndexManager, PLSearchIndexPendingWorkItem, PLSearchIndexSceneTaxonomy, 

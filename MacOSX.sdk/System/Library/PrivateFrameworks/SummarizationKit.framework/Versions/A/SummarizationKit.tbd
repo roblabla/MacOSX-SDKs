@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SummarizationKit.framework/Versions/A/SummarizationKit'
-current-version: 1.4.16
+current-version: 1.5.5
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -133,6 +133,10 @@ exports:
                        '_$s16SummarizationKit0A7SessionCMn', '_$s16SummarizationKit0A7SessionCMo', 
                        '_$s16SummarizationKit0A7SessionCMu', '_$s16SummarizationKit0A7SessionCN', 
                        '_$s16SummarizationKit0A7SessionCfD', '_$s16SummarizationKit0A7SessionCfd', 
+                       '_$s16SummarizationKit11FilterRulesC12assetManagerAcA07SKAssetF0C_tKcfC', 
+                       '_$s16SummarizationKit11FilterRulesC12assetManagerAcA07SKAssetF0C_tKcfCTj', 
+                       '_$s16SummarizationKit11FilterRulesC12assetManagerAcA07SKAssetF0C_tKcfCTq', 
+                       '_$s16SummarizationKit11FilterRulesC12assetManagerAcA07SKAssetF0C_tKcfc', 
                        '_$s16SummarizationKit11FilterRulesC8filePathACSS_tKcfC', 
                        '_$s16SummarizationKit11FilterRulesC8filePathACSS_tKcfCTj', 
                        '_$s16SummarizationKit11FilterRulesC8filePathACSS_tKcfCTq', 
@@ -439,6 +443,10 @@ exports:
                        '_$s16SummarizationKit28ClassificationRequestHandlerCMu', 
                        '_$s16SummarizationKit28ClassificationRequestHandlerCN', '_$s16SummarizationKit28ClassificationRequestHandlerCfD', 
                        '_$s16SummarizationKit28ClassificationRequestHandlerCfd', 
+                       '_$s16SummarizationKit29TwoPassInferenceConfigurationC12assetManagerAcA07SKAssetH0C_tKcfC', 
+                       '_$s16SummarizationKit29TwoPassInferenceConfigurationC12assetManagerAcA07SKAssetH0C_tKcfCTj', 
+                       '_$s16SummarizationKit29TwoPassInferenceConfigurationC12assetManagerAcA07SKAssetH0C_tKcfCTq', 
+                       '_$s16SummarizationKit29TwoPassInferenceConfigurationC12assetManagerAcA07SKAssetH0C_tKcfc', 
                        '_$s16SummarizationKit29TwoPassInferenceConfigurationCACyKcfC', 
                        '_$s16SummarizationKit29TwoPassInferenceConfigurationCACyKcfCTj', 
                        '_$s16SummarizationKit29TwoPassInferenceConfigurationCACyKcfCTq', 
@@ -1435,5 +1443,7 @@ exports:
                        '_$sSo13NSProcessInfoC16SummarizationKitE18isDebuggerAttachedSbvpMV', 
                        '_$sSo7NSErrorC16SummarizationKitE18loggingDescriptionSSvg', 
                        '_$sSo7NSErrorC16SummarizationKitE18loggingDescriptionSSvpMV', 
+                       '_$ss5ErrorP16SummarizationKitE18loggingDescriptionSSvg', 
+                       '_$ss5ErrorP16SummarizationKitE18loggingDescriptionSSvpMV', 
                        _SummarizationKitVersionNumber, _SummarizationKitVersionString ]
 ...

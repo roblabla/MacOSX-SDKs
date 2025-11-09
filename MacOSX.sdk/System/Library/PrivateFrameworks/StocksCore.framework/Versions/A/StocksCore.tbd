@@ -1021,8 +1021,6 @@ exports:
                        '_$s10StocksCore16AppConfigurationV21widgetSectionConfigIDSSvpMV', 
                        '_$s10StocksCore16AppConfigurationV22stocksKitClientConfigsSayAA0afG6ConfigVGvg', 
                        '_$s10StocksCore16AppConfigurationV22stocksKitClientConfigsSayAA0afG6ConfigVGvpMV', 
-                       '_$s10StocksCore16AppConfigurationV23canUseEdgeCacheForFeedsSbvg', 
-                       '_$s10StocksCore16AppConfigurationV23canUseEdgeCacheForFeedsSbvpMV', 
                        '_$s10StocksCore16AppConfigurationV23defaultWatchlistSymbolsSaySSGvg', 
                        '_$s10StocksCore16AppConfigurationV23defaultWatchlistSymbolsSaySSGvpMV', 
                        '_$s10StocksCore16AppConfigurationV23externalAnalyticsConfigSayAA08ExternalfD0VGvg', 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DocumentUnderstanding.framework/Versions/A/DocumentUnderstanding'
-current-version: 73.17
+current-version: 73.18
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -457,6 +457,7 @@ exports:
                        '_$s21DocumentUnderstanding10DUResponseCMa', '_$s21DocumentUnderstanding10DUResponseCMn', 
                        '_$s21DocumentUnderstanding10DUResponseCMo', '_$s21DocumentUnderstanding10DUResponseCMu', 
                        '_$s21DocumentUnderstanding10DUResponseCN', '_$s21DocumentUnderstanding10DUResponseCfD', 
+                       '_$s21DocumentUnderstanding10getLDAsset3for4withSo8NSBundleCSgSS_10Foundation6LocaleVtF', 
                        '_$s21DocumentUnderstanding11DUDebugInfoC0aB6Client27DUProtobufEncodableProtocolAAMc', 
                        '_$s21DocumentUnderstanding11DUDebugInfoC11debugStringSSvMTj', 
                        '_$s21DocumentUnderstanding11DUDebugInfoC11debugStringSSvMTq', 
@@ -630,6 +631,7 @@ exports:
                        '_$s21DocumentUnderstanding14SQLiteDatabaseCMa', '_$s21DocumentUnderstanding14SQLiteDatabaseCMn', 
                        '_$s21DocumentUnderstanding14SQLiteDatabaseCMo', '_$s21DocumentUnderstanding14SQLiteDatabaseCMu', 
                        '_$s21DocumentUnderstanding14SQLiteDatabaseCN', '_$s21DocumentUnderstanding14SQLiteDatabaseCfD', 
+                       '_$s21DocumentUnderstanding14requestNLAsset3forySo10NLLanguagea_tF', 
                        '_$s21DocumentUnderstanding15DUCalendarEventC0aB6Client27DUProtobufEncodableProtocolAAMc', 
                        '_$s21DocumentUnderstanding15DUCalendarEventC11endTimezone10Foundation8TimeZoneVSgvMTj', 
                        '_$s21DocumentUnderstanding15DUCalendarEventC11endTimezone10Foundation8TimeZoneVSgvMTq', 
@@ -820,6 +822,7 @@ exports:
                        '_$s21DocumentUnderstanding16PosTaggingResultCMa', '_$s21DocumentUnderstanding16PosTaggingResultCMn', 
                        '_$s21DocumentUnderstanding16PosTaggingResultCMo', '_$s21DocumentUnderstanding16PosTaggingResultCMu', 
                        '_$s21DocumentUnderstanding16PosTaggingResultCN', '_$s21DocumentUnderstanding16PosTaggingResultCfD', 
+                       '_$s21DocumentUnderstanding16getNLAssetLocale3for10Foundation0E0VSgSo10NLLanguagea_tF', 
                        '_$s21DocumentUnderstanding17DUDocumentGlobalsC11noMaxLengthSivgZ', 
                        '_$s21DocumentUnderstanding17DUDocumentGlobalsC11noMaxLengthSivpZMV', 
                        '_$s21DocumentUnderstanding17DUDocumentGlobalsC16defaultMaxLengthSivgZ', 

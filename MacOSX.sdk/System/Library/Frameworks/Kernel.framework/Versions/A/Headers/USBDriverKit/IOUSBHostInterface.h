@@ -1,4 +1,4 @@
-/* iig(DriverKit-427.100.5) generated from IOUSBHostInterface.iig */
+/* iig(DriverKit-427.120.2) generated from IOUSBHostInterface.iig */
 
 /* IOUSBHostInterface.iig:1-44 */
 /*

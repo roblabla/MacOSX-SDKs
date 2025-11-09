@@ -268,7 +268,7 @@ exports:
                        _kAXSAssistiveTouchEnabledNotification, _kAXSAssistiveTouchEnabledPreference, 
                        _kAXSAssistiveTouchHardwareChangedNotification, _kAXSAssistiveTouchPreferenceDomain, 
                        _kAXSAssistiveTouchScannerEnabledNotification, _kAXSAssistiveTouchSettingsChangedNotification, 
-                       _kAXSAssistiveTouchUseExtendedKeyboardPredictionsChangedNotification, 
+                       _kAXSAssistiveTouchUIEnabledPreference, _kAXSAssistiveTouchUseExtendedKeyboardPredictionsChangedNotification, 
                        _kAXSAttentionAwarenessFeaturesEnabledNotification, _kAXSAudioDonationSiriImprovementPreferenceDidChangeNotification, 
                        _kAXSAutoBrightnessChangedNotification, _kAXSAutomaticSubtitlesShowOnSkipBackEnabledNotification, 
                        _kAXSAutomaticSubtitlesShowWhenLanguageMismatchEnabledNotification, 

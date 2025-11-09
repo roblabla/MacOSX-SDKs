@@ -18,7 +18,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  *        exit from a Region
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, visionos)
-    @interface HMLocationEvent : HMEvent<NSCopying, NSMutableCopying>
+@interface HMLocationEvent : HMEvent<NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -46,7 +46,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateRegion:(CLRegion *)region completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("No longer supported.", ios(9.0, 11.0))API_UNAVAILABLE(watchos, tvos);
+- (void)updateRegion:(CLRegion *)region completionHandler:(void (^)(NSError *__nullable error))completion API_DEPRECATED("No longer supported.", ios(9.0, 11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -56,7 +56,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  *        exit from a Region
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, visionos)
-    @interface HMMutableLocationEvent : HMLocationEvent
+@interface HMMutableLocationEvent : HMLocationEvent
 
 - (instancetype)init NS_UNAVAILABLE;
 

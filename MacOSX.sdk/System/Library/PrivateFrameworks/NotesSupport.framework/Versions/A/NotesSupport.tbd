@@ -85,6 +85,8 @@ exports:
                        '_$sSo26ICModelAvailabilityManagerC12NotesSupportE34supportsPrivateCloudComputeSummarySbvpMV', 
                        '_$sSo26ICModelAvailabilityManagerC12NotesSupportE36privateCloudComputeSummaryRestrictedSbvg', 
                        '_$sSo26ICModelAvailabilityManagerC12NotesSupportE36privateCloudComputeSummaryRestrictedSbvpMV', 
+                       '_$sSo26ICModelAvailabilityManagerC12NotesSupportE47privateCloudComputeSummaryRestrictedDueToPolicySbvg', 
+                       '_$sSo26ICModelAvailabilityManagerC12NotesSupportE47privateCloudComputeSummaryRestrictedDueToPolicySbvpMV', 
                        '_$sSo26ICModelAvailabilityManagerC12NotesSupportE6sharedABvMZ', 
                        '_$sSo26ICModelAvailabilityManagerC12NotesSupportE6sharedABvgZ', 
                        '_$sSo26ICModelAvailabilityManagerC12NotesSupportE6sharedABvsZ', 

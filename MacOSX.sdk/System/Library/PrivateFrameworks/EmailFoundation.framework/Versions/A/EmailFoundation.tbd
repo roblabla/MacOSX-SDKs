@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3826.255.181
+current-version: 3826.255.51
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -96,9 +96,9 @@ exports:
                        EFObservable, EFObserver, EFOperationQueueScheduler, EFOrderedCollectionGroupedInsertion, 
                        EFOrderedCollectionGroupedInsertionByObject, EFOrderedDictionary, 
                        EFPair, EFParenthesizedSQLExpression, EFPathComponent, EFPriorityDesignator, 
-                       EFPrivacy, EFProcessBoost, EFProcessTransaction, EFPromise, 
-                       EFProtectedFile, EFProtectedFileGroup, EFQueue, EFQueueScheduler, 
-                       EFResource, EFResourcePool, EFSQLAggregateFunction, EFSQLAndExpression, 
+                       EFPrivacy, EFProcessTransaction, EFPromise, EFProtectedFile, 
+                       EFProtectedFileGroup, EFQueue, EFQueueScheduler, EFResource, 
+                       EFResourcePool, EFSQLAggregateFunction, EFSQLAndExpression, 
                        EFSQLBetweenExpression, EFSQLBinaryExpression, EFSQLBinding, 
                        EFSQLBitExpression, EFSQLBlockValueSource, EFSQLCaseExpression, 
                        EFSQLColumn, EFSQLColumnExpression, EFSQLColumnSchema, EFSQLColumnValueSource, 

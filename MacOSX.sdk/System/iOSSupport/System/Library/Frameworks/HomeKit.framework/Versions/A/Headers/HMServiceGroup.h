@@ -20,7 +20,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  *             Eg. A collection of lights can be grouped as the "Desk Lamps" service group.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMServiceGroup : NSObject
+@interface HMServiceGroup : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 

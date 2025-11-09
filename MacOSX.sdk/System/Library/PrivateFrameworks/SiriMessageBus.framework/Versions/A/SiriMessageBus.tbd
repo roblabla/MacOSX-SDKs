@@ -63,6 +63,8 @@ exports:
                        '_$s14SiriMessageBus17RequestDispatcherC34startUnderstandingDictationSession15withAssistantId12languageCode21understandingOnDeviceySS_SSSbtFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC40announceNotificationHandlingStateUpdated15withAssistantId02toI0ySS_So010AFExternalgd7HandlerI0VtFTj', 
                        '_$s14SiriMessageBus17RequestDispatcherC40announceNotificationHandlingStateUpdated15withAssistantId02toI0ySS_So010AFExternalgd7HandlerI0VtFTq', 
+                       '_$s14SiriMessageBus17RequestDispatcherC42updateConversationContextForRemoteResponse15withAssistantId07requestN09fullSpeak012redactedFullQ00P5Print0rsT0ySS_S2SSgA3KtFTj', 
+                       '_$s14SiriMessageBus17RequestDispatcherC42updateConversationContextForRemoteResponse15withAssistantId07requestN09fullSpeak012redactedFullQ00P5Print0rsT0ySS_S2SSgA3KtFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC7domainsSaySSGyFTj', 
                        '_$s14SiriMessageBus17RequestDispatcherC7domainsSaySSGyFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC7prewarm15withAssistantId12languageCode0F7Options010sharedUserI0ySS_SSSo09AFRequeste7PrewarmL0VSSSgtFTj', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatform.framework/Versions/A/IntelligencePlatform'
-current-version: 124.12.4
+current-version: 124.19
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -3805,7 +3805,7 @@ exports:
                        '_$s20IntelligencePlatform16MorphunTokenizerV16defaultSeparatorSSvgZ', 
                        '_$s20IntelligencePlatform16MorphunTokenizerV16defaultSeparatorSSvpZMV', 
                        '_$s20IntelligencePlatform16MorphunTokenizerV31processAndCheckNonNormalization5input9separatorSaySSGSS_SStKF', 
-                       '_$s20IntelligencePlatform16MorphunTokenizerV6locale21overrideConfigOptions29assetDownloadTimeoutInSecondsAC10Foundation6LocaleVSg_Say0C5Swift20ConfigurationFeatureOGSgSitKcfC', 
+                       '_$s20IntelligencePlatform16MorphunTokenizerV6locale21overrideConfigOptionsAC10Foundation6LocaleVSg_Say0C5Swift20ConfigurationFeatureOGSgtKcfC', 
                        '_$s20IntelligencePlatform16MorphunTokenizerV7process_9separator19noWordNormalizationS2S_SSSbtKF', 
                        '_$s20IntelligencePlatform16MorphunTokenizerV8tokenize_19noWordNormalizationSaySSGSS_SbtKF', 
                        '_$s20IntelligencePlatform16MorphunTokenizerVMa', '_$s20IntelligencePlatform16MorphunTokenizerVMn', 

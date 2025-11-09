@@ -244,7 +244,7 @@ AV_INIT_UNAVAILABLE
  @param			operatorType
 				The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
  */
-+ (NSPredicate *)predicateForChannelCount:(NSInteger)channelCount mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption operatorType:(NSPredicateOperatorType)operatorType;
++ (NSPredicate *)predicateForChannelCount:(NSInteger)channelCount mediaSelectionOption:(nullable AVMediaSelectionOption *)mediaSelectionOption operatorType:(NSPredicateOperatorType)operatorType;
 
 /*!
  @method		predicateForBinauralAudio:mediaSelectionOption:
@@ -254,7 +254,7 @@ AV_INIT_UNAVAILABLE
  @param			mediaSelectionOption
 				The audio media selection option under consideration.
  */
-+ (NSPredicate *)predicateForBinauralAudio:(BOOL)isBinauralAudio mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
++ (NSPredicate *)predicateForBinauralAudio:(BOOL)isBinauralAudio mediaSelectionOption:(nullable AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @method		predicateForImmersiveAudio:mediaSelectionOption:
@@ -264,7 +264,7 @@ AV_INIT_UNAVAILABLE
  @param			mediaSelectionOption
 				The audio media selection option under consideration.
  */
-+ (NSPredicate *)predicateForImmersiveAudio:(BOOL)isImmersiveAudio mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
++ (NSPredicate *)predicateForImmersiveAudio:(BOOL)isImmersiveAudio mediaSelectionOption:(nullable AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @method		predicateForDownmixAudio:mediaSelectionOption:
@@ -274,7 +274,7 @@ AV_INIT_UNAVAILABLE
  @param			mediaSelectionOption
 				The audio media selection option under consideration.
  */
-+ (NSPredicate *)predicateForDownmixAudio:(BOOL)isDownmixAudio mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
++ (NSPredicate *)predicateForDownmixAudio:(BOOL)isDownmixAudio mediaSelectionOption:(nullable AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @method		predicateForPresentationWidth:operatorType:
@@ -306,7 +306,64 @@ AV_INIT_UNAVAILABLE
  @param			operatorType
 				The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
  */
-+ (NSPredicate *)predicateForAudioSampleRate:(double)sampleRate mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption operatorType:(NSPredicateOperatorType)operatorType API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
++ (NSPredicate *)predicateForAudioSampleRate:(double)sampleRate mediaSelectionOption:(nullable AVMediaSelectionOption *)mediaSelectionOption operatorType:(NSPredicateOperatorType)operatorType API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+
+/*!
+ @method		predicateForChannelCount:operatorType:
+ @abstract		Creates a NSPredicate for audio channel count which can be used with other NSPredicates to express variant preferences.
+ @param			channelCount
+				The RHS value for the channel count in the predicate equation.
+ @param			operatorType
+				The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+ @discussion	Predicate will be evaluated on the media selection option selected for the asset.
+				Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration 			mediaSelections property.
+				Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration 			setInterstitialMediaSelectionCriteria: forMediaCharacteristic:].
+ */
++ (NSPredicate *)predicateForChannelCount:(NSInteger)channelCount operatorType:(NSPredicateOperatorType)operatorType API_AVAILABLE(macos(15.5), ios(18.5), tvos(18.5), watchos(11.5), visionos(2.5));
+
+/*!
+ @method		predicateForBinauralAudio:
+ @abstract		Creates a NSPredicate for binaural which can be used with other NSPredicates to express variant preferences.
+ @param			isBinaural
+				The RHS value for the value of isBinauralAudio in the predicate equation.
+ */
++ (NSPredicate *)predicateForBinauralAudio:(BOOL)isBinauralAudio API_AVAILABLE(macos(15.5), ios(18.5), tvos(18.5), watchos(11.5), visionos(2.5));
+
+/*!
+ @method		predicateForImmersiveAudio
+ @abstract		Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
+ @param			isImmersiveAudio
+				The RHS value for the value of isImmersiveAudio in the predicate equation.
+ @discussion	Predicate will be evaluated on the media selection option selected for the asset.
+				Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration 			mediaSelections property.
+				Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration 			setInterstitialMediaSelectionCriteria: forMediaCharacteristic:].
+ */
++ (NSPredicate *)predicateForImmersiveAudio:(BOOL)isImmersiveAudio API_AVAILABLE(macos(15.5), ios(18.5), tvos(18.5), watchos(11.5), visionos(2.5));
+
+/*!
+ @method		predicateForDownmixAudio:mediaSelectionOption:
+ @abstract		Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
+ @param			isDownmixAudio
+				The RHS value for the value of isDownmixAudio in the predicate equation.
+ @discussion	Predicate will be evaluated on the media selection option selected for the asset.
+				Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration 			mediaSelections property.
+				Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration 			setInterstitialMediaSelectionCriteria: forMediaCharacteristic:].
+ */
++ (NSPredicate *)predicateForDownmixAudio:(BOOL)isDownmixAudio API_AVAILABLE(macos(15.5), ios(18.5), tvos(18.5), watchos(11.5), visionos(2.5));
+
+/*!
+ @method		predicateForAudioSampleRate:operatorType:
+ @abstract		Creates a NSPredicate for audio sample rate which can be used with other NSPredicates to express variant preferences.
+ @param			sampleRate
+				The RHS value for the sample rate in the predicate equation.
+ @param			operatorType
+				The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+ @discussion	Predicate will be evaluated on the media selection option selected for the asset.
+				Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration 			mediaSelections property.
+				Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration 			setInterstitialMediaSelectionCriteria: forMediaCharacteristic:].
+ */
++ (NSPredicate *)predicateForAudioSampleRate:(double)sampleRate operatorType:(NSPredicateOperatorType)operatorType API_AVAILABLE(macos(15.5), ios(18.5), tvos(18.5), watchos(11.5), visionos(2.5));
 
 @end
 

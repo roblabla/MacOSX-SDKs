@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  *
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMNumberRange : NSObject
+@interface HMNumberRange : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 

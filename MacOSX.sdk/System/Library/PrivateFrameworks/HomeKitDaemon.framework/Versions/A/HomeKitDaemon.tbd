@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemon.framework/Versions/A/HomeKitDaemon'
-current-version: 1278.5.13
+current-version: 1278.6.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -112,7 +112,7 @@ exports:
                        '_$s13HomeKitDaemon21AliroVersionUtilitiesC029isCurrentDeviceCompatibleWithdE0ySbAA0dE0CFZ', 
                        '_$s13HomeKitDaemon21AliroVersionUtilitiesC04readde12IntoMemoryOnA7Manageryys8Sendable_pFZ', 
                        '_$s13HomeKitDaemon21AliroVersionUtilitiesC11concatenatey10Foundation4DataVSayAGGFZ', 
-                       '_$s13HomeKitDaemon21AliroVersionUtilitiesC14dataFromNumbery10Foundation4DataVSo8NSNumberCKFZ', 
+                       '_$s13HomeKitDaemon21AliroVersionUtilitiesC14dataFromNumbery10Foundation4DataVSo8NSNumberCSgKFZ', 
                        '_$s13HomeKitDaemon21AliroVersionUtilitiesC6chunksySay10Foundation4DataVGAGFZ', 
                        '_$s13HomeKitDaemon21AliroVersionUtilitiesCACycfC', '_$s13HomeKitDaemon21AliroVersionUtilitiesCACycfc', 
                        '_$s13HomeKitDaemon21AliroVersionUtilitiesCMa', '_$s13HomeKitDaemon21AliroVersionUtilitiesCMn', 
@@ -306,6 +306,21 @@ exports:
                        '_$s13HomeKitDaemon35AddACWGKeysToExistingHomesOperationCMn', 
                        '_$s13HomeKitDaemon35AddACWGKeysToExistingHomesOperationCN', 
                        '_$s13HomeKitDaemon35AddACWGKeysToExistingHomesOperationCfD', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO20keychainPullOverrideyyYbKcSgvMZ', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO20keychainPullOverrideyyYbKcSgvau', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO20keychainPullOverrideyyYbKcSgvgZ', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO20keychainPullOverrideyyYbKcSgvpZ', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO20keychainPullOverrideyyYbKcSgvpZMV', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO20keychainPullOverrideyyYbKcSgvsZ', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO29taskLocalKeychainPullOverrideyyYbKcSgvgZ', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO29taskLocalKeychainPullOverrideyyYbKcSgvpZMV', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO30$taskLocalKeychainPullOverrides04TaskJ0CyyyYbKcSgGvau', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO30$taskLocalKeychainPullOverrides04TaskJ0CyyyYbKcSgGvgZ', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO30$taskLocalKeychainPullOverrides04TaskJ0CyyyYbKcSgGvpZ', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesO30$taskLocalKeychainPullOverrides04TaskJ0CyyyYbKcSgGvpZMV', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesOMa', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesOMn', 
+                       '_$s13HomeKitDaemon35HMDHomeNFCReaderKeyManagerOverridesON', 
                        '_$s13HomeKitDaemon7AccountC14ChangeObserverC8delegateAE8Delegate_pSgvM', 
                        '_$s13HomeKitDaemon7AccountC14ChangeObserverC8delegateAE8Delegate_pSgvMTq', 
                        '_$s13HomeKitDaemon7AccountC14ChangeObserverC8delegateAE8Delegate_pSgvg', 
@@ -370,6 +385,8 @@ exports:
                        '_$sSo25HMDMatterAccessoryAdapterC13HomeKitDaemonE6device_23receivedAttributeReportySo9MTRDeviceC_SaySDySSypGGtF', 
                        '_$sSo25HMDMatterAccessoryAdapterC13HomeKitDaemonE6handle_10dictionary03hapB0ySo18MTRAttributeReportCSg_SDySSypGSo12HAPAccessoryCSgtF', 
                        '_$sSo25HMDMatterAccessoryAdapterC13HomeKitDaemonE6handle_10dictionary4flow03hapB0ySo14MTREventReportC_SDySSypGSo7HMFFlowCSo12HAPAccessoryCSgtF', 
+                       '_$sSo26HMDHomeNFCReaderKeyManagerC13HomeKitDaemonE16pullFromKeychain4flowySo7HMFFlowC_tYaKF', 
+                       '_$sSo26HMDHomeNFCReaderKeyManagerC13HomeKitDaemonE16pullFromKeychain4flowySo7HMFFlowC_tYaKFTu', 
                        '_$sSo28HMDMatterCapabilitiesFactoryC13HomeKitDaemonEABycfC', 
                        '_$sSo28HMDMatterCapabilitiesFactoryC13HomeKitDaemonEABycfc', 
                        '_$sSo28HMDMatterCapabilitiesFactoryCMa', '_$sSo28HMDMobileAssetManagerFactoryC13HomeKitDaemonEABycfC', 

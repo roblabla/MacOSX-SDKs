@@ -19,7 +19,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  *        The order of execution of these actions is undefined.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMActionSet : NSObject
+@interface HMActionSet : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 

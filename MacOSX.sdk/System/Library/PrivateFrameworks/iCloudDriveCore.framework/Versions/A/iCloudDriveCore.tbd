@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/iCloudDriveCore.framework/Versions/A/iCloudDriveCore'
-current-version: 3437.101.1
+current-version: 3437.120.20
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -47,11 +47,11 @@ exports:
                        _kBRCXPCActivityAllowBattery, _kBRCXPCActivityDelay, _kBRCXPCActivityDiskIntensive, 
                        _kBRCXPCActivityGracePeriod, _kBRCXPCActivityInterval, _kBRCXPCActivityMayReboot, 
                        _kBRCXPCActivityPowerNap, _kBRCXPCActivityPriority, _kBRCXPCActivityRepeating, 
-                       _kBRCXPCActivityRequireScreenSleep, _kBRRecordBogusSaltingKey, 
-                       _kBRRecordEtagInPreviousZone, _kBRRecordIDPrefixAlias, _kBRRecordIDPrefixContent, 
-                       _kBRRecordIDPrefixDirectoryStructure, _kBRRecordIDPrefixDocumentStructure, 
-                       _kBRRecordIDPrefixFinderBookmark, _kBRRecordIDPrefixShareAlias, 
-                       _kBRRecordIDPrefixSymlink, _kBRRecordIDPrefixZoneMovedDocumentStructure, 
+                       _kBRCXPCActivityRequireScreenSleep, _kBRRecordAssetReReference, 
+                       _kBRRecordBogusSaltingKey, _kBRRecordEtagInPreviousZone, _kBRRecordIDPrefixAlias, 
+                       _kBRRecordIDPrefixContent, _kBRRecordIDPrefixDirectoryStructure, 
+                       _kBRRecordIDPrefixDocumentStructure, _kBRRecordIDPrefixFinderBookmark, 
+                       _kBRRecordIDPrefixShareAlias, _kBRRecordIDPrefixSymlink, _kBRRecordIDPrefixZoneMovedDocumentStructure, 
                        _kBRRecordKeyBasehashSaltValidation, _kBRRecordKeyBirthtime, 
                        _kBRRecordKeyBoundaryKeyValidationKey, _kBRRecordKeyChildBasehashSalt, 
                        _kBRRecordKeyChildBasehashSaltValidation, _kBRRecordKeyContentBoundaryKey, 
@@ -175,10 +175,11 @@ exports:
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastAbleToRun, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastActivation, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastRegistration, 
-                       AppTelemetryInvestigation._errorCode, AppTelemetryInvestigation._errorDescription, 
-                       AppTelemetryInvestigation._errorDomain, AppTelemetryInvestigation._eventGroupUUID, 
-                       AppTelemetryInvestigation._eventTimestamp, AppTelemetryInvestigation._fpfsMigrationInvestigation, 
-                       AppTelemetryInvestigation._has, AppTelemetryInvestigation._hasForegroundClients, 
+                       AppTelemetryInvestigation._dbAge, AppTelemetryInvestigation._errorCode, 
+                       AppTelemetryInvestigation._errorDescription, AppTelemetryInvestigation._errorDomain, 
+                       AppTelemetryInvestigation._eventGroupUUID, AppTelemetryInvestigation._eventTimestamp, 
+                       AppTelemetryInvestigation._fpfsMigrationInvestigation, AppTelemetryInvestigation._has, 
+                       AppTelemetryInvestigation._hasForegroundClients, AppTelemetryInvestigation._isConsolidated, 
                        AppTelemetryInvestigation._isEnhancedDrivePrivacyEnabled, 
                        AppTelemetryInvestigation._isPCSChained, AppTelemetryInvestigation._itemID, 
                        AppTelemetryInvestigation._itemStatsInvestigation, AppTelemetryInvestigation._lastOSUpdate, 
@@ -272,8 +273,8 @@ exports:
                        BRCAccountSession._clientReadDatabaseFacade, BRCAccountSession._clientReadWriteDatabaseFacade, 
                        BRCAccountSession._clientTruthWorkloop, BRCAccountSession._cloudDocsFD, 
                        BRCAccountSession._databaseID, BRCAccountSession._dbCorruptionQueue, 
-                       BRCAccountSession._dbProfilingHook, BRCAccountSession._dbURL, 
-                       BRCAccountSession._dbWatcher, BRCAccountSession._dbWatcherQueue, 
+                       BRCAccountSession._dbCreationDate, BRCAccountSession._dbProfilingHook, 
+                       BRCAccountSession._dbURL, BRCAccountSession._dbWatcher, BRCAccountSession._dbWatcherQueue, 
                        BRCAccountSession._defaultScheduler, BRCAccountSession._desktopAndDocumentsManager, 
                        BRCAccountSession._forDBDump, BRCAccountSession._fpDomain, 
                        BRCAccountSession._isDataSeparated, BRCAccountSession._miscOperations, 

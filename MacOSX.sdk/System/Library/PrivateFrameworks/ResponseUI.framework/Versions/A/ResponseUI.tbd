@@ -64,5 +64,7 @@ exports:
                        '_$s2os6LoggerV10ResponseUIE8CategoryOMn', '_$s2os6LoggerV10ResponseUIE8CategoryON', 
                        '_$s2os6LoggerV10ResponseUIE8SignpostVMa', '_$s2os6LoggerV10ResponseUIE8SignpostVMn', 
                        '_$s2os6LoggerV10ResponseUIE8SignpostVN', '_$s2os6LoggerV10ResponseUIE9subsystemSSvgZ', 
+                       '_$sSo14NSUserDefaultsC10ResponseUIE44isDisplayRepresentationDebugIndicatorEnabledSbvgZ', 
+                       '_$sSo14NSUserDefaultsC10ResponseUIE44isDisplayRepresentationDebugIndicatorEnabledSbvpZMV', 
                        _ResponseUIVersionNumber, _ResponseUIVersionString ]
 ...

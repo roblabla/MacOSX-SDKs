@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 221.4.7
+current-version: 221.5.1
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -12,16 +12,16 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DMFAllConfigurationOrganizationTypes, _DMFAppLog, _DMFAppRatingAllApps, 
-                       _DMFAppRatingUnrated, _DMFAppStatusDidChangeNotificationName, 
-                       _DMFAtomicFileWritingLog, _DMFBundleIdentifierErrorKey, _DMFCEMReasonCodeBad, 
-                       _DMFCEMReasonCodeConflict, _DMFCEMReasonCodeCouldNotDecrypt, 
-                       _DMFCEMReasonCodeInvalidSignature, _DMFCEMReasonCodeOtherConflict, 
-                       _DMFCEMReasonCodePayloadPhase, _DMFCEMReasonCodePendingConfigurations, 
-                       _DMFCEMReasonCodePendingTether, _DMFCEMReasonCodePermissionDenied, 
-                       _DMFCEMReasonCodeUnknown, _DMFCEMReasonCodeUnknownPayloadKeys, 
-                       _DMFCommandPayloadDictionaryKey, _DMFCommandPayloadIdentifierKey, 
-                       _DMFCommandPayloadRequiresNetworkTetherKey, _DMFCommandPayloadStatusKey, 
-                       _DMFCommandPayloadTypeKey, _DMFCommandStateAssetsUsedKey, 
+                       _DMFAppRatingUnrated, _DMFAppSourceDeclarativeManagement, 
+                       _DMFAppStatusDidChangeNotificationName, _DMFAtomicFileWritingLog, 
+                       _DMFBundleIdentifierErrorKey, _DMFCEMReasonCodeBad, _DMFCEMReasonCodeConflict, 
+                       _DMFCEMReasonCodeCouldNotDecrypt, _DMFCEMReasonCodeInvalidSignature, 
+                       _DMFCEMReasonCodeOtherConflict, _DMFCEMReasonCodePayloadPhase, 
+                       _DMFCEMReasonCodePendingConfigurations, _DMFCEMReasonCodePendingTether, 
+                       _DMFCEMReasonCodePermissionDenied, _DMFCEMReasonCodeUnknown, 
+                       _DMFCEMReasonCodeUnknownPayloadKeys, _DMFCommandPayloadDictionaryKey, 
+                       _DMFCommandPayloadIdentifierKey, _DMFCommandPayloadRequiresNetworkTetherKey, 
+                       _DMFCommandPayloadStatusKey, _DMFCommandPayloadTypeKey, _DMFCommandStateAssetsUsedKey, 
                        _DMFCommandStateErrorChainErrorCodeKey, _DMFCommandStateErrorChainErrorDomainKey, 
                        _DMFCommandStateErrorChainKey, _DMFCommandStateErrorChainLocalizedDescriptionKey, 
                        _DMFCommandStateErrorChainUSEnglishDescriptionKey, _DMFCommandStatePayloadKey, 

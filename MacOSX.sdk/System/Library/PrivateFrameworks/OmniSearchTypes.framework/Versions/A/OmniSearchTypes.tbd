@@ -64,6 +64,7 @@ exports:
                        '_$s15OmniSearchTypes0B10ResultTypeO10AppIntents24PersistentlyIdentifiableAAMc', 
                        '_$s15OmniSearchTypes0B10ResultTypeO10AppIntents26StaticDisplayRepresentableAAMc', 
                        '_$s15OmniSearchTypes0B10ResultTypeO10Foundation40CustomLocalizedStringResourceConvertibleAAMc', 
+                       '_$s15OmniSearchTypes0B10ResultTypeO16emptyPlaceholderyA2CmFWC', 
                        '_$s15OmniSearchTypes0B10ResultTypeO25typeDisplayRepresentation10AppIntents0egH0VvMZ', 
                        '_$s15OmniSearchTypes0B10ResultTypeO25typeDisplayRepresentation10AppIntents0egH0VvgZ', 
                        '_$s15OmniSearchTypes0B10ResultTypeO25typeDisplayRepresentation10AppIntents0egH0VvpZMV', 

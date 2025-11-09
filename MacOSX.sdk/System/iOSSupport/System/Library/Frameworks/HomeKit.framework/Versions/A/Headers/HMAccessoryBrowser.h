@@ -72,7 +72,7 @@ API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
  * @brief This delegate receives updates about new accessories in the home.
  */
 HM_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
-    @protocol HMAccessoryBrowserDelegate<NSObject>
+@protocol HMAccessoryBrowserDelegate<NSObject>
 
 @optional
 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/InputAccessoriesSettings.framework/Versions/A/InputAccessoriesSettings'
-current-version: 8.3.2
+current-version: 9.4.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:

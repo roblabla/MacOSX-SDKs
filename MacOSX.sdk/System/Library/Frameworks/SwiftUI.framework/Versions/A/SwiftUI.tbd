@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI'
-current-version: 6.4.41
+current-version: 6.5.4
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -12012,6 +12012,8 @@ exports:
                        '_$s7SwiftUI4ViewPAAE22onContinueUserActivity_7performQrSS_ySo06NSUserG0CctFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE22onNavigationIconChange7performQryAA03AnyC0VSgc_tF', 
                        '_$s7SwiftUI4ViewPAAE22onNavigationIconChange7performQryAA03AnyC0VSgc_tFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE22onScrollGeometryChange3for11prefersLast2of6actionQrqd__m_Sbqd__AA0eF0Vcyqd___qd__tctSQRd__lF', 
+                       '_$s7SwiftUI4ViewPAAE22onScrollGeometryChange3for11prefersLast2of6actionQrqd__m_Sbqd__AA0eF0Vcyqd___qd__tctSQRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE22onScrollGeometryChange3for2of6actionQrqd__m_qd__AA0eF0Vcyqd___qd__tctSQRd__lF', 
                        '_$s7SwiftUI4ViewPAAE22onScrollGeometryChange3for2of6actionQrqd__m_qd__AA0eF0Vcyqd___qd__tctSQRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE22paletteSelectionEffectyQrAA07PaletteeF0VF', 

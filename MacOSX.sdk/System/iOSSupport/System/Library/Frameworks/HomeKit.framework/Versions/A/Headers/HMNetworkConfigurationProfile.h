@@ -36,7 +36,7 @@ API_UNAVAILABLE(macos)
 
 API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0))
 API_UNAVAILABLE(macos)
-@protocol HMNetworkConfigurationProfileDelegate <NSObject>
+@protocol HMNetworkConfigurationProfileDelegate<NSObject>
 
 @optional
 

@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * @discussion This class represents a trigger that is based on timers.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMTimerTrigger : HMTrigger
+@interface HMTimerTrigger : HMTrigger
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -45,7 +45,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  */
 - (instancetype)initWithName:(NSString *)name
                     fireDate:(NSDate *)fireDate
-                  recurrence:(nullable NSDateComponents *)recurrence API_AVAILABLE(ios(16.4), watchos(9.4), tvos(16.4), macCatalyst(16.4))API_UNAVAILABLE(macos);
+                  recurrence:(nullable NSDateComponents *)recurrence API_AVAILABLE(ios(16.4), watchos(9.4), tvos(16.4), macCatalyst(16.4)) API_UNAVAILABLE(macos);
 
 - (instancetype)initWithName:(NSString *)name
                     fireDate:(NSDate *)fireDate

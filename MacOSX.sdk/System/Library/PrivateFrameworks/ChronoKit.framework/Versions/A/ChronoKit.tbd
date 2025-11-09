@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ChronoKit.framework/Versions/A/ChronoKit'
-current-version: 537.5.41
+current-version: 537.6.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -564,9 +564,19 @@ exports:
                        '_$s9ChronoKit11PreferencesC29effectiveRemoteWidgetsEnabledSbvpMV', 
                        '_$s9ChronoKit11PreferencesC29effectiveRemoteWidgetsEnabledSbvsTj', 
                        '_$s9ChronoKit11PreferencesC29effectiveRemoteWidgetsEnabledSbvsTq', 
+                       '_$s9ChronoKit11PreferencesC29highlightSceneContentOverloadSbvMTj', 
+                       '_$s9ChronoKit11PreferencesC29highlightSceneContentOverloadSbvMTq', 
+                       '_$s9ChronoKit11PreferencesC29highlightSceneContentOverloadSbvgTj', 
+                       '_$s9ChronoKit11PreferencesC29highlightSceneContentOverloadSbvgTq', 
+                       '_$s9ChronoKit11PreferencesC29highlightSceneContentOverloadSbvpMV', 
+                       '_$s9ChronoKit11PreferencesC29highlightSceneContentOverloadSbvsTj', 
+                       '_$s9ChronoKit11PreferencesC29highlightSceneContentOverloadSbvsTq', 
                        '_$s9ChronoKit11PreferencesC30$effectiveRemoteWidgetsEnabled7Combine12AnyPublisherVySbs5NeverOGvgTj', 
                        '_$s9ChronoKit11PreferencesC30$effectiveRemoteWidgetsEnabled7Combine12AnyPublisherVySbs5NeverOGvgTq', 
                        '_$s9ChronoKit11PreferencesC30$effectiveRemoteWidgetsEnabled7Combine12AnyPublisherVySbs5NeverOGvpMV', 
+                       '_$s9ChronoKit11PreferencesC30$highlightSceneContentOverload7Combine12AnyPublisherVySbs5NeverOGvgTj', 
+                       '_$s9ChronoKit11PreferencesC30$highlightSceneContentOverload7Combine12AnyPublisherVySbs5NeverOGvgTq', 
+                       '_$s9ChronoKit11PreferencesC30$highlightSceneContentOverload7Combine12AnyPublisherVySbs5NeverOGvpMV', 
                        '_$s9ChronoKit11PreferencesC32widgetDiagnosticTriggersLogFaultSbvgTj', 
                        '_$s9ChronoKit11PreferencesC32widgetDiagnosticTriggersLogFaultSbvgTq', 
                        '_$s9ChronoKit11PreferencesC32widgetDiagnosticTriggersLogFaultSbvpMV', 

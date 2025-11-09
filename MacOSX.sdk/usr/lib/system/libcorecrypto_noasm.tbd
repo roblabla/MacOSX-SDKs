@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libcorecrypto_noasm.dylib'
-current-version: 1736.100.95
+current-version: 1736.120.5
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -310,11 +310,12 @@ exports:
                        _ccspake_mac_hkdf_cmac_aes128_sha256, _ccspake_mac_hkdf_hmac_sha256, 
                        _ccspake_mac_hkdf_hmac_sha512, _ccspake_mac_verify_and_get_session_key, 
                        _ccspake_prover_init, _ccspake_prover_initialize, _ccspake_reduce_w, 
-                       _ccspake_sizeof_ctx, _ccspake_sizeof_point, _ccspake_sizeof_w, 
-                       _ccspake_verifier_init, _ccspake_verifier_initialize, _ccsrp_client_process_challenge, 
-                       _ccsrp_client_set_noUsernameInX, _ccsrp_client_start_authentication, 
-                       _ccsrp_client_verify_session, _ccsrp_ctx_init, _ccsrp_ctx_init_option, 
-                       _ccsrp_ctx_init_with_size_option, _ccsrp_exchange_size, _ccsrp_generate_salt_and_verification, 
+                       _ccspake_reduce_w_RFC9383, _ccspake_sizeof_ctx, _ccspake_sizeof_point, 
+                       _ccspake_sizeof_w, _ccspake_verifier_init, _ccspake_verifier_initialize, 
+                       _ccsrp_client_process_challenge, _ccsrp_client_set_noUsernameInX, 
+                       _ccsrp_client_start_authentication, _ccsrp_client_verify_session, 
+                       _ccsrp_ctx_init, _ccsrp_ctx_init_option, _ccsrp_ctx_init_with_size_option, 
+                       _ccsrp_exchange_size, _ccsrp_generate_salt_and_verification, 
                        _ccsrp_generate_verifier, _ccsrp_get_premaster_secret, _ccsrp_get_session_key, 
                        _ccsrp_get_session_key_length, _ccsrp_gp_rfc5054_1024, _ccsrp_gp_rfc5054_2048, 
                        _ccsrp_gp_rfc5054_3072, _ccsrp_gp_rfc5054_4096, _ccsrp_gp_rfc5054_8192, 

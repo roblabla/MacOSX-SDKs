@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LearnedFeatures.framework/Versions/A/LearnedFeatures'
-current-version: 7.63
-compatibility-version: 7.63
+current-version: 7.71
+compatibility-version: 7.71
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__back_refIcEE, __ZTINSt3__110__function6__baseIFvvEEE, 

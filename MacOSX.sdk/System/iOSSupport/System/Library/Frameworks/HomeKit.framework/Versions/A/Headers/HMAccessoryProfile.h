@@ -17,7 +17,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * @abstract Represents a profile implemented by an accessory.
  */
 HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMAccessoryProfile : NSObject
+@interface HMAccessoryProfile : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 

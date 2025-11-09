@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIEdit.framework/Versions/A/PhotosUIEdit'
-current-version: 751.0.104
+current-version: 760.6.150
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -105,8 +105,9 @@ exports:
                        '_$sSo22PEModelDeliveryManagerC12PhotosUIEditEABycfC', '_$sSo22PEModelDeliveryManagerC12PhotosUIEditEABycfc', 
                        '_$sSo22PEModelDeliveryManagerCMa', _CGVectorZero, _PEAdjustmentApertureErrorDomain, 
                        _PEAdjustmentApertureMediaTypeErrorKey, _PEAdjustmentAudioMixErrorDomain, 
-                       _PEAdjustmentCleanupErrorDomain, _PEAdjustmentDataCacheTimeout, 
-                       _PEAdjustmentDepthErrorDomain, _PEAdjustmentDepthMediaTypeErrorKey, 
+                       _PEAdjustmentCanApplyAdjustments, _PEAdjustmentCleanupErrorDomain, 
+                       _PEAdjustmentDataCacheTimeout, _PEAdjustmentDepthErrorDomain, 
+                       _PEAdjustmentDepthMediaTypeErrorKey, _PEAdjustmentErrorDomain, 
                        _PEAdjustmentFilterErrorDomain, _PEAdjustmentFilterMediaTypeErrorKey, 
                        _PEAdjustmentPlaybackRateErrorDomain, _PEAdjustmentStraightenErrorDomain, 
                        _PEAdjustmentStyleErrorDomain, _PEAnalyticsEditSessionThirdPartyPlugin, 

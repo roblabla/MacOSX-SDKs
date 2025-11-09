@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreSpotlight.framework/Versions/A/CoreSpotlight'
-current-version: 2333.22.13
+current-version: 2333.50.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -189,8 +189,9 @@ exports:
                        _MDItemAlternateEmailAddresses, _MDItemAlternateNames, _MDItemAlternatePhoneNumbers, 
                        _MDItemAltitude, _MDItemAperture, _MDItemAppEngagementValues, 
                        _MDItemAppEntityInstanceId, _MDItemAppEntityTitle, _MDItemAppEntityType, 
-                       _MDItemAppEntityTypeRepresentationName, _MDItemAppEntityTypeRepresentationSynonyms, 
-                       _MDItemAppStoreAdamID, _MDItemAppleLoopDescriptors, _MDItemAppleLoopsKeyFilterType, 
+                       _MDItemAppEntityTypeDisplayRepresentationName, _MDItemAppEntityTypeRepresentationName, 
+                       _MDItemAppEntityTypeRepresentationSynonyms, _MDItemAppStoreAdamID, 
+                       _MDItemAppleLoopDescriptors, _MDItemAppleLoopsKeyFilterType, 
                        _MDItemAppleLoopsLoopMode, _MDItemAppleLoopsRootKey, _MDItemApplicationCategories, 
                        _MDItemApplicationLastLaunchedDate, _MDItemApplicationName, 
                        _MDItemApprovedDate, _MDItemApprovedStatus, _MDItemApprovedStatusString, 
@@ -241,15 +242,16 @@ exports:
                        _MDItemCustomPageVisitCountScore, _MDItemDarkThumbnailURL, 
                        _MDItemDataOwnerType, _MDItemDateAdded, _MDItemDateAdded_Ranking, 
                        _MDItemDeletedWithRelatedUniqueIdentifier, _MDItemDeliveryType, 
-                       _MDItemDescription, _MDItemDetectedEventTypes, _MDItemDirector, 
-                       _MDItemDisableSearchInSpotlight, _MDItemDisplayName, _MDItemDocumentIdentifier, 
-                       _MDItemDocumentUnderstandingCategories, _MDItemDocumentUnderstandingCategoriesConfidences, 
-                       _MDItemDocumentUnderstandingCategoriesLabels, _MDItemDocumentUnderstandingCategoriesSynonyms, 
-                       _MDItemDocumentUnderstandingCategoriesSynonymsCounts, _MDItemDocumentUnderstandingCategoriesVersion, 
-                       _MDItemDocumentUnderstandingTopics, _MDItemDocumentUnderstandingTopicsConfidences, 
-                       _MDItemDocumentUnderstandingTopicsLabels, _MDItemDocumentUnderstandingTopicsSynonyms, 
-                       _MDItemDocumentUnderstandingTopicsSynonymsCounts, _MDItemDocumentUnderstandingTopicsVersion, 
-                       _MDItemDomainIdentifier, _MDItemDonatedEvent, _MDItemDonatedEventArrivalAirportCode, 
+                       _MDItemDerivedIsMe, _MDItemDerivedIsMeTextContentMatch, _MDItemDescription, 
+                       _MDItemDetectedEventTypes, _MDItemDirector, _MDItemDisableSearchInSpotlight, 
+                       _MDItemDisplayName, _MDItemDocumentIdentifier, _MDItemDocumentUnderstandingCategories, 
+                       _MDItemDocumentUnderstandingCategoriesConfidences, _MDItemDocumentUnderstandingCategoriesLabels, 
+                       _MDItemDocumentUnderstandingCategoriesSynonyms, _MDItemDocumentUnderstandingCategoriesSynonymsCounts, 
+                       _MDItemDocumentUnderstandingCategoriesVersion, _MDItemDocumentUnderstandingTopics, 
+                       _MDItemDocumentUnderstandingTopicsConfidences, _MDItemDocumentUnderstandingTopicsLabels, 
+                       _MDItemDocumentUnderstandingTopicsSynonyms, _MDItemDocumentUnderstandingTopicsSynonymsCounts, 
+                       _MDItemDocumentUnderstandingTopicsVersion, _MDItemDomainIdentifier, 
+                       _MDItemDonatedEvent, _MDItemDonatedEventArrivalAirportCode, 
                        _MDItemDonatedEventArrivalAirportName, _MDItemDonatedEventCourierName, 
                        _MDItemDonatedEventDepartureAirportCode, _MDItemDonatedEventDepartureAirportName, 
                        _MDItemDonatedEventFlightCarrier, _MDItemDonatedEventFlightNumber, 

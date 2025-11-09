@@ -2,6 +2,8 @@
 #error "Do not include this header directly."
 #endif
 
+#include <TargetConditionals.h>
+
 /*  MARK: Implementation of the option-less public interfaces; simply defer
  *  to the versions with options, using the `_SparseDefaultXXXOptions` objects
  *  defined here.                                                             */
@@ -27,10 +29,30 @@ static const SparseNumericFactorOptions _SparseDefaultNumericFactorOptions_Float
   .pivotTolerance = 0.1,                    // Recommended value for difficult matrices in float
   .zeroTolerance = 1e-4 * __FLT_EPSILON__,  // "A few" orders of magnitude below epsilon.
 };
+static const SparseNumericFactorOptions _SparseDefaultNumericFactorOptions_Complex_Double = {
+  .control = SparseDefaultControl,
+  .scalingMethod = SparseScalingDefault,
+  .scaling = NULL,
+  .pivotTolerance = 0.01,                   // Recommended value for difficult matrices in double
+  .zeroTolerance = 1e-4 * __DBL_EPSILON__,  // "A few" orders of magnitude below epsilon.
+};
+static const SparseNumericFactorOptions _SparseDefaultNumericFactorOptions_Complex_Float = {
+  .control = SparseDefaultControl,
+  .scalingMethod = SparseScalingDefault,
+  .scaling = NULL,
+  .pivotTolerance = 0.1,                    // Recommended value for difficult matrices in float
+  .zeroTolerance = 1e-4 * __FLT_EPSILON__,  // "A few" orders of magnitude below epsilon.
+};
 
 static inline SPARSE_PUBLIC_INTERFACE
 SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
                                                SparseMatrixStructure Matrix) {
+  return SparseFactor(type, Matrix, _SparseDefaultSymbolicFactorOptions);
+}
+
+static inline SPARSE_PUBLIC_INTERFACE
+SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
+                                               SparseMatrixStructureComplex Matrix) {
   return SparseFactor(type, Matrix, _SparseDefaultSymbolicFactorOptions);
 }
 
@@ -74,7 +96,7 @@ SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
 
 // Do O(1) validity tests for matrix structure
 #ifndef SPARSE_CHECK_VALID_MATRIX_STRUCTURE
-#define SPARSE_CHECK_VALID_MATRIX_STRUCTURE(S, result) \
+#define SPARSE_CHECK_VALID_MATRIX_STRUCTURE_COMMON(S, result) \
   SPARSE_PARAMETER_CHECK((S).rowCount > 0, result, "%s.rowCount must be > 0, but is %d.\n", #S, (S).rowCount); \
   SPARSE_PARAMETER_CHECK((S).columnCount > 0, result, "%s.columnCount must be > 0, but is %d.\n", #S, (S).rowCount); \
   SPARSE_PARAMETER_CHECK((S).blockSize > 0, result, "%s.blockSize must be > 0, but is %d.]n", #S, (S).blockSize); \
@@ -82,6 +104,15 @@ SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
                          (S).rowCount == (S).columnCount, result, \
                          "%s.attributes.kind=SparseSymmetric, but %s.rowCount (%d) != %s.columnCount (%d).\n", \
                          #S, #S, (S).rowCount, #S, (S).columnCount);
+#if !0
+// Add check for SparseHermitian
+#define SPARSE_CHECK_VALID_MATRIX_STRUCTURE(S, result) \
+  SPARSE_CHECK_VALID_MATRIX_STRUCTURE_COMMON(S, result) \
+  SPARSE_PARAMETER_CHECK((S).attributes.kind != SparseHermitian || \
+                         (S).rowCount == (S).columnCount, result, \
+                         "%s.attributes.kind=SparseHermitian, but %s.rowCount (%d) != %s.columnCount (%d).\n", \
+                         #S, #S, (S).rowCount, #S, (S).columnCount);
+#endif
 #endif /* SPARSE_CHECK_VALID_MATRIX_STRUCTURE */
 
 // Check matrix matches symbolic factor
@@ -248,6 +279,12 @@ extern SparseOpaqueSymbolicFactorization _SparseSymbolicFactorQR
  const SparseMatrixStructure *Matrix,
  const SparseSymbolicFactorOptions *options);
 
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) )
+extern SparseOpaqueSymbolicFactorization _SparseSymbolicFactorLU
+ (SparseFactorization_t factorType,
+  const SparseMatrixStructure *Matrix,
+  const SparseSymbolicFactorOptions *options);
+
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SparseRetainSymbolic(SparseOpaqueSymbolicFactorization *_Nonnull symbolicFactor);
 
@@ -259,6 +296,24 @@ extern SparseSymbolicFactorOptions _SparseGetOptionsFromSymbolicFactor(SparseOpa
 
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SparseTrap(void);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) ) 
+extern SparseKind_t _SparseFromKindComplex(SparseKind_t K);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) ) 
+extern SparseKind_t _SparseToKindComplex(SparseKind_t K);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) ) 
+extern SparseAttributes_t _SparseFromAttributeComplex(SparseAttributesComplex_t K);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) ) 
+extern SparseAttributesComplex_t _SparseToAttributeComplex(SparseAttributes_t K);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) ) 
+extern SparseMatrixStructure _SparseFromStructureComplex(SparseMatrixStructureComplex K);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) ) 
+extern SparseMatrixStructureComplex _SparseToStructureComplex(SparseMatrixStructure K);
 
 #if __has_feature(nullability)
 #pragma clang assume_nonnull end
@@ -278,17 +333,53 @@ SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type, Spars
     case SparseFactorizationCholeskyAtA:
     case SparseFactorizationQR:
       return _SparseSymbolicFactorQR(type, &Matrix, &options);
-
+#if !0
+    case SparseFactorizationLU:
+    case SparseFactorizationLUUnpivoted:
+    case SparseFactorizationLUSPP:
+    case SparseFactorizationLUTPP:
+      return _SparseSymbolicFactorLU(type, &Matrix, &options);
+#endif // !TARGET_OS_BRIDGE
     default:
       SPARSE_PARAMETER_CHECK(Matrix.attributes.kind == SparseSymmetric,
                              (SparseOpaqueSymbolicFactorization){ .status = SparseParameterError },
-                             "Requested symmetric factorization of unsymmetric matrix.\n");
+                             "Requested symmetric factorization of non-symmetric matrix.\n");
       SPARSE_PARAMETER_CHECK(Matrix.rowCount == Matrix.columnCount,
                              (SparseOpaqueSymbolicFactorization){ .status = SparseParameterError },
-                             "Matrix purports to be symmetric, but rowCount != columnCount.\n");
+                             "Matrix supposed to be symmetric (Hermitian), but rowCount != columnCount.\n");
       return _SparseSymbolicFactorSymmetric(type, &Matrix, &options);
   }
 }
+
+#if !0
+static inline SPARSE_PUBLIC_INTERFACE
+SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type, SparseMatrixStructureComplex MatrixComplex, SparseSymbolicFactorOptions options) {
+  SparseMatrixStructure Matrix = _SparseFromStructureComplex(MatrixComplex);
+  SPARSE_PARAMETER_CHECK(Matrix.columnCount > 0,
+                         (SparseOpaqueSymbolicFactorization){ .status = SparseParameterError },
+                         ".structure.columnCount must be greater than 0.\n");
+  switch(type) {
+    case SparseFactorizationCholeskyAtA:
+    case SparseFactorizationQR:
+      return _SparseSymbolicFactorQR(type, &Matrix, &options);
+    case SparseFactorizationLU:
+    case SparseFactorizationLUUnpivoted:
+    case SparseFactorizationLUSPP:
+    case SparseFactorizationLUTPP:
+      return _SparseSymbolicFactorLU(type, &Matrix, &options);
+    default:
+
+      SPARSE_PARAMETER_CHECK(Matrix.attributes.kind == SparseSymmetric ||
+                             Matrix.attributes.kind == SparseHermitian,
+                             (SparseOpaqueSymbolicFactorization){ .status = SparseParameterError },
+                             "Requested symmetric factorization of non-symmetric (non-Hermitian) matrix.\n");
+      SPARSE_PARAMETER_CHECK(Matrix.rowCount == Matrix.columnCount,
+                             (SparseOpaqueSymbolicFactorization){ .status = SparseParameterError },
+                             "Matrix supposed to be symmetric (Hermitian), but rowCount != columnCount.\n");
+      return _SparseSymbolicFactorSymmetric(type, &Matrix, &options);
+  }
+}
+#endif // !TARGET_OS_BRIDGE
 
 static inline SPARSE_PUBLIC_INTERFACE
 SparseOpaqueSymbolicFactorization SparseRetain(SparseOpaqueSymbolicFactorization SymbolicFactor) {
@@ -360,21 +451,70 @@ SparseIterativeMethod SparseLSMR(SparseLSMROptions options) {
 }
 
 // Include type-specifc implementation for double
-#define _SPARSE_IMPLEMENTATION_TYPE double
-#define _SPARSE_OLDSTYLE(NAME) NAME ## _double
-#define _SPARSE_VARIANT(NAME) NAME ## _Double
+#define _SPARSE_IMPLEMENTATION_TYPE       double
+#define _SPARSE_OLDSTYLE(NAME)            NAME ## _double
+#define _SPARSE_VARIANT(NAME)             NAME ## _Double
+#define _SPARSE_REAL_VARIANT(NAME)        _SPARSE_VARIANT(NAME)
+#define _SPARSE_REAL_SIZE(NAME)           _SPARSE_REAL_VARIANT(NAME)
+#define _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+#define _SPARSE_ATTRIBUTES                SparseAttributes_t
 #include "SolveImplementationTyped.h"
 #undef _SPARSE_IMPLEMENTATION_TYPE
 #undef _SPARSE_VARIANT
 #undef _SPARSE_OLDSTYLE
+#undef _SPARSE_REAL_VARIANT
+#undef _SPARSE_REAL_SIZE
+#undef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+#undef _SPARSE_ATTRIBUTES
 
 // Include type-specifc implementation for float
-#define _SPARSE_IMPLEMENTATION_TYPE float
-#define _SPARSE_OLDSTYLE(NAME) NAME ## _float
-#define _SPARSE_VARIANT(NAME) NAME ## _Float
+#define _SPARSE_IMPLEMENTATION_TYPE       float
+#define _SPARSE_OLDSTYLE(NAME)            NAME ## _float
+#define _SPARSE_VARIANT(NAME)             NAME ## _Float
+#define _SPARSE_REAL_VARIANT(NAME)        _SPARSE_VARIANT(NAME)
+#define _SPARSE_REAL_SIZE(NAME)           _SPARSE_REAL_VARIANT(NAME)
+#define _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+#define _SPARSE_ATTRIBUTES                SparseAttributes_t
 #include "SolveImplementationTyped.h"
 #undef _SPARSE_IMPLEMENTATION_TYPE
 #undef _SPARSE_VARIANT
 #undef _SPARSE_OLDSTYLE
+#undef _SPARSE_REAL_VARIANT
+#undef _SPARSE_REAL_SIZE
+#undef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+#undef _SPARSE_ATTRIBUTES
+
+#if !0
+// Include type-specifc implementation for complex double
+#define _SPARSE_IMPLEMENTATION_TYPE       __SPARSE_double_complex
+#define _SPARSE_OLDSTYLE(NAME)            NAME ## _double_complex
+#define _SPARSE_VARIANT(NAME)             NAME ## _Complex_Double
+#define _SPARSE_REAL_VARIANT(NAME)        NAME ## _Double
+#define _SPARSE_REAL_SIZE(NAME)           (_SPARSE_REAL_VARIANT(NAME) * 2)
+#undef  _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+#define _SPARSE_ATTRIBUTES                SparseAttributesComplex_t
+#include "SolveImplementationTyped.h"
+#undef _SPARSE_IMPLEMENTATION_TYPE
+#undef _SPARSE_VARIANT
+#undef _SPARSE_OLDSTYLE
+#undef _SPARSE_REAL_VARIANT
+#undef _SPARSE_REAL_SIZE
+
+// Include type-specifc implementation for complex float
+#define _SPARSE_IMPLEMENTATION_TYPE       __SPARSE_float_complex
+#define _SPARSE_OLDSTYLE(NAME)            NAME ## _float_complex
+#define _SPARSE_VARIANT(NAME)             NAME ## _Complex_Float
+#define _SPARSE_REAL_VARIANT(NAME)        NAME ## _Float
+#define _SPARSE_REAL_SIZE(NAME)           (_SPARSE_REAL_VARIANT(NAME) * 2)
+#undef  _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+#define _SPARSE_ATTRIBUTES                SparseAttributesComplex_t
+#include "SolveImplementationTyped.h"
+#undef _SPARSE_IMPLEMENTATION_TYPE
+#undef _SPARSE_VARIANT
+#undef _SPARSE_OLDSTYLE
+#undef _SPARSE_REAL_VARIANT
+#undef _SPARSE_REAL_SIZE
+#undef _SPARSE_ATTRIBUTES
+#endif // !TARGET_OS_BRIDGE
 
 #undef sparse_mul_overflow

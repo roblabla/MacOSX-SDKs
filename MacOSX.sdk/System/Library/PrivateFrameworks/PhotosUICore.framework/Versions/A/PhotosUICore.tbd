@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUICore.framework/Versions/A/PhotosUICore'
-current-version: 751.0.104
+current-version: 760.6.150
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -2562,7 +2562,7 @@ exports:
                        '_$s12PhotosUICore15MapDataProviderCMn', '_$s12PhotosUICore15MapDataProviderCMo', 
                        '_$s12PhotosUICore15MapDataProviderCMu', '_$s12PhotosUICore15MapDataProviderCN', 
                        '_$s12PhotosUICore15MapDataProviderCfD', '_$s12PhotosUICore15MapDataProviderCfd', 
-                       '_$s12PhotosUICore15PhotoKitFetcherC10fetchTrips17withFavoriteState5limitSo13PHFetchResultCySo17PHAssetCollectionCGSbSg_SiSgtF', 
+                       '_$s12PhotosUICore15PXAppIntentsLogSo9OS_os_logCvg', '_$s12PhotosUICore15PhotoKitFetcherC10fetchTrips17withFavoriteState5limitSo13PHFetchResultCySo17PHAssetCollectionCGSbSg_SiSgtF', 
                        '_$s12PhotosUICore15PhotoKitFetcherC11fetchPeople3for21libraryFilterViewMode0F5Limit4type14detectionTypesSo13PHFetchResultCySo8PHPersonCGAC0G8CategoryO_So09PXLibraryjkL0VSiSo0S4TypeVSgSaySo8NSNumberCGtF', 
                        '_$s12PhotosUICore15PhotoKitFetcherC12RelationshipO10subFoldersyA2EmFWC', 
                        '_$s12PhotosUICore15PhotoKitFetcherC12RelationshipO11collectionsyA2EmFWC', 
@@ -3062,14 +3062,10 @@ exports:
                        '_$s12PhotosUICore17PXPhotoKitFetcherCACycfC', '_$s12PhotosUICore17PXPhotoKitFetcherCACycfc', 
                        '_$s12PhotosUICore17PXPhotoKitFetcherCMa', '_$s12PhotosUICore17PXPhotoKitFetcherCMn', 
                        '_$s12PhotosUICore17PXPhotoKitFetcherCMo', '_$s12PhotosUICore17PXPhotoKitFetcherCN', 
-                       '_$s12PhotosUICore17PXPhotoKitFetcherCfD', '_$s12PhotosUICore17ParallaxAssetViewV07overlapE7Opacity12CoreGraphics7CGFloatVvM', 
-                       '_$s12PhotosUICore17ParallaxAssetViewV07overlapE7Opacity12CoreGraphics7CGFloatVvg', 
-                       '_$s12PhotosUICore17ParallaxAssetViewV07overlapE7Opacity12CoreGraphics7CGFloatVvpMV', 
-                       '_$s12PhotosUICore17ParallaxAssetViewV07overlapE7Opacity12CoreGraphics7CGFloatVvs', 
-                       '_$s12PhotosUICore17ParallaxAssetViewV08$overlapE7Opacity7SwiftUI7BindingVy12CoreGraphics7CGFloatVGvg', 
-                       '_$s12PhotosUICore17ParallaxAssetViewV08$overlapE7Opacity7SwiftUI7BindingVy12CoreGraphics7CGFloatVGvpMV', 
+                       '_$s12PhotosUICore17PXPhotoKitFetcherCfD', '_$s12PhotosUICore17ParallaxAssetViewV13animateLayersSbvg', 
+                       '_$s12PhotosUICore17ParallaxAssetViewV13animateLayersSbvpMV', 
                        '_$s12PhotosUICore17ParallaxAssetViewV4bodyQrvg', '_$s12PhotosUICore17ParallaxAssetViewV4bodyQrvpMV', 
-                       '_$s12PhotosUICore17ParallaxAssetViewV4bodyQrvpQOMQ', '_$s12PhotosUICore17ParallaxAssetViewV9viewModel07overlapE7Opacity0hE0ACyxGAA0cdeG0C_7SwiftUI7BindingVy12CoreGraphics7CGFloatVGxyctcfC', 
+                       '_$s12PhotosUICore17ParallaxAssetViewV4bodyQrvpQOMQ', '_$s12PhotosUICore17ParallaxAssetViewV9viewModel13animateLayers07overlapE0ACyxGAA0cdeG0C_SbxyctcfC', 
                        '_$s12PhotosUICore17ParallaxAssetViewV9viewModelAA0cdeG0Cvg', 
                        '_$s12PhotosUICore17ParallaxAssetViewV9viewModelAA0cdeG0CvpMV', 
                        '_$s12PhotosUICore17ParallaxAssetViewVMa', '_$s12PhotosUICore17ParallaxAssetViewVMn', 
@@ -4474,6 +4470,8 @@ exports:
                        '_$s12PhotosUICore21ParallaxAssetsManagerC22maxPreloadedAssetCountSivpMV', 
                        '_$s12PhotosUICore21ParallaxAssetsManagerC24setOverlapViewCandidates_27desiredTimeLayoutIdentifierySayAA0cgH13ConfigurationVG_SStFTj', 
                        '_$s12PhotosUICore21ParallaxAssetsManagerC24setOverlapViewCandidates_27desiredTimeLayoutIdentifierySayAA0cgH13ConfigurationVG_SStFTq', 
+                       '_$s12PhotosUICore21ParallaxAssetsManagerC29reprocessImageForCurrentAssetyyFTj', 
+                       '_$s12PhotosUICore21ParallaxAssetsManagerC29reprocessImageForCurrentAssetyyFTq', 
                        '_$s12PhotosUICore21ParallaxAssetsManagerC5styleSo24PFParallaxLayerStyleKindavMTj', 
                        '_$s12PhotosUICore21ParallaxAssetsManagerC5styleSo24PFParallaxLayerStyleKindavMTq', 
                        '_$s12PhotosUICore21ParallaxAssetsManagerC5styleSo24PFParallaxLayerStyleKindavgTj', 
@@ -4722,6 +4720,9 @@ exports:
                        '_$s12PhotosUICore22ParallaxAssetViewModelC012maxPreloadedD5CountSivpMV', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC013rejectCurrentD0yyFTj', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC013rejectCurrentD0yyFTq', 
+                       '_$s12PhotosUICore22ParallaxAssetViewModelC03useC0SbvgTj', 
+                       '_$s12PhotosUICore22ParallaxAssetViewModelC03useC0SbvgTq', 
+                       '_$s12PhotosUICore22ParallaxAssetViewModelC03useC0SbvpMV', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC07currentD0So7PHAssetCSgvgTj', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC07currentD0So7PHAssetCSgvgTq', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC07currentD0So7PHAssetCSgvpMV', 
@@ -4732,13 +4733,8 @@ exports:
                        '_$s12PhotosUICore22ParallaxAssetViewModelC07currentD14CompositeImageAA0cdhI0VSgvpMV', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC07currentD14CompositeImageAA0cdhI0VSgvsTj', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC07currentD14CompositeImageAA0cdhI0VSgvsTq', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC07visibleD14CompositeImageAA0cdhI0VSgvMTj', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC07visibleD14CompositeImageAA0cdhI0VSgvMTq', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC07visibleD14CompositeImageAA0cdhI0VSgvgTj', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC07visibleD14CompositeImageAA0cdhI0VSgvgTq', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC07visibleD14CompositeImageAA0cdhI0VSgvpMV', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC07visibleD14CompositeImageAA0cdhI0VSgvsTj', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC07visibleD14CompositeImageAA0cdhI0VSgvsTq', 
+                       '_$s12PhotosUICore22ParallaxAssetViewModelC09updateUseC0yyFTj', 
+                       '_$s12PhotosUICore22ParallaxAssetViewModelC09updateUseC0yyFTq', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC11Observation10ObservableAAMc', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC12isForPreviewSbvg', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC12isForPreviewSbvpMV', 
@@ -4883,13 +4879,6 @@ exports:
                        '_$s12PhotosUICore22ParallaxAssetViewModelC8viewSize12isForPreview012maxPreloadedD5CountACSo6CGSizeV_SbSitcfc', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC8viewSizeSo6CGSizeVvg', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelC8viewSizeSo6CGSizeVvpMV', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC9isPreviewSbvMTj', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC9isPreviewSbvMTq', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC9isPreviewSbvgTj', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC9isPreviewSbvgTq', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC9isPreviewSbvpMV', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC9isPreviewSbvsTj', 
-                       '_$s12PhotosUICore22ParallaxAssetViewModelC9isPreviewSbvsTq', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelCMa', '_$s12PhotosUICore22ParallaxAssetViewModelCMm', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelCMn', '_$s12PhotosUICore22ParallaxAssetViewModelCMo', 
                        '_$s12PhotosUICore22ParallaxAssetViewModelCMu', '_$s12PhotosUICore22ParallaxAssetViewModelCN', 
@@ -5368,6 +5357,7 @@ exports:
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV14faceRectsUnionSo6CGRectVvpMV', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV14rectByClipping_14fromSideMargin8fractionSo6CGRectVSgAH_AA0cdE4EdgeO12CoreGraphics7CGFloatVtF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV14rectByShifting_11inDirection8fractionSo6CGRectVAH_AA0cdE4EdgeO12CoreGraphics7CGFloatVtF', 
+                       '_$s12PhotosUICore24ParallaxAssetImageLayoutV14sizeFitsInViewySbSo6CGSizeVF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV15isCropRectValidySbSo6CGRectVF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV15viewAspectRatio12CoreGraphics7CGFloatVvg', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV15viewAspectRatio12CoreGraphics7CGFloatVvpMV', 
@@ -5379,11 +5369,13 @@ exports:
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV21overlapViewAnchorEdgeAA0cdeJ0Ovg', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV21overlapViewAnchorEdgeAA0cdeJ0OvpMV', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV22rectCenteredVertically_6aroundSo6CGRectVAG_AGtF', 
+                       '_$s12PhotosUICore24ParallaxAssetImageLayoutV23clipRectToFitInViewSizeySo6CGRectVAFF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV25normalizedOverlapViewRectSo6CGRectVvg', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV25normalizedOverlapViewRectSo6CGRectVvpMV', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV30rectByClippingFromBottomMargin_8fractionSo6CGRectVAG_12CoreGraphics7CGFloatVtF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV31cropRectWithMaxHeadroomFraction_09referenceH0So6CGRectVSg12CoreGraphics7CGFloatV_AGtF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV33cropRectWithFixedHeadroomFraction_09referenceH0So6CGRectVSg12CoreGraphics7CGFloatV_AGtF', 
+                       '_$s12PhotosUICore24ParallaxAssetImageLayoutV33largestSaliencyRectThatFitsInViewSo6CGRectVyF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV35rectShiftedHorizontallyToCenterFace8cropRect18faceFractionOffsetSo6CGRectVSgAH_12CoreGraphics7CGFloatVtF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV37largestRectCenteredHorizontallyOnFace18faceFractionOffsetSo6CGRectVSg12CoreGraphics7CGFloatV_tF', 
                        '_$s12PhotosUICore24ParallaxAssetImageLayoutV8hasFacesSbvg', 
@@ -7020,7 +7012,6 @@ exports:
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO23localizedStringResource10Foundation09LocalizediJ0VvpMV', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO24noSharedLibraryForMovingyA2CmFWC', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO27noSharedLibraryForFilteringyA2CmFWC', 
-                       '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO5error3forACSgs0G0_p_tFZ', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorOMa', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorOMn', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorON', '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorOs0G0AAMc', 
@@ -7175,6 +7166,7 @@ exports:
                        '_$s12PhotosUICore33OneUpSharePlayActivityCoordinatorCfD', 
                        '_$s12PhotosUICore33OneUpSharePlayActivityCoordinatorCfd', 
                        '_$s12PhotosUICore33OneUpSharePlayActivityCoordinatorCyxG11Observation10ObservableAAMc', 
+                       '_$s12PhotosUICore33PXAppIntentsAssetsActionDidFinishyyF', 
                        '_$s12PhotosUICore33PXPhotosViewModelHandlerReferenceVMa', 
                        '_$s12PhotosUICore33PXPhotosViewModelHandlerReferenceVMn', 
                        '_$s12PhotosUICore33PXPhotosViewModelHandlerReferenceVN', 
@@ -7847,6 +7839,7 @@ exports:
                        '_$s12PhotosUICore37OneUpSharePlaySessionRecipientJournalCMu', 
                        '_$s12PhotosUICore37OneUpSharePlaySessionRecipientJournalCfD', 
                        '_$s12PhotosUICore37OneUpSharePlaySessionRecipientJournalCfd', 
+                       '_$s12PhotosUICore37PXAppIntentsTranslatedOrOriginalError3fors0H0_psAD_p_tF', 
                        '_$s12PhotosUICore37PhotoKitPlayMovieAssetActionPerformerC10actionTypeACSS_tcfC', 
                        '_$s12PhotosUICore37PhotoKitPlayMovieAssetActionPerformerC10actionTypeACSS_tcfc', 
                        '_$s12PhotosUICore37PhotoKitPlayMovieAssetActionPerformerC10canPerform2on2in6person11socialGroupSbSo7PHAssetC_So0Q10CollectionCSo8PHPersonCSgSo08PHSocialP0CSgtFZ', 
@@ -10035,19 +10028,19 @@ exports:
                        _PXAnalyticsVideoSessionFailed, _PXAnimatedImageOverlayTileKind, 
                        _PXAnimatedOverlayTilesGroup, _PXAppIntentsAddNavigationDestinationProviderDependency, 
                        _PXAppIntentsAddPersonImageProviderDependency, _PXAppIntentsAddPhotoLibraryProviderDependency, 
-                       _PXAppIntentsAddURLNavigationPerformerDependency, _PXAppIntentsAssetsMediaTypeNSErrorKey, 
-                       _PXAppIntentsEngagementDonateSearchEvent, _PXAppIntentsNSErrorDomain, 
-                       _PXAppIntentsNumberOfAssetsNSErrorKey, _PXAppIntentsRegisterViewAnnotationDelegate, 
-                       _PXAppIntentsUnregisterViewAnnotationDelegate, _PXAppleMusicCapabilityStatusDescription, 
-                       _PXAppleMusicCurationCategories, _PXAppleMusicMediaProviderErrorDomain, 
-                       _PXAppleMusicPlayerControllerErrorDomain, _PXApplicationVisibilityStateDescription, 
-                       _PXAssetActionTypeAddToAlbum, _PXAssetActionTypeAddToAlbumStream, 
-                       _PXAssetActionTypeAddToLastUsedAlbum, _PXAssetActionTypeAddToLibrary, 
-                       _PXAssetActionTypeAlbumMakeKeyPhoto, _PXAssetActionTypeClearRecentlyShared, 
-                       _PXAssetActionTypeClearRecentlyViewed, _PXAssetActionTypeCompositeVideo, 
-                       _PXAssetActionTypeCopy, _PXAssetActionTypeCopyAdjustments, 
-                       _PXAssetActionTypeCopyAdjustmentsSkippingOptions, _PXAssetActionTypeDelete, 
-                       _PXAssetActionTypeDuplicate, _PXAssetActionTypeEditAudioMixMode, 
+                       _PXAppIntentsAddURLNavigationPerformerDependency, _PXAppIntentsAssetsActionDidFinishNotification, 
+                       _PXAppIntentsAssetsMediaTypeNSErrorKey, _PXAppIntentsEngagementDonateSearchEvent, 
+                       _PXAppIntentsNSErrorDomain, _PXAppIntentsNumberOfAssetsNSErrorKey, 
+                       _PXAppIntentsRegisterViewAnnotationDelegate, _PXAppIntentsUnregisterViewAnnotationDelegate, 
+                       _PXAppleMusicCapabilityStatusDescription, _PXAppleMusicCurationCategories, 
+                       _PXAppleMusicMediaProviderErrorDomain, _PXAppleMusicPlayerControllerErrorDomain, 
+                       _PXApplicationVisibilityStateDescription, _PXAssetActionTypeAddToAlbum, 
+                       _PXAssetActionTypeAddToAlbumStream, _PXAssetActionTypeAddToLastUsedAlbum, 
+                       _PXAssetActionTypeAddToLibrary, _PXAssetActionTypeAlbumMakeKeyPhoto, 
+                       _PXAssetActionTypeClearRecentlyShared, _PXAssetActionTypeClearRecentlyViewed, 
+                       _PXAssetActionTypeCompositeVideo, _PXAssetActionTypeCopy, 
+                       _PXAssetActionTypeCopyAdjustments, _PXAssetActionTypeCopyAdjustmentsSkippingOptions, 
+                       _PXAssetActionTypeDelete, _PXAssetActionTypeDuplicate, _PXAssetActionTypeEditAudioMixMode, 
                        _PXAssetActionTypeEditDateTime, _PXAssetActionTypeEditDisableAutoEnhance, 
                        _PXAssetActionTypeEditEnableAutoEnhance, _PXAssetActionTypeEditLocation, 
                        _PXAssetActionTypeEditPlaybackRate, _PXAssetActionTypeEditRotateLeft, 
@@ -10653,8 +10646,8 @@ exports:
                        _PXPresentAssistantForContext, _PXPresentFailureWithLocalizedTitle, 
                        _PXPresentationEnvironmentForSender, _PXProgrammaticNavigationCloudIdentifierForURLQueryValues, 
                        _PXProgrammaticNavigationDestinationRevealModeDescription, 
-                       _PXProgrammaticNavigationDestinationTypeDescription, _PXProgrammaticNavigationIsSearchQueryURL, 
-                       _PXProgrammaticNavigationLastParticipantOnRouteToDestinationMatching, 
+                       _PXProgrammaticNavigationDestinationTypeDescription, _PXProgrammaticNavigationErrorDomain, 
+                       _PXProgrammaticNavigationIsSearchQueryURL, _PXProgrammaticNavigationLastParticipantOnRouteToDestinationMatching, 
                        _PXProgrammaticNavigationLocalIdentifierForCloudIdentifier, 
                        _PXProgrammaticNavigationPathComponentsForURLComponents, _PXProgrammaticNavigationQueryValuesForComponents, 
                        _PXProgrammaticNavigationRequestExecute, _PXProgrammaticNavigationResultDescription, 
@@ -12206,7 +12199,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIFoundation.framework/Versions/A/PhotosUIFoundation'
-current-version: 751.0.104
+current-version: 760.6.150
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -13622,7 +13615,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Tungsten.framework/Versions/A/Tungsten'
-current-version: 751.0.104
+current-version: 760.6.150
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2333.22.13
+current-version: 2333.50.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -88,9 +88,10 @@ exports:
                        __SIDirectoryStoreIterate, __SIFilterValidatedCSImports, __SIFlushAndSyncIndex, 
                        __SIGetAllOids, __SIGetDocumentCount, __SIGetErrorString, 
                        __SIGetFieldNameForId, __SIGetFileOptions, __SIGetIndexCount, 
-                       __SIGetLastUsedDate, __SIGetMissingParentOID, __SIGetRecoverTimeStamp, 
-                       __SIIssueBadIndex, __SIIssueCacheCleanup, __SIIssueCompact, 
-                       __SIIssueDefrag, __SIIssueFlush, __SIIssueFullMerge, __SIIssueFullMergeWithGroup, 
+                       __SIGetLastUsedDate, __SIGetMeAliasName, __SIGetMeNameTokens, 
+                       __SIGetMissingParentOID, __SIGetRecoverTimeStamp, __SIIssueBadIndex, 
+                       __SIIssueCacheCleanup, __SIIssueCompact, __SIIssueDefrag, 
+                       __SIIssueFlush, __SIIssueFullMerge, __SIIssueFullMergeWithGroup, 
                        __SIIssueLiveQueryDump, __SIIssueMerge, __SIIssueRecovery, 
                        __SIIssueSchedulerDump, __SIIssueSizeRepair, __SIIssueSplit, 
                        __SIIssueVerify, __SIMinimizeDiskSpace, __SIOpenIndexFilesForMerge, 
@@ -100,10 +101,13 @@ exports:
                        __SIScheduleOperation, __SIScheduleOperationPostIndexUpdate, 
                        __SISchedulerCopyDump, __SISetAssertedJournalNum, __SISetContactsIndex, 
                        __SISetCoreSpotlightCopyBundleRemapCallback, __SISetCoreSpotlightRelatedItemCallback, 
-                       __SISetFileOptions, __SISetGetLockStateCallback, __SISetKnownContactEmailMapping, 
-                       __SISetLastUsedDate, __SISetMeEmailAddresses, __SISetPriority, 
-                       __SISetProtectionClass, __SISetQueryBehavior, __SISetTurboMode, 
-                       __SISetVectorIndexDropCallback, __SIStartPreheatScheduler, 
+                       __SISetDerivedFromToIsMeAliasAdded, __SISetDerivedFromToIsMeAliasUpdated, 
+                       __SISetDerivedFromToIsMeNameAdded, __SISetDerivedFromToIsMeNameUpdated, 
+                       __SISetDuplicateOidsCheckSuspendState, __SISetFileOptions, 
+                       __SISetGetLockStateCallback, __SISetKnownContactEmailMapping, 
+                       __SISetLastUsedDate, __SISetMeEmailAddresses, __SISetMeNames, 
+                       __SISetPriority, __SISetProtectionClass, __SISetQueryBehavior, 
+                       __SISetTurboMode, __SISetVectorIndexDropCallback, __SIStartPreheatScheduler, 
                        __SITemporarilyChangeProtectionClass, __SITermIndexIterate, 
                        __SITransferBundles, __SITriggerReopenIndex, __SIValidateActivityJournal, 
                        __SIValidateVectors, _check_crash_state, _compress_data_to_file, 

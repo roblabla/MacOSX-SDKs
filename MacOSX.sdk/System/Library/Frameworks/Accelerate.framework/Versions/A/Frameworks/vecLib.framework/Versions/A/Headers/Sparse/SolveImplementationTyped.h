@@ -20,7 +20,7 @@ extern "C" {
 
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseMatrix) _SPARSE_VARIANT(_SparseConvertFromCoordinate)
-(int m, int n, long nBlock, uint8_t blockSize, SparseAttributes_t attributes, const int *row,
+(int m, int n, long nBlock, uint8_t blockSize, _SPARSE_ATTRIBUTES attributes, const int *row,
  const int *col, const _SPARSE_IMPLEMENTATION_TYPE *val, char *storage, int *workspace);
 
 #if defined __SPARSE_TYPES_H
@@ -29,7 +29,12 @@ API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 #endif /* defined __SPARSE_TYPES_H */
 
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
-extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumericFactorSymmetric)
+extern _SPARSE_VARIANT(SparseOpaqueFactorization)
+#ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+_SPARSE_VARIANT(_SparseNumericFactorSymmetric)
+#else
+_SPARSE_VARIANT(_SparseNumericFactorHermitian)
+#endif
 (SparseOpaqueSymbolicFactorization *symbolicFactor,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  const SparseNumericFactorOptions *options,
@@ -44,8 +49,21 @@ extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumeric
  void *factorStorage,
  void *workspace);
 
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) )
+extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumericFactorLU)
+(SparseOpaqueSymbolicFactorization *symbolicFactor,
+ const _SPARSE_VARIANT(SparseMatrix) *Matrix,
+ const SparseNumericFactorOptions *options,
+ void *factorStorage,
+ void *workspace);
+
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
-extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFactorSymmetric)
+extern _SPARSE_VARIANT(SparseOpaqueFactorization)
+#ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+_SPARSE_VARIANT(_SparseFactorSymmetric)
+#else
+_SPARSE_VARIANT(_SparseFactorHermitian)
+#endif
 (SparseFactorization_t factorType,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  const SparseSymbolicFactorOptions *sfoptions,
@@ -58,8 +76,20 @@ extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFactorQ
  const SparseSymbolicFactorOptions *sfoptions,
  const SparseNumericFactorOptions *nfoptions);
 
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) )
+extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFactorLU)
+(SparseFactorization_t factorType,
+ const _SPARSE_VARIANT(SparseMatrix) *Matrix,
+ const SparseSymbolicFactorOptions *sfoptions,
+ const SparseNumericFactorOptions *nfoptions);
+
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
-extern void _SPARSE_VARIANT(_SparseRefactorSymmetric)
+extern void
+#ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+_SPARSE_VARIANT(_SparseRefactorSymmetric)
+#else
+_SPARSE_VARIANT(_SparseRefactorHermitian)
+#endif
 (const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  _SPARSE_VARIANT(SparseOpaqueFactorization) *Factorization,
  const SparseNumericFactorOptions *nfoptions,
@@ -71,6 +101,20 @@ extern void _SPARSE_VARIANT(_SparseRefactorQR)
  _SPARSE_VARIANT(SparseOpaqueFactorization) *Factorization,
  const SparseNumericFactorOptions *nfoptions,
  void *workspace);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) )
+extern void _SPARSE_VARIANT(_SparseRefactorLU)
+(const _SPARSE_VARIANT(SparseMatrix) *Matrix,
+ _SPARSE_VARIANT(SparseOpaqueFactorization) *Factorization,
+ const SparseNumericFactorOptions *nfoptions,
+ void *workspace);
+
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) ) 
+extern void _SPARSE_VARIANT(_SparseUpdatePartialRefactorLU)
+(_SPARSE_VARIANT(SparseOpaqueFactorization) *Opaque,
+ int updateCount,
+ const int *updatedIndices,
+ _SPARSE_VARIANT(SparseMatrix) newMatrix);
 
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseMultiplySubfactor)
@@ -276,7 +320,7 @@ void _SPARSE_VARIANT(_SparseSubFactorGetDimn)(_SPARSE_VARIANT(SparseOpaqueSubfac
 
 static inline SPARSE_PUBLIC_INTERFACE
 _SPARSE_VARIANT(SparseMatrix) SparseConvertFromCoordinate(
-    int rowCount, int columnCount, long blockCount, uint8_t blockSize, SparseAttributes_t attributes,
+    int rowCount, int columnCount, long blockCount, uint8_t blockSize, _SPARSE_ATTRIBUTES attributes,
     const int *_Nonnull row, const int *_Nonnull column, const _SPARSE_IMPLEMENTATION_TYPE *_Nonnull data) {
   SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions;
   SPARSE_PARAMETER_CHECK(rowCount>=0, _SPARSE_VARIANT(_SparseNullMatrix),
@@ -307,7 +351,7 @@ _SPARSE_VARIANT(SparseMatrix) SparseConvertFromCoordinate(
 
 static inline SPARSE_PUBLIC_INTERFACE
 _SPARSE_VARIANT(SparseMatrix) SparseConvertFromCoordinate(int rowCount,
-    int columnCount, long blockCount, uint8_t blockSize, SparseAttributes_t attributes,
+    int columnCount, long blockCount, uint8_t blockSize, _SPARSE_ATTRIBUTES attributes,
     const int *_Nonnull row, const int *_Nonnull column, const _SPARSE_IMPLEMENTATION_TYPE *_Nonnull data,
     void *_Nonnull storage, void *_Nonnull workspace) {
   SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions;
@@ -416,21 +460,75 @@ void SparseMultiplyAdd(_SPARSE_IMPLEMENTATION_TYPE alpha, _SPARSE_VARIANT(Sparse
  ******************************************************************************/
 
 static inline SPARSE_PUBLIC_INTERFACE _SPARSE_VARIANT(SparseMatrix) SparseGetTranspose(_SPARSE_VARIANT(SparseMatrix) Matrix) {
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+  // if the matrix is marked as conjugate transposed, cannot perform transpose, since the net result is only conjugate
+  SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions; // We need default error reporting until we verify valid factor
+  SPARSE_PARAMETER_CHECK(!(Matrix.structure.attributes.transpose && Matrix.structure.attributes.conjugate_transpose), Matrix,
+                         "Cannot transpose matrix marked as conjugate transposed\n");
+  Matrix.structure.attributes.conjugate_transpose = false;
+#endif
   Matrix.structure.attributes.transpose = !Matrix.structure.attributes.transpose;
   return Matrix;
 }
-
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+static inline SPARSE_PUBLIC_INTERFACE _SPARSE_VARIANT(SparseMatrix) SparseGetConjugateTranspose(_SPARSE_VARIANT(SparseMatrix) Matrix) {
+  // if the matrix is marked as transposed, cannot perform conjugate transpose, since the net result is only conjugate
+  SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions; // We need default error reporting until we verify valid factor
+  SPARSE_PARAMETER_CHECK(!(Matrix.structure.attributes.transpose && !Matrix.structure.attributes.conjugate_transpose), Matrix,
+                         "Cannot conjugate transpose matrix marked as transposed\n");
+  Matrix.structure.attributes.conjugate_transpose = true;
+  Matrix.structure.attributes.transpose = !Matrix.structure.attributes.transpose;
+  return Matrix;
+}
+#endif
 static inline SPARSE_PUBLIC_INTERFACE _SPARSE_VARIANT(SparseOpaqueFactorization) SparseGetTranspose(_SPARSE_VARIANT(SparseOpaqueFactorization) Factor) {
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+  // if the factor is marked as conjugate transposed, cannot perform transpose, since the net result is only conjugate
+  SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions; // We need default error reporting until we verify valid factor
+  SPARSE_PARAMETER_CHECK(!(Factor.attributes.transpose && Factor.attributes.conjugate_transpose), Factor,
+                         "Cannot transpose factor marked as conjugate transposed\n");
+  Factor.attributes.conjugate_transpose = false;
+#endif
   Factor.attributes.transpose = !Factor.attributes.transpose;
   _SPARSE_VARIANT(_SparseRetainNumeric)(&Factor); // we're taking an additional reference
   return Factor;
 }
-
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+static inline SPARSE_PUBLIC_INTERFACE _SPARSE_VARIANT(SparseOpaqueFactorization) SparseGetConjugateTranspose(_SPARSE_VARIANT(SparseOpaqueFactorization) Factor) {
+  // if the factor is marked as transposed, cannot perform conjugate transpose, since the net result is only conjugate
+  SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions; // We need default error reporting until we verify valid factor
+  SPARSE_PARAMETER_CHECK(!(Factor.attributes.transpose && !Factor.attributes.conjugate_transpose), Factor,
+                         "Cannot conjugate transpose factor marked as transposed\n");
+  Factor.attributes.conjugate_transpose = true;
+  Factor.attributes.transpose = !Factor.attributes.transpose;
+  _SPARSE_VARIANT(_SparseRetainNumeric)(&Factor); // we're taking an additional reference
+  return Factor;
+}
+#endif
 static inline SPARSE_PUBLIC_INTERFACE _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseGetTranspose(_SPARSE_VARIANT(SparseOpaqueSubfactor) Subfactor) {
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+  // if the subfactor is marked as conjugate transposed, cannot perform transpose, since the net result is only conjugate
+  SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions; // We need default error reporting until we verify valid factor
+  SPARSE_PARAMETER_CHECK(!(Subfactor.attributes.transpose && Subfactor.attributes.conjugate_transpose), Subfactor,
+                         "Cannot transpose factor marked as conjugate transposed\n");
+  Subfactor.attributes.conjugate_transpose = false;
+#endif
   Subfactor.attributes.transpose = !Subfactor.attributes.transpose;
   _SPARSE_VARIANT(_SparseRetainNumeric)(&Subfactor.factor); // we're taking an additional reference
   return Subfactor;
 }
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+static inline SPARSE_PUBLIC_INTERFACE _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseGetConjugateTranspose(_SPARSE_VARIANT(SparseOpaqueSubfactor) Subfactor) {
+  // if the subfactor is marked as transposed, cannot perform conjugate transpose, since the net result is only conjugate
+  SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions; // We need default error reporting until we verify valid factor
+  SPARSE_PARAMETER_CHECK(!(Subfactor.attributes.transpose && !Subfactor.attributes.conjugate_transpose), Subfactor,
+                         "Cannot conjugate transpose factor marked as transposed\n");
+  Subfactor.attributes.conjugate_transpose = true;
+  Subfactor.attributes.transpose = !Subfactor.attributes.transpose;
+  _SPARSE_VARIANT(_SparseRetainNumeric)(&Subfactor.factor); // we're taking an additional reference
+  return Subfactor;
+}
+#endif
 
 /******************************************************************************
  *  Sparse Factor Functions
@@ -454,11 +552,25 @@ _SPARSE_VARIANT(SparseOpaqueFactorization) SparseFactor(SparseFactorization_t ty
     case SparseFactorizationCholeskyAtA:
     case SparseFactorizationQR:
       return _SPARSE_VARIANT(_SparseFactorQR)(type, &Matrix, &options, &nfoptions);
+#if !0
+    case SparseFactorizationLU:
+    case SparseFactorizationLUUnpivoted:
+    case SparseFactorizationLUSPP:
+    case SparseFactorizationLUTPP:
+      return _SPARSE_VARIANT(_SparseFactorLU)(type, &Matrix, &options, &nfoptions);
+#endif // !TARGET_OS_BRIDGE
     default:
+#if (defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL) || 0
       SPARSE_PARAMETER_CHECK(Matrix.structure.attributes.kind == SparseSymmetric,
                              _SPARSE_VARIANT(_SparseFailedFactor)(SparseParameterError),
-                             "Cannot perform symmetric matrix factorization of non-square matrix.\n");
+                             "Cannot perform symmetric matrix factorization of non-symmetric matrix.\n");
       return _SPARSE_VARIANT(_SparseFactorSymmetric)(type, &Matrix, &options, &nfoptions);
+#else
+      SPARSE_PARAMETER_CHECK(Matrix.structure.attributes.kind == SparseHermitian,
+                             _SPARSE_VARIANT(_SparseFailedFactor)(SparseParameterError),
+                             "Cannot perform Hermitian matrix factorization of non-Hermitian matrix.\n");
+      return _SPARSE_VARIANT(_SparseFactorHermitian)(type, &Matrix, &options, &nfoptions);
+#endif
   }
 }
 
@@ -494,19 +606,19 @@ _SPARSE_VARIANT(SparseOpaqueFactorization) SparseFactor(SparseOpaqueSymbolicFact
   bool userFactorStorage = (factorStorage != NULL);
   bool userWorkspace     = (workspace != NULL);
   if(!userFactorStorage) {
-    factorStorage = options.malloc(_SPARSE_VARIANT(symbolicFactor.factorSize));
+    factorStorage = options.malloc(_SPARSE_REAL_SIZE(symbolicFactor.factorSize));
     SPARSE_PARAMETER_CHECK(factorStorage != NULL,
                            _SPARSE_VARIANT(_SparseFailedFactor)(SparseInternalError),
                            "Failed to allocate factor storage of size %ld bytes.",
-                           _SPARSE_VARIANT(symbolicFactor.factorSize));
+                           _SPARSE_REAL_SIZE(symbolicFactor.factorSize));
   }
   if(!userWorkspace) {
-    workspace = options.malloc(_SPARSE_VARIANT(symbolicFactor.workspaceSize));
+    workspace = options.malloc(_SPARSE_REAL_SIZE(symbolicFactor.workspaceSize));
     if(!workspace && !userFactorStorage) options.free(factorStorage);
     SPARSE_PARAMETER_CHECK(workspace != NULL,
                            _SPARSE_VARIANT(_SparseFailedFactor)(SparseInternalError),
                            "Failed to allocate workspace of size %ld bytes.",
-                           _SPARSE_VARIANT(symbolicFactor.workspaceSize));
+                           _SPARSE_REAL_SIZE(symbolicFactor.workspaceSize));
   }
   _SPARSE_VARIANT(SparseOpaqueFactorization) result;
   switch(symbolicFactor.type) {
@@ -514,9 +626,20 @@ _SPARSE_VARIANT(SparseOpaqueFactorization) SparseFactor(SparseOpaqueSymbolicFact
     case SparseFactorizationQR:
       result = _SPARSE_VARIANT(_SparseNumericFactorQR)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
       break;
-
+#if !0
+    case SparseFactorizationLU:
+    case SparseFactorizationLUUnpivoted:
+    case SparseFactorizationLUSPP:
+    case SparseFactorizationLUTPP:
+      result = _SPARSE_VARIANT(_SparseNumericFactorLU)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+      break;
+#endif // !TARGET_OS_BRIDGE
     default:
+#ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
       result = _SPARSE_VARIANT(_SparseNumericFactorSymmetric)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+#else
+      result = _SPARSE_VARIANT(_SparseNumericFactorHermitian)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+#endif
   }
   result.userFactorStorage = userFactorStorage; // Flag whether we should free memory on destruction or not
   if(!userWorkspace) options.free(workspace); // If we allocated workspace, free it
@@ -674,12 +797,12 @@ void SparseRefactor(_SPARSE_VARIANT(SparseMatrix) Matrix, _SPARSE_VARIANT(Sparse
                                      /* no result */,
                                      "Factorization does not hold a valid symbolic matrix factorization.\n");
   options = _SparseGetOptionsFromSymbolicFactor(&Factorization->symbolicFactorization);
-  void *workspace = options.malloc(_SPARSE_VARIANT(Factorization->symbolicFactorization.workspaceSize));
+  void *workspace = options.malloc(_SPARSE_REAL_SIZE(Factorization->symbolicFactorization.workspaceSize));
   if(!workspace) Factorization->status = SparseInternalError;
   SPARSE_PARAMETER_CHECK(workspace,
                          /* no return value */,
                          "Failed to allocate workspace of size %ld.",
-                         _SPARSE_VARIANT(Factorization->symbolicFactorization.workspaceSize));
+                         _SPARSE_REAL_SIZE(Factorization->symbolicFactorization.workspaceSize));
 
   SparseRefactor(Matrix, Factorization, nfoptions, workspace);
   options.free(workspace);
@@ -704,8 +827,43 @@ void SparseRefactor(_SPARSE_VARIANT(SparseMatrix) Matrix, _SPARSE_VARIANT(Sparse
     case SparseFactorizationQR:
       _SPARSE_VARIANT(_SparseRefactorQR)(&Matrix, Factored, &nfoptions, workspace);
       break;
+#if !0
+    case SparseFactorizationLU:
+    case SparseFactorizationLUUnpivoted:
+    case SparseFactorizationLUSPP:
+    case SparseFactorizationLUTPP:
+      _SPARSE_VARIANT(_SparseRefactorLU)(&Matrix, Factored, &nfoptions, workspace);
+      break;
+#endif // !TARGET_OS_BRIDGE
     default:
+#ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
       _SPARSE_VARIANT(_SparseRefactorSymmetric)(&Matrix, Factored, &nfoptions, workspace);
+#else
+      _SPARSE_VARIANT(_SparseRefactorHermitian)(&Matrix, Factored, &nfoptions, workspace);
+#endif
+  }
+}
+
+/******************************************************************************
+ *  Sparse Update Functions
+ ******************************************************************************/
+static inline SPARSE_PUBLIC_INTERFACE
+void SparseUpdateFactor(SparseUpdate_t updateAlgorithm,
+                        _SPARSE_VARIANT(SparseOpaqueFactorization) *_Nonnull Factorization,
+                        int updateCount,
+                        const int *_Nonnull updatedIndices,
+                        _SPARSE_VARIANT(SparseMatrix) Update) {
+  SparseSymbolicFactorOptions options = _SparseDefaultSymbolicFactorOptions; // We need default error reporting until we verify valid factor
+  SPARSE_CHECK_MATCH_SYMB_FACTOR(Update, Factorization->symbolicFactorization, /* no result */);
+  switch(Factorization->symbolicFactorization.type) {
+    case SparseFactorizationLUUnpivoted:
+    case SparseFactorizationLUSPP:
+    case SparseFactorizationLUTPP:
+      _SPARSE_VARIANT(_SparseUpdatePartialRefactorLU)(Factorization, updateCount, updatedIndices, Update);
+      break;
+    default:
+      Factorization->status = SparseParameterError;
+      SPARSE_PARAMETER_CHECK(false, /* no result */, "SparseUpdate is only supported on LU factorizations");
   }
 }
 
@@ -726,7 +884,7 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseCreateSubfactor(SparseSubfactor_t s
                          "Bad factor.\n");
   options = _SparseGetOptionsFromSymbolicFactor(&Factor.symbolicFactorization);
   // Check user is requesting a valid combination of subfactor and Factor
-  SparseAttributes_t attributes = {
+  _SPARSE_ATTRIBUTES attributes = {
     .transpose = false,
     .triangle = SparseLowerTriangle,
     .kind = SparseOrdinary,
@@ -737,9 +895,18 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseCreateSubfactor(SparseSubfactor_t s
       break; // Valid for all factor types
 
     case SparseSubfactorL:
+      // Valid for Cholesky and LDL^T only
+      attributes.kind = SparseTriangular;
+      SPARSE_PARAMETER_CHECK(type == SparseFactorizationCholesky ||
+                             type == SparseFactorizationLDLTUnpivoted ||
+                             type == SparseFactorizationLDLTSBK ||
+                             type == SparseFactorizationLDLTTPP,
+                             _SPARSE_VARIANT(_SparseInvalidSubfactor)(),
+                             "Subfactor Type only valid for Cholesky and LDL^T factorizations.\n");
+      break;
+
     case SparseSubfactorPLPS:
       // Valid for Cholesky and LDL^T only
-      attributes.kind = (subfactor==SparseSubfactorPLPS) ? SparseOrdinary : SparseTriangular;
       SPARSE_PARAMETER_CHECK(type == SparseFactorizationCholesky ||
                              type == SparseFactorizationLDLTUnpivoted ||
                              type == SparseFactorizationLDLTSBK ||
@@ -749,6 +916,26 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseCreateSubfactor(SparseSubfactor_t s
       break;
 
     case SparseSubfactorS:
+      // Valid for LDL^T only
+      SPARSE_PARAMETER_CHECK(type == SparseFactorizationLDLTUnpivoted ||
+                             type == SparseFactorizationLDLTSBK ||
+                             type == SparseFactorizationLDLTTPP,
+                             _SPARSE_VARIANT(_SparseInvalidSubfactor)(),
+                             "Subfactor Type only valid for LDL^T factorization.\n");
+      break;
+
+#if !0
+    case SparseSubfactorSr:
+    case SparseSubfactorSc:
+      // Valid for LDL^T only
+      SPARSE_PARAMETER_CHECK(type == SparseFactorizationLUUnpivoted ||
+                             type == SparseFactorizationLUSPP ||
+                             type == SparseFactorizationLUTPP,
+                             _SPARSE_VARIANT(_SparseInvalidSubfactor)(),
+                             "Subfactor Type only valid for LU factorization.\n");
+      break;
+#endif // !TARGET_OS_BRIDGE
+
     case SparseSubfactorD:
       // Valid for LDL^T only
       SPARSE_PARAMETER_CHECK(type == SparseFactorizationLDLTUnpivoted ||
@@ -759,10 +946,16 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseCreateSubfactor(SparseSubfactor_t s
       break;
 
     case SparseSubfactorQ:
-      // Valid for QR only
-      SPARSE_PARAMETER_CHECK(type == SparseFactorizationQR,
+      // Valid for QR or LU only
+      SPARSE_PARAMETER_CHECK(type == SparseFactorizationQR
+#if !0
+                             || type == SparseFactorizationLUUnpivoted
+                             || type == SparseFactorizationLUSPP
+                             || type == SparseFactorizationLUTPP
+#endif // !TARGET_OS_BRIDGE
+                             ,
                              _SPARSE_VARIANT(_SparseInvalidSubfactor)(),
-                             "SparseSubfactorQ only valid for QR factorizations.\n");
+                             "SparseSubfactorQ only valid for QR or LU factorizations.\n");
       break;
 
     case SparseSubfactorR:
@@ -1110,10 +1303,18 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method, _SPARSE_VARIAN
         ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           if(accumulate) {
             if(trans==CblasNoTrans) SparseMultiplyAdd(A, X_, Y);
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+            else                    SparseMultiplyAdd(SparseGetConjugateTranspose(A), X_, Y);
+#else
             else                    SparseMultiplyAdd(SparseGetTranspose(A), X_, Y);
+#endif
           } else {
             if(trans==CblasNoTrans) SparseMultiply(A, X_, Y);
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+            else                    SparseMultiply(SparseGetConjugateTranspose(A), X_, Y);
+#else
             else                    SparseMultiply(SparseGetTranspose(A), X_, Y);
+#endif
           }
         }, NULL);
     default:
@@ -1274,10 +1475,18 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method, _SPARSE_VARIAN
       ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
         if(accumulate) {
           if(trans==CblasNoTrans) SparseMultiplyAdd(A, X_, Y);
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+          else                    SparseMultiplyAdd(SparseGetConjugateTranspose(A), X_, Y);
+#else
           else                    SparseMultiplyAdd(SparseGetTranspose(A), X_, Y);
+#endif
         } else {
           if(trans==CblasNoTrans) SparseMultiply(A, X_, Y);
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+          else                    SparseMultiply(SparseGetConjugateTranspose(A), X_, Y);
+#else
           else                    SparseMultiply(SparseGetTranspose(A), X_, Y);
+#endif
         }
       }, &P);
       break;
@@ -1345,14 +1554,22 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method, _SPARSE_VARIAN
     case _SparseMethodLSMR:
       return _SPARSE_VARIANT(_SparseLSMRSolve)(&method.options.lsmr, &X, &B,
         ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
-          if(accumulate) {
-            if(trans==CblasNoTrans) SparseMultiplyAdd(A, X_, Y);
-            else                    SparseMultiplyAdd(SparseGetTranspose(A), X_, Y);
-          } else {
-            if(trans==CblasNoTrans) SparseMultiply(A, X_, Y);
-            else                    SparseMultiply(SparseGetTranspose(A), X_, Y);
-          }
-        }, &Preconditioner);
+        if(accumulate) {
+          if(trans==CblasNoTrans) SparseMultiplyAdd(A, X_, Y);
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+          else                    SparseMultiplyAdd(SparseGetConjugateTranspose(A), X_, Y);
+#else
+          else                    SparseMultiplyAdd(SparseGetTranspose(A), X_, Y);
+#endif
+        } else {
+          if(trans==CblasNoTrans) SparseMultiply(A, X_, Y);
+#if !defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL && !0
+          else                    SparseMultiply(SparseGetConjugateTranspose(A), X_, Y);
+#else
+          else                    SparseMultiply(SparseGetTranspose(A), X_, Y);
+#endif
+        }
+    }, &Preconditioner);
     default:
       __builtin_unreachable(); // All options considered above.
   }

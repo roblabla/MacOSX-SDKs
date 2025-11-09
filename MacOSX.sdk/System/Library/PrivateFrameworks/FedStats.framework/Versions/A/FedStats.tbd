@@ -38,8 +38,9 @@ exports:
                        _kFedStatsCombinationTypeStructure, _kFedStatsDataEncoderCollectionKeyPrefix, 
                        _kFedStatsDataEncoderDataType, _kFedStatsDataEncoderMaxVectorDim, 
                        _kFedStatsDataEncoderSampleSize, _kFedStatsGeoHashMap, _kFedStatsGeoHashTypeHashLength, 
-                       _kFedStatsOutOfBoundsCategory, _kFedStatsTokenLocationEntity, 
-                       _kFedStatsTokenNumberEntity, _kFedStatsTokenPersonEntity, 
+                       _kFedStatsOutOfBoundsCategory, _kFedStatsThirdPartyPrefix, 
+                       _kFedStatsTokenLocationEntity, _kFedStatsTokenNumberEntity, 
+                       _kFedStatsTokenPersonEntity, _kFedStatsUseCaseIDMapping, _kFedStatsUseCaseIDUnknownValue, 
                        _kHuffmanBetweenToken, _kSQLQueryCheckColumnNameFormat, _kSQLQueryCheckTableNameFormat, 
                        _kSQLQueryMatchValueInTableColumnFormat, _kSQLQueryPartialMatchValueInTableColumnFormat, 
                        _stringsToDataTypesMap ]

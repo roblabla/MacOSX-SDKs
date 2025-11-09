@@ -48,6 +48,8 @@ exports:
                        '_$s16SiriTimeInternal04DateB14InferenceUtilsO05inferdB5Range4from06anchorD00aE00dB0CSgAJ_AJtFZ', 
                        '_$s16SiriTimeInternal04DateB14InferenceUtilsO06simpleB10Resolution03forD10Components17meridiemSetByUser12allowNearest09referenceD010Foundation0D0VSgAI0dJ0V_S2bAKtFZ', 
                        '_$s16SiriTimeInternal04DateB14InferenceUtilsO14dateComponents03fordB010Foundation0dH0V0aE00dB0C_tFZ', 
+                       '_$s16SiriTimeInternal04DateB14InferenceUtilsO15defaultCalendar10Foundation0H0VvgZ', 
+                       '_$s16SiriTimeInternal04DateB14InferenceUtilsO15defaultCalendar10Foundation0H0VvpZMV', 
                        '_$s16SiriTimeInternal04DateB14InferenceUtilsOMa', '_$s16SiriTimeInternal04DateB14InferenceUtilsOMn', 
                        '_$s16SiriTimeInternal04DateB14InferenceUtilsON', '_$s16SiriTimeInternal05ClockB12SnippetModelV07currentB11StaticTitleSSvM', 
                        '_$s16SiriTimeInternal05ClockB12SnippetModelV07currentB11StaticTitleSSvg', 

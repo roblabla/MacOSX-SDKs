@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsFoundationOS.framework/Versions/A/PreviewsFoundationOS'
-current-version: 22.30.25
+current-version: 22.40.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -2619,6 +2619,13 @@ exports:
                        '_$s20PreviewsFoundationOS34CommandLineArgumentConsumerBuilderV10buildBlockySayAA0defG0VyxGGAGd_tFZ', 
                        '_$s20PreviewsFoundationOS34CommandLineArgumentConsumerBuilderVMa', 
                        '_$s20PreviewsFoundationOS34CommandLineArgumentConsumerBuilderVMn', 
+                       '_$s20PreviewsFoundationOS34ProvidesRemoteDestinationFilePathsMp', 
+                       '_$s20PreviewsFoundationOS34ProvidesRemoteDestinationFilePathsP016remapTransferredh3ForF0yySDyS2SGFTj', 
+                       '_$s20PreviewsFoundationOS34ProvidesRemoteDestinationFilePathsP016remapTransferredh3ForF0yySDyS2SGFTq', 
+                       '_$s20PreviewsFoundationOS34ProvidesRemoteDestinationFilePathsP36pathsForTransferrableArtifactsOnHostSaySSGvgTj', 
+                       '_$s20PreviewsFoundationOS34ProvidesRemoteDestinationFilePathsP36pathsForTransferrableArtifactsOnHostSaySSGvgTq', 
+                       '_$s20PreviewsFoundationOS34ProvidesRemoteDestinationFilePathsPAAE019remappedTransferredh3ForF0yxSDyS2SGF', 
+                       '_$s20PreviewsFoundationOS34ProvidesRemoteDestinationFilePathsTL', 
                        '_$s20PreviewsFoundationOS34_printAgentSymbolTableMappingSizesyyF', 
                        '_$s20PreviewsFoundationOS37RejectTestingLibTemporarily_127569585V5merge3key4left5rightAA30EnvironmentVariableMergeResultOSS_SSSgAJtF', 
                        '_$s20PreviewsFoundationOS37RejectTestingLibTemporarily_127569585VAA31EnvironmentVariableMergeHandlerAAMc', 
@@ -3185,7 +3192,10 @@ exports:
                        '_$sSS20PreviewsFoundationOSE8deleting6prefixS2S_tF', '_$sSS20PreviewsFoundationOSE8rawValueSSvg', 
                        '_$sSS20PreviewsFoundationOSE8rawValueSSvpMV', '_$sSS20PreviewsFoundationOSE8unquotedSSyF', 
                        '_$sSS20PreviewsFoundationOSE9unescapedSSyF', '_$sSS20PreviewsFoundationOSE9uv_sha256SSvg', 
-                       '_$sSS20PreviewsFoundationOSE9uv_sha256SSvpMV', '_$sST20PreviewsFoundationOSE10identified2bySDyqd__7ElementQzGs7KeyPathCyAEqd__G_tSHRd__lF', 
+                       '_$sSS20PreviewsFoundationOSE9uv_sha256SSvpMV', '_$sST20PreviewsFoundationOSAA34ProvidesRemoteDestinationFilePaths7ElementRpzrlE36pathsForTransferrableArtifactsOnHostQrvg', 
+                       '_$sST20PreviewsFoundationOSAA34ProvidesRemoteDestinationFilePaths7ElementRpzrlE36pathsForTransferrableArtifactsOnHostQrvpMV', 
+                       '_$sST20PreviewsFoundationOSAA34ProvidesRemoteDestinationFilePaths7ElementRpzrlE36pathsForTransferrableArtifactsOnHostQrvpQOMQ', 
+                       '_$sST20PreviewsFoundationOSE10identified2bySDyqd__7ElementQzGs7KeyPathCyAEqd__G_tSHRd__lF', 
                        '_$sST20PreviewsFoundationOSE12stableSorted2bySay7ElementQzGSbAE_AEtKXE_tKF', 
                        '_$sST20PreviewsFoundationOSE13concatenatingyAA19ConcatenateSequenceVyxqd__Gqd__STRd__7ElementQyd__AFRtzlF', 
                        '_$sST20PreviewsFoundationOSE13groupElements5usingSDyqd__AA9InhabitedVySayqd_0_GGGqd___AGt7ElementQzXE_tSHRd__r0_lF', 
@@ -3291,6 +3301,8 @@ exports:
                        '_$sSk20PreviewsFoundationOSE7checked7ElementQzSg5IndexQz_tcig', 
                        '_$sSk20PreviewsFoundationOSE7checked7ElementQzSg5IndexQz_tcipMV', 
                        '_$sSk20PreviewsFoundationOSSL7ElementRpzSi5IndexRtzrlE020binarySearchForFirstdE15LessThanOrEqual2toSiSgAC_tF', 
+                       '_$sSk20PreviewsFoundationOSSMRzAA34ProvidesRemoteDestinationFilePaths7ElementSTRpzrlE016remapTransferredh3ForF0yySDyS2SGF', 
+                       '_$sSk20PreviewsFoundationOSSMRzAA34ProvidesRemoteDestinationFilePaths7ElementSTRpzrlE019remappedTransferredh3ForF0ySayADGSDyS2SGF', 
                        '_$sSl20PreviewsFoundationOSAA12TimingRecordV7ElementRtzrlE10totalRangeSNyAC5PointVGvg', 
                        '_$sSl20PreviewsFoundationOSAA12TimingRecordV7ElementRtzrlE10totalRangeSNyAC5PointVGvpMV', 
                        '_$sSl20PreviewsFoundationOSAA12TimingRecordV7ElementRtzrlE17filterWithinRangeySayACGSNyAC5PointVGF', 
