@@ -5,7 +5,8 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
 install-name:    '/usr/lib/swift/libswiftSpatial.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s7Spatial10Scalable3DMp', '_$s7Spatial10Scalable3DP14uniformlyScale2byySd_tFTj', 
                        '_$s7Spatial10Scalable3DP14uniformlyScale2byySd_tFTq', '_$s7Spatial10Scalable3DP15uniformlyScaled2byxSd_tFTj', 
                        '_$s7Spatial10Scalable3DP15uniformlyScaled2byxSd_tFTq', '_$s7Spatial10Scalable3DP5scale2byySo8SPSize3Da_tFTj', 

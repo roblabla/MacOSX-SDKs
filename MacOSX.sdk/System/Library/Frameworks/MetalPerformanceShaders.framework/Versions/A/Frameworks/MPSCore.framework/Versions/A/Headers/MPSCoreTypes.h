@@ -473,9 +473,18 @@ typedef NSArray<NSNumber*> MPSShape;
 
 // A utility function to get the size of an MPSDataType.  This implementation
 // relies upon the specific bit pattern used to encode the type.
+static inline size_t MPSDataTypeBitsCount(MPSDataType t)
+{
+    return (t & 0xFFFF);
+}
+
+
+// A utility function to get the size of an MPSDataType.  This implementation
+// relies upon the specific bit pattern used to encode the type.
+// It assumes bits per element is >= 8.
 static inline size_t MPSSizeofMPSDataType(MPSDataType t)
 {
-    return (t & 0xFFFF) >> 3;
+    return MPSDataTypeBitsCount(t) >> 3;
 }
 
 

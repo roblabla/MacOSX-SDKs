@@ -69,11 +69,13 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 typedef NS_ENUM(uint64_t, MPSGraphDeploymentPlatform)
 {
     /// Deployment platofmr for macOS.
-    MPSGraphDeploymentPlatformMacOS                                        MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0)) MPS_SWIFT_NAME(macOS) = 0L,
+    MPSGraphDeploymentPlatformMacOS             MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0)) MPS_SWIFT_NAME(macOS) = 0L,
     /// Deployment target for iOS.
-    MPSGraphDeploymentPlatformIOS                                          MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0)) MPS_SWIFT_NAME(iOS)   = 1L,
+    MPSGraphDeploymentPlatformIOS               MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0)) MPS_SWIFT_NAME(iOS)   = 1L,
     /// Deployment target for tvOS.
-    MPSGraphDeploymentPlatformTvOS                                         MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0)) MPS_SWIFT_NAME(tvOS)  = 2L,
+    MPSGraphDeploymentPlatformTvOS              MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0)) MPS_SWIFT_NAME(tvOS)  = 2L,
+    /// Deployment target for visionOS.
+    MPSGraphDeploymentPlatformVisionOS          MPS_ENUM_AVAILABLE_STARTING( macos(14.4), ios(17.4), macCatalyst(17.4), tvos(17.4), xros(1.1)) MPS_SWIFT_NAME(visionOS)  = 3L,
 };
 
 

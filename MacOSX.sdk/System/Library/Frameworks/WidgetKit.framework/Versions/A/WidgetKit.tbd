@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 402.22
+current-version: 402.116
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -211,7 +211,7 @@ exports:
                        '_$s9WidgetKit010_AccessoryA10BackgroundVACycfC', '_$s9WidgetKit010_AccessoryA10BackgroundVMa', 
                        '_$s9WidgetKit010_AccessoryA10BackgroundVMn', '_$s9WidgetKit010_AccessoryA10BackgroundVN', 
                        '_$s9WidgetKit010_AccessoryA10BackgroundVSEAAMc', '_$s9WidgetKit010_AccessoryA10BackgroundVSeAAMc', 
-                       '_$s9WidgetKit08InternalA6FamilyO03chsaD0So09CHSWidgetD0Vvg', 
+                       '_$s9WidgetKit07IgnoredA3URL10Foundation0D0Vvg', '_$s9WidgetKit08InternalA6FamilyO03chsaD0So09CHSWidgetD0Vvg', 
                        '_$s9WidgetKit08InternalA6FamilyO03chsaD0So09CHSWidgetD0VvpMV', 
                        '_$s9WidgetKit08InternalA6FamilyO11descriptionSSvg', '_$s9WidgetKit08InternalA6FamilyO11descriptionSSvpMV', 
                        '_$s9WidgetKit08InternalA6FamilyO11systemLargeyA2CmFWC', '_$s9WidgetKit08InternalA6FamilyO11systemSmallyA2CmFWC', 
@@ -373,10 +373,10 @@ exports:
                        '_$s9WidgetKit0A12ViewMetadataV25containsPrivacyRedactionsSbvg', 
                        '_$s9WidgetKit0A12ViewMetadataV25containsPrivacyRedactionsSbvpMV', 
                        '_$s9WidgetKit0A12ViewMetadataV25containsPrivacyRedactionsSbvs', 
-                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvM', 
-                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvg', 
-                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvpMV', 
-                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvs', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbSgvM', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbSgvg', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbSgvpMV', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbSgvs', 
                        '_$s9WidgetKit0A12ViewMetadataV3url10Foundation3URLVSgvM', 
                        '_$s9WidgetKit0A12ViewMetadataV3url10Foundation3URLVSgvg', 
                        '_$s9WidgetKit0A12ViewMetadataV3url10Foundation3URLVSgvpMV', 

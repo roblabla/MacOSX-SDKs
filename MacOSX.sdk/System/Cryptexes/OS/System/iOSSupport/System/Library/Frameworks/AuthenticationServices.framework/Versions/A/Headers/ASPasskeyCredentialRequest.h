@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*! @class This class encapsulates a password assertion request made to a credential provider extension.
+/*! @class This class encapsulates a passkey assertion request made to a credential provider extension.
  */
 AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
 @interface ASPasskeyCredentialRequest : NSObject <ASCredentialRequest>

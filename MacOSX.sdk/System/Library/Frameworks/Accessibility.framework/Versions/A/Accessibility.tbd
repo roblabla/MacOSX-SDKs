@@ -7,15 +7,6 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _AXAnimatedImagesEnabled, _AXAnimatedImagesEnabledDidChangeNotification, 
-                       _AXApplicationFocusDidChange, _AXApplicationFocusItemFrame, 
-                       _AXApplicationFocusItemLabel, _AXNameFromColor, _AXPrefersHorizontalTextLayout, 
-                       _AXPrefersHorizontalTextLayoutDidChangeNotification ]
-    objc-classes:    [ AXBrailleMap, AXCategoricalDataAxisDescriptor, AXCategoricalScale, 
-                       AXChartDescriptor, AXCustomContent, AXDataAnnotation, AXDataPoint, 
-                       AXDataPointValue, AXDataSeriesDescriptor, AXLiveAudioGraph, 
-                       AXNumericDataAxisDescriptor, AXNumericScale, AXScale ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0O12markdownNameSSvgZ', 
                        '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0O4nameSSvgZ', 
                        '_$s10Foundation15AttributeScopesO13AccessibilityE0D10AttributesV010TextCustomB0OAA19AttributedStringKeyADMc', 
@@ -280,7 +271,15 @@ exports:
                        '_$sSo27AXNumericDataAxisDescriptorC13AccessibilityE5rangeSNySdGvpMV', 
                        '_$sSo27AXNumericDataAxisDescriptorC13AccessibilityE5rangeSNySdGvs', 
                        '_$sSo27AXNumericDataAxisDescriptorC13AccessibilityE5title5range17gridlinePositions24valueDescriptionProviderABSS_SNySdGSaySdGSSSdctcfC', 
-                       '_$sSo27AXNumericDataAxisDescriptorC13AccessibilityE5title5range17gridlinePositions24valueDescriptionProviderABSS_SNySdGSaySdGSSSdctcfc' ]
+                       '_$sSo27AXNumericDataAxisDescriptorC13AccessibilityE5title5range17gridlinePositions24valueDescriptionProviderABSS_SNySdGSaySdGSSSdctcfc', 
+                       _AXAnimatedImagesEnabled, _AXAnimatedImagesEnabledDidChangeNotification, 
+                       _AXApplicationFocusDidChange, _AXApplicationFocusItemFrame, 
+                       _AXApplicationFocusItemLabel, _AXNameFromColor, _AXPrefersHorizontalTextLayout, 
+                       _AXPrefersHorizontalTextLayoutDidChangeNotification ]
+    objc-classes:    [ AXBrailleMap, AXCategoricalDataAxisDescriptor, AXCategoricalScale, 
+                       AXChartDescriptor, AXCustomContent, AXDataAnnotation, AXDataPoint, 
+                       AXDataPointValue, AXDataSeriesDescriptor, AXLiveAudioGraph, 
+                       AXNumericDataAxisDescriptor, AXNumericScale, AXScale ]
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AXMFiHearingDevicePairedUUIDs, _AXMFiHearingDevicePairedUUIDsDidChangeNotification, 
                        _AXMFiHearingDeviceStreamingEar, _AXMFiHearingDeviceStreamingEarDidChangeNotification, 

@@ -72,6 +72,9 @@
 #import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialProvider.h>
 #import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialRegistration.h>
 #import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserExternallyAuthenticatableRequest.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredential.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPublicKeyCredentialManager.h>
 #import <AuthenticationServices/ASCOSEConstants.h>
 #import <AuthenticationServices/ASPublicKeyCredential.h>
 
@@ -82,10 +85,6 @@
 #import <AuthenticationServices/ASAuthorizationProviderExtensionRegistrationHandler.h>
 
 #import <AuthenticationServices/ASAuthorizationProviderExtensionUserLoginConfiguration.h>
-
-#import <AuthenticationServices/ASAuthorizationWebBrowserExternallyAuthenticatableRequest.h>
-#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredential.h>
-#import <AuthenticationServices/ASAuthorizationWebBrowserPublicKeyCredentialManager.h>
 
 #import <AuthenticationServices/ASCredentialIdentity.h>
 #import <AuthenticationServices/ASCredentialRequest.h>
@@ -99,6 +98,11 @@
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialAssertionRequest.h>
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider.h>
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialRegistrationRequest.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialAssertionRequest.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialRegistrationRequest.h>
 #import <AuthenticationServices/ASPublicKeyCredentialClientData.h>
 
 #import <AuthenticationServices/ASSettingsHelper.h>
+
+#import <AuthenticationServices/ASWebAuthenticationSessionCallback.h>

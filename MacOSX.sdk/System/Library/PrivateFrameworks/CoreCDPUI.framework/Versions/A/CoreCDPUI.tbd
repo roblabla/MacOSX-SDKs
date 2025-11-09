@@ -16,6 +16,8 @@ exports:
                        '_$s9CoreCDPUI20WalrusSwiftUIFactoryC10cdpContext17viewModelDelegate15contextProviderACSo10CDPContextC_AA026AdvancedDataProtectionViewiJ0_pSo033CDPUIDeviceToDeviceEncryptionFlowG0CSSctcfCTj', 
                        '_$s9CoreCDPUI20WalrusSwiftUIFactoryC10cdpContext17viewModelDelegate15contextProviderACSo10CDPContextC_AA026AdvancedDataProtectionViewiJ0_pSo033CDPUIDeviceToDeviceEncryptionFlowG0CSSctcfCTq', 
                        '_$s9CoreCDPUI20WalrusSwiftUIFactoryC10cdpContext17viewModelDelegate15contextProviderACSo10CDPContextC_AA026AdvancedDataProtectionViewiJ0_pSo033CDPUIDeviceToDeviceEncryptionFlowG0CSSctcfc', 
+                       '_$s9CoreCDPUI20WalrusSwiftUIFactoryC32advancediCloudDataProtectionView0D2UI0J0_pyFTj', 
+                       '_$s9CoreCDPUI20WalrusSwiftUIFactoryC32advancediCloudDataProtectionView0D2UI0J0_pyFTq', 
                        '_$s9CoreCDPUI20WalrusSwiftUIFactoryC39advancediCloudDataProtectionSectionView0D2UI0K0_pyFTj', 
                        '_$s9CoreCDPUI20WalrusSwiftUIFactoryC39advancediCloudDataProtectionSectionView0D2UI0K0_pyFTq', 
                        '_$s9CoreCDPUI20WalrusSwiftUIFactoryC6update8adpStateyAA022AdvancedDataProtectionH0O_tF', 
@@ -47,8 +49,8 @@ exports:
                        '_$s9CoreCDPUI39AdvancedDataProtectionViewModelDelegateP26presentAccountRecoveryFlow2inySo8NSWindowCSg_tFTq', 
                        '_$s9CoreCDPUI39AdvancedDataProtectionViewModelDelegateTL', 
                        _CoreCDPUIVersionNumber, _CoreCDPUIVersionString, __CDPLogSystem, 
-                       __CDPSignpostCreate, __CDPSignpostGetNanoseconds, __CDPSignpostLogSystem, 
-                       _kiCDPLocalizedAlertMessageKey, _kiCDPLocalizedAlertTitleKey ]
+                       __CDPLogSystemAnalytics, __CDPSignpostCreate, __CDPSignpostGetNanoseconds, 
+                       __CDPSignpostLogSystem, _kiCDPLocalizedAlertMessageKey, _kiCDPLocalizedAlertTitleKey ]
     objc-classes:    [ CDPEnrollViewController, CDPEscapeOption, CDPICAWebKitViewController, 
                        CDPOption, CDPPrintBorderView, CDPQuotaStorageAppListRequest, 
                        CDPQuotaStorageAppListWebViewController, CDPRPDConfirmationFlow, 

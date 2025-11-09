@@ -248,6 +248,7 @@ exports:
                        '_$s13TVAppServices6BagKeyO19getWatchListSettingyA2CmFWC', 
                        '_$s13TVAppServices6BagKeyO20appConfigurationPathyA2CmFWC', 
                        '_$s13TVAppServices6BagKeyO22updateWatchListSettingyA2CmFWC', 
+                       '_$s13TVAppServices6BagKeyO25uvSearchNowPlayingEnabledyA2CmFWC', 
                        '_$s13TVAppServices6BagKeyO27maxLocalSettingAgeInSecondsyA2CmFWC', 
                        '_$s13TVAppServices6BagKeyO8languageyA2CmFWC', '_$s13TVAppServices6BagKeyO8rawValueACSgSS_tcfC', 
                        '_$s13TVAppServices6BagKeyO8rawValueSSvg', '_$s13TVAppServices6BagKeyO8rawValueSSvpMV', 

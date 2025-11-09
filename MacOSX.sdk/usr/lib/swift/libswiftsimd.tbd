@@ -10,9 +10,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.11$@rpath/libswiftsimd.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.13$@rpath/libswiftsimd.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.9$@rpath/libswiftsimd.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s4simd10reduce_addySds5SIMD2VySdGF', '_$s4simd10reduce_addySds5SIMD3VySdGF', 
+                       '$ld$install_name$os10.14$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.9$@rpath/libswiftsimd.dylib', 
+                       '_$s4simd10reduce_addySds5SIMD2VySdGF', '_$s4simd10reduce_addySds5SIMD3VySdGF', 
                        '_$s4simd10reduce_addySds5SIMD4VySdGF', '_$s4simd10reduce_addySfs5SIMD2VySfGF', 
                        '_$s4simd10reduce_addySfs5SIMD3VySfGF', '_$s4simd10reduce_addySfs5SIMD4VySfGF', 
                        '_$s4simd10reduce_addys5Int32Vs5SIMD2VyADGF', '_$s4simd10reduce_addys5Int32Vs5SIMD3VyADGF', 

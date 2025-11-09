@@ -1,5 +1,4 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/0032d1ee-80fd-11ee-8227-6aecfccc70fe/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tclvfs/tclvfs/doc/vfs.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2001-2003 Vince Darley <vincentdarley@users.sourceforge.net>
 '\" Copyright (c) 2003 Andreas Kupries <andreas_kupries@users.sourceforge.net>
 '\"

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServices.framework/Versions/A/PreviewsServices'
-current-version: 21.20.7
+current-version: 21.30.32
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -60,6 +60,8 @@ exports:
                        '_$s16PreviewsServices0A22ServiceMessageReceiverTL', '_$s16PreviewsServices0A7ServiceO11descriptionSSvg', 
                        '_$s16PreviewsServices0A7ServiceO11descriptionSSvpMV', '_$s16PreviewsServices0A7ServiceO11processExityA2CmFWC', 
                        '_$s16PreviewsServices0A7ServiceO13crashListeneryA2CmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantO11descriptionSSvg', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantO11descriptionSSvpMV', 
                        '_$s16PreviewsServices0A7ServiceO7VariantO2eeoiySbAE_AEtFZ', 
                        '_$s16PreviewsServices0A7ServiceO7VariantO3macyA2EmFWC', '_$s16PreviewsServices0A7ServiceO7VariantO4hash4intoys6HasherVz_tF', 
                        '_$s16PreviewsServices0A7ServiceO7VariantO7defaultyA2EmFWC', 
@@ -67,7 +69,8 @@ exports:
                        '_$s16PreviewsServices0A7ServiceO7VariantO9hashValueSivpMV', 
                        '_$s16PreviewsServices0A7ServiceO7VariantOMa', '_$s16PreviewsServices0A7ServiceO7VariantOMn', 
                        '_$s16PreviewsServices0A7ServiceO7VariantON', '_$s16PreviewsServices0A7ServiceO7VariantOSHAAMc', 
-                       '_$s16PreviewsServices0A7ServiceO7VariantOSQAAMc', '_$s16PreviewsServices0A7ServiceO7installyA2C7VariantO_tcACmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO7VariantOSQAAMc', '_$s16PreviewsServices0A7ServiceO7VariantOs23CustomStringConvertibleAAMc', 
+                       '_$s16PreviewsServices0A7ServiceO7installyA2C7VariantO_tcACmFWC', 
                        '_$s16PreviewsServices0A7ServiceO7previewyA2C7VariantO_tcACmFWC', 
                        '_$s16PreviewsServices0A7ServiceO9agentPipeyA2C7VariantO_tcACmFWC', 
                        '_$s16PreviewsServices0A7ServiceO9shellPipeyA2C7VariantO_tcACmFWC', 

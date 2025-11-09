@@ -67,6 +67,12 @@ The file coordination mechanism does not always send -relinquishPresentedItemToR
 */
 - (void)accommodatePresentedItemDeletionWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * _Nullable errorOrNil))completionHandler;
 
+/* Given that something in the system is waiting to evict the presented file or directory, do whatever it takes to ensure that the eviction will succeed and that the receiver's application will behave properly when the eviction has happened, and then invoke the completion handler. This must include calling `+[NSFileCoordinator removeFilePresenter:]`. If successful, pass nil to the completion handler. If not successful, or to prevent the eviction of the file, throw an error that encapsulates the reason. Implementations of this method must always invoke the completion handler because other parts of the system will wait until it is invoked or until the user loses patience and cancels the waiting.
+
+If this method is not implemented, eviction will fail.
+*/
+- (void)accommodatePresentedItemEvictionWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(14.4), ios(17.4)) API_UNAVAILABLE(watchos, tvos);
+
 /* Be notified that the file or directory has been moved or renamed, or a directory containing it has been moved or renamed. A typical implementation of this method will cause subsequent invocations of -presentedItemURL to return the new URL.
 
 The new URL may have a different file name extension than the current value of the presentedItemURL property.

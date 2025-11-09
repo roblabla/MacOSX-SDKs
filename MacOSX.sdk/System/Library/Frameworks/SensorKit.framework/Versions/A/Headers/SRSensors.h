@@ -306,4 +306,29 @@ SR_EXTERN SRSensor const SRSensorFaceMetrics API_AVAILABLE(ios(17.0)) API_UNAVAI
  */
 SR_EXTERN SRSensor const SRSensorOdometer API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
+
+/*!
+ * @const SRSensorElectrocardiogram
+ *
+ * @brief
+ * ECG sensor stream
+ *
+ * @discussion
+ * This stream stores samples of the ECG sensor
+ * Fetches from this stream return objects of type \c NSArray<SRElectrocardiogramSample *> *  
+ */
+SR_EXTERN SRSensor const SRSensorElectrocardiogram API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
+
+/*!
+ * @const SRSensorPhotoplethysmogram
+ *
+ * @brief
+ * PPG sensor stream
+ *
+ * @discussion
+ * This stream stores samples of the PPG sensor
+ * Fetches from this stream return objects of type \c NSArray<SRPhotoplethysmogramSample *> *
+ */
+SR_EXTERN SRSensor const SRSensorPhotoplethysmogram API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
+
 NS_ASSUME_NONNULL_END

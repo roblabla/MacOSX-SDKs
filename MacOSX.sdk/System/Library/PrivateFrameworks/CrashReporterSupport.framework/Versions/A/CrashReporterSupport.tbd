@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15122
+current-version: 15125.1
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -100,10 +100,9 @@ exports:
                        _kCRProblemTypePortraitAnalytics, _kCRProblemTypePowerlog, 
                        _kCRProblemTypeServiceWatchdogTimeout, _kCRProblemTypeShutdownStall, 
                        _kCRProblemTypeSleepWakeFailure, _kCRProblemTypeSpin, _kCRProblemTypeSystemInformation, 
-                       _kCRProblemTypeSystemStats, _kCRProblemTypeWakeupsMonitorViolation, 
-                       _kCRProblemTypeWatchdogTimeout, _kCRProblemTypeWirelessDiagnostics, 
-                       _kCRSubmissionPolicyAlternate, _kCRSubmissionPolicyAlways, 
-                       _kCRSubmissionPolicyDefault, _kCRSubmissionPolicyImmediate, 
+                       _kCRProblemTypeSystemStats, _kCRProblemTypeWatchdogTimeout, 
+                       _kCRProblemTypeWirelessDiagnostics, _kCRSubmissionPolicyAlternate, 
+                       _kCRSubmissionPolicyAlways, _kCRSubmissionPolicyDefault, _kCRSubmissionPolicyImmediate, 
                        _kCRSubmissionPolicyNever, _kMsgTracerKeyDomain, _kMsgTracerKeyDomainVersion, 
                        _kMsgTracerKeyMessage, _kMsgTracerKeyResult, _kMsgTracerKeySignature, 
                        _kMsgTracerKeySignature2, _kMsgTracerKeySignature3, _kMsgTracerKeyUUID, 

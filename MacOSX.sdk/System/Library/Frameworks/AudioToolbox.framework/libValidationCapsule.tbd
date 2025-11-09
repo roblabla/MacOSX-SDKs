@@ -155,4 +155,5 @@ exports:
                        __ZTVN11CAAudioUnit7AUStateE, __ZTVN19AUValidationCapsule32AUValidationCapsuleResultHandlerE, 
                        __ZTv0_n24_N11CAExceptionD0Ev, __ZTv0_n24_N11CAExceptionD1Ev, 
                        _validate, _validateWithParametersAsync, _validationCapsuleVersion ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

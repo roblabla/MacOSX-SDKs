@@ -21,12 +21,12 @@ exports:
                        _NINearbyObjectDistanceNotAvailable_Private, _NINearbyObjectElevationNotAvailable, 
                        _NINearbyObjectNbRssiNotAvailable, _NINearbyObjectQuaternionNotAvailable, 
                        _NINearbyObjectRangeBiasEstimateNotAvailable, _NINearbyObjectRangeUncertaintyNotAvailable, 
-                       _NINearbyObjectRemoteTxAntennaMaskNotAvailable, _NINearbyObjectRxStatusNotAvailable, 
-                       _NINearbyObjectSignalStrengthNotAvailable, _NINearbyObjectSignalStrengthNotAvailable_Private, 
-                       _NINearbyObjectWorldPositionNotAvailable, _NINearbyObjectWorldTransformNotAvailable, 
-                       _NINearbyObjectWorldTransformNotAvailable_Private, _NINotifySystemShutdownWithReason, 
-                       _NITruthTagLabelKey, _NITruthTagSourceClientApp, _NITruthTagSourceDirectUserInput, 
-                       _NITruthTagSourceKey, _kNISystemShutdownCompletionTimeoutSeconds ]
+                       _NINearbyObjectRegionBoundaryRangeNotAvailable, _NINearbyObjectRemoteTxAntennaMaskNotAvailable, 
+                       _NINearbyObjectRxStatusNotAvailable, _NINearbyObjectSignalStrengthNotAvailable, 
+                       _NINearbyObjectSignalStrengthNotAvailable_Private, _NINearbyObjectWorldPositionNotAvailable, 
+                       _NINearbyObjectWorldTransformNotAvailable, _NINearbyObjectWorldTransformNotAvailable_Private, 
+                       _NINotifySystemShutdownWithReason, _NITruthTagLabelKey, _NITruthTagSourceClientApp, 
+                       _NITruthTagSourceDirectUserInput, _NITruthTagSourceKey, _kNISystemShutdownCompletionTimeoutSeconds ]
     objc-classes:    [ NIAlgorithmConvergence, NIAlgorithmConvergenceState, NIBluetoothSample, 
                        NICarKeyConfiguration, NICarKeyEventNotifier, NIConfiguration, 
                        NIDevicePresenceConfiguration, NIDevicePresenceNotifier, NIDiscoveryToken, 

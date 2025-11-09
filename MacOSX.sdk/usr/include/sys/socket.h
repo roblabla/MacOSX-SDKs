@@ -416,11 +416,7 @@ struct so_np_extensions {
 struct sockaddr {
 	__uint8_t       sa_len;         /* total length */
 	sa_family_t     sa_family;      /* [XSI] address family */
-#if __has_ptrcheck
-	char            sa_data[__counted_by(sa_len - 2)];
-#else
-	char            sa_data[14];    /* [XSI] addr value (actually smaller or larger) */
-#endif
+	char            sa_data[14];    /* [XSI] addr value */
 };
 __CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct sockaddr, sockaddr);
 

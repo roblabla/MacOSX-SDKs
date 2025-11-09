@@ -149,4 +149,5 @@ exports:
                        DeviceGammaContext.deviceID, DeviceGammaContext.displayContainerID, 
                        DeviceGammaContext.frontALSservice, DeviceGammaContext.numSamples, 
                        DeviceGammaContext.rearALSservice ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

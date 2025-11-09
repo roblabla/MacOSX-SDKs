@@ -5356,7 +5356,7 @@
  *	This is the path to the Updates directory (which comes before
  *	the system perl directory in @INC.
  */
-#define UPDATESLIB		"/Library/Perl/Updates/5.34.0"
+#define UPDATESLIB		"/Library/Perl/Updates/5.34.1"
 
 /* NO_NETWORK_LIBRARY_PERL_FILE:
  *	If this file path exists, the vendor libs (which are the

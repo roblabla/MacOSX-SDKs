@@ -424,6 +424,9 @@ Classes:
   - Selector: 'flushWithRemovalOfDisplayedImage:completionHandler:'
     SwiftName: 'flush(removingDisplayedImage:completionHandler:)'
     MethodKind: Instance
+  - Selector: 'copyDisplayedPixelBuffer'
+    SwiftName: displayedPixelBuffer()
+    MethodKind: Instance
 - Name: AVPlayerItem
   Methods:
   - Selector: 'selectMediaOption:inMediaSelectionGroup:'

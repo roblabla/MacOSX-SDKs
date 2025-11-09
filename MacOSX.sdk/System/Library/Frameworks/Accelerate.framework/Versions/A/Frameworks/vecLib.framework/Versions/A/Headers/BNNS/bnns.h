@@ -2211,6 +2211,13 @@ size_t BNNSNDArrayGetDataSize(const BNNSNDArrayDescriptor *_Nonnull array)
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
+ @abstract Determine the rank of the given layout
+ @return The number of dimensions represented by `layout`, or `SIZE_T_MAX` if unable to determine
+ */
+size_t BNNSDataLayoutGetRank(BNNSDataLayout layout)
+__API_AVAILABLE(macos(14.4), ios(17.4), watchos(10.4), tvos(17.4));
+
+/*!
  @abstract Converts sparse tensor from the standardized COO layout to a device specific sparse layout used by FullyConnected
  @discussion The COO format is similar to that used in tensorflow and described at  https://www.tensorflow.org/guide/sparse_tensor
  - If the developer preallocates the workspace, it must be at least twice the size of the dense input.

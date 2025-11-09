@@ -5,10 +5,13 @@
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
-#import <GameController/GameController.h>
-#import <GameController/GCExtern.h>
-
 #import <Foundation/Foundation.h>
+
+#import <GameController/GCExtern.h>
+#import <GameController/GCDevice.h>
+
+@class GCKeyboard;
+@class GCKeyboardInput;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,7 +38,7 @@ GAMECONTROLLER_EXTERN NSString *const GCKeyboardDidDisconnectNotification API_AV
  @note All connected keyboards are coalesced into one keyboard object, so notification about connection/disconnection will only be delivered once.
  */
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
-@interface GCKeyboard : NSObject<GCDevice>
+@interface GCKeyboard : NSObject <GCDevice>
 
 /**
  Unlike GCController GCKeyboard only has one input profile.

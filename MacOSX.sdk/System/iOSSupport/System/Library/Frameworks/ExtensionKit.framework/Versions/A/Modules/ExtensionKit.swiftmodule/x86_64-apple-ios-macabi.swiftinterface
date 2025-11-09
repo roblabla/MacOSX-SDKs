@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ExtensionKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 141.2
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 145.5.14.4 -module-name ExtensionKit
 import ExtensionFoundation
 @_exported import ExtensionKit
 import Foundation
@@ -13,6 +12,10 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import os.log
 import os
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension ExtensionFoundation.AppExtension where Self.Configuration == ExtensionKit.AppExtensionSceneConfiguration {
+  public static func main() throws
+}
 @available(macOS 13.0, *)
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
@@ -38,10 +41,6 @@ extension ExtensionKit.EXHostViewController {
     get
     set
   }
-}
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension ExtensionFoundation.AppExtension where Self.Configuration == ExtensionKit.AppExtensionSceneConfiguration {
-  public static func main() throws
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct AppExtensionSceneConfiguration : ExtensionFoundation.AppExtensionConfiguration {

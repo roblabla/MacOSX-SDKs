@@ -84,6 +84,7 @@
 #import <AVFoundation/AVUtilities.h>
 #import <AVFoundation/AVVideoCompositing.h>
 #import <AVFoundation/AVVideoComposition.h>
+#import <AVFoundation/AVVideoPerformanceMetrics.h>
 #import <AVFoundation/AVVideoSettings.h>
 #if TARGET_OS_IPHONE && ! TARGET_OS_MACCATALYST
 #import <AVFoundation/AVDisplayCriteria.h>

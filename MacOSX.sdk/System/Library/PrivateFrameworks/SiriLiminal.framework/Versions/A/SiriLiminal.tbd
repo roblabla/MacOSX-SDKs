@@ -25,6 +25,6 @@ exports:
                        SLODLDInputTokenParams, SLODLDProcessor, SLODLDProcessorResult, 
                        SLProgressiveCheckerAnalyzer, SLProgressiveCheckerContext, 
                        SLProgressiveCheckerResult, SLRegexMatcher, SLSentencePieceModule, 
-                       SLUresMitigator, SLUresMitigatorIpFeats, SLUresMitigatorResult, 
-                       SLUtils ]
+                       SLUresMitigator, SLUresMitigatorConfigDecoder, SLUresMitigatorIpFeats, 
+                       SLUresMitigatorResult, SLUtils ]
 ...

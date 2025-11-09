@@ -6,6 +6,9 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s28AIMLExperimentationAnalytics015ExperimentationB0Mp', 
+                       '_$s28AIMLExperimentationAnalytics015ExperimentationB0P11emitTrigger3for9namespace9requestIDySo6NSUUIDC_SSAISgtYaKFTj', 
+                       '_$s28AIMLExperimentationAnalytics015ExperimentationB0P11emitTrigger3for9namespace9requestIDySo6NSUUIDC_SSAISgtYaKFTjTu', 
+                       '_$s28AIMLExperimentationAnalytics015ExperimentationB0P11emitTrigger3for9namespace9requestIDySo6NSUUIDC_SSAISgtYaKFTq', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB0P11emitTrigger3for9requestIDySo6NSUUIDC_AHSgtYaKFTj', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB0P11emitTrigger3for9requestIDySo6NSUUIDC_AHSgtYaKFTjTu', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB0P11emitTrigger3for9requestIDySo6NSUUIDC_AHSgtYaKFTq', 
@@ -25,6 +28,9 @@ exports:
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB0P31cacheTrialExperimentIdentifiers3for10namespacesySo6NSUUIDC_SaySSGtYaKFTjTu', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB0P31cacheTrialExperimentIdentifiers3for10namespacesySo6NSUUIDC_SaySSGtYaKFTq', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB0TL', 
+                       '_$s28AIMLExperimentationAnalytics015ExperimentationB7ManagerC11emitTrigger3for9namespace9requestIDySo6NSUUIDC_SSAISgtYaKFTj', 
+                       '_$s28AIMLExperimentationAnalytics015ExperimentationB7ManagerC11emitTrigger3for9namespace9requestIDySo6NSUUIDC_SSAISgtYaKFTjTu', 
+                       '_$s28AIMLExperimentationAnalytics015ExperimentationB7ManagerC11emitTrigger3for9namespace9requestIDySo6NSUUIDC_SSAISgtYaKFTq', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB7ManagerC11emitTrigger3for9requestIDySo6NSUUIDC_AHSgtYaKFTj', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB7ManagerC11emitTrigger3for9requestIDySo6NSUUIDC_AHSgtYaKFTjTu', 
                        '_$s28AIMLExperimentationAnalytics015ExperimentationB7ManagerC11emitTrigger3for9requestIDySo6NSUUIDC_AHSgtYaKFTq', 

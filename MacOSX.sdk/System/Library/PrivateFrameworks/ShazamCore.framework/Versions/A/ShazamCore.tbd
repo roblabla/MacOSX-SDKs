@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ShazamCore.framework/Versions/A/ShazamCore'
-current-version: 236.12
+current-version: 238.15
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -20,13 +20,13 @@ exports:
                        _SHAnalyticsPayloadSecureAccountKey, _SHAnalyticsPayloadSourceKey, 
                        _SHCampaignTokenDefaultCampaignValue, _SHCoreErrorDomain, 
                        _SHDefaultWorkerTimeout, _SHLookupDefaultMaxAgeValue, _SHRecordingIntermissionDefaultValue, 
-                       _SHShazamKitInternalClientEntitlement, _SHShazamKitTCCEntitlement, 
-                       _SHShazamKitTCCEntitlementMediaLibrary, _SHShazamKitTCCEntitlementMicrophone, 
-                       _sh_log_object ]
-    objc-classes:    [ SHAnalytics, SHBagContract, SHCacheValues, SHCampaignTokens, 
-                       SHCompression, SHCoreError, SHDefaultConfigurationValues, 
+                       _SHRecordingSignatureOffsetDefaultValue, _SHShazamKitInternalClientEntitlement, 
+                       _SHShazamKitTCCEntitlement, _SHShazamKitTCCEntitlementMediaLibrary, 
+                       _SHShazamKitTCCEntitlementMicrophone, _sh_log_object ]
+    objc-classes:    [ SHAMPConfiguration, SHAnalytics, SHBagContract, SHCacheValues, 
+                       SHCampaignTokens, SHCompression, SHCoreError, SHDefaultConfigurationValues, 
                        SHEndpoints, SHEntitlements, SHFeatureFlags, SHHost, SHJSONLFileReader, 
                        SHJSONLFileWriter, SHLocalization, SHMusicSubscriptionStatus, 
                        SHOffers, SHRecorderConfiguration, SHRemoteConfiguration, 
-                       SHStorefront, SHTokenizedURL ]
+                       SHStorefront, SHStreamingProviders, SHTokenizedURL ]
 ...

@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name CreateMLComponents
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1141.60.3
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 1163.100.9.0.1 -module-name CreateMLComponents
 import AVFAudio
 import AVFoundation
 import Accelerate
@@ -662,13 +661,16 @@ extension CreateMLComponents.AnnotatedFeature : Swift.Hashable where Feature : S
 extension CreateMLComponents.AnnotatedFeature : Swift.Sendable where Feature : Swift.Sendable, Annotation : Swift.Sendable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public struct FullyConnectedNetworkRegressorModel<Scalar> : CreateMLComponents.Regressor, Swift.Codable where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint {
+public struct FullyConnectedNetworkRegressorModel<Scalar> : CreateMLComponents.Regressor where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint {
   public typealias Target = Swift.Float
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func applied(to input: CoreML.MLShapedArray<Scalar>, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.FullyConnectedNetworkRegressorModel<Scalar>.Target
   #endif
   public typealias Input = CoreML.MLShapedArray<Scalar>
   public typealias Output = CreateMLComponents.FullyConnectedNetworkRegressorModel<Scalar>.Target
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+extension CreateMLComponents.FullyConnectedNetworkRegressorModel : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -889,15 +891,12 @@ public struct FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label> : Cr
   public typealias Output = CreateMLComponents.ClassificationDistribution<Label>
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
-extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Sendable where Scalar : Swift.Sendable, Label : Swift.Sendable {
-}
-@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
-extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Encodable where Scalar : Swift.Encodable {
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
-extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Decodable where Scalar : Swift.Decodable {
-  public init(from decoder: any Swift.Decoder) throws
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Sendable where Scalar : Swift.Sendable, Label : Swift.Sendable {
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.CustomDebugStringConvertible {
@@ -1331,7 +1330,7 @@ extension CreateMLComponents.RobustScaler.Transformer : Swift.Sendable where Ele
 }
 extension Swift.Sequence where Self.Element : Swift.FloatingPoint {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
   @inlinable internal func mean() -> Self.Element? {
         var sum = 0 as Element
         var lowOrderCompensation: Element = .zero // A running compensation for lost low-order bits.
@@ -1351,7 +1350,7 @@ extension Swift.Sequence where Self.Element : Swift.FloatingPoint {
 }
 extension Swift.Collection where Self.Element : Swift.FloatingPoint {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
   @inlinable internal func mean() -> Self.Element {
         if self.isEmpty {
             return Element.zero
@@ -1359,7 +1358,7 @@ extension Swift.Collection where Self.Element : Swift.FloatingPoint {
         return sum() / Element(count)
     }
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
   @inlinable internal func sum() -> Self.Element {
         // Kahan summation algorithm, which reduces numerical error
         var sum: Element = .zero
@@ -2219,7 +2218,7 @@ extension CreateMLComponents.ImageReader : Swift.CustomDebugStringConvertible {
     abs(annotatedPrediction.prediction - annotatedPrediction.annotation)
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-@_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+@backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
 @inlinable public func maximumAbsoluteError<T>(_ predicted: some Collection<T>, _ groundTruth: some Collection<T>) -> T where T : Swift.FloatingPoint {
     assert(
         predicted.count == groundTruth.count,
@@ -2238,7 +2237,7 @@ extension CreateMLComponents.ImageReader : Swift.CustomDebugStringConvertible {
     return .nan
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-@_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+@backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
 @inlinable public func meanAbsoluteError<T>(_ predicted: some Collection<T>, _ groundTruth: some Collection<T>) -> T where T : Swift.FloatingPoint {
     assert(
         predicted.count == groundTruth.count,
@@ -2257,7 +2256,7 @@ extension CreateMLComponents.ImageReader : Swift.CustomDebugStringConvertible {
     return annotatedPredictions.map({ absoluteError($0) }).mean()
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-@_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+@backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
 @inlinable public func rootMeanSquaredError<T>(_ predicted: some Collection<T>, _ groundTruth: some Collection<T>) -> T where T : Swift.FloatingPoint {
     assert(
         predicted.count == groundTruth.count,
@@ -2589,12 +2588,15 @@ public struct ImageBlur : CreateMLComponents.Transformer, Swift.Sendable {
   public typealias Output = CoreImage.CIImage
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public struct FullyConnectedNetworkClassifierModel<Scalar, Label> : CreateMLComponents.Classifier, Swift.Codable where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint, Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
+public struct FullyConnectedNetworkClassifierModel<Scalar, Label> : CreateMLComponents.Classifier where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint, Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func applied(to input: CoreML.MLShapedArray<Scalar>, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.ClassificationDistribution<Label>
   #endif
   public typealias Input = CoreML.MLShapedArray<Scalar>
   public typealias Output = CreateMLComponents.ClassificationDistribution<Label>
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+extension CreateMLComponents.FullyConnectedNetworkClassifierModel : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }

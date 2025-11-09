@@ -53,6 +53,10 @@ API_AVAILABLE(macos(10.14), ios(12.0))
 // Convenience method for creating a shared event handle that may be passed to other processes via XPC.
 - (MTLSharedEventHandle *)newSharedEventHandle;
 
+// Synchronously wait for the signaledValue to be greater than or equal to 'value', with a timeout
+// specified in milliseconds.   Returns YES if the value was signaled before the timeout, otherwise NO.
+- (BOOL)waitUntilSignaledValue:(uint64_t)value timeoutMS:(uint64_t)milliseconds API_AVAILABLE(macos(12.0), ios(15.0));
+
 @property (readwrite) uint64_t signaledValue; // Read or set signaled value
 
 @end

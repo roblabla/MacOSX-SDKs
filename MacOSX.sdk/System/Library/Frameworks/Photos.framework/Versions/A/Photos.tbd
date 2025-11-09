@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 621.0.100
+current-version: 646.2.101
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -71,18 +71,37 @@ exports:
                        '$ld$previous$@rpath/libswiftPhotos.dylib$$1$10.9$10.15$_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCfd$', 
                        '$ld$previous$@rpath/libswiftPhotos.dylib$$1$10.9$10.15$_$sSo29PHPersistentChangeFetchResultCST6PhotosMc$', 
                        '$ld$previous$@rpath/libswiftPhotos.dylib$$1$10.9$10.15$_swift_FORCE_LOAD_$_swiftPhotos$', 
-                       _NSStringFromPHErrorCode, _PHAccessLevelFromPLPhotosAccessScopeOptions, 
-                       _PHAdjustmentBaseVersionDescription, _PHAdjustmentDataKey, 
-                       _PHApplyTimeRangeKey, _PHAssetAnalysisAssetCountsKey, _PHAssetAnalysisClustererEligibleFaceCountKey, 
-                       _PHAssetAnalysisClustererIsClusteringKey, _PHAssetAnalysisClustererPendingFaceCountKey, 
-                       _PHAssetAnalysisClustererRebuildRequiredKey, _PHAssetAnalysisClusteringStateKey, 
-                       _PHAssetAnalysisCountFailedKey, _PHAssetAnalysisCountFailedNoResourceKey, 
-                       _PHAssetAnalysisCountProcessedKey, _PHAssetAnalysisCountTotalAllowedKey, 
-                       _PHAssetAnalysisCountUnavailableKey, _PHAssetAnalysisPersonVIPStatusKey, 
-                       _PHAssetAnalysisPetVIPStatusKey, _PHAssetBundleExportSessionErrorDomain, 
-                       _PHAssetCanPerformAdditionalProcessingOnAsset, _PHAssetCollectionReferenceType, 
-                       _PHAssetComposabilityOptionComputeDiptychScoresKey, _PHAssetComposabilityOptionComputeTriptychScoresKey, 
-                       _PHAssetComposabilityOptionIdenticalSimilarityThresholdKey, 
+                       '_$sSo14PHPhotoLibraryC6PhotosE23cloudIdentifierMappings19forLocalIdentifiersSDySSs6ResultOySo07PHCloudE0Cs5Error_pGGSaySSG_tF', 
+                       '_$sSo14PHPhotoLibraryC6PhotosE23localIdentifierMappings3forSDySo07PHCloudE0Cs6ResultOySSs5Error_pGGSayAGG_tF', 
+                       '_$sSo22PHProjectChangeRequestC6PhotosE12removeAssetsyySo13PHFetchResultCySo7PHAssetCGF', 
+                       '_$sSo22PHProjectChangeRequestC6PhotosE12removeAssetsyyxSlRzSo7PHAssetC7ElementRtzlF', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE12makeIteratorAbCE0G0CyF', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfC', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfCTj', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfCTq', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfc', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC4nextSo0aB0CSgyF', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMa', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMm', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMn', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMo', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMu', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCN', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCStACMc', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCfD', 
+                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCfd', 
+                       '_$sSo29PHPersistentChangeFetchResultCST6PhotosMc', _NSStringFromPHErrorCode, 
+                       _PHAccessLevelFromPLPhotosAccessScopeOptions, _PHAdjustmentBaseVersionDescription, 
+                       _PHAdjustmentDataKey, _PHApplyTimeRangeKey, _PHAssetAnalysisAssetCountsKey, 
+                       _PHAssetAnalysisClustererEligibleFaceCountKey, _PHAssetAnalysisClustererIsClusteringKey, 
+                       _PHAssetAnalysisClustererPendingFaceCountKey, _PHAssetAnalysisClustererRebuildRequiredKey, 
+                       _PHAssetAnalysisClusteringStateKey, _PHAssetAnalysisCountFailedKey, 
+                       _PHAssetAnalysisCountFailedNoResourceKey, _PHAssetAnalysisCountProcessedKey, 
+                       _PHAssetAnalysisCountTotalAllowedKey, _PHAssetAnalysisCountUnavailableKey, 
+                       _PHAssetAnalysisPersonVIPStatusKey, _PHAssetAnalysisPetVIPStatusKey, 
+                       _PHAssetBundleExportSessionErrorDomain, _PHAssetCanPerformAdditionalProcessingOnAsset, 
+                       _PHAssetCollectionReferenceType, _PHAssetComposabilityOptionComputeDiptychScoresKey, 
+                       _PHAssetComposabilityOptionComputeTriptychScoresKey, _PHAssetComposabilityOptionIdenticalSimilarityThresholdKey, 
                        _PHAssetComposabilityOptionSemanticalSimilarityThresholdKey, 
                        _PHAssetComposabilityResultDiptychScoresKey, _PHAssetComposabilityResultTriptychScoresKey, 
                        _PHAssetCreationDictionaryPathExtension, _PHAssetCreationHelperDictionaryFilename, 
@@ -383,26 +402,7 @@ exports:
                        PHMediaRequest._numRetries, PHResourceChooserList._asset, 
                        PHResourceChooserList._endOfListHandler, PHResourceChooserList._itemHandler ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo14PHPhotoLibraryC6PhotosE23cloudIdentifierMappings19forLocalIdentifiersSDySSs6ResultOySo07PHCloudE0Cs5Error_pGGSaySSG_tF', 
-                       '_$sSo14PHPhotoLibraryC6PhotosE23localIdentifierMappings3forSDySo07PHCloudE0Cs6ResultOySSs5Error_pGGSayAGG_tF', 
-                       '_$sSo22PHProjectChangeRequestC6PhotosE12removeAssetsyySo13PHFetchResultCySo7PHAssetCGF', 
-                       '_$sSo22PHProjectChangeRequestC6PhotosE12removeAssetsyyxSlRzSo7PHAssetC7ElementRtzlF', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE12makeIteratorAbCE0G0CyF', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfC', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfCTj', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfCTq', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC05fetchD0AeB_tcfc', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorC4nextSo0aB0CSgyF', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMa', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMm', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMn', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMo', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCMu', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCN', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCStACMc', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCfD', 
-                       '_$sSo29PHPersistentChangeFetchResultC6PhotosE8IteratorCfd', 
-                       '_$sSo29PHPersistentChangeFetchResultCST6PhotosMc', _PHLivePhotoEditingErrorDomain ]
+    symbols:         [ _PHLivePhotoEditingErrorDomain ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo8PHChangeC6PhotosE13changeDetails3forSo014PHObjectChangeD0CyxGSgx_tSo0F0CRbzlF$', 
                        '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CySo8PHObjectCGSgSo0fG0CyyXlG_tF$', 
@@ -412,9 +412,8 @@ exports:
                        '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$6$13.0$17.0$_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CyxGSgSo0fG0CyxG_tSo8PHObjectCRbzlF$', 
                        '$ld$previous$@rpath/libswiftPhotos.dylib$$1$10.9$10.15$_$sSo8PHChangeC6PhotosE13changeDetails3forSo014PHObjectChangeD0CyxGSgx_tSo0F0CRbzlF$', 
                        '$ld$previous$@rpath/libswiftPhotos.dylib$$1$10.9$10.15$_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CySo8PHObjectCGSgSo0fG0CyyXlG_tF$', 
-                       '$ld$previous$@rpath/libswiftPhotos.dylib$$1$10.9$10.15$_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CyxGSgSo0fG0CyxG_tSo8PHObjectCRbzlF$' ]
-  - targets:         [ arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo8PHChangeC6PhotosE13changeDetails3forSo014PHObjectChangeD0CyxGSgx_tSo0F0CRbzlF', 
+                       '$ld$previous$@rpath/libswiftPhotos.dylib$$1$10.9$10.15$_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CyxGSgSo0fG0CyxG_tSo8PHObjectCRbzlF$', 
+                       '_$sSo8PHChangeC6PhotosE13changeDetails3forSo014PHObjectChangeD0CyxGSgx_tSo0F0CRbzlF', 
                        '_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CySo8PHObjectCGSgSo0fG0CyyXlG_tF', 
                        '_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CyxGSgSo0fG0CyxG_tSo8PHObjectCRbzlF' ]
 ...

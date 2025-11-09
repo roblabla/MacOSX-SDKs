@@ -13,7 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(15.0)) 
+API_AVAILABLE(ios(15.0))
+API_UNAVAILABLE(visionos)
 NS_SWIFT_NAME(QLPreviewSceneActivationConfiguration.Options)
 QL_EXPORT @interface QLPreviewSceneOptions : NSObject
     /*!
@@ -22,8 +23,9 @@ QL_EXPORT @interface QLPreviewSceneOptions : NSObject
      @property (assign) NSInteger initialPreviewIndex;
 @end
 
-API_AVAILABLE(ios(15.0))  QL_EXPORT
-@interface QLPreviewSceneActivationConfiguration : UIWindowSceneActivationConfiguration
+API_AVAILABLE(ios(15.0))
+API_UNAVAILABLE(visionos)
+QL_EXPORT @interface QLPreviewSceneActivationConfiguration : UIWindowSceneActivationConfiguration
 
     /**
     * @abstract Create a new  scene configuration to preview items at `urls`.

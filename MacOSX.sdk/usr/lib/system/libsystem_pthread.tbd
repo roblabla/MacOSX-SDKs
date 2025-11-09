@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 519
+current-version: 519.101.1
 parent-umbrella:
   - targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, 
                        arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -38,8 +38,8 @@ exports:
                        __pthread_set_properties_self, __pthread_set_self, __pthread_setspecific_static, 
                        __pthread_start, __pthread_tsd_shared_cache_first, __pthread_tsd_shared_cache_last, 
                        __pthread_workloop_create, __pthread_workloop_destroy, __pthread_workqueue_add_cooperativethreads, 
-                       __pthread_workqueue_addthreads, __pthread_workqueue_asynchronous_override_add, 
-                       __pthread_workqueue_asynchronous_override_reset_all_self, 
+                       __pthread_workqueue_addthreads, __pthread_workqueue_allow_send_signals, 
+                       __pthread_workqueue_asynchronous_override_add, __pthread_workqueue_asynchronous_override_reset_all_self, 
                        __pthread_workqueue_asynchronous_override_reset_self, __pthread_workqueue_init, 
                        __pthread_workqueue_init_with_kevent, __pthread_workqueue_init_with_workloop, 
                        __pthread_workqueue_override_reset, __pthread_workqueue_override_start_direct, 
@@ -56,10 +56,10 @@ exports:
                        _pthread_attr_setdetachstate, _pthread_attr_setguardsize, 
                        _pthread_attr_setinheritsched, _pthread_attr_setschedparam, 
                        _pthread_attr_setschedpolicy, _pthread_attr_setscope, _pthread_attr_setstack, 
-                       _pthread_attr_setstackaddr, _pthread_attr_setstacksize, _pthread_cancel, 
-                       _pthread_chdir_np, _pthread_cond_broadcast, _pthread_cond_destroy, 
-                       _pthread_cond_init, _pthread_cond_signal, _pthread_cond_signal_thread_np, 
-                       _pthread_cond_timedwait, _pthread_cond_timedwait_relative_np, 
+                       _pthread_attr_setstackaddr, _pthread_attr_setstacksize, _pthread_attr_setworkinterval_np, 
+                       _pthread_cancel, _pthread_chdir_np, _pthread_cond_broadcast, 
+                       _pthread_cond_destroy, _pthread_cond_init, _pthread_cond_signal, 
+                       _pthread_cond_signal_thread_np, _pthread_cond_timedwait, _pthread_cond_timedwait_relative_np, 
                        _pthread_cond_wait, _pthread_condattr_destroy, _pthread_condattr_getpshared, 
                        _pthread_condattr_init, _pthread_condattr_setpshared, _pthread_cpu_number_np, 
                        _pthread_create, _pthread_create_from_mach_thread, _pthread_create_suspended_np, 
@@ -72,15 +72,16 @@ exports:
                        _pthread_getspecific, _pthread_install_workgroup_functions_np, 
                        _pthread_introspection_getspecific_np, _pthread_introspection_hook_install, 
                        _pthread_introspection_setspecific_np, _pthread_is_threaded_np, 
-                       _pthread_join, _pthread_key_create, _pthread_key_delete, _pthread_key_init_np, 
-                       _pthread_kill, _pthread_layout_offsets, _pthread_mach_thread_np, 
-                       _pthread_main_np, _pthread_main_thread_np, _pthread_mutex_destroy, 
-                       _pthread_mutex_getprioceiling, _pthread_mutex_init, _pthread_mutex_lock, 
-                       _pthread_mutex_setprioceiling, _pthread_mutex_trylock, _pthread_mutex_unlock, 
-                       _pthread_mutexattr_destroy, _pthread_mutexattr_getpolicy_np, 
-                       _pthread_mutexattr_getprioceiling, _pthread_mutexattr_getprotocol, 
-                       _pthread_mutexattr_getpshared, _pthread_mutexattr_gettype, 
-                       _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
+                       _pthread_jit_write_freeze_callbacks_np, _pthread_jit_write_protect_supported_np, 
+                       _pthread_jit_write_with_callback_np, _pthread_join, _pthread_key_create, 
+                       _pthread_key_delete, _pthread_key_init_np, _pthread_kill, 
+                       _pthread_layout_offsets, _pthread_mach_thread_np, _pthread_main_np, 
+                       _pthread_main_thread_np, _pthread_mutex_destroy, _pthread_mutex_getprioceiling, 
+                       _pthread_mutex_init, _pthread_mutex_lock, _pthread_mutex_setprioceiling, 
+                       _pthread_mutex_trylock, _pthread_mutex_unlock, _pthread_mutexattr_destroy, 
+                       _pthread_mutexattr_getpolicy_np, _pthread_mutexattr_getprioceiling, 
+                       _pthread_mutexattr_getprotocol, _pthread_mutexattr_getpshared, 
+                       _pthread_mutexattr_gettype, _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
                        _pthread_mutexattr_setprioceiling, _pthread_mutexattr_setprotocol, 
                        _pthread_mutexattr_setpshared, _pthread_mutexattr_settype, 
                        _pthread_once, _pthread_override_qos_class_end_np, _pthread_override_qos_class_start_np, 
@@ -102,9 +103,7 @@ exports:
                        _sched_get_priority_min, _sched_yield, _sigwait, _start_wqthread, 
                        _thread_chkstk_darwin, _thread_start ]
   - targets:         [ i386-macos, x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ __pthread_mutex_enable_legacy_mode, _pthread_jit_write_freeze_callbacks_np, 
-                       _pthread_jit_write_protect_np, _pthread_jit_write_protect_supported_np, 
-                       _pthread_jit_write_with_callback_np ]
+    symbols:         [ __pthread_mutex_enable_legacy_mode, _pthread_jit_write_protect_np ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_pthread_cond_timedwait$NOCANCEL', '_pthread_cond_wait$NOCANCEL', 

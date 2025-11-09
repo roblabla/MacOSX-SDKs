@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftDispatch.dylib'
-current-version: 34.0.2
+current-version: 41
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -13,9 +13,7 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftDispatch.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftDispatch.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s8Dispatch024dispatch_io_create_with_C0ySo03OS_b1_C0CSu_ADSo0f1_B6_queueCys5Int32VXEtF', 
+                       '$ld$install_name$os10.9$@rpath/libswiftDispatch.dylib', '_$s8Dispatch024dispatch_io_create_with_C0ySo03OS_b1_C0CSu_ADSo0f1_B6_queueCys5Int32VXEtF', 
                        '_$s8Dispatch0A11SpecificKeyCACyxGycfC', '_$s8Dispatch0A11SpecificKeyCACyxGycfCTj', 
                        '_$s8Dispatch0A11SpecificKeyCACyxGycfCTq', '_$s8Dispatch0A11SpecificKeyCACyxGycfc', 
                        '_$s8Dispatch0A11SpecificKeyCMa', '_$s8Dispatch0A11SpecificKeyCMn', 
@@ -473,6 +471,7 @@ exports:
                        '_$sSo18OS_dispatch_sourceC8DispatchE24makeMemoryPressureSource9eventMask5queueSo0a1_b1_C15_memorypressure_pAbCE0fG5EventV_So0a1_b1_K0CSgtFZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE25makeUserDataReplaceSource5queueSo0a1_b1_C13_data_replace_pSo0a1_b1_J0CSg_tFZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE26makeFileSystemObjectSource14fileDescriptor9eventMask5queueSo0a1_b1_C6_vnode_ps5Int32V_AbCE0fG5EventVSo0a1_b1_N0CSgtFZ', 
+                       '_$sSo18OS_dispatch_sourceC8DispatchE30makeExclavesNotificationSource10identifier9eventMask5queueSo0a1_b1_C22_exclaves_notification_pSu_s6UInt32VSo0a1_b1_L0CSgtFZ', 
                        '_$sSo18OS_dispatch_sourceP8DispatchE11isCancelledSbvg', '_$sSo18OS_dispatch_sourceP8DispatchE11isCancelledSbvpMV', 
                        '_$sSo18OS_dispatch_sourceP8DispatchE15setEventHandler3qos5flags7handleryAC0D3QoSV_AC0D13WorkItemFlagsVyyXBSgtF', 
                        '_$sSo18OS_dispatch_sourceP8DispatchE15setEventHandler7handleryAC0D8WorkItemC_tF', 
@@ -561,7 +560,7 @@ exports:
                        '_$sSo28OS_dispatch_source_mach_sendP8DispatchE6handles6UInt32VvpMV', 
                        '_$sSo31OS_dispatch_source_data_replaceP8DispatchE0E00D0ySu_tF', 
                        '_$sSo33OS_dispatch_queue_serial_executorC8DispatchE23asUnownedSerialExecutorSceyF', 
-                       '_$sSo33OS_dispatch_queue_serial_executorC8DispatchE7enqueueyyScJF', 
+                       '_$sSo33OS_dispatch_queue_serial_executorC8DispatchE7enqueueyys11ExecutorJobVnF', 
                        '_$sSo33OS_dispatch_queue_serial_executorCScF8DispatchMc', 
                        '_$sSo33OS_dispatch_queue_serial_executorCScf8DispatchMc', 
                        '_$sSo33OS_dispatch_source_memorypressureP8DispatchE4dataSo0a1_b1_C0CACE19MemoryPressureEventVvg', 

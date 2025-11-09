@@ -3,10 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DeveloperToolsSupport.framework/Versions/A/DeveloperToolsSupport'
-current-version: 21.0.15
+current-version: 21.30.4
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$10.15$14.0$_$s7SwiftUI13PreviewLayoutO12sizeThatFitsyA2CmFWC$', 
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$10.15$14.0$_$s7SwiftUI13PreviewLayoutO5fixedyAC12CoreGraphics7CGFloatV_AGtcACmFWC$', 
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$10.15$14.0$_$s7SwiftUI13PreviewLayoutO6deviceyA2CmFWC$', 
@@ -42,6 +43,16 @@ exports:
                        '_$s21DeveloperToolsSupport11LibraryItemV8CategoryVN', '_$s21DeveloperToolsSupport11LibraryItemVMa', 
                        '_$s21DeveloperToolsSupport11LibraryItemVMn', '_$s21DeveloperToolsSupport11LibraryItemVN', 
                        '_$s21DeveloperToolsSupport11LibraryItemV_7visible5title8category17matchingSignatureACxyXK_SbSSSgAC8CategoryVAHtclufC', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV11displayNameSSSgvM', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV11displayNameSSSgvg', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV11displayNameSSSgvpMV', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV11displayNameSSSgvs', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV4bodyyyYaKScMYccvM', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV4bodyyyYaKScMYccvg', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV4bodyyyYaKScMYccvpMV', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundV4bodyyyYaKScMYccvs', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundVMa', '_$s21DeveloperToolsSupport11_PlaygroundVMn', 
+                       '_$s21DeveloperToolsSupport11_PlaygroundVN', '_$s21DeveloperToolsSupport11_PlaygroundV_4bodyACSSSg_yyYaKScMYcctcfC', 
                        '_$s21DeveloperToolsSupport12PreviewTraitVA2A0D0V10ViewTraitsORszlE11fixedLayout5width6height5depthACyAGG12CoreGraphics7CGFloatV_A2OtFZ', 
                        '_$s21DeveloperToolsSupport12PreviewTraitVA2A0D0V10ViewTraitsORszlE11fixedLayout5width6heightACyAGG12CoreGraphics7CGFloatV_ANtFZ', 
                        '_$s21DeveloperToolsSupport12PreviewTraitVA2A0D0V10ViewTraitsORszlE13defaultLayoutACyAGGvgZ', 
@@ -152,7 +163,15 @@ exports:
                        '_$s21DeveloperToolsSupport18PreviewLayoutTraitVN', '_$s21DeveloperToolsSupport18PreviewUnavailableVACycfC', 
                        '_$s21DeveloperToolsSupport18PreviewUnavailableVMa', '_$s21DeveloperToolsSupport18PreviewUnavailableVMn', 
                        '_$s21DeveloperToolsSupport18PreviewUnavailableVN', '_$s21DeveloperToolsSupport18PreviewUnavailableVs5ErrorAAMc', 
-                       '_$s21DeveloperToolsSupport20PreviewCameraBuilderV10buildArrayySayAA0dE0VGSayAGGFZ', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryMp', '_$s21DeveloperToolsSupport19_PlaygroundRegistryP04makeD0AA01_D0VyKFZTj', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryP04makeD0AA01_D0VyKFZTq', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryP4lineSivgZTj', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryP4lineSivgZTq', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryP6columnSivgZTj', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryP6columnSivgZTq', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryP6fileIDSSvgZTj', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryP6fileIDSSvgZTq', 
+                       '_$s21DeveloperToolsSupport19_PlaygroundRegistryTL', '_$s21DeveloperToolsSupport20PreviewCameraBuilderV10buildArrayySayAA0dE0VGSayAGGFZ', 
                        '_$s21DeveloperToolsSupport20PreviewCameraBuilderV15buildExpressionySayAA0dE0VGAFFZ', 
                        '_$s21DeveloperToolsSupport20PreviewCameraBuilderV15buildExpressionySayAA0dE0VGAGFZ', 
                        '_$s21DeveloperToolsSupport20PreviewCameraBuilderV17buildPartialBlock11accumulated4nextSayAA0dE0VGAI_AItFZ', 
@@ -177,7 +196,10 @@ exports:
                        '_$s21DeveloperToolsSupport22LibraryContentProviderPAAE5viewsSayAA0D4ItemVGvg', 
                        '_$s21DeveloperToolsSupport22LibraryContentProviderPAAE5viewsSayAA0D4ItemVGvpMV', 
                        '_$s21DeveloperToolsSupport22LibraryContentProviderPAAE9modifiers4baseSayAA0D4ItemVG12ModifierBaseQz_tF', 
-                       '_$s21DeveloperToolsSupport22LibraryContentProviderTL', '_$s21DeveloperToolsSupport23TurboEntryPointRegistryC05entryF8InstanceAA0deF0OvgTj', 
+                       '_$s21DeveloperToolsSupport22LibraryContentProviderTL', '_$s21DeveloperToolsSupport22_PlaygroundUnavailableVACycfC', 
+                       '_$s21DeveloperToolsSupport22_PlaygroundUnavailableVMa', '_$s21DeveloperToolsSupport22_PlaygroundUnavailableVMn', 
+                       '_$s21DeveloperToolsSupport22_PlaygroundUnavailableVN', '_$s21DeveloperToolsSupport22_PlaygroundUnavailableVs5ErrorAAMc', 
+                       '_$s21DeveloperToolsSupport23TurboEntryPointRegistryC05entryF8InstanceAA0deF0OvgTj', 
                        '_$s21DeveloperToolsSupport23TurboEntryPointRegistryC05entryF8InstanceAA0deF0OvgTq', 
                        '_$s21DeveloperToolsSupport23TurboEntryPointRegistryC05entryF8InstanceAA0deF0OvpMV', 
                        '_$s21DeveloperToolsSupport23TurboEntryPointRegistryCACycfC', 

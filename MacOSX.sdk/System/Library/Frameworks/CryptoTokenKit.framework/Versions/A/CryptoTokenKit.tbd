@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CryptoTokenKit.framework/Versions/A/CryptoTokenKit'
-current-version: 685.60.2
+current-version: 685.100.14
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -17,18 +17,16 @@ exports:
                        _TKSlotTypeSmartCard, _TKSmartCardPreferencesDisabledTokensKey, 
                        _TKSmartCardPreferencesDomain, _TKSmartCardSessionEndPolicyKey, 
                        _TKSmartCardSessionProtocol, _TKSmartCardSessionSensitive, 
-                       _TKSmartCardSlotATR, _TKSmartCardSlotMaxInputLength, _TKSmartCardSlotMaxOutputLength, 
-                       _TKSmartCardSlotPowerStateKey, _TKSmartCardSlotPreviousStateKey, 
-                       _TKSmartCardSlotSecurePINChangeSupportedKey, _TKSmartCardSlotSecurePINVerificationSupportedKey, 
+                       _TKSmartCardSlotATR, _TKSmartCardSlotPowerStateKey, _TKSmartCardSlotPreviousStateKey, 
                        _TKSmartCardSlotShareStateKey, _TKSmartCardSlotStateKey, _TKTokenClassDriverApplicationIDKey, 
                        _TKTokenClassDriverClassIDKey, _TKTokenClassDriverClassNameKey, 
                        _TKTokenTypeKey, _TKTokenWatcherServerStartedNotification, 
-                       _TKTransportSlotName, _TKUnderlyingAKSErrorKey, _TKUserSecretTriesLeftErrorKey, 
-                       _kTKTokenAccessUserPromptInfo ]
+                       _TKTransportSlotName, _TKTransportSlotParameters, _TKUnderlyingAKSErrorKey, 
+                       _TKUserSecretTriesLeftErrorKey, _kTKTokenAccessUserPromptInfo ]
     objc-classes:    [ TKBERTLVRecord, TKClientToken, TKClientTokenAdvertisedItem, 
                        TKClientTokenObject, TKClientTokenSession, TKCompactTLVRecord, 
                        TKSEPKey, TKSharedResource, TKSharedResourceSlot, TKSimpleTLVRecord, 
-                       TKSmartCard, TKSmartCardATR, TKSmartCardATRInterfaceGroup, 
+                       TKSlotParameters, TKSmartCard, TKSmartCardATR, TKSmartCardATRInterfaceGroup, 
                        TKSmartCardPINFormat, TKSmartCardSlot, TKSmartCardSlotEngine, 
                        TKSmartCardSlotManager, TKSmartCardSlotScreen, TKSmartCardToken, 
                        TKSmartCardTokenDriver, TKSmartCardTokenSession, TKSmartCardUserInteraction, 

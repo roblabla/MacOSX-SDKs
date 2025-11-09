@@ -12,15 +12,7 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftCreateML.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCreateML.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCreateML.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCreateML.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '$ld$install_name$os10.15$/usr/lib/swift/libswiftCreateML.dylib', 
-                       '$ld$install_name$os11.0$/usr/lib/swift/libswiftCreateML.dylib', 
-                       '$ld$install_name$os11.1$/usr/lib/swift/libswiftCreateML.dylib', 
-                       '$ld$install_name$os11.2$/usr/lib/swift/libswiftCreateML.dylib', 
-                       '$ld$install_name$os11.3$/usr/lib/swift/libswiftCreateML.dylib', 
-                       '$ld$install_name$os11.4$/usr/lib/swift/libswiftCreateML.dylib', 
-                       '_$s8CreateML10MLProgressV11accuracyKeySo018NSProgressUserInfoE0avgZ', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCreateML.dylib', '_$s8CreateML10MLProgressV11accuracyKeySo018NSProgressUserInfoE0avgZ', 
                        '_$s8CreateML10MLProgressV11elapsedTimeSdvM', '_$s8CreateML10MLProgressV11elapsedTimeSdvg', 
                        '_$s8CreateML10MLProgressV11elapsedTimeSdvpMV', '_$s8CreateML10MLProgressV11elapsedTimeSdvs', 
                        '_$s8CreateML10MLProgressV12itemCountKeySo018NSProgressUserInfoF0avgZ', 
@@ -3195,4 +3187,11 @@ exports:
                        '_$ss5Int64V8CreateMLE13dataValueTypeAC06MLDataE0O0eF0OvgZ', 
                        '_$ss5Int64V8CreateMLE4fromABSgAC11MLDataValueO_tcfC', '_$ss5Int64V8CreateMLE9dataValueAC06MLDataE0Ovg', 
                        '_$ss5Int64V8CreateMLE9dataValueAC06MLDataE0OvpMV' ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ '$ld$install_name$os10.15$/usr/lib/swift/libswiftCreateML.dylib', 
+                       '$ld$install_name$os11.0$/usr/lib/swift/libswiftCreateML.dylib', 
+                       '$ld$install_name$os11.1$/usr/lib/swift/libswiftCreateML.dylib', 
+                       '$ld$install_name$os11.2$/usr/lib/swift/libswiftCreateML.dylib', 
+                       '$ld$install_name$os11.3$/usr/lib/swift/libswiftCreateML.dylib', 
+                       '$ld$install_name$os11.4$/usr/lib/swift/libswiftCreateML.dylib' ]
 ...

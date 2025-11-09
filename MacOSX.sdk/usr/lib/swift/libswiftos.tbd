@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftos.dylib'
-current-version: 1040
+current-version: 1049.100.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -11,10 +11,7 @@ exports:
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftos.dylib', '$ld$install_name$os10.11$@rpath/libswiftos.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftos.dylib', '$ld$install_name$os10.13$@rpath/libswiftos.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftos.dylib', '$ld$install_name$os10.9$@rpath/libswiftos.dylib', 
-                       __swift_os_log, __swift_os_log_return_address, __swift_os_signpost, 
-                       __swift_os_signpost_with_format ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s2os0A4_log_0B0_ySo0a1_B7_type_ta_So03OS_a1_B0CAA12OSLogMessageVtF', 
+                       '_$s2os0A4_log_0B0_ySo0a1_B7_type_ta_So03OS_a1_B0CAA12OSLogMessageVtF', 
                        '_$s2os0A4_log_3dso0B04type_ys12StaticStringV_SVSgSo03OS_a1_B0CSo0a1_b1_D2_tas7CVarArg_pdtF', 
                        '_$s2os0A4_log_3dso0B0__ySo0a1_B7_type_ta_SVSo03OS_a1_B0Cs12StaticStringVs7CVarArg_pdtF', 
                        '_$s2os0A9_signpost_3dso3log4name0B2ID__yAA24OSSignpostAnimationBeginO_SVSo03OS_a1_D0Cs12StaticStringVAA0gF0VAA0h6FormatL0O12OSLogMessageVs7CVarArg_pdtF', 
@@ -376,5 +373,6 @@ exports:
                        '_$sSo9OS_os_logC0B0E9subsystem8categoryABSS_AbCE8CategoryVtcfC', 
                        '_$sSo9OS_os_logC0B0E9subsystem8categoryABSS_AbCE8CategoryVtcfc', 
                        '_$sSo9OS_os_logC0B0E9subsystem8categoryABSS_SStcfC', '_$sSo9OS_os_logC0B0E9subsystem8categoryABSS_SStcfc', 
-                       '__swift_FORCE_LOAD_$_swiftos' ]
+                       '__swift_FORCE_LOAD_$_swiftos', __swift_os_log, __swift_os_log_return_address, 
+                       __swift_os_signpost, __swift_os_signpost_with_format ]
 ...

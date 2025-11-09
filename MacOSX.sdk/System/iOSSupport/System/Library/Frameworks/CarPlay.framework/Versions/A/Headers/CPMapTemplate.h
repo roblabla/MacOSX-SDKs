@@ -183,6 +183,13 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @protocol CPMapTemplateDelegate <NSObject>
 @optional
 
+#pragma mark - Navigation Metadata
+/**
+ Determines if the template should provide navigation metadata.
+ @return YES if the template should provide navigation metadata, otherwise NO
+ */
+- (BOOL)mapTemplateShouldProvideNavigationMetadata:(CPMapTemplate *)mapTemplate;
+
 #pragma mark - Notification Policy
 /**
  Determines if the maneuver should be presented as a notification when the app is in the background.

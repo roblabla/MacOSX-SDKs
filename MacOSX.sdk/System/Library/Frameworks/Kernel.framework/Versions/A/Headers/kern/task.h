@@ -172,6 +172,12 @@ extern int task_get_no_footprint_for_debug(
 extern bool task_is_translated(task_t task);
 #endif
 
+#if HAS_MTE_EMULATION_SHIMS
+/* These need full functions so they are callable in bsd/ */
+extern bool task_has_mte_emulation(task_t task);
+extern void task_set_has_mte_emulation(task_t task);
+#endif /* HAS_MTE_EMULATION_SHIMS */
+
 #if CONFIG_X86_64_COMPAT
 extern bool task_is_x86_64_compat(task_t task);
 #endif

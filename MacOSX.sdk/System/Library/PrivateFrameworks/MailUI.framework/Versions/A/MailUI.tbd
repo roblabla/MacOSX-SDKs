@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI'
-current-version: 3774.255.61
+current-version: 3774.255.171
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -172,6 +172,7 @@ exports:
                        '_$s6MailUI10SearchItemO13InstantAnswerV29flightDepartureDateComponents10Foundation0iJ0VvpMV', 
                        '_$s6MailUI10SearchItemO13InstantAnswerV29flightDepartureDateComponents10Foundation0iJ0Vvs', 
                        '_$s6MailUI10SearchItemO13InstantAnswerV2eeoiySbAE_AEtFZ', 
+                       '_$s6MailUI10SearchItemO13InstantAnswerV2id07instantF4Kind17flightCarrierCode0j14ArrivalAirportL00j9DeparturenL00jO14DateComponents0jmpQ00J6Number0J10CheckInUrl0jO8TimeZone0jmvW00j11BookingInfoU00jK00j12ConfirmationR018hotelReservationId14hotelUnderName012hotelCheckinpQ0013hotelCheckoutpQ005hotelvW023hotelReservationForName28hotelReservationForTelephone26hotelReservationForAddress34hotelReservationForAddressLocalityAE10Foundation4UUIDV_So016CSInstantAnswersI0VSSSgS2SA1_0pQ0VA8_A6_A1_3URLVSgA1_0vW0VSgA14_A11_A6_A6_A6_A6_A8_A8_SgA14_SSA6_A6_A6_tcfC', 
                        '_$s6MailUI10SearchItemO13InstantAnswerV2id10Foundation4UUIDVvM', 
                        '_$s6MailUI10SearchItemO13InstantAnswerV2id10Foundation4UUIDVvg', 
                        '_$s6MailUI10SearchItemO13InstantAnswerV2id10Foundation4UUIDVvpMV', 
@@ -893,12 +894,12 @@ exports:
                        __ef_log_MessageListSelectionModel, __ef_log_MessageSelectionStrategy, 
                        __ef_log_NSImage, _kMUIDocumentContentStateSource, _kMUIDocumentContentStateSourceLength, 
                        _kMUIDottedBlockquoteAbbreviatorSource, _kMUIDottedBlockquoteAbbreviatorSourceLength, 
-                       _kMUIMessageListDataSourceFetchTimeout, _kMUIRedundantContentAbbreviatorSource, 
-                       _kMUIRedundantContentAbbreviatorSourceLength, _kMUIRedundantContentClusterSource, 
-                       _kMUIRedundantContentClusterSourceLength, _kMUIRedundantTextUtilitiesSource, 
-                       _kMUIRedundantTextUtilitiesSourceLength, _kMUISimpleLinkAbbreviatorSource, 
-                       _kMUISimpleLinkAbbreviatorSourceLength, _kMUISimpleLinkWithDottedBlockquoteBarAbbreviatorSource, 
-                       _kMUISimpleLinkWithDottedBlockquoteBarAbbreviatorSourceLength, 
+                       _kMUILocalMailboxSearchOnlyKey, _kMUIMessageListDataSourceFetchTimeout, 
+                       _kMUIRedundantContentAbbreviatorSource, _kMUIRedundantContentAbbreviatorSourceLength, 
+                       _kMUIRedundantContentClusterSource, _kMUIRedundantContentClusterSourceLength, 
+                       _kMUIRedundantTextUtilitiesSource, _kMUIRedundantTextUtilitiesSourceLength, 
+                       _kMUISimpleLinkAbbreviatorSource, _kMUISimpleLinkAbbreviatorSourceLength, 
+                       _kMUISimpleLinkWithDottedBlockquoteBarAbbreviatorSource, _kMUISimpleLinkWithDottedBlockquoteBarAbbreviatorSourceLength, 
                        _kMUITrailingBlankLineRemoverSource, _kMUITrailingBlankLineRemoverSourceLength, 
                        _kMUIWebAttachmentControllerSource, _kMUIWebAttachmentControllerSourceLength, 
                        _kMUIWebDocumentDisplayControllerDelegateSource, _kMUIWebDocumentDisplayControllerDelegateSourceLength, 

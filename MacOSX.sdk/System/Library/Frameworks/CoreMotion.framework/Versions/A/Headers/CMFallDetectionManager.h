@@ -46,7 +46,7 @@ COREMOTION_EXPORT API_AVAILABLE(watchos(7.2)) API_UNAVAILABLE(macos, ios, tvos)
  *  @discussion
  *    The delegate object to receive Fall Detection events.
  */
-@property (nonatomic, weak) id<CMFallDetectionDelegate> delegate;
+@property (weak, nonatomic, nullable) id<CMFallDetectionDelegate> delegate;
 
 
 /**

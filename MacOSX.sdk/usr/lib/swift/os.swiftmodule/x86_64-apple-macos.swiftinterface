@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-macos14.2 -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name os
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1040
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-macos14.4 -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1049.100.4 -module-name os
 import Swift
 import _Concurrency
 import _StringProcessing
@@ -1266,65 +1265,38 @@ extension os_workgroup.WorkGroupParallel {
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation {
   @usableFromInline
-  @available(iOS, unavailable, introduced: 14)
-  @available(macOS, unavailable, introduced: 11.0)
-  @available(watchOS, unavailable, introduced: 7)
-  @available(tvOS, unavailable, introduced: 14)
+  @available(*, unavailable)
   internal mutating func appendInteger<T>(_ number: @escaping () -> T, format: os.OSLogIntegerFormatting, align: os.OSLogStringAlignment, privacy: os.OSLogPrivacy) where T : Swift.FixedWidthInteger
   @usableFromInline
-  @available(iOS, unavailable, introduced: 14)
-  @available(macOS, unavailable, introduced: 11.0)
-  @available(watchOS, unavailable, introduced: 7)
-  @available(tvOS, unavailable, introduced: 14)
+  @available(*, unavailable)
   internal func getNSObjectFormatSpecifier(_ privacy: os.OSLogPrivacy) -> Swift.String
   @usableFromInline
-  @available(iOS, unavailable, introduced: 14)
-  @available(macOS, unavailable, introduced: 11.0)
-  @available(watchOS, unavailable, introduced: 7)
-  @available(tvOS, unavailable, introduced: 14)
+  @available(*, unavailable)
   internal func getPointerFormatSpecifier(_ format: os.OSLogPointerFormat, _ privacy: os.OSLogPrivacy) -> Swift.String
   @usableFromInline
-  @available(iOS, unavailable, introduced: 14)
-  @available(macOS, unavailable, introduced: 11.0)
-  @available(watchOS, unavailable, introduced: 7)
-  @available(tvOS, unavailable, introduced: 14)
+  @available(*, unavailable)
   internal func getStringFormatSpecifier(_ align: os.OSLogStringAlignment, _ privacy: os.OSLogPrivacy) -> Swift.String
   @usableFromInline
-  @available(iOS, unavailable, introduced: 14)
-  @available(macOS, unavailable, introduced: 11.0)
-  @available(watchOS, unavailable, introduced: 7)
-  @available(tvOS, unavailable, introduced: 14)
+  @available(*, unavailable)
   internal func getExtendedFormatSpecifier(_ format: os.OSLogInt32ExtendedFormat, _ privacy: os.OSLogPrivacy) -> Swift.String
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogIntegerFormatting {
   @usableFromInline
-  @available(iOS, unavailable, introduced: 14)
-  @available(macOS, unavailable, introduced: 11.0)
-  @available(watchOS, unavailable, introduced: 7)
-  @available(tvOS, unavailable, introduced: 14)
+  @available(*, unavailable)
   internal func formatSpecifier<I>(for type: I.Type, align: os.OSLogStringAlignment, privacy: os.OSLogPrivacy) -> Swift.String where I : Swift.FixedWidthInteger
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogFloatFormatting {
   @usableFromInline
-  @available(iOS, unavailable, introduced: 14)
-  @available(macOS, unavailable, introduced: 11.0)
-  @available(watchOS, unavailable, introduced: 7)
-  @available(tvOS, unavailable, introduced: 14)
+  @available(*, unavailable)
   internal func formatSpecifier<I>(for type: I.Type, align: os.OSLogStringAlignment, privacy: os.OSLogPrivacy) -> Swift.String where I : Swift.FloatingPoint
 }
 @usableFromInline
-@available(iOS, unavailable, introduced: 14)
-@available(macOS, unavailable, introduced: 11.0)
-@available(watchOS, unavailable, introduced: 7)
-@available(tvOS, unavailable, introduced: 14)
+@available(*, unavailable)
 internal func serialize(_ stringValue: Swift.String, at bufferPosition: inout Swift.UnsafeMutablePointer<Swift.UInt8>, using stringStorage: inout os.ObjectStorage<Any>)
 @usableFromInline
-@available(iOS, unavailable, introduced: 14)
-@available(macOS, unavailable, introduced: 11.0)
-@available(watchOS, unavailable, introduced: 7)
-@available(tvOS, unavailable, introduced: 14)
+@available(*, unavailable)
 internal func getNullTerminatedUTF8Pointer(_ stringValue: Swift.String, using stringStorage: inout os.ObjectStorage<Any>) -> Swift.UnsafeRawPointer
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation {
@@ -1934,21 +1906,24 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
 			return initialState
 		}
 	}
+  @_alwaysEmitIntoClient internal func withLockUncheckedInternal<R>(_ body: (inout State) throws -> R) rethrows -> R {
+		return try self.__lock.withUnsafeMutablePointers { header, lock in
+			os_unfair_lock_lock(lock)
+			defer {
+				os_unfair_lock_unlock(lock)
+			}
+			return try body(&header.pointee)
+		}
+	}
   @_alwaysEmitIntoClient public func withLockUnchecked<R>(_ body: (inout State) throws -> R) rethrows -> R {
-        return try self.__lock.withUnsafeMutablePointers { header, lock in
-            os_unfair_lock_lock(lock)
-            defer {
-                os_unfair_lock_unlock(lock)
-            }
-            return try body(&header.pointee)
-        }
-    }
+		return try self.withLockUncheckedInternal(body)
+	}
   #if compiler(>=5.3) && $Sendable
   @_alwaysEmitIntoClient public func withLock<R>(_ body: @Sendable (inout State) throws -> R) rethrows -> R where R : Swift.Sendable {
-        return try self.withLockUnchecked(body)
+        return try self.withLockUncheckedInternal(body)
 	}
   #endif
-  @_alwaysEmitIntoClient public func withLockIfAvailableUnchecked<R>(_ body: (inout State) throws -> R) rethrows -> R? {
+  @_alwaysEmitIntoClient internal func withLockIfAvailableUncheckedInternal<R>(_ body: (inout State) throws -> R) rethrows -> R? {
 		return try self.__lock.withUnsafeMutablePointers { header, lock in
 			guard os_unfair_lock_trylock(lock) else {
 				return nil
@@ -1959,10 +1934,13 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
 			return try body(&header.pointee)
 		}
 	}
+  @_alwaysEmitIntoClient public func withLockIfAvailableUnchecked<R>(_ body: (inout State) throws -> R) rethrows -> R? {
+			return try self.withLockIfAvailableUncheckedInternal(body)
+	}
   #if compiler(>=5.3) && $Sendable
   @_alwaysEmitIntoClient public func withLockIfAvailable<R>(_ body: @Sendable (inout State) throws -> R) rethrows -> R? where R : Swift.Sendable {
-        return try self.withLockIfAvailableUnchecked(body)
-    }
+			return try self.withLockIfAvailableUncheckedInternal(body)
+	}
   #endif
   @frozen public enum Ownership {
     case owner
@@ -1999,16 +1977,16 @@ extension os.OSAllocatedUnfairLock where State == () {
 	}
   #if compiler(>=5.3) && $Sendable
   @_alwaysEmitIntoClient public func withLock<R>(_ body: @Sendable () throws -> R) rethrows -> R where R : Swift.Sendable {
-        return try withLock { _ in try body() }
-    }
+		return try withLock { _ in try body() }
+	}
   #endif
   @_alwaysEmitIntoClient public func withLockIfAvailableUnchecked<R>(_ body: () throws -> R) rethrows -> R? {
 		return try withLockIfAvailableUnchecked { _ in try body() }
 	}
   #if compiler(>=5.3) && $Sendable
   @_alwaysEmitIntoClient public func withLockIfAvailable<R>(_ body: @Sendable () throws -> R) rethrows -> R? where R : Swift.Sendable {
-        return try withLockIfAvailable { _ in try body() }
-    }
+		return try withLockIfAvailable { _ in try body() }
+	}
   #endif
   #if compiler(>=5.3) && $UnavailableFromAsync
   @_alwaysEmitIntoClient @_unavailableFromAsync(message: "Use withLock for scoped locking") public func lock() {
@@ -2507,8 +2485,6 @@ extension os.OSLogFloatFormatting.Notation : Swift.Hashable {}
 extension os.OSLogPointerFormat : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogPointerFormat : Swift.Hashable {}
-@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension os.AnimationFormatString.OSLogMessage : Swift.Sendable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSSignpostAnimationBegin : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)

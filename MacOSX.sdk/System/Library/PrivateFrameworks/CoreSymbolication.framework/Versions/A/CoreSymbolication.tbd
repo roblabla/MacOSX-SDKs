@@ -1,10 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication'
-current-version: 64561.101.1
+current-version: 64565.74.2
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CSAddressSetAdd, _CSAddressSetAddRange, _CSAddressSetCreate, 
                        _CSArchitectureGetArchitectureForName, _CSArchitectureGetCurrent, 
                        _CSArchitectureGetFamily, _CSArchitectureGetFamilyName, _CSArchitectureIs32Bit, 
@@ -22,13 +24,16 @@ exports:
                        _CSEqual, _CSExceptionSafeThreadProtectBlockWithHandler, _CSExceptionSafeThreadRunBlock, 
                        _CSExceptionSafeThreadRunBlockWithHandler, _CSFileIsCoreFile, 
                        _CSFileIsFlatbuffer, _CSFileIsKnownSignature, _CSFileIsSuitableForCS, 
-                       _CSGetDebugLoggingLevel, _CSGetForceSafeMachVMReads, _CSGetRetainCount, 
-                       _CSIsNull, _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
+                       _CSGetBinaryPathForExclaveWithUUIDBytes, _CSGetDebugLoggingLevel, 
+                       _CSGetForceSafeMachVMReads, _CSGetRetainCount, _CSIsNull, 
+                       _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
                        _CSMMapArchiveCacheSetShouldStoreToDaemon, _CSPlatformForTask, 
-                       _CSRangeContainsRange, _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
-                       _CSRegionForeachSourceInfo, _CSRegionForeachSymbol, _CSRegionGetName, 
-                       _CSRegionGetRange, _CSRegionGetSymbolOwner, _CSRegionGetSymbolicator, 
-                       _CSRelease, _CSRetain, _CSSectionGetSegment, _CSSegmentForeachSection, 
+                       _CSRangeContainsRange, _CSRangeIntersectionRange, _CSRangeIntersectsRange, 
+                       _CSRangeOfDyldSharedCacheInCurrentProcess, _CSRangeOfDyldSharedCacheInTask, 
+                       _CSRegionCopyDescriptionWithIndent, _CSRegionForeachSourceInfo, 
+                       _CSRegionForeachSymbol, _CSRegionGetName, _CSRegionGetRange, 
+                       _CSRegionGetSymbolOwner, _CSRegionGetSymbolicator, _CSRelease, 
+                       _CSRetain, _CSSectionGetSegment, _CSSegmentForeachSection, 
                        _CSSetDebugLoggingLevel, _CSSetForceSafeMachVMReads, _CSShow, 
                        _CSSourceInfoCopyDescriptionWithIndent, _CSSourceInfoGetColumn, 
                        _CSSourceInfoGetFilename, _CSSourceInfoGetLineNumber, _CSSourceInfoGetPath, 
@@ -94,6 +99,7 @@ exports:
                        _CSSymbolOwnerSetRelocationCount, _CSSymbolOwnerSetTransientUserData, 
                        _CSSymbolOwnerSetUnloadTimestamp, _CSSymbolOwnerUsesCPlusPlus, 
                        _CSSymbolReleaseMemory, _CSSymbolicationSessionCopyDescriptionWithIndent, 
+                       _CSSymbolicationSessionCreateNonFaultingSymbolicatorForPid, 
                        _CSSymbolicationSessionCreateSymbolicatorForPidWithFlags, 
                        _CSSymbolicationSessionCreateWithFlags, _CSSymbolicationSessionProcessATRCKernelChunk, 
                        _CSSymbolicationSessionProcessATRCProcessAndDSCChunks, _CSSymbolicatorAddSymbolOwner, 
@@ -108,9 +114,9 @@ exports:
                        _CSSymbolicatorCreateWithBinaryImageListCountPidFlagsAndNotification, 
                        _CSSymbolicatorCreateWithBinaryImageListPidAndSharedCacheUUID, 
                        _CSSymbolicatorCreateWithCoreFilePathAndFlags, _CSSymbolicatorCreateWithDyldProcessSnapshotPidAndFlags, 
-                       _CSSymbolicatorCreateWithMachKernel, _CSSymbolicatorCreateWithMachKernelExcludingSearchPaths, 
-                       _CSSymbolicatorCreateWithMachKernelFlagsAndNotification, _CSSymbolicatorCreateWithPathAndArchitecture, 
-                       _CSSymbolicatorCreateWithPathArchitectureFlagsAndNotification, 
+                       _CSSymbolicatorCreateWithExclaveUUIDAndFlags, _CSSymbolicatorCreateWithMachKernel, 
+                       _CSSymbolicatorCreateWithMachKernelExcludingSearchPaths, _CSSymbolicatorCreateWithMachKernelFlagsAndNotification, 
+                       _CSSymbolicatorCreateWithPathAndArchitecture, _CSSymbolicatorCreateWithPathArchitectureFlagsAndNotification, 
                        _CSSymbolicatorCreateWithPid, _CSSymbolicatorCreateWithPidFlagsAndNotification, 
                        _CSSymbolicatorCreateWithSharedCacheUUID, _CSSymbolicatorCreateWithSignature, 
                        _CSSymbolicatorCreateWithSignatureAdditionalSymbolOwnersFlagsAndNotification, 
@@ -124,6 +130,7 @@ exports:
                        _CSSymbolicatorCreateWithURLArchitectureFlagsAndNotification, 
                        _CSSymbolicatorFixupFrames, _CSSymbolicatorForEachAotImage, 
                        _CSSymbolicatorForceFullSymbolExtraction, _CSSymbolicatorForceNonFaultingFlags, 
+                       _CSSymbolicatorForeachExclaveCoreSymbolicator, _CSSymbolicatorForeachExclaveCoreSymbolicatorWithFlags, 
                        _CSSymbolicatorForeachFlatbufferSymbolicatorInSignature, _CSSymbolicatorForeachRegionAtTime, 
                        _CSSymbolicatorForeachRegionWithNameAtTime, _CSSymbolicatorForeachSectionAtTime, 
                        _CSSymbolicatorForeachSegmentAtTime, _CSSymbolicatorForeachSharedCache, 
@@ -141,7 +148,8 @@ exports:
                        _CSSymbolicatorGetFlagsForDsymOnlyData, _CSSymbolicatorGetFlagsForDwarfOnlyData, 
                        _CSSymbolicatorGetFlagsForFunctionStartsOnlyData, _CSSymbolicatorGetFlagsForNListOnlyData, 
                        _CSSymbolicatorGetFlagsForNoDataExceptFromTheCache, _CSSymbolicatorGetFlagsForNoSymbolOrSourceInfoData, 
-                       _CSSymbolicatorGetGroupKey, _CSSymbolicatorGetPid, _CSSymbolicatorGetRegionCountAtTime, 
+                       _CSSymbolicatorGetFlagsForNonFaultingBehavior, _CSSymbolicatorGetGroupKey, 
+                       _CSSymbolicatorGetPid, _CSSymbolicatorGetRegionCountAtTime, 
                        _CSSymbolicatorGetRegionWithAddressAtTime, _CSSymbolicatorGetRegionWithNameAtTime, 
                        _CSSymbolicatorGetSectionWithAddressAtTime, _CSSymbolicatorGetSegmentWithAddressAtTime, 
                        _CSSymbolicatorGetSharedCacheBaseAddress, _CSSymbolicatorGetSharedCacheUUID, 
@@ -175,6 +183,7 @@ exports:
                        _kCSTypeSetCallBacks, _kCSTypeSetWeakCallBacks, _map_new_node, 
                        _mapped_memory_core_file_get_architecture, _mapped_memory_core_file_get_argslen, 
                        _mapped_memory_core_file_get_dirty_flags, _mapped_memory_core_file_get_dyld_all_image_infos_addr, 
+                       _mapped_memory_core_file_get_exclave_vm_flags_for_address, 
                        _mapped_memory_core_file_get_ledger_alternate_accounting, 
                        _mapped_memory_core_file_get_ledger_alternate_compressed, 
                        _mapped_memory_core_file_get_ledger_graphics_footprint, _mapped_memory_core_file_get_ledger_graphics_footprint_compressed, 
@@ -195,6 +204,7 @@ exports:
                        _mapped_memory_core_file_get_proc_path, _mapped_memory_core_file_get_proc_starttime_sec, 
                        _mapped_memory_core_file_get_proc_starttime_usec, _mapped_memory_core_file_get_udata_ptrs, 
                        _mapped_memory_core_file_get_userstack, _mapped_memory_core_file_has_info_for_memory_analysis, 
+                       _mapped_memory_core_file_is_exclave, _mapped_memory_core_file_is_exclavecore, 
                        _mapped_memory_core_file_mach_vm_page_range_query, _mapped_memory_core_file_mach_vm_purgable_control, 
                        _mapped_memory_core_file_mach_vm_region_recurse_submap_short_64, 
                        _mapped_memory_core_file_region_filename, _mapped_memory_is_64_bit, 

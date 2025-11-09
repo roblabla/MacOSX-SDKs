@@ -1,9 +1,9 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name Speech
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3302.15.1
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 3304.65.2 -module-name Speech
 import AVFAudio
 import CoreMedia
+import Darwin
 import Distributed
 import Foundation
 @_exported import Speech
@@ -14,15 +14,15 @@ import _SwiftConcurrencyShims
 import os.log
 import os
 import os.signpost
-@available(macOS 14, iOS 17, *)
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
 public protocol DataInsertable {
   func insert(data: Speech.SFCustomLanguageModelData)
 }
-@available(macOS 14, iOS 17, *)
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
 public protocol TemplateInsertable {
   func insert(generator: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator)
 }
-@available(macOS 14, iOS 17, *)
+@available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
 public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
   public struct PhraseCount : Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible, Swift.Codable, Speech.DataInsertable {
     public let phrase: Swift.String
@@ -162,5 +162,17 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
 extension Speech.SFAcousticFeature {
   public var acousticFeatureValuePerFrame: [Swift.Double] {
     get
+  }
+}
+extension Swift.Sequence {
+  @inlinable internal func uniqued<Subject>(on projection: (Self.Element) throws -> Subject) rethrows -> [Self.Element] where Subject : Swift.Hashable {
+    var seen: Set<Subject> = []
+    var result: [Element] = []
+    for element in self {
+      if seen.insert(try projection(element)).inserted {
+        result.append(element)
+      }
+    }
+    return result
   }
 }

@@ -129,6 +129,8 @@ exports:
                        '_$s17_StringProcessing5RegexV15asciiOnlyDigitsyACyxGSbF', 
                        '_$s17_StringProcessing5RegexV16wordBoundaryKindyACyxGAA0c4WordeF0VF', 
                        '_$s17_StringProcessing5RegexV17matchingSemanticsyACyxGAA0C13SemanticLevelVF', 
+                       '_$s17_StringProcessing5RegexV18_nsreCompatibilityACyxGvg', 
+                       '_$s17_StringProcessing5RegexV18_nsreCompatibilityACyxGvpMV', 
                        '_$s17_StringProcessing5RegexV18dotMatchesNewlinesyACyxGSbF', 
                        '_$s17_StringProcessing5RegexV18repetitionBehavioryACyxGAA0c10RepetitionE0VF', 
                        '_$s17_StringProcessing5RegexV19asciiOnlyWhitespaceyACyxGSbF', 
@@ -300,7 +302,5 @@ exports:
                        '_$sSm17_StringProcessingSs11SubSequenceRtzrlE9replacing_8subrange15maxReplacements4withxqd_1__SnySS5IndexVGSiqd_0_AA5RegexV5MatchVyqd___GKXEtK0K6OutputQyd_1_Rsd__SlRd_0_AA0K9ComponentRd_1_SJ7ElementRtd_0_r1_lF', 
                        '_$sSy17_StringProcessingE8containsySbSSF', '_$sSy17_StringProcessingE8containsySbSsF', 
                        '_$sSy17_StringProcessingSs11SubSequenceRtzrlE6_split9separator9maxSplits25omittingEmptySubsequencesSaySsGSS_SiSbtF', 
-                       '_$sSy17_StringProcessingSs11SubSequenceRtzrlE6_split9separator9maxSplits25omittingEmptySubsequencesSaySsGSs_SiSbtF', 
-                       __swift_string_processing_getMphIdx, __swift_string_processing_getScalarBitArrayIdx, 
-                       __swift_string_processing_getScript, __swift_string_processing_getScriptExtensions ]
+                       '_$sSy17_StringProcessingSs11SubSequenceRtzrlE6_split9separator9maxSplits25omittingEmptySubsequencesSaySsGSs_SiSbtF' ]
 ...

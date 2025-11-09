@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libGPUCompilerImpl.dylib'
-current-version: 32023.101
+current-version: 32023.155
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AIRNTAddLegalizationPasses_Legalizer_Default, _AIRNTAddPassesToEmitAssembly_Matching_Default, 
@@ -208,6 +208,8 @@ exports:
                        __ZN4llvm3air10AIPosition7getImplERNS_11LLVMContextEjPNS0_18AIFunctionConstantENS_9StringRefES6_bNS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air10AITypeQual7classofEPKNS_8MetadataE, __ZN4llvm3air10AITypeQual7classofEPKNS_8MetadataENS_9StringRefE, 
                        __ZN4llvm3air10AIUserAttr7getImplERNS_11LLVMContextENS_9StringRefENS_8Metadata11StorageTypeEb, 
+                       __ZN4llvm3air10APITrackerC1EPKc, __ZN4llvm3air10APITrackerC2EPKc, 
+                       __ZN4llvm3air10APITrackerD1Ev, __ZN4llvm3air10APITrackerD2Ev, 
                        __ZN4llvm3air10ExportFile6createENS_15MemoryBufferRefE, __ZN4llvm3air10Reflection6createENS_15MemoryBufferRefE, 
                        __ZN4llvm3air10Reflection6createERKNS_6ModuleE, __ZN4llvm3air10ScriptFile6createENS_15MemoryBufferRefE, 
                        __ZN4llvm3air11AIArrayType7getImplERNS_11LLVMContextEjjNS_24MDTupleTypedArrayWrapperINS0_10AITypeQualEEEPNS0_6AITypeEjNS_8Metadata11StorageTypeEb, 
@@ -1172,7 +1174,8 @@ exports:
                        __ZN4llvm3air22StreamingArchiveWriterIyvE20backpatchSymbolTableEv, 
                        __ZN7metalfe12METADatabase10TARGET_KEYE, __ZN7metalfe12METADatabase11VERBOSE_KEYE, 
                        __ZN7metalfe12METADatabase16INSTALL_NAME_KEYE, __ZN7metalfe12METADatabase16PRODUCT_KIND_KEYE, 
-                       __ZN7metalfe12METADatabase19ACTIVE_PLATFORM_KEYE, __ZTVN4llvm2cl12basic_parserINSt3__14pairINS_9StringRefES4_EEEE, 
+                       __ZN7metalfe12METADatabase19ACTIVE_PLATFORM_KEYE, __ZNSt3__119piecewise_constructE, 
+                       __ZTVN4llvm2cl12basic_parserINSt3__14pairINS_9StringRefES4_EEEE, 
                        __ZZN11flatbuffers4dataIN13AirReflection6NodeIdENSt3__19allocatorIS2_EEEEPKT_RKNS3_6vectorIS6_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIN3Air13FunctionGroupEEENSt3__19allocatorIS4_EEEEPKT_RKNS5_6vectorIS8_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIN3Air19AttributeDescriptorEEENSt3__19allocatorIS4_EEEEPKT_RKNS5_6vectorIS8_T0_EEE1t, 

@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name AppIntents
-// swift-module-flags-ignorable: -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 146.60.7.0.3
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 174.100.17.0.1 -module-name AppIntents
 @_exported import AppIntents
 import CoreGraphics
 import CoreLocation
@@ -93,7 +92,7 @@ extension AppIntents.IntentParameter {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter {
-  @available(*, deprecated, message: "Please use needsValueError(_ dialog:)")
+  @available(*, deprecated, message: "Use `requestValue(_:)` or `needsValueError(_:)` instead.")
   final public func requestValue(_ dialog: AppIntents.IntentDialog? = nil) -> any Swift.Error
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
@@ -1218,6 +1217,41 @@ extension AppIntents.IntentItemSection {
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+@_functionBuilder public enum AppShortcutsBuilder {
+  @_disfavoredOverload public static func buildExpression(_ component: AppIntents.AppShortcut) -> AppIntents.AppShortcut
+  @_disfavoredOverload public static func buildBlock(_ components: AppIntents.AppShortcut...) -> [AppIntents.AppShortcut]
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+extension AppIntents.AppShortcutsBuilder {
+  public static func buildExpression(_ component: AppIntents.AppShortcut) -> [AppIntents.AppShortcut]
+  public static func buildBlock(_ components: [AppIntents.AppShortcut]...) -> [AppIntents.AppShortcut]
+  public static func buildBlock() -> [AppIntents.AppShortcut]
+  public static func buildOptional(_ component: (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)?) -> [AppIntents.AppShortcut]
+  @available(*, unavailable, message: "if statements in an AppShortcutsBuilder can only be used with #available clauses")
+  public static func buildOptional<A>(_ appShortcuts: A?) -> [AppIntents.AppShortcut] where A : AppIntents._AppShortcutsContentMarker
+  @available(*, unavailable, message: "if statements in an AppShortcutsBuilder can only be used with #available clauses")
+  public static func buildOptional(_ appShortcuts: [AppIntents.AppShortcut]?) -> [AppIntents.AppShortcut]
+  public static func buildLimitedAvailability(_ components: [AppIntents.AppShortcut]) -> (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+public protocol AppShortcutsContent {
+  var appShortcuts: [AppIntents.AppShortcut] { get }
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+@_marker public protocol _AppShortcutsContentMarker {
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+@_marker public protocol _LimitedAvailabilityAppShortcutsContentMarker {
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+@usableFromInline
+@frozen internal struct LimitedAvailabilityAppShortcuts : AppIntents.AppShortcutsContent, AppIntents._AppShortcutsContentMarker, AppIntents._LimitedAvailabilityAppShortcutsContentMarker {
+  @usableFromInline
+  internal var appShortcuts: [AppIntents.AppShortcut]
+  @usableFromInline
+  internal init(_ appShortcuts: [AppIntents.AppShortcut])
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameterContext {
   #if compiler(>=5.3) && $AsyncAwait
   public func requestValue(_ dialog: AppIntents.IntentDialog? = nil) async throws -> Value.ValueType
@@ -1326,11 +1360,6 @@ extension AppIntents.AppShortcutsProvider {
     get
   }
   public static func updateAppShortcutParameters()
-}
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-@_functionBuilder public enum AppShortcutsBuilder {
-  public static func buildExpression(_ component: AppIntents.AppShortcut) -> AppIntents.AppShortcut
-  public static func buildBlock(_ components: AppIntents.AppShortcut...) -> [AppIntents.AppShortcut]
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension AppIntents.AppShortcutsProvider {
@@ -2078,10 +2107,10 @@ extension AppIntents.IntentItem {
     public static func buildExpression<ExpressionValue>(_ expression: AppIntents.IntentItem<ExpressionValue>) -> AppIntents.IntentItem<ExpressionValue> where ExpressionValue : AppIntents._IntentValue
     public static func buildBlock(_ items: AppIntents.IntentItem<Value>...) -> [AppIntents.IntentItem<Value>]
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-    @_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
+    @backDeployed(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
     public static func buildBlock(_ items: [AppIntents.IntentItem<Value>]) -> [AppIntents.IntentItem<Value>] { items }
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-    @_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
+    @backDeployed(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
     public static func buildArray(_ components: [[AppIntents.IntentItem<Value>]]) -> [AppIntents.IntentItem<Value>] {
             components.flatMap { $0 }
         }
@@ -2769,6 +2798,13 @@ extension AppIntents._RawRepresentableStringQuery where Entity : Swift.CaseItera
   #if compiler(>=5.3) && $AsyncAwait
   public func entities(matching string: Swift.String) async throws -> [Entity]
   #endif
+}
+@available(iOS 17.4, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public protocol PushToTalkTransmissionIntent : AppIntents.SystemIntent {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol SetFocusFilterIntent : AppIntents.AppIntent, AppIntents.InstanceDisplayRepresentable {

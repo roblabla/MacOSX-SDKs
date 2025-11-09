@@ -1,4 +1,4 @@
-framework module MetalKit [extern_c] {
+framework module MetalKit {
   umbrella header "MetalKit.h"
   export *
   module * { export * }

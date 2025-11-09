@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-macos14.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -module-name CoreFoundation
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2000
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-macos14.4 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
 @_exported import CoreFoundation
 import Swift
 import _Concurrency
@@ -522,7 +521,7 @@ extension CoreFoundation.CGFloat : Swift.Codable {
     let container = try decoder.singleValueContainer()
     do {
       self.native = try container.decode(NativeType.self)
-    } catch DecodingError.typeMismatch(let type, let context) {
+    } catch DecodingError.dataCorrupted(let context) {
       // We may have encoded as a different type on a different platform. A
       // strict fixed-format decoder may disallow a conversion, so let's try the
       // other type.
@@ -536,7 +535,7 @@ extension CoreFoundation.CGFloat : Swift.Codable {
         // Failed to decode as the other type, too. This is neither a Float nor
         // a Double. Throw the old error; we don't want to clobber the original
         // info.
-        throw DecodingError.typeMismatch(type, context)
+        throw DecodingError.dataCorrupted(context)
       }
     }
   }

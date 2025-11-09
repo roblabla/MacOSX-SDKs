@@ -282,7 +282,7 @@ API_AVAILABLE(macos(12.3))
 @property(nonatomic, assign) BOOL ignoreGlobalClipDisplay API_AVAILABLE(macos(14.0));
 
 /*!
- @abstract SCStreamProperty to ignore framing on windows in the single window sharing case (will ignore shadows).
+ @abstract SCStreamProperty to ignore global clipping when on single window share. When set to true, single window captures that are partially off the screen will not be clipped. (will ignore window placement in display context).
  */
 @property(nonatomic, assign) BOOL ignoreGlobalClipSingleWindow API_AVAILABLE(macos(14.0));
 
@@ -459,6 +459,13 @@ API_AVAILABLE(macos(12.3))
  @discussion notifies the delegate that the stream has stopped and the error associated with it
 */
 - (void)stream:(SCStream *)stream didStopWithError:(NSError *)error;
+
+/*!
+ @abstract userDidStopStream:
+ @param stream the SCStream object
+ @discussion notifies the delegate that the stream was stopped by the user from the control center module
+ */
+- (void)userDidStopStream:(SCStream *)stream NS_SWIFT_NAME(userDidStopStream(_:)) API_AVAILABLE(macos(14.4));
 
 /*!
  @abstract outputVideoEffectDidStartForStream:

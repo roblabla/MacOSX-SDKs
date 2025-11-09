@@ -13,8 +13,8 @@ exports:
                        _RTIServiceMediaRemoteName, _RTIServiceRapportName, _RTIServiceSharingName, 
                        _RTIServiceSharingSafariName, _RTIServiceTVControlServicesName, 
                        _RemoteTextInputVersionNumber, _RemoteTextInputVersionString, 
-                       __RTI_NSStringFromCGRect, _kRTISupplementalItemIconDataType_CodedNSImage, 
-                       _kRTISupplementalItemIconDataType_CodedUIImage ]
+                       __RTI_NSStringFromCGRect, __RTI_NSStringFromRTIInputModality, 
+                       _kRTISupplementalItemIconDataType_CodedNSImage, _kRTISupplementalItemIconDataType_CodedUIImage ]
     objc-classes:    [ RTIAssistantItem, RTIBarButtonGroup, RTIColor, RTIDataPayload, 
                        RTIDocumentRequest, RTIDocumentState, RTIDocumentTraits, RTIInputOperation, 
                        RTIInputSourceState, RTIInputSystemAutoFillUIClient, RTIInputSystemClient, 

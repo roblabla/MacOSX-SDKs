@@ -180,4 +180,6 @@
 #define SIOCGIF6LOWPAN  _IOWR('i', 197, struct ifreq)   /* get 6LOWPAN config */
 
 
+#define SIOCGIFDIRECTLINK _IOWR('i', 219, struct ifreq) /* get DIRECTLINK */
+
 #endif /* !_SYS_SOCKIO_H_ */

@@ -8,10 +8,11 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CryptoKitCBridgingVersionNumber, _CryptoKitCBridgingVersionString, 
                        _SPAKE2Alishaz0Size, _SPAKE2CtxSize, _SSPBSecretShareReadFrom, 
-                       _ccss_sizeof_parameters_fix, _getCMACContextSize, _getContextSizeForECBMode, 
-                       _getDigestSizeForDigestInfo, _getGCMCtxSize, _getHMACContextSizeForDigestInfo, 
-                       _getccec_full_ctx_size, _getccec_pub_ctx_size, _init_ccec_ctx_full, 
-                       _init_ccec_ctx_pub, _keyIsCompactRepresentable ]
+                       _ccrng_generate_bridge, _ccss_sizeof_parameters_fix, _getCMACContextSize, 
+                       _getContextSizeForECBMode, _getDigestSizeForDigestInfo, _getGCMCtxSize, 
+                       _getHMACContextSizeForDigestInfo, _getccec_full_ctx_size, 
+                       _getccec_pub_ctx_size, _init_ccec_ctx_full, _init_ccec_ctx_pub, 
+                       _keyIsCompactRepresentable ]
     objc-classes:    [ CKCBCorecryptoECPoint, CKCBCorecryptoECScalar, CKSSShare, 
                        SEPUtils, SSPBSecretShare ]
     objc-ivars:      [ CKSSShare._share, CKSSShare._share_size, SSPBSecretShare._associatedData, 

@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomePubSub.framework/Versions/A/BiomePubSub'
-current-version: 123.2.7
+current-version: 123.5.23
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    symbols:         [ '__swift_FORCE_LOAD_$_swiftFoundation.1', '__swift_FORCE_LOAD_$_swiftFoundation.282', 
-                       '__swift_FORCE_LOAD_$_swiftFoundation.52' ]
+    symbols:         [ '__swift_FORCE_LOAD_$_swiftFoundation.1', '__swift_FORCE_LOAD_$_swiftFoundation.283', 
+                       '__swift_FORCE_LOAD_$_swiftFoundation.53' ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11BiomePubSub10PublishersO12HandleEventsV5innerSo09BPSHandleF0CyxGvM', 
@@ -267,10 +267,10 @@ exports:
                        '_$s23ObjectiveCPublisherType11BiomePubSub17PublisherProtocolPTl', 
                        '_$s6Output11BiomePubSub21PublisherBaseProtocolPTl', '_$sSa11BiomePubSubRlzClE11bmPublisherAA10PublishersO8SequenceVy_xGvg', 
                        '_$sSa11BiomePubSubRlzClE11bmPublisherAA10PublishersO8SequenceVy_xGvpMV', 
-                       _BMPubSubErrorDomain, _BPSDemandMax, _BPSDemandNone, _BPSDemandUnlimited, 
-                       _BPSOverridePipelineSupportsPullBasedPublishers, _BPSPBApproxPercentileDigestReadFrom, 
-                       _BPSPipelineSupportsPullBasedPublishers, _BiomePubSubVersionNumber, 
-                       _BiomePubSubVersionString, '__swift_FORCE_LOAD_$_swiftFoundation.80' ]
+                       _BPSDemandMax, _BPSDemandNone, _BPSDemandUnlimited, _BPSOverridePipelineSupportsPullBasedPublishers, 
+                       _BPSPBApproxPercentileDigestReadFrom, _BPSPipelineSupportsPullBasedPublishers, 
+                       _BPSPubSubErrorDomain, _BiomePubSubVersionNumber, _BiomePubSubVersionString, 
+                       '__swift_FORCE_LOAD_$_swiftFoundation.80' ]
     objc-classes:    [ BMBookmarkClasses, BMBookmarkNode, BMBookmarkWrapper, BMBookmarkablePublisher, 
                        BMBookmarkableSubscription, BPSAggregations, BPSAggregator, 
                        BPSApproxPercentileDigest, BPSApproxPercentileDigestCentroid, 
@@ -317,6 +317,6 @@ exports:
                        _BPSInnerFutureConduit._lock, _BPSMerged._downstreamLock, 
                        _BPSMerged._lock, _BPSSequenceInner._lock ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '__swift_FORCE_LOAD_$_swiftFoundation.2', '__swift_FORCE_LOAD_$_swiftFoundation.283', 
-                       '__swift_FORCE_LOAD_$_swiftFoundation.42', '__swift_FORCE_LOAD_$_swiftFoundation.53' ]
+    symbols:         [ '__swift_FORCE_LOAD_$_swiftFoundation.2', '__swift_FORCE_LOAD_$_swiftFoundation.284', 
+                       '__swift_FORCE_LOAD_$_swiftFoundation.42', '__swift_FORCE_LOAD_$_swiftFoundation.54' ]
 ...

@@ -10,9 +10,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftVision.dylib', '$ld$install_name$os10.11$@rpath/libswiftVision.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftVision.dylib', '$ld$install_name$os10.13$@rpath/libswiftVision.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftVision.dylib', '$ld$install_name$os10.9$@rpath/libswiftVision.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo16VNRecognizedTextC6VisionE11boundingBox3forSo22VNRectangleObservationCSgSnySS5IndexVG_tKF', 
+                       '$ld$install_name$os10.14$@rpath/libswiftVision.dylib', '$ld$install_name$os10.9$@rpath/libswiftVision.dylib', 
+                       '_$sSo16VNRecognizedTextC6VisionE11boundingBox3forSo22VNRectangleObservationCSgSnySS5IndexVG_tKF', 
                        '_$sSo17VNFaceObservationC6VisionE18faceCaptureQualitySfSgvg', 
                        '_$sSo17VNFaceObservationC6VisionE18faceCaptureQualitySfSgvpMV', 
                        '_$sSo18VNBarcodeSymbologya6VisionE10DataMatrixABvgZ', '_$sSo18VNBarcodeSymbologya6VisionE13I2of5ChecksumABvgZ', 

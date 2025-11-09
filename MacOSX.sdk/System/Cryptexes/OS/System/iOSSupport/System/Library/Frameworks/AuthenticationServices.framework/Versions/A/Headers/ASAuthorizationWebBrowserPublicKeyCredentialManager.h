@@ -1,20 +1,29 @@
 // Copyright © 2022 Apple Inc. All rights reserved.
 
+#import <AuthenticationServices/ASFoundation.h>
 #import <Foundation/Foundation.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class ASAuthorizationWebBrowserPlatformPublicKeyCredential;
 
-API_AVAILABLE(macos(13.3), macCatalyst(16.4)) API_UNAVAILABLE(ios, tvos, watchos)
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_AVAILABLE(macos(13.3), macCatalyst(16.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos, visionos)
+#else
+API_AVAILABLE(macos(13.3), macCatalyst(16.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos)
+#endif
 typedef NS_ENUM(NSInteger, ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) {
     ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized,
     ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied,
     ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined,
 } NS_SWIFT_NAME(ASAuthorizationWebBrowserPublicKeyCredentialManager.AuthorizationState);
 
-NS_SWIFT_SENDABLE
-AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4)) API_UNAVAILABLE(ios, tvos, watchos)
+AS_SWIFT_SENDABLE
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos, visionos)
+#else
+AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos)
+#endif
 @interface ASAuthorizationWebBrowserPublicKeyCredentialManager : NSObject
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

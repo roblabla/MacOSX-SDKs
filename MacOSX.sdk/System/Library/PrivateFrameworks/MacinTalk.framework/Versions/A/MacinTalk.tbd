@@ -1090,7 +1090,5 @@ exports:
                        MTFWrappedSpeechElement, MTFWrappedSyllable, MTFWrappedWord, 
                        MTFrontendSimple, MTVoiceUtils, MTWrappedPhraseProcessor, 
                        _TtC9MacinTalk24MTMacinTalkAUSPAudioUnit ]
-    weak-symbols:    [ __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEE12__block_sizeE, 
-                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEE16__destroy_vectorC1ERS5_, 
-                       __ZNSt3__16vectorIPKvNS_9allocatorIS2_EEE16__destroy_vectorC2ERS5_ ]
+    weak-symbols:    [ __ZNSt3__15dequeIP7SLTokenNS_9allocatorIS2_EEE12__block_sizeE ]
 ...

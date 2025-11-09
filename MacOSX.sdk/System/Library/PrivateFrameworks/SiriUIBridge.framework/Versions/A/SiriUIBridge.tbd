@@ -13,6 +13,8 @@ exports:
                        '_$s12SiriUIBridge0B0CyACSS_0A12MessageTypes0C10Publishing_pSo32AFRequestDispatcherServiceHelper_pSo17OS_dispatch_queueCAD28ConversationSessionsManaging_pSo26AFBridgeConnectionListenerCtcfc', 
                        '_$s12SiriUIBridge0B7ServiceC12siriPromptedyyFTj', '_$s12SiriUIBridge0B7ServiceC12siriPromptedyyFTq', 
                        '_$s12SiriUIBridge0B7ServiceC13siriDismissedyyFTj', '_$s12SiriUIBridge0B7ServiceC13siriDismissedyyFTq', 
+                       '_$s12SiriUIBridge0B7ServiceC13stopAttending3forySo23SUIBAttendingStopReasonV_tFTj', 
+                       '_$s12SiriUIBridge0B7ServiceC13stopAttending3forySo23SUIBAttendingStopReasonV_tFTq', 
                        '_$s12SiriUIBridge0B7ServiceC13stopAttending4withySo010AFUIBridgeE10StopReasonV_tFTj', 
                        '_$s12SiriUIBridge0B7ServiceC13stopAttending4withySo010AFUIBridgeE10StopReasonV_tFTq', 
                        '_$s12SiriUIBridge0B7ServiceC14siriWillPromptyyFTj', '_$s12SiriUIBridge0B7ServiceC14siriWillPromptyyFTq', 
@@ -40,7 +42,15 @@ exports:
                        '_$s12SiriUIBridge14SignpostLoggerPAAE5begin4name24parameterOverrideOptions0G02os12OSSignpostIDVs12StaticStringV_ALSgSSSgtFZ', 
                        '_$s12SiriUIBridge14SignpostLoggerPAAE5begin_15enableTelemetry2os12OSSignpostIDVs12StaticStringV_SbtFZ', 
                        '_$s12SiriUIBridge14SignpostLoggerPAAE5eventyys12StaticStringVFZ', 
-                       '_$s12SiriUIBridge14SignpostLoggerTL', _SiriUIBridgeVersionNumber, 
+                       '_$s12SiriUIBridge14SignpostLoggerTL', '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE12siriPromptedyyF', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE13siriDismissedyyF', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE13stopAttending3forySo23SUIBAttendingStopReasonV_tF', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE14siriWillPromptyyF', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE14startAttendingyyF', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE7preheatyyF', '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE8delegateABSo0A15ServiceDelegate_p_tcfC', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeE8delegateABSo0A15ServiceDelegate_p_tcfc', 
+                       '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeEABycfC', '_$sSo18SUIBUIBridgeClientC12SiriUIBridgeEABycfc', 
+                       '_$sSo18SUIBUIBridgeClientCMa', _SiriUIBridgeVersionNumber, 
                        _SiriUIBridgeVersionString ]
-    objc-classes:    [ _TtC12SiriUIBridge15UIBridgeService ]
+    objc-classes:    [ SUIBUIBridgeClient, _TtC12SiriUIBridge15UIBridgeService ]
 ...

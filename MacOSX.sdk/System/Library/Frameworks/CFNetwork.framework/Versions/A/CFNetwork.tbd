@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1490.0.4
+current-version: 1494.0.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -163,12 +163,13 @@ exports:
                        _NSURLSessionTransferSizeUnknown, _NSURLSessionUploadTaskResumeData, 
                        __CFCachedURLResponseGetMemMappedData, __CFCachedURLResponseSetBecameFileBackedCallBackBlock, 
                        __CFErrorCreateWithStreamError, __CFHTTPAuthenticationApplyProxyAuthorizationToRequest, 
-                       __CFHTTPAuthenticationCopySortedAuthSchemes, __CFHTTPAuthenticationCreateNTLMHeaderForRequest, 
-                       __CFHTTPAuthenticationCreateNegotiateHeaderForRequest, __CFHTTPAuthenticationDisassociateConnection, 
-                       __CFHTTPAuthenticationGetSchemesDict, __CFHTTPAuthenticationPasswordInClear, 
-                       __CFHTTPAuthenticationSetPreferredScheme, __CFHTTPAuthenticationUpdateFromResponse, 
-                       __CFHTTPCookieCreateCookiesWithResponseMessage, __CFHTTPCookieCreateWithStringAndPartition, 
-                       __CFHTTPCookieStorageCopyCookiesForURLWithMainDocumentURL, 
+                       __CFHTTPAuthenticationCheckOriginAllowedAsThirdParty, __CFHTTPAuthenticationCopySortedAuthSchemes, 
+                       __CFHTTPAuthenticationCreateNTLMHeaderForRequest, __CFHTTPAuthenticationCreateNegotiateHeaderForRequest, 
+                       __CFHTTPAuthenticationDisassociateConnection, __CFHTTPAuthenticationGetPATAuthHeaders, 
+                       __CFHTTPAuthenticationGetPATSchemes, __CFHTTPAuthenticationGetSchemesDict, 
+                       __CFHTTPAuthenticationPasswordInClear, __CFHTTPAuthenticationSetPreferredScheme, 
+                       __CFHTTPAuthenticationUpdateFromResponse, __CFHTTPCookieCreateCookiesWithResponseMessage, 
+                       __CFHTTPCookieCreateWithStringAndPartition, __CFHTTPCookieStorageCopyCookiesForURLWithMainDocumentURL, 
                        __CFHTTPCookieStorageCopyRequestHeaderFieldsForURL, __CFHTTPCookieStorageCreateInMemory, 
                        __CFHTTPCookieStorageCreateWithProperties, __CFHTTPCookieStorageFlushCookieStores, 
                        __CFHTTPCookieStorageGetDefault, __CFHTTPCookieStorageSetCookiesWithResponseHeaderFields, 

@@ -32,7 +32,8 @@ exports:
                        _TIReporterKey_ResultsArray_IntendedTransliteration, _TIReporterKey_ResultsArray_KeystrokeCount, 
                        _TIReporterKey_ResultsArray_Seed, _TIReporterKey_ResultsArray_SeparatorCount, 
                        _TIReporterKey_ResultsArray_SeparatorErrorCount, _TIReporterKey_ResultsArray_TouchPoints, 
-                       _TIReporterKey_ResultsArray_Touched, _TIReporterKey_ResultsArray_WordCount, 
+                       _TIReporterKey_ResultsArray_Touched, _TIReporterKey_ResultsArray_TypologyLogPath, 
+                       _TIReporterKey_ResultsArray_TypologyTraceLogPath, _TIReporterKey_ResultsArray_WordCount, 
                        _TIReporterKey_ResultsArray_WordErrorCount, _TIReporterKey_SeparatorAccuracy, 
                        _TIReporterKey_SeparatorCount, _TIReporterKey_SeparatorErrorCount, 
                        _TIReporterKey_TextCorpus, _TIReporterKey_TotalAutocorrectionCount, 
@@ -205,4 +206,5 @@ exports:
                        SpaceBarFollowingPunctuationFailure._letters, TIDebugValue.defaultValue, 
                        TIDebugValue.stepSize, TIDebugValue.sweepMax, TIDebugValue.sweepMin, 
                        TIDebugValue.sweepValue, TISweepSource.debugValues, TISweepSource.stepCount ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

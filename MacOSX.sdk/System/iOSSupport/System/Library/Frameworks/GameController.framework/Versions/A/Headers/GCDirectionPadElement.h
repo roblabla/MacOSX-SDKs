@@ -8,6 +8,7 @@
 #import <GameController/GCPhysicalInputElement.h>
 #import <GameController/GCLinearInput.h>
 #import <GameController/GCAxisInput.h>
+#import <GameController/GCAxis2DInput.h>
 #import <GameController/GCPressedStateInput.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
 @protocol GCDirectionPadElement <GCPhysicalInputElement>
+
+/** The x,y position of the dpad input. */
+@property (readonly) id<GCAxis2DInput> xyAxes API_AVAILABLE(macos(14.3), ios(17.4), tvos(17.4), visionos(1.1));
 
 /** The horizontal/x-component of the dpad input. */
 @property (readonly) id<GCAxisInput> xAxis;

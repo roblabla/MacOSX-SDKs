@@ -140,14 +140,12 @@ typedef NS_OPTIONS(NSUInteger, NSStringEncodingConversionOptions) {
 - (NSComparisonResult)compare:(NSString *)string options:(NSStringCompareOptions)mask range:(NSRange)rangeOfReceiverToCompare;
 - (NSComparisonResult)compare:(NSString *)string options:(NSStringCompareOptions)mask range:(NSRange)rangeOfReceiverToCompare locale:(nullable id)locale; // locale arg used to be a dictionary pre-Leopard. We now accept NSLocale. Assumes the current locale if non-nil and non-NSLocale. nil continues to mean canonical compare, which doesn't depend on user's locale choice.
 - (NSComparisonResult)caseInsensitiveCompare:(NSString *)string;
-#if !0
 - (NSComparisonResult)localizedCompare:(NSString *)string;
 - (NSComparisonResult)localizedCaseInsensitiveCompare:(NSString *)string;
 
 /* localizedStandardCompare:, added in 10.6, should be used whenever file names or other strings are presented in lists and tables where Finder-like sorting is appropriate.  The exact behavior of this method may be tweaked in future releases, and will be different under different localizations, so clients should not depend on the exact sorting order of the strings.
 */
 - (NSComparisonResult)localizedStandardCompare:(NSString *)string API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
-#endif
 
 - (BOOL)isEqualToString:(NSString *)aString;
 
@@ -502,9 +500,7 @@ FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDete
 
 
 FOUNDATION_EXPORT NSExceptionName const NSCharacterConversionException;
-#if !0
 FOUNDATION_EXPORT NSExceptionName const NSParseErrorException; // raised by -propertyList
-#endif
 #define NSMaximumStringLength	(INT_MAX-1)
 
 #pragma mark *** Deprecated/discouraged APIs ***

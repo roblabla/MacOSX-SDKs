@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-ios17.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name WeatherKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 514
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 563 -module-name WeatherKit
 import CoreLocation
 import Foundation
 import Network
@@ -57,7 +56,7 @@ public struct DayWeather {
   public var precipitation: WeatherKit.Precipitation
   public var precipitationChance: Swift.Double
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-  @_backDeploy(before: iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4)
+  @backDeployed(before: iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4)
   public var precipitationAmount: Foundation.Measurement<Foundation.UnitLength> {
     get {
         return rainfallAmount

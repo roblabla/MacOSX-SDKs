@@ -5,6 +5,8 @@
 //  Copyright (c) 2011 Apple, Inc. All rights reserved.
 //
 
+#import <SpriteKit/SKVersion.h>
+
 #import <SpriteKit/SKScene.h>
 #import <SpriteKit/SKCameraNode.h>
 #import <SpriteKit/SKNode.h>

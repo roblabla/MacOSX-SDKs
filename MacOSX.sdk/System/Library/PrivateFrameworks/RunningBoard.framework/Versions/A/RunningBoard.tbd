@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RunningBoard.framework/Versions/A/RunningBoard'
-current-version: 858.60.5
+current-version: 874.100.27
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RBAttributePrimitiveEntitlement, _RBBackBoardClientEntitlement, 
@@ -53,8 +53,9 @@ exports:
                        RBLaunchdProperties._underlyingAssertion, RBLaunchdProperties._variableEUID, 
                        RBProcessAppNapState._enabled, RBProcessAppNapState._pid, 
                        RBProcessAppNapState._policy, RBProcessAppNapState._taskPort, 
-                       RBProcessState._appNapState, RBProcessState._explicitJetsamBand, 
-                       RBProcessState._flags, RBProcessState._gpuRole, RBProcessState._guaranteedRunning, 
+                       RBProcessState._appNapState, RBProcessState._endowmentInfos, 
+                       RBProcessState._explicitJetsamBand, RBProcessState._flags, 
+                       RBProcessState._gpuRole, RBProcessState._guaranteedRunning, 
                        RBProcessState._identity, RBProcessState._inheritances, RBProcessState._jetsamLenientModeByRole, 
                        RBProcessState._legacyAssertions, RBProcessState._legacyFinishTaskReason, 
                        RBProcessState._maxCPULimitsByRole, RBProcessState._memoryLimit, 

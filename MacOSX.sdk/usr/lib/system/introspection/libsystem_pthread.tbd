@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/introspection/libsystem_pthread.dylib'
-current-version: 519
+current-version: 519.101.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -27,8 +27,8 @@ exports:
                        __pthread_set_properties_self, __pthread_set_self, __pthread_setspecific_static, 
                        __pthread_start, __pthread_tsd_shared_cache_first, __pthread_tsd_shared_cache_last, 
                        __pthread_workloop_create, __pthread_workloop_destroy, __pthread_workqueue_add_cooperativethreads, 
-                       __pthread_workqueue_addthreads, __pthread_workqueue_asynchronous_override_add, 
-                       __pthread_workqueue_asynchronous_override_reset_all_self, 
+                       __pthread_workqueue_addthreads, __pthread_workqueue_allow_send_signals, 
+                       __pthread_workqueue_asynchronous_override_add, __pthread_workqueue_asynchronous_override_reset_all_self, 
                        __pthread_workqueue_asynchronous_override_reset_self, __pthread_workqueue_init, 
                        __pthread_workqueue_init_with_kevent, __pthread_workqueue_init_with_workloop, 
                        __pthread_workqueue_override_reset, __pthread_workqueue_override_start_direct, 
@@ -45,10 +45,10 @@ exports:
                        _pthread_attr_setdetachstate, _pthread_attr_setguardsize, 
                        _pthread_attr_setinheritsched, _pthread_attr_setschedparam, 
                        _pthread_attr_setschedpolicy, _pthread_attr_setscope, _pthread_attr_setstack, 
-                       _pthread_attr_setstackaddr, _pthread_attr_setstacksize, _pthread_cancel, 
-                       _pthread_chdir_np, _pthread_cond_broadcast, _pthread_cond_destroy, 
-                       _pthread_cond_init, _pthread_cond_signal, _pthread_cond_signal_thread_np, 
-                       _pthread_cond_timedwait, '_pthread_cond_timedwait$NOCANCEL', 
+                       _pthread_attr_setstackaddr, _pthread_attr_setstacksize, _pthread_attr_setworkinterval_np, 
+                       _pthread_cancel, _pthread_chdir_np, _pthread_cond_broadcast, 
+                       _pthread_cond_destroy, _pthread_cond_init, _pthread_cond_signal, 
+                       _pthread_cond_signal_thread_np, _pthread_cond_timedwait, '_pthread_cond_timedwait$NOCANCEL', 
                        _pthread_cond_timedwait_relative_np, _pthread_cond_wait, '_pthread_cond_wait$NOCANCEL', 
                        _pthread_condattr_destroy, _pthread_condattr_getpshared, _pthread_condattr_init, 
                        _pthread_condattr_setpshared, _pthread_cpu_number_np, _pthread_create, 

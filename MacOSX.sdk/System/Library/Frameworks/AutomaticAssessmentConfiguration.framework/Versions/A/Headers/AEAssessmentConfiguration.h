@@ -14,9 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class AEAssessmentParticipantConfiguration;
 
 API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14.0))
+API_UNAVAILABLE(visionos)
 @interface AEAssessmentConfiguration: NSObject <NSCopying>
 
 API_AVAILABLE(ios(14.0))
+API_UNAVAILABLE(visionos)
 API_UNAVAILABLE(macos, macCatalyst)
 typedef NS_OPTIONS(NSUInteger, AEAutocorrectMode) {
     AEAutocorrectModeNone = 0,

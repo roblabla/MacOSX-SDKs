@@ -1188,7 +1188,7 @@ exports:
                        __ZNK3cva3geo5ChartIfE7projectERKNS_3bad6AffineIfLj3ENS3_3KeyEEERS6_, 
                        __ZNK3cva3geo5ChartIfE7startIDEv, __ZNK3cva3geo5ChartIfE9unprojectERKNS_3bad6AffineIfLj3ENS3_3KeyEEE, 
                        __ZNK3cva3geo5ChartIfE9unprojectERKNS_3bad6AffineIfLj3ENS3_3KeyEEERS6_, 
-                       __ZTVN3cva12experimental21ResizeStrategyLanczosINS_6MatrixIfLj4ELj1ELb0EEELb0EEE, 
+                       __ZNSt3__119piecewise_constructE, __ZTVN3cva12experimental21ResizeStrategyLanczosINS_6MatrixIfLj4ELj1ELb0EEELb0EEE, 
                        __ZTVN3cva12experimental21ResizeStrategyLanczosINS_6MatrixIfLj4ELj1ELb0EEELb1EEE, 
                        __ZTVN3cva12experimental21ResizeStrategyLanczosINS_6MatrixIhLj4ELj1ELb0EEELb0EEE, 
                        __ZTVN3cva12experimental21ResizeStrategyLanczosINS_6MatrixIhLj4ELj1ELb0EEELb1EEE, 

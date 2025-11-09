@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VFX.framework/Versions/A/Frameworks/libVFXCore.dylib'
-current-version: 174.40.1
+current-version: 174.100.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -16648,6 +16648,11 @@ exports:
                        '_$sSo14MTLTextureTypeV7VFXCoreE6encode2toys7Encoder_p_tKF', 
                        '_$sSo14MTLTextureTypeVSE7VFXCoreMc', '_$sSo14MTLTextureTypeVSe7VFXCoreMc', 
                        '_$sSo14MTLTextureTypeVs23CustomStringConvertible7VFXCoreMc', 
+                       '_$sSo14view_constantsV3ECS20DefaultInitializable7VFXCoreMc', 
+                       '_$sSo14view_constantsV3ECS20DefaultInitializable7VFXCoreWP', 
+                       '_$sSo14view_constantsV7VFXCoreE2eeoiySbAB_ABtFZ', '_$sSo14view_constantsV7VFXCoreE4hash4intoys6HasherVz_tF', 
+                       '_$sSo14view_constantsV7VFXCoreE9hashValueSivg', '_$sSo14view_constantsV7VFXCoreE9hashValueSivpMV', 
+                       '_$sSo14view_constantsVSH7VFXCoreMc', '_$sSo14view_constantsVSQ7VFXCoreMc', 
                        '_$sSo15MTLArgumentTypeV7VFXCoreE4fromABs7Decoder_p_tKcfC', 
                        '_$sSo15MTLArgumentTypeV7VFXCoreE6encode2toys7Encoder_p_tKF', 
                        '_$sSo15MTLArgumentTypeVSE7VFXCoreMc', '_$sSo15MTLArgumentTypeVSe7VFXCoreMc', 

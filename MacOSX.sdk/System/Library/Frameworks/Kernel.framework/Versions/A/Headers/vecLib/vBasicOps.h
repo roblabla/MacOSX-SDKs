@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-1041.0
+     Version:    vecLib-1043.100
  
-     Copyright:  Copyright (c) 1999-2023 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2024 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 #include <TargetConditionals.h>
 
-#if !0
+#if !0 && !0
 
 #if __has_include(<os/availability.h>)
 #  include <os/availability.h>

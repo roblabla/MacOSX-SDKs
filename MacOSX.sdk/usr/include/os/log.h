@@ -219,6 +219,7 @@ os_log_create(const char *subsystem, const char *category);
 #define os_log(log, format, ...) \
         os_log_with_type(log, OS_LOG_TYPE_DEFAULT, format, ##__VA_ARGS__)
 
+
 /*!
  * @function os_log_info
  *

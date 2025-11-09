@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCompute.framework/Versions/A/IntelligencePlatformCompute'
-current-version: 123.2.7
+current-version: 123.5.23
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -23,9 +23,9 @@ exports:
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerCN', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerCfD', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerCfd', 
-                       '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterC12streamPruned0G10IdentifierySS_tKF', 
-                       '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterC13streamUpdated0G10IdentifierySS_tKF', 
-                       '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterC14streamDeletion0G10IdentifierySS_tKF', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterC12streamPruned0G10Identifier10remoteNameySS_SSSgtKF', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterC13streamUpdated0G10Identifier10remoteNameySS_SSSgtKF', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterC14streamDeletion0G10Identifier10remoteNameySS_SSSgtKF', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterCMa', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterCMm', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterCMn', 
@@ -34,9 +34,9 @@ exports:
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterCN', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterCfD', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC13EventReporterCfd', 
-                       '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterC12streamPruned0H10IdentifierySS_tKF', 
-                       '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterC13streamUpdated0H10IdentifierySS_tKF', 
-                       '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterC14streamDeletion0H10IdentifierySS_tKF', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterC12streamPruned0H10Identifier10remoteNameySS_SSSgtKF', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterC13streamUpdated0H10Identifier10remoteNameySS_SSSgtKF', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterC14streamDeletion0H10Identifier10remoteNameySS_SSSgtKF', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterCAEycfC', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterCAEycfc', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterCMa', 
@@ -44,6 +44,16 @@ exports:
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterCMo', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterCN', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC17NullEventReporterCfD', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderC0aB4Core0e16UpdateGenerationfG0AAMc', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderC6runner3for0aB4Core0e16UpdateGenerationF0_pAH13ConfigurationV_tF', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCMa', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCMm', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCMn', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCMo', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCMu', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCN', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCfD', 
+                       '_$s27IntelligencePlatformCompute0C13OrchestrationC18ViewRunnerProviderCfd', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC5startSo19BMViewEventReporter_pyFZ', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationCACycfC', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationCACycfc', 

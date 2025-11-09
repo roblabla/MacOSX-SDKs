@@ -5,11 +5,11 @@
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <GameController/GCExtern.h>
 #import <GameController/GCPhysicalInputProfile.h>
 
 @class GCDeviceCursor;
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

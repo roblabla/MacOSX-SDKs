@@ -37,7 +37,8 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
 install-name:    '/System/Library/PrivateFrameworks/AskToCore.framework/Versions/A/AskToCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s5AskTo10ATQuestionC11descriptionSSvg', '_$s5AskTo10ATQuestionC13answerChoicesSayAA14ATAnswerChoiceCGvM', 
                        '_$s5AskTo10ATQuestionC13answerChoicesSayAA14ATAnswerChoiceCGvg', 
                        '_$s5AskTo10ATQuestionC13answerChoicesSayAA14ATAnswerChoiceCGvpMV', 

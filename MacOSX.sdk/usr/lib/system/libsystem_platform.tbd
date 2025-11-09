@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 306.0.1
+current-version: 316.100.10
 parent-umbrella:
   - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -57,10 +57,13 @@ exports:
                        __spin_lock, __spin_lock_try, __spin_unlock, _ffs, _ffsl, 
                        _ffsll, _fls, _flsl, _flsll, _getcontext, _longjmp, _makecontext, 
                        _os_lock_lock, _os_lock_trylock, _os_lock_unlock, _os_log_simple_now, 
-                       _os_log_simple_type_from_asl, _os_unfair_lock_assert_not_owner, 
+                       _os_log_simple_type_from_asl, _os_sync_wait_on_address, _os_sync_wait_on_address_with_deadline, 
+                       _os_sync_wait_on_address_with_timeout, _os_sync_wake_by_address_all, 
+                       _os_sync_wake_by_address_any, _os_unfair_lock_assert_not_owner, 
                        _os_unfair_lock_assert_owner, _os_unfair_lock_lock, _os_unfair_lock_lock_no_tsd, 
                        _os_unfair_lock_lock_with_options, _os_unfair_lock_trylock, 
-                       _os_unfair_lock_unlock, _os_unfair_lock_unlock_no_tsd, _os_unfair_recursive_lock_lock_with_options, 
+                       _os_unfair_lock_trylock_with_options, _os_unfair_lock_unlock, 
+                       _os_unfair_lock_unlock_no_tsd, _os_unfair_recursive_lock_lock_with_options, 
                        _os_unfair_recursive_lock_owned, _os_unfair_recursive_lock_trylock, 
                        _os_unfair_recursive_lock_tryunlock4objc, _os_unfair_recursive_lock_unlock, 
                        _os_unfair_recursive_lock_unlock_forked_child, _setcontext, 

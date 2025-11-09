@@ -1,10 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DTXConnectionServices.framework/Versions/A/DTXConnectionServices'
-current-version: 64562.3.1
+current-version: 64565.70.2
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CFArrayCreateWithDTXPrimitiveArray, _CFDictionaryCreateWithDTXPrimitiveDictionary, 
                        _DTXConnectionServicesVersionNumber, _DTXConnectionServicesVersionString, 
                        _DTXPrimitiveArrayAppendBuffer, _DTXPrimitiveArrayAppendValues, 

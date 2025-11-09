@@ -9,6 +9,7 @@
 #import <TargetConditionals.h>
 
 #import <GameController/GCExtern.h>
+#import <GameController/GCTypes.h>
 #import <GameController/GCColor.h>
 
 #import <GameController/GCDevice.h>
@@ -18,6 +19,7 @@
 #import <GameController/GCPhysicalInputSource.h>
 #import <GameController/GCLinearInput.h>
 #import <GameController/GCAxisInput.h>
+#import <GameController/GCAxis2DInput.h>
 #import <GameController/GCRelativeInput.h>
 #import <GameController/GCPressedStateInput.h>
 #import <GameController/GCTouchedStateInput.h>

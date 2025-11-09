@@ -203,9 +203,8 @@ exports:
                        ICReindexAllItemsOperation, ICSearchIndexConfiguration, ICSearchIndexImplementation, 
                        ICSearchIndexer, ICSearchableItemResult, ICSelectorDelayer, 
                        ICSettingsUtilities, ICSpotlightUtilities, ICStateHandler, 
-                       ICTelemetryManager, ICTuple, ICUtilities, ICWeakObject, ICWidget, 
-                       NSError ]
-    objc-eh-types:   [ NSError ]
+                       ICTelemetryManager, ICTuple, ICUtilities, ICWeakObject, ICWidget ]
     objc-ivars:      [ ICLRUCache.mData, ICLRUCache.mMax, ICLRUCache.mOrderedKeys, 
                        ICNoCopyDictionary.mDictionary, ICRWLock._rwLock ]
+    weak-symbols:    [ '_OBJC_EHTYPE_$_NSError' ]
 ...

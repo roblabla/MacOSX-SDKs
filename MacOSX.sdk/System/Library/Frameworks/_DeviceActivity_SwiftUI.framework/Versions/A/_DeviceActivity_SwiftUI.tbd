@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_DeviceActivity_SwiftUI.framework/Versions/A/_DeviceActivity_SwiftUI'
-current-version: 324
+current-version: 336
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -32,6 +32,26 @@ exports:
                        '_$s23_DeviceActivity_SwiftUI0aB11ReportScenePAAE4bodyQrvpQOMQ', 
                        '_$s23_DeviceActivity_SwiftUI0aB11ReportSceneTL', '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrxAA0abE5SceneRzlFZ', 
                        '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrxAA0abE5SceneRzlFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_q16_q17_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_AaER16_AaER17_r18_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_q16_q17_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_AaER16_AaER17_r18_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_q16_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_AaER16_r17_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_q16_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_AaER16_r17_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_r16_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_r16_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_r15_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_r15_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_r14_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_r14_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_r13_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_r13_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_r12_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_r12_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_r11_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_r11_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_r10_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_r10_lFZQOMQ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_r9_lFZ', 
+                       '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_r9_lFZQOMQ', 
                        '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_r8_lFZ', 
                        '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_r8_lFZQOMQ', 
                        '_$s23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_r7_lFZ', 

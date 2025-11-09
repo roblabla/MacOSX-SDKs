@@ -21,8 +21,13 @@ exports:
                        '_$s12MigrationKit11PairingCodeC6digitsACSS_tcfc', '_$s12MigrationKit11PairingCodeCMa', 
                        '_$s12MigrationKit11PairingCodeCMm', '_$s12MigrationKit11PairingCodeCMn', 
                        '_$s12MigrationKit11PairingCodeCN', '_$s12MigrationKit11PairingCodeCfD', 
-                       '_$s12MigrationKit11PairingCodeCfd', _MigrationKitVersionNumber, 
-                       _MigrationKitVersionString ]
+                       '_$s12MigrationKit11PairingCodeCfd', '_$s12MigrationKit9APIServerC3runSbyF', 
+                       '_$s12MigrationKit9APIServerC3runSbyFTq', '_$s12MigrationKit9APIServerCACycfC', 
+                       '_$s12MigrationKit9APIServerCACycfCTq', '_$s12MigrationKit9APIServerCACycfc', 
+                       '_$s12MigrationKit9APIServerCMa', '_$s12MigrationKit9APIServerCMm', 
+                       '_$s12MigrationKit9APIServerCMn', '_$s12MigrationKit9APIServerCN', 
+                       '_$s12MigrationKit9APIServerCfD', '_$s12MigrationKit9APIServerCfd', 
+                       _MigrationKitVersionNumber, _MigrationKitVersionString ]
     objc-classes:    [ MKAPIServer, MKClient, MKContext, MKCrypto, MKHex, MKImportContext, 
                        MKSRPServer ]
 ...

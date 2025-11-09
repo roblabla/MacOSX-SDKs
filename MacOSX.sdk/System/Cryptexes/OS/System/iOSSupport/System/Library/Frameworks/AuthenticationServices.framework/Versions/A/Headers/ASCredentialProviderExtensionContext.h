@@ -9,8 +9,10 @@
 #import <AuthenticationServices/ASFoundation.h>
 #import <Foundation/Foundation.h>
 
+
 @class ASPasskeyAssertionCredential;
 @class ASPasskeyRegistrationCredential;
+
 @class ASPasswordCredential;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -46,6 +48,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  @discussion Calling this method will eventually dismiss the associated view controller.
  */
 - (void)completeRegistrationRequestWithSelectedPasskeyCredential:(ASPasskeyRegistrationCredential *)credential completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler API_AVAILABLE(ios(17.0), macos(14.0)) NS_SWIFT_NAME(completeRegistrationRequest(using:completionHandler:)) API_UNAVAILABLE(watchos, tvos);
+
 
 
 /*! @abstract Complete the request to configure the extension.

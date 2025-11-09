@@ -160,4 +160,5 @@ exports:
                        ANSTSkinToneEstimate, ANSTSmileEstimate, ANSTUtility, ANSTVMTrackerEspresso, 
                        ANSTVideoMaskRefineAlgorithm, ANSTVideoMaskRefineAlgorithmConfiguration, 
                        ANSTVideoMaskRefineAlgorithmResult, ANSTVideoMaskRefineAlgorithmV1 ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

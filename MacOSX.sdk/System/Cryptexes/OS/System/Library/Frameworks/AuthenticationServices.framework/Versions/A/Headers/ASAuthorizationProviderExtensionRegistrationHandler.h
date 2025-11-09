@@ -31,6 +31,8 @@ typedef NS_OPTIONS(NSUInteger, ASAuthorizationProviderExtensionRequestOptions) {
     ASAuthorizationProviderExtensionRequestOptionsRegistrationSharedDeviceKeys API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 2,
     // The registration is changing to or from shared device keys.
     ASAuthorizationProviderExtensionRequestOptionsRegistrationDeviceKeyMigration API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 3,
+    // The user secure enclave key is invalid and must be replaced.
+    ASAuthorizationProviderExtensionRequestOptionsUserKeyInvalid API_AVAILABLE(macos(14.4)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 5,
 };
 
 typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionRegistrationResult)

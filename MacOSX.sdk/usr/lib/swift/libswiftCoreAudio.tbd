@@ -13,9 +13,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreAudio.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCoreAudio.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvg', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCoreAudio.dylib', 
+                       '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvg', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvpMV', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafedG0SpySo0beF0VGvM', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafedG0SpySo0beF0VGvg', 

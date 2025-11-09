@@ -1,5 +1,4 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/0032d1ee-80fd-11ee-8227-6aecfccc70fe/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/png/png.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2004, Code: Aaron Faupell <afaupell@users.sourceforge.net>
 '\" Copyright (c) 2004, Doc:  Andreas Kupries <andreas_kupries@users.sourceforge.net>
 '\"

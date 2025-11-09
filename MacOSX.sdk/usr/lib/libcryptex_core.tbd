@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex_core.dylib'
-current-version: 369.60.3
+current-version: 369.100.36
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_asset_type_c411, __cryptex_asset_type_cpxd, __cryptex_asset_type_cx1p, 
@@ -24,8 +24,9 @@ exports:
                        _cryptex_core_cx1_write_to_file, _cryptex_core_generate_identifier, 
                        _cryptex_core_generate_version, _cryptex_core_get_asset, _cryptex_core_get_cryptex1_properties, 
                        _cryptex_core_get_image_asset, _cryptex_core_get_info_asset, 
-                       _cryptex_core_get_nonce_domain, _cryptex_core_get_tc_asset, 
-                       _cryptex_core_get_volumehash_asset, _cryptex_core_is_cryptex1, 
+                       _cryptex_core_get_nonce_domain, _cryptex_core_get_nonce_domain_handle, 
+                       _cryptex_core_get_tc_asset, _cryptex_core_get_volumehash_asset, 
+                       _cryptex_core_image_authapfs_enabled, _cryptex_core_is_cryptex1, 
                        _cryptex_core_name_is_system_cryptex, _cryptex_core_parse_hdiid, 
                        _cryptex_core_parse_info_asset, _cryptex_core_pop_asset, _cryptex_core_set_asset, 
                        _cryptex_core_set_assets_from_directory, _cryptex_core_set_assets_from_fds, 

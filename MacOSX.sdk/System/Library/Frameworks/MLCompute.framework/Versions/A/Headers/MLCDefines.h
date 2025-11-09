@@ -44,8 +44,10 @@
 #    define MLCOMPUTE_AVAILABLE_STARTING(...)                         __API_AVAILABLE(__VA_ARGS__)
 #    define MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED(...)          __API_DEPRECATED_WITH_REPLACEMENT(__VA_ARGS__)
 #    define MLCOMPUTE_UNAVAILABLE(...)                                __API_UNAVAILABLE(__VA_ARGS__)
-#    define MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(MACOS, IOS, TVOS, ...) \
-       API_DEPRECATED("Use Metal Performance Shaders Graph or BNNS instead.", macos(MACOS, API_TO_BE_DEPRECATED), ios(IOS, API_TO_BE_DEPRECATED), tvos(TVOS, API_TO_BE_DEPRECATED))
+#    define MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(ARG1, ARG2, ARG3, ...) \
+       MLCOMPUTE_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal Performance Shaders Graph or BNNS instead.", macos(ARG1, 14.3)) \
+       MLCOMPUTE_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal Performance Shaders Graph or BNNS instead.", ios(ARG2, 17.4)) \
+       MLCOMPUTE_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal Performance Shaders Graph or BNNS instead.", tvos(ARG3, 17.4))
 #endif
 
 #endif /* MLComputeDefines_h */

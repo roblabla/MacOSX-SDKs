@@ -8,7 +8,8 @@ allowable-clients:
     clients:         [ CAAROverrides, CAMRootFlowPlugin, CAMRootFlowPluginTests, 
                        MessagesFlowDelegatePlugin, MessagesFlowDelegatePlugin-Tests, 
                        SiriCamSmokeTest, SiriCamTests, SiriKitExecutor, SiriKitExecutorBundle-Tests, 
-                       SiriKitFlow, SiriKitFlowTests, SiriKitRuntime, SiriKitRuntimeTests ]
+                       SiriKitFlow, SiriKitFlowTests, SiriKitRuntime, SiriKitRuntimeTests, 
+                       SiriMessagesFlow, SiriMessagesFlowTests ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s21SiriInformationSearch14PommesResponseC0A3CamE6encode2toys7Encoder_p_tKF', 

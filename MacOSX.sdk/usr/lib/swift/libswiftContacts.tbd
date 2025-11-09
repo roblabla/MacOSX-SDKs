@@ -17,7 +17,5 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftContacts.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftContacts.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftContacts.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftContacts.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '__swift_FORCE_LOAD_$_swiftContacts' ]
+                       '$ld$install_name$os10.9$@rpath/libswiftContacts.dylib', '__swift_FORCE_LOAD_$_swiftContacts' ]
 ...

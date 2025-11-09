@@ -1,32 +1,16 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name FinanceKitUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 143.7.12
-import AppKit
-import Combine
-import Contacts
-import CoreData
-import CoreGraphics
-import CoreImage
-import CoreLocation
-import CoreSpotlight
-import CoreTransferable
-import CryptoKit
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 144.29 -module-name FinanceKitUI
 import DeveloperToolsSupport
 import ExtensionKit
 import FinanceKit
 @_exported import FinanceKitUI
 import Foundation
-import Observation
 import Swift
 import SwiftUI
-import WidgetKit
 import _Concurrency
-import _MapKit_SwiftUI
-import _QuickLook_SwiftUI
 import _StringProcessing
 import _SwiftConcurrencyShims
-import _System_Foundation
 import os.log
 import os
 @available(iOS 17, *)

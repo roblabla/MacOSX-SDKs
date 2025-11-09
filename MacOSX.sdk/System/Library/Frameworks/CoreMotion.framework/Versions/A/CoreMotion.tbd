@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 2890.4.12
+current-version: 2890.12.17
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -61,8 +61,9 @@ exports:
                        _CLWeatherNotifyForecast, _CMAbsoluteAltitudeKey, _CMActivityData, 
                        _CMAnomalyDetectorEnabled, _CMAnomalyDetectorEvent, _CMAnomalyEventType, 
                        _CMAnomalySensorTestModeEnabled, _CMAuthorized, _CMAvailable, 
-                       _CMBatchedSensorAvailable, _CMCameraVcmActuatorId, _CMCompassCalibrationData, 
-                       _CMContextConfigurationKey, _CMCyclingWorkoutDistanceDataArray, 
+                       _CMBatchedSensorAvailable, _CMCameraVcmActuatorId, _CMColdStorageCardioTableNames, 
+                       _CMColdStorageConfiguration, _CMColdStorageDatabasePath, _CMColdStorageMobilityTableNames, 
+                       _CMCompassCalibrationData, _CMContextConfigurationKey, _CMCyclingWorkoutDistanceDataArray, 
                        _CMDatabaseType, _CMDeviceHasOriginalBackCamera, _CMDistributedSensingVehicleStateUpdateKey, 
                        _CMDyskinesiaResultsKey, _CMEclipseServiceEnable, _CMElevationProfileKeyAltitudeArray, 
                        _CMElevationProfileKeyLastBatch, _CMElevationProfileKeyQueryBatchSize, 
@@ -142,7 +143,7 @@ exports:
                        _CMOverrideResult, _CMOverrideSidebandOverride, _CMPedestrianFenceClientIdentifier, 
                        _CMPedestrianFenceDelay, _CMPedestrianFenceForceClear, _CMPedestrianFenceForceClearAll, 
                        _CMPedestrianFenceIdentifier, _CMPedestrianFenceRadius, _CMPedestrianFenceShouldWake, 
-                       _CMPedometerCalibrationBins, _CMPedometerCalibrationTypeId, 
+                       _CMPedestrianFenceStatus, _CMPedometerCalibrationBins, _CMPedometerCalibrationTypeId, 
                        _CMPedometerDataArray, _CMPedometerDataObject, _CMPedometerEntryCount, 
                        _CMPedometerEventKey, _CMPedometerFetchRemoteCalibrations, 
                        _CMPedometerSpeedSum, _CMPedometerStartTime, _CMPedometerStopTime, 

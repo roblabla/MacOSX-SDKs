@@ -24,9 +24,10 @@ exports:
                        _NFCD_XPCHELPER_ERROR_DOMAIN, _STSXPCHelperErrorDescriptions, 
                        _STS_XCPHELPER_ERROR_BT_SUBDOMAIN, _STS_XCPHELPER_ERROR_DOMAIN, 
                        _STS_XCPHELPER_ERROR_WIFI_SUBDOMAIN ]
-    objc-classes:    [ STS18013ReaderAuthInfo, STS18013RequestElement, STSAuxiliaryCredential, 
-                       STSAuxiliaryTransaction, STSCredential, STSDCKAssertion, STSEngagementConfiguration, 
-                       STSExpressEventInfo, STSExpressEventInfoWithDetail, STSExpressEventInfoWithIdentifiers, 
+    objc-classes:    [ STS18013ReaderAnalyticsData, STS18013ReaderAuthInfo, STS18013RequestElement, 
+                       STSAuxiliaryCredential, STSAuxiliaryTransaction, STSCredential, 
+                       STSDCKAssertion, STSEngagementConfiguration, STSExpressEventInfo, 
+                       STSExpressEventInfoWithDetail, STSExpressEventInfoWithIdentifiers, 
                        STSField, STSFieldNFC, STSInAppPaymentRequest, STSInAppPaymentResponse, 
                        STSListener, STSMerchantPaymentRequest, STSMerchantPaymentResponse, 
                        STSPaymentRequestBase, STSPaymentResponseBase, STSPeerPaymentRequest, 

@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name RealityFoundation
-// swift-module-flags-ignorable: -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 225.613.1
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 225.621 -module-name RealityFoundation
 import AVFAudio
 import AVFoundation
 import Accessibility
@@ -2397,7 +2396,9 @@ public struct SimpleMaterial : RealityFoundation.Material {
 public struct OcclusionMaterial : RealityFoundation.Material {
   public let __resource: RealityFoundation.__MaterialResource
   public var __parameterBlock: RealityFoundation.__RKMaterialParameterBlock
+  @available(visionOS, unavailable)
   public let receivesDynamicLighting: Swift.Bool
+  @available(visionOS, unavailable)
   public init(receivesDynamicLighting: Swift.Bool = false)
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -4913,12 +4914,15 @@ extension RealityFoundation.HasModel {
   @_Concurrency.MainActor(unsafe) public var __entities: [RealityFoundation.Entity] {
     get
   }
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public var anchors: RealityFoundation.Scene.AnchorCollection {
     get
     set
     _modify
   }
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public func addAnchor(_ anchor: any RealityFoundation.HasAnchoring)
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public func removeAnchor(_ anchor: any RealityFoundation.HasAnchoring)
   @_Concurrency.MainActor(unsafe) public static func __testInit(name: Swift.String) -> RealityFoundation.Scene
   @objc deinit
@@ -7463,6 +7467,7 @@ public struct CollisionComponent : RealityFoundation.Component, Swift.Equatable 
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 public struct AnchoringComponent : RealityFoundation.Component, Swift.Equatable {
   public enum Target : Swift.Hashable {
+    @available(visionOS, unavailable)
     case camera
     case world(transform: simd.float4x4)
     public static func == (lhs: RealityFoundation.AnchoringComponent.Target, rhs: RealityFoundation.AnchoringComponent.Target) -> Swift.Bool

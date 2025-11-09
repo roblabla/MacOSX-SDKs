@@ -406,6 +406,34 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(7.0))
 */
 @optional
 - (void)contentKeySessionDidGenerateExpiredSessionReport:(AVContentKeySession *)session API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(7.0));
+
+/*!
+ @method        contentKeySession:externalProtectionStatusDidChangeForContentKey:
+ @abstract      Informs the receiver when external protection state has changed.
+ @param         session
+				An instance of AVContentKeySession that loaded the content key.
+ @param         contentKey
+				The content key for which the external protection state changed.
+ @discussion    When externalProtectionStatusDidChangeForContentKey is received, externalContentProtectionStatus should be queried to obtain the latest state.
+*/
+@optional
+- (void)contentKeySession:(AVContentKeySession *)session externalProtectionStatusDidChangeForContentKey:(AVContentKey *)contentKey API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method        contentKeySession:didProvideContentKeyRequests:forInitializationData:
+ @abstract      Provides the receiver with a list of new content key requests.
+ @param         session
+				An instance of AVContentKeySession that's providing the list of new content key requests.
+ @param         keyRequests
+				An array with new AVContentKeyRequest instances.
+ @param         initializationData
+				InitializationData corresponding to the new AVContentKeyRequests. May be nil.
+ @discussion    Will be invoked by an AVContentKeySession as a result of a call to -processContentKeyRequestWithIdentifier:initializationData:options:.
+				The requests for all keys in an initializationData will be provided at once through contentKeySession:didProvideContentKeyRequests:forInitializationData: and it takes precedence over contentKeySession:didProvideContentKeyRequest:.
+*/
+@optional
+- (void)contentKeySession:(AVContentKeySession *)session didProvideContentKeyRequests:(NSArray<AVContentKeyRequest *> *)keyRequests forInitializationData:(nullable NSData *)initializationData API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4));
+
 @end
 
 
@@ -724,6 +752,23 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4))
 
 @end
 
+/*!
+ @enum             AVExternalContentProtectionStatus
+ @abstract        The constants can be used to derive whether or not we have established sufficient protection to display content protected by this AVContentKey on some set of attached displays.
+ 
+ @constant AVExternalContentProtectionStatusPending
+	Indicates that the current protection status has not yet been discovered for the attached display(s).
+ @constant AVExternalContentProtectionStatusSufficient
+	Indicates that sufficient protection with the attached display(s) has been established, content protected by the associated AVContentKey will be eligible to be displayed on the display(s).
+ @constant AVExternalContentProtectionStatusInsufficient
+	Indicates that sufficient protection with the attached display(s) has failed to be established, content protected by the associated AVContentKey will not be displayed.
+ */
+typedef NS_ENUM(NSInteger, AVExternalContentProtectionStatus) {
+	AVExternalContentProtectionStatusPending            = 0,
+	AVExternalContentProtectionStatusSufficient         = 1,
+	AVExternalContentProtectionStatusInsufficient       = 2,
+} API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4)) API_UNAVAILABLE(watchos);
+
 API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4))
 @interface AVContentKey : NSObject
 
@@ -732,6 +777,22 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4))
  @abstract      Specifies the content key.
  */
 @property  (readonly) AVContentKeySpecifier *contentKeySpecifier;
+
+/*!
+	@property		externalContentProtectionStatus
+	@abstract		The external protection status for the AVContentKey based on all attached displays.
+	@discussion		This property is not key-value observable, instead the contentKeySession:externalProtectionStatusDidChangeForContentKey: delegate method should be used.
+*/
+@property  (readonly) AVExternalContentProtectionStatus externalContentProtectionStatus API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method        revoke
+ @abstract      Revokes the decryption context of the content key, and removes it from its associated AVContentKeySession.
+ @discussion    Once revoked, the AVContentKey is no longer eligible to be used with any media.
+				If the key is required again, or if the key is requested to be loaded by the application, a new AVContentKeyRequest will be dispatched to the delegate.
+				If there is media playback occurring which is dependent on the content key it will fail and may result in an error being generated with the playback halting.
+*/
+- (void)revoke API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4));
 @end
 
 /*!

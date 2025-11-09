@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FRC.framework/Versions/A/FRC'
-current-version: 178
+current-version: 189
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ _FRCFlowConsistencyFrameScoreKey, _FRCFlowConsistencyRegionScoreKey, 
@@ -29,13 +29,14 @@ exports:
                        _interleave4, _isBufferCopyNecessaryForCVtoTextureConversion, 
                        _isBufferYUV, _isPackedRGBA, _isYUV420, _loadTexture, _loadTextureArray, 
                        _loadTextureInterleaved, _readBGRA, _readBuffer, _readBufferInterlaeved, 
-                       _readData, _readData32, _readFlo, _readPNG, _readYUVPlanar, 
-                       _saveTensorBuffer, _saveTensorBufferWithChannelOffset, _saveTextureArray, 
-                       _saveTextureBufferFlt32, _saveTextureInterleaved, _swapWidthAndHeight, 
-                       _uniformTimeScales, _write64RGBAHalf, _writeBGRA, _writeBuffer, 
-                       _writeBufferFlt32, _writeBufferInterlaeved, _writeBufferWithVerticalOffset, 
-                       _writeData, _writeData32, _writeFlo, _writeGrayscaldTiff, 
-                       _writePNG, _writeYUVPlanar ]
+                       _readData, _readData32, _readFlo, _readPNG, _readYUV10bit, 
+                       _readYUVPlanar, _saveTensorBuffer, _saveTensorBufferWithChannelOffset, 
+                       _saveTextureArray, _saveTextureBufferFlt32, _saveTextureInterleaved, 
+                       _swapWidthAndHeight, _uniformTimeScales, _write64RGBAHalf, 
+                       _writeBGRA, _writeBuffer, _writeBufferFlt32, _writeBufferInterlaeved, 
+                       _writeBufferWithVerticalOffset, _writeData, _writeData32, 
+                       _writeFlo, _writeGrayscaldTiff, _writePNG, _writeYUV10bit, 
+                       _writeYUVPlanar ]
     objc-classes:    [ Backwarp, BodyPoint, Correlation, EspressoModel, FRCBodyBoundingBoxDetector, 
                        FRCFaceHandLegBlock, FRCFaceHandLegRectangle, FRCFrame, FRCFrameBurstyDropInfo, 
                        FRCFrameDropDetector, FRCFrameInsertionPoint, FRCFrameInternalTimingInfo, 
@@ -43,9 +44,9 @@ exports:
                        FRCFrameTimingInfo, FRCImageProcessor, FRCLivePhotoMetadata, 
                        FRCLivePhotoMetadataReader, FRCMetalBase, FRCOpticalFlowEstimator, 
                        FRCScaler, FeatureExtractor, FlowAdaptationDecoder, FlowAdaptationFeatureExtractor, 
-                       FlowEstimate, Forwarp, GPUSynthesis, LiteSynthesis, Normalization, 
-                       OpticalFlow, OpticalFlowAnalyzer, Pyramid, Synthesis, SynthesisGridNet, 
-                       Tiling ]
+                       FlowConsistencyMap, FlowEstimate, Forwarp, GPUSynthesis, LiteSynthesis, 
+                       Normalization, OpticalFlow, OpticalFlowAnalyzer, Pyramid, 
+                       Synthesis, SynthesisGridNet, Tiling ]
     objc-ivars:      [ EspressoModel._callbackQueue, EspressoModel._context, EspressoModel._engine, 
                        EspressoModel._net, EspressoModel._plan, FRCMetalBase._commandQueue, 
                        FRCMetalBase._device, FRCMetalBase._mtlLibrary, FeatureExtractor._espresso_file, 

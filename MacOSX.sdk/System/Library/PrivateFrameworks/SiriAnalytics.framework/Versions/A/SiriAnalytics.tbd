@@ -9,6 +9,10 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s13SiriAnalytics0aB14MessageStagingC17bootstrapAndPruneyyFTj', 
                        '_$s13SiriAnalytics0aB14MessageStagingC17bootstrapAndPruneyyFTq', 
+                       '_$s13SiriAnalytics0aB14MessageStagingC17internalTelemetryACSo0ab8InternalF0C_tcfC', 
+                       '_$s13SiriAnalytics0aB14MessageStagingC17internalTelemetryACSo0ab8InternalF0C_tcfCTj', 
+                       '_$s13SiriAnalytics0aB14MessageStagingC17internalTelemetryACSo0ab8InternalF0C_tcfCTq', 
+                       '_$s13SiriAnalytics0aB14MessageStagingC17internalTelemetryACSo0ab8InternalF0C_tcfc', 
                        '_$s13SiriAnalytics0aB14MessageStagingCACycfC', '_$s13SiriAnalytics0aB14MessageStagingCACycfc', 
                        '_$s13SiriAnalytics0aB14MessageStagingCMa', '_$s13SiriAnalytics0aB14MessageStagingCMn', 
                        '_$s13SiriAnalytics0aB14MessageStagingCMo', '_$s13SiriAnalytics0aB14MessageStagingCMu', 

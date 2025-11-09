@@ -186,7 +186,7 @@ exports:
                        '_$s10CoreParsec34PARFeedbackReceivingStreamDelegateP22didReceiveFeedbackData_5agenty10Foundation0J0VSg_SSSgtFTq', 
                        '_$s10CoreParsec34PARFeedbackReceivingStreamDelegateTL', '_$s10PegasusAPI36Apple_Parsec_Spotlight_V1alpha_TopicV04CoreD0E05queryG0So07SFQueryG0Cvg', 
                        '_$s10PegasusAPI36Apple_Parsec_Spotlight_V1alpha_TopicV04CoreD0E05queryG0So07SFQueryG0CvpMV', 
-                       '_$sSo10PARSessionC10CoreParsecE4load_7contextSo7SFImageCAG_So0F7ContextCSgtYaKF', 
+                       '_$sSo10PARRequestC10CoreParsecE15beginNWActivityyyF', '_$sSo10PARSessionC10CoreParsecE4load_7contextSo7SFImageCAG_So0F7ContextCSgtYaKF', 
                        '_$sSo10PARSessionC10CoreParsecE4load_7contextSo7SFImageCAG_So0F7ContextCSgtYaKFTu', 
                        '_$sSo11PARResponseC10CoreParsecE5reply7factory12responseDataABSgSo8PARReplyC_So16PARResultFactory_p10Foundation0G0VtcfC', 
                        '_$sSo11PARResponseC10CoreParsecE5reply7factory12responseDataABSgSo8PARReplyC_So16PARResultFactory_p10Foundation0G0Vtcfc', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SignpostSupport.framework/Versions/A/SignpostSupport'
-current-version: 121
+current-version: 125
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -33,7 +33,17 @@ exports:
                        _SignpostSupportTotalDurationNsForIntervals, _SignpostSystemTimebaseRatio, 
                        _StringForSignpostPlatform, _StringPassesSignpostReporterStringAllowlist, 
                        __SignpostSerializeableObjectFromSerializedObjectDictionary, 
-                       __SignpostSupportSerializationDataFromObjectArray, __signpost_debug_log, 
+                       __SignpostSupportSerializationDataFromObjectArray, __combinedStdDev, 
+                       __signpost_debug_log, _kAggAverageDurationNsKey, _kAggAverageKey, 
+                       _kAggBeginTimeDateKey, _kAggBeginTimeMCTKey, _kAggBeginTimeNsKey, 
+                       _kAggCategoryKey, _kAggDescriptionKey, _kAggDurationDictKey, 
+                       _kAggDurationNsKey, _kAggDurationStdDevNsKey, _kAggEndTimeDateKey, 
+                       _kAggEndTimeMCTKey, _kAggEndTimeNsKey, _kAggGroupNameKey, 
+                       _kAggGroupNameToGroupKey, _kAggMaxDurationNsKey, _kAggMaxValueKey, 
+                       _kAggMeasuredValueDictKey, _kAggMinDurationNsKey, _kAggMinValueKey, 
+                       _kAggNameKey, _kAggSubsystemKey, _kAggTelemetryEnabledKey, 
+                       _kAggTimeRangeArrayKey, _kAggTotalDurationNsKey, _kAggTotalKey, 
+                       _kAggTypeKey, _kAggUnitOfMeasureKey, _kAggValueStdDevKey, 
                        _kCAFieldValue_DynamicDescription, _kCAFieldValue_WindowDuration, 
                        _kSSMetadataSegmentPlaceholderTokenNameKey, _kSignpostSupportDefaultFirstFrameGraceTimeMs, 
                        _kSignpostSupportDefaultUserInitiatedFirstFrameGraceTimeMs, 
@@ -41,6 +51,7 @@ exports:
                        _kSignpostSupportMachTimeTranslator_UnknownTime ]
     objc-classes:    [ SignpostAggregation, SignpostAggregationAccumulator, SignpostAggregationAccumulatorEntry, 
                        SignpostAggregationGroup, SignpostAggregationGroupDuration, 
+                       SignpostAggregationGroupMeasuredValue, SignpostAggregationValueStats, 
                        SignpostAnimationAccumulatedState, SignpostAnimationInterval, 
                        SignpostAnimationSubInterval, SignpostAnimationTransactionLifetime, 
                        SignpostCAInstrumentationProcessor, SignpostCAIntervalAggregationStats, 
@@ -67,5 +78,5 @@ exports:
                        SignpostSupportSubsystemCategoryFilterEntry, SignpostSupportSubsystemCategoryWhitelist, 
                        SignpostSupportUniquePIDAllowlist, SignpostSupportUniquePIDBlacklist, 
                        SignpostSupportUniquePIDBlocklist, SignpostSupportUniquePIDFilter, 
-                       SignpostSupportUniquePIDWhitelist ]
+                       SignpostSupportUniquePIDWhitelist, _SignpostAggregationValueSegmentParser ]
 ...

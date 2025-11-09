@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1131
+current-version: 1150.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -444,6 +444,10 @@ exports:
                        '_$s14FamilyControls9LocationsV06familyB19PrivateSyncMetadata10Foundation3URLVvpMV', 
                        '_$s14FamilyControls9LocationsV06familyB21InternalAuthorization10Foundation3URLVvg', 
                        '_$s14FamilyControls9LocationsV06familyB21InternalAuthorization10Foundation3URLVvpMV', 
+                       '_$s14FamilyControls9LocationsV06familyB23SharedSyncSerialization10Foundation3URLVvg', 
+                       '_$s14FamilyControls9LocationsV06familyB23SharedSyncSerialization10Foundation3URLVvpMV', 
+                       '_$s14FamilyControls9LocationsV06familyB24PrivateSyncSerialization10Foundation3URLVvg', 
+                       '_$s14FamilyControls9LocationsV06familyB24PrivateSyncSerialization10Foundation3URLVvpMV', 
                        '_$s14FamilyControls9LocationsV06familyB5Store10Foundation3URLVvg', 
                        '_$s14FamilyControls9LocationsV06familyB5Store10Foundation3URLVvpMV', 
                        '_$s14FamilyControls9LocationsV06familyB7KeyData10Foundation3URLVvg', 

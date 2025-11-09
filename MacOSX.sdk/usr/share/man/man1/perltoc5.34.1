@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PERLTOC 1"
-.TH PERLTOC 1 "2023-11-12" "perl v5.34.0" "Perl Programmers Reference Guide"
+.TH PERLTOC 1 "2024-02-10" "perl v5.34.1" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -8128,108 +8128,34 @@ Ricardo Signes, Steve Hay, Stuart Mackintosh, Todd Rinaldo, Tony Cook
 .IP "\s-1THE KEEPERS OF THE RECORDS\s0" 4
 .IX Item "THE KEEPERS OF THE RECORDS"
 .PD
-.SS "perldelta \- what is new for perl v5.34.0"
-.IX Subsection "perldelta - what is new for perl v5.34.0"
+.SS "perldelta \- what is new for perl v5.34.1"
+.IX Subsection "perldelta - what is new for perl v5.34.1"
 .IP "\s-1DESCRIPTION\s0" 4
 .IX Item "DESCRIPTION"
 .PD 0
-.IP "Core Enhancements" 4
-.IX Item "Core Enhancements"
-.RS 4
-.IP "Experimental Try/Catch Syntax" 4
-.IX Item "Experimental Try/Catch Syntax"
-.ie n .IP """qr/{,n}/"" is now accepted" 4
-.el .IP "\f(CWqr/{,n}/\fR is now accepted" 4
-.IX Item "qr/{,n}/ is now accepted"
-.IP "Blanks freely allowed within but adjacent to curly braces" 4
-.IX Item "Blanks freely allowed within but adjacent to curly braces"
-.ie n .IP "New octal syntax ""0o\fIddddd\fP""" 4
-.el .IP "New octal syntax \f(CW0o\f(CIddddd\f(CW\fR" 4
-.IX Item "New octal syntax 0oddddd"
-.RE
-.RS 4
-.RE
-.IP "Performance Enhancements" 4
-.IX Item "Performance Enhancements"
+.IP "Incompatible Changes" 4
+.IX Item "Incompatible Changes"
 .IP "Modules and Pragmata" 4
 .IX Item "Modules and Pragmata"
 .RS 4
-.IP "New Modules and Pragmata" 4
-.IX Item "New Modules and Pragmata"
 .IP "Updated Modules and Pragmata" 4
 .IX Item "Updated Modules and Pragmata"
 .RE
 .RS 4
 .RE
-.IP "Documentation" 4
-.IX Item "Documentation"
-.RS 4
-.IP "New Documentation" 4
-.IX Item "New Documentation"
-.IP "Changes to Existing Documentation" 4
-.IX Item "Changes to Existing Documentation"
-.RE
-.RS 4
-.RE
-.IP "Diagnostics" 4
-.IX Item "Diagnostics"
-.RS 4
-.IP "New Diagnostics" 4
-.IX Item "New Diagnostics"
-.IP "Changes to Existing Diagnostics" 4
-.IX Item "Changes to Existing Diagnostics"
-.RE
-.RS 4
-.RE
-.IP "Utility Changes" 4
-.IX Item "Utility Changes"
-.RS 4
-.IP "perl5db.pl (the debugger)" 4
-.IX Item "perl5db.pl (the debugger)"
-.PD
-New option: \f(CW\*(C`HistItemMinLength\*(C'\fR, Fix to \f(CW\*(C`i\*(C'\fR and \f(CW\*(C`l\*(C'\fR commands
-.RE
-.RS 4
-.RE
-.IP "Configuration and Compilation" 4
-.IX Item "Configuration and Compilation"
-stadtx hash support has been removed, Configure, \f(CW\*(C`\-Dusedefaultstrict\*(C'\fR
 .IP "Testing" 4
 .IX Item "Testing"
-.PD 0
-.IP "Platform Support" 4
-.IX Item "Platform Support"
 .RS 4
-.IP "New Platforms" 4
-.IX Item "New Platforms"
-.PD
-9front
-.IP "Updated Platforms" 4
-.IX Item "Updated Platforms"
-Plan9, MacOS (Darwin)
-.IP "Discontinued Platforms" 4
-.IX Item "Discontinued Platforms"
-Symbian
 .IP "Platform-Specific Notes" 4
 .IX Item "Platform-Specific Notes"
-DragonFlyBSD, Mac \s-1OS X,\s0 Windows, z/OS
+.PD
+Windows
 .RE
 .RS 4
 .RE
-.IP "Internal Changes" 4
-.IX Item "Internal Changes"
-.PD 0
 .IP "Selected Bug Fixes" 4
 .IX Item "Selected Bug Fixes"
-.PD
-pack/unpack format 'D' now works on all systems that could support it
-.IP "Known Problems" 4
-.IX Item "Known Problems"
 .PD 0
-.IP "Errata From Previous Releases" 4
-.IX Item "Errata From Previous Releases"
-.IP "Obituary" 4
-.IX Item "Obituary"
 .IP "Acknowledgements" 4
 .IX Item "Acknowledgements"
 .IP "Reporting Bugs" 4
@@ -8239,8 +8165,45 @@ pack/unpack format 'D' now works on all systems that could support it
 .IP "\s-1SEE ALSO\s0" 4
 .IX Item "SEE ALSO"
 .PD
-.SS "perl5340delta, perldelta \- what is new for perl v5.34.0"
-.IX Subsection "perl5340delta, perldelta - what is new for perl v5.34.0"
+.SS "perl5341delta, perldelta \- what is new for perl v5.34.1"
+.IX Subsection "perl5341delta, perldelta - what is new for perl v5.34.1"
+.IP "\s-1DESCRIPTION\s0" 4
+.IX Item "DESCRIPTION"
+.PD 0
+.IP "Incompatible Changes" 4
+.IX Item "Incompatible Changes"
+.IP "Modules and Pragmata" 4
+.IX Item "Modules and Pragmata"
+.RS 4
+.IP "Updated Modules and Pragmata" 4
+.IX Item "Updated Modules and Pragmata"
+.RE
+.RS 4
+.RE
+.IP "Testing" 4
+.IX Item "Testing"
+.RS 4
+.IP "Platform-Specific Notes" 4
+.IX Item "Platform-Specific Notes"
+.PD
+Windows
+.RE
+.RS 4
+.RE
+.IP "Selected Bug Fixes" 4
+.IX Item "Selected Bug Fixes"
+.PD 0
+.IP "Acknowledgements" 4
+.IX Item "Acknowledgements"
+.IP "Reporting Bugs" 4
+.IX Item "Reporting Bugs"
+.IP "Give Thanks" 4
+.IX Item "Give Thanks"
+.IP "\s-1SEE ALSO\s0" 4
+.IX Item "SEE ALSO"
+.PD
+.SS "perl5340delta \- what is new for perl v5.34.0"
+.IX Subsection "perl5340delta - what is new for perl v5.34.0"
 .IP "\s-1DESCRIPTION\s0" 4
 .IX Item "DESCRIPTION"
 .PD 0
@@ -16460,7 +16423,7 @@ utime \s-1LIST,\s0 waitpid \s-1PID,FLAGS\s0
 .RS 4
 .IP "Setting Up Perl on Windows" 4
 .IX Item "Setting Up Perl on Windows"
-Make, Command Shell, Microsoft Visual \*(C+, Microsoft Visual \*(C+ 2008\-2019
+Make, Command Shell, Microsoft Visual \*(C+, Microsoft Visual \*(C+ 2008\-2022
 Express/Community Edition, Microsoft Visual \*(C+ 2005 Express Edition,
 Microsoft Visual \*(C+ Toolkit 2003, Microsoft Platform \s-1SDK\s0 64\-bit Compiler,
 \&\s-1GCC,\s0 Intel \*(C+ Compiler

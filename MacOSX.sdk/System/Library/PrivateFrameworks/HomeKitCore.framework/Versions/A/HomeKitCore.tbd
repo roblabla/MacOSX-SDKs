@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitCore.framework/Versions/A/HomeKitCore'
-current-version: 1092.3.10
+current-version: 1124.5.8
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -556,12 +556,12 @@ exports:
                        '_$s11HomeKitCore26ModelPersonalityDescriptorCfD', '_$s11HomeKitCore26ModelPersonalityDescriptorCfd', 
                        '_$s11HomeKitCore26SharedMemoryEncodableModelMp', '_$s11HomeKitCore26SharedMemoryEncodableModelPAA0G0Tb', 
                        '_$s11HomeKitCore26SharedMemoryEncodableModelTL', '_$s11HomeKitCore27HMCDUserSharedSettingsModelC10entityNameSSvgZ', 
-                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC19isDolbyAtmosEnabledSo8NSNumberCSgvpMV', 
-                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC22isLosslessMusicEnabledSo8NSNumberCSgvpMV', 
-                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC22isiTunesAccountAllowedSo8NSNumberCSgvpMV', 
-                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC24isExplicitContentAllowedSo8NSNumberCSgvpMV', 
-                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC26isSiriIdentifyVoiceEnabledSo8NSNumberCSgvpMV', 
-                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC27isPlaybackInfluencesEnabledSo8NSNumberCSgvpMV', 
+                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC19isDolbyAtmosEnabledSbvpMV', 
+                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC22isLosslessMusicEnabledSbvpMV', 
+                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC22isiTunesAccountAllowedSbvpMV', 
+                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC24isExplicitContentAllowedSbvpMV', 
+                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC26isSiriIdentifyVoiceEnabledSbvpMV', 
+                       '_$s11HomeKitCore27HMCDUserSharedSettingsModelC27isPlaybackInfluencesEnabledSbvpMV', 
                        '_$s11HomeKitCore27HMCDUserSharedSettingsModelC6entity10insertIntoACSo19NSEntityDescriptionC_So22NSManagedObjectContextCSgtcfC', 
                        '_$s11HomeKitCore27HMCDUserSharedSettingsModelC6entity10insertIntoACSo19NSEntityDescriptionC_So22NSManagedObjectContextCSgtcfc', 
                        '_$s11HomeKitCore27HMCDUserSharedSettingsModelC7modelID10Foundation4UUIDVvpMV', 

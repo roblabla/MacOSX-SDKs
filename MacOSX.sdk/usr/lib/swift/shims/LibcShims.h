@@ -94,10 +94,15 @@ static inline int _swift_stdlib_vprintf(const char * __restrict fmt, va_list arg
 // Non-standard extensions
 #if defined(__APPLE__)
 #define HAS_MALLOC_SIZE 1
+#if __has_builtin(__is_target_os) && __is_target_os(driverkit)
+SWIFT_RUNTIME_STDLIB_SPI
+__swift_size_t _swift_stdlib_malloc_size(const void *ptr);
+#else
 static inline __swift_size_t _swift_stdlib_malloc_size(const void *ptr) {
   extern __swift_size_t malloc_size(const void *);
   return malloc_size(ptr);
 }
+#endif
 #elif defined(__linux__) || defined(__CYGWIN__) || defined(__ANDROID__) \
    || defined(__HAIKU__) || defined(__FreeBSD__) || defined(__wasi__)
 #define HAS_MALLOC_SIZE 1

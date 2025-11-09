@@ -3,6 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libmis.dylib'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -45,12 +46,13 @@ exports:
                        _MISValidateUPP, _MISValidationCopySignatureVersion, _kMISAppApprovalStateReportIndeterminateSoon, 
                        _kMISFutureMinSupportedSignatureVersion, _kMISMinSupportedSignatureVersion, 
                        _kMISValidationInfoCDVersion, _kMISValidationInfoCdHash, _kMISValidationInfoEntitlements, 
-                       _kMISValidationInfoIsNativeForPlatform, _kMISValidationInfoProfileUUID, 
-                       _kMISValidationInfoSignerCertificate, _kMISValidationInfoSignerType, 
-                       _kMISValidationInfoSigningID, _kMISValidationInfoSigningTime, 
-                       _kMISValidationInfoTeamID, _kMISValidationInfoValidatedByLocalProfile, 
-                       _kMISValidationInfoValidatedByProfile, _kMISValidationInfoValidatedByUniversalProfile, 
-                       _kMISValidationOptionAllowAdHocSigning, _kMISValidationOptionAuthoritativeLaunch, 
+                       _kMISValidationInfoIsNativeForPlatform, _kMISValidationInfoLaunchWarningData, 
+                       _kMISValidationInfoProfileUUID, _kMISValidationInfoSignerCertificate, 
+                       _kMISValidationInfoSignerType, _kMISValidationInfoSigningID, 
+                       _kMISValidationInfoSigningTime, _kMISValidationInfoTeamID, 
+                       _kMISValidationInfoValidatedByLocalProfile, _kMISValidationInfoValidatedByProfile, 
+                       _kMISValidationInfoValidatedByUniversalProfile, _kMISValidationOptionAllowAdHocSigning, 
+                       _kMISValidationOptionAllowLaunchWarning, _kMISValidationOptionAuthoritativeLaunch, 
                        _kMISValidationOptionDetachedSignature, _kMISValidationOptionExpectedHash, 
                        _kMISValidationOptionHonorBlacklist, _kMISValidationOptionHonorBlocklist, 
                        _kMISValidationOptionLogResourceErrors, _kMISValidationOptionOnlineAuthorization, 
@@ -58,4 +60,5 @@ exports:
                        _kMISValidationOptionSkipProfileIdentifierPolicy, _kMISValidationOptionTrustCacheOnly, 
                        _kMISValidationOptionUnauthoritativeLaunch, _kMISValidationOptionUniversalFileOffset, 
                        _kMISValidationOptionUseSoftwareSigningCert, _kMISValidationOptionValidateSignatureOnly ]
+    objc-classes:    [ MISLaunchWarningDatabase, MISLaunchWarningQueryResult ]
 ...

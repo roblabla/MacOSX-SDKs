@@ -146,6 +146,13 @@ API_AVAILABLE(macos(12.3))
 + (void)getShareableContentWithCompletionHandler:(void(^)(SCShareableContent * _Nullable shareableContent, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC(1) NS_SWIFT_ASYNC_NAME(getter:current());
 
 /*!
+@abstract getCurrentProcessShareableContentWithCompletionHandler:completionHandler
+@param completionHandler the call back that will hand you back a SCShareableContent object
+@discussion this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain redacted information about windows, displays and applications that are available to capture by current process without user consent via TCC
+*/
++ (void)getCurrentProcessShareableContentWithCompletionHandler:(void(^)(SCShareableContent * _Nullable shareableContent, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC(1) NS_SWIFT_ASYNC_NAME(getter:currentProcess()) API_AVAILABLE(macos(14.4));
+
+/*!
 @abstract getShareableContentExcludingDesktopWindows:onScreenWindowsOnly:completionHandler
 @param excludeDesktopWindows a BOOL indicating if we should exclude desktop windows
 @param onScreenWindowsOnly filter only windows that are on screen

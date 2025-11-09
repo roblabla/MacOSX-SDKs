@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteServiceDiscovery.framework/Versions/A/RemoteServiceDiscovery'
-current-version: 127.40.2
+current-version: 131.101.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _bridge_version_compare, _bridge_version_copy_current_string, 
@@ -32,13 +32,14 @@ exports:
                        _remote_device_disconnect, _remote_device_get_alias, _remote_device_get_bridge_version, 
                        _remote_device_get_connectable, _remote_device_get_heartbeat_stats, 
                        _remote_device_get_messaging_protocol_version, _remote_device_get_name, 
-                       _remote_device_get_state, _remote_device_get_type, _remote_device_get_xpc_remote_connection_version_flags, 
-                       _remote_device_heartbeat, _remote_device_reset, _remote_device_set_alias, 
-                       _remote_device_set_connected_callback, _remote_device_set_disconnected_callback, 
-                       _remote_device_start_browsing, _remote_device_start_browsing_matching, 
-                       _remote_device_state_get_description, _remote_device_timesync, 
-                       _remote_device_type_get_description, _remote_device_type_is_trusted, 
-                       _remote_device_type_parse, _remote_service_connect_socket, 
+                       _remote_device_get_state, _remote_device_get_type, _remote_device_get_xpc_remote_connection_mode_flags, 
+                       _remote_device_get_xpc_remote_connection_version_flags, _remote_device_heartbeat, 
+                       _remote_device_reset, _remote_device_set_alias, _remote_device_set_connected_callback, 
+                       _remote_device_set_disconnected_callback, _remote_device_start_browsing, 
+                       _remote_device_start_browsing_matching, _remote_device_state_get_description, 
+                       _remote_device_timesync, _remote_device_type_get_description, 
+                       _remote_device_type_is_trusted, _remote_device_type_parse, 
+                       _remote_service_connect_socket, _remote_service_copy_device, 
                        _remote_service_copy_properties, _remote_service_copy_property, 
                        _remote_service_create_connected_socket, _remote_service_get_name, 
                        _remote_service_get_version, _remote_service_get_xpc_remote_connection_version_flags, 

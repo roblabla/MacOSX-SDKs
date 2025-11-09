@@ -185,8 +185,6 @@ Tags:
   SwiftName: MKLocalSearchCompleter.FilterType
 - Name: MKScaleViewAlignment
   SwiftName: MKScaleView.Alignment
-- Name: MKTileOverlayPath
-  SwiftName: MKTileOverlay.Path
 - Name: MKLocalSearchCompleterResultType
   SwiftName: MKLocalSearchCompleter.ResultType
 - Name: MKLocalSearchResultType

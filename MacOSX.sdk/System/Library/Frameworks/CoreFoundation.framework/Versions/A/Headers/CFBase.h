@@ -87,8 +87,12 @@
 
 #if !defined(__MACTYPES__)
 #if !defined(_OS_OSTYPES_H)
-#if DEPLOYMENT_RUNTIME_SWIFT
+#if DEPLOYMENT_RUNTIME_SWIFT || 0
+#if defined(__cplusplus)
+    typedef bool                    Boolean;
+#else
     typedef _Bool                   Boolean;
+#endif //defined(__cplusplus)
 #else
     typedef unsigned char           Boolean;
 #endif

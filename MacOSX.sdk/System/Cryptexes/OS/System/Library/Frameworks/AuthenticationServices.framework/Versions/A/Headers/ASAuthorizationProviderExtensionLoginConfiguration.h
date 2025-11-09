@@ -56,6 +56,22 @@ typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionFederationType)
     ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust = 2,
 }  NS_SWIFT_NAME(ASAuthorizationProviderExtensionLoginConfiguration.FederationType);
 
+
+API_UNAVAILABLE(macos) API_UNAVAILABLE(ios, watchos, tvos);
+typedef NS_OPTIONS(NSUInteger, ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) {
+    // No options.
+    ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyNone = 0,
+    // Current Touch ID or Watch is required.
+    ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet = 1 << 0,
+    // Any Touch ID or Watch is required.
+    ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny = 1 << 1,
+    // Reuse Touch ID for unlock.
+    ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock = 1 << 2,
+    // If Touch ID is cancelled, fails or is not setup, then prompt for idp password.
+    ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback = 1 << 3,
+} NS_SWIFT_NAME(ASAuthorizationProviderExtensionLoginConfiguration.UserSecureEnclaveKeyBiometricPolicy);
+
+
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface ASAuthorizationProviderExtensionLoginConfiguration : NSObject
 
@@ -129,6 +145,14 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  @abstract The device context for storing device meta data.
  */
 @property (nonatomic, nullable, copy) NSData *deviceContext API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
+
+
+/*!
+ @abstract The biometric policy for User Secure Enclave Key authentication.
+ */
+@property (nonatomic) ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy userSecureEnclaveKeyBiometricPolicy API_AVAILABLE(macos(14.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 #pragma mark - Server Nonce

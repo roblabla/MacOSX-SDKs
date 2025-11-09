@@ -84,6 +84,7 @@ struct IORPCMessage {
 #pragma pack(pop)
 typedef struct IORPCMessage IORPCMessage;
 
+
 #if defined(__cplusplus)
 extern "C"
 #else
@@ -91,6 +92,7 @@ extern
 #endif
 IORPCMessage *
 IORPCMessageFromMach(IORPCMessageMach * msg, bool reply);
+
 
 struct IORPCMessageErrorReturnContent {
 	IORPCMessage  hdr;

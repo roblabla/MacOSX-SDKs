@@ -12,7 +12,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/acl.h>
 
 // All the API headers will use these macros
 

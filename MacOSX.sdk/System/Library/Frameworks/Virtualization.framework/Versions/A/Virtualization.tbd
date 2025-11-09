@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 162.7.3
+current-version: 162.9.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]

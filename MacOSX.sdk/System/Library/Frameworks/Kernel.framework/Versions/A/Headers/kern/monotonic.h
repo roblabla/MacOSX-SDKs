@@ -28,7 +28,7 @@
 #ifndef KERN_MONOTONIC_H
 #define KERN_MONOTONIC_H
 
-#if MONOTONIC
+#if CONFIG_CPU_COUNTERS
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -53,6 +53,6 @@ void mt_release_counters(void);
 __END_DECLS
 
 
-#endif /* MONOTONIC */
+#endif /* CONFIG_CPU_COUNTERS */
 
 #endif /* !defined(KERN_MONOTONIC_H) */

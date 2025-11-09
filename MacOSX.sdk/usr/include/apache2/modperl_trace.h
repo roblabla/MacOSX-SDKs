@@ -12,7 +12,7 @@
  * 04: Makefile.PL:102
  */
 
-#define MP_VERSION_STRING "mod_perl/2.0.9"
+#define MP_VERSION_STRING "mod_perl/2.0.12"
 #define MP_API_VERSION "2"
 #define MP_TRACE_OPTS "acdefghimorst"
 

@@ -36,6 +36,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdatomic.h>
+#include <string.h>
 
 #ifndef __DARWIN_UINT
 typedef unsigned int                    uint;

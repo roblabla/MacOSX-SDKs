@@ -16,5 +16,7 @@ INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeCCS2 N
 INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeCHAdeMO NS_SWIFT_NAME(INCarChargingConnectorType.chaDeMo) API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
 INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeGBTAC NS_SWIFT_NAME(INCarChargingConnectorType.gbtAC) API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
 INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeGBTDC NS_SWIFT_NAME(INCarChargingConnectorType.gbtDC) API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
-INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeTesla API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
+INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeTesla API_DEPRECATED("INCarChargingConnectorTypeTesla is deprecated. Please adopt INCarChargingConnectorTypeNACSDC instead", ios(14.0, 17.4), watchos(7.0, 10.4)) API_UNAVAILABLE(macos, tvos);
 INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeMennekes API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
+INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeNACSDC NS_SWIFT_NAME(INCarChargingConnectorType.nacsDC) API_AVAILABLE(ios(17.4), watchos(10.4)) API_UNAVAILABLE(macos, tvos);
+INTENTS_EXTERN INCarChargingConnectorType const INCarChargingConnectorTypeNACSAC NS_SWIFT_NAME(INCarChargingConnectorType.nacsAC) API_AVAILABLE(ios(17.4), watchos(10.4)) API_UNAVAILABLE(macos, tvos);

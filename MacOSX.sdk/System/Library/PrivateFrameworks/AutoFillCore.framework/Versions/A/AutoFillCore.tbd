@@ -18,6 +18,7 @@ exports:
                        _AFTextContentTypeAddressCityAndState, _AFTextContentTypeAddressState, 
                        _AFTextContentTypeBirthdate, _AFTextContentTypeBirthdateDay, 
                        _AFTextContentTypeBirthdateMonth, _AFTextContentTypeBirthdateYear, 
+                       _AFTextContentTypeCellularEID, _AFTextContentTypeCellularIMEI, 
                        _AFTextContentTypeCountryName, _AFTextContentTypeCreditCardExpiration, 
                        _AFTextContentTypeCreditCardExpirationMonth, _AFTextContentTypeCreditCardExpirationYear, 
                        _AFTextContentTypeCreditCardFamilyName, _AFTextContentTypeCreditCardGivenName, 

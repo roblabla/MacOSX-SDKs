@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
-current-version: 225.255.1
+current-version: 225.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -11279,6 +11279,8 @@ exports:
                        '_$s17RealityFoundation10BindTargetOAA33StateMachineCommandParameterValueAAWP', 
                        '_$s17RealityFoundation10BindTargetOMa', '_$s17RealityFoundation10BindTargetOMn', 
                        '_$s17RealityFoundation10BindTargetON', '_$s17RealityFoundation10BindTargetOSQAAMc', 
+                       '_$s17RealityFoundation10FinishableMp', '_$s17RealityFoundation10FinishableP6finishyyFTj', 
+                       '_$s17RealityFoundation10FinishableP6finishyyFTq', '_$s17RealityFoundation10FinishableTL', 
                        '_$s17RealityFoundation10MeshBufferV12makeIteratorAC0F0Vyx_GyF', 
                        '_$s17RealityFoundation10MeshBufferV4rateAA0C7BuffersO4RateOvM', 
                        '_$s17RealityFoundation10MeshBufferV4rateAA0C7BuffersO4RateOvg', 
@@ -15068,6 +15070,8 @@ exports:
                        '_$s17RealityFoundation26AsyncUpdateStreamContainerCMo', '_$s17RealityFoundation26AsyncUpdateStreamContainerCMu', 
                        '_$s17RealityFoundation26AsyncUpdateStreamContainerCfD', '_$s17RealityFoundation26AsyncUpdateStreamContainerCyxGAA0cdE8ObserverAAMc', 
                        '_$s17RealityFoundation26AsyncUpdateStreamContainerCyxGAA0cdE8ObserverAAWP', 
+                       '_$s17RealityFoundation26AsyncUpdateStreamContainerCyxGAA10FinishableAAMc', 
+                       '_$s17RealityFoundation26AsyncUpdateStreamContainerCyxGAA10FinishableAAWP', 
                        '_$s17RealityFoundation26MaterialDefinitionResourceC11__coreAsset0A3Kit02__G3RefVvgTj', 
                        '_$s17RealityFoundation26MaterialDefinitionResourceC11__coreAsset0A3Kit02__G3RefVvgTq', 
                        '_$s17RealityFoundation26MaterialDefinitionResourceC11__coreAsset0A3Kit02__G3RefVvpMV', 

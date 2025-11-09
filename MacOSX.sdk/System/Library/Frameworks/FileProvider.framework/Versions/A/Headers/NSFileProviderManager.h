@@ -417,8 +417,8 @@ FILEPROVIDER_API_AVAILABILITY_V3_IOS;
  In case the extension has lost its synchronisation state and is not interested in preserving
  the data cached on disk, it can remove and re-add the affected domain.
 
- The completion handler is called immediately and does not reflect the end of the import.
- When the import of the file hierarchy is finished, the system calls
+ The completion handler is called as soon as the reimport is initiated and does not not reflect
+ the end of the import. When the import of the file hierarchy is finished, the system calls
  -[NSFileProviderExtension importDidFinishWithCompletionHandler:].
 
  In some circumstances, in particular in case the requested item is the root item, calling

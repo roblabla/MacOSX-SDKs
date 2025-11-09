@@ -24,12 +24,18 @@ typedef NS_OPTIONS(uint8_t, NFCISO15693RequestFlag) {
     NFCISO15693RequestFlagOption API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)              = (1 << 6),
     NFCISO15693RequestFlagCommandSpecificBit8 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos) = (1 << 7),
     
-    RequestFlagDualSubCarriers API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagDualSubCarriers", ios(11.0, 14.0))    = NFCISO15693RequestFlagDualSubCarriers,
-    RequestFlagHighDataRate API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagHighDataRate", ios(11.0,14.0))           = NFCISO15693RequestFlagHighDataRate,
-    RequestFlagProtocolExtension API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagProtocolExtension", ios(11.0,14.0)) = NFCISO15693RequestFlagProtocolExtension,
-    RequestFlagSelect API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagSelect", ios(11.0,14.0))                       = NFCISO15693RequestFlagSelect,
-    RequestFlagAddress API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagAddress", ios(11.0,14.0))                     = NFCISO15693RequestFlagAddress,
-    RequestFlagOption API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagOption", ios(11.0,14.0))                       = NFCISO15693RequestFlagOption
+    RequestFlagDualSubCarriers API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagDualSubCarriers", ios(11.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos) 
+        = NFCISO15693RequestFlagDualSubCarriers,
+    RequestFlagHighDataRate API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagHighDataRate", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCISO15693RequestFlagHighDataRate,
+    RequestFlagProtocolExtension API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagProtocolExtension", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos) 
+        = NFCISO15693RequestFlagProtocolExtension,
+    RequestFlagSelect API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagSelect", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCISO15693RequestFlagSelect,
+    RequestFlagAddress API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagAddress", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCISO15693RequestFlagAddress,
+    RequestFlagOption API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagOption", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCISO15693RequestFlagOption
 
 } API_AVAILABLE(ios(14.0));
 

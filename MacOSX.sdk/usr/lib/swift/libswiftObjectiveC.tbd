@@ -6,7 +6,7 @@ install-name:    '/usr/lib/swift/libswiftObjectiveC.dylib'
 current-version: 8
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvM', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvg', 
                        '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvpMV', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvs' ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -16,9 +16,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftObjectiveC.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftObjectiveC.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftObjectiveC.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftObjectiveC.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s10ObjectiveC13ObjCClassListV12makeIteratorAC0F0CyF', '_$s10ObjectiveC13ObjCClassListV8IteratorC4nextyXlXpSgyFTj', 
+                       '$ld$install_name$os10.9$@rpath/libswiftObjectiveC.dylib', 
+                       '_$s10ObjectiveC13ObjCClassListV12makeIteratorAC0F0CyF', '_$s10ObjectiveC13ObjCClassListV8IteratorC4nextyXlXpSgyFTj', 
                        '_$s10ObjectiveC13ObjCClassListV8IteratorC4nextyXlXpSgyFTq', 
                        '_$s10ObjectiveC13ObjCClassListV8IteratorCMa', '_$s10ObjectiveC13ObjCClassListV8IteratorCMm', 
                        '_$s10ObjectiveC13ObjCClassListV8IteratorCMn', '_$s10ObjectiveC13ObjCClassListV8IteratorCMo', 
@@ -63,7 +62,7 @@ exports:
                        '_$sSo8NSObjectC10ObjectiveCE9hashValueSivg', '_$sSo8NSObjectC10ObjectiveCE9hashValueSivpMV', 
                        '_$sSo8NSObjectCSH10ObjectiveCMc', '_$sSo8NSObjectCSQ10ObjectiveCMc', 
                        '_$sSo8NSObjectCs7CVarArg10ObjectiveCMc', '__swift_FORCE_LOAD_$_swiftObjectiveC' ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10ObjectiveC8ObjCBoolV6_valueSbvM', '_$s10ObjectiveC8ObjCBoolV6_valueSbvg', 
                        '_$s10ObjectiveC8ObjCBoolV6_valueSbvpMV', '_$s10ObjectiveC8ObjCBoolV6_valueSbvs' ]
 ...

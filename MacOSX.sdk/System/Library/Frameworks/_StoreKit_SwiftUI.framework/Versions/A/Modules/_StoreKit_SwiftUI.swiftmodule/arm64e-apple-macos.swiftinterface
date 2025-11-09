@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _StoreKit_SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 813.2.8
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 813.4.32 -module-name _StoreKit_SwiftUI
 import AppKit
 import Combine
 import CryptoKit/*.Insecure*/
@@ -14,6 +13,13 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import os.log
 import os
+extension SwiftUI.View {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
+  public func subscriptionPromotionalOffer(offer: @escaping (_ product: StoreKit.Product, _ subscriptionInfo: StoreKit.Product.SubscriptionInfo) -> StoreKit.Product.SubscriptionOffer?, signature: @escaping (_ product: StoreKit.Product, _ subscriptionInfo: StoreKit.Product.SubscriptionInfo, _ promotionalOffer: StoreKit.Product.SubscriptionOffer) async throws -> StoreKit.Product.SubscriptionOffer.Signature) -> some SwiftUI.View
+  
+  #endif
+}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 public struct AutomaticProductViewStyle : _StoreKit_SwiftUI.ProductViewStyle {
   public init()
@@ -593,6 +599,17 @@ extension SwiftUI.View {
   @usableFromInline
   internal func _productDescriptionHidden(_ hidden: Swift.Bool = true) -> some SwiftUI.View
   
+  @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
+  @usableFromInline
+  internal func _productDescription(_ visibility: SwiftUI.Visibility) -> some SwiftUI.View
+  
+  @_alwaysEmitIntoClient public func productDescription(_ visibility: SwiftUI.Visibility) -> some SwiftUI.View {
+        if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *) {
+            return _productDescription(visibility)
+        }
+        return _productDescriptionHidden(visibility == .hidden)
+    }
+  
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 public protocol ProductViewStyle {
@@ -611,6 +628,8 @@ public struct ProductViewStyleConfiguration {
   public let state: StoreKit.Product.TaskState
   public let icon: _StoreKit_SwiftUI.ProductViewStyleConfiguration.Icon
   public let hasCurrentEntitlement: Swift.Bool
+  @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
+  public let descriptionVisibility: SwiftUI.Visibility
   public var product: StoreKit.Product? {
     get
   }

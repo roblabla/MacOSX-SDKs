@@ -31,6 +31,7 @@ NS_SWIFT_SENDABLE
 @property (nullable, copy) NSArray<NSString *> *arguments;
 @property (nullable, copy) NSDictionary<NSString *, NSString *> *environment; // if not set, use current
 @property (nullable, copy) NSURL *currentDirectoryURL API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nullable, copy) NSData *launchRequirementData API_AVAILABLE(macos(14.4)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
 
 // standard I/O channels; could be either an NSFileHandle or an NSPipe
 @property (nullable, retain) id standardInput;

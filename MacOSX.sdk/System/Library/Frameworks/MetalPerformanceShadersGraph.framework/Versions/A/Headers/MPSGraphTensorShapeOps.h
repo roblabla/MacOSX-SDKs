@@ -179,6 +179,54 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                             squeezeMask:(uint32_t) squeezeMask
                                    name:(NSString * _Nullable) name;
 
+/// Creates a strided slice update operation and returns the result tensor.
+///
+/// - Parameters:
+///   - dataTensor: The large tensor that will receive the update.
+///   - updateTensor: The tensor with the new values that will replace values in the dataTensor.
+///   - startsTensor: A Tensor that contains an array of numbers that specify the starting points for each dimension.
+///   - endsTensor: A Tensor that contains an array of numbers that specify the ending points for each dimension.
+///   - stridesTensor: A Tensor that contains an array of numbers that specify the strides for each dimension.
+///   - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore.
+///   - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore.
+///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object
+-(MPSGraphTensor *) sliceUpdateDataTensor:(MPSGraphTensor *) dataTensor
+                             updateTensor:(MPSGraphTensor *) updateTensor
+                             startsTensor:(MPSGraphTensor *) startsTensor
+                               endsTensor:(MPSGraphTensor *) endsTensor
+                            stridesTensor:(MPSGraphTensor *) stridesTensor
+                                startMask:(uint32_t) startMask
+                                  endMask:(uint32_t) endMask
+                              squeezeMask:(uint32_t) squeezeMask
+                                     name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
+
+/// Creates a strided slice update operation and returns the result tensor.
+///
+/// - Parameters:
+///   - dataTensor: The large tensor that will receive the update.
+///   - updateTensor: The tensor with the new values that will replace values in the dataTensor.
+///   - starts: An array of numbers that specify the starting points for each dimension.
+///   - ends: An array of numbers that specify the ending points for each dimension.
+///   - strides: An array of numbers that specify the strides for each dimension.
+///   - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore.
+///   - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore.
+///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object
+-(MPSGraphTensor *) sliceUpdateDataTensor:(MPSGraphTensor *) dataTensor
+                             updateTensor:(MPSGraphTensor *) updateTensor
+                                   starts:(NSArray<NSNumber *> *) starts
+                                     ends:(NSArray<NSNumber *> *) ends
+                                  strides:(NSArray<NSNumber *> *) strides
+                                startMask:(uint32_t) startMask
+                                  endMask:(uint32_t) endMask
+                              squeezeMask:(uint32_t) squeezeMask
+                                     name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
+
 /// Creates a concatenation operation and returns the result tensor.
 ///
 /// Concatenates two input tensors along the specified dimension. Tensors must be broadcast

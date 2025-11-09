@@ -5,7 +5,8 @@ install-name:    '/System/Library/PrivateFrameworks/iCloudQuotaUI.framework/Vers
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s13iCloudQuotaUI0B6LoggerO2ui2os0D0Vvau', '_$s13iCloudQuotaUI0B6LoggerO2ui2os0D0VvgZ', 
+    symbols:         [ '_$s11iCloudQuota19ICQLiftUIDataSourceC6LiftUI0fdE001iabG0Mc', 
+                       '_$s13iCloudQuotaUI0B6LoggerO2ui2os0D0Vvau', '_$s13iCloudQuotaUI0B6LoggerO2ui2os0D0VvgZ', 
                        '_$s13iCloudQuotaUI0B6LoggerO2ui2os0D0VvpZ', '_$s13iCloudQuotaUI0B6LoggerOMa', 
                        '_$s13iCloudQuotaUI0B6LoggerOMn', '_$s13iCloudQuotaUI0B6LoggerON', 
                        '_$s13iCloudQuotaUI13FooterSectionV05SwiftC04ViewAAMc', '_$s13iCloudQuotaUI13FooterSectionV18_withCurrentWindow33_2C7F63084D9C1585BCB51F67E75F00B7LL05SwiftC011EnvironmentVyAF04WithgH6ActionVGvpfi', 
@@ -113,18 +114,6 @@ exports:
                        '_$s13iCloudQuotaUI18ManageStorageModelCACycfC', '_$s13iCloudQuotaUI18ManageStorageModelCACycfc', 
                        '_$s13iCloudQuotaUI18ManageStorageModelCMa', '_$s13iCloudQuotaUI18ManageStorageModelCMn', 
                        '_$s13iCloudQuotaUI18ManageStorageModelCN', '_$s13iCloudQuotaUI18ManageStorageModelCfD', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC04LiftC00geF0AAMc', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC34$__lazy_storage_$_backupDeviceUUID33_BFBEF54A27708D2B57313CA86942BDBALLSSSgSgvpfi', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC4data3for10Foundation4DataVAF10URLRequestV_tYaKF', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC4data3for10Foundation4DataVAF10URLRequestV_tYaKFTu', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC7accountACSo9ACAccountC_tcfC', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC7accountACSo9ACAccountC_tcfCTq', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC7accountACSo9ACAccountC_tcfc', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC7request3for10Foundation10URLRequestVAF3URLV_tKF', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceC7request3for8timeZone10Foundation10URLRequestVAG3URLV_AG04TimeJ0VtKF', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceCACycfC', '_$s13iCloudQuotaUI19ICQLiftUIDataSourceCACycfc', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceCMa', '_$s13iCloudQuotaUI19ICQLiftUIDataSourceCMn', 
-                       '_$s13iCloudQuotaUI19ICQLiftUIDataSourceCN', '_$s13iCloudQuotaUI19ICQLiftUIDataSourceCfD', 
                        '_$s13iCloudQuotaUI21PrivateRelayViewModelC06bannerG033_3817F2794562B8EEA3455BFD2A91BDF7LLSo024ICQInternetPrivacyBannerG0CSgvpfP', 
                        '_$s13iCloudQuotaUI21PrivateRelayViewModelC07_bannerG033_3817F2794562B8EEA3455BFD2A91BDF7LL7Combine9PublishedVySo024ICQInternetPrivacyBannerG0CSgGvpfi', 
                        '_$s13iCloudQuotaUI21PrivateRelayViewModelC10_showAlert33_3817F2794562B8EEA3455BFD2A91BDF7LL7Combine9PublishedVySbGvpfi', 
@@ -316,7 +305,8 @@ exports:
                        _ICQUIPathStorageUpgrade, _ICQUIPhotosBundleID, _ICQUIQueryParamNameDeviceOffers, 
                        _ICQUIQueryParamNameFramework, _ICQUIQueryParamNamePath, _ICQUIQueryParamNameRemotePresentation, 
                        _ICQUIQueryParamValueFramework, _ICQUIQueryParamValueTrue, 
-                       _ICQUISpecifierKeyAccount, _ICQUniversalLinkWithQueryStart, 
+                       _ICQUISpecifierKeyAccount, _ICQUIUpsellTriggerEventAppLaunch, 
+                       _ICQUIUpsellTriggerEventFlowManagerKey, _ICQUniversalLinkWithQueryStart, 
                        _ICQiCloudSettingsUniversalURL, _NSPPrivacyProxyAccountTypeDescription, 
                        _NSPPrivacyProxyUserTierDecription ]
     objc-classes:    [ ICQAnalytics, ICQDynamicUIPresenter, ICQInAppAction, ICQInAppMessage, 
@@ -326,6 +316,5 @@ exports:
                        ICQLinkInAppAction, ICQPurchase, ICQUIAOSUISoftLinking, ICQUIINDaemonConnectionSoftLinking, 
                        ICQUIImageLoader, ICQUpgradeFlowManager, ICQiCloudPurchaseStorageController, 
                        _ICQUIHelperFunctions, _TtC13iCloudQuotaUI18ManageStorageModel, 
-                       _TtC13iCloudQuotaUI19ICQLiftUIDataSource, _TtC13iCloudQuotaUI24PrivateProxyAppListModel, 
-                       _TtC13iCloudQuotaUI25DynamicUIPresenterAdapter ]
+                       _TtC13iCloudQuotaUI24PrivateProxyAppListModel, _TtC13iCloudQuotaUI25DynamicUIPresenterAdapter ]
 ...

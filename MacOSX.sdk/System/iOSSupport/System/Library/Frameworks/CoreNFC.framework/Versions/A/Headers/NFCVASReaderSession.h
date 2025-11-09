@@ -25,11 +25,13 @@ typedef NS_ENUM(NSInteger, NFCVASMode) {
     NFCVASModeURLOnly API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)    = 0,
     NFCVASModeNormal API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 1,
     
-    VASModeURLOnly API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeURLOnly", ios(13.0, 14.0))    = NFCVASModeURLOnly,
-    VASModeNormal API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeNormal", ios(13.0, 14.0))      = NFCVASModeNormal,
+    VASModeURLOnly API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeURLOnly", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASModeURLOnly,
+    VASModeNormal API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeNormal", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASModeNormal,
 } API_AVAILABLE(ios(13.0));
 
-typedef NFCVASMode VASMode API_DEPRECATED_WITH_REPLACEMENT("NFCVASMode", ios(13.0, 14.0));
+typedef NFCVASMode VASMode API_DEPRECATED_WITH_REPLACEMENT("NFCVASMode", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @class NFCVASCommandConfiguration
@@ -84,17 +86,25 @@ typedef NS_ENUM(NSInteger, NFCVASErrorCode) {
     NFCVASErrorCodeIncorrectData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                  = 0x6A80,
     NFCVASErrorCodeUnsupportedApplicationVersion API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 0x6340,
     
-    VASErrorCodeSuccess API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeSuccess", ios(13.0, 14.0))                                              = NFCVASErrorCodeSuccess,
-    VASErrorCodeDataNotFound API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotFound", ios(13.0, 14.0))                                    = NFCVASErrorCodeDataNotFound,
-    VASErrorCodeDataNotActivated API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotActivated", ios(13.0, 14.0))                            = NFCVASErrorCodeDataNotActivated,
-    VASErrorCodeWrongParameters API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongParameters", ios(13.0, 14.0))                              = NFCVASErrorCodeWrongParameters,
-    VASErrorCodeWrongLCField API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongLCField", ios(13.0, 14.0))                                    = NFCVASErrorCodeWrongLCField,
-    VASErrorCodeUserIntervention API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUserIntervention", ios(13.0, 14.0))                            = NFCVASErrorCodeUserIntervention,
-    VASErrorCodeIncorrectData API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeIncorrectData", ios(13.0, 14.0))                                  = NFCVASErrorCodeIncorrectData,
-    VASErrorCodeUnsupportedApplicationVersion API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUnsupportedApplicationVersion", ios(13.0, 14.0))  = NFCVASErrorCodeUnsupportedApplicationVersion,
+    VASErrorCodeSuccess API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeSuccess", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeSuccess,
+    VASErrorCodeDataNotFound API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotFound", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeDataNotFound,
+    VASErrorCodeDataNotActivated API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotActivated", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeDataNotActivated,
+    VASErrorCodeWrongParameters API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongParameters", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeWrongParameters,
+    VASErrorCodeWrongLCField API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongLCField", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeWrongLCField,
+    VASErrorCodeUserIntervention API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUserIntervention", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeUserIntervention,
+    VASErrorCodeIncorrectData API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeIncorrectData", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeIncorrectData,
+    VASErrorCodeUnsupportedApplicationVersion API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUnsupportedApplicationVersion", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCVASErrorCodeUnsupportedApplicationVersion,
 } API_AVAILABLE(ios(13.0));
 
-typedef NFCVASErrorCode VASErrorCode API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCode", ios(13.0, 14.0));
+typedef NFCVASErrorCode VASErrorCode API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCode", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @class NFCVASResponse

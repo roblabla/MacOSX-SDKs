@@ -3,16 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftMetal.dylib'
-current-version: 341.35
+current-version: 343.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.11$@rpath/libswiftMetal.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.13$@rpath/libswiftMetal.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.9$@rpath/libswiftMetal.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s5Metal15MTLLogContainerV12makeIteratorAC0E0VyF', '_$s5Metal15MTLLogContainerV8IteratorV4nextSo14MTLFunctionLog_pSgyF', 
+                       '$ld$install_name$os10.14$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.9$@rpath/libswiftMetal.dylib', 
+                       '_$s5Metal15MTLLogContainerV12makeIteratorAC0E0VyF', '_$s5Metal15MTLLogContainerV8IteratorV4nextSo14MTLFunctionLog_pSgyF', 
                        '_$s5Metal15MTLLogContainerV8IteratorVMa', '_$s5Metal15MTLLogContainerV8IteratorVMn', 
                        '_$s5Metal15MTLLogContainerV8IteratorVN', '_$s5Metal15MTLLogContainerV8IteratorVStAAMc', 
                        '_$s5Metal15MTLLogContainerVMa', '_$s5Metal15MTLLogContainerVMn', 

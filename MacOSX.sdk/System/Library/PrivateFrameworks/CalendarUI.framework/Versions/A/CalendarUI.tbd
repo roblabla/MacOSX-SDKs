@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarUI.framework/Versions/A/CalendarUI'
-current-version: 1167.2.1
+current-version: 1167.4.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CALGroupPboardType, _CALLocationPboardType, _CALPixelAlignedPoint, 
@@ -14,17 +14,15 @@ exports:
                        _CalUILocationErrorDomain, _CalUIMajorVersionNumberFromVersion, 
                        _CalUIPreferenceMajorVersion, _CalUIPreferenceMajorVersion_WeekStartMigration, 
                        _CalUIPrefiCalVersionKey, _CalUIRecentlyUsedTimeZonesKey, 
-                       _CalUIReminderTimeTrackDividerWidth, _CalUIReminderTimeTrackHourWidth, 
-                       _CalUIReminderTimeTrackMinuteWidth, _CalUIWeekStart, _CustomMenuItemTag, 
-                       _DIFFERENCE_DIAMETER, _DOT_DIAMETER, _EKUIAttendeePasteboardType, 
-                       _EKUIGadgetContainerBetweenSpacing, _EKUIGadgetContainerBetweenSpacingExpanded, 
-                       _EKUIGadgetContainerBottomSpacing, _EKUIGadgetContainerBottomSpacingExpanded, 
-                       _EKUIGadgetContainerBottomSpacingLast, _EKUIGadgetContainerConditionKey, 
-                       _EKUIGadgetContainerSpacingKey, _EKUIGadgetContainerTopSpacing, 
-                       _EKUIGadgetContainerTopSpacingExpanded, _FloatingMenuItemTag, 
-                       _MaxRecentlyUsedTimeZones, _MinNumOfNewTimeOptions, _NoneMenuItemTag, 
-                       _PADDING_BOTTOM, _PADDING_LEFT, _PADDING_RIGHT, _PADDING_TOP, 
-                       _RecurrenceOrdinalDayPickerValueStrings, _RecurrenceOrdinalValueStrings, 
+                       _CalUIWeekStart, _CustomMenuItemTag, _DIFFERENCE_DIAMETER, 
+                       _DOT_DIAMETER, _EKUIAttendeePasteboardType, _EKUIGadgetContainerBetweenSpacing, 
+                       _EKUIGadgetContainerBetweenSpacingExpanded, _EKUIGadgetContainerBottomSpacing, 
+                       _EKUIGadgetContainerBottomSpacingExpanded, _EKUIGadgetContainerBottomSpacingLast, 
+                       _EKUIGadgetContainerConditionKey, _EKUIGadgetContainerSpacingKey, 
+                       _EKUIGadgetContainerTopSpacing, _EKUIGadgetContainerTopSpacingExpanded, 
+                       _FloatingMenuItemTag, _MaxRecentlyUsedTimeZones, _MinNumOfNewTimeOptions, 
+                       _NoneMenuItemTag, _PADDING_BOTTOM, _PADDING_LEFT, _PADDING_RIGHT, 
+                       _PADDING_TOP, _RecurrenceOrdinalDayPickerValueStrings, _RecurrenceOrdinalValueStrings, 
                        _SCROLLVIEW_INSET_BOTTOM, _SCROLLVIEW_INSET_HORIZONTAL, _SCROLLVIEW_INSET_TOP, 
                        _SCROLLVIEW_SPACING, _SELECTION_DIAMETER, _SELECTION_SPACING, 
                        _UTCMenuItemTag, __sharedCustomRecurrenceWindowController, 
@@ -85,11 +83,7 @@ exports:
                        CalUILogSubsystem, CalUIMiniMonthViewFormatter, CalUINewFeaturesContinueButton, 
                        CalUINewFeaturesView, CalUIOccurrenceTableCellView, CalUIOccurrenceUtilities, 
                        CalUIPasswordPanelController, CalUIPopupContentView, CalUIPopupWindow, 
-                       CalUIPopupWindowState, CalUIReminderDateItemView, CalUIReminderDatePickerTouchBar, 
-                       CalUIReminderDateViewLabel, CalUIReminderTimeTrackView, CalUIReminderTimeWheelSelectorLabel, 
-                       CalUIReminderTimeWheelSelectorLabelMask, CalUIReminderTimeWheelSelectorView, 
-                       CalUIReminderTimeWheelView, CalUIReminderTimeWheelViewController, 
-                       CalUIReminderViewTouchBar, CalUIResettingScrollViewController, 
+                       CalUIPopupWindowState, CalUIResettingScrollViewController, 
                        CalUIResizingTextField, CalUIRowView, CalUISuggestionsField, 
                        CalUISuggestionsFieldController, CalUISuggestionsTable, CalUISuggestionsWindow, 
                        CalUITextFieldCell, CalUITextFieldEditor, CalUITimeZoneCityPickerController, 

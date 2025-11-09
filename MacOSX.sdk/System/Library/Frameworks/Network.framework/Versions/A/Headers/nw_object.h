@@ -30,6 +30,10 @@
 #  define NW_SWIFT_SENDABLE
 #endif // __has_attribute(__swift_attr__)
 
+#ifndef NW_NO_DESTROY
+#	define NW_NO_DESTROY [[clang::no_destroy]]
+#endif // NW_NO_DESTROY
+
 #if OS_OBJECT_USE_OBJC
 #  define NW_OBJECT_DECL(type) OS_OBJECT_DECL(type)
 #  define NW_SENDABLE_OBJECT_DECL(type) NW_SWIFT_SENDABLE NW_OBJECT_DECL(type)

@@ -29,8 +29,6 @@ API_AVAILABLE(macos(13.0), ios(16.0)) CS_TVOS_UNAVAILABLE
 - (NSComparisonResult)compareByRank:(CSSuggestion *)other;
 
 - (NSComparisonResult)compare:(CSSuggestion *)other;
-- (NSNumber *)score;
-- (NSArray<id> *)suggestionDataSources;
 
 @end
 NS_ASSUME_NONNULL_END

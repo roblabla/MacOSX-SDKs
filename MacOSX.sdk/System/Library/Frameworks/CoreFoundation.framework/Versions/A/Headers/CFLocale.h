@@ -181,7 +181,6 @@ CF_EXPORT const CFLocaleKey kCFLocaleAlternateQuotationEndDelimiterKey API_AVAIL
 // Values for kCFLocaleCalendarIdentifier
 typedef CFStringRef CFCalendarIdentifier CF_STRING_ENUM;
 
-#if !0
 CF_EXPORT const CFCalendarIdentifier kCFGregorianCalendar;
 CF_EXPORT const CFCalendarIdentifier kCFBuddhistCalendar;
 CF_EXPORT const CFCalendarIdentifier kCFChineseCalendar;
@@ -195,7 +194,6 @@ CF_EXPORT const CFCalendarIdentifier kCFIndianCalendar API_AVAILABLE(macos(10.6)
 CF_EXPORT const CFCalendarIdentifier kCFISO8601Calendar API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 CF_EXPORT const CFCalendarIdentifier kCFIslamicTabularCalendar API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 CF_EXPORT const CFCalendarIdentifier kCFIslamicUmmAlQuraCalendar API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
-#endif
 
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED

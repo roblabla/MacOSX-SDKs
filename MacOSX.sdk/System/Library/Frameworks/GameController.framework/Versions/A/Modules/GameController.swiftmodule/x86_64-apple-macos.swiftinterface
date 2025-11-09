@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -module-name GameController
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 11.2.3
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-bare-slash-regex -user-module-version 11.4.11 -module-name GameController
 @_exported import GameController
 import Swift
 import _Concurrency
@@ -72,7 +71,7 @@ extension GameController.GCDevicePhysicalInputStateDiff {
         return __changedElements()
     }
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
   @inlinable public func changedElements() -> (some Swift.Sequence<any GameController.GCPhysicalInputElement>)? {
         return __changedElements()?.lazy.compactMap { $0 as? any GCPhysicalInputElement }
     }
@@ -307,10 +306,18 @@ public struct GCButtonElementName : Swift.RawRepresentable, Swift.Hashable, Swif
   public static let y: GameController.GCButtonElementName
   public static let leftShoulder: GameController.GCButtonElementName
   public static let rightShoulder: GameController.GCButtonElementName
+  @available(macOS 14.4, iOS 17.4, tvOS 17.4, visionOS 1.1, *)
+  public static let leftBumper: GameController.GCButtonElementName
+  @available(macOS 14.4, iOS 17.4, tvOS 17.4, visionOS 1.1, *)
+  public static let rightBumper: GameController.GCButtonElementName
   public static let leftTrigger: GameController.GCButtonElementName
   public static let rightTrigger: GameController.GCButtonElementName
   public static let leftThumbstickButton: GameController.GCButtonElementName
   public static let rightThumbstickButton: GameController.GCButtonElementName
+  @available(macOS 14.4, iOS 17.4, tvOS 17.4, visionOS 1.1, *)
+  public static func backLeftButton(position: Swift.Int) -> GameController.GCButtonElementName
+  @available(macOS 14.4, iOS 17.4, tvOS 17.4, visionOS 1.1, *)
+  public static func backRightButton(position: Swift.Int) -> GameController.GCButtonElementName
   public static let home: GameController.GCButtonElementName
   public static let menu: GameController.GCButtonElementName
   public static let options: GameController.GCButtonElementName

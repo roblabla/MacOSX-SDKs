@@ -16,9 +16,9 @@ typedef NS_ENUM(NSInteger, UIImpactFeedbackStyle) {
     UIImpactFeedbackStyleLight,
     UIImpactFeedbackStyleMedium,
     UIImpactFeedbackStyleHeavy,
-    UIImpactFeedbackStyleSoft     API_AVAILABLE(ios(13.0)),
-    UIImpactFeedbackStyleRigid    API_AVAILABLE(ios(13.0))
-};
+    UIImpactFeedbackStyleSoft     API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos),
+    UIImpactFeedbackStyleRigid    API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos)
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
 
 // UIImpactFeedbackGenerator is used to give user feedback when an impact between UI elements occurs
 UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR

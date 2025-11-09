@@ -40,6 +40,7 @@
 
 #include <sys/types.h>
 
+
 struct ah {
 	u_int8_t        ah_nxt;         /* Next Header */
 	u_int8_t        ah_len;         /* Length of data, in 32bit */

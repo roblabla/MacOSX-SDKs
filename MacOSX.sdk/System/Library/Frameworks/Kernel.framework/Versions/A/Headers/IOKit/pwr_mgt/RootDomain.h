@@ -328,6 +328,8 @@ public:
 	IOReturn    setWakeTime(uint64_t wakeContinuousTime);
 
 
+	void        copyWakeReasonString( char * outBuf, size_t bufSize );
+
 private:
 	unsigned long getRUN_STATE(void);
 

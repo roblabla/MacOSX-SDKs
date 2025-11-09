@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperFoundation.framework/Versions/A/WallpaperFoundation'
-current-version: 95.18
+current-version: 95.113
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -118,7 +118,17 @@ exports:
                        '_$s19WallpaperFoundation10ColorSpaceVMa', '_$s19WallpaperFoundation10ColorSpaceVMn', 
                        '_$s19WallpaperFoundation10ColorSpaceVN', '_$s19WallpaperFoundation10ColorSpaceVSEAAMc', 
                        '_$s19WallpaperFoundation10ColorSpaceVSeAAMc', '_$s19WallpaperFoundation10ColorSpaceVyACSo07CGColorD3RefacfC', 
-                       '_$s19WallpaperFoundation10WindowTagsV12arrayLiteralACSo19CGSWindowTagBitTypeVd_tcfC', 
+                       '_$s19WallpaperFoundation10TapToRadarC12displayAlert6header7messageySS_SStFTj', 
+                       '_$s19WallpaperFoundation10TapToRadarC12displayAlert6header7messageySS_SStFTq', 
+                       '_$s19WallpaperFoundation10TapToRadarC15unownedExecutorScevg', 
+                       '_$s19WallpaperFoundation10TapToRadarC15unownedExecutorScevpMV', 
+                       '_$s19WallpaperFoundation10TapToRadarCACycfC', '_$s19WallpaperFoundation10TapToRadarCACycfCTj', 
+                       '_$s19WallpaperFoundation10TapToRadarCACycfCTq', '_$s19WallpaperFoundation10TapToRadarCACycfc', 
+                       '_$s19WallpaperFoundation10TapToRadarCMa', '_$s19WallpaperFoundation10TapToRadarCMm', 
+                       '_$s19WallpaperFoundation10TapToRadarCMn', '_$s19WallpaperFoundation10TapToRadarCMo', 
+                       '_$s19WallpaperFoundation10TapToRadarCMu', '_$s19WallpaperFoundation10TapToRadarCN', 
+                       '_$s19WallpaperFoundation10TapToRadarCScAAAMc', '_$s19WallpaperFoundation10TapToRadarCfD', 
+                       '_$s19WallpaperFoundation10TapToRadarCfd', '_$s19WallpaperFoundation10WindowTagsV12arrayLiteralACSo19CGSWindowTagBitTypeVd_tcfC', 
                        '_$s19WallpaperFoundation10WindowTagsV17withUnsafePointer4bodyxxSPys6UInt32VGKXE_tKlF', 
                        '_$s19WallpaperFoundation10WindowTagsV7tagSizes6UInt32Vvg', 
                        '_$s19WallpaperFoundation10WindowTagsV7tagSizes6UInt32VvpMV', 

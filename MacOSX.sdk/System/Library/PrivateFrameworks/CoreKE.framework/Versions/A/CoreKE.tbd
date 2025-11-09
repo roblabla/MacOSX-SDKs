@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/CoreKE.framework/CoreKE'
-current-version: 7.3
+current-version: 7.5
 compatibility-version: 1.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

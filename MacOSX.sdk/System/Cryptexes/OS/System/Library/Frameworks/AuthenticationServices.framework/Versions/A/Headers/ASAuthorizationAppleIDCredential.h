@@ -20,6 +20,16 @@ typedef NS_ENUM(NSInteger, ASUserDetectionStatus) {
     ASUserDetectionStatusLikelyReal,
 };
 
+/*! @enum ASUserAgeRange
+ @constant ASUserAgeRangeUnknown This is returned if the project is missing the required entitlement to support child accounts.
+ @constant ASUserAgeRangeChild The user is a child.
+ @constant ASUserAgeRangeNotChild The user is not a child.
+ */
+typedef NS_ENUM(NSInteger, ASUserAgeRange) {
+    ASUserAgeRangeUnknown,
+    ASUserAgeRangeChild,
+    ASUserAgeRangeNotChild,
+} API_AVAILABLE(ios(17.0), macos(14.0), tvos(17.0), watchos(10.0));
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -60,6 +70,9 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
  */
 @property (nonatomic, readonly) ASUserDetectionStatus realUserStatus;
 
+/*! @abstract Check this property to determine whether the current user is a child.  @see ASUserAgeRange for guidelines on handling each status.
+ */
+@property (nonatomic, readonly) ASUserAgeRange userAgeRange API_AVAILABLE(ios(17.0), macos(14.0), tvos(17.0), watchos(10.0));
 
 + (instancetype)new NS_UNAVAILABLE;
 

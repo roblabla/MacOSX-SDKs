@@ -8,7 +8,17 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _MAAudibleMediaCopyPreferredCharacteristics, _MAAudibleMediaPrefCopyPreferDescriptiveVideo, 
+    symbols:         [ '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE14processSurface_03outG09timestamp7optionsAbCE6ResultVSo12IOSurfaceRefa_AKzSdSDySo0abC9OptionKeyaypGSgtF', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV14intensityLevelSfvg', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV14intensityLevelSfvpMV', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV15mitigationLevelSfvg', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV15mitigationLevelSfvpMV', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV16surfaceProcessedSbvg', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV16surfaceProcessedSbvpMV', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultVMa', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultVMn', 
+                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultVN', 
+                       _MAAudibleMediaCopyPreferredCharacteristics, _MAAudibleMediaPrefCopyPreferDescriptiveVideo, 
                        _MAAudibleMediaPrefResetAll, _MAAudibleMediaPrefSetPreferDescriptiveVideo, 
                        _MACaptionAppearanceAddPreferredLanguage, _MACaptionAppearanceAddSelectedLanguage, 
                        _MACaptionAppearanceCopyBackgroundColor, _MACaptionAppearanceCopyFontDescriptorForLanguage, 
@@ -164,15 +174,4 @@ exports:
                        _kMADisplayFilterPrefWarmthIntensityMin, _kMADisplayFilterSettingsChangedNotification, 
                        _kMAXCaptionAppearanceSettingsChangedNotification ]
     objc-classes:    [ MAFlashingLightsProcessor, MAFlashingLightsProcessorResult ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE14processSurface_03outG09timestamp7optionsAbCE6ResultVSo12IOSurfaceRefa_AKzSdSDySo0abC9OptionKeyaypGSgtF', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV14intensityLevelSfvg', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV14intensityLevelSfvpMV', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV15mitigationLevelSfvg', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV15mitigationLevelSfvpMV', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV16surfaceProcessedSbvg', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultV16surfaceProcessedSbvpMV', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultVMa', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultVMn', 
-                       '_$sSo25MAFlashingLightsProcessorC18MediaAccessibilityE6ResultVN' ]
 ...

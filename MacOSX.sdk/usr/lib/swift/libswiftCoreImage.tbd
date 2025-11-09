@@ -13,7 +13,6 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftCoreImage.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreImage.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreImage.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCoreImage.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '__swift_FORCE_LOAD_$_swiftCoreImage' ]
+                       '$ld$install_name$os10.9$@rpath/libswiftCoreImage.dylib', 
+                       '__swift_FORCE_LOAD_$_swiftCoreImage' ]
 ...

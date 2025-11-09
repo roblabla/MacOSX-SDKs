@@ -1433,6 +1433,11 @@ Protocols:
   - Selector: 'setTileAccelerationStructure:atBufferIndex:'
     SwiftName: setTileAccelerationStructure(_:bufferIndex:)
     MethodKind: Instance
+- Name: MTLResource
+  Methods:
+  - Selector: 'setOwnerWithIdentity:'
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: MTLSharedEvent
   Methods:
   - Selector: 'newSharedEventHandle'

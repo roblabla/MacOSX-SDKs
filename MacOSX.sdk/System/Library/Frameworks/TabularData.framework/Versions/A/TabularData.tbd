@@ -5,7 +5,8 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
 install-name:    '/System/Library/Frameworks/TabularData.framework/Versions/A/TabularData'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10ColumnType11TabularData0D13FrameProtocolPTl', '_$s11TabularData06ShapedB0V5shape7strides8contentsACyxGSaySiG_AHSayxGtcfC', 
                        '_$s11TabularData06ShapedB0V5shapeSaySiGvg', '_$s11TabularData06ShapedB0V5shapeSaySiGvpMV', 
                        '_$s11TabularData06ShapedB0V7stridesSaySiGvg', '_$s11TabularData06ShapedB0V7stridesSaySiGvpMV', 

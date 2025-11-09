@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
+#import <UIKit/UIInteraction.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 

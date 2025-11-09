@@ -7,14 +7,15 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _SWCollaborationClearNoticeTransmissionMessageReadFrom, _SWCollaborationMetadataForDocumentURL, 
+    symbols:         [ '_$sSo21SWCollaborationOptionC17SharedWithYouCoreE5title10identifier8subtitle8selected26requiredOptionsIdentifiersABSS_S2SSbSaySSGtcfC', 
+                       '_$sSo21SWCollaborationOptionC17SharedWithYouCoreE5title10identifier8subtitle8selected26requiredOptionsIdentifiersABSS_S2SSbSaySSGtcfc', 
+                       _SWCollaborationClearNoticeTransmissionMessageReadFrom, _SWCollaborationMetadataForDocumentURL, 
                        _SWCollaborationNoticeTransmissionMessageReadFrom, _SWContextMenuIdentifier, 
                        _SWCopyRepresentationTypeIdentifier, _SWCoreFrameworkBundle, 
-                       _SWCurrentProcessUsesNewWolfPPM, _SWFrameworkBundle, _SWFrameworkLogHandle, 
-                       _SWGeneralTelemetryLogHandle, _SWHideContextMenuIdentifier, 
-                       _SWIsRunningInWolfClient, _SWMobileSMSBundleIdentifier, _SWPerformActionForDocumentURL, 
-                       _SWReplyContextMenuIdentifier, _SWShareableContentLogHandle, 
-                       _SWWolfScalePPMForCurrentProcess, _SharedWithYouCoreVersionNumber, 
+                       _SWFrameworkBundle, _SWFrameworkLogHandle, _SWGeneralTelemetryLogHandle, 
+                       _SWHideContextMenuIdentifier, _SWMobileSMSBundleIdentifier, 
+                       _SWPerformActionForDocumentURL, _SWReplyContextMenuIdentifier, 
+                       _SWShareableContentLogHandle, _SharedWithYouCoreVersionNumber, 
                        _SharedWithYouCoreVersionString, _UTCollaborationOptionsTypeIdentifier, 
                        __SWActionResponseErrorDomain, __SWPendingCollaborationTypeIdentifier ]
     objc-classes:    [ SWAction, SWCollaborationClearNoticeTransmissionMessage, SWCollaborationCoordinator, 
@@ -29,7 +30,4 @@ exports:
                        _SWMutableCollaborationMetadata, _SWPendingCollaboration, 
                        _SWPerson, _SWPersonIdentity, _SWPersonIdentityProof, _SWStartCollaborationAction, 
                        _SWStartCollaborationActionResponse, _SWUpdateCollaborationParticipantsAction ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo21SWCollaborationOptionC17SharedWithYouCoreE5title10identifier8subtitle8selected26requiredOptionsIdentifiersABSS_S2SSbSaySSGtcfC', 
-                       '_$sSo21SWCollaborationOptionC17SharedWithYouCoreE5title10identifier8subtitle8selected26requiredOptionsIdentifiersABSS_S2SSbSaySSGtcfc' ]
 ...

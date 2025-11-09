@@ -1,5 +1,4 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/0032d1ee-80fd-11ee-8227-6aecfccc70fe/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/soundex/soundex.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) ????, Algorithm: Donald E. Knuth
 '\" Copyright (c) 2003, Documentation: Andreas Kupries <andreas_kupries@users.sourceforge.net>
 '\" Copyright (c) 1998, Tcl port: Evan Rempel <erempel@uvic.ca>

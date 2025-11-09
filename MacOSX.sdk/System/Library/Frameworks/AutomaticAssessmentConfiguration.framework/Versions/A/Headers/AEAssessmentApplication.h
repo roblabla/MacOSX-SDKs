@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(12.0))
+API_UNAVAILABLE(visionos)
 @interface AEAssessmentApplication : NSObject <NSCopying>
 
 @property (nonatomic, copy, readonly) NSString *bundleIdentifier API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);

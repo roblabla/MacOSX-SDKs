@@ -30,8 +30,9 @@ exports:
                        SRUIFMutableConversationItem, SRUIFMutableStack, SRUIFPlatformHostingInstrumentationHandler, 
                        SRUIFPreferences, SRUIFSiriSessionInfo, SRUIFSiriSessionStateHandler, 
                        SRUIFSiriSessionStateSignpostLogger, SRUIFSpeechRecognitionHypothesis, 
-                       SRUIFSpeechRequestHandler, SRUIFSpeechSynthesisTask, SRUIFSpeechSynthesisUtility, 
-                       SRUIFStack, SRUIFStateFeedbackDefaultProvider, SRUIFStateFeedbackManager, 
+                       SRUIFSpeechRequestHandler, SRUIFSpeechSynthesisRequest, SRUIFSpeechSynthesisTask, 
+                       SRUIFSpeechSynthesisUtility, SRUIFSpeechSynthesizer, SRUIFStack, 
+                       SRUIFStateFeedbackDefaultProvider, SRUIFStateFeedbackManager, 
                        SRUIFStateMachine, SRUIFTreeNode, SRUIFTreeNodePropertyListSerialization, 
                        SRUIFUIBridgeClient, SRUIFUtilities, _SRUIFAssertingDelayedActionCommand, 
                        _SRUIFDataStoreEntry ]

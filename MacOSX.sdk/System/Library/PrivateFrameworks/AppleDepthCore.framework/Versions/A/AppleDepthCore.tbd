@@ -41,14 +41,16 @@ exports:
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x3, 
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x4, 
                        __ZN13ADCommonUtils16inverseTransformE13simd_float4x3, __ZN13ADCommonUtils16inverseTransformE13simd_float4x4, 
+                       __ZN13ADCommonUtils17calcRotationAngleER13simd_float3x3, __ZN13ADCommonUtils17calcRotationAngleER14simd_double3x3, 
                        __ZN13ADCommonUtils17computeMaximalRoiE6CGSizeS0_, __ZN13ADCommonUtils17machTimeToSecondsEy, 
                        __ZN13ADCommonUtils18extrinsicsFromFileEPKc, __ZN13ADCommonUtils18extrinsicsToStringE13simd_float4x3, 
-                       __ZN13ADCommonUtils18intrinsicsToStringE13simd_float3x3, __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, 
-                       __ZN13ADCommonUtils21runtimePlatformHasANEEv, __ZN13ADCommonUtils22espressoEngineAsStringE20ADEspressoEngineType, 
+                       __ZN13ADCommonUtils18extrinsicsToStringE13simd_float4x4, __ZN13ADCommonUtils18intrinsicsToStringE13simd_float3x3, 
+                       __ZN13ADCommonUtils21calculatePoseDistanceE13simd_float4x4S0_, 
+                       __ZN13ADCommonUtils21extrinsics4x4FromFileEPKc, __ZN13ADCommonUtils21runtimePlatformHasANEEv, 
+                       __ZN13ADCommonUtils22espressoEngineAsStringE20ADEspressoEngineType, 
                        __ZN13ADCommonUtils22matrixForImageRotationE10ADRotation, 
                        __ZN13ADCommonUtils22rotationFromExtrinsicsERK13simd_float4x3, 
                        __ZN13ADCommonUtils23matrixFromArrayRowFirstEP7NSArray, __ZN13ADCommonUtils25translationFromExtrinsicsERK13simd_float4x3, 
-                       __ZN13ADCommonUtils26calculateTransformDistanceE13simd_float4x3S0_, 
                        __ZN13ADCommonUtils26matrixFromArrayColumnFirstEP7NSArray, 
                        __ZN13ADCommonUtils28transformMetersToMillimitersE13simd_float4x4, 
                        __ZN13ADCommonUtils28transformMillimitersToMetersE13simd_float4x4, 
@@ -59,8 +61,8 @@ exports:
                        __ZN16PixelBufferUtils11getJetColorEfRfS0_S0_, __ZN16PixelBufferUtils13asPixelBufferEmmjPv, 
                        __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferS1_U13block_pointerFvPvjS2_jEi, 
                        __ZN16PixelBufferUtils13forEveryPixelEP10__CVBufferU13block_pointerFvPvjEi, 
-                       __ZN16PixelBufferUtils14asVImageBufferEP10__CVBuffer, __ZN16PixelBufferUtils14asVImageBufferEP10__CVBufferm, 
-                       __ZN16PixelBufferUtils14copyAttachmentEP10__CVBufferPK10__CFStringP16CVAttachmentMode, 
+                       __ZN16PixelBufferUtils13getTurboColorEfRfS0_S0_, __ZN16PixelBufferUtils14asVImageBufferEP10__CVBuffer, 
+                       __ZN16PixelBufferUtils14asVImageBufferEP10__CVBufferm, __ZN16PixelBufferUtils14copyAttachmentEP10__CVBufferPK10__CFStringP16CVAttachmentMode, 
                        __ZN16PixelBufferUtils15copyAttachmentsEP10__CVBuffer16CVAttachmentMode, 
                        __ZN16PixelBufferUtils15copyPixelBufferEP10__CVBufferS1_b, 
                        __ZN16PixelBufferUtils17createPixelBufferE6CGSizejb, __ZN16PixelBufferUtils17createPixelBufferEmmjb, 
@@ -76,7 +78,8 @@ exports:
                        __ZN16PixelBufferUtils21copyPixelBufferRegionEP10__CVBuffer7CGPointS1_6CGRect, 
                        __ZN16PixelBufferUtils21createPixelBufferCopyEP10__CVBuffer, 
                        __ZN16PixelBufferUtils21pixelFormatFromStringEPKc, __ZN16PixelBufferUtils22pixelBufferFromCGImageEP7CGImagej, 
-                       __ZN16PixelBufferUtils22pixelBufferFromRawFileEPKcmmj, __ZN16PixelBufferUtils22pixelBufferToImageFileEPKcP10__CVBufferPK10__CFString, 
+                       __ZN16PixelBufferUtils22pixelBufferFromRawFileEPKc, __ZN16PixelBufferUtils22pixelBufferFromRawFileEPKcmmj, 
+                       __ZN16PixelBufferUtils22pixelBufferToImageFileEPKcP10__CVBufferPK10__CFString, 
                        __ZN16PixelBufferUtils22savePlyFromDepthBufferEP10__CVBufferPKcf7CGPointfffbb, 
                        __ZN16PixelBufferUtils23addCirclesToPixelBufferEP10__CVBufferfmPK7CGPointPKfS6_S6_S6_, 
                        __ZN16PixelBufferUtils23cropAndScalePixelBufferEP10__CVBufferS1_6CGRectb, 
@@ -156,6 +159,7 @@ exports:
                        ADCameraCalibration._intrinsicMatrix, ADCameraCalibration._pixelSize, 
                        ADCameraCalibration._referenceDimensions, ADJasperPointCloud._additionalData, 
                        ADJasperPointCloud._dataBuffer, ADJasperPointCloud._pc, ADPolynomialsLensDistortionModel._polynomials ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN25PixelBufferUtilsTiledView15createTiledViewEmmmmPNS_10TileConfigEb ]
 ...

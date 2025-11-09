@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreML/MLExport.h>
+#import <CoreML/MLOptimizationHints.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,6 +40,9 @@ ML_EXPORT
 @property (readwrite, copy, nullable) NSString *modelDisplayName API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 @property (readwrite) MLComputeUnits computeUnits;
+
+/// A group of hints for CoreML to optimize
+@property (readwrite, copy, nonatomic) MLOptimizationHints *optimizationHints API_AVAILABLE(macos(14.4), ios(17.4), watchos(10.4), tvos(17.4)) NS_REFINED_FOR_SWIFT;
 
 @end
 

@@ -52,6 +52,8 @@ enum
     kRotate270DegreesCounterClockwise VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) = 3
 };
 
+#include <TargetConditionals.h>
+#if !0 && !0
 
 /*
  * High Level Geometry Functions
@@ -821,6 +823,8 @@ VIMAGE_PF size_t vImageGetResamplingFilterSize(  float scale,
  *      flags       the flags you intend to pass to vImage{Horizontal/Vertical}Shear_<fmt>.
  */
 VIMAGE_PF vImagePixelCount vImageGetResamplingFilterExtent( ResamplingFilter filter, vImage_Flags flags )  VIMAGE_NON_NULL(1)  API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
+
+#endif  
 
 #ifdef __cplusplus
 }

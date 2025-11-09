@@ -17,6 +17,8 @@
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVQueuedSampleBufferRendering.h>
 
+@class AVVideoPerformanceMetrics;
+
 NS_ASSUME_NONNULL_BEGIN
 
 AVF_EXPORT NSNotificationName const AVSampleBufferVideoRendererDidFailToDecodeNotification API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos); // decode failed, see NSError in notification payload
@@ -63,6 +65,69 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 */
 
 - (void)flushWithRemovalOfDisplayedImage:(BOOL)removeDisplayedImage completionHandler:(nullable void (^)(void))handler;
+
+@end
+
+API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos)
+@interface AVSampleBufferVideoRenderer (AVSampleBufferVideoRendererPixelBufferOutput)
+/*!
+	@method			copyDisplayedPixelBuffer
+	@abstract		Returns a retained reference to the pixel buffer currently displayed in the AVSampleBufferVideoRenderer's target. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, or if the image is unavailable.
+	@discussion		This will return NULL if the rate is non-zero.  Clients must release the pixel buffer after use.
+			
+					Do not write to the returned CVPixelBuffer's attachments or pixel data.
+ */
+- (nullable CVPixelBufferRef)copyDisplayedPixelBuffer CF_RETURNS_RETAINED API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
+
+@end
+
+API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos)
+@interface AVSampleBufferVideoRenderer (AVSampleBufferVideoRendererPowerOptimization)
+
+/*!
+	@method			expectMinimumUpcomingSampleBufferPresentationTime:
+	@abstract		Promises, for the purpose of enabling power optimizations, that future sample buffers will have PTS values no less than a specified lower-bound PTS.
+	@discussion		Only applicable for forward playback.
+					Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS has the potential to lead to dropping that later buffer.
+					For best results, call -expectMinimumUpcomingSampleBufferPresentationTime: regularly, in between calls to -enqueueSampleBuffer:, to advance the lower-bound PTS.
+					Messaging -flush resets such expectations.
+					(For example, it's OK to make this expectation, then in response to a seek back, flush and then enqueue buffers with lower PTS values.)
+	@param			minimumUpcomingPresentationTime
+					A lower bound on PTS values for buffers that will be passed to -enqueueSampleBuffer: in the future.
+*/
+- (void)expectMinimumUpcomingSampleBufferPresentationTime:(CMTime)minimumUpcomingPresentationTime NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
+
+
+/*!
+	@method			expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes
+	@abstract		Promises, for the purpose of enabling power optimizations, that future sample buffers will have monotonically increasing PTS values.
+	@discussion		Only applicable for forward playback.
+					Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS than any previously enqueued PTS has the potential to lead to dropped buffers.
+					Messaging -flush resets such expectations.
+*/
+- (void)expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
+
+/*!
+	@method			resetUpcomingSampleBufferPresentationTimeExpectations:
+	@abstract		Resets previously-promised expectations about upcoming sample buffer PTSs.
+	@discussion		This undoes the state set by messaging -expectMinimumUpcomingSampleBufferPresentationTime: or -expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes.
+					If you didn't use either of those, you don't have to use this.
+*/
+- (void)resetUpcomingSampleBufferPresentationTimeExpectations NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
+
+@end
+
+API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos)
+@interface AVSampleBufferVideoRenderer (AVSampleBufferVideoRendererVideoPerformanceMetrics)
+
+/*!
+	@method			loadVideoPerformanceMetricsWithCompletionHandler:
+	@abstract		Gathers a snapshot of the video performance metrics and calls the completion handler with the results.
+	@param			completionHandler
+					The handler to invoke with the video performance metrics.
+	@discussion		If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics.
+*/
+- (void)loadVideoPerformanceMetricsWithCompletionHandler:(void (^)(AVVideoPerformanceMetrics * _Nullable_result videoPerformanceMetrics))completionHandler NS_SWIFT_ASYNC_NAME(getter:videoPerformanceMetrics()) API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
 
 @end
 

@@ -23,9 +23,12 @@ typedef NS_ENUM(NSInteger, NFCFeliCaPollingRequestCode) {
     NFCFeliCaPollingRequestCodeSystemCode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                 = 1,
     NFCFeliCaPollingRequestCodeCommunicationPerformance API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)   = 2,
     
-    PollingRequestCodeNoRequest API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeNoRequest", ios(13.0, 14.0))                                = NFCFeliCaPollingRequestCodeNoRequest,
-    PollingRequestCodeSystemCode API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeSystemCode", ios(13.0, 14.0))                              = NFCFeliCaPollingRequestCodeSystemCode,
-    PollingRequestCodeCommunicationPerformance API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeCommunicationPerformance", ios(13.0, 14.0))  = NFCFeliCaPollingRequestCodeCommunicationPerformance,
+    PollingRequestCodeNoRequest API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeNoRequest", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingRequestCodeNoRequest,
+    PollingRequestCodeSystemCode API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeSystemCode", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingRequestCodeSystemCode,
+    PollingRequestCodeCommunicationPerformance API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeCommunicationPerformance", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingRequestCodeCommunicationPerformance,
 } API_AVAILABLE(ios(14.0));
 
 typedef NFCFeliCaPollingRequestCode PollingRequestCode API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCode", ios(13.0, 14.0));
@@ -39,11 +42,16 @@ typedef NS_ENUM(NSInteger, NFCFeliCaPollingTimeSlot) {
     NFCFeliCaPollingTimeSlotMax8 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 7,
     NFCFeliCaPollingTimeSlotMax16 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) = 15,
     
-    PollingTimeSlotMax1 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax1", ios(13.0, 14.0))    = NFCFeliCaPollingTimeSlotMax1,
-    PollingTimeSlotMax2 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax2", ios(13.0, 14.0))    = NFCFeliCaPollingTimeSlotMax2,
-    PollingTimeSlotMax4 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax4", ios(13.0, 14.0))    = NFCFeliCaPollingTimeSlotMax4,
-    PollingTimeSlotMax8 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax18", ios(13.0, 14.0))   = NFCFeliCaPollingTimeSlotMax8,
-    PollingTimeSlotMax16 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax16", ios(13.0, 14.0))  = NFCFeliCaPollingTimeSlotMax16,
+    PollingTimeSlotMax1 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax1", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingTimeSlotMax1,
+    PollingTimeSlotMax2 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax2", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingTimeSlotMax2,
+    PollingTimeSlotMax4 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax4", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingTimeSlotMax4,
+    PollingTimeSlotMax8 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax18", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingTimeSlotMax8,
+    PollingTimeSlotMax16 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax16", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaPollingTimeSlotMax16,
 } API_AVAILABLE(ios(14.0));
 
 typedef NFCFeliCaPollingTimeSlot PollingTimeSlot API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlot", ios(13.0, 14.0));
@@ -55,11 +63,13 @@ typedef NS_ENUM(NSInteger, NFCFeliCaEncryptionId) {
     NFCFeliCaEncryptionIdAES API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)       = 0x4F,
     NFCFeliCaEncryptionIdAES_DES API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)   = 0x41,
     
-    EncryptionIdAES API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionIdAES", ios(13.0, 14.0))            = NFCFeliCaEncryptionIdAES,
-    EncryptionIdAES_DES API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionIdAES_DES", ios(13.0, 14.0))    = NFCFeliCaEncryptionIdAES_DES,
+    EncryptionIdAES API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionIdAES", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaEncryptionIdAES,
+    EncryptionIdAES_DES API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionIdAES_DES", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+        = NFCFeliCaEncryptionIdAES_DES,
 };
 
-typedef NFCFeliCaEncryptionId EncryptionId API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionId", ios(13.0, 14.0));
+typedef NFCFeliCaEncryptionId EncryptionId API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionId", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @protocol NFCFeliCaTag

@@ -346,7 +346,7 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 @property (readonly) NSTimeInterval IOBufferDuration API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /// Get an array of channel layouts that the current route supports.
-/// This property is only supported when the output is routed to ports of type AVAudioSessionPortCarAudio
+/// This property is only supported when the output is routed to ports of type AVAudioSessionPortCarAudio or AVAudioSessionPortAirPlay
 /// Otherwise, an empty array will be returned. Note that this will return an empty array if session is inactive.
 /// Clients should listen to AVAudioSessionRenderingCapabilitiesChangeNotification to be notified when this changes.
 @property(readonly) NSArray<AVAudioChannelLayout*>* supportedOutputChannelLayouts API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos);

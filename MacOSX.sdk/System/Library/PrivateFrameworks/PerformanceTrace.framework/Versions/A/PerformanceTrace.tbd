@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PerformanceTrace.framework/Versions/A/PerformanceTrace'
-current-version: 162.3
+current-version: 176
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PerformanceTraceVersionNumber, _PerformanceTraceVersionString, 

@@ -31,6 +31,11 @@
 
 #if CONFIG_EXCLAVES
 
+#include <kern/thread_call.h>
+#include <libkern/OSTypes.h>
+#include <stdbool.h>
+#include <stdint.h>
+
 #ifdef __cplusplus
 
 #include <libkern/c++/OSDictionary.h>
@@ -100,11 +105,33 @@ struct IOExclaveAsyncNotificationUpcallArgs {
 
 enum IOExclaveMapperOperationUpcallType {
 	MapperActivate,
+	MapperDeactivate,
 };
 
 struct IOExclaveMapperOperationUpcallArgs {
 	enum IOExclaveMapperOperationUpcallType type;
 	uint32_t mapperIndex;
+};
+
+enum IOExclaveANEUpcallType {
+	kIOExclaveANEUpcallTypeSetPowerState,
+	kIOExclaveANEUpcallTypeWorkSubmit,
+	kIOExclaveANEUpcallTypeWorkBegin,
+	kIOExclaveANEUpcallTypeWorkEnd,
+};
+
+struct IOExclaveANEUpcallArgs {
+	enum IOExclaveANEUpcallType type;
+	union {
+		struct {
+			uint32_t desired_state;
+		} setpowerstate_args;
+		struct {
+			uint64_t arg0;
+			uint64_t arg1;
+			uint64_t arg2;
+		} work_args;
+	};
 };
 
 
@@ -113,6 +140,7 @@ bool IOExclaveTimerUpcallHandler(uint64_t id, struct IOExclaveTimerUpcallArgs *a
 bool IOExclaveLockWorkloop(uint64_t id, bool lock);
 bool IOExclaveAsyncNotificationUpcallHandler(uint64_t id, struct IOExclaveAsyncNotificationUpcallArgs *args);
 bool IOExclaveMapperOperationUpcallHandler(uint64_t id, struct IOExclaveMapperOperationUpcallArgs *args);
+bool IOExclaveANEUpcallHandler(uint64_t id, struct IOExclaveANEUpcallArgs *args, bool *result);
 
 /* Test support */
 
@@ -121,6 +149,8 @@ struct IOExclaveTestSignalInterruptParam {
 	uint64_t index;
 };
 void IOExclaveTestSignalInterrupt(thread_call_param_t, thread_call_param_t);
+
+void exclaves_wait_for_cpu_init(void);
 
 #ifdef __cplusplus
 } /* extern "C" */

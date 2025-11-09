@@ -63,7 +63,13 @@ exports:
                        _SCStreamFrameInfoContentScale, _SCStreamFrameInfoDirtyRects, 
                        _SCStreamFrameInfoDisplayTime, _SCStreamFrameInfoPresenterOverlayContentRect, 
                        _SCStreamFrameInfoScaleFactor, _SCStreamFrameInfoScreenRect, 
-                       _SCStreamFrameInfoStatus, _SCStream_UpdateLatency ]
+                       _SCStreamFrameInfoStatus, _SCStream_UpdateLatency, _SLSDisplayStreamCreateProxying, 
+                       _SLSHWCaptureDesktopProxying, _SLSHWCaptureDisplayIntoIOSurfaceProxying, 
+                       _SLSHWCaptureStreamCreateProxying, _SLSHWCaptureWindowListToIOSurfaceProxying, 
+                       _SLSWindowIDArrayIsDefaultScreenCapturableProxying, _SLSWindowListCreateImageFromArrayProxying, 
+                       _SLSWindowListCreateImageProxying, _SLSWindowListIsDefaultScreenCapturableProxying, 
+                       ___SLSCopyWindowDescriptionListProxying, ___SLSWindowListCreateDescriptionFromArrayProxying, 
+                       ___SLSWindowListCreateProxying ]
     objc-classes:    [ RPFeatureFlagUtility, RPHardwareUtility, RPReportingAgent, 
                        SCCompositeConfiguration, SCContentFilter, SCContentFilterAppsAndWindowsPinnedToDisplayInformation, 
                        SCContentFilterDesktopIndependentWindowInformation, SCContentFilterDisplayInformation, 
@@ -72,7 +78,7 @@ exports:
                        SCContentSharingPickerInfo, SCContentSharingSession, SCContentSharingSessionManager, 
                        SCContentSharingSessionMetadata, SCControlCenterManager, SCDisplay, 
                        SCDisplayStreamCaptureInfo, SCEventConnection, SCHotKeyListener, 
-                       SCObjectList, SCObjectListEntry, SCPreview, SCPreviewAttributes, 
+                       SCMachPort, SCObjectList, SCObjectListEntry, SCPreview, SCPreviewAttributes, 
                        SCRemoteQueueXPCObject, SCRunningApplication, SCScreenshotManager, 
                        SCShareableContent, SCShareableContentInfo, SCShareableContentInformation, 
                        SCStream, SCStreamConfiguration, SCStreamInfo, SCStreamManager, 

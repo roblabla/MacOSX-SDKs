@@ -8,6 +8,8 @@
 #import <AuthenticationServices/ASFoundation.h>
 #import <Foundation/Foundation.h>
 
+@class ASWebAuthenticationSessionCallback;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ASWebAuthenticationPresentationContextProviding;
@@ -64,7 +66,9 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)
  @param callbackURLScheme the custom URL scheme that the app expects in the callback URL.
  @param completionHandler the completion handler which is called when the session is completed successfully or canceled by user.
  */
-- (instancetype)initWithURL:(NSURL *)URL callbackURLScheme:(nullable NSString *)callbackURLScheme completionHandler:(ASWebAuthenticationSessionCompletionHandler)completionHandler;
+- (instancetype)initWithURL:(NSURL *)URL callbackURLScheme:(nullable NSString *)callbackURLScheme completionHandler:(ASWebAuthenticationSessionCompletionHandler)completionHandler API_DEPRECATED("Use initWithURL:callback:completionHandler: instead", ios(12.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(10.15, API_TO_BE_DEPRECATED), watchos(6.2, API_TO_BE_DEPRECATED), tvos(16.0, API_TO_BE_DEPRECATED));
+
+- (instancetype)initWithURL:(NSURL *)URL callback:(ASWebAuthenticationSessionCallback *)callback completionHandler:(ASWebAuthenticationSessionCompletionHandler)completionHandler API_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4), visionos(1.1));
 
 /*! @abstract Provides context to target where in an application's UI the authorization view should be shown. A provider
  must be set prior to calling -start, otherwise the authorization view cannot be displayed. If deploying to iOS prior to
@@ -77,6 +81,10 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)
  This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
  */
 @property (nonatomic) BOOL prefersEphemeralWebBrowserSession API_AVAILABLE(ios(13.0), macos(10.15), watchos(6.2)) API_UNAVAILABLE(tvos);
+
+/// Any additional header fields to be set when loading the initial URL.
+/// All header field names must start with the "X-" prefix.
+@property (nonatomic, nullable) NSDictionary<NSString *, NSString *> *additionalHeaderFields API_AVAILABLE(ios(17.4), macos(14.4), tvos(17.4), watchos(10.4), visionos(1.1));
 
 /*! @abstract Returns whether the session can be successfully started. This property returns the same value as calling -start,
  but without the side effect of actually starting the session.

@@ -60,6 +60,7 @@ exports:
                        '_$s17SiriInferenceFlow21ContactResolutionVerbOMa', '_$s17SiriInferenceFlow21ContactResolutionVerbOMn', 
                        '_$s17SiriInferenceFlow21ContactResolutionVerbON', '_$s17SiriInferenceFlow21ContactResolutionVerbOSHAAMc', 
                        '_$s17SiriInferenceFlow21ContactResolutionVerbOSQAAMc', '_$s17SiriInferenceFlow21ContactResolutionVerbOSYAAMc', 
+                       '_$s17SiriInferenceFlow23ContactResolutionHelperO015nullHandleLabelF08contacts6localeSb19needsAuthentication_AA0dE9PatternIDO9patternIdtSaySo8INPersonCG_10Foundation6LocaleVtFZ', 
                        '_$s17SiriInferenceFlow23ContactResolutionHelperO015nullHandleLabelF08contactsSb19needsAuthentication_AA0dE9PatternIDO9patternIdtSaySo8INPersonCG_tFZ', 
                        '_$s17SiriInferenceFlow23ContactResolutionHelperO28sortINPersonBySearchProvider9inpersonsSaySo0H0CGAH_tFZ', 
                        '_$s17SiriInferenceFlow23ContactResolutionHelperOMa', '_$s17SiriInferenceFlow23ContactResolutionHelperOMn', 

@@ -353,7 +353,7 @@ int	 sradixsort(const unsigned char **__base, int __nel, const unsigned char *__
 	    unsigned __endbyte);
 void	 sranddev(void);
 void	 srandomdev(void);
-void	*reallocf(void *__ptr, size_t __size) __alloc_size(2);
+/* reallocf is now declared in _malloc.h */
 long long
 	strtonum(const char *__numstr, long long __minval, long long __maxval, const char **__errstrp)
 	__API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));

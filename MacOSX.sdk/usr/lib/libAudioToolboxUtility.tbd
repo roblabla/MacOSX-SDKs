@@ -437,7 +437,7 @@ exports:
                        __ZrsR14CADeserializerRPK10__CFString, __ZrsR14CADeserializerRPK7__CFURL, 
                        __ZrsR14CADeserializerRPK8__CFData, _gBogusAuditToken, _gCAVectorUnitType, 
                        _realFFTMultiply, _realFFTZeroPad, _realIFFTUnload, _sReadCounter_BSD ]
-    weak-symbols:    [ __ZN8TruePeak10sSincByTwoE, __ZN8TruePeak5sSincE ]
+    weak-symbols:    [ __ZN8TruePeak10sSincByTwoE, __ZN8TruePeak5sSincE, __ZNSt3__119piecewise_constructE ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZNK11PListLogger4vlogEPKcPc ]
 ...

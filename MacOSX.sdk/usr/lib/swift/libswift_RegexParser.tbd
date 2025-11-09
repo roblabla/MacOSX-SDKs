@@ -466,6 +466,7 @@ exports:
                        '_$s12_RegexParser3ASTV14MatchingOptionV4KindO14asciiOnlySpaceyA2GmFWC', 
                        '_$s12_RegexParser3ASTV14MatchingOptionV4KindO15caseInsensitiveyA2GmFWC', 
                        '_$s12_RegexParser3ASTV14MatchingOptionV4KindO17namedCapturesOnlyyA2GmFWC', 
+                       '_$s12_RegexParser3ASTV14MatchingOptionV4KindO17nsreCompatibleDotyA2GmFWC', 
                        '_$s12_RegexParser3ASTV14MatchingOptionV4KindO18reluctantByDefaultyA2GmFWC', 
                        '_$s12_RegexParser3ASTV14MatchingOptionV4KindO19asciiOnlyPOSIXPropsyA2GmFWC', 
                        '_$s12_RegexParser3ASTV14MatchingOptionV4KindO19possessiveByDefaultyA2GmFWC', 

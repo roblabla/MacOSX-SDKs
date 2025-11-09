@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(12.0))
+API_UNAVAILABLE(visionos)
 @interface AEAssessmentParticipantConfiguration : NSObject <NSCopying>
 
 @property (nonatomic, assign) BOOL allowsNetworkAccess API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);

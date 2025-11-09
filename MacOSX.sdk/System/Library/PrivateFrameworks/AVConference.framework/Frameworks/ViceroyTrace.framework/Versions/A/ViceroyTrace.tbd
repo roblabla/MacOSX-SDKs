@@ -7,7 +7,14 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AWDGCKSubmitLinkStatusMetric, _GKSSubmitAWDMetricsFromGameD, 
-                       _ReportingVC_SetEventDrivenAggregationOccurredHandler, _VCReporting_GetClientType, 
+                       _ReportingVC_SetEventDrivenAggregationOccurredHandler, _VCReportingDeltaDistributionKey_AggregatedAbsoluteAverage, 
+                       _VCReportingDeltaDistributionKey_AggregatedAbsoluteMax, _VCReportingDeltaDistributionKey_AggregatedAbsoluteMin, 
+                       _VCReportingDeltaDistributionKey_ReportingAbsoluteMax, _VCReportingDeltaDistributionKey_ReportingAbsoluteMin, 
+                       _VCReportingDeltaDistributionKey_ReportingAbsoluteSum, _VCReportingDistributionKey_AggregatedAverage, 
+                       _VCReportingDistributionKey_AggregatedHistogram, _VCReportingDistributionKey_AggregatedMax, 
+                       _VCReportingDistributionKey_AggregatedMin, _VCReportingDistributionKey_ReportingCount, 
+                       _VCReportingDistributionKey_ReportingMax, _VCReportingDistributionKey_ReportingMin, 
+                       _VCReportingDistributionKey_ReportingSum, _VCReporting_GetClientType, 
                        _VCReporting_GetDynamicReportingModuleID, _VCReporting_finalizeAggregation, 
                        _VRTraceDebugBreak, _VRTraceDefaultErrorLogLevel, _VRTraceErrorLogLevelFromCSTR, 
                        _VRTraceErrorLogLevelToCSTR, _VRTraceGetErrorLogLevelForModule, 
@@ -51,11 +58,12 @@ exports:
                        _sRTCReportingAnsweringMachineClientName, _sRTCReportingCoreDeviceScreenSharingClientName, 
                        _sRTCReportingCoreDeviceSystemAudioClientName, _sRTCReportingFaceTimeClientName, 
                        _sRTCReportingFaceTimeServiceName, _sRTCReportingHomeKitClientName, 
-                       _sRTCReportingMultiwayConferenceClientName, _sRTCReportingRemoteCameraClientName, 
-                       _sRTCReportingRemoteDesktopScreenSharingClientName, _sRTCReportingRemoteDesktopSystemAudioClientName, 
-                       _sRTCReportingRemoteMicClientName, _sRTCReportingSecondaryDisplayClientName, 
-                       _sRTCReportingVideoMessagingClientName, _sRTCReportingWiFiCallingClientName, 
-                       _selectDestinationForRTMetrics ]
-    objc-classes:    [ CallSegment, TimingCollection, VCReportingHistogram, VCWeakObjectHolder ]
+                       _sRTCReportingMultiwayConferenceClientName, _sRTCReportingPeerCamClientName, 
+                       _sRTCReportingRemoteCameraClientName, _sRTCReportingRemoteDesktopScreenSharingClientName, 
+                       _sRTCReportingRemoteDesktopSystemAudioClientName, _sRTCReportingRemoteMicClientName, 
+                       _sRTCReportingSecondaryDisplayClientName, _sRTCReportingVideoMessagingClientName, 
+                       _sRTCReportingWiFiCallingClientName, _selectDestinationForRTMetrics ]
+    objc-classes:    [ CallSegment, TimingCollection, VCReportingHistogram, VCSignedHistogram, 
+                       VCWeakObjectHolder ]
     objc-ivars:      [ VCWeakObjectHolder._weakObject, VCWeakObjectHolder._weakObjectWithoutAutoRelease ]
 ...

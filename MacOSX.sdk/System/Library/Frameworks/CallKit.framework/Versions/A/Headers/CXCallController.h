@@ -5,7 +5,6 @@
 //  Copyright © 2015 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CallKit/CXBase.h>
 
 NS_ASSUME_NONNULL_BEGIN

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 617.1.17
+current-version: 618.1.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -13,6 +13,8 @@ exports:
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0VN', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV12authenticate5using17callbackURLScheme016preferredBrowserF010Foundation3URLVAJ_SSAC0lF0VSgtYaKF', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV12authenticate5using17callbackURLScheme016preferredBrowserF010Foundation3URLVAJ_SSAC0lF0VSgtYaKFTu', 
+                       '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV12authenticate5using8callback016preferredBrowserF022additionalHeaderFields10Foundation3URLVAK_So05ASWebaF8CallbackCAC0kF0VSgSDyS2SGtYaKF', 
+                       '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV12authenticate5using8callback016preferredBrowserF022additionalHeaderFields10Foundation3URLVAK_So05ASWebaF8CallbackCAC0kF0VSgSDyS2SGtYaKFTu', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionVMa', '_$s31_AuthenticationServices_SwiftUI03WebA7SessionVMn', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionVN', '_$s31_AuthenticationServices_SwiftUI21ASAuthorizationResultO12customMethodyACSo0e6CustomH0acACmFWC', 
                        '_$s31_AuthenticationServices_SwiftUI21ASAuthorizationResultO16passkeyAssertionyACSo0e27PlatformPublicKeyCredentialH0CcACmFWC', 

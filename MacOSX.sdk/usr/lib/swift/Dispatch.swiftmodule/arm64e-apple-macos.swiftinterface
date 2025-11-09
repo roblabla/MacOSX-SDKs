@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Dispatch
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 34.0.2
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 41 -module-name Dispatch
 import Combine
 @_exported import Dispatch
 import Swift
@@ -187,10 +186,14 @@ extension Dispatch.DispatchQueue {
   public func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T?
   public func setSpecific<T>(key: Dispatch.DispatchSpecificKey<T>, value: T?)
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch._DispatchSerialExecutorQueue : _Concurrency.SerialExecutor {
-  public func enqueue(_ job: _Concurrency.UnownedJob)
+  #if compiler(>=5.3) && $MoveOnly
+  public func enqueue(_ job: consuming _Concurrency.ExecutorJob)
+  #endif
   public func asUnownedSerialExecutor() -> _Concurrency.UnownedSerialExecutor
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchSerialQueue {
   public struct Attributes : Swift.OptionSet {
     public let rawValue: Swift.UInt64
@@ -202,6 +205,7 @@ extension Dispatch.DispatchSerialQueue {
   }
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchSerialQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, target: Dispatch.DispatchQueue? = nil)
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchConcurrentQueue {
   public struct Attributes : Swift.OptionSet {
     public let rawValue: Swift.UInt64
@@ -213,6 +217,7 @@ extension Dispatch.DispatchConcurrentQueue {
   }
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchConcurrentQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, target: Dispatch.DispatchQueue? = nil)
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchWorkloop {
   public struct Attributes : Swift.OptionSet {
     public let rawValue: Swift.UInt64

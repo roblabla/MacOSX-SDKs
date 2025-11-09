@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MMCS.framework/Versions/A/MMCS'
-current-version: 2130
+current-version: 2150.15
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -74,18 +74,19 @@ exports:
                        _kMMCSRequestOptionBoundInterfaceIdentifier, _kMMCSRequestOptionCacheDeleteAvailableSpaceClass, 
                        _kMMCSRequestOptionCallerRequestUUID, _kMMCSRequestOptionCancelRequestOnVerificationQueue, 
                        _kMMCSRequestOptionChunkingLibraryCorruptionMode, _kMMCSRequestOptionClientLocation, 
-                       _kMMCSRequestOptionContainerIdentifier, _kMMCSRequestOptionDiscretionaryNetworkBehavior, 
-                       _kMMCSRequestOptionDuetPreClearedMode, _kMMCSRequestOptionErrorOnPreallocationFailure, 
-                       _kMMCSRequestOptionForceGetChunks, _kMMCSRequestOptionHTTPClass, 
-                       _kMMCSRequestOptionInlineCompleteLogicInvertedMode, _kMMCSRequestOptionInsertHeaders, 
-                       _kMMCSRequestOptionInsufficientDiskSpaceMode, _kMMCSRequestOptionItemOptions, 
-                       _kMMCSRequestOptionMMCSMetrics, _kMMCSRequestOptionMetaserverAllowedHostnamesOverride, 
-                       _kMMCSRequestOptionMetaserverAllowedSchemesOverride, _kMMCSRequestOptionMetaserverCheckDisabled, 
-                       _kMMCSRequestOptionMetricOptions, _kMMCSRequestOptionMmeDataClass, 
-                       _kMMCSRequestOptionNetworkServiceType, _kMMCSRequestOptionNetworkingDelegate, 
-                       _kMMCSRequestOptionPreauthorization, _kMMCSRequestOptionPreauthorizationSignature, 
-                       _kMMCSRequestOptionPriority, _kMMCSRequestOptionPrivacyProxyFailClosedOverride, 
-                       _kMMCSRequestOptionProxyDown, _kMMCSRequestOptionQoS, _kMMCSRequestOptionReaderWriterCallbackForDownloads, 
+                       _kMMCSRequestOptionContainerIdentifier, _kMMCSRequestOptionContainerType, 
+                       _kMMCSRequestOptionDiscretionaryNetworkBehavior, _kMMCSRequestOptionDuetPreClearedMode, 
+                       _kMMCSRequestOptionErrorOnPreallocationFailure, _kMMCSRequestOptionForceGetChunks, 
+                       _kMMCSRequestOptionHTTPClass, _kMMCSRequestOptionInlineCompleteLogicInvertedMode, 
+                       _kMMCSRequestOptionInsertHeaders, _kMMCSRequestOptionInsufficientDiskSpaceMode, 
+                       _kMMCSRequestOptionItemOptions, _kMMCSRequestOptionMMCSMetrics, 
+                       _kMMCSRequestOptionMetaserverAllowedHostnamesOverride, _kMMCSRequestOptionMetaserverAllowedSchemesOverride, 
+                       _kMMCSRequestOptionMetaserverCheckDisabled, _kMMCSRequestOptionMetricOptions, 
+                       _kMMCSRequestOptionMmeDataClass, _kMMCSRequestOptionNetworkServiceType, 
+                       _kMMCSRequestOptionNetworkingDelegate, _kMMCSRequestOptionPreauthorization, 
+                       _kMMCSRequestOptionPreauthorizationSignature, _kMMCSRequestOptionPriority, 
+                       _kMMCSRequestOptionPrivacyProxyFailClosedOverride, _kMMCSRequestOptionProxyDown, 
+                       _kMMCSRequestOptionQoS, _kMMCSRequestOptionReaderWriterCallbackForDownloads, 
                        _kMMCSRequestOptionRequireInlineComplete, _kMMCSRequestOptionRequiresPowerPluggedIn, 
                        _kMMCSRequestOptionResumableContainerLimpMode, _kMMCSRequestOptionRetrievePastRegistration, 
                        _kMMCSRequestOptionReturnOpaqueCloneContext, _kMMCSRequestOptionReturnPreauthorizationRequestObject, 

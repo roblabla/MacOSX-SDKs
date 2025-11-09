@@ -5,7 +5,7 @@
 
      Version:    Accelerate-1
 
-     Copyright:  Copyright (c) 2000-2023 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2024 by Apple Inc. All rights reserved.
 
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,8 @@
 #endif
 
 #include <TargetConditionals.h>
+
+
 
 
 #ifndef VIMAGE_H

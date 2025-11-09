@@ -4,6 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// A helper class to provide static utility methods for quick access to settings related to credential providers.
 API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
 @interface ASSettingsHelper : NSObject
 

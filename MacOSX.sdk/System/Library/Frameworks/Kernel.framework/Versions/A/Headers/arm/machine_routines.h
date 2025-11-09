@@ -589,11 +589,6 @@ ml_static_protect(
 	vm_size_t size,
 	vm_prot_t new_prot);
 
-typedef int ml_page_protection_t;
-
-/* Return the type of page protection supported */
-ml_page_protection_t ml_page_protection_type(void);
-
 /* virtual to physical on wired pages */
 vm_offset_t ml_vtophys(
 	vm_offset_t vaddr);
@@ -603,6 +598,11 @@ void ml_cpu_get_info(ml_cpu_info_t *ml_cpu_info);
 void ml_cpu_get_info_type(ml_cpu_info_t * ml_cpu_info, cluster_type_t cluster_type);
 
 #endif /* __APPLE_API_UNSTABLE */
+
+typedef int ml_page_protection_t;
+
+/* Return the type of page protection supported */
+ml_page_protection_t ml_page_protection_type(void);
 
 #ifdef __APPLE_API_PRIVATE
 
@@ -729,6 +729,7 @@ void ml_report_minor_badness(uint32_t badness_id);
 #define ML_MINOR_BADNESS_CONSOLE_BUFFER_FULL              0
 #define ML_MINOR_BADNESS_MEMFAULT_REPORTING_NOT_ENABLED   1
 #define ML_MINOR_BADNESS_PIO_WRITTEN_FROM_USERSPACE       2
+
 
 
 __END_DECLS

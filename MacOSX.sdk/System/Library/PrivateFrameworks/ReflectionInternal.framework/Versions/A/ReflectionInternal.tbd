@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReflectionInternal.framework/Versions/A/ReflectionInternal'
-current-version: 19
-compatibility-version: 19
+current-version: 22
+compatibility-version: 22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -21,11 +21,18 @@ exports:
                        '_$s18ReflectionInternal11PartialTypeV6create4withAA0D0VSgypXpd_tF', 
                        '_$s18ReflectionInternal11PartialTypeV6createAA0D0VSgyF', 
                        '_$s18ReflectionInternal11PartialTypeV7_create4withAA0D0VSgSRySVG_tF', 
+                       '_$s18ReflectionInternal11PartialTypeV7_create4withAA0D0VSgSRySVSgG_tF', 
+                       '_$s18ReflectionInternal11PartialTypeV7create24withAA0D0VSgAA15GenericArgumentOd_tF', 
+                       '_$s18ReflectionInternal11PartialTypeV7create24withAA0D0VSgSayAA15GenericArgumentOG_tF', 
                        '_$s18ReflectionInternal11PartialTypeV9hashValueSivg', '_$s18ReflectionInternal11PartialTypeV9hashValueSivpMV', 
                        '_$s18ReflectionInternal11PartialTypeV9isGenericSbvg', '_$s18ReflectionInternal11PartialTypeV9isGenericSbvpMV', 
                        '_$s18ReflectionInternal11PartialTypeVMa', '_$s18ReflectionInternal11PartialTypeVMn', 
                        '_$s18ReflectionInternal11PartialTypeVN', '_$s18ReflectionInternal11PartialTypeVSHAAMc', 
                        '_$s18ReflectionInternal11PartialTypeVSQAAMc', '_$s18ReflectionInternal11PartialTypeVyAC07RuntimeB00D8MetadataVcfC', 
+                       '_$s18ReflectionInternal15GenericArgumentO2eeoiySbAC_ACtFZ', 
+                       '_$s18ReflectionInternal15GenericArgumentO4typeyACypXpFZ', 
+                       '_$s18ReflectionInternal15GenericArgumentOMa', '_$s18ReflectionInternal15GenericArgumentOMn', 
+                       '_$s18ReflectionInternal15GenericArgumentON', '_$s18ReflectionInternal15GenericArgumentOSQAAMc', 
                        '_$s18ReflectionInternal16GenericArgumentsV08numberOfD0Sivg', 
                        '_$s18ReflectionInternal16GenericArgumentsV08numberOfD0SivpMV', 
                        '_$s18ReflectionInternal16GenericArgumentsV10startIndexSivg', 
@@ -42,6 +49,24 @@ exports:
                        '_$s18ReflectionInternal16GenericArgumentsVSlAAMc', '_$s18ReflectionInternal16GenericArgumentsVyAA4TypeVSicig', 
                        '_$s18ReflectionInternal16GenericArgumentsVyAA4TypeVSicipMV', 
                        '_$s18ReflectionInternal16GenericArgumentsVyACSVSg_SitcfC', 
+                       '_$s18ReflectionInternal17GenericArguments2V10startIndexSivg', 
+                       '_$s18ReflectionInternal17GenericArguments2V10startIndexSivpMV', 
+                       '_$s18ReflectionInternal17GenericArguments2V15argumentPointerSVSgvg', 
+                       '_$s18ReflectionInternal17GenericArguments2V15argumentPointerSVSgvpMV', 
+                       '_$s18ReflectionInternal17GenericArguments2V16genericSignature07RuntimeB00cF0VSgvg', 
+                       '_$s18ReflectionInternal17GenericArguments2V16genericSignature07RuntimeB00cF0VSgvpMV', 
+                       '_$s18ReflectionInternal17GenericArguments2V21numberOfKeyParametersSivg', 
+                       '_$s18ReflectionInternal17GenericArguments2V21numberOfKeyParametersSivpMV', 
+                       '_$s18ReflectionInternal17GenericArguments2V5index5afterS2i_tF', 
+                       '_$s18ReflectionInternal17GenericArguments2V5index6beforeS2i_tF', 
+                       '_$s18ReflectionInternal17GenericArguments2V8endIndexSivg', 
+                       '_$s18ReflectionInternal17GenericArguments2V8endIndexSivpMV', 
+                       '_$s18ReflectionInternal17GenericArguments2VMa', '_$s18ReflectionInternal17GenericArguments2VMn', 
+                       '_$s18ReflectionInternal17GenericArguments2VN', '_$s18ReflectionInternal17GenericArguments2VSKAAMc', 
+                       '_$s18ReflectionInternal17GenericArguments2VSTAAMc', '_$s18ReflectionInternal17GenericArguments2VSlAAMc', 
+                       '_$s18ReflectionInternal17GenericArguments2VyAA0C8ArgumentOSicig', 
+                       '_$s18ReflectionInternal17GenericArguments2VyAA0C8ArgumentOSicipMV', 
+                       '_$s18ReflectionInternal17GenericArguments2VyACSVSg_07RuntimeB00C9SignatureVSgSitcfC', 
                        '_$s18ReflectionInternal17_typesThatConform2toSayypXpGSgypXp_tF', 
                        '_$s18ReflectionInternal4CaseV10hasPayloadSbvg', '_$s18ReflectionInternal4CaseV10hasPayloadSbvpMV', 
                        '_$s18ReflectionInternal4CaseV10isIndirectSbvg', '_$s18ReflectionInternal4CaseV10isIndirectSbvpMV', 
@@ -64,6 +89,8 @@ exports:
                        '_$s18ReflectionInternal4TypeV13isExistentialSbvg', '_$s18ReflectionInternal4TypeV13isExistentialSbvpMV', 
                        '_$s18ReflectionInternal4TypeV16genericArgumentsAA07GenericE0Vvg', 
                        '_$s18ReflectionInternal4TypeV16genericArgumentsAA07GenericE0VvpMV', 
+                       '_$s18ReflectionInternal4TypeV17genericArguments2AA07GenericE0Vvg', 
+                       '_$s18ReflectionInternal4TypeV17genericArguments2AA07GenericE0VvpMV', 
                        '_$s18ReflectionInternal4TypeV2eeoiySbAC_ACtFZ', '_$s18ReflectionInternal4TypeV4hash4intoys6HasherVz_tF', 
                        '_$s18ReflectionInternal4TypeV5casesAA5CasesVvg', '_$s18ReflectionInternal4TypeV5casesAA5CasesVvpMV', 
                        '_$s18ReflectionInternal4TypeV6fieldsAA6FieldsVvg', '_$s18ReflectionInternal4TypeV6fieldsAA6FieldsVvpMV', 

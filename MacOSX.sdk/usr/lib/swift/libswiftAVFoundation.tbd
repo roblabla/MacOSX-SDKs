@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2220.14.1
+current-version: 2230.19.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -13,9 +13,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftAVFoundation.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftAVFoundation.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s12AVFoundation15AVAsyncPropertyC6StatusO11descriptionSSvg', 
+                       '$ld$install_name$os10.9$@rpath/libswiftAVFoundation.dylib', 
+                       '_$s12AVFoundation15AVAsyncPropertyC6StatusO11descriptionSSvg', 
                        '_$s12AVFoundation15AVAsyncPropertyC6StatusO11descriptionSSvpMV', 
                        '_$s12AVFoundation15AVAsyncPropertyC6StatusOAASQR_rlE2eeoiySbAEyxq__G_AGtFZ', 
                        '_$s12AVFoundation15AVAsyncPropertyC6StatusOMa', '_$s12AVFoundation15AVAsyncPropertyC6StatusOMn', 
@@ -211,6 +210,16 @@ exports:
                        '_$sSo26AVVideoOutputSpecificationC12AVFoundationE14tagCollectionsABSaySay9CoreMedia5CMTagCGG_tcfc', 
                        '_$sSo26AVVideoOutputSpecificationC12AVFoundationE23preferredTagCollectionsSaySay9CoreMedia5CMTagCGGvg', 
                        '_$sSo26AVVideoOutputSpecificationC12AVFoundationE23preferredTagCollectionsSaySay9CoreMedia5CMTagCGGvpMV', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27PresentationTimeExpectationO15minimumUpcomingyAESo6CMTimeacAEmFWC', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27PresentationTimeExpectationO23monotonicallyIncreasingyA2EmFWC', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27PresentationTimeExpectationO4noneyA2EmFWC', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27PresentationTimeExpectationOMa', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27PresentationTimeExpectationOMn', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27PresentationTimeExpectationON', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27presentationTimeExpectationAbCE012PresentationgH0OvM', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27presentationTimeExpectationAbCE012PresentationgH0Ovg', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27presentationTimeExpectationAbCE012PresentationgH0OvpMV', 
+                       '_$sSo27AVSampleBufferVideoRendererC12AVFoundationE27presentationTimeExpectationAbCE012PresentationgH0Ovs', 
                        '_$sSo29AVAssetVariantAudioAttributesC12AVFoundationE9formatIDsSays6UInt32VGvg', 
                        '_$sSo29AVAssetVariantAudioAttributesC12AVFoundationE9formatIDsSays6UInt32VGvpMV', 
                        '_$sSo29AVAssetVariantVideoAttributesC12AVFoundationE10codecTypesSays6UInt32VGvg', 

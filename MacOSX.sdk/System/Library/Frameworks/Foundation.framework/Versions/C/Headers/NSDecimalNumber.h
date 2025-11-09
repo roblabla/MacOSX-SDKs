@@ -44,9 +44,7 @@ NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
     unsigned int _reserved:1;
     unsigned int _hasExternalRefCount:1;
     unsigned int _refs:16;
-
-    unsigned short _mantissa[0]; /* GCC */
-
+    unsigned short _mantissa[];
 }
 
 - (instancetype)initWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;

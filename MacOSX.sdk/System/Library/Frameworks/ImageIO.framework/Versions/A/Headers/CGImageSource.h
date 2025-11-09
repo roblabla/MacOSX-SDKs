@@ -249,6 +249,13 @@ IMAGEIO_EXTERN const CFStringRef kCGImageSourceDecodeToSDR      IMAGEIO_AVAILABL
 IMAGEIO_EXTERN const CFStringRef kCGImageSourceDecodeRequestOptions     IMAGEIO_AVAILABLE_STARTING(14.0, 17.0, 17.0, 10.0);
 
 
+/* To limit the image formats that ImageIO can decode, you can call 'CGImageSourceSetAllowableTypes' with
+ * an array of type identifiers.
+ * The 'allowableTypes' array should contain valid type identifiers.
+ * CGImageSourceSetAllowableTypes can only be called once.
+ */
+IMAGEIO_EXTERN OSStatus CGImageSourceSetAllowableTypes(CFArrayRef allowableTypes) IMAGEIO_AVAILABLE_STARTING(14.2, 17.2, 17.2, 10.2);
+
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

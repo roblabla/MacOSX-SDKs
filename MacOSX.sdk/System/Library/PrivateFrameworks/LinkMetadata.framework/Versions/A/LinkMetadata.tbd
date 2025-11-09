@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LinkMetadata.framework/Versions/A/LinkMetadata'
-current-version: 146.60.7
+current-version: 174.100.17
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -156,20 +156,20 @@ exports:
                        _LNSystemProtocolIdentifierNavigateSequentially, _LNSystemProtocolIdentifierOpenEntity, 
                        _LNSystemProtocolIdentifierPaste, _LNSystemProtocolIdentifierPauseWorkout, 
                        _LNSystemProtocolIdentifierPlayVideo, _LNSystemProtocolIdentifierPreviewEntity, 
-                       _LNSystemProtocolIdentifierPutEntityInContainer, _LNSystemProtocolIdentifierRequiresMDMChecks, 
-                       _LNSystemProtocolIdentifierResize, _LNSystemProtocolIdentifierResumeWorkout, 
-                       _LNSystemProtocolIdentifierSaveEntity, _LNSystemProtocolIdentifierScroll, 
-                       _LNSystemProtocolIdentifierSearch, _LNSystemProtocolIdentifierSendMail, 
-                       _LNSystemProtocolIdentifierSendMessage, _LNSystemProtocolIdentifierSessionStarting, 
-                       _LNSystemProtocolIdentifierSetMailMessageIsRead, _LNSystemProtocolIdentifierShowInAppSearchResults, 
-                       _LNSystemProtocolIdentifierShowInAppStringSearchResults, _LNSystemProtocolIdentifierShowSearchResultsInApp, 
-                       _LNSystemProtocolIdentifierShowStringSearchResultsInApp, _LNSystemProtocolIdentifierStaccatoLongPress, 
-                       _LNSystemProtocolIdentifierStartDive, _LNSystemProtocolIdentifierStartWorkout, 
-                       _LNSystemProtocolIdentifierSting, _LNSystemProtocolIdentifierUndo, 
-                       _LNSystemProtocolIdentifierWidgetConfiguration, _LNSystemProtocolIdentifierZoom, 
-                       _LNValueTypeSpecificMetadataKeyBoolFalseDisplayName, _LNValueTypeSpecificMetadataKeyBoolTrueDisplayName, 
-                       _LNValueTypeSpecificMetadataKeyCLPlacemarkDisplayStyle, _LNValueTypeSpecificMetadataKeyCollectionSizes, 
-                       _LNValueTypeSpecificMetadataKeyCurrencyAmountCurrencyCodes, 
+                       _LNSystemProtocolIdentifierPushToTalkTransmission, _LNSystemProtocolIdentifierPutEntityInContainer, 
+                       _LNSystemProtocolIdentifierRequiresMDMChecks, _LNSystemProtocolIdentifierResize, 
+                       _LNSystemProtocolIdentifierResumeWorkout, _LNSystemProtocolIdentifierSaveEntity, 
+                       _LNSystemProtocolIdentifierScroll, _LNSystemProtocolIdentifierSearch, 
+                       _LNSystemProtocolIdentifierSendMail, _LNSystemProtocolIdentifierSendMessage, 
+                       _LNSystemProtocolIdentifierSessionStarting, _LNSystemProtocolIdentifierSetMailMessageIsRead, 
+                       _LNSystemProtocolIdentifierShowInAppSearchResults, _LNSystemProtocolIdentifierShowInAppStringSearchResults, 
+                       _LNSystemProtocolIdentifierShowSearchResultsInApp, _LNSystemProtocolIdentifierShowStringSearchResultsInApp, 
+                       _LNSystemProtocolIdentifierStaccatoLongPress, _LNSystemProtocolIdentifierStartDive, 
+                       _LNSystemProtocolIdentifierStartWorkout, _LNSystemProtocolIdentifierSting, 
+                       _LNSystemProtocolIdentifierUndo, _LNSystemProtocolIdentifierWidgetConfiguration, 
+                       _LNSystemProtocolIdentifierZoom, _LNValueTypeSpecificMetadataKeyBoolFalseDisplayName, 
+                       _LNValueTypeSpecificMetadataKeyBoolTrueDisplayName, _LNValueTypeSpecificMetadataKeyCLPlacemarkDisplayStyle, 
+                       _LNValueTypeSpecificMetadataKeyCollectionSizes, _LNValueTypeSpecificMetadataKeyCurrencyAmountCurrencyCodes, 
                        _LNValueTypeSpecificMetadataKeyDateDateFormatterStyleDate, 
                        _LNValueTypeSpecificMetadataKeyDateDateFormatterStyleTime, 
                        _LNValueTypeSpecificMetadataKeyDateFormat, _LNValueTypeSpecificMetadataKeyDateFormatType, 

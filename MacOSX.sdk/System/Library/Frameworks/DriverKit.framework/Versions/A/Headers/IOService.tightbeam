@@ -1,6 +1,6 @@
 module IOService
 
-protocol IOServiceProtocol {
+service IOServiceProtocol {
 	func Start() -> Bool
 }
 

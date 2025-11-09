@@ -1281,7 +1281,6 @@ struct AUDependentParameter {
 };
 typedef struct AUDependentParameter AUDependentParameter;
 
-#if !(0 && 0)
 #if !TARGET_OS_IPHONE
 /*!
 	@struct			AudioUnitCocoaViewInfo
@@ -1307,7 +1306,6 @@ struct AUHostVersionIdentifier {
 };
 typedef struct AUHostVersionIdentifier AUHostVersionIdentifier;
 #endif //!TARGET_OS_IPHONE
-#endif 
 
 /*!
 	@struct			MIDIPacketList
@@ -3775,7 +3773,6 @@ CF_ENUM(AudioUnitPropertyID) {
 						For the preset instruments, the numeric ID of a particular preset within that bank to load.
  						Range is 0 to 127.
  */
-#if !(0 && 0)
 struct AUSamplerInstrumentData {
 	CFURLRef				fileURL;
 	UInt8					instrumentType;
@@ -3784,7 +3781,6 @@ struct AUSamplerInstrumentData {
 	UInt8					presetID;
 };
 typedef struct AUSamplerInstrumentData AUSamplerInstrumentData;
-#endif 
 
 /*
 	@enum			InstrumentTypes
@@ -4132,7 +4128,6 @@ enum {
 
 // Deprecated in favor of the newer AUSamplerInstrumentData
 // structure and its supporting property.
-#if !(0 && 0)
 typedef struct AUSamplerBankPresetData {
 	CFURLRef				bankURL;
 	UInt8					bankMSB;
@@ -4140,7 +4135,6 @@ typedef struct AUSamplerBankPresetData {
 	UInt8					presetID;
 	UInt8					reserved;
 } AUSamplerBankPresetData;
-#endif 
 
 CF_ENUM(AudioUnitPropertyID) {
 	kAUSamplerProperty_LoadPresetFromBank			= 4100,

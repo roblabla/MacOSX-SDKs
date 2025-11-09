@@ -138,12 +138,12 @@ API_AVAILABLE(macos(10.11))
 
 /// Offset in bits within the PIN block to mark a location for filling in the formatted PIN (justified with respect to PINJustification).
 /// @note Default value: 0
-/// @discussion Note that the value of PINBitOffset indirectly controls the internal system units indicator. If PINBitOffset is byte aligned (PINBitOffset mod 8 is equal to 0), the internal representation of PINBitOffset gets converted from bits to bytes.
+/// @discussion The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value.
 @property NSInteger PINBitOffset;
 
 /// Offset in bits within the PIN block to mark a location for filling in the PIN length (always left justified).
 /// @note Default value: 0
-/// @discussion Note that the value of PINLengthBitOffset indirectly controls the internal system units indicator. If PINLengthBitOffset is byte aligned (PINLengthBitOffset mod 8 is equal to 0), the internal representation of PINLengthBitOffset gets converted from bits to bytes.
+/// @discussion The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified.
 @property NSInteger PINLengthBitOffset;
 
 /// Size in bits of the PIN length field. If set to 0, PIN length is not written.

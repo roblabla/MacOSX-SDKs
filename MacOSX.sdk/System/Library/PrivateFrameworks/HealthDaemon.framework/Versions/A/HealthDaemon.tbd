@@ -1400,6 +1400,7 @@ exports:
                        __HKHeartRateRecoveryOneMinuteIntervalDuration, __HKStatisticsComputationMethodForQuantityType, 
                        __HKStringForHealthServiceConnectionState, __NSStringFromSessionState, 
                        __OriginalFHIRResourceAsJoinSpecifier, __PropertyNamesToCharacteristicIdentifiers, 
+                       __SendDataTimerKey, __StartMirroringTimerKey, __StopMirroringTimerKey, 
                        __TimeToCompleteAuthorizeTimerKey, __WorkoutConfigurationActivityTypeKey, 
                        __WorkoutConfigurationDistanceCyclingRateMilesKey, __WorkoutConfigurationDistanceSwimmingRateYardsKey, 
                        __WorkoutConfigurationDistanceWalkingRateMilesKey, __WorkoutConfigurationEndTimeKey, 
@@ -1816,11 +1817,11 @@ exports:
                        HDActivitySummaryBuilder, HDActivitySummaryQueryHelper, HDActivitySummaryQueryServer, 
                        HDAdHocConceptEntity, HDAgeGatingManager, HDAggregateDataCollector, 
                        HDAlarmEvent, HDAlarmEventChanges, HDAlarmEventEntity, HDAlertSuppressor, 
-                       HDAllergyRecordEntity, HDAllowedCountriesDataSourceWithNanoRegistryFallback, 
-                       HDAnalyticsDailyEventManager, HDAnalyticsSubmissionCoordinator, 
-                       HDAnchoredObjectQueryServer, HDAppLauncher, HDAppSubscription, 
-                       HDAppSubscriptionAppLaunchEntity, HDAppSubscriptionEntity, 
-                       HDAppSubscriptionManager, HDAppleExerciseTimeDataAggregator, 
+                       HDAllergyRecordEntity, HDAllowedCountriesDataSourceWithLocalCountrySetFallback, 
+                       HDAllowedCountriesDataSourceWithNanoRegistryFallback, HDAnalyticsDailyEventManager, 
+                       HDAnalyticsSubmissionCoordinator, HDAnchoredObjectQueryServer, 
+                       HDAppLauncher, HDAppSubscription, HDAppSubscriptionAppLaunchEntity, 
+                       HDAppSubscriptionEntity, HDAppSubscriptionManager, HDAppleExerciseTimeDataAggregator, 
                        HDAssociationEntity, HDAssociationEntityIsAssociatedPredicate, 
                        HDAssociationEntityParentIDExistsPredicate, HDAssociationEntityParentIDPredicate, 
                        HDAssociationSyncEntity, HDAsynchronousTaskTree, HDAttachment, 
@@ -2123,6 +2124,7 @@ exports:
                        HDMedicationOrderEntity, HDMedicationRecordEntity, HDMetadataKeyEntity, 
                        HDMetadataManager, HDMetadataValueEntity, HDMetadataValueEntityPredicate, 
                        HDMetadataValueStatement, HDMinorExperiencesPlugin, HDMinorExperiencesProfileExtension, 
+                       HDMirroredWorkoutAnalyticEvent, HDMirroredWorkoutAnalyticsCollector, 
                        HDMirroredWorkoutSessionServer, HDMockIDSDevice, HDMultiTypeSortedSampleIterator, 
                        HDMutableDatabaseTransactionContext, HDNanoHealthNotification, 
                        HDNanoPairingEntity, HDNanoRegistryDeviceCapabilityProvider, 
@@ -2933,4 +2935,5 @@ exports:
                        HDWorkoutSessionServer._profile, HDWorkoutSessionServer._queue, 
                        HDWorkoutSessionServer._startDate, HDWorkoutSessionServer._stopDate, 
                        HDWorkoutSessionServer._syncController, HDWorkoutSessionServer._workoutDataFlowLink ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

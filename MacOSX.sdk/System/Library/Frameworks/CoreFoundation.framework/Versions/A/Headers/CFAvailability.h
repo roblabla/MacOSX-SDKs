@@ -16,20 +16,11 @@
 #include <TargetConditionals.h>
 #endif
 
-#if __has_include(<Availability.h>) && __has_include(<os/availability.h>) && __has_include(<AvailabilityMacros.h>) && !0
+#if __has_include(<Availability.h>) && __has_include(<os/availability.h>) && __has_include(<AvailabilityMacros.h>)
 #include <Availability.h>
 #include <os/availability.h>
 // Even if unused, these must remain here for compatibility, because projects rely on them being included.
 #include <AvailabilityMacros.h>
-#elif __has_include(<Availability.h>) && __has_include(<AvailabilityMacros.h>)
-#include <Availability.h>
-#include <AvailabilityMacros.h>
-#if !defined(API_AVAILABLE)
-#define API_AVAILABLE(...) __API_AVAILABLE(__VA_ARGS__)
-#define API_DEPRECATED(...) __API_DEPRECATED(__VA_ARGS__)
-#define API_UNAVAILABLE(...) __API_UNAVAILABLE(__VA_ARGS__)
-#define API_DEPRECATED_WITH_REPLACEMENT(...) __API_DEPRECATED_WITH_REPLACEMENT(__VA_ARGS__)
-#endif
 #else
 #define API_AVAILABLE(...)
 #define API_DEPRECATED(...)

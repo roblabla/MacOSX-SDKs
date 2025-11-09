@@ -2313,6 +2313,9 @@ API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAIL
  
  @discussion
     This property changes to reflect the Gestures state in Control Center. It is key-value observable. Clients can call performEffectForReaction: independently of whether gesture detection is enabled, reaction effects from either source will be intermixed.
+    By default, gesture detection is enabled.  As of iOS 17.4 and macOS 14.4, applications can control the default value of this property by adding the following key to their Info.plist:
+        <key>NSCameraReactionEffectGesturesEnabledDefault</key>
+    A value of true enables gesture detection and a value of false disables it, until such time that the user makes their own selection in Control Center.
  */
 @property(class, readonly) BOOL reactionEffectGesturesEnabled API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 

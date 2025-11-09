@@ -11,19 +11,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// The resize mode to use for resizing.
 typedef NS_ENUM(NSUInteger, MPSGraphResizeMode)
 {
+    /// Samples the nearest neighbor to the pixel coordinate.
     MPSGraphResizeNearest        MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0)) MPS_SWIFT_NAME(nearest)   =  0L,
+    /// Samples the 4 neighbors to the pixel coordinate and uses bilinear interpolation.
     MPSGraphResizeBilinear       MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                           =  1L,
 };
 
+/// The rounding mode to use when using nearest resize mode.
 typedef NS_ENUM(NSUInteger, MPSGraphResizeNearestRoundingMode)
 {
+    /// Rounds values to the nearest integer value, with 0.5f offset rounding toward +inf.
     MPSGraphResizeNearestRoundingModeRoundPreferCeil        MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0)) MPS_SWIFT_NAME(roundPreferCeil)   =  0L,
+    /// Rounds values to the nearest integer value, with 0.5f rounding toward -inf.
     MPSGraphResizeNearestRoundingModeRoundPreferFloor       MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))                                    =  1L,
+    /// Rounds values toward +inf.
     MPSGraphResizeNearestRoundingModeCeil                   MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))                                    =  2L,
+    /// Rounds values toward -inf.
     MPSGraphResizeNearestRoundingModeFloor                  MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))                                    =  3L,
+    /// Rounds values to the nearest integer value, with 0.5f rounding toward the closest even value.
     MPSGraphResizeNearestRoundingModeRoundToEven            MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                                    =  4L,
+    /// Rounds values to the nearest integer value, with 0.5f rounding toward the closest odd value.
     MPSGraphResizeNearestRoundingModeRoundToOdd             MPS_ENUM_AVAILABLE_STARTING(macos(13.2), ios(16.3), tvos(16.3))                                    =  5L,
 };
 

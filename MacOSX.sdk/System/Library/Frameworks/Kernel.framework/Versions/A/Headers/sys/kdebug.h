@@ -154,6 +154,8 @@ __BEGIN_DECLS
 #define DBG_MACH_IHDLR          0x10 // Interrupt Handlers
 #define DBG_MACH_IPC            0x20 // Inter Process Comm
 #define DBG_MACH_RESOURCE       0x25 // tracing limits, etc
+#define DBG_MACH_EXCLAVES       0x2A 
+#define DBG_MACH_EXCLAVES_SCHEDULER 0x2B 
 #define DBG_MACH_VM             0x30 // Virtual Memory
 #define DBG_MACH_LEAKS          0x31 // alloc/free
 #define DBG_MACH_WORKINGSET     0x32 // private subclass for working set related debugging
@@ -179,6 +181,7 @@ __BEGIN_DECLS
 #define DBG_MACH_KCOV           0xAD // Kernel coverage sanitizer
 #define DBG_MACH_MACHDEP_EXCP_SC_x86 0xAE // Machine Dependent System Calls on x86
 #define DBG_MACH_MACHDEP_EXCP_SC_ARM 0xAF // Machine Dependent System Calls on arm
+#define DBG_MACH_VM_RECLAIM     0xB0 // Deferred Memory Reclamation
 
 // Codes for DBG_MACH_IO
 #define DBC_MACH_IO_MMIO_READ           0x1
@@ -353,6 +356,24 @@ __BEGIN_DECLS
 #define MACH_IPC_PORT_ENTRY_MODIFY              0xc     /* A port space gained or lost a port right (reference) */
 #define MACH_IPC_DESTROY_GUARDED_DESC           0xd     /* Unable to receive a guarded descriptor */
 
+
+#define MACH_EXCLAVES_SWITCH                    0x0     
+#define MACH_EXCLAVES_XNUPROXY                  0x1     
+#define MACH_EXCLAVES_RPC                       0x2     
+#define MACH_EXCLAVES_UPCALL                    0x3     
+#define MACH_EXCLAVES_BOOT_TASK                 0x4     
+
+
+#define MACH_EXCLAVES_SCHEDULER_YIELD           0x0     
+#define MACH_EXCLAVES_SCHEDULER_SPAWNED         0x1     
+#define MACH_EXCLAVES_SCHEDULER_TERMINATED      0x2     
+#define MACH_EXCLAVES_SCHEDULER_WAIT            0x3     
+#define MACH_EXCLAVES_SCHEDULER_WAKE            0x4     
+#define MACH_EXCLAVES_SCHEDULER_SUSPENDED       0x5     
+#define MACH_EXCLAVES_SCHEDULER_RESUMED         0x6     
+#define MACH_EXCLAVES_SCHEDULER_INTERRUPTED     0x7     
+
+
 /* Codes for thread groups (DBG_MACH_THREAD_GROUP) */
 #define MACH_THREAD_GROUP_NEW           0x0
 #define MACH_THREAD_GROUP_FREE          0x1
@@ -517,6 +538,16 @@ __BEGIN_DECLS
 #define HV_X86_VM_PROTECT_TRAP           0x2b
 #define HV_X86_VM_UNMAP_TRAP             0x2c
 #define HV_X86_TSC_OFFSET_SET            0x2d
+
+#pragma mark Deferred Memory Reclamation Codes (DBG_MACH_VM_RECLAIM)
+
+#define VM_RECLAIM_UPDATE_ACCOUNTING 0x01
+#define VM_RECLAIM_ENTRIES           0x02
+#define VM_RECLAIM_CHUNK             0x03
+#define VM_RECLAIM_ENTRY             0x04
+#define VM_RECLAIM_ALL_MEMORY        0x05
+#define VM_RECLAIM_ASYNC_MEMORY      0x06
+#define VM_RECLAIM_INIT              0x07
 
 /* **** The Kernel Debug Sub Classes for Network (DBG_NETWORK) **** */
 #define DBG_NETIP       1       /* Internet Protocol */
@@ -1038,6 +1069,8 @@ __BEGIN_DECLS
 #define ZFREE_CODE_2 MACHDBG_CODE(DBG_MACH_LEAKS, 7)
 
 #define MEMSTAT_CODE(code) BSDDBG_CODE(DBG_BSD_MEMSTAT, code)
+
+#define VM_RECLAIM_CODE(code) MACHDBG_CODE(DBG_MACH_VM_RECLAIM, code)
 
 #define PMAP_CODE(code) MACHDBG_CODE(DBG_MACH_PMAP, code)
 

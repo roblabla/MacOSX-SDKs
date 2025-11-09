@@ -3,11 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftSystem.dylib'
-current-version: 24
+current-version: 33
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s6System14FileDescriptorV10AccessModeV11descriptionSSvg', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
+    symbols:         [ '_$s6System4MachO4PortV8_contexts6UInt64VvM', '_$s6System4MachO4PortV8_contexts6UInt64Vvg', 
+                       '_$s6System4MachO4PortV8_contexts6UInt64Vvs', '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE10relinquishs6UInt32V4name_s6UInt64V7contexttyF', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE16withBorrowedName4bodyqd__qd__s6UInt32V_s6UInt64VtXE_tlF', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE4name7contextAEy_AGGs6UInt32V_s6UInt64VtcfC' ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s6System13MachPortRightMp', '_$s6System13MachPortRightTL', 
+                       '_$s6System14FileDescriptorV10AccessModeV11descriptionSSvg', 
                        '_$s6System14FileDescriptorV10AccessModeV11descriptionSSvpMV', 
                        '_$s6System14FileDescriptorV10AccessModeV16debugDescriptionSSvg', 
                        '_$s6System14FileDescriptorV10AccessModeV16debugDescriptionSSvpMV', 
@@ -52,6 +59,7 @@ exports:
                        '_$s6System14FileDescriptorV6_closes6ResultOyytAA5ErrnoVGyF', 
                        '_$s6System14FileDescriptorV6_write16toAbsoluteOffset_16retryOnInterrupts6ResultOySiAA5ErrnoVGs5Int64V_SWSbtF', 
                        '_$s6System14FileDescriptorV6_write_16retryOnInterrupts6ResultOySiAA5ErrnoVGSW_SbtF', 
+                       '_$s6System14FileDescriptorV7_resize2to16retryOnInterrupts6ResultOyytAA5ErrnoVGs5Int64V_SbtF', 
                        '_$s6System14FileDescriptorV8rawValues5Int32VvpMV', '_$s6System14FileDescriptorV9_writeAll16toAbsoluteOffset_s6ResultOySiAA5ErrnoVGs5Int64V_xtSTRzs5UInt8V7ElementRtzlF', 
                        '_$s6System14FileDescriptorV9_writeAllys6ResultOySiAA5ErrnoVGxSTRzs5UInt8V7ElementRtzlF', 
                        '_$s6System14FileDescriptorVMa', '_$s6System14FileDescriptorVMn', 
@@ -68,7 +76,35 @@ exports:
                        '_$s6System15FilePermissionsVs23CustomStringConvertibleAAMc', 
                        '_$s6System15FilePermissionsVs25ExpressibleByArrayLiteralAAMc', 
                        '_$s6System15FilePermissionsVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s6System15FilePermissionsVs9OptionSetAAMc', '_$s6System5ErrnoV11descriptionSSvg', 
+                       '_$s6System15FilePermissionsVs9OptionSetAAMc', '_$s6System17_machPrecondition4file4line_ys12StaticStringV_Sus5Int32VyXKtF', 
+                       '_$s6System4MachO12ReceiveRightVAA0b4PortD0AAMc', '_$s6System4MachO12ReceiveRightVAA0b4PortD0AAWP', 
+                       '_$s6System4MachO12ReceiveRightVMa', '_$s6System4MachO12ReceiveRightVMn', 
+                       '_$s6System4MachO12ReceiveRightVN', '_$s6System4MachO13SendOnceRightVAA0b4PortE0AAMc', 
+                       '_$s6System4MachO13SendOnceRightVAA0b4PortE0AAWP', '_$s6System4MachO13SendOnceRightVMa', 
+                       '_$s6System4MachO13SendOnceRightVMn', '_$s6System4MachO13SendOnceRightVN', 
+                       '_$s6System4MachO14PortRightErrorO2eeoiySbAE_AEtFZ', '_$s6System4MachO14PortRightErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s6System4MachO14PortRightErrorO8deadNameyA2EmFWC', '_$s6System4MachO14PortRightErrorO9hashValueSivg', 
+                       '_$s6System4MachO14PortRightErrorO9hashValueSivpMV', '_$s6System4MachO14PortRightErrorOMa', 
+                       '_$s6System4MachO14PortRightErrorOMn', '_$s6System4MachO14PortRightErrorON', 
+                       '_$s6System4MachO14PortRightErrorOSHAAMc', '_$s6System4MachO14PortRightErrorOSQAAMc', 
+                       '_$s6System4MachO14PortRightErrorOs0E0AAMc', '_$s6System4MachO4PortV16withBorrowedName4bodyqd__qd__s6UInt32VXE_tlF', 
+                       '_$s6System4MachO4PortV4nameAEy_xGs6UInt32V_tcfC', '_$s6System4MachO4PortV5_names6UInt32VvM', 
+                       '_$s6System4MachO4PortV5_names6UInt32Vvg', '_$s6System4MachO4PortV5_names6UInt32Vvs', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE012makeSendOnceE0AEy_AC0ghE0VGyF', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE08makeSendE0AEy_AC0gE0VGyF', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE13makeSendCounts6UInt32VvM', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE13makeSendCounts6UInt32Vvg', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE13makeSendCounts6UInt32Vvs', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE20unguardAndRelinquishs6UInt32VyF', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlEAEy_AGGycfC', 
+                       '_$s6System4MachO4PortVAaC13SendOnceRightVRszrlE10relinquishs6UInt32VyF', 
+                       '_$s6System4MachO4PortVAaC9SendRightVRszrlE04copydE0AEy_AGGyKF', 
+                       '_$s6System4MachO4PortVAaC9SendRightVRszrlE10relinquishs6UInt32VyF', 
+                       '_$s6System4MachO4PortVMa', '_$s6System4MachO4PortVMn', '_$s6System4MachO4PortVfD', 
+                       '_$s6System4MachO9SendRightVAA0b4PortD0AAMc', '_$s6System4MachO9SendRightVAA0b4PortD0AAWP', 
+                       '_$s6System4MachO9SendRightVMa', '_$s6System4MachO9SendRightVMn', 
+                       '_$s6System4MachO9SendRightVN', '_$s6System4MachOMa', '_$s6System4MachOMn', 
+                       '_$s6System4MachON', '_$s6System5ErrnoV11descriptionSSvg', 
                        '_$s6System5ErrnoV11descriptionSSvpMV', '_$s6System5ErrnoV16debugDescriptionSSvg', 
                        '_$s6System5ErrnoV16debugDescriptionSSvpMV', '_$s6System5ErrnoV5_codeSivg', 
                        '_$s6System5ErrnoV5_codeSivpMV', '_$s6System5ErrnoV7_domainSSvg', 
@@ -196,4 +232,9 @@ exports:
                        '_$sSS6SystemE8decodingSSAA8FilePathV4RootV_tcfC', '_$sSS6SystemE8decodingSSAA8FilePathV9ComponentV_tcfC', 
                        '_$sSS6SystemE8decodingSSAA8FilePathV_tcfC', '_$sSS6SystemEySSAA8FilePathVcfC', 
                        '__swift_FORCE_LOAD_$_swiftSystem' ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s6System4MachO4PortV8_contextSuvM', '_$s6System4MachO4PortV8_contextSuvg', 
+                       '_$s6System4MachO4PortV8_contextSuvs', '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE10relinquishs6UInt32V4name_Su7contexttyF', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE16withBorrowedName4bodyqd__qd__s6UInt32V_SutXE_tlF', 
+                       '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE4name7contextAEy_AGGs6UInt32V_SutcfC' ]
 ...

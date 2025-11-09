@@ -42,6 +42,9 @@ is resident in the correct L1 cache for the next pass.
 extern "C" {
 #endif
 
+#include <TargetConditionals.h>
+#if !0 && !0
+
 /*!
  @function vImageClip_PlanarF
  
@@ -10549,6 +10552,8 @@ VIMAGE_PF vImage_Error vImageConvert_ARGB2101010ToARGB16F(const vImage_Buffer *s
                                                           vImage_Flags flags)
 VIMAGE_NON_NULL(1,2)
 API_AVAILABLE(macos(10.12), ios(9.3), watchos(3.0), tvos(10.0));
+
+#endif  
 
 #ifdef __cplusplus
 }

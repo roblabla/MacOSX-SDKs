@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CryptoKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 176.0.2
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 183.100.21 -module-name CryptoKit
 import Foundation
 import LocalAuthentication
 import Security.SecAccessControl
@@ -557,8 +556,16 @@ public enum CryptoKitError : Swift.Error {
   @available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, macCatalyst 16.0, *)
   case invalidParameter
 }
+@available(iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, macCatalyst 17.4, *)
+extension CryptoKit.CryptoKitError : Swift.Equatable, Swift.Hashable {
+  public static func == (a: CryptoKit.CryptoKitError, b: CryptoKit.CryptoKitError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
-public enum CryptoKitASN1Error : Swift.Error {
+public enum CryptoKitASN1Error : Swift.Equatable, Swift.Error, Swift.Hashable {
   case invalidFieldIdentifier
   case unexpectedFieldType
   case invalidObjectIdentifier
@@ -1328,10 +1335,6 @@ extension CryptoKit.ChaChaPoly.SealedBox : Swift.Sendable {}
 extension CryptoKit.Insecure.SHA1 : CryptoKit.HashFunction {}
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.Insecure.MD5 : CryptoKit.HashFunction {}
-@available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
-extension CryptoKit.CryptoKitASN1Error : Swift.Equatable {}
-@available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
-extension CryptoKit.CryptoKitASN1Error : Swift.Hashable {}
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, macCatalyst 17.0, *)
 extension CryptoKit.HPKE.Errors : Swift.Equatable {}
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, macCatalyst 17.0, *)

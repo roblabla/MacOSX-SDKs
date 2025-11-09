@@ -5,7 +5,8 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
 install-name:    '/System/Library/Frameworks/DockKit.framework/DockKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s7DockKit0A16AccessoryManagerC21accessoryStateChangesAA0aC0C0fG0VvgTj', 
                        '_$s7DockKit0A16AccessoryManagerC21accessoryStateChangesAA0aC0C0fG0VvgTq', 
                        '_$s7DockKit0A16AccessoryManagerC21accessoryStateChangesAA0aC0C0fG0VvpMV', 
@@ -19,7 +20,22 @@ exports:
                        '_$s7DockKit0A16AccessoryManagerCMm', '_$s7DockKit0A16AccessoryManagerCMn', 
                        '_$s7DockKit0A16AccessoryManagerCMo', '_$s7DockKit0A16AccessoryManagerCMu', 
                        '_$s7DockKit0A16AccessoryManagerCN', '_$s7DockKit0A16AccessoryManagerCfD', 
-                       '_$s7DockKit0A16AccessoryManagerCfd', '_$s7DockKit0A9AccessoryC10IdentifierV16debugDescriptionSSvg', 
+                       '_$s7DockKit0A16AccessoryManagerCfd', '_$s7DockKit0A9AccessoryC0C5EventO10cameraFlipyA2EmFWC', 
+                       '_$s7DockKit0A9AccessoryC0C5EventO10cameraZoomyAESd_tcAEmFWC', 
+                       '_$s7DockKit0A9AccessoryC0C5EventO13cameraShutteryA2EmFWC', 
+                       '_$s7DockKit0A9AccessoryC0C5EventO2eeoiySbAE_AEtFZ', '_$s7DockKit0A9AccessoryC0C5EventO4hash4intoys6HasherVz_tF', 
+                       '_$s7DockKit0A9AccessoryC0C5EventO6buttonyAESi_SbtcAEmFWC', 
+                       '_$s7DockKit0A9AccessoryC0C5EventO9hashValueSivg', '_$s7DockKit0A9AccessoryC0C5EventO9hashValueSivpMV', 
+                       '_$s7DockKit0A9AccessoryC0C5EventOMa', '_$s7DockKit0A9AccessoryC0C5EventOMn', 
+                       '_$s7DockKit0A9AccessoryC0C5EventON', '_$s7DockKit0A9AccessoryC0C5EventOSHAAMc', 
+                       '_$s7DockKit0A9AccessoryC0C5EventOSQAAMc', '_$s7DockKit0A9AccessoryC0C6EventsV17makeAsyncIteratorAE0G0VyF', 
+                       '_$s7DockKit0A9AccessoryC0C6EventsV8IteratorV4nextAC0C5EventOSgyYaF', 
+                       '_$s7DockKit0A9AccessoryC0C6EventsV8IteratorV4nextAC0C5EventOSgyYaFTu', 
+                       '_$s7DockKit0A9AccessoryC0C6EventsV8IteratorVMa', '_$s7DockKit0A9AccessoryC0C6EventsV8IteratorVMn', 
+                       '_$s7DockKit0A9AccessoryC0C6EventsV8IteratorVN', '_$s7DockKit0A9AccessoryC0C6EventsV8IteratorVScIAAMc', 
+                       '_$s7DockKit0A9AccessoryC0C6EventsVMa', '_$s7DockKit0A9AccessoryC0C6EventsVMn', 
+                       '_$s7DockKit0A9AccessoryC0C6EventsVN', '_$s7DockKit0A9AccessoryC0C6EventsVSciAAMc', 
+                       '_$s7DockKit0A9AccessoryC10IdentifierV16debugDescriptionSSvg', 
                        '_$s7DockKit0A9AccessoryC10IdentifierV16debugDescriptionSSvpMV', 
                        '_$s7DockKit0A9AccessoryC10IdentifierV2eeoiySbAE_AEtFZ', '_$s7DockKit0A9AccessoryC10IdentifierV4hash4intoys6HasherVz_tF', 
                        '_$s7DockKit0A9AccessoryC10IdentifierV4nameSSvg', '_$s7DockKit0A9AccessoryC10IdentifierV4nameSSvpMV', 
@@ -98,6 +114,7 @@ exports:
                        '_$s7DockKit0A9AccessoryC14setFramingModeyyAC0eF0OYaKF', '_$s7DockKit0A9AccessoryC14setFramingModeyyAC0eF0OYaKFTu', 
                        '_$s7DockKit0A9AccessoryC14setOrientation_8duration8relativeSo10NSProgressCSo10SPVector3Da_s8DurationVSbtKF', 
                        '_$s7DockKit0A9AccessoryC14setOrientation_8duration8relativeSo10NSProgressCSo12SPRotation3Da_s8DurationVSbtKF', 
+                       '_$s7DockKit0A9AccessoryC15accessoryEventsAC0cE0Vvg', '_$s7DockKit0A9AccessoryC15accessoryEventsAC0cE0VvpMV', 
                        '_$s7DockKit0A9AccessoryC15firmwareVersionSSSgvg', '_$s7DockKit0A9AccessoryC15firmwareVersionSSSgvpMV', 
                        '_$s7DockKit0A9AccessoryC16debugDescriptionSSvg', '_$s7DockKit0A9AccessoryC16debugDescriptionSSvpMV', 
                        '_$s7DockKit0A9AccessoryC16regionOfInterestSo6CGRectVvg', 

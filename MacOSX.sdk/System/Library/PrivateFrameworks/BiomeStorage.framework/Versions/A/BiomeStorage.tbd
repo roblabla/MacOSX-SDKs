@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomeStorage.framework/Versions/A/BiomeStorage'
-current-version: 123.2.7
+current-version: 123.5.23
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -22,7 +22,7 @@ exports:
                        BMStreamDatastoreOutOfProcessWriter, BMStreamDatastorePruner, 
                        BMStreamDatastoreReader, BMStreamDatastoreWriter, BMStreamMetadata, 
                        BMStreamTombstoneEventDatastore, BMTombstoneEvent, BMTombstoneEventEnumerator, 
-                       BMWeakProxy, BMWriteServer, BMWriteServerExported, BMWriteService ]
+                       BMWriteServer, BMWriteServerExported, BMWriteService ]
     objc-ivars:      [ BMPBStoreBookmark._has, BMPBStoreBookmark._iterationStartTime, 
                        BMPBStoreBookmark._offset, BMPBStoreBookmark._segmentName, 
                        BMPBStoreBookmark._streamId, BMPBTombstoneEvent._has, BMPBTombstoneEvent._length, 

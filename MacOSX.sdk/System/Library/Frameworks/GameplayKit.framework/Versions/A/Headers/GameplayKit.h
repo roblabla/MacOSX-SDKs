@@ -9,6 +9,8 @@
 
 #import <GameplayKit/GameplayKitBase.h>
 
+#import <GameplayKit/GKVersion.h>
+
 #import <GameplayKit/GKAgent.h>
 #import <GameplayKit/GKBehavior.h>
 #import <GameplayKit/GKComponent.h>

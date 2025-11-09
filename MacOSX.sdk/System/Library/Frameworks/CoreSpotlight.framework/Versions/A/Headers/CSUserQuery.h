@@ -6,7 +6,8 @@
 //
 
 #import <CoreSpotlight/CSBase.h>
-#import <CoreSpotlight/CoreSpotlight.h>
+#import <CoreSpotlight/CSSearchQuery.h>
+#import <CoreSpotlight/CSSuggestion.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

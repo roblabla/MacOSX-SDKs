@@ -10,7 +10,7 @@
 \fBxctspawn\fR \fI/path/to/test_run_file.xctestrun\fR [options]
 
 .SH DESCRIPTION
-To run your tests, point the tool at the xctestrun file sitting alongside your built tests. The tool will execute the tests and generate an Xcode result bundle containing the test results (pass/fail/skipped/xfail status, activities, attachments, crash reports, etc.). Note that the tests must be built for the platform you are running them on.
+To run your tests, point the tool at the xctestproducts file or the xctestrun file sitting alongside your built tests. The tool will execute the tests and generate an Xcode result bundle containing the test results (pass/fail/skipped/xfail status, activities, attachments, crash reports, etc.). Note that the tests must be built for the platform you are running them on.
 .PP
 If this tool is interrupted via SIGINT while tests are still executing, it will still generate a result bundle containing the test results that have been produced so far.
 
@@ -36,6 +36,9 @@ Constrains testing by specifying tests to include, and excluding other tests. Th
 .TP
 \fB\-\-skip\-testing\fR \fItest identifier\fR
 Constrains testing by specifying tests to exclude, but including other tests. The test identifier takes the form `TestTargetName[/TestClassName][/TestMethodName]`, e.g. `MyTestTarget/MyTestClass/testFoo` (ObjC) or `MyTestTarget/MyTestClass/testFoo()` (Swift).
+.TP
+\fB\-\-test\-plan\fR
+Specifies which test plan in the xctestproducts to run.
 .TP
 \fB\-\-parallel\-testing\-enabled\fR \fIYES\fR | \fINO\fR
 Overrides the per-target setting in the scheme/test plan.
@@ -78,6 +81,9 @@ Enable or disable tests repeating in a new process for each repetition. Must be 
 .TP
 \fB\-\-skip\-app\-reinstallation\fR
 Don't install an app (either a test runner app or a UI target app) from the build products if there is already a copy of the app installed on the system. If there isn't a copy on the system, the app will still be installed.
+.TP
+\fB\-\-disable\-code\-coverage\fR
+If the tests were built with code coverage enabled, this option will skip the generation of a coverage report.
 .TP
 \fB\-\-arg\fR \fIvalue\fR
 A command-line argument to supply to any test runner process that is launched during test execution. Can be specified multiple times.

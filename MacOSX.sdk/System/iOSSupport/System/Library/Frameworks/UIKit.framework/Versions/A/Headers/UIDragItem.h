@@ -22,12 +22,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 @property (nonatomic, readonly) __kindof NSItemProvider *itemProvider;
 
-/* Use `localObject` to attach additional information to
+/**
+ * Use `localObject` to attach additional information to
  * this drag item, visible only inside the app that started the drag.
  */
 @property (nonatomic, strong, nullable) id localObject;
 
-/* Use `previewProvider` to change the preview for an item.
+/**
+ * Use `previewProvider` to change the preview for an item.
  *
  * Each item is usually given a preview when the drag begins,
  * either by the UIDragInteractionDelegate's `-dragInteraction:previewForLiftingItem:session:`
@@ -41,6 +43,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
  * To hide the preview, set `previewProvider` to a block that returns nil.
  */
 @property (nonatomic, copy, nullable) UIDragPreview * _Nullable (^previewProvider)(void);
+
+/**
+ * Requests for the drop preview to be updated if an active drop animation is in progress, and can handle updates.
+ * If no active drop animation is in progress for the specified item, then nothing happens.
+ */
+- (void)setNeedsDropPreviewUpdate API_AVAILABLE(ios(17.4));
 
 @end
 

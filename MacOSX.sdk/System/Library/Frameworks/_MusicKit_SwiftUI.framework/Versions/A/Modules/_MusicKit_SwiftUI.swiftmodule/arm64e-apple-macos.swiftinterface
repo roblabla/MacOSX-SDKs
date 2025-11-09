@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -module-name _MusicKit_SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 4023.340.1
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 4023.540.1 -module-name _MusicKit_SwiftUI
 import CoreGraphics
 import Foundation
 @_exported import MusicKit
@@ -10,7 +9,7 @@ import SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 @_Concurrency.MainActor(unsafe) public struct ArtworkImage : SwiftUI.View {
   @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat)
   @_Concurrency.MainActor(unsafe) public init(_ artwork: MusicKit.Artwork, width: CoreFoundation.CGFloat)
@@ -23,11 +22,13 @@ import _SwiftConcurrencyShims
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct MusicSubscriptionOffer {
 }
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension SwiftUI.View {
   public func musicSubscriptionOffer(isPresented: SwiftUI.Binding<Swift.Bool>, options: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options = .default, onLoadCompletion: @escaping ((any Swift.Error)?) -> Swift.Void = { _ in }) -> some SwiftUI.View
   
@@ -35,6 +36,7 @@ extension SwiftUI.View {
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer {
   public struct Action : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public init(_ rawValue: Swift.String)
@@ -65,12 +67,14 @@ extension _MusicKit_SwiftUI.MusicSubscriptionOffer {
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Options : Swift.Equatable {
   public static func == (a: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options, b: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options) -> Swift.Bool
 }
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Options : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -80,6 +84,7 @@ extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Options : Swift.Hashable {
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Options : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
@@ -88,6 +93,7 @@ extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Options : Swift.CustomStringC
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Action : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
@@ -96,6 +102,7 @@ extension _MusicKit_SwiftUI.MusicSubscriptionOffer.Action : Swift.CustomStringCo
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension _MusicKit_SwiftUI.MusicSubscriptionOffer.MessageIdentifier : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get

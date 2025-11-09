@@ -7,7 +7,8 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ FindMyCloudKitTests, findmylocateagent, findmylocated, findmylocatedTests ]
+    clients:         [ FindMyCloudKitTests, findmylocateagent, findmylocated, findmylocatedTests, 
+                       searchpartyd, searchpartydTests, searchpartyuseragent ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -75,7 +76,6 @@ exports:
                        '_$s14FindMyCloudKit0cD11CoordinatorC12AccountStateO10restrictedyA2EmFWC', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC12AccountStateO11descriptionSSvg', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC12AccountStateO11descriptionSSvpMV', 
-                       '_$s14FindMyCloudKit0cD11CoordinatorC12AccountStateO13apnsConnectedyA2EmFWC', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC12AccountStateO16manateeAvailableyA2EmFWC', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC12AccountStateO18manateeUnavailableyA2EmFWC', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC12AccountStateO2eeoiySbAE_AEtFZ', 
@@ -117,6 +117,9 @@ exports:
                        '_$s14FindMyCloudKit0cD11CoordinatorC19modifySubscriptions6saving8deleting8databaseSDySSs6ResultOySo14CKSubscriptionCs5Error_pGG11saveResults_SDySSAIyytsAL_pGG06deleteO0tSayAKG_SaySSGAC8DatabaseOtYaKFTj', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC19modifySubscriptions6saving8deleting8databaseSDySSs6ResultOySo14CKSubscriptionCs5Error_pGG11saveResults_SDySSAIyytsAL_pGG06deleteO0tSayAKG_SaySSGAC8DatabaseOtYaKFTjTu', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC19modifySubscriptions6saving8deleting8databaseSDySSs6ResultOySo14CKSubscriptionCs5Error_pGG11saveResults_SDySSAIyytsAL_pGG06deleteO0tSayAKG_SaySSGAC8DatabaseOtYaKFTq', 
+                       '_$s14FindMyCloudKit0cD11CoordinatorC21connectionStateStreamScSySbGyYaFTj', 
+                       '_$s14FindMyCloudKit0cD11CoordinatorC21connectionStateStreamScSySbGyYaFTjTu', 
+                       '_$s14FindMyCloudKit0cD11CoordinatorC21connectionStateStreamScSySbGyYaFTq', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC5ErrorO12missingTokenyA2EmFWC', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC5ErrorO13missingResultyA2EmFWC', 
                        '_$s14FindMyCloudKit0cD11CoordinatorC5ErrorO18manateeUnavailableyA2EmFWC', 

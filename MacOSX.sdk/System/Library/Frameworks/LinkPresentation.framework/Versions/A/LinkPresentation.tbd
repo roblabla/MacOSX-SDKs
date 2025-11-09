@@ -2,15 +2,15 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/LinkPresentation.framework/Versions/A/LinkPresentation'
-current-version: 240.3.4
+current-version: 240.13
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LPErrorDomain, _LPLinkMetadataTypeIdentifier, _LPLogChannelFetching, 
-                       _LPLogChannelFilesystem, _LPLogChannelPlugin, _LPLogChannelSerialization, 
-                       _LPLogChannelSnapshotGenerator, _LPLogChannelTranscoding, 
-                       _LPLogChannelUI, _LPLogChannelVideo, _LPYouTubePlayerErrorDomain, 
-                       _nameForSizeClass, _nameForStyle, _performForEachSizeClass, 
-                       _performForEachStyle ]
+                       _LPLogChannelFilesystem, _LPLogChannelImage, _LPLogChannelPlugin, 
+                       _LPLogChannelSerialization, _LPLogChannelSnapshotGenerator, 
+                       _LPLogChannelTranscoding, _LPLogChannelUI, _LPLogChannelVideo, 
+                       _LPYouTubePlayerErrorDomain, _nameForSizeClass, _nameForStyle, 
+                       _performForEachSizeClass, _performForEachStyle ]
     objc-classes:    [ LPARAsset, LPARAssetAttachmentSubstitute, LPARAssetMetadata, 
                        LPARAssetProperties, LPAppLinkPresentationProperties, LPAppStoreStoryMetadata, 
                        LPAppearanceDependentValue, LPAppleMusicTVShowMetadata, LPAppleNewsMetadata, 
@@ -48,5 +48,5 @@ exports:
                        LPiTunesMediaPodcastEpisodeMetadata, LPiTunesMediaPodcastMetadata, 
                        LPiTunesMediaRadioMetadata, LPiTunesMediaSoftwareMetadata, 
                        LPiTunesMediaSongMetadata, LPiTunesMediaTVEpisodeMetadata, 
-                       LPiTunesMediaTVSeasonMetadata, LPiTunesUserProfileMetadata ]
+                       LPiTunesMediaTVSeasonMetadata, LPiTunesStoreInformation, LPiTunesUserProfileMetadata ]
 ...

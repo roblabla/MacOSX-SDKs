@@ -67,3 +67,21 @@
 #import <CoreML/MLCPUComputeDevice.h>
 #import <CoreML/MLGPUComputeDevice.h>
 #import <CoreML/MLNeuralEngineComputeDevice.h>
+
+#import <CoreML/MLModelStructure.h>
+#import <CoreML/MLModelStructureNeuralNetwork.h>
+#import <CoreML/MLModelStructureNeuralNetworkLayer.h>
+#import <CoreML/MLModelStructurePipeline.h>
+#import <CoreML/MLModelStructureProgram.h>
+#import <CoreML/MLModelStructureProgramArgument.h>
+#import <CoreML/MLModelStructureProgramBinding.h>
+#import <CoreML/MLModelStructureProgramBlock.h>
+#import <CoreML/MLModelStructureProgramFunction.h>
+#import <CoreML/MLModelStructureProgramNamedValueType.h>
+#import <CoreML/MLModelStructureProgramOperation.h>
+#import <CoreML/MLModelStructureProgramValue.h>
+#import <CoreML/MLModelStructureProgramValueType.h>
+
+#import <CoreML/MLComputePlan.h>
+#import <CoreML/MLComputePlanCost.h>
+#import <CoreML/MLComputePlanDeviceUsage.h>

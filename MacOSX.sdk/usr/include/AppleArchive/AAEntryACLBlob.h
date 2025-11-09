@@ -32,7 +32,7 @@ APPLE_ARCHIVE_ENUM(AAACEQualifierTypes, uint32_t) {
 } APPLE_ARCHIVE_SWIFT_PRIVATE;
 
 // tag, permissions, flags for each ACL entry (ACE)
-typedef acl_tag_t AAACETag APPLE_ARCHIVE_SWIFT_PRIVATE;
+typedef uint32_t AAACETag APPLE_ARCHIVE_SWIFT_PRIVATE;
 typedef uint64_t AAACEPermSet APPLE_ARCHIVE_SWIFT_PRIVATE;
 typedef uint64_t AAACEFlagSet APPLE_ARCHIVE_SWIFT_PRIVATE;
 

@@ -11,18 +11,3 @@ module XPC [system] {
 
 module XPCOverlay [system] {
 }
-
-module Bootstrap [system] {
-	header "bootstrap.h"
-	export *
-}
-
-module launch [system] {
-	header "launch.h"
-	export *
-}
-
-module vproc [system] {
-	header "vproc.h"
-	export *
-}

@@ -6,6 +6,7 @@
 //  Copyright © 2022 Apple Inc. All rights reserved.
 //
 
+#import <VideoSubscriberAccount/VSAppleSubscription.h>
 #import <VideoSubscriberAccount/VideoSubscriberAccountDefines.h>
 
 #import <Foundation/Foundation.h>
@@ -24,6 +25,7 @@ typedef NS_ENUM(NSInteger, VSOriginatingDeviceCategory) {
 
 VS_EXPORT API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst)
 NS_REFINED_FOR_SWIFT
+NS_SWIFT_SENDABLE
 @interface VSUserAccount : NSObject
 
 // The URL pointing to the application JS that can respond to account update requests, or nil if JS updates are not supported.
@@ -74,6 +76,10 @@ NS_REFINED_FOR_SWIFT
 
 // The type of device the VSUserAccount was registered on.
 @property (nonatomic, readonly) VSOriginatingDeviceCategory deviceCategory;
+
+// The Apple service subscription associated with the user account.
+@property (nonatomic, strong, nullable) VSAppleSubscription *appleSubscription
+    API_AVAILABLE(ios(17.4), tvos(17.4), macos(14.4), visionos(1.1)) API_UNAVAILABLE(watchos, macCatalyst);
 
 // Use -initWithAccountType:updateURL: or -initWithAccountProviderIdentifier: instead.
 VS_INIT_UNAVAILABLE

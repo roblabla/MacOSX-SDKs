@@ -5,7 +5,6 @@
 //  Copyright © 2016 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CallKit/CXBase.h>
 #import <CallKit/CXCallDirectory.h>
 

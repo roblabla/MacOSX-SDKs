@@ -395,7 +395,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  
     Changing the value of this property will not affect the movie fragment interval of the file currently being written, if there is one.
 
-    For best writing performance on external storage devices, set the movieFragmentInterval to 10 seconds or greater.
+    For best writing performance on external storage devices, set the movieFragmentInterval to 10 seconds or greater. If the size of a movie fragment is greater than or equal to 2GB, an interval is added at 2GB mark.
  */
 @property(nonatomic) CMTime movieFragmentInterval;
 

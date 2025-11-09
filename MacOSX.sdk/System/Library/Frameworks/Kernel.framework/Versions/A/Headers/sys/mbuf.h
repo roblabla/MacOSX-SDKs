@@ -107,6 +107,25 @@
 #define MT_TAG          16      /* volatile metadata associated to pkts */
 #define MT_MAX          32      /* enough? */
 
+enum {
+	MTF_FREE        = (1 << MT_FREE),
+	MTF_DATA        = (1 << MT_DATA),
+	MTF_HEADER      = (1 << MT_HEADER),
+	MTF_SOCKET      = (1 << MT_SOCKET),
+	MTF_PCB         = (1 << MT_PCB),
+	MTF_RTABLE      = (1 << MT_RTABLE),
+	MTF_HTABLE      = (1 << MT_HTABLE),
+	MTF_ATABLE      = (1 << MT_ATABLE),
+	MTF_SONAME      = (1 << MT_SONAME),
+	MTF_SOOPTS      = (1 << MT_SOOPTS),
+	MTF_FTABLE      = (1 << MT_FTABLE),
+	MTF_RIGHTS      = (1 << MT_RIGHTS),
+	MTF_IFADDR      = (1 << MT_IFADDR),
+	MTF_CONTROL     = (1 << MT_CONTROL),
+	MTF_OOBDATA     = (1 << MT_OOBDATA),
+	MTF_TAG         = (1 << MT_TAG),
+};
+
 
 /*
  * Mbuf statistics (legacy).
@@ -181,7 +200,6 @@ typedef struct mb_class_stat {
 	u_int32_t       mbcl_mc_waiter_cnt;  /* # waiters on the cache */
 	u_int32_t       mbcl_mc_wretry_cnt;  /* # of wait retries */
 	u_int32_t       mbcl_mc_nwretry_cnt; /* # of no-wait retry attempts */
-	u_int32_t       mbcl_peak_reported; /* last usage peak reported */
 	u_int32_t       mbcl_reserved[7];    /* for future use */
 } mb_class_stat_t;
 

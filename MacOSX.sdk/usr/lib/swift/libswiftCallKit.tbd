@@ -10,9 +10,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCallKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftCallKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCallKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftCallKit.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftCallKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftCallKit.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvM', 
+                       '$ld$install_name$os10.14$@rpath/libswiftCallKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftCallKit.dylib', 
+                       '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvM', 
                        '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvg', 
                        '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvpMV', 
                        '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvs', 

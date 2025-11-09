@@ -39,6 +39,8 @@
 
 
 #if TARGET_OS_IOS && !TARGET_OS_VISION
+#import <AVKit/AVCaptureEventInteraction.h>
+#import <AVKit/AVCaptureEvent.h>
 #import <AVKit/AVError.h>
 #import <AVKit/AVPictureInPictureController.h>
 #import <AVKit/AVPictureInPictureController_AVSampleBufferDisplayLayerSupport.h>
@@ -79,6 +81,8 @@
 
 #if TARGET_OS_VISION
 #import <AVKit/AVDisplayManager.h>
+#import <AVKit/AVCaptureEventInteraction.h>
+#import <AVKit/AVCaptureEvent.h>
 #import <AVKit/AVError.h>
 #import <AVKit/AVInterstitialTimeRange.h>
 #import <AVKit/AVPictureInPictureController.h>

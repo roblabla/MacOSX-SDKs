@@ -3,10 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftShazamKit.dylib'
-current-version: 236.12
+current-version: 238.15
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22UniformTypeIdentifiers6UTTypeV9ShazamKitE15shazamSignatureACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV9ShazamKitE19shazamCustomCatalogACvgZ', 
                        '_$s9ShazamKit16SHManagedSessionC11Observation10ObservableAAMc', 

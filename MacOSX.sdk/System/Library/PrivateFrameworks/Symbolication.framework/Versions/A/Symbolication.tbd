@@ -1,18 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication'
-current-version: 64561.91.2
+current-version: 64565.70.2
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _VMUBacktraceIsExcludedMarker, _VMUCreateRootNodeMarkingMap, 
                        _VMUDirectedGraphCompatibilityVersionNumberInGraphKey, _VMUDirectedGraphToolCompatibilityVersionKey, 
-                       _VMUEnumerateVMAnnotatedMallocObjectsWithBlock, _VMUGetFlagsForAllVMRegionStatistics, 
-                       _VMUGraphNodeTypeDescription, _VMUGraphNodeType_IsAddressValid, 
-                       _VMUGraphNodeType_IsRoot, _VMUGraphNodeType_IsVMRegion, _VMUIntersectionRange, 
-                       _VMUIsOwningReference, _VMULiteZoneIndex, _VMUMarkObject, 
-                       _VMUMemorySizeString, _VMUOAHRuntimeLocation, _VMUOptionParserError, 
-                       _VMUOptionParserRegisterFlag, _VMUOptionParserRegisterFlagInternal, 
+                       _VMUEnumerateVMAnnotatedMallocObjectsWithBlock, _VMUExclaveOrDarwinRegionTypeDescriptionForTagShareProtAndPager, 
+                       _VMUGetFlagsForAllVMRegionStatistics, _VMUGraphNodeTypeDescription, 
+                       _VMUGraphNodeType_IsAddressValid, _VMUGraphNodeType_IsRoot, 
+                       _VMUGraphNodeType_IsVMRegion, _VMUIntersectionRange, _VMUIsOwningReference, 
+                       _VMULiteZoneIndex, _VMUMarkObject, _VMUMemorySizeString, _VMUOAHRuntimeLocation, 
+                       _VMUOptionParserError, _VMUOptionParserRegisterFlag, _VMUOptionParserRegisterFlagInternal, 
                        _VMUPlatformForTask, _VMUPlatformNameForPlatform, _VMUPlatformNameForTask, 
                        _VMUPurgeableDisplayCharacter, _VMURangeContainsRange, _VMURangeDescription, 
                        _VMURangeIntersectsOrAbutsRange, _VMURangeIntersectsRange, 
@@ -70,8 +72,8 @@ exports:
                        VMUStackLogReaderBase._excludedFrames, VMUStackLogReaderBase._regionTracker, 
                        VMUStackLogReaderBase._symbolicator, VMUStackLogReaderBase._task, 
                        VMUStackLogReaderBase._usesCoreFile, VMUStackLogReaderBase._usesLiteMode, 
-                       VMUSwiftRuntimeInfo._nativeWeakReferenceMarkerMask, VMUSwiftRuntimeInfo._nativeWeakReferenceMarkerValue, 
-                       VMUSwiftRuntimeInfo._nativeWeakReferencePointerIsSideTable, 
+                       VMUStackLogReaderBase._vmuTask, VMUSwiftRuntimeInfo._nativeWeakReferenceMarkerMask, 
+                       VMUSwiftRuntimeInfo._nativeWeakReferenceMarkerValue, VMUSwiftRuntimeInfo._nativeWeakReferencePointerIsSideTable, 
                        VMUSwiftRuntimeInfo._nativeWeakReferencePointerMask, VMUSwiftRuntimeInfo._refcountIsSideTableMarkerMask, 
                        VMUSwiftRuntimeInfo._refcountIsSideTableMarkerValue, VMUSwiftRuntimeInfo._runtimeHasStableABI, 
                        VMUSwiftRuntimeInfo._sideTableLayoutWithScannableOwnerPointer, 
@@ -80,8 +82,8 @@ exports:
                        VMUSwiftRuntimeInfo._sideTablePointerRightShift, VMUSwiftRuntimeInfo._unownedExtraDataLayout, 
                        VMUSymbol._name, VMUSymbol._sourceInfo, VMUSymbolicator._symbolicator, 
                        VMUVMRegion.coalesced_region_count, VMUVMRegion.dirty_size, 
-                       VMUVMRegion.external_pager, VMUVMRegion.is_macho_region, VMUVMRegion.is_submap, 
-                       VMUVMRegion.is_unused_data_page_shared_with_active_content, 
+                       VMUVMRegion.exclaveFlags, VMUVMRegion.external_pager, VMUVMRegion.isExclaveRegion, 
+                       VMUVMRegion.is_macho_region, VMUVMRegion.is_submap, VMUVMRegion.is_unused_data_page_shared_with_active_content, 
                        VMUVMRegion.is_unused_data_region, VMUVMRegion.is_wired, VMUVMRegion.mallocBlockCount, 
                        VMUVMRegion.mallocTypeFlag, VMUVMRegion.maxProt, VMUVMRegion.nesting_depth, 
                        VMUVMRegion.object_id, VMUVMRegion.offset, VMUVMRegion.pages_dirtied, 

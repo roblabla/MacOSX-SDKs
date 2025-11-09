@@ -5,7 +5,8 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
 install-name:    '/System/Library/Frameworks/CreateMLComponents.framework/Versions/A/CreateMLComponents'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Annotation18CreateMLComponents19SupervisedEstimatorPTl', 
                        '_$s10Annotation18CreateMLComponents26SupervisedTabularEstimatorPTl', 
                        '_$s10Annotation18CreateMLComponents27SupervisedTemporalEstimatorPTl', 
@@ -3458,15 +3459,15 @@ exports:
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelV16debugDescriptionSSvpMV', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelV27updatePrecisionRecallCurvesyyqd__YaKSlRd__AA16AnnotatedFeatureVy6CoreML13MLShapedArrayVyxGShyq_GG7ElementRtd__lF', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelV27updatePrecisionRecallCurvesyyqd__YaKSlRd__AA16AnnotatedFeatureVy6CoreML13MLShapedArrayVyxGShyq_GG7ElementRtd__lFTu', 
+                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelV4fromACyxq_Gs7Decoder_p_tKcfC', 
+                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelV6encode2toys7Encoder_p_tKF', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelV7applied2to12eventHandlerAA26ClassificationDistributionVyq_G6CoreML13MLShapedArrayVyxG_yAA5EventVYbcSgtKF', 
-                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVAASERzrlE6encode2toys7Encoder_p_tKF', 
-                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVAASeRzrlE4fromACyxq_Gs7Decoder_p_tKcfC', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVMa', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVMn', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVyxq_GAA11TransformerAAMc', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVyxq_GAA11TransformerAAWP', 
-                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVyxq_GSEAASERzrlMc', 
-                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVyxq_GSeAASeRzrlMc', 
+                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVyxq_GSEAAMc', 
+                       '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVyxq_GSeAAMc', 
                        '_$s18CreateMLComponents46FullyConnectedNetworkMultiLabelClassifierModelVyxq_Gs28CustomDebugStringConvertibleAAMc', 
                        '_$s18CreateMLComponents46TemporalTransformerToUpdatableEstimatorAdaptorV04makeD0xyF', 
                        '_$s18CreateMLComponents46TemporalTransformerToUpdatableEstimatorAdaptorV11transformerxvg', 

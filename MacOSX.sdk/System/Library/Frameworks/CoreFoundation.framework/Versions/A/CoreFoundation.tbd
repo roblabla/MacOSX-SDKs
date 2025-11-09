@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 2202
+current-version: 2420
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -601,11 +601,11 @@ exports:
                        __CFCharacterSetCompact, __CFCharacterSetCreateKeyedCodingString, 
                        __CFCharacterSetFast, __CFCharacterSetGetKeyedCodingBuiltinType, 
                        __CFCharacterSetGetKeyedCodingRange, __CFCharacterSetGetKeyedCodingType, 
-                       __CFCharacterSetIsInverted, __CFCharacterSetIsMutable, __CFCharacterSetSetIsInverted, 
-                       __CFCopyServerVersionDictionary, __CFCopySupplementalVersionDictionary, 
-                       __CFCopySystemVersionDictionary, __CFCopySystemVersionDictionaryValue, 
-                       __CFCopySystemVersionPlatformDictionary, __CFCreateArrayStorage, 
-                       __CFCreateCharacterSetFromUSet, __CFCreateContainerURLForSecurityApplicationGroupIdentifier, 
+                       __CFCharacterSetIsInverted, __CFCharacterSetIsMutable, __CFCharacterSetIsValidRange, 
+                       __CFCharacterSetSetIsInverted, __CFCopyServerVersionDictionary, 
+                       __CFCopySupplementalVersionDictionary, __CFCopySystemVersionDictionary, 
+                       __CFCopySystemVersionDictionaryValue, __CFCopySystemVersionPlatformDictionary, 
+                       __CFCreateArrayStorage, __CFCreateCharacterSetFromUSet, __CFCreateContainerURLForSecurityApplicationGroupIdentifier, 
                        __CFCreateContainerURLForSecurityApplicationIdentifierGroupIdentifierAndUser, 
                        __CFDataFindBytes, __CFDateFormatterCreateAttributedStringAndFieldsWithAbsoluteTime, 
                        __CFDateFormatterCreateSkeletonFromTemplate, __CFDictionaryFastEnumeration, 
@@ -613,9 +613,10 @@ exports:
                        __CFDictionarySetKVOBit, __CFDiscorporateMemoryAllocate, __CFDiscorporateMemoryDeallocate, 
                        __CFDiscorporateMemoryDematerialize, __CFDiscorporateMemoryMaterialize, 
                        __CFDoExceptionOperation, __CFDoubledStringCreate, __CFEnableZombies, 
-                       __CFErrorCreateDebugDescription, __CFErrorCreateLocalizedDescription, 
-                       __CFErrorCreateLocalizedFailureReason, __CFErrorCreateLocalizedRecoverySuggestion, 
-                       __CFErrorCreateRedactedDescription, __CFErrorCreateUnlocalizedDebugDescription, 
+                       __CFErrorCreateCallStackReturnAddresses, __CFErrorCreateDebugDescription, 
+                       __CFErrorCreateLocalizedDescription, __CFErrorCreateLocalizedFailureReason, 
+                       __CFErrorCreateLocalizedRecoverySuggestion, __CFErrorCreateRedactedDescription, 
+                       __CFErrorCreateUnlocalizedDebugDescription, __CFErrorSetCallStackCaptureEnabled, 
                        __CFExecutableLinkedOnOrAfter, __CFExtensionIsValidToAppend, 
                        __CFExtensionUniCharsIsValidToAppend, __CFFileCoordinateReadWriteItemsAtURLs, 
                        __CFFileCoordinateReadingItemAtURL, __CFFileCoordinateReadingItemAtURL2, 
@@ -1232,7 +1233,8 @@ exports:
                        __CFPropertListCreateFromFrozen, __CFPropertyListCopyShared, 
                        __CFPropertyListCreateFrozen, __CFPropertyListShare, __CFRunLoopSetCurrent, 
                        __CFStringTokenizerCreateCurrentTokenLemma, __CFStringTokenizerSetMetadata, 
-                       __CFURLBookmarkDataCompare, __CFURLBookmarkDataToAliasHandle, 
+                       __CFURLBookmarkCreateByAddingSecurityScope, __CFURLBookmarkDataCompare, 
+                       __CFURLBookmarkDataToAliasHandle, __CFURLBookmarkIsSecurityScoped, 
                        __CFURLCopyAliasFromPropertyListRepresentation, __CFURLCopyExtendedPropertyListPrimitive, 
                        __CFURLCopyExtendedPropertyListRepresentation, __CFURLCreateFileReferenceURLFromFSRef, 
                        __CFURLCreateFileReferenceURLFromIDs, __CFURLGetFSRef, __CFURLGetObjectInformationNoIO, 

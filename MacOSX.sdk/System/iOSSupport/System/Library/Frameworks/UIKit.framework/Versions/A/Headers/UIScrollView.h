@@ -56,6 +56,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic)         CGSize                       contentSize;                    // default CGSizeZero
 @property(nonatomic)         UIEdgeInsets                 contentInset;                   // default UIEdgeInsetsZero. add additional scroll area around content
 
+// A unit point that describes how to align the scroll view content when the content size is smaller than the scroll view bounds.
+// For example, (0, 0) aligns the content to the top left, (0.5, 0.5) centers the content, and (0.5, 1.0) would align the content to the bottom center.
+// Default: CGPointZero
+@property (nonatomic) CGPoint contentAlignmentPoint API_AVAILABLE(ios(17.4));
+
 /* When contentInsetAdjustmentBehavior allows, UIScrollView may incorporate
  its safeAreaInsets into the adjustedContentInset.
  */
@@ -87,11 +92,35 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @property(nullable,nonatomic,weak) id<UIScrollViewDelegate>        delegate;                       // default nil. weak reference
 @property(nonatomic,getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;         // default NO. if YES, try to lock vertical or horizontal scrolling while dragging
-@property(nonatomic)         BOOL                         bounces;                        // default YES. if YES, bounces past edge of content and back again
+
+// If YES, bounces past the edge of the content and back again.
+// Setting this property is a convenience for setting both `bouncesHorizontally` and `bouncesVertically`.
+// Only returns YES if both `bouncesHorizontally` and `bouncesVertically` are YES.
+// Default: YES
+@property (nonatomic) BOOL bounces;
+
+// If YES, bounces past the left and right edges of the content and back again.
+// Setting the `bounces` property will set this axis-specific value.
+// Default: YES
+@property (nonatomic) BOOL bouncesHorizontally API_AVAILABLE(ios(17.4));
+
+// If YES, bounces past the top and bottom edges of the content and back again.
+// Setting the `bounces` property will set this axis-specific value.
+// Default: YES
+@property (nonatomic) BOOL bouncesVertically API_AVAILABLE(ios(17.4));
+
 @property(nonatomic)         BOOL                         alwaysBounceVertical;           // default NO. if YES and bounces is YES, even if content is smaller than bounds, allow drag vertically
 @property(nonatomic)         BOOL                         alwaysBounceHorizontal;         // default NO. if YES and bounces is YES, even if content is smaller than bounds, allow drag horizontally
 @property(nonatomic,getter=isPagingEnabled) BOOL          pagingEnabled API_UNAVAILABLE(tvos);// default NO. if YES, stop on multiples of view bounds
 @property(nonatomic,getter=isScrollEnabled) BOOL          scrollEnabled;                  // default YES. turn off any dragging temporarily
+
+// If YES, scrolling horizontally past the left and right edges of the content will start scrolling parent scroll views.
+// Default: YES
+@property (nonatomic) BOOL transfersHorizontalScrollingToParent API_AVAILABLE(ios(17.4));
+
+// If YES, scrolling vertically past the top and bottom edges of the content will start scrolling parent scroll views.
+// Default: YES
+@property (nonatomic) BOOL transfersVerticalScrollingToParent API_AVAILABLE(ios(17.4));
 
 @property(nonatomic)         BOOL                         showsVerticalScrollIndicator;   // default YES. show indicator while we are tracking. fades out after tracking
 @property(nonatomic)         BOOL                         showsHorizontalScrollIndicator; // default YES. show indicator while we are tracking. fades out after tracking
@@ -107,7 +136,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;  // animate at constant velocity to new offset
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated;         // scroll so rect is just visible (nearest edges). nothing if rect completely visible
 
-- (void)flashScrollIndicators;             // displays the scroll indicators for a short time. This should be done whenever you bring the scroll view to front.
+// Displays the scroll indicators for a short time. This should be done whenever you bring the scroll view to front.
+- (void)flashScrollIndicators;
+
+// Shows scroll indicators immediately as a result of any contentOffset changes performed within the block.
+// Scroll indicators are only shown on axes where the contentOffset changes.
+// If contentOffset is set without animation, the scroll indicators will fade out after a delay.
+// If contentOffset is set with animation, the scroll indicators will fade out when the animation completes.
+- (void)withScrollIndicatorsShownForContentOffsetChanges:(void (NS_NOESCAPE ^)(void))changes API_AVAILABLE(ios(17.4));
 
 /*
  Scrolling with no scroll bars is a bit complex. on touch down, we don't know if the user will want to scroll or track a subview like a control.
@@ -117,9 +153,19 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
  you can remove the delay in delivery of touchesBegan:withEvent: to subviews by setting delaysContentTouches to NO.
  */
 
-@property(nonatomic,readonly,getter=isTracking)     BOOL tracking;        // returns YES if user has touched. may not yet have started dragging
-@property(nonatomic,readonly,getter=isDragging)     BOOL dragging;        // returns YES if user has started scrolling. this may require some time and or distance to move to initiate dragging
-@property(nonatomic,readonly,getter=isDecelerating) BOOL decelerating;    // returns YES if user isn't dragging (touch up) but scroll view is still moving
+// Returns YES if user has touched. May not yet have started dragging
+@property(nonatomic, readonly, getter=isTracking) BOOL tracking;
+
+// Returns YES if user has started scrolling. It may require some time and/or distance to move to initiate dragging
+@property(nonatomic, readonly, getter=isDragging) BOOL dragging;
+
+// Returns YES if user isn't dragging (touch up) but scroll view is still moving
+@property(nonatomic, readonly, getter=isDecelerating) BOOL decelerating;
+
+// Returns YES if the scroll view is currently animating a `contentOffset` change
+// For example, this could be from a `setContentOffset:animated:` call
+// Note that deceleration will *not* cause this property to be YES
+@property (nonatomic, readonly, getter=isScrollAnimating) BOOL scrollAnimating API_AVAILABLE(ios(17.4));
 
 @property(nonatomic) BOOL delaysContentTouches;       // default is YES. if NO, we immediately call -touchesShouldBegin:withEvent:inContentView:. this has no effect on presses
 @property(nonatomic) BOOL canCancelContentTouches;    // default is YES. if NO, then once we start tracking, we don't try to drag if the touch moves. this has no effect on presses
@@ -148,14 +194,29 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)setZoomScale:(CGFloat)scale animated:(BOOL)animated API_AVAILABLE(ios(3.0));
 - (void)zoomToRect:(CGRect)rect animated:(BOOL)animated API_AVAILABLE(ios(3.0));
 
-@property(nonatomic) BOOL  bouncesZoom;          // default is YES. if set, user can go past min/max zoom while gesturing and the zoom will animate to the min/max value at gesture end
+// If set, the user can zoom past the min/max scale while gesturing and the scale will animate to the min/max value when the gesture ends
+// Default: YES
+@property (nonatomic) BOOL bouncesZoom;
 
-@property(nonatomic,readonly,getter=isZooming)       BOOL zooming;       // returns YES if user in zoom gesture
-@property(nonatomic,readonly,getter=isZoomBouncing)  BOOL zoomBouncing;  // returns YES if we are in the middle of zooming back to the min/max value
+// Returns YES if the user is performing a zoom gesture
+@property (nonatomic, readonly, getter=isZooming) BOOL zooming;
+
+// Returns YES if ths scroll view is in the middle of zooming back to the min/max zoom scale
+@property (nonatomic, readonly, getter=isZoomBouncing) BOOL zoomBouncing;
+
+// Returns YES if the scroll view is currently animating a `zoomScale` change
+// For example, this could be from a `setZoomScale:animated:` call
+@property (nonatomic, readonly, getter=isZoomAnimating) BOOL zoomAnimating API_AVAILABLE(ios(17.4));
 
 // When the user taps the status bar, the scroll view beneath the touch which is closest to the status bar will be scrolled to top, but only if its `scrollsToTop` property is YES, its delegate does not return NO from `-scrollViewShouldScrollToTop:`, and it is not already at the top.
 // On iPhone, we execute this gesture only if there's one on-screen scroll view with `scrollsToTop` == YES. If more than one is found, none will be scrolled.
-@property(nonatomic) BOOL  scrollsToTop API_UNAVAILABLE(tvos);          // default is YES.
+// Default: YES
+@property (nonatomic) BOOL scrollsToTop API_UNAVAILABLE(tvos);
+
+// Stops any scrolling or zooming, whether initiated programmatically or by the user
+// Stops scrolling at the current `contentOffset` during deceleration unless bouncing, in which case the `contentOffset` is moved within the valid range
+// If paging is enabled, aligns `contentOffset` with a page boundary
+- (void)stopScrollingAndZooming API_AVAILABLE(ios(17.4));
 
 // Use these accessors to configure the scroll view's built-in gesture recognizers.
 // Do not change the gestures' delegates or override the getters for these properties.
@@ -163,7 +224,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Change `panGestureRecognizer.allowedTouchTypes` to limit scrolling to a particular set of touch types.
 @property(nonatomic, readonly) UIPanGestureRecognizer *panGestureRecognizer API_AVAILABLE(ios(5.0));
 // `pinchGestureRecognizer` will return nil when zooming is disabled.
-@property(nullable, nonatomic, readonly) UIPinchGestureRecognizer *pinchGestureRecognizer API_AVAILABLE(ios(5.0));
+@property(nullable, nonatomic, readonly) UIPinchGestureRecognizer *pinchGestureRecognizer API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
 // `directionalPressGestureRecognizer` is disabled by default, but can be enabled to perform scrolling in response to up / down / left / right arrow button presses directly, instead of scrolling indirectly in response to focus updates.
 @property(nonatomic, readonly) UIGestureRecognizer *directionalPressGestureRecognizer API_DEPRECATED("Configuring the panGestureRecognizer for indirect scrolling automatically supports directional presses now, so this property is no longer useful.", tvos(9.0, 11.0));
 

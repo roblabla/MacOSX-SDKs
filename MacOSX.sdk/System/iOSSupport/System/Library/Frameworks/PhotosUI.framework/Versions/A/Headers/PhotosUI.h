@@ -10,19 +10,19 @@
 
 #import <TargetConditionals.h>
 
-#if TARGET_OS_IOS || TARGET_OS_OSX || TARGET_OS_TV
+#if TARGET_OS_IOS || TARGET_OS_OSX || TARGET_OS_TV || TARGET_OS_VISION
 #import <PhotosUI/PHLivePhotoView.h>
 #endif
 
-#if TARGET_OS_IOS || TARGET_OS_OSX || TARGET_OS_WATCH
+#if TARGET_OS_IOS || TARGET_OS_OSX || TARGET_OS_WATCH || TARGET_OS_VISION
 #import <PhotosUI/PHPicker.h>
 #endif
 
-#if TARGET_OS_IOS || TARGET_OS_OSX
+#if TARGET_OS_IOS || TARGET_OS_OSX || TARGET_OS_VISION
 #import <PhotosUI/PHContentEditingController.h>
 #endif
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import <PhotosUI/PHPhotoLibrary+PhotosUISupport.h>
 #endif
 

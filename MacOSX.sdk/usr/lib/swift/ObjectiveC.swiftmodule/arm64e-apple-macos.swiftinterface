@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftObjectiveC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -disable-objc-attr-requires-foundation-module -module-name ObjectiveC
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 8
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftObjectiveC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -disable-objc-attr-requires-foundation-module -enable-bare-slash-regex -user-module-version 8 -module-name ObjectiveC
 @_exported import ObjectiveC
 import Swift
 import _Concurrency
@@ -120,5 +119,3 @@ public struct ObjCClassList : Swift.Sequence {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 public func objc_enumerateClasses(fromImage: ObjectiveC.ObjCEnumerationImage = .machHeader(#dsohandle), matchingNamePrefix: Swift.String? = nil, conformingTo: ObjectiveC.`Protocol`? = nil, subclassing: Swift.AnyClass? = nil) -> ObjectiveC.ObjCClassList
 extension ObjectiveC.ObjCBool : Swift.Sendable {}
-extension ObjectiveC.Selector : Swift.Sendable {}
-extension ObjectiveC.NSZone : Swift.Sendable {}

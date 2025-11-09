@@ -381,7 +381,7 @@ CG_EXTERN CGWindowLevel CGShieldingWindowLevel(void)
    `displayID'. */
 
 CG_EXTERN CGImageRef __nullable CGDisplayCreateImage(CGDirectDisplayID displayID)
-    CG_AVAILABLE_STARTING(10.6);
+    CG_AVAILABLE_BUT_DEPRECATED(10.6, 14.4, "This API is deprecated. Please use ScreenCaptureKit's captureScreenshot APIs instead.");
 
 /* Return an image containing the contents of the rectangle `rect',
    specified in display space, of the display identified by `displayID'. The
@@ -390,7 +390,7 @@ CG_EXTERN CGImageRef __nullable CGDisplayCreateImage(CGDirectDisplayID displayID
 
 CG_EXTERN CGImageRef __nullable CGDisplayCreateImageForRect(
     CGDirectDisplayID display, CGRect rect)
-    CG_AVAILABLE_STARTING(10.6);
+    CG_AVAILABLE_BUT_DEPRECATED(10.6, 14.4, "This API is deprecated. Please use ScreenCaptureKit's captureScreenshot APIs instead.");
 
 /* Hide the mouse cursor and increment the hide cursor count. The `display'
    parameter is ignored. */

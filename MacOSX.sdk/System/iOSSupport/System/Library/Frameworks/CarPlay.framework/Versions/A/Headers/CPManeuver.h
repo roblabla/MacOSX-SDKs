@@ -7,8 +7,84 @@
 
 #import <CarPlay/CPImageSet.h>
 #import <Foundation/Foundation.h>
+#import <CarPlay/CPLaneGuidance.h>
 #import <CarPlay/CPTravelEstimates.h>
 #import <UIKit/UIKit.h>
+
+typedef NS_ENUM(NSUInteger, CPManeuverType) {
+    CPManeuverTypeNoTurn                    =  0,
+    CPManeuverTypeLeftTurn                  =  1,
+    CPManeuverTypeRightTurn                 =  2,
+    CPManeuverTypeStraightAhead             =  3,
+    CPManeuverTypeUTurn                     =  4,
+    CPManeuverTypeFollowRoad                =  5,
+    CPManeuverTypeEnterRoundabout           =  6,
+    CPManeuverTypeExitRoundabout            =  7,
+    CPManeuverTypeOffRamp                   =  8,
+    CPManeuverTypeOnRamp                    =  9,
+    CPManeuverTypeArriveEndOfNavigation     = 10,
+    CPManeuverTypeStartRoute                = 11,
+    CPManeuverTypeArriveAtDestination       = 12,
+    CPManeuverTypeKeepLeft                  = 13,
+    CPManeuverTypeKeepRight                 = 14,
+    CPManeuverTypeEnter_Ferry               = 15,
+    CPManeuverTypeExitFerry                 = 16,
+    CPManeuverTypeChangeFerry               = 17,
+    CPManeuverTypeStartRouteWithUTurn       = 18,
+    CPManeuverTypeUTurnAtRoundabout         = 19,
+    CPManeuverTypeLeftTurnAtEnd             = 20,
+    CPManeuverTypeRightTurnAtEnd            = 21,
+    CPManeuverTypeHighwayOffRampLeft        = 22,
+    CPManeuverTypeHighwayOffRampRight       = 23,
+    CPManeuverTypeArriveAtDestinationLeft   = 24,
+    CPManeuverTypeArriveAtDestinationRight  = 25,
+    CPManeuverTypeUTurnWhenPossible         = 26,
+    CPManeuverTypeArriveEndOfDirections     = 27,
+    CPManeuverTypeRoundaboutExit1           = 28,
+    CPManeuverTypeRoundaboutExit2           = 29,
+    CPManeuverTypeRoundaboutExit3           = 30,
+    CPManeuverTypeRoundaboutExit4           = 31,
+    CPManeuverTypeRoundaboutExit5           = 32,
+    CPManeuverTypeRoundaboutExit6           = 33,
+    CPManeuverTypeRoundaboutExit7           = 34,
+    CPManeuverTypeRoundaboutExit8           = 35,
+    CPManeuverTypeRoundaboutExit9           = 36,
+    CPManeuverTypeRoundaboutExit10          = 37,
+    CPManeuverTypeRoundaboutExit11          = 38,
+    CPManeuverTypeRoundaboutExit12          = 39,
+    CPManeuverTypeRoundaboutExit13          = 40,
+    CPManeuverTypeRoundaboutExit14          = 41,
+    CPManeuverTypeRoundaboutExit15          = 42,
+    CPManeuverTypeRoundaboutExit16          = 43,
+    CPManeuverTypeRoundaboutExit17          = 44,
+    CPManeuverTypeRoundaboutExit18          = 45,
+    CPManeuverTypeRoundaboutExit19          = 46,
+    CPManeuverTypeSharpLeftTurn             = 47,
+    CPManeuverTypeSharpRightTurn            = 48,
+    CPManeuverTypeSlightLeftTurn            = 49,
+    CPManeuverTypeSlightRightTurn           = 50,
+    CPManeuverTypeChangeHighway             = 51,
+    CPManeuverTypeChangeHighwayLeft         = 52,
+    CPManeuverTypeChangeHighwayRight        = 53,
+} API_AVAILABLE(ios(17.4));
+
+typedef NS_ENUM(NSUInteger, CPJunctionType) {
+    CPJunctionTypeIntersection = 0, // single intersection with roads coming to a common point
+    CPJunctionTypeRoundabout   = 1, // roundabout, junction elements represent roads exiting the roundabout
+} API_AVAILABLE(ios(17.4));
+
+typedef NS_ENUM(NSUInteger, CPTrafficSide) {
+    CPTrafficSideRight = 0, // counterclockwise for roundabouts
+    CPTrafficSideLeft  = 1, // clockwise for roundabouts
+} API_AVAILABLE(ios(17.4));
+
+typedef NS_ENUM(NSInteger, CPManeuverState)
+{
+    CPManeuverStateContinue = 0,
+    CPManeuverStateInitial,
+    CPManeuverStatePrepare,
+    CPManeuverStateExecute
+} API_AVAILABLE(ios(17.4));
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -126,6 +202,47 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @see +[NSAttributedString attributedStringWithAttachment:], -[NSTextAttachment image]
  */
 @property (nonatomic, copy) NSArray<NSAttributedString *> *notificationAttributedInstructionVariants API_AVAILABLE(ios(14.0));
+
+/**
+ maneuverType is a @c CPManeuverType representing the type of maneuver.
+ */
+@property (nonatomic, assign) CPManeuverType maneuverType API_AVAILABLE(ios(17.4));
+
+/**
+ roadFollowingManeuverVariants is an array of @c NSString representing the name of the road following this maneuver,
+ arranged from most to least preferred. (arranged by space)
+ */
+@property (nonatomic, copy, nullable) NSArray<NSString *> *roadFollowingManeuverVariants API_AVAILABLE(ios(17.4));
+
+/**
+ trafficSide is a @c CPTrafficSide representing which side of the road the traffic drives on.
+ */
+@property (nonatomic, assign) CPTrafficSide trafficSide API_AVAILABLE(ios(17.4));
+
+/**
+ junctionType is a @c CPJunctionType representing the type of the junction associated with this maneuver
+ */
+@property (nonatomic, assign) CPJunctionType junctionType API_AVAILABLE(ios(17.4));
+
+/**
+ junctionExitAngle is the angle of the exit road of this junction.
+ */
+@property (nonatomic, copy, nullable) NSMeasurement<NSUnitAngle *> *junctionExitAngle API_AVAILABLE(ios(17.4));
+
+/**
+ junctionElementAngles is a set of angles of the rest of the roads of this junction. This must not include @c junctionExitAngle .
+ */
+@property (nonatomic, copy, nullable) NSSet<NSMeasurement<NSUnitAngle *> *> *junctionElementAngles API_AVAILABLE(ios(17.4));
+
+/**
+ linkedLaneGuidance is the optional @c CPLaneGuidance associated with this maneuver // conditional - must be there if there is a corresponding lane guidance
+ */
+@property (nonatomic, assign) CPLaneGuidance *linkedLaneGuidance API_AVAILABLE(ios(17.4));
+
+/**
+ highwayExitLabel is a @c NSString describing a highway exit. Exit 123 for example.
+ */
+@property (nonatomic, copy) NSString *highwayExitLabel API_AVAILABLE(ios(17.4));
 
 /**
  Any custom user info related to this maneuver.

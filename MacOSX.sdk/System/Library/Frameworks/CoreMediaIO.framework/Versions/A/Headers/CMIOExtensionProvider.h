@@ -183,6 +183,14 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 */
 + (void)startServiceWithProvider:(CMIOExtensionProvider *)provider NS_SWIFT_NAME(startService(provider:));
 
+/*!
+@method stopServiceWithProvider:
+@abstract
+ Stops the CoreMediaIO Extension machinery.
+@discussion
+ This should only be called in very rare circumstances.  For example, if an extension is present on a system and there is no possible way that it would ever create a device instance. It is suggested that this be called as soon as possible in the provider's lifecycle, and that the provider's ignoreSIGTERM method be called first. After calling this method the extension should exit.
+*/
++ (void)stopServiceWithProvider:(CMIOExtensionProvider *)provider NS_SWIFT_NAME(stopService(provider:)) API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4)) API_UNAVAILABLE(watchos, macCatalyst);
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

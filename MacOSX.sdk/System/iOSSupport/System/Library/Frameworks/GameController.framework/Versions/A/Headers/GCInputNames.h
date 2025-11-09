@@ -54,12 +54,55 @@ GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputDirectionPad API_AVAILABLE(
 GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputLeftThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXTERN GCInputDirectionPadName GCInputRightThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
-GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/*
+ * Shoulder Buttons
+ */
+
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightShoulder API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
+ *  Identifies the button element located at the top-left/right of a gamepad,
+ *  between the left/right shoulder button and the gamepad's horizontal center.
+ */
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
+
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/*
+ * Back Buttons
+ *
+ * Some gamepads include additional buttons or triggers on their underside.
+ * Because the number and layout of bottom buttons can vary by controller, the
+ * Game Controller framework identifies them by their ease of operation.  The
+ * back left and right buttons at the first position are located nearest the
+ * natural rest position of the user's fingers and are suitable for actions
+ * requiring repeated inputs.  The buttons at the 'second' position may require
+ * the user to move their fingers to press and should be used for less frequent
+ * actions.
+ *
+ * Example view looking at the underside of a gamepad with four back buttons
+ * arranged horizontally:
+ *
+ *     +---------------------------------------------------------------+
+ *     |                       Controller top                          |
+ *     +---------------------------------------------------------------+
+ *     |                                                               |
+ *   R | [(R) 0]  [(R) 1]                             [(L) 1]  [(L) 0] | L
+ *     |                                                               |
+ *     +---------------------------------------------------------------|
+ *     |             Controller bottom (nearest the user)              |
+ *     +---------------------------------------------------------------+
+ */
+
+/* Note: The `position` argument begins at index 0. */
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputBackLeftButton(NSInteger position) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputBackRightButton(NSInteger position) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
 
 GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonHome API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXTERN GCInputButtonName GCInputButtonMenu API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));

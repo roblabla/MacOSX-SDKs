@@ -17,12 +17,13 @@ exports:
                        _kAPConfigSystemVersionKey, _kAPConfigurationSystemJSONFile, 
                        _kAPConfigurationSystemPlistFile, _kAPDaemonBundleID, _kConfigSystemMaxCappingPollValue, 
                        _kDefaultConfigSystemPollValue, _kJSONExtension, _kPlistExtension ]
-    objc-classes:    [ APCSAgeSensitiveNoise, APCSAgeSensitiveThreshold, APCSConfiguration, 
-                       APCSIntegrityReport, APCSPolicyAppleSubscriptions, APCSReports, 
-                       APClientMetricsConfig, APConfiguration, APConfigurationCache, 
-                       APConfigurationDecompressor, APConfigurationMediator, APConfigurationMigrator, 
-                       APConfigurationResponseHandler, APECDiagnosticPurposeConfig, 
-                       APECJourneyPurposeConfig, APECObservabilityConfig, APECObservabilityPurposeConfig, 
-                       APECReportsPurposeConfig, APECSettingsConfig, APVersionData, 
-                       APVersionHelper, APVersionTestData ]
+    objc-classes:    [ APAttributionConfig, APAttributionErrorCodeBucketsConfig, 
+                       APCSAgeSensitiveNoise, APCSAgeSensitiveThreshold, APCSConfiguration, 
+                       APCSEventDatabase, APCSIntegrityReport, APCSPolicyAppleSubscriptions, 
+                       APCSProxyRequest, APCSReports, APClientMetricsConfig, APConfiguration, 
+                       APConfigurationCache, APConfigurationDecompressor, APConfigurationMediator, 
+                       APConfigurationMigrator, APConfigurationResponseHandler, APECDiagnosticPurposeConfig, 
+                       APECGroupRandomizerConfig, APECJourneyPurposeConfig, APECObservabilityConfig, 
+                       APECObservabilityPurposeConfig, APECReportsPurposeConfig, 
+                       APECSettingsConfig, APVersionData, APVersionHelper, APVersionTestData ]
 ...

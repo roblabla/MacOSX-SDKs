@@ -62,5 +62,6 @@ exports:
                        _kAPFSVolumeCreateSynchronousKey, _kAPFSVolumeEffaceableKey, 
                        _kAPFSVolumeEncryptedACMKey, _kAPFSVolumeEncryptedKey, _kAPFSVolumeFSIndexKey, 
                        _kAPFSVolumeGroupSiblingFSIndexKey, _kAPFSVolumeNameKey, _kAPFSVolumeNoAutomountAtCreateKey, 
-                       _kAPFSVolumeQuotaSizeKey, _kAPFSVolumeReserveSizeKey, _kAPFSVolumeRoleKey ]
+                       _kAPFSVolumeNoExplicitContentProtectedKey, _kAPFSVolumeQuotaSizeKey, 
+                       _kAPFSVolumeReserveSizeKey, _kAPFSVolumeRoleKey ]
 ...

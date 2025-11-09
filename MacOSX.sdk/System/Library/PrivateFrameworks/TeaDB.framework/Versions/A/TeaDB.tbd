@@ -7,7 +7,7 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ BookAnalytics,BookCore,Books,BooksInternalExtras,BooksPersonalization,EngagementCollector,NewsInternalExtras,NewsPersonalization,NewsServices,NewsServicesInternal,NewsTag,NewsToday,NewsToday2,NewsTodayIntents,NewsWidgetIntents,News,NVCDemo,ArticleNotificationExtension,ArticleNotificationServiceExtension,NewsNotificationServiceExtension,MarketingNotificationExtension,OpenInNews,Feldspar Tests,NewsInternalSettings,NewsSettings,NewsUI,NewsUITests,newsd,com.apple.news,NewsAnalyticsUpload,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsKit,NewsKitTests,NewsKitDemo,NewsLiveActivitiesCore,NewsLiveActivitiesCoreTests,NewsArticles,NewsArticlesTests,NewsAds,NewsAdsTests,NewsEngagementCollector,NewsFormat,NewsFormatTests,NewsSubscription,NewsSubscriptionTests,NewsAnalytics,NewsAnalyticsTests,Feldspar,Silex,SilexWeb,NewsArticleViewer,NewsArticleQuickLook,NewsEngagement,NewsEngagementTests,SilexDebugger,NewsDiagnosticExtension,NanoNewsWidgetExtension,NanoNews,NanoNewsInternalExtras,NanoNewsUI,NanoNewsDataService,NanoNewsAnalytics,NanoNewsHeadlines,NewsPersonalizationTests,NewsAudio,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksDetailIntents,StocksKit,StocksKitTests,StocksTests,StocksToday,StocksUI,StocksUITests,StocksWidget,StocksDiagnosticExtension,Weather,WeatherCharts,WeatherDemo,Kinsale,WeatherCore,WeatherCoreTests,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherDaemon,WeatherDaemonTests,weatherd,WeatherWidget,WeatherWidgetExtension,WeatherIntents,WeatherUnitTests,KinsaleAnalytics,WeatherAnalytics,WeatherAnalyticsTests,KinsaleUI,WeatherUI,WeatherDiagnosticExtension,WeatherNotifications,WeatherDaemonMemoryTests,NanoWeather,nanoweatherd,TeaCharts,TeaChartsTests,TeaDB,TeaDBTests,TeaDemo,TeaFoundationTests,TeaSettings,TeaSettingsTests,TeaSnappy,TeaSnappyTests,TeaTemplate,TeaTemplateTests,TeaUI,TeaUITests ]
+    clients:         [ BookAnalytics,BookCore,Books,BooksInternalExtras,BooksPersonalization,BooksPersonalizationTests,EngagementCollector,NewsInternalExtras,NewsPersonalization,NewsServices,NewsServicesInternal,NewsTag,NewsToday,NewsToday2,NewsTodayIntents,NewsWidgetIntents,News,NVCDemo,ArticleNotificationExtension,ArticleNotificationServiceExtension,NewsNotificationServiceExtension,MarketingNotificationExtension,OpenInNews,Feldspar Tests,NewsInternalSettings,NewsSettings,NewsUI,NewsUITests,newsd,com.apple.news,NewsAnalyticsUpload,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsKit,NewsKitTests,NewsKitDemo,NewsLiveActivitiesCore,NewsLiveActivitiesCoreTests,NewsArticles,NewsArticlesTests,NewsAds,NewsAdsTests,NewsEngagementCollector,NewsFormat,NewsFormatTests,NewsSubscription,NewsSubscriptionTests,NewsAnalytics,NewsAnalyticsTests,Feldspar,Silex,SilexWeb,NewsArticleViewer,NewsArticleQuickLook,NewsEngagement,NewsEngagementTests,SilexDebugger,NewsDiagnosticExtension,NanoNewsWidgetExtension,NanoNews,NanoNewsInternalExtras,NanoNewsUI,NanoNewsDataService,NanoNewsAnalytics,NanoNewsHeadlines,NewsPersonalizationTests,NewsAudio,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksDetailIntents,StocksKit,StocksKitTests,StocksTests,StocksToday,StocksUI,StocksUITests,StocksWidget,StocksDiagnosticExtension,Weather,WeatherCharts,WeatherDemo,Kinsale,WeatherCore,WeatherCoreTests,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherDaemon,WeatherDaemonTests,weatherd,WeatherWidget,WeatherWidgetExtension,WeatherIntents,WeatherUnitTests,KinsaleAnalytics,WeatherAnalytics,WeatherAnalyticsTests,KinsaleUI,WeatherUI,WeatherDiagnosticExtension,WeatherNotifications,WeatherDaemonMemoryTests,NanoWeather,nanoweatherd,TeaCharts,TeaChartsTests,TeaDB,TeaDBTests,TeaDemo,TeaFoundationTests,TeaSettings,TeaSettingsTests,TeaSnappy,TeaSnappyTests,TeaTemplate,TeaTemplateTests,TeaUI,TeaUITests ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -201,10 +201,10 @@ exports:
                        '_$s5TeaDB16AssertionOptionsV5closeACvgZ', '_$s5TeaDB16AssertionOptionsV5writeACvgZ', 
                        '_$s5TeaDB16AssertionOptionsV6legacyACvgZ', '_$s5TeaDB16AssertionOptionsV8rawValueACSi_tcfC', 
                        '_$s5TeaDB16AssertionOptionsV8rawValueSivg', '_$s5TeaDB16AssertionOptionsV8rawValueSivpMV', 
-                       '_$s5TeaDB16AssertionOptionsVMa', '_$s5TeaDB16AssertionOptionsVMn', 
-                       '_$s5TeaDB16AssertionOptionsVN', '_$s5TeaDB16AssertionOptionsVSQAAMc', 
-                       '_$s5TeaDB16AssertionOptionsVSYAAMc', '_$s5TeaDB16AssertionOptionsVs10SetAlgebraAAMc', 
-                       '_$s5TeaDB16AssertionOptionsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s5TeaDB16AssertionOptionsV9immediateACvgZ', '_$s5TeaDB16AssertionOptionsVMa', 
+                       '_$s5TeaDB16AssertionOptionsVMn', '_$s5TeaDB16AssertionOptionsVN', 
+                       '_$s5TeaDB16AssertionOptionsVSQAAMc', '_$s5TeaDB16AssertionOptionsVSYAAMc', 
+                       '_$s5TeaDB16AssertionOptionsVs10SetAlgebraAAMc', '_$s5TeaDB16AssertionOptionsVs25ExpressibleByArrayLiteralAAMc', 
                        '_$s5TeaDB16AssertionOptionsVs9OptionSetAAMc', '_$s5TeaDB17PartialEntityTypeMp', 
                        '_$s5TeaDB17PartialEntityTypePAA04FastD9ProvidingTb', '_$s5TeaDB17PartialEntityTypePAA09ConstructE0Tb', 
                        '_$s5TeaDB17PartialEntityTypeTL', '_$s5TeaDB17PreparedStatementCMa', 
@@ -429,7 +429,15 @@ exports:
                        '_$s5TeaDB8LazyJSONCMu', '_$s5TeaDB8LazyJSONCfD', '_$s5TeaDB8LazyJSONCfd', 
                        '_$s5TeaDB8LazyJSONCyxGAA10ColumnTypeAAMc', '_$s5TeaDB8LazyJSONCyxGAA18StatementChainTypeAAMc', 
                        '_$s5TeaDB8LazyJSONCyxGAA18StatementChainTypeAAWP', '_$s5TeaDB8LazyJSONCyxGSEAAMc', 
-                       '_$s5TeaDB8LazyJSONCyxGSeAAMc', '_$s5TeaDB9AssertionCACyKcfC', 
+                       '_$s5TeaDB8LazyJSONCyxGSeAAMc', '_$s5TeaDB9AssertionC4NameO13finishTaskNowyA2EmFWC', 
+                       '_$s5TeaDB9AssertionC4NameO25finishTaskUninterruptableyA2EmFWC', 
+                       '_$s5TeaDB9AssertionC4NameO2eeoiySbAE_AEtFZ', '_$s5TeaDB9AssertionC4NameO4hash4intoys6HasherVz_tF', 
+                       '_$s5TeaDB9AssertionC4NameO9hashValueSivg', '_$s5TeaDB9AssertionC4NameO9hashValueSivpMV', 
+                       '_$s5TeaDB9AssertionC4NameOMa', '_$s5TeaDB9AssertionC4NameOMn', 
+                       '_$s5TeaDB9AssertionC4NameON', '_$s5TeaDB9AssertionC4NameOSHAAMc', 
+                       '_$s5TeaDB9AssertionC4NameOSQAAMc', '_$s5TeaDB9AssertionC4nameA2C4NameO_tKcfC', 
+                       '_$s5TeaDB9AssertionC4nameA2C4NameO_tKcfCTj', '_$s5TeaDB9AssertionC4nameA2C4NameO_tKcfCTq', 
+                       '_$s5TeaDB9AssertionC4nameA2C4NameO_tKcfc', '_$s5TeaDB9AssertionCACyKcfC', 
                        '_$s5TeaDB9AssertionCACyKcfCTj', '_$s5TeaDB9AssertionCACyKcfCTq', 
                        '_$s5TeaDB9AssertionCACyKcfc', '_$s5TeaDB9AssertionCMa', '_$s5TeaDB9AssertionCMm', 
                        '_$s5TeaDB9AssertionCMn', '_$s5TeaDB9AssertionCMo', '_$s5TeaDB9AssertionCMu', 
@@ -464,6 +472,7 @@ exports:
                        '_$s5TeaDB9_OptionalVyxGAA10ColumnTypeAAMc', '_$s5TeaDB9_OptionalVyxGAA18StatementChainTypeAAMc', 
                        '_$s5TeaDB9_OptionalVyxGAA18StatementChainTypeAAWP', '_$s5TeaDB9_OptionalVyxGSEAAMc', 
                        '_$s5TeaDB9_OptionalVyxGSeAAMc', '_$s5TeaDB9assertion8invokingxxyKXE_tKlF', 
+                       '_$s5TeaDB9assertion_8invokingxAA9AssertionC4NameO_xyKXEtKlF', 
                        '_$sSS5TeaDB10ColumnTypeAAMc', '_$sSS5TeaDB10ColumnTypeAAWP', 
                        '_$sSS5TeaDB14QueryValueTypeAAMc', '_$sSS5TeaDB14QueryValueTypeAAWP', 
                        '_$sSS5TeaDB18StatementChainTypeAAMc', '_$sSS5TeaDB18StatementChainTypeAAWP', 

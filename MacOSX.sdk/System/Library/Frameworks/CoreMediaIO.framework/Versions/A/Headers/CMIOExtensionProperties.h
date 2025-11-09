@@ -93,6 +93,15 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDe
 FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
 
 /*!
+@constant CMIOExtensionPropertyDeviceLatency
+@abstract
+ The key for the readonly device property indicating the number of frames of latency in the CMIOExtensionDevice.
+@discussion
+ The property state for CMIOExtensionPropertyDeviceLatency is a number containing the number of frames of latency in the CMIOExtensionDevice. Note that input and output latency may differ. Further, the CMIOExtensionDevice's CMIOExtensionStreams may have additional latency so they should be queried as well. If both the device and the stream say they have latency, then the total latency for the stream is the device latency summed with the stream latency. This property translates to the kCMIODevicePropertyLatency property.
+*/
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceLatency API_AVAILABLE(macos(14.4), macCatalyst(17.4)) API_UNAVAILABLE(ios, tvos);
+
+/*!
 @constant CMIOExtensionPropertyStreamActiveFormatIndex
 @abstract
  The key for the stream property active format index.
@@ -155,6 +164,15 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBuf
  The property state for CMIOExtensionPropertyStreamSinkEndOfData is a number, 1 means that the stream has reached the end and a value of 0 means that more data is (or will be) available. This property translates to the kCMIOStreamPropertyEndOfData property.
 */
 FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkEndOfData API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+
+/*!
+@constant CMIOExtensionPropertyStreamLatency
+@abstract
+ The key for the readonly stream property indicating the number of frames of latency in the CMIOExtensionStream.
+@discussion
+ The property state for CMIOExtensionPropertyStreamLatency is a number containing the number of frames of latency in the CMIOExtensionStream. Note that the owning CMIOExtensionDevice may have additional latency so it should be queried as well. If both the device and the stream say they have latency, then the total latency for the stream is the device latency summed with the stream latency. This property translates to the kCMIOStreamPropertyLatency property.
+*/
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamLatency API_AVAILABLE(macos(14.4), macCatalyst(17.4)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 @class CMIOExtensionPropertyAttributes

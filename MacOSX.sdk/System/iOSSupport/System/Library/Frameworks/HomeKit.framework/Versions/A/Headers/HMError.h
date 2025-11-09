@@ -121,6 +121,7 @@ typedef NS_ENUM(NSInteger, HMErrorCode) {
     HMErrorCodeAccessoryCommunicationFailure API_AVAILABLE(ios(14.0)) = 101,
     HMErrorCodeFailedToJoinNetwork API_AVAILABLE(ios(14.0)) = 102,
     HMErrorCodeAccessoryIsSuspended API_AVAILABLE(ios(15.0)) = 103,
+    HMErrorCodePartialCommunicationFailure = 104,
 } API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 NS_ASSUME_NONNULL_END

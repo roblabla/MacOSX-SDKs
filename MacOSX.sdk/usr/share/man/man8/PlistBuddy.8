@@ -22,7 +22,7 @@
 .Nd read and write values to plists
 .Sh SYNOPSIS
 .Nm
-.Op Fl cxh 
+.Op Fl cxlh 
 .Ar file.plist
 .Sh DESCRIPTION
 The
@@ -106,6 +106,8 @@ Entries may be of the following types:
 Execute command and exit. By default, PlistBuddy will run in interactive mode.
 .It Fl x
 Output will be in the form of an xml plist where appropriate.
+.It Fl l
+If the path provided contains any symbolic links, they will not be followed.
 .It Fl h
 Print the complete help info.
 .El

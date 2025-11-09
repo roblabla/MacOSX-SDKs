@@ -9,5 +9,5 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ISBackstopLanguage, _ISBackstopLocale, _InternationalSupportVersionNumber, 
                        _InternationalSupportVersionString ]
-    objc-classes:    [ ISUtilities ]
+    objc-classes:    [ ISLanguageCarousel, ISLanguageCarouselItem, ISUtilities ]
 ...

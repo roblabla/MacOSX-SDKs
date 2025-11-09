@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIMenuElement.h>
+#import <UIKit/UIMenuDisplayPreferences.h>
 
 typedef NSString *UIMenuIdentifier NS_SWIFT_NAME(UIMenu.Identifier) NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
 
@@ -55,6 +56,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 /// The element(s) in the menu and sub-menus that have an "on" menu item state.
 @property (nonatomic, readonly) NSArray <UIMenuElement *> *selectedElements API_AVAILABLE(ios(15.0));
+
+/// Display preferences for this menu's immediate children. Preferences are not inherited by sub menus,
+/// and may be ignored or overridden by the system in certain element sizes or menu layouts.
+@property (nonatomic, nullable, copy) UIMenuDisplayPreferences *displayPreferences API_AVAILABLE(ios(17.4));
 
 /*!
  * @abstract Creates a UIMenu with an empty title, nil image, automatically generated identifier, and default options.

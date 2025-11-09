@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 171
+current-version: 183
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -11,7 +11,8 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _DMFAllConfigurationOrganizationTypes, _DMFAppLog, _DMFAppStatusDidChangeNotificationName, 
+    symbols:         [ _DMFAllConfigurationOrganizationTypes, _DMFAppLog, _DMFAppRatingAllApps, 
+                       _DMFAppRatingUnrated, _DMFAppStatusDidChangeNotificationName, 
                        _DMFAtomicFileWritingLog, _DMFBundleIdentifierErrorKey, _DMFCEMReasonCodeBad, 
                        _DMFCEMReasonCodeConflict, _DMFCEMReasonCodeCouldNotDecrypt, 
                        _DMFCEMReasonCodeInvalidSignature, _DMFCEMReasonCodeOtherConflict, 
@@ -211,7 +212,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 10
+current-version: 10.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

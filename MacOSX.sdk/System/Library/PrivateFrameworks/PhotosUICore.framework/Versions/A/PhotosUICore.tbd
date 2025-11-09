@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUICore.framework/Versions/A/PhotosUICore'
-current-version: 621.0.100
+current-version: 646.2.101
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1986,8 +1986,8 @@ exports:
                        _PXAssetActionTypePasteAdjustments, _PXAssetActionTypePersonChangeType, 
                        _PXAssetActionTypePersonMakeKeyPhoto, _PXAssetActionTypePickAsset, 
                        _PXAssetActionTypePrint, _PXAssetActionTypeQuickLook, _PXAssetActionTypeRemove, 
-                       _PXAssetActionTypeRemoveSharingSuggestion, _PXAssetActionTypeReply, 
-                       _PXAssetActionTypeRestore, _PXAssetActionTypeRevertAdjustments, 
+                       _PXAssetActionTypeRemoveNoConfirm, _PXAssetActionTypeRemoveSharingSuggestion, 
+                       _PXAssetActionTypeReply, _PXAssetActionTypeRestore, _PXAssetActionTypeRevertAdjustments, 
                        _PXAssetActionTypeShare, _PXAssetActionTypeShowActionsMenu, 
                        _PXAssetActionTypeShowInLibrary, _PXAssetActionTypeSlideshow, 
                        _PXAssetActionTypeSpotlightOpenApp, _PXAssetActionTypeStoryMakeKeyPhoto, 
@@ -2609,7 +2609,8 @@ exports:
                        _PXPreferencesSetMergeDuplicatesEnabled, _PXPreferencesSetPromptDateForCameraSharingPreferences, 
                        _PXPreferencesSetSharedLibraryBadgingEnabled, _PXPreferencesSetSharedLibraryDeletionNotificationEnabled, 
                        _PXPreferencesSetSharedLibrarySuggestionsEnabled, _PXPreferencesSetValue, 
-                       _PXPreferencesSetVideoAutoplayEnabled, _PXPreferredContentSizeCategoryIsAccessibility, 
+                       _PXPreferencesSetVideoAutoplayEnabled, _PXPreferencesSetWelcomeViewLastPresentationDate, 
+                       _PXPreferencesWelcomeViewLastPresentationDate, _PXPreferredContentSizeCategoryIsAccessibility, 
                        _PXPresentAssistantForContext, _PXPresentFailureWithLocalizedTitle, 
                        _PXPresentationEnvironmentForSender, _PXProResLogLocalizedString, 
                        _PXProgrammaticNavigationDestinationRevealModeDescription, 
@@ -3664,7 +3665,8 @@ exports:
                        PXPhotoKitPeopleSuggestionsDataSource, PXPhotoKitPeopleSuggestionsDataSourceManager, 
                        PXPhotoKitPeopleSuggestionsDataSourceState, PXPhotoKitPeopleSuggestionsMediaProvider, 
                        PXPhotoKitPersonSuggestion, PXPhotoKitRemoveAssetActionPerformer, 
-                       PXPhotoKitRemoveSharingSuggestionAssetActionPerformer, PXPhotoKitRemoveSharingSuggestionAssetCollectionActionPerformer, 
+                       PXPhotoKitRemoveNoConfirmAssetActionPerformer, PXPhotoKitRemoveSharingSuggestionAssetActionPerformer, 
+                       PXPhotoKitRemoveSharingSuggestionAssetCollectionActionPerformer, 
                        PXPhotoKitRestoreAssetActionPerformer, PXPhotoKitShowActionsMenuAssetActionPerformer, 
                        PXPhotoKitSyndicationSaveToLibraryActionPerformer, PXPhotoKitThumbnailCache, 
                        PXPhotoKitTrashAssetActionPerformer, PXPhotoKitTrashNoConfirmAssetActionPerformer, 

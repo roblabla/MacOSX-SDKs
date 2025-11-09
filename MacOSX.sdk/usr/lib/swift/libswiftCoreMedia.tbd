@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftCoreMedia.dylib'
-current-version: 3090.15.4
+current-version: 3100.20.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -13,9 +13,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreMedia.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCoreMedia.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s9CoreMedia10CMTypedTagC11rawCategory0eD5ValueACyxGs6UInt32V_AA5CMTagC0G0OtcfC', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCoreMedia.dylib', 
+                       '_$s9CoreMedia10CMTypedTagC11rawCategory0eD5ValueACyxGs6UInt32V_AA5CMTagC0G0OtcfC', 
                        '_$s9CoreMedia10CMTypedTagC11rawCategory0eD5ValueACyxGs6UInt32V_AA5CMTagC0G0Otcfc', 
                        '_$s9CoreMedia10CMTypedTagC5valuexvgTj', '_$s9CoreMedia10CMTypedTagC5valuexvgTq', 
                        '_$s9CoreMedia10CMTypedTagC5valuexvpMV', '_$s9CoreMedia10CMTypedTagC8CategoryV03rawE008valueForD5Value03tagihI0AEyx_Gs6UInt32V_xSgAA5CMTagC0I0OYbcAPxYbctcfC', 

@@ -40,6 +40,7 @@ exports:
                        '_$s9SiriSetup21LocalDataSourceWriterC04siriD13SharingStatusSo06AFSiridh5OptInI0VSgvpfi', 
                        '_$s9SiriSetup21LocalDataSourceWriterC11descriptionSSvg', 
                        '_$s9SiriSetup21LocalDataSourceWriterC11siriEnabledSo9AFBooleanVvpfi', 
+                       '_$s9SiriSetup21LocalDataSourceWriterC12siriLanguageSSSgvpfi', 
                        '_$s9SiriSetup21LocalDataSourceWriterC14setupDismissedSo9AFBooleanVvpfi', 
                        '_$s9SiriSetup21LocalDataSourceWriterC17siriInCallEnabledSo9AFBooleanVvpfi', 
                        '_$s9SiriSetup21LocalDataSourceWriterC19voiceTriggerEnabledSo9AFBooleanVvpfi', 

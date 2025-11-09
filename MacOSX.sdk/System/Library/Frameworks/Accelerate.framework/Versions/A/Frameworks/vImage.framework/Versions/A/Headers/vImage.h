@@ -253,6 +253,8 @@
  *   @/textblock </pre>
  */
 
+#include <TargetConditionals.h>
+
 
 // Types, defines, flags and error codes
 #include <vImage/vImage_Types.h>
@@ -294,5 +296,7 @@
 #  include <vImage/vImage_CVUtilities.h>
 # endif
 #endif /* defined __clang__ && defined __has_include */
+
+
 
 #endif /* VIMAGE_H */

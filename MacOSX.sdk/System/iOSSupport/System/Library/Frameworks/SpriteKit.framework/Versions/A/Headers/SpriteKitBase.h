@@ -13,8 +13,6 @@
 #import <CoreGraphics/CGGeometry.h>
 #import <Foundation/Foundation.h>
 
-#import <SpriteKit/SKVersion.h>
-
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else

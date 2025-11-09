@@ -55,12 +55,13 @@ exports:
                        _kQPQueryParserOptionIgnoreSingleYearSuggestionKey, _kQPQueryParserOptionIncludeRankCategoriesKey, 
                        _kQPQueryParserOptionInternalBundleIdentifierKey, _kQPQueryParserOptionIsEntitySearchKey, 
                        _kQPQueryParserOptionLocaleKey, _kQPQueryParserOptionPreferredLanguagesKey, 
-                       _kQPQueryParserOptionReferenceCalendarKey, _kQPQueryParserOptionReferenceDateKey, 
-                       _kQPQueryParserOptionReferenceTimezoneKey, _kQPQueryParserOptionResolveConcreteDatesKey, 
-                       _kQPQueryParserOptionResolveDatesInFutureKey, _kQPQueryParserOptionResolveDatesInPastKey, 
-                       _kQPQueryParserOptionU2EnabledKey, _kQPQueryParserOptionUseECRInProcessKey, 
-                       _kQPQueryParserOptionUseU2InSpotlightResourcesKey, _kQPSuggestionResultDescriptionKey, 
-                       _kQPSuggestionResultRankCategoriesKey, _kQPSuggestionResultSuggestionKey, 
-                       _kQPSuggestionResultTokensKey, _kQPSuggestionResultTypeKey ]
+                       _kQPQueryParserOptionReferenceCalendarKey, _kQPQueryParserOptionReferenceCalendarRegionKey, 
+                       _kQPQueryParserOptionReferenceDateKey, _kQPQueryParserOptionReferenceTimezoneKey, 
+                       _kQPQueryParserOptionResolveConcreteDatesKey, _kQPQueryParserOptionResolveDatesInFutureKey, 
+                       _kQPQueryParserOptionResolveDatesInPastKey, _kQPQueryParserOptionU2EnabledKey, 
+                       _kQPQueryParserOptionUseECRInProcessKey, _kQPQueryParserOptionUseU2InSpotlightResourcesKey, 
+                       _kQPSuggestionResultDescriptionKey, _kQPSuggestionResultRankCategoriesKey, 
+                       _kQPSuggestionResultSuggestionKey, _kQPSuggestionResultTokensKey, 
+                       _kQPSuggestionResultTypeKey ]
     objc-classes:    [ QPQueryParserManager ]
 ...

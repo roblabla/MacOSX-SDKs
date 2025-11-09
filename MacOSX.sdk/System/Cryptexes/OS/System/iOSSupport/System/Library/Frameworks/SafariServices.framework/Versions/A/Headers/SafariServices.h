@@ -5,6 +5,7 @@
 //  Copyright (c) 2013 Apple Inc. All rights reserved.
 //
 
+#import <SafariServices/SFAddToHomeScreenActivityItem.h>
 #import <SafariServices/SFAuthenticationSession.h>
 #import <SafariServices/SFContentBlockerManager.h>
 #import <SafariServices/SFContentBlockerState.h>

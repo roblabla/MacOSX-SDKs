@@ -37,7 +37,7 @@ exports:
                        _NFDriverRemoteDeviceFelicaTransceive, _NFDriverRemoteDeviceIso14443Transceive, 
                        _NFDriverRemoteDeviceIso15693Transceive, _NFDriverResetFWFlags, 
                        _NFDriverRestartDiscovery, _NFDriverRunIntegrityDebug, _NFDriverSecureElementGetAttackCounterLog, 
-                       _NFDriverSecureElementGetAvailablePersistentMemory, _NFDriverSecureElementGetCommetATR, 
+                       _NFDriverSecureElementGetAvailablePersistentMemory, _NFDriverSecureElementGetCometATR, 
                        _NFDriverSecureElementGetOSInfo, _NFDriverSecureElementGetOSMode, 
                        _NFDriverSecureElementGetPresenceOfAttackLog, _NFDriverSecureElementGetResponseStatus, 
                        _NFDriverSecureElementSelect, _NFDriverSecureElementSelectWithOS, 

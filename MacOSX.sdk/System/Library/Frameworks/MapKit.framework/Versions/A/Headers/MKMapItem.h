@@ -41,6 +41,9 @@ NS_CLASS_AVAILABLE(10_9, 6_0) __TVOS_AVAILABLE(9_2)
 // fromScene is used to indicate the UIScene where the user interaction took place.
 - (void)openInMapsWithLaunchOptions:(nullable NSDictionary<NSString *, id> *)launchOptions fromScene:(nullable UIScene *)scene completionHandler:(void (^__nullable)(BOOL success))completion API_AVAILABLE(ios(13.2)) API_UNAVAILABLE(watchos, tvos, macos);
 + (void)openMapsWithItems:(NSArray<MKMapItem *> *)mapItems launchOptions:(nullable NSDictionary<NSString *, id> *)launchOptions fromScene:(nullable UIScene *)scene completionHandler:(void (^__nullable)(BOOL success))completion API_AVAILABLE(ios(13.2)) API_UNAVAILABLE(watchos, tvos, macos);
+#elif TARGET_OS_OSX
+- (void)openInMapsWithLaunchOptions:(nullable NSDictionary<NSString *, id> *)launchOptions completionHandler:(void (^__nullable)(BOOL success))completion API_AVAILABLE(macos(14.4)) API_UNAVAILABLE(ios, watchos, tvos);
++ (void)openMapsWithItems:(NSArray<MKMapItem *> *)mapItems launchOptions:(nullable NSDictionary<NSString *, id> *)launchOptions completionHandler:( void (^__nullable)(BOOL success))completion API_AVAILABLE(macos(14.4)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 @end

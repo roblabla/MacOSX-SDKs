@@ -3,6 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReminderKitInternal.framework/Versions/A/ReminderKitInternal'
+current-version: 1041
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1583,6 +1584,7 @@ exports:
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC19TestCustomSmartListV8isPinnedyAESbF', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC19TestCustomSmartListV8locationyAeA09REMCustomiJ16FilterDescriptorC0M8LocationOSgF', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC19TestCustomSmartListV9dateRange4from2toAESS_SStF', 
+                       '_$s19ReminderKitInternal21REMTestStorePopulatorC19TestCustomSmartListV9operationyAeA09REMCustomiJ16FilterDescriptorC9OperationOF', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC19TestCustomSmartListVMa', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC19TestCustomSmartListVMn', 
                        '_$s19ReminderKitInternal21REMTestStorePopulatorC19TestCustomSmartListVN', 
@@ -6271,6 +6273,8 @@ exports:
                        '_$s19ReminderKitInternal8whenSome2on__AA7PromiseCyxSg_q_SgtGSo17OS_dispatch_queueC_AEyxGAEyq_Gtr0_lF', 
                        '_$s19ReminderKitInternal9AnalyticsC11isEventUsedySbSSF', 
                        '_$s19ReminderKitInternal9AnalyticsC11isEventUsedySbSSFZ', 
+                       '_$s19ReminderKitInternal9AnalyticsC37postBiomeEventForCorrectedGroceryItem4item16originalCategory011destinationN0ySS_S2StFZ', 
+                       '_$s19ReminderKitInternal9AnalyticsC41postBiomeEventForUncategorizedGroceryItem4itemySS_tFZ', 
                        '_$s19ReminderKitInternal9AnalyticsC9postEvent_7payload5error28performAutoBugCaptureOnErrorySS_SDySSSo8NSObjectCGs0N0_pSgSbtF', 
                        '_$s19ReminderKitInternal9AnalyticsC9postEvent_7payload5error28performAutoBugCaptureOnErrorySS_SDySSSo8NSObjectCGs0N0_pSgSbtFZ', 
                        '_$s19ReminderKitInternal9AnalyticsC9postEvent_7payload8duration5error28performAutoBugCaptureOnErrorySS_SDySSSo8NSObjectCGSdSgs0O0_pSgSbtF', 

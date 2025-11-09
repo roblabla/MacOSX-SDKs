@@ -34,6 +34,8 @@ AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationE
 AVF_EXPORT NSNotificationName const AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos); // see requiresFlushToResumeDecoding property
 AVF_EXPORT NSNotificationName const AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4)); // see outputObscuredDueToInsufficientExternalProtection property
 
+AVF_EXPORT NSNotificationName const AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // see readyForDisplay property
+
 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer : CALayer
 
@@ -64,6 +66,16 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					See <AVFoundation/AVAnimation.h> for a description of these options.
  */
 @property(copy) AVLayerVideoGravity videoGravity;
+
+/*!
+	 @property		readyForDisplay
+	 @abstract		Boolean indicating that the first video frame has been made ready for display.
+	 @discusssion		Use this property as an indicator of when best to show or animate-in an AVSampleBufferDisplayLayer into view.
+					An AVSampleBufferDisplayLayer may be displayed, or made visible, while this property is NO, however the layer will not have any user-visible content until the value becomes YES. Note that if an animation is added to an AVSampleBufferDisplayLayer before it becomes readyForDisplay the video image displayed inside might not animate with the receiver.
+					readyForDisplay will change to NO when the layer can no longer display frames. readyForDisplay will be YES when the first video frame has been made ready for display.
+					This property is not key-value observable.  AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification is posted when this value changes.
+ */
+@property (nonatomic, readonly, getter=isReadyForDisplay) BOOL readyForDisplay API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
 
 @end
 

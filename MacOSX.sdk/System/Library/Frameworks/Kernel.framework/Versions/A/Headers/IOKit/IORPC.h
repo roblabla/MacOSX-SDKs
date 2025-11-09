@@ -85,13 +85,6 @@ struct IORPCMessage {
 #pragma pack(pop)
 typedef struct IORPCMessage IORPCMessage;
 
-#if defined(__cplusplus)
-extern "C"
-#else
-extern
-#endif
-IORPCMessage *
-IORPCMessageFromMach(IORPCMessageMach * msg, bool reply);
 
 struct IORPCMessageErrorReturnContent {
 	IORPCMessage  hdr;
@@ -119,6 +112,7 @@ struct IORPC {
 	IORPCMessageMach * reply;
 	uint32_t           sendSize;
 	uint32_t           replySize;
+	IORPCMessage     * kernelContent;
 };
 typedef struct IORPC IORPC;
 

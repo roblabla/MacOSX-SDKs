@@ -44,6 +44,7 @@
 #undef  NCURSES_VERSION
 #define NCURSES_VERSION "6.0"
 
+#include <AvailabilityMacros.h>
 #include <ncurses_dll.h>
 
 #ifdef __cplusplus

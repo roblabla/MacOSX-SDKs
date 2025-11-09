@@ -8,7 +8,9 @@ allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyCloudKit, FindMyDaemonSupportTests, FindMyServerInteraction, 
-                       findmybeaconingd, findmylocateagent, findmylocated, findmylocatedTests ]
+                       SPShared, SPSharedTests, findmybeaconingd, findmylocateagent, 
+                       findmylocated, findmylocatedTests, searchpartyd, searchpartydTests, 
+                       searchpartyuseragent ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -160,6 +162,8 @@ exports:
                        '_$s19FindMyDaemonSupport11APNSManagerC15setDidReconnect5blockyyyYaYbc_tFTq', 
                        '_$s19FindMyDaemonSupport11APNSManagerC15unownedExecutorScevg', 
                        '_$s19FindMyDaemonSupport11APNSManagerC15unownedExecutorScevpMV', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC21connectionStateStreamScSySbGyFTj', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC21connectionStateStreamScSySbGyFTq', 
                        '_$s19FindMyDaemonSupport11APNSManagerC24setDidReceivePublicToken5blockyy10Foundation4DataVYaYbc_tFTj', 
                        '_$s19FindMyDaemonSupport11APNSManagerC24setDidReceivePublicToken5blockyy10Foundation4DataVYaYbc_tFTq', 
                        '_$s19FindMyDaemonSupport11APNSManagerC28setDidChangeConnectionStatus5blockyySbYaYbc_tFTj', 
@@ -174,6 +178,13 @@ exports:
                        '_$s19FindMyDaemonSupport11APNSManagerC5ErrorOMa', '_$s19FindMyDaemonSupport11APNSManagerC5ErrorOMn', 
                        '_$s19FindMyDaemonSupport11APNSManagerC5ErrorON', '_$s19FindMyDaemonSupport11APNSManagerC5ErrorOSHAAMc', 
                        '_$s19FindMyDaemonSupport11APNSManagerC5ErrorOSQAAMc', '_$s19FindMyDaemonSupport11APNSManagerC5ErrorOsAdAMc', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC9connectedSbvMTj', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC9connectedSbvMTq', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC9connectedSbvgTj', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC9connectedSbvgTq', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC9connectedSbvpMV', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC9connectedSbvsTj', 
+                       '_$s19FindMyDaemonSupport11APNSManagerC9connectedSbvsTq', 
                        '_$s19FindMyDaemonSupport11APNSManagerCAA13APNSConnectorAAMc', 
                        '_$s19FindMyDaemonSupport11APNSManagerCAA13APNSConnectorAAWP', 
                        '_$s19FindMyDaemonSupport11APNSManagerCMa', '_$s19FindMyDaemonSupport11APNSManagerCMm', 

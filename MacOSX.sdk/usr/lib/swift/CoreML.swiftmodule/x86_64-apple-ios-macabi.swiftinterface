@@ -1,8 +1,8 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreML -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name CoreML
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1877.50.1
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreML -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 3304.7.1 -module-name CoreML
 @_exported import CoreML
+import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
@@ -75,6 +75,27 @@ extension CoreML.MLModel {
   public static var availableComputeDevices: [CoreML.MLComputeDevice] {
     get
   }
+}
+@_hasMissingDesignatedInitializers @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+public class MLComputePlan {
+  public struct DeviceUsage : Swift.Sendable {
+    public let supported: [CoreML.MLComputeDevice]
+    public let preferred: CoreML.MLComputeDevice
+  }
+  public struct Cost : Swift.Sendable {
+    public let weight: Swift.Double
+  }
+  final public let modelStructure: CoreML.MLModelStructure
+  #if compiler(>=5.3) && $AsyncAwait
+  public static func load(asset: CoreML.MLModelAsset, configuration: CoreML.MLModelConfiguration) async throws -> CoreML.MLComputePlan
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  public static func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration) async throws -> CoreML.MLComputePlan
+  #endif
+  public func estimatedCost(of operation: CoreML.MLModelStructure.Program.Operation) -> CoreML.MLComputePlan.Cost?
+  public func deviceUsage(for layer: CoreML.MLModelStructure.NeuralNetwork.Layer) -> CoreML.MLComputePlan.DeviceUsage?
+  public func deviceUsage(for operation: CoreML.MLModelStructure.Program.Operation) -> CoreML.MLComputePlan.DeviceUsage?
+  @objc deinit
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension CoreML.MLFeatureValue {
@@ -175,11 +196,36 @@ extension Swift.UnsafeMutableBufferPointer {
   public init(_ multiArray: CoreML.MLMultiArray) throws
 }
 @available(macOS 11.0, iOS 14.0, *)
+@available(macOS, deprecated: 13.4, message: "Use Background Assets or NSURLSession instead.")
+@available(iOS, deprecated: 16.4, message: "Use Background Assets or NSURLSession instead.")
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension CoreML.MLModelCollection {
   public class func beginAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<CoreML.MLModelCollection, any Swift.Error>) -> Swift.Void) -> Foundation.Progress
   public class func endAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
+}
+extension CoreML.MLModelConfiguration {
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  public var optimizationHints: CoreML.MLOptimizationHints {
+    get
+    set
+  }
+}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+public struct MLOptimizationHints : Swift.Equatable, Swift.Sendable {
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  public enum ReshapeFrequency : Swift.Int, Swift.Sendable {
+    case frequent
+    case infrequent
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public var reshapeFrequency: CoreML.MLOptimizationHints.ReshapeFrequency
+  public init()
+  public static func == (a: CoreML.MLOptimizationHints, b: CoreML.MLOptimizationHints) -> Swift.Bool
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public protocol MLShapedArrayRangeExpression {
@@ -418,3 +464,68 @@ extension CoreML.MLShapedArraySlice : Swift.Encodable where Scalar : Swift.Encod
 extension CoreML.MLShapedArraySlice : Swift.Decodable where Scalar : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+public enum MLModelStructure : Swift.Sendable {
+  public struct Program : Swift.Sendable {
+    public struct ValueType : Swift.Sendable {
+    }
+    public struct Value : Swift.Sendable {
+    }
+    public struct NamedValueType : Swift.Sendable {
+      public let name: Swift.String
+      public let type: CoreML.MLModelStructure.Program.ValueType
+    }
+    public enum Binding : Swift.Sendable {
+      case value(CoreML.MLModelStructure.Program.Value)
+      case name(Swift.String)
+    }
+    public struct Argument : Swift.Sendable {
+      public let bindings: [CoreML.MLModelStructure.Program.Binding]
+    }
+    public struct Function : Swift.Sendable {
+      public let inputs: [CoreML.MLModelStructure.Program.NamedValueType]
+      public let block: CoreML.MLModelStructure.Program.Block
+    }
+    public struct Block : Swift.Sendable {
+      public let inputs: [CoreML.MLModelStructure.Program.NamedValueType]
+      public let outputNames: [Swift.String]
+      public let operations: [CoreML.MLModelStructure.Program.Operation]
+    }
+    public struct Operation : Swift.Sendable {
+      public let operatorName: Swift.String
+      public let inputs: [Swift.String : CoreML.MLModelStructure.Program.Argument]
+      public let outputs: [CoreML.MLModelStructure.Program.NamedValueType]
+      public let blocks: [CoreML.MLModelStructure.Program.Block]
+    }
+    public let functions: [Swift.String : CoreML.MLModelStructure.Program.Function]
+  }
+  public struct NeuralNetwork : Swift.Sendable {
+    public struct Layer : Swift.Sendable {
+      public let name: Swift.String
+      public let type: Swift.String
+      public let inputNames: [Swift.String]
+      public let outputNames: [Swift.String]
+    }
+    public let layers: [CoreML.MLModelStructure.NeuralNetwork.Layer]
+  }
+  public struct Pipeline : Swift.Sendable {
+    public let subModelNames: [Swift.String]
+    public let subModels: [CoreML.MLModelStructure]
+  }
+  case neuralNetwork(CoreML.MLModelStructure.NeuralNetwork)
+  case program(CoreML.MLModelStructure.Program)
+  case pipeline(CoreML.MLModelStructure.Pipeline)
+  case unsupported
+  #if compiler(>=5.3) && $AsyncAwait
+  public static func load(contentsOf url: Foundation.URL) async throws -> CoreML.MLModelStructure
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  public static func load(asset: CoreML.MLModelAsset) async throws -> CoreML.MLModelStructure
+  #endif
+}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+extension CoreML.MLOptimizationHints.ReshapeFrequency : Swift.Equatable {}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+extension CoreML.MLOptimizationHints.ReshapeFrequency : Swift.Hashable {}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+extension CoreML.MLOptimizationHints.ReshapeFrequency : Swift.RawRepresentable {}

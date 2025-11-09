@@ -13,8 +13,6 @@ exports:
                        '_$s14SiriMessageBus17RequestDispatcherC011startSpeechD015withAssistantId07requestJ011inputOrigin8locationySS_S2SSo10CLLocationCSgtFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC011startSpeechD015withAssistantId07requestJ011inputOriginySS_S2StFTj', 
                        '_$s14SiriMessageBus17RequestDispatcherC011startSpeechD015withAssistantId07requestJ011inputOriginySS_S2StFTq', 
-                       '_$s14SiriMessageBus17RequestDispatcherC015startTestSpeechD015withAssistantId07requestK011inputOriginySS_S2StFTj', 
-                       '_$s14SiriMessageBus17RequestDispatcherC015startTestSpeechD015withAssistantId07requestK011inputOriginySS_S2StFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC015startTestSpeechD015withAssistantId07requestK09enableASR11inputOrigin8location10jitContext17overrideModelPathySS_SSSbSSSo10CLLocationCSgSaySSGSgSSSgtFTj', 
                        '_$s14SiriMessageBus17RequestDispatcherC015startTestSpeechD015withAssistantId07requestK09enableASR11inputOrigin8location10jitContext17overrideModelPathySS_SSSbSSSo10CLLocationCSgSaySSGSgSSSgtFTq', 
                        '_$s14SiriMessageBus17RequestDispatcherC017startDirectActionD015withAssistantId07requestK011inputOrigin06directH00L19ExecutionParameters11audioSource0R11Destination12responseMode10isEyesFree0W19VoiceTriggerEnabled0W19TextToSpeechEnabled0W19TriggerlessFollowup12bargeInModes30approximatePreviousTTSInterval18deviceRestrictions21voiceTriggerEventInfo017voiceAudioSessionK00W21SystemApertureEnabled0W9InAmbientySS_S3SSgSDyS2SGSgA3XS4bSaySSG10Foundation12DateIntervalVSgA_AZs6UInt32VS2btFTj', 

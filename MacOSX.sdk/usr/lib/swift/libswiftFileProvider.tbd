@@ -3,10 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftFileProvider.dylib'
-current-version: 1703.61.4
+current-version: 1835.101.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12FileProvider01_aB14_CSQueryParserC19parseSpotlightQuery09spotlightG08callbackqd__SS_qd__AA01_ab1_C10ExpressionOyqd__GKctKlFZ', 
                        '_$s12FileProvider01_aB14_CSQueryParserCMa', '_$s12FileProvider01_aB14_CSQueryParserCMn', 
                        '_$s12FileProvider01_aB14_CSQueryParserCMo', '_$s12FileProvider01_aB14_CSQueryParserCMu', 

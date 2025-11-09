@@ -3,6 +3,8 @@
 #import <AuthenticationServices/ASAuthorizationProvider.h>
 #import <Foundation/Foundation.h>
 
+#import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider.h>
+
 @class ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest;
 @class ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest;
 
@@ -33,6 +35,14 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
+@end
+
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_AVAILABLE(macos(14.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos, visionos)
+#else
+API_AVAILABLE(macos(14.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos)
+#endif
+@interface ASAuthorizationSecurityKeyPublicKeyCredentialProvider () <ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider>
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

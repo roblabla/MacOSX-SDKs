@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalControl.framework/Versions/A/UniversalControl'
-current-version: 140.2.1
+current-version: 140.101
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -824,6 +824,8 @@ exports:
                        '_$s16UniversalControl0aB7ManagerC24setDynamicTargetOverride_10completionyAA0aB8DeviceIDVSg_ys5Error_pSgctFTj', 
                        '_$s16UniversalControl0aB7ManagerC24setDynamicTargetOverride_10completionyAA0aB8DeviceIDVSg_ys5Error_pSgctFTq', 
                        '_$s16UniversalControl0aB7ManagerC25beginDisplayConfigurationAA0abeF0CyKF', 
+                       '_$s16UniversalControl0aB7ManagerC31takeSingleDeviceClientAssertiony7Combine14AnyCancellableCSSFTj', 
+                       '_$s16UniversalControl0aB7ManagerC31takeSingleDeviceClientAssertiony7Combine14AnyCancellableCSSFTq', 
                        '_$s16UniversalControl0aB7ManagerC4move5focus2to10completionySayAA0aB5FocusOG_AA0aB8DeviceIDVys5Error_pSgctFTj', 
                        '_$s16UniversalControl0aB7ManagerC4move5focus2to10completionySayAA0aB5FocusOG_AA0aB8DeviceIDVys5Error_pSgctFTq', 
                        '_$s16UniversalControl0aB7ManagerC6getIDS10completionyySayAA0aB8DeviceIDVG_s5Error_pSgtc_tFTj', 
@@ -1006,8 +1008,8 @@ exports:
                        '_$s16UniversalControl16AgentXPCDelegateP19xpcConnectedDevicesSayAA0aB8DeviceIDVGvgTq', 
                        '_$s16UniversalControl16AgentXPCDelegateP21xpcConnectionCanceledyySOFTj', 
                        '_$s16UniversalControl16AgentXPCDelegateP21xpcConnectionCanceledyySOFTq', 
-                       '_$s16UniversalControl16AgentXPCDelegateP22xpcTakeClientAssertion_11assertionID10completionySo09UVCClientH0a_10Foundation4UUIDVys5Error_pSgctFTj', 
-                       '_$s16UniversalControl16AgentXPCDelegateP22xpcTakeClientAssertion_11assertionID10completionySo09UVCClientH0a_10Foundation4UUIDVys5Error_pSgctFTq', 
+                       '_$s16UniversalControl16AgentXPCDelegateP22xpcTakeClientAssertion_11assertionID06deviceJ010completionySo09UVCClientH0a_10Foundation4UUIDVSSSgys5Error_pSgctFTj', 
+                       '_$s16UniversalControl16AgentXPCDelegateP22xpcTakeClientAssertion_11assertionID06deviceJ010completionySo09UVCClientH0a_10Foundation4UUIDVSSSgys5Error_pSgctFTq', 
                        '_$s16UniversalControl16AgentXPCDelegateP25xpcAutomaticallyReconnectSbvMTj', 
                        '_$s16UniversalControl16AgentXPCDelegateP25xpcAutomaticallyReconnectSbvMTq', 
                        '_$s16UniversalControl16AgentXPCDelegateP25xpcAutomaticallyReconnectSbvgTj', 
@@ -1832,7 +1834,8 @@ exports:
                        '_$sSo8HIDEventC8HIDUtilsE12wrappedValueABvg', '_$sSo8HIDEventC8HIDUtilsE12wrappedValueABvpMV', 
                        '_$sSo8HIDEventC8HIDUtilsE9eventTypeAC0aD0Vvg', '_$sSo8HIDEventC8HIDUtilsE9eventTypeAC0aD0VvpMV', 
                        '_$ss6UInt32V8HIDUtilsE11stringValueSSvg', '_$ss6UInt32V8HIDUtilsE11stringValueSSvpMV', 
-                       _UVCClientAssertionDisabled, _UVCClientAssertionHotzonesDisabled ]
+                       _UVCClientAssertionDisabled, _UVCClientAssertionHotzonesDisabled, 
+                       _UVCClientAssertionSingleDeviceMode ]
     objc-classes:    [ UVCPreferences, UniversalControlXPCDevice, UniversalControlXPCEdgeRegion, 
                        _TtC16UniversalControl16AgentXPCListener ]
 ...

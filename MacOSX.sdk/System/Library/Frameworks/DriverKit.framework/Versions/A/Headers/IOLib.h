@@ -39,6 +39,7 @@
 #include <os/overflow.h>
 #include <os/log.h>
 #include <TargetConditionals.h>
+#include <os/availability.h>
 
 #ifndef DRIVERKIT_IOLIB_H
 #define DRIVERKIT_IOLIB_H
@@ -49,6 +50,15 @@
 #else
 #define IO_FOR_ANALYZER(x)
 #endif
+
+#ifndef __typed_memory_operation
+#if defined(__has_feature) && __has_feature(typed_memory_operations)
+#define __typed_memory_operation(override, type_param_pos) __attribute__((typed_memory_operation(override, type_param_pos)))
+#else
+#define __typed_memory_operation(override, type_param_pos)
+#endif
+#endif
+
 
 __BEGIN_DECLS
 
@@ -76,6 +86,12 @@ __attribute__((format(printf, 1, 2)));
 int IOLogv(const char *format, va_list ap)
 __attribute__((format(printf, 1, 0)));
 
+typedef unsigned long long malloc_type_id_t;
+
+void *
+IOMallocTyped(size_t length, malloc_type_id_t type_id)
+__attribute__((alloc_size(1))) IO_FOR_ANALYZER(__attribute__((returns_nonnull))) API_AVAILABLE(driverkit(23.4));
+
 /*! @function IOMalloc
  *   @abstract Allocates general purpose memory.
  *   @discussion This is a general purpose utility to allocate memory. There are no alignment guarantees given on the returned memory, and alignment may vary depending on the configuration. To allocate memory for I/O, use IOBufferMemoryDescriptor::Create()
@@ -84,7 +100,12 @@ __attribute__((format(printf, 1, 0)));
  */
 void *
 IOMalloc(size_t length)
+__typed_memory_operation(IOMallocTyped, 1)
 __attribute__((alloc_size(1))) IO_FOR_ANALYZER(__attribute__((returns_nonnull)));
+
+void *
+IOMallocZeroTyped(size_t length, malloc_type_id_t type_id)
+__attribute__((alloc_size(1))) IO_FOR_ANALYZER(__attribute__((returns_nonnull))) API_AVAILABLE(driverkit(23.4));
 
 /*! @function IOMallocZero
  *   @abstract Allocates general purpose memory, initialized to zero.
@@ -94,6 +115,7 @@ __attribute__((alloc_size(1))) IO_FOR_ANALYZER(__attribute__((returns_nonnull)))
  */
 void * 
 IOMallocZero(size_t length)
+__typed_memory_operation(IOMallocZeroTyped, 1)
 __attribute__((alloc_size(1))) IO_FOR_ANALYZER(__attribute__((returns_nonnull)));
 
 /*! @function IOFree
@@ -275,13 +297,15 @@ OSReportWithBacktrace(const char *str, ...) __printflike(1, 2);
  */
 #define IONew(type, count)                              \
 ({                                                      \
-    size_t __size;                                      \
-    bool overflow = os_mul_overflow(sizeof(type), (count), &__size); \
+    size_t __size, __count = (count);                   \
+    bool overflow = os_mul_overflow(sizeof(type), __count, &__size); \
 	IO_FOR_ANALYZER(assert(!overflow));					\
     (overflow										    \
     ? ((type *) NULL)                                   \
-    : ((type *) IOMalloc(__size)));                     \
+    : ((type *) IOMalloc(__count * sizeof(type))));     \
 })
+// Note: we recompute the size (guaranteed to not overflow) in the call to IOMalloc()
+// to make it easier for the compiler to infer the type when rewriting to IOMallocTyped().
 
 /*! @macro IONewZero
  *   @abstract Calls IOMallocZero with the size of an array of types.
@@ -291,13 +315,15 @@ OSReportWithBacktrace(const char *str, ...) __printflike(1, 2);
  */
 #define IONewZero(type, count)                          \
 ({                                                      \
-    size_t __size;                                      \
-    bool overflow = os_mul_overflow(sizeof(type), (count), &__size); \
+    size_t __size, __count = (count);                   \
+    bool overflow = os_mul_overflow(sizeof(type), __count, &__size); \
 	IO_FOR_ANALYZER(assert(!overflow));					\
     (overflow											\
     ? ((type *) NULL)                                   \
-    : ((type *) IOMallocZero(__size)));                 \
+    : ((type *) IOMallocZero(__count * sizeof(type)))); \
 })
+// Note: we recompute the size (guaranteed to not overflow) in the call to IOMallocZero()
+// to make it easier for the compiler to infer the type when rewriting to IOMallocZeroTyped().
 
 /*! @macro IODelete
  *   @abstract Calls IOFree with the size of an array of types.

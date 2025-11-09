@@ -112,6 +112,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// Removes the action with the provided identifier from the set of passed control events.
 - (void)removeActionForIdentifier:(UIActionIdentifier)actionIdentifier forControlEvents:(UIControlEvents)controlEvents API_AVAILABLE(ios(14.0));
 
+/// Performs the control's primary action.
+- (void)performPrimaryAction API_AVAILABLE(ios(17.4));
+
 // get info about target & actions. this makes it possible to enumerate all target/actions by checking for each event kind
 @property(nonatomic,readonly) NSSet *allTargets;                                           // set may include NSNull to indicate at least one nil target
 @property(nonatomic,readonly) UIControlEvents allControlEvents;                            // list of all events that have at least one action

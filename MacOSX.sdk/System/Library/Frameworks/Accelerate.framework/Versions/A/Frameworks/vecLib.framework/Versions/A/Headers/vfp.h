@@ -1,5 +1,5 @@
-/*  vfp.h (from vecLib-1041.0)
- *  Copyright (c) 1999-2023 by Apple Inc. All rights reserved.
+/*  vfp.h (from vecLib-1043.100)
+ *  Copyright (c) 1999-2024 by Apple Inc. All rights reserved.
  *
  *  Overview:
  *  vfp.h provides math library operations for SIMD vectors.  These functions
@@ -78,7 +78,7 @@ extern vFloat vfloorf(vFloat) API_AVAILABLE(macos(10.5), ios(6.0));
 extern vFloat vtruncf(vFloat) API_AVAILABLE(macos(10.9), ios(6.0));
 extern vFloat  vnintf(vFloat) API_AVAILABLE(macos(10.5), ios(6.0));
 
-#if !0
+#if !0 && !0
 /*  The legacy name vintf is not available on iOS, and is deprecated on macOS.  Use vtruncf instead.      */
 extern vFloat   vintf(vFloat) API_DEPRECATED_WITH_REPLACEMENT("vtruncf", macos(10.5, 10.14)) API_UNAVAILABLE(ios, tvos, watchos);
 #endif	
@@ -268,7 +268,7 @@ extern vUInt32   vsignbitf(vFloat)         API_AVAILABLE(macos(10.0), ios(6.0));
 extern vFloat  vnextafterf(vFloat, vFloat) API_AVAILABLE(macos(10.0), ios(6.0));
 extern vUInt32  vclassifyf(vFloat)         API_AVAILABLE(macos(10.0), ios(6.0));
 
-#if !0
+#if !0 && !0
 /*  The legacy name vfabf is not available on iOS.  Use vfabsf instead.       */
 extern vFloat        vfabf(vFloat)          API_DEPRECATED_WITH_REPLACEMENT("vfabsf", macos(10.0, 12.0)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif	

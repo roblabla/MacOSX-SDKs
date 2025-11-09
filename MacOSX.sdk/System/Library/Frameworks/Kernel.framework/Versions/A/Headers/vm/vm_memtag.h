@@ -125,7 +125,11 @@ vm_memtag_extract_tag(vm_offset_t tagged_ptr)
  * tag value to achieve optimal codegen and no external calls.
  */
 #define vm_memtag_canonicalize_address(addr)    vm_memtag_add_ptr_tag(addr, 0xF)
+#define vm_memtag_canonicalize_user_address(addr)       vm_memtag_add_ptr_tag(addr, 0x0)
 
+#ifdef HAS_MTE_EMULATION_SHIMS
+#define vm_rosetta_canonicalize_user_address(addr)      vm_memtag_canonicalize_user_address(addr)
+#endif /* HAS_MTE_EMULATION_SHIMS */
 #else /* CONFIG_KERNEL_TAGGING */
 
 #define vm_memtag_bzero(p, s)                   bzero(p, s)
@@ -138,6 +142,28 @@ vm_memtag_extract_tag(vm_offset_t tagged_ptr)
 #define vm_memtag_canonicalize_address(a)       (a)
 #define vm_memtag_enable_checking()             do { } while (0)
 #define vm_memtag_disable_checking()            do { } while (0)
+
+#if HAS_MTE_EMULATION_SHIMS
+/*
+ * While it's not great to duplicate MEMTAG functionality, it is
+ * necessary for bleaching purposes. This is because we need the
+ * canonicalization features of MEMTAG but cannot make suitably generic to
+ * support our use case without breaking the secrecy of MTE.
+ */
+
+#define VM_ROSETTA_PTR_BITS_MASK                                ((1LLU<<56) - 1)
+#define VM_ROSETTA_PTR_TAG_MASK                                 (0xf)
+#define VM_ROSETTA_PTR_TAG_SHIFT                                (56)
+
+static inline vm_address_t
+vm_rosetta_add_ptr_tag(vm_address_t naked_ptr, uint8_t tag)
+{
+	return (naked_ptr & VM_ROSETTA_PTR_BITS_MASK) |
+	       (((vm_address_t)tag) << VM_ROSETTA_PTR_TAG_SHIFT);
+}
+
+#define vm_rosetta_canonicalize_user_address(addr) vm_rosetta_add_ptr_tag(addr, 0x0)
+#endif /* HAS_MTE_EMULATION_SHIMS */
 
 #endif /* CONFIG_KERNEL_TAGGING */
 

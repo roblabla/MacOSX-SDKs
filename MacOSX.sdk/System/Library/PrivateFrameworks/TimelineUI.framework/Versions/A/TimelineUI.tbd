@@ -65,6 +65,7 @@ exports:
                        '_$s10TimelineUI0A7UIErrorO11descriptionSSvg', '_$s10TimelineUI0A7UIErrorO11descriptionSSvpMV', 
                        '_$s10TimelineUI0A7UIErrorO13outroTimedOutyA2CmFWC', '_$s10TimelineUI0A7UIErrorO16errorDescriptionSSSgvg', 
                        '_$s10TimelineUI0A7UIErrorO16errorDescriptionSSSgvpMV', '_$s10TimelineUI0A7UIErrorO17systemWentToSleepyA2CmFWC', 
+                       '_$s10TimelineUI0A7UIErrorO18failedToFindWindowyA2CmFWC', 
                        '_$s10TimelineUI0A7UIErrorO21clientWindowOffScreenyA2CmFWC', 
                        '_$s10TimelineUI0A7UIErrorO21desktopPictureIsEmptyyA2CmFWC', 
                        '_$s10TimelineUI0A7UIErrorO22failedToCaptureDisplayyACSo7CGErrorV_s6UInt32VtcACmFWC', 
@@ -234,7 +235,6 @@ exports:
                        __ZTS31TNaturalCubicSplineInterpolator, __ZTV15TLUTimelineTick, 
                        __ZTV23TParametricInterpolator, __ZTV28TPiecewiseLinearInterpolator, 
                        __ZTV31TNaturalCubicSplineInterpolator ]
-    objc-classes:    [ TLUAppearance, TLUFloatingRestoreIcon, TLUScreenshot, TLUTask, 
-                       TLUTimelineController, TLUTimelineLayer, _TtC10TimelineUI17TimelineUITesting, 
-                       _TtC10TimelineUI29TLUTimelineControllerInternal ]
+    objc-classes:    [ TLUAppearance, TLUFloatingRestoreIcon, TLUTask, TLUTimelineController, 
+                       TLUTimelineLayer, _TtC10TimelineUI17TimelineUITesting, _TtC10TimelineUI29TLUTimelineControllerInternal ]
 ...

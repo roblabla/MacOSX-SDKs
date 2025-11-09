@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceEngine.framework/Versions/A/IntelligenceEngine'
-current-version: 3300.31.1
+current-version: 3304.2.1
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN4YAML12EventHandlerE, __ZTIN4YAML13SettingChangeINS_13EMITTER_MANIPEEE, 
@@ -1785,4 +1785,5 @@ exports:
                        IEPatternizer, IEResponse, IEResponseUndo, IETestParseError, 
                        IETestResult, IETestResults, IEUpdater, IEValidationResult, 
                        IEValidator, IEVariable ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

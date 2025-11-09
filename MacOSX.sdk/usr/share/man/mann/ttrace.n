@@ -1,5 +1,4 @@
 '\"
-'\" Generated from file '' by tcllib/doctools with format 'nroff'
 '\"
 '\" -*- tcl -*- doctools manpage
 '\" The definitions below are for supplemental macros used in Tcl/Tk

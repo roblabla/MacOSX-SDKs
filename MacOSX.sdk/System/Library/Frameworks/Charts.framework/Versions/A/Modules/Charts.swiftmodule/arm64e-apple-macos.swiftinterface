@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Charts
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2.2.1
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2.4.8.2 -module-name Charts
 import Foundation
 import Swift
 import SwiftUI
@@ -1018,6 +1017,9 @@ extension Charts.BuilderPair : Charts.ChartContent where T0 : Charts.ChartConten
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct PlottableValue<Value> where Value : Charts.Plottable {
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.PlottableValue {
   public static func value(_ labelKey: SwiftUI.LocalizedStringKey, _ value: Value) -> Charts.PlottableValue<Value>
   @_disfavoredOverload public static func value<S>(_ label: S, _ value: Value) -> Charts.PlottableValue<Value> where S : Swift.StringProtocol
   public static func value(_ label: SwiftUI.Text, _ value: Value) -> Charts.PlottableValue<Value>

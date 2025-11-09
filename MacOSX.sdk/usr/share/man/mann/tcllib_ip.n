@@ -1,5 +1,4 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/0032d1ee-80fd-11ee-8227-6aecfccc70fe/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/dns/tcllib_ip.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 2004, Pat Thoyts
 '\" Copyright (c) 2005 Aamer Akhter <aakhter@cisco.com>
 '\"

@@ -6,6 +6,8 @@
 #import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor.h>
 #import <Foundation/Foundation.h>
 
+#import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialRegistrationRequest.h>
+
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
@@ -26,6 +28,14 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
+@end
+
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_AVAILABLE(macos(14.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos, visionos)
+#else
+API_AVAILABLE(macos(14.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos)
+#endif
+@interface ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest () <ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialRegistrationRequest>
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

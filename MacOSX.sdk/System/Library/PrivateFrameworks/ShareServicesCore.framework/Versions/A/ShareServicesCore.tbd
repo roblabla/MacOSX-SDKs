@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ShareServicesCore.framework/Versions/A/ShareServicesCore'
-current-version: 621.0.100
+current-version: 646.2.101
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SBLDontAllowRAWForSharingService, _SBLFileURLFromFileURLs, 
@@ -30,5 +30,6 @@ exports:
                        SBLShareKitShareableAssetItem, SBLShareKitShareableItem, SBLShareKitShareableStoryItem, 
                        SBLSharedAlbumsSharingService, SBLVideoStabilizationInternalService, 
                        SharingServiceString ]
-    objc-ivars:      [ SBLShareKitShareableItem._didPrepare, SBLShareKitShareableItem._prepareLock ]
+    objc-ivars:      [ SBLShareKitShareableItem._didPrepare, SBLShareKitShareableItem._prepareLock, 
+                       SBLShareKitShareableItem._progressLock ]
 ...

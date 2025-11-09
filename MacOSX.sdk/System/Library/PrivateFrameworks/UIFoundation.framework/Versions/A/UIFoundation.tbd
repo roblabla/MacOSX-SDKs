@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 908.3
+current-version: 909.7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -45,16 +45,17 @@ exports:
                        _NSGeneratorDocumentAttribute, _NSGlyphDisplayInvalidationTrace, 
                        _NSGlyphGenerationTrace, _NSGlyphGeometryTrace, _NSGlyphInfoAttributeName, 
                        _NSGrammarLeftOffsetAttributeName, _NSGrammarRightOffsetAttributeName, 
-                       _NSHTMLTextDocumentType, _NSHeadIndentRulerMarkerTag, _NSHyphenationFactorDocumentAttribute, 
-                       _NSIgnoringSubstitutionAttributeName, _NSKernAttributeName, 
-                       _NSKeywordsDocumentAttribute, _NSLanguageAttributeName, _NSLeftMarginDocumentAttribute, 
-                       _NSLigatureAttributeName, _NSLinkAttributeName, _NSMacSimpleTextDocumentType, 
-                       _NSManagerDocumentAttribute, _NSMarkedClauseSegmentAttributeName, 
-                       _NSMarkedTextSelectionAttributeName, _NSMarkedTextStyleAttributeName, 
-                       _NSModificationTimeDocumentAttribute, _NSNoIndexDocumentAttribute, 
-                       _NSObliquenessAttributeName, _NSOfficeOpenXMLTextDocumentType, 
-                       _NSOpenDocumentTextDocumentType, _NSOriginalFontAttributeName, 
-                       _NSOrthographyAttributeName, _NSPOSIXLocaleIdentifier, _NSPaperMarginDocumentAttribute, 
+                       _NSHTMLAllowNetworkAccess, _NSHTMLTextDocumentType, _NSHeadIndentRulerMarkerTag, 
+                       _NSHyphenationFactorDocumentAttribute, _NSIgnoringSubstitutionAttributeName, 
+                       _NSKernAttributeName, _NSKeywordsDocumentAttribute, _NSLanguageAttributeName, 
+                       _NSLeftMarginDocumentAttribute, _NSLigatureAttributeName, 
+                       _NSLinkAttributeName, _NSMacSimpleTextDocumentType, _NSManagerDocumentAttribute, 
+                       _NSMarkedClauseSegmentAttributeName, _NSMarkedTextSelectionAttributeName, 
+                       _NSMarkedTextStyleAttributeName, _NSModificationTimeDocumentAttribute, 
+                       _NSNoIndexDocumentAttribute, _NSObliquenessAttributeName, 
+                       _NSOfficeOpenXMLTextDocumentType, _NSOpenDocumentTextDocumentType, 
+                       _NSOriginalFontAttributeName, _NSOrthographyAttributeName, 
+                       _NSPOSIXLocaleIdentifier, _NSPaperMarginDocumentAttribute, 
                        _NSPaperSizeDocumentAttribute, _NSParagraphStyleAttributeName, 
                        _NSPlainTextDocumentType, _NSPrefixSpacesDocumentAttribute, 
                        _NSRTFDTextDocumentType, _NSRTFException, _NSRTFTextDocumentType, 

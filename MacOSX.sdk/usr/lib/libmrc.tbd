@@ -12,5 +12,8 @@ exports:
                        _mrc_dns_proxy_set_event_handler, _mrc_dns_proxy_set_queue, 
                        _mrc_dns_proxy_state_inquiry_activate, _mrc_dns_proxy_state_inquiry_create, 
                        _mrc_dns_proxy_state_inquiry_invalidate, _mrc_dns_proxy_state_inquiry_set_handler, 
-                       _mrc_dns_proxy_state_inquiry_set_queue, _mrc_release, _mrc_retain ]
+                       _mrc_dns_proxy_state_inquiry_set_queue, _mrc_dns_service_registration_activate, 
+                       _mrc_dns_service_registration_create, _mrc_dns_service_registration_invalidate, 
+                       _mrc_dns_service_registration_set_event_handler, _mrc_dns_service_registration_set_queue, 
+                       _mrc_release, _mrc_retain ]
 ...

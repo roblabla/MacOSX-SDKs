@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarks.framework/Versions/A/WebBookmarks'
-current-version: 617.1.17
+current-version: 618.1.15
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BookmarksBarSpecialID, _BookmarksFrequentlyVisitedSitesSpecialID, 
@@ -37,13 +37,14 @@ exports:
                        _WebBookmarksReadingListFetchingNotification, _WebBookmarksReadingListFolderTitle, 
                        _WebBookmarksResetCloudHistoryAccountDefaultsKey, _WebBookmarksRootBookmarkTitle, 
                        _WebBookmarksSQLiteErrorDomain, _WebBookmarksServerMachServiceName, 
-                       _WebBookmarksSpecialFoldersDidChangeNotification, _WebBookmarksTabFolderContentsDidChangeNotification, 
-                       _WebBookmarksToMigrationStateKey, _WebBookmarksWebFilterAllowedSitesFolderTitle, 
-                       _WebBookmarksXPCConnectionErrorDomain, _WebNSStringFromBookmarkID, 
-                       _kSafariFetcherClearAllReadingListArchivesMessageName, _kSafariFetcherClearReadingListArchiveMessageName, 
-                       _kSafariFetcherDServiceName, _kSafariFetcherDidFinishFetchingMessageName, 
-                       _kSafariFetcherDidStartFetchingItemMessageName, _kSafariFetcherDidStopFetchingItemMessageName, 
-                       _kSafariFetcherDidUpdateProgressMessageName, _kSafariFetcherRegisterForReadingListFetcherUpdatesMessageName, 
+                       _WebBookmarksShowIconOnlyAttributeKey, _WebBookmarksSpecialFoldersDidChangeNotification, 
+                       _WebBookmarksTabFolderContentsDidChangeNotification, _WebBookmarksToMigrationStateKey, 
+                       _WebBookmarksWebFilterAllowedSitesFolderTitle, _WebBookmarksXPCConnectionErrorDomain, 
+                       _WebNSStringFromBookmarkID, _kSafariFetcherClearAllReadingListArchivesMessageName, 
+                       _kSafariFetcherClearReadingListArchiveMessageName, _kSafariFetcherDServiceName, 
+                       _kSafariFetcherDidFinishFetchingMessageName, _kSafariFetcherDidStartFetchingItemMessageName, 
+                       _kSafariFetcherDidStopFetchingItemMessageName, _kSafariFetcherDidUpdateProgressMessageName, 
+                       _kSafariFetcherRegisterForReadingListFetcherUpdatesMessageName, 
                        _kSafariFetcherStartReadingListFetcherMessageName, _kSafariFetcherUnregisterForReadingListFetcherUpdatesMessageName, 
                        _kWebBookmarksAddToReadingListMessageName, _kWebBookmarksAddressKey, 
                        _kWebBookmarksClearAllCloudTabDevicesMessageName, _kWebBookmarksClearAllSafariHistoryMessageName, 
@@ -72,14 +73,13 @@ exports:
                        WBReusableTabManager, WBSettingsSyncEngineAccess, WBSettingsTask, 
                        WBTab, WBTabCollection, WBTabCyclerCommandHandler, WBTabGroup, 
                        WBTabGroupManager, WBTabGroupSyncAgent, WBTabGroupSyncAgentProxy, 
-                       WBWebsiteDataRecord, WBWindow, WBWindowState, WebBookmark, 
-                       WebBookmarkChange, WebBookmarkChangeSet, WebBookmarkCollection, 
-                       WebBookmarkDebugSafariTabCollection, WebBookmarkDeviceIdentifier, 
-                       WebBookmarkList, WebBookmarkListQuery, WebBookmarkProductionSafariTabCollection, 
-                       WebBookmarkReadonlyCollection, WebBookmarkSafariAutomationTabCollection, 
-                       WebBookmarkSafariTechnologyPreviewTabCollection, WebBookmarkSecondaryCollection, 
-                       WebBookmarkTabCollection, WebBookmarksSettingsGateway, WebBookmarksXPCConnection, 
-                       WebBookmarksXPCListener ]
+                       WBWebsiteDataRecord, WBWindowState, WebBookmark, WebBookmarkChange, 
+                       WebBookmarkChangeSet, WebBookmarkCollection, WebBookmarkDebugSafariTabCollection, 
+                       WebBookmarkDeviceIdentifier, WebBookmarkList, WebBookmarkListQuery, 
+                       WebBookmarkProductionSafariTabCollection, WebBookmarkReadonlyCollection, 
+                       WebBookmarkSafariAutomationTabCollection, WebBookmarkSafariTechnologyPreviewTabCollection, 
+                       WebBookmarkSecondaryCollection, WebBookmarkTabCollection, 
+                       WebBookmarksSettingsGateway, WebBookmarksXPCConnection, WebBookmarksXPCListener ]
     objc-ivars:      [ WBProfile._settingsDictionary, WBProfile._tabGroups, WBProfile._titleProvider, 
                        WBTab._added, WBTab._bookmark, WBTab._inUnnamedTabGroup, WBTab._modified, 
                        WBTab._moved, WBTab._privateBrowsing, WBTab._shared, WBTab._tabGroupUUID, 

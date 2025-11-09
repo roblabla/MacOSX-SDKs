@@ -654,8 +654,9 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  fetchContents to retrieve the new contents and replace them on disk.
 
  The `baseVersion` might contain one or both component set to
- `NSFileProviderItemVersionComponentZero` in case there has never been a version for
- which the item on disk and the item in the provider were known to be in sync.
+ `+[NSFileProviderItemVersion beforeFirstSyncComponent]`, in case
+ there has never been a version for which the item on disk and the item in the provider
+ were known to be in sync.
 
  Structural consistency and Cycle handling:
  ------------------------------------------

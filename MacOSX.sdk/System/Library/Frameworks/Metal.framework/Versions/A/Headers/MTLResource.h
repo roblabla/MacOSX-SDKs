@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
+#import <mach/mach.h>
 
 NS_ASSUME_NONNULL_BEGIN
 /*!
@@ -282,6 +283,11 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 -(BOOL) isAliasable API_AVAILABLE(macos(10.13), ios(10.0));
 
+/*!
+ @method setOwnerWithIdentity:
+ @abstract Assigns ownership of the resource's underlying memory to another task for the purposes of VM accounting.
+*/
+- (kern_return_t)setOwnerWithIdentity:(task_id_token_t)task_id_token API_AVAILABLE(ios(17.4), watchos(10.4), tvos(17.4), macos(14.4));
 @end
 
 

@@ -19,9 +19,10 @@ exports:
                        OTICDPRecordContext, OTICDPRecordSilentContext, OTInheritanceKey, 
                        OTSecureElementPeerIdentity, OTWalrus, OTWebAccess ]
     objc-ivars:      [ OTAccountSettings._walrus, OTAccountSettings._webAccess, OTCDPRecoveryInformation._containsIcdpData, 
-                       OTCDPRecoveryInformation._has, OTCDPRecoveryInformation._recoveryKey, 
-                       OTCDPRecoveryInformation._recoverySecret, OTCDPRecoveryInformation._silentRecoveryAttempt, 
-                       OTCDPRecoveryInformation._useCachedSecret, OTCDPRecoveryInformation._usePreviouslyCachedRecoveryKey, 
+                       OTCDPRecoveryInformation._has, OTCDPRecoveryInformation._nonViableRepair, 
+                       OTCDPRecoveryInformation._recoveryKey, OTCDPRecoveryInformation._recoverySecret, 
+                       OTCDPRecoveryInformation._silentRecoveryAttempt, OTCDPRecoveryInformation._useCachedSecret, 
+                       OTCDPRecoveryInformation._usePreviouslyCachedRecoveryKey, 
                        OTCDPRecoveryInformation._usesMultipleIcsc, OTCurrentSecureElementIdentities._localPeerIdentity, 
                        OTCurrentSecureElementIdentities._pendingLocalPeerIdentity, 
                        OTCurrentSecureElementIdentities._trustedPeerSecureElementIdentities, 

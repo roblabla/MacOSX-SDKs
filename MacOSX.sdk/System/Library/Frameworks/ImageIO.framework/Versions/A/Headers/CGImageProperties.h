@@ -139,6 +139,8 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFModel  IMAGEIO_AVAILABLE_ST
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFOrientation  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFXResolution  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFYResolution  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFXPosition  IMAGEIO_AVAILABLE_STARTING(14.4, 17.4);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFYPosition  IMAGEIO_AVAILABLE_STARTING(14.4, 17.4);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFResolutionUnit  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFSoftware  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFTransferFunction  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
@@ -159,7 +161,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFYDensity  IMAGEIO_AVAILABLE
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFDensityUnit  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFIsProgressive  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
-/* Possible keys for kCGImagePropertyHEICSDictionary */
+/* Possible keys for kCGImagePropertyHEICSDictionary and kCGImagePropertyAVISDictionary */
 
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSLoopCount  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSDelayTime  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);

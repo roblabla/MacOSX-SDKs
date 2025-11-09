@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreGraphics
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 15
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 15 -module-name CoreGraphics
 @_exported import CoreFoundation
 @_exported import CoreGraphics
 import Darwin

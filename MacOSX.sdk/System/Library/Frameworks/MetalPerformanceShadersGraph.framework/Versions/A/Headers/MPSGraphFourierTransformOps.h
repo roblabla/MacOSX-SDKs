@@ -82,11 +82,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 ///  the result tensor back with the inverse of the input transpose.
 ///
 /// - Parameters:
-///   - tensor: A complex-valued input tensor. Must have datatype `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`.
+///   - tensor: A complex or real-valued input tensor.
 ///   - axes: An array of numbers that specifies over which axes MPSGraph performs the Fourier transform - all axes must be contained within last four dimensions of the input tensor.
 ///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
-/// - Returns: A valid MPSGraphTensor of the same type as `tensor`.
+/// - Returns: A valid complex-valued MPSGraphTensor of the same shape as `tensor`.
 -(MPSGraphTensor *) fastFourierTransformWithTensor:(MPSGraphTensor *) tensor
                                               axes:(NSArray<NSNumber *> *) axes
                                         descriptor:(MPSGraphFFTDescriptor *) descriptor
@@ -115,11 +115,11 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 ///  the result tensor back with the inverse of the input transpose.
 ///
 /// - Parameters:
-///   - tensor: A complex-valued input tensor. Must have datatype `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`.
+///   - tensor: A complex or real-valued input tensor.
 ///   - axesTensor: A tensor of rank one containing the axes over which MPSGraph performs the transformation. See ``MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:``.
 ///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
-/// - Returns: A valid MPSGraphTensor of the same type as `tensor`.
+/// - Returns: A valid complex-valued MPSGraphTensor of the same shape as `tensor`.
 -(MPSGraphTensor *) fastFourierTransformWithTensor:(MPSGraphTensor *) tensor
                                         axesTensor:(MPSGraphTensor *) axesTensor
                                         descriptor:(MPSGraphFFTDescriptor *) descriptor

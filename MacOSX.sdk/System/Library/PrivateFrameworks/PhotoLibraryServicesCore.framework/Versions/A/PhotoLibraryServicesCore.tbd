@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServicesCore.framework/Versions/A/PhotoLibraryServicesCore'
-current-version: 621.0.100
+current-version: 646.2.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -542,14 +542,14 @@ exports:
                        _PLThumbnailIdentifierSchemeUBF, _PLThumbnailManagerTableOnlyRebuildKey, 
                        _PLThumbnailManagerThumbnailFormatKey, _PLThumbnailManagerThumbnailFormatsKey, 
                        _PLThumbnailManagerVersionKey, _PLThumbnailTableExtension, 
-                       _PLThumbnailsGetLog, _PLTimelineGetLog, _PLTransformForImageOrientation, 
-                       _PLTungstenGetLog, _PLUIActionsGetLog, _PLUIGetLog, _PLURLForResourceProperties, 
-                       _PLURLFromXPCDictionary, _PLUUIDBytesFromString, _PLUUIDDataFromString, 
-                       _PLUUIDFromLocalMercuryLocalIdentifier, _PLUnSetIsAssetsdProxyService, 
-                       _PLUnarchiveUUIDStringsSetFromData, _PLUnderlyingErrorCodeForDomain, 
-                       _PLUnderlyingErrorHasOSDomain, _PLUnderlyingErrorThatHasDomainAndCode, 
-                       _PLUnderlyingErrorThatMatchesCodesByDomain, _PLUnderlyingErrorWithDomain, 
-                       _PLUnderlyingPOSIXError, _PLUniformTypeIdentifierIsRenderableImage, 
+                       _PLThumbnailsGetLog, _PLTimelineGetLog, _PLTopLevelErrorAndAllUnderlyingErrors, 
+                       _PLTransformForImageOrientation, _PLTungstenGetLog, _PLUIActionsGetLog, 
+                       _PLUIGetLog, _PLURLForResourceProperties, _PLURLFromXPCDictionary, 
+                       _PLUUIDBytesFromString, _PLUUIDDataFromString, _PLUUIDFromLocalMercuryLocalIdentifier, 
+                       _PLUnSetIsAssetsdProxyService, _PLUnarchiveUUIDStringsSetFromData, 
+                       _PLUnderlyingErrorCodeForDomain, _PLUnderlyingErrorHasOSDomain, 
+                       _PLUnderlyingErrorThatHasDomainAndCode, _PLUnderlyingErrorThatMatchesCodesByDomain, 
+                       _PLUnderlyingErrorWithDomain, _PLUnderlyingPOSIXError, _PLUniformTypeIdentifierIsRenderableImage, 
                        _PLUnmirroredImageOrientation, _PLUpNextGetLog, _PLUserFeedbackGetLog, 
                        _PLUserSmartAlbumGetLog, _PLUserStatusGetLog, _PLUserStatusUIGetLog, 
                        _PLValidateDesignatedRequirementDataForSecCode, _PLValidatedSavedAssetTypeApplies, 
@@ -589,11 +589,11 @@ exports:
                        _PhotoLibraryServicesEntitlementAllowSmartSharingCacheWrite, 
                        _UIImageClass, __PLDataExplicitLengthKey, __PLIsNotificationTypeEnabledForKey, 
                        __PLResetNotificationTypeEnabledKey, __PLSandboxedURLKey, 
-                       __PLSandboxedURLTokenKey, __localizedStringFromTableInBundle, 
-                       _ca_log_Photos_upgrade, _circularRegionFromData, _convertToData, 
-                       _createImageByRemovingBlackBarsFromPreviewImage, _dateFromData, 
-                       _doubleFromData, _indexSetForManagedObjectsMatchingIDs, _integerFromData, 
-                       _kAcceptActionID, _kCommentActionID, _kDCIMImageWriterAvalancheExtension, 
+                       __PLSandboxedURLTokenKey, __ValidatedClientLogFromDictionary, 
+                       __localizedStringFromTableInBundle, _ca_log_Photos_upgrade, 
+                       _circularRegionFromData, _convertToData, _createImageByRemovingBlackBarsFromPreviewImage, 
+                       _dateFromData, _doubleFromData, _indexSetForManagedObjectsMatchingIDs, 
+                       _integerFromData, _kAcceptActionID, _kCommentActionID, _kDCIMImageWriterAvalancheExtension, 
                        _kDCIMImageWriterCameraAdjustmentsPathExtension, _kDCIMImageWriterCameraMetadataPathExtension, 
                        _kDCIMImageWriterDiagnosticExtension, _kDCIMImageWriterFullSizeRenderSecondaryPathExtension, 
                        _kDCIMImageWriterIncomingAssetFilenameDelimiter, _kDCIMImageWriterLargeThumbnailInflightPathExtension, 

@@ -444,6 +444,24 @@ Boolean IOSurfaceAllowsPixelSizeCasting(IOSurfaceRef buffer)
 kern_return_t IOSurfaceSetPurgeable(IOSurfaceRef buffer, uint32_t newState, uint32_t * __nullable oldState)
     API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
+// Memory ledger tags.
+typedef CF_ENUM(int, IOSurfaceMemoryLedgerTags) {
+    kIOSurfaceMemoryLedgerTagDefault     = 0x00000001,
+    kIOSurfaceMemoryLedgerTagNetwork     = 0x00000002,
+    kIOSurfaceMemoryLedgerTagMedia       = 0x00000003,
+    kIOSurfaceMemoryLedgerTagGraphics    = 0x00000004,
+    kIOSurfaceMemoryLedgerTagNeural      = 0x00000005,
+};
+
+// Memory ledger flags.
+typedef CF_OPTIONS(uint32_t, IOSurfaceMemoryLedgerFlags) {
+    kIOSurfaceMemoryLedgerFlagNoFootprint = (1 << 0),
+};
+
+
+kern_return_t IOSurfaceSetOwnershipIdentity(IOSurfaceRef buffer, task_id_token_t task_id_token, int newLedgerTag, uint32_t newLedgerOptions) API_AVAILABLE(ios(17.4), watchos(10.4), tvos(17.4), macos(14.4));
+
+
 __END_DECLS
 
 CF_ASSUME_NONNULL_END

@@ -19,7 +19,8 @@ API_AVAILABLE(macos(13.0), ios(16.1)) API_UNAVAILABLE(tvos, watchos)
 /// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request.
 /// @param identifier A unique identifier that is used to track the download across the app and extension.
 /// @param request The request used to perform the download. The URL provided inside of the request must be a https scheme.
-/// @param fileSize The size of the file to download.  If the @c fileSize is not accurate, then the download will fail if @c isEssential is true.
+/// @param fileSize The size of the file to download. This field must be accurate in order to show the user accurate progress during app installation.
+/// If the size does not match the file being downloaded, then the download will fail.
 /// @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download.
 - (instancetype)initWithIdentifier:(NSString *)identifier
                            request:(NSURLRequest *)request
@@ -31,9 +32,8 @@ API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(tvos, watchos);
 /// @param identifier A unique identifier that is used to track the download across the app and extension.
 /// @param request The request used to perform the download. The URL provided inside of the request must be a https scheme.
 /// @param essential Whether the download is essential. See @c BADownload.isEssential. Default is false.
-/// @param fileSize The size of the file to download. For Essential downloads, this field must be accurate in order to show the user
-/// accurate progress during app installation. If the size does not match the file being downloaded, then the download will fail. It is recommended to
-/// report an accurate @c fileSize for both Essential and Non-Essential downloads.
+/// @param fileSize The size of the file to download. This field must be accurate in order to show the user accurate progress during app installation.
+/// If the size does not match the file being downloaded, then the download will fail.
 /// @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download.
 /// @param priority A priority between @c BADownloaderPriorityMin - @c BADownloaderPriorityMax which is used to order the downloads for this process.
 /// It is recommended to use  @c BADownloaderPriorityDefault if download priority does not matter.

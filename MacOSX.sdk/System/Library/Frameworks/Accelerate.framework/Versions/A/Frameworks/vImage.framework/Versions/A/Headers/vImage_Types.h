@@ -20,7 +20,11 @@ extern "C" {
 #include <stdint.h>
 #include <stddef.h>
 #include <unistd.h>
-#if __has_include(<os/availability.h>) && !defined(__linux__)
+
+#include <TargetConditionals.h>
+
+
+#if __has_include(<os/availability.h>) && !defined(__linux__) && !0 && !0
 #    include <os/availability.h>
 #else
 #    define __API_AVAILABLE(...)
@@ -530,7 +534,7 @@ typedef VIMAGE_CHOICE_ENUM(vImage_Error, ssize_t)
  
  @constant  kvImageLeaveAlphaUnchanged   Some functions that operate on ARGB data in place allow
                 you to operate on just the RGB components and leave the alpha channel unmodified.
-                These are typically histogram and gamma functions.
+                These are typically histogram and gamma functions and some convolution functions.
  
  @constant  kvImageCopyInPlace  One of four edging modes. This one tells vImage to do nothing for
                 destination pixels that need source pixels that are missing. The corresponding source
@@ -865,6 +869,7 @@ typedef struct vImage_YpCbCrToARGBMatrix
         float                      Cb_B;
 }vImage_YpCbCrToARGBMatrix;
  
+#if !0 && !0
 /*! @const      kvImage_YpCbCrToARGBMatrix_ITU_R_601_4
  @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.601-4 */
 extern VIMAGE_PF const vImage_YpCbCrToARGBMatrix *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
@@ -872,7 +877,7 @@ extern VIMAGE_PF const vImage_YpCbCrToARGBMatrix *kvImage_YpCbCrToARGBMatrix_ITU
 /*! @const      kvImage_YpCbCrToARGBMatrix_ITU_R_709_2
  @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.709-2 */
 extern VIMAGE_PF const vImage_YpCbCrToARGBMatrix *kvImage_YpCbCrToARGBMatrix_ITU_R_709_2 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
-
+#endif
     
     
     
@@ -939,6 +944,7 @@ typedef struct vImage_ARGBToYpCbCrMatrix
         float                      B_Cr;
 }vImage_ARGBToYpCbCrMatrix;
 
+#if !0 && !0
 /*! @const      kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4
  @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.601-4 */
 extern VIMAGE_PF const vImage_ARGBToYpCbCrMatrix *kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
@@ -946,7 +952,8 @@ extern VIMAGE_PF const vImage_ARGBToYpCbCrMatrix *kvImage_ARGBToYpCbCrMatrix_ITU
 /*! @const      kvImage_ARGBToYpCbCrMatrix_ITU_R_709_2
  @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.709-2 */
 extern VIMAGE_PF const vImage_ARGBToYpCbCrMatrix *kvImage_ARGBToYpCbCrMatrix_ITU_R_709_2 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
-    
+#endif
+
 /*!
  @typedef    vImage_ARGBToYpCbCr
  @abstract   An opaque representation of a 3x3 converson matrix for converting RGB signals to Y'CbCr.

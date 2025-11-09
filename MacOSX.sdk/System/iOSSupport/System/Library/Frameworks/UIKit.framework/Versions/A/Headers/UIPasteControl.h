@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, UIPasteControlDisplayMode) {
     UIPasteControlDisplayModeIconAndLabel,
     UIPasteControlDisplayModeIconOnly,
     UIPasteControlDisplayModeLabelOnly
-} API_AVAILABLE(ios(16.0)) NS_SWIFT_NAME(UIPasteControl.DisplayMode);
+} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(UIPasteControl.DisplayMode);
 
 UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(UIPasteControl.Configuration) NS_SWIFT_UI_ACTOR
 @interface UIPasteControlConfiguration : NSObject <NSSecureCoding>

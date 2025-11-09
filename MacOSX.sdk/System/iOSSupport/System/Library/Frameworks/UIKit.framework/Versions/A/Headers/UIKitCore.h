@@ -163,6 +163,7 @@
 #import <UIKit/UISegmentedControl.h>
 #import <UIKit/UISlider.h>
 #import <UIKit/UISplitViewController.h>
+#import <UIKit/UIStandardTextCursorView.h>
 #import <UIKit/UIStepper.h>
 #import <UIKit/UIStoryboard.h>
 #import <UIKit/UIStoryboardPopoverSegue.h>
@@ -180,6 +181,7 @@
 #import <UIKit/UITableViewController.h>
 #import <UIKit/UITapGestureRecognizer.h>
 #import <UIKit/UITextChecker.h>
+#import <UIKit/UITextCursorDropPositionAnimator.h>
 #import <UIKit/UITextCursorView.h>
 #import <UIKit/UITextField.h>
 #import <UIKit/UITextInput.h>
@@ -317,6 +319,7 @@
 #import <UIKit/UNNotificationResponse+UIKitAdditions.h>
 #import <UIKit/UIAction.h>
 #import <UIKit/UIMenu.h>
+#import <UIKit/UIMenuDisplayPreferences.h>
 #import <UIKit/UIMenuLeaf.h>
 #import <UIKit/UIMenuBuilder.h>
 #import <UIKit/UIMenuElement.h>

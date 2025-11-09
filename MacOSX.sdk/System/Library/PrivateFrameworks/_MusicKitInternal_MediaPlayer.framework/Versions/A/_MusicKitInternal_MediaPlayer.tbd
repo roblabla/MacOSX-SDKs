@@ -11,6 +11,7 @@ exports:
                        '_$s16MusicKitInternal0A21CollaborativePlaylistV11JoinRequestV01_abC12_MediaPlayerE7performSo07MPModelE0CyYaKF', 
                        '_$s16MusicKitInternal0A21CollaborativePlaylistV11JoinRequestV01_abC12_MediaPlayerE7performSo07MPModelE0CyYaKFTu', 
                        '_$s16MusicKitInternal0A21CollaborativePlaylistV11JoinRequestV01_abC12_MediaPlayerE8playlist13invitationURLAESgSo07MPModelE0C_10Foundation0L0VtcfC', 
+                       '_$s16MusicKitInternal0A21CollaborativePlaylistV15ReactionRequestV01_abC12_MediaPlayerE8playlist5entry8reactionAESgSo07MPModelE0C_So0mE5EntryCSSSgtcfC', 
                        '_$s16MusicKitInternal0A21CollaborativePlaylistV23EndCollaborationRequestV01_abC12_MediaPlayerE7performSo07MPModelE0CyYaKF', 
                        '_$s16MusicKitInternal0A21CollaborativePlaylistV23EndCollaborationRequestV01_abC12_MediaPlayerE7performSo07MPModelE0CyYaKFTu', 
                        '_$s16MusicKitInternal0A21CollaborativePlaylistV23EndCollaborationRequestV01_abC12_MediaPlayerE8playlistAESgSo07MPModelE0C_tcfC', 

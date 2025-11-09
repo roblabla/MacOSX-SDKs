@@ -5,7 +5,11 @@
 AS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 NS_REFINED_FOR_SWIFT
-AS_API_AVAILABLE(macos(13.5), macCatalyst(16.6)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos)
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+AS_API_AVAILABLE(macos(13.5), macCatalyst(16.6), ios(17.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(watchos)
+#else
+AS_API_AVAILABLE(macos(13.5), macCatalyst(16.6), ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+#endif
 typedef NS_ENUM(NSInteger, ASPublicKeyCredentialClientDataCrossOriginValue) {
     ASPublicKeyCredentialClientDataCrossOriginValueNotSet,
     ASPublicKeyCredentialClientDataCrossOriginValueCrossOrigin,
@@ -13,7 +17,11 @@ typedef NS_ENUM(NSInteger, ASPublicKeyCredentialClientDataCrossOriginValue) {
 };
 
 NS_REFINED_FOR_SWIFT AS_EXTERN
-AS_API_AVAILABLE(macos(13.5), macCatalyst(16.6)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos)
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+AS_API_AVAILABLE(macos(13.5), macCatalyst(16.6), ios(17.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(watchos)
+#else
+AS_API_AVAILABLE(macos(13.5), macCatalyst(16.6), ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+#endif
 /// This object represents the client data for a public key credential request, as defined in the WebAuthentication standard.
 @interface ASPublicKeyCredentialClientData : NSObject
 + (instancetype)new NS_UNAVAILABLE;

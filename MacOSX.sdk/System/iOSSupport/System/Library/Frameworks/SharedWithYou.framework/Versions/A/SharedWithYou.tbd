@@ -95,6 +95,7 @@ exports:
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC30cloudSharingControllerDelegateSo07UICloudijK0_pSgvpMV', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC30cloudSharingControllerDelegateSo07UICloudijK0_pSgvs', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC32presentationControllerDidDismissyySo014UIPresentationI0CF', 
+                       '_$s13SharedWithYou30_SWCollaborationButtonViewImplC33presentationControllerWillDismissyySo014UIPresentationI0CF', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC5frameACSo6CGRectV_tcfC', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC5frameACSo6CGRectV_tcfc', 
                        '_$s13SharedWithYou30_SWCollaborationButtonViewImplC8delegateSo0dF8Delegate_pSgvM', 

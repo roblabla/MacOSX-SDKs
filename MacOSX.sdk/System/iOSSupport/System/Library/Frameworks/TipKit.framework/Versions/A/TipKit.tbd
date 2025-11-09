@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 55.2.3
+current-version: 55.4.17
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -313,13 +313,20 @@ exports:
                        '_$s6TipKit4TipsO17UsesCoreAnalyticsVAA0A6OptionAAWP', '_$s6TipKit4TipsO17UsesCoreAnalyticsVMa', 
                        '_$s6TipKit4TipsO17UsesCoreAnalyticsVMn', '_$s6TipKit4TipsO17UsesCoreAnalyticsVN', 
                        '_$s6TipKit4TipsO17UsesCoreAnalyticsVyAESbcfC', '_$s6TipKit4TipsO18InvalidationReasonO15actionPerformedyA2EmFWC', 
+                       '_$s6TipKit4TipsO18InvalidationReasonO16holdoutGroupUseryA2EmFWC', 
+                       '_$s6TipKit4TipsO18InvalidationReasonO20cloudDeviceDismissalyA2EmFWC', 
                        '_$s6TipKit4TipsO18InvalidationReasonO20displayCountExceededyA2EmFWC', 
+                       '_$s6TipKit4TipsO18InvalidationReasonO23displayDurationExceededyA2EmFWC', 
                        '_$s6TipKit4TipsO18InvalidationReasonO2eeoiySbAE_AEtFZ', '_$s6TipKit4TipsO18InvalidationReasonO4hash4intoys6HasherVz_tF', 
-                       '_$s6TipKit4TipsO18InvalidationReasonO9hashValueSivg', '_$s6TipKit4TipsO18InvalidationReasonO9hashValueSivpMV', 
-                       '_$s6TipKit4TipsO18InvalidationReasonO9tipClosedyA2EmFWC', 
+                       '_$s6TipKit4TipsO18InvalidationReasonO7unknownyA2EmFWC', '_$s6TipKit4TipsO18InvalidationReasonO9hashValueSivg', 
+                       '_$s6TipKit4TipsO18InvalidationReasonO9hashValueSivpMV', '_$s6TipKit4TipsO18InvalidationReasonO9tipClosedyA2EmFWC', 
                        '_$s6TipKit4TipsO18InvalidationReasonOMa', '_$s6TipKit4TipsO18InvalidationReasonOMn', 
                        '_$s6TipKit4TipsO18InvalidationReasonON', '_$s6TipKit4TipsO18InvalidationReasonOSHAAMc', 
-                       '_$s6TipKit4TipsO18InvalidationReasonOSQAAMc', '_$s6TipKit4TipsO19ConfigurationOptionV15AnalyticsEngineV04coreF0AGvgZ', 
+                       '_$s6TipKit4TipsO18InvalidationReasonOSQAAMc', '_$s6TipKit4TipsO18MaxDisplayDurationVAA0A6OptionAAMc', 
+                       '_$s6TipKit4TipsO18MaxDisplayDurationVAA0A6OptionAAWP', '_$s6TipKit4TipsO18MaxDisplayDurationVMa', 
+                       '_$s6TipKit4TipsO18MaxDisplayDurationVMn', '_$s6TipKit4TipsO18MaxDisplayDurationVN', 
+                       '_$s6TipKit4TipsO18MaxDisplayDurationV_22invalidatesImmediatelyAESd_SbtcfC', 
+                       '_$s6TipKit4TipsO19ConfigurationOptionV15AnalyticsEngineV04coreF0AGvgZ', 
                        '_$s6TipKit4TipsO19ConfigurationOptionV15AnalyticsEngineV2eeoiySbAG_AGtFZ', 
                        '_$s6TipKit4TipsO19ConfigurationOptionV15AnalyticsEngineV4noneAGvgZ', 
                        '_$s6TipKit4TipsO19ConfigurationOptionV15AnalyticsEngineVMa', 

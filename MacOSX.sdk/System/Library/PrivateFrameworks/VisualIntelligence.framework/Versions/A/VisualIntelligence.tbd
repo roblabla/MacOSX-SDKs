@@ -1501,10 +1501,11 @@ exports:
                        __ZNK5faiss9HeapArrayINS_4CMaxIixEEE16per_line_extremaEPiPx, 
                        __ZNK5faiss9HeapArrayINS_4CMinIfxEEE16per_line_extremaEPfPx, 
                        __ZNK5faiss9HeapArrayINS_4CMinIixEEE16per_line_extremaEPiPx, 
-                       __ZTIN5faiss18IndexIDMapTemplateINS_11IndexBinaryEEE, __ZTIN5faiss18IndexIDMapTemplateINS_5IndexEEE, 
-                       __ZTIN5faiss19IndexIDMap2TemplateINS_11IndexBinaryEEE, __ZTIN5faiss19IndexIDMap2TemplateINS_5IndexEEE, 
-                       __ZTSN5faiss18IndexIDMapTemplateINS_11IndexBinaryEEE, __ZTSN5faiss18IndexIDMapTemplateINS_5IndexEEE, 
-                       __ZTSN5faiss19IndexIDMap2TemplateINS_11IndexBinaryEEE, __ZTSN5faiss19IndexIDMap2TemplateINS_5IndexEEE, 
-                       __ZTVN5faiss18IndexIDMapTemplateINS_11IndexBinaryEEE, __ZTVN5faiss18IndexIDMapTemplateINS_5IndexEEE, 
-                       __ZTVN5faiss19IndexIDMap2TemplateINS_11IndexBinaryEEE, __ZTVN5faiss19IndexIDMap2TemplateINS_5IndexEEE ]
+                       __ZNSt3__119piecewise_constructE, __ZTIN5faiss18IndexIDMapTemplateINS_11IndexBinaryEEE, 
+                       __ZTIN5faiss18IndexIDMapTemplateINS_5IndexEEE, __ZTIN5faiss19IndexIDMap2TemplateINS_11IndexBinaryEEE, 
+                       __ZTIN5faiss19IndexIDMap2TemplateINS_5IndexEEE, __ZTSN5faiss18IndexIDMapTemplateINS_11IndexBinaryEEE, 
+                       __ZTSN5faiss18IndexIDMapTemplateINS_5IndexEEE, __ZTSN5faiss19IndexIDMap2TemplateINS_11IndexBinaryEEE, 
+                       __ZTSN5faiss19IndexIDMap2TemplateINS_5IndexEEE, __ZTVN5faiss18IndexIDMapTemplateINS_11IndexBinaryEEE, 
+                       __ZTVN5faiss18IndexIDMapTemplateINS_5IndexEEE, __ZTVN5faiss19IndexIDMap2TemplateINS_11IndexBinaryEEE, 
+                       __ZTVN5faiss19IndexIDMap2TemplateINS_5IndexEEE ]
 ...

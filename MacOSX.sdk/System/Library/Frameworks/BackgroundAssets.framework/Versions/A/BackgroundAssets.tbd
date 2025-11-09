@@ -11,20 +11,6 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _BAAppStoreClientErrorDomain, _BAAppStoreProgressObserverStateString, 
-                       _BABackgroundDownloaderExtensionLabel, _BAContentRequestToString, 
-                       _BADownloadNecessityToString, _BADownloaderPriorityDefault, 
-                       _BADownloaderPriorityMax, _BADownloaderPriorityMin, _BAErrorDomain, 
-                       _BAEssentialMaxInstallSize, _BAInitialRestrictionsDomainAllowList, 
-                       _BAInitialRestrictionsDownloadAllowance, _BAInitialRestrictionsEssentialDownloadAllowance, 
-                       _BAInitialRestrictionsKey, _BAInitialRestrictionsOptionalDownloadAllowance, 
-                       _BAManifestURL, _BAMaxInstallSize, _BAOptionalMaxInstallSize ]
-    objc-classes:    [ BAAgentSystemProxy, BAAppExtensionInfo, BAAppStoreClient, 
-                       BAAppStoreEventDescriptor, BAAppStorePrepareDescriptor, BAAppStoreProgressConfiguration, 
-                       BAAppStoreProgressInfoDescriptor, BAAppStoreProgressObserver, 
-                       BAApplicationConfigurationOverrides, BACloudKitDownload, BADownload, 
-                       BADownloadManager, BAURLDownload ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s16BackgroundAssets21BADownloaderExtensionMp', '_$s16BackgroundAssets21BADownloaderExtensionP0D10Foundation03AppD0Tb', 
                        '_$s16BackgroundAssets21BADownloaderExtensionP18backgroundDownload_10didReceiveSo36NSURLSessionAuthChallengeDispositionV_So15NSURLCredentialCSgtSo10BADownloadC_So019NSURLAuthenticationK0CtYaFTj', 
                        '_$s16BackgroundAssets21BADownloaderExtensionP18backgroundDownload_10didReceiveSo36NSURLSessionAuthChallengeDispositionV_So15NSURLCredentialCSgtSo10BADownloadC_So019NSURLAuthenticationK0CtYaFTjTu', 
@@ -52,5 +38,18 @@ exports:
                        '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE31restrictedDownloadSizeRemainingSiSgvg', 
                        '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE31restrictedDownloadSizeRemainingSiSgvpMV', 
                        '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE40restrictedEssentialDownloadSizeRemainingSiSgvg', 
-                       '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE40restrictedEssentialDownloadSizeRemainingSiSgvpMV' ]
+                       '_$sSo18BAAppExtensionInfoC16BackgroundAssetsE40restrictedEssentialDownloadSizeRemainingSiSgvpMV', 
+                       _BAAppStoreClientErrorDomain, _BAAppStoreProgressObserverStateString, 
+                       _BABackgroundDownloaderExtensionLabel, _BAContentRequestToString, 
+                       _BADownloadNecessityToString, _BADownloaderPriorityDefault, 
+                       _BADownloaderPriorityMax, _BADownloaderPriorityMin, _BAErrorDomain, 
+                       _BAEssentialMaxInstallSize, _BAInitialRestrictionsDomainAllowList, 
+                       _BAInitialRestrictionsDownloadAllowance, _BAInitialRestrictionsEssentialDownloadAllowance, 
+                       _BAInitialRestrictionsKey, _BAInitialRestrictionsOptionalDownloadAllowance, 
+                       _BAManifestURL, _BAMaxInstallSize, _BAOptionalMaxInstallSize ]
+    objc-classes:    [ BAAgentSystemProxy, BAAppExtensionInfo, BAAppStoreClient, 
+                       BAAppStoreEventDescriptor, BAAppStorePrepareDescriptor, BAAppStoreProgressConfiguration, 
+                       BAAppStoreProgressInfoDescriptor, BAAppStoreProgressObserver, 
+                       BAApplicationConfigurationOverrides, BACloudKitDownload, BADownload, 
+                       BADownloadManager, BAURLDownload ]
 ...

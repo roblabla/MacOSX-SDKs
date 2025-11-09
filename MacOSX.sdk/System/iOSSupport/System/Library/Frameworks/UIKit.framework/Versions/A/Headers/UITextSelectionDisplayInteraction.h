@@ -16,6 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class UITextSelectionDisplayInteraction;
+@protocol UITextCursorView;
 
 UIKIT_EXTERN API_AVAILABLE(ios(17.0)) NS_SWIFT_UI_ACTOR
 @protocol UITextSelectionDisplayInteractionDelegate <NSObject>

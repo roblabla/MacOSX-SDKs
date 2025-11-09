@@ -7,8 +7,6 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CoreTransferableVersionNumber ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation16AttributedStringV16CoreTransferable0E0ADMc', 
                        '_$s10Foundation16AttributedStringV16CoreTransferable0E0ADWP', 
                        '_$s10Foundation16AttributedStringV16CoreTransferableE22transferRepresentationQrvgZ', 
@@ -225,5 +223,6 @@ exports:
                        '_$ss5NeverO16CoreTransferable22TransferRepresentationACMc', 
                        '_$ss5NeverO16CoreTransferable22TransferRepresentationACWP', 
                        '_$ss5NeverO16CoreTransferableE22transferRepresentationABvgZ', 
-                       '_$ss5NeverO16CoreTransferableE4bodyABvg', '_$ss5NeverO16CoreTransferableE4bodyABvpMV' ]
+                       '_$ss5NeverO16CoreTransferableE4bodyABvg', '_$ss5NeverO16CoreTransferableE4bodyABvpMV', 
+                       _CoreTransferableVersionNumber ]
 ...

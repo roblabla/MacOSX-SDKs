@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GameControllerFoundation.framework/Versions/A/GameControllerFoundation'
-current-version: 11.2.3
+current-version: 11.4.11
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -13,7 +13,8 @@ exports:
                        _GCCurrentConsoleUserDidChangeNotificationUserKey, _GCDevicePhysicalInputErrorDomain, 
                        _GCFLOC_ACCELERATOR_PEDAL, _GCFLOC_BRAKE_PEDAL, _GCFLOC_BUTTON_A, 
                        _GCFLOC_BUTTON_B, _GCFLOC_BUTTON_HOME, _GCFLOC_BUTTON_L4, 
-                       _GCFLOC_BUTTON_L5, _GCFLOC_BUTTON_LEFT_THUMBSTICK, _GCFLOC_BUTTON_MENU, 
+                       _GCFLOC_BUTTON_L5, _GCFLOC_BUTTON_LEFT_THUMBSTICK, _GCFLOC_BUTTON_M1, 
+                       _GCFLOC_BUTTON_M2, _GCFLOC_BUTTON_M3, _GCFLOC_BUTTON_M4, _GCFLOC_BUTTON_MENU, 
                        _GCFLOC_BUTTON_OPTIONS, _GCFLOC_BUTTON_R4, _GCFLOC_BUTTON_R5, 
                        _GCFLOC_BUTTON_RIGHT_THUMBSTICK, _GCFLOC_BUTTON_SHARE, _GCFLOC_BUTTON_X, 
                        _GCFLOC_BUTTON_Y, _GCFLOC_CLUTCH_PEDAL, _GCFLOC_DIRECTIONAL_GAMEPAD_BUTTON_CENTER, 
@@ -85,12 +86,13 @@ exports:
                        _GC_NSInvalidCollectionException, _GC_NSURLAssetKey, _GC_NSUnhandledErrorException, 
                        _NSStringFromGCHIDElementUsageType, __GCFConvertStringToLocalizedString, 
                        __gc_log_device, __gc_log_device_configuration, __gc_log_hid, 
-                       __gc_log_hid_input, __gc_log_ipc, _gc_log_create_device, _gc_log_create_hid, 
-                       _gc_log_create_ipc ]
+                       __gc_log_hid_input, __gc_log_ipc, __gc_log_runtime_issue, 
+                       _gc_log_create_device, _gc_log_create_hid, _gc_log_create_ipc ]
     objc-classes:    [ GCConfigXPCService, GCConfigXPCServiceClientConnection, GCConfigXPCServiceConnection, 
                        GCConfigXPCServiceServiceConnection, GCConfigurationAssetManagementServiceConnection, 
                        GCConfigurationAssetManagementServiceXPCProxy, GCConfigurationBundleFileSystemSource, 
                        GCConsoleUserMonitor, GCDaemon, GCDevicePhysicalInputButtonElementDescription, 
+                       GCDevicePhysicalInputCapacitiveButtonElementDescription, GCDevicePhysicalInputCapacitiveDirectionPadElementDescription, 
                        GCDevicePhysicalInputClickableDirectionPadElementDescription, 
                        GCDevicePhysicalInputDescription, GCDevicePhysicalInputDirectionPadElementDescription, 
                        GCDevicePhysicalInputElementDescription, GCDevicePhysicalInputGroupDescription, 

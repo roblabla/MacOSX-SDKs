@@ -82,7 +82,7 @@ API_AVAILABLE(ios(15.0),watchos(8.0))
 /// confirm that they’re comfortable using this UI element when they want to
 /// grant temporary access to their location data. If the user agrees, the app
 /// receives temporary
-/// <doc://com.apple.documentation/documentation/corelocation/clauthorizationstatus/kclauthorizationstatusauthorizedwheninuse>
+/// <doc://com.apple.documentation/documentation/corelocation/clauthorizationstatus/authorizedwheninuse>
 /// authorization, like when the user chooses _Allow Once_ in response to your
 /// app’s standard location authorization request. This temporary authorization
 /// expires when your app is no longer in use.

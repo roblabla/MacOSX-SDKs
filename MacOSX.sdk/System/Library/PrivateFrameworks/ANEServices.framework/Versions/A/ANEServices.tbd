@@ -165,4 +165,5 @@ exports:
                        __ZTSN6H11ANE24H11ANECFLocalMessagePortE, __ZTSN6H11ANE25H11ANECFRemoteMessagePortE, 
                        __ZTVN6H11ANE24H11ANECFLocalMessagePortE, __ZTVN6H11ANE25H11ANECFRemoteMessagePortE, 
                        _debugFwStatsData ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI'
-current-version: 1226.2.2
+current-version: 1226.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -390,7 +390,8 @@ exports:
                        _SGUICompositeImageNSRectKey, __suggestionViewControllerPresenter, 
                        _currentUIContext, _dateStringForDate, _dispatchInContext, 
                        _getContactSuggestion, _getRealtimeSuggestion, _getReminderSuggestion, 
-                       _isMultiDayEvent, _kSGSuggestionCategoryContactsId, _kSGSuggestionCategoryEventsId, 
+                       _isMultiDayEvent, _kSGSuggestionCategoryCollaborationsId, 
+                       _kSGSuggestionCategoryContactsId, _kSGSuggestionCategoryEventsId, 
                        _kSGSuggestionCategoryRadarsId, _kSGSuggestionCategoryRemindersId, 
                        _kSGSuggestionCategorySubscriptionsId, _timeStringForDate ]
     objc-classes:    [ SGBannerDividerParameter, SGBannerUtility, SGBannerView, SGContactSuggestionHelpers, 

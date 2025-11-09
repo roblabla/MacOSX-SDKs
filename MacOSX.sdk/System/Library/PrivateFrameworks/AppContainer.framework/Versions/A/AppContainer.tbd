@@ -10,8 +10,9 @@ exports:
                        _ASBContainerErrorsIsPermissionsError, _ASBContainerErrorsRecordPermissionsError, 
                        _ASBContainerErrorsUpdateError, _containerSetError, _kASBContainerErrorDomain, 
                        _kASBContainerErrorsHasPermissionsDataKey, _kASBContainerIdentityKey, 
-                       _kASBContainerSandboxProfileDataKey, _kASBContainerSandboxProfileDataValidationInfoKey, 
-                       _recordPermissionsError, _restorePermissions ]
+                       _kASBContainerManagerErrorDomain, _kASBContainerSandboxProfileDataKey, 
+                       _kASBContainerSandboxProfileDataValidationInfoKey, _recordPermissionsError, 
+                       _restorePermissions ]
     objc-classes:    [ ASBContainer, ASBContainerACL, ASBContainerAction, ASBContainerActionMove, 
                        ASBContainerActionMoveContents, ASBContainerActionSymlink, 
                        ASBContainerActionUnlink, ASBContainerFileManager, ASBContainerUpgradeScript, 

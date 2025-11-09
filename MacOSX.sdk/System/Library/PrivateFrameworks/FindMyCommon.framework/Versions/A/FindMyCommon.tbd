@@ -10,7 +10,7 @@ allowable-clients:
     clients:         [ FindMyCloudKit, FindMyCommonTests, FindMyCrypto, FindMyLocate, 
                        FindMyLocateObjCWrapper, FindMyStorage, findmybeaconingd, 
                        findmylocateagent, findmylocated, findmylocatedTests, searchpartyd, 
-                       searchpartyuseragent ]
+                       searchpartydTests, searchpartyuseragent ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

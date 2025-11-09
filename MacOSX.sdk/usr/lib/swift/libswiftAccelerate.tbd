@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAccelerate.dylib'
-current-version: 45
+current-version: 45.100.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -13,9 +13,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftAccelerate.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftAccelerate.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s10Accelerate0A13MutableBufferMp', '_$s10Accelerate0A13MutableBufferP010withUnsafebC7Pointeryqd__qd__Sry7ElementQzGzKXEKlFTj', 
+                       '$ld$install_name$os10.9$@rpath/libswiftAccelerate.dylib', 
+                       '_$s10Accelerate0A13MutableBufferMp', '_$s10Accelerate0A13MutableBufferP010withUnsafebC7Pointeryqd__qd__Sry7ElementQzGzKXEKlFTj', 
                        '_$s10Accelerate0A13MutableBufferP010withUnsafebC7Pointeryqd__qd__Sry7ElementQzGzKXEKlFTq', 
                        '_$s10Accelerate0A13MutableBufferPAA0aC0Tb', '_$s10Accelerate0A13MutableBufferPAASMRzrlE010withUnsafebC7Pointeryqd__qd__Sry7ElementSTQzGzKXEKlF', 
                        '_$s10Accelerate0A13MutableBufferTL', '_$s10Accelerate0A6BufferMp', 

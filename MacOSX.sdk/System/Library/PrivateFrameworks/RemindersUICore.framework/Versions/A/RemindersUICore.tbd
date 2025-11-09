@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RemindersUICore.framework/Versions/A/RemindersUICore'
+current-version: 2941
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -7997,6 +7998,8 @@ exports:
                        '_$s15RemindersUICore27TTRReminderDetailInteractorC15attributeEditorAA32TTRRemindersListAttributeEditing_pvg', 
                        '_$s15RemindersUICore27TTRReminderDetailInteractorC15attributeEditorAA32TTRRemindersListAttributeEditing_pvpMV', 
                        '_$s15RemindersUICore27TTRReminderDetailInteractorC17locationDidUpdateyyF', 
+                       '_$s15RemindersUICore27TTRReminderDetailInteractorC17pendingMoveTargetAA0cd7PendinggE10CapabilityC0igH0VSgvg', 
+                       '_$s15RemindersUICore27TTRReminderDetailInteractorC17pendingMoveTargetAA0cd7PendinggE10CapabilityC0igH0VSgvpMV', 
                        '_$s15RemindersUICore27TTRReminderDetailInteractorC17subtasksLoadState33_BE0E3189919E03745028D29606869BC8LLAA08SubtasksgH0AELLOvpfi', 
                        '_$s15RemindersUICore27TTRReminderDetailInteractorC18reminderChangeItem11undoManager6listID15customSmartList14manualOrderingAcA6EitherOySo011REMRemindergH0C7Combine19CurrentValueSubjectCyALs5NeverOGG_So06NSUndoJ0CSo09REMObjectL0CSgSo08REMSmartO0CSgAA036TTRRemindersMovingParamsForREMManualQ0VSgtcfC', 
                        '_$s15RemindersUICore27TTRReminderDetailInteractorC18reminderChangeItem11undoManager6listID15customSmartList14manualOrderingAcA6EitherOySo011REMRemindergH0C7Combine19CurrentValueSubjectCyALs5NeverOGG_So06NSUndoJ0CSo09REMObjectL0CSgSo08REMSmartO0CSgAA036TTRRemindersMovingParamsForREMManualQ0VSgtcfCTq', 
@@ -8661,8 +8664,8 @@ exports:
                        '_$s15RemindersUICore29TTRDeferredViewActionProviderCfd', 
                        '_$s15RemindersUICore29TTREditSectionsChangeItemTypeMp', '_$s15RemindersUICore29TTREditSectionsChangeItemTypeP7StorageAC_SQTn', 
                        '_$s15RemindersUICore29TTREditSectionsChangeItemTypeTL', '_$s15RemindersUICore29TTREditSectionsInteractorTypeMp', 
-                       '_$s15RemindersUICore29TTREditSectionsInteractorTypeTL', '_$s15RemindersUICore29TTRGeoLocationServiceDelegateMp', 
-                       '_$s15RemindersUICore29TTRGeoLocationServiceDelegatePAAE03geoE0_017didResolveCurrentD0yAA0cdE4Type_p_AA0cde8ResolvedD0OtF', 
+                       '_$s15RemindersUICore29TTREditSectionsInteractorTypeTL', '_$s15RemindersUICore29TTRExecutingWithinSiriProcessSbyF', 
+                       '_$s15RemindersUICore29TTRGeoLocationServiceDelegateMp', '_$s15RemindersUICore29TTRGeoLocationServiceDelegatePAAE03geoE0_017didResolveCurrentD0yAA0cdE4Type_p_AA0cde8ResolvedD0OtF', 
                        '_$s15RemindersUICore29TTRGeoLocationServiceDelegatePAAE03geoE0_10didResolve2toyAA0cdE4Type_p_AA0cde8ResolvedD0O7AddressOAItF', 
                        '_$s15RemindersUICore29TTRGeoLocationServiceDelegatePAAE03geoE0_10didResolve2toyAA0cdE4Type_p_So10CLLocationCAA0cde8ResolvedD0OtF', 
                        '_$s15RemindersUICore29TTRGeoLocationServiceDelegatePAAE03geoE22DidChangeAuthorizationyyAA0cdE4Type_pF', 
@@ -11749,6 +11752,7 @@ exports:
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC15attributeEditorAA32TTRRemindersListAttributeEditing_pSgvg', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC15attributeEditorAA32TTRRemindersListAttributeEditing_pSgvpMV', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC15pendingMoveList33_D16974DBE06DC169267B578E7887D2ADLLAA020TTRListOrCustomSmartI0OSgvpfi', 
+                       '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC18pendingMoveSection33_D16974DBE06DC169267B578E7887D2ADLLAA024TTRReminderDetailPendinghF10CapabilityC0sh6TargetI0VSgvpfi', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC18reminderChangeItem0E11KitInternal7PromiseCySo011REMReminderhI0CGvM', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC18reminderChangeItem0E11KitInternal7PromiseCySo011REMReminderhI0CGvg', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC18reminderChangeItem0E11KitInternal7PromiseCySo011REMReminderhI0CGvpMV', 
@@ -11771,6 +11775,7 @@ exports:
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC6listIDSo09REMObjectH0CSgvpMV', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC6update12userActivityySo07REMUserI0C_tF', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC6update17dueDateComponentsy10Foundation0iJ0V_tF', 
+                       '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC6update18pendingMoveSectionyAA024TTRReminderDetailPendingiF10CapabilityC0mi6TargetJ0V_tF', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC6update31extensionContextExtractorResultyAA0cijK0V_tF', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC6update4listyAA24TTRListOrCustomSmartListO_tF', 
                        '_$s15RemindersUICore36TTRExtensionCreateReminderInteractorC6update5notesySSSg_tF', 
@@ -14568,6 +14573,15 @@ exports:
                        '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF13TargetSectionVMn', 
                        '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF13TargetSectionVN', 
                        '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF13TargetSectionVSQAAMc', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetV03hasE7ChangesSbvg', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetV03hasE7ChangesSbvpMV', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetV07pendingF4ListAA020TTRListOrCustomSmartK0OSgvg', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetV07pendingF4ListAA020TTRListOrCustomSmartK0OSgvpMV', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetV07pendingfI7SectionAC0efiK0VSgvg', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetV07pendingfI7SectionAC0efiK0VSgvpMV', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetVMa', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetVMn', 
+                       '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC0eF6TargetVN', 
                        '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC13updateSection18sectionDisplayName16isFromSuggestion08originalJ2IDySS_SbAA010TTRSectionR0OSgtF', 
                        '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC13updateSection9sectionID08originaljL0yAA010TTRSectionL0OSg_AItF', 
                        '_$s15RemindersUICore48TTRReminderDetailPendingMoveInteractorCapabilityC18reminderChangeItem11undoManager07pendingF12TargetListID0n11CustomSmartP7ToMatchACSo011REMReminderjK0C_So06NSUndoM0CSo09REMObjectQ0CSgSo08REMSmartP0CSgtcfC', 

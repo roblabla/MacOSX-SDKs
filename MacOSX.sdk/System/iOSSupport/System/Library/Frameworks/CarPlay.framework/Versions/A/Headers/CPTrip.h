@@ -85,6 +85,13 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 @property (nullable, nonatomic, strong) id userInfo;
 
+/**
+ destinationNameVariants is an array of @c NSString representing the name of the destination for
+ this trip, arranged from most to least preferred. You must provide at least one variant.
+ The variant strings should be provided as localized, displayable content.
+ */
+@property (nonatomic, copy, nullable) NSArray<NSString *> *destinationNameVariants;
+
 @end
 
 NS_ASSUME_NONNULL_END

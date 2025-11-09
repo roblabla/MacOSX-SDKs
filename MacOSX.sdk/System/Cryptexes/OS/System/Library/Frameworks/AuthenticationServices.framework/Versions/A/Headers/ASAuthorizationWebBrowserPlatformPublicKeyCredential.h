@@ -5,7 +5,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 NS_REFINED_FOR_SWIFT
-AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4)) API_UNAVAILABLE(ios, tvos, watchos)
+AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos)
 @interface ASAuthorizationWebBrowserPlatformPublicKeyCredential : NSObject
 
 + (instancetype)new NS_UNAVAILABLE;
@@ -15,7 +15,7 @@ AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4)) API_UNAVAILABLE(ios, tvo
 @property (nonatomic, readonly) NSString *name;
 
 /// A user-specified title for the credential.
-@property (nonatomic, nullable, readonly) NSString *customTitle API_AVAILABLE(macos(14.0), macCatalyst(17.0));
+@property (nonatomic, nullable, readonly) NSString *customTitle AS_API_AVAILABLE(macos(14.0), macCatalyst(17.0), ios(17.4));
 
 /// The "relying party" (generally website) the credential was saved for.
 @property (nonatomic, readonly) NSString *relyingParty;

@@ -3,15 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AppIntents.framework/Versions/A/AppIntents'
-current-version: 146.60.7
+current-version: 174.100.17
 compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    objc-classes:    [ LNAppConnectionListener, LNAppContextWrapper, LNClientConnection, 
-                       LNExtensionConnectionHandler, LNPerformActionOperation, LNUserActivityHelper ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10AppIntents010DeprecatedA6IntentMp', '_$s10AppIntents010DeprecatedA6IntentP011ReplacementD0AC_AA0aD0Tn', 
                        '_$s10AppIntents010DeprecatedA6IntentP11deprecationAA0D11DeprecationVy011ReplacementD0QzGvgZTj', 
                        '_$s10AppIntents010DeprecatedA6IntentP11deprecationAA0D11DeprecationVy011ReplacementD0QzGvgZTq', 
@@ -44,8 +41,15 @@ exports:
                        '_$s10AppIntents011FocusFilterA7ContextV29targetContentIdentifierPrefixSSSgvg', 
                        '_$s10AppIntents011FocusFilterA7ContextV29targetContentIdentifierPrefixSSSgvpMV', 
                        '_$s10AppIntents011FocusFilterA7ContextVMa', '_$s10AppIntents011FocusFilterA7ContextVMn', 
-                       '_$s10AppIntents011FocusFilterA7ContextVN', '_$s10AppIntents019ShowSearchResultsInA6IntentMp', 
-                       '_$s10AppIntents019ShowSearchResultsInA6IntentP8CriteriaAC_AA0dH0Tn', 
+                       '_$s10AppIntents011FocusFilterA7ContextVN', '_$s10AppIntents019LimitedAvailabilityA9ShortcutsV03appE0SayAA0A8ShortcutVGvM', 
+                       '_$s10AppIntents019LimitedAvailabilityA9ShortcutsV03appE0SayAA0A8ShortcutVGvg', 
+                       '_$s10AppIntents019LimitedAvailabilityA9ShortcutsV03appE0SayAA0A8ShortcutVGvpMV', 
+                       '_$s10AppIntents019LimitedAvailabilityA9ShortcutsV03appE0SayAA0A8ShortcutVGvs', 
+                       '_$s10AppIntents019LimitedAvailabilityA9ShortcutsVAA0aE7ContentAAMc', 
+                       '_$s10AppIntents019LimitedAvailabilityA9ShortcutsVAA0aE7ContentAAWP', 
+                       '_$s10AppIntents019LimitedAvailabilityA9ShortcutsVMa', '_$s10AppIntents019LimitedAvailabilityA9ShortcutsVMn', 
+                       '_$s10AppIntents019LimitedAvailabilityA9ShortcutsVN', '_$s10AppIntents019LimitedAvailabilityA9ShortcutsVyACSayAA0A8ShortcutVGcfC', 
+                       '_$s10AppIntents019ShowSearchResultsInA6IntentMp', '_$s10AppIntents019ShowSearchResultsInA6IntentP8CriteriaAC_AA0dH0Tn', 
                        '_$s10AppIntents019ShowSearchResultsInA6IntentP8criteria8CriteriaQzvMTj', 
                        '_$s10AppIntents019ShowSearchResultsInA6IntentP8criteria8CriteriaQzvMTq', 
                        '_$s10AppIntents019ShowSearchResultsInA6IntentP8criteria8CriteriaQzvgTj', 
@@ -328,10 +332,20 @@ exports:
                        '_$s10AppIntents0A15ViewBridgeErrorON', '_$s10AppIntents0A15ViewBridgeErrorOs0E0AAMc', 
                        '_$s10AppIntents0A16IntentEnablementO7enabledyA2CmFWC', '_$s10AppIntents0A16IntentEnablementO8disabledyAC10Foundation23LocalizedStringResourceVSg_tcACmFWC', 
                        '_$s10AppIntents0A16IntentEnablementOMa', '_$s10AppIntents0A16IntentEnablementOMn', 
-                       '_$s10AppIntents0A16IntentEnablementON', '_$s10AppIntents0A16ShortcutsBuilderO10buildBlockySayAA0A8ShortcutVGAFd_tFZ', 
+                       '_$s10AppIntents0A16IntentEnablementON', '_$s10AppIntents0A16ShortcutsBuilderO10buildBlockSayAA0A8ShortcutVGyFZ', 
+                       '_$s10AppIntents0A16ShortcutsBuilderO10buildBlockySayAA0A8ShortcutVGAFd_tFZ', 
+                       '_$s10AppIntents0A16ShortcutsBuilderO10buildBlockySayAA0A8ShortcutVGAGd_tFZ', 
+                       '_$s10AppIntents0A16ShortcutsBuilderO13buildOptionalySayAA0A8ShortcutVGAA01_aC13ContentMarker_AA020_LimitedAvailabilityachI0pSgFZ', 
+                       '_$s10AppIntents0A16ShortcutsBuilderO13buildOptionalySayAA0A8ShortcutVGAGSgFZ', 
+                       '_$s10AppIntents0A16ShortcutsBuilderO13buildOptionalySayAA0A8ShortcutVGxSgAA01_aC13ContentMarkerRzlFZ', 
                        '_$s10AppIntents0A16ShortcutsBuilderO15buildExpressionyAA0A8ShortcutVAFFZ', 
+                       '_$s10AppIntents0A16ShortcutsBuilderO15buildExpressionySayAA0A8ShortcutVGAFFZ', 
+                       '_$s10AppIntents0A16ShortcutsBuilderO24buildLimitedAvailabilityyAA01_aC13ContentMarker_AA01_fgachI0pSayAA0A8ShortcutVGFZ', 
                        '_$s10AppIntents0A16ShortcutsBuilderOMa', '_$s10AppIntents0A16ShortcutsBuilderOMn', 
-                       '_$s10AppIntents0A16ShortcutsBuilderON', '_$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyKcyXAts8SendableRzlF', 
+                       '_$s10AppIntents0A16ShortcutsBuilderON', '_$s10AppIntents0A16ShortcutsContentMp', 
+                       '_$s10AppIntents0A16ShortcutsContentP03appC0SayAA0A8ShortcutVGvgTj', 
+                       '_$s10AppIntents0A16ShortcutsContentP03appC0SayAA0A8ShortcutVGvgTq', 
+                       '_$s10AppIntents0A16ShortcutsContentTL', '_$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyKcyXAts8SendableRzlF', 
                        '_$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyXAts8SendableRzlF', 
                        '_$s10AppIntents0A17DependencyManagerC3add3key10dependencyys11AnyHashableVSg_xyYaKcts8SendableRzlF', 
                        '_$s10AppIntents0A17DependencyManagerC5ErrorO012failedToLoadC0yAEy_xGs11AnyHashableV_xmtcAGmlFWC', 
@@ -3271,6 +3285,9 @@ exports:
                        '_$s10AppIntents17_ExitMarkupIntentVAA24PersistentlyIdentifiableAAWP', 
                        '_$s10AppIntents17_ExitMarkupIntentVACycfC', '_$s10AppIntents17_ExitMarkupIntentVMa', 
                        '_$s10AppIntents17_ExitMarkupIntentVMn', '_$s10AppIntents17_ExitMarkupIntentVN', 
+                       '_$s10AppIntents18AttributableEntityMp', '_$s10AppIntents18AttributableEntityP27attributionBundleIdentifierSSvgZTj', 
+                       '_$s10AppIntents18AttributableEntityP27attributionBundleIdentifierSSvgZTq', 
+                       '_$s10AppIntents18AttributableEntityPAA0aD0Tb', '_$s10AppIntents18AttributableEntityTL', 
                        '_$s10AppIntents18ContainsComparatorC13withResolvers16mappingTransformACyx10Foundation16AttributedStringVAHq1_Gqd__yc_q1_AHctcAA14EntityPropertyCyAHGRbzAHRs_AHRs0_AA21ResolverSpecificationRd__lufC', 
                        '_$s10AppIntents18ContainsComparatorC13withResolvers16mappingTransformACyx10Foundation16AttributedStringVAHq1_Gqd__yc_q1_AHctcAA14EntityPropertyCyAHGRbzAHRs_AHRs0_AA21ResolverSpecificationRd__lufCTj', 
                        '_$s10AppIntents18ContainsComparatorC13withResolvers16mappingTransformACyx10Foundation16AttributedStringVAHq1_Gqd__yc_q1_AHctcAA14EntityPropertyCyAHGRbzAHRs_AHRs0_AA21ResolverSpecificationRd__lufCTq', 
@@ -5545,7 +5562,9 @@ exports:
                        '_$s10AppIntents28MediaItemRepresentableEntityP19mediaRepresentationAA06IntentcD0VvgTjTu', 
                        '_$s10AppIntents28MediaItemRepresentableEntityP19mediaRepresentationAA06IntentcD0VvgTq', 
                        '_$s10AppIntents28MediaItemRepresentableEntityPAA0aF0Tb', 
-                       '_$s10AppIntents28MediaItemRepresentableEntityTL', '_$s10AppIntents28ResolverSpecificationBuilderO10buildBlockQryFZ', 
+                       '_$s10AppIntents28MediaItemRepresentableEntityTL', '_$s10AppIntents28PushToTalkTransmissionIntentMp', 
+                       '_$s10AppIntents28PushToTalkTransmissionIntentPAA06SystemG0Tb', 
+                       '_$s10AppIntents28PushToTalkTransmissionIntentTL', '_$s10AppIntents28ResolverSpecificationBuilderO10buildBlockQryFZ', 
                        '_$s10AppIntents28ResolverSpecificationBuilderO10buildBlockQryFZQOMQ', 
                        '_$s10AppIntents28ResolverSpecificationBuilderO10buildBlockyQrqd__AA0C0Rd__lFZ', 
                        '_$s10AppIntents28ResolverSpecificationBuilderO10buildBlockyQrqd__AA0C0Rd__lFZQOMQ', 
@@ -6112,5 +6131,7 @@ exports:
                        '_$ss5NeverO10AppIntentsE7performAC21IntentResultContainerVyA4BGyYaKFTu', 
                        '_$ss5NeverO10AppIntentsEABycfC', '_$sxSg10AppIntents12_IntentValueA2bCRzlMc', 
                        '_$sxSg10AppIntents12_IntentValueA2bCRzlWP' ]
-    objc-classes:    [ LNAppContext, LNPerformActionExecutorDelegateProxy, _AppIntentsUserActivityHelper ]
+    objc-classes:    [ LNAppConnectionListener, LNAppContext, LNAppContextWrapper, 
+                       LNClientConnection, LNExtensionConnectionHandler, LNPerformActionExecutorDelegateProxy, 
+                       LNPerformActionOperation, LNUserActivityHelper, _AppIntentsUserActivityHelper ]
 ...

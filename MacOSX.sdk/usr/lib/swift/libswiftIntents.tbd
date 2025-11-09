@@ -10,9 +10,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.11$@rpath/libswiftIntents.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.13$@rpath/libswiftIntents.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.9$@rpath/libswiftIntents.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s7Intents10INShortcutO10Foundation20ReferenceConvertibleAAMc', 
+                       '$ld$install_name$os10.14$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.9$@rpath/libswiftIntents.dylib', 
+                       '_$s7Intents10INShortcutO10Foundation20ReferenceConvertibleAAMc', 
                        '_$s7Intents10INShortcutO11descriptionSSvg', '_$s7Intents10INShortcutO11descriptionSSvpMV', 
                        '_$s7Intents10INShortcutO12userActivityACSo06NSUserD0C_tcfC', 
                        '_$s7Intents10INShortcutO12userActivitySo06NSUserD0CSgvg', 

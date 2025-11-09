@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -library-level api -module-name SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 5.2.12
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -package-name SwiftUI -enable-bare-slash-regex -user-module-version 5.4.38.401 -module-name SwiftUI
 import Accessibility
 import AppKit
 import Combine
@@ -512,6 +511,44 @@ extension SwiftUI.View {
   @available(visionOS, introduced: 1.0, deprecated: 100000.0, message: "use `confirmationDialog(title:isPresented:titleVisibility:presenting:actions:)`instead.")
   public func actionSheet(isPresented: SwiftUI.Binding<Swift.Bool>, content: () -> SwiftUI.ActionSheet) -> some SwiftUI.View
   
+}
+@available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.TableColumnBuilder {
+  @_alwaysEmitIntoClient public static func buildIf<C>(_ content: C?) -> C? where RowValue == C.TableRowValue, Sort == C.TableColumnSortComparator, C : SwiftUI.TableColumnContent {
+        content
+    }
+  @_alwaysEmitIntoClient public static func buildEither<T, F>(first: T) -> SwiftUI._ConditionalContent<T, F> where RowValue == T.TableRowValue, Sort == T.TableColumnSortComparator, T : SwiftUI.TableColumnContent, F : SwiftUI.TableColumnContent, T.TableColumnSortComparator == F.TableColumnSortComparator, T.TableRowValue == F.TableRowValue {
+        _ConditionalContent<T, F>(storage: .trueContent(first))
+    }
+  @_alwaysEmitIntoClient public static func buildEither<T, F>(second: F) -> SwiftUI._ConditionalContent<T, F> where RowValue == T.TableRowValue, Sort == T.TableColumnSortComparator, T : SwiftUI.TableColumnContent, F : SwiftUI.TableColumnContent, T.TableColumnSortComparator == F.TableColumnSortComparator, T.TableRowValue == F.TableRowValue {
+        _ConditionalContent<T, F>(storage: .falseContent(second))
+    }
+}
+@available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI._ConditionalContent : SwiftUI.TableColumnContent where TrueContent : SwiftUI.TableColumnContent, FalseContent : SwiftUI.TableColumnContent {
+  public typealias TableRowValue = TrueContent.TableRowValue
+  public typealias TableColumnSortComparator = TrueContent.TableColumnSortComparator
+  public typealias TableRowBody = Swift.Never
+  public static func _makeContent(content: SwiftUI._GraphValue<SwiftUI._ConditionalContent<TrueContent, FalseContent>>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
+  public static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
+  @usableFromInline
+  internal init(storage: SwiftUI._ConditionalContent<TrueContent, FalseContent>.Storage)
+  public typealias TableColumnBody = Swift.Never
+}
+@available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension Swift.Optional : SwiftUI.TableColumnContent where Wrapped : SwiftUI.TableColumnContent {
+  public typealias TableRowValue = Wrapped.TableRowValue
+  public typealias TableColumnSortComparator = Wrapped.TableColumnSortComparator
+  public typealias TableRowBody = Swift.Never
+  public static func _makeContent(content: SwiftUI._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
+  public static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
+  public typealias TableColumnBody = Swift.Never
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUI.View {
@@ -3828,6 +3865,8 @@ public struct TableColumn<RowValue, Sort, Content, Label> : SwiftUI.TableColumnC
   public typealias TableRowValue = RowValue
   public typealias TableColumnSortComparator = Sort
   public static func _makeContent(content: SwiftUI._GraphValue<SwiftUI.TableColumn<RowValue, Sort, Content, Label>>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
+  @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+  public static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
   public typealias TableColumnBody = Swift.Never
 }
 @available(*, unavailable)
@@ -6992,19 +7031,19 @@ public struct ToolbarItemPlacement {
   @available(visionOS, unavailable)
   public static let keyboard: SwiftUI.ToolbarItemPlacement
   @available(iOS 14.0, tvOS 14.0, watchOS 10.0, *)
-  @_backDeploy(before: iOS 17.0, tvOS 17.0)
+  @backDeployed(before: iOS 17.0, tvOS 17.0)
   @available(macOS, unavailable)
   public static var topBarLeading: SwiftUI.ToolbarItemPlacement {
     get
   }
   @available(iOS 14.0, tvOS 14.0, watchOS 10.0, *)
-  @_backDeploy(before: iOS 17.0, tvOS 17.0)
+  @backDeployed(before: iOS 17.0, tvOS 17.0)
   @available(macOS, unavailable)
   public static var topBarTrailing: SwiftUI.ToolbarItemPlacement {
     get
   }
   @available(macOS 13.0, *)
-  @_backDeploy(before: macOS 14.0)
+  @backDeployed(before: macOS 14.0)
   @available(iOS, unavailable)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -13556,7 +13595,7 @@ extension SwiftUI.EnvironmentValues {
 }
 extension SwiftUI.EnvironmentValues {
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-  @_backDeploy(before: macOS 14.0, tvOS 17.0, watchOS 10.0)
+  @backDeployed(before: macOS 14.0, tvOS 17.0, watchOS 10.0)
   public var horizontalSizeClass: SwiftUI.UserInterfaceSizeClass? {
     get {
             if #available(macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
@@ -13584,7 +13623,7 @@ extension SwiftUI.EnvironmentValues {
     set
   }
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-  @_backDeploy(before: macOS 14.0, tvOS 17.0, watchOS 10.0)
+  @backDeployed(before: macOS 14.0, tvOS 17.0, watchOS 10.0)
   public var verticalSizeClass: SwiftUI.UserInterfaceSizeClass? {
     get {
             if #available(macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
@@ -13921,7 +13960,7 @@ public protocol _PreviewProviderLocator {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_Concurrency.MainActor(unsafe) public protocol _PreviewProvider {
   @_Concurrency.MainActor(unsafe) static var _previews: Any { get }
-  static var _platform: SwiftUI.PreviewPlatform? { get }
+  @_Concurrency.MainActor(unsafe) static var _platform: SwiftUI.PreviewPlatform? { get }
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_Concurrency.MainActor(unsafe) public protocol PreviewProvider : SwiftUI._PreviewProvider {
@@ -14411,6 +14450,23 @@ extension Swift.Optional : SwiftUI.View where Wrapped : SwiftUI.View {
   public static func _makeViewList(view: SwiftUI._GraphValue<Swift.Optional<Wrapped>>, inputs: SwiftUI._ViewListInputs) -> SwiftUI._ViewListOutputs
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   public static func _viewListCount(inputs: SwiftUI._ViewListCountInputs) -> Swift.Int?
+}
+@available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct TableColumnForEach<Data, ID, RowValue, Sort, Content> : SwiftUI.TableColumnContent where Data : Swift.RandomAccessCollection, ID : Swift.Hashable, RowValue == Content.TableRowValue, Sort == Content.TableColumnSortComparator, Content : SwiftUI.TableColumnContent {
+  public typealias TableRowValue = RowValue
+  public typealias TableColumnSortComparator = Sort
+  public typealias TableColumnBody = Swift.Never
+  public var data: Data
+  public var content: (Data.Element) -> Content
+  public init(_ data: Data, @SwiftUI.TableColumnBuilder<SwiftUI.TableColumnForEach<Data, ID, RowValue, Sort, Content>.TableRowValue, SwiftUI.TableColumnForEach<Data, ID, RowValue, Sort, Content>.TableColumnSortComparator> content: @escaping (Data.Element) -> Content) where ID == Data.Element.ID, Data.Element : Swift.Identifiable
+  public init(_ data: Data, id: Swift.KeyPath<Data.Element, ID>, @SwiftUI.TableColumnBuilder<SwiftUI.TableColumnForEach<Data, ID, RowValue, Sort, Content>.TableRowValue, SwiftUI.TableColumnForEach<Data, ID, RowValue, Sort, Content>.TableColumnSortComparator> content: @escaping (Data.Element) -> Content)
+  @_semantics("swiftui.requires_constant_range") public init(_ data: Swift.Range<Swift.Int>, @SwiftUI.TableColumnBuilder<SwiftUI.TableColumnForEach<Swift.Range<Swift.Int>, Swift.Int, RowValue, Sort, Content>.TableRowValue, SwiftUI.TableColumnForEach<Swift.Range<Swift.Int>, Swift.Int, RowValue, Sort, Content>.TableColumnSortComparator> content: @escaping (Swift.Int) -> Content) where Data == Swift.Range<Swift.Int>, ID == Swift.Int
+  public static func _makeContent(content: SwiftUI._GraphValue<SwiftUI.TableColumnForEach<Data, ID, RowValue, Sort, Content>>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
+}
+@available(*, unavailable)
+extension SwiftUI.TableColumnForEach : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol _Detachable {
@@ -18195,6 +18251,8 @@ public protocol TableColumnContent<TableRowValue, TableColumnSortComparator> {
   associatedtype TableColumnBody : SwiftUI.TableColumnContent
   var tableColumnBody: Self.TableColumnBody { get }
   static func _makeContent(content: SwiftUI._GraphValue<Self>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
+  @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+  static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
 }
 #else
 @available(iOS 16.0, macOS 12.0, *)
@@ -18206,6 +18264,8 @@ public protocol TableColumnContent {
   associatedtype TableColumnBody : SwiftUI.TableColumnContent
   var tableColumnBody: Self.TableColumnBody { get }
   static func _makeContent(content: SwiftUI._GraphValue<Self>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
+  @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+  static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
 }
 #endif
 @available(iOS 16.0, macOS 12.0, *)
@@ -18230,6 +18290,12 @@ extension SwiftUI._TableColumnOutputs : Swift.Sendable {
 extension SwiftUI.TableColumnContent where Self.TableColumnSortComparator == Self.TableColumnBody.TableColumnSortComparator, Self.TableRowValue == Self.TableColumnBody.TableRowValue {
   public static func _makeContent(content: SwiftUI._GraphValue<Self>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
 }
+@available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.TableColumnContent {
+  public static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
+}
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -18239,6 +18305,8 @@ extension Swift.Never : SwiftUI.TableColumnContent {
   public var tableColumnBody: Swift.Never {
     get
   }
+  @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+  public static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
 }
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
@@ -22427,6 +22495,8 @@ extension SwiftUI.View {
         self.value = value
     }
   public static func _makeContent(content: SwiftUI._GraphValue<SwiftUI.TupleTableColumnContent<RowValue, Sort, T>>, inputs: SwiftUI._TableColumnInputs) -> SwiftUI._TableColumnOutputs
+  @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
+  public static func _tableColumnCount(inputs: SwiftUI._TableColumnInputs) -> Swift.Int?
   public typealias TableColumnBody = Swift.Never
 }
 @available(*, unavailable)
@@ -26407,7 +26477,7 @@ public struct ToolbarPlacement {
   public static var tabBar: SwiftUI.ToolbarPlacement {
     get
   }
-  @_backDeploy(before: macOS 14.0)
+  @backDeployed(before: macOS 14.0)
   @available(iOS, unavailable)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)

@@ -22,6 +22,8 @@
 .Cm oncore-sampling-period Ar period-in-ns|disabled
 .br .RE
 .Cm full-system-sampling-period Ar period-in-ns|disabled
+.br .RE
+.Cm sampling-option Ar (add:|remove:)options
 .El
 .Bl -hang -compact -width "tailspin -"
 .\"
@@ -99,6 +101,12 @@ The minimum period allowed is 1 ms. "disabled" may be used to disable the oncore
 Set up a timer in the tailspin configuration to sample all threads of all processes when the timer fires every
 .Ar period-in-ns .
 The minimum period allowed is 10 ms. "disabled" may be used to disable the full sampling timer.
+.It Cm sampling-option Ar (add:|remove:)options
+Apply the sampling options specified by
+.Ar options
+to the tailspin configuration, thereby controlling what sampling is enabled by tailspin. See
+.Sx SAMPLING OPTIONS
+on the syntax of a sampling options.
 .El
 .\" RESET
 .It Cm reset Op buffer-size-mb|ktrace-filter-descriptor|oncore-sampling-period|full-system-sampling-period
@@ -149,6 +157,12 @@ For example, this filter description would enable classes 0x1 and 0x25 and the s
 The
 .Ql ALL
 filter description enables events from all classes.
+.Sh SAMPLING OPTIONS
+Sampling options are specified via a comma-separated list of recognized names that indicate what sampling should be enabled/disabled.
+The names that are recognized are:
+.Ql cswitch-sampling
+and
+.Ql syscall-sampling
 .Sh VIEWING TAILSPIN DATA
 tailspin data can be viewed by
 .Xr ktrace 1 ,

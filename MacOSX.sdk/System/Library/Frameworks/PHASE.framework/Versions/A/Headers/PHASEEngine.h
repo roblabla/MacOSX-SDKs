@@ -5,6 +5,8 @@
 //  Copyright © 2021 Apple Inc. All rights reserved.
 //
 
+#ifndef PHASEEngine_h
+#define PHASEEngine_h
 
 #import <PHASE/PHASESoundEventNodes.h>
 #import <PHASE/PHASEAssetRegistry.h>
@@ -172,3 +174,5 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
 @end  // PHASEEngine
 
 NS_ASSUME_NONNULL_END
+
+#endif // PHASEEngine_h

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1774.2.3
+current-version: 1774.4.3
 compatibility-version: 64
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -392,9 +392,10 @@ exports:
                        _CGDisplayListEntryStateGetUndercolorRemoval, _CGDisplayListEnumerateEntriesWithOptions, 
                        _CGDisplayListExecute, _CGDisplayListGetBoundingBox, _CGDisplayListGetNumberOfEntries, 
                        _CGDisplayListGetNumberOfEntriesOfType, _CGDisplayListGetTypeID, 
-                       _CGDisplayListIsEqualToDisplayList, _CGDisplayListRelease, 
-                       _CGDisplayListReset, _CGDisplayListRetain, _CGDisplayListSerializeToURL, 
-                       _CGDisplayListSetBoundingBox, _CGDisplayMirrorsDisplay, _CGDisplayModeCopyPixelEncoding, 
+                       _CGDisplayListIsEqualToDisplayList, _CGDisplayListIsEqualToDisplayListWithOptions, 
+                       _CGDisplayListRelease, _CGDisplayListReset, _CGDisplayListRetain, 
+                       _CGDisplayListSerializeToURL, _CGDisplayListSetBoundingBox, 
+                       _CGDisplayMirrorsDisplay, _CGDisplayModeCopyPixelEncoding, 
                        _CGDisplayModeCreate, _CGDisplayModeGetHeight, _CGDisplayModeGetIODisplayModeID, 
                        _CGDisplayModeGetIOFlags, _CGDisplayModeGetPixelDensity, _CGDisplayModeGetPixelHeight, 
                        _CGDisplayModeGetPixelWidth, _CGDisplayModeGetPixelsHigh, 

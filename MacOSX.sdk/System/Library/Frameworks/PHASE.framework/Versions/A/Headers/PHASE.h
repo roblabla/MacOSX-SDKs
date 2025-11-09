@@ -5,6 +5,9 @@
 //  Copyright © 2021 Apple Inc. All rights reserved.
 //
 
+#ifndef PHASE_h
+#define PHASE_h
+
 #import <PHASE/PHASEAssetRegistry.h>
 #import <PHASE/PHASEDefinition.h>
 #import <PHASE/PHASEDirectivityModel.h>
@@ -27,3 +30,5 @@
 #import <PHASE/PHASESource.h>
 #import <PHASE/PHASESpatialPipeline.h>
 #import <PHASE/PHASETypes.h>
+
+#endif // PHASE_h

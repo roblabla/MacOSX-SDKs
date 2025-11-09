@@ -1367,7 +1367,7 @@ exports:
                        __ZNR7xgboost14JsonTypedArrayIhLNS_5Value9ValueKindE8EE8GetArrayEv, 
                        __ZNR7xgboost14JsonTypedArrayIiLNS_5Value9ValueKindE9EE8GetArrayEv, 
                        __ZNR7xgboost14JsonTypedArrayIxLNS_5Value9ValueKindE10EE8GetArrayEv, 
-                       __ZTVN7xgboost14JsonTypedArrayIfLNS_5Value9ValueKindE7EEE, 
+                       __ZNSt3__119piecewise_constructE, __ZTVN7xgboost14JsonTypedArrayIfLNS_5Value9ValueKindE7EEE, 
                        __ZTVN7xgboost14JsonTypedArrayIhLNS_5Value9ValueKindE8EEE, 
                        __ZTVN7xgboost14JsonTypedArrayIiLNS_5Value9ValueKindE9EEE, 
                        __ZTVN7xgboost14JsonTypedArrayIxLNS_5Value9ValueKindE10EEE ]

@@ -417,4 +417,5 @@ exports:
                        _verify_chain_img4_v2, _verify_chain_img4_v2_AWG1, _verify_chain_img4_v2_rsa3k, 
                        _verify_chain_img4_x86, _verify_signature_ecdsa, _verify_signature_rsa, 
                        _verify_signature_rsa3k ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

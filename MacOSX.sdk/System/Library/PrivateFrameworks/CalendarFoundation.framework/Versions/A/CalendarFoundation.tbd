@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1547.1.1
+current-version: 1547.4.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -100,10 +100,11 @@ exports:
                        _CalNSTimeIntervalToContinuousInterval, _CalOAuth2Type, _CalOAuthType, 
                        _CalPerfLogEnd, _CalPerfLogPoint, _CalPerfLogStart, _CalRedactURLString, 
                        _CalRoundDoubleToNearestMultiple, _CalRoundToNearestMultiple, 
-                       _CalRoundWithSigFigs, _CalRouteType_Driving, _CalRouteType_Transit, 
-                       _CalRouteType_Walking, _CalSessionDebugErrorKey, _CalSessionDebugIntervalKey, 
-                       _CalSessionDebugStatusKey, _CalSetDefaultTimeZone, _CalSetForceReminderBridgeEnabled, 
-                       _CalSetSystemTimeZone, _CalSubclassShouldImplement, _CalSubscriptionSessionErrorNotification, 
+                       _CalRoundWithSigFigs, _CalRouteType_Bicycle, _CalRouteType_Driving, 
+                       _CalRouteType_Transit, _CalRouteType_Walking, _CalSessionDebugErrorKey, 
+                       _CalSessionDebugIntervalKey, _CalSessionDebugStatusKey, _CalSetDefaultTimeZone, 
+                       _CalSetForceReminderBridgeEnabled, _CalSetSystemTimeZone, 
+                       _CalSubclassShouldImplement, _CalSubscriptionSessionErrorNotification, 
                        _CalTemporaryDirectory, _CalTimeIntervalConvertToNanoSeconds, 
                        _CalTimeInterval_OneDayInSeconds, _CalTimeInterval_OneHourInSeconds, 
                        _CalTimeInterval_OneMinuteInSeconds, _CalTimeInterval_OneWeekInSeconds, 

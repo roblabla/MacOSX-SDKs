@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-ios17.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -module-name MusicKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 4023.340.1
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 4023.540.1 -module-name MusicKit
 import Combine
 import CoreGraphics
 import Foundation
@@ -9,15 +8,15 @@ import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   public class Queue : Combine.ObservableObject, Swift.ExpressibleByArrayLiteral {
     required public init<S, PlayableMusicItemType>(for playableItems: S, startingAt startPlayableItem: S.Element? = nil) where S : Swift.Sequence, PlayableMusicItemType : MusicKit.PlayableMusicItem, PlayableMusicItemType == S.Element
     required public init<S>(_ entries: S, startingAt startEntry: S.Element? = nil) where S : Swift.Sequence, S.Element == MusicKit.MusicPlayer.Queue.Entry
-    @available(iOS 16.4, tvOS 16.4, macOS 14.0, *)
+    @available(iOS 16.4, tvOS 16.4, visionOS 1.0, macOS 14.0, *)
     required public init(album: MusicKit.Album, startingAt startTrack: MusicKit.Track)
-    @available(iOS 16.4, tvOS 16.4, macOS 14.0, *)
+    @available(iOS 16.4, tvOS 16.4, visionOS 1.0, macOS 14.0, *)
     required public init(playlist: MusicKit.Playlist, startingAt startPlaylistEntry: MusicKit.Playlist.Entry)
     public var currentEntry: MusicKit.MusicPlayer.Queue.Entry? {
       get
@@ -44,12 +43,12 @@ extension MusicKit.MusicPlayer {
     @objc deinit
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue : Swift.Equatable {
   public static func == (left: MusicKit.MusicPlayer.Queue, right: MusicKit.MusicPlayer.Queue) -> Swift.Bool
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
@@ -57,7 +56,7 @@ extension MusicKit.MusicPlayer.Queue : Swift.Hashable {
     get
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue {
   public enum EntryInsertionPosition : Swift.Sendable {
@@ -70,10 +69,10 @@ extension MusicKit.MusicPlayer.Queue {
     }
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol MusicLibrarySearchable : MusicKit.MusicItem {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public struct MusicLibrarySectionedRequest<SectionType, MusicItemType> where SectionType : MusicKit.MusicLibrarySectionRequestable, MusicItemType : MusicKit.MusicLibraryRequestable {
   public init()
   public var limit: Swift.Int
@@ -104,9 +103,9 @@ public struct MusicLibrarySectionedRequest<SectionType, MusicItemType> where Sec
   public func response() async throws -> MusicKit.MusicLibrarySectionedResponse<SectionType, MusicItemType>
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicCatalogResourceRequest<MusicItemType> : Swift.Sendable where MusicItemType : MusicKit.MusicItem, MusicItemType : Swift.Decodable {
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public init() where MusicItemType : MusicKit.MusicCatalogTopLevelResourceRequesting
   public init<Value>(matching keyPath: Swift.KeyPath<MusicItemType.FilterType, Value>, equalTo value: Value) where MusicItemType : MusicKit.FilterableMusicItem
   public init<Value>(matching keyPath: Swift.KeyPath<MusicItemType.FilterType, Value>, memberOf values: [Value]) where MusicItemType : MusicKit.FilterableMusicItem
@@ -116,24 +115,24 @@ public struct MusicCatalogResourceRequest<MusicItemType> : Swift.Sendable where 
   public func response() async throws -> MusicKit.MusicCatalogResourceResponse<MusicItemType>
   #endif
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public protocol MusicCatalogTopLevelResourceRequesting : MusicKit.MusicItem {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItem where Self : MusicKit.MusicPropertyContainer, Self : Swift.Decodable {
   #if compiler(>=5.3) && $AsyncAwait
   public func with(_ properties: [MusicKit.PartialMusicAsyncProperty<Self>]) async throws -> Self
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public func with(_ properties: [MusicKit.PartialMusicAsyncProperty<Self>], preferredSource: MusicKit.MusicPropertySource) async throws -> Self
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public func with(_ properties: MusicKit.PartialMusicAsyncProperty<Self>..., preferredSource: MusicKit.MusicPropertySource) async throws -> Self
   #endif
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 public struct Curator : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -161,7 +160,7 @@ public struct Curator : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swi
     get
   }
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Curator : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -182,27 +181,27 @@ extension MusicKit.Curator : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Curator {
   public static let playlists: MusicKit.MusicRelationshipProperty<MusicKit.Curator, MusicKit.Playlist>
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Curator : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 public protocol CuratorFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Curator : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.CuratorFilter
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Curator : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Curator : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -211,7 +210,7 @@ extension MusicKit.Curator : Swift.CustomStringConvertible, Swift.CustomDebugStr
     get
   }
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Curator {
   public enum Kind : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
     case editorial
@@ -225,7 +224,7 @@ extension MusicKit.Curator {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public struct MusicLibrarySearchResponse : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let albums: MusicKit.MusicItemCollection<MusicKit.Album>
   public let artists: MusicKit.MusicItemCollection<MusicKit.Artist>
@@ -239,7 +238,7 @@ public struct MusicLibrarySearchResponse : Swift.Equatable, Swift.Hashable, Swif
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySearchResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -248,7 +247,7 @@ extension MusicKit.MusicLibrarySearchResponse : Swift.CustomStringConvertible, S
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchSuggestionsResponse {
   public struct Suggestion : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
     public var id: Swift.String {
@@ -266,7 +265,7 @@ extension MusicKit.MusicCatalogSearchSuggestionsResponse {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchSuggestionsResponse.Suggestion : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -275,11 +274,11 @@ extension MusicKit.MusicCatalogSearchSuggestionsResponse.Suggestion : Swift.Cust
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol FilterableMusicItem : MusicKit.MusicItem {
   associatedtype FilterType
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicDataRequest : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public init(urlRequest: Foundation.URLRequest)
   public let urlRequest: Foundation.URLRequest
@@ -297,39 +296,39 @@ public struct MusicDataRequest : Swift.Equatable, Swift.Hashable, Swift.Sendable
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicDataRequest : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol MusicLibraryRequestable : MusicKit.MusicItem {
   associatedtype LibraryFilter
   associatedtype LibrarySortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol MusicLibrarySectionRequestable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol MusicLibraryRequestFilterValueEquatable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension Swift.Bool : MusicKit.MusicLibraryRequestFilterValueEquatable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicItemID : MusicKit.MusicLibraryRequestFilterValueEquatable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension Swift.String : MusicKit.MusicLibraryRequestFilterValueEquatable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol MusicLibraryRequestFilterValueMembershipComparable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicItemID : MusicKit.MusicLibraryRequestFilterValueMembershipComparable {
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   public enum PlaybackStatus : Swift.Equatable, Swift.Hashable, Swift.Sendable {
@@ -346,7 +345,7 @@ extension MusicKit.MusicPlayer {
     }
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   public enum RepeatMode : Swift.Sendable {
@@ -360,7 +359,7 @@ extension MusicKit.MusicPlayer {
     }
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   public enum ShuffleMode : Swift.Sendable {
@@ -373,7 +372,7 @@ extension MusicKit.MusicPlayer {
     }
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   @_hasMissingDesignatedInitializers public class State : Combine.ObservableObject {
@@ -393,7 +392,7 @@ extension MusicKit.MusicPlayer {
       get
       set
     }
-    @available(iOS 16.0, tvOS 16.0, *)
+    @available(iOS 16.0, tvOS 16.0, visionOS 1.0, *)
     public var audioVariant: MusicKit.AudioVariant? {
       get
     }
@@ -403,7 +402,7 @@ extension MusicKit.MusicPlayer {
     public typealias ObjectWillChangePublisher = Combine.AnyPublisher<Swift.Void, Swift.Never>
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Station : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -443,7 +442,7 @@ public struct Station : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swi
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Station : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -464,33 +463,33 @@ extension MusicKit.Station : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.Station : MusicKit.PlayableMusicItem {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Station : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol StationFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Station : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.StationFilter
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Station : MusicKit.MusicPersonalRecommendationItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Station : MusicKit.MusicRecentlyPlayedRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Station : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Station : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -499,7 +498,7 @@ extension MusicKit.Station : Swift.CustomStringConvertible, Swift.CustomDebugStr
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct RecordLabel : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -530,7 +529,7 @@ public struct RecordLabel : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable,
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.RecordLabel : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -551,7 +550,7 @@ extension MusicKit.RecordLabel : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.RecordLabel {
   @_alwaysEmitIntoClient public static var latestReleases: MusicKit.MusicRelationshipProperty<MusicKit.RecordLabel, MusicKit.Album> {
     get {
@@ -564,23 +563,23 @@ extension MusicKit.PartialMusicProperty where Root == MusicKit.RecordLabel {
     }
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.RecordLabel : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol RecordLabelFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.RecordLabel : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.RecordLabelFilter
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.RecordLabel : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.RecordLabel : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -589,7 +588,7 @@ extension MusicKit.RecordLabel : Swift.CustomStringConvertible, Swift.CustomDebu
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public enum ContentRating : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
   case clean
   case explicit
@@ -601,17 +600,17 @@ public enum ContentRating : Swift.Codable, Swift.Equatable, Swift.Hashable, Swif
   }
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 public protocol MusicLibraryAddable : MusicKit.MusicItem {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 public protocol MusicPlaylistAddable : MusicKit.MusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public enum MusicPropertySource : Swift.CaseIterable, Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
   case catalog
   @available(macOS 14.0, macCatalyst 17.0, *)
@@ -628,33 +627,33 @@ public enum MusicPropertySource : Swift.CaseIterable, Swift.Codable, Swift.Equat
   }
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicRecentlyPlayedResponse<MusicItemType> where MusicItemType : MusicKit.MusicRecentlyPlayedRequestable {
   public let items: MusicKit.MusicItemCollection<MusicItemType>
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicRecentlyPlayedResponse : Swift.Equatable where MusicItemType : Swift.Equatable {
   public static func == (a: MusicKit.MusicRecentlyPlayedResponse<MusicItemType>, b: MusicKit.MusicRecentlyPlayedResponse<MusicItemType>) -> Swift.Bool
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicRecentlyPlayedResponse : Swift.Hashable where MusicItemType : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicRecentlyPlayedResponse : Swift.Sendable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicRecentlyPlayedResponse : Swift.Decodable where MusicItemType : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicRecentlyPlayedResponse : Swift.Encodable where MusicItemType : Swift.Encodable {
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicRecentlyPlayedResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -663,11 +662,11 @@ extension MusicKit.MusicRecentlyPlayedResponse : Swift.CustomStringConvertible, 
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol MusicItem : Swift.Sendable {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicCatalogSearchSuggestionsRequest {
   public init(term: Swift.String, includingTopResultsOfTypes types: [any MusicKit.MusicCatalogSearchable.Type] = [])
   public let term: Swift.String
@@ -679,7 +678,7 @@ public struct MusicCatalogSearchSuggestionsRequest {
   public func response() async throws -> MusicKit.MusicCatalogSearchSuggestionsResponse
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicAuthorization {
   public static var currentStatus: MusicKit.MusicAuthorization.Status {
     get
@@ -688,7 +687,7 @@ public struct MusicAuthorization {
   public static func request() async -> MusicKit.MusicAuthorization.Status
   #endif
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicCatalogChart<MusicItemType> : Swift.Identifiable where MusicItemType : MusicKit.MusicCatalogChartRequestable {
   public let id: Swift.String
   public let kind: MusicKit.MusicCatalogChartKind
@@ -696,29 +695,29 @@ public struct MusicCatalogChart<MusicItemType> : Swift.Identifiable where MusicI
   public let items: MusicKit.MusicItemCollection<MusicItemType>
   public typealias ID = Swift.String
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChart : Swift.Equatable where MusicItemType : Swift.Equatable {
   public static func == (a: MusicKit.MusicCatalogChart<MusicItemType>, b: MusicKit.MusicCatalogChart<MusicItemType>) -> Swift.Bool
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChart : Swift.Hashable where MusicItemType : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChart : Swift.Sendable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChart : Swift.Decodable where MusicItemType : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChart : Swift.Encodable where MusicItemType : Swift.Encodable {
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChart : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -727,7 +726,7 @@ extension MusicKit.MusicCatalogChart : Swift.CustomStringConvertible, Swift.Cust
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicCatalogChartsRequest : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public init(genre: MusicKit.Genre? = nil, kinds: [MusicKit.MusicCatalogChartKind] = [.mostPlayed], types: [any MusicKit.MusicCatalogChartRequestable.Type])
   public var genre: MusicKit.Genre? {
@@ -750,7 +749,7 @@ public struct MusicCatalogChartsRequest : Swift.Equatable, Swift.Hashable, Swift
     get
   }
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class AnyMusicProperty : Swift.Equatable, Swift.Hashable, @unchecked Swift.Sendable {
   public static func == (left: MusicKit.AnyMusicProperty, right: MusicKit.AnyMusicProperty) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -759,15 +758,15 @@ public class AnyMusicProperty : Swift.Equatable, Swift.Hashable, @unchecked Swif
     get
   }
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class PartialMusicProperty<Root> : MusicKit.AnyMusicProperty {
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class PartialMusicAsyncProperty<Root> : MusicKit.PartialMusicProperty<Root> {
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class MusicAttributeProperty<Root, Value> : MusicKit.PartialMusicProperty<Root>, Swift.CustomStringConvertible where Value : Swift.Decodable {
   @usableFromInline
   internal init(_ name: Swift.String)
@@ -776,11 +775,11 @@ public class MusicAttributeProperty<Root, Value> : MusicKit.PartialMusicProperty
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class MusicExtendedAttributeProperty<Root, Value> : MusicKit.PartialMusicAsyncProperty<Root>, Swift.CustomStringConvertible where Value : Swift.Decodable {
   @usableFromInline
   internal init(_ name: Swift.String)
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   @usableFromInline
   internal init(_ name: Swift.String, supportedSources: [MusicKit.MusicPropertySource])
   public var description: Swift.String {
@@ -788,11 +787,11 @@ public class MusicExtendedAttributeProperty<Root, Value> : MusicKit.PartialMusic
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class MusicRelationshipProperty<Root, RelatedMusicItemType> : MusicKit.PartialMusicAsyncProperty<Root>, Swift.CustomStringConvertible where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
   @usableFromInline
   internal init(_ name: Swift.String, kind: MusicKit.MusicRelationshipPropertyKind = .model)
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   @usableFromInline
   internal init(_ name: Swift.String, kind: MusicKit.MusicRelationshipPropertyKind = .model, supportedSources: [MusicKit.MusicPropertySource])
   @usableFromInline
@@ -802,7 +801,7 @@ public class MusicRelationshipProperty<Root, RelatedMusicItemType> : MusicKit.Pa
   }
   @objc deinit
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 @usableFromInline
 internal enum MusicRelationshipPropertyKind : Swift.Sendable {
   case model
@@ -817,21 +816,21 @@ internal enum MusicRelationshipPropertyKind : Swift.Sendable {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol MusicPropertyContainer {
   #if compiler(>=5.3) && $AsyncAwait
   func with(_ properties: [MusicKit.PartialMusicAsyncProperty<Self>]) async throws -> Self
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   func with(_ properties: [MusicKit.PartialMusicAsyncProperty<Self>], preferredSource: MusicKit.MusicPropertySource) async throws -> Self
   #endif
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   func with(_ properties: MusicKit.PartialMusicAsyncProperty<Self>..., preferredSource: MusicKit.MusicPropertySource) async throws -> Self
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $AsyncAwait
   @_alwaysEmitIntoClient public func with(_ properties: MusicKit.PartialMusicAsyncProperty<Self>...) async throws -> Self {
@@ -840,7 +839,7 @@ extension MusicKit.MusicPropertyContainer {
     }
   #endif
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicRecentlyPlayedRequest<MusicItemType> where MusicItemType : MusicKit.MusicRecentlyPlayedRequestable, MusicItemType : Swift.Decodable {
   public init()
   public var limit: Swift.Int?
@@ -849,7 +848,7 @@ public struct MusicRecentlyPlayedRequest<MusicItemType> where MusicItemType : Mu
   public func response() async throws -> MusicKit.MusicRecentlyPlayedResponse<MusicItemType>
   #endif
 }
-@_hasMissingDesignatedInitializers @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public class MusicLibrary {
   public static let shared: MusicKit.MusicLibrary
   @objc deinit
@@ -889,12 +888,12 @@ public class MusicLibrary {
   public func edit<S, MusicPlaylistAddableType>(_ playlist: MusicKit.Playlist, name: Swift.String? = nil, description: Swift.String? = nil, authorDisplayName: Swift.String? = nil, items: S) async throws -> MusicKit.Playlist where S : Swift.Sequence, MusicPlaylistAddableType : MusicKit.MusicPlaylistAddable, MusicPlaylistAddableType == S.Element
   #endif
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 public protocol PlayableMusicItem : MusicKit.MusicItem {
   var playParameters: MusicKit.PlayParameters? { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicSubscription {
   #if compiler(>=5.3) && $RethrowsProtocol
   public struct Updates : _Concurrency.AsyncSequence {
@@ -916,6 +915,7 @@ extension MusicKit.MusicSubscription {
   #endif
 }
 #if compiler(>=5.3) && $RethrowsProtocol
+@available(visionOS, unavailable, introduced: 1.0)
 @available(watchOS, unavailable, introduced: 8.0)
 @available(tvOS, unavailable, introduced: 15.0)
 @available(macOS, unavailable, introduced: 12.0)
@@ -925,6 +925,7 @@ extension MusicKit.MusicSubscription.Updates.Iterator : @unchecked Swift.Sendabl
 }
 #endif
 #if compiler(>=5.3) && $RethrowsProtocol
+@available(visionOS, unavailable, introduced: 1.0)
 @available(watchOS, unavailable, introduced: 8.0)
 @available(tvOS, unavailable, introduced: 15.0)
 @available(macOS, unavailable, introduced: 12.0)
@@ -933,7 +934,7 @@ extension MusicKit.MusicSubscription.Updates.Iterator : @unchecked Swift.Sendabl
 extension MusicKit.MusicSubscription.Updates : @unchecked Swift.Sendable {
 }
 #endif
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicPersonalRecommendationsRequest : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public init()
   public init<S>(refreshing recommendations: S) where S : Swift.Sequence, S.Element == MusicKit.MusicPersonalRecommendation
@@ -948,27 +949,27 @@ public struct MusicPersonalRecommendationsRequest : Swift.Equatable, Swift.Hasha
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public typealias MusicRecentlyPlayedContainerRequest = MusicKit.MusicRecentlyPlayedRequest<MusicKit.RecentlyPlayedMusicItem>
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public struct MusicLibrarySectionedResponse<SectionType, MusicItemType> where SectionType : MusicKit.MusicLibrarySectionRequestable, MusicItemType : MusicKit.MusicLibraryRequestable {
   public let sections: [MusicKit.MusicLibrarySection<SectionType, MusicItemType>]
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySectionedResponse : Swift.Equatable where SectionType : Swift.Equatable, MusicItemType : Swift.Equatable {
   public static func == (a: MusicKit.MusicLibrarySectionedResponse<SectionType, MusicItemType>, b: MusicKit.MusicLibrarySectionedResponse<SectionType, MusicItemType>) -> Swift.Bool
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySectionedResponse : Swift.Hashable where SectionType : Swift.Hashable, MusicItemType : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySectionedResponse : Swift.Sendable where SectionType : Swift.Sendable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySectionedResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -977,28 +978,28 @@ extension MusicKit.MusicLibrarySectionedResponse : Swift.CustomStringConvertible
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public protocol MusicRecentlyPlayedRequestable : MusicKit.MusicItem {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public struct MusicLibraryResponse<MusicItemType> where MusicItemType : MusicKit.MusicItem {
   public let items: MusicKit.MusicItemCollection<MusicItemType>
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibraryResponse : Swift.Equatable where MusicItemType : Swift.Equatable {
   public static func == (a: MusicKit.MusicLibraryResponse<MusicItemType>, b: MusicKit.MusicLibraryResponse<MusicItemType>) -> Swift.Bool
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibraryResponse : Swift.Hashable where MusicItemType : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibraryResponse : Swift.Sendable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibraryResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1007,7 +1008,7 @@ extension MusicKit.MusicLibraryResponse : Swift.CustomStringConvertible, Swift.C
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicCatalogSearchSuggestionsResponse : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public typealias TopResult = MusicKit.MusicCatalogSearchResponse.TopResult
   public let suggestions: [MusicKit.MusicCatalogSearchSuggestionsResponse.Suggestion]
@@ -1018,12 +1019,12 @@ public struct MusicCatalogSearchSuggestionsResponse : Swift.Equatable, Swift.Has
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchSuggestionsResponse : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchSuggestionsResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1032,7 +1033,7 @@ extension MusicKit.MusicCatalogSearchSuggestionsResponse : Swift.CustomStringCon
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicTokenRequestOptions : Swift.OptionSet, Swift.Sendable {
   public init(rawValue: Swift.Int)
   public let rawValue: Swift.Int
@@ -1041,19 +1042,19 @@ public struct MusicTokenRequestOptions : Swift.OptionSet, Swift.Sendable {
   public typealias Element = MusicKit.MusicTokenRequestOptions
   public typealias RawValue = Swift.Int
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol MusicDeveloperTokenProvider : Swift.Sendable {
   #if compiler(>=5.3) && $AsyncAwait
   func developerToken(options: MusicKit.MusicTokenRequestOptions) async throws -> Swift.String
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public typealias MusicTokenProvider = MusicKit.MusicUserTokenProvider & MusicKit.MusicDeveloperTokenProvider
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicDataRequest {
   public static var tokenProvider: any MusicKit.MusicUserTokenProvider & MusicKit.MusicDeveloperTokenProvider
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 public struct RadioShow : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -1081,7 +1082,7 @@ public struct RadioShow : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, S
     get
   }
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RadioShow : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -1102,27 +1103,27 @@ extension MusicKit.RadioShow : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.RadioShow {
   public static let playlists: MusicKit.MusicRelationshipProperty<MusicKit.RadioShow, MusicKit.Playlist>
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RadioShow : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 public protocol RadioShowFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RadioShow : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.RadioShowFilter
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RadioShow : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RadioShow : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1131,7 +1132,7 @@ extension MusicKit.RadioShow : Swift.CustomStringConvertible, Swift.CustomDebugS
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public struct TitledSection : Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let title: Swift.String
   public var id: MusicKit.MusicItemID {
@@ -1144,10 +1145,10 @@ public struct TitledSection : Swift.Equatable, Swift.Hashable, Swift.Identifiabl
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.TitledSection : MusicKit.MusicLibrarySectionRequestable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public enum MusicCatalogChartKind : Swift.CaseIterable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
   case mostPlayed
   case cityTop
@@ -1162,21 +1163,21 @@ public enum MusicCatalogChartKind : Swift.CaseIterable, Swift.Equatable, Swift.H
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChartKind : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChartKind : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol MusicCatalogSearchable : MusicKit.MusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchResponse {
   public enum TopResult : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
     case album(MusicKit.Album)
@@ -1205,12 +1206,12 @@ extension MusicKit.MusicCatalogSearchResponse {
     }
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchResponse.TopResult : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchResponse.TopResult : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1219,7 +1220,7 @@ extension MusicKit.MusicCatalogSearchResponse.TopResult : Swift.CustomStringConv
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicPersonalRecommendationsResponse : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let recommendations: MusicKit.MusicItemCollection<MusicKit.MusicPersonalRecommendation>
   public static func == (a: MusicKit.MusicPersonalRecommendationsResponse, b: MusicKit.MusicPersonalRecommendationsResponse) -> Swift.Bool
@@ -1228,12 +1229,12 @@ public struct MusicPersonalRecommendationsResponse : Swift.Equatable, Swift.Hash
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicPersonalRecommendationsResponse : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicPersonalRecommendationsResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1242,7 +1243,7 @@ extension MusicKit.MusicPersonalRecommendationsResponse : Swift.CustomStringConv
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicSubscription {
   public enum Error : Swift.String, Foundation.LocalizedError, Swift.Sendable {
     case unknown
@@ -1267,13 +1268,13 @@ extension MusicKit.MusicSubscription {
     }
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicSubscription.Error : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicPersonalRecommendation : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public let title: Swift.String?
@@ -1301,12 +1302,12 @@ public struct MusicPersonalRecommendation : MusicKit.MusicItem, Swift.Equatable,
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicPersonalRecommendation : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicPersonalRecommendation : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1315,7 +1316,7 @@ extension MusicKit.MusicPersonalRecommendation : Swift.CustomStringConvertible, 
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 open class MusicUserTokenProvider {
   public init()
   #if compiler(>=5.3) && $AsyncAwait
@@ -1323,7 +1324,7 @@ open class MusicUserTokenProvider {
   #endif
   @objc deinit
 }
-@_inheritsConvenienceInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@_inheritsConvenienceInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class DefaultMusicTokenProvider : MusicKit.MusicTokenProvider, @unchecked Swift.Sendable {
   #if compiler(>=5.3) && $AsyncAwait
   public func developerToken(options: MusicKit.MusicTokenRequestOptions) async throws -> Swift.String
@@ -1331,7 +1332,7 @@ public class DefaultMusicTokenProvider : MusicKit.MusicTokenProvider, @unchecked
   override public init()
   @objc deinit
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicAuthorization {
   public enum Status : Swift.String, Swift.Sendable {
     case notDetermined
@@ -1345,13 +1346,13 @@ extension MusicKit.MusicAuthorization {
     }
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicAuthorization.Status : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicDataResponse : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let data: Foundation.Data
   public let urlResponse: Foundation.HTTPURLResponse
@@ -1361,7 +1362,7 @@ public struct MusicDataResponse : Swift.Equatable, Swift.Hashable, Swift.Sendabl
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicDataResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1370,7 +1371,7 @@ extension MusicKit.MusicDataResponse : Swift.CustomStringConvertible, Swift.Cust
     get
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue {
   public struct Entry : Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.CustomStringConvertible {
@@ -1411,7 +1412,7 @@ extension MusicKit.MusicPlayer.Queue {
     }
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   case song(MusicKit.Song)
   case musicVideo(MusicKit.MusicVideo)
@@ -1456,18 +1457,18 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
   public var genreNames: [Swift.String] {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
   public var isrc: Swift.String? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var playCount: Swift.Int? {
     get
   }
@@ -1508,7 +1509,7 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Track : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -1529,21 +1530,21 @@ extension MusicKit.Track : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.Track : MusicKit.PlayableMusicItem {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 extension MusicKit.Track : MusicKit.MusicLibraryAddable, MusicKit.MusicPlaylistAddable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Track : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibraryTrackFilter
   public typealias LibrarySortProperties = MusicKit.LibraryTrackSortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryTrackFilter {
   var id: MusicKit.MusicItemID { get }
   var albums: MusicKit.MusicItemCollection<MusicKit.Album>? { get }
@@ -1553,7 +1554,7 @@ public protocol LibraryTrackFilter {
   var artistName: Swift.String? { get }
   var title: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryTrackSortProperties {
   var albumTitle: Swift.String? { get }
   var artistName: Swift.String? { get }
@@ -1565,15 +1566,15 @@ public protocol LibraryTrackSortProperties {
   var title: Swift.String { get }
   var trackNumber: Swift.Int? { get }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Track : MusicKit.MusicRecentlyPlayedRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Track : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Track : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1582,7 +1583,7 @@ extension MusicKit.Track : Swift.CustomStringConvertible, Swift.CustomDebugStrin
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Artwork : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let maximumWidth: Swift.Int
   public let maximumHeight: Swift.Int
@@ -1599,12 +1600,12 @@ public struct Artwork : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artwork : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artwork : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1613,7 +1614,7 @@ extension MusicKit.Artwork : Swift.CustomStringConvertible, Swift.CustomDebugStr
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry {
   public enum Item : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
     case musicVideo(MusicKit.MusicVideo)
@@ -1683,7 +1684,7 @@ extension MusicKit.Playlist.Entry {
     }
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry.Item : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -1704,16 +1705,16 @@ extension MusicKit.Playlist.Entry.Item : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 16.0, tvOS 16.0, macOS 14.0, *)
+@available(iOS 16.0, tvOS 16.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.Playlist.Entry.Item : MusicKit.PlayableMusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry.Item : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry.Item : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1722,10 +1723,10 @@ extension MusicKit.Playlist.Entry.Item : Swift.CustomStringConvertible, Swift.Cu
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public protocol MusicPersonalRecommendationItem : MusicKit.MusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicPersonalRecommendation {
   public enum Item : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
     case album(MusicKit.Album)
@@ -1751,12 +1752,12 @@ extension MusicKit.MusicPersonalRecommendation {
     }
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicPersonalRecommendation.Item : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicPersonalRecommendation.Item : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1765,7 +1766,7 @@ extension MusicKit.MusicPersonalRecommendation.Item : Swift.CustomStringConverti
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicCatalogChartsResponse : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let albumCharts: [MusicKit.MusicCatalogChart<MusicKit.Album>]
   public let musicVideoCharts: [MusicKit.MusicCatalogChart<MusicKit.MusicVideo>]
@@ -1777,12 +1778,12 @@ public struct MusicCatalogChartsResponse : Swift.Equatable, Swift.Hashable, Swif
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChartsResponse : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogChartsResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1791,21 +1792,21 @@ extension MusicKit.MusicCatalogChartsResponse : Swift.CustomStringConvertible, S
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicCatalogSearchResponse : Swift.Equatable, Swift.Hashable {
   public let albums: MusicKit.MusicItemCollection<MusicKit.Album>
   public let artists: MusicKit.MusicItemCollection<MusicKit.Artist>
-  @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+  @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
   public let curators: MusicKit.MusicItemCollection<MusicKit.Curator>
-  @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+  @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
   public let musicVideos: MusicKit.MusicItemCollection<MusicKit.MusicVideo>
   public let playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>
-  @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+  @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
   public let radioShows: MusicKit.MusicItemCollection<MusicKit.RadioShow>
   public let recordLabels: MusicKit.MusicItemCollection<MusicKit.RecordLabel>
   public let songs: MusicKit.MusicItemCollection<MusicKit.Song>
   public let stations: MusicKit.MusicItemCollection<MusicKit.Station>
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public let topResults: MusicKit.MusicItemCollection<MusicKit.MusicCatalogSearchResponse.TopResult>
   public static func == (a: MusicKit.MusicCatalogSearchResponse, b: MusicKit.MusicCatalogSearchResponse) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -1813,12 +1814,12 @@ public struct MusicCatalogSearchResponse : Swift.Equatable, Swift.Hashable {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchResponse : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogSearchResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1827,7 +1828,7 @@ extension MusicKit.MusicCatalogSearchResponse : Swift.CustomStringConvertible, S
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct EditorialNotes : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let short: Swift.String?
   public let standard: Swift.String?
@@ -1839,12 +1840,12 @@ public struct EditorialNotes : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.EditorialNotes : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.EditorialNotes : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1853,7 +1854,7 @@ extension MusicKit.EditorialNotes : Swift.CustomStringConvertible, Swift.CustomD
     get
   }
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, tvOS 15.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, tvOS 15.0, visionOS 1.0, *)
 @available(watchOS, unavailable)
 @available(macOS, unavailable)
 public class SystemMusicPlayer : MusicKit.MusicPlayer {
@@ -1864,7 +1865,7 @@ public class SystemMusicPlayer : MusicKit.MusicPlayer {
   }
   @objc deinit
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct PreviewAsset : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let artwork: MusicKit.Artwork?
   public let url: Foundation.URL?
@@ -1875,12 +1876,12 @@ public struct PreviewAsset : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PreviewAsset : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PreviewAsset : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -1889,7 +1890,7 @@ extension MusicKit.PreviewAsset : Swift.CustomStringConvertible, Swift.CustomDeb
     get
   }
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 public class MusicPlayer {
   @objc deinit
@@ -1920,16 +1921,16 @@ public class MusicPlayer {
   public func skipToPreviousEntry() async throws
   #endif
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.ApplicationMusicPlayer {
   @_inheritsConvenienceInitializers public class Queue : MusicKit.MusicPlayer.Queue {
     required public init<S, PlayableMusicItemType>(for playableItems: S, startingAt startPlayableItem: S.Element? = nil) where S : Swift.Sequence, PlayableMusicItemType : MusicKit.PlayableMusicItem, PlayableMusicItemType == S.Element
     required public init<S>(_ entries: S, startingAt startEntry: S.Element? = nil) where S : Swift.Sequence, S.Element == MusicKit.MusicPlayer.Queue.Entry
     required public init(arrayLiteral elements: any MusicKit.PlayableMusicItem...)
-    @available(iOS 16.4, tvOS 16.4, macOS 14.0, *)
+    @available(iOS 16.4, tvOS 16.4, visionOS 1.0, macOS 14.0, *)
     required public init(album: MusicKit.Album, startingAt startTrack: MusicKit.Track)
-    @available(iOS 16.4, tvOS 16.4, macOS 14.0, *)
+    @available(iOS 16.4, tvOS 16.4, visionOS 1.0, macOS 14.0, *)
     required public init(playlist: MusicKit.Playlist, startingAt startPlaylistEntry: MusicKit.Playlist.Entry)
     public var entries: MusicKit.ApplicationMusicPlayer.Queue.Entries {
       get
@@ -1979,7 +1980,7 @@ extension MusicKit.ApplicationMusicPlayer {
     @objc deinit
   }
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 public class ApplicationMusicPlayer : MusicKit.MusicPlayer {
   public static let shared: MusicKit.ApplicationMusicPlayer
@@ -1989,7 +1990,7 @@ public class ApplicationMusicPlayer : MusicKit.MusicPlayer {
   }
   @objc deinit
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 @frozen public struct MusicItemID : Swift.Equatable, Swift.Hashable, Swift.Sendable, Swift.RawRepresentable, Swift.ExpressibleByStringLiteral {
   public init(_ rawValue: Swift.String)
   public init(rawValue: Swift.String)
@@ -2000,18 +2001,18 @@ public class ApplicationMusicPlayer : MusicKit.MusicPlayer {
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemID : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemID : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 16.1, tvOS 16.1, watchOS 9.1, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.1, tvOS 16.1, watchOS 9.1, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrary {
   public enum Error : Swift.String, Foundation.LocalizedError, Swift.Sendable, Swift.CustomStringConvertible {
     case unknown
@@ -2044,7 +2045,7 @@ extension MusicKit.MusicLibrary {
     }
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public enum MusicTokenRequestError : Swift.String, Foundation.LocalizedError, Swift.Sendable, Swift.CustomStringConvertible {
   case unknown
   case permissionDenied
@@ -2074,7 +2075,7 @@ public enum MusicTokenRequestError : Swift.String, Foundation.LocalizedError, Sw
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -2113,15 +2114,15 @@ public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, 
   public var isrc: Swift.String? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var playCount: Swift.Int? {
     get
   }
@@ -2171,7 +2172,7 @@ public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, 
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -2192,7 +2193,7 @@ extension MusicKit.MusicVideo : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.MusicVideo {
   @_alwaysEmitIntoClient public static var artistURL: MusicKit.MusicExtendedAttributeProperty<MusicKit.MusicVideo, Foundation.URL> {
     get {
@@ -2206,32 +2207,32 @@ extension MusicKit.PartialMusicProperty where Root == MusicKit.MusicVideo {
   public static let moreByArtist: MusicKit.MusicRelationshipProperty<MusicKit.MusicVideo, MusicKit.MusicVideo>
   public static let moreInGenre: MusicKit.MusicRelationshipProperty<MusicKit.MusicVideo, MusicKit.MusicVideo>
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicCatalogChartRequestable {
 }
-@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, *)
+@available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol MusicVideoFilter {
   var id: MusicKit.MusicItemID { get }
   var isrc: Swift.String? { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.MusicVideoFilter
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 extension MusicKit.MusicVideo : MusicKit.MusicLibraryAddable, MusicKit.MusicPlaylistAddable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibraryMusicVideoFilter
   public typealias LibrarySortProperties = MusicKit.LibraryMusicVideoSortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryMusicVideoFilter {
   var id: MusicKit.MusicItemID { get }
   var albums: MusicKit.MusicItemCollection<MusicKit.Album>? { get }
@@ -2241,7 +2242,7 @@ public protocol LibraryMusicVideoFilter {
   var artistName: Swift.String? { get }
   var title: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryMusicVideoSortProperties {
   var albumTitle: Swift.String? { get }
   var artistName: Swift.String? { get }
@@ -2252,18 +2253,18 @@ public protocol LibraryMusicVideoSortProperties {
   var title: Swift.String { get }
   var trackNumber: Swift.Int? { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicLibrarySearchable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicRecentlyPlayedRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -2272,14 +2273,14 @@ extension MusicKit.MusicVideo : Swift.CustomStringConvertible, Swift.CustomDebug
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public enum AudioVariant : Swift.CaseIterable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
   case dolbyAtmos
   case dolbyAudio
   case lossless
   case highResolutionLossless
   case lossyStereo
-  @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
+  @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
   case spatialAudio
   public static var allCases: [MusicKit.AudioVariant] {
     get
@@ -2291,46 +2292,46 @@ public enum AudioVariant : Swift.CaseIterable, Swift.Equatable, Swift.Hashable, 
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.AudioVariant : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.AudioVariant : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 @dynamicMemberLookup public struct MusicLibrarySection<SectionType, MusicItemType> where SectionType : MusicKit.MusicLibrarySectionRequestable, MusicItemType : MusicKit.MusicLibraryRequestable {
   public let items: MusicKit.MusicItemCollection<MusicItemType>
   public subscript<T>(dynamicMember keyPath: Swift.KeyPath<SectionType, T>) -> T {
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySection : Swift.Identifiable {
   public var id: MusicKit.MusicItemID {
     get
   }
   public typealias ID = MusicKit.MusicItemID
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySection : Swift.Equatable where SectionType : Swift.Equatable, MusicItemType : Swift.Equatable {
   public static func == (a: MusicKit.MusicLibrarySection<SectionType, MusicItemType>, b: MusicKit.MusicLibrarySection<SectionType, MusicItemType>) -> Swift.Bool
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySection : Swift.Hashable where SectionType : Swift.Hashable, MusicItemType : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySection : Swift.Sendable where SectionType : Swift.Sendable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySection : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -2339,7 +2340,7 @@ extension MusicKit.MusicLibrarySection : Swift.CustomStringConvertible, Swift.Cu
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var name: Swift.String {
@@ -2348,7 +2349,7 @@ public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
   public var parent: MusicKit.Genre? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public var libraryAddedDate: Foundation.Date? {
@@ -2361,7 +2362,7 @@ public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Genre : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -2382,41 +2383,41 @@ extension MusicKit.Genre : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol GenreFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Genre : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.GenreFilter
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Genre : MusicKit.MusicCatalogTopLevelResourceRequesting {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Genre : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibraryGenreFilter
   public typealias LibrarySortProperties = MusicKit.LibraryGenreSortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryGenreFilter {
   var id: MusicKit.MusicItemID { get }
   var name: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryGenreSortProperties {
   var libraryAddedDate: Foundation.Date? { get }
   var name: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.2, macCatalyst 17.2, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.2, macCatalyst 17.2, *)
 extension MusicKit.Genre : MusicKit.MusicLibrarySectionRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Genre : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Genre : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -2425,7 +2426,7 @@ extension MusicKit.Genre : Swift.CustomStringConvertible, Swift.CustomDebugStrin
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   @_alwaysEmitIntoClient public var artwork: MusicKit.Artwork? {
@@ -2439,7 +2440,7 @@ public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swif
   public var genreNames: [Swift.String]? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
@@ -2504,7 +2505,7 @@ public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swif
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artist : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -2525,7 +2526,7 @@ extension MusicKit.Artist : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Artist {
   @_alwaysEmitIntoClient internal static var artwork: MusicKit.MusicAttributeProperty<MusicKit.Artist, MusicKit.Artwork> {
     get {
@@ -2549,47 +2550,47 @@ extension MusicKit.PartialMusicProperty where Root == MusicKit.Artist {
   public static let topMusicVideos: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.MusicVideo>
   public static let topSongs: MusicKit.MusicRelationshipProperty<MusicKit.Artist, MusicKit.Song>
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artist : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol ArtistFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artist : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.ArtistFilter
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Artist : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibraryArtistFilter
   public typealias LibrarySortProperties = MusicKit.LibraryArtistSortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryArtistFilter {
   var id: MusicKit.MusicItemID { get }
   var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? { get }
   var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? { get }
   var name: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryArtistSortProperties {
   var albumCount: Swift.Int? { get }
   var libraryAddedDate: Foundation.Date? { get }
   var name: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Artist : MusicKit.MusicLibrarySectionRequestable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Artist : MusicKit.MusicLibrarySearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artist : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artist : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -2598,7 +2599,7 @@ extension MusicKit.Artist : Swift.CustomStringConvertible, Swift.CustomDebugStri
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySearchResponse {
   public enum TopResult : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
     case album(MusicKit.Album)
@@ -2623,12 +2624,12 @@ extension MusicKit.MusicLibrarySearchResponse {
     }
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySearchResponse.TopResult : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrarySearchResponse.TopResult : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -2637,7 +2638,7 @@ extension MusicKit.MusicLibrarySearchResponse.TopResult : Swift.CustomStringConv
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public enum RecentlyPlayedMusicItem : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   case album(MusicKit.Album)
   case playlist(MusicKit.Playlist)
@@ -2664,12 +2665,12 @@ public enum RecentlyPlayedMusicItem : MusicKit.MusicItem, Swift.Equatable, Swift
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RecentlyPlayedMusicItem : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RecentlyPlayedMusicItem : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -2678,14 +2679,14 @@ extension MusicKit.RecentlyPlayedMusicItem : Swift.CustomStringConvertible, Swif
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, macOS 14.0, *)
+@available(iOS 16.0, tvOS 16.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.RecentlyPlayedMusicItem : MusicKit.PlayableMusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RecentlyPlayedMusicItem : MusicKit.MusicRecentlyPlayedRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -2703,11 +2704,11 @@ public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Sw
   public var lastModifiedDate: Foundation.Date? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
@@ -2726,15 +2727,15 @@ public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Sw
   public var url: Foundation.URL? {
     get
   }
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var curator: MusicKit.Curator? {
     get
   }
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var entries: MusicKit.MusicItemCollection<MusicKit.Playlist.Entry>? {
     get
   }
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var radioShow: MusicKit.RadioShow? {
     get
   }
@@ -2754,7 +2755,7 @@ public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Sw
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Playlist : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -2775,72 +2776,72 @@ extension MusicKit.Playlist : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Playlist {
   public static let tracks: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, MusicKit.Track>
   public static let featuredArtists: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, MusicKit.Artist>
   public static let moreByCurator: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, MusicKit.Playlist>
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Playlist {
   public static let curator: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, MusicKit.Curator>
   public static let entries: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, MusicKit.Playlist.Entry>
   public static let radioShow: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, MusicKit.RadioShow>
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.Playlist : MusicKit.PlayableMusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist : MusicKit.MusicCatalogChartRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Playlist : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol PlaylistFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Playlist : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.PlaylistFilter
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 extension MusicKit.Playlist : MusicKit.MusicLibraryAddable, MusicKit.MusicPlaylistAddable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Playlist : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibraryPlaylistFilter
   public typealias LibrarySortProperties = MusicKit.LibraryPlaylistSortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryPlaylistFilter {
   var id: MusicKit.MusicItemID { get }
   var name: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryPlaylistSortProperties {
   var lastPlayedDate: Foundation.Date? { get }
   var libraryAddedDate: Foundation.Date? { get }
   var name: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Playlist : MusicKit.MusicLibrarySectionRequestable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Playlist : MusicKit.MusicLibrarySearchable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist : MusicKit.MusicPersonalRecommendationItem {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Playlist : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Playlist : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -2849,7 +2850,7 @@ extension MusicKit.Playlist : Swift.CustomStringConvertible, Swift.CustomDebugSt
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Playlist {
   public enum Kind : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
     case editorial
@@ -2866,7 +2867,7 @@ extension MusicKit.Playlist {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.Entry {
   public enum Item : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
@@ -2886,7 +2887,7 @@ extension MusicKit.MusicPlayer.Queue.Entry {
     }
   }
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.Entry.Item : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
@@ -2908,17 +2909,17 @@ extension MusicKit.MusicPlayer.Queue.Entry.Item : MusicKit.MusicPropertyContaine
   }
   #endif
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.Entry.Item : MusicKit.PlayableMusicItem {
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.Entry.Item : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.Entry.Item : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
@@ -2928,7 +2929,7 @@ extension MusicKit.MusicPlayer.Queue.Entry.Item : Swift.CustomStringConvertible,
     get
   }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public struct MusicLibrarySearchRequest : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public init(term: Swift.String, types: [any MusicKit.MusicLibrarySearchable.Type])
   public let term: Swift.String
@@ -2946,10 +2947,10 @@ public struct MusicLibrarySearchRequest : Swift.Equatable, Swift.Hashable, Swift
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public protocol MusicCatalogChartRequestable : MusicKit.MusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist {
   public struct Entry : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
     public let id: MusicKit.MusicItemID
@@ -3021,36 +3022,36 @@ extension MusicKit.Playlist {
     }
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry : MusicKit.MusicPropertyContainer {
 }
-@available(iOS 16.0, tvOS 16.0, macOS 14.0, *)
+@available(iOS 16.0, tvOS 16.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.Playlist.Entry : MusicKit.PlayableMusicItem {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 extension MusicKit.Playlist.Entry : MusicKit.MusicLibraryAddable, MusicKit.MusicPlaylistAddable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Playlist.Entry : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibraryPlaylistEntryFilter
   public typealias LibrarySortProperties = MusicKit.LibraryPlaylistEntrySortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryPlaylistEntryFilter {
   var id: MusicKit.MusicItemID { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryPlaylistEntrySortProperties {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -3059,7 +3060,7 @@ extension MusicKit.Playlist.Entry : Swift.CustomStringConvertible, Swift.CustomD
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicCatalogSearchRequest {
   public init(term: Swift.String, types: [any MusicKit.MusicCatalogSearchable.Type])
   public let term: Swift.String
@@ -3068,13 +3069,13 @@ public struct MusicCatalogSearchRequest {
   }
   public var limit: Swift.Int?
   public var offset: Swift.Int?
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var includeTopResults: Swift.Bool
   #if compiler(>=5.3) && $AsyncAwait
   public func response() async throws -> MusicKit.MusicCatalogSearchResponse
   #endif
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public struct MusicLibraryRequest<MusicItemType> where MusicItemType : MusicKit.MusicLibraryRequestable {
   public init()
   public var limit: Swift.Int
@@ -3093,33 +3094,33 @@ public struct MusicLibraryRequest<MusicItemType> where MusicItemType : MusicKit.
   public func response() async throws -> MusicKit.MusicLibraryResponse<MusicItemType>
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicCatalogResourceResponse<MusicItemType> where MusicItemType : MusicKit.MusicItem {
   public let items: MusicKit.MusicItemCollection<MusicItemType>
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogResourceResponse : Swift.Equatable where MusicItemType : Swift.Equatable {
   public static func == (a: MusicKit.MusicCatalogResourceResponse<MusicItemType>, b: MusicKit.MusicCatalogResourceResponse<MusicItemType>) -> Swift.Bool
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogResourceResponse : Swift.Hashable where MusicItemType : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogResourceResponse : Swift.Sendable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogResourceResponse : Swift.Decodable where MusicItemType : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogResourceResponse : Swift.Encodable where MusicItemType : Swift.Encodable {
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicCatalogResourceResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -3128,7 +3129,7 @@ extension MusicKit.MusicCatalogResourceResponse : Swift.CustomStringConvertible,
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicSubscription : Swift.Equatable, Swift.Hashable, Swift.Sendable, Swift.CustomStringConvertible {
   public let canPlayCatalogContent: Swift.Bool
   public let canBecomeSubscriber: Swift.Bool
@@ -3147,7 +3148,7 @@ public struct MusicSubscription : Swift.Equatable, Swift.Hashable, Swift.Sendabl
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -3165,7 +3166,7 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
   public var attribution: Swift.String? {
     get
   }
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var audioVariants: [MusicKit.AudioVariant]? {
     get
   }
@@ -3190,18 +3191,18 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
   public var hasLyrics: Swift.Bool {
     get
   }
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var isAppleDigitalMaster: Swift.Bool? {
     get
   }
   public var isrc: Swift.String? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
@@ -3214,7 +3215,7 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
   public var movementNumber: Swift.Int? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var playCount: Swift.Int? {
     get
   }
@@ -3264,7 +3265,7 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Song : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -3285,7 +3286,7 @@ extension MusicKit.Song : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Song {
   @_alwaysEmitIntoClient public static var artistURL: MusicKit.MusicExtendedAttributeProperty<MusicKit.Song, Foundation.URL> {
     get {
@@ -3299,40 +3300,40 @@ extension MusicKit.PartialMusicProperty where Root == MusicKit.Song {
   public static let composers: MusicKit.MusicRelationshipProperty<MusicKit.Song, MusicKit.Artist>
   public static let musicVideos: MusicKit.MusicRelationshipProperty<MusicKit.Song, MusicKit.MusicVideo>
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Song {
   public static let audioVariants: MusicKit.MusicExtendedAttributeProperty<MusicKit.Song, [MusicKit.AudioVariant]>
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.Song : MusicKit.PlayableMusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Song : MusicKit.MusicCatalogChartRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Song : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol SongFilter {
   var id: MusicKit.MusicItemID { get }
   var isrc: Swift.String? { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Song : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.SongFilter
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 extension MusicKit.Song : MusicKit.MusicLibraryAddable, MusicKit.MusicPlaylistAddable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Song : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibrarySongFilter
   public typealias LibrarySortProperties = MusicKit.LibrarySongSortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibrarySongFilter {
   var id: MusicKit.MusicItemID { get }
   var albums: MusicKit.MusicItemCollection<MusicKit.Album>? { get }
@@ -3343,7 +3344,7 @@ public protocol LibrarySongFilter {
   var composerName: Swift.String? { get }
   var title: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibrarySongSortProperties {
   var albumTitle: Swift.String? { get }
   var artistName: Swift.String? { get }
@@ -3356,18 +3357,18 @@ public protocol LibrarySongSortProperties {
   var title: Swift.String { get }
   var trackNumber: Swift.Int? { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Song : MusicKit.MusicLibrarySearchable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Song : MusicKit.MusicRecentlyPlayedRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Song : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Song : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -3376,9 +3377,9 @@ extension MusicKit.Song : Swift.CustomStringConvertible, Swift.CustomDebugString
     get
   }
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public typealias MusicRecentlyPlayedContainerResponse = MusicKit.MusicRecentlyPlayedResponse<MusicKit.RecentlyPlayedMusicItem>
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicDataRequest {
   public struct Error : Swift.Error, Swift.Sendable {
     public let status: Swift.Int
@@ -3394,19 +3395,19 @@ extension MusicKit.MusicDataRequest {
     }
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicDataRequest.Error : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicDataRequest.Error.Source : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
   public var artwork: MusicKit.Artwork? {
@@ -3418,7 +3419,7 @@ public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
   public var artistURL: Foundation.URL? {
     get
   }
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var audioVariants: [MusicKit.AudioVariant]? {
     get
   }
@@ -3434,7 +3435,7 @@ public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
   public var genreNames: [Swift.String] {
     get
   }
-  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+  @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var isAppleDigitalMaster: Swift.Bool? {
     get
   }
@@ -3447,11 +3448,11 @@ public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
   public var isSingle: Swift.Bool? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
-  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
@@ -3507,7 +3508,7 @@ public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Album : MusicKit.MusicPropertyContainer {
   #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
@@ -3528,7 +3529,7 @@ extension MusicKit.Album : MusicKit.MusicPropertyContainer {
   }
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Album {
   @_alwaysEmitIntoClient public static var artistURL: MusicKit.MusicExtendedAttributeProperty<MusicKit.Album, Foundation.URL> {
     get {
@@ -3544,40 +3545,40 @@ extension MusicKit.PartialMusicProperty where Root == MusicKit.Album {
   public static let relatedAlbums: MusicKit.MusicRelationshipProperty<MusicKit.Album, MusicKit.Album>
   public static let relatedVideos: MusicKit.MusicRelationshipProperty<MusicKit.Album, MusicKit.MusicVideo>
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Album {
   public static let audioVariants: MusicKit.MusicExtendedAttributeProperty<MusicKit.Album, [MusicKit.AudioVariant]>
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.Album : MusicKit.PlayableMusicItem {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Album : MusicKit.MusicCatalogChartRequestable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Album : MusicKit.MusicCatalogSearchable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol AlbumFilter {
   var id: MusicKit.MusicItemID { get }
   var upc: Swift.String? { get }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Album : MusicKit.FilterableMusicItem {
   public typealias FilterType = MusicKit.AlbumFilter
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 extension MusicKit.Album : MusicKit.MusicLibraryAddable, MusicKit.MusicPlaylistAddable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Album : MusicKit.MusicLibraryRequestable {
   public typealias LibraryFilter = MusicKit.LibraryAlbumFilter
   public typealias LibrarySortProperties = MusicKit.LibraryAlbumSortProperties
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryAlbumFilter {
   var id: MusicKit.MusicItemID { get }
   var isCompilation: Swift.Bool? { get }
@@ -3586,7 +3587,7 @@ public protocol LibraryAlbumFilter {
   var title: Swift.String { get }
   var artistName: Swift.String { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryAlbumSortProperties {
   var artistName: Swift.String { get }
   var releaseDate: Foundation.Date? { get }
@@ -3595,21 +3596,21 @@ public protocol LibraryAlbumSortProperties {
   var lastPlayedDate: Foundation.Date? { get }
   var libraryAddedDate: Foundation.Date? { get }
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Album : MusicKit.MusicLibrarySectionRequestable {
 }
-@available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Album : MusicKit.MusicLibrarySearchable {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Album : MusicKit.MusicPersonalRecommendationItem {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Album : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Album : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -3618,14 +3619,14 @@ extension MusicKit.Album : Swift.CustomStringConvertible, Swift.CustomDebugStrin
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicItemCollection<MusicItemType> where MusicItemType : MusicKit.MusicItem {
   public var title: Swift.String? {
     get
   }
   public static func += (collection: inout MusicKit.MusicItemCollection<MusicItemType>, nextBatchCollection: MusicKit.MusicItemCollection<MusicItemType>)
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection {
   public var hasNextBatch: Swift.Bool {
     get
@@ -3637,16 +3638,16 @@ extension MusicKit.MusicItemCollection {
   public func nextBatch(limit: Swift.Int? = nil) async throws -> MusicKit.MusicItemCollection<MusicItemType>? where MusicItemType : Swift.Decodable
   #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral items: MusicItemType...)
   public typealias ArrayLiteralElement = MusicItemType
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection {
   public init<S>(_ elements: S) where MusicItemType == S.Element, S : Swift.Sequence
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.RandomAccessCollection {
   public typealias Element = MusicItemType
   public typealias Index = Swift.Array<MusicItemType>.Index
@@ -3676,29 +3677,29 @@ extension MusicKit.MusicItemCollection : Swift.RandomAccessCollection {
   public func distance(from start: MusicKit.MusicItemCollection<MusicItemType>.Index, to end: MusicKit.MusicItemCollection<MusicItemType>.Index) -> Swift.Int
   public typealias Iterator = Swift.IndexingIterator<MusicKit.MusicItemCollection<MusicItemType>>
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.Equatable where MusicItemType : Swift.Equatable {
   public static func == (left: MusicKit.MusicItemCollection<MusicItemType>, right: MusicKit.MusicItemCollection<MusicItemType>) -> Swift.Bool
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.Hashable where MusicItemType : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.Sendable {
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.Decodable where MusicItemType : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.Encodable where MusicItemType : Swift.Encodable {
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -3707,7 +3708,7 @@ extension MusicKit.MusicItemCollection : Swift.CustomStringConvertible, Swift.Cu
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct PlayParameters : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public static func == (a: MusicKit.PlayParameters, b: MusicKit.PlayParameters) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -3715,54 +3716,54 @@ public struct PlayParameters : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     get
   }
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PlayParameters : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.EntryInsertionPosition : Swift.Equatable {}
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.EntryInsertionPosition : Swift.Hashable {}
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.RepeatMode : Swift.Equatable {}
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.RepeatMode : Swift.Hashable {}
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.ShuffleMode : Swift.Equatable {}
-@available(iOS 15.0, tvOS 15.0, macOS 14.0, *)
+@available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.ShuffleMode : Swift.Hashable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicRelationshipPropertyKind : Swift.Equatable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicRelationshipPropertyKind : Swift.Hashable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicSubscription.Error : Swift.Equatable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicSubscription.Error : Swift.Hashable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicSubscription.Error : Swift.RawRepresentable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicTokenRequestError : Swift.Equatable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicTokenRequestError : Swift.Hashable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicTokenRequestError : Swift.RawRepresentable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicAuthorization.Status : Swift.Equatable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicAuthorization.Status : Swift.Hashable {}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicAuthorization.Status : Swift.RawRepresentable {}
-@available(iOS 16.1, tvOS 16.1, watchOS 9.1, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.1, tvOS 16.1, watchOS 9.1, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrary.Error : Swift.Equatable {}
-@available(iOS 16.1, tvOS 16.1, watchOS 9.1, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.1, tvOS 16.1, watchOS 9.1, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrary.Error : Swift.Hashable {}
-@available(iOS 16.1, tvOS 16.1, watchOS 9.1, macOS 14.0, macCatalyst 17.0, *)
+@available(iOS 16.1, tvOS 16.1, watchOS 9.1, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicLibrary.Error : Swift.RawRepresentable {}

@@ -25,7 +25,7 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 /// A Boolean that indicates whether the webpage controller is not recording web
 /// usage.
 ///
-/// Set to `YES` to stop recording and reporting web-usage data.
+/// Set to <doc://com.apple.documentation/documentation/objectivec/yes> to stop recording and reporting web-usage data.
 @property (nonatomic) BOOL suppressUsageRecording;
 
 /// The URL for the webpage.
@@ -36,10 +36,10 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 /// A Boolean that indicates whether there are one or more videos currently
 /// playing in the webpage.
 ///
-/// The default value is `NO`. Set this value when the webpage starts or
+/// The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or
 /// stops playing video.
 ///
-/// - Important: Set this value to `NO` prior to changing
+/// - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing
 /// ``ScreenTime/STWebpageController/URL`` if the new webpage at that URL stops currently
 /// playing media and won’t immediately start playing new media.
 @property (nonatomic) BOOL URLIsPlayingVideo NS_SWIFT_NAME(urlIsPlayingVideo);
@@ -47,10 +47,10 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 /// A Boolean that indicates whether the webpage is currently displaying a
 /// floating picture in picture window.
 ///
-/// The default value is `NO`. Set this value when the webpage starts or
+/// The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or
 /// stops displaying a Picture in Picture window.
 ///
-/// - Important: Set this value to `NO` prior to changing
+/// - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing
 /// ``ScreenTime/STWebpageController/URL`` if the new webpage at that URL ends all
 /// currently displayed Picture in Picture windows, and won’t immediately
 /// display a new one.
@@ -59,7 +59,7 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 /// A Boolean that indicates whether a parent or guardian has blocked the URL.
 ///
 /// When a parent or guardian blocks the webpage’s URL, the webpage controller
-/// displays a blocking UI and then sets this property to `YES`.
+/// displays a blocking UI and then sets this property to <doc://com.apple.documentation/documentation/objectivec/yes>.
 @property (readonly) BOOL URLIsBlocked NS_SWIFT_NAME(urlIsBlocked);
 
 /// Changes the bundle identifier used to report web usage.

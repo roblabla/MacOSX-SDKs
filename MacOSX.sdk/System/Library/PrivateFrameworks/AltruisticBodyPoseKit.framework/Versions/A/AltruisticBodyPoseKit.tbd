@@ -158,4 +158,5 @@ exports:
                        ABPKSinglePerson2DResult, ABPKSkeleton, ABPKSkeletonDefinition, 
                        ABPKTime, ABPKTrackedObject, ABPKVisualizer, GPUImageUndistortion, 
                        PolyNomialExtrapolation ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

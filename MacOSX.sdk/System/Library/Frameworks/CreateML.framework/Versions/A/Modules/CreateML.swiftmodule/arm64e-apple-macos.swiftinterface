@@ -1,8 +1,8 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name CreateML
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1141.60.3
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 1163.100.9.0.1 -module-name CreateML
 import AVFoundation
+import Accelerate
 import Combine
 import CoreGraphics
 import CoreImage
@@ -1857,24 +1857,6 @@ extension CreateML.MLRegressorMetrics : Swift.CustomStringConvertible, Swift.Cus
     get
   }
 }
-extension Swift.Int32 {
-  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
-  public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
-    get
-  }
-}
-extension Swift.Float {
-  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
-  public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
-    get
-  }
-}
-extension Swift.Double {
-  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
-  public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
-    get
-  }
-}
 extension CreateML.MLRecommender {
   @available(macOS 10.15, *)
   @available(iOS, unavailable)
@@ -2626,6 +2608,24 @@ extension CreateML.MLSoundClassifier.ModelParameters {
 extension CreateML.MLGazetteer {
   public func write(to fileURL: Foundation.URL, metadata: CreateML.MLModelMetadata? = nil) throws
   public func write(toFile path: Swift.String, metadata: CreateML.MLModelMetadata? = nil) throws
+}
+extension Swift.Int32 {
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
+    get
+  }
+}
+extension Swift.Float {
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
+    get
+  }
+}
+extension Swift.Double {
+  @available(macOS 12.0, iOS 15.0, tvOS 16.0, *)
+  public static var mlMultiArrayDataType: CoreML.MLMultiArrayDataType {
+    get
+  }
 }
 @available(macOS 10.15, *)
 @available(iOS, unavailable)

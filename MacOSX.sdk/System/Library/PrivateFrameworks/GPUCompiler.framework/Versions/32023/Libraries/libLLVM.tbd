@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libLLVM.dylib'
-current-version: 32023.101
+current-version: 32023.155
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN4llvm3sys6detail3x8618getVendorSignatureEPj ]
@@ -15250,7 +15250,7 @@ exports:
                        __ZNK4llvm8LoopBaseINS_17MachineBasicBlockENS_11MachineLoopEE9getHeaderEv, 
                        __ZNK4llvm8LoopBaseINS_17MachineBasicBlockENS_11MachineLoopEE9isInvalidEv, 
                        __ZNK4llvm9FuncDataTINS_9EmptyDataEE17getEntryBlockNameEv, 
-                       __ZTVN4llvm14ChangeReporterINS_7IRDataTINS_9EmptyDataEEEEE, 
+                       __ZNSt3__119piecewise_constructE, __ZTVN4llvm14ChangeReporterINS_7IRDataTINS_9EmptyDataEEEEE, 
                        __ZTVN4llvm14ChangeReporterINSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEEE, 
                        __ZTVN4llvm14RegionInfoBaseINS_12RegionTraitsINS_15MachineFunctionEEEEE, 
                        __ZTVN4llvm14RegionInfoBaseINS_12RegionTraitsINS_8FunctionEEEEE, 

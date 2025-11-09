@@ -3,7 +3,7 @@ module AppleTextureEncoder [system] {
  link "ate"
  export *
 }
-extern module Bootstrap "xpc.modulemap"
+extern module Bootstrap "launch.modulemap"
 module Compression [system] {
  header "compression.h"
  export *
@@ -1010,7 +1010,7 @@ module asl [system] {
  export *
 }
 extern module dnssd "dnssd.modulemap"
-extern module launch "xpc.modulemap"
+extern module launch "launch.modulemap"
 extern module libunwind "libunwind.modulemap"
 module os [system] {
  module atomic {
@@ -1159,6 +1159,13 @@ module SQLite3 [system] {
  }
  export *
 }
-extern module vproc "xpc.modulemap"
+extern module vproc "launch.modulemap"
 extern module xcselect "xcselect.modulemap"
 extern module XPC "xpc.modulemap"
+extern module Dispatch "dispatch/module.modulemap"
+extern module DispatchIntrospection "dispatch/module.modulemap"
+extern module MachO "mach-o/module.modulemap"
+extern module ObjectiveC "objc/module.modulemap"
+extern module ICU "unicode/module.modulemap"
+extern module CUPS "cups/module.modulemap"
+extern module FFI "ffi/module.modulemap"

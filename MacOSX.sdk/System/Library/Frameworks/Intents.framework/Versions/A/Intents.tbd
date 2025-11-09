@@ -103,6 +103,7 @@ exports:
                        _INCarChargingConnectorTypeGBTAC, _INCarChargingConnectorTypeGBTDC, 
                        _INCarChargingConnectorTypeGetBackingType, _INCarChargingConnectorTypeGetFacadeObject, 
                        _INCarChargingConnectorTypeJ1772, _INCarChargingConnectorTypeMennekes, 
+                       _INCarChargingConnectorTypeNACSAC, _INCarChargingConnectorTypeNACSDC, 
                        _INCarChargingConnectorTypeTesla, _INCarChargingConnectorTypeValueAsString, 
                        _INCarDefrosterGetBackingType, _INCarDefrosterGetFacadeType, 
                        _INCarDefrosterGetLocalizedName, _INCarDefrosterGetName, _INCarDefrosterHasBackingType, 

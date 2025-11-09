@@ -205,5 +205,5 @@ exports:
                        FTCinematicTrackingResult, FTCinematicTrackingState, FTEspressoBuffer, 
                        FTImageTensorDescriptor, FTNetworkDescriptor, FTTapToBox, 
                        FTTapToTrackPreprocessor, FTTensorReference, FTVTScaler ]
-    weak-symbols:    [ __ZN2ft10ProxyTrack4KINDE ]
+    weak-symbols:    [ __ZN2ft10ProxyTrack4KINDE, __ZNSt3__119piecewise_constructE ]
 ...

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Versions/A/LocalAuthentication'
-current-version: 1394.60.57
+current-version: 1394.100.151
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -19,8 +19,15 @@ exports:
     symbols:         [ _LAEnabledBiometryUsers, _kAPKekPassword, _kAPMasterKey ]
     objc-classes:    [ LAAuthenticationProvider ]
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+    symbols:         [ _LADarwinNotificationRatchetStateDidChange, _LARatchetErrorDomain, 
+                       _LARatchetErrorUserInfoKeyState, _NSStringFromLARatchetStateDuration, 
+                       _NSStringFromLARatchetStateRawValue ]
     objc-classes:    [ LAAuthenticationBiometricMethod, LAAuthenticationBiometricMethodConfiguration, 
                        LAAuthenticationBiometricMethodState, LAAuthenticationMethod, 
                        LAAuthenticationMethodConfiguration, LAAuthenticationMethodResult, 
-                       LAAuthenticationMethodState ]
+                       LAAuthenticationMethodState, LARatchet, LARatchetManager, 
+                       LARatchetState, LARatchetStateValue, LARatchetStateValueArmed, 
+                       LARatchetStateValueCollapsed, LARatchetStateValueExpired, 
+                       LARatchetStateValueNotStarted, LARatchetStateValueReady, LARatchetStateValueWaitingForCoolOff, 
+                       LARatchetStateValueWaitingForSecondAuthentication ]
 ...

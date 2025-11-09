@@ -164,6 +164,25 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
      completed.
     */
     NSFileProviderErrorDomainDisabled FILEPROVIDER_API_AVAILABILITY_V5_0_IOS = -2011,
+
+    /*
+     Returned by the system to indicate that it is temporarily unable to service requests for this domain.
+     The caller should expect the same API call to succeed at a later time.
+     */
+    NSFileProviderErrorProviderDomainTemporarilyUnavailable FILEPROVIDER_API_AVAILABILITY_V6_0_IOS = -2012,
+
+    /*
+     Returned by the system to indicate that there is no NSFileProviderDomain registered in the
+     system which has the same identifier that was used to construct the NSFileProviderManager
+     which made the API call.
+     */
+    NSFileProviderErrorProviderDomainNotFound FILEPROVIDER_API_AVAILABILITY_V6_0_IOS = -2013,
+
+    /*
+     Returned by the system to indicate that the system does not have any launchable
+     `com.apple.fileprovider-nonui` application extension for this domain's app bundle.
+     */
+    NSFileProviderErrorApplicationExtensionNotFound FILEPROVIDER_API_AVAILABILITY_V6_0_IOS = -2014,
 } FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 @interface NSError (NSFileProviderError)

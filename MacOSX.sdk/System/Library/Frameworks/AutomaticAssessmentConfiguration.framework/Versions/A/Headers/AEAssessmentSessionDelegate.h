@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AEAssessmentConfiguration;
 
 API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14.0))
+API_UNAVAILABLE(visionos)
 @protocol AEAssessmentSessionDelegate <NSObject>
 @optional
 

@@ -7,7 +7,8 @@ current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s17PersistentElement9SwiftData22RelationshipCollectionPTl', 
                        '_$s5Model9SwiftData07BackingC0PTl', '_$s9SwiftData07BackingB0Mp', 
                        '_$s9SwiftData07BackingB0P17persistentModelIDAA20PersistentIdentifierVSgvMTj', 
@@ -350,6 +351,7 @@ exports:
                        '_$s9SwiftData6SchemaC05_coreB18ManagedObjectModel3for10mergedWithypSgSayAA010PersistentG0_pXpG_yptFZ', 
                        '_$s9SwiftData6SchemaC05_coreB22MakeManagedObjectModelypSgyF', 
                        '_$s9SwiftData6SchemaC05_coreB22MakeManagedObjectModelyypSgSayAA010PersistentH0_pXpGFZ', 
+                       '_$s9SwiftData6SchemaC05purgeC6CachesyyFZ', '_$s9SwiftData6SchemaC06createC009versionedC0AcA09VersionedC0_pXp_tKFZ', 
                        '_$s9SwiftData6SchemaC09versionedC0AcA09VersionedC0_pXp_tcfC', 
                        '_$s9SwiftData6SchemaC09versionedC0AcA09VersionedC0_pXp_tcfc', 
                        '_$s9SwiftData6SchemaC12RelationshipC07isToOneD0Sbvg', '_$s9SwiftData6SchemaC12RelationshipC07isToOneD0SbvpMV', 

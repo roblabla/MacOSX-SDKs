@@ -3,7 +3,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <LocalAuthentication/LocalAuthentication.h>
+#import <LocalAuthentication/LARight.h>
 #import <LocalAuthenticationEmbeddedUI/LAPresentationContext.h>
 
 NS_ASSUME_NONNULL_BEGIN

@@ -33,6 +33,7 @@
 #endif
 
 #include <mach/kern_return.h>
+#include <mach/mach_types.h>
 #include <CoreFoundation/CoreFoundation.h>
 #if TARGET_OS_OSX
 #include <xpc/xpc.h>

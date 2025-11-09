@@ -293,6 +293,13 @@ exports:
                        '_$s14AppleAccountUI23PrintableSummaryContextOMa', '_$s14AppleAccountUI23PrintableSummaryContextOMn', 
                        '_$s14AppleAccountUI23PrintableSummaryContextON', '_$s14AppleAccountUI23PrintableSummaryContextOSHAAMc', 
                        '_$s14AppleAccountUI23PrintableSummaryContextOSQAAMc', '_$s14AppleAccountUI23PrintableSummaryContextOSYAAMc', 
+                       '_$s14AppleAccountUI30ReviewCustodianListViewFactoryC6create14accountManager12repairHelperSo16NSViewControllerCSo011AIDAAccountK0C_So019AAUICustodianRepairM0CtFZ', 
+                       '_$s14AppleAccountUI30ReviewCustodianListViewFactoryCACycfC', 
+                       '_$s14AppleAccountUI30ReviewCustodianListViewFactoryCACycfc', 
+                       '_$s14AppleAccountUI30ReviewCustodianListViewFactoryCMa', 
+                       '_$s14AppleAccountUI30ReviewCustodianListViewFactoryCMn', 
+                       '_$s14AppleAccountUI30ReviewCustodianListViewFactoryCMo', 
+                       '_$s14AppleAccountUI30ReviewCustodianListViewFactoryCN', '_$s14AppleAccountUI30ReviewCustodianListViewFactoryCfD', 
                        '_$s7Content14AppleAccountUI14DataclassSheetPTl', '_$s7SwiftUI17EnvironmentValuesV012AppleAccountB0E19dismissToiCloudHomeAD07DismisshiJ0CSgvM', 
                        '_$s7SwiftUI17EnvironmentValuesV012AppleAccountB0E19dismissToiCloudHomeAD07DismisshiJ0CSgvg', 
                        '_$s7SwiftUI17EnvironmentValuesV012AppleAccountB0E19dismissToiCloudHomeAD07DismisshiJ0CSgvpMV', 
@@ -301,9 +308,9 @@ exports:
                        '_$s7SwiftUI17EnvironmentValuesV012AppleAccountB0E20serviceModelProviderAD07ServicehI0_pSgvg', 
                        '_$s7SwiftUI17EnvironmentValuesV012AppleAccountB0E20serviceModelProviderAD07ServicehI0_pSgvpMV', 
                        '_$s7SwiftUI17EnvironmentValuesV012AppleAccountB0E20serviceModelProviderAD07ServicehI0_pSgvs', 
-                       __AAUILogGreenTea, __AAUILogGreenTeaEnabled, __AAUILogGreenTeaTransmittingPhotosOrVideos, 
+                       __AAUILogGreenTeaEnabled, __AAUILogGreenTeaTransmittingPhotosOrVideos, 
                        __AAUILogGreenTeaWithFormat, __AAUILogSystem, __AAUISignpostCreate, 
                        __AAUISignpostGetNanoseconds, __AAUISignpostLogSystem ]
-    objc-classes:    [ AAUICDPHelper, AAUIPrintableAccountRecoverySummaryViewFactory, 
-                       AAUISpyglassSpecifierRowModel ]
+    objc-classes:    [ AAUICDPHelper, AAUICustodianRepairHelper, AAUIPrintableAccountRecoverySummaryViewFactory, 
+                       AAUIReviewCustodianListViewFactory, AAUISpyglassSpecifierRowModel ]
 ...

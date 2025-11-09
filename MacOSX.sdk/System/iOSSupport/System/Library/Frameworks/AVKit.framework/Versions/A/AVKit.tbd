@@ -12,24 +12,30 @@ exports:
                        _AVKitMetadataIdentifierBrandIdentifier, _AVKitMetadataIdentifierEpisodeNumber, 
                        _AVKitMetadataIdentifierExactEndDate, _AVKitMetadataIdentifierExactStartDate, 
                        _AVKitMetadataIdentifierExternalContentIdentifier, _AVKitMetadataIdentifierExternalUserProfileIdentifier, 
-                       _AVKitMetadataIdentifierPlaybackProgress, _AVKitMetadataIdentifierRottenTomatoesFreshness, 
+                       _AVKitMetadataIdentifierLeagueName, _AVKitMetadataIdentifierPlaybackProgress, 
+                       _AVKitMetadataIdentifierProgramScheduledTime, _AVKitMetadataIdentifierRottenTomatoesFreshness, 
                        _AVKitMetadataIdentifierRottenTomatoesRating, _AVKitMetadataIdentifierSeasonNumber, 
                        _AVKitMetadataIdentifierServiceIdentifier, _AVKitMetadataIdentifieriTunesStoreIdentifier, 
                        _AVPictureInPictureControllerContentSourceKey, _AVPictureInPictureControllerDidStartNotification, 
                        _AVPictureInPictureControllerDidStopNotification, _AVPictureInPictureControllerPlaybackStateDidChangeNotification, 
                        _AVPictureInPictureControllerPlaybackStateIsPlayingKey, _AVPictureInPictureControllerWillStartNotification, 
-                       _AVPictureInPictureControllerWillStopNotification, _AVPlayerItemAVKitDataDidChangeNotification ]
+                       _AVPictureInPictureControllerWillStopNotification, _AVPlayerItemAVKitDataDidChangeNotification, 
+                       _AVPlayerViewControllerDidShowInfoViewControllerKindKey, _AVPlayerViewControllerDidShowInfoViewControllerNotification, 
+                       _AVPlayerViewControllerInfoViewControllerAudioKind, _AVPlayerViewControllerInfoViewControllerCustomKind, 
+                       _AVPlayerViewControllerInfoViewControllerInfoKind, _AVPlayerViewControllerInfoViewControllerNavigationMarkersKind, 
+                       _AVPlayerViewControllerInfoViewControllerSubtitlesKind ]
     objc-classes:    [ AVAppStoreBehavior, AVAppStoreBehaviorContext, AVAppStorePlayerView, 
-                       AVBackgroundView, AVControlItem, AVEditBehavior, AVEditBehaviorContext, 
-                       AVExternalPlaybackController, AVHomeIPCameraBehavior, AVHomeIPCameraBehaviorContext, 
-                       AVHomeLoadingButtonControlItem, AVMediaSelectionViewController, 
-                       AVMusicAppBehavior, AVMusicAppBehaviorContext, AVNewsWidgetPlayerBehavior, 
-                       AVNewsWidgetPlayerBehaviorContext, AVPictureInPictureController, 
-                       AVPictureInPictureControllerContentSource, AVPictureInPictureIndicatorView, 
-                       AVPictureInPicturePlayerLayerView, AVPictureInPictureVideoCallViewController, 
-                       AVPlayerViewController, AVPlayerViewControllerConfiguration, 
-                       AVPlayerViewControllerCustomControlsView, AVRoutePickerView, 
-                       AVSeymourBehavior, AVSeymourBehaviorContext, __AVPlayerLayerView ]
+                       AVBackgroundView, AVCaptureEvent, AVCaptureEventInteraction, 
+                       AVControlItem, AVEditBehavior, AVEditBehaviorContext, AVExternalPlaybackController, 
+                       AVHomeIPCameraBehavior, AVHomeIPCameraBehaviorContext, AVHomeLoadingButtonControlItem, 
+                       AVMediaSelectionViewController, AVMusicAppBehavior, AVMusicAppBehaviorContext, 
+                       AVNewsWidgetPlayerBehavior, AVNewsWidgetPlayerBehaviorContext, 
+                       AVPictureInPictureController, AVPictureInPictureControllerContentSource, 
+                       AVPictureInPictureIndicatorView, AVPictureInPicturePlayerLayerView, 
+                       AVPictureInPictureVideoCallViewController, AVPlayerViewController, 
+                       AVPlayerViewControllerConfiguration, AVPlayerViewControllerCustomControlsView, 
+                       AVRoutePickerView, AVSeymourBehavior, AVSeymourBehaviorContext, 
+                       __AVPlayerLayerView ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

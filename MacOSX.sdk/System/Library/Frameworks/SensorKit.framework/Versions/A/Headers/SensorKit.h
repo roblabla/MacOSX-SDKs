@@ -30,3 +30,6 @@
 #import <SensorKit/SRMediaEvent.h>
 #import <SensorKit/SRSpeechMetrics.h>
 #import <SensorKit/SRFaceMetrics.h>
+#import <SensorKit/SRElectrocardiogramSession.h>
+#import <SensorKit/SRElectrocardiogramSample.h>
+#import <SensorKit/SRPhotoplethysmogramSample.h>

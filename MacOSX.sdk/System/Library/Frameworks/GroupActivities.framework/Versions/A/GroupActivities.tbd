@@ -5,7 +5,8 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
 install-name:    '/System/Library/Frameworks/GroupActivities.framework/Versions/A/GroupActivities'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10CloudAsset0B17UploadCoordinatorC15GroupActivitiesAbDMc', 
                        '_$s10CloudAsset0B17UploadCoordinatorC15GroupActivitiesAbDWP', 
                        '_$s10CloudAsset0B19DownloadCoordinatorC15GroupActivitiesAbDMc', 

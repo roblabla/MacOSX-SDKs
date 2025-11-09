@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libapple_nghttp2.dylib'
-current-version: 1.55.1
+current-version: 1.58
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -28,12 +28,12 @@ exports:
                        _nghttp2_option_set_no_http_messaging, _nghttp2_option_set_no_http_semantics, 
                        _nghttp2_option_set_no_recv_client_magic, _nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation, 
                        _nghttp2_option_set_peer_max_concurrent_streams, _nghttp2_option_set_server_fallback_rfc7540_priorities, 
-                       _nghttp2_option_set_user_recv_extension_type, _nghttp2_pack_settings_payload, 
-                       _nghttp2_priority_spec_check_default, _nghttp2_priority_spec_default_init, 
-                       _nghttp2_priority_spec_init, _nghttp2_rcbuf_decref, _nghttp2_rcbuf_get_buf, 
-                       _nghttp2_rcbuf_incref, _nghttp2_rcbuf_is_static, _nghttp2_select_next_protocol, 
-                       _nghttp2_session_callbacks_del, _nghttp2_session_callbacks_new, 
-                       _nghttp2_session_callbacks_set_before_frame_send_callback, 
+                       _nghttp2_option_set_stream_reset_rate_limit, _nghttp2_option_set_user_recv_extension_type, 
+                       _nghttp2_pack_settings_payload, _nghttp2_priority_spec_check_default, 
+                       _nghttp2_priority_spec_default_init, _nghttp2_priority_spec_init, 
+                       _nghttp2_rcbuf_decref, _nghttp2_rcbuf_get_buf, _nghttp2_rcbuf_incref, 
+                       _nghttp2_rcbuf_is_static, _nghttp2_select_next_protocol, _nghttp2_session_callbacks_del, 
+                       _nghttp2_session_callbacks_new, _nghttp2_session_callbacks_set_before_frame_send_callback, 
                        _nghttp2_session_callbacks_set_data_source_read_length_callback, 
                        _nghttp2_session_callbacks_set_error_callback, _nghttp2_session_callbacks_set_error_callback2, 
                        _nghttp2_session_callbacks_set_on_begin_frame_callback, _nghttp2_session_callbacks_set_on_begin_headers_callback, 

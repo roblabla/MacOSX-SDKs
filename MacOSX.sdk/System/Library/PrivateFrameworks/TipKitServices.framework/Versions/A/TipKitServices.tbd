@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TipKitServices.framework/Versions/A/TipKitServices'
-current-version: 55.2.3
+current-version: 55.4.17
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -16,7 +16,12 @@ exports:
                        '_$s14TipKitServices0A10EventProxyCMn', '_$s14TipKitServices0A10EventProxyCMo', 
                        '_$s14TipKitServices0A10EventProxyCMu', '_$s14TipKitServices0A10EventProxyCN', 
                        '_$s14TipKitServices0A10EventProxyCScAAAMc', '_$s14TipKitServices0A10EventProxyCfD', 
-                       '_$s14TipKitServices0A10EventProxyCfd', '_$s14TipKitServices0A5ProxyC10invalidate13tipIdentifier3for4withySS_SSAC18InvalidationReasonVtYaKFZ', 
+                       '_$s14TipKitServices0A10EventProxyCfd', '_$s14TipKitServices0A15EventProxySwiftC6donate15eventIdentifier3forySS_SStYaKFZ', 
+                       '_$s14TipKitServices0A15EventProxySwiftC6donate15eventIdentifier3forySS_SStYaKFZTu', 
+                       '_$s14TipKitServices0A15EventProxySwiftCACycfC', '_$s14TipKitServices0A15EventProxySwiftCACycfc', 
+                       '_$s14TipKitServices0A15EventProxySwiftCMa', '_$s14TipKitServices0A15EventProxySwiftCMn', 
+                       '_$s14TipKitServices0A15EventProxySwiftCMo', '_$s14TipKitServices0A15EventProxySwiftCN', 
+                       '_$s14TipKitServices0A15EventProxySwiftCfD', '_$s14TipKitServices0A5ProxyC10invalidate13tipIdentifier3for4withySS_SSAC18InvalidationReasonVtYaKFZ', 
                        '_$s14TipKitServices0A5ProxyC10invalidate13tipIdentifier3for4withySS_SSAC18InvalidationReasonVtYaKFZTu', 
                        '_$s14TipKitServices0A5ProxyC15unownedExecutorScevg', '_$s14TipKitServices0A5ProxyC15unownedExecutorScevpMV', 
                        '_$s14TipKitServices0A5ProxyC18InvalidationReasonV010userClosedA0AEvgZ', 
@@ -35,4 +40,5 @@ exports:
                        '_$s14TipKitServices15DaemonUtilitiesV19updateDeviceProfileyySDySSs8Sendable_pGYaKFZTu', 
                        '_$s14TipKitServices15DaemonUtilitiesVMa', '_$s14TipKitServices15DaemonUtilitiesVMn', 
                        '_$s14TipKitServices15DaemonUtilitiesVN' ]
+    objc-classes:    [ TipEventProxy, _TtC14TipKitServices18TipEventProxySwift ]
 ...

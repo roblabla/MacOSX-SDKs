@@ -5,7 +5,8 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
 install-name:    '/System/Library/Frameworks/CarKey.framework/Versions/A/CarKey'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s6CarKey0aB13RemoteControlC5start8delegate17subscriptionRange4withAA0abcD7SessionCAA0abcdJ8Delegate_p_SNySiGSgSo17OS_dispatch_queueCSgtYaKFZTj', 
                        '_$s6CarKey0aB13RemoteControlC5start8delegate17subscriptionRange4withAA0abcD7SessionCAA0abcdJ8Delegate_p_SNySiGSgSo17OS_dispatch_queueCSgtYaKFZTjTu', 
                        '_$s6CarKey0aB13RemoteControlC5start8delegate17subscriptionRange4withAA0abcD7SessionCAA0abcdJ8Delegate_p_SNySiGSgSo17OS_dispatch_queueCSgtYaKFZTq', 

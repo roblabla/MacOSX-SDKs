@@ -2,17 +2,13 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LearnedFeatures.framework/Versions/A/LearnedFeatures'
-current-version: 6.33.4
-compatibility-version: 6.33.4
+current-version: 6.51.2
+compatibility-version: 6.51.2
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
-                       __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
-                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__117bad_function_callE, 
+    weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__117bad_function_callE, 
                        __ZTINSt3__16vectorIfNS_9allocatorIfEEEE, __ZTINSt3__16vectorIhNS_9allocatorIhEEEE, 
                        __ZTINSt3__16vectorItNS_9allocatorItEEEE, __ZTIPFvvE, __ZTSFvvE, 
-                       __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
-                       __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
                        __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110shared_ptrIKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS7_S6_EE, 
                        __ZTSNSt3__110shared_ptrINS_14basic_ifstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
                        __ZTSNSt3__110shared_ptrINS_14basic_ofstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 

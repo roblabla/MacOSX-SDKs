@@ -2,11 +2,17 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 617.1.17
+current-version: 618.1.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ '_$s22AuthenticationServices31ASPublicKeyCredentialClientDataV11crossOriginAC05CrossI5ValueOSgvM', 
+    symbols:         [ '_$s22AuthenticationServices042ASAuthorizationWebBrowserSecurityKeyPublicG18CredentialProviderMp', 
+                       '_$s22AuthenticationServices042ASAuthorizationWebBrowserSecurityKeyPublicG18CredentialProviderP06createI16AssertionRequest10clientDataSo0cfghgilM0CAA08ASPublicgi6ClientO0V_tFTj', 
+                       '_$s22AuthenticationServices042ASAuthorizationWebBrowserSecurityKeyPublicG18CredentialProviderP06createI16AssertionRequest10clientDataSo0cfghgilM0CAA08ASPublicgi6ClientO0V_tFTq', 
+                       '_$s22AuthenticationServices042ASAuthorizationWebBrowserSecurityKeyPublicG18CredentialProviderP06createI19RegistrationRequest10clientData11displayName4name6userIDSo0cfghgilM0CAA08ASPublicgi6ClientO0V_S2S10Foundation0O0VtFTj', 
+                       '_$s22AuthenticationServices042ASAuthorizationWebBrowserSecurityKeyPublicG18CredentialProviderP06createI19RegistrationRequest10clientData11displayName4name6userIDSo0cfghgilM0CAA08ASPublicgi6ClientO0V_S2S10Foundation0O0VtFTq', 
+                       '_$s22AuthenticationServices042ASAuthorizationWebBrowserSecurityKeyPublicG18CredentialProviderTL', 
+                       '_$s22AuthenticationServices31ASPublicKeyCredentialClientDataV11crossOriginAC05CrossI5ValueOSgvM', 
                        '_$s22AuthenticationServices31ASPublicKeyCredentialClientDataV11crossOriginAC05CrossI5ValueOSgvg', 
                        '_$s22AuthenticationServices31ASPublicKeyCredentialClientDataV11crossOriginAC05CrossI5ValueOSgvpMV', 
                        '_$s22AuthenticationServices31ASPublicKeyCredentialClientDataV11crossOriginAC05CrossI5ValueOSgvs', 
@@ -39,6 +45,8 @@ exports:
                        '_$s22AuthenticationServices31ASPublicKeyCredentialClientDataVN', 
                        '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV10userHandle10Foundation4DataVvg', 
                        '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV10userHandle10Foundation4DataVvpMV', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV11customTitleSSvg', 
+                       '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV11customTitleSSvpMV', 
                        '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12credentialID10Foundation4DataVvg', 
                        '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12credentialID10Foundation4DataVvpMV', 
                        '_$s22AuthenticationServices52ASAuthorizationWebBrowserPlatformPublicKeyCredentialV12providerNameSSvg', 
@@ -109,6 +117,16 @@ exports:
                        '_$s22AuthenticationServices61ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutputVMa', 
                        '_$s22AuthenticationServices61ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutputVMn', 
                        '_$s22AuthenticationServices61ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutputVN', 
+                       '_$sSo032ASAuthorizationSecurityKeyPublicC18CredentialProviderC22AuthenticationServices0a10WebBrowserbcdceF0ACMc', 
+                       '_$sSo032ASAuthorizationSecurityKeyPublicC18CredentialProviderC22AuthenticationServices0a10WebBrowserbcdceF0ACWP', 
+                       '_$sSo032ASAuthorizationSecurityKeyPublicC18CredentialProviderC22AuthenticationServicesE06createE16AssertionRequest10clientDataSo0abcdcejK0CAC08ASPublicce6ClientM0V_tF', 
+                       '_$sSo032ASAuthorizationSecurityKeyPublicC18CredentialProviderC22AuthenticationServicesE06createE19RegistrationRequest10clientData11displayName4name6userIDSo0abcdcejK0CAC08ASPublicce6ClientM0V_S2S10Foundation0M0VtF', 
+                       '_$sSo042ASAuthorizationWebBrowserSecurityKeyPublicE26CredentialAssertionRequestP22AuthenticationServicesE10clientDataAC08ASPubliceg6ClientM0VSgvg', 
+                       '_$sSo042ASAuthorizationWebBrowserSecurityKeyPublicE26CredentialAssertionRequestP22AuthenticationServicesE10clientDataAC08ASPubliceg6ClientM0VSgvpMV', 
+                       '_$sSo042ASAuthorizationWebBrowserSecurityKeyPublicE29CredentialRegistrationRequestP22AuthenticationServicesE10clientDataAC08ASPubliceg6ClientM0VSgvg', 
+                       '_$sSo042ASAuthorizationWebBrowserSecurityKeyPublicE29CredentialRegistrationRequestP22AuthenticationServicesE10clientDataAC08ASPubliceg6ClientM0VSgvpMV', 
+                       '_$sSo25ASCredentialIdentityStoreC22AuthenticationServicesE20credentialIdentities10forService0fB5TypesSaySo0aB0_pGSo0aI10IdentifierCSg_So0abJ0VtYaF', 
+                       '_$sSo25ASCredentialIdentityStoreC22AuthenticationServicesE20credentialIdentities10forService0fB5TypesSaySo0aB0_pGSo0aI10IdentifierCSg_So0abJ0VtYaFTu', 
                        '_$sSo26ASPasskeyCredentialRequestC22AuthenticationServicesE18credentialIdentity14clientDataHash26userVerificationPreference19supportedAlgorithmsABSo0abG0C_10Foundation0I0VSo024ASAuthorizationPublicKeyb4UserlM0aSaySo25ASCOSEAlgorithmIdentifieraGtcfC', 
                        '_$sSo26ASPasskeyCredentialRequestC22AuthenticationServicesE18credentialIdentity14clientDataHash26userVerificationPreference19supportedAlgorithmsABSo0abG0C_10Foundation0I0VSo024ASAuthorizationPublicKeyb4UserlM0aSaySo25ASCOSEAlgorithmIdentifieraGtcfc', 
                        '_$sSo26ASPasskeyCredentialRequestC22AuthenticationServicesE19supportedAlgorithmsSaySo25ASCOSEAlgorithmIdentifieraGvg', 
@@ -160,6 +178,8 @@ exports:
                        _ASExtensionLocalizedFailureReasonErrorKey, _ASWebAuthenticationSessionErrorDomain, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitiesKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilityIsSupportedKey, 
+                       _ASWebAuthenticationSessionWebBrowserSupportCapabilitySupportsAdditionalHeaderFields, 
+                       _ASWebAuthenticationSessionWebBrowserSupportCapabilitySupportsCallback, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitySupportsEphemeralBrowserSessionKey, 
                        _AuthenticationServicesAgentMain, __authenticationSessionRequestServerErrorDomain, 
                        _asTransportToWKTransport ]
@@ -193,9 +213,9 @@ exports:
                        ASPasskeyCredentialRequest, ASPasskeyCredentialRequestParameters, 
                        ASPasskeyRegistrationCredential, ASPasswordCredential, ASPasswordCredentialIdentity, 
                        ASPasswordCredentialRequest, ASPublicKeyCredentialClientData, 
-                       ASSettingsHelper, ASWebAuthenticationSession, ASWebAuthenticationSessionRequest, 
-                       ASWebAuthenticationSessionRequestClient, _ASAccountManagerTipContent, 
-                       _ASAccountManagerTipManager, _ASIncomingCallObserver, _ASPasskeysLearnMoreContent, 
-                       _ASPasswordManagerDeleteAlertConfiguration, _ASPasswordManagerIconController, 
-                       _ASWebAuthenticationSessionRequestServer ]
+                       ASSettingsHelper, ASWebAuthenticationSession, ASWebAuthenticationSessionCallback, 
+                       ASWebAuthenticationSessionRequest, ASWebAuthenticationSessionRequestClient, 
+                       _ASAccountManagerTipContent, _ASAccountManagerTipManager, 
+                       _ASIncomingCallObserver, _ASPasskeysLearnMoreContent, _ASPasswordManagerDeleteAlertConfiguration, 
+                       _ASPasswordManagerIconController, _ASWebAuthenticationSessionRequestServer ]
 ...

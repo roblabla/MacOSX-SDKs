@@ -19,6 +19,10 @@ typedef NS_ENUM(NSInteger, PKContentVersion) {
     ///
     /// Inks included are Pen, Pencil, Marker, Monoline, Fountain Pen, Watercolor, and Crayon.
     PKContentVersion2 NS_SWIFT_NAME(version2),
+    
+    /// New Fountain Pen
+    PKContentVersion3 NS_SWIFT_NAME(version3),
+
     /// The latest version including all features.
-    PKContentVersionLatest = PKContentVersion2
+    PKContentVersionLatest = PKContentVersion3
 };

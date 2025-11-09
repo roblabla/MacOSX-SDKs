@@ -637,8 +637,62 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRate API_AVA
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ReferenceBufferCount API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)); // CFNumber, Optional
 
 
+/*!
+	@constant	kVTCompressionPropertyKey_CalculateMeanSquaredError
+	@abstract
+		This property requests that the encoder measure and output the Mean Squared Error(MSE) quality metric.
+	@discussion
+		The MSE value returned may be measured using an internal representation of the decoded frame which may lack filtering or processing present in the actual decoded frame.  Because of this, there may be a small delta between the reported MSE and the true MSE.
+		If supported, the MSE values will be returned as sample buffer attachments on the encoded frame using the kVTSampleAttachmentKey_QualityMetrics key.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CalculateMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // Read/write, CFBoolean
+
+
+/*!
+	@constant	kVTSampleAttachmentKey_QualityMetrics
+	@abstract
+		The value for this key contain quality-related metadata from the video encoder for a video frame.
+	@discussion
+		The video encoder will attach this via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+*/
+VT_EXPORT const CFStringRef kVTSampleAttachmentKey_QualityMetrics API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); //CFDictionary
+
+/*!
+	@constant	kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError
+	@abstract
+		Key for mean squared error (MSE) of the encoded Luma channel from the video encoder.
+	@discussion
+		For single-view video, a CFNumber value is returned.
+		For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view.
+		The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+*/
+VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // CFNumber, CFArray
+
+/*!
+	@constant	kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError
+	@abstract
+		Key for mean squared error (MSE) of the encoded Chroma Blue channel from the video encoder.
+	@discussion
+		For single-view video, a CFNumber value is returned.
+		For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view.
+		The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+**/
+VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // CFNumber, CFArray
+
+/*!
+	@constant	kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError
+	@abstract
+		Key for mean squared error (MSE) of the encoded Chroma Red channel from the video encoder.
+	@discussion
+		For single-view video, a CFNumber value is returned.
+		For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view.
+		The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+*/
+VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // CFNumber, CFArray
+
+
+
 #pragma mark Hardware acceleration
-#if !TARGET_OS_IPHONE
 /*!
 	@constant	kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder
 	@abstract
@@ -650,7 +704,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ReferenceBufferCount API_A
 		this property can be set to kCFBooleanFalse.
  		In MacOS 10.15 and later, hardware encode is enabled in VTCompressionSessions by default.
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // CFBoolean, Optional, true by default
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(17.4), tvos(17.4)); // CFBoolean, Optional, true by default
 
 /*!
 	@constant	kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder
@@ -669,7 +723,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableHardwareAccelerat
 			- the requested encoding format or encoding configuration is not supported
 			- the hardware encoding resources on the machine are busy
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(17.4), tvos(17.4)); // CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder
@@ -680,8 +734,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequireHardwareAccelera
 		accelerated encode using kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder
 		to see if a hardware accelerated encoder was selected.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // CFBoolean, Read; assumed false by default
-#endif // !TARGET_OS_IPHONE
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(17.4), tvos(17.4)); // CFBoolean, Read; assumed false by default
 
 /*!
 	@constant	kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID
@@ -1241,6 +1294,16 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasLeftStereoEyeView API_A
         The value will be set on the format description for output samples and may affect the decoded frame presentation.
  */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasRightStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean, see kCMFormatDescriptionExtension_HasRightStereoEyeView
+
+/*!
+    @constant    kVTCompressionPropertyKey_HorizontalFieldOfView
+    @abstract
+        Specifies the value of kCMFormatDescriptionExtension_HorizontalFieldOfView.
+    @discussion
+    The value is a CFNumber holding an unsigned 32-bit integer that is interpreted in millidegree or thousandths of a degree (e.g., 123456 is 123.456 degree).
+    This property is optional and should only be specified if the field of view is known.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalFieldOfView API_AVAILABLE(macos(14.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos);     // CFNumber(uint32) as millidegrees
 
 	
 CM_ASSUME_NONNULL_END

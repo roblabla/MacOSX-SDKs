@@ -25,6 +25,10 @@ Typedefs:
   SwiftName: SRAmbientLightSample.Chromaticity
 - Name: SRDeviceUsageCategoryKey
   SwiftName: SRDeviceUsageReport.CategoryKey
+- Name: SRPhotoplethysmogramOpticalSampleCondition
+  SwiftName: SRPhotoplethysmogramOpticalSample.Condition
+- Name: SRPhotoplethysmogramSampleUsage
+  SwiftName: SRPhotoplethysmogramSample.Usage
 Functions:
 - Name: SRAbsoluteTimeGetCurrent
   SwiftName: 'SRAbsoluteTime.current()'
@@ -57,6 +61,20 @@ Tags:
   SwiftName: SRSpeechMetrics.SessionFlags
 - Name: SRFaceMetricsContext
   SwiftName: SRFaceMetrics.Context
+- Name: SRElectrocardiogramSessionState
+  SwiftName: SRElectrocardiogramSession.State
+- Name: SRElectrocardiogramSessionGuidance
+  SwiftName: SRElectrocardiogramSession.SessionGuidance
+- Name: SRElectrocardiogramDataFlags
+  SwiftName: SRElectrocardiogramData.Flags
+- Name: SRElectrocardiogramLead
+  SwiftName: SRElectrocardiogramSample.Lead
+- Name: SRPhotoplethysmogramPhotodiode
+  SwiftName: SRPhotoplethysmogramOpticalSample.Photodiode
+- Name: SRPhotoplethysmogramDataFlags
+  SwiftName: SRPhotoplethysmogramOpticalSample.Flags
+- Name: SRPhotoplethysmogramUsage
+  SwiftName: SRPhotoplethysmogramSample.Usage
 # Local Variables:
 # mode: yaml
 # End:

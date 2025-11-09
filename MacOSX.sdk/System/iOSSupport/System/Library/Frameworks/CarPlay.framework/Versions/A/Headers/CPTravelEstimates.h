@@ -29,6 +29,13 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
+- (instancetype)initWithDistanceRemaining:(NSMeasurement<NSUnitLength *> *)distanceRemaining distanceRemainingToDisplay:(NSMeasurement<NSUnitLength *> *)distanceRemainingToDisplay timeRemaining:(NSTimeInterval)time NS_DESIGNATED_INITIALIZER;
+
+/**
+ Distance remaining for displaying to the user.  If not set falls back to distanceRemaining;
+ */
+@property (nonatomic, readonly, copy) NSMeasurement<NSUnitLength *> *distanceRemainingToDisplay;
+
 /**
  Distance remaining.
  */

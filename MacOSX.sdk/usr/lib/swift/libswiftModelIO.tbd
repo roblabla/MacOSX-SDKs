@@ -9,9 +9,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.11$@rpath/libswiftModelIO.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.13$@rpath/libswiftModelIO.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.9$@rpath/libswiftModelIO.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvg', '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvpMV', 
+                       '$ld$install_name$os10.14$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.9$@rpath/libswiftModelIO.dylib', 
+                       '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvg', '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvpMV', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE10floatArraySaySfGvg', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE10floatArraySaySfGvpMV', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE11doubleArraySaySdGvg', 

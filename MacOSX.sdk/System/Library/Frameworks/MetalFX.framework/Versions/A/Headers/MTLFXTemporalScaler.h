@@ -41,6 +41,9 @@ API_UNAVAILABLE(visionos)
 @property (readwrite, nonatomic) float inputContentMinScale;
 @property (readwrite, nonatomic) float inputContentMaxScale;
 
+@property (readwrite, nonatomic, getter=isReactiveMaskTextureEnabled) BOOL reactiveMaskTextureEnabled API_AVAILABLE(macos(14.4), ios(17.4));
+@property (readwrite, nonatomic) MTLPixelFormat reactiveMaskTextureFormat API_AVAILABLE(macos(14.4), ios(17.4));
+
 // The following method is used to instantiate the effect encoder for a given
 // Metal device.
 - (nullable id <MTLFXTemporalScaler>)newTemporalScalerWithDevice:(nonnull id<MTLDevice>)device;
@@ -65,6 +68,7 @@ API_UNAVAILABLE(visionos)
 @property (nonatomic, readonly) MTLTextureUsage colorTextureUsage;
 @property (nonatomic, readonly) MTLTextureUsage depthTextureUsage;
 @property (nonatomic, readonly) MTLTextureUsage motionTextureUsage;
+@property (nonatomic, readonly) MTLTextureUsage reactiveTextureUsage API_AVAILABLE(macos(14.4), ios(17.4));
 @property (nonatomic, readonly) MTLTextureUsage outputTextureUsage;
 
 // Dynamic Resolution property
@@ -85,6 +89,13 @@ API_UNAVAILABLE(visionos)
 // the texel located at (0, 0) is used for exposure value. The value is used
 // to multiply the input color, use GPU to generate the exposure value.
 @property (nonatomic, retain, nullable) id<MTLTexture> exposureTexture;
+
+// Reactive mask
+// An optional single channel texture that contains values in the range
+// 0.0f-1.0f. A value of 0.0f applies the default temporal effect treatment.
+// A value greater than 0.0f applies a bias towards the current frame for
+// the pixel.
+@property (nonatomic, retain, nullable) id<MTLTexture> reactiveMaskTexture API_AVAILABLE(macos(14.4), ios(17.4));
 // If the input color is pre-multiplied by fixed value, set this value
 // which MetalFX will use to divide input color, this is not common.
 @property (nonatomic) float preExposure;

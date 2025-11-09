@@ -3,9 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/StorageKit.framework/Versions/A/StorageKit'
 current-version: 53
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AddUserDictionaryForAPFS, _AddUserToRecipe, _CreateScaledUserGraphics, 
+    symbols:         [ '_$s10StorageKit14SKAnalyticsHubC7addSinkyyAA0cF0_pFZ', '_$s10StorageKit14SKAnalyticsHubC9sendEvent4name19eventPayloadBuilderySS_SDySSSo8NSObjectCGSgyctFZ', 
+                       '_$s10StorageKit14SKAnalyticsHubCACycfC', '_$s10StorageKit14SKAnalyticsHubCACycfc', 
+                       '_$s10StorageKit14SKAnalyticsHubCMa', '_$s10StorageKit14SKAnalyticsHubCMn', 
+                       '_$s10StorageKit14SKAnalyticsHubCMo', '_$s10StorageKit14SKAnalyticsHubCN', 
+                       '_$s10StorageKit14SKAnalyticsHubCfD', '_$s10StorageKit19SKCoreAnalyticsSinkC9sendEvent4name19eventPayloadBuilderySS_SDySSSo8NSObjectCGSgyctFTj', 
+                       '_$s10StorageKit19SKCoreAnalyticsSinkC9sendEvent4name19eventPayloadBuilderySS_SDySSSo8NSObjectCGSgyctFTq', 
+                       '_$s10StorageKit19SKCoreAnalyticsSinkCACycfC', '_$s10StorageKit19SKCoreAnalyticsSinkCACycfc', 
+                       '_$s10StorageKit19SKCoreAnalyticsSinkCMa', '_$s10StorageKit19SKCoreAnalyticsSinkCMn', 
+                       '_$s10StorageKit19SKCoreAnalyticsSinkCMo', '_$s10StorageKit19SKCoreAnalyticsSinkCMu', 
+                       '_$s10StorageKit19SKCoreAnalyticsSinkCN', '_$s10StorageKit19SKCoreAnalyticsSinkCfD', 
+                       _AddUserDictionaryForAPFS, _AddUserToRecipe, _CreateScaledUserGraphics, 
                        _GetDataValueForODAttribute, _GetStringValueForODAttribute, 
                        _GetUUID, _GetValueForODAttribute, _HasInternalIPAddress, 
                        _NSNumberToBool, _NSNumberToULongLong, _NSStringOrEmpty, _READONLY_KEY_TO_SYNC, 
@@ -21,7 +32,7 @@ exports:
                        _SKFormatToDIFormat, _SKGetOSLog, _SKHelperClientInterface, 
                        _SKHelperConnectionInterface, _SKLogArrayRedacted, _SKLogSetLogsToConsole, 
                        _SKLogSetLogsToStd, _SKLogSetLogsToSys, _SKLogSetRedacted, 
-                       _commaSeparatedDiskListFromArray, _currentQueueIsMainQueue, 
+                       _base64Encode, _commaSeparatedDiskListFromArray, _currentQueueIsMainQueue, 
                        _currentQueueMatchesTag, _diskTypeToScheme, _endTransitionEntry, 
                        _endTransitionEntrySEL, _eraseDisk, _getWholeDiskFromDisk, 
                        _isOptionalArray, _isOptionalData, _isOptionalDict, _isOptionalNumber, 
@@ -79,24 +90,21 @@ exports:
                        _transitionEntry, _transitionEntrySEL ]
     objc-classes:    [ SKAPFSContainerDisk, SKAPFSDisk, SKAPFSSnapshotDisk, SKAPFSStoreDisk, 
                        SKAPFSVolumeDescriptor, SKBaseManager, SKBindableDisk, SKBlockDevice, 
-                       SKCSDisk, SKCSLVGDisk, SKCSPVDisk, SKDisk, SKDiskImage, SKDiskImageAttachParams, 
-                       SKDiskImageCreateParams, SKDiskImageInfoParams, SKDiskImagePartitionLessResizer, 
-                       SKDiskImagePartitionedResizer, SKDiskImageResizeLimitsParams, 
-                       SKDiskImageResizeParams, SKDiskImageResizer, SKDiskImageResizerBase, 
-                       SKDiskImageSizeLimits, SKEXFATVolumeDescriptor, SKEraseDisk, 
-                       SKEraseVolume, SKError, SKFilesystem, SKHelperClient, SKIOIterator, 
-                       SKIOMedia, SKIOObject, SKIdleWaiter, SKMSDOSVolumeDescriptor, 
+                       SKCSDisk, SKCSLVGDisk, SKCSPVDisk, SKCompletionHandler, SKDisk, 
+                       SKDiskImage, SKDiskImageAttachParams, SKDiskImageCreateParams, 
+                       SKDiskImageInfoParams, SKDiskImagePartitionLessResizer, SKDiskImagePartitionedResizer, 
+                       SKDiskImageResizeLimitsParams, SKDiskImageResizeParams, SKDiskImageResizer, 
+                       SKDiskImageResizerBase, SKDiskImageSizeLimits, SKEXFATVolumeDescriptor, 
+                       SKEraseDisk, SKEraseVolume, SKError, SKFilesystem, SKHelperClient, 
+                       SKIOIterator, SKIOMedia, SKIOObject, SKLogAnalyticsSink, SKMSDOSVolumeDescriptor, 
                        SKManager, SKMountParams, SKPartition, SKPartitionDescriptor, 
                        SKPartitionTable, SKProgress, SKProgressObserver, SKRAIDDisk, 
                        SKStateMachine, SKStateTransitionEntry, SKStateTransitionTable, 
                        SKSyncCommand, SKTask, SKTaskExecuter, SKTaskLineParser, SKTaskNOOPParser, 
-                       SKTaskPlistParser, SKTaskRawParser, SKVolumeDescriptor, SKWaitingForDiskElement ]
-    objc-ivars:      [ SKHelperClient._callbackQueue, SKHelperClient._completionBlockDictionary, 
-                       SKHelperClient._connection, SKHelperClient._errorBlockDictionary, 
-                       SKHelperClient._isInvalidated, SKHelperClient._progressBlock, 
-                       SKHelperClient._progressBlockDictionary, SKManager._connection, 
-                       SKManager._diskNotificationQueue, SKManager._filesystems, 
-                       SKManager._listeners, SKManager._listenersAppearedDisks, SKManager._shouldBeBindingsSafe, 
+                       SKTaskPlistParser, SKTaskRawParser, SKVolumeDescriptor, SKWaitingForDiskElement, 
+                       _TtC10StorageKit14SKAnalyticsHub, _TtC10StorageKit19SKCoreAnalyticsSink ]
+    objc-ivars:      [ SKManager._connection, SKManager._filesystems, SKManager._listeners, 
+                       SKManager._listenersAppearedDisks, SKManager._shouldBeBindingsSafe, 
                        SKManager._waitingForDiskQueue, SKManager._waitingForDiskSet, 
                        SKManager.allDisks, SKManager.diskQueueStuck, SKManager.imageSrcArray, 
                        SKManager.visibleRoles ]

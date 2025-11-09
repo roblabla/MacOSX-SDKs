@@ -1,5 +1,4 @@
 '\"
-'\" Generated from file '/AppleInternal/Library/BuildRoots/0032d1ee-80fd-11ee-8227-6aecfccc70fe/Library/Caches/com.apple.xbs/Sources/tcl/tcl_ext/tcllib/tcllib/modules/base32/base32core.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) Public domain
 '\"
 '\" The definitions below are for supplemental macros used in Tcl/Tk

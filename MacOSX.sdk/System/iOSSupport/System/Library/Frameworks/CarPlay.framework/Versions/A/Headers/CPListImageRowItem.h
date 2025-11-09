@@ -37,7 +37,32 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @discussion To properly size your images, your app should size them to the display scale of the car screen.
  See -[CPInterfaceController carTraitCollection].
  */
-- (instancetype)initWithText:(NSString *)text images:(NSArray<UIImage *> *)images;
+- (instancetype)initWithText:(NSString *)text 
+                      images:(NSArray<UIImage *> *)images;
+
+/**
+ Initialize a list image row item with a text string, an array of @c UIImage
+ for the grid of images, and an array of @c NSString titles, one displayed below each image.
+
+ The number of titles in the @c imageTitles list should be equal to the number of images in the
+ @c images list.
+
+ When providing an image, your app should provide a @c UIImage that is display-ready. If necessary for the image, provide
+ light and dark styles by using an asset from your asset catalog, prepared with light and dark styles
+ or by using @c UIImageAsset to combine two @c UIImage instances into a single image with
+ both styles.
+
+ UIImageAsset is used to combine multiple UIImages with different trait collections into a single UIImage.
+
+ @note The expected image size is given by +[CPListImageRowItem maximumImageSize]. Images provided
+ will be resized to this size if necessary.
+
+ @discussion To properly size your images, your app should size them to the display scale of the car screen.
+ See -[CPInterfaceController carTraitCollection].
+ */
+- (instancetype)initWithText:(NSString *)text
+                      images:(NSArray<UIImage *> *)images
+                 imageTitles:(NSArray<NSString *> *)imageTitles API_AVAILABLE(ios(17.4));
 
 /**
  The primary text shown in a cell displaying this list item.
@@ -84,8 +109,20 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @see To update/reload the title of the image row item, assign to
  the @c text property of the image row item.
+ @see To update/reload the title labels displayed below each image, assign to
+ the @c imageTitles property of the image row item.
  */
 - (void)updateImages:(NSArray <UIImage *> *)gridImages;
+
+/**
+ Update the titles displayed each image in this image row item. If this image row
+ item is already displayed in a list template, then it will be automatically
+ reloaded.
+
+ @see To update/reload the title of the image row item, assign to
+ the @c text property of the image row item.
+ */
+@property (nonatomic, copy) NSArray <NSString *> *imageTitles API_AVAILABLE(ios(17.4));
 
 /**
  A block that is called when the user selects one of the images in this image row item.

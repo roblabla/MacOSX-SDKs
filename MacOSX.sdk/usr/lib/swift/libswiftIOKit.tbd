@@ -9,9 +9,8 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftIOKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftIOKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftIOKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftIOKit.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftIOKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftIOKit.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s5IOKit13kIOReturnBusys5Int32Vvg', '_$s5IOKit14kIOReturnErrors5Int32Vvg', 
+                       '$ld$install_name$os10.14$@rpath/libswiftIOKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftIOKit.dylib', 
+                       '_$s5IOKit13kIOReturnBusys5Int32Vvg', '_$s5IOKit14kIOReturnErrors5Int32Vvg', 
                        '_$s5IOKit16kIOReturnAborteds5Int32Vvg', '_$s5IOKit16kIOReturnIOErrors5Int32Vvg', 
                        '_$s5IOKit16kIOReturnInvalids5Int32Vvg', '_$s5IOKit16kIOReturnNoMedias5Int32Vvg', 
                        '_$s5IOKit16kIOReturnNoPowers5Int32Vvg', '_$s5IOKit16kIOReturnNoSpaces5Int32Vvg', 

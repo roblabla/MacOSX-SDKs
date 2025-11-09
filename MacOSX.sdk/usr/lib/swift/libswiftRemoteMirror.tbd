@@ -313,7 +313,8 @@ exports:
                        __ZNK7__swift9__runtime4llvm15SmallVectorBaseIjE5emptyEv, 
                        __ZNK7__swift9__runtime4llvm15SmallVectorBaseIjE8capacityEv, 
                        __ZNK7__swift9__runtime4llvm15SmallVectorBaseIyE4sizeEv, __ZNK7__swift9__runtime4llvm15SmallVectorBaseIyE5emptyEv, 
-                       __ZNK7__swift9__runtime4llvm15SmallVectorBaseIyE8capacityEv ]
+                       __ZNK7__swift9__runtime4llvm15SmallVectorBaseIyE8capacityEv, 
+                       __ZNSt3__119piecewise_constructE ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __ZN5swift8Demangle9__runtime5warnvEjPKcPc, __ZN5swift8Demangle9__runtime6fatalvEjPKcPc ]
 ...

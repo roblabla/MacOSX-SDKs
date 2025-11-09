@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Charts.framework/Versions/A/Charts'
-current-version: 2.2.1
+current-version: 2.4.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -298,8 +298,6 @@ exports:
                        '_$s6Charts15AnyChartContentVAA0cD0AAMc', '_$s6Charts15AnyChartContentVAA0cD0AAWP', 
                        '_$s6Charts15AnyChartContentVMa', '_$s6Charts15AnyChartContentVMn', 
                        '_$s6Charts15AnyChartContentVN', '_$s6Charts15AnyChartContentVyAcA0cD0_pcfC', 
-                       '_$s6Charts15AxisMarkBuilderV10buildBlockQryFZQOMQ', '_$s6Charts15AxisMarkBuilderV17buildPartialBlock11accumulated4nextQrx_q_tAA0bC0RzAaGR_r0_lFZQOMQ', 
-                       '_$s6Charts15AxisMarkBuilderV24buildLimitedAvailabilityyQrxAA0bC0RzlFZQOMQ', 
                        '_$s6Charts15AxisMarkBuilderVMa', '_$s6Charts15AxisMarkBuilderVMn', 
                        '_$s6Charts15AxisMarkBuilderVN', '_$s6Charts16AxisMarkPositionV11descriptionSSvg', 
                        '_$s6Charts16AxisMarkPositionV11descriptionSSvpMV', '_$s6Charts16AxisMarkPositionV3topACvgZ', 
@@ -339,8 +337,6 @@ exports:
                        '_$s6Charts18AnnotationPositionV8trailingACvgZ', '_$s6Charts18AnnotationPositionV9automaticACvgZ', 
                        '_$s6Charts18AnnotationPositionVMa', '_$s6Charts18AnnotationPositionVMn', 
                        '_$s6Charts18AnnotationPositionVN', '_$s6Charts18AnnotationPositionVSQAAMc', 
-                       '_$s6Charts18AxisContentBuilderV10buildBlockQryFZQOMQ', '_$s6Charts18AxisContentBuilderV17buildPartialBlock11accumulated4nextQrx_q_tAA0bC0RzAaGR_r0_lFZQOMQ', 
-                       '_$s6Charts18AxisContentBuilderV24buildLimitedAvailabilityyQrxAA0bC0RzlFZQOMQ', 
                        '_$s6Charts18AxisContentBuilderVMa', '_$s6Charts18AxisContentBuilderVMn', 
                        '_$s6Charts18AxisContentBuilderVN', '_$s6Charts18BuilderConditionalV7StorageOMa', 
                        '_$s6Charts18BuilderConditionalV7StorageOMn', '_$s6Charts18BuilderConditionalV7storageAC7StorageOyxq__Gvg', 
@@ -388,11 +384,9 @@ exports:
                        '_$s6Charts19AnyChartSymbolShapeV7SwiftUI4ViewAAMc', '_$s6Charts19AnyChartSymbolShapeVAA0cdE0AAMc', 
                        '_$s6Charts19AnyChartSymbolShapeVAA0cdE0AAWP', '_$s6Charts19AnyChartSymbolShapeVMa', 
                        '_$s6Charts19AnyChartSymbolShapeVMn', '_$s6Charts19AnyChartSymbolShapeVN', 
-                       '_$s6Charts19AnyChartSymbolShapeVyAcA0cdE0_pcfC', '_$s6Charts19ChartContentBuilderV10buildBlockQryFZQOMQ', 
-                       '_$s6Charts19ChartContentBuilderV17buildPartialBlock11accumulated4nextQrx_q_tAA0bC0RzAaGR_r0_lFZQOMQ', 
-                       '_$s6Charts19ChartContentBuilderV24buildLimitedAvailabilityyQrxAA0bC0RzlFZQOMQ', 
-                       '_$s6Charts19ChartContentBuilderVMa', '_$s6Charts19ChartContentBuilderVMn', 
-                       '_$s6Charts19ChartContentBuilderVN', '_$s6Charts19InterpolationMethodV10catmullRom5alphaAC12CoreGraphics7CGFloatV_tFZ', 
+                       '_$s6Charts19AnyChartSymbolShapeVyAcA0cdE0_pcfC', '_$s6Charts19ChartContentBuilderVMa', 
+                       '_$s6Charts19ChartContentBuilderVMn', '_$s6Charts19ChartContentBuilderVN', 
+                       '_$s6Charts19InterpolationMethodV10catmullRom5alphaAC12CoreGraphics7CGFloatV_tFZ', 
                        '_$s6Charts19InterpolationMethodV10catmullRomACvgZ', '_$s6Charts19InterpolationMethodV10stepCenterACvgZ', 
                        '_$s6Charts19InterpolationMethodV11descriptionSSvg', '_$s6Charts19InterpolationMethodV11descriptionSSvpMV', 
                        '_$s6Charts19InterpolationMethodV6linearACvgZ', '_$s6Charts19InterpolationMethodV7StorageOMa', 

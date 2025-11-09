@@ -12,7 +12,7 @@ allowable-clients:
                        Shortcuts Events, ShortcutsActionExtension, ShortcutsAppTests, 
                        ShortcutsEditor, ShortcutsEditor Catalyst, ShortcutsRunningUITester, 
                        ShortcutsUI, ShortcutsViewService, ShortcutsWidgetExtension, 
-                       StaccatoConfigurationExtension, WidgetConfigurationExtension, 
+                       SystemActionConfigurationExtension, WidgetConfigurationExtension, 
                        WorkflowEditor, WorkflowEditorTests, WorkflowUI, WorkflowUITests, 
                        arckive2 ]
 exports:
@@ -759,9 +759,8 @@ exports:
                        '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6action3forSo8WFActionC0A3Kit15AggregatedEntryO_tYaKFTj', 
                        '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6action3forSo8WFActionC0A3Kit15AggregatedEntryO_tYaKFTjTu', 
                        '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6action3forSo8WFActionC0A3Kit15AggregatedEntryO_tYaKFTq', 
-                       '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6reloadyyYaKFTj', 
-                       '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6reloadyyYaKFTjTu', 
-                       '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6reloadyyYaKFTq', 
+                       '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6reloadyyKFTj', 
+                       '_$s14WorkflowEditor26DrawerSuggestionDataSourceC6reloadyyKFTq', 
                        '_$s14WorkflowEditor26DrawerSuggestionDataSourceC7Combine16ObservableObjectAAMc', 
                        '_$s14WorkflowEditor26DrawerSuggestionDataSourceCMa', '_$s14WorkflowEditor26DrawerSuggestionDataSourceCMm', 
                        '_$s14WorkflowEditor26DrawerSuggestionDataSourceCMn', '_$s14WorkflowEditor26DrawerSuggestionDataSourceCMo', 

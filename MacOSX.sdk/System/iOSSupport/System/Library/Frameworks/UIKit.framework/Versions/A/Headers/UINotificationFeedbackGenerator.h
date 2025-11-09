@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, UINotificationFeedbackType) {
     UINotificationFeedbackTypeSuccess,
     UINotificationFeedbackTypeWarning,
     UINotificationFeedbackTypeError
-};
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
 
 // UINotificationFeedbackGenerator is used to give user feedback when an notification is displayed
 UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR

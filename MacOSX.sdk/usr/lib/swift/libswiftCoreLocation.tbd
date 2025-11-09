@@ -13,9 +13,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreLocation.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCoreLocation.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s12CoreLocation11CLConditionMp', '_$s12CoreLocation11CLConditionPSETb', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCoreLocation.dylib', 
+                       '_$s12CoreLocation11CLConditionMp', '_$s12CoreLocation11CLConditionPSETb', 
                        '_$s12CoreLocation11CLConditionPSeTb', '_$s12CoreLocation11CLConditionTL', 
                        '_$s12CoreLocation16CLLocationUpdateV11liveUpdatesyAC0F0VAC17LiveConfigurationOFZ', 
                        '_$s12CoreLocation16CLLocationUpdateV12isStationarySbvg', 

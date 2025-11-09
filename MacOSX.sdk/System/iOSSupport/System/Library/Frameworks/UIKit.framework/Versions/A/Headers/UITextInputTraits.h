@@ -262,6 +262,10 @@ UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardExpirationMonth 
 UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardExpirationYear  API_AVAILABLE(ios(17.0));
 UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardType            API_AVAILABLE(ios(17.0));
 
+/// eSIM activation
+UIKIT_EXTERN UITextContentType const UITextContentTypeCellularEID               API_AVAILABLE(ios(17.4));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCellularIMEI              API_AVAILABLE(ios(17.4));
+
 NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else

@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftXPC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name XPC
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 29.0.2
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftXPC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 36.100.7.0.1 -module-name XPC
 import Swift
 @_exported import XPC
 import _Concurrency
@@ -19,13 +18,29 @@ public class XPCSession {
     public typealias Element = XPC.XPCSession.InitializationOptions
     public typealias RawValue = Swift.UInt64
   }
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init(xpcService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init(xpcService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, incomingMessageHandler: ((XPC.XPCDictionary) -> XPC.XPCDictionary?)? = nil, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init<Message>(xpcService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, incomingMessageHandler: ((Message) -> (any Swift.Encodable)?)? = nil, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws where Message : Swift.Decodable
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init(xpcService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, incomingMessageHandler: ((XPC.XPCReceivedMessage) -> (any Swift.Encodable)?)? = nil, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init(machService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init(machService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, incomingMessageHandler: ((XPC.XPCDictionary) -> XPC.XPCDictionary?)? = nil, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init<Message>(machService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, incomingMessageHandler: ((Message) -> (any Swift.Encodable)?)? = nil, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws where Message : Swift.Decodable
+  @available(macOS 14.0, macCatalyst 17.0, *)
+  @available(iOS, unavailable)
   convenience public init(machService: Swift.String, targetQueue: Dispatch.DispatchQueue? = nil, options: XPC.XPCSession.InitializationOptions = .none, incomingMessageHandler: ((XPC.XPCReceivedMessage) -> (any Swift.Encodable)?)? = nil, cancellationHandler: ((XPC.XPCRichError) -> Swift.Void)? = nil) throws
   public func setIncomingMessageHandler(_ incomingMessageHandler: @escaping (XPC.XPCDictionary) -> XPC.XPCDictionary?)
   public func setIncomingMessageHandler<Message>(_ incomingMessageHandler: @escaping (Message) -> (any Swift.Encodable)?) where Message : Swift.Decodable
@@ -44,6 +59,7 @@ public class XPCSession {
   public func send<Message>(_ message: Message, replyHandler: @escaping (Swift.Result<XPC.XPCReceivedMessage, XPC.XPCRichError>) -> Swift.Void) throws where Message : Swift.Encodable
   @objc deinit
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension XPC.XPCSession : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
@@ -171,94 +187,123 @@ extension XPC.XPCRichError : Swift.CustomDebugStringConvertible {
     get
   }
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_CONNECTION: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_ENDPOINT: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_NULL: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_BOOL: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_INT64: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_UINT64: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_DOUBLE: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_DATE: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_DATA: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_STRING: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_UUID: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_FD: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_SHMEM: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_ARRAY: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_DICTIONARY: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_ERROR: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_TYPE_ACTIVITY: XPC.xpc_type_t {
   get
 }
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public var XPC_TYPE_RICH_ERROR: XPC.xpc_type_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public let XPC_ERROR_KEY_DESCRIPTION: Swift.UnsafePointer<Swift.CChar>
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public let XPC_EVENT_KEY_NAME: Swift.UnsafePointer<Swift.CChar>
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_BOOL_TRUE: XPC.xpc_object_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_BOOL_FALSE: XPC.xpc_object_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_ARRAY_APPEND: Darwin.size_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_ERROR_CONNECTION_INTERRUPTED: XPC.xpc_object_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_ERROR_CONNECTION_INVALID: XPC.xpc_object_t {
   get
 }
+@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_ERROR_TERMINATION_IMMINENT: XPC.xpc_object_t {
   get
 }
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "XPCSession")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public typealias xpc_session_t = XPC.OS_xpc_object
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "debugDescription")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "debugDescription")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "debugDescription")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "debugDescription")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "debugDescription")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_copy_description(_ session: any XPC.OS_xpc_object) -> Swift.UnsafeMutablePointer<Swift.CChar>?
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession.InitializationOptions")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession.InitializationOptions")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession.InitializationOptions")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "XPCSession.InitializationOptions")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession.InitializationOptions")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct xpc_session_create_flags_t : Swift.OptionSet, @unchecked Swift.Sendable {
   public var rawValue: Swift.UInt64 {
     get
@@ -272,69 +317,82 @@ public struct xpc_session_create_flags_t : Swift.OptionSet, @unchecked Swift.Sen
   public typealias RawValue = Swift.UInt64
 }
 @available(macOS, introduced: 13.0, deprecated: 14.0, message: "See XPCSession initializer")
-@available(iOS, introduced: 16.0, deprecated: 17.0, message: "See XPCSession initializer")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, message: "See XPCSession initializer")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, message: "See XPCSession initializer")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, message: "See XPCSession initializer")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public typealias xpc_session_cancel_handler_t = (XPC.xpc_rich_error_t) -> Swift.Void
 @available(macOS, introduced: 13.0, deprecated: 14.0, message: "See XPCSession initializer")
-@available(iOS, introduced: 16.0, deprecated: 17.0, message: "See XPCSession initializer")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, message: "See XPCSession initializer")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, message: "See XPCSession initializer")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, message: "See XPCSession initializer")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public typealias xpc_session_incoming_message_handler_t = (XPC.xpc_object_t) -> Swift.Void
 @available(macOS, introduced: 13.0, deprecated: 14.0, message: "See XPCSession.send(_:replyHandler)")
-@available(iOS, introduced: 16.0, deprecated: 17.0, message: "See XPCSession.send(_:replyHandler)")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, message: "See XPCSession.send(_:replyHandler)")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, message: "See XPCSession.send(_:replyHandler)")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, message: "See XPCSession.send(_:replyHandler)")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public typealias xpc_session_reply_handler_t = (XPC.xpc_object_t?, XPC.xpc_rich_error_t?) -> Swift.Void
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession(xpcService:)")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession(xpcService:)")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession(xpcService:)")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "XPCSession(xpcService:)")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession(xpcService:)")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_create_xpc_service(_ name: Swift.UnsafePointer<Swift.CChar>, _ target_queue: Dispatch.dispatch_queue_t?, _ flags: XPC.xpc_session_create_flags_t, _ error_out: Swift.AutoreleasingUnsafeMutablePointer<XPC.xpc_rich_error_t?>?) -> (any XPC.OS_xpc_object)?
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession(machService:)")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession(machService:)")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession(machService:)")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "XPCSession(machService:)")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession(machService:)")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_create_mach_service(_ mach_service: Swift.UnsafePointer<Swift.CChar>, _ target_queue: Dispatch.dispatch_queue_t?, _ flags: XPC.xpc_session_create_flags_t, _ error_out: Swift.AutoreleasingUnsafeMutablePointer<XPC.xpc_rich_error_t?>?) -> (any XPC.OS_xpc_object)?
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "setIncomingMessageHandler()")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "setIncomingMessageHandler()")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "setIncomingMessageHandler()")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "setIncomingMessageHandler()")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "setIncomingMessageHandler()")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_set_incoming_message_handler(_ session: any XPC.OS_xpc_object, _ handler: @escaping XPC.xpc_session_incoming_message_handler_t)
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "setCancellationHandler()")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "setCancellationHandler()")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "setCancellationHandler()")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "setCancellationHandler()")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "setCancellationHandler()")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_set_cancel_handler(_ session: any XPC.OS_xpc_object, _ cancel_handler: @escaping XPC.xpc_session_cancel_handler_t)
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "setTargetQueue()")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "setTargetQueue()")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "setTargetQueue()")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "setTargetQueue()")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "setTargetQueue()")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_set_target_queue(_ session: any XPC.OS_xpc_object, _ target_queue: Dispatch.dispatch_queue_t?)
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "activate()")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "activate()")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "activate()")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "activate()")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "activate()")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_activate(_ session: any XPC.OS_xpc_object, _ error_out: Swift.AutoreleasingUnsafeMutablePointer<XPC.xpc_rich_error_t?>?) -> Swift.Bool
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "cancel(reason:)")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "cancel(reason:)")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "cancel(reason:)")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "cancel(reason:)")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "cancel(reason:)")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_cancel(_ session: any XPC.OS_xpc_object)
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "send(message:)")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "send(message:)")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "send(message:)")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "send(message:)")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "send(message:)")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_send_message(_ session: any XPC.OS_xpc_object, _ message: XPC.xpc_object_t) -> XPC.xpc_rich_error_t?
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "sendSync(message:)")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "sendSync(message:)")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "sendSync(message:)")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "sendSync(message:)")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "sendSync(message:)")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_send_message_with_reply_sync(_ session: any XPC.OS_xpc_object, _ message: XPC.xpc_object_t, _ error_out: Swift.AutoreleasingUnsafeMutablePointer<XPC.xpc_rich_error_t?>?) -> XPC.xpc_object_t?
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "send(message:replyHandler:)")
-@available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "send(message:replyHandler:)")
-@available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "send(message:replyHandler:)")
-@available(watchOS, introduced: 9.0, deprecated: 10.0, renamed: "send(message:replyHandler:)")
+@available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "send(message:replyHandler:)")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public func xpc_session_send_message_with_reply_async(_ session: any XPC.OS_xpc_object, _ message: XPC.xpc_object_t, _ reply_handler: @escaping XPC.xpc_session_reply_handler_t)
 @available(*, unavailable, renamed: "XPCListener")
 public typealias xpc_listener_t = XPC.OS_xpc_listener
@@ -353,6 +411,18 @@ public func xpc_listener_activate(_ listener: XPC.xpc_listener_t, _ error_out: S
 public func xpc_listener_cancel(_ listener: XPC.xpc_listener_t)
 @available(*, unavailable, renamed: "XPCListener.IncomingSessionRequest.reject(reason:)")
 public func xpc_listener_reject_peer(_ peer: any XPC.OS_xpc_object, _ reason: Swift.UnsafePointer<Swift.CChar>)
+@available(macOS, introduced: 10.7, deprecated: 14.4, message: "Use Swift's automatic reference counting to manage the lifetime of XPC objects")
+@available(macCatalyst, introduced: 4.0, deprecated: 17.4, message: "Use Swift's automatic reference counting to manage the lifetime of XPC objects")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public func xpc_retain(_ object: XPC.xpc_object_t) -> XPC.xpc_object_t
+@available(macOS, introduced: 10.7, deprecated: 14.4, message: "Use Swift's automatic reference counting to manage the lifetime of XPC objects")
+@available(macCatalyst, introduced: 4.0, deprecated: 17.4, message: "Use Swift's automatic reference counting to manage the lifetime of XPC objects")
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public func xpc_release(_ object: XPC.xpc_object_t)
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 public struct XPCDictionary {
   public init(_ value: XPC.xpc_object_t)
@@ -475,7 +545,10 @@ extension XPC.XPCDictionary : Swift.CustomDebugStringConvertible {
     get
   }
 }
-@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, macCatalyst 17.0, *)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public class XPCListener {
   public struct InitializationOptions : Swift.OptionSet {
     public let rawValue: Swift.UInt64
@@ -506,17 +579,27 @@ public class XPCListener {
   public func cancel()
   @objc deinit
 }
-@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, macCatalyst 17.0, *)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public protocol XPCPeerHandler {
   associatedtype Input
   associatedtype Output
   func handleIncomingRequest(_: Self.Input) -> Self.Output?
   func handleCancellation(error: XPC.XPCRichError)
 }
-@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, macCatalyst 17.0, *)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension XPC.XPCPeerHandler {
   public func handleCancellation(error: XPC.XPCRichError)
 }
+@available(macOS 14.0, macCatalyst 17.0, *)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension XPC.XPCListener : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get

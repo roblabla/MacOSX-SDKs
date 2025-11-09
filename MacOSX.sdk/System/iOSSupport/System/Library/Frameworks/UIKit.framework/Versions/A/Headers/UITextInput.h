@@ -230,6 +230,10 @@ NS_SWIFT_UI_ACTOR
 - (void)updateFloatingCursorAtPoint:(CGPoint)point API_AVAILABLE(ios(9.0));
 - (void)endFloatingCursor API_AVAILABLE(ios(9.0));
 
+/// Similar to `-caretRectForPosition:`, optionally provide a transform for the caret at `position`. As with all geometry information in this protocol,
+/// transforms are assumed to be relative to the `textInputView` coordinate space. If unimplemented, the identity transform is assumed.
+- (CGAffineTransform)caretTransformForPosition:(UITextPosition *)position API_AVAILABLE(ios(17.4));
+
 /**
  * Called when the text input is preparing an edit menu presentation for the specified text range.
  *
@@ -282,6 +286,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly) BOOL containsStart; // Returns YES if the rect contains the start of the selection.
 @property (nonatomic, readonly) BOOL containsEnd; // Returns YES if the rect contains the end of the selection.
 @property (nonatomic, readonly) BOOL isVertical; // Returns YES if the rect is for vertically oriented text.
+
+/// Custom transform for highlight rects.
+/// This transform is assumed to be in the `textInputView` coordinate space.
+/// Default is CGAffineTransformIdentity (no transform applied).
+@property (nonatomic, readonly) CGAffineTransform transform API_AVAILABLE(ios(17.4));
 
 @end
 

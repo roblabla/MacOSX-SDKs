@@ -1,12 +1,17 @@
 // Copyright © 2023 Apple Inc. All rights reserved.
 
+#import <AuthenticationServices/ASFoundation.h>
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialConstants.h>
 #import <Foundation/Foundation.h>
 
 AS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+/// A class that holds various parameters related to a passkey credential request.
+///  This class is provided by the system to the credential provider extension when there is an active passkey request as part of
+///  -[ASCredentialProviderViewController prepareCredentialListForServiceIdentifiers:requestParameters:] and should be used
+///  to construct a passkey credential response using the item selected by the user from the extension's UI.
 AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
-NS_SWIFT_SENDABLE
+AS_SWIFT_SENDABLE
 @interface ASPasskeyCredentialRequestParameters : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

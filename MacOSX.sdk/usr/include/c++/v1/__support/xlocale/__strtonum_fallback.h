@@ -32,7 +32,7 @@ extern "C" {
 #undef strtoll_l
 #undef strtoull_l
 
-inline _LIBCPP_HIDE_FROM_ABI_C float strtof_l(const char* __nptr, char** __endptr, locale_t) {
+inline _LIBCPP_HIDE_FROM_ABI_C float strtof_l(const char *__nptr, char **__endptr, locale_t) {
   return ::strtof(__nptr, __endptr);
 }
 

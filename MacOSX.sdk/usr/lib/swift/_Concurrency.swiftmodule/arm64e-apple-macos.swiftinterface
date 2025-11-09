@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx12.1 -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concurrency -module-name _Concurrency -disable-availability-checking
-// swift-module-flags-ignorable: -user-module-version 5.9.2.2.11 -enable-lexical-lifetimes=false -target-min-inlining-version min
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx14.4 -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concurrency -target-min-inlining-version min -user-module-version 5.10.0.12.5 -module-name _Concurrency -disable-availability-checking
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false
 import Swift
 import SwiftShims
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -119,6 +119,26 @@ extension _Concurrency.CheckedContinuation {
 }
 #endif
 #endif
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@_alwaysEmitIntoClient internal func _createCheckedContinuation<T>(_ continuation: __owned _Concurrency.UnsafeContinuation<T, Swift.Never>) -> _Concurrency.CheckedContinuation<T, Swift.Never> {
+  return CheckedContinuation(continuation: continuation)
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@_alwaysEmitIntoClient internal func _createCheckedThrowingContinuation<T>(_ continuation: __owned _Concurrency.UnsafeContinuation<T, any Swift.Error>) -> _Concurrency.CheckedContinuation<T, any Swift.Error> {
+  return CheckedContinuation(continuation: continuation)
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@_alwaysEmitIntoClient internal func _resumeCheckedContinuation<T>(_ continuation: _Concurrency.CheckedContinuation<T, Swift.Never>, _ value: __owned T) {
+  continuation.resume(returning: value)
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@_alwaysEmitIntoClient internal func _resumeCheckedThrowingContinuation<T>(_ continuation: _Concurrency.CheckedContinuation<T, any Swift.Error>, _ value: __owned T) {
+  continuation.resume(returning: value)
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@_alwaysEmitIntoClient internal func _resumeCheckedThrowingContinuationWithError<T>(_ continuation: _Concurrency.CheckedContinuation<T, any Swift.Error>, _ error: __owned any Swift.Error) {
+  continuation.resume(throwing: error)
+}
 #if compiler(>=5.3) && $AsyncAwait
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @_silgen_name("swift_deletedAsyncMethodError")
@@ -127,7 +147,6 @@ public func swift_deletedAsyncMethodError() async
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol Executor : AnyObject, Swift.Sendable {
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-  @available(*, deprecated, message: "Implement 'enqueue(_: __owned ExecutorJob)' instead")
   func enqueue(_ job: _Concurrency.UnownedJob)
   #if compiler(>=5.3) && $MoveOnly
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
@@ -179,10 +198,8 @@ extension _Concurrency.SerialExecutor {
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @frozen public struct UnownedSerialExecutor : Swift.Sendable {
-  #if compiler(>=5.3) && $BuiltinExecutor
   @usableFromInline
   internal var executor: Builtin.Executor
-  #endif
   #if compiler(>=5.3) && $BuiltinExecutor
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   public var _executor: Builtin.Executor {
@@ -226,44 +243,141 @@ public func _taskIsOnExecutor<Executor>(_ executor: Executor) -> Swift.Bool wher
       _filenameStart, _filenameLength, _filenameIsASCII, _line, _executor)
 }
 #endif
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.SerialExecutor {
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  public func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  public func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
+    guard _isDebugAssertConfiguration() || _isReleaseAssertConfiguration() else {
+      return
+    }
+
+    let expectationCheck = _taskIsCurrentExecutor(self.asUnownedSerialExecutor().executor)
+
+    /// TODO: implement the logic in-place perhaps rather than delegating to precondition()?
+    precondition(expectationCheck,
+        // TODO: offer information which executor we actually got
+        "Incorrect actor executor assumption; Expected '\(self)' executor. \(message())",
+        file: file, line: line) // short-cut so we get the exact same failure reporting semantics
+  }
 }
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.Actor {
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  nonisolated public func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  nonisolated public func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
+    guard _isDebugAssertConfiguration() || _isReleaseAssertConfiguration() else {
+      return
+    }
+
+    let expectationCheck = _taskIsCurrentExecutor(self.unownedExecutor.executor)
+
+    // TODO: offer information which executor we actually got
+    precondition(expectationCheck,
+        // TODO: figure out a way to get the typed repr out of the unowned executor
+        "Incorrect actor executor assumption; Expected '\(self.unownedExecutor)' executor. \(message())",
+        file: file, line: line)
+  }
 }
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.GlobalActor {
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  public static func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  public static func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
+    try Self.shared.preconditionIsolated(message(), file: file, line: line)
+  }
 }
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.SerialExecutor {
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  public func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  public func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
+    guard _isDebugAssertConfiguration() else {
+      return
+    }
+
+    guard _taskIsCurrentExecutor(self.asUnownedSerialExecutor().executor) else {
+      // TODO: offer information which executor we actually got
+      let msg = "Incorrect actor executor assumption; Expected '\(self)' executor. \(message())"
+      /// TODO: implement the logic in-place perhaps rather than delegating to precondition()?
+      assertionFailure(msg, file: file, line: line)
+      return
+    }
+  }
 }
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.Actor {
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  nonisolated public func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  nonisolated public func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
+    guard _isDebugAssertConfiguration() else {
+      return
+    }
+
+    guard _taskIsCurrentExecutor(self.unownedExecutor.executor) else {
+      // TODO: offer information which executor we actually got
+      // TODO: figure out a way to get the typed repr out of the unowned executor
+      let msg = "Incorrect actor executor assumption; Expected '\(self.unownedExecutor)' executor. \(message())"
+      /// TODO: implement the logic in-place perhaps rather than delegating to precondition()?
+      assertionFailure(msg, file: file, line: line) // short-cut so we get the exact same failure reporting semantics
+      return
+    }
+  }
 }
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.GlobalActor {
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  public static func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  public static func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
+    try Self.shared.assertIsolated(message(), file: file, line: line)
+  }
 }
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.Actor {
   #if compiler(>=5.3) && $UnavailableFromAsync
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  @_unavailableFromAsync(message: "express the closure as an explicit function declared on the specified 'actor' instead") nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  @_unavailableFromAsync(message: "express the closure as an explicit function declared on the specified 'actor' instead") nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T {
+    typealias YesActor = (isolated Self) throws -> T
+    typealias NoActor = (Self) throws -> T
+
+    /// This is guaranteed to be fatal if the check fails,
+    /// as this is our "safe" version of this API.
+    let executor: Builtin.Executor = self.unownedExecutor.executor
+    guard _taskIsCurrentExecutor(executor) else {
+      // TODO: offer information which executor we actually got
+      fatalError("Incorrect actor executor assumption; Expected same executor as \(self).", file: file, line: line)
+    }
+
+    // To do the unsafe cast, we have to pretend it's @escaping.
+    return try withoutActuallyEscaping(operation) {
+      (_ fn: @escaping YesActor) throws -> T in
+      let rawFn = unsafeBitCast(fn, to: NoActor.self)
+      return try rawFn(self)
+    }
+  }
   #else
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T {
+    typealias YesActor = (isolated Self) throws -> T
+    typealias NoActor = (Self) throws -> T
+
+    /// This is guaranteed to be fatal if the check fails,
+    /// as this is our "safe" version of this API.
+    let executor: Builtin.Executor = self.unownedExecutor.executor
+    guard _taskIsCurrentExecutor(executor) else {
+      // TODO: offer information which executor we actually got
+      fatalError("Incorrect actor executor assumption; Expected same executor as \(self).", file: file, line: line)
+    }
+
+    // To do the unsafe cast, we have to pretend it's @escaping.
+    return try withoutActuallyEscaping(operation) {
+      (_ fn: @escaping YesActor) throws -> T in
+      let rawFn = unsafeBitCast(fn, to: NoActor.self)
+      return try rawFn(self)
+    }
+  }
   #endif
 }
 #if compiler(>=5.3) && $RethrowsProtocol
@@ -1512,14 +1626,54 @@ extension _Concurrency.MainActor {
 }
 #endif
 #if compiler(>=5.3) && $Actors
-@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.MainActor {
   #if compiler(>=5.3) && $UnavailableFromAsync
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  @_unavailableFromAsync(message: "await the call to the @MainActor closure directly") public static func assumeIsolated<T>(_ operation: @_Concurrency.MainActor () throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  @_unavailableFromAsync(message: "await the call to the @MainActor closure directly") public static func assumeIsolated<T>(_ operation: @_Concurrency.MainActor () throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T {
+
+    typealias YesActor = @MainActor () throws -> T
+    typealias NoActor = () throws -> T
+
+    /// This is guaranteed to be fatal if the check fails,
+    /// as this is our "safe" version of this API.
+    let executor: Builtin.Executor = Self.shared.unownedExecutor.executor
+    guard _taskIsCurrentExecutor(executor) else {
+      // TODO: offer information which executor we actually got
+      fatalError("Incorrect actor executor assumption; Expected same executor as \(self).", file: file, line: line)
+    }
+
+    // To do the unsafe cast, we have to pretend it's @escaping.
+    return try withoutActuallyEscaping(operation) {
+      (_ fn: @escaping YesActor) throws -> T in
+      let rawFn = unsafeBitCast(fn, to: NoActor.self)
+      return try rawFn()
+    }
+  }
   #else
-  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  public static func assumeIsolated<T>(_ operation: @_Concurrency.MainActor () throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  public static func assumeIsolated<T>(_ operation: @_Concurrency.MainActor () throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T {
+
+    typealias YesActor = @MainActor () throws -> T
+    typealias NoActor = () throws -> T
+
+    /// This is guaranteed to be fatal if the check fails,
+    /// as this is our "safe" version of this API.
+    let executor: Builtin.Executor = Self.shared.unownedExecutor.executor
+    guard _taskIsCurrentExecutor(executor) else {
+      // TODO: offer information which executor we actually got
+      fatalError("Incorrect actor executor assumption; Expected same executor as \(self).", file: file, line: line)
+    }
+
+    // To do the unsafe cast, we have to pretend it's @escaping.
+    return try withoutActuallyEscaping(operation) {
+      (_ fn: @escaping YesActor) throws -> T in
+      let rawFn = unsafeBitCast(fn, to: NoActor.self)
+      return try rawFn()
+    }
+  }
   #endif
 }
 #endif
@@ -1529,9 +1683,7 @@ extension _Concurrency.MainActor {
 internal func _swiftJobRun(_ job: _Concurrency.UnownedJob, _ executor: _Concurrency.UnownedSerialExecutor)
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @frozen public struct UnownedJob : Swift.Sendable {
-  #if compiler(>=5.3) && $BuiltinJob
   private var context: Builtin.Job
-  #endif
   #if compiler(>=5.3) && $BuiltinJob
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   @usableFromInline
@@ -1568,9 +1720,7 @@ extension _Concurrency.UnownedJob : Swift.CustomStringConvertible {
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @available(*, deprecated, renamed: "ExecutorJob")
 @frozen @_moveOnly public struct Job : Swift.Sendable {
-  #if compiler(>=5.3) && $BuiltinJob
   internal var context: Builtin.Job
-  #endif
   #if compiler(>=5.3) && $BuiltinJob
   @usableFromInline
   internal init(context: __owned Builtin.Job)
@@ -1596,9 +1746,7 @@ extension _Concurrency.Job {
 #if compiler(>=5.3) && $MoveOnly
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @frozen @_moveOnly public struct ExecutorJob : Swift.Sendable {
-  #if compiler(>=5.3) && $BuiltinJob
   internal var context: Builtin.Job
-  #endif
   #if compiler(>=5.3) && $BuiltinJob
   @usableFromInline
   internal init(context: __owned Builtin.Job)
@@ -2283,35 +2431,25 @@ internal func _reportUnexpectedExecutor(_ _filenameStart: Builtin.RawPointer, _ 
 #if compiler(>=5.3) && $AsyncAwait && $Sendable
 #if $UnsafeInheritExecutor
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
+@backDeployed(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
 @_unsafeInheritExecutor public func withTaskCancellationHandler<T>(operation: () async throws -> T, onCancel handler: @Sendable () -> Swift.Void) async rethrows -> T {
   // unconditionally add the cancellation record to the task.
   // if the task was already cancelled, it will be executed right away.
   let record = _taskAddCancellationHandler(handler: handler)
-  do {
-    let result = try await operation()
-    _taskRemoveCancellationHandler(record: record)
-    return result
-  } catch {
-    _taskRemoveCancellationHandler(record: record)
-    throw error
-  }
+  defer { _taskRemoveCancellationHandler(record: record) }
+
+  return try await operation()
 }
 #else
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
+@backDeployed(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
 public func withTaskCancellationHandler<T>(operation: () async throws -> T, onCancel handler: @Sendable () -> Swift.Void) async rethrows -> T {
   // unconditionally add the cancellation record to the task.
   // if the task was already cancelled, it will be executed right away.
   let record = _taskAddCancellationHandler(handler: handler)
-  do {
-    let result = try await operation()
-    _taskRemoveCancellationHandler(record: record)
-    return result
-  } catch {
-    _taskRemoveCancellationHandler(record: record)
-    throw error
-  }
+  defer { _taskRemoveCancellationHandler(record: record) }
+
+  return try await operation()
 }
 #endif
 #endif
@@ -2978,57 +3116,43 @@ internal func _taskGroupWaitAll<T>(group: Builtin.RawPointer, bodyError: (any Sw
   final public func get() -> Value
   #if compiler(>=5.3) && $AsyncAwait
   #if $UnsafeInheritExecutor
-  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-  @_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
+  @backDeployed(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
   @discardableResult
-  @_unsafeInheritExecutor final public func withValue<R>(_ valueDuringOperation: Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
+  @inlinable @_unsafeInheritExecutor final public func withValue<R>(_ valueDuringOperation: Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
     return try await withValueImpl(valueDuringOperation, operation: operation, file: file, line: line)
   }
   #else
-  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-  @_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
+  @backDeployed(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
   @discardableResult
-  final public func withValue<R>(_ valueDuringOperation: Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
+  @inlinable final public func withValue<R>(_ valueDuringOperation: Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
     return try await withValueImpl(valueDuringOperation, operation: operation, file: file, line: line)
   }
   #endif
   #endif
   #if compiler(>=5.3) && $AsyncAwait
   #if $UnsafeInheritExecutor
-  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
   @discardableResult
   @inlinable @_unsafeInheritExecutor final internal func withValueImpl<R>(_ valueDuringOperation: __owned Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
     // check if we're not trying to bind a value from an illegal context; this may crash
     _checkIllegalTaskLocalBindingWithinWithTaskGroup(file: file, line: line)
 
-    _taskLocalValuePush(key: key, value: valueDuringOperation)
-    do {
-      let result = try await operation()
-      _taskLocalValuePop()
-      return result
-    } catch {
-      _taskLocalValuePop()
-      throw error
-    }
+    _taskLocalValuePush(key: key, value: consume valueDuringOperation)
+    defer { _taskLocalValuePop() }
+
+    return try await operation()
   }
   #else
-  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
   @discardableResult
   @inlinable final internal func withValueImpl<R>(_ valueDuringOperation: __owned Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
     // check if we're not trying to bind a value from an illegal context; this may crash
     _checkIllegalTaskLocalBindingWithinWithTaskGroup(file: file, line: line)
 
-    _taskLocalValuePush(key: key, value: valueDuringOperation)
-    do {
-      let result = try await operation()
-      _taskLocalValuePop()
-      return result
-    } catch {
-      _taskLocalValuePop()
-      throw error
-    }
+    _taskLocalValuePush(key: key, value: consume valueDuringOperation)
+    defer { _taskLocalValuePop() }
+
+    return try await operation()
   }
   #endif
   #endif
@@ -3143,7 +3267,7 @@ extension _Concurrency.AsyncStream.Continuation {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncStream {
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
   public static func makeStream(of elementType: Element.Type = Element.self, bufferingPolicy limit: _Concurrency.AsyncStream<Element>.Continuation.BufferingPolicy = .unbounded) -> (stream: _Concurrency.AsyncStream<Element>, continuation: _Concurrency.AsyncStream<Element>.Continuation) {
     var continuation: AsyncStream<Element>.Continuation!
     let stream = AsyncStream<Element>(bufferingPolicy: limit) { continuation = $0 }
@@ -3207,7 +3331,7 @@ extension _Concurrency.AsyncThrowingStream.Continuation {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncThrowingStream {
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  @backDeployed(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
   public static func makeStream(of elementType: Element.Type = Element.self, throwing failureType: Failure.Type = Failure.self, bufferingPolicy limit: _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.BufferingPolicy = .unbounded) -> (stream: _Concurrency.AsyncThrowingStream<Element, Failure>, continuation: _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation) where Failure == any Swift.Error {
     var continuation: AsyncThrowingStream<Element, Failure>.Continuation!
     let stream = AsyncThrowingStream<Element, Failure>(bufferingPolicy: limit) { continuation = $0 }
@@ -3216,8 +3340,6 @@ extension _Concurrency.AsyncThrowingStream {
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncThrowingStream : @unchecked Swift.Sendable where Element : Swift.Sendable {
-}
-@_alwaysEmitIntoClient @_transparent internal func _internalInvariant(_ condition: @autoclosure () -> Swift.Bool, _ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

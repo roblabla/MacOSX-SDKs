@@ -483,7 +483,7 @@ exports:
                        __Z13makeCFPointerIP9CGContextE, __Z13makeCFPointerIPK15__CTFramesetterE, 
                        __Z13makeCFPointerIPK9__CTFrameE, __ZGVZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE16CONTEXT_LOG_PROB, 
                        __ZGVZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE17WORD_MIN_LOG_PROB, 
-                       __ZZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE16CONTEXT_LOG_PROB, 
+                       __ZNSt3__119piecewise_constructE, __ZZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE16CONTEXT_LOG_PROB, 
                        __ZZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE17WORD_MIN_LOG_PROB ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z13fieldDecodingRNSt3__16vectorINS0_IfNS_9allocatorIfEEEENS1_IS3_EEEEiiPPKi17FieldDecodingTypeRNS0_IdNS1_IdEEEEP14NSMutableArrayb, 

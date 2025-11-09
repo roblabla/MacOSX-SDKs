@@ -140,7 +140,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @result The JSValue representing a new promise JavaScript object.
 @discussion This method is equivalent to calling the Promise constructor in JavaScript. the resolve and reject callbacks each normally take a single value, which they forward to all relevent pending reactions. While inside the executor callback context will act as if it were in any other callback, except calleeFunction will be <code>nil</code>. This also means means the new promise object may be accessed via <code>[context thisValue]</code>.
 */
-+ (JSValue *)valueWithNewPromiseInContext:(JSContext *)context fromExecutor:(void (^)(JSValue *resolve, JSValue *reject))callback API_AVAILABLE(macos(10.15), ios(13.0));
++ (JSValue *)valueWithNewPromiseInContext:(JSContext *)context fromExecutor:(void (^)(JSValue *resolve, JSValue *reject))callback JSC_API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
 @method
@@ -150,7 +150,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @result The JSValue representing a new promise JavaScript object.
 @discussion This method is equivalent to calling <code>[JSValue valueWithNewPromiseFromExecutor:^(JSValue *resolve, JSValue *reject) { [resolve callWithArguments:@[result]]; } inContext:context]</code>
 */
-+ (JSValue *)valueWithNewPromiseResolvedWithResult:(id)result inContext:(JSContext *)context API_AVAILABLE(macos(10.15), ios(13.0));
++ (JSValue *)valueWithNewPromiseResolvedWithResult:(id)result inContext:(JSContext *)context JSC_API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
 @method
@@ -160,7 +160,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @result The JSValue representing a new promise JavaScript object.
 @discussion This method is equivalent to calling <code>[JSValue valueWithNewPromiseFromExecutor:^(JSValue *resolve, JSValue *reject) { [reject callWithArguments:@[reason]]; } inContext:context]</code>
 */
-+ (JSValue *)valueWithNewPromiseRejectedWithReason:(id)reason inContext:(JSContext *)context API_AVAILABLE(macos(10.15), ios(13.0));
++ (JSValue *)valueWithNewPromiseRejectedWithReason:(id)reason inContext:(JSContext *)context JSC_API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
 @method
@@ -169,7 +169,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @param context The JSContext to which the resulting JSValue belongs.
 @result The JSValue representing a unique JavaScript value with type symbol.
 */
-+ (JSValue *)valueWithNewSymbolFromDescription:(NSString *)description inContext:(JSContext *)context API_AVAILABLE(macos(10.15), ios(13.0));
++ (JSValue *)valueWithNewSymbolFromDescription:(NSString *)description inContext:(JSContext *)context JSC_API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
 @method
@@ -388,19 +388,19 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @property
 @abstract Check if a JSValue is an array.
 */ 
-@property (readonly) BOOL isArray API_AVAILABLE(macos(10.11), ios(9.0));
+@property (readonly) BOOL isArray JSC_API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
 @property
 @abstract Check if a JSValue is a date.
 */ 
-@property (readonly) BOOL isDate API_AVAILABLE(macos(10.11), ios(9.0));
+@property (readonly) BOOL isDate JSC_API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property
  @abstract Check if a JSValue is a symbol.
  */
-@property (readonly) BOOL isSymbol API_AVAILABLE(macos(10.15), ios(13.0));
+@property (readonly) BOOL isSymbol JSC_API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
 @method

@@ -55,10 +55,11 @@ NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 @interface GKScoreChallenge : GKChallenge
 
 /// The score to meet to satisfy this challenge
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-@property (nonatomic, readonly, nullable, retain) GKScore *score;
-#pragma clang diagnostic pop
+@property (nonatomic, readonly, nullable, retain) GKScore *score API_DEPRECATED_WITH_REPLACEMENT("-leaderboardEntry:", ios(6.0, 17.4), macos(10.8, 14.4), tvos(9.0, 17.4), visionos(1.0, 1.1));
+
+/// The leaderboard entry to meet to satisfy this challenge
+@property (nonatomic, readonly, nullable, retain) GKLeaderboardEntry *leaderboardEntry API_AVAILABLE(ios(17.4), macos(14.4), tvos(17.4));
+
 @end
 
 NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED

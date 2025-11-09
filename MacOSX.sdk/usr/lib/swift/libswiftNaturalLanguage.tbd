@@ -13,9 +13,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftNaturalLanguage.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftNaturalLanguage.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftNaturalLanguage.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftNaturalLanguage.dylib' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$sSo11NLEmbeddingC15NaturalLanguageE18enumerateNeighbors3for12maximumCount12distanceType5usingySS_SiSo010NLDistanceJ0VSbSS_SdtXEtF', 
+                       '$ld$install_name$os10.9$@rpath/libswiftNaturalLanguage.dylib', 
+                       '_$sSo11NLEmbeddingC15NaturalLanguageE18enumerateNeighbors3for12maximumCount12distanceType5usingySS_SiSo010NLDistanceJ0VSbSS_SdtXEtF', 
                        '_$sSo11NLEmbeddingC15NaturalLanguageE18enumerateNeighbors3for12maximumCount12distanceType5usingySaySdG_SiSo010NLDistanceJ0VSbSS_SdtXEtF', 
                        '_$sSo11NLEmbeddingC15NaturalLanguageE5write_8language8revision2toySDySSSaySdGG_So10NLLanguageaSgSi10Foundation3URLVtKFZ', 
                        '_$sSo11NLEmbeddingC15NaturalLanguageE6vector3forSaySdGSgSS_tF', 

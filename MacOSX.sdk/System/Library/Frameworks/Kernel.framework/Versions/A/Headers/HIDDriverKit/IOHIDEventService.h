@@ -1,4 +1,4 @@
-/* iig(DriverKit-324.60.3) generated from IOHIDEventService.iig */
+/* iig(DriverKit-380) generated from IOHIDEventService.iig */
 
 /* IOHIDEventService.iig:1-48 */
 /*

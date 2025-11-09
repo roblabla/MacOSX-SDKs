@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex.dylib'
-current-version: 369.60.3
+current-version: 369.100.36
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_copy_list, __cryptex_create, __cryptex_install_core, 
@@ -33,12 +33,16 @@ exports:
                        _cryptex_personalize, _cryptex_personalize2, _cryptex_remote_array_apply, 
                        _cryptex_remote_cryptex_get_identifier, _cryptex_remote_cryptex_get_version_string, 
                        _cryptex_remote_device_identifier_get_chip_inst, _cryptex_remote_service_copy_device_identifier, 
-                       _cryptex_remote_service_copy_installed, _cryptex_remote_service_copy_nonce, 
-                       _cryptex_remote_service_create, _cryptex_remote_service_install, 
+                       _cryptex_remote_service_copy_device_identifier2, _cryptex_remote_service_copy_installed, 
+                       _cryptex_remote_service_copy_installed2, _cryptex_remote_service_copy_nonce, 
+                       _cryptex_remote_service_copy_nonce2, _cryptex_remote_service_create, 
+                       _cryptex_remote_service_install, _cryptex_remote_service_install2, 
                        _cryptex_remote_service_nonce_attr_create, _cryptex_remote_service_nonce_attr_get_nonce_domain, 
-                       _cryptex_remote_service_nonce_attr_set_image_type, _cryptex_remote_service_nonce_attr_set_persistence, 
-                       _cryptex_remote_service_nonce_get_nonce, _cryptex_remote_service_roll_nonce, 
-                       _cryptex_remote_service_uninstall, _cryptex_signing_service_create, 
+                       _cryptex_remote_service_nonce_attr_set_cryptex, _cryptex_remote_service_nonce_attr_set_image_type, 
+                       _cryptex_remote_service_nonce_attr_set_persistence, _cryptex_remote_service_nonce_get_nonce, 
+                       _cryptex_remote_service_roll_nonce, _cryptex_remote_service_roll_nonce2, 
+                       _cryptex_remote_service_supports_feature, _cryptex_remote_service_uninstall, 
+                       _cryptex_remote_service_uninstall2, _cryptex_signing_service_create, 
                        _cryptex_signing_service_set_cryptex_core, _cryptex_signing_service_set_image, 
                        _cryptex_signing_service_set_image_bytes, _cryptex_signing_service_set_sso_ticket, 
                        _cryptex_signing_service_set_tss_url, _cryptex_signing_service_sign, 

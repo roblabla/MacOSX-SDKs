@@ -1,4 +1,4 @@
-/* iig(DriverKit-324.60.3) generated from OSSerialization.iig */
+/* iig(DriverKit-380) generated from OSSerialization.iig */
 
 /* OSSerialization.iig:1-38 */
 /*

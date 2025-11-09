@@ -10,8 +10,6 @@
 #import <Availability.h>
 #import <TargetConditionals.h>
 
-#import <GameplayKit/GKVersion.h>
-
 //Exporting
 #ifdef __cplusplus
 #define GK_EXPORT extern "C" __attribute__((visibility ("default")))

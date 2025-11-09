@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class ASCredentialIdentityStoreState;
 @class ASPasswordCredentialIdentity;
 
+@class ASCredentialServiceIdentifier;
+
 AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
 NSErrorDomain const ASCredentialIdentityStoreErrorDomain;
 
@@ -28,6 +30,12 @@ typedef NS_ERROR_ENUM(ASCredentialIdentityStoreErrorDomain, ASCredentialIdentity
     ASCredentialIdentityStoreErrorCodeStoreDisabled = 1,
     ASCredentialIdentityStoreErrorCodeStoreBusy = 2,
 } API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos);
+
+typedef NS_OPTIONS(NSUInteger, ASCredentialIdentityTypes) {
+    ASCredentialIdentityTypesAll = 0,
+    ASCredentialIdentityTypesPassword = 1,
+    ASCredentialIdentityTypesPasskey = 1 << 1,
+} NS_SWIFT_NAME(ASCredentialIdentityStore.IdentityTypes) API_AVAILABLE(ios(17.4), macos(14.4), visionos(1.1)) API_UNAVAILABLE(tvos, watchos);
 
 AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
 @interface ASCredentialIdentityStore : NSObject
@@ -45,6 +53,15 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
 - (void)getCredentialIdentityStoreStateWithCompletion:(void (^)(ASCredentialIdentityStoreState *state))completion
     NS_SWIFT_ASYNC_NAME(state())
     ;
+
+/*! @abstract List the currently saved credential identities.
+ @param serviceIdentifier Specify a service identifier to get only credential identities for that service.
+ Pass nil to get credential identities for all services.
+ @param credentialIdentityTypes Specify one or more types to get only credential identities of those types.
+ Pass ASCredentialIdentityTypesAll to get credential identities of all types.
+ @discussion Call this method to get a list of all credential identities saved in the store for your extension.
+ */
+- (void)getCredentialIdentitiesForService:(nullable ASCredentialServiceIdentifier *)serviceIdentifier credentialIdentityTypes:(ASCredentialIdentityTypes)credentialIdentityTypes completionHandler:(void (^)(NSArray<id <ASCredentialIdentity>> *))completionHandler API_AVAILABLE(ios(17.4), macos(14.4), visionos(1.1)) API_UNAVAILABLE(tvos, watchos) NS_REFINED_FOR_SWIFT;
 
 /*! @abstract Save the given credential identities to the store.
  @param credentialIdentities array of ASPasswordCredentialIdentity objects to save to the store.

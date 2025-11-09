@@ -109,7 +109,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  A set of aliases that can be used to access this element with keyed subscript notation.
  
  */
-@property (nonatomic, readonly) NSSet<NSString *> *aliases API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+@property (nonatomic, copy, readonly) NSSet<NSString *> *aliases API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 @end
 

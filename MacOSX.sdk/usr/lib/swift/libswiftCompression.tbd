@@ -6,7 +6,8 @@ install-name:    '/usr/lib/swift/libswiftCompression.dylib'
 current-version: 6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11Compression11FilterErrorO11invalidDatayA2CmFWC', '_$s11Compression11FilterErrorO12invalidStateyA2CmFWC', 
                        '_$s11Compression11FilterErrorO2eeoiySbAC_ACtFZ', '_$s11Compression11FilterErrorO4hash4intoys6HasherVz_tF', 
                        '_$s11Compression11FilterErrorO9hashValueSivg', '_$s11Compression11FilterErrorO9hashValueSivpMV', 

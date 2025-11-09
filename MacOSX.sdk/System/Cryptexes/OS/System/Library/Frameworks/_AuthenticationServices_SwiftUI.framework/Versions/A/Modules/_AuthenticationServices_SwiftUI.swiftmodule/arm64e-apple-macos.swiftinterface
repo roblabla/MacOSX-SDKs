@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _AuthenticationServices_SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 7617.1.17.11.2
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 7618.1.15.11.8 -module-name _AuthenticationServices_SwiftUI
 @_exported import AuthenticationServices
 import Swift
 import SwiftUI
@@ -9,29 +8,6 @@ import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 import os
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public struct SignInWithAppleButton : SwiftUI.View {
-  public init(_ label: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label = .signIn, onRequest: @escaping (AuthenticationServices.ASAuthorizationAppleIDRequest) -> Swift.Void, onCompletion: @escaping ((Swift.Result<AuthenticationServices.ASAuthorization, any Swift.Error>) -> Swift.Void))
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
-    get
-  }
-  public struct Label {
-    public static let signIn: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label
-    public static let `continue`: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label
-    public static let signUp: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label
-  }
-  public struct Style {
-    public static let black: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style
-    public static let white: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style
-    public static let whiteOutline: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style
-  }
-  public typealias Body = @_opaqueReturnTypeOf("$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV4bodyQrvp", 0) __
-}
-extension SwiftUI.View {
-  @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-  public func signInWithAppleButtonStyle(_ style: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style) -> some SwiftUI.View
-  
-}
 @available(iOS 16.4, macOS 13.3, watchOS 9.4, tvOS 16.4, *)
 public enum ASAuthorizationResult : Swift.Sendable {
   case password(AuthenticationServices.ASPasswordCredential)
@@ -102,6 +78,29 @@ extension SwiftUI.EnvironmentValues {
     get
   }
 }
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+public struct SignInWithAppleButton : SwiftUI.View {
+  public init(_ label: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label = .signIn, onRequest: @escaping (AuthenticationServices.ASAuthorizationAppleIDRequest) -> Swift.Void, onCompletion: @escaping ((Swift.Result<AuthenticationServices.ASAuthorization, any Swift.Error>) -> Swift.Void))
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public struct Label {
+    public static let signIn: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label
+    public static let `continue`: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label
+    public static let signUp: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Label
+  }
+  public struct Style {
+    public static let black: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style
+    public static let white: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style
+    public static let whiteOutline: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV4bodyQrvp", 0) __
+}
+extension SwiftUI.View {
+  @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+  public func signInWithAppleButtonStyle(_ style: _AuthenticationServices_SwiftUI.SignInWithAppleButton.Style) -> some SwiftUI.View
+  
+}
 @available(iOS 16.4, macOS 13.3, watchOS 9.4, tvOS 16.4, *)
 public struct WebAuthenticationSession {
   public struct BrowserSession : Swift.Sendable {
@@ -113,7 +112,15 @@ public struct WebAuthenticationSession {
     }
   }
   #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS, introduced: 16.4, deprecated: 100000, message: "Use `authenticate(using:callback:preferredBrowserSession:additionalHeaderFields:)` instead")
+  @available(macOS, introduced: 13.3, deprecated: 100000, message: "Use `authenticate(using:callback:preferredBrowserSession:additionalHeaderFields:)` instead")
+  @available(watchOS, introduced: 9.4, deprecated: 100000, message: "Use `authenticate(using:callback:preferredBrowserSession:additionalHeaderFields:)` instead")
+  @available(tvOS, introduced: 16.4, deprecated: 100000, message: "Use `authenticate(using:callback:preferredBrowserSession:additionalHeaderFields:)` instead")
   public func authenticate(using url: Foundation.URL, callbackURLScheme: Swift.String, preferredBrowserSession: _AuthenticationServices_SwiftUI.WebAuthenticationSession.BrowserSession? = nil) async throws -> Foundation.URL
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
+  public func authenticate(using url: Foundation.URL, callback: AuthenticationServices.ASWebAuthenticationSession.Callback, preferredBrowserSession: _AuthenticationServices_SwiftUI.WebAuthenticationSession.BrowserSession? = nil, additionalHeaderFields: [Swift.String : Swift.String]) async throws -> Foundation.URL
   #endif
 }
 extension SwiftUI.EnvironmentValues {

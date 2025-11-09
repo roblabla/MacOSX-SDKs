@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari'
-current-version: 617.1.17
+current-version: 618.1.15
 compatibility-version: 528
 exports:
   - targets:         [ x86_64-macos ]
@@ -52,13 +52,14 @@ exports:
                        _touchIDAvailabilityMayHaveChangedNotification, _touchIDToAutoFillToggledNotification ]
     objc-classes:    [ AccountManagerContainerViewController, AccountManagerViewController, 
                        AutoFillAuthorizationController, AutoFillCredentialPickerCoordinator, 
-                       AutoFillLocalAuthenticationManager, BookmarksController, CredentialCompletionAutoFillCellView, 
-                       FeatureAvailability, MacSafariBookmarkDBAccess, MenuTableRowView, 
-                       MenuTableSeparatorRowView, OneTimeCodeAutoFillCellView, PurgeableDirectory, 
-                       PurgeableItemController, PurgeableWebCache, ReadingListDataStore, 
-                       ReadingListItem, ReadingListThumbnailProvider, RestrictedSandboxBroker, 
-                       SafariAppExtensionsController, SafariContentBlockerAppExtensionsController, 
-                       SafariSandboxBroker, SafariSettingsSyncEngineAccessMac, SafariWebBookmarkList, 
+                       AutoFillLocalAuthenticationManager, BookmarksController, CompletionListVendorForHistoryService, 
+                       CredentialCompletionAutoFillCellView, FeatureAvailability, 
+                       MacSafariBookmarkDBAccess, MenuTableRowView, MenuTableSeparatorRowView, 
+                       OneTimeCodeAutoFillCellView, PurgeableDirectory, PurgeableItemController, 
+                       PurgeableWebCache, ReadingListDataStore, ReadingListItem, 
+                       ReadingListThumbnailProvider, RestrictedSandboxBroker, SafariAppExtensionsController, 
+                       SafariContentBlockerAppExtensionsController, SafariSandboxBroker, 
+                       SafariSettingsSyncEngineAccessMac, SafariWebBookmarkList, 
                        SafariWebExtensionsController, SearchProvider, SearchProvidersController, 
                        SnapshotCache, SnapshotRequest, SnapshotResponse, TouchIconCache, 
                        WebBookmarkGroup, WebBookmarkLeaf, WebBookmarkProxy ]

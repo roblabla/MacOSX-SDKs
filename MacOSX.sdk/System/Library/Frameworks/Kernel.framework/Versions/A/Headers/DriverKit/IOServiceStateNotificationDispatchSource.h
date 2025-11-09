@@ -1,4 +1,4 @@
-/* iig(DriverKit-324.60.3) generated from IOServiceStateNotificationDispatchSource.iig */
+/* iig(DriverKit-380) generated from IOServiceStateNotificationDispatchSource.iig */
 
 /* IOServiceStateNotificationDispatchSource.iig:1-36 */
 /*

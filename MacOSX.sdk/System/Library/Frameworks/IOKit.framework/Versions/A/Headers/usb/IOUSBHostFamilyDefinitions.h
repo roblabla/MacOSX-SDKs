@@ -288,10 +288,10 @@ enum tIOUSBHostPortStatus
 #define kUSBHostControllerPropertySuperSpeedCompanion           "kUSBSuperSpeedCompanion"               // OSBoolean false to disable superspeed companion controller
 #define kUSBHostControllerPropertyRevision                      "Revision"                              // OSData    Major/minor revision number of controller
 #define kUSBHostControllerPropertyCompanionControllerName       "UsbCompanionControllerName"            // OSString  key to set/get the name of the service, i.e. companion controller dictionary.
-#define kUSBHostControllerPropertyDisableWakeSources            "UsbHostControllerDisableWakeSources"   // OSBoolean true to disable connect/disconnect/overcurrent wake sources
 #define kUSBHostControllerPropertyPersistFullSpeedIsochronous   "UsbHostControllerPersistFullSpeedIsochronous"  // OSBoolean true to reduce commands related to full-speed isochronous endpoints
 #define kUSBHostControllerPropertyDeferRegisterService          "UsbHostControllerDeferRegisterService" // OSBoolean true to defer registerService call by base class during start
 #define kUSBHostControllerPropertyControlRequestPolicy          "UsbHostControllerControlRequestPolicy" // OSNumber containing tUSBControlRequestPolicy
+#define kUSBHostControllerPropertyPortWakeSourcesPolicy         "UsbHostControllerPortWakeSourcesPolicy"        // OSNumber containing tUSBPortWakeSourcesPolicy
 #define kUSBHostControllerPropertySoftRetryPolicy               "UsbHostControllerSoftRetryPolicy"      // OSNumber containing tUSBSoftRetryPolicy
 #define kUSBHostControllerPropertyStreamPolicy                  "UsbHostControllerStreamPolicy"         // OSNumber containing tUSBStreamPolicy
 #define kUSBHostControllerPropertyUSB2LPMPolicy                 "UsbHostControllerUSB2LPMPolicy"        // OSNumber containing tUSBLPMPolicy

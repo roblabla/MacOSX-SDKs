@@ -44,6 +44,7 @@
 #import <CarPlay/CPPointOfInterestTemplate.h>
 #import <CarPlay/CPSearchTemplate.h>
 #import <CarPlay/CPListItemTypes.h>
+#import <CarPlay/CPRouteInformation.h>
 #import <CarPlay/CPSessionConfiguration.h>
 #import <CarPlay/CPTabBarTemplate.h>
 #import <CarPlay/CPTemplate.h>

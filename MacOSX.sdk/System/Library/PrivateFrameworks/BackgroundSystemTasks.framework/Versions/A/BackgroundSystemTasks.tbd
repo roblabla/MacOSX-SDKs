@@ -4,8 +4,10 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/BackgroundSystemTasks.framework/Versions/A/BackgroundSystemTasks'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _BGSystemTaskSchedulerErrorDomain ]
+    symbols:         [ _BGSystemTaskCustomCheckpointMax, _BGSystemTaskCustomCheckpointMin, 
+                       _BGSystemTaskSchedulerErrorDomain ]
     objc-classes:    [ BGNonRepeatingSystemTask, BGNonRepeatingSystemTaskRequest, 
                        BGRepeatingSystemTask, BGRepeatingSystemTaskRequest, BGSystemTask, 
-                       BGSystemTaskRequest, BGSystemTaskScheduler, BGSystemTaskStatus ]
+                       BGSystemTaskCheckpoints, BGSystemTaskRequest, BGSystemTaskScheduler, 
+                       BGSystemTaskStatus, BGSystemTaskWorkload ]
 ...

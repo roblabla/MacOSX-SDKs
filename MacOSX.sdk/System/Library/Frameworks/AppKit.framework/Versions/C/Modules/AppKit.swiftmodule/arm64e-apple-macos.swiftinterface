@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
-// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AppKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2487.30.104
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
+// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2487.50.124 -module-name AppKit
 @_exported import Accessibility
 @_exported import AppKit
 import Cocoa
@@ -9,7 +8,6 @@ import Cocoa
 import CoreTransferable
 @_exported import DeveloperToolsSupport
 import Foundation
-import OSLog
 import OpenGL
 import Swift
 import Symbols
@@ -17,7 +15,6 @@ import UniformTypeIdentifiers
 @_exported import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-import os
 @available(macOS 14.0, *)
 extension AppKit.NSShadow : @unchecked Swift.Sendable {
 }

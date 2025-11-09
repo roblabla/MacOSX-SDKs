@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleTracingSupportSymbolication.framework/Versions/A/AppleTracingSupportSymbolication'
-current-version: 38.2
+current-version: 45
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPK8__CFDataEEE, __ZTINSt3__117bad_function_callE, 
@@ -18,9 +18,10 @@ exports:
                        __Z26ats_symbolication_log_initv, __ZN10SourceInfo26initializeWithCSSourceInfoE10_CSTypeRef, 
                        __ZN10SourceInfo5debugEv, __ZN10SourceInfoC1E10_CSTypeRef, 
                        __ZN10SourceInfoC2E10_CSTypeRef, __ZN10StringPool11cacheStringERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
+                       __ZN11SharedCacheC1E10_CSTypeRefRKNSt3__110shared_ptrI10StringPoolEE, 
                        __ZN11SharedCacheC1E22SharedCacheDescription, __ZN11SharedCacheC1E22SharedCacheDescriptionRKNSt3__110shared_ptrI10StringPoolEE, 
-                       __ZN11SharedCacheC1EOS_, __ZN11SharedCacheC1ERKS_, __ZN11SharedCacheC2E22SharedCacheDescription, 
-                       __ZN11SharedCacheC2E22SharedCacheDescriptionRKNSt3__110shared_ptrI10StringPoolEE, 
+                       __ZN11SharedCacheC1EOS_, __ZN11SharedCacheC1ERKS_, __ZN11SharedCacheC2E10_CSTypeRefRKNSt3__110shared_ptrI10StringPoolEE, 
+                       __ZN11SharedCacheC2E22SharedCacheDescription, __ZN11SharedCacheC2E22SharedCacheDescriptionRKNSt3__110shared_ptrI10StringPoolEE, 
                        __ZN11SharedCacheC2EOS_, __ZN11SharedCacheC2ERKS_, __ZN11SharedCacheD1Ev, 
                        __ZN11SharedCacheD2Ev, __ZN11SharedCacheaSEOS_, __ZN11SharedCacheaSERKS_, 
                        __ZN12InlineSymbol37initializeWithCSSymbolAndCSSourceInfoE10_CSTypeRefS0_, 
@@ -59,8 +60,10 @@ exports:
                        __ZN20SymbolicationSession14parseStackshotE11kcdata_iter, 
                        __ZN20SymbolicationSession15handleInterruptEP7ProcessPK11trace_point, 
                        __ZN20SymbolicationSession15handleInterruptEPK11trace_point, 
+                       __ZN20SymbolicationSession15handleRealFaultEPK11trace_point, 
                        __ZN20SymbolicationSession15handleUserStackEPK11trace_point, 
                        __ZN20SymbolicationSession15learnPidLibraryEiRK18LibraryDescriptionRNSt3__113unordered_setIS0_NS3_4hashIS0_EENS3_8equal_toIS0_EENS3_9allocatorIS0_EEEE, 
+                       __ZN20SymbolicationSession16handleKPCHandlerEPK11trace_point, 
                        __ZN20SymbolicationSession16setKtraceSessionEP14ktrace_session, 
                        __ZN20SymbolicationSession17handleDTraceProbeEPK11trace_point, 
                        __ZN20SymbolicationSession17handleKernelStackEP7ProcessPK11trace_point, 
@@ -72,15 +75,22 @@ exports:
                        __ZN20SymbolicationSession23registerKtraceCallbacksEv, __ZN20SymbolicationSession23updateKdebugLibraryViewEv, 
                        __ZN20SymbolicationSession25collectAvailableDsymPathsEv, __ZN20SymbolicationSession25isConfiguredToSaveSymbolsEv, 
                        __ZN20SymbolicationSession26sharedCacheWithDescriptionE22SharedCacheDescription, 
+                       __ZN20SymbolicationSession27collectDsymPathsViaDownloadEv, 
                        __ZN20SymbolicationSession27writeSymbolDataToKtraceFileEP11ktrace_file, 
                        __ZN20SymbolicationSession28sharedLibraryWithUUIDAndPathE4UUIDNSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
                        __ZN20SymbolicationSession28writeProcessMapsToKtraceFileEP11ktrace_file, 
                        __ZN20SymbolicationSession30aotSymbolicatorWithDescriptionE25AOTSharedCacheDescription, 
                        __ZN20SymbolicationSession30sharedLibraryWithCSSymbolOwnerE10_CSTypeRef, 
+                       __ZN20SymbolicationSession31addProcessFromChunkSymbolicatorE10_CSTypeRef, 
                        __ZN20SymbolicationSession32forEachResymbolicatedSymbolChunkENSt3__18functionIFvPK8__CFDataEEE, 
+                       __ZN20SymbolicationSession34extractSymbolicationChunksFromFileEP11ktrace_file, 
                        __ZN20SymbolicationSession34updateBestKnownLibraryDescriptionsERK18LibraryDescription, 
                        __ZN20SymbolicationSession36collectLiveLibraryDescriptionsForPidEiRNSt3__113unordered_setI18LibraryDescriptionNS0_4hashIS2_EENS0_8equal_toIS2_EENS0_9allocatorIS2_EEEE, 
+                       __ZN20SymbolicationSession36fillSharedCacheFromChunkSymbolicatorE10_CSTypeRef, 
+                       __ZN20SymbolicationSession38verifyKernelFromFileAndSetupLiveKernelE10_CSTypeRef, 
                        __ZN20SymbolicationSession39filterUUIDsNeedingSymbolicationWithFileEP11ktrace_file, 
+                       __ZN20SymbolicationSession40addProcessFromModifiedNonFBSSymbolSourceE10_CSTypeRef, 
+                       __ZN20SymbolicationSession48verifySharedCacheFromFileAndSetupLiveSharedCacheE10_CSTypeRef, 
                        __ZN20SymbolicationSession8learnPidEi, __ZN20SymbolicationSessionC1EP24ats_symbolication_config, 
                        __ZN20SymbolicationSessionC1Ev, __ZN20SymbolicationSessionC2EP24ats_symbolication_config, 
                        __ZN20SymbolicationSessionC2Ev, __ZN20SymbolicationSessionD1Ev, 
@@ -200,5 +210,6 @@ exports:
                        _ats_configure_postprocessing, _ats_configure_postprocessing_with_config, 
                        _ats_create_symbolication_config, _ats_destroy_symbolication_config, 
                        _ats_postprocessing_complete, _ats_postprocessing_complete_write_processmaps, 
-                       _ats_symbolication_log, _ats_will_start_tracing ]
+                       _ats_should_amend_with_file, _ats_symbolication_log, _ats_will_start_tracing ]
+    weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

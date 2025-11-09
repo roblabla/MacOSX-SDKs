@@ -54,7 +54,8 @@ struct lconv* localeconv();
 #define	LC_MESSAGES	6
 
 inline char* setlocale(int, const char *) {
-    return "C";
+    static char __c_locale[] = "C";
+    return __c_locale;
 }
 
 #endif // _LIBCPP___SUPPORT_SEPOS_LOCALE_SHIMS_H

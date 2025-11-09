@@ -431,6 +431,8 @@ exports:
                        '_$s26TextToSpeechVoiceBankingUI25TTSVoicePickerSwiftBridgeCMu', 
                        '_$s26TextToSpeechVoiceBankingUI25TTSVoicePickerSwiftBridgeCN', 
                        '_$s26TextToSpeechVoiceBankingUI25TTSVoicePickerSwiftBridgeCfD', 
+                       '_$s26TextToSpeechVoiceBankingUI30TTSResourceManagerUIObservableC010informSiriD19SubscriptionsWithId7voiceIDySS_tFTj', 
+                       '_$s26TextToSpeechVoiceBankingUI30TTSResourceManagerUIObservableC010informSiriD19SubscriptionsWithId7voiceIDySS_tFTq', 
                        '_$s26TextToSpeechVoiceBankingUI30TTSResourceManagerUIObservableC13loadResources10completionyyycSg_tFTj', 
                        '_$s26TextToSpeechVoiceBankingUI30TTSResourceManagerUIObservableC13loadResources10completionyyycSg_tFTq', 
                        '_$s26TextToSpeechVoiceBankingUI30TTSResourceManagerUIObservableC16downloadProgress03forD2Id8progress11storageSize17requiredDiskSpaceySS_Sfs5Int64VSbtFTj', 
